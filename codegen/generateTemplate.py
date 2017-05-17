@@ -5,7 +5,6 @@ from mako.exceptions import RichTraceback
 import logging
 import argparse
 import sys, os
-import importlib
 
 import pprint
 pp = pprint.PrettyPrinter(indent=3)
