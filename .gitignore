@@ -1,5 +1,4 @@
 *.pyc
 .cache
-
-
 .com.apple.timemachine.supported
+bin/
