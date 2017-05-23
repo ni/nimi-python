@@ -134,13 +134,13 @@ class Session(object):
     def getAttributeViString(self, attributeId):
         errorCode = self.library.niDMM_GetAttributeViString(self.sessionHandle, None, attributeId, 0, None)
         # Do the IVI dance
-        # Don't use handle errors, because errorCode being positive means something other than warning.
+        # Don't use _handleError, because positive value in errorCode means size, not warning.
         if(errors._isError(errorCode)): raise errors.Error(self.library, self.sessionHandle, errorCode)
         bufferSize = errorCode
         value = ctypes.create_string_buffer(bufferSize)
         errorCode = self.library.niDMM_GetAttributeViString(self.sessionHandle, None, attributeId, bufferSize, value)
         errors._handleError(self.library, self.sessionHandle, errorCode)
-        return value.raw.decode("ascii")
+        return value.value.decode("ascii")
 
     def setAttributeViBoolean(self, attributeId, value):
         errorCode = self.library.niDMM_SetAttributeViBoolean(self.sessionHandle, b'', attributeId, value)

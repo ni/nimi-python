@@ -51,7 +51,7 @@ class _ErrorBase(Exception):
         #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
         self.code = errorCode.value
-        self.elaboration = errorMessage.raw.decode("ascii")
+        self.elaboration = errorMessage.value.decode("ascii")
         super(_ErrorBase, self).__init__(str(self.code) + ": " + self.elaboration)
 
 
