@@ -31,11 +31,10 @@ def configureLogging(lvl = logging.WARNING, logfile = None):
     hndlr.setFormatter(formatter)
     root.addHandler(hndlr)
 
-def Main():
+def main():
     # Setup the required arguments for this script
-    usage = """
-usage: %prog [options]
-"""
+    usage = "usage: " + sys.argv[0] + " [options]"
+
     parser = argparse.ArgumentParser(description=usage)
     fileGroup = parser.add_argument_group("Input and Output files")
     fileGroup.add_argument(
@@ -130,5 +129,5 @@ usage: %prog [options]
 
 
 if __name__ == '__main__':
-    Main()
+    main()
 
