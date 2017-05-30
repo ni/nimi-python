@@ -1,8 +1,9 @@
 #!/usr/bin/python
 
 import sys, os
-# Add parent directory to the path, so that we load the locally sourced nidmm module and not require installation.
-sys.path.append(os.path.join(sys.path[0],'..'))
+# Add bin directory to the path, so that we load the locally built nidmm module and not require installation.
+sys.path.append(os.path.join(sys.path[0],'../../../bin/'))
+print(sys.path)
 
 import nidmm
 
@@ -36,22 +37,27 @@ def test_wrong_parameter_type():
             pass
 
 
-def test_set_get_attributes():
+def test_ViBoolean_attribute():
     with nidmm.Session("Dev1") as session:
-        assert session.specificDriverClassSpecMajorVersion == 4
-        assert session.specificDriverClassSpecMinorVersion == 1
+        assert session.simulate is False
+        #@TODO: set a boolean
+
+
+def test_ViString_attribute():
+    with nidmm.Session("Dev1") as session:
+        assert session.serialNumber == "1A67CAC"
+        #@TODO: set a string
+
+
+def test_ViInt32_attribute():
+    with nidmm.Session("Dev1") as session:
         session.sampleCount = 5
         assert session.sampleCount == 5
-        session.triggerCount = 2
-        assert session.triggerCount == 2
+
+
+def test_ViReal64_attribute():
+    with nidmm.Session("Dev1") as session:
         session.range = 50 # Coerces up!
         assert session.range == 100
-        session.resolutionDigits = 3.5
-        assert session.resolutionDigits == 3.5
-        x = session.serialNumber
-        print(type(x))
-        print(type(session.serialNumber))
-        print(session.serialNumber)
-        assert session.serialNumber == "1A67CAC"
-        assert session.simulate is False
+
 
