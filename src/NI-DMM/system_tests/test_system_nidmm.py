@@ -45,19 +45,19 @@ def test_ViBoolean_attribute():
 
 def test_ViString_attribute():
     with nidmm.Session("Dev1") as session:
-        assert session.serialNumber == "1A67CAC"
+        assert "1A67CAC" == session.serialNumber
         #@TODO: set a string
 
 
 def test_ViInt32_attribute():
     with nidmm.Session("Dev1") as session:
         session.sampleCount = 5
-        assert session.sampleCount == 5
+        assert 5 == session.sampleCount
 
 
 def test_ViReal64_attribute():
     with nidmm.Session("Dev1") as session:
         session.range = 50 # Coerces up!
-        assert session.range == 100
+        assert 100 == session.range
 
 
