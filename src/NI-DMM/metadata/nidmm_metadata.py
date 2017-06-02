@@ -180,7 +180,7 @@ attributes = {
     'IO_SESSION':
     {
         'id':1050322,
-        'type':'N/A',
+        'type':'ViSession',
         'enum':None,
         'access':'read only'
     },
