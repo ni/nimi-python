@@ -7,8 +7,6 @@ print(sys.path)
 
 import nidmm
 
-testCount = 0
-
 
 def test_invalid_device_name():
     try:
@@ -65,10 +63,28 @@ def test_Enum_attribute():
     with nidmm.Session("Dev1") as session:
         session.function = nidmm.Function.AC_CURRENT
         assert session.function == nidmm.Function.AC_CURRENT
+        assert type(session.function) is nidmm.Function
         try:
             session.function = nidmm.LCCalculationModel.CALC_MODEL_SERIES
             assert false
         except TypeError as e:
             print(e)
             pass
+
+
+def test_ViSession_attribute():
+    with nidmm.Session("Dev1") as session:
+        try:
+            session.ioSession = 5
+            assert false
+        except TypeError as e:
+            print(e)
+            pass
+        try:
+            value = session.ioSession
+            assert false
+        except TypeError as e:
+            print(e)
+            pass
+
 

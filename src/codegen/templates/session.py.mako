@@ -1,6 +1,12 @@
 <%
     module_name = config = templateParameters['config']['module_name']
     c_function_prefix = config = templateParameters['config']['c_function_prefix']
+    attributes = templateParameters['attributes']
+
+    def snakecase_to_camelcase(snake_string):
+        """Converts a C-style SNAKE_CASE string to camelCase"""
+        components = snake_string.split('_')
+        return components[0].lower() + "".join(component.title() for component in components[1:])
 %>
 # This file was generated
 
@@ -77,18 +83,28 @@ class AttributeEnum(object):
         obj.setAttributeViInt32(self.attributeId, value.value)
 
 
+class AttributeViSession(object):
+
+    def __init__(self, attributeId):
+        self.attributeId = attributeId
+
+    def __get__(self, obj, objtype):
+        raise TypeError('Attributes of type ViSession are unsupported in Python')
+
+    def __set__(self, obj, value):
+        raise TypeError('Attributes of type ViSession are unsupported in Python')
+
+
 class Session(object):
     """${templateParameters['config']['session_description']}"""
 
-    specificDriverClassSpecMajorVersion = AttributeViInt32(1050515)
-    specificDriverClassSpecMinorVersion = AttributeViInt32(1050516)
-    sampleCount                         = AttributeViInt32(1250301)
-    triggerCount                        = AttributeViInt32(1250304)
-    range                               = AttributeViReal64(1250002)
-    resolutionDigits                    = AttributeViReal64(1250003)
-    serialNumber                        = AttributeViString(1150054)
-    simulate                            = AttributeViBoolean(1050005)
-    function                            = AttributeEnum(1250001, enums.Function)
+% for attribute in attributes:
+    %if attributes[attribute]['enum']:
+    ${snakecase_to_camelcase(attribute)} = AttributeEnum(${attributes[attribute]['id']}, enums.${attributes[attribute]['enum']})
+    %else:
+    ${snakecase_to_camelcase(attribute)} = Attribute${attributes[attribute]['type']}(${attributes[attribute]['id']})
+    %endif
+% endfor
 
     def __init__(self, resourceName, idQuery = 0, reset = False):
         #print("__init__ entered")
