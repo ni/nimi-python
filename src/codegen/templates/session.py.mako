@@ -1,7 +1,13 @@
+<%
+    module_name = config = templateParameters['config']['module_name']
+    c_function_prefix = config = templateParameters['config']['c_function_prefix']
+%>
+# This file was generated
+
 import ctypes
-from nidmm import errors
-from nidmm import library
-from nidmm import enums
+from ${module_name} import errors
+from ${module_name} import library
+from ${module_name} import enums
 
 
 class AttributeViInt32(object):
@@ -72,7 +78,7 @@ class AttributeEnum(object):
 
 
 class Session(object):
-    """An NI-DMM session to a National Instruments Digital Multimeter"""
+    """${templateParameters['config']['session_description']}"""
 
     specificDriverClassSpecMajorVersion = AttributeViInt32(1050515)
     specificDriverClassSpecMinorVersion = AttributeViInt32(1050516)
@@ -88,7 +94,7 @@ class Session(object):
         #print("__init__ entered")
         self.sessionHandle = ctypes.c_ulong(0)
         self.library = library.getLibrary()
-        errorCode = self.library.niDMM_init(resourceName.encode('ascii'), idQuery, reset, ctypes.byref(self.sessionHandle))
+        errorCode = self.library.${c_function_prefix}init(resourceName.encode('ascii'), idQuery, reset, ctypes.byref(self.sessionHandle))
         errors._handleError(self.library, self.sessionHandle, errorCode)
 
     def __del__(self):
@@ -106,7 +112,7 @@ class Session(object):
     def close(self):
         #@TODO: Should we raise an exception on double close? Look at what File does.
         if(self.sessionHandle.value != 0):
-            errorCode = self.library.niDMM_close(self.sessionHandle)
+            errorCode = self.library.${c_function_prefix}close(self.sessionHandle)
             if(errorCode < 0):
                 #@TODO: This will occur when session is "stolen". Maybe don't even bother with printing?
                 print("Failed to close session.")
@@ -114,57 +120,57 @@ class Session(object):
 
     def configureMeasurementDigits(self, mode, range, digitsOfResolution):
         if type(mode) is not enums.Function: raise TypeError('Parameter mode must be of type ' + str(enums.Function))
-        errorCode = self.library.niDMM_ConfigureMeasurementDigits(self.sessionHandle, mode.value, range, digitsOfResolution)
+        errorCode = self.library.${c_function_prefix}ConfigureMeasurementDigits(self.sessionHandle, mode.value, range, digitsOfResolution)
         errors._handleError(self.library, self.sessionHandle, errorCode)
 
     def read(self, timeoutInMilliseconds = 10000):
         measurement = ctypes.c_double(0)
-        errorCode = self.library.niDMM_Read(self.sessionHandle, timeoutInMilliseconds, ctypes.byref(measurement))
+        errorCode = self.library.${c_function_prefix}Read(self.sessionHandle, timeoutInMilliseconds, ctypes.byref(measurement))
         errors._handleError(self.library, self.sessionHandle, errorCode)
         return measurement.value
 
     def setAttributeViInt32(self, attributeId, value):
-        errorCode = self.library.niDMM_SetAttributeViInt32(self.sessionHandle, b'', attributeId, value)
+        errorCode = self.library.${c_function_prefix}SetAttributeViInt32(self.sessionHandle, b'', attributeId, value)
         errors._handleError(self.library, self.sessionHandle, errorCode)
 
     def getAttributeViInt32(self, attributeId):
         value = ctypes.c_long(0)
-        errorCode = self.library.niDMM_GetAttributeViInt32(self.sessionHandle, None, attributeId, ctypes.byref(value))
+        errorCode = self.library.${c_function_prefix}GetAttributeViInt32(self.sessionHandle, None, attributeId, ctypes.byref(value))
         errors._handleError(self.library, self.sessionHandle, errorCode)
         return value.value
 
     def setAttributeViReal64(self, attributeId, value):
-        errorCode = self.library.niDMM_SetAttributeViReal64(self.sessionHandle, b'', attributeId, value)
+        errorCode = self.library.${c_function_prefix}SetAttributeViReal64(self.sessionHandle, b'', attributeId, value)
         errors._handleError(self.library, self.sessionHandle, errorCode)
 
     def getAttributeViReal64(self, attributeId):
         value = ctypes.c_double(0)
-        errorCode = self.library.niDMM_GetAttributeViReal64(self.sessionHandle, None, attributeId, ctypes.byref(value))
+        errorCode = self.library.${c_function_prefix}GetAttributeViReal64(self.sessionHandle, None, attributeId, ctypes.byref(value))
         errors._handleError(self.library, self.sessionHandle, errorCode)
         return value.value
 
     def setAttributeViString(self, attributeId, value):
-        errorCode = self.library.niDMM_SetAttributeViString(self.sessionHandle, b'', attributeId, value.encode('ascii'))
+        errorCode = self.library.${c_function_prefix}SetAttributeViString(self.sessionHandle, b'', attributeId, value.encode('ascii'))
         errors._handleError(self.library, self.sessionHandle, errorCode)
 
     def getAttributeViString(self, attributeId):
-        errorCode = self.library.niDMM_GetAttributeViString(self.sessionHandle, None, attributeId, 0, None)
+        errorCode = self.library.${c_function_prefix}GetAttributeViString(self.sessionHandle, None, attributeId, 0, None)
         # Do the IVI dance
         # Don't use _handleError, because positive value in errorCode means size, not warning.
         if(errors._isError(errorCode)): raise errors.Error(self.library, self.sessionHandle, errorCode)
         bufferSize = errorCode
         value = ctypes.create_string_buffer(bufferSize)
-        errorCode = self.library.niDMM_GetAttributeViString(self.sessionHandle, None, attributeId, bufferSize, value)
+        errorCode = self.library.${c_function_prefix}GetAttributeViString(self.sessionHandle, None, attributeId, bufferSize, value)
         errors._handleError(self.library, self.sessionHandle, errorCode)
         return value.value.decode("ascii")
 
     def setAttributeViBoolean(self, attributeId, value):
-        errorCode = self.library.niDMM_SetAttributeViBoolean(self.sessionHandle, b'', attributeId, value)
+        errorCode = self.library.${c_function_prefix}SetAttributeViBoolean(self.sessionHandle, b'', attributeId, value)
         errors._handleError(self.library, self.sessionHandle, errorCode)
 
     def getAttributeViBoolean(self, attributeId):
         value = ctypes.c_ushort(0)
-        errorCode = self.library.niDMM_GetAttributeViBoolean(self.sessionHandle, None, attributeId, ctypes.byref(value))
+        errorCode = self.library.${c_function_prefix}GetAttributeViBoolean(self.sessionHandle, None, attributeId, ctypes.byref(value))
         errors._handleError(self.library, self.sessionHandle, errorCode)
         return value.value
 
