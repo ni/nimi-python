@@ -293,7 +293,7 @@ attributes = {
     {
         'id':1250322,
         'type':'ViInt32',
-        'enum':'ApertureTimeUnit',
+        'enum':'ApertureTimeUnits',
         'access':'read-write'
     },
     'AUTO_RANGE_VALUE':
