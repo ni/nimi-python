@@ -56,6 +56,21 @@ class AttributeViBoolean(object):
         obj.setAttributeViBoolean(self.attributeId, (value is not 0))
 
 
+class AttributeEnum(object):
+
+    def __init__(self, attributeId, enumMetaClass):
+        self.attributeId = attributeId
+        self.attributeType = enumMetaClass
+
+    def __get__(self, obj, objtype):
+        assert objtype is Session
+        return self.attributeType(obj.getAttributeViInt32(self.attributeId))
+
+    def __set__(self, obj, value):
+        if type(value) is not self.attributeType: raise TypeError('Value mode must be of type ' + str(self.attributeType))
+        obj.setAttributeViInt32(self.attributeId, value.value)
+
+
 class Session(object):
     """An NI-DMM session to a National Instruments Digital Multimeter"""
 
@@ -67,6 +82,7 @@ class Session(object):
     resolutionDigits                    = AttributeViReal64(1250003)
     serialNumber                        = AttributeViString(1150054)
     simulate                            = AttributeViBoolean(1050005)
+    function                            = AttributeEnum(1250001, enums.Function)
 
     def __init__(self, resourceName, idQuery = 0, reset = False):
         #print("__init__ entered")

@@ -61,3 +61,14 @@ def test_ViReal64_attribute():
         assert 100 == session.range
 
 
+def test_Enum_attribute():
+    with nidmm.Session("Dev1") as session:
+        session.function = nidmm.Function.AC_CURRENT
+        assert session.function == nidmm.Function.AC_CURRENT
+        try:
+            session.function = nidmm.LCCalculationModel.CALC_MODEL_SERIES
+            assert false
+        except TypeError as e:
+            print(e)
+            pass
+
