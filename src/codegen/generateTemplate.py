@@ -95,6 +95,7 @@ def main():
     templateParams['functions'] = metadata['functions']
     templateParams['attributes'] = metadata['attributes']
     templateParams['config'] = metadata['config']
+    templateParams['enums'] = metadata['enums']
     templateParams['types'] = types
 
     logging.debug(pp.pformat(templateParams))
