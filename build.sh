@@ -17,7 +17,11 @@ python3 src/codegen/generateTemplate.py \
     --metadata src/NI-DMM/metadata/nidmm_metadata.py \
     --dest-file bin/nidmm/enums.py -v -v
 
+python3 src/codegen/generateTemplate.py \
+    --template src/codegen/templates/session.py.mako \
+    --metadata src/NI-DMM/metadata/nidmm_metadata.py \
+    --dest-file bin/nidmm/session.py -v -v
+
 cp src/NI-DMM/nidmm/__init__.py     bin/nidmm/__init__.py
 cp src/NI-DMM/nidmm/errors.py       bin/nidmm/errors.py
-cp src/NI-DMM/nidmm/session.py      bin/nidmm/session.py
 
