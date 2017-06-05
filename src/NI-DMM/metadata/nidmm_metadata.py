@@ -606,7 +606,7 @@ attributes = {
     }
 }
 
-#@TODO: Need to fill in enum information for those parameters that require it.
+# TODO(marcoskirsch): Need to fill in enum information for those parameters that require it.
 functions = [   {   'name': 'niDMM_init',
         'parameters': [   {'direction': 'in', 'enum': None, 'name': 'resourceName', 'type': 'ViRsrc'},
                           {'direction': 'in', 'enum': None, 'name': 'IDQuery', 'type': 'ViBoolean'},
@@ -742,7 +742,7 @@ functions = [   {   'name': 'niDMM_init',
     {   'name': 'niDMM_GetApertureTimeInfo',
         'parameters': [   {'direction': 'in', 'enum': None, 'name': 'vi', 'type': 'ViSession'},
                           {'direction': 'out', 'enum': None, 'name': 'apertureTime', 'type': 'ViReal64'},
-                          {'direction': 'out', 'enum': None, 'name': 'apertureTimeUnits', 'type': 'ViInt32'}],
+                          {'direction': 'out', 'enum': 'ApertureTimeUnits', 'name': 'apertureTimeUnits', 'type': 'ViInt32'}],
         'returns': 'ViStatus'},
     {   'name': 'niDMM_GetAutoRangeValue',
         'parameters': [   {'direction': 'in', 'enum': None, 'name': 'vi', 'type': 'ViSession'},

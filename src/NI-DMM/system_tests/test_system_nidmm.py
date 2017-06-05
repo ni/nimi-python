@@ -38,13 +38,13 @@ def test_wrong_parameter_type():
 def test_ViBoolean_attribute():
     with nidmm.Session("Dev1") as session:
         assert session.simulate is False
-        #@TODO: set a boolean
+        # TODO(marcoskirsch): set a boolean
 
 
 def test_ViString_attribute():
     with nidmm.Session("Dev1") as session:
         assert "1A67CAC" == session.serialNumber
-        #@TODO: set a string
+        # TODO(marcoskirsch): set a string
 
 
 def test_ViInt32_attribute():

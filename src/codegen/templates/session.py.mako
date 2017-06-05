@@ -126,11 +126,11 @@ class Session(object):
         self.close()
 
     def close(self):
-        #@TODO: Should we raise an exception on double close? Look at what File does.
+        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         if(self.sessionHandle.value != 0):
             errorCode = self.library.${c_function_prefix}close(self.sessionHandle)
             if(errorCode < 0):
-                #@TODO: This will occur when session is "stolen". Maybe don't even bother with printing?
+                # TODO(marcoskirsch): This will occur when session is "stolen". Maybe don't even bother with printing?
                 print("Failed to close session.")
             self.sesionHandle = ctypes.c_ulong(0)
 

@@ -17,7 +17,7 @@ It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and p
 
 **nimi-python** supports only the Windows operating system.
 
-** nimi-python** supports CPython 3.6+. *@TODO: At some point we add PyPI version here.*
+** nimi-python** supports CPython 3.6+. * TODO(marcoskirsch): Add PyPI version here.*
 
 .. _installation-section:
 
@@ -37,7 +37,7 @@ Or **easy_install** from
 
 You also can download the project source, build, and run::
 
-  $ python @TODO: how do we build?
+  $ python TODO(marcoskirsch): how do we build?
   $ python setup.py install
 
 .. _usage-section:
