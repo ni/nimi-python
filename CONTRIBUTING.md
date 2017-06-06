@@ -46,7 +46,7 @@ System tests are distinct on a per-driver basis and require the following:
   - Supported version of CPython is installed.
   - Compatible device is connected to it (i.e. NI 4080).
 
-*@TODO: update all this when we have clearer information*
+* TODO(marcoskirsch): update all this when we have clearer information*
 
 NI-DMM system tests assume your device has a specific alias "DMM1" specified in MAX. Rename your device in MAX to match.
 

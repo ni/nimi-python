@@ -15,8 +15,15 @@ types = {
     'ViBoolean': 'c_ushort',
     'ViSession': 'c_ulong',
     'ViChar': 'c_char_p',
-    'ViInt32': 'c_ulong',
+    'ViUInt32': 'c_ulong',
+    'ViInt32': 'c_long',
+    'ViInt16': 'c_short',
+    'ViUInt16': 'c_ushort',
+    'ViReal32': 'c_float',
     'ViReal64': 'c_double',
+    'ViString': 'c_char_p',
+    'ViConstString': 'c_char_p',
+    'ViAttr': 'c_long',
 }
 
 def configureLogging(lvl = logging.WARNING, logfile = None):
@@ -31,11 +38,10 @@ def configureLogging(lvl = logging.WARNING, logfile = None):
     hndlr.setFormatter(formatter)
     root.addHandler(hndlr)
 
-def Main():
+def main():
     # Setup the required arguments for this script
-    usage = """
-usage: %prog [options]
-"""
+    usage = "usage: " + sys.argv[0] + " [options]"
+
     parser = argparse.ArgumentParser(description=usage)
     fileGroup = parser.add_argument_group("Input and Output files")
     fileGroup.add_argument(
@@ -89,6 +95,7 @@ usage: %prog [options]
     templateParams['functions'] = metadata['functions']
     templateParams['attributes'] = metadata['attributes']
     templateParams['config'] = metadata['config']
+    templateParams['enums'] = metadata['enums']
     templateParams['types'] = types
 
     logging.debug(pp.pformat(templateParams))
@@ -130,5 +137,5 @@ usage: %prog [options]
 
 
 if __name__ == '__main__':
-    Main()
+    main()
 
