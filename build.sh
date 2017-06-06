@@ -22,6 +22,6 @@ python3 src/codegen/generateTemplate.py \
     --driver NI-DMM \
     --dest-dir bin/nidmm -v -v
 
-cp src/nidmm/nidmm/__init__.py     bin/nidmm/__init__.py
-cp src/nidmm/nidmm/errors.py       bin/nidmm/errors.py
+cp src/NI-DMM/nidmm/__init__.py     bin/nidmm/__init__.py
+cp src/NI-DMM/nidmm/errors.py       bin/nidmm/errors.py
 
