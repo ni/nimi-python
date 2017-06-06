@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-import sys, os
+import os
+import sys
 # Add bin directory to the path, so that we load the locally built nidmm module and not require installation.
 sys.path.append(os.path.join(sys.path[0],'../../../bin/'))
-print(sys.path)
 
 import nidmm
 
