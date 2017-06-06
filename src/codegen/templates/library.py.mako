@@ -1,18 +1,17 @@
-<%
-functions     = templateParameters['functions']
-attributes    = templateParameters['attributes']
-config        = templateParameters['config']
-types         = templateParameters['types']
-%>
 #!/usr/bin/python
-
 # This file was generated
+<%
+functions     = template_parameters['metadata'].functions
+attributes    = template_parameters['metadata'].attributes
+config        = template_parameters['metadata'].config
+types         = template_parameters['types']
+%>
 
-
-from ctypes import *
+import ctypes
 import platform
+import sys
 
-def getLibraryName():
+def get_library_name():
     is_64bits = sys.maxsize > 2**32
 
 % if 'library_linux' in config:
@@ -35,8 +34,8 @@ def getLibraryName():
 % endif
 
 
-def getLibrary()
-    library = CDLL(getLibraryName())
+def get_library():
+    library = ctypes.CDLL(get_library_name())
 
     """ Specify required argument types (function prototypes) and Return types.
         https://docs.python.org/3/library/ctypes.html#specifying-the-required-argument-types-function-prototypes
@@ -49,16 +48,16 @@ def getLibrary()
 % for f in functions:
 <%
     param_types = ""
-    for p in f['params']:
+    for p in f['parameters']:
         if len(param_types) > 0:
             param_types += ", "
         if p['direction'] == 'out':
-            param_types += "POINTER(" + types[p['type']] + ")"
+            param_types += "ctypes.POINTER(" + "ctypes." + types[p['type']] + ")"
         else:
-            param_types += types[p['type']]
+            param_types += "ctypes." + types[p['type']]
 %>
-    library.${f['name']}.restype = ${types[f['ret_type']]}
-    library.${f['name']}.argtypes = [${param_types}]
+    library.${config['c_function_prefix']}${f['name']}.restype = ctypes.${types[f['returns']]}
+    library.${config['c_function_prefix']}${f['name']}.argtypes = [${param_types}]
 % endfor
 
     return library
