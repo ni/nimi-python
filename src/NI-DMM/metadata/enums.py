@@ -32,10 +32,10 @@ enums = {
         {'name': 'AC_VOLTS', 'value':    2},
         {'name': 'DC_CURRENT', 'value':    3},
         {'name': 'AC_CURRENT', 'value':    4},
-        {'name': 'RES_2_WIRE',
-         'value':    5}, # Had to put RES_ in front, rather than in back, so name doesn't start with number.
-        {'name': 'RES_4_WIRE',
-         'value':  101}, # Had to put RES_ in front, rather than in back, so name doesn't start with number.
+        # Had to put RES_ in front, rather than in back, so name doesn't start with number.
+        {'name': 'RES_2_WIRE', 'value':    5},
+        # Had to put RES_ in front, rather than in back, so name doesn't start with number.
+        {'name': 'RES_4_WIRE', 'value':  101},
         {'name': 'FREQ', 'value':  104},
         {'name': 'PERIOD', 'value':  105},
         {'name': 'TEMPERATURE', 'value':  108},
@@ -98,10 +98,10 @@ enums = {
     'TemperatureTransducerType': [
         {'name': 'THERMOCOUPLE', 'value':  1},
         {'name': 'THERMISTOR', 'value':  2},
-        {'name': 'RTD_2_WIRE',
-         'value':  3}, # Had to put RTD in front, rather than in back, so name doesn't start with number.
-        {'name': 'RTD_4_WIRE',
-         'value':  4}, # Had to put RTD in front, rather than in back, so name doesn't start with number.
+        # Had to put RTD in front, rather than in back, so name doesn't start with number.
+        {'name': 'RTD_2_WIRE', 'value':  3},
+        # Had to put RTD in front, rather than in back, so name doesn't start with number.
+        {'name': 'RTD_4_WIRE', 'value':  4},
     ],
 
     'WaveformCouplingMode': [
