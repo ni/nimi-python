@@ -49,9 +49,9 @@ def main():
         action="store", dest="template", default=None, required=True,
         help="Mako template to use")
     fileGroup.add_argument(
-        "--dest-file",
+        "--dest-dir",
         action="store", dest="dest", default=None, required=True,
-        help="Output file")
+        help="Output folder")
     fileGroup.add_argument(
         "--metadata",
         action="store", dest="metadata", default=None, required=True,
@@ -131,7 +131,8 @@ def main():
         sys.exit(1)
 
     print(renderedTemplate)
-    fileHandlePublic = open(args.dest, 'w')
+    dest_file = os.path.join(args.dest, args.template.replace('.mako', ''))
+    fileHandlePublic = open(dest_file, 'w')
     fileHandlePublic.write(renderedTemplate)
     fileHandlePublic.close()
 
