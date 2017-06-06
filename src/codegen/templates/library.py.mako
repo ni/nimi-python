@@ -8,7 +8,7 @@ types         = templateParameters['types']
 # This file was generated
 
 
-from ctypes import *
+import ctypes
 import platform
 import sys
 
@@ -36,7 +36,7 @@ def getLibraryName():
 
 
 def getLibrary():
-    library = CDLL(getLibraryName())
+    library = ctypes.CDLL(getLibraryName())
 
     """ Specify required argument types (function prototypes) and Return types.
         https://docs.python.org/3/library/ctypes.html#specifying-the-required-argument-types-function-prototypes
@@ -53,11 +53,11 @@ def getLibrary():
         if len(param_types) > 0:
             param_types += ", "
         if p['direction'] == 'out':
-            param_types += "POINTER(" + types[p['type']] + ")"
+            param_types += "ctypes.POINTER(" + "ctypes." + types[p['type']] + ")"
         else:
-            param_types += types[p['type']]
+            param_types += "ctypes." + types[p['type']]
 %>
-    library.${f['name']}.restype = ${types[f['returns']]}
+    library.${f['name']}.restype = ctypes.${types[f['returns']]}
     library.${f['name']}.argtypes = [${param_types}]
 % endfor
 

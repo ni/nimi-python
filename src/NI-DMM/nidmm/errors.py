@@ -1,5 +1,5 @@
 import nidmm
-from ctypes import *
+import ctypes
 
 
 def _isSuccess(errorCode):
@@ -18,8 +18,8 @@ class _ErrorBase(Exception):
 
     def __init__(self, nidmmLib, sessionHandle, errorCode):
 
-        newErrorCode = c_long(0)
-        bufferSize = nidmmLib.niDMM_GetError(sessionHandle, byref(newErrorCode), 0, None)
+        newErrorCode = ctypes.c_long(0)
+        bufferSize = nidmmLib.niDMM_GetError(sessionHandle, ctypes.byref(newErrorCode), 0, None)
         assert (newErrorCode.value == errorCode)
 
         if (bufferSize > 0):
@@ -30,9 +30,9 @@ class _ErrorBase(Exception):
             (trust that the IVI error code was properly stored in the session
             by the driver)
             '''
-            errorCode = c_long(errorCode)
-            errorMessage = create_string_buffer(bufferSize)
-            nidmmLib.niDMM_GetError(sessionHandle, byref(errorCode), bufferSize, errorMessage)
+            errorCode = ctypes.c_long(errorCode)
+            errorMessage = ctypes.create_string_buffer(bufferSize)
+            nidmmLib.niDMM_GetError(sessionHandle, ctypes.byref(errorCode), bufferSize, errorMessage)
         else:
             '''
             Return code <= 0 from GetError indicates a problem.  This is expected
@@ -45,7 +45,7 @@ class _ErrorBase(Exception):
             errorCode = bufferSize
             bufferSize = nidmmLib.niDMM_GetErrorMessage(sessionHandle, errorCode, 0, None)
             print("bufferSize", bufferSize)
-            errorMessage = create_string_buffer(bufferSize)
+            errorMessage = ctypes.create_string_buffer(bufferSize)
             nidmmLib.niDMM_GetErrorMessage(sessionHandle, errorCode, bufferSize, errorMessage)
 
         #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
