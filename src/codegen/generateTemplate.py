@@ -54,9 +54,9 @@ def main():
         action="store", dest="dest", default=None, required=True,
         help="Output file")
     file_group.add_argument(
-        "--metadata",
-        action="store", dest="metadata", default=None, required=True,
-        help="Metadata")
+        "--driver",
+        action="store", dest="driver", default=None, required=True,
+        help="Driver name to generate metadata folder. Required hierarchy: src/<driver>/metadata")
 
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
     verbosity_group.add_argument(
@@ -85,18 +85,18 @@ def main():
 
     logging.info(pp.pformat(args))
 
-    metadata = dict()
-    with open(args.metadata) as f:
-        logging.debug("Reading metadata")
-        code = compile(f.read(), args.metadata, 'exec')
-        exec(code, metadata)
+    sys.path.append(os.path.normpath(os.path.join(sys.path[0], '..', args.driver)))
+
+    try:
+        import metadata
+    except ImportError as e:
+        logging.error("Error importing metadata")
+        logging.error(e)
+        sys.exit(1)
 
     template = Template(filename=args.template)
     template_params = {}
-    template_params['functions'] = metadata['functions']
-    template_params['attributes'] = metadata['attributes']
-    template_params['config'] = metadata['config']
-    template_params['enums'] = metadata['enums']
+    template_params['metadata'] = metadata
     template_params['types'] = types
 
     logging.debug(pp.pformat(template_params))

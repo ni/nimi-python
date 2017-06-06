@@ -1,8 +1,14 @@
 # This file was generated
 <%
-    module_name = config = template_parameters['config']['module_name']
-    c_function_prefix = config = template_parameters['config']['c_function_prefix']
-    attributes = template_parameters['attributes']
+    config = template_parameters['metadata'].config
+    module_name = config['module_name']
+    c_function_prefix = config['c_function_prefix']
+    attributes = template_parameters['metadata'].attributes
+
+    def snakecase_to_camelcase(snake_string):
+        """Converts a C-style SNAKE_CASE string to camelCase"""
+        components = snake_string.split('_')
+        return components[0].lower() + "".join(component.title() for component in components[1:])
 %>
 
 import ctypes
@@ -92,7 +98,7 @@ class AttributeViSession(object):
 
 
 class Session(object):
-    """${template_parameters['config']['session_description']}"""
+    """${config['session_description']}"""
 
 % for attribute in attributes:
     %if attributes[attribute]['enum']:
