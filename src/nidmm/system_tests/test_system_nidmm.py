@@ -20,18 +20,29 @@ def test_invalid_device_name():
 
 def test_take_simple_measurement_works():
     with nidmm.Session("Dev1") as session:
-        session.configureMeasurementDigits(nidmm.Function.DC_VOLTS, 10, 5.5)
-        assert session.read() < 0.1 # Assume nothing is connected to device, reads back around 0.
+        session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
+        assert session.read() < 0.01 # Assume nothing is connected to device, reads back around 0.
 
 
 def test_wrong_parameter_type():
     with nidmm.Session("Dev1") as session:
         try:
             # We are passing a number where an enum is expected.
-            session.configureMeasurementDigits(1, 10, 5.5)
-            assert false
+            session.configure_measurement_digits(1, 10, 5.5)
+            assert False
         except TypeError as e:
             print(e)
+            pass
+
+
+def test_warning():
+    with nidmm.Session("Dev1") as session:
+        session.configure_measurement_digits(nidmm.Function.RES_2_WIRE, 1e6, 3.5)
+        try:
+            print(session.read()) # Assume nothing is connected to device, overrange!
+            assert False
+        except nidmm.Warning as w:
+            print(w)
             pass
 
 
@@ -43,14 +54,14 @@ def test_ViBoolean_attribute():
 
 def test_ViString_attribute():
     with nidmm.Session("Dev1") as session:
-        assert "1A67CAC" == session.serialNumber
+        assert "1A67CAC" == session.serial_number
         # TODO(marcoskirsch): set a string
 
 
 def test_ViInt32_attribute():
     with nidmm.Session("Dev1") as session:
-        session.sampleCount = 5
-        assert 5 == session.sampleCount
+        session.sample_count = 5
+        assert 5 == session.sample_count
 
 
 def test_ViReal64_attribute():
@@ -75,13 +86,13 @@ def test_Enum_attribute():
 def test_ViSession_attribute():
     with nidmm.Session("Dev1") as session:
         try:
-            session.ioSession = 5
+            session.io_session = 5
             assert false
         except TypeError as e:
             print(e)
             pass
         try:
-            value = session.ioSession
+            value = session.io_session
             assert false
         except TypeError as e:
             print(e)

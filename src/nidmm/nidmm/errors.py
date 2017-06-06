@@ -2,27 +2,27 @@ import nidmm
 import ctypes
 
 
-def _isSuccess(errorCode):
-    return (errorCode == 0)
+def _is_success(error_code):
+    return (error_code == 0)
 
 
-def _isError(errorCode):
-    return (errorCode < 0)
+def _is_error(error_code):
+    return (error_code < 0)
 
 
-def _isWarning(errorCode):
-    return (errorCode > 0)
+def _is_warning(error_code):
+    return (error_code > 0)
 
 
 class _ErrorBase(Exception):
 
-    def __init__(self, nidmmLib, sessionHandle, errorCode):
+    def __init__(self, library, session_handle, error_code):
 
-        newErrorCode = ctypes.c_long(0)
-        bufferSize = nidmmLib.niDMM_GetError(sessionHandle, ctypes.byref(newErrorCode), 0, None)
-        assert (newErrorCode.value == errorCode)
+        new_error_code = ctypes.c_long(0)
+        buffer_size = library.niDMM_GetError(session_handle, ctypes.byref(new_error_code), 0, None)
+        assert (new_error_code.value == error_code)
 
-        if (bufferSize > 0):
+        if (buffer_size > 0):
             '''
             Return code > 0 from first call to GetError represents the size of
             the description.  Call it again.
@@ -30,9 +30,9 @@ class _ErrorBase(Exception):
             (trust that the IVI error code was properly stored in the session
             by the driver)
             '''
-            errorCode = ctypes.c_long(errorCode)
-            errorMessage = ctypes.create_string_buffer(bufferSize)
-            nidmmLib.niDMM_GetError(sessionHandle, ctypes.byref(errorCode), bufferSize, errorMessage)
+            error_code = ctypes.c_long(error_code)
+            error_message = ctypes.create_string_buffer(buffer_size)
+            library.niDMM_GetError(session_handle, ctypes.byref(error_code), buffer_size, error_message)
         else:
             '''
             Return code <= 0 from GetError indicates a problem.  This is expected
@@ -42,38 +42,38 @@ class _ErrorBase(Exception):
             Call niDMM_GetErrorMessage, pass VI_NULL for the buffer in order to retrieve
             the length of the error message.
             '''
-            errorCode = bufferSize
-            bufferSize = nidmmLib.niDMM_GetErrorMessage(sessionHandle, errorCode, 0, None)
-            print("bufferSize", bufferSize)
-            errorMessage = ctypes.create_string_buffer(bufferSize)
-            nidmmLib.niDMM_GetErrorMessage(sessionHandle, errorCode, bufferSize, errorMessage)
+            error_code = buffer_size
+            buffer_size = library.niDMM_GetErrorMessage(session_handle, error_code, 0, None)
+            print("buffer_size", buffer_size)
+            error_message = ctypes.create_string_buffer(buffer_size)
+            library.niDMM_GetErrorMessage(session_handle, error_code, buffer_size, error_message)
 
         #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
-        self.code = errorCode.value
-        self.elaboration = errorMessage.value.decode("ascii")
+        self.code = error_code.value
+        self.elaboration = error_message.value.decode("ascii")
         super(_ErrorBase, self).__init__(str(self.code) + ": " + self.elaboration)
 
 
 class Error(_ErrorBase):
 
-    def __init__(self, nidmmLib, sessionHandle, errorCode):
-        assert (_isError(errorCode)), "Should not raise Error if errorCode is not fatal."
-        super(Error, self).__init__(nidmmLib, sessionHandle, errorCode)
+    def __init__(self, library, session_handle, error_code):
+        assert (_is_error(error_code)), "Should not raise Error if error_code is not fatal."
+        super(Error, self).__init__(library, session_handle, error_code)
 
 
 class Warning(_ErrorBase):
 
-    def __init__(self, nidmmLib, sessionHandle, errorCode):
-        assert (_isWarning(errorCode)), "Should not raise Warning if errorCode is not positive."
-        super(Warning, self).__init__(nidmmLib, sessionHandle, errorCode)
+    def __init__(self, library, session_handle, error_code):
+        assert (_is_warning(error_code)), "Should not raise Warning if error_code is not positive."
+        super(Warning, self).__init__(library, session_handle, error_code)
 
 
-def _handleError(nidmmLib, sessionHandle, errorCode):
-    if (_isSuccess(errorCode)):
+def _handle_error(library, session_handle, error_code):
+    if (_is_success(error_code)):
         return
-    if (_isError(errorCode)):
-        raise Error(nidmmLib, sessionHandle, errorCode)
-    if (_isWarning(errorCode)):
-        raise Warning(nidmmLib, sessionHandle, errorCode)
+    if (_is_error(error_code)):
+        raise Error(library, session_handle, error_code)
+    if (_is_warning(error_code)):
+        raise Warning(library, session_handle, error_code)
 

@@ -1,7 +1,7 @@
-<%
-enums = templateParameters['enums']
-%>
 # This file was generated
+<%
+enums = template_parameters['metadata'].enums
+%>
 
 from enum import Enum
 

@@ -17,8 +17,8 @@ args = parser.parse_args()
 
 try:
     with nidmm.Session(args.name) as session:
-        session.configureMeasurementDigits(nidmm.Function[args.function], args.range, args.digits)
+        session.configure_measurement_digits(nidmm.Function[args.function], args.range, args.digits)
         print(session.read())
 except nidmm.Error as e:
-    print(e)
+    print(e, file=sys.stderr)
     sys.exit(e.code)
