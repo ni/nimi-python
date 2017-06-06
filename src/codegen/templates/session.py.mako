@@ -2,11 +2,6 @@
     module_name = config = templateParameters['config']['module_name']
     c_function_prefix = config = templateParameters['config']['c_function_prefix']
     attributes = templateParameters['attributes']
-
-    def snakecase_to_camelcase(snake_string):
-        """Converts a C-style SNAKE_CASE string to camelCase"""
-        components = snake_string.split('_')
-        return components[0].lower() + "".join(component.title() for component in components[1:])
 %>
 # This file was generated
 
@@ -83,6 +78,7 @@ class AttributeEnum(object):
         obj.setAttributeViInt32(self.attributeId, value.value)
 
 
+# TODO(marcoskirsch): We may want to support this, plus a Session constructor that uses an existing ViSession.
 class AttributeViSession(object):
 
     def __init__(self, attributeId):
@@ -100,9 +96,9 @@ class Session(object):
 
 % for attribute in attributes:
     %if attributes[attribute]['enum']:
-    ${snakecase_to_camelcase(attribute)} = AttributeEnum(${attributes[attribute]['id']}, enums.${attributes[attribute]['enum']})
+    ${attribute.lower()} = AttributeEnum(${attributes[attribute]['id']}, enums.${attributes[attribute]['enum']})
     %else:
-    ${snakecase_to_camelcase(attribute)} = Attribute${attributes[attribute]['type']}(${attributes[attribute]['id']})
+    ${attribute.lower()} = Attribute${attributes[attribute]['type']}(${attributes[attribute]['id']})
     %endif
 % endfor
 
