@@ -20,8 +20,8 @@ def test_invalid_device_name():
 
 def test_take_simple_measurement_works():
     with nidmm.Session("Dev1") as session:
-        session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 10, 5.5)
-        assert session.read() < 0.1 # Assume nothing is connected to device, reads back around 0.
+        session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
+        assert session.read() < 0.01 # Assume nothing is connected to device, reads back around 0.
 
 
 def test_wrong_parameter_type():
@@ -32,6 +32,17 @@ def test_wrong_parameter_type():
             assert False
         except TypeError as e:
             print(e)
+            pass
+
+
+def test_warning():
+    with nidmm.Session("Dev1") as session:
+        session.configure_measurement_digits(nidmm.Function.RES_2_WIRE, 1e6, 3.5)
+        try:
+            print(session.read()) # Assume nothing is connected to device, overrange!
+            assert False
+        except nidmm.Warning as w:
+            print(w)
             pass
 
 
