@@ -57,8 +57,8 @@ def getLibrary():
         else:
             param_types += "ctypes." + types[p['type']]
 %>
-    library.${f['name']}.restype = ctypes.${types[f['returns']]}
-    library.${f['name']}.argtypes = [${param_types}]
+    library.${config['c_function_prefix']}${f['name']}.restype = ctypes.${types[f['returns']]}
+    library.${config['c_function_prefix']}${f['name']}.argtypes = [${param_types}]
 % endfor
 
     return library
