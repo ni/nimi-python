@@ -1,7 +1,6 @@
-from nidmm.library import *
-from nidmm.errors import *
-from nidmm.session import *
-#from nidmm.attributes import *
 from nidmm.enums import *
+from nidmm.errors import Error
+from nidmm.errors import Warning
+from nidmm.session import Session
 
-__all__ = ['library', 'Error', 'Session', 'enums']
+__all__ = []
