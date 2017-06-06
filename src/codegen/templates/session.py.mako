@@ -1,9 +1,9 @@
 # This file was generated
 <%
-    config = templateParameters['metadata'].config
+    config = template_parameters['metadata'].config
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
-    attributes = templateParameters['metadata'].attributes
+    attributes = template_parameters['metadata'].attributes
 
     def snakecase_to_camelcase(snake_string):
         """Converts a C-style SNAKE_CASE string to camelCase"""

@@ -53,7 +53,7 @@ def main():
         "--dest-file",
         action="store", dest="dest", default=None, required=True,
         help="Output file")
-    fileGroup.add_argument(
+    file_group.add_argument(
         "--driver",
         action="store", dest="driver", default=None, required=True,
         help="Driver folder name")
@@ -95,9 +95,9 @@ def main():
         sys.exit(1)
 
     template = Template(filename=args.template)
-    templateParams = {}
-    templateParams['metadata'] = metadata
-    templateParams['types'] = types
+    template_params = {}
+    template_params['metadata'] = metadata
+    template_params['types'] = types
 
     logging.debug(pp.pformat(template_params))
 

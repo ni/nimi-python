@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # This file was generated
 <%
-functions     = templateParameters['metadata'].functions
-attributes    = templateParameters['metadata'].attributes
-config        = templateParameters['metadata'].config
-types         = templateParameters['types']
+functions     = template_parameters['metadata'].functions
+attributes    = template_parameters['metadata'].attributes
+config        = template_parameters['metadata'].config
+types         = template_parameters['types']
 %>
 
 import ctypes
