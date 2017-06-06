@@ -56,6 +56,7 @@ def main():
     file_group.add_argument(
         "--driver",
         action="store", dest="driver", default=None, required=True,
+        help="Driver name to generate metadata folder. Required hierarchy: src/<driver>/metadata")
 
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
     verbosity_group.add_argument(
