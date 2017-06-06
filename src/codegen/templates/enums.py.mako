@@ -1,5 +1,5 @@
 <%
-enums = templateParameters['enums']
+enums = templateParameters['metadata'].enums
 %>
 # This file was generated
 

@@ -84,26 +84,18 @@ def main():
 
     logging.info(pp.pformat(args))
 
-    sys.path.append(os.path.normpath(os.path.join(sys.path[0], '..', args.driver, 'metadata')))
+    sys.path.append(os.path.normpath(os.path.join(sys.path[0], '..', args.driver)))
 
     try:
-        import functions
-        import config
-        import attributes
-        import enums
+        import metadata
     except ImportError as e:
         logging.error("Error importing metadata")
         logging.error(e)
         sys.exit(1)
 
-    logging.debug(pp.pformat(functions))
-
     template = Template(filename=args.template)
     templateParams = {}
-    templateParams['functions'] = functions.functions
-    templateParams['attributes'] = attributes.attributes
-    templateParams['config'] = config.config
-    templateParams['enums'] = enums.enums
+    templateParams['metadata'] = metadata
     templateParams['types'] = types
 
     logging.debug(pp.pformat(templateParams))

@@ -1,7 +1,7 @@
 <%
-functions     = templateParameters['functions']
-attributes    = templateParameters['attributes']
-config        = templateParameters['config']
+functions     = templateParameters['metadata'].functions
+attributes    = templateParameters['metadata'].attributes
+config        = templateParameters['metadata'].config
 types         = templateParameters['types']
 %>
 #!/usr/bin/python

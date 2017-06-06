@@ -1,7 +1,8 @@
 <%
-    module_name = config = templateParameters['config']['module_name']
-    c_function_prefix = config = templateParameters['config']['c_function_prefix']
-    attributes = templateParameters['attributes']
+    config = templateParameters['metadata'].config
+    module_name = config['module_name']
+    c_function_prefix = config['c_function_prefix']
+    attributes = templateParameters['metadata'].attributes
 
     def snakecase_to_camelcase(snake_string):
         """Converts a C-style SNAKE_CASE string to camelCase"""
@@ -96,7 +97,7 @@ class AttributeViSession(object):
 
 
 class Session(object):
-    """${templateParameters['config']['session_description']}"""
+    """${config['session_description']}"""
 
 % for attribute in attributes:
     %if attributes[attribute]['enum']:
