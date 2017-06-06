@@ -53,9 +53,9 @@ def main():
         action="store", dest="dest", default=None, required=True,
         help="Output file")
     fileGroup.add_argument(
-        "--metadata",
-        action="store", dest="metadata", default=None, required=True,
-        help="Metadata")
+        "--driver",
+        action="store", dest="driver", default=None, required=True,
+        help="Driver folder name")
 
     verbosityGroup = parser.add_argument_group("Verbosity, Logging & Debugging")
     verbosityGroup.add_argument(
@@ -84,18 +84,26 @@ def main():
 
     logging.info(pp.pformat(args))
 
-    metadata = dict()
-    with open(args.metadata) as f:
-        logging.debug("Reading metadata")
-        code = compile(f.read(), args.metadata, 'exec')
-        exec(code, metadata)
+    sys.path.append(os.path.normpath(os.path.join(sys.path[0], '..', args.driver, 'metadata')))
+
+    try:
+        import functions
+        import config
+        import attributes
+        import enums
+    except ImportError as e:
+        logging.error("Error importing metadata")
+        logging.error(e)
+        sys.exit(1)
+
+    logging.debug(pp.pformat(functions))
 
     template = Template(filename=args.template)
     templateParams = {}
-    templateParams['functions'] = metadata['functions']
-    templateParams['attributes'] = metadata['attributes']
-    templateParams['config'] = metadata['config']
-    templateParams['enums'] = metadata['enums']
+    templateParams['functions'] = functions.functions
+    templateParams['attributes'] = attributes.attributes
+    templateParams['config'] = config.config
+    templateParams['enums'] = enums.enums
     templateParams['types'] = types
 
     logging.debug(pp.pformat(templateParams))
