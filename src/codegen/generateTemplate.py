@@ -4,9 +4,10 @@ from mako.template import Template
 from mako.exceptions import RichTraceback
 import logging
 import argparse
-import sys, os
-
+import os
 import pprint
+import sys
+
 pp = pprint.PrettyPrinter(indent=3)
 
 types = {
@@ -26,7 +27,7 @@ types = {
     'ViAttr': 'c_long',
 }
 
-def configureLogging(lvl = logging.WARNING, logfile = None):
+def configure_logging(lvl = logging.WARNING, logfile = None):
     root = logging.getLogger()
     root.setLevel(lvl)
     formatter = logging.Formatter('%(funcName)s - %(levelname)s - %(message)s')
@@ -43,32 +44,32 @@ def main():
     usage = "usage: " + sys.argv[0] + " [options]"
 
     parser = argparse.ArgumentParser(description=usage)
-    fileGroup = parser.add_argument_group("Input and Output files")
-    fileGroup.add_argument(
+    file_group = parser.add_argument_group("Input and Output files")
+    file_group.add_argument(
         "--template",
         action="store", dest="template", default=None, required=True,
         help="Mako template to use")
-    fileGroup.add_argument(
+    file_group.add_argument(
         "--dest-file",
         action="store", dest="dest", default=None, required=True,
         help="Output file")
-    fileGroup.add_argument(
+    file_group.add_argument(
         "--metadata",
         action="store", dest="metadata", default=None, required=True,
         help="Metadata")
 
-    verbosityGroup = parser.add_argument_group("Verbosity, Logging & Debugging")
-    verbosityGroup.add_argument(
+    verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
+    verbosity_group.add_argument(
         "-v", "--verbose",
         action="count", dest="verbose", default=0,
         help="Verbose output"
         )
-    verbosityGroup.add_argument(
+    verbosity_group.add_argument(
         "--test",
         action="store_true", dest="test", default=False,
         help="Run doctests and quit"
         )
-    verbosityGroup.add_argument(
+    verbosity_group.add_argument(
         "--log-file",
         action="store", dest="logfile", default=None,
         help="Send logging to listed file instead of stdout"
@@ -76,11 +77,11 @@ def main():
     args = parser.parse_args()
 
     if args.verbose > 1:
-        configureLogging(logging.DEBUG, args.logfile)
+        configure_logging(logging.DEBUG, args.logfile)
     elif args.verbose == 1:
-        configureLogging(logging.INFO, args.logfile)
+        configure_logging(logging.INFO, args.logfile)
     else:
-        configureLogging(logging.WARNING, args.logfile)
+        configure_logging(logging.WARNING, args.logfile)
 
     logging.info(pp.pformat(args))
 
@@ -91,17 +92,17 @@ def main():
         exec(code, metadata)
 
     template = Template(filename=args.template)
-    templateParams = {}
-    templateParams['functions'] = metadata['functions']
-    templateParams['attributes'] = metadata['attributes']
-    templateParams['config'] = metadata['config']
-    templateParams['enums'] = metadata['enums']
-    templateParams['types'] = types
+    template_params = {}
+    template_params['functions'] = metadata['functions']
+    template_params['attributes'] = metadata['attributes']
+    template_params['config'] = metadata['config']
+    template_params['enums'] = metadata['enums']
+    template_params['types'] = types
 
-    logging.debug(pp.pformat(templateParams))
+    logging.debug(pp.pformat(template_params))
 
     try:
-        renderedTemplate = template.render(templateParameters=templateParams)
+        rendered_template = template.render(template_parameters=template_params)
 
     except:
         # Because mako expands into python, we catch all errors, not just MakoException.
@@ -130,10 +131,10 @@ def main():
         logging.error("\n")
         sys.exit(1)
 
-    print(renderedTemplate)
-    fileHandlePublic = open(args.dest, 'w')
-    fileHandlePublic.write(renderedTemplate)
-    fileHandlePublic.close()
+    print(rendered_template)
+    file_handle_public = open(args.dest, 'w')
+    file_handle_public.write(rendered_template)
+    file_handle_public.close()
 
 
 if __name__ == '__main__':
