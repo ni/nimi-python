@@ -51,8 +51,12 @@ def main():
         help="Mako template to use")
     file_group.add_argument(
         "--dest-dir",
-        action="store", dest="dest", default=None, required=True,
-        help="Output folder")
+        action="store", dest="dest_dir", default=None, required=True,
+        help="Output folder.")
+    file_group.add_argument(
+        "--dest-file",
+        action="store", dest="dest_file", default=None, required=False,
+        help="Output file name. Optional. If not set, file will be named based on mako template name.")
     file_group.add_argument(
         "--driver",
         action="store", dest="driver", default=None, required=True,
@@ -131,10 +135,13 @@ def main():
         logging.error("\n")
         sys.exit(1)
 
-    print(rendered_template)
-    dest_file = os.path.join(args.dest, os.path.basename(args.template).replace('.mako', ''))
-    fileHandlePublic = open(dest_file, 'w')
-    fileHandlePublic.write(rendered_template)
+    logging.debug(rendered_template)
+    file_name = args.dest_file
+    if file_name is None:
+        file_name = os.path.basename(args.template).replace('.mako', '')
+    dest_file = os.path.join(args.dest_dir, file_name)
+    fileHandlePublic = open(dest_file, 'wb')
+    fileHandlePublic.write(bytes(rendered_template, "UTF-8"))
     fileHandlePublic.close()
 
 
