@@ -3,15 +3,10 @@ config = {
     'module_version': '0.1',
     'c_function_prefix': 'niDMM_',
     'session_description': 'An NI-DMM session to a National Instruments Digital Multimeter',
-    'library_windows':
+    'library_name':
     {
-        '32': 'nidmm_32.dll',
-        '64': 'nidmm_64.dll'
-    },
-    'library_linux':
-    {
-        '32': 'nidmm_32.so',
-        '64': 'nidmm_64.so'
-    },
+        'Windows': {'32bit': 'nidmm_32.dll', '64bit': 'nidmm_64.dll'},
+        'Linux': {'64bit': 'libnidmm.so'}
+    }
 }
 
