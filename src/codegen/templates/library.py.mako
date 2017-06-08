@@ -8,34 +8,23 @@ types         = template_parameters['types']
 %>
 
 import ctypes
+from nidmm import errors
 import platform
-import sys
+
 
 def get_library_name():
-    is_64bits = sys.maxsize > 2**32
-
-% if 'library_linux' in config:
-    if platform.system() == "Linux":
-        if is_64bits:
-            return "${config['library_linux']['64']}"
-        else:
-            return "${config['library_linux']['32']}"
-% endif
-% if 'library_mac' in config:
-    if platform.system() == "Darwin":
-        return "${config['library_mac']['64']}"
-% endif
-% if 'library_windows' in config:
-    if platform.system() == "Windows":
-        if is_64bits:
-            return "${config['library_windows']['64']}"
-        else:
-            return "${config['library_windows']['32']}"
-% endif
+    try:
+        return ${config['library_name']}[platform.system()][platform.architecture()[0]]
+    except KeyError as e:
+        raise errors.UnsupportedConfigurationError
 
 
 def get_library():
-    library = ctypes.CDLL(get_library_name())
+    try:
+        library = ctypes.CDLL(get_library_name())
+    except OSError as e:
+        raise errors.DriverNotInstalledError()
+
 
     """ Specify required argument types (function prototypes) and Return types.
         https://docs.python.org/3/library/ctypes.html#specifying-the-required-argument-types-function-prototypes
@@ -44,7 +33,6 @@ def get_library():
         Strictly speaking, this is not necessary if/when we code-generate the calling code.
         It may have some performance impact as well.
     """
-
 % for f in functions:
 <%
     param_types = ""
