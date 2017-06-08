@@ -39,6 +39,44 @@ def configure_logging(lvl = logging.WARNING, logfile = None):
     hndlr.setFormatter(formatter)
     root.addHandler(hndlr)
 
+def generate_template(template_name, template_params, dest_file):
+    try:
+        template = Template(filename=template_name)
+        rendered_template = template.render(template_parameters=template_params)
+
+    except:
+        # Because mako expands into python, we catch all errors, not just MakoException.
+        # Ideally, we'd use text_error_template, but it sucks.  html_error_template,
+        # however, is useful.  Unfortunately emitting html isn't acceptable.  So we
+        # re-implement using mako.exceptions.RichTraceback here.
+        tback = RichTraceback(traceback=None)
+        line = tback.lineno
+        lines = tback.source.split('\n')
+
+        # The underlying error.
+        logging.error("\n%s: %s\n" % ( str(tback.error.__class__.__name__), str(tback.error) ))
+        logging.error("Offending Template: %s\n" % template_name)
+
+        # Show a source listing of the template, with offending line marked.
+        for index in range(max(0, line - 4), min(len(lines), line + 5)):
+            if index + 1 == line:
+                logging.error(">> %#08d: %s" % (index + 1, lines[index]))
+            else:
+                logging.error("   %08d: %s" % (index + 1, lines[index]))
+
+        logging.error("\nTraceback (most recent call last):")
+        for (filename, lineno, function, line) in tback.reverse_traceback:
+            logging.error("   File %s, line %d, in %s\n     %s" % (filename, lineno, function, line))
+
+        logging.error("\n")
+        sys.exit(1)
+
+    logging.debug(rendered_template)
+    fileHandlePublic = open(dest_file, 'wb')
+    fileHandlePublic.write(bytes(rendered_template, "UTF-8"))
+    fileHandlePublic.close()
+
+
 def main():
     # Setup the required arguments for this script
     usage = "usage: " + sys.argv[0] + " [options]"
@@ -98,52 +136,18 @@ def main():
         logging.error(e)
         sys.exit(1)
 
-    template = Template(filename=args.template)
     template_params = {}
     template_params['metadata'] = metadata
     template_params['types'] = types
 
     logging.debug(pp.pformat(template_params))
 
-    try:
-        rendered_template = template.render(template_parameters=template_params)
-
-    except:
-        # Because mako expands into python, we catch all errors, not just MakoException.
-        # Ideally, we'd use text_error_template, but it sucks.  html_error_template,
-        # however, is useful.  Unfortunately emitting html isn't acceptable.  So we
-        # re-implement using mako.exceptions.RichTraceback here.
-        tback = RichTraceback(traceback=None)
-        line = tback.lineno
-        lines = tback.source.split('\n')
-
-        # The underlying error.
-        logging.error("\n%s: %s\n" % ( str(tback.error.__class__.__name__), str(tback.error) ))
-        logging.error("Offending Template: %s\n" % args.template)
-
-        # Show a source listing of the template, with offending line marked.
-        for index in range(max(0, line - 4), min(len(lines), line + 5)):
-            if index + 1 == line:
-                logging.error(">> %#08d: %s" % (index + 1, lines[index]))
-            else:
-                logging.error("   %08d: %s" % (index + 1, lines[index]))
-
-        logging.error("\nTraceback (most recent call last):")
-        for (filename, lineno, function, line) in tback.reverse_traceback:
-            logging.error("   File %s, line %d, in %s\n     %s" % (filename, lineno, function, line))
-
-        logging.error("\n")
-        sys.exit(1)
-
-    logging.debug(rendered_template)
     file_name = args.dest_file
     if file_name is None:
         file_name = os.path.basename(args.template).replace('.mako', '')
     dest_file = os.path.join(args.dest_dir, file_name)
-    fileHandlePublic = open(dest_file, 'wb')
-    fileHandlePublic.write(bytes(rendered_template, "UTF-8"))
-    fileHandlePublic.close()
 
+    generate_template(args.template, template_params, dest_file)
 
 if __name__ == '__main__':
     main()
