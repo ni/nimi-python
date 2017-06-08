@@ -86,7 +86,7 @@ def main():
 
         template_params = {}
         template_params['metadata'] = metadata
-        template_params['types'] = codegen.types
+        template_params['types'] = codegen.type_map
 
         logging.debug(pp.pformat(template_params))
 

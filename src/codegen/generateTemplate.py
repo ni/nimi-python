@@ -10,7 +10,7 @@ import sys
 
 pp = pprint.PrettyPrinter(indent=3)
 
-types = {
+type_map = {
     'ViStatus': 'c_long',
     'ViRsrc': 'c_char_p',
     'ViBoolean': 'c_ushort',
