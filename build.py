@@ -16,8 +16,7 @@ SOURCE_DIR = os.path.join(sys.path[0], "src")
 TEMPLATE_DIR = os.path.join(SOURCE_DIR, "codegen", "templates")
 possible_actions=["clean","make"]
 
-buildinfo_format = """
-The buildinfo format is as follows:
+buildinfo_format = """The buildinfo format is as follows:
 buildinfo = {
   'variables': {<vars>},
   "<action>": [<commands>],
@@ -76,7 +75,7 @@ def exec_rmdir(folder):
     if os.path.exists(folder):
         shutil.rmtree(folder)
 
-def exec_template(codegen, metadata, template_name, output_file):
+def exec_codegen(codegen, metadata, template_name, output_file):
     logging.debug("Generating %s from %s" % (output_file, template_name))
     template_params = {}
     template_params['metadata'] = metadata
@@ -90,6 +89,8 @@ def exec_template(codegen, metadata, template_name, output_file):
     config = metadata.config
 
     codegen.generate_template(template_name, template_params, output_file)
+
+# end command functions
 
 def load_build(m):
     metadata = path_import(m)
@@ -118,10 +119,10 @@ def exec_build(codegen, metadata, actions):
             elif command == "rmdir":
                 folder = (params['path'] % all_vars)
                 exec_rmdir(folder)
-            elif command == "template":
+            elif command == "codegen":
                 template = (params['template'] % all_vars)
                 output_file = (params['output_file'] % all_vars)
-                exec_template(codegen, metadata, template, output_file)
+                exec_codegen(codegen, metadata, template, output_file)
 
 def main():
     # Setup the required arguments for this script
