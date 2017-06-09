@@ -1,19 +1,18 @@
 #!/usr/bin/python
 
+import argparse
+from contextlib import contextmanager
+import importlib
 import logging
 import os
 import pprint
-import sys
 import shutil
-import argparse
+import sys
 
-pp = pprint.PrettyPrinter(indent=3)
+pp = pprint.PrettyPrinter(indent=4)
 
 DRIVERS = ["nidmm"]
 OUTPUT_DIR = os.path.join(sys.path[0], "bin")
-
-from contextlib import contextmanager
-import importlib
 
 # From https://stackoverflow.com/questions/41861427/python-3-5-how-to-dynamically-import-a-module-given-the-full-file-path-in-the
 @contextmanager
@@ -35,7 +34,7 @@ def path_import(absolute_path):
 
 def main():
     # Setup the required arguments for this script
-    usage = "usage: " + sys.argv[0] + " [options]"
+    usage = "Codegen driver files"
 
     parser = argparse.ArgumentParser(description=usage)
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
