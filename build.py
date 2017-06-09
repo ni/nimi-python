@@ -89,7 +89,7 @@ def main():
                     if not os.path.isdir(driver_output_dir):
                         raise
 
-                metadata_path = os.path.join(sys.path[0], 'src', driver, 'metadata')
+                metadata_path = os.path.join(SOURCE_DIR, driver, 'metadata')
                 metadata = path_import(metadata_path)
 
                 template_params = {}
