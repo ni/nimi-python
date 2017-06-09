@@ -13,6 +13,8 @@ pp = pprint.PrettyPrinter(indent=4)
 
 DRIVERS = ["nidmm"]
 OUTPUT_DIR = os.path.join(sys.path[0], "bin")
+SOURCE_DIR = os.path.join(sys.path[0], "src")
+possible_actions=["clean","make"]
 
 # From https://stackoverflow.com/questions/41861427/python-3-5-how-to-dynamically-import-a-module-given-the-full-file-path-in-the
 @contextmanager
@@ -53,10 +55,13 @@ def main():
         action="store", dest="logfile", default=None,
         help="Send logging to listed file instead of stdout"
         )
+    parser.add_argument(
+        "actions", metavar = "ACTIONS", type=str, choices=possible_actions,
+        nargs="+", help="Possible actions: " + ', '.join(possible_actions)
+        )
     args = parser.parse_args()
 
     codegen_path = os.path.join(sys.path[0], 'src', 'codegen')
-    print('codegen_path = %s' % codegen_path)
     codegen = path_import(codegen_path)
 
     if args.verbose > 1:
@@ -68,33 +73,37 @@ def main():
 
     logging.info(pp.pformat(args))
 
-    # clean up
-    shutil.rmtree(OUTPUT_DIR)
+    for action in args.actions:
+        logging.info("Action: %s" % action)
+        if action == "clean":
+            # clean up
+            if os.path.exists(OUTPUT_DIR):
+                shutil.rmtree(OUTPUT_DIR)
 
-    for driver in DRIVERS:
-        driver_output_dir = os.path.join(OUTPUT_DIR, driver)
-        try: 
-            os.makedirs(driver_output_dir)
-        except OSError:
-            if not os.path.isdir(driver_output_dir):
-                raise
+        elif action == 'make':
+            for driver in DRIVERS:
+                driver_output_dir = os.path.join(OUTPUT_DIR, driver)
+                try: 
+                    os.makedirs(driver_output_dir)
+                except OSError:
+                    if not os.path.isdir(driver_output_dir):
+                        raise
 
-        metadata_path = os.path.join(sys.path[0], 'src', driver, 'metadata')
-        print(metadata_path)
-        metadata = path_import(metadata_path)
+                metadata_path = os.path.join(SOURCE_DIR, driver, 'metadata')
+                metadata = path_import(metadata_path)
 
-        template_params = {}
-        template_params['metadata'] = metadata
-        template_params['types'] = codegen.type_map
+                template_params = {}
+                template_params['metadata'] = metadata
+                template_params['types'] = codegen.type_map
 
-        logging.debug(pp.pformat(template_params))
+                logging.debug(pp.pformat(template_params))
 
-        config = metadata.config
+                config = metadata.config
 
-        for output_file in config['files_to_generate']:
-            template_name = os.path.join(sys.path[0], 'src', 'codegen', 'templates', output_file + '.mako')
-            dest_file = os.path.join(driver_output_dir, output_file)
-            codegen.generate_template(template_name, template_params, dest_file)
+                for output_file in config['files_to_generate']:
+                    template_name = os.path.join(sys.path[0], 'src', 'codegen', 'templates', output_file + '.mako')
+                    dest_file = os.path.join(driver_output_dir, output_file)
+                    codegen.generate_template(template_name, template_params, dest_file)
 
 
 
