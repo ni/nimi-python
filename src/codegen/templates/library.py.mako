@@ -5,10 +5,14 @@ functions     = template_parameters['metadata'].functions
 attributes    = template_parameters['metadata'].attributes
 config        = template_parameters['metadata'].config
 types         = template_parameters['types']
+
+module_name = config['module_name']
+c_function_prefix = config['c_function_prefix']
+driver_name = config['driver_name']
 %>
 
 import ctypes
-from nidmm import errors
+from ${module_name} import errors
 import platform
 
 
@@ -29,7 +33,7 @@ def get_library():
     """ Specify required argument types (function prototypes) and Return types.
         https://docs.python.org/3/library/ctypes.html#specifying-the-required-argument-types-function-prototypes
         https://docs.python.org/3/library/ctypes.html#return-types
-        This provides some automatic conversion and error checking when calling NI-DMM functions.
+        This provides some automatic conversion and error checking when calling ${driver_name} functions.
         Strictly speaking, this is not necessary if/when we code-generate the calling code.
         It may have some performance impact as well.
     """
@@ -44,8 +48,8 @@ def get_library():
         else:
             param_types += "ctypes." + types[p['type']]
 %>
-    library.${config['c_function_prefix']}${f['name']}.restype = ctypes.${types[f['returns']]}
-    library.${config['c_function_prefix']}${f['name']}.argtypes = [${param_types}]
+    library.${c_function_prefix}${f['name']}.restype = ctypes.${types[f['returns']]}
+    library.${c_function_prefix}${f['name']}.argtypes = [${param_types}]
 % endfor
 
     return library
