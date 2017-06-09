@@ -107,6 +107,7 @@ def exec_build(codegen, metadata, actions):
     if 'variables' in metadata.buildinfo:
         all_vars.update(metadata.buildinfo['variables'])
     for action in actions:
+        logging.info('%s, %s' % (action, metadata.config['driver_name']))
         commands = metadata.buildinfo[action]
         for c in commands:
             command = c['command']
