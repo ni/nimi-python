@@ -29,6 +29,9 @@ type_map = {
 
 def configure_logging(lvl = logging.WARNING, logfile = None):
     root = logging.getLogger()
+    # Remove all handlers. We will add our own
+    while root.handlers:
+        root.handlers.pop()
     root.setLevel(lvl)
     formatter = logging.Formatter('%(funcName)s - %(levelname)s - %(message)s')
     if logfile is None:
