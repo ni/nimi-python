@@ -1,14 +1,11 @@
 # This file was generated
 <%
+    #import helper
+
     config = template_parameters['metadata'].config
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
-
-    def snakecase_to_camelcase(snake_string):
-        """Converts a C-style SNAKE_CASE string to camelCase"""
-        components = snake_string.split('_')
-        return components[0].lower() + "".join(component.title() for component in components[1:])
 %>
 
 import ctypes
@@ -98,7 +95,7 @@ class AttributeViSession(object):
 
 
 class Session(object):
-    """${config['session_description']}"""
+    '''${config['session_description']}'''
 
 % for attribute in attributes:
     %if attributes[attribute]['enum']:
@@ -131,6 +128,8 @@ class Session(object):
                 # TODO(marcoskirsch): This will occur when session is "stolen". Maybe don't even bother with printing?
                 print("Failed to close session.")
             self.sesion_handle = ctypes.c_ulong(0)
+
+    ''' These are hand-coded still '''
 
     def configure_measurement_digits(self, mode, range, digits_of_resolution):
         if type(mode) is not enums.Function: raise TypeError('Parameter mode must be of type ' + str(enums.Function))
@@ -188,3 +187,24 @@ class Session(object):
         errors._handle_error(self.library, self.session_handle, error_code)
         return value.value
 
+    ''' These are code-generated '''
+<%
+functions     = template_parameters['metadata'].functions
+config        = template_parameters['metadata'].config
+types         = template_parameters['types']
+
+module_name = config['module_name']
+c_function_prefix = config['c_function_prefix']
+driver_name = config['driver_name']
+
+%>
+% for f in functions:
+<%
+    #method_name = function_to_method_name(f)
+    method_name = f['name'] # TODO
+    #input_parameters = extract_input_parameters(f['parameters'])
+    #output_parameters = extract_output_parameters(f['parameters'])
+%>
+    def ${method_name}(self, parameters_go_here):
+        pass
+% endfor
