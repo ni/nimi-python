@@ -79,10 +79,7 @@ def exec_codegen(codegen, metadata, template_name, output_file):
     logging.debug("Generating %s from %s" % (output_file, template_name))
     template_params = {}
     template_params['metadata'] = metadata
-    if metadata.type_map is None:
-        template_params['types'] = codegen.type_map
-    else:
-        template_params['types'] = metadata.type_map
+    template_params['types'] = codegen.type_map
 
     logging.debug(pp.pformat(template_params))
 
