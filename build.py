@@ -1,12 +1,15 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import argparse
 from contextlib import contextmanager
+import distutils
+from distutils import dir_util
 import importlib
 import logging
 import os
 import pprint
 import shutil
+import subprocess
 import sys
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -32,6 +35,9 @@ Command               Parameters
 mkdir                 {'path': '<path to create>'}
 rmdir                 {'path': '<path to delete>'}
 template              {'template': '<path to mako template>', 'output_file': '<output file path>'}
+copy                  {'src': '<source path>', 'dest': '<destination path>'} // Source can be a file or a directory
+sdist                 {'src-dir': '<directory that contains setup.py>'}
+wheel                 {'src-dir': '<directory that contains setup.py>'}
 
 Variables will be substitued in all param strings. Format in the string is %(varname)s.
 
@@ -90,6 +96,29 @@ def exec_codegen(codegen, metadata, template_name, output_file):
 
     codegen.generate_template(template_name, template_params, output_file)
 
+def exec_copy(src, dest):
+    logging.debug("Copying %s to %s" % (src, dest))
+    if os.path.isdir(src):
+        distutils.dir_util.copy_tree(src, dest)
+    else:
+        shutil.copyfile(src, dest)
+
+def exec_sdist(src_dir):
+    logging.debug('Create pypi packages in %s' % src_dir)
+    # Save the current working directory before changing to src_dir
+    old_cwd = os.getcwd()
+    os.chdir(src_dir)
+    subprocess.call(['py', 'setup.py', 'sdist'])
+    os.chdir(old_cwd)
+
+def exec_wheel(src_dir):
+    logging.debug('Create pypi packages in %s' % src_dir)
+    # Save the current working directory before changing to src_dir
+    old_cwd = os.getcwd()
+    os.chdir(src_dir)
+    subprocess.call(['py', 'setup.py', 'bdist_wheel', '--universal'])
+    os.chdir(old_cwd)
+
 # end command functions
 
 def load_build(m):
@@ -123,6 +152,19 @@ def exec_build(codegen, metadata, actions):
                 template = (params['template'] % all_vars)
                 output_file = (params['output_file'] % all_vars)
                 exec_codegen(codegen, metadata, template, output_file)
+            elif command == 'copy':
+                src = (params['src'] % all_vars)
+                dest = (params['dest'] % all_vars)
+                exec_copy(src, dest)
+            elif command == 'sdist':
+                src_dir = (params['src-dir'] % all_vars)
+                exec_sdist(src_dir)
+            elif command == 'wheel':
+                src_dir = (params['src-dir'] % all_vars)
+                exec_wheel(src_dir)
+            else:
+                logging.error('Unknown command: %s' % command)
+                sys.exit(1)
 
 def main():
     # Setup the required arguments for this script
