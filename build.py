@@ -122,7 +122,7 @@ def load_build(m):
     metadata = path_import(m)
     # Check to make sure there is build information in the given build file
     try:
-        buildinfo = metadata.buildinfo
+        buildinfo = metadata.build_info
     except NameError:
         logging.error("There must be a build variable in %s" % bf)
         sys.exit(1)
@@ -131,11 +131,11 @@ def load_build(m):
 
 def exec_build(codegen, metadata, actions):
     all_vars = globals().copy()
-    if 'variables' in metadata.buildinfo:
-        all_vars.update(metadata.buildinfo['variables'])
+    if 'variables' in metadata.build_info:
+        all_vars.update(metadata.build_info['variables'])
     for action in actions:
         logging.info('%s, %s' % (action, metadata.config['driver_name']))
-        commands = metadata.buildinfo[action]
+        commands = metadata.build_info[action]
         for c in commands:
             command = c['command']
             params = c['params']

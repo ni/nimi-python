@@ -1,5 +1,5 @@
 
-buildinfo = {
+build_info = {
     'variables': {
         'driver': 'nidmm',
     },
