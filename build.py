@@ -70,7 +70,7 @@ def path_import(absolute_path):
 # command functions
 def exec_mkdir(folder):
     logging.debug("Creating directory %s" % folder)
-    try: 
+    try:
         os.makedirs(folder)
     except OSError:
         if not os.path.isdir(folder):
@@ -85,10 +85,7 @@ def exec_codegen(codegen, metadata, template_name, output_file):
     logging.debug("Generating %s from %s" % (output_file, template_name))
     template_params = {}
     template_params['metadata'] = metadata
-    if metadata.type_map is None:
-        template_params['types'] = codegen.type_map
-    else:
-        template_params['types'] = metadata.type_map
+    template_params['types'] = codegen.type_map
 
     logging.debug(pp.pformat(template_params))
 
@@ -188,7 +185,7 @@ def main():
         help="Send logging to listed file instead of stdout"
         )
     parser.add_argument(
-        "--metadata", 
+        "--metadata",
         action='append', dest='metadata', default=[],
         help='Absolute or relative path to metadata package. Multiple allowed. ' +
              'Will build in order added to command line.'

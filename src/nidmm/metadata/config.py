@@ -1,4 +1,5 @@
 config = {
+    'metadata_version': '1.0',
     'module_name': 'nidmm',
     'module_version': '0.1',
     'c_function_prefix': 'niDMM_',
