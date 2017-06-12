@@ -105,8 +105,7 @@ def exec_sdist(src_dir):
     # Save the current working directory before changing to src_dir
     old_cwd = os.getcwd()
     os.chdir(src_dir)
-    # TODO(texasaggie97) Needs to be python to be generic
-    subprocess.call(['py', 'setup.py', 'sdist'])
+    subprocess.call(['python', 'setup.py', 'sdist'])
     os.chdir(old_cwd)
 
 def exec_wheel(src_dir):
@@ -114,8 +113,7 @@ def exec_wheel(src_dir):
     # Save the current working directory before changing to src_dir
     old_cwd = os.getcwd()
     os.chdir(src_dir)
-    # TODO(texasaggie97) Needs to be python to be generic
-    subprocess.call(['py', 'setup.py', 'bdist_wheel', '--universal'])
+    subprocess.call(['python', 'setup.py', 'bdist_wheel', '--universal'])
     os.chdir(old_cwd)
 
 # end command functions
