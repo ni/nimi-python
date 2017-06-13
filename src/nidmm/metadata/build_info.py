@@ -33,12 +33,15 @@ build_info = {
          'params': {'template': '%(TEMPLATE_DIR)s/__init__.py.mako',
                     'output_file': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/__init__.py'},
         },
+    ],
+    'local_install': [
         {'command': 'codegen',
          'params': {'template': '%(TEMPLATE_DIR)s/setup.py.mako',
                     'output_file': '%(OUTPUT_DIR)s/%(driver)s/setup.py'},
         },
         {'command': 'copy',
-         'params': {'src': 'README.rst', 'dest': '%(OUTPUT_DIR)s/%(driver)s/README.rst'},
+         'params': {'src': 'README.rst',
+                    'dest': '%(OUTPUT_DIR)s/%(driver)s/README.rst'},
         },
         {'command': 'sdist',
          'params': {'src-dir': '%(OUTPUT_DIR)s/%(driver)s'},
@@ -46,5 +49,5 @@ build_info = {
         {'command': 'wheel',
          'params': {'src-dir': '%(OUTPUT_DIR)s/%(driver)s'},
         },
-    ]
+    ],
 }
