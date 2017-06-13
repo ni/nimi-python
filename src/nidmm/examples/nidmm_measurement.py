@@ -3,7 +3,7 @@
 # TODO(marcoskirsch): this should be removed once the module can be installed.
 import sys, os
 # Add bin directory to the path, so that we load the locally built nidmm module and not require installation.
-sys.path.append(os.path.join(sys.path[0],'../../../bin/'))
+sys.path.append(os.path.join(sys.path[0],'../../../bin/nidmm'))
 
 import argparse
 import nidmm
