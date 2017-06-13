@@ -1,12 +1,15 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import argparse
 from contextlib import contextmanager
+import distutils
+from distutils import dir_util
 import importlib
 import logging
 import os
 import pprint
 import shutil
+import subprocess
 import sys
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -32,6 +35,9 @@ Command               Parameters
 mkdir                 {'path': '<path to create>'}
 rmdir                 {'path': '<path to delete>'}
 template              {'template': '<path to mako template>', 'output_file': '<output file path>'}
+copy                  {'src': '<source path>', 'dest': '<destination path>'} // Source can be a file or a directory
+sdist                 {'src-dir': '<directory that contains setup.py>'}
+wheel                 {'src-dir': '<directory that contains setup.py>'}
 
 Variables will be substitued in all param strings. Format in the string is %(varname)s.
 
@@ -64,7 +70,7 @@ def path_import(absolute_path):
 # command functions
 def exec_mkdir(folder):
     logging.debug("Creating directory %s" % folder)
-    try: 
+    try:
         os.makedirs(folder)
     except OSError:
         if not os.path.isdir(folder):
@@ -87,13 +93,36 @@ def exec_codegen(codegen, metadata, template_name, output_file):
 
     codegen.generate_template(template_name, template_params, output_file)
 
+def exec_copy(src, dest):
+    logging.debug("Copying %s to %s" % (src, dest))
+    if os.path.isdir(src):
+        distutils.dir_util.copy_tree(src, dest)
+    else:
+        shutil.copyfile(src, dest)
+
+def exec_sdist(src_dir):
+    logging.debug('Create pypi packages in %s' % src_dir)
+    # Save the current working directory before changing to src_dir
+    old_cwd = os.getcwd()
+    os.chdir(src_dir)
+    subprocess.call(['python', 'setup.py', 'sdist'])
+    os.chdir(old_cwd)
+
+def exec_wheel(src_dir):
+    logging.debug('Create pypi packages in %s' % src_dir)
+    # Save the current working directory before changing to src_dir
+    old_cwd = os.getcwd()
+    os.chdir(src_dir)
+    subprocess.call(['python', 'setup.py', 'bdist_wheel', '--universal'])
+    os.chdir(old_cwd)
+
 # end command functions
 
 def load_build(m):
     metadata = path_import(m)
     # Check to make sure there is build information in the given build file
     try:
-        buildinfo = metadata.buildinfo
+        buildinfo = metadata.build_info
     except NameError:
         logging.error("There must be a build variable in %s" % bf)
         sys.exit(1)
@@ -102,11 +131,11 @@ def load_build(m):
 
 def exec_build(codegen, metadata, actions):
     all_vars = globals().copy()
-    if 'variables' in metadata.buildinfo:
-        all_vars.update(metadata.buildinfo['variables'])
+    if 'variables' in metadata.build_info:
+        all_vars.update(metadata.build_info['variables'])
     for action in actions:
         logging.info('%s, %s' % (action, metadata.config['driver_name']))
-        commands = metadata.buildinfo[action]
+        commands = metadata.build_info[action]
         for c in commands:
             command = c['command']
             params = c['params']
@@ -120,6 +149,19 @@ def exec_build(codegen, metadata, actions):
                 template = (params['template'] % all_vars)
                 output_file = (params['output_file'] % all_vars)
                 exec_codegen(codegen, metadata, template, output_file)
+            elif command == 'copy':
+                src = (params['src'] % all_vars)
+                dest = (params['dest'] % all_vars)
+                exec_copy(src, dest)
+            elif command == 'sdist':
+                src_dir = (params['src-dir'] % all_vars)
+                exec_sdist(src_dir)
+            elif command == 'wheel':
+                src_dir = (params['src-dir'] % all_vars)
+                exec_wheel(src_dir)
+            else:
+                logging.error('Unknown command: %s' % command)
+                sys.exit(1)
 
 def main():
     # Setup the required arguments for this script
@@ -143,7 +185,7 @@ def main():
         help="Send logging to listed file instead of stdout"
         )
     parser.add_argument(
-        "--metadata", 
+        "--metadata",
         action='append', dest='metadata', default=[],
         help='Absolute or relative path to metadata package. Multiple allowed. ' +
              'Will build in order added to command line.'

@@ -34,6 +34,6 @@ class AttributeInfo:
             'ViInt32': c_long,
             'ViString': c_char_p,
             'ViReal64': c_double,
-        }[self.getInfo(name)['type']
+        }[self.getInfo(name)['type']]
 
 
