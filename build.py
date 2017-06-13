@@ -83,7 +83,7 @@ def main():
         elif action == 'make':
             for driver in DRIVERS:
                 driver_output_dir = os.path.join(OUTPUT_DIR, driver)
-                try: 
+                try:
                     os.makedirs(driver_output_dir)
                 except OSError:
                     if not os.path.isdir(driver_output_dir):
