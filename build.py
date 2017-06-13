@@ -17,7 +17,6 @@ pp = pprint.PrettyPrinter(indent=4)
 OUTPUT_DIR = os.path.join(sys.path[0], "bin")
 SOURCE_DIR = os.path.join(sys.path[0], "src")
 TEMPLATE_DIR = os.path.join(SOURCE_DIR, "codegen", "templates")
-possible_actions=["clean","make"]
 
 buildinfo_format = """The buildinfo format is as follows:
 buildinfo = {
@@ -27,7 +26,7 @@ buildinfo = {
   "<action>": [<commands>],
 }
 
-<action> can be one of possible_actions
+Allowed <action>s are based on entries in metadata.build_info
 Each <commands> looks like:
 {"command": "<command>", "params": {<command specific parameters>}}
 
@@ -191,8 +190,8 @@ def main():
              'Will build in order added to command line.'
         )
     parser.add_argument(
-        "actions", metavar = "ACTIONS", type=str, choices=possible_actions,
-        nargs="+", help="Possible actions: " + ', '.join(possible_actions)
+        "actions", metavar = "ACTIONS", type=str,
+        nargs="+", help="Possible actions."
         )
     args = parser.parse_args()
 
