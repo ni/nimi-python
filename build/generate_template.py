@@ -15,7 +15,7 @@ def generate_template(template_name, template_params, dest_file, in_zip_file=Fal
     try:
         # if we are in a zip file, we need to get the mako template as a resource string
         #  from the contents of the zip file
-        if in_zip_file:
+        if in_zip_file and not os.path.isfile(template_name):
             tmpl = pkg_resources.resource_string(__name__, template_name)
             template = Template(tmpl)
         else:
