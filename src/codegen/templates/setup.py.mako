@@ -63,6 +63,6 @@ setup(
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: System :: Hardware :: Hardware Drivers"
     ],
-    #cmdclass={'test': PyTest},
+    cmdclass={'test': PyTest},
     package_data={pypi_name: ['VERSION']},
 )

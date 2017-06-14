@@ -115,6 +115,14 @@ def exec_wheel(src_dir):
     subprocess.call(['python', 'setup.py', 'bdist_wheel', '--universal'])
     os.chdir(old_cwd)
 
+def exec_setup_test(src_dir):
+    logging.debug('Running unit tests in %s' % src_dir)
+    # Save the current working directory before changing to src_dir
+    old_cwd = os.getcwd()
+    os.chdir(src_dir)
+    subprocess.call(['python', 'setup.py', 'test'])
+    os.chdir(old_cwd)
+
 # end command functions
 
 def load_build(m):
@@ -158,6 +166,9 @@ def exec_build(codegen, metadata, actions):
             elif command == 'wheel':
                 src_dir = (params['src-dir'] % all_vars)
                 exec_wheel(src_dir)
+            elif command == 'setup_test':
+                src_dir = (params['src-dir'] % all_vars)
+                exec_setup_test(src_dir)
             else:
                 logging.error('Unknown command: %s' % command)
                 sys.exit(1)
