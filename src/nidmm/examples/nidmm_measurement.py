@@ -20,5 +20,5 @@ try:
         session.configure_measurement_digits(nidmm.Function[args.function], args.range, args.digits)
         print(session.read())
 except nidmm.Error as e:
-    print(e, file=sys.stderr)
+    sys.stderr.write(e)
     sys.exit(e.code)
