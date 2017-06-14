@@ -43,7 +43,9 @@ setup(
     install_requires=[
         'enum34;python_version<"3.4"',
     ],
+    setup_requires=['pytest-runner',],
     tests_require=['pytest'],
+    test_suite='tests',
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",

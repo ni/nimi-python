@@ -8,7 +8,7 @@ build_info = {
     ],
     'make': [
         {'command': 'mkdir',
-         'params': {'path': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/test'}},
+         'params': {'path': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/tests'}},
         {'command': 'codegen',
          'params': {'template': '%(TEMPLATE_DIR)s/attributes.py.mako',
                     'output_file': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/attributes.py'},
@@ -35,7 +35,7 @@ build_info = {
         },
         {'command': 'copy',
          'params': {'src': '%(SOURCE_DIR)s/%(driver)s/test',
-                    'dest': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/test'},
+                    'dest': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/tests'},
         },
     ],
     'make_installer': [
