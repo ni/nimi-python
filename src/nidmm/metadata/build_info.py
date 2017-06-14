@@ -34,7 +34,7 @@ build_info = {
                     'output_file': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/__init__.py'},
         },
     ],
-    'local_install': [
+    'make_installer': [
         {'command': 'codegen',
          'params': {'template': '%(TEMPLATE_DIR)s/setup.py.mako',
                     'output_file': '%(OUTPUT_DIR)s/%(driver)s/setup.py'},
