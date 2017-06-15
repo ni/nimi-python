@@ -15,6 +15,7 @@ import ctypes
 from ${module_name} import errors
 import platform
 
+
 def get_library_name():
     try:
         return ${config['library_name']}[platform.system()][platform.architecture()[0]]
@@ -22,17 +23,11 @@ def get_library_name():
         raise errors.UnsupportedConfigurationError
 
 
-def get_library(mocking=False):
-    if not mocking:
-        try:
-            library = ctypes.CDLL(get_library_name())
-        except OSError as e:
-            raise errors.DriverNotInstalledError()
-    else:
-        try:
-            library = ctypes.CDLL('kernel32')
-        except OSError as e:
-            raise errors.DriverNotInstalledError()
+def get_library():
+    try:
+        library = ctypes.CDLL(get_library_name())
+    except OSError as e:
+        raise errors.DriverNotInstalledError()
 
 
     """ Specify required argument types (function prototypes) and Return types.
