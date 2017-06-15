@@ -43,7 +43,9 @@ setup(
     install_requires=[
         'enum34;python_version<"3.4"',
     ],
+    setup_requires=['pytest-runner',],
     tests_require=['pytest'],
+    test_suite='tests',
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
@@ -63,6 +65,6 @@ setup(
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: System :: Hardware :: Hardware Drivers"
     ],
-    #cmdclass={'test': PyTest},
+    cmdclass={'test': PyTest},
     package_data={pypi_name: ['VERSION']},
 )

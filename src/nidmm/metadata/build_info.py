@@ -8,7 +8,7 @@ build_info = {
     ],
     'make': [
         {'command': 'mkdir',
-         'params': {'path': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s'}},
+         'params': {'path': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/tests'}},
         {'command': 'codegen',
          'params': {'template': '%(TEMPLATE_DIR)s/attributes.py.mako',
                     'output_file': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/attributes.py'},
@@ -33,8 +33,12 @@ build_info = {
          'params': {'template': '%(TEMPLATE_DIR)s/__init__.py.mako',
                     'output_file': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/__init__.py'},
         },
+        {'command': 'copy',
+         'params': {'src': '%(SOURCE_DIR)s/%(driver)s/test',
+                    'dest': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/tests'},
+        },
     ],
-    'local_install': [
+    'make_installer': [
         {'command': 'codegen',
          'params': {'template': '%(TEMPLATE_DIR)s/setup.py.mako',
                     'output_file': '%(OUTPUT_DIR)s/%(driver)s/setup.py'},
@@ -42,6 +46,9 @@ build_info = {
         {'command': 'copy',
          'params': {'src': 'README.rst',
                     'dest': '%(OUTPUT_DIR)s/%(driver)s/README.rst'},
+        },
+        {'command': 'setup_test',
+         'params': {'src-dir': '%(OUTPUT_DIR)s/%(driver)s'},
         },
         {'command': 'sdist',
          'params': {'src-dir': '%(OUTPUT_DIR)s/%(driver)s'},

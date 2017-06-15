@@ -1,6 +1,5 @@
 
 # Python 3 is required for build.py
-
 rm -Rf bin
 mkdir bin
 
@@ -10,5 +9,6 @@ python -m zipapp -o bin/build.pyz build
 
 # Needs Python 3.5+ for pkg_resources
 python bin/build.pyz clean make local_install -v --metadata src/nidmm/metadata
+
 
 
