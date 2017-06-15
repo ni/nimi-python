@@ -1,6 +1,6 @@
 # This file was generated
 <%
-    #import helper
+    import helper
 
     config = template_parameters['metadata'].config
     module_name = config['module_name']
@@ -189,22 +189,32 @@ class Session(object):
 
     ''' These are code-generated '''
 <%
-functions     = template_parameters['metadata'].functions
-config        = template_parameters['metadata'].config
-types         = template_parameters['types']
+    types_map = template_parameters['types']
+    functions = template_parameters['metadata'].functions
+    functions = helper.extract_codegen_functions(functions)
+    functions = helper.add_all_metadata(functions, types_map)
 
-module_name = config['module_name']
-c_function_prefix = config['c_function_prefix']
-driver_name = config['driver_name']
-
+    import pprint
+    pp = pprint.PrettyPrinter(indent=4)
+    #print('----')
+    #pp.pprint(functions)
+    #print('----')
+    #return
 %>
 % for f in functions:
 <%
-    #method_name = function_to_method_name(f)
-    method_name = f['name'] # TODO
-    #input_parameters = extract_input_parameters(f['parameters'])
-    #output_parameters = extract_output_parameters(f['parameters'])
+    input_parameters = helper.extract_input_parameters(f['parameters'])
+    output_parameters = helper.extract_output_parameters(f['parameters'])
+    enum_input_parameters = helper.extract_enum_parameters(input_parameters)
 %>
-    def ${method_name}(self, parameters_go_here):
-        pass
+    def ${f['python_name']}(${helper.get_method_parameters_snippet(input_parameters)}):
+% for parameter in enum_input_parameters:
+        ${helper.get_enum_type_check_snippet(parameter)}
+% endfor
+% for output_parameter in output_parameters:
+        ${output_parameter['ctypes_variable_name']} = ${output_parameter['ctypes_type']}(0)
+% endfor
+        error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
+        errors._handle_error(self.library, self.session_handle, error_code)
+        ${helper.get_method_return_snippet(output_parameters)}
 % endfor
