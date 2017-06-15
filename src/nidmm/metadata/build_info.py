@@ -34,7 +34,7 @@ build_info = {
                     'output_file': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/__init__.py'},
         },
         {'command': 'copy',
-         'params': {'src': '%(SOURCE_DIR)s/%(driver)s/test',
+         'params': {'src': '%(SOURCE_DIR)s/%(driver)s/tests',
                     'dest': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/tests'},
         },
     ],
