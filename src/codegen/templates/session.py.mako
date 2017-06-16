@@ -127,7 +127,7 @@ class Session(object):
             if(error_code < 0):
                 # TODO(marcoskirsch): This will occur when session is "stolen". Maybe don't even bother with printing?
                 print("Failed to close session.")
-            self.sesion_handle = ctypes.c_ulong(0)
+            self.session_handle = ctypes.c_ulong(0)
 
     ''' These are hand-coded still '''
 
