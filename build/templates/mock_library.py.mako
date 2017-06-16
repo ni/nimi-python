@@ -16,6 +16,17 @@ import pprint
 from ctypes import *
 pp = pprint.PrettyPrinter(indent=4)
 
+def ${c_function_prefix}_InitWithOptions_side_effect(resource, id_query, reset, option_string, session_handle):
+    session_handle.contents.value = 42
+
+def set_side_effects_and_return_values(mock_library):
+  mock_library.${c_function_prefix}InitWithOptions.side_effect = ${c_function_prefix}_InitWithOptions_side_effect
+  mock_library.${c_function_prefix}InitWithOptions.return_value = 0
+
+  mock_library.${c_function_prefix}ConfigureMeasurementDigits.return_value = 0
+
+  mock_library.${c_function_prefix}close.return_value = 0
+
 class mock_library():
     def ${c_function_prefix}InitWithOptions(self, resourceName, idQuery, reset, optionString, session_handle):
         print('resourceName = %s' % resourceName)

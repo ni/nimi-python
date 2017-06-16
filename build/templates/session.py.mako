@@ -111,7 +111,7 @@ class Session(object):
     def __init__(self, resourceName, idQuery = 0, reset = False, optionString = "", mocking = False):
         self.session_handle = ctypes.c_ulong(0)
         self.library = library.get_library(mocking)
-        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.byref(self.session_handle))
+        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.pointer(self.session_handle))
         errors._handle_error(self.library, self.session_handle, error_code)
 
     def __del__(self):
