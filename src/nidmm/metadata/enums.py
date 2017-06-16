@@ -98,10 +98,9 @@ enums = {
     'TemperatureTransducerType': [
         {'name': 'THERMOCOUPLE', 'value': 1},
         {'name': 'THERMISTOR', 'value': 2},
-        # Had to put RTD in front, rather than in back, so name doesn't start with number.
-        {'name': 'RTD_2_WIRE', 'value': 3},
-        # Had to put RTD in front, rather than in back, so name doesn't start with number.
-        {'name': 'RTD_4_WIRE', 'value': 4},
+        # TODO(marcoskirsch): annoying, C constants start with numbers. Replaced with spelled out values.
+        {'name': 'TWO_WIRE_RTD', 'value': 3},
+        {'name': 'FOUR_WIRE_RTD', 'value': 4},
     ],
 
     'WaveformCouplingMode': [
@@ -137,11 +136,12 @@ enums = {
         {'name': 'NO_ACQUISITION_IN_PROGRESS', 'value': 4},
     ],
 
+    # TODO(marcoskirsch): annoying, C constants start with numbers. Replaced with spelled out values.
     'CurrentSource': [
-        {'name': '1_MICRO_AMP', 'value': 0.000001},
-        {'name': '10_MICRO_AMP', 'value': 0.00001},
-        {'name': '100_MICRO_AMP', 'value': 0.0001},
-        {'name': '1_MILLI_AMP', 'value': 0.001},
+        {'name': 'ONE_MICRO_AMP', 'value': 0.000001},
+        {'name': 'TEN_MICRO_AMP', 'value': 0.00001},
+        {'name': 'HUNDRED_MICRO_AMP', 'value': 0.0001},
+        {'name': 'ONE_MILLI_AMP', 'value': 0.001},
     ],
 
 }
