@@ -105,7 +105,10 @@ def get_library_call_parameter_snippet(parameters_list):
             if x['direction'] is 'in':
                 snippet += (', ' + x['python_name'])
                 snippet += '.value' if x['enum'] is not None else ''
+                if x['type'] is 'ViConstString':
+                    snippet += '.encode(\'ascii\')'
             else:
+                assert x['direction'] is 'out'
                 snippet += ', ctypes.byref(' + (x['ctypes_variable_name']) + ')'
     return snippet
 
