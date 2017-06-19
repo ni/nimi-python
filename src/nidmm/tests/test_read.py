@@ -17,13 +17,17 @@ def test_init(patched_library, patched_errors):
     nidmm.tests.mock_library.set_side_effects_and_return_values(MockLibrary)
 
     patched_library.get_library.return_value = MockLibrary
+    patched_errors._handle_error.return_value = 0
 
+    MockLibrary.niDMM_InitWithOptions.return_value = 0
     with nidmm.Session("Dev1") as session:
-        assert(session.session_handle.value == 42)
+        assert(session.vi == 42)
         MockLibrary.niDMM_InitWithOptions.assert_called_once_with(b'Dev1', 0, False, b'', ANY)
-#        patched_errors._handle_error.assert_called_once_with(MockLibrary, ANY, MockLibrary.niDMM_InitWithOptions.return_value)
+        patched_errors._handle_error.assert_called_once_with(MockLibrary, session.vi, MockLibrary.niDMM_InitWithOptions.return_value)
+
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
-        MockLibrary.niDMM_ConfigureMeasurementDigits.assert_called_once_with(ctypes.c_ulong(42), nidmm.Function.DC_CURRENT.value, 1, 5.5)
-    MockLibrary.niDMM_close.assert_called_once_with(ctypes.c_ulong(42))
+        MockLibrary.niDMM_ConfigureMeasurementDigits.assert_called_once_with(session.vi, nidmm.Function.DC_CURRENT.value, 1, 5.5)
+        patched_errors._handle_error.assert_called_with(MockLibrary, ANY, MockLibrary.niDMM_InitWithOptions.return_value)
+    MockLibrary.niDMM_close.assert_called_once_with(session.vi)
 
 
