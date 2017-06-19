@@ -4,7 +4,6 @@
 functions     = template_parameters['metadata'].functions
 attributes    = template_parameters['metadata'].attributes
 config        = template_parameters['metadata'].config
-types         = template_parameters['types']
 
 module_name = config['module_name']
 c_function_prefix = config['c_function_prefix']

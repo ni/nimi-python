@@ -4,7 +4,6 @@
 functions     = template_parameters['metadata'].functions
 attributes    = template_parameters['metadata'].attributes
 config        = template_parameters['metadata'].config
-types         = template_parameters['types']
 
 module_name = config['module_name']
 c_function_prefix = config['c_function_prefix']
@@ -13,6 +12,7 @@ driver_name = config['driver_name']
 
 import ctypes
 from ${module_name} import errors
+from ${module_name}.ctypes_types import * # So we can use the types without module
 import platform
 
 
@@ -44,11 +44,11 @@ def get_library():
         if len(param_types) > 0:
             param_types += ", "
         if p['direction'] == 'out':
-            param_types += "ctypes.POINTER(" + "ctypes." + types[p['type']] + ")"
+            param_types += "ctypes.POINTER(" + p['type'] + ")"
         else:
-            param_types += "ctypes." + types[p['type']]
+            param_types += p['type']
 %>
-    library.${c_function_prefix}${f['name']}.restype = ctypes.${types[f['returns']]}
+    library.${c_function_prefix}${f['name']}.restype = ${f['returns']}
     library.${c_function_prefix}${f['name']}.argtypes = [${param_types}]
 % endfor
 
