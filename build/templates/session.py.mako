@@ -110,10 +110,10 @@ class Session(object):
     %endif
 % endfor
 
-    def __init__(self, resourceName, idQuery = 0, reset = False):
+    def __init__(self, resourceName, idQuery = 0, reset = False, optionString = ""):
         self.session_handle = ctypes.c_ulong(0)
         self.library = library.get_library()
-        error_code = self.library.${c_function_prefix}init(resourceName.encode('ascii'), idQuery, reset, ctypes.byref(self.session_handle))
+        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.byref(self.session_handle))
         errors._handle_error(self.library, self.session_handle, error_code)
 
     def __del__(self):
