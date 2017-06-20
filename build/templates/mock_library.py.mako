@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # This file was generated
 <%
 functions     = template_parameters['metadata'].functions
@@ -17,28 +16,56 @@ import pprint
 from ctypes import *
 pp = pprint.PrettyPrinter(indent=4)
 
-def ${c_function_prefix}InitWithOptions_side_effect(resource, id_query, reset, option_string, session_handle):
-    session_handle.contents.value = 42
+# Create side effect functions for all entry points that take byref/pointer parameters
+% for f in functions:
+<% params = f['parameters']
+ has_pointer = (len([x['direction'] for x in params if x['direction'] == 'out']) > 0)
+%>\
+% if has_pointer:
+<%
+    param_list = ''
+    for p in f['parameters']:
+        if len(param_list) > 0:
+            param_list += ', '
+        param_list += p['name']
+%>
+def ${c_function_prefix}${f['name']}_side_effect(${param_list}):
+%    for p in f['parameters']:
+%        if p['direction'] == 'out':
+    ${p['name']}.contents.value = ${p['default_for_test']}
+%        endif
+%    endfor
     return DEFAULT
+% endif
+% endfor
 
+# Helper function to setup Mock object with default side affects and return values
 def set_side_effects_and_return_values(mock_library):
-  mock_library.${c_function_prefix}InitWithOptions.side_effect = ${c_function_prefix}InitWithOptions_side_effect
-  mock_library.${c_function_prefix}InitWithOptions.return_value = 0
+% for f in functions:
+<% params = f['parameters']
+ has_pointer = (len([x['direction'] for x in params if x['direction'] == 'out']) > 0)
+%>\
+% if has_pointer:
+    mock_library.${c_function_prefix}${f['name']}.side_effect = ${c_function_prefix}${f['name']}_side_effect
+% endif
+    mock_library.${c_function_prefix}${f['name']}.return_value = 0
+% endfor
 
-  mock_library.${c_function_prefix}ConfigureMeasurementDigits.return_value = 0
-
-  mock_library.${c_function_prefix}close.return_value = 0
-
+# Class with all required entry points - used as a spec when mocking the ctypes.CDLL
+#   dynamically created object
 class mock_library():
-    def ${c_function_prefix}InitWithOptions(self, resourceName, idQuery, reset, optionString, session_handle):
-        pass
+% for f in functions:
+<%
+    param_list = ''
+    for p in f['parameters']:
+        if len(param_list) > 0:
+            param_list += ', '
+        param_list += p['name']
+%>\
+   def ${c_function_prefix}${f['name']}(self, ${param_list}):
+       pass
 
-    def ${c_function_prefix}ConfigureMeasurementDigits(self, vi, mode, range, digits_of_resolution):
-        pass
-
-    def ${c_function_prefix}close(self, vi):
-        pass
-
+% endfor
 
 
 
