@@ -93,7 +93,7 @@ def exec_sdist(src_dir):
     # Save the current working directory before changing to src_dir
     old_cwd = os.getcwd()
     os.chdir(src_dir)
-    subprocess.call(['python', 'setup.py', 'sdist'])
+    subprocess.call(['python3', 'setup.py', 'sdist'])
     os.chdir(old_cwd)
 
 def exec_wheel(src_dir):
@@ -101,7 +101,7 @@ def exec_wheel(src_dir):
     # Save the current working directory before changing to src_dir
     old_cwd = os.getcwd()
     os.chdir(src_dir)
-    subprocess.call(['python', 'setup.py', 'bdist_wheel', '--universal'])
+    subprocess.call(['python3', 'setup.py', 'bdist_wheel', '--universal'])
     os.chdir(old_cwd)
 
 def exec_setup_test(src_dir):
@@ -109,7 +109,7 @@ def exec_setup_test(src_dir):
     # Save the current working directory before changing to src_dir
     old_cwd = os.getcwd()
     os.chdir(src_dir)
-    subprocess.call(['python', 'setup.py', 'pytest'])
+    subprocess.call(['python3', 'setup.py', 'pytest'])
     os.chdir(old_cwd)
 
 # end command functions
