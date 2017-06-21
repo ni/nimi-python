@@ -150,7 +150,7 @@ class Session(object):
     #pp.pprint(functions)
     #print('----')
     #return
-%>
+%>\
 % for f in functions:
 <%
     input_parameters = helper.extract_input_parameters(f['parameters'])

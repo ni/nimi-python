@@ -8,7 +8,7 @@ import re
 # TODO(marcoskirsch): not being used
 def  shoutcase_to_camelcase(shout_string):
     '''Converts a C-style SHOUT_CASE string to camelCase'''
-    components = snake_string.split('_')
+    components = shout_string.split('_')
     return components[0].lower() + "".join(component.title() for component in components[1:])
 
 def camelcase_to_snakecase(camelcase_string):
