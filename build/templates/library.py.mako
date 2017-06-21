@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # This file was generated
 <%
 functions     = template_parameters['metadata'].functions
@@ -8,7 +7,7 @@ config        = template_parameters['metadata'].config
 module_name = config['module_name']
 c_function_prefix = config['c_function_prefix']
 driver_name = config['driver_name']
-%>
+%>\
 
 import ctypes
 from ${module_name} import errors
@@ -37,6 +36,7 @@ def get_library():
         Strictly speaking, this is not necessary if/when we code-generate the calling code.
         It may have some performance impact as well.
     """
+
 % for f in functions:
 <%
     param_types = ""
@@ -46,10 +46,11 @@ def get_library():
         if p['direction'] == 'out':
             param_types += "ctypes.POINTER(" + p['type'] + ")"
         else:
-            param_types += p['type']
-%>
+            param_types += p['type'] + '_ctypes'
+%>\
     library.${c_function_prefix}${f['name']}.restype = ${f['returns']}
     library.${c_function_prefix}${f['name']}.argtypes = [${param_types}]
+
 % endfor
 
     return library
