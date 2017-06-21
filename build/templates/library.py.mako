@@ -1,5 +1,7 @@
 # This file was generated
 <%
+import helper
+
 functions     = template_parameters['metadata'].functions
 attributes    = template_parameters['metadata'].attributes
 config        = template_parameters['metadata'].config
@@ -7,13 +9,22 @@ config        = template_parameters['metadata'].config
 module_name = config['module_name']
 c_function_prefix = config['c_function_prefix']
 driver_name = config['driver_name']
+
+functions = template_parameters['metadata'].functions
+functions = helper.extract_codegen_functions(functions)
+functions = helper.add_all_metadata(functions)
+
+#print('----')
+#pp.pprint(functions)
+#print('----')
+#return
 %>\
 
 import ctypes
-from ${module_name} import errors
-from ${module_name}.ctypes_types import * # So we can use the types without module
 import platform
 
+from ${module_name} import errors
+from ${module_name}.ctypes_types import * # So we can use the types without module
 
 def get_library_name():
     try:
@@ -38,18 +49,8 @@ def get_library():
     """
 
 % for f in functions:
-<%
-    param_types = ""
-    for p in f['parameters']:
-        if len(param_types) > 0:
-            param_types += ", "
-        if p['direction'] == 'out':
-            param_types += "ctypes.POINTER(" + p['type'] + ")"
-        else:
-            param_types += p['type'] + '_ctypes'
-%>\
-    library.${c_function_prefix}${f['name']}.restype = ${f['returns']}
-    library.${c_function_prefix}${f['name']}.argtypes = [${param_types}]
+    library.${c_function_prefix}${f['name']}.restype = ${f['returns_ctype']}
+    library.${c_function_prefix}${f['name']}.argtypes = [${helper.get_library_call_parameter_types_snippet(f['parameters'])}]
 
 % endfor
 

@@ -6,6 +6,9 @@
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
+
+    import pprint
+    pp = pprint.PrettyPrinter(indent=4)
 %>
 
 import ctypes
@@ -139,13 +142,10 @@ class Session(object):
 
     #TODO (marcoskirsch): attribute methods will be like "_set_attribute_vi_boolean", should be _set_attribute_ViBoolean. Open issue about it.
 <%
-    types_map = template_parameters['types']
     functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
-    functions = helper.add_all_metadata(functions, types_map)
+    functions = helper.add_all_metadata(functions)
 
-    import pprint
-    pp = pprint.PrettyPrinter(indent=4)
     #print('----')
     #pp.pprint(functions)
     #print('----')

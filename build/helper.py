@@ -57,10 +57,10 @@ def _add_python_parameter_name(parameter):
     parameter['python_name'] = camelcase_to_snakecase(parameter['name'])
     return parameter
 
-def _add_python_type(parameter, types_map):
+def _add_python_type(parameter):
     '''Adds a python_type key/value pair to the parameter metadata'''
     if parameter['enum'] is None:
-        parameter['python_type'] = types_map[parameter['type']]['python_type']
+        parameter['python_type'] = parameter['type']
     else:
         parameter['python_type'] = 'enums.' + parameter['enum']
     return parameter
@@ -70,21 +70,33 @@ def _add_ctypes_variable_name(parameter):
     parameter['ctypes_variable_name'] = parameter['python_name'] + '_ctype'
     return parameter
 
-def _add_ctypes_type(parameter, types_map):
+def _add_ctypes_type(parameter):
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
     # TODO(marcoskirsch): handle buffers and strings.
-    parameter['ctypes_type'] = 'ctypes.' + types_map[parameter['type']]['ctypes_type']
+    parameter['ctypes_type'] = parameter['type'] + '_ctype'
     return parameter
 
-def add_all_metadata(functions, types_map):
+def _add_ctypes_return_type(f):
+    '''Adds the ctypes_type key/value pair to the function metadata for the return type'''
+    f['returns_ctype'] = f['returns'] + '_ctype'
+    return f
+
+def _add_python_return_type(f):
+    '''Adds the ctypes_type key/value pair to the function metadata for the return type'''
+    f['returns_python'] = f['returns']
+    return f
+
+def add_all_metadata(functions):
     '''Adds all codegen-specific metada to the function metadata list'''
     for f in functions:
         _add_python_method_name(f)
+        _add_ctypes_return_type(f)
+        _add_python_return_type(f)
         for p in f['parameters']:
             _add_python_parameter_name(p)
-            _add_python_type(p, types_map)
+            _add_python_type(p)
             _add_ctypes_variable_name(p)
-            _add_ctypes_type(p, types_map)
+            _add_ctypes_type(p)
     return functions
 
 
@@ -110,6 +122,19 @@ def get_library_call_parameter_snippet(parameters_list):
             else:
                 assert x['direction'] is 'out'
                 snippet += ', ctypes.byref(' + (x['ctypes_variable_name']) + ')'
+    return snippet
+
+def get_library_call_parameter_types_snippet(parameters_list):
+    '''Returns a string suitable to use as the parameters to the library definition object'''
+    snippet = ''
+    for x in parameters_list:
+        if len(snippet) > 0:
+            snippet += ", "
+        if x['direction'] == 'out':
+            snippet += "ctypes.POINTER(" + x['ctypes_type'] + ")"
+        else:
+            assert x['direction'] is 'in'
+            snippet += x['ctypes_type']
     return snippet
 
 def get_method_return_snippet(output_parameters):
