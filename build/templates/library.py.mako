@@ -44,11 +44,11 @@ def get_library():
         if len(param_types) > 0:
             param_types += ", "
         if p['direction'] == 'out':
-            param_types += "ctypes.POINTER(" + "ctypes." + types[p['type']] + ")"
+            param_types += "ctypes.POINTER(" + "ctypes." + types[p['type']]['ctypes_type'] + ")"
         else:
-            param_types += "ctypes." + types[p['type']]
+            param_types += "ctypes." + types[p['type']]['ctypes_type']
 %>
-    library.${c_function_prefix}${f['name']}.restype = ctypes.${types[f['returns']]}
+    library.${c_function_prefix}${f['name']}.restype = ctypes.${types[f['returns']]['ctypes_type']}
     library.${c_function_prefix}${f['name']}.argtypes = [${param_types}]
 % endfor
 

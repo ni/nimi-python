@@ -27,6 +27,7 @@ def _is_error(error_code):
 def _is_warning(error_code):
     return (error_code > 0)
 
+# TODO(marcoskirsch): instead of using library and handcoding everything, consider implementing in terms of Session.
 
 class _ErrorBase(Exception):
 
