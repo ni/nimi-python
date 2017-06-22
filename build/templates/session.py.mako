@@ -6,10 +6,7 @@
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
-
-    import pprint
-    pp = pprint.PrettyPrinter(indent=4)
-%>
+%>\
 
 import ctypes
 from ${module_name} import errors
@@ -145,11 +142,6 @@ class Session(object):
     functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
     functions = helper.add_all_metadata(functions)
-
-    #print('----')
-    #pp.pprint(functions)
-    #print('----')
-    #return
 %>\
 % for f in functions:
 <%
