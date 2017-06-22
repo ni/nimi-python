@@ -12,9 +12,6 @@ driver_name = config['driver_name']
 
 import ctypes
 from unittest.mock import DEFAULT
-import pprint
-from ctypes import *
-pp = pprint.PrettyPrinter(indent=4)
 
 # Create side effect functions for all entry points that take byref/pointer parameters
 % for f in functions:
@@ -28,7 +25,7 @@ pp = pprint.PrettyPrinter(indent=4)
         if len(param_list) > 0:
             param_list += ', '
         param_list += p['name']
-%>
+%>\
 def ${c_function_prefix}${f['name']}_side_effect(${param_list}):
 %    for p in f['parameters']:
 %        if p['direction'] == 'out':
@@ -36,6 +33,7 @@ def ${c_function_prefix}${f['name']}_side_effect(${param_list}):
 %        endif
 %    endfor
     return DEFAULT
+
 % endif
 % endfor
 

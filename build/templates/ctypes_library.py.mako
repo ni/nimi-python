@@ -27,11 +27,11 @@ class ${module_name}_ctypes_library:
 <%
     func_name = c_function_prefix + f['name']
     param_types = ""
-    param_names = ""
+    param_names = "self"
     for p in f['parameters']:
+        param_names += ", "
         if len(param_types) > 0:
             param_types += ", "
-            param_names += ", "
         param_names += p['name']
         if p['direction'] == 'out':
             param_types += "ctypes.POINTER(" + "ctypes." + types[p['type']] + ")"
@@ -42,7 +42,7 @@ class ${module_name}_ctypes_library:
         if self.${func_name}_cfunc is None:
             self.${func_name}_cfunc = self._cdll.${func_name}
             self.${func_name}_cfunc.argtypes = [${param_types}]
-            self.${func_name}_cfunc.restype = ${f['returns']}
+            self.${func_name}_cfunc.restype = ${types[f['returns']]}
         return self.${func_name}_cfunc(${param_names})
 
 % endfor

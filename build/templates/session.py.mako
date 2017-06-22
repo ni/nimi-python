@@ -109,10 +109,12 @@ class Session(object):
 % endfor
 
     def __init__(self, resourceName, idQuery = 0, reset = False, optionString = ""):
-        self.session_handle = ctypes.c_ulong(0)
+        self.vi = 0
         self.library = library.get_library()
-        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.byref(self.session_handle))
-        errors._handle_error(self.library, self.session_handle, error_code)
+        session_handle = ctypes.c_ulong(0)
+        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.pointer(session_handle))
+        self.vi = session_handle.value
+        errors._handle_error(self.library, self.vi, error_code)
 
     def __del__(self):
         pass
@@ -125,8 +127,8 @@ class Session(object):
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        if(self.session_handle.value != 0):
-            error_code = self.library.${c_function_prefix}close(self.session_handle)
+        if(self.vi != 0):
+            error_code = self.library.${c_function_prefix}close(self.vi)
             if(error_code < 0):
                 # TODO(marcoskirsch): This will occur when session is "stolen". Maybe don't even bother with printing?
                 print("Failed to close session.")
@@ -134,57 +136,57 @@ class Session(object):
 
     def configure_measurement_digits(self, mode, range, digits_of_resolution):
         if type(mode) is not enums.Function: raise TypeError('Parameter mode must be of type ' + str(enums.Function))
-        error_code = self.library.${c_function_prefix}ConfigureMeasurementDigits(self.session_handle, mode.value, range, digits_of_resolution)
-        errors._handle_error(self.library, self.session_handle, error_code)
+        error_code = self.library.${c_function_prefix}ConfigureMeasurementDigits(self.vi, mode.value, range, digits_of_resolution)
+        errors._handle_error(self.library, self.vi, error_code)
 
     def read(self, timeout_in_milliseconds = 10000):
         measurement = ctypes.c_double(0)
-        error_code = self.library.${c_function_prefix}Read(self.session_handle, timeout_in_milliseconds, ctypes.byref(measurement))
-        errors._handle_error(self.library, self.session_handle, error_code)
+        error_code = self.library.${c_function_prefix}Read(self.vi, timeout_in_milliseconds, ctypes.byref(measurement))
+        errors._handle_error(self.library, self.vi, error_code)
         return measurement.value
 
     def setAttributeViInt32(self, attribute_id, value):
-        error_code = self.library.${c_function_prefix}SetAttributeViInt32(self.session_handle, b'', attribute_id, value)
-        errors._handle_error(self.library, self.session_handle, error_code)
+        error_code = self.library.${c_function_prefix}SetAttributeViInt32(self.vi, b'', attribute_id, value)
+        errors._handle_error(self.library, self.vi, error_code)
 
     def getAttributeViInt32(self, attribute_id):
         value = ctypes.c_long(0)
-        error_code = self.library.${c_function_prefix}GetAttributeViInt32(self.session_handle, None, attribute_id, ctypes.byref(value))
-        errors._handle_error(self.library, self.session_handle, error_code)
+        error_code = self.library.${c_function_prefix}GetAttributeViInt32(self.vi, None, attribute_id, ctypes.byref(value))
+        errors._handle_error(self.library, self.vi, error_code)
         return value.value
 
     def setAttributeViReal64(self, attribute_id, value):
-        error_code = self.library.${c_function_prefix}SetAttributeViReal64(self.session_handle, b'', attribute_id, value)
-        errors._handle_error(self.library, self.session_handle, error_code)
+        error_code = self.library.${c_function_prefix}SetAttributeViReal64(self.vi, b'', attribute_id, value)
+        errors._handle_error(self.library, self.vi, error_code)
 
     def getAttributeViReal64(self, attribute_id):
         value = ctypes.c_double(0)
-        error_code = self.library.${c_function_prefix}GetAttributeViReal64(self.session_handle, None, attribute_id, ctypes.byref(value))
-        errors._handle_error(self.library, self.session_handle, error_code)
+        error_code = self.library.${c_function_prefix}GetAttributeViReal64(self.vi, None, attribute_id, ctypes.byref(value))
+        errors._handle_error(self.library, self.vi, error_code)
         return value.value
 
     def setAttributeViString(self, attribute_id, value):
-        error_code = self.library.${c_function_prefix}SetAttributeViString(self.session_handle, b'', attribute_id, value.encode('ascii'))
-        errors._handle_error(self.library, self.session_handle, error_code)
+        error_code = self.library.${c_function_prefix}SetAttributeViString(self.vi, b'', attribute_id, value.encode('ascii'))
+        errors._handle_error(self.library, self.vi, error_code)
 
     def getAttributeViString(self, attribute_id):
-        error_code = self.library.${c_function_prefix}GetAttributeViString(self.session_handle, None, attribute_id, 0, None)
+        error_code = self.library.${c_function_prefix}GetAttributeViString(self.vi, None, attribute_id, 0, None)
         # Do the IVI dance
         # Don't use _handle_error, because positive value in error_code means size, not warning.
-        if(errors._is_error(error_code)): raise errors.Error(self.library, self.session_handle, error_code)
+        if(errors._is_error(error_code)): raise errors.Error(self.library, self.vi, error_code)
         buffer_size = error_code
         value = ctypes.create_string_buffer(buffer_size)
-        error_code = self.library.${c_function_prefix}GetAttributeViString(self.session_handle, None, attribute_id, buffer_size, value)
-        errors._handle_error(self.library, self.session_handle, error_code)
+        error_code = self.library.${c_function_prefix}GetAttributeViString(self.vi, None, attribute_id, buffer_size, value)
+        errors._handle_error(self.library, self.vi, error_code)
         return value.value.decode("ascii")
 
     def setAttributeViBoolean(self, attribute_id, value):
-        error_code = self.library.${c_function_prefix}SetAttributeViBoolean(self.session_handle, b'', attribute_id, value)
-        errors._handle_error(self.library, self.session_handle, error_code)
+        error_code = self.library.${c_function_prefix}SetAttributeViBoolean(self.vi, b'', attribute_id, value)
+        errors._handle_error(self.library, self.vi, error_code)
 
     def getAttributeViBoolean(self, attribute_id):
         value = ctypes.c_ushort(0)
-        error_code = self.library.${c_function_prefix}GetAttributeViBoolean(self.session_handle, None, attribute_id, ctypes.byref(value))
-        errors._handle_error(self.library, self.session_handle, error_code)
+        error_code = self.library.${c_function_prefix}GetAttributeViBoolean(self.vi, None, attribute_id, ctypes.byref(value))
+        errors._handle_error(self.library, self.vi, error_code)
         return value.value
 
