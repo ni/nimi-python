@@ -1,20 +1,25 @@
-#!/usr/bin/python
 # This file was generated
 <%
+import helper
+
 functions     = template_parameters['metadata'].functions
 attributes    = template_parameters['metadata'].attributes
 config        = template_parameters['metadata'].config
-types         = template_parameters['types']
 
 module_name = config['module_name']
 c_function_prefix = config['c_function_prefix']
 driver_name = config['driver_name']
-%>
+
+functions = template_parameters['metadata'].functions
+functions = helper.extract_codegen_functions(functions)
+functions = helper.add_all_metadata(functions)
+%>\
 
 import ctypes
-from ${module_name} import errors
 import platform
 
+from ${module_name} import errors
+from ${module_name}.ctypes_types import * # So we can use the types without module
 
 def get_library_name():
     try:
@@ -37,19 +42,11 @@ def get_library():
         Strictly speaking, this is not necessary if/when we code-generate the calling code.
         It may have some performance impact as well.
     """
+
 % for f in functions:
-<%
-    param_types = ""
-    for p in f['parameters']:
-        if len(param_types) > 0:
-            param_types += ", "
-        if p['direction'] == 'out':
-            param_types += "ctypes.POINTER(" + "ctypes." + types[p['type']]['ctypes_type'] + ")"
-        else:
-            param_types += "ctypes." + types[p['type']]['ctypes_type']
-%>
-    library.${c_function_prefix}${f['name']}.restype = ctypes.${types[f['returns']]['ctypes_type']}
-    library.${c_function_prefix}${f['name']}.argtypes = [${param_types}]
+    library.${c_function_prefix}${f['name']}.restype = ${f['returns_ctype']}
+    library.${c_function_prefix}${f['name']}.argtypes = [${helper.get_library_call_parameter_types_snippet(f['parameters'])}]
+
 % endfor
 
     return library

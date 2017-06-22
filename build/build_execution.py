@@ -4,6 +4,7 @@ import distutils
 from distutils import dir_util
 import logging
 import os
+import pkg_resources
 import pprint
 import shutil
 import subprocess
@@ -11,7 +12,6 @@ import sys
 
 import generate_template
 import utilities
-import type_map
 
 pp = pprint.PrettyPrinter(indent=4)
 print(__file__)
@@ -75,7 +75,6 @@ def exec_codegen(metadata, template_name, output_file):
     logging.debug("Generating %s from %s" % (output_file, template_name))
     template_params = {}
     template_params['metadata'] = metadata
-    template_params['types'] = type_map.type_map
 
     logging.debug(pp.pformat(template_params))
 
@@ -85,6 +84,10 @@ def exec_copy(src, dest):
     logging.debug("Copying %s to %s" % (src, dest))
     if os.path.isdir(src):
         distutils.dir_util.copy_tree(src, dest)
+    elif in_zip_file and not os.path.exists(src):
+        file_contents = pkg_resources.resource_string(__name__, src)
+        with open(dest, "wb") as text_file:
+            text_file.write(file_contents)
     else:
         shutil.copyfile(src, dest)
 

@@ -2,7 +2,6 @@
 functions     = template_parameters['metadata'].functions
 attributes    = template_parameters['metadata'].attributes
 config        = template_parameters['metadata'].config
-types         = template_parameters['types']
 %>
 #!/usr/bin/python
 
