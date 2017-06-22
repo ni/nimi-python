@@ -108,13 +108,9 @@ class Session(object):
     %endif
 % endfor
 
-    def __init__(self, resourceName, idQuery = 0, reset = False, optionString = "", mocking = False):
+    def __init__(self, resourceName, idQuery = 0, reset = False, optionString = ""):
         self.session_handle = ctypes.c_ulong(0)
-        if not mocking:
-            self.library = library.get_library()
-        else:
-            from ${module_name} import mock_library
-            self.library = mock_library.get_library()
+        self.library = library.get_library()
         error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.byref(self.session_handle))
         errors._handle_error(self.library, self.session_handle, error_code)
 
