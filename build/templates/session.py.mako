@@ -116,7 +116,7 @@ class Session(object):
         self.library = library.get_library()
         session_handle = ctypes_types.ViSession_ctype(0)
         error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.byref(session_handle))
-        vi = session_handle.value
+        self.vi = session_handle.value
         errors._handle_error(self.library, self.vi, error_code.value)
 
     def __del__(self):
@@ -130,12 +130,12 @@ class Session(object):
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        if(self.vi.value != 0):
+        if(self.vi != 0):
             error_code = self.library.${c_function_prefix}close(self.vi)
-            if(error_code < 0):
+            if(error_code.value < 0):
                 # TODO(marcoskirsch): This will occur when session is "stolen". Maybe don't even bother with printing?
                 print("Failed to close session.")
-            self.vi = ctypes.c_ulong(0)
+            self.vi = 0
 
 
     ''' These are code-generated '''
@@ -157,7 +157,7 @@ class Session(object):
         ${helper.get_enum_type_check_snippet(parameter)}
 % endfor
 % for output_parameter in output_parameters:
-        ${output_parameter['ctypes_variable_name']} = ${output_parameter['ctypes_type']}(0)
+        ${output_parameter['ctypes_variable_name']} = ctypes_types.${output_parameter['ctypes_type']}(0)
 % endfor
         error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
         errors._handle_error(self.library, self.vi, error_code.value)

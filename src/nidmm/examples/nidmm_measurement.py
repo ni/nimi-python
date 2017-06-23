@@ -20,5 +20,5 @@ try:
         session.configure_measurement_digits(nidmm.Function[args.function], args.range, args.digits)
         print(session.read(1000)) # TODO(marcoskirsch): Remove once we have default in the method
 except nidmm.Error as e:
-    sys.stderr.write(e)
+    sys.stderr.write(str(e))
     sys.exit(e.code)
