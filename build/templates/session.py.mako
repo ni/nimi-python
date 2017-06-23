@@ -12,6 +12,7 @@ import ctypes
 from ${module_name} import errors
 from ${module_name} import library
 from ${module_name} import enums
+from ${module_name} import ctypes_types
 
 
 class AttributeViInt32(object):
@@ -111,10 +112,12 @@ class Session(object):
 % endfor
 
     def __init__(self, resourceName, idQuery = 0, reset = False, optionString = ""):
-        self.session_handle = ctypes.c_ulong(0)
+        self.vi = 0
         self.library = library.get_library()
-        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.byref(self.session_handle))
-        errors._handle_error(self.library, self.session_handle, error_code)
+        session_handle = ctypes_types.ViSession_ctype(0)
+        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.byref(session_handle))
+        vi = session_handle.value
+        errors._handle_error(self.library, self.vi, error_code.value)
 
     def __del__(self):
         pass
@@ -127,12 +130,12 @@ class Session(object):
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        if(self.session_handle.value != 0):
-            error_code = self.library.${c_function_prefix}close(self.session_handle)
+        if(self.vi.value != 0):
+            error_code = self.library.${c_function_prefix}close(self.vi)
             if(error_code < 0):
                 # TODO(marcoskirsch): This will occur when session is "stolen". Maybe don't even bother with printing?
                 print("Failed to close session.")
-            self.session_handle = ctypes.c_ulong(0)
+            self.vi = ctypes.c_ulong(0)
 
 
     ''' These are code-generated '''
@@ -157,7 +160,7 @@ class Session(object):
         ${output_parameter['ctypes_variable_name']} = ${output_parameter['ctypes_type']}(0)
 % endfor
         error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        errors._handle_error(self.library, self.session_handle, error_code)
+        errors._handle_error(self.library, self.vi, error_code.value)
         ${helper.get_method_return_snippet(output_parameters)}
 % endfor
 
@@ -165,12 +168,12 @@ class Session(object):
     ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
 
     def _get_attribute_vi_string(self, channel, attribute_id):
-        error_code = self.library.${c_function_prefix}GetAttributeViString(self.session_handle, None, attribute_id, 0, None)
+        error_code = self.library.${c_function_prefix}GetAttributeViString(self.vi, None, attribute_id, 0, None)
         # Do the IVI dance
         # Don't use _handle_error, because positive value in error_code means size, not warning.
-        if(errors._is_error(error_code)): raise errors.Error(self.library, self.session_handle, error_code)
+        if(errors._is_error(error_code)): raise errors.Error(self.library, self.vi, error_code)
         buffer_size = error_code
         value = ctypes.create_string_buffer(buffer_size)
-        error_code = self.library.${c_function_prefix}GetAttributeViString(self.session_handle, None, attribute_id, buffer_size, value)
-        errors._handle_error(self.library, self.session_handle, error_code)
+        error_code = self.library.${c_function_prefix}GetAttributeViString(self.vi, None, attribute_id, buffer_size, value)
+        errors._handle_error(self.library, self.vi, error_code.value)
         return value.value.decode("ascii")
