@@ -111,7 +111,7 @@ def get_method_parameters_snippet(parameters):
 
 def get_library_call_parameter_snippet(parameters_list):
     '''Returns a string suitable to use as the parameters to the library object, i.e. "self, mode, range, digits_of_resolution"'''
-    snippet = 'self.session_handle'
+    snippet = 'self.vi'
     for x in parameters_list:
         if x['name'] is not 'vi':
             if x['direction'] is 'in':
