@@ -30,7 +30,7 @@ def get_library_name():
 
 def get_library():
     try:
-        library = ctypes.CDLL(get_library_name())
+        library = ctypes.WinDLL(get_library_name())
     except OSError as e:
         raise errors.DriverNotInstalledError()
 
