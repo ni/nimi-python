@@ -115,7 +115,7 @@ class Session(object):
         self.vi = 0
         self.library = library.get_library()
         session_handle = ctypes_types.ViSession_ctype(0)
-        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.byref(session_handle))
+        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.pointer(session_handle))
         self.vi = session_handle.value
         errors._handle_error(self.library, self.vi, error_code.value)
 
