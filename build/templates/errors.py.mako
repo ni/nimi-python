@@ -32,7 +32,7 @@ class _ErrorBase(Exception):
 
     def __init__(self, library, session_handle, error_code):
 
-        new_error_code = nidmm.ctypes_types.ViStatus_ctype(0)
+        new_error_code = ${module_name}.ctypes_types.ViStatus_ctype(0)
         buffer_size = library.${c_function_prefix}GetError(session_handle, ctypes.byref(new_error_code), 0, None)
         assert (new_error_code.value == error_code)
 
@@ -44,7 +44,7 @@ class _ErrorBase(Exception):
             (trust that the IVI error code was properly stored in the session
             by the driver)
             '''
-            error_code = nidmm.ctypes_types.ViStatus_ctype(error_code)
+            error_code = ${module_name}.ctypes_types.ViStatus_ctype(error_code)
             error_message = ctypes.create_string_buffer(buffer_size.value)
             library.${c_function_prefix}GetError(session_handle, ctypes.byref(error_code), buffer_size.value, error_message)
         else:
