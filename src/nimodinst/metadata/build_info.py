@@ -26,7 +26,7 @@ build_info = {
                     'output_file': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/session.py'},
         },
         {'command': 'codegen',
-         'params': {'template': '%(TEMPLATE_DIR)s/errors.py.mako',
+         'params': {'template': '%(SOURCE_DIR)s/%(driver)s/templates/errors.py.mako',
                     'output_file': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/errors.py'},
         },
         {'command': 'codegen',
