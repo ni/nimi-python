@@ -1,0 +1,18 @@
+#!/usr/bin/python
+
+import nimodinst
+import sys
+
+try:
+    with nimodinst.Session('') as session:
+        if len(session) > 0:
+            print("%d items" % session.item_count)
+            print("{: >20} {: >15} {: >10}".format('Name', 'Model', 'S/N'))
+        for d in session:
+            print("{: >20} {: >15} {: >10}".format(session.device_name[d], session.device_model[d], session.serial_number[d]))
+            
+except nimodinst.Error as e:
+    sys.stderr.write(str(e))
+    sys.exit(e.code)
+
+
