@@ -121,7 +121,7 @@ def get_library_call_parameter_snippet(parameters_list):
                     snippet += '.encode(\'ascii\')'
             else:
                 assert x['direction'] is 'out'
-                snippet += ', ctypes.byref(' + (x['ctypes_variable_name']) + ')'
+                snippet += ', ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
     return snippet
 
 def get_library_call_parameter_types_snippet(parameters_list):
