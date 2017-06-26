@@ -62,6 +62,28 @@ class Session(object):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close_installed_devices_session()
 
+    def __len__(self):
+        return self.item_count
+
+    def __iter__(self):
+        self.current_item = 0
+        return self
+
+    def next(self):
+        if self.current_item > self.item_count:
+            raise StopIteration
+        else:
+            self.current_item += 1
+            return self.current_item
+
+    def __next__(self):
+        if self.current_item + 1 > self.item_count:
+            raise StopIteration
+        else:
+            result = self.current_item
+            self.current_item += 1
+            return result
+
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         if(self.vi != 0):
