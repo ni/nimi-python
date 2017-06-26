@@ -51,7 +51,7 @@ class Session(object):
         error_code = self.library.${c_function_prefix}OpenInstalledDevicesSession(driver.encode('ascii'), ctypes.pointer(get_session), ctypes.pointer(get_item_count))
         self.vi = get_session.value
         self.item_count = get_item_count.value
-        #errors._handle_error(self.library, self.vi, error_code.value)
+        errors._handle_error(self.library, self.vi, error_code.value)
 
     def __del__(self):
         pass
@@ -94,7 +94,7 @@ class Session(object):
         ${output_parameter['ctypes_variable_name']} = ctypes_types.${output_parameter['ctypes_type']}(0)
 % endfor
         error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        #errors._handle_error(self.library, self.vi, error_code.value)
+        errors._handle_error(self.library, self.vi, error_code.value)
         ${helper.get_method_return_snippet(output_parameters)}
 % endfor
 
