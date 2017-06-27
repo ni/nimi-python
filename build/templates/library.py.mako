@@ -1,13 +1,8 @@
 # This file was generated
 <%
-functions     = template_parameters['metadata'].functions
-attributes    = template_parameters['metadata'].attributes
 config        = template_parameters['metadata'].config
-types         = template_parameters['types']
 
 module_name = config['module_name']
-c_function_prefix = config['c_function_prefix']
-driver_name = config['driver_name']
 %>\
 
 import ctypes
@@ -15,7 +10,6 @@ import platform
 
 from ${module_name} import errors
 from ${module_name} import ctypes_library
-
 
 def get_library_name():
     try:

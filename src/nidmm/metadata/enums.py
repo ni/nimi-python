@@ -96,17 +96,52 @@ enums = {
     ],
 
     'TemperatureTransducerType': [
-        {'name': 'THERMOCOUPLE', 'value':  1},
-        {'name': 'THERMISTOR', 'value':  2},
-        # Had to put RTD in front, rather than in back, so name doesn't start with number.
-        {'name': 'RTD_2_WIRE', 'value':  3},
-        # Had to put RTD in front, rather than in back, so name doesn't start with number.
-        {'name': 'RTD_4_WIRE', 'value':  4},
+        {'name': 'THERMOCOUPLE', 'value': 1},
+        {'name': 'THERMISTOR', 'value': 2},
+        # TODO(marcoskirsch): annoying, C constants start with numbers. Replaced with spelled out values.
+        {'name': 'TWO_WIRE_RTD', 'value': 3},
+        {'name': 'FOUR_WIRE_RTD', 'value': 4},
     ],
 
     'WaveformCouplingMode': [
-        {'name': 'WAVEFORM_COUPLING_AC', 'value':  0},
-        {'name': 'WAVEFORM_COUPLING_DC', 'value':  1},
+        {'name': 'WAVEFORM_COUPLING_AC', 'value': 0},
+        {'name': 'WAVEFORM_COUPLING_DC', 'value': 1},
+    ],
+
+    'Terminal': [
+        {'name': 'NONE         ', 'value': -1},
+        {'name': 'IMMEDIATE    ', 'value': 1},
+        {'name': 'EXTERNAL     ', 'value': 2},
+        {'name': 'SOFTWARE_TRIG', 'value': 3},
+        {'name': 'PXI_TRIG0    ', 'value': 111},
+        {'name': 'PXI_TRIG1    ', 'value': 112},
+        {'name': 'PXI_TRIG2    ', 'value': 113},
+        {'name': 'PXI_TRIG3    ', 'value': 114},
+        {'name': 'PXI_TRIG4    ', 'value': 115},
+        {'name': 'PXI_TRIG5    ', 'value': 116},
+        {'name': 'PXI_TRIG6    ', 'value': 117},
+        {'name': 'PXI_TRIG7    ', 'value': 118},
+        {'name': 'PXI_STAR     ', 'value': 131},
+        #{'name': 'LBR_TRIG0    ', 'value':1003}, # TODO: Internal Trigger Line of a PXI/SCXI Combination Chassis
+        #{'name': 'LBR_TRIG1    ', 'value':1004}, # TODO: Internal Trigger Line of a PXI/SCXI Combination Chassis
+        {'name': 'AUX_TRIG1    ', 'value': 1001},
+        {'name': 'INTERVAL     ', 'value': 10},
+    ],
+
+    'AcquisitionStatus': [
+        {'name': 'RUNNING', 'value': 0},
+        {'name': 'FINISHED_WITH_BACKLOG', 'value': 1},
+        {'name': 'FINISHED_WITH_NO_BACKLOG', 'value': 2},
+        {'name': 'PAUSED', 'value': 3},
+        {'name': 'NO_ACQUISITION_IN_PROGRESS', 'value': 4},
+    ],
+
+    # TODO(marcoskirsch): annoying, C constants start with numbers. Replaced with spelled out values.
+    'CurrentSource': [
+        {'name': 'ONE_MICRO_AMP', 'value': 0.000001},
+        {'name': 'TEN_MICRO_AMP', 'value': 0.00001},
+        {'name': 'HUNDRED_MICRO_AMP', 'value': 0.0001},
+        {'name': 'ONE_MILLI_AMP', 'value': 0.001},
     ],
 
 }
