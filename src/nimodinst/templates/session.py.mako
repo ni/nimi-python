@@ -17,23 +17,38 @@ from ${module_name} import ctypes_types
 
 class AttributeViInt32(object):
 
-    def __init__(self, owner, attribute_id):
+    def __init__(self, owner, attribute_id, index=None):
         self._owner = owner
+        self._index = index
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        return self._owner._get_installed_device_attribute_vi_int32(index, self._attribute_id)
+        i = self._index if self._index is not None else index
+        return self._owner._get_installed_device_attribute_vi_int32(i, self._attribute_id)
 
+    def __format__(self, format_spec):
+        return format(self._owner._get_installed_device_attribute_vi_int32(self._index, self._attribute_id), format_spec)
 
 class AttributeViString(object):
 
-    def __init__(self, owner, attribute_id):
+    def __init__(self, owner, attribute_id, index=None):
         self._owner = owner
+        self._index = index
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        return self._owner._get_installed_device_attribute_vi_string(index, self._attribute_id)
+        i = self._index if self._index is not None else index
+        return self._owner._get_installed_device_attribute_vi_string(i, self._attribute_id)
 
+    def __format__(self, format_spec):
+        return format(self._owner._get_installed_device_attribute_vi_string(self._index, self._attribute_id), format_spec)
+
+class Device(object):
+
+    def __init__(self, owner, index):
+% for attribute in attributes:
+        self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index = index)
+% endfor
 
 class Session(object):
     '''${config['session_description']}'''
@@ -62,6 +77,7 @@ class Session(object):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close_installed_devices_session()
 
+    # Iterator functions
     def __len__(self):
         return self.item_count
 
@@ -70,17 +86,18 @@ class Session(object):
         return self
 
     def next(self):
-        if self.current_item > self.item_count:
+        if self.current_item + 1 > self.item_count:
             raise StopIteration
         else:
+            result = Device(self, self.current_item)
             self.current_item += 1
-            return self.current_item
+            return result
 
     def __next__(self):
         if self.current_item + 1 > self.item_count:
             raise StopIteration
         else:
-            result = self.current_item
+            result = Device(self, self.current_item)
             self.current_item += 1
             return result
 

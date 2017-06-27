@@ -9,7 +9,7 @@ try:
             print("%d items" % session.item_count)
             print("{: >20} {: >15} {: >10}".format('Name', 'Model', 'S/N'))
         for d in session:
-            print("{: >20} {: >15} {: >10}".format(session.device_name[d], session.device_model[d], session.serial_number[d]))
+            print("{: >20} {: >15} {: >10}".format(d.device_name, d.device_model, d.serial_number))
             
 except nimodinst.Error as e:
     sys.stderr.write(str(e))
