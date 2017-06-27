@@ -115,7 +115,7 @@ class Session(object):
         self.vi = 0
         self.library = library.get_library()
         session_handle = ctypes_types.ViSession_ctype(0)
-        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.byref(session_handle))
+        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.pointer(session_handle))
         self.vi = session_handle.value
         errors._handle_error(self.library, self.vi, error_code.value)
 
@@ -171,9 +171,9 @@ class Session(object):
         error_code = self.library.${c_function_prefix}GetAttributeViString(self.vi, None, attribute_id, 0, None)
         # Do the IVI dance
         # Don't use _handle_error, because positive value in error_code means size, not warning.
-        if(errors._is_error(error_code)): raise errors.Error(self.library, self.vi, error_code)
+        if(errors._is_error(error_code.value)): raise errors.Error(self.library, self.vi, error_code.value)
         buffer_size = error_code
-        value = ctypes.create_string_buffer(buffer_size)
-        error_code = self.library.${c_function_prefix}GetAttributeViString(self.vi, None, attribute_id, buffer_size, value)
+        value = ctypes.create_string_buffer(buffer_size.value)
+        error_code = self.library.${c_function_prefix}GetAttributeViString(self.vi, None, attribute_id, buffer_size.value, value)
         errors._handle_error(self.library, self.vi, error_code.value)
         return value.value.decode("ascii")
