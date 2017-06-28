@@ -18,6 +18,7 @@ functions = helper.add_all_metadata(functions)
 import ctypes
 from unittest.mock import DEFAULT
 import ${module_name}.ctypes_types
+import ${module_name}.python_types
 
 # Create side effect functions for all entry points that take byref/pointer parameters
 % for f in functions:
@@ -45,7 +46,7 @@ output_params = helper.extract_output_parameters(params)
 % if len(output_params) > 0:
     mock_library.${c_function_prefix}${f['name']}.side_effect = ${c_function_prefix}${f['name']}_side_effect
 % endif
-    mock_library.${c_function_prefix}${f['name']}.return_value = ${module_name}.ctypes_types.${f['returns_ctype']}(0)
+    mock_library.${c_function_prefix}${f['name']}.return_value = ${module_name}.python_types.${f['returns_python']}(0)
 % endfor
 
 

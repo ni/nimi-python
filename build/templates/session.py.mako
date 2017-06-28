@@ -117,7 +117,7 @@ class Session(object):
         session_handle = ctypes_types.ViSession_ctype(0)
         error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.pointer(session_handle))
         self.vi = session_handle.value
-        errors._handle_error(self.library, self.vi, error_code.value)
+        errors._handle_error(self.library, self.vi, error_code)
 
     def __del__(self):
         pass
@@ -132,7 +132,7 @@ class Session(object):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         if(self.vi != 0):
             error_code = self.library.${c_function_prefix}close(self.vi)
-            if(error_code.value < 0):
+            if(error_code < 0):
                 # TODO(marcoskirsch): This will occur when session is "stolen". Maybe don't even bother with printing?
                 print("Failed to close session.")
             self.vi = 0
@@ -160,7 +160,7 @@ class Session(object):
         ${output_parameter['ctypes_variable_name']} = ctypes_types.${output_parameter['ctypes_type']}(0)
 % endfor
         error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        errors._handle_error(self.library, self.vi, error_code.value)
+        errors._handle_error(self.library, self.vi, error_code)
         ${helper.get_method_return_snippet(output_parameters)}
 % endfor
 
@@ -171,11 +171,11 @@ class Session(object):
         error_code = self.library.${c_function_prefix}GetAttributeViString(self.vi, None, attribute_id, 0, None)
         # Do the IVI dance
         # Don't use _handle_error, because positive value in error_code means size, not warning.
-        if(errors._is_error(error_code.value)): raise errors.Error(self.library, self.vi, error_code.value)
+        if(errors._is_error(error_code)): raise errors.Error(self.library, self.vi, error_code)
         buffer_size = error_code
-        value = ctypes.create_string_buffer(buffer_size.value)
-        error_code = self.library.${c_function_prefix}GetAttributeViString(self.vi, None, attribute_id, buffer_size.value, value)
-        errors._handle_error(self.library, self.vi, error_code.value)
+        value = ctypes.create_string_buffer(buffer_size)
+        error_code = self.library.${c_function_prefix}GetAttributeViString(self.vi, None, attribute_id, buffer_size, value)
+        errors._handle_error(self.library, self.vi, error_code)
         return value.value.decode("ascii")
 
 
