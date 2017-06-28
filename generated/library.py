@@ -6,7 +6,6 @@ import platform
 from nidmm import errors
 from nidmm import ctypes_library
 
-
 def get_library_name():
     try:
         return {'Windows': {'32bit': 'nidmm_32.dll', '64bit': 'nidmm_64.dll'}, 'Linux': {'64bit': 'libnidmm.so'}}[platform.system()][platform.architecture()[0]]

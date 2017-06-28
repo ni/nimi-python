@@ -1,281 +1,171 @@
 # This file was generated
 
-
 import ctypes
+import platform
 from unittest.mock import DEFAULT
 
-# Create side effect functions for all entry points that take byref/pointer parameters
-def niDMM_init_side_effect(resourceName, IDQuery, reset, newVi):
-    newVi.contents.value = 42
-    return DEFAULT
+import nidmm.ctypes_types
+import nidmm.python_types
 
-def niDMM_InitWithOptions_side_effect(resourceName, IDQuery, resetDevice, optionsString, newVi):
-    newVi.contents.value = 42
-    return DEFAULT
-
-def niDMM_GetError_side_effect(vi, errorCode, bufferSize, description):
-    errorCode.contents.value = -1
-    return DEFAULT
-
-def niDMM_self_test_side_effect(vi, selfTestResult, selfTestMessage):
-    selfTestResult.contents.value = 42
-    return DEFAULT
-
-def niDMM_GetMeasurementPeriod_side_effect(vi, period):
-    period.contents.value = 42.2
-    return DEFAULT
-
-def niDMM_Read_side_effect(vi, maxTime, reading):
-    reading.contents.value = 4.2
-    return DEFAULT
-
-def niDMM_Fetch_side_effect(vi, maxTime, reading):
-    reading.contents.value = 4.2
-    return DEFAULT
-
-def niDMM_IsOverRange_side_effect(vi, measurementValue, isOverRange):
-    isOverRange.contents.value = 1
-    return DEFAULT
-
-def niDMM_IsUnderRange_side_effect(vi, measurementValue, isUnderRange):
-    isUnderRange.contents.value = 1
-    return DEFAULT
-
-def niDMM_ReadMultiPoint_side_effect(vi, maxTime, arraySize, readingArray, actualPts):
-    actualPts.contents.value = 42
-    return DEFAULT
-
-def niDMM_FetchMultiPoint_side_effect(vi, maxTime, arraySize, readingArray, actualPts):
-    actualPts.contents.value = 42
-    return DEFAULT
-
-def niDMM_GetApertureTimeInfo_side_effect(vi, apertureTime, apertureTimeUnits):
-    apertureTime.contents.value = 42.2
-    apertureTimeUnits.contents.value = 0
-    return DEFAULT
-
-def niDMM_GetAutoRangeValue_side_effect(vi, autoRangeValue):
-    autoRangeValue.contents.value = 10
-    return DEFAULT
-
-def niDMM_ReadStatus_side_effect(vi, acqBacklog, acqDone):
-    acqBacklog.contents.value = 1
-    acqDone.contents.value = 1
-    return DEFAULT
-
-def niDMM_PerformOpenCableComp_side_effect(vi, conductance, susceptance):
-    conductance.contents.value = 400.1
-    susceptance.contents.value = 400.2
-    return DEFAULT
-
-def niDMM_PerformShortCableComp_side_effect(vi, resistance, reactance):
-    resistance.contents.value = 10000
-    reactance.contents.value = 10000.1
-    return DEFAULT
-
-def niDMM_LockSession_side_effect(vi, callerHasLock):
-    callerHasLock.contents.value = 1
-    return DEFAULT
-
-def niDMM_UnlockSession_side_effect(vi, callerHasLock):
-    callerHasLock.contents.value = 0
-    return DEFAULT
-
-def niDMM_FetchWaveform_side_effect(vi, maxTime, arraySize, waveformArray, actualPoints):
-    actualPoints.contents.value = 5
-    return DEFAULT
-
-def niDMM_ReadWaveform_side_effect(vi, maxTime, arraySize, waveformArray, actualPoints):
-    actualPoints.contents.value = 5
-    return DEFAULT
-
-def niDMM_GetAttributeViInt32_side_effect(vi, channelName, attributeId, value):
-    value.contents.value = 42
-    return DEFAULT
-
-def niDMM_GetAttributeViReal64_side_effect(vi, channelName, attributeId, value):
-    value.contents.value = 42.2
-    return DEFAULT
-
-def niDMM_GetAttributeViSession_side_effect(vi, channelName, attributeId, value):
-    value.contents.value = 42
-    return DEFAULT
-
-def niDMM_GetAttributeViBoolean_side_effect(vi, channelName, attributeId, value):
-    value.contents.value = 1
-    return DEFAULT
-
-def niDMM_InitExtCal_side_effect(resourceName, password, newVi):
-    newVi.contents.value = 43
-    return DEFAULT
-
-def niDMM_GetExtCalRecommendedInterval_side_effect(vi, months):
-    months.contents.value = 360
-    return DEFAULT
-
-def niDMM_GetCalUserDefinedInfoMaxSize_side_effect(vi, infoSize):
-    infoSize.contents.value = 4
-    return DEFAULT
-
-def niDMM_GetSelfCalSupported_side_effect(vi, selfCalSupported):
-    selfCalSupported.contents.value = 1
-    return DEFAULT
-
-def niDMM_GetCalDateAndTime_side_effect(vi, calType, month, day, year, hour, minute):
-    month.contents.value = 40
-    day.contents.value = 41
-    year.contents.value = 42
-    hour.contents.value = 43
-    minute.contents.value = 44
-    return DEFAULT
-
-def niDMM_GetCalCount_side_effect(vi, calType, count):
-    count.contents.value = 42
-    return DEFAULT
-
-def niDMM_GetLastCalTemp_side_effect(vi, calType, temperature):
-    temperature.contents.value = 42.2
-    return DEFAULT
-
-def niDMM_GetDevTemp_side_effect(vi, reserved, temperature):
-    temperature.contents.value = 41.2
-    return DEFAULT
-
+class IncorrectCall(Exception):
+    def __init__(self, function):
+        self.function = function
+        super(Exception, self).__init__("{0} called when it shouldn't have been".format(self.function))
 
 # Helper function to setup Mock object with default side affects and return values
 def set_side_effects_and_return_values(mock_library):
-    mock_library.niDMM_init.side_effect = niDMM_init_side_effect
-    mock_library.niDMM_init.return_value = 0
-    mock_library.niDMM_InitWithOptions.side_effect = niDMM_InitWithOptions_side_effect
-    mock_library.niDMM_InitWithOptions.return_value = 0
-    mock_library.niDMM_close.return_value = 0
-    mock_library.niDMM_GetError.side_effect = niDMM_GetError_side_effect
-    mock_library.niDMM_GetError.return_value = 0
-    mock_library.niDMM_GetErrorMessage.return_value = 0
-    mock_library.niDMM_ClearError.return_value = 0
-    mock_library.niDMM_reset.return_value = 0
-    mock_library.niDMM_self_test.side_effect = niDMM_self_test_side_effect
-    mock_library.niDMM_self_test.return_value = 0
-    mock_library.niDMM_SelfCal.return_value = 0
-    mock_library.niDMM_revision_query.return_value = 0
-    mock_library.niDMM_InvalidateAllAttributes.return_value = 0
-    mock_library.niDMM_ResetWithDefaults.return_value = 0
-    mock_library.niDMM_Disable.return_value = 0
-    mock_library.niDMM_GetMeasurementPeriod.side_effect = niDMM_GetMeasurementPeriod_side_effect
-    mock_library.niDMM_GetMeasurementPeriod.return_value = 0
-    mock_library.niDMM_ConfigureTrigger.return_value = 0
-    mock_library.niDMM_Read.side_effect = niDMM_Read_side_effect
-    mock_library.niDMM_Read.return_value = 0
-    mock_library.niDMM_Fetch.side_effect = niDMM_Fetch_side_effect
-    mock_library.niDMM_Fetch.return_value = 0
-    mock_library.niDMM_Abort.return_value = 0
-    mock_library.niDMM_Initiate.return_value = 0
-    mock_library.niDMM_IsOverRange.side_effect = niDMM_IsOverRange_side_effect
-    mock_library.niDMM_IsOverRange.return_value = 0
-    mock_library.niDMM_IsUnderRange.side_effect = niDMM_IsUnderRange_side_effect
-    mock_library.niDMM_IsUnderRange.return_value = 0
-    mock_library.niDMM_ConfigureACBandwidth.return_value = 0
-    mock_library.niDMM_ConfigureFrequencyVoltageRange.return_value = 0
-    mock_library.niDMM_ConfigureMeasCompleteDest.return_value = 0
-    mock_library.niDMM_ConfigureMultiPoint.return_value = 0
-    mock_library.niDMM_ReadMultiPoint.side_effect = niDMM_ReadMultiPoint_side_effect
-    mock_library.niDMM_ReadMultiPoint.return_value = 0
-    mock_library.niDMM_FetchMultiPoint.side_effect = niDMM_FetchMultiPoint_side_effect
-    mock_library.niDMM_FetchMultiPoint.return_value = 0
-    mock_library.niDMM_ConfigureTriggerSlope.return_value = 0
-    mock_library.niDMM_SendSoftwareTrigger.return_value = 0
-    mock_library.niDMM_GetApertureTimeInfo.side_effect = niDMM_GetApertureTimeInfo_side_effect
-    mock_library.niDMM_GetApertureTimeInfo.return_value = 0
-    mock_library.niDMM_GetAutoRangeValue.side_effect = niDMM_GetAutoRangeValue_side_effect
-    mock_library.niDMM_GetAutoRangeValue.return_value = 0
-    mock_library.niDMM_ConfigureAutoZeroMode.return_value = 0
-    mock_library.niDMM_ConfigurePowerLineFrequency.return_value = 0
-    mock_library.niDMM_ConfigureMeasurementDigits.return_value = 0
-    mock_library.niDMM_ConfigureMeasurementAbsolute.return_value = 0
-    mock_library.niDMM_ConfigureMeasCompleteSlope.return_value = 0
-    mock_library.niDMM_ConfigureSampleTriggerSlope.return_value = 0
-    mock_library.niDMM_ReadStatus.side_effect = niDMM_ReadStatus_side_effect
-    mock_library.niDMM_ReadStatus.return_value = 0
-    mock_library.niDMM_Control.return_value = 0
-    mock_library.niDMM_ConfigureADCCalibration.return_value = 0
-    mock_library.niDMM_ConfigureOffsetCompOhms.return_value = 0
-    mock_library.niDMM_ConfigureCurrentSource.return_value = 0
-    mock_library.niDMM_ConfigureCableCompType.return_value = 0
-    mock_library.niDMM_PerformOpenCableComp.side_effect = niDMM_PerformOpenCableComp_side_effect
-    mock_library.niDMM_PerformOpenCableComp.return_value = 0
-    mock_library.niDMM_PerformShortCableComp.side_effect = niDMM_PerformShortCableComp_side_effect
-    mock_library.niDMM_PerformShortCableComp.return_value = 0
-    mock_library.niDMM_ConfigureOpenCableCompValues.return_value = 0
-    mock_library.niDMM_ConfigureShortCableCompValues.return_value = 0
-    mock_library.niDMM_LockSession.side_effect = niDMM_LockSession_side_effect
-    mock_library.niDMM_LockSession.return_value = 0
-    mock_library.niDMM_UnlockSession.side_effect = niDMM_UnlockSession_side_effect
-    mock_library.niDMM_UnlockSession.return_value = 0
-    mock_library.niDMM_ConfigureWaveformAcquisition.return_value = 0
-    mock_library.niDMM_ConfigureWaveformCoupling.return_value = 0
-    mock_library.niDMM_FetchWaveform.side_effect = niDMM_FetchWaveform_side_effect
-    mock_library.niDMM_FetchWaveform.return_value = 0
-    mock_library.niDMM_ReadWaveform.side_effect = niDMM_ReadWaveform_side_effect
-    mock_library.niDMM_ReadWaveform.return_value = 0
-    mock_library.niDMM_GetAttributeViInt32.side_effect = niDMM_GetAttributeViInt32_side_effect
-    mock_library.niDMM_GetAttributeViInt32.return_value = 0
-    mock_library.niDMM_SetAttributeViInt32.return_value = 0
-    mock_library.niDMM_CheckAttributeViInt32.return_value = 0
-    mock_library.niDMM_GetAttributeViReal64.side_effect = niDMM_GetAttributeViReal64_side_effect
-    mock_library.niDMM_GetAttributeViReal64.return_value = 0
-    mock_library.niDMM_SetAttributeViReal64.return_value = 0
-    mock_library.niDMM_CheckAttributeViReal64.return_value = 0
-    mock_library.niDMM_GetAttributeViString.return_value = 0
-    mock_library.niDMM_SetAttributeViString.return_value = 0
-    mock_library.niDMM_CheckAttributeViString.return_value = 0
-    mock_library.niDMM_GetAttributeViSession.side_effect = niDMM_GetAttributeViSession_side_effect
-    mock_library.niDMM_GetAttributeViSession.return_value = 0
-    mock_library.niDMM_SetAttributeViSession.return_value = 0
-    mock_library.niDMM_CheckAttributeViSession.return_value = 0
-    mock_library.niDMM_GetAttributeViBoolean.side_effect = niDMM_GetAttributeViBoolean_side_effect
-    mock_library.niDMM_GetAttributeViBoolean.return_value = 0
-    mock_library.niDMM_SetAttributeViBoolean.return_value = 0
-    mock_library.niDMM_CheckAttributeViBoolean.return_value = 0
-    mock_library.niDMM_GetNextCoercionRecord.return_value = 0
-    mock_library.niDMM_GetNextInterchangeWarning.return_value = 0
-    mock_library.niDMM_ResetInterchangeCheck.return_value = 0
-    mock_library.niDMM_ClearInterchangeWarnings.return_value = 0
-    mock_library.niDMM_4022Control.return_value = 0
-    mock_library.niDMM_GetChannelName.return_value = 0
-    mock_library.niDMM_InitExtCal.side_effect = niDMM_InitExtCal_side_effect
-    mock_library.niDMM_InitExtCal.return_value = 0
-    mock_library.niDMM_CloseExtCal.return_value = 0
-    mock_library.niDMM_CalAdjustLinearization.return_value = 0
-    mock_library.niDMM_CalAdjustGain.return_value = 0
-    mock_library.niDMM_CalAdjustOffset.return_value = 0
-    mock_library.niDMM_CalAdjustMisc.return_value = 0
-    mock_library.niDMM_CalAdjustLC.return_value = 0
-    mock_library.niDMM_CalAdjustACFilter.return_value = 0
-    mock_library.niDMM_RestoreLastExtCalConstants.return_value = 0
-    mock_library.niDMM_SetCalPassword.return_value = 0
-    mock_library.niDMM_GetExtCalRecommendedInterval.side_effect = niDMM_GetExtCalRecommendedInterval_side_effect
-    mock_library.niDMM_GetExtCalRecommendedInterval.return_value = 0
-    mock_library.niDMM_SetCalUserDefinedInfo.return_value = 0
-    mock_library.niDMM_GetCalUserDefinedInfoMaxSize.side_effect = niDMM_GetCalUserDefinedInfoMaxSize_side_effect
-    mock_library.niDMM_GetCalUserDefinedInfoMaxSize.return_value = 0
-    mock_library.niDMM_GetCalUserDefinedInfo.return_value = 0
-    mock_library.niDMM_GetSelfCalSupported.side_effect = niDMM_GetSelfCalSupported_side_effect
-    mock_library.niDMM_GetSelfCalSupported.return_value = 0
-    mock_library.niDMM_GetCalDateAndTime.side_effect = niDMM_GetCalDateAndTime_side_effect
-    mock_library.niDMM_GetCalDateAndTime.return_value = 0
-    mock_library.niDMM_GetCalCount.side_effect = niDMM_GetCalCount_side_effect
-    mock_library.niDMM_GetCalCount.return_value = 0
-    mock_library.niDMM_GetLastCalTemp.side_effect = niDMM_GetLastCalTemp_side_effect
-    mock_library.niDMM_GetLastCalTemp.return_value = 0
-    mock_library.niDMM_GetDevTemp.side_effect = niDMM_GetDevTemp_side_effect
-    mock_library.niDMM_GetDevTemp.return_value = 0
-    mock_library.niDMM_ConfigureTransducerType.return_value = 0
-    mock_library.niDMM_ConfigureThermocouple.return_value = 0
-    mock_library.niDMM_ConfigureFixedRefJunction.return_value = 0
-    mock_library.niDMM_ConfigureRTDType.return_value = 0
-    mock_library.niDMM_ConfigureRTDCustom.return_value = 0
-    mock_library.niDMM_ConfigureThermistorType.return_value = 0
-    mock_library.niDMM_ConfigureThermistorCustom.return_value = 0
+    mock_library.niDMM_InitWithOptions.side_effect = IncorrectCall("niDMM_InitWithOptions")
+    mock_library.niDMM_InitWithOptions.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_close.side_effect = IncorrectCall("niDMM_close")
+    mock_library.niDMM_close.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetError.side_effect = IncorrectCall("niDMM_GetError")
+    mock_library.niDMM_GetError.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetErrorMessage.side_effect = IncorrectCall("niDMM_GetErrorMessage")
+    mock_library.niDMM_GetErrorMessage.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ClearError.side_effect = IncorrectCall("niDMM_ClearError")
+    mock_library.niDMM_ClearError.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_reset.side_effect = IncorrectCall("niDMM_reset")
+    mock_library.niDMM_reset.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_self_test.side_effect = IncorrectCall("niDMM_self_test")
+    mock_library.niDMM_self_test.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_SelfCal.side_effect = IncorrectCall("niDMM_SelfCal")
+    mock_library.niDMM_SelfCal.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_revision_query.side_effect = IncorrectCall("niDMM_revision_query")
+    mock_library.niDMM_revision_query.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_InvalidateAllAttributes.side_effect = IncorrectCall("niDMM_InvalidateAllAttributes")
+    mock_library.niDMM_InvalidateAllAttributes.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ResetWithDefaults.side_effect = IncorrectCall("niDMM_ResetWithDefaults")
+    mock_library.niDMM_ResetWithDefaults.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_Disable.side_effect = IncorrectCall("niDMM_Disable")
+    mock_library.niDMM_Disable.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetMeasurementPeriod.side_effect = IncorrectCall("niDMM_GetMeasurementPeriod")
+    mock_library.niDMM_GetMeasurementPeriod.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureTrigger.side_effect = IncorrectCall("niDMM_ConfigureTrigger")
+    mock_library.niDMM_ConfigureTrigger.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_Read.side_effect = IncorrectCall("niDMM_Read")
+    mock_library.niDMM_Read.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_Fetch.side_effect = IncorrectCall("niDMM_Fetch")
+    mock_library.niDMM_Fetch.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_Abort.side_effect = IncorrectCall("niDMM_Abort")
+    mock_library.niDMM_Abort.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_Initiate.side_effect = IncorrectCall("niDMM_Initiate")
+    mock_library.niDMM_Initiate.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_IsOverRange.side_effect = IncorrectCall("niDMM_IsOverRange")
+    mock_library.niDMM_IsOverRange.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_IsUnderRange.side_effect = IncorrectCall("niDMM_IsUnderRange")
+    mock_library.niDMM_IsUnderRange.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureACBandwidth.side_effect = IncorrectCall("niDMM_ConfigureACBandwidth")
+    mock_library.niDMM_ConfigureACBandwidth.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureFrequencyVoltageRange.side_effect = IncorrectCall("niDMM_ConfigureFrequencyVoltageRange")
+    mock_library.niDMM_ConfigureFrequencyVoltageRange.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureMeasCompleteDest.side_effect = IncorrectCall("niDMM_ConfigureMeasCompleteDest")
+    mock_library.niDMM_ConfigureMeasCompleteDest.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureMultiPoint.side_effect = IncorrectCall("niDMM_ConfigureMultiPoint")
+    mock_library.niDMM_ConfigureMultiPoint.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ReadMultiPoint.side_effect = IncorrectCall("niDMM_ReadMultiPoint")
+    mock_library.niDMM_ReadMultiPoint.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_FetchMultiPoint.side_effect = IncorrectCall("niDMM_FetchMultiPoint")
+    mock_library.niDMM_FetchMultiPoint.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureTriggerSlope.side_effect = IncorrectCall("niDMM_ConfigureTriggerSlope")
+    mock_library.niDMM_ConfigureTriggerSlope.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_SendSoftwareTrigger.side_effect = IncorrectCall("niDMM_SendSoftwareTrigger")
+    mock_library.niDMM_SendSoftwareTrigger.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetApertureTimeInfo.side_effect = IncorrectCall("niDMM_GetApertureTimeInfo")
+    mock_library.niDMM_GetApertureTimeInfo.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetAutoRangeValue.side_effect = IncorrectCall("niDMM_GetAutoRangeValue")
+    mock_library.niDMM_GetAutoRangeValue.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureAutoZeroMode.side_effect = IncorrectCall("niDMM_ConfigureAutoZeroMode")
+    mock_library.niDMM_ConfigureAutoZeroMode.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigurePowerLineFrequency.side_effect = IncorrectCall("niDMM_ConfigurePowerLineFrequency")
+    mock_library.niDMM_ConfigurePowerLineFrequency.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureMeasurementDigits.side_effect = IncorrectCall("niDMM_ConfigureMeasurementDigits")
+    mock_library.niDMM_ConfigureMeasurementDigits.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureMeasurementAbsolute.side_effect = IncorrectCall("niDMM_ConfigureMeasurementAbsolute")
+    mock_library.niDMM_ConfigureMeasurementAbsolute.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureMeasCompleteSlope.side_effect = IncorrectCall("niDMM_ConfigureMeasCompleteSlope")
+    mock_library.niDMM_ConfigureMeasCompleteSlope.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureSampleTriggerSlope.side_effect = IncorrectCall("niDMM_ConfigureSampleTriggerSlope")
+    mock_library.niDMM_ConfigureSampleTriggerSlope.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ReadStatus.side_effect = IncorrectCall("niDMM_ReadStatus")
+    mock_library.niDMM_ReadStatus.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureADCCalibration.side_effect = IncorrectCall("niDMM_ConfigureADCCalibration")
+    mock_library.niDMM_ConfigureADCCalibration.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureOffsetCompOhms.side_effect = IncorrectCall("niDMM_ConfigureOffsetCompOhms")
+    mock_library.niDMM_ConfigureOffsetCompOhms.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureCurrentSource.side_effect = IncorrectCall("niDMM_ConfigureCurrentSource")
+    mock_library.niDMM_ConfigureCurrentSource.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureCableCompType.side_effect = IncorrectCall("niDMM_ConfigureCableCompType")
+    mock_library.niDMM_ConfigureCableCompType.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_PerformOpenCableComp.side_effect = IncorrectCall("niDMM_PerformOpenCableComp")
+    mock_library.niDMM_PerformOpenCableComp.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_PerformShortCableComp.side_effect = IncorrectCall("niDMM_PerformShortCableComp")
+    mock_library.niDMM_PerformShortCableComp.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureOpenCableCompValues.side_effect = IncorrectCall("niDMM_ConfigureOpenCableCompValues")
+    mock_library.niDMM_ConfigureOpenCableCompValues.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureShortCableCompValues.side_effect = IncorrectCall("niDMM_ConfigureShortCableCompValues")
+    mock_library.niDMM_ConfigureShortCableCompValues.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_LockSession.side_effect = IncorrectCall("niDMM_LockSession")
+    mock_library.niDMM_LockSession.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_UnlockSession.side_effect = IncorrectCall("niDMM_UnlockSession")
+    mock_library.niDMM_UnlockSession.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureWaveformAcquisition.side_effect = IncorrectCall("niDMM_ConfigureWaveformAcquisition")
+    mock_library.niDMM_ConfigureWaveformAcquisition.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureWaveformCoupling.side_effect = IncorrectCall("niDMM_ConfigureWaveformCoupling")
+    mock_library.niDMM_ConfigureWaveformCoupling.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_FetchWaveform.side_effect = IncorrectCall("niDMM_FetchWaveform")
+    mock_library.niDMM_FetchWaveform.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ReadWaveform.side_effect = IncorrectCall("niDMM_ReadWaveform")
+    mock_library.niDMM_ReadWaveform.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetAttributeViInt32.side_effect = IncorrectCall("niDMM_GetAttributeViInt32")
+    mock_library.niDMM_GetAttributeViInt32.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_SetAttributeViInt32.side_effect = IncorrectCall("niDMM_SetAttributeViInt32")
+    mock_library.niDMM_SetAttributeViInt32.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetAttributeViReal64.side_effect = IncorrectCall("niDMM_GetAttributeViReal64")
+    mock_library.niDMM_GetAttributeViReal64.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_SetAttributeViReal64.side_effect = IncorrectCall("niDMM_SetAttributeViReal64")
+    mock_library.niDMM_SetAttributeViReal64.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetAttributeViString.side_effect = IncorrectCall("niDMM_GetAttributeViString")
+    mock_library.niDMM_GetAttributeViString.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_SetAttributeViString.side_effect = IncorrectCall("niDMM_SetAttributeViString")
+    mock_library.niDMM_SetAttributeViString.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetAttributeViSession.side_effect = IncorrectCall("niDMM_GetAttributeViSession")
+    mock_library.niDMM_GetAttributeViSession.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_SetAttributeViSession.side_effect = IncorrectCall("niDMM_SetAttributeViSession")
+    mock_library.niDMM_SetAttributeViSession.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetAttributeViBoolean.side_effect = IncorrectCall("niDMM_GetAttributeViBoolean")
+    mock_library.niDMM_GetAttributeViBoolean.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_SetAttributeViBoolean.side_effect = IncorrectCall("niDMM_SetAttributeViBoolean")
+    mock_library.niDMM_SetAttributeViBoolean.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetNextCoercionRecord.side_effect = IncorrectCall("niDMM_GetNextCoercionRecord")
+    mock_library.niDMM_GetNextCoercionRecord.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetNextInterchangeWarning.side_effect = IncorrectCall("niDMM_GetNextInterchangeWarning")
+    mock_library.niDMM_GetNextInterchangeWarning.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ResetInterchangeCheck.side_effect = IncorrectCall("niDMM_ResetInterchangeCheck")
+    mock_library.niDMM_ResetInterchangeCheck.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ClearInterchangeWarnings.side_effect = IncorrectCall("niDMM_ClearInterchangeWarnings")
+    mock_library.niDMM_ClearInterchangeWarnings.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetChannelName.side_effect = IncorrectCall("niDMM_GetChannelName")
+    mock_library.niDMM_GetChannelName.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetCalCount.side_effect = IncorrectCall("niDMM_GetCalCount")
+    mock_library.niDMM_GetCalCount.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetLastCalTemp.side_effect = IncorrectCall("niDMM_GetLastCalTemp")
+    mock_library.niDMM_GetLastCalTemp.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetDevTemp.side_effect = IncorrectCall("niDMM_GetDevTemp")
+    mock_library.niDMM_GetDevTemp.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureTransducerType.side_effect = IncorrectCall("niDMM_ConfigureTransducerType")
+    mock_library.niDMM_ConfigureTransducerType.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureThermocouple.side_effect = IncorrectCall("niDMM_ConfigureThermocouple")
+    mock_library.niDMM_ConfigureThermocouple.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureFixedRefJunction.side_effect = IncorrectCall("niDMM_ConfigureFixedRefJunction")
+    mock_library.niDMM_ConfigureFixedRefJunction.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureRTDType.side_effect = IncorrectCall("niDMM_ConfigureRTDType")
+    mock_library.niDMM_ConfigureRTDType.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureRTDCustom.side_effect = IncorrectCall("niDMM_ConfigureRTDCustom")
+    mock_library.niDMM_ConfigureRTDCustom.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureThermistorType.side_effect = IncorrectCall("niDMM_ConfigureThermistorType")
+    mock_library.niDMM_ConfigureThermistorType.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_ConfigureThermistorCustom.side_effect = IncorrectCall("niDMM_ConfigureThermistorCustom")
+    mock_library.niDMM_ConfigureThermistorCustom.return_value = nidmm.python_types.ViStatus(0)
 
 
 
