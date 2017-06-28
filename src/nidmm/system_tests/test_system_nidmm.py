@@ -14,8 +14,8 @@ def test_invalid_device_name():
         assert false
     except nidmm.Error as e:
         assert e.code == -1074118656
-        assert e.elaboration.find("Device was not recognized. The device is not supported with this driver or version.") != -1
-        assert e.elaboration.find("Foo!") != -1
+        assert e.description.find("Device was not recognized. The device is not supported with this driver or version.") != -1
+        assert e.description.find("Foo!") != -1
 
 
 def test_take_simple_measurement_works():
