@@ -112,15 +112,8 @@ class Session(object):
 
     def __init__(self, resource_name, id_query = 0, reset_device = False, options_string = ""):
         self.library = library.get_library()
-<<<<<<< HEAD
         self.vi = 0 # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
-=======
-        session_handle = ctypes_types.ViSession_ctype(0)
-        error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.pointer(session_handle))
-        self.vi = session_handle.value
-        errors._handle_error(self, error_code)
->>>>>>> master
 
     def __del__(self):
         pass
@@ -133,7 +126,6 @@ class Session(object):
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-<<<<<<< HEAD
         try:
             self._close()
         except nidmm.Error as e:
@@ -142,14 +134,6 @@ class Session(object):
             # Maybe log?
             print("Failed to close session.")
         self.vi = 0
-=======
-        if(self.vi != 0):
-            error_code = self.library.${c_function_prefix}close(self.vi)
-            if(error_code < 0):
-                # TODO(marcoskirsch): This will occur when session is "stolen". Maybe don't even bother with printing?
-                print("Failed to close session.")
-            self.vi = 0
->>>>>>> master
 
 
     # method needed for generic driver exceptions
@@ -168,7 +152,7 @@ class Session(object):
             '''
             error_code = ctypes_types.ViStatus_ctype(error_code)
             error_message = ctypes.create_string_buffer(buffer_size)
-            self.library.${c_function_prefix}GetError(self.vi, ctypes.byref(error_code), buffer_size, error_message)
+            self.library.${c_function_prefix}GetError(self.vi, ctypes.byref(error_code), buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         else:
             '''
             Return code <= 0 from GetError indicates a problem.  This is expected
@@ -182,7 +166,7 @@ class Session(object):
             buffer_size = self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, 0, None)
             print("buffer_size", buffer_size)
             error_message = ctypes.create_string_buffer(buffer_size)
-            self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, buffer_size, error_message)
+            self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
 
         #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
@@ -221,9 +205,9 @@ class Session(object):
         buffer_size = 0
         value_ctype = ctypes.create_string_buffer(buffer_size)
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        if(errors._is_error(error_code.value)): raise errors.Error(self.library, self.vi, error_code)
-        buffer_size = error_code.value
+        if(errors._is_error(error_code)): raise errors.Error(self.library, self.vi, error_code)
+        buffer_size = error_code
         value_ctype = ctypes.create_string_buffer(buffer_size)
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        errors._handle_error(self.library, self.vi, error_code.value)
+        errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
