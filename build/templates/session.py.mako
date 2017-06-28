@@ -117,7 +117,7 @@ class Session(object):
         session_handle = ctypes_types.ViSession_ctype(0)
         error_code = self.library.${c_function_prefix}InitWithOptions(resourceName.encode('ascii'), idQuery, reset, optionString.encode('ascii'), ctypes.pointer(session_handle))
         self.vi = session_handle.value
-        errors._handle_error(self.library, self.vi, error_code)
+        errors._handle_error(self, error_code)
 
     def __del__(self):
         pass
@@ -137,6 +137,42 @@ class Session(object):
                 print("Failed to close session.")
             self.vi = 0
 
+
+    # method needed for generic driver exceptions
+    def _get_error_description(self, error_code):
+        new_error_code = ctypes_types.ViStatus_ctype(0)
+        buffer_size = self.library.${c_function_prefix}GetError(self.vi, ctypes.byref(new_error_code), 0, None)
+        assert (new_error_code.value == error_code)
+
+        if (buffer_size > 0):
+            '''
+            Return code > 0 from first call to GetError represents the size of
+            the description.  Call it again.
+            Ignore incoming IVI error code and return description from the driver
+            (trust that the IVI error code was properly stored in the session
+            by the driver)
+            '''
+            error_code = ctypes_types.ViStatus_ctype(error_code)
+            error_message = ctypes.create_string_buffer(buffer_size)
+            self.library.${c_function_prefix}GetError(self.vi, ctypes.byref(error_code), buffer_size, error_message)
+        else:
+            '''
+            Return code <= 0 from GetError indicates a problem.  This is expected
+            when the session is invalid (IVI spec requires GetError to fail).
+            Use GetErrorMessage instead.  It doesn't require a session.
+
+            Call ${c_function_prefix}GetErrorMessage, pass VI_NULL for the buffer in order to retrieve
+            the length of the error message.
+            '''
+            error_code = buffer_size
+            buffer_size = self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, 0, None)
+            print("buffer_size", buffer_size)
+            error_message = ctypes.create_string_buffer(buffer_size)
+            self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, buffer_size, error_message)
+
+        #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
+        #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
+        return new_error_code.value, error_message.value.decode("ascii")
 
     ''' These are code-generated '''
 
@@ -160,7 +196,7 @@ class Session(object):
         ${output_parameter['ctypes_variable_name']} = ctypes_types.${output_parameter['ctypes_type']}(0)
 % endfor
         error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        errors._handle_error(self.library, self.vi, error_code)
+        errors._handle_error(self, error_code)
         ${helper.get_method_return_snippet(output_parameters)}
 % endfor
 
@@ -175,7 +211,7 @@ class Session(object):
         buffer_size = error_code
         value = ctypes.create_string_buffer(buffer_size)
         error_code = self.library.${c_function_prefix}GetAttributeViString(self.vi, None, attribute_id, buffer_size, value)
-        errors._handle_error(self.library, self.vi, error_code)
+        errors._handle_error(self, error_code)
         return value.value.decode("ascii")
 
 
