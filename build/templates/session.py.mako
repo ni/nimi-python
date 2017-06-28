@@ -172,7 +172,7 @@ class Session(object):
 
         #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
-        return new_error_code, error_message.value.decode("ascii")
+        return new_error_code.value, error_message.value.decode("ascii")
 
     ''' These are code-generated '''
 
