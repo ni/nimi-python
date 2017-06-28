@@ -36,7 +36,7 @@ class _ErrorBase(Exception):
         buffer_size = library.${c_function_prefix}GetError(session_handle, ctypes.byref(new_error_code), 0, None)
         assert (new_error_code.value == error_code)
 
-        if (buffer_size.value > 0):
+        if (buffer_size > 0):
             '''
             Return code > 0 from first call to GetError represents the size of
             the description.  Call it again.
@@ -45,8 +45,8 @@ class _ErrorBase(Exception):
             by the driver)
             '''
             error_code = ${module_name}.ctypes_types.ViStatus_ctype(error_code)
-            error_message = ctypes.create_string_buffer(buffer_size.value)
-            library.${c_function_prefix}GetError(session_handle, ctypes.byref(error_code), buffer_size.value, error_message)
+            error_message = ctypes.create_string_buffer(buffer_size)
+            library.${c_function_prefix}GetError(session_handle, ctypes.byref(error_code), buffer_size, error_message)
         else:
             '''
             Return code <= 0 from GetError indicates a problem.  This is expected
@@ -56,15 +56,15 @@ class _ErrorBase(Exception):
             Call ${c_function_prefix}GetErrorMessage, pass VI_NULL for the buffer in order to retrieve
             the length of the error message.
             '''
-            error_code = buffer_size.value
+            error_code = buffer_size
             buffer_size = library.${c_function_prefix}GetErrorMessage(session_handle, error_code, 0, None)
             print("buffer_size", buffer_size)
-            error_message = ctypes.create_string_buffer(buffer_size.value)
-            library.${c_function_prefix}GetErrorMessage(session_handle, error_code, buffer_size.value, error_message)
+            error_message = ctypes.create_string_buffer(buffer_size)
+            library.${c_function_prefix}GetErrorMessage(session_handle, error_code, buffer_size, error_message)
 
         #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
-        self.code = new_error_code.value
+        self.code = new_error_code
         self.elaboration = error_message.value.decode("ascii")
         super(_ErrorBase, self).__init__(str(self.code) + ": " + self.elaboration)
 
