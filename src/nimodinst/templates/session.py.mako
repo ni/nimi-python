@@ -66,7 +66,7 @@ class Session(object):
         error_code = self.library.${c_function_prefix}OpenInstalledDevicesSession(driver.encode('ascii'), ctypes.pointer(get_session), ctypes.pointer(get_item_count))
         self.vi = get_session.value
         self.item_count = get_item_count.value
-        errors._handle_error(self.library, self.vi, error_code.value)
+        errors._handle_error(self, error_code)
 
     def __del__(self):
         pass
@@ -77,6 +77,26 @@ class Session(object):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close_installed_devices_session()
 
+    # method needed for generic driver exceptions
+    def _get_error_description(self, error_code):
+        buffer_size = library.${c_function_prefix}GetExtendedErrorInfo(0, None)
+
+        if (buffer_size > 0):
+            '''
+            Return code > 0 from first call to GetError represents the size of
+            the description.  Call it again.
+            Ignore incoming IVI error code and return description from the driver
+            (trust that the IVI error code was properly stored in the session
+            by the driver)
+            '''
+            error_code = ${module_name}.ctypes_types.ViStatus_ctype(error_code)
+            error_message = ctypes.create_string_buffer(buffer_size)
+            library.${c_function_prefix}GetExtendedErrorInfo(buffer_size, error_message)
+
+        #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
+        #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
+        return error_code, error_message.value.decode("ascii")
+
     # Iterator functions
     def __len__(self):
         return self.item_count
@@ -85,7 +105,7 @@ class Session(object):
         self.current_item = 0
         return self
 
-    def next(self):
+    def get_next(self):
         if self.current_item + 1 > self.item_count:
             raise StopIteration
         else:
@@ -93,19 +113,17 @@ class Session(object):
             self.current_item += 1
             return result
 
+    def next(self):
+        return self.get_next()
+
     def __next__(self):
-        if self.current_item + 1 > self.item_count:
-            raise StopIteration
-        else:
-            result = Device(self, self.current_item)
-            self.current_item += 1
-            return result
+        return self.get_next()
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         if(self.vi != 0):
             error_code = self.library.${c_function_prefix}close(self.vi)
-            if(error_code.value < 0):
+            if(error_code < 0):
                 # TODO(marcoskirsch): This will occur when session is "stolen". Maybe don't even bother with printing?
                 print("Failed to close session.")
             self.vi = 0
@@ -133,7 +151,7 @@ class Session(object):
         ${output_parameter['ctypes_variable_name']} = ctypes_types.${output_parameter['ctypes_type']}(0)
 % endfor
         error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        errors._handle_error(self.library, self.vi, error_code.value)
+        errors._handle_error(self, error_code)
         ${helper.get_method_return_snippet(output_parameters)}
 % endfor
 
@@ -144,9 +162,9 @@ class Session(object):
         error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.vi, index, attribute_id, 0, None)
         # Do the IVI dance
         # Don't use _handle_error, because positive value in error_code means size, not warning.
-        if(errors._is_error(error_code.value)): raise errors.Error(self.library, self.vi, error_code.value)
+        if(errors._is_error(error_code)): raise errors.Error(self, error_code)
         buffer_size = error_code
-        value = ctypes.create_string_buffer(buffer_size.value)
-        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.vi, index, attribute_id, buffer_size.value, value)
-        errors._handle_error(self.library, self.vi, error_code.value)
+        value = ctypes.create_string_buffer(buffer_size)
+        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.vi, index, attribute_id, buffer_size, value)
+        errors._handle_error(self, error_code)
         return value.value.decode("ascii")
