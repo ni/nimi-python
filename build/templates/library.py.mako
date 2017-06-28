@@ -20,6 +20,7 @@ import platform
 
 from ${module_name} import errors
 from ${module_name}.ctypes_types import * # So we can use the types without module
+import ${module_name}.python_types
 
 def get_library_name():
     try:
@@ -43,7 +44,7 @@ def get_library():
     """
 
 % for f in functions:
-    library.${c_function_prefix}${f['name']}.restype = ${f['returns_ctype']}
+    library.${c_function_prefix}${f['name']}.restype = ${module_name}.python_types.${f['returns_python']}
     library.${c_function_prefix}${f['name']}.argtypes = [${helper.get_library_call_parameter_types_snippet(f['parameters'])}]
 
 % endfor
