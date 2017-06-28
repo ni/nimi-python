@@ -2,7 +2,7 @@ functions = [
     {   'name': 'OpenInstalledDevicesSession',
         'codegen_method': 'public',
         'parameters': [
-            {'direction': 'in', 'enum': 'Drivers',
+            {'direction': 'in', 'enum': None,
              'name': 'driver',
              'type': 'ViConstString'},
             {'direction': 'out', 'enum': None,
