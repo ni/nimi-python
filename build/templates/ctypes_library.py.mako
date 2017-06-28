@@ -21,12 +21,12 @@ import platform
 from ${module_name}.ctypes_types import *
 
 class ${module_name}_ctypes_library:
-    # We cache the cfunc object from the ctypes.CDLL object
-% for f in functions:
-    ${c_function_prefix}${f['name']}_cfunc = None
-% endfor
 
     def __init__(self, library_name):
+    # We cache the cfunc object from the ctypes.CDLL object
+% for f in functions:
+        self.${c_function_prefix}${f['name']}_cfunc = None
+% endfor
         self._cdll = ctypes.WinDLL(library_name)
 
 
