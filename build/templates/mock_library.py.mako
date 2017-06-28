@@ -16,36 +16,21 @@ functions = helper.add_all_metadata(functions)
 %>\
 
 import ctypes
+import platform
 from unittest.mock import DEFAULT
+
 import ${module_name}.ctypes_types
 import ${module_name}.python_types
 
-# Create side effect functions for all entry points that take byref/pointer parameters
-% for f in functions:
-<% 
-params = f['parameters']
-output_params = helper.extract_output_parameters(params)
-%>\
-% if len(output_params) > 0:
-def ${c_function_prefix}${f['name']}_side_effect(${helper.get_function_parameters_snippet(params)}):
-%    for p in output_params:
-    ${p['python_name']}.contents.value = ${p['default_for_test']}
-%    endfor
-    return DEFAULT
-
-% endif
-% endfor
+class IncorrectCall(Exception):
+    def __init__(self, function):
+        self.function = function
+        super(Exception, self).__init__("{0} called when it shouldn't have been".format(self.function))
 
 # Helper function to setup Mock object with default side affects and return values
 def set_side_effects_and_return_values(mock_library):
 % for f in functions:
-<% 
-params = f['parameters']
-output_params = helper.extract_output_parameters(params)
-%>\
-% if len(output_params) > 0:
-    mock_library.${c_function_prefix}${f['name']}.side_effect = ${c_function_prefix}${f['name']}_side_effect
-% endif
+    mock_library.${c_function_prefix}${f['name']}.side_effect = IncorrectCall("${c_function_prefix}${f['name']}")
     mock_library.${c_function_prefix}${f['name']}.return_value = ${module_name}.python_types.${f['returns_python']}(0)
 % endfor
 
