@@ -30,8 +30,8 @@ class _ErrorBase(Exception):
 
     def __init__(self, session, error_code):
 
-        self.code, self.elaboration = session._get_error_description(error_code)
-        super(_ErrorBase, self).__init__(str(self.code) + ": " + self.elaboration)
+        self.code, self.description = session._get_error_description(error_code)
+        super(_ErrorBase, self).__init__(str(self.code) + ": " + self.description)
 
 
 class Error(_ErrorBase):
