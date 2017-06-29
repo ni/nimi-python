@@ -11,7 +11,7 @@ class ViRsrc_ctype(ctypes.c_char_p):
 class ViSession_ctype(ctypes.c_ulong):
     pass
 
-class ViChar_ctype(ctypes.c_char_p):
+class ViChar_ctype(ctypes.c_char):
     pass
 
 class ViUInt32_ctype(ctypes.c_ulong):

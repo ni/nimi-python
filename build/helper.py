@@ -86,6 +86,15 @@ def _add_python_return_type(f):
     f['returns_python'] = f['returns']
     return f
 
+def _add_is_buffer(parameter):
+    '''Adds 'is_buffer' key/value pair to the parameter metadata iff not already populated'''
+    try:
+        parameter['is_buffer']
+    except KeyError:
+        # Not populated, assume False
+        parameter['is_buffer'] = False
+    return parameter
+
 def add_all_metadata(functions):
     '''Adds all codegen-specific metada to the function metadata list'''
     for f in functions:
@@ -97,6 +106,7 @@ def add_all_metadata(functions):
             _add_python_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
+            _add_is_buffer(p)
     return functions
 
 
@@ -113,41 +123,64 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
     '''Returns a string suitable to use as the parameters to the library object, i.e. "self, mode, range, digits_of_resolution"'''
     snippets = []
     for x in parameters_list:
-        if x['direction'] is 'in':
-            snippet = x['python_name']
-            snippet += '.value' if x['enum'] is not None else ''
-            if x['type'] is 'ViConstString':
-                snippet += '.encode(\'ascii\')'
+        if x['name'] is sessionName:
+            snippets.append('self.' + sessionName)
         else:
-            assert x['direction'] is 'out'
-            snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
-        snippets.append(snippet)
+            snippet = ''
+            if x['direction'] is 'in':
+                snippet += x['python_name']
+                snippet += '.value' if x['enum'] is not None else ''
+                if x['type'] is 'ViString' or x['type'] is 'ViConstString' or x['type'] is 'ViRsrc':
+                    snippet += '.encode(\'ascii\')'
+            else:
+                assert x['direction'] is 'out'
+                snippet += 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
+            snippets.append(snippet)
     return ', '.join(snippets)
 
 def get_library_call_parameter_types_snippet(parameters_list):
     '''Returns a string suitable to use as the parameters to the library definition object'''
-    snippet = ''
+    snippets = []
     for x in parameters_list:
-        if len(snippet) > 0:
-            snippet += ", "
-        if x['direction'] == 'out':
-            snippet += "ctypes.POINTER(" + x['ctypes_type'] + ")"
+        if x['direction'] is 'out':
+            if x['type'] is 'ViString' or x['type'] is 'ViRsrc' or x['type'] is 'ViConstString_ctype':
+                # These are defined as c_char_p which is already a pointer!
+                snippets.append(x['ctypes_type'])
+            else:
+                snippets.append("ctypes.POINTER(" + x['ctypes_type'] + ")")
         else:
             assert x['direction'] is 'in'
-            snippet += x['ctypes_type']
+            snippets.append(x['ctypes_type'])
+    return ', '.join(snippets)
+
+def _get_output_param_return_snippet(output_parameter):
+    '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
+    snippet = output_parameter['ctypes_variable_name'] + '.value'
+    if output_parameter['type'] is 'ViChar':
+        snippet += '.decode("ascii")'
     return snippet
 
 def get_method_return_snippet(output_parameters):
-    '''Returns a string suitable to use as the return argument of a Session method, i.e. "reading_ctype.value"'''
+    '''Returns a string suitable to use as the return argument of a Session method, i.e. "return reading_ctype.value"'''
     if len(output_parameters) is 0:
         return 'return'
-    snippet = 'return ' + output_parameters[0]['ctypes_variable_name'] + '.value'
-    for x in output_parameters[1:]:
-        snippet += ', ' + x['ctypes_variable_name'] + '.value'
-    return snippet
+    snippets = []
+    for x in output_parameters:
+        snippets.append(_get_output_param_return_snippet(x))
+    return 'return ' + ', '.join(snippets)
 
 def get_enum_type_check_snippet(parameter):
-    '''Returns Python snippet to check that the type of a parameter is what is expected'''
+    '''Returns python snippet to check that the type of a parameter is what is expected'''
     assert parameter['enum'] is not None
     assert parameter['direction'] is 'in'
     return 'if type(' + parameter['python_name'] + ') is not ' + parameter['python_type'] + ': raise TypeError(\'Parameter mode must be of type \' + str(' + parameter['python_type'] + '))'
+
+def get_ctype_variable_declaration_snippet(parameter):
+    '''Returns python snippet to declare and initialize the corresponding ctypes variable'''
+    assert parameter['direction'] is 'out'
+    snippet = parameter['ctypes_variable_name'] + ' = '
+    if parameter['is_buffer']:
+        snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)' + ' #TODO: allocate a buffer'
+    else:
+        snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)'
+    return snippet
