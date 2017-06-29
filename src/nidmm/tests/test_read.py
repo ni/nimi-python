@@ -1,6 +1,6 @@
 
 import nidmm
-import nidmm.tests.mock_library
+import nidmm.tests.mock_helper as mock_helper
 
 from unittest.mock import ANY
 from unittest.mock import Mock
@@ -8,7 +8,7 @@ from unittest.mock import patch
 from unittest.mock import create_autospec
 from unittest.mock import DEFAULT
 
-nidmm_side_effects = nidmm.tests.mock_library.side_effects_helper()
+nidmm_side_effects = mock_helper.side_effects_helper()
 SESSION_NUM_FOR_TEST = 42
 
 @patch('nidmm.session.errors', spec_set=['_handle_error'])
@@ -19,7 +19,7 @@ def test_simple_read(patched_library, patched_ctypes_library, patched_errors):
 
     patched_library.get_library.return_value = patched_ctypes_library
 
-    nidmm.tests.mock_library.set_side_effects_and_return_values(patched_ctypes_library)
+    mock_helper.set_side_effects_and_return_values(patched_ctypes_library)
 
     patched_ctypes_library.niDMM_InitWithOptions.side_effect = nidmm_side_effects.niDMM_InitWithOptions_side_effect
     patched_ctypes_library.niDMM_close.side_effect = nidmm_side_effects.niDMM_close_side_effect
