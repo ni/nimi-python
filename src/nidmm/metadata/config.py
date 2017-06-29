@@ -5,10 +5,15 @@ config = {
     'c_function_prefix': 'niDMM_',
     'driver_name': 'NI-DMM',
     'session_description': 'An NI-DMM session to a National Instruments Digital Multimeter',
-    'library_name':
+    'library_info':
     {
-        'Windows': {'32bit': 'nidmm_32.dll', '64bit': 'nidmm_64.dll'},
-        'Linux': {'64bit': 'libnidmm.so'}
+        'Windows': {
+            '32bit': {'name': 'nidmm_32.dll', 'type': 'windll'},
+            '64bit': {'name': 'nidmm_64.dll', 'type': 'cdll'},
+        },
+        'Linux': {
+            '64bit': {'name': 'libnidmm.so', 'type': 'cdll'},
+        },
     }
 }
 

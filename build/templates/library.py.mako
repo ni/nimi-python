@@ -24,14 +24,22 @@ import ${module_name}.python_types
 
 def get_library_name():
     try:
-        return ${config['library_name']}[platform.system()][platform.architecture()[0]]
+        return ${config['library_info']}[platform.system()][platform.architecture()[0]]['name']
     except KeyError as e:
         raise errors.UnsupportedConfigurationError
 
+def get_library_type():
+    try:
+        return ${config['library_info']}[platform.system()][platform.architecture()[0]]['type']
+    except KeyError as e:
+        raise errors.UnsupportedConfigurationError
 
 def get_library():
     try:
-        library = ctypes.WinDLL(get_library_name())
+        if get_library_type() == 'windll':
+            library = ctypes.WinDLL(get_library_name())
+        else:
+            library = ctypes.CDLL(get_library_name())
     except OSError as e:
         raise errors.DriverNotInstalledError()
 
