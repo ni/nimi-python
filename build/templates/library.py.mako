@@ -36,12 +36,11 @@ def get_library():
         raise errors.DriverNotInstalledError()
 
 
-    """ Specify required argument types (function prototypes) and Return types.
-        https://docs.python.org/3/library/ctypes.html#specifying-the-required-argument-types-function-prototypes
-        https://docs.python.org/3/library/ctypes.html#return-types
-        This provides some automatic conversion and error checking when calling ${driver_name} functions.
-        Strictly speaking, this is not necessary if/when we code-generate the calling code.
-        It may have some performance impact as well.
+    """
+    Specify required argument types (function prototypes) and Return types.
+    https://docs.python.org/3/library/ctypes.html#specifying-the-required-argument-types-function-prototypes
+    https://docs.python.org/3/library/ctypes.html#return-types
+    This provides some automatic conversion and error checking when calling ${driver_name} functions.
     """
 
 % for f in functions:
