@@ -21,8 +21,8 @@ def test_simple_read(patched_library, patched_ctypes_library, patched_errors):
     mock_helper.set_side_effects_and_return_values(patched_ctypes_library)
 
     nimodinst_side_effects = mock_helper.side_effects_helper()
-    patched_ctypes_library.niModInst_OpenInstalledDevicesSession.side_effect = nimodinst_side_effects.niModInst_OpenInstalledDevicesSession_side_effect
-    patched_ctypes_library.niModInst_CloseInstalledDevicesSession.side_effect = nimodinst_side_effects.niModInst_CloseInstalledDevicesSession_side_effect
+    patched_ctypes_library.niModInst_OpenInstalledDevicesSession.side_effect = nimodinst_side_effects.niModInst_OpenInstalledDevicesSession
+    patched_ctypes_library.niModInst_CloseInstalledDevicesSession.side_effect = nimodinst_side_effects.niModInst_CloseInstalledDevicesSession
 
     nimodinst_side_effects['OpenInstalledDevicesSession']['handle'] = SESSION_NUM_FOR_TEST
     nimodinst_side_effects['OpenInstalledDevicesSession']['item_count'] = 1

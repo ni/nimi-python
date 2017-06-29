@@ -8,7 +8,6 @@ from unittest.mock import patch
 from unittest.mock import create_autospec
 from unittest.mock import DEFAULT
 
-nidmm_side_effects = mock_helper.side_effects_helper()
 SESSION_NUM_FOR_TEST = 42
 
 @patch('nidmm.session.errors', spec_set=['_handle_error'])
@@ -21,9 +20,10 @@ def test_simple_read(patched_library, patched_ctypes_library, patched_errors):
 
     mock_helper.set_side_effects_and_return_values(patched_ctypes_library)
 
-    patched_ctypes_library.niDMM_InitWithOptions.side_effect = nidmm_side_effects.niDMM_InitWithOptions_side_effect
-    patched_ctypes_library.niDMM_close.side_effect = nidmm_side_effects.niDMM_close_side_effect
-    patched_ctypes_library.niDMM_ConfigureMeasurementDigits.side_effect = nidmm_side_effects.niDMM_ConfigureMeasurementDigits_side_effect
+    nidmm_side_effects = mock_helper.side_effects_helper()
+    patched_ctypes_library.niDMM_InitWithOptions.side_effect = nidmm_side_effects.niDMM_InitWithOptions
+    patched_ctypes_library.niDMM_close.side_effect = nidmm_side_effects.niDMM_close
+    patched_ctypes_library.niDMM_ConfigureMeasurementDigits.side_effect = nidmm_side_effects.niDMM_ConfigureMeasurementDigits
 
     nidmm_side_effects['InitWithOptions']['newVi'] = SESSION_NUM_FOR_TEST
 
