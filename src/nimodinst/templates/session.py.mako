@@ -58,15 +58,10 @@ class Session(object):
         self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(self, ${attributes[attribute]['id']})
 % endfor
 
-        self.vi = 0
+        self.handle = 0
         self.item_count = 0
         self.library = library.get_library()
-        get_session = ctypes_types.ViSession_ctype(0)
-        get_item_count = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.${c_function_prefix}OpenInstalledDevicesSession(driver.encode('ascii'), ctypes.pointer(get_session), ctypes.pointer(get_item_count))
-        self.vi = get_session.value
-        self.item_count = get_item_count.value
-        errors._handle_error(self, error_code)
+        self.handle, self.item_count = self._open_installed_devices_session(driver)
 
     def __del__(self):
         pass
@@ -75,9 +70,11 @@ class Session(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close_installed_devices_session()
+        self.close()
 
     # method needed for generic driver exceptions
+    # TODO(texasaggie97) Rewrite to use session function instead of library once buffer
+    #   retrieval is working
     def _get_error_description(self, error_code):
         buffer_size = library.${c_function_prefix}GetExtendedErrorInfo(0, None)
 
@@ -121,12 +118,9 @@ class Session(object):
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        if(self.vi != 0):
-            error_code = self.library.${c_function_prefix}close(self.vi)
-            if(error_code < 0):
-                # TODO(marcoskirsch): This will occur when session is "stolen". Maybe don't even bother with printing?
-                print("Failed to close session.")
-            self.vi = 0
+        if(self.handle != 0):
+            self._close_installed_devices_session(self.handle)
+            self.handle = 0
 
 
     ''' These are code-generated '''
@@ -150,7 +144,7 @@ class Session(object):
 % for output_parameter in output_parameters:
         ${output_parameter['ctypes_variable_name']} = ctypes_types.${output_parameter['ctypes_type']}(0)
 % endfor
-        error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
+        error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'], sessionName = 'handle')})
         errors._handle_error(self, error_code)
         ${helper.get_method_return_snippet(output_parameters)}
 % endfor
@@ -159,12 +153,12 @@ class Session(object):
     ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
 
     def _get_installed_device_attribute_vi_string(self, index, attribute_id):
-        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.vi, index, attribute_id, 0, None)
+        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, 0, None)
         # Do the IVI dance
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if(errors._is_error(error_code)): raise errors.Error(self, error_code)
         buffer_size = error_code
         value = ctypes.create_string_buffer(buffer_size)
-        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.vi, index, attribute_id, buffer_size, value)
+        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, value)
         errors._handle_error(self, error_code)
         return value.value.decode("ascii")

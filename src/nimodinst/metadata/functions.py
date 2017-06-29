@@ -1,12 +1,12 @@
 functions = [
     {   'name': 'OpenInstalledDevicesSession',
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'parameters': [
             {'direction': 'in', 'enum': None,
              'name': 'driver',
              'type': 'ViConstString'},
             {'direction': 'out', 'enum': None,
-             'name': 'session',
+             'name': 'handle',
              'type': 'ViSession'},
             {'direction': 'out', 'enum': None,
              'name': 'item_count',
@@ -17,7 +17,7 @@ functions = [
         'codegen_method': 'private',
         'parameters': [
             {'direction': 'in', 'enum': None,
-             'name': 'vi',
+             'name': 'handle',
              'type': 'ViSession'},
             {'direction': 'in', 'enum': None,
              'name': 'index',
@@ -37,7 +37,7 @@ functions = [
         'codegen_method': 'private',
         'parameters': [
             {'direction': 'in', 'enum': None,
-             'name': 'vi',
+             'name': 'handle',
              'type': 'ViSession'},
             {'direction': 'in', 'enum': None,
              'name': 'index',
@@ -51,10 +51,10 @@ functions = [
         ],
         'returns': 'ViStatus'},
     {   'name': 'CloseInstalledDevicesSession',
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'parameters': [
             {'direction': 'in', 'enum': None,
-             'name': 'vi', 'type': 'ViSession'},
+             'name': 'handle', 'type': 'ViSession'},
         ],
         'returns': 'ViStatus'},
     {   'name': 'GetExtendedErrorInfo',

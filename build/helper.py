@@ -29,9 +29,9 @@ def extract_codegen_functions(functions):
     '''Returns function metadata only for those functions to be included in codegen'''
     return [x for x in functions if x['codegen_method'] is not 'no']
 
-def extract_input_parameters(parameters):
+def extract_input_parameters(parameters, sessionName = 'vi'):
     '''Returns list of parameters only with input parameters'''
-    return [x for x in parameters if x['direction'] is 'in' and x['name'] is not 'vi']
+    return [x for x in parameters if x['direction'] is 'in' and x['name'] is not sessionName]
 
 def extract_output_parameters(parameters):
     '''Returns list of parameters only with output parameters'''
@@ -109,20 +109,20 @@ def get_method_parameters_snippet(parameters):
         snippet += ', ' + x['python_name']
     return snippet
 
-def get_library_call_parameter_snippet(parameters_list):
+def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
     '''Returns a string suitable to use as the parameters to the library object, i.e. "self, mode, range, digits_of_resolution"'''
-    snippet = 'self.vi'
+    snippets = []
     for x in parameters_list:
-        if x['name'] is not 'vi':
-            if x['direction'] is 'in':
-                snippet += (', ' + x['python_name'])
-                snippet += '.value' if x['enum'] is not None else ''
-                if x['type'] is 'ViConstString':
-                    snippet += '.encode(\'ascii\')'
-            else:
-                assert x['direction'] is 'out'
-                snippet += ', ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
-    return snippet
+        if x['direction'] is 'in':
+            snippet = x['python_name']
+            snippet += '.value' if x['enum'] is not None else ''
+            if x['type'] is 'ViConstString':
+                snippet += '.encode(\'ascii\')'
+        else:
+            assert x['direction'] is 'out'
+            snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
+        snippets.append(snippet)
+    return ', '.join(snippets)
 
 def get_library_call_parameter_types_snippet(parameters_list):
     '''Returns a string suitable to use as the parameters to the library definition object'''
