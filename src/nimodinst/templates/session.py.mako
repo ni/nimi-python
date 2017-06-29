@@ -141,9 +141,9 @@ class Session(object):
         ${helper.get_enum_type_check_snippet(parameter)}
 % endfor
 % for output_parameter in output_parameters:
-        ${output_parameter['ctypes_variable_name']} = ctypes_types.${output_parameter['ctypes_type']}(0)
+        ${helper.get_ctype_variable_declaration_snippet(output_parameter)}
 % endfor
-        error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'], sessionName = 'handle')})
+        error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
         errors._handle_error(self, error_code)
         ${helper.get_method_return_snippet(output_parameters)}
 % endfor
@@ -152,12 +152,14 @@ class Session(object):
     ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
 
     def _get_installed_device_attribute_vi_string(self, index, attribute_id):
-        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, 0, None)
         # Do the IVI dance
         # Don't use _handle_error, because positive value in error_code means size, not warning.
+        buffer_size = 0
+        value_ctype = ctypes.create_string_buffer(buffer_size)
+        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         if(errors._is_error(error_code)): raise errors.Error(self, error_code)
         buffer_size = error_code
-        value = ctypes.create_string_buffer(buffer_size)
-        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, value)
+        value_ctype = ctypes.create_string_buffer(buffer_size)
+        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
-        return value.value.decode("ascii")
+        return value_ctype.value.decode("ascii")
