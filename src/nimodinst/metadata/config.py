@@ -5,10 +5,15 @@ config = {
     'c_function_prefix': 'niModInst_',
     'driver_name': 'NI-ModInst',
     'session_description': 'A NI-ModInst session to get device information',
-    'library_name':
+    'library_info':
     {
-        'Windows': {'32bit': 'nimodinst.dll', '64bit': 'nimodinst_64.dll'},
-        'Linux': {'64bit': 'libnimodinst.so'}
+        'Windows': {
+            '32bit': {'name': 'nimodinst.dll', 'type': 'windll'},
+            '64bit': {'name': 'nimodinst_64.dll', 'type': 'cdll'},
+        },
+        'Linux': {
+            '64bit': {'name': 'libnimodinst.so', 'type': 'cdll'},
+        },
     }
 }
 
