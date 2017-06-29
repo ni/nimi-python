@@ -8,6 +8,7 @@ python3 -m zipapp -o bin/build.pyz build
 
 rem Needs Python 3.5+ for pkg_resources
 python3 bin/build.pyz clean make make_installer -v --metadata src/nidmm/metadata
+python3 bin/build.pyz clean make make_installer -v --metadata src/nimodinst/metadata
 
 
 
