@@ -49,6 +49,10 @@ build_info = {
          'params': {'src': '%(SOURCE_DIR)s/%(driver)s/tests',
                     'dest': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/tests'},
         },
+        {'command': 'codegen',
+         'params': {'template': '%(TEMPLATE_DIR)s/mock_helper.py.mako',
+                    'output_file': '%(OUTPUT_DIR)s/%(driver)s/%(driver)s/tests/mock_helper.py'},
+        },
     ],
     'make_installer': [
         {'command': 'codegen',

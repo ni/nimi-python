@@ -55,6 +55,8 @@ output_params = helper.extract_output_parameters(params)
 %>\
     def ${c_function_prefix}${f['name']}_side_effect(${helper.get_method_parameters_snippet(params)}):
 %    for p in output_params:
+        if self._defaults['${f['name']}']['${p['name']}'] is None:
+            raise IncorrectMockFunctionCall("${c_function_prefix}${f['name']}", param='${p['name']}')
         ${p['python_name']}.contents.value = self._defaults['${f['name']}']['${p['name']}']
 %    endfor
         return self._defaults['${f['name']}']['return']
