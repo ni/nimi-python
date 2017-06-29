@@ -20,6 +20,7 @@ import platform
 
 from ${module_name} import errors
 from ${module_name}.ctypes_types import * # So we can use the types without module
+import ${module_name}.python_types
 
 def get_library_name():
     try:
@@ -35,16 +36,15 @@ def get_library():
         raise errors.DriverNotInstalledError()
 
 
-    """ Specify required argument types (function prototypes) and Return types.
-        https://docs.python.org/3/library/ctypes.html#specifying-the-required-argument-types-function-prototypes
-        https://docs.python.org/3/library/ctypes.html#return-types
-        This provides some automatic conversion and error checking when calling ${driver_name} functions.
-        Strictly speaking, this is not necessary if/when we code-generate the calling code.
-        It may have some performance impact as well.
+    """
+    Specify required argument types (function prototypes) and Return types.
+    https://docs.python.org/3/library/ctypes.html#specifying-the-required-argument-types-function-prototypes
+    https://docs.python.org/3/library/ctypes.html#return-types
+    This provides some automatic conversion and error checking when calling ${driver_name} functions.
     """
 
 % for f in functions:
-    library.${c_function_prefix}${f['name']}.restype = ${f['returns_ctype']}
+    library.${c_function_prefix}${f['name']}.restype = ${module_name}.python_types.${f['returns_python']}
     library.${c_function_prefix}${f['name']}.argtypes = [${helper.get_library_call_parameter_types_snippet(f['parameters'])}]
 
 % endfor
