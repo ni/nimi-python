@@ -98,3 +98,10 @@ def test_ViSession_attribute():
             print(e)
             pass
 
+'''
+def test_self_test():
+    with nidmm.Session("PXI1Slot2") as session:
+        result, message = session.self_test()
+        assert result is 0
+        assert message is 'hello'
+'''
