@@ -125,7 +125,6 @@ class Session(object):
 
     ''' These are code-generated '''
 
-    #TODO (marcoskirsch): attribute methods will be like "_set_attribute_vi_boolean", should be _set_attribute_ViBoolean. Open issue about it.
 <%
     functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
