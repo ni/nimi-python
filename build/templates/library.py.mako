@@ -39,6 +39,7 @@ def get_library():
         if get_library_type() == 'windll':
             library = ctypes.WinDLL(get_library_name())
         else:
+            assert get_library_type() == 'cdll'
             library = ctypes.CDLL(get_library_name())
     except OSError as e:
         raise errors.DriverNotInstalledError()
