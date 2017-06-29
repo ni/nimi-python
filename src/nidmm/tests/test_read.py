@@ -8,15 +8,8 @@ from unittest.mock import patch
 from unittest.mock import create_autospec
 from unittest.mock import DEFAULT
 
-def niDMM_InitWithOptions_side_effect(resourceName, IDQuery, resetDevice, optionsString, newVi):
-    newVi.contents.value = 42
-    return DEFAULT
-
-def niDMM_close_side_effect(vi):
-    return DEFAULT
-
-def niDMM_ConfigureMeasurementDigits_side_effect(vi, meas_function, range, resolution_digits):
-    return DEFAULT
+nidmm_side_effects = nidmm.tests.mock_library.side_effects_helper()
+nidmm_side_effects['InitWithOptions']['newVi'] = 42
 
 @patch('nidmm.session.errors', spec_set=['_handle_error'])
 @patch('nidmm.ctypes_library.nidmm_ctypes_library', autospec=True)
@@ -28,9 +21,9 @@ def test_simple_read(patched_library, patched_ctypes_library, patched_errors):
 
     nidmm.tests.mock_library.set_side_effects_and_return_values(patched_ctypes_library)
 
-    patched_ctypes_library.niDMM_InitWithOptions.side_effect = niDMM_InitWithOptions_side_effect
-    patched_ctypes_library.niDMM_close.side_effect = niDMM_close_side_effect
-    patched_ctypes_library.niDMM_ConfigureMeasurementDigits.side_effect = niDMM_ConfigureMeasurementDigits_side_effect
+    patched_ctypes_library.niDMM_InitWithOptions.side_effect = nidmm_side_effects.niDMM_InitWithOptions_side_effect
+    patched_ctypes_library.niDMM_close.side_effect = nidmm_side_effects.niDMM_close_side_effect
+    patched_ctypes_library.niDMM_ConfigureMeasurementDigits.side_effect = nidmm_side_effects.niDMM_ConfigureMeasurementDigits_side_effect
 
     with nidmm.Session("Dev1") as session:
         assert(session.vi == 42)
