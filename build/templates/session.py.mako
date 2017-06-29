@@ -129,9 +129,7 @@ class Session(object):
         try:
             self._close()
         except nidmm.Error as e:
-            # TODO(marcoskirsch): This will occur when session is "stolen".
-            # Maybe don't even bother with printing?
-            # Maybe log?
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
             print("Failed to close session.")
         self.vi = 0
 
@@ -164,7 +162,6 @@ class Session(object):
             '''
             error_code = buffer_size
             buffer_size = self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, 0, None)
-            print("buffer_size", buffer_size)
             error_message = ctypes.create_string_buffer(buffer_size)
             self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
 

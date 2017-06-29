@@ -140,24 +140,21 @@ def get_library_call_parameter_snippet(parameters_list):
 
 def get_library_call_parameter_types_snippet(parameters_list):
     '''Returns a string suitable to use as the parameters to the library definition object'''
-    snippet = ''
+    snippets = []
     for x in parameters_list:
-        if len(snippet) > 0:
-            snippet += ", "
         if x['direction'] is 'out':
             if x['type'] is 'ViString' or x['type'] is 'ViRsrc' or x['type'] is 'ViConstString_ctype':
                 # These are defined as c_char_p which is already a pointer!
-                snippet += x['ctypes_type']
+                snippets.append(x['ctypes_type'])
             else:
-                snippet += "ctypes.POINTER(" + x['ctypes_type'] + ")"
+                snippets.append("ctypes.POINTER(" + x['ctypes_type'] + ")")
         else:
             assert x['direction'] is 'in'
-            snippet += x['ctypes_type']
-    return snippet
+            snippets.append(x['ctypes_type'])
+    return ', '.join(snippets)
 
 def _get_output_param_return_snippet(output_parameter):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
-    #print ('output param:' + str(output_parameter))
     snippet = output_parameter['ctypes_variable_name'] + '.value'
     if output_parameter['type'] is 'ViChar':
         snippet += '.decode("ascii")'
@@ -180,7 +177,6 @@ def get_enum_type_check_snippet(parameter):
 
 def get_ctype_variable_declaration_snippet(parameter):
     '''Returns python snippet to declare and initialize the corresponding ctypes variable'''
-    print(parameter)
     assert parameter['direction'] is 'out'
     snippet = parameter['ctypes_variable_name'] + ' = '
     if parameter['is_buffer']:
