@@ -29,9 +29,9 @@ def extract_codegen_functions(functions):
     '''Returns function metadata only for those functions to be included in codegen'''
     return [x for x in functions if x['codegen_method'] is not 'no']
 
-def extract_input_parameters(parameters):
+def extract_input_parameters(parameters, sessionName = 'vi'):
     '''Returns list of parameters only with input parameters'''
-    return [x for x in parameters if x['direction'] is 'in' and x['name'] is not 'vi']
+    return [x for x in parameters if x['direction'] is 'in' and x['name'] is not sessionName]
 
 def extract_output_parameters(parameters):
     '''Returns list of parameters only with output parameters'''
@@ -114,37 +114,35 @@ def add_all_metadata(functions):
 
 def get_method_parameters_snippet(parameters):
     '''Returns a string suitable for the parameter list of a method given a list of parameter objects'''
-    snippet = 'self'
+    snippets = ['self']
     for x in parameters:
-        snippet += ', ' + x['python_name']
-    return snippet
+        snippets.append(x['python_name'])
+    return ', '.join(snippets)
 
 def get_function_parameters_snippet(parameters):
     '''Returns a string suitable for the parameter list of a method given a list of parameter objects'''
-    snippet = ''
+    snippets = []
     for x in parameters:
-        if len(snippet) > 0:
-            snippet += ', '
-        snippet += x['python_name']
-    return snippet
+        snippets.append(x['python_name'])
+    return ', '.join(snippets)
 
-def get_library_call_parameter_snippet(parameters_list):
+def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
     '''Returns a string suitable to use as the parameters to the library object, i.e. "self, mode, range, digits_of_resolution"'''
     snippets = []
     for x in parameters_list:
-        if x['name'] is 'vi':
-            snippets.append('self.vi')
-        else:
-            snippet = ''
-            if x['direction'] is 'in':
+        snippet = ''
+        if x['direction'] is 'in':
+            if x['name'] is sessionName:
+                snippet += 'self.' + sessionName
+            else:
                 snippet += x['python_name']
                 snippet += '.value' if x['enum'] is not None else ''
                 if x['type'] is 'ViString' or x['type'] is 'ViConstString' or x['type'] is 'ViRsrc':
                     snippet += '.encode(\'ascii\')'
-            else:
-                assert x['direction'] is 'out'
-                snippet += 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
-            snippets.append(snippet)
+        else:
+            assert x['direction'] is 'out'
+            snippet += 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
+        snippets.append(snippet)
     return ', '.join(snippets)
 
 def get_library_call_parameter_types_snippet(parameters_list):
