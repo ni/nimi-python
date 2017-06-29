@@ -23,12 +23,17 @@ import ${module_name}.python_types
 
 class ${module_name}_ctypes_library:
 
-    def __init__(self, library_name):
+    def __init__(self, library_name, library_type):
         # We cache the cfunc object from the ctypes.CDLL object
 % for f in functions:
         self.${c_function_prefix}${f['name']}_cfunc = None
 % endfor
-        self._cdll = ctypes.WinDLL(library_name)
+
+        if library_type == 'windll':
+            self._library = ctypes.WinDLL(library_name)
+        else:
+            assert library_type == 'cdll'
+            self._library = ctypes.CDLL(library_name)
 
 
 % for f in functions:
