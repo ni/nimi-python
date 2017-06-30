@@ -2,35 +2,56 @@
 import nimodinst
 import nimodinst.tests.mock_helper as mock_helper
 
-from unittest.mock import ANY
-from unittest.mock import Mock
-from unittest.mock import patch
-from unittest.mock import create_autospec
-from unittest.mock import DEFAULT
+import ctypes
 
 SESSION_NUM_FOR_TEST = 42
 
-@patch('nimodinst.session.errors', spec_set=['_handle_error'])
-@patch('nimodinst.ctypes_library.nimodinst_ctypes_library', autospec=True)
-@patch('nimodinst.session.library', spec_set=['get_library'])
-def test_simple_read(patched_library, patched_ctypes_library, patched_errors):
-    patched_errors._handle_error.return_value = 0
+from unittest.mock import ANY
+from unittest.mock import patch
 
-    patched_library.get_library.return_value = patched_ctypes_library
+SESSION_NUM_FOR_TEST = 42
 
-    nimodinst_side_effects = mock_helper.side_effects_helper()
-    nimodinst_side_effects.set_side_effects_and_return_values(patched_ctypes_library)
+class TestSession(object):
+    def setup_method(self, method):
+        self.patched_ctypes_library_patcher = patch('nimodinst.ctypes_library.nimodinst_ctypes_library', autospec=True)
+        self.patched_ctypes_library = self.patched_ctypes_library_patcher.start()
+        self.patched_get_library_patcher = patch('nimodinst.session.library.get_library', return_value=self.patched_ctypes_library)
+        self.patched_get_library_patcher.start()
+        self.errors_patcher = patch('nimodinst.session.errors', spec_set=['_handle_error', '_is_error'])
+        self.patched_errors = self.errors_patcher.start()
+        self.patched_errors._is_error.return_value = 0
 
-    patched_ctypes_library.niModInst_OpenInstalledDevicesSession.side_effect = nimodinst_side_effects.niModInst_OpenInstalledDevicesSession
-    patched_ctypes_library.niModInst_CloseInstalledDevicesSession.side_effect = nimodinst_side_effects.niModInst_CloseInstalledDevicesSession
+        self.side_effects_helper = mock_helper.side_effects_helper()
+        self.side_effects_helper.set_side_effects_and_return_values(self.patched_ctypes_library)
+        self.patched_ctypes_library.niModInst_OpenInstalledDevicesSession.side_effect = self.side_effects_helper.niModInst_OpenInstalledDevicesSession
+        self.disallow_close = self.patched_ctypes_library.niModInst_CloseInstalledDevicesSession.side_effect
+        self.patched_ctypes_library.niModInst_CloseInstalledDevicesSession.side_effect = self.side_effects_helper.niModInst_CloseInstalledDevicesSession
 
-    nimodinst_side_effects['OpenInstalledDevicesSession']['handle'] = SESSION_NUM_FOR_TEST
-    nimodinst_side_effects['OpenInstalledDevicesSession']['item_count'] = 1
+        self.side_effects_helper['OpenInstalledDevicesSession']['handle'] = SESSION_NUM_FOR_TEST
+        self.side_effects_helper['OpenInstalledDevicesSession']['item_count'] = 1
 
-    with nimodinst.Session("") as session:
+    def teardown_method(self, method):
+        self.errors_patcher.stop()
+        self.patched_get_library_patcher.stop()
+        self.patched_ctypes_library_patcher.stop()
+
+    def test_open(self):
+        self.patched_ctypes_library.niModInst_CloseInstalledDevicesSession.side_effect = self.disallow_close
+        session = nimodinst.Session('')
         assert(session.handle == SESSION_NUM_FOR_TEST)
-        patched_ctypes_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
-        patched_errors._handle_error.assert_called_once_with(session, patched_ctypes_library.niModInst_OpenInstalledDevicesSession.return_value)
+        self.patched_ctypes_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
+        self.patched_errors._handle_error.assert_called_once_with(session, self.patched_ctypes_library.niModInst_OpenInstalledDevicesSession.return_value)
 
-    patched_ctypes_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
+    def test_close(self):
+        session = nimodinst.Session('')
+        session.close()
+        self.patched_ctypes_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
+
+    def test_context_manager(self):
+        with nimodinst.Session('') as session:
+            assert(session.handle == SESSION_NUM_FOR_TEST)
+            self.patched_ctypes_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
+            self.patched_errors._handle_error.assert_called_once_with(session, self.patched_ctypes_library.niModInst_OpenInstalledDevicesSession.return_value)
+        self.patched_ctypes_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
+
 

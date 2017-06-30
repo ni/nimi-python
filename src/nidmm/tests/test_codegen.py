@@ -4,9 +4,6 @@ import nidmm.tests.mock_helper as mock_helper
 import pytest
 
 from unittest.mock import ANY
-from unittest.mock import sentinel
-from unittest.mock import call
-from unittest.mock import Mock
 from unittest.mock import patch
 
 import ctypes
