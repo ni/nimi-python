@@ -1,6 +1,6 @@
 # This file was generated
 <%
-import helper
+import build.helper as helper
 
 functions     = template_parameters['metadata'].functions
 attributes    = template_parameters['metadata'].attributes

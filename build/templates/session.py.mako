@@ -1,6 +1,6 @@
 # This file was generated
 <%
-    import helper
+    import build.helper as helper
 
     config = template_parameters['metadata'].config
     module_name = config['module_name']

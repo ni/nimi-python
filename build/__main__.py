@@ -9,6 +9,7 @@ import sys
 # Part of this package
 import build_execution
 import utilities
+import generate_template
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -84,7 +85,6 @@ for m in args.metadata:
 
             template_params = {}
             template_params['metadata'] = metadata
-            template_params['types'] = type_map.type_map
 
             logging.debug(pp.pformat(template_params))
 
