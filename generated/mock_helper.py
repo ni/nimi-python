@@ -27,8 +27,10 @@ class side_effects_helper(object):
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
+        self._defaults['GetError']['description'] = None
         self._defaults['GetErrorMessage'] = {}
         self._defaults['GetErrorMessage']['return'] = 0
+        self._defaults['GetErrorMessage']['errMessage'] = None
         self._defaults['ClearError'] = {}
         self._defaults['ClearError']['return'] = 0
         self._defaults['reset'] = {}
@@ -36,6 +38,7 @@ class side_effects_helper(object):
         self._defaults['self_test'] = {}
         self._defaults['self_test']['return'] = 0
         self._defaults['self_test']['selfTestResult'] = None
+        self._defaults['self_test']['selfTestMessage'] = None
         self._defaults['SelfCal'] = {}
         self._defaults['SelfCal']['return'] = 0
         self._defaults['revision_query'] = {}
@@ -156,6 +159,7 @@ class side_effects_helper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
+        self._defaults['GetAttributeViString']['value'] = None
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViSession'] = {}
@@ -172,12 +176,23 @@ class side_effects_helper(object):
         self._defaults['GetNextCoercionRecord']['return'] = 0
         self._defaults['GetNextInterchangeWarning'] = {}
         self._defaults['GetNextInterchangeWarning']['return'] = 0
+        self._defaults['GetNextInterchangeWarning']['warnString'] = None
         self._defaults['ResetInterchangeCheck'] = {}
         self._defaults['ResetInterchangeCheck']['return'] = 0
         self._defaults['ClearInterchangeWarnings'] = {}
         self._defaults['ClearInterchangeWarnings']['return'] = 0
         self._defaults['GetChannelName'] = {}
         self._defaults['GetChannelName']['return'] = 0
+        self._defaults['GetSelfCalSupported'] = {}
+        self._defaults['GetSelfCalSupported']['return'] = 0
+        self._defaults['GetSelfCalSupported']['selfCalSupported'] = None
+        self._defaults['GetCalDateAndTime'] = {}
+        self._defaults['GetCalDateAndTime']['return'] = 0
+        self._defaults['GetCalDateAndTime']['month'] = None
+        self._defaults['GetCalDateAndTime']['day'] = None
+        self._defaults['GetCalDateAndTime']['year'] = None
+        self._defaults['GetCalDateAndTime']['hour'] = None
+        self._defaults['GetCalDateAndTime']['minute'] = None
         self._defaults['GetCalCount'] = {}
         self._defaults['GetCalCount']['return'] = 0
         self._defaults['GetCalCount']['count'] = None
@@ -208,263 +223,384 @@ class side_effects_helper(object):
     def __setitem__(self, func, val):
         self._defaults[func] = val
 
-    def niDMM_InitWithOptions_side_effect(self, resource_name, id_query, reset_device, options_string, new_vi):
+    def niDMM_InitWithOptions(self, resource_name, id_query, reset_device, options_string, new_vi):
+        if self._defaults['InitWithOptions']['newVi'] is None:
+            raise IncorrectMockFunctionCall("niDMM_InitWithOptions", param='newVi')
         new_vi.contents.value = self._defaults['InitWithOptions']['newVi']
         return self._defaults['InitWithOptions']['return']
 
-    def niDMM_close_side_effect(self, vi):
+    def niDMM_close(self, vi):
         return self._defaults['close']['return']
 
-    def niDMM_GetError_side_effect(self, vi, error_code, buffer_size, description):
+    def niDMM_GetError(self, vi, error_code, buffer_size, description):
+        if self._defaults['GetError']['errorCode'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetError", param='errorCode')
         error_code.contents.value = self._defaults['GetError']['errorCode']
+        if self._defaults['GetError']['description'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetError", param='description')
+        description.contents.value = self._defaults['GetError']['description']
         return self._defaults['GetError']['return']
 
-    def niDMM_GetErrorMessage_side_effect(self, vi, error_code, buffer_size, err_message):
+    def niDMM_GetErrorMessage(self, vi, error_code, buffer_size, err_message):
+        if self._defaults['GetErrorMessage']['errMessage'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetErrorMessage", param='errMessage')
+        err_message.contents.value = self._defaults['GetErrorMessage']['errMessage']
         return self._defaults['GetErrorMessage']['return']
 
-    def niDMM_ClearError_side_effect(self, vi):
+    def niDMM_ClearError(self, vi):
         return self._defaults['ClearError']['return']
 
-    def niDMM_reset_side_effect(self, vi):
+    def niDMM_reset(self, vi):
         return self._defaults['reset']['return']
 
-    def niDMM_self_test_side_effect(self, vi, self_test_result, self_test_message):
+    def niDMM_self_test(self, vi, self_test_result, self_test_message):
+        if self._defaults['self_test']['selfTestResult'] is None:
+            raise IncorrectMockFunctionCall("niDMM_self_test", param='selfTestResult')
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
+        if self._defaults['self_test']['selfTestMessage'] is None:
+            raise IncorrectMockFunctionCall("niDMM_self_test", param='selfTestMessage')
+        self_test_message.contents.value = self._defaults['self_test']['selfTestMessage']
         return self._defaults['self_test']['return']
 
-    def niDMM_SelfCal_side_effect(self, vi):
+    def niDMM_SelfCal(self, vi):
         return self._defaults['SelfCal']['return']
 
-    def niDMM_revision_query_side_effect(self, vi, driver_rev, instr_rev):
+    def niDMM_revision_query(self, vi, driver_rev, instr_rev):
         return self._defaults['revision_query']['return']
 
-    def niDMM_InvalidateAllAttributes_side_effect(self, vi):
+    def niDMM_InvalidateAllAttributes(self, vi):
         return self._defaults['InvalidateAllAttributes']['return']
 
-    def niDMM_ResetWithDefaults_side_effect(self, vi):
+    def niDMM_ResetWithDefaults(self, vi):
         return self._defaults['ResetWithDefaults']['return']
 
-    def niDMM_Disable_side_effect(self, vi):
+    def niDMM_Disable(self, vi):
         return self._defaults['Disable']['return']
 
-    def niDMM_GetMeasurementPeriod_side_effect(self, vi, period):
+    def niDMM_GetMeasurementPeriod(self, vi, period):
+        if self._defaults['GetMeasurementPeriod']['period'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetMeasurementPeriod", param='period')
         period.contents.value = self._defaults['GetMeasurementPeriod']['period']
         return self._defaults['GetMeasurementPeriod']['return']
 
-    def niDMM_ConfigureTrigger_side_effect(self, vi, trig_source, trigger_delay):
+    def niDMM_ConfigureTrigger(self, vi, trig_source, trigger_delay):
         return self._defaults['ConfigureTrigger']['return']
 
-    def niDMM_Read_side_effect(self, vi, max_time, reading):
+    def niDMM_Read(self, vi, max_time, reading):
+        if self._defaults['Read']['reading'] is None:
+            raise IncorrectMockFunctionCall("niDMM_Read", param='reading')
         reading.contents.value = self._defaults['Read']['reading']
         return self._defaults['Read']['return']
 
-    def niDMM_Fetch_side_effect(self, vi, max_time, reading):
+    def niDMM_Fetch(self, vi, max_time, reading):
+        if self._defaults['Fetch']['reading'] is None:
+            raise IncorrectMockFunctionCall("niDMM_Fetch", param='reading')
         reading.contents.value = self._defaults['Fetch']['reading']
         return self._defaults['Fetch']['return']
 
-    def niDMM_Abort_side_effect(self, vi):
+    def niDMM_Abort(self, vi):
         return self._defaults['Abort']['return']
 
-    def niDMM_Initiate_side_effect(self, vi):
+    def niDMM_Initiate(self, vi):
         return self._defaults['Initiate']['return']
 
-    def niDMM_IsOverRange_side_effect(self, vi, measurement_value, is_over_range):
+    def niDMM_IsOverRange(self, vi, measurement_value, is_over_range):
+        if self._defaults['IsOverRange']['isOverRange'] is None:
+            raise IncorrectMockFunctionCall("niDMM_IsOverRange", param='isOverRange')
         is_over_range.contents.value = self._defaults['IsOverRange']['isOverRange']
         return self._defaults['IsOverRange']['return']
 
-    def niDMM_IsUnderRange_side_effect(self, vi, measurement_value, is_under_range):
+    def niDMM_IsUnderRange(self, vi, measurement_value, is_under_range):
+        if self._defaults['IsUnderRange']['isUnderRange'] is None:
+            raise IncorrectMockFunctionCall("niDMM_IsUnderRange", param='isUnderRange')
         is_under_range.contents.value = self._defaults['IsUnderRange']['isUnderRange']
         return self._defaults['IsUnderRange']['return']
 
-    def niDMM_ConfigureACBandwidth_side_effect(self, vi, min_freq, max_freq):
+    def niDMM_ConfigureACBandwidth(self, vi, min_freq, max_freq):
         return self._defaults['ConfigureACBandwidth']['return']
 
-    def niDMM_ConfigureFrequencyVoltageRange_side_effect(self, vi, frequency_voltage_range):
+    def niDMM_ConfigureFrequencyVoltageRange(self, vi, frequency_voltage_range):
         return self._defaults['ConfigureFrequencyVoltageRange']['return']
 
-    def niDMM_ConfigureMeasCompleteDest_side_effect(self, vi, destination):
+    def niDMM_ConfigureMeasCompleteDest(self, vi, destination):
         return self._defaults['ConfigureMeasCompleteDest']['return']
 
-    def niDMM_ConfigureMultiPoint_side_effect(self, vi, trigger_count, sample_count, sample_trigger, sample_interval):
+    def niDMM_ConfigureMultiPoint(self, vi, trigger_count, sample_count, sample_trigger, sample_interval):
         return self._defaults['ConfigureMultiPoint']['return']
 
-    def niDMM_ReadMultiPoint_side_effect(self, vi, max_time, array_size, reading_array, actual_pts):
+    def niDMM_ReadMultiPoint(self, vi, max_time, array_size, reading_array, actual_pts):
+        if self._defaults['ReadMultiPoint']['actualPts'] is None:
+            raise IncorrectMockFunctionCall("niDMM_ReadMultiPoint", param='actualPts')
         actual_pts.contents.value = self._defaults['ReadMultiPoint']['actualPts']
         return self._defaults['ReadMultiPoint']['return']
 
-    def niDMM_FetchMultiPoint_side_effect(self, vi, max_time, array_size, reading_array, actual_pts):
+    def niDMM_FetchMultiPoint(self, vi, max_time, array_size, reading_array, actual_pts):
+        if self._defaults['FetchMultiPoint']['actualPts'] is None:
+            raise IncorrectMockFunctionCall("niDMM_FetchMultiPoint", param='actualPts')
         actual_pts.contents.value = self._defaults['FetchMultiPoint']['actualPts']
         return self._defaults['FetchMultiPoint']['return']
 
-    def niDMM_ConfigureTriggerSlope_side_effect(self, vi, polarity):
+    def niDMM_ConfigureTriggerSlope(self, vi, polarity):
         return self._defaults['ConfigureTriggerSlope']['return']
 
-    def niDMM_SendSoftwareTrigger_side_effect(self, vi):
+    def niDMM_SendSoftwareTrigger(self, vi):
         return self._defaults['SendSoftwareTrigger']['return']
 
-    def niDMM_GetApertureTimeInfo_side_effect(self, vi, aperture_time, aperture_time_units):
+    def niDMM_GetApertureTimeInfo(self, vi, aperture_time, aperture_time_units):
+        if self._defaults['GetApertureTimeInfo']['apertureTime'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetApertureTimeInfo", param='apertureTime')
         aperture_time.contents.value = self._defaults['GetApertureTimeInfo']['apertureTime']
+        if self._defaults['GetApertureTimeInfo']['apertureTimeUnits'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetApertureTimeInfo", param='apertureTimeUnits')
         aperture_time_units.contents.value = self._defaults['GetApertureTimeInfo']['apertureTimeUnits']
         return self._defaults['GetApertureTimeInfo']['return']
 
-    def niDMM_GetAutoRangeValue_side_effect(self, vi, auto_range_value):
+    def niDMM_GetAutoRangeValue(self, vi, auto_range_value):
+        if self._defaults['GetAutoRangeValue']['autoRangeValue'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetAutoRangeValue", param='autoRangeValue')
         auto_range_value.contents.value = self._defaults['GetAutoRangeValue']['autoRangeValue']
         return self._defaults['GetAutoRangeValue']['return']
 
-    def niDMM_ConfigureAutoZeroMode_side_effect(self, vi, auto_zero_mode):
+    def niDMM_ConfigureAutoZeroMode(self, vi, auto_zero_mode):
         return self._defaults['ConfigureAutoZeroMode']['return']
 
-    def niDMM_ConfigurePowerLineFrequency_side_effect(self, vi, frequency):
+    def niDMM_ConfigurePowerLineFrequency(self, vi, frequency):
         return self._defaults['ConfigurePowerLineFrequency']['return']
 
-    def niDMM_ConfigureMeasurementDigits_side_effect(self, vi, meas_function, range, resolution_digits):
+    def niDMM_ConfigureMeasurementDigits(self, vi, meas_function, range, resolution_digits):
         return self._defaults['ConfigureMeasurementDigits']['return']
 
-    def niDMM_ConfigureMeasurementAbsolute_side_effect(self, vi, meas_function, range, resolution_absolute):
+    def niDMM_ConfigureMeasurementAbsolute(self, vi, meas_function, range, resolution_absolute):
         return self._defaults['ConfigureMeasurementAbsolute']['return']
 
-    def niDMM_ConfigureMeasCompleteSlope_side_effect(self, vi, polarity):
+    def niDMM_ConfigureMeasCompleteSlope(self, vi, polarity):
         return self._defaults['ConfigureMeasCompleteSlope']['return']
 
-    def niDMM_ConfigureSampleTriggerSlope_side_effect(self, vi, polarity):
+    def niDMM_ConfigureSampleTriggerSlope(self, vi, polarity):
         return self._defaults['ConfigureSampleTriggerSlope']['return']
 
-    def niDMM_ReadStatus_side_effect(self, vi, acq_backlog, acq_done):
+    def niDMM_ReadStatus(self, vi, acq_backlog, acq_done):
+        if self._defaults['ReadStatus']['acqBacklog'] is None:
+            raise IncorrectMockFunctionCall("niDMM_ReadStatus", param='acqBacklog')
         acq_backlog.contents.value = self._defaults['ReadStatus']['acqBacklog']
+        if self._defaults['ReadStatus']['acqDone'] is None:
+            raise IncorrectMockFunctionCall("niDMM_ReadStatus", param='acqDone')
         acq_done.contents.value = self._defaults['ReadStatus']['acqDone']
         return self._defaults['ReadStatus']['return']
 
-    def niDMM_ConfigureADCCalibration_side_effect(self, vi, adc_gain_comp):
+    def niDMM_ConfigureADCCalibration(self, vi, adc_gain_comp):
         return self._defaults['ConfigureADCCalibration']['return']
 
-    def niDMM_ConfigureOffsetCompOhms_side_effect(self, vi, offset_comp_ohms):
+    def niDMM_ConfigureOffsetCompOhms(self, vi, offset_comp_ohms):
         return self._defaults['ConfigureOffsetCompOhms']['return']
 
-    def niDMM_ConfigureCurrentSource_side_effect(self, vi, diode_current_src):
+    def niDMM_ConfigureCurrentSource(self, vi, diode_current_src):
         return self._defaults['ConfigureCurrentSource']['return']
 
-    def niDMM_ConfigureCableCompType_side_effect(self, vi, type_of_compensation):
+    def niDMM_ConfigureCableCompType(self, vi, type_of_compensation):
         return self._defaults['ConfigureCableCompType']['return']
 
-    def niDMM_PerformOpenCableComp_side_effect(self, vi, conductance, susceptance):
+    def niDMM_PerformOpenCableComp(self, vi, conductance, susceptance):
+        if self._defaults['PerformOpenCableComp']['conductance'] is None:
+            raise IncorrectMockFunctionCall("niDMM_PerformOpenCableComp", param='conductance')
         conductance.contents.value = self._defaults['PerformOpenCableComp']['conductance']
+        if self._defaults['PerformOpenCableComp']['susceptance'] is None:
+            raise IncorrectMockFunctionCall("niDMM_PerformOpenCableComp", param='susceptance')
         susceptance.contents.value = self._defaults['PerformOpenCableComp']['susceptance']
         return self._defaults['PerformOpenCableComp']['return']
 
-    def niDMM_PerformShortCableComp_side_effect(self, vi, resistance, reactance):
+    def niDMM_PerformShortCableComp(self, vi, resistance, reactance):
+        if self._defaults['PerformShortCableComp']['resistance'] is None:
+            raise IncorrectMockFunctionCall("niDMM_PerformShortCableComp", param='resistance')
         resistance.contents.value = self._defaults['PerformShortCableComp']['resistance']
+        if self._defaults['PerformShortCableComp']['reactance'] is None:
+            raise IncorrectMockFunctionCall("niDMM_PerformShortCableComp", param='reactance')
         reactance.contents.value = self._defaults['PerformShortCableComp']['reactance']
         return self._defaults['PerformShortCableComp']['return']
 
-    def niDMM_ConfigureOpenCableCompValues_side_effect(self, vi, conductance, susceptance):
+    def niDMM_ConfigureOpenCableCompValues(self, vi, conductance, susceptance):
         return self._defaults['ConfigureOpenCableCompValues']['return']
 
-    def niDMM_ConfigureShortCableCompValues_side_effect(self, vi, resistance, reactance):
+    def niDMM_ConfigureShortCableCompValues(self, vi, resistance, reactance):
         return self._defaults['ConfigureShortCableCompValues']['return']
 
-    def niDMM_LockSession_side_effect(self, vi, caller_has_lock):
+    def niDMM_LockSession(self, vi, caller_has_lock):
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise IncorrectMockFunctionCall("niDMM_LockSession", param='callerHasLock')
         caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
         return self._defaults['LockSession']['return']
 
-    def niDMM_UnlockSession_side_effect(self, vi, caller_has_lock):
+    def niDMM_UnlockSession(self, vi, caller_has_lock):
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise IncorrectMockFunctionCall("niDMM_UnlockSession", param='callerHasLock')
         caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
         return self._defaults['UnlockSession']['return']
 
-    def niDMM_ConfigureWaveformAcquisition_side_effect(self, vi, function, range, rate, waveform_points):
+    def niDMM_ConfigureWaveformAcquisition(self, vi, function, range, rate, waveform_points):
         return self._defaults['ConfigureWaveformAcquisition']['return']
 
-    def niDMM_ConfigureWaveformCoupling_side_effect(self, vi, coupling):
+    def niDMM_ConfigureWaveformCoupling(self, vi, coupling):
         return self._defaults['ConfigureWaveformCoupling']['return']
 
-    def niDMM_FetchWaveform_side_effect(self, vi, max_time, array_size, waveform_array, actual_points):
+    def niDMM_FetchWaveform(self, vi, max_time, array_size, waveform_array, actual_points):
+        if self._defaults['FetchWaveform']['actualPoints'] is None:
+            raise IncorrectMockFunctionCall("niDMM_FetchWaveform", param='actualPoints')
         actual_points.contents.value = self._defaults['FetchWaveform']['actualPoints']
         return self._defaults['FetchWaveform']['return']
 
-    def niDMM_ReadWaveform_side_effect(self, vi, max_time, array_size, waveform_array, actual_points):
+    def niDMM_ReadWaveform(self, vi, max_time, array_size, waveform_array, actual_points):
+        if self._defaults['ReadWaveform']['actualPoints'] is None:
+            raise IncorrectMockFunctionCall("niDMM_ReadWaveform", param='actualPoints')
         actual_points.contents.value = self._defaults['ReadWaveform']['actualPoints']
         return self._defaults['ReadWaveform']['return']
 
-    def niDMM_GetAttributeViInt32_side_effect(self, vi, channel_name, attribute_id, value):
+    def niDMM_GetAttributeViInt32(self, vi, channel_name, attribute_id, value):
+        if self._defaults['GetAttributeViInt32']['value'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetAttributeViInt32", param='value')
         value.contents.value = self._defaults['GetAttributeViInt32']['value']
         return self._defaults['GetAttributeViInt32']['return']
 
-    def niDMM_SetAttributeViInt32_side_effect(self, vi, channel_name, attribute_id, value):
+    def niDMM_SetAttributeViInt32(self, vi, channel_name, attribute_id, value):
         return self._defaults['SetAttributeViInt32']['return']
 
-    def niDMM_GetAttributeViReal64_side_effect(self, vi, channel_name, attribute_id, value):
+    def niDMM_GetAttributeViReal64(self, vi, channel_name, attribute_id, value):
+        if self._defaults['GetAttributeViReal64']['value'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetAttributeViReal64", param='value')
         value.contents.value = self._defaults['GetAttributeViReal64']['value']
         return self._defaults['GetAttributeViReal64']['return']
 
-    def niDMM_SetAttributeViReal64_side_effect(self, vi, channel_name, attribute_id, value):
+    def niDMM_SetAttributeViReal64(self, vi, channel_name, attribute_id, value):
         return self._defaults['SetAttributeViReal64']['return']
 
-    def niDMM_GetAttributeViString_side_effect(self, vi, channel_name, attribute_id, buf_size, value):
+    def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):
+        if self._defaults['GetAttributeViString']['value'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetAttributeViString", param='value')
+        value.contents.value = self._defaults['GetAttributeViString']['value']
         return self._defaults['GetAttributeViString']['return']
 
-    def niDMM_SetAttributeViString_side_effect(self, vi, channel_name, attribute_id, value):
+    def niDMM_SetAttributeViString(self, vi, channel_name, attribute_id, value):
         return self._defaults['SetAttributeViString']['return']
 
-    def niDMM_GetAttributeViSession_side_effect(self, vi, channel_name, attribute_id, value):
+    def niDMM_GetAttributeViSession(self, vi, channel_name, attribute_id, value):
+        if self._defaults['GetAttributeViSession']['value'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetAttributeViSession", param='value')
         value.contents.value = self._defaults['GetAttributeViSession']['value']
         return self._defaults['GetAttributeViSession']['return']
 
-    def niDMM_SetAttributeViSession_side_effect(self, vi, channel_name, attribute_id, value):
+    def niDMM_SetAttributeViSession(self, vi, channel_name, attribute_id, value):
         return self._defaults['SetAttributeViSession']['return']
 
-    def niDMM_GetAttributeViBoolean_side_effect(self, vi, channel_name, attribute_id, value):
+    def niDMM_GetAttributeViBoolean(self, vi, channel_name, attribute_id, value):
+        if self._defaults['GetAttributeViBoolean']['value'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetAttributeViBoolean", param='value')
         value.contents.value = self._defaults['GetAttributeViBoolean']['value']
         return self._defaults['GetAttributeViBoolean']['return']
 
-    def niDMM_SetAttributeViBoolean_side_effect(self, vi, channel_name, attribute_id, value):
+    def niDMM_SetAttributeViBoolean(self, vi, channel_name, attribute_id, value):
         return self._defaults['SetAttributeViBoolean']['return']
 
-    def niDMM_GetNextCoercionRecord_side_effect(self, vi, buffer_size, record):
+    def niDMM_GetNextCoercionRecord(self, vi, buffer_size, record):
         return self._defaults['GetNextCoercionRecord']['return']
 
-    def niDMM_GetNextInterchangeWarning_side_effect(self, vi, buffer_size, warn_string):
+    def niDMM_GetNextInterchangeWarning(self, vi, buffer_size, warn_string):
+        if self._defaults['GetNextInterchangeWarning']['warnString'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetNextInterchangeWarning", param='warnString')
+        warn_string.contents.value = self._defaults['GetNextInterchangeWarning']['warnString']
         return self._defaults['GetNextInterchangeWarning']['return']
 
-    def niDMM_ResetInterchangeCheck_side_effect(self, vi):
+    def niDMM_ResetInterchangeCheck(self, vi):
         return self._defaults['ResetInterchangeCheck']['return']
 
-    def niDMM_ClearInterchangeWarnings_side_effect(self, vi):
+    def niDMM_ClearInterchangeWarnings(self, vi):
         return self._defaults['ClearInterchangeWarnings']['return']
 
-    def niDMM_GetChannelName_side_effect(self, vi, index, buffer_size, name):
+    def niDMM_GetChannelName(self, vi, index, buffer_size, name):
         return self._defaults['GetChannelName']['return']
 
-    def niDMM_GetCalCount_side_effect(self, vi, cal_type, count):
+    def niDMM_GetSelfCalSupported(self, vi, self_cal_supported):
+        if self._defaults['GetSelfCalSupported']['selfCalSupported'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetSelfCalSupported", param='selfCalSupported')
+        self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
+        return self._defaults['GetSelfCalSupported']['return']
+
+    def niDMM_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):
+        if self._defaults['GetCalDateAndTime']['month'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetCalDateAndTime", param='month')
+        month.contents.value = self._defaults['GetCalDateAndTime']['month']
+        if self._defaults['GetCalDateAndTime']['day'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetCalDateAndTime", param='day')
+        day.contents.value = self._defaults['GetCalDateAndTime']['day']
+        if self._defaults['GetCalDateAndTime']['year'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetCalDateAndTime", param='year')
+        year.contents.value = self._defaults['GetCalDateAndTime']['year']
+        if self._defaults['GetCalDateAndTime']['hour'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetCalDateAndTime", param='hour')
+        hour.contents.value = self._defaults['GetCalDateAndTime']['hour']
+        if self._defaults['GetCalDateAndTime']['minute'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetCalDateAndTime", param='minute')
+        minute.contents.value = self._defaults['GetCalDateAndTime']['minute']
+        return self._defaults['GetCalDateAndTime']['return']
+
+    def niDMM_GetCalCount(self, vi, cal_type, count):
+        if self._defaults['GetCalCount']['count'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetCalCount", param='count')
         count.contents.value = self._defaults['GetCalCount']['count']
         return self._defaults['GetCalCount']['return']
 
-    def niDMM_GetLastCalTemp_side_effect(self, vi, cal_type, temperature):
+    def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):
+        if self._defaults['GetLastCalTemp']['temperature'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetLastCalTemp", param='temperature')
         temperature.contents.value = self._defaults['GetLastCalTemp']['temperature']
         return self._defaults['GetLastCalTemp']['return']
 
-    def niDMM_GetDevTemp_side_effect(self, vi, reserved, temperature):
+    def niDMM_GetDevTemp(self, vi, reserved, temperature):
+        if self._defaults['GetDevTemp']['temperature'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetDevTemp", param='temperature')
         temperature.contents.value = self._defaults['GetDevTemp']['temperature']
         return self._defaults['GetDevTemp']['return']
 
-    def niDMM_ConfigureTransducerType_side_effect(self, vi, transducer_type):
+    def niDMM_ConfigureTransducerType(self, vi, transducer_type):
         return self._defaults['ConfigureTransducerType']['return']
 
-    def niDMM_ConfigureThermocouple_side_effect(self, vi, thermocouple_type, ref_junction_type):
+    def niDMM_ConfigureThermocouple(self, vi, thermocouple_type, ref_junction_type):
         return self._defaults['ConfigureThermocouple']['return']
 
-    def niDMM_ConfigureFixedRefJunction_side_effect(self, vi, fixed_ref_junction):
+    def niDMM_ConfigureFixedRefJunction(self, vi, fixed_ref_junction):
         return self._defaults['ConfigureFixedRefJunction']['return']
 
-    def niDMM_ConfigureRTDType_side_effect(self, vi, rtd_type, resistance):
+    def niDMM_ConfigureRTDType(self, vi, rtd_type, resistance):
         return self._defaults['ConfigureRTDType']['return']
 
-    def niDMM_ConfigureRTDCustom_side_effect(self, vi, a, b, c):
+    def niDMM_ConfigureRTDCustom(self, vi, a, b, c):
         return self._defaults['ConfigureRTDCustom']['return']
 
-    def niDMM_ConfigureThermistorType_side_effect(self, vi, thermistor_type):
+    def niDMM_ConfigureThermistorType(self, vi, thermistor_type):
         return self._defaults['ConfigureThermistorType']['return']
 
-    def niDMM_ConfigureThermistorCustom_side_effect(self, vi, a, b, c):
+    def niDMM_ConfigureThermistorCustom(self, vi, a, b, c):
         return self._defaults['ConfigureThermistorCustom']['return']
+
+
+    def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):
+        if self._defaults['GetAttributeViString']['value'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetAttributeViString", param='value')
+        if buf_size == 0:
+            return len(self._defaults['GetAttributeViString']['value'])
+        t = nidmm.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['value'].encode('ascii'))
+        value.contents.value = ctypes.cast(t, nidmm.ctypes_types.ViString_ctype).value
+        return self._defaults['GetAttributeViString']['return']
+
+    def niDMM_GetError(self, vi, error_code, buffer_size, description):
+        if self._defaults['GetError']['errorCode'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetError", param='errorCode')
+        error_code.contents.value = self._defaults['GetError']['errorCode']
+        if self._defaults['GetError']['description'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetError", param='description')
+        if buffer_size == 0:
+            return len(self._defaults['GetError'][description])
+        t = nidmm.ctypes_types.ViString_ctype(self._defaults['GetError'][description].encode('ascii'))
+        value.contents.value = ctypes.cast(t, nidmm.ctypes_types.ViString_ctype).value
+        return self._defaults['GetError']['return']
 
 
 # Helper function to setup Mock object with default side affects and return values
@@ -601,6 +737,10 @@ def set_side_effects_and_return_values(mock_library):
     mock_library.niDMM_ClearInterchangeWarnings.return_value = nidmm.python_types.ViStatus(0)
     mock_library.niDMM_GetChannelName.side_effect = IncorrectMockFunctionCall("niDMM_GetChannelName")
     mock_library.niDMM_GetChannelName.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetSelfCalSupported.side_effect = IncorrectMockFunctionCall("niDMM_GetSelfCalSupported")
+    mock_library.niDMM_GetSelfCalSupported.return_value = nidmm.python_types.ViStatus(0)
+    mock_library.niDMM_GetCalDateAndTime.side_effect = IncorrectMockFunctionCall("niDMM_GetCalDateAndTime")
+    mock_library.niDMM_GetCalDateAndTime.return_value = nidmm.python_types.ViStatus(0)
     mock_library.niDMM_GetCalCount.side_effect = IncorrectMockFunctionCall("niDMM_GetCalCount")
     mock_library.niDMM_GetCalCount.return_value = nidmm.python_types.ViStatus(0)
     mock_library.niDMM_GetLastCalTemp.side_effect = IncorrectMockFunctionCall("niDMM_GetLastCalTemp")

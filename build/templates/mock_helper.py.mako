@@ -63,6 +63,29 @@ output_params = helper.extract_output_parameters(params)
 
 % endfor
 
+    # TODO(texasaggie97) Remove hand coded functions once metadata contains enough information to code generate these
+    def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):
+        if self._defaults['GetAttributeViString']['value'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetAttributeViString", param='value')
+        if buf_size == 0:
+            return len(self._defaults['GetAttributeViString']['value'])
+        t = ${module_name}.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['value'].encode('ascii'))
+        value.contents.value = ctypes.cast(t, ${module_name}.ctypes_types.ViString_ctype).value
+        return self._defaults['GetAttributeViString']['return']
+
+    def niDMM_GetError(self, vi, error_code, buffer_size, description):
+        if self._defaults['GetError']['errorCode'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetError", param='errorCode')
+        error_code.contents.value = self._defaults['GetError']['errorCode']
+        if self._defaults['GetError']['description'] is None:
+            raise IncorrectMockFunctionCall("niDMM_GetError", param='description')
+        if buffer_size == 0:
+            return len(self._defaults['GetError'][description])
+        t = ${module_name}.ctypes_types.ViString_ctype(self._defaults['GetError'][description].encode('ascii'))
+        value.contents.value = ctypes.cast(t, ${module_name}.ctypes_types.ViString_ctype).value
+        return self._defaults['GetError']['return']
+
+
 # Helper function to setup Mock object with default side affects and return values
 def set_side_effects_and_return_values(mock_library):
 % for f in helper.extract_codegen_functions(functions):
