@@ -22,7 +22,7 @@ from unittest.mock import DEFAULT
 import ${module_name}.ctypes_types
 import ${module_name}.python_types
 
-class IncorrectMockFunctionCall(Exception):
+class MockFunctionCallError(Exception):
     def __init__(self, function, param = None):
         self.function = function
         self.param = param
@@ -56,7 +56,7 @@ output_params = helper.extract_output_parameters(params)
     def ${c_function_prefix}${f['name']}(${helper.get_method_parameters_snippet(params)}):
 %    for p in output_params:
         if self._defaults['${f['name']}']['${p['name']}'] is None:
-            raise IncorrectMockFunctionCall("${c_function_prefix}${f['name']}", param='${p['name']}')
+            raise MockFunctionCallError("${c_function_prefix}${f['name']}", param='${p['name']}')
         ${p['python_name']}.contents.value = self._defaults['${f['name']}']['${p['name']}']
 %    endfor
         return self._defaults['${f['name']}']['return']
@@ -66,7 +66,7 @@ output_params = helper.extract_output_parameters(params)
     # TODO(texasaggie97) Remove hand coded functions once metadata contains enough information to code generate these
     def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):
         if self._defaults['GetAttributeViString']['value'] is None:
-            raise IncorrectMockFunctionCall("niDMM_GetAttributeViString", param='value')
+            raise MockFunctionCallError("niDMM_GetAttributeViString", param='value')
         if buf_size == 0:
             return len(self._defaults['GetAttributeViString']['value'])
         t = ${module_name}.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['value'].encode('ascii'))
@@ -75,10 +75,10 @@ output_params = helper.extract_output_parameters(params)
 
     def niDMM_GetError(self, vi, error_code, buffer_size, description):
         if self._defaults['GetError']['errorCode'] is None:
-            raise IncorrectMockFunctionCall("niDMM_GetError", param='errorCode')
+            raise MockFunctionCallError("niDMM_GetError", param='errorCode')
         error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['description'] is None:
-            raise IncorrectMockFunctionCall("niDMM_GetError", param='description')
+            raise MockFunctionCallError("niDMM_GetError", param='description')
         if buffer_size == 0:
             return len(self._defaults['GetError'][description])
         t = ${module_name}.ctypes_types.ViString_ctype(self._defaults['GetError'][description].encode('ascii'))
@@ -86,11 +86,11 @@ output_params = helper.extract_output_parameters(params)
         return self._defaults['GetError']['return']
 
 
-# Helper function to setup Mock object with default side affects and return values
-def set_side_effects_and_return_values(mock_library):
+    # Helper function to setup Mock object with default side effects and return values
+    def set_side_effects_and_return_values(self, mock_library):
 % for f in helper.extract_codegen_functions(functions):
-    mock_library.${c_function_prefix}${f['name']}.side_effect = IncorrectMockFunctionCall("${c_function_prefix}${f['name']}")
-    mock_library.${c_function_prefix}${f['name']}.return_value = ${module_name}.python_types.${f['returns_python']}(0)
+        mock_library.${c_function_prefix}${f['name']}.side_effect = MockFunctionCallError("${c_function_prefix}${f['name']}")
+        mock_library.${c_function_prefix}${f['name']}.return_value = ${module_name}.python_types.${f['returns_python']}(0)
 % endfor
 
 

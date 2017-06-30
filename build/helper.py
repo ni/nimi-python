@@ -130,18 +130,17 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
     '''Returns a string suitable to use as the parameters to the library object, i.e. "self, mode, range, digits_of_resolution"'''
     snippets = []
     for x in parameters_list:
-        snippet = ''
         if x['direction'] is 'in':
             if x['name'] is sessionName:
-                snippet += 'self.' + sessionName
+                snippet = 'self.' + sessionName
             else:
-                snippet += x['python_name']
+                snippet = x['python_name']
                 snippet += '.value' if x['enum'] is not None else ''
                 if x['type'] is 'ViString' or x['type'] is 'ViConstString' or x['type'] is 'ViRsrc':
                     snippet += '.encode(\'ascii\')'
         else:
             assert x['direction'] is 'out'
-            snippet += 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
+            snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
         snippets.append(snippet)
     return ', '.join(snippets)
 

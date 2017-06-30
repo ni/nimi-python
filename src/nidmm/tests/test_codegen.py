@@ -24,7 +24,7 @@ class TestSession(object):
         self.patched_errors._is_error.return_value = 0
 
         self.side_effects_helper = mock_helper.side_effects_helper()
-        mock_helper.set_side_effects_and_return_values(self.patched_ctypes_library)
+        self.side_effects_helper.set_side_effects_and_return_values(self.patched_ctypes_library)
         self.patched_ctypes_library.niDMM_InitWithOptions.side_effect = self.side_effects_helper.niDMM_InitWithOptions
         self.disallow_close = self.patched_ctypes_library.niDMM_close.side_effect
         self.patched_ctypes_library.niDMM_close.side_effect = self.side_effects_helper.niDMM_close
