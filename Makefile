@@ -1,5 +1,6 @@
 
-DRIVERS := nidmm nimodinst
+ALL_DRIVERS := nidmm nimodinst
+DRIVERS ?= $(ALL_DRIVERS)
 
 ROOT_DIR := $(abspath .)
 BUILD_DIR := $(ROOT_DIR)/build
@@ -7,11 +8,7 @@ export ROOT_DIR
 export BUILD_DIR
 
 POSSIBLE_TARGETS := module unit_tests run_unit_tests
-TARGETS := $(MAKECMDGOALS)
-ifeq (,$(TARGETS))
-TARGETS := $(POSSIBLE_TARGETS)
-endif
-export TARGETS
+export POSSIBLE_TARGETS
 
 all: $(DRIVERS)
 

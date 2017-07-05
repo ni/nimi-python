@@ -22,6 +22,10 @@ ifeq (,$(PRINT))
 _hide_cmds := @
 endif
 
+ifeq (,$(MAKECMDGOALS))
+TARGETS := $(POSSIBLE_TARGETS)
+endif
+
 .PHONY:
 all: $(TARGETS)
 
