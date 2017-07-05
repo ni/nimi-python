@@ -27,6 +27,13 @@ $(foreach d,$(ALL_DRIVERS),\
    $(foreach t,$(POSSIBLE_TARGETS),\
       $(eval $(call per_driver_per_target,$(d),$(t)))))
 
+define per_target
+$1:
+	$(foreach d,$(DRIVERS),make --no-print-directory -f src/$(d)/$(d).mak DRIVER=$(d) $1 &&)  echo
+endef
+
+$(foreach t,$(POSSIBLE_TARGETS),$(eval $(call per_target,$(t))))
+
 clean:
 	@echo 'Cleaning...'
 	@rm -Rf bin
@@ -36,7 +43,7 @@ clean:
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
 DRIVER_ALL_TARGETS_HELP := echo Drivers: $(addprefix  && echo - ,$(ALL_DRIVERS))
-TARGETS_HELP := echo Targets \(not implemented yet\): $(addprefix  && echo - ,$(POSSIBLE_TARGETS))
+TARGETS_HELP := echo Targets: $(addprefix  && echo - ,$(POSSIBLE_TARGETS))
 PER_DRIVER_PER_TARGET := \
    $(foreach d,$(ALL_DRIVERS),\
       $(foreach t,$(POSSIBLE_TARGETS),\
@@ -65,3 +72,5 @@ per_driver_variable_print = make --no-print-directory -f src/$1/$1.mak DRIVER=$1
 .PHONY:
 printvar:
 	@$(foreach d,$(DRIVERS),$(call per_driver_variable_print,$(d),$(VAR)) && ) echo
+
+
