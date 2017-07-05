@@ -27,7 +27,9 @@ endef
 $(foreach d,$(DRIVERS),$(eval $(call per_driver_all,$(d))))
 
 clean:
-	rm -Rf bin
+	@echo 'Cleaning...'
+	@rm -Rf bin
+	@find -name __pycache__ -print -exec rm -Rf {} \;
 
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
