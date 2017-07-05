@@ -34,6 +34,22 @@ unit_tests: module $(UNIT_TEST_FILES)
 run_unit_tests: unit_tests
 	cd $(OUTPUT_DIR) && python3 -m pytest -s
 
+$(OUTPUT_DIR)/README.rst: $(ROOT_DIR)/README.rst
+	@echo Creating $(notdir $@)
+	$(_hide_cmds)cp $< $@
+
+$(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako MKDIR
+	@echo Creating $(notdir $@)
+	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR))
+
+sdist: unit_tests $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst
+	@echo Creating Source distribution
+	$(_hide_cmds)cd $(OUTPUT_DIR) && python3 setup.py sdist
+
+wheel: unit_tests $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst
+	@echo Creating Source distribution
+	$(_hide_cmds)cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal
+
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
 

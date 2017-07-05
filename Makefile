@@ -7,7 +7,7 @@ BUILD_DIR := $(ROOT_DIR)/build
 export ROOT_DIR
 export BUILD_DIR
 
-POSSIBLE_TARGETS := module unit_tests run_unit_tests
+POSSIBLE_TARGETS := module unit_tests run_unit_tests wheel sdist
 export POSSIBLE_TARGETS
 
 all: $(DRIVERS)
@@ -43,12 +43,13 @@ PER_DRIVER_PER_TARGET := \
          $(d)_$(t)))
 DRIVER_TARGETS_HELP := echo Per driver, per target: $(addprefix  && echo - ,$(PER_DRIVER_PER_TARGET))
 help:
-	@echo 'Supported commands:'
+	@echo 'Supported targets:'
 	@echo '* help'
 	@echo '* clean'
 	@echo '* print-<VARIABLE> (only top level variables)'
 	@echo '* printvar VAR=<VARIABLE> (per driver print variable)'
 	@echo ''
+	@echo 'Any/multiple target(s) listed below:'
 	@$(DRIVER_ALL_TARGETS_HELP)
 	@echo ''
 	@$(TARGETS_HELP)
