@@ -34,4 +34,6 @@ unit_tests: module $(UNIT_TEST_FILES)
 run_unit_tests: unit_tests
 	cd $(OUTPUT_DIR) && python3 -m pytest -s
 
+# From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
+print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
 

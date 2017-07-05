@@ -47,6 +47,7 @@ help:
 	@echo '* help'
 	@echo '* clean'
 	@echo '* print-<VARIABLE> (only top level variables)'
+	@echo '* printvar VAR=<VARIABLE> (per driver print variable)'
 	@echo ''
 	@$(DRIVER_ALL_TARGETS_HELP)
 	@echo ''
@@ -58,4 +59,8 @@ help:
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $* is $(flavor $*) variable set to [$($*)]) @true
 
-
+# Per driver variable printing
+per_driver_variable_print = make --no-print-directory -f src/$1/$1.mak DRIVER=$1 print-$2
+.PHONY:
+printvar:
+	@$(foreach d,$(DRIVERS),$(call per_driver_variable_print,$(d),$(VAR)) && ) echo
