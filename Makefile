@@ -29,3 +29,16 @@ $(foreach d,$(DRIVERS),$(eval $(call per_driver_all,$(d))))
 clean:
 	rm -Rf bin
 
+
+# From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
+DRIVER_TARGETS_HELP := echo Drivers: $(addprefix  && echo - ,$(ALL_DRIVERS))
+help:
+	@echo 'Supported commands:'
+	@echo '* help'
+	@echo '* clean'
+	@echo '* print-<VARIABLE>'
+	@echo ''
+	@$(DRIVER_TARGETS_HELP)
+
+# From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
+print-%: ; $(info $* is $(flavor $*) variable set to [$($*)]) @true
