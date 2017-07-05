@@ -7,7 +7,6 @@ import pprint
 import sys
 
 # Part of this package
-import build_execution
 import utilities
 import generate_template
 
@@ -40,14 +39,10 @@ build_group.add_argument(
     help='Absolute or relative path to metadata package. Multiple allowed. ' +
          'Will build in order added to command line.'
     )
-build_group.add_argument(
-    "actions", metavar = "ACTIONS", type=str,
-    nargs="*", help="Actions to run"
-    )
 utility_group = parser.add_argument_group("Utility")
 utility_group.add_argument(
     "--template",
-    action="store", dest="template", default=None, required=False,
+    action="store", dest="template", default=None, required=True,
     help="Mako template to use. Can only be used if no actions.")
 utility_group.add_argument(
     "--dest-dir",
@@ -71,26 +66,20 @@ logging.info(pp.pformat(args))
 for m in args.metadata:
     if not os.path.isabs(m):
         m = os.path.normpath(os.path.join(os.getcwd(), m))
-    metadata = build_execution.load_build(m)
+    metadata = utilities.load_build(m)
 
-    # If we have actions from the command line, that is all we will do
-    if len(args.actions) > 0:
-        build_execution.exec_build(metadata, args.actions)
-    else:
-        # Otherwise we look at other parameters
-        if args.template is not None:
-            if args.dest_dir is None:
-                logging.error('--dest-dir is required when using --template')
-                sys.exit(1)
+    if args.dest_dir is None:
+        logging.error('--dest-dir is required when using --template')
+        sys.exit(1)
 
-            template_params = {}
-            template_params['metadata'] = metadata
+    template_params = {}
+    template_params['metadata'] = metadata
 
-            logging.debug(pp.pformat(template_params))
+    logging.debug(pp.pformat(template_params))
 
-            file_name = args.dest_file
-            if file_name is None:
-                file_name = os.path.basename(args.template).replace('.mako', '')
-            dest_file = os.path.join(args.dest_dir, file_name)
-            generate_template.generate_template(args.template, template_params, dest_file)
+    file_name = args.dest_file
+    if file_name is None:
+        file_name = os.path.basename(args.template).replace('.mako', '')
+    dest_file = os.path.join(args.dest_dir, file_name)
+    generate_template.generate_template(args.template, template_params, dest_file)
 

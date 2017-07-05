@@ -5,7 +5,6 @@ from mako.exceptions import RichTraceback
 import logging
 import argparse
 import os
-import pkg_resources
 import pprint
 import sys
 
@@ -13,13 +12,7 @@ pp = pprint.PrettyPrinter(indent=3)
 
 def generate_template(template_name, template_params, dest_file, in_zip_file=False):
     try:
-        # if we are in a zip file, we need to get the mako template as a resource string
-        #  from the contents of the zip file
-        if in_zip_file and not os.path.isfile(template_name):
-            tmpl = pkg_resources.resource_string(__name__, template_name)
-            template = Template(tmpl)
-        else:
-            template = Template(filename=template_name)
+        template = Template(filename=template_name)
         rendered_template = template.render(template_parameters=template_params)
 
     except:
