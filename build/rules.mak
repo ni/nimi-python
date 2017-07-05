@@ -5,13 +5,16 @@ MODULE_FILES := \
 
 overall_all: unit_test
 
-
 MKDIR:
 	mkdir -p $(MKDIRECTORIES)
 
 $(MODULE_DIR)/%.py: %.py.mako MKDIR
 	@echo Creating $(notdir $@)
-	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(MODULE_DIR), $(METADATA_DIR))
+	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR))
+
+$(MODULE_DIR)/tests/%.py: %.py.mako MKDIR
+	@echo Creating $(notdir $@)
+	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR))
 
 $(MODULE_DIR)/%.py: %.py
 	@echo Creating $(notdir $@)
