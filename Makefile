@@ -29,7 +29,8 @@ $(foreach d,$(DRIVERS),$(eval $(call per_driver_all,$(d))))
 clean:
 	@echo 'Cleaning...'
 	@rm -Rf bin
-	@find -name __pycache__ -print -exec rm -Rf {} \;
+	@find . -path '*/__pycache__/*' -delete
+	@find . -name __pycache__ -delete
 
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
