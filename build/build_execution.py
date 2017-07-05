@@ -14,7 +14,6 @@ import generate_template
 import utilities
 
 pp = pprint.PrettyPrinter(indent=4)
-print(__file__)
 
 # OUTPUT_DIR & SOURCE_DIR are relative to the folder where invoked
 OUTPUT_DIR = os.path.join(os.getcwd(), "bin")
