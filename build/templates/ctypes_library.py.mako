@@ -4,7 +4,7 @@
 # ctypes is a library to manage calling into C/C++ DLLs. It will ensure the correct
 #  number and types of parameters are passed into the different entry points
 <%
-import build.helper as helper
+import helper
 
 attributes    = template_parameters['metadata'].attributes
 config        = template_parameters['metadata'].config
@@ -48,7 +48,7 @@ class ${module_name}_ctypes_library:
 %>\
     def ${func_name}(${param_names_method}):
         if self.${func_name}_cfunc is None:
-            self.${func_name}_cfunc = self._cdll.${func_name}
+            self.${func_name}_cfunc = self._library.${func_name}
             self.${func_name}_cfunc.argtypes = [${helper.get_library_call_parameter_types_snippet(params)}]
             self.${func_name}_cfunc.restype = ${module_name}.python_types.${f['returns_python']}
         return self.${func_name}_cfunc(${param_names_function})
