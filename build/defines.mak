@@ -14,7 +14,15 @@ MKDIRECTORIES += \
 
 VPATH = $(TEMPLATE_DIR)
 
-.PHONY
-all: 
+define GENERATE_SCRIPT
+python3 -m build --template $1 --dest-dir $2 --metadata $3 $(if $(PRINT),-v,)
+endef
+
+ifeq (,$(PRINT))
+_hide_cmds := @
+endif
+
+.PHONY:
+all: $(TARGETS)
 
 
