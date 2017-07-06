@@ -36,9 +36,9 @@ $(foreach t,$(POSSIBLE_TARGETS),$(eval $(call per_target,$(t))))
 
 clean:
 	@echo 'Cleaning...'
-	@rm -Rf bin
-	@find . -path '*/__pycache__/*' -delete
-	@find . -name __pycache__ -delete
+	-@rm -Rf bin
+	-@find . -path '*/__pycache__/*' -exec rm {} \;
+	-@find . -name __pycache__ -exec rmdir {} \;
 
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
