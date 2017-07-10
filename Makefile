@@ -41,6 +41,7 @@ clean:
 	-@rm -Rf $(ROOT_OUTPUT_DIR)
 	-@find . -path '*/__pycache__/*' -exec rm {} \;
 	-@find . -name __pycache__ -exec rmdir {} \;
+	-@find . -name '*.pyc' -exec rm {} \;
 
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
