@@ -1,4 +1,5 @@
 OUTPUT_DIR := $(ROOT_OUTPUT_DIR)/$(DRIVER)
+LOG_DIR := $(OUTPUT_DIR)/log
 MODULE_DIR := $(OUTPUT_DIR)/$(DRIVER)
 UNIT_TEST_DIR := $(MODULE_DIR)/tests
 TEMPLATE_DIR := $(ROOT_DIR)/build/templates
@@ -6,10 +7,15 @@ TEMPLATE_DIR := $(ROOT_DIR)/build/templates
 DRIVER_DIR := $(ROOT_DIR)/src/$(DRIVER)
 METADATA_DIR := $(DRIVER_DIR)/metadata
 
+VERSION ?= 0.1
+WHEEL := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION)-py2.py3-none-any.whl
+SDIST := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION).tar.gz
+
 MKDIRECTORIES += \
                  $(OUTPUT_DIR) \
                  $(MODULE_DIR) \
                  $(UNIT_TEST_DIR) \
+                 $(LOG_DIR) \
 
 VPATH = $(TEMPLATE_DIR)
 
@@ -21,9 +27,7 @@ ifeq (,$(PRINT))
 _hide_cmds := @
 endif
 
-ifeq (,$(MAKECMDGOALS))
-TARGETS := $(POSSIBLE_TARGETS)
-endif
+TARGETS := $(filter-out run_unit_tests,$(POSSIBLE_TARGETS))
 
 .PHONY:
 all: $(TARGETS)

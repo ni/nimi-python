@@ -5,16 +5,22 @@ export ROOT_OUTPUT_DIR
 POSSIBLE_TARGETS := module unit_tests run_unit_tests wheel sdist
 export POSSIBLE_TARGETS
 
+ifeq (,$(PRINT))
+_hide_cmds := @
+endif
+
 all: $(DRIVERS)
 
 define per_driver_per_target
 $1_$2:
-	make --no-print-directory -f src/$1/$1.mak DRIVER=$1 $2
+	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1 MKDIR
+	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1 $2
 endef
 
 define per_driver_all
 $1:
-	make --no-print-directory -f src/$1/$1.mak DRIVER=$1
+	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1 MKDIR
+	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1
 endef
 
 $(foreach d,$(ALL_DRIVERS),$(eval $(call per_driver_all,$(d))))
@@ -50,7 +56,7 @@ help:
 	@echo '* help'
 	@echo '* clean'
 	@echo '* print-<VARIABLE> (only top level variables)'
-	@echo '* printvar VAR-<VARIABLE> (per driver print variable)'
+	@echo '* printvar VAR=<VARIABLE> (per driver print variable)'
 	@echo ''
 	@echo 'Any/multiple target(s) listed below:'
 	@$(DRIVER_ALL_TARGETS_HELP)
@@ -67,6 +73,6 @@ print-%: ; $(info $* is $(flavor $*) variable set to [$($*)]) @true
 per_driver_variable_print = make --no-print-directory -f src/$1/$1.mak DRIVER=$1 print-$2
 .PHONY:
 printvar:
-	@$(foreach d,$(DRIVERS),$(call per_driver_variable_print,$(d),$(VAR)) && ) echo
+	$(_hide_cmds)$(foreach d,$(DRIVERS),$(call per_driver_variable_print,$(d),$(VAR)) && ) echo
 
 
