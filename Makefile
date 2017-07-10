@@ -12,6 +12,5 @@ export BUILD_HELPER_DIR
 BIN_DIR := $(ROOT_DIR)/bin
 export BIN_DIR
 
-
 include $(BUILD_HELPER_DIR)/Makefile
 

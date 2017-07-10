@@ -19,8 +19,9 @@ MKDIRECTORIES += \
 
 VPATH = $(TEMPLATE_DIR)
 
+PYTHON_CMD ?= python3
 define GENERATE_SCRIPT
-python3 -m build --template $1 --dest-dir $2 --metadata $3 $(if $(PRINT),-v,)
+$(PYTHON_CMD) -m build --template $1 --dest-dir $2 --metadata $3 $(if $(PRINT),-v,)
 endef
 
 ifeq (,$(PRINT))
