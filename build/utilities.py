@@ -44,4 +44,9 @@ def configure_logging(lvl = logging.WARNING, logfile = None):
     hndlr.setFormatter(formatter)
     root.addHandler(hndlr)
 
+def load_build(m):
+    metadata = path_import(m)
+
+    return metadata
+
 

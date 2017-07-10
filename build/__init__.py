@@ -19,10 +19,5 @@ def add_to_path(p):
 with add_to_path(pathname):
     from generate_template import generate_template
 
-    from type_map import type_map
-
-    from build_execution import load_build
-    from build_execution import exec_build
-
     from utilities import configure_logging
 

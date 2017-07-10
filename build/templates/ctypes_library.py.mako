@@ -4,7 +4,7 @@
 # ctypes is a library to manage calling into C/C++ DLLs. It will ensure the correct
 #  number and types of parameters are passed into the different entry points
 <%
-import helper
+import build.helper as helper
 
 attributes    = template_parameters['metadata'].attributes
 config        = template_parameters['metadata'].config
