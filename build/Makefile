@@ -1,7 +1,4 @@
 
-ROOT_OUTPUT_DIR := $(ROOT_DIR)/bin
-export ROOT_OUTPUT_DIR
-
 POSSIBLE_TARGETS := module unit_tests run_unit_tests wheel sdist
 export POSSIBLE_TARGETS
 
@@ -37,7 +34,7 @@ $(foreach t,$(POSSIBLE_TARGETS),$(eval $(call per_target,$(t))))
 
 clean:
 	@echo 'Cleaning...'
-	-@rm -Rf $(ROOT_OUTPUT_DIR)
+	-@rm -Rf $(BIN_DIR)
 	-@find . -path '*/__pycache__/*' -exec rm {} \;
 	-@find . -name __pycache__ -exec rmdir {} \;
 	-@find . -name '*.pyc' -exec rm {} \;

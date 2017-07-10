@@ -1,11 +1,11 @@
 
 
-include $(BUILD_DIR)/defines.mak
+include $(BUILD_HELPER_DIR)/defines.mak
 
 FILES_TO_GENERATE := $(DEFAULT_FILES_TO_GENERATE)
 
 FILES_TO_COPY := $(DEFAULT_FILES_TO_COPY)
 
 
-include $(BUILD_DIR)/rules.mak
+include $(BUILD_HELPER_DIR)/rules.mak
 
