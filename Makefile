@@ -4,8 +4,10 @@ DRIVERS ?= $(ALL_DRIVERS)
 
 ROOT_DIR := $(abspath .)
 BUILD_DIR := $(ROOT_DIR)/build
+ROOT_OUTPUT_DIR := $(ROOT_DIR)/bin
 export ROOT_DIR
 export BUILD_DIR
+export ROOT_OUTPUT_DIR
 
 POSSIBLE_TARGETS := module unit_tests run_unit_tests wheel sdist
 export POSSIBLE_TARGETS
@@ -36,7 +38,7 @@ $(foreach t,$(POSSIBLE_TARGETS),$(eval $(call per_target,$(t))))
 
 clean:
 	@echo 'Cleaning...'
-	-@rm -Rf bin
+	-@rm -Rf $(ROOT_OUTPUT_DIR)
 	-@find . -path '*/__pycache__/*' -exec rm {} \;
 	-@find . -name __pycache__ -exec rmdir {} \;
 
