@@ -66,3 +66,11 @@ $(WHEEL): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
 
+$(TOX_INI): $(ROOT_DIR)/tox.ini
+	@echo Copying tox.ini to $(TOX_INI)
+	$(_hide_cmds)cp $< $@
+
+test: $(TOX_INI)
+	@echo Running tox tests
+	$(_hide_cmds)cd $(OUTPUT_DIR) && tox
+

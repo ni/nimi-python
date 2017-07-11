@@ -22,7 +22,7 @@ endef
 
 $(foreach d,$(ALL_DRIVERS),$(eval $(call per_driver_all,$(d))))
 $(foreach d,$(ALL_DRIVERS),\
-   $(foreach t,$(POSSIBLE_TARGETS),\
+   $(foreach t,$(POSSIBLE_TARGETS) test,\
       $(eval $(call per_driver_per_target,$(d),$(t)))))
 
 define per_target
@@ -30,7 +30,9 @@ $1:
 	$(foreach d,$(DRIVERS),make --no-print-directory -f src/$(d)/$(d).mak DRIVER=$(d) $1 &&)  echo
 endef
 
-$(foreach t,$(POSSIBLE_TARGETS),$(eval $(call per_target,$(t))))
+# We add test when we create the $(POSSIBLE_TARGETS). This is because it shouldn't be
+# run when all us used, but we want it to work
+$(foreach t,$(POSSIBLE_TARGETS) test,$(eval $(call per_target,$(t))))
 
 clean:
 	@echo 'Cleaning...'
@@ -42,10 +44,10 @@ clean:
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
 DRIVER_ALL_TARGETS_HELP := echo Drivers: $(addprefix  && echo - ,$(ALL_DRIVERS))
-TARGETS_HELP := echo Targets: $(addprefix  && echo - ,$(POSSIBLE_TARGETS))
+TARGETS_HELP := echo Targets: $(addprefix  && echo - ,$(POSSIBLE_TARGETS) test)
 PER_DRIVER_PER_TARGET := \
    $(foreach d,$(ALL_DRIVERS),\
-      $(foreach t,$(POSSIBLE_TARGETS),\
+      $(foreach t,$(POSSIBLE_TARGETS) test,\
          $(d)_$(t)))
 DRIVER_TARGETS_HELP := echo Per driver, per target: $(addprefix  && echo - ,$(PER_DRIVER_PER_TARGET))
 help:
