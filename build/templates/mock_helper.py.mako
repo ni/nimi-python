@@ -17,7 +17,6 @@ functions = helper.add_all_metadata(functions)
 
 import ctypes
 import platform
-from unittest.mock import DEFAULT
 
 import ${module_name}.ctypes_types
 import ${module_name}.python_types
