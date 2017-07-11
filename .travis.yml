@@ -8,6 +8,7 @@ install:
   - pip install --upgrade setuptools
   - pip install -U tox-travis
   - pip install mako
+  - pip install mock
 
 script:
   - make clean PRINT=1
