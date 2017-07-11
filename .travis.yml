@@ -11,6 +11,5 @@ install:
   - pip install --upgrade mock
 
 script:
-  - make clean PRINT=1
-  - make PRINT=1
-  - make test PRINT=1
+  - make clean all test PRINT=1
+
