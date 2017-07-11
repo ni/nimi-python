@@ -6,9 +6,9 @@ python: 3.4
 
 install:
   - pip install --upgrade setuptools
-  - pip install -U tox-travis
-  - pip install mako
-  - pip install mock
+  - pip install --upgrade tox-travis
+  - pip install --upgrade mako
+  - pip install --upgrade mock
 
 script:
   - make clean PRINT=1
