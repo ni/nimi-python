@@ -4,3 +4,5 @@
 bin/
 
 .com.apple.timemachine.supported
+
+command_history.txt

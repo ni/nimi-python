@@ -4,6 +4,9 @@ MODULE_DIR := $(OUTPUT_DIR)/$(DRIVER)
 UNIT_TEST_DIR := $(MODULE_DIR)/tests
 TEMPLATE_DIR := $(BUILD_HELPER_DIR)/templates
 
+TOX_INI := $(OUTPUT_DIR)/tox.ini
+COMMAND_LOG := $(ROOT_DIR)/command_history.txt
+
 DRIVER_DIR := $(ROOT_DIR)/src/$(DRIVER)
 METADATA_DIR := $(DRIVER_DIR)/metadata
 
@@ -26,6 +29,9 @@ endef
 
 ifeq (,$(PRINT))
 _hide_cmds := @
+LOG_OUTPUT := >
+else
+LOG_OUTPUT := | tee
 endif
 
 TARGETS := $(filter-out run_unit_tests,$(POSSIBLE_TARGETS))
