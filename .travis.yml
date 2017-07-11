@@ -11,10 +11,10 @@ python:
   - "pypy3.5-5.8.0"
 
 install:
-  - pip install --upgrade setuptools
-  - pip install --upgrade mako
-  - pip install --upgrade mock
-  - pip install --upgrade tox
+  - pip3 install --upgrade setuptools
+  - pip3 install --upgrade mako
+  - pip3 install --upgrade mock
+  - pip3 install --upgrade tox
 
 script:
   - make clean all test PRINT=1
