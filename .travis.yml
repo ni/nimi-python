@@ -1,0 +1,15 @@
+sudo: false
+cache: pip
+language: python
+# For pypy versions, see https://github.com/pyenv/pyenv/tree/master/plugins/python-build/share/python-build
+python: 3.4
+
+install:
+  - pip install --upgrade setuptools
+  - pip install -U tox-travis
+  - pip install mako
+
+script:
+  - make clean
+  - make
+  - make test
