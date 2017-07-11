@@ -6,7 +6,6 @@ python: 3.4
 
 install:
   - pip install --upgrade setuptools
-  - pip install --upgrade tox-travis
   - pip install --upgrade mako
   - pip install --upgrade mock
 
