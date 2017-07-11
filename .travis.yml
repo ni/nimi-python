@@ -1,0 +1,15 @@
+sudo: false
+cache: pip
+language: python
+# For pypy versions, see https://github.com/pyenv/pyenv/tree/master/plugins/python-build/share/python-build
+python: 3.4
+
+install:
+  - pip install --upgrade setuptools
+  - pip install --upgrade mako
+  - pip install --upgrade mock
+  - pip install --upgrade tox
+
+script:
+  - make clean all test PRINT=1
+
