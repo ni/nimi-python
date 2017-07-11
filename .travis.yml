@@ -10,6 +10,6 @@ install:
   - pip install mako
 
 script:
-  - make clean
-  - make
-  - make test
+  - make clean PRINT=1
+  - make PRINT=1
+  - make test PRINT=1

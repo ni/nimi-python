@@ -27,6 +27,9 @@ endef
 
 ifeq (,$(PRINT))
 _hide_cmds := @
+LOG_OUTPUT := >
+else
+LOG_OUTPUT := | tee
 endif
 
 TARGETS := $(filter-out run_unit_tests,$(POSSIBLE_TARGETS))
