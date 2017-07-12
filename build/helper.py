@@ -149,11 +149,7 @@ def get_library_call_parameter_types_snippet(parameters_list):
     snippets = []
     for x in parameters_list:
         if x['direction'] is 'out':
-            if x['type'] is 'ViString' or x['type'] is 'ViRsrc' or x['type'] is 'ViConstString_ctype':
-                # These are defined as c_char_p which is already a pointer!
-                snippets.append(x['ctypes_type'])
-            else:
-                snippets.append("ctypes.POINTER(" + x['ctypes_type'] + ")")
+            snippets.append("ctypes.POINTER(" + x['ctypes_type'] + ")")
         else:
             assert x['direction'] is 'in'
             snippets.append(x['ctypes_type'])
