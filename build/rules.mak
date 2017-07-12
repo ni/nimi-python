@@ -18,11 +18,11 @@ $1:
 endef
 $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 
-$(MODULE_DIR)/%.py: %.py.mako
+$(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPT)
 	@echo Creating $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
-$(MODULE_DIR)/tests/%.py: %.py.mako
+$(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPT)
 	@echo Creating $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 

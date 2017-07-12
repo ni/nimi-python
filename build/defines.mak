@@ -11,6 +11,8 @@ COMMAND_LOG := $(ROOT_DIR)/command_history.txt
 DRIVER_DIR := $(ROOT_DIR)/src/$(DRIVER)
 METADATA_DIR := $(DRIVER_DIR)/metadata
 
+BUILD_HELPER_SCRIPT := $(BUILD_HELPER_DIR)/helper.py
+
 VERSION ?= 0.1
 WHEEL := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION)-py2.py3-none-any.whl
 SDIST := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION).tar.gz
