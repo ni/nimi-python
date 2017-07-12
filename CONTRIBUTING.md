@@ -21,9 +21,7 @@ To contribute to this project, it is recommended that you follow these steps:
 
 1. Fork the repository on GitHub.
 2. Build. Unit tests will execute as part of this.
-      -----------------------------
       To build on a Windows Machine
-      -----------------------------
       1. Install Python
       2. Install PyPI
       3. pip install Wheel
