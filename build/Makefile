@@ -31,7 +31,7 @@ $1:
 endef
 
 # We add test when we create the $(POSSIBLE_TARGETS). This is because it shouldn't be
-# run when all us used, but we want it to work
+# run when all is used, but we want it to work
 $(foreach t,$(POSSIBLE_TARGETS) test,$(eval $(call per_target,$(t))))
 
 clean:
