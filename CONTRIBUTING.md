@@ -22,16 +22,16 @@ To contribute to this project, it is recommended that you follow these steps:
 1. Fork the repository on GitHub.
 2. Build. Unit tests will execute as part of this.
    - To build on a Windows Machine
-      a. Install Python from https://www.python.org/downloads/ . 
-      b. Add Python install location to the Windows path.
-      c. Install PyPI, following the instructions on https://pip.pypa.io/en/latest/installing/ .
-      d. Install Wheel using PyPI.
-      e. Install Mock using PyPI.
-      f. Install Mako using PyPI.
-      g. Install mingw (msys-base) following the instructions on http://www.mingw.org/wiki/Getting_Started/ . 
-      h. Add <mingw Install Path>\msys\1.0\bin to Windows path.
-      i. Call "make clean".
-      j. Call "make".
+      1. Install Python from https://www.python.org/downloads/ . 
+      2. Add Python install location to the Windows path.
+      3. Install PyPI, following the instructions on https://pip.pypa.io/en/latest/installing/ .
+      4. Install Wheel using PyPI.
+      5. Install Mock using PyPI.
+      6. Install Mako using PyPI.
+      7. Install mingw (msys-base) following the instructions on http://www.mingw.org/wiki/Getting_Started/ . 
+      8. Add <mingw Install Path>\msys\1.0\bin to Windows path.
+      9. Call "make clean".
+      10. Call "make".
 3. Run system tests on your system (see Testing section). At this point,
    if any tests fail, do not begin development. Try to investigate these
    failures. If you're unable to do so, report an issue through our
