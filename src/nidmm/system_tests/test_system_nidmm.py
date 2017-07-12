@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import nidmm
+device_name = "dev1"
 
 def test_invalid_device_name():
     try:
@@ -13,13 +14,13 @@ def test_invalid_device_name():
 
 
 def test_take_simple_measurement_works():
-    with nidmm.Session("PXI1Slot2") as session:
+    with nidmm.Session(device_name) as session:
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
-        assert session.read(1000) < 0.01 # Assume nothing is connected to device, reads back around 0.
+        assert session.read(1000) < 0.21 # Assume nothing is connected to device, reads back around 0.
 
 
 def test_wrong_parameter_type():
-    with nidmm.Session("PXI1Slot2") as session:
+    with nidmm.Session(device_name) as session:
         try:
             # We are passing a number where an enum is expected.
             session.configure_measurement_digits(1, 10, 5.5)
@@ -30,7 +31,7 @@ def test_wrong_parameter_type():
 
 
 def test_warning():
-    with nidmm.Session("PXI1Slot2") as session:
+    with nidmm.Session(device_name) as session:
         session.configure_measurement_digits(nidmm.Function.RES_2_WIRE, 1e6, 3.5)
         try:
             print(session.read(1000)) # Assume nothing is connected to device, overrange!
@@ -41,31 +42,31 @@ def test_warning():
 
 
 def test_ViBoolean_attribute():
-    with nidmm.Session("PXI1Slot2") as session:
+    with nidmm.Session(device_name) as session:
         assert session.simulate is False
         # TODO(marcoskirsch): set a boolean
 
 
 def test_ViString_attribute():
-    with nidmm.Session("PXI1Slot2") as session:
+    with nidmm.Session(device_name) as session:
         assert "1A67CAC" == session.serial_number
         # TODO(marcoskirsch): set a string
 
 
 def test_ViInt32_attribute():
-    with nidmm.Session("PXI1Slot2") as session:
+    with nidmm.Session(device_name) as session:
         session.sample_count = 5
         assert 5 == session.sample_count
 
 
 def test_ViReal64_attribute():
-    with nidmm.Session("PXI1Slot2") as session:
+    with nidmm.Session(device_name) as session:
         session.range = 50 # Coerces up!
         assert 100 == session.range
 
 
 def test_Enum_attribute():
-    with nidmm.Session("PXI1Slot2") as session:
+    with nidmm.Session(device_name) as session:
         session.function = nidmm.Function.AC_CURRENT
         assert session.function == nidmm.Function.AC_CURRENT
         assert type(session.function) is nidmm.Function
@@ -78,7 +79,7 @@ def test_Enum_attribute():
 
 
 def test_ViSession_attribute():
-    with nidmm.Session("PXI1Slot2") as session:
+    with nidmm.Session(device_name) as session:
         try:
             session.io_session = 5
             assert false
