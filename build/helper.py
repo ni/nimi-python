@@ -2,6 +2,8 @@
 # TODO(marcoskirsch): Figure out unit test for this.
 
 import re
+import pprint
+pp = pprint.PrettyPrinter(indent=3)
 
 # Coding convention transformation functions.
 
@@ -139,7 +141,7 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
                 if x['type'] is 'ViString' or x['type'] is 'ViConstString' or x['type'] is 'ViRsrc':
                     snippet += '.encode(\'ascii\')'
         else:
-            assert x['direction'] is 'out'
+            assert x['direction'] is 'out', pp.pformat(x)
             if x['type'] is 'ViString' or x['type'] is 'ViRsrc' or x['type'] is 'ViConstString_ctype':
                 # These are defined as c_char_p which is already a pointer!
                 snippet = (x['ctypes_variable_name'])
