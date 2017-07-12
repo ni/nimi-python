@@ -40,7 +40,7 @@ clean:
 	-@find $(ROOT_DIR) -path '*/__pycache__/*' -exec rm {} \;
 	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \;
 	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \;
-
+	-@rm command_history.txt
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
 DRIVER_ALL_TARGETS_HELP := echo Drivers: $(addprefix  && echo - ,$(ALL_DRIVERS))

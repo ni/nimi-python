@@ -5,6 +5,9 @@ UNIT_TEST_DIR := $(MODULE_DIR)/tests
 TEMPLATE_DIR := $(BUILD_HELPER_DIR)/templates
 TOX_INI := $(OUTPUT_DIR)/tox.ini
 
+TOX_INI := $(OUTPUT_DIR)/tox.ini
+COMMAND_LOG := $(ROOT_DIR)/command_history.txt
+
 DRIVER_DIR := $(ROOT_DIR)/src/$(DRIVER)
 METADATA_DIR := $(DRIVER_DIR)/metadata
 
