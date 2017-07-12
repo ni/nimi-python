@@ -3,8 +3,8 @@ import nidmm.tests.mock_helper as mock_helper
 
 import pytest
 
-from unittest.mock import ANY
-from unittest.mock import patch
+from mock import ANY
+from mock import patch
 
 import ctypes
 

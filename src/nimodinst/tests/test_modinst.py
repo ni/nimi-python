@@ -1,13 +1,13 @@
 
 import nimodinst
-import nimodinst.tests.mock_helper as mock_helper
+import mock_helper
 
 import ctypes
 
 SESSION_NUM_FOR_TEST = 42
 
-from unittest.mock import ANY
-from unittest.mock import patch
+from mock import ANY
+from mock import patch
 
 SESSION_NUM_FOR_TEST = 42
 

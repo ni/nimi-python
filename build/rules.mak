@@ -43,7 +43,7 @@ unit_tests: $(UNIT_TEST_FILES)
 
 $(LOG_DIR)/test_results.log:
 	@echo Running unit tests
-	$(_hide_cmds)cd $(OUTPUT_DIR) && python3 -m pytest -s > $(LOG_DIR)/test_results.log
+	$(_hide_cmds)cd $(OUTPUT_DIR) && python3 -m pytest -s $(LOG_OUTPUT) $(LOG_DIR)/test_results.log
 
 $(OUTPUT_DIR)/README.rst: $(ROOT_DIR)/README.rst
 	@echo Creating $(notdir $@)
@@ -56,13 +56,21 @@ $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako
 sdist: $(SDIST)
 $(SDIST): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/test_results.log
 	@echo Creating Source distribution
-	$(_hide_cmds)cd $(OUTPUT_DIR) && python3 setup.py sdist > $(LOG_DIR)/sdist.log
+	$(_hide_cmds)cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log
 
 wheel: $(WHEEL)
 $(WHEEL): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/test_results.log
 	@echo Creating Wheel distribution
-	$(_hide_cmds)cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal > $(LOG_DIR)/wheel.log
+	$(_hide_cmds)cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log
 
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
+
+$(TOX_INI): $(ROOT_DIR)/tox.ini
+	@echo Copying tox.ini to $(TOX_INI)
+	$(_hide_cmds)cp $< $@
+
+test: $(TOX_INI)
+	@echo Running tox tests
+	$(_hide_cmds)cd $(OUTPUT_DIR) && tox
 
