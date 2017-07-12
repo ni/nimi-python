@@ -38,7 +38,6 @@ TARGETS := $(filter-out run_unit_tests,$(POSSIBLE_TARGETS))
 all: $(TARGETS)
 
 DEFAULT_FILES_TO_GENERATE := \
-                     attributes.py \
                      enums.py \
                      library.py \
                      session.py \
