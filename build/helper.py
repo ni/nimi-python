@@ -140,7 +140,11 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
                     snippet += '.encode(\'ascii\')'
         else:
             assert x['direction'] is 'out'
-            snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
+            if x['type'] is 'ViString' or x['type'] is 'ViRsrc' or x['type'] is 'ViConstString_ctype':
+                # These are defined as c_char_p which is already a pointer!
+                snippet = (x['ctypes_variable_name'])
+            else:
+                snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
         snippets.append(snippet)
     return ', '.join(snippets)
 
@@ -149,7 +153,11 @@ def get_library_call_parameter_types_snippet(parameters_list):
     snippets = []
     for x in parameters_list:
         if x['direction'] is 'out':
-            snippets.append("ctypes.POINTER(" + x['ctypes_type'] + ")")
+            if x['type'] is 'ViString' or x['type'] is 'ViRsrc' or x['type'] is 'ViConstString_ctype':
+                # These are defined as c_char_p which is already a pointer!
+                snippets.append(x['ctypes_type'])
+            else:
+                snippets.append("ctypes.POINTER(" + x['ctypes_type'] + ")")
         else:
             assert x['direction'] is 'in'
             snippets.append(x['ctypes_type'])

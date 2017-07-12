@@ -69,7 +69,7 @@ output_params = helper.extract_output_parameters(params)
         if buf_size == 0:
             return len(self._defaults['GetAttributeViString']['value'])
         t = ${module_name}.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['value'].encode('ascii'))
-        value.contents.value = ctypes.cast(t, ${module_name}.ctypes_types.ViString_ctype).value
+        value.value = ctypes.cast(t, ${module_name}.ctypes_types.ViString_ctype).value
         return self._defaults['GetAttributeViString']['return']
 
     def niDMM_GetError(self, vi, error_code, buffer_size, description):

@@ -201,11 +201,11 @@ class Session(object):
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         buffer_size = 0
         value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, ctypes.pointer(value_ctype))
+        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
         if(errors._is_error(error_code)): raise errors.Error(self.library, self.vi, error_code)
         buffer_size = error_code
         value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, ctypes.pointer(value_ctype))
+        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
 
