@@ -132,7 +132,7 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
     '''Returns a string suitable to use as the parameters to the library object, i.e. "self, mode, range, digits_of_resolution"'''
     snippets = []
     for x in parameters_list:
-        if x['direction'] is 'in':
+        if x['direction'] == 'in':
             if x['name'] is sessionName:
                 snippet = 'self.' + sessionName
             else:
