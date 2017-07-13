@@ -4,7 +4,6 @@ dist: trusty
 language: python
 # For pypy versions, see https://github.com/pyenv/pyenv/tree/master/plugins/python-build/share/python-build
 python: 
-  - flake8
   - 2.7
   - 3.4
   - 3.5
@@ -15,8 +14,8 @@ python:
 install:
   - pip install --upgrade setuptools mako mock tox tox-travis flake8
 
-#before_script:
-#  - flake8
+before_script:
+  - flake8
 
 script:
   - make clean all test PRINT=1 PYTHON_CMD=python
