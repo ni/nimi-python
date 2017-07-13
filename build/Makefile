@@ -1,6 +1,12 @@
 
-POSSIBLE_TARGETS := module unit_tests run_unit_tests wheel sdist
+POSSIBLE_TARGETS := module unit_tests run_unit_tests wheel sdist update_generated_files
 export POSSIBLE_TARGETS
+
+GENERATED_DIR := $(ROOT_DIR)/generated
+export GENERATED_DIR
+
+COMMAND_LOG := $(GENERATED_DIR)/command_history.txt
+export COMMAND_LOG
 
 ifeq (,$(PRINT))
 _hide_cmds := @
@@ -9,13 +15,13 @@ endif
 all: $(DRIVERS)
 
 define per_driver_per_target
-$1_$2:
+$1_$2: start
 	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1 MKDIR
 	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1 $2
 endef
 
 define per_driver_all
-$1:
+$1: start
 	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1 MKDIR
 	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1
 endef
@@ -34,13 +40,16 @@ endef
 # run when all is used, but we want it to work
 $(foreach t,$(POSSIBLE_TARGETS) test,$(eval $(call per_target,$(t))))
 
-clean:
+clean: start
 	@echo 'Cleaning...'
 	-@rm -Rf $(BIN_DIR)
 	-@find $(ROOT_DIR) -path '*/__pycache__/*' -exec rm {} \;
 	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \;
 	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \;
-	-@rm command_history.txt
+
+start:
+	-@rm -f $(COMMAND_LOG)
+
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
 DRIVER_ALL_TARGETS_HELP := echo Drivers: $(addprefix  && echo - ,$(ALL_DRIVERS))

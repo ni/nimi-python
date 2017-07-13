@@ -79,4 +79,14 @@ test: $(TOX_INI)
 	@echo Running tox tests
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && tox)
 
+update_generated_files: $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
+	@echo Updating generated files
+	$(_hide_cmds)$(call log_command,rm -Rf $(GENERATED_DIR)/$(DRIVER))
+	$(_hide_cmds)$(call log_command,mkdir -p $(GENERATED_DIR)/$(DRIVER))
+	$(_hide_cmds)$(call log_command,cp -Rf $(MODULE_DIR)/* $(GENERATED_DIR)/$(DRIVER))
+	$(_hide_cmds)$(call log_command,cp -Rf $(OUTPUT_DIR)/setup.py $(GENERATED_DIR)/$(DRIVER))
+
+
+
+
 
