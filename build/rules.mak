@@ -9,7 +9,8 @@ MKDIR: $(MKDIRECTORIES)
 
 define log_command
 	$1
-	@echo '$1' >> $(COMMAND_LOG)
+	@echo '$1' >> $(COMMAND_LOG_BATCH)
+	@echo '$1' >> $(COMMAND_LOG_SH)
 endef
 
 define mkdir_rule

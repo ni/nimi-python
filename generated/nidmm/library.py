@@ -8,13 +8,13 @@ from nidmm import ctypes_library
 
 def get_library_name():
     try:
-        return {'Windows': {'32bit': {'type': 'windll', 'name': 'nidmm_32.dll'}, '64bit': {'type': 'cdll', 'name': 'nidmm_64.dll'}}, 'Linux': {'64bit': {'type': 'cdll', 'name': 'libnidmm.so'}}}[platform.system()][platform.architecture()[0]]['name']
+        return {'Linux': {'64bit': {'type': 'cdll', 'name': 'libnidmm.so'}}, 'Windows': {'32bit': {'type': 'windll', 'name': 'nidmm_32.dll'}, '64bit': {'type': 'cdll', 'name': 'nidmm_64.dll'}}}[platform.system()][platform.architecture()[0]]['name']
     except KeyError as e:
         raise errors.UnsupportedConfigurationError
 
 def get_library_type():
     try:
-        return {'Windows': {'32bit': {'type': 'windll', 'name': 'nidmm_32.dll'}, '64bit': {'type': 'cdll', 'name': 'nidmm_64.dll'}}, 'Linux': {'64bit': {'type': 'cdll', 'name': 'libnidmm.so'}}}[platform.system()][platform.architecture()[0]]['type']
+        return {'Linux': {'64bit': {'type': 'cdll', 'name': 'libnidmm.so'}}, 'Windows': {'32bit': {'type': 'windll', 'name': 'nidmm_32.dll'}, '64bit': {'type': 'cdll', 'name': 'nidmm_64.dll'}}}[platform.system()][platform.architecture()[0]]['type']
     except KeyError as e:
         raise errors.UnsupportedConfigurationError
 

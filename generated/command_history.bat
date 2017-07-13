@@ -1,3 +1,4 @@
+rem This is the list of commands that make invoked in order to build nimi-python. If you want to reproduce the build but don't have GNU Make setup in your system, you can invoke this script.
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm/tests

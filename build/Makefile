@@ -5,8 +5,10 @@ export POSSIBLE_TARGETS
 GENERATED_DIR := $(ROOT_DIR)/generated
 export GENERATED_DIR
 
-COMMAND_LOG := $(GENERATED_DIR)/command_history.txt
-export COMMAND_LOG
+COMMAND_LOG_BATCH := $(GENERATED_DIR)/command_history.bat
+export COMMAND_LOG_BATCH
+COMMAND_LOG_SH := $(GENERATED_DIR)/command_history.sh
+export COMMAND_LOG_SH
 
 ifeq (,$(PRINT))
 _hide_cmds := @
@@ -48,7 +50,8 @@ clean: start
 	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \;
 
 start:
-	-@rm -f $(COMMAND_LOG)
+	-@echo "rem This is the list of commands that make invoked in order to build nimi-python. If you want to reproduce the build but don't have GNU Make setup in your system, you can invoke this script." > $(COMMAND_LOG_BATCH)
+	-@echo "# This is the list of commands that make invoked in order to build nimi-python. If you want to reproduce the build but don't have GNU Make setup in your system, you can invoke this script." > $(COMMAND_LOG_SH)
 
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines

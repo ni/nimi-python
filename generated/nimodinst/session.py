@@ -38,29 +38,29 @@ class AttributeViString(object):
 class Device(object):
 
     def __init__(self, owner, index):
-        self.device_model = AttributeViString(owner, 1, index = index)
+        self.bus_number = AttributeViInt32(owner, 12, index = index)
+        self.max_pciexpress_link_width = AttributeViInt32(owner, 18, index = index)
         self.serial_number = AttributeViString(owner, 2, index = index)
-        self.slot_number = AttributeViInt32(owner, 10, index = index)
+        self.device_name = AttributeViString(owner, 0, index = index)
         self.socket_number = AttributeViInt32(owner, 13, index = index)
+        self.slot_number = AttributeViInt32(owner, 10, index = index)
         self.pciexpress_link_width = AttributeViInt32(owner, 17, index = index)
         self.chassis_number = AttributeViInt32(owner, 11, index = index)
-        self.max_pciexpress_link_width = AttributeViInt32(owner, 18, index = index)
-        self.device_name = AttributeViString(owner, 0, index = index)
-        self.bus_number = AttributeViInt32(owner, 12, index = index)
+        self.device_model = AttributeViString(owner, 1, index = index)
 
 class Session(object):
     '''A NI-ModInst session to get device information'''
 
     def __init__(self, driver):
-        self.device_model = AttributeViString(self, 1)
+        self.bus_number = AttributeViInt32(self, 12)
+        self.max_pciexpress_link_width = AttributeViInt32(self, 18)
         self.serial_number = AttributeViString(self, 2)
-        self.slot_number = AttributeViInt32(self, 10)
+        self.device_name = AttributeViString(self, 0)
         self.socket_number = AttributeViInt32(self, 13)
+        self.slot_number = AttributeViInt32(self, 10)
         self.pciexpress_link_width = AttributeViInt32(self, 17)
         self.chassis_number = AttributeViInt32(self, 11)
-        self.max_pciexpress_link_width = AttributeViInt32(self, 18)
-        self.device_name = AttributeViString(self, 0)
-        self.bus_number = AttributeViInt32(self, 12)
+        self.device_model = AttributeViString(self, 1)
 
         self.handle = 0
         self.item_count = 0
