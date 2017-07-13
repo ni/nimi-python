@@ -9,10 +9,12 @@
 %>\
 
 import ctypes
+
+from ${module_name} import ctypes_types
+from ${module_name} import enums
 from ${module_name} import errors
 from ${module_name} import library
-from ${module_name} import enums
-from ${module_name} import ctypes_types
+
 
 class AttributeViInt32(object):
 
@@ -82,7 +84,8 @@ class AttributeEnum(object):
         return self.attribute_type(obj._get_attribute_vi_int32(self.channel, self.attribute_id))
 
     def __set__(self, obj, value):
-        if type(value) is not self.attribute_type: raise TypeError('Value mode must be of type ' + str(self.attribute_type))
+        if type(value) is not self.attribute_type:
+            raise TypeError('Value mode must be of type ' + str(self.attribute_type))
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
 
 
@@ -110,9 +113,9 @@ class Session(object):
     %endif
 % endfor
 
-    def __init__(self, resource_name, id_query = 0, reset_device = False, options_string = ""):
+    def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):
         self.library = library.get_library()
-        self.vi = 0 # This must be set before calling _init_with_options.
+        self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
 
     def __del__(self):
@@ -128,11 +131,10 @@ class Session(object):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         try:
             self._close()
-        except nidmm.Error as e:
+        except errors.Error as e:
             # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
             print("Failed to close session.")
         self.vi = 0
-
 
     # method needed for generic driver exceptions
     def _get_error_description(self, error_code):
@@ -165,7 +167,7 @@ class Session(object):
             error_message = ctypes.create_string_buffer(buffer_size)
             self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
 
-        #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
+        # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
         return new_error_code.value, error_message.value.decode("ascii")
 
@@ -183,7 +185,7 @@ class Session(object):
 %>
     def ${f['python_name']}(${helper.get_method_parameters_snippet(input_parameters)}):
 % for parameter in enum_input_parameters:
-        ${helper.get_enum_type_check_snippet(parameter)}
+        ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
 % for output_parameter in output_parameters:
         ${helper.get_ctype_variable_declaration_snippet(output_parameter)}
@@ -193,20 +195,18 @@ class Session(object):
         ${helper.get_method_return_snippet(output_parameters)}
 % endfor
 
-
     ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
 
-    def _get_attribute_vi_string(self, channel_name, attribute_id):
+    def _get_attribute_vi_string(self, channel_name, attribute_id):  # noqa: F811
         # Do the IVI dance
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         buffer_size = 0
         value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
-        if(errors._is_error(error_code)): raise errors.Error(self.library, self.vi, error_code)
+        if(errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
         buffer_size = error_code
         value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
-
-

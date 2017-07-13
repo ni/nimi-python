@@ -1,18 +1,15 @@
+import mock_helper
 import nidmm
-import nidmm.tests.mock_helper as mock_helper
-
-import pytest
 
 from mock import ANY
 from mock import patch
 
-import ctypes
-
 SESSION_NUM_FOR_TEST = 42
+
 
 class TestSession(object):
     def setup_method(self, method):
-        self.patched_ctypes_library_patcher = patch('nidmm.ctypes_library.nidmm_ctypes_library', autospec=True)
+        self.patched_ctypes_library_patcher = patch('nidmm.ctypes_library.NidmmCtypesLibrary', autospec=True)
         self.patched_ctypes_library = self.patched_ctypes_library_patcher.start()
         self.patched_get_library_patcher = patch('nidmm.session.library.get_library', return_value=self.patched_ctypes_library)
         self.patched_get_library_patcher.start()
@@ -20,7 +17,7 @@ class TestSession(object):
         self.patched_errors = self.errors_patcher.start()
         self.patched_errors._is_error.return_value = 0
 
-        self.side_effects_helper = mock_helper.side_effects_helper()
+        self.side_effects_helper = mock_helper.SideEffectsHelper()
         self.side_effects_helper.set_side_effects_and_return_values(self.patched_ctypes_library)
         self.patched_ctypes_library.niDMM_InitWithOptions.side_effect = self.side_effects_helper.niDMM_InitWithOptions
         self.disallow_close = self.patched_ctypes_library.niDMM_close.side_effect
@@ -32,7 +29,6 @@ class TestSession(object):
         self.errors_patcher.stop()
         self.patched_get_library_patcher.stop()
         self.patched_ctypes_library_patcher.stop()
-
 
     def test_init_with_options(self):
         self.patched_ctypes_library.niDMM_close.side_effect = self.disallow_close
@@ -60,7 +56,6 @@ class TestSession(object):
             self.patched_ctypes_library.niDMM_reset.assert_called_once_with(SESSION_NUM_FOR_TEST)
             assert self.patched_errors._handle_error.call_count == 2
             self.patched_errors._handle_error.assert_called_with(session, self.patched_ctypes_library.niDMM_reset.return_value)
-
 
     # Additional tests
 
@@ -93,7 +88,6 @@ class TestSession(object):
             assert self.patched_errors._handle_error.call_count == 2
             assert self.patched_ctypes_library.niDMM_GetAttributeViString.call_count == 2
 
-
     # Get string attribute works from attribute type
     def test_get_string_attribute_type(self):
         self.patched_ctypes_library.niDMM_GetAttributeViString.side_effect = self.side_effects_helper.niDMM_GetAttributeViString
@@ -101,8 +95,3 @@ class TestSession(object):
         with nidmm.Session('dev1') as session:
             sn = session.serial_number
             assert(sn == '0x12345678')
-
-        
-
-
-

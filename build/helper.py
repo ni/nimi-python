@@ -181,18 +181,18 @@ def get_method_return_snippet(output_parameters):
         snippets.append(_get_output_param_return_snippet(x))
     return 'return ' + ', '.join(snippets)
 
-def get_enum_type_check_snippet(parameter):
+def get_enum_type_check_snippet(parameter, indent):
     '''Returns python snippet to check that the type of a parameter is what is expected'''
     assert parameter['enum'] is not None, pp.pformat(parameter)
     assert parameter['direction'] == 'in', pp.pformat(parameter)
-    return 'if type(' + parameter['python_name'] + ') is not ' + parameter['python_type'] + ': raise TypeError(\'Parameter mode must be of type \' + str(' + parameter['python_type'] + '))'
+    return 'if type(' + parameter['python_name'] + ') is not ' + parameter['python_type'] + ':\n' + (' ' * indent) + 'raise TypeError(\'Parameter mode must be of type \' + str(' + parameter['python_type'] + '))'
 
 def get_ctype_variable_declaration_snippet(parameter):
     '''Returns python snippet to declare and initialize the corresponding ctypes variable'''
     assert parameter['direction'] == 'out', pp.pformat(parameter)
     snippet = parameter['ctypes_variable_name'] + ' = '
     if parameter['is_buffer']:
-        snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)' + ' #TODO: allocate a buffer'
+        snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)' + '  # TODO(marcoskirsch): allocate a buffer'
     else:
         snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)'
     return snippet

@@ -16,13 +16,13 @@ functions = helper.add_all_metadata(functions)
 %>\
 
 import ctypes
-import platform
 
 import ${module_name}.ctypes_types
 import ${module_name}.python_types
 
+
 class MockFunctionCallError(Exception):
-    def __init__(self, function, param = None):
+    def __init__(self, function, param=None):
         self.function = function
         self.param = param
         msg = "{0} called without setting side_effect".format(self.function)
@@ -30,7 +30,8 @@ class MockFunctionCallError(Exception):
             msg += " or setting the {0} parameter return value".format(self.param)
         super(Exception, self).__init__(msg)
 
-class side_effects_helper(object):
+
+class SideEffectsHelper(object):
     def __init__(self):
         self._defaults = {}
 % for f in helper.extract_codegen_functions(functions):
@@ -52,7 +53,7 @@ class side_effects_helper(object):
 params = f['parameters']
 output_params = helper.extract_output_parameters(params)
 %>\
-    def ${c_function_prefix}${f['name']}(${helper.get_method_parameters_snippet(params)}):
+    def ${c_function_prefix}${f['name']}(${helper.get_method_parameters_snippet(params)}):  # noqa: N802
 %    for p in output_params:
         if self._defaults['${f['name']}']['${p['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${f['name']}", param='${p['name']}')
@@ -61,9 +62,8 @@ output_params = helper.extract_output_parameters(params)
         return self._defaults['${f['name']}']['return']
 
 % endfor
-
     # TODO(texasaggie97) Remove hand coded functions once metadata contains enough information to code generate these
-    def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):
+    def ${c_function_prefix}GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):  # noqa: N802,F811
         if self._defaults['GetAttributeViString']['value'] is None:
             raise MockFunctionCallError("niDMM_GetAttributeViString", param='value')
         if buf_size == 0:
@@ -72,7 +72,7 @@ output_params = helper.extract_output_parameters(params)
         value.value = ctypes.cast(t, ${module_name}.ctypes_types.ViString_ctype).value
         return self._defaults['GetAttributeViString']['return']
 
-    def niDMM_GetError(self, vi, error_code, buffer_size, description):
+    def ${c_function_prefix}GetError(self, vi, error_code, buffer_size, description):  # noqa: N802,F811
         if self._defaults['GetError']['errorCode'] is None:
             raise MockFunctionCallError("niDMM_GetError", param='errorCode')
         error_code.contents.value = self._defaults['GetError']['errorCode']
@@ -81,9 +81,8 @@ output_params = helper.extract_output_parameters(params)
         if buffer_size == 0:
             return len(self._defaults['GetError'][description])
         t = ${module_name}.ctypes_types.ViString_ctype(self._defaults['GetError'][description].encode('ascii'))
-        value.contents.value = ctypes.cast(t, ${module_name}.ctypes_types.ViString_ctype).value
+        description.value = ctypes.cast(t, ${module_name}.ctypes_types.ViString_ctype).value
         return self._defaults['GetError']['return']
-
 
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
@@ -91,7 +90,3 @@ output_params = helper.extract_output_parameters(params)
         mock_library.${c_function_prefix}${f['name']}.side_effect = MockFunctionCallError("${c_function_prefix}${f['name']}")
         mock_library.${c_function_prefix}${f['name']}.return_value = ${module_name}.python_types.${f['returns_python']}(0)
 % endfor
-
-
-
-
