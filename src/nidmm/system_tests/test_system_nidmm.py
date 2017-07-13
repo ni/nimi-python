@@ -1,7 +1,23 @@
 #!/usr/bin/python
 
 import nidmm
-device_name = "PXI1Slot2"
+import pytest
+import nimodinst
+
+# We look for nidmm devices and use the first one for the tests
+@pytest.fixture(scope='function')
+def device_name(request):
+    device_name_for_test = "unknown"
+    try:
+        with nimodinst.Session('nidmm') as session:
+            if len(session) > 0:
+                device_name_for_test = session.device_name[0]
+
+    except nimodinst.Error as e:
+        sys.stderr.write(str(e))
+        sys.exit(e.code)
+    return device_name_for_test
+
 
 def test_invalid_device_name():
     try:
@@ -13,13 +29,13 @@ def test_invalid_device_name():
         assert e.description.find("Foo!") != -1
 
 
-def test_take_simple_measurement_works():
+def test_take_simple_measurement_works(device_name):
     with nidmm.Session(device_name) as session:
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
         assert session.read(1000) < 0.01 # Assume nothing is connected to device, reads back around 0.
 
 
-def test_wrong_parameter_type():
+def test_wrong_parameter_type(device_name):
     with nidmm.Session(device_name) as session:
         try:
             # We are passing a number where an enum is expected.
@@ -30,7 +46,7 @@ def test_wrong_parameter_type():
             pass
 
 
-def test_warning():
+def test_warning(device_name):
     with nidmm.Session(device_name) as session:
         session.configure_measurement_digits(nidmm.Function.RES_2_WIRE, 1e6, 3.5)
         try:
@@ -41,31 +57,31 @@ def test_warning():
             pass
 
 
-def test_ViBoolean_attribute():
+def test_ViBoolean_attribute(device_name):
     with nidmm.Session(device_name) as session:
         assert session.simulate is False
         # TODO(marcoskirsch): set a boolean
 
 
-def test_ViString_attribute():
+def test_ViString_attribute(device_name):
     with nidmm.Session(device_name) as session:
         assert "1A67CAC" == session.serial_number
         # TODO(marcoskirsch): set a string
 
 
-def test_ViInt32_attribute():
+def test_ViInt32_attribute(device_name):
     with nidmm.Session(device_name) as session:
         session.sample_count = 5
         assert 5 == session.sample_count
 
 
-def test_ViReal64_attribute():
+def test_ViReal64_attribute(device_name):
     with nidmm.Session(device_name) as session:
         session.range = 50 # Coerces up!
         assert 100 == session.range
 
 
-def test_Enum_attribute():
+def test_Enum_attribute(device_name):
     with nidmm.Session(device_name) as session:
         session.function = nidmm.Function.AC_CURRENT
         assert session.function == nidmm.Function.AC_CURRENT
@@ -78,7 +94,7 @@ def test_Enum_attribute():
             pass
 
 
-def test_ViSession_attribute():
+def test_ViSession_attribute(device_name):
     with nidmm.Session(device_name) as session:
         try:
             session.io_session = 5
@@ -94,8 +110,8 @@ def test_ViSession_attribute():
             pass
 
 '''
-def test_self_test():
-    with nidmm.Session("PXI1Slot2") as session:
+def test_self_test(device_name):
+    with nidmm.Session(device_name) as session:
         result, message = session.self_test()
         assert result is 0
         assert message is 'hello'
