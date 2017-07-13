@@ -44,7 +44,10 @@ def generate_template(template_name, template_params, dest_file, in_zip_file=Fal
 
     logging.debug(rendered_template)
     fileHandlePublic = open(dest_file, 'wb')
-    fileHandlePublic.write(bytes(rendered_template, "UTF-8"))
+    if sys.version_info.major < 3:
+        fileHandlePublic.write(bytes(rendered_template))
+    else:
+        fileHandlePublic.write(bytes(rendered_template, "UTF-8"))
     fileHandlePublic.close()
 
 
