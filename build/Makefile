@@ -2,6 +2,9 @@
 POSSIBLE_TARGETS := module unit_tests run_unit_tests wheel sdist
 export POSSIBLE_TARGETS
 
+ADDITIONAL_POSSIBLE_TARGETS := test flake8
+export ADDITIONAL_POSSIBLE_TARGETS
+
 ifeq (,$(PRINT))
 _hide_cmds := @
 endif
@@ -22,7 +25,7 @@ endef
 
 $(foreach d,$(ALL_DRIVERS),$(eval $(call per_driver_all,$(d))))
 $(foreach d,$(ALL_DRIVERS),\
-   $(foreach t,$(POSSIBLE_TARGETS) test,\
+   $(foreach t,$(POSSIBLE_TARGETS) $(ADDITIONAL_POSSIBLE_TARGETS),\
       $(eval $(call per_driver_per_target,$(d),$(t)))))
 
 define per_target
@@ -32,7 +35,7 @@ endef
 
 # We add test when we create the $(POSSIBLE_TARGETS). This is because it shouldn't be
 # run when all is used, but we want it to work
-$(foreach t,$(POSSIBLE_TARGETS) test,$(eval $(call per_target,$(t))))
+$(foreach t,$(POSSIBLE_TARGETS) $(ADDITIONAL_POSSIBLE_TARGETS),$(eval $(call per_target,$(t))))
 
 clean:
 	@echo 'Cleaning...'
@@ -44,10 +47,10 @@ clean:
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
 DRIVER_ALL_TARGETS_HELP := echo Drivers: $(addprefix  && echo - ,$(ALL_DRIVERS))
-TARGETS_HELP := echo Targets: $(addprefix  && echo - ,$(POSSIBLE_TARGETS) test)
+TARGETS_HELP := echo Targets: $(addprefix  && echo - ,$(POSSIBLE_TARGETS) $(ADDITIONAL_POSSIBLE_TARGETS))
 PER_DRIVER_PER_TARGET := \
    $(foreach d,$(ALL_DRIVERS),\
-      $(foreach t,$(POSSIBLE_TARGETS) test,\
+      $(foreach t,$(POSSIBLE_TARGETS) $(ADDITIONAL_POSSIBLE_TARGETS),\
          $(d)_$(t)))
 DRIVER_TARGETS_HELP := echo Per driver, per target: $(addprefix  && echo - ,$(PER_DRIVER_PER_TARGET))
 help:

@@ -14,11 +14,8 @@ python:
 install:
   - pip install --upgrade setuptools mako mock tox tox-travis flake8
 
-before_script:
-  - flake8
-
 script:
-  - make clean all test PRINT=1 PYTHON_CMD=python
+  - make clean all flake8 test PRINT=1 PYTHON_CMD=python
 
 
 

@@ -79,4 +79,7 @@ test: $(TOX_INI)
 	@echo Running tox tests
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && tox)
 
+flake8: $(TOX_INI)
+	@echo Running flake8
+	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && tox -e flake8)
 
