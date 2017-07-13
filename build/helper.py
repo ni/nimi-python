@@ -2,6 +2,8 @@
 # TODO(marcoskirsch): Figure out unit test for this.
 
 import re
+import pprint
+pp = pprint.PrettyPrinter(indent=3)
 
 # Coding convention transformation functions.
 
@@ -139,7 +141,7 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
                 if x['type'] == 'ViString' or x['type'] == 'ViConstString' or x['type'] == 'ViRsrc':
                     snippet += '.encode(\'ascii\')'
         else:
-            assert x['direction'] == 'out'
+            assert x['direction'] == 'out', pp.pformat(x)
             if x['type'] == 'ViString' or x['type'] == 'ViRsrc' or x['type'] == 'ViConstString_ctype':
                 # These are defined as c_char_p which is already a pointer!
                 snippet = (x['ctypes_variable_name'])
@@ -159,7 +161,7 @@ def get_library_call_parameter_types_snippet(parameters_list):
             else:
                 snippets.append("ctypes.POINTER(" + x['ctypes_type'] + ")")
         else:
-            assert x['direction'] == 'in'
+            assert x['direction'] == 'in', pp.pformat(x)
             snippets.append(x['ctypes_type'])
     return ', '.join(snippets)
 
@@ -181,13 +183,13 @@ def get_method_return_snippet(output_parameters):
 
 def get_enum_type_check_snippet(parameter):
     '''Returns python snippet to check that the type of a parameter is what is expected'''
-    assert parameter['enum'] is not None
-    assert parameter['direction'] == 'in'
+    assert parameter['enum'] is not None, pp.pformat(parameter)
+    assert parameter['direction'] == 'in', pp.pformat(parameter)
     return 'if type(' + parameter['python_name'] + ') is not ' + parameter['python_type'] + ': raise TypeError(\'Parameter mode must be of type \' + str(' + parameter['python_type'] + '))'
 
 def get_ctype_variable_declaration_snippet(parameter):
     '''Returns python snippet to declare and initialize the corresponding ctypes variable'''
-    assert parameter['direction'] == 'out'
+    assert parameter['direction'] == 'out', pp.pformat(parameter)
     snippet = parameter['ctypes_variable_name'] + ' = '
     if parameter['is_buffer']:
         snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)' + ' #TODO: allocate a buffer'
