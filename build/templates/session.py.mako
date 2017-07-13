@@ -131,7 +131,7 @@ class Session(object):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         try:
             self._close()
-        except errors.Error as e:
+        except errors.Error:
             # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
             print("Failed to close session.")
         self.vi = 0
