@@ -141,11 +141,7 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
                 if x['type'] == 'ViString' or x['type'] == 'ViConstString' or x['type'] == 'ViRsrc':
                     snippet += '.encode(\'ascii\')'
         else:
-<<<<<<< HEAD
             assert x['direction'] == 'out', pp.pformat(x)
-=======
-            assert x['direction'] == 'out'
->>>>>>> refs/remotes/origin/master
             if x['type'] == 'ViString' or x['type'] == 'ViRsrc' or x['type'] == 'ViConstString_ctype':
                 # These are defined as c_char_p which is already a pointer!
                 snippet = (x['ctypes_variable_name'])
