@@ -5,7 +5,7 @@ enums = template_parameters['metadata'].enums
 
 from enum import Enum
 
-% for enum_name in enums:
+% for enum_name in sorted(enums):
 class ${enum_name}(Enum):
     % for enum_value in enums[enum_name]:
     % if type(enum_value['value']) is str:
