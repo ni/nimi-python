@@ -210,6 +210,7 @@ class Session(object):
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
+% if config['context_manager'] == 'input' or config['context_manager'] == 'both':
 
 
     class acquisition(object):
@@ -221,4 +222,18 @@ class Session(object):
 
         def __exit__(self, exc_type, exc_value, traceback):
             self.session._abort()
+% endif
+% if config['context_manager'] == 'output' or config['context_manager'] == 'both':
+
+
+    class generation(object):
+        def __init__(self, session):
+            self.session = session
+
+        def __enter__(self):
+            self.session._initiate()
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            self.session._abort()
+% endif
 
