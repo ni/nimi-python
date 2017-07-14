@@ -109,6 +109,12 @@ def test_ViSession_attribute(device_name):
             print(e)
             pass
 
+def test_acquisition(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
+        with session.acquisition(session):
+            print(session.fetch(1000))
+       
 '''
 def test_self_test(device_name):
     with nidmm.Session(device_name) as session:
