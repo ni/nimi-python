@@ -210,30 +210,23 @@ class Session(object):
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
-% if config['context_manager'] == 'input' or config['context_manager'] == 'both':
+
+% for c in config['context_manager']:
+<%
+context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
+enter_function = next(f for f in functions if f['name'].upper() == c['enter'].upper())
+exit_function = next(f for f in functions if f['name'].upper() == c['exit'].upper())
+%>\
 
 
-    class acquisition(object):
+    class ${context_name}(object):
         def __init__(self, session):
             self.session = session
 
         def __enter__(self):
-            self.session._initiate()
+            self.session.${enter_function['python_name']}()
 
         def __exit__(self, exc_type, exc_value, traceback):
-            self.session._abort()
-% endif
-% if config['context_manager'] == 'output' or config['context_manager'] == 'both':
-
-
-    class generation(object):
-        def __init__(self, session):
-            self.session = session
-
-        def __enter__(self):
-            self.session._initiate()
-
-        def __exit__(self, exc_type, exc_value, traceback):
-            self.session._abort()
-% endif
+            self.session.${exit_function['python_name']}()
+% endfor
 

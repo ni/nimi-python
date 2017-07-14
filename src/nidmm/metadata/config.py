@@ -15,6 +15,11 @@ config = {
             '64bit': {'name': 'libnidmm.so', 'type': 'cdll'},
         },
     },
-    'context_manager': 'input',
+    'context_manager': [
+        { 'direction': 'input',
+          'enter': 'Initiate',
+          'exit': 'Abort',
+        },
+    ]
 }
 
