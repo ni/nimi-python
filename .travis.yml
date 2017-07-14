@@ -12,7 +12,7 @@ python:
   - "pypy3.5-5.8.0"
 
 install:
-  - pip install --upgrade setuptools mako mock tox tox-travis
+  - pip install --upgrade setuptools mako mock tox tox-travis sphinx
 
 script:
   - make clean all test html PRINT=1 PYTHON_CMD=python
