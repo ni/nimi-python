@@ -39,28 +39,28 @@ class Device(object):
 
     def __init__(self, owner, index):
         self.bus_number = AttributeViInt32(owner, 12, index = index)
-        self.max_pciexpress_link_width = AttributeViInt32(owner, 18, index = index)
-        self.serial_number = AttributeViString(owner, 2, index = index)
-        self.device_name = AttributeViString(owner, 0, index = index)
-        self.socket_number = AttributeViInt32(owner, 13, index = index)
-        self.slot_number = AttributeViInt32(owner, 10, index = index)
-        self.pciexpress_link_width = AttributeViInt32(owner, 17, index = index)
         self.chassis_number = AttributeViInt32(owner, 11, index = index)
         self.device_model = AttributeViString(owner, 1, index = index)
+        self.device_name = AttributeViString(owner, 0, index = index)
+        self.max_pciexpress_link_width = AttributeViInt32(owner, 18, index = index)
+        self.pciexpress_link_width = AttributeViInt32(owner, 17, index = index)
+        self.serial_number = AttributeViString(owner, 2, index = index)
+        self.slot_number = AttributeViInt32(owner, 10, index = index)
+        self.socket_number = AttributeViInt32(owner, 13, index = index)
 
 class Session(object):
     '''A NI-ModInst session to get device information'''
 
     def __init__(self, driver):
         self.bus_number = AttributeViInt32(self, 12)
-        self.max_pciexpress_link_width = AttributeViInt32(self, 18)
-        self.serial_number = AttributeViString(self, 2)
-        self.device_name = AttributeViString(self, 0)
-        self.socket_number = AttributeViInt32(self, 13)
-        self.slot_number = AttributeViInt32(self, 10)
-        self.pciexpress_link_width = AttributeViInt32(self, 17)
         self.chassis_number = AttributeViInt32(self, 11)
         self.device_model = AttributeViString(self, 1)
+        self.device_name = AttributeViString(self, 0)
+        self.max_pciexpress_link_width = AttributeViInt32(self, 18)
+        self.pciexpress_link_width = AttributeViInt32(self, 17)
+        self.serial_number = AttributeViString(self, 2)
+        self.slot_number = AttributeViInt32(self, 10)
+        self.socket_number = AttributeViInt32(self, 13)
 
         self.handle = 0
         self.item_count = 0
@@ -130,25 +130,6 @@ class Session(object):
     ''' These are code-generated '''
 
 
-    def _open_installed_devices_session(self, driver):
-        handle_ctype = ctypes_types.ViSession_ctype(0)
-        item_count_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niModInst_OpenInstalledDevicesSession(driver.encode('ascii'), ctypes.pointer(handle_ctype), ctypes.pointer(item_count_ctype))
-        errors._handle_error(self, error_code)
-        return handle_ctype.value, item_count_ctype.value
-
-    def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id, attribute_value_buffer_size):
-        attribute_value_ctype = ctypes_types.ViChar_ctype(0) #TODO: allocate a buffer
-        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(handle, index, attribute_id, attribute_value_buffer_size, ctypes.pointer(attribute_value_ctype))
-        errors._handle_error(self, error_code)
-        return attribute_value_ctype.value.decode("ascii")
-
-    def _get_installed_device_attribute_vi_int32(self, handle, index, attribute_id):
-        attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niModInst_GetInstalledDeviceAttributeViInt32(handle, index, attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors._handle_error(self, error_code)
-        return attribute_value_ctype.value
-
     def _close_installed_devices_session(self, handle):
         error_code = self.library.niModInst_CloseInstalledDevicesSession(handle)
         errors._handle_error(self, error_code)
@@ -159,6 +140,25 @@ class Session(object):
         error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, ctypes.pointer(error_info_ctype))
         errors._handle_error(self, error_code)
         return error_info_ctype.value.decode("ascii")
+
+    def _get_installed_device_attribute_vi_int32(self, handle, index, attribute_id):
+        attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
+        error_code = self.library.niModInst_GetInstalledDeviceAttributeViInt32(handle, index, attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors._handle_error(self, error_code)
+        return attribute_value_ctype.value
+
+    def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id, attribute_value_buffer_size):
+        attribute_value_ctype = ctypes_types.ViChar_ctype(0) #TODO: allocate a buffer
+        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(handle, index, attribute_id, attribute_value_buffer_size, ctypes.pointer(attribute_value_ctype))
+        errors._handle_error(self, error_code)
+        return attribute_value_ctype.value.decode("ascii")
+
+    def _open_installed_devices_session(self, driver):
+        handle_ctype = ctypes_types.ViSession_ctype(0)
+        item_count_ctype = ctypes_types.ViInt32_ctype(0)
+        error_code = self.library.niModInst_OpenInstalledDevicesSession(driver.encode('ascii'), ctypes.pointer(handle_ctype), ctypes.pointer(item_count_ctype))
+        errors._handle_error(self, error_code)
+        return handle_ctype.value, item_count_ctype.value
 
 
     ''' These are temporarily hand-coded because the generator can't handle buffers yet '''

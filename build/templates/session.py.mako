@@ -102,7 +102,7 @@ class AttributeViSession(object):
 class Session(object):
     '''${config['session_description']}'''
 
-% for attribute in attributes:
+% for attribute in sorted(attributes):
     %if attributes[attribute]['enum']:
     ${attribute.lower()} = AttributeEnum(${attributes[attribute]['id']}, enums.${attributes[attribute]['enum']})
     %else:
@@ -174,6 +174,7 @@ class Session(object):
     functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
     functions = helper.add_all_metadata(functions)
+    functions = sorted(functions, key=lambda k: k['name'])
 %>\
 % for f in functions:
 <%
