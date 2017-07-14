@@ -3,21 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to NI Modular Instruments Python API's documentation!
+Welcome to NI-ModInst Python API's documentation!
 =============================================================
 
-.. include:: README.rst
-
 .. toctree::
-   :maxdepth: 1
-   :caption: Drivers
+   :maxdepth: 3
+   :caption: API References:
 
-   nidmm
-   nimodinst
+   nimodinst_session
 
-Indices and tables
-==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

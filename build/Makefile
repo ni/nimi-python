@@ -98,9 +98,9 @@ SPHINXPROJ    = NIModularInstrumentsPythonAPI
 SOURCEDIR     = $(ROOT_DIR)/docs
 BUILDDIR      = $(BIN_DIR)/docs
 
-help_rtd:
+html:
 	$(_hide_cmds)cp $(ROOT_DIR)/README.rst $(SOURCEDIR)
-	$(_hide_cmds)$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	$(_hide_cmds)$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
 
 .PHONY: help Makefile
 
