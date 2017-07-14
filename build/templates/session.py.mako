@@ -8,7 +8,9 @@
     attributes = template_parameters['metadata'].attributes
 %>\
 
+from contextlib import contextmanager
 import ctypes
+
 from ${module_name} import errors
 from ${module_name} import library
 from ${module_name} import enums
@@ -209,4 +211,14 @@ class Session(object):
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
 
+
+    class acquisition(object):
+        def __init__(self, session):
+            self.session = session
+
+        def __enter__(self):
+            self.session._initiate()
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            self.session._abort()
 

@@ -46,7 +46,7 @@ class TestSession(object):
         session.close()
         self.patched_ctypes_library.niDMM_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
-    def test_context_manager(self):
+    def test_session_context_manager(self):
         with nidmm.Session('dev1') as session:
             assert(session.vi == SESSION_NUM_FOR_TEST)
             self.patched_ctypes_library.niDMM_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
@@ -101,6 +101,15 @@ class TestSession(object):
         with nidmm.Session('dev1') as session:
             sn = session.serial_number
             assert(sn == '0x12345678')
+
+    def test_acquisition_context_manager(self):
+        self.patched_ctypes_library.niDMM_Initiate.side_effect = self.side_effects_helper.niDMM_Initiate
+        self.patched_ctypes_library.niDMM_Abort.side_effect = self.side_effects_helper.niDMM_Abort
+        with nidmm.Session('dev1') as session:
+            with session.acquisition(session):
+                self.patched_ctypes_library.niDMM_Initiate.assert_called_once_with(SESSION_NUM_FOR_TEST)
+            self.patched_ctypes_library.niDMM_Abort.assert_called_once_with(SESSION_NUM_FOR_TEST)
+        self.patched_ctypes_library.niDMM_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
         
 
