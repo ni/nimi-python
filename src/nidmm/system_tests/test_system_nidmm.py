@@ -4,19 +4,23 @@ import nidmm
 import pytest
 import nimodinst
 
-# We look for nidmm devices and use the first one for the tests
 @pytest.fixture(scope='function')
-def device_name(request):
-    device_name_for_test = "unknown"
+def device_info(request):
+    device_info = {}
+    device_name = "unknown"
+    device_sn = "unknown"
     try:
         with nimodinst.Session('nidmm') as session:
             if len(session) > 0:
-                device_name_for_test = session.device_name[0]
+                device_name = session.device_name[0]
+                device_sn = session.serial_number[0]
 
     except nimodinst.Error as e:
         sys.stderr.write(str(e))
         sys.exit(e.code)
-    return device_name_for_test
+    device_info['name'] = device_name
+    device_info['sn'] = device_sn
+    return device_info
 
 
 def test_invalid_device_name():
@@ -29,14 +33,14 @@ def test_invalid_device_name():
         assert e.description.find("Foo!") != -1
 
 
-def test_take_simple_measurement_works(device_name):
-    with nidmm.Session(device_name) as session:
+def test_take_simple_measurement_works(device_info):
+    with nidmm.Session(device_info['name']) as session:
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
         assert session.read(1000) < 0.01 # Assume nothing is connected to device, reads back around 0.
 
 
-def test_wrong_parameter_type(device_name):
-    with nidmm.Session(device_name) as session:
+def test_wrong_parameter_type(device_info):
+    with nidmm.Session(device_info['name']) as session:
         try:
             # We are passing a number where an enum is expected.
             session.configure_measurement_digits(1, 10, 5.5)
@@ -46,8 +50,8 @@ def test_wrong_parameter_type(device_name):
             pass
 
 
-def test_warning(device_name):
-    with nidmm.Session(device_name) as session:
+def test_warning(device_info):
+    with nidmm.Session(device_info['name']) as session:
         session.configure_measurement_digits(nidmm.Function.RES_2_WIRE, 1e6, 3.5)
         try:
             print(session.read(1000)) # Assume nothing is connected to device, overrange!
@@ -57,32 +61,32 @@ def test_warning(device_name):
             pass
 
 
-def test_ViBoolean_attribute(device_name):
-    with nidmm.Session(device_name) as session:
+def test_ViBoolean_attribute(device_info):
+    with nidmm.Session(device_info['name']) as session:
         assert session.simulate is False
         # TODO(marcoskirsch): set a boolean
 
 
-def test_ViString_attribute(device_name):
-    with nidmm.Session(device_name) as session:
-        assert "1A67CAC" == session.serial_number
+def test_ViString_attribute(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        assert int(device_info['sn'],16) == int(session.serial_number,16)
         # TODO(marcoskirsch): set a string
 
 
-def test_ViInt32_attribute(device_name):
-    with nidmm.Session(device_name) as session:
+def test_ViInt32_attribute(device_info):
+    with nidmm.Session(device_info['name']) as session:
         session.sample_count = 5
         assert 5 == session.sample_count
 
 
-def test_ViReal64_attribute(device_name):
-    with nidmm.Session(device_name) as session:
+def test_ViReal64_attribute(device_info):
+    with nidmm.Session(device_info['name']) as session:
         session.range = 50 # Coerces up!
         assert 100 == session.range
 
 
-def test_Enum_attribute(device_name):
-    with nidmm.Session(device_name) as session:
+def test_Enum_attribute(device_info):
+    with nidmm.Session(device_info['name']) as session:
         session.function = nidmm.Function.AC_CURRENT
         assert session.function == nidmm.Function.AC_CURRENT
         assert type(session.function) is nidmm.Function
@@ -94,8 +98,8 @@ def test_Enum_attribute(device_name):
             pass
 
 
-def test_ViSession_attribute(device_name):
-    with nidmm.Session(device_name) as session:
+def test_ViSession_attribute(device_info):
+    with nidmm.Session(device_info['name']) as session:
         try:
             session.io_session = 5
             assert false
@@ -110,9 +114,10 @@ def test_ViSession_attribute(device_name):
             pass
 
 '''
-def test_self_test(device_name):
-    with nidmm.Session(device_name) as session:
+def test_self_test(device_info):
+    with nidmm.Session(device_info['name']) as session:
         result, message = session.self_test()
         assert result is 0
         assert message is 'hello'
 '''
+
