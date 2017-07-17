@@ -47,8 +47,13 @@ class AttributeViString(object):
 class Device(object):
 
     def __init__(self, owner, index):
+<<<<<<< HEAD
 % for attribute in attributes:
         self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index=index)
+=======
+% for attribute in sorted(attributes):
+        self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index = index)
+>>>>>>> master
 % endfor
 
 
@@ -56,7 +61,7 @@ class Session(object):
     '''${config['session_description']}'''
 
     def __init__(self, driver):
-% for attribute in attributes:
+% for attribute in sorted(attributes):
         self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(self, ${attributes[attribute]['id']})
 % endfor
 
@@ -129,6 +134,7 @@ class Session(object):
     functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
     functions = helper.add_all_metadata(functions)
+    functions = sorted(functions, key=lambda k: k['name'])
 %>\
 % for f in functions:
 <%

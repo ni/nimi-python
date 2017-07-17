@@ -9,7 +9,8 @@ MKDIR: $(MKDIRECTORIES)
 
 define log_command
 	$1
-	@echo '$1' >> $(COMMAND_LOG)
+	@echo '$1' >> $(COMMAND_LOG_BATCH)
+	@echo '$1' >> $(COMMAND_LOG_SH)
 endef
 
 define mkdir_rule
@@ -82,4 +83,15 @@ test: $(TOX_INI)
 flake8: $(TOX_INI)
 	@echo Running flake8
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && tox -e flake8)
+
+update_generated_files: $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
+	@echo Updating generated files
+	$(_hide_cmds)$(call log_command,rm -Rf $(GENERATED_DIR)/$(DRIVER))
+	$(_hide_cmds)$(call log_command,mkdir -p $(GENERATED_DIR)/$(DRIVER))
+	$(_hide_cmds)$(call log_command,cp -Rf $(MODULE_DIR)/* $(GENERATED_DIR)/$(DRIVER))
+	$(_hide_cmds)$(call log_command,cp -Rf $(OUTPUT_DIR)/setup.py $(GENERATED_DIR)/$(DRIVER))
+
+
+
+
 
