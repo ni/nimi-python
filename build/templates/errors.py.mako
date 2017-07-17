@@ -10,10 +10,8 @@ c_function_prefix = config['c_function_prefix']
 driver_name = config['driver_name']
 %>
 
-import ctypes
 import platform
 
-import ${module_name}
 
 def _is_success(error_code):
     return (error_code == 0)
@@ -25,6 +23,7 @@ def _is_error(error_code):
 
 def _is_warning(error_code):
     return (error_code > 0)
+
 
 class _ErrorBase(Exception):
 
@@ -71,4 +70,3 @@ def _handle_error(session, error_code):
         raise Error(session, error_code)
     if (_is_warning(error_code)):
         raise Warning(session, error_code)
-

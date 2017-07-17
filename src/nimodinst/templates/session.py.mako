@@ -9,10 +9,9 @@
 %>\
 
 import ctypes
+from ${module_name} import ctypes_types
 from ${module_name} import errors
 from ${module_name} import library
-from ${module_name} import enums
-from ${module_name} import ctypes_types
 
 
 class AttributeViInt32(object):
@@ -29,6 +28,7 @@ class AttributeViInt32(object):
     def __format__(self, format_spec):
         return format(self._owner._get_installed_device_attribute_vi_int32(self._index, self._attribute_id), format_spec)
 
+
 class AttributeViString(object):
 
     def __init__(self, owner, attribute_id, index=None):
@@ -43,12 +43,14 @@ class AttributeViString(object):
     def __format__(self, format_spec):
         return format(self._owner._get_installed_device_attribute_vi_string(self._index, self._attribute_id), format_spec)
 
+
 class Device(object):
 
     def __init__(self, owner, index):
 % for attribute in sorted(attributes):
-        self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index = index)
+        self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index=index)
 % endfor
+
 
 class Session(object):
     '''${config['session_description']}'''
@@ -86,11 +88,11 @@ class Session(object):
             (trust that the IVI error code was properly stored in the session
             by the driver)
             '''
-            error_code = ${module_name}.ctypes_types.ViStatus_ctype(error_code)
+            error_code = ctypes_types.ViStatus_ctype(error_code)
             error_message = ctypes.create_string_buffer(buffer_size)
             library.${c_function_prefix}GetExtendedErrorInfo(buffer_size, error_message)
 
-        #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
+        # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
         return error_code, error_message.value.decode("ascii")
 
@@ -122,9 +124,7 @@ class Session(object):
             self._close_installed_devices_session(self.handle)
             self.handle = 0
 
-
     ''' These are code-generated '''
-
 <%
     functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
@@ -149,16 +149,16 @@ class Session(object):
         ${helper.get_method_return_snippet(output_parameters)}
 % endfor
 
-
     ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
 
-    def _get_installed_device_attribute_vi_string(self, index, attribute_id):
+    def _get_installed_device_attribute_vi_string(self, index, attribute_id):  # noqa: F811
         # Do the IVI dance
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         buffer_size = 0
         value_ctype = ctypes.create_string_buffer(buffer_size)
         error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        if(errors._is_error(error_code)): raise errors.Error(self, error_code)
+        if(errors._is_error(error_code)):
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         value_ctype = ctypes.create_string_buffer(buffer_size)
         error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
