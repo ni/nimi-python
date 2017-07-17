@@ -1,10 +1,12 @@
 # This file was generated
 
 import ctypes
+
+from nidmm import ctypes_types
+from nidmm import enums
 from nidmm import errors
 from nidmm import library
-from nidmm import enums
-from nidmm import ctypes_types
+
 
 class AttributeViInt32(object):
 
@@ -74,7 +76,8 @@ class AttributeEnum(object):
         return self.attribute_type(obj._get_attribute_vi_int32(self.channel, self.attribute_id))
 
     def __set__(self, obj, value):
-        if type(value) is not self.attribute_type: raise TypeError('Value mode must be of type ' + str(self.attribute_type))
+        if type(value) is not self.attribute_type:
+            raise TypeError('Value mode must be of type ' + str(self.attribute_type))
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
 
 
@@ -179,9 +182,9 @@ class Session(object):
     waveform_points = AttributeViInt32(1150019)
     waveform_rate = AttributeViReal64(1150018)
 
-    def __init__(self, resource_name, id_query = 0, reset_device = False, options_string = ""):
+    def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):
         self.library = library.get_library()
-        self.vi = 0 # This must be set before calling _init_with_options.
+        self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
 
     def __del__(self):
@@ -197,11 +200,10 @@ class Session(object):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         try:
             self._close()
-        except nidmm.Error as e:
+        except errors.Error:
             # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
             print("Failed to close session.")
         self.vi = 0
-
 
     # method needed for generic driver exceptions
     def _get_error_description(self, error_code):
@@ -234,7 +236,7 @@ class Session(object):
             error_message = ctypes.create_string_buffer(buffer_size)
             self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
 
-        #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
+        # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
         return new_error_code.value, error_message.value.decode("ascii")
 
@@ -261,25 +263,29 @@ class Session(object):
         return
 
     def configure_adc_calibration(self, adc_gain_comp):
-        if type(adc_gain_comp) is not enums.EnabledSetting: raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
+        if type(adc_gain_comp) is not enums.EnabledSetting:
+            raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
         error_code = self.library.niDMM_ConfigureADCCalibration(self.vi, adc_gain_comp.value)
         errors._handle_error(self, error_code)
         return
 
     def configure_auto_zero_mode(self, auto_zero_mode):
-        if type(auto_zero_mode) is not enums.EnabledSetting: raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
+        if type(auto_zero_mode) is not enums.EnabledSetting:
+            raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
         error_code = self.library.niDMM_ConfigureAutoZeroMode(self.vi, auto_zero_mode.value)
         errors._handle_error(self, error_code)
         return
 
     def configure_cable_comp_type(self, type_of_compensation):
-        if type(type_of_compensation) is not enums.CableCompensationType: raise TypeError('Parameter mode must be of type ' + str(enums.CableCompensationType))
+        if type(type_of_compensation) is not enums.CableCompensationType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.CableCompensationType))
         error_code = self.library.niDMM_ConfigureCableCompType(self.vi, type_of_compensation.value)
         errors._handle_error(self, error_code)
         return
 
     def configure_current_source(self, diode_current_src):
-        if type(diode_current_src) is not enums.CurrentSource: raise TypeError('Parameter mode must be of type ' + str(enums.CurrentSource))
+        if type(diode_current_src) is not enums.CurrentSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.CurrentSource))
         error_code = self.library.niDMM_ConfigureCurrentSource(self.vi, diode_current_src.value)
         errors._handle_error(self, error_code)
         return
@@ -295,37 +301,43 @@ class Session(object):
         return
 
     def configure_meas_complete_dest(self, destination):
-        if type(destination) is not enums.Terminal: raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(destination) is not enums.Terminal:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
         error_code = self.library.niDMM_ConfigureMeasCompleteDest(self.vi, destination.value)
         errors._handle_error(self, error_code)
         return
 
     def configure_meas_complete_slope(self, polarity):
-        if type(polarity) is not enums.Slope: raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
+        if type(polarity) is not enums.Slope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
         error_code = self.library.niDMM_ConfigureMeasCompleteSlope(self.vi, polarity.value)
         errors._handle_error(self, error_code)
         return
 
     def configure_measurement_absolute(self, meas_function, range, resolution_absolute):
-        if type(meas_function) is not enums.Function: raise TypeError('Parameter mode must be of type ' + str(enums.Function))
+        if type(meas_function) is not enums.Function:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Function))
         error_code = self.library.niDMM_ConfigureMeasurementAbsolute(self.vi, meas_function.value, range, resolution_absolute)
         errors._handle_error(self, error_code)
         return
 
     def configure_measurement_digits(self, meas_function, range, resolution_digits):
-        if type(meas_function) is not enums.Function: raise TypeError('Parameter mode must be of type ' + str(enums.Function))
+        if type(meas_function) is not enums.Function:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Function))
         error_code = self.library.niDMM_ConfigureMeasurementDigits(self.vi, meas_function.value, range, resolution_digits)
         errors._handle_error(self, error_code)
         return
 
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger, sample_interval):
-        if type(sample_trigger) is not enums.Terminal: raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(sample_trigger) is not enums.Terminal:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
         error_code = self.library.niDMM_ConfigureMultiPoint(self.vi, trigger_count, sample_count, sample_trigger.value, sample_interval)
         errors._handle_error(self, error_code)
         return
 
     def configure_offset_comp_ohms(self, offset_comp_ohms):
-        if type(offset_comp_ohms) is not enums.EnabledSetting: raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
+        if type(offset_comp_ohms) is not enums.EnabledSetting:
+            raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
         error_code = self.library.niDMM_ConfigureOffsetCompOhms(self.vi, offset_comp_ohms.value)
         errors._handle_error(self, error_code)
         return
@@ -351,7 +363,8 @@ class Session(object):
         return
 
     def configure_sample_trigger_slope(self, polarity):
-        if type(polarity) is not enums.Slope: raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
+        if type(polarity) is not enums.Slope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
         error_code = self.library.niDMM_ConfigureSampleTriggerSlope(self.vi, polarity.value)
         errors._handle_error(self, error_code)
         return
@@ -367,7 +380,8 @@ class Session(object):
         return
 
     def configure_thermistor_type(self, thermistor_type):
-        if type(thermistor_type) is not enums.TemperatureThermistorType: raise TypeError('Parameter mode must be of type ' + str(enums.TemperatureThermistorType))
+        if type(thermistor_type) is not enums.TemperatureThermistorType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TemperatureThermistorType))
         error_code = self.library.niDMM_ConfigureThermistorType(self.vi, thermistor_type.value)
         errors._handle_error(self, error_code)
         return
@@ -378,31 +392,36 @@ class Session(object):
         return
 
     def configure_transducer_type(self, transducer_type):
-        if type(transducer_type) is not enums.TemperatureTransducerType: raise TypeError('Parameter mode must be of type ' + str(enums.TemperatureTransducerType))
+        if type(transducer_type) is not enums.TemperatureTransducerType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TemperatureTransducerType))
         error_code = self.library.niDMM_ConfigureTransducerType(self.vi, transducer_type.value)
         errors._handle_error(self, error_code)
         return
 
     def configure_trigger(self, trig_source, trigger_delay):
-        if type(trig_source) is not enums.Terminal: raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(trig_source) is not enums.Terminal:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
         error_code = self.library.niDMM_ConfigureTrigger(self.vi, trig_source.value, trigger_delay)
         errors._handle_error(self, error_code)
         return
 
     def configure_trigger_slope(self, polarity):
-        if type(polarity) is not enums.Slope: raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
+        if type(polarity) is not enums.Slope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
         error_code = self.library.niDMM_ConfigureTriggerSlope(self.vi, polarity.value)
         errors._handle_error(self, error_code)
         return
 
     def configure_waveform_acquisition(self, function, range, rate, waveform_points):
-        if type(function) is not enums.Function: raise TypeError('Parameter mode must be of type ' + str(enums.Function))
+        if type(function) is not enums.Function:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Function))
         error_code = self.library.niDMM_ConfigureWaveformAcquisition(self.vi, function.value, range, rate, waveform_points)
         errors._handle_error(self, error_code)
         return
 
     def configure_waveform_coupling(self, coupling):
-        if type(coupling) is not enums.WaveformCouplingMode: raise TypeError('Parameter mode must be of type ' + str(enums.WaveformCouplingMode))
+        if type(coupling) is not enums.WaveformCouplingMode:
+            raise TypeError('Parameter mode must be of type ' + str(enums.WaveformCouplingMode))
         error_code = self.library.niDMM_ConfigureWaveformCoupling(self.vi, coupling.value)
         errors._handle_error(self, error_code)
         return
@@ -462,7 +481,7 @@ class Session(object):
         return value_ctype.value
 
     def _get_attribute_vi_string(self, channel_name, attribute_id, buf_size):
-        value_ctype = ctypes_types.ViString_ctype(0) #TODO: allocate a buffer
+        value_ctype = ctypes_types.ViString_ctype(0)  # TODO(marcoskirsch): allocate a buffer
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buf_size, value_ctype)
         errors._handle_error(self, error_code)
         return value_ctype.value
@@ -502,13 +521,13 @@ class Session(object):
 
     def _get_error(self, buffer_size):
         error_code_ctype = ctypes_types.ViStatus_ctype(0)
-        description_ctype = ctypes_types.ViChar_ctype(0) #TODO: allocate a buffer
+        description_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
         error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, ctypes.pointer(description_ctype))
         errors._handle_error(self, error_code)
         return error_code_ctype.value, description_ctype.value.decode("ascii")
 
     def _get_error_message(self, error_code, buffer_size):
-        err_message_ctype = ctypes_types.ViChar_ctype(0) #TODO: allocate a buffer
+        err_message_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
         error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, ctypes.pointer(err_message_ctype))
         errors._handle_error(self, error_code)
         return err_message_ctype.value.decode("ascii")
@@ -531,7 +550,7 @@ class Session(object):
         return
 
     def get_next_interchange_warning(self, buffer_size):
-        warn_string_ctype = ctypes_types.ViChar_ctype(0) #TODO: allocate a buffer
+        warn_string_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
         error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, ctypes.pointer(warn_string_ctype))
         errors._handle_error(self, error_code)
         return warn_string_ctype.value.decode("ascii")
@@ -683,25 +702,23 @@ class Session(object):
 
     def self_test(self):
         self_test_result_ctype = ctypes_types.ViInt16_ctype(0)
-        self_test_message_ctype = ctypes_types.ViChar_ctype(0) #TODO: allocate a buffer
+        self_test_message_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
         error_code = self.library.niDMM_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.pointer(self_test_message_ctype))
         errors._handle_error(self, error_code)
         return self_test_result_ctype.value, self_test_message_ctype.value.decode("ascii")
 
-
     ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
 
-    def _get_attribute_vi_string(self, channel_name, attribute_id):
+    def _get_attribute_vi_string(self, channel_name, attribute_id):  # noqa: F811
         # Do the IVI dance
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         buffer_size = 0
         value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
-        if(errors._is_error(error_code)): raise errors.Error(self.library, self.vi, error_code)
+        if(errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
         buffer_size = error_code
         value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
-
-

@@ -2,10 +2,8 @@
 # This file was generated
 
 
-import ctypes
 import platform
 
-import nidmm
 
 def _is_success(error_code):
     return (error_code == 0)
@@ -17,6 +15,7 @@ def _is_error(error_code):
 
 def _is_warning(error_code):
     return (error_code > 0)
+
 
 class _ErrorBase(Exception):
 
@@ -63,4 +62,3 @@ def _handle_error(session, error_code):
         raise Error(session, error_code)
     if (_is_warning(error_code)):
         raise Warning(session, error_code)
-
