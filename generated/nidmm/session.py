@@ -1,6 +1,4 @@
 # This file was generated
-
-from contextlib import contextmanager
 import ctypes
 
 from nidmm import ctypes_types
@@ -93,8 +91,6 @@ class AttributeViSession(object):
 
     def __set__(self, obj, value):
         raise TypeError('Attributes of type ViSession are unsupported in Python')
-
-
 
 
 class Acquisition(object):

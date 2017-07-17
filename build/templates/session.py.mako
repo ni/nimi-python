@@ -12,8 +12,6 @@
     functions = helper.add_all_metadata(functions)
     functions = sorted(functions, key=lambda k: k['name'])
 %>\
-
-from contextlib import contextmanager
 import ctypes
 
 from ${module_name} import ctypes_types
@@ -106,8 +104,6 @@ class AttributeViSession(object):
 
     def __set__(self, obj, value):
         raise TypeError('Attributes of type ViSession are unsupported in Python')
-
-
 % for c in config['context_manager']:
 <%
 context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
