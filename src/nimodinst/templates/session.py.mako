@@ -47,13 +47,8 @@ class AttributeViString(object):
 class Device(object):
 
     def __init__(self, owner, index):
-<<<<<<< HEAD
-% for attribute in attributes:
-        self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index=index)
-=======
 % for attribute in sorted(attributes):
         self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index = index)
->>>>>>> master
 % endfor
 
 
