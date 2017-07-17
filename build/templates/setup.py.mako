@@ -4,14 +4,13 @@
 config        = template_parameters['metadata'].config
 %>
 
-import os
+from setuptools.command.test import test as test_command
 from setuptools import setup
-from setuptools.command.test import test as TestCommand
 
 
-class PyTest(TestCommand):
+class PyTest(test_command):
     def finalize_options(self):
-        TestCommand.finalize_options(self)
+        test_command.finalize_options(self)
         self.test_args = []
         self.test_suite = True
 
@@ -19,7 +18,7 @@ class PyTest(TestCommand):
         import pytest
         pytest.main(self.test_args)
 
-        
+
 pypi_name = '${config['module_name']}'
 
 
@@ -43,7 +42,7 @@ setup(
     install_requires=[
         'enum34;python_version<"3.4"',
     ],
-    setup_requires=['pytest-runner',],
+    setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
     test_suite='tests',
     classifiers=[

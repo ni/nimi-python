@@ -109,23 +109,23 @@ enums = {
     ],
 
     'Terminal': [
-        {'name': 'NONE         ', 'value': -1},
-        {'name': 'IMMEDIATE    ', 'value': 1},
-        {'name': 'EXTERNAL     ', 'value': 2},
+        {'name': 'NONE', 'value': -1},
+        {'name': 'IMMEDIATE', 'value': 1},
+        {'name': 'EXTERNAL', 'value': 2},
         {'name': 'SOFTWARE_TRIG', 'value': 3},
-        {'name': 'PXI_TRIG0    ', 'value': 111},
-        {'name': 'PXI_TRIG1    ', 'value': 112},
-        {'name': 'PXI_TRIG2    ', 'value': 113},
-        {'name': 'PXI_TRIG3    ', 'value': 114},
-        {'name': 'PXI_TRIG4    ', 'value': 115},
-        {'name': 'PXI_TRIG5    ', 'value': 116},
-        {'name': 'PXI_TRIG6    ', 'value': 117},
-        {'name': 'PXI_TRIG7    ', 'value': 118},
-        {'name': 'PXI_STAR     ', 'value': 131},
-        #{'name': 'LBR_TRIG0    ', 'value':1003}, # TODO: Internal Trigger Line of a PXI/SCXI Combination Chassis
-        #{'name': 'LBR_TRIG1    ', 'value':1004}, # TODO: Internal Trigger Line of a PXI/SCXI Combination Chassis
-        {'name': 'AUX_TRIG1    ', 'value': 1001},
-        {'name': 'INTERVAL     ', 'value': 10},
+        {'name': 'PXI_TRIG0', 'value': 111},
+        {'name': 'PXI_TRIG1', 'value': 112},
+        {'name': 'PXI_TRIG2', 'value': 113},
+        {'name': 'PXI_TRIG3', 'value': 114},
+        {'name': 'PXI_TRIG4', 'value': 115},
+        {'name': 'PXI_TRIG5', 'value': 116},
+        {'name': 'PXI_TRIG6', 'value': 117},
+        {'name': 'PXI_TRIG7', 'value': 118},
+        {'name': 'PXI_STAR', 'value': 131},
+        #{'name': 'LBR_TRIG0', 'value':1003}, # TODO: Internal Trigger Line of a PXI/SCXI Combination Chassis
+        #{'name': 'LBR_TRIG1', 'value':1004}, # TODO: Internal Trigger Line of a PXI/SCXI Combination Chassis
+        {'name': 'AUX_TRIG1', 'value': 1001},
+        {'name': 'INTERVAL', 'value': 10},
     ],
 
     'AcquisitionStatus': [

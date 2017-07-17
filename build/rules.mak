@@ -80,6 +80,10 @@ test: $(TOX_INI)
 	@echo Running tox tests
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && tox)
 
+flake8: $(TOX_INI)
+	@echo Running flake8
+	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && tox -e flake8)
+
 update_generated_files: $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
 	@echo Updating generated files
 	$(_hide_cmds)$(call log_command,rm -Rf $(GENERATED_DIR)/$(DRIVER))
