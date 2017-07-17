@@ -1,10 +1,10 @@
 # This file was generated
 
-import ctypes
 import platform
 
-from nimodinst import errors
 from nimodinst import ctypes_library
+from nimodinst import errors
+
 
 def get_library_name():
     try:
@@ -14,6 +14,7 @@ def get_library_name():
     except KeyError as e:
         raise errors.UnsupportedConfigurationError
 
+
 def get_library_type():
     try:
         return {   'Linux': {'64bit': {'name': 'libnimodinst.so', 'type': 'cdll'}},
@@ -22,10 +23,11 @@ def get_library_type():
     except KeyError as e:
         raise errors.UnsupportedConfigurationError
 
+
 def get_library():
     try:
-        library = ctypes_library.nimodinst_ctypes_library(get_library_name(), get_library_type())
-    except OSError as e:
+        library = ctypes_library.NimodinstCtypesLibrary(get_library_name(), get_library_type())
+    except OSError:
         raise errors.DriverNotInstalledError()
 
     return library

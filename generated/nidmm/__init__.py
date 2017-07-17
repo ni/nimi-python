@@ -1,8 +1,7 @@
 #!/usr/bin/python
 # This file was generated
 
-from nidmm.enums import *
-from nidmm.errors import Error
-from nidmm.errors import Warning
-from nidmm.session import Session
-
+from nidmm.enums import *          # noqa: F403,F401,H303
+from nidmm.errors import Error     # noqa: F401
+from nidmm.errors import Warning   # noqa: F401
+from nidmm.session import Session  # noqa: F401
