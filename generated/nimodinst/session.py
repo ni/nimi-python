@@ -1,10 +1,9 @@
 # This file was generated
 
 import ctypes
+from nimodinst import ctypes_types
 from nimodinst import errors
 from nimodinst import library
-from nimodinst import enums
-from nimodinst import ctypes_types
 
 
 class AttributeViInt32(object):
@@ -21,6 +20,7 @@ class AttributeViInt32(object):
     def __format__(self, format_spec):
         return format(self._owner._get_installed_device_attribute_vi_int32(self._index, self._attribute_id), format_spec)
 
+
 class AttributeViString(object):
 
     def __init__(self, owner, attribute_id, index=None):
@@ -35,18 +35,20 @@ class AttributeViString(object):
     def __format__(self, format_spec):
         return format(self._owner._get_installed_device_attribute_vi_string(self._index, self._attribute_id), format_spec)
 
+
 class Device(object):
 
     def __init__(self, owner, index):
-        self.bus_number = AttributeViInt32(owner, 12, index = index)
-        self.chassis_number = AttributeViInt32(owner, 11, index = index)
-        self.device_model = AttributeViString(owner, 1, index = index)
-        self.device_name = AttributeViString(owner, 0, index = index)
-        self.max_pciexpress_link_width = AttributeViInt32(owner, 18, index = index)
-        self.pciexpress_link_width = AttributeViInt32(owner, 17, index = index)
-        self.serial_number = AttributeViString(owner, 2, index = index)
-        self.slot_number = AttributeViInt32(owner, 10, index = index)
-        self.socket_number = AttributeViInt32(owner, 13, index = index)
+        self.bus_number = AttributeViInt32(owner, 12, index=index)
+        self.chassis_number = AttributeViInt32(owner, 11, index=index)
+        self.device_model = AttributeViString(owner, 1, index=index)
+        self.device_name = AttributeViString(owner, 0, index=index)
+        self.max_pciexpress_link_width = AttributeViInt32(owner, 18, index=index)
+        self.pciexpress_link_width = AttributeViInt32(owner, 17, index=index)
+        self.serial_number = AttributeViString(owner, 2, index=index)
+        self.slot_number = AttributeViInt32(owner, 10, index=index)
+        self.socket_number = AttributeViInt32(owner, 13, index=index)
+
 
 class Session(object):
     '''A NI-ModInst session to get device information'''
@@ -90,11 +92,11 @@ class Session(object):
             (trust that the IVI error code was properly stored in the session
             by the driver)
             '''
-            error_code = nimodinst.ctypes_types.ViStatus_ctype(error_code)
+            error_code = ctypes_types.ViStatus_ctype(error_code)
             error_message = ctypes.create_string_buffer(buffer_size)
             library.niModInst_GetExtendedErrorInfo(buffer_size, error_message)
 
-        #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
+        # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
         return error_code, error_message.value.decode("ascii")
 
@@ -126,9 +128,7 @@ class Session(object):
             self._close_installed_devices_session(self.handle)
             self.handle = 0
 
-
     ''' These are code-generated '''
-
 
     def _close_installed_devices_session(self, handle):
         error_code = self.library.niModInst_CloseInstalledDevicesSession(handle)
@@ -136,7 +136,7 @@ class Session(object):
         return
 
     def get_extended_error_info(self, error_info_buffer_size):
-        error_info_ctype = ctypes_types.ViChar_ctype(0) #TODO: allocate a buffer
+        error_info_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
         error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, ctypes.pointer(error_info_ctype))
         errors._handle_error(self, error_code)
         return error_info_ctype.value.decode("ascii")
@@ -148,7 +148,7 @@ class Session(object):
         return attribute_value_ctype.value
 
     def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id, attribute_value_buffer_size):
-        attribute_value_ctype = ctypes_types.ViChar_ctype(0) #TODO: allocate a buffer
+        attribute_value_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
         error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(handle, index, attribute_id, attribute_value_buffer_size, ctypes.pointer(attribute_value_ctype))
         errors._handle_error(self, error_code)
         return attribute_value_ctype.value.decode("ascii")
@@ -160,16 +160,16 @@ class Session(object):
         errors._handle_error(self, error_code)
         return handle_ctype.value, item_count_ctype.value
 
-
     ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
 
-    def _get_installed_device_attribute_vi_string(self, index, attribute_id):
+    def _get_installed_device_attribute_vi_string(self, index, attribute_id):  # noqa: F811
         # Do the IVI dance
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         buffer_size = 0
         value_ctype = ctypes.create_string_buffer(buffer_size)
         error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        if(errors._is_error(error_code)): raise errors.Error(self, error_code)
+        if(errors._is_error(error_code)):
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         value_ctype = ctypes.create_string_buffer(buffer_size)
         error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))

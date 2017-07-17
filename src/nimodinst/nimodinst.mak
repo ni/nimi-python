@@ -2,7 +2,8 @@
 
 include $(BUILD_HELPER_DIR)/defines.mak
 
-FILES_TO_GENERATE := $(DEFAULT_FILES_TO_GENERATE)
+# We want everything but enums.py
+FILES_TO_GENERATE := $(filter-out enums.py,$(DEFAULT_FILES_TO_GENERATE))
 
 FILES_TO_COPY := $(DEFAULT_FILES_TO_COPY)
 
