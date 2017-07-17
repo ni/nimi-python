@@ -36,7 +36,7 @@ else
 LOG_OUTPUT := | tee
 endif
 
-TARGETS := $(filter-out run_unit_tests,$(POSSIBLE_TARGETS))
+TARGETS := $(filter-out run_unit_tests,$(DEFAULT_TARGETS))
 
 .PHONY:
 all: $(TARGETS)
