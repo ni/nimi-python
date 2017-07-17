@@ -10,7 +10,7 @@
     functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
     functions = helper.add_all_metadata(functions)
-
+    functions = sorted(functions, key=lambda k: k['name'])
 %>\
 
 from contextlib import contextmanager
@@ -129,7 +129,7 @@ class ${context_name.title()}(object):
 class Session(object):
     '''${config['session_description']}'''
 
-% for attribute in attributes:
+% for attribute in sorted(attributes):
     %if attributes[attribute]['enum']:
     ${attribute.lower()} = AttributeEnum(${attributes[attribute]['id']}, enums.${attributes[attribute]['enum']})
     %else:

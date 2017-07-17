@@ -1,18 +1,10 @@
 # This file was generated
-<%
-    import build.helper as helper
-
-    config = template_parameters['metadata'].config
-    module_name = config['module_name']
-    c_function_prefix = config['c_function_prefix']
-    attributes = template_parameters['metadata'].attributes
-%>\
 
 import ctypes
-from ${module_name} import errors
-from ${module_name} import library
-from ${module_name} import enums
-from ${module_name} import ctypes_types
+from nimodinst import errors
+from nimodinst import library
+from nimodinst import enums
+from nimodinst import ctypes_types
 
 
 class AttributeViInt32(object):
@@ -46,17 +38,29 @@ class AttributeViString(object):
 class Device(object):
 
     def __init__(self, owner, index):
-% for attribute in sorted(attributes):
-        self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index = index)
-% endfor
+        self.bus_number = AttributeViInt32(owner, 12, index = index)
+        self.chassis_number = AttributeViInt32(owner, 11, index = index)
+        self.device_model = AttributeViString(owner, 1, index = index)
+        self.device_name = AttributeViString(owner, 0, index = index)
+        self.max_pciexpress_link_width = AttributeViInt32(owner, 18, index = index)
+        self.pciexpress_link_width = AttributeViInt32(owner, 17, index = index)
+        self.serial_number = AttributeViString(owner, 2, index = index)
+        self.slot_number = AttributeViInt32(owner, 10, index = index)
+        self.socket_number = AttributeViInt32(owner, 13, index = index)
 
 class Session(object):
-    '''${config['session_description']}'''
+    '''A NI-ModInst session to get device information'''
 
     def __init__(self, driver):
-% for attribute in sorted(attributes):
-        self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(self, ${attributes[attribute]['id']})
-% endfor
+        self.bus_number = AttributeViInt32(self, 12)
+        self.chassis_number = AttributeViInt32(self, 11)
+        self.device_model = AttributeViString(self, 1)
+        self.device_name = AttributeViString(self, 0)
+        self.max_pciexpress_link_width = AttributeViInt32(self, 18)
+        self.pciexpress_link_width = AttributeViInt32(self, 17)
+        self.serial_number = AttributeViString(self, 2)
+        self.slot_number = AttributeViInt32(self, 10)
+        self.socket_number = AttributeViInt32(self, 13)
 
         self.handle = 0
         self.item_count = 0
@@ -76,7 +80,7 @@ class Session(object):
     # TODO(texasaggie97) Rewrite to use session function instead of library once buffer
     #   retrieval is working
     def _get_error_description(self, error_code):
-        buffer_size = library.${c_function_prefix}GetExtendedErrorInfo(0, None)
+        buffer_size = library.niModInst_GetExtendedErrorInfo(0, None)
 
         if (buffer_size > 0):
             '''
@@ -86,9 +90,9 @@ class Session(object):
             (trust that the IVI error code was properly stored in the session
             by the driver)
             '''
-            error_code = ${module_name}.ctypes_types.ViStatus_ctype(error_code)
+            error_code = nimodinst.ctypes_types.ViStatus_ctype(error_code)
             error_message = ctypes.create_string_buffer(buffer_size)
-            library.${c_function_prefix}GetExtendedErrorInfo(buffer_size, error_message)
+            library.niModInst_GetExtendedErrorInfo(buffer_size, error_message)
 
         #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
@@ -125,29 +129,36 @@ class Session(object):
 
     ''' These are code-generated '''
 
-<%
-    functions = template_parameters['metadata'].functions
-    functions = helper.extract_codegen_functions(functions)
-    functions = helper.add_all_metadata(functions)
-    functions = sorted(functions, key=lambda k: k['name'])
-%>\
-% for f in functions:
-<%
-    input_parameters = helper.extract_input_parameters(f['parameters'])
-    output_parameters = helper.extract_output_parameters(f['parameters'])
-    enum_input_parameters = helper.extract_enum_parameters(input_parameters)
-%>
-    def ${f['python_name']}(${helper.get_method_parameters_snippet(input_parameters)}):
-% for parameter in enum_input_parameters:
-        ${helper.get_enum_type_check_snippet(parameter)}
-% endfor
-% for output_parameter in output_parameters:
-        ${helper.get_ctype_variable_declaration_snippet(output_parameter)}
-% endfor
-        error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
+
+    def _close_installed_devices_session(self, handle):
+        error_code = self.library.niModInst_CloseInstalledDevicesSession(handle)
         errors._handle_error(self, error_code)
-        ${helper.get_method_return_snippet(output_parameters)}
-% endfor
+        return
+
+    def get_extended_error_info(self, error_info_buffer_size):
+        error_info_ctype = ctypes_types.ViChar_ctype(0) #TODO: allocate a buffer
+        error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, ctypes.pointer(error_info_ctype))
+        errors._handle_error(self, error_code)
+        return error_info_ctype.value.decode("ascii")
+
+    def _get_installed_device_attribute_vi_int32(self, handle, index, attribute_id):
+        attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
+        error_code = self.library.niModInst_GetInstalledDeviceAttributeViInt32(handle, index, attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors._handle_error(self, error_code)
+        return attribute_value_ctype.value
+
+    def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id, attribute_value_buffer_size):
+        attribute_value_ctype = ctypes_types.ViChar_ctype(0) #TODO: allocate a buffer
+        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(handle, index, attribute_id, attribute_value_buffer_size, ctypes.pointer(attribute_value_ctype))
+        errors._handle_error(self, error_code)
+        return attribute_value_ctype.value.decode("ascii")
+
+    def _open_installed_devices_session(self, driver):
+        handle_ctype = ctypes_types.ViSession_ctype(0)
+        item_count_ctype = ctypes_types.ViInt32_ctype(0)
+        error_code = self.library.niModInst_OpenInstalledDevicesSession(driver.encode('ascii'), ctypes.pointer(handle_ctype), ctypes.pointer(item_count_ctype))
+        errors._handle_error(self, error_code)
+        return handle_ctype.value, item_count_ctype.value
 
 
     ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
@@ -157,10 +168,10 @@ class Session(object):
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         buffer_size = 0
         value_ctype = ctypes.create_string_buffer(buffer_size)
-        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         if(errors._is_error(error_code)): raise errors.Error(self, error_code)
         buffer_size = error_code
         value_ctype = ctypes.create_string_buffer(buffer_size)
-        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")

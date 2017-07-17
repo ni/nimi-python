@@ -3,7 +3,7 @@
 
 import re
 import pprint
-pp = pprint.PrettyPrinter(indent=3)
+pp = pprint.PrettyPrinter(indent=4)
 
 # Coding convention transformation functions.
 
@@ -196,3 +196,9 @@ def get_ctype_variable_declaration_snippet(parameter):
     else:
         snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)'
     return snippet
+
+def get_dictionary_snippet(d, indent=4):
+    '''Returns a formatted dictionary'''
+    d_str = pp.pformat(d)
+    d_lines = d_str.splitlines()
+    return ('\n' + (' ' * indent)).join(d_lines)

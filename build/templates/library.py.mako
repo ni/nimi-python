@@ -1,5 +1,6 @@
 # This file was generated
 <%
+import build.helper as helper
 config        = template_parameters['metadata'].config
 
 module_name = config['module_name']
@@ -13,13 +14,13 @@ from ${module_name} import ctypes_library
 
 def get_library_name():
     try:
-        return ${config['library_info']}[platform.system()][platform.architecture()[0]]['name']
+        return ${helper.get_dictionary_snippet(config['library_info'], indent=8)}[platform.system()][platform.architecture()[0]]['name']
     except KeyError as e:
         raise errors.UnsupportedConfigurationError
 
 def get_library_type():
     try:
-        return ${config['library_info']}[platform.system()][platform.architecture()[0]]['type']
+        return ${helper.get_dictionary_snippet(config['library_info'], indent=8)}[platform.system()][platform.architecture()[0]]['type']
     except KeyError as e:
         raise errors.UnsupportedConfigurationError
 
