@@ -106,7 +106,7 @@ class TestSession(object):
         self.patched_ctypes_library.niDMM_Initiate.side_effect = self.side_effects_helper.niDMM_Initiate
         self.patched_ctypes_library.niDMM_Abort.side_effect = self.side_effects_helper.niDMM_Abort
         with nidmm.Session('dev1') as session:
-            with session.acquisition(session):
+            with session.acquisition:
                 self.patched_ctypes_library.niDMM_Initiate.assert_called_once_with(SESSION_NUM_FOR_TEST)
             self.patched_ctypes_library.niDMM_Abort.assert_called_once_with(SESSION_NUM_FOR_TEST)
         self.patched_ctypes_library.niDMM_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
