@@ -39,15 +39,15 @@ class AttributeViString(object):
 class Device(object):
 
     def __init__(self, owner, index):
-        self.bus_number = AttributeViInt32(owner, 12, index = index)
-        self.chassis_number = AttributeViInt32(owner, 11, index = index)
-        self.device_model = AttributeViString(owner, 1, index = index)
-        self.device_name = AttributeViString(owner, 0, index = index)
-        self.max_pciexpress_link_width = AttributeViInt32(owner, 18, index = index)
-        self.pciexpress_link_width = AttributeViInt32(owner, 17, index = index)
-        self.serial_number = AttributeViString(owner, 2, index = index)
-        self.slot_number = AttributeViInt32(owner, 10, index = index)
-        self.socket_number = AttributeViInt32(owner, 13, index = index)
+        self.bus_number = AttributeViInt32(owner, 12, index=index)
+        self.chassis_number = AttributeViInt32(owner, 11, index=index)
+        self.device_model = AttributeViString(owner, 1, index=index)
+        self.device_name = AttributeViString(owner, 0, index=index)
+        self.max_pciexpress_link_width = AttributeViInt32(owner, 18, index=index)
+        self.pciexpress_link_width = AttributeViInt32(owner, 17, index=index)
+        self.serial_number = AttributeViString(owner, 2, index=index)
+        self.slot_number = AttributeViInt32(owner, 10, index=index)
+        self.socket_number = AttributeViInt32(owner, 13, index=index)
 
 
 class Session(object):

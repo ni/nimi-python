@@ -48,7 +48,7 @@ class Device(object):
 
     def __init__(self, owner, index):
 % for attribute in sorted(attributes):
-        self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index = index)
+        self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index=index)
 % endfor
 
 

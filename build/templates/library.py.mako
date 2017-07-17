@@ -14,14 +14,14 @@ from ${module_name} import errors
 
 def get_library_name():
     try:
-        return ${helper.get_dictionary_snippet(config['library_info'], indent=8)}[platform.system()][platform.architecture()[0]]['name']
+        return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['name']
     except KeyError as e:
         raise errors.UnsupportedConfigurationError
 
 
 def get_library_type():
     try:
-        return ${helper.get_dictionary_snippet(config['library_info'], indent=8)}[platform.system()][platform.architecture()[0]]['type']
+        return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['type']
     except KeyError as e:
         raise errors.UnsupportedConfigurationError
 
