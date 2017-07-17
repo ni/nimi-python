@@ -8,7 +8,7 @@ import os
 import pprint
 import sys
 
-pp = pprint.PrettyPrinter(indent=3)
+pp = pprint.PrettyPrinter(indent=4)
 
 def generate_template(template_name, template_params, dest_file, in_zip_file=False):
     try:
