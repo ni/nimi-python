@@ -98,89 +98,341 @@ class Session(object):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
     ac_max_freq = AttributeViReal64(1250007)
+    '''
+    See `ac_max_freq <nidmm_attributes.html#nidmm.attribute.ac_max_freq>`__
+    '''
     ac_min_freq = AttributeViReal64(1250006)
+    '''
+    See `ac_min_freq <nidmm_attributes.html#nidmm.attribute.ac_min_freq>`__
+    '''
     adc_calibration = AttributeEnum(1150022, enums.EnabledSetting)
+    '''
+    See `adc_calibration <nidmm_attributes.html#nidmm.attribute.adc_calibration>`__
+    '''
     aperture_time = AttributeViReal64(1250321)
+    '''
+    See `aperture_time <nidmm_attributes.html#nidmm.attribute.aperture_time>`__
+    '''
     aperture_time_units = AttributeEnum(1250322, enums.ApertureTimeUnits)
+    '''
+    See `aperture_time_units <nidmm_attributes.html#nidmm.attribute.aperture_time_units>`__
+    '''
     auto_range_value = AttributeViReal64(1250331)
+    '''
+    See `auto_range_value <nidmm_attributes.html#nidmm.attribute.auto_range_value>`__
+    '''
     auto_zero = AttributeEnum(1250332, enums.EnabledSetting)
+    '''
+    See `auto_zero <nidmm_attributes.html#nidmm.attribute.auto_zero>`__
+    '''
     buffer_size = AttributeViInt32(1150037)
+    '''
+    See `buffer_size <nidmm_attributes.html#nidmm.attribute.buffer_size>`__
+    '''
     cable_comp_type = AttributeEnum(1150045, enums.CableCompensationType)
+    '''
+    See `cable_comp_type <nidmm_attributes.html#nidmm.attribute.cable_comp_type>`__
+    '''
     cache = AttributeViBoolean(1050004)
+    '''
+    See `cache <nidmm_attributes.html#nidmm.attribute.cache>`__
+    '''
     channel_count = AttributeViInt32(1050203)
+    '''
+    See `channel_count <nidmm_attributes.html#nidmm.attribute.channel_count>`__
+    '''
     class_driver_class_spec_major_version = AttributeViInt32(1050519)
+    '''
+    See `class_driver_class_spec_major_version <nidmm_attributes.html#nidmm.attribute.class_driver_class_spec_major_version>`__
+    '''
     class_driver_class_spec_minor_version = AttributeViInt32(1050520)
+    '''
+    See `class_driver_class_spec_minor_version <nidmm_attributes.html#nidmm.attribute.class_driver_class_spec_minor_version>`__
+    '''
     config_product_number = AttributeViInt32(1150061)
+    '''
+    See `config_product_number <nidmm_attributes.html#nidmm.attribute.config_product_number>`__
+    '''
     current_source = AttributeViReal64(1150025)
+    '''
+    See `current_source <nidmm_attributes.html#nidmm.attribute.current_source>`__
+    '''
     dc_bias = AttributeViInt32(1150053)
+    '''
+    See `dc_bias <nidmm_attributes.html#nidmm.attribute.dc_bias>`__
+    '''
     dc_noise_rejection = AttributeEnum(1150026, enums.DCNoiseRejectionMode)
+    '''
+    See `dc_noise_rejection <nidmm_attributes.html#nidmm.attribute.dc_noise_rejection>`__
+    '''
     driver_setup = AttributeViString(1050007)
+    '''
+    See `driver_setup <nidmm_attributes.html#nidmm.attribute.driver_setup>`__
+    '''
     freq_voltage_auto_range_value = AttributeViReal64(1150044)
+    '''
+    See `freq_voltage_auto_range_value <nidmm_attributes.html#nidmm.attribute.freq_voltage_auto_range_value>`__
+    '''
     freq_voltage_range = AttributeViReal64(1250101)
+    '''
+    See `freq_voltage_range <nidmm_attributes.html#nidmm.attribute.freq_voltage_range>`__
+    '''
     function = AttributeEnum(1250001, enums.Function)
+    '''
+    See `function <nidmm_attributes.html#nidmm.attribute.function>`__
+    '''
     group_capabilities = AttributeViString(1050401)
+    '''
+    See `group_capabilities <nidmm_attributes.html#nidmm.attribute.group_capabilities>`__
+    '''
     input_resistance = AttributeViReal64(1150029)
+    '''
+    See `input_resistance <nidmm_attributes.html#nidmm.attribute.input_resistance>`__
+    '''
     instrument_firmware_revision = AttributeViString(1050510)
+    '''
+    See `instrument_firmware_revision <nidmm_attributes.html#nidmm.attribute.instrument_firmware_revision>`__
+    '''
     instrument_manufacturer = AttributeViString(1050511)
+    '''
+    See `instrument_manufacturer <nidmm_attributes.html#nidmm.attribute.instrument_manufacturer>`__
+    '''
     instrument_model = AttributeViString(1050512)
+    '''
+    See `instrument_model <nidmm_attributes.html#nidmm.attribute.instrument_model>`__
+    '''
     interchange_check = AttributeViBoolean(1050021)
+    '''
+    See `interchange_check <nidmm_attributes.html#nidmm.attribute.interchange_check>`__
+    '''
     io_resource_descriptor = AttributeViString(1050304)
+    '''
+    See `io_resource_descriptor <nidmm_attributes.html#nidmm.attribute.io_resource_descriptor>`__
+    '''
     io_session = AttributeViSession(1050322)
+    '''
+    See `io_session <nidmm_attributes.html#nidmm.attribute.io_session>`__
+    '''
     latency = AttributeViInt32(1150034)
+    '''
+    See `latency <nidmm_attributes.html#nidmm.attribute.latency>`__
+    '''
     lc_calculation_model = AttributeEnum(1150052, enums.LCCalculationModel)
+    '''
+    See `lc_calculation_model <nidmm_attributes.html#nidmm.attribute.lc_calculation_model>`__
+    '''
     lc_number_meas_to_average = AttributeViInt32(1150055)
+    '''
+    See `lc_number_meas_to_average <nidmm_attributes.html#nidmm.attribute.lc_number_meas_to_average>`__
+    '''
     logical_name = AttributeViString(1050305)
+    '''
+    See `logical_name <nidmm_attributes.html#nidmm.attribute.logical_name>`__
+    '''
     meas_complete_dest = AttributeViInt32(1250305)
+    '''
+    See `meas_complete_dest <nidmm_attributes.html#nidmm.attribute.meas_complete_dest>`__
+    '''
     meas_dest_slope = AttributeEnum(1150002, enums.Slope)
+    '''
+    See `meas_dest_slope <nidmm_attributes.html#nidmm.attribute.meas_dest_slope>`__
+    '''
     number_of_averages = AttributeViInt32(1150032)
+    '''
+    See `number_of_averages <nidmm_attributes.html#nidmm.attribute.number_of_averages>`__
+    '''
     offset_comp_ohms = AttributeEnum(1150023, enums.EnabledSetting)
+    '''
+    See `offset_comp_ohms <nidmm_attributes.html#nidmm.attribute.offset_comp_ohms>`__
+    '''
     open_cable_comp_conductance = AttributeViReal64(1150049)
+    '''
+    See `open_cable_comp_conductance <nidmm_attributes.html#nidmm.attribute.open_cable_comp_conductance>`__
+    '''
     open_cable_comp_susceptance = AttributeViReal64(1150048)
+    '''
+    See `open_cable_comp_susceptance <nidmm_attributes.html#nidmm.attribute.open_cable_comp_susceptance>`__
+    '''
     operation_mode = AttributeEnum(1150014, enums.OperationMode)
+    '''
+    See `operation_mode <nidmm_attributes.html#nidmm.attribute.operation_mode>`__
+    '''
     powerline_freq = AttributeViReal64(1250333)
+    '''
+    See `powerline_freq <nidmm_attributes.html#nidmm.attribute.powerline_freq>`__
+    '''
     query_instrument_status = AttributeViBoolean(1050003)
+    '''
+    See `query_instrument_status <nidmm_attributes.html#nidmm.attribute.query_instrument_status>`__
+    '''
     range = AttributeViReal64(1250002)
+    '''
+    See `range <nidmm_attributes.html#nidmm.attribute.range>`__
+    '''
     range_check = AttributeViBoolean(1050002)
+    '''
+    See `range_check <nidmm_attributes.html#nidmm.attribute.range_check>`__
+    '''
     record_coercions = AttributeViBoolean(1050006)
+    '''
+    See `record_coercions <nidmm_attributes.html#nidmm.attribute.record_coercions>`__
+    '''
     resolution_absolute = AttributeViReal64(1250008)
+    '''
+    See `resolution_absolute <nidmm_attributes.html#nidmm.attribute.resolution_absolute>`__
+    '''
     resolution_digits = AttributeViReal64(1250003)
+    '''
+    See `resolution_digits <nidmm_attributes.html#nidmm.attribute.resolution_digits>`__
+    '''
     sample_count = AttributeViInt32(1250301)
+    '''
+    See `sample_count <nidmm_attributes.html#nidmm.attribute.sample_count>`__
+    '''
     sample_interval = AttributeViReal64(1250303)
+    '''
+    See `sample_interval <nidmm_attributes.html#nidmm.attribute.sample_interval>`__
+    '''
     sample_trigger = AttributeViInt32(1250302)
+    '''
+    See `sample_trigger <nidmm_attributes.html#nidmm.attribute.sample_trigger>`__
+    '''
     sample_trigger_slope = AttributeEnum(1150010, enums.Slope)
+    '''
+    See `sample_trigger_slope <nidmm_attributes.html#nidmm.attribute.sample_trigger_slope>`__
+    '''
     serial_number = AttributeViString(1150054)
+    '''
+    See `serial_number <nidmm_attributes.html#nidmm.attribute.serial_number>`__
+    '''
     settle_time = AttributeViReal64(1150028)
+    '''
+    See `settle_time <nidmm_attributes.html#nidmm.attribute.settle_time>`__
+    '''
     short_cable_comp_reactance = AttributeViReal64(1150046)
+    '''
+    See `short_cable_comp_reactance <nidmm_attributes.html#nidmm.attribute.short_cable_comp_reactance>`__
+    '''
     short_cable_comp_resistance = AttributeViReal64(1150047)
+    '''
+    See `short_cable_comp_resistance <nidmm_attributes.html#nidmm.attribute.short_cable_comp_resistance>`__
+    '''
     shunt_value = AttributeViReal64(1150003)
+    '''
+    See `shunt_value <nidmm_attributes.html#nidmm.attribute.shunt_value>`__
+    '''
     simulate = AttributeViBoolean(1050005)
+    '''
+    See `simulate <nidmm_attributes.html#nidmm.attribute.simulate>`__
+    '''
     specific_driver_class_spec_major_version = AttributeViInt32(1050515)
+    '''
+    See `specific_driver_class_spec_major_version <nidmm_attributes.html#nidmm.attribute.specific_driver_class_spec_major_version>`__
+    '''
     specific_driver_class_spec_minor_version = AttributeViInt32(1050516)
+    '''
+    See `specific_driver_class_spec_minor_version <nidmm_attributes.html#nidmm.attribute.specific_driver_class_spec_minor_version>`__
+    '''
     specific_driver_description = AttributeViString(1050514)
+    '''
+    See `specific_driver_description <nidmm_attributes.html#nidmm.attribute.specific_driver_description>`__
+    '''
     specific_driver_prefix = AttributeViString(1050302)
+    '''
+    See `specific_driver_prefix <nidmm_attributes.html#nidmm.attribute.specific_driver_prefix>`__
+    '''
     specific_driver_revision = AttributeViString(1050551)
+    '''
+    See `specific_driver_revision <nidmm_attributes.html#nidmm.attribute.specific_driver_revision>`__
+    '''
     specific_driver_vendor = AttributeViString(1050513)
+    '''
+    See `specific_driver_vendor <nidmm_attributes.html#nidmm.attribute.specific_driver_vendor>`__
+    '''
     supported_instrument_models = AttributeViString(1050327)
+    '''
+    See `supported_instrument_models <nidmm_attributes.html#nidmm.attribute.supported_instrument_models>`__
+    '''
     temp_rtd_a = AttributeViReal64(1150121)
+    '''
+    See `temp_rtd_a <nidmm_attributes.html#nidmm.attribute.temp_rtd_a>`__
+    '''
     temp_rtd_b = AttributeViReal64(1150122)
+    '''
+    See `temp_rtd_b <nidmm_attributes.html#nidmm.attribute.temp_rtd_b>`__
+    '''
     temp_rtd_c = AttributeViReal64(1150123)
+    '''
+    See `temp_rtd_c <nidmm_attributes.html#nidmm.attribute.temp_rtd_c>`__
+    '''
     temp_rtd_res = AttributeViReal64(1250242)
+    '''
+    See `temp_rtd_res <nidmm_attributes.html#nidmm.attribute.temp_rtd_res>`__
+    '''
     temp_rtd_type = AttributeEnum(1150120, enums.TemperatureRTDType)
+    '''
+    See `temp_rtd_type <nidmm_attributes.html#nidmm.attribute.temp_rtd_type>`__
+    '''
     temp_tc_fixed_ref_junc = AttributeViReal64(1250233)
+    '''
+    See `temp_tc_fixed_ref_junc <nidmm_attributes.html#nidmm.attribute.temp_tc_fixed_ref_junc>`__
+    '''
     temp_tc_ref_junc_type = AttributeEnum(1250232, enums.TemperatureThermocoupleReferenceJunctionType)
+    '''
+    See `temp_tc_ref_junc_type <nidmm_attributes.html#nidmm.attribute.temp_tc_ref_junc_type>`__
+    '''
     temp_tc_type = AttributeEnum(1250231, enums.TemperatureThermocoupleType)
+    '''
+    See `temp_tc_type <nidmm_attributes.html#nidmm.attribute.temp_tc_type>`__
+    '''
     temp_thermistor_a = AttributeViReal64(1150125)
+    '''
+    See `temp_thermistor_a <nidmm_attributes.html#nidmm.attribute.temp_thermistor_a>`__
+    '''
     temp_thermistor_b = AttributeViReal64(1150126)
+    '''
+    See `temp_thermistor_b <nidmm_attributes.html#nidmm.attribute.temp_thermistor_b>`__
+    '''
     temp_thermistor_c = AttributeViReal64(1150127)
+    '''
+    See `temp_thermistor_c <nidmm_attributes.html#nidmm.attribute.temp_thermistor_c>`__
+    '''
     temp_thermistor_type = AttributeEnum(1150124, enums.TemperatureThermistorType)
+    '''
+    See `temp_thermistor_type <nidmm_attributes.html#nidmm.attribute.temp_thermistor_type>`__
+    '''
     temp_transducer_type = AttributeEnum(1250201, enums.TemperatureTransducerType)
+    '''
+    See `temp_transducer_type <nidmm_attributes.html#nidmm.attribute.temp_transducer_type>`__
+    '''
     trigger_count = AttributeViInt32(1250304)
+    '''
+    See `trigger_count <nidmm_attributes.html#nidmm.attribute.trigger_count>`__
+    '''
     trigger_delay = AttributeViReal64(1250005)
+    '''
+    See `trigger_delay <nidmm_attributes.html#nidmm.attribute.trigger_delay>`__
+    '''
     trigger_slope = AttributeEnum(1250334, enums.Slope)
+    '''
+    See `trigger_slope <nidmm_attributes.html#nidmm.attribute.trigger_slope>`__
+    '''
     trigger_source = AttributeViInt32(1250004)
+    '''
+    See `trigger_source <nidmm_attributes.html#nidmm.attribute.trigger_source>`__
+    '''
     waveform_coupling = AttributeEnum(1150027, enums.WaveformCouplingMode)
+    '''
+    See `waveform_coupling <nidmm_attributes.html#nidmm.attribute.waveform_coupling>`__
+    '''
     waveform_points = AttributeViInt32(1150019)
+    '''
+    See `waveform_points <nidmm_attributes.html#nidmm.attribute.waveform_points>`__
+    '''
     waveform_rate = AttributeViReal64(1150018)
+    '''
+    See `waveform_rate <nidmm_attributes.html#nidmm.attribute.waveform_rate>`__
+    '''
 
     def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):
         self.library = library.get_library()

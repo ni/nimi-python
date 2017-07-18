@@ -12,4 +12,6 @@ Welcome to NI-DMM Python API's documentation!
 
    nidmm_session
    nidmm_enums
+   nidmm_attributes
+
 

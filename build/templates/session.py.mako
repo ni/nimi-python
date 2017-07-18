@@ -111,6 +111,9 @@ class Session(object):
     %else:
     ${attribute.lower()} = Attribute${attributes[attribute]['type']}(${attributes[attribute]['id']})
     %endif
+    '''
+    See `${attribute.lower()} <nidmm_attributes.html#${module_name}.attribute.${attribute.lower()}>`__
+    '''
 % endfor
 
     def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):

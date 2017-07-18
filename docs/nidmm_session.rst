@@ -1,4 +1,4 @@
-nidmm.session
+NI-DMM Session
 =============
 .. automodule:: nidmm.session
     :members:

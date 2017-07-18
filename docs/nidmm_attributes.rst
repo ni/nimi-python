@@ -1,6 +1,6 @@
-NI-DMM Enums
+NI-DMM Attributes
 ===========
-.. automodule:: nidmm.enums
+.. automodule:: nidmm.attribute
     :members:
     :undoc-members:
     :show-inheritance:
