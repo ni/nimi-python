@@ -13,14 +13,6 @@ export COMMAND_LOG_BATCH
 COMMAND_LOG_SH := $(GENERATED_DIR)/command_history.sh
 export COMMAND_LOG_SH
 
-GENERATED_DIR := $(ROOT_DIR)/generated
-export GENERATED_DIR
-
-COMMAND_LOG_BATCH := $(GENERATED_DIR)/command_history.bat
-export COMMAND_LOG_BATCH
-COMMAND_LOG_SH := $(GENERATED_DIR)/command_history.sh
-export COMMAND_LOG_SH
-
 ifeq (,$(PRINT))
 _hide_cmds := @
 endif
