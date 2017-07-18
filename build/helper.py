@@ -202,4 +202,3 @@ def get_dictionary_snippet(d, indent=4):
     d_str = pprint.pformat(d)
     d_lines = d_str.splitlines()
     return ('\n' + (' ' * indent)).join(d_lines)
-#    return d_str

@@ -12,10 +12,10 @@ python:
   - 3.6
 
 install:
-  - pip install --upgrade setuptools mako mock tox tox-travis flake8 wheel
+  - pip install --upgrade setuptools mako mock tox tox-travis flake8 wheel sphinx
 
 script:
-  - make clean all flake8 test PRINT=1 PYTHON_CMD=python
+  - make clean all flake8 test html PRINT=1 PYTHON_CMD=python
 
 
 

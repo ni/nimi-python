@@ -90,3 +90,21 @@ printvar:
 	$(_hide_cmds)$(foreach d,$(DRIVERS),$(call per_driver_variable_print,$(d),$(VAR)) && ) echo
 
 
+# Minimal makefile for Sphinx documentation
+#
+PYTHON_CMD ?= python3
+
+# You can set these variables from the command line.
+SPHINXOPTS    =
+SPHINXBUILD   = $(PYTHON_CMD) -msphinx
+SPHINXPROJ    = NIModularInstrumentsPythonAPI
+SOURCEDIR     = $(ROOT_DIR)/docs
+BUILDDIR      = $(BIN_DIR)/docs
+
+html:
+	$(_hide_cmds)cp $(ROOT_DIR)/README.rst $(SOURCEDIR)
+	$(_hide_cmds)$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+
+.PHONY: help Makefile
+
+
