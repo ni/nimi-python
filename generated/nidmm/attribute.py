@@ -1,4 +1,5 @@
 # This file was generated
+# -*- coding: utf-8 -*-
 
 ac_max_freq = None
 '''
