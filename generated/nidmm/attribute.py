@@ -1,5 +1,4 @@
 # This file was generated
-import nidmm
 
 ac_max_freq = None
 '''
