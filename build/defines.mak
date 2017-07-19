@@ -50,7 +50,6 @@ DEFAULT_PY_FILES_TO_GENERATE := \
                      session.py \
                      errors.py \
                      ctypes_library.py \
-                     attribute.py \
                      tests/mock_helper.py \
                      __init__.py \
 
