@@ -39,3 +39,9 @@ rm -Rf /mnt/d/GitHub/nimi-python/generated/nimodinst
 mkdir -p /mnt/d/GitHub/nimi-python/generated/nimodinst
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst/* /mnt/d/GitHub/nimi-python/generated/nimodinst
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nimodinst/setup.py /mnt/d/GitHub/nimi-python/generated/nimodinst
+cp /mnt/d/GitHub/nimi-python/README.rst /mnt/d/GitHub/nimi-python/docs
+python3 -msphinx -M html "/mnt/d/GitHub/nimi-python/docs" "/mnt/d/GitHub/nimi-python/bin/docs" 
+cp /mnt/d/GitHub/nimi-python/tox.ini /mnt/d/GitHub/nimi-python/bin/nidmm/tox.ini
+cd /mnt/d/GitHub/nimi-python/bin/nidmm && tox -e flake8
+cp /mnt/d/GitHub/nimi-python/tox.ini /mnt/d/GitHub/nimi-python/bin/nimodinst/tox.ini
+cd /mnt/d/GitHub/nimi-python/bin/nimodinst && tox -e flake8

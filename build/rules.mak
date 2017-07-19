@@ -1,7 +1,10 @@
 
 MODULE_FILES := \
-                $(addprefix $(MODULE_DIR)/,$(FILES_TO_GENERATE)) \
-                $(addprefix $(MODULE_DIR)/,$(FILES_TO_COPY))
+                $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_GENERATE)) \
+                $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_COPY))
+
+RST_FILES := \
+                $(addprefix $(DRIVER_DOCS_DIR)/,$(RST_FILES_TO_GENERATE)) \
 
 overall_all: unit_test
 
@@ -31,6 +34,10 @@ $(MODULE_DIR)/%.py: %.py
 	@echo Creating $(notdir $@)
 	$(_hide_cmds)cp $< $@
 
+$(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPT)
+	@echo Creating $(notdir $@)
+	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
+
 UNIT_TEST_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/tests/*.py)
 UNIT_TEST_FILES := $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_COPY)))
 
@@ -41,10 +48,10 @@ $(UNIT_TEST_DIR)/%.py: $(DRIVER_DIR)/tests/%.py
 clean:
 
 .PHONY: module unit_tests sdist wheel
-$(UNIT_TEST_FILES): $(MODULE_FILES)
+$(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
 module: $(MODULE_FILES)
 
-$(UNIT_TEST_FILES): $(MODULE_FILES)
+$(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
 unit_tests: $(UNIT_TEST_FILES)
 
 $(LOG_DIR)/test_results.log:

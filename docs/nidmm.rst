@@ -10,6 +10,8 @@ Welcome to NI-DMM Python API's documentation!
    :maxdepth: 3
    :caption: API Reference:
 
-   nidmm_session
-   nidmm_enums
+   nidmm/session
+   nidmm/enums
+   nidmm/attributes
+
 

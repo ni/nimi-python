@@ -1,4 +1,4 @@
-nidmm.enums
+NI-DMM Enums
 ===========
 .. automodule:: nidmm.enums
     :members:
