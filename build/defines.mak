@@ -41,7 +41,7 @@ TARGETS := $(filter-out run_unit_tests,$(DEFAULT_TARGETS))
 .PHONY:
 all: $(TARGETS)
 
-DEFAULT_FILES_TO_GENERATE := \
+DEFAULT_PY_FILES_TO_GENERATE := \
                      enums.py \
                      library.py \
                      session.py \
@@ -51,8 +51,9 @@ DEFAULT_FILES_TO_GENERATE := \
                      tests/mock_helper.py \
                      __init__.py \
 
-DEFAULT_FILES_TO_COPY := \
-                 ctypes_types.py \
-                 python_types.py \
+DEFAULT_PY_FILES_TO_COPY := \
+                     ctypes_types.py \
+                     python_types.py \
+
 
 

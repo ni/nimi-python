@@ -1,7 +1,8 @@
 
 MODULE_FILES := \
-                $(addprefix $(MODULE_DIR)/,$(FILES_TO_GENERATE)) \
-                $(addprefix $(MODULE_DIR)/,$(FILES_TO_COPY))
+                $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_GENERATE)) \
+                $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_COPY))
+
 
 overall_all: unit_test
 
