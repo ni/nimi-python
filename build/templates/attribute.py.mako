@@ -12,7 +12,7 @@ module_name = template_parameters['metadata'].config['module_name']
 
 ${attribute.lower()} = None
 '''
-${attribute_docs[str(attributes[attribute]['id'])]}
+${attribute_docs[str(attributes[attribute]['id'])]['longDescription']}
 '''
 % endif
 % endfor

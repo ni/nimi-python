@@ -4,7 +4,7 @@
 bus_number = None
 '''
 
-    **Bus Number** the bus on which the device has been enumerated.
+    The bus on which the device has been enumerated.
 
     The following table lists the characteristics of this property.
 
@@ -27,7 +27,7 @@ bus_number = None
 chassis_number = None
 '''
 
-    **Chassis Number** the number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
+    The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
 
     The following table lists the characteristics of this property.
 
@@ -50,7 +50,7 @@ chassis_number = None
 device_model = None
 '''
 
-    **Device Model** the model of the device (for example, NI PXI-5122)
+    The model of the device (for example, NI PXI-5122)
 
     The following table lists the characteristics of this property.
 
@@ -73,7 +73,7 @@ device_model = None
 device_name = None
 '''
 
-    **Device Name** the name of the device, which can be used to open an instrument driver session for that device
+    The name of the device, which can be used to open an instrument driver session for that device
 
     The following table lists the characteristics of this property.
 
@@ -96,7 +96,6 @@ device_name = None
 max_pciexpress_link_width = None
 '''
 
-    **MAX_PCIEXPRESS_LINK_WIDTH**
 
     The following table lists the characteristics of this property.
 
@@ -119,7 +118,6 @@ max_pciexpress_link_width = None
 pciexpress_link_width = None
 '''
 
-    **PCIEXPRESS_LINK_WIDTH**
 
     The following table lists the characteristics of this property.
 
@@ -142,7 +140,7 @@ pciexpress_link_width = None
 serial_number = None
 '''
 
-    **Serial Number** the serial number of the device
+    The serial number of the device
 
     The following table lists the characteristics of this property.
 
@@ -165,7 +163,7 @@ serial_number = None
 slot_number = None
 '''
 
-    **Slot Number** the slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
+    The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
 
     The following table lists the characteristics of this property.
 
@@ -188,7 +186,7 @@ slot_number = None
 socket_number = None
 '''
 
-    **Socket Number** the socket number on which the device has been enumerated
+    The socket number on which the device has been enumerated
 
     The following table lists the characteristics of this property.
 

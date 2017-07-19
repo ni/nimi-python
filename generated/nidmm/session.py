@@ -99,339 +99,706 @@ class Session(object):
 
     ac_max_freq = AttributeViReal64(1250007)
     '''
-    See `ac_max_freq <nidmm_attributes.html#nidmm.attribute.ac_max_freq>`__
+    
+Specifies the maximum frequency component of the input signal for AC
+measurements. This property is used only for error checking and verifies
+that the value of this parameter is less than the maximum frequency of
+the device. This property affects the DMM only when you set the Function
+property to AC measurements.
+
     '''
     ac_min_freq = AttributeViReal64(1250006)
     '''
-    See `ac_min_freq <nidmm_attributes.html#nidmm.attribute.ac_min_freq>`__
+    
+Specifies the minimum frequency component of the input signal for AC
+measurements. This property affects the DMM only when you set the
+Function property to AC measurements. The valid range is 1 Hz-300 kHz
+for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
+4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
+
     '''
     adc_calibration = AttributeEnum(1150022, enums.EnabledSetting)
     '''
-    See `adc_calibration <nidmm_attributes.html#nidmm.attribute.adc_calibration>`__
+    
+For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
+calibration mode.
+
     '''
     aperture_time = AttributeViReal64(1250321)
     '''
-    See `aperture_time <nidmm_attributes.html#nidmm.attribute.aperture_time>`__
+    
+Specifies the measurement aperture time for the current configuration.
+Aperture time is specified in units set by the Aperture Time Units
+property. To override the default aperture, set this property to the
+desired aperture time after calling niDMM Config Measurement . To return
+to the default, set this property to Aperture Time Auto (-1).
+
     '''
     aperture_time_units = AttributeEnum(1250322, enums.ApertureTimeUnits)
     '''
-    See `aperture_time_units <nidmm_attributes.html#nidmm.attribute.aperture_time_units>`__
+    
+Specifies the units of aperture time for the current configuration.
+
     '''
     auto_range_value = AttributeViReal64(1250331)
     '''
-    See `auto_range_value <nidmm_attributes.html#nidmm.attribute.auto_range_value>`__
+    
+Specifies the value of the range. If auto ranging is enabled, shows the
+actual value of the active range. The value of this property is set
+during a read operation.
+
     '''
     auto_zero = AttributeEnum(1250332, enums.EnabledSetting)
     '''
-    See `auto_zero <nidmm_attributes.html#nidmm.attribute.auto_zero>`__
+    
+Specifies the AutoZero mode. This property is not supported for the NI
+4050.
+
     '''
     buffer_size = AttributeViInt32(1150037)
     '''
-    See `buffer_size <nidmm_attributes.html#nidmm.attribute.buffer_size>`__
+    
+Specifies the size in samples of the internal data buffer. Maximum size
+is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
+chooses the buffer size.
+
     '''
     cable_comp_type = AttributeEnum(1150045, enums.CableCompensationType)
     '''
-    See `cable_comp_type <nidmm_attributes.html#nidmm.attribute.cable_comp_type>`__
+    
+For the NI 4081 and NI 4072 only, specifies the type of cable
+compensation that is applied to the current capacitance or inductance
+measurement for the current range.
+
     '''
     cache = AttributeViBoolean(1050004)
     '''
-    See `cache <nidmm_attributes.html#nidmm.attribute.cache>`__
+    
+Specifies whether to cache the value of properties. When caching is
+enabled, the instrument driver keeps track of the current instrument
+settings and avoids sending redundant commands to the instrument. Thus,
+it significantly increases execution speed. The instrument driver can
+choose to always cache or to never cache particular properties
+regardless of the setting of this property. The default value is TRUE
+(1). Use niDMM Initialize With Options to override the default setting.
+
     '''
     channel_count = AttributeViInt32(1050203)
     '''
-    See `channel_count <nidmm_attributes.html#nidmm.attribute.channel_count>`__
+    
+Indicates the number of channels that the specific instrument driver
+supports. For each property for which the IVI\_VAL\_MULTI\_CHANNEL flag
+property is set, the IVI engine maintains a separate cache value for
+each channel.
+
     '''
     class_driver_class_spec_major_version = AttributeViInt32(1050519)
-    '''
-    See `class_driver_class_spec_major_version <nidmm_attributes.html#nidmm.attribute.class_driver_class_spec_major_version>`__
-    '''
     class_driver_class_spec_minor_version = AttributeViInt32(1050520)
-    '''
-    See `class_driver_class_spec_minor_version <nidmm_attributes.html#nidmm.attribute.class_driver_class_spec_minor_version>`__
-    '''
     config_product_number = AttributeViInt32(1150061)
     '''
-    See `config_product_number <nidmm_attributes.html#nidmm.attribute.config_product_number>`__
+    
+The PCI product ID.
+
     '''
     current_source = AttributeViReal64(1150025)
     '''
-    See `current_source <nidmm_attributes.html#nidmm.attribute.current_source>`__
+    
+Specifies the current source provided during diode measurements.
+
+The NI 4050 and NI 4060 are not supported.
+
     '''
     dc_bias = AttributeViInt32(1150053)
     '''
-    See `dc_bias <nidmm_attributes.html#nidmm.attribute.dc_bias>`__
+    
+For the NI 4082 and NI 4072 only, controls the available DC bias for
+capacitance measurements.
+
     '''
     dc_noise_rejection = AttributeEnum(1150026, enums.DCNoiseRejectionMode)
     '''
-    See `dc_noise_rejection <nidmm_attributes.html#nidmm.attribute.dc_noise_rejection>`__
+    
+Specifies the DC noise rejection mode.
+
     '''
     driver_setup = AttributeViString(1050007)
     '''
-    See `driver_setup <nidmm_attributes.html#nidmm.attribute.driver_setup>`__
+    
+This property indicates the Driver Setup string that the user specified
+when initializing the driver. Some cases exist where the end-user must
+specify instrument driver options at initialization time. An example of
+this is specifying a particular instrument model from among a family of
+instruments that the driver supports. This is useful when using
+simulation. The end-user can specify driver-specific options through the
+Driver Setup keyword in the Option String parameter in niDMM Initialize
+With Options . If the user does not specify a Driver Setup string, this
+property returns an empty string.
+
     '''
     freq_voltage_auto_range_value = AttributeViReal64(1150044)
     '''
-    See `freq_voltage_auto_range_value <nidmm_attributes.html#nidmm.attribute.freq_voltage_auto_range_value>`__
+    
+For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
+the frequency voltage range. If auto ranging is enabled, shows the
+actual value of the active frequency voltage range. If not Auto Ranging,
+the value is the same as that of the Frequency Voltage Range property.
+
     '''
     freq_voltage_range = AttributeViReal64(1250101)
     '''
-    See `freq_voltage_range <nidmm_attributes.html#nidmm.attribute.freq_voltage_range>`__
+    
+For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
+amplitude of the input signal for frequency measurements.
+
     '''
     function = AttributeEnum(1250001, enums.Function)
     '''
-    See `function <nidmm_attributes.html#nidmm.attribute.function>`__
+    
+Specifies the measurement function. If you are setting this property
+directly, you must also set the Operation Mode property, which controls
+whether the DMM takes standard single or multipoint measurements, or
+acquires a waveform. If you are programming properties directly, you
+must set the Operation Mode property before setting other configuration
+properties. If the Operation Mode property is set to Waveform Mode, the
+only valid function types are Waveform Voltage and Waveform Current. Set
+the Operation Mode property to IVIDMM Mode to set all other function
+values.
+
     '''
     group_capabilities = AttributeViString(1050401)
     '''
-    See `group_capabilities <nidmm_attributes.html#nidmm.attribute.group_capabilities>`__
+    
+A string containing the capabilities and extension groups supported by
+the specific driver.
+
     '''
     input_resistance = AttributeViReal64(1150029)
     '''
-    See `input_resistance <nidmm_attributes.html#nidmm.attribute.input_resistance>`__
+    
+Specifies the input resistance of the instrument.
+
     '''
     instrument_firmware_revision = AttributeViString(1050510)
     '''
-    See `instrument_firmware_revision <nidmm_attributes.html#nidmm.attribute.instrument_firmware_revision>`__
+    
+A string containing the instrument firmware revision number.
+
     '''
     instrument_manufacturer = AttributeViString(1050511)
     '''
-    See `instrument_manufacturer <nidmm_attributes.html#nidmm.attribute.instrument_manufacturer>`__
+    
+A string containing the manufacturer of the instrument.
+
     '''
     instrument_model = AttributeViString(1050512)
     '''
-    See `instrument_model <nidmm_attributes.html#nidmm.attribute.instrument_model>`__
+    
+A string containing the instrument model.
+
     '''
     interchange_check = AttributeViBoolean(1050021)
     '''
-    See `interchange_check <nidmm_attributes.html#nidmm.attribute.interchange_check>`__
+    
+Specifies whether to perform interchangeability checking and log
+interchangeability warnings when you call niDMM VIs. Interchangeability
+warnings indicate that using your application with a different
+instrument might cause different behavior. Use niDMM Get Next
+Interchange Warning to extract interchange warnings. Use niDMM Clear
+Interchange Warnings to clear the list of interchangeability warnings
+without reading them. Interchangeability checking examines the
+properties in a capability group only if you specify a value for at
+least one property within that group. Interchangeability warnings can
+occur when a property affects the behavior of the instrument and you
+have not set that property, or the property has been invalidated since
+you set it.
+
     '''
     io_resource_descriptor = AttributeViString(1050304)
     '''
-    See `io_resource_descriptor <nidmm_attributes.html#nidmm.attribute.io_resource_descriptor>`__
+    
+A string containing the resource descriptor of the instrument.
+
     '''
     io_session = AttributeViSession(1050322)
-    '''
-    See `io_session <nidmm_attributes.html#nidmm.attribute.io_session>`__
-    '''
     latency = AttributeViInt32(1150034)
     '''
-    See `latency <nidmm_attributes.html#nidmm.attribute.latency>`__
+    
+Specifies the number of measurements transferred at a time from the
+instrument to an internal buffer. When set to Auto (-1), NI-DMM chooses
+the transfer size.
+
     '''
     lc_calculation_model = AttributeEnum(1150052, enums.LCCalculationModel)
     '''
-    See `lc_calculation_model <nidmm_attributes.html#nidmm.attribute.lc_calculation_model>`__
+    
+For the NI 4082 and NI 4072 only, specifies the type of algorithm that
+the measurement processing uses for capacitance and inductance
+measurements.
+
     '''
     lc_number_meas_to_average = AttributeViInt32(1150055)
     '''
-    See `lc_number_meas_to_average <nidmm_attributes.html#nidmm.attribute.lc_number_meas_to_average>`__
+    
+For the NI 4082 and NI 4072 only, specifies the number of LC
+measurements that are averaged to produce one reading.
+
     '''
     logical_name = AttributeViString(1050305)
     '''
-    See `logical_name <nidmm_attributes.html#nidmm.attribute.logical_name>`__
+    
+A string containing the logical name of the instrument.
+
     '''
     meas_complete_dest = AttributeViInt32(1250305)
     '''
-    See `meas_complete_dest <nidmm_attributes.html#nidmm.attribute.meas_complete_dest>`__
+    
+Specifies the destination of the measurement complete (MC) signal.
+
+To determine which values are supported by each device, refer to the
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
+
     '''
     meas_dest_slope = AttributeEnum(1150002, enums.Slope)
     '''
-    See `meas_dest_slope <nidmm_attributes.html#nidmm.attribute.meas_dest_slope>`__
+    
+Specifies the polarity of the generated measurement complete signal.
+
     '''
     number_of_averages = AttributeViInt32(1150032)
     '''
-    See `number_of_averages <nidmm_attributes.html#nidmm.attribute.number_of_averages>`__
+    
+Specifies the number of averages to perform in a measurement. For the NI
+4080/4081/4082 and NI 4070/4071/4072, applies only when the aperture
+time is not set to Auto and Auto Zero is ON. The Number of Averages
+Property will be ignored otherwise. The default is 4 for 7 1/2 digits;
+otherwise, the default is 1.
+
+The NI 4050 and NI 4060 are not supported.
+
     '''
     offset_comp_ohms = AttributeEnum(1150023, enums.EnabledSetting)
     '''
-    See `offset_comp_ohms <nidmm_attributes.html#nidmm.attribute.offset_comp_ohms>`__
+    
+For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
+offset compensated ohms.
+
     '''
     open_cable_comp_conductance = AttributeViReal64(1150049)
     '''
-    See `open_cable_comp_conductance <nidmm_attributes.html#nidmm.attribute.open_cable_comp_conductance>`__
+    
+For the NI 4082 and NI 4072 only, specifies the active part
+(conductance) of the open cable compensation. The valid range is any
+real number >0. The default value (-1.0) indicates that compensation has
+not taken place.
+
     '''
     open_cable_comp_susceptance = AttributeViReal64(1150048)
     '''
-    See `open_cable_comp_susceptance <nidmm_attributes.html#nidmm.attribute.open_cable_comp_susceptance>`__
+    
+For the NI 4082 and NI 4072 only, specifies the reactive part
+(susceptance) of the open cable compensation. The valid range is any
+real number >0. The default value (-1.0) indicates that compensation has
+not taken place.
+
     '''
     operation_mode = AttributeEnum(1150014, enums.OperationMode)
     '''
-    See `operation_mode <nidmm_attributes.html#nidmm.attribute.operation_mode>`__
+    
+Specifies how the DMM acquires data.
+
++-------------+----------------------------------------------+
+| **Note:**   | The NI 4050 and NI 4060 are not supported.   |
++-------------+----------------------------------------------+
+
+When you call niDMM Config Measurement , NI-DMM sets this property to
+IVIDMM Mode. When you call niDMM Configure Waveform Acquisition , NI-DMM
+sets this property to Waveform Mode. If you are programming properties
+directly, you must set this property before setting other configuration
+properties.
+
     '''
     powerline_freq = AttributeViReal64(1250333)
     '''
-    See `powerline_freq <nidmm_attributes.html#nidmm.attribute.powerline_freq>`__
+    
+Specifies the powerline frequency. The NI 4060 and NI 4050 use this
+value to select an aperture time to reject powerline noise by selecting
+the appropriate internal sample clock and filter. The NI 4065, NI
+4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
+for setting the Aperture Time property in powerline cycles.
+
     '''
     query_instrument_status = AttributeViBoolean(1050003)
     '''
-    See `query_instrument_status <nidmm_attributes.html#nidmm.attribute.query_instrument_status>`__
+    
+Specifies whether the instrument driver queries the instrument status
+after each operation. Querying the instrument status is very useful for
+debugging. After the user program is validated, this property can be set
+to FALSE (0) to disable status checking and maximize performance. The
+instrument driver can choose to ignore status checking for particular
+properties regardless of the setting of this property. The default value
+is TRUE (1). Use niDMM Initialize With Options to override the default
+setting.
+
     '''
     range = AttributeViReal64(1250002)
     '''
-    See `range <nidmm_attributes.html#nidmm.attribute.range>`__
+    
+Specifies the measurement range. Use positive values to represent the
+absolute value of the maximum expected measurement. The value is in
+units appropriate for the current value of the Function property. For
+example, if the Function property is set to DC Volts, the units are
+volts.
+
     '''
     range_check = AttributeViBoolean(1050002)
     '''
-    See `range_check <nidmm_attributes.html#nidmm.attribute.range_check>`__
+    
+Specifies whether to validate property values and VI parameters. If
+enabled, the instrument driver validates the parameter values passed to
+driver VIs. Range checking parameters is very useful for debugging.
+After the user program is validated, you can set this property to FALSE
+(0) to disable range checking and maximize performance. The default
+value is TRUE (1). Use niDMM Initialize With Options to override the
+default setting.
+
     '''
     record_coercions = AttributeViBoolean(1050006)
     '''
-    See `record_coercions <nidmm_attributes.html#nidmm.attribute.record_coercions>`__
+    
+Specifies whether the IVI engine keeps a list of the value coercions it
+makes for ViInt32 and ViReal64 properties. The default value is FALSE
+(0). Use niDMM Initialize With Options to override the default setting.
+Use niDMM Get Next Coercion Record to extract and delete the oldest
+coercion record from the list.
+
     '''
     resolution_absolute = AttributeViReal64(1250008)
     '''
-    See `resolution_absolute <nidmm_attributes.html#nidmm.attribute.resolution_absolute>`__
+    
+Specifies the measurement resolution in absolute units. Setting this
+property to higher values increases the measurement accuracy. Setting
+this property to lower values increases the measurement speed.
+
     '''
     resolution_digits = AttributeViReal64(1250003)
     '''
-    See `resolution_digits <nidmm_attributes.html#nidmm.attribute.resolution_digits>`__
+    
+Specifies the measurement resolution in digits. Setting this property to
+higher values increases the measurement accuracy. Setting this property
+to lower values increases the measurement speed.
+
     '''
     sample_count = AttributeViInt32(1250301)
     '''
-    See `sample_count <nidmm_attributes.html#nidmm.attribute.sample_count>`__
+    
+Specifies the number of measurements the DMM takes each time it receives
+a trigger in a multiple point acquisition. Setting Sample Count to 0 on
+the NI 4050 and NI 4060 causes the device to take continuous
+measurements. Otherwise, setting Sample Count to 0 causes the
+conditional statement "Measurements equal to Sample Count" to always
+evaluate to False, and causes the DMM to continue taking measurements in
+the inner loop.
+
     '''
     sample_interval = AttributeViReal64(1250303)
     '''
-    See `sample_interval <nidmm_attributes.html#nidmm.attribute.sample_interval>`__
+    
+Specifies the amount of time in seconds the DMM waits between
+measurement cycles. This property only applies when the Sample Trigger
+property is set to INTERVAL. The default value (-1) ensures that the DMM
+settles for a recommended time, which is the same as using an immediate
+trigger.
+
     '''
     sample_trigger = AttributeViInt32(1250302)
     '''
-    See `sample_trigger <nidmm_attributes.html#nidmm.attribute.sample_trigger>`__
+    
+Specifies the sample trigger source.
+
+To determine which values are supported by each device, refer to the
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
+
     '''
     sample_trigger_slope = AttributeEnum(1150010, enums.Slope)
     '''
-    See `sample_trigger_slope <nidmm_attributes.html#nidmm.attribute.sample_trigger_slope>`__
+    
+Specifies the edge of the signal from the specified sample trigger
+source on which the DMM is triggered.
+
     '''
     serial_number = AttributeViString(1150054)
     '''
-    See `serial_number <nidmm_attributes.html#nidmm.attribute.serial_number>`__
+    
+A string containing the serial number of the instrument. This property
+corresponds to the serial number label that is attached to most
+products.
+
     '''
     settle_time = AttributeViReal64(1150028)
     '''
-    See `settle_time <nidmm_attributes.html#nidmm.attribute.settle_time>`__
+    
+Specifies the settling time in seconds. Use this property to override
+the default settling time. To return to the default, set this property
+to Auto (-1).
+
     '''
     short_cable_comp_reactance = AttributeViReal64(1150046)
     '''
-    See `short_cable_comp_reactance <nidmm_attributes.html#nidmm.attribute.short_cable_comp_reactance>`__
+    
+For the NI 4082 and NI 4072 only, represents the reactive part
+(reactance) of the short cable compensation. The valid range is any real
+number >0. The default value (-1) indicates that compensation has not
+taken place.
+
     '''
     short_cable_comp_resistance = AttributeViReal64(1150047)
     '''
-    See `short_cable_comp_resistance <nidmm_attributes.html#nidmm.attribute.short_cable_comp_resistance>`__
+    
+For the NI 4082 and NI 4072 only, represents the active part
+(resistance) of the short cable compensation. The valid range is any
+real number >0. The default value (-1) indicates that compensation has
+not taken place.
+
     '''
     shunt_value = AttributeViReal64(1150003)
     '''
-    See `shunt_value <nidmm_attributes.html#nidmm.attribute.shunt_value>`__
+    
+For the NI 4050 only, specifies the shunt resistance value.
+
     '''
     simulate = AttributeViBoolean(1050005)
     '''
-    See `simulate <nidmm_attributes.html#nidmm.attribute.simulate>`__
+    
+Specifies whether to simulate instrument driver I/O operations. If
+simulation is enabled, instrument driver functions perform range
+checking and call IVI Get and Set VIs, but they do not perform
+instrument I/O. For output parameters that represent instrument data,
+the instrument driver VIs return calculated values. The default value is
+FALSE (0). Use niDMM Initialize With Options to override the default
+setting.
+
     '''
     specific_driver_class_spec_major_version = AttributeViInt32(1050515)
     '''
-    See `specific_driver_class_spec_major_version <nidmm_attributes.html#nidmm.attribute.specific_driver_class_spec_major_version>`__
+    
+The major version number of the class specification for the specific
+driver.
+
     '''
     specific_driver_class_spec_minor_version = AttributeViInt32(1050516)
     '''
-    See `specific_driver_class_spec_minor_version <nidmm_attributes.html#nidmm.attribute.specific_driver_class_spec_minor_version>`__
+    
+The minor version number of the class specification for the specific
+driver.
+
     '''
     specific_driver_description = AttributeViString(1050514)
     '''
-    See `specific_driver_description <nidmm_attributes.html#nidmm.attribute.specific_driver_description>`__
+    
+A string containing a description of the specific driver.
+
     '''
     specific_driver_prefix = AttributeViString(1050302)
     '''
-    See `specific_driver_prefix <nidmm_attributes.html#nidmm.attribute.specific_driver_prefix>`__
+    
+The prefix for the specific instrument driver. The name of each
+user-callable VI in this driver starts with this prefix. The prefix can
+be up to a maximum of eight characters.
+
     '''
     specific_driver_revision = AttributeViString(1050551)
     '''
-    See `specific_driver_revision <nidmm_attributes.html#nidmm.attribute.specific_driver_revision>`__
+    
+A string that contains additional version information about this
+instrument driver.
+
     '''
     specific_driver_vendor = AttributeViString(1050513)
     '''
-    See `specific_driver_vendor <nidmm_attributes.html#nidmm.attribute.specific_driver_vendor>`__
+    
+A string containing the vendor of the specific driver.
+
     '''
     supported_instrument_models = AttributeViString(1050327)
     '''
-    See `supported_instrument_models <nidmm_attributes.html#nidmm.attribute.supported_instrument_models>`__
+    
+A string containing the instrument models supported by the specific
+driver.
+
     '''
     temp_rtd_a = AttributeViReal64(1150121)
     '''
-    See `temp_rtd_a <nidmm_attributes.html#nidmm.attribute.temp_rtd_a>`__
+    
+Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
+**RTD Type property** is set to Custom.
+
     '''
     temp_rtd_b = AttributeViReal64(1150122)
     '''
-    See `temp_rtd_b <nidmm_attributes.html#nidmm.attribute.temp_rtd_b>`__
+    
+Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
+**RTD Type property** is set to Custom.
+
     '''
     temp_rtd_c = AttributeViReal64(1150123)
     '''
-    See `temp_rtd_c <nidmm_attributes.html#nidmm.attribute.temp_rtd_c>`__
+    
+Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
+**RTD Type property** is set to Custom.
+
     '''
     temp_rtd_res = AttributeViReal64(1250242)
     '''
-    See `temp_rtd_res <nidmm_attributes.html#nidmm.attribute.temp_rtd_res>`__
+    
+Specifies the RTD resistance at 0 degrees Celsius.
+
     '''
     temp_rtd_type = AttributeEnum(1150120, enums.TemperatureRTDType)
     '''
-    See `temp_rtd_type <nidmm_attributes.html#nidmm.attribute.temp_rtd_type>`__
+    
+Specifies the RTD type.
+
     '''
     temp_tc_fixed_ref_junc = AttributeViReal64(1250233)
     '''
-    See `temp_tc_fixed_ref_junc <nidmm_attributes.html#nidmm.attribute.temp_tc_fixed_ref_junc>`__
+    
+Specifies the value of the fixed reference junction temperature for a
+thermocouple in degrees Celsius.
+
     '''
     temp_tc_ref_junc_type = AttributeEnum(1250232, enums.TemperatureThermocoupleReferenceJunctionType)
     '''
-    See `temp_tc_ref_junc_type <nidmm_attributes.html#nidmm.attribute.temp_tc_ref_junc_type>`__
+    
+Specifies the thermocouple reference junction type.
+
     '''
     temp_tc_type = AttributeEnum(1250231, enums.TemperatureThermocoupleType)
     '''
-    See `temp_tc_type <nidmm_attributes.html#nidmm.attribute.temp_tc_type>`__
+    
+Specifies the thermocouple type.
+
     '''
     temp_thermistor_a = AttributeViReal64(1150125)
     '''
-    See `temp_thermistor_a <nidmm_attributes.html#nidmm.attribute.temp_thermistor_a>`__
+    
+Specifies the Steinhart-Hart A coefficient for thermistor scaling when
+the **Thermistor Type property** is set to Custom.
+
     '''
     temp_thermistor_b = AttributeViReal64(1150126)
     '''
-    See `temp_thermistor_b <nidmm_attributes.html#nidmm.attribute.temp_thermistor_b>`__
+    
+Specifies the Steinhart-Hart B coefficient for thermistor scaling when
+the **Thermistor Type property** is set to Custom.
+
     '''
     temp_thermistor_c = AttributeViReal64(1150127)
     '''
-    See `temp_thermistor_c <nidmm_attributes.html#nidmm.attribute.temp_thermistor_c>`__
+    
+Specifies the Steinhart-Hart C coefficient for thermistor scaling when
+the **Thermistor Type property** is set to Custom.
+
     '''
     temp_thermistor_type = AttributeEnum(1150124, enums.TemperatureThermistorType)
     '''
-    See `temp_thermistor_type <nidmm_attributes.html#nidmm.attribute.temp_thermistor_type>`__
+    
+Specifies the thermistor type.
+
     '''
     temp_transducer_type = AttributeEnum(1250201, enums.TemperatureTransducerType)
     '''
-    See `temp_transducer_type <nidmm_attributes.html#nidmm.attribute.temp_transducer_type>`__
+    
+Specifies the transducer type.
+
     '''
     trigger_count = AttributeViInt32(1250304)
     '''
-    See `trigger_count <nidmm_attributes.html#nidmm.attribute.trigger_count>`__
+    
+Specifies the number of triggers the DMM receives before returning to
+the Idle state. This property can be set to any positive ViInt32 value
+for the NI 4065, NI 4070/4071/4072, and NI 4080/4081/4082.
+
+The NI 4050/4060 only support this property being set to 1.
+
+Refer to Multiple Point Acquisitions in the *NI Digital Multimeters
+Help* for more information.
+
     '''
     trigger_delay = AttributeViReal64(1250005)
     '''
-    See `trigger_delay <nidmm_attributes.html#nidmm.attribute.trigger_delay>`__
+    
+Specifies the time (in seconds) that the DMM waits after it has received
+a trigger before taking a measurement. The default value is Auto Delay
+(-1), which means that the DMM waits an appropriate settling time before
+taking the measurement.
+
+The NI 4080/4081/4082 uses the value specified in this property as
+additional settling time. The valid range for Trigger Delay is Auto
+Delay (-1) or 0.0 - 150.0 seconds, and the onboard timing resolution is
+10.0 ns.
+
+The NI 4065 and NI 4070/4071/4072 use the value specified in this
+property as additional settling time. For these devices, the valid range
+for Trigger Delay is Auto Delay (-1) or 0.0 - 149.0 seconds and the
+onboard timing resolution is 34.72 ns.
+
+On the NI 4060, if this property is set to 0, the DMM does not settle
+before taking the measurement. On the NI 4060, the valid range for
+Trigger Delay (-1) is 0.0-12.0 seconds and the onboard timing resolution
+is 100 ms.
+
+When using the NI 4050, this property must be set to Auto Delay (-1).
+
+Use positive values to set the trigger delay in seconds.
+
+Valid Range: Auto Delay (-1.0), 0.0-12.0 seconds (NI 4060 only),
+0.0-149.0 seconds (NI 4065 and NI 4070/4071/4072)
+
+Default Value: Auto Delay
+
     '''
     trigger_slope = AttributeEnum(1250334, enums.Slope)
     '''
-    See `trigger_slope <nidmm_attributes.html#nidmm.attribute.trigger_slope>`__
+    
+Specifies the edge of the signal from the specified trigger source on
+which the DMM is triggered.
+
     '''
     trigger_source = AttributeViInt32(1250004)
     '''
-    See `trigger_source <nidmm_attributes.html#nidmm.attribute.trigger_source>`__
+    
+Specifies the trigger source. When niDMM Initiate is called, the DMM
+waits for the trigger specified with this property. After it receives
+the trigger, the DMM waits the length of time specified with the Trigger
+Delay property. The DMM then takes a measurement.
+
+To determine which values are supported by each device, refer to the
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
+
     '''
     waveform_coupling = AttributeEnum(1150027, enums.WaveformCouplingMode)
     '''
-    See `waveform_coupling <nidmm_attributes.html#nidmm.attribute.waveform_coupling>`__
+    
+For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
+coupling during a waveform acquisition.
+
     '''
     waveform_points = AttributeViInt32(1150019)
     '''
-    See `waveform_points <nidmm_attributes.html#nidmm.attribute.waveform_points>`__
+    
+For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the number of
+points to acquire in a waveform acquisition.
+
     '''
     waveform_rate = AttributeViReal64(1150018)
     '''
-    See `waveform_rate <nidmm_attributes.html#nidmm.attribute.waveform_rate>`__
+    
+Specifies the rate of the waveform acquisition in samples per second
+(S/s). The valid rate is calculated by dividing 1,800,000 by an integer
+divisor, and the rate falls between 10 and 1,800,000 samples per second.
+The waveform rate is coerced upwards to the next valid rate. The default
+value is 1,800,000 samples per second. Not supported by NI 4065.
+
     '''
 
     def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):
