@@ -13,6 +13,12 @@ export COMMAND_LOG_BATCH
 COMMAND_LOG_SH := $(GENERATED_DIR)/command_history.sh
 export COMMAND_LOG_SH
 
+define log_command
+	$1
+	@echo '$1' >> $(COMMAND_LOG_BATCH)
+	@echo '$1' >> $(COMMAND_LOG_SH)
+endef
+
 ifeq (,$(PRINT))
 _hide_cmds := @
 endif
@@ -102,8 +108,8 @@ SOURCEDIR     = $(ROOT_DIR)/docs
 BUILDDIR      = $(BIN_DIR)/docs
 
 html:
-	$(_hide_cmds)cp $(ROOT_DIR)/README.rst $(SOURCEDIR)
-	$(_hide_cmds)$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	$(_hide_cmds)$(call log_command,cp $(ROOT_DIR)/README.rst $(SOURCEDIR))
+	$(_hide_cmds)$(call log_command,$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS))
 
 .PHONY: help Makefile
 

@@ -6,6 +6,7 @@
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
+    attribute_docs = template_parameters['metadata'].attribute_docs
 %>\
 
 import ctypes
@@ -49,6 +50,11 @@ class Device(object):
     def __init__(self, owner, index):
 % for attribute in sorted(attributes):
         self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index=index)
+%   if str(attributes[attribute]['id']) in attribute_docs:
+        '''
+        ${helper.get_indented_docstring(attribute_docs[str(attributes[attribute]['id'])]['shortDescription'])}, indent=8)
+        '''
+%   endif
 % endfor
 
 
@@ -58,6 +64,11 @@ class Session(object):
     def __init__(self, driver):
 % for attribute in sorted(attributes):
         self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(self, ${attributes[attribute]['id']})
+%   if str(attributes[attribute]['id']) in attribute_docs:
+        '''
+        ${helper.get_indented_docstring(attribute_docs[str(attributes[attribute]['id'])]['shortDescription'])}, indent=8)
+        '''
+%   endif
 % endfor
 
         self.handle = 0

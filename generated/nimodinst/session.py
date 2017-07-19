@@ -40,14 +40,41 @@ class Device(object):
 
     def __init__(self, owner, index):
         self.bus_number = AttributeViInt32(owner, 12, index=index)
+        '''
+        The bus on which the device has been enumerated., indent=8)
+        '''
         self.chassis_number = AttributeViInt32(owner, 11, index=index)
+        '''
+        The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX., indent=8)
+        '''
         self.device_model = AttributeViString(owner, 1, index=index)
+        '''
+        The model of the device (for example, NI PXI-5122), indent=8)
+        '''
         self.device_name = AttributeViString(owner, 0, index=index)
+        '''
+        The name of the device, which can be used to open an instrument driver session for that device, indent=8)
+        '''
         self.max_pciexpress_link_width = AttributeViInt32(owner, 18, index=index)
+        '''
+        **MAX_PCIEXPRESS_LINK_WIDTH**, indent=8)
+        '''
         self.pciexpress_link_width = AttributeViInt32(owner, 17, index=index)
+        '''
+        **PCIEXPRESS_LINK_WIDTH**, indent=8)
+        '''
         self.serial_number = AttributeViString(owner, 2, index=index)
+        '''
+        The serial number of the device, indent=8)
+        '''
         self.slot_number = AttributeViInt32(owner, 10, index=index)
+        '''
+        The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX., indent=8)
+        '''
         self.socket_number = AttributeViInt32(owner, 13, index=index)
+        '''
+        The socket number on which the device has been enumerated, indent=8)
+        '''
 
 
 class Session(object):
@@ -55,14 +82,41 @@ class Session(object):
 
     def __init__(self, driver):
         self.bus_number = AttributeViInt32(self, 12)
+        '''
+        The bus on which the device has been enumerated., indent=8)
+        '''
         self.chassis_number = AttributeViInt32(self, 11)
+        '''
+        The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX., indent=8)
+        '''
         self.device_model = AttributeViString(self, 1)
+        '''
+        The model of the device (for example, NI PXI-5122), indent=8)
+        '''
         self.device_name = AttributeViString(self, 0)
+        '''
+        The name of the device, which can be used to open an instrument driver session for that device, indent=8)
+        '''
         self.max_pciexpress_link_width = AttributeViInt32(self, 18)
+        '''
+        **MAX_PCIEXPRESS_LINK_WIDTH**, indent=8)
+        '''
         self.pciexpress_link_width = AttributeViInt32(self, 17)
+        '''
+        **PCIEXPRESS_LINK_WIDTH**, indent=8)
+        '''
         self.serial_number = AttributeViString(self, 2)
+        '''
+        The serial number of the device, indent=8)
+        '''
         self.slot_number = AttributeViInt32(self, 10)
+        '''
+        The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX., indent=8)
+        '''
         self.socket_number = AttributeViInt32(self, 13)
+        '''
+        The socket number on which the device has been enumerated, indent=8)
+        '''
 
         self.handle = 0
         self.item_count = 0

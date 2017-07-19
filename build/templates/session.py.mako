@@ -114,7 +114,7 @@ class Session(object):
     %endif
 %   if str(attributes[attribute]['id']) in attribute_docs:
     '''
-    ${attribute_docs[str(attributes[attribute]['id'])]['shortDescription']}
+    ${helper.get_indented_docstring(attribute_docs[str(attributes[attribute]['id'])]['shortDescription'])}, indent=4)
     '''
 %   endif
 % endfor

@@ -202,3 +202,19 @@ def get_dictionary_snippet(d, indent=4):
     d_str = pprint.pformat(d)
     d_lines = d_str.splitlines()
     return ('\n' + (' ' * indent)).join(d_lines)
+
+def get_indented_docstring(d, indent=4):
+    '''
+    Returns a docstring with the correct amount of indentation. Can't use similar construct as
+    get_dictionary_snippet ('\n' + (' ' * indent)).join(d_lines) because empty lines would get
+    the spaces, which violates pep8 and causes the flake8 step to fail
+    '''
+    d_lines = d.strip().splitlines()
+    ret_val = ''
+    for l in d_lines:
+        if len(ret_val) > 0:
+            ret_val += '\n'
+            if len(l.strip()) > 0:
+                ret_val += (' ' * indent)
+        ret_val += l.strip()
+    return ret_val
