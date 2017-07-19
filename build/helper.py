@@ -218,3 +218,8 @@ def get_indented_docstring_snippet(d, indent=4):
                 ret_val += (' ' * indent)
         ret_val += l.strip()
     return ret_val
+
+def get_rst_header_snippet(t, header_level='='):
+    ret_val = t + '\n'
+    ret_val += header_level * len(t)
+    return ret_val
