@@ -12,6 +12,9 @@ METADATA_DIR := $(DRIVER_DIR)/metadata
 
 BUILD_HELPER_SCRIPT := $(BUILD_HELPER_DIR)/helper.py
 
+DOCS_DIR := $(ROOT_DIR)/docs
+DRIVER_DOCS_DIR := $(DOCS_DIR)/$(DRIVER)
+
 VERSION ?= 0.1
 WHEEL := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION)-py2.py3-none-any.whl
 SDIST := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION).tar.gz
@@ -55,5 +58,7 @@ DEFAULT_PY_FILES_TO_COPY := \
                      ctypes_types.py \
                      python_types.py \
 
+DEFAULT_RST_FILES_TO_GENERATE := \
+                     session.rst \
 
 
