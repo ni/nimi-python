@@ -10,6 +10,6 @@ Welcome to NI-ModInst Python API's documentation!
    :maxdepth: 3
    :caption: API References:
 
-   nimodinst_session
+   nimodinst/session
 
 
