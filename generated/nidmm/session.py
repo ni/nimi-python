@@ -113,7 +113,7 @@ class Session(object):
     for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
     4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060., indent=4)
     '''
-    adc_calibration = AttributeEnum(1150022, enums.EnabledSetting)
+    adc_calibration = AttributeEnum(1150022, enums.ADCCalibration)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
     calibration mode., indent=4)
@@ -136,7 +136,7 @@ class Session(object):
     actual value of the active range. The value of this property is set
     during a read operation., indent=4)
     '''
-    auto_zero = AttributeEnum(1250332, enums.EnabledSetting)
+    auto_zero = AttributeEnum(1250332, enums.AutoZero)
     '''
     Specifies the AutoZero mode. This property is not supported for the NI
     4050., indent=4)
@@ -289,14 +289,14 @@ class Session(object):
     '''
     A string containing the logical name of the instrument., indent=4)
     '''
-    meas_complete_dest = AttributeViInt32(1250305)
+    meas_complete_dest = AttributeEnum(1250305, enums.MeasurementCompleteDest)
     '''
     Specifies the destination of the measurement complete (MC) signal.
 
     To determine which values are supported by each device, refer to the
     LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* ., indent=4)
     '''
-    meas_dest_slope = AttributeEnum(1150002, enums.Slope)
+    meas_dest_slope = AttributeEnum(1150002, enums.MeasurementDestinationSlope)
     '''
     Specifies the polarity of the generated measurement complete signal., indent=4)
     '''
@@ -310,7 +310,7 @@ class Session(object):
 
     The NI 4050 and NI 4060 are not supported., indent=4)
     '''
-    offset_comp_ohms = AttributeEnum(1150023, enums.EnabledSetting)
+    offset_comp_ohms = AttributeEnum(1150023, enums.OffsetCompensatedOhms)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
     offset compensated ohms., indent=4)
@@ -333,9 +333,8 @@ class Session(object):
     '''
     Specifies how the DMM acquires data.
 
-    +-------------+----------------------------------------------+
-    | **Note:**   | The NI 4050 and NI 4060 are not supported.   |
-    +-------------+----------------------------------------------+
+    .. note::
+    The NI 4050 and NI 4060 are not supported.
 
     When you call niDMM Config Measurement , NI-DMM sets this property to
     IVIDMM Mode. When you call niDMM Configure Waveform Acquisition , NI-DMM
@@ -418,14 +417,14 @@ class Session(object):
     settles for a recommended time, which is the same as using an immediate
     trigger., indent=4)
     '''
-    sample_trigger = AttributeViInt32(1250302)
+    sample_trigger = AttributeEnum(1250302, enums.SampleTrigger)
     '''
     Specifies the sample trigger source.
 
     To determine which values are supported by each device, refer to the
     LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* ., indent=4)
     '''
-    sample_trigger_slope = AttributeEnum(1150010, enums.Slope)
+    sample_trigger_slope = AttributeEnum(1150010, enums.SampleTrigSlope)
     '''
     Specifies the edge of the signal from the specified sample trigger
     source on which the DMM is triggered., indent=4)
@@ -605,12 +604,12 @@ class Session(object):
 
     Default Value: Auto Delay, indent=4)
     '''
-    trigger_slope = AttributeEnum(1250334, enums.Slope)
+    trigger_slope = AttributeEnum(1250334, enums.TriggerSlope)
     '''
     Specifies the edge of the signal from the specified trigger source on
     which the DMM is triggered., indent=4)
     '''
-    trigger_source = AttributeViInt32(1250004)
+    trigger_source = AttributeEnum(1250004, enums.TriggerSource)
     '''
     Specifies the trigger source. When niDMM Initiate is called, the DMM
     waits for the trigger specified with this property. After it receives
