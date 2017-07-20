@@ -1,10 +1,10 @@
 enum_docs = {
     'ADCCalibration': {
-        '1': {
-            'name': 'On',
+        '-1': {
+            'name': 'Auto',
             'description': '''
-The DMM measures an internal reference to calculate the correct gain for
-the measurement.
+The DMM enables or disables ADC calibration based on the configured
+function and resolution.
 ''',
         },
         '0': {
@@ -13,29 +13,42 @@ the measurement.
 The DMM does not compensate for changes to the gain.
 ''',
         },
-        '-1': {
-            'name': 'Auto',
+        '1': {
+            'name': 'On',
             'description': '''
-The DMM enables or disables ADC calibration based on the configured
-function and resolution.
+The DMM measures an internal reference to calculate the correct gain for
+the measurement.
 ''',
         },
     },
     'ApertureTimeUnits': {
-        '1': {
-            'name': 'Power Line Cycles',
-            'description': '''
-Units are powerline cycles (PLCs).
-''',
-        },
         '0': {
             'name': 'Seconds',
             'description': '''
 Units are seconds.
 ''',
         },
+        '1': {
+            'name': 'Power Line Cycles',
+            'description': '''
+Units are powerline cycles (PLCs).
+''',
+        },
     },
     'AutoZero': {
+        '-1': {
+            'name': 'Auto',
+            'description': '''
+NI-DMM chooses the Auto Zero setting based on the configured function
+and resolution.
+''',
+        },
+        '0': {
+            'name': 'Off',
+            'description': '''
+Disables AutoZero.
+''',
+        },
         '1': {
             'name': 'On',
             'description': '''
@@ -55,21 +68,14 @@ from the first reading and the following readings. The NI 4060/4065 does
 not support this setting.
 ''',
         },
-        '0': {
-            'name': 'Off',
-            'description': '''
-Disables AutoZero.
-''',
-        },
-        '-1': {
-            'name': 'Auto',
-            'description': '''
-NI-DMM chooses the Auto Zero setting based on the configured function
-and resolution.
-''',
-        },
     },
     'CableCompensationType': {
+        '0': {
+            'name': 'None',
+            'description': '''
+No cable compensation.
+''',
+        },
         '1': {
             'name': 'Open',
             'description': '''
@@ -80,12 +86,6 @@ Open cable compensation.
             'name': 'Short',
             'description': '''
 Short cable compensation.
-''',
-        },
-        '0': {
-            'name': 'None',
-            'description': '''
-No cable compensation.
 ''',
         },
         '3': {
@@ -122,20 +122,33 @@ NI 4070/4071/4072 are supported.
         },
     },
     'DCBias': {
-        '1': {
-            'name': 'DC Bias On',
-            'description': '''
-NI-DMM programs the device to use the DC bias.
-''',
-        },
         '0': {
             'name': 'DC Bias Off',
             'description': '''
 NI-DMM programs the device not to use the DC bias.
 ''',
         },
+        '1': {
+            'name': 'DC Bias On',
+            'description': '''
+NI-DMM programs the device to use the DC bias.
+''',
+        },
     },
     'DCNoiseRejection': {
+        '-1': {
+            'name': 'Auto',
+            'description': '''
+The driver chooses the DC noise rejection setting based on the
+configured function and resolution.
+''',
+        },
+        '0': {
+            'name': 'Normal',
+            'description': '''
+NI-DMM weighs all samples equally.
+''',
+        },
         '1': {
             'name': 'Second Order',
             'description': '''
@@ -152,27 +165,8 @@ than samples taken at the beginning and the end of the measurement using
 a bell-curve weighing function.
 ''',
         },
-        '0': {
-            'name': 'Normal',
-            'description': '''
-NI-DMM weighs all samples equally.
-''',
-        },
-        '-1': {
-            'name': 'Auto',
-            'description': '''
-The driver chooses the DC noise rejection setting based on the
-configured function and resolution.
-''',
-        },
     },
     'DigitsResolution': {
-        '5.500000E+0': {
-            'name': '5.5',
-            'description': '''
-Specifies 5.5 digits resolution.
-''',
-        },
         '3.5000000E+0': {
             'name': '3.5',
             'description': '''
@@ -185,10 +179,10 @@ Specifies 3.5 digits resolution.
 Specifies 4.5 digits resolution.
 ''',
         },
-        '7.500000E+0': {
-            'name': '7.5',
+        '5.500000E+0': {
+            'name': '5.5',
             'description': '''
-Specifies 7.5 digits resolution.
+Specifies 5.5 digits resolution.
 ''',
         },
         '6.500000E+0': {
@@ -197,18 +191,18 @@ Specifies 7.5 digits resolution.
 Specifies 6.5 digits resolution.
 ''',
         },
-    },
-    'Function': {
-        '5': {
-            'name': '2-Wire Resistance',
+        '7.500000E+0': {
+            'name': '7.5',
             'description': '''
-All devices supported.
+Specifies 7.5 digits resolution.
 ''',
         },
-        '1003': {
-            'name': 'Waveform Voltage',
+    },
+    'Function': {
+        '1': {
+            'name': 'DC Volts',
             'description': '''
-NI 4070/4071/4072 supported.
+All devices supported.
 ''',
         },
         '1001': {
@@ -223,10 +217,58 @@ NI 4070/4071/4072 supported.
 All devices supported.
 ''',
         },
+        '1003': {
+            'name': 'Waveform Voltage',
+            'description': '''
+NI 4070/4071/4072 supported.
+''',
+        },
+        '1004': {
+            'name': 'Waveform Current',
+            'description': '''
+NI 4070/4071/4072 supported.
+''',
+        },
+        '1005': {
+            'name': 'Capacitance',
+            'description': '''
+NI 4072 supported.
+''',
+        },
+        '1006': {
+            'name': 'Inductance',
+            'description': '''
+NI 4072 supported.
+''',
+        },
+        '101': {
+            'name': '4-Wire Resistance',
+            'description': '''
+NI 4065, and NI 4070/4071/4072 supported.
+''',
+        },
+        '104': {
+            'name': 'Frequency',
+            'description': '''
+NI 4070/4071/4072 supported.
+''',
+        },
         '105': {
             'name': 'Period',
             'description': '''
 NI 4070/4071/4072 supported.
+''',
+        },
+        '108': {
+            'name': 'Temperature',
+            'description': '''
+NI 4065, and NI 4070/4071/4072 supported.
+''',
+        },
+        '2': {
+            'name': 'AC Volts',
+            'description': '''
+All devices supported.
 ''',
         },
         '3': {
@@ -241,52 +283,10 @@ All devices supported.
 All devices supported.
 ''',
         },
-        '101': {
-            'name': '4-Wire Resistance',
-            'description': '''
-NI 4065, and NI 4070/4071/4072 supported.
-''',
-        },
-        '1004': {
-            'name': 'Waveform Current',
-            'description': '''
-NI 4070/4071/4072 supported.
-''',
-        },
-        '108': {
-            'name': 'Temperature',
-            'description': '''
-NI 4065, and NI 4070/4071/4072 supported.
-''',
-        },
-        '104': {
-            'name': 'Frequency',
-            'description': '''
-NI 4070/4071/4072 supported.
-''',
-        },
-        '1006': {
-            'name': 'Inductance',
-            'description': '''
-NI 4072 supported.
-''',
-        },
-        '2': {
-            'name': 'AC Volts',
+        '5': {
+            'name': '2-Wire Resistance',
             'description': '''
 All devices supported.
-''',
-        },
-        '1': {
-            'name': 'DC Volts',
-            'description': '''
-All devices supported.
-''',
-        },
-        '1005': {
-            'name': 'Capacitance',
-            'description': '''
-NI 4072 supported.
 ''',
         },
     },
@@ -311,11 +311,10 @@ Input resistance of 10 M Ohm
         },
     },
     'LCCalculationModel': {
-        '1': {
-            'name': 'Parallel',
+        '-1': {
+            'name': 'Auto',
             'description': '''
-NI-DMM uses the parallel admittance model to calculate capacitance and
-inductance.
+NI-DMM chooses the algorithm based on function and range.
 ''',
         },
         '0': {
@@ -325,30 +324,25 @@ NI-DMM uses the series impedance model to calculate capacitance and
 inductance.
 ''',
         },
-        '-1': {
-            'name': 'Auto',
+        '1': {
+            'name': 'Parallel',
             'description': '''
-NI-DMM chooses the algorithm based on function and range.
+NI-DMM uses the parallel admittance model to calculate capacitance and
+inductance.
 ''',
         },
     },
     'MeasurementCompleteDest': {
+        '-1': {
+            'name': 'None',
+            'description': '''
+No destination specified.
+''',
+        },
         '1003': {
             'name': 'LBR Trig 0',
             'description': '''
 Local Bus Right Trigger Line 0 of PXI/SCXI combination chassis
-''',
-        },
-        '113': {
-            'name': 'TL 2',
-            'description': '''
-PXI Trigger Line 2
-''',
-        },
-        '112': {
-            'name': 'TTL 1',
-            'description': '''
-PXI Trigger Line 1
 ''',
         },
         '111': {
@@ -357,10 +351,22 @@ PXI Trigger Line 1
 PXI Trigger Line 0
 ''',
         },
-        '116': {
-            'name': 'TTL 5',
+        '112': {
+            'name': 'TTL 1',
             'description': '''
-PXI Trigger Line 5
+PXI Trigger Line 1
+''',
+        },
+        '113': {
+            'name': 'TL 2',
+            'description': '''
+PXI Trigger Line 2
+''',
+        },
+        '114': {
+            'name': 'TTL 3',
+            'description': '''
+PXI Trigger Line 3
 ''',
         },
         '115': {
@@ -369,16 +375,10 @@ PXI Trigger Line 5
 PXI Trigger Line 4
 ''',
         },
-        '2': {
-            'name': 'External',
+        '116': {
+            'name': 'TTL 5',
             'description': '''
-Pin 6 on the AUX Connector
-''',
-        },
-        '114': {
-            'name': 'TTL 3',
-            'description': '''
-PXI Trigger Line 3
+PXI Trigger Line 5
 ''',
         },
         '117': {
@@ -393,49 +393,42 @@ PXI Trigger Line 6
 PXI Trigger Line 7
 ''',
         },
-        '-1': {
-            'name': 'None',
+        '2': {
+            'name': 'External',
             'description': '''
-No destination specified.
+Pin 6 on the AUX Connector
 ''',
         },
     },
     'MeasurementDestinationSlope': {
-        '1': {
-            'name': 'Negative',
-            'description': '''
-The driver triggers on the falling edge of the trigger signal.
-''',
-        },
         '0': {
             'name': 'Positive',
             'description': '''
 The driver triggers on the rising edge of the trigger signal.
 ''',
         },
-    },
-    'OffsetCompensatedOhms': {
         '1': {
-            'name': 'On',
+            'name': 'Negative',
             'description': '''
-Enables Offset Compensated Ohms.
+The driver triggers on the falling edge of the trigger signal.
 ''',
         },
+    },
+    'OffsetCompensatedOhms': {
         '0': {
             'name': 'Off',
             'description': '''
 Disables Offset Compensated Ohms.
 ''',
         },
-    },
-    'OperationMode': {
         '1': {
-            'name': 'Waveform Mode',
+            'name': 'On',
             'description': '''
-Configures the NI 4080/4081/4082 and NI 4070/4071/4072 to take waveform
-measurements.
+Enables Offset Compensated Ohms.
 ''',
         },
+    },
+    'OperationMode': {
         '0': {
             'name': 'IVIDMM Mode',
             'description': '''
@@ -445,28 +438,29 @@ NI 4080/4081/4082 take a single-point measurement; otherwise, NI-DMM
 takes multipoint measurements.
 ''',
         },
-    },
-    'PowerlineFrequency': {
-        '6.000000E+1': {
-            'name': '60 Hz',
+        '1': {
+            'name': 'Waveform Mode',
             'description': '''
-Specifies the powerline frequency as 60 Hz.
+Configures the NI 4080/4081/4082 and NI 4070/4071/4072 to take waveform
+measurements.
 ''',
         },
+    },
+    'PowerlineFrequency': {
         '5.000000E+1': {
             'name': '50 Hz',
             'description': '''
 Specifies the powerline frequency as 50 Hz.
 ''',
         },
-    },
-    'RTDType': {
-        '5': {
-            'name': 'Pt 3920',
+        '6.000000E+1': {
+            'name': '60 Hz',
             'description': '''
-Performs scaling for a Pt 3920 RTD.
+Specifies the powerline frequency as 60 Hz.
 ''',
         },
+    },
+    'RTDType': {
         '0': {
             'name': 'Custom',
             'description': '''
@@ -474,22 +468,16 @@ Performs Callendar-Van Dusen RTD scaling with the user-specified A, B,
 and C coefficients.
 ''',
         },
-        '6': {
-            'name': 'Pt 3928',
+        '1': {
+            'name': 'Pt 3750',
             'description': '''
-Performs scaling for a Pt 3928 RTD.
+Performs scaling for a Pt 3750 RTD.
 ''',
         },
         '2': {
             'name': 'Pt 3851',
             'description': '''
 Performs scaling for a Pt 3851 RTD.
-''',
-        },
-        '1': {
-            'name': 'Pt 3750',
-            'description': '''
-Performs scaling for a Pt 3750 RTD.
 ''',
         },
         '3': {
@@ -504,38 +492,62 @@ Performs scaling for a Pt 3911 RTD.
 Performs scaling for a Pt 3916 RTD.
 ''',
         },
-    },
-    'SampleTrigSlope': {
-        '1': {
-            'name': 'Negative',
+        '5': {
+            'name': 'Pt 3920',
             'description': '''
-The driver triggers on the falling edge of the trigger signal.
+Performs scaling for a Pt 3920 RTD.
 ''',
         },
+        '6': {
+            'name': 'Pt 3928',
+            'description': '''
+Performs scaling for a Pt 3928 RTD.
+''',
+        },
+    },
+    'SampleTrigSlope': {
         '0': {
             'name': 'Positive',
             'description': '''
 The driver triggers on the rising edge of the trigger signal.
 ''',
         },
-    },
-    'SampleTrigger': {
-        '1004': {
-            'name': 'LBR Trig 1',
+        '1': {
+            'name': 'Negative',
             'description': '''
-Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
+The driver triggers on the falling edge of the trigger signal.
 ''',
         },
-        '131': {
-            'name': 'PXI Star',
+    },
+    'SampleTrigger': {
+        '1': {
+            'name': 'Immediate',
             'description': '''
-PXI Star trigger line
+No trigger specified
+''',
+        },
+        '10': {
+            'name': 'Interval',
+            'description': '''
+Interval trigger
 ''',
         },
         '1001': {
             'name': 'AUX Trig 1',
             'description': '''
 Pin 3 on the AUX connector
+''',
+        },
+        '1004': {
+            'name': 'LBR Trig 1',
+            'description': '''
+Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
+''',
+        },
+        '111': {
+            'name': 'TTL 0',
+            'description': '''
+PXI Trigger Line 0
 ''',
         },
         '112': {
@@ -556,22 +568,10 @@ PXI Trigger Line 2
 PXI Trigger Line 3
 ''',
         },
-        '3': {
-            'name': 'Software Trig',
+        '115': {
+            'name': 'TTL 4',
             'description': '''
-Configures the DMM to wait until niDMM Send Software Trigger is called.
-''',
-        },
-        '118': {
-            'name': 'TTL 7',
-            'description': '''
-PXI Trigger Line 7
-''',
-        },
-        '10': {
-            'name': 'Interval',
-            'description': '''
-Interval trigger
+PXI Trigger Line 4
 ''',
         },
         '116': {
@@ -580,38 +580,45 @@ Interval trigger
 PXI Trigger Line 5
 ''',
         },
-        '2': {
-            'name': 'External',
-            'description': '''
-Pin 9 on the AUX Connector
-''',
-        },
-        '115': {
-            'name': 'TTL 4',
-            'description': '''
-PXI Trigger Line 4
-''',
-        },
-        '111': {
-            'name': 'TTL 0',
-            'description': '''
-PXI Trigger Line 0
-''',
-        },
-        '1': {
-            'name': 'Immediate',
-            'description': '''
-No trigger specified
-''',
-        },
         '117': {
             'name': 'TTL 6',
             'description': '''
 PXI Trigger Line 6
 ''',
         },
+        '118': {
+            'name': 'TTL 7',
+            'description': '''
+PXI Trigger Line 7
+''',
+        },
+        '131': {
+            'name': 'PXI Star',
+            'description': '''
+PXI Star trigger line
+''',
+        },
+        '2': {
+            'name': 'External',
+            'description': '''
+Pin 9 on the AUX Connector
+''',
+        },
+        '3': {
+            'name': 'Software Trig',
+            'description': '''
+Configures the DMM to wait until niDMM Send Software Trigger is called.
+''',
+        },
     },
     'ThermistorType': {
+        '0': {
+            'name': 'Custom',
+            'description': '''
+Performs Steinhart-Hart thermistor scaling with the user-specified A, B,
+and C coefficients.
+''',
+        },
         '1': {
             'name': '44004',
             'description': '''
@@ -622,13 +629,6 @@ Performs scaling for an Omega Series 44004 thermistor.
             'name': '44006',
             'description': '''
 Performs scaling for an Omega Series 44006 thermistor.
-''',
-        },
-        '0': {
-            'name': 'Custom',
-            'description': '''
-Performs Steinhart-Hart thermistor scaling with the user-specified A, B,
-and C coefficients.
 ''',
         },
         '3': {
@@ -648,10 +648,10 @@ temperature.
         },
     },
     'ThermocoupleType': {
-        '8': {
-            'name': 'N',
+        '1': {
+            'name': 'B',
             'description': '''
-Thermocouple type N
+Thermocouple type B
 ''',
         },
         '10': {
@@ -660,34 +660,16 @@ Thermocouple type N
 Thermocouple type S
 ''',
         },
-        '4': {
-            'name': 'E',
-            'description': '''
-Thermocouple type E
-''',
-        },
-        '9': {
-            'name': 'R',
-            'description': '''
-Thermocouple type R
-''',
-        },
         '11': {
             'name': 'T',
             'description': '''
 Thermocouple type T
 ''',
         },
-        '1': {
-            'name': 'B',
+        '4': {
+            'name': 'E',
             'description': '''
-Thermocouple type B
-''',
-        },
-        '7': {
-            'name': 'K',
-            'description': '''
-Thermocouple type K
+Thermocouple type E
 ''',
         },
         '6': {
@@ -696,18 +678,36 @@ Thermocouple type K
 Thermocouple type J
 ''',
         },
-    },
-    'TransducerType': {
-        '2': {
-            'name': 'Thermistor',
+        '7': {
+            'name': 'K',
             'description': '''
-Use for thermistor measurements.
+Thermocouple type K
 ''',
         },
+        '8': {
+            'name': 'N',
+            'description': '''
+Thermocouple type N
+''',
+        },
+        '9': {
+            'name': 'R',
+            'description': '''
+Thermocouple type R
+''',
+        },
+    },
+    'TransducerType': {
         '1': {
             'name': 'Thermocouple',
             'description': '''
 Use for thermocouple measurements.
+''',
+        },
+        '2': {
+            'name': 'Thermistor',
+            'description': '''
+Use for thermistor measurements.
 ''',
         },
         '3': {
@@ -724,30 +724,24 @@ Use for 4-wire RTD measurements.
         },
     },
     'TriggerSlope': {
-        '1': {
-            'name': 'Negative',
-            'description': '''
-The driver triggers on the falling edge of the trigger signal.
-''',
-        },
         '0': {
             'name': 'Positive',
             'description': '''
 The driver triggers on the rising edge of the trigger signal.
 ''',
         },
-    },
-    'TriggerSource': {
-        '1004': {
-            'name': 'LBR Trig 1',
+        '1': {
+            'name': 'Negative',
             'description': '''
-Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
+The driver triggers on the falling edge of the trigger signal.
 ''',
         },
-        '131': {
-            'name': 'PXI Star',
+    },
+    'TriggerSource': {
+        '1': {
+            'name': 'Immediate',
             'description': '''
-PXI Star Trigger Line
+No trigger specified.
 ''',
         },
         '1001': {
@@ -756,34 +750,16 @@ PXI Star Trigger Line
 Pin 3 on the AUX connector
 ''',
         },
+        '1004': {
+            'name': 'LBR Trig 1',
+            'description': '''
+Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
+''',
+        },
         '111': {
             'name': 'TTL 0',
             'description': '''
 PXI Trigger Line 0
-''',
-        },
-        '114': {
-            'name': 'TTL 3',
-            'description': '''
-PXI Trigger Line 3
-''',
-        },
-        '3': {
-            'name': 'Software Trig',
-            'description': '''
-Waits until niDMM Send Software Trigger is called.
-''',
-        },
-        '118': {
-            'name': 'TTL 7',
-            'description': '''
-PXI Trigger Line 7
-''',
-        },
-        '113': {
-            'name': 'TTL 2',
-            'description': '''
-PXI Trigger Line 2
 ''',
         },
         '112': {
@@ -792,16 +768,22 @@ PXI Trigger Line 2
 PXI Trigger Line 1
 ''',
         },
+        '113': {
+            'name': 'TTL 2',
+            'description': '''
+PXI Trigger Line 2
+''',
+        },
+        '114': {
+            'name': 'TTL 3',
+            'description': '''
+PXI Trigger Line 3
+''',
+        },
         '115': {
             'name': 'TTL 4',
             'description': '''
 PXI Trigger Line 4
-''',
-        },
-        '2': {
-            'name': 'External',
-            'description': '''
-Pin 9 on the AUX Connector
 ''',
         },
         '116': {
@@ -810,30 +792,48 @@ Pin 9 on the AUX Connector
 PXI Trigger Line 5
 ''',
         },
-        '1': {
-            'name': 'Immediate',
-            'description': '''
-No trigger specified.
-''',
-        },
         '117': {
             'name': 'TTL 6',
             'description': '''
 PXI Trigger Line 6
 ''',
         },
-    },
-    'WaveformCoupling': {
-        '1': {
-            'name': 'DC',
+        '118': {
+            'name': 'TTL 7',
             'description': '''
-Specifies DC coupling.
+PXI Trigger Line 7
 ''',
         },
+        '131': {
+            'name': 'PXI Star',
+            'description': '''
+PXI Star Trigger Line
+''',
+        },
+        '2': {
+            'name': 'External',
+            'description': '''
+Pin 9 on the AUX Connector
+''',
+        },
+        '3': {
+            'name': 'Software Trig',
+            'description': '''
+Waits until niDMM Send Software Trigger is called.
+''',
+        },
+    },
+    'WaveformCoupling': {
         '0': {
             'name': 'AC',
             'description': '''
 Specifies AC coupling.
+''',
+        },
+        '1': {
+            'name': 'DC',
+            'description': '''
+Specifies DC coupling.
 ''',
         },
     },

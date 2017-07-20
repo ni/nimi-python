@@ -1,13 +1,6 @@
 # -*- coding: utf-8 -*-
 attribute_docs = {
     '-2': {
-        'shortDescription': '''
-Specifies the channel name used to access all subsequent channel-based
-properties in this property node. Set the channel before setting
-channel-based properties. Pass a name that the instrument driver defines
-or a virtual channel name configured in MAX.
-
-''',
         'longDescription': '''
 Specifies the channel name used to access all subsequent channel-based
 properties in this property node. Set the channel before setting
@@ -33,18 +26,15 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 ''',
-    },
-    '1050002': {
         'shortDescription': '''
-Specifies whether to validate property values and VI parameters. If
-enabled, the instrument driver validates the parameter values passed to
-driver VIs. Range checking parameters is very useful for debugging.
-After the user program is validated, you can set this property to FALSE
-(0) to disable range checking and maximize performance. The default
-value is TRUE (1). Use niDMM Initialize With Options to override the
-default setting.
+Specifies the channel name used to access all subsequent channel-based
+properties in this property node. Set the channel before setting
+channel-based properties. Pass a name that the instrument driver defines
+or a virtual channel name configured in MAX.
 
 ''',
+    },
+    '1050002': {
         'longDescription': '''
 Specifies whether to validate property values and VI parameters. If
 enabled, the instrument driver validates the parameter values passed to
@@ -74,19 +64,18 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 ''',
-    },
-    '1050003': {
         'shortDescription': '''
-Specifies whether the instrument driver queries the instrument status
-after each operation. Querying the instrument status is very useful for
-debugging. After the user program is validated, this property can be set
-to FALSE (0) to disable status checking and maximize performance. The
-instrument driver can choose to ignore status checking for particular
-properties regardless of the setting of this property. The default value
-is TRUE (1). Use niDMM Initialize With Options to override the default
-setting.
+Specifies whether to validate property values and VI parameters. If
+enabled, the instrument driver validates the parameter values passed to
+driver VIs. Range checking parameters is very useful for debugging.
+After the user program is validated, you can set this property to FALSE
+(0) to disable range checking and maximize performance. The default
+value is TRUE (1). Use niDMM Initialize With Options to override the
+default setting.
 
 ''',
+    },
+    '1050003': {
         'longDescription': '''
 Specifies whether the instrument driver queries the instrument status
 after each operation. Querying the instrument status is very useful for
@@ -117,18 +106,19 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 ''',
-    },
-    '1050004': {
         'shortDescription': '''
-Specifies whether to cache the value of properties. When caching is
-enabled, the instrument driver keeps track of the current instrument
-settings and avoids sending redundant commands to the instrument. Thus,
-it significantly increases execution speed. The instrument driver can
-choose to always cache or to never cache particular properties
-regardless of the setting of this property. The default value is TRUE
-(1). Use niDMM Initialize With Options to override the default setting.
+Specifies whether the instrument driver queries the instrument status
+after each operation. Querying the instrument status is very useful for
+debugging. After the user program is validated, this property can be set
+to FALSE (0) to disable status checking and maximize performance. The
+instrument driver can choose to ignore status checking for particular
+properties regardless of the setting of this property. The default value
+is TRUE (1). Use niDMM Initialize With Options to override the default
+setting.
 
 ''',
+    },
+    '1050004': {
         'longDescription': '''
 Specifies whether to cache the value of properties. When caching is
 enabled, the instrument driver keeps track of the current instrument
@@ -158,18 +148,18 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 ''',
-    },
-    '1050005': {
         'shortDescription': '''
-Specifies whether to simulate instrument driver I/O operations. If
-simulation is enabled, instrument driver functions perform range
-checking and call IVI Get and Set VIs, but they do not perform
-instrument I/O. For output parameters that represent instrument data,
-the instrument driver VIs return calculated values. The default value is
-FALSE (0). Use niDMM Initialize With Options to override the default
-setting.
+Specifies whether to cache the value of properties. When caching is
+enabled, the instrument driver keeps track of the current instrument
+settings and avoids sending redundant commands to the instrument. Thus,
+it significantly increases execution speed. The instrument driver can
+choose to always cache or to never cache particular properties
+regardless of the setting of this property. The default value is TRUE
+(1). Use niDMM Initialize With Options to override the default setting.
 
 ''',
+    },
+    '1050005': {
         'longDescription': '''
 Specifies whether to simulate instrument driver I/O operations. If
 simulation is enabled, instrument driver functions perform range
@@ -202,16 +192,18 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 ''',
-    },
-    '1050006': {
         'shortDescription': '''
-Specifies whether the IVI engine keeps a list of the value coercions it
-makes for ViInt32 and ViReal64 properties. The default value is FALSE
-(0). Use niDMM Initialize With Options to override the default setting.
-Use niDMM Get Next Coercion Record to extract and delete the oldest
-coercion record from the list.
+Specifies whether to simulate instrument driver I/O operations. If
+simulation is enabled, instrument driver functions perform range
+checking and call IVI Get and Set VIs, but they do not perform
+instrument I/O. For output parameters that represent instrument data,
+the instrument driver VIs return calculated values. The default value is
+FALSE (0). Use niDMM Initialize With Options to override the default
+setting.
 
 ''',
+    },
+    '1050006': {
         'longDescription': '''
 Specifies whether the IVI engine keeps a list of the value coercions it
 makes for ViInt32 and ViReal64 properties. The default value is FALSE
@@ -239,20 +231,16 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 ''',
-    },
-    '1050007': {
         'shortDescription': '''
-This property indicates the Driver Setup string that the user specified
-when initializing the driver. Some cases exist where the end-user must
-specify instrument driver options at initialization time. An example of
-this is specifying a particular instrument model from among a family of
-instruments that the driver supports. This is useful when using
-simulation. The end-user can specify driver-specific options through the
-Driver Setup keyword in the Option String parameter in niDMM Initialize
-With Options . If the user does not specify a Driver Setup string, this
-property returns an empty string.
+Specifies whether the IVI engine keeps a list of the value coercions it
+makes for ViInt32 and ViReal64 properties. The default value is FALSE
+(0). Use niDMM Initialize With Options to override the default setting.
+Use niDMM Get Next Coercion Record to extract and delete the oldest
+coercion record from the list.
 
 ''',
+    },
+    '1050007': {
         'longDescription': '''
 This property indicates the Driver Setup string that the user specified
 when initializing the driver. Some cases exist where the end-user must
@@ -284,23 +272,20 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050021': {
         'shortDescription': '''
-Specifies whether to perform interchangeability checking and log
-interchangeability warnings when you call niDMM VIs. Interchangeability
-warnings indicate that using your application with a different
-instrument might cause different behavior. Use niDMM Get Next
-Interchange Warning to extract interchange warnings. Use niDMM Clear
-Interchange Warnings to clear the list of interchangeability warnings
-without reading them. Interchangeability checking examines the
-properties in a capability group only if you specify a value for at
-least one property within that group. Interchangeability warnings can
-occur when a property affects the behavior of the instrument and you
-have not set that property, or the property has been invalidated since
-you set it.
+This property indicates the Driver Setup string that the user specified
+when initializing the driver. Some cases exist where the end-user must
+specify instrument driver options at initialization time. An example of
+this is specifying a particular instrument model from among a family of
+instruments that the driver supports. This is useful when using
+simulation. The end-user can specify driver-specific options through the
+Driver Setup keyword in the Option String parameter in niDMM Initialize
+With Options . If the user does not specify a Driver Setup string, this
+property returns an empty string.
 
 ''',
+    },
+    '1050021': {
         'longDescription': '''
 Specifies whether to perform interchangeability checking and log
 interchangeability warnings when you call niDMM VIs. Interchangeability
@@ -341,17 +326,23 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 ''',
-    },
-    '1050101': {
         'shortDescription': '''
-A code that describes the first error that occurred since the last call
-to niDMM Get Error for the session. The value follows the VXIplug&play
-conventions. A negative value describes an error condition. A positive
-value describes a warning condition. A zero indicates that no error or
-warning occurred. The error and warning values can be status codes
-defined by IVI, VISA, class drivers, or specific drivers.
+Specifies whether to perform interchangeability checking and log
+interchangeability warnings when you call niDMM VIs. Interchangeability
+warnings indicate that using your application with a different
+instrument might cause different behavior. Use niDMM Get Next
+Interchange Warning to extract interchange warnings. Use niDMM Clear
+Interchange Warnings to clear the list of interchangeability warnings
+without reading them. Interchangeability checking examines the
+properties in a capability group only if you specify a value for at
+least one property within that group. Interchangeability warnings can
+occur when a property affects the behavior of the instrument and you
+have not set that property, or the property has been invalidated since
+you set it.
 
 ''',
+    },
+    '1050101': {
         'longDescription': '''
 A code that describes the first error that occurred since the last call
 to niDMM Get Error for the session. The value follows the VXIplug&play
@@ -380,15 +371,17 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1050102': {
         'shortDescription': '''
-An optional code that provides additional information concerning the
-primary error condition. The error and warning values can be status
-codes defined by IVI, VISA, class drivers, or specific drivers. Zero
-indicates no additional information.
+A code that describes the first error that occurred since the last call
+to niDMM Get Error for the session. The value follows the VXIplug&play
+conventions. A negative value describes an error condition. A positive
+value describes a warning condition. A zero indicates that no error or
+warning occurred. The error and warning values can be status codes
+defined by IVI, VISA, class drivers, or specific drivers.
 
 ''',
+    },
+    '1050102': {
         'longDescription': '''
 An optional code that provides additional information concerning the
 primary error condition. The error and warning values can be status
@@ -415,13 +408,15 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1050103': {
         'shortDescription': '''
-An optional string that contains additional information concerning the
-primary error condition.
+An optional code that provides additional information concerning the
+primary error condition. The error and warning values can be status
+codes defined by IVI, VISA, class drivers, or specific drivers. Zero
+indicates no additional information.
 
 ''',
+    },
+    '1050103': {
         'longDescription': '''
 An optional string that contains additional information concerning the
 primary error condition.
@@ -446,15 +441,13 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 ''',
-    },
-    '1050203': {
         'shortDescription': '''
-Indicates the number of channels that the specific instrument driver
-supports. For each property for which the IVI\_VAL\_MULTI\_CHANNEL flag
-property is set, the IVI engine maintains a separate cache value for
-each channel.
+An optional string that contains additional information concerning the
+primary error condition.
 
 ''',
+    },
+    '1050203': {
         'longDescription': '''
 Indicates the number of channels that the specific instrument driver
 supports. For each property for which the IVI\_VAL\_MULTI\_CHANNEL flag
@@ -481,14 +474,15 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1050302': {
         'shortDescription': '''
-The prefix for the specific instrument driver. The name of each
-user-callable VI in this driver starts with this prefix. The prefix can
-be up to a maximum of eight characters.
+Indicates the number of channels that the specific instrument driver
+supports. For each property for which the IVI\_VAL\_MULTI\_CHANNEL flag
+property is set, the IVI engine maintains a separate cache value for
+each channel.
 
 ''',
+    },
+    '1050302': {
         'longDescription': '''
 The prefix for the specific instrument driver. The name of each
 user-callable VI in this driver starts with this prefix. The prefix can
@@ -514,12 +508,14 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050304': {
         'shortDescription': '''
-A string containing the resource descriptor of the instrument.
+The prefix for the specific instrument driver. The name of each
+user-callable VI in this driver starts with this prefix. The prefix can
+be up to a maximum of eight characters.
 
 ''',
+    },
+    '1050304': {
         'longDescription': '''
 A string containing the resource descriptor of the instrument.
 
@@ -543,12 +539,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050305': {
         'shortDescription': '''
-A string containing the logical name of the instrument.
+A string containing the resource descriptor of the instrument.
 
 ''',
+    },
+    '1050305': {
         'longDescription': '''
 A string containing the logical name of the instrument.
 
@@ -572,13 +568,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050327': {
         'shortDescription': '''
-A string containing the instrument models supported by the specific
-driver.
+A string containing the logical name of the instrument.
 
 ''',
+    },
+    '1050327': {
         'longDescription': '''
 A string containing the instrument models supported by the specific
 driver.
@@ -603,13 +598,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050401': {
         'shortDescription': '''
-A string containing the capabilities and extension groups supported by
-the specific driver.
+A string containing the instrument models supported by the specific
+driver.
 
 ''',
+    },
+    '1050401': {
         'longDescription': '''
 A string containing the capabilities and extension groups supported by
 the specific driver.
@@ -634,12 +629,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050501': {
         'shortDescription': '''
-The major version number of the IVI engine.
+A string containing the capabilities and extension groups supported by
+the specific driver.
 
 ''',
+    },
+    '1050501': {
         'longDescription': '''
 The major version number of the IVI engine.
 
@@ -663,12 +659,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1050502': {
         'shortDescription': '''
-The minor version number of the IVI engine.
+The major version number of the IVI engine.
 
 ''',
+    },
+    '1050502': {
         'longDescription': '''
 The minor version number of the IVI engine.
 
@@ -692,12 +688,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1050503': {
         'shortDescription': '''
-Returns the major version number of this instrument driver.
+The minor version number of the IVI engine.
 
 ''',
+    },
+    '1050503': {
         'longDescription': '''
 Returns the major version number of this instrument driver.
 
@@ -721,12 +717,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1050504': {
         'shortDescription': '''
-Returns the minor version number of this instrument driver.
+Returns the major version number of this instrument driver.
 
 ''',
+    },
+    '1050504': {
         'longDescription': '''
 Returns the minor version number of this instrument driver.
 
@@ -750,12 +746,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1050510': {
         'shortDescription': '''
-A string containing the instrument firmware revision number.
+Returns the minor version number of this instrument driver.
 
 ''',
+    },
+    '1050510': {
         'longDescription': '''
 A string containing the instrument firmware revision number.
 
@@ -779,12 +775,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050511': {
         'shortDescription': '''
-A string containing the manufacturer of the instrument.
+A string containing the instrument firmware revision number.
 
 ''',
+    },
+    '1050511': {
         'longDescription': '''
 A string containing the manufacturer of the instrument.
 
@@ -808,12 +804,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050512': {
         'shortDescription': '''
-A string containing the instrument model.
+A string containing the manufacturer of the instrument.
 
 ''',
+    },
+    '1050512': {
         'longDescription': '''
 A string containing the instrument model.
 
@@ -837,12 +833,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050513': {
         'shortDescription': '''
-A string containing the vendor of the specific driver.
+A string containing the instrument model.
 
 ''',
+    },
+    '1050513': {
         'longDescription': '''
 A string containing the vendor of the specific driver.
 
@@ -866,12 +862,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050514': {
         'shortDescription': '''
-A string containing a description of the specific driver.
+A string containing the vendor of the specific driver.
 
 ''',
+    },
+    '1050514': {
         'longDescription': '''
 A string containing a description of the specific driver.
 
@@ -895,13 +891,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050515': {
         'shortDescription': '''
-The major version number of the class specification for the specific
-driver.
+A string containing a description of the specific driver.
 
 ''',
+    },
+    '1050515': {
         'longDescription': '''
 The major version number of the class specification for the specific
 driver.
@@ -926,13 +921,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1050516': {
         'shortDescription': '''
-The minor version number of the class specification for the specific
+The major version number of the class specification for the specific
 driver.
 
 ''',
+    },
+    '1050516': {
         'longDescription': '''
 The minor version number of the class specification for the specific
 driver.
@@ -957,13 +952,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1050551': {
         'shortDescription': '''
-A string that contains additional version information about this
-instrument driver.
+The minor version number of the class specification for the specific
+driver.
 
 ''',
+    },
+    '1050551': {
         'longDescription': '''
 A string that contains additional version information about this
 instrument driver.
@@ -988,13 +983,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1050553': {
         'shortDescription': '''
-A string that contains additional version information about the IVI
-engine.
+A string that contains additional version information about this
+instrument driver.
 
 ''',
+    },
+    '1050553': {
         'longDescription': '''
 A string that contains additional version information about the IVI
 engine.
@@ -1019,12 +1014,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1150001': {
         'shortDescription': '''
-A string containing the type of instrument used in the current session.
+A string that contains additional version information about the IVI
+engine.
 
 ''',
+    },
+    '1150001': {
         'longDescription': '''
 A string containing the type of instrument used in the current session.
 
@@ -1047,12 +1043,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1150002': {
         'shortDescription': '''
-Specifies the polarity of the generated measurement complete signal.
+A string containing the type of instrument used in the current session.
 
 ''',
+    },
+    '1150002': {
         'longDescription': '''
 Specifies the polarity of the generated measurement complete signal.
 
@@ -1084,12 +1080,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150003': {
         'shortDescription': '''
-For the NI 4050 only, specifies the shunt resistance value.
+Specifies the polarity of the generated measurement complete signal.
 
 ''',
+    },
+    '1150003': {
         'longDescription': '''
 For the NI 4050 only, specifies the shunt resistance value.
 
@@ -1116,13 +1112,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150010': {
         'shortDescription': '''
-Specifies the edge of the signal from the specified sample trigger
-source on which the DMM is triggered.
+For the NI 4050 only, specifies the shunt resistance value.
 
 ''',
+    },
+    '1150010': {
         'longDescription': '''
 Specifies the edge of the signal from the specified sample trigger
 source on which the DMM is triggered.
@@ -1155,21 +1150,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150014': {
         'shortDescription': '''
-Specifies how the DMM acquires data.
-
-.. note::
-   The NI 4050 and NI 4060 are not supported.  
-
-When you call niDMM Config Measurement , NI-DMM sets this property to
-IVIDMM Mode. When you call niDMM Configure Waveform Acquisition , NI-DMM
-sets this property to Waveform Mode. If you are programming properties
-directly, you must set this property before setting other configuration
-properties.
+Specifies the edge of the signal from the specified sample trigger
+source on which the DMM is triggered.
 
 ''',
+    },
+    '1150014': {
         'longDescription': '''
 Specifies how the DMM acquires data.
 
@@ -1210,16 +1197,21 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150018': {
         'shortDescription': '''
-Specifies the rate of the waveform acquisition in samples per second
-(S/s). The valid rate is calculated by dividing 1,800,000 by an integer
-divisor, and the rate falls between 10 and 1,800,000 samples per second.
-The waveform rate is coerced upwards to the next valid rate. The default
-value is 1,800,000 samples per second. Not supported by NI 4065.
+Specifies how the DMM acquires data.
+
+.. note::
+   The NI 4050 and NI 4060 are not supported.  
+
+When you call niDMM Config Measurement , NI-DMM sets this property to
+IVIDMM Mode. When you call niDMM Configure Waveform Acquisition , NI-DMM
+sets this property to Waveform Mode. If you are programming properties
+directly, you must set this property before setting other configuration
+properties.
 
 ''',
+    },
+    '1150018': {
         'longDescription': '''
 Specifies the rate of the waveform acquisition in samples per second
 (S/s). The valid rate is calculated by dividing 1,800,000 by an integer
@@ -1247,13 +1239,16 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150019': {
         'shortDescription': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the number of
-points to acquire in a waveform acquisition.
+Specifies the rate of the waveform acquisition in samples per second
+(S/s). The valid rate is calculated by dividing 1,800,000 by an integer
+divisor, and the rate falls between 10 and 1,800,000 samples per second.
+The waveform rate is coerced upwards to the next valid rate. The default
+value is 1,800,000 samples per second. Not supported by NI 4065.
 
 ''',
+    },
+    '1150019': {
         'longDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the number of
 points to acquire in a waveform acquisition.
@@ -1278,13 +1273,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150022': {
         'shortDescription': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
-calibration mode.
+For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the number of
+points to acquire in a waveform acquisition.
 
 ''',
+    },
+    '1150022': {
         'longDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
 calibration mode.
@@ -1319,13 +1314,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150023': {
         'shortDescription': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
-offset compensated ohms.
+For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
+calibration mode.
 
 ''',
+    },
+    '1150023': {
         'longDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
 offset compensated ohms.
@@ -1358,14 +1353,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150025': {
         'shortDescription': '''
-Specifies the current source provided during diode measurements.
-
-The NI 4050 and NI 4060 are not supported.
+For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
+offset compensated ohms.
 
 ''',
+    },
+    '1150025': {
         'longDescription': '''
 Specifies the current source provided during diode measurements.
 
@@ -1403,12 +1397,14 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150026': {
         'shortDescription': '''
-Specifies the DC noise rejection mode.
+Specifies the current source provided during diode measurements.
+
+The NI 4050 and NI 4060 are not supported.
 
 ''',
+    },
+    '1150026': {
         'longDescription': '''
 Specifies the DC noise rejection mode.
 
@@ -1447,13 +1443,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150027': {
         'shortDescription': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
-coupling during a waveform acquisition.
+Specifies the DC noise rejection mode.
 
 ''',
+    },
+    '1150027': {
         'longDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
 coupling during a waveform acquisition.
@@ -1486,14 +1481,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150028': {
         'shortDescription': '''
-Specifies the settling time in seconds. Use this property to override
-the default settling time. To return to the default, set this property
-to Auto (-1).
+For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
+coupling during a waveform acquisition.
 
 ''',
+    },
+    '1150028': {
         'longDescription': '''
 Specifies the settling time in seconds. Use this property to override
 the default settling time. To return to the default, set this property
@@ -1522,12 +1516,14 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150029': {
         'shortDescription': '''
-Specifies the input resistance of the instrument.
+Specifies the settling time in seconds. Use this property to override
+the default settling time. To return to the default, set this property
+to Auto (-1).
 
 ''',
+    },
+    '1150029': {
         'longDescription': '''
 Specifies the input resistance of the instrument.
 
@@ -1564,12 +1560,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150031': {
         'shortDescription': '''
-For the NI 4060 only, specifies a delay interval after a sample trigger.
+Specifies the input resistance of the instrument.
 
 ''',
+    },
+    '1150031': {
         'longDescription': '''
 For the NI 4060 only, specifies a delay interval after a sample trigger.
 
@@ -1599,18 +1595,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150032': {
         'shortDescription': '''
-Specifies the number of averages to perform in a measurement. For the NI
-4080/4081/4082 and NI 4070/4071/4072, applies only when the aperture
-time is not set to Auto and Auto Zero is ON. The Number of Averages
-Property will be ignored otherwise. The default is 4 for 7 1/2 digits;
-otherwise, the default is 1.
-
-The NI 4050 and NI 4060 are not supported.
+For the NI 4060 only, specifies a delay interval after a sample trigger.
 
 ''',
+    },
+    '1150032': {
         'longDescription': '''
 Specifies the number of averages to perform in a measurement. For the NI
 4080/4081/4082 and NI 4070/4071/4072, applies only when the aperture
@@ -1640,14 +1630,18 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150034': {
         'shortDescription': '''
-Specifies the number of measurements transferred at a time from the
-instrument to an internal buffer. When set to Auto (-1), NI-DMM chooses
-the transfer size.
+Specifies the number of averages to perform in a measurement. For the NI
+4080/4081/4082 and NI 4070/4071/4072, applies only when the aperture
+time is not set to Auto and Auto Zero is ON. The Number of Averages
+Property will be ignored otherwise. The default is 4 for 7 1/2 digits;
+otherwise, the default is 1.
+
+The NI 4050 and NI 4060 are not supported.
 
 ''',
+    },
+    '1150034': {
         'longDescription': '''
 Specifies the number of measurements transferred at a time from the
 instrument to an internal buffer. When set to Auto (-1), NI-DMM chooses
@@ -1673,14 +1667,14 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150037': {
         'shortDescription': '''
-Specifies the size in samples of the internal data buffer. Maximum size
-is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
-chooses the buffer size.
+Specifies the number of measurements transferred at a time from the
+instrument to an internal buffer. When set to Auto (-1), NI-DMM chooses
+the transfer size.
 
 ''',
+    },
+    '1150037': {
         'longDescription': '''
 Specifies the size in samples of the internal data buffer. Maximum size
 is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
@@ -1706,15 +1700,14 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150044': {
         'shortDescription': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
-the frequency voltage range. If auto ranging is enabled, shows the
-actual value of the active frequency voltage range. If not Auto Ranging,
-the value is the same as that of the Frequency Voltage Range property.
+Specifies the size in samples of the internal data buffer. Maximum size
+is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
+chooses the buffer size.
 
 ''',
+    },
+    '1150044': {
         'longDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
 the frequency voltage range. If auto ranging is enabled, shows the
@@ -1741,14 +1734,15 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150045': {
         'shortDescription': '''
-For the NI 4081 and NI 4072 only, specifies the type of cable
-compensation that is applied to the current capacitance or inductance
-measurement for the current range.
+For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
+the frequency voltage range. If auto ranging is enabled, shows the
+actual value of the active frequency voltage range. If not Auto Ranging,
+the value is the same as that of the Frequency Voltage Range property.
 
 ''',
+    },
+    '1150045': {
         'longDescription': '''
 For the NI 4081 and NI 4072 only, specifies the type of cable
 compensation that is applied to the current capacitance or inductance
@@ -1789,15 +1783,14 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150046': {
         'shortDescription': '''
-For the NI 4082 and NI 4072 only, represents the reactive part
-(reactance) of the short cable compensation. The valid range is any real
-number >0. The default value (-1) indicates that compensation has not
-taken place.
+For the NI 4081 and NI 4072 only, specifies the type of cable
+compensation that is applied to the current capacitance or inductance
+measurement for the current range.
 
 ''',
+    },
+    '1150046': {
         'longDescription': '''
 For the NI 4082 and NI 4072 only, represents the reactive part
 (reactance) of the short cable compensation. The valid range is any real
@@ -1828,15 +1821,15 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150047': {
         'shortDescription': '''
-For the NI 4082 and NI 4072 only, represents the active part
-(resistance) of the short cable compensation. The valid range is any
-real number >0. The default value (-1) indicates that compensation has
-not taken place.
+For the NI 4082 and NI 4072 only, represents the reactive part
+(reactance) of the short cable compensation. The valid range is any real
+number >0. The default value (-1) indicates that compensation has not
+taken place.
 
 ''',
+    },
+    '1150047': {
         'longDescription': '''
 For the NI 4082 and NI 4072 only, represents the active part
 (resistance) of the short cable compensation. The valid range is any
@@ -1867,15 +1860,15 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150048': {
         'shortDescription': '''
-For the NI 4082 and NI 4072 only, specifies the reactive part
-(susceptance) of the open cable compensation. The valid range is any
-real number >0. The default value (-1.0) indicates that compensation has
+For the NI 4082 and NI 4072 only, represents the active part
+(resistance) of the short cable compensation. The valid range is any
+real number >0. The default value (-1) indicates that compensation has
 not taken place.
 
 ''',
+    },
+    '1150048': {
         'longDescription': '''
 For the NI 4082 and NI 4072 only, specifies the reactive part
 (susceptance) of the open cable compensation. The valid range is any
@@ -1906,15 +1899,15 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150049': {
         'shortDescription': '''
-For the NI 4082 and NI 4072 only, specifies the active part
-(conductance) of the open cable compensation. The valid range is any
+For the NI 4082 and NI 4072 only, specifies the reactive part
+(susceptance) of the open cable compensation. The valid range is any
 real number >0. The default value (-1.0) indicates that compensation has
 not taken place.
 
 ''',
+    },
+    '1150049': {
         'longDescription': '''
 For the NI 4082 and NI 4072 only, specifies the active part
 (conductance) of the open cable compensation. The valid range is any
@@ -1945,14 +1938,15 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150052': {
         'shortDescription': '''
-For the NI 4082 and NI 4072 only, specifies the type of algorithm that
-the measurement processing uses for capacitance and inductance
-measurements.
+For the NI 4082 and NI 4072 only, specifies the active part
+(conductance) of the open cable compensation. The valid range is any
+real number >0. The default value (-1.0) indicates that compensation has
+not taken place.
 
 ''',
+    },
+    '1150052': {
         'longDescription': '''
 For the NI 4082 and NI 4072 only, specifies the type of algorithm that
 the measurement processing uses for capacitance and inductance
@@ -1988,13 +1982,14 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150053': {
         'shortDescription': '''
-For the NI 4082 and NI 4072 only, controls the available DC bias for
-capacitance measurements.
+For the NI 4082 and NI 4072 only, specifies the type of algorithm that
+the measurement processing uses for capacitance and inductance
+measurements.
 
 ''',
+    },
+    '1150053': {
         'longDescription': '''
 For the NI 4082 and NI 4072 only, controls the available DC bias for
 capacitance measurements.
@@ -2027,14 +2022,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150054': {
         'shortDescription': '''
-A string containing the serial number of the instrument. This property
-corresponds to the serial number label that is attached to most
-products.
+For the NI 4082 and NI 4072 only, controls the available DC bias for
+capacitance measurements.
 
 ''',
+    },
+    '1150054': {
         'longDescription': '''
 A string containing the serial number of the instrument. This property
 corresponds to the serial number label that is attached to most
@@ -2060,13 +2054,14 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
-    },
-    '1150055': {
         'shortDescription': '''
-For the NI 4082 and NI 4072 only, specifies the number of LC
-measurements that are averaged to produce one reading.
+A string containing the serial number of the instrument. This property
+corresponds to the serial number label that is attached to most
+products.
 
 ''',
+    },
+    '1150055': {
         'longDescription': '''
 For the NI 4082 and NI 4072 only, specifies the number of LC
 measurements that are averaged to produce one reading.
@@ -2092,12 +2087,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150061': {
         'shortDescription': '''
-The PCI product ID.
+For the NI 4082 and NI 4072 only, specifies the number of LC
+measurements that are averaged to produce one reading.
 
 ''',
+    },
+    '1150061': {
         'longDescription': '''
 The PCI product ID.
 
@@ -2121,12 +2117,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150120': {
         'shortDescription': '''
-Specifies the RTD type.
+The PCI product ID.
 
 ''',
+    },
+    '1150120': {
         'longDescription': '''
 Specifies the RTD type.
 
@@ -2168,13 +2164,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150121': {
         'shortDescription': '''
-Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
-**RTD Type property** is set to Custom.
+Specifies the RTD type.
 
 ''',
+    },
+    '1150121': {
         'longDescription': '''
 Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
@@ -2199,13 +2194,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150122': {
         'shortDescription': '''
-Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
+Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
 
 ''',
+    },
+    '1150122': {
         'longDescription': '''
 Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
@@ -2230,13 +2225,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150123': {
         'shortDescription': '''
-Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
+Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
 
 ''',
+    },
+    '1150123': {
         'longDescription': '''
 Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
@@ -2261,12 +2256,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150124': {
         'shortDescription': '''
-Specifies the thermistor type.
+Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
+**RTD Type property** is set to Custom.
 
 ''',
+    },
+    '1150124': {
         'longDescription': '''
 Specifies the thermistor type.
 
@@ -2302,13 +2298,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150125': {
         'shortDescription': '''
-Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-the **Thermistor Type property** is set to Custom.
+Specifies the thermistor type.
 
 ''',
+    },
+    '1150125': {
         'longDescription': '''
 Specifies the Steinhart-Hart A coefficient for thermistor scaling when
 the **Thermistor Type property** is set to Custom.
@@ -2333,13 +2328,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150126': {
         'shortDescription': '''
-Specifies the Steinhart-Hart B coefficient for thermistor scaling when
+Specifies the Steinhart-Hart A coefficient for thermistor scaling when
 the **Thermistor Type property** is set to Custom.
 
 ''',
+    },
+    '1150126': {
         'longDescription': '''
 Specifies the Steinhart-Hart B coefficient for thermistor scaling when
 the **Thermistor Type property** is set to Custom.
@@ -2364,13 +2359,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1150127': {
         'shortDescription': '''
-Specifies the Steinhart-Hart C coefficient for thermistor scaling when
+Specifies the Steinhart-Hart B coefficient for thermistor scaling when
 the **Thermistor Type property** is set to Custom.
 
 ''',
+    },
+    '1150127': {
         'longDescription': '''
 Specifies the Steinhart-Hart C coefficient for thermistor scaling when
 the **Thermistor Type property** is set to Custom.
@@ -2395,20 +2390,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250001': {
         'shortDescription': '''
-Specifies the measurement function. If you are setting this property
-directly, you must also set the Operation Mode property, which controls
-whether the DMM takes standard single or multipoint measurements, or
-acquires a waveform. If you are programming properties directly, you
-must set the Operation Mode property before setting other configuration
-properties. If the Operation Mode property is set to Waveform Mode, the
-only valid function types are Waveform Voltage and Waveform Current. Set
-the Operation Mode property to IVIDMM Mode to set all other function
-values.
+Specifies the Steinhart-Hart C coefficient for thermistor scaling when
+the **Thermistor Type property** is set to Custom.
 
 ''',
+    },
+    '1250001': {
         'longDescription': '''
 Specifies the measurement function. If you are setting this property
 directly, you must also set the Operation Mode property, which controls
@@ -2473,16 +2461,20 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250002': {
         'shortDescription': '''
-Specifies the measurement range. Use positive values to represent the
-absolute value of the maximum expected measurement. The value is in
-units appropriate for the current value of the Function property. For
-example, if the Function property is set to DC Volts, the units are
-volts.
+Specifies the measurement function. If you are setting this property
+directly, you must also set the Operation Mode property, which controls
+whether the DMM takes standard single or multipoint measurements, or
+acquires a waveform. If you are programming properties directly, you
+must set the Operation Mode property before setting other configuration
+properties. If the Operation Mode property is set to Waveform Mode, the
+only valid function types are Waveform Voltage and Waveform Current. Set
+the Operation Mode property to IVIDMM Mode to set all other function
+values.
 
 ''',
+    },
+    '1250002': {
         'longDescription': '''
 Specifies the measurement range. Use positive values to represent the
 absolute value of the maximum expected measurement. The value is in
@@ -2520,14 +2512,16 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250003': {
         'shortDescription': '''
-Specifies the measurement resolution in digits. Setting this property to
-higher values increases the measurement accuracy. Setting this property
-to lower values increases the measurement speed.
+Specifies the measurement range. Use positive values to represent the
+absolute value of the maximum expected measurement. The value is in
+units appropriate for the current value of the Function property. For
+example, if the Function property is set to DC Volts, the units are
+volts.
 
 ''',
+    },
+    '1250003': {
         'longDescription': '''
 Specifies the measurement resolution in digits. Setting this property to
 higher values increases the measurement accuracy. Setting this property
@@ -2569,18 +2563,14 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250004': {
         'shortDescription': '''
-Specifies the trigger source. When niDMM Initiate is called, the DMM
-waits for the trigger specified with this property. After it receives
-the trigger, the DMM waits the length of time specified with the Trigger
-Delay property. The DMM then takes a measurement.
-
-To determine which values are supported by each device, refer to the
-LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
+Specifies the measurement resolution in digits. Setting this property to
+higher values increases the measurement accuracy. Setting this property
+to lower values increases the measurement speed.
 
 ''',
+    },
+    '1250004': {
         'longDescription': '''
 Specifies the trigger source. When niDMM Initiate is called, the DMM
 waits for the trigger specified with this property. After it receives
@@ -2641,39 +2631,18 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250005': {
         'shortDescription': '''
-Specifies the time (in seconds) that the DMM waits after it has received
-a trigger before taking a measurement. The default value is Auto Delay
-(-1), which means that the DMM waits an appropriate settling time before
-taking the measurement.
+Specifies the trigger source. When niDMM Initiate is called, the DMM
+waits for the trigger specified with this property. After it receives
+the trigger, the DMM waits the length of time specified with the Trigger
+Delay property. The DMM then takes a measurement.
 
-The NI 4080/4081/4082 uses the value specified in this property as
-additional settling time. The valid range for Trigger Delay is Auto
-Delay (-1) or 0.0 - 150.0 seconds, and the onboard timing resolution is
-10.0 ns.
-
-The NI 4065 and NI 4070/4071/4072 use the value specified in this
-property as additional settling time. For these devices, the valid range
-for Trigger Delay is Auto Delay (-1) or 0.0 - 149.0 seconds and the
-onboard timing resolution is 34.72 ns.
-
-On the NI 4060, if this property is set to 0, the DMM does not settle
-before taking the measurement. On the NI 4060, the valid range for
-Trigger Delay (-1) is 0.0-12.0 seconds and the onboard timing resolution
-is 100 ms.
-
-When using the NI 4050, this property must be set to Auto Delay (-1).
-
-Use positive values to set the trigger delay in seconds.
-
-Valid Range: Auto Delay (-1.0), 0.0-12.0 seconds (NI 4060 only),
-0.0-149.0 seconds (NI 4065 and NI 4070/4071/4072)
-
-Default Value: Auto Delay
+To determine which values are supported by each device, refer to the
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
 
 ''',
+    },
+    '1250005': {
         'longDescription': '''
 Specifies the time (in seconds) that the DMM waits after it has received
 a trigger before taking a measurement. The default value is Auto Delay
@@ -2723,16 +2692,39 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250006': {
         'shortDescription': '''
-Specifies the minimum frequency component of the input signal for AC
-measurements. This property affects the DMM only when you set the
-Function property to AC measurements. The valid range is 1 Hz-300 kHz
-for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
-4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
+Specifies the time (in seconds) that the DMM waits after it has received
+a trigger before taking a measurement. The default value is Auto Delay
+(-1), which means that the DMM waits an appropriate settling time before
+taking the measurement.
+
+The NI 4080/4081/4082 uses the value specified in this property as
+additional settling time. The valid range for Trigger Delay is Auto
+Delay (-1) or 0.0 - 150.0 seconds, and the onboard timing resolution is
+10.0 ns.
+
+The NI 4065 and NI 4070/4071/4072 use the value specified in this
+property as additional settling time. For these devices, the valid range
+for Trigger Delay is Auto Delay (-1) or 0.0 - 149.0 seconds and the
+onboard timing resolution is 34.72 ns.
+
+On the NI 4060, if this property is set to 0, the DMM does not settle
+before taking the measurement. On the NI 4060, the valid range for
+Trigger Delay (-1) is 0.0-12.0 seconds and the onboard timing resolution
+is 100 ms.
+
+When using the NI 4050, this property must be set to Auto Delay (-1).
+
+Use positive values to set the trigger delay in seconds.
+
+Valid Range: Auto Delay (-1.0), 0.0-12.0 seconds (NI 4060 only),
+0.0-149.0 seconds (NI 4065 and NI 4070/4071/4072)
+
+Default Value: Auto Delay
 
 ''',
+    },
+    '1250006': {
         'longDescription': '''
 Specifies the minimum frequency component of the input signal for AC
 measurements. This property affects the DMM only when you set the
@@ -2760,16 +2752,16 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250007': {
         'shortDescription': '''
-Specifies the maximum frequency component of the input signal for AC
-measurements. This property is used only for error checking and verifies
-that the value of this parameter is less than the maximum frequency of
-the device. This property affects the DMM only when you set the Function
-property to AC measurements.
+Specifies the minimum frequency component of the input signal for AC
+measurements. This property affects the DMM only when you set the
+Function property to AC measurements. The valid range is 1 Hz-300 kHz
+for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
+4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
 
 ''',
+    },
+    '1250007': {
         'longDescription': '''
 Specifies the maximum frequency component of the input signal for AC
 measurements. This property is used only for error checking and verifies
@@ -2807,14 +2799,16 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250008': {
         'shortDescription': '''
-Specifies the measurement resolution in absolute units. Setting this
-property to higher values increases the measurement accuracy. Setting
-this property to lower values increases the measurement speed.
+Specifies the maximum frequency component of the input signal for AC
+measurements. This property is used only for error checking and verifies
+that the value of this parameter is less than the maximum frequency of
+the device. This property affects the DMM only when you set the Function
+property to AC measurements.
 
 ''',
+    },
+    '1250008': {
         'longDescription': '''
 Specifies the measurement resolution in absolute units. Setting this
 property to higher values increases the measurement accuracy. Setting
@@ -2843,13 +2837,14 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250101': {
         'shortDescription': '''
-For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
-amplitude of the input signal for frequency measurements.
+Specifies the measurement resolution in absolute units. Setting this
+property to higher values increases the measurement accuracy. Setting
+this property to lower values increases the measurement speed.
 
 ''',
+    },
+    '1250101': {
         'longDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
 amplitude of the input signal for frequency measurements.
@@ -2880,12 +2875,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250201': {
         'shortDescription': '''
-Specifies the transducer type.
+For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
+amplitude of the input signal for frequency measurements.
 
 ''',
+    },
+    '1250201': {
         'longDescription': '''
 Specifies the transducer type.
 
@@ -2921,12 +2917,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250231': {
         'shortDescription': '''
-Specifies the thermocouple type.
+Specifies the transducer type.
 
 ''',
+    },
+    '1250231': {
         'longDescription': '''
 Specifies the thermocouple type.
 
@@ -2970,12 +2966,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250232': {
         'shortDescription': '''
-Specifies the thermocouple reference junction type.
+Specifies the thermocouple type.
 
 ''',
+    },
+    '1250232': {
         'longDescription': '''
 Specifies the thermocouple reference junction type.
 
@@ -3005,13 +3001,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250233': {
         'shortDescription': '''
-Specifies the value of the fixed reference junction temperature for a
-thermocouple in degrees Celsius.
+Specifies the thermocouple reference junction type.
 
 ''',
+    },
+    '1250233': {
         'longDescription': '''
 Specifies the value of the fixed reference junction temperature for a
 thermocouple in degrees Celsius.
@@ -3036,12 +3031,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250242': {
         'shortDescription': '''
-Specifies the RTD resistance at 0 degrees Celsius.
+Specifies the value of the fixed reference junction temperature for a
+thermocouple in degrees Celsius.
 
 ''',
+    },
+    '1250242': {
         'longDescription': '''
 Specifies the RTD resistance at 0 degrees Celsius.
 
@@ -3065,18 +3061,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250301': {
         'shortDescription': '''
-Specifies the number of measurements the DMM takes each time it receives
-a trigger in a multiple point acquisition. Setting Sample Count to 0 on
-the NI 4050 and NI 4060 causes the device to take continuous
-measurements. Otherwise, setting Sample Count to 0 causes the
-conditional statement "Measurements equal to Sample Count" to always
-evaluate to False, and causes the DMM to continue taking measurements in
-the inner loop.
+Specifies the RTD resistance at 0 degrees Celsius.
 
 ''',
+    },
+    '1250301': {
         'longDescription': '''
 Specifies the number of measurements the DMM takes each time it receives
 a trigger in a multiple point acquisition. Setting Sample Count to 0 on
@@ -3106,15 +3096,18 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250302': {
         'shortDescription': '''
-Specifies the sample trigger source.
-
-To determine which values are supported by each device, refer to the
-LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
+Specifies the number of measurements the DMM takes each time it receives
+a trigger in a multiple point acquisition. Setting Sample Count to 0 on
+the NI 4050 and NI 4060 causes the device to take continuous
+measurements. Otherwise, setting Sample Count to 0 causes the
+conditional statement "Measurements equal to Sample Count" to always
+evaluate to False, and causes the DMM to continue taking measurements in
+the inner loop.
 
 ''',
+    },
+    '1250302': {
         'longDescription': '''
 Specifies the sample trigger source.
 
@@ -3175,16 +3168,15 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250303': {
         'shortDescription': '''
-Specifies the amount of time in seconds the DMM waits between
-measurement cycles. This property only applies when the Sample Trigger
-property is set to INTERVAL. The default value (-1) ensures that the DMM
-settles for a recommended time, which is the same as using an immediate
-trigger.
+Specifies the sample trigger source.
+
+To determine which values are supported by each device, refer to the
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
 
 ''',
+    },
+    '1250303': {
         'longDescription': '''
 Specifies the amount of time in seconds the DMM waits between
 measurement cycles. This property only applies when the Sample Trigger
@@ -3226,19 +3218,16 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250304': {
         'shortDescription': '''
-Specifies the number of triggers the DMM receives before returning to
-the Idle state. This property can be set to any positive ViInt32 value
-for the NI 4065, NI 4070/4071/4072, and NI 4080/4081/4082.
-
-The NI 4050/4060 only support this property being set to 1.
-
-Refer to Multiple Point Acquisitions in the *NI Digital Multimeters
-Help* for more information.
+Specifies the amount of time in seconds the DMM waits between
+measurement cycles. This property only applies when the Sample Trigger
+property is set to INTERVAL. The default value (-1) ensures that the DMM
+settles for a recommended time, which is the same as using an immediate
+trigger.
 
 ''',
+    },
+    '1250304': {
         'longDescription': '''
 Specifies the number of triggers the DMM receives before returning to
 the Idle state. This property can be set to any positive ViInt32 value
@@ -3269,15 +3258,19 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250305': {
         'shortDescription': '''
-Specifies the destination of the measurement complete (MC) signal.
+Specifies the number of triggers the DMM receives before returning to
+the Idle state. This property can be set to any positive ViInt32 value
+for the NI 4065, NI 4070/4071/4072, and NI 4080/4081/4082.
 
-To determine which values are supported by each device, refer to the
-LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
+The NI 4050/4060 only support this property being set to 1.
+
+Refer to Multiple Point Acquisitions in the *NI Digital Multimeters
+Help* for more information.
 
 ''',
+    },
+    '1250305': {
         'longDescription': '''
 Specifies the destination of the measurement complete (MC) signal.
 
@@ -3333,16 +3326,15 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250321': {
         'shortDescription': '''
-Specifies the measurement aperture time for the current configuration.
-Aperture time is specified in units set by the Aperture Time Units
-property. To override the default aperture, set this property to the
-desired aperture time after calling niDMM Config Measurement . To return
-to the default, set this property to Aperture Time Auto (-1).
+Specifies the destination of the measurement complete (MC) signal.
+
+To determine which values are supported by each device, refer to the
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
 
 ''',
+    },
+    '1250321': {
         'longDescription': '''
 Specifies the measurement aperture time for the current configuration.
 Aperture time is specified in units set by the Aperture Time Units
@@ -3386,12 +3378,16 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250322': {
         'shortDescription': '''
-Specifies the units of aperture time for the current configuration.
+Specifies the measurement aperture time for the current configuration.
+Aperture time is specified in units set by the Aperture Time Units
+property. To override the default aperture, set this property to the
+desired aperture time after calling niDMM Config Measurement . To return
+to the default, set this property to Aperture Time Auto (-1).
 
 ''',
+    },
+    '1250322': {
         'longDescription': '''
 Specifies the units of aperture time for the current configuration.
 
@@ -3426,14 +3422,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250331': {
         'shortDescription': '''
-Specifies the value of the range. If auto ranging is enabled, shows the
-actual value of the active range. The value of this property is set
-during a read operation.
+Specifies the units of aperture time for the current configuration.
 
 ''',
+    },
+    '1250331': {
         'longDescription': '''
 Specifies the value of the range. If auto ranging is enabled, shows the
 actual value of the active range. The value of this property is set
@@ -3458,13 +3452,14 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250332': {
         'shortDescription': '''
-Specifies the AutoZero mode. This property is not supported for the NI
-4050.
+Specifies the value of the range. If auto ranging is enabled, shows the
+actual value of the active range. The value of this property is set
+during a read operation.
 
 ''',
+    },
+    '1250332': {
         'longDescription': '''
 Specifies the AutoZero mode. This property is not supported for the NI
 4050.
@@ -3501,16 +3496,13 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250333': {
         'shortDescription': '''
-Specifies the powerline frequency. The NI 4060 and NI 4050 use this
-value to select an aperture time to reject powerline noise by selecting
-the appropriate internal sample clock and filter. The NI 4065, NI
-4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
-for setting the Aperture Time property in powerline cycles.
+Specifies the AutoZero mode. This property is not supported for the NI
+4050.
 
 ''',
+    },
+    '1250333': {
         'longDescription': '''
 Specifies the powerline frequency. The NI 4060 and NI 4050 use this
 value to select an aperture time to reject powerline noise by selecting
@@ -3557,13 +3549,16 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
-    },
-    '1250334': {
         'shortDescription': '''
-Specifies the edge of the signal from the specified trigger source on
-which the DMM is triggered.
+Specifies the powerline frequency. The NI 4060 and NI 4050 use this
+value to select an aperture time to reject powerline noise by selecting
+the appropriate internal sample clock and filter. The NI 4065, NI
+4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
+for setting the Aperture Time property in powerline cycles.
 
 ''',
+    },
+    '1250334': {
         'longDescription': '''
 Specifies the edge of the signal from the specified trigger source on
 which the DMM is triggered.
@@ -3593,6 +3588,11 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
+''',
+        'shortDescription': '''
+Specifies the edge of the signal from the specified trigger source on
+which the DMM is triggered.
 
 ''',
     },
