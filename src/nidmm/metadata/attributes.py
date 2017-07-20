@@ -206,7 +206,7 @@ attributes = {
     {
         'id':1250004,
         'type':'ViInt32',
-        'enum':None,
+        'enum':'TriggerSource',
         'access':'read-write'
     },
     'AC_MAX_FREQ':
@@ -234,7 +234,7 @@ attributes = {
     {
         'id':1250305,
         'type':'ViInt32',
-        'enum':None,
+        'enum':'MeasurementCompleteDest',
         'access':'read-write'
     },
     'SAMPLE_COUNT':
@@ -255,7 +255,7 @@ attributes = {
     {
         'id':1250302,
         'type':'ViInt32',
-        'enum':None,
+        'enum':'SampleTrigger',
         'access':'read-write'
     },
     'TRIGGER_COUNT':
@@ -290,7 +290,7 @@ attributes = {
     {
         'id':1250332,
         'type':'ViInt32',
-        'enum':'EnabledSetting',
+        'enum':'AutoZero',
         'access':'read-write'
     },
     'POWERLINE_FREQ':
@@ -304,35 +304,35 @@ attributes = {
     {
         'id':1250334,
         'type':'ViInt32',
-        'enum':'Slope',
+        'enum':'TriggerSlope',
         'access':'read-write'
     },
     'SAMPLE_TRIGGER_SLOPE':
     {
         'id':1150010,
         'type':'ViInt32',
-        'enum':'Slope',
+        'enum':'SampleTrigSlope',
         'access':'read-write'
     },
     'MEAS_DEST_SLOPE':
     {
         'id':1150002,
         'type':'ViInt32',
-        'enum':'Slope',
+        'enum':'MeasurementDestinationSlope',
         'access':'read-write'
     },
     'ADC_CALIBRATION':
     {
         'id':1150022,
         'type':'ViInt32',
-        'enum':'EnabledSetting',
+        'enum':'ADCCalibration',
         'access':'read-write'
     },
     'OFFSET_COMP_OHMS':
     {
         'id':1150023,
         'type':'ViInt32',
-        'enum':'EnabledSetting',
+        'enum':'OffsetCompensatedOhms',
         'access':'read-write'
     },
     'NUMBER_OF_AVERAGES':
