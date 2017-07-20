@@ -211,7 +211,7 @@ NI-DMM Session
       aperture time is 78.2 s. If setting the number of averages directly, the
       total measurement time is aperture time X the number of averages, which
       must be less than 72.8 s. The aperture times allowed are 333 micro s,
-      667 micro s, or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33
+      667 micro s, or multiples of 1.11 msâ€”for example 1.11 ms, 2.22 ms, 3.33
       ms, and so on. If you set an aperture time other than 333 micro s, 667
       micro s, or multiples of 1.11 ms, the value will be coerced up to the
       next supported aperture time.
@@ -1312,13 +1312,13 @@ NI-DMM Session
       After configuring powerline frequency, set the Aperture Time Units
       property to PLCs. When setting the Aperture Time property, select the
       number of PLCs for the powerline frequency. For example, if powerline
-      frequency = 50 Hz (or 20 ms) and aperture time in PLCs = 5, then
-      aperture time in seconds = 20 ms \* 5 PLCs = 100 ms. Similarly, if
-      powerline frequency = 60 Hz (or 16.667 ms) and aperture time in PLCs =
-      6, then aperture time in seconds = 16.667 ms \* 6 PLCs = 100 ms.
+      frequency = 50 Hz (or 20Â ms) and aperture time in PLCs = 5, then
+      aperture time in seconds = 20Â ms \* 5 PLCs = 100Â ms. Similarly, if
+      powerline frequency = 60Â Hz (or 16.667Â ms) and aperture time in PLCs =
+      6, then aperture time in seconds = 16.667Â ms \* 6 PLCs = 100Â ms.
 
       .. note::
-         For 400 Hz powerline frequency, use the 50 Hz setting.
+         For 400 Hz powerline frequency, use the 50Â Hz setting.
 
       +--------------------+-----------------------------------------------+
       | Name               | Description                                   |
