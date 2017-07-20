@@ -5,7 +5,7 @@
     module_name = config['module_name']
     driver_name = config['driver_name']
     attributes = template_parameters['metadata'].attributes
-    attribute_docs = template_parameters['metadata'].attribute_docs
+    attribute_docs = helper.normalize_string_type(template_parameters['metadata'].attribute_docs)
 %>\
 ${helper.get_rst_header_snippet(driver_name + ' Session', '=')}
 

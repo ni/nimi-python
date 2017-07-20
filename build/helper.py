@@ -3,6 +3,8 @@
 
 import re
 import pprint
+import sys
+
 pp = pprint.PrettyPrinter(indent=4)
 
 # Coding convention transformation functions.
@@ -111,7 +113,16 @@ def add_all_metadata(functions):
             _add_is_buffer(p)
     return functions
 
+# Normalize string type between python2 & python3
+def normalize_string_type(d):
+    if sys.version_info.major < 3:
+        if type(d) is dict:
+            for k in d:
+                d[k] = normalize_string_type(d[k])
+        elif type(d) is str:
+            d = d.decode('utf-8')
 
+    return d
 # Functions that return snippets that can be placed directly in the templates.
 
 def get_method_parameters_snippet(parameters):
