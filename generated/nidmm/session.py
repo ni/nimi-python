@@ -334,7 +334,7 @@ class Session(object):
     Specifies how the DMM acquires data.
 
     .. note::
-    The NI 4050 and NI 4060 are not supported.
+       The NI 4050 and NI 4060 are not supported.
 
     When you call niDMM Config Measurement , NI-DMM sets this property to
     IVIDMM Mode. When you call niDMM Configure Waveform Acquisition , NI-DMM

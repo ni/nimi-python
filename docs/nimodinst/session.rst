@@ -1,213 +1,196 @@
 NI-ModInst Session
 ==================
 
-A NI-ModInst session to get device information
+.. py:module:: nimodinst
 
-Attributes
-----------
+.. py:class:: Session
 
-BUS_NUMBER
-~~~~~~~~~~
+   A NI-ModInst session to get device information
 
 
-    The bus on which the device has been enumerated.
+   :ivar ViInt32 bus_number:
+   :ivar ViInt32 chassis_number:
+   :ivar ViString device_model:
+   :ivar ViString device_name:
+   :ivar ViInt32 max_pciexpress_link_width:
+   :ivar ViInt32 pciexpress_link_width:
+   :ivar ViString serial_number:
+   :ivar ViInt32 slot_number:
+   :ivar ViInt32 socket_number:
 
-    The following table lists the characteristics of this property.
+   .. py:attribute:: bus_number
 
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
+      The bus on which the device has been enumerated.
 
+          The following table lists the characteristics of this property.
 
-CHASSIS_NUMBER
-~~~~~~~~~~~~~~
+          +------------------+-------------------------+
+          | Characteristic   | Value                   |
+          +------------------+-------------------------+
+          | Datatype         | 32-bit signed integer   |
+          +------------------+-------------------------+
+          | Permissions      | Read/Write              |
+          +------------------+-------------------------+
+          | High Level VI    | N/A                     |
+          +------------------+-------------------------+
+          | Channel Based    | False                   |
+          +------------------+-------------------------+
+          | Resettable       | No                      |
+          +------------------+-------------------------+
 
+   .. py:attribute:: chassis_number
 
-    The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
+      The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
 
-    The following table lists the characteristics of this property.
+          The following table lists the characteristics of this property.
 
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
+          +------------------+-------------------------+
+          | Characteristic   | Value                   |
+          +------------------+-------------------------+
+          | Datatype         | 32-bit signed integer   |
+          +------------------+-------------------------+
+          | Permissions      | Read/Write              |
+          +------------------+-------------------------+
+          | High Level VI    | N/A                     |
+          +------------------+-------------------------+
+          | Channel Based    | False                   |
+          +------------------+-------------------------+
+          | Resettable       | No                      |
+          +------------------+-------------------------+
 
+   .. py:attribute:: device_model
 
-DEVICE_MODEL
-~~~~~~~~~~~~
+      The model of the device (for example, NI PXI-5122)
 
+          The following table lists the characteristics of this property.
 
-    The model of the device (for example, NI PXI-5122)
+          +------------------+-------------+
+          | Characteristic   | Value       |
+          +------------------+-------------+
+          | Datatype         | string      |
+          +------------------+-------------+
+          | Permissions      | Read Only   |
+          +------------------+-------------+
+          | High Level VI    | N/A         |
+          +------------------+-------------+
+          | Channel Based    | False       |
+          +------------------+-------------+
+          | Resettable       | No          |
+          +------------------+-------------+
 
-    The following table lists the characteristics of this property.
+   .. py:attribute:: device_name
 
-    +------------------+-------------+
-    | Characteristic   | Value       |
-    +------------------+-------------+
-    | Datatype         | string      |
-    +------------------+-------------+
-    | Permissions      | Read Only   |
-    +------------------+-------------+
-    | High Level VI    | N/A         |
-    +------------------+-------------+
-    | Channel Based    | False       |
-    +------------------+-------------+
-    | Resettable       | No          |
-    +------------------+-------------+
+      The name of the device, which can be used to open an instrument driver session for that device
 
+          The following table lists the characteristics of this property.
 
-DEVICE_NAME
-~~~~~~~~~~~
+          +------------------+-------------+
+          | Characteristic   | Value       |
+          +------------------+-------------+
+          | Datatype         | string      |
+          +------------------+-------------+
+          | Permissions      | Read Only   |
+          +------------------+-------------+
+          | High Level VI    | N/A         |
+          +------------------+-------------+
+          | Channel Based    | False       |
+          +------------------+-------------+
+          | Resettable       | No          |
+          +------------------+-------------+
 
+   .. py:attribute:: max_pciexpress_link_width
 
-    The name of the device, which can be used to open an instrument driver session for that device
+      The following table lists the characteristics of this property.
 
-    The following table lists the characteristics of this property.
+          +------------------+-------------------------+
+          | Characteristic   | Value                   |
+          +------------------+-------------------------+
+          | Datatype         | 32-bit signed integer   |
+          +------------------+-------------------------+
+          | Permissions      | Read/Write              |
+          +------------------+-------------------------+
+          | High Level VI    | N/A                     |
+          +------------------+-------------------------+
+          | Channel Based    | False                   |
+          +------------------+-------------------------+
+          | Resettable       | No                      |
+          +------------------+-------------------------+
 
-    +------------------+-------------+
-    | Characteristic   | Value       |
-    +------------------+-------------+
-    | Datatype         | string      |
-    +------------------+-------------+
-    | Permissions      | Read Only   |
-    +------------------+-------------+
-    | High Level VI    | N/A         |
-    +------------------+-------------+
-    | Channel Based    | False       |
-    +------------------+-------------+
-    | Resettable       | No          |
-    +------------------+-------------+
+   .. py:attribute:: pciexpress_link_width
 
+      The following table lists the characteristics of this property.
 
-MAX_PCIEXPRESS_LINK_WIDTH
-~~~~~~~~~~~~~~~~~~~~~~~~~
+          +------------------+-------------------------+
+          | Characteristic   | Value                   |
+          +------------------+-------------------------+
+          | Datatype         | 32-bit signed integer   |
+          +------------------+-------------------------+
+          | Permissions      | Read/Write              |
+          +------------------+-------------------------+
+          | High Level VI    | N/A                     |
+          +------------------+-------------------------+
+          | Channel Based    | False                   |
+          +------------------+-------------------------+
+          | Resettable       | No                      |
+          +------------------+-------------------------+
 
+   .. py:attribute:: serial_number
 
+      The serial number of the device
 
-    The following table lists the characteristics of this property.
+          The following table lists the characteristics of this property.
 
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
+          +------------------+-------------+
+          | Characteristic   | Value       |
+          +------------------+-------------+
+          | Datatype         | string      |
+          +------------------+-------------+
+          | Permissions      | Read Only   |
+          +------------------+-------------+
+          | High Level VI    | N/A         |
+          +------------------+-------------+
+          | Channel Based    | False       |
+          +------------------+-------------+
+          | Resettable       | No          |
+          +------------------+-------------+
 
+   .. py:attribute:: slot_number
 
-PCIEXPRESS_LINK_WIDTH
-~~~~~~~~~~~~~~~~~~~~~
+      The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
 
+          The following table lists the characteristics of this property.
 
+          +------------------+-------------------------+
+          | Characteristic   | Value                   |
+          +------------------+-------------------------+
+          | Datatype         | 32-bit signed integer   |
+          +------------------+-------------------------+
+          | Permissions      | Read/Write              |
+          +------------------+-------------------------+
+          | High Level VI    | N/A                     |
+          +------------------+-------------------------+
+          | Channel Based    | False                   |
+          +------------------+-------------------------+
+          | Resettable       | No                      |
+          +------------------+-------------------------+
 
-    The following table lists the characteristics of this property.
+   .. py:attribute:: socket_number
 
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
+      The socket number on which the device has been enumerated
 
+          The following table lists the characteristics of this property.
 
-SERIAL_NUMBER
-~~~~~~~~~~~~~
-
-
-    The serial number of the device
-
-    The following table lists the characteristics of this property.
-
-    +------------------+-------------+
-    | Characteristic   | Value       |
-    +------------------+-------------+
-    | Datatype         | string      |
-    +------------------+-------------+
-    | Permissions      | Read Only   |
-    +------------------+-------------+
-    | High Level VI    | N/A         |
-    +------------------+-------------+
-    | Channel Based    | False       |
-    +------------------+-------------+
-    | Resettable       | No          |
-    +------------------+-------------+
-
-
-SLOT_NUMBER
-~~~~~~~~~~~
-
-
-    The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
-
-    The following table lists the characteristics of this property.
-
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
-
-
-SOCKET_NUMBER
-~~~~~~~~~~~~~
-
-
-    The socket number on which the device has been enumerated
-
-    The following table lists the characteristics of this property.
-
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
-
+          +------------------+-------------------------+
+          | Characteristic   | Value                   |
+          +------------------+-------------------------+
+          | Datatype         | 32-bit signed integer   |
+          +------------------+-------------------------+
+          | Permissions      | Read/Write              |
+          +------------------+-------------------------+
+          | High Level VI    | N/A                     |
+          +------------------+-------------------------+
+          | Channel Based    | False                   |
+          +------------------+-------------------------+
+          | Resettable       | No                      |
+          +------------------+-------------------------+
 
