@@ -11,7 +11,7 @@ ${helper.get_rst_header_snippet(driver_name + ' Enums', '=')}
 
 Enums used in ${driver_name}
 
-${helper.get_rst_header_snippet('Enums', '-')}
+.. py:currentmodule:: ${module_name}
 
 % for enum_name in sorted(enums):
 
