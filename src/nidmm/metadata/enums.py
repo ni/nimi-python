@@ -231,7 +231,6 @@ enums = {
     },
 
     'AcquisitionStatus': {
-        'documentation_lookup': None,
         'values': [
             {'name': 'RUNNING', 'value': 0},
             {'name': 'FINISHED_WITH_BACKLOG', 'value': 1},

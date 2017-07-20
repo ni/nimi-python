@@ -22,10 +22,25 @@ class ADCCalibration(Enum):
 
 class AcquisitionStatus(Enum):
     RUNNING = 0
+    '''
+    Running
+    '''
     FINISHED_WITH_BACKLOG = 1
+    '''
+    Finished with **Backlog**
+    '''
     FINISHED_WITH_NO_BACKLOG = 2
+    '''
+    Finished with no **Backlog**
+    '''
     PAUSED = 3
+    '''
+    Paused
+    '''
     NO_ACQUISITION_IN_PROGRESS = 4
+    '''
+    No acquisition in progress
+    '''
 
 
 class ApertureTimeUnits(Enum):

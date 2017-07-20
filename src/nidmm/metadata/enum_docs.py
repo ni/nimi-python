@@ -21,6 +21,38 @@ the measurement.
 ''',
         },
     },
+    'AcquisitionStatus': {
+        0: {
+            'name': 'Running',
+            'description': '''
+Running
+''',
+        },
+        1: {
+            'name': 'FINISHED_WITH_BACKLOG',
+            'description': '''
+Finished with **Backlog**
+''',
+        },
+        2: {
+            'name': 'FINISHED_WITH_NO_BACKLOG',
+            'description': '''
+Finished with no **Backlog**
+''',
+        },
+        3: {
+            'name': 'PAUSED',
+            'description': '''
+Paused
+''',
+        },
+        4: {
+            'name': 'NO_ACQUISITION_IN_PROGRESS',
+            'description': '''
+No acquisition in progress
+''',
+        },
+    },
     'ApertureTimeUnits': {
         0: {
             'name': 'Seconds',

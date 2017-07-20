@@ -28,18 +28,23 @@ Enums used in NI-DMM
 
    .. py:attribute:: RUNNING
 
+      Running
 
    .. py:attribute:: FINISHED_WITH_BACKLOG
 
+      Finished with **Backlog**
 
    .. py:attribute:: FINISHED_WITH_NO_BACKLOG
 
+      Finished with no **Backlog**
 
    .. py:attribute:: PAUSED
 
+      Paused
 
    .. py:attribute:: NO_ACQUISITION_IN_PROGRESS
 
+      No acquisition in progress
 
 
 .. py:data:: ApertureTimeUnits
