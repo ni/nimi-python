@@ -46,6 +46,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 AC_MIN_FREQ
 ~~~~~~~~~~~
 
@@ -74,6 +75,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 ADC_CALIBRATION
@@ -113,6 +115,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 APERTURE_TIME
 ~~~~~~~~~~~~~
 
@@ -133,7 +136,7 @@ On the NI 4065 the minimum aperture time is 333 micro s and the maximum
 aperture time is 78.2 s. If setting the number of averages directly, the
 total measurement time is aperture time X the number of averages, which
 must be less than 72.8 s. The aperture times allowed are 333 micro s,
-667 micro s, or multiples of 1.11 msâ€”for example 1.11 ms, 2.22 ms, 3.33
+667 micro s, or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33
 ms, and so on. If you set an aperture time other than 333 micro s, 667
 micro s, or multiples of 1.11 ms, the value will be coerced up to the
 next supported aperture time.
@@ -157,6 +160,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 APERTURE_TIME_UNITS
@@ -196,6 +200,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 AUTO_RANGE_VALUE
 ~~~~~~~~~~~~~~~~
 
@@ -221,6 +226,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 AUTO_ZERO
@@ -262,6 +268,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 BUFFER_SIZE
 ~~~~~~~~~~~
 
@@ -288,6 +295,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 CABLE_COMP_TYPE
@@ -333,6 +341,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 CACHE
 ~~~~~
 
@@ -365,6 +374,7 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 
+
 CHANNEL_COUNT
 ~~~~~~~~~~~~~
 
@@ -394,6 +404,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 CONFIG_PRODUCT_NUMBER
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -418,6 +429,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 CURRENT_SOURCE
@@ -460,6 +472,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 DC_BIAS
 ~~~~~~~
 
@@ -493,6 +506,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 DC_NOISE_REJECTION
@@ -536,6 +550,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 DRIVER_SETUP
 ~~~~~~~~~~~~
 
@@ -570,6 +585,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 
+
 FREQ_VOLTAGE_AUTO_RANGE_VALUE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -597,6 +613,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 FREQ_VOLTAGE_RANGE
@@ -630,6 +647,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 FUNCTION
@@ -699,6 +717,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 GROUP_CAPABILITIES
 ~~~~~~~~~~~~~~~~~~
 
@@ -724,6 +743,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
+
 
 
 INPUT_RESISTANCE
@@ -765,6 +785,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 INSTRUMENT_FIRMWARE_REVISION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -789,6 +810,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
+
 
 
 INSTRUMENT_MANUFACTURER
@@ -817,6 +839,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 
+
 INSTRUMENT_MODEL
 ~~~~~~~~~~~~~~~~
 
@@ -841,6 +864,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
+
 
 
 INTERCHANGE_CHECK
@@ -886,6 +910,7 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 
+
 IO_RESOURCE_DESCRIPTOR
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -910,6 +935,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
+
 
 
 LATENCY
@@ -938,6 +964,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 LC_CALCULATION_MODEL
@@ -978,6 +1005,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 LC_NUMBER_MEAS_TO_AVERAGE
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1006,6 +1034,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 LOGICAL_NAME
 ~~~~~~~~~~~~
 
@@ -1030,6 +1059,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
+
 
 
 MEAS_COMPLETE_DEST
@@ -1090,6 +1120,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 MEAS_DEST_SLOPE
 ~~~~~~~~~~~~~~~
 
@@ -1124,6 +1155,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 NUMBER_OF_AVERAGES
 ~~~~~~~~~~~~~~~~~~
 
@@ -1154,6 +1186,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 OFFSET_COMP_OHMS
@@ -1191,6 +1224,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 OPEN_CABLE_COMP_CONDUCTANCE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1224,6 +1258,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 OPEN_CABLE_COMP_SUSCEPTANCE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1255,6 +1290,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 OPERATION_MODE
@@ -1300,6 +1336,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 POWERLINE_FREQ
 ~~~~~~~~~~~~~~
 
@@ -1316,13 +1353,13 @@ Options:Powerline Frequency**
 After configuring powerline frequency, set the Aperture Time Units
 property to PLCs. When setting the Aperture Time property, select the
 number of PLCs for the powerline frequency. For example, if powerline
-frequency = 50 Hz (or 20Â ms) and aperture time in PLCs = 5, then
-aperture time in seconds = 20Â ms \* 5 PLCs = 100Â ms. Similarly, if
-powerline frequency = 60Â Hz (or 16.667Â ms) and aperture time in PLCs =
-6, then aperture time in seconds = 16.667Â ms \* 6 PLCs = 100Â ms.
+frequency = 50 Hz (or 20 ms) and aperture time in PLCs = 5, then
+aperture time in seconds = 20 ms \* 5 PLCs = 100 ms. Similarly, if
+powerline frequency = 60 Hz (or 16.667 ms) and aperture time in PLCs =
+6, then aperture time in seconds = 16.667 ms \* 6 PLCs = 100 ms.
 
 .. note::
-   For 400 Hz powerline frequency, use the 50Â Hz setting.  
+   For 400 Hz powerline frequency, use the 50 Hz setting.  
 
 +---------------------------+-----------------------------------------------+
 | Name                      | Description                                   |
@@ -1347,6 +1384,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 QUERY_INSTRUMENT_STATUS
@@ -1380,6 +1418,7 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 | Resettable       | No           |
 +------------------+--------------+
+
 
 
 RANGE
@@ -1422,6 +1461,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 RANGE_CHECK
 ~~~~~~~~~~~
 
@@ -1454,6 +1494,7 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 
+
 RECORD_COERCIONS
 ~~~~~~~~~~~~~~~~
 
@@ -1482,6 +1523,7 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 | Resettable       | No           |
 +------------------+--------------+
+
 
 
 RESOLUTION_ABSOLUTE
@@ -1513,6 +1555,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 RESOLUTION_DIGITS
@@ -1559,6 +1602,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 SAMPLE_COUNT
 ~~~~~~~~~~~~
 
@@ -1589,6 +1633,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 SAMPLE_INTERVAL
@@ -1633,6 +1678,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 SAMPLE_TRIGGER
@@ -1698,6 +1744,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 SAMPLE_TRIGGER_SLOPE
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -1733,6 +1780,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 SERIAL_NUMBER
 ~~~~~~~~~~~~~
 
@@ -1759,6 +1807,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
+
 
 
 SETTLE_TIME
@@ -1790,6 +1839,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 SHORT_CABLE_COMP_REACTANCE
@@ -1825,6 +1875,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 SHORT_CABLE_COMP_RESISTANCE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1858,6 +1909,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 SHUNT_VALUE
 ~~~~~~~~~~~
 
@@ -1885,6 +1937,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 SIMULATE
@@ -1922,6 +1975,7 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 
+
 SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1947,6 +2001,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION
@@ -1976,6 +2031,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 SPECIFIC_DRIVER_DESCRIPTION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2000,6 +2056,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
+
 
 
 SPECIFIC_DRIVER_PREFIX
@@ -2030,6 +2087,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 
+
 SPECIFIC_DRIVER_REVISION
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2057,6 +2115,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 
+
 SPECIFIC_DRIVER_VENDOR
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2081,6 +2140,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
+
 
 
 SUPPORTED_INSTRUMENT_MODELS
@@ -2110,6 +2170,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 
+
 TEMP_RTD_A
 ~~~~~~~~~~
 
@@ -2135,6 +2196,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 TEMP_RTD_B
@@ -2164,6 +2226,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 TEMP_RTD_C
 ~~~~~~~~~~
 
@@ -2191,6 +2254,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 TEMP_RTD_RES
 ~~~~~~~~~~~~
 
@@ -2215,6 +2279,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 TEMP_RTD_TYPE
@@ -2261,6 +2326,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 TEMP_TC_FIXED_REF_JUNC
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2286,6 +2352,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 TEMP_TC_REF_JUNC_TYPE
@@ -2318,6 +2385,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 TEMP_TC_TYPE
@@ -2366,6 +2434,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 TEMP_THERMISTOR_A
 ~~~~~~~~~~~~~~~~~
 
@@ -2391,6 +2460,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 TEMP_THERMISTOR_B
@@ -2420,6 +2490,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 TEMP_THERMISTOR_C
 ~~~~~~~~~~~~~~~~~
 
@@ -2445,6 +2516,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 TEMP_THERMISTOR_TYPE
@@ -2485,6 +2557,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 TEMP_TRANSDUCER_TYPE
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -2523,6 +2596,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 TRIGGER_COUNT
 ~~~~~~~~~~~~~
 
@@ -2554,6 +2628,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 TRIGGER_DELAY
@@ -2608,6 +2683,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 TRIGGER_SLOPE
 ~~~~~~~~~~~~~
 
@@ -2640,6 +2716,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 TRIGGER_SOURCE
@@ -2705,6 +2782,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 WAVEFORM_COUPLING
 ~~~~~~~~~~~~~~~~~
 
@@ -2740,6 +2818,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 
+
 WAVEFORM_POINTS
 ~~~~~~~~~~~~~~~
 
@@ -2765,6 +2844,7 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
 WAVEFORM_RATE
@@ -2795,5 +2875,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
+
 
 
