@@ -101,9 +101,6 @@ NI-DMM Session
       the device. This property affects the DMM only when you set the Function
       property to AC measurements.
 
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Max Frequency**
-
       The valid ranges are shown in the following table.
 
       +----------------------------------------+----------------+
@@ -128,6 +125,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Max Frequency**
+           - C Attribute: **NIDMM_ATTR_AC_MAX_FREQ**
+
    .. py:attribute:: ac_min_freq
 
       Specifies the minimum frequency component of the input signal for AC
@@ -135,9 +138,6 @@ NI-DMM Session
       Function property to AC measurements. The valid range is 1 Hz-300 kHz
       for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
       4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Min Frequency**
 
       The following table lists the characteristics of this property.
 
@@ -153,15 +153,18 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Min Frequency**
+           - C Attribute: **NIDMM_ATTR_AC_MIN_FREQ**
+
    .. py:attribute:: adc_calibration
 
       See :py:data:`nidmm.ADCCalibration` 
 
       For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
       calibration mode.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:ADC Calibration**
 
       +-----------------+------------------------------------------------------------------------------------------------+
       | Name            | Description                                                                                    |
@@ -187,6 +190,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:ADC Calibration**
+           - C Attribute: **NIDMM_ATTR_ADC_CALIBRATION**
+
    .. py:attribute:: aperture_time
 
       Specifies the measurement aperture time for the current configuration.
@@ -194,9 +203,6 @@ NI-DMM Session
       property. To override the default aperture, set this property to the
       desired aperture time after calling niDMM Config Measurement . To return
       to the default, set this property to Aperture Time Auto (-1).
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Advanced:Aperture Time**
 
       Any number of powerline cycles (PLCs) within the minimum and maximum
       ranges is allowed on the NI 4080/4081/4082 and NI 4070/4071/4072.
@@ -228,14 +234,17 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Advanced:Aperture Time**
+           - C Attribute: **NIDMM_ATTR_APERTURE_TIME**
+
    .. py:attribute:: aperture_time_units
 
       See :py:data:`nidmm.ApertureTimeUnits` 
 
       Specifies the units of aperture time for the current configuration.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Advanced:Aperture Time Units**
 
       .. note::
          The NI 4060 does not support an aperture time set in seconds.
@@ -262,14 +271,17 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Advanced:Aperture Time Units**
+           - C Attribute: **NIDMM_ATTR_APERTURE_TIME_UNITS**
+
    .. py:attribute:: auto_range_value
 
       Specifies the value of the range. If auto ranging is enabled, shows the
       actual value of the active range. The value of this property is set
       during a read operation.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Auto Range Value**
 
       The following table lists the characteristics of this property.
 
@@ -285,15 +297,18 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Auto Range Value**
+           - C Attribute: **NIDMM_ATTR_AUTO_RANGE_VALUE**
+
    .. py:attribute:: auto_zero
 
       See :py:data:`nidmm.AutoZero` 
 
       Specifies the AutoZero mode. This property is not supported for the NI
       4050.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Auto Zero**
 
       +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
       | Name            | Description                                                                                                                                                                                                                                                                                                                         |
@@ -321,14 +336,17 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Auto Zero**
+           - C Attribute: **NIDMM_ATTR_AUTO_ZERO**
+
    .. py:attribute:: buffer_size
 
       Specifies the size in samples of the internal data buffer. Maximum size
       is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
       chooses the buffer size.
-
-      .. note::
-         This corresponds to the LabVIEW property **Multi Point Acquisition:Advanced:Buffer Size**
 
       The following table lists the characteristics of this property.
 
@@ -344,6 +362,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Multi Point Acquisition:Advanced:Buffer Size**
+           - C Attribute: **NIDMM_ATTR_BUFFER_SIZE**
+
    .. py:attribute:: cable_comp_type
 
       See :py:data:`nidmm.CableCompensationType` 
@@ -351,9 +375,6 @@ NI-DMM Session
       For the NI 4081 and NI 4072 only, specifies the type of cable
       compensation that is applied to the current capacitance or inductance
       measurement for the current range.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**
 
       .. note::
          Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
@@ -384,6 +405,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**
+           - C Attribute: **NIDMM_ATTR_CABLE_COMP_TYPE**
+
    .. py:attribute:: cache
 
       Specifies whether to cache the value of properties. When caching is
@@ -393,9 +420,6 @@ NI-DMM Session
       choose to always cache or to never cache particular properties
       regardless of the setting of this property. The default value is TRUE
       (1). Use niDMM Initialize With Options to override the default setting.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Cache**
 
       The following table lists the characteristics of this property.
 
@@ -411,6 +435,12 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:User Options:Cache**
+           - C Attribute: **NIDMM_ATTR_CACHE**
+
    .. py:attribute:: channel_count
 
       Indicates the number of channels that the specific instrument driver
@@ -418,9 +448,6 @@ NI-DMM Session
       property is set, the IVI engine maintains a separate cache value for
       each channel.
 
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Capabilities:Channel Count**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------------------+
@@ -434,14 +461,19 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Instrument Capabilities:Channel Count**
+           - C Attribute: **NIDMM_ATTR_CHANNEL_COUNT**
+
+
 
    .. py:attribute:: config_product_number
 
       The PCI product ID.
 
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------------------+
@@ -455,15 +487,18 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
+           - C Attribute: **NIDMM_ATTR_CONFIG_PRODUCT_NUMBER**
 
    .. py:attribute:: current_source
 
       Specifies the current source provided during diode measurements.
 
       The NI 4050 and NI 4060 are not supported.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Current Source**
 
       +-----------------------------+--------------------------------------------------------------------+
       | Name                        | Description                                                        |
@@ -491,13 +526,16 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Current Source**
+           - C Attribute: **NIDMM_ATTR_CURRENT_SOURCE**
+
    .. py:attribute:: dc_bias
 
       For the NI 4082 and NI 4072 only, controls the available DC bias for
       capacitance measurements.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias**
 
       +-----------------------+------------------------------------------------------+
       | Name                  | Description                                          |
@@ -521,14 +559,17 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias**
+           - C Attribute: **NIDMM_ATTR_DC_BIAS**
+
    .. py:attribute:: dc_noise_rejection
 
       See :py:data:`nidmm.DCNoiseRejectionMode` 
 
       Specifies the DC noise rejection mode.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:DC Noise Rejection**
 
       .. note::
          The NI 4050 and NI 4060 are not supported.
@@ -559,6 +600,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:DC Noise Rejection**
+           - C Attribute: **NIDMM_ATTR_DC_NOISE_REJECTION**
+
    .. py:attribute:: driver_setup
 
       This property indicates the Driver Setup string that the user specified
@@ -570,9 +617,6 @@ NI-DMM Session
       Driver Setup keyword in the Option String parameter in niDMM Initialize
       With Options . If the user does not specify a Driver Setup string, this
       property returns an empty string.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Driver Setup**
 
       The following table lists the characteristics of this property.
 
@@ -588,15 +632,18 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:User Options:Driver Setup**
+           - C Attribute: **NIDMM_ATTR_DRIVER_SETUP**
+
    .. py:attribute:: freq_voltage_auto_range_value
 
       For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
       the frequency voltage range. If auto ranging is enabled, shows the
       actual value of the active frequency voltage range. If not Auto Ranging,
       the value is the same as that of the Frequency Voltage Range property.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
 
       The following table lists the characteristics of this property.
 
@@ -612,13 +659,16 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
+           - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_AUTO_RANGE_VALUE**
+
    .. py:attribute:: freq_voltage_range
 
       For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
       amplitude of the input signal for frequency measurements.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Frequency Voltage Range**
 
       +------------------+--------+------------------------------------------------------------------------------------------------------------------------------------+
       | Auto Range On    | -1.0   | Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement.   |
@@ -640,6 +690,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Frequency Voltage Range**
+           - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_RANGE**
+
    .. py:attribute:: function
 
       See :py:data:`nidmm.Function` 
@@ -653,9 +709,6 @@ NI-DMM Session
       only valid function types are Waveform Voltage and Waveform Current. Set
       the Operation Mode property to IVIDMM Mode to set all other function
       values.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Function**
 
       +----------------------------------+---------------------------------------------+
       | Name                             | Description                                 |
@@ -705,13 +758,16 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Function**
+           - C Attribute: **NIDMM_ATTR_FUNCTION**
+
    .. py:attribute:: group_capabilities
 
       A string containing the capabilities and extension groups supported by
       the specific driver.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities**
 
       The following table lists the characteristics of this property.
 
@@ -727,12 +783,15 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities**
+           - C Attribute: **NIDMM_ATTR_GROUP_CAPABILITIES**
+
    .. py:attribute:: input_resistance
 
       Specifies the input resistance of the instrument.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Input Resistance**
 
       .. note::
          The NI 4050 and NI 4060 are not supported.
@@ -761,12 +820,15 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Input Resistance**
+           - C Attribute: **NIDMM_ATTR_INPUT_RESISTANCE**
+
    .. py:attribute:: instrument_firmware_revision
 
       A string containing the instrument firmware revision number.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision**
 
       The following table lists the characteristics of this property.
 
@@ -781,14 +843,17 @@ NI-DMM Session
       +------------------+-------------+
       | Resettable       | No          |
       +------------------+-------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision**
+           - C Attribute: **NIDMM_ATTR_INSTRUMENT_FIRMWARE_REVISION**
 
    .. py:attribute:: instrument_manufacturer
 
       A string containing the manufacturer of the instrument.
 
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------+
@@ -802,14 +867,17 @@ NI-DMM Session
       +------------------+-------------+
       | Resettable       | No          |
       +------------------+-------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer**
+           - C Attribute: **NIDMM_ATTR_INSTRUMENT_MANUFACTURER**
 
    .. py:attribute:: instrument_model
 
       A string containing the instrument model.
 
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Model**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------+
@@ -823,6 +891,12 @@ NI-DMM Session
       +------------------+-------------+
       | Resettable       | No          |
       +------------------+-------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Model**
+           - C Attribute: **NIDMM_ATTR_INSTRUMENT_MODEL**
 
    .. py:attribute:: interchange_check
 
@@ -838,9 +912,6 @@ NI-DMM Session
       occur when a property affects the behavior of the instrument and you
       have not set that property, or the property has been invalidated since
       you set it.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Interchange Check**
 
       +---------+-----+
       | TRUE    | 1   |
@@ -862,12 +933,15 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:User Options:Interchange Check**
+           - C Attribute: **NIDMM_ATTR_INTERCHANGE_CHECK**
+
    .. py:attribute:: io_resource_descriptor
 
       A string containing the resource descriptor of the instrument.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**
 
       The following table lists the characteristics of this property.
 
@@ -883,14 +957,18 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**
+           - C Attribute: **NIDMM_ATTR_IO_RESOURCE_DESCRIPTOR**
+
+
    .. py:attribute:: latency
 
       Specifies the number of measurements transferred at a time from the
       instrument to an internal buffer. When set to Auto (-1), NI-DMM chooses
       the transfer size.
-
-      .. note::
-         This corresponds to the LabVIEW property **Multi Point Acquisition:Advanced:Latency**
 
       The following table lists the characteristics of this property.
 
@@ -906,6 +984,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Multi Point Acquisition:Advanced:Latency**
+           - C Attribute: **NIDMM_ATTR_LATENCY**
+
    .. py:attribute:: lc_calculation_model
 
       See :py:data:`nidmm.LCCalculationModel` 
@@ -913,9 +997,6 @@ NI-DMM Session
       For the NI 4082 and NI 4072 only, specifies the type of algorithm that
       the measurement processing uses for capacitance and inductance
       measurements.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model**
 
       +--------------------+--------------------------------------------------------------------------------------+
       | Name               | Description                                                                          |
@@ -941,13 +1022,16 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model**
+           - C Attribute: **NIDMM_ATTR_LC_CALCULATION_MODEL**
+
    .. py:attribute:: lc_number_meas_to_average
 
       For the NI 4082 and NI 4072 only, specifies the number of LC
       measurements that are averaged to produce one reading.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**
 
       The following table lists the characteristics of this property.
 
@@ -963,12 +1047,15 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**
+           - C Attribute: **NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE**
+
    .. py:attribute:: logical_name
 
       A string containing the logical name of the instrument.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Advanced Session Information:Logical Name**
 
       The following table lists the characteristics of this property.
 
@@ -984,6 +1071,12 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
+           - C Attribute: **NIDMM_ATTR_LOGICAL_NAME**
+
    .. py:attribute:: meas_complete_dest
 
       See :py:data:`nidmm.MeasurementCompleteDest` 
@@ -992,9 +1085,6 @@ NI-DMM Session
 
       To determine which values are supported by each device, refer to the
       LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
-
-      .. note::
-         This corresponds to the LabVIEW property **Trigger:Measurement Complete Dest**
 
       .. note::
          The NI 4050 is not supported.
@@ -1039,14 +1129,17 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Trigger:Measurement Complete Dest**
+           - C Attribute: **NIDMM_ATTR_MEAS_COMPLETE_DEST**
+
    .. py:attribute:: meas_dest_slope
 
       See :py:data:`nidmm.MeasurementDestinationSlope` 
 
       Specifies the polarity of the generated measurement complete signal.
-
-      .. note::
-         This corresponds to the LabVIEW property **Trigger:Measurement Destination Slope**
 
       +--------------------+------------------------------------------------------------------+
       | Name               | Description                                                      |
@@ -1070,6 +1163,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Trigger:Measurement Destination Slope**
+           - C Attribute: **NIDMM_ATTR_MEAS_DEST_SLOPE**
+
    .. py:attribute:: number_of_averages
 
       Specifies the number of averages to perform in a measurement. For the NI
@@ -1079,9 +1178,6 @@ NI-DMM Session
       otherwise, the default is 1.
 
       The NI 4050 and NI 4060 are not supported.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Advanced:Number Of Averages**
 
       The following table lists the characteristics of this property.
 
@@ -1097,15 +1193,18 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Advanced:Number Of Averages**
+           - C Attribute: **NIDMM_ATTR_NUMBER_OF_AVERAGES**
+
    .. py:attribute:: offset_comp_ohms
 
       See :py:data:`nidmm.OffsetCompensatedOhms` 
 
       For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
       offset compensated ohms.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Offset Compensated Ohms**
 
       +---------------+-------------------------------------+
       | Name          | Description                         |
@@ -1129,15 +1228,18 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Offset Compensated Ohms**
+           - C Attribute: **NIDMM_ATTR_OFFSET_COMP_OHMS**
+
    .. py:attribute:: open_cable_comp_conductance
 
       For the NI 4082 and NI 4072 only, specifies the active part
       (conductance) of the open cable compensation. The valid range is any
       real number >0. The default value (-1.0) indicates that compensation has
       not taken place.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**
 
       .. note::
          Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
@@ -1155,6 +1257,12 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**
+           - C Attribute: **NIDMM_ATTR_OPEN_CABLE_COMP_CONDUCTANCE**
 
    .. py:attribute:: open_cable_comp_susceptance
 
@@ -1164,9 +1272,6 @@ NI-DMM Session
       not taken place.
 
       .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**
-
-      .. note::
          Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
 
       The following table lists the characteristics of this property.
@@ -1182,6 +1287,12 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**
+           - C Attribute: **NIDMM_ATTR_OPEN_CABLE_COMP_SUSCEPTANCE**
 
    .. py:attribute:: operation_mode
 
@@ -1197,9 +1308,6 @@ NI-DMM Session
       sets this property to Waveform Mode. If you are programming properties
       directly, you must set this property before setting other configuration
       properties.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Advanced:Operation Mode**
 
       +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
       | Name                    | Description                                                                                                                                                                                                                                        |
@@ -1223,6 +1331,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Advanced:Operation Mode**
+           - C Attribute: **NIDMM_ATTR_OPERATION_MODE**
+
    .. py:attribute:: powerline_freq
 
       Specifies the powerline frequency. The NI 4060 and NI 4050 use this
@@ -1230,9 +1344,6 @@ NI-DMM Session
       the appropriate internal sample clock and filter. The NI 4065, NI
       4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
       for setting the Aperture Time property in powerline cycles.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Powerline Frequency**
 
       After configuring powerline frequency, set the Aperture Time Units
       property to PLCs. When setting the Aperture Time property, select the
@@ -1267,6 +1378,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Powerline Frequency**
+           - C Attribute: **NIDMM_ATTR_POWERLINE_FREQ**
+
    .. py:attribute:: query_instrument_status
 
       Specifies whether the instrument driver queries the instrument status
@@ -1277,9 +1394,6 @@ NI-DMM Session
       properties regardless of the setting of this property. The default value
       is TRUE (1). Use niDMM Initialize With Options to override the default
       setting.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Query Instrument Status**
 
       The following table lists the characteristics of this property.
 
@@ -1295,6 +1409,12 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
+           - C Attribute: **NIDMM_ATTR_QUERY_INSTRUMENT_STATUS**
+
    .. py:attribute:: range
 
       Specifies the measurement range. Use positive values to represent the
@@ -1302,9 +1422,6 @@ NI-DMM Session
       units appropriate for the current value of the Function property. For
       example, if the Function property is set to DC Volts, the units are
       volts.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Range**
 
       .. note::
          The NI 4050, NI 4060, and NI 4065 only support Auto Range when the trigger and sample trigger are set to Immediate.
@@ -1331,6 +1448,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Range**
+           - C Attribute: **NIDMM_ATTR_RANGE**
+
    .. py:attribute:: range_check
 
       Specifies whether to validate property values and VI parameters. If
@@ -1341,9 +1464,6 @@ NI-DMM Session
       value is TRUE (1). Use niDMM Initialize With Options to override the
       default setting.
 
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Range Check**
-
       The following table lists the characteristics of this property.
 
       +------------------+--------------+
@@ -1357,6 +1477,12 @@ NI-DMM Session
       +------------------+--------------+
       | Resettable       | No           |
       +------------------+--------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:User Options:Range Check**
+           - C Attribute: **NIDMM_ATTR_RANGE_CHECK**
 
    .. py:attribute:: record_coercions
 
@@ -1366,9 +1492,6 @@ NI-DMM Session
       Use niDMM Get Next Coercion Record to extract and delete the oldest
       coercion record from the list.
 
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Record Value Coercions**
-
       The following table lists the characteristics of this property.
 
       +------------------+--------------+
@@ -1383,14 +1506,17 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
+           - C Attribute: **NIDMM_ATTR_RECORD_COERCIONS**
+
    .. py:attribute:: resolution_absolute
 
       Specifies the measurement resolution in absolute units. Setting this
       property to higher values increases the measurement accuracy. Setting
       this property to lower values increases the measurement speed.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Absolute Resolution**
 
       .. note::
          NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
@@ -1409,14 +1535,17 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Absolute Resolution**
+           - C Attribute: **NIDMM_ATTR_RESOLUTION_ABSOLUTE**
+
    .. py:attribute:: resolution_digits
 
       Specifies the measurement resolution in digits. Setting this property to
       higher values increases the measurement accuracy. Setting this property
       to lower values increases the measurement speed.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Digits Resolution**
 
       .. note::
          NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
@@ -1449,6 +1578,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Digits Resolution**
+           - C Attribute: **NIDMM_ATTR_RESOLUTION_DIGITS**
+
    .. py:attribute:: sample_count
 
       Specifies the number of measurements the DMM takes each time it receives
@@ -1458,9 +1593,6 @@ NI-DMM Session
       conditional statement "Measurements equal to Sample Count" to always
       evaluate to False, and causes the DMM to continue taking measurements in
       the inner loop.
-
-      .. note::
-         This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Count**
 
       The following table lists the characteristics of this property.
 
@@ -1476,6 +1608,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Multi Point Acquisition:Sample Count**
+           - C Attribute: **NIDMM_ATTR_SAMPLE_COUNT**
+
    .. py:attribute:: sample_interval
 
       Specifies the amount of time in seconds the DMM waits between
@@ -1483,9 +1621,6 @@ NI-DMM Session
       property is set to INTERVAL. The default value (-1) ensures that the DMM
       settles for a recommended time, which is the same as using an immediate
       trigger.
-
-      .. note::
-         This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Interval**
 
       The NI 4065 and NI 4070/4071/4072 use the value specified in this
       property as additional delay. On these devices, the onboard timing
@@ -1515,6 +1650,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Multi Point Acquisition:Sample Interval**
+           - C Attribute: **NIDMM_ATTR_SAMPLE_INTERVAL**
+
    .. py:attribute:: sample_trigger
 
       See :py:data:`nidmm.SampleTrigger` 
@@ -1523,9 +1664,6 @@ NI-DMM Session
 
       To determine which values are supported by each device, refer to the
       LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
-
-      .. note::
-         This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Trigger**
 
       +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
       | Name                    | Description                                                                                                                            |
@@ -1575,15 +1713,18 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Multi Point Acquisition:Sample Trigger**
+           - C Attribute: **NIDMM_ATTR_SAMPLE_TRIGGER**
+
    .. py:attribute:: sample_trigger_slope
 
       See :py:data:`nidmm.SampleTrigSlope` 
 
       Specifies the edge of the signal from the specified sample trigger
       source on which the DMM is triggered.
-
-      .. note::
-         This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Trig Slope**
 
       +--------------------+------------------------------------------------------------------+
       | Name               | Description                                                      |
@@ -1607,14 +1748,17 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Multi Point Acquisition:Sample Trig Slope**
+           - C Attribute: **NIDMM_ATTR_SAMPLE_TRIGGER_SLOPE**
+
    .. py:attribute:: serial_number
 
       A string containing the serial number of the instrument. This property
       corresponds to the serial number label that is attached to most
       products.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**
 
       The following table lists the characteristics of this property.
 
@@ -1630,14 +1774,17 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**
+           - C Attribute: **NIDMM_ATTR_SERIAL_NUMBER**
+
    .. py:attribute:: settle_time
 
       Specifies the settling time in seconds. Use this property to override
       the default settling time. To return to the default, set this property
       to Auto (-1).
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Advanced:Settle Time**
 
       .. note::
          The NI 4050 and NI 4060 are not supported.
@@ -1656,15 +1803,18 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Advanced:Settle Time**
+           - C Attribute: **NIDMM_ATTR_SETTLE_TIME**
+
    .. py:attribute:: short_cable_comp_reactance
 
       For the NI 4082 and NI 4072 only, represents the reactive part
       (reactance) of the short cable compensation. The valid range is any real
       number >0. The default value (-1) indicates that compensation has not
       taken place.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**
 
       .. note::
          Changing the VI or the range through this property or through niDMM Config Measurement resets this property to the default value.
@@ -1682,6 +1832,12 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**
+           - C Attribute: **NIDMM_ATTR_SHORT_CABLE_COMP_REACTANCE**
 
    .. py:attribute:: short_cable_comp_resistance
 
@@ -1691,9 +1847,6 @@ NI-DMM Session
       not taken place.
 
       .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
-
-      .. note::
          Changing the VI or the range through this property or through niDMM Config Measurement resets this property to the default value.
 
       The following table lists the characteristics of this property.
@@ -1710,12 +1863,15 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
+           - C Attribute: **NIDMM_ATTR_SHORT_CABLE_COMP_RESISTANCE**
+
    .. py:attribute:: shunt_value
 
       For the NI 4050 only, specifies the shunt resistance value.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Shunt Value**
 
       .. note::
          The NI 4050 requires an external shunt resistor for current measurements. This property should be set to the value of the shunt resistor.
@@ -1734,6 +1890,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Shunt Value**
+           - C Attribute: **NIDMM_ATTR_SHUNT_VALUE**
+
    .. py:attribute:: simulate
 
       Specifies whether to simulate instrument driver I/O operations. If
@@ -1743,9 +1905,6 @@ NI-DMM Session
       the instrument driver VIs return calculated values. The default value is
       FALSE (0). Use niDMM Initialize With Options to override the default
       setting.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Simulate**
 
       .. note::
          Simulate can only be set within the niDMM Initialize With Options VI. The property value cannot be changed outside of the VI.
@@ -1764,13 +1923,16 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:User Options:Simulate**
+           - C Attribute: **NIDMM_ATTR_SIMULATE**
+
    .. py:attribute:: specific_driver_class_spec_major_version
 
       The major version number of the class specification for the specific
       driver.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version**
 
       The following table lists the characteristics of this property.
 
@@ -1785,15 +1947,18 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version**
+           - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION**
 
    .. py:attribute:: specific_driver_class_spec_minor_version
 
       The minor version number of the class specification for the specific
       driver.
 
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------------------+
@@ -1808,12 +1973,15 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version**
+           - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION**
+
    .. py:attribute:: specific_driver_description
 
       A string containing a description of the specific driver.
-
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description**
 
       The following table lists the characteristics of this property.
 
@@ -1828,6 +1996,12 @@ NI-DMM Session
       +------------------+-------------+
       | Resettable       | No          |
       +------------------+-------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description**
+           - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
 
    .. py:attribute:: specific_driver_prefix
 
@@ -1835,9 +2009,6 @@ NI-DMM Session
       user-callable VI in this driver starts with this prefix. The prefix can
       be up to a maximum of eight characters.
 
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------+
@@ -1851,15 +2022,18 @@ NI-DMM Session
       +------------------+-------------+
       | Resettable       | No          |
       +------------------+-------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix**
+           - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_PREFIX**
 
    .. py:attribute:: specific_driver_revision
 
       A string that contains additional version information about this
       instrument driver.
 
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Version Info:Specific Driver Revision**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------+
@@ -1873,14 +2047,17 @@ NI-DMM Session
       +------------------+-------------+
       | Resettable       | No          |
       +------------------+-------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Version Info:Specific Driver Revision**
+           - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_REVISION**
 
    .. py:attribute:: specific_driver_vendor
 
       A string containing the vendor of the specific driver.
 
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------+
@@ -1894,15 +2071,18 @@ NI-DMM Session
       +------------------+-------------+
       | Resettable       | No          |
       +------------------+-------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor**
+           - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_VENDOR**
 
    .. py:attribute:: supported_instrument_models
 
       A string containing the instrument models supported by the specific
       driver.
 
-      .. note::
-         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------+
@@ -1917,13 +2097,16 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models**
+           - C Attribute: **NIDMM_ATTR_SUPPORTED_INSTRUMENT_MODELS**
+
    .. py:attribute:: temp_rtd_a
 
       Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
       **RTD Type property** is set to Custom.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**
 
       The following table lists the characteristics of this property.
 
@@ -1938,15 +2121,18 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**
+           - C Attribute: **NIDMM_ATTR_TEMP_RTD_A**
 
    .. py:attribute:: temp_rtd_b
 
       Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
       **RTD Type property** is set to Custom.
 
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------------------+
@@ -1960,15 +2146,18 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**
+           - C Attribute: **NIDMM_ATTR_TEMP_RTD_B**
 
    .. py:attribute:: temp_rtd_c
 
       Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
       **RTD Type property** is set to Custom.
 
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------------------+
@@ -1982,14 +2171,17 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**
+           - C Attribute: **NIDMM_ATTR_TEMP_RTD_C**
 
    .. py:attribute:: temp_rtd_res
 
       Specifies the RTD resistance at 0 degrees Celsius.
 
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------------------+
@@ -2003,15 +2195,18 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**
+           - C Attribute: **NIDMM_ATTR_TEMP_RTD_RES**
 
    .. py:attribute:: temp_rtd_type
 
       See :py:data:`nidmm.TemperatureRTDType` 
 
       Specifies the RTD type.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**
 
       +-------------------+----------------------------------------------------------------------------------------------+
       | Name              | Description                                                                                  |
@@ -2045,13 +2240,16 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**
+           - C Attribute: **NIDMM_ATTR_TEMP_RTD_TYPE**
+
    .. py:attribute:: temp_tc_fixed_ref_junc
 
       Specifies the value of the fixed reference junction temperature for a
       thermocouple in degrees Celsius.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction**
 
       The following table lists the characteristics of this property.
 
@@ -2067,14 +2265,17 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction**
+           - C Attribute: **NIDMM_ATTR_TEMP_TC_FIXED_REF_JUNC**
+
    .. py:attribute:: temp_tc_ref_junc_type
 
       See :py:data:`nidmm.TemperatureThermocoupleReferenceJunctionType` 
 
       Specifies the thermocouple reference junction type.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type**
 
       +-----------------+------------------------------------------------------------------------------+
       | Name            | Description                                                                  |
@@ -2096,14 +2297,17 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type**
+           - C Attribute: **NIDMM_ATTR_TEMP_TC_REF_JUNC_TYPE**
+
    .. py:attribute:: temp_tc_type
 
       See :py:data:`nidmm.TemperatureThermocoupleType` 
 
       Specifies the thermocouple type.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**
 
       +--------------+-----------------------+
       | Name         | Description           |
@@ -2139,13 +2343,16 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**
+           - C Attribute: **NIDMM_ATTR_TEMP_TC_TYPE**
+
    .. py:attribute:: temp_thermistor_a
 
       Specifies the Steinhart-Hart A coefficient for thermistor scaling when
       the **Thermistor Type property** is set to Custom.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor A**
 
       The following table lists the characteristics of this property.
 
@@ -2160,15 +2367,18 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor A**
+           - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_A**
 
    .. py:attribute:: temp_thermistor_b
 
       Specifies the Steinhart-Hart B coefficient for thermistor scaling when
       the **Thermistor Type property** is set to Custom.
 
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor B**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------------------+
@@ -2182,15 +2392,18 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor B**
+           - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_B**
 
    .. py:attribute:: temp_thermistor_c
 
       Specifies the Steinhart-Hart C coefficient for thermistor scaling when
       the **Thermistor Type property** is set to Custom.
 
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor C**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------------------+
@@ -2205,14 +2418,17 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor C**
+           - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_C**
+
    .. py:attribute:: temp_thermistor_type
 
       See :py:data:`nidmm.TemperatureThermistorType` 
 
       Specifies the thermistor type.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type**
 
       +------------------+------------------------------------------------------------------------------------------------+
       | Name             | Description                                                                                    |
@@ -2240,14 +2456,17 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type**
+           - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_TYPE**
+
    .. py:attribute:: temp_transducer_type
 
       See :py:data:`nidmm.TemperatureTransducerType` 
 
       Specifies the transducer type.
-
-      .. note::
-         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Transducer Type**
 
       +------------------------+--------------------------------------+
       | Name                   | Description                          |
@@ -2275,6 +2494,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Configuration:Measurement Options:Temperature:Transducer Type**
+           - C Attribute: **NIDMM_ATTR_TEMP_TRANSDUCER_TYPE**
+
    .. py:attribute:: trigger_count
 
       Specifies the number of triggers the DMM receives before returning to
@@ -2285,9 +2510,6 @@ NI-DMM Session
 
       Refer to Multiple Point Acquisitions in the *NI Digital Multimeters
       Help* for more information.
-
-      .. note::
-         This corresponds to the LabVIEW property **Multi Point Acquisition:Trigger Count**
 
       The following table lists the characteristics of this property.
 
@@ -2302,6 +2524,12 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Multi Point Acquisition:Trigger Count**
+           - C Attribute: **NIDMM_ATTR_TRIGGER_COUNT**
 
    .. py:attribute:: trigger_delay
 
@@ -2334,9 +2562,6 @@ NI-DMM Session
 
       Default Value: Auto Delay
 
-      .. note::
-         This corresponds to the LabVIEW property **Trigger:Trigger Delay**
-
       The following table lists the characteristics of this property.
 
       +------------------+-------------------------+
@@ -2351,15 +2576,18 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Trigger:Trigger Delay**
+           - C Attribute: **NIDMM_ATTR_TRIGGER_DELAY**
+
    .. py:attribute:: trigger_slope
 
       See :py:data:`nidmm.TriggerSlope` 
 
       Specifies the edge of the signal from the specified trigger source on
       which the DMM is triggered.
-
-      .. note::
-         This corresponds to the LabVIEW property **Trigger:Trigger Slope**
 
       +--------------------+------------------------------------------------------------------+
       | Name               | Description                                                      |
@@ -2383,6 +2611,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Trigger:Trigger Slope**
+           - C Attribute: **NIDMM_ATTR_TRIGGER_SLOPE**
+
    .. py:attribute:: trigger_source
 
       See :py:data:`nidmm.TriggerSource` 
@@ -2394,9 +2628,6 @@ NI-DMM Session
 
       To determine which values are supported by each device, refer to the
       LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
-
-      .. note::
-         This corresponds to the LabVIEW property **Trigger:Trigger Source**
 
       +--------------------------+-------------------------------------------------------------------------------------------------------------------+
       | Name                     | Description                                                                                                       |
@@ -2444,15 +2675,18 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Trigger:Trigger Source**
+           - C Attribute: **NIDMM_ATTR_TRIGGER_SOURCE**
+
    .. py:attribute:: waveform_coupling
 
       See :py:data:`nidmm.WaveformCouplingMode` 
 
       For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
       coupling during a waveform acquisition.
-
-      .. note::
-         This corresponds to the LabVIEW property **Waveform Acquisition:Waveform Coupling**
 
       +--------------+--------------------------+
       | Name         | Description              |
@@ -2476,13 +2710,16 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Waveform Acquisition:Waveform Coupling**
+           - C Attribute: **NIDMM_ATTR_WAVEFORM_COUPLING**
+
    .. py:attribute:: waveform_points
 
       For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the number of
       points to acquire in a waveform acquisition.
-
-      .. note::
-         This corresponds to the LabVIEW property **Waveform Acquisition:Waveform Points**
 
       The following table lists the characteristics of this property.
 
@@ -2498,6 +2735,12 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Waveform Acquisition:Waveform Points**
+           - C Attribute: **NIDMM_ATTR_WAVEFORM_POINTS**
+
    .. py:attribute:: waveform_rate
 
       Specifies the rate of the waveform acquisition in samples per second
@@ -2505,9 +2748,6 @@ NI-DMM Session
       divisor, and the rate falls between 10 and 1,800,000 samples per second.
       The waveform rate is coerced upwards to the next valid rate. The default
       value is 1,800,000 samples per second. Not supported by NI 4065.
-
-      .. note::
-         This corresponds to the LabVIEW property **Waveform Acquisition:Waveform Rate**
 
       The following table lists the characteristics of this property.
 
@@ -2522,4 +2762,10 @@ NI-DMM Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - LV Property: **Waveform Acquisition:Waveform Rate**
+           - C Attribute: **NIDMM_ATTR_WAVEFORM_RATE**
 

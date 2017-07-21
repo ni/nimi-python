@@ -38,6 +38,11 @@ NI-ModInst Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - C Attribute: **NIMODINST_ATTR_BUS_NUMBER**
+
    .. py:attribute:: chassis_number
 
       The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
@@ -57,6 +62,11 @@ NI-ModInst Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - C Attribute: **NIMODINST_ATTR_CHASSIS_NUMBER**
 
    .. py:attribute:: device_model
 
@@ -78,6 +88,11 @@ NI-ModInst Session
       | Resettable       | No          |
       +------------------+-------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - C Attribute: **NIMODINST_ATTR_DEVICE_MODEL**
+
    .. py:attribute:: device_name
 
       The name of the device, which can be used to open an instrument driver session for that device
@@ -98,6 +113,11 @@ NI-ModInst Session
       | Resettable       | No          |
       +------------------+-------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - C Attribute: **NIMODINST_ATTR_DEVICE_NAME**
+
    .. py:attribute:: max_pciexpress_link_width
 
       The following table lists the characteristics of this property.
@@ -116,6 +136,11 @@ NI-ModInst Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - C Attribute: **NIMODINST_ATTR_MAX_PCIEXPRESS_LINK_WIDTH**
+
    .. py:attribute:: pciexpress_link_width
 
       The following table lists the characteristics of this property.
@@ -133,6 +158,11 @@ NI-ModInst Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - C Attribute: **NIMODINST_ATTR_PCIEXPRESS_LINK_WIDTH**
 
    .. py:attribute:: serial_number
 
@@ -154,6 +184,11 @@ NI-ModInst Session
       | Resettable       | No          |
       +------------------+-------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - C Attribute: **NIMODINST_ATTR_SERIAL_NUMBER**
+
    .. py:attribute:: slot_number
 
       The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
@@ -174,6 +209,11 @@ NI-ModInst Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
+      .. note::
+         This attribute corresponds to:
+
+           - C Attribute: **NIMODINST_ATTR_SLOT_NUMBER**
+
    .. py:attribute:: socket_number
 
       The socket number on which the device has been enumerated
@@ -193,4 +233,9 @@ NI-ModInst Session
       +------------------+-------------------------+
       | Resettable       | No                      |
       +------------------+-------------------------+
+
+      .. note::
+         This attribute corresponds to:
+
+           - C Attribute: **NIMODINST_ATTR_SOCKET_NUMBER**
 

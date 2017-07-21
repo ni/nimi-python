@@ -4,6 +4,7 @@
     config = template_parameters['metadata'].config
     module_name = config['module_name']
     driver_name = config['driver_name']
+    c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
     attribute_docs = helper.normalize_string_type(template_parameters['metadata'].attribute_docs)
 %>\
@@ -36,5 +37,13 @@ else:
 %   endif
       ${helper.get_indented_docstring_snippet(attribute_docs[str(attributes[attr]['id'])]['longDescription'], indent=6)}
 
+      .. note::
+         This attribute corresponds to:
+
+%   if 'lv_property' in attribute_docs[str(attributes[attr]['id'])]:
+           - LV Property: **${attribute_docs[str(attributes[attr]['id'])]['lv_property'].strip()}**
 %   endif
+           - C Attribute: **${c_function_prefix.upper()}ATTR_${attr}**
+%   endif
+
 % endfor

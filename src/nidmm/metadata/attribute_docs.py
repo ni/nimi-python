@@ -7,9 +7,6 @@ properties in this property node. Set the channel before setting
 channel-based properties. Pass a name that the instrument driver defines
 or a virtual channel name configured in MAX.
 
-.. note::
-   This corresponds to the LabVIEW property **Active Channel**  
-
 The following table lists the characteristics of this property.
 
 +------------------+--------------+
@@ -24,6 +21,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No           |
 +------------------+--------------+
 
+''',
+        'lv_property': '''
+Active Channel
 ''',
         'shortDescription': '''
 Specifies the channel name used to access all subsequent channel-based
@@ -43,9 +43,6 @@ After the user program is validated, you can set this property to FALSE
 value is TRUE (1). Use niDMM Initialize With Options to override the
 default setting.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Range Check**  
-
 The following table lists the characteristics of this property.
 
 +------------------+--------------+
@@ -60,6 +57,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No           |
 +------------------+--------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:User Options:Range Check
 ''',
         'shortDescription': '''
 Specifies whether to validate property values and VI parameters. If
@@ -83,9 +83,6 @@ properties regardless of the setting of this property. The default value
 is TRUE (1). Use niDMM Initialize With Options to override the default
 setting.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Query Instrument Status**  
-
 The following table lists the characteristics of this property.
 
 +------------------+--------------+
@@ -100,6 +97,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No           |
 +------------------+--------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:User Options:Query Instrument Status
 ''',
         'shortDescription': '''
 Specifies whether the instrument driver queries the instrument status
@@ -123,9 +123,6 @@ choose to always cache or to never cache particular properties
 regardless of the setting of this property. The default value is TRUE
 (1). Use niDMM Initialize With Options to override the default setting.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Cache**  
-
 The following table lists the characteristics of this property.
 
 +------------------+--------------+
@@ -140,6 +137,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No           |
 +------------------+--------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:User Options:Cache
 ''',
         'shortDescription': '''
 Specifies whether to cache the value of properties. When caching is
@@ -163,9 +163,6 @@ FALSE (0). Use niDMM Initialize With Options to override the default
 setting.
 
 .. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Simulate**  
-
-.. note::
    Simulate can only be set within the niDMM Initialize With Options VI. The property value cannot be changed outside of the VI.  
 
 The following table lists the characteristics of this property.
@@ -182,6 +179,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No           |
 +------------------+--------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:User Options:Simulate
 ''',
         'shortDescription': '''
 Specifies whether to simulate instrument driver I/O operations. If
@@ -202,9 +202,6 @@ makes for ViInt32 and ViReal64 properties. The default value is FALSE
 Use niDMM Get Next Coercion Record to extract and delete the oldest
 coercion record from the list.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Record Value Coercions**  
-
 The following table lists the characteristics of this property.
 
 +------------------+--------------+
@@ -219,6 +216,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No           |
 +------------------+--------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:User Options:Record Value Coercions
 ''',
         'shortDescription': '''
 Specifies whether the IVI engine keeps a list of the value coercions it
@@ -241,9 +241,6 @@ Driver Setup keyword in the Option String parameter in niDMM Initialize
 With Options . If the user does not specify a Driver Setup string, this
 property returns an empty string.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Driver Setup**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -258,6 +255,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:User Options:Driver Setup
 ''',
         'shortDescription': '''
 This property indicates the Driver Setup string that the user specified
@@ -287,9 +287,6 @@ occur when a property affects the behavior of the instrument and you
 have not set that property, or the property has been invalidated since
 you set it.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Interchange Check**  
-
 +---------+-----+
 | TRUE    | 1   |
 +---------+-----+
@@ -310,6 +307,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No           |
 +------------------+--------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:User Options:Interchange Check
 ''',
         'shortDescription': '''
 Specifies whether to perform interchangeability checking and log
@@ -336,9 +336,6 @@ value describes a warning condition. A zero indicates that no error or
 warning occurred. The error and warning values can be status codes
 defined by IVI, VISA, class drivers, or specific drivers.
 
-.. note::
-   This corresponds to the LabVIEW property **Obsolete:Inherent IVI Attributes:Error Info:Primary Error**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -353,6 +350,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Obsolete:Inherent IVI Attributes:Error Info:Primary Error
 ''',
         'shortDescription': '''
 A code that describes the first error that occurred since the last call
@@ -371,9 +371,6 @@ primary error condition. The error and warning values can be status
 codes defined by IVI, VISA, class drivers, or specific drivers. Zero
 indicates no additional information.
 
-.. note::
-   This corresponds to the LabVIEW property **Obsolete:Inherent IVI Attributes:Error Info:Secondary Error**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -389,6 +386,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Obsolete:Inherent IVI Attributes:Error Info:Secondary Error
+''',
         'shortDescription': '''
 An optional code that provides additional information concerning the
 primary error condition. The error and warning values can be status
@@ -401,9 +401,6 @@ indicates no additional information.
         'longDescription': '''
 An optional string that contains additional information concerning the
 primary error condition.
-
-.. note::
-   This corresponds to the LabVIEW property **Obsolete:Inherent IVI Attributes:Error Info:Error Elaboration**  
 
 The following table lists the characteristics of this property.
 
@@ -420,6 +417,9 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 
 ''',
+        'lv_property': '''
+Obsolete:Inherent IVI Attributes:Error Info:Error Elaboration
+''',
         'shortDescription': '''
 An optional string that contains additional information concerning the
 primary error condition.
@@ -432,9 +432,6 @@ Indicates the number of channels that the specific instrument driver
 supports. For each property for which the IVI\_VAL\_MULTI\_CHANNEL flag
 property is set, the IVI engine maintains a separate cache value for
 each channel.
-
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Capabilities:Channel Count**  
 
 The following table lists the characteristics of this property.
 
@@ -450,6 +447,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Instrument Capabilities:Channel Count
 ''',
         'shortDescription': '''
 Indicates the number of channels that the specific instrument driver
@@ -465,9 +465,6 @@ The prefix for the specific instrument driver. The name of each
 user-callable VI in this driver starts with this prefix. The prefix can
 be up to a maximum of eight characters.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -482,6 +479,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix
 ''',
         'shortDescription': '''
 The prefix for the specific instrument driver. The name of each
@@ -494,9 +494,6 @@ be up to a maximum of eight characters.
         'longDescription': '''
 A string containing the resource descriptor of the instrument.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -511,6 +508,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor
 ''',
         'shortDescription': '''
 A string containing the resource descriptor of the instrument.
@@ -521,9 +521,6 @@ A string containing the resource descriptor of the instrument.
         'longDescription': '''
 A string containing the logical name of the instrument.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Advanced Session Information:Logical Name**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -538,6 +535,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Advanced Session Information:Logical Name
 ''',
         'shortDescription': '''
 A string containing the logical name of the instrument.
@@ -549,9 +549,6 @@ A string containing the logical name of the instrument.
 A string containing the instrument models supported by the specific
 driver.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -566,6 +563,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models
 ''',
         'shortDescription': '''
 A string containing the instrument models supported by the specific
@@ -578,9 +578,6 @@ driver.
 A string containing the capabilities and extension groups supported by
 the specific driver.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -595,6 +592,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities
 ''',
         'shortDescription': '''
 A string containing the capabilities and extension groups supported by
@@ -606,9 +606,6 @@ the specific driver.
         'longDescription': '''
 The major version number of the IVI engine.
 
-.. note::
-   This corresponds to the LabVIEW property **Obsolete:Inherent IVI Attributes:Version Info:Engine Major Version**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -623,6 +620,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Obsolete:Inherent IVI Attributes:Version Info:Engine Major Version
 ''',
         'shortDescription': '''
 The major version number of the IVI engine.
@@ -633,9 +633,6 @@ The major version number of the IVI engine.
         'longDescription': '''
 The minor version number of the IVI engine.
 
-.. note::
-   This corresponds to the LabVIEW property **Obsolete:Inherent IVI Attributes:Version Info:Engine Minor Version**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -650,6 +647,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Obsolete:Inherent IVI Attributes:Version Info:Engine Minor Version
 ''',
         'shortDescription': '''
 The minor version number of the IVI engine.
@@ -660,9 +660,6 @@ The minor version number of the IVI engine.
         'longDescription': '''
 Returns the major version number of this instrument driver.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Version Info:Specific Driver Major Version**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -677,6 +674,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Version Info:Specific Driver Major Version
 ''',
         'shortDescription': '''
 Returns the major version number of this instrument driver.
@@ -687,9 +687,6 @@ Returns the major version number of this instrument driver.
         'longDescription': '''
 Returns the minor version number of this instrument driver.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Version Info:Specific Driver Minor Version**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -705,6 +702,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Inherent IVI Attributes:Version Info:Specific Driver Minor Version
+''',
         'shortDescription': '''
 Returns the minor version number of this instrument driver.
 
@@ -713,9 +713,6 @@ Returns the minor version number of this instrument driver.
     '1050510': {
         'longDescription': '''
 A string containing the instrument firmware revision number.
-
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision**  
 
 The following table lists the characteristics of this property.
 
@@ -731,6 +728,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision
 ''',
         'shortDescription': '''
 A string containing the instrument firmware revision number.
@@ -741,9 +741,6 @@ A string containing the instrument firmware revision number.
         'longDescription': '''
 A string containing the manufacturer of the instrument.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -758,6 +755,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer
 ''',
         'shortDescription': '''
 A string containing the manufacturer of the instrument.
@@ -768,9 +768,6 @@ A string containing the manufacturer of the instrument.
         'longDescription': '''
 A string containing the instrument model.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Model**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -785,6 +782,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Instrument Identification:Instrument Model
 ''',
         'shortDescription': '''
 A string containing the instrument model.
@@ -795,9 +795,6 @@ A string containing the instrument model.
         'longDescription': '''
 A string containing the vendor of the specific driver.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -812,6 +809,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor
 ''',
         'shortDescription': '''
 A string containing the vendor of the specific driver.
@@ -822,9 +822,6 @@ A string containing the vendor of the specific driver.
         'longDescription': '''
 A string containing a description of the specific driver.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -839,6 +836,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description
 ''',
         'shortDescription': '''
 A string containing a description of the specific driver.
@@ -850,9 +850,6 @@ A string containing a description of the specific driver.
 The major version number of the class specification for the specific
 driver.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -867,6 +864,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version
 ''',
         'shortDescription': '''
 The major version number of the class specification for the specific
@@ -879,9 +879,6 @@ driver.
 The minor version number of the class specification for the specific
 driver.
 
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -897,6 +894,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version
+''',
         'shortDescription': '''
 The minor version number of the class specification for the specific
 driver.
@@ -907,9 +907,6 @@ driver.
         'longDescription': '''
 A string that contains additional version information about this
 instrument driver.
-
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Version Info:Specific Driver Revision**  
 
 The following table lists the characteristics of this property.
 
@@ -925,6 +922,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Inherent IVI Attributes:Version Info:Specific Driver Revision
 ''',
         'shortDescription': '''
 A string that contains additional version information about this
@@ -937,9 +937,6 @@ instrument driver.
 A string that contains additional version information about the IVI
 engine.
 
-.. note::
-   This corresponds to the LabVIEW property **Obsolete:Inherent IVI Attributes:Version Info:Engine Revision**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -954,6 +951,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No          |
 +------------------+-------------+
 
+''',
+        'lv_property': '''
+Obsolete:Inherent IVI Attributes:Version Info:Engine Revision
 ''',
         'shortDescription': '''
 A string that contains additional version information about the IVI
@@ -965,9 +965,6 @@ engine.
         'longDescription': '''
 A string containing the type of instrument used in the current session.
 
-.. note::
-   This corresponds to the LabVIEW property **Obsolete:Misc:IDQuery response**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------+
@@ -983,6 +980,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
+        'lv_property': '''
+Obsolete:Misc:IDQuery response
+''',
         'shortDescription': '''
 A string containing the type of instrument used in the current session.
 
@@ -991,9 +991,6 @@ A string containing the type of instrument used in the current session.
     '1150002': {
         'longDescription': '''
 Specifies the polarity of the generated measurement complete signal.
-
-.. note::
-   This corresponds to the LabVIEW property **Trigger:Measurement Destination Slope**  
 
 +--------------------+------------------------------------------------------------------+
 | Name               | Description                                                      |
@@ -1018,6 +1015,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Trigger:Measurement Destination Slope
+''',
         'shortDescription': '''
 Specifies the polarity of the generated measurement complete signal.
 
@@ -1026,9 +1026,6 @@ Specifies the polarity of the generated measurement complete signal.
     '1150003': {
         'longDescription': '''
 For the NI 4050 only, specifies the shunt resistance value.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Shunt Value**  
 
 .. note::
    The NI 4050 requires an external shunt resistor for current measurements. This property should be set to the value of the shunt resistor.  
@@ -1048,6 +1045,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Shunt Value
+''',
         'shortDescription': '''
 For the NI 4050 only, specifies the shunt resistance value.
 
@@ -1057,9 +1057,6 @@ For the NI 4050 only, specifies the shunt resistance value.
         'longDescription': '''
 Specifies the edge of the signal from the specified sample trigger
 source on which the DMM is triggered.
-
-.. note::
-   This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Trig Slope**  
 
 +--------------------+------------------------------------------------------------------+
 | Name               | Description                                                      |
@@ -1084,6 +1081,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Multi Point Acquisition:Sample Trig Slope
+''',
         'shortDescription': '''
 Specifies the edge of the signal from the specified sample trigger
 source on which the DMM is triggered.
@@ -1102,9 +1102,6 @@ IVIDMM Mode. When you call niDMM Configure Waveform Acquisition , NI-DMM
 sets this property to Waveform Mode. If you are programming properties
 directly, you must set this property before setting other configuration
 properties.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Advanced:Operation Mode**  
 
 +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Name                    | Description                                                                                                                                                                                                                                        |
@@ -1129,6 +1126,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Advanced:Operation Mode
+''',
         'shortDescription': '''
 Specifies how the DMM acquires data.
 
@@ -1151,9 +1151,6 @@ divisor, and the rate falls between 10 and 1,800,000 samples per second.
 The waveform rate is coerced upwards to the next valid rate. The default
 value is 1,800,000 samples per second. Not supported by NI 4065.
 
-.. note::
-   This corresponds to the LabVIEW property **Waveform Acquisition:Waveform Rate**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -1169,6 +1166,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Waveform Acquisition:Waveform Rate
+''',
         'shortDescription': '''
 Specifies the rate of the waveform acquisition in samples per second
 (S/s). The valid rate is calculated by dividing 1,800,000 by an integer
@@ -1182,9 +1182,6 @@ value is 1,800,000 samples per second. Not supported by NI 4065.
         'longDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the number of
 points to acquire in a waveform acquisition.
-
-.. note::
-   This corresponds to the LabVIEW property **Waveform Acquisition:Waveform Points**  
 
 The following table lists the characteristics of this property.
 
@@ -1201,6 +1198,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Waveform Acquisition:Waveform Points
+''',
         'shortDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the number of
 points to acquire in a waveform acquisition.
@@ -1211,9 +1211,6 @@ points to acquire in a waveform acquisition.
         'longDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
 calibration mode.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:ADC Calibration**  
 
 +-----------------+------------------------------------------------------------------------------------------------+
 | Name            | Description                                                                                    |
@@ -1240,6 +1237,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:ADC Calibration
+''',
         'shortDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
 calibration mode.
@@ -1250,9 +1250,6 @@ calibration mode.
         'longDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
 offset compensated ohms.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Offset Compensated Ohms**  
 
 +---------------+-------------------------------------+
 | Name          | Description                         |
@@ -1277,6 +1274,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Offset Compensated Ohms
+''',
         'shortDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
 offset compensated ohms.
@@ -1288,9 +1288,6 @@ offset compensated ohms.
 Specifies the current source provided during diode measurements.
 
 The NI 4050 and NI 4060 are not supported.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Current Source**  
 
 +-----------------------------+--------------------------------------------------------------------+
 | Name                        | Description                                                        |
@@ -1319,6 +1316,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Current Source
+''',
         'shortDescription': '''
 Specifies the current source provided during diode measurements.
 
@@ -1329,9 +1329,6 @@ The NI 4050 and NI 4060 are not supported.
     '1150026': {
         'longDescription': '''
 Specifies the DC noise rejection mode.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:DC Noise Rejection**  
 
 .. note::
    The NI 4050 and NI 4060 are not supported.  
@@ -1363,6 +1360,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:DC Noise Rejection
+''',
         'shortDescription': '''
 Specifies the DC noise rejection mode.
 
@@ -1372,9 +1372,6 @@ Specifies the DC noise rejection mode.
         'longDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
 coupling during a waveform acquisition.
-
-.. note::
-   This corresponds to the LabVIEW property **Waveform Acquisition:Waveform Coupling**  
 
 +--------------+--------------------------+
 | Name         | Description              |
@@ -1399,6 +1396,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Waveform Acquisition:Waveform Coupling
+''',
         'shortDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
 coupling during a waveform acquisition.
@@ -1410,9 +1410,6 @@ coupling during a waveform acquisition.
 Specifies the settling time in seconds. Use this property to override
 the default settling time. To return to the default, set this property
 to Auto (-1).
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Advanced:Settle Time**  
 
 .. note::
    The NI 4050 and NI 4060 are not supported.  
@@ -1432,6 +1429,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Advanced:Settle Time
+''',
         'shortDescription': '''
 Specifies the settling time in seconds. Use this property to override
 the default settling time. To return to the default, set this property
@@ -1442,9 +1442,6 @@ to Auto (-1).
     '1150029': {
         'longDescription': '''
 Specifies the input resistance of the instrument.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Input Resistance**  
 
 .. note::
    The NI 4050 and NI 4060 are not supported.  
@@ -1474,6 +1471,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Input Resistance
+''',
         'shortDescription': '''
 Specifies the input resistance of the instrument.
 
@@ -1482,9 +1482,6 @@ Specifies the input resistance of the instrument.
     '1150031': {
         'longDescription': '''
 For the NI 4060 only, specifies a delay interval after a sample trigger.
-
-.. note::
-   This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Delay Mode**  
 
 +-----+---------------------+-----------------------------------------------------------------------------------------+
 | 0   | IVI compliant       | The Sample Interval property is only used when the Sample Trigger is set to Interval.   |
@@ -1507,6 +1504,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Multi Point Acquisition:Sample Delay Mode
+''',
         'shortDescription': '''
 For the NI 4060 only, specifies a delay interval after a sample trigger.
 
@@ -1522,9 +1522,6 @@ otherwise, the default is 1.
 
 The NI 4050 and NI 4060 are not supported.
 
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Advanced:Number Of Averages**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -1539,6 +1536,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Configuration:Advanced:Number Of Averages
 ''',
         'shortDescription': '''
 Specifies the number of averages to perform in a measurement. For the NI
@@ -1557,9 +1557,6 @@ Specifies the number of measurements transferred at a time from the
 instrument to an internal buffer. When set to Auto (-1), NI-DMM chooses
 the transfer size.
 
-.. note::
-   This corresponds to the LabVIEW property **Multi Point Acquisition:Advanced:Latency**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -1574,6 +1571,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Multi Point Acquisition:Advanced:Latency
 ''',
         'shortDescription': '''
 Specifies the number of measurements transferred at a time from the
@@ -1588,9 +1588,6 @@ Specifies the size in samples of the internal data buffer. Maximum size
 is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
 chooses the buffer size.
 
-.. note::
-   This corresponds to the LabVIEW property **Multi Point Acquisition:Advanced:Buffer Size**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -1606,6 +1603,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Multi Point Acquisition:Advanced:Buffer Size
+''',
         'shortDescription': '''
 Specifies the size in samples of the internal data buffer. Maximum size
 is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
@@ -1619,9 +1619,6 @@ For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
 the frequency voltage range. If auto ranging is enabled, shows the
 actual value of the active frequency voltage range. If not Auto Ranging,
 the value is the same as that of the Frequency Voltage Range property.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Frequency Voltage Auto Range Value**  
 
 The following table lists the characteristics of this property.
 
@@ -1638,6 +1635,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Frequency Voltage Auto Range Value
+''',
         'shortDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
 the frequency voltage range. If auto ranging is enabled, shows the
@@ -1651,9 +1651,6 @@ the value is the same as that of the Frequency Voltage Range property.
 For the NI 4081 and NI 4072 only, specifies the type of cable
 compensation that is applied to the current capacitance or inductance
 measurement for the current range.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**  
 
 .. note::
    Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.  
@@ -1685,6 +1682,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type
+''',
         'shortDescription': '''
 For the NI 4081 and NI 4072 only, specifies the type of cable
 compensation that is applied to the current capacitance or inductance
@@ -1698,9 +1698,6 @@ For the NI 4082 and NI 4072 only, represents the reactive part
 (reactance) of the short cable compensation. The valid range is any real
 number >0. The default value (-1) indicates that compensation has not
 taken place.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**  
 
 .. note::
    Changing the VI or the range through this property or through niDMM Config Measurement resets this property to the default value.  
@@ -1719,6 +1716,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance
 ''',
         'shortDescription': '''
 For the NI 4082 and NI 4072 only, represents the reactive part
@@ -1736,9 +1736,6 @@ real number >0. The default value (-1) indicates that compensation has
 not taken place.
 
 .. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**  
-
-.. note::
    Changing the VI or the range through this property or through niDMM Config Measurement resets this property to the default value.  
 
 The following table lists the characteristics of this property.
@@ -1756,6 +1753,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance
+''',
         'shortDescription': '''
 For the NI 4082 and NI 4072 only, represents the active part
 (resistance) of the short cable compensation. The valid range is any
@@ -1770,9 +1770,6 @@ For the NI 4082 and NI 4072 only, specifies the reactive part
 (susceptance) of the open cable compensation. The valid range is any
 real number >0. The default value (-1.0) indicates that compensation has
 not taken place.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**  
 
 .. note::
    Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.  
@@ -1791,6 +1788,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance
 ''',
         'shortDescription': '''
 For the NI 4082 and NI 4072 only, specifies the reactive part
@@ -1808,9 +1808,6 @@ real number >0. The default value (-1.0) indicates that compensation has
 not taken place.
 
 .. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**  
-
-.. note::
    Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.  
 
 The following table lists the characteristics of this property.
@@ -1828,6 +1825,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance
+''',
         'shortDescription': '''
 For the NI 4082 and NI 4072 only, specifies the active part
 (conductance) of the open cable compensation. The valid range is any
@@ -1841,9 +1841,6 @@ not taken place.
 For the NI 4082 and NI 4072 only, specifies the type of algorithm that
 the measurement processing uses for capacitance and inductance
 measurements.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model**  
 
 +--------------------+--------------------------------------------------------------------------------------+
 | Name               | Description                                                                          |
@@ -1870,6 +1867,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model
+''',
         'shortDescription': '''
 For the NI 4082 and NI 4072 only, specifies the type of algorithm that
 the measurement processing uses for capacitance and inductance
@@ -1881,9 +1881,6 @@ measurements.
         'longDescription': '''
 For the NI 4082 and NI 4072 only, controls the available DC bias for
 capacitance measurements.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias**  
 
 +-----------------------+------------------------------------------------------+
 | Name                  | Description                                          |
@@ -1908,6 +1905,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias
+''',
         'shortDescription': '''
 For the NI 4082 and NI 4072 only, controls the available DC bias for
 capacitance measurements.
@@ -1919,9 +1919,6 @@ capacitance measurements.
 A string containing the serial number of the instrument. This property
 corresponds to the serial number label that is attached to most
 products.
-
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**  
 
 The following table lists the characteristics of this property.
 
@@ -1938,6 +1935,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 
 ''',
+        'lv_property': '''
+Inherent IVI Attributes:Instrument Identification:Instrument Serial Number
+''',
         'shortDescription': '''
 A string containing the serial number of the instrument. This property
 corresponds to the serial number label that is attached to most
@@ -1949,9 +1949,6 @@ products.
         'longDescription': '''
 For the NI 4082 and NI 4072 only, specifies the number of LC
 measurements that are averaged to produce one reading.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**  
 
 The following table lists the characteristics of this property.
 
@@ -1968,6 +1965,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average
+''',
         'shortDescription': '''
 For the NI 4082 and NI 4072 only, specifies the number of LC
 measurements that are averaged to produce one reading.
@@ -1977,9 +1977,6 @@ measurements that are averaged to produce one reading.
     '1150061': {
         'longDescription': '''
 The PCI product ID.
-
-.. note::
-   This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**  
 
 The following table lists the characteristics of this property.
 
@@ -1996,6 +1993,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Inherent IVI Attributes:Instrument Identification:Instrument Product ID
+''',
         'shortDescription': '''
 The PCI product ID.
 
@@ -2004,9 +2004,6 @@ The PCI product ID.
     '1150120': {
         'longDescription': '''
 Specifies the RTD type.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**  
 
 +-------------------+----------------------------------------------------------------------------------------------+
 | Name              | Description                                                                                  |
@@ -2041,6 +2038,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type
+''',
         'shortDescription': '''
 Specifies the RTD type.
 
@@ -2050,9 +2050,6 @@ Specifies the RTD type.
         'longDescription': '''
 Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**  
 
 The following table lists the characteristics of this property.
 
@@ -2068,6 +2065,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A
 ''',
         'shortDescription': '''
 Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
@@ -2080,9 +2080,6 @@ Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
 Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
 
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -2097,6 +2094,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B
 ''',
         'shortDescription': '''
 Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
@@ -2109,9 +2109,6 @@ Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
 Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
 
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -2127,6 +2124,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C
+''',
         'shortDescription': '''
 Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
@@ -2136,9 +2136,6 @@ Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
     '1150124': {
         'longDescription': '''
 Specifies the thermistor type.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type**  
 
 +------------------+------------------------------------------------------------------------------------------------+
 | Name             | Description                                                                                    |
@@ -2167,6 +2164,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type
+''',
         'shortDescription': '''
 Specifies the thermistor type.
 
@@ -2176,9 +2176,6 @@ Specifies the thermistor type.
         'longDescription': '''
 Specifies the Steinhart-Hart A coefficient for thermistor scaling when
 the **Thermistor Type property** is set to Custom.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor A**  
 
 The following table lists the characteristics of this property.
 
@@ -2194,6 +2191,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Thermistor:Thermistor A
 ''',
         'shortDescription': '''
 Specifies the Steinhart-Hart A coefficient for thermistor scaling when
@@ -2206,9 +2206,6 @@ the **Thermistor Type property** is set to Custom.
 Specifies the Steinhart-Hart B coefficient for thermistor scaling when
 the **Thermistor Type property** is set to Custom.
 
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor B**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -2223,6 +2220,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Thermistor:Thermistor B
 ''',
         'shortDescription': '''
 Specifies the Steinhart-Hart B coefficient for thermistor scaling when
@@ -2235,9 +2235,6 @@ the **Thermistor Type property** is set to Custom.
 Specifies the Steinhart-Hart C coefficient for thermistor scaling when
 the **Thermistor Type property** is set to Custom.
 
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor C**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -2252,6 +2249,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Thermistor:Thermistor C
 ''',
         'shortDescription': '''
 Specifies the Steinhart-Hart C coefficient for thermistor scaling when
@@ -2270,9 +2270,6 @@ properties. If the Operation Mode property is set to Waveform Mode, the
 only valid function types are Waveform Voltage and Waveform Current. Set
 the Operation Mode property to IVIDMM Mode to set all other function
 values.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Function**  
 
 +----------------------------------+---------------------------------------------+
 | Name                             | Description                                 |
@@ -2323,6 +2320,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Function
+''',
         'shortDescription': '''
 Specifies the measurement function. If you are setting this property
 directly, you must also set the Operation Mode property, which controls
@@ -2343,9 +2343,6 @@ absolute value of the maximum expected measurement. The value is in
 units appropriate for the current value of the Function property. For
 example, if the Function property is set to DC Volts, the units are
 volts.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Range**  
 
 .. note::
    The NI 4050, NI 4060, and NI 4065 only support Auto Range when the trigger and sample trigger are set to Immediate.  
@@ -2373,6 +2370,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Range
+''',
         'shortDescription': '''
 Specifies the measurement range. Use positive values to represent the
 absolute value of the maximum expected measurement. The value is in
@@ -2387,9 +2387,6 @@ volts.
 Specifies the measurement resolution in digits. Setting this property to
 higher values increases the measurement accuracy. Setting this property
 to lower values increases the measurement speed.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Digits Resolution**  
 
 .. note::
    NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.  
@@ -2423,6 +2420,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Digits Resolution
+''',
         'shortDescription': '''
 Specifies the measurement resolution in digits. Setting this property to
 higher values increases the measurement accuracy. Setting this property
@@ -2439,9 +2439,6 @@ Delay property. The DMM then takes a measurement.
 
 To determine which values are supported by each device, refer to the
 LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
-
-.. note::
-   This corresponds to the LabVIEW property **Trigger:Trigger Source**  
 
 +--------------------------+-------------------------------------------------------------------------------------------------------------------+
 | Name                     | Description                                                                                                       |
@@ -2490,6 +2487,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Trigger:Trigger Source
+''',
         'shortDescription': '''
 Specifies the trigger source. When niDMM Initiate is called, the DMM
 waits for the trigger specified with this property. After it receives
@@ -2532,9 +2532,6 @@ Valid Range: Auto Delay (-1.0), 0.0-12.0 seconds (NI 4060 only),
 
 Default Value: Auto Delay
 
-.. note::
-   This corresponds to the LabVIEW property **Trigger:Trigger Delay**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -2549,6 +2546,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Trigger:Trigger Delay
 ''',
         'shortDescription': '''
 Specifies the time (in seconds) that the DMM waits after it has received
@@ -2590,9 +2590,6 @@ Function property to AC measurements. The valid range is 1 Hz-300 kHz
 for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
 
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Min Frequency**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -2607,6 +2604,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Configuration:Measurement Options:Min Frequency
 ''',
         'shortDescription': '''
 Specifies the minimum frequency component of the input signal for AC
@@ -2624,9 +2624,6 @@ measurements. This property is used only for error checking and verifies
 that the value of this parameter is less than the maximum frequency of
 the device. This property affects the DMM only when you set the Function
 property to AC measurements.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Max Frequency**  
 
 The valid ranges are shown in the following table.
 
@@ -2653,6 +2650,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Max Frequency
+''',
         'shortDescription': '''
 Specifies the maximum frequency component of the input signal for AC
 measurements. This property is used only for error checking and verifies
@@ -2667,9 +2667,6 @@ property to AC measurements.
 Specifies the measurement resolution in absolute units. Setting this
 property to higher values increases the measurement accuracy. Setting
 this property to lower values increases the measurement speed.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Absolute Resolution**  
 
 .. note::
    NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.  
@@ -2689,6 +2686,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Absolute Resolution
+''',
         'shortDescription': '''
 Specifies the measurement resolution in absolute units. Setting this
 property to higher values increases the measurement accuracy. Setting
@@ -2700,9 +2700,6 @@ this property to lower values increases the measurement speed.
         'longDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
 amplitude of the input signal for frequency measurements.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Frequency Voltage Range**  
 
 +------------------+--------+------------------------------------------------------------------------------------------------------------------------------------+
 | Auto Range On    | -1.0   | Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement.   |
@@ -2725,6 +2722,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Frequency Voltage Range
+''',
         'shortDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
 amplitude of the input signal for frequency measurements.
@@ -2734,9 +2734,6 @@ amplitude of the input signal for frequency measurements.
     '1250201': {
         'longDescription': '''
 Specifies the transducer type.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Transducer Type**  
 
 +------------------------+--------------------------------------+
 | Name                   | Description                          |
@@ -2765,6 +2762,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Transducer Type
+''',
         'shortDescription': '''
 Specifies the transducer type.
 
@@ -2773,9 +2773,6 @@ Specifies the transducer type.
     '1250231': {
         'longDescription': '''
 Specifies the thermocouple type.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**  
 
 +--------------+-----------------------+
 | Name         | Description           |
@@ -2812,6 +2809,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type
+''',
         'shortDescription': '''
 Specifies the thermocouple type.
 
@@ -2820,9 +2820,6 @@ Specifies the thermocouple type.
     '1250232': {
         'longDescription': '''
 Specifies the thermocouple reference junction type.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type**  
 
 +-----------------+------------------------------------------------------------------------------+
 | Name            | Description                                                                  |
@@ -2845,6 +2842,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type
+''',
         'shortDescription': '''
 Specifies the thermocouple reference junction type.
 
@@ -2854,9 +2854,6 @@ Specifies the thermocouple reference junction type.
         'longDescription': '''
 Specifies the value of the fixed reference junction temperature for a
 thermocouple in degrees Celsius.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction**  
 
 The following table lists the characteristics of this property.
 
@@ -2872,6 +2869,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction
 ''',
         'shortDescription': '''
 Specifies the value of the fixed reference junction temperature for a
@@ -2883,9 +2883,6 @@ thermocouple in degrees Celsius.
         'longDescription': '''
 Specifies the RTD resistance at 0 degrees Celsius.
 
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -2900,6 +2897,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance
 ''',
         'shortDescription': '''
 Specifies the RTD resistance at 0 degrees Celsius.
@@ -2916,9 +2916,6 @@ conditional statement "Measurements equal to Sample Count" to always
 evaluate to False, and causes the DMM to continue taking measurements in
 the inner loop.
 
-.. note::
-   This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Count**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -2933,6 +2930,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Multi Point Acquisition:Sample Count
 ''',
         'shortDescription': '''
 Specifies the number of measurements the DMM takes each time it receives
@@ -2951,9 +2951,6 @@ Specifies the sample trigger source.
 
 To determine which values are supported by each device, refer to the
 LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
-
-.. note::
-   This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Trigger**  
 
 +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
 | Name                    | Description                                                                                                                            |
@@ -3004,6 +3001,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Multi Point Acquisition:Sample Trigger
+''',
         'shortDescription': '''
 Specifies the sample trigger source.
 
@@ -3019,9 +3019,6 @@ measurement cycles. This property only applies when the Sample Trigger
 property is set to INTERVAL. The default value (-1) ensures that the DMM
 settles for a recommended time, which is the same as using an immediate
 trigger.
-
-.. note::
-   This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Interval**  
 
 The NI 4065 and NI 4070/4071/4072 use the value specified in this
 property as additional delay. On these devices, the onboard timing
@@ -3052,6 +3049,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Multi Point Acquisition:Sample Interval
+''',
         'shortDescription': '''
 Specifies the amount of time in seconds the DMM waits between
 measurement cycles. This property only applies when the Sample Trigger
@@ -3072,9 +3072,6 @@ The NI 4050/4060 only support this property being set to 1.
 Refer to Multiple Point Acquisitions in the *NI Digital Multimeters
 Help* for more information.
 
-.. note::
-   This corresponds to the LabVIEW property **Multi Point Acquisition:Trigger Count**  
-
 The following table lists the characteristics of this property.
 
 +------------------+-------------------------+
@@ -3089,6 +3086,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Multi Point Acquisition:Trigger Count
 ''',
         'shortDescription': '''
 Specifies the number of triggers the DMM receives before returning to
@@ -3108,9 +3108,6 @@ Specifies the destination of the measurement complete (MC) signal.
 
 To determine which values are supported by each device, refer to the
 LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
-
-.. note::
-   This corresponds to the LabVIEW property **Trigger:Measurement Complete Dest**  
 
 .. note::
    The NI 4050 is not supported.  
@@ -3156,6 +3153,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Trigger:Measurement Complete Dest
+''',
         'shortDescription': '''
 Specifies the destination of the measurement complete (MC) signal.
 
@@ -3171,9 +3171,6 @@ Aperture time is specified in units set by the Aperture Time Units
 property. To override the default aperture, set this property to the
 desired aperture time after calling niDMM Config Measurement . To return
 to the default, set this property to Aperture Time Auto (-1).
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Advanced:Aperture Time**  
 
 Any number of powerline cycles (PLCs) within the minimum and maximum
 ranges is allowed on the NI 4080/4081/4082 and NI 4070/4071/4072.
@@ -3206,6 +3203,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Advanced:Aperture Time
+''',
         'shortDescription': '''
 Specifies the measurement aperture time for the current configuration.
 Aperture time is specified in units set by the Aperture Time Units
@@ -3218,9 +3218,6 @@ to the default, set this property to Aperture Time Auto (-1).
     '1250322': {
         'longDescription': '''
 Specifies the units of aperture time for the current configuration.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Advanced:Aperture Time Units**  
 
 .. note::
    The NI 4060 does not support an aperture time set in seconds.  
@@ -3248,6 +3245,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Advanced:Aperture Time Units
+''',
         'shortDescription': '''
 Specifies the units of aperture time for the current configuration.
 
@@ -3258,9 +3258,6 @@ Specifies the units of aperture time for the current configuration.
 Specifies the value of the range. If auto ranging is enabled, shows the
 actual value of the active range. The value of this property is set
 during a read operation.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Auto Range Value**  
 
 The following table lists the characteristics of this property.
 
@@ -3277,6 +3274,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Auto Range Value
+''',
         'shortDescription': '''
 Specifies the value of the range. If auto ranging is enabled, shows the
 actual value of the active range. The value of this property is set
@@ -3288,9 +3288,6 @@ during a read operation.
         'longDescription': '''
 Specifies the AutoZero mode. This property is not supported for the NI
 4050.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Auto Zero**  
 
 +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Name            | Description                                                                                                                                                                                                                                                                                                                         |
@@ -3319,6 +3316,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Auto Zero
+''',
         'shortDescription': '''
 Specifies the AutoZero mode. This property is not supported for the NI
 4050.
@@ -3332,9 +3332,6 @@ value to select an aperture time to reject powerline noise by selecting
 the appropriate internal sample clock and filter. The NI 4065, NI
 4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
 for setting the Aperture Time property in powerline cycles.
-
-.. note::
-   This corresponds to the LabVIEW property **Configuration:Measurement Options:Powerline Frequency**  
 
 After configuring powerline frequency, set the Aperture Time Units
 property to PLCs. When setting the Aperture Time property, select the
@@ -3370,6 +3367,9 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 
 ''',
+        'lv_property': '''
+Configuration:Measurement Options:Powerline Frequency
+''',
         'shortDescription': '''
 Specifies the powerline frequency. The NI 4060 and NI 4050 use this
 value to select an aperture time to reject powerline noise by selecting
@@ -3383,9 +3383,6 @@ for setting the Aperture Time property in powerline cycles.
         'longDescription': '''
 Specifies the edge of the signal from the specified trigger source on
 which the DMM is triggered.
-
-.. note::
-   This corresponds to the LabVIEW property **Trigger:Trigger Slope**  
 
 +--------------------+------------------------------------------------------------------+
 | Name               | Description                                                      |
@@ -3409,6 +3406,9 @@ The following table lists the characteristics of this property.
 | Resettable       | No                      |
 +------------------+-------------------------+
 
+''',
+        'lv_property': '''
+Trigger:Trigger Slope
 ''',
         'shortDescription': '''
 Specifies the edge of the signal from the specified trigger source on
