@@ -20,7 +20,6 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 | Resettable       | No           |
 +------------------+--------------+
-
 ''',
         'lv_property': '''
 Active Channel
@@ -30,7 +29,6 @@ Specifies the channel name used to access all subsequent channel-based
 properties in this property node. Set the channel before setting
 channel-based properties. Pass a name that the instrument driver defines
 or a virtual channel name configured in MAX.
-
 ''',
     },
     '1050002': {
@@ -56,7 +54,6 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 | Resettable       | No           |
 +------------------+--------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:User Options:Range Check
@@ -69,7 +66,6 @@ After the user program is validated, you can set this property to FALSE
 (0) to disable range checking and maximize performance. The default
 value is TRUE (1). Use niDMM Initialize With Options to override the
 default setting.
-
 ''',
     },
     '1050003': {
@@ -96,7 +92,6 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 | Resettable       | No           |
 +------------------+--------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:User Options:Query Instrument Status
@@ -110,7 +105,6 @@ instrument driver can choose to ignore status checking for particular
 properties regardless of the setting of this property. The default value
 is TRUE (1). Use niDMM Initialize With Options to override the default
 setting.
-
 ''',
     },
     '1050004': {
@@ -136,7 +130,6 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 | Resettable       | No           |
 +------------------+--------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:User Options:Cache
@@ -149,7 +142,6 @@ it significantly increases execution speed. The instrument driver can
 choose to always cache or to never cache particular properties
 regardless of the setting of this property. The default value is TRUE
 (1). Use niDMM Initialize With Options to override the default setting.
-
 ''',
     },
     '1050005': {
@@ -178,7 +170,6 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 | Resettable       | No           |
 +------------------+--------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:User Options:Simulate
@@ -191,7 +182,6 @@ instrument I/O. For output parameters that represent instrument data,
 the instrument driver VIs return calculated values. The default value is
 FALSE (0). Use niDMM Initialize With Options to override the default
 setting.
-
 ''',
     },
     '1050006': {
@@ -215,7 +205,6 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 | Resettable       | No           |
 +------------------+--------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:User Options:Record Value Coercions
@@ -226,7 +215,6 @@ makes for ViInt32 and ViReal64 properties. The default value is FALSE
 (0). Use niDMM Initialize With Options to override the default setting.
 Use niDMM Get Next Coercion Record to extract and delete the oldest
 coercion record from the list.
-
 ''',
     },
     '1050007': {
@@ -254,7 +242,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:User Options:Driver Setup
@@ -269,7 +256,6 @@ simulation. The end-user can specify driver-specific options through the
 Driver Setup keyword in the Option String parameter in niDMM Initialize
 With Options . If the user does not specify a Driver Setup string, this
 property returns an empty string.
-
 ''',
     },
     '1050021': {
@@ -306,7 +292,6 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 | Resettable       | No           |
 +------------------+--------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:User Options:Interchange Check
@@ -324,7 +309,6 @@ least one property within that group. Interchangeability warnings can
 occur when a property affects the behavior of the instrument and you
 have not set that property, or the property has been invalidated since
 you set it.
-
 ''',
     },
     '1050101': {
@@ -349,7 +333,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Obsolete:Inherent IVI Attributes:Error Info:Primary Error
@@ -361,7 +344,6 @@ conventions. A negative value describes an error condition. A positive
 value describes a warning condition. A zero indicates that no error or
 warning occurred. The error and warning values can be status codes
 defined by IVI, VISA, class drivers, or specific drivers.
-
 ''',
     },
     '1050102': {
@@ -384,7 +366,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Obsolete:Inherent IVI Attributes:Error Info:Secondary Error
@@ -394,7 +375,6 @@ An optional code that provides additional information concerning the
 primary error condition. The error and warning values can be status
 codes defined by IVI, VISA, class drivers, or specific drivers. Zero
 indicates no additional information.
-
 ''',
     },
     '1050103': {
@@ -415,7 +395,6 @@ The following table lists the characteristics of this property.
 +------------------+--------------+
 | Resettable       | No           |
 +------------------+--------------+
-
 ''',
         'lv_property': '''
 Obsolete:Inherent IVI Attributes:Error Info:Error Elaboration
@@ -423,7 +402,6 @@ Obsolete:Inherent IVI Attributes:Error Info:Error Elaboration
         'shortDescription': '''
 An optional string that contains additional information concerning the
 primary error condition.
-
 ''',
     },
     '1050203': {
@@ -446,7 +424,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Instrument Capabilities:Channel Count
@@ -456,7 +433,6 @@ Indicates the number of channels that the specific instrument driver
 supports. For each property for which the IVI\_VAL\_MULTI\_CHANNEL flag
 property is set, the IVI engine maintains a separate cache value for
 each channel.
-
 ''',
     },
     '1050302': {
@@ -478,7 +454,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix
@@ -487,7 +462,6 @@ Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix
 The prefix for the specific instrument driver. The name of each
 user-callable VI in this driver starts with this prefix. The prefix can
 be up to a maximum of eight characters.
-
 ''',
     },
     '1050304': {
@@ -507,14 +481,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor
 ''',
         'shortDescription': '''
 A string containing the resource descriptor of the instrument.
-
 ''',
     },
     '1050305': {
@@ -534,14 +506,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Advanced Session Information:Logical Name
 ''',
         'shortDescription': '''
 A string containing the logical name of the instrument.
-
 ''',
     },
     '1050327': {
@@ -562,7 +532,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models
@@ -570,7 +539,6 @@ Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models
         'shortDescription': '''
 A string containing the instrument models supported by the specific
 driver.
-
 ''',
     },
     '1050401': {
@@ -591,7 +559,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities
@@ -599,7 +566,6 @@ Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities
         'shortDescription': '''
 A string containing the capabilities and extension groups supported by
 the specific driver.
-
 ''',
     },
     '1050501': {
@@ -619,14 +585,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Obsolete:Inherent IVI Attributes:Version Info:Engine Major Version
 ''',
         'shortDescription': '''
 The major version number of the IVI engine.
-
 ''',
     },
     '1050502': {
@@ -646,14 +610,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Obsolete:Inherent IVI Attributes:Version Info:Engine Minor Version
 ''',
         'shortDescription': '''
 The minor version number of the IVI engine.
-
 ''',
     },
     '1050503': {
@@ -673,14 +635,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Version Info:Specific Driver Major Version
 ''',
         'shortDescription': '''
 Returns the major version number of this instrument driver.
-
 ''',
     },
     '1050504': {
@@ -700,14 +660,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Version Info:Specific Driver Minor Version
 ''',
         'shortDescription': '''
 Returns the minor version number of this instrument driver.
-
 ''',
     },
     '1050510': {
@@ -727,14 +685,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision
 ''',
         'shortDescription': '''
 A string containing the instrument firmware revision number.
-
 ''',
     },
     '1050511': {
@@ -754,14 +710,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer
 ''',
         'shortDescription': '''
 A string containing the manufacturer of the instrument.
-
 ''',
     },
     '1050512': {
@@ -781,14 +735,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Instrument Identification:Instrument Model
 ''',
         'shortDescription': '''
 A string containing the instrument model.
-
 ''',
     },
     '1050513': {
@@ -808,14 +760,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor
 ''',
         'shortDescription': '''
 A string containing the vendor of the specific driver.
-
 ''',
     },
     '1050514': {
@@ -835,14 +785,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description
 ''',
         'shortDescription': '''
 A string containing a description of the specific driver.
-
 ''',
     },
     '1050515': {
@@ -863,7 +811,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version
@@ -871,7 +818,6 @@ Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spe
         'shortDescription': '''
 The major version number of the class specification for the specific
 driver.
-
 ''',
     },
     '1050516': {
@@ -892,7 +838,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version
@@ -900,7 +845,6 @@ Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spe
         'shortDescription': '''
 The minor version number of the class specification for the specific
 driver.
-
 ''',
     },
     '1050551': {
@@ -921,7 +865,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Version Info:Specific Driver Revision
@@ -929,7 +872,6 @@ Inherent IVI Attributes:Version Info:Specific Driver Revision
         'shortDescription': '''
 A string that contains additional version information about this
 instrument driver.
-
 ''',
     },
     '1050553': {
@@ -950,7 +892,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Obsolete:Inherent IVI Attributes:Version Info:Engine Revision
@@ -958,7 +899,6 @@ Obsolete:Inherent IVI Attributes:Version Info:Engine Revision
         'shortDescription': '''
 A string that contains additional version information about the IVI
 engine.
-
 ''',
     },
     '1150001': {
@@ -978,14 +918,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Obsolete:Misc:IDQuery response
 ''',
         'shortDescription': '''
 A string containing the type of instrument used in the current session.
-
 ''',
     },
     '1150002': {
@@ -1013,14 +951,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Trigger:Measurement Destination Slope
 ''',
         'shortDescription': '''
 Specifies the polarity of the generated measurement complete signal.
-
 ''',
     },
     '1150003': {
@@ -1043,14 +979,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Shunt Value
 ''',
         'shortDescription': '''
 For the NI 4050 only, specifies the shunt resistance value.
-
 ''',
     },
     '1150010': {
@@ -1079,7 +1013,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Multi Point Acquisition:Sample Trig Slope
@@ -1087,7 +1020,6 @@ Multi Point Acquisition:Sample Trig Slope
         'shortDescription': '''
 Specifies the edge of the signal from the specified sample trigger
 source on which the DMM is triggered.
-
 ''',
     },
     '1150014': {
@@ -1124,7 +1056,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Advanced:Operation Mode
@@ -1140,7 +1071,6 @@ IVIDMM Mode. When you call niDMM Configure Waveform Acquisition , NI-DMM
 sets this property to Waveform Mode. If you are programming properties
 directly, you must set this property before setting other configuration
 properties.
-
 ''',
     },
     '1150018': {
@@ -1164,7 +1094,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Waveform Acquisition:Waveform Rate
@@ -1175,7 +1104,6 @@ Specifies the rate of the waveform acquisition in samples per second
 divisor, and the rate falls between 10 and 1,800,000 samples per second.
 The waveform rate is coerced upwards to the next valid rate. The default
 value is 1,800,000 samples per second. Not supported by NI 4065.
-
 ''',
     },
     '1150019': {
@@ -1196,7 +1124,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Waveform Acquisition:Waveform Points
@@ -1204,7 +1131,6 @@ Waveform Acquisition:Waveform Points
         'shortDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the number of
 points to acquire in a waveform acquisition.
-
 ''',
     },
     '1150022': {
@@ -1235,7 +1161,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:ADC Calibration
@@ -1243,7 +1168,6 @@ Configuration:Measurement Options:ADC Calibration
         'shortDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
 calibration mode.
-
 ''',
     },
     '1150023': {
@@ -1272,7 +1196,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Offset Compensated Ohms
@@ -1280,7 +1203,6 @@ Configuration:Measurement Options:Offset Compensated Ohms
         'shortDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
 offset compensated ohms.
-
 ''',
     },
     '1150025': {
@@ -1314,7 +1236,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Current Source
@@ -1323,7 +1244,6 @@ Configuration:Measurement Options:Current Source
 Specifies the current source provided during diode measurements.
 
 The NI 4050 and NI 4060 are not supported.
-
 ''',
     },
     '1150026': {
@@ -1358,14 +1278,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:DC Noise Rejection
 ''',
         'shortDescription': '''
 Specifies the DC noise rejection mode.
-
 ''',
     },
     '1150027': {
@@ -1394,7 +1312,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Waveform Acquisition:Waveform Coupling
@@ -1402,7 +1319,6 @@ Waveform Acquisition:Waveform Coupling
         'shortDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
 coupling during a waveform acquisition.
-
 ''',
     },
     '1150028': {
@@ -1427,7 +1343,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Advanced:Settle Time
@@ -1436,7 +1351,6 @@ Configuration:Advanced:Settle Time
 Specifies the settling time in seconds. Use this property to override
 the default settling time. To return to the default, set this property
 to Auto (-1).
-
 ''',
     },
     '1150029': {
@@ -1469,14 +1383,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Input Resistance
 ''',
         'shortDescription': '''
 Specifies the input resistance of the instrument.
-
 ''',
     },
     '1150031': {
@@ -1502,14 +1414,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Multi Point Acquisition:Sample Delay Mode
 ''',
         'shortDescription': '''
 For the NI 4060 only, specifies a delay interval after a sample trigger.
-
 ''',
     },
     '1150032': {
@@ -1535,7 +1445,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Advanced:Number Of Averages
@@ -1548,7 +1457,6 @@ Property will be ignored otherwise. The default is 4 for 7 1/2 digits;
 otherwise, the default is 1.
 
 The NI 4050 and NI 4060 are not supported.
-
 ''',
     },
     '1150034': {
@@ -1570,7 +1478,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Multi Point Acquisition:Advanced:Latency
@@ -1579,7 +1486,6 @@ Multi Point Acquisition:Advanced:Latency
 Specifies the number of measurements transferred at a time from the
 instrument to an internal buffer. When set to Auto (-1), NI-DMM chooses
 the transfer size.
-
 ''',
     },
     '1150037': {
@@ -1601,7 +1507,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Multi Point Acquisition:Advanced:Buffer Size
@@ -1610,7 +1515,6 @@ Multi Point Acquisition:Advanced:Buffer Size
 Specifies the size in samples of the internal data buffer. Maximum size
 is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
 chooses the buffer size.
-
 ''',
     },
     '1150044': {
@@ -1633,7 +1537,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Frequency Voltage Auto Range Value
@@ -1643,7 +1546,6 @@ For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
 the frequency voltage range. If auto ranging is enabled, shows the
 actual value of the active frequency voltage range. If not Auto Ranging,
 the value is the same as that of the Frequency Voltage Range property.
-
 ''',
     },
     '1150045': {
@@ -1680,7 +1582,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type
@@ -1689,7 +1590,6 @@ Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation 
 For the NI 4081 and NI 4072 only, specifies the type of cable
 compensation that is applied to the current capacitance or inductance
 measurement for the current range.
-
 ''',
     },
     '1150046': {
@@ -1715,7 +1615,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance
@@ -1725,7 +1624,6 @@ For the NI 4082 and NI 4072 only, represents the reactive part
 (reactance) of the short cable compensation. The valid range is any real
 number >0. The default value (-1) indicates that compensation has not
 taken place.
-
 ''',
     },
     '1150047': {
@@ -1751,7 +1649,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance
@@ -1761,7 +1658,6 @@ For the NI 4082 and NI 4072 only, represents the active part
 (resistance) of the short cable compensation. The valid range is any
 real number >0. The default value (-1) indicates that compensation has
 not taken place.
-
 ''',
     },
     '1150048': {
@@ -1787,7 +1683,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance
@@ -1797,7 +1692,6 @@ For the NI 4082 and NI 4072 only, specifies the reactive part
 (susceptance) of the open cable compensation. The valid range is any
 real number >0. The default value (-1.0) indicates that compensation has
 not taken place.
-
 ''',
     },
     '1150049': {
@@ -1823,7 +1717,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance
@@ -1833,7 +1726,6 @@ For the NI 4082 and NI 4072 only, specifies the active part
 (conductance) of the open cable compensation. The valid range is any
 real number >0. The default value (-1.0) indicates that compensation has
 not taken place.
-
 ''',
     },
     '1150052': {
@@ -1865,7 +1757,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model
@@ -1874,7 +1765,6 @@ Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculatio
 For the NI 4082 and NI 4072 only, specifies the type of algorithm that
 the measurement processing uses for capacitance and inductance
 measurements.
-
 ''',
     },
     '1150053': {
@@ -1903,7 +1793,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias
@@ -1911,7 +1800,6 @@ Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias
         'shortDescription': '''
 For the NI 4082 and NI 4072 only, controls the available DC bias for
 capacitance measurements.
-
 ''',
     },
     '1150054': {
@@ -1933,7 +1821,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------+
 | Resettable       | No          |
 +------------------+-------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Instrument Identification:Instrument Serial Number
@@ -1942,7 +1829,6 @@ Inherent IVI Attributes:Instrument Identification:Instrument Serial Number
 A string containing the serial number of the instrument. This property
 corresponds to the serial number label that is attached to most
 products.
-
 ''',
     },
     '1150055': {
@@ -1963,7 +1849,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average
@@ -1971,7 +1856,6 @@ Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measur
         'shortDescription': '''
 For the NI 4082 and NI 4072 only, specifies the number of LC
 measurements that are averaged to produce one reading.
-
 ''',
     },
     '1150061': {
@@ -1991,14 +1875,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Inherent IVI Attributes:Instrument Identification:Instrument Product ID
 ''',
         'shortDescription': '''
 The PCI product ID.
-
 ''',
     },
     '1150120': {
@@ -2036,14 +1918,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type
 ''',
         'shortDescription': '''
 Specifies the RTD type.
-
 ''',
     },
     '1150121': {
@@ -2064,7 +1944,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A
@@ -2072,7 +1951,6 @@ Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RT
         'shortDescription': '''
 Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
-
 ''',
     },
     '1150122': {
@@ -2093,7 +1971,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B
@@ -2101,7 +1978,6 @@ Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RT
         'shortDescription': '''
 Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
-
 ''',
     },
     '1150123': {
@@ -2122,7 +1998,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C
@@ -2130,7 +2005,6 @@ Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RT
         'shortDescription': '''
 Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
 **RTD Type property** is set to Custom.
-
 ''',
     },
     '1150124': {
@@ -2162,14 +2036,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type
 ''',
         'shortDescription': '''
 Specifies the thermistor type.
-
 ''',
     },
     '1150125': {
@@ -2190,7 +2062,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermistor:Thermistor A
@@ -2198,7 +2069,6 @@ Configuration:Measurement Options:Temperature:Thermistor:Thermistor A
         'shortDescription': '''
 Specifies the Steinhart-Hart A coefficient for thermistor scaling when
 the **Thermistor Type property** is set to Custom.
-
 ''',
     },
     '1150126': {
@@ -2219,7 +2089,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermistor:Thermistor B
@@ -2227,7 +2096,6 @@ Configuration:Measurement Options:Temperature:Thermistor:Thermistor B
         'shortDescription': '''
 Specifies the Steinhart-Hart B coefficient for thermistor scaling when
 the **Thermistor Type property** is set to Custom.
-
 ''',
     },
     '1150127': {
@@ -2248,7 +2116,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermistor:Thermistor C
@@ -2256,7 +2123,6 @@ Configuration:Measurement Options:Temperature:Thermistor:Thermistor C
         'shortDescription': '''
 Specifies the Steinhart-Hart C coefficient for thermistor scaling when
 the **Thermistor Type property** is set to Custom.
-
 ''',
     },
     '1250001': {
@@ -2318,7 +2184,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Function
@@ -2333,7 +2198,6 @@ properties. If the Operation Mode property is set to Waveform Mode, the
 only valid function types are Waveform Voltage and Waveform Current. Set
 the Operation Mode property to IVIDMM Mode to set all other function
 values.
-
 ''',
     },
     '1250002': {
@@ -2368,7 +2232,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Range
@@ -2379,7 +2242,6 @@ absolute value of the maximum expected measurement. The value is in
 units appropriate for the current value of the Function property. For
 example, if the Function property is set to DC Volts, the units are
 volts.
-
 ''',
     },
     '1250003': {
@@ -2418,7 +2280,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Digits Resolution
@@ -2427,7 +2288,6 @@ Configuration:Digits Resolution
 Specifies the measurement resolution in digits. Setting this property to
 higher values increases the measurement accuracy. Setting this property
 to lower values increases the measurement speed.
-
 ''',
     },
     '1250004': {
@@ -2438,7 +2298,7 @@ the trigger, the DMM waits the length of time specified with the Trigger
 Delay property. The DMM then takes a measurement.
 
 To determine which values are supported by each device, refer to the
-LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
 
 +--------------------------+-------------------------------------------------------------------------------------------------------------------+
 | Name                     | Description                                                                                                       |
@@ -2485,7 +2345,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Trigger:Trigger Source
@@ -2497,8 +2356,7 @@ the trigger, the DMM waits the length of time specified with the Trigger
 Delay property. The DMM then takes a measurement.
 
 To determine which values are supported by each device, refer to the
-LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
-
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
 ''',
     },
     '1250005': {
@@ -2545,7 +2403,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Trigger:Trigger Delay
@@ -2579,7 +2436,6 @@ Valid Range: Auto Delay (-1.0), 0.0-12.0 seconds (NI 4060 only),
 0.0-149.0 seconds (NI 4065 and NI 4070/4071/4072)
 
 Default Value: Auto Delay
-
 ''',
     },
     '1250006': {
@@ -2603,7 +2459,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Min Frequency
@@ -2614,7 +2469,6 @@ measurements. This property affects the DMM only when you set the
 Function property to AC measurements. The valid range is 1 Hz-300 kHz
 for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
-
 ''',
     },
     '1250007': {
@@ -2648,7 +2502,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Max Frequency
@@ -2659,7 +2512,6 @@ measurements. This property is used only for error checking and verifies
 that the value of this parameter is less than the maximum frequency of
 the device. This property affects the DMM only when you set the Function
 property to AC measurements.
-
 ''',
     },
     '1250008': {
@@ -2684,7 +2536,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Absolute Resolution
@@ -2693,7 +2544,6 @@ Configuration:Absolute Resolution
 Specifies the measurement resolution in absolute units. Setting this
 property to higher values increases the measurement accuracy. Setting
 this property to lower values increases the measurement speed.
-
 ''',
     },
     '1250101': {
@@ -2720,7 +2570,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Frequency Voltage Range
@@ -2728,7 +2577,6 @@ Configuration:Measurement Options:Frequency Voltage Range
         'shortDescription': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
 amplitude of the input signal for frequency measurements.
-
 ''',
     },
     '1250201': {
@@ -2760,14 +2608,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Transducer Type
 ''',
         'shortDescription': '''
 Specifies the transducer type.
-
 ''',
     },
     '1250231': {
@@ -2807,14 +2653,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type
 ''',
         'shortDescription': '''
 Specifies the thermocouple type.
-
 ''',
     },
     '1250232': {
@@ -2840,14 +2684,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type
 ''',
         'shortDescription': '''
 Specifies the thermocouple reference junction type.
-
 ''',
     },
     '1250233': {
@@ -2868,7 +2710,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction
@@ -2876,7 +2717,6 @@ Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junct
         'shortDescription': '''
 Specifies the value of the fixed reference junction temperature for a
 thermocouple in degrees Celsius.
-
 ''',
     },
     '1250242': {
@@ -2896,14 +2736,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance
 ''',
         'shortDescription': '''
 Specifies the RTD resistance at 0 degrees Celsius.
-
 ''',
     },
     '1250301': {
@@ -2929,7 +2767,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Multi Point Acquisition:Sample Count
@@ -2942,7 +2779,6 @@ measurements. Otherwise, setting Sample Count to 0 causes the
 conditional statement "Measurements equal to Sample Count" to always
 evaluate to False, and causes the DMM to continue taking measurements in
 the inner loop.
-
 ''',
     },
     '1250302': {
@@ -2950,7 +2786,7 @@ the inner loop.
 Specifies the sample trigger source.
 
 To determine which values are supported by each device, refer to the
-LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
 
 +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
 | Name                    | Description                                                                                                                            |
@@ -2999,7 +2835,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Multi Point Acquisition:Sample Trigger
@@ -3008,8 +2843,7 @@ Multi Point Acquisition:Sample Trigger
 Specifies the sample trigger source.
 
 To determine which values are supported by each device, refer to the
-LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
-
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
 ''',
     },
     '1250303': {
@@ -3047,7 +2881,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Multi Point Acquisition:Sample Interval
@@ -3058,7 +2891,6 @@ measurement cycles. This property only applies when the Sample Trigger
 property is set to INTERVAL. The default value (-1) ensures that the DMM
 settles for a recommended time, which is the same as using an immediate
 trigger.
-
 ''',
     },
     '1250304': {
@@ -3085,7 +2917,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Multi Point Acquisition:Trigger Count
@@ -3099,7 +2930,6 @@ The NI 4050/4060 only support this property being set to 1.
 
 Refer to Multiple Point Acquisitions in the *NI Digital Multimeters
 Help* for more information.
-
 ''',
     },
     '1250305': {
@@ -3107,7 +2937,7 @@ Help* for more information.
 Specifies the destination of the measurement complete (MC) signal.
 
 To determine which values are supported by each device, refer to the
-LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
 
 .. note::
    The NI 4050 is not supported.  
@@ -3151,7 +2981,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Trigger:Measurement Complete Dest
@@ -3160,8 +2989,7 @@ Trigger:Measurement Complete Dest
 Specifies the destination of the measurement complete (MC) signal.
 
 To determine which values are supported by each device, refer to the
-LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
-
+LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
 ''',
     },
     '1250321': {
@@ -3201,7 +3029,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Advanced:Aperture Time
@@ -3212,7 +3039,6 @@ Aperture time is specified in units set by the Aperture Time Units
 property. To override the default aperture, set this property to the
 desired aperture time after calling niDMM Config Measurement . To return
 to the default, set this property to Aperture Time Auto (-1).
-
 ''',
     },
     '1250322': {
@@ -3243,14 +3069,12 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Advanced:Aperture Time Units
 ''',
         'shortDescription': '''
 Specifies the units of aperture time for the current configuration.
-
 ''',
     },
     '1250331': {
@@ -3272,7 +3096,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Auto Range Value
@@ -3281,7 +3104,6 @@ Configuration:Auto Range Value
 Specifies the value of the range. If auto ranging is enabled, shows the
 actual value of the active range. The value of this property is set
 during a read operation.
-
 ''',
     },
     '1250332': {
@@ -3314,7 +3136,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Auto Zero
@@ -3322,7 +3143,6 @@ Configuration:Measurement Options:Auto Zero
         'shortDescription': '''
 Specifies the AutoZero mode. This property is not supported for the NI
 4050.
-
 ''',
     },
     '1250333': {
@@ -3365,7 +3185,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Configuration:Measurement Options:Powerline Frequency
@@ -3376,7 +3195,6 @@ value to select an aperture time to reject powerline noise by selecting
 the appropriate internal sample clock and filter. The NI 4065, NI
 4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
 for setting the Aperture Time property in powerline cycles.
-
 ''',
     },
     '1250334': {
@@ -3405,7 +3223,6 @@ The following table lists the characteristics of this property.
 +------------------+-------------------------+
 | Resettable       | No                      |
 +------------------+-------------------------+
-
 ''',
         'lv_property': '''
 Trigger:Trigger Slope
@@ -3413,7 +3230,6 @@ Trigger:Trigger Slope
         'shortDescription': '''
 Specifies the edge of the signal from the specified trigger source on
 which the DMM is triggered.
-
 ''',
     },
 }
