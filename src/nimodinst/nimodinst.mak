@@ -3,9 +3,11 @@
 include $(BUILD_HELPER_DIR)/defines.mak
 
 # We want everything but enums.py
-FILES_TO_GENERATE := $(filter-out enums.py,$(DEFAULT_FILES_TO_GENERATE))
+MODULE_FILES_TO_GENERATE := $(filter-out enums.py,$(DEFAULT_PY_FILES_TO_GENERATE))
 
-FILES_TO_COPY := $(DEFAULT_FILES_TO_COPY)
+MODULE_FILES_TO_COPY := $(DEFAULT_PY_FILES_TO_COPY)
+
+RST_FILES_TO_GENERATE := $(DEFAULT_RST_FILES_TO_GENERATE)
 
 include $(BUILD_HELPER_DIR)/rules.mak
 

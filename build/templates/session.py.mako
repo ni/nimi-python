@@ -6,6 +6,7 @@
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
+    attribute_docs = template_parameters['metadata'].attribute_docs
 
     functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
@@ -133,6 +134,11 @@ class Session(object):
     %else:
     ${attribute.lower()} = Attribute${attributes[attribute]['type']}(${attributes[attribute]['id']})
     %endif
+%   if str(attributes[attribute]['id']) in attribute_docs:
+    '''
+    ${helper.get_indented_docstring_snippet(attribute_docs[str(attributes[attribute]['id'])]['shortDescription'])}, indent=4)
+    '''
+%   endif
 % endfor
 
     def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):

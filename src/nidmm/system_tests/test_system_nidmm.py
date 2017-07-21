@@ -36,7 +36,7 @@ def test_invalid_device_name():
 def test_take_simple_measurement_works(device_info):
     with nidmm.Session(device_info['name']) as session:
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
-        assert session.read(1000) < 0.01 # Assume nothing is connected to device, reads back around 0.
+        assert session.read(1000) != 0 # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
 
 
 def test_wrong_parameter_type(device_info):
@@ -53,23 +53,26 @@ def test_wrong_parameter_type(device_info):
 def test_warning(device_info):
     with nidmm.Session(device_info['name']) as session:
         session.configure_measurement_digits(nidmm.Function.RES_2_WIRE, 1e6, 3.5)
-        try:
-            print(session.read(1000)) # Assume nothing is connected to device, overrange!
-            assert False
-        except nidmm.Warning as w:
-            print(w)
-            pass
+        if not session.simulate:
+           try:
+               print(session.read(1000)) # Assume nothing is connected to device, overrange!
+               assert False
+           except nidmm.Warning as w:
+               print(w)
+               pass
+        else:
+           pytest.skip("Simulated")
 
 
 def test_ViBoolean_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
-        assert session.simulate is False
+        assert session.interchange_check is False
         # TODO(marcoskirsch): set a boolean
 
 
 def test_ViString_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
-        assert int(device_info['sn'],16) == int(session.serial_number,16)
+        assert device_info['name'] == session.io_resource_descriptor
         # TODO(marcoskirsch): set a string
 
 

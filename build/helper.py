@@ -3,6 +3,8 @@
 
 import re
 import pprint
+import sys
+
 pp = pprint.PrettyPrinter(indent=4)
 
 # Coding convention transformation functions.
@@ -111,7 +113,16 @@ def add_all_metadata(functions):
             _add_is_buffer(p)
     return functions
 
+# Normalize string type between python2 & python3
+def normalize_string_type(d):
+    if sys.version_info.major < 3:
+        if type(d) is dict:
+            for k in d:
+                d[k] = normalize_string_type(d[k])
+        elif type(d) is str:
+            d = d.decode('utf-8')
 
+    return d
 # Functions that return snippets that can be placed directly in the templates.
 
 def get_method_parameters_snippet(parameters):
@@ -202,4 +213,24 @@ def get_dictionary_snippet(d, indent=4):
     d_str = pprint.pformat(d)
     d_lines = d_str.splitlines()
     return ('\n' + (' ' * indent)).join(d_lines)
-#    return d_str
+
+def get_indented_docstring_snippet(d, indent=4):
+    '''
+    Returns a docstring with the correct amount of indentation. Can't use similar construct as
+    get_dictionary_snippet ('\n' + (' ' * indent)).join(d_lines) because empty lines would get
+    the spaces, which violates pep8 and causes the flake8 step to fail
+    '''
+    d_lines = d.strip().splitlines()
+    ret_val = ''
+    for l in d_lines:
+        if len(ret_val) > 0:
+            ret_val += '\n'
+            if len(l.strip()) > 0:
+                ret_val += (' ' * indent)
+        ret_val += l.strip()
+    return ret_val
+
+def get_rst_header_snippet(t, header_level='='):
+    ret_val = t + '\n'
+    ret_val += header_level * len(t)
+    return ret_val
