@@ -101,8 +101,8 @@ NI-DMM Session
       the device. This property affects the DMM only when you set the Function
       property to AC measurements.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Max Frequency**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Max Frequency**
 
       The valid ranges are shown in the following table.
 
@@ -123,8 +123,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -138,8 +136,8 @@ NI-DMM Session
       for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
       4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Min Frequency**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Min Frequency**
 
       The following table lists the characteristics of this property.
 
@@ -149,8 +147,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -164,8 +160,8 @@ NI-DMM Session
       For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
       calibration mode.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:ADC Calibration**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:ADC Calibration**
 
       +-----------------+------------------------------------------------------------------------------------------------+
       | Name            | Description                                                                                    |
@@ -186,8 +182,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -201,8 +195,8 @@ NI-DMM Session
       desired aperture time after calling niDMM Config Measurement . To return
       to the default, set this property to Aperture Time Auto (-1).
 
-      This corresponds to LabVIEW property **Configuration:Advanced:Aperture
-      Time**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Advanced:Aperture Time**
 
       Any number of powerline cycles (PLCs) within the minimum and maximum
       ranges is allowed on the NI 4080/4081/4082 and NI 4070/4071/4072.
@@ -211,7 +205,7 @@ NI-DMM Session
       aperture time is 78.2 s. If setting the number of averages directly, the
       total measurement time is aperture time X the number of averages, which
       must be less than 72.8 s. The aperture times allowed are 333 micro s,
-      667 micro s, or multiples of 1.11 msâ€”for example 1.11 ms, 2.22 ms, 3.33
+      667 micro s, or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33
       ms, and so on. If you set an aperture time other than 333 micro s, 667
       micro s, or multiples of 1.11 ms, the value will be coerced up to the
       next supported aperture time.
@@ -229,8 +223,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -242,8 +234,8 @@ NI-DMM Session
 
       Specifies the units of aperture time for the current configuration.
 
-      This corresponds to LabVIEW property **Configuration:Advanced:Aperture
-      Time Units**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Advanced:Aperture Time Units**
 
       .. note::
          The NI 4060 does not support an aperture time set in seconds.
@@ -265,8 +257,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -278,7 +268,8 @@ NI-DMM Session
       actual value of the active range. The value of this property is set
       during a read operation.
 
-      This corresponds to LabVIEW property **Configuration:Auto Range Value**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Auto Range Value**
 
       The following table lists the characteristics of this property.
 
@@ -288,8 +279,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -303,8 +292,8 @@ NI-DMM Session
       Specifies the AutoZero mode. This property is not supported for the NI
       4050.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Auto Zero**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Auto Zero**
 
       +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
       | Name            | Description                                                                                                                                                                                                                                                                                                                         |
@@ -327,8 +316,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -340,8 +327,8 @@ NI-DMM Session
       is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
       chooses the buffer size.
 
-      This corresponds to LabVIEW property **Multi Point
-      Acquisition:Advanced:Buffer Size**
+      .. note::
+         This corresponds to the LabVIEW property **Multi Point Acquisition:Advanced:Buffer Size**
 
       The following table lists the characteristics of this property.
 
@@ -351,8 +338,6 @@ NI-DMM Session
       | Datatype         | 32-bit signed integer   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -367,8 +352,8 @@ NI-DMM Session
       compensation that is applied to the current capacitance or inductance
       measurement for the current range.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Capacitance and Inductance:Cable Compensation Type**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**
 
       .. note::
          Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
@@ -394,8 +379,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -411,8 +394,8 @@ NI-DMM Session
       regardless of the setting of this property. The default value is TRUE
       (1). Use niDMM Initialize With Options to override the default setting.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:User
-      Options:Cache**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Cache**
 
       The following table lists the characteristics of this property.
 
@@ -422,8 +405,6 @@ NI-DMM Session
       | Datatype         | Boolean      |
       +------------------+--------------+
       | Permissions      | Read/Write   |
-      +------------------+--------------+
-      | High Level VI    | N/A          |
       +------------------+--------------+
       | Channel Based    | False        |
       +------------------+--------------+
@@ -437,8 +418,8 @@ NI-DMM Session
       property is set, the IVI engine maintains a separate cache value for
       each channel.
 
-      This corresponds to LabVIEW property **Inherent IVI
-      Attributes:Instrument Capabilities:Channel Count**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Capabilities:Channel Count**
 
       The following table lists the characteristics of this property.
 
@@ -448,8 +429,6 @@ NI-DMM Session
       | Datatype         | 32-bit signed integer   |
       +------------------+-------------------------+
       | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -460,8 +439,8 @@ NI-DMM Session
 
       The PCI product ID.
 
-      This corresponds to LabVIEW property **Inherent IVI
-      Attributes:Instrument Identification:Instrument Product ID**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
 
       The following table lists the characteristics of this property.
 
@@ -471,8 +450,6 @@ NI-DMM Session
       | Datatype         | 32-bit signed integer   |
       +------------------+-------------------------+
       | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -485,8 +462,8 @@ NI-DMM Session
 
       The NI 4050 and NI 4060 are not supported.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Current Source**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Current Source**
 
       +-----------------------------+--------------------------------------------------------------------+
       | Name                        | Description                                                        |
@@ -509,8 +486,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -521,8 +496,8 @@ NI-DMM Session
       For the NI 4082 and NI 4072 only, controls the available DC bias for
       capacitance measurements.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Capacitance and Inductance:Advanced:DC Bias**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias**
 
       +-----------------------+------------------------------------------------------+
       | Name                  | Description                                          |
@@ -541,8 +516,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -554,8 +527,8 @@ NI-DMM Session
 
       Specifies the DC noise rejection mode.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:DC Noise Rejection**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:DC Noise Rejection**
 
       .. note::
          The NI 4050 and NI 4060 are not supported.
@@ -581,8 +554,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -600,8 +571,8 @@ NI-DMM Session
       With Options . If the user does not specify a Driver Setup string, this
       property returns an empty string.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:User
-      Options:Driver Setup**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Driver Setup**
 
       The following table lists the characteristics of this property.
 
@@ -611,8 +582,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -626,8 +595,8 @@ NI-DMM Session
       actual value of the active frequency voltage range. If not Auto Ranging,
       the value is the same as that of the Frequency Voltage Range property.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Frequency Voltage Auto Range Value**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
 
       The following table lists the characteristics of this property.
 
@@ -637,8 +606,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -650,8 +617,8 @@ NI-DMM Session
       For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
       amplitude of the input signal for frequency measurements.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Frequency Voltage Range**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Frequency Voltage Range**
 
       +------------------+--------+------------------------------------------------------------------------------------------------------------------------------------+
       | Auto Range On    | -1.0   | Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement.   |
@@ -667,8 +634,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -689,7 +654,8 @@ NI-DMM Session
       the Operation Mode property to IVIDMM Mode to set all other function
       values.
 
-      This corresponds to LabVIEW property **Configuration:Function**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Function**
 
       +----------------------------------+---------------------------------------------+
       | Name                             | Description                                 |
@@ -734,8 +700,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -746,8 +710,8 @@ NI-DMM Session
       A string containing the capabilities and extension groups supported by
       the specific driver.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:Specific
-      Driver Capabilities:Group Capabilities**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities**
 
       The following table lists the characteristics of this property.
 
@@ -758,8 +722,6 @@ NI-DMM Session
       +------------------+-------------+
       | Permissions      | Read Only   |
       +------------------+-------------+
-      | High Level VI    | N/A         |
-      +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
       | Resettable       | No          |
@@ -769,8 +731,8 @@ NI-DMM Session
 
       Specifies the input resistance of the instrument.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Input Resistance**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Input Resistance**
 
       .. note::
          The NI 4050 and NI 4060 are not supported.
@@ -794,8 +756,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -805,8 +765,8 @@ NI-DMM Session
 
       A string containing the instrument firmware revision number.
 
-      This corresponds to LabVIEW property **Inherent IVI
-      Attributes:Instrument Identification:Instrument Firmware Revision**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision**
 
       The following table lists the characteristics of this property.
 
@@ -816,8 +776,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -828,8 +786,8 @@ NI-DMM Session
 
       A string containing the manufacturer of the instrument.
 
-      This corresponds to LabVIEW property **Inherent IVI
-      Attributes:Instrument Identification:Instrument Manufacturer**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer**
 
       The following table lists the characteristics of this property.
 
@@ -839,8 +797,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -851,8 +807,8 @@ NI-DMM Session
 
       A string containing the instrument model.
 
-      This corresponds to LabVIEW property **Inherent IVI
-      Attributes:Instrument Identification:Instrument Model**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Model**
 
       The following table lists the characteristics of this property.
 
@@ -862,8 +818,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -885,8 +839,8 @@ NI-DMM Session
       have not set that property, or the property has been invalidated since
       you set it.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:User
-      Options:Interchange Check**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Interchange Check**
 
       +---------+-----+
       | TRUE    | 1   |
@@ -903,8 +857,6 @@ NI-DMM Session
       +------------------+--------------+
       | Permissions      | Read/Write   |
       +------------------+--------------+
-      | High Level VI    | N/A          |
-      +------------------+--------------+
       | Channel Based    | False        |
       +------------------+--------------+
       | Resettable       | No           |
@@ -914,8 +866,8 @@ NI-DMM Session
 
       A string containing the resource descriptor of the instrument.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:Advanced
-      Session Information:I/O Resource Descriptor**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**
 
       The following table lists the characteristics of this property.
 
@@ -925,8 +877,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -939,8 +889,8 @@ NI-DMM Session
       instrument to an internal buffer. When set to Auto (-1), NI-DMM chooses
       the transfer size.
 
-      This corresponds to LabVIEW property **Multi Point
-      Acquisition:Advanced:Latency**
+      .. note::
+         This corresponds to the LabVIEW property **Multi Point Acquisition:Advanced:Latency**
 
       The following table lists the characteristics of this property.
 
@@ -950,8 +900,6 @@ NI-DMM Session
       | Datatype         | 32-bit signed integer   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -966,8 +914,8 @@ NI-DMM Session
       the measurement processing uses for capacitance and inductance
       measurements.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Capacitance and Inductance:Advanced:Calculation Model**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model**
 
       +--------------------+--------------------------------------------------------------------------------------+
       | Name               | Description                                                                          |
@@ -988,8 +936,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1000,9 +946,8 @@ NI-DMM Session
       For the NI 4082 and NI 4072 only, specifies the number of LC
       measurements that are averaged to produce one reading.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Capacitance and Inductance:Number of LC Measurements To
-      Average**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**
 
       The following table lists the characteristics of this property.
 
@@ -1013,8 +958,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1024,8 +967,8 @@ NI-DMM Session
 
       A string containing the logical name of the instrument.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:Advanced
-      Session Information:Logical Name**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Advanced Session Information:Logical Name**
 
       The following table lists the characteristics of this property.
 
@@ -1035,8 +978,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -1052,8 +993,8 @@ NI-DMM Session
       To determine which values are supported by each device, refer to the
       LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
 
-      This corresponds to LabVIEW property **Trigger:Measurement Complete
-      Dest**
+      .. note::
+         This corresponds to the LabVIEW property **Trigger:Measurement Complete Dest**
 
       .. note::
          The NI 4050 is not supported.
@@ -1093,8 +1034,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1106,8 +1045,8 @@ NI-DMM Session
 
       Specifies the polarity of the generated measurement complete signal.
 
-      This corresponds to LabVIEW property **Trigger:Measurement Destination
-      Slope**
+      .. note::
+         This corresponds to the LabVIEW property **Trigger:Measurement Destination Slope**
 
       +--------------------+------------------------------------------------------------------+
       | Name               | Description                                                      |
@@ -1126,8 +1065,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1143,8 +1080,8 @@ NI-DMM Session
 
       The NI 4050 and NI 4060 are not supported.
 
-      This corresponds to LabVIEW property **Configuration:Advanced:Number Of
-      Averages**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Advanced:Number Of Averages**
 
       The following table lists the characteristics of this property.
 
@@ -1154,8 +1091,6 @@ NI-DMM Session
       | Datatype         | 32-bit signed integer   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -1169,8 +1104,8 @@ NI-DMM Session
       For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
       offset compensated ohms.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Offset Compensated Ohms**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Offset Compensated Ohms**
 
       +---------------+-------------------------------------+
       | Name          | Description                         |
@@ -1189,8 +1124,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1203,9 +1136,8 @@ NI-DMM Session
       real number >0. The default value (-1.0) indicates that compensation has
       not taken place.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Capacitance and Inductance:Open Cable Compensation
-      Values:Conductance**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**
 
       .. note::
          Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
@@ -1218,8 +1150,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -1233,9 +1163,8 @@ NI-DMM Session
       real number >0. The default value (-1.0) indicates that compensation has
       not taken place.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Capacitance and Inductance:Open Cable Compensation
-      Values:Susceptance**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**
 
       .. note::
          Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
@@ -1248,8 +1177,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -1271,8 +1198,8 @@ NI-DMM Session
       directly, you must set this property before setting other configuration
       properties.
 
-      This corresponds to LabVIEW property **Configuration:Advanced:Operation
-      Mode**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Advanced:Operation Mode**
 
       +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
       | Name                    | Description                                                                                                                                                                                                                                        |
@@ -1291,8 +1218,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1306,19 +1231,19 @@ NI-DMM Session
       4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
       for setting the Aperture Time property in powerline cycles.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Powerline Frequency**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Powerline Frequency**
 
       After configuring powerline frequency, set the Aperture Time Units
       property to PLCs. When setting the Aperture Time property, select the
       number of PLCs for the powerline frequency. For example, if powerline
-      frequency = 50 Hz (or 20Â ms) and aperture time in PLCs = 5, then
-      aperture time in seconds = 20Â ms \* 5 PLCs = 100Â ms. Similarly, if
-      powerline frequency = 60Â Hz (or 16.667Â ms) and aperture time in PLCs =
-      6, then aperture time in seconds = 16.667Â ms \* 6 PLCs = 100Â ms.
+      frequency = 50 Hz (or 20 ms) and aperture time in PLCs = 5, then
+      aperture time in seconds = 20 ms \* 5 PLCs = 100 ms. Similarly, if
+      powerline frequency = 60 Hz (or 16.667 ms) and aperture time in PLCs =
+      6, then aperture time in seconds = 16.667 ms \* 6 PLCs = 100 ms.
 
       .. note::
-         For 400 Hz powerline frequency, use the 50Â Hz setting.
+         For 400 Hz powerline frequency, use the 50 Hz setting.
 
       +--------------------+-----------------------------------------------+
       | Name               | Description                                   |
@@ -1337,8 +1262,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1355,8 +1278,8 @@ NI-DMM Session
       is TRUE (1). Use niDMM Initialize With Options to override the default
       setting.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:User
-      Options:Query Instrument Status**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Query Instrument Status**
 
       The following table lists the characteristics of this property.
 
@@ -1366,8 +1289,6 @@ NI-DMM Session
       | Datatype         | Boolean      |
       +------------------+--------------+
       | Permissions      | Read/Write   |
-      +------------------+--------------+
-      | High Level VI    | N/A          |
       +------------------+--------------+
       | Channel Based    | False        |
       +------------------+--------------+
@@ -1382,7 +1303,8 @@ NI-DMM Session
       example, if the Function property is set to DC Volts, the units are
       volts.
 
-      This corresponds to LabVIEW property **Configuration:Range**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Range**
 
       .. note::
          The NI 4050, NI 4060, and NI 4065 only support Auto Range when the trigger and sample trigger are set to Immediate.
@@ -1404,8 +1326,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1421,8 +1341,8 @@ NI-DMM Session
       value is TRUE (1). Use niDMM Initialize With Options to override the
       default setting.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:User
-      Options:Range Check**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Range Check**
 
       The following table lists the characteristics of this property.
 
@@ -1432,8 +1352,6 @@ NI-DMM Session
       | Datatype         | Boolean      |
       +------------------+--------------+
       | Permissions      | Read/Write   |
-      +------------------+--------------+
-      | High Level VI    | N/A          |
       +------------------+--------------+
       | Channel Based    | False        |
       +------------------+--------------+
@@ -1448,8 +1366,8 @@ NI-DMM Session
       Use niDMM Get Next Coercion Record to extract and delete the oldest
       coercion record from the list.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:User
-      Options:Record Value Coercions**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Record Value Coercions**
 
       The following table lists the characteristics of this property.
 
@@ -1459,8 +1377,6 @@ NI-DMM Session
       | Datatype         | Boolean      |
       +------------------+--------------+
       | Permissions      | Read/Write   |
-      +------------------+--------------+
-      | High Level VI    | N/A          |
       +------------------+--------------+
       | Channel Based    | False        |
       +------------------+--------------+
@@ -1473,8 +1389,8 @@ NI-DMM Session
       property to higher values increases the measurement accuracy. Setting
       this property to lower values increases the measurement speed.
 
-      This corresponds to LabVIEW property **Configuration:Absolute
-      Resolution**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Absolute Resolution**
 
       .. note::
          NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
@@ -1488,8 +1404,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1501,7 +1415,8 @@ NI-DMM Session
       higher values increases the measurement accuracy. Setting this property
       to lower values increases the measurement speed.
 
-      This corresponds to LabVIEW property **Configuration:Digits Resolution**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Digits Resolution**
 
       .. note::
          NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
@@ -1529,8 +1444,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1546,8 +1459,8 @@ NI-DMM Session
       evaluate to False, and causes the DMM to continue taking measurements in
       the inner loop.
 
-      This corresponds to LabVIEW property **Multi Point Acquisition:Sample
-      Count**
+      .. note::
+         This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Count**
 
       The following table lists the characteristics of this property.
 
@@ -1557,8 +1470,6 @@ NI-DMM Session
       | Datatype         | 32-bit signed integer   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -1573,8 +1484,8 @@ NI-DMM Session
       settles for a recommended time, which is the same as using an immediate
       trigger.
 
-      This corresponds to LabVIEW property **Multi Point Acquisition:Sample
-      Interval**
+      .. note::
+         This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Interval**
 
       The NI 4065 and NI 4070/4071/4072 use the value specified in this
       property as additional delay. On these devices, the onboard timing
@@ -1599,8 +1510,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1615,8 +1524,8 @@ NI-DMM Session
       To determine which values are supported by each device, refer to the
       LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
 
-      This corresponds to LabVIEW property **Multi Point Acquisition:Sample
-      Trigger**
+      .. note::
+         This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Trigger**
 
       +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
       | Name                    | Description                                                                                                                            |
@@ -1661,8 +1570,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1675,8 +1582,8 @@ NI-DMM Session
       Specifies the edge of the signal from the specified sample trigger
       source on which the DMM is triggered.
 
-      This corresponds to LabVIEW property **Multi Point Acquisition:Sample
-      Trig Slope**
+      .. note::
+         This corresponds to the LabVIEW property **Multi Point Acquisition:Sample Trig Slope**
 
       +--------------------+------------------------------------------------------------------+
       | Name               | Description                                                      |
@@ -1695,8 +1602,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1708,8 +1613,8 @@ NI-DMM Session
       corresponds to the serial number label that is attached to most
       products.
 
-      This corresponds to LabVIEW property **Inherent IVI
-      Attributes:Instrument Identification:Instrument Serial Number**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**
 
       The following table lists the characteristics of this property.
 
@@ -1719,8 +1624,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -1733,8 +1636,8 @@ NI-DMM Session
       the default settling time. To return to the default, set this property
       to Auto (-1).
 
-      This corresponds to LabVIEW property **Configuration:Advanced:Settle
-      Time**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Advanced:Settle Time**
 
       .. note::
          The NI 4050 and NI 4060 are not supported.
@@ -1748,8 +1651,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1762,9 +1663,8 @@ NI-DMM Session
       number >0. The default value (-1) indicates that compensation has not
       taken place.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Capacitance and Inductance:Short Cable Compensation
-      Values:Reactance**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**
 
       .. note::
          Changing the VI or the range through this property or through niDMM Config Measurement resets this property to the default value.
@@ -1777,8 +1677,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -1792,9 +1690,8 @@ NI-DMM Session
       real number >0. The default value (-1) indicates that compensation has
       not taken place.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Capacitance and Inductance:Short Cable Compensation
-      Values:Resistance**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
 
       .. note::
          Changing the VI or the range through this property or through niDMM Config Measurement resets this property to the default value.
@@ -1808,8 +1705,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1819,8 +1714,8 @@ NI-DMM Session
 
       For the NI 4050 only, specifies the shunt resistance value.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Shunt Value**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Shunt Value**
 
       .. note::
          The NI 4050 requires an external shunt resistor for current measurements. This property should be set to the value of the shunt resistor.
@@ -1833,8 +1728,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -1851,8 +1744,8 @@ NI-DMM Session
       FALSE (0). Use niDMM Initialize With Options to override the default
       setting.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:User
-      Options:Simulate**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:User Options:Simulate**
 
       .. note::
          Simulate can only be set within the niDMM Initialize With Options VI. The property value cannot be changed outside of the VI.
@@ -1866,8 +1759,6 @@ NI-DMM Session
       +------------------+--------------+
       | Permissions      | Read/Write   |
       +------------------+--------------+
-      | High Level VI    | N/A          |
-      +------------------+--------------+
       | Channel Based    | False        |
       +------------------+--------------+
       | Resettable       | No           |
@@ -1878,8 +1769,8 @@ NI-DMM Session
       The major version number of the class specification for the specific
       driver.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:Specific
-      Driver Identification:Specific Driver Class Spec Major Version**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version**
 
       The following table lists the characteristics of this property.
 
@@ -1889,8 +1780,6 @@ NI-DMM Session
       | Datatype         | 32-bit signed integer   |
       +------------------+-------------------------+
       | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -1902,8 +1791,8 @@ NI-DMM Session
       The minor version number of the class specification for the specific
       driver.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:Specific
-      Driver Identification:Specific Driver Class Spec Minor Version**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version**
 
       The following table lists the characteristics of this property.
 
@@ -1914,8 +1803,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read Only               |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -1925,8 +1812,8 @@ NI-DMM Session
 
       A string containing a description of the specific driver.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:Specific
-      Driver Identification:Specific Driver Description**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description**
 
       The following table lists the characteristics of this property.
 
@@ -1936,8 +1823,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -1950,8 +1835,8 @@ NI-DMM Session
       user-callable VI in this driver starts with this prefix. The prefix can
       be up to a maximum of eight characters.
 
-      This corresponds to LabVIEW property **Inherent IVI
-      Attributes:Instrument Capabilities:Specific Driver Prefix**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix**
 
       The following table lists the characteristics of this property.
 
@@ -1961,8 +1846,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -1974,8 +1857,8 @@ NI-DMM Session
       A string that contains additional version information about this
       instrument driver.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:Version
-      Info:Specific Driver Revision**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Version Info:Specific Driver Revision**
 
       The following table lists the characteristics of this property.
 
@@ -1985,8 +1868,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -1997,8 +1878,8 @@ NI-DMM Session
 
       A string containing the vendor of the specific driver.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:Specific
-      Driver Identification:Specific Driver Vendor**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor**
 
       The following table lists the characteristics of this property.
 
@@ -2008,8 +1889,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -2021,8 +1900,8 @@ NI-DMM Session
       A string containing the instrument models supported by the specific
       driver.
 
-      This corresponds to LabVIEW property **Inherent IVI Attributes:Specific
-      Driver Capabilities:Supported Instrument Models**
+      .. note::
+         This corresponds to the LabVIEW property **Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models**
 
       The following table lists the characteristics of this property.
 
@@ -2032,8 +1911,6 @@ NI-DMM Session
       | Datatype         | string      |
       +------------------+-------------+
       | Permissions      | Read Only   |
-      +------------------+-------------+
-      | High Level VI    | N/A         |
       +------------------+-------------+
       | Channel Based    | False       |
       +------------------+-------------+
@@ -2045,8 +1922,8 @@ NI-DMM Session
       Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
       **RTD Type property** is set to Custom.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Resistance Temperature Detector:RTD A**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**
 
       The following table lists the characteristics of this property.
 
@@ -2056,8 +1933,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -2069,8 +1944,8 @@ NI-DMM Session
       Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
       **RTD Type property** is set to Custom.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Resistance Temperature Detector:RTD B**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**
 
       The following table lists the characteristics of this property.
 
@@ -2080,8 +1955,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -2093,8 +1966,8 @@ NI-DMM Session
       Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
       **RTD Type property** is set to Custom.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Resistance Temperature Detector:RTD C**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**
 
       The following table lists the characteristics of this property.
 
@@ -2104,8 +1977,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -2116,8 +1987,8 @@ NI-DMM Session
 
       Specifies the RTD resistance at 0 degrees Celsius.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Resistance Temperature Detector:RTD Resistance**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**
 
       The following table lists the characteristics of this property.
 
@@ -2127,8 +1998,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -2141,8 +2010,8 @@ NI-DMM Session
 
       Specifies the RTD type.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Resistance Temperature Detector:RTD Type**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**
 
       +-------------------+----------------------------------------------------------------------------------------------+
       | Name              | Description                                                                                  |
@@ -2171,8 +2040,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -2183,8 +2050,8 @@ NI-DMM Session
       Specifies the value of the fixed reference junction temperature for a
       thermocouple in degrees Celsius.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Thermocouple:Fixed Reference Junction**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction**
 
       The following table lists the characteristics of this property.
 
@@ -2194,8 +2061,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -2208,8 +2073,8 @@ NI-DMM Session
 
       Specifies the thermocouple reference junction type.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Thermocouple:Reference Junction Type**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type**
 
       +-----------------+------------------------------------------------------------------------------+
       | Name            | Description                                                                  |
@@ -2226,8 +2091,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -2239,8 +2102,8 @@ NI-DMM Session
 
       Specifies the thermocouple type.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Thermocouple:Thermocouple Type**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**
 
       +--------------+-----------------------+
       | Name         | Description           |
@@ -2271,8 +2134,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -2283,8 +2144,8 @@ NI-DMM Session
       Specifies the Steinhart-Hart A coefficient for thermistor scaling when
       the **Thermistor Type property** is set to Custom.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Thermistor:Thermistor A**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor A**
 
       The following table lists the characteristics of this property.
 
@@ -2294,8 +2155,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -2307,8 +2166,8 @@ NI-DMM Session
       Specifies the Steinhart-Hart B coefficient for thermistor scaling when
       the **Thermistor Type property** is set to Custom.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Thermistor:Thermistor B**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor B**
 
       The following table lists the characteristics of this property.
 
@@ -2318,8 +2177,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -2331,8 +2188,8 @@ NI-DMM Session
       Specifies the Steinhart-Hart C coefficient for thermistor scaling when
       the **Thermistor Type property** is set to Custom.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Thermistor:Thermistor C**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor C**
 
       The following table lists the characteristics of this property.
 
@@ -2342,8 +2199,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -2356,8 +2211,8 @@ NI-DMM Session
 
       Specifies the thermistor type.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Thermistor:Thermistor Type**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type**
 
       +------------------+------------------------------------------------------------------------------------------------+
       | Name             | Description                                                                                    |
@@ -2380,8 +2235,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -2393,8 +2246,8 @@ NI-DMM Session
 
       Specifies the transducer type.
 
-      This corresponds to LabVIEW property **Configuration:Measurement
-      Options:Temperature:Transducer Type**
+      .. note::
+         This corresponds to the LabVIEW property **Configuration:Measurement Options:Temperature:Transducer Type**
 
       +------------------------+--------------------------------------+
       | Name                   | Description                          |
@@ -2417,8 +2270,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -2435,8 +2286,8 @@ NI-DMM Session
       Refer to Multiple Point Acquisitions in the *NI Digital Multimeters
       Help* for more information.
 
-      This corresponds to LabVIEW property **Multi Point Acquisition:Trigger
-      Count**
+      .. note::
+         This corresponds to the LabVIEW property **Multi Point Acquisition:Trigger Count**
 
       The following table lists the characteristics of this property.
 
@@ -2446,8 +2297,6 @@ NI-DMM Session
       | Datatype         | 32-bit signed integer   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -2485,7 +2334,8 @@ NI-DMM Session
 
       Default Value: Auto Delay
 
-      This corresponds to LabVIEW property **Trigger:Trigger Delay**
+      .. note::
+         This corresponds to the LabVIEW property **Trigger:Trigger Delay**
 
       The following table lists the characteristics of this property.
 
@@ -2495,8 +2345,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -2510,7 +2358,8 @@ NI-DMM Session
       Specifies the edge of the signal from the specified trigger source on
       which the DMM is triggered.
 
-      This corresponds to LabVIEW property **Trigger:Trigger Slope**
+      .. note::
+         This corresponds to the LabVIEW property **Trigger:Trigger Slope**
 
       +--------------------+------------------------------------------------------------------+
       | Name               | Description                                                      |
@@ -2529,8 +2378,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -2548,7 +2395,8 @@ NI-DMM Session
       To determine which values are supported by each device, refer to the
       LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* .
 
-      This corresponds to LabVIEW property **Trigger:Trigger Source**
+      .. note::
+         This corresponds to the LabVIEW property **Trigger:Trigger Source**
 
       +--------------------------+-------------------------------------------------------------------------------------------------------------------+
       | Name                     | Description                                                                                                       |
@@ -2591,8 +2439,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -2605,8 +2451,8 @@ NI-DMM Session
       For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
       coupling during a waveform acquisition.
 
-      This corresponds to LabVIEW property **Waveform Acquisition:Waveform
-      Coupling**
+      .. note::
+         This corresponds to the LabVIEW property **Waveform Acquisition:Waveform Coupling**
 
       +--------------+--------------------------+
       | Name         | Description              |
@@ -2625,8 +2471,6 @@ NI-DMM Session
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
       +------------------+-------------------------+
-      | High Level VI    | N/A                     |
-      +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
       | Resettable       | No                      |
@@ -2637,8 +2481,8 @@ NI-DMM Session
       For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the number of
       points to acquire in a waveform acquisition.
 
-      This corresponds to LabVIEW property **Waveform Acquisition:Waveform
-      Points**
+      .. note::
+         This corresponds to the LabVIEW property **Waveform Acquisition:Waveform Points**
 
       The following table lists the characteristics of this property.
 
@@ -2648,8 +2492,6 @@ NI-DMM Session
       | Datatype         | 32-bit signed integer   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
@@ -2664,8 +2506,8 @@ NI-DMM Session
       The waveform rate is coerced upwards to the next valid rate. The default
       value is 1,800,000 samples per second. Not supported by NI 4065.
 
-      This corresponds to LabVIEW property **Waveform Acquisition:Waveform
-      Rate**
+      .. note::
+         This corresponds to the LabVIEW property **Waveform Acquisition:Waveform Rate**
 
       The following table lists the characteristics of this property.
 
@@ -2675,8 +2517,6 @@ NI-DMM Session
       | Datatype         | 64-bit floating point   |
       +------------------+-------------------------+
       | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | High Level VI    | N/A                     |
       +------------------+-------------------------+
       | Channel Based    | False                   |
       +------------------+-------------------------+
