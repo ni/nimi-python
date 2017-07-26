@@ -107,8 +107,6 @@ class AttributeViSession(object):
 % for c in config['context_manager']:
 <%
 context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
-enter_function = next(f for f in functions if f['name'].upper() == c['enter'].upper())
-exit_function = next(f for f in functions if f['name'].upper() == c['exit'].upper())
 %>\
 
 
@@ -117,10 +115,11 @@ class ${context_name.title()}(object):
         self.session = session
 
     def __enter__(self):
-        self.session.${enter_function['python_name']}()
+        self.session._initiate()
+        return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.session.${exit_function['python_name']}()
+        self.session._abort()
 % endfor
 
 
@@ -148,7 +147,9 @@ class Session(object):
 <%
 context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
 %>\
-        self.${context_name.lower()} = ${context_name.title()}(self)
+
+    def initiate(self):
+        return ${context_name.title()}(self)
 % endfor
 
     def __del__(self):
