@@ -31,7 +31,9 @@ functions = [
             {'direction': 'out', 'enum': None,
              'name': 'attributeValue',
              'type': 'ViChar',
-             'is_buffer': True},
+             'is_buffer': True,
+             'size': 'ivi-dance',
+             },
         ],
         'returns': 'ViStatus'},
     {   'name': 'GetInstalledDeviceAttributeViInt32',
@@ -66,7 +68,9 @@ functions = [
             {'direction': 'out', 'enum': None,
              'name': 'errorInfo',
              'type': 'ViChar',
-             'is_buffer': True},
+             'is_buffer': True,
+             'size': 'ivi-dance'
+             },
         ],
         'returns': 'ViStatus'},
 ]
