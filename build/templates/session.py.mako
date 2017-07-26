@@ -6,8 +6,12 @@
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
-%>\
 
+    functions = template_parameters['metadata'].functions
+    functions = helper.extract_codegen_functions(functions)
+    functions = helper.add_all_metadata(functions)
+    functions = sorted(functions, key=lambda k: k['name'])
+%>\
 import ctypes
 
 from ${module_name} import ctypes_types
@@ -100,6 +104,24 @@ class AttributeViSession(object):
 
     def __set__(self, obj, value):
         raise TypeError('Attributes of type ViSession are unsupported in Python')
+% for c in config['context_manager']:
+<%
+context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
+enter_function = next(f for f in functions if f['name'].upper() == c['enter'].upper())
+exit_function = next(f for f in functions if f['name'].upper() == c['exit'].upper())
+%>\
+
+
+class ${context_name.title()}(object):
+    def __init__(self, session):
+        self.session = session
+
+    def __enter__(self):
+        self.session.${enter_function['python_name']}()
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.session.${exit_function['python_name']}()
+% endfor
 
 
 class Session(object):
@@ -122,6 +144,12 @@ class Session(object):
         self.library = library.get_library()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+% for c in config['context_manager']:
+<%
+context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
+%>\
+        self.${context_name.lower()} = ${context_name.title()}(self)
+% endfor
 
     def __del__(self):
         pass
@@ -177,12 +205,6 @@ class Session(object):
         return new_error_code.value, error_message.value.decode("ascii")
 
     ''' These are code-generated '''
-<%
-    functions = template_parameters['metadata'].functions
-    functions = helper.extract_codegen_functions(functions)
-    functions = helper.add_all_metadata(functions)
-    functions = sorted(functions, key=lambda k: k['name'])
-%>\
 % for f in functions:
 <%
     input_parameters = helper.extract_input_parameters(f['parameters'])

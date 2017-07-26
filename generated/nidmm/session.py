@@ -1,5 +1,4 @@
 # This file was generated
-
 import ctypes
 
 from nidmm import ctypes_types
@@ -92,6 +91,17 @@ class AttributeViSession(object):
 
     def __set__(self, obj, value):
         raise TypeError('Attributes of type ViSession are unsupported in Python')
+
+
+class Acquisition(object):
+    def __init__(self, session):
+        self.session = session
+
+    def __enter__(self):
+        self.session._initiate()
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.session._abort()
 
 
 class Session(object):
@@ -696,6 +706,7 @@ class Session(object):
         self.library = library.get_library()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+        self.acquisition = Acquisition(self)
 
     def __del__(self):
         pass
