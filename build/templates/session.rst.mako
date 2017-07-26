@@ -37,7 +37,7 @@ else:
 %   endif
       ${helper.get_indented_docstring_snippet(attributes[attr]['longDescription'], indent=6)}
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
 %   if 'lv_property' in attributes[attr]:
