@@ -102,7 +102,7 @@ Documentation is available `here <http://nimi-python.readthedocs.io>`_.
 Additional Documentation
 ========================
 
-Refer to driver-specific documentation for general information about using your devices and detailed API documentation.
+Refer to your driver documentation for device-specific information and detailed API documentation.
 
 .. _license-section:
 
