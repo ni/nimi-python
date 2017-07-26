@@ -99,6 +99,7 @@ class Acquisition(object):
 
     def __enter__(self):
         self.session._initiate()
+        return self
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.session._abort()
@@ -706,7 +707,9 @@ class Session(object):
         self.library = library.get_library()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
-        self.acquisition = Acquisition(self)
+
+    def initiate(self):
+        return Acquisition(self)
 
     def __del__(self):
         pass
