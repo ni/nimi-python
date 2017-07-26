@@ -57,9 +57,6 @@ Enums used in NI-DMM
 
       Units are powerline cycles (PLCs).
 
-   .. py:attribute:: RAW_SAMPLES
-
-
 
 .. py:data:: AutoZero
 
@@ -90,64 +87,98 @@ Enums used in NI-DMM
 
 .. py:data:: CableCompensationType
 
-   .. py:attribute:: CABLE_COMP_NONE
+   .. py:attribute:: NONE
 
       No cable compensation.
 
-   .. py:attribute:: CABLE_COMP_OPEN
+   .. py:attribute:: OPEN
 
       Open cable compensation.
 
-   .. py:attribute:: CABLE_COMP_SHORT
+   .. py:attribute:: SHORT
 
       Short cable compensation.
 
-   .. py:attribute:: CABLE_COMP_OPEN_AND_SHORT
+   .. py:attribute:: OPEN_AND_SHORT
 
       Open and short cable compensation.
 
 
 .. py:data:: CurrentSource
 
-   .. py:attribute:: ONE_MICRO_AMP
+   .. py:attribute:: _1_MICROAMP
 
       NI 4070/4071/4072 are supported.
 
-   .. py:attribute:: TEN_MICRO_AMP
+   .. py:attribute:: _10_MICROAMP
 
       NI 4080/4081/4082 and NI 4070/4071/4072 are supported.
 
-   .. py:attribute:: HUNDRED_MICRO_AMP
+   .. py:attribute:: _100_MICROAMP
 
       NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
 
-   .. py:attribute:: ONE_MILLI_AMP
+   .. py:attribute:: _1_MILLIAMP
 
       NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
 
 
-.. py:data:: DCNoiseRejectionMode
+.. py:data:: DCBias
 
-   .. py:attribute:: DCNR_AUTO
+   .. py:attribute:: DC_BIAS_OFF
+
+      NI-DMM programs the device not to use the DC bias.
+
+   .. py:attribute:: DC_BIAS_ON
+
+      NI-DMM programs the device to use the DC bias.
+
+
+.. py:data:: DCNoiseRejection
+
+   .. py:attribute:: AUTO
 
       The driver chooses the DC noise rejection setting based on the
       configured function and resolution.
 
-   .. py:attribute:: DCNR_NORMAL
+   .. py:attribute:: NORMAL
 
       NI-DMM weighs all samples equally.
 
-   .. py:attribute:: DCNR_SECOND_ORDERT
+   .. py:attribute:: SECOND_ORDER
 
       NI-DMM weighs the samples taken in the middle of the aperture time more
       than samples taken at the beginning and the end of the measurement using
       a triangular weighing function.
 
-   .. py:attribute:: DCNR_HIGH_ORDER
+   .. py:attribute:: HIGH_ORDER
 
       NI-DMM weighs the samples taken in the middle of the aperture time more
       than samples taken at the beginning and the end of the measurement using
       a bell-curve weighing function.
+
+
+.. py:data:: DigitsResolution
+
+   .. py:attribute:: _3_5
+
+      Specifies 3.5 digits resolution.
+
+   .. py:attribute:: _4_5
+
+      Specifies 4.5 digits resolution.
+
+   .. py:attribute:: _5_5
+
+      Specifies 5.5 digits resolution.
+
+   .. py:attribute:: _6_5
+
+      Specifies 6.5 digits resolution.
+
+   .. py:attribute:: _7_5
+
+      Specifies 7.5 digits resolution.
 
 
 .. py:data:: Function
@@ -168,15 +199,15 @@ Enums used in NI-DMM
 
       All devices supported.
 
-   .. py:attribute:: RES_2_WIRE
+   .. py:attribute:: _2_WIRE_RESISTANCE
 
       All devices supported.
 
-   .. py:attribute:: RES_4_WIRE
+   .. py:attribute:: _4_WIRE_RESISTANCE
 
       NI 4065, and NI 4070/4071/4072 supported.
 
-   .. py:attribute:: FREQ
+   .. py:attribute:: FREQUENCY
 
       NI 4070/4071/4072 supported.
 
@@ -188,7 +219,7 @@ Enums used in NI-DMM
 
       NI 4065, and NI 4070/4071/4072 supported.
 
-   .. py:attribute:: AC_VOLTS_DC_COUPLED
+   .. py:attribute:: _AC_VOLTS_DC_COUPLED
 
       NI 4070/4071/4072 supported.
 
@@ -200,7 +231,7 @@ Enums used in NI-DMM
 
       NI 4070/4071/4072 supported.
 
-   .. py:attribute:: WAVEFORM_CURRENT
+   .. py:attribute:: _WAVEFORM_CURRENT
 
       NI 4070/4071/4072 supported.
 
@@ -213,18 +244,33 @@ Enums used in NI-DMM
       NI 4072 supported.
 
 
+.. py:data:: InputResistance
+
+   .. py:attribute:: _1_M_OHM
+
+      Input resistance of 1 M Ohm
+
+   .. py:attribute:: _10_M_OHM
+
+      Input resistance of 10 M Ohm
+
+   .. py:attribute:: GREATER_THAN_10_G_OHM
+
+      Input resistance greater than 10 G Ohm
+
+
 .. py:data:: LCCalculationModel
 
-   .. py:attribute:: CALC_MODEL_AUTO
+   .. py:attribute:: AUTO
 
       NI-DMM chooses the algorithm based on function and range.
 
-   .. py:attribute:: CALC_MODEL_SERIES
+   .. py:attribute:: SERIES
 
       NI-DMM uses the series impedance model to calculate capacitance and
       inductance.
 
-   .. py:attribute:: CALC_MODEL_PARALLEL
+   .. py:attribute:: PARALLEL
 
       NI-DMM uses the parallel admittance model to calculate capacitance and
       inductance.
@@ -240,42 +286,39 @@ Enums used in NI-DMM
 
       Pin 6 on the AUX Connector
 
-   .. py:attribute:: SOFTWARE_TRIG
-
-
-   .. py:attribute:: PXI_TRIG0
+   .. py:attribute:: TTL_0
 
       PXI Trigger Line 0
 
-   .. py:attribute:: PXI_TRIG1
+   .. py:attribute:: TTL_1
 
       PXI Trigger Line 1
 
-   .. py:attribute:: PXI_TRIG2
+   .. py:attribute:: TL_2
 
       PXI Trigger Line 2
 
-   .. py:attribute:: PXI_TRIG3
+   .. py:attribute:: TTL_3
 
       PXI Trigger Line 3
 
-   .. py:attribute:: PXI_TRIG4
+   .. py:attribute:: TL_4
 
       PXI Trigger Line 4
 
-   .. py:attribute:: PXI_TRIG5
+   .. py:attribute:: TTL_5
 
       PXI Trigger Line 5
 
-   .. py:attribute:: PXI_TRIG6
+   .. py:attribute:: TTL_6
 
       PXI Trigger Line 6
 
-   .. py:attribute:: PXI_TRIG7
+   .. py:attribute:: TTL_7
 
       PXI Trigger Line 7
 
-   .. py:attribute:: LBR_TRIG0
+   .. py:attribute:: _LBR_TRIG_0
 
       Local Bus Right Trigger Line 0 of PXI/SCXI combination chassis
 
@@ -304,7 +347,7 @@ Enums used in NI-DMM
 
 .. py:data:: OperationMode
 
-   .. py:attribute:: DMM_MODE
+   .. py:attribute:: _IVIDMM_MODE
 
       Single or multipoint measurements: When the Trigger Count and Sample
       Count properties are both set to 1, the NI 4065, NI 4070/4071/4072, and
@@ -315,6 +358,49 @@ Enums used in NI-DMM
 
       Configures the NI 4080/4081/4082 and NI 4070/4071/4072 to take waveform
       measurements.
+
+
+.. py:data:: PowerlineFrequency
+
+   .. py:attribute:: _50_HZ
+
+      Specifies the powerline frequency as 50 Hz.
+
+   .. py:attribute:: _60_HZ
+
+      Specifies the powerline frequency as 60 Hz.
+
+
+.. py:data:: RTDType
+
+   .. py:attribute:: CUSTOM
+
+      Performs Callendar-Van Dusen RTD scaling with the user-specified A, B,
+      and C coefficients.
+
+   .. py:attribute:: PT_3750
+
+      Performs scaling for a Pt 3750 RTD.
+
+   .. py:attribute:: PT_3851
+
+      Performs scaling for a Pt 3851 RTD.
+
+   .. py:attribute:: PT_3911
+
+      Performs scaling for a Pt 3911 RTD.
+
+   .. py:attribute:: PT_3916
+
+      Performs scaling for a Pt 3916 RTD.
+
+   .. py:attribute:: PT_3920
+
+      Performs scaling for a Pt 3920 RTD.
+
+   .. py:attribute:: PT_3928
+
+      Performs scaling for a Pt 3928 RTD.
 
 
 .. py:data:: SampleTrigSlope
@@ -330,14 +416,11 @@ Enums used in NI-DMM
 
 .. py:data:: SampleTrigger
 
-   .. py:attribute:: NONE
-
-
    .. py:attribute:: IMMEDIATE
 
       No trigger specified
 
-   .. py:attribute:: EXTERNAL
+   .. py:attribute:: _EXTERNAL
 
       Pin 9 on the AUX Connector
 
@@ -349,43 +432,35 @@ Enums used in NI-DMM
 
       Interval trigger
 
-   .. py:attribute:: AUX_TRIG1
-
-      Pin 3 on the AUX connector
-
-   .. py:attribute:: LBR_TRIG1
-
-      Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
-
-   .. py:attribute:: PXI_TRIG0
+   .. py:attribute:: TTL_0
 
       PXI Trigger Line 0
 
-   .. py:attribute:: PXI_TRIG1
+   .. py:attribute:: TTL_1
 
       PXI Trigger Line 1
 
-   .. py:attribute:: PXI_TRIG2
+   .. py:attribute:: TTL_2
 
       PXI Trigger Line 2
 
-   .. py:attribute:: PXI_TRIG3
+   .. py:attribute:: _TTL_3
 
       PXI Trigger Line 3
 
-   .. py:attribute:: PXI_TRIG4
+   .. py:attribute:: TTL_4
 
       PXI Trigger Line 4
 
-   .. py:attribute:: PXI_TRIG5
+   .. py:attribute:: TTL_5
 
       PXI Trigger Line 5
 
-   .. py:attribute:: PXI_TRIG6
+   .. py:attribute:: TTL_6
 
       PXI Trigger Line 6
 
-   .. py:attribute:: PXI_TRIG7
+   .. py:attribute:: TTL_7
 
       PXI Trigger Line 7
 
@@ -393,68 +468,44 @@ Enums used in NI-DMM
 
       PXI Star trigger line
 
+   .. py:attribute:: AUX_TRIG_1
 
-.. py:data:: TemperatureRTDType
+      Pin 3 on the AUX connector
 
-   .. py:attribute:: CustomRTD
+   .. py:attribute:: LBR_TRIG_1
 
-      Performs Callendar-Van Dusen RTD scaling with the user-specified A, B,
-      and C coefficients.
-
-   .. py:attribute:: PT3750
-
-      Performs scaling for a Pt 3750 RTD.
-
-   .. py:attribute:: PT3851
-
-      Performs scaling for a Pt 3851 RTD.
-
-   .. py:attribute:: PT3911
-
-      Performs scaling for a Pt 3911 RTD.
-
-   .. py:attribute:: PT3916
-
-      Performs scaling for a Pt 3916 RTD.
-
-   .. py:attribute:: PT3920
-
-      Performs scaling for a Pt 3920 RTD.
-
-   .. py:attribute:: PT3928
-
-      Performs scaling for a Pt 3928 RTD.
+      Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
 
 
-.. py:data:: TemperatureThermistorType
+.. py:data:: ThermistorType
 
-   .. py:attribute:: THERMISTOR_CUSTOM
+   .. py:attribute:: CUSTOM
 
       Performs Steinhart-Hart thermistor scaling with the user-specified A, B,
       and C coefficients.
 
-   .. py:attribute:: THERMISTOR_44004
+   .. py:attribute:: _44004
 
       Performs scaling for an Omega Series 44004 thermistor.
 
-   .. py:attribute:: THERMISTOR_44006
+   .. py:attribute:: _44006
 
       Performs scaling for an Omega Series 44006 thermistor.
 
-   .. py:attribute:: THERMISTOR_44007
+   .. py:attribute:: _44007
 
       Performs scaling for an Omega Series 44007 thermistor.
 
 
-.. py:data:: TemperatureThermocoupleReferenceJunctionType
+.. py:data:: ThermocoupleReferenceJunctionType
 
-   .. py:attribute:: Fixed
+   .. py:attribute:: FIXED
 
       Thermocouple reference juction is fixed at the user-specified
       temperature.
 
 
-.. py:data:: TemperatureThermocoupleType
+.. py:data:: ThermocoupleType
 
    .. py:attribute:: B
 
@@ -489,7 +540,7 @@ Enums used in NI-DMM
       Thermocouple type T
 
 
-.. py:data:: TemperatureTransducerType
+.. py:data:: TransducerType
 
    .. py:attribute:: THERMOCOUPLE
 
@@ -499,11 +550,11 @@ Enums used in NI-DMM
 
       Use for thermistor measurements.
 
-   .. py:attribute:: TWO_WIRE_RTD
+   .. py:attribute:: _2_WIRE_RTD
 
       Use for 2-wire RTD measurements.
 
-   .. py:attribute:: FOUR_WIRE_RTD
+   .. py:attribute:: _4_WIRE_RTD
 
       Use for 4-wire RTD measurements.
 
@@ -521,9 +572,6 @@ Enums used in NI-DMM
 
 .. py:data:: TriggerSource
 
-   .. py:attribute:: NONE
-
-
    .. py:attribute:: IMMEDIATE
 
       No trigger specified.
@@ -536,57 +584,57 @@ Enums used in NI-DMM
 
       Waits until niDMM Send Software Trigger is called.
 
-   .. py:attribute:: PXI_TRIG0
+   .. py:attribute:: _TTL_0
 
       PXI Trigger Line 0
 
-   .. py:attribute:: PXI_TRIG1
+   .. py:attribute:: TTL_1
 
       PXI Trigger Line 1
 
-   .. py:attribute:: PXI_TRIG2
+   .. py:attribute:: TTL_2
 
       PXI Trigger Line 2
 
-   .. py:attribute:: PXI_TRIG3
+   .. py:attribute:: _TTL_3
 
       PXI Trigger Line 3
 
-   .. py:attribute:: PXI_TRIG4
+   .. py:attribute:: TTL_4
 
       PXI Trigger Line 4
 
-   .. py:attribute:: PXI_TRIG5
+   .. py:attribute:: TTL_5
 
       PXI Trigger Line 5
 
-   .. py:attribute:: PXI_TRIG6
+   .. py:attribute:: TTL_6
 
       PXI Trigger Line 6
 
-   .. py:attribute:: PXI_TRIG7
+   .. py:attribute:: _TTL_7
 
       PXI Trigger Line 7
 
-   .. py:attribute:: PXI_STAR
+   .. py:attribute:: _PXI_STAR
 
       PXI Star Trigger Line
 
-   .. py:attribute:: AUX_TRIG1
+   .. py:attribute:: AUX_TRIG_1
 
       Pin 3 on the AUX connector
 
-   .. py:attribute:: LBR_TRIG1
+   .. py:attribute:: LBR_TRIG_1
 
       Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
 
 
-.. py:data:: WaveformCouplingMode
+.. py:data:: WaveformCoupling
 
-   .. py:attribute:: WAVEFORM_COUPLING_AC
+   .. py:attribute:: AC
 
       Specifies AC coupling.
 
-   .. py:attribute:: WAVEFORM_COUPLING_DC
+   .. py:attribute:: DC
 
       Specifies DC coupling.

@@ -52,7 +52,6 @@ class ApertureTimeUnits(Enum):
     '''
     Units are powerline cycles (PLCs).
     '''
-    RAW_SAMPLES = 2
 
 
 class AutoZero(Enum):
@@ -83,64 +82,98 @@ class AutoZero(Enum):
 
 
 class CableCompensationType(Enum):
-    CABLE_COMP_NONE = 0
+    NONE = 0
     '''
     No cable compensation.
     '''
-    CABLE_COMP_OPEN = 1
+    OPEN = 1
     '''
     Open cable compensation.
     '''
-    CABLE_COMP_SHORT = 2
+    SHORT = 2
     '''
     Short cable compensation.
     '''
-    CABLE_COMP_OPEN_AND_SHORT = 3
+    OPEN_AND_SHORT = 3
     '''
     Open and short cable compensation.
     '''
 
 
 class CurrentSource(Enum):
-    ONE_MICRO_AMP = 1e-06
+    _1_MICROAMP = 1e-06
     '''
     NI 4070/4071/4072 are supported.
     '''
-    TEN_MICRO_AMP = 1e-05
+    _10_MICROAMP = 1e-05
     '''
     NI 4080/4081/4082 and NI 4070/4071/4072 are supported.
     '''
-    HUNDRED_MICRO_AMP = 0.0001
+    _100_MICROAMP = 0.0001
     '''
     NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
     '''
-    ONE_MILLI_AMP = 0.001
+    _1_MILLIAMP = 0.001
     '''
     NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
     '''
 
 
-class DCNoiseRejectionMode(Enum):
-    DCNR_AUTO = -1
+class DCBias(Enum):
+    DC_BIAS_OFF = 0
+    '''
+    NI-DMM programs the device not to use the DC bias.
+    '''
+    DC_BIAS_ON = 1
+    '''
+    NI-DMM programs the device to use the DC bias.
+    '''
+
+
+class DCNoiseRejection(Enum):
+    AUTO = -1
     '''
     The driver chooses the DC noise rejection setting based on the
     configured function and resolution.
     '''
-    DCNR_NORMAL = 0
+    NORMAL = 0
     '''
     NI-DMM weighs all samples equally.
     '''
-    DCNR_SECOND_ORDERT = 1
+    SECOND_ORDER = 1
     '''
     NI-DMM weighs the samples taken in the middle of the aperture time more
     than samples taken at the beginning and the end of the measurement using
     a triangular weighing function.
     '''
-    DCNR_HIGH_ORDER = 2
+    HIGH_ORDER = 2
     '''
     NI-DMM weighs the samples taken in the middle of the aperture time more
     than samples taken at the beginning and the end of the measurement using
     a bell-curve weighing function.
+    '''
+
+
+class DigitsResolution(Enum):
+    _3_5 = 3.5
+    '''
+    Specifies 3.5 digits resolution.
+    '''
+    _4_5 = 4.5
+    '''
+    Specifies 4.5 digits resolution.
+    '''
+    _5_5 = 5.5
+    '''
+    Specifies 5.5 digits resolution.
+    '''
+    _6_5 = 6.5
+    '''
+    Specifies 6.5 digits resolution.
+    '''
+    _7_5 = 7.5
+    '''
+    Specifies 7.5 digits resolution.
     '''
 
 
@@ -161,15 +194,15 @@ class Function(Enum):
     '''
     All devices supported.
     '''
-    RES_2_WIRE = 5
+    _2_WIRE_RESISTANCE = 5
     '''
     All devices supported.
     '''
-    RES_4_WIRE = 101
+    _4_WIRE_RESISTANCE = 101
     '''
     NI 4065, and NI 4070/4071/4072 supported.
     '''
-    FREQ = 104
+    FREQUENCY = 104
     '''
     NI 4070/4071/4072 supported.
     '''
@@ -181,7 +214,7 @@ class Function(Enum):
     '''
     NI 4065, and NI 4070/4071/4072 supported.
     '''
-    AC_VOLTS_DC_COUPLED = 1001
+    _AC_VOLTS_DC_COUPLED = 1001
     '''
     NI 4070/4071/4072 supported.
     '''
@@ -193,7 +226,7 @@ class Function(Enum):
     '''
     NI 4070/4071/4072 supported.
     '''
-    WAVEFORM_CURRENT = 1004
+    _WAVEFORM_CURRENT = 1004
     '''
     NI 4070/4071/4072 supported.
     '''
@@ -207,17 +240,32 @@ class Function(Enum):
     '''
 
 
+class InputResistance(Enum):
+    _1_M_OHM = 1000000.0
+    '''
+    Input resistance of 1 M Ohm
+    '''
+    _10_M_OHM = 10000000.0
+    '''
+    Input resistance of 10 M Ohm
+    '''
+    GREATER_THAN_10_G_OHM = 10000000000.0
+    '''
+    Input resistance greater than 10 G Ohm
+    '''
+
+
 class LCCalculationModel(Enum):
-    CALC_MODEL_AUTO = -1
+    AUTO = -1
     '''
     NI-DMM chooses the algorithm based on function and range.
     '''
-    CALC_MODEL_SERIES = 0
+    SERIES = 0
     '''
     NI-DMM uses the series impedance model to calculate capacitance and
     inductance.
     '''
-    CALC_MODEL_PARALLEL = 1
+    PARALLEL = 1
     '''
     NI-DMM uses the parallel admittance model to calculate capacitance and
     inductance.
@@ -233,40 +281,39 @@ class MeasurementCompleteDest(Enum):
     '''
     Pin 6 on the AUX Connector
     '''
-    SOFTWARE_TRIG = 3
-    PXI_TRIG0 = 111
+    TTL_0 = 111
     '''
     PXI Trigger Line 0
     '''
-    PXI_TRIG1 = 112
+    TTL_1 = 112
     '''
     PXI Trigger Line 1
     '''
-    PXI_TRIG2 = 113
+    TL_2 = 113
     '''
     PXI Trigger Line 2
     '''
-    PXI_TRIG3 = 114
+    TTL_3 = 114
     '''
     PXI Trigger Line 3
     '''
-    PXI_TRIG4 = 115
+    TL_4 = 115
     '''
     PXI Trigger Line 4
     '''
-    PXI_TRIG5 = 116
+    TTL_5 = 116
     '''
     PXI Trigger Line 5
     '''
-    PXI_TRIG6 = 117
+    TTL_6 = 117
     '''
     PXI Trigger Line 6
     '''
-    PXI_TRIG7 = 118
+    TTL_7 = 118
     '''
     PXI Trigger Line 7
     '''
-    LBR_TRIG0 = 1003
+    _LBR_TRIG_0 = 1003
     '''
     Local Bus Right Trigger Line 0 of PXI/SCXI combination chassis
     '''
@@ -295,7 +342,7 @@ class OffsetCompensatedOhms(Enum):
 
 
 class OperationMode(Enum):
-    DMM_MODE = 0
+    _IVIDMM_MODE = 0
     '''
     Single or multipoint measurements: When the Trigger Count and Sample
     Count properties are both set to 1, the NI 4065, NI 4070/4071/4072, and
@@ -306,6 +353,49 @@ class OperationMode(Enum):
     '''
     Configures the NI 4080/4081/4082 and NI 4070/4071/4072 to take waveform
     measurements.
+    '''
+
+
+class PowerlineFrequency(Enum):
+    _50_HZ = 50.0
+    '''
+    Specifies the powerline frequency as 50 Hz.
+    '''
+    _60_HZ = 60.0
+    '''
+    Specifies the powerline frequency as 60 Hz.
+    '''
+
+
+class RTDType(Enum):
+    CUSTOM = 0
+    '''
+    Performs Callendar-Van Dusen RTD scaling with the user-specified A, B,
+    and C coefficients.
+    '''
+    PT_3750 = 1
+    '''
+    Performs scaling for a Pt 3750 RTD.
+    '''
+    PT_3851 = 2
+    '''
+    Performs scaling for a Pt 3851 RTD.
+    '''
+    PT_3911 = 3
+    '''
+    Performs scaling for a Pt 3911 RTD.
+    '''
+    PT_3916 = 4
+    '''
+    Performs scaling for a Pt 3916 RTD.
+    '''
+    PT_3920 = 5
+    '''
+    Performs scaling for a Pt 3920 RTD.
+    '''
+    PT_3928 = 6
+    '''
+    Performs scaling for a Pt 3928 RTD.
     '''
 
 
@@ -321,12 +411,11 @@ class SampleTrigSlope(Enum):
 
 
 class SampleTrigger(Enum):
-    NONE = -1
     IMMEDIATE = 1
     '''
     No trigger specified
     '''
-    EXTERNAL = 2
+    _EXTERNAL = 2
     '''
     Pin 9 on the AUX Connector
     '''
@@ -338,43 +427,35 @@ class SampleTrigger(Enum):
     '''
     Interval trigger
     '''
-    AUX_TRIG1 = 1001
-    '''
-    Pin 3 on the AUX connector
-    '''
-    LBR_TRIG1 = 1004
-    '''
-    Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
-    '''
-    PXI_TRIG0 = 111
+    TTL_0 = 111
     '''
     PXI Trigger Line 0
     '''
-    PXI_TRIG1 = 112
+    TTL_1 = 112
     '''
     PXI Trigger Line 1
     '''
-    PXI_TRIG2 = 113
+    TTL_2 = 113
     '''
     PXI Trigger Line 2
     '''
-    PXI_TRIG3 = 114
+    _TTL_3 = 114
     '''
     PXI Trigger Line 3
     '''
-    PXI_TRIG4 = 115
+    TTL_4 = 115
     '''
     PXI Trigger Line 4
     '''
-    PXI_TRIG5 = 116
+    TTL_5 = 116
     '''
     PXI Trigger Line 5
     '''
-    PXI_TRIG6 = 117
+    TTL_6 = 117
     '''
     PXI Trigger Line 6
     '''
-    PXI_TRIG7 = 118
+    TTL_7 = 118
     '''
     PXI Trigger Line 7
     '''
@@ -382,69 +463,45 @@ class SampleTrigger(Enum):
     '''
     PXI Star trigger line
     '''
-
-
-class TemperatureRTDType(Enum):
-    CustomRTD = 0
+    AUX_TRIG_1 = 1001
     '''
-    Performs Callendar-Van Dusen RTD scaling with the user-specified A, B,
-    and C coefficients.
+    Pin 3 on the AUX connector
     '''
-    PT3750 = 1
+    LBR_TRIG_1 = 1004
     '''
-    Performs scaling for a Pt 3750 RTD.
-    '''
-    PT3851 = 2
-    '''
-    Performs scaling for a Pt 3851 RTD.
-    '''
-    PT3911 = 3
-    '''
-    Performs scaling for a Pt 3911 RTD.
-    '''
-    PT3916 = 4
-    '''
-    Performs scaling for a Pt 3916 RTD.
-    '''
-    PT3920 = 5
-    '''
-    Performs scaling for a Pt 3920 RTD.
-    '''
-    PT3928 = 6
-    '''
-    Performs scaling for a Pt 3928 RTD.
+    Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
     '''
 
 
-class TemperatureThermistorType(Enum):
-    THERMISTOR_CUSTOM = 0
+class ThermistorType(Enum):
+    CUSTOM = 0
     '''
     Performs Steinhart-Hart thermistor scaling with the user-specified A, B,
     and C coefficients.
     '''
-    THERMISTOR_44004 = 1
+    _44004 = 1
     '''
     Performs scaling for an Omega Series 44004 thermistor.
     '''
-    THERMISTOR_44006 = 2
+    _44006 = 2
     '''
     Performs scaling for an Omega Series 44006 thermistor.
     '''
-    THERMISTOR_44007 = 3
+    _44007 = 3
     '''
     Performs scaling for an Omega Series 44007 thermistor.
     '''
 
 
-class TemperatureThermocoupleReferenceJunctionType(Enum):
-    Fixed = 2
+class ThermocoupleReferenceJunctionType(Enum):
+    FIXED = 2
     '''
     Thermocouple reference juction is fixed at the user-specified
     temperature.
     '''
 
 
-class TemperatureThermocoupleType(Enum):
+class ThermocoupleType(Enum):
     B = 1
     '''
     Thermocouple type B
@@ -479,7 +536,7 @@ class TemperatureThermocoupleType(Enum):
     '''
 
 
-class TemperatureTransducerType(Enum):
+class TransducerType(Enum):
     THERMOCOUPLE = 1
     '''
     Use for thermocouple measurements.
@@ -488,11 +545,11 @@ class TemperatureTransducerType(Enum):
     '''
     Use for thermistor measurements.
     '''
-    TWO_WIRE_RTD = 3
+    _2_WIRE_RTD = 3
     '''
     Use for 2-wire RTD measurements.
     '''
-    FOUR_WIRE_RTD = 4
+    _4_WIRE_RTD = 4
     '''
     Use for 4-wire RTD measurements.
     '''
@@ -510,7 +567,6 @@ class TriggerSlope(Enum):
 
 
 class TriggerSource(Enum):
-    NONE = -1
     IMMEDIATE = 1
     '''
     No trigger specified.
@@ -523,58 +579,58 @@ class TriggerSource(Enum):
     '''
     Waits until niDMM Send Software Trigger is called.
     '''
-    PXI_TRIG0 = 111
+    _TTL_0 = 111
     '''
     PXI Trigger Line 0
     '''
-    PXI_TRIG1 = 112
+    TTL_1 = 112
     '''
     PXI Trigger Line 1
     '''
-    PXI_TRIG2 = 113
+    TTL_2 = 113
     '''
     PXI Trigger Line 2
     '''
-    PXI_TRIG3 = 114
+    _TTL_3 = 114
     '''
     PXI Trigger Line 3
     '''
-    PXI_TRIG4 = 115
+    TTL_4 = 115
     '''
     PXI Trigger Line 4
     '''
-    PXI_TRIG5 = 116
+    TTL_5 = 116
     '''
     PXI Trigger Line 5
     '''
-    PXI_TRIG6 = 117
+    TTL_6 = 117
     '''
     PXI Trigger Line 6
     '''
-    PXI_TRIG7 = 118
+    _TTL_7 = 118
     '''
     PXI Trigger Line 7
     '''
-    PXI_STAR = 131
+    _PXI_STAR = 131
     '''
     PXI Star Trigger Line
     '''
-    AUX_TRIG1 = 1001
+    AUX_TRIG_1 = 1001
     '''
     Pin 3 on the AUX connector
     '''
-    LBR_TRIG1 = 1004
+    LBR_TRIG_1 = 1004
     '''
     Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis
     '''
 
 
-class WaveformCouplingMode(Enum):
-    WAVEFORM_COUPLING_AC = 0
+class WaveformCoupling(Enum):
+    AC = 0
     '''
     Specifies AC coupling.
     '''
-    WAVEFORM_COUPLING_DC = 1
+    DC = 1
     '''
     Specifies DC coupling.
     '''
