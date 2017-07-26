@@ -4,20 +4,46 @@
     config = template_parameters['metadata'].config
     module_name = config['module_name']
     driver_name = config['driver_name']
+    c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
-    attribute_docs = helper.normalize_string_type(template_parameters['metadata'].attribute_docs)
 %>\
 ${helper.get_rst_header_snippet(driver_name + ' Session', '=')}
 
-${config['session_description']}
+.. py:module:: ${module_name}
 
-${helper.get_rst_header_snippet('Attributes', '-')}
+.. py:class:: Session
+
+   ${helper.get_indented_docstring_snippet(config['session_description'], indent=3)}
+
 
 % for attr in sorted(attributes):
-%   if str(attributes[attr]['id']) in attribute_docs:
-${helper.get_rst_header_snippet(attr, '~')}
+<% 
+if attributes[attr]['enum'] is not None:
+    t = 'enums.' + attributes[attr]['enum']
+else:
+    t = attributes[attr]["type"]
+%>\
+   :ivar ${t} ${attributes[attr]["name"].lower()}: 
+      ${helper.get_indented_docstring_snippet(attributes[attr]['shortDescription'], indent=6)}
+% endfor
 
-${attribute_docs[str(attributes[attr]['id'])]['longDescription']}
+% for attr in sorted(attributes):
+%   if 'longDescription' in attributes[attr]:
+   .. py:attribute:: ${attributes[attr]["name"].lower()}
+
+%   if attributes[attr]['enum'] is not None:
+      See :py:data:`${module_name}.${attributes[attr]['enum']}` 
 
 %   endif
+      ${helper.get_indented_docstring_snippet(attributes[attr]['longDescription'], indent=6)}
+
+      .. tip:: 
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+%   if 'lv_property' in attributes[attr]:
+           - LabVIEW Property: **${attributes[attr]['lv_property'].strip()}**
+%   endif
+           - C Attribute: **${c_function_prefix.upper()}ATTR_${attributes[attr]["name"].upper()}**
+%   endif
+
 % endfor

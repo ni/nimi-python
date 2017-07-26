@@ -1,213 +1,232 @@
 NI-ModInst Session
 ==================
 
-A NI-ModInst session to get device information
+.. py:module:: nimodinst
 
-Attributes
-----------
+.. py:class:: Session
 
-BUS_NUMBER
-~~~~~~~~~~
+   A NI-ModInst session to get device information
 
 
-    The bus on which the device has been enumerated.
+   :ivar ViString device_name: 
+      The name of the device, which can be used to open an instrument driver session for that device
+   :ivar ViString device_model: 
+      The model of the device (for example, NI PXI-5122)
+   :ivar ViString serial_number: 
+      The serial number of the device
+   :ivar ViInt32 slot_number: 
+      The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
+   :ivar ViInt32 chassis_number: 
+      The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
+   :ivar ViInt32 bus_number: 
+      The bus on which the device has been enumerated.
+   :ivar ViInt32 socket_number: 
+      The socket number on which the device has been enumerated
+   :ivar ViInt32 pciexpress_link_width: 
+      **PCIEXPRESS_LINK_WIDTH**
+   :ivar ViInt32 max_pciexpress_link_width: 
+      **MAX_PCIEXPRESS_LINK_WIDTH**
 
-    The following table lists the characteristics of this property.
+   .. py:attribute:: device_name
 
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
+      The name of the device, which can be used to open an instrument driver session for that device
 
+      The following table lists the characteristics of this property.
 
-CHASSIS_NUMBER
-~~~~~~~~~~~~~~
+      +------------------+-------------+
+      | Characteristic   | Value       |
+      +------------------+-------------+
+      | Datatype         | string      |
+      +------------------+-------------+
+      | Permissions      | Read Only   |
+      +------------------+-------------+
+      | Channel Based    | False       |
+      +------------------+-------------+
+      | Resettable       | No          |
+      +------------------+-------------+
 
+      .. tip:: 
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-    The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
+           - C Attribute: **NIMODINST_ATTR_DEVICE_NAME**
 
-    The following table lists the characteristics of this property.
+   .. py:attribute:: device_model
 
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
+      The model of the device (for example, NI PXI-5122)
 
+      The following table lists the characteristics of this property.
 
-DEVICE_MODEL
-~~~~~~~~~~~~
+      +------------------+-------------+
+      | Characteristic   | Value       |
+      +------------------+-------------+
+      | Datatype         | string      |
+      +------------------+-------------+
+      | Permissions      | Read Only   |
+      +------------------+-------------+
+      | Channel Based    | False       |
+      +------------------+-------------+
+      | Resettable       | No          |
+      +------------------+-------------+
 
+      .. tip:: 
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-    The model of the device (for example, NI PXI-5122)
+           - C Attribute: **NIMODINST_ATTR_DEVICE_MODEL**
 
-    The following table lists the characteristics of this property.
+   .. py:attribute:: serial_number
 
-    +------------------+-------------+
-    | Characteristic   | Value       |
-    +------------------+-------------+
-    | Datatype         | string      |
-    +------------------+-------------+
-    | Permissions      | Read Only   |
-    +------------------+-------------+
-    | High Level VI    | N/A         |
-    +------------------+-------------+
-    | Channel Based    | False       |
-    +------------------+-------------+
-    | Resettable       | No          |
-    +------------------+-------------+
+      The serial number of the device
 
+      The following table lists the characteristics of this property.
 
-DEVICE_NAME
-~~~~~~~~~~~
+      +------------------+-------------+
+      | Characteristic   | Value       |
+      +------------------+-------------+
+      | Datatype         | string      |
+      +------------------+-------------+
+      | Permissions      | Read Only   |
+      +------------------+-------------+
+      | Channel Based    | False       |
+      +------------------+-------------+
+      | Resettable       | No          |
+      +------------------+-------------+
 
+      .. tip:: 
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-    The name of the device, which can be used to open an instrument driver session for that device
+           - C Attribute: **NIMODINST_ATTR_SERIAL_NUMBER**
 
-    The following table lists the characteristics of this property.
+   .. py:attribute:: slot_number
 
-    +------------------+-------------+
-    | Characteristic   | Value       |
-    +------------------+-------------+
-    | Datatype         | string      |
-    +------------------+-------------+
-    | Permissions      | Read Only   |
-    +------------------+-------------+
-    | High Level VI    | N/A         |
-    +------------------+-------------+
-    | Channel Based    | False       |
-    +------------------+-------------+
-    | Resettable       | No          |
-    +------------------+-------------+
+      The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
 
+      The following table lists the characteristics of this property.
 
-MAX_PCIEXPRESS_LINK_WIDTH
-~~~~~~~~~~~~~~~~~~~~~~~~~
+      +------------------+-------------------------+
+      | Characteristic   | Value                   |
+      +------------------+-------------------------+
+      | Datatype         | 32-bit signed integer   |
+      +------------------+-------------------------+
+      | Permissions      | Read/Write              |
+      +------------------+-------------------------+
+      | Channel Based    | False                   |
+      +------------------+-------------------------+
+      | Resettable       | No                      |
+      +------------------+-------------------------+
 
+      .. tip:: 
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
+           - C Attribute: **NIMODINST_ATTR_SLOT_NUMBER**
 
-    The following table lists the characteristics of this property.
+   .. py:attribute:: chassis_number
 
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
+      The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
 
+      The following table lists the characteristics of this property.
 
-PCIEXPRESS_LINK_WIDTH
-~~~~~~~~~~~~~~~~~~~~~
+      +------------------+-------------------------+
+      | Characteristic   | Value                   |
+      +------------------+-------------------------+
+      | Datatype         | 32-bit signed integer   |
+      +------------------+-------------------------+
+      | Permissions      | Read/Write              |
+      +------------------+-------------------------+
+      | Channel Based    | False                   |
+      +------------------+-------------------------+
+      | Resettable       | No                      |
+      +------------------+-------------------------+
 
+      .. tip:: 
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
+           - C Attribute: **NIMODINST_ATTR_CHASSIS_NUMBER**
 
-    The following table lists the characteristics of this property.
+   .. py:attribute:: bus_number
 
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
+      The bus on which the device has been enumerated.
 
+      The following table lists the characteristics of this property.
 
-SERIAL_NUMBER
-~~~~~~~~~~~~~
+      +------------------+-------------------------+
+      | Characteristic   | Value                   |
+      +------------------+-------------------------+
+      | Datatype         | 32-bit signed integer   |
+      +------------------+-------------------------+
+      | Permissions      | Read/Write              |
+      +------------------+-------------------------+
+      | Channel Based    | False                   |
+      +------------------+-------------------------+
+      | Resettable       | No                      |
+      +------------------+-------------------------+
 
+      .. tip:: 
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-    The serial number of the device
+           - C Attribute: **NIMODINST_ATTR_BUS_NUMBER**
 
-    The following table lists the characteristics of this property.
+   .. py:attribute:: socket_number
 
-    +------------------+-------------+
-    | Characteristic   | Value       |
-    +------------------+-------------+
-    | Datatype         | string      |
-    +------------------+-------------+
-    | Permissions      | Read Only   |
-    +------------------+-------------+
-    | High Level VI    | N/A         |
-    +------------------+-------------+
-    | Channel Based    | False       |
-    +------------------+-------------+
-    | Resettable       | No          |
-    +------------------+-------------+
+      The socket number on which the device has been enumerated
 
+      The following table lists the characteristics of this property.
 
-SLOT_NUMBER
-~~~~~~~~~~~
+      +------------------+-------------------------+
+      | Characteristic   | Value                   |
+      +------------------+-------------------------+
+      | Datatype         | 32-bit signed integer   |
+      +------------------+-------------------------+
+      | Permissions      | Read/Write              |
+      +------------------+-------------------------+
+      | Channel Based    | False                   |
+      +------------------+-------------------------+
+      | Resettable       | No                      |
+      +------------------+-------------------------+
 
+      .. tip:: 
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-    The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
+           - C Attribute: **NIMODINST_ATTR_SOCKET_NUMBER**
 
-    The following table lists the characteristics of this property.
+   .. py:attribute:: pciexpress_link_width
 
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
+      The following table lists the characteristics of this property.
 
+      +------------------+-------------------------+
+      | Characteristic   | Value                   |
+      +------------------+-------------------------+
+      | Datatype         | 32-bit signed integer   |
+      +------------------+-------------------------+
+      | Permissions      | Read/Write              |
+      +------------------+-------------------------+
+      | Channel Based    | False                   |
+      +------------------+-------------------------+
+      | Resettable       | No                      |
+      +------------------+-------------------------+
 
-SOCKET_NUMBER
-~~~~~~~~~~~~~
+      .. tip:: 
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
+           - C Attribute: **NIMODINST_ATTR_PCIEXPRESS_LINK_WIDTH**
 
-    The socket number on which the device has been enumerated
+   .. py:attribute:: max_pciexpress_link_width
 
-    The following table lists the characteristics of this property.
+      The following table lists the characteristics of this property.
 
-    +------------------+-------------------------+
-    | Characteristic   | Value                   |
-    +------------------+-------------------------+
-    | Datatype         | 32-bit signed integer   |
-    +------------------+-------------------------+
-    | Permissions      | Read/Write              |
-    +------------------+-------------------------+
-    | High Level VI    | N/A                     |
-    +------------------+-------------------------+
-    | Channel Based    | False                   |
-    +------------------+-------------------------+
-    | Resettable       | No                      |
-    +------------------+-------------------------+
+      +------------------+-------------------------+
+      | Characteristic   | Value                   |
+      +------------------+-------------------------+
+      | Datatype         | 32-bit signed integer   |
+      +------------------+-------------------------+
+      | Permissions      | Read/Write              |
+      +------------------+-------------------------+
+      | Channel Based    | False                   |
+      +------------------+-------------------------+
+      | Resettable       | No                      |
+      +------------------+-------------------------+
 
+      .. tip:: 
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+           - C Attribute: **NIMODINST_ATTR_MAX_PCIEXPRESS_LINK_WIDTH**
 
