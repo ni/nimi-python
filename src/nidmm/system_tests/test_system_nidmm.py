@@ -116,6 +116,39 @@ def test_ViSession_attribute(device_info):
             print(e)
             pass
 
+
+def test_parameter_count0(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        assert session.get_aperture_time_info()[1] == 0 # Assuming default aperture time unit will be seconds
+
+                
+def test_parameter_count1(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
+        session._initiate()
+        assert session.fetch(1000) != 0 # Assumes DMM doesn't Fetch is not exactly zero to support non-connected modules and simulated modules.
+        session._abort()
+        
+    
+def test_parameter_count1_error(device_info):
+    #calling a function, without parameter, But it has a mandate parameter
+    with nidmm.Session(device_info['name']) as session:
+        try:
+            session.fetch()
+            assert False
+        except TypeError as e:
+            print (e)
+            pass
+            
+
+def test_parameter_count2(device_info):
+	# Calling Configure Trigger function and asserting True if any error occurred while function call.
+    with nidmm.Session(device_info['name']) as session:
+        try:
+            session.configure_trigger(nidmm.Terminal.IMMEDIATE, 1)
+        except Error as e:
+            print (e)
+            assert True
 '''
 def test_self_test(device_info):
     with nidmm.Session(device_info['name']) as session:
