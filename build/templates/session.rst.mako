@@ -23,7 +23,8 @@ if attributes[attr]['enum'] is not None:
 else:
     t = attributes[attr]["type"]
 %>\
-   :ivar ${t} ${attributes[attr]["name"].lower()}:
+   :ivar ${t} ${attributes[attr]["name"].lower()}: 
+      ${helper.get_indented_docstring_snippet(attributes[attr]['shortDescription'], indent=6)}
 % endfor
 
 % for attr in sorted(attributes):
