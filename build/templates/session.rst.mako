@@ -6,7 +6,6 @@
     driver_name = config['driver_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
-    attribute_docs = helper.normalize_string_type(template_parameters['metadata'].attribute_docs)
 %>\
 ${helper.get_rst_header_snippet(driver_name + ' Session', '=')}
 
@@ -24,26 +23,26 @@ if attributes[attr]['enum'] is not None:
 else:
     t = attributes[attr]["type"]
 %>\
-   :ivar ${t} ${attr.lower()}:
+   :ivar ${t} ${attributes[attr]["name"].lower()}:
 % endfor
 
 % for attr in sorted(attributes):
-%   if str(attributes[attr]['id']) in attribute_docs:
-   .. py:attribute:: ${attr.lower()}
+%   if 'longDescription' in attributes[attr]:
+   .. py:attribute:: ${attributes[attr]["name"].lower()}
 
 %   if attributes[attr]['enum'] is not None:
       See :py:data:`${module_name}.${attributes[attr]['enum']}` 
 
 %   endif
-      ${helper.get_indented_docstring_snippet(attribute_docs[str(attributes[attr]['id'])]['longDescription'], indent=6)}
+      ${helper.get_indented_docstring_snippet(attributes[attr]['longDescription'], indent=6)}
 
       .. note::
          This attribute corresponds to:
 
-%   if 'lv_property' in attribute_docs[str(attributes[attr]['id'])]:
-           - LV Property: **${attribute_docs[str(attributes[attr]['id'])]['lv_property'].strip()}**
+%   if 'lv_property' in attributes[attr]:
+           - LV Property: **${attributes[attr]['lv_property'].strip()}**
 %   endif
-           - C Attribute: **${c_function_prefix.upper()}ATTR_${attr}**
+           - C Attribute: **${c_function_prefix.upper()}ATTR_${attributes[attr]["name"].upper()}**
 %   endif
 
 % endfor

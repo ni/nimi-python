@@ -6,7 +6,6 @@
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
-    attribute_docs = template_parameters['metadata'].attribute_docs
 %>\
 
 import ctypes
@@ -108,13 +107,13 @@ class Session(object):
 
 % for attribute in sorted(attributes):
     %if attributes[attribute]['enum']:
-    ${attribute.lower()} = AttributeEnum(${attributes[attribute]['id']}, enums.${attributes[attribute]['enum']})
+    ${attributes[attribute]['name'].lower()} = AttributeEnum(${attribute}, enums.${attributes[attribute]['enum']})
     %else:
-    ${attribute.lower()} = Attribute${attributes[attribute]['type']}(${attributes[attribute]['id']})
+    ${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(${attribute})
     %endif
-%   if str(attributes[attribute]['id']) in attribute_docs:
+%   if 'shortDescription' in attributes[attribute]:
     '''
-    ${helper.get_indented_docstring_snippet(attribute_docs[str(attributes[attribute]['id'])]['shortDescription'])}, indent=4)
+    ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'])}, indent=4)
     '''
 %   endif
 % endfor

@@ -2,7 +2,6 @@
 <%
 import build.helper as helper
 enums = template_parameters['metadata'].enums
-enum_docs = template_parameters['metadata'].enum_docs
 %>
 from enum import Enum
 % for enum_name in sorted(enums):
@@ -15,16 +14,9 @@ class ${enum_name}(Enum):
     % else:
     ${enum_value['name']} = ${enum_value['value']}
     % endif
-<%
-enum_val_doc = None
-lookup_name = enums[enum_name]['documentation_lookup'] if 'documentation_lookup' in enums[enum_name] else enum_name
-val = enum_value['value']
-if lookup_name is not None and val in enum_docs[lookup_name]:
-    enum_val_doc = enum_docs[lookup_name][val]['description'].strip()
-%>\
-    % if enum_val_doc is not None:
+    % if 'description' in enum_value:
     '''
-    ${helper.get_indented_docstring_snippet(enum_val_doc, indent=4)}
+    ${helper.get_indented_docstring_snippet(enum_value['description'], indent=4)}
     '''
     % endif
     % endfor
