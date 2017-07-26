@@ -46,7 +46,7 @@ NI-ModInst Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
            - C Attribute: **NIMODINST_ATTR_DEVICE_NAME**
 
@@ -69,7 +69,7 @@ NI-ModInst Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
            - C Attribute: **NIMODINST_ATTR_DEVICE_MODEL**
 
@@ -92,7 +92,7 @@ NI-ModInst Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
            - C Attribute: **NIMODINST_ATTR_SERIAL_NUMBER**
 
@@ -115,7 +115,7 @@ NI-ModInst Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
            - C Attribute: **NIMODINST_ATTR_SLOT_NUMBER**
 
@@ -138,7 +138,7 @@ NI-ModInst Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
            - C Attribute: **NIMODINST_ATTR_CHASSIS_NUMBER**
 
@@ -161,7 +161,7 @@ NI-ModInst Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
            - C Attribute: **NIMODINST_ATTR_BUS_NUMBER**
 
@@ -184,7 +184,7 @@ NI-ModInst Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
            - C Attribute: **NIMODINST_ATTR_SOCKET_NUMBER**
 
@@ -205,7 +205,7 @@ NI-ModInst Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
            - C Attribute: **NIMODINST_ATTR_PCIEXPRESS_LINK_WIDTH**
 
@@ -226,7 +226,7 @@ NI-ModInst Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
            - C Attribute: **NIMODINST_ATTR_MAX_PCIEXPRESS_LINK_WIDTH**
 

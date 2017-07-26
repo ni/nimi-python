@@ -441,9 +441,9 @@ NI-DMM Session
       +------------------+--------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Active Channel**
+           - LabVIEW Property: **Active Channel**
            - C Attribute: **NIDMM_ATTR_ACTIVE_CHANNEL**
 
    .. py:attribute:: range_check
@@ -471,9 +471,9 @@ NI-DMM Session
       +------------------+--------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:User Options:Range Check**
+           - LabVIEW Property: **Inherent IVI Attributes:User Options:Range Check**
            - C Attribute: **NIDMM_ATTR_RANGE_CHECK**
 
    .. py:attribute:: query_instrument_status
@@ -502,9 +502,9 @@ NI-DMM Session
       +------------------+--------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
+           - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
            - C Attribute: **NIDMM_ATTR_QUERY_INSTRUMENT_STATUS**
 
    .. py:attribute:: cache
@@ -532,9 +532,9 @@ NI-DMM Session
       +------------------+--------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:User Options:Cache**
+           - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
            - C Attribute: **NIDMM_ATTR_CACHE**
 
    .. py:attribute:: simulate
@@ -565,9 +565,9 @@ NI-DMM Session
       +------------------+--------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:User Options:Simulate**
+           - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
            - C Attribute: **NIDMM_ATTR_SIMULATE**
 
    .. py:attribute:: record_value_coercions
@@ -593,9 +593,9 @@ NI-DMM Session
       +------------------+--------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
+           - LabVIEW Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
            - C Attribute: **NIDMM_ATTR_RECORD_VALUE_COERCIONS**
 
    .. py:attribute:: driver_setup
@@ -625,9 +625,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:User Options:Driver Setup**
+           - LabVIEW Property: **Inherent IVI Attributes:User Options:Driver Setup**
            - C Attribute: **NIDMM_ATTR_DRIVER_SETUP**
 
    .. py:attribute:: interchange_check
@@ -666,9 +666,9 @@ NI-DMM Session
       +------------------+--------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:User Options:Interchange Check**
+           - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
            - C Attribute: **NIDMM_ATTR_INTERCHANGE_CHECK**
 
    .. py:attribute:: primary_error
@@ -695,9 +695,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Obsolete:Inherent IVI Attributes:Error Info:Primary Error**
+           - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Error Info:Primary Error**
            - C Attribute: **NIDMM_ATTR_PRIMARY_ERROR**
 
    .. py:attribute:: secondary_error
@@ -722,9 +722,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Obsolete:Inherent IVI Attributes:Error Info:Secondary Error**
+           - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Error Info:Secondary Error**
            - C Attribute: **NIDMM_ATTR_SECONDARY_ERROR**
 
    .. py:attribute:: error_elaboration
@@ -747,9 +747,9 @@ NI-DMM Session
       +------------------+--------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Obsolete:Inherent IVI Attributes:Error Info:Error Elaboration**
+           - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Error Info:Error Elaboration**
            - C Attribute: **NIDMM_ATTR_ERROR_ELABORATION**
 
    .. py:attribute:: channel_count
@@ -774,9 +774,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Instrument Capabilities:Channel Count**
+           - LabVIEW Property: **Inherent IVI Attributes:Instrument Capabilities:Channel Count**
            - C Attribute: **NIDMM_ATTR_CHANNEL_COUNT**
 
    .. py:attribute:: specific_driver_prefix
@@ -800,9 +800,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix**
+           - LabVIEW Property: **Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix**
            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_PREFIX**
 
    .. py:attribute:: io_resource_descriptor
@@ -824,9 +824,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**
+           - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**
            - C Attribute: **NIDMM_ATTR_IO_RESOURCE_DESCRIPTOR**
 
    .. py:attribute:: logical_name
@@ -848,9 +848,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
+           - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
            - C Attribute: **NIDMM_ATTR_LOGICAL_NAME**
 
    .. py:attribute:: supported_instrument_models
@@ -873,9 +873,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models**
+           - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models**
            - C Attribute: **NIDMM_ATTR_SUPPORTED_INSTRUMENT_MODELS**
 
    .. py:attribute:: group_capabilities
@@ -898,9 +898,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities**
+           - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities**
            - C Attribute: **NIDMM_ATTR_GROUP_CAPABILITIES**
 
    .. py:attribute:: engine_major_version
@@ -922,9 +922,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Major Version**
+           - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Major Version**
            - C Attribute: **NIDMM_ATTR_ENGINE_MAJOR_VERSION**
 
    .. py:attribute:: engine_minor_version
@@ -946,9 +946,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Minor Version**
+           - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Minor Version**
            - C Attribute: **NIDMM_ATTR_ENGINE_MINOR_VERSION**
 
    .. py:attribute:: specific_driver_major_version
@@ -970,9 +970,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Version Info:Specific Driver Major Version**
+           - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Major Version**
            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_MAJOR_VERSION**
 
    .. py:attribute:: specific_driver_minor_version
@@ -994,9 +994,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Version Info:Specific Driver Minor Version**
+           - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Minor Version**
            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_MINOR_VERSION**
 
    .. py:attribute:: instrument_firmware_revision
@@ -1018,9 +1018,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision**
+           - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision**
            - C Attribute: **NIDMM_ATTR_INSTRUMENT_FIRMWARE_REVISION**
 
    .. py:attribute:: instrument_manufacturer
@@ -1042,9 +1042,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer**
+           - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer**
            - C Attribute: **NIDMM_ATTR_INSTRUMENT_MANUFACTURER**
 
    .. py:attribute:: instrument_model
@@ -1066,9 +1066,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Model**
+           - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Model**
            - C Attribute: **NIDMM_ATTR_INSTRUMENT_MODEL**
 
    .. py:attribute:: specific_driver_vendor
@@ -1090,9 +1090,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor**
+           - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor**
            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_VENDOR**
 
    .. py:attribute:: specific_driver_description
@@ -1114,9 +1114,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description**
+           - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description**
            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
 
    .. py:attribute:: specific_driver_class_spec_major_version
@@ -1139,9 +1139,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version**
+           - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version**
            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION**
 
    .. py:attribute:: specific_driver_class_spec_minor_version
@@ -1164,9 +1164,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version**
+           - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version**
            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION**
 
    .. py:attribute:: specific_driver_revision
@@ -1189,9 +1189,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Version Info:Specific Driver Revision**
+           - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Revision**
            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_REVISION**
 
    .. py:attribute:: engine_revision
@@ -1214,9 +1214,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Revision**
+           - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Revision**
            - C Attribute: **NIDMM_ATTR_ENGINE_REVISION**
 
    .. py:attribute:: idquery_response
@@ -1238,9 +1238,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Obsolete:Misc:IDQuery response**
+           - LabVIEW Property: **Obsolete:Misc:IDQuery response**
            - C Attribute: **NIDMM_ATTR_IDQUERY_RESPONSE**
 
    .. py:attribute:: measurement_destination_slope
@@ -1272,9 +1272,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Trigger:Measurement Destination Slope**
+           - LabVIEW Property: **Trigger:Measurement Destination Slope**
            - C Attribute: **NIDMM_ATTR_MEASUREMENT_DESTINATION_SLOPE**
 
    .. py:attribute:: shunt_value
@@ -1299,9 +1299,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Shunt Value**
+           - LabVIEW Property: **Configuration:Measurement Options:Shunt Value**
            - C Attribute: **NIDMM_ATTR_SHUNT_VALUE**
 
    .. py:attribute:: sample_trig_slope
@@ -1334,9 +1334,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Multi Point Acquisition:Sample Trig Slope**
+           - LabVIEW Property: **Multi Point Acquisition:Sample Trig Slope**
            - C Attribute: **NIDMM_ATTR_SAMPLE_TRIG_SLOPE**
 
    .. py:attribute:: operation_mode
@@ -1377,9 +1377,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Advanced:Operation Mode**
+           - LabVIEW Property: **Configuration:Advanced:Operation Mode**
            - C Attribute: **NIDMM_ATTR_OPERATION_MODE**
 
    .. py:attribute:: waveform_rate
@@ -1405,9 +1405,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Waveform Acquisition:Waveform Rate**
+           - LabVIEW Property: **Waveform Acquisition:Waveform Rate**
            - C Attribute: **NIDMM_ATTR_WAVEFORM_RATE**
 
    .. py:attribute:: waveform_points
@@ -1430,9 +1430,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Waveform Acquisition:Waveform Points**
+           - LabVIEW Property: **Waveform Acquisition:Waveform Points**
            - C Attribute: **NIDMM_ATTR_WAVEFORM_POINTS**
 
    .. py:attribute:: adc_calibration
@@ -1467,9 +1467,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:ADC Calibration**
+           - LabVIEW Property: **Configuration:Measurement Options:ADC Calibration**
            - C Attribute: **NIDMM_ATTR_ADC_CALIBRATION**
 
    .. py:attribute:: offset_compensated_ohms
@@ -1502,9 +1502,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Offset Compensated Ohms**
+           - LabVIEW Property: **Configuration:Measurement Options:Offset Compensated Ohms**
            - C Attribute: **NIDMM_ATTR_OFFSET_COMPENSATED_OHMS**
 
    .. py:attribute:: current_source
@@ -1542,9 +1542,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Current Source**
+           - LabVIEW Property: **Configuration:Measurement Options:Current Source**
            - C Attribute: **NIDMM_ATTR_CURRENT_SOURCE**
 
    .. py:attribute:: dc_noise_rejection
@@ -1583,9 +1583,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:DC Noise Rejection**
+           - LabVIEW Property: **Configuration:Measurement Options:DC Noise Rejection**
            - C Attribute: **NIDMM_ATTR_DC_NOISE_REJECTION**
 
    .. py:attribute:: waveform_coupling
@@ -1618,9 +1618,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Waveform Acquisition:Waveform Coupling**
+           - LabVIEW Property: **Waveform Acquisition:Waveform Coupling**
            - C Attribute: **NIDMM_ATTR_WAVEFORM_COUPLING**
 
    .. py:attribute:: settle_time
@@ -1647,9 +1647,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Advanced:Settle Time**
+           - LabVIEW Property: **Configuration:Advanced:Settle Time**
            - C Attribute: **NIDMM_ATTR_SETTLE_TIME**
 
    .. py:attribute:: input_resistance
@@ -1686,9 +1686,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Input Resistance**
+           - LabVIEW Property: **Configuration:Measurement Options:Input Resistance**
            - C Attribute: **NIDMM_ATTR_INPUT_RESISTANCE**
 
    .. py:attribute:: sample_delay_mode
@@ -1716,9 +1716,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Multi Point Acquisition:Sample Delay Mode**
+           - LabVIEW Property: **Multi Point Acquisition:Sample Delay Mode**
            - C Attribute: **NIDMM_ATTR_SAMPLE_DELAY_MODE**
 
    .. py:attribute:: number_of_averages
@@ -1746,9 +1746,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Advanced:Number Of Averages**
+           - LabVIEW Property: **Configuration:Advanced:Number Of Averages**
            - C Attribute: **NIDMM_ATTR_NUMBER_OF_AVERAGES**
 
    .. py:attribute:: latency
@@ -1772,9 +1772,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Multi Point Acquisition:Advanced:Latency**
+           - LabVIEW Property: **Multi Point Acquisition:Advanced:Latency**
            - C Attribute: **NIDMM_ATTR_LATENCY**
 
    .. py:attribute:: buffer_size
@@ -1798,9 +1798,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Multi Point Acquisition:Advanced:Buffer Size**
+           - LabVIEW Property: **Multi Point Acquisition:Advanced:Buffer Size**
            - C Attribute: **NIDMM_ATTR_BUFFER_SIZE**
 
    .. py:attribute:: frequency_voltage_auto_range_value
@@ -1825,9 +1825,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
+           - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
            - C Attribute: **NIDMM_ATTR_FREQUENCY_VOLTAGE_AUTO_RANGE_VALUE**
 
    .. py:attribute:: cable_compensation_type
@@ -1868,9 +1868,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**
+           - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**
            - C Attribute: **NIDMM_ATTR_CABLE_COMPENSATION_TYPE**
 
    .. py:attribute:: reactance
@@ -1898,9 +1898,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**
+           - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**
            - C Attribute: **NIDMM_ATTR_REACTANCE**
 
    .. py:attribute:: resistance
@@ -1928,9 +1928,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
+           - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
            - C Attribute: **NIDMM_ATTR_RESISTANCE**
 
    .. py:attribute:: susceptance
@@ -1958,9 +1958,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**
+           - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**
            - C Attribute: **NIDMM_ATTR_SUSCEPTANCE**
 
    .. py:attribute:: conductance
@@ -1988,9 +1988,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**
+           - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**
            - C Attribute: **NIDMM_ATTR_CONDUCTANCE**
 
    .. py:attribute:: lc_calculation_model
@@ -2026,9 +2026,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model**
+           - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model**
            - C Attribute: **NIDMM_ATTR_LC_CALCULATION_MODEL**
 
    .. py:attribute:: dc_bias
@@ -2061,9 +2061,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias**
+           - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias**
            - C Attribute: **NIDMM_ATTR_DC_BIAS**
 
    .. py:attribute:: instrument_serial_number
@@ -2087,9 +2087,9 @@ NI-DMM Session
       +------------------+-------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**
+           - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**
            - C Attribute: **NIDMM_ATTR_INSTRUMENT_SERIAL_NUMBER**
 
    .. py:attribute:: number_of_lc_measurements_to_average
@@ -2112,9 +2112,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**
+           - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**
            - C Attribute: **NIDMM_ATTR_NUMBER_OF_LC_MEASUREMENTS_TO_AVERAGE**
 
    .. py:attribute:: instrument_product_id
@@ -2136,9 +2136,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
+           - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
            - C Attribute: **NIDMM_ATTR_INSTRUMENT_PRODUCT_ID**
 
    .. py:attribute:: rtd_type
@@ -2180,9 +2180,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**
            - C Attribute: **NIDMM_ATTR_RTD_TYPE**
 
    .. py:attribute:: rtd_a
@@ -2205,9 +2205,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**
            - C Attribute: **NIDMM_ATTR_RTD_A**
 
    .. py:attribute:: rtd_b
@@ -2230,9 +2230,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**
            - C Attribute: **NIDMM_ATTR_RTD_B**
 
    .. py:attribute:: rtd_c
@@ -2255,9 +2255,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**
            - C Attribute: **NIDMM_ATTR_RTD_C**
 
    .. py:attribute:: thermistor_type
@@ -2293,9 +2293,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type**
            - C Attribute: **NIDMM_ATTR_THERMISTOR_TYPE**
 
    .. py:attribute:: thermistor_a
@@ -2318,9 +2318,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor A**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor A**
            - C Attribute: **NIDMM_ATTR_THERMISTOR_A**
 
    .. py:attribute:: thermistor_b
@@ -2343,9 +2343,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor B**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor B**
            - C Attribute: **NIDMM_ATTR_THERMISTOR_B**
 
    .. py:attribute:: thermistor_c
@@ -2368,9 +2368,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor C**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor C**
            - C Attribute: **NIDMM_ATTR_THERMISTOR_C**
 
    .. py:attribute:: function
@@ -2436,9 +2436,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Function**
+           - LabVIEW Property: **Configuration:Function**
            - C Attribute: **NIDMM_ATTR_FUNCTION**
 
    .. py:attribute:: range
@@ -2475,9 +2475,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Range**
+           - LabVIEW Property: **Configuration:Range**
            - C Attribute: **NIDMM_ATTR_RANGE**
 
    .. py:attribute:: digits_resolution
@@ -2520,9 +2520,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Digits Resolution**
+           - LabVIEW Property: **Configuration:Digits Resolution**
            - C Attribute: **NIDMM_ATTR_DIGITS_RESOLUTION**
 
    .. py:attribute:: trigger_source
@@ -2584,9 +2584,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Trigger:Trigger Source**
+           - LabVIEW Property: **Trigger:Trigger Source**
            - C Attribute: **NIDMM_ATTR_TRIGGER_SOURCE**
 
    .. py:attribute:: trigger_delay
@@ -2635,9 +2635,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Trigger:Trigger Delay**
+           - LabVIEW Property: **Trigger:Trigger Delay**
            - C Attribute: **NIDMM_ATTR_TRIGGER_DELAY**
 
    .. py:attribute:: min_frequency
@@ -2663,9 +2663,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Min Frequency**
+           - LabVIEW Property: **Configuration:Measurement Options:Min Frequency**
            - C Attribute: **NIDMM_ATTR_MIN_FREQUENCY**
 
    .. py:attribute:: max_frequency
@@ -2701,9 +2701,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Max Frequency**
+           - LabVIEW Property: **Configuration:Measurement Options:Max Frequency**
            - C Attribute: **NIDMM_ATTR_MAX_FREQUENCY**
 
    .. py:attribute:: absolute_resolution
@@ -2730,9 +2730,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Absolute Resolution**
+           - LabVIEW Property: **Configuration:Absolute Resolution**
            - C Attribute: **NIDMM_ATTR_ABSOLUTE_RESOLUTION**
 
    .. py:attribute:: frequency_voltage_range
@@ -2761,9 +2761,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Frequency Voltage Range**
+           - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Range**
            - C Attribute: **NIDMM_ATTR_FREQUENCY_VOLTAGE_RANGE**
 
    .. py:attribute:: transducer_type
@@ -2799,9 +2799,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Transducer Type**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Transducer Type**
            - C Attribute: **NIDMM_ATTR_TRANSDUCER_TYPE**
 
    .. py:attribute:: thermocouple_type
@@ -2845,9 +2845,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**
            - C Attribute: **NIDMM_ATTR_THERMOCOUPLE_TYPE**
 
    .. py:attribute:: tc_ref_junction_type
@@ -2877,9 +2877,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type**
            - C Attribute: **NIDMM_ATTR_TC_REF_JUNCTION_TYPE**
 
    .. py:attribute:: tc_fixed_ref_junction
@@ -2902,9 +2902,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction**
            - C Attribute: **NIDMM_ATTR_TC_FIXED_REF_JUNCTION**
 
    .. py:attribute:: rtd_resistance
@@ -2926,9 +2926,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**
+           - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**
            - C Attribute: **NIDMM_ATTR_RTD_RESISTANCE**
 
    .. py:attribute:: sample_count
@@ -2956,9 +2956,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Multi Point Acquisition:Sample Count**
+           - LabVIEW Property: **Multi Point Acquisition:Sample Count**
            - C Attribute: **NIDMM_ATTR_SAMPLE_COUNT**
 
    .. py:attribute:: sample_trigger
@@ -3019,9 +3019,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Multi Point Acquisition:Sample Trigger**
+           - LabVIEW Property: **Multi Point Acquisition:Sample Trigger**
            - C Attribute: **NIDMM_ATTR_SAMPLE_TRIGGER**
 
    .. py:attribute:: sample_interval
@@ -3061,9 +3061,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Multi Point Acquisition:Sample Interval**
+           - LabVIEW Property: **Multi Point Acquisition:Sample Interval**
            - C Attribute: **NIDMM_ATTR_SAMPLE_INTERVAL**
 
    .. py:attribute:: trigger_count
@@ -3092,9 +3092,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Multi Point Acquisition:Trigger Count**
+           - LabVIEW Property: **Multi Point Acquisition:Trigger Count**
            - C Attribute: **NIDMM_ATTR_TRIGGER_COUNT**
 
    .. py:attribute:: measurement_completdest
@@ -3150,9 +3150,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Trigger:Measurement Complete Dest**
+           - LabVIEW Property: **Trigger:Measurement Complete Dest**
            - C Attribute: **NIDMM_ATTR_MEASUREMENT_COMPLETDEST**
 
    .. py:attribute:: aperture_time
@@ -3194,9 +3194,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Advanced:Aperture Time**
+           - LabVIEW Property: **Configuration:Advanced:Aperture Time**
            - C Attribute: **NIDMM_ATTR_APERTURE_TIME**
 
    .. py:attribute:: aperture_time_units
@@ -3231,9 +3231,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Advanced:Aperture Time Units**
+           - LabVIEW Property: **Configuration:Advanced:Aperture Time Units**
            - C Attribute: **NIDMM_ATTR_APERTURE_TIME_UNITS**
 
    .. py:attribute:: auto_range_value
@@ -3257,9 +3257,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Auto Range Value**
+           - LabVIEW Property: **Configuration:Auto Range Value**
            - C Attribute: **NIDMM_ATTR_AUTO_RANGE_VALUE**
 
    .. py:attribute:: auto_zero
@@ -3296,9 +3296,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Auto Zero**
+           - LabVIEW Property: **Configuration:Measurement Options:Auto Zero**
            - C Attribute: **NIDMM_ATTR_AUTO_ZERO**
 
    .. py:attribute:: powerline_frequency
@@ -3345,9 +3345,9 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Configuration:Measurement Options:Powerline Frequency**
+           - LabVIEW Property: **Configuration:Measurement Options:Powerline Frequency**
            - C Attribute: **NIDMM_ATTR_POWERLINE_FREQUENCY**
 
    .. py:attribute:: trigger_slope
@@ -3380,8 +3380,8 @@ NI-DMM Session
       +------------------+-------------------------+
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-           - LV Property: **Trigger:Trigger Slope**
+           - LabVIEW Property: **Trigger:Trigger Slope**
            - C Attribute: **NIDMM_ATTR_TRIGGER_SLOPE**
 
