@@ -440,7 +440,7 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Active Channel**
@@ -470,7 +470,7 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:User Options:Range Check**
@@ -501,7 +501,7 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
@@ -531,7 +531,7 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:User Options:Cache**
@@ -564,7 +564,7 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:User Options:Simulate**
@@ -592,7 +592,7 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
@@ -624,7 +624,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:User Options:Driver Setup**
@@ -665,7 +665,7 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:User Options:Interchange Check**
@@ -694,7 +694,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Obsolete:Inherent IVI Attributes:Error Info:Primary Error**
@@ -721,7 +721,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Obsolete:Inherent IVI Attributes:Error Info:Secondary Error**
@@ -746,7 +746,7 @@ NI-DMM Session
       | Resettable       | No           |
       +------------------+--------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Obsolete:Inherent IVI Attributes:Error Info:Error Elaboration**
@@ -773,7 +773,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Instrument Capabilities:Channel Count**
@@ -799,7 +799,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix**
@@ -823,7 +823,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**
@@ -847,7 +847,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
@@ -872,7 +872,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models**
@@ -897,7 +897,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities**
@@ -921,7 +921,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Major Version**
@@ -945,7 +945,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Minor Version**
@@ -969,7 +969,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Version Info:Specific Driver Major Version**
@@ -993,7 +993,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Version Info:Specific Driver Minor Version**
@@ -1017,7 +1017,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision**
@@ -1041,7 +1041,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer**
@@ -1065,7 +1065,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Model**
@@ -1089,7 +1089,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor**
@@ -1113,7 +1113,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description**
@@ -1138,7 +1138,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version**
@@ -1163,7 +1163,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version**
@@ -1188,7 +1188,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Version Info:Specific Driver Revision**
@@ -1213,7 +1213,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Revision**
@@ -1237,7 +1237,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Obsolete:Misc:IDQuery response**
@@ -1271,7 +1271,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Trigger:Measurement Destination Slope**
@@ -1298,7 +1298,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Shunt Value**
@@ -1333,7 +1333,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Multi Point Acquisition:Sample Trig Slope**
@@ -1376,7 +1376,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Advanced:Operation Mode**
@@ -1404,7 +1404,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Waveform Acquisition:Waveform Rate**
@@ -1429,7 +1429,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Waveform Acquisition:Waveform Points**
@@ -1466,7 +1466,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:ADC Calibration**
@@ -1501,7 +1501,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Offset Compensated Ohms**
@@ -1541,7 +1541,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Current Source**
@@ -1582,7 +1582,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:DC Noise Rejection**
@@ -1617,7 +1617,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Waveform Acquisition:Waveform Coupling**
@@ -1646,7 +1646,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Advanced:Settle Time**
@@ -1685,7 +1685,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Input Resistance**
@@ -1715,7 +1715,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Multi Point Acquisition:Sample Delay Mode**
@@ -1745,7 +1745,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Advanced:Number Of Averages**
@@ -1771,7 +1771,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Multi Point Acquisition:Advanced:Latency**
@@ -1797,7 +1797,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Multi Point Acquisition:Advanced:Buffer Size**
@@ -1824,7 +1824,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
@@ -1867,7 +1867,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**
@@ -1897,7 +1897,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**
@@ -1927,7 +1927,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
@@ -1957,7 +1957,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**
@@ -1987,7 +1987,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**
@@ -2025,7 +2025,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model**
@@ -2060,7 +2060,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias**
@@ -2086,7 +2086,7 @@ NI-DMM Session
       | Resettable       | No          |
       +------------------+-------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**
@@ -2111,7 +2111,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**
@@ -2135,7 +2135,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
@@ -2179,7 +2179,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**
@@ -2204,7 +2204,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**
@@ -2229,7 +2229,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**
@@ -2254,7 +2254,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**
@@ -2292,7 +2292,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type**
@@ -2317,7 +2317,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor A**
@@ -2342,7 +2342,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor B**
@@ -2367,7 +2367,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor C**
@@ -2435,7 +2435,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Function**
@@ -2474,7 +2474,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Range**
@@ -2519,7 +2519,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Digits Resolution**
@@ -2583,7 +2583,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Trigger:Trigger Source**
@@ -2634,7 +2634,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Trigger:Trigger Delay**
@@ -2662,7 +2662,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Min Frequency**
@@ -2700,7 +2700,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Max Frequency**
@@ -2729,7 +2729,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Absolute Resolution**
@@ -2760,7 +2760,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Frequency Voltage Range**
@@ -2798,7 +2798,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Transducer Type**
@@ -2844,7 +2844,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**
@@ -2876,7 +2876,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type**
@@ -2901,7 +2901,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction**
@@ -2925,7 +2925,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**
@@ -2955,7 +2955,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Multi Point Acquisition:Sample Count**
@@ -3018,7 +3018,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Multi Point Acquisition:Sample Trigger**
@@ -3060,7 +3060,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Multi Point Acquisition:Sample Interval**
@@ -3091,7 +3091,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Multi Point Acquisition:Trigger Count**
@@ -3149,7 +3149,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Trigger:Measurement Complete Dest**
@@ -3193,7 +3193,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Advanced:Aperture Time**
@@ -3230,7 +3230,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Advanced:Aperture Time Units**
@@ -3256,7 +3256,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Auto Range Value**
@@ -3295,7 +3295,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Auto Zero**
@@ -3344,7 +3344,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Configuration:Measurement Options:Powerline Frequency**
@@ -3379,7 +3379,7 @@ NI-DMM Session
       | Resettable       | No                      |
       +------------------+-------------------------+
 
-      .. note::
+      .. tip:: 
          This attribute corresponds to:
 
            - LV Property: **Trigger:Trigger Slope**
