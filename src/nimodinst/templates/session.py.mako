@@ -51,7 +51,7 @@ class Device(object):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(owner, ${attribute}, index=index)
 %   if 'shortDescription' in attributes[attribute]:
         '''
-       ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'])}, indent=8)
+        ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'], indent=8)}
         '''
 %   endif
 % endfor
@@ -65,7 +65,7 @@ class Session(object):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(self, ${attribute})
 %   if 'shortDescription' in attributes[attribute]:
         '''
-       ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'])}, indent=8)
+        ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'], indent=8)}
         '''
 %   endif
 % endfor

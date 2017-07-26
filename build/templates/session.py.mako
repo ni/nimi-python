@@ -113,7 +113,7 @@ class Session(object):
     %endif
 %   if 'shortDescription' in attributes[attribute]:
     '''
-    ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'])}, indent=4)
+    ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'], indent=4)}
     '''
 %   endif
 % endfor
