@@ -38,10 +38,10 @@ else:
       ${helper.get_indented_docstring_snippet(attributes[attr]['longDescription'], indent=6)}
 
       .. tip:: 
-         This attribute corresponds to:
+         This attribute corresponds to the following LabVIEW Property or C Attribute:
 
 %   if 'lv_property' in attributes[attr]:
-           - LV Property: **${attributes[attr]['lv_property'].strip()}**
+           - LabVIEW Property: **${attributes[attr]['lv_property'].strip()}**
 %   endif
            - C Attribute: **${c_function_prefix.upper()}ATTR_${attributes[attr]["name"].upper()}**
 %   endif
