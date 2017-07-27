@@ -110,7 +110,20 @@ class ${context_name.title()}(object):
 % endfor
 
 
-class Session(object):
+# From https://stackoverflow.com/questions/3603502/prevent-creating-new-attributes-outside-init
+class FrozenClass(object):
+    __isfrozen = False
+
+    def __setattr__(self, key, value):
+        if self.__isfrozen and key not in dir(self):
+            raise TypeError("%r is a frozen class" % self)
+        object.__setattr__(self, key, value)
+
+    def _freeze(self):
+        self.__isfrozen = True
+
+
+class Session(FrozenClass):
     '''${config['session_description']}'''
 
 % for attribute in sorted(attributes):
@@ -130,6 +143,7 @@ class Session(object):
         self.library = library.get_library()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+        self._freeze()
 % for c in config['context_manager']:
 <%
 context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
