@@ -16,9 +16,8 @@ config = {
         },
     },
     'context_manager': [
-        { 'direction': 'input',
-          'enter': 'Initiate',
-          'exit': 'Abort',
+        { 
+            'direction': 'input'
         },
     ]
 }
