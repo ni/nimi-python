@@ -149,7 +149,7 @@ class Session(object):
             by the driver)
             '''
             error_code = ctypes_types.ViStatus_ctype(error_code)
-            error_message = ctypes.create_string_buffer(buffer_size)
+            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
             self.library.${c_function_prefix}GetError(self.vi, ctypes.byref(error_code), buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         else:
             '''
@@ -162,7 +162,7 @@ class Session(object):
             '''
             error_code = buffer_size
             buffer_size = self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, 0, None)
-            error_message = ctypes.create_string_buffer(buffer_size)
+            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
             self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
 
         #@TODO: By hardcoding encoding "ascii", internationalized strings will throw.
@@ -209,4 +209,10 @@ class Session(object):
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
 
-
+    # TODO(marcoskirsch): code generation is missing the cast operation when calling into niDMM_self_test
+    def self_test(self):
+        self_test_result_ctype = ctypes_types.ViInt16_ctype(0)
+        self_test_message_ctype = (ctypes_types.ViChar_ctype * 256)()
+        error_code = self.library.niDMM_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+        errors._handle_error(self, error_code)
+        return self_test_result_ctype.value, self_test_message_ctype.value.decode("ascii")
