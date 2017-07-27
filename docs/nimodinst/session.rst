@@ -33,17 +33,17 @@ NI-ModInst Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+--------+
+      | Characteristic | Value  |
+      +================+========+
+      | Datatype       | string |
+      +----------------+--------+
+      | Permissions    | read   |
+      +----------------+--------+
+      | Channel Based  | False  |
+      +----------------+--------+
+      | Resettable     | No     |
+      +----------------+--------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -56,17 +56,17 @@ NI-ModInst Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+--------+
+      | Characteristic | Value  |
+      +================+========+
+      | Datatype       | string |
+      +----------------+--------+
+      | Permissions    | read   |
+      +----------------+--------+
+      | Channel Based  | False  |
+      +----------------+--------+
+      | Resettable     | No     |
+      +----------------+--------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -79,17 +79,17 @@ NI-ModInst Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+--------+
+      | Characteristic | Value  |
+      +================+========+
+      | Datatype       | string |
+      +----------------+--------+
+      | Permissions    | read   |
+      +----------------+--------+
+      | Channel Based  | False  |
+      +----------------+--------+
+      | Resettable     | No     |
+      +----------------+--------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -102,17 +102,17 @@ NI-ModInst Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+---------+
+      | Characteristic | Value   |
+      +================+=========+
+      | Datatype       | integer |
+      +----------------+---------+
+      | Permissions    | read    |
+      +----------------+---------+
+      | Channel Based  | False   |
+      +----------------+---------+
+      | Resettable     | No      |
+      +----------------+---------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -125,17 +125,17 @@ NI-ModInst Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+---------+
+      | Characteristic | Value   |
+      +================+=========+
+      | Datatype       | integer |
+      +----------------+---------+
+      | Permissions    | read    |
+      +----------------+---------+
+      | Channel Based  | False   |
+      +----------------+---------+
+      | Resettable     | No      |
+      +----------------+---------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -148,17 +148,17 @@ NI-ModInst Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+---------+
+      | Characteristic | Value   |
+      +================+=========+
+      | Datatype       | integer |
+      +----------------+---------+
+      | Permissions    | read    |
+      +----------------+---------+
+      | Channel Based  | False   |
+      +----------------+---------+
+      | Resettable     | No      |
+      +----------------+---------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -171,17 +171,17 @@ NI-ModInst Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+---------+
+      | Characteristic | Value   |
+      +================+=========+
+      | Datatype       | integer |
+      +----------------+---------+
+      | Permissions    | read    |
+      +----------------+---------+
+      | Channel Based  | False   |
+      +----------------+---------+
+      | Resettable     | No      |
+      +----------------+---------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -190,19 +190,21 @@ NI-ModInst Session
 
    .. py:attribute:: pciexpress_link_width
 
+      **PCIEXPRESS_LINK_WIDTH**
+
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+---------+
+      | Characteristic | Value   |
+      +================+=========+
+      | Datatype       | integer |
+      +----------------+---------+
+      | Permissions    | read    |
+      +----------------+---------+
+      | Channel Based  | False   |
+      +----------------+---------+
+      | Resettable     | No      |
+      +----------------+---------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -211,19 +213,21 @@ NI-ModInst Session
 
    .. py:attribute:: max_pciexpress_link_width
 
+      **MAX_PCIEXPRESS_LINK_WIDTH**
+
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+---------+
+      | Characteristic | Value   |
+      +================+=========+
+      | Datatype       | integer |
+      +----------------+---------+
+      | Permissions    | read    |
+      +----------------+---------+
+      | Channel Based  | False   |
+      +----------------+---------+
+      | Resettable     | No      |
+      +----------------+---------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:

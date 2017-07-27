@@ -8,11 +8,6 @@ NI-DMM Session
    An NI-DMM session to a National Instruments Digital Multimeter
 
 
-   :ivar ViString active_channel: 
-      Specifies the channel name used to access all subsequent channel-based
-      properties in this property node. Set the channel before setting
-      channel-based properties. Pass a name that the instrument driver defines
-      or a virtual channel name configured in MAX.
    :ivar ViBoolean range_check: 
       Specifies whether to validate property values and VI parameters. If
       enabled, the instrument driver validates the parameter values passed to
@@ -419,33 +414,6 @@ NI-DMM Session
       Specifies the edge of the signal from the specified trigger source on
       which the DMM is triggered.
 
-   .. py:attribute:: active_channel
-
-      Specifies the channel name used to access all subsequent channel-based
-      properties in this property node. Set the channel before setting
-      channel-based properties. Pass a name that the instrument driver defines
-      or a virtual channel name configured in MAX.
-
-      The following table lists the characteristics of this property.
-
-      +------------------+--------------+
-      | Characteristic   | Value        |
-      +------------------+--------------+
-      | Datatype         | string       |
-      +------------------+--------------+
-      | Permissions      | Write Only   |
-      +------------------+--------------+
-      | Channel Based    | False        |
-      +------------------+--------------+
-      | Resettable       | No           |
-      +------------------+--------------+
-
-      .. tip:: 
-         This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-           - LabVIEW Property: **Active Channel**
-           - C Attribute: **NIDMM_ATTR_ACTIVE_CHANNEL**
-
    .. py:attribute:: range_check
 
       Specifies whether to validate property values and VI parameters. If
@@ -458,17 +426,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+--------------+
-      | Characteristic   | Value        |
-      +------------------+--------------+
-      | Datatype         | Boolean      |
-      +------------------+--------------+
-      | Permissions      | Read/Write   |
-      +------------------+--------------+
-      | Channel Based    | False        |
-      +------------------+--------------+
-      | Resettable       | No           |
-      +------------------+--------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | bool       |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -489,17 +457,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+--------------+
-      | Characteristic   | Value        |
-      +------------------+--------------+
-      | Datatype         | Boolean      |
-      +------------------+--------------+
-      | Permissions      | Read/Write   |
-      +------------------+--------------+
-      | Channel Based    | False        |
-      +------------------+--------------+
-      | Resettable       | No           |
-      +------------------+--------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | bool       |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -519,17 +487,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+--------------+
-      | Characteristic   | Value        |
-      +------------------+--------------+
-      | Datatype         | Boolean      |
-      +------------------+--------------+
-      | Permissions      | Read/Write   |
-      +------------------+--------------+
-      | Channel Based    | False        |
-      +------------------+--------------+
-      | Resettable       | No           |
-      +------------------+--------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | bool       |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -552,17 +520,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+--------------+
-      | Characteristic   | Value        |
-      +------------------+--------------+
-      | Datatype         | Boolean      |
-      +------------------+--------------+
-      | Permissions      | Read/Write   |
-      +------------------+--------------+
-      | Channel Based    | False        |
-      +------------------+--------------+
-      | Resettable       | No           |
-      +------------------+--------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | bool       |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -580,17 +548,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+--------------+
-      | Characteristic   | Value        |
-      +------------------+--------------+
-      | Datatype         | Boolean      |
-      +------------------+--------------+
-      | Permissions      | Read/Write   |
-      +------------------+--------------+
-      | Channel Based    | False        |
-      +------------------+--------------+
-      | Resettable       | No           |
-      +------------------+--------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | bool       |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -612,17 +580,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -653,17 +621,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+--------------+
-      | Characteristic   | Value        |
-      +------------------+--------------+
-      | Datatype         | Boolean      |
-      +------------------+--------------+
-      | Permissions      | Read/Write   |
-      +------------------+--------------+
-      | Channel Based    | False        |
-      +------------------+--------------+
-      | Resettable       | No           |
-      +------------------+--------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | bool       |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -682,17 +650,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | integer    |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -709,17 +677,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | integer    |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -734,17 +702,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+--------------+
-      | Characteristic   | Value        |
-      +------------------+--------------+
-      | Datatype         | string       |
-      +------------------+--------------+
-      | Permissions      | Read/Write   |
-      +------------------+--------------+
-      | Channel Based    | False        |
-      +------------------+--------------+
-      | Resettable       | No           |
-      +------------------+--------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | string     |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -761,17 +729,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | integer   |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -787,17 +755,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -811,17 +779,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -835,17 +803,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -860,17 +828,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -885,17 +853,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -909,17 +877,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | integer   |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -933,17 +901,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | integer   |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -957,17 +925,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | integer   |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -981,17 +949,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | integer   |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1005,17 +973,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1029,17 +997,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1053,17 +1021,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1077,17 +1045,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1101,17 +1069,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1126,17 +1094,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | integer   |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1151,17 +1119,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | integer   |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1176,17 +1144,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1201,17 +1169,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1225,17 +1193,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1249,27 +1217,19 @@ NI-DMM Session
 
       Specifies the polarity of the generated measurement complete signal.
 
-      +--------------------+------------------------------------------------------------------+
-      | Name               | Description                                                      |
-      +--------------------+------------------------------------------------------------------+
-      | **Positive** (0)   | The driver triggers on the rising edge of the trigger signal.    |
-      +--------------------+------------------------------------------------------------------+
-      | **Negative** (1)   | The driver triggers on the falling edge of the trigger signal.   |
-      +--------------------+------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------------------------+
+      | Characteristic | Value                            |
+      +================+==================================+
+      | Datatype       | enum.MeasurementDestinationSlope |
+      +----------------+----------------------------------+
+      | Permissions    | read-write                       |
+      +----------------+----------------------------------+
+      | Channel Based  | False                            |
+      +----------------+----------------------------------+
+      | Resettable     | No                               |
+      +----------------+----------------------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1286,17 +1246,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1311,27 +1271,19 @@ NI-DMM Session
       Specifies the edge of the signal from the specified sample trigger
       source on which the DMM is triggered.
 
-      +--------------------+------------------------------------------------------------------+
-      | Name               | Description                                                      |
-      +--------------------+------------------------------------------------------------------+
-      | **Positive** (0)   | The driver triggers on the rising edge of the trigger signal.    |
-      +--------------------+------------------------------------------------------------------+
-      | **Negative** (1)   | The driver triggers on the falling edge of the trigger signal.   |
-      +--------------------+------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------------+
+      | Characteristic | Value                |
+      +================+======================+
+      | Datatype       | enum.SampleTrigSlope |
+      +----------------+----------------------+
+      | Permissions    | read-write           |
+      +----------------+----------------------+
+      | Channel Based  | False                |
+      +----------------+----------------------+
+      | Resettable     | No                   |
+      +----------------+----------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1354,27 +1306,19 @@ NI-DMM Session
       directly, you must set this property before setting other configuration
       properties.
 
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | Name                    | Description                                                                                                                                                                                                                                        |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | **IVIDMM Mode** (0)     | Single or multipoint measurements: When the Trigger Count and Sample Count properties are both set to 1, the NI 4065, NI 4070/4071/4072, and NI 4080/4081/4082 take a single-point measurement; otherwise, NI-DMM takes multipoint measurements.   |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | **Waveform Mode** (1)   | Configures the NI 4080/4081/4082 and NI 4070/4071/4072 to take waveform measurements.                                                                                                                                                              |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+--------------------+
+      | Characteristic | Value              |
+      +================+====================+
+      | Datatype       | enum.OperationMode |
+      +----------------+--------------------+
+      | Permissions    | read-write         |
+      +----------------+--------------------+
+      | Channel Based  | False              |
+      +----------------+--------------------+
+      | Resettable     | No                 |
+      +----------------+--------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1392,17 +1336,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1417,17 +1361,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | integer    |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1442,29 +1386,19 @@ NI-DMM Session
       For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
       calibration mode.
 
-      +-----------------+------------------------------------------------------------------------------------------------+
-      | Name            | Description                                                                                    |
-      +-----------------+------------------------------------------------------------------------------------------------+
-      | **Auto** (-1)   | The DMM enables or disables ADC calibration based on the configured function and resolution.   |
-      +-----------------+------------------------------------------------------------------------------------------------+
-      | **Off** (0)     | The DMM does not compensate for changes to the gain.                                           |
-      +-----------------+------------------------------------------------------------------------------------------------+
-      | **On** (1)      | The DMM measures an internal reference to calculate the correct gain for the measurement.      |
-      +-----------------+------------------------------------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+---------------------+
+      | Characteristic | Value               |
+      +================+=====================+
+      | Datatype       | enum.ADCCalibration |
+      +----------------+---------------------+
+      | Permissions    | read-write          |
+      +----------------+---------------------+
+      | Channel Based  | False               |
+      +----------------+---------------------+
+      | Resettable     | No                  |
+      +----------------+---------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1479,27 +1413,19 @@ NI-DMM Session
       For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
       offset compensated ohms.
 
-      +---------------+-------------------------------------+
-      | Name          | Description                         |
-      +---------------+-------------------------------------+
-      | **Off** (0)   | Disables Offset Compensated Ohms.   |
-      +---------------+-------------------------------------+
-      | **On** (1)    | Enables Offset Compensated Ohms.    |
-      +---------------+-------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------------------+
+      | Characteristic | Value                      |
+      +================+============================+
+      | Datatype       | enum.OffsetCompensatedOhms |
+      +----------------+----------------------------+
+      | Permissions    | read-write                 |
+      +----------------+----------------------------+
+      | Channel Based  | False                      |
+      +----------------+----------------------------+
+      | Resettable     | No                         |
+      +----------------+----------------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1515,31 +1441,19 @@ NI-DMM Session
 
       The NI 4050 and NI 4060 are not supported.
 
-      +-----------------------------+--------------------------------------------------------------------+
-      | Name                        | Description                                                        |
-      +-----------------------------+--------------------------------------------------------------------+
-      | **1 Microamp** (1e-06)      | NI 4070/4071/4072 are supported.                                   |
-      +-----------------------------+--------------------------------------------------------------------+
-      | **10 Microamp** (1e-05)     | NI 4080/4081/4082 and NI 4070/4071/4072 are supported.             |
-      +-----------------------------+--------------------------------------------------------------------+
-      | **100 Microamp** (0.0001)   | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.   |
-      +-----------------------------+--------------------------------------------------------------------+
-      | **1 Milliamp** (0.001)      | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.   |
-      +-----------------------------+--------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+--------------------+
+      | Characteristic | Value              |
+      +================+====================+
+      | Datatype       | enum.CurrentSource |
+      +----------------+--------------------+
+      | Permissions    | read-write         |
+      +----------------+--------------------+
+      | Channel Based  | False              |
+      +----------------+--------------------+
+      | Resettable     | No                 |
+      +----------------+--------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1556,31 +1470,19 @@ NI-DMM Session
       .. note::
          The NI 4050 and NI 4060 are not supported.
 
-      +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | Name                   | Description                                                                                                                                                                        |
-      +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | **Auto** (-1)          | The driver chooses the DC noise rejection setting based on the configured function and resolution.                                                                                 |
-      +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | **Normal** (0)         | NI-DMM weighs all samples equally.                                                                                                                                                 |
-      +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | **Second Order** (1)   | NI-DMM weighs the samples taken in the middle of the aperture time more than samples taken at the beginning and the end of the measurement using a triangular weighing function.   |
-      +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | **High Order** (2)     | NI-DMM weighs the samples taken in the middle of the aperture time more than samples taken at the beginning and the end of the measurement using a bell-curve weighing function.   |
-      +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------------------+
+      | Characteristic | Value                 |
+      +================+=======================+
+      | Datatype       | enum.DCNoiseRejection |
+      +----------------+-----------------------+
+      | Permissions    | read-write            |
+      +----------------+-----------------------+
+      | Channel Based  | False                 |
+      +----------------+-----------------------+
+      | Resettable     | No                    |
+      +----------------+-----------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1595,27 +1497,19 @@ NI-DMM Session
       For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
       coupling during a waveform acquisition.
 
-      +--------------+--------------------------+
-      | Name         | Description              |
-      +--------------+--------------------------+
-      | **AC** (0)   | Specifies AC coupling.   |
-      +--------------+--------------------------+
-      | **DC** (1)   | Specifies DC coupling.   |
-      +--------------+--------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------------------+
+      | Characteristic | Value                 |
+      +================+=======================+
+      | Datatype       | enum.WaveformCoupling |
+      +----------------+-----------------------+
+      | Permissions    | read-write            |
+      +----------------+-----------------------+
+      | Channel Based  | False                 |
+      +----------------+-----------------------+
+      | Resettable     | No                    |
+      +----------------+-----------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1634,17 +1528,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1661,29 +1555,19 @@ NI-DMM Session
       .. note::
          The NI 4050 and NI 4060 are not supported.
 
-      +---------------------------------------------+------------------------------------------+
-      | Name                                        | Description                              |
-      +---------------------------------------------+------------------------------------------+
-      | **1 M Ohm** (1000000.0)                     | Input resistance of 1 M Ohm              |
-      +---------------------------------------------+------------------------------------------+
-      | **10 M Ohm** (10000000.0)                   | Input resistance of 10 M Ohm             |
-      +---------------------------------------------+------------------------------------------+
-      | **Greater Than 10 G Ohm** (10000000000.0)   | Input resistance greater than 10 G Ohm   |
-      +---------------------------------------------+------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------------+
+      | Characteristic | Value                |
+      +================+======================+
+      | Datatype       | enum.InputResistance |
+      +----------------+----------------------+
+      | Permissions    | read-write           |
+      +----------------+----------------------+
+      | Channel Based  | False                |
+      +----------------+----------------------+
+      | Resettable     | No                   |
+      +----------------+----------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1703,17 +1587,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | integer    |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1733,17 +1617,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | integer    |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1759,17 +1643,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | integer    |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1785,17 +1669,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | integer    |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1812,17 +1696,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read only      |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1841,31 +1725,19 @@ NI-DMM Session
       .. note::
          Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
 
-      +----------------------------+--------------------------------------+
-      | Name                       | Description                          |
-      +----------------------------+--------------------------------------+
-      | **None** (0)               | No cable compensation.               |
-      +----------------------------+--------------------------------------+
-      | **Open** (1)               | Open cable compensation.             |
-      +----------------------------+--------------------------------------+
-      | **Short** (2)              | Short cable compensation.            |
-      +----------------------------+--------------------------------------+
-      | **Open\_and\_Short** (3)   | Open and short cable compensation.   |
-      +----------------------------+--------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------------------+
+      | Characteristic | Value                      |
+      +================+============================+
+      | Datatype       | enum.CableCompensationType |
+      +----------------+----------------------------+
+      | Permissions    | read-write                 |
+      +----------------+----------------------------+
+      | Channel Based  | False                      |
+      +----------------+----------------------------+
+      | Resettable     | No                         |
+      +----------------+----------------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1885,17 +1757,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1915,17 +1787,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1945,17 +1817,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1975,17 +1847,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2001,29 +1873,19 @@ NI-DMM Session
       the measurement processing uses for capacitance and inductance
       measurements.
 
-      +--------------------+--------------------------------------------------------------------------------------+
-      | Name               | Description                                                                          |
-      +--------------------+--------------------------------------------------------------------------------------+
-      | **Auto** (-1)      | NI-DMM chooses the algorithm based on function and range.                            |
-      +--------------------+--------------------------------------------------------------------------------------+
-      | **Series** (0)     | NI-DMM uses the series impedance model to calculate capacitance and inductance.      |
-      +--------------------+--------------------------------------------------------------------------------------+
-      | **Parallel** (1)   | NI-DMM uses the parallel admittance model to calculate capacitance and inductance.   |
-      +--------------------+--------------------------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-------------------------+
+      | Characteristic | Value                   |
+      +================+=========================+
+      | Datatype       | enum.LCCalculationModel |
+      +----------------+-------------------------+
+      | Permissions    | read-write              |
+      +----------------+-------------------------+
+      | Channel Based  | False                   |
+      +----------------+-------------------------+
+      | Resettable     | No                      |
+      +----------------+-------------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2038,27 +1900,19 @@ NI-DMM Session
       For the NI 4082 and NI 4072 only, controls the available DC bias for
       capacitance measurements.
 
-      +-----------------------+------------------------------------------------------+
-      | Name                  | Description                                          |
-      +-----------------------+------------------------------------------------------+
-      | **DC Bias Off** (0)   | NI-DMM programs the device not to use the DC bias.   |
-      +-----------------------+------------------------------------------------------+
-      | **DC Bias On** (1)    | NI-DMM programs the device to use the DC bias.       |
-      +-----------------------+------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-------------+
+      | Characteristic | Value       |
+      +================+=============+
+      | Datatype       | enum.DCBias |
+      +----------------+-------------+
+      | Permissions    | read-write  |
+      +----------------+-------------+
+      | Channel Based  | False       |
+      +----------------+-------------+
+      | Resettable     | No          |
+      +----------------+-------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2074,17 +1928,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------+
-      | Characteristic   | Value       |
-      +------------------+-------------+
-      | Datatype         | string      |
-      +------------------+-------------+
-      | Permissions      | Read Only   |
-      +------------------+-------------+
-      | Channel Based    | False       |
-      +------------------+-------------+
-      | Resettable       | No          |
-      +------------------+-------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | string    |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2099,17 +1953,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | integer    |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2123,17 +1977,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------+
+      | Characteristic | Value     |
+      +================+===========+
+      | Datatype       | integer   |
+      +----------------+-----------+
+      | Permissions    | read only |
+      +----------------+-----------+
+      | Channel Based  | False     |
+      +----------------+-----------+
+      | Resettable     | No        |
+      +----------------+-----------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2147,37 +2001,19 @@ NI-DMM Session
 
       Specifies the RTD type.
 
-      +-------------------+----------------------------------------------------------------------------------------------+
-      | Name              | Description                                                                                  |
-      +-------------------+----------------------------------------------------------------------------------------------+
-      | **Custom** (0)    | Performs Callendar-Van Dusen RTD scaling with the user-specified A, B, and C coefficients.   |
-      +-------------------+----------------------------------------------------------------------------------------------+
-      | **Pt 3750** (1)   | Performs scaling for a Pt 3750 RTD.                                                          |
-      +-------------------+----------------------------------------------------------------------------------------------+
-      | **Pt 3851** (2)   | Performs scaling for a Pt 3851 RTD.                                                          |
-      +-------------------+----------------------------------------------------------------------------------------------+
-      | **Pt 3911** (3)   | Performs scaling for a Pt 3911 RTD.                                                          |
-      +-------------------+----------------------------------------------------------------------------------------------+
-      | **Pt 3916** (4)   | Performs scaling for a Pt 3916 RTD.                                                          |
-      +-------------------+----------------------------------------------------------------------------------------------+
-      | **Pt 3920** (5)   | Performs scaling for a Pt 3920 RTD.                                                          |
-      +-------------------+----------------------------------------------------------------------------------------------+
-      | **Pt 3928** (6)   | Performs scaling for a Pt 3928 RTD.                                                          |
-      +-------------------+----------------------------------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+--------------+
+      | Characteristic | Value        |
+      +================+==============+
+      | Datatype       | enum.RTDType |
+      +----------------+--------------+
+      | Permissions    | read-write   |
+      +----------------+--------------+
+      | Channel Based  | False        |
+      +----------------+--------------+
+      | Resettable     | No           |
+      +----------------+--------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2192,17 +2028,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2217,17 +2053,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2242,17 +2078,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2266,31 +2102,19 @@ NI-DMM Session
 
       Specifies the thermistor type.
 
-      +------------------+------------------------------------------------------------------------------------------------+
-      | Name             | Description                                                                                    |
-      +------------------+------------------------------------------------------------------------------------------------+
-      | **Custom** (0)   | Performs Steinhart-Hart thermistor scaling with the user-specified A, B, and C coefficients.   |
-      +------------------+------------------------------------------------------------------------------------------------+
-      | **44004** (1)    | Performs scaling for an Omega Series 44004 thermistor.                                         |
-      +------------------+------------------------------------------------------------------------------------------------+
-      | **44006** (2)    | Performs scaling for an Omega Series 44006 thermistor.                                         |
-      +------------------+------------------------------------------------------------------------------------------------+
-      | **44007** (3)    | Performs scaling for an Omega Series 44007 thermistor.                                         |
-      +------------------+------------------------------------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+---------------------+
+      | Characteristic | Value               |
+      +================+=====================+
+      | Datatype       | enum.ThermistorType |
+      +----------------+---------------------+
+      | Permissions    | read-write          |
+      +----------------+---------------------+
+      | Channel Based  | False               |
+      +----------------+---------------------+
+      | Resettable     | No                  |
+      +----------------+---------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2305,17 +2129,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2330,17 +2154,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2355,17 +2179,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2387,53 +2211,19 @@ NI-DMM Session
       the Operation Mode property to IVIDMM Mode to set all other function
       values.
 
-      +----------------------------------+---------------------------------------------+
-      | Name                             | Description                                 |
-      +----------------------------------+---------------------------------------------+
-      | **DC Volts** (1)                 | All devices supported.                      |
-      +----------------------------------+---------------------------------------------+
-      | **AC Volts** (2)                 | All devices supported.                      |
-      +----------------------------------+---------------------------------------------+
-      | **DC Current** (3)               | All devices supported.                      |
-      +----------------------------------+---------------------------------------------+
-      | **AC Current** (4)               | All devices supported.                      |
-      +----------------------------------+---------------------------------------------+
-      | **2-Wire Resistance** (5)        | All devices supported.                      |
-      +----------------------------------+---------------------------------------------+
-      | **4-Wire Resistance** (101)      | NI 4065, and NI 4070/4071/4072 supported.   |
-      +----------------------------------+---------------------------------------------+
-      | **Frequency** (104)              | NI 4070/4071/4072 supported.                |
-      +----------------------------------+---------------------------------------------+
-      | **Period** (105)                 | NI 4070/4071/4072 supported.                |
-      +----------------------------------+---------------------------------------------+
-      | **AC Volts DC Coupled** (1001)   | NI 4070/4071/4072 supported.                |
-      +----------------------------------+---------------------------------------------+
-      | **Diode** (1002)                 | All devices supported.                      |
-      +----------------------------------+---------------------------------------------+
-      | **Waveform Voltage** (1003)      | NI 4070/4071/4072 supported.                |
-      +----------------------------------+---------------------------------------------+
-      | **Waveform Current** (1004)      | NI 4070/4071/4072 supported.                |
-      +----------------------------------+---------------------------------------------+
-      | **Capacitance** (1005)           | NI 4072 supported.                          |
-      +----------------------------------+---------------------------------------------+
-      | **Inductance** (1006)            | NI 4072 supported.                          |
-      +----------------------------------+---------------------------------------------+
-      | **Temperature** (108)            | NI 4065, and NI 4070/4071/4072 supported.   |
-      +----------------------------------+---------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+---------------+
+      | Characteristic | Value         |
+      +================+===============+
+      | Datatype       | enum.Function |
+      +----------------+---------------+
+      | Permissions    | read-write    |
+      +----------------+---------------+
+      | Channel Based  | False         |
+      +----------------+---------------+
+      | Resettable     | No            |
+      +----------------+---------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2462,17 +2252,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2491,33 +2281,19 @@ NI-DMM Session
       .. note::
          NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
 
-      +-----------------+------------------------------------+
-      | Name            | Description                        |
-      +-----------------+------------------------------------+
-      | **3.5** (3.5)   | Specifies 3.5 digits resolution.   |
-      +-----------------+------------------------------------+
-      | **4.5** (4.5)   | Specifies 4.5 digits resolution.   |
-      +-----------------+------------------------------------+
-      | **5.5** (5.5)   | Specifies 5.5 digits resolution.   |
-      +-----------------+------------------------------------+
-      | **6.5** (6.5)   | Specifies 6.5 digits resolution.   |
-      +-----------------+------------------------------------+
-      | **7.5** (7.5)   | Specifies 7.5 digits resolution.   |
-      +-----------------+------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------------------+
+      | Characteristic | Value                 |
+      +================+=======================+
+      | Datatype       | enum.DigitsResolution |
+      +----------------+-----------------------+
+      | Permissions    | read-write            |
+      +----------------+-----------------------+
+      | Channel Based  | False                 |
+      +----------------+-----------------------+
+      | Resettable     | No                    |
+      +----------------+-----------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2537,51 +2313,19 @@ NI-DMM Session
       To determine which values are supported by each device, refer to the
       LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
 
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | Name                     | Description                                                                                                       |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **Immediate** (1)        | No trigger specified.                                                                                             |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **External** (2)         | Pin 9 on the AUX Connector                                                                                        |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **Software Trig** (3)    | Waits until \`niDMM Send Software Trigger <dmmviref.chm::/niDMM\_Send\_Software\_Trigger.html>\`\_\_ is called.   |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **TTL 0** (111)          | PXI Trigger Line 0                                                                                                |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **TTL 1** (112)          | PXI Trigger Line 1                                                                                                |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **TTL 2** (113)          | PXI Trigger Line 2                                                                                                |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **TTL 3** (114)          | PXI Trigger Line 3                                                                                                |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **TTL 4** (115)          | PXI Trigger Line 4                                                                                                |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **TTL 5** (116)          | PXI Trigger Line 5                                                                                                |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **TTL 6** (117)          | PXI Trigger Line 6                                                                                                |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **TTL 7** (118)          | PXI Trigger Line 7                                                                                                |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **PXI Star** (131)       | PXI Star Trigger Line                                                                                             |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **LBR Trig 1** (1004)    | Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis                                                    |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-      | **AUX\_Trig 1** (1001)   | Pin 3 on the AUX connector                                                                                        |
-      +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+--------------------+
+      | Characteristic | Value              |
+      +================+====================+
+      | Datatype       | enum.TriggerSource |
+      +----------------+--------------------+
+      | Permissions    | read-write         |
+      +----------------+--------------------+
+      | Channel Based  | False              |
+      +----------------+--------------------+
+      | Resettable     | No                 |
+      +----------------+--------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2622,17 +2366,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2650,17 +2394,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2688,17 +2432,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2717,17 +2461,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2748,17 +2492,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2772,31 +2516,19 @@ NI-DMM Session
 
       Specifies the transducer type.
 
-      +------------------------+--------------------------------------+
-      | Name                   | Description                          |
-      +------------------------+--------------------------------------+
-      | **Thermocouple** (1)   | Use for thermocouple measurements.   |
-      +------------------------+--------------------------------------+
-      | **Thermistor** (2)     | Use for thermistor measurements.     |
-      +------------------------+--------------------------------------+
-      | **2-Wire RTD** (3)     | Use for 2-wire RTD measurements.     |
-      +------------------------+--------------------------------------+
-      | **4-Wire RTD** (4)     | Use for 4-wire RTD measurements.     |
-      +------------------------+--------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+---------------------+
+      | Characteristic | Value               |
+      +================+=====================+
+      | Datatype       | enum.TransducerType |
+      +----------------+---------------------+
+      | Permissions    | read-write          |
+      +----------------+---------------------+
+      | Channel Based  | False               |
+      +----------------+---------------------+
+      | Resettable     | No                  |
+      +----------------+---------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2810,39 +2542,19 @@ NI-DMM Session
 
       Specifies the thermocouple type.
 
-      +--------------+-----------------------+
-      | Name         | Description           |
-      +--------------+-----------------------+
-      | **B** (1)    | Thermocouple type B   |
-      +--------------+-----------------------+
-      | **E** (4)    | Thermocouple type E   |
-      +--------------+-----------------------+
-      | **J** (6)    | Thermocouple type J   |
-      +--------------+-----------------------+
-      | **K** (7)    | Thermocouple type K   |
-      +--------------+-----------------------+
-      | **N** (8)    | Thermocouple type N   |
-      +--------------+-----------------------+
-      | **R** (9)    | Thermocouple type R   |
-      +--------------+-----------------------+
-      | **S** (10)   | Thermocouple type S   |
-      +--------------+-----------------------+
-      | **T** (11)   | Thermocouple type T   |
-      +--------------+-----------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-----------------------+
+      | Characteristic | Value                 |
+      +================+=======================+
+      | Datatype       | enum.ThermocoupleType |
+      +----------------+-----------------------+
+      | Permissions    | read-write            |
+      +----------------+-----------------------+
+      | Channel Based  | False                 |
+      +----------------+-----------------------+
+      | Resettable     | No                    |
+      +----------------+-----------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2856,25 +2568,19 @@ NI-DMM Session
 
       Specifies the thermocouple reference junction type.
 
-      +-----------------+------------------------------------------------------------------------------+
-      | Name            | Description                                                                  |
-      +-----------------+------------------------------------------------------------------------------+
-      | **Fixed** (2)   | Thermocouple reference juction is fixed at the user-specified temperature.   |
-      +-----------------+------------------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------------------------------+
+      | Characteristic | Value                                  |
+      +================+========================================+
+      | Datatype       | enum.ThermocoupleReferenceJunctionType |
+      +----------------+----------------------------------------+
+      | Permissions    | read-write                             |
+      +----------------+----------------------------------------+
+      | Channel Based  | False                                  |
+      +----------------+----------------------------------------+
+      | Resettable     | No                                     |
+      +----------------+----------------------------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2889,17 +2595,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2913,17 +2619,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2943,17 +2649,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | integer    |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2970,53 +2676,19 @@ NI-DMM Session
       To determine which values are supported by each device, refer to the
       LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
 
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | Name                    | Description                                                                                                                            |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **Immediate** (1)       | No trigger specified                                                                                                                   |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **Interval** (10)       | Interval trigger                                                                                                                       |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **External** (2)        | Pin 9 on the AUX Connector                                                                                                             |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **Software Trig** (3)   | Configures the DMM to wait until \`niDMM Send Software Trigger <dmmviref.chm::/niDMM\_Send\_Software\_Trigger.html>\`\_\_ is called.   |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **TTL 0** (111)         | PXI Trigger Line 0                                                                                                                     |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **TTL 1** (112)         | PXI Trigger Line 1                                                                                                                     |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **TTL 2** (113)         | PXI Trigger Line 2                                                                                                                     |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **TTL 3** (114)         | PXI Trigger Line 3                                                                                                                     |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **TTL 4** (115)         | PXI Trigger Line 4                                                                                                                     |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **TTL 5** (116)         | PXI Trigger Line 5                                                                                                                     |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **TTL 6** (117)         | PXI Trigger Line 6                                                                                                                     |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **TTL 7** (118)         | PXI Trigger Line 7                                                                                                                     |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **PXI Star** (131)      | PXI Star trigger line                                                                                                                  |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **LBR Trig 1** (1004)   | Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis                                                                         |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-      | **AUX Trig 1** (1001)   | Pin 3 on the AUX connector                                                                                                             |
-      +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+--------------------+
+      | Characteristic | Value              |
+      +================+====================+
+      | Datatype       | enum.SampleTrigger |
+      +----------------+--------------------+
+      | Permissions    | read-write         |
+      +----------------+--------------------+
+      | Channel Based  | False              |
+      +----------------+--------------------+
+      | Resettable     | No                 |
+      +----------------+--------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -3048,17 +2720,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -3079,17 +2751,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------+
+      | Characteristic | Value      |
+      +================+============+
+      | Datatype       | integer    |
+      +----------------+------------+
+      | Permissions    | read-write |
+      +----------------+------------+
+      | Channel Based  | False      |
+      +----------------+------------+
+      | Resettable     | No         |
+      +----------------+------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -3109,45 +2781,19 @@ NI-DMM Session
       .. note::
          The NI 4050 is not supported.
 
-      +-------------------------+------------------------------------------------------------------+
-      | Name                    | Description                                                      |
-      +-------------------------+------------------------------------------------------------------+
-      | **None** (-1)           | No destination specified.                                        |
-      +-------------------------+------------------------------------------------------------------+
-      | **External** (2)        | Pin 6 on the AUX Connector                                       |
-      +-------------------------+------------------------------------------------------------------+
-      | **TTL 0** (111)         | PXI Trigger Line 0                                               |
-      +-------------------------+------------------------------------------------------------------+
-      | **TTL 1** (112)         | PXI Trigger Line 1                                               |
-      +-------------------------+------------------------------------------------------------------+
-      | **TL 2** (113)          | PXI Trigger Line 2                                               |
-      +-------------------------+------------------------------------------------------------------+
-      | **TTL 3** (114)         | PXI Trigger Line 3                                               |
-      +-------------------------+------------------------------------------------------------------+
-      | **TL 4** (115)          | PXI Trigger Line 4                                               |
-      +-------------------------+------------------------------------------------------------------+
-      | **TTL 5** (116)         | PXI Trigger Line 5                                               |
-      +-------------------------+------------------------------------------------------------------+
-      | **TTL 6** (117)         | PXI Trigger Line 6                                               |
-      +-------------------------+------------------------------------------------------------------+
-      | **TTL 7** (118)         | PXI Trigger Line 7                                               |
-      +-------------------------+------------------------------------------------------------------+
-      | **LBR Trig 0** (1003)   | Local Bus Right Trigger Line 0 of PXI/SCXI combination chassis   |
-      +-------------------------+------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------------------------+
+      | Characteristic | Value                        |
+      +================+==============================+
+      | Datatype       | enum.MeasurementCompleteDest |
+      +----------------+------------------------------+
+      | Permissions    | read-write                   |
+      +----------------+------------------------------+
+      | Channel Based  | False                        |
+      +----------------+------------------------------+
+      | Resettable     | No                           |
+      +----------------+------------------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -3181,17 +2827,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read-write     |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -3208,27 +2854,19 @@ NI-DMM Session
       .. note::
          The NI 4060 does not support an aperture time set in seconds.
 
-      +-----------------------------+--------------------------------------+
-      | Name                        | Description                          |
-      +-----------------------------+--------------------------------------+
-      | **Seconds** (0)             | Units are seconds.                   |
-      +-----------------------------+--------------------------------------+
-      | **Power Line Cycles** (1)   | Units are powerline cycles (PLCs).   |
-      +-----------------------------+--------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+------------------------+
+      | Characteristic | Value                  |
+      +================+========================+
+      | Datatype       | enum.ApertureTimeUnits |
+      +----------------+------------------------+
+      | Permissions    | read-write             |
+      +----------------+------------------------+
+      | Channel Based  | False                  |
+      +----------------+------------------------+
+      | Resettable     | No                     |
+      +----------------+------------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -3244,17 +2882,17 @@ NI-DMM Session
 
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read Only               |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+----------------+
+      | Characteristic | Value          |
+      +================+================+
+      | Datatype       | floating point |
+      +----------------+----------------+
+      | Permissions    | read only      |
+      +----------------+----------------+
+      | Channel Based  | False          |
+      +----------------+----------------+
+      | Resettable     | No             |
+      +----------------+----------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -3269,31 +2907,19 @@ NI-DMM Session
       Specifies the AutoZero mode. This property is not supported for the NI
       4050.
 
-      +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | Name            | Description                                                                                                                                                                                                                                                                                                                         |
-      +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | **Auto** (-1)   | NI-DMM chooses the Auto Zero setting based on the configured function and resolution.                                                                                                                                                                                                                                               |
-      +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | **Off** (0)     | Disables AutoZero.                                                                                                                                                                                                                                                                                                                  |
-      +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | **On** (1)      | The DMM internally disconnects the input signal following each measurement and takes a zero reading. It then subtracts the zero reading from the preceding reading. For NI 4065 devices, Auto Zero is always ON. Auto Zero is an integral part of the signal measurement phase and adds no extra time to the overall measurement.   |
-      +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      | **Once** (2)    | The DMM internally disconnects the input signal for the first measurement and takes a zero reading. It then subtracts the zero reading from the first reading and the following readings. The NI 4060/4065 does not support this setting.                                                                                           |
-      +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+---------------+
+      | Characteristic | Value         |
+      +================+===============+
+      | Datatype       | enum.AutoZero |
+      +----------------+---------------+
+      | Permissions    | read-write    |
+      +----------------+---------------+
+      | Channel Based  | False         |
+      +----------------+---------------+
+      | Resettable     | No            |
+      +----------------+---------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -3322,27 +2948,19 @@ NI-DMM Session
       .. note::
          For 400 Hz powerline frequency, use the 50 Hz setting.
 
-      +--------------------+-----------------------------------------------+
-      | Name               | Description                                   |
-      +--------------------+-----------------------------------------------+
-      | **50 Hz** (50.0)   | Specifies the powerline frequency as 50 Hz.   |
-      +--------------------+-----------------------------------------------+
-      | **60 Hz** (60.0)   | Specifies the powerline frequency as 60 Hz.   |
-      +--------------------+-----------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 64-bit floating point   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-------------------------+
+      | Characteristic | Value                   |
+      +================+=========================+
+      | Datatype       | enum.PowerlineFrequency |
+      +----------------+-------------------------+
+      | Permissions    | read-write              |
+      +----------------+-------------------------+
+      | Channel Based  | False                   |
+      +----------------+-------------------------+
+      | Resettable     | No                      |
+      +----------------+-------------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -3357,27 +2975,19 @@ NI-DMM Session
       Specifies the edge of the signal from the specified trigger source on
       which the DMM is triggered.
 
-      +--------------------+------------------------------------------------------------------+
-      | Name               | Description                                                      |
-      +--------------------+------------------------------------------------------------------+
-      | **Positive** (0)   | The driver triggers on the rising edge of the trigger signal.    |
-      +--------------------+------------------------------------------------------------------+
-      | **Negative** (1)   | The driver triggers on the falling edge of the trigger signal.   |
-      +--------------------+------------------------------------------------------------------+
-
       The following table lists the characteristics of this property.
 
-      +------------------+-------------------------+
-      | Characteristic   | Value                   |
-      +------------------+-------------------------+
-      | Datatype         | 32-bit signed integer   |
-      +------------------+-------------------------+
-      | Permissions      | Read/Write              |
-      +------------------+-------------------------+
-      | Channel Based    | False                   |
-      +------------------+-------------------------+
-      | Resettable       | No                      |
-      +------------------+-------------------------+
+      +----------------+-------------------+
+      | Characteristic | Value             |
+      +================+===================+
+      | Datatype       | enum.TriggerSlope |
+      +----------------+-------------------+
+      | Permissions    | read-write        |
+      +----------------+-------------------+
+      | Channel Based  | False             |
+      +----------------+-------------------+
+      | Resettable     | No                |
+      +----------------+-------------------+
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:

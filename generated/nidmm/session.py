@@ -108,13 +108,6 @@ class Acquisition(object):
 class Session(object):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
-    active_channel = AttributeViString(-2)
-    '''
-    Specifies the channel name used to access all subsequent channel-based
-    properties in this property node. Set the channel before setting
-    channel-based properties. Pass a name that the instrument driver defines
-    or a virtual channel name configured in MAX.
-    '''
     range_check = AttributeViBoolean(1050002)
     '''
     Specifies whether to validate property values and VI parameters. If
