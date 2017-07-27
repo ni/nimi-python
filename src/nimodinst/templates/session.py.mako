@@ -47,7 +47,7 @@ class AttributeViString(object):
 class Device(object):
 
     def __init__(self, owner, index):
-% for attribute in sorted(attributes):
+% for attribute in helper.sorted_attrs(attributes):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(owner, ${attribute}, index=index)
 %   if 'shortDescription' in attributes[attribute]:
         '''
@@ -61,7 +61,7 @@ class Session(object):
     '''${config['session_description']}'''
 
     def __init__(self, driver):
-% for attribute in sorted(attributes):
+% for attribute in helper.sorted_attrs(attributes):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(self, ${attribute})
 %   if 'shortDescription' in attributes[attribute]:
         '''
