@@ -26,7 +26,7 @@ def device_info(request):
 def test_invalid_device_name():
     try:
         nidmm.Session("Foo!")
-        assert false
+        assert False
     except nidmm.Error as e:
         assert e.code == -1074118656
         assert e.description.find("Device was not recognized. The device is not supported with this driver or version.") != -1
@@ -95,7 +95,7 @@ def test_Enum_attribute(device_info):
         assert type(session.function) is nidmm.Function
         try:
             session.function = nidmm.LCCalculationModel.CALC_MODEL_SERIES
-            assert false
+            assert False
         except TypeError as e:
             print(e)
             pass
@@ -105,13 +105,13 @@ def test_ViSession_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         try:
             session.io_session = 5
-            assert false
+            assert False
         except TypeError as e:
             print(e)
             pass
         try:
             value = session.io_session
-            assert false
+            assert False
         except TypeError as e:
             print(e)
             pass
