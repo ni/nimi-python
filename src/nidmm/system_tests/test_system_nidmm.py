@@ -92,10 +92,17 @@ def test_ViSession_attribute():
             print(e)
             pass
 
-'''
+
 def test_self_test():
     with nidmm.Session("PXI1Slot2") as session:
         result, message = session.self_test()
-        assert result is 0
-        assert message is 'hello'
-'''
+        assert result == 0
+        assert message == 'Self Test passed.'
+
+
+def test_get_dev_temp():
+    with nidmm.Session("PXI1Slot2") as session:
+        temperature = session.get_dev_temp('')
+        print(temperature)
+        assert 20 <= temperature <= 50
+
