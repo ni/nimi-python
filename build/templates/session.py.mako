@@ -132,9 +132,9 @@ class Session(object):
     %else:
     ${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(${attribute})
     %endif
-%   if 'shortDescription' in attributes[attribute]:
+%   if 'short_description' in attributes[attribute]:
     '''
-    ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'], indent=4)}
+    ${helper.get_indented_docstring_snippet(attributes[attribute]['short_description'], indent=4)}
     '''
 %   endif
 % endfor

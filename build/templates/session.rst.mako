@@ -24,18 +24,37 @@ else:
     t = attributes[attr]["type"]
 %>\
    :ivar ${t} ${attributes[attr]["name"].lower()}: 
-      ${helper.get_indented_docstring_snippet(attributes[attr]['shortDescription'], indent=6)}
+      ${helper.get_indented_docstring_snippet(attributes[attr]['short_description'], indent=6)}
 % endfor
 
 % for attr in sorted(attributes):
-%   if 'longDescription' in attributes[attr]:
    .. py:attribute:: ${attributes[attr]["name"].lower()}
 
 %   if attributes[attr]['enum'] is not None:
       See :py:data:`${module_name}.${attributes[attr]['enum']}` 
 
 %   endif
-      ${helper.get_indented_docstring_snippet(attributes[attr]['longDescription'], indent=6)}
+<%
+a = attributes[attr]
+data_type = helper.get_python_type_from_visa_type(a['type'])
+if attributes[attr]['enum'] is not None:
+    data_type = 'enum.' + attributes[attr]['enum']
+table_contents = [
+         ('Characteristic', 'Value'),
+         ('Datatype', data_type),
+         ('Permissions', a['access']),
+         ('Channel Based', a['channel_based']),
+         ('Resettable', a['resettable']),
+         ]
+table = helper.as_rest_table(table_contents, full=True)
+
+desc = a['long_description'] if 'long_description' in a else a['short_description']
+%>\
+      ${helper.get_indented_docstring_snippet(desc, indent=6)}
+
+      The following table lists the characteristics of this property.
+
+      ${helper.get_indented_docstring_snippet(table, indent=6)}
 
       .. tip:: 
          This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -44,6 +63,5 @@ else:
            - LabVIEW Property: **${attributes[attr]['lv_property'].strip()}**
 %   endif
            - C Attribute: **${c_function_prefix.upper()}ATTR_${attributes[attr]["name"].upper()}**
-%   endif
 
 % endfor
