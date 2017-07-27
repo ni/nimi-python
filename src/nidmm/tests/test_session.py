@@ -111,11 +111,13 @@ class TestSession(object):
                 session.io_session = 5
                 assert False
             except TypeError as e:
+                print(e)
                 pass
             try:
                 value = session.io_session  # noqa: F841
                 assert False
             except AttributeError as e:
+                print(e)
                 pass
 
 
