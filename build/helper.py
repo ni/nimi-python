@@ -140,7 +140,11 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
                     snippet += '.encode(\'ascii\')'
         else:
             assert x['direction'] is 'out'
-            snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
+            if x['is_buffer']:
+                # TODO(marcoskirsch): cast this pointer
+                snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
+            else:
+                snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
         snippets.append(snippet)
     return ', '.join(snippets)
 
@@ -183,10 +187,18 @@ def get_enum_type_check_snippet(parameter):
 
 def get_ctype_variable_declaration_snippet(parameter):
     '''Returns python snippet to declare and initialize the corresponding ctypes variable'''
-    assert parameter['direction'] is 'out'
+    assert parameter['direction'] == 'out'
     snippet = parameter['ctypes_variable_name'] + ' = '
     if parameter['is_buffer']:
-        snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)' + ' #TODO: allocate a buffer'
+        if isinstance(parameter['size'], int):
+            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']) + ')()'
+            #snippet += 'ctypes.create_string_buffer(' + str(parameter['size']) + ')'
+        elif parameter['size'] == 'ivi-dance':
+            snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0) #TODO: Do the IVI-dance!'
+        else:
+            # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
+            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + camelcase_to_snakecase(parameter['size']) + ')()'
+
     else:
         snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)'
     return snippet
