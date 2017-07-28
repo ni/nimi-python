@@ -80,19 +80,6 @@ class AttributeEnum(object):
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
 
 
-# TODO(marcoskirsch): We may want to support this, plus a Session constructor that uses an existing ViSession.
-class AttributeViSession(object):
-
-    def __init__(self, attribute_id):
-        self.attribute_id = attribute_id
-
-    def __get__(self, obj, objtype):
-        raise TypeError('Attributes of type ViSession are unsupported in Python')
-
-    def __set__(self, obj, value):
-        raise TypeError('Attributes of type ViSession are unsupported in Python')
-
-
 class Acquisition(object):
     def __init__(self, session):
         self.session = session
@@ -105,7 +92,20 @@ class Acquisition(object):
         self.session._abort()
 
 
-class Session(object):
+# From https://stackoverflow.com/questions/3603502/prevent-creating-new-attributes-outside-init
+class FrozenClass(object):
+    __isfrozen = False
+
+    def __setattr__(self, key, value):
+        if self.__isfrozen and key not in dir(self):
+            raise TypeError("%r is a frozen class" % self)
+        object.__setattr__(self, key, value)
+
+    def _freeze(self):
+        self.__isfrozen = True
+
+
+class Session(FrozenClass):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
     absolute_resolution = AttributeViReal64(1250008)
@@ -700,6 +700,7 @@ class Session(object):
         self.library = library.get_library()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+        self._freeze()
 
     def initiate(self):
         return Acquisition(self)

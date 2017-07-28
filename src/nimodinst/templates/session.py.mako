@@ -57,7 +57,20 @@ class Device(object):
 % endfor
 
 
-class Session(object):
+# From https://stackoverflow.com/questions/3603502/prevent-creating-new-attributes-outside-init
+class FrozenClass(object):
+    __isfrozen = False
+
+    def __setattr__(self, key, value):
+        if self.__isfrozen and key not in dir(self):
+            raise TypeError("%r is a frozen class" % self)
+        object.__setattr__(self, key, value)
+
+    def _freeze(self):
+        self.__isfrozen = True
+
+
+class Session(FrozenClass):
     '''${config['session_description']}'''
 
     def __init__(self, driver):
@@ -74,6 +87,8 @@ class Session(object):
         self.item_count = 0
         self.library = library.get_library()
         self.handle, self.item_count = self._open_installed_devices_session(driver)
+
+        self._freeze()
 
     def __del__(self):
         pass

@@ -33,6 +33,8 @@ setup(
     description='${config['driver_name']} Python API',
     long_description=read_contents('README.rst'),
     author='National Instruments',
+    author_email="opensource@ni.com",
+    url="https://github.com/ni/nimi-python",
     maintainer="National Instruments",
     maintainer_email="opensource@ni.com",
     keywords=['${config['module_name']}'],
@@ -45,6 +47,7 @@ setup(
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
     test_suite='tests',
+    zip_safe=False,
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
