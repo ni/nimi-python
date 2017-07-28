@@ -95,6 +95,9 @@ class Acquisition(object):
 class Session(object):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
+    # This is needed during __init__. Without it, __setattr__ raises an exception
+    _is_frozen = False
+
     absolute_resolution = AttributeViReal64(1250008)
     '''
     Specifies the measurement resolution in absolute units. Setting this
@@ -687,6 +690,13 @@ class Session(object):
         self.library = library.get_library()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+
+        self._is_frozen = True
+
+    def __setattr__(self, key, value):
+        if self._is_frozen and key not in dir(self):
+            raise TypeError("%r is a frozen class" % self)
+        object.__setattr__(self, key, value)
 
     def initiate(self):
         return Acquisition(self)
