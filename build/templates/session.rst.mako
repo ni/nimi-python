@@ -24,7 +24,6 @@ else:
     t = attributes[attr]["type"]
 %>\
    :var ${attributes[attr]["name"].lower()}: 
-      ${helper.get_indented_docstring_snippet(attributes[attr]['short_description'], indent=6)}
    :vartype ${attributes[attr]["name"].lower()}: ${t}
 % endfor
 
