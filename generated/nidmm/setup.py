@@ -27,10 +27,13 @@ def read_contents(file_to_read):
 
 setup(
     name=pypi_name,
+    zip_safe=False,
     version='0.1',
     description='NI-DMM Python API',
     long_description=read_contents('README.rst'),
     author='National Instruments',
+    author_email="opensource@ni.com",
+    url="https://github.com/ni/nimi-python",
     maintainer="National Instruments",
     maintainer_email="opensource@ni.com",
     keywords=['nidmm'],
