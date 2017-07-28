@@ -34,11 +34,17 @@ class MockFunctionCallError(Exception):
 class SideEffectsHelper(object):
     def __init__(self):
         self._defaults = {}
-% for f in helper.extract_codegen_functions(functions):
-        self._defaults['${f['name']}'] = {}
-        self._defaults['${f['name']}']['return'] = 0
-% for p in helper.extract_output_parameters(f['parameters']):
-        self._defaults['${f['name']}']['${p['name']}'] = None
+% for func_name in helper.extract_codegen_functions(functions):
+<% 
+f = functions[func_name]
+%>\
+        self._defaults['${func_name}'] = {}
+        self._defaults['${func_name}']['return'] = 0
+% for param_num in helper.extract_output_parameters(f['parameters']):
+<%
+p = f['parameters'][param_num]
+%>\
+        self._defaults['${func_name}']['${p['name']}'] = None
 % endfor
 % endfor
 
@@ -48,18 +54,22 @@ class SideEffectsHelper(object):
     def __setitem__(self, func, val):
         self._defaults[func] = val
 
-% for f in helper.extract_codegen_functions(functions):
+% for func_name in helper.extract_codegen_functions(functions):
 <% 
+f = functions[func_name]
 params = f['parameters']
 output_params = helper.extract_output_parameters(params)
 %>\
-    def ${c_function_prefix}${f['name']}(${helper.get_method_parameters_snippet(params)}):  # noqa: N802
-%    for p in output_params:
-        if self._defaults['${f['name']}']['${p['name']}'] is None:
-            raise MockFunctionCallError("${c_function_prefix}${f['name']}", param='${p['name']}')
-        ${p['python_name']}.contents.value = self._defaults['${f['name']}']['${p['name']}']
+    def ${c_function_prefix}${func_name}(${helper.get_method_parameters_snippet(params)}):  # noqa: N802
+%    for param_num in output_params:
+<%
+p = output_params[param_num]
+%>\
+        if self._defaults['${func_name}']['${p['name']}'] is None:
+            raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${p['name']}')
+        ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
 %    endfor
-        return self._defaults['${f['name']}']['return']
+        return self._defaults['${func_name}']['return']
 
 % endfor
     # TODO(texasaggie97) Remove hand coded functions once metadata contains enough information to code generate these
@@ -86,7 +96,10 @@ output_params = helper.extract_output_parameters(params)
 
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
-% for f in helper.extract_codegen_functions(functions):
-        mock_library.${c_function_prefix}${f['name']}.side_effect = MockFunctionCallError("${c_function_prefix}${f['name']}")
-        mock_library.${c_function_prefix}${f['name']}.return_value = ${module_name}.python_types.${f['returns_python']}(0)
+% for func_name in helper.extract_codegen_functions(functions):
+<% 
+f = functions[func_name]
+%>\
+        mock_library.${c_function_prefix}${func_name}.side_effect = MockFunctionCallError("${c_function_prefix}${func_name}")
+        mock_library.${c_function_prefix}${func_name}.return_value = ${module_name}.python_types.${f['returns_python']}(0)
 % endfor
