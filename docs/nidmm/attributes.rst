@@ -32,33 +32,6 @@ NI-DMM Attributes
         - LabVIEW Property: **Configuration:Absolute Resolution**
         - C Attribute: **NIDMM_ATTR_ABSOLUTE_RESOLUTION**
 
-.. py:attribute:: active_channel
-
-   Specifies the channel name used to access all subsequent channel-based
-   properties in this property node. Set the channel before setting
-   channel-based properties. Pass a name that the instrument driver defines
-   or a virtual channel name configured in MAX.
-
-   The following table lists the characteristics of this property.
-
-   +------------------+--------------+
-   | Characteristic   | Value        |
-   +------------------+--------------+
-   | Datatype         | string       |
-   +------------------+--------------+
-   | Permissions      | Write Only   |
-   +------------------+--------------+
-   | Channel Based    | False        |
-   +------------------+--------------+
-   | Resettable       | No           |
-   +------------------+--------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Active Channel**
-        - C Attribute: **NIDMM_ATTR_ACTIVE_CHANNEL**
-
 .. py:attribute:: adc_calibration
 
    See :py:data:`nidmm.ADCCalibration` 

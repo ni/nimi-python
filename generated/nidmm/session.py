@@ -114,13 +114,6 @@ class Session(object):
     property to higher values increases the measurement accuracy. Setting
     this property to lower values increases the measurement speed.
     '''
-    active_channel = AttributeViString(-2)
-    '''
-    Specifies the channel name used to access all subsequent channel-based
-    properties in this property node. Set the channel before setting
-    channel-based properties. Pass a name that the instrument driver defines
-    or a virtual channel name configured in MAX.
-    '''
     adc_calibration = AttributeEnum(1150022, enums.ADCCalibration)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC

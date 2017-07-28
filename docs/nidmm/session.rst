@@ -12,11 +12,6 @@ NI-DMM Session
       Specifies the measurement resolution in absolute units. Setting this
       property to higher values increases the measurement accuracy. Setting
       this property to lower values increases the measurement speed.
-   :ivar ViString active_channel: 
-      Specifies the channel name used to access all subsequent channel-based
-      properties in this property node. Set the channel before setting
-      channel-based properties. Pass a name that the instrument driver defines
-      or a virtual channel name configured in MAX.
    :ivar enums.ADCCalibration adc_calibration: 
       For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
       calibration mode.
