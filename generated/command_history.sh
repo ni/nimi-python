@@ -12,6 +12,7 @@ python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/mock_help
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/__init__.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm/ --metadata  /mnt/d/GitHub/nimi-python/src/nidmm/metadata 
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/session.rst.mako --dest-dir  /mnt/d/GitHub/nimi-python/docs/nidmm/ --metadata  /mnt/d/GitHub/nimi-python/src/nidmm/metadata 
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/enums.rst.mako --dest-dir  /mnt/d/GitHub/nimi-python/docs/nidmm/ --metadata  /mnt/d/GitHub/nimi-python/src/nidmm/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/attributes.rst.mako --dest-dir  /mnt/d/GitHub/nimi-python/docs/nidmm/ --metadata  /mnt/d/GitHub/nimi-python/src/nidmm/metadata 
 cp /mnt/d/GitHub/nimi-python/src/nidmm/tests/test_session.py /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm/tests/test_session.py
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/setup.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nidmm/ --metadata  /mnt/d/GitHub/nimi-python/src/nidmm/metadata 
 cp /mnt/d/GitHub/nimi-python/README.rst /mnt/d/GitHub/nimi-python/bin/nidmm/README.rst
@@ -32,6 +33,7 @@ python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/ctypes_li
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/mock_helper.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst/tests/ --metadata  /mnt/d/GitHub/nimi-python/src/nimodinst/metadata 
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/__init__.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst/ --metadata  /mnt/d/GitHub/nimi-python/src/nimodinst/metadata 
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/session.rst.mako --dest-dir  /mnt/d/GitHub/nimi-python/docs/nimodinst/ --metadata  /mnt/d/GitHub/nimi-python/src/nimodinst/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/attributes.rst.mako --dest-dir  /mnt/d/GitHub/nimi-python/docs/nimodinst/ --metadata  /mnt/d/GitHub/nimi-python/src/nimodinst/metadata 
 cp /mnt/d/GitHub/nimi-python/src/nimodinst/tests/test_modinst.py /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst/tests/test_modinst.py
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/setup.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nimodinst/ --metadata  /mnt/d/GitHub/nimi-python/src/nimodinst/metadata 
 cp /mnt/d/GitHub/nimi-python/README.rst /mnt/d/GitHub/nimi-python/bin/nimodinst/README.rst

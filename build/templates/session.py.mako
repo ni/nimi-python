@@ -126,7 +126,7 @@ class ${context_name.title()}(object):
 class Session(object):
     '''${config['session_description']}'''
 
-% for attribute in sorted(attributes):
+% for attribute in helper.sorted_attrs(attributes):
     %if attributes[attribute]['enum']:
     ${attributes[attribute]['name'].lower()} = AttributeEnum(${attribute}, enums.${attributes[attribute]['enum']})
     %else:
