@@ -91,19 +91,6 @@ class AttributeEnum(object):
         if type(value) is not self.attribute_type:
             raise TypeError('Value mode must be of type ' + str(self.attribute_type))
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
-
-
-# TODO(marcoskirsch): We may want to support this, plus a Session constructor that uses an existing ViSession.
-class AttributeViSession(object):
-
-    def __init__(self, attribute_id):
-        self.attribute_id = attribute_id
-
-    def __get__(self, obj, objtype):
-        raise TypeError('Attributes of type ViSession are unsupported in Python')
-
-    def __set__(self, obj, value):
-        raise TypeError('Attributes of type ViSession are unsupported in Python')
 % for c in config['context_manager']:
 <%
 context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
