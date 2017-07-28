@@ -105,16 +105,16 @@ class TestSession(object):
             self.patched_ctypes_library.niDMM_Abort.assert_called_once_with(SESSION_NUM_FOR_TEST)
         self.patched_ctypes_library.niDMM_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
-    def test_freeze(self):
+    def test_cannot_add_properties_to_session(self):
         with nidmm.Session('dev1') as session:
             try:
-                session.io_session = 5
+                session.nonexistent_property = 5
                 assert False
             except TypeError as e:
                 print(e)
                 pass
             try:
-                value = session.io_session  # noqa: F841
+                value = session.nonexistent_property  # noqa: F841
                 assert False
             except AttributeError as e:
                 print(e)

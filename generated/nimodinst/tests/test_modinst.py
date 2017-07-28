@@ -51,16 +51,16 @@ class TestSession(object):
             self.patched_errors._handle_error.assert_called_once_with(session, self.patched_ctypes_library.niModInst_OpenInstalledDevicesSession.return_value)
         self.patched_ctypes_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
-    def test_freeze(self):
+    def test_cannot_add_properties_to_session(self):
         with nimodinst.Session('') as session:
             try:
-                session.io_session = 5
+                session.nonexistant_property = 5
                 assert False
             except TypeError as e:
                 print(e)
                 pass
             try:
-                value = session.io_session  # noqa: F841
+                value = session.nonexistant_property  # noqa: F841
                 assert False
             except AttributeError as e:
                 print(e)
