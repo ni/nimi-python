@@ -66,3 +66,9 @@ class TestSession(object):
                 print(e)
                 pass
 
+    def test_iterating(self):
+        self.side_effects_helper['OpenInstalledDevicesSession']['item_count'] = 2
+        with nimodinst.Session('') as session:
+            assert len(session) == 2
+            for d in session:
+                pass
