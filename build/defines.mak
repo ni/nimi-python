@@ -5,8 +5,15 @@ UNIT_TEST_DIR := $(MODULE_DIR)/tests
 TEMPLATE_DIR := $(BUILD_HELPER_DIR)/templates
 TOX_INI := $(OUTPUT_DIR)/tox.ini
 
+TOX_INI := $(OUTPUT_DIR)/tox.ini
+
 DRIVER_DIR := $(ROOT_DIR)/src/$(DRIVER)
 METADATA_DIR := $(DRIVER_DIR)/metadata
+
+BUILD_HELPER_SCRIPT := $(BUILD_HELPER_DIR)/helper.py
+
+DOCS_DIR := $(ROOT_DIR)/docs
+DRIVER_DOCS_DIR := $(DOCS_DIR)/$(DRIVER)
 
 VERSION ?= 0.1
 WHEEL := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION)-py2.py3-none-any.whl
@@ -32,12 +39,12 @@ else
 LOG_OUTPUT := | tee
 endif
 
-TARGETS := $(filter-out run_unit_tests,$(POSSIBLE_TARGETS))
+TARGETS := $(filter-out run_unit_tests,$(DEFAULT_TARGETS))
 
 .PHONY:
 all: $(TARGETS)
 
-DEFAULT_FILES_TO_GENERATE := \
+DEFAULT_PY_FILES_TO_GENERATE := \
                      enums.py \
                      library.py \
                      session.py \
@@ -46,8 +53,13 @@ DEFAULT_FILES_TO_GENERATE := \
                      tests/mock_helper.py \
                      __init__.py \
 
-DEFAULT_FILES_TO_COPY := \
-                 ctypes_types.py \
-                 python_types.py \
+DEFAULT_PY_FILES_TO_COPY := \
+                     ctypes_types.py \
+                     python_types.py \
+
+DEFAULT_RST_FILES_TO_GENERATE := \
+                     session.rst \
+                     enums.rst \
+                     attributes.rst \
 
 

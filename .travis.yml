@@ -1,17 +1,22 @@
 sudo: false
 cache: pip
+dist: trusty
 language: python
 # For pypy versions, see https://github.com/pyenv/pyenv/tree/master/plugins/python-build/share/python-build
-python: 3.6
+python: 
+  - "pypy-5.6.0"
+  - "pypy3.5-5.8.0"
+  - 2.7
+  - 3.4
+  - 3.5
+  - 3.6
 
 install:
-  - pip install --upgrade setuptools
-  - pip install --upgrade mako
-  - pip install --upgrade mock
-  - pip install --upgrade tox
+  - pip install --upgrade setuptools mako mock tox tox-travis flake8 wheel sphinx sphinx_rtd_theme
 
 script:
-  - make clean all test PRINT=1
+  - make clean all flake8 test html PRINT=1 PYTHON_CMD=python
+
 
 
 

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import codecs
 from mako.template import Template
 from mako.exceptions import RichTraceback
 import logging
@@ -8,7 +9,7 @@ import os
 import pprint
 import sys
 
-pp = pprint.PrettyPrinter(indent=3)
+pp = pprint.PrettyPrinter(indent=4)
 
 def generate_template(template_name, template_params, dest_file, in_zip_file=False):
     try:
@@ -43,9 +44,14 @@ def generate_template(template_name, template_params, dest_file, in_zip_file=Fal
         sys.exit(1)
 
     logging.debug(rendered_template)
-    fileHandlePublic = open(dest_file, 'wb')
-    fileHandlePublic.write(bytes(rendered_template, "UTF-8"))
-    fileHandlePublic.close()
+    if sys.version_info.major < 3:
+        fileHandlePublic = codecs.open(dest_file, mode="w", encoding='utf-8')
+        fileHandlePublic.write(rendered_template)
+        fileHandlePublic.close()
+    else:
+        fileHandlePublic = open(dest_file, 'wb')
+        fileHandlePublic.write(bytes(rendered_template, "UTF-8"))
+        fileHandlePublic.close()
 
 
 
