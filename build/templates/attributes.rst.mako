@@ -14,15 +14,11 @@ ${helper.get_rst_header_snippet(driver_name + ' Attributes', '=')}
 % for attr in helper.sorted_attrs(attributes):
 .. py:attribute:: ${attributes[attr]["name"].lower()}
 
-%   if attributes[attr]['enum'] is not None:
-   See :py:data:`${module_name}.${attributes[attr]['enum']}` 
-
-%   endif
 <%
 a = attributes[attr]
 data_type = helper.get_python_type_from_visa_type(a['type'])
 if attributes[attr]['enum'] is not None:
-    data_type = 'enum.' + attributes[attr]['enum']
+    data_type = ':py:data:`' + attributes[attr]["enum"] + '`'
 table_contents = [
          ('Characteristic', 'Value'),
          ('Datatype', data_type),

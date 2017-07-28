@@ -34,24 +34,22 @@ NI-DMM Attributes
 
 .. py:attribute:: adc_calibration
 
-   See :py:data:`nidmm.ADCCalibration` 
-
    For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
    calibration mode.
 
    The following table lists the characteristics of this property.
 
-   +----------------+---------------------+
-   | Characteristic | Value               |
-   +================+=====================+
-   | Datatype       | enum.ADCCalibration |
-   +----------------+---------------------+
-   | Permissions    | read-write          |
-   +----------------+---------------------+
-   | Channel Based  | False               |
-   +----------------+---------------------+
-   | Resettable     | No                  |
-   +----------------+---------------------+
+   +----------------+---------------------------+
+   | Characteristic | Value                     |
+   +================+===========================+
+   | Datatype       | :py:data:`ADCCalibration` |
+   +----------------+---------------------------+
+   | Permissions    | read-write                |
+   +----------------+---------------------------+
+   | Channel Based  | False                     |
+   +----------------+---------------------------+
+   | Resettable     | No                        |
+   +----------------+---------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -105,8 +103,6 @@ NI-DMM Attributes
 
 .. py:attribute:: aperture_time_units
 
-   See :py:data:`nidmm.ApertureTimeUnits` 
-
    Specifies the units of aperture time for the current configuration.
 
    .. note::
@@ -114,17 +110,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+------------------------+
-   | Characteristic | Value                  |
-   +================+========================+
-   | Datatype       | enum.ApertureTimeUnits |
-   +----------------+------------------------+
-   | Permissions    | read-write             |
-   +----------------+------------------------+
-   | Channel Based  | False                  |
-   +----------------+------------------------+
-   | Resettable     | No                     |
-   +----------------+------------------------+
+   +----------------+------------------------------+
+   | Characteristic | Value                        |
+   +================+==============================+
+   | Datatype       | :py:data:`ApertureTimeUnits` |
+   +----------------+------------------------------+
+   | Permissions    | read-write                   |
+   +----------------+------------------------------+
+   | Channel Based  | False                        |
+   +----------------+------------------------------+
+   | Resettable     | No                           |
+   +----------------+------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -160,24 +156,22 @@ NI-DMM Attributes
 
 .. py:attribute:: auto_zero
 
-   See :py:data:`nidmm.AutoZero` 
-
    Specifies the AutoZero mode. This property is not supported for the NI
    4050.
 
    The following table lists the characteristics of this property.
 
-   +----------------+---------------+
-   | Characteristic | Value         |
-   +================+===============+
-   | Datatype       | enum.AutoZero |
-   +----------------+---------------+
-   | Permissions    | read-write    |
-   +----------------+---------------+
-   | Channel Based  | False         |
-   +----------------+---------------+
-   | Resettable     | No            |
-   +----------------+---------------+
+   +----------------+---------------------+
+   | Characteristic | Value               |
+   +================+=====================+
+   | Datatype       | :py:data:`AutoZero` |
+   +----------------+---------------------+
+   | Permissions    | read-write          |
+   +----------------+---------------------+
+   | Channel Based  | False               |
+   +----------------+---------------------+
+   | Resettable     | No                  |
+   +----------------+---------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -213,8 +207,6 @@ NI-DMM Attributes
 
 .. py:attribute:: cable_compensation_type
 
-   See :py:data:`nidmm.CableCompensationType` 
-
    For the NI 4081 and NI 4072 only, specifies the type of cable
    compensation that is applied to the current capacitance or inductance
    measurement for the current range.
@@ -224,17 +216,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------------------+
-   | Characteristic | Value                      |
-   +================+============================+
-   | Datatype       | enum.CableCompensationType |
-   +----------------+----------------------------+
-   | Permissions    | read-write                 |
-   +----------------+----------------------------+
-   | Channel Based  | False                      |
-   +----------------+----------------------------+
-   | Resettable     | No                         |
-   +----------------+----------------------------+
+   +----------------+----------------------------------+
+   | Characteristic | Value                            |
+   +================+==================================+
+   | Datatype       | :py:data:`CableCompensationType` |
+   +----------------+----------------------------------+
+   | Permissions    | read-write                       |
+   +----------------+----------------------------------+
+   | Channel Based  | False                            |
+   +----------------+----------------------------------+
+   | Resettable     | No                               |
+   +----------------+----------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -331,25 +323,23 @@ NI-DMM Attributes
 
 .. py:attribute:: current_source
 
-   See :py:data:`nidmm.CurrentSource` 
-
    Specifies the current source provided during diode measurements.
 
    The NI 4050 and NI 4060 are not supported.
 
    The following table lists the characteristics of this property.
 
-   +----------------+--------------------+
-   | Characteristic | Value              |
-   +================+====================+
-   | Datatype       | enum.CurrentSource |
-   +----------------+--------------------+
-   | Permissions    | read-write         |
-   +----------------+--------------------+
-   | Channel Based  | False              |
-   +----------------+--------------------+
-   | Resettable     | No                 |
-   +----------------+--------------------+
+   +----------------+--------------------------+
+   | Characteristic | Value                    |
+   +================+==========================+
+   | Datatype       | :py:data:`CurrentSource` |
+   +----------------+--------------------------+
+   | Permissions    | read-write               |
+   +----------------+--------------------------+
+   | Channel Based  | False                    |
+   +----------------+--------------------------+
+   | Resettable     | No                       |
+   +----------------+--------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -359,24 +349,22 @@ NI-DMM Attributes
 
 .. py:attribute:: dc_bias
 
-   See :py:data:`nidmm.DCBias` 
-
    For the NI 4082 and NI 4072 only, controls the available DC bias for
    capacitance measurements.
 
    The following table lists the characteristics of this property.
 
-   +----------------+-------------+
-   | Characteristic | Value       |
-   +================+=============+
-   | Datatype       | enum.DCBias |
-   +----------------+-------------+
-   | Permissions    | read-write  |
-   +----------------+-------------+
-   | Channel Based  | False       |
-   +----------------+-------------+
-   | Resettable     | No          |
-   +----------------+-------------+
+   +----------------+-------------------+
+   | Characteristic | Value             |
+   +================+===================+
+   | Datatype       | :py:data:`DCBias` |
+   +----------------+-------------------+
+   | Permissions    | read-write        |
+   +----------------+-------------------+
+   | Channel Based  | False             |
+   +----------------+-------------------+
+   | Resettable     | No                |
+   +----------------+-------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -386,8 +374,6 @@ NI-DMM Attributes
 
 .. py:attribute:: dc_noise_rejection
 
-   See :py:data:`nidmm.DCNoiseRejection` 
-
    Specifies the DC noise rejection mode.
 
    .. note::
@@ -395,17 +381,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+-----------------------+
-   | Characteristic | Value                 |
-   +================+=======================+
-   | Datatype       | enum.DCNoiseRejection |
-   +----------------+-----------------------+
-   | Permissions    | read-write            |
-   +----------------+-----------------------+
-   | Channel Based  | False                 |
-   +----------------+-----------------------+
-   | Resettable     | No                    |
-   +----------------+-----------------------+
+   +----------------+-----------------------------+
+   | Characteristic | Value                       |
+   +================+=============================+
+   | Datatype       | :py:data:`DCNoiseRejection` |
+   +----------------+-----------------------------+
+   | Permissions    | read-write                  |
+   +----------------+-----------------------------+
+   | Channel Based  | False                       |
+   +----------------+-----------------------------+
+   | Resettable     | No                          |
+   +----------------+-----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -414,8 +400,6 @@ NI-DMM Attributes
         - C Attribute: **NIDMM_ATTR_DC_NOISE_REJECTION**
 
 .. py:attribute:: digits_resolution
-
-   See :py:data:`nidmm.DigitsResolution` 
 
    Specifies the measurement resolution in digits. Setting this property to
    higher values increases the measurement accuracy. Setting this property
@@ -426,17 +410,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+-----------------------+
-   | Characteristic | Value                 |
-   +================+=======================+
-   | Datatype       | enum.DigitsResolution |
-   +----------------+-----------------------+
-   | Permissions    | read-write            |
-   +----------------+-----------------------+
-   | Channel Based  | False                 |
-   +----------------+-----------------------+
-   | Resettable     | No                    |
-   +----------------+-----------------------+
+   +----------------+-----------------------------+
+   | Characteristic | Value                       |
+   +================+=============================+
+   | Datatype       | :py:data:`DigitsResolution` |
+   +----------------+-----------------------------+
+   | Permissions    | read-write                  |
+   +----------------+-----------------------------+
+   | Channel Based  | False                       |
+   +----------------+-----------------------------+
+   | Resettable     | No                          |
+   +----------------+-----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -634,8 +618,6 @@ NI-DMM Attributes
 
 .. py:attribute:: function
 
-   See :py:data:`nidmm.Function` 
-
    Specifies the measurement function. If you are setting this property
    directly, you must also set the Operation Mode property, which controls
    whether the DMM takes standard single or multipoint measurements, or
@@ -648,17 +630,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+---------------+
-   | Characteristic | Value         |
-   +================+===============+
-   | Datatype       | enum.Function |
-   +----------------+---------------+
-   | Permissions    | read-write    |
-   +----------------+---------------+
-   | Channel Based  | False         |
-   +----------------+---------------+
-   | Resettable     | No            |
-   +----------------+---------------+
+   +----------------+---------------------+
+   | Characteristic | Value               |
+   +================+=====================+
+   | Datatype       | :py:data:`Function` |
+   +----------------+---------------------+
+   | Permissions    | read-write          |
+   +----------------+---------------------+
+   | Channel Based  | False               |
+   +----------------+---------------------+
+   | Resettable     | No                  |
+   +----------------+---------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -717,8 +699,6 @@ NI-DMM Attributes
 
 .. py:attribute:: input_resistance
 
-   See :py:data:`nidmm.InputResistance` 
-
    Specifies the input resistance of the instrument.
 
    .. note::
@@ -726,17 +706,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------------+
-   | Characteristic | Value                |
-   +================+======================+
-   | Datatype       | enum.InputResistance |
-   +----------------+----------------------+
-   | Permissions    | read-write           |
-   +----------------+----------------------+
-   | Channel Based  | False                |
-   +----------------+----------------------+
-   | Resettable     | No                   |
-   +----------------+----------------------+
+   +----------------+----------------------------+
+   | Characteristic | Value                      |
+   +================+============================+
+   | Datatype       | :py:data:`InputResistance` |
+   +----------------+----------------------------+
+   | Permissions    | read-write                 |
+   +----------------+----------------------------+
+   | Channel Based  | False                      |
+   +----------------+----------------------------+
+   | Resettable     | No                         |
+   +----------------+----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -959,25 +939,23 @@ NI-DMM Attributes
 
 .. py:attribute:: lc_calculation_model
 
-   See :py:data:`nidmm.LCCalculationModel` 
-
    For the NI 4082 and NI 4072 only, specifies the type of algorithm that
    the measurement processing uses for capacitance and inductance
    measurements.
 
    The following table lists the characteristics of this property.
 
-   +----------------+-------------------------+
-   | Characteristic | Value                   |
-   +================+=========================+
-   | Datatype       | enum.LCCalculationModel |
-   +----------------+-------------------------+
-   | Permissions    | read-write              |
-   +----------------+-------------------------+
-   | Channel Based  | False                   |
-   +----------------+-------------------------+
-   | Resettable     | No                      |
-   +----------------+-------------------------+
+   +----------------+-------------------------------+
+   | Characteristic | Value                         |
+   +================+===============================+
+   | Datatype       | :py:data:`LCCalculationModel` |
+   +----------------+-------------------------------+
+   | Permissions    | read-write                    |
+   +----------------+-------------------------------+
+   | Channel Based  | False                         |
+   +----------------+-------------------------------+
+   | Resettable     | No                            |
+   +----------------+-------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1049,8 +1027,6 @@ NI-DMM Attributes
 
 .. py:attribute:: measurement_completdest
 
-   See :py:data:`nidmm.MeasurementCompleteDest` 
-
    Specifies the destination of the measurement complete (MC) signal.
 
    To determine which values are supported by each device, refer to the
@@ -1061,17 +1037,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+------------------------------+
-   | Characteristic | Value                        |
-   +================+==============================+
-   | Datatype       | enum.MeasurementCompleteDest |
-   +----------------+------------------------------+
-   | Permissions    | read-write                   |
-   +----------------+------------------------------+
-   | Channel Based  | False                        |
-   +----------------+------------------------------+
-   | Resettable     | No                           |
-   +----------------+------------------------------+
+   +----------------+------------------------------------+
+   | Characteristic | Value                              |
+   +================+====================================+
+   | Datatype       | :py:data:`MeasurementCompleteDest` |
+   +----------------+------------------------------------+
+   | Permissions    | read-write                         |
+   +----------------+------------------------------------+
+   | Channel Based  | False                              |
+   +----------------+------------------------------------+
+   | Resettable     | No                                 |
+   +----------------+------------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1081,23 +1057,21 @@ NI-DMM Attributes
 
 .. py:attribute:: measurement_destination_slope
 
-   See :py:data:`nidmm.MeasurementDestinationSlope` 
-
    Specifies the polarity of the generated measurement complete signal.
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------------------------+
-   | Characteristic | Value                            |
-   +================+==================================+
-   | Datatype       | enum.MeasurementDestinationSlope |
-   +----------------+----------------------------------+
-   | Permissions    | read-write                       |
-   +----------------+----------------------------------+
-   | Channel Based  | False                            |
-   +----------------+----------------------------------+
-   | Resettable     | No                               |
-   +----------------+----------------------------------+
+   +----------------+----------------------------------------+
+   | Characteristic | Value                                  |
+   +================+========================================+
+   | Datatype       | :py:data:`MeasurementDestinationSlope` |
+   +----------------+----------------------------------------+
+   | Permissions    | read-write                             |
+   +----------------+----------------------------------------+
+   | Channel Based  | False                                  |
+   +----------------+----------------------------------------+
+   | Resettable     | No                                     |
+   +----------------+----------------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1190,24 +1164,22 @@ NI-DMM Attributes
 
 .. py:attribute:: offset_compensated_ohms
 
-   See :py:data:`nidmm.OffsetCompensatedOhms` 
-
    For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
    offset compensated ohms.
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------------------+
-   | Characteristic | Value                      |
-   +================+============================+
-   | Datatype       | enum.OffsetCompensatedOhms |
-   +----------------+----------------------------+
-   | Permissions    | read-write                 |
-   +----------------+----------------------------+
-   | Channel Based  | False                      |
-   +----------------+----------------------------+
-   | Resettable     | No                         |
-   +----------------+----------------------------+
+   +----------------+----------------------------------+
+   | Characteristic | Value                            |
+   +================+==================================+
+   | Datatype       | :py:data:`OffsetCompensatedOhms` |
+   +----------------+----------------------------------+
+   | Permissions    | read-write                       |
+   +----------------+----------------------------------+
+   | Channel Based  | False                            |
+   +----------------+----------------------------------+
+   | Resettable     | No                               |
+   +----------------+----------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1216,8 +1188,6 @@ NI-DMM Attributes
         - C Attribute: **NIDMM_ATTR_OFFSET_COMPENSATED_OHMS**
 
 .. py:attribute:: operation_mode
-
-   See :py:data:`nidmm.OperationMode` 
 
    Specifies how the DMM acquires data.
 
@@ -1232,17 +1202,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+--------------------+
-   | Characteristic | Value              |
-   +================+====================+
-   | Datatype       | enum.OperationMode |
-   +----------------+--------------------+
-   | Permissions    | read-write         |
-   +----------------+--------------------+
-   | Channel Based  | False              |
-   +----------------+--------------------+
-   | Resettable     | No                 |
-   +----------------+--------------------+
+   +----------------+--------------------------+
+   | Characteristic | Value                    |
+   +================+==========================+
+   | Datatype       | :py:data:`OperationMode` |
+   +----------------+--------------------------+
+   | Permissions    | read-write               |
+   +----------------+--------------------------+
+   | Channel Based  | False                    |
+   +----------------+--------------------------+
+   | Resettable     | No                       |
+   +----------------+--------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1251,8 +1221,6 @@ NI-DMM Attributes
         - C Attribute: **NIDMM_ATTR_OPERATION_MODE**
 
 .. py:attribute:: powerline_frequency
-
-   See :py:data:`nidmm.PowerlineFrequency` 
 
    Specifies the powerline frequency. The NI 4060 and NI 4050 use this
    value to select an aperture time to reject powerline noise by selecting
@@ -1273,17 +1241,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+-------------------------+
-   | Characteristic | Value                   |
-   +================+=========================+
-   | Datatype       | enum.PowerlineFrequency |
-   +----------------+-------------------------+
-   | Permissions    | read-write              |
-   +----------------+-------------------------+
-   | Channel Based  | False                   |
-   +----------------+-------------------------+
-   | Resettable     | No                      |
-   +----------------+-------------------------+
+   +----------------+-------------------------------+
+   | Characteristic | Value                         |
+   +================+===============================+
+   | Datatype       | :py:data:`PowerlineFrequency` |
+   +----------------+-------------------------------+
+   | Permissions    | read-write                    |
+   +----------------+-------------------------------+
+   | Channel Based  | False                         |
+   +----------------+-------------------------------+
+   | Resettable     | No                            |
+   +----------------+-------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1609,23 +1577,21 @@ NI-DMM Attributes
 
 .. py:attribute:: rtd_type
 
-   See :py:data:`nidmm.RTDType` 
-
    Specifies the RTD type.
 
    The following table lists the characteristics of this property.
 
-   +----------------+--------------+
-   | Characteristic | Value        |
-   +================+==============+
-   | Datatype       | enum.RTDType |
-   +----------------+--------------+
-   | Permissions    | read-write   |
-   +----------------+--------------+
-   | Channel Based  | False        |
-   +----------------+--------------+
-   | Resettable     | No           |
-   +----------------+--------------+
+   +----------------+--------------------+
+   | Characteristic | Value              |
+   +================+====================+
+   | Datatype       | :py:data:`RTDType` |
+   +----------------+--------------------+
+   | Permissions    | read-write         |
+   +----------------+--------------------+
+   | Channel Based  | False              |
+   +----------------+--------------------+
+   | Resettable     | No                 |
+   +----------------+--------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1737,8 +1703,6 @@ NI-DMM Attributes
 
 .. py:attribute:: sample_trigger
 
-   See :py:data:`nidmm.SampleTrigger` 
-
    Specifies the sample trigger source.
 
    To determine which values are supported by each device, refer to the
@@ -1746,17 +1710,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+--------------------+
-   | Characteristic | Value              |
-   +================+====================+
-   | Datatype       | enum.SampleTrigger |
-   +----------------+--------------------+
-   | Permissions    | read-write         |
-   +----------------+--------------------+
-   | Channel Based  | False              |
-   +----------------+--------------------+
-   | Resettable     | No                 |
-   +----------------+--------------------+
+   +----------------+--------------------------+
+   | Characteristic | Value                    |
+   +================+==========================+
+   | Datatype       | :py:data:`SampleTrigger` |
+   +----------------+--------------------------+
+   | Permissions    | read-write               |
+   +----------------+--------------------------+
+   | Channel Based  | False                    |
+   +----------------+--------------------------+
+   | Resettable     | No                       |
+   +----------------+--------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1766,24 +1730,22 @@ NI-DMM Attributes
 
 .. py:attribute:: sample_trig_slope
 
-   See :py:data:`nidmm.SampleTrigSlope` 
-
    Specifies the edge of the signal from the specified sample trigger
    source on which the DMM is triggered.
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------------+
-   | Characteristic | Value                |
-   +================+======================+
-   | Datatype       | enum.SampleTrigSlope |
-   +----------------+----------------------+
-   | Permissions    | read-write           |
-   +----------------+----------------------+
-   | Channel Based  | False                |
-   +----------------+----------------------+
-   | Resettable     | No                   |
-   +----------------+----------------------+
+   +----------------+----------------------------+
+   | Characteristic | Value                      |
+   +================+============================+
+   | Datatype       | :py:data:`SampleTrigSlope` |
+   +----------------+----------------------------+
+   | Permissions    | read-write                 |
+   +----------------+----------------------------+
+   | Channel Based  | False                      |
+   +----------------+----------------------------+
+   | Resettable     | No                         |
+   +----------------+----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2186,23 +2148,21 @@ NI-DMM Attributes
 
 .. py:attribute:: tc_ref_junction_type
 
-   See :py:data:`nidmm.ThermocoupleReferenceJunctionType` 
-
    Specifies the thermocouple reference junction type.
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------------------------------+
-   | Characteristic | Value                                  |
-   +================+========================================+
-   | Datatype       | enum.ThermocoupleReferenceJunctionType |
-   +----------------+----------------------------------------+
-   | Permissions    | read-write                             |
-   +----------------+----------------------------------------+
-   | Channel Based  | False                                  |
-   +----------------+----------------------------------------+
-   | Resettable     | No                                     |
-   +----------------+----------------------------------------+
+   +----------------+----------------------------------------------+
+   | Characteristic | Value                                        |
+   +================+==============================================+
+   | Datatype       | :py:data:`ThermocoupleReferenceJunctionType` |
+   +----------------+----------------------------------------------+
+   | Permissions    | read-write                                   |
+   +----------------+----------------------------------------------+
+   | Channel Based  | False                                        |
+   +----------------+----------------------------------------------+
+   | Resettable     | No                                           |
+   +----------------+----------------------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2287,23 +2247,21 @@ NI-DMM Attributes
 
 .. py:attribute:: thermistor_type
 
-   See :py:data:`nidmm.ThermistorType` 
-
    Specifies the thermistor type.
 
    The following table lists the characteristics of this property.
 
-   +----------------+---------------------+
-   | Characteristic | Value               |
-   +================+=====================+
-   | Datatype       | enum.ThermistorType |
-   +----------------+---------------------+
-   | Permissions    | read-write          |
-   +----------------+---------------------+
-   | Channel Based  | False               |
-   +----------------+---------------------+
-   | Resettable     | No                  |
-   +----------------+---------------------+
+   +----------------+---------------------------+
+   | Characteristic | Value                     |
+   +================+===========================+
+   | Datatype       | :py:data:`ThermistorType` |
+   +----------------+---------------------------+
+   | Permissions    | read-write                |
+   +----------------+---------------------------+
+   | Channel Based  | False                     |
+   +----------------+---------------------------+
+   | Resettable     | No                        |
+   +----------------+---------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2313,23 +2271,21 @@ NI-DMM Attributes
 
 .. py:attribute:: thermocouple_type
 
-   See :py:data:`nidmm.ThermocoupleType` 
-
    Specifies the thermocouple type.
 
    The following table lists the characteristics of this property.
 
-   +----------------+-----------------------+
-   | Characteristic | Value                 |
-   +================+=======================+
-   | Datatype       | enum.ThermocoupleType |
-   +----------------+-----------------------+
-   | Permissions    | read-write            |
-   +----------------+-----------------------+
-   | Channel Based  | False                 |
-   +----------------+-----------------------+
-   | Resettable     | No                    |
-   +----------------+-----------------------+
+   +----------------+-----------------------------+
+   | Characteristic | Value                       |
+   +================+=============================+
+   | Datatype       | :py:data:`ThermocoupleType` |
+   +----------------+-----------------------------+
+   | Permissions    | read-write                  |
+   +----------------+-----------------------------+
+   | Channel Based  | False                       |
+   +----------------+-----------------------------+
+   | Resettable     | No                          |
+   +----------------+-----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2339,23 +2295,21 @@ NI-DMM Attributes
 
 .. py:attribute:: transducer_type
 
-   See :py:data:`nidmm.TransducerType` 
-
    Specifies the transducer type.
 
    The following table lists the characteristics of this property.
 
-   +----------------+---------------------+
-   | Characteristic | Value               |
-   +================+=====================+
-   | Datatype       | enum.TransducerType |
-   +----------------+---------------------+
-   | Permissions    | read-write          |
-   +----------------+---------------------+
-   | Channel Based  | False               |
-   +----------------+---------------------+
-   | Resettable     | No                  |
-   +----------------+---------------------+
+   +----------------+---------------------------+
+   | Characteristic | Value                     |
+   +================+===========================+
+   | Datatype       | :py:data:`TransducerType` |
+   +----------------+---------------------------+
+   | Permissions    | read-write                |
+   +----------------+---------------------------+
+   | Channel Based  | False                     |
+   +----------------+---------------------------+
+   | Resettable     | No                        |
+   +----------------+---------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2447,24 +2401,22 @@ NI-DMM Attributes
 
 .. py:attribute:: trigger_slope
 
-   See :py:data:`nidmm.TriggerSlope` 
-
    Specifies the edge of the signal from the specified trigger source on
    which the DMM is triggered.
 
    The following table lists the characteristics of this property.
 
-   +----------------+-------------------+
-   | Characteristic | Value             |
-   +================+===================+
-   | Datatype       | enum.TriggerSlope |
-   +----------------+-------------------+
-   | Permissions    | read-write        |
-   +----------------+-------------------+
-   | Channel Based  | False             |
-   +----------------+-------------------+
-   | Resettable     | No                |
-   +----------------+-------------------+
+   +----------------+-------------------------+
+   | Characteristic | Value                   |
+   +================+=========================+
+   | Datatype       | :py:data:`TriggerSlope` |
+   +----------------+-------------------------+
+   | Permissions    | read-write              |
+   +----------------+-------------------------+
+   | Channel Based  | False                   |
+   +----------------+-------------------------+
+   | Resettable     | No                      |
+   +----------------+-------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2473,8 +2425,6 @@ NI-DMM Attributes
         - C Attribute: **NIDMM_ATTR_TRIGGER_SLOPE**
 
 .. py:attribute:: trigger_source
-
-   See :py:data:`nidmm.TriggerSource` 
 
    Specifies the trigger source. When niDMM Initiate is called, the DMM
    waits for the trigger specified with this property. After it receives
@@ -2486,17 +2436,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+--------------------+
-   | Characteristic | Value              |
-   +================+====================+
-   | Datatype       | enum.TriggerSource |
-   +----------------+--------------------+
-   | Permissions    | read-write         |
-   +----------------+--------------------+
-   | Channel Based  | False              |
-   +----------------+--------------------+
-   | Resettable     | No                 |
-   +----------------+--------------------+
+   +----------------+--------------------------+
+   | Characteristic | Value                    |
+   +================+==========================+
+   | Datatype       | :py:data:`TriggerSource` |
+   +----------------+--------------------------+
+   | Permissions    | read-write               |
+   +----------------+--------------------------+
+   | Channel Based  | False                    |
+   +----------------+--------------------------+
+   | Resettable     | No                       |
+   +----------------+--------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2506,24 +2456,22 @@ NI-DMM Attributes
 
 .. py:attribute:: waveform_coupling
 
-   See :py:data:`nidmm.WaveformCoupling` 
-
    For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
    coupling during a waveform acquisition.
 
    The following table lists the characteristics of this property.
 
-   +----------------+-----------------------+
-   | Characteristic | Value                 |
-   +================+=======================+
-   | Datatype       | enum.WaveformCoupling |
-   +----------------+-----------------------+
-   | Permissions    | read-write            |
-   +----------------+-----------------------+
-   | Channel Based  | False                 |
-   +----------------+-----------------------+
-   | Resettable     | No                    |
-   +----------------+-----------------------+
+   +----------------+-----------------------------+
+   | Characteristic | Value                       |
+   +================+=============================+
+   | Datatype       | :py:data:`WaveformCoupling` |
+   +----------------+-----------------------------+
+   | Permissions    | read-write                  |
+   +----------------+-----------------------------+
+   | Channel Based  | False                       |
+   +----------------+-----------------------------+
+   | Resettable     | No                          |
+   +----------------+-----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
