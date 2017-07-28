@@ -19,12 +19,13 @@ ${helper.get_rst_header_snippet(driver_name + ' Session', '=')}
 % for attr in helper.sorted_attrs(attributes):
 <% 
 if attributes[attr]['enum'] is not None:
-    t = 'enums.' + attributes[attr]['enum']
+    t = ':py:data:`' + attributes[attr]["enum"] + '`'
 else:
     t = attributes[attr]["type"]
 %>\
-   :ivar ${t} ${attributes[attr]["name"].lower()}: 
+   :var ${attributes[attr]["name"].lower()}: 
       ${helper.get_indented_docstring_snippet(attributes[attr]['short_description'], indent=6)}
+   :vartype ${attributes[attr]["name"].lower()}: ${t}
 % endfor
 
 
