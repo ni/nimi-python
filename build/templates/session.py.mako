@@ -236,7 +236,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
-<<<<<<< HEAD
+
 
     # TODO(marcoskirsch): code generation is missing the cast operation when calling into niDMM_self_test
     def self_test(self):
@@ -245,5 +245,4 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
         error_code = self.library.niDMM_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return self_test_result_ctype.value, self_test_message_ctype.value.decode("ascii")
-=======
->>>>>>> master
+

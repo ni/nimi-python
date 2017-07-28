@@ -152,17 +152,10 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
                 if x['type'] == 'ViString' or x['type'] == 'ViConstString' or x['type'] == 'ViRsrc':
                     snippet += '.encode(\'ascii\')'
         else:
-<<<<<<< HEAD
             assert x['direction'] is 'out'
             if x['is_buffer']:
                 # TODO(marcoskirsch): cast this pointer
                 snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
-=======
-            assert x['direction'] == 'out', pp.pformat(x)
-            if x['type'] == 'ViString' or x['type'] == 'ViRsrc' or x['type'] == 'ViConstString_ctype':
-                # These are defined as c_char_p which is already a pointer!
-                snippet = (x['ctypes_variable_name'])
->>>>>>> master
             else:
                 snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
         snippets.append(snippet)
@@ -207,8 +200,7 @@ def get_enum_type_check_snippet(parameter, indent):
 
 def get_ctype_variable_declaration_snippet(parameter):
     '''Returns python snippet to declare and initialize the corresponding ctypes variable'''
-<<<<<<< HEAD
-    assert parameter['direction'] == 'out'
+    assert parameter['direction'] == 'out', pp.pformat(parameter)
     snippet = parameter['ctypes_variable_name'] + ' = '
     if parameter['is_buffer']:
         if isinstance(parameter['size'], int):
@@ -219,13 +211,6 @@ def get_ctype_variable_declaration_snippet(parameter):
         else:
             # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
             snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + camelcase_to_snakecase(parameter['size']) + ')()'
-
-=======
-    assert parameter['direction'] == 'out', pp.pformat(parameter)
-    snippet = parameter['ctypes_variable_name'] + ' = '
-    if parameter['is_buffer']:
-        snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)' + '  # TODO(marcoskirsch): allocate a buffer'
->>>>>>> master
     else:
         snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)'
     return snippet
