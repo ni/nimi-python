@@ -19,6 +19,7 @@ functions = helper.add_all_metadata(functions)
 %>\
 
 import ctypes
+import threading
 
 from ${module_name}.ctypes_types import *  # noqa: F403,H303
 import ${module_name}.python_types
@@ -26,8 +27,9 @@ import ${module_name}.python_types
 
 class ${module_name.title()}CtypesLibrary(object):
     def __init__(self, library_name, library_type):
+        self._func_lock = threading.Lock()
         # We cache the cfunc object from the ctypes.CDLL object
-% for f in functions:
+% for f in helper.sorted_functions(functions):
         self.${c_function_prefix}${f['name']}_cfunc = None
 % endfor
 
@@ -36,7 +38,7 @@ class ${module_name.title()}CtypesLibrary(object):
         else:
             assert library_type == 'cdll'
             self._library = ctypes.CDLL(library_name)
-% for f in functions:
+% for f in helper.sorted_functions(functions):
 <%
     func_name = c_function_prefix + f['name']
     params = f['parameters']
@@ -45,9 +47,10 @@ class ${module_name.title()}CtypesLibrary(object):
 %>\
 
     def ${func_name}(${param_names_method}):  # noqa: N802
-        if self.${func_name}_cfunc is None:
-            self.${func_name}_cfunc = self._library.${func_name}
-            self.${func_name}_cfunc.argtypes = [${helper.get_library_call_parameter_types_snippet(params)}]  # noqa: F405
-            self.${func_name}_cfunc.restype = ${module_name}.python_types.${f['returns_python']}
+        with self._func_lock:
+            if self.${func_name}_cfunc is None:
+                self.${func_name}_cfunc = self._library.${func_name}
+                self.${func_name}_cfunc.argtypes = [${helper.get_library_call_parameter_types_snippet(params)}]  # noqa: F405
+                self.${func_name}_cfunc.restype = ${module_name}.python_types.${f['returns_python']}
         return self.${func_name}_cfunc(${param_names_function})
 % endfor
