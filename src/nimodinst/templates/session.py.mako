@@ -74,6 +74,7 @@ class Session(object):
 
         self.handle = 0
         self.item_count = 0
+        self.current_item = 0
         self.library = library.get_library()
         self.handle, self.item_count = self._open_installed_devices_session(driver)
 
