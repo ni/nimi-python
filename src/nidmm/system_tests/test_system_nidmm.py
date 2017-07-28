@@ -126,6 +126,14 @@ def test_acquisition(device_info):
             print(session.fetch(1000))
 
 
+def test_library_singleton(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        lib1 = session.library
+    with nidmm.Session(device_info['name']) as session:
+        lib2 = session.library
+    assert lib1 == lib2
+
+
 '''
 def test_self_test(device_info):
     with nidmm.Session(device_info['name']) as session:
