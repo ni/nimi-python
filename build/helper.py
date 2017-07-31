@@ -354,4 +354,6 @@ def get_python_type_from_visa_type(visa_type):
         return 'const string'
     elif visa_type == 'ViBoolean':
         return 'bool'
+    else:
+        return 'Unknown'
 
