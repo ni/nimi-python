@@ -152,10 +152,9 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
                 if x['type'] == 'ViString' or x['type'] == 'ViConstString' or x['type'] == 'ViRsrc':
                     snippet += '.encode(\'ascii\')'
         else:
-            assert x['direction'] is 'out'
+            assert x['direction'] == 'out', pp.pformat(x)
             if x['is_buffer']:
-                # TODO(marcoskirsch): cast this pointer
-                snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
+                snippet = 'ctypes.cast(' + x['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + x['ctypes_type'] + '))'
             else:
                 snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
         snippets.append(snippet)
@@ -178,9 +177,16 @@ def get_library_call_parameter_types_snippet(parameters_list):
 
 def _get_output_param_return_snippet(output_parameter):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
-    snippet = output_parameter['ctypes_variable_name'] + '.value'
-    if output_parameter['type'] == 'ViChar':
-        snippet += '.decode("ascii")'
+    assert parameter['direction'] == 'out', pp.pformat(parameter)
+    if output_parameter['is_buffer']:
+        if output_parameter['type'] == 'ViChar':
+            snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
+        else:
+            # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
+            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i] for i in range(' + camelcase_to_snakecase(output_parameter['size']) + ')]'
+    else:
+        snippet = output_parameter['ctypes_variable_name'] + '.value'
+
     return snippet
 
 def get_method_return_snippet(output_parameters):
