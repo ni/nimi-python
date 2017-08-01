@@ -177,7 +177,7 @@ def get_library_call_parameter_types_snippet(parameters_list):
 
 def _get_output_param_return_snippet(output_parameter):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
-    assert parameter['direction'] == 'out', pp.pformat(parameter)
+    assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
     if output_parameter['is_buffer']:
         if output_parameter['type'] == 'ViChar':
             snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
