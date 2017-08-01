@@ -237,7 +237,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
 
-
+    '''
     # TODO(marcoskirsch): code generation is missing the cast operation when calling into niDMM_self_test
     def self_test(self):
         self_test_result_ctype = ctypes_types.ViInt16_ctype(0)
@@ -245,4 +245,13 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
         error_code = self.library.niDMM_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return self_test_result_ctype.value, self_test_message_ctype.value.decode("ascii")
+    '''
 
+    '''
+    def read_multi_point(self, max_time, array_size):
+        reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
+        actual_pts_ctype = ctypes_types.ViInt32_ctype(0)
+        error_code = self.library.niDMM_ReadMultiPoint(self.vi, max_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_pts_ctype))
+        errors._handle_error(self, error_code)
+        return [reading_array_ctype[i] for i in range(actual_pts_ctype.value)], actual_pts_ctype.value
+    '''
