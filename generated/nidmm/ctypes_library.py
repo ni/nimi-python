@@ -360,7 +360,7 @@ class NidmmCtypesLibrary(object):
         with self._func_lock:
             if self.niDMM_FetchMultiPoint_cfunc is None:
                 self.niDMM_FetchMultiPoint_cfunc = self._library.niDMM_FetchMultiPoint
-                self.niDMM_FetchMultiPoint_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ViReal64_ctype, ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
+                self.niDMM_FetchMultiPoint_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ctypes.POINTER(ViReal64_ctype), ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
                 self.niDMM_FetchMultiPoint_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_FetchMultiPoint_cfunc(vi, max_time, array_size, reading_array, actual_pts)
 
@@ -368,7 +368,7 @@ class NidmmCtypesLibrary(object):
         with self._func_lock:
             if self.niDMM_FetchWaveform_cfunc is None:
                 self.niDMM_FetchWaveform_cfunc = self._library.niDMM_FetchWaveform
-                self.niDMM_FetchWaveform_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ViReal64_ctype, ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
+                self.niDMM_FetchWaveform_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ctypes.POINTER(ViReal64_ctype), ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
                 self.niDMM_FetchWaveform_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_FetchWaveform_cfunc(vi, max_time, array_size, waveform_array, actual_points)
 
@@ -592,7 +592,7 @@ class NidmmCtypesLibrary(object):
         with self._func_lock:
             if self.niDMM_ReadMultiPoint_cfunc is None:
                 self.niDMM_ReadMultiPoint_cfunc = self._library.niDMM_ReadMultiPoint
-                self.niDMM_ReadMultiPoint_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ViReal64_ctype, ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
+                self.niDMM_ReadMultiPoint_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ctypes.POINTER(ViReal64_ctype), ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
                 self.niDMM_ReadMultiPoint_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_ReadMultiPoint_cfunc(vi, max_time, array_size, reading_array, actual_pts)
 
@@ -608,7 +608,7 @@ class NidmmCtypesLibrary(object):
         with self._func_lock:
             if self.niDMM_ReadWaveform_cfunc is None:
                 self.niDMM_ReadWaveform_cfunc = self._library.niDMM_ReadWaveform
-                self.niDMM_ReadWaveform_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ViReal64_ctype, ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
+                self.niDMM_ReadWaveform_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ctypes.POINTER(ViReal64_ctype), ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
                 self.niDMM_ReadWaveform_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_ReadWaveform_cfunc(vi, max_time, array_size, waveform_array, actual_points)
 

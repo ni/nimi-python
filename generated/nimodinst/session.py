@@ -201,8 +201,8 @@ class Session(object):
         return
 
     def get_extended_error_info(self, error_info_buffer_size):
-        error_info_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
-        error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, ctypes.pointer(error_info_ctype))
+        error_info_ctype = ctypes_types.ViChar_ctype(0) #TODO: Do the IVI-dance!
+        error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, ctypes.cast(error_info_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return error_info_ctype.value.decode("ascii")
 
@@ -213,8 +213,8 @@ class Session(object):
         return attribute_value_ctype.value
 
     def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id, attribute_value_buffer_size):
-        attribute_value_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
-        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(handle, index, attribute_id, attribute_value_buffer_size, ctypes.pointer(attribute_value_ctype))
+        attribute_value_ctype = ctypes_types.ViChar_ctype(0) #TODO: Do the IVI-dance!
+        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(handle, index, attribute_id, attribute_value_buffer_size, ctypes.cast(attribute_value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return attribute_value_ctype.value.decode("ascii")
 

@@ -734,7 +734,7 @@ class Session(object):
             by the driver)
             '''
             error_code = ctypes_types.ViStatus_ctype(error_code)
-            error_message = ctypes.create_string_buffer(buffer_size)
+            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
             self.library.niDMM_GetError(self.vi, ctypes.byref(error_code), buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         else:
             '''
@@ -747,7 +747,7 @@ class Session(object):
             '''
             error_code = buffer_size
             buffer_size = self.library.niDMM_GetErrorMessage(self.vi, error_code, 0, None)
-            error_message = ctypes.create_string_buffer(buffer_size)
+            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
             self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
 
         # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
@@ -815,8 +815,8 @@ class Session(object):
         return
 
     def configure_meas_complete_dest(self, destination):
-        if type(destination) is not enums.Terminal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(destination) is not enums.MeasurementCompleteDest:
+            raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementCompleteDest))
         error_code = self.library.niDMM_ConfigureMeasCompleteDest(self.vi, destination.value)
         errors._handle_error(self, error_code)
         return
@@ -843,8 +843,8 @@ class Session(object):
         return
 
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger, sample_interval):
-        if type(sample_trigger) is not enums.Terminal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(sample_trigger) is not enums.SampleTrigger:
+            raise TypeError('Parameter mode must be of type ' + str(enums.SampleTrigger))
         error_code = self.library.niDMM_ConfigureMultiPoint(self.vi, trigger_count, sample_count, sample_trigger.value, sample_interval)
         errors._handle_error(self, error_code)
         return
@@ -913,8 +913,8 @@ class Session(object):
         return
 
     def configure_trigger(self, trig_source, trigger_delay):
-        if type(trig_source) is not enums.Terminal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(trig_source) is not enums.TriggerSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         error_code = self.library.niDMM_ConfigureTrigger(self.vi, trig_source.value, trigger_delay)
         errors._handle_error(self, error_code)
         return
@@ -951,17 +951,19 @@ class Session(object):
         errors._handle_error(self, error_code)
         return reading_ctype.value
 
-    def fetch_multi_point(self, max_time, array_size, reading_array):
+    def fetch_multi_point(self, max_time, array_size):
+        reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_pts_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niDMM_FetchMultiPoint(self.vi, max_time, array_size, reading_array, ctypes.pointer(actual_pts_ctype))
+        error_code = self.library.niDMM_FetchMultiPoint(self.vi, max_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_pts_ctype))
         errors._handle_error(self, error_code)
-        return actual_pts_ctype.value
+        return [reading_array_ctype[i] for i in range(array_size)], actual_pts_ctype.value
 
-    def fetch_waveform(self, max_time, array_size, waveform_array):
+    def fetch_waveform(self, max_time, array_size):
+        waveform_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_points_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niDMM_FetchWaveform(self.vi, max_time, array_size, waveform_array, ctypes.pointer(actual_points_ctype))
+        error_code = self.library.niDMM_FetchWaveform(self.vi, max_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_points_ctype))
         errors._handle_error(self, error_code)
-        return actual_points_ctype.value
+        return [waveform_array_ctype[i] for i in range(array_size)], actual_points_ctype.value
 
     def get_aperture_time_info(self):
         aperture_time_ctype = ctypes_types.ViReal64_ctype(0)
@@ -995,10 +997,10 @@ class Session(object):
         return value_ctype.value
 
     def _get_attribute_vi_string(self, channel_name, attribute_id, buf_size):
-        value_ctype = ctypes_types.ViString_ctype(0)  # TODO(marcoskirsch): allocate a buffer
-        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buf_size, value_ctype)
+        value_ctype = ctypes_types.ViString_ctype(0) #TODO: Do the IVI-dance!
+        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buf_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)))
         errors._handle_error(self, error_code)
-        return value_ctype.value
+        return [value_ctype[i] for i in range(ivi-dance)]
 
     def get_auto_range_value(self):
         auto_range_value_ctype = ctypes_types.ViReal64_ctype(0)
@@ -1035,14 +1037,14 @@ class Session(object):
 
     def _get_error(self, buffer_size):
         error_code_ctype = ctypes_types.ViStatus_ctype(0)
-        description_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
-        error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, ctypes.pointer(description_ctype))
+        description_ctype = ctypes_types.ViChar_ctype(0) #TODO: Do the IVI-dance!
+        error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, ctypes.cast(description_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return error_code_ctype.value, description_ctype.value.decode("ascii")
 
     def _get_error_message(self, error_code, buffer_size):
-        err_message_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
-        error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, ctypes.pointer(err_message_ctype))
+        err_message_ctype = ctypes_types.ViChar_ctype(0) #TODO: Do the IVI-dance!
+        error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(err_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return err_message_ctype.value.decode("ascii")
 
@@ -1064,8 +1066,8 @@ class Session(object):
         return
 
     def get_next_interchange_warning(self, buffer_size):
-        warn_string_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
-        error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, ctypes.pointer(warn_string_ctype))
+        warn_string_ctype = ctypes_types.ViChar_ctype(0) #TODO: Do the IVI-dance!
+        error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, ctypes.cast(warn_string_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return warn_string_ctype.value.decode("ascii")
 
@@ -1129,11 +1131,12 @@ class Session(object):
         errors._handle_error(self, error_code)
         return reading_ctype.value
 
-    def read_multi_point(self, max_time, array_size, reading_array):
+    def read_multi_point(self, max_time, array_size):
+        reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_pts_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niDMM_ReadMultiPoint(self.vi, max_time, array_size, reading_array, ctypes.pointer(actual_pts_ctype))
+        error_code = self.library.niDMM_ReadMultiPoint(self.vi, max_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_pts_ctype))
         errors._handle_error(self, error_code)
-        return actual_pts_ctype.value
+        return [reading_array_ctype[i] for i in range(array_size)], actual_pts_ctype.value
 
     def read_status(self):
         acq_backlog_ctype = ctypes_types.ViInt32_ctype(0)
@@ -1142,11 +1145,12 @@ class Session(object):
         errors._handle_error(self, error_code)
         return acq_backlog_ctype.value, acq_done_ctype.value
 
-    def read_waveform(self, max_time, array_size, waveform_array):
+    def read_waveform(self, max_time, array_size):
+        waveform_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_points_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niDMM_ReadWaveform(self.vi, max_time, array_size, waveform_array, ctypes.pointer(actual_points_ctype))
+        error_code = self.library.niDMM_ReadWaveform(self.vi, max_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_points_ctype))
         errors._handle_error(self, error_code)
-        return actual_points_ctype.value
+        return [waveform_array_ctype[i] for i in range(array_size)], actual_points_ctype.value
 
     def reset_interchange_check(self):
         error_code = self.library.niDMM_ResetInterchangeCheck(self.vi)
@@ -1216,8 +1220,8 @@ class Session(object):
 
     def self_test(self):
         self_test_result_ctype = ctypes_types.ViInt16_ctype(0)
-        self_test_message_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
-        error_code = self.library.niDMM_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.pointer(self_test_message_ctype))
+        self_test_message_ctype = (ctypes_types.ViChar_ctype * 256)()
+        error_code = self.library.niDMM_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return self_test_result_ctype.value, self_test_message_ctype.value.decode("ascii")
 
@@ -1236,3 +1240,4 @@ class Session(object):
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
+
