@@ -26,7 +26,7 @@ def device_info(request):
 def test_invalid_device_name():
     try:
         nidmm.Session("Foo!")
-        assert false
+        assert False
     except nidmm.Error as e:
         assert e.code == -1074118656
         assert e.description.find("Device was not recognized. The device is not supported with this driver or version.") != -1
@@ -52,7 +52,7 @@ def test_wrong_parameter_type(device_info):
 
 def test_warning(device_info):
     with nidmm.Session(device_info['name']) as session:
-        session.configure_measurement_digits(nidmm.Function.RES_2_WIRE, 1e6, 3.5)
+        session.configure_measurement_digits(nidmm.Function._2_WIRE_RESISTANCE, 1e6, 3.5)
         if not session.simulate:
            try:
                print(session.read(1000)) # Assume nothing is connected to device, overrange!
@@ -66,6 +66,7 @@ def test_warning(device_info):
 
 def test_ViBoolean_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
+
         assert session.interchange_check is False
         # TODO(marcoskirsch): set a boolean
 
@@ -94,43 +95,35 @@ def test_Enum_attribute(device_info):
         assert session.function == nidmm.Function.AC_CURRENT
         assert type(session.function) is nidmm.Function
         try:
-            session.function = nidmm.LCCalculationModel.CALC_MODEL_SERIES
+            session.function = nidmm.LCCalculationModel.SERIES
             assert false
         except TypeError as e:
             print(e)
             pass
 
 
-def test_ViSession_attribute(device_info):
+def test_acquisition(device_info):
     with nidmm.Session(device_info['name']) as session:
-        try:
-            session.io_session = 5
-            assert false
-        except TypeError as e:
-            print(e)
-            pass
-        try:
-            value = session.io_session
-            assert false
-        except TypeError as e:
-            print(e)
-            pass
+        session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
+        with session.initiate():
+            print(session.fetch(1000))
+        with session.initiate():
+            print(session.fetch(1000))
 
-
-def test_parameter_count0(device_info):
+			
+def test_function_call_with_zero_parameter(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert session.get_aperture_time_info()[1] == 0 # Assuming default aperture time unit will be seconds
-
-                
-def test_parameter_count1(device_info):
+   
+        
+def test_function_call_with_one_parameter(device_info):
     with nidmm.Session(device_info['name']) as session:
         session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
-        session._initiate()
-        assert session.fetch(1000) != 0 # Assumes DMM doesn't Fetch is not exactly zero to support non-connected modules and simulated modules.
-        session._abort()
+        with session.initiate():
+            assert session.fetch(1000) != 0 # Assumes DMM doesn't Fetch is not exactly zero to support non-connected modules and simulated modules.
+
         
-    
-def test_parameter_count1_error(device_info):
+def test_function_call_with_one_parameter(device_info):
     #calling a function, without parameter, But it has a mandate parameter
     with nidmm.Session(device_info['name']) as session:
         try:
@@ -141,12 +134,12 @@ def test_parameter_count1_error(device_info):
             pass
             
 
-def test_parameter_count2(device_info):
-	# Calling Configure Trigger function and asserting True if any error occurred while function call.
+def test_function_call_with_two_parameter(device_info):
+    # Calling Configure Trigger function and asserting True if any error occurred while function call.
     with nidmm.Session(device_info['name']) as session:
         try:
             session.configure_trigger(nidmm.Terminal.IMMEDIATE, 1)
-        except Error as e:
+        except nidmm.Error as e:
             print (e)
             assert True
 '''
