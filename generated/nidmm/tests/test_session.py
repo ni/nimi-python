@@ -108,13 +108,13 @@ class TestSession(object):
     def test_cannot_add_properties_to_session(self):
         with nidmm.Session('dev1') as session:
             try:
-                session.nonexistant_property = 5
+                session.nonexistent_property = 5
                 assert False
             except TypeError as e:
                 print(e)
                 pass
             try:
-                value = session.nonexistant_property  # noqa: F841
+                value = session.nonexistent_property  # noqa: F841
                 assert False
             except AttributeError as e:
                 print(e)
