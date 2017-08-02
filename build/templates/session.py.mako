@@ -217,10 +217,10 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
 %>
     def ${f['python_name']}(${helper.get_method_parameters_snippet(input_parameters)}):
 % for parameter in enum_input_parameters:
-        ${helper.get_enum_type_check_snippet(enum_input_parameters[parameter], indent=12)}
+        ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
 % for output_parameter in output_parameters:
-        ${helper.get_ctype_variable_declaration_snippet(output_parameters[output_parameter])}
+        ${helper.get_ctype_variable_declaration_snippet(output_parameter)}
 % endfor
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
         errors._handle_error(self, error_code)

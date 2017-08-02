@@ -39,27 +39,15 @@ def extract_codegen_functions(functions):
 
 def extract_input_parameters(parameters, sessionName = 'vi'):
     '''Returns list of parameters only with input parameters'''
-    params = {}
-    for x in parameters:
-        if parameters[x]['direction'] == 'in' and parameters[x]['name'] != sessionName:
-            params[x] = parameters[x]
-    return params
+    return [x for x in parameters if x['direction'] == 'in' and x['name'] != sessionName]
 
 def extract_output_parameters(parameters):
     '''Returns list of parameters only with output parameters'''
-    params = {}
-    for x in parameters:
-        if parameters[x]['direction'] == 'out':
-            params[x] = parameters[x]
-    return params
+    return [x for x in parameters if x['direction'] == 'out']
 
 def extract_enum_parameters(parameters):
     '''Returns a dictionary with information about the output parameters of a session method'''
-    params = {}
-    for x in parameters:
-        if parameters[x]['enum'] != None:
-            params[x] = parameters[x]
-    return params
+    return [x for x in parameters if x['enum'] is not None]
 
 # Functions to add information to metadata structures that are specific to our codegen needs.
 
@@ -121,11 +109,11 @@ def add_all_metadata(functions):
         _add_ctypes_return_type(functions[f])
         _add_python_return_type(functions[f])
         for p in functions[f]['parameters']:
-            _add_python_parameter_name(functions[f]['parameters'][p])
-            _add_python_type(functions[f]['parameters'][p])
-            _add_ctypes_variable_name(functions[f]['parameters'][p])
-            _add_ctypes_type(functions[f]['parameters'][p])
-            _add_is_buffer(functions[f]['parameters'][p])
+            _add_python_parameter_name(p)
+            _add_python_type(p)
+            _add_ctypes_variable_name(p)
+            _add_ctypes_type(p)
+            _add_is_buffer(p)
     return functions
 
 # Normalize string type between python2 & python3
@@ -143,24 +131,21 @@ def normalize_string_type(d):
 def get_method_parameters_snippet(parameters):
     '''Returns a string suitable for the parameter list of a method given a list of parameter objects'''
     snippets = ['self']
-    for p in parameters:
-        x = parameters[p]
+    for x in parameters:
         snippets.append(x['python_name'])
     return ', '.join(snippets)
 
 def get_function_parameters_snippet(parameters):
     '''Returns a string suitable for the parameter list of a method given a list of parameter objects'''
     snippets = []
-    for p in parameters:
-        x = parameters[p]
+    for x in parameters:
         snippets.append(x['python_name'])
     return ', '.join(snippets)
 
 def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
     '''Returns a string suitable to use as the parameters to the library object, i.e. "self, mode, range, digits_of_resolution"'''
     snippets = []
-    for p in parameters_list:
-        x = parameters_list[p]
+    for x in parameters_list:
         if x['direction'] == 'in':
             if x['name'] == sessionName:
                 snippet = 'self.' + sessionName
@@ -182,8 +167,7 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
 def get_library_call_parameter_types_snippet(parameters_list):
     '''Returns a string suitable to use as the parameters to the library definition object'''
     snippets = []
-    for p in parameters_list:
-        x = parameters_list[p]
+    for x in parameters_list:
         if x['direction'] == 'out':
             if x['type'] == 'ViString' or x['type'] == 'ViRsrc' or x['type'] == 'ViConstString_ctype':
                 # These are defined as c_char_p which is already a pointer!
@@ -207,8 +191,7 @@ def get_method_return_snippet(output_parameters):
     if len(output_parameters) == 0:
         return 'return'
     snippets = []
-    for p in output_parameters:
-        x = output_parameters[p]
+    for x in output_parameters:
         snippets.append(_get_output_param_return_snippet(x))
     return 'return ' + ', '.join(snippets)
 

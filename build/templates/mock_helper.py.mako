@@ -34,16 +34,13 @@ class MockFunctionCallError(Exception):
 class SideEffectsHelper(object):
     def __init__(self):
         self._defaults = {}
-% for func_name in helper.extract_codegen_functions(functions):
+% for func_name in sorted(helper.extract_codegen_functions(functions)):
 <% 
 f = functions[func_name]
 %>\
         self._defaults['${func_name}'] = {}
         self._defaults['${func_name}']['return'] = 0
-% for param_num in helper.extract_output_parameters(f['parameters']):
-<%
-p = f['parameters'][param_num]
-%>\
+% for p in helper.extract_output_parameters(f['parameters']):
         self._defaults['${func_name}']['${p['name']}'] = None
 % endfor
 % endfor
@@ -54,17 +51,14 @@ p = f['parameters'][param_num]
     def __setitem__(self, func, val):
         self._defaults[func] = val
 
-% for func_name in helper.extract_codegen_functions(functions):
+% for func_name in sorted(helper.extract_codegen_functions(functions)):
 <% 
 f = functions[func_name]
 params = f['parameters']
 output_params = helper.extract_output_parameters(params)
 %>\
     def ${c_function_prefix}${func_name}(${helper.get_method_parameters_snippet(params)}):  # noqa: N802
-%    for param_num in output_params:
-<%
-p = output_params[param_num]
-%>\
+%    for p in output_params:
         if self._defaults['${func_name}']['${p['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${p['name']}')
         ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
@@ -96,7 +90,7 @@ p = output_params[param_num]
 
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
-% for func_name in helper.extract_codegen_functions(functions):
+% for func_name in sorted(helper.extract_codegen_functions(functions)):
 <% 
 f = functions[func_name]
 %>\

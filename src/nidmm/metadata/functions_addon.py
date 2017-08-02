@@ -8,5 +8,8 @@ functions_addon = {
     'close': {
         'codegen_method': 'private',
     },
+    'Abort': {
+        'codegen_method': 'private',
+    },
 
 }
