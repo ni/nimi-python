@@ -23,7 +23,7 @@ class TestSession(object):
         self.disallow_close = self.patched_ctypes_library.niDMM_close.side_effect
         self.patched_ctypes_library.niDMM_close.side_effect = self.side_effects_helper.niDMM_close
 
-        self.side_effects_helper['InitWithOptions']['newVi'] = SESSION_NUM_FOR_TEST
+        self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
 
     def teardown_method(self, method):
         self.errors_patcher.stop()
