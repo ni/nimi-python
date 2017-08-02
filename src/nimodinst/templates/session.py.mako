@@ -139,10 +139,10 @@ class Session(object):
     functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
     functions = helper.add_all_metadata(functions)
-    functions = sorted(functions, key=lambda k: k['name'])
 %>\
-% for f in functions:
+% for func_name in sorted(functions):
 <%
+    f = functions[func_name]
     input_parameters = helper.extract_input_parameters(f['parameters'])
     output_parameters = helper.extract_output_parameters(f['parameters'])
     enum_input_parameters = helper.extract_enum_parameters(input_parameters)
@@ -154,7 +154,7 @@ class Session(object):
 % for output_parameter in output_parameters:
         ${helper.get_ctype_variable_declaration_snippet(output_parameter)}
 % endfor
-        error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
         errors._handle_error(self, error_code)
         ${helper.get_method_return_snippet(output_parameters)}
 % endfor

@@ -1,5 +1,5 @@
-functions = [
-    {   'name': 'OpenInstalledDevicesSession',
+functions = {
+    'OpenInstalledDevicesSession': {
         'codegen_method': 'private',
         'parameters': [
             {'direction': 'in', 'enum': None,
@@ -12,8 +12,9 @@ functions = [
              'name': 'item_count',
              'type': 'ViInt32'},
         ],
-        'returns': 'ViStatus'},
-    {   'name': 'GetInstalledDeviceAttributeViString',
+        'returns': 'ViStatus',
+    },
+    'GetInstalledDeviceAttributeViString': {
         'codegen_method': 'private',
         'parameters': [
             {'direction': 'in', 'enum': None,
@@ -33,8 +34,9 @@ functions = [
              'type': 'ViChar',
              'is_buffer': True},
         ],
-        'returns': 'ViStatus'},
-    {   'name': 'GetInstalledDeviceAttributeViInt32',
+        'returns': 'ViStatus',
+    },
+    'GetInstalledDeviceAttributeViInt32': {
         'codegen_method': 'private',
         'parameters': [
             {'direction': 'in', 'enum': None,
@@ -50,15 +52,17 @@ functions = [
              'name': 'attributeValue',
              'type': 'ViInt32'},
         ],
-        'returns': 'ViStatus'},
-    {   'name': 'CloseInstalledDevicesSession',
+        'returns': 'ViStatus',
+    },
+    'CloseInstalledDevicesSession': {
         'codegen_method': 'private',
         'parameters': [
             {'direction': 'in', 'enum': None,
              'name': 'handle', 'type': 'ViSession'},
         ],
-        'returns': 'ViStatus'},
-    {   'name': 'GetExtendedErrorInfo',
+        'returns': 'ViStatus',
+    },
+    'GetExtendedErrorInfo': {
         'codegen_method': 'public',
         'parameters': [
             {'direction': 'in', 'enum': None,
@@ -68,7 +72,8 @@ functions = [
              'type': 'ViChar',
              'is_buffer': True},
         ],
-        'returns': 'ViStatus'},
-]
+        'returns': 'ViStatus',
+    },
+}
 
 
