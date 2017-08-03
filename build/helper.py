@@ -334,26 +334,11 @@ def as_rest_table(data, full=False):
     return '\n'.join(table)
 
 def get_python_type_from_visa_type(visa_type):
-    if visa_type == 'ViInt32':
-        return 'integer'
-    elif visa_type == 'ViInt64':
-        return 'integer'
-    elif visa_type == 'ViUInt32':
-        return 'integer'
-    elif visa_type == 'ViUInt64':
-        return 'integer'
-    elif visa_type == 'ViReal32':
-        return 'floating point'
-    elif visa_type == 'ViReal64':
-        return 'floating point'
-    elif visa_type == 'ViChar':
-        return 'string'
-    elif visa_type == 'ViString':
-        return 'string'
-    elif visa_type == 'ViConstString':
-        return 'const string'
-    elif visa_type == 'ViBoolean':
-        return 'bool'
-    else:
-        return 'Unknown'
+
+    import importlib
+    p_types = importlib.import_module('build.templates.python_types')
+    v_type = getattr(p_types, visa_type)
+    p_type = v_type().python_type()
+
+    return p_type
 
