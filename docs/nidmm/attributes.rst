@@ -14,17 +14,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -83,17 +83,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -136,17 +136,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read only      |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | float     |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -249,7 +249,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | bool       |
+   | Datatype       | integer    |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+
@@ -303,17 +303,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -567,17 +567,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read only      |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | float     |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -598,17 +598,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -872,7 +872,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | bool       |
+   | Datatype       | integer    |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+
@@ -1007,17 +1007,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1089,17 +1089,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1304,7 +1304,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | bool       |
+   | Datatype       | integer    |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+
@@ -1340,17 +1340,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1373,7 +1373,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | bool       |
+   | Datatype       | integer    |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+
@@ -1400,17 +1400,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1431,7 +1431,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | bool       |
+   | Datatype       | integer    |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+
@@ -1458,17 +1458,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1483,17 +1483,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1508,17 +1508,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1533,17 +1533,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1557,17 +1557,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1683,17 +1683,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1791,17 +1791,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1818,17 +1818,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1854,7 +1854,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | bool       |
+   | Datatype       | integer    |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+
@@ -2103,17 +2103,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2128,17 +2128,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2177,17 +2177,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2202,17 +2202,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2227,17 +2227,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2381,17 +2381,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2514,17 +2514,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +----------------+----------------+
-   | Characteristic | Value          |
-   +================+================+
-   | Datatype       | floating point |
-   +----------------+----------------+
-   | Permissions    | read-write     |
-   +----------------+----------------+
-   | Channel Based  | False          |
-   +----------------+----------------+
-   | Resettable     | No             |
-   +----------------+----------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
