@@ -1,1075 +1,8 @@
-<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 # This file is code generated, do not make changes here
 #  If the generated information is not correct for python
 #  changes can be made in functions_addon.py and they will be 
 #  applied at build time
-=======
-functions = [   {   'name': 'init',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'resourceName',
-                                       'is_buffer': True,
-                                       'type': 'ViRsrc'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'IDQuery',
-                                       'type': 'ViBoolean'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'reset', 'type': 'ViBoolean'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'newVi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'InitWithOptions',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'resourceName',
-                                       'is_buffer': True,
-                                       'type': 'ViRsrc'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'IDQuery',
-                                       'type': 'ViBoolean'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'resetDevice',
-                                       'type': 'ViBoolean'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'optionsString',
-                                       'is_buffer': True,
-                                       'type': 'ViString'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'newVi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'close',
-                    'codegen_method': 'private',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetError',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'errorCode',
-                                       'type': 'ViStatus'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'bufferSize',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'description',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetErrorMessage',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'errorCode',
-                                       'type': 'ViStatus'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'bufferSize',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'errMessage',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ClearError',
-                    'codegen_method': 'private',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'reset',
-                    'codegen_method': 'public',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'self_test',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'selfTestResult',
-                                       'type': 'ViInt16'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'selfTestMessage',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'SelfCal',
-                    'codegen_method': 'public',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'revision_query',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'driverRev',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'instrRev',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'InvalidateAllAttributes',
-                    'codegen_method': 'public',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ResetWithDefaults',
-                    'codegen_method': 'public',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'Disable',
-                    'codegen_method': 'public',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetMeasurementPeriod',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'period', 'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureTrigger',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'TriggerSource',
-                                       'name': 'trigSource',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'triggerDelay',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'Read',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'maxTime', 'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'reading',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'Fetch',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'maxTime', 'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'reading',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'Abort',
-                    'codegen_method': 'private',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'Initiate',
-                    'codegen_method': 'private',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'IsOverRange',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'measurementValue',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'isOverRange',
-                                       'type': 'ViBoolean'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'IsUnderRange',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'measurementValue',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'isUnderRange',
-                                       'type': 'ViBoolean'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureACBandwidth',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'minFreq', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'maxFreq',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureFrequencyVoltageRange',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'frequencyVoltageRange',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureMeasCompleteDest',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'MeasurementCompleteDest',
-                                       'name': 'destination',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureMultiPoint',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'triggerCount',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'sampleCount',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': 'SampleTrigger',
-                                       'name': 'sampleTrigger',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'sampleInterval',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ReadMultiPoint',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'maxTime', 'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'arraySize',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'readingArray',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'actualPts',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'FetchMultiPoint',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'maxTime', 'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'arraySize',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'readingArray',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'actualPts',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureTriggerSlope',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'Slope',
-                                       'name': 'polarity',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'SendSoftwareTrigger',
-                    'codegen_method': 'public',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetApertureTimeInfo',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'apertureTime',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'out',
-                                       'enum': 'ApertureTimeUnits',
-                                       'name': 'apertureTimeUnits',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetAutoRangeValue',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'autoRangeValue',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureAutoZeroMode',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'EnabledSetting',
-                                       'name': 'autoZeroMode',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigurePowerLineFrequency',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'frequency',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureMeasurementDigits',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'Function',
-                                       'name': 'measFunction',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'range', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'resolutionDigits',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureMeasurementAbsolute',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'Function',
-                                       'name': 'measFunction',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'range', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'resolutionAbsolute',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureMeasCompleteSlope',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'Slope',
-                                       'name': 'polarity',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureSampleTriggerSlope',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'Slope',
-                                       'name': 'polarity',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ReadStatus',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'acqBacklog',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': 'AcquisitionStatus',
-                                       'name': 'acqDone', 'type': 'ViInt16'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'Control',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None, # TODO(marcoskirsch): About to be obsoleted and replaced with commit.
-                                       'name': 'action', 'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureADCCalibration',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'EnabledSetting',
-                                       'name': 'adcGainComp', # TODO(marcoskirsch): bad param name?
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureOffsetCompOhms',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'EnabledSetting',
-                                       'name': 'offsetCompOhms',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureCurrentSource',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'CurrentSource',
-                                       'name': 'diodeCurrentSrc',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureCableCompType',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'CableCompensationType',
-                                       'name': 'typeOfCompensation',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'PerformOpenCableComp',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'conductance',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'susceptance',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'PerformShortCableComp',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'resistance',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'reactance',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureOpenCableCompValues',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'conductance',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'susceptance',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureShortCableCompValues',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'resistance',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'reactance',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'LockSession',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'callerHasLock',
-                                       'type': 'ViBoolean'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'UnlockSession',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'callerHasLock',
-                                       'type': 'ViBoolean'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureWaveformAcquisition',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'Function',
-                                       'name': 'function', 'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'range', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'rate', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'waveformPoints',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureWaveformCoupling',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'WaveformCouplingMode',
-                                       'name': 'coupling',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'FetchWaveform',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'maxTime', 'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'arraySize',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'waveformArray',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'actualPoints',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ReadWaveform',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'maxTime', 'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'arraySize',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'waveformArray',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'actualPoints',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetAttributeViInt32',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'value', 'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'SetAttributeViInt32',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'value', 'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CheckAttributeViInt32',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'value', 'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetAttributeViReal64',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'value', 'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'SetAttributeViReal64',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'value', 'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CheckAttributeViReal64',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'value', 'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetAttributeViString',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'bufSize', 'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'value',
-                                       'is_buffer': True,
-                                       'type': 'ViString'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'SetAttributeViString',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'value',
-                                       'is_buffer': True,
-                                       'type': 'ViString'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CheckAttributeViString',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'value',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetAttributeViSession',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'value', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'SetAttributeViSession',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'value', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CheckAttributeViSession',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'value', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetAttributeViBoolean',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'value', 'type': 'ViBoolean'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'SetAttributeViBoolean',
-                    'codegen_method': 'private',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'value', 'type': 'ViBoolean'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CheckAttributeViBoolean',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'channelName',
-                                       'is_buffer': True,
-                                       'type': 'ViConstString'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'attributeId',
-                                       'type': 'ViAttr'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'value', 'type': 'ViBoolean'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetNextCoercionRecord',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'bufferSize',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'record',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetNextInterchangeWarning',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'bufferSize',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'warnString',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ResetInterchangeCheck',
-                    'codegen_method': 'public',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ClearInterchangeWarnings',
-                    'codegen_method': 'public',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': '4022Control',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'resourceName',
-                                       'is_buffer': True,
-                                       'type': 'ViRsrc'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'configuration',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetChannelName',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'index', 'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'bufferSize',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'name',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'InitExtCal',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'resourceName',
-                                       'is_buffer': True,
-                                       'type': 'ViRsrc'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'password',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'newVi',
-                                       'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CloseExtCal',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'action', 'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CalAdjustLinearization',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'mode', 'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'range', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'inputR', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'expectedValue',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CalAdjustGain',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'mode', 'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'range', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'inputR', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'expectedValue',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CalAdjustOffset',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'mode', 'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'range', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'inputR', 'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CalAdjustMisc',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'type', 'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CalAdjustLC',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'type', 'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'CalAdjustACFilter',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'mode', 'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'range', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'frequency',
-                                       'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'expectedValue',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'RestoreLastExtCalConstants',
-                    'codegen_method': 'no',
-                    'parameters': [{'direction': 'in', 'enum': None,
-                                    'name': 'vi', 'type': 'ViSession'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'SetCalPassword',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'oldPassword',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'newPassword',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetExtCalRecommendedInterval',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'months', 'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'SetCalUserDefinedInfo',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'info',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetCalUserDefinedInfoMaxSize',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'infoSize',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetCalUserDefinedInfo',
-                    'codegen_method': 'no',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'bufferSize',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'info',
-                                       'is_buffer': True,
-                                       'type': 'ViChar'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetSelfCalSupported',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'selfCalSupported',
-                                       'type': 'ViBoolean'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetCalDateAndTime',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'calType', 'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'month', 'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'day', 'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'year', 'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'hour', 'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'minute', 'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetCalCount',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'calType', 'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'count', 'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetLastCalTemp',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'calType', 'type': 'ViInt32'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'temperature',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'GetDevTemp',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'reserved',
-                                       'is_buffer': True,
-                                       'type': 'ViString'},
-                                      {'direction': 'out', 'enum': None,
-                                       'name': 'temperature',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureTransducerType',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'TemperatureTransducerType',
-                                       'name': 'transducerType',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureThermocouple',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'thermocoupleType',
-                                       'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'refJunctionType',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureFixedRefJunction',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'fixedRefJunction',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureRTDType',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'rtdType', 'type': 'ViInt32'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'resistance',
-                                       'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureRTDCustom',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'a', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'b', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'c', 'type': 'ViReal64'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureThermistorType',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': 'TemperatureThermistorType',
-                                       'name': 'thermistorType',
-                                       'type': 'ViInt32'}],
-                    'returns': 'ViStatus'},
-                {   'name': 'ConfigureThermistorCustom',
-                    'codegen_method': 'public',
-                    'parameters': [   {'direction': 'in', 'enum': None,
-                                       'name': 'vi', 'type': 'ViSession'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'a', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'b', 'type': 'ViReal64'},
-                                      {'direction': 'in', 'enum': None,
-                                       'name': 'c', 'type': 'ViReal64'}],
-                    'returns': 'ViStatus'}]
->>>>>>> master
 
 functions = {
     'Abort': {
@@ -1098,11 +31,8 @@ The default is None.
     },
     'CalAdjustACFilter': {
         'long_description': '''
-+------------+--------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  Refer to the calibration procedure for your device before using this function.   |
-+------------+--------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   Refer to the calibration procedure for your device before
+using this function.
 ''',
         'purpose': '''
 For the NI 4080/4081/4082 and the NI 4070/4071/4072, calibrates the
@@ -1240,11 +170,8 @@ Specifies the **expectedValue** of the measurement.
     },
     'CalAdjustLC': {
         'long_description': '''
-+------------+--------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  Refer to the calibration procedure for your device before using this function.   |
-+------------+--------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   Refer to the calibration procedure for your device before
+using this function.
 ''',
         'purpose': '''
 For the NI 4082 and NI 4072 only, performs a specialized LC calibration
@@ -1355,12 +282,9 @@ Specifies the **expectedValue** of the measurement.
     },
     'CalAdjustMisc': {
         'long_description': '''
-+------------+----------------------------------------------------------------------------------+
-| |image0|   | **Note**  The NI 4050 and NI 4060 are not supported.                             |
-|            | Refer to the calibration procedure for your device before using this function.   |
-+------------+----------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   The NI 4050 and NI 4060 are not supported.
+Refer to the calibration procedure for your device before using this
+function.
 ''',
         'purpose': '''
 Performs a specialized calibration step depending on the specified
@@ -1406,12 +330,9 @@ Specifies which of the miscellaneous calibration steps to perform.
     },
     'CalAdjustOffset': {
         'long_description': '''
-+------------+----------------------------------------------------------------------------------+
-| |image0|   | **Note**  The NI 4050 and NI 4060 are not supported.                             |
-|            | Refer to the calibration procedure for your device before using this function.   |
-+------------+----------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   The NI 4050 and NI 4060 are not supported.
+Refer to the calibration procedure for your device before using this
+function.
 ''',
         'purpose': '''
 Calibrates the offset and Auto Zero offset for the supplied **Mode**,
@@ -1832,12 +753,9 @@ calibration session obtained from `
 niDMM\_InitExtCal <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_InitExtCal.html')>`__,
 and deallocates resources that it reserved.
 
-+------------+----------------------------------------------------------------------------------+
-| |image0|   | **Note**  The NI 4050 and NI 4060 are not supported.                             |
-|            | Refer to the calibration procedure for your device before using this function.   |
-+------------+----------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+| .. note::   The NI 4050 and NI 4060 are not supported.
+| Refer to the calibration procedure for your device before using this
+  function.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -2048,89 +966,7 @@ For NI 4065 devices, **autoZeroMode** is always ON. **autoZeroMode** is
 an integral part of the signal measurement phase and adds no extra time
 to the overall measurement.
 
-+--------------------------+--------------------------+--------------------------+
-| NIDMM\_VAL\_AUTO\_ZERO\_ | -1                       | NI-DMM chooses the Auto  |
-| AUTO (default)           |                          | Zero setting based on    |
-|                          |                          | the configured function  |
-|                          |                          | and resolution.          |
-+--------------------------+--------------------------+--------------------------+
-| NIDMM\_VAL\_AUTO\_ZERO\_ |  0                       | Disables Auto Zero.      |
-| OFF                      |                          | +------------+---------- |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | +                        |
-|                          |                          | | |image0|   | **Note**  |
-|                          |                          |  The NI 4065 does *not*  |
-|                          |                          | support this setting.    |
-|                          |                          | |                        |
-|                          |                          | +------------+---------- |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | +                        |
-+--------------------------+--------------------------+--------------------------+
-| NIDMM\_VAL\_AUTO\_ZERO\_ |  1                       | The DMM internally       |
-| ON                       |                          | disconnects the input    |
-|                          |                          | signal following each    |
-|                          |                          | measurement and takes a  |
-|                          |                          | zero reading. It then    |
-|                          |                          | subtracts the zero       |
-|                          |                          | reading from the         |
-|                          |                          | preceding reading.       |
-|                          |                          | +------------+---------- |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | -------+                 |
-|                          |                          | | |image1|   | **Note**  |
-|                          |                          |  For NI 4065 devices, ** |
-|                          |                          | autoZeroMode** is always |
-|                          |                          |  ON. **autoZeroMode** is |
-|                          |                          |  an integral part of the |
-|                          |                          |  signal measurement phas |
-|                          |                          | e and adds no extra time |
-|                          |                          |  to the overall measurem |
-|                          |                          | ent.   |                 |
-|                          |                          | +------------+---------- |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | -------+                 |
-+--------------------------+--------------------------+--------------------------+
-| NIDMM\_VAL\_AUTO\_ZERO\_ |  2                       | The DMM internally       |
-| ONCE                     |                          | disconnects the input    |
-|                          |                          | signal following the     |
-|                          |                          | first measurement and    |
-|                          |                          | takes a zero reading. It |
-|                          |                          | then subtracts the zero  |
-|                          |                          | reading from the         |
-|                          |                          | preceding reading and    |
-|                          |                          | each measurement that    |
-|                          |                          | follows.                 |
-|                          |                          | +------------+---------- |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | -----+                   |
-|                          |                          | | |image2|   | **Note**  |
-|                          |                          |  The NI 4060/4065 does * |
-|                          |                          | not* support this settin |
-|                          |                          | g.   |                   |
-|                          |                          | +------------+---------- |
-|                          |                          | ------------------------ |
-|                          |                          | ------------------------ |
-|                          |                          | -----+                   |
-+--------------------------+--------------------------+--------------------------+
-
-.. |image0| image:: note.gif
-.. |image1| image:: note.gif
-.. |image2| image:: note.gif
+.. note::   The NI 4060/4065 does *not* support this setting.
 ''',
                 'name': 'autoZeroMode',
                 'type': 'ViInt32',
@@ -2341,12 +1177,10 @@ signal is issued when the DMM completes a single measurement. The driver
 sets the `
 NIDMM\_ATTR\_MEAS\_COMPLETE\_DEST <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_MEAS_COMPLETE_DEST.html')>`__
 attribute to this value. This signal is commonly referred to as
-Voltmeter Complete.
-+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  To determine which values are supported by each device, refer to the `LabWindows/CVI Trigger Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__ section.   |
-+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+Voltmeter Complete. .. note::   To determine which values are supported
+by each device, refer to the `LabWindows/CVI Trigger
+Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
+section.
 ''',
                 'name': 'measCompleteDestination',
                 'type': 'ViInt32',
@@ -2457,20 +1291,24 @@ Overview <javascript:LaunchHelp('dmm.chm::/devices.html')>`__ for a list
 of valid ranges. The driver sets `
 NIDMM\_ATTR\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RANGE.html')>`__
 to this value. The default is 0.02 V.
-+------------+---------------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  The NI 4050, NI 4060, and NI 4065 only support Auto range when the trigger and sample trigger are set to IMMEDIATE.   |
-+------------+---------------------------------------------------------------------------------------------------------------------------------+
-
-+---------------------------------+--------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| NIDMM\_VAL\_AUTO\_RANGE\_ON     | -1.0   | NI-DMM performs an Auto range before acquiring the measurement.                                                                                                                                                                                                                                                 |
-+---------------------------------+--------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| NIDMM\_VAL\_AUTO\_RANGE\_OFF    | -2.0   | NI-DMM sets the range to the current ` NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__ and uses this range                                                                                                                 |
-|                                 |        | for all subsequent measurements until the measurement configuration is changed.                                                                                                                                                                                                                                 |
-+---------------------------------+--------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| NIDMM\_VAL\_AUTO\_RANGE\_ONCE   | -3.0   | NI-DMM performs an Auto range before acquiring the measurement. The ` NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__ is stored and used for all subsequent measurements until the measurement configuration is changed.   |
-+---------------------------------+--------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   The NI 4050, NI 4060, and NI 4065 only support Auto range
+when the trigger and sample trigger are set to IMMEDIATE.
+NIDMM\_VAL\_AUTO\_RANGE\_ON
+-1.0
+NI-DMM performs an Auto range before acquiring the measurement.
+NIDMM\_VAL\_AUTO\_RANGE\_OFF
+-2.0
+NI-DMM sets the range to the current `
+NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__
+and uses this range
+for all subsequent measurements until the measurement configuration is
+changed.
+NIDMM\_VAL\_AUTO\_RANGE\_ONCE
+-3.0
+NI-DMM performs an Auto range before acquiring the measurement. The `
+NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__
+is stored and used for all subsequent measurements until the measurement
+configuration is changed.
 ''',
                 'name': 'range',
                 'type': 'ViReal64',
@@ -2484,11 +1322,11 @@ NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE <javascript:LaunchMergedHelp('dmm.chm',%20'dmm
 to this value. This parameter is ignored when the **Range** parameter is
 set to NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or
 NIDMM\_VAL\_AUTO\_RANGE\_ONCE (-3.0). The default is 0.001 V.
-+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  NI-DMM ignores this parameter for capacitance and inductance measurements on the NI 4072. To achieve better resolution for such measurements, use the ` NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE.html')>`__ attribute.   |
-+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   NI-DMM ignores this parameter for capacitance and inductance
+measurements on the NI 4072. To achieve better resolution for such
+measurements, use the `
+NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE.html')>`__
+attribute.
 ''',
                 'name': 'resolutionAbsolute',
                 'type': 'ViReal64',
@@ -2558,20 +1396,24 @@ Overview <javascript:LaunchHelp('dmm.chm::/devices.html')>`__ for a list
 of valid ranges. The driver sets `
 NIDMM\_ATTR\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RANGE.html')>`__
 to this value. The default is 0.02 V.
-+------------+---------------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  The NI 4050, NI 4060, and NI 4065 only support Auto range when the trigger and sample trigger are set to IMMEDIATE.   |
-+------------+---------------------------------------------------------------------------------------------------------------------------------+
-
-+---------------------------------+--------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| NIDMM\_VAL\_AUTO\_RANGE\_ON     | -1.0   | NI-DMM performs an Auto range before acquiring the measurement.                                                                                                                                                                                                                                                 |
-+---------------------------------+--------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| NIDMM\_VAL\_AUTO\_RANGE\_OFF    | -2.0   | NI-DMM sets the range to the current ` NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__ and uses this range                                                                                                                 |
-|                                 |        | for all subsequent measurements until the measurement configuration is changed.                                                                                                                                                                                                                                 |
-+---------------------------------+--------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| NIDMM\_VAL\_AUTO\_RANGE\_ONCE   | -3.0   | NI-DMM performs an Auto range before acquiring the measurement. The ` NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__ is stored and used for all subsequent measurements until the measurement configuration is changed.   |
-+---------------------------------+--------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   The NI 4050, NI 4060, and NI 4065 only support Auto range
+when the trigger and sample trigger are set to IMMEDIATE.
+NIDMM\_VAL\_AUTO\_RANGE\_ON
+-1.0
+NI-DMM performs an Auto range before acquiring the measurement.
+NIDMM\_VAL\_AUTO\_RANGE\_OFF
+-2.0
+NI-DMM sets the range to the current `
+NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__
+and uses this range
+for all subsequent measurements until the measurement configuration is
+changed.
+NIDMM\_VAL\_AUTO\_RANGE\_ONCE
+-3.0
+NI-DMM performs an Auto range before acquiring the measurement. The `
+NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__
+is stored and used for all subsequent measurements until the measurement
+configuration is changed.
 ''',
                 'name': 'range',
                 'type': 'ViReal64',
@@ -2588,11 +1430,11 @@ NIDMM\_ATTR\_RESOLUTION\_DIGITS <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcr
 attribute to this value. This parameter is ignored when the **Range**
 parameter is set to NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or
 NIDMM\_VAL\_AUTO\_RANGE\_ONCE (-3.0). The default is 5½.
-+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  NI-DMM ignores this parameter for capacitance and inductance measurements on the NI 4072. To achieve better resolution for such measurements, use the ` NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE.html')>`__ attribute.   |
-+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   NI-DMM ignores this parameter for capacitance and inductance
+measurements on the NI 4072. To achieve better resolution for such
+measurements, use the `
+NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE.html')>`__
+attribute.
 ''',
                 'name': 'resolutionDigits',
                 'type': 'ViReal64',
@@ -2673,11 +1515,10 @@ Specifies the **sampleTrigger** source you want to use. The driver sets
 `
 NIDMM\_ATTR\_SAMPLE\_TRIGGER <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_SAMPLE_TRIGGER.html')>`__
 to this value. The default is Immediate.
-+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  To determine which values are supported by each device, refer to the `LabWindows/CVI Trigger Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__ section.   |
-+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   To determine which values are supported by each device,
+refer to the `LabWindows/CVI Trigger
+Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
+section.
 ''',
                 'name': 'sampleTrigger',
                 'type': 'ViInt32',
@@ -2701,11 +1542,8 @@ specified in **sampleInterval** as additional delay. The default value
 (-1) ensures that the DMM settles for a recommended time. This is the
 same as using an Immediate trigger.
 
-+------------+----------------------------------------------------------------------------------+
-| |image0|   | **Note**  This attribute is not used on the NI 4080/4081/4082 and the NI 4050.   |
-+------------+----------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   This attribute is not used on the NI 4080/4081/4082 and the
+NI 4050.
 ''',
                 'name': 'sampleInterval',
                 'type': 'ViReal64',
@@ -3358,11 +2196,10 @@ NIDMM\_ATTR\_TRIGGER\_SOURCE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.
 to this value. Software configures the DMM to wait until `
 niDMM\_SendSoftwareTrigger <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_SendSoftwareTrigger.html')>`__
 is called before triggering the DMM.
-+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  To determine which values are supported by each device, refer to the `LabWindows/CVI Trigger Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__ section.   |
-+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   To determine which values are supported by each device,
+refer to the `LabWindows/CVI Trigger
+Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
+section.
 ''',
                 'name': 'triggerSource',
                 'type': 'ViInt32',
@@ -3379,12 +2216,9 @@ NIDMM\_VAL\_AUTO\_DELAY (-1), which means the DMM waits an appropriate
 settling time before taking the measurement. On the NI 4060, if you set
 **triggerDelay** to 0, the DMM does not settle before taking the
 measurement. The NI 4065 and NI 4070/4071/4072 use the value specified
-in **triggerDelay** as additional settling time.
-+------------+---------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  When using the NI 4050, **triggerDelay** must be set to NIDMM\_VAL\_AUTO\_DELAY (-1).   |
-+------------+---------------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+in **triggerDelay** as additional settling time. .. note::   When using
+the NI 4050, **triggerDelay** must be set to NIDMM\_VAL\_AUTO\_DELAY
+(-1).
 ''',
                 'name': 'triggerDelay',
                 'type': 'ViReal64',
@@ -4433,11 +3267,8 @@ attribute. The units of the returned value depend on the function.
     },
     'GetCalCount': {
         'long_description': '''
-+----------+----------------------------------------------------------------------------+
-| |Note|   | **Note**  The NI 4050, NI 4060, and NI 4080/4081/4082 are not supported.   |
-+----------+----------------------------------------------------------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4050, NI 4060, and NI 4080/4081/4082 are not
+supported.
 ''',
         'purpose': '''
 Returns the calibration **Count** for the specified type of calibration.
@@ -4464,27 +3295,12 @@ The default is None.
                 'long_description': '''
 Specifies the type of calibration performed (external or
 self-calibration).
-+--------------------------+--------------------------+--------------------------+
-| NIDMM\_VAL\_INTERNAL\_AR | 0                        | Self-Calibration         |
-| EA (default)             |                          |                          |
-| +----------+------------ |                          |                          |
-| ------------------------ |                          |                          |
-| ------------------------ |                          |                          |
-| +                        |                          |                          |
-| | |Note|   | **Note**  T |                          |                          |
-| he NI 4065 does not supp |                          |                          |
-| ort self-calibration.    |                          |                          |
-| |                        |                          |                          |
-| +----------+------------ |                          |                          |
-| ------------------------ |                          |                          |
-| ------------------------ |                          |                          |
-| +                        |                          |                          |
-+--------------------------+--------------------------+--------------------------+
-| NIDMM\_VAL\_EXTERNAL\_AR | 1                        | External Calibration     |
-| EA                       |                          |                          |
-+--------------------------+--------------------------+--------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4065 does not support self-calibration.
+0
+Self-Calibration
+NIDMM\_VAL\_EXTERNAL\_AREA
+1
+External Calibration
 ''',
                 'name': 'calType',
                 'type': 'ViInt32',
@@ -4503,11 +3319,7 @@ The number of times calibration has been performed.
     },
     'GetCalDateAndTime': {
         'long_description': '''
-+----------+--------------------------------------------------------+
-| |Note|   | **Note**  The NI 4050 and NI 4060 are not supported.   |
-+----------+--------------------------------------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4050 and NI 4060 are not supported.
 ''',
         'purpose': '''
 Returns the date and time of the last calibration performed.
@@ -4534,27 +3346,12 @@ The default is None.
                 'long_description': '''
 Specifies the type of calibration performed (external or
 self-calibration).
-+--------------------------+--------------------------+--------------------------+
-| NIDMM\_VAL\_INTERNAL\_AR | 0                        | Self-Calibration         |
-| EA (default)             |                          |                          |
-| +----------+------------ |                          |                          |
-| ------------------------ |                          |                          |
-| ------------------------ |                          |                          |
-| +                        |                          |                          |
-| | |Note|   | **Note**  T |                          |                          |
-| he NI 4065 does not supp |                          |                          |
-| ort self-calibration.    |                          |                          |
-| |                        |                          |                          |
-| +----------+------------ |                          |                          |
-| ------------------------ |                          |                          |
-| ------------------------ |                          |                          |
-| +                        |                          |                          |
-+--------------------------+--------------------------+--------------------------+
-| NIDMM\_VAL\_EXTERNAL\_AR | 1                        | External Calibration     |
-| EA                       |                          |                          |
-+--------------------------+--------------------------+--------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4065 does not support self-calibration.
+0
+Self-Calibration
+NIDMM\_VAL\_EXTERNAL\_AREA
+1
+External Calibration
 ''',
                 'name': 'calType',
                 'type': 'ViInt32',
@@ -4609,11 +3406,7 @@ Indicates the **minute** of the last calibration.
     },
     'GetCalUserDefinedInfo': {
         'long_description': '''
-+----------+--------------------------------------------------------+
-| |Note|   | **Note**  The NI 4050 and NI 4060 are not supported.   |
-+----------+--------------------------------------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4050 and NI 4060 are not supported.
 ''',
         'purpose': '''
 Returns the user-defined calibration information stored in the EEPROM.
@@ -4681,11 +3474,7 @@ Returns the maximum string length that can be stored in the EEPROM. Use
 niDMM\_SetCalUserDefinedInfo <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_SetCalUserDefinedInfo.html')>`__
 to store user-defined information.
 
-+----------+--------------------------------------------------------+
-| |Note|   | **Note**  The NI 4050 and NI 4060 are not supported.   |
-+----------+--------------------------------------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4050 and NI 4060 are not supported.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -4788,11 +3577,7 @@ Returns the **channelString** that is in the channel table at the
     },
     'GetDevTemp': {
         'long_description': '''
-+----------+--------------------------------------------------------+
-| |Note|   | **Note**  The NI 4050 and NI 4060 are not supported.   |
-+----------+--------------------------------------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4050 and NI 4060 are not supported.
 ''',
         'purpose': '''
 Returns the current **Temperature** of the device.
@@ -4974,11 +3759,7 @@ specify with the **Buffer\_Size** parameter. If you pass 0 for
     },
     'GetExtCalRecommendedInterval': {
         'long_description': '''
-+----------+--------------------------------------------------------+
-| |Note|   | **Note**  The NI 4050 and NI 4060 are not supported.   |
-+----------+--------------------------------------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4050 and NI 4060 are not supported.
 ''',
         'purpose': '''
 Returns the recommended interval between external recalibration in
@@ -5015,11 +3796,7 @@ calibrations.
     },
     'GetLastCalTemp': {
         'long_description': '''
-+----------+--------------------------------------------------------+
-| |Note|   | **Note**  The NI 4050 and NI 4060 are not supported.   |
-+----------+--------------------------------------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4050 and NI 4060 are not supported.
 ''',
         'purpose': '''
 Returns the **Temperature** during the last calibration procedure.
@@ -5046,27 +3823,12 @@ The default is None.
                 'long_description': '''
 Specifies the type of calibration performed (external or
 self-calibration).
-+--------------------------+--------------------------+--------------------------+
-| NIDMM\_VAL\_INTERNAL\_AR | 0                        | Self-Calibration         |
-| EA (default)             |                          |                          |
-| +----------+------------ |                          |                          |
-| ------------------------ |                          |                          |
-| ------------------------ |                          |                          |
-| +                        |                          |                          |
-| | |Note|   | **Note**  T |                          |                          |
-| he NI 4065 does not supp |                          |                          |
-| ort self-calibration.    |                          |                          |
-| |                        |                          |                          |
-| +----------+------------ |                          |                          |
-| ------------------------ |                          |                          |
-| ------------------------ |                          |                          |
-| +                        |                          |                          |
-+--------------------------+--------------------------+--------------------------+
-| NIDMM\_VAL\_EXTERNAL\_AR | 1                        | External Calibration     |
-| EA                       |                          |                          |
-+--------------------------+--------------------------+--------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4065 does not support self-calibration.
+0
+Self-Calibration
+NIDMM\_VAL\_EXTERNAL\_AREA
+1
+External Calibration
 ''',
                 'name': 'calType',
                 'type': 'ViInt32',
@@ -6065,11 +4827,7 @@ Indicates the number of measured values actually retrieved from the DMM.
     },
     'ReadStatus': {
         'long_description': '''
-+----------+-------------------------------------------+
-| |Note|   | **Note**  The NI 4050 is not supported.   |
-+----------+-------------------------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4050 is not supported.
 ''',
         'purpose': '''
 Returns measurement backlog and acquisition status. Use this function to
@@ -6102,12 +4860,11 @@ The default is None.
                 'long_description': '''
 The number of measurements available to be read. If the backlog
 continues to increase, data is eventually overwritten, resulting in an
-error.
-+----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| |Note|   | **Note**  On the NI 4060, the **Backlog** does not increase when autoranging. On the NI 4065, the **Backlog** does not increase when Range is set to AUTO RANGE ON (-1), or before the first point is fetched when Range is set to AUTO RANGE ONCE (-3). These behaviors are due to the autorange model of the devices.   |
-+----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. |Note| image:: note.gif
+error. .. note::   On the NI 4060, the **Backlog** does not increase
+when autoranging. On the NI 4065, the **Backlog** does not increase when
+Range is set to AUTO RANGE ON (-1), or before the first point is fetched
+when Range is set to AUTO RANGE ONCE (-3). These behaviors are due to
+the autorange model of the devices.
 ''',
                 'name': 'acquisitionBacklog',
                 'type': 'ViInt32',
@@ -6304,11 +5061,8 @@ niDMM\_SelfCal <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cvini
 before taking measurements with the device to adjust the device for any
 temperature drifts since the last external calibration.
 
-+----------+----------------------------------------------------------------------------+
-| |Note|   | **Note**  The NI 4050, NI 4060, and NI 4080/4081/4082 are not supported.   |
-+----------+----------------------------------------------------------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4050, NI 4060, and NI 4080/4081/4082 are not
+supported.
 ''',
         'purpose': '''
 Reverts the device to the calibration constants from the last complete
@@ -6337,11 +5091,10 @@ The default is None.
     },
     'SelfCal': {
         'long_description': '''
-+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  This function calls ` niDMM\_reset <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_reset.html')>`__, and any configurations previous to the call will be lost. All attributes will be set to their default values after the call returns.   |
-+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   This function calls `
+niDMM\_reset <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_reset.html')>`__,
+and any configurations previous to the call will be lost. All attributes
+will be set to their default values after the call returns.
 ''',
         'purpose': '''
 For the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the
@@ -6863,11 +5616,7 @@ size is larger than the maximum string size, NI-DMM stores as much of
 the information as possible, truncates the remainder, and returns a
 warning.
 
-+----------+--------------------------------------------------------+
-| |Note|   | **Note**  The NI 4050 and NI 4060 are not supported.   |
-+----------+--------------------------------------------------------+
-
-.. |Note| image:: note.gif
+.. note::   The NI 4050 and NI 4060 are not supported.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -7322,11 +6071,10 @@ Returns a string containing the instrument **firmwareRevision** numbers.
     },
     'self_test': {
         'long_description': '''
-+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**  This function calls ` niDMM\_reset <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_reset.html')>`__, and any configurations previous to the call will be lost. All attributes will be set to their default values after the call returns.   |
-+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. |image0| image:: note.gif
+.. note::   This function calls `
+niDMM\_reset <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_reset.html')>`__,
+and any configurations previous to the call will be lost. All attributes
+will be set to their default values after the call returns.
 ''',
         'purpose': '''
 Performs a self-test on the DMM to ensure that the DMM is functioning
@@ -7358,11 +6106,9 @@ indicates success.
 On the NI 4080/4082 and NI 4070/4072, the error code 1013 indicates that
 you should check the fuse and replace it, if necessary.
 
-+----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| |Note|   | **Note**  Self-test does not check the fuse on the NI 4065, NI 4071, and NI 4081. Hence, even if the fuse is blown on the device, self-test does not return error code 1013.   |
-+----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. |Note| image:: note.gif
+.. note::   Self-test does not check the fuse on the NI 4065, NI 4071,
+and NI 4081. Hence, even if the fuse is blown on the device, self-test
+does not return error code 1013.
 ''',
                 'name': 'selfTestResult',
                 'type': 'ViInt16',
