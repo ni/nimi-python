@@ -48,9 +48,10 @@ class ${module_name.title()}CtypesLibrary(object):
 %>\
 
     def ${c_func_name}(${param_names_method}):  # noqa: N802
-        if self.${c_func_name}_cfunc is None:
-            self.${c_func_name}_cfunc = self._library.${c_func_name}
-            self.${c_func_name}_cfunc.argtypes = [${helper.get_library_call_parameter_types_snippet(params)}]  # noqa: F405
-            self.${c_func_name}_cfunc.restype = ${module_name}.python_types.${f['returns_python']}
+        with self._func_lock:
+            if self.${c_func_name}_cfunc is None:
+                self.${c_func_name}_cfunc = self._library.${c_func_name}
+                self.${c_func_name}_cfunc.argtypes = [${helper.get_library_call_parameter_types_snippet(params)}]  # noqa: F405
+                self.${c_func_name}_cfunc.restype = ${module_name}.python_types.${f['returns_python']}
         return self.${c_func_name}_cfunc(${param_names_function})
 % endfor
