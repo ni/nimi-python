@@ -21,34 +21,10 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
-        self._defaults['CalAdjustACFilter'] = {}
-        self._defaults['CalAdjustACFilter']['return'] = 0
-        self._defaults['CalAdjustGain'] = {}
-        self._defaults['CalAdjustGain']['return'] = 0
-        self._defaults['CalAdjustLC'] = {}
-        self._defaults['CalAdjustLC']['return'] = 0
-        self._defaults['CalAdjustLinearization'] = {}
-        self._defaults['CalAdjustLinearization']['return'] = 0
-        self._defaults['CalAdjustMisc'] = {}
-        self._defaults['CalAdjustMisc']['return'] = 0
-        self._defaults['CalAdjustOffset'] = {}
-        self._defaults['CalAdjustOffset']['return'] = 0
-        self._defaults['CheckAttributeViBoolean'] = {}
-        self._defaults['CheckAttributeViBoolean']['return'] = 0
-        self._defaults['CheckAttributeViInt32'] = {}
-        self._defaults['CheckAttributeViInt32']['return'] = 0
-        self._defaults['CheckAttributeViReal64'] = {}
-        self._defaults['CheckAttributeViReal64']['return'] = 0
-        self._defaults['CheckAttributeViSession'] = {}
-        self._defaults['CheckAttributeViSession']['return'] = 0
-        self._defaults['CheckAttributeViString'] = {}
-        self._defaults['CheckAttributeViString']['return'] = 0
         self._defaults['ClearError'] = {}
         self._defaults['ClearError']['return'] = 0
         self._defaults['ClearInterchangeWarnings'] = {}
         self._defaults['ClearInterchangeWarnings']['return'] = 0
-        self._defaults['CloseExtCal'] = {}
-        self._defaults['CloseExtCal']['return'] = 0
         self._defaults['ConfigureACBandwidth'] = {}
         self._defaults['ConfigureACBandwidth']['return'] = 0
         self._defaults['ConfigureADCCalibration'] = {}
@@ -103,8 +79,6 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureWaveformAcquisition']['return'] = 0
         self._defaults['ConfigureWaveformCoupling'] = {}
         self._defaults['ConfigureWaveformCoupling']['return'] = 0
-        self._defaults['Control'] = {}
-        self._defaults['Control']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
         self._defaults['Fetch'] = {}
@@ -155,12 +129,6 @@ class SideEffectsHelper(object):
         self._defaults['GetCalDateAndTime']['year'] = None
         self._defaults['GetCalDateAndTime']['hour'] = None
         self._defaults['GetCalDateAndTime']['minute'] = None
-        self._defaults['GetCalUserDefinedInfo'] = {}
-        self._defaults['GetCalUserDefinedInfo']['return'] = 0
-        self._defaults['GetCalUserDefinedInfo']['info'] = None
-        self._defaults['GetCalUserDefinedInfoMaxSize'] = {}
-        self._defaults['GetCalUserDefinedInfoMaxSize']['return'] = 0
-        self._defaults['GetCalUserDefinedInfoMaxSize']['infoSize'] = None
         self._defaults['GetChannelName'] = {}
         self._defaults['GetChannelName']['return'] = 0
         self._defaults['GetChannelName']['channelString'] = None
@@ -174,9 +142,6 @@ class SideEffectsHelper(object):
         self._defaults['GetErrorMessage'] = {}
         self._defaults['GetErrorMessage']['return'] = 0
         self._defaults['GetErrorMessage']['errorMessage'] = None
-        self._defaults['GetExtCalRecommendedInterval'] = {}
-        self._defaults['GetExtCalRecommendedInterval']['return'] = 0
-        self._defaults['GetExtCalRecommendedInterval']['months'] = None
         self._defaults['GetLastCalTemp'] = {}
         self._defaults['GetLastCalTemp']['return'] = 0
         self._defaults['GetLastCalTemp']['temperature'] = None
@@ -192,9 +157,6 @@ class SideEffectsHelper(object):
         self._defaults['GetSelfCalSupported'] = {}
         self._defaults['GetSelfCalSupported']['return'] = 0
         self._defaults['GetSelfCalSupported']['selfCalSupported'] = None
-        self._defaults['InitExtCal'] = {}
-        self._defaults['InitExtCal']['return'] = 0
-        self._defaults['InitExtCal']['vi'] = None
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
         self._defaults['InitWithOptions']['vi'] = None
@@ -236,8 +198,6 @@ class SideEffectsHelper(object):
         self._defaults['ResetInterchangeCheck']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
         self._defaults['ResetWithDefaults']['return'] = 0
-        self._defaults['RestoreLastExtCalConstants'] = {}
-        self._defaults['RestoreLastExtCalConstants']['return'] = 0
         self._defaults['SelfCal'] = {}
         self._defaults['SelfCal']['return'] = 0
         self._defaults['SendSoftwareTrigger'] = {}
@@ -252,10 +212,6 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViSession']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
-        self._defaults['SetCalPassword'] = {}
-        self._defaults['SetCalPassword']['return'] = 0
-        self._defaults['SetCalUserDefinedInfo'] = {}
-        self._defaults['SetCalUserDefinedInfo']['return'] = 0
         self._defaults['UnlockSession'] = {}
         self._defaults['UnlockSession']['return'] = 0
         self._defaults['UnlockSession']['callerHasLock'] = None
@@ -268,9 +224,6 @@ class SideEffectsHelper(object):
         self._defaults['error_query']['return'] = 0
         self._defaults['error_query']['errorCode'] = None
         self._defaults['error_query']['errorMessage'] = None
-        self._defaults['init'] = {}
-        self._defaults['init']['return'] = 0
-        self._defaults['init']['vi'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
         self._defaults['revision_query'] = {}
@@ -291,47 +244,11 @@ class SideEffectsHelper(object):
     def niDMM_Abort(self, vi):  # noqa: N802
         return self._defaults['Abort']['return']
 
-    def niDMM_CalAdjustACFilter(self, vi, mode, range, frequency, expected_value):  # noqa: N802
-        return self._defaults['CalAdjustACFilter']['return']
-
-    def niDMM_CalAdjustGain(self, vi, mode, range, input_resistance, expected_value):  # noqa: N802
-        return self._defaults['CalAdjustGain']['return']
-
-    def niDMM_CalAdjustLC(self, vi, type):  # noqa: N802
-        return self._defaults['CalAdjustLC']['return']
-
-    def niDMM_CalAdjustLinearization(self, vi, function, range, input_resistance, expected_value):  # noqa: N802
-        return self._defaults['CalAdjustLinearization']['return']
-
-    def niDMM_CalAdjustMisc(self, vi, type):  # noqa: N802
-        return self._defaults['CalAdjustMisc']['return']
-
-    def niDMM_CalAdjustOffset(self, vi, mode, range, input_resistance):  # noqa: N802
-        return self._defaults['CalAdjustOffset']['return']
-
-    def niDMM_CheckAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        return self._defaults['CheckAttributeViBoolean']['return']
-
-    def niDMM_CheckAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        return self._defaults['CheckAttributeViInt32']['return']
-
-    def niDMM_CheckAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        return self._defaults['CheckAttributeViReal64']['return']
-
-    def niDMM_CheckAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        return self._defaults['CheckAttributeViSession']['return']
-
-    def niDMM_CheckAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        return self._defaults['CheckAttributeViString']['return']
-
     def niDMM_ClearError(self, vi):  # noqa: N802
         return self._defaults['ClearError']['return']
 
     def niDMM_ClearInterchangeWarnings(self, vi):  # noqa: N802
         return self._defaults['ClearInterchangeWarnings']['return']
-
-    def niDMM_CloseExtCal(self, vi, action):  # noqa: N802
-        return self._defaults['CloseExtCal']['return']
 
     def niDMM_ConfigureACBandwidth(self, vi, ac_minimum_frequency_hz, ac_maximum_frequency_hz):  # noqa: N802
         return self._defaults['ConfigureACBandwidth']['return']
@@ -413,9 +330,6 @@ class SideEffectsHelper(object):
 
     def niDMM_ConfigureWaveformCoupling(self, vi, waveform_coupling):  # noqa: N802
         return self._defaults['ConfigureWaveformCoupling']['return']
-
-    def niDMM_Control(self, vi, control_action):  # noqa: N802
-        return self._defaults['Control']['return']
 
     def niDMM_Disable(self, vi):  # noqa: N802
         return self._defaults['Disable']['return']
@@ -525,18 +439,6 @@ class SideEffectsHelper(object):
         minute.contents.value = self._defaults['GetCalDateAndTime']['minute']
         return self._defaults['GetCalDateAndTime']['return']
 
-    def niDMM_GetCalUserDefinedInfo(self, vi, buffer_size, info):  # noqa: N802
-        if self._defaults['GetCalUserDefinedInfo']['info'] is None:
-            raise MockFunctionCallError("niDMM_GetCalUserDefinedInfo", param='info')
-        info.contents.value = self._defaults['GetCalUserDefinedInfo']['info']
-        return self._defaults['GetCalUserDefinedInfo']['return']
-
-    def niDMM_GetCalUserDefinedInfoMaxSize(self, vi, info_size):  # noqa: N802
-        if self._defaults['GetCalUserDefinedInfoMaxSize']['infoSize'] is None:
-            raise MockFunctionCallError("niDMM_GetCalUserDefinedInfoMaxSize", param='infoSize')
-        info_size.contents.value = self._defaults['GetCalUserDefinedInfoMaxSize']['infoSize']
-        return self._defaults['GetCalUserDefinedInfoMaxSize']['return']
-
     def niDMM_GetChannelName(self, vi, index, buffer_size, channel_string):  # noqa: N802
         if self._defaults['GetChannelName']['channelString'] is None:
             raise MockFunctionCallError("niDMM_GetChannelName", param='channelString')
@@ -563,12 +465,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetErrorMessage", param='errorMessage')
         error_message.contents.value = self._defaults['GetErrorMessage']['errorMessage']
         return self._defaults['GetErrorMessage']['return']
-
-    def niDMM_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
-        if self._defaults['GetExtCalRecommendedInterval']['months'] is None:
-            raise MockFunctionCallError("niDMM_GetExtCalRecommendedInterval", param='months')
-        months.contents.value = self._defaults['GetExtCalRecommendedInterval']['months']
-        return self._defaults['GetExtCalRecommendedInterval']['return']
 
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
         if self._defaults['GetLastCalTemp']['temperature'] is None:
@@ -599,12 +495,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetSelfCalSupported", param='selfCalSupported')
         self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
         return self._defaults['GetSelfCalSupported']['return']
-
-    def niDMM_InitExtCal(self, resource_name, calibration_password, vi):  # noqa: N802
-        if self._defaults['InitExtCal']['vi'] is None:
-            raise MockFunctionCallError("niDMM_InitExtCal", param='vi')
-        vi.contents.value = self._defaults['InitExtCal']['vi']
-        return self._defaults['InitExtCal']['return']
 
     def niDMM_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['vi'] is None:
@@ -690,9 +580,6 @@ class SideEffectsHelper(object):
     def niDMM_ResetWithDefaults(self, vi):  # noqa: N802
         return self._defaults['ResetWithDefaults']['return']
 
-    def niDMM_RestoreLastExtCalConstants(self, vi):  # noqa: N802
-        return self._defaults['RestoreLastExtCalConstants']['return']
-
     def niDMM_SelfCal(self, vi):  # noqa: N802
         return self._defaults['SelfCal']['return']
 
@@ -713,12 +600,6 @@ class SideEffectsHelper(object):
 
     def niDMM_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         return self._defaults['SetAttributeViString']['return']
-
-    def niDMM_SetCalPassword(self, vi, old_password, new_password):  # noqa: N802
-        return self._defaults['SetCalPassword']['return']
-
-    def niDMM_SetCalUserDefinedInfo(self, vi, info):  # noqa: N802
-        return self._defaults['SetCalUserDefinedInfo']['return']
 
     def niDMM_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         if self._defaults['UnlockSession']['callerHasLock'] is None:
@@ -743,12 +624,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_error_query", param='errorMessage')
         error_message.contents.value = self._defaults['error_query']['errorMessage']
         return self._defaults['error_query']['return']
-
-    def niDMM_init(self, resource_name, id_query, reset_device, vi):  # noqa: N802
-        if self._defaults['init']['vi'] is None:
-            raise MockFunctionCallError("niDMM_init", param='vi')
-        vi.contents.value = self._defaults['init']['vi']
-        return self._defaults['init']['return']
 
     def niDMM_reset(self, vi):  # noqa: N802
         return self._defaults['reset']['return']
@@ -797,34 +672,10 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niDMM_Abort.side_effect = MockFunctionCallError("niDMM_Abort")
         mock_library.niDMM_Abort.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CalAdjustACFilter.side_effect = MockFunctionCallError("niDMM_CalAdjustACFilter")
-        mock_library.niDMM_CalAdjustACFilter.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CalAdjustGain.side_effect = MockFunctionCallError("niDMM_CalAdjustGain")
-        mock_library.niDMM_CalAdjustGain.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CalAdjustLC.side_effect = MockFunctionCallError("niDMM_CalAdjustLC")
-        mock_library.niDMM_CalAdjustLC.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CalAdjustLinearization.side_effect = MockFunctionCallError("niDMM_CalAdjustLinearization")
-        mock_library.niDMM_CalAdjustLinearization.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CalAdjustMisc.side_effect = MockFunctionCallError("niDMM_CalAdjustMisc")
-        mock_library.niDMM_CalAdjustMisc.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CalAdjustOffset.side_effect = MockFunctionCallError("niDMM_CalAdjustOffset")
-        mock_library.niDMM_CalAdjustOffset.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CheckAttributeViBoolean.side_effect = MockFunctionCallError("niDMM_CheckAttributeViBoolean")
-        mock_library.niDMM_CheckAttributeViBoolean.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CheckAttributeViInt32.side_effect = MockFunctionCallError("niDMM_CheckAttributeViInt32")
-        mock_library.niDMM_CheckAttributeViInt32.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CheckAttributeViReal64.side_effect = MockFunctionCallError("niDMM_CheckAttributeViReal64")
-        mock_library.niDMM_CheckAttributeViReal64.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CheckAttributeViSession.side_effect = MockFunctionCallError("niDMM_CheckAttributeViSession")
-        mock_library.niDMM_CheckAttributeViSession.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CheckAttributeViString.side_effect = MockFunctionCallError("niDMM_CheckAttributeViString")
-        mock_library.niDMM_CheckAttributeViString.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ClearError.side_effect = MockFunctionCallError("niDMM_ClearError")
         mock_library.niDMM_ClearError.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ClearInterchangeWarnings.side_effect = MockFunctionCallError("niDMM_ClearInterchangeWarnings")
         mock_library.niDMM_ClearInterchangeWarnings.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_CloseExtCal.side_effect = MockFunctionCallError("niDMM_CloseExtCal")
-        mock_library.niDMM_CloseExtCal.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ConfigureACBandwidth.side_effect = MockFunctionCallError("niDMM_ConfigureACBandwidth")
         mock_library.niDMM_ConfigureACBandwidth.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ConfigureADCCalibration.side_effect = MockFunctionCallError("niDMM_ConfigureADCCalibration")
@@ -879,8 +730,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_ConfigureWaveformAcquisition.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ConfigureWaveformCoupling.side_effect = MockFunctionCallError("niDMM_ConfigureWaveformCoupling")
         mock_library.niDMM_ConfigureWaveformCoupling.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_Control.side_effect = MockFunctionCallError("niDMM_Control")
-        mock_library.niDMM_Control.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_Disable.side_effect = MockFunctionCallError("niDMM_Disable")
         mock_library.niDMM_Disable.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_Fetch.side_effect = MockFunctionCallError("niDMM_Fetch")
@@ -909,10 +758,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_GetCalCount.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetCalDateAndTime.side_effect = MockFunctionCallError("niDMM_GetCalDateAndTime")
         mock_library.niDMM_GetCalDateAndTime.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_GetCalUserDefinedInfo.side_effect = MockFunctionCallError("niDMM_GetCalUserDefinedInfo")
-        mock_library.niDMM_GetCalUserDefinedInfo.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_GetCalUserDefinedInfoMaxSize.side_effect = MockFunctionCallError("niDMM_GetCalUserDefinedInfoMaxSize")
-        mock_library.niDMM_GetCalUserDefinedInfoMaxSize.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetChannelName.side_effect = MockFunctionCallError("niDMM_GetChannelName")
         mock_library.niDMM_GetChannelName.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetDevTemp.side_effect = MockFunctionCallError("niDMM_GetDevTemp")
@@ -921,8 +766,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_GetError.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetErrorMessage.side_effect = MockFunctionCallError("niDMM_GetErrorMessage")
         mock_library.niDMM_GetErrorMessage.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niDMM_GetExtCalRecommendedInterval")
-        mock_library.niDMM_GetExtCalRecommendedInterval.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetLastCalTemp.side_effect = MockFunctionCallError("niDMM_GetLastCalTemp")
         mock_library.niDMM_GetLastCalTemp.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetMeasurementPeriod.side_effect = MockFunctionCallError("niDMM_GetMeasurementPeriod")
@@ -933,8 +776,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_GetNextInterchangeWarning.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetSelfCalSupported.side_effect = MockFunctionCallError("niDMM_GetSelfCalSupported")
         mock_library.niDMM_GetSelfCalSupported.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_InitExtCal.side_effect = MockFunctionCallError("niDMM_InitExtCal")
-        mock_library.niDMM_InitExtCal.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_InitWithOptions.side_effect = MockFunctionCallError("niDMM_InitWithOptions")
         mock_library.niDMM_InitWithOptions.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_Initiate.side_effect = MockFunctionCallError("niDMM_Initiate")
@@ -961,8 +802,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_ResetInterchangeCheck.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ResetWithDefaults.side_effect = MockFunctionCallError("niDMM_ResetWithDefaults")
         mock_library.niDMM_ResetWithDefaults.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_RestoreLastExtCalConstants.side_effect = MockFunctionCallError("niDMM_RestoreLastExtCalConstants")
-        mock_library.niDMM_RestoreLastExtCalConstants.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_SelfCal.side_effect = MockFunctionCallError("niDMM_SelfCal")
         mock_library.niDMM_SelfCal.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_SendSoftwareTrigger.side_effect = MockFunctionCallError("niDMM_SendSoftwareTrigger")
@@ -977,10 +816,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_SetAttributeViSession.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_SetAttributeViString.side_effect = MockFunctionCallError("niDMM_SetAttributeViString")
         mock_library.niDMM_SetAttributeViString.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_SetCalPassword.side_effect = MockFunctionCallError("niDMM_SetCalPassword")
-        mock_library.niDMM_SetCalPassword.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_SetCalUserDefinedInfo.side_effect = MockFunctionCallError("niDMM_SetCalUserDefinedInfo")
-        mock_library.niDMM_SetCalUserDefinedInfo.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_UnlockSession.side_effect = MockFunctionCallError("niDMM_UnlockSession")
         mock_library.niDMM_UnlockSession.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_close.side_effect = MockFunctionCallError("niDMM_close")
@@ -989,8 +824,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_error_message.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_error_query.side_effect = MockFunctionCallError("niDMM_error_query")
         mock_library.niDMM_error_query.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_init.side_effect = MockFunctionCallError("niDMM_init")
-        mock_library.niDMM_init.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_reset.side_effect = MockFunctionCallError("niDMM_reset")
         mock_library.niDMM_reset.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_revision_query.side_effect = MockFunctionCallError("niDMM_revision_query")
