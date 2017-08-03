@@ -217,6 +217,9 @@ def get_dictionary_snippet(d, indent=4):
 def sorted_attrs(a):
     return sorted(a, key=lambda k: a[k]['name'])
 
+def sorted_functions(f):
+    return sorted(f, key=lambda k: k['name'])
+
 def get_indented_docstring_snippet(d, indent=4):
     '''
     Returns a docstring with the correct amount of indentation. Can't use similar construct as
