@@ -815,8 +815,8 @@ class Session(object):
         return
 
     def configure_meas_complete_dest(self, destination):
-        if type(destination) is not enums.Terminal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(destination) is not enums.MeasurementCompleteDest:
+            raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementCompleteDest))
         error_code = self.library.niDMM_ConfigureMeasCompleteDest(self.vi, destination.value)
         errors._handle_error(self, error_code)
         return
@@ -843,8 +843,8 @@ class Session(object):
         return
 
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger, sample_interval):
-        if type(sample_trigger) is not enums.Terminal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(sample_trigger) is not enums.SampleTrigger:
+            raise TypeError('Parameter mode must be of type ' + str(enums.SampleTrigger))
         error_code = self.library.niDMM_ConfigureMultiPoint(self.vi, trigger_count, sample_count, sample_trigger.value, sample_interval)
         errors._handle_error(self, error_code)
         return
@@ -913,8 +913,8 @@ class Session(object):
         return
 
     def configure_trigger(self, trig_source, trigger_delay):
-        if type(trig_source) is not enums.Terminal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(trig_source) is not enums.TriggerSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         error_code = self.library.niDMM_ConfigureTrigger(self.vi, trig_source.value, trigger_delay)
         errors._handle_error(self, error_code)
         return
