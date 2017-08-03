@@ -66,7 +66,6 @@ def test_warning(device_info):
 
 def test_ViBoolean_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
-
         assert session.interchange_check is False
         # TODO(marcoskirsch): set a boolean
 
@@ -111,19 +110,16 @@ def test_acquisition(device_info):
             print(session.fetch(1000))
 
 			
-def test_function_call_with_zero_parameter(device_info):
+def test_method_call_with_zero_parameter(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert session.get_aperture_time_info()[1] == 0 # Assuming default aperture time unit will be seconds
    
         
-def test_function_call_with_one_parameter(device_info):
-    with nidmm.Session(device_info['name']) as session:
-        session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
-        with session.initiate():
-            assert session.fetch(1000) != 0 # Assumes DMM doesn't Fetch is not exactly zero to support non-connected modules and simulated modules.
+def test_method_call_with_one_parameter(device_info):
+    session.configure_power_line_frequency(60)
 
         
-def test_function_call_with_one_parameter(device_info):
+def test_invalid_method_call(device_info):
     #calling a function, without parameter, But it has a mandate parameter
     with nidmm.Session(device_info['name']) as session:
         try:
@@ -134,7 +130,7 @@ def test_function_call_with_one_parameter(device_info):
             pass
             
 
-def test_function_call_with_two_parameter(device_info):
+def test_method_call_with_two_parameter(device_info):
     # Calling Configure Trigger function and asserting True if any error occurred while function call.
     with nidmm.Session(device_info['name']) as session:
         try:
