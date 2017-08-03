@@ -1,38 +1,5 @@
 # -*- coding: utf-8 -*-
 attributes = {
-    -2: {
-        'access': 'write only',
-        'enum': None,
-        'longDescription': '''
-Specifies the channel name used to access all subsequent channel-based
-properties in this property node. Set the channel before setting
-channel-based properties. Pass a name that the instrument driver defines
-or a virtual channel name configured in MAX.
-
-The following table lists the characteristics of this property.
-
-+------------------+--------------+
-| Characteristic   | Value        |
-+------------------+--------------+
-| Datatype         | string       |
-+------------------+--------------+
-| Permissions      | Write Only   |
-+------------------+--------------+
-| Channel Based    | False        |
-+------------------+--------------+
-| Resettable       | No           |
-+------------------+--------------+
-''',
-        'lv_property': 'Active Channel',
-        'name': 'ACTIVE_CHANNEL',
-        'shortDescription': '''
-Specifies the channel name used to access all subsequent channel-based
-properties in this property node. Set the channel before setting
-channel-based properties. Pass a name that the instrument driver defines
-or a virtual channel name configured in MAX.
-''',
-        'type': 'ViString',
-    },
     1050002: {
         'access': 'read-write',
         'enum': None,

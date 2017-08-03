@@ -19,6 +19,7 @@ functions = helper.add_all_metadata(functions)
 %>\
 
 import ctypes
+import threading
 
 from ${module_name}.ctypes_types import *  # noqa: F403,H303
 import ${module_name}.python_types
@@ -26,6 +27,7 @@ import ${module_name}.python_types
 
 class ${module_name.title()}CtypesLibrary(object):
     def __init__(self, library_name, library_type):
+        self._func_lock = threading.Lock()
         # We cache the cfunc object from the ctypes.CDLL object
 % for func_name in sorted(functions):
         self.${c_function_prefix}${func_name}_cfunc = None

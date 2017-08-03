@@ -51,13 +51,14 @@ endef
 # run when all is used, but we want it to work
 $(foreach t,$(DEFAULT_TARGETS) $(ADDITIONAL_TARGETS),$(eval $(call per_target,$(t))))
 
+SUPPRESS_ERROR_OUTPUT := 2> /dev/null
 clean: start
 	@echo 'Cleaning...'
-	-@rm -Rf $(BIN_DIR)
-	-@find $(ROOT_DIR) -path '*/__pycache__/*' -exec rm {} \;
-	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \;
-	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \;
-	-rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*.rst)
+	-@rm -Rf $(BIN_DIR) $(SUPPRESS_ERROR_OUTPUT)
+	-@find $(ROOT_DIR) -path '*/__pycache__/*' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT)
+	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT)
+	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT)
+	-@rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*.rst) $(SUPPRESS_ERROR_OUTPUT)
 
 start:
 	-@echo "rem This is the list of commands that make invoked in order to build nimi-python. If you want to reproduce the build but don't have GNU Make setup in your system, you can invoke this script." > $(COMMAND_LOG_BATCH)
@@ -109,7 +110,6 @@ SOURCEDIR     = $(ROOT_DIR)/docs
 BUILDDIR      = $(BIN_DIR)/docs
 
 html:
-	$(_hide_cmds)$(call log_command,cp $(ROOT_DIR)/README.rst $(SOURCEDIR))
 	$(_hide_cmds)$(call log_command,$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS))
 
 .PHONY: help Makefile

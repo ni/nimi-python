@@ -50,3 +50,25 @@ class TestSession(object):
             self.patched_ctypes_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
             self.patched_errors._handle_error.assert_called_once_with(session, self.patched_ctypes_library.niModInst_OpenInstalledDevicesSession.return_value)
         self.patched_ctypes_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
+
+    def test_cannot_add_properties_to_session(self):
+        with nimodinst.Session('') as session:
+            try:
+                session.nonexistent_property = 5
+                assert False
+            except TypeError as e:
+                print(e)
+                pass
+            try:
+                value = session.nonexistent_property  # noqa: F841
+                assert False
+            except AttributeError as e:
+                print(e)
+                pass
+
+    def test_iterating(self):
+        self.side_effects_helper['OpenInstalledDevicesSession']['item_count'] = 2
+        with nimodinst.Session('') as session:
+            assert len(session) == 2
+            for d in session:
+                pass

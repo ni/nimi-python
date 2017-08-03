@@ -16,7 +16,7 @@ ${helper.get_rst_header_snippet(driver_name + ' Session', '=')}
    ${helper.get_indented_docstring_snippet(config['session_description'], indent=3)}
 
 
-% for attr in sorted(attributes):
+% for attr in helper.sorted_attrs(attributes):
 <% 
 if attributes[attr]['enum'] is not None:
     t = 'enums.' + attributes[attr]['enum']
@@ -27,23 +27,4 @@ else:
       ${helper.get_indented_docstring_snippet(attributes[attr]['shortDescription'], indent=6)}
 % endfor
 
-% for attr in sorted(attributes):
-%   if 'longDescription' in attributes[attr]:
-   .. py:attribute:: ${attributes[attr]["name"].lower()}
 
-%   if attributes[attr]['enum'] is not None:
-      See :py:data:`${module_name}.${attributes[attr]['enum']}` 
-
-%   endif
-      ${helper.get_indented_docstring_snippet(attributes[attr]['longDescription'], indent=6)}
-
-      .. tip:: 
-         This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-%   if 'lv_property' in attributes[attr]:
-           - LabVIEW Property: **${attributes[attr]['lv_property'].strip()}**
-%   endif
-           - C Attribute: **${c_function_prefix.upper()}ATTR_${attributes[attr]["name"].upper()}**
-%   endif
-
-% endfor

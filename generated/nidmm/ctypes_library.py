@@ -5,6 +5,7 @@
 #  number and types of parameters are passed into the different entry points
 
 import ctypes
+import threading
 
 from nidmm.ctypes_types import *  # noqa: F403,H303
 import nidmm.python_types
@@ -12,6 +13,7 @@ import nidmm.python_types
 
 class NidmmCtypesLibrary(object):
     def __init__(self, library_name, library_type):
+        self._func_lock = threading.Lock()
         # We cache the cfunc object from the ctypes.CDLL object
         self.niDMM_Abort_cfunc = None
         self.niDMM_ClearError_cfunc = None

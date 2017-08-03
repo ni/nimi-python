@@ -5,6 +5,7 @@
 #  number and types of parameters are passed into the different entry points
 
 import ctypes
+import threading
 
 from nimodinst.ctypes_types import *  # noqa: F403,H303
 import nimodinst.python_types
@@ -12,6 +13,7 @@ import nimodinst.python_types
 
 class NimodinstCtypesLibrary(object):
     def __init__(self, library_name, library_type):
+        self._func_lock = threading.Lock()
         # We cache the cfunc object from the ctypes.CDLL object
         self.niModInst_CloseInstalledDevicesSession_cfunc = None
         self.niModInst_GetExtendedErrorInfo_cfunc = None
