@@ -20,9 +20,9 @@ functions_codegen_method = {
 }
 
 functions_enums = {
-    'ConfigureTrigger':             { 'parameters': { 1: { 'enum': 'Terminal',                  }, }, },
-    'ConfigureMeasCompleteDest':    { 'parameters': { 1: { 'enum': 'Terminal',                  }, }, },
-    'ConfigureMultiPoint':          { 'parameters': { 3: { 'enum': 'Terminal',                  }, }, },
+    'ConfigureTrigger':             { 'parameters': { 1: { 'enum': 'TriggerSource',             }, }, },
+    'ConfigureMeasCompleteDest':    { 'parameters': { 1: { 'enum': 'MeasurementCompleteDest',   }, }, },
+    'ConfigureMultiPoint':          { 'parameters': { 3: { 'enum': 'SampleTrigger',             }, }, },
     'ConfigureTriggerSlope':        { 'parameters': { 1: { 'enum': 'Slope',                     }, }, },
     'GetApertureTimeInfo':          { 'parameters': { 2: { 'enum': 'ApertureTimeUnits',         }, }, },
     'ConfigureAutoZeroMode':        { 'parameters': { 1: { 'enum': 'EnabledSetting',            }, }, },
