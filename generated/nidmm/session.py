@@ -814,10 +814,17 @@ class Session(object):
         errors._handle_error(self, error_code)
         return
 
+<<<<<<< HEAD
     def configure_meas_complete_dest(self, meas_complete_destination):
         if type(meas_complete_destination) is not enums.MeasurementCompleteDest:
             raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementCompleteDest))
         error_code = self.library.niDMM_ConfigureMeasCompleteDest(self.vi, meas_complete_destination.value)
+=======
+    def configure_meas_complete_dest(self, destination):
+        if type(destination) is not enums.MeasurementCompleteDest:
+            raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementCompleteDest))
+        error_code = self.library.niDMM_ConfigureMeasCompleteDest(self.vi, destination.value)
+>>>>>>> master
         errors._handle_error(self, error_code)
         return
 
@@ -912,10 +919,17 @@ class Session(object):
         errors._handle_error(self, error_code)
         return
 
+<<<<<<< HEAD
     def configure_trigger(self, trigger_source, trigger_delay):
         if type(trigger_source) is not enums.TriggerSource:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         error_code = self.library.niDMM_ConfigureTrigger(self.vi, trigger_source.value, trigger_delay)
+=======
+    def configure_trigger(self, trig_source, trigger_delay):
+        if type(trig_source) is not enums.TriggerSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
+        error_code = self.library.niDMM_ConfigureTrigger(self.vi, trig_source.value, trigger_delay)
+>>>>>>> master
         errors._handle_error(self, error_code)
         return
 
