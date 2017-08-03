@@ -1,6 +1,8 @@
 # TODO(marcoskirsch): This file should definitely not live here but I had trouble getting import to work.
 # TODO(marcoskirsch): Figure out unit test for this.
 
+from contextlib import contextmanager
+import importlib
 import re
 import pprint
 import string
@@ -333,10 +335,25 @@ def as_rest_table(data, full=False):
     table.append(separator)
     return '\n'.join(table)
 
-def get_python_type_from_visa_type(visa_type):
+# We need this to allow us to dynamically add and remove a folder to the search
+# path becaise importlib.import_module() won't work with a module hierarchy in python2
+@contextmanager
+def add_to_path(p):
+    import sys
+    old_path = sys.path
+    sys.path = sys.path[:]
+    sys.path.insert(0, p)
+    try:
+        yield
+    finally:
+        sys.path = old_path
 
-    import importlib
-    p_types = importlib.import_module('build.templates.python_types')
+def get_python_type_from_visa_type(visa_type):
+    if sys.version_info.major < 3:
+        with add_to_path('build/templates'):
+            p_types = importlib.import_module('python_types')
+    else:
+        p_types = importlib.import_module('build.templates.python_types')
     v_type = getattr(p_types, visa_type)
     p_type = v_type().python_type()
 
