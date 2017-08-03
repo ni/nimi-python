@@ -113,6 +113,9 @@ class ${context_name.title()}(object):
 class Session(object):
     '''${config['session_description']}'''
 
+    # This is needed during __init__. Without it, __setattr__ raises an exception
+    _is_frozen = False
+
 % for attribute in helper.sorted_attrs(attributes):
     %if attributes[attribute]['enum']:
     ${attributes[attribute]['name'].lower()} = AttributeEnum(${attribute}, enums.${attributes[attribute]['enum']})
@@ -130,6 +133,13 @@ class Session(object):
         self.library = library.get_library()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+
+        self._is_frozen = True
+
+    def __setattr__(self, key, value):
+        if self._is_frozen and key not in dir(self):
+            raise TypeError("%r is a frozen class" % self)
+        object.__setattr__(self, key, value)
 % for c in config['context_manager']:
 <%
 context_name = 'acquisition' if c['direction'] == 'input' else 'generation'

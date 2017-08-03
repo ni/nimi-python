@@ -3,6 +3,11 @@ Info         Python bindings for NI Modular Instrument drivers. See `GitHub <htt
 Author       National Instruments
 ===========  =================================================================================================================
 
+
+.. warning::
+   NI Modular Instruments Python API is currently under development. You are welcome to use it,
+   and we welcome feedback, but be prepared for changes to the APIs.
+
 .. _about-section:
 
 About

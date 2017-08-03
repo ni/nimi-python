@@ -26,7 +26,7 @@ def device_info(request):
 def test_invalid_device_name():
     try:
         nidmm.Session("Foo!")
-        assert false
+        assert False
     except nidmm.Error as e:
         assert e.code == -1074118656
         assert e.description.find("Device was not recognized. The device is not supported with this driver or version.") != -1

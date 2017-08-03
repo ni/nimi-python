@@ -110,7 +110,6 @@ SOURCEDIR     = $(ROOT_DIR)/docs
 BUILDDIR      = $(BIN_DIR)/docs
 
 html:
-	$(_hide_cmds)$(call log_command,cp $(ROOT_DIR)/README.rst $(SOURCEDIR))
 	$(_hide_cmds)$(call log_command,$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS))
 
 .PHONY: help Makefile

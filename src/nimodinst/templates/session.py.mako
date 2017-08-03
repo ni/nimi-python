@@ -60,6 +60,9 @@ class Device(object):
 class Session(object):
     '''${config['session_description']}'''
 
+    # This is needed during __init__. Without it, __setattr__ raises an exception
+    _is_frozen = False
+
     def __init__(self, driver):
 % for attribute in helper.sorted_attrs(attributes):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(self, ${attribute})
@@ -72,8 +75,16 @@ class Session(object):
 
         self.handle = 0
         self.item_count = 0
+        self.current_item = 0
         self.library = library.get_library()
         self.handle, self.item_count = self._open_installed_devices_session(driver)
+
+        self._is_frozen = True
+
+    def __setattr__(self, key, value):
+        if self._is_frozen and key not in dir(self):
+            raise TypeError("%r is a frozen class" % self)
+        object.__setattr__(self, key, value)
 
     def __del__(self):
         pass
