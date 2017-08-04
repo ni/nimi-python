@@ -116,14 +116,15 @@ def test_method_call_with_zero_parameter(device_info):
    
         
 def test_method_call_with_one_parameter(device_info):
-    session.configure_power_line_frequency(60)
+    with nidmm.Session(device_info['name']) as session:
+        session.configure_power_line_frequency(60)
 
         
 def test_invalid_method_call(device_info):
     #calling a function, without parameter, But it has a mandate parameter
     with nidmm.Session(device_info['name']) as session:
         try:
-            session.fetch()
+            session.configure_power_line_frequency()
             assert False
         except TypeError as e:
             print (e)
@@ -134,7 +135,7 @@ def test_method_call_with_two_parameter(device_info):
     # Calling Configure Trigger function and asserting True if any error occurred while function call.
     with nidmm.Session(device_info['name']) as session:
         try:
-            session.configure_trigger(nidmm.Terminal.IMMEDIATE, 1)
+            session.configure_trigger(nidmm.TriggerSource.IMMEDIATE, 1)
         except nidmm.Error as e:
             print (e)
             assert True
