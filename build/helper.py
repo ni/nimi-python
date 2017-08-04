@@ -254,11 +254,22 @@ def get_indented_docstring_snippet(d, indent=4):
     return ret_val
 
 def get_rst_header_snippet(t, header_level='='):
+    '''Get rst formatted heading
+    '''
     ret_val = t + '\n'
     ret_val += header_level * len(t)
     return ret_val
 
 def get_function_rst(fname, function, indent=0):
+    '''Gets rst formatted documentation for given function
+
+    Args:
+        fname (str): Function name - key in function dictionary
+        function (dict): function entry correcsponding to fname in function dictionary
+
+    Returns:
+        str: rst formatted documentation
+    '''
     rst = '.. function:: ' + function['python_name'] + '('
     rst += get_function_parameters_snippet(function['parameters'], sessionName='vi') + ')'
     indent += 4
@@ -290,6 +301,41 @@ def get_function_rst(fname, function, indent=0):
         rst += '\n\n' + (' ' * indent) + ':rtype: '+ p['python_type']
 
     return rst
+
+def get_function_docstring(fname, function, indent=0):
+    '''Gets formatted documentation for given function that can be used as a docstring
+
+    Args:
+        fname (str): Function name - key in function dictionary
+        function (dict): function entry correcsponding to fname in function dictionary
+
+    Returns:
+        str: docstring formatted documentation
+    '''
+    docstring = ''
+    if 'purpose' in function:
+        docstring += get_indented_docstring_snippet(function['purpose'], indent)
+    elif 'long_description' in function:
+        docstring += get_indented_docstring_snippet(function['long_description'], indent)
+
+    input_params = extract_input_parameters(function['parameters'])
+    if len(input_params) > 0:
+        docstring += '\n\n' + (' ' * indent) + 'Args:'
+    for p in input_params:
+        docstring +=  '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
+        if 'long_description' in p:
+            docstring += get_indented_docstring_snippet(p['long_description'], indent + 8)
+
+
+    output_params = extract_output_parameters(function['parameters'])
+    if len(output_params) > 0:
+        docstring += '\n\n' + (' ' * indent) + 'Returns:'
+        for p in output_params:
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
+            if 'long_description' in p:
+                docstring += get_indented_docstring_snippet(p['long_description'], indent + 8)
+
+    return docstring
 
 
 
