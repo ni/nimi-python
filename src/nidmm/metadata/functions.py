@@ -36,8 +36,8 @@ using this function.
 ''',
         'purpose': '''
 For the NI 4080/4081/4082 and the NI 4070/4071/4072, calibrates the
-filter coefficients used for AC measurements of the supplied **Mode**
-and **Range**.
+filter coefficients used for AC measurements of the supplied **mode**
+and **range**.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -88,7 +88,7 @@ Specifies the **frequency** of the input signal.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **expectedValue** of the measurement.
+Specifies the **expected\_value** of the measurement.
 ''',
                 'name': 'expectedValue',
                 'type': 'ViReal64',
@@ -106,8 +106,8 @@ Specifies the **expectedValue** of the measurement.
 .. |image0| image:: note.gif
 ''',
         'purpose': '''
-Calibrates the gain coefficient for the supplied **Mode**, **Range**,
-and **Input\_Resistance**.
+Calibrates the gain coefficient for the supplied **mode**, **range**,
+and **input_resistance**.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -149,9 +149,9 @@ Auto-ranging is not supported for calibration operations.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **inputResistance** that the device should use.
-**inputResistance** values are coerced up to the closest
-**inputResistance**.
+Specifies the **input\_resistance** that the device should use.
+**input\_resistance** values are coerced up to the closest
+**input\_resistance**.
 ''',
                 'name': 'inputResistance',
                 'type': 'ViReal64',
@@ -160,7 +160,7 @@ Specifies the **inputResistance** that the device should use.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **expectedValue** of the measurement.
+Specifies the **expected\_value** of the measurement.
 ''',
                 'name': 'expectedValue',
                 'type': 'ViReal64',
@@ -175,7 +175,7 @@ using this function.
 ''',
         'purpose': '''
 For the NI 4082 and NI 4072 only, performs a specialized LC calibration
-step depending on the specified **Type**.
+step depending on the specified **type**.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -261,9 +261,9 @@ Procedure*. Auto-ranging is not supported for calibration operations.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **inputResistance** that the device should use.
-**inputResistance** values are coerced up to the closest
-**inputResistance**.
+Specifies the **input\_resistance** that the device should use.
+**input\_resistance** values are coerced up to the closest
+**input\_resistance**.
 ''',
                 'name': 'inputResistance',
                 'type': 'ViReal64',
@@ -272,7 +272,7 @@ Specifies the **inputResistance** that the device should use.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **expectedValue** of the measurement.
+Specifies the **expected\_value** of the measurement.
 ''',
                 'name': 'expectedValue',
                 'type': 'ViReal64',
@@ -288,7 +288,7 @@ function.
 ''',
         'purpose': '''
 Performs a specialized calibration step depending on the specified
-**Type**.
+**type**.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -335,8 +335,8 @@ Refer to the calibration procedure for your device before using this
 function.
 ''',
         'purpose': '''
-Calibrates the offset and Auto Zero offset for the supplied **Mode**,
-**Range**, and **Input\_Resistance**.
+Calibrates the offset and Auto Zero offset for the supplied **mode**,
+**range**, and **input_resistance**.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -378,9 +378,9 @@ Auto-ranging is not supported for calibration operations.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **inputResistance** that the device should use.
-**inputResistance** values are coerced up to the closest
-**inputResistance**.
+Specifies the **input\_resistance** that the device should use.
+**input\_resistance** values are coerced up to the closest
+**input\_resistance**.
 ''',
                 'name': 'inputResistance',
                 'type': 'ViReal64',
@@ -390,9 +390,9 @@ Specifies the **inputResistance** that the device should use.
     },
     'CheckAttributeViBoolean': {
         'long_description': '''
-ViStatus = niDMM\_CheckAttributeViBoolean(ViSession Instrument\_Handle,
-ViConstString Channel\_Name, ViAttr Attribute\_ID, ViBoolean
-Attribute\_Value)
+Vistatus = niDMM\_CheckAttributeViBoolean(ViSession vi,
+ViConstString channel_name, ViAttr attribute_id, ViBoolean
+attribute_value)
 ''',
         'purpose': '''
 This function checks the validity of a value you specify for a ViBoolean
@@ -451,9 +451,9 @@ Pass the value that you want to set the attribute to.
     },
     'CheckAttributeViInt32': {
         'long_description': '''
-ViStatus = niDMM\_CheckAttributeViInt32(ViSession Instrument\_Handle,
-ViConstString Channel\_Name, ViAttr Attribute\_ID, ViInt32
-Attribute\_Value)
+Vistatus = niDMM\_CheckAttributeViInt32(ViSession vi,
+ViConstString channel_name, ViAttr attribute_id, ViInt32
+attribute_value)
 ''',
         'purpose': '''
 This function checks the validity of a value you specify for a ViInt32
@@ -512,9 +512,9 @@ Pass the value that you want to set the attribute to.
     },
     'CheckAttributeViReal64': {
         'long_description': '''
-ViStatus = niDMM\_CheckAttributeViReal64(ViSession Instrument\_Handle,
-ViConstString Channel\_Name, ViAttr Attribute\_ID, ViReal64
-Attribute\_Value)
+Vistatus = niDMM\_CheckAttributeViReal64(ViSession vi,
+ViConstString channel_name, ViAttr attribute_id, ViReal64
+attribute_value)
 ''',
         'purpose': '''
 This function checks the validity of a value you specify for a ViReal64
@@ -573,9 +573,9 @@ Pass the value that you want to set the attribute to.
     },
     'CheckAttributeViSession': {
         'long_description': '''
-ViStatus = niDMM\_CheckAttributeViSession(ViSession Instrument\_Handle,
-ViConstString Channel\_Name, ViAttr Attribute\_ID, ViSession
-Attribute\_Value)
+Vistatus = niDMM\_CheckAttributeViSession(ViSession vi,
+ViConstString channel_name, ViAttr attribute_id, ViSession
+attribute_value)
 ''',
         'purpose': '''
 This function checks the validity of a value you specify for a ViSession
@@ -634,9 +634,9 @@ Pass the value that you want to set the attribute to.
     },
     'CheckAttributeViString': {
         'long_description': '''
-ViStatus = niDMM\_CheckAttributeViString(ViSession Instrument\_Handle,
-ViConstString Channel\_Name, ViAttr Attribute\_ID, ViChar
-Attribute\_Value[])
+Vistatus = niDMM\_CheckAttributeViString(ViSession vi,
+ViConstString channel_name, ViAttr attribute_id, ViChar
+attribute_value[])
 ''',
         'purpose': '''
 This function checks the validity of a value you specify for a ViString
@@ -698,7 +698,7 @@ Pass the value that you want to set the attribute to.
         'purpose': '''
 Clears the error information for the current execution thread and the
 IVI session you specify. If you pass VI\_NULL for the
-**Instrument\_Handle** parameter, this function clears the error
+**vi** parameter, this function clears the error
 information only for the current execution thread.
 ''',
         'returns': 'ViStatus',
@@ -748,7 +748,7 @@ The default is None.
 Purpose
 -------
 
-Performs the specified **Action**, closes the specified external
+Performs the specified **action**, closes the specified external
 calibration session obtained from `
 niDMM\_InitExtCal <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_InitExtCal.html')>`__,
 and deallocates resources that it reserved.
@@ -914,11 +914,11 @@ other measurement configurations, the driver disables
     },
     'ConfigureAutoZeroMode': {
         'purpose': '''
-Configures the DMM for **Auto\_Zero\_Mode**. When **Auto\_Zero\_Mode**
+Configures the DMM for **auto_zero_mode**. When **auto_zero_mode**
 is ON, the DMM internally disconnects the input signal and takes a zero
 reading. It then subtracts the zero reading from the measurement. This
 prevents offset voltages present on the input circuitry of the DMM from
-affecting measurement accuracy. When **Auto\_Zero\_Mode** is OFF, the
+affecting measurement accuracy. When **auto_zero_mode** is OFF, the
 DMM does not compensate for zero reading offset.
 ''',
         'returns': 'ViStatus',
@@ -941,30 +941,30 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **autoZeroMode**. NI-DMM sets the `
+Specifies the **auto\_zero\_mode**. NI-DMM sets the `
 NIDMM\_ATTR\_AUTO\_ZERO <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_ZERO.html')>`__
 attribute to this value.
 
-ON enables **autoZeroMode** for each measurement. ONCE enables
-**autoZeroMode** before the next measurement. The **autoZeroMode** value
-is stored and used in subsequent measurements until the device is
-reconfigured.
+ON enables **auto\_zero\_mode** for each measurement. ONCE enables
+**auto\_zero\_mode** before the next measurement. The
+**auto\_zero\_mode** value is stored and used in subsequent measurements
+until the device is reconfigured.
 
-OFF disables **autoZeroMode**. If you set this parameter to AUTO, NI-DMM
-determines whether to enable Auto Zero based on the measurement function
-that you configure. If you configure the NI 4080/4081/4082 or the
-NI 4070/4071/4072 for a 6½–digit and greater resolution DC measurement,
-NI-DMM sets **autoZeroMode** to ON.
+OFF disables **auto\_zero\_mode**. If you set this parameter to AUTO,
+NI-DMM determines whether to enable Auto Zero based on the measurement
+function that you configure. If you configure the NI 4080/4081/4082 or
+the NI 4070/4071/4072 for a 6½–digit and greater resolution DC
+measurement, NI-DMM sets **auto\_zero\_mode** to ON.
 
 For all other DC measurement configurations on the NI 4080/4081/4082 or
-the NI 4070/4071/4072, NI-DMM sets **autoZeroMode** to ONCE. For all AC
-measurements or waveform acquisitions on the NI 4080/4081/4082 or the
-NI 4070/4071/4072, NI-DMM sets **autoZeroMode** to OFF. For NI 4060,
-**autoZeroMode** is set to OFF when AUTO is selected.
+the NI 4070/4071/4072, NI-DMM sets **auto\_zero\_mode** to ONCE. For all
+AC measurements or waveform acquisitions on the NI 4080/4081/4082 or the
+NI 4070/4071/4072, NI-DMM sets **auto\_zero\_mode** to OFF. For NI 4060,
+**auto\_zero\_mode** is set to OFF when AUTO is selected.
 
-For NI 4065 devices, **autoZeroMode** is always ON. **autoZeroMode** is
-an integral part of the signal measurement phase and adds no extra time
-to the overall measurement.
+For NI 4065 devices, **auto\_zero\_mode** is always ON.
+**auto\_zero\_mode** is an integral part of the signal measurement phase
+and adds no extra time to the overall measurement.
 
 .. note::   The NI 4060/4065 does *not* support this setting.
 ''',
@@ -1015,7 +1015,7 @@ range.
     'ConfigureCurrentSource': {
         'purpose': '''
 The NI 4050 and NI 4060 are not supported. Configures the
-**Current\_Source** for diode measurements.
+**current_source** for diode measurements.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -1037,9 +1037,9 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **currentSource** provided during diode measurements. For
-valid ranges, refer to the device sections for your device. The driver
-sets `
+Specifies the **current\_source** provided during diode measurements.
+For valid ranges, refer to the device sections for your device. The
+driver sets `
 NIDMM\_ATTR\_CURRENT\_SOURCE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_CURRENT_SOURCE.html')>`__
 to this value.
 +-------------------------------------+----------+-----------------------------------------------------+
@@ -1130,7 +1130,7 @@ and `NI 4072 <javascript:LaunchHelp('dmm.chm::/4072.html')>`__ sections
 for a list of valid values. NI-DMM sets `
 NIDMM\_ATTR\_FREQ\_VOLTAGE\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_FREQ_VOLTAGE_RANGE.html')>`__
 to this value. The minimum peak-to-peak signal amplitude that can be
-detected is 10% of the specified **voltageRange**.
+detected is 10% of the specified **voltage\_range**.
 +-----------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------+
 | Name                                    | Value   | Description                                                                                                                        |
 +=========================================+=========+====================================================================================================================================+
@@ -1231,9 +1231,9 @@ to this value.
     },
     'ConfigureMeasurementAbsolute': {
         'long_description': '''
-ViStatus = niDMM\_ConfigureMeasurementAbsolute(ViSession
-Instrument\_Handle, ViInt32 Measurement\_Function, ViReal64 Range,
-ViReal64 Resolution\_Absolute)
+Vistatus = niDMM\_ConfigureMeasurementAbsolute(ViSession
+vi, ViInt32 measurement_function, ViReal64 range,
+ViReal64 resolution_absolute)
 
 Purpose
 -------
@@ -1266,7 +1266,7 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **measurementFunction** used to acquire the measurement.
+Specifies the **measurement\_function** used to acquire the measurement.
 The driver sets `
 NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_FUNCTION.html')>`__
 to this value.
@@ -1336,9 +1336,9 @@ attribute.
     },
     'ConfigureMeasurementDigits': {
         'long_description': '''
-ViStatus = niDMM\_ConfigureMeasurementDigits(ViSession
-Instrument\_Handle, ViInt32 Measurement\_Function, ViReal64 Range,
-ViReal64 Resolution\_Digits)
+Vistatus = niDMM\_ConfigureMeasurementDigits(ViSession
+vi, ViInt32 measurement_function, ViReal64 range,
+ViReal64 resolution_digits)
 
 Purpose
 -------
@@ -1371,7 +1371,7 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **measurementFunction** used to acquire the measurement.
+Specifies the **measurement\_function** used to acquire the measurement.
 The driver sets `
 NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_FUNCTION.html')>`__
 to this value.
@@ -1511,8 +1511,8 @@ to this value. The default value is 1.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **sampleTrigger** source you want to use. The driver sets
-`
+Specifies the **sample\_trigger** source you want to use. The driver
+sets `
 NIDMM\_ATTR\_SAMPLE\_TRIGGER <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_SAMPLE_TRIGGER.html')>`__
 to this value. The default is Immediate.
 .. note::   To determine which values are supported by each device,
@@ -1532,13 +1532,13 @@ cycles. The driver sets `
 NIDMM\_ATTR\_SAMPLE\_INTERVAL <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_SAMPLE_INTERVAL.html')>`__
 to this value. Specify a sample interval to add settling time between
 measurement cycles or to decrease the measurement rate.
-**sampleInterval** only applies when the **Sample\_Trigger** is set to
+**sample\_interval** only applies when the **Sample\_Trigger** is set to
 INTERVAL.
 
-On the NI 4060, the **sampleInterval** value is used as the settling
+On the NI 4060, the **sample\_interval** value is used as the settling
 time. When sample interval is set to 0, the DMM does not settle between
 measurement cycles. The NI 4065 and NI 4070/4071/4072 use the value
-specified in **sampleInterval** as additional delay. The default value
+specified in **sample\_interval** as additional delay. The default value
 (-1) ensures that the DMM settles for a recommended time. This is the
 same as using an Immediate trigger.
 
@@ -1555,10 +1555,10 @@ NI 4050.
         'purpose': '''
 For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
 compensate for voltage offsets in resistance measurements. When
-**Offset\_Comp\_Ohms** is enabled, the DMM measures the resistance twice
+**offset_comp_ohms** is enabled, the DMM measures the resistance twice
 (once with the current source on and again with it turned off). Any
 voltage offset present in both measurements is cancelled out.
-**Offset\_Comp\_Ohms** is useful when measuring resistance values less
+**offset_comp_ohms** is useful when measuring resistance values less
 than 10 KΩ.
 ''',
         'returns': 'ViStatus',
@@ -1581,16 +1581,16 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Enables or disables **offsetCompOhms**. The driver sets `
+Enables or disables **offset\_comp\_ohms**. The driver sets `
 NIDMM\_ATTR\_OFFSET\_COMP\_OHMS <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_OFFSET_COMP_OHMS.html')>`__
 to this value.
-+-------------------------------------------------+---------+--------------------------------------+
-| Name                                            | Value   | Description                          |
-+=================================================+=========+======================================+
-| NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_OFF (default)   | 0       | Off disables \ **offsetCompOhms**.   |
-+-------------------------------------------------+---------+--------------------------------------+
-| NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_ON              | 1       | On enables **offsetCompOhms**.       |
-+-------------------------------------------------+---------+--------------------------------------+
++-------------------------------------------------+---------+------------------------------------------+
+| Name                                            | Value   | Description                              |
++=================================================+=========+==========================================+
+| NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_OFF (default)   | 0       | Off disables \ **offset\_comp\_ohms**.   |
++-------------------------------------------------+---------+------------------------------------------+
+| NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_ON              | 1       | On enables **offset\_comp\_ohms**.       |
++-------------------------------------------------+---------+------------------------------------------+
 ''',
                 'name': 'offsetCompOhms',
                 'type': 'ViInt32',
@@ -2164,7 +2164,7 @@ NIDMM\_VAL\_THERMOCOUPLE.
 Purpose
 -------
 
-Configures the DMM **Trigger\_Source** and **Trigger\_Delay**. Refer to
+Configures the DMM **trigger_source** and **trigger_delay**. Refer to
 `Triggering <javascript:LaunchHelp('dmm.chm::/trigger.html')>`__ and
 `Using
 Switches <javascript:LaunchHelp('dmm.chm::/switch_selection.html')>`__
@@ -2190,7 +2190,7 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **triggerSource** that initiates the acquisition. The
+Specifies the **trigger\_source** that initiates the acquisition. The
 driver sets `
 NIDMM\_ATTR\_TRIGGER\_SOURCE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_TRIGGER_SOURCE.html')>`__
 to this value. Software configures the DMM to wait until `
@@ -2211,14 +2211,14 @@ section.
 Specifies the time that the DMM waits after it has received a trigger
 before taking a measurement. The driver sets the
 `NIDMM\_ATTR\_TRIGGER\_DELAY <javascript:LaunchHelp('dmmcref.chm::/caNIDMM_ATTR_TRIGGER_DELAY.html')>`__
-attribute to this value. By default, **triggerDelay** is
+attribute to this value. By default, **trigger\_delay** is
 NIDMM\_VAL\_AUTO\_DELAY (-1), which means the DMM waits an appropriate
 settling time before taking the measurement. On the NI 4060, if you set
-**triggerDelay** to 0, the DMM does not settle before taking the
+**trigger\_delay** to 0, the DMM does not settle before taking the
 measurement. The NI 4065 and NI 4070/4071/4072 use the value specified
-in **triggerDelay** as additional settling time. .. note::   When using
-the NI 4050, **triggerDelay** must be set to NIDMM\_VAL\_AUTO\_DELAY
-(-1).
+in **trigger\_delay** as additional settling time. .. note::   When
+using the NI 4050, **trigger\_delay** must be set to
+NIDMM\_VAL\_AUTO\_DELAY (-1).
 ''',
                 'name': 'triggerDelay',
                 'type': 'ViReal64',
@@ -2295,7 +2295,7 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **measurementFunction** used in a waveform acquisition.
+Specifies the **measurement\_function** used in a waveform acquisition.
 The driver sets `
 NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_FUNCTION.html')>`__
 to this value.
@@ -2509,7 +2509,7 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **maximumTime** allowed for this function to complete in
+Specifies the **maximum\_time** allowed for this function to complete in
 milliseconds. If the function does not complete within this time
 interval, the function returns the NIDMM\_ERROR\_MAX\_TIME\_EXCEEDED
 error code. This may happen if an external trigger has not been
@@ -2569,7 +2569,7 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **maximumTime** allowed for this function to complete in
+Specifies the **maximum\_time** allowed for this function to complete in
 milliseconds. If the function does not complete within this time
 interval, the function returns the NIDMM\_ERROR\_MAX\_TIME\_EXCEEDED
 error code. This may happen if an external trigger has not been
@@ -2605,9 +2605,9 @@ positive ViInt32. The default value is 1.
                 'is_buffer': True,
                 'long_description': '''
 An array of measurement values.
-+------------+-----------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**   The size of the **readingArray** must be at least the size that you specify for the **Array\_Size** parameter.   |
-+------------+-----------------------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------------------------+
+| |image0|   | **Note**   The size of the **reading\_array** must be at least the size that you specify for the **Array\_Size** parameter.   |
++------------+-------------------------------------------------------------------------------------------------------------------------------+
 
 .. |image0| image:: note.gif
 ''',
@@ -2653,7 +2653,7 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **maximumTime** allowed for this function to complete in
+Specifies the **maximum\_time** allowed for this function to complete in
 milliseconds. If the function does not complete within this time
 interval, the function returns the NIDMM\_ERROR\_MAX\_TIME\_EXCEEDED
 error code. This may happen if an external trigger has not been
@@ -2705,9 +2705,9 @@ Indicates the number of measured values actually retrieved from the DMM.
     },
     'FormatMeasAbsolute': {
         'purpose': '''
-Formats the **Measurement** to the proper number of displayed digits
-according to the **Measurement\_Function**, **Range**, and
-**Resolution**. Returns the formatted data, range, and mode strings.
+Formats the **measurement** to the proper number of displayed digits
+according to the **measurement\_Function**, **range**, and
+**resolution**. Returns the formatted data, range, and mode strings.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -2715,7 +2715,7 @@ according to the **Measurement\_Function**, **Range**, and
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **measurementFunction** used to acquire the measurement.
+Specifies the **measurement\_function** used to acquire the measurement.
 The driver sets `
 NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_FUNCTION.html')>`__
 to this value.
@@ -2797,7 +2797,7 @@ NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE <javascript:LaunchMergedHelp('dmm.chm',%20'dmm
     },
     'GetApertureTimeInfo': {
         'purpose': '''
-Returns the DMM **Aperture\_Time** and **Aperture\_Time\_Units**.
+Returns the DMM **aperture_time** and **aperture_time\_Units**.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -3198,11 +3198,11 @@ Pass the number of bytes in the ViChar array you specify for the
 
 If the current value of the attribute, including the terminating NULL
 byte, contains more bytes that you indicate in this parameter, the
-function copies **bufferSize**—1 bytes into the buffer, places an ASCII
-NUL byte at the end of the buffer, and returns the buffer size you must
-pass to get the entire value. For example, if the value is "123456" and
-the **bufferSize** is 4, the function places "123" into the buffer and
-returns 7.
+function copies **buffer\_size**—1 bytes into the buffer, places an
+ASCII NUL byte at the end of the buffer, and returns the buffer size you
+must pass to get the entire value. For example, if the value is "123456"
+and the **buffer\_size** is 4, the function places "123" into the buffer
+and returns 7.
 
 If you pass a negative number, the function copies the value to the
 buffer regardless of the number of bytes in the value. If you pass 0,
@@ -3231,7 +3231,7 @@ VI\_NULL for this parameter.
     },
     'GetAutoRangeValue': {
         'purpose': '''
-Returns the **Actual\_Range** that the DMM is using, even when Auto
+Returns the **actual_range** that the DMM is using, even when Auto
 Range is off.
 ''',
         'returns': 'ViStatus',
@@ -3254,8 +3254,8 @@ The default is None.
             {
                 'direction': 'out',
                 'long_description': '''
-Indicates the **actualRange** the DMM is using. Returns the value of the
-`
+Indicates the **actual\_range** the DMM is using. Returns the value of
+the `
 NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__
 attribute. The units of the returned value depend on the function.
 ''',
@@ -3271,7 +3271,7 @@ attribute. The units of the returned value depend on the function.
 supported.
 ''',
         'purpose': '''
-Returns the calibration **Count** for the specified type of calibration.
+Returns the calibration **count** for the specified type of calibration.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -3434,14 +3434,14 @@ The default is None.
 Passes the number of bytes in the ViString you specify for the **Info**
 parameter.
 
-If zero is passed for this parameter, the **bufferSize** needed to store
-the information is returned. If the Info parameter, including the
+If zero is passed for this parameter, the **buffer\_size** needed to
+store the information is returned. If the Info parameter, including the
 terminating NULL byte, contains more bytes than you indicate in this
-parameter, the function copies **bufferSize** - 1 bytes into the buffer,
-places an ASCII NULL byte at the end of the buffer, and returns the
-**bufferSize** you must pass to get the entire value.
+parameter, the function copies **buffer\_size** - 1 bytes into the
+buffer, places an ASCII NULL byte at the end of the buffer, and returns
+the **buffer\_size** you must pass to get the entire value.
 
-For example, if the value is "123456" and the **bufferSize** is 4, the
+For example, if the value is "123456" and the **buffer\_size** is 4, the
 function places "123" into the buffer and returns 7. If you pass a
 negative number, the function copies the value to the buffer regardless
 of the number of bytes in the value.
@@ -3499,7 +3499,7 @@ The default is None.
 Returns the value of maximum string length that can be stored in the
 EEPROM using `
 niDMM\_SetCalUserDefinedInfo <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_SetCalUserDefinedInfo.htm')>`__.
-The **infoSize** value is given in characters, but it does not include
+The **info\_size** value is given in characters, but it does not include
 the termination character.
 ''',
                 'name': 'infoSize',
@@ -3510,8 +3510,8 @@ the termination character.
     },
     'GetChannelName': {
         'purpose': '''
-Returns the **Channel\_String** that is in the channel table at an
-**Index** you specify. Not applicable to National Instruments DMMs.
+Returns the **channel_string** that is in the channel table at an
+**index** you specify. Not applicable to National Instruments DMMs.
 Included for compliance with the *IviDmm Class Specification*.
 ''',
         'returns': 'ViStatus',
@@ -3546,11 +3546,12 @@ A 1–based **index** into the channel table.
 Passes the number of bytes in the ViChar array you specify for the
 **Channel\_String** parameter. If the next **Channel\_String**,
 including the terminating NULL byte, contains more bytes than you
-indicate in this parameter, the function copies **bufferSize** –1 bytes
-into the buffer, places an ASCII NULL byte at the end of the buffer, and
-returns the buffer size you must pass to get the entire value.
+indicate in this parameter, the function copies
+**buffer\_size** –1 bytes into the buffer, places an ASCII NULL byte at
+the end of the buffer, and returns the buffer size you must pass to get
+the entire value.
 
-For example, if the value is "123456" and the **bufferSize** is 4, the
+For example, if the value is "123456" and the **buffer\_size** is 4, the
 function places "123" into the buffer and returns 7. If you pass a
 negative number, the function copies the value to the buffer regardless
 of the number of bytes in the value. If you pass 0, you can pass
@@ -3565,9 +3566,9 @@ is None.
                 'direction': 'out',
                 'is_buffer': True,
                 'long_description': '''
-Returns the **channelString** that is in the channel table at the
+Returns the **channel\_string** that is in the channel table at the
 **Index** you specify. Do not modify the contents of the
-**channelString**.
+**channel\_string**.
 ''',
                 'name': 'channelString',
                 'type': 'ViChar',
@@ -3580,7 +3581,7 @@ Returns the **channelString** that is in the channel table at the
 .. note::   The NI 4050 and NI 4060 are not supported.
 ''',
         'purpose': '''
-Returns the current **Temperature** of the device.
+Returns the current **temperature** of the device.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -3622,9 +3623,9 @@ Returns the current **temperature** of the device.
     'GetError': {
         'purpose': '''
 Returns the error information associated with the
-**Instrument\_Handle**. This function retrieves and then clears the
+**vi**. This function retrieves and then clears the
 error information for the session. If you leave the
-**Instrument\_Handle** unwired, this function retrieves and then clears
+**vi** unwired, this function retrieves and then clears
 the error information for the process.
 ''',
         'returns': 'ViStatus',
@@ -3647,7 +3648,7 @@ The default is None.
             {
                 'direction': 'out',
                 'long_description': '''
-Returns the **errorCode** for the session or execution thread. If you
+Returns the **error\_code** for the session or execution thread. If you
 pass 0 for the **Buffer\_Size**, you can pass VI\_NULL for this
 parameter.
 ''',
@@ -3661,11 +3662,11 @@ parameter.
 Passes the number of bytes in the ViChar array you specify for the
 **Description** parameter. If the error description, including the
 terminating NULL byte, contains more bytes than you indicate in this
-parameter, the function copies **bufferSize** –1 bytes into the buffer,
-places an ASCII NULL byte at the end of the buffer, and returns the
-**bufferSize** you must pass to get the entire value.
+parameter, the function copies **buffer\_size** –1 bytes into the
+buffer, places an ASCII NULL byte at the end of the buffer, and returns
+the **buffer\_size** you must pass to get the entire value.
 
-For example, if the value is "123456" and the **bufferSize** is 4, the
+For example, if the value is "123456" and the **buffer\_size** is 4, the
 function places "123" into the buffer and returns 7. If you pass a
 negative number, the function copies the value to the buffer regardless
 of the number of bytes in the value. If you pass 0, you can pass
@@ -3697,9 +3698,9 @@ you specify with the **Buffer\_Size** parameter. If you pass 0 for the
 Purpose
 -------
 
-Returns the **Error\_Message** as a user-readable string for the
-provided **Error\_Code**. Calling this function with a **Buffer\_Size**
-of 0 returns the size needed for the **Error\_Message**.
+Returns the **error_message** as a user-readable string for the
+provided **error_code**. Calling this function with a **Buffer\_Size**
+of 0 returns the size needed for the **error_message**.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -3763,7 +3764,7 @@ specify with the **Buffer\_Size** parameter. If you pass 0 for
 ''',
         'purpose': '''
 Returns the recommended interval between external recalibration in
-**Months**.
+**months**.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -3799,7 +3800,7 @@ calibrations.
 .. note::   The NI 4050 and NI 4060 are not supported.
 ''',
         'purpose': '''
-Returns the **Temperature** during the last calibration procedure.
+Returns the **temperature** during the last calibration procedure.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -3847,7 +3848,7 @@ Returns the **temperature** during the last calibration.
     },
     'GetMeasurementPeriod': {
         'purpose': '''
-Returns the measurement **Period**, which is the amount of time it takes
+Returns the measurement **period**, which is the amount of time it takes
 to complete one measurement with the current configuration. Use this
 function right before you begin acquiring data—after you have completely
 configured the measurement and after all configuration functions have
@@ -3926,11 +3927,12 @@ The default is None.
 Passes the number of bytes in the ViChar array you specify for the
 **Coercion\_Record** parameter. If the next coercion record string,
 including the terminating NULL byte, contains more bytes than you
-indicate in this parameter, the function copies **bufferSize** – 1 bytes
-into the buffer, places an ASCII NULL byte at the end of the buffer, and
-returns the buffer size you must pass to get the entire value.
+indicate in this parameter, the function copies **buffer\_size** – 1
+bytes into the buffer, places an ASCII NULL byte at the end of the
+buffer, and returns the buffer size you must pass to get the entire
+value.
 
-For example, if the value is "123456" and the **bufferSize** is 4, the
+For example, if the value is "123456" and the **buffer\_size** is 4, the
 function places "123" into the buffer and returns 7. If you pass a
 negative number, the function copies the value to the buffer regardless
 of the number of bytes in the value.
@@ -3948,7 +3950,7 @@ The default value is None.
                 'direction': 'out',
                 'is_buffer': True,
                 'long_description': '''
-Returns the next **coercionRecord** for the IVI session.
+Returns the next **coercion\_record** for the IVI session.
 
 If there are no coercions records, the function returns an empty string.
 The buffer must contain at least as many elements as the value you
@@ -3965,7 +3967,7 @@ specify with the **Buffer\_Size** parameter.
 The driver performs interchangeability checking when `
 NIDMM\_ATTR\_INTERCHANGE\_CHECK <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_INTERCHANGE_CHECK.html')>`__
 is set to VI\_TRUE (1). The function returns an empty string in the
-**Interchange\_Warning** parameter if no interchangeability warnings
+**interchange_warning** parameter if no interchangeability warnings
 remain for the session. In general, the instrument driver generates
 interchangeability warnings when an attribute that affects the behavior
 of the instrument is in a state that you did not specify.
@@ -4001,11 +4003,11 @@ Passes the number of bytes in the ViChar array you specify for the
 **Interchange\_Warning** parameter. If the next interchangeability
 warning string, including the terminating NULL byte, contains more bytes
 than you indicate in this parameter, the function copies
-**bufferSize** –1 bytes into the buffer, places an ASCII NULL byte at
+**buffer\_size** –1 bytes into the buffer, places an ASCII NULL byte at
 the end of the buffer, and returns the buffer size you must pass to get
 the entire value.
 
-For example, if the value is "123456" and the **bufferSize** is 4, the
+For example, if the value is "123456" and the **buffer\_size** is 4, the
 function places "123" into the buffer and returns 7. If you pass a
 negative number, the function copies the value to the buffer regardless
 of the number of bytes in the value. If you pass 0, you can pass
@@ -4073,7 +4075,7 @@ given session.
     'InitExtCal': {
         'long_description': '''
 -  Creates a new session for external calibration to the device you
-   specify for the **Resource\_Name** parameter.
+   specify for the **resource_name** parameter.
 -  Resets the device and prepares the EEPROM for new calibration
    coefficients.
 -  Returns a ViSession handle that you use to identify the instrument in
@@ -4102,7 +4104,7 @@ to return the device to a usable state.
 .. |image0| image:: note.gif
 ''',
         'purpose': '''
-The following operations are performed if the **Calibration\_Password**
+The following operations are performed if the **calibration_password**
 is valid:
 ''',
         'returns': 'ViStatus',
@@ -4111,8 +4113,8 @@ is valid:
             {
                 'direction': 'in',
                 'long_description': '''
-| Contains the **resourceName** of the device to initialize. The
-  **resourceName** is assigned in Measurement & Automation Explorer
+| Contains the **resource\_name** of the device to initialize. The
+  **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
   Documentation <javascript:LaunchHelp('dmm.chm::/related_documentation.html')>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
@@ -4124,7 +4126,7 @@ is valid:
 -  DAQ::Traditional NI-DAQ device number[::INSTR]
 -  IVI logical name
 
-.. caution::   All IVI names for the **resourceName**, such as logical
+.. caution::   All IVI names for the **resource\_name**, such as logical
 names or virtual names, are case-sensitive. If you use logical names,
 driver session names, or virtual names in your program, you must make
 sure that the name you use matches the name in the IVI Configuration
@@ -4167,18 +4169,18 @@ identifies a particular instrument calibration session.
    initial state of the following session attributes: `
    RangeCheck <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RANGE_CHECK.html')>`__,
    `
-   QueryInstrStatus <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_QUERY_INSTR_STATUS.html')>`__,
+   QueryInstrstatus <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_QUERY_INSTR_STATUS.html')>`__,
    `
    Cache <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_CACHE.html')>`__,
    `
    Simulate <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_SIMULATE.html')>`__,
    `
    Recordcoercions <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RECORD_COERCIONS.html')>`__.
--  Opens a session to the device you specify for the **Resource\_Name**
+-  Opens a session to the device you specify for the **resource_name**
    parameter. If the **ID\_Query** parameter is set to VI\_TRUE, this
    function queries the instrument ID and checks that it is valid for
    this instrument driver.
--  If the **Reset\_Device** parameter is set to VI\_TRUE, this function
+-  If the **reset_device** parameter is set to VI\_TRUE, this function
    resets the instrument to a known state. Sends initialization commands
    to set the instrument to the state necessary for the operation of the
    instrument driver.
@@ -4194,8 +4196,8 @@ This function completes the following tasks:
             {
                 'direction': 'in',
                 'long_description': '''
-| Contains the **resourceName** of the device to initialize. The
-  **resourceName** is assigned in Measurement & Automation Explorer
+| Contains the **resource\_name** of the device to initialize. The
+  **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
   Documentation <javascript:LaunchHelp('dmm.chm::/related_documentation.html')>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
@@ -4207,7 +4209,7 @@ This function completes the following tasks:
 -  DAQ::Traditional NI-DAQ device number[::INSTR]
 -  IVI logical name
 
-.. caution::   All IVI names for the **resourceName**, such as logical
+.. caution::   All IVI names for the **resource\_name**, such as logical
 names or virtual names, are case-sensitive. If you use logical names,
 driver session names, or virtual names in your program, you must make
 sure that the name you use matches the name in the IVI Configuration
@@ -4277,9 +4279,9 @@ attributes, separate their assignments with a comma.
 
 If you pass NULL or an empty string for this parameter, the session uses
 the default values for the attributes. You can override the default
-values by assigning a value explicitly in an **optionString** parameter.
-You do not have to specify all of the attributes and may leave any of
-them out (those left out use the default value).
+values by assigning a value explicitly in an **option\_string**
+parameter. You do not have to specify all of the attributes and may
+leave any of them out (those left out use the default value).
 
 Refer to `Simulating NI Digital
 Multimeters <javascript:LaunchHelp('dmm.chm::/simulation.html')>`__ for
@@ -4337,7 +4339,7 @@ The default is None.
     },
     'IsOverRange': {
         'purpose': '''
-Takes a **Measurement\_Value** and determines if the value is a valid
+Takes a **measurement_value** and determines if the value is a valid
 measurement or a value indicating that an overrange condition occurred.
 ''',
         'returns': 'ViStatus',
@@ -4361,9 +4363,9 @@ The default is None.
                 'direction': 'in',
                 'long_description': '''
 The measured value returned from the DMM.
-+------------+----------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**   If an overrange condition occurs, the **measurementValue** contains an IEEE-defined NaN (Not a Number) value.   |
-+------------+----------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------------------+
+| |image0|   | **Note**   If an overrange condition occurs, the **measurement\_value** contains an IEEE-defined NaN (Not a Number) value.   |
++------------+------------------------------------------------------------------------------------------------------------------------------+
 
 .. |image0| image:: note.gif
 ''',
@@ -4390,7 +4392,7 @@ overrange condition.
     },
     'IsUnderRange': {
         'purpose': '''
-Takes a **Measurement\_Value** and determines if the value is a valid
+Takes a **measurement_value** and determines if the value is a valid
 measurement or a value indicating that an underrange condition occurred.
 ''',
         'returns': 'ViStatus',
@@ -4414,9 +4416,9 @@ The default is None.
                 'direction': 'in',
                 'long_description': '''
 The measured value returned from the DMM.
-+------------+----------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**   If an overrange condition occurs, the **measurementValue** contains an IEEE-defined NaN (Not a Number) value.   |
-+------------+----------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------------------+
+| |image0|   | **Note**   If an overrange condition occurs, the **measurement\_value** contains an IEEE-defined NaN (Not a Number) value.   |
++------------+------------------------------------------------------------------------------------------------------------------------------+
 
 .. |image0| image:: note.gif
 ''',
@@ -4464,7 +4466,7 @@ thread.
 To completely unlock the session, you must balance each call to this
 function with a call to `
 niDMM\_UnlockSession <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_UnlockSession.html')>`__.
-If, however, you use the **Caller\_Has\_Lock** parameter in all calls to
+If, however, you use the **caller_has_lock** parameter in all calls to
 this function and `
 niDMM\_UnlockSession <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_UnlockSession.html')>`__
 within a function, the IVI Library locks the session only once within
@@ -4588,7 +4590,7 @@ Purpose
 
 For the NI 4082 and NI 4072 only, performs the open cable compensation
 measurements for the current capacitance/inductance range, and returns
-open cable compensation **Conductance** and **Susceptance** values. You
+open cable compensation **conductance** and **susceptance** values. You
 can use the return values of this function as inputs to `
 niDMM\_ConfigureOpenCableCompValues <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_ConfigureOpenCableCompValues.html')>`__.
 
@@ -4643,7 +4645,7 @@ Purpose
 
 Performs the short cable compensation measurements for the current
 capacitance/inductance range, and returns short cable compensation
-**Resistance** and **Reactance** values. You can use the return values
+**resistance** and **reactance** values. You can use the return values
 of this function as inputs to `
 niDMM\_ConfigureShortCableCompValues <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_ConfigureShortCableCompValues.html')>`__.
 
@@ -4715,7 +4717,7 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **maximumTime** allowed for this function to complete in
+Specifies the **maximum\_time** allowed for this function to complete in
 milliseconds. If the function does not complete within this time
 interval, the function returns the NIDMM\_ERROR\_MAX\_TIME\_EXCEEDED
 error code. This may happen if an external trigger has not been
@@ -4768,7 +4770,7 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **maximumTime** allowed for this function to complete in
+Specifies the **maximum\_time** allowed for this function to complete in
 milliseconds. If the function does not complete within this time
 interval, the function returns the NIDMM\_ERROR\_MAX\_TIME\_EXCEEDED
 error code. This may happen if an external trigger has not been
@@ -4804,9 +4806,9 @@ positive ViInt32. The default value is 1.
                 'is_buffer': True,
                 'long_description': '''
 An array of measurement values.
-+------------+-----------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**   The size of the **readingArray** must be at least the size that you specify for the **Array\_Size** parameter.   |
-+------------+-----------------------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------------------------+
+| |image0|   | **Note**   The size of the **reading\_array** must be at least the size that you specify for the **Array\_Size** parameter.   |
++------------+-------------------------------------------------------------------------------------------------------------------------------+
 
 .. |image0| image:: note.gif
 ''',
@@ -4897,7 +4899,7 @@ acquisition states:
         'purpose': '''
 For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
 and returns data as an array of values or as a waveform data type. The
-number of elements in the **Waveform\_Array** is determined by the
+number of elements in the **waveform_array** is determined by the
 values you specify for the **Waveform\_Points** parameter in `
 niDMM\_ConfigureWaveformAcquisition <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_ConfigureWaveformAcquisition.html')>`__.
 ''',
@@ -4921,7 +4923,7 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the **maximumTime** allowed for this function to complete in
+Specifies the **maximum\_time** allowed for this function to complete in
 milliseconds. If the function does not complete within this time
 interval, the function returns the NIDMM\_ERROR\_MAX\_TIME\_EXCEEDED
 error code. This may happen if an external trigger has not been
@@ -4954,9 +4956,9 @@ The default value is 1.
                 'is_buffer': True,
                 'long_description': '''
 An array of measurement values.
-+------------+------------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Note**   The size of the **waveformArray** must be at least the size that you specify for the **Array\_Size** parameter.   |
-+------------+------------------------------------------------------------------------------------------------------------------------------+
++------------+--------------------------------------------------------------------------------------------------------------------------------+
+| |image0|   | **Note**   The size of the **waveform\_array** must be at least the size that you specify for the **Array\_Size** parameter.   |
++------------+--------------------------------------------------------------------------------------------------------------------------------+
 
 .. |image0| image:: note.gif
 ''',
@@ -5594,7 +5596,7 @@ excluding the termination character.
                 'direction': 'in',
                 'is_buffer': True,
                 'long_description': '''
-Specifies the **newPassword** required to enable external calibration
+Specifies the **new\_password** required to enable external calibration
 functionality. The maximum password string length is eight characters,
 excluding the termination character.
 ''',
@@ -5610,8 +5612,8 @@ Purpose
 -------
 
 Stores the user-defined information in the EEPROM. Use `
-niDMM\_GetCalUserDefinedInfoMaxSize <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_GetCalUserDefinedInfoMaxSize.html')>`__
-to learn the maximum string size that is allowed. If the **Info** string
+niDMM\_GetCalUserDefinedinfoMaxSize <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_GetCalUserDefinedinfoMaxSize.html')>`__
+to learn the maximum string size that is allowed. If the **info** string
 size is larger than the maximum string size, NI-DMM stores as much of
 the information as possible, truncates the remainder, and returns a
 warning.
@@ -5799,7 +5801,7 @@ The default is None.
     },
     'error_message': {
         'purpose': '''
-Takes the **Error\_Code** returned by the instrument driver functions,
+Takes the **error_code** returned by the instrument driver functions,
 interprets it, and returns it as a user-readable string.
 ''',
         'returns': 'ViStatus',
@@ -5822,7 +5824,7 @@ The default is None.
             {
                 'direction': 'in',
                 'long_description': '''
-The **errorCode** returned from the instrument. The default is 0,
+The **error\_code** returned from the instrument. The default is 0,
 indicating VI\_SUCCESS.
 ''',
                 'name': 'errorCode',
@@ -5843,7 +5845,7 @@ The error information formatted into a string.
     },
     'error_query': {
         'purpose': '''
-Reads an **Error\_Code** and message from the DMM error queue. National
+Reads an **error_code** and message from the DMM error queue. National
 Instruments DMMs do not contain an error queue. Errors are reported as
 they occur. Therefore, this function does not detect errors; it is
 included for compliance with the *IviDmm Class Specification*.
@@ -5868,7 +5870,7 @@ The default is None.
             {
                 'direction': 'out',
                 'long_description': '''
-The **errorCode** returned from the instrument.
+The **error\_code** returned from the instrument.
 
 The default value is VI\_SUCCESS (0).
 ''',
@@ -5896,14 +5898,14 @@ Formats the **Error\_Code** into a user-readable message string.
     'init': {
         'long_description': '''
 -  Creates a new IVI instrument driver session.
--  Opens a session to the device you specify for the **Resource\_Name**
+-  Opens a session to the device you specify for the **resource_name**
    parameter.
 
 -  If the **ID\_Query** parameter is set to VI\_TRUE (1), this function
    queries the instrument ID and checks that it is valid for this
    instrument driver.
 
--  If the **Reset\_Device** parameter is set to VI\_TRUE (1), this
+-  If the **reset_device** parameter is set to VI\_TRUE (1), this
    function resets the instrument to a known state. Sends initialization
    commands to set the instrument to the state necessary for the
    operation of the instrument driver.
@@ -5920,8 +5922,8 @@ This function completes the following tasks:
             {
                 'direction': 'in',
                 'long_description': '''
-| Contains the **resourceName** of the device to initialize. The
-  **resourceName** is assigned in Measurement & Automation Explorer
+| Contains the **resource\_name** of the device to initialize. The
+  **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
   Documentation <javascript:LaunchHelp('dmm.chm::/related_documentation.html')>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
@@ -5933,7 +5935,7 @@ This function completes the following tasks:
 -  DAQ::Traditional NI-DAQ device number[::INSTR]
 -  IVI logical name
 
-.. caution::   All IVI names for the **resourceName**, such as logical
+.. caution::   All IVI names for the **resource\_name**, such as logical
 names or virtual names, are case-sensitive. If you use logical names,
 driver session names, or virtual names in your program, you must make
 sure that the name you use matches the name in the IVI Configuration
@@ -6056,7 +6058,8 @@ numbers.
                 'direction': 'out',
                 'is_buffer': True,
                 'long_description': '''
-Returns a string containing the instrument **firmwareRevision** numbers.
+Returns a string containing the instrument **firmware\_revision**
+numbers.
 +------------+------------------------------------------------------------------------+
 | |image0|   | **Note**   The array must contain at least 256 elements ViChar[256].   |
 +------------+------------------------------------------------------------------------+
