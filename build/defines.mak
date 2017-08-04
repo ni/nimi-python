@@ -61,5 +61,6 @@ DEFAULT_RST_FILES_TO_GENERATE := \
                      session.rst \
                      enums.rst \
                      attributes.rst \
+                     functions.rst \
 
 
