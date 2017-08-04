@@ -213,6 +213,8 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
     enum_input_parameters = helper.extract_enum_parameters(input_parameters)
 %>
     def ${f['python_name']}(${helper.get_method_parameters_snippet(input_parameters)}):
+        '''${helper.get_function_rst(func_name, f, indent=8)}
+        '''
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor

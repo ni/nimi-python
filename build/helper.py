@@ -38,15 +38,15 @@ def extract_codegen_functions(functions):
     return funcs
 
 def extract_input_parameters(parameters, sessionName = 'vi'):
-    '''Returns list of parameters only with input parameters'''
+    '''Returns list of parameter dicts only with input parameters'''
     return [x for x in parameters if x['direction'] == 'in' and x['name'] != sessionName]
 
 def extract_output_parameters(parameters):
-    '''Returns list of parameters only with output parameters'''
+    '''Returns list of parameter dicts only with output parameters'''
     return [x for x in parameters if x['direction'] == 'out']
 
 def extract_enum_parameters(parameters):
-    '''Returns a dictionary with information about the output parameters of a session method'''
+    '''Returns a list of parameter dicts that have an associated enum'''
     return [x for x in parameters if x['enum'] is not None]
 
 # Functions to add information to metadata structures that are specific to our codegen needs.
@@ -135,10 +135,16 @@ def get_method_parameters_snippet(parameters):
         snippets.append(x['python_name'])
     return ', '.join(snippets)
 
-def get_function_parameters_snippet(parameters):
-    '''Returns a string suitable for the parameter list of a method given a list of parameter objects'''
+def get_function_parameters_snippet(parameters, sessionName=None):
+    '''
+    Returns a string suitable for the parameter list of a method given a list of parameter objects
+
+    If sessionName set, skip that parameter
+    '''
     snippets = []
     for x in parameters:
+        if sessionName is not None and x['python_name'] == sessionName:
+            continue
         snippets.append(x['python_name'])
     return ', '.join(snippets)
 
@@ -222,9 +228,20 @@ def sorted_attrs(a):
 
 def get_indented_docstring_snippet(d, indent=4):
     '''
-    Returns a docstring with the correct amount of indentation. Can't use similar construct as
-    get_dictionary_snippet ('\n' + (' ' * indent)).join(d_lines) because empty lines would get
+    Returns a docstring with the correct amount of indentation. 
+
+    First line is not indented.
+
+    Can't use similar construct as get_dictionary_snippet 
+    ('\n' + (' ' * indent)).join(d_lines) because empty lines would get
     the spaces, which violates pep8 and causes the flake8 step to fail
+
+    Args:
+        docstring (str): multiline string to format
+        indent (int): How much to indent lines 2+
+
+    Returns:
+        str: formatted string
     '''
     d_lines = d.strip().splitlines()
     ret_val = ''
@@ -240,3 +257,39 @@ def get_rst_header_snippet(t, header_level='='):
     ret_val = t + '\n'
     ret_val += header_level * len(t)
     return ret_val
+
+def get_function_rst(fname, function, indent=0):
+    rst = '.. function:: ' + function['python_name'] + '('
+    rst += get_function_parameters_snippet(function['parameters'], sessionName='vi') + ')'
+    indent += 4
+    if 'purpose' in function:
+        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(function['purpose'], indent)
+    if 'long_description' in function:
+        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(function['long_description'], indent)
+
+    input_params = extract_input_parameters(function['parameters'])
+    if len(input_params) > 0:
+        rst += '\n'
+    for p in input_params:
+        rst +=  '\n' + (' ' * indent) + ':param {0}: '.format(p['python_name'])
+        if 'long_description' in p:
+            rst += get_indented_docstring_snippet(p['long_description'], indent + 4)
+        rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p['python_type']
+
+
+    output_params = extract_output_parameters(function['parameters'])
+    if len(output_params) > 1:
+        rst += '\n\n' + (' ' * indent) + ':rtype: tuple ('+ ', '.join([p['python_name'] for p in output_params]) + ')\n'
+        rst += (' ' * (indent + 4)) + 'WHERE'
+        for p in output_params:
+            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
+            if 'long_description' in p:
+                rst += get_indented_docstring_snippet(p['long_description'], indent + 8)
+    elif len(output_params) == 1:
+        p = output_params[0]
+        rst += '\n\n' + (' ' * indent) + ':rtype: '+ p['python_type']
+
+    return rst
+
+
+
