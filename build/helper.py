@@ -260,6 +260,25 @@ def get_rst_header_snippet(t, header_level='='):
     ret_val += header_level * len(t)
     return ret_val
 
+def make_snake_case(m):
+    if m.group(1) == 'func':
+        f = camelcase_to_snakecase(m.group(3))
+        return ':py:func:`' + m.group(2) + '.' + f + '`'
+
+def fix_links(rst):
+    link_re = re.compile('\:py\:(data|func)\:\\\\`(.+?)\.(.+?)\\\\`', re.MULTILINE | re.DOTALL)
+#    m = link_re.search(rst)
+#    while m:
+#        if m.group(1) == 'data':
+#            #rst = link_re.sub('\g<3>', rst)
+#            pass
+#        else:
+#            func = camelcase_to_snakecase(m.group(3))
+#            rst = link_re.sub(':py:func:`{0}.{1}`'.format(m.group(2), func), rst)
+#        m = link_re.search(rst)
+    rst = link_re.sub(make_snake_case, rst)
+    return rst
+
 def get_function_rst(fname, function, indent=0):
     '''Gets rst formatted documentation for given function
 
@@ -274,9 +293,9 @@ def get_function_rst(fname, function, indent=0):
     rst += get_function_parameters_snippet(function['parameters'], sessionName='vi') + ')'
     indent += 4
     if 'purpose' in function:
-        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(function['purpose'], indent)
+        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_links(function['purpose']), indent)
     if 'long_description' in function:
-        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(function['long_description'], indent)
+        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_links(function['long_description']), indent)
 
     input_params = extract_input_parameters(function['parameters'])
     if len(input_params) > 0:
@@ -284,7 +303,7 @@ def get_function_rst(fname, function, indent=0):
     for p in input_params:
         rst +=  '\n' + (' ' * indent) + ':param {0}: '.format(p['python_name'])
         if 'long_description' in p:
-            rst += get_indented_docstring_snippet(p['long_description'], indent + 4)
+            rst += get_indented_docstring_snippet(fix_links(p['long_description']), indent + 4)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p['python_type']
 
 
@@ -295,12 +314,24 @@ def get_function_rst(fname, function, indent=0):
         for p in output_params:
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
             if 'long_description' in p:
-                rst += get_indented_docstring_snippet(p['long_description'], indent + 8)
+                rst += get_indented_docstring_snippet(fix_links(p['long_description']), indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
         rst += '\n\n' + (' ' * indent) + ':rtype: '+ p['python_type']
 
     return rst
+
+def remove_links(docstring):
+    link_re = re.compile('\:py\:(data|func)\:\\\\`(.+?)\.(.+?)\\\\`', re.MULTILINE | re.DOTALL)
+    m = link_re.search(docstring)
+    while m:
+        if m.group(1) == 'data':
+            docstring = link_re.sub('\g<3>', docstring)
+        else:
+            func = camelcase_to_snakecase(m.group(3))
+            docstring = link_re.sub(func, docstring)
+        m = link_re.search(docstring)
+    return docstring
 
 def get_function_docstring(fname, function, indent=0):
     '''Gets formatted documentation for given function that can be used as a docstring
@@ -314,9 +345,9 @@ def get_function_docstring(fname, function, indent=0):
     '''
     docstring = ''
     if 'purpose' in function:
-        docstring += get_indented_docstring_snippet(function['purpose'], indent)
+        docstring += get_indented_docstring_snippet(remove_links(function['purpose']), indent)
     elif 'long_description' in function:
-        docstring += get_indented_docstring_snippet(function['long_description'], indent)
+        docstring += get_indented_docstring_snippet(remove_links(function['long_description']), indent)
 
     input_params = extract_input_parameters(function['parameters'])
     if len(input_params) > 0:
@@ -324,7 +355,7 @@ def get_function_docstring(fname, function, indent=0):
     for p in input_params:
         docstring +=  '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
         if 'long_description' in p:
-            docstring += get_indented_docstring_snippet(p['long_description'], indent + 8)
+            docstring += get_indented_docstring_snippet(remove_links(p['long_description']), indent + 8)
 
 
     output_params = extract_output_parameters(function['parameters'])
@@ -333,7 +364,7 @@ def get_function_docstring(fname, function, indent=0):
         for p in output_params:
             docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
             if 'long_description' in p:
-                docstring += get_indented_docstring_snippet(p['long_description'], indent + 8)
+                docstring += get_indented_docstring_snippet(remove_links(p['long_description']), indent + 8)
 
     return docstring
 

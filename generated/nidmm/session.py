@@ -793,35 +793,30 @@ class Session(object):
         Purpose
         -------
 
-        Configures the `
-        NIDMM\_ATTR\_AC\_MIN\_FREQ <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AC_MIN_FREQ.html')>`__
-        and `
-        NIDMM\_ATTR\_AC\_MAX\_FREQ <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_AC_MAX_FREQ.html')>`__
-        attributes, which the DMM uses for AC measurements.
+        Configures the AC\_MIN\_FREQ and
+        AC\_MAX\_FREQ attributes, which the DMM uses for AC
+        measurements.
 
         Args:
             ac_minimum_frequency_hz (ViReal64): Specifies the minimum expected frequency component of the input signal
-                in hertz. This parameter affects the DMM only when you set the `
-                NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_FUNCTION.html')>`__
-                attribute to AC measurements. NI-DMM uses this parameter to calculate
-                the proper aperture for the measurement.
-                The driver sets the `
-                NIDMM\_ATTR\_AC\_MIN\_FREQ <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_AC_MIN_FREQ.html')>`__
-                attribute to this value. The valid range is 1 Hz–300 kHz for the NI
-                4080/4081/4082 and the NI 4070/4071/4072, 10 Hz–100 Hz for the NI 4065,
-                and 20 Hz–25 kHz for the NI 4050 and NI 4060.
+                in hertz. This parameter affects the DMM only when you set the
+                FUNCTION attribute to AC measurements. NI-DMM uses
+                this parameter to calculate the proper aperture for the measurement.
+                The driver sets the AC\_MIN\_FREQ attribute to this
+                value. The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the
+                NI 4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for
+                the NI 4050 and NI 4060.
             ac_maximum_frequency_hz (ViReal64): Specifies the maximum expected frequency component of the input signal
                 in hertz within the device limits. This parameter is used only for error
                 checking and verifies that the value of this parameter is less than the
                 maximum frequency of the device.
 
-                This parameter affects the DMM only when you set the `
-                NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_FUNCTION.html')>`__
-                attribute to AC measurements. The driver sets the `
-                NIDMM\_ATTR\_AC\_MAX\_FREQ <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AC_MAX_FREQ.html')>`__
-                attribute to this value. The valid range is 1 Hz–300 kHz for the NI
-                4080/4081/4082 and the NI 4070/4071/4072, 10 Hz–100 Hz for the NI 4065,
-                and 20 Hz–25 kHz for the NI 4050 and NI 4060.
+                This parameter affects the DMM only when you set the
+                FUNCTION attribute to AC measurements. The driver
+                sets the AC\_MAX\_FREQ attribute to this value. The
+                valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
+                4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
+                NI 4050 and NI 4060.
         '''
         error_code = self.library.niDMM_ConfigureACBandwidth(self.vi, ac_minimum_frequency_hz, ac_maximum_frequency_hz)
         errors._handle_error(self, error_code)
@@ -838,9 +833,8 @@ class Session(object):
         changes to the gain.
 
         Args:
-            adc_calibration (enums.EnabledSetting): Specifies the **ADC\_Calibration** setting. The driver sets `
-                NIDMM\_ATTR\_ADC\_CALIBRATION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_ADC_CALIBRATION.html')>`__
-                to this value.
+            adc_calibration (enums.EnabledSetting): Specifies the **ADC\_Calibration** setting. The driver sets
+                ADC\_CALIBRATION to this value.
                 NIDMM\_VAL\_ADC\_CALIBRATION\_ON enables **ADC\_Calibration**.
                 NIDMM\_VAL\_ADC\_CALIBRATION\_OFF disables **ADC\_Calibration**. If you
                 set the value to NIDMM\_VAL\_ADC\_CALIBRATION\_AUTO, the driver
@@ -877,9 +871,8 @@ class Session(object):
         DMM does not compensate for zero reading offset.
 
         Args:
-            auto_zero_mode (enums.EnabledSetting): Specifies the **auto\_zero\_mode**. NI-DMM sets the `
-                NIDMM\_ATTR\_AUTO\_ZERO <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_ZERO.html')>`__
-                attribute to this value.
+            auto_zero_mode (enums.EnabledSetting): Specifies the **auto\_zero\_mode**. NI-DMM sets the
+                AUTO\_ZERO attribute to this value.
 
                 ON enables **auto\_zero\_mode** for each measurement. ONCE enables
                 **auto\_zero\_mode** before the next measurement. The
@@ -916,9 +909,9 @@ class Session(object):
         Purpose
         -------
 
-        For the NI 4082 and NI 4072 only, sets the `
-        NIDMM\_ATTR\_CABLE\_COMPENSATION\_TYPE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_CABLE_COMP_TYPE.html')>`__
-        attribute for the current capacitance/inductance mode range.
+        For the NI 4082 and NI 4072 only, sets the
+        CABLE\_COMP\_TYPE attribute for the current
+        capacitance/inductance mode range.
 
         Args:
             cable_comp_type (enums.CableCompensationType): Specifies the type of cable compensation that is used for the current
@@ -939,9 +932,7 @@ class Session(object):
         Args:
             current_source (enums.CurrentSource): Specifies the **current\_source** provided during diode measurements.
                 For valid ranges, refer to the device sections for your device. The
-                driver sets `
-                NIDMM\_ATTR\_CURRENT\_SOURCE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_CURRENT_SOURCE.html')>`__
-                to this value.
+                driver sets CURRENT\_SOURCE to this value.
                 +-------------------------------------+----------+-----------------------------------------------------+
                 | NIDMM\_VAL\_1\_MICROAMP             | 1 µA     | NI 4080/4081/4082 and NI 4070/4071/4072             |
                 +-------------------------------------+----------+-----------------------------------------------------+
@@ -983,16 +974,9 @@ class Session(object):
 
         Args:
             voltage_range (ViReal64): Sets the expected maximum amplitude of the input signal. Refer to the
-                `NI 4080 <javascript:LaunchHelp('dmm.chm::/4080_functional_overview.html')>`__,
-                `NI 4081 <javascript:LaunchHelp('dmm.chm::/4081_functional_overview.html')>`__,
-                `NI 4072 <javascript:LaunchHelp('dmm.chm::/4082.html')>`__,
-                `NI 4070 <javascript:LaunchHelp('dmm.chm::/4070_functional_overview.html')>`__,
-                `NI 4071 <javascript:LaunchHelp('dmm.chm::/4071_functional_overview.html')>`__,
-                and `NI 4072 <javascript:LaunchHelp('dmm.chm::/4072.html')>`__ sections
-                for a list of valid values. NI-DMM sets `
-                NIDMM\_ATTR\_FREQ\_VOLTAGE\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_FREQ_VOLTAGE_RANGE.html')>`__
-                to this value. The minimum peak-to-peak signal amplitude that can be
-                detected is 10% of the specified **voltage\_range**.
+                FREQ\_VOLTAGE\_RANGE to this value. The minimum
+                peak-to-peak signal amplitude that can be detected is 10% of the
+                specified **voltage\_range**.
                 +-----------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------+
                 | Name                                    | Value   | Description                                                                                                                        |
                 +=========================================+=========+====================================================================================================================================+
@@ -1016,11 +1000,10 @@ class Session(object):
         Args:
             meas_complete_destination (enums.MeasurementCompleteDest): Specifies the destination of the Measurement Complete signal. This
                 signal is issued when the DMM completes a single measurement. The driver
-                sets the `
-                NIDMM\_ATTR\_MEAS\_COMPLETE\_DEST <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_MEAS_COMPLETE_DEST.html')>`__
-                attribute to this value. This signal is commonly referred to as
-                Voltmeter Complete. .. note::   To determine which values are supported
-                by each device, refer to the `LabWindows/CVI Trigger
+                sets the MEAS\_COMPLETE\_DEST attribute to this
+                value. This signal is commonly referred to as Voltmeter Complete. ..
+                note::   To determine which values are supported by each device, refer
+                to the `LabWindows/CVI Trigger
                 Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
                 section.
         '''
@@ -1038,9 +1021,7 @@ class Session(object):
 
         Args:
             meas_complete_slope (enums.Slope): Specifies the polarity of the signal that is generated. The driver sets
-                `
-                NIDMM\_ATTR\_MEAS\_DEST\_SLOPE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_MEAS_DEST_SLOPE.html')>`__
-                to this value.
+                MEAS\_DEST\_SLOPE to this value.
                 +--------------------------+-----+------------------------+------------------------------------------------------------------+
                 | Rising Edge              | 0   | NIDMM\_VAL\_POSITIVE   | The driver triggers on the rising edge of the trigger signal.    |
                 +--------------------------+-----+------------------------+------------------------------------------------------------------+
@@ -1064,18 +1045,12 @@ class Session(object):
         -------
 
         Configures the common attributes of the measurement. These attributes
-        include `
-        NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_FUNCTION.html')>`__,
-        `
-        NIDMM\_ATTR\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RANGE.html')>`__,
-        and `
-        NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RESOLUTION_ABSOLUTE.html')>`__.
+        include FUNCTION, RANGE, and
+        RESOLUTION\_ABSOLUTE.
 
         Args:
             measurement_function (enums.Function): Specifies the **measurement\_function** used to acquire the measurement.
-                The driver sets `
-                NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_FUNCTION.html')>`__
-                to this value.
+                The driver sets FUNCTION to this value.
             range (ViReal64): Specifies the **range** for the function specified in the
                 **Measurement\_Function** parameter. When frequency is specified in the
                 **Measurement\_Function** parameter, you must supply the minimum
@@ -1084,11 +1059,8 @@ class Session(object):
                 For all other functions, you must supply a **range** that exceeds the
                 value that you are measuring. For example, you must type in 10 V if you
                 are measuring 9 V. **range** values are coerced up to the closest input
-                **range**. Refer to the `Devices
-                Overview <javascript:LaunchHelp('dmm.chm::/devices.html')>`__ for a list
-                of valid ranges. The driver sets `
-                NIDMM\_ATTR\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RANGE.html')>`__
-                to this value. The default is 0.02 V.
+                **range**. Refer to the RANGE to this value. The
+                default is 0.02 V.
                 .. note::   The NI 4050, NI 4060, and NI 4065 only support Auto range
                 when the trigger and sample trigger are set to IMMEDIATE.
                 NIDMM\_VAL\_AUTO\_RANGE\_ON
@@ -1096,26 +1068,23 @@ class Session(object):
                 NI-DMM performs an Auto range before acquiring the measurement.
                 NIDMM\_VAL\_AUTO\_RANGE\_OFF
                 -2.0
-                NI-DMM sets the range to the current `
-                NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__
-                and uses this range
+                NI-DMM sets the range to the current
+                AUTO\_RANGE\_VALUE and uses this range
                 for all subsequent measurements until the measurement configuration is
                 changed.
                 NIDMM\_VAL\_AUTO\_RANGE\_ONCE
                 -3.0
-                NI-DMM performs an Auto range before acquiring the measurement. The `
-                NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__
-                is stored and used for all subsequent measurements until the measurement
-                configuration is changed.
-            resolution_absolute (ViReal64): Specifies the absolute resolution for the measurement. NI-DMM sets `
-                NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RESOLUTION_ABSOLUTE.html')>`__
-                to this value. This parameter is ignored when the **Range** parameter is
-                set to NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or
-                NIDMM\_VAL\_AUTO\_RANGE\_ONCE (-3.0). The default is 0.001 V.
+                NI-DMM performs an Auto range before acquiring the measurement. The
+                AUTO\_RANGE\_VALUE is stored and used for all
+                subsequent measurements until the measurement configuration is changed.
+            resolution_absolute (ViReal64): Specifies the absolute resolution for the measurement. NI-DMM sets
+                RESOLUTION\_ABSOLUTE to this value. This parameter is
+                ignored when the **Range** parameter is set to
+                NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
+                (-3.0). The default is 0.001 V.
                 .. note::   NI-DMM ignores this parameter for capacitance and inductance
                 measurements on the NI 4072. To achieve better resolution for such
-                measurements, use the `
-                NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE.html')>`__
+                measurements, use the LC\_NUMBER\_MEAS\_TO\_AVERAGE
                 attribute.
         '''
         if type(measurement_function) is not enums.Function:
@@ -1135,18 +1104,12 @@ class Session(object):
         -------
 
         Configures the common attributes of the measurement. These attributes
-        include `
-        NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_FUNCTION.html')>`__,
-        `
-        NIDMM\_ATTR\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RANGE.html')>`__,
-        and `
-        NIDMM\_ATTR\_RESOLUTION\_DIGITS <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RESOLUTION_DIGITS.html')>`__.
+        include FUNCTION, RANGE, and
+        RESOLUTION\_DIGITS.
 
         Args:
             measurement_function (enums.Function): Specifies the **measurement\_function** used to acquire the measurement.
-                The driver sets `
-                NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_FUNCTION.html')>`__
-                to this value.
+                The driver sets FUNCTION to this value.
             range (ViReal64): Specifies the range for the function specified in the
                 **Measurement\_Function** parameter. When frequency is specified in the
                 **Measurement\_Function** parameter, you must supply the minimum
@@ -1155,11 +1118,8 @@ class Session(object):
                 For all other functions, you must supply a range that exceeds the value
                 that you are measuring. For example, you must type in 10 V if you are
                 measuring 9 V. range values are coerced up to the closest input range.
-                Refer to the `Devices
-                Overview <javascript:LaunchHelp('dmm.chm::/devices.html')>`__ for a list
-                of valid ranges. The driver sets `
-                NIDMM\_ATTR\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RANGE.html')>`__
-                to this value. The default is 0.02 V.
+                Refer to the RANGE to this value. The default is 0.02
+                V.
                 .. note::   The NI 4050, NI 4060, and NI 4065 only support Auto range
                 when the trigger and sample trigger are set to IMMEDIATE.
                 NIDMM\_VAL\_AUTO\_RANGE\_ON
@@ -1167,29 +1127,23 @@ class Session(object):
                 NI-DMM performs an Auto range before acquiring the measurement.
                 NIDMM\_VAL\_AUTO\_RANGE\_OFF
                 -2.0
-                NI-DMM sets the range to the current `
-                NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__
-                and uses this range
+                NI-DMM sets the range to the current
+                AUTO\_RANGE\_VALUE and uses this range
                 for all subsequent measurements until the measurement configuration is
                 changed.
                 NIDMM\_VAL\_AUTO\_RANGE\_ONCE
                 -3.0
-                NI-DMM performs an Auto range before acquiring the measurement. The `
-                NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__
-                is stored and used for all subsequent measurements until the measurement
-                configuration is changed.
+                NI-DMM performs an Auto range before acquiring the measurement. The
+                AUTO\_RANGE\_VALUE is stored and used for all
+                subsequent measurements until the measurement configuration is changed.
             resolution_digits (ViReal64): Specifies the resolution of the measurement in digits. The driver sets
-                the `Devices
-                Overview <javascript:LaunchHelp('dmm.chm::/devices.html')>`__ for a list
-                of valid ranges. The driver sets `
-                NIDMM\_ATTR\_RESOLUTION\_DIGITS <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RESOLUTION_DIGITS.html')>`__
-                attribute to this value. This parameter is ignored when the **Range**
-                parameter is set to NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or
-                NIDMM\_VAL\_AUTO\_RANGE\_ONCE (-3.0). The default is 5½.
+                the RESOLUTION\_DIGITS attribute to this value. This
+                parameter is ignored when the **Range** parameter is set to
+                NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
+                (-3.0). The default is 5½.
                 .. note::   NI-DMM ignores this parameter for capacitance and inductance
                 measurements on the NI 4072. To achieve better resolution for such
-                measurements, use the `
-                NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE.html')>`__
+                measurements, use the LC\_NUMBER\_MEAS\_TO\_AVERAGE
                 attribute.
         '''
         if type(measurement_function) is not enums.Function:
@@ -1205,20 +1159,13 @@ class Session(object):
         -------
 
         Configures the attributes for multipoint measurements. These attributes
-        include `
-        NIDMM\_ATTR\_TRIGGER\_COUNT <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_TRIGGER_COUNT.html')>`__,
-        `
-        NIDMM\_ATTR\_SAMPLE\_COUNT <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_SAMPLE_COUNT.html')>`__,
-        `
-        NIDMM\_ATTR\_SAMPLE\_TRIGGER <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_SAMPLE_TRIGGER.html')>`__,
-        and `
-        NIDMM\_ATTR\_SAMPLE\_INTERVAL <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_SAMPLE_INTERVAL.html')>`__.
+        include TRIGGER\_COUNT,
+        SAMPLE\_COUNT, SAMPLE\_TRIGGER,
+        and SAMPLE\_INTERVAL.
 
-        For continuous acquisitions, set `
-        NIDMM\_ATTR\_TRIGGER\_COUNT <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_TRIGGER_COUNT.html')>`__
-        or `
-        NIDMM\_ATTR\_SAMPLE\_COUNT <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_SAMPLE_COUNT.html')>`__
-        to zero. For more information, refer to `Multiple Point
+        For continuous acquisitions, set TRIGGER\_COUNT or
+        SAMPLE\_COUNT to zero. For more information, refer to
+        `Multiple Point
         Acquisitions <javascript:LaunchHelp('dmm.chm::/multi_point.html')>`__,
         `Triggering <javascript:LaunchHelp('dmm.chm::/trigger.html')>`__, and
         `Using
@@ -1226,25 +1173,21 @@ class Session(object):
 
         Args:
             trigger_count (ViInt32): Sets the number of triggers you want the DMM to receive before returning
-                to the Idle state. The driver sets `
-                NIDMM\_ATTR\_TRIGGER\_COUNT <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_TRIGGER_COUNT.html')>`__
-                to this value. The default value is 1.
+                to the Idle state. The driver sets TRIGGER\_COUNT to
+                this value. The default value is 1.
             sample_count (ViInt32): Sets the number of measurements the DMM makes in each measurement
-                sequence initiated by a trigger. The driver sets `
-                NIDMM\_ATTR\_SAMPLE\_COUNT <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_SAMPLE_COUNT.html')>`__
-                to this value. The default value is 1.
+                sequence initiated by a trigger. The driver sets
+                SAMPLE\_COUNT to this value. The default value is 1.
             sample_trigger (enums.SampleTrigger): Specifies the **sample\_trigger** source you want to use. The driver
-                sets `
-                NIDMM\_ATTR\_SAMPLE\_TRIGGER <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_SAMPLE_TRIGGER.html')>`__
-                to this value. The default is Immediate.
+                sets SAMPLE\_TRIGGER to this value. The default is
+                Immediate.
                 .. note::   To determine which values are supported by each device,
                 refer to the `LabWindows/CVI Trigger
                 Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
                 section.
             sample_interval (ViReal64): Sets the amount of time in seconds the DMM waits between measurement
-                cycles. The driver sets `
-                NIDMM\_ATTR\_SAMPLE\_INTERVAL <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_SAMPLE_INTERVAL.html')>`__
-                to this value. Specify a sample interval to add settling time between
+                cycles. The driver sets SAMPLE\_INTERVAL to this
+                value. Specify a sample interval to add settling time between
                 measurement cycles or to decrease the measurement rate.
                 **sample\_interval** only applies when the **Sample\_Trigger** is set to
                 INTERVAL.
@@ -1277,9 +1220,8 @@ class Session(object):
         than 10 KΩ.
 
         Args:
-            offset_comp_ohms (enums.EnabledSetting): Enables or disables **offset\_comp\_ohms**. The driver sets `
-                NIDMM\_ATTR\_OFFSET\_COMP\_OHMS <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_OFFSET_COMP_OHMS.html')>`__
-                to this value.
+            offset_comp_ohms (enums.EnabledSetting): Enables or disables **offset\_comp\_ohms**. The driver sets
+                OFFSET\_COMP\_OHMS to this value.
                 +-------------------------------------------------+---------+------------------------------------------+
                 | Name                                            | Value   | Description                              |
                 +=================================================+=========+==========================================+
@@ -1300,11 +1242,9 @@ class Session(object):
         Purpose
         -------
 
-        For the NI 4082 and NI 4072 only, configures the `
-        NIDMM\_ATTR\_OPEN\_CABLE\_COMP\_CONDUCTANCE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_OPEN_CABLE_COMP_CONDUCTANCE.html')>`__
-        and `
-        NIDMM\_ATTR\_OPEN\_CABLE\_COMP\_SUSCEPTANCE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_OPEN_CABLE_COMP_SUSCEPTANCE.html')>`__
-        attributes.
+        For the NI 4082 and NI 4072 only, configures the
+        OPEN\_CABLE\_COMP\_CONDUCTANCE and
+        OPEN\_CABLE\_COMP\_SUSCEPTANCE attributes.
 
         Args:
             conductance (ViReal64): Specifies the open cable compensation **conductance**.
@@ -1334,17 +1274,17 @@ class Session(object):
 
         Args:
             rtd_a (ViReal64): Specifies the Callendar-Van Dusen A coefficient for RTD scaling when RTD
-                Type parameter is set to Custom in the `
-                niDMM\_ConfigureRTDType <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_ConfigureRTDType.html')>`__
-                function. The default is 3.9083e-3 (Pt3851)
+                Type parameter is set to Custom in the
+                configure_rtd_type function. The default is 3.9083e-3
+                (Pt3851)
             rtd_b (ViReal64): Specifies the Callendar-Van Dusen B coefficient for RTD scaling when RTD
-                Type parameter is set to Custom in the `
-                niDMM\_ConfigureRTDType <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_ConfigureRTDType.html')>`__
-                function. The default is -5.775e-7 (Pt3851).
+                Type parameter is set to Custom in the
+                configure_rtd_type function. The default is -5.775e-7
+                (Pt3851).
             rtd_c (ViReal64): Specifies the Callendar-Van Dusen C coefficient for RTD scaling when RTD
-                Type parameter is set to Custom in the `
-                niDMM\_ConfigureRTDType <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_ConfigureRTDType.html')>`__
-                function. The default is -4.183e-12 (Pt3851).
+                Type parameter is set to Custom in the
+                configure_rtd_type function. The default is -4.183e-12
+                (Pt3851).
         '''
         error_code = self.library.niDMM_ConfigureRTDCustom(self.vi, rtd_a, rtd_b, rtd_c)
         errors._handle_error(self, error_code)
@@ -1445,9 +1385,8 @@ class Session(object):
         Args:
             sample_trigger_slope (enums.Slope): Specifies the polarity of the Trigger signal on which the measurement is
                 triggered for values of either NIDMM\_VAL\_POSITIVE or
-                NIDMM\_VAL\_NEGATIVE. The driver sets `
-                NIDMM\_ATTR\_SAMPLE\_TRIGGER\_SLOPE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_SAMPLE_TRIGGER_SLOPE.html')>`__
-                to this value.
+                NIDMM\_VAL\_NEGATIVE. The driver sets
+                SAMPLE\_TRIGGER\_SLOPE to this value.
                 +--------------------------+-----+------------------------+------------------------------------------------------------------+
                 | Rising Edge              | 0   | NIDMM\_VAL\_POSITIVE   | The driver triggers on the rising edge of the trigger signal.    |
                 +--------------------------+-----+------------------------+------------------------------------------------------------------+
@@ -1487,17 +1426,17 @@ class Session(object):
 
         Args:
             thermistor_a (ViReal64): Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the `
-                niDMM\_ConfigureThermistorType <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_ConfigureThermistorType.html')>`__
-                function. The default is 1.0295e-3 (44006).
+                Thermistor Type is set to Custom in the
+                configure_thermistor_type function. The default is
+                1.0295e-3 (44006).
             thermistor_b (ViReal64): Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the `
-                niDMM\_ConfigureThermistorType <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_ConfigureThermistorType.html')>`__
-                function. The default is 2.391e-4 (44006).
+                Thermistor Type is set to Custom in the
+                configure_thermistor_type function. The default is
+                2.391e-4 (44006).
             thermistor_c (ViReal64): Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the `
-                niDMM\_ConfigureThermistorType <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_ConfigureThermistorType.html')>`__
-                function. The default is 1.568e-7 (44006).
+                Thermistor Type is set to Custom in the
+                configure_thermistor_type function. The default is
+                1.568e-7 (44006).
         '''
         error_code = self.library.niDMM_ConfigureThermistorCustom(self.vi, thermistor_a, thermistor_b, thermistor_c)
         errors._handle_error(self, error_code)
@@ -1611,10 +1550,8 @@ class Session(object):
 
         Args:
             trigger_source (enums.TriggerSource): Specifies the **trigger\_source** that initiates the acquisition. The
-                driver sets `
-                NIDMM\_ATTR\_TRIGGER\_SOURCE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_TRIGGER_SOURCE.html')>`__
-                to this value. Software configures the DMM to wait until `
-                niDMM\_SendSoftwareTrigger <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_SendSoftwareTrigger.html')>`__
+                driver sets TRIGGER\_SOURCE to this value. Software
+                configures the DMM to wait until SendSoftwareTrigger
                 is called before triggering the DMM.
                 .. note::   To determine which values are supported by each device,
                 refer to the `LabWindows/CVI Trigger
@@ -1649,9 +1586,8 @@ class Session(object):
         Args:
             trigger_slope (enums.Slope): Specifies the polarity of the trigger signal on which the measurement is
                 triggered for values of either NIDMM\_VAL\_POSITIVE or
-                NIDMM\_VAL\_NEGATIVE. The driver sets the `
-                NIDMM\_ATTR\_TRIGGER\_SLOPE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_TRIGGER_SLOPE.html')>`__
-                attribute to this value.
+                NIDMM\_VAL\_NEGATIVE. The driver sets the
+                TRIGGER\_SLOPE attribute to this value.
                 +----------------------------------+-----+------------------------------------------------------------------+
                 | NIDMM\_VAL\_POSITIVE             | 0   | The driver triggers on the rising edge of the trigger signal.    |
                 +----------------------------------+-----+------------------------------------------------------------------+
@@ -1672,35 +1608,29 @@ class Session(object):
 
         Args:
             measurement_function (enums.Function): Specifies the **measurement\_function** used in a waveform acquisition.
-                The driver sets `
-                NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_FUNCTION.html')>`__
-                to this value.
+                The driver sets FUNCTION to this value.
                 +-------------------------------------------+--------+--------------------+
                 | NIDMM\_VAL\_WAVEFORM\_VOLTAGE (default)   | 1003   | Voltage Waveform   |
                 +-------------------------------------------+--------+--------------------+
                 | NIDMM\_VAL\_WAVEFORM\_CURRENT             | 1004   | Current Waveform   |
                 +-------------------------------------------+--------+--------------------+
             range (ViReal64): Specifies the expected maximum amplitude of the input signal and sets
-                the **range** for the **Measurement\_Function**. NI-DMM sets `
-                NIDMM\_ATTR\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_RANGE.html')>`__
-                to this value. **range** values are coerced up to the closest input
-                **range**. The default is 10.0.
+                the **range** for the **Measurement\_Function**. NI-DMM sets
+                RANGE to this value. **range** values are coerced up
+                to the closest input **range**. The default is 10.0.
 
                 For valid ranges refer to the topics in
                 `Devices <javascript:LaunchHelp('dmm.chm::/Devices.html')>`__.
 
                 Auto-ranging is not supported during waveform acquisitions.
             rate (ViReal64): Specifies the **rate** of the acquisition in samples per second. NI-DMM
-                sets `
-                NIDMM\_ATTR\_WAVEFORM\_RATE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_WAVEFORM_RATE.html')>`__
-                to this value.
+                sets WAVEFORM\_RATE to this value.
 
                 The valid **Range** is 10.0–1,800,000 S/s. **rate** values are coerced
                 to the closest integer divisor of 1,800,000. The default value is
                 1,800,000.
             waveform_points (ViInt32): Specifies the number of points to acquire before the waveform
-                acquisition completes. NI-DMM sets `
-                NIDMM\_ATTR\_WAVEFORM\_POINTS <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_WAVEFORM_POINTS.html')>`__
+                acquisition completes. NI-DMM sets WAVEFORM\_POINTS
                 to this value.
 
                 To calculate the maximum and minimum number of waveform points that you
@@ -1723,9 +1653,8 @@ class Session(object):
         instrument coupling for voltage waveforms.
 
         Args:
-            waveform_coupling (enums.WaveformCouplingMode): Selects DC or AC coupling. The driver sets `
-                NIDMM\_ATTR\_WAVEFORM\_COUPLING <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_WAVEFORM_COUPLING.html')>`__
-                to this value.
+            waveform_coupling (enums.WaveformCouplingMode): Selects DC or AC coupling. The driver sets
+                WAVEFORM\_COUPLING to this value.
                 +------------------------------------------------+---------+---------------+
                 | Name                                           | Value   | Description   |
                 +================================================+=========+===============+
@@ -1758,9 +1687,7 @@ class Session(object):
         -------
 
         Returns the value from a previously initiated measurement. You must call
-        `
-        niDMM\_Initiate <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_Initiate.html')>`__
-        before calling this function.
+        initiate before calling this function.
 
         Args:
             maximum_time (ViInt32): Specifies the **maximum\_time** allowed for this function to complete in
@@ -1791,11 +1718,9 @@ class Session(object):
         Returns an array of values from a previously initiated multipoint
         measurement. The number of measurements the DMM makes is determined by
         the values you specify for the **Trigger\_Count** and **Sample\_Count**
-        parameters of `
-        niDMM\_ConfigureMultiPoint <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_ConfigureMultiPoint.html')>`__.
-        You must first call `
-        niDMM\_Initiate <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_Initiate.html')>`__
-        to initiate a measurement before calling this function.
+        parameters of configure_multi_point. You must first
+        call configure_multi_point to initiate a measurement before
+        calling this function.
 
         Args:
             maximum_time (ViInt32): Specifies the **maximum\_time** allowed for this function to complete in
@@ -1810,8 +1735,7 @@ class Session(object):
                 automatically.
             array_size (ViInt32): Specifies the number of measurements to acquire. The maximum number of
                 measurements for a finite acquisition is the (**Trigger Count** x
-                **Sample Count**) parameters in `
-                niDMM\_ConfigureMultiPoint <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_ConfigureMultiPoint.html')>`__.
+                **Sample Count**) parameters in configure_multi_point.
 
                 For continuous acquisitions, up to 100,000 points can be returned at
                 once. The number of measurements can be a subset. The valid range is any
@@ -1877,29 +1801,20 @@ class Session(object):
 
         Args:
             measurement_function (ViInt32): Specifies the **measurement\_function** used to acquire the measurement.
-                The driver sets `
-                NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_FUNCTION.html')>`__
-                to this value.
-            range (ViReal64): Specifies the `
-                NIDMM\_ATTR\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RANGE.html')>`__
-                used to acquire the **Measurement**.
-            resolution (ViReal64): Specifies the `
-                NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RESOLUTION_ABSOLUTE.html')>`__
-                of the **Measurement**.
+                The driver sets FUNCTION to this value.
+            range (ViReal64): Specifies the RANGE used to acquire the
+                **Measurement**.
+            resolution (ViReal64): Specifies the RESOLUTION\_ABSOLUTE of the
+                **Measurement**.
             measurement (ViReal64): Specifies the measured value returned from the DMM.
 
         Returns:
             mode_string (ViChar): Returns a string containing the units of the **Measurement** mode.
-            range_string (ViChar): Returns the `
-                NIDMM\_ATTR\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RANGE.html')>`__
-                of the **Measurement**, formatted into a string with the correct number
-                of display digits.
-            data_string (ViChar): Returns the **Measurement**, formatted according to the `
-                NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_FUNCTION.html')>`__,
-                `
-                NIDMM\_ATTR\_RANGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RANGE.html')>`__,
-                and `
-                NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_RESOLUTION_ABSOLUTE.html')>`__.
+            range_string (ViChar): Returns the RANGE of the **Measurement**, formatted
+                into a string with the correct number of display digits.
+            data_string (ViChar): Returns the **Measurement**, formatted according to the
+                FUNCTION, RANGE, and
+                RESOLUTION\_ABSOLUTE.
         '''
         mode_string_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
         range_string_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): allocate a buffer
@@ -1916,11 +1831,9 @@ class Session(object):
         Returns:
             aperture_time (ViReal64): Specifies the amount of time the DMM digitizes the input signal for a
                 single measurement. This parameter does not include settling time.
-                Returns the value of the `
-                NIDMM\_ATTR\_APERTURE\_TIME <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_APERTURE_TIME.html')>`__
-                attribute. The units of this attribute depend on the value of the `
-                NIDMM\_ATTR\_APERTURE\_TIME\_UNITS <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_APERTURE_TIME_UNITS.html')>`__
-                attribute.
+                Returns the value of the APERTURE\_TIME attribute.
+                The units of this attribute depend on the value of the
+                APERTURE\_TIME\_UNITS attribute.
                 On the NI 4070/4071/4072, the minimum aperture time is 8.89 µs, and the
                 maximum aperture time is 149 s. Any number of powerline cycles (PLCs)
                 within the minimum and maximum ranges is allowed on the
@@ -1937,9 +1850,8 @@ class Session(object):
                 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50,
                 the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
             aperture_time_units (enums.ApertureTimeUnits): Indicates the units of aperture time as powerline cycles (PLCs) or
-                seconds. Returns the value of the `
-                NIDMM\_ATTR\_APERTURE\_TIME\_UNITS <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_APERTURE_TIME_UNITS.html')>`__
-                attribute.
+                seconds. Returns the value of the
+                APERTURE\_TIME\_UNITS attribute.
                 +-----------------------------------+-----+--------------------+
                 | NIDMM\_VAL\_SECONDS               | 0   | Seconds            |
                 +-----------------------------------+-----+--------------------+
@@ -2123,9 +2035,8 @@ class Session(object):
 
         Returns:
             actual_range (ViReal64): Indicates the **actual\_range** the DMM is using. Returns the value of
-                the `
-                NIDMM\_ATTR\_AUTO\_RANGE\_VALUE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_RANGE_VALUE.html')>`__
-                attribute. The units of the returned value depend on the function.
+                the AUTO\_RANGE\_VALUE attribute. The units of the
+                returned value depend on the function.
         '''
         actual_range_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_GetAutoRangeValue(self.vi, ctypes.pointer(actual_range_ctype))
@@ -2344,12 +2255,9 @@ class Session(object):
 
                 The first measurement in a multipoint acquisition requires additional
                 settling time. This function does not include this additional time or
-                any `
-                NIDMM\_ATTR\_TRIGGER\_DELAY <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_TRIGGER_DELAY.html')>`__
-                associated with the first measurement. Time required for internal
-                measurements, such as `
-                NIDMM\_ATTR\_AUTO\_ZERO <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_AUTO_ZERO.html')>`__,
-                is included.
+                any TRIGGER\_DELAY associated with the first
+                measurement. Time required for internal measurements, such as
+                AUTO\_ZERO, is included.
         '''
         period_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_GetMeasurementPeriod(self.vi, ctypes.pointer(period_ctype))
@@ -2540,13 +2448,9 @@ class Session(object):
 
         Initiates an acquisition. After you call this function, the DMM leaves
         the Idle state and enters the Wait-for-Trigger state. If trigger is set
-        to Immediate mode, the DMM begins acquiring measurement data. Use `
-        niDMM\_Fetch <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_Fetch.html')>`__,
-        `
-        niDMM\_FetchMultiPoint <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_FetchMultiPoint.html')>`__,
-        or `
-        niDMM\_FetchWaveform <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_FetchWaveform.html')>`__
-        to retrieve the measurement data.
+        to Immediate mode, the DMM begins acquiring measurement data. Use
+        fetch, fetch, or
+        fetch to retrieve the measurement data.
         '''
         error_code = self.library.niDMM_Initiate(self.vi)
         errors._handle_error(self, error_code)
@@ -2625,27 +2529,23 @@ class Session(object):
                 #. In the declaration of the local variable, initialize it to VI\_FALSE
                    (0).
                 #. Pass the address of the same local variable to any other calls you
-                   make to this function or `
-                   niDMM\_UnlockSession <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_UnlockSession.html')>`__
-                   in the same function.
+                   make to this function or unlock_session in the same
+                   function.
 
-                The parameter is an input/output parameter. This function and `
-                niDMM\_UnlockSession <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_UnlockSession.html')>`__
-                each inspect the current value and take the following actions:
+                The parameter is an input/output parameter. This function and
+                unlock_session each inspect the current value and take
+                the following actions:
 
                 If the value is VI\_TRUE (1), this function does not lock the session
                 again. If the value is VI\_FALSE, this function obtains the lock and
                 sets the value of the parameter to VI\_TRUE.
 
-                If the value is VI\_FALSE, `
-                niDMM\_UnlockSession <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_UnlockSession.html')>`__
-                does not attempt to unlock the session. If the value is VI\_TRUE, `
-                niDMM\_UnlockSession <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_UnlockSession.html')>`__
-                releases the lock and sets the value of the parameter to VI\_FALSE.
-                Thus, you can, call `
-                niDMM\_UnlockSession <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_UnlockSession.html')>`__
-                at the end of your function without worrying about whether you actually
-                have the lock.
+                If the value is VI\_FALSE, unlock_session does not
+                attempt to unlock the session. If the value is VI\_TRUE,
+                unlock_session releases the lock and sets the value of
+                the parameter to VI\_FALSE. Thus, you can, call
+                unlock_session at the end of your function without
+                worrying about whether you actually have the lock.
 
                 **Example**
 
@@ -2707,13 +2607,9 @@ class Session(object):
         For the NI 4082 and NI 4072 only, performs the open cable compensation
         measurements for the current capacitance/inductance range, and returns
         open cable compensation **conductance** and **susceptance** values. You
-        can use the return values of this function as inputs to `
-        niDMM\_ConfigureOpenCableCompValues <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_ConfigureOpenCableCompValues.html')>`__.
-
-        This function returns an error if the value of the `
-        NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_FUNCTION.html')>`__
-        attribute is not set to NIDMM\_VAL\_CAPACITANCE (1005) or
-        NIDMM\_VAL\_INDUCTANCE (1006).
+        can use the return values of this function as inputs to
+        FUNCTION attribute is not set to
+        NIDMM\_VAL\_CAPACITANCE (1005) or NIDMM\_VAL\_INDUCTANCE (1006).
 
         Returns:
             conductance (ViReal64): **conductance** is the measured value of open cable compensation
@@ -2736,13 +2632,9 @@ class Session(object):
         Performs the short cable compensation measurements for the current
         capacitance/inductance range, and returns short cable compensation
         **resistance** and **reactance** values. You can use the return values
-        of this function as inputs to `
-        niDMM\_ConfigureShortCableCompValues <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'cviniDMM_ConfigureShortCableCompValues.html')>`__.
-
-        This function returns an error if the value of the `
-        NIDMM\_ATTR\_FUNCTION <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_FUNCTION.html')>`__
-        attribute is not set to NIDMM\_VAL\_CAPACITANCE (1005) or
-        NIDMM\_VAL\_INDUCTANCE (1006).
+        of this function as inputs to FUNCTION attribute is
+        not set to NIDMM\_VAL\_CAPACITANCE (1005) or NIDMM\_VAL\_INDUCTANCE
+        (1006).
 
         Returns:
             resistance (ViReal64): **resistance** is the measured value of short cable compensation
@@ -2802,8 +2694,7 @@ class Session(object):
                 automatically.
             array_size (ViInt32): Specifies the number of measurements to acquire. The maximum number of
                 measurements for a finite acquisition is the (**Trigger Count** x
-                **Sample Count**) parameters in `
-                niDMM\_ConfigureMultiPoint <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_ConfigureMultiPoint.html')>`__.
+                **Sample Count**) parameters in configure_multi_point.
 
                 For continuous acquisitions, up to 100,000 points can be returned at
                 once. The number of measurements can be a subset. The valid range is any
@@ -2885,9 +2776,8 @@ class Session(object):
                 automatically.
             array_size (ViInt32): Specifies the number of waveform points to return. You specify the total
                 number of points that the DMM acquires in the **Waveform Points**
-                parameter of `
-                niDMM\_ConfigureWaveformAcquisition <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_ConfigureWaveformAcquisition.html')>`__.
-                The default value is 1.
+                parameter of configure_waveform_acquisition. The
+                default value is 1.
 
         Returns:
             waveform_array (ViReal64): An array of measurement values.
@@ -2945,17 +2835,13 @@ class Session(object):
         -------
 
         Sends a command to trigger the DMM. Call this function if you have
-        configured either the `
-        NIDMM\_ATTR\_TRIGGER\_SOURCE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_TRIGGER_SOURCE.html')>`__
-        or `
-        NIDMM\_ATTR\_SAMPLE\_TRIGGER <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_SAMPLE_TRIGGER.html')>`__
-        attributes. If the `
-        NIDMM\_ATTR\_TRIGGER\_SOURCE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_TRIGGER_SOURCE.html')>`__
-        and/or `
-        NIDMM\_ATTR\_SAMPLE\_TRIGGER <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20%0A'caNIDMM_ATTR_SAMPLE_TRIGGER.html')>`__
-        attributes are set to NIDMM\_VAL\_EXTERNAL or NIDMM\_VAL\_TTL\ *n*, you
-        can use this function to override the trigger source that you configured
-        and trigger the device. The NI 4050 and NI 4060 are not supported.
+        configured either the TRIGGER\_SOURCE or
+        SAMPLE\_TRIGGER attributes. If the
+        TRIGGER\_SOURCE and/or
+        SAMPLE\_TRIGGER attributes are set to
+        NIDMM\_VAL\_EXTERNAL or NIDMM\_VAL\_TTL\ *n*, you can use this function
+        to override the trigger source that you configured and trigger the
+        device. The NI 4050 and NI 4060 are not supported.
         '''
         error_code = self.library.niDMM_SendSoftwareTrigger(self.vi)
         errors._handle_error(self, error_code)
@@ -3091,20 +2977,17 @@ class Session(object):
                 #. In the declaration of the local variable, initialize it to VI\_FALSE
                    (0).
                 #. Pass the address of the same local variable to any other calls you
-                   make to `
-                   niDMM\_LockSession <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_LockSession.html')>`__
-                   or this function in the same function.
+                   make to lock_session or this function in the same
+                   function.
 
-                The parameter is an input/output parameter. `
-                niDMM\_LockSession <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_LockSession.html')>`__
-                and this function each inspect the current value and take the following
-                actions:
+                The parameter is an input/output parameter.
+                lock_session and this function each inspect the
+                current value and take the following actions:
 
-                If the value is VI\_TRUE (1), `
-                niDMM\_LockSession <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_LockSession.html')>`__
-                does not lock the session again. If the value is VI\_FALSE, `
-                niDMM\_LockSession <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_LockSession.html')>`__
-                obtains the lock and sets the value of the parameter to VI\_TRUE.
+                If the value is VI\_TRUE (1), lock_session does not
+                lock the session again. If the value is VI\_FALSE,
+                lock_session obtains the lock and sets the value of
+                the parameter to VI\_TRUE.
 
                 If the value is VI\_FALSE, this function does not attempt to unlock the
                 session. If the value is VI\_TRUE, this function releases the lock and
