@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file is code generated, do not make changes here
 #  If the generated information is not correct for python
-#  changes can be made in functions_addon.py and they will be 
+#  changes can be made in functions_addon.py and they will be
 #  applied at build time
 
 functions = {
@@ -17,8 +17,8 @@ Idle state.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -42,8 +42,8 @@ and **range**.
             {
                 'direction': 'in',
                 'long_description': '''
-The session handle that you obtain from :py:func:\`nidmm.InitExtCal\`.
-The handle identifies a particular instrument calibration session.
+The session handle that you obtain from niDMM\_InitExtCal. The handle
+identifies a particular instrument calibration session.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -111,8 +111,8 @@ and **input_resistance**.
             {
                 'direction': 'in',
                 'long_description': '''
-The session handle that you obtain from :py:func:\`nidmm.InitExtCal\`.
-The handle identifies a particular instrument calibration session.
+The session handle that you obtain from niDMM\_InitExtCal. The handle
+identifies a particular instrument calibration session.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -178,8 +178,8 @@ step depending on the specified **type**.
             {
                 'direction': 'in',
                 'long_description': '''
-The session handle that you obtain from :py:func:\`nidmm.InitExtCal\`.
-The handle identifies a particular instrument calibration session.
+The session handle that you obtain from niDMM\_InitExtCal. The handle
+identifies a particular instrument calibration session.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -219,8 +219,8 @@ For the NI 4065 only, compensates for any non-linearities.
             {
                 'direction': 'in',
                 'long_description': '''
-The session handle that you obtain from :py:func:\`nidmm.InitExtCal\`.
-The handle identifies a particular instrument calibration session.
+The session handle that you obtain from niDMM\_InitExtCal. The handle
+identifies a particular instrument calibration session.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -289,8 +289,8 @@ Performs a specialized calibration step depending on the specified
             {
                 'direction': 'in',
                 'long_description': '''
-The session handle that you obtain from :py:func:\`nidmm.InitExtCal\`.
-The handle identifies a particular instrument calibration session.
+The session handle that you obtain from niDMM\_InitExtCal. The handle
+identifies a particular instrument calibration session.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -336,8 +336,8 @@ Calibrates the offset and Auto Zero offset for the supplied **mode**,
             {
                 'direction': 'in',
                 'long_description': '''
-The session handle that you obtain from :py:func:\`nidmm.InitExtCal\`.
-The handle identifies a particular instrument calibration session.
+The session handle that you obtain from niDMM\_InitExtCal. The handle
+identifies a particular instrument calibration session.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -396,8 +396,8 @@ attribute.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -454,8 +454,8 @@ attribute.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -512,8 +512,8 @@ attribute.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -570,8 +570,8 @@ attribute.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -628,8 +628,8 @@ attribute.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -684,8 +684,8 @@ information only for the current execution thread.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -704,8 +704,8 @@ Clears the list of current interchange warnings.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -719,8 +719,8 @@ Purpose
 -------
 
 Performs the specified **action**, closes the specified external
-calibration session obtained from :py:func:\`nidmm.InitExtCal\`, and
-deallocates resources that it reserved.
+calibration session obtained from niDMM\_InitExtCal, and deallocates
+resources that it reserved.
 
 | .. note::   The NI 4050 and NI 4060 are not supported.
 | Refer to the calibration procedure for your device before using this
@@ -732,8 +732,8 @@ deallocates resources that it reserved.
             {
                 'direction': 'in',
                 'long_description': '''
-The session handle that you obtain from :py:func:\`nidmm.InitExtCal\`.
-The handle identifies a particular instrument calibration session.
+The session handle that you obtain from niDMM\_InitExtCal. The handle
+identifies a particular instrument calibration session.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -760,9 +760,8 @@ Specifies whether the driver saves the updated calibration constants.
 Purpose
 -------
 
-Configures the :py:data:\`nidmm.AC\_MIN\_FREQ\` and
-:py:data:\`nidmm.AC\_MAX\_FREQ\` attributes, which the DMM uses for AC
-measurements.
+Configures the NIDMM\_ATTR\_AC\_MIN\_FREQ and NIDMM\_ATTR\_AC\_MAX\_FREQ
+attributes, which the DMM uses for AC measurements.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -771,8 +770,8 @@ measurements.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -783,12 +782,12 @@ parameter from :py:func:\`nidmm.init\` or
                 'long_description': '''
 Specifies the minimum expected frequency component of the input signal
 in hertz. This parameter affects the DMM only when you set the
-:py:data:\`nidmm.FUNCTION\` attribute to AC measurements. NI-DMM uses
-this parameter to calculate the proper aperture for the measurement.
-The driver sets the :py:data:\`nidmm.AC\_MIN\_FREQ\` attribute to this
-value. The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the
-NI 4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for
-the NI 4050 and NI 4060.
+NIDMM\_ATTR\_FUNCTION attribute to AC measurements. NI-DMM uses this
+parameter to calculate the proper aperture for the measurement.
+The driver sets the NIDMM\_ATTR\_AC\_MIN\_FREQ attribute to this value.
+The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
+4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
+NI 4050 and NI 4060.
 ''',
                 'name': 'acMinimumFrequencyHz',
                 'type': 'ViReal64',
@@ -803,11 +802,10 @@ checking and verifies that the value of this parameter is less than the
 maximum frequency of the device.
 
 This parameter affects the DMM only when you set the
-:py:data:\`nidmm.FUNCTION\` attribute to AC measurements. The driver
-sets the :py:data:\`nidmm.AC\_MAX\_FREQ\` attribute to this value. The
-valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
-4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
-NI 4050 and NI 4060.
+NIDMM\_ATTR\_FUNCTION attribute to AC measurements. The driver sets the
+NIDMM\_ATTR\_AC\_MAX\_FREQ attribute to this value. The valid range is 1
+Hz–300 kHz for the NI 4080/4081/4082 and the NI 4070/4071/4072, 10
+Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
 ''',
                 'name': 'acMaximumFrequencyHz',
                 'type': 'ViReal64',
@@ -831,8 +829,8 @@ changes to the gain.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -842,7 +840,7 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Specifies the **ADC\_Calibration** setting. The driver sets
-:py:data:\`nidmm.ADC\_CALIBRATION\` to this value.
+NIDMM\_ATTR\_ADC\_CALIBRATION to this value.
 NIDMM\_VAL\_ADC\_CALIBRATION\_ON enables **ADC\_Calibration**.
 NIDMM\_VAL\_ADC\_CALIBRATION\_OFF disables **ADC\_Calibration**. If you
 set the value to NIDMM\_VAL\_ADC\_CALIBRATION\_AUTO, the driver
@@ -884,8 +882,8 @@ DMM does not compensate for zero reading offset.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -895,7 +893,7 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Specifies the **auto\_zero\_mode**. NI-DMM sets the
-:py:data:\`nidmm.AUTO\_ZERO\` attribute to this value.
+NIDMM\_ATTR\_AUTO\_ZERO attribute to this value.
 
 ON enables **auto\_zero\_mode** for each measurement. ONCE enables
 **auto\_zero\_mode** before the next measurement. The
@@ -932,7 +930,7 @@ Purpose
 -------
 
 For the NI 4082 and NI 4072 only, sets the
-:py:data:\`nidmm.CABLE\_COMP\_TYPE\` attribute for the current
+NIDMM\_ATTR\_CABLE\_COMP\_TYPE attribute for the current
 capacitance/inductance mode range.
 ''',
         'returns': 'ViStatus',
@@ -942,8 +940,8 @@ capacitance/inductance mode range.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -973,8 +971,8 @@ The NI 4050 and NI 4060 are not supported. Configures the
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -985,7 +983,7 @@ parameter from :py:func:\`nidmm.init\` or
                 'long_description': '''
 Specifies the **current\_source** provided during diode measurements.
 For valid ranges, refer to the device sections for your device. The
-driver sets :py:data:\`nidmm.CURRENT\_SOURCE\` to this value.
+driver sets NIDMM\_ATTR\_CURRENT\_SOURCE to this value.
 +-------------------------------------+----------+-----------------------------------------------------+
 | NIDMM\_VAL\_1\_MICROAMP             | 1 µA     | NI 4080/4081/4082 and NI 4070/4071/4072             |
 +-------------------------------------+----------+-----------------------------------------------------+
@@ -1014,8 +1012,8 @@ with a fixed reference junction type.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1048,8 +1046,8 @@ measurements.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1059,7 +1057,7 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Sets the expected maximum amplitude of the input signal. Refer to the
-:py:data:\`nidmm.FREQ\_VOLTAGE\_RANGE\` to this value. The minimum
+NIDMM\_ATTR\_FREQ\_VOLTAGE\_RANGE to this value. The minimum
 peak-to-peak signal amplitude that can be detected is 10% of the
 specified **voltage\_range**.
 +-----------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------+
@@ -1090,8 +1088,8 @@ more information.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1102,10 +1100,10 @@ parameter from :py:func:\`nidmm.init\` or
                 'long_description': '''
 Specifies the destination of the Measurement Complete signal. This
 signal is issued when the DMM completes a single measurement. The driver
-sets the :py:data:\`nidmm.MEAS\_COMPLETE\_DEST\` attribute to this
-value. This signal is commonly referred to as Voltmeter Complete. ..
-note::   To determine which values are supported by each device, refer
-to the `LabWindows/CVI Trigger
+sets the NIDMM\_ATTR\_MEAS\_COMPLETE\_DEST attribute to this value. This
+signal is commonly referred to as Voltmeter Complete. .. note::   To
+determine which values are supported by each device, refer to the
+`LabWindows/CVI Trigger
 Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
 section.
 ''',
@@ -1127,8 +1125,8 @@ falling edge (negative) polarity.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1138,7 +1136,7 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Specifies the polarity of the signal that is generated. The driver sets
-:py:data:\`nidmm.MEAS\_DEST\_SLOPE\` to this value.
+NIDMM\_ATTR\_MEAS\_DEST\_SLOPE to this value.
 +--------------------------+-----+------------------------+------------------------------------------------------------------+
 | Rising Edge              | 0   | NIDMM\_VAL\_POSITIVE   | The driver triggers on the rising edge of the trigger signal.    |
 +--------------------------+-----+------------------------+------------------------------------------------------------------+
@@ -1161,8 +1159,8 @@ Purpose
 -------
 
 Configures the common attributes of the measurement. These attributes
-include :py:data:\`nidmm.FUNCTION\`, :py:data:\`nidmm.RANGE\`, and
-:py:data:\`nidmm.RESOLUTION\_ABSOLUTE\`.
+include NIDMM\_ATTR\_FUNCTION, NIDMM\_ATTR\_RANGE, and
+NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -1171,8 +1169,8 @@ include :py:data:\`nidmm.FUNCTION\`, :py:data:\`nidmm.RANGE\`, and
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1182,7 +1180,7 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Specifies the **measurement\_function** used to acquire the measurement.
-The driver sets :py:data:\`nidmm.FUNCTION\` to this value.
+The driver sets NIDMM\_ATTR\_FUNCTION to this value.
 ''',
                 'name': 'measurementFunction',
                 'type': 'ViInt32',
@@ -1199,8 +1197,8 @@ type in 100 Hz if you are measuring 101 Hz or higher.
 For all other functions, you must supply a **range** that exceeds the
 value that you are measuring. For example, you must type in 10 V if you
 are measuring 9 V. **range** values are coerced up to the closest input
-**range**. Refer to the :py:data:\`nidmm.RANGE\` to this value. The
-default is 0.02 V.
+**range**. Refer to the NIDMM\_ATTR\_RANGE to this value. The default is
+0.02 V.
 .. note::   The NI 4050, NI 4060, and NI 4065 only support Auto range
 when the trigger and sample trigger are set to IMMEDIATE.
 NIDMM\_VAL\_AUTO\_RANGE\_ON
@@ -1208,15 +1206,15 @@ NIDMM\_VAL\_AUTO\_RANGE\_ON
 NI-DMM performs an Auto range before acquiring the measurement.
 NIDMM\_VAL\_AUTO\_RANGE\_OFF
 -2.0
-NI-DMM sets the range to the current
-:py:data:\`nidmm.AUTO\_RANGE\_VALUE\` and uses this range
+NI-DMM sets the range to the current NIDMM\_ATTR\_AUTO\_RANGE\_VALUE and
+uses this range
 for all subsequent measurements until the measurement configuration is
 changed.
 NIDMM\_VAL\_AUTO\_RANGE\_ONCE
 -3.0
 NI-DMM performs an Auto range before acquiring the measurement. The
-:py:data:\`nidmm.AUTO\_RANGE\_VALUE\` is stored and used for all
-subsequent measurements until the measurement configuration is changed.
+NIDMM\_ATTR\_AUTO\_RANGE\_VALUE is stored and used for all subsequent
+measurements until the measurement configuration is changed.
 ''',
                 'name': 'range',
                 'type': 'ViReal64',
@@ -1226,13 +1224,13 @@ subsequent measurements until the measurement configuration is changed.
                 'direction': 'in',
                 'long_description': '''
 Specifies the absolute resolution for the measurement. NI-DMM sets
-:py:data:\`nidmm.RESOLUTION\_ABSOLUTE\` to this value. This parameter is
+NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE to this value. This parameter is
 ignored when the **Range** parameter is set to
 NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
 (-3.0). The default is 0.001 V.
 .. note::   NI-DMM ignores this parameter for capacitance and inductance
 measurements on the NI 4072. To achieve better resolution for such
-measurements, use the :py:data:\`nidmm.LC\_NUMBER\_MEAS\_TO\_AVERAGE\`
+measurements, use the NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE
 attribute.
 ''',
                 'name': 'resolutionAbsolute',
@@ -1251,8 +1249,8 @@ Purpose
 -------
 
 Configures the common attributes of the measurement. These attributes
-include :py:data:\`nidmm.FUNCTION\`, :py:data:\`nidmm.RANGE\`, and
-:py:data:\`nidmm.RESOLUTION\_DIGITS\`.
+include NIDMM\_ATTR\_FUNCTION, NIDMM\_ATTR\_RANGE, and
+NIDMM\_ATTR\_RESOLUTION\_DIGITS.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -1261,8 +1259,8 @@ include :py:data:\`nidmm.FUNCTION\`, :py:data:\`nidmm.RANGE\`, and
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1272,7 +1270,7 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Specifies the **measurement\_function** used to acquire the measurement.
-The driver sets :py:data:\`nidmm.FUNCTION\` to this value.
+The driver sets NIDMM\_ATTR\_FUNCTION to this value.
 ''',
                 'name': 'measurementFunction',
                 'type': 'ViInt32',
@@ -1289,8 +1287,7 @@ type in 100 Hz if you are measuring 101 Hz or higher.
 For all other functions, you must supply a range that exceeds the value
 that you are measuring. For example, you must type in 10 V if you are
 measuring 9 V. range values are coerced up to the closest input range.
-Refer to the :py:data:\`nidmm.RANGE\` to this value. The default is 0.02
-V.
+Refer to the NIDMM\_ATTR\_RANGE to this value. The default is 0.02 V.
 .. note::   The NI 4050, NI 4060, and NI 4065 only support Auto range
 when the trigger and sample trigger are set to IMMEDIATE.
 NIDMM\_VAL\_AUTO\_RANGE\_ON
@@ -1298,15 +1295,15 @@ NIDMM\_VAL\_AUTO\_RANGE\_ON
 NI-DMM performs an Auto range before acquiring the measurement.
 NIDMM\_VAL\_AUTO\_RANGE\_OFF
 -2.0
-NI-DMM sets the range to the current
-:py:data:\`nidmm.AUTO\_RANGE\_VALUE\` and uses this range
+NI-DMM sets the range to the current NIDMM\_ATTR\_AUTO\_RANGE\_VALUE and
+uses this range
 for all subsequent measurements until the measurement configuration is
 changed.
 NIDMM\_VAL\_AUTO\_RANGE\_ONCE
 -3.0
 NI-DMM performs an Auto range before acquiring the measurement. The
-:py:data:\`nidmm.AUTO\_RANGE\_VALUE\` is stored and used for all
-subsequent measurements until the measurement configuration is changed.
+NIDMM\_ATTR\_AUTO\_RANGE\_VALUE is stored and used for all subsequent
+measurements until the measurement configuration is changed.
 ''',
                 'name': 'range',
                 'type': 'ViReal64',
@@ -1316,13 +1313,13 @@ subsequent measurements until the measurement configuration is changed.
                 'direction': 'in',
                 'long_description': '''
 Specifies the resolution of the measurement in digits. The driver sets
-the :py:data:\`nidmm.RESOLUTION\_DIGITS\` attribute to this value. This
+the NIDMM\_ATTR\_RESOLUTION\_DIGITS attribute to this value. This
 parameter is ignored when the **Range** parameter is set to
 NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
 (-3.0). The default is 5½.
 .. note::   NI-DMM ignores this parameter for capacitance and inductance
 measurements on the NI 4072. To achieve better resolution for such
-measurements, use the :py:data:\`nidmm.LC\_NUMBER\_MEAS\_TO\_AVERAGE\`
+measurements, use the NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE
 attribute.
 ''',
                 'name': 'resolutionDigits',
@@ -1337,12 +1334,11 @@ Purpose
 -------
 
 Configures the attributes for multipoint measurements. These attributes
-include :py:data:\`nidmm.TRIGGER\_COUNT\`,
-:py:data:\`nidmm.SAMPLE\_COUNT\`, :py:data:\`nidmm.SAMPLE\_TRIGGER\`,
-and :py:data:\`nidmm.SAMPLE\_INTERVAL\`.
+include NIDMM\_ATTR\_TRIGGER\_COUNT, NIDMM\_ATTR\_SAMPLE\_COUNT,
+NIDMM\_ATTR\_SAMPLE\_TRIGGER, and NIDMM\_ATTR\_SAMPLE\_INTERVAL.
 
-For continuous acquisitions, set :py:data:\`nidmm.TRIGGER\_COUNT\` or
-:py:data:\`nidmm.SAMPLE\_COUNT\` to zero. For more information, refer to
+For continuous acquisitions, set NIDMM\_ATTR\_TRIGGER\_COUNT or
+NIDMM\_ATTR\_SAMPLE\_COUNT to zero. For more information, refer to
 `Multiple Point
 Acquisitions <javascript:LaunchHelp('dmm.chm::/multi_point.html')>`__,
 `Triggering <javascript:LaunchHelp('dmm.chm::/trigger.html')>`__, and
@@ -1356,8 +1352,8 @@ Switches <javascript:LaunchHelp('dmm.chm::/switch_selection.html')>`__.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1367,8 +1363,8 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Sets the number of triggers you want the DMM to receive before returning
-to the Idle state. The driver sets :py:data:\`nidmm.TRIGGER\_COUNT\` to
-this value. The default value is 1.
+to the Idle state. The driver sets NIDMM\_ATTR\_TRIGGER\_COUNT to this
+value. The default value is 1.
 ''',
                 'name': 'triggerCount',
                 'type': 'ViInt32',
@@ -1379,7 +1375,7 @@ this value. The default value is 1.
                 'long_description': '''
 Sets the number of measurements the DMM makes in each measurement
 sequence initiated by a trigger. The driver sets
-:py:data:\`nidmm.SAMPLE\_COUNT\` to this value. The default value is 1.
+NIDMM\_ATTR\_SAMPLE\_COUNT to this value. The default value is 1.
 ''',
                 'name': 'sampleCount',
                 'type': 'ViInt32',
@@ -1389,7 +1385,7 @@ sequence initiated by a trigger. The driver sets
                 'direction': 'in',
                 'long_description': '''
 Specifies the **sample\_trigger** source you want to use. The driver
-sets :py:data:\`nidmm.SAMPLE\_TRIGGER\` to this value. The default is
+sets NIDMM\_ATTR\_SAMPLE\_TRIGGER to this value. The default is
 Immediate.
 .. note::   To determine which values are supported by each device,
 refer to the `LabWindows/CVI Trigger
@@ -1404,11 +1400,10 @@ section.
                 'direction': 'in',
                 'long_description': '''
 Sets the amount of time in seconds the DMM waits between measurement
-cycles. The driver sets :py:data:\`nidmm.SAMPLE\_INTERVAL\` to this
-value. Specify a sample interval to add settling time between
-measurement cycles or to decrease the measurement rate.
-**sample\_interval** only applies when the **Sample\_Trigger** is set to
-INTERVAL.
+cycles. The driver sets NIDMM\_ATTR\_SAMPLE\_INTERVAL to this value.
+Specify a sample interval to add settling time between measurement
+cycles or to decrease the measurement rate. **sample\_interval** only
+applies when the **Sample\_Trigger** is set to INTERVAL.
 
 On the NI 4060, the **sample\_interval** value is used as the settling
 time. When sample interval is set to 0, the DMM does not settle between
@@ -1443,8 +1438,8 @@ than 10 KΩ.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1454,7 +1449,7 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Enables or disables **offset\_comp\_ohms**. The driver sets
-:py:data:\`nidmm.OFFSET\_COMP\_OHMS\` to this value.
+NIDMM\_ATTR\_OFFSET\_COMP\_OHMS to this value.
 +-------------------------------------------------+---------+------------------------------------------+
 | Name                                            | Value   | Description                              |
 +=================================================+=========+==========================================+
@@ -1475,8 +1470,8 @@ Purpose
 -------
 
 For the NI 4082 and NI 4072 only, configures the
-:py:data:\`nidmm.OPEN\_CABLE\_COMP\_CONDUCTANCE\` and
-:py:data:\`nidmm.OPEN\_CABLE\_COMP\_SUSCEPTANCE\` attributes.
+NIDMM\_ATTR\_OPEN\_CABLE\_COMP\_CONDUCTANCE and
+NIDMM\_ATTR\_OPEN\_CABLE\_COMP\_SUSCEPTANCE attributes.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -1485,8 +1480,8 @@ For the NI 4082 and NI 4072 only, configures the
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1523,8 +1518,8 @@ Specifies the powerline frequency.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1553,8 +1548,8 @@ Configures the A, B, and C parameters for a custom RTD.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1564,9 +1559,8 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Specifies the Callendar-Van Dusen A coefficient for RTD scaling when RTD
-Type parameter is set to Custom in the
-:py:func:\`nidmm.ConfigureRTDType\` function. The default is 3.9083e-3
-(Pt3851)
+Type parameter is set to Custom in the niDMM\_ConfigureRTDType function.
+The default is 3.9083e-3 (Pt3851)
 ''',
                 'name': 'rtdA',
                 'type': 'ViReal64',
@@ -1576,9 +1570,8 @@ Type parameter is set to Custom in the
                 'direction': 'in',
                 'long_description': '''
 Specifies the Callendar-Van Dusen B coefficient for RTD scaling when RTD
-Type parameter is set to Custom in the
-:py:func:\`nidmm.ConfigureRTDType\` function. The default is -5.775e-7
-(Pt3851).
+Type parameter is set to Custom in the niDMM\_ConfigureRTDType function.
+The default is -5.775e-7 (Pt3851).
 ''',
                 'name': 'rtdB',
                 'type': 'ViReal64',
@@ -1588,9 +1581,8 @@ Type parameter is set to Custom in the
                 'direction': 'in',
                 'long_description': '''
 Specifies the Callendar-Van Dusen C coefficient for RTD scaling when RTD
-Type parameter is set to Custom in the
-:py:func:\`nidmm.ConfigureRTDType\` function. The default is -4.183e-12
-(Pt3851).
+Type parameter is set to Custom in the niDMM\_ConfigureRTDType function.
+The default is -4.183e-12 (Pt3851).
 ''',
                 'name': 'rtdC',
                 'type': 'ViReal64',
@@ -1609,8 +1601,8 @@ Configures the RTD Type and RTD Resistance parameters for an RTD.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1721,8 +1713,8 @@ to either rising edge (positive) or falling edge (negative) polarity.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1734,7 +1726,7 @@ parameter from :py:func:\`nidmm.init\` or
 Specifies the polarity of the Trigger signal on which the measurement is
 triggered for values of either NIDMM\_VAL\_POSITIVE or
 NIDMM\_VAL\_NEGATIVE. The driver sets
-:py:data:\`nidmm.SAMPLE\_TRIGGER\_SLOPE\` to this value.
+NIDMM\_ATTR\_SAMPLE\_TRIGGER\_SLOPE to this value.
 +--------------------------+-----+------------------------+------------------------------------------------------------------+
 | Rising Edge              | 0   | NIDMM\_VAL\_POSITIVE   | The driver triggers on the rising edge of the trigger signal.    |
 +--------------------------+-----+------------------------+------------------------------------------------------------------+
@@ -1765,8 +1757,8 @@ attributes.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1803,8 +1795,8 @@ Configures the A, B, and C parameters for a custom thermistor.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1814,9 +1806,8 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-Thermistor Type is set to Custom in the
-:py:func:\`nidmm.ConfigureThermistorType\` function. The default is
-1.0295e-3 (44006).
+Thermistor Type is set to Custom in the niDMM\_ConfigureThermistorType
+function. The default is 1.0295e-3 (44006).
 ''',
                 'name': 'thermistorA',
                 'type': 'ViReal64',
@@ -1826,9 +1817,8 @@ Thermistor Type is set to Custom in the
                 'direction': 'in',
                 'long_description': '''
 Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-Thermistor Type is set to Custom in the
-:py:func:\`nidmm.ConfigureThermistorType\` function. The default is
-2.391e-4 (44006).
+Thermistor Type is set to Custom in the niDMM\_ConfigureThermistorType
+function. The default is 2.391e-4 (44006).
 ''',
                 'name': 'thermistorB',
                 'type': 'ViReal64',
@@ -1838,9 +1828,8 @@ Thermistor Type is set to Custom in the
                 'direction': 'in',
                 'long_description': '''
 Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-Thermistor Type is set to Custom in the
-:py:func:\`nidmm.ConfigureThermistorType\` function. The default is
-1.568e-7 (44006).
+Thermistor Type is set to Custom in the niDMM\_ConfigureThermistorType
+function. The default is 1.568e-7 (44006).
 ''',
                 'name': 'thermistorC',
                 'type': 'ViReal64',
@@ -1859,8 +1848,8 @@ Configures the thermistor type.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1908,8 +1897,8 @@ chosen thermocouple.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1968,8 +1957,8 @@ Configures the transducer type.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2015,8 +2004,8 @@ for more information.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2026,9 +2015,9 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Specifies the **trigger\_source** that initiates the acquisition. The
-driver sets :py:data:\`nidmm.TRIGGER\_SOURCE\` to this value. Software
-configures the DMM to wait until :py:func:\`nidmm.SendSoftwareTrigger\`
-is called before triggering the DMM.
+driver sets NIDMM\_ATTR\_TRIGGER\_SOURCE to this value. Software
+configures the DMM to wait until niDMM\_SendSoftwareTrigger is called
+before triggering the DMM.
 .. note::   To determine which values are supported by each device,
 refer to the `LabWindows/CVI Trigger
 Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
@@ -2073,8 +2062,8 @@ polarity.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2085,8 +2074,8 @@ parameter from :py:func:\`nidmm.init\` or
                 'long_description': '''
 Specifies the polarity of the trigger signal on which the measurement is
 triggered for values of either NIDMM\_VAL\_POSITIVE or
-NIDMM\_VAL\_NEGATIVE. The driver sets the
-:py:data:\`nidmm.TRIGGER\_SLOPE\` attribute to this value.
+NIDMM\_VAL\_NEGATIVE. The driver sets the NIDMM\_ATTR\_TRIGGER\_SLOPE
+attribute to this value.
 +----------------------------------+-----+------------------------------------------------------------------+
 | NIDMM\_VAL\_POSITIVE             | 0   | The driver triggers on the rising edge of the trigger signal.    |
 +----------------------------------+-----+------------------------------------------------------------------+
@@ -2111,8 +2100,8 @@ on the NI 4080/4081/4082 and the NI 4070/4071/4072.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2122,7 +2111,7 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Specifies the **measurement\_function** used in a waveform acquisition.
-The driver sets :py:data:\`nidmm.FUNCTION\` to this value.
+The driver sets NIDMM\_ATTR\_FUNCTION to this value.
 +-------------------------------------------+--------+--------------------+
 | NIDMM\_VAL\_WAVEFORM\_VOLTAGE (default)   | 1003   | Voltage Waveform   |
 +-------------------------------------------+--------+--------------------+
@@ -2138,8 +2127,8 @@ The driver sets :py:data:\`nidmm.FUNCTION\` to this value.
                 'long_description': '''
 Specifies the expected maximum amplitude of the input signal and sets
 the **range** for the **Measurement\_Function**. NI-DMM sets
-:py:data:\`nidmm.RANGE\` to this value. **range** values are coerced up
-to the closest input **range**. The default is 10.0.
+NIDMM\_ATTR\_RANGE to this value. **range** values are coerced up to the
+closest input **range**. The default is 10.0.
 
 For valid ranges refer to the topics in
 `Devices <javascript:LaunchHelp('dmm.chm::/Devices.html')>`__.
@@ -2154,7 +2143,7 @@ Auto-ranging is not supported during waveform acquisitions.
                 'direction': 'in',
                 'long_description': '''
 Specifies the **rate** of the acquisition in samples per second. NI-DMM
-sets :py:data:\`nidmm.WAVEFORM\_RATE\` to this value.
+sets NIDMM\_ATTR\_WAVEFORM\_RATE to this value.
 
 The valid **Range** is 10.0–1,800,000 S/s. **rate** values are coerced
 to the closest integer divisor of 1,800,000. The default value is
@@ -2168,8 +2157,8 @@ to the closest integer divisor of 1,800,000. The default value is
                 'direction': 'in',
                 'long_description': '''
 Specifies the number of points to acquire before the waveform
-acquisition completes. NI-DMM sets :py:data:\`nidmm.WAVEFORM\_POINTS\`
-to this value.
+acquisition completes. NI-DMM sets NIDMM\_ATTR\_WAVEFORM\_POINTS to this
+value.
 
 To calculate the maximum and minimum number of waveform points that you
 can acquire in one acquisition, refer to the `Waveform Acquisition
@@ -2196,8 +2185,8 @@ instrument coupling for voltage waveforms.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2207,7 +2196,7 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'in',
                 'long_description': '''
 Selects DC or AC coupling. The driver sets
-:py:data:\`nidmm.WAVEFORM\_COUPLING\` to this value.
+NIDMM\_ATTR\_WAVEFORM\_COUPLING to this value.
 +------------------------------------------------+---------+---------------+
 | Name                                           | Value   | Description   |
 +================================================+=========+===============+
@@ -2247,8 +2236,8 @@ to make the initiate call as quickly as possible.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2280,8 +2269,8 @@ progress when this function is called, the measurement is aborted.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2295,7 +2284,7 @@ Purpose
 -------
 
 Returns the value from a previously initiated measurement. You must call
-:py:func:\`nidmm.Initiate\` before calling this function.
+niDMM\_Initiate before calling this function.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -2304,8 +2293,8 @@ Returns the value from a previously initiated measurement. You must call
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2348,9 +2337,8 @@ Purpose
 Returns an array of values from a previously initiated multipoint
 measurement. The number of measurements the DMM makes is determined by
 the values you specify for the **Trigger\_Count** and **Sample\_Count**
-parameters of :py:func:\`nidmm.ConfigureMultiPoint\`. You must first
-call :py:func:\`nidmm.Initiate\` to initiate a measurement before
-calling this function.
+parameters of niDMM\_ConfigureMultiPoint. You must first call
+niDMM\_Initiate to initiate a measurement before calling this function.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -2359,8 +2347,8 @@ calling this function.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2389,7 +2377,7 @@ automatically.
                 'long_description': '''
 Specifies the number of measurements to acquire. The maximum number of
 measurements for a finite acquisition is the (**Trigger Count** x
-**Sample Count**) parameters in :py:func:\`nidmm.ConfigureMultiPoint\`.
+**Sample Count**) parameters in niDMM\_ConfigureMultiPoint.
 
 For continuous acquisitions, up to 100,000 points can be returned at
 once. The number of measurements can be a subset. The valid range is any
@@ -2439,8 +2427,8 @@ before calling this function.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2512,7 +2500,7 @@ according to the **measurement\_Function**, **range**, and
                 'direction': 'in',
                 'long_description': '''
 Specifies the **measurement\_function** used to acquire the measurement.
-The driver sets :py:data:\`nidmm.FUNCTION\` to this value.
+The driver sets NIDMM\_ATTR\_FUNCTION to this value.
 ''',
                 'name': 'measurementFunction',
                 'type': 'ViInt32',
@@ -2521,8 +2509,7 @@ The driver sets :py:data:\`nidmm.FUNCTION\` to this value.
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the :py:data:\`nidmm.RANGE\` used to acquire the
-**Measurement**.
+Specifies the NIDMM\_ATTR\_RANGE used to acquire the **Measurement**.
 ''',
                 'name': 'range',
                 'type': 'ViReal64',
@@ -2531,8 +2518,7 @@ Specifies the :py:data:\`nidmm.RANGE\` used to acquire the
             {
                 'direction': 'in',
                 'long_description': '''
-Specifies the :py:data:\`nidmm.RESOLUTION\_ABSOLUTE\` of the
-**Measurement**.
+Specifies the NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE of the **Measurement**.
 ''',
                 'name': 'resolution',
                 'type': 'ViReal64',
@@ -2561,8 +2547,8 @@ Returns a string containing the units of the **Measurement** mode.
                 'direction': 'out',
                 'is_buffer': True,
                 'long_description': '''
-Returns the :py:data:\`nidmm.RANGE\` of the **Measurement**, formatted
-into a string with the correct number of display digits.
+Returns the NIDMM\_ATTR\_RANGE of the **Measurement**, formatted into a
+string with the correct number of display digits.
 ''',
                 'name': 'rangeString',
                 'type': 'ViChar',
@@ -2573,8 +2559,8 @@ into a string with the correct number of display digits.
                 'is_buffer': True,
                 'long_description': '''
 Returns the **Measurement**, formatted according to the
-:py:data:\`nidmm.FUNCTION\`, :py:data:\`nidmm.RANGE\`, and
-:py:data:\`nidmm.RESOLUTION\_ABSOLUTE\`.
+NIDMM\_ATTR\_FUNCTION, NIDMM\_ATTR\_RANGE, and
+NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE.
 ''',
                 'name': 'dataString',
                 'type': 'ViChar',
@@ -2593,8 +2579,8 @@ Returns the DMM **aperture_time** and **aperture_time\_Units**.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2605,9 +2591,9 @@ parameter from :py:func:\`nidmm.init\` or
                 'long_description': '''
 Specifies the amount of time the DMM digitizes the input signal for a
 single measurement. This parameter does not include settling time.
-Returns the value of the :py:data:\`nidmm.APERTURE\_TIME\` attribute.
-The units of this attribute depend on the value of the
-:py:data:\`nidmm.APERTURE\_TIME\_UNITS\` attribute.
+Returns the value of the NIDMM\_ATTR\_APERTURE\_TIME attribute. The
+units of this attribute depend on the value of the
+NIDMM\_ATTR\_APERTURE\_TIME\_UNITS attribute.
 On the NI 4070/4071/4072, the minimum aperture time is 8.89 µs, and the
 maximum aperture time is 149 s. Any number of powerline cycles (PLCs)
 within the minimum and maximum ranges is allowed on the
@@ -2632,8 +2618,8 @@ the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
                 'direction': 'out',
                 'long_description': '''
 Indicates the units of aperture time as powerline cycles (PLCs) or
-seconds. Returns the value of the
-:py:data:\`nidmm.APERTURE\_TIME\_UNITS\` attribute.
+seconds. Returns the value of the NIDMM\_ATTR\_APERTURE\_TIME\_UNITS
+attribute.
 +-----------------------------------+-----+--------------------+
 | NIDMM\_VAL\_SECONDS               | 0   | Seconds            |
 +-----------------------------------+-----+--------------------+
@@ -2667,8 +2653,8 @@ attributes.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2730,8 +2716,8 @@ attributes.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2795,8 +2781,8 @@ instrument I/O in the following cases:
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2860,8 +2846,8 @@ instrument I/O in the following cases:
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2926,8 +2912,8 @@ attributes.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3007,8 +2993,8 @@ Range is off.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3018,8 +3004,8 @@ parameter from :py:func:\`nidmm.init\` or
                 'direction': 'out',
                 'long_description': '''
 Indicates the **actual\_range** the DMM is using. Returns the value of
-the :py:data:\`nidmm.AUTO\_RANGE\_VALUE\` attribute. The units of the
-returned value depend on the function.
+the NIDMM\_ATTR\_AUTO\_RANGE\_VALUE attribute. The units of the returned
+value depend on the function.
 ''',
                 'name': 'actualRange',
                 'type': 'ViReal64',
@@ -3042,8 +3028,8 @@ Returns the calibration **count** for the specified type of calibration.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3090,8 +3076,8 @@ Returns the date and time of the last calibration performed.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3174,8 +3160,8 @@ Returns the user-defined calibration information stored in the EEPROM.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3223,8 +3209,7 @@ Purpose
 -------
 
 Returns the maximum string length that can be stored in the EEPROM. Use
-:py:func:\`nidmm.SetCalUserDefinedInfo\` to store user-defined
-information.
+niDMM\_SetCalUserDefinedInfo to store user-defined information.
 
 .. note::   The NI 4050 and NI 4060 are not supported.
 ''',
@@ -3235,8 +3220,8 @@ information.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3270,8 +3255,8 @@ Included for compliance with the *IviDmm Class Specification*.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3336,8 +3321,8 @@ Returns the current **temperature** of the device.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3378,8 +3363,8 @@ the error information for the process.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3449,9 +3434,8 @@ of 0 returns the size needed for the **error_message**.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. You can also use VI\_NULL if you do
-not have a valid **vi**.
+parameter from niDMM\_init or niDMM\_InitWithOptions. You can also use
+VI\_NULL if you do not have a valid **vi**.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3511,8 +3495,8 @@ Returns the recommended interval between external recalibration in
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3544,8 +3528,8 @@ Returns the **temperature** during the last calibration procedure.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3593,8 +3577,8 @@ been called.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3607,9 +3591,9 @@ Returns the number of seconds it takes to make one measurement.
 
 The first measurement in a multipoint acquisition requires additional
 settling time. This function does not include this additional time or
-any :py:data:\`nidmm.TRIGGER\_DELAY\` associated with the first
-measurement. Time required for internal measurements, such as
-:py:data:\`nidmm.AUTO\_ZERO\`, is included.
+any NIDMM\_ATTR\_TRIGGER\_DELAY associated with the first measurement.
+Time required for internal measurements, such as
+NIDMM\_ATTR\_AUTO\_ZERO, is included.
 ''',
                 'name': 'period',
                 'type': 'ViReal64',
@@ -3619,10 +3603,10 @@ measurement. Time required for internal measurements, such as
     },
     'GetNextCoercionRecord': {
         'long_description': '''
-If you set :py:data:\`nidmm.RECORD\_COERCIONS\` to VI\_TRUE (1), NI-DMM
-keeps a list of all coercions it makes on ViInt32 or ViReal64 values
-that you pass to NI-DMM functions. Use this function to retrieve
-information from that list.
+If you set NIDMM\_ATTR\_RECORD\_COERCIONS to VI\_TRUE (1), NI-DMM keeps
+a list of all coercions it makes on ViInt32 or ViReal64 values that you
+pass to NI-DMM functions. Use this function to retrieve information from
+that list.
 ''',
         'purpose': '''
 This function returns the coercion information associated with the IVI
@@ -3636,8 +3620,8 @@ coerced a value you specified to another value.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3687,12 +3671,12 @@ specify with the **Buffer\_Size** parameter.
     'GetNextInterchangeWarning': {
         'long_description': '''
 The driver performs interchangeability checking when
-:py:data:\`nidmm.INTERCHANGE\_CHECK\` is set to VI\_TRUE (1). The
-function returns an empty string in the **interchange_warning**
-parameter if no interchangeability warnings remain for the session. In
-general, the instrument driver generates interchangeability warnings
-when an attribute that affects the behavior of the instrument is in a
-state that you did not specify.
+NIDMM\_ATTR\_INTERCHANGE\_CHECK is set to VI\_TRUE (1). The function
+returns an empty string in the **interchange_warning** parameter if no
+interchangeability warnings remain for the session. In general, the
+instrument driver generates interchangeability warnings when an
+attribute that affects the behavior of the instrument is in a state that
+you did not specify.
 ''',
         'purpose': '''
 This function returns the interchangeability warnings associated with
@@ -3708,8 +3692,8 @@ different instrument might cause different behavior.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3764,8 +3748,8 @@ are using can perform self-calibration.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -3797,11 +3781,11 @@ given session.
 -  Returns a ViSession handle that you use to identify the instrument in
    all calibration adjustments and post-adjustment verification steps.
 
-+------------+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| |image0|   | **Notes**   | The NI 4050 and NI 4060 are not supported.                                                                                                                                                                                                            |
-|            |             | Refer to the *NI 4065 6½ Digit DMM Calibration Procedure*, the *NI 4070/4072 6½ Digit FlexDMM Calibration Procedure*, or the *NI 4071 7½–Digit FlexDMM Calibration Procedure* before using this function.                                             |
-|            |             | This function creates a new session the first time you invoke it for a device. If you call this function on the same resource, an error is returned. You should use :py:func:\`nidmm.CloseExtCal\` to close a session obtained using this function.   |
-+------------+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| |image0|   | **Notes**   | The NI 4050 and NI 4060 are not supported.                                                                                                                                                                                                |
+|            |             | Refer to the *NI 4065 6½ Digit DMM Calibration Procedure*, the *NI 4070/4072 6½ Digit FlexDMM Calibration Procedure*, or the *NI 4071 7½–Digit FlexDMM Calibration Procedure* before using this function.                                 |
+|            |             | This function creates a new session the first time you invoke it for a device. If you call this function on the same resource, an error is returned. You should use niDMM\_CloseExtCal to close a session obtained using this function.   |
++------------+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 After opening a calibration session, the device cannot take valid
 measurements using this session until the device has been properly
@@ -3809,12 +3793,12 @@ adjusted. Once the adjustment phase is complete, you can use this
 session to verify the new calibration constants. After verification, you
 have the option of saving the new calibration constants or reverting to
 the previous calibration constants by specifying the **Action**
-parameter in :py:func:\`nidmm.CloseExtCal\`.
+parameter in niDMM\_CloseExtCal.
 
 If you encounter a fatal error such as a power failure or system crash
 while performing an external calibration, you can call
-:py:func:\`nidmm.RestoreLastExtCalConstants\` to return the device to a
-usable state.
+niDMM\_RestoreLastExtCalConstants to return the device to a usable
+state.
 
 .. |image0| image:: note.gif
 ''',
@@ -3882,9 +3866,9 @@ identifies a particular instrument calibration session.
         'long_description': '''
 -  Creates a new IVI instrument driver session and, optionally, sets the
    initial state of the following session attributes:
-   :py:data:\`nidmm.RANGE\_CHECK\`,
-   :py:data:\`nidmm.QUERY\_INSTR\_STATUS\`, :py:data:\`nidmm.CACHE\`,
-   :py:data:\`nidmm.SIMULATE\`, :py:data:\`nidmm.RECORD\_COERCIONS\`.
+   NIDMM\_ATTR\_RANGE\_CHECK, NIDMM\_ATTR\_QUERY\_INSTR\_STATUS,
+   NIDMM\_ATTR\_CACHE, NIDMM\_ATTR\_SIMULATE,
+   NIDMM\_ATTR\_RECORD\_COERCIONS.
 -  Opens a session to the device you specify for the **resource_name**
    parameter. If the **ID\_Query** parameter is set to VI\_TRUE, this
    function queries the instrument ID and checks that it is valid for
@@ -4020,8 +4004,8 @@ Purpose
 Initiates an acquisition. After you call this function, the DMM leaves
 the Idle state and enters the Wait-for-Trigger state. If trigger is set
 to Immediate mode, the DMM begins acquiring measurement data. Use
-:py:func:\`nidmm.Fetch\`, :py:func:\`nidmm.FetchMultiPoint\`, or
-:py:func:\`nidmm.FetchWaveform\` to retrieve the measurement data.
+niDMM\_Fetch, niDMM\_FetchMultiPoint, or niDMM\_FetchWaveform to
+retrieve the measurement data.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -4030,8 +4014,8 @@ to Immediate mode, the DMM begins acquiring measurement data. Use
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4051,8 +4035,8 @@ measurement or a value indicating that an overrange condition occurred.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4101,8 +4085,8 @@ measurement or a value indicating that an underrange condition occurred.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4149,22 +4133,20 @@ following ways:
 -  A call to the IVI Library locked the session.
 
 After your call to this function returns successfully, no other threads
-can access the instrument session until you call
-:py:func:\`nidmm.UnlockSession\`.
+can access the instrument session until you call niDMM\_UnlockSession.
 
-Use this function and :py:func:\`nidmm.UnlockSession\` around a sequence
-of calls to instrument driver functions if you require that the
-instrument retain its settings through the end of the sequence. You can
-safely make nested calls to this function within the same thread.
+Use this function and niDMM\_UnlockSession around a sequence of calls to
+instrument driver functions if you require that the instrument retain
+its settings through the end of the sequence. You can safely make nested
+calls to this function within the same thread.
 
 To completely unlock the session, you must balance each call to this
-function with a call to :py:func:\`nidmm.UnlockSession\`. If, however,
-you use the **caller_has_lock** parameter in all calls to this
-function and :py:func:\`nidmm.UnlockSession\` within a function, the IVI
-Library locks the session only once within the function regardless of
-the number of calls you make to this function. This feature allows you
-to call :py:func:\`nidmm.UnlockSession\` just once at the end of the
-function.
+function with a call to niDMM\_UnlockSession. If, however, you use the
+**caller_has_lock** parameter in all calls to this function and
+niDMM\_UnlockSession within a function, the IVI Library locks the
+session only once within the function regardless of the number of calls
+you make to this function. This feature allows you to call
+niDMM\_UnlockSession just once at the end of the function.
 ''',
         'purpose': '''
 This function obtains a multithread lock on the instrument session.
@@ -4178,8 +4160,8 @@ released their locks on the instrument session.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4197,23 +4179,21 @@ the session. To use this parameter, complete the following steps:
 #. In the declaration of the local variable, initialize it to VI\_FALSE
    (0).
 #. Pass the address of the same local variable to any other calls you
-   make to this function or :py:func:\`nidmm.UnlockSession\` in the same
-   function.
+   make to this function or niDMM\_UnlockSession in the same function.
 
 The parameter is an input/output parameter. This function and
-:py:func:\`nidmm.UnlockSession\` each inspect the current value and take
-the following actions:
+niDMM\_UnlockSession each inspect the current value and take the
+following actions:
 
 If the value is VI\_TRUE (1), this function does not lock the session
 again. If the value is VI\_FALSE, this function obtains the lock and
 sets the value of the parameter to VI\_TRUE.
 
-If the value is VI\_FALSE, :py:func:\`nidmm.UnlockSession\` does not
-attempt to unlock the session. If the value is VI\_TRUE,
-:py:func:\`nidmm.UnlockSession\` releases the lock and sets the value of
-the parameter to VI\_FALSE. Thus, you can, call
-:py:func:\`nidmm.UnlockSession\` at the end of your function without
-worrying about whether you actually have the lock.
+If the value is VI\_FALSE, niDMM\_UnlockSession does not attempt to
+unlock the session. If the value is VI\_TRUE, niDMM\_UnlockSession
+releases the lock and sets the value of the parameter to VI\_FALSE.
+Thus, you can, call niDMM\_UnlockSession at the end of your function
+without worrying about whether you actually have the lock.
 
 **Example**
 
@@ -4276,8 +4256,8 @@ For the NI 4082 and NI 4072 only, performs the open cable compensation
 measurements for the current capacitance/inductance range, and returns
 open cable compensation **conductance** and **susceptance** values. You
 can use the return values of this function as inputs to
-:py:data:\`nidmm.FUNCTION\` attribute is not set to
-NIDMM\_VAL\_CAPACITANCE (1005) or NIDMM\_VAL\_INDUCTANCE (1006).
+NIDMM\_ATTR\_FUNCTION attribute is not set to NIDMM\_VAL\_CAPACITANCE
+(1005) or NIDMM\_VAL\_INDUCTANCE (1006).
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -4286,8 +4266,8 @@ NIDMM\_VAL\_CAPACITANCE (1005) or NIDMM\_VAL\_INDUCTANCE (1006).
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4323,9 +4303,8 @@ Purpose
 Performs the short cable compensation measurements for the current
 capacitance/inductance range, and returns short cable compensation
 **resistance** and **reactance** values. You can use the return values
-of this function as inputs to :py:data:\`nidmm.FUNCTION\` attribute is
-not set to NIDMM\_VAL\_CAPACITANCE (1005) or NIDMM\_VAL\_INDUCTANCE
-(1006).
+of this function as inputs to NIDMM\_ATTR\_FUNCTION attribute is not set
+to NIDMM\_VAL\_CAPACITANCE (1005) or NIDMM\_VAL\_INDUCTANCE (1006).
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -4334,8 +4313,8 @@ not set to NIDMM\_VAL\_CAPACITANCE (1005) or NIDMM\_VAL\_INDUCTANCE
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4374,8 +4353,8 @@ Acquires a single measurement and returns the measured value.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4424,8 +4403,8 @@ niDMM\_ConfigureMultiPoint <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.ch
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4454,7 +4433,7 @@ automatically.
                 'long_description': '''
 Specifies the number of measurements to acquire. The maximum number of
 measurements for a finite acquisition is the (**Trigger Count** x
-**Sample Count**) parameters in :py:func:\`nidmm.ConfigureMultiPoint\`.
+**Sample Count**) parameters in niDMM\_ConfigureMultiPoint.
 
 For continuous acquisitions, up to 100,000 points can be returned at
 once. The number of measurements can be a subset. The valid range is any
@@ -4510,8 +4489,8 @@ niDMM\_FetchWaveform <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4570,8 +4549,8 @@ niDMM\_ConfigureWaveformAcquisition <javascript:LaunchMergedHelp('dmm.chm',%20'd
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4600,8 +4579,8 @@ automatically.
                 'long_description': '''
 Specifies the number of waveform points to return. You specify the total
 number of points that the DMM acquires in the **Waveform Points**
-parameter of :py:func:\`nidmm.ConfigureWaveformAcquisition\`. The
-default value is 1.
+parameter of niDMM\_ConfigureWaveformAcquisition. The default value is
+1.
 ''',
                 'name': 'arraySize',
                 'type': 'ViInt32',
@@ -4650,14 +4629,13 @@ modules.
 
 This function does not clear the interchangeability warnings from the
 list of previously recorded interchangeability warnings. If you want to
-guarantee that :py:func:\`nidmm.GetNextInterchangeWarning\` only returns
-those interchangeability warnings that are generated after calling this
+guarantee that niDMM\_GetNextInterchangeWarning only returns those
+interchangeability warnings that are generated after calling this
 function, you must clear the list of interchangeability warnings. You
 can clear the interchangeability warnings list by repeatedly calling
-:py:func:\`nidmm.GetNextInterchangeWarning\` until no more
-interchangeability warnings are returned. If you are not interested in
-the content of those warnings, you can call
-:py:func:\`nidmm.ClearInterchangeWarnings\`.
+niDMM\_GetNextInterchangeWarning until no more interchangeability
+warnings are returned. If you are not interested in the content of those
+warnings, you can call niDMM\_ClearInterchangeWarnings.
 ''',
         'purpose': '''
 When developing a complex test system that consists of multiple test
@@ -4672,8 +4650,8 @@ module completely configures the state of each instrument it uses.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4695,8 +4673,8 @@ values associated with a logical name are applied after setting the DMM.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4706,8 +4684,8 @@ parameter from :py:func:\`nidmm.init\` or
     },
     'RestoreLastExtCalConstants': {
         'long_description': '''
-After calling this function, you should call :py:func:\`nidmm.SelfCal\`
-before taking measurements with the device to adjust the device for any
+After calling this function, you should call niDMM\_SelfCal before
+taking measurements with the device to adjust the device for any
 temperature drifts since the last external calibration.
 
 .. note::   The NI 4050, NI 4060, and NI 4080/4081/4082 are not
@@ -4726,8 +4704,8 @@ procedure.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4737,9 +4715,9 @@ parameter from :py:func:\`nidmm.init\` or
     },
     'SelfCal': {
         'long_description': '''
-.. note::   This function calls :py:func:\`nidmm.reset\`, and any
-configurations previous to the call will be lost. All attributes will be
-set to their default values after the call returns.
+.. note::   This function calls niDMM\_reset, and any configurations
+previous to the call will be lost. All attributes will be set to their
+default values after the call returns.
 ''',
         'purpose': '''
 For the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the
@@ -4752,8 +4730,8 @@ self-calibration routine to maintain measurement accuracy.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4767,13 +4745,12 @@ Purpose
 -------
 
 Sends a command to trigger the DMM. Call this function if you have
-configured either the :py:data:\`nidmm.TRIGGER\_SOURCE\` or
-:py:data:\`nidmm.SAMPLE\_TRIGGER\` attributes. If the
-:py:data:\`nidmm.TRIGGER\_SOURCE\` and/or
-:py:data:\`nidmm.SAMPLE\_TRIGGER\` attributes are set to
-NIDMM\_VAL\_EXTERNAL or NIDMM\_VAL\_TTL\ *n*, you can use this function
-to override the trigger source that you configured and trigger the
-device. The NI 4050 and NI 4060 are not supported.
+configured either the NIDMM\_ATTR\_TRIGGER\_SOURCE or
+NIDMM\_ATTR\_SAMPLE\_TRIGGER attributes. If the
+NIDMM\_ATTR\_TRIGGER\_SOURCE and/or NIDMM\_ATTR\_SAMPLE\_TRIGGER
+attributes are set to NIDMM\_VAL\_EXTERNAL or NIDMM\_VAL\_TTL\ *n*, you
+can use this function to override the trigger source that you configured
+and trigger the device. The NI 4050 and NI 4060 are not supported.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -4782,8 +4759,8 @@ device. The NI 4050 and NI 4060 are not supported.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4827,8 +4804,8 @@ This function sets the value of a ViBoolean attribute.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4904,8 +4881,8 @@ This function sets the value of a ViInt32 attribute.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -4981,8 +4958,8 @@ This function sets the value of a ViReal64 attribute.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -5047,8 +5024,8 @@ instrument I/O in the following cases:
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -5124,8 +5101,8 @@ This function sets the value of a ViString attribute.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -5188,8 +5165,8 @@ the default password.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -5227,10 +5204,10 @@ Purpose
 -------
 
 Stores the user-defined information in the EEPROM. Use
-:py:func:\`nidmm.GetCalUserDefinedinfoMaxSize\` to learn the maximum
-string size that is allowed. If the **info** string size is larger than
-the maximum string size, NI-DMM stores as much of the information as
-possible, truncates the remainder, and returns a warning.
+niDMM\_GetCalUserDefinedinfoMaxSize to learn the maximum string size
+that is allowed. If the **info** string size is larger than the maximum
+string size, NI-DMM stores as much of the information as possible,
+truncates the remainder, and returns a warning.
 
 .. note::   The NI 4050 and NI 4060 are not supported.
 ''',
@@ -5241,8 +5218,8 @@ possible, truncates the remainder, and returns a warning.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -5254,11 +5231,10 @@ parameter from :py:func:\`nidmm.init\` or
                 'long_description': '''
 Specifies the user-defined information to be stored in the EEPROM such
 as the operator who performed the calibration operation or system
-information. Use :py:func:\`nidmm.GetCalUserDefinedinfoMaxSize\` to
-learn the maximum string size that is allowed. If the **info** string
-size is larger than the maximum string size, NI-DMM stores as much of
-the information as possible, truncates the remainder, and return a
-warning.
+information. Use niDMM\_GetCalUserDefinedinfoMaxSize to learn the
+maximum string size that is allowed. If the **info** string size is
+larger than the maximum string size, NI-DMM stores as much of the
+information as possible, truncates the remainder, and return a warning.
 ''',
                 'name': 'info',
                 'type': 'ViChar',
@@ -5280,8 +5256,8 @@ for additional information on session locks.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -5302,17 +5278,14 @@ To use this parameter, complete the following steps:
 #. In the declaration of the local variable, initialize it to VI\_FALSE
    (0).
 #. Pass the address of the same local variable to any other calls you
-   make to :py:func:\`nidmm.LockSession\` or this function in the same
-   function.
+   make to niDMM\_LockSession or this function in the same function.
 
-The parameter is an input/output parameter.
-:py:func:\`nidmm.LockSession\` and this function each inspect the
-current value and take the following actions:
+The parameter is an input/output parameter. niDMM\_LockSession and this
+function each inspect the current value and take the following actions:
 
-If the value is VI\_TRUE (1), :py:func:\`nidmm.LockSession\` does not
-lock the session again. If the value is VI\_FALSE,
-:py:func:\`nidmm.LockSession\` obtains the lock and sets the value of
-the parameter to VI\_TRUE.
+If the value is VI\_TRUE (1), niDMM\_LockSession does not lock the
+session again. If the value is VI\_FALSE, niDMM\_LockSession obtains the
+lock and sets the value of the parameter to VI\_TRUE.
 
 If the value is VI\_FALSE, this function does not attempt to unlock the
 session. If the value is VI\_TRUE, this function releases the lock and
@@ -5391,8 +5364,8 @@ Closes the specified session and deallocates resources that it reserved.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -5412,8 +5385,8 @@ interprets it, and returns it as a user-readable string.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -5455,8 +5428,8 @@ included for compliance with the *IviDmm Class Specification*.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -5599,8 +5572,8 @@ to the state necessary for the operation of the instrument driver.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -5620,8 +5593,8 @@ firmware.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
@@ -5663,9 +5636,9 @@ numbers.
     },
     'self_test': {
         'long_description': '''
-.. note::   This function calls :py:func:\`nidmm.reset\`, and any
-configurations previous to the call will be lost. All attributes will be
-set to their default values after the call returns.
+.. note::   This function calls niDMM\_reset, and any configurations
+previous to the call will be lost. All attributes will be set to their
+default values after the call returns.
 ''',
         'purpose': '''
 Performs a self-test on the DMM to ensure that the DMM is functioning
@@ -5678,8 +5651,8 @@ properly. Self-test does not calibrate the DMM.
                 'direction': 'in',
                 'long_description': '''
 Identifies a particular instrument session. You obtain the **vi**
-parameter from :py:func:\`nidmm.init\` or
-:py:func:\`nidmm.InitWithOptions\`. The default is None.
+parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
+None.
 ''',
                 'name': 'vi',
                 'type': 'ViSession',
