@@ -2,12 +2,13 @@
 <%
     import build.helper as helper
 
-    config = template_parameters['metadata'].config
+    config        = template_parameters['metadata'].config
+    attributes    = config['attributes']
+    functions     = config['functions']
+
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
-    attributes = template_parameters['metadata'].attributes
 
-    functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
     functions = helper.add_all_metadata(functions)
     functions = sorted(functions, key=lambda k: k['name'])

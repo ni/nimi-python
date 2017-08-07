@@ -2,10 +2,10 @@
 <%
     import build.helper as helper
 
-    config = template_parameters['metadata'].config
+    config        = template_parameters['metadata'].config
+    attributes    = config['attributes']
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
-    attributes = template_parameters['metadata'].attributes
 %>\
 
 import ctypes

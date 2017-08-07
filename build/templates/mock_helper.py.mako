@@ -2,9 +2,9 @@
 <%
 import build.helper as helper
 
-functions     = template_parameters['metadata'].functions
-attributes    = template_parameters['metadata'].attributes
 config        = template_parameters['metadata'].config
+attributes    = config['attributes']
+functions     = config['functions']
 
 module_name = config['module_name']
 c_function_prefix = config['c_function_prefix']
