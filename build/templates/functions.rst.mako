@@ -21,7 +21,7 @@ ${helper.get_rst_header_snippet(driver_name + ' Functions', '=')}
     output_parameters = helper.extract_output_parameters(f['parameters'])
     enum_input_parameters = helper.extract_enum_parameters(input_parameters)
 %>
-${helper.get_function_rst(fname, f, indent=0)}
+${helper.get_function_rst(fname, functions, config, indent=0)}
 
 % endfor
 

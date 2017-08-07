@@ -1,3 +1,8 @@
+<%
+# Have to put this in a variable and add it that way because mako keeps thinking it is for it, not for the output file
+encoding_tag = '# -*- coding: utf-8 -*-'
+%>\
+${encoding_tag}
 # This file was generated
 <%
     import build.helper as helper
@@ -215,7 +220,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
     def ${f['python_name']}(${helper.get_method_parameters_snippet(input_parameters)}):
         '''${f['python_name']}
 
-        ${helper.get_function_docstring(func_name, f, indent=8)}
+        ${helper.get_function_docstring(func_name, functions, config, indent=8)}
         '''
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}

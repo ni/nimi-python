@@ -228,11 +228,11 @@ def sorted_attrs(a):
 
 def get_indented_docstring_snippet(d, indent=4):
     '''
-    Returns a docstring with the correct amount of indentation. 
+    Returns a docstring with the correct amount of indentation.
 
     First line is not indented.
 
-    Can't use similar construct as get_dictionary_snippet 
+    Can't use similar construct as get_dictionary_snippet
     ('\n' + (' ' * indent)).join(d_lines) because empty lines would get
     the spaces, which violates pep8 and causes the flake8 step to fail
 
@@ -260,26 +260,72 @@ def get_rst_header_snippet(t, header_level='='):
     ret_val += header_level * len(t)
     return ret_val
 
-def make_snake_case(m):
-    if m.group(1) == 'func':
-        f = camelcase_to_snakecase(m.group(3))
-        return ':py:func:`' + m.group(2) + '.' + f + '`'
+# We need this in the global namespace so we can reference it from the sub() callback
+functions = None
+config = None
+def replace_func_python_name_no_link(m):
+    '''callback function for regex sub command when link not needed
 
-def fix_links(rst):
-    link_re = re.compile('\:py\:(data|func)\:\\\\`(.+?)\.(.+?)\\\\`', re.MULTILINE | re.DOTALL)
-#    m = link_re.search(rst)
-#    while m:
-#        if m.group(1) == 'data':
-#            #rst = link_re.sub('\g<3>', rst)
-#            pass
-#        else:
-#            func = camelcase_to_snakecase(m.group(3))
-#            rst = link_re.sub(':py:func:`{0}.{1}`'.format(m.group(2), func), rst)
-#        m = link_re.search(rst)
-    rst = link_re.sub(make_snake_case, rst)
-    return rst
+    Args:
+        m (match object): Match object from the function substitution command
 
-def get_function_rst(fname, function, indent=0):
+    Returns:
+        str: python name of the function
+    '''
+    fname = "Unknown"
+    if f_match and f_match.group(1) in functions:
+        fname = functions[f_match.group(1)]['python_name']
+    return '{0} '.format(fname)
+
+def replace_func_python_name_with_link(m):
+    '''callback function for regex sub command when link needed
+
+    Args:
+        m (match object): Match object from the function substitution command
+
+    Returns:
+        str: rst link to function using python name
+    '''
+    fname = "Unknown"
+    if f_match and f_match.group(1) in functions:
+        fname = functions[f_match.group(1)]['python_name']
+    return ':py:func:`{0}.{1}` '.format(config['module_name'], fname)
+
+def fix_references(doc, funcs, cfg, make_link=False):
+    '''Replace ATTR and function mentions in documentation
+
+    Args:
+        doc (str): documentation string to be updated
+        funcs (dict): functions dictionary from metadata - needed for proper name replacement
+        config (dict): config dictionary from metadata - currently only used for module_name
+        make_link (bool): Default False
+            True - references are replaced with a rst style link
+            False - references are replaced with just the python name
+
+    Returns:
+        str: documentation with references replaces based on make_link
+    '''
+
+    global functions
+    functions = funcs
+
+    global config
+    config = cfg
+
+    attr_re = re.compile('{0}\\\\_ATTR\\\\_(.+?) '.format(config['module_name'].upper()))
+    func_re = re.compile('{0}(.+?) '.format(config['c_function_prefix'].replace('_', '\_')))
+    enum_re = re.compile('enums.(.+)')
+
+    if make_link:
+        doc = attr_re.sub(':py:data:`{0}.\g<1>` '.format(config['module_name']), doc)
+        doc = func_re.sub(replace_func_python_name_with_link, doc)
+    else:
+        doc = attr_re.sub('\g<1> ', doc)
+        doc = func_re.sub(replace_func_python_name_no_link, doc)
+        doc = doc.replace('\_', '_')
+    return doc
+
+def get_function_rst(fname, functions, config, indent=0):
     '''Gets rst formatted documentation for given function
 
     Args:
@@ -289,13 +335,14 @@ def get_function_rst(fname, function, indent=0):
     Returns:
         str: rst formatted documentation
     '''
+    function = functions[fname]
     rst = '.. function:: ' + function['python_name'] + '('
     rst += get_function_parameters_snippet(function['parameters'], sessionName='vi') + ')'
     indent += 4
     if 'purpose' in function:
-        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_links(function['purpose']), indent)
+        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_references(function['purpose'], functions, config, make_link=True), indent)
     if 'long_description' in function:
-        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_links(function['long_description']), indent)
+        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_references(function['long_description'], functions, config, make_link=True), indent)
 
     input_params = extract_input_parameters(function['parameters'])
     if len(input_params) > 0:
@@ -303,8 +350,12 @@ def get_function_rst(fname, function, indent=0):
     for p in input_params:
         rst +=  '\n' + (' ' * indent) + ':param {0}: '.format(p['python_name'])
         if 'long_description' in p:
-            rst += get_indented_docstring_snippet(fix_links(p['long_description']), indent + 4)
-        rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p['python_type']
+            rst += get_indented_docstring_snippet(fix_references(p['long_description'], functions, config, make_link=True), indent + 4)
+        p_type = p['python_type']
+        if p_type.startswith('enums.'):
+            p_type = p_type.replace('enums.', '')
+            p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+        rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
 
     output_params = extract_output_parameters(function['parameters'])
@@ -314,26 +365,14 @@ def get_function_rst(fname, function, indent=0):
         for p in output_params:
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
             if 'long_description' in p:
-                rst += get_indented_docstring_snippet(fix_links(p['long_description']), indent + 8)
+                rst += get_indented_docstring_snippet(fix_references(p['long_description'], functions, config, make_link=True), indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
         rst += '\n\n' + (' ' * indent) + ':rtype: '+ p['python_type']
 
     return rst
 
-def remove_links(docstring):
-    link_re = re.compile('\:py\:(data|func)\:\\\\`(.+?)\.(.+?)\\\\`', re.MULTILINE | re.DOTALL)
-    m = link_re.search(docstring)
-    while m:
-        if m.group(1) == 'data':
-            docstring = link_re.sub('\g<3>', docstring)
-        else:
-            func = camelcase_to_snakecase(m.group(3))
-            docstring = link_re.sub(func, docstring)
-        m = link_re.search(docstring)
-    return docstring
-
-def get_function_docstring(fname, function, indent=0):
+def get_function_docstring(fname, functions, config, indent=0):
     '''Gets formatted documentation for given function that can be used as a docstring
 
     Args:
@@ -344,10 +383,11 @@ def get_function_docstring(fname, function, indent=0):
         str: docstring formatted documentation
     '''
     docstring = ''
+    function = functions[fname]
     if 'purpose' in function:
-        docstring += get_indented_docstring_snippet(remove_links(function['purpose']), indent)
+        docstring += get_indented_docstring_snippet(fix_references(function['purpose'], functions, config, make_link=False), indent)
     elif 'long_description' in function:
-        docstring += get_indented_docstring_snippet(remove_links(function['long_description']), indent)
+        docstring += get_indented_docstring_snippet(fix_references(function['long_description'], functions, config, make_link=False), indent)
 
     input_params = extract_input_parameters(function['parameters'])
     if len(input_params) > 0:
@@ -355,7 +395,7 @@ def get_function_docstring(fname, function, indent=0):
     for p in input_params:
         docstring +=  '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
         if 'long_description' in p:
-            docstring += get_indented_docstring_snippet(remove_links(p['long_description']), indent + 8)
+            docstring += get_indented_docstring_snippet(fix_references(p['long_description'], functions, config, make_link=False), indent + 8)
 
 
     output_params = extract_output_parameters(function['parameters'])
@@ -364,7 +404,7 @@ def get_function_docstring(fname, function, indent=0):
         for p in output_params:
             docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
             if 'long_description' in p:
-                docstring += get_indented_docstring_snippet(remove_links(p['long_description']), indent + 8)
+                docstring += get_indented_docstring_snippet(fix_references(p['long_description'], functions, config, make_link=False), indent + 8)
 
     return docstring
 
