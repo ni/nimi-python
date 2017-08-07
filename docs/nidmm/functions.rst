@@ -28,18 +28,17 @@ NI-DMM Functions
     Purpose
     -------
 
-    Configures the  and
-     attributes, which the DMM uses for AC
-    measurements.
+    Configures the :py:data:`nidmm.AC\_MIN\_FREQ` and NIDMM\_ATTR\_AC\_MAX\_FREQ
+    attributes, which the DMM uses for AC measurements.
 
     :param ac_minimum_frequency_hz: Specifies the minimum expected frequency component of the input signal
         in hertz. This parameter affects the DMM only when you set the
-         attribute to AC measurements. NI-DMM uses
-        this parameter to calculate the proper aperture for the measurement.
-        The driver sets the  attribute to this
-        value. The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the
-        NI 4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for
-        the NI 4050 and NI 4060.
+        :py:data:`nidmm.FUNCTION` attribute to AC measurements. NI-DMM uses this
+        parameter to calculate the proper aperture for the measurement.
+        The driver sets the :py:data:`nidmm.AC\_MIN\_FREQ` attribute to this value.
+        The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
+        4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
+        NI 4050 and NI 4060.
     :type ac_minimum_frequency_hz: ViReal64
     :param ac_maximum_frequency_hz: Specifies the maximum expected frequency component of the input signal
         in hertz within the device limits. This parameter is used only for error
@@ -47,11 +46,10 @@ NI-DMM Functions
         maximum frequency of the device.
 
         This parameter affects the DMM only when you set the
-         attribute to AC measurements. The driver
-        sets the  attribute to this value. The
-        valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
-        4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
-        NI 4050 and NI 4060.
+        :py:data:`nidmm.FUNCTION` attribute to AC measurements. The driver sets the
+        :py:data:`nidmm.AC\_MAX\_FREQ` attribute to this value. The valid range is 1
+        Hz–300 kHz for the NI 4080/4081/4082 and the NI 4070/4071/4072, 10
+        Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
     :type ac_maximum_frequency_hz: ViReal64
 
 
@@ -65,7 +63,7 @@ NI-DMM Functions
     changes to the gain.
 
     :param adc_calibration: Specifies the **ADC\_Calibration** setting. The driver sets
-         to this value.
+        :py:data:`nidmm.ADC\_CALIBRATION` to this value.
         NIDMM\_VAL\_ADC\_CALIBRATION\_ON enables **ADC\_Calibration**.
         NIDMM\_VAL\_ADC\_CALIBRATION\_OFF disables **ADC\_Calibration**. If you
         set the value to NIDMM\_VAL\_ADC\_CALIBRATION\_AUTO, the driver
@@ -84,7 +82,7 @@ NI-DMM Functions
         +------------------------------------------------+---------+-----------------------------------------------------------------------------------------------------+
         | NIDMM\_VAL\_ADC\_CALIBRATION\_ON               |  1      | The DMM measures an internal reference to calculate the correct gain for the measurement.           |
         +------------------------------------------------+---------+-----------------------------------------------------------------------------------------------------+
-    :type adc_calibration: enums.EnabledSetting
+    :type adc_calibration: :py:data:`nidmm.EnabledSetting`
 
 
 .. function:: configure_auto_zero_mode(auto_zero_mode)
@@ -97,7 +95,7 @@ NI-DMM Functions
     DMM does not compensate for zero reading offset.
 
     :param auto_zero_mode: Specifies the **auto\_zero\_mode**. NI-DMM sets the
-         attribute to this value.
+        :py:data:`nidmm.AUTO\_ZERO` attribute to this value.
 
         ON enables **auto\_zero\_mode** for each measurement. ONCE enables
         **auto\_zero\_mode** before the next measurement. The
@@ -121,7 +119,7 @@ NI-DMM Functions
         and adds no extra time to the overall measurement.
 
         .. note::   The NI 4060/4065 does *not* support this setting.
-    :type auto_zero_mode: enums.EnabledSetting
+    :type auto_zero_mode: :py:data:`nidmm.EnabledSetting`
 
 
 .. function:: configure_cable_comp_type(cable_comp_type)
@@ -130,12 +128,12 @@ NI-DMM Functions
     -------
 
     For the NI 4082 and NI 4072 only, sets the
-     attribute for the current
+    :py:data:`nidmm.CABLE\_COMP\_TYPE` attribute for the current
     capacitance/inductance mode range.
 
     :param cable_comp_type: Specifies the type of cable compensation that is used for the current
         range.
-    :type cable_comp_type: enums.CableCompensationType
+    :type cable_comp_type: :py:data:`nidmm.CableCompensationType`
 
 
 .. function:: configure_current_source(current_source)
@@ -145,7 +143,7 @@ NI-DMM Functions
 
     :param current_source: Specifies the **current\_source** provided during diode measurements.
         For valid ranges, refer to the device sections for your device. The
-        driver sets  to this value.
+        driver sets :py:data:`nidmm.CURRENT\_SOURCE` to this value.
         +-------------------------------------+----------+-----------------------------------------------------+
         | NIDMM\_VAL\_1\_MICROAMP             | 1 µA     | NI 4080/4081/4082 and NI 4070/4071/4072             |
         +-------------------------------------+----------+-----------------------------------------------------+
@@ -155,7 +153,7 @@ NI-DMM Functions
         +-------------------------------------+----------+-----------------------------------------------------+
         | NIDMM\_VAL\_1\_MILLIAMP (default)   | 1 mA     | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065   |
         +-------------------------------------+----------+-----------------------------------------------------+
-    :type current_source: enums.CurrentSource
+    :type current_source: :py:data:`nidmm.CurrentSource`
 
 
 .. function:: configure_fixed_ref_junction(fixed_reference_junction)
@@ -177,7 +175,7 @@ NI-DMM Functions
     measurements.
 
     :param voltage_range: Sets the expected maximum amplitude of the input signal. Refer to the
-         to this value. The minimum
+        :py:data:`nidmm.FREQ\_VOLTAGE\_RANGE` to this value. The minimum
         peak-to-peak signal amplitude that can be detected is 10% of the
         specified **voltage\_range**.
         +-----------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------+
@@ -199,13 +197,13 @@ NI-DMM Functions
 
     :param meas_complete_destination: Specifies the destination of the Measurement Complete signal. This
         signal is issued when the DMM completes a single measurement. The driver
-        sets the  attribute to this
-        value. This signal is commonly referred to as Voltmeter Complete. ..
-        note::   To determine which values are supported by each device, refer
-        to the `LabWindows/CVI Trigger
+        sets the :py:data:`nidmm.MEAS\_COMPLETE\_DEST` attribute to this value. This
+        signal is commonly referred to as Voltmeter Complete. .. note::   To
+        determine which values are supported by each device, refer to the
+        `LabWindows/CVI Trigger
         Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
         section.
-    :type meas_complete_destination: enums.MeasurementCompleteDest
+    :type meas_complete_destination: :py:data:`nidmm.MeasurementCompleteDest`
 
 
 .. function:: configure_meas_complete_slope(meas_complete_slope)
@@ -214,13 +212,13 @@ NI-DMM Functions
     falling edge (negative) polarity.
 
     :param meas_complete_slope: Specifies the polarity of the signal that is generated. The driver sets
-         to this value.
+        :py:data:`nidmm.MEAS\_DEST\_SLOPE` to this value.
         +--------------------------+-----+------------------------+------------------------------------------------------------------+
         | Rising Edge              | 0   | NIDMM\_VAL\_POSITIVE   | The driver triggers on the rising edge of the trigger signal.    |
         +--------------------------+-----+------------------------+------------------------------------------------------------------+
         | Falling Edge (default)   | 1   | NIDMM\_VAL\_NEGATIVE   | The driver triggers on the falling edge of the trigger signal.   |
         +--------------------------+-----+------------------------+------------------------------------------------------------------+
-    :type meas_complete_slope: enums.Slope
+    :type meas_complete_slope: :py:data:`nidmm.Slope`
 
 
 .. function:: configure_measurement_absolute(measurement_function, range, resolution_absolute)
@@ -233,12 +231,12 @@ NI-DMM Functions
     -------
 
     Configures the common attributes of the measurement. These attributes
-    include , , and
-    .
+    include :py:data:`nidmm.FUNCTION,` :py:data:`nidmm.RANGE,` and
+    NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE.
 
     :param measurement_function: Specifies the **measurement\_function** used to acquire the measurement.
-        The driver sets  to this value.
-    :type measurement_function: enums.Function
+        The driver sets :py:data:`nidmm.FUNCTION` to this value.
+    :type measurement_function: :py:data:`nidmm.Function`
     :param range: Specifies the **range** for the function specified in the
         **Measurement\_Function** parameter. When frequency is specified in the
         **Measurement\_Function** parameter, you must supply the minimum
@@ -247,8 +245,8 @@ NI-DMM Functions
         For all other functions, you must supply a **range** that exceeds the
         value that you are measuring. For example, you must type in 10 V if you
         are measuring 9 V. **range** values are coerced up to the closest input
-        **range**. Refer to the  to this value. The
-        default is 0.02 V.
+        **range**. Refer to the :py:data:`nidmm.RANGE` to this value. The default is
+        0.02 V.
         .. note::   The NI 4050, NI 4060, and NI 4065 only support Auto range
         when the trigger and sample trigger are set to IMMEDIATE.
         NIDMM\_VAL\_AUTO\_RANGE\_ON
@@ -256,24 +254,24 @@ NI-DMM Functions
         NI-DMM performs an Auto range before acquiring the measurement.
         NIDMM\_VAL\_AUTO\_RANGE\_OFF
         -2.0
-        NI-DMM sets the range to the current
-         and uses this range
+        NI-DMM sets the range to the current :py:data:`nidmm.AUTO\_RANGE\_VALUE` and
+        uses this range
         for all subsequent measurements until the measurement configuration is
         changed.
         NIDMM\_VAL\_AUTO\_RANGE\_ONCE
         -3.0
         NI-DMM performs an Auto range before acquiring the measurement. The
-         is stored and used for all
-        subsequent measurements until the measurement configuration is changed.
+        :py:data:`nidmm.AUTO\_RANGE\_VALUE` is stored and used for all subsequent
+        measurements until the measurement configuration is changed.
     :type range: ViReal64
     :param resolution_absolute: Specifies the absolute resolution for the measurement. NI-DMM sets
-         to this value. This parameter is
+        :py:data:`nidmm.RESOLUTION\_ABSOLUTE` to this value. This parameter is
         ignored when the **Range** parameter is set to
         NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
         (-3.0). The default is 0.001 V.
         .. note::   NI-DMM ignores this parameter for capacitance and inductance
         measurements on the NI 4072. To achieve better resolution for such
-        measurements, use the
+        measurements, use the NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE
         attribute.
     :type resolution_absolute: ViReal64
 
@@ -288,12 +286,12 @@ NI-DMM Functions
     -------
 
     Configures the common attributes of the measurement. These attributes
-    include , , and
-    .
+    include :py:data:`nidmm.FUNCTION,` :py:data:`nidmm.RANGE,` and
+    NIDMM\_ATTR\_RESOLUTION\_DIGITS.
 
     :param measurement_function: Specifies the **measurement\_function** used to acquire the measurement.
-        The driver sets  to this value.
-    :type measurement_function: enums.Function
+        The driver sets :py:data:`nidmm.FUNCTION` to this value.
+    :type measurement_function: :py:data:`nidmm.Function`
     :param range: Specifies the range for the function specified in the
         **Measurement\_Function** parameter. When frequency is specified in the
         **Measurement\_Function** parameter, you must supply the minimum
@@ -302,8 +300,7 @@ NI-DMM Functions
         For all other functions, you must supply a range that exceeds the value
         that you are measuring. For example, you must type in 10 V if you are
         measuring 9 V. range values are coerced up to the closest input range.
-        Refer to the  to this value. The default is 0.02
-        V.
+        Refer to the :py:data:`nidmm.RANGE` to this value. The default is 0.02 V.
         .. note::   The NI 4050, NI 4060, and NI 4065 only support Auto range
         when the trigger and sample trigger are set to IMMEDIATE.
         NIDMM\_VAL\_AUTO\_RANGE\_ON
@@ -311,24 +308,24 @@ NI-DMM Functions
         NI-DMM performs an Auto range before acquiring the measurement.
         NIDMM\_VAL\_AUTO\_RANGE\_OFF
         -2.0
-        NI-DMM sets the range to the current
-         and uses this range
+        NI-DMM sets the range to the current :py:data:`nidmm.AUTO\_RANGE\_VALUE` and
+        uses this range
         for all subsequent measurements until the measurement configuration is
         changed.
         NIDMM\_VAL\_AUTO\_RANGE\_ONCE
         -3.0
         NI-DMM performs an Auto range before acquiring the measurement. The
-         is stored and used for all
-        subsequent measurements until the measurement configuration is changed.
+        :py:data:`nidmm.AUTO\_RANGE\_VALUE` is stored and used for all subsequent
+        measurements until the measurement configuration is changed.
     :type range: ViReal64
     :param resolution_digits: Specifies the resolution of the measurement in digits. The driver sets
-        the  attribute to this value. This
+        the :py:data:`nidmm.RESOLUTION\_DIGITS` attribute to this value. This
         parameter is ignored when the **Range** parameter is set to
         NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
         (-3.0). The default is 5½.
         .. note::   NI-DMM ignores this parameter for capacitance and inductance
         measurements on the NI 4072. To achieve better resolution for such
-        measurements, use the
+        measurements, use the NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE
         attribute.
     :type resolution_digits: ViReal64
 
@@ -339,12 +336,11 @@ NI-DMM Functions
     -------
 
     Configures the attributes for multipoint measurements. These attributes
-    include ,
-    , ,
-    and .
+    include :py:data:`nidmm.TRIGGER\_COUNT,` NIDMM\_ATTR\_SAMPLE\_COUNT,
+    :py:data:`nidmm.SAMPLE\_TRIGGER,` and NIDMM\_ATTR\_SAMPLE\_INTERVAL.
 
-    For continuous acquisitions, set  or
-     to zero. For more information, refer to
+    For continuous acquisitions, set :py:data:`nidmm.TRIGGER\_COUNT` or
+    :py:data:`nidmm.SAMPLE\_COUNT` to zero. For more information, refer to
     `Multiple Point
     Acquisitions <javascript:LaunchHelp('dmm.chm::/multi_point.html')>`__,
     `Triggering <javascript:LaunchHelp('dmm.chm::/trigger.html')>`__, and
@@ -352,27 +348,26 @@ NI-DMM Functions
     Switches <javascript:LaunchHelp('dmm.chm::/switch_selection.html')>`__.
 
     :param trigger_count: Sets the number of triggers you want the DMM to receive before returning
-        to the Idle state. The driver sets  to
-        this value. The default value is 1.
+        to the Idle state. The driver sets :py:data:`nidmm.TRIGGER\_COUNT` to this
+        value. The default value is 1.
     :type trigger_count: ViInt32
     :param sample_count: Sets the number of measurements the DMM makes in each measurement
         sequence initiated by a trigger. The driver sets
-         to this value. The default value is 1.
+        :py:data:`nidmm.SAMPLE\_COUNT` to this value. The default value is 1.
     :type sample_count: ViInt32
     :param sample_trigger: Specifies the **sample\_trigger** source you want to use. The driver
-        sets  to this value. The default is
+        sets :py:data:`nidmm.SAMPLE\_TRIGGER` to this value. The default is
         Immediate.
         .. note::   To determine which values are supported by each device,
         refer to the `LabWindows/CVI Trigger
         Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
         section.
-    :type sample_trigger: enums.SampleTrigger
+    :type sample_trigger: :py:data:`nidmm.SampleTrigger`
     :param sample_interval: Sets the amount of time in seconds the DMM waits between measurement
-        cycles. The driver sets  to this
-        value. Specify a sample interval to add settling time between
-        measurement cycles or to decrease the measurement rate.
-        **sample\_interval** only applies when the **Sample\_Trigger** is set to
-        INTERVAL.
+        cycles. The driver sets :py:data:`nidmm.SAMPLE\_INTERVAL` to this value.
+        Specify a sample interval to add settling time between measurement
+        cycles or to decrease the measurement rate. **sample\_interval** only
+        applies when the **Sample\_Trigger** is set to INTERVAL.
 
         On the NI 4060, the **sample\_interval** value is used as the settling
         time. When sample interval is set to 0, the DMM does not settle between
@@ -397,7 +392,7 @@ NI-DMM Functions
     than 10 KΩ.
 
     :param offset_comp_ohms: Enables or disables **offset\_comp\_ohms**. The driver sets
-         to this value.
+        :py:data:`nidmm.OFFSET\_COMP\_OHMS` to this value.
         +-------------------------------------------------+---------+------------------------------------------+
         | Name                                            | Value   | Description                              |
         +=================================================+=========+==========================================+
@@ -405,7 +400,7 @@ NI-DMM Functions
         +-------------------------------------------------+---------+------------------------------------------+
         | NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_ON              | 1       | On enables **offset\_comp\_ohms**.       |
         +-------------------------------------------------+---------+------------------------------------------+
-    :type offset_comp_ohms: enums.EnabledSetting
+    :type offset_comp_ohms: :py:data:`nidmm.EnabledSetting`
 
 
 .. function:: configure_open_cable_comp_values(conductance, susceptance)
@@ -414,8 +409,8 @@ NI-DMM Functions
     -------
 
     For the NI 4082 and NI 4072 only, configures the
-     and
-     attributes.
+    :py:data:`nidmm.OPEN\_CABLE\_COMP\_CONDUCTANCE` and
+    :py:data:`nidmm.OPEN\_CABLE\_COMP\_SUSCEPTANCE` attributes.
 
     :param conductance: Specifies the open cable compensation **conductance**.
     :type conductance: ViReal64
@@ -437,19 +432,16 @@ NI-DMM Functions
     Configures the A, B, and C parameters for a custom RTD.
 
     :param rtd_a: Specifies the Callendar-Van Dusen A coefficient for RTD scaling when RTD
-        Type parameter is set to Custom in the
-        :py:func:`nidmm.configure_rtd_type` function. The default is 3.9083e-3
-        (Pt3851)
+        Type parameter is set to Custom in the niDMM\_ConfigureRTDType function.
+        The default is 3.9083e-3 (Pt3851)
     :type rtd_a: ViReal64
     :param rtd_b: Specifies the Callendar-Van Dusen B coefficient for RTD scaling when RTD
-        Type parameter is set to Custom in the
-        :py:func:`nidmm.configure_rtd_type` function. The default is -5.775e-7
-        (Pt3851).
+        Type parameter is set to Custom in the niDMM\_ConfigureRTDType function.
+        The default is -5.775e-7 (Pt3851).
     :type rtd_b: ViReal64
     :param rtd_c: Specifies the Callendar-Van Dusen C coefficient for RTD scaling when RTD
-        Type parameter is set to Custom in the
-        :py:func:`nidmm.configure_rtd_type` function. The default is -4.183e-12
-        (Pt3851).
+        Type parameter is set to Custom in the niDMM\_ConfigureRTDType function.
+        The default is -4.183e-12 (Pt3851).
     :type rtd_c: ViReal64
 
 
@@ -538,19 +530,19 @@ NI-DMM Functions
 .. function:: configure_sample_trigger_slope(sample_trigger_slope)
 
     Sets the `
-    NIDMM\_ATTR\_SAMPLE\_TRIGGER\_SLOPE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_SAMPLE_TRIGGER_SLOPE.html')>`__
+    :py:data:`nidmm.SAMPLE\_TRIGGER\_SLOPE` <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_SAMPLE_TRIGGER_SLOPE.html')>`__
     to either rising edge (positive) or falling edge (negative) polarity.
 
     :param sample_trigger_slope: Specifies the polarity of the Trigger signal on which the measurement is
         triggered for values of either NIDMM\_VAL\_POSITIVE or
         NIDMM\_VAL\_NEGATIVE. The driver sets
-         to this value.
+        :py:data:`nidmm.SAMPLE\_TRIGGER\_SLOPE` to this value.
         +--------------------------+-----+------------------------+------------------------------------------------------------------+
         | Rising Edge              | 0   | NIDMM\_VAL\_POSITIVE   | The driver triggers on the rising edge of the trigger signal.    |
         +--------------------------+-----+------------------------+------------------------------------------------------------------+
         | Falling Edge (default)   | 1   | NIDMM\_VAL\_NEGATIVE   | The driver triggers on the falling edge of the trigger signal.   |
         +--------------------------+-----+------------------------+------------------------------------------------------------------+
-    :type sample_trigger_slope: enums.Slope
+    :type sample_trigger_slope: :py:data:`nidmm.Slope`
 
 
 .. function:: configure_short_cable_comp_values(resistance, reactance)
@@ -559,9 +551,9 @@ NI-DMM Functions
     -------
 
     For the NI 4082 and NI 4072 only, configures the
-    `NIDMM\_ATTR\_SHORT\_CABLE\_COMP\_RESISTANCE <javascript:LaunchHelp('dmmcref.chm::/caNIDMM_ATTR_SHORT_CABLE_COMP_RESISTANCE.html')>`__
+    `:py:data:`nidmm.SHORT\_CABLE\_COMP\_RESISTANCE` <javascript:LaunchHelp('dmmcref.chm::/caNIDMM_ATTR_SHORT_CABLE_COMP_RESISTANCE.html')>`__
     and
-    `NIDMM\_ATTR\_SHORT\_CABLE\_COMP\_REACTANCE <javascript:LaunchHelp('dmmcref.chm::/caNIDMM_ATTR_SHORT_CABLE_COMP_REACTANCE.html')>`__
+    `:py:data:`nidmm.SHORT\_CABLE\_COMP\_REACTANCE` <javascript:LaunchHelp('dmmcref.chm::/caNIDMM_ATTR_SHORT_CABLE_COMP_REACTANCE.html')>`__
     attributes.
 
     :param resistance: Specifies the short cable compensation **resistance**.
@@ -575,19 +567,16 @@ NI-DMM Functions
     Configures the A, B, and C parameters for a custom thermistor.
 
     :param thermistor_a: Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the
-        :py:func:`nidmm.configure_thermistor_type` function. The default is
-        1.0295e-3 (44006).
+        Thermistor Type is set to Custom in the niDMM\_ConfigureThermistorType
+        function. The default is 1.0295e-3 (44006).
     :type thermistor_a: ViReal64
     :param thermistor_b: Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the
-        :py:func:`nidmm.configure_thermistor_type` function. The default is
-        2.391e-4 (44006).
+        Thermistor Type is set to Custom in the niDMM\_ConfigureThermistorType
+        function. The default is 2.391e-4 (44006).
     :type thermistor_b: ViReal64
     :param thermistor_c: Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the
-        :py:func:`nidmm.configure_thermistor_type` function. The default is
-        1.568e-7 (44006).
+        Thermistor Type is set to Custom in the niDMM\_ConfigureThermistorType
+        function. The default is 1.568e-7 (44006).
     :type thermistor_c: ViReal64
 
 
@@ -615,7 +604,7 @@ NI-DMM Functions
         | NIDMM\_VAL\_TEMP\_ | 44007              | 3                  | 5 kΩ               |
         | THERMISTOR\_44007  |                    |                    |                    |
         +--------------------+--------------------+--------------------+--------------------+
-    :type thermistor_type: enums.TemperatureThermistorType
+    :type thermistor_type: :py:data:`nidmm.TemperatureThermistorType`
 
 
 .. function:: configure_thermocouple(thermocouple_type, reference_junction_type)
@@ -667,7 +656,7 @@ NI-DMM Functions
         +----------------------------+----------------+
         | NIDMM\_VAL\_THERMOCOUPLE   | Thermocouple   |
         +----------------------------+----------------+
-    :type transducer_type: enums.TemperatureTransducerType
+    :type transducer_type: :py:data:`nidmm.TemperatureTransducerType`
 
 
 .. function:: configure_trigger(trigger_source, trigger_delay)
@@ -682,17 +671,17 @@ NI-DMM Functions
     for more information.
 
     :param trigger_source: Specifies the **trigger\_source** that initiates the acquisition. The
-        driver sets  to this value. Software
-        configures the DMM to wait until :py:func:`nidmm.send_software_trigger`
-        is called before triggering the DMM.
+        driver sets :py:data:`nidmm.TRIGGER\_SOURCE` to this value. Software
+        configures the DMM to wait until niDMM\_SendSoftwareTrigger is called
+        before triggering the DMM.
         .. note::   To determine which values are supported by each device,
         refer to the `LabWindows/CVI Trigger
         Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
         section.
-    :type trigger_source: enums.TriggerSource
+    :type trigger_source: :py:data:`nidmm.TriggerSource`
     :param trigger_delay: Specifies the time that the DMM waits after it has received a trigger
         before taking a measurement. The driver sets the
-        `NIDMM\_ATTR\_TRIGGER\_DELAY <javascript:LaunchHelp('dmmcref.chm::/caNIDMM_ATTR_TRIGGER_DELAY.html')>`__
+        `:py:data:`nidmm.TRIGGER\_DELAY` <javascript:LaunchHelp('dmmcref.chm::/caNIDMM_ATTR_TRIGGER_DELAY.html')>`__
         attribute to this value. By default, **trigger\_delay** is
         NIDMM\_VAL\_AUTO\_DELAY (-1), which means the DMM waits an appropriate
         settling time before taking the measurement. On the NI 4060, if you set
@@ -707,20 +696,20 @@ NI-DMM Functions
 .. function:: configure_trigger_slope(trigger_slope)
 
     Sets the `
-    NIDMM\_ATTR\_TRIGGER\_SLOPE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_TRIGGER_SLOPE.html')>`__
+    :py:data:`nidmm.TRIGGER\_SLOPE` <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_TRIGGER_SLOPE.html')>`__
     attribute to either rising edge (positive) or falling edge (negative)
     polarity.
 
     :param trigger_slope: Specifies the polarity of the trigger signal on which the measurement is
         triggered for values of either NIDMM\_VAL\_POSITIVE or
-        NIDMM\_VAL\_NEGATIVE. The driver sets the
-         attribute to this value.
+        NIDMM\_VAL\_NEGATIVE. The driver sets the NIDMM\_ATTR\_TRIGGER\_SLOPE
+        attribute to this value.
         +----------------------------------+-----+------------------------------------------------------------------+
         | NIDMM\_VAL\_POSITIVE             | 0   | The driver triggers on the rising edge of the trigger signal.    |
         +----------------------------------+-----+------------------------------------------------------------------+
         | NIDMM\_VAL\_NEGATIVE (default)   | 1   | The driver triggers on the falling edge of the trigger signal.   |
         +----------------------------------+-----+------------------------------------------------------------------+
-    :type trigger_slope: enums.Slope
+    :type trigger_slope: :py:data:`nidmm.Slope`
 
 
 .. function:: configure_waveform_acquisition(measurement_function, range, rate, waveform_points)
@@ -729,17 +718,17 @@ NI-DMM Functions
     on the NI 4080/4081/4082 and the NI 4070/4071/4072.
 
     :param measurement_function: Specifies the **measurement\_function** used in a waveform acquisition.
-        The driver sets  to this value.
+        The driver sets :py:data:`nidmm.FUNCTION` to this value.
         +-------------------------------------------+--------+--------------------+
         | NIDMM\_VAL\_WAVEFORM\_VOLTAGE (default)   | 1003   | Voltage Waveform   |
         +-------------------------------------------+--------+--------------------+
         | NIDMM\_VAL\_WAVEFORM\_CURRENT             | 1004   | Current Waveform   |
         +-------------------------------------------+--------+--------------------+
-    :type measurement_function: enums.Function
+    :type measurement_function: :py:data:`nidmm.Function`
     :param range: Specifies the expected maximum amplitude of the input signal and sets
         the **range** for the **Measurement\_Function**. NI-DMM sets
-         to this value. **range** values are coerced up
-        to the closest input **range**. The default is 10.0.
+        :py:data:`nidmm.RANGE` to this value. **range** values are coerced up to the
+        closest input **range**. The default is 10.0.
 
         For valid ranges refer to the topics in
         `Devices <javascript:LaunchHelp('dmm.chm::/Devices.html')>`__.
@@ -747,15 +736,15 @@ NI-DMM Functions
         Auto-ranging is not supported during waveform acquisitions.
     :type range: ViReal64
     :param rate: Specifies the **rate** of the acquisition in samples per second. NI-DMM
-        sets  to this value.
+        sets :py:data:`nidmm.WAVEFORM\_RATE` to this value.
 
         The valid **Range** is 10.0–1,800,000 S/s. **rate** values are coerced
         to the closest integer divisor of 1,800,000. The default value is
         1,800,000.
     :type rate: ViReal64
     :param waveform_points: Specifies the number of points to acquire before the waveform
-        acquisition completes. NI-DMM sets
-        to this value.
+        acquisition completes. NI-DMM sets :py:data:`nidmm.WAVEFORM\_POINTS` to this
+        value.
 
         To calculate the maximum and minimum number of waveform points that you
         can acquire in one acquisition, refer to the `Waveform Acquisition
@@ -772,7 +761,7 @@ NI-DMM Functions
     instrument coupling for voltage waveforms.
 
     :param waveform_coupling: Selects DC or AC coupling. The driver sets
-         to this value.
+        :py:data:`nidmm.WAVEFORM\_COUPLING` to this value.
         +------------------------------------------------+---------+---------------+
         | Name                                           | Value   | Description   |
         +================================================+=========+===============+
@@ -780,7 +769,7 @@ NI-DMM Functions
         +------------------------------------------------+---------+---------------+
         | NIDMM\_VAL\_WAVEFORM\_COUPLING\_DC (default)   | 1       | DC coupling   |
         +------------------------------------------------+---------+---------------+
-    :type waveform_coupling: enums.WaveformCouplingMode
+    :type waveform_coupling: :py:data:`nidmm.WaveformCouplingMode`
 
 
 .. function:: disable()
@@ -796,7 +785,7 @@ NI-DMM Functions
     -------
 
     Returns the value from a previously initiated measurement. You must call
-    :py:func:`nidmm.initiate` before calling this function.
+    niDMM\_Initiate before calling this function.
 
     :param maximum_time: Specifies the **maximum\_time** allowed for this function to complete in
         milliseconds. If the function does not complete within this time
@@ -821,9 +810,8 @@ NI-DMM Functions
     Returns an array of values from a previously initiated multipoint
     measurement. The number of measurements the DMM makes is determined by
     the values you specify for the **Trigger\_Count** and **Sample\_Count**
-    parameters of :py:func:`nidmm.configure_multi_point`. You must first
-    call :py:func:`nidmm.initiate` to initiate a measurement before
-    calling this function.
+    parameters of niDMM\_ConfigureMultiPoint. You must first call
+    niDMM\_Initiate to initiate a measurement before calling this function.
 
     :param maximum_time: Specifies the **maximum\_time** allowed for this function to complete in
         milliseconds. If the function does not complete within this time
@@ -838,7 +826,7 @@ NI-DMM Functions
     :type maximum_time: ViInt32
     :param array_size: Specifies the number of measurements to acquire. The maximum number of
         measurements for a finite acquisition is the (**Trigger Count** x
-        **Sample Count**) parameters in :py:func:`nidmm.configure_multi_point`.
+        **Sample Count**) parameters in niDMM\_ConfigureMultiPoint.
 
         For continuous acquisitions, up to 100,000 points can be returned at
         once. The number of measurements can be a subset. The valid range is any
@@ -895,13 +883,11 @@ NI-DMM Functions
     **resolution**. Returns the formatted data, range, and mode strings.
 
     :param measurement_function: Specifies the **measurement\_function** used to acquire the measurement.
-        The driver sets  to this value.
+        The driver sets :py:data:`nidmm.FUNCTION` to this value.
     :type measurement_function: ViInt32
-    :param range: Specifies the  used to acquire the
-        **Measurement**.
+    :param range: Specifies the :py:data:`nidmm.RANGE` used to acquire the **Measurement**.
     :type range: ViReal64
-    :param resolution: Specifies the  of the
-        **Measurement**.
+    :param resolution: Specifies the :py:data:`nidmm.RESOLUTION\_ABSOLUTE` of the **Measurement**.
     :type resolution: ViReal64
     :param measurement: Specifies the measured value returned from the DMM.
     :type measurement: ViReal64
@@ -909,11 +895,11 @@ NI-DMM Functions
     :rtype: tuple (mode_string, range_string, data_string)
         WHERE
         mode_string (ViChar): Returns a string containing the units of the **Measurement** mode.
-        range_string (ViChar): Returns the  of the **Measurement**, formatted
-            into a string with the correct number of display digits.
+        range_string (ViChar): Returns the :py:data:`nidmm.RANGE` of the **Measurement**, formatted into a
+            string with the correct number of display digits.
         data_string (ViChar): Returns the **Measurement**, formatted according to the
-            , , and
-            .
+            :py:data:`nidmm.FUNCTION,` :py:data:`nidmm.RANGE,` and
+            NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE.
 
 
 .. function:: get_aperture_time_info(aperture_time, aperture_time_units)
@@ -924,9 +910,9 @@ NI-DMM Functions
         WHERE
         aperture_time (ViReal64): Specifies the amount of time the DMM digitizes the input signal for a
             single measurement. This parameter does not include settling time.
-            Returns the value of the  attribute.
-            The units of this attribute depend on the value of the
-             attribute.
+            Returns the value of the :py:data:`nidmm.APERTURE\_TIME` attribute. The
+            units of this attribute depend on the value of the
+            :py:data:`nidmm.APERTURE\_TIME\_UNITS` attribute.
             On the NI 4070/4071/4072, the minimum aperture time is 8.89 µs, and the
             maximum aperture time is 149 s. Any number of powerline cycles (PLCs)
             within the minimum and maximum ranges is allowed on the
@@ -943,8 +929,8 @@ NI-DMM Functions
             1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50,
             the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
         aperture_time_units (enums.ApertureTimeUnits): Indicates the units of aperture time as powerline cycles (PLCs) or
-            seconds. Returns the value of the
-             attribute.
+            seconds. Returns the value of the NIDMM\_ATTR\_APERTURE\_TIME\_UNITS
+            attribute.
             +-----------------------------------+-----+--------------------+
             | NIDMM\_VAL\_SECONDS               | 0   | Seconds            |
             +-----------------------------------+-----+--------------------+
@@ -1292,10 +1278,10 @@ NI-DMM Functions
     session, and it retrieves and clears the oldest instance in which NI-DMM
     coerced a value you specified to another value.
 
-    If you set  to VI\_TRUE (1), NI-DMM
-    keeps a list of all coercions it makes on ViInt32 or ViReal64 values
-    that you pass to NI-DMM functions. Use this function to retrieve
-    information from that list.
+    If you set :py:data:`nidmm.RECORD\_COERCIONS` to VI\_TRUE (1), NI-DMM keeps
+    a list of all coercions it makes on ViInt32 or ViReal64 values that you
+    pass to NI-DMM functions. Use this function to retrieve information from
+    that list.
 
     :param buffer_size: Passes the number of bytes in the ViChar array you specify for the
         **Coercion\_Record** parameter. If the next coercion record string,
@@ -1328,12 +1314,12 @@ NI-DMM Functions
     different instrument might cause different behavior.
 
     The driver performs interchangeability checking when
-     is set to VI\_TRUE (1). The
-    function returns an empty string in the **interchange_warning**
-    parameter if no interchangeability warnings remain for the session. In
-    general, the instrument driver generates interchangeability warnings
-    when an attribute that affects the behavior of the instrument is in a
-    state that you did not specify.
+    :py:data:`nidmm.INTERCHANGE\_CHECK` is set to VI\_TRUE (1). The function
+    returns an empty string in the **interchange_warning** parameter if no
+    interchangeability warnings remain for the session. In general, the
+    instrument driver generates interchangeability warnings when an
+    attribute that affects the behavior of the instrument is in a state that
+    you did not specify.
 
     :param buffer_size: Passes the number of bytes in the ViChar array you specify for the
         **Interchange\_Warning** parameter. If the next interchangeability
@@ -1368,9 +1354,9 @@ NI-DMM Functions
 
     -  Creates a new IVI instrument driver session and, optionally, sets the
        initial state of the following session attributes:
-       ,
-       , ,
-       , .
+       :py:data:`nidmm.RANGE\_CHECK,` NIDMM\_ATTR\_QUERY\_INSTR\_STATUS,
+       :py:data:`nidmm.CACHE,` NIDMM\_ATTR\_SIMULATE,
+       NIDMM\_ATTR\_RECORD\_COERCIONS.
     -  Opens a session to the device you specify for the **resource_name**
        parameter. If the **ID\_Query** parameter is set to VI\_TRUE, this
        function queries the instrument ID and checks that it is valid for
@@ -1426,17 +1412,17 @@ NI-DMM Functions
           default value for each attribute that you can use in this parameter:
 
         +--------------------+-------------------------------------+---------------------+------+
-        | Check              | NIDMM\_ATTR\_RANGE\_CHECK           | VI\_TRUE            | 1    |
+        | Check              | :py:data:`nidmm.RANGE\_CHECK`           | VI\_TRUE            | 1    |
         +--------------------+-------------------------------------+---------------------+------+
-        | QueryInstrStatus   | NIDMM\_ATTR\_QUERY\_INSTR\_STATUS   | VI\_FALSE           | 0    |
+        | QueryInstrStatus   | :py:data:`nidmm.QUERY\_INSTR\_STATUS`   | VI\_FALSE           | 0    |
         +--------------------+-------------------------------------+---------------------+------+
-        | Cache              | NIDMM\_ATTR\_CACHE                  | VI\_TRUE            | 1    |
+        | Cache              | :py:data:`nidmm.CACHE`                  | VI\_TRUE            | 1    |
         +--------------------+-------------------------------------+---------------------+------+
-        | Simulate           | NIDMM\_ATTR\_SIMULATE               | VI\_FALSE           | 0    |
+        | Simulate           | :py:data:`nidmm.SIMULATE`               | VI\_FALSE           | 0    |
         +--------------------+-------------------------------------+---------------------+------+
-        | RecordCoercions    | NIDMM\_ATTR\_RECORD\_COERCIONS      | VI\_FALSE           | 0    |
+        | RecordCoercions    | :py:data:`nidmm.RECORD\_COERCIONS`      | VI\_FALSE           | 0    |
         +--------------------+-------------------------------------+---------------------+------+
-        | DriverSetup        | NIDMM\_ATTR\_DRIVER\_SETUP          | "" (empty string)   | ""   |
+        | DriverSetup        | :py:data:`nidmm.DRIVER\_SETUP`          | "" (empty string)   | ""   |
         +--------------------+-------------------------------------+---------------------+------+
 
         The format of this string is, "AttributeName=Value." To set multiple
@@ -1464,8 +1450,8 @@ NI-DMM Functions
     Initiates an acquisition. After you call this function, the DMM leaves
     the Idle state and enters the Wait-for-Trigger state. If trigger is set
     to Immediate mode, the DMM begins acquiring measurement data. Use
-    :py:func:`nidmm.fetch`, :py:func:`nidmm.fetch_multi_point`, or
-    :py:func:`nidmm.fetch_waveform` to retrieve the measurement data.
+    niDMM\_Fetch, niDMM\_FetchMultiPoint, or niDMM\_FetchWaveform to
+    retrieve the measurement data.
 
 
 .. function:: is_over_range(measurement_value, is_over_range)
@@ -1514,22 +1500,20 @@ NI-DMM Functions
     -  A call to the IVI Library locked the session.
 
     After your call to this function returns successfully, no other threads
-    can access the instrument session until you call
-    :py:func:`nidmm.unlock_session`.
+    can access the instrument session until you call niDMM\_UnlockSession.
 
-    Use this function and :py:func:`nidmm.unlock_session` around a sequence
-    of calls to instrument driver functions if you require that the
-    instrument retain its settings through the end of the sequence. You can
-    safely make nested calls to this function within the same thread.
+    Use this function and niDMM\_UnlockSession around a sequence of calls to
+    instrument driver functions if you require that the instrument retain
+    its settings through the end of the sequence. You can safely make nested
+    calls to this function within the same thread.
 
     To completely unlock the session, you must balance each call to this
-    function with a call to :py:func:`nidmm.unlock_session`. If, however,
-    you use the **caller_has_lock** parameter in all calls to this
-    function and :py:func:`nidmm.unlock_session` within a function, the IVI
-    Library locks the session only once within the function regardless of
-    the number of calls you make to this function. This feature allows you
-    to call :py:func:`nidmm.unlock_session` just once at the end of the
-    function.
+    function with a call to niDMM\_UnlockSession. If, however, you use the
+    **caller_has_lock** parameter in all calls to this function and
+    niDMM\_UnlockSession within a function, the IVI Library locks the
+    session only once within the function regardless of the number of calls
+    you make to this function. This feature allows you to call
+    niDMM\_UnlockSession just once at the end of the function.
 
     :rtype: ViBoolean
 
@@ -1543,8 +1527,8 @@ NI-DMM Functions
     measurements for the current capacitance/inductance range, and returns
     open cable compensation **conductance** and **susceptance** values. You
     can use the return values of this function as inputs to
-     attribute is not set to
-    NIDMM\_VAL\_CAPACITANCE (1005) or NIDMM\_VAL\_INDUCTANCE (1006).
+    :py:data:`nidmm.FUNCTION` attribute is not set to NIDMM\_VAL\_CAPACITANCE
+    (1005) or NIDMM\_VAL\_INDUCTANCE (1006).
 
     :rtype: tuple (conductance, susceptance)
         WHERE
@@ -1562,9 +1546,8 @@ NI-DMM Functions
     Performs the short cable compensation measurements for the current
     capacitance/inductance range, and returns short cable compensation
     **resistance** and **reactance** values. You can use the return values
-    of this function as inputs to  attribute is
-    not set to NIDMM\_VAL\_CAPACITANCE (1005) or NIDMM\_VAL\_INDUCTANCE
-    (1006).
+    of this function as inputs to :py:data:`nidmm.FUNCTION` attribute is not set
+    to NIDMM\_VAL\_CAPACITANCE (1005) or NIDMM\_VAL\_INDUCTANCE (1006).
 
     :rtype: tuple (resistance, reactance)
         WHERE
@@ -1613,7 +1596,7 @@ NI-DMM Functions
     :type maximum_time: ViInt32
     :param array_size: Specifies the number of measurements to acquire. The maximum number of
         measurements for a finite acquisition is the (**Trigger Count** x
-        **Sample Count**) parameters in :py:func:`nidmm.configure_multi_point`.
+        **Sample Count**) parameters in niDMM\_ConfigureMultiPoint.
 
         For continuous acquisitions, up to 100,000 points can be returned at
         once. The number of measurements can be a subset. The valid range is any
@@ -1688,8 +1671,8 @@ NI-DMM Functions
     :type maximum_time: ViInt32
     :param array_size: Specifies the number of waveform points to return. You specify the total
         number of points that the DMM acquires in the **Waveform Points**
-        parameter of :py:func:`nidmm.configure_waveform_acquisition`. The
-        default value is 1.
+        parameter of niDMM\_ConfigureWaveformAcquisition. The default value is
+        1.
     :type array_size: ViInt32
 
     :rtype: tuple (waveform_array, actual_number_of_points)
@@ -1725,14 +1708,13 @@ NI-DMM Functions
 
     This function does not clear the interchangeability warnings from the
     list of previously recorded interchangeability warnings. If you want to
-    guarantee that :py:func:`nidmm.get_next_interchange_warning` only returns
-    those interchangeability warnings that are generated after calling this
+    guarantee that niDMM\_GetNextInterchangeWarning only returns those
+    interchangeability warnings that are generated after calling this
     function, you must clear the list of interchangeability warnings. You
     can clear the interchangeability warnings list by repeatedly calling
-    :py:func:`nidmm.get_next_interchange_warning` until no more
-    interchangeability warnings are returned. If you are not interested in
-    the content of those warnings, you can call
-    :py:func:`nidmm.clear_interchange_warnings`.
+    niDMM\_GetNextInterchangeWarning until no more interchangeability
+    warnings are returned. If you are not interested in the content of those
+    warnings, you can call niDMM\_ClearInterchangeWarnings.
 
 
 .. function:: reset_with_defaults()
@@ -1748,9 +1730,9 @@ NI-DMM Functions
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the
     self-calibration routine to maintain measurement accuracy.
 
-    .. note::   This function calls :py:func:`nidmm.reset`, and any
-    configurations previous to the call will be lost. All attributes will be
-    set to their default values after the call returns.
+    .. note::   This function calls niDMM\_reset, and any configurations
+    previous to the call will be lost. All attributes will be set to their
+    default values after the call returns.
 
 
 .. function:: send_software_trigger()
@@ -1759,13 +1741,12 @@ NI-DMM Functions
     -------
 
     Sends a command to trigger the DMM. Call this function if you have
-    configured either the  or
-     attributes. If the
-     and/or
-     attributes are set to
-    NIDMM\_VAL\_EXTERNAL or NIDMM\_VAL\_TTL\ *n*, you can use this function
-    to override the trigger source that you configured and trigger the
-    device. The NI 4050 and NI 4060 are not supported.
+    configured either the :py:data:`nidmm.TRIGGER\_SOURCE` or
+    :py:data:`nidmm.SAMPLE\_TRIGGER` attributes. If the
+    :py:data:`nidmm.TRIGGER\_SOURCE` and/or NIDMM\_ATTR\_SAMPLE\_TRIGGER
+    attributes are set to NIDMM\_VAL\_EXTERNAL or NIDMM\_VAL\_TTL\ *n*, you
+    can use this function to override the trigger source that you configured
+    and trigger the device. The NI 4050 and NI 4060 are not supported.
 
 
 .. function:: _set_attribute_vi_boolean(channel_name, attribute_id, attribute_value)
@@ -2048,9 +2029,9 @@ NI-DMM Functions
     Performs a self-test on the DMM to ensure that the DMM is functioning
     properly. Self-test does not calibrate the DMM.
 
-    .. note::   This function calls :py:func:`nidmm.reset`, and any
-    configurations previous to the call will be lost. All attributes will be
-    set to their default values after the call returns.
+    .. note::   This function calls niDMM\_reset, and any configurations
+    previous to the call will be lost. All attributes will be set to their
+    default values after the call returns.
 
     :rtype: tuple (self_test_result, self_test_message)
         WHERE
