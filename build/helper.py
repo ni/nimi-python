@@ -169,7 +169,9 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
                     snippet += '.encode(\'ascii\')'
         else:
             assert x['direction'] == 'out', pp.pformat(x)
-            if x['is_buffer']:
+            if x['ivi-dance']:
+                snippet = x['ctypes_variable_name']
+            elif x['is_buffer']:
                 snippet = 'ctypes.cast(' + x['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + x['ctypes_type'] + '))'
             else:
                 snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
@@ -205,14 +207,13 @@ def _get_output_param_return_snippet(output_parameter):
 
     return snippet
 
-def get_method_return_snippet(output_parameters):
+def get_method_return_snippet(parameters):
     '''Returns a string suitable to use as the return argument of a Session method, i.e. "return reading_ctype.value"'''
-    if len(output_parameters) == 0:
-        return 'return'
     snippets = []
-    for x in output_parameters:
-        snippets.append(_get_output_param_return_snippet(x))
-    return 'return ' + ', '.join(snippets)
+    for x in parameters:
+        if x['direction'] == 'out' or x['ivi-dance']:
+            snippets.append(_get_output_param_return_snippet(x))
+    return ('return ' + ', '.join(snippets)).strip()
 
 def get_enum_type_check_snippet(parameter, indent):
     '''Returns python snippet to check that the type of a parameter is what is expected'''
