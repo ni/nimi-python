@@ -187,7 +187,7 @@ def _get_output_param_return_snippet(output_parameter):
             size_name = camelcase_to_snakecase(output_parameter['size'])
             if size_name == 'ivi-dance':
                 size_name = '0'
-            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i] for i in range(' + size_name + ')]'
+            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i].value for i in range(' + size_name + ')]'
     else:
         snippet = output_parameter['ctypes_variable_name'] + '.value'
 
