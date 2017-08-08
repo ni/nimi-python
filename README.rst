@@ -7,8 +7,8 @@ Author       National Instruments
 
 Versions:
 
-* NI-DMM: |DMMLatestVersion| |ModInstLatestVersion| 
-* NI-ModInst: |DMMPythonVersion| |ModInstPythonVersion|
+* NI-DMM: |DMMLatestVersion| |DMMPythonVersion|
+* NI-ModInst: |ModInstLatestVersion| |ModInstPythonVersion|
 
 +-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | WARNING!! | NI Modular Instruments Python API is currently under development. You are welcome to use it, and we welcome feedback, but be prepared for changes to the APIs. |
@@ -28,7 +28,7 @@ It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and p
 
 **nimi-python** supports only the Windows operating system.
 
-** nimi-python** supports CPython 3.6+. * TODO(marcoskirsch): Add PyPI version here.*
+**nimi-python** supports CPython 3.6+. * TODO(marcoskirsch): Add PyPI version here.*
 
 .. _installation-section:
 
