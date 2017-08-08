@@ -7,8 +7,8 @@ Author       National Instruments
 |BuildStatus| |Docs| |CoverageStatus| |MITLicense| |IssueStats|
 
 Versions:
- |DMMLatestVersion| |ModInstLatestVersion| 
- |DMMPythonVersion| |ModInstPythonVersion|
+* NI-DMM: |DMMLatestVersion| |ModInstLatestVersion| 
+* NI-ModInst: |DMMPythonVersion| |ModInstPythonVersion|
 
 +-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | WARNING!! | NI Modular Instruments Python API is currently under development. You are welcome to use it, and we welcome feedback, but be prepared for changes to the APIs. |
