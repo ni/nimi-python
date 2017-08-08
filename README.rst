@@ -7,6 +7,7 @@ Author       National Instruments
 |BuildStatus| |Docs| |CoverageStatus| |MITLicense| |IssueStats|
 
 Versions:
+
 * NI-DMM: |DMMLatestVersion| |ModInstLatestVersion| 
 * NI-ModInst: |DMMPythonVersion| |ModInstPythonVersion|
 
