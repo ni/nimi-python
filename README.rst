@@ -136,7 +136,7 @@ licenses allow for non-commercial and commercial use.
     :scale: 100%
     :target: https://nimi-python.readthedocs.io/en/latest/?badge=latest
 
-.. |MITLicense| image:: ttps://img.shields.io/github/license/ni/nimi-python.svg
+.. |MITLicense| image:: https://img.shields.io/badge/License-MIT-yellow.svg
     :alt: MIT License
     :scale: 100%
     :target: https://opensource.org/licenses/MIT
