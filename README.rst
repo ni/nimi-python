@@ -1,10 +1,9 @@
+|BuildStatus| |Docs| |CoverageStatus| |MITLicense| |OpenIssues| |OpenPullRequests|
+
 ===========  =================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
 Author       National Instruments
 ===========  =================================================================================================================
-
-
-|BuildStatus| |Docs| |CoverageStatus| |MITLicense| |OpenIssues| |OpenPullRequests|
 
 Versions:
 
