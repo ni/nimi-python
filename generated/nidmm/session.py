@@ -997,10 +997,10 @@ class Session(object):
         return value_ctype.value
 
     def _get_attribute_vi_string(self, channel_name, attribute_id, buf_size):
-        value_ctype = ctypes_types.ViString_ctype(0) #TODO: Do the IVI-dance!
+        value_ctype = ctypes_types.ViString_ctype(0)  # TODO(marcoskirsch): Do the IVI-dance!
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buf_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)))
         errors._handle_error(self, error_code)
-        return [value_ctype[i] for i in range(ivi-dance)]
+        return [value_ctype[i] for i in range(0)]
 
     def get_auto_range_value(self):
         auto_range_value_ctype = ctypes_types.ViReal64_ctype(0)
@@ -1037,13 +1037,13 @@ class Session(object):
 
     def _get_error(self, buffer_size):
         error_code_ctype = ctypes_types.ViStatus_ctype(0)
-        description_ctype = ctypes_types.ViChar_ctype(0) #TODO: Do the IVI-dance!
+        description_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): Do the IVI-dance!
         error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, ctypes.cast(description_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return error_code_ctype.value, description_ctype.value.decode("ascii")
 
     def _get_error_message(self, error_code, buffer_size):
-        err_message_ctype = ctypes_types.ViChar_ctype(0) #TODO: Do the IVI-dance!
+        err_message_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): Do the IVI-dance!
         error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(err_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return err_message_ctype.value.decode("ascii")
@@ -1066,7 +1066,7 @@ class Session(object):
         return
 
     def get_next_interchange_warning(self, buffer_size):
-        warn_string_ctype = ctypes_types.ViChar_ctype(0) #TODO: Do the IVI-dance!
+        warn_string_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): Do the IVI-dance!
         error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, ctypes.cast(warn_string_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return warn_string_ctype.value.decode("ascii")
