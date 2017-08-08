@@ -22,11 +22,11 @@ $1:
 endef
 $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 
-$(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPT)
+$(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	@echo Creating $(DRIVER) $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
-$(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPT)
+$(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	@echo Creating $(DRIVER) $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
@@ -34,7 +34,7 @@ $(MODULE_DIR)/%.py: %.py
 	@echo Creating $(DRIVER) $(notdir $@)
 	$(_hide_cmds)cp $< $@
 
-$(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPT)
+$(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	@echo Creating $(DRIVER) $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
