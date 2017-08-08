@@ -38,8 +38,8 @@ def extract_input_parameters(parameters, sessionName = 'vi'):
     return [x for x in parameters if x['direction'] == 'in' and x['name'] != sessionName]
 
 def extract_output_parameters(parameters):
-    '''Returns list of parameters only with output parameters'''
-    return [x for x in parameters if x['direction'] == 'out']
+    '''Returns list of parameters only with output parameters, not including the ivi-dance parameter if it exists'''
+    return [x for x in parameters if x['direction'] == 'out' and not x['ivi-dance']]
 
 def extract_enum_parameters(parameters):
     '''Returns a dictionary with information about the output parameters of a session method'''
