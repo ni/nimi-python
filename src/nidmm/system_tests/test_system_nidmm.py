@@ -120,15 +120,15 @@ def test_multi_point_acquisition(device_info):
         assert numberOfMeasurements == 8
 
 
-def test_self_test():
-    with nidmm.Session("PXI1Slot2") as session:
+def test_self_test(device_info):
+    with nidmm.Session(device_info['name']) as session:
         result, message = session.self_test()
         assert result == 0
         assert message == 'Self Test passed.'
 
 
-def test_get_dev_temp():
-    with nidmm.Session("PXI1Slot2") as session:
+def test_get_dev_temp(device_info):
+    with nidmm.Session(device_info['name']) as session:
         temperature = session.get_dev_temp('')
         print(temperature)
         assert 20 <= temperature <= 50
