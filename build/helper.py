@@ -42,7 +42,7 @@ def extract_output_parameters(parameters):
     return [x for x in parameters if x['direction'] == 'out' and not x['ivi-dance']]
 
 def extract_enum_parameters(parameters):
-    '''Returns a dictionary with information about the output parameters of a session method'''
+    '''Returns a list with information about the output parameters of a session method'''
     return [x for x in parameters if x['enum'] is not None]
 
 
