@@ -109,10 +109,11 @@ def _add_buffer_info(parameter):
         parameter['ivi-dance'] = False
         if type(parameter['size']) is str and parameter['size'].startswith('ivi-dance,'):
             parameter['ivi-dance'] = True
-            parameter['size'] = parameter['size'].split(',')[1]
+            parameter['size'] = camelcase_to_snakecase(parameter['size'].split(',')[1])
     except KeyError:
         # Not populated, assume False
         parameter['is_buffer'] = False
+        parameter['ivi-dance'] = False
     return parameter
 
 def add_all_metadata(functions):
