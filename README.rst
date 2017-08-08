@@ -4,7 +4,7 @@ Author       National Instruments
 ===========  =================================================================================================================
 
 
-|BuildStatus| |Docs| |CoverageStatus| |MITLicense| |IssueStats|
+|BuildStatus| |Docs| |CoverageStatus| |MITLicense| |OpenIssues| |OpenPullRequests|
 
 Versions:
 
@@ -136,7 +136,7 @@ licenses allow for non-commercial and commercial use.
     :scale: 100%
     :target: https://nimi-python.readthedocs.io/en/latest/?badge=latest
 
-.. |MITLicense| image:: https://img.shields.io/badge/license-MIT-yellow.svg
+.. |MITLicense| image:: ttps://img.shields.io/github/license/ni/nimi-python.svg
     :alt: MIT License
     :scale: 100%
     :target: https://opensource.org/licenses/MIT
@@ -145,11 +145,6 @@ licenses allow for non-commercial and commercial use.
     :alt: Coverage
     :scale: 100%
     :target: https://coveralls.io/github/ni/nimi-python?branch=master
-
-.. |IssueStatus| image:: http://issuestats.com/github/ni/nimi-python/badge/issue?style=flat
-    :alt: Issue Stats
-    :scale: 100%
-    :target: http://issuestats.com/github/ni/nimi-python
 
 .. |DMMLatestVersion| image:: http://img.shields.io/pypi/v/nidmm.svg
     :alt: Latest DMM Version
@@ -170,5 +165,15 @@ licenses allow for non-commercial and commercial use.
     :alt: Latest DMM Version
     :scale: 100%
     :target: http://pypi.python.org/pypi/nimodinst
+
+.. |OpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python.svg
+    :alt: Latest DMM Version
+    :scale: 100%
+    :target: https://github.com/ni/nimi-python/issues
+
+.. |OpenPullRequests| image:: https://img.shields.io/github/issues-pr/ni/nimi-python.svg
+    :alt: Latest DMM Version
+    :scale: 100%
+    :target: https://github.com/ni/nimi-python/pulls
 
 
