@@ -183,7 +183,11 @@ def _get_output_param_return_snippet(output_parameter):
             snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
         else:
             # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
-            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i] for i in range(' + camelcase_to_snakecase(output_parameter['size']) + ')]'
+            # TODO(texasaggie97): Not implementing ivi-dance so replace with 0
+            size_name = camelcase_to_snakecase(output_parameter['size'])
+            if size_name == 'ivi-dance':
+                size_name = '0'
+            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i] for i in range(' + size_name + ')]'
     else:
         snippet = output_parameter['ctypes_variable_name'] + '.value'
 
@@ -213,7 +217,7 @@ def get_ctype_variable_declaration_snippet(parameter):
             snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']) + ')()'
             #snippet += 'ctypes.create_string_buffer(' + str(parameter['size']) + ')'
         elif parameter['size'] == 'ivi-dance':
-            snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0) #TODO: Do the IVI-dance!'
+            snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)  # TODO(marcoskirsch): Do the IVI-dance!'
         else:
             # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
             snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + camelcase_to_snakecase(parameter['size']) + ')()'
