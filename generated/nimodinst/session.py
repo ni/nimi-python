@@ -239,18 +239,3 @@ class Session(object):
         errors._handle_error(self, error_code)
         return handle_ctype.value, item_count_ctype.value
 
-    ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
-
-#    def _get_installed_device_attribute_vi_string(self, index, attribute_id):  # noqa: F811
-#        # Do the IVI dance
-#        # Don't use _handle_error, because positive value in error_code means size, not warning.
-#        buffer_size = 0
-#        value_ctype = ctypes.create_string_buffer(buffer_size)
-#        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-#        if(errors._is_error(error_code)):
-#            raise errors.Error(self, error_code)
-#        buffer_size = error_code
-#        value_ctype = ctypes.create_string_buffer(buffer_size)
-#        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-#        errors._handle_error(self, error_code)
-#        return value_ctype.value.decode("ascii")

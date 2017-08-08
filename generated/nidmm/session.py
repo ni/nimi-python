@@ -1254,18 +1254,3 @@ class Session(object):
         errors._handle_error(self, error_code)
         return self_test_result_ctype.value, self_test_message_ctype.value.decode("ascii")
 
-    ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
-
-#    def _get_attribute_vi_string(self, channel_name, attribute_id):  # noqa: F811
-#        # Do the IVI dance
-#        # Don't use _handle_error, because positive value in error_code means size, not warning.
-#        buffer_size = 0
-#        value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-#        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
-#        if(errors._is_error(error_code)):
-#            raise errors.Error(self.library, self.vi, error_code)
-#        buffer_size = error_code
-#        value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-#        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
-#        errors._handle_error(self, error_code)
-#        return value_ctype.value.decode("ascii")
