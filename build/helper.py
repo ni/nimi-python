@@ -90,10 +90,15 @@ def _add_python_return_type(f):
     f['returns_python'] = f['returns']
     return f
 
-def _add_is_buffer(parameter):
-    '''Adds 'is_buffer' key/value pair to the parameter metadata iff not already populated'''
+def _add_buffer_info(parameter):
+    '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
     try:
-        parameter['is_buffer']
+        parameter['size']
+        parameter['is_buffer'] = True
+        parameter['ivi-dance'] = False
+        if type(parameter['size']) is str and parameter['size'].startswith('ivi-dance,'):
+            parameter['ivi-dance'] = True
+            parameter['size'] = parameter['size'].split(',')[1]
     except KeyError:
         # Not populated, assume False
         parameter['is_buffer'] = False
@@ -110,7 +115,7 @@ def add_all_metadata(functions):
             _add_python_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
-            _add_is_buffer(p)
+            _add_buffer_info(p)
     return functions
 
 # Normalize string type between python2 & python3
@@ -183,11 +188,7 @@ def _get_output_param_return_snippet(output_parameter):
             snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
         else:
             # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
-            # TODO(texasaggie97): Not implementing ivi-dance so replace with 0
-            size_name = camelcase_to_snakecase(output_parameter['size'])
-            if size_name == 'ivi-dance':
-                size_name = '0'
-            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i].value for i in range(' + size_name + ')]'
+            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i].value for i in range(' + camelcase_to_snakecase(output_parameter['size']) + ')]'
     else:
         snippet = output_parameter['ctypes_variable_name'] + '.value'
 

@@ -32,7 +32,7 @@ functions = [
              'name': 'attributeValue',
              'type': 'ViChar',
              'is_buffer': True,
-             'size': 'ivi-dance',
+             'size': 'ivi-dance,attributeValueBufferSize',
              },
         ],
         'returns': 'ViStatus'},
@@ -69,7 +69,7 @@ functions = [
              'name': 'errorInfo',
              'type': 'ViChar',
              'is_buffer': True,
-             'size': 'ivi-dance'
+             'size': 'ivi-dance,errorInfoBufferSize'
              },
         ],
         'returns': 'ViStatus'},
