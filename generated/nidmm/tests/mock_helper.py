@@ -27,10 +27,8 @@ class SideEffectsHelper(object):
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
-        self._defaults['GetError']['description'] = None
         self._defaults['GetErrorMessage'] = {}
         self._defaults['GetErrorMessage']['return'] = 0
-        self._defaults['GetErrorMessage']['errMessage'] = None
         self._defaults['ClearError'] = {}
         self._defaults['ClearError']['return'] = 0
         self._defaults['reset'] = {}
@@ -163,7 +161,6 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
-        self._defaults['GetAttributeViString']['value'] = None
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViSession'] = {}
@@ -180,7 +177,6 @@ class SideEffectsHelper(object):
         self._defaults['GetNextCoercionRecord']['return'] = 0
         self._defaults['GetNextInterchangeWarning'] = {}
         self._defaults['GetNextInterchangeWarning']['return'] = 0
-        self._defaults['GetNextInterchangeWarning']['warnString'] = None
         self._defaults['ResetInterchangeCheck'] = {}
         self._defaults['ResetInterchangeCheck']['return'] = 0
         self._defaults['ClearInterchangeWarnings'] = {}
@@ -240,15 +236,9 @@ class SideEffectsHelper(object):
         if self._defaults['GetError']['errorCode'] is None:
             raise MockFunctionCallError("niDMM_GetError", param='errorCode')
         error_code.contents.value = self._defaults['GetError']['errorCode']
-        if self._defaults['GetError']['description'] is None:
-            raise MockFunctionCallError("niDMM_GetError", param='description')
-        description.contents.value = self._defaults['GetError']['description']
         return self._defaults['GetError']['return']
 
     def niDMM_GetErrorMessage(self, vi, error_code, buffer_size, err_message):  # noqa: N802
-        if self._defaults['GetErrorMessage']['errMessage'] is None:
-            raise MockFunctionCallError("niDMM_GetErrorMessage", param='errMessage')
-        err_message.contents.value = self._defaults['GetErrorMessage']['errMessage']
         return self._defaults['GetErrorMessage']['return']
 
     def niDMM_ClearError(self, vi):  # noqa: N802
@@ -489,9 +479,6 @@ class SideEffectsHelper(object):
         return self._defaults['SetAttributeViReal64']['return']
 
     def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):  # noqa: N802
-        if self._defaults['GetAttributeViString']['value'] is None:
-            raise MockFunctionCallError("niDMM_GetAttributeViString", param='value')
-        value.contents.value = self._defaults['GetAttributeViString']['value']
         return self._defaults['GetAttributeViString']['return']
 
     def niDMM_SetAttributeViString(self, vi, channel_name, attribute_id, value):  # noqa: N802
@@ -519,9 +506,6 @@ class SideEffectsHelper(object):
         return self._defaults['GetNextCoercionRecord']['return']
 
     def niDMM_GetNextInterchangeWarning(self, vi, buffer_size, warn_string):  # noqa: N802
-        if self._defaults['GetNextInterchangeWarning']['warnString'] is None:
-            raise MockFunctionCallError("niDMM_GetNextInterchangeWarning", param='warnString')
-        warn_string.contents.value = self._defaults['GetNextInterchangeWarning']['warnString']
         return self._defaults['GetNextInterchangeWarning']['return']
 
     def niDMM_ResetInterchangeCheck(self, vi):  # noqa: N802

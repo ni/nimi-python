@@ -25,7 +25,6 @@ class SideEffectsHelper(object):
         self._defaults['OpenInstalledDevicesSession']['item_count'] = None
         self._defaults['GetInstalledDeviceAttributeViString'] = {}
         self._defaults['GetInstalledDeviceAttributeViString']['return'] = 0
-        self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'] = None
         self._defaults['GetInstalledDeviceAttributeViInt32'] = {}
         self._defaults['GetInstalledDeviceAttributeViInt32']['return'] = 0
         self._defaults['GetInstalledDeviceAttributeViInt32']['attributeValue'] = None
@@ -33,7 +32,6 @@ class SideEffectsHelper(object):
         self._defaults['CloseInstalledDevicesSession']['return'] = 0
         self._defaults['GetExtendedErrorInfo'] = {}
         self._defaults['GetExtendedErrorInfo']['return'] = 0
-        self._defaults['GetExtendedErrorInfo']['errorInfo'] = None
 
     def __getitem__(self, func):
         return self._defaults[func]
@@ -51,9 +49,6 @@ class SideEffectsHelper(object):
         return self._defaults['OpenInstalledDevicesSession']['return']
 
     def niModInst_GetInstalledDeviceAttributeViString(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
-        if self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'] is None:
-            raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViString", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetInstalledDeviceAttributeViString']['attributeValue']
         return self._defaults['GetInstalledDeviceAttributeViString']['return']
 
     def niModInst_GetInstalledDeviceAttributeViInt32(self, handle, index, attribute_id, attribute_value):  # noqa: N802
@@ -66,9 +61,6 @@ class SideEffectsHelper(object):
         return self._defaults['CloseInstalledDevicesSession']['return']
 
     def niModInst_GetExtendedErrorInfo(self, error_info_buffer_size, error_info):  # noqa: N802
-        if self._defaults['GetExtendedErrorInfo']['errorInfo'] is None:
-            raise MockFunctionCallError("niModInst_GetExtendedErrorInfo", param='errorInfo')
-        error_info.contents.value = self._defaults['GetExtendedErrorInfo']['errorInfo']
         return self._defaults['GetExtendedErrorInfo']['return']
 
     # TODO(texasaggie97) Remove hand coded functions once metadata contains enough information to code generate these

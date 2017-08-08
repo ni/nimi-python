@@ -1,3 +1,4 @@
+
 # This file was generated
 import ctypes
 
@@ -996,11 +997,18 @@ class Session(object):
         errors._handle_error(self, error_code)
         return value_ctype.value
 
-    def _get_attribute_vi_string(self, channel_name, attribute_id, buf_size):
-        value_ctype = ctypes_types.ViString_ctype(0)  # TODO(marcoskirsch): Do the IVI-dance!
-        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buf_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)))
+    def _get_attribute_vi_string(self, channel_name, attribute_id):
+        buf_size = 0
+        value_ctype = ctypes.cast(ctypes.create_string_buffer(buf_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buf_size, value_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        buf_size = error_code
+        value_ctype = ctypes.cast(ctypes.create_string_buffer(buf_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buf_size, value_ctype)
         errors._handle_error(self, error_code)
-        return [value_ctype[i].value for i in range(0)]
+        return value_ctype.value.decode("ascii")
 
     def get_auto_range_value(self):
         auto_range_value_ctype = ctypes_types.ViReal64_ctype(0)
@@ -1035,16 +1043,30 @@ class Session(object):
         errors._handle_error(self, error_code)
         return temperature_ctype.value
 
-    def _get_error(self, buffer_size):
+    def _get_error(self):
         error_code_ctype = ctypes_types.ViStatus_ctype(0)
-        description_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): Do the IVI-dance!
-        error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, ctypes.cast(description_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+        buffer_size = 0
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        buffer_size = error_code
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors._handle_error(self, error_code)
         return error_code_ctype.value, description_ctype.value.decode("ascii")
 
-    def _get_error_message(self, error_code, buffer_size):
-        err_message_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): Do the IVI-dance!
-        error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(err_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+    def _get_error_message(self, error_code):
+        buffer_size = 0
+        err_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, err_message_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        buffer_size = error_code
+        err_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, err_message_ctype)
         errors._handle_error(self, error_code)
         return err_message_ctype.value.decode("ascii")
 
@@ -1065,9 +1087,16 @@ class Session(object):
         errors._handle_error(self, error_code)
         return
 
-    def get_next_interchange_warning(self, buffer_size):
-        warn_string_ctype = ctypes_types.ViChar_ctype(0)  # TODO(marcoskirsch): Do the IVI-dance!
-        error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, ctypes.cast(warn_string_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+    def get_next_interchange_warning(self):
+        buffer_size = 0
+        warn_string_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, warn_string_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        buffer_size = error_code
+        warn_string_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, warn_string_ctype)
         errors._handle_error(self, error_code)
         return warn_string_ctype.value.decode("ascii")
 
@@ -1227,17 +1256,16 @@ class Session(object):
 
     ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
 
-    def _get_attribute_vi_string(self, channel_name, attribute_id):  # noqa: F811
-        # Do the IVI dance
-        # Don't use _handle_error, because positive value in error_code means size, not warning.
-        buffer_size = 0
-        value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
-        if(errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
-        buffer_size = error_code
-        value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
-        errors._handle_error(self, error_code)
-        return value_ctype.value.decode("ascii")
-
+#    def _get_attribute_vi_string(self, channel_name, attribute_id):  # noqa: F811
+#        # Do the IVI dance
+#        # Don't use _handle_error, because positive value in error_code means size, not warning.
+#        buffer_size = 0
+#        value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+#        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
+#        if(errors._is_error(error_code)):
+#            raise errors.Error(self.library, self.vi, error_code)
+#        buffer_size = error_code
+#        value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+#        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
+#        errors._handle_error(self, error_code)
+#        return value_ctype.value.decode("ascii")
