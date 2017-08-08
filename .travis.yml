@@ -12,11 +12,12 @@ python:
   - 3.6
 
 install:
-  - pip install --upgrade setuptools mako mock tox tox-travis flake8 wheel sphinx sphinx_rtd_theme
+  - pip install --upgrade setuptools mako mock tox tox-travis flake8 wheel sphinx sphinx_rtd_theme coveralls
 
 script:
   - make clean all flake8 test html PRINT=1 PYTHON_CMD=python
 
-
+after_success:
+  - coveralls
 
 
