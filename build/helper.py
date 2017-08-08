@@ -45,6 +45,17 @@ def extract_enum_parameters(parameters):
     '''Returns a list with information about the output parameters of a session method'''
     return [x for x in parameters if x['enum'] is not None]
 
+def extract_ivi_dance_parameter(parameters):
+    '''Returns the ivi-dance parameter of a session method if there is one
+
+    There can be only one ivi-dance parameter so return that individual parameter and not a list
+    '''
+    param = [x for x in parameters if x['ivi-dance']]
+    assert len(param) <= 1, '{1} ivi-dance parameters. No more than one is allowed'.format(len(param))
+    if len(param) == 0:
+        return None
+    return param[0]
+
 
 # Functions to add information to metadata structures that are specific to our codegen needs.
 
