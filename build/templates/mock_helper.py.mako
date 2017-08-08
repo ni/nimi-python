@@ -77,28 +77,6 @@ ivi_dance_param = helper.extract_ivi_dance_parameter(f['parameters'])
         return self._defaults['${f['name']}']['return']
 
 % endfor
-    # TODO(texasaggie97) Remove hand coded functions once metadata contains enough information to code generate these
-    def ${c_function_prefix}GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):  # noqa: N802,F811
-        if self._defaults['GetAttributeViString']['value'] is None:
-            raise MockFunctionCallError("niDMM_GetAttributeViString", param='value')
-        if buf_size == 0:
-            return len(self._defaults['GetAttributeViString']['value'])
-        t = ${module_name}.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['value'].encode('ascii'))
-        value.value = ctypes.cast(t, ${module_name}.ctypes_types.ViString_ctype).value
-        return self._defaults['GetAttributeViString']['return']
-
-    def ${c_function_prefix}GetError(self, vi, error_code, buffer_size, description):  # noqa: N802,F811
-        if self._defaults['GetError']['errorCode'] is None:
-            raise MockFunctionCallError("niDMM_GetError", param='errorCode')
-        error_code.contents.value = self._defaults['GetError']['errorCode']
-        if self._defaults['GetError']['description'] is None:
-            raise MockFunctionCallError("niDMM_GetError", param='description')
-        if buffer_size == 0:
-            return len(self._defaults['GetError'][description])
-        t = ${module_name}.ctypes_types.ViString_ctype(self._defaults['GetError'][description].encode('ascii'))
-        description.value = ctypes.cast(t, ${module_name}.ctypes_types.ViString_ctype).value
-        return self._defaults['GetError']['return']
-
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
 % for f in helper.extract_codegen_functions(functions):
