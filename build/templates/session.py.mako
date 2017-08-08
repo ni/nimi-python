@@ -6,9 +6,12 @@
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
-    attribute_docs = template_parameters['metadata'].attribute_docs
-%>\
 
+    functions = template_parameters['metadata'].functions
+    functions = helper.extract_codegen_functions(functions)
+    functions = helper.add_all_metadata(functions)
+    functions = sorted(functions, key=lambda k: k['name'])
+%>\
 import ctypes
 
 from ${module_name} import ctypes_types
@@ -88,33 +91,40 @@ class AttributeEnum(object):
         if type(value) is not self.attribute_type:
             raise TypeError('Value mode must be of type ' + str(self.attribute_type))
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
+% for c in config['context_manager']:
+<%
+context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
+%>\
 
 
-# TODO(marcoskirsch): We may want to support this, plus a Session constructor that uses an existing ViSession.
-class AttributeViSession(object):
+class ${context_name.title()}(object):
+    def __init__(self, session):
+        self.session = session
 
-    def __init__(self, attribute_id):
-        self.attribute_id = attribute_id
+    def __enter__(self):
+        self.session._initiate()
+        return self
 
-    def __get__(self, obj, objtype):
-        raise TypeError('Attributes of type ViSession are unsupported in Python')
-
-    def __set__(self, obj, value):
-        raise TypeError('Attributes of type ViSession are unsupported in Python')
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.session._abort()
+% endfor
 
 
 class Session(object):
     '''${config['session_description']}'''
 
-% for attribute in sorted(attributes):
+    # This is needed during __init__. Without it, __setattr__ raises an exception
+    _is_frozen = False
+
+% for attribute in helper.sorted_attrs(attributes):
     %if attributes[attribute]['enum']:
-    ${attribute.lower()} = AttributeEnum(${attributes[attribute]['id']}, enums.${attributes[attribute]['enum']})
+    ${attributes[attribute]['name'].lower()} = AttributeEnum(${attribute}, enums.${attributes[attribute]['enum']})
     %else:
-    ${attribute.lower()} = Attribute${attributes[attribute]['type']}(${attributes[attribute]['id']})
+    ${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(${attribute})
     %endif
-%   if str(attributes[attribute]['id']) in attribute_docs:
+%   if 'shortDescription' in attributes[attribute]:
     '''
-    ${helper.get_indented_docstring_snippet(attribute_docs[str(attributes[attribute]['id'])]['shortDescription'])}, indent=4)
+    ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'], indent=4)}
     '''
 %   endif
 % endfor
@@ -123,6 +133,21 @@ class Session(object):
         self.library = library.get_library()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+
+        self._is_frozen = True
+
+    def __setattr__(self, key, value):
+        if self._is_frozen and key not in dir(self):
+            raise TypeError("%r is a frozen class" % self)
+        object.__setattr__(self, key, value)
+% for c in config['context_manager']:
+<%
+context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
+%>\
+
+    def initiate(self):
+        return ${context_name.title()}(self)
+% endfor
 
     def __del__(self):
         pass
@@ -178,12 +203,6 @@ class Session(object):
         return new_error_code.value, error_message.value.decode("ascii")
 
     ''' These are code-generated '''
-<%
-    functions = template_parameters['metadata'].functions
-    functions = helper.extract_codegen_functions(functions)
-    functions = helper.add_all_metadata(functions)
-    functions = sorted(functions, key=lambda k: k['name'])
-%>\
 % for f in functions:
 <%
     input_parameters = helper.extract_input_parameters(f['parameters'])

@@ -4,20 +4,27 @@
     config = template_parameters['metadata'].config
     module_name = config['module_name']
     driver_name = config['driver_name']
+    c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
-    attribute_docs = helper.normalize_string_type(template_parameters['metadata'].attribute_docs)
 %>\
 ${helper.get_rst_header_snippet(driver_name + ' Session', '=')}
 
-${config['session_description']}
+.. py:module:: ${module_name}
 
-${helper.get_rst_header_snippet('Attributes', '-')}
+.. py:class:: Session
 
-% for attr in sorted(attributes):
-%   if str(attributes[attr]['id']) in attribute_docs:
-${helper.get_rst_header_snippet(attr, '~')}
+   ${helper.get_indented_docstring_snippet(config['session_description'], indent=3)}
 
-${attribute_docs[str(attributes[attr]['id'])]['longDescription']}
 
-%   endif
+% for attr in helper.sorted_attrs(attributes):
+<% 
+if attributes[attr]['enum'] is not None:
+    t = 'enums.' + attributes[attr]['enum']
+else:
+    t = attributes[attr]["type"]
+%>\
+   :ivar ${t} ${attributes[attr]["name"].lower()}: 
+      ${helper.get_indented_docstring_snippet(attributes[attr]['shortDescription'], indent=6)}
 % endfor
+
+

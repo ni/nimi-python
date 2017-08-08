@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to NI-DMM Python API's documentation!
+NI-DMM Python API's documentation
 =============================================================
 
 .. toctree::
@@ -11,7 +11,7 @@ Welcome to NI-DMM Python API's documentation!
    :caption: API Reference:
 
    nidmm/session
-   nidmm/enums
    nidmm/attributes
+   nidmm/enums
 
 

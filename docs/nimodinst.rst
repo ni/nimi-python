@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to NI-ModInst Python API's documentation!
+NI-ModInst Python API's documentation
 =============================================================
 
 .. toctree::
@@ -11,5 +11,6 @@ Welcome to NI-ModInst Python API's documentation!
    :caption: API References:
 
    nimodinst/session
+   nimodinst/attributes
 
 

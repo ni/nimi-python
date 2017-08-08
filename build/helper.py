@@ -214,6 +214,12 @@ def get_dictionary_snippet(d, indent=4):
     d_lines = d_str.splitlines()
     return ('\n' + (' ' * indent)).join(d_lines)
 
+def sorted_attrs(a):
+    return sorted(a, key=lambda k: a[k]['name'])
+
+def sorted_functions(f):
+    return sorted(f, key=lambda k: k['name'])
+
 def get_indented_docstring_snippet(d, indent=4):
     '''
     Returns a docstring with the correct amount of indentation. Can't use similar construct as
@@ -225,9 +231,9 @@ def get_indented_docstring_snippet(d, indent=4):
     for l in d_lines:
         if len(ret_val) > 0:
             ret_val += '\n'
-            if len(l.strip()) > 0:
+            if len(l.rstrip()) > 0:
                 ret_val += (' ' * indent)
-        ret_val += l.strip()
+        ret_val += normalize_string_type(l.rstrip())
     return ret_val
 
 def get_rst_header_snippet(t, header_level='='):

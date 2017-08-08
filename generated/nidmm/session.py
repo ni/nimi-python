@@ -1,5 +1,4 @@
 # This file was generated
-
 import ctypes
 
 from nidmm import ctypes_types
@@ -81,42 +80,34 @@ class AttributeEnum(object):
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
 
 
-# TODO(marcoskirsch): We may want to support this, plus a Session constructor that uses an existing ViSession.
-class AttributeViSession(object):
+class Acquisition(object):
+    def __init__(self, session):
+        self.session = session
 
-    def __init__(self, attribute_id):
-        self.attribute_id = attribute_id
+    def __enter__(self):
+        self.session._initiate()
+        return self
 
-    def __get__(self, obj, objtype):
-        raise TypeError('Attributes of type ViSession are unsupported in Python')
-
-    def __set__(self, obj, value):
-        raise TypeError('Attributes of type ViSession are unsupported in Python')
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.session._abort()
 
 
 class Session(object):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
-    ac_max_freq = AttributeViReal64(1250007)
+    # This is needed during __init__. Without it, __setattr__ raises an exception
+    _is_frozen = False
+
+    absolute_resolution = AttributeViReal64(1250008)
     '''
-    Specifies the maximum frequency component of the input signal for AC
-    measurements. This property is used only for error checking and verifies
-    that the value of this parameter is less than the maximum frequency of
-    the device. This property affects the DMM only when you set the Function
-    property to AC measurements., indent=4)
+    Specifies the measurement resolution in absolute units. Setting this
+    property to higher values increases the measurement accuracy. Setting
+    this property to lower values increases the measurement speed.
     '''
-    ac_min_freq = AttributeViReal64(1250006)
-    '''
-    Specifies the minimum frequency component of the input signal for AC
-    measurements. This property affects the DMM only when you set the
-    Function property to AC measurements. The valid range is 1 Hz-300 kHz
-    for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
-    4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060., indent=4)
-    '''
-    adc_calibration = AttributeEnum(1150022, enums.EnabledSetting)
+    adc_calibration = AttributeEnum(1150022, enums.ADCCalibration)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
-    calibration mode., indent=4)
+    calibration mode.
     '''
     aperture_time = AttributeViReal64(1250321)
     '''
@@ -124,34 +115,34 @@ class Session(object):
     Aperture time is specified in units set by the Aperture Time Units
     property. To override the default aperture, set this property to the
     desired aperture time after calling niDMM Config Measurement . To return
-    to the default, set this property to Aperture Time Auto (-1)., indent=4)
+    to the default, set this property to Aperture Time Auto (-1).
     '''
     aperture_time_units = AttributeEnum(1250322, enums.ApertureTimeUnits)
     '''
-    Specifies the units of aperture time for the current configuration., indent=4)
+    Specifies the units of aperture time for the current configuration.
     '''
     auto_range_value = AttributeViReal64(1250331)
     '''
     Specifies the value of the range. If auto ranging is enabled, shows the
     actual value of the active range. The value of this property is set
-    during a read operation., indent=4)
+    during a read operation.
     '''
-    auto_zero = AttributeEnum(1250332, enums.EnabledSetting)
+    auto_zero = AttributeEnum(1250332, enums.AutoZero)
     '''
     Specifies the AutoZero mode. This property is not supported for the NI
-    4050., indent=4)
+    4050.
     '''
     buffer_size = AttributeViInt32(1150037)
     '''
     Specifies the size in samples of the internal data buffer. Maximum size
     is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
-    chooses the buffer size., indent=4)
+    chooses the buffer size.
     '''
-    cable_comp_type = AttributeEnum(1150045, enums.CableCompensationType)
+    cable_compensation_type = AttributeEnum(1150045, enums.CableCompensationType)
     '''
     For the NI 4081 and NI 4072 only, specifies the type of cable
     compensation that is applied to the current capacitance or inductance
-    measurement for the current range., indent=4)
+    measurement for the current range.
     '''
     cache = AttributeViBoolean(1050004)
     '''
@@ -161,35 +152,42 @@ class Session(object):
     it significantly increases execution speed. The instrument driver can
     choose to always cache or to never cache particular properties
     regardless of the setting of this property. The default value is TRUE
-    (1). Use niDMM Initialize With Options to override the default setting., indent=4)
+    (1). Use niDMM Initialize With Options to override the default setting.
     '''
     channel_count = AttributeViInt32(1050203)
     '''
     Indicates the number of channels that the specific instrument driver
     supports. For each property for which the IVI\_VAL\_MULTI\_CHANNEL flag
     property is set, the IVI engine maintains a separate cache value for
-    each channel., indent=4)
+    each channel.
     '''
-    class_driver_class_spec_major_version = AttributeViInt32(1050519)
-    class_driver_class_spec_minor_version = AttributeViInt32(1050520)
-    config_product_number = AttributeViInt32(1150061)
+    conductance = AttributeViReal64(1150049)
     '''
-    The PCI product ID., indent=4)
+    For the NI 4082 and NI 4072 only, specifies the active part
+    (conductance) of the open cable compensation. The valid range is any
+    real number >0. The default value (-1.0) indicates that compensation has
+    not taken place.
     '''
-    current_source = AttributeViReal64(1150025)
+    current_source = AttributeEnum(1150025, enums.CurrentSource)
     '''
     Specifies the current source provided during diode measurements.
 
-    The NI 4050 and NI 4060 are not supported., indent=4)
+    The NI 4050 and NI 4060 are not supported.
     '''
-    dc_bias = AttributeViInt32(1150053)
+    dc_bias = AttributeEnum(1150053, enums.DCBias)
     '''
     For the NI 4082 and NI 4072 only, controls the available DC bias for
-    capacitance measurements., indent=4)
+    capacitance measurements.
     '''
-    dc_noise_rejection = AttributeEnum(1150026, enums.DCNoiseRejectionMode)
+    dc_noise_rejection = AttributeEnum(1150026, enums.DCNoiseRejection)
     '''
-    Specifies the DC noise rejection mode., indent=4)
+    Specifies the DC noise rejection mode.
+    '''
+    digits_resolution = AttributeEnum(1250003, enums.DigitsResolution)
+    '''
+    Specifies the measurement resolution in digits. Setting this property to
+    higher values increases the measurement accuracy. Setting this property
+    to lower values increases the measurement speed.
     '''
     driver_setup = AttributeViString(1050007)
     '''
@@ -201,19 +199,37 @@ class Session(object):
     simulation. The end-user can specify driver-specific options through the
     Driver Setup keyword in the Option String parameter in niDMM Initialize
     With Options . If the user does not specify a Driver Setup string, this
-    property returns an empty string., indent=4)
+    property returns an empty string.
     '''
-    freq_voltage_auto_range_value = AttributeViReal64(1150044)
+    engine_major_version = AttributeViInt32(1050501)
+    '''
+    The major version number of the IVI engine.
+    '''
+    engine_minor_version = AttributeViInt32(1050502)
+    '''
+    The minor version number of the IVI engine.
+    '''
+    engine_revision = AttributeViString(1050553)
+    '''
+    A string that contains additional version information about the IVI
+    engine.
+    '''
+    error_elaboration = AttributeViString(1050103)
+    '''
+    An optional string that contains additional information concerning the
+    primary error condition.
+    '''
+    frequency_voltage_auto_range_value = AttributeViReal64(1150044)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
     the frequency voltage range. If auto ranging is enabled, shows the
     actual value of the active frequency voltage range. If not Auto Ranging,
-    the value is the same as that of the Frequency Voltage Range property., indent=4)
+    the value is the same as that of the Frequency Voltage Range property.
     '''
-    freq_voltage_range = AttributeViReal64(1250101)
+    frequency_voltage_range = AttributeViReal64(1250101)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
-    amplitude of the input signal for frequency measurements., indent=4)
+    amplitude of the input signal for frequency measurements.
     '''
     function = AttributeEnum(1250001, enums.Function)
     '''
@@ -225,28 +241,42 @@ class Session(object):
     properties. If the Operation Mode property is set to Waveform Mode, the
     only valid function types are Waveform Voltage and Waveform Current. Set
     the Operation Mode property to IVIDMM Mode to set all other function
-    values., indent=4)
+    values.
     '''
     group_capabilities = AttributeViString(1050401)
     '''
     A string containing the capabilities and extension groups supported by
-    the specific driver., indent=4)
+    the specific driver.
     '''
-    input_resistance = AttributeViReal64(1150029)
+    idquery_response = AttributeViString(1150001)
     '''
-    Specifies the input resistance of the instrument., indent=4)
+    A string containing the type of instrument used in the current session.
+    '''
+    input_resistance = AttributeEnum(1150029, enums.InputResistance)
+    '''
+    Specifies the input resistance of the instrument.
     '''
     instrument_firmware_revision = AttributeViString(1050510)
     '''
-    A string containing the instrument firmware revision number., indent=4)
+    A string containing the instrument firmware revision number.
     '''
     instrument_manufacturer = AttributeViString(1050511)
     '''
-    A string containing the manufacturer of the instrument., indent=4)
+    A string containing the manufacturer of the instrument.
     '''
     instrument_model = AttributeViString(1050512)
     '''
-    A string containing the instrument model., indent=4)
+    A string containing the instrument model.
+    '''
+    instrument_product_id = AttributeViInt32(1150061)
+    '''
+    The PCI product ID.
+    '''
+    instrument_serial_number = AttributeViString(1150054)
+    '''
+    A string containing the serial number of the instrument. This property
+    corresponds to the serial number label that is attached to most
+    products.
     '''
     interchange_check = AttributeViBoolean(1050021)
     '''
@@ -261,44 +291,54 @@ class Session(object):
     least one property within that group. Interchangeability warnings can
     occur when a property affects the behavior of the instrument and you
     have not set that property, or the property has been invalidated since
-    you set it., indent=4)
+    you set it.
     '''
     io_resource_descriptor = AttributeViString(1050304)
     '''
-    A string containing the resource descriptor of the instrument., indent=4)
+    A string containing the resource descriptor of the instrument.
     '''
-    io_session = AttributeViSession(1050322)
     latency = AttributeViInt32(1150034)
     '''
     Specifies the number of measurements transferred at a time from the
     instrument to an internal buffer. When set to Auto (-1), NI-DMM chooses
-    the transfer size., indent=4)
+    the transfer size.
     '''
     lc_calculation_model = AttributeEnum(1150052, enums.LCCalculationModel)
     '''
     For the NI 4082 and NI 4072 only, specifies the type of algorithm that
     the measurement processing uses for capacitance and inductance
-    measurements., indent=4)
-    '''
-    lc_number_meas_to_average = AttributeViInt32(1150055)
-    '''
-    For the NI 4082 and NI 4072 only, specifies the number of LC
-    measurements that are averaged to produce one reading., indent=4)
+    measurements.
     '''
     logical_name = AttributeViString(1050305)
     '''
-    A string containing the logical name of the instrument., indent=4)
+    A string containing the logical name of the instrument.
     '''
-    meas_complete_dest = AttributeViInt32(1250305)
+    max_frequency = AttributeViReal64(1250007)
+    '''
+    Specifies the maximum frequency component of the input signal for AC
+    measurements. This property is used only for error checking and verifies
+    that the value of this parameter is less than the maximum frequency of
+    the device. This property affects the DMM only when you set the Function
+    property to AC measurements.
+    '''
+    measurement_completdest = AttributeEnum(1250305, enums.MeasurementCompleteDest)
     '''
     Specifies the destination of the measurement complete (MC) signal.
 
     To determine which values are supported by each device, refer to the
-    LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* ., indent=4)
+    LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
     '''
-    meas_dest_slope = AttributeEnum(1150002, enums.Slope)
+    measurement_destination_slope = AttributeEnum(1150002, enums.MeasurementDestinationSlope)
     '''
-    Specifies the polarity of the generated measurement complete signal., indent=4)
+    Specifies the polarity of the generated measurement complete signal.
+    '''
+    min_frequency = AttributeViReal64(1250006)
+    '''
+    Specifies the minimum frequency component of the input signal for AC
+    measurements. This property affects the DMM only when you set the
+    Function property to AC measurements. The valid range is 1 Hz-300 kHz
+    for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
+    4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
     '''
     number_of_averages = AttributeViInt32(1150032)
     '''
@@ -308,47 +348,47 @@ class Session(object):
     Property will be ignored otherwise. The default is 4 for 7 1/2 digits;
     otherwise, the default is 1.
 
-    The NI 4050 and NI 4060 are not supported., indent=4)
+    The NI 4050 and NI 4060 are not supported.
     '''
-    offset_comp_ohms = AttributeEnum(1150023, enums.EnabledSetting)
+    number_of_lc_measurements_to_average = AttributeViInt32(1150055)
+    '''
+    For the NI 4082 and NI 4072 only, specifies the number of LC
+    measurements that are averaged to produce one reading.
+    '''
+    offset_compensated_ohms = AttributeEnum(1150023, enums.OffsetCompensatedOhms)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
-    offset compensated ohms., indent=4)
-    '''
-    open_cable_comp_conductance = AttributeViReal64(1150049)
-    '''
-    For the NI 4082 and NI 4072 only, specifies the active part
-    (conductance) of the open cable compensation. The valid range is any
-    real number >0. The default value (-1.0) indicates that compensation has
-    not taken place., indent=4)
-    '''
-    open_cable_comp_susceptance = AttributeViReal64(1150048)
-    '''
-    For the NI 4082 and NI 4072 only, specifies the reactive part
-    (susceptance) of the open cable compensation. The valid range is any
-    real number >0. The default value (-1.0) indicates that compensation has
-    not taken place., indent=4)
+    offset compensated ohms.
     '''
     operation_mode = AttributeEnum(1150014, enums.OperationMode)
     '''
     Specifies how the DMM acquires data.
 
     .. note::
-    The NI 4050 and NI 4060 are not supported.
+       The NI 4050 and NI 4060 are not supported.
 
     When you call niDMM Config Measurement , NI-DMM sets this property to
     IVIDMM Mode. When you call niDMM Configure Waveform Acquisition , NI-DMM
     sets this property to Waveform Mode. If you are programming properties
     directly, you must set this property before setting other configuration
-    properties., indent=4)
+    properties.
     '''
-    powerline_freq = AttributeViReal64(1250333)
+    powerline_frequency = AttributeEnum(1250333, enums.PowerlineFrequency)
     '''
     Specifies the powerline frequency. The NI 4060 and NI 4050 use this
     value to select an aperture time to reject powerline noise by selecting
     the appropriate internal sample clock and filter. The NI 4065, NI
     4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
-    for setting the Aperture Time property in powerline cycles., indent=4)
+    for setting the Aperture Time property in powerline cycles.
+    '''
+    primary_error = AttributeViInt32(1050101)
+    '''
+    A code that describes the first error that occurred since the last call
+    to niDMM Get Error for the session. The value follows the VXIplug&play
+    conventions. A negative value describes an error condition. A positive
+    value describes a warning condition. A zero indicates that no error or
+    warning occurred. The error and warning values can be status codes
+    defined by IVI, VISA, class drivers, or specific drivers.
     '''
     query_instrument_status = AttributeViBoolean(1050003)
     '''
@@ -359,7 +399,7 @@ class Session(object):
     instrument driver can choose to ignore status checking for particular
     properties regardless of the setting of this property. The default value
     is TRUE (1). Use niDMM Initialize With Options to override the default
-    setting., indent=4)
+    setting.
     '''
     range = AttributeViReal64(1250002)
     '''
@@ -367,7 +407,7 @@ class Session(object):
     absolute value of the maximum expected measurement. The value is in
     units appropriate for the current value of the Function property. For
     example, if the Function property is set to DC Volts, the units are
-    volts., indent=4)
+    volts.
     '''
     range_check = AttributeViBoolean(1050002)
     '''
@@ -377,27 +417,52 @@ class Session(object):
     After the user program is validated, you can set this property to FALSE
     (0) to disable range checking and maximize performance. The default
     value is TRUE (1). Use niDMM Initialize With Options to override the
-    default setting., indent=4)
+    default setting.
     '''
-    record_coercions = AttributeViBoolean(1050006)
+    reactance = AttributeViReal64(1150046)
+    '''
+    For the NI 4082 and NI 4072 only, represents the reactive part
+    (reactance) of the short cable compensation. The valid range is any real
+    number >0. The default value (-1) indicates that compensation has not
+    taken place.
+    '''
+    record_value_coercions = AttributeViBoolean(1050006)
     '''
     Specifies whether the IVI engine keeps a list of the value coercions it
     makes for ViInt32 and ViReal64 properties. The default value is FALSE
     (0). Use niDMM Initialize With Options to override the default setting.
     Use niDMM Get Next Coercion Record to extract and delete the oldest
-    coercion record from the list., indent=4)
+    coercion record from the list.
     '''
-    resolution_absolute = AttributeViReal64(1250008)
+    resistance = AttributeViReal64(1150047)
     '''
-    Specifies the measurement resolution in absolute units. Setting this
-    property to higher values increases the measurement accuracy. Setting
-    this property to lower values increases the measurement speed., indent=4)
+    For the NI 4082 and NI 4072 only, represents the active part
+    (resistance) of the short cable compensation. The valid range is any
+    real number >0. The default value (-1) indicates that compensation has
+    not taken place.
     '''
-    resolution_digits = AttributeViReal64(1250003)
+    rtd_a = AttributeViReal64(1150121)
     '''
-    Specifies the measurement resolution in digits. Setting this property to
-    higher values increases the measurement accuracy. Setting this property
-    to lower values increases the measurement speed., indent=4)
+    Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
+    **RTD Type property** is set to Custom.
+    '''
+    rtd_b = AttributeViReal64(1150122)
+    '''
+    Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
+    **RTD Type property** is set to Custom.
+    '''
+    rtd_c = AttributeViReal64(1150123)
+    '''
+    Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
+    **RTD Type property** is set to Custom.
+    '''
+    rtd_resistance = AttributeViReal64(1250242)
+    '''
+    Specifies the RTD resistance at 0 degrees Celsius.
+    '''
+    rtd_type = AttributeEnum(1150120, enums.RTDType)
+    '''
+    Specifies the RTD type.
     '''
     sample_count = AttributeViInt32(1250301)
     '''
@@ -407,7 +472,11 @@ class Session(object):
     measurements. Otherwise, setting Sample Count to 0 causes the
     conditional statement "Measurements equal to Sample Count" to always
     evaluate to False, and causes the DMM to continue taking measurements in
-    the inner loop., indent=4)
+    the inner loop.
+    '''
+    sample_delay_mode = AttributeViInt32(1150031)
+    '''
+    For the NI 4060 only, specifies a delay interval after a sample trigger.
     '''
     sample_interval = AttributeViReal64(1250303)
     '''
@@ -415,49 +484,36 @@ class Session(object):
     measurement cycles. This property only applies when the Sample Trigger
     property is set to INTERVAL. The default value (-1) ensures that the DMM
     settles for a recommended time, which is the same as using an immediate
-    trigger., indent=4)
+    trigger.
     '''
-    sample_trigger = AttributeViInt32(1250302)
+    sample_trigger = AttributeEnum(1250302, enums.SampleTrigger)
     '''
     Specifies the sample trigger source.
 
     To determine which values are supported by each device, refer to the
-    LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* ., indent=4)
+    LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
     '''
-    sample_trigger_slope = AttributeEnum(1150010, enums.Slope)
+    sample_trig_slope = AttributeEnum(1150010, enums.SampleTrigSlope)
     '''
     Specifies the edge of the signal from the specified sample trigger
-    source on which the DMM is triggered., indent=4)
+    source on which the DMM is triggered.
     '''
-    serial_number = AttributeViString(1150054)
+    secondary_error = AttributeViInt32(1050102)
     '''
-    A string containing the serial number of the instrument. This property
-    corresponds to the serial number label that is attached to most
-    products., indent=4)
+    An optional code that provides additional information concerning the
+    primary error condition. The error and warning values can be status
+    codes defined by IVI, VISA, class drivers, or specific drivers. Zero
+    indicates no additional information.
     '''
     settle_time = AttributeViReal64(1150028)
     '''
     Specifies the settling time in seconds. Use this property to override
     the default settling time. To return to the default, set this property
-    to Auto (-1)., indent=4)
-    '''
-    short_cable_comp_reactance = AttributeViReal64(1150046)
-    '''
-    For the NI 4082 and NI 4072 only, represents the reactive part
-    (reactance) of the short cable compensation. The valid range is any real
-    number >0. The default value (-1) indicates that compensation has not
-    taken place., indent=4)
-    '''
-    short_cable_comp_resistance = AttributeViReal64(1150047)
-    '''
-    For the NI 4082 and NI 4072 only, represents the active part
-    (resistance) of the short cable compensation. The valid range is any
-    real number >0. The default value (-1) indicates that compensation has
-    not taken place., indent=4)
+    to Auto (-1).
     '''
     shunt_value = AttributeViReal64(1150003)
     '''
-    For the NI 4050 only, specifies the shunt resistance value., indent=4)
+    For the NI 4050 only, specifies the shunt resistance value.
     '''
     simulate = AttributeViBoolean(1050005)
     '''
@@ -467,100 +523,92 @@ class Session(object):
     instrument I/O. For output parameters that represent instrument data,
     the instrument driver VIs return calculated values. The default value is
     FALSE (0). Use niDMM Initialize With Options to override the default
-    setting., indent=4)
+    setting.
     '''
     specific_driver_class_spec_major_version = AttributeViInt32(1050515)
     '''
     The major version number of the class specification for the specific
-    driver., indent=4)
+    driver.
     '''
     specific_driver_class_spec_minor_version = AttributeViInt32(1050516)
     '''
     The minor version number of the class specification for the specific
-    driver., indent=4)
+    driver.
     '''
     specific_driver_description = AttributeViString(1050514)
     '''
-    A string containing a description of the specific driver., indent=4)
+    A string containing a description of the specific driver.
+    '''
+    specific_driver_major_version = AttributeViInt32(1050503)
+    '''
+    Returns the major version number of this instrument driver.
+    '''
+    specific_driver_minor_version = AttributeViInt32(1050504)
+    '''
+    Returns the minor version number of this instrument driver.
     '''
     specific_driver_prefix = AttributeViString(1050302)
     '''
     The prefix for the specific instrument driver. The name of each
     user-callable VI in this driver starts with this prefix. The prefix can
-    be up to a maximum of eight characters., indent=4)
+    be up to a maximum of eight characters.
     '''
     specific_driver_revision = AttributeViString(1050551)
     '''
     A string that contains additional version information about this
-    instrument driver., indent=4)
+    instrument driver.
     '''
     specific_driver_vendor = AttributeViString(1050513)
     '''
-    A string containing the vendor of the specific driver., indent=4)
+    A string containing the vendor of the specific driver.
     '''
     supported_instrument_models = AttributeViString(1050327)
     '''
     A string containing the instrument models supported by the specific
-    driver., indent=4)
+    driver.
     '''
-    temp_rtd_a = AttributeViReal64(1150121)
+    susceptance = AttributeViReal64(1150048)
     '''
-    Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
-    **RTD Type property** is set to Custom., indent=4)
+    For the NI 4082 and NI 4072 only, specifies the reactive part
+    (susceptance) of the open cable compensation. The valid range is any
+    real number >0. The default value (-1.0) indicates that compensation has
+    not taken place.
     '''
-    temp_rtd_b = AttributeViReal64(1150122)
-    '''
-    Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
-    **RTD Type property** is set to Custom., indent=4)
-    '''
-    temp_rtd_c = AttributeViReal64(1150123)
-    '''
-    Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
-    **RTD Type property** is set to Custom., indent=4)
-    '''
-    temp_rtd_res = AttributeViReal64(1250242)
-    '''
-    Specifies the RTD resistance at 0 degrees Celsius., indent=4)
-    '''
-    temp_rtd_type = AttributeEnum(1150120, enums.TemperatureRTDType)
-    '''
-    Specifies the RTD type., indent=4)
-    '''
-    temp_tc_fixed_ref_junc = AttributeViReal64(1250233)
+    tc_fixed_ref_junction = AttributeViReal64(1250233)
     '''
     Specifies the value of the fixed reference junction temperature for a
-    thermocouple in degrees Celsius., indent=4)
+    thermocouple in degrees Celsius.
     '''
-    temp_tc_ref_junc_type = AttributeEnum(1250232, enums.TemperatureThermocoupleReferenceJunctionType)
+    tc_ref_junction_type = AttributeEnum(1250232, enums.ThermocoupleReferenceJunctionType)
     '''
-    Specifies the thermocouple reference junction type., indent=4)
+    Specifies the thermocouple reference junction type.
     '''
-    temp_tc_type = AttributeEnum(1250231, enums.TemperatureThermocoupleType)
-    '''
-    Specifies the thermocouple type., indent=4)
-    '''
-    temp_thermistor_a = AttributeViReal64(1150125)
+    thermistor_a = AttributeViReal64(1150125)
     '''
     Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-    the **Thermistor Type property** is set to Custom., indent=4)
+    the **Thermistor Type property** is set to Custom.
     '''
-    temp_thermistor_b = AttributeViReal64(1150126)
+    thermistor_b = AttributeViReal64(1150126)
     '''
     Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-    the **Thermistor Type property** is set to Custom., indent=4)
+    the **Thermistor Type property** is set to Custom.
     '''
-    temp_thermistor_c = AttributeViReal64(1150127)
+    thermistor_c = AttributeViReal64(1150127)
     '''
     Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-    the **Thermistor Type property** is set to Custom., indent=4)
+    the **Thermistor Type property** is set to Custom.
     '''
-    temp_thermistor_type = AttributeEnum(1150124, enums.TemperatureThermistorType)
+    thermistor_type = AttributeEnum(1150124, enums.ThermistorType)
     '''
-    Specifies the thermistor type., indent=4)
+    Specifies the thermistor type.
     '''
-    temp_transducer_type = AttributeEnum(1250201, enums.TemperatureTransducerType)
+    thermocouple_type = AttributeEnum(1250231, enums.ThermocoupleType)
     '''
-    Specifies the transducer type., indent=4)
+    Specifies the thermocouple type.
+    '''
+    transducer_type = AttributeEnum(1250201, enums.TransducerType)
+    '''
+    Specifies the transducer type.
     '''
     trigger_count = AttributeViInt32(1250304)
     '''
@@ -571,7 +619,7 @@ class Session(object):
     The NI 4050/4060 only support this property being set to 1.
 
     Refer to Multiple Point Acquisitions in the *NI Digital Multimeters
-    Help* for more information., indent=4)
+    Help* for more information.
     '''
     trigger_delay = AttributeViReal64(1250005)
     '''
@@ -602,14 +650,14 @@ class Session(object):
     Valid Range: Auto Delay (-1.0), 0.0-12.0 seconds (NI 4060 only),
     0.0-149.0 seconds (NI 4065 and NI 4070/4071/4072)
 
-    Default Value: Auto Delay, indent=4)
+    Default Value: Auto Delay
     '''
-    trigger_slope = AttributeEnum(1250334, enums.Slope)
+    trigger_slope = AttributeEnum(1250334, enums.TriggerSlope)
     '''
     Specifies the edge of the signal from the specified trigger source on
-    which the DMM is triggered., indent=4)
+    which the DMM is triggered.
     '''
-    trigger_source = AttributeViInt32(1250004)
+    trigger_source = AttributeEnum(1250004, enums.TriggerSource)
     '''
     Specifies the trigger source. When niDMM Initiate is called, the DMM
     waits for the trigger specified with this property. After it receives
@@ -617,17 +665,17 @@ class Session(object):
     Delay property. The DMM then takes a measurement.
 
     To determine which values are supported by each device, refer to the
-    LabVIEW Trigger Routing section in the *NI Digital Multimeters Help* ., indent=4)
+    LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
     '''
-    waveform_coupling = AttributeEnum(1150027, enums.WaveformCouplingMode)
+    waveform_coupling = AttributeEnum(1150027, enums.WaveformCoupling)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
-    coupling during a waveform acquisition., indent=4)
+    coupling during a waveform acquisition.
     '''
     waveform_points = AttributeViInt32(1150019)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the number of
-    points to acquire in a waveform acquisition., indent=4)
+    points to acquire in a waveform acquisition.
     '''
     waveform_rate = AttributeViReal64(1150018)
     '''
@@ -635,13 +683,23 @@ class Session(object):
     (S/s). The valid rate is calculated by dividing 1,800,000 by an integer
     divisor, and the rate falls between 10 and 1,800,000 samples per second.
     The waveform rate is coerced upwards to the next valid rate. The default
-    value is 1,800,000 samples per second. Not supported by NI 4065., indent=4)
+    value is 1,800,000 samples per second. Not supported by NI 4065.
     '''
 
     def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):
         self.library = library.get_library()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+
+        self._is_frozen = True
+
+    def __setattr__(self, key, value):
+        if self._is_frozen and key not in dir(self):
+            raise TypeError("%r is a frozen class" % self)
+        object.__setattr__(self, key, value)
+
+    def initiate(self):
+        return Acquisition(self)
 
     def __del__(self):
         pass
@@ -757,8 +815,8 @@ class Session(object):
         return
 
     def configure_meas_complete_dest(self, destination):
-        if type(destination) is not enums.Terminal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(destination) is not enums.MeasurementCompleteDest:
+            raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementCompleteDest))
         error_code = self.library.niDMM_ConfigureMeasCompleteDest(self.vi, destination.value)
         errors._handle_error(self, error_code)
         return
@@ -785,8 +843,8 @@ class Session(object):
         return
 
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger, sample_interval):
-        if type(sample_trigger) is not enums.Terminal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(sample_trigger) is not enums.SampleTrigger:
+            raise TypeError('Parameter mode must be of type ' + str(enums.SampleTrigger))
         error_code = self.library.niDMM_ConfigureMultiPoint(self.vi, trigger_count, sample_count, sample_trigger.value, sample_interval)
         errors._handle_error(self, error_code)
         return
@@ -855,8 +913,8 @@ class Session(object):
         return
 
     def configure_trigger(self, trig_source, trigger_delay):
-        if type(trig_source) is not enums.Terminal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Terminal))
+        if type(trig_source) is not enums.TriggerSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         error_code = self.library.niDMM_ConfigureTrigger(self.vi, trig_source.value, trigger_delay)
         errors._handle_error(self, error_code)
         return

@@ -59,5 +59,7 @@ DEFAULT_PY_FILES_TO_COPY := \
 
 DEFAULT_RST_FILES_TO_GENERATE := \
                      session.rst \
+                     enums.rst \
+                     attributes.rst \
 
 

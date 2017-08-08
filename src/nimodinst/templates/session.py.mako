@@ -6,7 +6,6 @@
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
-    attribute_docs = template_parameters['metadata'].attribute_docs
 %>\
 
 import ctypes
@@ -48,11 +47,11 @@ class AttributeViString(object):
 class Device(object):
 
     def __init__(self, owner, index):
-% for attribute in sorted(attributes):
-        self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(owner, ${attributes[attribute]['id']}, index=index)
-%   if str(attributes[attribute]['id']) in attribute_docs:
+% for attribute in helper.sorted_attrs(attributes):
+        self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(owner, ${attribute}, index=index)
+%   if 'shortDescription' in attributes[attribute]:
         '''
-        ${helper.get_indented_docstring_snippet(attribute_docs[str(attributes[attribute]['id'])]['shortDescription'])}, indent=8)
+        ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'], indent=8)}
         '''
 %   endif
 % endfor
@@ -61,20 +60,31 @@ class Device(object):
 class Session(object):
     '''${config['session_description']}'''
 
+    # This is needed during __init__. Without it, __setattr__ raises an exception
+    _is_frozen = False
+
     def __init__(self, driver):
-% for attribute in sorted(attributes):
-        self.${attribute.lower()} = Attribute${attributes[attribute]['type']}(self, ${attributes[attribute]['id']})
-%   if str(attributes[attribute]['id']) in attribute_docs:
+% for attribute in helper.sorted_attrs(attributes):
+        self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(self, ${attribute})
+%   if 'shortDescription' in attributes[attribute]:
         '''
-        ${helper.get_indented_docstring_snippet(attribute_docs[str(attributes[attribute]['id'])]['shortDescription'])}, indent=8)
+        ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'], indent=8)}
         '''
 %   endif
 % endfor
 
         self.handle = 0
         self.item_count = 0
+        self.current_item = 0
         self.library = library.get_library()
         self.handle, self.item_count = self._open_installed_devices_session(driver)
+
+        self._is_frozen = True
+
+    def __setattr__(self, key, value):
+        if self._is_frozen and key not in dir(self):
+            raise TypeError("%r is a frozen class" % self)
+        object.__setattr__(self, key, value)
 
     def __del__(self):
         pass

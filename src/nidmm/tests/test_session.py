@@ -42,7 +42,7 @@ class TestSession(object):
         session.close()
         self.patched_ctypes_library.niDMM_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
-    def test_context_manager(self):
+    def test_session_context_manager(self):
         with nidmm.Session('dev1') as session:
             assert(session.vi == SESSION_NUM_FOR_TEST)
             self.patched_ctypes_library.niDMM_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
@@ -93,5 +93,30 @@ class TestSession(object):
         self.patched_ctypes_library.niDMM_GetAttributeViString.side_effect = self.side_effects_helper.niDMM_GetAttributeViString
         self.side_effects_helper['GetAttributeViString']['value'] = '0x12345678'
         with nidmm.Session('dev1') as session:
-            sn = session.serial_number
+            sn = session.instrument_serial_number
             assert(sn == '0x12345678')
+
+    def test_acquisition_context_manager(self):
+        self.patched_ctypes_library.niDMM_Initiate.side_effect = self.side_effects_helper.niDMM_Initiate
+        self.patched_ctypes_library.niDMM_Abort.side_effect = self.side_effects_helper.niDMM_Abort
+        with nidmm.Session('dev1') as session:
+            with session.initiate():
+                self.patched_ctypes_library.niDMM_Initiate.assert_called_once_with(SESSION_NUM_FOR_TEST)
+            self.patched_ctypes_library.niDMM_Abort.assert_called_once_with(SESSION_NUM_FOR_TEST)
+        self.patched_ctypes_library.niDMM_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+
+    def test_cannot_add_properties_to_session(self):
+        with nidmm.Session('dev1') as session:
+            try:
+                session.nonexistent_property = 5
+                assert False
+            except TypeError as e:
+                print(e)
+                pass
+            try:
+                value = session.nonexistent_property  # noqa: F841
+                assert False
+            except AttributeError as e:
+                print(e)
+                pass
+
