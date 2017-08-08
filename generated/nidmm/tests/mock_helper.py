@@ -80,9 +80,11 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureMultiPoint']['return'] = 0
         self._defaults['ReadMultiPoint'] = {}
         self._defaults['ReadMultiPoint']['return'] = 0
+        self._defaults['ReadMultiPoint']['readingArray'] = None
         self._defaults['ReadMultiPoint']['actualPts'] = None
         self._defaults['FetchMultiPoint'] = {}
         self._defaults['FetchMultiPoint']['return'] = 0
+        self._defaults['FetchMultiPoint']['readingArray'] = None
         self._defaults['FetchMultiPoint']['actualPts'] = None
         self._defaults['ConfigureTriggerSlope'] = {}
         self._defaults['ConfigureTriggerSlope']['return'] = 0
@@ -143,9 +145,11 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureWaveformCoupling']['return'] = 0
         self._defaults['FetchWaveform'] = {}
         self._defaults['FetchWaveform']['return'] = 0
+        self._defaults['FetchWaveform']['waveformArray'] = None
         self._defaults['FetchWaveform']['actualPoints'] = None
         self._defaults['ReadWaveform'] = {}
         self._defaults['ReadWaveform']['return'] = 0
+        self._defaults['ReadWaveform']['waveformArray'] = None
         self._defaults['ReadWaveform']['actualPoints'] = None
         self._defaults['GetAttributeViInt32'] = {}
         self._defaults['GetAttributeViInt32']['return'] = 0
@@ -329,12 +333,18 @@ class SideEffectsHelper(object):
         return self._defaults['ConfigureMultiPoint']['return']
 
     def niDMM_ReadMultiPoint(self, vi, max_time, array_size, reading_array, actual_pts):  # noqa: N802
+        if self._defaults['ReadMultiPoint']['readingArray'] is None:
+            raise MockFunctionCallError("niDMM_ReadMultiPoint", param='readingArray')
+        reading_array.contents.value = self._defaults['ReadMultiPoint']['readingArray']
         if self._defaults['ReadMultiPoint']['actualPts'] is None:
             raise MockFunctionCallError("niDMM_ReadMultiPoint", param='actualPts')
         actual_pts.contents.value = self._defaults['ReadMultiPoint']['actualPts']
         return self._defaults['ReadMultiPoint']['return']
 
     def niDMM_FetchMultiPoint(self, vi, max_time, array_size, reading_array, actual_pts):  # noqa: N802
+        if self._defaults['FetchMultiPoint']['readingArray'] is None:
+            raise MockFunctionCallError("niDMM_FetchMultiPoint", param='readingArray')
+        reading_array.contents.value = self._defaults['FetchMultiPoint']['readingArray']
         if self._defaults['FetchMultiPoint']['actualPts'] is None:
             raise MockFunctionCallError("niDMM_FetchMultiPoint", param='actualPts')
         actual_pts.contents.value = self._defaults['FetchMultiPoint']['actualPts']
@@ -443,12 +453,18 @@ class SideEffectsHelper(object):
         return self._defaults['ConfigureWaveformCoupling']['return']
 
     def niDMM_FetchWaveform(self, vi, max_time, array_size, waveform_array, actual_points):  # noqa: N802
+        if self._defaults['FetchWaveform']['waveformArray'] is None:
+            raise MockFunctionCallError("niDMM_FetchWaveform", param='waveformArray')
+        waveform_array.contents.value = self._defaults['FetchWaveform']['waveformArray']
         if self._defaults['FetchWaveform']['actualPoints'] is None:
             raise MockFunctionCallError("niDMM_FetchWaveform", param='actualPoints')
         actual_points.contents.value = self._defaults['FetchWaveform']['actualPoints']
         return self._defaults['FetchWaveform']['return']
 
     def niDMM_ReadWaveform(self, vi, max_time, array_size, waveform_array, actual_points):  # noqa: N802
+        if self._defaults['ReadWaveform']['waveformArray'] is None:
+            raise MockFunctionCallError("niDMM_ReadWaveform", param='waveformArray')
+        waveform_array.contents.value = self._defaults['ReadWaveform']['waveformArray']
         if self._defaults['ReadWaveform']['actualPoints'] is None:
             raise MockFunctionCallError("niDMM_ReadWaveform", param='actualPoints')
         actual_points.contents.value = self._defaults['ReadWaveform']['actualPoints']

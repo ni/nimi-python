@@ -153,9 +153,8 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
                     snippet += '.encode(\'ascii\')'
         else:
             assert x['direction'] == 'out', pp.pformat(x)
-            if x['type'] == 'ViString' or x['type'] == 'ViRsrc' or x['type'] == 'ViConstString_ctype':
-                # These are defined as c_char_p which is already a pointer!
-                snippet = (x['ctypes_variable_name'])
+            if x['is_buffer']:
+                snippet = 'ctypes.cast(' + x['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + x['ctypes_type'] + '))'
             else:
                 snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
         snippets.append(snippet)
@@ -178,9 +177,20 @@ def get_library_call_parameter_types_snippet(parameters_list):
 
 def _get_output_param_return_snippet(output_parameter):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
-    snippet = output_parameter['ctypes_variable_name'] + '.value'
-    if output_parameter['type'] == 'ViChar':
-        snippet += '.decode("ascii")'
+    assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
+    if output_parameter['is_buffer']:
+        if output_parameter['type'] == 'ViChar':
+            snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
+        else:
+            # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
+            # TODO(texasaggie97): Not implementing ivi-dance so replace with 0
+            size_name = camelcase_to_snakecase(output_parameter['size'])
+            if size_name == 'ivi-dance':
+                size_name = '0'
+            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i].value for i in range(' + size_name + ')]'
+    else:
+        snippet = output_parameter['ctypes_variable_name'] + '.value'
+
     return snippet
 
 def get_method_return_snippet(output_parameters):
@@ -203,7 +213,14 @@ def get_ctype_variable_declaration_snippet(parameter):
     assert parameter['direction'] == 'out', pp.pformat(parameter)
     snippet = parameter['ctypes_variable_name'] + ' = '
     if parameter['is_buffer']:
-        snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)' + '  # TODO(marcoskirsch): allocate a buffer'
+        if isinstance(parameter['size'], int):
+            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']) + ')()'
+            #snippet += 'ctypes.create_string_buffer(' + str(parameter['size']) + ')'
+        elif parameter['size'] == 'ivi-dance':
+            snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)  # TODO(marcoskirsch): Do the IVI-dance!'
+        else:
+            # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
+            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + camelcase_to_snakecase(parameter['size']) + ')()'
     else:
         snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)'
     return snippet

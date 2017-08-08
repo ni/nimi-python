@@ -183,7 +183,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
             by the driver)
             '''
             error_code = ctypes_types.ViStatus_ctype(error_code)
-            error_message = ctypes.create_string_buffer(buffer_size)
+            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
             self.library.${c_function_prefix}GetError(self.vi, ctypes.byref(error_code), buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         else:
             '''
@@ -196,7 +196,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
             '''
             error_code = buffer_size
             buffer_size = self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, 0, None)
-            error_message = ctypes.create_string_buffer(buffer_size)
+            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
             self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
 
         # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
@@ -237,3 +237,4 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
         errors._handle_error(self, error_code)
         return value_ctype.value.decode("ascii")
+
