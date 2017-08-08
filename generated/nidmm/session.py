@@ -956,14 +956,14 @@ class Session(object):
         actual_pts_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_FetchMultiPoint(self.vi, max_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_pts_ctype))
         errors._handle_error(self, error_code)
-        return [reading_array_ctype[i] for i in range(array_size)], actual_pts_ctype.value
+        return [reading_array_ctype[i].value for i in range(array_size)], actual_pts_ctype.value
 
     def fetch_waveform(self, max_time, array_size):
         waveform_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_points_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_FetchWaveform(self.vi, max_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_points_ctype))
         errors._handle_error(self, error_code)
-        return [waveform_array_ctype[i] for i in range(array_size)], actual_points_ctype.value
+        return [waveform_array_ctype[i].value for i in range(array_size)], actual_points_ctype.value
 
     def get_aperture_time_info(self):
         aperture_time_ctype = ctypes_types.ViReal64_ctype(0)
@@ -1000,7 +1000,7 @@ class Session(object):
         value_ctype = ctypes_types.ViString_ctype(0)  # TODO(marcoskirsch): Do the IVI-dance!
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buf_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)))
         errors._handle_error(self, error_code)
-        return [value_ctype[i] for i in range(0)]
+        return [value_ctype[i].value for i in range(0)]
 
     def get_auto_range_value(self):
         auto_range_value_ctype = ctypes_types.ViReal64_ctype(0)
@@ -1136,7 +1136,7 @@ class Session(object):
         actual_pts_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_ReadMultiPoint(self.vi, max_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_pts_ctype))
         errors._handle_error(self, error_code)
-        return [reading_array_ctype[i] for i in range(array_size)], actual_pts_ctype.value
+        return [reading_array_ctype[i].value for i in range(array_size)], actual_pts_ctype.value
 
     def read_status(self):
         acq_backlog_ctype = ctypes_types.ViInt32_ctype(0)
@@ -1150,7 +1150,7 @@ class Session(object):
         actual_points_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_ReadWaveform(self.vi, max_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_points_ctype))
         errors._handle_error(self, error_code)
-        return [waveform_array_ctype[i] for i in range(array_size)], actual_points_ctype.value
+        return [waveform_array_ctype[i].value for i in range(array_size)], actual_points_ctype.value
 
     def reset_interchange_check(self):
         error_code = self.library.niDMM_ResetInterchangeCheck(self.vi)
