@@ -4,7 +4,7 @@
     config = template_parameters['metadata'].config
     module_name = config['module_name']
     driver_name = config['driver_name']
-    enums = template_parameters['metadata'].enums
+    enums = config['enums']
 %>\
 ${helper.get_rst_header_snippet(driver_name + ' Enums', '=')}
 

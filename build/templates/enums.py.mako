@@ -1,7 +1,8 @@
 # This file was generated
 <%
 import build.helper as helper
-enums = template_parameters['metadata'].enums
+config = template_parameters['metadata'].config
+enums = config['enums']
 %>
 from enum import Enum
 % for enum_name in sorted(enums):

@@ -47,3 +47,23 @@ functions_params_types = {
     'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
 }
 
+functions_buffer_info = {
+    'GetError':                     { 'parameters': { 3: { 'size': 'ivi-dance,bufferSize', }, }, },
+    'GetErrorMessage':              { 'parameters': { 3: { 'size': 'ivi-dance,bufferSize', }, }, },
+    'self_test':                    { 'parameters': { 2: { 'size': 256, }, }, }, # From documentation
+    'ReadMultiPoint':               { 'parameters': { 3: { 'size': 'arraySize', }, }, },
+    'FetchMultiPoint':              { 'parameters': { 3: { 'size': 'arraySize', }, }, },
+    'FetchWaveform':                { 'parameters': { 3: { 'size': 'arraySize', }, }, },
+    'ReadWaveform':                 { 'parameters': { 3: { 'size': 'arraySize', }, }, },
+    'GetAttributeViString':         { 'parameters': { 4: { 'size': 'ivi-dance,bufferSize', }, }, },
+    'GetNextInterchangeWarning':    { 'parameters': { 2: { 'size': 'ivi-dance,bufferSize', }, }, },
+    'GetCalUserDefinedInfo':        { 'parameters': { 2: { 'size': 256, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
+    'init':                         { 'parameters': { 0: { 'is_buffer': True, }, }, },
+    'InitWithOptions':              { 'parameters': { 0: { 'is_buffer': True, },
+                                                      3: { 'is_buffer': True, }, }, },
+    '.etAttribute.+':               { 'parameters': { 1: { 'is_buffer': True, }, }, },
+    'CheckAttribute.+':             { 'parameters': { 1: { 'is_buffer': True, }, }, },
+    'InitExtCal':                   { 'parameters': { 0: { 'is_buffer': True, }, }, },
+    'GetDevTemp':                   { 'parameters': { 1: { 'is_buffer': True, }, }, },
+}
+
