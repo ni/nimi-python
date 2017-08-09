@@ -26,7 +26,7 @@ install:
 script:
   - make clean all flake8 test html PRINT=1 PYTHON_CMD=python
 
-after_success:
-  - coveralls
+#after_success:
+#  - coveralls
 
 

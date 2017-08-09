@@ -1,5 +1,5 @@
 +----------------------+------------------------------------------------------------+
-| master branch status | |BuildStatus| |Docs| |CoverageStatus| |MITLicense|         |
+| master branch status | |BuildStatus| |Docs| |MITLicense|         |
 +----------------------+------------------------------------------------------------+
 | GitHub status        | |OpenIssues| |OpenPullRequests|                            |
 +----------------------+------------+-----------------------------------------------+
@@ -180,4 +180,4 @@ licenses allow for non-commercial and commercial use.
     :scale: 100%
     :target: https://github.com/ni/nimi-python/pulls
 
-
+..  |CoverageStatus|
