@@ -1,18 +1,23 @@
-|BuildStatus| |Docs| |CoverageStatus| |MITLicense| |OpenIssues| |OpenPullRequests|
-
++----------------------+------------------------------------------------------------+
+| master branch status | |BuildStatus| |Docs| |CoverageStatus| |MITLicense|         |
++----------------------+------------------------------------------------------------+
+| GitHub status        | |OpenIssues| |OpenPullRequests|                            |
++----------------------+------------+-----------------------------------------------+
+| Versions             | NI-DMM     | |DMMLatestVersion| |DMMPythonVersion|         |
+|                      +------------+-----------------------------------------------+
+|                      | NI-ModInst | |ModInstLatestVersion| |ModInstPythonVersion| |
++----------------------+------------+-----------------------------------------------+
+ 
 ===========  =================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
 Author       National Instruments
 ===========  =================================================================================================================
 
-Versions:
-
-* NI-DMM: |DMMLatestVersion| |DMMPythonVersion|
-* NI-ModInst: |ModInstLatestVersion| |ModInstPythonVersion|
-
-+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| WARNING!! | NI Modular Instruments Python API is currently under development. You are welcome to use it, and we welcome feedback, but be prepared for changes to the APIs. |
-+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------+-----------------------------------------------------------------------+
+| WARNING!! | NI Modular Instruments Python API is currently under development. You |
+|           | are welcome to use it, and we welcome feedback, but be prepared for   |
+|           | changes to the APIs.                                                  |
++-----------+-----------------------------------------------------------------------+
 
 .. _about-section:
 
