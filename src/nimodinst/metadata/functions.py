@@ -30,9 +30,9 @@ functions = [
              'type': 'ViInt32'},
             {'direction': 'out', 'enum': None,
              'name': 'attributeValue',
-             'type': 'ViChar',
+             'type': 'ViString',
              'is_buffer': True,
-             'size': 'ivi-dance',
+             'size': 'ivi-dance,attributeValueBufferSize',
              },
         ],
         'returns': 'ViStatus'},
@@ -67,9 +67,9 @@ functions = [
              'name': 'errorInfoBufferSize', 'type': 'ViInt32'},
             {'direction': 'out', 'enum': None,
              'name': 'errorInfo',
-             'type': 'ViChar',
+             'type': 'ViString',
              'is_buffer': True,
-             'size': 'ivi-dance'
+             'size': 'ivi-dance,errorInfoBufferSize'
              },
         ],
         'returns': 'ViStatus'},
