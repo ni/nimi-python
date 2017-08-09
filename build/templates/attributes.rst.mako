@@ -5,7 +5,7 @@
     module_name = config['module_name']
     driver_name = config['driver_name']
     c_function_prefix = config['c_function_prefix']
-    attributes = template_parameters['metadata'].attributes
+    attributes = config['attributes']
 %>\
 ${helper.get_rst_header_snippet(driver_name + ' Attributes', '=')}
 
