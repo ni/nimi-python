@@ -131,12 +131,12 @@ Other incorporated projects may be licensed under different licenses. All
 licenses allow for non-commercial and commercial use.
 
 .. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
-    :alt: build status
+    :alt: Build Status - master branch
     :scale: 100%
     :target: https://travis-ci.org/ni/nimi-python
 
 .. |Docs| image:: https://readthedocs.org/projects/nimi-python/badge/?version=latest
-    :alt: Documentation Status
+    :alt: Documentation Status - master branch
     :scale: 100%
     :target: https://nimi-python.readthedocs.io/en/latest/?badge=latest
 
@@ -146,37 +146,37 @@ licenses allow for non-commercial and commercial use.
     :target: https://opensource.org/licenses/MIT
 
 .. |CoverageStatus| image:: https://coveralls.io/repos/github/ni/nimi-python/badge.svg?branch=master
-    :alt: Coverage
+    :alt: Test Coverage - master branch
     :scale: 100%
     :target: https://coveralls.io/github/ni/nimi-python?branch=master
 
 .. |DMMLatestVersion| image:: http://img.shields.io/pypi/v/nidmm.svg
-    :alt: Latest DMM Version
+    :alt: Latest NI-DMM Version
     :scale: 100%
     :target: http://pypi.python.org/pypi/nidmm
 
 .. |ModInstLatestVersion| image:: http://img.shields.io/pypi/v/nimodinst.svg
-    :alt: Latest DMM Version
+    :alt: Latest NI-ModInst Version
     :scale: 100%
     :target: http://pypi.python.org/pypi/nimodinst
 
 .. |DMMPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidmm.svg
-    :alt: Latest DMM Version
+    :alt: NI-DMM supported Python versions
     :scale: 100%
     :target: http://pypi.python.org/pypi/nidmm
 
 .. |ModInstPythonVersion| image:: http://img.shields.io/pypi/pyversions/nimodinst.svg
-    :alt: Latest DMM Version
+    :alt: NI-ModInst supported Python versions
     :scale: 100%
     :target: http://pypi.python.org/pypi/nimodinst
 
 .. |OpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python.svg
-    :alt: Latest DMM Version
+    :alt: Open Issues + Pull Requests
     :scale: 100%
     :target: https://github.com/ni/nimi-python/issues
 
 .. |OpenPullRequests| image:: https://img.shields.io/github/issues-pr/ni/nimi-python.svg
-    :alt: Latest DMM Version
+    :alt: Open Pull Requests
     :scale: 100%
     :target: https://github.com/ni/nimi-python/pulls
 
