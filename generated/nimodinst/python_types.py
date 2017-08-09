@@ -1,49 +1,62 @@
 
 
 class ViStatus(int):
-    pass
+    def python_type(self):
+        return 'integer'
 
 
 class ViRsrc(str):
-    pass
+    def python_type(self):
+        return 'string'
 
 
 class ViSession(int):
-    pass
+    def python_type(self):
+        return 'integer'
 
 
 class ViChar(int):
-    pass
+    def python_type(self):
+        return 'integer'
 
 
 class ViUInt32(int):
-    pass
+    def python_type(self):
+        return 'integer'
 
 
 class ViInt32(int):
-    pass
+    def python_type(self):
+        return 'integer'
 
 
 class ViInt16(int):
-    pass
+    def python_type(self):
+        return 'integer'
 
 
 class ViUInt16(int):
-    pass
+    def python_type(self):
+        return 'integer'
 
 
 class ViString(str):
-    pass
+    def python_type(self):
+        return 'string'
 
 
 class ViAttr(int):
-    pass
+    def python_type(self):
+        return 'integer'
 
 
 class ViConstString(ViString):
     @property
     def value(self):  # Makes 'value' readonly
         return super(ViConstString, ViString)
+
+    def python_type(self):
+        return 'string'
 
 
 # Python's bool cannot be subclassed:
@@ -53,10 +66,16 @@ class ViBoolean(int):
     def from_param(cls, param):
         return 1 if bool(param) else 0
 
+    def python_type(self):
+        return 'integer'
+
 
 class ViReal32(float):
-    pass
+    def python_type(self):
+        return 'float'
 
 
 class ViReal64(float):
-    pass
+    def python_type(self):
+        return 'float'
+
