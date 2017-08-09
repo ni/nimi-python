@@ -85,7 +85,7 @@ $(TOX_INI): $(ROOT_DIR)/tox.ini
 
 test: $(TOX_INI)
 	@echo Running tox tests for $(DRIVER)
-	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && tox)
+	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && set DRIVER=$(DRIVER) && tox)
 
 flake8: $(TOX_INI)
 	@echo Running flake8 for $(DRIVER)
