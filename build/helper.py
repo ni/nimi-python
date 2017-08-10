@@ -34,7 +34,11 @@ def function_to_method_name(f):
 
 def extract_codegen_functions(functions):
     '''Returns function metadata only for those functions to be included in codegen'''
-    return [x for x in functions if x['codegen_method'] != 'no']
+    funcs = {}
+    for x in functions:
+        if functions[x]['codegen_method'] != 'no':
+            funcs[x] = functions[x]
+    return funcs
 
 def extract_input_parameters(parameters, sessionName = 'vi'):
     '''Returns list of parameters only with input parameters'''
@@ -59,15 +63,14 @@ def extract_ivi_dance_parameter(parameters):
         return None
     return param[0]
 
-
 # Functions to add information to metadata structures that are specific to our codegen needs.
 
-def _add_python_method_name(function):
+def _add_python_method_name(function, name):
     '''Adds a python_name' key/value pair to the function metadata'''
     if function['codegen_method'] == 'private':
-        function['python_name'] = '_' + camelcase_to_snakecase(function['name'])
+        function['python_name'] = '_' + camelcase_to_snakecase(name)
     else:
-        function['python_name'] = camelcase_to_snakecase(function['name'])
+        function['python_name'] = camelcase_to_snakecase(name)
     return function
 
 def _add_python_parameter_name(parameter):
@@ -122,10 +125,10 @@ def _add_buffer_info(parameter):
 def add_all_metadata(functions):
     '''Adds all codegen-specific metada to the function metadata list'''
     for f in functions:
-        _add_python_method_name(f)
-        _add_ctypes_return_type(f)
-        _add_python_return_type(f)
-        for p in f['parameters']:
+        _add_python_method_name(functions[f], f)
+        _add_ctypes_return_type(functions[f])
+        _add_python_return_type(functions[f])
+        for p in functions[f]['parameters']:
             _add_python_parameter_name(p)
             _add_python_type(p)
             _add_ctypes_variable_name(p)
@@ -251,9 +254,6 @@ def get_dictionary_snippet(d, indent=4):
 def sorted_attrs(a):
     return sorted(a, key=lambda k: a[k]['name'])
 
-def sorted_functions(f):
-    return sorted(f, key=lambda k: k['name'])
-
 def get_indented_docstring_snippet(d, indent=4):
     '''
     Returns a docstring with the correct amount of indentation. Can't use similar construct as
@@ -293,7 +293,7 @@ def as_rest_table(data, full=False):
 
     >>> print as_rest_table(data)
     =====  ====================  ======
-    what   how                   who   
+    what   how                   who
     =====  ====================  ======
     lorem  that is a long value  3.1415
     ipsum                 89798     0.2

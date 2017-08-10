@@ -34,17 +34,20 @@ class MockFunctionCallError(Exception):
 class SideEffectsHelper(object):
     def __init__(self):
         self._defaults = {}
-% for f in helper.extract_codegen_functions(functions):
-        self._defaults['${f['name']}'] = {}
-        self._defaults['${f['name']}']['return'] = 0
+% for func_name in sorted(helper.extract_codegen_functions(functions)):
+<% 
+f = functions[func_name]
+%>\
+        self._defaults['${func_name}'] = {}
+        self._defaults['${func_name}']['return'] = 0
 % for p in helper.extract_output_parameters(f['parameters']):
-        self._defaults['${f['name']}']['${p['name']}'] = None
+        self._defaults['${func_name}']['${p['name']}'] = None
 % endfor
 <%
 ivi_dance_param = helper.extract_ivi_dance_parameter(f['parameters'])
 %>\
 % if ivi_dance_param is not None:
-        self._defaults['${f['name']}']['${ivi_dance_param['name']}'] = None
+        self._defaults['${func_name}']['${ivi_dance_param['name']}'] = None
 % endif
 % endfor
 
@@ -54,32 +57,36 @@ ivi_dance_param = helper.extract_ivi_dance_parameter(f['parameters'])
     def __setitem__(self, func, val):
         self._defaults[func] = val
 
-% for f in helper.extract_codegen_functions(functions):
+% for func_name in sorted(helper.extract_codegen_functions(functions)):
 <% 
+f = functions[func_name]
 params = f['parameters']
 output_params = helper.extract_output_parameters(params)
 ivi_dance_param = helper.extract_ivi_dance_parameter(f['parameters'])
 %>\
-    def ${c_function_prefix}${f['name']}(${helper.get_method_parameters_snippet(params)}):  # noqa: N802
+    def ${c_function_prefix}${func_name}(${helper.get_method_parameters_snippet(params)}):  # noqa: N802
 %    for p in output_params:
-        if self._defaults['${f['name']}']['${p['name']}'] is None:
-            raise MockFunctionCallError("${c_function_prefix}${f['name']}", param='${p['name']}')
-        ${p['python_name']}.contents.value = self._defaults['${f['name']}']['${p['name']}']
+        if self._defaults['${func_name}']['${p['name']}'] is None:
+            raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${p['name']}')
+        ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
 %    endfor
 %    if ivi_dance_param is not None:
-        if self._defaults['${f['name']}']['${ivi_dance_param['name']}'] is None:
-            raise MockFunctionCallError("${c_function_prefix}${f['name']}", param='${ivi_dance_param['name']}')
+        if self._defaults['${func_name}']['${ivi_dance_param['name']}'] is None:
+            raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${ivi_dance_param['name']}')
         if ${ivi_dance_param['size']} == 0:
-            return len(self._defaults['${f['name']}']['${ivi_dance_param['name']}'])
-        t = ${module_name}.ctypes_types.${ivi_dance_param['ctypes_type']}(self._defaults['${f['name']}']['${ivi_dance_param['name']}'].encode('ascii'))
+            return len(self._defaults['${func_name}']['${ivi_dance_param['name']}'])
+        t = ${module_name}.ctypes_types.${ivi_dance_param['ctypes_type']}(self._defaults['${func_name}']['${ivi_dance_param['name']}'].encode('ascii'))
         ${ivi_dance_param['python_name']}.value = ctypes.cast(t, ${module_name}.ctypes_types.${ivi_dance_param['ctypes_type']}).value
 %    endif
-        return self._defaults['${f['name']}']['return']
+        return self._defaults['${func_name}']['return']
 
 % endfor
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
-% for f in helper.extract_codegen_functions(functions):
-        mock_library.${c_function_prefix}${f['name']}.side_effect = MockFunctionCallError("${c_function_prefix}${f['name']}")
-        mock_library.${c_function_prefix}${f['name']}.return_value = ${module_name}.python_types.${f['returns_python']}(0)
+% for func_name in sorted(helper.extract_codegen_functions(functions)):
+<% 
+f = functions[func_name]
+%>\
+        mock_library.${c_function_prefix}${func_name}.side_effect = MockFunctionCallError("${c_function_prefix}${func_name}")
+        mock_library.${c_function_prefix}${func_name}.return_value = ${module_name}.python_types.${f['returns_python']}(0)
 % endfor
