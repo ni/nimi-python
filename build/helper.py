@@ -350,7 +350,7 @@ def replace_attribute_python_name_no_link(a_match):
         aname = a_match.group(1)
         if attr:
             aname = attr['name'].lower()
-    return '{0} '.format(aname)
+    return '{0}'.format(aname)
 
 def replace_attribute_python_name_with_link(a_match):
     '''callback function for regex sub command when link needed
@@ -363,11 +363,11 @@ def replace_attribute_python_name_with_link(a_match):
     '''
     aname = "Unknown"
     if a_match:
-        attr = find_attribute_by_name(config['attributes'], a_match.group(1))
+        attr = find_attribute_by_name(config['attributes'], a_match.group(1).replace('\_', '_'))
         aname = a_match.group(1)
         if attr:
             aname = attr['name'].lower()
-    return ':py:data:`{0}.{1}` '.format(config['module_name'], aname)
+    return ':py:data:`{0}.{1}`'.format(config['module_name'], aname)
 
 def fix_references(doc, cfg, make_link=False):
     '''Replace ATTR and function mentions in documentation
@@ -386,16 +386,31 @@ def fix_references(doc, cfg, make_link=False):
     global config
     config = cfg
 
-    attr_re = re.compile('{0}\\\\_ATTR\\\\_(.+?) '.format(config['module_name'].upper()))
+    attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
     func_re = re.compile('{0}(.+?) '.format(config['c_function_prefix'].replace('_', '\_')))
     enum_re = re.compile('enums.(.+)')
 
     if make_link:
-        doc = attr_re.sub(replace_attribute_python_name_with_link, doc)
-        doc = func_re.sub(replace_func_python_name_with_link, doc)
+        m = attr_re.search(doc)
+        if m:
+            doc = attr_re.sub(replace_attribute_python_name_with_link, doc)
+            m = attr_re.search(doc)
+
+        m = func_re.search(doc)
+        if m:
+            doc = func_re.sub(replace_func_python_name_with_link, doc)
+            m = func_re.search(doc)
     else:
-        doc = attr_re.sub(replace_attribute_python_name_no_link, doc)
-        doc = func_re.sub(replace_func_python_name_no_link, doc)
+        m = attr_re.search(doc)
+        if m:
+            doc = attr_re.sub(replace_attribute_python_name_no_link, doc)
+            m = attr_re.search(doc)
+
+        m = func_re.search(doc)
+        if m:
+            doc = func_re.sub(replace_func_python_name_no_link, doc)
+            m = func_re.search(doc)
+
         doc = doc.replace('\_', '_')
     return doc
 
@@ -422,9 +437,9 @@ def get_function_rst(fname, config, indent=0):
     if len(input_params) > 0:
         rst += '\n'
     for p in input_params:
-        rst +=  '\n' + (' ' * indent) + ':param {0}: '.format(p['python_name'])
+        rst +=  '\n' + (' ' * indent) + ':param {0}: '.format(p['python_name']) + '\n'
         if 'long_description' in p:
-            rst += get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=True), indent + 4)
+            rst += (' ' * (indent + 4)) + get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=True), indent + 4) + '\n'
         p_type = p['python_type']
         if p_type.startswith('enums.'):
             p_type = p_type.replace('enums.', '')
@@ -437,9 +452,9 @@ def get_function_rst(fname, config, indent=0):
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple ('+ ', '.join([p['python_name'] for p in output_params]) + ')\n'
         rst += (' ' * (indent + 4)) + 'WHERE'
         for p in output_params:
-            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
+            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type']) + '\n'
             if 'long_description' in p:
-                rst += get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=True), indent + 8)
+                rst += (' ' * (indent + 8)) + get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=True), indent + 8) + '\n'
     elif len(output_params) == 1:
         p = output_params[0]
         rst += '\n\n' + (' ' * indent) + ':rtype: '+ p['python_type']
