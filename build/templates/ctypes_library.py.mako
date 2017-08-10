@@ -6,14 +6,14 @@
 <%
 import build.helper as helper
 
-attributes    = template_parameters['metadata'].attributes
-config        = template_parameters['metadata'].config
+config = template_parameters['metadata'].config
+attributes = config['attributes']
 
 module_name = config['module_name']
 c_function_prefix = config['c_function_prefix']
 driver_name = config['driver_name']
 
-functions = template_parameters['metadata'].functions
+functions = config['functions']
 functions = helper.extract_codegen_functions(functions)
 functions = helper.add_all_metadata(functions)
 %>\

@@ -14,17 +14,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -34,34 +34,22 @@ NI-DMM Attributes
 
 .. py:attribute:: adc_calibration
 
-   See :py:data:`nidmm.ADCCalibration` 
-
    For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
    calibration mode.
 
-   +-----------------+------------------------------------------------------------------------------------------------+
-   | Name            | Description                                                                                    |
-   +-----------------+------------------------------------------------------------------------------------------------+
-   | **Auto** (-1)   | The DMM enables or disables ADC calibration based on the configured function and resolution.   |
-   +-----------------+------------------------------------------------------------------------------------------------+
-   | **Off** (0)     | The DMM does not compensate for changes to the gain.                                           |
-   +-----------------+------------------------------------------------------------------------------------------------+
-   | **On** (1)      | The DMM measures an internal reference to calculate the correct gain for the measurement.      |
-   +-----------------+------------------------------------------------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+---------------------------+
+   | Characteristic | Value                     |
+   +================+===========================+
+   | Datatype       | :py:data:`ADCCalibration` |
+   +----------------+---------------------------+
+   | Permissions    | read-write                |
+   +----------------+---------------------------+
+   | Channel Based  | False                     |
+   +----------------+---------------------------+
+   | Resettable     | No                        |
+   +----------------+---------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -95,17 +83,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -115,34 +103,24 @@ NI-DMM Attributes
 
 .. py:attribute:: aperture_time_units
 
-   See :py:data:`nidmm.ApertureTimeUnits` 
-
    Specifies the units of aperture time for the current configuration.
 
    .. note::
       The NI 4060 does not support an aperture time set in seconds.
 
-   +-----------------------------+--------------------------------------+
-   | Name                        | Description                          |
-   +-----------------------------+--------------------------------------+
-   | **Seconds** (0)             | Units are seconds.                   |
-   +-----------------------------+--------------------------------------+
-   | **Power Line Cycles** (1)   | Units are powerline cycles (PLCs).   |
-   +-----------------------------+--------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------------------------+
+   | Characteristic | Value                        |
+   +================+==============================+
+   | Datatype       | :py:data:`ApertureTimeUnits` |
+   +----------------+------------------------------+
+   | Permissions    | read-write                   |
+   +----------------+------------------------------+
+   | Channel Based  | False                        |
+   +----------------+------------------------------+
+   | Resettable     | No                           |
+   +----------------+------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -158,17 +136,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read Only               |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | float     |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -178,36 +156,22 @@ NI-DMM Attributes
 
 .. py:attribute:: auto_zero
 
-   See :py:data:`nidmm.AutoZero` 
-
    Specifies the AutoZero mode. This property is not supported for the NI
    4050.
 
-   +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Name            | Description                                                                                                                                                                                                                                                                                                                         |
-   +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **Auto** (-1)   | NI-DMM chooses the Auto Zero setting based on the configured function and resolution.                                                                                                                                                                                                                                               |
-   +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **Off** (0)     | Disables AutoZero.                                                                                                                                                                                                                                                                                                                  |
-   +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **On** (1)      | The DMM internally disconnects the input signal following each measurement and takes a zero reading. It then subtracts the zero reading from the preceding reading. For NI 4065 devices, Auto Zero is always ON. Auto Zero is an integral part of the signal measurement phase and adds no extra time to the overall measurement.   |
-   +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **Once** (2)    | The DMM internally disconnects the input signal for the first measurement and takes a zero reading. It then subtracts the zero reading from the first reading and the following readings. The NI 4060/4065 does not support this setting.                                                                                           |
-   +-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+---------------------+
+   | Characteristic | Value               |
+   +================+=====================+
+   | Datatype       | :py:data:`AutoZero` |
+   +----------------+---------------------+
+   | Permissions    | read-write          |
+   +----------------+---------------------+
+   | Channel Based  | False               |
+   +----------------+---------------------+
+   | Resettable     | No                  |
+   +----------------+---------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -223,17 +187,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -243,8 +207,6 @@ NI-DMM Attributes
 
 .. py:attribute:: cable_compensation_type
 
-   See :py:data:`nidmm.CableCompensationType` 
-
    For the NI 4081 and NI 4072 only, specifies the type of cable
    compensation that is applied to the current capacitance or inductance
    measurement for the current range.
@@ -252,31 +214,19 @@ NI-DMM Attributes
    .. note::
       Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
 
-   +----------------------------+--------------------------------------+
-   | Name                       | Description                          |
-   +----------------------------+--------------------------------------+
-   | **None** (0)               | No cable compensation.               |
-   +----------------------------+--------------------------------------+
-   | **Open** (1)               | Open cable compensation.             |
-   +----------------------------+--------------------------------------+
-   | **Short** (2)              | Short cable compensation.            |
-   +----------------------------+--------------------------------------+
-   | **Open\_and\_Short** (3)   | Open and short cable compensation.   |
-   +----------------------------+--------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+----------------------------------+
+   | Characteristic | Value                            |
+   +================+==================================+
+   | Datatype       | :py:data:`CableCompensationType` |
+   +----------------+----------------------------------+
+   | Permissions    | read-write                       |
+   +----------------+----------------------------------+
+   | Channel Based  | False                            |
+   +----------------+----------------------------------+
+   | Resettable     | No                               |
+   +----------------+----------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -296,17 +246,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+--------------+
-   | Characteristic   | Value        |
-   +------------------+--------------+
-   | Datatype         | Boolean      |
-   +------------------+--------------+
-   | Permissions      | Read/Write   |
-   +------------------+--------------+
-   | Channel Based    | False        |
-   +------------------+--------------+
-   | Resettable       | No           |
-   +------------------+--------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -323,17 +273,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read Only               |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | integer   |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -353,17 +303,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -373,37 +323,23 @@ NI-DMM Attributes
 
 .. py:attribute:: current_source
 
-   See :py:data:`nidmm.CurrentSource` 
-
    Specifies the current source provided during diode measurements.
 
    The NI 4050 and NI 4060 are not supported.
 
-   +-----------------------------+--------------------------------------------------------------------+
-   | Name                        | Description                                                        |
-   +-----------------------------+--------------------------------------------------------------------+
-   | **1 Microamp** (1e-06)      | NI 4070/4071/4072 are supported.                                   |
-   +-----------------------------+--------------------------------------------------------------------+
-   | **10 Microamp** (1e-05)     | NI 4080/4081/4082 and NI 4070/4071/4072 are supported.             |
-   +-----------------------------+--------------------------------------------------------------------+
-   | **100 Microamp** (0.0001)   | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.   |
-   +-----------------------------+--------------------------------------------------------------------+
-   | **1 Milliamp** (0.001)      | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.   |
-   +-----------------------------+--------------------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+--------------------------+
+   | Characteristic | Value                    |
+   +================+==========================+
+   | Datatype       | :py:data:`CurrentSource` |
+   +----------------+--------------------------+
+   | Permissions    | read-write               |
+   +----------------+--------------------------+
+   | Channel Based  | False                    |
+   +----------------+--------------------------+
+   | Resettable     | No                       |
+   +----------------+--------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -413,32 +349,22 @@ NI-DMM Attributes
 
 .. py:attribute:: dc_bias
 
-   See :py:data:`nidmm.DCBias` 
-
    For the NI 4082 and NI 4072 only, controls the available DC bias for
    capacitance measurements.
 
-   +-----------------------+------------------------------------------------------+
-   | Name                  | Description                                          |
-   +-----------------------+------------------------------------------------------+
-   | **DC Bias Off** (0)   | NI-DMM programs the device not to use the DC bias.   |
-   +-----------------------+------------------------------------------------------+
-   | **DC Bias On** (1)    | NI-DMM programs the device to use the DC bias.       |
-   +-----------------------+------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-------------------+
+   | Characteristic | Value             |
+   +================+===================+
+   | Datatype       | :py:data:`DCBias` |
+   +----------------+-------------------+
+   | Permissions    | read-write        |
+   +----------------+-------------------+
+   | Channel Based  | False             |
+   +----------------+-------------------+
+   | Resettable     | No                |
+   +----------------+-------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -448,38 +374,24 @@ NI-DMM Attributes
 
 .. py:attribute:: dc_noise_rejection
 
-   See :py:data:`nidmm.DCNoiseRejection` 
-
    Specifies the DC noise rejection mode.
 
    .. note::
       The NI 4050 and NI 4060 are not supported.
 
-   +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Name                   | Description                                                                                                                                                                        |
-   +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **Auto** (-1)          | The driver chooses the DC noise rejection setting based on the configured function and resolution.                                                                                 |
-   +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **Normal** (0)         | NI-DMM weighs all samples equally.                                                                                                                                                 |
-   +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **Second Order** (1)   | NI-DMM weighs the samples taken in the middle of the aperture time more than samples taken at the beginning and the end of the measurement using a triangular weighing function.   |
-   +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **High Order** (2)     | NI-DMM weighs the samples taken in the middle of the aperture time more than samples taken at the beginning and the end of the measurement using a bell-curve weighing function.   |
-   +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------------------------+
+   | Characteristic | Value                       |
+   +================+=============================+
+   | Datatype       | :py:data:`DCNoiseRejection` |
+   +----------------+-----------------------------+
+   | Permissions    | read-write                  |
+   +----------------+-----------------------------+
+   | Channel Based  | False                       |
+   +----------------+-----------------------------+
+   | Resettable     | No                          |
+   +----------------+-----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -489,8 +401,6 @@ NI-DMM Attributes
 
 .. py:attribute:: digits_resolution
 
-   See :py:data:`nidmm.DigitsResolution` 
-
    Specifies the measurement resolution in digits. Setting this property to
    higher values increases the measurement accuracy. Setting this property
    to lower values increases the measurement speed.
@@ -498,33 +408,19 @@ NI-DMM Attributes
    .. note::
       NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
 
-   +-----------------+------------------------------------+
-   | Name            | Description                        |
-   +-----------------+------------------------------------+
-   | **3.5** (3.5)   | Specifies 3.5 digits resolution.   |
-   +-----------------+------------------------------------+
-   | **4.5** (4.5)   | Specifies 4.5 digits resolution.   |
-   +-----------------+------------------------------------+
-   | **5.5** (5.5)   | Specifies 5.5 digits resolution.   |
-   +-----------------+------------------------------------+
-   | **6.5** (6.5)   | Specifies 6.5 digits resolution.   |
-   +-----------------+------------------------------------+
-   | **7.5** (7.5)   | Specifies 7.5 digits resolution.   |
-   +-----------------+------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------------------------+
+   | Characteristic | Value                       |
+   +================+=============================+
+   | Datatype       | :py:data:`DigitsResolution` |
+   +----------------+-----------------------------+
+   | Permissions    | read-write                  |
+   +----------------+-----------------------------+
+   | Channel Based  | False                       |
+   +----------------+-----------------------------+
+   | Resettable     | No                          |
+   +----------------+-----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -546,17 +442,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -570,17 +466,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read Only               |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | integer   |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -594,17 +490,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read Only               |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | integer   |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -619,17 +515,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -644,17 +540,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+--------------+
-   | Characteristic   | Value        |
-   +------------------+--------------+
-   | Datatype         | string       |
-   +------------------+--------------+
-   | Permissions      | Read/Write   |
-   +------------------+--------------+
-   | Channel Based    | False        |
-   +------------------+--------------+
-   | Resettable       | No           |
-   +------------------+--------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | string     |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -671,17 +567,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read Only               |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | float     |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -702,17 +598,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -721,8 +617,6 @@ NI-DMM Attributes
         - C Attribute: **NIDMM_ATTR_FREQUENCY_VOLTAGE_RANGE**
 
 .. py:attribute:: function
-
-   See :py:data:`nidmm.Function` 
 
    Specifies the measurement function. If you are setting this property
    directly, you must also set the Operation Mode property, which controls
@@ -734,53 +628,19 @@ NI-DMM Attributes
    the Operation Mode property to IVIDMM Mode to set all other function
    values.
 
-   +----------------------------------+---------------------------------------------+
-   | Name                             | Description                                 |
-   +----------------------------------+---------------------------------------------+
-   | **DC Volts** (1)                 | All devices supported.                      |
-   +----------------------------------+---------------------------------------------+
-   | **AC Volts** (2)                 | All devices supported.                      |
-   +----------------------------------+---------------------------------------------+
-   | **DC Current** (3)               | All devices supported.                      |
-   +----------------------------------+---------------------------------------------+
-   | **AC Current** (4)               | All devices supported.                      |
-   +----------------------------------+---------------------------------------------+
-   | **2-Wire Resistance** (5)        | All devices supported.                      |
-   +----------------------------------+---------------------------------------------+
-   | **4-Wire Resistance** (101)      | NI 4065, and NI 4070/4071/4072 supported.   |
-   +----------------------------------+---------------------------------------------+
-   | **Frequency** (104)              | NI 4070/4071/4072 supported.                |
-   +----------------------------------+---------------------------------------------+
-   | **Period** (105)                 | NI 4070/4071/4072 supported.                |
-   +----------------------------------+---------------------------------------------+
-   | **AC Volts DC Coupled** (1001)   | NI 4070/4071/4072 supported.                |
-   +----------------------------------+---------------------------------------------+
-   | **Diode** (1002)                 | All devices supported.                      |
-   +----------------------------------+---------------------------------------------+
-   | **Waveform Voltage** (1003)      | NI 4070/4071/4072 supported.                |
-   +----------------------------------+---------------------------------------------+
-   | **Waveform Current** (1004)      | NI 4070/4071/4072 supported.                |
-   +----------------------------------+---------------------------------------------+
-   | **Capacitance** (1005)           | NI 4072 supported.                          |
-   +----------------------------------+---------------------------------------------+
-   | **Inductance** (1006)            | NI 4072 supported.                          |
-   +----------------------------------+---------------------------------------------+
-   | **Temperature** (108)            | NI 4065, and NI 4070/4071/4072 supported.   |
-   +----------------------------------+---------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+---------------------+
+   | Characteristic | Value               |
+   +================+=====================+
+   | Datatype       | :py:data:`Function` |
+   +----------------+---------------------+
+   | Permissions    | read-write          |
+   +----------------+---------------------+
+   | Channel Based  | False               |
+   +----------------+---------------------+
+   | Resettable     | No                  |
+   +----------------+---------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -795,17 +655,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -819,17 +679,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -839,36 +699,24 @@ NI-DMM Attributes
 
 .. py:attribute:: input_resistance
 
-   See :py:data:`nidmm.InputResistance` 
-
    Specifies the input resistance of the instrument.
 
    .. note::
       The NI 4050 and NI 4060 are not supported.
 
-   +---------------------------------------------+------------------------------------------+
-   | Name                                        | Description                              |
-   +---------------------------------------------+------------------------------------------+
-   | **1 M Ohm** (1000000.0)                     | Input resistance of 1 M Ohm              |
-   +---------------------------------------------+------------------------------------------+
-   | **10 M Ohm** (10000000.0)                   | Input resistance of 10 M Ohm             |
-   +---------------------------------------------+------------------------------------------+
-   | **Greater Than 10 G Ohm** (10000000000.0)   | Input resistance greater than 10 G Ohm   |
-   +---------------------------------------------+------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+----------------------------+
+   | Characteristic | Value                      |
+   +================+============================+
+   | Datatype       | :py:data:`InputResistance` |
+   +----------------+----------------------------+
+   | Permissions    | read-write                 |
+   +----------------+----------------------------+
+   | Channel Based  | False                      |
+   +----------------+----------------------------+
+   | Resettable     | No                         |
+   +----------------+----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -882,17 +730,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -906,17 +754,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -930,17 +778,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -954,17 +802,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read Only               |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | integer   |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -980,17 +828,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1021,17 +869,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+--------------+
-   | Characteristic   | Value        |
-   +------------------+--------------+
-   | Datatype         | Boolean      |
-   +------------------+--------------+
-   | Permissions      | Read/Write   |
-   +------------------+--------------+
-   | Channel Based    | False        |
-   +------------------+--------------+
-   | Resettable       | No           |
-   +------------------+--------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1045,17 +893,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1071,17 +919,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1091,35 +939,23 @@ NI-DMM Attributes
 
 .. py:attribute:: lc_calculation_model
 
-   See :py:data:`nidmm.LCCalculationModel` 
-
    For the NI 4082 and NI 4072 only, specifies the type of algorithm that
    the measurement processing uses for capacitance and inductance
    measurements.
 
-   +--------------------+--------------------------------------------------------------------------------------+
-   | Name               | Description                                                                          |
-   +--------------------+--------------------------------------------------------------------------------------+
-   | **Auto** (-1)      | NI-DMM chooses the algorithm based on function and range.                            |
-   +--------------------+--------------------------------------------------------------------------------------+
-   | **Series** (0)     | NI-DMM uses the series impedance model to calculate capacitance and inductance.      |
-   +--------------------+--------------------------------------------------------------------------------------+
-   | **Parallel** (1)   | NI-DMM uses the parallel admittance model to calculate capacitance and inductance.   |
-   +--------------------+--------------------------------------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-------------------------------+
+   | Characteristic | Value                         |
+   +================+===============================+
+   | Datatype       | :py:data:`LCCalculationModel` |
+   +----------------+-------------------------------+
+   | Permissions    | read-write                    |
+   +----------------+-------------------------------+
+   | Channel Based  | False                         |
+   +----------------+-------------------------------+
+   | Resettable     | No                            |
+   +----------------+-------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1133,17 +969,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1171,17 +1007,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1191,8 +1027,6 @@ NI-DMM Attributes
 
 .. py:attribute:: measurement_completdest
 
-   See :py:data:`nidmm.MeasurementCompleteDest` 
-
    Specifies the destination of the measurement complete (MC) signal.
 
    To determine which values are supported by each device, refer to the
@@ -1201,45 +1035,19 @@ NI-DMM Attributes
    .. note::
       The NI 4050 is not supported.
 
-   +-------------------------+------------------------------------------------------------------+
-   | Name                    | Description                                                      |
-   +-------------------------+------------------------------------------------------------------+
-   | **None** (-1)           | No destination specified.                                        |
-   +-------------------------+------------------------------------------------------------------+
-   | **External** (2)        | Pin 6 on the AUX Connector                                       |
-   +-------------------------+------------------------------------------------------------------+
-   | **TTL 0** (111)         | PXI Trigger Line 0                                               |
-   +-------------------------+------------------------------------------------------------------+
-   | **TTL 1** (112)         | PXI Trigger Line 1                                               |
-   +-------------------------+------------------------------------------------------------------+
-   | **TL 2** (113)          | PXI Trigger Line 2                                               |
-   +-------------------------+------------------------------------------------------------------+
-   | **TTL 3** (114)         | PXI Trigger Line 3                                               |
-   +-------------------------+------------------------------------------------------------------+
-   | **TL 4** (115)          | PXI Trigger Line 4                                               |
-   +-------------------------+------------------------------------------------------------------+
-   | **TTL 5** (116)         | PXI Trigger Line 5                                               |
-   +-------------------------+------------------------------------------------------------------+
-   | **TTL 6** (117)         | PXI Trigger Line 6                                               |
-   +-------------------------+------------------------------------------------------------------+
-   | **TTL 7** (118)         | PXI Trigger Line 7                                               |
-   +-------------------------+------------------------------------------------------------------+
-   | **LBR Trig 0** (1003)   | Local Bus Right Trigger Line 0 of PXI/SCXI combination chassis   |
-   +-------------------------+------------------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------------------------------+
+   | Characteristic | Value                              |
+   +================+====================================+
+   | Datatype       | :py:data:`MeasurementCompleteDest` |
+   +----------------+------------------------------------+
+   | Permissions    | read-write                         |
+   +----------------+------------------------------------+
+   | Channel Based  | False                              |
+   +----------------+------------------------------------+
+   | Resettable     | No                                 |
+   +----------------+------------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1249,31 +1057,21 @@ NI-DMM Attributes
 
 .. py:attribute:: measurement_destination_slope
 
-   See :py:data:`nidmm.MeasurementDestinationSlope` 
-
    Specifies the polarity of the generated measurement complete signal.
-
-   +--------------------+------------------------------------------------------------------+
-   | Name               | Description                                                      |
-   +--------------------+------------------------------------------------------------------+
-   | **Positive** (0)   | The driver triggers on the rising edge of the trigger signal.    |
-   +--------------------+------------------------------------------------------------------+
-   | **Negative** (1)   | The driver triggers on the falling edge of the trigger signal.   |
-   +--------------------+------------------------------------------------------------------+
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+----------------------------------------+
+   | Characteristic | Value                                  |
+   +================+========================================+
+   | Datatype       | :py:data:`MeasurementDestinationSlope` |
+   +----------------+----------------------------------------+
+   | Permissions    | read-write                             |
+   +----------------+----------------------------------------+
+   | Channel Based  | False                                  |
+   +----------------+----------------------------------------+
+   | Resettable     | No                                     |
+   +----------------+----------------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1291,17 +1089,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1321,17 +1119,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1346,17 +1144,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1366,32 +1164,22 @@ NI-DMM Attributes
 
 .. py:attribute:: offset_compensated_ohms
 
-   See :py:data:`nidmm.OffsetCompensatedOhms` 
-
    For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
    offset compensated ohms.
 
-   +---------------+-------------------------------------+
-   | Name          | Description                         |
-   +---------------+-------------------------------------+
-   | **Off** (0)   | Disables Offset Compensated Ohms.   |
-   +---------------+-------------------------------------+
-   | **On** (1)    | Enables Offset Compensated Ohms.    |
-   +---------------+-------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+----------------------------------+
+   | Characteristic | Value                            |
+   +================+==================================+
+   | Datatype       | :py:data:`OffsetCompensatedOhms` |
+   +----------------+----------------------------------+
+   | Permissions    | read-write                       |
+   +----------------+----------------------------------+
+   | Channel Based  | False                            |
+   +----------------+----------------------------------+
+   | Resettable     | No                               |
+   +----------------+----------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1400,8 +1188,6 @@ NI-DMM Attributes
         - C Attribute: **NIDMM_ATTR_OFFSET_COMPENSATED_OHMS**
 
 .. py:attribute:: operation_mode
-
-   See :py:data:`nidmm.OperationMode` 
 
    Specifies how the DMM acquires data.
 
@@ -1414,27 +1200,19 @@ NI-DMM Attributes
    directly, you must set this property before setting other configuration
    properties.
 
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Name                    | Description                                                                                                                                                                                                                                        |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **IVIDMM Mode** (0)     | Single or multipoint measurements: When the Trigger Count and Sample Count properties are both set to 1, the NI 4065, NI 4070/4071/4072, and NI 4080/4081/4082 take a single-point measurement; otherwise, NI-DMM takes multipoint measurements.   |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **Waveform Mode** (1)   | Configures the NI 4080/4081/4082 and NI 4070/4071/4072 to take waveform measurements.                                                                                                                                                              |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+--------------------------+
+   | Characteristic | Value                    |
+   +================+==========================+
+   | Datatype       | :py:data:`OperationMode` |
+   +----------------+--------------------------+
+   | Permissions    | read-write               |
+   +----------------+--------------------------+
+   | Channel Based  | False                    |
+   +----------------+--------------------------+
+   | Resettable     | No                       |
+   +----------------+--------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1443,8 +1221,6 @@ NI-DMM Attributes
         - C Attribute: **NIDMM_ATTR_OPERATION_MODE**
 
 .. py:attribute:: powerline_frequency
-
-   See :py:data:`nidmm.PowerlineFrequency` 
 
    Specifies the powerline frequency. The NI 4060 and NI 4050 use this
    value to select an aperture time to reject powerline noise by selecting
@@ -1463,27 +1239,19 @@ NI-DMM Attributes
    .. note::
       For 400 Hz powerline frequency, use the 50 Hz setting.
 
-   +--------------------+-----------------------------------------------+
-   | Name               | Description                                   |
-   +--------------------+-----------------------------------------------+
-   | **50 Hz** (50.0)   | Specifies the powerline frequency as 50 Hz.   |
-   +--------------------+-----------------------------------------------+
-   | **60 Hz** (60.0)   | Specifies the powerline frequency as 60 Hz.   |
-   +--------------------+-----------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-------------------------------+
+   | Characteristic | Value                         |
+   +================+===============================+
+   | Datatype       | :py:data:`PowerlineFrequency` |
+   +----------------+-------------------------------+
+   | Permissions    | read-write                    |
+   +----------------+-------------------------------+
+   | Channel Based  | False                         |
+   +----------------+-------------------------------+
+   | Resettable     | No                            |
+   +----------------+-------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1502,17 +1270,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1533,17 +1301,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+--------------+
-   | Characteristic   | Value        |
-   +------------------+--------------+
-   | Datatype         | Boolean      |
-   +------------------+--------------+
-   | Permissions      | Read/Write   |
-   +------------------+--------------+
-   | Channel Based    | False        |
-   +------------------+--------------+
-   | Resettable       | No           |
-   +------------------+--------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1572,17 +1340,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1602,17 +1370,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+--------------+
-   | Characteristic   | Value        |
-   +------------------+--------------+
-   | Datatype         | Boolean      |
-   +------------------+--------------+
-   | Permissions      | Read/Write   |
-   +------------------+--------------+
-   | Channel Based    | False        |
-   +------------------+--------------+
-   | Resettable       | No           |
-   +------------------+--------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1632,17 +1400,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1660,17 +1428,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+--------------+
-   | Characteristic   | Value        |
-   +------------------+--------------+
-   | Datatype         | Boolean      |
-   +------------------+--------------+
-   | Permissions      | Read/Write   |
-   +------------------+--------------+
-   | Channel Based    | False        |
-   +------------------+--------------+
-   | Resettable       | No           |
-   +------------------+--------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1690,17 +1458,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1715,17 +1483,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1740,17 +1508,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1765,17 +1533,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1789,17 +1557,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1809,41 +1577,21 @@ NI-DMM Attributes
 
 .. py:attribute:: rtd_type
 
-   See :py:data:`nidmm.RTDType` 
-
    Specifies the RTD type.
-
-   +-------------------+----------------------------------------------------------------------------------------------+
-   | Name              | Description                                                                                  |
-   +-------------------+----------------------------------------------------------------------------------------------+
-   | **Custom** (0)    | Performs Callendar-Van Dusen RTD scaling with the user-specified A, B, and C coefficients.   |
-   +-------------------+----------------------------------------------------------------------------------------------+
-   | **Pt 3750** (1)   | Performs scaling for a Pt 3750 RTD.                                                          |
-   +-------------------+----------------------------------------------------------------------------------------------+
-   | **Pt 3851** (2)   | Performs scaling for a Pt 3851 RTD.                                                          |
-   +-------------------+----------------------------------------------------------------------------------------------+
-   | **Pt 3911** (3)   | Performs scaling for a Pt 3911 RTD.                                                          |
-   +-------------------+----------------------------------------------------------------------------------------------+
-   | **Pt 3916** (4)   | Performs scaling for a Pt 3916 RTD.                                                          |
-   +-------------------+----------------------------------------------------------------------------------------------+
-   | **Pt 3920** (5)   | Performs scaling for a Pt 3920 RTD.                                                          |
-   +-------------------+----------------------------------------------------------------------------------------------+
-   | **Pt 3928** (6)   | Performs scaling for a Pt 3928 RTD.                                                          |
-   +-------------------+----------------------------------------------------------------------------------------------+
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+--------------------+
+   | Characteristic | Value              |
+   +================+====================+
+   | Datatype       | :py:data:`RTDType` |
+   +----------------+--------------------+
+   | Permissions    | read-write         |
+   +----------------+--------------------+
+   | Channel Based  | False              |
+   +----------------+--------------------+
+   | Resettable     | No                 |
+   +----------------+--------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1863,17 +1611,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1893,17 +1641,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1935,17 +1683,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -1955,60 +1703,24 @@ NI-DMM Attributes
 
 .. py:attribute:: sample_trigger
 
-   See :py:data:`nidmm.SampleTrigger` 
-
    Specifies the sample trigger source.
 
    To determine which values are supported by each device, refer to the
    LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
 
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | Name                    | Description                                                                                                                            |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **Immediate** (1)       | No trigger specified                                                                                                                   |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **Interval** (10)       | Interval trigger                                                                                                                       |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **External** (2)        | Pin 9 on the AUX Connector                                                                                                             |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **Software Trig** (3)   | Configures the DMM to wait until \`niDMM Send Software Trigger <dmmviref.chm::/niDMM\_Send\_Software\_Trigger.html>\`\_\_ is called.   |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **TTL 0** (111)         | PXI Trigger Line 0                                                                                                                     |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **TTL 1** (112)         | PXI Trigger Line 1                                                                                                                     |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **TTL 2** (113)         | PXI Trigger Line 2                                                                                                                     |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **TTL 3** (114)         | PXI Trigger Line 3                                                                                                                     |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **TTL 4** (115)         | PXI Trigger Line 4                                                                                                                     |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **TTL 5** (116)         | PXI Trigger Line 5                                                                                                                     |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **TTL 6** (117)         | PXI Trigger Line 6                                                                                                                     |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **TTL 7** (118)         | PXI Trigger Line 7                                                                                                                     |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **PXI Star** (131)      | PXI Star trigger line                                                                                                                  |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **LBR Trig 1** (1004)   | Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis                                                                         |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-   | **AUX Trig 1** (1001)   | Pin 3 on the AUX connector                                                                                                             |
-   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+--------------------------+
+   | Characteristic | Value                    |
+   +================+==========================+
+   | Datatype       | :py:data:`SampleTrigger` |
+   +----------------+--------------------------+
+   | Permissions    | read-write               |
+   +----------------+--------------------------+
+   | Channel Based  | False                    |
+   +----------------+--------------------------+
+   | Resettable     | No                       |
+   +----------------+--------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2018,32 +1730,22 @@ NI-DMM Attributes
 
 .. py:attribute:: sample_trig_slope
 
-   See :py:data:`nidmm.SampleTrigSlope` 
-
    Specifies the edge of the signal from the specified sample trigger
    source on which the DMM is triggered.
 
-   +--------------------+------------------------------------------------------------------+
-   | Name               | Description                                                      |
-   +--------------------+------------------------------------------------------------------+
-   | **Positive** (0)   | The driver triggers on the rising edge of the trigger signal.    |
-   +--------------------+------------------------------------------------------------------+
-   | **Negative** (1)   | The driver triggers on the falling edge of the trigger signal.   |
-   +--------------------+------------------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+----------------------------+
+   | Characteristic | Value                      |
+   +================+============================+
+   | Datatype       | :py:data:`SampleTrigSlope` |
+   +----------------+----------------------------+
+   | Permissions    | read-write                 |
+   +----------------+----------------------------+
+   | Channel Based  | False                      |
+   +----------------+----------------------------+
+   | Resettable     | No                         |
+   +----------------+----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2060,17 +1762,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2089,17 +1791,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2116,17 +1818,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2149,17 +1851,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+--------------+
-   | Characteristic   | Value        |
-   +------------------+--------------+
-   | Datatype         | Boolean      |
-   +------------------+--------------+
-   | Permissions      | Read/Write   |
-   +------------------+--------------+
-   | Channel Based    | False        |
-   +------------------+--------------+
-   | Resettable       | No           |
-   +------------------+--------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2174,17 +1876,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read Only               |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | integer   |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2199,17 +1901,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read Only               |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | integer   |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2223,17 +1925,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2247,17 +1949,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read Only               |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | integer   |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2271,17 +1973,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read Only               |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | integer   |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2297,17 +1999,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2322,17 +2024,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2346,17 +2048,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2371,17 +2073,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------+
-   | Characteristic   | Value       |
-   +------------------+-------------+
-   | Datatype         | string      |
-   +------------------+-------------+
-   | Permissions      | Read Only   |
-   +------------------+-------------+
-   | Channel Based    | False       |
-   +------------------+-------------+
-   | Resettable       | No          |
-   +------------------+-------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2401,17 +2103,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2426,17 +2128,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2446,29 +2148,21 @@ NI-DMM Attributes
 
 .. py:attribute:: tc_ref_junction_type
 
-   See :py:data:`nidmm.ThermocoupleReferenceJunctionType` 
-
    Specifies the thermocouple reference junction type.
-
-   +-----------------+------------------------------------------------------------------------------+
-   | Name            | Description                                                                  |
-   +-----------------+------------------------------------------------------------------------------+
-   | **Fixed** (2)   | Thermocouple reference juction is fixed at the user-specified temperature.   |
-   +-----------------+------------------------------------------------------------------------------+
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+----------------------------------------------+
+   | Characteristic | Value                                        |
+   +================+==============================================+
+   | Datatype       | :py:data:`ThermocoupleReferenceJunctionType` |
+   +----------------+----------------------------------------------+
+   | Permissions    | read-write                                   |
+   +----------------+----------------------------------------------+
+   | Channel Based  | False                                        |
+   +----------------+----------------------------------------------+
+   | Resettable     | No                                           |
+   +----------------+----------------------------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2483,17 +2177,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2508,17 +2202,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2533,17 +2227,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2553,35 +2247,21 @@ NI-DMM Attributes
 
 .. py:attribute:: thermistor_type
 
-   See :py:data:`nidmm.ThermistorType` 
-
    Specifies the thermistor type.
-
-   +------------------+------------------------------------------------------------------------------------------------+
-   | Name             | Description                                                                                    |
-   +------------------+------------------------------------------------------------------------------------------------+
-   | **Custom** (0)   | Performs Steinhart-Hart thermistor scaling with the user-specified A, B, and C coefficients.   |
-   +------------------+------------------------------------------------------------------------------------------------+
-   | **44004** (1)    | Performs scaling for an Omega Series 44004 thermistor.                                         |
-   +------------------+------------------------------------------------------------------------------------------------+
-   | **44006** (2)    | Performs scaling for an Omega Series 44006 thermistor.                                         |
-   +------------------+------------------------------------------------------------------------------------------------+
-   | **44007** (3)    | Performs scaling for an Omega Series 44007 thermistor.                                         |
-   +------------------+------------------------------------------------------------------------------------------------+
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+---------------------------+
+   | Characteristic | Value                     |
+   +================+===========================+
+   | Datatype       | :py:data:`ThermistorType` |
+   +----------------+---------------------------+
+   | Permissions    | read-write                |
+   +----------------+---------------------------+
+   | Channel Based  | False                     |
+   +----------------+---------------------------+
+   | Resettable     | No                        |
+   +----------------+---------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2591,43 +2271,21 @@ NI-DMM Attributes
 
 .. py:attribute:: thermocouple_type
 
-   See :py:data:`nidmm.ThermocoupleType` 
-
    Specifies the thermocouple type.
-
-   +--------------+-----------------------+
-   | Name         | Description           |
-   +--------------+-----------------------+
-   | **B** (1)    | Thermocouple type B   |
-   +--------------+-----------------------+
-   | **E** (4)    | Thermocouple type E   |
-   +--------------+-----------------------+
-   | **J** (6)    | Thermocouple type J   |
-   +--------------+-----------------------+
-   | **K** (7)    | Thermocouple type K   |
-   +--------------+-----------------------+
-   | **N** (8)    | Thermocouple type N   |
-   +--------------+-----------------------+
-   | **R** (9)    | Thermocouple type R   |
-   +--------------+-----------------------+
-   | **S** (10)   | Thermocouple type S   |
-   +--------------+-----------------------+
-   | **T** (11)   | Thermocouple type T   |
-   +--------------+-----------------------+
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------------------------+
+   | Characteristic | Value                       |
+   +================+=============================+
+   | Datatype       | :py:data:`ThermocoupleType` |
+   +----------------+-----------------------------+
+   | Permissions    | read-write                  |
+   +----------------+-----------------------------+
+   | Channel Based  | False                       |
+   +----------------+-----------------------------+
+   | Resettable     | No                          |
+   +----------------+-----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2637,35 +2295,21 @@ NI-DMM Attributes
 
 .. py:attribute:: transducer_type
 
-   See :py:data:`nidmm.TransducerType` 
-
    Specifies the transducer type.
-
-   +------------------------+--------------------------------------+
-   | Name                   | Description                          |
-   +------------------------+--------------------------------------+
-   | **Thermocouple** (1)   | Use for thermocouple measurements.   |
-   +------------------------+--------------------------------------+
-   | **Thermistor** (2)     | Use for thermistor measurements.     |
-   +------------------------+--------------------------------------+
-   | **2-Wire RTD** (3)     | Use for 2-wire RTD measurements.     |
-   +------------------------+--------------------------------------+
-   | **4-Wire RTD** (4)     | Use for 4-wire RTD measurements.     |
-   +------------------------+--------------------------------------+
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+---------------------------+
+   | Characteristic | Value                     |
+   +================+===========================+
+   | Datatype       | :py:data:`TransducerType` |
+   +----------------+---------------------------+
+   | Permissions    | read-write                |
+   +----------------+---------------------------+
+   | Channel Based  | False                     |
+   +----------------+---------------------------+
+   | Resettable     | No                        |
+   +----------------+---------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2686,17 +2330,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2737,17 +2381,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2757,32 +2401,22 @@ NI-DMM Attributes
 
 .. py:attribute:: trigger_slope
 
-   See :py:data:`nidmm.TriggerSlope` 
-
    Specifies the edge of the signal from the specified trigger source on
    which the DMM is triggered.
 
-   +--------------------+------------------------------------------------------------------+
-   | Name               | Description                                                      |
-   +--------------------+------------------------------------------------------------------+
-   | **Positive** (0)   | The driver triggers on the rising edge of the trigger signal.    |
-   +--------------------+------------------------------------------------------------------+
-   | **Negative** (1)   | The driver triggers on the falling edge of the trigger signal.   |
-   +--------------------+------------------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-------------------------+
+   | Characteristic | Value                   |
+   +================+=========================+
+   | Datatype       | :py:data:`TriggerSlope` |
+   +----------------+-------------------------+
+   | Permissions    | read-write              |
+   +----------------+-------------------------+
+   | Channel Based  | False                   |
+   +----------------+-------------------------+
+   | Resettable     | No                      |
+   +----------------+-------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2792,8 +2426,6 @@ NI-DMM Attributes
 
 .. py:attribute:: trigger_source
 
-   See :py:data:`nidmm.TriggerSource` 
-
    Specifies the trigger source. When niDMM Initiate is called, the DMM
    waits for the trigger specified with this property. After it receives
    the trigger, the DMM waits the length of time specified with the Trigger
@@ -2802,51 +2434,19 @@ NI-DMM Attributes
    To determine which values are supported by each device, refer to the
    LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
 
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | Name                     | Description                                                                                                       |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **Immediate** (1)        | No trigger specified.                                                                                             |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **External** (2)         | Pin 9 on the AUX Connector                                                                                        |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **Software Trig** (3)    | Waits until \`niDMM Send Software Trigger <dmmviref.chm::/niDMM\_Send\_Software\_Trigger.html>\`\_\_ is called.   |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **TTL 0** (111)          | PXI Trigger Line 0                                                                                                |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **TTL 1** (112)          | PXI Trigger Line 1                                                                                                |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **TTL 2** (113)          | PXI Trigger Line 2                                                                                                |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **TTL 3** (114)          | PXI Trigger Line 3                                                                                                |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **TTL 4** (115)          | PXI Trigger Line 4                                                                                                |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **TTL 5** (116)          | PXI Trigger Line 5                                                                                                |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **TTL 6** (117)          | PXI Trigger Line 6                                                                                                |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **TTL 7** (118)          | PXI Trigger Line 7                                                                                                |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **PXI Star** (131)       | PXI Star Trigger Line                                                                                             |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **LBR Trig 1** (1004)    | Local Bus Right Trigger Line 1 of PXI/SCXI combination chassis                                                    |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | **AUX\_Trig 1** (1001)   | Pin 3 on the AUX connector                                                                                        |
-   +--------------------------+-------------------------------------------------------------------------------------------------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+--------------------------+
+   | Characteristic | Value                    |
+   +================+==========================+
+   | Datatype       | :py:data:`TriggerSource` |
+   +----------------+--------------------------+
+   | Permissions    | read-write               |
+   +----------------+--------------------------+
+   | Channel Based  | False                    |
+   +----------------+--------------------------+
+   | Resettable     | No                       |
+   +----------------+--------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2856,32 +2456,22 @@ NI-DMM Attributes
 
 .. py:attribute:: waveform_coupling
 
-   See :py:data:`nidmm.WaveformCoupling` 
-
    For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
    coupling during a waveform acquisition.
 
-   +--------------+--------------------------+
-   | Name         | Description              |
-   +--------------+--------------------------+
-   | **AC** (0)   | Specifies AC coupling.   |
-   +--------------+--------------------------+
-   | **DC** (1)   | Specifies DC coupling.   |
-   +--------------+--------------------------+
-
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+-----------------------------+
+   | Characteristic | Value                       |
+   +================+=============================+
+   | Datatype       | :py:data:`WaveformCoupling` |
+   +----------------+-----------------------------+
+   | Permissions    | read-write                  |
+   +----------------+-----------------------------+
+   | Channel Based  | False                       |
+   +----------------+-----------------------------+
+   | Resettable     | No                          |
+   +----------------+-----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2896,17 +2486,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 32-bit signed integer   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
@@ -2924,17 +2514,17 @@ NI-DMM Attributes
 
    The following table lists the characteristics of this property.
 
-   +------------------+-------------------------+
-   | Characteristic   | Value                   |
-   +------------------+-------------------------+
-   | Datatype         | 64-bit floating point   |
-   +------------------+-------------------------+
-   | Permissions      | Read/Write              |
-   +------------------+-------------------------+
-   | Channel Based    | False                   |
-   +------------------+-------------------------+
-   | Resettable       | No                      |
-   +------------------+-------------------------+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:

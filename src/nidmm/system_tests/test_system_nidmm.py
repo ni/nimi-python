@@ -95,7 +95,7 @@ def test_Enum_attribute(device_info):
         assert type(session.function) is nidmm.Function
         try:
             session.function = nidmm.LCCalculationModel.SERIES
-            assert false
+            assert False
         except TypeError as e:
             print(e)
             pass
@@ -131,6 +131,7 @@ def test_invalid_method_call(device_info):
             pass
             
 
+
 def test_method_call_with_two_parameter(device_info):
     # Calling Configure Trigger function and asserting True if any error occurred while function call.
     with nidmm.Session(device_info['name']) as session:
@@ -139,11 +140,27 @@ def test_method_call_with_two_parameter(device_info):
         except nidmm.Error as e:
             print (e)
             assert True
-'''
+
+            
+def test_multi_point_acquisition(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        session.configure_multi_point(4, 2, nidmm.SampleTrigger.IMMEDIATE, 0)
+        session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
+        measurements, numberOfMeasurements = session.read_multi_point(-1, 8)
+        print(measurements)
+        assert len(measurements) == 8
+        assert numberOfMeasurements == 8
+
+
 def test_self_test(device_info):
     with nidmm.Session(device_info['name']) as session:
         result, message = session.self_test()
-        assert result is 0
-        assert message is 'hello'
-'''
+        assert result == 0
+        assert message == 'Self Test passed.'
 
+
+def test_get_dev_temp(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        temperature = session.get_dev_temp('')
+        print(temperature)
+        assert 20 <= temperature <= 50

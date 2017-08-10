@@ -39,7 +39,7 @@ class NimodinstCtypesLibrary(object):
         with self._func_lock:
             if self.niModInst_GetExtendedErrorInfo_cfunc is None:
                 self.niModInst_GetExtendedErrorInfo_cfunc = self._library.niModInst_GetExtendedErrorInfo
-                self.niModInst_GetExtendedErrorInfo_cfunc.argtypes = [ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
+                self.niModInst_GetExtendedErrorInfo_cfunc.argtypes = [ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niModInst_GetExtendedErrorInfo_cfunc.restype = nimodinst.python_types.ViStatus
         return self.niModInst_GetExtendedErrorInfo_cfunc(error_info_buffer_size, error_info)
 
@@ -55,7 +55,7 @@ class NimodinstCtypesLibrary(object):
         with self._func_lock:
             if self.niModInst_GetInstalledDeviceAttributeViString_cfunc is None:
                 self.niModInst_GetInstalledDeviceAttributeViString_cfunc = self._library.niModInst_GetInstalledDeviceAttributeViString
-                self.niModInst_GetInstalledDeviceAttributeViString_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
+                self.niModInst_GetInstalledDeviceAttributeViString_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niModInst_GetInstalledDeviceAttributeViString_cfunc.restype = nimodinst.python_types.ViStatus
         return self.niModInst_GetInstalledDeviceAttributeViString_cfunc(handle, index, attribute_id, attribute_value_buffer_size, attribute_value)
 

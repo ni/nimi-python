@@ -1,13 +1,15 @@
+
 # This file was generated
 <%
     import build.helper as helper
 
-    config = template_parameters['metadata'].config
+    config        = template_parameters['metadata'].config
+    attributes    = config['attributes']
+    functions     = config['functions']
+
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
-    attributes = template_parameters['metadata'].attributes
 
-    functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
     functions = helper.add_all_metadata(functions)
     functions = sorted(functions, key=lambda k: k['name'])
@@ -122,9 +124,9 @@ class Session(object):
     %else:
     ${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(${attribute})
     %endif
-%   if 'shortDescription' in attributes[attribute]:
+%   if 'short_description' in attributes[attribute]:
     '''
-    ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'], indent=4)}
+    ${helper.get_indented_docstring_snippet(attributes[attribute]['short_description'], indent=4)}
     '''
 %   endif
 % endfor
@@ -182,7 +184,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
             by the driver)
             '''
             error_code = ctypes_types.ViStatus_ctype(error_code)
-            error_message = ctypes.create_string_buffer(buffer_size)
+            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
             self.library.${c_function_prefix}GetError(self.vi, ctypes.byref(error_code), buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         else:
             '''
@@ -195,7 +197,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
             '''
             error_code = buffer_size
             buffer_size = self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, 0, None)
-            error_message = ctypes.create_string_buffer(buffer_size)
+            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
             self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
 
         # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
@@ -208,6 +210,11 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
     input_parameters = helper.extract_input_parameters(f['parameters'])
     output_parameters = helper.extract_output_parameters(f['parameters'])
     enum_input_parameters = helper.extract_enum_parameters(input_parameters)
+    ivi_dance_parameter = helper.extract_ivi_dance_parameter(f['parameters'])
+
+    # If there is an ivi_dance parameter, we need to remove the associated size parameter from the input_params
+    if ivi_dance_parameter is not None:
+        input_parameters[:] = [p for p in input_parameters if p['python_name'] != ivi_dance_parameter['size']]
 %>
     def ${f['python_name']}(${helper.get_method_parameters_snippet(input_parameters)}):
 % for parameter in enum_input_parameters:
@@ -216,23 +223,22 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
 % for output_parameter in output_parameters:
         ${helper.get_ctype_variable_declaration_snippet(output_parameter)}
 % endfor
+% if ivi_dance_parameter is None:
         error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
         errors._handle_error(self, error_code)
-        ${helper.get_method_return_snippet(output_parameters)}
+        ${helper.get_method_return_snippet(f['parameters'])}
+% else:
+        ${ivi_dance_parameter['size']} = 0
+        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_parameter['size']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        ${ivi_dance_parameter['size']} = error_code
+        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_parameter['size']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
+        errors._handle_error(self, error_code)
+        ${helper.get_method_return_snippet(f['parameters'])}
+% endif
 % endfor
 
-    ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
-
-    def _get_attribute_vi_string(self, channel_name, attribute_id):  # noqa: F811
-        # Do the IVI dance
-        # Don't use _handle_error, because positive value in error_code means size, not warning.
-        buffer_size = 0
-        value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
-        if(errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
-        buffer_size = error_code
-        value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, value_ctype)
-        errors._handle_error(self, error_code)
-        return value_ctype.value.decode("ascii")

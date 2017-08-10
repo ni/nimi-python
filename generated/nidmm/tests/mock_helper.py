@@ -80,9 +80,11 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureMultiPoint']['return'] = 0
         self._defaults['ReadMultiPoint'] = {}
         self._defaults['ReadMultiPoint']['return'] = 0
+        self._defaults['ReadMultiPoint']['readingArray'] = None
         self._defaults['ReadMultiPoint']['actualPts'] = None
         self._defaults['FetchMultiPoint'] = {}
         self._defaults['FetchMultiPoint']['return'] = 0
+        self._defaults['FetchMultiPoint']['readingArray'] = None
         self._defaults['FetchMultiPoint']['actualPts'] = None
         self._defaults['ConfigureTriggerSlope'] = {}
         self._defaults['ConfigureTriggerSlope']['return'] = 0
@@ -143,9 +145,11 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureWaveformCoupling']['return'] = 0
         self._defaults['FetchWaveform'] = {}
         self._defaults['FetchWaveform']['return'] = 0
+        self._defaults['FetchWaveform']['waveformArray'] = None
         self._defaults['FetchWaveform']['actualPoints'] = None
         self._defaults['ReadWaveform'] = {}
         self._defaults['ReadWaveform']['return'] = 0
+        self._defaults['ReadWaveform']['waveformArray'] = None
         self._defaults['ReadWaveform']['actualPoints'] = None
         self._defaults['GetAttributeViInt32'] = {}
         self._defaults['GetAttributeViInt32']['return'] = 0
@@ -238,13 +242,19 @@ class SideEffectsHelper(object):
         error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niDMM_GetError", param='description')
-        description.contents.value = self._defaults['GetError']['description']
+        if buffer_size == 0:
+            return len(self._defaults['GetError']['description'])
+        t = nidmm.ctypes_types.ViChar_ctype(self._defaults['GetError']['description'].encode('ascii'))
+        description.value = ctypes.cast(t, nidmm.ctypes_types.ViChar_ctype).value
         return self._defaults['GetError']['return']
 
     def niDMM_GetErrorMessage(self, vi, error_code, buffer_size, err_message):  # noqa: N802
         if self._defaults['GetErrorMessage']['errMessage'] is None:
             raise MockFunctionCallError("niDMM_GetErrorMessage", param='errMessage')
-        err_message.contents.value = self._defaults['GetErrorMessage']['errMessage']
+        if buffer_size == 0:
+            return len(self._defaults['GetErrorMessage']['errMessage'])
+        t = nidmm.ctypes_types.ViChar_ctype(self._defaults['GetErrorMessage']['errMessage'].encode('ascii'))
+        err_message.value = ctypes.cast(t, nidmm.ctypes_types.ViChar_ctype).value
         return self._defaults['GetErrorMessage']['return']
 
     def niDMM_ClearError(self, vi):  # noqa: N802
@@ -329,12 +339,18 @@ class SideEffectsHelper(object):
         return self._defaults['ConfigureMultiPoint']['return']
 
     def niDMM_ReadMultiPoint(self, vi, max_time, array_size, reading_array, actual_pts):  # noqa: N802
+        if self._defaults['ReadMultiPoint']['readingArray'] is None:
+            raise MockFunctionCallError("niDMM_ReadMultiPoint", param='readingArray')
+        reading_array.contents.value = self._defaults['ReadMultiPoint']['readingArray']
         if self._defaults['ReadMultiPoint']['actualPts'] is None:
             raise MockFunctionCallError("niDMM_ReadMultiPoint", param='actualPts')
         actual_pts.contents.value = self._defaults['ReadMultiPoint']['actualPts']
         return self._defaults['ReadMultiPoint']['return']
 
     def niDMM_FetchMultiPoint(self, vi, max_time, array_size, reading_array, actual_pts):  # noqa: N802
+        if self._defaults['FetchMultiPoint']['readingArray'] is None:
+            raise MockFunctionCallError("niDMM_FetchMultiPoint", param='readingArray')
+        reading_array.contents.value = self._defaults['FetchMultiPoint']['readingArray']
         if self._defaults['FetchMultiPoint']['actualPts'] is None:
             raise MockFunctionCallError("niDMM_FetchMultiPoint", param='actualPts')
         actual_pts.contents.value = self._defaults['FetchMultiPoint']['actualPts']
@@ -443,12 +459,18 @@ class SideEffectsHelper(object):
         return self._defaults['ConfigureWaveformCoupling']['return']
 
     def niDMM_FetchWaveform(self, vi, max_time, array_size, waveform_array, actual_points):  # noqa: N802
+        if self._defaults['FetchWaveform']['waveformArray'] is None:
+            raise MockFunctionCallError("niDMM_FetchWaveform", param='waveformArray')
+        waveform_array.contents.value = self._defaults['FetchWaveform']['waveformArray']
         if self._defaults['FetchWaveform']['actualPoints'] is None:
             raise MockFunctionCallError("niDMM_FetchWaveform", param='actualPoints')
         actual_points.contents.value = self._defaults['FetchWaveform']['actualPoints']
         return self._defaults['FetchWaveform']['return']
 
     def niDMM_ReadWaveform(self, vi, max_time, array_size, waveform_array, actual_points):  # noqa: N802
+        if self._defaults['ReadWaveform']['waveformArray'] is None:
+            raise MockFunctionCallError("niDMM_ReadWaveform", param='waveformArray')
+        waveform_array.contents.value = self._defaults['ReadWaveform']['waveformArray']
         if self._defaults['ReadWaveform']['actualPoints'] is None:
             raise MockFunctionCallError("niDMM_ReadWaveform", param='actualPoints')
         actual_points.contents.value = self._defaults['ReadWaveform']['actualPoints']
@@ -475,7 +497,10 @@ class SideEffectsHelper(object):
     def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):  # noqa: N802
         if self._defaults['GetAttributeViString']['value'] is None:
             raise MockFunctionCallError("niDMM_GetAttributeViString", param='value')
-        value.contents.value = self._defaults['GetAttributeViString']['value']
+        if buf_size == 0:
+            return len(self._defaults['GetAttributeViString']['value'])
+        t = nidmm.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['value'].encode('ascii'))
+        value.value = ctypes.cast(t, nidmm.ctypes_types.ViString_ctype).value
         return self._defaults['GetAttributeViString']['return']
 
     def niDMM_SetAttributeViString(self, vi, channel_name, attribute_id, value):  # noqa: N802
@@ -505,7 +530,10 @@ class SideEffectsHelper(object):
     def niDMM_GetNextInterchangeWarning(self, vi, buffer_size, warn_string):  # noqa: N802
         if self._defaults['GetNextInterchangeWarning']['warnString'] is None:
             raise MockFunctionCallError("niDMM_GetNextInterchangeWarning", param='warnString')
-        warn_string.contents.value = self._defaults['GetNextInterchangeWarning']['warnString']
+        if buffer_size == 0:
+            return len(self._defaults['GetNextInterchangeWarning']['warnString'])
+        t = nidmm.ctypes_types.ViChar_ctype(self._defaults['GetNextInterchangeWarning']['warnString'].encode('ascii'))
+        warn_string.value = ctypes.cast(t, nidmm.ctypes_types.ViChar_ctype).value
         return self._defaults['GetNextInterchangeWarning']['return']
 
     def niDMM_ResetInterchangeCheck(self, vi):  # noqa: N802
@@ -579,28 +607,6 @@ class SideEffectsHelper(object):
 
     def niDMM_ConfigureThermistorCustom(self, vi, a, b, c):  # noqa: N802
         return self._defaults['ConfigureThermistorCustom']['return']
-
-    # TODO(texasaggie97) Remove hand coded functions once metadata contains enough information to code generate these
-    def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):  # noqa: N802,F811
-        if self._defaults['GetAttributeViString']['value'] is None:
-            raise MockFunctionCallError("niDMM_GetAttributeViString", param='value')
-        if buf_size == 0:
-            return len(self._defaults['GetAttributeViString']['value'])
-        t = nidmm.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['value'].encode('ascii'))
-        value.value = ctypes.cast(t, nidmm.ctypes_types.ViString_ctype).value
-        return self._defaults['GetAttributeViString']['return']
-
-    def niDMM_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802,F811
-        if self._defaults['GetError']['errorCode'] is None:
-            raise MockFunctionCallError("niDMM_GetError", param='errorCode')
-        error_code.contents.value = self._defaults['GetError']['errorCode']
-        if self._defaults['GetError']['description'] is None:
-            raise MockFunctionCallError("niDMM_GetError", param='description')
-        if buffer_size == 0:
-            return len(self._defaults['GetError'][description])
-        t = nidmm.ctypes_types.ViString_ctype(self._defaults['GetError'][description].encode('ascii'))
-        description.value = ctypes.cast(t, nidmm.ctypes_types.ViString_ctype).value
-        return self._defaults['GetError']['return']
 
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):

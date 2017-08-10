@@ -49,3 +49,5 @@ cp /mnt/d/GitHub/nimi-python/tox.ini /mnt/d/GitHub/nimi-python/bin/nidmm/tox.ini
 cd /mnt/d/GitHub/nimi-python/bin/nidmm && tox -e flake8
 cp /mnt/d/GitHub/nimi-python/tox.ini /mnt/d/GitHub/nimi-python/bin/nimodinst/tox.ini
 cd /mnt/d/GitHub/nimi-python/bin/nimodinst && tox -e flake8
+cd /mnt/d/GitHub/nimi-python/bin/nidmm && set DRIVER=nidmm && tox
+cd /mnt/d/GitHub/nimi-python/bin/nimodinst && set DRIVER=nimodinst && tox
