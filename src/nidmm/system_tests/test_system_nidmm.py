@@ -129,8 +129,7 @@ def test_invalid_method_call(device_info):
         except TypeError as e:
             print (e)
             pass
-            
-
+          
 
 def test_method_call_with_two_parameter(device_info):
     # Calling Configure Trigger function and asserting True if any error occurred while function call.
