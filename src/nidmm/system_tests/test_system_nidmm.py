@@ -133,9 +133,11 @@ def test_get_dev_temp(device_info):
         print(temperature)
         assert 20 <= temperature <= 50
 
+		
 def test_writeonly_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         try:
             session.channel_count = 5
         except nidmm.Error as e:
             assert e.code == -1074135027
+
