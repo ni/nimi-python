@@ -2,10 +2,15 @@
 <%
     import build.helper as helper
 
-    config = template_parameters['metadata'].config
-    module_name = config['module_name']
+    config            = template_parameters['metadata'].config
+    attributes        = config['attributes']
+    functions         = config['functions']
+
+    module_name       = config['module_name']
     c_function_prefix = config['c_function_prefix']
-    attributes = template_parameters['metadata'].attributes
+
+    functions = helper.extract_codegen_functions(functions)
+    functions = helper.add_all_metadata(functions)
 %>\
 
 import ctypes
@@ -23,10 +28,10 @@ class AttributeViInt32(object):
 
     def __getitem__(self, index):
         i = self._index if self._index is not None else index
-        return self._owner._get_installed_device_attribute_vi_int32(i, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, i, self._attribute_id)
 
     def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_int32(self._index, self._attribute_id), format_spec)
+        return format(self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id), format_spec)
 
 
 class AttributeViString(object):
@@ -38,10 +43,10 @@ class AttributeViString(object):
 
     def __getitem__(self, index):
         i = self._index if self._index is not None else index
-        return self._owner._get_installed_device_attribute_vi_string(i, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, i, self._attribute_id)
 
     def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_string(self._index, self._attribute_id), format_spec)
+        return format(self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id), format_spec)
 
 
 class Device(object):
@@ -49,9 +54,9 @@ class Device(object):
     def __init__(self, owner, index):
 % for attribute in helper.sorted_attrs(attributes):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(owner, ${attribute}, index=index)
-%   if 'shortDescription' in attributes[attribute]:
+%   if 'short_description' in attributes[attribute]:
         '''
-        ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'], indent=8)}
+        ${helper.get_indented_docstring_snippet(attributes[attribute]['short_description'], indent=8)}
         '''
 %   endif
 % endfor
@@ -66,9 +71,9 @@ class Session(object):
     def __init__(self, driver):
 % for attribute in helper.sorted_attrs(attributes):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(self, ${attribute})
-%   if 'shortDescription' in attributes[attribute]:
+%   if 'short_description' in attributes[attribute]:
         '''
-        ${helper.get_indented_docstring_snippet(attributes[attribute]['shortDescription'], indent=8)}
+        ${helper.get_indented_docstring_snippet(attributes[attribute]['short_description'], indent=8)}
         '''
 %   endif
 % endfor
@@ -146,17 +151,17 @@ class Session(object):
             self.handle = 0
 
     ''' These are code-generated '''
+% for func_name in functions:
 <%
-    functions = template_parameters['metadata'].functions
-    functions = helper.extract_codegen_functions(functions)
-    functions = helper.add_all_metadata(functions)
-    functions = sorted(functions, key=lambda k: k['name'])
-%>\
-% for f in functions:
-<%
+    f = functions[func_name]
     input_parameters = helper.extract_input_parameters(f['parameters'])
     output_parameters = helper.extract_output_parameters(f['parameters'])
     enum_input_parameters = helper.extract_enum_parameters(input_parameters)
+    ivi_dance_parameter = helper.extract_ivi_dance_parameter(f['parameters'])
+
+    # If there is an ivi_dance parameter, we need to remove the associated size parameter from the input_params
+    if ivi_dance_parameter is not None:
+        input_parameters[:] = [p for p in input_parameters if p['python_name'] != ivi_dance_parameter['size']]
 %>
     def ${f['python_name']}(${helper.get_method_parameters_snippet(input_parameters)}):
 % for parameter in enum_input_parameters:
@@ -165,23 +170,22 @@ class Session(object):
 % for output_parameter in output_parameters:
         ${helper.get_ctype_variable_declaration_snippet(output_parameter)}
 % endfor
-        error_code = self.library.${c_function_prefix}${f['name']}(${helper.get_library_call_parameter_snippet(f['parameters'])})
+% if ivi_dance_parameter is None:
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], sessionName='handle')})
         errors._handle_error(self, error_code)
-        ${helper.get_method_return_snippet(output_parameters)}
+        ${helper.get_method_return_snippet(f['parameters'])}
+% else:
+        ${ivi_dance_parameter['size']} = 0
+        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_parameter['size']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], sessionName='handle')})
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        ${ivi_dance_parameter['size']} = error_code
+        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_parameter['size']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], sessionName='handle')})
+        errors._handle_error(self, error_code)
+        ${helper.get_method_return_snippet(f['parameters'])}
+% endif
 % endfor
 
-    ''' These are temporarily hand-coded because the generator can't handle buffers yet '''
-
-    def _get_installed_device_attribute_vi_string(self, index, attribute_id):  # noqa: F811
-        # Do the IVI dance
-        # Don't use _handle_error, because positive value in error_code means size, not warning.
-        buffer_size = 0
-        value_ctype = ctypes.create_string_buffer(buffer_size)
-        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        if(errors._is_error(error_code)):
-            raise errors.Error(self, error_code)
-        buffer_size = error_code
-        value_ctype = ctypes.create_string_buffer(buffer_size)
-        error_code = self.library.${c_function_prefix}GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, buffer_size, ctypes.cast(value_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        errors._handle_error(self, error_code)
-        return value_ctype.value.decode("ascii")

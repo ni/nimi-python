@@ -23,7 +23,7 @@ class TestSession(object):
         self.disallow_close = self.patched_ctypes_library.niDMM_close.side_effect
         self.patched_ctypes_library.niDMM_close.side_effect = self.side_effects_helper.niDMM_close
 
-        self.side_effects_helper['InitWithOptions']['newVi'] = SESSION_NUM_FOR_TEST
+        self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
 
     def teardown_method(self, method):
         self.errors_patcher.stop()
@@ -81,7 +81,7 @@ class TestSession(object):
     # Test getting a string attribute (IVI dance to get string)
     def test_get_string_attribute(self):
         self.patched_ctypes_library.niDMM_GetAttributeViString.side_effect = self.side_effects_helper.niDMM_GetAttributeViString
-        self.side_effects_helper['GetAttributeViString']['value'] = 'Testing is fun?'
+        self.side_effects_helper['GetAttributeViString']['attributeValue'] = 'Testing is fun?'
         with nidmm.Session('dev1') as session:
             attr_string = session._get_attribute_vi_string("", 5)
             assert(attr_string == 'Testing is fun?')
@@ -91,7 +91,7 @@ class TestSession(object):
     # Get string attribute works from attribute type
     def test_get_string_attribute_type(self):
         self.patched_ctypes_library.niDMM_GetAttributeViString.side_effect = self.side_effects_helper.niDMM_GetAttributeViString
-        self.side_effects_helper['GetAttributeViString']['value'] = '0x12345678'
+        self.side_effects_helper['GetAttributeViString']['attributeValue'] = '0x12345678'
         with nidmm.Session('dev1') as session:
             sn = session.instrument_serial_number
             assert(sn == '0x12345678')
