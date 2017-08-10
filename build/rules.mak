@@ -22,11 +22,11 @@ $1:
 endef
 $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 
-$(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPT)
+$(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	@echo Creating $(DRIVER) $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
-$(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPT)
+$(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	@echo Creating $(DRIVER) $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
@@ -34,7 +34,7 @@ $(MODULE_DIR)/%.py: %.py
 	@echo Creating $(DRIVER) $(notdir $@)
 	$(_hide_cmds)cp $< $@
 
-$(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPT)
+$(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	@echo Creating $(DRIVER) $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
@@ -85,7 +85,7 @@ $(TOX_INI): $(ROOT_DIR)/tox.ini
 
 test: $(TOX_INI)
 	@echo Running tox tests for $(DRIVER)
-	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && tox)
+	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && set DRIVER=$(DRIVER) && tox)
 
 flake8: $(TOX_INI)
 	@echo Running flake8 for $(DRIVER)

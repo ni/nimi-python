@@ -47,7 +47,10 @@ class SideEffectsHelper(object):
     def niModInst_GetExtendedErrorInfo(self, error_info_buffer_size, error_info):  # noqa: N802
         if self._defaults['GetExtendedErrorInfo']['errorInfo'] is None:
             raise MockFunctionCallError("niModInst_GetExtendedErrorInfo", param='errorInfo')
-        error_info.contents.value = self._defaults['GetExtendedErrorInfo']['errorInfo']
+        if error_info_buffer_size == 0:
+            return len(self._defaults['GetExtendedErrorInfo']['errorInfo'])
+        t = nimodinst.ctypes_types.ViString_ctype(self._defaults['GetExtendedErrorInfo']['errorInfo'].encode('ascii'))
+        error_info.value = ctypes.cast(t, nimodinst.ctypes_types.ViString_ctype).value
         return self._defaults['GetExtendedErrorInfo']['return']
 
     def niModInst_GetInstalledDeviceAttributeViInt32(self, handle, index, attribute_id, attribute_value):  # noqa: N802
@@ -59,7 +62,10 @@ class SideEffectsHelper(object):
     def niModInst_GetInstalledDeviceAttributeViString(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
         if self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViString", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetInstalledDeviceAttributeViString']['attributeValue']
+        if attribute_value_buffer_size == 0:
+            return len(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'])
+        t = nimodinst.ctypes_types.ViString_ctype(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'].encode('ascii'))
+        attribute_value.value = ctypes.cast(t, nimodinst.ctypes_types.ViString_ctype).value
         return self._defaults['GetInstalledDeviceAttributeViString']['return']
 
     def niModInst_OpenInstalledDevicesSession(self, driver, handle, item_count):  # noqa: N802
@@ -70,28 +76,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niModInst_OpenInstalledDevicesSession", param='item_count')
         item_count.contents.value = self._defaults['OpenInstalledDevicesSession']['item_count']
         return self._defaults['OpenInstalledDevicesSession']['return']
-
-    # TODO(texasaggie97) Remove hand coded functions once metadata contains enough information to code generate these
-    def niModInst_GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):  # noqa: N802,F811
-        if self._defaults['GetAttributeViString']['value'] is None:
-            raise MockFunctionCallError("niDMM_GetAttributeViString", param='value')
-        if buf_size == 0:
-            return len(self._defaults['GetAttributeViString']['value'])
-        t = nimodinst.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['value'].encode('ascii'))
-        value.value = ctypes.cast(t, nimodinst.ctypes_types.ViString_ctype).value
-        return self._defaults['GetAttributeViString']['return']
-
-    def niModInst_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802,F811
-        if self._defaults['GetError']['errorCode'] is None:
-            raise MockFunctionCallError("niDMM_GetError", param='errorCode')
-        error_code.contents.value = self._defaults['GetError']['errorCode']
-        if self._defaults['GetError']['description'] is None:
-            raise MockFunctionCallError("niDMM_GetError", param='description')
-        if buffer_size == 0:
-            return len(self._defaults['GetError'][description])
-        t = nimodinst.ctypes_types.ViString_ctype(self._defaults['GetError'][description].encode('ascii'))
-        description.value = ctypes.cast(t, nimodinst.ctypes_types.ViString_ctype).value
-        return self._defaults['GetError']['return']
 
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):

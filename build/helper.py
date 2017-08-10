@@ -1,8 +1,11 @@
 # TODO(marcoskirsch): This file should definitely not live here but I had trouble getting import to work.
 # TODO(marcoskirsch): Figure out unit test for this.
 
+from contextlib import contextmanager
+import importlib
 import re
 import pprint
+import string
 import sys
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -42,12 +45,23 @@ def extract_input_parameters(parameters, sessionName = 'vi'):
     return [x for x in parameters if x['direction'] == 'in' and x['name'] != sessionName]
 
 def extract_output_parameters(parameters):
-    '''Returns list of parameter dicts only with output parameters'''
-    return [x for x in parameters if x['direction'] == 'out']
+    '''Returns list of parameters only with output parameters, not including the ivi-dance parameter if it exists'''
+    return [x for x in parameters if x['direction'] == 'out' and not x['ivi-dance']]
 
 def extract_enum_parameters(parameters):
     '''Returns a list of parameter dicts that have an associated enum'''
     return [x for x in parameters if x['enum'] is not None]
+
+def extract_ivi_dance_parameter(parameters):
+    '''Returns the ivi-dance parameter of a session method if there is one
+
+    There can be only one ivi-dance parameter so return that individual parameter and not a list
+    '''
+    param = [x for x in parameters if x['ivi-dance']]
+    assert len(param) <= 1, '{1} ivi-dance parameters. No more than one is allowed'.format(len(param))
+    if len(param) == 0:
+        return None
+    return param[0]
 
 # Functions to add information to metadata structures that are specific to our codegen needs.
 
@@ -93,13 +107,19 @@ def _add_python_return_type(f):
     f['returns_python'] = f['returns']
     return f
 
-def _add_is_buffer(parameter):
-    '''Adds 'is_buffer' key/value pair to the parameter metadata iff not already populated'''
+def _add_buffer_info(parameter):
+    '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
     try:
-        parameter['is_buffer']
+        parameter['size']
+        parameter['is_buffer'] = True
+        parameter['ivi-dance'] = False
+        if type(parameter['size']) is str and parameter['size'].startswith('ivi-dance,'):
+            parameter['ivi-dance'] = True
+            parameter['size'] = camelcase_to_snakecase(parameter['size'].split(',')[1])
     except KeyError:
         # Not populated, assume False
         parameter['is_buffer'] = False
+        parameter['ivi-dance'] = False
     return parameter
 
 def add_all_metadata(functions):
@@ -113,7 +133,7 @@ def add_all_metadata(functions):
             _add_python_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
-            _add_is_buffer(p)
+            _add_buffer_info(p)
     return functions
 
 # Normalize string type between python2 & python3
@@ -162,9 +182,10 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
                     snippet += '.encode(\'ascii\')'
         else:
             assert x['direction'] == 'out', pp.pformat(x)
-            if x['type'] == 'ViString' or x['type'] == 'ViRsrc' or x['type'] == 'ViConstString_ctype':
-                # These are defined as c_char_p which is already a pointer!
-                snippet = (x['ctypes_variable_name'])
+            if x['ivi-dance']:
+                snippet = x['ctypes_variable_name']
+            elif x['is_buffer']:
+                snippet = 'ctypes.cast(' + x['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + x['ctypes_type'] + '))'
             else:
                 snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
         snippets.append(snippet)
@@ -187,19 +208,25 @@ def get_library_call_parameter_types_snippet(parameters_list):
 
 def _get_output_param_return_snippet(output_parameter):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
-    snippet = output_parameter['ctypes_variable_name'] + '.value'
-    if output_parameter['type'] == 'ViChar':
-        snippet += '.decode("ascii")'
+    assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
+    if output_parameter['is_buffer']:
+        if output_parameter['type'] == 'ViChar' or output_parameter['type'] == 'ViString':
+            snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
+        else:
+            # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
+            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i].value for i in range(' + camelcase_to_snakecase(output_parameter['size']) + ')]'
+    else:
+        snippet = output_parameter['ctypes_variable_name'] + '.value'
+
     return snippet
 
-def get_method_return_snippet(output_parameters):
+def get_method_return_snippet(parameters):
     '''Returns a string suitable to use as the return argument of a Session method, i.e. "return reading_ctype.value"'''
-    if len(output_parameters) == 0:
-        return 'return'
     snippets = []
-    for x in output_parameters:
-        snippets.append(_get_output_param_return_snippet(x))
-    return 'return ' + ', '.join(snippets)
+    for x in parameters:
+        if x['direction'] == 'out' or x['ivi-dance']:
+            snippets.append(_get_output_param_return_snippet(x))
+    return ('return ' + ', '.join(snippets)).strip()
 
 def get_enum_type_check_snippet(parameter, indent):
     '''Returns python snippet to check that the type of a parameter is what is expected'''
@@ -212,7 +239,14 @@ def get_ctype_variable_declaration_snippet(parameter):
     assert parameter['direction'] == 'out', pp.pformat(parameter)
     snippet = parameter['ctypes_variable_name'] + ' = '
     if parameter['is_buffer']:
-        snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)' + '  # TODO(marcoskirsch): allocate a buffer'
+        if isinstance(parameter['size'], int):
+            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']) + ')()'
+            #snippet += 'ctypes.create_string_buffer(' + str(parameter['size']) + ')'
+        elif parameter['size'] == 'ivi-dance':
+            snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)  # TODO(marcoskirsch): Do the IVI-dance!'
+        else:
+            # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
+            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + camelcase_to_snakecase(parameter['size']) + ')()'
     else:
         snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)'
     return snippet
@@ -261,7 +295,6 @@ def get_rst_header_snippet(t, header_level='='):
     return ret_val
 
 # We need this in the global namespace so we can reference it from the sub() callback
-functions = None
 config = None
 def replace_func_python_name_no_link(m):
     '''callback function for regex sub command when link not needed
@@ -273,8 +306,8 @@ def replace_func_python_name_no_link(m):
         str: python name of the function
     '''
     fname = "Unknown"
-    if f_match and f_match.group(1) in functions:
-        fname = functions[f_match.group(1)]['python_name']
+    if f_match and f_match.group(1) in config['functions']:
+        fname = config['functions'][f_match.group(1)]['python_name']
     return '{0} '.format(fname)
 
 def replace_func_python_name_with_link(m):
@@ -287,11 +320,11 @@ def replace_func_python_name_with_link(m):
         str: rst link to function using python name
     '''
     fname = "Unknown"
-    if f_match and f_match.group(1) in functions:
-        fname = functions[f_match.group(1)]['python_name']
+    if f_match and f_match.group(1) in config['functions']:
+        fname = config['functions'][f_match.group(1)]['python_name']
     return ':py:func:`{0}.{1}` '.format(config['module_name'], fname)
 
-def fix_references(doc, funcs, cfg, make_link=False):
+def fix_references(doc, cfg, make_link=False):
     '''Replace ATTR and function mentions in documentation
 
     Args:
@@ -305,9 +338,6 @@ def fix_references(doc, funcs, cfg, make_link=False):
     Returns:
         str: documentation with references replaces based on make_link
     '''
-
-    global functions
-    functions = funcs
 
     global config
     config = cfg
@@ -325,7 +355,7 @@ def fix_references(doc, funcs, cfg, make_link=False):
         doc = doc.replace('\_', '_')
     return doc
 
-def get_function_rst(fname, functions, config, indent=0):
+def get_function_rst(fname, config, indent=0):
     '''Gets rst formatted documentation for given function
 
     Args:
@@ -335,14 +365,14 @@ def get_function_rst(fname, functions, config, indent=0):
     Returns:
         str: rst formatted documentation
     '''
-    function = functions[fname]
+    function = config['functions'][fname]
     rst = '.. function:: ' + function['python_name'] + '('
     rst += get_function_parameters_snippet(function['parameters'], sessionName='vi') + ')'
     indent += 4
     if 'purpose' in function:
-        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_references(function['purpose'], functions, config, make_link=True), indent)
+        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_references(function['purpose'], config, make_link=True), indent)
     if 'long_description' in function:
-        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_references(function['long_description'], functions, config, make_link=True), indent)
+        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_references(function['long_description'], config, make_link=True), indent)
 
     input_params = extract_input_parameters(function['parameters'])
     if len(input_params) > 0:
@@ -350,7 +380,7 @@ def get_function_rst(fname, functions, config, indent=0):
     for p in input_params:
         rst +=  '\n' + (' ' * indent) + ':param {0}: '.format(p['python_name'])
         if 'long_description' in p:
-            rst += get_indented_docstring_snippet(fix_references(p['long_description'], functions, config, make_link=True), indent + 4)
+            rst += get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=True), indent + 4)
         p_type = p['python_type']
         if p_type.startswith('enums.'):
             p_type = p_type.replace('enums.', '')
@@ -365,14 +395,14 @@ def get_function_rst(fname, functions, config, indent=0):
         for p in output_params:
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
             if 'long_description' in p:
-                rst += get_indented_docstring_snippet(fix_references(p['long_description'], functions, config, make_link=True), indent + 8)
+                rst += get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=True), indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
         rst += '\n\n' + (' ' * indent) + ':rtype: '+ p['python_type']
 
     return rst
 
-def get_function_docstring(fname, functions, config, indent=0):
+def get_function_docstring(fname, config, indent=0):
     '''Gets formatted documentation for given function that can be used as a docstring
 
     Args:
@@ -383,11 +413,11 @@ def get_function_docstring(fname, functions, config, indent=0):
         str: docstring formatted documentation
     '''
     docstring = ''
-    function = functions[fname]
+    function = config['functions'][fname]
     if 'purpose' in function:
-        docstring += get_indented_docstring_snippet(fix_references(function['purpose'], functions, config, make_link=False), indent)
+        docstring += get_indented_docstring_snippet(fix_references(function['purpose'], config, make_link=False), indent)
     elif 'long_description' in function:
-        docstring += get_indented_docstring_snippet(fix_references(function['long_description'], functions, config, make_link=False), indent)
+        docstring += get_indented_docstring_snippet(fix_references(function['long_description'], config, make_link=False), indent)
 
     input_params = extract_input_parameters(function['parameters'])
     if len(input_params) > 0:
@@ -395,7 +425,7 @@ def get_function_docstring(fname, functions, config, indent=0):
     for p in input_params:
         docstring +=  '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
         if 'long_description' in p:
-            docstring += get_indented_docstring_snippet(fix_references(p['long_description'], functions, config, make_link=False), indent + 8)
+            docstring += get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=False), indent + 8)
 
 
     output_params = extract_output_parameters(function['parameters'])
@@ -404,9 +434,123 @@ def get_function_docstring(fname, functions, config, indent=0):
         for p in output_params:
             docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
             if 'long_description' in p:
-                docstring += get_indented_docstring_snippet(fix_references(p['long_description'], functions, config, make_link=False), indent + 8)
+                docstring += get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=False), indent + 8)
 
     return docstring
 
 
+# From http://code.activestate.com/recipes/579054-generate-sphinx-table/
+def as_rest_table(data, full=False):
+    """
+    >>> from report_table import as_rest_table
+    >>> data = [('what', 'how', 'who'),
+    ...         ('lorem', 'that is a long value', 3.1415),
+    ...         ('ipsum', 89798, 0.2)]
+    >>> print as_rest_table(data, full=True)
+    +-------+----------------------+--------+
+    | what  | how                  | who    |
+    +=======+======================+========+
+    | lorem | that is a long value | 3.1415 |
+    +-------+----------------------+--------+
+    | ipsum |                89798 |    0.2 |
+    +-------+----------------------+--------+
+
+    >>> print as_rest_table(data)
+    =====  ====================  ======
+    what   how                   who
+    =====  ====================  ======
+    lorem  that is a long value  3.1415
+    ipsum                 89798     0.2
+    =====  ====================  ======
+
+    """
+    data = data if data else [['No Data']]
+    table = []
+    # max size of each column
+    sizes = map(max, zip(*[[len(str(elt)) for elt in member]
+                           for member in data]))
+    if sys.version_info.major >= 3:
+        sizes = list(sizes)
+    num_elts = len(sizes)
+
+    if full:
+        start_of_line = '| '
+        vertical_separator = ' | '
+        end_of_line = ' |'
+        line_marker = '-'
+    else:
+        start_of_line = ''
+        vertical_separator = '  '
+        end_of_line = ''
+        line_marker = '='
+
+    meta_template = vertical_separator.join(['{{{{{0}:{{{0}}}}}}}'.format(i)
+                                             for i in range(num_elts)])
+    template = '{0}{1}{2}'.format(start_of_line,
+                                  meta_template.format(*sizes),
+                                  end_of_line)
+    # determine top/bottom borders
+    if full:
+        to_separator = {ord('|'): '+', ord(' '): '-'}
+        if sys.version_info.major < 3:
+            to_separator = string.maketrans('| ', '+-')
+    else:
+        to_separator = {ord('|'): '+'}
+        if sys.version_info.major < 3:
+            to_separator = string.maketrans('|', '+')
+    start_of_line = start_of_line.translate(to_separator)
+    vertical_separator = vertical_separator.translate(to_separator)
+    end_of_line = end_of_line.translate(to_separator)
+    separator = '{0}{1}{2}'.format(start_of_line,
+                                   vertical_separator.join([x*line_marker for x in sizes]),
+                                   end_of_line)
+    # determine header separator
+    th_separator_tr = {ord('-'): '='}
+    if sys.version_info.major < 3:
+        th_separator_tr = string.maketrans('-', '=')
+    start_of_line = start_of_line.translate(th_separator_tr)
+    line_marker = line_marker.translate(th_separator_tr)
+    vertical_separator = vertical_separator.translate(th_separator_tr)
+    end_of_line = end_of_line.translate(th_separator_tr)
+    th_separator = '{0}{1}{2}'.format(start_of_line,
+                                      vertical_separator.join([x*line_marker for x in sizes]),
+                                      end_of_line)
+    # prepare result
+    table.append(separator)
+    # set table header
+    titles = data[0]
+    table.append(template.format(*titles))
+    table.append(th_separator)
+
+    for d in data[1:-1]:
+        table.append(template.format(*d))
+        if full:
+            table.append(separator)
+    table.append(template.format(*data[-1]))
+    table.append(separator)
+    return '\n'.join(table)
+
+# We need this to allow us to dynamically add and remove a folder to the search
+# path becaise importlib.import_module() won't work with a module hierarchy in python2
+@contextmanager
+def add_to_path(p):
+    import sys
+    old_path = sys.path
+    sys.path = sys.path[:]
+    sys.path.insert(0, p)
+    try:
+        yield
+    finally:
+        sys.path = old_path
+
+def get_python_type_from_visa_type(visa_type):
+    if sys.version_info.major < 3:
+        with add_to_path('build/templates'):
+            p_types = importlib.import_module('python_types')
+    else:
+        p_types = importlib.import_module('build.templates.python_types')
+    v_type = getattr(p_types, visa_type)
+    p_type = v_type().python_type()
+
+    return p_type
 

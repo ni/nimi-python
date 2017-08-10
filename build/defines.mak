@@ -9,6 +9,7 @@ TOX_INI := $(OUTPUT_DIR)/tox.ini
 
 DRIVER_DIR := $(ROOT_DIR)/src/$(DRIVER)
 METADATA_DIR := $(DRIVER_DIR)/metadata
+METADATA_FILES := $(wildcard $(METADATA_DIR)/*.py)
 
 BUILD_HELPER_SCRIPT := $(BUILD_HELPER_DIR)/helper.py
 

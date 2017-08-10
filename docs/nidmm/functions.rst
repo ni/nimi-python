@@ -1089,8 +1089,6 @@ NI-DMM Functions
         you can pass VI\_NULL for the **Attribute\_Value** buffer parameter.
     :type buffer_size: ViInt32
 
-    :rtype: ViString
-
 
 .. function:: get_auto_range_value(actual_range)
 
@@ -1207,16 +1205,7 @@ NI-DMM Functions
         None.
     :type buffer_size: ViInt32
 
-    :rtype: tuple (error_code, description)
-        WHERE
-        error_code (ViStatus): Returns the **error\_code** for the session or execution thread. If you
-            pass 0 for the **Buffer\_Size**, you can pass VI\_NULL for this
-            parameter.
-        description (ViChar): Returns the error **description** for the IVI session or execution
-            thread. If there is no **description**, the function returns an empty
-            string. The buffer must contain at least as many elements as the value
-            you specify with the **Buffer\_Size** parameter. If you pass 0 for the
-            **Buffer\_Size**, you can pass VI\_NULL for this parameter.
+    :rtype: ViStatus
 
 
 .. function:: _get_error_message(error_code, buffer_size, error_message)
@@ -1238,8 +1227,6 @@ NI-DMM Functions
         pass 0 for **buffer\_size**, the function returns the buffer size needed
         for **Error\_Message**.
     :type buffer_size: ViInt32
-
-    :rtype: ViChar
 
 
 .. function:: get_last_cal_temp(cal_type, temperature)
@@ -1336,8 +1323,6 @@ NI-DMM Functions
         VI\_NULL for the **Interchange\_Warning** buffer parameter. The default
         value is None.
     :type buffer_size: ViInt32
-
-    :rtype: ViChar
 
 
 .. function:: get_self_cal_supported(self_cal_supported)

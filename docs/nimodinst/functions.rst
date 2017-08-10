@@ -15,8 +15,6 @@ NI-ModInst Functions
     :param error_info_buffer_size: 
     :type error_info_buffer_size: ViInt32
 
-    :rtype: ViChar
-
 
 .. function:: _get_installed_device_attribute_vi_int32(handle, index, attribute_id, attribute_value)
 
@@ -40,8 +38,6 @@ NI-ModInst Functions
     :type attribute_id: ViInt32
     :param attribute_value_buffer_size: 
     :type attribute_value_buffer_size: ViInt32
-
-    :rtype: ViChar
 
 
 .. function:: _open_installed_devices_session(driver, handle, item_count)

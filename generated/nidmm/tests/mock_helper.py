@@ -406,7 +406,10 @@ class SideEffectsHelper(object):
     def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niDMM_GetAttributeViString", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViString']['attributeValue']
+        if buffer_size == 0:
+            return len(self._defaults['GetAttributeViString']['attributeValue'])
+        t = nidmm.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
+        attribute_value.value = ctypes.cast(t, nidmm.ctypes_types.ViString_ctype).value
         return self._defaults['GetAttributeViString']['return']
 
     def niDMM_GetAutoRangeValue(self, vi, actual_range):  # noqa: N802
@@ -457,13 +460,19 @@ class SideEffectsHelper(object):
         error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niDMM_GetError", param='description')
-        description.contents.value = self._defaults['GetError']['description']
+        if buffer_size == 0:
+            return len(self._defaults['GetError']['description'])
+        t = nidmm.ctypes_types.ViChar_ctype(self._defaults['GetError']['description'].encode('ascii'))
+        description.value = ctypes.cast(t, nidmm.ctypes_types.ViChar_ctype).value
         return self._defaults['GetError']['return']
 
     def niDMM_GetErrorMessage(self, vi, error_code, buffer_size, error_message):  # noqa: N802
         if self._defaults['GetErrorMessage']['errorMessage'] is None:
             raise MockFunctionCallError("niDMM_GetErrorMessage", param='errorMessage')
-        error_message.contents.value = self._defaults['GetErrorMessage']['errorMessage']
+        if buffer_size == 0:
+            return len(self._defaults['GetErrorMessage']['errorMessage'])
+        t = nidmm.ctypes_types.ViChar_ctype(self._defaults['GetErrorMessage']['errorMessage'].encode('ascii'))
+        error_message.value = ctypes.cast(t, nidmm.ctypes_types.ViChar_ctype).value
         return self._defaults['GetErrorMessage']['return']
 
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
@@ -487,7 +496,10 @@ class SideEffectsHelper(object):
     def niDMM_GetNextInterchangeWarning(self, vi, buffer_size, interchange_warning):  # noqa: N802
         if self._defaults['GetNextInterchangeWarning']['interchangeWarning'] is None:
             raise MockFunctionCallError("niDMM_GetNextInterchangeWarning", param='interchangeWarning')
-        interchange_warning.contents.value = self._defaults['GetNextInterchangeWarning']['interchangeWarning']
+        if buffer_size == 0:
+            return len(self._defaults['GetNextInterchangeWarning']['interchangeWarning'])
+        t = nidmm.ctypes_types.ViChar_ctype(self._defaults['GetNextInterchangeWarning']['interchangeWarning'].encode('ascii'))
+        interchange_warning.value = ctypes.cast(t, nidmm.ctypes_types.ViChar_ctype).value
         return self._defaults['GetNextInterchangeWarning']['return']
 
     def niDMM_GetSelfCalSupported(self, vi, self_cal_supported):  # noqa: N802
@@ -645,28 +657,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_self_test", param='selfTestMessage')
         self_test_message.contents.value = self._defaults['self_test']['selfTestMessage']
         return self._defaults['self_test']['return']
-
-    # TODO(texasaggie97) Remove hand coded functions once metadata contains enough information to code generate these
-    def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buf_size, value):  # noqa: N802,F811
-        if self._defaults['GetAttributeViString']['value'] is None:
-            raise MockFunctionCallError("niDMM_GetAttributeViString", param='value')
-        if buf_size == 0:
-            return len(self._defaults['GetAttributeViString']['value'])
-        t = nidmm.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['value'].encode('ascii'))
-        value.value = ctypes.cast(t, nidmm.ctypes_types.ViString_ctype).value
-        return self._defaults['GetAttributeViString']['return']
-
-    def niDMM_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802,F811
-        if self._defaults['GetError']['errorCode'] is None:
-            raise MockFunctionCallError("niDMM_GetError", param='errorCode')
-        error_code.contents.value = self._defaults['GetError']['errorCode']
-        if self._defaults['GetError']['description'] is None:
-            raise MockFunctionCallError("niDMM_GetError", param='description')
-        if buffer_size == 0:
-            return len(self._defaults['GetError'][description])
-        t = nidmm.ctypes_types.ViString_ctype(self._defaults['GetError'][description].encode('ascii'))
-        description.value = ctypes.cast(t, nidmm.ctypes_types.ViString_ctype).value
-        return self._defaults['GetError']['return']
 
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
