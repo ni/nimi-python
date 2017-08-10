@@ -850,6 +850,7 @@ the NI 4080/4081/4082 or NI 4070/4071/4072 for a 6½–digit and greater
 resolution DC measurement, the driver enables ADC Calibration. For all
 other measurement configurations, the driver disables
 **ADC\_Calibration**.
+
 +------------------------------------------------+---------+-----------------------------------------------------------------------------------------------------+
 | Name                                           | Value   | Description                                                                                         |
 +================================================+=========+=====================================================================================================+
@@ -984,6 +985,7 @@ None.
 Specifies the **current\_source** provided during diode measurements.
 For valid ranges, refer to the device sections for your device. The
 driver sets NIDMM\_ATTR\_CURRENT\_SOURCE to this value.
+
 +-------------------------------------+----------+-----------------------------------------------------+
 | NIDMM\_VAL\_1\_MICROAMP             | 1 µA     | NI 4080/4081/4082 and NI 4070/4071/4072             |
 +-------------------------------------+----------+-----------------------------------------------------+
@@ -1060,6 +1062,7 @@ Sets the expected maximum amplitude of the input signal. Refer to the
 NIDMM\_ATTR\_FREQ\_VOLTAGE\_RANGE to this value. The minimum
 peak-to-peak signal amplitude that can be detected is 10% of the
 specified **voltage\_range**.
+
 +-----------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------+
 | Name                                    | Value   | Description                                                                                                                        |
 +=========================================+=========+====================================================================================================================================+
@@ -1137,6 +1140,7 @@ None.
                 'long_description': '''
 Specifies the polarity of the signal that is generated. The driver sets
 NIDMM\_ATTR\_MEAS\_DEST\_SLOPE to this value.
+
 +--------------------------+-----+------------------------+------------------------------------------------------------------+
 | Rising Edge              | 0   | NIDMM\_VAL\_POSITIVE   | The driver triggers on the rising edge of the trigger signal.    |
 +--------------------------+-----+------------------------+------------------------------------------------------------------+
@@ -1450,6 +1454,7 @@ None.
                 'long_description': '''
 Enables or disables **offset\_comp\_ohms**. The driver sets
 NIDMM\_ATTR\_OFFSET\_COMP\_OHMS to this value.
+
 +-------------------------------------------------+---------+------------------------------------------+
 | Name                                            | Value   | Description                              |
 +=================================================+=========+==========================================+
@@ -1727,6 +1732,7 @@ Specifies the polarity of the Trigger signal on which the measurement is
 triggered for values of either NIDMM\_VAL\_POSITIVE or
 NIDMM\_VAL\_NEGATIVE. The driver sets
 NIDMM\_ATTR\_SAMPLE\_TRIGGER\_SLOPE to this value.
+
 +--------------------------+-----+------------------------+------------------------------------------------------------------+
 | Rising Edge              | 0   | NIDMM\_VAL\_POSITIVE   | The driver triggers on the rising edge of the trigger signal.    |
 +--------------------------+-----+------------------------+------------------------------------------------------------------+
@@ -1910,6 +1916,7 @@ None.
 Specifies the type of thermocouple used to measure the temperature.
 NI-DMM uses this value to set the Thermocouple Type property. The
 default is NIDMM\_VAL\_TEMP\_TC\_J.
+
 +---------------------------+-----------------------+
 | NIDMM\_VAL\_TEMP\_TC\_B   | Thermocouple type B   |
 +---------------------------+-----------------------+
@@ -1970,6 +1977,7 @@ None.
 Specifies the type of device used to measure the temperature. NI-DMM
 uses this value to set the Transducer Type property. The default is
 NIDMM\_VAL\_THERMOCOUPLE.
+
 +----------------------------+----------------+
 | NIDMM\_VAL\_2\_WIRE\_RTD   | 2-wire RTD     |
 +----------------------------+----------------+
@@ -2076,6 +2084,7 @@ Specifies the polarity of the trigger signal on which the measurement is
 triggered for values of either NIDMM\_VAL\_POSITIVE or
 NIDMM\_VAL\_NEGATIVE. The driver sets the NIDMM\_ATTR\_TRIGGER\_SLOPE
 attribute to this value.
+
 +----------------------------------+-----+------------------------------------------------------------------+
 | NIDMM\_VAL\_POSITIVE             | 0   | The driver triggers on the rising edge of the trigger signal.    |
 +----------------------------------+-----+------------------------------------------------------------------+
@@ -2112,6 +2121,7 @@ None.
                 'long_description': '''
 Specifies the **measurement\_function** used in a waveform acquisition.
 The driver sets NIDMM\_ATTR\_FUNCTION to this value.
+
 +-------------------------------------------+--------+--------------------+
 | NIDMM\_VAL\_WAVEFORM\_VOLTAGE (default)   | 1003   | Voltage Waveform   |
 +-------------------------------------------+--------+--------------------+
@@ -2197,6 +2207,7 @@ None.
                 'long_description': '''
 Selects DC or AC coupling. The driver sets
 NIDMM\_ATTR\_WAVEFORM\_COUPLING to this value.
+
 +------------------------------------------------+---------+---------------+
 | Name                                           | Value   | Description   |
 +================================================+=========+===============+
@@ -2392,6 +2403,7 @@ positive ViInt32. The default value is 1.
                 'is_buffer': True,
                 'long_description': '''
 An array of measurement values.
+
 +------------+-------------------------------------------------------------------------------------------------------------------------------+
 | |image0|   | **Note**   The size of the **reading\_array** must be at least the size that you specify for the **Array\_Size** parameter.   |
 +------------+-------------------------------------------------------------------------------------------------------------------------------+
@@ -2620,6 +2632,7 @@ the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
 Indicates the units of aperture time as powerline cycles (PLCs) or
 seconds. Returns the value of the NIDMM\_ATTR\_APERTURE\_TIME\_UNITS
 attribute.
+
 +-----------------------------------+-----+--------------------+
 | NIDMM\_VAL\_SECONDS               | 0   | Seconds            |
 +-----------------------------------+-----+--------------------+
@@ -3760,6 +3773,7 @@ None.
                 'long_description': '''
 Returns whether Self Cal is supported for the device specified by the
 given session.
+
 +-------------+-----+---------------------------------------------------------------+
 | VI\_TRUE    | 1   | The DMM that you are using can perform self-calibration.      |
 +-------------+-----+---------------------------------------------------------------+
@@ -3920,6 +3934,7 @@ Verifies that the device you initialize is one that the driver supports.
 NI-DMM automatically performs this query, so setting this parameter is
 not necessary.
 Defined Values:
+
 +----------------------+-----+--------------------+
 | VI\_TRUE (default)   | 1   | Perform ID Query   |
 +----------------------+-----+--------------------+
@@ -3936,6 +3951,7 @@ Defined Values:
 Specifies whether to reset the instrument during the initialization
 procedure.
 Defined Values:
+
 +----------------------+-----+----------------+
 | VI\_TRUE (default)   | 1   | Reset Device   |
 +----------------------+-----+----------------+
@@ -4046,6 +4062,7 @@ None.
                 'direction': 'in',
                 'long_description': '''
 The measured value returned from the DMM.
+
 +------------+------------------------------------------------------------------------------------------------------------------------------+
 | |image0|   | **Note**   If an overrange condition occurs, the **measurement\_value** contains an IEEE-defined NaN (Not a Number) value.   |
 +------------+------------------------------------------------------------------------------------------------------------------------------+
@@ -4061,6 +4078,7 @@ The measured value returned from the DMM.
                 'long_description': '''
 Returns whether the measurement value is a valid measurement or an
 overrange condition.
+
 +-------------+-----+-------------------------------------------------------------+
 | VI\_TRUE    | 1   | The value indicates that an overrange condition occurred.   |
 +-------------+-----+-------------------------------------------------------------+
@@ -4096,6 +4114,7 @@ None.
                 'direction': 'in',
                 'long_description': '''
 The measured value returned from the DMM.
+
 +------------+------------------------------------------------------------------------------------------------------------------------------+
 | |image0|   | **Note**   If an overrange condition occurs, the **measurement\_value** contains an IEEE-defined NaN (Not a Number) value.   |
 +------------+------------------------------------------------------------------------------------------------------------------------------+
@@ -4111,6 +4130,7 @@ The measured value returned from the DMM.
                 'long_description': '''
 Returns whether the **Measurement\_Value** is a valid measurement or an
 underrange condition.
+
 +-------------+-----+--------------------------------------------------------------+
 | VI\_TRUE    | 1   | The value indicates that an underrange condition occurred.   |
 +-------------+-----+--------------------------------------------------------------+
