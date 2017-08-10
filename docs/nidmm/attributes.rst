@@ -32,6 +32,72 @@ NI-DMM Attributes
         - LabVIEW Property: **Configuration:Absolute Resolution**
         - C Attribute: **NIDMM_ATTR_ABSOLUTE_RESOLUTION**
 
+.. py:attribute:: ac_max_freq
+
+   Specifies the maximum frequency component of the input signal for AC
+   measurements. This property is used only for error checking and verifies
+   that the value of this parameter is less than the maximum frequency of
+   the device. This property affects the DMM only when you set the Function
+   property to AC measurements.
+
+   The valid ranges are shown in the following table.
+
+   +----------------------------------------+----------------+
+   | NI 4080/4081/4082, NI 4070/4071/4072   | 1 Hz-300 kHz   |
+   +----------------------------------------+----------------+
+   | NI 4065                                | 10 Hz-100 Hz   |
+   +----------------------------------------+----------------+
+   | NI 4050/4060                           | 20 Hz-25 kHz   |
+   +----------------------------------------+----------------+
+
+   The following table lists the characteristics of this property.
+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Max Frequency**
+        - C Attribute: **NIDMM_ATTR_AC_MAX_FREQ**
+
+.. py:attribute:: ac_min_freq
+
+   Specifies the minimum frequency component of the input signal for AC
+   measurements. This property affects the DMM only when you set the
+   Function property to AC measurements. The valid range is 1 Hz-300 kHz
+   for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
+   4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Min Frequency**
+        - C Attribute: **NIDMM_ATTR_AC_MIN_FREQ**
+
 .. py:attribute:: adc_calibration
 
    For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
@@ -987,44 +1053,6 @@ NI-DMM Attributes
         - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
         - C Attribute: **NIDMM_ATTR_LOGICAL_NAME**
 
-.. py:attribute:: max_frequency
-
-   Specifies the maximum frequency component of the input signal for AC
-   measurements. This property is used only for error checking and verifies
-   that the value of this parameter is less than the maximum frequency of
-   the device. This property affects the DMM only when you set the Function
-   property to AC measurements.
-
-   The valid ranges are shown in the following table.
-
-   +----------------------------------------+----------------+
-   | NI 4080/4081/4082, NI 4070/4071/4072   | 1 Hz-300 kHz   |
-   +----------------------------------------+----------------+
-   | NI 4065                                | 10 Hz-100 Hz   |
-   +----------------------------------------+----------------+
-   | NI 4050/4060                           | 20 Hz-25 kHz   |
-   +----------------------------------------+----------------+
-
-   The following table lists the characteristics of this property.
-
-   +----------------+------------+
-   | Characteristic | Value      |
-   +================+============+
-   | Datatype       | float      |
-   +----------------+------------+
-   | Permissions    | read-write |
-   +----------------+------------+
-   | Channel Based  | False      |
-   +----------------+------------+
-   | Resettable     | No         |
-   +----------------+------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Measurement Options:Max Frequency**
-        - C Attribute: **NIDMM_ATTR_MAX_FREQUENCY**
-
 .. py:attribute:: measurement_completdest
 
    Specifies the destination of the measurement complete (MC) signal.
@@ -1078,34 +1106,6 @@ NI-DMM Attributes
 
         - LabVIEW Property: **Trigger:Measurement Destination Slope**
         - C Attribute: **NIDMM_ATTR_MEASUREMENT_DESTINATION_SLOPE**
-
-.. py:attribute:: min_frequency
-
-   Specifies the minimum frequency component of the input signal for AC
-   measurements. This property affects the DMM only when you set the
-   Function property to AC measurements. The valid range is 1 Hz-300 kHz
-   for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
-   4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+------------+
-   | Characteristic | Value      |
-   +================+============+
-   | Datatype       | float      |
-   +----------------+------------+
-   | Permissions    | read-write |
-   +----------------+------------+
-   | Channel Based  | False      |
-   +----------------+------------+
-   | Resettable     | No         |
-   +----------------+------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Measurement Options:Min Frequency**
-        - C Attribute: **NIDMM_ATTR_MIN_FREQUENCY**
 
 .. py:attribute:: number_of_averages
 

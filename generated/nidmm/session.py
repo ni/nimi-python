@@ -105,6 +105,22 @@ class Session(object):
     property to higher values increases the measurement accuracy. Setting
     this property to lower values increases the measurement speed.
     '''
+    ac_max_freq = AttributeViReal64(1250007)
+    '''
+    Specifies the maximum frequency component of the input signal for AC
+    measurements. This property is used only for error checking and verifies
+    that the value of this parameter is less than the maximum frequency of
+    the device. This property affects the DMM only when you set the Function
+    property to AC measurements.
+    '''
+    ac_min_freq = AttributeViReal64(1250006)
+    '''
+    Specifies the minimum frequency component of the input signal for AC
+    measurements. This property affects the DMM only when you set the
+    Function property to AC measurements. The valid range is 1 Hz-300 kHz
+    for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
+    4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
+    '''
     adc_calibration = AttributeEnum(1150022, enums.ADCCalibration)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
@@ -314,14 +330,6 @@ class Session(object):
     '''
     A string containing the logical name of the instrument.
     '''
-    max_frequency = AttributeViReal64(1250007)
-    '''
-    Specifies the maximum frequency component of the input signal for AC
-    measurements. This property is used only for error checking and verifies
-    that the value of this parameter is less than the maximum frequency of
-    the device. This property affects the DMM only when you set the Function
-    property to AC measurements.
-    '''
     measurement_completdest = AttributeEnum(1250305, enums.MeasurementCompleteDest)
     '''
     Specifies the destination of the measurement complete (MC) signal.
@@ -332,14 +340,6 @@ class Session(object):
     measurement_destination_slope = AttributeEnum(1150002, enums.MeasurementDestinationSlope)
     '''
     Specifies the polarity of the generated measurement complete signal.
-    '''
-    min_frequency = AttributeViReal64(1250006)
-    '''
-    Specifies the minimum frequency component of the input signal for AC
-    measurements. This property affects the DMM only when you set the
-    Function property to AC measurements. The valid range is 1 Hz-300 kHz
-    for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
-    4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
     '''
     number_of_averages = AttributeViInt32(1150032)
     '''
@@ -794,13 +794,13 @@ class Session(object):
         Purpose
         -------
 
-        Configures the AC_MIN_FREQ and NIDMM_ATTR_AC_MAX_FREQ
+        Configures the AC_MIN_FREQ and AC_MAX_FREQ
         attributes, which the DMM uses for AC measurements.
 
         Args:
             ac_minimum_frequency_hz (ViReal64): Specifies the minimum expected frequency component of the input signal
                 in hertz. This parameter affects the DMM only when you set the
-                FUNCTION attribute to AC measurements. NI-DMM uses this
+                function attribute to AC measurements. NI-DMM uses this
                 parameter to calculate the proper aperture for the measurement.
                 The driver sets the AC_MIN_FREQ attribute to this value.
                 The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
@@ -812,7 +812,7 @@ class Session(object):
                 maximum frequency of the device.
 
                 This parameter affects the DMM only when you set the
-                FUNCTION attribute to AC measurements. The driver sets the
+                function attribute to AC measurements. The driver sets the
                 AC_MAX_FREQ attribute to this value. The valid range is 1
                 Hz–300 kHz for the NI 4080/4081/4082 and the NI 4070/4071/4072, 10
                 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
@@ -832,7 +832,7 @@ class Session(object):
         changes to the gain.
 
         Args:
-            adc_calibration (enums.EnabledSetting): Specifies the **ADC_Calibration** setting. The driver sets
+            adc_calibration (enums.ADCCalibration): Specifies the **ADC_Calibration** setting. The driver sets
                 ADC_CALIBRATION to this value.
                 NIDMM_VAL_ADC_CALIBRATION_ON enables **ADC_Calibration**.
                 NIDMM_VAL_ADC_CALIBRATION_OFF disables **ADC_Calibration**. If you
@@ -843,6 +843,7 @@ class Session(object):
                 resolution DC measurement, the driver enables ADC Calibration. For all
                 other measurement configurations, the driver disables
                 **ADC_Calibration**.
+
                 +------------------------------------------------+---------+-----------------------------------------------------------------------------------------------------+
                 | Name                                           | Value   | Description                                                                                         |
                 +================================================+=========+=====================================================================================================+
@@ -853,8 +854,8 @@ class Session(object):
                 | NIDMM_VAL_ADC_CALIBRATION_ON               |  1      | The DMM measures an internal reference to calculate the correct gain for the measurement.           |
                 +------------------------------------------------+---------+-----------------------------------------------------------------------------------------------------+
         '''
-        if type(adc_calibration) is not enums.EnabledSetting:
-            raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
+        if type(adc_calibration) is not enums.ADCCalibration:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ADCCalibration))
         error_code = self.library.niDMM_ConfigureADCCalibration(self.vi, adc_calibration.value)
         errors._handle_error(self, error_code)
         return
@@ -870,7 +871,7 @@ class Session(object):
         DMM does not compensate for zero reading offset.
 
         Args:
-            auto_zero_mode (enums.EnabledSetting): Specifies the **auto_zero_mode**. NI-DMM sets the
+            auto_zero_mode (enums.AutoZero): Specifies the **auto_zero_mode**. NI-DMM sets the
                 AUTO_ZERO attribute to this value.
 
                 ON enables **auto_zero_mode** for each measurement. ONCE enables
@@ -896,8 +897,8 @@ class Session(object):
 
                 .. note::   The NI 4060/4065 does *not* support this setting.
         '''
-        if type(auto_zero_mode) is not enums.EnabledSetting:
-            raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
+        if type(auto_zero_mode) is not enums.AutoZero:
+            raise TypeError('Parameter mode must be of type ' + str(enums.AutoZero))
         error_code = self.library.niDMM_ConfigureAutoZeroMode(self.vi, auto_zero_mode.value)
         errors._handle_error(self, error_code)
         return
@@ -932,6 +933,7 @@ class Session(object):
             current_source (enums.CurrentSource): Specifies the **current_source** provided during diode measurements.
                 For valid ranges, refer to the device sections for your device. The
                 driver sets CURRENT_SOURCE to this value.
+
                 +-------------------------------------+----------+-----------------------------------------------------+
                 | NIDMM_VAL_1_MICROAMP             | 1 µA     | NI 4080/4081/4082 and NI 4070/4071/4072             |
                 +-------------------------------------+----------+-----------------------------------------------------+
@@ -976,6 +978,7 @@ class Session(object):
                 FREQ_VOLTAGE_RANGE to this value. The minimum
                 peak-to-peak signal amplitude that can be detected is 10% of the
                 specified **voltage_range**.
+
                 +-----------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------+
                 | Name                                    | Value   | Description                                                                                                                        |
                 +=========================================+=========+====================================================================================================================================+
@@ -1021,6 +1024,7 @@ class Session(object):
         Args:
             meas_complete_slope (enums.Slope): Specifies the polarity of the signal that is generated. The driver sets
                 MEAS_DEST_SLOPE to this value.
+
                 +--------------------------+-----+------------------------+------------------------------------------------------------------+
                 | Rising Edge              | 0   | NIDMM_VAL_POSITIVE   | The driver triggers on the rising edge of the trigger signal.    |
                 +--------------------------+-----+------------------------+------------------------------------------------------------------+
@@ -1044,12 +1048,12 @@ class Session(object):
         -------
 
         Configures the common attributes of the measurement. These attributes
-        include FUNCTION, RANGE, and
-        NIDMM_ATTR_RESOLUTION_ABSOLUTE.
+        include function, range, and
+        RESOLUTION_ABSOLUTE.
 
         Args:
             measurement_function (enums.Function): Specifies the **measurement_function** used to acquire the measurement.
-                The driver sets FUNCTION to this value.
+                The driver sets function to this value.
             range (ViReal64): Specifies the **range** for the function specified in the
                 **Measurement_Function** parameter. When frequency is specified in the
                 **Measurement_Function** parameter, you must supply the minimum
@@ -1058,7 +1062,7 @@ class Session(object):
                 For all other functions, you must supply a **range** that exceeds the
                 value that you are measuring. For example, you must type in 10 V if you
                 are measuring 9 V. **range** values are coerced up to the closest input
-                **range**. Refer to the RANGE to this value. The default is
+                **range**. Refer to the range to this value. The default is
                 0.02 V.
                 .. note::   The NI 4050, NI 4060, and NI 4065 only support Auto range
                 when the trigger and sample trigger are set to IMMEDIATE.
@@ -1083,7 +1087,7 @@ class Session(object):
                 (-3.0). The default is 0.001 V.
                 .. note::   NI-DMM ignores this parameter for capacitance and inductance
                 measurements on the NI 4072. To achieve better resolution for such
-                measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE
+                measurements, use the LC_NUMBER_MEAS_TO_AVERAGE
                 attribute.
         '''
         if type(measurement_function) is not enums.Function:
@@ -1103,12 +1107,12 @@ class Session(object):
         -------
 
         Configures the common attributes of the measurement. These attributes
-        include FUNCTION, RANGE, and
-        NIDMM_ATTR_RESOLUTION_DIGITS.
+        include function, range, and
+        RESOLUTION_DIGITS.
 
         Args:
             measurement_function (enums.Function): Specifies the **measurement_function** used to acquire the measurement.
-                The driver sets FUNCTION to this value.
+                The driver sets function to this value.
             range (ViReal64): Specifies the range for the function specified in the
                 **Measurement_Function** parameter. When frequency is specified in the
                 **Measurement_Function** parameter, you must supply the minimum
@@ -1117,7 +1121,7 @@ class Session(object):
                 For all other functions, you must supply a range that exceeds the value
                 that you are measuring. For example, you must type in 10 V if you are
                 measuring 9 V. range values are coerced up to the closest input range.
-                Refer to the RANGE to this value. The default is 0.02 V.
+                Refer to the range to this value. The default is 0.02 V.
                 .. note::   The NI 4050, NI 4060, and NI 4065 only support Auto range
                 when the trigger and sample trigger are set to IMMEDIATE.
                 NIDMM_VAL_AUTO_RANGE_ON
@@ -1141,7 +1145,7 @@ class Session(object):
                 (-3.0). The default is 5½.
                 .. note::   NI-DMM ignores this parameter for capacitance and inductance
                 measurements on the NI 4072. To achieve better resolution for such
-                measurements, use the NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE
+                measurements, use the LC_NUMBER_MEAS_TO_AVERAGE
                 attribute.
         '''
         if type(measurement_function) is not enums.Function:
@@ -1157,8 +1161,8 @@ class Session(object):
         -------
 
         Configures the attributes for multipoint measurements. These attributes
-        include TRIGGER_COUNT, NIDMM_ATTR_SAMPLE_COUNT,
-        SAMPLE_TRIGGER, and NIDMM_ATTR_SAMPLE_INTERVAL.
+        include TRIGGER_COUNT, SAMPLE_COUNT,
+        SAMPLE_TRIGGER, and SAMPLE_INTERVAL.
 
         For continuous acquisitions, set TRIGGER_COUNT or
         SAMPLE_COUNT to zero. For more information, refer to
@@ -1216,8 +1220,9 @@ class Session(object):
         than 10 KΩ.
 
         Args:
-            offset_comp_ohms (enums.EnabledSetting): Enables or disables **offset_comp_ohms**. The driver sets
+            offset_comp_ohms (enums.OffsetCompensatedOhms): Enables or disables **offset_comp_ohms**. The driver sets
                 OFFSET_COMP_OHMS to this value.
+
                 +-------------------------------------------------+---------+------------------------------------------+
                 | Name                                            | Value   | Description                              |
                 +=================================================+=========+==========================================+
@@ -1226,8 +1231,8 @@ class Session(object):
                 | NIDMM_VAL_OFFSET_COMP_OHMS_ON              | 1       | On enables **offset_comp_ohms**.       |
                 +-------------------------------------------------+---------+------------------------------------------+
         '''
-        if type(offset_comp_ohms) is not enums.EnabledSetting:
-            raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
+        if type(offset_comp_ohms) is not enums.OffsetCompensatedOhms:
+            raise TypeError('Parameter mode must be of type ' + str(enums.OffsetCompensatedOhms))
         error_code = self.library.niDMM_ConfigureOffsetCompOhms(self.vi, offset_comp_ohms.value)
         errors._handle_error(self, error_code)
         return
@@ -1380,6 +1385,7 @@ class Session(object):
                 triggered for values of either NIDMM_VAL_POSITIVE or
                 NIDMM_VAL_NEGATIVE. The driver sets
                 SAMPLE_TRIGGER_SLOPE to this value.
+
                 +--------------------------+-----+------------------------+------------------------------------------------------------------+
                 | Rising Edge              | 0   | NIDMM_VAL_POSITIVE   | The driver triggers on the rising edge of the trigger signal.    |
                 +--------------------------+-----+------------------------+------------------------------------------------------------------+
@@ -1475,6 +1481,7 @@ class Session(object):
             thermocouple_type (ViInt32): Specifies the type of thermocouple used to measure the temperature.
                 NI-DMM uses this value to set the Thermocouple Type property. The
                 default is NIDMM_VAL_TEMP_TC_J.
+
                 +---------------------------+-----------------------+
                 | NIDMM_VAL_TEMP_TC_B   | Thermocouple type B   |
                 +---------------------------+-----------------------+
@@ -1510,6 +1517,7 @@ class Session(object):
             transducer_type (enums.TemperatureTransducerType): Specifies the type of device used to measure the temperature. NI-DMM
                 uses this value to set the Transducer Type property. The default is
                 NIDMM_VAL_THERMOCOUPLE.
+
                 +----------------------------+----------------+
                 | NIDMM_VAL_2_WIRE_RTD   | 2-wire RTD     |
                 +----------------------------+----------------+
@@ -1576,8 +1584,9 @@ class Session(object):
         Args:
             trigger_slope (enums.Slope): Specifies the polarity of the trigger signal on which the measurement is
                 triggered for values of either NIDMM_VAL_POSITIVE or
-                NIDMM_VAL_NEGATIVE. The driver sets the NIDMM_ATTR_TRIGGER_SLOPE
+                NIDMM_VAL_NEGATIVE. The driver sets the TRIGGER_SLOPE
                 attribute to this value.
+
                 +----------------------------------+-----+------------------------------------------------------------------+
                 | NIDMM_VAL_POSITIVE             | 0   | The driver triggers on the rising edge of the trigger signal.    |
                 +----------------------------------+-----+------------------------------------------------------------------+
@@ -1598,7 +1607,8 @@ class Session(object):
 
         Args:
             measurement_function (enums.Function): Specifies the **measurement_function** used in a waveform acquisition.
-                The driver sets FUNCTION to this value.
+                The driver sets function to this value.
+
                 +-------------------------------------------+--------+--------------------+
                 | NIDMM_VAL_WAVEFORM_VOLTAGE (default)   | 1003   | Voltage Waveform   |
                 +-------------------------------------------+--------+--------------------+
@@ -1606,7 +1616,7 @@ class Session(object):
                 +-------------------------------------------+--------+--------------------+
             range (ViReal64): Specifies the expected maximum amplitude of the input signal and sets
                 the **range** for the **Measurement_Function**. NI-DMM sets
-                RANGE to this value. **range** values are coerced up to the
+                range to this value. **range** values are coerced up to the
                 closest input **range**. The default is 10.0.
 
                 For valid ranges refer to the topics in
@@ -1645,6 +1655,7 @@ class Session(object):
         Args:
             waveform_coupling (enums.WaveformCouplingMode): Selects DC or AC coupling. The driver sets
                 WAVEFORM_COUPLING to this value.
+
                 +------------------------------------------------+---------+---------------+
                 | Name                                           | Value   | Description   |
                 +================================================+=========+===============+
@@ -1732,6 +1743,7 @@ class Session(object):
 
         Returns:
             reading_array (ViReal64): An array of measurement values.
+
                 +------------+-------------------------------------------------------------------------------------------------------------------------------+
                 | |image0|   | **Note**   The size of the **reading_array** must be at least the size that you specify for the **Array_Size** parameter.   |
                 +------------+-------------------------------------------------------------------------------------------------------------------------------+
@@ -1790,18 +1802,18 @@ class Session(object):
 
         Args:
             measurement_function (ViInt32): Specifies the **measurement_function** used to acquire the measurement.
-                The driver sets FUNCTION to this value.
-            range (ViReal64): Specifies the RANGE used to acquire the **Measurement**.
+                The driver sets function to this value.
+            range (ViReal64): Specifies the range used to acquire the **Measurement**.
             resolution (ViReal64): Specifies the RESOLUTION_ABSOLUTE of the **Measurement**.
             measurement (ViReal64): Specifies the measured value returned from the DMM.
 
         Returns:
             mode_string (ViChar): Returns a string containing the units of the **Measurement** mode.
-            range_string (ViChar): Returns the RANGE of the **Measurement**, formatted into a
+            range_string (ViChar): Returns the range of the **Measurement**, formatted into a
                 string with the correct number of display digits.
             data_string (ViChar): Returns the **Measurement**, formatted according to the
-                FUNCTION, RANGE, and
-                NIDMM_ATTR_RESOLUTION_ABSOLUTE.
+                function, range, and
+                RESOLUTION_ABSOLUTE.
         '''
         mode_string_ctype = ctypes_types.ViChar_ctype(0)
         range_string_ctype = ctypes_types.ViChar_ctype(0)
@@ -1837,8 +1849,9 @@ class Session(object):
                 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50,
                 the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
             aperture_time_units (enums.ApertureTimeUnits): Indicates the units of aperture time as powerline cycles (PLCs) or
-                seconds. Returns the value of the NIDMM_ATTR_APERTURE_TIME_UNITS
+                seconds. Returns the value of the APERTURE_TIME_UNITS
                 attribute.
+
                 +-----------------------------------+-----+--------------------+
                 | NIDMM_VAL_SECONDS               | 0   | Seconds            |
                 +-----------------------------------+-----+--------------------+
@@ -2337,6 +2350,7 @@ class Session(object):
         Returns:
             self_cal_supported (ViBoolean): Returns whether Self Cal is supported for the device specified by the
                 given session.
+
                 +-------------+-----+---------------------------------------------------------------+
                 | VI_TRUE    | 1   | The DMM that you are using can perform self-calibration.      |
                 +-------------+-----+---------------------------------------------------------------+
@@ -2377,6 +2391,7 @@ class Session(object):
                 NI-DMM automatically performs this query, so setting this parameter is
                 not necessary.
                 Defined Values:
+
                 +----------------------+-----+--------------------+
                 | VI_TRUE (default)   | 1   | Perform ID Query   |
                 +----------------------+-----+--------------------+
@@ -2385,6 +2400,7 @@ class Session(object):
             reset_device (ViBoolean): Specifies whether to reset the instrument during the initialization
                 procedure.
                 Defined Values:
+
                 +----------------------+-----+----------------+
                 | VI_TRUE (default)   | 1   | Reset Device   |
                 +----------------------+-----+----------------+
@@ -2399,9 +2415,9 @@ class Session(object):
                 +--------------------+-------------------------------------+---------------------+------+
                 | QueryInstrStatus   | QUERY_INSTR_STATUS   | VI_FALSE           | 0    |
                 +--------------------+-------------------------------------+---------------------+------+
-                | Cache              | CACHE                  | VI_TRUE            | 1    |
+                | Cache              | cache                  | VI_TRUE            | 1    |
                 +--------------------+-------------------------------------+---------------------+------+
-                | Simulate           | SIMULATE               | VI_FALSE           | 0    |
+                | Simulate           | simulate               | VI_FALSE           | 0    |
                 +--------------------+-------------------------------------+---------------------+------+
                 | RecordCoercions    | RECORD_COERCIONS      | VI_FALSE           | 0    |
                 +--------------------+-------------------------------------+---------------------+------+
@@ -2454,6 +2470,7 @@ class Session(object):
 
         Args:
             measurement_value (ViReal64): The measured value returned from the DMM.
+
                 +------------+------------------------------------------------------------------------------------------------------------------------------+
                 | |image0|   | **Note**   If an overrange condition occurs, the **measurement_value** contains an IEEE-defined NaN (Not a Number) value.   |
                 +------------+------------------------------------------------------------------------------------------------------------------------------+
@@ -2463,6 +2480,7 @@ class Session(object):
         Returns:
             is_over_range (ViBoolean): Returns whether the measurement value is a valid measurement or an
                 overrange condition.
+
                 +-------------+-----+-------------------------------------------------------------+
                 | VI_TRUE    | 1   | The value indicates that an overrange condition occurred.   |
                 +-------------+-----+-------------------------------------------------------------+
@@ -2482,6 +2500,7 @@ class Session(object):
 
         Args:
             measurement_value (ViReal64): The measured value returned from the DMM.
+
                 +------------+------------------------------------------------------------------------------------------------------------------------------+
                 | |image0|   | **Note**   If an overrange condition occurs, the **measurement_value** contains an IEEE-defined NaN (Not a Number) value.   |
                 +------------+------------------------------------------------------------------------------------------------------------------------------+
@@ -2491,6 +2510,7 @@ class Session(object):
         Returns:
             is_under_range (ViBoolean): Returns whether the **Measurement_Value** is a valid measurement or an
                 underrange condition.
+
                 +-------------+-----+--------------------------------------------------------------+
                 | VI_TRUE    | 1   | The value indicates that an underrange condition occurred.   |
                 +-------------+-----+--------------------------------------------------------------+
@@ -2596,7 +2616,7 @@ class Session(object):
         measurements for the current capacitance/inductance range, and returns
         open cable compensation **conductance** and **susceptance** values. You
         can use the return values of this function as inputs to
-        FUNCTION attribute is not set to NIDMM_VAL_CAPACITANCE
+        function attribute is not set to NIDMM_VAL_CAPACITANCE
         (1005) or NIDMM_VAL_INDUCTANCE (1006).
 
         Returns:
@@ -2620,7 +2640,7 @@ class Session(object):
         Performs the short cable compensation measurements for the current
         capacitance/inductance range, and returns short cable compensation
         **resistance** and **reactance** values. You can use the return values
-        of this function as inputs to FUNCTION attribute is not set
+        of this function as inputs to function attribute is not set
         to NIDMM_VAL_CAPACITANCE (1005) or NIDMM_VAL_INDUCTANCE (1006).
 
         Returns:
@@ -2824,7 +2844,7 @@ class Session(object):
         Sends a command to trigger the DMM. Call this function if you have
         configured either the TRIGGER_SOURCE or
         SAMPLE_TRIGGER attributes. If the
-        TRIGGER_SOURCE and/or NIDMM_ATTR_SAMPLE_TRIGGER
+        TRIGGER_SOURCE and/or SAMPLE_TRIGGER
         attributes are set to NIDMM_VAL_EXTERNAL or NIDMM_VAL_TTL\ *n*, you
         can use this function to override the trigger source that you configured
         and trigger the device. The NI 4050 and NI 4060 are not supported.
