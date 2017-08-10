@@ -109,7 +109,38 @@ def test_acquisition(device_info):
         with session.initiate():
             print(session.fetch(1000))
 
+			
+def test_method_call_with_zero_parameter(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        assert session.get_aperture_time_info()[1] == 0 # Assuming default aperture time unit will be seconds
+   
+        
+def test_method_call_with_one_parameter(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        session.configure_power_line_frequency(60)
 
+        
+def test_invalid_method_call(device_info):
+    #calling a function, without parameter, But it has a mandate parameter
+    with nidmm.Session(device_info['name']) as session:
+        try:
+            session.configure_power_line_frequency()
+            assert False
+        except TypeError as e:
+            print (e)
+            pass
+          
+
+def test_method_call_with_two_parameter(device_info):
+    # Calling Configure Trigger function and asserting True if any error occurred while function call.
+    with nidmm.Session(device_info['name']) as session:
+        try:
+            session.configure_trigger(nidmm.TriggerSource.IMMEDIATE, 1)
+        except nidmm.Error as e:
+            print (e)
+            assert True
+
+            
 def test_multi_point_acquisition(device_info):
     with nidmm.Session(device_info['name']) as session:
         session.configure_multi_point(4, 2, nidmm.SampleTrigger.IMMEDIATE, 0)

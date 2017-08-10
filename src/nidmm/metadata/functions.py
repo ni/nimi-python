@@ -3,6 +3,7 @@
 #  If the generated information is not correct for python
 #  changes can be made in functions_addon.py and they will be
 #  applied at build time
+
 functions = {
     'Abort': {
         'purpose': '''
@@ -5701,4 +5702,3 @@ This error code indicates that the DMM should be repaired.
         ],
     },
 }
-
