@@ -195,18 +195,10 @@ class Session(object):
 
     ''' These are code-generated '''
 
-    def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id):
-        attribute_value_buffer_size = 0
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(attribute_value_buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)
-        # Don't use _handle_error, because positive value in error_code means size, not warning.
-        if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
-        attribute_value_buffer_size = error_code
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(attribute_value_buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)
+    def _close_installed_devices_session(self, handle):
+        error_code = self.library.niModInst_CloseInstalledDevicesSession(self.handle)
         errors._handle_error(self, error_code)
-        return attribute_value_ctype.value.decode("ascii")
+        return
 
     def _get_installed_device_attribute_vi_int32(self, handle, index, attribute_id):
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
@@ -221,11 +213,6 @@ class Session(object):
         errors._handle_error(self, error_code)
         return handle_ctype.value, item_count_ctype.value
 
-    def _close_installed_devices_session(self, handle):
-        error_code = self.library.niModInst_CloseInstalledDevicesSession(self.handle)
-        errors._handle_error(self, error_code)
-        return
-
     def get_extended_error_info(self):
         error_info_buffer_size = 0
         error_info_ctype = ctypes.cast(ctypes.create_string_buffer(error_info_buffer_size), ctypes_types.ViString_ctype)
@@ -238,4 +225,17 @@ class Session(object):
         error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
         errors._handle_error(self, error_code)
         return error_info_ctype.value.decode("ascii")
+
+    def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id):
+        attribute_value_buffer_size = 0
+        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(attribute_value_buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        attribute_value_buffer_size = error_code
+        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(attribute_value_buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)
+        errors._handle_error(self, error_code)
+        return attribute_value_ctype.value.decode("ascii")
 

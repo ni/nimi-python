@@ -24,10 +24,21 @@ def get_library_type():
         raise errors.UnsupportedConfigurationError
 
 
-def get_library():
-    try:
-        library = ctypes_library.NimodinstCtypesLibrary(get_library_name(), get_library_type())
-    except OSError:
-        raise errors.DriverNotInstalledError()
+class LibrarySingleton(object):
+    instance = None
 
-    return library
+    def __init__(self):
+        if LibrarySingleton.instance is None:
+            try:
+                LibrarySingleton.instance = ctypes_library.NimodinstCtypesLibrary(get_library_name(), get_library_type())
+            except OSError:
+                raise errors.DriverNotInstalledError()
+
+        self._library = LibrarySingleton.instance
+
+    def get_library(self):
+        return self._library
+
+
+def get_library():
+    return LibrarySingleton().get_library()
