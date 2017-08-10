@@ -28,6 +28,7 @@ def merge_dicts(into, outof):
                     if re.search(item, item2):
                         into[item2] = outof[item]
 
+# Update generated functions data with hand maintained data
 from metadata.functions_addon import functions_codegen_method
 from metadata.functions_addon import functions_enums
 from metadata.functions_addon import functions_params_types
@@ -37,6 +38,11 @@ merge_dicts(functions, functions_codegen_method)
 merge_dicts(functions, functions_enums)
 merge_dicts(functions, functions_params_types)
 merge_dicts(functions, functions_buffer_info)
+
+# Update generated attribute data with hand maintained data
+from metadata.attributes_addon import attributes_c_names
+
+merge_dicts(attributes, attributes_c_names)
 
 __version__ = config['module_version']
 

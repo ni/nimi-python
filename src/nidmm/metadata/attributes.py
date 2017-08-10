@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+# This file is code generated, do not make changes here
+#  If the generated information is not correct for python
+#  changes can be made in attributes_addon.py and they will be
+#  applied at build time
+
 attributes = {
     1050002: {
         'access': 'read-write',
@@ -558,7 +563,7 @@ source on which the DMM is triggered.
 Specifies how the DMM acquires data.
 
 .. note::
-   The NI 4050 and NI 4060 are not supported.  
+   The NI 4050 and NI 4060 are not supported.
 
 When you call niDMM Config Measurement , NI-DMM sets this property to
 IVIDMM Mode. When you call niDMM Configure Waveform Acquisition , NI-DMM
@@ -1144,7 +1149,7 @@ example, if the Function property is set to DC Volts, the units are
 volts.
 
 .. note::
-   The NI 4050, NI 4060, and NI 4065 only support Auto Range when the trigger and sample trigger are set to Immediate.  
+   The NI 4050, NI 4060, and NI 4065 only support Auto Range when the trigger and sample trigger are set to Immediate.
 
 +----------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | (-1.0)   | Auto Range On     | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                                |
