@@ -13,7 +13,7 @@ pp = pprint.PrettyPrinter(indent=4)
 # Coding convention transformation functions.
 
 # TODO(marcoskirsch): not being used
-def  shoutcase_to_camelcase(shout_string):
+def shoutcase_to_camelcase(shout_string):
     '''Converts a C-style SHOUT_CASE string to camelCase'''
     components = shout_string.split('_')
     return components[0].lower() + "".join(component.title() for component in components[1:])
@@ -58,7 +58,7 @@ def extract_ivi_dance_parameter(parameters):
     There can be only one ivi-dance parameter so return that individual parameter and not a list
     '''
     param = [x for x in parameters if x['ivi-dance']]
-    assert len(param) <= 1, '{1} ivi-dance parameters. No more than one is allowed'.format(len(param))
+    assert len(param) <= 1, '{0} ivi-dance parameters. No more than one is allowed'.format(len(param))
     if len(param) == 0:
         return None
     return param[0]
@@ -296,7 +296,7 @@ def get_rst_header_snippet(t, header_level='='):
 
 # We need this in the global namespace so we can reference it from the sub() callback
 config = None
-def replace_func_python_name_no_link(m):
+def replace_func_python_name_no_link(f_match):
     '''callback function for regex sub command when link not needed
 
     Args:
@@ -310,7 +310,7 @@ def replace_func_python_name_no_link(m):
         fname = config['functions'][f_match.group(1)]['python_name']
     return '{0} '.format(fname)
 
-def replace_func_python_name_with_link(m):
+def replace_func_python_name_with_link(f_match):
     '''callback function for regex sub command when link needed
 
     Args:
@@ -324,13 +324,57 @@ def replace_func_python_name_with_link(m):
         fname = config['functions'][f_match.group(1)]['python_name']
     return ':py:func:`{0}.{1}` '.format(config['module_name'], fname)
 
+def find_attribute_by_name(attributes, name):
+    '''Returns the attribute with the given name if there is one
+
+    There should only be one so return that individual parameter and not a list
+    '''
+    attr = [attributes[x] for x in attributes if attributes[x]['name'] == name]
+    assert len(attr) <= 1, '{0} attributes with name {1}. No more than one is allowed'.format(len(attr), name)
+    if len(attr) == 0:
+        return None
+    return attr[0]
+
+def replace_attribute_python_name_no_link(a_match):
+    '''callback function for regex sub command when link not needed
+
+    Args:
+        m (match object): Match object from the attribute substitution command
+
+    Returns:
+        str: python name of the attribute
+    '''
+    aname = "Unknown"
+    if a_match:
+        attr = find_attribute_by_name(config['attributes'], a_match.group(1))
+        aname = a_match.group(1)
+        if attr:
+            aname = attr['name'].lower()
+    return '{0} '.format(aname)
+
+def replace_attribute_python_name_with_link(a_match):
+    '''callback function for regex sub command when link needed
+
+    Args:
+        m (match object): Match object from the attribute substitution command
+
+    Returns:
+        str: rst link to attribute using python name
+    '''
+    aname = "Unknown"
+    if a_match:
+        attr = find_attribute_by_name(config['attributes'], a_match.group(1))
+        aname = a_match.group(1)
+        if attr:
+            aname = attr['name'].lower()
+    return ':py:data:`{0}.{1}` '.format(config['module_name'], aname)
+
 def fix_references(doc, cfg, make_link=False):
     '''Replace ATTR and function mentions in documentation
 
     Args:
         doc (str): documentation string to be updated
-        funcs (dict): functions dictionary from metadata - needed for proper name replacement
-        config (dict): config dictionary from metadata - currently only used for module_name
+        config (dict): config dictionary from metadata
         make_link (bool): Default False
             True - references are replaced with a rst style link
             False - references are replaced with just the python name
@@ -347,10 +391,10 @@ def fix_references(doc, cfg, make_link=False):
     enum_re = re.compile('enums.(.+)')
 
     if make_link:
-        doc = attr_re.sub(':py:data:`{0}.\g<1>` '.format(config['module_name']), doc)
+        doc = attr_re.sub(replace_attribute_python_name_with_link, doc)
         doc = func_re.sub(replace_func_python_name_with_link, doc)
     else:
-        doc = attr_re.sub('\g<1> ', doc)
+        doc = attr_re.sub(replace_attribute_python_name_no_link, doc)
         doc = func_re.sub(replace_func_python_name_no_link, doc)
         doc = doc.replace('\_', '_')
     return doc
@@ -553,4 +597,5 @@ def get_python_type_from_visa_type(visa_type):
     p_type = v_type().python_type()
 
     return p_type
+
 
