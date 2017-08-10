@@ -778,15 +778,15 @@ class Session(object):
         return
 
     def configure_adc_calibration(self, adc_calibration):
-        if type(adc_calibration) is not enums.EnabledSetting:
-            raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
+        if type(adc_calibration) is not enums.ADCCalibration:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ADCCalibration))
         error_code = self.library.niDMM_ConfigureADCCalibration(self.vi, adc_calibration.value)
         errors._handle_error(self, error_code)
         return
 
     def configure_auto_zero_mode(self, auto_zero_mode):
-        if type(auto_zero_mode) is not enums.EnabledSetting:
-            raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
+        if type(auto_zero_mode) is not enums.AutoZero:
+            raise TypeError('Parameter mode must be of type ' + str(enums.AutoZero))
         error_code = self.library.niDMM_ConfigureAutoZeroMode(self.vi, auto_zero_mode.value)
         errors._handle_error(self, error_code)
         return
@@ -851,8 +851,8 @@ class Session(object):
         return
 
     def configure_offset_comp_ohms(self, offset_comp_ohms):
-        if type(offset_comp_ohms) is not enums.EnabledSetting:
-            raise TypeError('Parameter mode must be of type ' + str(enums.EnabledSetting))
+        if type(offset_comp_ohms) is not enums.OffsetCompensatedOhms:
+            raise TypeError('Parameter mode must be of type ' + str(enums.OffsetCompensatedOhms))
         error_code = self.library.niDMM_ConfigureOffsetCompOhms(self.vi, offset_comp_ohms.value)
         errors._handle_error(self, error_code)
         return
