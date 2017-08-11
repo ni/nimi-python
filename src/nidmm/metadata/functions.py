@@ -1016,6 +1016,14 @@ None.
                 'direction': 'in',
                 'long_description': '''
 Sets the expected maximum amplitude of the input signal. Refer to the
+`NI 4080 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4080_functional_overview/>`__,
+`NI 4081 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4081_functional_overview/>`__,
+`NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4082/>`__,
+`NI 4070 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4070_functional_overview/>`__,
+`NI 4071 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4071_functional_overview/>`__,
+and
+`NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4072/>`__
+sections for a list of valid values. NI-DMM sets
 NIDMM\_ATTR\_FREQ\_VOLTAGE\_RANGE to this value. The minimum
 peak-to-peak signal amplitude that can be detected is 10% of the
 specified **voltage\_range**.
@@ -1038,8 +1046,8 @@ specified **voltage\_range**.
         'purpose': '''
 Specifies the destination of the DMM Measurement Complete (MC) signal.
 Refer to
-`Triggering <javascript:LaunchHelp('dmm.chm::/trigger.html')>`__ for
-more information.
+`Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
+for more information.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -1067,7 +1075,7 @@ signal is commonly referred to as Voltmeter Complete.
                 'note': '''
 To determine which values are supported by each device, refer to the
 `LabWindows/CVI Trigger
-Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
+Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
 section.
 ''',
                 'type': 'ViInt32',
@@ -1153,8 +1161,10 @@ type in 100 Hz if you are measuring 101 Hz or higher.
 For all other functions, you must supply a **range** that exceeds the
 value that you are measuring. For example, you must type in 10 V if you
 are measuring 9 V. **range** values are coerced up to the closest input
-**range**. Refer to the NIDMM\_ATTR\_RANGE to this value. The default is
-0.02 V.
+**range**. Refer to the `Devices
+Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
+for a list of valid ranges. The driver sets NIDMM\_ATTR\_RANGE to this
+value. The default is 0.02 V.
 
 +---------------------------------+--------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | NIDMM\_VAL\_AUTO\_RANGE\_ON     | -1.0   | NI-DMM performs an Auto range before acquiring the measurement.                                                                                                                                          |
@@ -1186,8 +1196,7 @@ NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
                 'note': '''
 NI-DMM ignores this parameter for capacitance and inductance
 measurements on the NI 4072. To achieve better resolution for such
-measurements, use the `
-NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE.html')>`__
+measurements, use the NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE
 attribute.
 ''',
                 'type': 'ViReal64',
@@ -1236,7 +1245,10 @@ type in 100 Hz if you are measuring 101 Hz or higher.
 For all other functions, you must supply a range that exceeds the value
 that you are measuring. For example, you must type in 10 V if you are
 measuring 9 V. range values are coerced up to the closest input range.
-Refer to the NIDMM\_ATTR\_RANGE to this value. The default is 0.02 V.
+Refer to the `Devices
+Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
+for a list of valid ranges. The driver sets NIDMM\_ATTR\_RANGE to this
+value. The default is 0.02 V.
 
 +---------------------------------+--------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | NIDMM\_VAL\_AUTO\_RANGE\_ON     | -1.0   | NI-DMM performs an Auto range before acquiring the measurement.                                                                                                                                          |
@@ -1259,8 +1271,11 @@ trigger and sample trigger are set to IMMEDIATE.
                 'direction': 'in',
                 'long_description': '''
 Specifies the resolution of the measurement in digits. The driver sets
-the NIDMM\_ATTR\_RESOLUTION\_DIGITS attribute to this value. This
-parameter is ignored when the **Range** parameter is set to
+the `Devices
+Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
+for a list of valid ranges. The driver sets
+NIDMM\_ATTR\_RESOLUTION\_DIGITS attribute to this value. This parameter
+is ignored when the **Range** parameter is set to
 NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
 (-3.0). The default is 5½.
 ''',
@@ -1268,8 +1283,7 @@ NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
                 'note': '''
 NI-DMM ignores this parameter for capacitance and inductance
 measurements on the NI 4072. To achieve better resolution for such
-measurements, use the `
-NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'caNIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE.html')>`__
+measurements, use the NIDMM\_ATTR\_LC\_NUMBER\_MEAS\_TO\_AVERAGE
 attribute.
 ''',
                 'type': 'ViReal64',
@@ -1330,7 +1344,7 @@ Immediate.
                 'note': '''
 To determine which values are supported by each device, refer to the
 `LabWindows/CVI Trigger
-Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
+Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
 section.
 ''',
                 'type': 'ViInt32',
@@ -1680,10 +1694,8 @@ NIDMM\_ATTR\_SAMPLE\_TRIGGER\_SLOPE to this value.
     'ConfigureShortCableCompValues': {
         'purpose': '''
 For the NI 4082 and NI 4072 only, configures the
-`NIDMM\_ATTR\_SHORT\_CABLE\_COMP\_RESISTANCE <javascript:LaunchHelp('dmmcref.chm::/caNIDMM_ATTR_SHORT_CABLE_COMP_RESISTANCE.html')>`__
-and
-`NIDMM\_ATTR\_SHORT\_CABLE\_COMP\_REACTANCE <javascript:LaunchHelp('dmmcref.chm::/caNIDMM_ATTR_SHORT_CABLE_COMP_REACTANCE.html')>`__
-attributes.
+NIDMM\_ATTR\_SHORT\_CABLE\_COMP\_RESISTANCE and
+NIDMM\_ATTR\_SHORT\_CABLE\_COMP\_REACTANCE attributes.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -1926,9 +1938,9 @@ NIDMM\_VAL\_THERMOCOUPLE.
     'ConfigureTrigger': {
         'purpose': '''
 Configures the DMM **trigger_source** and **trigger_delay**. Refer to
-`Triggering <javascript:LaunchHelp('dmm.chm::/trigger.html')>`__ and
-`Using
-Switches <javascript:LaunchHelp('dmm.chm::/switch_selection.html')>`__
+`Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
+and `Using
+Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__
 for more information.
 ''',
         'returns': 'ViStatus',
@@ -1957,7 +1969,7 @@ before triggering the DMM.
                 'note': '''
 To determine which values are supported by each device, refer to the
 `LabWindows/CVI Trigger
-Routing <javascript:LaunchHelp('dmm.chm::/CVItrigger_routing.html')>`__
+Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
 section.
 ''',
                 'type': 'ViInt32',
@@ -1968,13 +1980,12 @@ section.
                 'long_description': '''
 Specifies the time that the DMM waits after it has received a trigger
 before taking a measurement. The driver sets the
-`NIDMM\_ATTR\_TRIGGER\_DELAY <javascript:LaunchHelp('dmmcref.chm::/caNIDMM_ATTR_TRIGGER_DELAY.html')>`__
-attribute to this value. By default, **trigger\_delay** is
-NIDMM\_VAL\_AUTO\_DELAY (-1), which means the DMM waits an appropriate
-settling time before taking the measurement. On the NI 4060, if you set
-**trigger\_delay** to 0, the DMM does not settle before taking the
-measurement. The NI 4065 and NI 4070/4071/4072 use the value specified
-in **trigger\_delay** as additional settling time.
+NIDMM\_ATTR\_TRIGGER\_DELAY attribute to this value. By default,
+**trigger\_delay** is NIDMM\_VAL\_AUTO\_DELAY (-1), which means the DMM
+waits an appropriate settling time before taking the measurement. On the
+NI 4060, if you set **trigger\_delay** to 0, the DMM does not settle
+before taking the measurement. The NI 4065 and NI 4070/4071/4072 use the
+value specified in **trigger\_delay** as additional settling time.
 ''',
                 'name': 'triggerDelay',
                 'note': '''
@@ -2069,7 +2080,7 @@ NIDMM\_ATTR\_RANGE to this value. **range** values are coerced up to the
 closest input **range**. The default is 10.0.
 
 For valid ranges refer to the topics in
-`Devices <javascript:LaunchHelp('dmm.chm::/Devices.html')>`__.
+`Devices <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__.
 
 Auto-ranging is not supported during waveform acquisitions.
 ''',
@@ -2101,7 +2112,7 @@ value.
 To calculate the maximum and minimum number of waveform points that you
 can acquire in one acquisition, refer to the `Waveform Acquisition
 Measurement
-Cycle <javascript:LaunchHelp('dmm.chm::/waveform_cycle.html')>`__.
+Cycle <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/waveform_cycle/>`__.
 
 The default value is 500.
 ''',
@@ -2154,9 +2165,7 @@ NIDMM\_ATTR\_WAVEFORM\_COUPLING to this value.
         'purpose': '''
 Controls the DMM. Use this function if you want a parameter change to be
 immediately reflected in the hardware. Use this function before calling
-`
-niDMM\_Initiate <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cvinidMM_Initiate.html')>`__
-to make the initiate call as quickly as possible.
+nidMM\_Initiate to make the initiate call as quickly as possible.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -2378,9 +2387,8 @@ automatically.
                 'long_description': '''
 Specifies the number of waveform points to return. You specify the total
 number of points that the DMM acquires in the **Waveform Points**
-parameter of `
-niDMM\_ConfigureWaveformAcquisition <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_ConfigureWaveformAcquisition.htm')>`__.
-The default value is 1.
+parameter of niDMM\_ConfigureWaveformAcquisition. The default value is
+1.
 ''',
                 'name': 'arraySize',
                 'type': 'ViInt32',
@@ -3097,10 +3105,8 @@ None.
                 'direction': 'out',
                 'long_description': '''
 Returns the value of maximum string length that can be stored in the
-EEPROM using `
-niDMM\_SetCalUserDefinedInfo <javascript:LaunchMergedHelp('dmm.chm',%20'dmmcref.chm',%20'cviniDMM_SetCalUserDefinedInfo.htm')>`__.
-The **info\_size** value is given in characters, but it does not include
-the termination character.
+EEPROM using niDMM\_SetCalUserDefinedInfo. The **info\_size** value is
+given in characters, but it does not include the termination character.
 ''',
                 'name': 'infoSize',
                 'type': 'ViInt32',
@@ -3632,7 +3638,7 @@ is valid:
 | Contains the **resource\_name** of the device to initialize. The
   **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
-  Documentation <javascript:LaunchHelp('dmm.chm::/related_documentation.html')>`__
+  Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
   information about configuring and testing the DMM in MAX.
 | Valid Syntax:
@@ -3692,7 +3698,7 @@ This function completes the following tasks:
 | Contains the **resource\_name** of the device to initialize. The
   **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
-  Documentation <javascript:LaunchHelp('dmm.chm::/related_documentation.html')>`__
+  Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
   information about configuring and testing the DMM in MAX.
 | Valid Syntax:
@@ -3779,8 +3785,8 @@ parameter. You do not have to specify all of the attributes and may
 leave any of them out (those left out use the default value).
 
 Refer to `Simulating NI Digital
-Multimeters <javascript:LaunchHelp('dmm.chm::/simulation.html')>`__ for
-more information.
+Multimeters <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/simulation/>`__
+for more information.
 ''',
                 'name': 'optionString',
                 'type': 'ViString',
@@ -4028,8 +4034,7 @@ For the NI 4082 and NI 4072 only, performs the open cable compensation
 measurements for the current capacitance/inductance range, and returns
 open cable compensation **conductance** and **susceptance** values. You
 can use the return values of this function as inputs to
-NIDMM\_ATTR\_FUNCTION attribute is not set to NIDMM\_VAL\_CAPACITANCE
-(1005) or NIDMM\_VAL\_INDUCTANCE (1006).
+niDMM\_ConfigureOpenCableCompValues.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -4072,8 +4077,7 @@ None.
 Performs the short cable compensation measurements for the current
 capacitance/inductance range, and returns short cable compensation
 **resistance** and **reactance** values. You can use the return values
-of this function as inputs to NIDMM\_ATTR\_FUNCTION attribute is not set
-to NIDMM\_VAL\_CAPACITANCE (1005) or NIDMM\_VAL\_INDUCTANCE (1006).
+of this function as inputs to niDMM\_ConfigureShortCableCompValues.
 ''',
         'returns': 'ViStatus',
         'codegen_method': 'public',
@@ -5081,7 +5085,7 @@ This function completes the following tasks:
 | Contains the **resource\_name** of the device to initialize. The
   **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
-  Documentation <javascript:LaunchHelp('dmm.chm::/related_documentation.html')>`__
+  Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
   information about configuring and testing the DMM in MAX.
 | Valid Syntax:
