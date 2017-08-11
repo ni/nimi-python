@@ -139,5 +139,5 @@ def test_writeonly_attribute(device_info):
         try:
             session.channel_count = 5
         except nidmm.Error as e:
-            assert e.code == -1074135027
+            assert e.code == -1074135027 #Error : Attribute is read-only.
 
