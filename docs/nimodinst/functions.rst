@@ -56,7 +56,9 @@ NI-ModInst Functions
     :type driver: ViConstString
 
     :rtype: tuple (handle, item_count)
+
         WHERE
+
         handle (ViSession): 
 
         item_count (ViInt32): 
