@@ -449,8 +449,8 @@ def get_function_rst(fname, config, indent=0):
 
     output_params = extract_output_parameters(function['parameters'])
     if len(output_params) > 1:
-        rst += '\n\n' + (' ' * indent) + ':rtype: tuple ('+ ', '.join([p['python_name'] for p in output_params]) + ')\n'
-        rst += (' ' * (indent + 4)) + 'WHERE'
+        rst += '\n\n' + (' ' * indent) + ':rtype: tuple ('+ ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
+        rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type']) + '\n'
             if 'long_description' in p:
