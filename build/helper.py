@@ -294,6 +294,14 @@ def get_rst_header_snippet(t, header_level='='):
     ret_val += header_level * len(t)
     return ret_val
 
+def get_rst_note_snippet(d, config, indent=0):
+    '''Returns a rst formatted note if 'note' exists in the dictionary'''
+    if 'note' in d:
+        note = '\n\n' + (' ' * indent) + '.. note:: ' + get_indented_docstring_snippet(fix_references(d['note'], config, make_link=True), indent + 4)
+        return note
+    else:
+        return ''
+
 # We need this in the global namespace so we can reference it from the sub() callback
 config = None
 def replace_func_python_name_no_link(f_match):
@@ -433,6 +441,7 @@ def get_function_rst(fname, config, indent=0):
     if 'long_description' in function:
         rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_references(function['long_description'], config, make_link=True), indent)
 
+    rst += get_rst_note_snippet(function, config, indent)
     input_params = extract_input_parameters(function['parameters'])
     if len(input_params) > 0:
         rst += '\n'
@@ -440,6 +449,7 @@ def get_function_rst(fname, config, indent=0):
         rst +=  '\n' + (' ' * indent) + ':param {0}: '.format(p['python_name']) + '\n'
         if 'long_description' in p:
             rst += (' ' * (indent + 4)) + get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=True), indent + 4) + '\n'
+        rst += get_rst_note_snippet(p, config, indent + 4)
         p_type = p['python_type']
         if p_type.startswith('enums.'):
             p_type = p_type.replace('enums.', '')
@@ -455,6 +465,7 @@ def get_function_rst(fname, config, indent=0):
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type']) + '\n'
             if 'long_description' in p:
                 rst += (' ' * (indent + 8)) + get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=True), indent + 8) + '\n'
+            rst += get_rst_note_snippet(p, config, indent + 4)
     elif len(output_params) == 1:
         p = output_params[0]
         rst += '\n\n' + (' ' * indent) + ':rtype: '+ p['python_type']
@@ -475,8 +486,10 @@ def get_function_docstring(fname, config, indent=0):
     function = config['functions'][fname]
     if 'purpose' in function:
         docstring += get_indented_docstring_snippet(fix_references(function['purpose'], config, make_link=False), indent)
-    elif 'long_description' in function:
+    if 'long_description' in function:
         docstring += get_indented_docstring_snippet(fix_references(function['long_description'], config, make_link=False), indent)
+    if 'note' in function:
+        docstring += get_indented_docstring_snippet(fix_references('Note: ' + function['note'], config, make_link=False), indent)
 
     input_params = extract_input_parameters(function['parameters'])
     if len(input_params) > 0:
@@ -485,6 +498,8 @@ def get_function_docstring(fname, config, indent=0):
         docstring +=  '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
         if 'long_description' in p:
             docstring += get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=False), indent + 8)
+        if 'note' in p:
+            docstring += get_indented_docstring_snippet(fix_references('Note: ' + p['note'], config, make_link=False), indent + 8)
 
 
     output_params = extract_output_parameters(function['parameters'])
@@ -494,6 +509,8 @@ def get_function_docstring(fname, config, indent=0):
             docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
             if 'long_description' in p:
                 docstring += get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=False), indent + 8)
+            if 'note' in p:
+                docstring += get_indented_docstring_snippet(fix_references('Note: ' + p['note'], config, make_link=False), indent + 8)
 
     return docstring
 
