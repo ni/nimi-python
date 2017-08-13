@@ -63,7 +63,7 @@ f = functions[func_name]
 params = f['parameters']
 output_params = helper.extract_output_parameters(params)
 ivi_dance_param = helper.extract_ivi_dance_parameter(params)
-ivi_dance_size_param = helper.extract_ivi_dance_size_parameter(params)
+ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 %>\
     def ${c_function_prefix}${func_name}(${helper.get_method_parameters_snippet(params, skip_session_handle = False, skip_ivi_dance_size_parameter = False, skip_output_parameters = False)}):  # noqa: N802
 %    for p in output_params:

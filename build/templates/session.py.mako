@@ -217,14 +217,14 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
     output_parameters = helper.extract_output_parameters(parameters)
     enum_input_parameters = helper.extract_enum_parameters(input_parameters)
     ivi_dance_parameter = helper.extract_ivi_dance_parameter(parameters)
-    ivi_dance_size_parameter = helper.extract_ivi_dance_size_parameter(parameters)
+    ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
     def ${f['python_name']}(${helper.get_method_parameters_snippet(parameters, skip_session_handle = True, skip_ivi_dance_size_parameter = True, skip_output_parameters = True)}):
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
 % for output_parameter in output_parameters:
-        ${helper.get_ctype_variable_declaration_snippet(output_parameter)}
+        ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
 % endfor
 % if ivi_dance_parameter is None:
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
