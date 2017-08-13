@@ -35,7 +35,7 @@ class SideEffectsHelper(object):
     def __init__(self):
         self._defaults = {}
 % for func_name in sorted(helper.extract_codegen_functions(functions)):
-<% 
+<%
 f = functions[func_name]
 %>\
         self._defaults['${func_name}'] = {}
@@ -58,13 +58,14 @@ ivi_dance_param = helper.extract_ivi_dance_parameter(f['parameters'])
         self._defaults[func] = val
 
 % for func_name in sorted(helper.extract_codegen_functions(functions)):
-<% 
+<%
 f = functions[func_name]
 params = f['parameters']
 output_params = helper.extract_output_parameters(params)
-ivi_dance_param = helper.extract_ivi_dance_parameter(f['parameters'])
+ivi_dance_param = helper.extract_ivi_dance_parameter(params)
+ivi_dance_size_param = helper.extract_ivi_dance_size_parameter(params)
 %>\
-    def ${c_function_prefix}${func_name}(${helper.get_method_parameters_snippet(params)}):  # noqa: N802
+    def ${c_function_prefix}${func_name}(${helper.get_method_parameters_snippet(params, skip_session_handle = False, skip_ivi_dance_size_parameter = False, skip_output_parameters = False)}):  # noqa: N802
 %    for p in output_params:
         if self._defaults['${func_name}']['${p['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${p['name']}')
@@ -73,7 +74,7 @@ ivi_dance_param = helper.extract_ivi_dance_parameter(f['parameters'])
 %    if ivi_dance_param is not None:
         if self._defaults['${func_name}']['${ivi_dance_param['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${ivi_dance_param['name']}')
-        if ${ivi_dance_param['size']} == 0:
+        if ${ivi_dance_size_param['python_name']} == 0:
             return len(self._defaults['${func_name}']['${ivi_dance_param['name']}'])
         t = ${module_name}.ctypes_types.${ivi_dance_param['ctypes_type']}(self._defaults['${func_name}']['${ivi_dance_param['name']}'].encode('ascii'))
         ${ivi_dance_param['python_name']}.value = ctypes.cast(t, ${module_name}.ctypes_types.${ivi_dance_param['ctypes_type']}).value
@@ -84,7 +85,7 @@ ivi_dance_param = helper.extract_ivi_dance_parameter(f['parameters'])
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
 % for func_name in sorted(helper.extract_codegen_functions(functions)):
-<% 
+<%
 f = functions[func_name]
 %>\
         mock_library.${c_function_prefix}${func_name}.side_effect = MockFunctionCallError("${c_function_prefix}${func_name}")

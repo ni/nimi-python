@@ -40,27 +40,35 @@ def extract_codegen_functions(functions):
             funcs[x] = functions[x]
     return funcs
 
-def extract_input_parameters(parameters, sessionName = 'vi'):
-    '''Returns list of parameters only with input parameters'''
-    return [x for x in parameters if x['direction'] == 'in' and x['name'] != sessionName]
+def extract_input_parameters(parameters, session_name = 'vi'):
+    '''Returns list of parameters that includes only input parameters, except the session parameter if it exists'''
+    return [x for x in parameters if x['direction'] == 'in' and x['name'] != session_name]
 
 def extract_output_parameters(parameters):
-    '''Returns list of parameters only with output parameters, not including the ivi-dance parameter if it exists'''
-    return [x for x in parameters if x['direction'] == 'out' and not x['ivi-dance']]
+    '''Returns list of parameters that includes only output parameters, except the ivi-dance parameter if it exists'''
+    return [x for x in parameters if x['direction'] == 'out' and x['size']['mechanism'] != 'ivi-dance']
 
 def extract_enum_parameters(parameters):
-    '''Returns a list with information about the output parameters of a session method'''
+    '''Returns a list of parameters whose type is an enum'''
     return [x for x in parameters if x['enum'] is not None]
 
 def extract_ivi_dance_parameter(parameters):
-    '''Returns the ivi-dance parameter of a session method if there is one
-
-    There can be only one ivi-dance parameter so return that individual parameter and not a list
-    '''
-    param = [x for x in parameters if x['ivi-dance']]
+    '''Returns the ivi-dance parameter of a session method if there is one. This is the parameter whose size is determined at runtime.'''
+    param = [x for x in parameters if x['size']['mechanism'] == 'ivi-dance']
     assert len(param) <= 1, '{1} ivi-dance parameters. No more than one is allowed'.format(len(param))
     if len(param) == 0:
         return None
+    assert param[0]['direction'] == 'out', "ivi-dance parameter must have 'direction':'out'. Check your metadata."
+    assert param[0]['is_buffer'], "ivi-dance parameter must have 'is_buffer':True. Check your metadata."
+    return param[0]
+
+def extract_ivi_dance_size_parameter(parameters):
+    '''Returns the parameter that is used as the size for the IVI-dance parameter.'''
+    ivi_dance_parameter = extract_ivi_dance_parameter(parameters)
+    if ivi_dance_parameter is None:
+        return None
+    param = [x for x in parameters if x['name'] == ivi_dance_parameter['size']['value']]
+    assert len(param) == 1, "You must have a bug in your metadata! Found: " + str(len(param)) + ' matching: '+ str(ivi_dance_parameter)
     return param[0]
 
 # Functions to add information to metadata structures that are specific to our codegen needs.
@@ -107,19 +115,15 @@ def _add_python_return_type(f):
     f['returns_python'] = f['returns']
     return f
 
-def _add_buffer_info(parameter):
+def _add_is_buffer(parameter):
     '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
     try:
         parameter['size']
         parameter['is_buffer'] = True
-        parameter['ivi-dance'] = False
-        if type(parameter['size']) is str and parameter['size'].startswith('ivi-dance,'):
-            parameter['ivi-dance'] = True
-            parameter['size'] = camelcase_to_snakecase(parameter['size'].split(',')[1])
     except KeyError:
         # Not populated, assume False
+        parameter['size'] = {'mechanism':'fixed','value':1}
         parameter['is_buffer'] = False
-        parameter['ivi-dance'] = False
     return parameter
 
 def add_all_metadata(functions):
@@ -133,7 +137,7 @@ def add_all_metadata(functions):
             _add_python_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
-            _add_buffer_info(p)
+            _add_is_buffer(p)
     return functions
 
 # Normalize string type between python2 & python3
@@ -148,11 +152,24 @@ def normalize_string_type(d):
     return d
 # Functions that return snippets that can be placed directly in the templates.
 
-def get_method_parameters_snippet(parameters):
-    '''Returns a string suitable for the parameter list of a method given a list of parameter objects'''
+def get_method_parameters_snippet(parameters, skip_session_handle, skip_ivi_dance_size_parameter, skip_output_parameters):
+    '''
+    Returns a string suitable for the parameter list of a method given a list of parameter objects.
+    You can optionally skip session handle parameter, the parameter used for an output
+    buffer size (i.e. you don't want it in a Session method), and output parameters.
+    '''
     snippets = ['self']
+    ivi_dance_size_parameter = extract_ivi_dance_size_parameter(parameters)
     for x in parameters:
-        snippets.append(x['python_name'])
+        skip = False
+        if x['direction'] == 'out' and skip_output_parameters:
+            skip = True
+        if x == ivi_dance_size_parameter and skip_ivi_dance_size_parameter:
+            skip = True
+        if x['name'] == 'vi' and skip_session_handle:
+            skip = True
+        if not skip:
+            snippets.append(x['python_name'])
     return ', '.join(snippets)
 
 def get_function_parameters_snippet(parameters):
@@ -162,13 +179,13 @@ def get_function_parameters_snippet(parameters):
         snippets.append(x['python_name'])
     return ', '.join(snippets)
 
-def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
+def get_library_call_parameter_snippet(parameters_list, session_name = 'vi'):
     '''Returns a string suitable to use as the parameters to the library object, i.e. "self, mode, range, digits_of_resolution"'''
     snippets = []
     for x in parameters_list:
         if x['direction'] == 'in':
-            if x['name'] == sessionName:
-                snippet = 'self.' + sessionName
+            if x['name'] == session_name:
+                snippet = 'self.' + session_name
             else:
                 snippet = x['python_name']
                 snippet += '.value' if x['enum'] is not None else ''
@@ -176,7 +193,7 @@ def get_library_call_parameter_snippet(parameters_list, sessionName = 'vi'):
                     snippet += '.encode(\'ascii\')'
         else:
             assert x['direction'] == 'out', pp.pformat(x)
-            if x['ivi-dance']:
+            if x['size']['mechanism'] == 'ivi-dance':
                 snippet = x['ctypes_variable_name']
             elif x['is_buffer']:
                 snippet = 'ctypes.cast(' + x['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + x['ctypes_type'] + '))'
@@ -208,7 +225,7 @@ def _get_output_param_return_snippet(output_parameter):
             snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
         else:
             # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
-            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i].value for i in range(' + camelcase_to_snakecase(output_parameter['size']) + ')]'
+            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i].value for i in range(' + camelcase_to_snakecase(output_parameter['size']['value']) + ')]'
     else:
         snippet = output_parameter['ctypes_variable_name'] + '.value'
 
@@ -218,7 +235,7 @@ def get_method_return_snippet(parameters):
     '''Returns a string suitable to use as the return argument of a Session method, i.e. "return reading_ctype.value"'''
     snippets = []
     for x in parameters:
-        if x['direction'] == 'out' or x['ivi-dance']:
+        if x['direction'] == 'out' or x['size']['mechanism'] == 'ivi-dance':
             snippets.append(_get_output_param_return_snippet(x))
     return ('return ' + ', '.join(snippets)).strip()
 
@@ -233,14 +250,14 @@ def get_ctype_variable_declaration_snippet(parameter):
     assert parameter['direction'] == 'out', pp.pformat(parameter)
     snippet = parameter['ctypes_variable_name'] + ' = '
     if parameter['is_buffer']:
-        if isinstance(parameter['size'], int):
-            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']) + ')()'
-            #snippet += 'ctypes.create_string_buffer(' + str(parameter['size']) + ')'
-        elif parameter['size'] == 'ivi-dance':
+        if parameter['size']['mechanism'] == 'fixed':
+            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']['value']) + ')()'
+        elif parameter['size']['mechanism'] == 'ivi-dance':
             snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)  # TODO(marcoskirsch): Do the IVI-dance!'
         else:
+            assert parameter['size']['mechanism'] == 'passed-in', parameter['size']['mechanism']
             # TODO(marcoskirsch): I don't like calling camelcase_to_snakecase here, it relies on contract that parameter name where the size is stored was created with that function.
-            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + camelcase_to_snakecase(parameter['size']) + ')()'
+            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + camelcase_to_snakecase(parameter['size']['value']) + ')()'
     else:
         snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)'
     return snippet
