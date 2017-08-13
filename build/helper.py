@@ -118,7 +118,7 @@ def _add_python_return_type(f):
     f['returns_python'] = f['returns']
     return f
 
-def _add_is_buffer(parameter):
+def _add_buffer_info(parameter):
     '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
     try:
         parameter['size']
@@ -140,7 +140,7 @@ def add_all_metadata(functions):
             _add_python_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
-            _add_is_buffer(p)
+            _add_buffer_info(p)
     return functions
 
 # Python 2/3 compatibility
