@@ -157,7 +157,7 @@ def normalize_string_type(d):
 
 # Functions that return snippets that can be placed directly in the templates.
 
-def get_method_parameters_snippet(parameters, skip_session_handle, skip_ivi_dance_size_parameter, skip_output_parameters):
+def get_method_parameters_snippet(parameters, skip_session_handle, skip_output_parameters, skip_ivi_dance_size_parameter, session_name = 'vi'):
     '''
     Returns a string suitable for the parameter list of a method given a list of parameter objects.
     You can optionally skip session handle parameter, the parameter used for an output
@@ -171,7 +171,7 @@ def get_method_parameters_snippet(parameters, skip_session_handle, skip_ivi_danc
             skip = True
         if x == ivi_dance_size_parameter and skip_ivi_dance_size_parameter:
             skip = True
-        if x['name'] == 'vi' and skip_session_handle:
+        if x['name'] == session_name and skip_session_handle:
             skip = True
         if not skip:
             snippets.append(x['python_name'])

@@ -161,7 +161,7 @@ class Session(object):
     ivi_dance_parameter = helper.extract_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
-    def ${f['python_name']}(${helper.get_method_parameters_snippet(parameters, skip_session_handle = True, skip_ivi_dance_size_parameter = True, skip_output_parameters = True)}):
+    def ${f['python_name']}(${helper.get_method_parameters_snippet(parameters, skip_session_handle = True, skip_output_parameters = True, skip_ivi_dance_size_parameter = True)}):
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter)}
 % endfor
