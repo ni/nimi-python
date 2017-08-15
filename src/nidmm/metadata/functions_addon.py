@@ -57,28 +57,28 @@ functions_params_types = {
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
 # {'is_buffer': True} is required for all parameters that are arrays. Some were able to be detected as an array when
 #   generating functions.py. This sets 'is_buffer' for those parameters where the dectection didn't work
-# {'size': <size information>} is required for all output buffers
-#    possibilities for <size information> is:
-#        * int - this is for output parameters where the buffer size is known ahead of time, possibly due to IVI
-#        * '<parameter name>' - this is used when the size of the buffer is passed in as one of the other parameters.
-#                               This size will be used to create the appropriate buffer and then the function will be called
-#        * 'ivi-dance,<parameter name>' - 'ivi-dance' is when the function is called with a zero size and the function then
-#                                         returns the size of the string as the return value.
-#                                         When this is used, the generated code will call the function with a 0 size, get
-#                                         the size from the return values, allocate a buffer of that size and call again
-#                                         <parameter name> is the name of the parameter that is used to pass in the size
-#                                         This parameter is not part of the Python function parameter list
+# {'size': <size information>} is required for all output buffers.
+# <size information> is a dictionary with two keys: 'mechanism' and 'value'.
+#   'mechanism' can be:
+#       'fixed':        The size is known ahead of time, usually defined by the API.
+#                       'value' should be an int.
+#       'passed-in':    When the size comes from another parameter.
+#                       'value' should be the name of the parameter through which this is specified.
+#       'ivi-dance':    When the size is determined by calling into the function using a size of zero and
+#                       interpreting the return value as a size rather than an error.
+#                       'value' should be the name of the parameter through which the size (0, then the real
+#                       one) is passed in. This parameter won't exist in the corresponding Python Session method.
 functions_buffer_info = {
-    'GetError':                     { 'parameters': { 3: { 'size': 'ivi-dance,bufferSize', }, }, },
-    'GetErrorMessage':              { 'parameters': { 3: { 'size': 'ivi-dance,bufferSize', }, }, },
-    'self_test':                    { 'parameters': { 2: { 'size': 256, }, }, }, # From documentation
-    'ReadMultiPoint':               { 'parameters': { 3: { 'size': 'arraySize', }, }, },
-    'FetchMultiPoint':              { 'parameters': { 3: { 'size': 'arraySize', }, }, },
-    'FetchWaveform':                { 'parameters': { 3: { 'size': 'arraySize', }, }, },
-    'ReadWaveform':                 { 'parameters': { 3: { 'size': 'arraySize', }, }, },
-    'GetAttributeViString':         { 'parameters': { 4: { 'size': 'ivi-dance,bufferSize', }, }, },
-    'GetNextInterchangeWarning':    { 'parameters': { 2: { 'size': 'ivi-dance,bufferSize', }, }, },
-    'GetCalUserDefinedInfo':        { 'parameters': { 2: { 'size': 256, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
+    'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'GetErrorMessage':              { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'buffer_size'}, }, }, },
+    'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'ReadMultiPoint':               { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
+    'FetchMultiPoint':              { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
+    'FetchWaveform':                { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
+    'ReadWaveform':                 { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
+    'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'GetNextInterchangeWarning':    { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'GetCalUserDefinedInfo':        { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
     'init':                         { 'parameters': { 0: { 'is_buffer': True, }, }, },
     'InitWithOptions':              { 'parameters': { 0: { 'is_buffer': True, },
                                                       3: { 'is_buffer': True, }, }, },
