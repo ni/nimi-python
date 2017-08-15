@@ -45,7 +45,7 @@ NI-DMM Functions
         parameter to calculate the proper aperture for the measurement.
         The driver sets the :py:data:`nidmm.AC\_MIN\_FREQ` attribute to this value.
         The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
-        4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
+        4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
         NI 4050 and NI 4060.
 
         
@@ -63,7 +63,7 @@ NI-DMM Functions
         :py:data:`nidmm.function` attribute to AC measurements. The driver sets the
         :py:data:`nidmm.AC\_MAX\_FREQ` attribute to this value. The valid range is 1
         Hz–300 kHz for the NI 4080/4081/4082 and the NI 4070/4071/4072, 10
-        Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
+        Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
 
         
 
@@ -71,7 +71,7 @@ NI-DMM Functions
 
 .. function:: configure_adc_calibration(adc_calibration)
 
-    For the NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
+    For the NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
     compensate for gain drift since the last external calibration or
     self-calibration. When **ADC\_Calibration** is ON, the DMM measures an
     internal reference to calculate the correct gain for the measurement.
@@ -91,7 +91,7 @@ NI-DMM Functions
         set the value to NIDMM\_VAL\_ADC\_CALIBRATION\_AUTO, the driver
         determines whether to enable **ADC\_Calibration** based on the
         measurement function and resolution that you configure. If you configure
-        the NI 4080/4081/4082 or NI 4070/4071/4072 for a 6½–digit and greater
+        the NI 4080/4081/4082 or NI 4070/4071/4072 for a 6½–digit and greater
         resolution DC measurement, the driver enables ADC Calibration. For all
         other measurement configurations, the driver disables
         **ADC\_Calibration**.
@@ -99,7 +99,7 @@ NI-DMM Functions
         +----------------------------------------------+-------+---------------------------------------------------------------------------------------------------+
         | Name                                         | Value | Description                                                                                       |
         +==============================================+=======+===================================================================================================+
-        | NIDMM\_VAL\_ADC\_CALIBRATION\_AUTO (default) | -1.0  | The DMM enables or disables **ADC\_Calibration** based on the configured function and resolution. |
+        | NIDMM\_VAL\_ADC\_CALIBRATION\_AUTO (default) | -1.0  | The DMM enables or disables **ADC\_Calibration** based on the configured function and resolution. |
         +----------------------------------------------+-------+---------------------------------------------------------------------------------------------------+
         | NIDMM\_VAL\_ADC\_CALIBRATION\_OFF            | 0     | The DMM does not compensate for changes to the gain.                                              |
         +----------------------------------------------+-------+---------------------------------------------------------------------------------------------------+
@@ -133,14 +133,14 @@ NI-DMM Functions
 
         OFF disables **auto\_zero\_mode**. If you set this parameter to AUTO,
         NI-DMM determines whether to enable Auto Zero based on the measurement
-        function that you configure. If you configure the NI 4080/4081/4082 or
-        the NI 4070/4071/4072 for a 6½–digit and greater resolution DC
+        function that you configure. If you configure the NI 4080/4081/4082 or
+        the NI 4070/4071/4072 for a 6½–digit and greater resolution DC
         measurement, NI-DMM sets **auto\_zero\_mode** to ON.
 
-        For all other DC measurement configurations on the NI 4080/4081/4082 or
-        the NI 4070/4071/4072, NI-DMM sets **auto\_zero\_mode** to ONCE. For all
-        AC measurements or waveform acquisitions on the NI 4080/4081/4082 or the
-        NI 4070/4071/4072, NI-DMM sets **auto\_zero\_mode** to OFF. For NI 4060,
+        For all other DC measurement configurations on the NI 4080/4081/4082 or
+        the NI 4070/4071/4072, NI-DMM sets **auto\_zero\_mode** to ONCE. For all
+        AC measurements or waveform acquisitions on the NI 4080/4081/4082 or the
+        NI 4070/4071/4072, NI-DMM sets **auto\_zero\_mode** to OFF. For NI 4060,
         **auto\_zero\_mode** is set to OFF when AUTO is selected.
 
         For NI 4065 devices, **auto\_zero\_mode** is always ON.
@@ -148,7 +148,7 @@ NI-DMM Functions
         and adds no extra time to the overall measurement.
 
         +----------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIDMM\_VAL\_AUTO\_ZERO\_AUTO (default) | -1 | NI-DMM chooses the Auto Zero setting based on the configured function and resolution.                                                                                                                      |
+        | NIDMM\_VAL\_AUTO\_ZERO\_AUTO (default) | -1 | NI-DMM chooses the Auto Zero setting based on the configured function and resolution.                                                                                                                      |
         +----------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | NIDMM\_VAL\_AUTO\_ZERO\_OFF            | 0  | Disables Auto Zero.                                                                                                                                                                                        |
         +----------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -163,7 +163,7 @@ NI-DMM Functions
 
 .. function:: configure_cable_comp_type(cable_comp_type)
 
-    For the NI 4082 and NI 4072 only, sets the
+    For the NI 4082 and NI 4072 only, sets the
     :py:data:`nidmm.CABLE\_COMP\_TYPE` attribute for the current
     capacitance/inductance mode range.
 
@@ -182,7 +182,7 @@ NI-DMM Functions
 
 .. function:: configure_current_source(current_source)
 
-    The NI 4050 and NI 4060 are not supported. Configures the
+    The NI 4050 and NI 4060 are not supported. Configures the
     **Current\_Source** for diode measurements.
 
     
@@ -229,7 +229,7 @@ NI-DMM Functions
 
 .. function:: configure_frequency_voltage_range(voltage_range)
 
-    For the NI 4080/4081/4082 and the NI 4070/4071/4072 only, specifies the
+    For the NI 4080/4081/4082 and the NI 4070/4071/4072 only, specifies the
     expected maximum amplitude of the input signal for frequency and period
     measurements.
 
@@ -240,13 +240,13 @@ NI-DMM Functions
 
 
         Sets the expected maximum amplitude of the input signal. Refer to the
-        `NI 4080 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4080_functional_overview/>`__,
-        `NI 4081 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4081_functional_overview/>`__,
-        `NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4082/>`__,
-        `NI 4070 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4070_functional_overview/>`__,
-        `NI 4071 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4071_functional_overview/>`__,
+        `NI 4080 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4080_functional_overview/>`__,
+        `NI 4081 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4081_functional_overview/>`__,
+        `NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4082/>`__,
+        `NI 4070 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4070_functional_overview/>`__,
+        `NI 4071 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4071_functional_overview/>`__,
         and
-        `NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4072/>`__
+        `NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4072/>`__
         sections for a list of valid values. NI-DMM sets
         :py:data:`nidmm.FREQ\_VOLTAGE\_RANGE` to this value. The minimum
         peak-to-peak signal amplitude that can be detected is 10% of the
@@ -255,7 +255,7 @@ NI-DMM Functions
         +---------------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
         | Name                                  | Value | Description                                                                                                                      |
         +=======================================+=======+==================================================================================================================================+
-        | NIDMM\_VAL\_AUTO\_RANGE\_ON (default) | -1.0  | Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement. |
+        | NIDMM\_VAL\_AUTO\_RANGE\_ON (default) | -1.0  | Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement. |
         +---------------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
         | NIDMM\_VAL\_AUTO\_RANGE\_OFF          | -2.0  | Disables Auto Ranging. The driver sets the voltage range to the last calculated voltage range.                                   |
         +---------------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
@@ -353,7 +353,7 @@ NI-DMM Functions
         | NIDMM\_VAL\_AUTO\_RANGE\_ONCE | -3.0 | NI-DMM performs an Auto Range before acquiring the measurement. The :py:data:`nidmm.AUTO\_RANGE\_VALUE` is stored and used for all subsequent measurements until the measurement configuration is changed. |
         +-------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-        .. note:: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
+        .. note:: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
             trigger and sample trigger are set to IMMEDIATE.
 
     :type range:ViReal64
@@ -417,7 +417,7 @@ NI-DMM Functions
         | NIDMM\_VAL\_AUTO\_RANGE\_ONCE | -3.0 | NI-DMM performs an Auto Range before acquiring the measurement. The :py:data:`nidmm.AUTO\_RANGE\_VALUE` is stored and used for all subsequent measurements until the measurement configuration is changed. |
         +-------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-        .. note:: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
+        .. note:: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
             trigger and sample trigger are set to IMMEDIATE.
 
     :type range:ViReal64
@@ -436,7 +436,7 @@ NI-DMM Functions
         
 
         .. note:: NI-DMM ignores this parameter for capacitance and inductance
-            measurements on the NI 4072. To achieve better resolution for such
+            measurements on the NI 4072. To achieve better resolution for such
             measurements, use the :py:data:`nidmm.LC\_NUMBER\_MEAS\_TO\_AVERAGE`
             attribute.
 
@@ -503,22 +503,22 @@ NI-DMM Functions
         cycles or to decrease the measurement rate. **sample\_interval** only
         applies when the **Sample\_Trigger** is set to INTERVAL.
 
-        On the NI 4060, the **sample\_interval** value is used as the settling
+        On the NI 4060, the **sample\_interval** value is used as the settling
         time. When sample interval is set to 0, the DMM does not settle between
-        measurement cycles. The NI 4065 and NI 4070/4071/4072 use the value
+        measurement cycles. The NI 4065 and NI 4070/4071/4072 use the value
         specified in **sample\_interval** as additional delay. The default value
         (-1) ensures that the DMM settles for a recommended time. This is the
         same as using an Immediate trigger.
 
         
 
-        .. note:: This attribute is not used on the NI 4080/4081/4082 and the NI 4050.
+        .. note:: This attribute is not used on the NI 4080/4081/4082 and the NI 4050.
 
     :type sample_interval:ViReal64
 
 .. function:: configure_offset_comp_ohms(offset_comp_ohms)
 
-    For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
+    For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
     compensate for voltage offsets in resistance measurements. When
     **Offset\_Comp\_Ohms** is enabled, the DMM measures the resistance twice
     (once with the current source on and again with it turned off). Any
@@ -535,19 +535,19 @@ NI-DMM Functions
         Enables or disables **offset\_comp\_ohms**. The driver sets
         :py:data:`nidmm.OFFSET\_COMP\_OHMS` to this value.
 
-        +-----------------------------------------------+-------+----------------------------------------+
-        | Name                                          | Value | Description                            |
-        +===============================================+=======+========================================+
-        | NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_OFF (default) | 0     | Off disables \ **Offset\_Comp\_Ohms**. |
-        +-----------------------------------------------+-------+----------------------------------------+
-        | NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_ON            | 1     | On enables **Offset\_Comp\_Ohms**.     |
-        +-----------------------------------------------+-------+----------------------------------------+
+        +-----------------------------------------------+-------+--------------------------------------+
+        | Name                                          | Value | Description                          |
+        +===============================================+=======+======================================+
+        | NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_OFF (default) | 0     | Off disables **Offset\_Comp\_Ohms**. |
+        +-----------------------------------------------+-------+--------------------------------------+
+        | NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_ON            | 1     | On enables **Offset\_Comp\_Ohms**.   |
+        +-----------------------------------------------+-------+--------------------------------------+
 
     :type offset_comp_ohms::py:data:`nidmm.OffsetCompensatedOhms`
 
 .. function:: configure_open_cable_comp_values(conductance, susceptance)
 
-    For the NI 4082 and NI 4072 only, configures the
+    For the NI 4082 and NI 4072 only, configures the
     :py:data:`nidmm.OPEN\_CABLE\_COMP\_CONDUCTANCE` and
     :py:data:`nidmm.OPEN\_CABLE\_COMP\_SUSCEPTANCE` attributes.
 
@@ -697,7 +697,7 @@ NI-DMM Functions
 
 .. function:: configure_short_cable_comp_values(resistance, reactance)
 
-    For the NI 4082 and NI 4072 only, configures the
+    For the NI 4082 and NI 4072 only, configures the
     :py:data:`nidmm.SHORT\_CABLE\_COMP\_RESISTANCE` and
     :py:data:`nidmm.SHORT\_CABLE\_COMP\_REACTANCE` attributes.
 
@@ -732,7 +732,7 @@ NI-DMM Functions
 
 
         Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the niDMM\_ConfigureThermistorType
+        Thermistor Type is set to Custom in the :py:func:`nidmm.configure_thermistor_type`
         function. The default is 1.0295e-3 (44006).
 
         
@@ -742,7 +742,7 @@ NI-DMM Functions
 
 
         Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the niDMM\_ConfigureThermistorType
+        Thermistor Type is set to Custom in the :py:func:`nidmm.configure_thermistor_type`
         function. The default is 2.391e-4 (44006).
 
         
@@ -752,7 +752,7 @@ NI-DMM Functions
 
 
         Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the niDMM\_ConfigureThermistorType
+        Thermistor Type is set to Custom in the :py:func:`nidmm.configure_thermistor_type`
         function. The default is 1.568e-7 (44006).
 
         
@@ -901,13 +901,13 @@ NI-DMM Functions
         :py:data:`nidmm.TRIGGER\_DELAY` attribute to this value. By default,
         **trigger\_delay** is NIDMM\_VAL\_AUTO\_DELAY (-1), which means the DMM
         waits an appropriate settling time before taking the measurement. On the
-        NI 4060, if you set **trigger\_delay** to 0, the DMM does not settle
-        before taking the measurement. The NI 4065 and NI 4070/4071/4072 use the
+        NI 4060, if you set **trigger\_delay** to 0, the DMM does not settle
+        before taking the measurement. The NI 4065 and NI 4070/4071/4072 use the
         value specified in **trigger\_delay** as additional settling time.
 
         
 
-        .. note:: When using the NI 4050, **Trigger\_Delay** must be set to
+        .. note:: When using the NI 4050, **Trigger\_Delay** must be set to
             NIDMM\_VAL\_AUTO\_DELAY (-1).
 
     :type trigger_delay:ViReal64
@@ -931,7 +931,7 @@ NI-DMM Functions
         +--------------------------------+---+----------------------------------------------------------------+
         | NIDMM\_VAL\_POSITIVE           | 0 | The driver triggers on the rising edge of the trigger signal.  |
         +--------------------------------+---+----------------------------------------------------------------+
-        | NIDMM\_VAL\_NEGATIVE (default) | 1 | The driver triggers on the falling edge of the trigger signal. |
+        | NIDMM\_VAL\_NEGATIVE (default) | 1 | The driver triggers on the falling edge of the trigger signal. |
         +--------------------------------+---+----------------------------------------------------------------+
 
     :type trigger_slope::py:data:`nidmm.Slope`
@@ -1006,7 +1006,7 @@ NI-DMM Functions
 
 .. function:: configure_waveform_coupling(waveform_coupling)
 
-    For the NI 4080/4081/4082 and the NI 4070/4071/4072, configures
+    For the NI 4080/4081/4082 and the NI 4070/4071/4072, configures
     instrument coupling for voltage waveforms.
 
     
@@ -1076,7 +1076,7 @@ NI-DMM Functions
     Returns an array of values from a previously initiated multipoint
     measurement. The number of measurements the DMM makes is determined by
     the values you specify for the **Trigger\_Count** and **Sample\_Count**
-    parameters of :py:func:`nidmm.Unknown` You must first call
+    parameters of :py:func:`nidmm.configure_multi_point`. You must first call
     :py:func:`nidmm._initiate` to initiate a measurement before calling this function.
 
     
@@ -1104,7 +1104,7 @@ NI-DMM Functions
 
         Specifies the number of measurements to acquire. The maximum number of
         measurements for a finite acquisition is the (**Trigger Count** x
-        **Sample Count**) parameters in niDMM\_ConfigureMultiPoint.
+        **Sample Count**) parameters in :py:func:`nidmm.configure_multi_point`.
 
         For continuous acquisitions, up to 100,000 points can be returned at
         once. The number of measurements can be a subset. The valid range is any
@@ -1138,7 +1138,7 @@ NI-DMM Functions
 
 .. function:: fetch_waveform(maximum_time, array_size, waveform_array, actual_number_of_points)
 
-    For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
+    For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
     values from a previously initiated waveform acquisition. You must call
     :py:func:`nidmm._initiate` before calling this function.
 
@@ -1167,7 +1167,7 @@ NI-DMM Functions
 
         Specifies the number of waveform points to return. You specify the total
         number of points that the DMM acquires in the **Waveform Points**
-        parameter of :py:func:`nidmm.Unknown` The default value is
+        parameter of :py:func:`nidmm.configure_waveform_acquisition`. The default value is
         1.
 
         
@@ -1285,11 +1285,11 @@ NI-DMM Functions
             Returns the value of the :py:data:`nidmm.APERTURE\_TIME` attribute. The
             units of this attribute depend on the value of the
             :py:data:`nidmm.APERTURE\_TIME\_UNITS` attribute.
-            On the NI 4070/4071/4072, the minimum aperture time is 8.89 µs, and the
-            maximum aperture time is 149 s. Any number of powerline cycles (PLCs)
+            On the NI 4070/4071/4072, the minimum aperture time is 8.89 µs, and the
+            maximum aperture time is 149 s. Any number of powerline cycles (PLCs)
             within the minimum and maximum ranges is allowed on the
-            NI 4070/4071/4072.
-            On the NI 4065 the minimum aperture time is 333 µs, and the maximum
+            NI 4070/4071/4072.
+            On the NI 4065 the minimum aperture time is 333 µs, and the maximum
             aperture time is 78.2 s. If setting the number of averages directly, the
             total measurement time is aperture time X the number of averages, which
             must be less than 72.8 s. The aperture times allowed are 333 µs, 667 µs,
@@ -1297,9 +1297,9 @@ NI-DMM Functions
             on. If you set an aperture time other than 333 µs, 667 µs, or multiples
             of 1.11 ms, the value will be coerced up to the next supported aperture
             time.
-            On the NI 4060, when the powerline frequency is 60, the PLCs allowed are
-            1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50,
-            the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
+            On the NI 4060, when the powerline frequency is 60, the PLCs allowed are
+            1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50,
+            the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
 
             
 
@@ -1591,7 +1591,7 @@ NI-DMM Functions
 
     
 
-    .. note:: The NI 4050, NI 4060, and NI 4080/4081/4082 are not supported.
+    .. note:: The NI 4050, NI 4060, and NI 4080/4081/4082 are not supported.
 
 
     :param cal_type:
@@ -1601,12 +1601,12 @@ NI-DMM Functions
         self-calibration).
 
         +--------------------------------------+---+----------------------+
-        | NIDMM\_VAL\_INTERNAL\_AREA (default) | 0 | Self-Calibration     |
+        | NIDMM\_VAL\_INTERNAL\_AREA (default) | 0 | Self-Calibration     |
         +--------------------------------------+---+----------------------+
         | NIDMM\_VAL\_EXTERNAL\_AREA           | 1 | External Calibration |
         +--------------------------------------+---+----------------------+
 
-        .. note:: The NI 4065 does not support self-calibration.
+        .. note:: The NI 4065 does not support self-calibration.
 
     :type cal_type:ViInt32
 
@@ -1624,7 +1624,7 @@ NI-DMM Functions
 
     
 
-    .. note:: The NI 4050 and NI 4060 are not supported.
+    .. note:: The NI 4050 and NI 4060 are not supported.
 
 
     :param cal_type:
@@ -1634,12 +1634,12 @@ NI-DMM Functions
         self-calibration).
 
         +--------------------------------------+---+----------------------+
-        | NIDMM\_VAL\_INTERNAL\_AREA (default) | 0 | Self-Calibration     |
+        | NIDMM\_VAL\_INTERNAL\_AREA (default) | 0 | Self-Calibration     |
         +--------------------------------------+---+----------------------+
         | NIDMM\_VAL\_EXTERNAL\_AREA           | 1 | External Calibration |
         +--------------------------------------+---+----------------------+
 
-        .. note:: The NI 4065 does not support self-calibration.
+        .. note:: The NI 4065 does not support self-calibration.
 
     :type cal_type:ViInt32
 
@@ -1707,7 +1707,7 @@ NI-DMM Functions
         **Channel\_String** parameter. If the next **Channel\_String**,
         including the terminating NULL byte, contains more bytes than you
         indicate in this parameter, the function copies
-        **buffer\_size** –1 bytes into the buffer, places an ASCII NULL byte at
+        **buffer\_size** –1 bytes into the buffer, places an ASCII NULL byte at
         the end of the buffer, and returns the buffer size you must pass to get
         the entire value.
 
@@ -1738,7 +1738,7 @@ NI-DMM Functions
 
     
 
-    .. note:: The NI 4050 and NI 4060 are not supported.
+    .. note:: The NI 4050 and NI 4060 are not supported.
 
 
     :param options:
@@ -1838,7 +1838,7 @@ NI-DMM Functions
 
     
 
-    .. note:: The NI 4050 and NI 4060 are not supported.
+    .. note:: The NI 4050 and NI 4060 are not supported.
 
 
     :param cal_type:
@@ -1848,12 +1848,12 @@ NI-DMM Functions
         self-calibration).
 
         +--------------------------------------+---+----------------------+
-        | NIDMM\_VAL\_INTERNAL\_AREA (default) | 0 | Self-Calibration     |
+        | NIDMM\_VAL\_INTERNAL\_AREA (default) | 0 | Self-Calibration     |
         +--------------------------------------+---+----------------------+
         | NIDMM\_VAL\_EXTERNAL\_AREA           | 1 | External Calibration |
         +--------------------------------------+---+----------------------+
 
-        .. note:: The NI 4065 does not support self-calibration.
+        .. note:: The NI 4065 does not support self-calibration.
 
     :type cal_type:ViInt32
 
@@ -1967,7 +1967,7 @@ NI-DMM Functions
         **Interchange\_Warning** parameter. If the next interchangeability
         warning string, including the terminating NULL byte, contains more bytes
         than you indicate in this parameter, the function copies
-        **buffer\_size** –1 bytes into the buffer, places an ASCII NULL byte at
+        **buffer\_size** –1 bytes into the buffer, places an ASCII NULL byte at
         the end of the buffer, and returns the buffer size you must pass to get
         the entire value.
 
@@ -2040,7 +2040,7 @@ NI-DMM Functions
           **resource\_name** is assigned in Measurement & Automation Explorer
           (MAX). Refer to `Related
           Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
-          for the *NI Digital Multimeters Getting Started Guide* for more
+          for the *NI Digital Multimeters Getting Started Guide* for more
           information about configuring and testing the DMM in MAX.
         | Valid Syntax:
 
@@ -2097,7 +2097,7 @@ NI-DMM Functions
         parameter. You do not have to specify all of the attributes and may
         leave any of them out (those left out use the default value).
 
-        Refer to `Simulating NI Digital
+        Refer to `Simulating NI Digital
         Multimeters <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/simulation/>`__
         for more information.
 
@@ -2131,7 +2131,7 @@ NI-DMM Functions
     Initiates an acquisition. After you call this function, the DMM leaves
     the Idle state and enters the Wait-for-Trigger state. If trigger is set
     to Immediate mode, the DMM begins acquiring measurement data. Use
-    :py:func:`nidmm.Unknown` :py:func:`nidmm.Unknown` or :py:func:`nidmm.fetch_waveform` to
+    :py:func:`nidmm.fetch`, :py:func:`nidmm.fetch_multi_point`, or :py:func:`nidmm.fetch_waveform` to
     retrieve the measurement data.
 
     
@@ -2217,7 +2217,7 @@ NI-DMM Functions
     -  A call to the IVI Library locked the session.
 
     After your call to this function returns successfully, no other threads
-    can access the instrument session until you call niDMM\_UnlockSession.
+    can access the instrument session until you call :py:func:`nidmm._unlock_session`.
 
     Use this function and :py:func:`nidmm._unlock_session` around a sequence of calls to
     instrument driver functions if you require that the instrument retain
@@ -2225,7 +2225,7 @@ NI-DMM Functions
     calls to this function within the same thread.
 
     To completely unlock the session, you must balance each call to this
-    function with a call to :py:func:`nidmm.Unknown` If, however, you use the
+    function with a call to :py:func:`nidmm._unlock_session`. If, however, you use the
     **Caller\_Has\_Lock** parameter in all calls to this function and
     :py:func:`nidmm._unlock_session` within a function, the IVI Library locks the
     session only once within the function regardless of the number of calls
@@ -2258,7 +2258,7 @@ NI-DMM Functions
             sets the value of the parameter to VI\_TRUE.
 
             If the value is VI\_FALSE, :py:func:`nidmm._unlock_session` does not attempt to
-            unlock the session. If the value is VI\_TRUE, niDMM\_UnlockSession
+            unlock the session. If the value is VI\_TRUE, :py:func:`nidmm._unlock_session`
             releases the lock and sets the value of the parameter to VI\_FALSE.
             Thus, you can, call :py:func:`nidmm._unlock_session` at the end of your function
             without worrying about whether you actually have the lock.
@@ -2303,7 +2303,7 @@ NI-DMM Functions
 
             \*/
 
-            :py:func:`nidmm.Unknown` &haveLock;);
+            :py:func:`nidmm._unlock_session`(vi, &haveLock;);
 
             return error;
 
@@ -2314,11 +2314,11 @@ NI-DMM Functions
 
 .. function:: perform_open_cable_comp(conductance, susceptance)
 
-    For the NI 4082 and NI 4072 only, performs the open cable compensation
+    For the NI 4082 and NI 4072 only, performs the open cable compensation
     measurements for the current capacitance/inductance range, and returns
     open cable compensation **Conductance** and **Susceptance** values. You
     can use the return values of this function as inputs to
-    niDMM\_ConfigureOpenCableCompValues.
+    :py:func:`nidmm.configure_open_cable_comp_values`.
 
     This function returns an error if the value of the :py:data:`nidmm.function`
     attribute is not set to NIDMM\_VAL\_CAPACITANCE (1005) or
@@ -2353,7 +2353,7 @@ NI-DMM Functions
     Performs the short cable compensation measurements for the current
     capacitance/inductance range, and returns short cable compensation
     **Resistance** and **Reactance** values. You can use the return values
-    of this function as inputs to niDMM\_ConfigureShortCableCompValues.
+    of this function as inputs to :py:func:`nidmm.configure_short_cable_comp_values`.
 
     This function returns an error if the value of the :py:data:`nidmm.function`
     attribute is not set to NIDMM\_VAL\_CAPACITANCE (1005) or
@@ -2421,7 +2421,7 @@ NI-DMM Functions
     Acquires multiple measurements and returns an array of measured values.
     The number of measurements the DMM makes is determined by the values you
     specify for the **Trigger\_Count** and **Sample\_Count** parameters in
-    niDMM\_ConfigureMultiPoint.
+    :py:func:`nidmm.configure_multi_point`.
 
     
 
@@ -2448,7 +2448,7 @@ NI-DMM Functions
 
         Specifies the number of measurements to acquire. The maximum number of
         measurements for a finite acquisition is the (**Trigger Count** x
-        **Sample Count**) parameters in niDMM\_ConfigureMultiPoint.
+        **Sample Count**) parameters in :py:func:`nidmm.configure_multi_point`.
 
         For continuous acquisitions, up to 100,000 points can be returned at
         once. The number of measurements can be a subset. The valid range is any
@@ -2484,11 +2484,11 @@ NI-DMM Functions
 
     Returns measurement backlog and acquisition status. Use this function to
     determine how many measurements are available before calling
-    :py:func:`nidmm.Unknown` :py:func:`nidmm.Unknown` or niDMM\_FetchWaveform.
+    :py:func:`nidmm.fetch`, :py:func:`nidmm.fetch_multi_point`, or :py:func:`nidmm.fetch_waveform`.
 
     
 
-    .. note:: The NI 4050 is not supported.
+    .. note:: The NI 4050 is not supported.
 
 
     :rtype: tuple (acquisition_backlog, acquisition_status)
@@ -2531,11 +2531,11 @@ NI-DMM Functions
 
 .. function:: read_waveform(maximum_time, array_size, waveform_array, actual_number_of_points)
 
-    For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
+    For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
     and returns data as an array of values or as a waveform data type. The
     number of elements in the **Waveform\_Array** is determined by the
     values you specify for the **Waveform\_Points** parameter in
-    niDMM\_ConfigureWaveformAcquisition.
+    :py:func:`nidmm.configure_waveform_acquisition`.
 
     
 
@@ -2562,7 +2562,7 @@ NI-DMM Functions
 
         Specifies the number of waveform points to return. You specify the total
         number of points that the DMM acquires in the **Waveform Points**
-        parameter of :py:func:`nidmm.Unknown` The default value is
+        parameter of :py:func:`nidmm.configure_waveform_acquisition`. The default value is
         1.
 
         
@@ -2619,7 +2619,7 @@ NI-DMM Functions
     can clear the interchangeability warnings list by repeatedly calling
     :py:func:`nidmm.get_next_interchange_warning` until no more interchangeability
     warnings are returned. If you are not interested in the content of those
-    warnings, you can call niDMM\_ClearInterchangeWarnings.
+    warnings, you can call :py:func:`nidmm.clear_interchange_warnings`.
 
     
 
@@ -2641,7 +2641,7 @@ NI-DMM Functions
 
     
 
-    .. note:: This function calls :py:func:`nidmm.Unknown` and any configurations previous to
+    .. note:: This function calls :py:func:`nidmm.reset`, and any configurations previous to
         the call will be lost. All attributes will be set to their default
         values after the call returns.
 
@@ -2954,7 +2954,7 @@ NI-DMM Functions
 .. function:: _unlock_session(caller_has_lock)
 
     This function releases a lock that you acquired on an instrument session
-    using :py:func:`nidmm.Unknown` Refer to :py:func:`nidmm._lock_session` for additional
+    using :py:func:`nidmm._lock_session`. Refer to :py:func:`nidmm._lock_session` for additional
     information on session locks.
 
     
@@ -3035,7 +3035,7 @@ NI-DMM Functions
 
             \*/
 
-            :py:func:`nidmm.Unknown` &haveLock;);
+            :py:func:`nidmm._unlock_session`(vi, &haveLock;);
 
             return error;
 
@@ -3159,7 +3159,7 @@ NI-DMM Functions
 
     
 
-    .. note:: This function calls :py:func:`nidmm.Unknown` and any configurations previous to
+    .. note:: This function calls :py:func:`nidmm.reset`, and any configurations previous to
         the call will be lost. All attributes will be set to their default
         values after the call returns.
 
@@ -3174,13 +3174,13 @@ NI-DMM Functions
             Contains the value returned from the instrument self-test. Zero
             indicates success.
 
-            On the NI 4080/4082 and NI 4070/4072, the error code 1013 indicates that
+            On the NI 4080/4082 and NI 4070/4072, the error code 1013 indicates that
             you should check the fuse and replace it, if necessary.
 
             
 
-            .. note:: Self-test does not check the fuse on the NI 4065, NI 4071, and
-                NI 4081. Hence, even if the fuse is blown on the device, self-test does
+            .. note:: Self-test does not check the fuse on the NI 4065, NI 4071, and
+                NI 4081. Hence, even if the fuse is blown on the device, self-test does
                 not return error code 1013.
 
         self_test_message (ViChar):
@@ -3189,7 +3189,7 @@ NI-DMM Functions
             This parameter contains the string returned from the instrument
             self-test. The array must contain at least 256 elements.
 
-            For the NI 4050 and NI 4060, the error codes returned for self-test
+            For the NI 4050 and NI 4060, the error codes returned for self-test
             failures include the following:
 
             -  NIDMM\_ERROR\_AC\_TEST\_FAILURE
@@ -3198,7 +3198,7 @@ NI-DMM Functions
 
             These error codes indicate that the DMM should be repaired.
 
-            For the NI 4080/4081/4082 and the NI 4070/4071/4072, the error code
+            For the NI 4080/4081/4082 and the NI 4070/4071/4072, the error code
             returned for a self-test failure is NIDMM\_ERROR\_SELF\_TEST\_FAILURE.
             This error code indicates that the DMM should be repaired.
 
