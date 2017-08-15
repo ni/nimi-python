@@ -3,20 +3,17 @@ NI-ModInst Functions
 
 .. py:currentmodule:: nimodinst
 
-
 .. function:: _close_installed_devices_session(handle)
 
     :param handle: 
 
     :type handle: ViSession
 
-
 .. function:: get_extended_error_info(error_info_buffer_size, error_info)
 
     :param error_info_buffer_size: 
 
     :type error_info_buffer_size: ViInt32
-
 
 .. function:: _get_installed_device_attribute_vi_int32(handle, index, attribute_id, attribute_value)
 
@@ -47,7 +44,6 @@ NI-ModInst Functions
     :param attribute_value_buffer_size: 
 
     :type attribute_value_buffer_size: ViInt32
-
 
 .. function:: _open_installed_devices_session(driver, handle, item_count)
 

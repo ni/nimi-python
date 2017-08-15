@@ -46,8 +46,3 @@ cp /mnt/d/GitHub/nimi-python/README.rst /mnt/d/GitHub/nimi-python/bin/nimodinst/
 cd /mnt/d/GitHub/nimi-python/bin/nimodinst && python3 -m pytest -s > /mnt/d/GitHub/nimi-python/bin/nimodinst/log/test_results.log
 cd /mnt/d/GitHub/nimi-python/bin/nimodinst && python3 setup.py bdist_wheel --universal > /mnt/d/GitHub/nimi-python/bin/nimodinst/log/wheel.log
 cd /mnt/d/GitHub/nimi-python/bin/nimodinst && python3 setup.py sdist > /mnt/d/GitHub/nimi-python/bin/nimodinst/log/sdist.log
-python3 -msphinx -M html "/mnt/d/GitHub/nimi-python/docs" "/mnt/d/GitHub/nimi-python/bin/docs" 
-cp /mnt/d/GitHub/nimi-python/tox.ini /mnt/d/GitHub/nimi-python/bin/nidmm/tox.ini
-cd /mnt/d/GitHub/nimi-python/bin/nidmm && tox -e flake8
-cp /mnt/d/GitHub/nimi-python/tox.ini /mnt/d/GitHub/nimi-python/bin/nimodinst/tox.ini
-cd /mnt/d/GitHub/nimi-python/bin/nimodinst && tox -e flake8
