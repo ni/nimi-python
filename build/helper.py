@@ -294,43 +294,120 @@ def get_rst_header_snippet(t, header_level='='):
     ret_val += header_level * len(t)
     return ret_val
 
-def get_rst_note_snippet(d, config, indent=0):
-    '''Returns a rst formatted note if 'note' exists in the dictionary'''
-    if 'note' in d:
-        note = '\n\n' + (' ' * indent) + '.. note:: ' + get_indented_docstring_snippet(fix_references(d['note'], config, make_link=True), indent + 4)
-        return note
+def get_rst_table_snippet(d, config, indent=0, make_link=True):
+    '''Returns an rst table snippet if table_header and/or table_body are in the dictionary'''
+    if 'table_body' in d:
+        table_body = d['table_body']
     else:
         return ''
 
+    header = False
+    # If there is no body, then we ignore the header
+    if 'table_header' in d:
+        table_header = d['table_header']
+        header = True
+
+    table_contents = []
+    if header:
+        header_contents = []
+        for i in table_header:
+            contents = fix_references(i, config, make_link)
+            header_contents.append(contents)
+        table_contents.append(header_contents)
+
+    for t in table_body:
+        line_contents = []
+        for i in t:
+            contents = fix_references(i, config, make_link)
+            line_contents.append(contents)
+        table_contents.append(line_contents)
+
+    table = as_rest_table(table_contents, full=True, header=header)
+    return get_indented_docstring_snippet(table, indent)
+
+
+def get_rst_admonition_snippet(admonition, d, config, indent=0):
+    '''Returns a rst formatted admonition if the given admonition ('note', 'caution') exists in the dictionary'''
+    if admonition in d:
+        a = '\n\n' + (' ' * indent) + '.. {0}:: '.format(admonition) + get_indented_docstring_snippet(fix_references(d[admonition], config, make_link=True), indent + 4)
+        return a
+    else:
+        return ''
+
+def get_documentation_for_node_rst(node, config, indent=0):
+    '''Returns any documentaion information formatted for rst
+
+    Documentation will be in the following order (if existing)
+    - 'caution' admonition
+    - 'description'
+    - table made of 'table_header' and 'table_body'
+    - 'note' admonition
+
+    Args:
+        node (dict) - Node possibly containing documentation
+        config (dict) - build configuration
+        indent (int) - how much each line should be indented
+
+    Returns:
+        str - formatted documentation, empty string if none
+    '''
+    doc = ''
+    if 'documentation' not in node:
+        return doc
+
+    nd = node['documentation']
+    doc += get_rst_admonition_snippet('caution', nd, config, indent)
+    if 'description' in nd:
+        doc += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_references(nd['description'], config, make_link=True), indent)
+
+    doc += '\n\n' + (' ' * indent) + get_rst_table_snippet(nd, config, indent)
+    doc += get_rst_admonition_snippet('note', nd, config, indent)
+
+    return doc
+
+def get_documentation_for_node_docstring(node, config, indent=0):
+    '''Returns any documentaion information formatted for docstring
+
+    Documentation will be in the following order (if existing)
+    - 'caution' admonition
+    - 'description'
+    - table made of 'table_header' and 'table_body'
+    - 'note' admonition
+
+    Args:
+        node (dict) - Node possibly containing documentation
+        config (dict) - build configuration
+        indent (int) - how much each line should be indented
+
+    Returns:
+        str - formatted documentation, empty string if none
+    '''
+    doc = ''
+    if 'documentation' not in node:
+        return doc
+
+    nd = node['documentation']
+    extra_newline = ''
+    if 'caution' in nd:
+        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(fix_references('Caution: ' + nd['caution'], config, make_link=False), indent)
+        extra_newline = '\n'
+
+    if 'description' in nd:
+        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(fix_references(nd['description'], config, make_link=False), indent)
+        extra_newline = '\n'
+
+    tbl = get_rst_table_snippet(nd, config, indent, make_link=False)
+    if len(tbl) > 0:
+        doc += '\n' + extra_newline + (' ' * indent) + tbl
+        extra_newline = '\n'
+
+    if 'note' in nd:
+        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(fix_references('Note: ' + nd['note'], config, make_link=False), indent)
+
+    return doc
+
 # We need this in the global namespace so we can reference it from the sub() callback
 config = None
-def replace_func_python_name_no_link(f_match):
-    '''callback function for regex sub command when link not needed
-
-    Args:
-        m (match object): Match object from the function substitution command
-
-    Returns:
-        str: python name of the function
-    '''
-    fname = "Unknown"
-    if f_match and f_match.group(1) in config['functions']:
-        fname = config['functions'][f_match.group(1)]['python_name']
-    return '{0} '.format(fname)
-
-def replace_func_python_name_with_link(f_match):
-    '''callback function for regex sub command when link needed
-
-    Args:
-        m (match object): Match object from the function substitution command
-
-    Returns:
-        str: rst link to function using python name
-    '''
-    fname = "Unknown"
-    if f_match and f_match.group(1) in config['functions']:
-        fname = config['functions'][f_match.group(1)]['python_name']
-    return ':py:func:`{0}.{1}` '.format(config['module_name'], fname)
 
 def find_attribute_by_name(attributes, name):
     '''Returns the attribute with the given name if there is one
@@ -343,7 +420,7 @@ def find_attribute_by_name(attributes, name):
         return None
     return attr[0]
 
-def replace_attribute_python_name_no_link(a_match):
+def replace_attribute_python_name(a_match):
     '''callback function for regex sub command when link not needed
 
     Args:
@@ -358,24 +435,30 @@ def replace_attribute_python_name_no_link(a_match):
         aname = a_match.group(1)
         if attr:
             aname = attr['name'].lower()
-    return '{0}'.format(aname)
 
-def replace_attribute_python_name_with_link(a_match):
+    if config['make_link']:
+        return ':py:data:`{0}.{1}`'.format(config['module_name'], aname)
+    else:
+        return '{0}'.format(aname)
+
+def replace_func_python_name(f_match):
     '''callback function for regex sub command when link needed
 
     Args:
-        m (match object): Match object from the attribute substitution command
+        m (match object): Match object from the function substitution command
 
     Returns:
-        str: rst link to attribute using python name
+        str: rst link to function using python name
     '''
-    aname = "Unknown"
-    if a_match:
-        attr = find_attribute_by_name(config['attributes'], a_match.group(1).replace('\_', '_'))
-        aname = a_match.group(1)
-        if attr:
-            aname = attr['name'].lower()
-    return ':py:data:`{0}.{1}`'.format(config['module_name'], aname)
+    fname = "Unknown"
+    if f_match and f_match.group(1) in config['functions']:
+        fname = config['functions'][f_match.group(1)]['python_name']
+
+    print('fname: ' + fname)
+    if config['make_link']:
+        return ':py:func:`{0}.{1}` '.format(config['module_name'], fname)
+    else:
+        return '{0} '.format(fname)
 
 def fix_references(doc, cfg, make_link=False):
     '''Replace ATTR and function mentions in documentation
@@ -394,31 +477,20 @@ def fix_references(doc, cfg, make_link=False):
     global config
     config = cfg
 
+    config['make_link'] = make_link
+
+    before = doc
+
     attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
-    func_re = re.compile('{0}(.+?) '.format(config['c_function_prefix'].replace('_', '\_')))
-    enum_re = re.compile('enums.(.+)')
+    func_re = re.compile('{0}\\\\_(.+?) '.format(config['c_function_prefix'].replace('_', '')))
 
-    if make_link:
-        m = attr_re.search(doc)
-        if m:
-            doc = attr_re.sub(replace_attribute_python_name_with_link, doc)
-            m = attr_re.search(doc)
+    doc = attr_re.sub(replace_attribute_python_name, doc)
+    doc = func_re.sub(replace_func_python_name, doc)
 
-        m = func_re.search(doc)
-        if m:
-            doc = func_re.sub(replace_func_python_name_with_link, doc)
-            m = func_re.search(doc)
-    else:
-        m = attr_re.search(doc)
-        if m:
-            doc = attr_re.sub(replace_attribute_python_name_no_link, doc)
-            m = attr_re.search(doc)
+    if doc.find('niDMM') != -1:
+        print('Found niDMM: ' + doc)
 
-        m = func_re.search(doc)
-        if m:
-            doc = func_re.sub(replace_func_python_name_no_link, doc)
-            m = func_re.search(doc)
-
+    if not make_link:
         doc = doc.replace('\_', '_')
     return doc
 
@@ -436,20 +508,15 @@ def get_function_rst(fname, config, indent=0):
     rst = '.. function:: ' + function['python_name'] + '('
     rst += get_function_parameters_snippet(function['parameters'], sessionName='vi') + ')'
     indent += 4
-    if 'purpose' in function:
-        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_references(function['purpose'], config, make_link=True), indent)
-    if 'long_description' in function:
-        rst += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_references(function['long_description'], config, make_link=True), indent)
+    rst += get_documentation_for_node_rst(function, config, indent)
 
-    rst += get_rst_note_snippet(function, config, indent)
     input_params = extract_input_parameters(function['parameters'])
     if len(input_params) > 0:
         rst += '\n'
     for p in input_params:
         rst +=  '\n' + (' ' * indent) + ':param {0}: '.format(p['python_name']) + '\n'
-        if 'long_description' in p:
-            rst += (' ' * (indent + 4)) + get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=True), indent + 4) + '\n'
-        rst += get_rst_note_snippet(p, config, indent + 4)
+        rst += get_documentation_for_node_rst(p, config, indent + 4)
+
         p_type = p['python_type']
         if p_type.startswith('enums.'):
             p_type = p_type.replace('enums.', '')
@@ -463,12 +530,11 @@ def get_function_rst(fname, config, indent=0):
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type']) + '\n'
-            if 'long_description' in p:
-                rst += (' ' * (indent + 8)) + get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=True), indent + 8) + '\n'
-            rst += get_rst_note_snippet(p, config, indent + 4)
+            rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
-        rst += '\n\n' + (' ' * indent) + ':rtype: '+ p['python_type']
+        rst += '\n\n' + (' ' * indent) + ':rtype: '+ p['python_type'] + '\n'
+        rst += get_documentation_for_node_rst(p, config, indent + 8)
 
     return rst
 
@@ -484,39 +550,27 @@ def get_function_docstring(fname, config, indent=0):
     '''
     docstring = ''
     function = config['functions'][fname]
-    if 'purpose' in function:
-        docstring += get_indented_docstring_snippet(fix_references(function['purpose'], config, make_link=False), indent)
-    if 'long_description' in function:
-        docstring += get_indented_docstring_snippet(fix_references(function['long_description'], config, make_link=False), indent)
-    if 'note' in function:
-        docstring += get_indented_docstring_snippet(fix_references('Note: ' + function['note'], config, make_link=False), indent)
+    docstring += get_documentation_for_node_docstring(function, config, indent)
 
     input_params = extract_input_parameters(function['parameters'])
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
         docstring +=  '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
-        if 'long_description' in p:
-            docstring += get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=False), indent + 8)
-        if 'note' in p:
-            docstring += get_indented_docstring_snippet(fix_references('Note: ' + p['note'], config, make_link=False), indent + 8)
-
+        docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     output_params = extract_output_parameters(function['parameters'])
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type'])
-            if 'long_description' in p:
-                docstring += get_indented_docstring_snippet(fix_references(p['long_description'], config, make_link=False), indent + 8)
-            if 'note' in p:
-                docstring += get_indented_docstring_snippet(fix_references('Note: ' + p['note'], config, make_link=False), indent + 8)
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type'])
+            docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     return docstring
 
 
 # From http://code.activestate.com/recipes/579054-generate-sphinx-table/
-def as_rest_table(data, full=False):
+def as_rest_table(data, full=False, header=True):
     """
     >>> from report_table import as_rest_table
     >>> data = [('what', 'how', 'who'),
@@ -596,7 +650,10 @@ def as_rest_table(data, full=False):
     # set table header
     titles = data[0]
     table.append(template.format(*titles))
-    table.append(th_separator)
+    if header:
+        table.append(th_separator)
+    else:
+        table.append(separator)
 
     for d in data[1:-1]:
         table.append(template.format(*d))
