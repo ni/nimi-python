@@ -476,13 +476,17 @@ def replace_func_python_name(f_match):
         str: rst link to function using python name
     '''
     fname = "Unknown"
-    if f_match and f_match.group(1) in config['functions']:
-        fname = config['functions'][f_match.group(1)]['python_name']
+    if f_match:
+        fname = f_match.group(1).replace('.', '').replace(',', '')
+        fname = config['functions'][fname]['python_name']
+    else:
+        print('Unknown function name: {0}'.format(f_match.group(1)))
+        print(config['functions'])
 
     if config['make_link']:
-        return ':py:func:`{0}.{1}` '.format(config['module_name'], fname)
+        return ':py:func:`{0}.{1}`'.format(config['module_name'], fname)
     else:
-        return '{0} '.format(fname)
+        return '{0}'.format(fname)
 
 def fix_references(doc, cfg, make_link=False):
     '''Replace ATTR and function mentions in documentation
@@ -506,7 +510,7 @@ def fix_references(doc, cfg, make_link=False):
     before = doc
 
     attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
-    func_re = re.compile('{0}\\\\_(.+?) '.format(config['c_function_prefix'].replace('_', '')))
+    func_re = re.compile('{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', '')))
 
     doc = attr_re.sub(replace_attribute_python_name, doc)
     doc = func_re.sub(replace_func_python_name, doc)
