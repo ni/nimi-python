@@ -10,6 +10,7 @@ NI-DMM Functions
 
     
 
+
 .. function:: _clear_error()
 
     Clears the error information for the current execution thread and the
@@ -19,11 +20,13 @@ NI-DMM Functions
 
     
 
+
 .. function:: clear_interchange_warnings()
 
     Clears the list of current interchange warnings.
 
     
+
 
 .. function:: configure_ac_bandwidth(ac_minimum_frequency_hz, ac_maximum_frequency_hz)
 
@@ -32,7 +35,8 @@ NI-DMM Functions
 
     
 
-    :param ac_minimum_frequency_hz: 
+
+    :param ac_minimum_frequency_hz:
 
 
         Specifies the minimum expected frequency component of the input signal
@@ -45,8 +49,9 @@ NI-DMM Functions
         NI 4050 and NI 4060.
 
         
-    :type ac_minimum_frequency_hz: ViReal64
-    :param ac_maximum_frequency_hz: 
+
+    :type ac_minimum_frequency_hz:ViReal64
+    :param ac_maximum_frequency_hz:
 
 
         Specifies the maximum expected frequency component of the input signal
@@ -61,7 +66,8 @@ NI-DMM Functions
         Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
 
         
-    :type ac_maximum_frequency_hz: ViReal64
+
+    :type ac_maximum_frequency_hz:ViReal64
 
 .. function:: configure_adc_calibration(adc_calibration)
 
@@ -74,7 +80,8 @@ NI-DMM Functions
 
     
 
-    :param adc_calibration: 
+
+    :param adc_calibration:
 
 
         Specifies the **ADC\_Calibration** setting. The driver sets
@@ -98,7 +105,8 @@ NI-DMM Functions
         +----------------------------------------------+-------+---------------------------------------------------------------------------------------------------+
         | NIDMM\_VAL\_ADC\_CALIBRATION\_ON             | 1     | The DMM measures an internal reference to calculate the correct gain for the measurement.         |
         +----------------------------------------------+-------+---------------------------------------------------------------------------------------------------+
-    :type adc_calibration: :py:data:`nidmm.ADCCalibration`
+
+    :type adc_calibration::py:data:`nidmm.ADCCalibration`
 
 .. function:: configure_auto_zero_mode(auto_zero_mode)
 
@@ -111,7 +119,8 @@ NI-DMM Functions
 
     
 
-    :param auto_zero_mode: 
+
+    :param auto_zero_mode:
 
 
         Specifies the **auto\_zero\_mode**. NI-DMM sets the
@@ -149,7 +158,8 @@ NI-DMM Functions
         +----------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: The NI 4060/4065 does *not* support this setting.
-    :type auto_zero_mode: :py:data:`nidmm.AutoZero`
+
+    :type auto_zero_mode::py:data:`nidmm.AutoZero`
 
 .. function:: configure_cable_comp_type(cable_comp_type)
 
@@ -159,14 +169,16 @@ NI-DMM Functions
 
     
 
-    :param cable_comp_type: 
+
+    :param cable_comp_type:
 
 
         Specifies the type of cable compensation that is used for the current
         range.
 
         
-    :type cable_comp_type: :py:data:`nidmm.CableCompensationType`
+
+    :type cable_comp_type::py:data:`nidmm.CableCompensationType`
 
 .. function:: configure_current_source(current_source)
 
@@ -175,7 +187,8 @@ NI-DMM Functions
 
     
 
-    :param current_source: 
+
+    :param current_source:
 
 
         Specifies the **current\_source** provided during diode measurements.
@@ -191,7 +204,8 @@ NI-DMM Functions
         +-----------------------------------+--------+---------------------------------------------------+
         | NIDMM\_VAL\_1\_MILLIAMP (default) | 1 mA   | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 |
         +-----------------------------------+--------+---------------------------------------------------+
-    :type current_source: :py:data:`nidmm.CurrentSource`
+
+    :type current_source::py:data:`nidmm.CurrentSource`
 
 .. function:: configure_fixed_ref_junction(fixed_reference_junction)
 
@@ -200,7 +214,8 @@ NI-DMM Functions
 
     
 
-    :param fixed_reference_junction: 
+
+    :param fixed_reference_junction:
 
 
         Specifies the reference junction temperature when a fixed reference
@@ -209,7 +224,8 @@ NI-DMM Functions
         Junction property. The default is 25.00 (°C).
 
         
-    :type fixed_reference_junction: ViReal64
+
+    :type fixed_reference_junction:ViReal64
 
 .. function:: configure_frequency_voltage_range(voltage_range)
 
@@ -219,7 +235,8 @@ NI-DMM Functions
 
     
 
-    :param voltage_range: 
+
+    :param voltage_range:
 
 
         Sets the expected maximum amplitude of the input signal. Refer to the
@@ -242,7 +259,8 @@ NI-DMM Functions
         +---------------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
         | NIDMM\_VAL\_AUTO\_RANGE\_OFF          | -2.0  | Disables Auto Ranging. The driver sets the voltage range to the last calculated voltage range.                                   |
         +---------------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
-    :type voltage_range: ViReal64
+
+    :type voltage_range:ViReal64
 
 .. function:: configure_meas_complete_dest(meas_complete_destination)
 
@@ -253,7 +271,8 @@ NI-DMM Functions
 
     
 
-    :param meas_complete_destination: 
+
+    :param meas_complete_destination:
 
 
         Specifies the destination of the Measurement Complete signal. This
@@ -267,7 +286,8 @@ NI-DMM Functions
             `LabWindows/CVI Trigger
             Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
             section.
-    :type meas_complete_destination: :py:data:`nidmm.MeasurementCompleteDest`
+
+    :type meas_complete_destination::py:data:`nidmm.MeasurementCompleteDest`
 
 .. function:: configure_meas_complete_slope(meas_complete_slope)
 
@@ -276,7 +296,8 @@ NI-DMM Functions
 
     
 
-    :param meas_complete_slope: 
+
+    :param meas_complete_slope:
 
 
         Specifies the polarity of the signal that is generated. The driver sets
@@ -287,7 +308,8 @@ NI-DMM Functions
         +------------------------+---+----------------------+----------------------------------------------------------------+
         | Falling Edge (default) | 1 | NIDMM\_VAL\_NEGATIVE | The driver triggers on the falling edge of the trigger signal. |
         +------------------------+---+----------------------+----------------------------------------------------------------+
-    :type meas_complete_slope: :py:data:`nidmm.Slope`
+
+    :type meas_complete_slope::py:data:`nidmm.Slope`
 
 .. function:: configure_measurement_absolute(measurement_function, range, resolution_absolute)
 
@@ -297,15 +319,17 @@ NI-DMM Functions
 
     
 
-    :param measurement_function: 
+
+    :param measurement_function:
 
 
         Specifies the **measurement\_function** used to acquire the measurement.
         The driver sets :py:data:`nidmm.function` to this value.
 
         
-    :type measurement_function: :py:data:`nidmm.Function`
-    :param range: 
+
+    :type measurement_function::py:data:`nidmm.Function`
+    :param range:
 
 
         Specifies the **range** for the function specified in the
@@ -331,8 +355,9 @@ NI-DMM Functions
 
         .. note:: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
             trigger and sample trigger are set to IMMEDIATE.
-    :type range: ViReal64
-    :param resolution_absolute: 
+
+    :type range:ViReal64
+    :param resolution_absolute:
 
 
         Specifies the absolute resolution for the measurement. NI-DMM sets
@@ -347,7 +372,8 @@ NI-DMM Functions
             measurements on the NI 4072. To achieve better resolution for such
             measurements, use the :py:data:`nidmm.LC\_NUMBER\_MEAS\_TO\_AVERAGE`
             attribute.
-    :type resolution_absolute: ViReal64
+
+    :type resolution_absolute:ViReal64
 
 .. function:: configure_measurement_digits(measurement_function, range, resolution_digits)
 
@@ -357,15 +383,17 @@ NI-DMM Functions
 
     
 
-    :param measurement_function: 
+
+    :param measurement_function:
 
 
         Specifies the **measurement\_function** used to acquire the measurement.
         The driver sets :py:data:`nidmm.function` to this value.
 
         
-    :type measurement_function: :py:data:`nidmm.Function`
-    :param range: 
+
+    :type measurement_function::py:data:`nidmm.Function`
+    :param range:
 
 
         Specifies the range for the function specified in the
@@ -391,8 +419,9 @@ NI-DMM Functions
 
         .. note:: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
             trigger and sample trigger are set to IMMEDIATE.
-    :type range: ViReal64
-    :param resolution_digits: 
+
+    :type range:ViReal64
+    :param resolution_digits:
 
 
         Specifies the resolution of the measurement in digits. The driver sets
@@ -410,7 +439,8 @@ NI-DMM Functions
             measurements on the NI 4072. To achieve better resolution for such
             measurements, use the :py:data:`nidmm.LC\_NUMBER\_MEAS\_TO\_AVERAGE`
             attribute.
-    :type resolution_digits: ViReal64
+
+    :type resolution_digits:ViReal64
 
 .. function:: configure_multi_point(trigger_count, sample_count, sample_trigger, sample_interval)
 
@@ -428,7 +458,8 @@ NI-DMM Functions
 
     
 
-    :param trigger_count: 
+
+    :param trigger_count:
 
 
         Sets the number of triggers you want the DMM to receive before returning
@@ -436,8 +467,9 @@ NI-DMM Functions
         value. The default value is 1.
 
         
-    :type trigger_count: ViInt32
-    :param sample_count: 
+
+    :type trigger_count:ViInt32
+    :param sample_count:
 
 
         Sets the number of measurements the DMM makes in each measurement
@@ -445,8 +477,9 @@ NI-DMM Functions
         :py:data:`nidmm.SAMPLE\_COUNT` to this value. The default value is 1.
 
         
-    :type sample_count: ViInt32
-    :param sample_trigger: 
+
+    :type sample_count:ViInt32
+    :param sample_trigger:
 
 
         Specifies the **sample\_trigger** source you want to use. The driver
@@ -459,8 +492,9 @@ NI-DMM Functions
             `LabWindows/CVI Trigger
             Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
             section.
-    :type sample_trigger: :py:data:`nidmm.SampleTrigger`
-    :param sample_interval: 
+
+    :type sample_trigger::py:data:`nidmm.SampleTrigger`
+    :param sample_interval:
 
 
         Sets the amount of time in seconds the DMM waits between measurement
@@ -479,7 +513,8 @@ NI-DMM Functions
         
 
         .. note:: This attribute is not used on the NI 4080/4081/4082 and the NI 4050.
-    :type sample_interval: ViReal64
+
+    :type sample_interval:ViReal64
 
 .. function:: configure_offset_comp_ohms(offset_comp_ohms)
 
@@ -493,7 +528,8 @@ NI-DMM Functions
 
     
 
-    :param offset_comp_ohms: 
+
+    :param offset_comp_ohms:
 
 
         Enables or disables **offset\_comp\_ohms**. The driver sets
@@ -506,7 +542,8 @@ NI-DMM Functions
         +-----------------------------------------------+-------+----------------------------------------+
         | NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_ON            | 1     | On enables **Offset\_Comp\_Ohms**.     |
         +-----------------------------------------------+-------+----------------------------------------+
-    :type offset_comp_ohms: :py:data:`nidmm.OffsetCompensatedOhms`
+
+    :type offset_comp_ohms::py:data:`nidmm.OffsetCompensatedOhms`
 
 .. function:: configure_open_cable_comp_values(conductance, susceptance)
 
@@ -516,20 +553,23 @@ NI-DMM Functions
 
     
 
-    :param conductance: 
+
+    :param conductance:
 
 
         Specifies the open cable compensation **conductance**.
 
         
-    :type conductance: ViReal64
-    :param susceptance: 
+
+    :type conductance:ViReal64
+    :param susceptance:
 
 
         Specifies the open cable compensation **susceptance**.
 
         
-    :type susceptance: ViReal64
+
+    :type susceptance:ViReal64
 
 .. function:: configure_power_line_frequency(power_line_frequency_hz)
 
@@ -537,14 +577,16 @@ NI-DMM Functions
 
     
 
-    :param power_line_frequency_hz: 
+
+    :param power_line_frequency_hz:
 
 
         **Powerline Frequency** specifies the powerline frequency in hertz.
         NI-DMM sets the Powerline Frequency property to this value.
 
         
-    :type power_line_frequency_hz: ViReal64
+
+    :type power_line_frequency_hz:ViReal64
 
 .. function:: configure_rtd_custom(rtd_a, rtd_b, rtd_c)
 
@@ -552,7 +594,8 @@ NI-DMM Functions
 
     
 
-    :param rtd_a: 
+
+    :param rtd_a:
 
 
         Specifies the Callendar-Van Dusen A coefficient for RTD scaling when RTD
@@ -560,8 +603,9 @@ NI-DMM Functions
         The default is 3.9083e-3 (Pt3851)
 
         
-    :type rtd_a: ViReal64
-    :param rtd_b: 
+
+    :type rtd_a:ViReal64
+    :param rtd_b:
 
 
         Specifies the Callendar-Van Dusen B coefficient for RTD scaling when RTD
@@ -569,8 +613,9 @@ NI-DMM Functions
         The default is -5.775e-7 (Pt3851).
 
         
-    :type rtd_b: ViReal64
-    :param rtd_c: 
+
+    :type rtd_b:ViReal64
+    :param rtd_c:
 
 
         Specifies the Callendar-Van Dusen C coefficient for RTD scaling when RTD
@@ -578,7 +623,8 @@ NI-DMM Functions
         The default is -4.183e-12 (Pt3851).
 
         
-    :type rtd_c: ViReal64
+
+    :type rtd_c:ViReal64
 
 .. function:: configure_rtd_type(rtd_type, rtd_resistance)
 
@@ -586,7 +632,8 @@ NI-DMM Functions
 
     
 
-    :param rtd_type: 
+
+    :param rtd_type:
 
 
         Specifies the type of RTD used to measure the temperature resistance.
@@ -612,15 +659,17 @@ NI-DMM Functions
         +---------------------------------+
         | \*No standard. Check the TCR.   |
         +---------------------------------+
-    :type rtd_type: ViInt32
-    :param rtd_resistance: 
+
+    :type rtd_type:ViInt32
+    :param rtd_resistance:
 
 
         Specifies the RTD resistance in ohms at 0 °C. NI-DMM uses this value to
         set the RTD Resistance property. The default is 100 (Ω).
 
         
-    :type rtd_resistance: ViReal64
+
+    :type rtd_resistance:ViReal64
 
 .. function:: configure_sample_trigger_slope(sample_trigger_slope)
 
@@ -629,7 +678,8 @@ NI-DMM Functions
 
     
 
-    :param sample_trigger_slope: 
+
+    :param sample_trigger_slope:
 
 
         Specifies the polarity of the Trigger signal on which the measurement is
@@ -642,7 +692,8 @@ NI-DMM Functions
         +------------------------+---+----------------------+----------------------------------------------------------------+
         | Falling Edge (default) | 1 | NIDMM\_VAL\_NEGATIVE | The driver triggers on the falling edge of the trigger signal. |
         +------------------------+---+----------------------+----------------------------------------------------------------+
-    :type sample_trigger_slope: :py:data:`nidmm.Slope`
+
+    :type sample_trigger_slope::py:data:`nidmm.Slope`
 
 .. function:: configure_short_cable_comp_values(resistance, reactance)
 
@@ -652,20 +703,23 @@ NI-DMM Functions
 
     
 
-    :param resistance: 
+
+    :param resistance:
 
 
         Specifies the short cable compensation **resistance**.
 
         
-    :type resistance: ViReal64
-    :param reactance: 
+
+    :type resistance:ViReal64
+    :param reactance:
 
 
         Specifies the short cable compensation **reactance**.
 
         
-    :type reactance: ViReal64
+
+    :type reactance:ViReal64
 
 .. function:: configure_thermistor_custom(thermistor_a, thermistor_b, thermistor_c)
 
@@ -673,7 +727,8 @@ NI-DMM Functions
 
     
 
-    :param thermistor_a: 
+
+    :param thermistor_a:
 
 
         Specifies the Steinhart-Hart A coefficient for thermistor scaling when
@@ -681,8 +736,9 @@ NI-DMM Functions
         function. The default is 1.0295e-3 (44006).
 
         
-    :type thermistor_a: ViReal64
-    :param thermistor_b: 
+
+    :type thermistor_a:ViReal64
+    :param thermistor_b:
 
 
         Specifies the Steinhart-Hart B coefficient for thermistor scaling when
@@ -690,8 +746,9 @@ NI-DMM Functions
         function. The default is 2.391e-4 (44006).
 
         
-    :type thermistor_b: ViReal64
-    :param thermistor_c: 
+
+    :type thermistor_b:ViReal64
+    :param thermistor_c:
 
 
         Specifies the Steinhart-Hart C coefficient for thermistor scaling when
@@ -699,7 +756,8 @@ NI-DMM Functions
         function. The default is 1.568e-7 (44006).
 
         
-    :type thermistor_c: ViReal64
+
+    :type thermistor_c:ViReal64
 
 .. function:: configure_thermistor_type(thermistor_type)
 
@@ -707,7 +765,8 @@ NI-DMM Functions
 
     
 
-    :param thermistor_type: 
+
+    :param thermistor_type:
 
 
         Specifies the type of thermistor used to measure the temperature. NI-DMM
@@ -732,7 +791,8 @@ NI-DMM Functions
         +--------------------+--------------------+--------------------+--------------------+
 
         
-    :type thermistor_type: :py:data:`nidmm.TemperatureThermistorType`
+
+    :type thermistor_type::py:data:`nidmm.TemperatureThermistorType`
 
 .. function:: configure_thermocouple(thermocouple_type, reference_junction_type)
 
@@ -741,7 +801,8 @@ NI-DMM Functions
 
     
 
-    :param thermocouple_type: 
+
+    :param thermocouple_type:
 
 
         Specifies the type of thermocouple used to measure the temperature.
@@ -765,8 +826,9 @@ NI-DMM Functions
         +-------------------------+---------------------+
         | NIDMM\_VAL\_TEMP\_TC\_T | Thermocouple type T |
         +-------------------------+---------------------+
-    :type thermocouple_type: ViInt32
-    :param reference_junction_type: 
+
+    :type thermocouple_type:ViInt32
+    :param reference_junction_type:
 
 
         Specifies the type of reference junction to be used in the reference
@@ -775,7 +837,8 @@ NI-DMM Functions
         value is NIDMM\_VAL\_TEMP\_REF\_JUNC\_FIXED.
 
         
-    :type reference_junction_type: ViInt32
+
+    :type reference_junction_type:ViInt32
 
 .. function:: configure_transducer_type(transducer_type)
 
@@ -783,7 +846,8 @@ NI-DMM Functions
 
     
 
-    :param transducer_type: 
+
+    :param transducer_type:
 
 
         Specifies the type of device used to measure the temperature. NI-DMM
@@ -799,7 +863,8 @@ NI-DMM Functions
         +--------------------------+--------------+
         | NIDMM\_VAL\_THERMOCOUPLE | Thermocouple |
         +--------------------------+--------------+
-    :type transducer_type: :py:data:`nidmm.TemperatureTransducerType`
+
+    :type transducer_type::py:data:`nidmm.TemperatureTransducerType`
 
 .. function:: configure_trigger(trigger_source, trigger_delay)
 
@@ -811,7 +876,8 @@ NI-DMM Functions
 
     
 
-    :param trigger_source: 
+
+    :param trigger_source:
 
 
         Specifies the **trigger\_source** that initiates the acquisition. The
@@ -825,8 +891,9 @@ NI-DMM Functions
             `LabWindows/CVI Trigger
             Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
             section.
-    :type trigger_source: :py:data:`nidmm.TriggerSource`
-    :param trigger_delay: 
+
+    :type trigger_source::py:data:`nidmm.TriggerSource`
+    :param trigger_delay:
 
 
         Specifies the time that the DMM waits after it has received a trigger
@@ -842,7 +909,8 @@ NI-DMM Functions
 
         .. note:: When using the NI 4050, **Trigger\_Delay** must be set to
             NIDMM\_VAL\_AUTO\_DELAY (-1).
-    :type trigger_delay: ViReal64
+
+    :type trigger_delay:ViReal64
 
 .. function:: configure_trigger_slope(trigger_slope)
 
@@ -851,7 +919,8 @@ NI-DMM Functions
 
     
 
-    :param trigger_slope: 
+
+    :param trigger_slope:
 
 
         Specifies the polarity of the trigger signal on which the measurement is
@@ -864,7 +933,8 @@ NI-DMM Functions
         +--------------------------------+---+----------------------------------------------------------------+
         | NIDMM\_VAL\_NEGATIVE (default) | 1 | The driver triggers on the falling edge of the trigger signal. |
         +--------------------------------+---+----------------------------------------------------------------+
-    :type trigger_slope: :py:data:`nidmm.Slope`
+
+    :type trigger_slope::py:data:`nidmm.Slope`
 
 .. function:: configure_waveform_acquisition(measurement_function, range, rate, waveform_points)
 
@@ -873,7 +943,8 @@ NI-DMM Functions
 
     
 
-    :param measurement_function: 
+
+    :param measurement_function:
 
 
         Specifies the **measurement\_function** used in a waveform acquisition.
@@ -884,8 +955,9 @@ NI-DMM Functions
         +-----------------------------------------+------+------------------+
         | NIDMM\_VAL\_WAVEFORM\_CURRENT           | 1004 | Current Waveform |
         +-----------------------------------------+------+------------------+
-    :type measurement_function: :py:data:`nidmm.Function`
-    :param range: 
+
+    :type measurement_function::py:data:`nidmm.Function`
+    :param range:
 
 
         Specifies the expected maximum amplitude of the input signal and sets
@@ -899,8 +971,9 @@ NI-DMM Functions
         Auto-ranging is not supported during waveform acquisitions.
 
         
-    :type range: ViReal64
-    :param rate: 
+
+    :type range:ViReal64
+    :param rate:
 
 
         Specifies the **rate** of the acquisition in samples per second. NI-DMM
@@ -911,8 +984,9 @@ NI-DMM Functions
         1,800,000.
 
         
-    :type rate: ViReal64
-    :param waveform_points: 
+
+    :type rate:ViReal64
+    :param waveform_points:
 
 
         Specifies the number of points to acquire before the waveform
@@ -927,7 +1001,8 @@ NI-DMM Functions
         The default value is 500.
 
         
-    :type waveform_points: ViInt32
+
+    :type waveform_points:ViInt32
 
 .. function:: configure_waveform_coupling(waveform_coupling)
 
@@ -936,7 +1011,8 @@ NI-DMM Functions
 
     
 
-    :param waveform_coupling: 
+
+    :param waveform_coupling:
 
 
         Selects DC or AC coupling. The driver sets
@@ -949,7 +1025,8 @@ NI-DMM Functions
         +----------------------------------------------+-------+-------------+
         | NIDMM\_VAL\_WAVEFORM\_COUPLING\_DC (default) | 1     | DC coupling |
         +----------------------------------------------+-------+-------------+
-    :type waveform_coupling: :py:data:`nidmm.WaveformCouplingMode`
+
+    :type waveform_coupling::py:data:`nidmm.WaveformCouplingMode`
 
 .. function:: disable()
 
@@ -959,6 +1036,7 @@ NI-DMM Functions
 
     
 
+
 .. function:: fetch(maximum_time, reading)
 
     Returns the value from a previously initiated measurement. You must call
@@ -966,7 +1044,8 @@ NI-DMM Functions
 
     
 
-    :param maximum_time: 
+
+    :param maximum_time:
 
 
         Specifies the **maximum\_time** allowed for this function to complete in
@@ -981,7 +1060,8 @@ NI-DMM Functions
         automatically.
 
         
-    :type maximum_time: ViInt32
+
+    :type maximum_time:ViInt32
 
     :rtype: ViReal64
 
@@ -989,6 +1069,7 @@ NI-DMM Functions
             The measured value returned from the DMM.
 
             
+
 
 .. function:: fetch_multi_point(maximum_time, array_size, reading_array, actual_number_of_points)
 
@@ -1000,7 +1081,8 @@ NI-DMM Functions
 
     
 
-    :param maximum_time: 
+
+    :param maximum_time:
 
 
         Specifies the **maximum\_time** allowed for this function to complete in
@@ -1015,8 +1097,9 @@ NI-DMM Functions
         automatically.
 
         
-    :type maximum_time: ViInt32
-    :param array_size: 
+
+    :type maximum_time:ViInt32
+    :param array_size:
 
 
         Specifies the number of measurements to acquire. The maximum number of
@@ -1028,13 +1111,14 @@ NI-DMM Functions
         positive ViInt32. The default value is 1.
 
         
-    :type array_size: ViInt32
+
+    :type array_size:ViInt32
 
     :rtype: tuple (reading_array, actual_number_of_points)
 
         WHERE
 
-        reading_array (ViReal64): 
+        reading_array (ViReal64):
 
 
             An array of measurement values.
@@ -1043,12 +1127,14 @@ NI-DMM Functions
 
             .. note:: The size of the **Reading\_Array** must be at least the size that you
                 specify for the **Array\_Size** parameter.
-        actual_number_of_points (ViInt32): 
+
+        actual_number_of_points (ViInt32):
 
 
             Indicates the number of measured values actually retrieved from the DMM.
 
             
+
 
 .. function:: fetch_waveform(maximum_time, array_size, waveform_array, actual_number_of_points)
 
@@ -1058,7 +1144,8 @@ NI-DMM Functions
 
     
 
-    :param maximum_time: 
+
+    :param maximum_time:
 
 
         Specifies the **maximum\_time** allowed for this function to complete in
@@ -1073,8 +1160,9 @@ NI-DMM Functions
         automatically.
 
         
-    :type maximum_time: ViInt32
-    :param array_size: 
+
+    :type maximum_time:ViInt32
+    :param array_size:
 
 
         Specifies the number of waveform points to return. You specify the total
@@ -1083,25 +1171,28 @@ NI-DMM Functions
         1.
 
         
-    :type array_size: ViInt32
+
+    :type array_size:ViInt32
 
     :rtype: tuple (waveform_array, actual_number_of_points)
 
         WHERE
 
-        waveform_array (ViReal64): 
+        waveform_array (ViReal64):
 
 
             **Waveform Array** is an array of measurement values stored in waveform
             data type.
 
             
-        actual_number_of_points (ViInt32): 
+
+        actual_number_of_points (ViInt32):
 
 
             Indicates the number of measured values actually retrieved from the DMM.
 
             
+
 
 .. function:: format_meas_absolute(measurement_function, range, resolution, measurement, mode_string, range_string, data_string)
 
@@ -1111,54 +1202,61 @@ NI-DMM Functions
 
     
 
-    :param measurement_function: 
+
+    :param measurement_function:
 
 
         Specifies the **measurement\_function** used to acquire the measurement.
         The driver sets :py:data:`nidmm.function` to this value.
 
         
-    :type measurement_function: ViInt32
-    :param range: 
+
+    :type measurement_function:ViInt32
+    :param range:
 
 
         Specifies the :py:data:`nidmm.range` used to acquire the **Measurement**.
 
         
-    :type range: ViReal64
-    :param resolution: 
+
+    :type range:ViReal64
+    :param resolution:
 
 
         Specifies the :py:data:`nidmm.RESOLUTION\_ABSOLUTE` of the **Measurement**.
 
         
-    :type resolution: ViReal64
-    :param measurement: 
+
+    :type resolution:ViReal64
+    :param measurement:
 
 
         Specifies the measured value returned from the DMM.
 
         
-    :type measurement: ViReal64
+
+    :type measurement:ViReal64
 
     :rtype: tuple (mode_string, range_string, data_string)
 
         WHERE
 
-        mode_string (ViChar): 
+        mode_string (ViChar):
 
 
             Returns a string containing the units of the **Measurement** mode.
 
             
-        range_string (ViChar): 
+
+        range_string (ViChar):
 
 
             Returns the :py:data:`nidmm.range` of the **Measurement**, formatted into a
             string with the correct number of display digits.
 
             
-        data_string (ViChar): 
+
+        data_string (ViChar):
 
 
             Returns the **Measurement**, formatted according to the
@@ -1167,17 +1265,19 @@ NI-DMM Functions
 
             
 
+
 .. function:: get_aperture_time_info(aperture_time, aperture_time_units)
 
     Returns the DMM **Aperture\_Time** and **Aperture\_Time\_Units**.
 
     
 
+
     :rtype: tuple (aperture_time, aperture_time_units)
 
         WHERE
 
-        aperture_time (ViReal64): 
+        aperture_time (ViReal64):
 
 
             Specifies the amount of time the DMM digitizes the input signal for a
@@ -1202,7 +1302,8 @@ NI-DMM Functions
             the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
 
             
-        aperture_time_units (enums.ApertureTimeUnits): 
+
+        aperture_time_units (enums.ApertureTimeUnits):
 
 
             Indicates the units of aperture time as powerline cycles (PLCs) or
@@ -1214,6 +1315,7 @@ NI-DMM Functions
             +---------------------------------+---+------------------+
             | NIDMM\_VAL\_POWER\_LINE\_CYCLES | 1 | Powerline Cycles |
             +---------------------------------+---+------------------+
+
 
 .. function:: _get_attribute_vi_boolean(channel_name, attribute_id, attribute_value)
 
@@ -1230,7 +1332,8 @@ NI-DMM Functions
 
     
 
-    :param channel_name: 
+
+    :param channel_name:
 
 
         This parameter is ignored. National Instruments DMMs do not support
@@ -1241,14 +1344,16 @@ NI-DMM Functions
         The default value is " " (an empty string).
 
         
-    :type channel_name: ViConstString
-    :param attribute_id: 
+
+    :type channel_name:ViConstString
+    :param attribute_id:
 
 
         Pass the ID of an attribute.
 
         
-    :type attribute_id: ViAttr
+
+    :type attribute_id:ViAttr
 
     :rtype: ViBoolean
 
@@ -1257,6 +1362,7 @@ NI-DMM Functions
             ViBoolean variable.
 
             
+
 
 .. function:: _get_attribute_vi_int32(channel_name, attribute_id, attribute_value)
 
@@ -1273,7 +1379,8 @@ NI-DMM Functions
 
     
 
-    :param channel_name: 
+
+    :param channel_name:
 
 
         This parameter is ignored. National Instruments DMMs do not support
@@ -1284,14 +1391,16 @@ NI-DMM Functions
         The default value is " " (an empty string).
 
         
-    :type channel_name: ViConstString
-    :param attribute_id: 
+
+    :type channel_name:ViConstString
+    :param attribute_id:
 
 
         Pass the ID of an attribute.
 
         
-    :type attribute_id: ViAttr
+
+    :type attribute_id:ViAttr
 
     :rtype: ViInt32
 
@@ -1300,6 +1409,7 @@ NI-DMM Functions
             ViInt32 variable.
 
             
+
 
 .. function:: _get_attribute_vi_real64(channel_name, attribute_id, attribute_value)
 
@@ -1316,7 +1426,8 @@ NI-DMM Functions
 
     
 
-    :param channel_name: 
+
+    :param channel_name:
 
 
         This parameter is ignored. National Instruments DMMs do not support
@@ -1327,14 +1438,16 @@ NI-DMM Functions
         The default value is " " (an empty string).
 
         
-    :type channel_name: ViConstString
-    :param attribute_id: 
+
+    :type channel_name:ViConstString
+    :param attribute_id:
 
 
         Pass the ID of an attribute.
 
         
-    :type attribute_id: ViAttr
+
+    :type attribute_id:ViAttr
 
     :rtype: ViReal64
 
@@ -1343,6 +1456,7 @@ NI-DMM Functions
             ViReal64 variable.
 
             
+
 
 .. function:: _get_attribute_vi_session(channel_name, attribute_id, attribute_value)
 
@@ -1359,7 +1473,8 @@ NI-DMM Functions
 
     
 
-    :param channel_name: 
+
+    :param channel_name:
 
 
         This parameter is ignored. National Instruments DMMs do not support
@@ -1370,14 +1485,16 @@ NI-DMM Functions
         The default value is " " (an empty string).
 
         
-    :type channel_name: ViConstString
-    :param attribute_id: 
+
+    :type channel_name:ViConstString
+    :param attribute_id:
 
 
         Pass the ID of an attribute.
 
         
-    :type attribute_id: ViAttr
+
+    :type attribute_id:ViAttr
 
     :rtype: ViSession
 
@@ -1386,6 +1503,7 @@ NI-DMM Functions
             ViSession variable.
 
             
+
 
 .. function:: _get_attribute_vi_string(channel_name, attribute_id, buffer_size, attribute_value)
 
@@ -1405,7 +1523,8 @@ NI-DMM Functions
 
     
 
-    :param channel_name: 
+
+    :param channel_name:
 
 
         This parameter is ignored. National Instruments DMMs do not support
@@ -1416,15 +1535,17 @@ NI-DMM Functions
         The default value is " " (an empty string).
 
         
-    :type channel_name: ViConstString
-    :param attribute_id: 
+
+    :type channel_name:ViConstString
+    :param attribute_id:
 
 
         Pass the ID of an attribute.
 
         
-    :type attribute_id: ViAttr
-    :param buffer_size: 
+
+    :type attribute_id:ViAttr
+    :param buffer_size:
 
 
         Pass the number of bytes in the ViChar array you specify for the
@@ -1443,7 +1564,8 @@ NI-DMM Functions
         you can pass VI\_NULL for the **Attribute\_Value** buffer parameter.
 
         
-    :type buffer_size: ViInt32
+
+    :type buffer_size:ViInt32
 
 .. function:: get_auto_range_value(actual_range)
 
@@ -1451,6 +1573,7 @@ NI-DMM Functions
     Range is off.
 
     
+
 
     :rtype: ViReal64
 
@@ -1461,6 +1584,7 @@ NI-DMM Functions
 
             
 
+
 .. function:: get_cal_count(cal_type, count)
 
     Returns the calibration **Count** for the specified type of calibration.
@@ -1469,7 +1593,8 @@ NI-DMM Functions
 
     .. note:: The NI 4050, NI 4060, and NI 4080/4081/4082 are not supported.
 
-    :param cal_type: 
+
+    :param cal_type:
 
 
         Specifies the type of calibration performed (external or
@@ -1482,7 +1607,8 @@ NI-DMM Functions
         +--------------------------------------+---+----------------------+
 
         .. note:: The NI 4065 does not support self-calibration.
-    :type cal_type: ViInt32
+
+    :type cal_type:ViInt32
 
     :rtype: ViInt32
 
@@ -1490,6 +1616,7 @@ NI-DMM Functions
             The number of times calibration has been performed.
 
             
+
 
 .. function:: get_cal_date_and_time(cal_type, month, day, year, hour, minute)
 
@@ -1499,7 +1626,8 @@ NI-DMM Functions
 
     .. note:: The NI 4050 and NI 4060 are not supported.
 
-    :param cal_type: 
+
+    :param cal_type:
 
 
         Specifies the type of calibration performed (external or
@@ -1512,42 +1640,48 @@ NI-DMM Functions
         +--------------------------------------+---+----------------------+
 
         .. note:: The NI 4065 does not support self-calibration.
-    :type cal_type: ViInt32
+
+    :type cal_type:ViInt32
 
     :rtype: tuple (month, day, year, hour, minute)
 
         WHERE
 
-        month (ViInt32): 
+        month (ViInt32):
 
 
             Indicates the **month** of the last calibration.
 
             
-        day (ViInt32): 
+
+        day (ViInt32):
 
 
             Indicates the **day** of the last calibration.
 
             
-        year (ViInt32): 
+
+        year (ViInt32):
 
 
             Indicates the **year** of the last calibration.
 
             
-        hour (ViInt32): 
+
+        hour (ViInt32):
 
 
             Indicates the **hour** of the last calibration.
 
             
-        minute (ViInt32): 
+
+        minute (ViInt32):
 
 
             Indicates the **minute** of the last calibration.
 
             
+
 
 .. function:: get_channel_name(index, buffer_size, channel_string)
 
@@ -1557,14 +1691,16 @@ NI-DMM Functions
 
     
 
-    :param index: 
+
+    :param index:
 
 
         A 1–based **index** into the channel table.
 
         
-    :type index: ViInt32
-    :param buffer_size: 
+
+    :type index:ViInt32
+    :param buffer_size:
 
 
         Passes the number of bytes in the ViChar array you specify for the
@@ -1583,7 +1719,8 @@ NI-DMM Functions
         is None.
 
         
-    :type buffer_size: ViInt32
+
+    :type buffer_size:ViInt32
 
     :rtype: ViChar
 
@@ -1594,6 +1731,7 @@ NI-DMM Functions
 
             
 
+
 .. function:: get_dev_temp(options, temperature)
 
     Returns the current **Temperature** of the device.
@@ -1602,13 +1740,15 @@ NI-DMM Functions
 
     .. note:: The NI 4050 and NI 4060 are not supported.
 
-    :param options: 
+
+    :param options:
 
 
         Reserved.
 
         
-    :type options: ViString
+
+    :type options:ViString
 
     :rtype: ViReal64
 
@@ -1616,6 +1756,7 @@ NI-DMM Functions
             Returns the current **temperature** of the device.
 
             
+
 
 .. function:: _get_error(error_code, buffer_size, description)
 
@@ -1627,7 +1768,8 @@ NI-DMM Functions
 
     
 
-    :param buffer_size: 
+
+    :param buffer_size:
 
 
         Passes the number of bytes in the ViChar array you specify for the
@@ -1645,7 +1787,8 @@ NI-DMM Functions
         None.
 
         
-    :type buffer_size: ViInt32
+
+    :type buffer_size:ViInt32
 
     :rtype: ViStatus
 
@@ -1656,6 +1799,7 @@ NI-DMM Functions
 
             
 
+
 .. function:: _get_error_message(error_code, buffer_size, error_message)
 
     Returns the **Error\_Message** as a user-readable string for the
@@ -1664,15 +1808,17 @@ NI-DMM Functions
 
     
 
-    :param error_code: 
+
+    :param error_code:
 
 
         The error code returned from the instrument for which you want to get a
         user-readable string.
 
         
-    :type error_code: ViStatus
-    :param buffer_size: 
+
+    :type error_code:ViStatus
+    :param buffer_size:
 
 
         Specifies the number of bytes allocated for the **Error\_Message**
@@ -1683,7 +1829,8 @@ NI-DMM Functions
         for **Error\_Message**.
 
         
-    :type buffer_size: ViInt32
+
+    :type buffer_size:ViInt32
 
 .. function:: get_last_cal_temp(cal_type, temperature)
 
@@ -1693,7 +1840,8 @@ NI-DMM Functions
 
     .. note:: The NI 4050 and NI 4060 are not supported.
 
-    :param cal_type: 
+
+    :param cal_type:
 
 
         Specifies the type of calibration performed (external or
@@ -1706,7 +1854,8 @@ NI-DMM Functions
         +--------------------------------------+---+----------------------+
 
         .. note:: The NI 4065 does not support self-calibration.
-    :type cal_type: ViInt32
+
+    :type cal_type:ViInt32
 
     :rtype: ViReal64
 
@@ -1714,6 +1863,7 @@ NI-DMM Functions
             Returns the **temperature** during the last calibration.
 
             
+
 
 .. function:: get_measurement_period(period)
 
@@ -1724,6 +1874,7 @@ NI-DMM Functions
     been called.
 
     
+
 
     :rtype: ViReal64
 
@@ -1738,6 +1889,7 @@ NI-DMM Functions
 
             
 
+
 .. function:: get_next_coercion_record(buffer_size, coercion_record)
 
     This function returns the coercion information associated with the IVI
@@ -1751,7 +1903,8 @@ NI-DMM Functions
 
     
 
-    :param buffer_size: 
+
+    :param buffer_size:
 
 
         Passes the number of bytes in the ViChar array you specify for the
@@ -1773,7 +1926,8 @@ NI-DMM Functions
         The default value is None.
 
         
-    :type buffer_size: ViInt32
+
+    :type buffer_size:ViInt32
 
     :rtype: ViChar
 
@@ -1785,6 +1939,7 @@ NI-DMM Functions
             specify with the **Buffer\_Size** parameter.
 
             
+
 
 .. function:: get_next_interchange_warning(buffer_size, interchange_warning)
 
@@ -1804,7 +1959,8 @@ NI-DMM Functions
 
     
 
-    :param buffer_size: 
+
+    :param buffer_size:
 
 
         Passes the number of bytes in the ViChar array you specify for the
@@ -1823,7 +1979,8 @@ NI-DMM Functions
         value is None.
 
         
-    :type buffer_size: ViInt32
+
+    :type buffer_size:ViInt32
 
 .. function:: get_self_cal_supported(self_cal_supported)
 
@@ -1831,6 +1988,7 @@ NI-DMM Functions
     are using can perform self-calibration.
 
     
+
 
     :rtype: ViBoolean
 
@@ -1843,6 +2001,7 @@ NI-DMM Functions
             +-----------+---+-------------------------------------------------------------+
             | VI\_FALSE | 0 | The DMM that you are using cannot perform self-calibration. |
             +-----------+---+-------------------------------------------------------------+
+
 
 .. function:: _init_with_options(resource_name, id_query, reset_device, option_string)
 
@@ -1866,7 +2025,8 @@ NI-DMM Functions
 
     
 
-    :param resource_name: 
+
+    :param resource_name:
 
 
         .. caution:: All IVI names for the **Resource\_Name**, such as logical names or
@@ -1890,8 +2050,9 @@ NI-DMM Functions
         -  IVI logical name
 
         
-    :type resource_name: ViString
-    :param id_query: 
+
+    :type resource_name:ViString
+    :param id_query:
 
 
         Verifies that the device you initialize is one that the driver supports.
@@ -1904,8 +2065,9 @@ NI-DMM Functions
         +--------------------+---+------------------+
         | VI\_FALSE          | 0 | Skip ID Query    |
         +--------------------+---+------------------+
-    :type id_query: ViBoolean
-    :param reset_device: 
+
+    :type id_query:ViBoolean
+    :param reset_device:
 
 
         Specifies whether to reset the instrument during the initialization
@@ -1917,8 +2079,9 @@ NI-DMM Functions
         +--------------------+---+--------------+
         | VI\_FALSE          | 0 | Don't Reset  |
         +--------------------+---+--------------+
-    :type reset_device: ViBoolean
-    :param option_string: 
+
+    :type reset_device:ViBoolean
+    :param option_string:
 
 
         | Sets the initial value of certain attributes for the session. The
@@ -1951,7 +2114,8 @@ NI-DMM Functions
         +------------------+---------------------------------------+-------------------+----+
         | DriverSetup      | :py:data:`nidmm.DRIVER\_SETUP`        | "" (empty string) | "" |
         +------------------+---------------------------------------+-------------------+----+
-    :type option_string: ViString
+
+    :type option_string:ViString
 
     :rtype: ViSession
 
@@ -1960,6 +2124,7 @@ NI-DMM Functions
             all subsequent instrument driver function calls.
 
             
+
 
 .. function:: _initiate()
 
@@ -1971,6 +2136,7 @@ NI-DMM Functions
 
     
 
+
 .. function:: is_over_range(measurement_value, is_over_range)
 
     Takes a **Measurement\_Value** and determines if the value is a valid
@@ -1978,7 +2144,8 @@ NI-DMM Functions
 
     
 
-    :param measurement_value: 
+
+    :param measurement_value:
 
 
         The measured value returned from the DMM.
@@ -1987,7 +2154,8 @@ NI-DMM Functions
 
         .. note:: If an overrange condition occurs, the **Measurement\_Value** contains
             an IEEE-defined NaN (Not a Number) value.
-    :type measurement_value: ViReal64
+
+    :type measurement_value:ViReal64
 
     :rtype: ViBoolean
 
@@ -2001,6 +2169,7 @@ NI-DMM Functions
             | VI\_FALSE | 0 | The value is a valid measurement.                         |
             +-----------+---+-----------------------------------------------------------+
 
+
 .. function:: is_under_range(measurement_value, is_under_range)
 
     Takes a **Measurement\_Value** and determines if the value is a valid
@@ -2008,7 +2177,8 @@ NI-DMM Functions
 
     
 
-    :param measurement_value: 
+
+    :param measurement_value:
 
 
         The measured value returned from the DMM.
@@ -2017,7 +2187,8 @@ NI-DMM Functions
 
         .. note:: If an overrange condition occurs, the **Measurement\_Value** contains
             an IEEE-defined NaN (Not a Number) value.
-    :type measurement_value: ViReal64
+
+    :type measurement_value:ViReal64
 
     :rtype: ViBoolean
 
@@ -2030,6 +2201,7 @@ NI-DMM Functions
             +-----------+---+------------------------------------------------------------+
             | VI\_FALSE | 0 | The value is a valid measurement.                          |
             +-----------+---+------------------------------------------------------------+
+
 
 .. function:: _lock_session(caller_has_lock)
 
@@ -2061,6 +2233,7 @@ NI-DMM Functions
     :py:func:`nidmm._unlock_session` just once at the end of the function.
 
     
+
 
     :rtype: ViBoolean
 
@@ -2138,6 +2311,7 @@ NI-DMM Functions
 
             
 
+
 .. function:: perform_open_cable_comp(conductance, susceptance)
 
     For the NI 4082 and NI 4072 only, performs the open cable compensation
@@ -2152,24 +2326,27 @@ NI-DMM Functions
 
     
 
+
     :rtype: tuple (conductance, susceptance)
 
         WHERE
 
-        conductance (ViReal64): 
+        conductance (ViReal64):
 
 
             **conductance** is the measured value of open cable compensation
             **conductance**.
 
             
-        susceptance (ViReal64): 
+
+        susceptance (ViReal64):
 
 
             **susceptance** is the measured value of open cable compensation
             **susceptance**.
 
             
+
 
 .. function:: perform_short_cable_comp(resistance, reactance)
 
@@ -2184,18 +2361,20 @@ NI-DMM Functions
 
     
 
+
     :rtype: tuple (resistance, reactance)
 
         WHERE
 
-        resistance (ViReal64): 
+        resistance (ViReal64):
 
 
             **resistance** is the measured value of short cable compensation
             **resistance**.
 
             
-        reactance (ViReal64): 
+
+        reactance (ViReal64):
 
 
             **reactance** is the measured value of short cable compensation
@@ -2203,13 +2382,15 @@ NI-DMM Functions
 
             
 
+
 .. function:: read(maximum_time, reading)
 
     Acquires a single measurement and returns the measured value.
 
     
 
-    :param maximum_time: 
+
+    :param maximum_time:
 
 
         Specifies the **maximum\_time** allowed for this function to complete in
@@ -2224,7 +2405,8 @@ NI-DMM Functions
         automatically.
 
         
-    :type maximum_time: ViInt32
+
+    :type maximum_time:ViInt32
 
     :rtype: ViReal64
 
@@ -2232,6 +2414,7 @@ NI-DMM Functions
             The measured value returned from the DMM.
 
             
+
 
 .. function:: read_multi_point(maximum_time, array_size, reading_array, actual_number_of_points)
 
@@ -2242,7 +2425,8 @@ NI-DMM Functions
 
     
 
-    :param maximum_time: 
+
+    :param maximum_time:
 
 
         Specifies the **maximum\_time** allowed for this function to complete in
@@ -2257,8 +2441,9 @@ NI-DMM Functions
         automatically.
 
         
-    :type maximum_time: ViInt32
-    :param array_size: 
+
+    :type maximum_time:ViInt32
+    :param array_size:
 
 
         Specifies the number of measurements to acquire. The maximum number of
@@ -2270,13 +2455,14 @@ NI-DMM Functions
         positive ViInt32. The default value is 1.
 
         
-    :type array_size: ViInt32
+
+    :type array_size:ViInt32
 
     :rtype: tuple (reading_array, actual_number_of_points)
 
         WHERE
 
-        reading_array (ViReal64): 
+        reading_array (ViReal64):
 
 
             An array of measurement values.
@@ -2285,12 +2471,14 @@ NI-DMM Functions
 
             .. note:: The size of the **Reading\_Array** must be at least the size that you
                 specify for the **Array\_Size** parameter.
-        actual_number_of_points (ViInt32): 
+
+        actual_number_of_points (ViInt32):
 
 
             Indicates the number of measured values actually retrieved from the DMM.
 
             
+
 
 .. function:: read_status(acquisition_backlog, acquisition_status)
 
@@ -2302,11 +2490,12 @@ NI-DMM Functions
 
     .. note:: The NI 4050 is not supported.
 
+
     :rtype: tuple (acquisition_backlog, acquisition_status)
 
         WHERE
 
-        acquisition_backlog (ViInt32): 
+        acquisition_backlog (ViInt32):
 
 
             The number of measurements available to be read. If the backlog
@@ -2320,7 +2509,8 @@ NI-DMM Functions
                 RANGE ON (-1), or before the first point is fetched when Range is set to
                 AUTO RANGE ONCE (-3). These behaviors are due to the autorange model of
                 the devices.
-        acquisition_status (enums.AcquisitionStatus): 
+
+        acquisition_status (enums.AcquisitionStatus):
 
 
             Indicates status of the acquisition. The following table shows the
@@ -2338,6 +2528,7 @@ NI-DMM Functions
             | 4 | No acquisition in progress |
             +---+----------------------------+
 
+
 .. function:: read_waveform(maximum_time, array_size, waveform_array, actual_number_of_points)
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
@@ -2348,7 +2539,8 @@ NI-DMM Functions
 
     
 
-    :param maximum_time: 
+
+    :param maximum_time:
 
 
         Specifies the **maximum\_time** allowed for this function to complete in
@@ -2363,8 +2555,9 @@ NI-DMM Functions
         automatically.
 
         
-    :type maximum_time: ViInt32
-    :param array_size: 
+
+    :type maximum_time:ViInt32
+    :param array_size:
 
 
         Specifies the number of waveform points to return. You specify the total
@@ -2373,13 +2566,14 @@ NI-DMM Functions
         1.
 
         
-    :type array_size: ViInt32
+
+    :type array_size:ViInt32
 
     :rtype: tuple (waveform_array, actual_number_of_points)
 
         WHERE
 
-        waveform_array (ViReal64): 
+        waveform_array (ViReal64):
 
 
             An array of measurement values.
@@ -2388,12 +2582,14 @@ NI-DMM Functions
 
             .. note:: The size of the **Waveform\_Array** must be at least the size that you
                 specify for the **Array\_Size** parameter.
-        actual_number_of_points (ViInt32): 
+
+        actual_number_of_points (ViInt32):
 
 
             Indicates the number of measured values actually retrieved from the DMM.
 
             
+
 
 .. function:: reset_interchange_check()
 
@@ -2427,6 +2623,7 @@ NI-DMM Functions
 
     
 
+
 .. function:: reset_with_defaults()
 
     Resets the instrument to a known state and sends initialization commands
@@ -2435,6 +2632,7 @@ NI-DMM Functions
     values associated with a logical name are applied after setting the DMM.
 
     
+
 
 .. function:: self_cal()
 
@@ -2447,6 +2645,7 @@ NI-DMM Functions
         the call will be lost. All attributes will be set to their default
         values after the call returns.
 
+
 .. function:: send_software_trigger()
 
     Sends a command to trigger the DMM. Call this function if you have
@@ -2458,6 +2657,7 @@ NI-DMM Functions
     and trigger the device. The NI 4050 and NI 4060 are not supported.
 
     
+
 
 .. function:: _set_attribute_vi_boolean(channel_name, attribute_id, attribute_value)
 
@@ -2489,7 +2689,8 @@ NI-DMM Functions
 
     
 
-    :param channel_name: 
+
+    :param channel_name:
 
 
         This parameter is ignored. National Instruments DMMs do not support
@@ -2500,21 +2701,24 @@ NI-DMM Functions
         The default value is " " (an empty string).
 
         
-    :type channel_name: ViConstString
-    :param attribute_id: 
+
+    :type channel_name:ViConstString
+    :param attribute_id:
 
 
         Pass the ID of an attribute.
 
         
-    :type attribute_id: ViAttr
-    :param attribute_value: 
+
+    :type attribute_id:ViAttr
+    :param attribute_value:
 
 
         Pass the value that you want to set the attribute to.
 
         
-    :type attribute_value: ViBoolean
+
+    :type attribute_value:ViBoolean
 
 .. function:: _set_attribute_vi_int32(channel_name, attribute_id, attribute_value)
 
@@ -2546,7 +2750,8 @@ NI-DMM Functions
 
     
 
-    :param channel_name: 
+
+    :param channel_name:
 
 
         This parameter is ignored. National Instruments DMMs do not support
@@ -2557,21 +2762,24 @@ NI-DMM Functions
         The default value is " " (an empty string).
 
         
-    :type channel_name: ViConstString
-    :param attribute_id: 
+
+    :type channel_name:ViConstString
+    :param attribute_id:
 
 
         Pass the ID of an attribute.
 
         
-    :type attribute_id: ViAttr
-    :param attribute_value: 
+
+    :type attribute_id:ViAttr
+    :param attribute_value:
 
 
         Pass the value that you want to set the attribute to.
 
         
-    :type attribute_value: ViInt32
+
+    :type attribute_value:ViInt32
 
 .. function:: _set_attribute_vi_real64(channel_name, attribute_id, attribute_value)
 
@@ -2603,7 +2811,8 @@ NI-DMM Functions
 
     
 
-    :param channel_name: 
+
+    :param channel_name:
 
 
         This parameter is ignored. National Instruments DMMs do not support
@@ -2614,21 +2823,24 @@ NI-DMM Functions
         The default value is " " (an empty string).
 
         
-    :type channel_name: ViConstString
-    :param attribute_id: 
+
+    :type channel_name:ViConstString
+    :param attribute_id:
 
 
         Pass the ID of an attribute.
 
         
-    :type attribute_id: ViAttr
-    :param attribute_value: 
+
+    :type attribute_id:ViAttr
+    :param attribute_value:
 
 
         Pass the value that you want to set the attribute to.
 
         
-    :type attribute_value: ViReal64
+
+    :type attribute_value:ViReal64
 
 .. function:: _set_attribute_vi_session(channel_name, attribute_id, attribute_value)
 
@@ -2647,7 +2859,8 @@ NI-DMM Functions
 
     
 
-    :param channel_name: 
+
+    :param channel_name:
 
 
         This parameter is ignored. National Instruments DMMs do not support
@@ -2658,21 +2871,24 @@ NI-DMM Functions
         The default value is " " (an empty string).
 
         
-    :type channel_name: ViConstString
-    :param attribute_id: 
+
+    :type channel_name:ViConstString
+    :param attribute_id:
 
 
         Pass the ID of an attribute.
 
         
-    :type attribute_id: ViAttr
-    :param attribute_value: 
+
+    :type attribute_id:ViAttr
+    :param attribute_value:
 
 
         Pass the value that you want to set the attribute to.
 
         
-    :type attribute_value: ViSession
+
+    :type attribute_value:ViSession
 
 .. function:: _set_attribute_vi_string(channel_name, attribute_id, attribute_value)
 
@@ -2704,7 +2920,8 @@ NI-DMM Functions
 
     
 
-    :param channel_name: 
+
+    :param channel_name:
 
 
         This parameter is ignored. National Instruments DMMs do not support
@@ -2715,21 +2932,24 @@ NI-DMM Functions
         The default value is " " (an empty string).
 
         
-    :type channel_name: ViConstString
-    :param attribute_id: 
+
+    :type channel_name:ViConstString
+    :param attribute_id:
 
 
         Pass the ID of an attribute.
 
         
-    :type attribute_id: ViAttr
-    :param attribute_value: 
+
+    :type attribute_id:ViAttr
+    :param attribute_value:
 
 
         Pass the value that you want to set the attribute to.
 
         
-    :type attribute_value: ViString
+
+    :type attribute_value:ViString
 
 .. function:: _unlock_session(caller_has_lock)
 
@@ -2738,6 +2958,7 @@ NI-DMM Functions
     information on session locks.
 
     
+
 
     :rtype: ViBoolean
 
@@ -2822,11 +3043,13 @@ NI-DMM Functions
 
             
 
+
 .. function:: _close()
 
     Closes the specified session and deallocates resources that it reserved.
 
     
+
 
 .. function:: error_message(error_code, error_message)
 
@@ -2835,14 +3058,16 @@ NI-DMM Functions
 
     
 
-    :param error_code: 
+
+    :param error_code:
 
 
         The **error\_code** returned from the instrument. The default is 0,
         indicating VI\_SUCCESS.
 
         
-    :type error_code: ViStatus
+
+    :type error_code:ViStatus
 
     :rtype: ViChar
 
@@ -2850,6 +3075,7 @@ NI-DMM Functions
             The error information formatted into a string.
 
             
+
 
 .. function:: error_query(error_code, error_message)
 
@@ -2860,11 +3086,12 @@ NI-DMM Functions
 
     
 
+
     :rtype: tuple (error_code, error_message)
 
         WHERE
 
-        error_code (ViStatus): 
+        error_code (ViStatus):
 
 
             The **error\_code** returned from the instrument.
@@ -2872,7 +3099,8 @@ NI-DMM Functions
             The default value is VI\_SUCCESS (0).
 
             
-        error_message (ViChar): 
+
+        error_message (ViChar):
 
 
             Formats the **Error\_Code** into a user-readable message string.
@@ -2880,6 +3108,7 @@ NI-DMM Functions
             
 
             .. note:: The array must contain at least 256 elements ViChar[256].
+
 
 .. function:: reset()
 
@@ -2889,6 +3118,7 @@ NI-DMM Functions
 
     
 
+
 .. function:: revision_query(instrument_driver_revision, firmware_revision)
 
     Returns the revision numbers of the instrument driver and instrument
@@ -2896,11 +3126,12 @@ NI-DMM Functions
 
     
 
+
     :rtype: tuple (instrument_driver_revision, firmware_revision)
 
         WHERE
 
-        instrument_driver_revision (ViChar): 
+        instrument_driver_revision (ViChar):
 
 
             Returns a string containing the instrument driver software revision
@@ -2909,7 +3140,8 @@ NI-DMM Functions
             
 
             .. note:: The array must contain at least 256 elements ViChar[256].
-        firmware_revision (ViChar): 
+
+        firmware_revision (ViChar):
 
 
             Returns a string containing the instrument **firmware\_revision**
@@ -2918,6 +3150,7 @@ NI-DMM Functions
             
 
             .. note:: The array must contain at least 256 elements ViChar[256].
+
 
 .. function:: self_test(self_test_result, self_test_message)
 
@@ -2930,11 +3163,12 @@ NI-DMM Functions
         the call will be lost. All attributes will be set to their default
         values after the call returns.
 
+
     :rtype: tuple (self_test_result, self_test_message)
 
         WHERE
 
-        self_test_result (ViInt16): 
+        self_test_result (ViInt16):
 
 
             Contains the value returned from the instrument self-test. Zero
@@ -2948,7 +3182,8 @@ NI-DMM Functions
             .. note:: Self-test does not check the fuse on the NI 4065, NI 4071, and
                 NI 4081. Hence, even if the fuse is blown on the device, self-test does
                 not return error code 1013.
-        self_test_message (ViChar): 
+
+        self_test_message (ViChar):
 
 
             This parameter contains the string returned from the instrument
@@ -2968,5 +3203,6 @@ NI-DMM Functions
             This error code indicates that the DMM should be repaired.
 
             
+
 
 
