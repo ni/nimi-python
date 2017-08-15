@@ -227,7 +227,6 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
 %>
     def ${f['python_name']}(${helper.get_method_parameters_snippet(input_parameters)}):
         '''${f['python_name']}
-
         ${helper.get_function_docstring(func_name, config, indent=8)}
         '''
 % for parameter in enum_input_parameters:
