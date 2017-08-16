@@ -7,25 +7,25 @@ NI-ModInst Functions
 
     :param handle:
 
-    :type handle:ViSession
+    :type handle: ViSession
 
 .. function:: get_extended_error_info(error_info_buffer_size, error_info)
 
     :param error_info_buffer_size:
 
-    :type error_info_buffer_size:ViInt32
+    :type error_info_buffer_size: ViInt32
 
 .. function:: _get_installed_device_attribute_vi_int32(handle, index, attribute_id, attribute_value)
 
     :param handle:
 
-    :type handle:ViSession
+    :type handle: ViSession
     :param index:
 
-    :type index:ViInt32
+    :type index: ViInt32
     :param attribute_id:
 
-    :type attribute_id:ViInt32
+    :type attribute_id: ViInt32
 
     :rtype: ViInt32
 
@@ -34,22 +34,22 @@ NI-ModInst Functions
 
     :param handle:
 
-    :type handle:ViSession
+    :type handle: ViSession
     :param index:
 
-    :type index:ViInt32
+    :type index: ViInt32
     :param attribute_id:
 
-    :type attribute_id:ViInt32
+    :type attribute_id: ViInt32
     :param attribute_value_buffer_size:
 
-    :type attribute_value_buffer_size:ViInt32
+    :type attribute_value_buffer_size: ViInt32
 
 .. function:: _open_installed_devices_session(driver, handle, item_count)
 
     :param driver:
 
-    :type driver:ViConstString
+    :type driver: ViConstString
 
     :rtype: tuple (handle, item_count)
 
