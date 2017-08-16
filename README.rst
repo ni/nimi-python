@@ -22,6 +22,9 @@ Author       National Instruments
 .. _about-section:
 
 .. image:: docs/_static/python dmm.jpg
+   :scale: 50 %
+   :alt: NI Digital Multimeter with Python logo
+   :align: center
 
 About
 =====
