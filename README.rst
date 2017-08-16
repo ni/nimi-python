@@ -21,6 +21,8 @@ Author       National Instruments
 
 .. _about-section:
 
+.. image:: docs/_static/python dmm.jpg
+
 About
 =====
 
