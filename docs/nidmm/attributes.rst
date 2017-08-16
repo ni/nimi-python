@@ -249,7 +249,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | integer    |
+   | Datatype       | bool       |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+
@@ -872,7 +872,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | integer    |
+   | Datatype       | bool       |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+
@@ -1304,7 +1304,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | integer    |
+   | Datatype       | bool       |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+
@@ -1373,7 +1373,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | integer    |
+   | Datatype       | bool       |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+
@@ -1431,7 +1431,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | integer    |
+   | Datatype       | bool       |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+
@@ -1854,7 +1854,7 @@ NI-DMM Attributes
    +----------------+------------+
    | Characteristic | Value      |
    +================+============+
-   | Datatype       | integer    |
+   | Datatype       | bool       |
    +----------------+------------+
    | Permissions    | read-write |
    +----------------+------------+

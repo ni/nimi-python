@@ -120,3 +120,32 @@ class TestSession(object):
                 print(e)
                 pass
 
+    def test_bool_return_type(self):
+        self.patched_ctypes_library.niDMM_GetSelfCalSupported = self.side_effects_helper.niDMM_GetSelfCalSupported
+        self.side_effects_helper['GetSelfCalSupported']['selfCalSupported'] = 1
+        with nidmm.Session('dev1') as session:
+            self_cal_supported = session.get_self_cal_supported()
+            assert str(self_cal_supported) == 'True'
+
+    def test_enum_return_type(self):
+        self.patched_ctypes_library.niDMM_ReadStatus = self.side_effects_helper.niDMM_ReadStatus
+        self.side_effects_helper['ReadStatus']['acquisitionBacklog'] = 0
+        self.side_effects_helper['ReadStatus']['acquisitionStatus'] = 4
+        with nidmm.Session('dev1') as session:
+            (backlog, status) = session.read_status()
+            assert backlog == 0
+            assert type(status) is nidmm.AcquisitionStatus
+            assert status == nidmm.AcquisitionStatus.NO_ACQUISITION_IN_PROGRESS
+
+
+'''
+    def test_self_test(self):
+        self.patched_ctypes_library.niDMM_self_test = self.side_effects_helper.niDMM_self_test
+        self.side_effects_helper['self_test']['selfTestResult'] = 0
+        self.side_effects_helper['self_test']['selfTestMessage'] = 'Self Test passed'
+        with nidmm.Session('dev1') as session:
+            result, message = session.self_test()
+            assert result == 0
+            assert message == 'Self Test passed.'
+'''
+

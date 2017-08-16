@@ -64,10 +64,16 @@ class ViConstString(ViString):
 class ViBoolean(int):
     @classmethod
     def from_param(cls, param):
-        return 1 if bool(param) else 0
+        return True if bool(param) else False
 
     def python_type(self):
-        return 'integer'
+        return 'bool'
+
+    def __new__(cls, val=0):
+        if val:
+            return True
+        else:
+            return False
 
 
 class ViReal32(float):

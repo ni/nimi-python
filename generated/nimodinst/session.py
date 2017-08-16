@@ -4,6 +4,7 @@ import ctypes
 from nimodinst import ctypes_types
 from nimodinst import errors
 from nimodinst import library
+from nimodinst import python_types
 
 
 class AttributeViInt32(object):
@@ -217,7 +218,7 @@ class Session(object):
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niModInst_GetInstalledDeviceAttributeViInt32(self.handle, index, attribute_id, ctypes.pointer(attribute_value_ctype))
         errors._handle_error(self, error_code)
-        return attribute_value_ctype.value
+        return python_types.ViInt32(attribute_value_ctype.value)
 
     def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id):
         attribute_value_buffer_size = 0
@@ -237,5 +238,5 @@ class Session(object):
         item_count_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niModInst_OpenInstalledDevicesSession(driver.encode('ascii'), ctypes.pointer(handle_ctype), ctypes.pointer(item_count_ctype))
         errors._handle_error(self, error_code)
-        return handle_ctype.value, item_count_ctype.value
+        return python_types.ViSession(handle_ctype.value), python_types.ViInt32(item_count_ctype.value)
 
