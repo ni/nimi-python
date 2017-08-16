@@ -11,6 +11,7 @@ NI-ModInst Python API's documentation
    :caption: API References:
 
    nimodinst/session
+   nimodinst/functions
    nimodinst/attributes
 
 

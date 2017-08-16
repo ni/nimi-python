@@ -1,4 +1,8 @@
-
+<%
+# Have to put this in a variable and add it that way because mako keeps thinking it is for it, not for the output file
+encoding_tag = '# -*- coding: utf-8 -*-'
+%>\
+${encoding_tag}
 # This file was generated
 <%
     import build.helper as helper
@@ -220,6 +224,9 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
     def ${f['python_name']}(${helper.get_method_parameters_snippet(parameters, skip_session_handle = True, skip_output_parameters = True, skip_ivi_dance_size_parameter = True)}):
+        '''${f['python_name']}
+${helper.get_function_docstring(func_name, config, indent=8)}
+        '''
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor

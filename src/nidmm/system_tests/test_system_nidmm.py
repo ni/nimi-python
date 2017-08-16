@@ -146,7 +146,8 @@ def test_multi_point_acquisition(device_info):
         session.configure_multi_point(4, 2, nidmm.SampleTrigger.IMMEDIATE, 0)
         session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
         measurements, numberOfMeasurements = session.read_multi_point(-1, 8)
-        print(measurements)
+        for measurement in measurements:
+            print('{:10.4f}'.format(measurement))
         assert len(measurements) == 8
         assert numberOfMeasurements == 8
 
