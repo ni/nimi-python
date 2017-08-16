@@ -1,5 +1,5 @@
 
-ALL_DRIVERS := nidmm nimodinst
+ALL_DRIVERS := nidmm nimodinst niswitch
 DRIVERS ?= $(ALL_DRIVERS)
 
 ROOT_DIR := $(abspath .)
