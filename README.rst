@@ -21,12 +21,7 @@ Author       National Instruments
 
 .. _about-section:
 
-.. image:: https://raw.githubusercontent.com/ni/nimi-python/docs/readme/docs/_static/python%20dmm.jpg
-   :height: 376px
-   :width: 400px
-   :scale: 50 %
-   :alt: NI Digital Multimeter with Python logo
-   :align: center
+|pythonDMM|
 
 About
 =====
@@ -192,3 +187,10 @@ licenses allow for non-commercial and commercial use.
     :target: https://github.com/ni/nimi-python/pulls
 
 ..  |CoverageStatus|
+
+.. image:: https://raw.githubusercontent.com/ni/nimi-python/docs/readme/docs/_static/python%20dmm.jpg
+   :alt: NI Digital Multimeter with Python logo
+   :scale: 50%
+   :height: 376px
+   :width: 400px
+   :align: center
