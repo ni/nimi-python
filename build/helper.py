@@ -231,14 +231,20 @@ def get_library_call_parameter_types_snippet(parameters_list):
 def _get_output_param_return_snippet(output_parameter, parameters):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
     assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
+    return_type_snippet = ''
+    if output_parameter['enum'] is not None:
+        return_type_snippet = 'enums.' + output_parameter['enum'] + '('
+    else:
+        return_type_snippet = 'python_types.' + output_parameter['python_type'] + '('
+
     if output_parameter['is_buffer']:
         if output_parameter['type'] == 'ViChar' or output_parameter['type'] == 'ViString':
             snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
         else:
             size_parameter = find_size_parameter(output_parameter, parameters)
-            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i].value for i in range(' + size_parameter['python_name'] + ')]'
+            snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i].value) for i in range(' + size_parameter['python_name'] + ')]'
     else:
-        snippet = output_parameter['ctypes_variable_name'] + '.value'
+        snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + '.value)'
 
     return snippet
 
@@ -711,7 +717,11 @@ def get_python_type_from_visa_type(visa_type):
     else:
         p_types = importlib.import_module('build.templates.python_types')
     v_type = getattr(p_types, visa_type)
-    p_type = v_type().python_type()
+    # We have a special case for bool
+    if type(v_type()) is bool:
+        p_type = 'bool'
+    else:
+        p_type = v_type().python_type()
 
     return p_type
 
