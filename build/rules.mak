@@ -54,7 +54,7 @@ module: $(MODULE_FILES)
 $(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
 unit_tests: $(UNIT_TEST_FILES)
 
-$(LOG_DIR)/test_results.log:
+$(LOG_DIR)/test_results.log: unit_tests
 	@echo Running unit tests for $(DRIVER)
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 -m pytest -s $(LOG_OUTPUT) $(LOG_DIR)/test_results.log)
 
