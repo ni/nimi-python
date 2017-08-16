@@ -549,7 +549,7 @@ def get_function_rst(fname, config, indent=0):
         if p_type.startswith('enums.'):
             p_type = p_type.replace('enums.', '')
             p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
-        rst += '\n' + (' ' * indent) + ':type {0}:'.format(p['python_name']) + p_type
+        rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
 
     output_params = extract_output_parameters(function['parameters'])
