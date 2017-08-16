@@ -177,15 +177,15 @@ def get_method_parameters_snippet(parameters, skip_session_handle, skip_output_p
             snippets.append(x['python_name'])
     return ', '.join(snippets)
 
-def get_function_parameters_snippet(parameters, sessionName=None):
+def get_function_parameters_snippet(parameters, session_name='vi'):
     '''
     Returns a string suitable for the parameter list of a method given a list of parameter objects
 
-    If sessionName set, skip that parameter
+    If session_name set, skip that parameter
     '''
     snippets = []
     for x in parameters:
-        if sessionName is not None and x['python_name'] == sessionName:
+        if session_name is not None and x['python_name'] == session_name:
             continue
         snippets.append(x['python_name'])
     return ', '.join(snippets)
@@ -534,7 +534,7 @@ def get_function_rst(fname, config, indent=0):
     '''
     function = config['functions'][fname]
     rst = '.. function:: ' + function['python_name'] + '('
-    rst += get_function_parameters_snippet(function['parameters'], sessionName='vi') + ')'
+    rst += get_function_parameters_snippet(function['parameters'], session_name='vi') + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
