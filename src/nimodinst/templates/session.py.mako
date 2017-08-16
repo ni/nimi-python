@@ -151,7 +151,7 @@ class Session(object):
             self.handle = 0
 
     ''' These are code-generated '''
-% for func_name in functions:
+% for func_name in sorted(functions):
 <%
     f = functions[func_name]
     parameters = f['parameters']
