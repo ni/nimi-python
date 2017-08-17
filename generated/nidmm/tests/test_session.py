@@ -138,4 +138,14 @@ class TestSession(object):
             assert status == nidmm.AcquisitionStatus.NO_ACQUISITION_IN_PROGRESS
 
 
+'''
+    def test_self_test(self):
+        self.patched_ctypes_library.niDMM_self_test = self.side_effects_helper.niDMM_self_test
+        self.side_effects_helper['self_test']['selfTestResult'] = 0
+        self.side_effects_helper['self_test']['selfTestMessage'] = 'Self Test passed'
+        with nidmm.Session('dev1') as session:
+            result, message = session.self_test()
+            assert result == 0
+            assert message == 'Self Test passed.'
+'''
 

@@ -1691,7 +1691,7 @@ class Session(object):
                 automatically.
 
         Returns:
-            reading (ViReal64):
+            reading (float):
                 The measured value returned from the DMM.
         '''
         reading_ctype = ctypes_types.ViReal64_ctype(0)
@@ -1730,13 +1730,13 @@ class Session(object):
                 positive ViInt32. The default value is 1.
 
         Returns:
-            reading_array (ViReal64):
+            reading_array (float):
                 An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
-            actual_number_of_points (ViInt32):
+            actual_number_of_points (int):
                 Indicates the number of measured values actually retrieved from the DMM.
         '''
         reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
@@ -1771,10 +1771,10 @@ class Session(object):
                 1.
 
         Returns:
-            waveform_array (ViReal64):
+            waveform_array (float):
                 **Waveform Array** is an array of measurement values stored in waveform
                 data type.
-            actual_number_of_points (ViInt32):
+            actual_number_of_points (int):
                 Indicates the number of measured values actually retrieved from the DMM.
         '''
         waveform_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
@@ -1802,12 +1802,12 @@ class Session(object):
                 Specifies the measured value returned from the DMM.
 
         Returns:
-            mode_string (ViChar):
+            mode_string (int):
                 Returns a string containing the units of the **Measurement** mode.
-            range_string (ViChar):
+            range_string (int):
                 Returns the range of the **Measurement**, formatted into a
                 string with the correct number of display digits.
-            data_string (ViChar):
+            data_string (int):
                 Returns the **Measurement**, formatted according to the
                 function, range, and
                 RESOLUTION_ABSOLUTE.
@@ -1825,7 +1825,7 @@ class Session(object):
         Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
 
         Returns:
-            aperture_time (ViReal64):
+            aperture_time (float):
                 Specifies the amount of time the DMM digitizes the input signal for a
                 single measurement. This parameter does not include settling time.
                 Returns the value of the APERTURE_TIME attribute. The
@@ -1889,7 +1889,7 @@ class Session(object):
                 Pass the ID of an attribute.
 
         Returns:
-            attribute_value (ViBoolean):
+            attribute_value (bool):
                 Returns the current value of the attribute. Pass the address of a
                 ViBoolean variable.
         '''
@@ -1924,7 +1924,7 @@ class Session(object):
                 Pass the ID of an attribute.
 
         Returns:
-            attribute_value (ViInt32):
+            attribute_value (int):
                 Returns the current value of the attribute. Pass the address of a
                 ViInt32 variable.
         '''
@@ -1959,7 +1959,7 @@ class Session(object):
                 Pass the ID of an attribute.
 
         Returns:
-            attribute_value (ViReal64):
+            attribute_value (float):
                 Returns the current value of the attribute. Pass the address of a
                 ViReal64 variable.
         '''
@@ -1994,7 +1994,7 @@ class Session(object):
                 Pass the ID of an attribute.
 
         Returns:
-            attribute_value (ViSession):
+            attribute_value (int):
                 Returns the current value of the attribute. Pass the address of a
                 ViSession variable.
         '''
@@ -2065,7 +2065,7 @@ class Session(object):
         Range is off.
 
         Returns:
-            actual_range (ViReal64):
+            actual_range (float):
                 Indicates the **actual_range** the DMM is using. Returns the value of
                 the AUTO_RANGE_VALUE attribute. The units of the returned
                 value depend on the function.
@@ -2096,7 +2096,7 @@ class Session(object):
                 Note: The NI 4065 does not support self-calibration.
 
         Returns:
-            count (ViInt32):
+            count (int):
                 The number of times calibration has been performed.
         '''
         count_ctype = ctypes_types.ViInt32_ctype(0)
@@ -2125,15 +2125,15 @@ class Session(object):
                 Note: The NI 4065 does not support self-calibration.
 
         Returns:
-            month (ViInt32):
+            month (int):
                 Indicates the **month** of the last calibration.
-            day (ViInt32):
+            day (int):
                 Indicates the **day** of the last calibration.
-            year (ViInt32):
+            year (int):
                 Indicates the **year** of the last calibration.
-            hour (ViInt32):
+            hour (int):
                 Indicates the **hour** of the last calibration.
-            minute (ViInt32):
+            minute (int):
                 Indicates the **minute** of the last calibration.
         '''
         month_ctype = ctypes_types.ViInt32_ctype(0)
@@ -2172,7 +2172,7 @@ class Session(object):
                 is None.
 
         Returns:
-            channel_string (ViChar):
+            channel_string (int):
                 Returns the **channel_string** that is in the channel table at the
                 **Index** you specify. Do not modify the contents of the
                 **channel_string**.
@@ -2194,7 +2194,7 @@ class Session(object):
                 Reserved.
 
         Returns:
-            temperature (ViReal64):
+            temperature (float):
                 Returns the current **temperature** of the device.
         '''
         temperature_ctype = ctypes_types.ViReal64_ctype(0)
@@ -2228,7 +2228,7 @@ class Session(object):
                 None.
 
         Returns:
-            error_code (ViStatus):
+            error_code (int):
                 Returns the **error_code** for the session or execution thread. If you
                 pass 0 for the **Buffer_Size**, you can pass VI_NULL for this
                 parameter.
@@ -2298,7 +2298,7 @@ class Session(object):
                 Note: The NI 4065 does not support self-calibration.
 
         Returns:
-            temperature (ViReal64):
+            temperature (float):
                 Returns the **temperature** during the last calibration.
         '''
         temperature_ctype = ctypes_types.ViReal64_ctype(0)
@@ -2316,7 +2316,7 @@ class Session(object):
         been called.
 
         Returns:
-            period (ViReal64):
+            period (float):
                 Returns the number of seconds it takes to make one measurement.
 
                 The first measurement in a multipoint acquisition requires additional
@@ -2363,7 +2363,7 @@ class Session(object):
                 The default value is None.
 
         Returns:
-            coercion_record (ViChar):
+            coercion_record (int):
                 Returns the next **coercion_record** for the IVI session.
 
                 If there are no coercions records, the function returns an empty string.
@@ -2428,7 +2428,7 @@ class Session(object):
         are using can perform self-calibration.
 
         Returns:
-            self_cal_supported (ViBoolean):
+            self_cal_supported (bool):
                 Returns whether Self Cal is supported for the device specified by the
                 given session.
 
@@ -2540,7 +2540,7 @@ class Session(object):
                 +------------------+--------------------+-------------------+----+
 
         Returns:
-            vi (ViSession):
+            vi (int):
                 Returns a ViSession handle that you use to identify the instrument in
                 all subsequent instrument driver function calls.
         '''
@@ -2577,7 +2577,7 @@ class Session(object):
                 an IEEE-defined NaN (Not a Number) value.
 
         Returns:
-            is_over_range (ViBoolean):
+            is_over_range (bool):
                 Returns whether the measurement value is a valid measurement or an
                 overrange condition.
 
@@ -2607,7 +2607,7 @@ class Session(object):
                 an IEEE-defined NaN (Not a Number) value.
 
         Returns:
-            is_under_range (ViBoolean):
+            is_under_range (bool):
                 Returns whether the **Measurement_Value** is a valid measurement or an
                 underrange condition.
 
@@ -2653,7 +2653,7 @@ class Session(object):
         _unlock_session just once at the end of the function.
 
         Returns:
-            caller_has_lock (ViBoolean):
+            caller_has_lock (bool):
                 This parameter serves as a convenience. If you do not want to use this
                 parameter, pass VI_NULL. Use this parameter in complex functions to
                 keep track of whether you obtain a lock and, therefore, need to unlock
@@ -2744,10 +2744,10 @@ class Session(object):
         NIDMM_VAL_INDUCTANCE (1006).
 
         Returns:
-            conductance (ViReal64):
+            conductance (float):
                 **conductance** is the measured value of open cable compensation
                 **conductance**.
-            susceptance (ViReal64):
+            susceptance (float):
                 **susceptance** is the measured value of open cable compensation
                 **susceptance**.
         '''
@@ -2770,10 +2770,10 @@ class Session(object):
         NIDMM_VAL_INDUCTANCE (1006).
 
         Returns:
-            resistance (ViReal64):
+            resistance (float):
                 **resistance** is the measured value of short cable compensation
                 **resistance**.
-            reactance (ViReal64):
+            reactance (float):
                 **reactance** is the measured value of short cable compensation
                 **reactance**.
         '''
@@ -2802,7 +2802,7 @@ class Session(object):
                 automatically.
 
         Returns:
-            reading (ViReal64):
+            reading (float):
                 The measured value returned from the DMM.
         '''
         reading_ctype = ctypes_types.ViReal64_ctype(0)
@@ -2840,13 +2840,13 @@ class Session(object):
                 positive ViInt32. The default value is 1.
 
         Returns:
-            reading_array (ViReal64):
+            reading_array (float):
                 An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
-            actual_number_of_points (ViInt32):
+            actual_number_of_points (int):
                 Indicates the number of measured values actually retrieved from the DMM.
         '''
         reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
@@ -2865,7 +2865,7 @@ class Session(object):
         Note: The NI 4050 is not supported.
 
         Returns:
-            acquisition_backlog (ViInt32):
+            acquisition_backlog (int):
                 The number of measurements available to be read. If the backlog
                 continues to increase, data is eventually overwritten, resulting in an
                 error.
@@ -2926,13 +2926,13 @@ class Session(object):
                 1.
 
         Returns:
-            waveform_array (ViReal64):
+            waveform_array (float):
                 An array of measurement values.
 
                 Note:
                 The size of the **Waveform_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
-            actual_number_of_points (ViInt32):
+            actual_number_of_points (int):
                 Indicates the number of measured values actually retrieved from the DMM.
         '''
         waveform_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
@@ -3243,7 +3243,7 @@ class Session(object):
         information on session locks.
 
         Returns:
-            caller_has_lock (ViBoolean):
+            caller_has_lock (bool):
                 This parameter serves as a convenience. If you do not want to use this
                 parameter, pass VI_NULL.
 
@@ -3348,7 +3348,7 @@ class Session(object):
                 indicating VI_SUCCESS.
 
         Returns:
-            error_message (ViChar):
+            error_message (int):
                 The error information formatted into a string.
         '''
         error_message_ctype = ctypes_types.ViChar_ctype(0)
@@ -3365,11 +3365,11 @@ class Session(object):
         included for compliance with the *IviDmm Class Specification*.
 
         Returns:
-            error_code (ViStatus):
+            error_code (int):
                 The **error_code** returned from the instrument.
 
                 The default value is VI_SUCCESS (0).
-            error_message (ViChar):
+            error_message (int):
                 Formats the **Error_Code** into a user-readable message string.
 
                 Note: The array must contain at least 256 elements ViChar[256].
@@ -3398,12 +3398,12 @@ class Session(object):
         firmware.
 
         Returns:
-            instrument_driver_revision (ViChar):
+            instrument_driver_revision (int):
                 Returns a string containing the instrument driver software revision
                 numbers.
 
                 Note: The array must contain at least 256 elements ViChar[256].
-            firmware_revision (ViChar):
+            firmware_revision (int):
                 Returns a string containing the instrument **firmware_revision**
                 numbers.
 
@@ -3427,7 +3427,7 @@ class Session(object):
         values after the call returns.
 
         Returns:
-            self_test_result (ViInt16):
+            self_test_result (int):
                 Contains the value returned from the instrument self-test. Zero
                 indicates success.
 
@@ -3438,7 +3438,7 @@ class Session(object):
                 Self-test does not check the fuse on the NI 4065, NI 4071, and
                 NI 4081. Hence, even if the fuse is blown on the device, self-test does
                 not return error code 1013.
-            self_test_message (ViChar):
+            self_test_message (int):
                 This parameter contains the string returned from the instrument
                 self-test. The array must contain at least 256 elements.
 
