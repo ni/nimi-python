@@ -99,7 +99,7 @@ def _add_python_type(parameter):
     return parameter
 
 def _add_intrinsic_type(parameter):
-    '''Adds a intrinsic key/value pair to the parameter metadata'''
+    '''Adds a intrinsic (basic python type) key/value pair to the parameter metadata'''
     if parameter['enum'] is None:
         parameter['intrinsic_type'] = get_intrinsic_type_from_visa_type(parameter['type'])
     else:
