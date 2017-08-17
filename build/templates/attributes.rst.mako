@@ -28,21 +28,21 @@ table_contents = [
          ]
 table = helper.as_rest_table(table_contents, full=True)
 
-desc = a['long_description'] if 'long_description' in a else a['short_description']
+desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 %>\
-   ${helper.get_indented_docstring_snippet(desc, indent=3)}
+    ${helper.get_indented_docstring_snippet(desc, indent=4)}
 
-   The following table lists the characteristics of this property.
+    The following table lists the characteristics of this property.
 
-   ${helper.get_indented_docstring_snippet(table, indent=3)}
+    ${helper.get_indented_docstring_snippet(table, indent=4)}
 
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
+    .. tip:: 
+        This attribute corresponds to the following LabVIEW Property or C Attribute:
 
 %   if 'lv_property' in attributes[attr]:
-        - LabVIEW Property: **${attributes[attr]['lv_property'].strip()}**
+            - LabVIEW Property: **${attributes[attr]['lv_property'].strip()}**
 %   endif
-        - C Attribute: **${c_function_prefix.upper()}ATTR_${attributes[attr]["name"].upper()}**
+            - C Attribute: **${c_function_prefix.upper()}ATTR_${attributes[attr]["name"].upper()}**
 
 % endfor
 
