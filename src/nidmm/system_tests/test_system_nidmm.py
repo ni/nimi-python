@@ -146,7 +146,8 @@ def test_multi_point_acquisition(device_info):
         session.configure_multi_point(4, 2, nidmm.SampleTrigger.IMMEDIATE, 0)
         session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
         measurements, numberOfMeasurements = session.read_multi_point(-1, 8)
-        print(measurements)
+        for measurement in measurements:
+            print('{:10.4f}'.format(measurement))
         assert len(measurements) == 8
         assert numberOfMeasurements == 8
 
@@ -188,3 +189,12 @@ def test_method_with_enum_output_type_method(device_info):
         #will have to update after https://github.com/ni/nimi-python/issues/128 fixed
         assert session.read_status()[1] == 4        
         
+		
+def test_writeonly_attribute(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        try:
+            session.channel_count = 5
+        except nidmm.Error as e:
+            assert e.code == -1074135027 #Error : Attribute is read-only.
+
+

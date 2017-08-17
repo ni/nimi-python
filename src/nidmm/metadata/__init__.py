@@ -28,6 +28,7 @@ def merge_dicts(into, outof):
                     if re.search(item, item2):
                         into[item2] = outof[item]
 
+# Update generated functions data with hand maintained data
 from metadata.functions_addon import functions_codegen_method
 from metadata.functions_addon import functions_enums
 from metadata.functions_addon import functions_params_types
