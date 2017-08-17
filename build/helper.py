@@ -98,6 +98,14 @@ def _add_python_type(parameter):
         parameter['python_type'] = 'enums.' + parameter['enum']
     return parameter
 
+def _add_intrinsic_type(parameter):
+    '''Adds a intrinsic key/value pair to the parameter metadata'''
+    if parameter['enum'] is None:
+        parameter['intrinsic_type'] = get_python_type_from_visa_type(parameter['type'])
+    else:
+        parameter['intrinsic_type'] = parameter['python_type']
+    return parameter
+
 def _add_ctypes_variable_name(parameter):
     '''Adds a ctypes_variable_name key/value pair to the parameter metadata for a corresponding ctypes variable'''
     parameter['ctypes_variable_name'] = parameter['python_name'] + '_ctype'
@@ -138,6 +146,7 @@ def add_all_metadata(functions):
         for p in functions[f]['parameters']:
             _add_python_parameter_name(p)
             _add_python_type(p)
+            _add_intrinsic_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
             _add_buffer_info(p)
@@ -551,11 +560,11 @@ def get_function_rst(fname, config, indent=0):
         rst +=  '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
         rst += get_documentation_for_node_rst(p, config, indent + 4)
 
-        p_type = p['python_type']
+        p_type = p['intrinsic_type']
         if p_type.startswith('enums.'):
             p_type = p_type.replace('enums.', '')
             p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
-        rst += '\n' + (' ' * indent) + ':type {0}:'.format(p['python_name']) + p_type
+        rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
 
     output_params = extract_output_parameters(function['parameters'])
@@ -563,7 +572,7 @@ def get_function_rst(fname, config, indent=0):
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple ('+ ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
-            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type']) + '\n'
+            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type']) + '\n'
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
@@ -597,7 +606,7 @@ def get_function_docstring(fname, config, indent=0):
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type'])
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['intrinsic_type'])
             docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     return docstring
@@ -717,11 +726,19 @@ def get_python_type_from_visa_type(visa_type):
     else:
         p_types = importlib.import_module('build.templates.python_types')
     v_type = getattr(p_types, visa_type)
-    # We have a special case for bool
-    if type(v_type()) is bool:
+    # If we just take type() and make it a string, we get <class 'float'> which is not what we want
+    # So we check for each type and return the string we want
+    c_type = type(v_type())
+    if c_type is float:
+        p_type = 'float'
+    elif c_type is str:
+        p_type = 'str'
+    elif c_type is int:
+        p_type = 'int'
+    elif c_type is bool:
         p_type = 'bool'
     else:
-        p_type = v_type().python_type()
+        assert False, 'Unknown datatype: {0}'.format(c_type)
 
     return p_type
 
