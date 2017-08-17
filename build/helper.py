@@ -515,9 +515,6 @@ def fix_references(doc, cfg, make_link=False):
     doc = attr_re.sub(replace_attribute_python_name, doc)
     doc = func_re.sub(replace_func_python_name, doc)
 
-    if doc.find('niDMM') != -1:
-        print('Found niDMM: ' + doc)
-
     if not make_link:
         doc = doc.replace('\_', '_')
     return doc
