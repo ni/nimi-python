@@ -726,20 +726,7 @@ def get_python_type_from_visa_type(visa_type):
     else:
         p_types = importlib.import_module('build.templates.python_types')
     v_type = getattr(p_types, visa_type)
-    # If we just take type() and make it a string, we get <class 'float'> which is not what we want
-    # So we check for each type and return the string we want
-    c_type = type(v_type())
-    if c_type is float:
-        p_type = 'float'
-    elif c_type is str:
-        p_type = 'str'
-    elif c_type is int:
-        p_type = 'int'
-    elif c_type is bool:
-        p_type = 'bool'
-    else:
-        assert False, 'Unknown datatype: {0}'.format(c_type)
 
-    return p_type
+    return type(v_type()).__name__
 
 
