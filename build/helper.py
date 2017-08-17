@@ -599,7 +599,7 @@ def get_function_docstring(fname, config, indent=0):
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
-        docstring +=  '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type'])
+        docstring +=  '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['intrinsic_type'])
         docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     output_params = extract_output_parameters(function['parameters'])
