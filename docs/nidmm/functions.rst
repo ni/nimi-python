@@ -827,7 +827,7 @@ NI-DMM Functions
         | NIDMM\_VAL\_TEMP\_TC\_T | Thermocouple type T |
         +-------------------------+---------------------+
 
-    :type thermocouple_type: int
+    :type thermocouple_type: :py:data:`nidmm.ThermocoupleType`
     :param reference_junction_type:
 
 

@@ -1459,7 +1459,7 @@ class Session(object):
         chosen thermocouple.
 
         Args:
-            thermocouple_type (int):
+            thermocouple_type (enums.ThermocoupleType):
                 Specifies the type of thermocouple used to measure the temperature.
                 NI-DMM uses this value to set the Thermocouple Type property. The
                 default is NIDMM_VAL_TEMP_TC_J.
@@ -1487,7 +1487,9 @@ class Session(object):
                 value to set the Reference Junction Type property. The only supported
                 value is NIDMM_VAL_TEMP_REF_JUNC_FIXED.
         '''
-        error_code = self.library.niDMM_ConfigureThermocouple(self.vi, thermocouple_type, reference_junction_type)
+        if type(thermocouple_type) is not enums.ThermocoupleType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ThermocoupleType))
+        error_code = self.library.niDMM_ConfigureThermocouple(self.vi, thermocouple_type.value, reference_junction_type)
         errors._handle_error(self, error_code)
         return
 
