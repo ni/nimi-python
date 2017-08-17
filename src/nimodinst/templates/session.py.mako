@@ -151,39 +151,37 @@ class Session(object):
             self.handle = 0
 
     ''' These are code-generated '''
-% for func_name in functions:
+% for func_name in sorted(functions):
 <%
     f = functions[func_name]
-    input_parameters = helper.extract_input_parameters(f['parameters'])
-    output_parameters = helper.extract_output_parameters(f['parameters'])
+    parameters = f['parameters']
+    input_parameters = helper.extract_input_parameters(parameters)
+    output_parameters = helper.extract_output_parameters(parameters)
     enum_input_parameters = helper.extract_enum_parameters(input_parameters)
-    ivi_dance_parameter = helper.extract_ivi_dance_parameter(f['parameters'])
-
-    # If there is an ivi_dance parameter, we need to remove the associated size parameter from the input_params
-    if ivi_dance_parameter is not None:
-        input_parameters[:] = [p for p in input_parameters if p['python_name'] != ivi_dance_parameter['size']]
+    ivi_dance_parameter = helper.extract_ivi_dance_parameter(parameters)
+    ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
-    def ${f['python_name']}(${helper.get_method_parameters_snippet(input_parameters)}):
+    def ${f['python_name']}(${helper.get_method_parameters_snippet(parameters, skip_session_handle = True, skip_output_parameters = True, skip_ivi_dance_size_parameter = True)}):
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter)}
 % endfor
 % for output_parameter in output_parameters:
-        ${helper.get_ctype_variable_declaration_snippet(output_parameter)}
+        ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
 % endfor
 % if ivi_dance_parameter is None:
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], sessionName='handle')})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
         errors._handle_error(self, error_code)
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
-        ${ivi_dance_parameter['size']} = 0
-        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_parameter['size']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], sessionName='handle')})
+        ${ivi_dance_size_parameter['python_name']} = 0
+        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
             raise errors.Error(self.library, self.vi, error_code)
-        ${ivi_dance_parameter['size']} = error_code
-        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_parameter['size']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], sessionName='handle')})
+        ${ivi_dance_size_parameter['python_name']} = error_code
+        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
         errors._handle_error(self, error_code)
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
