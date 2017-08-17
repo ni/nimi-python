@@ -6,8 +6,10 @@
 # don't generate at all
 functions_codegen_method = {
     'OpenInstalledDevicesSession':          { 'codegen_method': 'private',  },
-    'CloseInstalledDevicesSession':         { 'codegen_method': 'private',  },
     'GetExtendedErrorInfo':                 { 'codegen_method': 'private',  },
+    'GetInstalledDeviceAttributeViInt32':   { 'codegen_method': 'private',  },
+    'GetInstalledDeviceAttributeViString':  { 'codegen_method': 'private',  },
+    'CloseInstalledDevicesSession':         { 'codegen_method': 'private',  },
 }
 
 
