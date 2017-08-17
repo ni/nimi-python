@@ -429,7 +429,7 @@ def get_documentation_for_node_docstring(node, config, indent=0):
     if 'note' in nd:
         doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(fix_references('Note: ' + nd['note'], config, make_link=False), indent)
 
-    return doc
+    return doc.strip()
 
 # We need this in the global namespace so we can reference it from the sub() callback
 config = None
@@ -514,9 +514,6 @@ def fix_references(doc, cfg, make_link=False):
 
     doc = attr_re.sub(replace_attribute_python_name, doc)
     doc = func_re.sub(replace_func_python_name, doc)
-
-    if doc.find('niDMM') != -1:
-        print('Found niDMM: ' + doc)
 
     if not make_link:
         doc = doc.replace('\_', '_')
