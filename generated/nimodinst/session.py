@@ -213,13 +213,13 @@ class Session(object):
         errors._handle_error(self, error_code)
         return error_info_ctype.value.decode("ascii")
 
-    def get_installed_device_attribute_vi_int32(self, handle, index, attribute_id):
+    def _get_installed_device_attribute_vi_int32(self, handle, index, attribute_id):
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niModInst_GetInstalledDeviceAttributeViInt32(self.handle, index, attribute_id, ctypes.pointer(attribute_value_ctype))
         errors._handle_error(self, error_code)
         return attribute_value_ctype.value
 
-    def get_installed_device_attribute_vi_string(self, handle, index, attribute_id):
+    def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id):
         attribute_value_buffer_size = 0
         attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(attribute_value_buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)

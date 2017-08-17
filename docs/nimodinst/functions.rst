@@ -57,7 +57,7 @@ NI-ModInst Functions
 
     :type error_info_buffer_size: ViInt32
 
-.. function:: get_installed_device_attribute_vi_int32(handle, index, attribute_id, attribute_value)
+.. function:: _get_installed_device_attribute_vi_int32(handle, index, attribute_id, attribute_value)
 
     Returns an integer attribute specified by the attributeID parameter for
     a device specified by the handle and index parameters. The handle
@@ -118,7 +118,7 @@ NI-ModInst Functions
             
 
 
-.. function:: get_installed_device_attribute_vi_string(handle, index, attribute_id, attribute_value_buffer_size, attribute_value)
+.. function:: _get_installed_device_attribute_vi_string(handle, index, attribute_id, attribute_value_buffer_size, attribute_value)
 
     Returns a string attribute specified by the attributeID parameter for a
     device specified by the handle and index parameters. The handle
