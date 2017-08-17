@@ -101,7 +101,7 @@ def _add_python_type(parameter):
 def _add_intrinsic_type(parameter):
     '''Adds a intrinsic key/value pair to the parameter metadata'''
     if parameter['enum'] is None:
-        parameter['intrinsic_type'] = get_python_type_from_visa_type(parameter['type'])
+        parameter['intrinsic_type'] = get_intrinsic_type_from_visa_type(parameter['type'])
     else:
         parameter['intrinsic_type'] = parameter['python_type']
     return parameter
@@ -719,7 +719,8 @@ def add_to_path(p):
     finally:
         sys.path = old_path
 
-def get_python_type_from_visa_type(visa_type):
+def get_intrinsic_type_from_visa_type(visa_type):
+    '''Returns the underlying intrinsic (python) type from the visa type'''
     if sys.version_info.major < 3:
         with add_to_path('build/templates'):
             p_types = importlib.import_module('python_types')
