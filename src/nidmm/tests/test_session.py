@@ -93,7 +93,7 @@ class TestSession(object):
         self.patched_ctypes_library.niDMM_GetAttributeViString.side_effect = self.side_effects_helper.niDMM_GetAttributeViString
         self.side_effects_helper['GetAttributeViString']['attributeValue'] = '0x12345678'
         with nidmm.Session('dev1') as session:
-            sn = session.instrument_serial_number
+            sn = session.serial_number
             assert(sn == '0x12345678')
 
     def test_acquisition_context_manager(self):

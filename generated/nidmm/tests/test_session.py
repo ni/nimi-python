@@ -93,7 +93,7 @@ class TestSession(object):
         self.patched_ctypes_library.niDMM_GetAttributeViString.side_effect = self.side_effects_helper.niDMM_GetAttributeViString
         self.side_effects_helper['GetAttributeViString']['attributeValue'] = '0x12345678'
         with nidmm.Session('dev1') as session:
-            sn = session.instrument_serial_number
+            sn = session.serial_number
             assert(sn == '0x12345678')
 
     def test_acquisition_context_manager(self):
@@ -137,15 +137,4 @@ class TestSession(object):
             assert type(status) is nidmm.AcquisitionStatus
             assert status == nidmm.AcquisitionStatus.NO_ACQUISITION_IN_PROGRESS
 
-
-'''
-    def test_self_test(self):
-        self.patched_ctypes_library.niDMM_self_test = self.side_effects_helper.niDMM_self_test
-        self.side_effects_helper['self_test']['selfTestResult'] = 0
-        self.side_effects_helper['self_test']['selfTestMessage'] = 'Self Test passed'
-        with nidmm.Session('dev1') as session:
-            result, message = session.self_test()
-            assert result == 0
-            assert message == 'Self Test passed.'
-'''
 
