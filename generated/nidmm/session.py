@@ -106,6 +106,16 @@ class Session(object):
     that the value of this parameter is less than the maximum frequency of
     the device. This property affects the DMM only when you set the Function
     property to AC measurements.
+
+    The valid ranges are shown in the following table.
+
+    +--------------------------------------+--------------+
+    | NI 4080/4081/4082, NI 4070/4071/4072 | 1 Hz-300 kHz |
+    +--------------------------------------+--------------+
+    | NI 4065                              | 10 Hz-100 Hz |
+    +--------------------------------------+--------------+
+    | NI 4050/4060                         | 20 Hz-25 kHz |
+    +--------------------------------------+--------------+
     '''
     ac_min_freq = AttributeViReal64(1250006)
     '''
@@ -125,12 +135,31 @@ class Session(object):
     Specifies the measurement aperture time for the current configuration.
     Aperture time is specified in units set by the Aperture Time Units
     property. To override the default aperture, set this property to the
-    desired aperture time after calling niDMM Config Measurement . To return
+    desired aperture time after calling `niDMM Config
+    Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__. To return
     to the default, set this property to Aperture Time Auto (-1).
+
+    Any number of powerline cycles (PLCs) within the minimum and maximum
+    ranges is allowed on the NI 4080/4081/4082 and NI 4070/4071/4072.
+
+    On the NI 4065 the minimum aperture time is 333 micro s and the maximum
+    aperture time is 78.2 s. If setting the number of averages directly, the
+    total measurement time is aperture time X the number of averages, which
+    must be less than 72.8 s. The aperture times allowed are 333 micro s,
+    667 micro s, or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33
+    ms, and so on. If you set an aperture time other than 333 micro s, 667
+    micro s, or multiples of 1.11 ms, the value will be coerced up to the
+    next supported aperture time.
+
+    On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed
+    are 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is
+    50 Hz, the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
     '''
     aperture_time_units = AttributeEnum(1250322, enums.ApertureTimeUnits)
     '''
     Specifies the units of aperture time for the current configuration.
+
+    Note: The NI 4060 does not support an aperture time set in seconds.
     '''
     auto_range_value = AttributeViReal64(1250331)
     '''
@@ -154,6 +183,8 @@ class Session(object):
     For the NI 4081 and NI 4072 only, specifies the type of cable
     compensation that is applied to the current capacitance or inductance
     measurement for the current range.
+
+    Note: Changing the function or the range using property nodes or through
     '''
     cache = AttributeViBoolean(1050004)
     '''
@@ -163,12 +194,14 @@ class Session(object):
     it significantly increases execution speed. The instrument driver can
     choose to always cache or to never cache particular properties
     regardless of the setting of this property. The default value is TRUE
-    (1). Use niDMM Initialize With Options to override the default setting.
+    (1). Use `niDMM Initialize With
+    Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
+    override the default setting.
     '''
     channel_count = AttributeViInt32(1050203)
     '''
     Indicates the number of channels that the specific instrument driver
-    supports. For each property for which the IVI\_VAL\_MULTI\_CHANNEL flag
+    supports. For each property for which the IVI_VAL_MULTI_CHANNEL flag
     property is set, the IVI engine maintains a separate cache value for
     each channel.
     '''
@@ -190,6 +223,8 @@ class Session(object):
     dc_noise_rejection = AttributeEnum(1150026, enums.DCNoiseRejection)
     '''
     Specifies the DC noise rejection mode.
+
+    Note: The NI 4050 and NI 4060 are not supported.
     '''
     driver_setup = AttributeViString(1050007)
     '''
@@ -199,9 +234,10 @@ class Session(object):
     this is specifying a particular instrument model from among a family of
     instruments that the driver supports. This is useful when using
     simulation. The end-user can specify driver-specific options through the
-    Driver Setup keyword in the Option String parameter in niDMM Initialize
-    With Options . If the user does not specify a Driver Setup string, this
-    property returns an empty string.
+    Driver Setup keyword in the Option String parameter in `niDMM Initialize
+    With Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__. If
+    the user does not specify a Driver Setup string, this property returns
+    an empty string.
     '''
     engine_major_version = AttributeViInt32(1050501)
     '''
@@ -232,18 +268,24 @@ class Session(object):
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
     amplitude of the input signal for frequency measurements.
+
+    +----------------+------+----------------------------------------------------------------------------------------------------------------------------------+
+    | Auto Range On  | -1.0 | Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement. |
+    +----------------+------+----------------------------------------------------------------------------------------------------------------------------------+
+    | Auto Range Off | -2.0 | Disables Auto Ranging. NI-DMM sets the voltage range to the last calculated voltage range.                                       |
+    +----------------+------+----------------------------------------------------------------------------------------------------------------------------------+
     '''
     function = AttributeEnum(1250001, enums.Function)
     '''
     Specifies the measurement function. If you are setting this property
-    directly, you must also set the Operation Mode property, which controls
-    whether the DMM takes standard single or multipoint measurements, or
-    acquires a waveform. If you are programming properties directly, you
-    must set the Operation Mode property before setting other configuration
-    properties. If the Operation Mode property is set to Waveform Mode, the
-    only valid function types are Waveform Voltage and Waveform Current. Set
-    the Operation Mode property to IVIDMM Mode to set all other function
-    values.
+    directly, you must also set the `Operation
+    Mode <pniDMM_OperationMode.html>`__ property, which controls whether the
+    DMM takes standard single or multipoint measurements, or acquires a
+    waveform. If you are programming properties directly, you must set the
+    Operation Mode property before setting other configuration properties.
+    If the Operation Mode property is set to Waveform Mode, the only valid
+    function types are Waveform Voltage and Waveform Current. Set the
+    Operation Mode property to IVIDMM Mode to set all other function values.
     '''
     group_capabilities = AttributeViString(1050401)
     '''
@@ -257,6 +299,8 @@ class Session(object):
     input_resistance = AttributeEnum(1150029, enums.InputResistance)
     '''
     Specifies the input resistance of the instrument.
+
+    Note: The NI 4050 and NI 4060 are not supported.
     '''
     instrument_firmware_revision = AttributeViString(1050510)
     '''
@@ -275,15 +319,25 @@ class Session(object):
     Specifies whether to perform interchangeability checking and log
     interchangeability warnings when you call niDMM VIs. Interchangeability
     warnings indicate that using your application with a different
-    instrument might cause different behavior. Use niDMM Get Next
-    Interchange Warning to extract interchange warnings. Use niDMM Clear
-    Interchange Warnings to clear the list of interchangeability warnings
-    without reading them. Interchangeability checking examines the
-    properties in a capability group only if you specify a value for at
-    least one property within that group. Interchangeability warnings can
-    occur when a property affects the behavior of the instrument and you
-    have not set that property, or the property has been invalidated since
-    you set it.
+    instrument might cause different behavior. Use `niDMM Get Next
+    Interchange
+    Warning <dmmviref.chm::/niDMM_Get_Next_Interchange_Warning.html>`__ to
+    extract interchange warnings. Use
+
+    `niDMM Clear Interchange
+    Warnings <dmmviref.chm::/niDMM_Clear_Interchange_Warnings.html>`__ to
+    clear the list of interchangeability warnings without reading them.
+    Interchangeability checking examines the properties in a capability
+    group only if you specify a value for at least one property within that
+    group. Interchangeability warnings can occur when a property affects the
+    behavior of the instrument and you have not set that property, or the
+    property has been invalidated since you set it.
+
+    +-------+---+
+    | TRUE  | 1 |
+    +-------+---+
+    | FALSE | 0 |
+    +-------+---+
     '''
     io_resource_descriptor = AttributeViString(1050304)
     '''
@@ -315,7 +369,11 @@ class Session(object):
     Specifies the destination of the measurement complete (MC) signal.
 
     To determine which values are supported by each device, refer to the
-    LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
+
+    `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
+    in the *NI Digital Multimeters Help*
+
+    Note: The NI 4050 is not supported.
     '''
     meas_dest_slope = AttributeEnum(1150002, enums.MeasurementDestinationSlope)
     '''
@@ -342,6 +400,8 @@ class Session(object):
     (conductance) of the open cable compensation. The valid range is any
     real number >0. The default value (-1.0) indicates that compensation has
     not taken place.
+
+    Note: Changing the function or the range using property nodes or through
     '''
     open_cable_comp_susceptance = AttributeViReal64(1150048)
     '''
@@ -349,19 +409,25 @@ class Session(object):
     (susceptance) of the open cable compensation. The valid range is any
     real number >0. The default value (-1.0) indicates that compensation has
     not taken place.
+
+    Note: Changing the function or the range using property nodes or through
     '''
     operation_mode = AttributeEnum(1150014, enums.OperationMode)
     '''
     Specifies how the DMM acquires data.
 
-    .. note::
-       The NI 4050 and NI 4060 are not supported.
+    When you call
 
-    When you call niDMM Config Measurement , NI-DMM sets this property to
-    IVIDMM Mode. When you call niDMM Configure Waveform Acquisition , NI-DMM
-    sets this property to Waveform Mode. If you are programming properties
-    directly, you must set this property before setting other configuration
-    properties.
+    `niDMM Config
+    Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__, NI-DMM
+    sets this property to IVIDMM Mode. When you call `niDMM Configure
+    Waveform
+    Acquisition <dmmviref.chm::/niDMM_Configure_Waveform_Acquisition.html>`__,
+    NI-DMM sets this property to Waveform Mode. If you are programming
+    properties directly, you must set this property before setting other
+    configuration properties.
+
+    Note: The NI 4050 and NI 4060 are not supported.
     '''
     powerline_freq = AttributeEnum(1250333, enums.PowerlineFrequency)
     '''
@@ -370,6 +436,16 @@ class Session(object):
     the appropriate internal sample clock and filter. The NI 4065, NI
     4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
     for setting the Aperture Time property in powerline cycles.
+
+    After configuring powerline frequency, set the Aperture Time Units
+    property to PLCs. When setting the Aperture Time property, select the
+    number of PLCs for the powerline frequency. For example, if powerline
+    frequency = 50 Hz (or 20 ms) and aperture time in PLCs = 5, then
+    aperture time in seconds = 20 ms \* 5 PLCs = 100 ms. Similarly, if
+    powerline frequency = 60 Hz (or 16.667 ms) and aperture time in PLCs =
+    6, then aperture time in seconds = 16.667 ms \* 6 PLCs = 100 ms.
+
+    Note: For 400 Hz powerline frequency, use the 50 Hz setting.
     '''
     primary_error = AttributeViInt32(1050101)
     '''
@@ -388,8 +464,9 @@ class Session(object):
     to FALSE (0) to disable status checking and maximize performance. The
     instrument driver can choose to ignore status checking for particular
     properties regardless of the setting of this property. The default value
-    is TRUE (1). Use niDMM Initialize With Options to override the default
-    setting.
+    is TRUE (1). Use `niDMM Initialize With
+    Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
+    override the default setting.
     '''
     range = AttributeViReal64(1250002)
     '''
@@ -398,6 +475,16 @@ class Session(object):
     units appropriate for the current value of the Function property. For
     example, if the Function property is set to DC Volts, the units are
     volts.
+
+    +--------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | (-1.0) | Auto Range On   | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                                                               |
+    +--------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | (-2.0) | Auto Range Off  | NI-DMM sets the Range to the current `Auto Range Value <pnidmm_AutoRangeValue.html>`__ and uses this range for all subsequent measurements until the measurement configuration is changed.                                    |
+    +--------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | (-3.0) | Auto Range Once | NI-DMM performs an Auto Range before acquiring the next measurement. The `Auto Range Value <pnidmm_AutoRangeValue.html>`__ is stored and used for all subsequent measurements until the measurement configuration is changed. |
+    +--------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    Note: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the trigger and sample trigger are set to Immediate.
     '''
     range_check = AttributeViBoolean(1050002)
     '''
@@ -406,28 +493,37 @@ class Session(object):
     driver VIs. Range checking parameters is very useful for debugging.
     After the user program is validated, you can set this property to FALSE
     (0) to disable range checking and maximize performance. The default
-    value is TRUE (1). Use niDMM Initialize With Options to override the
-    default setting.
+    value is TRUE (1). Use `niDMM Initialize With
+    Options <dmmviref.chm::/niDMM_Initialize_With_Options.html>`__ to
+    override the default setting.
     '''
     record_coercions = AttributeViBoolean(1050006)
     '''
     Specifies whether the IVI engine keeps a list of the value coercions it
     makes for ViInt32 and ViReal64 properties. The default value is FALSE
-    (0). Use niDMM Initialize With Options to override the default setting.
-    Use niDMM Get Next Coercion Record to extract and delete the oldest
-    coercion record from the list.
+    (0). Use `niDMM Initialize With
+    Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
+    override the default setting. Use
+
+    `niDMM Get Next Coercion
+    Record <dmmviref.chm::/niDMM_Get_Next_Coercion_Record.html>`__ to
+    extract and delete the oldest coercion record from the list.
     '''
     resolution_absolute = AttributeViReal64(1250008)
     '''
     Specifies the measurement resolution in absolute units. Setting this
     property to higher values increases the measurement accuracy. Setting
     this property to lower values increases the measurement speed.
+
+    Note: NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
     '''
     resolution_digits = AttributeEnum(1250003, enums.DigitsResolution)
     '''
     Specifies the measurement resolution in digits. Setting this property to
     higher values increases the measurement accuracy. Setting this property
     to lower values increases the measurement speed.
+
+    Note: NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the
     '''
     sample_count = AttributeViInt32(1250301)
     '''
@@ -442,6 +538,12 @@ class Session(object):
     sample_delay_mode = AttributeViInt32(1150031)
     '''
     For the NI 4060 only, specifies a delay interval after a sample trigger.
+
+    +---+-------------------+---------------------------------------------------------------------------------------+
+    | 0 | IVI compliant     | The Sample Interval property is only used when the Sample Trigger is set to Interval. |
+    +---+-------------------+---------------------------------------------------------------------------------------+
+    | 1 | Not IVI compliant | The Sample Interval property is used as a delay after any type of Sample Trigger.     |
+    +---+-------------------+---------------------------------------------------------------------------------------+
     '''
     sample_interval = AttributeViReal64(1250303)
     '''
@@ -450,13 +552,28 @@ class Session(object):
     property is set to INTERVAL. The default value (-1) ensures that the DMM
     settles for a recommended time, which is the same as using an immediate
     trigger.
+
+    The NI 4065 and NI 4070/4071/4072 use the value specified in this
+    property as additional delay. On these devices, the onboard timing
+    resolution is 34.72 ns and the valid range is 0-149 s.
+
+    On the NI 4060, the value for this property is used as the settling
+    time. When this property is set to 0, the NI 4060 does not settle
+    between measurement cycles. The onboard timing resolution is 1 micro s
+    on the NI 4060.
+
+    Only positive values are valid when setting the sample interval.
+
+    Note: The NI 4080/4081/4082 and NI 4050 are not supported.
     '''
     sample_trigger = AttributeEnum(1250302, enums.SampleTrigger)
     '''
     Specifies the sample trigger source.
 
     To determine which values are supported by each device, refer to the
-    LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
+
+    `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
+    in the *NI Digital Multimeters Help*
     '''
     sample_trigger_slope = AttributeEnum(1150010, enums.SampleTrigSlope)
     '''
@@ -481,6 +598,8 @@ class Session(object):
     Specifies the settling time in seconds. Use this property to override
     the default settling time. To return to the default, set this property
     to Auto (-1).
+
+    Note: The NI 4050 and NI 4060 are not supported.
     '''
     short_cable_comp_reactance = AttributeViReal64(1150046)
     '''
@@ -488,6 +607,8 @@ class Session(object):
     (reactance) of the short cable compensation. The valid range is any real
     number >0. The default value (-1) indicates that compensation has not
     taken place.
+
+    Note: Changing the VI or the range through this property or through
     '''
     short_cable_comp_resistance = AttributeViReal64(1150047)
     '''
@@ -495,10 +616,14 @@ class Session(object):
     (resistance) of the short cable compensation. The valid range is any
     real number >0. The default value (-1) indicates that compensation has
     not taken place.
+
+    Note: Changing the VI or the range through this property or through
     '''
     shunt_value = AttributeViReal64(1150003)
     '''
     For the NI 4050 only, specifies the shunt resistance value.
+
+    Note: The NI 4050 requires an external shunt resistor for current measurements. This property should be set to the value of the shunt resistor.
     '''
     simulate = AttributeViBoolean(1050005)
     '''
@@ -507,8 +632,11 @@ class Session(object):
     checking and call IVI Get and Set VIs, but they do not perform
     instrument I/O. For output parameters that represent instrument data,
     the instrument driver VIs return calculated values. The default value is
-    FALSE (0). Use niDMM Initialize With Options to override the default
-    setting.
+    FALSE (0). Use `niDMM Initialize With
+    Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
+    override the default setting.
+
+    Note: Simulate can only be set within the
     '''
     specific_driver_class_spec_major_version = AttributeViInt32(1050515)
     '''
@@ -555,17 +683,17 @@ class Session(object):
     temp_rtd_a = AttributeViReal64(1150121)
     '''
     Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
-    **RTD Type property** is set to Custom.
+    **RTD Type property**
     '''
     temp_rtd_b = AttributeViReal64(1150122)
     '''
     Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
-    **RTD Type property** is set to Custom.
+    **RTD Type property**
     '''
     temp_rtd_c = AttributeViReal64(1150123)
     '''
     Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
-    **RTD Type property** is set to Custom.
+    **RTD Type property**
     '''
     temp_rtd_res = AttributeViReal64(1250242)
     '''
@@ -591,17 +719,17 @@ class Session(object):
     temp_thermistor_a = AttributeViReal64(1150125)
     '''
     Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-    the **Thermistor Type property** is set to Custom.
+    the **Thermistor Type property**
     '''
     temp_thermistor_b = AttributeViReal64(1150126)
     '''
     Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-    the **Thermistor Type property** is set to Custom.
+    the **Thermistor Type property**
     '''
     temp_thermistor_c = AttributeViReal64(1150127)
     '''
     Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-    the **Thermistor Type property** is set to Custom.
+    the **Thermistor Type property**
     '''
     temp_thermistor_type = AttributeEnum(1150124, enums.ThermistorType)
     '''
@@ -619,8 +747,10 @@ class Session(object):
 
     The NI 4050/4060 only support this property being set to 1.
 
-    Refer to Multiple Point Acquisitions in the *NI Digital Multimeters
-    Help* for more information.
+    Refer to
+
+    `Multiple Point Acquisitions <dmm.chm::/multi_point.html>`__ in the *NI
+    Digital Multimeters Help*
     '''
     trigger_delay = AttributeViReal64(1250005)
     '''
@@ -660,13 +790,18 @@ class Session(object):
     '''
     trigger_source = AttributeEnum(1250004, enums.TriggerSource)
     '''
-    Specifies the trigger source. When niDMM Initiate is called, the DMM
+    Specifies the trigger source. When `niDMM
+    Initiate <dmmviref.chm::/niDMM_Initiate.html>`__ is called, the DMM
     waits for the trigger specified with this property. After it receives
-    the trigger, the DMM waits the length of time specified with the Trigger
-    Delay property. The DMM then takes a measurement.
+    the trigger, the DMM waits the length of time specified with the
+
+    `Trigger Delay <pnidmm_TriggerDelay.html>`__ property. The DMM then
+    takes a measurement.
 
     To determine which values are supported by each device, refer to the
-    LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
+
+    `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
+    in the *NI Digital Multimeters Help*
     '''
     waveform_coupling = AttributeEnum(1150027, enums.WaveformCoupling)
     '''
@@ -760,7 +895,7 @@ class Session(object):
     def _abort(self):
         '''_abort
 
-        Aborts a previously initiated measurement and returns the DMM to the
+Aborts a previously initiated measurement and returns the DMM to the
         Idle state.
         '''
         error_code = self.library.niDMM_Abort(self.vi)
@@ -770,7 +905,7 @@ class Session(object):
     def _clear_error(self):
         '''_clear_error
 
-        Clears the error information for the current execution thread and the
+Clears the error information for the current execution thread and the
         IVI session you specify. If you pass VI_NULL for the
         **Instrument_Handle** parameter, this function clears the error
         information only for the current execution thread.
@@ -782,7 +917,7 @@ class Session(object):
     def clear_interchange_warnings(self):
         '''clear_interchange_warnings
 
-        Clears the list of current interchange warnings.
+Clears the list of current interchange warnings.
         '''
         error_code = self.library.niDMM_ClearInterchangeWarnings(self.vi)
         errors._handle_error(self, error_code)
@@ -791,12 +926,11 @@ class Session(object):
     def configure_ac_bandwidth(self, ac_minimum_frequency_hz, ac_maximum_frequency_hz):
         '''configure_ac_bandwidth
 
-        Configures the AC_MIN_FREQ and AC_MAX_FREQ
+Configures the AC_MIN_FREQ and AC_MAX_FREQ
         attributes, which the DMM uses for AC measurements.
 
         Args:
-            ac_minimum_frequency_hz (ViReal64):
-                Specifies the minimum expected frequency component of the input signal
+            ac_minimum_frequency_hz (ViReal64):Specifies the minimum expected frequency component of the input signal
                 in hertz. This parameter affects the DMM only when you set the
                 function attribute to AC measurements. NI-DMM uses this
                 parameter to calculate the proper aperture for the measurement.
@@ -804,8 +938,7 @@ class Session(object):
                 The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
                 4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
                 NI 4050 and NI 4060.
-            ac_maximum_frequency_hz (ViReal64):
-                Specifies the maximum expected frequency component of the input signal
+            ac_maximum_frequency_hz (ViReal64):Specifies the maximum expected frequency component of the input signal
                 in hertz within the device limits. This parameter is used only for error
                 checking and verifies that the value of this parameter is less than the
                 maximum frequency of the device.
@@ -823,7 +956,7 @@ class Session(object):
     def configure_adc_calibration(self, adc_calibration):
         '''configure_adc_calibration
 
-        For the NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
+For the NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
         compensate for gain drift since the last external calibration or
         self-calibration. When **ADC_Calibration** is ON, the DMM measures an
         internal reference to calculate the correct gain for the measurement.
@@ -831,8 +964,7 @@ class Session(object):
         changes to the gain.
 
         Args:
-            adc_calibration (enums.ADCCalibration):
-                Specifies the **ADC_Calibration** setting. The driver sets
+            adc_calibration (enums.ADCCalibration):Specifies the **ADC_Calibration** setting. The driver sets
                 ADC_CALIBRATION to this value.
                 NIDMM_VAL_ADC_CALIBRATION_ON enables **ADC_Calibration**.
                 NIDMM_VAL_ADC_CALIBRATION_OFF disables **ADC_Calibration**. If you
@@ -863,7 +995,7 @@ class Session(object):
     def configure_auto_zero_mode(self, auto_zero_mode):
         '''configure_auto_zero_mode
 
-        Configures the DMM for **Auto_Zero_Mode**. When **Auto_Zero_Mode**
+Configures the DMM for **Auto_Zero_Mode**. When **Auto_Zero_Mode**
         is ON, the DMM internally disconnects the input signal and takes a zero
         reading. It then subtracts the zero reading from the measurement. This
         prevents offset voltages present on the input circuitry of the DMM from
@@ -871,8 +1003,7 @@ class Session(object):
         DMM does not compensate for zero reading offset.
 
         Args:
-            auto_zero_mode (enums.AutoZero):
-                Specifies the **auto_zero_mode**. NI-DMM sets the
+            auto_zero_mode (enums.AutoZero):Specifies the **auto_zero_mode**. NI-DMM sets the
                 AUTO_ZERO attribute to this value.
 
                 ON enables **auto_zero_mode** for each measurement. ONCE enables
@@ -917,13 +1048,12 @@ class Session(object):
     def configure_cable_comp_type(self, cable_comp_type):
         '''configure_cable_comp_type
 
-        For the NI 4082 and NI 4072 only, sets the
+For the NI 4082 and NI 4072 only, sets the
         CABLE_COMP_TYPE attribute for the current
         capacitance/inductance mode range.
 
         Args:
-            cable_comp_type (enums.CableCompensationType):
-                Specifies the type of cable compensation that is used for the current
+            cable_comp_type (enums.CableCompensationType):Specifies the type of cable compensation that is used for the current
                 range.
         '''
         if type(cable_comp_type) is not enums.CableCompensationType:
@@ -935,12 +1065,11 @@ class Session(object):
     def configure_current_source(self, current_source):
         '''configure_current_source
 
-        The NI 4050 and NI 4060 are not supported. Configures the
+The NI 4050 and NI 4060 are not supported. Configures the
         **Current_Source** for diode measurements.
 
         Args:
-            current_source (enums.CurrentSource):
-                Specifies the **current_source** provided during diode measurements.
+            current_source (enums.CurrentSource):Specifies the **current_source** provided during diode measurements.
                 For valid ranges, refer to the device sections for your device. The
                 driver sets CURRENT_SOURCE to this value.
 
@@ -963,12 +1092,11 @@ class Session(object):
     def configure_fixed_ref_junction(self, fixed_reference_junction):
         '''configure_fixed_ref_junction
 
-        Configures the fixed reference junction temperature for a thermocouple
+Configures the fixed reference junction temperature for a thermocouple
         with a fixed reference junction type.
 
         Args:
-            fixed_reference_junction (ViReal64):
-                Specifies the reference junction temperature when a fixed reference
+            fixed_reference_junction (ViReal64):Specifies the reference junction temperature when a fixed reference
                 junction is used to take a thermocouple measurement. The units are
                 degrees Celsius. NI-DMM uses this value to set the Fixed Reference
                 Junction property. The default is 25.00 (°C).
@@ -980,13 +1108,12 @@ class Session(object):
     def configure_frequency_voltage_range(self, voltage_range):
         '''configure_frequency_voltage_range
 
-        For the NI 4080/4081/4082 and the NI 4070/4071/4072 only, specifies the
+For the NI 4080/4081/4082 and the NI 4070/4071/4072 only, specifies the
         expected maximum amplitude of the input signal for frequency and period
         measurements.
 
         Args:
-            voltage_range (ViReal64):
-                Sets the expected maximum amplitude of the input signal. Refer to the
+            voltage_range (ViReal64):Sets the expected maximum amplitude of the input signal. Refer to the
                 `NI 4080 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4080_functional_overview/>`__,
                 `NI 4081 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4081_functional_overview/>`__,
                 `NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4082/>`__,
@@ -1014,14 +1141,13 @@ class Session(object):
     def configure_meas_complete_dest(self, meas_complete_destination):
         '''configure_meas_complete_dest
 
-        Specifies the destination of the DMM Measurement Complete (MC) signal.
+Specifies the destination of the DMM Measurement Complete (MC) signal.
         Refer to
         `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
         for more information.
 
         Args:
-            meas_complete_destination (enums.MeasurementCompleteDest):
-                Specifies the destination of the Measurement Complete signal. This
+            meas_complete_destination (enums.MeasurementCompleteDest):Specifies the destination of the Measurement Complete signal. This
                 signal is issued when the DMM completes a single measurement. The driver
                 sets the MEAS_COMPLETE_DEST attribute to this value. This
                 signal is commonly referred to as Voltmeter Complete.
@@ -1041,12 +1167,11 @@ class Session(object):
     def configure_meas_complete_slope(self, meas_complete_slope):
         '''configure_meas_complete_slope
 
-        Sets the Measurement Complete signal to either rising edge (positive) or
+Sets the Measurement Complete signal to either rising edge (positive) or
         falling edge (negative) polarity.
 
         Args:
-            meas_complete_slope (enums.Slope):
-                Specifies the polarity of the signal that is generated. The driver sets
+            meas_complete_slope (enums.Slope):Specifies the polarity of the signal that is generated. The driver sets
                 MEAS_DEST_SLOPE to this value.
 
                 +------------------------+---+--------------------+----------------------------------------------------------------+
@@ -1064,16 +1189,14 @@ class Session(object):
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
         '''configure_measurement_absolute
 
-        Configures the common attributes of the measurement. These attributes
+Configures the common attributes of the measurement. These attributes
         include function, range, and
         RESOLUTION_ABSOLUTE.
 
         Args:
-            measurement_function (enums.Function):
-                Specifies the **measurement_function** used to acquire the measurement.
+            measurement_function (enums.Function):Specifies the **measurement_function** used to acquire the measurement.
                 The driver sets function to this value.
-            range (ViReal64):
-                Specifies the **range** for the function specified in the
+            range (ViReal64):Specifies the **range** for the function specified in the
                 **Measurement_Function** parameter. When frequency is specified in the
                 **Measurement_Function** parameter, you must supply the minimum
                 frequency expected in the **range** parameter. For example, you must
@@ -1097,8 +1220,7 @@ class Session(object):
                 Note:
                 The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
                 trigger and sample trigger are set to IMMEDIATE.
-            resolution_absolute (ViReal64):
-                Specifies the absolute resolution for the measurement. NI-DMM sets
+            resolution_absolute (ViReal64):Specifies the absolute resolution for the measurement. NI-DMM sets
                 RESOLUTION_ABSOLUTE to this value. This parameter is
                 ignored when the **Range** parameter is set to
                 NIDMM_VAL_AUTO_RANGE_ON (-1.0) or NIDMM_VAL_AUTO_RANGE_ONCE
@@ -1119,16 +1241,14 @@ class Session(object):
     def configure_measurement_digits(self, measurement_function, range, resolution_digits):
         '''configure_measurement_digits
 
-        Configures the common attributes of the measurement. These attributes
+Configures the common attributes of the measurement. These attributes
         include function, range, and
         RESOLUTION_DIGITS.
 
         Args:
-            measurement_function (enums.Function):
-                Specifies the **measurement_function** used to acquire the measurement.
+            measurement_function (enums.Function):Specifies the **measurement_function** used to acquire the measurement.
                 The driver sets function to this value.
-            range (ViReal64):
-                Specifies the range for the function specified in the
+            range (ViReal64):Specifies the range for the function specified in the
                 **Measurement_Function** parameter. When frequency is specified in the
                 **Measurement_Function** parameter, you must supply the minimum
                 frequency expected in the **range** parameter. For example, you must
@@ -1152,8 +1272,7 @@ class Session(object):
                 Note:
                 The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
                 trigger and sample trigger are set to IMMEDIATE.
-            resolution_digits (ViReal64):
-                Specifies the resolution of the measurement in digits. The driver sets
+            resolution_digits (ViReal64):Specifies the resolution of the measurement in digits. The driver sets
                 the `Devices
                 Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
                 for a list of valid ranges. The driver sets
@@ -1177,7 +1296,7 @@ class Session(object):
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger, sample_interval):
         '''configure_multi_point
 
-        Configures the attributes for multipoint measurements. These attributes
+Configures the attributes for multipoint measurements. These attributes
         include TRIGGER_COUNT, SAMPLE_COUNT,
         SAMPLE_TRIGGER, and SAMPLE_INTERVAL.
 
@@ -1190,16 +1309,13 @@ class Session(object):
         Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__.
 
         Args:
-            trigger_count (ViInt32):
-                Sets the number of triggers you want the DMM to receive before returning
+            trigger_count (ViInt32):Sets the number of triggers you want the DMM to receive before returning
                 to the Idle state. The driver sets TRIGGER_COUNT to this
                 value. The default value is 1.
-            sample_count (ViInt32):
-                Sets the number of measurements the DMM makes in each measurement
+            sample_count (ViInt32):Sets the number of measurements the DMM makes in each measurement
                 sequence initiated by a trigger. The driver sets
                 SAMPLE_COUNT to this value. The default value is 1.
-            sample_trigger (enums.SampleTrigger):
-                Specifies the **sample_trigger** source you want to use. The driver
+            sample_trigger (enums.SampleTrigger):Specifies the **sample_trigger** source you want to use. The driver
                 sets SAMPLE_TRIGGER to this value. The default is
                 Immediate.
 
@@ -1208,8 +1324,7 @@ class Session(object):
                 `LabWindows/CVI Trigger
                 Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
                 section.
-            sample_interval (ViReal64):
-                Sets the amount of time in seconds the DMM waits between measurement
+            sample_interval (ViReal64):Sets the amount of time in seconds the DMM waits between measurement
                 cycles. The driver sets SAMPLE_INTERVAL to this value.
                 Specify a sample interval to add settling time between measurement
                 cycles or to decrease the measurement rate. **sample_interval** only
@@ -1233,7 +1348,7 @@ class Session(object):
     def configure_offset_comp_ohms(self, offset_comp_ohms):
         '''configure_offset_comp_ohms
 
-        For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
+For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
         compensate for voltage offsets in resistance measurements. When
         **Offset_Comp_Ohms** is enabled, the DMM measures the resistance twice
         (once with the current source on and again with it turned off). Any
@@ -1242,8 +1357,7 @@ class Session(object):
         than 10 KΩ.
 
         Args:
-            offset_comp_ohms (enums.OffsetCompensatedOhms):
-                Enables or disables **offset_comp_ohms**. The driver sets
+            offset_comp_ohms (enums.OffsetCompensatedOhms):Enables or disables **offset_comp_ohms**. The driver sets
                 OFFSET_COMP_OHMS to this value.
 
                 +------------------------------------------+-------+------------------------------------+
@@ -1263,15 +1377,13 @@ class Session(object):
     def configure_open_cable_comp_values(self, conductance, susceptance):
         '''configure_open_cable_comp_values
 
-        For the NI 4082 and NI 4072 only, configures the
+For the NI 4082 and NI 4072 only, configures the
         OPEN_CABLE_COMP_CONDUCTANCE and
         OPEN_CABLE_COMP_SUSCEPTANCE attributes.
 
         Args:
-            conductance (ViReal64):
-                Specifies the open cable compensation **conductance**.
-            susceptance (ViReal64):
-                Specifies the open cable compensation **susceptance**.
+            conductance (ViReal64):Specifies the open cable compensation **conductance**.
+            susceptance (ViReal64):Specifies the open cable compensation **susceptance**.
         '''
         error_code = self.library.niDMM_ConfigureOpenCableCompValues(self.vi, conductance, susceptance)
         errors._handle_error(self, error_code)
@@ -1280,11 +1392,10 @@ class Session(object):
     def configure_power_line_frequency(self, power_line_frequency_hz):
         '''configure_power_line_frequency
 
-        Specifies the powerline frequency.
+Specifies the powerline frequency.
 
         Args:
-            power_line_frequency_hz (ViReal64):
-                **Powerline Frequency** specifies the powerline frequency in hertz.
+            power_line_frequency_hz (ViReal64):**Powerline Frequency** specifies the powerline frequency in hertz.
                 NI-DMM sets the Powerline Frequency property to this value.
         '''
         error_code = self.library.niDMM_ConfigurePowerLineFrequency(self.vi, power_line_frequency_hz)
@@ -1294,19 +1405,16 @@ class Session(object):
     def configure_rtd_custom(self, rtd_a, rtd_b, rtd_c):
         '''configure_rtd_custom
 
-        Configures the A, B, and C parameters for a custom RTD.
+Configures the A, B, and C parameters for a custom RTD.
 
         Args:
-            rtd_a (ViReal64):
-                Specifies the Callendar-Van Dusen A coefficient for RTD scaling when RTD
+            rtd_a (ViReal64):Specifies the Callendar-Van Dusen A coefficient for RTD scaling when RTD
                 Type parameter is set to Custom in the configure_rtd_type function.
                 The default is 3.9083e-3 (Pt3851)
-            rtd_b (ViReal64):
-                Specifies the Callendar-Van Dusen B coefficient for RTD scaling when RTD
+            rtd_b (ViReal64):Specifies the Callendar-Van Dusen B coefficient for RTD scaling when RTD
                 Type parameter is set to Custom in the configure_rtd_type function.
                 The default is -5.775e-7 (Pt3851).
-            rtd_c (ViReal64):
-                Specifies the Callendar-Van Dusen C coefficient for RTD scaling when RTD
+            rtd_c (ViReal64):Specifies the Callendar-Van Dusen C coefficient for RTD scaling when RTD
                 Type parameter is set to Custom in the configure_rtd_type function.
                 The default is -4.183e-12 (Pt3851).
         '''
@@ -1317,11 +1425,10 @@ class Session(object):
     def configure_rtd_type(self, rtd_type, rtd_resistance):
         '''configure_rtd_type
 
-        Configures the RTD Type and RTD Resistance parameters for an RTD.
+Configures the RTD Type and RTD Resistance parameters for an RTD.
 
         Args:
-            rtd_type (ViInt32):
-                Specifies the type of RTD used to measure the temperature resistance.
+            rtd_type (ViInt32):Specifies the type of RTD used to measure the temperature resistance.
                 NI-DMM uses this value to set the RTD Type property. The default is
                 NIDMM_VAL_TEMP_RTD_PT3851.
 
@@ -1344,8 +1451,7 @@ class Session(object):
                 +---------------------------------+
                 | \*No standard. Check the TCR.   |
                 +---------------------------------+
-            rtd_resistance (ViReal64):
-                Specifies the RTD resistance in ohms at 0 °C. NI-DMM uses this value to
+            rtd_resistance (ViReal64):Specifies the RTD resistance in ohms at 0 °C. NI-DMM uses this value to
                 set the RTD Resistance property. The default is 100 (Ω).
         '''
         error_code = self.library.niDMM_ConfigureRTDType(self.vi, rtd_type, rtd_resistance)
@@ -1355,12 +1461,11 @@ class Session(object):
     def configure_sample_trigger_slope(self, sample_trigger_slope):
         '''configure_sample_trigger_slope
 
-        Sets the SAMPLE_TRIGGER_SLOPE to either rising edge
+Sets the SAMPLE_TRIGGER_SLOPE to either rising edge
         (positive) or falling edge (negative) polarity.
 
         Args:
-            sample_trigger_slope (enums.Slope):
-                Specifies the polarity of the Trigger signal on which the measurement is
+            sample_trigger_slope (enums.Slope):Specifies the polarity of the Trigger signal on which the measurement is
                 triggered for values of either NIDMM_VAL_POSITIVE or
                 NIDMM_VAL_NEGATIVE. The driver sets
                 SAMPLE_TRIGGER_SLOPE to this value.
@@ -1380,15 +1485,13 @@ class Session(object):
     def configure_short_cable_comp_values(self, resistance, reactance):
         '''configure_short_cable_comp_values
 
-        For the NI 4082 and NI 4072 only, configures the
+For the NI 4082 and NI 4072 only, configures the
         SHORT_CABLE_COMP_RESISTANCE and
         SHORT_CABLE_COMP_REACTANCE attributes.
 
         Args:
-            resistance (ViReal64):
-                Specifies the short cable compensation **resistance**.
-            reactance (ViReal64):
-                Specifies the short cable compensation **reactance**.
+            resistance (ViReal64):Specifies the short cable compensation **resistance**.
+            reactance (ViReal64):Specifies the short cable compensation **reactance**.
         '''
         error_code = self.library.niDMM_ConfigureShortCableCompValues(self.vi, resistance, reactance)
         errors._handle_error(self, error_code)
@@ -1397,19 +1500,16 @@ class Session(object):
     def configure_thermistor_custom(self, thermistor_a, thermistor_b, thermistor_c):
         '''configure_thermistor_custom
 
-        Configures the A, B, and C parameters for a custom thermistor.
+Configures the A, B, and C parameters for a custom thermistor.
 
         Args:
-            thermistor_a (ViReal64):
-                Specifies the Steinhart-Hart A coefficient for thermistor scaling when
+            thermistor_a (ViReal64):Specifies the Steinhart-Hart A coefficient for thermistor scaling when
                 Thermistor Type is set to Custom in the configure_thermistor_type
                 function. The default is 1.0295e-3 (44006).
-            thermistor_b (ViReal64):
-                Specifies the Steinhart-Hart B coefficient for thermistor scaling when
+            thermistor_b (ViReal64):Specifies the Steinhart-Hart B coefficient for thermistor scaling when
                 Thermistor Type is set to Custom in the configure_thermistor_type
                 function. The default is 2.391e-4 (44006).
-            thermistor_c (ViReal64):
-                Specifies the Steinhart-Hart C coefficient for thermistor scaling when
+            thermistor_c (ViReal64):Specifies the Steinhart-Hart C coefficient for thermistor scaling when
                 Thermistor Type is set to Custom in the configure_thermistor_type
                 function. The default is 1.568e-7 (44006).
         '''
@@ -1420,11 +1520,10 @@ class Session(object):
     def configure_thermistor_type(self, thermistor_type):
         '''configure_thermistor_type
 
-        Configures the thermistor type.
+Configures the thermistor type.
 
         Args:
-            thermistor_type (enums.TemperatureThermistorType):
-                Specifies the type of thermistor used to measure the temperature. NI-DMM
+            thermistor_type (enums.TemperatureThermistorType):Specifies the type of thermistor used to measure the temperature. NI-DMM
                 uses this value to set the Thermistor Type property. The default is
                 NIDMM_VAL_TEMP_THERMISTOR_44006.
 
@@ -1454,12 +1553,11 @@ class Session(object):
     def configure_thermocouple(self, thermocouple_type, reference_junction_type):
         '''configure_thermocouple
 
-        Configures the thermocouple type and reference junction type for a
+Configures the thermocouple type and reference junction type for a
         chosen thermocouple.
 
         Args:
-            thermocouple_type (ViInt32):
-                Specifies the type of thermocouple used to measure the temperature.
+            thermocouple_type (ViInt32):Specifies the type of thermocouple used to measure the temperature.
                 NI-DMM uses this value to set the Thermocouple Type property. The
                 default is NIDMM_VAL_TEMP_TC_J.
 
@@ -1480,8 +1578,7 @@ class Session(object):
                 +---------------------+---------------------+
                 | NIDMM_VAL_TEMP_TC_T | Thermocouple type T |
                 +---------------------+---------------------+
-            reference_junction_type (ViInt32):
-                Specifies the type of reference junction to be used in the reference
+            reference_junction_type (ViInt32):Specifies the type of reference junction to be used in the reference
                 junction compensation of a thermocouple measurement. NI-DMM uses this
                 value to set the Reference Junction Type property. The only supported
                 value is NIDMM_VAL_TEMP_REF_JUNC_FIXED.
@@ -1493,11 +1590,10 @@ class Session(object):
     def configure_transducer_type(self, transducer_type):
         '''configure_transducer_type
 
-        Configures the transducer type.
+Configures the transducer type.
 
         Args:
-            transducer_type (enums.TemperatureTransducerType):
-                Specifies the type of device used to measure the temperature. NI-DMM
+            transducer_type (enums.TemperatureTransducerType):Specifies the type of device used to measure the temperature. NI-DMM
                 uses this value to set the Transducer Type property. The default is
                 NIDMM_VAL_THERMOCOUPLE.
 
@@ -1520,15 +1616,14 @@ class Session(object):
     def configure_trigger(self, trigger_source, trigger_delay):
         '''configure_trigger
 
-        Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
+Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
         `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
         and `Using
         Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__
         for more information.
 
         Args:
-            trigger_source (enums.TriggerSource):
-                Specifies the **trigger_source** that initiates the acquisition. The
+            trigger_source (enums.TriggerSource):Specifies the **trigger_source** that initiates the acquisition. The
                 driver sets TRIGGER_SOURCE to this value. Software
                 configures the DMM to wait until send_software_trigger is called
                 before triggering the DMM.
@@ -1538,8 +1633,7 @@ class Session(object):
                 `LabWindows/CVI Trigger
                 Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
                 section.
-            trigger_delay (ViReal64):
-                Specifies the time that the DMM waits after it has received a trigger
+            trigger_delay (ViReal64):Specifies the time that the DMM waits after it has received a trigger
                 before taking a measurement. The driver sets the
                 TRIGGER_DELAY attribute to this value. By default,
                 **trigger_delay** is NIDMM_VAL_AUTO_DELAY (-1), which means the DMM
@@ -1561,12 +1655,11 @@ class Session(object):
     def configure_trigger_slope(self, trigger_slope):
         '''configure_trigger_slope
 
-        Sets the TRIGGER_SLOPE attribute to either rising edge
+Sets the TRIGGER_SLOPE attribute to either rising edge
         (positive) or falling edge (negative) polarity.
 
         Args:
-            trigger_slope (enums.Slope):
-                Specifies the polarity of the trigger signal on which the measurement is
+            trigger_slope (enums.Slope):Specifies the polarity of the trigger signal on which the measurement is
                 triggered for values of either NIDMM_VAL_POSITIVE or
                 NIDMM_VAL_NEGATIVE. The driver sets the TRIGGER_SLOPE
                 attribute to this value.
@@ -1586,12 +1679,11 @@ class Session(object):
     def configure_waveform_acquisition(self, measurement_function, range, rate, waveform_points):
         '''configure_waveform_acquisition
 
-        Configures the DMM for waveform acquisitions. This feature is supported
+Configures the DMM for waveform acquisitions. This feature is supported
         on the NI 4080/4081/4082 and the NI 4070/4071/4072.
 
         Args:
-            measurement_function (enums.Function):
-                Specifies the **measurement_function** used in a waveform acquisition.
+            measurement_function (enums.Function):Specifies the **measurement_function** used in a waveform acquisition.
                 The driver sets function to this value.
 
                 +--------------------------------------+------+------------------+
@@ -1599,8 +1691,7 @@ class Session(object):
                 +--------------------------------------+------+------------------+
                 | NIDMM_VAL_WAVEFORM_CURRENT           | 1004 | Current Waveform |
                 +--------------------------------------+------+------------------+
-            range (ViReal64):
-                Specifies the expected maximum amplitude of the input signal and sets
+            range (ViReal64):Specifies the expected maximum amplitude of the input signal and sets
                 the **range** for the **Measurement_Function**. NI-DMM sets
                 range to this value. **range** values are coerced up to the
                 closest input **range**. The default is 10.0.
@@ -1609,15 +1700,13 @@ class Session(object):
                 `Devices <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__.
 
                 Auto-ranging is not supported during waveform acquisitions.
-            rate (ViReal64):
-                Specifies the **rate** of the acquisition in samples per second. NI-DMM
+            rate (ViReal64):Specifies the **rate** of the acquisition in samples per second. NI-DMM
                 sets WAVEFORM_RATE to this value.
 
                 The valid **Range** is 10.0–1,800,000 S/s. **rate** values are coerced
                 to the closest integer divisor of 1,800,000. The default value is
                 1,800,000.
-            waveform_points (ViInt32):
-                Specifies the number of points to acquire before the waveform
+            waveform_points (ViInt32):Specifies the number of points to acquire before the waveform
                 acquisition completes. NI-DMM sets WAVEFORM_POINTS to this
                 value.
 
@@ -1637,12 +1726,11 @@ class Session(object):
     def configure_waveform_coupling(self, waveform_coupling):
         '''configure_waveform_coupling
 
-        For the NI 4080/4081/4082 and the NI 4070/4071/4072, configures
+For the NI 4080/4081/4082 and the NI 4070/4071/4072, configures
         instrument coupling for voltage waveforms.
 
         Args:
-            waveform_coupling (enums.WaveformCouplingMode):
-                Selects DC or AC coupling. The driver sets
+            waveform_coupling (enums.WaveformCouplingMode):Selects DC or AC coupling. The driver sets
                 WAVEFORM_COUPLING to this value.
 
                 +------------------------------------------+-------+-------------+
@@ -1662,7 +1750,7 @@ class Session(object):
     def disable(self):
         '''disable
 
-        Places the instrument in a quiescent state where it has minimal or no
+Places the instrument in a quiescent state where it has minimal or no
         impact on the system to which it is connected. If a measurement is in
         progress when this function is called, the measurement is aborted.
         '''
@@ -1673,12 +1761,11 @@ class Session(object):
     def fetch(self, maximum_time):
         '''fetch
 
-        Returns the value from a previously initiated measurement. You must call
+Returns the value from a previously initiated measurement. You must call
         _initiate before calling this function.
 
         Args:
-            maximum_time (ViInt32):
-                Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (ViInt32):Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1690,8 +1777,7 @@ class Session(object):
                 automatically.
 
         Returns:
-            reading (ViReal64):
-                The measured value returned from the DMM.
+            reading (ViReal64):The measured value returned from the DMM.
         '''
         reading_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_Fetch(self.vi, maximum_time, ctypes.pointer(reading_ctype))
@@ -1701,15 +1787,14 @@ class Session(object):
     def fetch_multi_point(self, maximum_time, array_size):
         '''fetch_multi_point
 
-        Returns an array of values from a previously initiated multipoint
+Returns an array of values from a previously initiated multipoint
         measurement. The number of measurements the DMM makes is determined by
         the values you specify for the **Trigger_Count** and **Sample_Count**
         parameters of configure_multi_point. You must first call
         _initiate to initiate a measurement before calling this function.
 
         Args:
-            maximum_time (ViInt32):
-                Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (ViInt32):Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1719,8 +1804,7 @@ class Session(object):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (ViInt32):
-                Specifies the number of measurements to acquire. The maximum number of
+            array_size (ViInt32):Specifies the number of measurements to acquire. The maximum number of
                 measurements for a finite acquisition is the (**Trigger Count** x
                 **Sample Count**) parameters in configure_multi_point.
 
@@ -1729,14 +1813,12 @@ class Session(object):
                 positive ViInt32. The default value is 1.
 
         Returns:
-            reading_array (ViReal64):
-                An array of measurement values.
+            reading_array (ViReal64):An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
-            actual_number_of_points (ViInt32):
-                Indicates the number of measured values actually retrieved from the DMM.
+            actual_number_of_points (ViInt32):Indicates the number of measured values actually retrieved from the DMM.
         '''
         reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
@@ -1747,13 +1829,12 @@ class Session(object):
     def fetch_waveform(self, maximum_time, array_size):
         '''fetch_waveform
 
-        For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
+For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
         values from a previously initiated waveform acquisition. You must call
         _initiate before calling this function.
 
         Args:
-            maximum_time (ViInt32):
-                Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (ViInt32):Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1763,18 +1844,15 @@ class Session(object):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (ViInt32):
-                Specifies the number of waveform points to return. You specify the total
+            array_size (ViInt32):Specifies the number of waveform points to return. You specify the total
                 number of points that the DMM acquires in the **Waveform Points**
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
         Returns:
-            waveform_array (ViReal64):
-                **Waveform Array** is an array of measurement values stored in waveform
+            waveform_array (ViReal64):**Waveform Array** is an array of measurement values stored in waveform
                 data type.
-            actual_number_of_points (ViInt32):
-                Indicates the number of measured values actually retrieved from the DMM.
+            actual_number_of_points (ViInt32):Indicates the number of measured values actually retrieved from the DMM.
         '''
         waveform_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
@@ -1785,29 +1863,22 @@ class Session(object):
     def format_meas_absolute(self, measurement_function, range, resolution, measurement):
         '''format_meas_absolute
 
-        Formats the **Measurement** to the proper number of displayed digits
+Formats the **Measurement** to the proper number of displayed digits
         according to the **Measurement_Function**, **Range**, and
         **Resolution**. Returns the formatted data, range, and mode strings.
 
         Args:
-            measurement_function (ViInt32):
-                Specifies the **measurement_function** used to acquire the measurement.
+            measurement_function (ViInt32):Specifies the **measurement_function** used to acquire the measurement.
                 The driver sets function to this value.
-            range (ViReal64):
-                Specifies the range used to acquire the **Measurement**.
-            resolution (ViReal64):
-                Specifies the RESOLUTION_ABSOLUTE of the **Measurement**.
-            measurement (ViReal64):
-                Specifies the measured value returned from the DMM.
+            range (ViReal64):Specifies the range used to acquire the **Measurement**.
+            resolution (ViReal64):Specifies the RESOLUTION_ABSOLUTE of the **Measurement**.
+            measurement (ViReal64):Specifies the measured value returned from the DMM.
 
         Returns:
-            mode_string (ViChar):
-                Returns a string containing the units of the **Measurement** mode.
-            range_string (ViChar):
-                Returns the range of the **Measurement**, formatted into a
+            mode_string (ViChar):Returns a string containing the units of the **Measurement** mode.
+            range_string (ViChar):Returns the range of the **Measurement**, formatted into a
                 string with the correct number of display digits.
-            data_string (ViChar):
-                Returns the **Measurement**, formatted according to the
+            data_string (ViChar):Returns the **Measurement**, formatted according to the
                 function, range, and
                 RESOLUTION_ABSOLUTE.
         '''
@@ -1821,11 +1892,10 @@ class Session(object):
     def get_aperture_time_info(self):
         '''get_aperture_time_info
 
-        Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
+Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
 
         Returns:
-            aperture_time (ViReal64):
-                Specifies the amount of time the DMM digitizes the input signal for a
+            aperture_time (ViReal64):Specifies the amount of time the DMM digitizes the input signal for a
                 single measurement. This parameter does not include settling time.
                 Returns the value of the APERTURE_TIME attribute. The
                 units of this attribute depend on the value of the
@@ -1845,8 +1915,7 @@ class Session(object):
                 On the NI 4060, when the powerline frequency is 60, the PLCs allowed are
                 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50,
                 the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
-            aperture_time_units (enums.ApertureTimeUnits):
-                Indicates the units of aperture time as powerline cycles (PLCs) or
+            aperture_time_units (enums.ApertureTimeUnits):Indicates the units of aperture time as powerline cycles (PLCs) or
                 seconds. Returns the value of the APERTURE_TIME_UNITS
                 attribute.
 
@@ -1865,7 +1934,7 @@ class Session(object):
     def _get_attribute_vi_boolean(self, channel_name, attribute_id):
         '''_get_attribute_vi_boolean
 
-        Queries the value of a ViBoolean attribute. You can use this function to
+Queries the value of a ViBoolean attribute. You can use this function to
         get the values of instrument-specific attributes and inherent IVI
         attributes.
 
@@ -1877,19 +1946,16 @@ class Session(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (ViConstString):
-                This parameter is ignored. National Instruments DMMs do not support
+            channel_name (ViConstString):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (ViAttr):
-                Pass the ID of an attribute.
+            attribute_id (ViAttr):Pass the ID of an attribute.
 
         Returns:
-            attribute_value (ViBoolean):
-                Returns the current value of the attribute. Pass the address of a
+            attribute_value (ViBoolean):Returns the current value of the attribute. Pass the address of a
                 ViBoolean variable.
         '''
         attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
@@ -1900,7 +1966,7 @@ class Session(object):
     def _get_attribute_vi_int32(self, channel_name, attribute_id):
         '''_get_attribute_vi_int32
 
-        Queries the value of a ViInt32 attribute. You can use this function to
+Queries the value of a ViInt32 attribute. You can use this function to
         get the values of instrument-specific attributes and inherent IVI
         attributes.
 
@@ -1912,19 +1978,16 @@ class Session(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (ViConstString):
-                This parameter is ignored. National Instruments DMMs do not support
+            channel_name (ViConstString):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (ViAttr):
-                Pass the ID of an attribute.
+            attribute_id (ViAttr):Pass the ID of an attribute.
 
         Returns:
-            attribute_value (ViInt32):
-                Returns the current value of the attribute. Pass the address of a
+            attribute_value (ViInt32):Returns the current value of the attribute. Pass the address of a
                 ViInt32 variable.
         '''
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
@@ -1935,7 +1998,7 @@ class Session(object):
     def _get_attribute_vi_real64(self, channel_name, attribute_id):
         '''_get_attribute_vi_real64
 
-        Queries the value of a ViReal64 attribute. You can use this function to
+Queries the value of a ViReal64 attribute. You can use this function to
         get the values of instrument-specific attributes and inherent IVI
         attributes.
 
@@ -1947,19 +2010,16 @@ class Session(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (ViConstString):
-                This parameter is ignored. National Instruments DMMs do not support
+            channel_name (ViConstString):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (ViAttr):
-                Pass the ID of an attribute.
+            attribute_id (ViAttr):Pass the ID of an attribute.
 
         Returns:
-            attribute_value (ViReal64):
-                Returns the current value of the attribute. Pass the address of a
+            attribute_value (ViReal64):Returns the current value of the attribute. Pass the address of a
                 ViReal64 variable.
         '''
         attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
@@ -1970,7 +2030,7 @@ class Session(object):
     def _get_attribute_vi_session(self, channel_name, attribute_id):
         '''_get_attribute_vi_session
 
-        Queries the value of a ViSession attribute. You can use this function to
+Queries the value of a ViSession attribute. You can use this function to
         get the values of instrument-specific attributes and inherent IVI
         attributes.
 
@@ -1982,19 +2042,16 @@ class Session(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (ViConstString):
-                This parameter is ignored. National Instruments DMMs do not support
+            channel_name (ViConstString):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (ViAttr):
-                Pass the ID of an attribute.
+            attribute_id (ViAttr):Pass the ID of an attribute.
 
         Returns:
-            attribute_value (ViSession):
-                Returns the current value of the attribute. Pass the address of a
+            attribute_value (ViSession):Returns the current value of the attribute. Pass the address of a
                 ViSession variable.
         '''
         attribute_value_ctype = ctypes_types.ViSession_ctype(0)
@@ -2005,7 +2062,7 @@ class Session(object):
     def _get_attribute_vi_string(self, channel_name, attribute_id):
         '''_get_attribute_vi_string
 
-        Queries the value of a ViString attribute. You can use this function to
+Queries the value of a ViString attribute. You can use this function to
         get the values of instrument-specific attributes and inherent IVI
         attributes.
 
@@ -2020,17 +2077,14 @@ class Session(object):
            parameter.
 
         Args:
-            channel_name (ViConstString):
-                This parameter is ignored. National Instruments DMMs do not support
+            channel_name (ViConstString):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (ViAttr):
-                Pass the ID of an attribute.
-            buffer_size (ViInt32):
-                Pass the number of bytes in the ViChar array you specify for the
+            attribute_id (ViAttr):Pass the ID of an attribute.
+            buffer_size (ViInt32):Pass the number of bytes in the ViChar array you specify for the
                 **Attribute_Value** parameter.
 
                 If the current value of the attribute, including the terminating NULL
@@ -2060,12 +2114,11 @@ class Session(object):
     def get_auto_range_value(self):
         '''get_auto_range_value
 
-        Returns the **Actual_Range** that the DMM is using, even when Auto
+Returns the **Actual_Range** that the DMM is using, even when Auto
         Range is off.
 
         Returns:
-            actual_range (ViReal64):
-                Indicates the **actual_range** the DMM is using. Returns the value of
+            actual_range (ViReal64):Indicates the **actual_range** the DMM is using. Returns the value of
                 the AUTO_RANGE_VALUE attribute. The units of the returned
                 value depend on the function.
         '''
@@ -2077,13 +2130,12 @@ class Session(object):
     def get_cal_count(self, cal_type):
         '''get_cal_count
 
-        Returns the calibration **Count** for the specified type of calibration.
+Returns the calibration **Count** for the specified type of calibration.
 
         Note: The NI 4050, NI 4060, and NI 4080/4081/4082 are not supported.
 
         Args:
-            cal_type (ViInt32):
-                Specifies the type of calibration performed (external or
+            cal_type (ViInt32):Specifies the type of calibration performed (external or
                 self-calibration).
 
                 +-----------------------------------+---+----------------------+
@@ -2095,8 +2147,7 @@ class Session(object):
                 Note: The NI 4065 does not support self-calibration.
 
         Returns:
-            count (ViInt32):
-                The number of times calibration has been performed.
+            count (ViInt32):The number of times calibration has been performed.
         '''
         count_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_GetCalCount(self.vi, cal_type, ctypes.pointer(count_ctype))
@@ -2106,13 +2157,12 @@ class Session(object):
     def get_cal_date_and_time(self, cal_type):
         '''get_cal_date_and_time
 
-        Returns the date and time of the last calibration performed.
+Returns the date and time of the last calibration performed.
 
         Note: The NI 4050 and NI 4060 are not supported.
 
         Args:
-            cal_type (ViInt32):
-                Specifies the type of calibration performed (external or
+            cal_type (ViInt32):Specifies the type of calibration performed (external or
                 self-calibration).
 
                 +-----------------------------------+---+----------------------+
@@ -2124,16 +2174,11 @@ class Session(object):
                 Note: The NI 4065 does not support self-calibration.
 
         Returns:
-            month (ViInt32):
-                Indicates the **month** of the last calibration.
-            day (ViInt32):
-                Indicates the **day** of the last calibration.
-            year (ViInt32):
-                Indicates the **year** of the last calibration.
-            hour (ViInt32):
-                Indicates the **hour** of the last calibration.
-            minute (ViInt32):
-                Indicates the **minute** of the last calibration.
+            month (ViInt32):Indicates the **month** of the last calibration.
+            day (ViInt32):Indicates the **day** of the last calibration.
+            year (ViInt32):Indicates the **year** of the last calibration.
+            hour (ViInt32):Indicates the **hour** of the last calibration.
+            minute (ViInt32):Indicates the **minute** of the last calibration.
         '''
         month_ctype = ctypes_types.ViInt32_ctype(0)
         day_ctype = ctypes_types.ViInt32_ctype(0)
@@ -2147,15 +2192,13 @@ class Session(object):
     def get_channel_name(self, index, buffer_size):
         '''get_channel_name
 
-        Returns the **Channel_String** that is in the channel table at an
+Returns the **Channel_String** that is in the channel table at an
         **Index** you specify. Not applicable to National Instruments DMMs.
         Included for compliance with the *IviDmm Class Specification*.
 
         Args:
-            index (ViInt32):
-                A 1–based **index** into the channel table.
-            buffer_size (ViInt32):
-                Passes the number of bytes in the ViChar array you specify for the
+            index (ViInt32):A 1–based **index** into the channel table.
+            buffer_size (ViInt32):Passes the number of bytes in the ViChar array you specify for the
                 **Channel_String** parameter. If the next **Channel_String**,
                 including the terminating NULL byte, contains more bytes than you
                 indicate in this parameter, the function copies
@@ -2171,8 +2214,7 @@ class Session(object):
                 is None.
 
         Returns:
-            channel_string (ViChar):
-                Returns the **channel_string** that is in the channel table at the
+            channel_string (ViChar):Returns the **channel_string** that is in the channel table at the
                 **Index** you specify. Do not modify the contents of the
                 **channel_string**.
         '''
@@ -2184,17 +2226,15 @@ class Session(object):
     def get_dev_temp(self, options):
         '''get_dev_temp
 
-        Returns the current **Temperature** of the device.
+Returns the current **Temperature** of the device.
 
         Note: The NI 4050 and NI 4060 are not supported.
 
         Args:
-            options (ViString):
-                Reserved.
+            options (ViString):Reserved.
 
         Returns:
-            temperature (ViReal64):
-                Returns the current **temperature** of the device.
+            temperature (ViReal64):Returns the current **temperature** of the device.
         '''
         temperature_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_GetDevTemp(self.vi, options.encode('ascii'), ctypes.pointer(temperature_ctype))
@@ -2204,15 +2244,14 @@ class Session(object):
     def _get_error(self):
         '''_get_error
 
-        Returns the error information associated with the
+Returns the error information associated with the
         **Instrument_Handle**. This function retrieves and then clears the
         error information for the session. If you leave the
         **Instrument_Handle** unwired, this function retrieves and then clears
         the error information for the process.
 
         Args:
-            buffer_size (ViInt32):
-                Passes the number of bytes in the ViChar array you specify for the
+            buffer_size (ViInt32):Passes the number of bytes in the ViChar array you specify for the
                 **Description** parameter. If the error description, including the
                 terminating NULL byte, contains more bytes than you indicate in this
                 parameter, the function copies **buffer_size** –1 bytes into the
@@ -2227,8 +2266,7 @@ class Session(object):
                 None.
 
         Returns:
-            error_code (ViStatus):
-                Returns the **error_code** for the session or execution thread. If you
+            error_code (ViStatus):Returns the **error_code** for the session or execution thread. If you
                 pass 0 for the **Buffer_Size**, you can pass VI_NULL for this
                 parameter.
         '''
@@ -2248,16 +2286,14 @@ class Session(object):
     def _get_error_message(self, error_code):
         '''_get_error_message
 
-        Returns the **Error_Message** as a user-readable string for the
+Returns the **Error_Message** as a user-readable string for the
         provided **Error_Code**. Calling this function with a **Buffer_Size**
         of 0 returns the size needed for the **Error_Message**.
 
         Args:
-            error_code (ViStatus):
-                The error code returned from the instrument for which you want to get a
+            error_code (ViStatus):The error code returned from the instrument for which you want to get a
                 user-readable string.
-            buffer_size (ViInt32):
-                Specifies the number of bytes allocated for the **Error_Message**
+            buffer_size (ViInt32):Specifies the number of bytes allocated for the **Error_Message**
                 ViChar array. If the error description that this function returns
                 (including terminating NULL byte) is larger than you indicated in
                 **buffer_size**, the error description will be truncated to fit. If you
@@ -2279,13 +2315,12 @@ class Session(object):
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
 
-        Returns the **Temperature** during the last calibration procedure.
+Returns the **Temperature** during the last calibration procedure.
 
         Note: The NI 4050 and NI 4060 are not supported.
 
         Args:
-            cal_type (ViInt32):
-                Specifies the type of calibration performed (external or
+            cal_type (ViInt32):Specifies the type of calibration performed (external or
                 self-calibration).
 
                 +-----------------------------------+---+----------------------+
@@ -2297,8 +2332,7 @@ class Session(object):
                 Note: The NI 4065 does not support self-calibration.
 
         Returns:
-            temperature (ViReal64):
-                Returns the **temperature** during the last calibration.
+            temperature (ViReal64):Returns the **temperature** during the last calibration.
         '''
         temperature_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_GetLastCalTemp(self.vi, cal_type, ctypes.pointer(temperature_ctype))
@@ -2308,15 +2342,14 @@ class Session(object):
     def get_measurement_period(self):
         '''get_measurement_period
 
-        Returns the measurement **Period**, which is the amount of time it takes
+Returns the measurement **Period**, which is the amount of time it takes
         to complete one measurement with the current configuration. Use this
         function right before you begin acquiring data—after you have completely
         configured the measurement and after all configuration functions have
         been called.
 
         Returns:
-            period (ViReal64):
-                Returns the number of seconds it takes to make one measurement.
+            period (ViReal64):Returns the number of seconds it takes to make one measurement.
 
                 The first measurement in a multipoint acquisition requires additional
                 settling time. This function does not include this additional time or
@@ -2332,7 +2365,7 @@ class Session(object):
     def get_next_coercion_record(self, buffer_size):
         '''get_next_coercion_record
 
-        This function returns the coercion information associated with the IVI
+This function returns the coercion information associated with the IVI
         session, and it retrieves and clears the oldest instance in which NI-DMM
         coerced a value you specified to another value.
 
@@ -2342,8 +2375,7 @@ class Session(object):
         that list.
 
         Args:
-            buffer_size (ViInt32):
-                Passes the number of bytes in the ViChar array you specify for the
+            buffer_size (ViInt32):Passes the number of bytes in the ViChar array you specify for the
                 **Coercion_Record** parameter. If the next coercion record string,
                 including the terminating NULL byte, contains more bytes than you
                 indicate in this parameter, the function copies **buffer_size** – 1
@@ -2362,8 +2394,7 @@ class Session(object):
                 The default value is None.
 
         Returns:
-            coercion_record (ViChar):
-                Returns the next **coercion_record** for the IVI session.
+            coercion_record (ViChar):Returns the next **coercion_record** for the IVI session.
 
                 If there are no coercions records, the function returns an empty string.
                 The buffer must contain at least as many elements as the value you
@@ -2377,7 +2408,7 @@ class Session(object):
     def get_next_interchange_warning(self):
         '''get_next_interchange_warning
 
-        This function returns the interchangeability warnings associated with
+This function returns the interchangeability warnings associated with
         the IVI session. It retrieves and clears the oldest instance in which
         the class driver recorded an interchangeability warning.
         Interchangeability warnings indicate that using your application with a
@@ -2392,8 +2423,7 @@ class Session(object):
         you did not specify.
 
         Args:
-            buffer_size (ViInt32):
-                Passes the number of bytes in the ViChar array you specify for the
+            buffer_size (ViInt32):Passes the number of bytes in the ViChar array you specify for the
                 **Interchange_Warning** parameter. If the next interchangeability
                 warning string, including the terminating NULL byte, contains more bytes
                 than you indicate in this parameter, the function copies
@@ -2423,12 +2453,11 @@ class Session(object):
     def get_self_cal_supported(self):
         '''get_self_cal_supported
 
-        Returns a Boolean value that expresses whether or not the DMM that you
+Returns a Boolean value that expresses whether or not the DMM that you
         are using can perform self-calibration.
 
         Returns:
-            self_cal_supported (ViBoolean):
-                Returns whether Self Cal is supported for the device specified by the
+            self_cal_supported (ViBoolean):Returns whether Self Cal is supported for the device specified by the
                 given session.
 
                 +----------+---+-------------------------------------------------------------+
@@ -2445,7 +2474,7 @@ class Session(object):
     def _init_with_options(self, resource_name, id_query, reset_device, option_string):
         '''_init_with_options
 
-        This function completes the following tasks:
+This function completes the following tasks:
 
         -  Creates a new IVI instrument driver session and, optionally, sets the
            initial state of the following session attributes:
@@ -2464,8 +2493,7 @@ class Session(object):
            all subsequent instrument driver function calls.
 
         Args:
-            resource_name (ViString):
-                Caution:
+            resource_name (ViString):Caution:
                 All IVI names for the **Resource_Name**, such as logical names or
                 virtual names, are case-sensitive. If you use logical names, driver
                 session names, or virtual names in your program, you must make sure that
@@ -2485,8 +2513,7 @@ class Session(object):
                 -  DAQ::NI-DAQmx name[::INSTR]
                 -  DAQ::Traditional NI-DAQ device number[::INSTR]
                 -  IVI logical name
-            id_query (ViBoolean):
-                Verifies that the device you initialize is one that the driver supports.
+            id_query (ViBoolean):Verifies that the device you initialize is one that the driver supports.
                 NI-DMM automatically performs this query, so setting this parameter is
                 not necessary.
                 Defined Values:
@@ -2496,8 +2523,7 @@ class Session(object):
                 +-------------------+---+------------------+
                 | VI_FALSE          | 0 | Skip ID Query    |
                 +-------------------+---+------------------+
-            reset_device (ViBoolean):
-                Specifies whether to reset the instrument during the initialization
+            reset_device (ViBoolean):Specifies whether to reset the instrument during the initialization
                 procedure.
                 Defined Values:
 
@@ -2506,8 +2532,7 @@ class Session(object):
                 +-------------------+---+--------------+
                 | VI_FALSE          | 0 | Don't Reset  |
                 +-------------------+---+--------------+
-            option_string (ViString):
-                | Sets the initial value of certain attributes for the session. The
+            option_string (ViString):| Sets the initial value of certain attributes for the session. The
                   following table specifies the attribute name, attribute constant, and
                   default value for each attribute that you can use in this parameter:
 
@@ -2539,8 +2564,7 @@ class Session(object):
                 +------------------+--------------------+-------------------+----+
 
         Returns:
-            vi (ViSession):
-                Returns a ViSession handle that you use to identify the instrument in
+            vi (ViSession):Returns a ViSession handle that you use to identify the instrument in
                 all subsequent instrument driver function calls.
         '''
         vi_ctype = ctypes_types.ViSession_ctype(0)
@@ -2551,7 +2575,7 @@ class Session(object):
     def _initiate(self):
         '''_initiate
 
-        Initiates an acquisition. After you call this function, the DMM leaves
+Initiates an acquisition. After you call this function, the DMM leaves
         the Idle state and enters the Wait-for-Trigger state. If trigger is set
         to Immediate mode, the DMM begins acquiring measurement data. Use
         fetch, fetch_multi_point, or fetch_waveform to
@@ -2564,20 +2588,18 @@ class Session(object):
     def is_over_range(self, measurement_value):
         '''is_over_range
 
-        Takes a **Measurement_Value** and determines if the value is a valid
+Takes a **Measurement_Value** and determines if the value is a valid
         measurement or a value indicating that an overrange condition occurred.
 
         Args:
-            measurement_value (ViReal64):
-                The measured value returned from the DMM.
+            measurement_value (ViReal64):The measured value returned from the DMM.
 
                 Note:
                 If an overrange condition occurs, the **Measurement_Value** contains
                 an IEEE-defined NaN (Not a Number) value.
 
         Returns:
-            is_over_range (ViBoolean):
-                Returns whether the measurement value is a valid measurement or an
+            is_over_range (ViBoolean):Returns whether the measurement value is a valid measurement or an
                 overrange condition.
 
                 +----------+---+-----------------------------------------------------------+
@@ -2594,20 +2616,18 @@ class Session(object):
     def is_under_range(self, measurement_value):
         '''is_under_range
 
-        Takes a **Measurement_Value** and determines if the value is a valid
+Takes a **Measurement_Value** and determines if the value is a valid
         measurement or a value indicating that an underrange condition occurred.
 
         Args:
-            measurement_value (ViReal64):
-                The measured value returned from the DMM.
+            measurement_value (ViReal64):The measured value returned from the DMM.
 
                 Note:
                 If an overrange condition occurs, the **Measurement_Value** contains
                 an IEEE-defined NaN (Not a Number) value.
 
         Returns:
-            is_under_range (ViBoolean):
-                Returns whether the **Measurement_Value** is a valid measurement or an
+            is_under_range (ViBoolean):Returns whether the **Measurement_Value** is a valid measurement or an
                 underrange condition.
 
                 +----------+---+------------------------------------------------------------+
@@ -2624,7 +2644,7 @@ class Session(object):
     def _lock_session(self):
         '''_lock_session
 
-        This function obtains a multithread lock on the instrument session.
+This function obtains a multithread lock on the instrument session.
         Before it does so, it waits until all other execution threads have
         released their locks on the instrument session.
 
@@ -2652,8 +2672,7 @@ class Session(object):
         _unlock_session just once at the end of the function.
 
         Returns:
-            caller_has_lock (ViBoolean):
-                This parameter serves as a convenience. If you do not want to use this
+            caller_has_lock (ViBoolean):This parameter serves as a convenience. If you do not want to use this
                 parameter, pass VI_NULL. Use this parameter in complex functions to
                 keep track of whether you obtain a lock and, therefore, need to unlock
                 the session. To use this parameter, complete the following steps:
@@ -2732,7 +2751,7 @@ class Session(object):
     def perform_open_cable_comp(self):
         '''perform_open_cable_comp
 
-        For the NI 4082 and NI 4072 only, performs the open cable compensation
+For the NI 4082 and NI 4072 only, performs the open cable compensation
         measurements for the current capacitance/inductance range, and returns
         open cable compensation **Conductance** and **Susceptance** values. You
         can use the return values of this function as inputs to
@@ -2743,11 +2762,9 @@ class Session(object):
         NIDMM_VAL_INDUCTANCE (1006).
 
         Returns:
-            conductance (ViReal64):
-                **conductance** is the measured value of open cable compensation
+            conductance (ViReal64):**conductance** is the measured value of open cable compensation
                 **conductance**.
-            susceptance (ViReal64):
-                **susceptance** is the measured value of open cable compensation
+            susceptance (ViReal64):**susceptance** is the measured value of open cable compensation
                 **susceptance**.
         '''
         conductance_ctype = ctypes_types.ViReal64_ctype(0)
@@ -2759,7 +2776,7 @@ class Session(object):
     def perform_short_cable_comp(self):
         '''perform_short_cable_comp
 
-        Performs the short cable compensation measurements for the current
+Performs the short cable compensation measurements for the current
         capacitance/inductance range, and returns short cable compensation
         **Resistance** and **Reactance** values. You can use the return values
         of this function as inputs to configure_short_cable_comp_values.
@@ -2769,11 +2786,9 @@ class Session(object):
         NIDMM_VAL_INDUCTANCE (1006).
 
         Returns:
-            resistance (ViReal64):
-                **resistance** is the measured value of short cable compensation
+            resistance (ViReal64):**resistance** is the measured value of short cable compensation
                 **resistance**.
-            reactance (ViReal64):
-                **reactance** is the measured value of short cable compensation
+            reactance (ViReal64):**reactance** is the measured value of short cable compensation
                 **reactance**.
         '''
         resistance_ctype = ctypes_types.ViReal64_ctype(0)
@@ -2785,11 +2800,10 @@ class Session(object):
     def read(self, maximum_time):
         '''read
 
-        Acquires a single measurement and returns the measured value.
+Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (ViInt32):
-                Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (ViInt32):Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2801,8 +2815,7 @@ class Session(object):
                 automatically.
 
         Returns:
-            reading (ViReal64):
-                The measured value returned from the DMM.
+            reading (ViReal64):The measured value returned from the DMM.
         '''
         reading_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_Read(self.vi, maximum_time, ctypes.pointer(reading_ctype))
@@ -2812,14 +2825,13 @@ class Session(object):
     def read_multi_point(self, maximum_time, array_size):
         '''read_multi_point
 
-        Acquires multiple measurements and returns an array of measured values.
+Acquires multiple measurements and returns an array of measured values.
         The number of measurements the DMM makes is determined by the values you
         specify for the **Trigger_Count** and **Sample_Count** parameters in
         configure_multi_point.
 
         Args:
-            maximum_time (ViInt32):
-                Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (ViInt32):Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2829,8 +2841,7 @@ class Session(object):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (ViInt32):
-                Specifies the number of measurements to acquire. The maximum number of
+            array_size (ViInt32):Specifies the number of measurements to acquire. The maximum number of
                 measurements for a finite acquisition is the (**Trigger Count** x
                 **Sample Count**) parameters in configure_multi_point.
 
@@ -2839,14 +2850,12 @@ class Session(object):
                 positive ViInt32. The default value is 1.
 
         Returns:
-            reading_array (ViReal64):
-                An array of measurement values.
+            reading_array (ViReal64):An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
-            actual_number_of_points (ViInt32):
-                Indicates the number of measured values actually retrieved from the DMM.
+            actual_number_of_points (ViInt32):Indicates the number of measured values actually retrieved from the DMM.
         '''
         reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
@@ -2857,15 +2866,14 @@ class Session(object):
     def read_status(self):
         '''read_status
 
-        Returns measurement backlog and acquisition status. Use this function to
+Returns measurement backlog and acquisition status. Use this function to
         determine how many measurements are available before calling
         fetch, fetch_multi_point, or fetch_waveform.
 
         Note: The NI 4050 is not supported.
 
         Returns:
-            acquisition_backlog (ViInt32):
-                The number of measurements available to be read. If the backlog
+            acquisition_backlog (ViInt32):The number of measurements available to be read. If the backlog
                 continues to increase, data is eventually overwritten, resulting in an
                 error.
 
@@ -2875,8 +2883,7 @@ class Session(object):
                 RANGE ON (-1), or before the first point is fetched when Range is set to
                 AUTO RANGE ONCE (-3). These behaviors are due to the autorange model of
                 the devices.
-            acquisition_status (enums.AcquisitionStatus):
-                Indicates status of the acquisition. The following table shows the
+            acquisition_status (enums.AcquisitionStatus):Indicates status of the acquisition. The following table shows the
                 acquisition states:
 
                 +---+----------------------------+
@@ -2900,15 +2907,14 @@ class Session(object):
     def read_waveform(self, maximum_time, array_size):
         '''read_waveform
 
-        For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
+For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
         and returns data as an array of values or as a waveform data type. The
         number of elements in the **Waveform_Array** is determined by the
         values you specify for the **Waveform_Points** parameter in
         configure_waveform_acquisition.
 
         Args:
-            maximum_time (ViInt32):
-                Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (ViInt32):Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2918,21 +2924,18 @@ class Session(object):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (ViInt32):
-                Specifies the number of waveform points to return. You specify the total
+            array_size (ViInt32):Specifies the number of waveform points to return. You specify the total
                 number of points that the DMM acquires in the **Waveform Points**
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
         Returns:
-            waveform_array (ViReal64):
-                An array of measurement values.
+            waveform_array (ViReal64):An array of measurement values.
 
                 Note:
                 The size of the **Waveform_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
-            actual_number_of_points (ViInt32):
-                Indicates the number of measured values actually retrieved from the DMM.
+            actual_number_of_points (ViInt32):Indicates the number of measured values actually retrieved from the DMM.
         '''
         waveform_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
@@ -2943,7 +2946,7 @@ class Session(object):
     def reset_interchange_check(self):
         '''reset_interchange_check
 
-        When developing a complex test system that consists of multiple test
+When developing a complex test system that consists of multiple test
         modules, it is generally a good idea to design the test modules so that
         they can run in any order. To do so requires ensuring that each test
         module completely configures the state of each instrument it uses.
@@ -2978,7 +2981,7 @@ class Session(object):
     def reset_with_defaults(self):
         '''reset_with_defaults
 
-        Resets the instrument to a known state and sends initialization commands
+Resets the instrument to a known state and sends initialization commands
         to the DMM. The initialization commands set the DMM settings to the
         state necessary for the operation of NI-DMM. All user-defined default
         values associated with a logical name are applied after setting the DMM.
@@ -2990,7 +2993,7 @@ class Session(object):
     def self_cal(self):
         '''self_cal
 
-        For the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the
+For the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the
         self-calibration routine to maintain measurement accuracy.
 
         Note:
@@ -3005,7 +3008,7 @@ class Session(object):
     def send_software_trigger(self):
         '''send_software_trigger
 
-        Sends a command to trigger the DMM. Call this function if you have
+Sends a command to trigger the DMM. Call this function if you have
         configured either the TRIGGER_SOURCE or
         SAMPLE_TRIGGER attributes. If the
         TRIGGER_SOURCE and/or SAMPLE_TRIGGER
@@ -3020,7 +3023,7 @@ class Session(object):
     def _set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
-        This function sets the value of a ViBoolean attribute.
+This function sets the value of a ViBoolean attribute.
 
         This is a low-level function that you can use to set the values of
         instrument-specific attributes and inherent IVI attributes.
@@ -3047,17 +3050,14 @@ class Session(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (ViConstString):
-                This parameter is ignored. National Instruments DMMs do not support
+            channel_name (ViConstString):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (ViAttr):
-                Pass the ID of an attribute.
-            attribute_value (ViBoolean):
-                Pass the value that you want to set the attribute to.
+            attribute_id (ViAttr):Pass the ID of an attribute.
+            attribute_value (ViBoolean):Pass the value that you want to set the attribute to.
         '''
         error_code = self.library.niDMM_SetAttributeViBoolean(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors._handle_error(self, error_code)
@@ -3066,7 +3066,7 @@ class Session(object):
     def _set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
-        This function sets the value of a ViInt32 attribute.
+This function sets the value of a ViInt32 attribute.
 
         This is a low-level function that you can use to set the values of
         instrument-specific attributes and inherent IVI attributes.
@@ -3093,17 +3093,14 @@ class Session(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (ViConstString):
-                This parameter is ignored. National Instruments DMMs do not support
+            channel_name (ViConstString):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (ViAttr):
-                Pass the ID of an attribute.
-            attribute_value (ViInt32):
-                Pass the value that you want to set the attribute to.
+            attribute_id (ViAttr):Pass the ID of an attribute.
+            attribute_value (ViInt32):Pass the value that you want to set the attribute to.
         '''
         error_code = self.library.niDMM_SetAttributeViInt32(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors._handle_error(self, error_code)
@@ -3112,7 +3109,7 @@ class Session(object):
     def _set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
-        This function sets the value of a ViReal64 attribute.
+This function sets the value of a ViReal64 attribute.
 
         This is a low-level function that you can use to set the values of
         instrument-specific attributes and inherent IVI attributes.
@@ -3139,17 +3136,14 @@ class Session(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (ViConstString):
-                This parameter is ignored. National Instruments DMMs do not support
+            channel_name (ViConstString):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (ViAttr):
-                Pass the ID of an attribute.
-            attribute_value (ViReal64):
-                Pass the value that you want to set the attribute to.
+            attribute_id (ViAttr):Pass the ID of an attribute.
+            attribute_value (ViReal64):Pass the value that you want to set the attribute to.
         '''
         error_code = self.library.niDMM_SetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors._handle_error(self, error_code)
@@ -3158,7 +3152,7 @@ class Session(object):
     def _set_attribute_vi_session(self, channel_name, attribute_id, attribute_value):
         '''_set_attribute_vi_session
 
-        This function sets the value of a ViSession attribute.
+This function sets the value of a ViSession attribute.
 
         This is a low-level function that you can use to set the values of
         instrument-specific attributes and inherent IVI attributes.
@@ -3172,17 +3166,14 @@ class Session(object):
            or is different than the value you specify.
 
         Args:
-            channel_name (ViConstString):
-                This parameter is ignored. National Instruments DMMs do not support
+            channel_name (ViConstString):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (ViAttr):
-                Pass the ID of an attribute.
-            attribute_value (ViSession):
-                Pass the value that you want to set the attribute to.
+            attribute_id (ViAttr):Pass the ID of an attribute.
+            attribute_value (ViSession):Pass the value that you want to set the attribute to.
         '''
         error_code = self.library.niDMM_SetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors._handle_error(self, error_code)
@@ -3191,7 +3182,7 @@ class Session(object):
     def _set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
-        This function sets the value of a ViString attribute.
+This function sets the value of a ViString attribute.
 
         This is a low-level function that you can use to set the values of
         instrument-specific attributes and inherent IVI attributes.
@@ -3218,17 +3209,14 @@ class Session(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (ViConstString):
-                This parameter is ignored. National Instruments DMMs do not support
+            channel_name (ViConstString):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (ViAttr):
-                Pass the ID of an attribute.
-            attribute_value (ViString):
-                Pass the value that you want to set the attribute to.
+            attribute_id (ViAttr):Pass the ID of an attribute.
+            attribute_value (ViString):Pass the value that you want to set the attribute to.
         '''
         error_code = self.library.niDMM_SetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
         errors._handle_error(self, error_code)
@@ -3237,13 +3225,12 @@ class Session(object):
     def _unlock_session(self):
         '''_unlock_session
 
-        This function releases a lock that you acquired on an instrument session
+This function releases a lock that you acquired on an instrument session
         using _lock_session. Refer to _lock_session for additional
         information on session locks.
 
         Returns:
-            caller_has_lock (ViBoolean):
-                This parameter serves as a convenience. If you do not want to use this
+            caller_has_lock (ViBoolean):This parameter serves as a convenience. If you do not want to use this
                 parameter, pass VI_NULL.
 
                 Use this parameter in complex functions to keep track of whether you
@@ -3329,7 +3316,7 @@ class Session(object):
     def _close(self):
         '''_close
 
-        Closes the specified session and deallocates resources that it reserved.
+Closes the specified session and deallocates resources that it reserved.
         '''
         error_code = self.library.niDMM_close(self.vi)
         errors._handle_error(self, error_code)
@@ -3338,17 +3325,15 @@ class Session(object):
     def error_message(self, error_code):
         '''error_message
 
-        Takes the **Error_Code** returned by the instrument driver functions,
+Takes the **Error_Code** returned by the instrument driver functions,
         interprets it, and returns it as a user-readable string.
 
         Args:
-            error_code (ViStatus):
-                The **error_code** returned from the instrument. The default is 0,
+            error_code (ViStatus):The **error_code** returned from the instrument. The default is 0,
                 indicating VI_SUCCESS.
 
         Returns:
-            error_message (ViChar):
-                The error information formatted into a string.
+            error_message (ViChar):The error information formatted into a string.
         '''
         error_message_ctype = ctypes_types.ViChar_ctype(0)
         error_code = self.library.niDMM_error_message(self.vi, error_code, ctypes.pointer(error_message_ctype))
@@ -3358,18 +3343,16 @@ class Session(object):
     def error_query(self):
         '''error_query
 
-        Reads an **Error_Code** and message from the DMM error queue. National
+Reads an **Error_Code** and message from the DMM error queue. National
         Instruments DMMs do not contain an error queue. Errors are reported as
         they occur. Therefore, this function does not detect errors; it is
         included for compliance with the *IviDmm Class Specification*.
 
         Returns:
-            error_code (ViStatus):
-                The **error_code** returned from the instrument.
+            error_code (ViStatus):The **error_code** returned from the instrument.
 
                 The default value is VI_SUCCESS (0).
-            error_message (ViChar):
-                Formats the **Error_Code** into a user-readable message string.
+            error_message (ViChar):Formats the **Error_Code** into a user-readable message string.
 
                 Note: The array must contain at least 256 elements ViChar[256].
         '''
@@ -3382,7 +3365,7 @@ class Session(object):
     def reset(self):
         '''reset
 
-        Resets the instrument to a known state and sends initialization commands
+Resets the instrument to a known state and sends initialization commands
         to the instrument. The initialization commands set instrument settings
         to the state necessary for the operation of the instrument driver.
         '''
@@ -3393,17 +3376,15 @@ class Session(object):
     def revision_query(self):
         '''revision_query
 
-        Returns the revision numbers of the instrument driver and instrument
+Returns the revision numbers of the instrument driver and instrument
         firmware.
 
         Returns:
-            instrument_driver_revision (ViChar):
-                Returns a string containing the instrument driver software revision
+            instrument_driver_revision (ViChar):Returns a string containing the instrument driver software revision
                 numbers.
 
                 Note: The array must contain at least 256 elements ViChar[256].
-            firmware_revision (ViChar):
-                Returns a string containing the instrument **firmware_revision**
+            firmware_revision (ViChar):Returns a string containing the instrument **firmware_revision**
                 numbers.
 
                 Note: The array must contain at least 256 elements ViChar[256].
@@ -3417,7 +3398,7 @@ class Session(object):
     def self_test(self):
         '''self_test
 
-        Performs a self-test on the DMM to ensure that the DMM is functioning
+Performs a self-test on the DMM to ensure that the DMM is functioning
         properly. Self-test does not calibrate the DMM.
 
         Note:
@@ -3426,8 +3407,7 @@ class Session(object):
         values after the call returns.
 
         Returns:
-            self_test_result (ViInt16):
-                Contains the value returned from the instrument self-test. Zero
+            self_test_result (ViInt16):Contains the value returned from the instrument self-test. Zero
                 indicates success.
 
                 On the NI 4080/4082 and NI 4070/4072, the error code 1013 indicates that
@@ -3437,8 +3417,7 @@ class Session(object):
                 Self-test does not check the fuse on the NI 4065, NI 4071, and
                 NI 4081. Hence, even if the fuse is blown on the device, self-test does
                 not return error code 1013.
-            self_test_message (ViChar):
-                This parameter contains the string returned from the instrument
+            self_test_message (ViChar):This parameter contains the string returned from the instrument
                 self-test. The array must contain at least 256 elements.
 
                 For the NI 4050 and NI 4060, the error codes returned for self-test
