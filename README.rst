@@ -7,7 +7,7 @@
 |                      +------------+-----------------------------------------------+
 |                      | NI-ModInst | |ModInstLatestVersion| |ModInstPythonVersion| |
 +----------------------+------------+-----------------------------------------------+
- 
+
 ===========  =================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
 Author       National Instruments
@@ -21,28 +21,33 @@ Author       National Instruments
 
 .. _about-section:
 
+.. image:: https://raw.githubusercontent.com/ni/nimi-python/master/docs/_static/python-dmm-small.jpg
+   :alt: NI Digital Multimeter with Python logo
+   :align: center
+
 About
 =====
 
 The **nimi-python** repository generates Python bindings (Application Programming Interface) for interacting with the Modular Instrument drivers. Currently, the following drivers are supported:
 
 * NI-DMM (Python module: nidmm)
+* NI-ModInst (Python module: nimodinst)
 
 It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is called through its public C API using the
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
 
-**nimi-python** supports only the Windows operating system.
+**nimi-python** supports all the Operating Systems supported by the underlying driver.
 
-**nimi-python** supports CPython 3.6+. * TODO(marcoskirsch): Add PyPI version here.*
+**nimi-python** supports Python 2.7, 3.4 and later using CPython or PyPy.
 
 .. _installation-section:
 
 Installation
 ============
 
-In order to use nimi-python modules, you must install the corresponding driver runtime on your system. Visit `ni.com/downloads <http://www.ni.com/downloads/>`_ to download the latest driver version for your devices.
+As a prerequisite to using nimi-python modules, you must install the corresponding driver runtime on your system. Visit `ni.com/downloads <http://www.ni.com/downloads/>`_ to download the driver runtime for your devices.
 
-Specific Python bindings (i.e. for **NI-DMM**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
+The nimi-python modules (i.e. for **NI-DMM**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
   $ python -m pip install nidmm
 
@@ -51,10 +56,11 @@ Or **easy_install** from
 
   $ python -m easy_install nidmm
 
-You also can download the project source, build, and run::
+You also can clone the project repository, build it, and install it::
 
-  $ python TODO(marcoskirsch): how do we build?
-  $ python setup.py install
+  $ git clone https://github.com/ni/nimi-python.git
+  $ make
+  $ pip install -U bin\nidmm\dist\nidmm-0.1-py2.py3-none-any.whl
 
 .. _usage-section:
 
@@ -69,6 +75,8 @@ The following is a basic example of using the **nidmm** module to open a session
     with nidmm.Session("Dev1") as session:
         session.configureMeasurementDigits(nidmm.Function.DC_VOLTS, 10, 5.5)
         print("Measurement: " + str(session.read()))
+
+Additional examples for each driver are located in src/<driver>/examples/ directory.
 
 .. _support-section:
 

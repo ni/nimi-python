@@ -103,6 +103,8 @@ class SideEffectsHelper(object):
         self._defaults['LockSession'] = {}
         self._defaults['LockSession']['return'] = 0
         self._defaults['LockSession']['callerHasLock'] = None
+        self._defaults['RelayControl'] = {}
+        self._defaults['RelayControl']['return'] = 0
         self._defaults['ResetInterchangeCheck'] = {}
         self._defaults['ResetInterchangeCheck']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -231,13 +233,19 @@ class SideEffectsHelper(object):
     def niSwitch_GetAttributeViString(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niSwitch_GetAttributeViString", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViString']['attributeValue']
+        if array_size == 0:
+            return len(self._defaults['GetAttributeViString']['attributeValue'])
+        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
+        attribute_value.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetAttributeViString']['return']
 
     def niSwitch_GetChannelName(self, vi, index, buffer_size, channel_name_buffer):  # noqa: N802
         if self._defaults['GetChannelName']['channelNameBuffer'] is None:
             raise MockFunctionCallError("niSwitch_GetChannelName", param='channelNameBuffer')
-        channel_name_buffer.contents.value = self._defaults['GetChannelName']['channelNameBuffer']
+        if buffer_size == 0:
+            return len(self._defaults['GetChannelName']['channelNameBuffer'])
+        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii'))
+        channel_name_buffer.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetChannelName']['return']
 
     def niSwitch_GetError(self, vi, code, buffersize, description):  # noqa: N802
@@ -246,25 +254,37 @@ class SideEffectsHelper(object):
         code.contents.value = self._defaults['GetError']['code']
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niSwitch_GetError", param='description')
-        description.contents.value = self._defaults['GetError']['description']
+        if buffersize == 0:
+            return len(self._defaults['GetError']['description'])
+        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetError']['description'].encode('ascii'))
+        description.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetError']['return']
 
     def niSwitch_GetNextCoercionRecord(self, vi, buffer_size, coercion_record):  # noqa: N802
         if self._defaults['GetNextCoercionRecord']['coercionRecord'] is None:
             raise MockFunctionCallError("niSwitch_GetNextCoercionRecord", param='coercionRecord')
-        coercion_record.contents.value = self._defaults['GetNextCoercionRecord']['coercionRecord']
+        if buffer_size == 0:
+            return len(self._defaults['GetNextCoercionRecord']['coercionRecord'])
+        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetNextCoercionRecord']['coercionRecord'].encode('ascii'))
+        coercion_record.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetNextCoercionRecord']['return']
 
     def niSwitch_GetNextInterchangeWarning(self, vi, buffer_size, interchange_warning):  # noqa: N802
         if self._defaults['GetNextInterchangeWarning']['interchangeWarning'] is None:
             raise MockFunctionCallError("niSwitch_GetNextInterchangeWarning", param='interchangeWarning')
-        interchange_warning.contents.value = self._defaults['GetNextInterchangeWarning']['interchangeWarning']
+        if buffer_size == 0:
+            return len(self._defaults['GetNextInterchangeWarning']['interchangeWarning'])
+        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetNextInterchangeWarning']['interchangeWarning'].encode('ascii'))
+        interchange_warning.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetNextInterchangeWarning']['return']
 
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
         if self._defaults['GetPath']['path'] is None:
             raise MockFunctionCallError("niSwitch_GetPath", param='path')
-        path.contents.value = self._defaults['GetPath']['path']
+        if buffer_size == 0:
+            return len(self._defaults['GetPath']['path'])
+        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetPath']['path'].encode('ascii'))
+        path.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetPath']['return']
 
     def niSwitch_GetRelayCount(self, vi, relay_name, relay_count):  # noqa: N802
@@ -276,7 +296,10 @@ class SideEffectsHelper(object):
     def niSwitch_GetRelayName(self, vi, index, relay_name_buffer_size, relay_name_buffer):  # noqa: N802
         if self._defaults['GetRelayName']['relayNameBuffer'] is None:
             raise MockFunctionCallError("niSwitch_GetRelayName", param='relayNameBuffer')
-        relay_name_buffer.contents.value = self._defaults['GetRelayName']['relayNameBuffer']
+        if relay_name_buffer_size == 0:
+            return len(self._defaults['GetRelayName']['relayNameBuffer'])
+        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetRelayName']['relayNameBuffer'].encode('ascii'))
+        relay_name_buffer.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetRelayName']['return']
 
     def niSwitch_GetRelayPosition(self, vi, relay_name, relay_position):  # noqa: N802
@@ -317,6 +340,9 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_LockSession", param='callerHasLock')
         caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
         return self._defaults['LockSession']['return']
+
+    def niSwitch_RelayControl(self, vi, relay_name, relay_action):  # noqa: N802
+        return self._defaults['RelayControl']['return']
 
     def niSwitch_ResetInterchangeCheck(self, vi):  # noqa: N802
         return self._defaults['ResetInterchangeCheck']['return']
@@ -474,6 +500,8 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_IsScanning.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_LockSession.side_effect = MockFunctionCallError("niSwitch_LockSession")
         mock_library.niSwitch_LockSession.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_RelayControl.side_effect = MockFunctionCallError("niSwitch_RelayControl")
+        mock_library.niSwitch_RelayControl.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_ResetInterchangeCheck.side_effect = MockFunctionCallError("niSwitch_ResetInterchangeCheck")
         mock_library.niSwitch_ResetInterchangeCheck.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_ResetWithDefaults.side_effect = MockFunctionCallError("niSwitch_ResetWithDefaults")

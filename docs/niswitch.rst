@@ -3,15 +3,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-NI-ModInst Python API's documentation
+NI-SWITCH Python API's documentation
 =============================================================
 
 .. toctree::
    :maxdepth: 3
-   :caption: API References:
+   :caption: API Reference:
 
-   nimodinst/session
-   nimodinst/functions
-   nimodinst/attributes
+   niswitch/session
+   niswitch/functions
+   niswitch/attributes
+   niswitch/enums
 
 

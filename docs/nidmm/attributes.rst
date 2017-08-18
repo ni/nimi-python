@@ -3,14 +3,23 @@ NI-DMM Attributes
 
 .. py:currentmodule:: nidmm
 
-.. py:attribute:: absolute_resolution
+.. py:attribute:: ac_max_freq
 
-   Specifies the measurement resolution in absolute units. Setting this
-   property to higher values increases the measurement accuracy. Setting
-   this property to lower values increases the measurement speed.
+   Specifies the maximum frequency component of the input signal for AC
+   measurements. This property is used only for error checking and verifies
+   that the value of this parameter is less than the maximum frequency of
+   the device. This property affects the DMM only when you set the Function
+   property to AC measurements.
 
-   .. note::
-      NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
+   The valid ranges are shown in the following table.
+
+   +----------------------------------------+----------------+
+   | NI 4080/4081/4082, NI 4070/4071/4072   | 1 Hz-300 kHz   |
+   +----------------------------------------+----------------+
+   | NI 4065                                | 10 Hz-100 Hz   |
+   +----------------------------------------+----------------+
+   | NI 4050/4060                           | 20 Hz-25 kHz   |
+   +----------------------------------------+----------------+
 
    The following table lists the characteristics of this property.
 
@@ -29,8 +38,36 @@ NI-DMM Attributes
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-        - LabVIEW Property: **Configuration:Absolute Resolution**
-        - C Attribute: **NIDMM_ATTR_ABSOLUTE_RESOLUTION**
+        - LabVIEW Property: **Configuration:Measurement Options:Max Frequency**
+        - C Attribute: **NIDMM_ATTR_AC_MAX_FREQ**
+
+.. py:attribute:: ac_min_freq
+
+   Specifies the minimum frequency component of the input signal for AC
+   measurements. This property affects the DMM only when you set the
+   Function property to AC measurements. The valid range is 1 Hz-300 kHz
+   for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
+   4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Min Frequency**
+        - C Attribute: **NIDMM_ATTR_AC_MIN_FREQ**
 
 .. py:attribute:: adc_calibration
 
@@ -205,7 +242,7 @@ NI-DMM Attributes
         - LabVIEW Property: **Multi Point Acquisition:Advanced:Buffer Size**
         - C Attribute: **NIDMM_ATTR_BUFFER_SIZE**
 
-.. py:attribute:: cable_compensation_type
+.. py:attribute:: cable_comp_type
 
    For the NI 4081 and NI 4072 only, specifies the type of cable
    compensation that is applied to the current capacitance or inductance
@@ -232,7 +269,7 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**
-        - C Attribute: **NIDMM_ATTR_CABLE_COMPENSATION_TYPE**
+        - C Attribute: **NIDMM_ATTR_CABLE_COMP_TYPE**
 
 .. py:attribute:: cache
 
@@ -291,35 +328,29 @@ NI-DMM Attributes
         - LabVIEW Property: **Inherent IVI Attributes:Instrument Capabilities:Channel Count**
         - C Attribute: **NIDMM_ATTR_CHANNEL_COUNT**
 
-.. py:attribute:: conductance
+.. py:attribute:: config_product_number
 
-   For the NI 4082 and NI 4072 only, specifies the active part
-   (conductance) of the open cable compensation. The valid range is any
-   real number >0. The default value (-1.0) indicates that compensation has
-   not taken place.
-
-   .. note::
-      Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
+   The PCI product ID.
 
    The following table lists the characteristics of this property.
 
-   +----------------+------------+
-   | Characteristic | Value      |
-   +================+============+
-   | Datatype       | float      |
-   +----------------+------------+
-   | Permissions    | read-write |
-   +----------------+------------+
-   | Channel Based  | False      |
-   +----------------+------------+
-   | Resettable     | No         |
-   +----------------+------------+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | integer   |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-        - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**
-        - C Attribute: **NIDMM_ATTR_CONDUCTANCE**
+        - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
+        - C Attribute: **NIDMM_ATTR_CONFIG_PRODUCT_NUMBER**
 
 .. py:attribute:: current_source
 
@@ -398,35 +429,6 @@ NI-DMM Attributes
 
         - LabVIEW Property: **Configuration:Measurement Options:DC Noise Rejection**
         - C Attribute: **NIDMM_ATTR_DC_NOISE_REJECTION**
-
-.. py:attribute:: digits_resolution
-
-   Specifies the measurement resolution in digits. Setting this property to
-   higher values increases the measurement accuracy. Setting this property
-   to lower values increases the measurement speed.
-
-   .. note::
-      NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+-----------------------------+
-   | Characteristic | Value                       |
-   +================+=============================+
-   | Datatype       | :py:data:`DigitsResolution` |
-   +----------------+-----------------------------+
-   | Permissions    | read-write                  |
-   +----------------+-----------------------------+
-   | Channel Based  | False                       |
-   +----------------+-----------------------------+
-   | Resettable     | No                          |
-   +----------------+-----------------------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Digits Resolution**
-        - C Attribute: **NIDMM_ATTR_DIGITS_RESOLUTION**
 
 .. py:attribute:: driver_setup
 
@@ -558,7 +560,7 @@ NI-DMM Attributes
         - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Error Info:Error Elaboration**
         - C Attribute: **NIDMM_ATTR_ERROR_ELABORATION**
 
-.. py:attribute:: frequency_voltage_auto_range_value
+.. py:attribute:: freq_voltage_auto_range_value
 
    For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
    the frequency voltage range. If auto ranging is enabled, shows the
@@ -583,9 +585,9 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
-        - C Attribute: **NIDMM_ATTR_FREQUENCY_VOLTAGE_AUTO_RANGE_VALUE**
+        - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_AUTO_RANGE_VALUE**
 
-.. py:attribute:: frequency_voltage_range
+.. py:attribute:: freq_voltage_range
 
    For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
    amplitude of the input signal for frequency measurements.
@@ -614,7 +616,7 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Range**
-        - C Attribute: **NIDMM_ATTR_FREQUENCY_VOLTAGE_RANGE**
+        - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_RANGE**
 
 .. py:attribute:: function
 
@@ -796,56 +798,6 @@ NI-DMM Attributes
         - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Model**
         - C Attribute: **NIDMM_ATTR_INSTRUMENT_MODEL**
 
-.. py:attribute:: instrument_product_id
-
-   The PCI product ID.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+-----------+
-   | Characteristic | Value     |
-   +================+===========+
-   | Datatype       | integer   |
-   +----------------+-----------+
-   | Permissions    | read only |
-   +----------------+-----------+
-   | Channel Based  | False     |
-   +----------------+-----------+
-   | Resettable     | No        |
-   +----------------+-----------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
-        - C Attribute: **NIDMM_ATTR_INSTRUMENT_PRODUCT_ID**
-
-.. py:attribute:: instrument_serial_number
-
-   A string containing the serial number of the instrument. This property
-   corresponds to the serial number label that is attached to most
-   products.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+-----------+
-   | Characteristic | Value     |
-   +================+===========+
-   | Datatype       | string    |
-   +----------------+-----------+
-   | Permissions    | read only |
-   +----------------+-----------+
-   | Channel Based  | False     |
-   +----------------+-----------+
-   | Resettable     | No        |
-   +----------------+-----------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**
-        - C Attribute: **NIDMM_ATTR_INSTRUMENT_SERIAL_NUMBER**
-
 .. py:attribute:: interchange_check
 
    Specifies whether to perform interchangeability checking and log
@@ -963,6 +915,31 @@ NI-DMM Attributes
         - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model**
         - C Attribute: **NIDMM_ATTR_LC_CALCULATION_MODEL**
 
+.. py:attribute:: lc_number_meas_to_average
+
+   For the NI 4082 and NI 4072 only, specifies the number of LC
+   measurements that are averaged to produce one reading.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | integer    |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**
+        - C Attribute: **NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE**
+
 .. py:attribute:: logical_name
 
    A string containing the logical name of the instrument.
@@ -987,45 +964,7 @@ NI-DMM Attributes
         - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
         - C Attribute: **NIDMM_ATTR_LOGICAL_NAME**
 
-.. py:attribute:: max_frequency
-
-   Specifies the maximum frequency component of the input signal for AC
-   measurements. This property is used only for error checking and verifies
-   that the value of this parameter is less than the maximum frequency of
-   the device. This property affects the DMM only when you set the Function
-   property to AC measurements.
-
-   The valid ranges are shown in the following table.
-
-   +----------------------------------------+----------------+
-   | NI 4080/4081/4082, NI 4070/4071/4072   | 1 Hz-300 kHz   |
-   +----------------------------------------+----------------+
-   | NI 4065                                | 10 Hz-100 Hz   |
-   +----------------------------------------+----------------+
-   | NI 4050/4060                           | 20 Hz-25 kHz   |
-   +----------------------------------------+----------------+
-
-   The following table lists the characteristics of this property.
-
-   +----------------+------------+
-   | Characteristic | Value      |
-   +================+============+
-   | Datatype       | float      |
-   +----------------+------------+
-   | Permissions    | read-write |
-   +----------------+------------+
-   | Channel Based  | False      |
-   +----------------+------------+
-   | Resettable     | No         |
-   +----------------+------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Measurement Options:Max Frequency**
-        - C Attribute: **NIDMM_ATTR_MAX_FREQUENCY**
-
-.. py:attribute:: measurement_completdest
+.. py:attribute:: meas_complete_dest
 
    Specifies the destination of the measurement complete (MC) signal.
 
@@ -1053,9 +992,9 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Trigger:Measurement Complete Dest**
-        - C Attribute: **NIDMM_ATTR_MEASUREMENT_COMPLETDEST**
+        - C Attribute: **NIDMM_ATTR_MEAS_COMPLETE_DEST**
 
-.. py:attribute:: measurement_destination_slope
+.. py:attribute:: meas_dest_slope
 
    Specifies the polarity of the generated measurement complete signal.
 
@@ -1077,35 +1016,7 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Trigger:Measurement Destination Slope**
-        - C Attribute: **NIDMM_ATTR_MEASUREMENT_DESTINATION_SLOPE**
-
-.. py:attribute:: min_frequency
-
-   Specifies the minimum frequency component of the input signal for AC
-   measurements. This property affects the DMM only when you set the
-   Function property to AC measurements. The valid range is 1 Hz-300 kHz
-   for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
-   4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+------------+
-   | Characteristic | Value      |
-   +================+============+
-   | Datatype       | float      |
-   +----------------+------------+
-   | Permissions    | read-write |
-   +----------------+------------+
-   | Channel Based  | False      |
-   +----------------+------------+
-   | Resettable     | No         |
-   +----------------+------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Measurement Options:Min Frequency**
-        - C Attribute: **NIDMM_ATTR_MIN_FREQUENCY**
+        - C Attribute: **NIDMM_ATTR_MEAS_DEST_SLOPE**
 
 .. py:attribute:: number_of_averages
 
@@ -1137,32 +1048,7 @@ NI-DMM Attributes
         - LabVIEW Property: **Configuration:Advanced:Number Of Averages**
         - C Attribute: **NIDMM_ATTR_NUMBER_OF_AVERAGES**
 
-.. py:attribute:: number_of_lc_measurements_to_average
-
-   For the NI 4082 and NI 4072 only, specifies the number of LC
-   measurements that are averaged to produce one reading.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+------------+
-   | Characteristic | Value      |
-   +================+============+
-   | Datatype       | integer    |
-   +----------------+------------+
-   | Permissions    | read-write |
-   +----------------+------------+
-   | Channel Based  | False      |
-   +----------------+------------+
-   | Resettable     | No         |
-   +----------------+------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**
-        - C Attribute: **NIDMM_ATTR_NUMBER_OF_LC_MEASUREMENTS_TO_AVERAGE**
-
-.. py:attribute:: offset_compensated_ohms
+.. py:attribute:: offset_comp_ohms
 
    For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
    offset compensated ohms.
@@ -1185,7 +1071,67 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Offset Compensated Ohms**
-        - C Attribute: **NIDMM_ATTR_OFFSET_COMPENSATED_OHMS**
+        - C Attribute: **NIDMM_ATTR_OFFSET_COMP_OHMS**
+
+.. py:attribute:: open_cable_comp_conductance
+
+   For the NI 4082 and NI 4072 only, specifies the active part
+   (conductance) of the open cable compensation. The valid range is any
+   real number >0. The default value (-1.0) indicates that compensation has
+   not taken place.
+
+   .. note::
+      Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**
+        - C Attribute: **NIDMM_ATTR_OPEN_CABLE_COMP_CONDUCTANCE**
+
+.. py:attribute:: open_cable_comp_susceptance
+
+   For the NI 4082 and NI 4072 only, specifies the reactive part
+   (susceptance) of the open cable compensation. The valid range is any
+   real number >0. The default value (-1.0) indicates that compensation has
+   not taken place.
+
+   .. note::
+      Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**
+        - C Attribute: **NIDMM_ATTR_OPEN_CABLE_COMP_SUSCEPTANCE**
 
 .. py:attribute:: operation_mode
 
@@ -1220,7 +1166,7 @@ NI-DMM Attributes
         - LabVIEW Property: **Configuration:Advanced:Operation Mode**
         - C Attribute: **NIDMM_ATTR_OPERATION_MODE**
 
-.. py:attribute:: powerline_frequency
+.. py:attribute:: powerline_freq
 
    Specifies the powerline frequency. The NI 4060 and NI 4050 use this
    value to select an aperture time to reject powerline noise by selecting
@@ -1257,7 +1203,7 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Powerline Frequency**
-        - C Attribute: **NIDMM_ATTR_POWERLINE_FREQUENCY**
+        - C Attribute: **NIDMM_ATTR_POWERLINE_FREQ**
 
 .. py:attribute:: primary_error
 
@@ -1328,15 +1274,7 @@ NI-DMM Attributes
    volts.
 
    .. note::
-      The NI 4050, NI 4060, and NI 4065 only support Auto Range when the trigger and sample trigger are set to Immediate.
-
-   +----------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | (-1.0)   | Auto Range On     | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                                |
-   +----------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | (-2.0)   | Auto Range Off    | NI-DMM sets the Range to the current Auto Range Value and uses this range for all subsequent measurements until the measurement configuration is changed.                                      |
-   +----------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | (-3.0)   | Auto Range Once   | NI-DMM performs an Auto Range before acquiring the next measurement. The Auto Range Value is stored and used for all subsequent measurements until the measurement configuration is changed.   |
-   +----------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      NI-DMM performs an Auto Range before acquiring the next measurement. The Auto Range Value is stored and used for all subsequent measurements until the measurement configuration is changed.  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
    The following table lists the characteristics of this property.
 
@@ -1388,37 +1326,7 @@ NI-DMM Attributes
         - LabVIEW Property: **Inherent IVI Attributes:User Options:Range Check**
         - C Attribute: **NIDMM_ATTR_RANGE_CHECK**
 
-.. py:attribute:: reactance
-
-   For the NI 4082 and NI 4072 only, represents the reactive part
-   (reactance) of the short cable compensation. The valid range is any real
-   number >0. The default value (-1) indicates that compensation has not
-   taken place.
-
-   .. note::
-      Changing the VI or the range through this property or through niDMM Config Measurement resets this property to the default value.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+------------+
-   | Characteristic | Value      |
-   +================+============+
-   | Datatype       | float      |
-   +----------------+------------+
-   | Permissions    | read-write |
-   +----------------+------------+
-   | Channel Based  | False      |
-   +----------------+------------+
-   | Resettable     | No         |
-   +----------------+------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**
-        - C Attribute: **NIDMM_ATTR_REACTANCE**
-
-.. py:attribute:: record_value_coercions
+.. py:attribute:: record_coercions
 
    Specifies whether the IVI engine keeps a list of the value coercions it
    makes for ViInt32 and ViReal64 properties. The default value is FALSE
@@ -1444,17 +1352,16 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
-        - C Attribute: **NIDMM_ATTR_RECORD_VALUE_COERCIONS**
+        - C Attribute: **NIDMM_ATTR_RECORD_COERCIONS**
 
-.. py:attribute:: resistance
+.. py:attribute:: resolution_absolute
 
-   For the NI 4082 and NI 4072 only, represents the active part
-   (resistance) of the short cable compensation. The valid range is any
-   real number >0. The default value (-1) indicates that compensation has
-   not taken place.
+   Specifies the measurement resolution in absolute units. Setting this
+   property to higher values increases the measurement accuracy. Setting
+   this property to lower values increases the measurement speed.
 
    .. note::
-      Changing the VI or the range through this property or through niDMM Config Measurement resets this property to the default value.
+      NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
 
    The following table lists the characteristics of this property.
 
@@ -1473,131 +1380,37 @@ NI-DMM Attributes
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-        - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
-        - C Attribute: **NIDMM_ATTR_RESISTANCE**
+        - LabVIEW Property: **Configuration:Absolute Resolution**
+        - C Attribute: **NIDMM_ATTR_RESOLUTION_ABSOLUTE**
 
-.. py:attribute:: rtd_a
+.. py:attribute:: resolution_digits
 
-   Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
-   **RTD Type property** is set to Custom.
+   Specifies the measurement resolution in digits. Setting this property to
+   higher values increases the measurement accuracy. Setting this property
+   to lower values increases the measurement speed.
+
+   .. note::
+      NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
 
    The following table lists the characteristics of this property.
 
-   +----------------+------------+
-   | Characteristic | Value      |
-   +================+============+
-   | Datatype       | float      |
-   +----------------+------------+
-   | Permissions    | read-write |
-   +----------------+------------+
-   | Channel Based  | False      |
-   +----------------+------------+
-   | Resettable     | No         |
-   +----------------+------------+
+   +----------------+-----------------------------+
+   | Characteristic | Value                       |
+   +================+=============================+
+   | Datatype       | :py:data:`DigitsResolution` |
+   +----------------+-----------------------------+
+   | Permissions    | read-write                  |
+   +----------------+-----------------------------+
+   | Channel Based  | False                       |
+   +----------------+-----------------------------+
+   | Resettable     | No                          |
+   +----------------+-----------------------------+
 
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**
-        - C Attribute: **NIDMM_ATTR_RTD_A**
-
-.. py:attribute:: rtd_b
-
-   Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
-   **RTD Type property** is set to Custom.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+------------+
-   | Characteristic | Value      |
-   +================+============+
-   | Datatype       | float      |
-   +----------------+------------+
-   | Permissions    | read-write |
-   +----------------+------------+
-   | Channel Based  | False      |
-   +----------------+------------+
-   | Resettable     | No         |
-   +----------------+------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**
-        - C Attribute: **NIDMM_ATTR_RTD_B**
-
-.. py:attribute:: rtd_c
-
-   Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
-   **RTD Type property** is set to Custom.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+------------+
-   | Characteristic | Value      |
-   +================+============+
-   | Datatype       | float      |
-   +----------------+------------+
-   | Permissions    | read-write |
-   +----------------+------------+
-   | Channel Based  | False      |
-   +----------------+------------+
-   | Resettable     | No         |
-   +----------------+------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**
-        - C Attribute: **NIDMM_ATTR_RTD_C**
-
-.. py:attribute:: rtd_resistance
-
-   Specifies the RTD resistance at 0 degrees Celsius.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+------------+
-   | Characteristic | Value      |
-   +================+============+
-   | Datatype       | float      |
-   +----------------+------------+
-   | Permissions    | read-write |
-   +----------------+------------+
-   | Channel Based  | False      |
-   +----------------+------------+
-   | Resettable     | No         |
-   +----------------+------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**
-        - C Attribute: **NIDMM_ATTR_RTD_RESISTANCE**
-
-.. py:attribute:: rtd_type
-
-   Specifies the RTD type.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+--------------------+
-   | Characteristic | Value              |
-   +================+====================+
-   | Datatype       | :py:data:`RTDType` |
-   +----------------+--------------------+
-   | Permissions    | read-write         |
-   +----------------+--------------------+
-   | Channel Based  | False              |
-   +----------------+--------------------+
-   | Resettable     | No                 |
-   +----------------+--------------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**
-        - C Attribute: **NIDMM_ATTR_RTD_TYPE**
+        - LabVIEW Property: **Configuration:Digits Resolution**
+        - C Attribute: **NIDMM_ATTR_RESOLUTION_DIGITS**
 
 .. py:attribute:: sample_count
 
@@ -1728,7 +1541,7 @@ NI-DMM Attributes
         - LabVIEW Property: **Multi Point Acquisition:Sample Trigger**
         - C Attribute: **NIDMM_ATTR_SAMPLE_TRIGGER**
 
-.. py:attribute:: sample_trig_slope
+.. py:attribute:: sample_trigger_slope
 
    Specifies the edge of the signal from the specified sample trigger
    source on which the DMM is triggered.
@@ -1751,7 +1564,7 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Multi Point Acquisition:Sample Trig Slope**
-        - C Attribute: **NIDMM_ATTR_SAMPLE_TRIG_SLOPE**
+        - C Attribute: **NIDMM_ATTR_SAMPLE_TRIGGER_SLOPE**
 
 .. py:attribute:: secondary_error
 
@@ -1779,6 +1592,32 @@ NI-DMM Attributes
 
         - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Error Info:Secondary Error**
         - C Attribute: **NIDMM_ATTR_SECONDARY_ERROR**
+
+.. py:attribute:: serial_number
+
+   A string containing the serial number of the instrument. This property
+   corresponds to the serial number label that is attached to most
+   products.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+-----------+
+   | Characteristic | Value     |
+   +================+===========+
+   | Datatype       | string    |
+   +----------------+-----------+
+   | Permissions    | read only |
+   +----------------+-----------+
+   | Channel Based  | False     |
+   +----------------+-----------+
+   | Resettable     | No        |
+   +----------------+-----------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**
+        - C Attribute: **NIDMM_ATTR_SERIAL_NUMBER**
 
 .. py:attribute:: settle_time
 
@@ -1808,6 +1647,66 @@ NI-DMM Attributes
 
         - LabVIEW Property: **Configuration:Advanced:Settle Time**
         - C Attribute: **NIDMM_ATTR_SETTLE_TIME**
+
+.. py:attribute:: short_cable_comp_reactance
+
+   For the NI 4082 and NI 4072 only, represents the reactive part
+   (reactance) of the short cable compensation. The valid range is any real
+   number >0. The default value (-1) indicates that compensation has not
+   taken place.
+
+   .. note::
+      Changing the VI or the range through this property or through niDMM Config Measurement resets this property to the default value.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**
+        - C Attribute: **NIDMM_ATTR_SHORT_CABLE_COMP_REACTANCE**
+
+.. py:attribute:: short_cable_comp_resistance
+
+   For the NI 4082 and NI 4072 only, represents the active part
+   (resistance) of the short cable compensation. The valid range is any
+   real number >0. The default value (-1) indicates that compensation has
+   not taken place.
+
+   .. note::
+      Changing the VI or the range through this property or through niDMM Config Measurement resets this property to the default value.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
+        - C Attribute: **NIDMM_ATTR_SHORT_CABLE_COMP_RESISTANCE**
 
 .. py:attribute:: shunt_value
 
@@ -2091,15 +1990,10 @@ NI-DMM Attributes
         - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models**
         - C Attribute: **NIDMM_ATTR_SUPPORTED_INSTRUMENT_MODELS**
 
-.. py:attribute:: susceptance
+.. py:attribute:: temp_rtd_a
 
-   For the NI 4082 and NI 4072 only, specifies the reactive part
-   (susceptance) of the open cable compensation. The valid range is any
-   real number >0. The default value (-1.0) indicates that compensation has
-   not taken place.
-
-   .. note::
-      Changing the function or the range using property nodes or through niDMM Config Measurement resets this property to the default value.
+   Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
+   **RTD Type property** is set to Custom.
 
    The following table lists the characteristics of this property.
 
@@ -2118,10 +2012,108 @@ NI-DMM Attributes
    .. tip:: 
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
-        - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**
-        - C Attribute: **NIDMM_ATTR_SUSCEPTANCE**
+        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**
+        - C Attribute: **NIDMM_ATTR_TEMP_RTD_A**
 
-.. py:attribute:: tc_fixed_ref_junction
+.. py:attribute:: temp_rtd_b
+
+   Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
+   **RTD Type property** is set to Custom.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**
+        - C Attribute: **NIDMM_ATTR_TEMP_RTD_B**
+
+.. py:attribute:: temp_rtd_c
+
+   Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
+   **RTD Type property** is set to Custom.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**
+        - C Attribute: **NIDMM_ATTR_TEMP_RTD_C**
+
+.. py:attribute:: temp_rtd_res
+
+   Specifies the RTD resistance at 0 degrees Celsius.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+------------+
+   | Characteristic | Value      |
+   +================+============+
+   | Datatype       | float      |
+   +----------------+------------+
+   | Permissions    | read-write |
+   +----------------+------------+
+   | Channel Based  | False      |
+   +----------------+------------+
+   | Resettable     | No         |
+   +----------------+------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**
+        - C Attribute: **NIDMM_ATTR_TEMP_RTD_RES**
+
+.. py:attribute:: temp_rtd_type
+
+   Specifies the RTD type.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+--------------------+
+   | Characteristic | Value              |
+   +================+====================+
+   | Datatype       | :py:data:`RTDType` |
+   +----------------+--------------------+
+   | Permissions    | read-write         |
+   +----------------+--------------------+
+   | Channel Based  | False              |
+   +----------------+--------------------+
+   | Resettable     | No                 |
+   +----------------+--------------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**
+        - C Attribute: **NIDMM_ATTR_TEMP_RTD_TYPE**
+
+.. py:attribute:: temp_tc_fixed_ref_junc
 
    Specifies the value of the fixed reference junction temperature for a
    thermocouple in degrees Celsius.
@@ -2144,9 +2136,9 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction**
-        - C Attribute: **NIDMM_ATTR_TC_FIXED_REF_JUNCTION**
+        - C Attribute: **NIDMM_ATTR_TEMP_TC_FIXED_REF_JUNC**
 
-.. py:attribute:: tc_ref_junction_type
+.. py:attribute:: temp_tc_ref_junc_type
 
    Specifies the thermocouple reference junction type.
 
@@ -2168,9 +2160,33 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type**
-        - C Attribute: **NIDMM_ATTR_TC_REF_JUNCTION_TYPE**
+        - C Attribute: **NIDMM_ATTR_TEMP_TC_REF_JUNC_TYPE**
 
-.. py:attribute:: thermistor_a
+.. py:attribute:: temp_tc_type
+
+   Specifies the thermocouple type.
+
+   The following table lists the characteristics of this property.
+
+   +----------------+-----------------------------+
+   | Characteristic | Value                       |
+   +================+=============================+
+   | Datatype       | :py:data:`ThermocoupleType` |
+   +----------------+-----------------------------+
+   | Permissions    | read-write                  |
+   +----------------+-----------------------------+
+   | Channel Based  | False                       |
+   +----------------+-----------------------------+
+   | Resettable     | No                          |
+   +----------------+-----------------------------+
+
+   .. tip:: 
+      This attribute corresponds to the following LabVIEW Property or C Attribute:
+
+        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**
+        - C Attribute: **NIDMM_ATTR_TEMP_TC_TYPE**
+
+.. py:attribute:: temp_thermistor_a
 
    Specifies the Steinhart-Hart A coefficient for thermistor scaling when
    the **Thermistor Type property** is set to Custom.
@@ -2193,9 +2209,9 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor A**
-        - C Attribute: **NIDMM_ATTR_THERMISTOR_A**
+        - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_A**
 
-.. py:attribute:: thermistor_b
+.. py:attribute:: temp_thermistor_b
 
    Specifies the Steinhart-Hart B coefficient for thermistor scaling when
    the **Thermistor Type property** is set to Custom.
@@ -2218,9 +2234,9 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor B**
-        - C Attribute: **NIDMM_ATTR_THERMISTOR_B**
+        - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_B**
 
-.. py:attribute:: thermistor_c
+.. py:attribute:: temp_thermistor_c
 
    Specifies the Steinhart-Hart C coefficient for thermistor scaling when
    the **Thermistor Type property** is set to Custom.
@@ -2243,9 +2259,9 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor C**
-        - C Attribute: **NIDMM_ATTR_THERMISTOR_C**
+        - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_C**
 
-.. py:attribute:: thermistor_type
+.. py:attribute:: temp_thermistor_type
 
    Specifies the thermistor type.
 
@@ -2267,33 +2283,9 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type**
-        - C Attribute: **NIDMM_ATTR_THERMISTOR_TYPE**
+        - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_TYPE**
 
-.. py:attribute:: thermocouple_type
-
-   Specifies the thermocouple type.
-
-   The following table lists the characteristics of this property.
-
-   +----------------+-----------------------------+
-   | Characteristic | Value                       |
-   +================+=============================+
-   | Datatype       | :py:data:`ThermocoupleType` |
-   +----------------+-----------------------------+
-   | Permissions    | read-write                  |
-   +----------------+-----------------------------+
-   | Channel Based  | False                       |
-   +----------------+-----------------------------+
-   | Resettable     | No                          |
-   +----------------+-----------------------------+
-
-   .. tip:: 
-      This attribute corresponds to the following LabVIEW Property or C Attribute:
-
-        - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**
-        - C Attribute: **NIDMM_ATTR_THERMOCOUPLE_TYPE**
-
-.. py:attribute:: transducer_type
+.. py:attribute:: temp_transducer_type
 
    Specifies the transducer type.
 
@@ -2315,7 +2307,7 @@ NI-DMM Attributes
       This attribute corresponds to the following LabVIEW Property or C Attribute:
 
         - LabVIEW Property: **Configuration:Measurement Options:Temperature:Transducer Type**
-        - C Attribute: **NIDMM_ATTR_TRANSDUCER_TYPE**
+        - C Attribute: **NIDMM_ATTR_TEMP_TRANSDUCER_TYPE**
 
 .. py:attribute:: trigger_count
 

@@ -33,7 +33,7 @@ functions = {
              'name': 'attributeValue',
              'type': 'ViString',
              'is_buffer': True,
-             'size': 'ivi-dance,attributeValueBufferSize',
+             'size': {'mechanism':'ivi-dance', 'value':'attributeValueBufferSize'}
              },
         ],
         'returns': 'ViStatus',
@@ -73,7 +73,7 @@ functions = {
              'name': 'errorInfo',
              'type': 'ViString',
              'is_buffer': True,
-             'size': 'ivi-dance,errorInfoBufferSize'
+             'size': {'mechanism':'ivi-dance', 'value':'errorInfoBufferSize'}
              },
         ],
         'returns': 'ViStatus',

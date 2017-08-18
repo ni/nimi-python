@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+# This file is code generated, do not make changes here
+#  If the generated information is not correct for python
+#  changes can be made in attributes_addon.py and they will be
+#  applied at build time
+
 attributes = {
     1050002: {
         'access': 'read-write',
@@ -94,7 +99,7 @@ setting.
         'lv_property': '''
 Inherent IVI Attributes:User Options:Record Value Coercions
 ''',
-        'name': 'RECORD_VALUE_COERCIONS',
+        'name': 'RECORD_COERCIONS',
         'resettable': 'No',
         'short_description': '''
 Specifies whether the IVI engine keeps a list of the value coercions it
@@ -509,7 +514,7 @@ A string containing the type of instrument used in the current session.
         'channel_based': 'False',
         'enum': 'MeasurementDestinationSlope',
         'lv_property': 'Trigger:Measurement Destination Slope',
-        'name': 'MEASUREMENT_DESTINATION_SLOPE',
+        'name': 'MEAS_DEST_SLOPE',
         'resettable': 'No',
         'short_description': '''
 Specifies the polarity of the generated measurement complete signal.
@@ -539,7 +544,7 @@ For the NI 4050 only, specifies the shunt resistance value.
         'channel_based': 'False',
         'enum': 'SampleTrigSlope',
         'lv_property': 'Multi Point Acquisition:Sample Trig Slope',
-        'name': 'SAMPLE_TRIG_SLOPE',
+        'name': 'SAMPLE_TRIGGER_SLOPE',
         'resettable': 'No',
         'short_description': '''
 Specifies the edge of the signal from the specified sample trigger
@@ -617,7 +622,7 @@ calibration mode.
         'lv_property': '''
 Configuration:Measurement Options:Offset Compensated Ohms
 ''',
-        'name': 'OFFSET_COMPENSATED_OHMS',
+        'name': 'OFFSET_COMP_OHMS',
         'resettable': 'No',
         'short_description': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
@@ -786,7 +791,7 @@ chooses the buffer size.
         'lv_property': '''
 Configuration:Measurement Options:Frequency Voltage Auto Range Value
 ''',
-        'name': 'FREQUENCY_VOLTAGE_AUTO_RANGE_VALUE',
+        'name': 'FREQ_VOLTAGE_AUTO_RANGE_VALUE',
         'resettable': 'No',
         'short_description': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
@@ -811,7 +816,7 @@ measurement for the current range.
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type
 ''',
-        'name': 'CABLE_COMPENSATION_TYPE',
+        'name': 'CABLE_COMP_TYPE',
         'resettable': 'No',
         'short_description': '''
 For the NI 4081 and NI 4072 only, specifies the type of cable
@@ -836,7 +841,7 @@ taken place.
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance
 ''',
-        'name': 'REACTANCE',
+        'name': 'SHORT_CABLE_COMP_REACTANCE',
         'resettable': 'No',
         'short_description': '''
 For the NI 4082 and NI 4072 only, represents the reactive part
@@ -862,7 +867,7 @@ not taken place.
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance
 ''',
-        'name': 'RESISTANCE',
+        'name': 'SHORT_CABLE_COMP_RESISTANCE',
         'resettable': 'No',
         'short_description': '''
 For the NI 4082 and NI 4072 only, represents the active part
@@ -888,7 +893,7 @@ not taken place.
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance
 ''',
-        'name': 'SUSCEPTANCE',
+        'name': 'OPEN_CABLE_COMP_SUSCEPTANCE',
         'resettable': 'No',
         'short_description': '''
 For the NI 4082 and NI 4072 only, specifies the reactive part
@@ -914,7 +919,7 @@ not taken place.
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance
 ''',
-        'name': 'CONDUCTANCE',
+        'name': 'OPEN_CABLE_COMP_CONDUCTANCE',
         'resettable': 'No',
         'short_description': '''
 For the NI 4082 and NI 4072 only, specifies the active part
@@ -962,7 +967,7 @@ capacitance measurements.
         'lv_property': '''
 Inherent IVI Attributes:Instrument Identification:Instrument Serial Number
 ''',
-        'name': 'INSTRUMENT_SERIAL_NUMBER',
+        'name': 'SERIAL_NUMBER',
         'resettable': 'No',
         'short_description': '''
 A string containing the serial number of the instrument. This property
@@ -978,7 +983,7 @@ products.
         'lv_property': '''
 Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average
 ''',
-        'name': 'NUMBER_OF_LC_MEASUREMENTS_TO_AVERAGE',
+        'name': 'LC_NUMBER_MEAS_TO_AVERAGE',
         'resettable': 'No',
         'short_description': '''
 For the NI 4082 and NI 4072 only, specifies the number of LC
@@ -993,7 +998,7 @@ measurements that are averaged to produce one reading.
         'lv_property': '''
 Inherent IVI Attributes:Instrument Identification:Instrument Product ID
 ''',
-        'name': 'INSTRUMENT_PRODUCT_ID',
+        'name': 'CONFIG_PRODUCT_NUMBER',
         'resettable': 'No',
         'short_description': 'The PCI product ID.',
         'type': 'ViInt32',
@@ -1005,7 +1010,7 @@ Inherent IVI Attributes:Instrument Identification:Instrument Product ID
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type
 ''',
-        'name': 'RTD_TYPE',
+        'name': 'TEMP_RTD_TYPE',
         'resettable': 'No',
         'short_description': 'Specifies the RTD type.',
         'type': 'ViInt32',
@@ -1017,7 +1022,7 @@ Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RT
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A
 ''',
-        'name': 'RTD_A',
+        'name': 'TEMP_RTD_A',
         'resettable': 'No',
         'short_description': '''
 Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
@@ -1032,7 +1037,7 @@ Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B
 ''',
-        'name': 'RTD_B',
+        'name': 'TEMP_RTD_B',
         'resettable': 'No',
         'short_description': '''
 Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
@@ -1047,7 +1052,7 @@ Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C
 ''',
-        'name': 'RTD_C',
+        'name': 'TEMP_RTD_C',
         'resettable': 'No',
         'short_description': '''
 Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
@@ -1062,7 +1067,7 @@ Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type
 ''',
-        'name': 'THERMISTOR_TYPE',
+        'name': 'TEMP_THERMISTOR_TYPE',
         'resettable': 'No',
         'short_description': 'Specifies the thermistor type.',
         'type': 'ViInt32',
@@ -1074,7 +1079,7 @@ Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermistor:Thermistor A
 ''',
-        'name': 'THERMISTOR_A',
+        'name': 'TEMP_THERMISTOR_A',
         'resettable': 'No',
         'short_description': '''
 Specifies the Steinhart-Hart A coefficient for thermistor scaling when
@@ -1089,7 +1094,7 @@ the **Thermistor Type property** is set to Custom.
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermistor:Thermistor B
 ''',
-        'name': 'THERMISTOR_B',
+        'name': 'TEMP_THERMISTOR_B',
         'resettable': 'No',
         'short_description': '''
 Specifies the Steinhart-Hart B coefficient for thermistor scaling when
@@ -1104,7 +1109,7 @@ the **Thermistor Type property** is set to Custom.
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermistor:Thermistor C
 ''',
-        'name': 'THERMISTOR_C',
+        'name': 'TEMP_THERMISTOR_C',
         'resettable': 'No',
         'short_description': '''
 Specifies the Steinhart-Hart C coefficient for thermistor scaling when
@@ -1144,15 +1149,7 @@ example, if the Function property is set to DC Volts, the units are
 volts.
 
 .. note::
-   The NI 4050, NI 4060, and NI 4065 only support Auto Range when the trigger and sample trigger are set to Immediate.  
-
-+----------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| (-1.0)   | Auto Range On     | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                                |
-+----------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| (-2.0)   | Auto Range Off    | NI-DMM sets the Range to the current Auto Range Value and uses this range for all subsequent measurements until the measurement configuration is changed.                                      |
-+----------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| (-3.0)   | Auto Range Once   | NI-DMM performs an Auto Range before acquiring the next measurement. The Auto Range Value is stored and used for all subsequent measurements until the measurement configuration is changed.   |
-+----------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   NI-DMM performs an Auto Range before acquiring the next measurement. The Auto Range Value is stored and used for all subsequent measurements until the measurement configuration is changed.  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ''',
         'lv_property': 'Configuration:Range',
         'name': 'RANGE',
@@ -1179,7 +1176,7 @@ to lower values increases the measurement speed.
    NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
 ''',
         'lv_property': 'Configuration:Digits Resolution',
-        'name': 'DIGITS_RESOLUTION',
+        'name': 'RESOLUTION_DIGITS',
         'resettable': 'No',
         'short_description': '''
 Specifies the measurement resolution in digits. Setting this property to
@@ -1250,7 +1247,7 @@ Default Value: Auto Delay
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Configuration:Measurement Options:Min Frequency',
-        'name': 'MIN_FREQUENCY',
+        'name': 'AC_MIN_FREQ',
         'resettable': 'No',
         'short_description': '''
 Specifies the minimum frequency component of the input signal for AC
@@ -1283,7 +1280,7 @@ The valid ranges are shown in the following table.
 +----------------------------------------+----------------+
 ''',
         'lv_property': 'Configuration:Measurement Options:Max Frequency',
-        'name': 'MAX_FREQUENCY',
+        'name': 'AC_MAX_FREQ',
         'resettable': 'No',
         'short_description': '''
 Specifies the maximum frequency component of the input signal for AC
@@ -1307,7 +1304,7 @@ this property to lower values increases the measurement speed.
    NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
 ''',
         'lv_property': 'Configuration:Absolute Resolution',
-        'name': 'ABSOLUTE_RESOLUTION',
+        'name': 'RESOLUTION_ABSOLUTE',
         'resettable': 'No',
         'short_description': '''
 Specifies the measurement resolution in absolute units. Setting this
@@ -1333,7 +1330,7 @@ amplitude of the input signal for frequency measurements.
         'lv_property': '''
 Configuration:Measurement Options:Frequency Voltage Range
 ''',
-        'name': 'FREQUENCY_VOLTAGE_RANGE',
+        'name': 'FREQ_VOLTAGE_RANGE',
         'resettable': 'No',
         'short_description': '''
 For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the maximum
@@ -1348,7 +1345,7 @@ amplitude of the input signal for frequency measurements.
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Transducer Type
 ''',
-        'name': 'TRANSDUCER_TYPE',
+        'name': 'TEMP_TRANSDUCER_TYPE',
         'resettable': 'No',
         'short_description': 'Specifies the transducer type.',
         'type': 'ViInt32',
@@ -1360,7 +1357,7 @@ Configuration:Measurement Options:Temperature:Transducer Type
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type
 ''',
-        'name': 'THERMOCOUPLE_TYPE',
+        'name': 'TEMP_TC_TYPE',
         'resettable': 'No',
         'short_description': 'Specifies the thermocouple type.',
         'type': 'ViInt32',
@@ -1372,7 +1369,7 @@ Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type
 ''',
-        'name': 'TC_REF_JUNCTION_TYPE',
+        'name': 'TEMP_TC_REF_JUNC_TYPE',
         'resettable': 'No',
         'short_description': '''
 Specifies the thermocouple reference junction type.
@@ -1386,7 +1383,7 @@ Specifies the thermocouple reference junction type.
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction
 ''',
-        'name': 'TC_FIXED_REF_JUNCTION',
+        'name': 'TEMP_TC_FIXED_REF_JUNC',
         'resettable': 'No',
         'short_description': '''
 Specifies the value of the fixed reference junction temperature for a
@@ -1401,7 +1398,7 @@ thermocouple in degrees Celsius.
         'lv_property': '''
 Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance
 ''',
-        'name': 'RTD_RESISTANCE',
+        'name': 'TEMP_RTD_RES',
         'resettable': 'No',
         'short_description': '''
 Specifies the RTD resistance at 0 degrees Celsius.
@@ -1511,7 +1508,7 @@ LabVIEW Trigger Routing section in the *NI Digital Multimeters Help*.
    The NI 4050 is not supported.
 ''',
         'lv_property': 'Trigger:Measurement Complete Dest',
-        'name': 'MEASUREMENT_COMPLETDEST',
+        'name': 'MEAS_COMPLETE_DEST',
         'resettable': 'No',
         'short_description': '''
 Specifies the destination of the measurement complete (MC) signal.
@@ -1630,7 +1627,7 @@ powerline frequency = 60 Hz (or 16.667 ms) and aperture time in PLCs =
         'lv_property': '''
 Configuration:Measurement Options:Powerline Frequency
 ''',
-        'name': 'POWERLINE_FREQUENCY',
+        'name': 'POWERLINE_FREQ',
         'resettable': 'No',
         'short_description': '''
 Specifies the powerline frequency. The NI 4060 and NI 4050 use this
