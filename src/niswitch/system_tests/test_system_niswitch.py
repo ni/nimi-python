@@ -36,61 +36,84 @@ def best_invalid_device_name():
 def test_relayclose(device_info):
     with niswitch.Session(device_info['name']) as session:
         relayName = session.get_relay_name(1)
+        print (relayName)
         positionInitial = session.get_relay_position(relayName)
-        # Missing Relay Control ????
-        
+        if positionInitial == 10: # if relay is open, close relay
+            session.relay_control(relayName, 21)
+        else:
+            session.relay_control(relayName, 20)
+        positionMiddle = session.get_relay_position(relayName)
+        if positionMiddle == 10: # if relay is open, close relay
+            session.relay_control(relayName, 21)
+        else:
+            session.relay_control(relayName, 20)
         positionFinal = session.get_relay_position(relayName)
         assert relayName
+        assert positionInitial != positionMiddle
+        assert positionMiddle != positionFinal
         assert positionInitial == positionFinal
 
+        
+def test_channel_connection(device_info):
+   with niswitch.Session(device_info['name']) as session:
+       channel1 = session.get_channel_name(1)
+       for x in range (2, session.channel_count):
+           channel2 = session.get_channel_name(x)
+           if session.can_connect(channel1, channel2) == 1: #path available
+               session.connect(channel1, channel2)
+               session.disconnect(channel1, channel2)
+               session.connect(channel1, channel2)
+               session.disconnect_all()
+               pass
+               break
+       
 
-def best_wrong_parameter_type(device_info):
+def test_wrong_parameter_type(device_info):
     with niswitch.Session(device_info['name']) as session:
         try:
             # We are passing a number where an enum is expected.
-            session.configure_measurement_digits(1, 10, 5.5)
+            session.trigger_input(1)
             assert False
         except TypeError as e:
             print(e)
             pass
 
 
-def best_warning(device_info):
+def test_warning(device_info):
     with niswitch.Session(device_info['name']) as session:
-        session.configure_measurement_digits(niswitch.Function._2_WIRE_RESISTANCE, 1e6, 3.5)
-        if not session.simulate:
-           try:
-               print(session.read(1000)) # Assume nothing is connected to device, overrange!
-               assert False
-           except niswitch.Warning as w:
-               print(w)
-               pass
-        else:
-           pytest.skip("Simulated")
+       channel1 = session.get_channel_name(1)
+       for x in range (2, session.channel_count):
+           channel2 = session.get_channel_name(x)
+           if session.can_connect(channel1, channel2) == 1: #path available
+               session.connect(channel1, channel2)
+               try:
+                   session.can_connect(channel1, channel2)
+               except niswitch.Warning as w:
+                   print(w)
+                   break
+                   pass
 
 
 def best_ViBoolean_attribute(device_info):
     with niswitch.Session(device_info['name']) as session:
-        assert session.interchange_check is False
-        # TODO(marcoskirsch): set a boolean
+        session.query_instrument_status = False
+        assert session.query_instrument_status is False
 
 
-def best_ViString_attribute(device_info):
+def test_ViString_attribute(device_info):
     with niswitch.Session(device_info['name']) as session:
         assert device_info['name'] == session.io_resource_descriptor
-        # TODO(marcoskirsch): set a string
 
 
-def best_ViInt32_attribute(device_info):
+def test_ViInt32_attribute(device_info):
     with niswitch.Session(device_info['name']) as session:
-        session.sample_count = 5
-        assert 5 == session.sample_count
+        assert session.channel_count > 0
 
 
-def best_ViReal64_attribute(device_info):
+def test_ViReal64_attribute(device_info):
     with niswitch.Session(device_info['name']) as session:
-        session.range = 50 # Coerces up!
-        assert 100 == session.range
+        session.settling_time = 0.1
+        assert session.settling_time == 0.1
 
 
 def best_Enum_attribute(device_info):
@@ -106,58 +129,39 @@ def best_Enum_attribute(device_info):
             pass
 
 
-def best_acquisition(device_info):
+def test_method_call_with_zero_parameter(device_info):
     with niswitch.Session(device_info['name']) as session:
-        session.configure_measurement_digits(niswitch.Function.DC_CURRENT, 1, 5.5)
-        with session.initiate():
-            print(session.fetch(1000))
-        with session.initiate():
-            print(session.fetch(1000))
+        session.reset()
+        pass
 
 
-def best_method_call_with_zero_parameter(device_info):
+def test_method_call_with_one_parameter(device_info):
     with niswitch.Session(device_info['name']) as session:
-        assert session.get_aperture_time_info()[1] == 0 # Assuming default aperture time unit will be seconds
+        session.get_channel_name(1)
 
 
-def best_method_call_with_one_parameter(device_info):
-    with niswitch.Session(device_info['name']) as session:
-        session.configure_power_line_frequency(60)
-
-
-def best_invalid_method_call(device_info):
+def test_invalid_method_call(device_info):
     #calling a function, without parameter, But it has a mandate parameter
     with niswitch.Session(device_info['name']) as session:
         try:
-            session.configure_power_line_frequency()
+            session.get_channel_name()
             assert False
         except TypeError as e:
             print (e)
             pass
 
 
-def best_method_call_with_two_parameter(device_info):
+def test_method_call_with_two_parameter(device_info):
     # Calling Configure Trigger function and asserting True if any error occurred while function call.
     with niswitch.Session(device_info['name']) as session:
         try:
-            session.configure_trigger(niswitch.TriggerSource.IMMEDIATE, 1)
+            session.can_connect(session.get_channel_name(1), session.get_channel_name(2))
         except niswitch.Error as e:
             print (e)
             assert True
 
 
-def best_multi_point_acquisition(device_info):
-    with niswitch.Session(device_info['name']) as session:
-        session.configure_multi_point(4, 2, niswitch.SampleTrigger.IMMEDIATE, 0)
-        session.configure_measurement_digits(niswitch.Function.DC_VOLTS, 1, 5.5)
-        measurements, numberOfMeasurements = session.read_multi_point(-1, 8)
-        for measurement in measurements:
-            print('{:10.4f}'.format(measurement))
-        assert len(measurements) == 8
-        assert numberOfMeasurements == 8
-
-
-def best_library_singleton(device_info):
+def test_library_singleton(device_info):
     with niswitch.Session(device_info['name']) as session:
         lib1 = session.library
     with niswitch.Session(device_info['name']) as session:
@@ -170,13 +174,6 @@ def best_self_test(device_info):
         result, message = session.self_test()
         assert result == 0
         assert message == 'Self Test passed.'
-
-
-def best_get_dev_temp(device_info):
-    with niswitch.Session(device_info['name']) as session:
-        temperature = session.get_dev_temp('')
-        print(temperature)
-        assert 20 <= temperature <= 50
 
         
 def best_method_with_noinput_nooutput(device_info):
