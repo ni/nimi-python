@@ -1247,8 +1247,6 @@ the device. This property affects the DMM only when you set the Function
 property to AC measurements.
 
 The valid ranges are shown in the following table.
-
-The valid ranges are shown in the following table.
 ''',
             'table_body': [['NI 4080/4081/4082, NI 4070/4071/4072', '1 Hz-300 kHz'], ['NI 4065', '10 Hz-100 Hz'],
                            ['NI 4050/4060', '20 Hz-25 kHz']],
@@ -1421,39 +1419,6 @@ between measurement cycles. The onboard timing resolution is 1 micro s
 on the NI 4060.
 
 Only positive values are valid when setting the sample interval.
-
-The NI 4065 and NI 4070/4071/4072 use the value specified in this
-property as additional delay. On these devices, the onboard timing
-resolution is 34.72 ns and the valid range is 0-149 s.
-
-On the NI 4060, the value for this property is used as the settling
-time. When this property is set to 0, the NI 4060 does not settle
-between measurement cycles. The onboard timing resolution is 1 micro s
-on the NI 4060.
-
-Only positive values are valid when setting the sample interval.
-
-The NI 4065 and NI 4070/4071/4072 use the value specified in this
-property as additional delay. On these devices, the onboard timing
-resolution is 34.72 ns and the valid range is 0-149 s.
-
-On the NI 4060, the value for this property is used as the settling
-time. When this property is set to 0, the NI 4060 does not settle
-between measurement cycles. The onboard timing resolution is 1 micro s
-on the NI 4060.
-
-Only positive values are valid when setting the sample interval.
-
-The NI 4065 and NI 4070/4071/4072 use the value specified in this
-property as additional delay. On these devices, the onboard timing
-resolution is 34.72 ns and the valid range is 0-149 s.
-
-On the NI 4060, the value for this property is used as the settling
-time. When this property is set to 0, the NI 4060 does not settle
-between measurement cycles. The onboard timing resolution is 1 micro s
-on the NI 4060.
-
-Only positive values are valid when setting the sample interval.
 ''',
             'note': 'The NI 4080/4081/4082 and NI 4050 are not supported.',
         },
@@ -1514,38 +1479,6 @@ property. To override the default aperture, set this property to the
 desired aperture time after calling `niDMM Config
 Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__. To return
 to the default, set this property to Aperture Time Auto (-1).
-
-Any number of powerline cycles (PLCs) within the minimum and maximum
-ranges is allowed on the NI 4080/4081/4082 and NI 4070/4071/4072.
-
-On the NI 4065 the minimum aperture time is 333 micro s and the maximum
-aperture time is 78.2 s. If setting the number of averages directly, the
-total measurement time is aperture time X the number of averages, which
-must be less than 72.8 s. The aperture times allowed are 333 micro s,
-667 micro s, or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33
-ms, and so on. If you set an aperture time other than 333 micro s, 667
-micro s, or multiples of 1.11 ms, the value will be coerced up to the
-next supported aperture time.
-
-On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed
-are 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is
-50 Hz, the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
-
-Any number of powerline cycles (PLCs) within the minimum and maximum
-ranges is allowed on the NI 4080/4081/4082 and NI 4070/4071/4072.
-
-On the NI 4065 the minimum aperture time is 333 micro s and the maximum
-aperture time is 78.2 s. If setting the number of averages directly, the
-total measurement time is aperture time X the number of averages, which
-must be less than 72.8 s. The aperture times allowed are 333 micro s,
-667 micro s, or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33
-ms, and so on. If you set an aperture time other than 333 micro s, 667
-micro s, or multiples of 1.11 ms, the value will be coerced up to the
-next supported aperture time.
-
-On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed
-are 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is
-50 Hz, the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
 
 Any number of powerline cycles (PLCs) within the minimum and maximum
 ranges is allowed on the NI 4080/4081/4082 and NI 4070/4071/4072.
@@ -1624,14 +1557,6 @@ value to select an aperture time to reject powerline noise by selecting
 the appropriate internal sample clock and filter. The NI 4065, NI
 4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
 for setting the Aperture Time property in powerline cycles.
-
-After configuring powerline frequency, set the Aperture Time Units
-property to PLCs. When setting the Aperture Time property, select the
-number of PLCs for the powerline frequency. For example, if powerline
-frequency = 50 Hz (or 20 ms) and aperture time in PLCs = 5, then
-aperture time in seconds = 20 ms \* 5 PLCs = 100 ms. Similarly, if
-powerline frequency = 60 Hz (or 16.667 ms) and aperture time in PLCs =
-6, then aperture time in seconds = 16.667 ms \* 6 PLCs = 100 ms.
 
 After configuring powerline frequency, set the Aperture Time Units
 property to PLCs. When setting the Aperture Time property, select the
