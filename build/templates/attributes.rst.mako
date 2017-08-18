@@ -37,7 +37,7 @@ desc = helper.get_documentation_for_node_rst(a, config, indent=0)
     ${helper.get_indented_docstring_snippet(table, indent=4)}
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
 %   if 'lv_property' in attributes[attr]:
             - LabVIEW Property: **${attributes[attr]['lv_property'].strip()}**
