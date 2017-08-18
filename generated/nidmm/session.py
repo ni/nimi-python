@@ -916,7 +916,7 @@ class Session(object):
     def _abort(self):
         '''_abort
 
-Aborts a previously initiated measurement and returns the DMM to the
+        Aborts a previously initiated measurement and returns the DMM to the
         Idle state.
         '''
         error_code = self.library.niDMM_Abort(self.vi)
@@ -926,7 +926,7 @@ Aborts a previously initiated measurement and returns the DMM to the
     def _clear_error(self):
         '''_clear_error
 
-Clears the error information for the current execution thread and the
+        Clears the error information for the current execution thread and the
         IVI session you specify. If you pass VI_NULL for the
         **Instrument_Handle** parameter, this function clears the error
         information only for the current execution thread.
@@ -938,7 +938,7 @@ Clears the error information for the current execution thread and the
     def clear_interchange_warnings(self):
         '''clear_interchange_warnings
 
-Clears the list of current interchange warnings.
+        Clears the list of current interchange warnings.
         '''
         error_code = self.library.niDMM_ClearInterchangeWarnings(self.vi)
         errors._handle_error(self, error_code)
@@ -947,7 +947,7 @@ Clears the list of current interchange warnings.
     def configure_ac_bandwidth(self, ac_minimum_frequency_hz, ac_maximum_frequency_hz):
         '''configure_ac_bandwidth
 
-Configures the AC_MIN_FREQ and AC_MAX_FREQ
+        Configures the AC_MIN_FREQ and AC_MAX_FREQ
         attributes, which the DMM uses for AC measurements.
 
         Args:
@@ -977,7 +977,7 @@ Configures the AC_MIN_FREQ and AC_MAX_FREQ
     def configure_adc_calibration(self, adc_calibration):
         '''configure_adc_calibration
 
-For the NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
+        For the NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
         compensate for gain drift since the last external calibration or
         self-calibration. When **ADC_Calibration** is ON, the DMM measures an
         internal reference to calculate the correct gain for the measurement.
@@ -1016,7 +1016,7 @@ For the NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
     def configure_auto_zero_mode(self, auto_zero_mode):
         '''configure_auto_zero_mode
 
-Configures the DMM for **Auto_Zero_Mode**. When **Auto_Zero_Mode**
+        Configures the DMM for **Auto_Zero_Mode**. When **Auto_Zero_Mode**
         is ON, the DMM internally disconnects the input signal and takes a zero
         reading. It then subtracts the zero reading from the measurement. This
         prevents offset voltages present on the input circuitry of the DMM from
@@ -1069,7 +1069,7 @@ Configures the DMM for **Auto_Zero_Mode**. When **Auto_Zero_Mode**
     def configure_cable_comp_type(self, cable_comp_type):
         '''configure_cable_comp_type
 
-For the NI 4082 and NI 4072 only, sets the
+        For the NI 4082 and NI 4072 only, sets the
         CABLE_COMP_TYPE attribute for the current
         capacitance/inductance mode range.
 
@@ -1086,7 +1086,7 @@ For the NI 4082 and NI 4072 only, sets the
     def configure_current_source(self, current_source):
         '''configure_current_source
 
-The NI 4050 and NI 4060 are not supported. Configures the
+        The NI 4050 and NI 4060 are not supported. Configures the
         **Current_Source** for diode measurements.
 
         Args:
@@ -1113,7 +1113,7 @@ The NI 4050 and NI 4060 are not supported. Configures the
     def configure_fixed_ref_junction(self, fixed_reference_junction):
         '''configure_fixed_ref_junction
 
-Configures the fixed reference junction temperature for a thermocouple
+        Configures the fixed reference junction temperature for a thermocouple
         with a fixed reference junction type.
 
         Args:
@@ -1129,7 +1129,7 @@ Configures the fixed reference junction temperature for a thermocouple
     def configure_frequency_voltage_range(self, voltage_range):
         '''configure_frequency_voltage_range
 
-For the NI 4080/4081/4082 and the NI 4070/4071/4072 only, specifies the
+        For the NI 4080/4081/4082 and the NI 4070/4071/4072 only, specifies the
         expected maximum amplitude of the input signal for frequency and period
         measurements.
 
@@ -1162,7 +1162,7 @@ For the NI 4080/4081/4082 and the NI 4070/4071/4072 only, specifies the
     def configure_meas_complete_dest(self, meas_complete_destination):
         '''configure_meas_complete_dest
 
-Specifies the destination of the DMM Measurement Complete (MC) signal.
+        Specifies the destination of the DMM Measurement Complete (MC) signal.
         Refer to
         `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
         for more information.
@@ -1188,7 +1188,7 @@ Specifies the destination of the DMM Measurement Complete (MC) signal.
     def configure_meas_complete_slope(self, meas_complete_slope):
         '''configure_meas_complete_slope
 
-Sets the Measurement Complete signal to either rising edge (positive) or
+        Sets the Measurement Complete signal to either rising edge (positive) or
         falling edge (negative) polarity.
 
         Args:
@@ -1210,7 +1210,7 @@ Sets the Measurement Complete signal to either rising edge (positive) or
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
         '''configure_measurement_absolute
 
-Configures the common attributes of the measurement. These attributes
+        Configures the common attributes of the measurement. These attributes
         include function, range, and
         RESOLUTION_ABSOLUTE.
 
@@ -1262,7 +1262,7 @@ Configures the common attributes of the measurement. These attributes
     def configure_measurement_digits(self, measurement_function, range, resolution_digits):
         '''configure_measurement_digits
 
-Configures the common attributes of the measurement. These attributes
+        Configures the common attributes of the measurement. These attributes
         include function, range, and
         RESOLUTION_DIGITS.
 
@@ -1317,7 +1317,7 @@ Configures the common attributes of the measurement. These attributes
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger, sample_interval):
         '''configure_multi_point
 
-Configures the attributes for multipoint measurements. These attributes
+        Configures the attributes for multipoint measurements. These attributes
         include TRIGGER_COUNT, SAMPLE_COUNT,
         SAMPLE_TRIGGER, and SAMPLE_INTERVAL.
 
@@ -1369,7 +1369,7 @@ Configures the attributes for multipoint measurements. These attributes
     def configure_offset_comp_ohms(self, offset_comp_ohms):
         '''configure_offset_comp_ohms
 
-For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
+        For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
         compensate for voltage offsets in resistance measurements. When
         **Offset_Comp_Ohms** is enabled, the DMM measures the resistance twice
         (once with the current source on and again with it turned off). Any
@@ -1398,7 +1398,7 @@ For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
     def configure_open_cable_comp_values(self, conductance, susceptance):
         '''configure_open_cable_comp_values
 
-For the NI 4082 and NI 4072 only, configures the
+        For the NI 4082 and NI 4072 only, configures the
         OPEN_CABLE_COMP_CONDUCTANCE and
         OPEN_CABLE_COMP_SUSCEPTANCE attributes.
 
@@ -1413,7 +1413,7 @@ For the NI 4082 and NI 4072 only, configures the
     def configure_power_line_frequency(self, power_line_frequency_hz):
         '''configure_power_line_frequency
 
-Specifies the powerline frequency.
+        Specifies the powerline frequency.
 
         Args:
             power_line_frequency_hz (ViReal64):**Powerline Frequency** specifies the powerline frequency in hertz.
@@ -1426,7 +1426,7 @@ Specifies the powerline frequency.
     def configure_rtd_custom(self, rtd_a, rtd_b, rtd_c):
         '''configure_rtd_custom
 
-Configures the A, B, and C parameters for a custom RTD.
+        Configures the A, B, and C parameters for a custom RTD.
 
         Args:
             rtd_a (ViReal64):Specifies the Callendar-Van Dusen A coefficient for RTD scaling when RTD
@@ -1446,7 +1446,7 @@ Configures the A, B, and C parameters for a custom RTD.
     def configure_rtd_type(self, rtd_type, rtd_resistance):
         '''configure_rtd_type
 
-Configures the RTD Type and RTD Resistance parameters for an RTD.
+        Configures the RTD Type and RTD Resistance parameters for an RTD.
 
         Args:
             rtd_type (ViInt32):Specifies the type of RTD used to measure the temperature resistance.
@@ -1482,7 +1482,7 @@ Configures the RTD Type and RTD Resistance parameters for an RTD.
     def configure_sample_trigger_slope(self, sample_trigger_slope):
         '''configure_sample_trigger_slope
 
-Sets the SAMPLE_TRIGGER_SLOPE to either rising edge
+        Sets the SAMPLE_TRIGGER_SLOPE to either rising edge
         (positive) or falling edge (negative) polarity.
 
         Args:
@@ -1506,7 +1506,7 @@ Sets the SAMPLE_TRIGGER_SLOPE to either rising edge
     def configure_short_cable_comp_values(self, resistance, reactance):
         '''configure_short_cable_comp_values
 
-For the NI 4082 and NI 4072 only, configures the
+        For the NI 4082 and NI 4072 only, configures the
         SHORT_CABLE_COMP_RESISTANCE and
         SHORT_CABLE_COMP_REACTANCE attributes.
 
@@ -1521,7 +1521,7 @@ For the NI 4082 and NI 4072 only, configures the
     def configure_thermistor_custom(self, thermistor_a, thermistor_b, thermistor_c):
         '''configure_thermistor_custom
 
-Configures the A, B, and C parameters for a custom thermistor.
+        Configures the A, B, and C parameters for a custom thermistor.
 
         Args:
             thermistor_a (ViReal64):Specifies the Steinhart-Hart A coefficient for thermistor scaling when
@@ -1541,7 +1541,7 @@ Configures the A, B, and C parameters for a custom thermistor.
     def configure_thermistor_type(self, thermistor_type):
         '''configure_thermistor_type
 
-Configures the thermistor type.
+        Configures the thermistor type.
 
         Args:
             thermistor_type (enums.TemperatureThermistorType):Specifies the type of thermistor used to measure the temperature. NI-DMM
@@ -1574,7 +1574,7 @@ Configures the thermistor type.
     def configure_thermocouple(self, thermocouple_type, reference_junction_type):
         '''configure_thermocouple
 
-Configures the thermocouple type and reference junction type for a
+        Configures the thermocouple type and reference junction type for a
         chosen thermocouple.
 
         Args:
@@ -1611,7 +1611,7 @@ Configures the thermocouple type and reference junction type for a
     def configure_transducer_type(self, transducer_type):
         '''configure_transducer_type
 
-Configures the transducer type.
+        Configures the transducer type.
 
         Args:
             transducer_type (enums.TemperatureTransducerType):Specifies the type of device used to measure the temperature. NI-DMM
@@ -1637,7 +1637,7 @@ Configures the transducer type.
     def configure_trigger(self, trigger_source, trigger_delay):
         '''configure_trigger
 
-Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
+        Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
         `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
         and `Using
         Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__
@@ -1676,7 +1676,7 @@ Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
     def configure_trigger_slope(self, trigger_slope):
         '''configure_trigger_slope
 
-Sets the TRIGGER_SLOPE attribute to either rising edge
+        Sets the TRIGGER_SLOPE attribute to either rising edge
         (positive) or falling edge (negative) polarity.
 
         Args:
@@ -1700,7 +1700,7 @@ Sets the TRIGGER_SLOPE attribute to either rising edge
     def configure_waveform_acquisition(self, measurement_function, range, rate, waveform_points):
         '''configure_waveform_acquisition
 
-Configures the DMM for waveform acquisitions. This feature is supported
+        Configures the DMM for waveform acquisitions. This feature is supported
         on the NI 4080/4081/4082 and the NI 4070/4071/4072.
 
         Args:
@@ -1747,7 +1747,7 @@ Configures the DMM for waveform acquisitions. This feature is supported
     def configure_waveform_coupling(self, waveform_coupling):
         '''configure_waveform_coupling
 
-For the NI 4080/4081/4082 and the NI 4070/4071/4072, configures
+        For the NI 4080/4081/4082 and the NI 4070/4071/4072, configures
         instrument coupling for voltage waveforms.
 
         Args:
@@ -1771,7 +1771,7 @@ For the NI 4080/4081/4082 and the NI 4070/4071/4072, configures
     def disable(self):
         '''disable
 
-Places the instrument in a quiescent state where it has minimal or no
+        Places the instrument in a quiescent state where it has minimal or no
         impact on the system to which it is connected. If a measurement is in
         progress when this function is called, the measurement is aborted.
         '''
@@ -1782,7 +1782,7 @@ Places the instrument in a quiescent state where it has minimal or no
     def fetch(self, maximum_time):
         '''fetch
 
-Returns the value from a previously initiated measurement. You must call
+        Returns the value from a previously initiated measurement. You must call
         _initiate before calling this function.
 
         Args:
@@ -1808,7 +1808,7 @@ Returns the value from a previously initiated measurement. You must call
     def fetch_multi_point(self, maximum_time, array_size):
         '''fetch_multi_point
 
-Returns an array of values from a previously initiated multipoint
+        Returns an array of values from a previously initiated multipoint
         measurement. The number of measurements the DMM makes is determined by
         the values you specify for the **Trigger_Count** and **Sample_Count**
         parameters of configure_multi_point. You must first call
@@ -1850,7 +1850,7 @@ Returns an array of values from a previously initiated multipoint
     def fetch_waveform(self, maximum_time, array_size):
         '''fetch_waveform
 
-For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
+        For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
         values from a previously initiated waveform acquisition. You must call
         _initiate before calling this function.
 
@@ -1884,7 +1884,7 @@ For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
     def format_meas_absolute(self, measurement_function, range, resolution, measurement):
         '''format_meas_absolute
 
-Formats the **Measurement** to the proper number of displayed digits
+        Formats the **Measurement** to the proper number of displayed digits
         according to the **Measurement_Function**, **Range**, and
         **Resolution**. Returns the formatted data, range, and mode strings.
 
@@ -1913,7 +1913,7 @@ Formats the **Measurement** to the proper number of displayed digits
     def get_aperture_time_info(self):
         '''get_aperture_time_info
 
-Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
+        Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
 
         Returns:
             aperture_time (ViReal64):Specifies the amount of time the DMM digitizes the input signal for a
@@ -1955,7 +1955,7 @@ Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
     def _get_attribute_vi_boolean(self, channel_name, attribute_id):
         '''_get_attribute_vi_boolean
 
-Queries the value of a ViBoolean attribute. You can use this function to
+        Queries the value of a ViBoolean attribute. You can use this function to
         get the values of instrument-specific attributes and inherent IVI
         attributes.
 
@@ -1987,7 +1987,7 @@ Queries the value of a ViBoolean attribute. You can use this function to
     def _get_attribute_vi_int32(self, channel_name, attribute_id):
         '''_get_attribute_vi_int32
 
-Queries the value of a ViInt32 attribute. You can use this function to
+        Queries the value of a ViInt32 attribute. You can use this function to
         get the values of instrument-specific attributes and inherent IVI
         attributes.
 
@@ -2019,7 +2019,7 @@ Queries the value of a ViInt32 attribute. You can use this function to
     def _get_attribute_vi_real64(self, channel_name, attribute_id):
         '''_get_attribute_vi_real64
 
-Queries the value of a ViReal64 attribute. You can use this function to
+        Queries the value of a ViReal64 attribute. You can use this function to
         get the values of instrument-specific attributes and inherent IVI
         attributes.
 
@@ -2051,7 +2051,7 @@ Queries the value of a ViReal64 attribute. You can use this function to
     def _get_attribute_vi_session(self, channel_name, attribute_id):
         '''_get_attribute_vi_session
 
-Queries the value of a ViSession attribute. You can use this function to
+        Queries the value of a ViSession attribute. You can use this function to
         get the values of instrument-specific attributes and inherent IVI
         attributes.
 
@@ -2083,7 +2083,7 @@ Queries the value of a ViSession attribute. You can use this function to
     def _get_attribute_vi_string(self, channel_name, attribute_id):
         '''_get_attribute_vi_string
 
-Queries the value of a ViString attribute. You can use this function to
+        Queries the value of a ViString attribute. You can use this function to
         get the values of instrument-specific attributes and inherent IVI
         attributes.
 
@@ -2135,7 +2135,7 @@ Queries the value of a ViString attribute. You can use this function to
     def get_auto_range_value(self):
         '''get_auto_range_value
 
-Returns the **Actual_Range** that the DMM is using, even when Auto
+        Returns the **Actual_Range** that the DMM is using, even when Auto
         Range is off.
 
         Returns:
@@ -2151,7 +2151,7 @@ Returns the **Actual_Range** that the DMM is using, even when Auto
     def get_cal_count(self, cal_type):
         '''get_cal_count
 
-Returns the calibration **Count** for the specified type of calibration.
+        Returns the calibration **Count** for the specified type of calibration.
 
         Note: The NI 4050, NI 4060, and NI 4080/4081/4082 are not supported.
 
@@ -2178,7 +2178,7 @@ Returns the calibration **Count** for the specified type of calibration.
     def get_cal_date_and_time(self, cal_type):
         '''get_cal_date_and_time
 
-Returns the date and time of the last calibration performed.
+        Returns the date and time of the last calibration performed.
 
         Note: The NI 4050 and NI 4060 are not supported.
 
@@ -2213,7 +2213,7 @@ Returns the date and time of the last calibration performed.
     def get_channel_name(self, index, buffer_size):
         '''get_channel_name
 
-Returns the **Channel_String** that is in the channel table at an
+        Returns the **Channel_String** that is in the channel table at an
         **Index** you specify. Not applicable to National Instruments DMMs.
         Included for compliance with the *IviDmm Class Specification*.
 
@@ -2247,7 +2247,7 @@ Returns the **Channel_String** that is in the channel table at an
     def get_dev_temp(self, options):
         '''get_dev_temp
 
-Returns the current **Temperature** of the device.
+        Returns the current **Temperature** of the device.
 
         Note: The NI 4050 and NI 4060 are not supported.
 
@@ -2265,7 +2265,7 @@ Returns the current **Temperature** of the device.
     def _get_error(self):
         '''_get_error
 
-Returns the error information associated with the
+        Returns the error information associated with the
         **Instrument_Handle**. This function retrieves and then clears the
         error information for the session. If you leave the
         **Instrument_Handle** unwired, this function retrieves and then clears
@@ -2307,7 +2307,7 @@ Returns the error information associated with the
     def _get_error_message(self, error_code):
         '''_get_error_message
 
-Returns the **Error_Message** as a user-readable string for the
+        Returns the **Error_Message** as a user-readable string for the
         provided **Error_Code**. Calling this function with a **Buffer_Size**
         of 0 returns the size needed for the **Error_Message**.
 
@@ -2336,7 +2336,7 @@ Returns the **Error_Message** as a user-readable string for the
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
 
-Returns the **Temperature** during the last calibration procedure.
+        Returns the **Temperature** during the last calibration procedure.
 
         Note: The NI 4050 and NI 4060 are not supported.
 
@@ -2363,7 +2363,7 @@ Returns the **Temperature** during the last calibration procedure.
     def get_measurement_period(self):
         '''get_measurement_period
 
-Returns the measurement **Period**, which is the amount of time it takes
+        Returns the measurement **Period**, which is the amount of time it takes
         to complete one measurement with the current configuration. Use this
         function right before you begin acquiring data—after you have completely
         configured the measurement and after all configuration functions have
@@ -2386,7 +2386,7 @@ Returns the measurement **Period**, which is the amount of time it takes
     def get_next_coercion_record(self, buffer_size):
         '''get_next_coercion_record
 
-This function returns the coercion information associated with the IVI
+        This function returns the coercion information associated with the IVI
         session, and it retrieves and clears the oldest instance in which NI-DMM
         coerced a value you specified to another value.
 
@@ -2429,7 +2429,7 @@ This function returns the coercion information associated with the IVI
     def get_next_interchange_warning(self):
         '''get_next_interchange_warning
 
-This function returns the interchangeability warnings associated with
+        This function returns the interchangeability warnings associated with
         the IVI session. It retrieves and clears the oldest instance in which
         the class driver recorded an interchangeability warning.
         Interchangeability warnings indicate that using your application with a
@@ -2474,7 +2474,7 @@ This function returns the interchangeability warnings associated with
     def get_self_cal_supported(self):
         '''get_self_cal_supported
 
-Returns a Boolean value that expresses whether or not the DMM that you
+        Returns a Boolean value that expresses whether or not the DMM that you
         are using can perform self-calibration.
 
         Returns:
@@ -2495,7 +2495,7 @@ Returns a Boolean value that expresses whether or not the DMM that you
     def _init_with_options(self, resource_name, id_query, reset_device, option_string):
         '''_init_with_options
 
-This function completes the following tasks:
+        This function completes the following tasks:
 
         -  Creates a new IVI instrument driver session and, optionally, sets the
            initial state of the following session attributes:
@@ -2596,7 +2596,7 @@ This function completes the following tasks:
     def _initiate(self):
         '''_initiate
 
-Initiates an acquisition. After you call this function, the DMM leaves
+        Initiates an acquisition. After you call this function, the DMM leaves
         the Idle state and enters the Wait-for-Trigger state. If trigger is set
         to Immediate mode, the DMM begins acquiring measurement data. Use
         fetch, fetch_multi_point, or fetch_waveform to
@@ -2609,7 +2609,7 @@ Initiates an acquisition. After you call this function, the DMM leaves
     def is_over_range(self, measurement_value):
         '''is_over_range
 
-Takes a **Measurement_Value** and determines if the value is a valid
+        Takes a **Measurement_Value** and determines if the value is a valid
         measurement or a value indicating that an overrange condition occurred.
 
         Args:
@@ -2637,7 +2637,7 @@ Takes a **Measurement_Value** and determines if the value is a valid
     def is_under_range(self, measurement_value):
         '''is_under_range
 
-Takes a **Measurement_Value** and determines if the value is a valid
+        Takes a **Measurement_Value** and determines if the value is a valid
         measurement or a value indicating that an underrange condition occurred.
 
         Args:
@@ -2665,7 +2665,7 @@ Takes a **Measurement_Value** and determines if the value is a valid
     def _lock_session(self):
         '''_lock_session
 
-This function obtains a multithread lock on the instrument session.
+        This function obtains a multithread lock on the instrument session.
         Before it does so, it waits until all other execution threads have
         released their locks on the instrument session.
 
@@ -2772,7 +2772,7 @@ This function obtains a multithread lock on the instrument session.
     def perform_open_cable_comp(self):
         '''perform_open_cable_comp
 
-For the NI 4082 and NI 4072 only, performs the open cable compensation
+        For the NI 4082 and NI 4072 only, performs the open cable compensation
         measurements for the current capacitance/inductance range, and returns
         open cable compensation **Conductance** and **Susceptance** values. You
         can use the return values of this function as inputs to
@@ -2797,7 +2797,7 @@ For the NI 4082 and NI 4072 only, performs the open cable compensation
     def perform_short_cable_comp(self):
         '''perform_short_cable_comp
 
-Performs the short cable compensation measurements for the current
+        Performs the short cable compensation measurements for the current
         capacitance/inductance range, and returns short cable compensation
         **Resistance** and **Reactance** values. You can use the return values
         of this function as inputs to configure_short_cable_comp_values.
@@ -2821,7 +2821,7 @@ Performs the short cable compensation measurements for the current
     def read(self, maximum_time):
         '''read
 
-Acquires a single measurement and returns the measured value.
+        Acquires a single measurement and returns the measured value.
 
         Args:
             maximum_time (ViInt32):Specifies the **maximum_time** allowed for this function to complete in
@@ -2846,7 +2846,7 @@ Acquires a single measurement and returns the measured value.
     def read_multi_point(self, maximum_time, array_size):
         '''read_multi_point
 
-Acquires multiple measurements and returns an array of measured values.
+        Acquires multiple measurements and returns an array of measured values.
         The number of measurements the DMM makes is determined by the values you
         specify for the **Trigger_Count** and **Sample_Count** parameters in
         configure_multi_point.
@@ -2887,7 +2887,7 @@ Acquires multiple measurements and returns an array of measured values.
     def read_status(self):
         '''read_status
 
-Returns measurement backlog and acquisition status. Use this function to
+        Returns measurement backlog and acquisition status. Use this function to
         determine how many measurements are available before calling
         fetch, fetch_multi_point, or fetch_waveform.
 
@@ -2928,7 +2928,7 @@ Returns measurement backlog and acquisition status. Use this function to
     def read_waveform(self, maximum_time, array_size):
         '''read_waveform
 
-For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
+        For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
         and returns data as an array of values or as a waveform data type. The
         number of elements in the **Waveform_Array** is determined by the
         values you specify for the **Waveform_Points** parameter in
@@ -2967,7 +2967,7 @@ For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
     def reset_interchange_check(self):
         '''reset_interchange_check
 
-When developing a complex test system that consists of multiple test
+        When developing a complex test system that consists of multiple test
         modules, it is generally a good idea to design the test modules so that
         they can run in any order. To do so requires ensuring that each test
         module completely configures the state of each instrument it uses.
@@ -3002,7 +3002,7 @@ When developing a complex test system that consists of multiple test
     def reset_with_defaults(self):
         '''reset_with_defaults
 
-Resets the instrument to a known state and sends initialization commands
+        Resets the instrument to a known state and sends initialization commands
         to the DMM. The initialization commands set the DMM settings to the
         state necessary for the operation of NI-DMM. All user-defined default
         values associated with a logical name are applied after setting the DMM.
@@ -3014,7 +3014,7 @@ Resets the instrument to a known state and sends initialization commands
     def self_cal(self):
         '''self_cal
 
-For the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the
+        For the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the
         self-calibration routine to maintain measurement accuracy.
 
         Note:
@@ -3029,7 +3029,7 @@ For the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the
     def send_software_trigger(self):
         '''send_software_trigger
 
-Sends a command to trigger the DMM. Call this function if you have
+        Sends a command to trigger the DMM. Call this function if you have
         configured either the TRIGGER_SOURCE or
         SAMPLE_TRIGGER attributes. If the
         TRIGGER_SOURCE and/or SAMPLE_TRIGGER
@@ -3044,7 +3044,7 @@ Sends a command to trigger the DMM. Call this function if you have
     def _set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
-This function sets the value of a ViBoolean attribute.
+        This function sets the value of a ViBoolean attribute.
 
         This is a low-level function that you can use to set the values of
         instrument-specific attributes and inherent IVI attributes.
@@ -3087,7 +3087,7 @@ This function sets the value of a ViBoolean attribute.
     def _set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
-This function sets the value of a ViInt32 attribute.
+        This function sets the value of a ViInt32 attribute.
 
         This is a low-level function that you can use to set the values of
         instrument-specific attributes and inherent IVI attributes.
@@ -3130,7 +3130,7 @@ This function sets the value of a ViInt32 attribute.
     def _set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
-This function sets the value of a ViReal64 attribute.
+        This function sets the value of a ViReal64 attribute.
 
         This is a low-level function that you can use to set the values of
         instrument-specific attributes and inherent IVI attributes.
@@ -3173,7 +3173,7 @@ This function sets the value of a ViReal64 attribute.
     def _set_attribute_vi_session(self, channel_name, attribute_id, attribute_value):
         '''_set_attribute_vi_session
 
-This function sets the value of a ViSession attribute.
+        This function sets the value of a ViSession attribute.
 
         This is a low-level function that you can use to set the values of
         instrument-specific attributes and inherent IVI attributes.
@@ -3203,7 +3203,7 @@ This function sets the value of a ViSession attribute.
     def _set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
-This function sets the value of a ViString attribute.
+        This function sets the value of a ViString attribute.
 
         This is a low-level function that you can use to set the values of
         instrument-specific attributes and inherent IVI attributes.
@@ -3246,7 +3246,7 @@ This function sets the value of a ViString attribute.
     def _unlock_session(self):
         '''_unlock_session
 
-This function releases a lock that you acquired on an instrument session
+        This function releases a lock that you acquired on an instrument session
         using _lock_session. Refer to _lock_session for additional
         information on session locks.
 
@@ -3337,7 +3337,7 @@ This function releases a lock that you acquired on an instrument session
     def _close(self):
         '''_close
 
-Closes the specified session and deallocates resources that it reserved.
+        Closes the specified session and deallocates resources that it reserved.
         '''
         error_code = self.library.niDMM_close(self.vi)
         errors._handle_error(self, error_code)
@@ -3346,7 +3346,7 @@ Closes the specified session and deallocates resources that it reserved.
     def error_message(self, error_code):
         '''error_message
 
-Takes the **Error_Code** returned by the instrument driver functions,
+        Takes the **Error_Code** returned by the instrument driver functions,
         interprets it, and returns it as a user-readable string.
 
         Args:
@@ -3364,7 +3364,7 @@ Takes the **Error_Code** returned by the instrument driver functions,
     def error_query(self):
         '''error_query
 
-Reads an **Error_Code** and message from the DMM error queue. National
+        Reads an **Error_Code** and message from the DMM error queue. National
         Instruments DMMs do not contain an error queue. Errors are reported as
         they occur. Therefore, this function does not detect errors; it is
         included for compliance with the *IviDmm Class Specification*.
@@ -3386,7 +3386,7 @@ Reads an **Error_Code** and message from the DMM error queue. National
     def reset(self):
         '''reset
 
-Resets the instrument to a known state and sends initialization commands
+        Resets the instrument to a known state and sends initialization commands
         to the instrument. The initialization commands set instrument settings
         to the state necessary for the operation of the instrument driver.
         '''
@@ -3397,7 +3397,7 @@ Resets the instrument to a known state and sends initialization commands
     def revision_query(self):
         '''revision_query
 
-Returns the revision numbers of the instrument driver and instrument
+        Returns the revision numbers of the instrument driver and instrument
         firmware.
 
         Returns:
@@ -3419,7 +3419,7 @@ Returns the revision numbers of the instrument driver and instrument
     def self_test(self):
         '''self_test
 
-Performs a self-test on the DMM to ensure that the DMM is functioning
+        Performs a self-test on the DMM to ensure that the DMM is functioning
         properly. Self-test does not calibrate the DMM.
 
         Note:

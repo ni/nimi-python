@@ -226,7 +226,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
     def ${f['python_name']}(${helper.get_method_parameters_snippet(parameters, skip_session_handle = True, skip_output_parameters = True, skip_ivi_dance_size_parameter = True)}):
         '''${f['python_name']}
 
-${helper.get_function_docstring(func_name, config, indent=8)}
+        ${helper.get_function_docstring(func_name, config, indent=8)}
         '''
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
