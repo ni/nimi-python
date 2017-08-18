@@ -36,7 +36,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Max Frequency**
             - C Attribute: **NIDMM_ATTR_AC_MAX_FREQ**
@@ -64,7 +64,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Min Frequency**
             - C Attribute: **NIDMM_ATTR_AC_MIN_FREQ**
@@ -89,7 +89,7 @@ NI-DMM Attributes
     +----------------+---------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:ADC Calibration**
             - C Attribute: **NIDMM_ATTR_ADC_CALIBRATION**
@@ -134,7 +134,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Advanced:Aperture Time**
             - C Attribute: **NIDMM_ATTR_APERTURE_TIME**
@@ -162,7 +162,7 @@ NI-DMM Attributes
     +----------------+------------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Advanced:Aperture Time Units**
             - C Attribute: **NIDMM_ATTR_APERTURE_TIME_UNITS**
@@ -188,7 +188,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Auto Range Value**
             - C Attribute: **NIDMM_ATTR_AUTO_RANGE_VALUE**
@@ -213,7 +213,7 @@ NI-DMM Attributes
     +----------------+---------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Auto Zero**
             - C Attribute: **NIDMM_ATTR_AUTO_ZERO**
@@ -239,7 +239,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Advanced:Buffer Size**
             - C Attribute: **NIDMM_ATTR_BUFFER_SIZE**
@@ -253,6 +253,9 @@ NI-DMM Attributes
 
 
     .. note:: Changing the function or the range using property nodes or through
+        `niDMM Config
+        Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
+        this property to the default value.
 
     The following table lists the characteristics of this property.
 
@@ -269,7 +272,7 @@ NI-DMM Attributes
     +----------------+----------------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**
             - C Attribute: **NIDMM_ATTR_CABLE_COMP_TYPE**
@@ -301,7 +304,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
             - C Attribute: **NIDMM_ATTR_CACHE**
@@ -328,7 +331,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Capabilities:Channel Count**
             - C Attribute: **NIDMM_ATTR_CHANNEL_COUNT**
@@ -352,7 +355,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
             - C Attribute: **NIDMM_ATTR_CONFIG_PRODUCT_NUMBER**
@@ -378,7 +381,7 @@ NI-DMM Attributes
     +----------------+--------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Current Source**
             - C Attribute: **NIDMM_ATTR_CURRENT_SOURCE**
@@ -403,7 +406,7 @@ NI-DMM Attributes
     +----------------+-------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias**
             - C Attribute: **NIDMM_ATTR_DC_BIAS**
@@ -431,7 +434,7 @@ NI-DMM Attributes
     +----------------+-----------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:DC Noise Rejection**
             - C Attribute: **NIDMM_ATTR_DC_NOISE_REJECTION**
@@ -464,7 +467,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Driver Setup**
             - C Attribute: **NIDMM_ATTR_DRIVER_SETUP**
@@ -488,7 +491,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Major Version**
             - C Attribute: **NIDMM_ATTR_ENGINE_MAJOR_VERSION**
@@ -512,7 +515,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Minor Version**
             - C Attribute: **NIDMM_ATTR_ENGINE_MINOR_VERSION**
@@ -537,7 +540,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Revision**
             - C Attribute: **NIDMM_ATTR_ENGINE_REVISION**
@@ -562,7 +565,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Error Info:Error Elaboration**
             - C Attribute: **NIDMM_ATTR_ERROR_ELABORATION**
@@ -589,7 +592,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
             - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_AUTO_RANGE_VALUE**
@@ -620,7 +623,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Range**
             - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_RANGE**
@@ -652,7 +655,7 @@ NI-DMM Attributes
     +----------------+---------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Function**
             - C Attribute: **NIDMM_ATTR_FUNCTION**
@@ -677,7 +680,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities**
             - C Attribute: **NIDMM_ATTR_GROUP_CAPABILITIES**
@@ -701,7 +704,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Misc:IDQuery response**
             - C Attribute: **NIDMM_ATTR_IDQUERY_RESPONSE**
@@ -729,7 +732,7 @@ NI-DMM Attributes
     +----------------+----------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Input Resistance**
             - C Attribute: **NIDMM_ATTR_INPUT_RESISTANCE**
@@ -753,7 +756,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision**
             - C Attribute: **NIDMM_ATTR_INSTRUMENT_FIRMWARE_REVISION**
@@ -777,7 +780,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer**
             - C Attribute: **NIDMM_ATTR_INSTRUMENT_MANUFACTURER**
@@ -801,7 +804,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Model**
             - C Attribute: **NIDMM_ATTR_INSTRUMENT_MODEL**
@@ -814,9 +817,7 @@ NI-DMM Attributes
     instrument might cause different behavior. Use `niDMM Get Next
     Interchange
     Warning <dmmviref.chm::/niDMM_Get_Next_Interchange_Warning.html>`__ to
-    extract interchange warnings. Use
-
-    `niDMM Clear Interchange
+    extract interchange warnings. Use `niDMM Clear Interchange
     Warnings <dmmviref.chm::/niDMM_Clear_Interchange_Warnings.html>`__ to
     clear the list of interchangeability warnings without reading them.
     Interchangeability checking examines the properties in a capability
@@ -846,7 +847,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
             - C Attribute: **NIDMM_ATTR_INTERCHANGE_CHECK**
@@ -870,7 +871,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**
             - C Attribute: **NIDMM_ATTR_IO_RESOURCE_DESCRIPTOR**
@@ -896,7 +897,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Advanced:Latency**
             - C Attribute: **NIDMM_ATTR_LATENCY**
@@ -922,7 +923,7 @@ NI-DMM Attributes
     +----------------+-------------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model**
             - C Attribute: **NIDMM_ATTR_LC_CALCULATION_MODEL**
@@ -947,7 +948,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**
             - C Attribute: **NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE**
@@ -971,7 +972,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
             - C Attribute: **NIDMM_ATTR_LOGICAL_NAME**
@@ -981,9 +982,8 @@ NI-DMM Attributes
     Specifies the destination of the measurement complete (MC) signal.
 
     To determine which values are supported by each device, refer to the
-
     `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-    in the *NI Digital Multimeters Help*
+    in the *NI Digital Multimeters Help*.
 
 
 
@@ -1004,7 +1004,7 @@ NI-DMM Attributes
     +----------------+------------------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Trigger:Measurement Complete Dest**
             - C Attribute: **NIDMM_ATTR_MEAS_COMPLETE_DEST**
@@ -1028,7 +1028,7 @@ NI-DMM Attributes
     +----------------+----------------------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Trigger:Measurement Destination Slope**
             - C Attribute: **NIDMM_ATTR_MEAS_DEST_SLOPE**
@@ -1058,7 +1058,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Advanced:Number Of Averages**
             - C Attribute: **NIDMM_ATTR_NUMBER_OF_AVERAGES**
@@ -1083,7 +1083,7 @@ NI-DMM Attributes
     +----------------+----------------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Offset Compensated Ohms**
             - C Attribute: **NIDMM_ATTR_OFFSET_COMP_OHMS**
@@ -1098,6 +1098,9 @@ NI-DMM Attributes
 
 
     .. note:: Changing the function or the range using property nodes or through
+        `niDMM Config
+        Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
+        this property to the default value.
 
     The following table lists the characteristics of this property.
 
@@ -1114,7 +1117,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**
             - C Attribute: **NIDMM_ATTR_OPEN_CABLE_COMP_CONDUCTANCE**
@@ -1129,6 +1132,9 @@ NI-DMM Attributes
 
 
     .. note:: Changing the function or the range using property nodes or through
+        `niDMM Config
+        Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
+        this property to the default value.
 
     The following table lists the characteristics of this property.
 
@@ -1145,7 +1151,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**
             - C Attribute: **NIDMM_ATTR_OPEN_CABLE_COMP_SUSCEPTANCE**
@@ -1154,9 +1160,7 @@ NI-DMM Attributes
 
     Specifies how the DMM acquires data.
 
-    When you call
-
-    `niDMM Config
+    When you call `niDMM Config
     Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__, NI-DMM
     sets this property to IVIDMM Mode. When you call `niDMM Configure
     Waveform
@@ -1184,7 +1188,7 @@ NI-DMM Attributes
     +----------------+--------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Advanced:Operation Mode**
             - C Attribute: **NIDMM_ATTR_OPERATION_MODE**
@@ -1224,7 +1228,7 @@ NI-DMM Attributes
     +----------------+-------------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Powerline Frequency**
             - C Attribute: **NIDMM_ATTR_POWERLINE_FREQ**
@@ -1253,7 +1257,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Error Info:Primary Error**
             - C Attribute: **NIDMM_ATTR_PRIMARY_ERROR**
@@ -1285,7 +1289,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
             - C Attribute: **NIDMM_ATTR_QUERY_INSTRUMENT_STATUS**
@@ -1306,7 +1310,8 @@ NI-DMM Attributes
     | (-3.0) | Auto Range Once | NI-DMM performs an Auto Range before acquiring the next measurement. The `Auto Range Value <pnidmm_AutoRangeValue.html>`__ is stored and used for all subsequent measurements until the measurement configuration is changed. |
     +--------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-    .. note:: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the trigger and sample trigger are set to Immediate.
+    .. note:: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
+        trigger and sample trigger are set to Immediate.
 
     The following table lists the characteristics of this property.
 
@@ -1323,7 +1328,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Range**
             - C Attribute: **NIDMM_ATTR_RANGE**
@@ -1354,7 +1359,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Range Check**
             - C Attribute: **NIDMM_ATTR_RANGE_CHECK**
@@ -1365,9 +1370,7 @@ NI-DMM Attributes
     makes for ViInt32 and ViReal64 properties. The default value is FALSE
     (0). Use `niDMM Initialize With
     Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
-    override the default setting. Use
-
-    `niDMM Get Next Coercion
+    override the default setting. Use `niDMM Get Next Coercion
     Record <dmmviref.chm::/niDMM_Get_Next_Coercion_Record.html>`__ to
     extract and delete the oldest coercion record from the list.
 
@@ -1386,7 +1389,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
             - C Attribute: **NIDMM_ATTR_RECORD_COERCIONS**
@@ -1399,7 +1402,9 @@ NI-DMM Attributes
 
 
 
-    .. note:: NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
+    .. note:: NI-DMM ignores this property for capacitance and inductance measurements
+        on the NI 4082 and NI 4072. To achieve better resolution for such
+        measurements, use the Number of LC Measurements to Average property.
 
     The following table lists the characteristics of this property.
 
@@ -1416,7 +1421,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Absolute Resolution**
             - C Attribute: **NIDMM_ATTR_RESOLUTION_ABSOLUTE**
@@ -1429,7 +1434,10 @@ NI-DMM Attributes
 
 
 
-    .. note:: NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the
+    .. note:: NI-DMM ignores this property for capacitance and inductance measurements
+        on the NI 4082 and NI 4072. To achieve better resolution for such
+        measurements, use the `Number of LC Measurements to
+        Average <pniDMM_NumberofLCMeasurementsToAverage.html>`__ property.
 
     The following table lists the characteristics of this property.
 
@@ -1446,7 +1454,7 @@ NI-DMM Attributes
     +----------------+-----------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Digits Resolution**
             - C Attribute: **NIDMM_ATTR_RESOLUTION_DIGITS**
@@ -1476,7 +1484,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Count**
             - C Attribute: **NIDMM_ATTR_SAMPLE_COUNT**
@@ -1506,7 +1514,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Delay Mode**
             - C Attribute: **NIDMM_ATTR_SAMPLE_DELAY_MODE**
@@ -1549,7 +1557,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Interval**
             - C Attribute: **NIDMM_ATTR_SAMPLE_INTERVAL**
@@ -1559,9 +1567,8 @@ NI-DMM Attributes
     Specifies the sample trigger source.
 
     To determine which values are supported by each device, refer to the
-
     `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-    in the *NI Digital Multimeters Help*
+    in the *NI Digital Multimeters Help*.
 
     The following table lists the characteristics of this property.
 
@@ -1578,7 +1585,7 @@ NI-DMM Attributes
     +----------------+--------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Trigger**
             - C Attribute: **NIDMM_ATTR_SAMPLE_TRIGGER**
@@ -1603,7 +1610,7 @@ NI-DMM Attributes
     +----------------+----------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Trig Slope**
             - C Attribute: **NIDMM_ATTR_SAMPLE_TRIGGER_SLOPE**
@@ -1630,7 +1637,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Error Info:Secondary Error**
             - C Attribute: **NIDMM_ATTR_SECONDARY_ERROR**
@@ -1656,7 +1663,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**
             - C Attribute: **NIDMM_ATTR_SERIAL_NUMBER**
@@ -1686,7 +1693,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Advanced:Settle Time**
             - C Attribute: **NIDMM_ATTR_SETTLE_TIME**
@@ -1700,7 +1707,9 @@ NI-DMM Attributes
 
 
 
-    .. note:: Changing the VI or the range through this property or through
+    .. note:: Changing the VI or the range through this property or through `niDMM
+        Config Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__
+        resets this property to the default value.
 
     The following table lists the characteristics of this property.
 
@@ -1717,7 +1726,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**
             - C Attribute: **NIDMM_ATTR_SHORT_CABLE_COMP_REACTANCE**
@@ -1731,7 +1740,9 @@ NI-DMM Attributes
 
 
 
-    .. note:: Changing the VI or the range through this property or through
+    .. note:: Changing the VI or the range through this property or through `niDMM
+        Config Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__
+        resets this property to the default value.
 
     The following table lists the characteristics of this property.
 
@@ -1748,7 +1759,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
             - C Attribute: **NIDMM_ATTR_SHORT_CABLE_COMP_RESISTANCE**
@@ -1759,7 +1770,9 @@ NI-DMM Attributes
 
 
 
-    .. note:: The NI 4050 requires an external shunt resistor for current measurements. This property should be set to the value of the shunt resistor.
+    .. note:: The NI 4050 requires an external shunt resistor for current
+        measurements. This property should be set to the value of the shunt
+        resistor.
 
     The following table lists the characteristics of this property.
 
@@ -1776,7 +1789,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Shunt Value**
             - C Attribute: **NIDMM_ATTR_SHUNT_VALUE**
@@ -1794,7 +1807,9 @@ NI-DMM Attributes
 
 
 
-    .. note:: Simulate can only be set within the
+    .. note:: Simulate can only be set within the `niDMM Initialize With
+        Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ VI. The
+        property value cannot be changed outside of the VI.
 
     The following table lists the characteristics of this property.
 
@@ -1811,7 +1826,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
             - C Attribute: **NIDMM_ATTR_SIMULATE**
@@ -1836,7 +1851,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version**
             - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION**
@@ -1861,7 +1876,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version**
             - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION**
@@ -1885,7 +1900,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description**
             - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
@@ -1909,7 +1924,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Major Version**
             - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_MAJOR_VERSION**
@@ -1933,7 +1948,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Minor Version**
             - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_MINOR_VERSION**
@@ -1959,7 +1974,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix**
             - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_PREFIX**
@@ -1984,7 +1999,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Revision**
             - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_REVISION**
@@ -2008,7 +2023,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor**
             - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_VENDOR**
@@ -2033,7 +2048,7 @@ NI-DMM Attributes
     +----------------+-----------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models**
             - C Attribute: **NIDMM_ATTR_SUPPORTED_INSTRUMENT_MODELS**
@@ -2041,7 +2056,7 @@ NI-DMM Attributes
 .. py:attribute:: temp_rtd_a
 
     Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
-    **RTD Type property**
+    **RTD Type property** is set to Custom.
 
     The following table lists the characteristics of this property.
 
@@ -2058,7 +2073,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**
             - C Attribute: **NIDMM_ATTR_TEMP_RTD_A**
@@ -2066,7 +2081,7 @@ NI-DMM Attributes
 .. py:attribute:: temp_rtd_b
 
     Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
-    **RTD Type property**
+    **RTD Type property** is set to Custom.
 
     The following table lists the characteristics of this property.
 
@@ -2083,7 +2098,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**
             - C Attribute: **NIDMM_ATTR_TEMP_RTD_B**
@@ -2091,7 +2106,7 @@ NI-DMM Attributes
 .. py:attribute:: temp_rtd_c
 
     Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
-    **RTD Type property**
+    **RTD Type property** is set to Custom.
 
     The following table lists the characteristics of this property.
 
@@ -2108,7 +2123,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**
             - C Attribute: **NIDMM_ATTR_TEMP_RTD_C**
@@ -2132,7 +2147,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**
             - C Attribute: **NIDMM_ATTR_TEMP_RTD_RES**
@@ -2156,7 +2171,7 @@ NI-DMM Attributes
     +----------------+--------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**
             - C Attribute: **NIDMM_ATTR_TEMP_RTD_TYPE**
@@ -2181,7 +2196,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction**
             - C Attribute: **NIDMM_ATTR_TEMP_TC_FIXED_REF_JUNC**
@@ -2205,7 +2220,7 @@ NI-DMM Attributes
     +----------------+----------------------------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type**
             - C Attribute: **NIDMM_ATTR_TEMP_TC_REF_JUNC_TYPE**
@@ -2229,7 +2244,7 @@ NI-DMM Attributes
     +----------------+-----------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**
             - C Attribute: **NIDMM_ATTR_TEMP_TC_TYPE**
@@ -2237,7 +2252,7 @@ NI-DMM Attributes
 .. py:attribute:: temp_thermistor_a
 
     Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-    the **Thermistor Type property**
+    the **Thermistor Type property** is set to Custom.
 
     The following table lists the characteristics of this property.
 
@@ -2254,7 +2269,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor A**
             - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_A**
@@ -2262,7 +2277,7 @@ NI-DMM Attributes
 .. py:attribute:: temp_thermistor_b
 
     Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-    the **Thermistor Type property**
+    the **Thermistor Type property** is set to Custom.
 
     The following table lists the characteristics of this property.
 
@@ -2279,7 +2294,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor B**
             - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_B**
@@ -2287,7 +2302,7 @@ NI-DMM Attributes
 .. py:attribute:: temp_thermistor_c
 
     Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-    the **Thermistor Type property**
+    the **Thermistor Type property** is set to Custom.
 
     The following table lists the characteristics of this property.
 
@@ -2304,7 +2319,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor C**
             - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_C**
@@ -2328,7 +2343,7 @@ NI-DMM Attributes
     +----------------+---------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type**
             - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_TYPE**
@@ -2352,7 +2367,7 @@ NI-DMM Attributes
     +----------------+---------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Transducer Type**
             - C Attribute: **NIDMM_ATTR_TEMP_TRANSDUCER_TYPE**
@@ -2365,10 +2380,8 @@ NI-DMM Attributes
 
     The NI 4050/4060 only support this property being set to 1.
 
-    Refer to
-
-    `Multiple Point Acquisitions <dmm.chm::/multi_point.html>`__ in the *NI
-    Digital Multimeters Help*
+    Refer to `Multiple Point Acquisitions <dmm.chm::/multi_point.html>`__ in
+    the *NI Digital Multimeters Help* for more information.
 
     The following table lists the characteristics of this property.
 
@@ -2385,7 +2398,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Trigger Count**
             - C Attribute: **NIDMM_ATTR_TRIGGER_COUNT**
@@ -2436,7 +2449,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Trigger:Trigger Delay**
             - C Attribute: **NIDMM_ATTR_TRIGGER_DELAY**
@@ -2461,7 +2474,7 @@ NI-DMM Attributes
     +----------------+-------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Trigger:Trigger Slope**
             - C Attribute: **NIDMM_ATTR_TRIGGER_SLOPE**
@@ -2472,14 +2485,12 @@ NI-DMM Attributes
     Initiate <dmmviref.chm::/niDMM_Initiate.html>`__ is called, the DMM
     waits for the trigger specified with this property. After it receives
     the trigger, the DMM waits the length of time specified with the
-
     `Trigger Delay <pnidmm_TriggerDelay.html>`__ property. The DMM then
     takes a measurement.
 
     To determine which values are supported by each device, refer to the
-
     `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-    in the *NI Digital Multimeters Help*
+    in the *NI Digital Multimeters Help*.
 
     The following table lists the characteristics of this property.
 
@@ -2496,7 +2507,7 @@ NI-DMM Attributes
     +----------------+--------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Trigger:Trigger Source**
             - C Attribute: **NIDMM_ATTR_TRIGGER_SOURCE**
@@ -2521,7 +2532,7 @@ NI-DMM Attributes
     +----------------+-----------------------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Waveform Acquisition:Waveform Coupling**
             - C Attribute: **NIDMM_ATTR_WAVEFORM_COUPLING**
@@ -2546,7 +2557,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Waveform Acquisition:Waveform Points**
             - C Attribute: **NIDMM_ATTR_WAVEFORM_POINTS**
@@ -2574,7 +2585,7 @@ NI-DMM Attributes
     +----------------+------------+
 
     .. tip:: 
-        This attribute corresponds to the following LabVIEW Property or C Attribute:
+        This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Waveform Acquisition:Waveform Rate**
             - C Attribute: **NIDMM_ATTR_WAVEFORM_RATE**

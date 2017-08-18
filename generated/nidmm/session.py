@@ -184,7 +184,11 @@ class Session(object):
     compensation that is applied to the current capacitance or inductance
     measurement for the current range.
 
-    Note: Changing the function or the range using property nodes or through
+    Note:
+    Changing the function or the range using property nodes or through
+    `niDMM Config
+    Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
+    this property to the default value.
     '''
     cache = AttributeViBoolean(1050004)
     '''
@@ -322,9 +326,7 @@ class Session(object):
     instrument might cause different behavior. Use `niDMM Get Next
     Interchange
     Warning <dmmviref.chm::/niDMM_Get_Next_Interchange_Warning.html>`__ to
-    extract interchange warnings. Use
-
-    `niDMM Clear Interchange
+    extract interchange warnings. Use `niDMM Clear Interchange
     Warnings <dmmviref.chm::/niDMM_Clear_Interchange_Warnings.html>`__ to
     clear the list of interchangeability warnings without reading them.
     Interchangeability checking examines the properties in a capability
@@ -369,9 +371,8 @@ class Session(object):
     Specifies the destination of the measurement complete (MC) signal.
 
     To determine which values are supported by each device, refer to the
-
     `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-    in the *NI Digital Multimeters Help*
+    in the *NI Digital Multimeters Help*.
 
     Note: The NI 4050 is not supported.
     '''
@@ -401,7 +402,11 @@ class Session(object):
     real number >0. The default value (-1.0) indicates that compensation has
     not taken place.
 
-    Note: Changing the function or the range using property nodes or through
+    Note:
+    Changing the function or the range using property nodes or through
+    `niDMM Config
+    Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
+    this property to the default value.
     '''
     open_cable_comp_susceptance = AttributeViReal64(1150048)
     '''
@@ -410,15 +415,17 @@ class Session(object):
     real number >0. The default value (-1.0) indicates that compensation has
     not taken place.
 
-    Note: Changing the function or the range using property nodes or through
+    Note:
+    Changing the function or the range using property nodes or through
+    `niDMM Config
+    Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
+    this property to the default value.
     '''
     operation_mode = AttributeEnum(1150014, enums.OperationMode)
     '''
     Specifies how the DMM acquires data.
 
-    When you call
-
-    `niDMM Config
+    When you call `niDMM Config
     Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__, NI-DMM
     sets this property to IVIDMM Mode. When you call `niDMM Configure
     Waveform
@@ -484,7 +491,9 @@ class Session(object):
     | (-3.0) | Auto Range Once | NI-DMM performs an Auto Range before acquiring the next measurement. The `Auto Range Value <pnidmm_AutoRangeValue.html>`__ is stored and used for all subsequent measurements until the measurement configuration is changed. |
     +--------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-    Note: The NI 4050, NI 4060, and NI 4065 only support Auto Range when the trigger and sample trigger are set to Immediate.
+    Note:
+    The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
+    trigger and sample trigger are set to Immediate.
     '''
     range_check = AttributeViBoolean(1050002)
     '''
@@ -503,9 +512,7 @@ class Session(object):
     makes for ViInt32 and ViReal64 properties. The default value is FALSE
     (0). Use `niDMM Initialize With
     Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
-    override the default setting. Use
-
-    `niDMM Get Next Coercion
+    override the default setting. Use `niDMM Get Next Coercion
     Record <dmmviref.chm::/niDMM_Get_Next_Coercion_Record.html>`__ to
     extract and delete the oldest coercion record from the list.
     '''
@@ -515,7 +522,10 @@ class Session(object):
     property to higher values increases the measurement accuracy. Setting
     this property to lower values increases the measurement speed.
 
-    Note: NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.
+    Note:
+    NI-DMM ignores this property for capacitance and inductance measurements
+    on the NI 4082 and NI 4072. To achieve better resolution for such
+    measurements, use the Number of LC Measurements to Average property.
     '''
     resolution_digits = AttributeEnum(1250003, enums.DigitsResolution)
     '''
@@ -523,7 +533,11 @@ class Session(object):
     higher values increases the measurement accuracy. Setting this property
     to lower values increases the measurement speed.
 
-    Note: NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the
+    Note:
+    NI-DMM ignores this property for capacitance and inductance measurements
+    on the NI 4082 and NI 4072. To achieve better resolution for such
+    measurements, use the `Number of LC Measurements to
+    Average <pniDMM_NumberofLCMeasurementsToAverage.html>`__ property.
     '''
     sample_count = AttributeViInt32(1250301)
     '''
@@ -571,9 +585,8 @@ class Session(object):
     Specifies the sample trigger source.
 
     To determine which values are supported by each device, refer to the
-
     `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-    in the *NI Digital Multimeters Help*
+    in the *NI Digital Multimeters Help*.
     '''
     sample_trigger_slope = AttributeEnum(1150010, enums.SampleTrigSlope)
     '''
@@ -608,7 +621,10 @@ class Session(object):
     number >0. The default value (-1) indicates that compensation has not
     taken place.
 
-    Note: Changing the VI or the range through this property or through
+    Note:
+    Changing the VI or the range through this property or through `niDMM
+    Config Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__
+    resets this property to the default value.
     '''
     short_cable_comp_resistance = AttributeViReal64(1150047)
     '''
@@ -617,13 +633,19 @@ class Session(object):
     real number >0. The default value (-1) indicates that compensation has
     not taken place.
 
-    Note: Changing the VI or the range through this property or through
+    Note:
+    Changing the VI or the range through this property or through `niDMM
+    Config Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__
+    resets this property to the default value.
     '''
     shunt_value = AttributeViReal64(1150003)
     '''
     For the NI 4050 only, specifies the shunt resistance value.
 
-    Note: The NI 4050 requires an external shunt resistor for current measurements. This property should be set to the value of the shunt resistor.
+    Note:
+    The NI 4050 requires an external shunt resistor for current
+    measurements. This property should be set to the value of the shunt
+    resistor.
     '''
     simulate = AttributeViBoolean(1050005)
     '''
@@ -636,7 +658,10 @@ class Session(object):
     Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
     override the default setting.
 
-    Note: Simulate can only be set within the
+    Note:
+    Simulate can only be set within the `niDMM Initialize With
+    Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ VI. The
+    property value cannot be changed outside of the VI.
     '''
     specific_driver_class_spec_major_version = AttributeViInt32(1050515)
     '''
@@ -683,17 +708,17 @@ class Session(object):
     temp_rtd_a = AttributeViReal64(1150121)
     '''
     Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
-    **RTD Type property**
+    **RTD Type property** is set to Custom.
     '''
     temp_rtd_b = AttributeViReal64(1150122)
     '''
     Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
-    **RTD Type property**
+    **RTD Type property** is set to Custom.
     '''
     temp_rtd_c = AttributeViReal64(1150123)
     '''
     Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
-    **RTD Type property**
+    **RTD Type property** is set to Custom.
     '''
     temp_rtd_res = AttributeViReal64(1250242)
     '''
@@ -719,17 +744,17 @@ class Session(object):
     temp_thermistor_a = AttributeViReal64(1150125)
     '''
     Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-    the **Thermistor Type property**
+    the **Thermistor Type property** is set to Custom.
     '''
     temp_thermistor_b = AttributeViReal64(1150126)
     '''
     Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-    the **Thermistor Type property**
+    the **Thermistor Type property** is set to Custom.
     '''
     temp_thermistor_c = AttributeViReal64(1150127)
     '''
     Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-    the **Thermistor Type property**
+    the **Thermistor Type property** is set to Custom.
     '''
     temp_thermistor_type = AttributeEnum(1150124, enums.ThermistorType)
     '''
@@ -747,10 +772,8 @@ class Session(object):
 
     The NI 4050/4060 only support this property being set to 1.
 
-    Refer to
-
-    `Multiple Point Acquisitions <dmm.chm::/multi_point.html>`__ in the *NI
-    Digital Multimeters Help*
+    Refer to `Multiple Point Acquisitions <dmm.chm::/multi_point.html>`__ in
+    the *NI Digital Multimeters Help* for more information.
     '''
     trigger_delay = AttributeViReal64(1250005)
     '''
@@ -794,14 +817,12 @@ class Session(object):
     Initiate <dmmviref.chm::/niDMM_Initiate.html>`__ is called, the DMM
     waits for the trigger specified with this property. After it receives
     the trigger, the DMM waits the length of time specified with the
-
     `Trigger Delay <pnidmm_TriggerDelay.html>`__ property. The DMM then
     takes a measurement.
 
     To determine which values are supported by each device, refer to the
-
     `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-    in the *NI Digital Multimeters Help*
+    in the *NI Digital Multimeters Help*.
     '''
     waveform_coupling = AttributeEnum(1150027, enums.WaveformCoupling)
     '''
