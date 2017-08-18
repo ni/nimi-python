@@ -198,3 +198,15 @@ def test_writeonly_attribute(device_info):
             assert e.code == -1074135027 #Error : Attribute is read-only.
 
 
+def test_invalid_value_attribute(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        try:
+            session.settle_time = "q"
+        except nidmm.Error as e:
+            assert e.code == -1074135024 #Error : Invalid value for parameter or property.
+
+
+def test_ViInt32_output_function(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        assert isinstance(session.get_cal_count(0), int) #TODO: when enum for cal_type is added, replace 0 with Internal or External
+
