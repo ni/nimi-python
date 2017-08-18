@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 # This file was generated
 import ctypes
 
@@ -517,300 +517,722 @@ class Session(object):
     ''' These are code-generated '''
 
     def _abort_scan(self):
+        '''_abort_scan
+
+        '''
         error_code = self.library.niSwitch_AbortScan(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def can_connect(self, channel1, channel2):
+        '''can_connect
+
+
+        Args:
+            channel1 (ViConstString):
+            channel2 (ViConstString):
+
+        Returns:
+            path_capability (ViInt32):
+        '''
         path_capability_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niSwitch_CanConnect(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), ctypes.pointer(path_capability_ctype))
         errors._handle_error(self, error_code)
         return path_capability_ctype.value
 
     def _clear_error(self):
+        '''_clear_error
+
+        '''
         error_code = self.library.niSwitch_ClearError(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def clear_interchange_warnings(self):
+        '''clear_interchange_warnings
+
+        '''
         error_code = self.library.niSwitch_ClearInterchangeWarnings(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def commit(self):
+        '''commit
+
+        '''
         error_code = self.library.niSwitch_Commit(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def configure_scan_list(self, scanlist, scan_mode):
+        '''configure_scan_list
+
+
+        Args:
+            scanlist (ViConstString):
+            scan_mode (ViInt32):
+        '''
         error_code = self.library.niSwitch_ConfigureScanList(self.vi, scanlist.encode('ascii'), scan_mode)
         errors._handle_error(self, error_code)
         return
 
     def configure_scan_trigger(self, scan_delay, trigger_input, scan_advanced_output):
+        '''configure_scan_trigger
+
+
+        Args:
+            scan_delay (ViReal64):
+            trigger_input (ViInt32):
+            scan_advanced_output (ViInt32):
+        '''
         error_code = self.library.niSwitch_ConfigureScanTrigger(self.vi, scan_delay, trigger_input, scan_advanced_output)
         errors._handle_error(self, error_code)
         return
 
     def connect(self, channel1, channel2):
+        '''connect
+
+
+        Args:
+            channel1 (ViConstString):
+            channel2 (ViConstString):
+        '''
         error_code = self.library.niSwitch_Connect(self.vi, channel1.encode('ascii'), channel2.encode('ascii'))
         errors._handle_error(self, error_code)
         return
 
     def connect_multiple(self, connection_list):
+        '''connect_multiple
+
+
+        Args:
+            connection_list (ViConstString):
+        '''
         error_code = self.library.niSwitch_ConnectMultiple(self.vi, connection_list.encode('ascii'))
         errors._handle_error(self, error_code)
         return
 
     def disable(self):
+        '''disable
+
+        '''
         error_code = self.library.niSwitch_Disable(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def disconnect(self, channel1, channel2):
+        '''disconnect
+
+
+        Args:
+            channel1 (ViConstString):
+            channel2 (ViConstString):
+        '''
         error_code = self.library.niSwitch_Disconnect(self.vi, channel1.encode('ascii'), channel2.encode('ascii'))
         errors._handle_error(self, error_code)
         return
 
     def disconnect_all(self):
+        '''disconnect_all
+
+        '''
         error_code = self.library.niSwitch_DisconnectAll(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def disconnect_multiple(self, disconnection_list):
+        '''disconnect_multiple
+
+
+        Args:
+            disconnection_list (ViConstString):
+        '''
         error_code = self.library.niSwitch_DisconnectMultiple(self.vi, disconnection_list.encode('ascii'))
         errors._handle_error(self, error_code)
         return
 
     def _get_attribute_vi_boolean(self, channel_name, attribute_id):
+        '''_get_attribute_vi_boolean
+
+
+        Args:
+            channel_name (ViConstString):
+            attribute_id (ViAttr):
+
+        Returns:
+            attribute_value (ViBoolean):
+        '''
         attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niSwitch_GetAttributeViBoolean(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors._handle_error(self, error_code)
         return attribute_value_ctype.value
 
     def _get_attribute_vi_int32(self, channel_name, attribute_id):
+        '''_get_attribute_vi_int32
+
+
+        Args:
+            channel_name (ViConstString):
+            attribute_id (ViAttr):
+
+        Returns:
+            attribute_value (ViInt32):
+        '''
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niSwitch_GetAttributeViInt32(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors._handle_error(self, error_code)
         return attribute_value_ctype.value
 
     def _get_attribute_vi_real64(self, channel_name, attribute_id):
+        '''_get_attribute_vi_real64
+
+
+        Args:
+            channel_name (ViConstString):
+            attribute_id (ViAttr):
+
+        Returns:
+            attribute_value (ViReal64):
+        '''
         attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niSwitch_GetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors._handle_error(self, error_code)
         return attribute_value_ctype.value
 
     def _get_attribute_vi_session(self, channel_name, attribute_id):
+        '''_get_attribute_vi_session
+
+
+        Args:
+            channel_name (ViConstString):
+            attribute_id (ViAttr):
+
+        Returns:
+            attribute_value (ViSession):
+        '''
         attribute_value_ctype = ctypes_types.ViSession_ctype(0)
         error_code = self.library.niSwitch_GetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors._handle_error(self, error_code)
         return attribute_value_ctype.value
 
-    def _get_attribute_vi_string(self, channel_name, attribute_id, array_size):
-        attribute_value_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, array_size, ctypes.pointer(attribute_value_ctype))
-        errors._handle_error(self, error_code)
-        return attribute_value_ctype.value
+    def _get_attribute_vi_string(self, channel_name, attribute_id):
+        '''_get_attribute_vi_string
 
-    def get_channel_name(self, index, buffer_size):
-        channel_name_buffer_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_GetChannelName(self.vi, index, buffer_size, ctypes.pointer(channel_name_buffer_ctype))
-        errors._handle_error(self, error_code)
-        return channel_name_buffer_ctype.value
 
-    def _get_error(self, buffersize):
+        Args:
+            channel_name (ViConstString):
+            attribute_id (ViAttr):
+            array_size (ViInt32):
+        '''
+        array_size = 0
+        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        array_size = error_code
+        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
+        errors._handle_error(self, error_code)
+        return attribute_value_ctype.value.decode("ascii")
+
+    def get_channel_name(self, index):
+        '''get_channel_name
+
+
+        Args:
+            index (ViInt32):
+            buffer_size (ViInt32):
+        '''
+        buffer_size = 0
+        channel_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetChannelName(self.vi, index, buffer_size, channel_name_buffer_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        buffer_size = error_code
+        channel_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetChannelName(self.vi, index, buffer_size, channel_name_buffer_ctype)
+        errors._handle_error(self, error_code)
+        return channel_name_buffer_ctype.value.decode("ascii")
+
+    def _get_error(self):
+        '''_get_error
+
+
+        Args:
+            buffersize (ViInt32):
+
+        Returns:
+            code (ViStatus):
+        '''
         code_ctype = ctypes_types.ViStatus_ctype(0)
-        description_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_GetError(self.vi, ctypes.pointer(code_ctype), buffersize, ctypes.pointer(description_ctype))
+        buffersize = 0
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffersize), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetError(self.vi, ctypes.pointer(code_ctype), buffersize, description_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        buffersize = error_code
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffersize), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetError(self.vi, ctypes.pointer(code_ctype), buffersize, description_ctype)
         errors._handle_error(self, error_code)
-        return code_ctype.value, description_ctype.value
+        return code_ctype.value, description_ctype.value.decode("ascii")
 
-    def get_next_coercion_record(self, buffer_size):
-        coercion_record_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, ctypes.pointer(coercion_record_ctype))
-        errors._handle_error(self, error_code)
-        return coercion_record_ctype.value
+    def get_next_coercion_record(self):
+        '''get_next_coercion_record
 
-    def get_next_interchange_warning(self, buffer_size):
-        interchange_warning_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, ctypes.pointer(interchange_warning_ctype))
-        errors._handle_error(self, error_code)
-        return interchange_warning_ctype.value
 
-    def get_path(self, channel1, channel2, buffer_size):
-        path_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_GetPath(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, ctypes.pointer(path_ctype))
+        Args:
+            buffer_size (ViInt32):
+        '''
+        buffer_size = 0
+        coercion_record_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, coercion_record_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        buffer_size = error_code
+        coercion_record_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, coercion_record_ctype)
         errors._handle_error(self, error_code)
-        return path_ctype.value
+        return coercion_record_ctype.value.decode("ascii")
+
+    def get_next_interchange_warning(self):
+        '''get_next_interchange_warning
+
+
+        Args:
+            buffer_size (ViInt32):
+        '''
+        buffer_size = 0
+        interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        buffer_size = error_code
+        interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
+        errors._handle_error(self, error_code)
+        return interchange_warning_ctype.value.decode("ascii")
+
+    def get_path(self, channel1, channel2):
+        '''get_path
+
+
+        Args:
+            channel1 (ViConstString):
+            channel2 (ViConstString):
+            buffer_size (ViInt32):
+        '''
+        buffer_size = 0
+        path_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetPath(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        buffer_size = error_code
+        path_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetPath(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
+        errors._handle_error(self, error_code)
+        return path_ctype.value.decode("ascii")
 
     def get_relay_count(self, relay_name):
+        '''get_relay_count
+
+
+        Args:
+            relay_name (ViConstString):
+
+        Returns:
+            relay_count (ViInt32):
+        '''
         relay_count_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niSwitch_GetRelayCount(self.vi, relay_name.encode('ascii'), ctypes.pointer(relay_count_ctype))
         errors._handle_error(self, error_code)
         return relay_count_ctype.value
 
-    def get_relay_name(self, index, relay_name_buffer_size):
-        relay_name_buffer_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_GetRelayName(self.vi, index, relay_name_buffer_size, ctypes.pointer(relay_name_buffer_ctype))
+    def get_relay_name(self, index):
+        '''get_relay_name
+
+
+        Args:
+            index (ViInt32):
+            relay_name_buffer_size (ViInt32):
+        '''
+        relay_name_buffer_size = 0
+        relay_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(relay_name_buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetRelayName(self.vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
+        # Don't use _handle_error, because positive value in error_code means size, not warning.
+        if (errors._is_error(error_code)):
+            raise errors.Error(self.library, self.vi, error_code)
+        relay_name_buffer_size = error_code
+        relay_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(relay_name_buffer_size), ctypes_types.ViString_ctype)
+        error_code = self.library.niSwitch_GetRelayName(self.vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
         errors._handle_error(self, error_code)
-        return relay_name_buffer_ctype.value
+        return relay_name_buffer_ctype.value.decode("ascii")
 
     def get_relay_position(self, relay_name):
+        '''get_relay_position
+
+
+        Args:
+            relay_name (ViConstString):
+
+        Returns:
+            relay_position (ViInt32):
+        '''
         relay_position_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niSwitch_GetRelayPosition(self.vi, relay_name.encode('ascii'), ctypes.pointer(relay_position_ctype))
         errors._handle_error(self, error_code)
         return relay_position_ctype.value
 
     def _init_with_options(self, resource_name, id_query, reset_device, options_string):
+        '''_init_with_options
+
+
+        Args:
+            resource_name (ViRsrc):
+            id_query (ViBoolean):
+            reset_device (ViBoolean):
+            options_string (ViConstString):
+
+        Returns:
+            vi (ViSession):
+        '''
         vi_ctype = ctypes_types.ViSession_ctype(0)
         error_code = self.library.niSwitch_InitWithOptions(resource_name.encode('ascii'), id_query, reset_device, options_string.encode('ascii'), ctypes.pointer(vi_ctype))
         errors._handle_error(self, error_code)
         return vi_ctype.value
 
     def init_with_topology(self, resource_name, topology, simulate, reset_device):
+        '''init_with_topology
+
+
+        Args:
+            resource_name (ViRsrc):
+            topology (ViConstString):
+            simulate (ViBoolean):
+            reset_device (ViBoolean):
+
+        Returns:
+            vi (ViSession):
+        '''
         vi_ctype = ctypes_types.ViSession_ctype(0)
         error_code = self.library.niSwitch_InitWithTopology(resource_name.encode('ascii'), topology.encode('ascii'), simulate, reset_device, ctypes.pointer(vi_ctype))
         errors._handle_error(self, error_code)
         return vi_ctype.value
 
     def _initiate_scan(self):
+        '''_initiate_scan
+
+        '''
         error_code = self.library.niSwitch_InitiateScan(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def is_debounced(self):
+        '''is_debounced
+
+
+        Returns:
+            is_debounced (ViBoolean):
+        '''
         is_debounced_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niSwitch_IsDebounced(self.vi, ctypes.pointer(is_debounced_ctype))
         errors._handle_error(self, error_code)
         return is_debounced_ctype.value
 
     def is_scanning(self):
+        '''is_scanning
+
+
+        Returns:
+            is_scanning (ViBoolean):
+        '''
         is_scanning_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niSwitch_IsScanning(self.vi, ctypes.pointer(is_scanning_ctype))
         errors._handle_error(self, error_code)
         return is_scanning_ctype.value
 
     def _lock_session(self):
+        '''_lock_session
+
+
+        Returns:
+            caller_has_lock (ViBoolean):
+        '''
         caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niSwitch_LockSession(self.vi, ctypes.pointer(caller_has_lock_ctype))
         errors._handle_error(self, error_code)
         return caller_has_lock_ctype.value
 
+    def relay_control(self, relay_name, relay_action):
+        '''relay_control
+
+
+        Args:
+            relay_name (ViConstString):
+            relay_action (ViInt32):
+        '''
+        error_code = self.library.niSwitch_RelayControl(self.vi, relay_name.encode('ascii'), relay_action)
+        errors._handle_error(self, error_code)
+        return
+
     def reset_interchange_check(self):
+        '''reset_interchange_check
+
+        '''
         error_code = self.library.niSwitch_ResetInterchangeCheck(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def reset_with_defaults(self):
+        '''reset_with_defaults
+
+        '''
         error_code = self.library.niSwitch_ResetWithDefaults(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):
+        '''route_scan_advanced_output
+
+
+        Args:
+            scan_advanced_output_connector (ViInt32):
+            scan_advanced_output_bus_line (ViInt32):
+            invert (ViBoolean):
+        '''
         error_code = self.library.niSwitch_RouteScanAdvancedOutput(self.vi, scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
         errors._handle_error(self, error_code)
         return
 
     def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert):
+        '''route_trigger_input
+
+
+        Args:
+            trigger_input_connector (ViInt32):
+            trigger_input_bus_line (ViInt32):
+            invert (ViBoolean):
+        '''
         error_code = self.library.niSwitch_RouteTriggerInput(self.vi, trigger_input_connector, trigger_input_bus_line, invert)
         errors._handle_error(self, error_code)
         return
 
     def scan(self, scanlist, initiation):
+        '''scan
+
+
+        Args:
+            scanlist (ViConstString):
+            initiation (ViInt16):
+        '''
         error_code = self.library.niSwitch_Scan(self.vi, scanlist.encode('ascii'), initiation)
         errors._handle_error(self, error_code)
         return
 
     def send_software_trigger(self):
+        '''send_software_trigger
+
+        '''
         error_code = self.library.niSwitch_SendSoftwareTrigger(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def _set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):
+        '''_set_attribute_vi_boolean
+
+
+        Args:
+            channel_name (ViConstString):
+            attribute_id (ViAttr):
+            attribute_value (ViBoolean):
+        '''
         error_code = self.library.niSwitch_SetAttributeViBoolean(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors._handle_error(self, error_code)
         return
 
     def _set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):
+        '''_set_attribute_vi_int32
+
+
+        Args:
+            channel_name (ViConstString):
+            attribute_id (ViAttr):
+            attribute_value (ViInt32):
+        '''
         error_code = self.library.niSwitch_SetAttributeViInt32(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors._handle_error(self, error_code)
         return
 
     def _set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):
+        '''_set_attribute_vi_real64
+
+
+        Args:
+            channel_name (ViConstString):
+            attribute_id (ViAttr):
+            attribute_value (ViReal64):
+        '''
         error_code = self.library.niSwitch_SetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors._handle_error(self, error_code)
         return
 
     def _set_attribute_vi_session(self, channel_name, attribute_id, attribute_value):
+        '''_set_attribute_vi_session
+
+
+        Args:
+            channel_name (ViConstString):
+            attribute_id (ViAttr):
+            attribute_value (ViSession):
+        '''
         error_code = self.library.niSwitch_SetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors._handle_error(self, error_code)
         return
 
     def _set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):
+        '''_set_attribute_vi_string
+
+
+        Args:
+            channel_name (ViConstString):
+            attribute_id (ViAttr):
+            attribute_value (ViChar):
+        '''
         error_code = self.library.niSwitch_SetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors._handle_error(self, error_code)
         return
 
     def set_continuous_scan(self, continuous_scan):
+        '''set_continuous_scan
+
+
+        Args:
+            continuous_scan (ViBoolean):
+        '''
         error_code = self.library.niSwitch_SetContinuousScan(self.vi, continuous_scan)
         errors._handle_error(self, error_code)
         return
 
     def set_path(self, path_list):
+        '''set_path
+
+
+        Args:
+            path_list (ViConstString):
+        '''
         error_code = self.library.niSwitch_SetPath(self.vi, path_list.encode('ascii'))
         errors._handle_error(self, error_code)
         return
 
     def _unlock_session(self):
+        '''_unlock_session
+
+
+        Returns:
+            caller_has_lock (ViBoolean):
+        '''
         caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niSwitch_UnlockSession(self.vi, ctypes.pointer(caller_has_lock_ctype))
         errors._handle_error(self, error_code)
         return caller_has_lock_ctype.value
 
     def wait_for_debounce(self, maximum_time_ms):
+        '''wait_for_debounce
+
+
+        Args:
+            maximum_time_ms (ViInt32):
+        '''
         error_code = self.library.niSwitch_WaitForDebounce(self.vi, maximum_time_ms)
         errors._handle_error(self, error_code)
         return
 
     def wait_for_scan_complete(self, maximum_time_ms):
+        '''wait_for_scan_complete
+
+
+        Args:
+            maximum_time_ms (ViInt32):
+        '''
         error_code = self.library.niSwitch_WaitForScanComplete(self.vi, maximum_time_ms)
         errors._handle_error(self, error_code)
         return
 
     def _close(self):
+        '''_close
+
+        '''
         error_code = self.library.niSwitch_close(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def error_message(self, error_code):
-        error_message_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_error_message(self.vi, error_code, ctypes.pointer(error_message_ctype))
+        '''error_message
+
+
+        Args:
+            error_code (ViStatus):
+
+        Returns:
+            error_message (ViString):
+        '''
+        error_message_ctype = (ctypes_types.ViString_ctype * 256)()
+        error_code = self.library.niSwitch_error_message(self.vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)))
         errors._handle_error(self, error_code)
-        return error_message_ctype.value
+        return error_message_ctype.value.decode("ascii")
 
     def error_query(self):
+        '''error_query
+
+
+        Returns:
+            error_code (ViInt32):
+            error_message (ViString):
+        '''
         error_code_ctype = ctypes_types.ViInt32_ctype(0)
-        error_message_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_error_query(self.vi, ctypes.pointer(error_code_ctype), ctypes.pointer(error_message_ctype))
+        error_message_ctype = (ctypes_types.ViString_ctype * 256)()
+        error_code = self.library.niSwitch_error_query(self.vi, ctypes.pointer(error_code_ctype), ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)))
         errors._handle_error(self, error_code)
-        return error_code_ctype.value, error_message_ctype.value
+        return error_code_ctype.value, error_message_ctype.value.decode("ascii")
 
     def reset(self):
+        '''reset
+
+        '''
         error_code = self.library.niSwitch_reset(self.vi)
         errors._handle_error(self, error_code)
         return
 
     def revision_query(self):
-        instrument_driver_revision_ctype = ctypes_types.ViChar_ctype(0)
+        '''revision_query
+
+
+        Returns:
+            instrument_driver_revision (ViString):
+            firmware_revision (ViChar):
+        '''
+        instrument_driver_revision_ctype = (ctypes_types.ViString_ctype * 256)()
         firmware_revision_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_revision_query(self.vi, ctypes.pointer(instrument_driver_revision_ctype), ctypes.pointer(firmware_revision_ctype))
+        error_code = self.library.niSwitch_revision_query(self.vi, ctypes.cast(instrument_driver_revision_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)), ctypes.pointer(firmware_revision_ctype))
         errors._handle_error(self, error_code)
-        return instrument_driver_revision_ctype.value, firmware_revision_ctype.value
+        return instrument_driver_revision_ctype.value.decode("ascii"), firmware_revision_ctype.value
 
     def self_test(self):
+        '''self_test
+
+
+        Returns:
+            self_test_result (ViInt16):
+            self_test_message (ViString):
+        '''
         self_test_result_ctype = ctypes_types.ViInt16_ctype(0)
-        self_test_message_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.pointer(self_test_message_ctype))
+        self_test_message_ctype = (ctypes_types.ViString_ctype * 256)()
+        error_code = self.library.niSwitch_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)))
         errors._handle_error(self, error_code)
-        return self_test_result_ctype.value, self_test_message_ctype.value
+        return self_test_result_ctype.value, self_test_message_ctype.value.decode("ascii")
 
