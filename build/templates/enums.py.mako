@@ -15,7 +15,7 @@ class ${enum_name}(Enum):
     % else:
     ${enum_value['name']} = ${enum_value['value']}
     % endif
-    % if 'description' in enum_value:
+    % if 'description' in enum_value and len(enum_value['description'].strip()) > 0:
     '''
     ${helper.get_indented_docstring_snippet(enum_value['description'], indent=4)}
     '''
