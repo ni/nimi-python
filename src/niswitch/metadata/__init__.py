@@ -29,8 +29,12 @@ def merge_dicts(into, outof):
                         into[item2] = outof[item]
 
 from metadata.functions_addon import functions_codegen_method
+from metadata.functions_addon import functions_params_types
+from metadata.functions_addon import functions_buffer_info
 
 merge_dicts(functions, functions_codegen_method)
+merge_dicts(functions, functions_params_types)
+merge_dicts(functions, functions_buffer_info)
 
 __version__ = config['module_version']
 
