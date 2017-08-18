@@ -1,9 +1,9 @@
 
 # -*- coding: utf-8 -*-
-# This file is code generated, do not make changes here
+# This file is code generated, do not make changes here.
 #  If the generated information is not correct for python
 #  changes can be made in attributes_addon.py and they will be
-#  applied at build time
+#  applied at build time.
 
 attributes = {
     1050002: {
@@ -90,7 +90,11 @@ FALSE (0). Use `niDMM Initialize With
 Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
 override the default setting.
 ''',
-            'note': 'Simulate can only be set within the',
+            'note': '''
+Simulate can only be set within the `niDMM Initialize With
+Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ VI. The
+property value cannot be changed outside of the VI.
+''',
         },
     },
     1050006: {
@@ -107,9 +111,7 @@ Specifies whether the IVI engine keeps a list of the value coercions it
 makes for ViInt32 and ViReal64 properties. The default value is FALSE
 (0). Use `niDMM Initialize With
 Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
-override the default setting. Use
-
-`niDMM Get Next Coercion
+override the default setting. Use `niDMM Get Next Coercion
 Record <dmmviref.chm::/niDMM_Get_Next_Coercion_Record.html>`__ to
 extract and delete the oldest coercion record from the list.
 ''',
@@ -154,9 +156,7 @@ warnings indicate that using your application with a different
 instrument might cause different behavior. Use `niDMM Get Next
 Interchange
 Warning <dmmviref.chm::/niDMM_Get_Next_Interchange_Warning.html>`__ to
-extract interchange warnings. Use
-
-`niDMM Clear Interchange
+extract interchange warnings. Use `niDMM Clear Interchange
 Warnings <dmmviref.chm::/niDMM_Clear_Interchange_Warnings.html>`__ to
 clear the list of interchangeability warnings without reading them.
 Interchangeability checking examines the properties in a capability
@@ -508,7 +508,11 @@ engine.
         'type': 'ViReal64',
         'documentation': {
             'description': 'For the NI 4050 only, specifies the shunt resistance value.',
-            'note': 'The NI 4050 requires an external shunt resistor for current measurements. This property should be set to the value of the shunt resistor.',
+            'note': '''
+The NI 4050 requires an external shunt resistor for current
+measurements. This property should be set to the value of the shunt
+resistor.
+''',
         },
     },
     1150010: {
@@ -538,9 +542,7 @@ source on which the DMM is triggered.
             'description': '''
 Specifies how the DMM acquires data.
 
-When you call
-
-`niDMM Config
+When you call `niDMM Config
 Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__, NI-DMM
 sets this property to IVIDMM Mode. When you call `niDMM Configure
 Waveform
@@ -788,7 +790,12 @@ For the NI 4081 and NI 4072 only, specifies the type of cable
 compensation that is applied to the current capacitance or inductance
 measurement for the current range.
 ''',
-            'note': 'Changing the function or the range using property nodes or through',
+            'note': '''
+Changing the function or the range using property nodes or through
+`niDMM Config
+Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
+this property to the default value.
+''',
         },
     },
     1150046: {
@@ -806,7 +813,11 @@ For the NI 4082 and NI 4072 only, represents the reactive part
 number >0. The default value (-1) indicates that compensation has not
 taken place.
 ''',
-            'note': 'Changing the VI or the range through this property or through',
+            'note': '''
+Changing the VI or the range through this property or through `niDMM
+Config Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__
+resets this property to the default value.
+''',
         },
     },
     1150047: {
@@ -824,7 +835,11 @@ For the NI 4082 and NI 4072 only, represents the active part
 real number >0. The default value (-1) indicates that compensation has
 not taken place.
 ''',
-            'note': 'Changing the VI or the range through this property or through',
+            'note': '''
+Changing the VI or the range through this property or through `niDMM
+Config Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__
+resets this property to the default value.
+''',
         },
     },
     1150048: {
@@ -842,7 +857,12 @@ For the NI 4082 and NI 4072 only, specifies the reactive part
 real number >0. The default value (-1.0) indicates that compensation has
 not taken place.
 ''',
-            'note': 'Changing the function or the range using property nodes or through',
+            'note': '''
+Changing the function or the range using property nodes or through
+`niDMM Config
+Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
+this property to the default value.
+''',
         },
     },
     1150049: {
@@ -860,7 +880,12 @@ For the NI 4082 and NI 4072 only, specifies the active part
 real number >0. The default value (-1.0) indicates that compensation has
 not taken place.
 ''',
-            'note': 'Changing the function or the range using property nodes or through',
+            'note': '''
+Changing the function or the range using property nodes or through
+`niDMM Config
+Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
+this property to the default value.
+''',
         },
     },
     1150052: {
@@ -960,7 +985,7 @@ measurements that are averaged to produce one reading.
         'documentation': {
             'description': '''
 Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
-**RTD Type property**
+**RTD Type property** is set to Custom.
 ''',
         },
     },
@@ -975,7 +1000,7 @@ Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the
         'documentation': {
             'description': '''
 Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
-**RTD Type property**
+**RTD Type property** is set to Custom.
 ''',
         },
     },
@@ -990,7 +1015,7 @@ Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the
         'documentation': {
             'description': '''
 Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
-**RTD Type property**
+**RTD Type property** is set to Custom.
 ''',
         },
     },
@@ -1017,7 +1042,7 @@ Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the
         'documentation': {
             'description': '''
 Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-the **Thermistor Type property**
+the **Thermistor Type property** is set to Custom.
 ''',
         },
     },
@@ -1032,7 +1057,7 @@ the **Thermistor Type property**
         'documentation': {
             'description': '''
 Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-the **Thermistor Type property**
+the **Thermistor Type property** is set to Custom.
 ''',
         },
     },
@@ -1047,7 +1072,7 @@ the **Thermistor Type property**
         'documentation': {
             'description': '''
 Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-the **Thermistor Type property**
+the **Thermistor Type property** is set to Custom.
 ''',
         },
     },
@@ -1089,7 +1114,10 @@ units appropriate for the current value of the Function property. For
 example, if the Function property is set to DC Volts, the units are
 volts.
 ''',
-            'note': 'The NI 4050, NI 4060, and NI 4065 only support Auto Range when the trigger and sample trigger are set to Immediate.',
+            'note': '''
+The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
+trigger and sample trigger are set to Immediate.
+''',
             'table_body': [['(-1.0)', 'Auto Range On',
                             'NI-DMM performs an Auto Range before acquiring the measurement.'], ['(-2.0)',
                                                                                                  'Auto Range Off',
@@ -1112,7 +1140,12 @@ Specifies the measurement resolution in digits. Setting this property to
 higher values increases the measurement accuracy. Setting this property
 to lower values increases the measurement speed.
 ''',
-            'note': 'NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the',
+            'note': '''
+NI-DMM ignores this property for capacitance and inductance measurements
+on the NI 4082 and NI 4072. To achieve better resolution for such
+measurements, use the `Number of LC Measurements to
+Average <pniDMM_NumberofLCMeasurementsToAverage.html>`__ property.
+''',
         },
     },
     1250004: {
@@ -1129,14 +1162,12 @@ Specifies the trigger source. When `niDMM
 Initiate <dmmviref.chm::/niDMM_Initiate.html>`__ is called, the DMM
 waits for the trigger specified with this property. After it receives
 the trigger, the DMM waits the length of time specified with the
-
 `Trigger Delay <pnidmm_TriggerDelay.html>`__ property. The DMM then
 takes a measurement.
 
 To determine which values are supported by each device, refer to the
-
 `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-in the *NI Digital Multimeters Help*
+in the *NI Digital Multimeters Help*.
 ''',
         },
     },
@@ -1216,6 +1247,8 @@ the device. This property affects the DMM only when you set the Function
 property to AC measurements.
 
 The valid ranges are shown in the following table.
+
+The valid ranges are shown in the following table.
 ''',
             'table_body': [['NI 4080/4081/4082, NI 4070/4071/4072', '1 Hz-300 kHz'], ['NI 4065', '10 Hz-100 Hz'],
                            ['NI 4050/4060', '20 Hz-25 kHz']],
@@ -1235,7 +1268,11 @@ Specifies the measurement resolution in absolute units. Setting this
 property to higher values increases the measurement accuracy. Setting
 this property to lower values increases the measurement speed.
 ''',
-            'note': 'NI-DMM ignores this property for capacitance and inductance measurements on the NI 4082 and NI 4072. To achieve better resolution for such measurements, use the Number of LC Measurements to Average property.',
+            'note': '''
+NI-DMM ignores this property for capacitance and inductance measurements
+on the NI 4082 and NI 4072. To achieve better resolution for such
+measurements, use the Number of LC Measurements to Average property.
+''',
         },
     },
     1250101: {
@@ -1353,9 +1390,8 @@ the inner loop.
 Specifies the sample trigger source.
 
 To determine which values are supported by each device, refer to the
-
 `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-in the *NI Digital Multimeters Help*
+in the *NI Digital Multimeters Help*.
 ''',
         },
     },
@@ -1374,6 +1410,39 @@ measurement cycles. This property only applies when the Sample Trigger
 property is set to INTERVAL. The default value (-1) ensures that the DMM
 settles for a recommended time, which is the same as using an immediate
 trigger.
+
+The NI 4065 and NI 4070/4071/4072 use the value specified in this
+property as additional delay. On these devices, the onboard timing
+resolution is 34.72 ns and the valid range is 0-149 s.
+
+On the NI 4060, the value for this property is used as the settling
+time. When this property is set to 0, the NI 4060 does not settle
+between measurement cycles. The onboard timing resolution is 1 micro s
+on the NI 4060.
+
+Only positive values are valid when setting the sample interval.
+
+The NI 4065 and NI 4070/4071/4072 use the value specified in this
+property as additional delay. On these devices, the onboard timing
+resolution is 34.72 ns and the valid range is 0-149 s.
+
+On the NI 4060, the value for this property is used as the settling
+time. When this property is set to 0, the NI 4060 does not settle
+between measurement cycles. The onboard timing resolution is 1 micro s
+on the NI 4060.
+
+Only positive values are valid when setting the sample interval.
+
+The NI 4065 and NI 4070/4071/4072 use the value specified in this
+property as additional delay. On these devices, the onboard timing
+resolution is 34.72 ns and the valid range is 0-149 s.
+
+On the NI 4060, the value for this property is used as the settling
+time. When this property is set to 0, the NI 4060 does not settle
+between measurement cycles. The onboard timing resolution is 1 micro s
+on the NI 4060.
+
+Only positive values are valid when setting the sample interval.
 
 The NI 4065 and NI 4070/4071/4072 use the value specified in this
 property as additional delay. On these devices, the onboard timing
@@ -1405,10 +1474,8 @@ for the NI 4065, NI 4070/4071/4072, and NI 4080/4081/4082.
 
 The NI 4050/4060 only support this property being set to 1.
 
-Refer to
-
-`Multiple Point Acquisitions <dmm.chm::/multi_point.html>`__ in the *NI
-Digital Multimeters Help*
+Refer to `Multiple Point Acquisitions <dmm.chm::/multi_point.html>`__ in
+the *NI Digital Multimeters Help* for more information.
 ''',
         },
     },
@@ -1425,9 +1492,8 @@ Digital Multimeters Help*
 Specifies the destination of the measurement complete (MC) signal.
 
 To determine which values are supported by each device, refer to the
-
 `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
-in the *NI Digital Multimeters Help*
+in the *NI Digital Multimeters Help*.
 ''',
             'note': 'The NI 4050 is not supported.',
         },
@@ -1448,6 +1514,38 @@ property. To override the default aperture, set this property to the
 desired aperture time after calling `niDMM Config
 Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__. To return
 to the default, set this property to Aperture Time Auto (-1).
+
+Any number of powerline cycles (PLCs) within the minimum and maximum
+ranges is allowed on the NI 4080/4081/4082 and NI 4070/4071/4072.
+
+On the NI 4065 the minimum aperture time is 333 micro s and the maximum
+aperture time is 78.2 s. If setting the number of averages directly, the
+total measurement time is aperture time X the number of averages, which
+must be less than 72.8 s. The aperture times allowed are 333 micro s,
+667 micro s, or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33
+ms, and so on. If you set an aperture time other than 333 micro s, 667
+micro s, or multiples of 1.11 ms, the value will be coerced up to the
+next supported aperture time.
+
+On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed
+are 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is
+50 Hz, the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
+
+Any number of powerline cycles (PLCs) within the minimum and maximum
+ranges is allowed on the NI 4080/4081/4082 and NI 4070/4071/4072.
+
+On the NI 4065 the minimum aperture time is 333 micro s and the maximum
+aperture time is 78.2 s. If setting the number of averages directly, the
+total measurement time is aperture time X the number of averages, which
+must be less than 72.8 s. The aperture times allowed are 333 micro s,
+667 micro s, or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33
+ms, and so on. If you set an aperture time other than 333 micro s, 667
+micro s, or multiples of 1.11 ms, the value will be coerced up to the
+next supported aperture time.
+
+On the NI 4060, when the powerline frequency is 60 Hz, the PLCs allowed
+are 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is
+50 Hz, the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
 
 Any number of powerline cycles (PLCs) within the minimum and maximum
 ranges is allowed on the NI 4080/4081/4082 and NI 4070/4071/4072.
@@ -1526,6 +1624,14 @@ value to select an aperture time to reject powerline noise by selecting
 the appropriate internal sample clock and filter. The NI 4065, NI
 4070/4071/4072, and NI 4080/4081/4082 use this value to select timebases
 for setting the Aperture Time property in powerline cycles.
+
+After configuring powerline frequency, set the Aperture Time Units
+property to PLCs. When setting the Aperture Time property, select the
+number of PLCs for the powerline frequency. For example, if powerline
+frequency = 50 Hz (or 20 ms) and aperture time in PLCs = 5, then
+aperture time in seconds = 20 ms \* 5 PLCs = 100 ms. Similarly, if
+powerline frequency = 60 Hz (or 16.667 ms) and aperture time in PLCs =
+6, then aperture time in seconds = 16.667 ms \* 6 PLCs = 100 ms.
 
 After configuring powerline frequency, set the Aperture Time Units
 property to PLCs. When setting the Aperture Time property, select the
