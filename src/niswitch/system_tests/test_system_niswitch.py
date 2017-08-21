@@ -53,7 +53,7 @@ def test_relayclose(device_info):
         assert positionMiddle != positionFinal
         assert positionInitial == positionFinal
 
-        
+
 def test_channel_connection(device_info):
    with niswitch.Session(device_info['name']) as session:
        channel1 = session.get_channel_name(1)
@@ -66,7 +66,7 @@ def test_channel_connection(device_info):
                session.disconnect_all()
                pass
                break
-       
+
 
 def test_wrong_parameter_type(device_info):
     with niswitch.Session(device_info['name']) as session:
@@ -96,8 +96,10 @@ def test_warning(device_info):
 
 def best_ViBoolean_attribute(device_info):
     with niswitch.Session(device_info['name']) as session:
-        session.query_instrument_status = False
-        assert session.query_instrument_status is False
+        session.interchange_check = False
+        assert session.interchange_check is False
+        session.interchange_check = True
+        assert session.interchange_check is True
 
 
 def test_ViString_attribute(device_info):
@@ -169,30 +171,18 @@ def test_library_singleton(device_info):
     assert lib1 == lib2
 
 
-def best_self_test(device_info):
-    with niswitch.Session(device_info['name']) as session:
-        result, message = session.self_test()
-        assert result == 0
-        assert message == 'Self Test passed.'
-
-        
-def best_method_with_noinput_nooutput(device_info):
+def test_method_with_noinput_nooutput(device_info):
     with niswitch.Session(device_info['name']) as session:
         assert session.reset_with_defaults() == None
-        
-        
-def best_method_with_ViBoolean_output_type_method(device_info):
-    with niswitch.Session(device_info['name']) as session:
-        assert session.get_self_cal_supported() in [True, False]
-      
-     
+
+
 def best_method_with_enum_output_type_method(device_info):
     with niswitch.Session(device_info['name']) as session:
         #will have to update after https://github.com/ni/nimi-python/issues/128 fixed
-        assert session.read_status()[1] == 4        
-        
-		
-def best_writeonly_attribute(device_info):
+        assert session.read_status()[1] == 4
+
+
+def test_writeonly_attribute(device_info):
     with niswitch.Session(device_info['name']) as session:
         try:
             session.channel_count = 5
@@ -200,3 +190,18 @@ def best_writeonly_attribute(device_info):
             assert e.code == -1074135027 #Error : Attribute is read-only.
 
 
+def test_string_functions(device_info):
+    with niswitch.Session(device_info['name']) as session:
+        result, message = session.self_test()
+        assert result == 0
+        assert len(message) > 1
+        channel1 = session.get_channel_name(1)
+        for x in range (2, session.channel_count):
+            channel2 = session.get_channel_name(x)
+            if session.can_connect(channel1, channel2) == 1: #path available
+                path = session.get_path(channel1, channel2)
+                assert len(path) > 1
+                break
+        
+        
+        

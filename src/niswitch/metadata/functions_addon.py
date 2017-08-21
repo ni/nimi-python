@@ -25,13 +25,11 @@ functions_params_types = {
     'error_message':                { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'error_query':                  { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'revision_query':               { 'parameters': { 1: { 'type': 'ViString',                  }, }, },
-    'self_test':                    { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
     'GetNextInterchangeWarning':    { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'GetNextCoercionRecord':        { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'GetChannelName':               { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetRelayName':                 { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'GetPath':                      { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
