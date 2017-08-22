@@ -211,4 +211,3 @@ def test_ViInt32_output_function(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert isinstance(session.get_cal_count(0), int) #TODO: when enum for cal_type is added, replace 0 with Internal or External
 
-
