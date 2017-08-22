@@ -63,7 +63,7 @@ NI-FAKE Functions
 
         
 
-    :type buffer_size: ViInt32
+    :type buffer_size: int
 
     :rtype: ViChar
 
@@ -87,7 +87,7 @@ NI-FAKE Functions
 
         
 
-    :type channel_name: ViConstString
+    :type channel_name: str
     :param attribute_id:
 
 
@@ -95,7 +95,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_id: ViAttr
+    :type attribute_id: int
 
     :rtype: ViBoolean
 
@@ -119,7 +119,7 @@ NI-FAKE Functions
 
         
 
-    :type channel_name: ViConstString
+    :type channel_name: str
     :param attribute_id:
 
 
@@ -127,7 +127,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_id: ViAttr
+    :type attribute_id: int
 
     :rtype: ViInt32
 
@@ -151,7 +151,7 @@ NI-FAKE Functions
 
         
 
-    :type channel_name: ViConstString
+    :type channel_name: str
     :param attribute_id:
 
 
@@ -159,7 +159,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_id: ViAttr
+    :type attribute_id: int
 
     :rtype: ViReal64
 
@@ -183,7 +183,7 @@ NI-FAKE Functions
 
         
 
-    :type channel_name: ViConstString
+    :type channel_name: str
     :param attribute_id:
 
 
@@ -191,7 +191,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_id: ViAttr
+    :type attribute_id: int
 
     :rtype: ViSession
 
@@ -215,7 +215,7 @@ NI-FAKE Functions
 
         
 
-    :type channel_name: ViConstString
+    :type channel_name: str
     :param attribute_id:
 
 
@@ -223,7 +223,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_id: ViAttr
+    :type attribute_id: int
     :param buffer_size:
 
 
@@ -231,7 +231,7 @@ NI-FAKE Functions
 
         
 
-    :type buffer_size: ViInt32
+    :type buffer_size: int
 
 .. function:: get_enum_value(a_quantity, a_turtle)
 
@@ -246,7 +246,7 @@ NI-FAKE Functions
 
         WHERE
 
-        a_quantity (ViInt32):
+        a_quantity (ViInt32): 
 
 
             This is an amount.
@@ -255,7 +255,7 @@ NI-FAKE Functions
 
             .. note:: The amount will be between -2^31 and (2^31-1)
 
-        a_turtle (enums.Turtle):
+        a_turtle (enums.Turtle): 
 
 
             Indicates a ninja turtle
@@ -285,7 +285,7 @@ NI-FAKE Functions
 
         
 
-    :type buffer_size: ViInt32
+    :type buffer_size: int
 
     :rtype: ViStatus
 
@@ -309,7 +309,7 @@ NI-FAKE Functions
 
         
 
-    :type error_code: ViStatus
+    :type error_code: int
     :param buffer_size:
 
 
@@ -317,7 +317,7 @@ NI-FAKE Functions
 
         
 
-    :type buffer_size: ViInt32
+    :type buffer_size: int
 
 .. function:: _init_with_options(resource_name, id_query, reset_device, option_string)
 
@@ -335,7 +335,7 @@ NI-FAKE Functions
 
         
 
-    :type resource_name: ViString
+    :type resource_name: str
     :param id_query:
 
 
@@ -347,7 +347,7 @@ NI-FAKE Functions
         | VI\_FALSE          | 0 | Skip ID Query    |
         +--------------------+---+------------------+
 
-    :type id_query: ViBoolean
+    :type id_query: bool
     :param reset_device:
 
 
@@ -359,7 +359,7 @@ NI-FAKE Functions
         | VI\_FALSE          | 0 | Don't Reset  |
         +--------------------+---+--------------+
 
-    :type reset_device: ViBoolean
+    :type reset_device: bool
     :param option_string:
 
 
@@ -367,7 +367,7 @@ NI-FAKE Functions
 
         
 
-    :type option_string: ViString
+    :type option_string: str
 
     :rtype: ViSession
 
@@ -398,7 +398,7 @@ NI-FAKE Functions
 
         
 
-    :type maximum_time: ViInt32
+    :type maximum_time: int
 
     :rtype: ViReal64
 
@@ -422,7 +422,7 @@ NI-FAKE Functions
 
         
 
-    :type maximum_time: ViInt32
+    :type maximum_time: int
     :param array_size:
 
 
@@ -430,13 +430,13 @@ NI-FAKE Functions
 
         
 
-    :type array_size: ViInt32
+    :type array_size: int
 
     :rtype: tuple (reading_array, actual_number_of_points)
 
         WHERE
 
-        reading_array (ViReal64):
+        reading_array (ViReal64): 
 
 
             An array of measurement values.
@@ -445,7 +445,7 @@ NI-FAKE Functions
 
             .. note:: The size must be at least arraySize.
 
-        actual_number_of_points (ViInt32):
+        actual_number_of_points (ViInt32): 
 
 
             Indicates the number of measured values actually retrieved.
@@ -466,14 +466,14 @@ NI-FAKE Functions
 
         WHERE
 
-        a_number (ViInt16):
+        a_number (ViInt16): 
 
 
             Contains a number.
 
             
 
-        a_string (ViChar):
+        a_string (ViChar): 
 
 
             Contains a string.
@@ -495,7 +495,7 @@ NI-FAKE Functions
 
         
 
-    :type channel_name: ViConstString
+    :type channel_name: str
     :param attribute_id:
 
 
@@ -503,7 +503,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_id: ViAttr
+    :type attribute_id: int
     :param attribute_value:
 
 
@@ -511,7 +511,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_value: ViBoolean
+    :type attribute_value: bool
 
 .. function:: _set_attribute_vi_int32(channel_name, attribute_id, attribute_value)
 
@@ -527,7 +527,7 @@ NI-FAKE Functions
 
         
 
-    :type channel_name: ViConstString
+    :type channel_name: str
     :param attribute_id:
 
 
@@ -535,7 +535,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_id: ViAttr
+    :type attribute_id: int
     :param attribute_value:
 
 
@@ -543,7 +543,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_value: ViInt32
+    :type attribute_value: int
 
 .. function:: _set_attribute_vi_real64(channel_name, attribute_id, attribute_value)
 
@@ -559,7 +559,7 @@ NI-FAKE Functions
 
         
 
-    :type channel_name: ViConstString
+    :type channel_name: str
     :param attribute_id:
 
 
@@ -567,7 +567,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_id: ViAttr
+    :type attribute_id: int
     :param attribute_value:
 
 
@@ -575,7 +575,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_value: ViReal64
+    :type attribute_value: float
 
 .. function:: _set_attribute_vi_session(channel_name, attribute_id, attribute_value)
 
@@ -591,7 +591,7 @@ NI-FAKE Functions
 
         
 
-    :type channel_name: ViConstString
+    :type channel_name: str
     :param attribute_id:
 
 
@@ -599,7 +599,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_id: ViAttr
+    :type attribute_id: int
     :param attribute_value:
 
 
@@ -607,7 +607,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_value: ViSession
+    :type attribute_value: int
 
 .. function:: _set_attribute_vi_string(channel_name, attribute_id, attribute_value)
 
@@ -623,7 +623,7 @@ NI-FAKE Functions
 
         
 
-    :type channel_name: ViConstString
+    :type channel_name: str
     :param attribute_id:
 
 
@@ -631,7 +631,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_id: ViAttr
+    :type attribute_id: int
     :param attribute_value:
 
 
@@ -639,7 +639,7 @@ NI-FAKE Functions
 
         
 
-    :type attribute_value: ViString
+    :type attribute_value: str
 
 .. function:: simple_function()
 
@@ -669,7 +669,7 @@ NI-FAKE Functions
 
         
 
-    :type error_code: ViStatus
+    :type error_code: int
 
     :rtype: ViChar
 

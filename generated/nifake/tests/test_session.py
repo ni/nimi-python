@@ -58,7 +58,7 @@ class TestSession(object):
             assert self.patched_errors._handle_error.call_count == 2
             self.patched_errors._handle_error.assert_called_with(session, self.patched_ctypes_library.niFake_SimpleFunction.return_value)
 
-    #TODO(marcoskirsch): Full coverage.
+    #TODO(marcoskirsch): Flesh out test coverage for all NI-FAKE functions and attributes.
 '''
     # Test with multiple pointer types, ensuring proper return values (i.e. parameters in correct order)
     def test_multiple_return_params(self):

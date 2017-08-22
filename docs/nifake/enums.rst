@@ -9,37 +9,37 @@ Enums used in NI-FAKE
 
 .. py:data:: Color
 
-   .. py:attribute:: RED
+    .. py:attribute:: RED
 
-      Like blood.
 
-   .. py:attribute:: BLUE
 
-      Like the sky.
+    .. py:attribute:: BLUE
 
-   .. py:attribute:: YELLOW
 
-      Like a banana.
 
-   .. py:attribute:: BLACK
+    .. py:attribute:: YELLOW
 
-      Like this developer's conscience.
+
+
+    .. py:attribute:: BLACK
+
+
 
 
 .. py:data:: Turtle
 
-   .. py:attribute:: LEONARDO
+    .. py:attribute:: LEONARDO
 
-      Wields two katanas.
 
-   .. py:attribute:: DONATELLO
 
-      Uses a bo staff.
+    .. py:attribute:: DONATELLO
 
-   .. py:attribute:: RAPHAEL
 
-      Has a pair of sai.
 
-   .. py:attribute:: MICHELANGELO
+    .. py:attribute:: RAPHAEL
 
-      Owns nunchucks.
+
+
+    .. py:attribute:: MICHELANGELO
+
+
