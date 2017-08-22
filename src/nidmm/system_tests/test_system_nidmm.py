@@ -112,7 +112,7 @@ def test_acquisition(device_info):
 
 def test_method_call_with_zero_parameter(device_info):
     with nidmm.Session(device_info['name']) as session:
-        assert session.get_aperture_time_info()[1] == 0 # Assuming default aperture time unit will be seconds
+        assert session.get_aperture_time_info()[1] == nidmm.ApertureTimeUnits.SECONDS # Assuming default aperture time unit will be seconds
 
 
 def test_method_call_with_one_parameter(device_info):
@@ -173,28 +173,29 @@ def test_get_dev_temp(device_info):
         print(temperature)
         assert 20 <= temperature <= 50
 
-        
+
 def test_method_with_noinput_nooutput(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert session.reset_with_defaults() == None
-        
-        
+
+
 def test_method_with_ViBoolean_output_type_method(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert session.get_self_cal_supported() in [True, False]
-      
-     
+
+
 def test_method_with_enum_output_type_method(device_info):
     with nidmm.Session(device_info['name']) as session:
         #will have to update after https://github.com/ni/nimi-python/issues/128 fixed
-        assert session.read_status()[1] == 4        
-        
-		
+        assert session.read_status()[1] == 4
+
+
 def test_writeonly_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         try:
             session.channel_count = 5
         except nidmm.Error as e:
             assert e.code == -1074135027 #Error : Attribute is read-only.
+
 
 
