@@ -9,17 +9,17 @@ NI-ModInst Attributes
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------+
-    | Characteristic | Value   |
-    +================+=========+
-    | Datatype       | integer |
-    +----------------+---------+
-    | Permissions    | read    |
-    +----------------+---------+
-    | Channel Based  | False   |
-    +----------------+---------+
-    | Resettable     | No      |
-    +----------------+---------+
+    +----------------+-------+
+    | Characteristic | Value |
+    +================+=======+
+    | Datatype       | int   |
+    +----------------+-------+
+    | Permissions    | read  |
+    +----------------+-------+
+    | Channel Based  | False |
+    +----------------+-------+
+    | Resettable     | No    |
+    +----------------+-------+
 
     .. tip:: 
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -32,17 +32,17 @@ NI-ModInst Attributes
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------+
-    | Characteristic | Value   |
-    +================+=========+
-    | Datatype       | integer |
-    +----------------+---------+
-    | Permissions    | read    |
-    +----------------+---------+
-    | Channel Based  | False   |
-    +----------------+---------+
-    | Resettable     | No      |
-    +----------------+---------+
+    +----------------+-------+
+    | Characteristic | Value |
+    +================+=======+
+    | Datatype       | int   |
+    +----------------+-------+
+    | Permissions    | read  |
+    +----------------+-------+
+    | Channel Based  | False |
+    +----------------+-------+
+    | Resettable     | No    |
+    +----------------+-------+
 
     .. tip:: 
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -55,17 +55,17 @@ NI-ModInst Attributes
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------+
-    | Characteristic | Value  |
-    +================+========+
-    | Datatype       | string |
-    +----------------+--------+
-    | Permissions    | read   |
-    +----------------+--------+
-    | Channel Based  | False  |
-    +----------------+--------+
-    | Resettable     | No     |
-    +----------------+--------+
+    +----------------+-------+
+    | Characteristic | Value |
+    +================+=======+
+    | Datatype       | str   |
+    +----------------+-------+
+    | Permissions    | read  |
+    +----------------+-------+
+    | Channel Based  | False |
+    +----------------+-------+
+    | Resettable     | No    |
+    +----------------+-------+
 
     .. tip:: 
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -78,17 +78,17 @@ NI-ModInst Attributes
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------+
-    | Characteristic | Value  |
-    +================+========+
-    | Datatype       | string |
-    +----------------+--------+
-    | Permissions    | read   |
-    +----------------+--------+
-    | Channel Based  | False  |
-    +----------------+--------+
-    | Resettable     | No     |
-    +----------------+--------+
+    +----------------+-------+
+    | Characteristic | Value |
+    +================+=======+
+    | Datatype       | str   |
+    +----------------+-------+
+    | Permissions    | read  |
+    +----------------+-------+
+    | Channel Based  | False |
+    +----------------+-------+
+    | Resettable     | No    |
+    +----------------+-------+
 
     .. tip:: 
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -101,17 +101,17 @@ NI-ModInst Attributes
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------+
-    | Characteristic | Value   |
-    +================+=========+
-    | Datatype       | integer |
-    +----------------+---------+
-    | Permissions    | read    |
-    +----------------+---------+
-    | Channel Based  | False   |
-    +----------------+---------+
-    | Resettable     | No      |
-    +----------------+---------+
+    +----------------+-------+
+    | Characteristic | Value |
+    +================+=======+
+    | Datatype       | int   |
+    +----------------+-------+
+    | Permissions    | read  |
+    +----------------+-------+
+    | Channel Based  | False |
+    +----------------+-------+
+    | Resettable     | No    |
+    +----------------+-------+
 
     .. tip:: 
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -124,17 +124,17 @@ NI-ModInst Attributes
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------+
-    | Characteristic | Value   |
-    +================+=========+
-    | Datatype       | integer |
-    +----------------+---------+
-    | Permissions    | read    |
-    +----------------+---------+
-    | Channel Based  | False   |
-    +----------------+---------+
-    | Resettable     | No      |
-    +----------------+---------+
+    +----------------+-------+
+    | Characteristic | Value |
+    +================+=======+
+    | Datatype       | int   |
+    +----------------+-------+
+    | Permissions    | read  |
+    +----------------+-------+
+    | Channel Based  | False |
+    +----------------+-------+
+    | Resettable     | No    |
+    +----------------+-------+
 
     .. tip:: 
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -147,17 +147,17 @@ NI-ModInst Attributes
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------+
-    | Characteristic | Value  |
-    +================+========+
-    | Datatype       | string |
-    +----------------+--------+
-    | Permissions    | read   |
-    +----------------+--------+
-    | Channel Based  | False  |
-    +----------------+--------+
-    | Resettable     | No     |
-    +----------------+--------+
+    +----------------+-------+
+    | Characteristic | Value |
+    +================+=======+
+    | Datatype       | str   |
+    +----------------+-------+
+    | Permissions    | read  |
+    +----------------+-------+
+    | Channel Based  | False |
+    +----------------+-------+
+    | Resettable     | No    |
+    +----------------+-------+
 
     .. tip:: 
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -170,17 +170,17 @@ NI-ModInst Attributes
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------+
-    | Characteristic | Value   |
-    +================+=========+
-    | Datatype       | integer |
-    +----------------+---------+
-    | Permissions    | read    |
-    +----------------+---------+
-    | Channel Based  | False   |
-    +----------------+---------+
-    | Resettable     | No      |
-    +----------------+---------+
+    +----------------+-------+
+    | Characteristic | Value |
+    +================+=======+
+    | Datatype       | int   |
+    +----------------+-------+
+    | Permissions    | read  |
+    +----------------+-------+
+    | Channel Based  | False |
+    +----------------+-------+
+    | Resettable     | No    |
+    +----------------+-------+
 
     .. tip:: 
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -193,17 +193,17 @@ NI-ModInst Attributes
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------+
-    | Characteristic | Value   |
-    +================+=========+
-    | Datatype       | integer |
-    +----------------+---------+
-    | Permissions    | read    |
-    +----------------+---------+
-    | Channel Based  | False   |
-    +----------------+---------+
-    | Resettable     | No      |
-    +----------------+---------+
+    +----------------+-------+
+    | Characteristic | Value |
+    +================+=======+
+    | Datatype       | int   |
+    +----------------+-------+
+    | Permissions    | read  |
+    +----------------+-------+
+    | Channel Based  | False |
+    +----------------+-------+
+    | Resettable     | No    |
+    +----------------+-------+
 
     .. tip:: 
         This property corresponds to the following LabVIEW Property or C Attribute:

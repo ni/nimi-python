@@ -33,7 +33,7 @@ class SideEffectsHelper(object):
         self._defaults['OpenInstalledDevicesSession'] = {}
         self._defaults['OpenInstalledDevicesSession']['return'] = 0
         self._defaults['OpenInstalledDevicesSession']['handle'] = None
-        self._defaults['OpenInstalledDevicesSession']['item_count'] = None
+        self._defaults['OpenInstalledDevicesSession']['deviceCount'] = None
 
     def __getitem__(self, func):
         return self._defaults[func]
@@ -68,13 +68,13 @@ class SideEffectsHelper(object):
         attribute_value.value = ctypes.cast(t, nimodinst.ctypes_types.ViString_ctype).value
         return self._defaults['GetInstalledDeviceAttributeViString']['return']
 
-    def niModInst_OpenInstalledDevicesSession(self, driver, handle, item_count):  # noqa: N802
+    def niModInst_OpenInstalledDevicesSession(self, driver, handle, device_count):  # noqa: N802
         if self._defaults['OpenInstalledDevicesSession']['handle'] is None:
             raise MockFunctionCallError("niModInst_OpenInstalledDevicesSession", param='handle')
         handle.contents.value = self._defaults['OpenInstalledDevicesSession']['handle']
-        if self._defaults['OpenInstalledDevicesSession']['item_count'] is None:
-            raise MockFunctionCallError("niModInst_OpenInstalledDevicesSession", param='item_count')
-        item_count.contents.value = self._defaults['OpenInstalledDevicesSession']['item_count']
+        if self._defaults['OpenInstalledDevicesSession']['deviceCount'] is None:
+            raise MockFunctionCallError("niModInst_OpenInstalledDevicesSession", param='deviceCount')
+        device_count.contents.value = self._defaults['OpenInstalledDevicesSession']['deviceCount']
         return self._defaults['OpenInstalledDevicesSession']['return']
 
     # Helper function to setup Mock object with default side effects and return values

@@ -1,53 +1,53 @@
 
 
 class ViStatus(int):
-    def python_type(self):
-        return 'integer'
+    def __new__(cls, val=0):
+        return int(val)
 
 
 class ViRsrc(str):
-    def python_type(self):
-        return 'string'
+    def __new__(cls, val=0):
+        return str(val)
 
 
 class ViSession(int):
-    def python_type(self):
-        return 'integer'
+    def __new__(cls, val=0):
+        return int(val)
 
 
 class ViChar(int):
-    def python_type(self):
-        return 'integer'
+    def __new__(cls, val=0):
+        return int(val)
 
 
 class ViUInt32(int):
-    def python_type(self):
-        return 'integer'
+    def __new__(cls, val=0):
+        return int(val)
 
 
 class ViInt32(int):
-    def python_type(self):
-        return 'integer'
+    def __new__(cls, val=0):
+        return int(val)
 
 
 class ViInt16(int):
-    def python_type(self):
-        return 'integer'
+    def __new__(cls, val=0):
+        return int(val)
 
 
 class ViUInt16(int):
-    def python_type(self):
-        return 'integer'
+    def __new__(cls, val=0):
+        return int(val)
 
 
 class ViString(str):
-    def python_type(self):
-        return 'string'
+    def __new__(cls, val=0):
+        return str(val)
 
 
 class ViAttr(int):
-    def python_type(self):
-        return 'integer'
+    def __new__(cls, val=0):
+        return int(val)
 
 
 class ViConstString(ViString):
@@ -55,8 +55,8 @@ class ViConstString(ViString):
     def value(self):  # Makes 'value' readonly
         return super(ViConstString, ViString)
 
-    def python_type(self):
-        return 'string'
+    def __new__(cls, val=0):
+        return str(val)
 
 
 # Python's bool cannot be subclassed:
@@ -64,18 +64,18 @@ class ViConstString(ViString):
 class ViBoolean(int):
     @classmethod
     def from_param(cls, param):
-        return 1 if bool(param) else 0
+        return True if bool(param) else False
 
-    def python_type(self):
-        return 'integer'
+    def __new__(cls, val=0):
+        return bool(val)
 
 
 class ViReal32(float):
-    def python_type(self):
-        return 'float'
+    def __new__(cls, val=0):
+        return float(val)
 
 
 class ViReal64(float):
-    def python_type(self):
-        return 'float'
+    def __new__(cls, val=0):
+        return float(val)
 
