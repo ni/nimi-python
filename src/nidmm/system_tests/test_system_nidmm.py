@@ -198,7 +198,6 @@ def test_writeonly_attribute(device_info):
             assert e.code == -1074135027 #Error : Attribute is read-only.
 
 
-
 def test_invalid_value_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         try:
