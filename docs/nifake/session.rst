@@ -18,7 +18,7 @@ NI-FAKE Session
    +------------------------------+------------------+
    | :py:attr:`read_write_double` | ViReal64         |
    +------------------------------+------------------+
-   | :py:attr:`simulate`          | ViString         |
+   | :py:attr:`read_write_string` | ViString         |
    +------------------------------+------------------+
 
 

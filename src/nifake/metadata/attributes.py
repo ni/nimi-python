@@ -42,7 +42,6 @@ attributes = {
         'enum': None,
         'lv_property': 'Fake attributes:Read Write String',
         'name': 'READ_WRITE_STRING',
-        'name': 'SIMULATE',
         'resettable': 'No',
         'short_description': '''An attribute of type string with read/write access.''',
         'type': 'ViString',

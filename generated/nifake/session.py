@@ -103,7 +103,7 @@ class Session(object):
     read_write_bool = AttributeViBoolean(1000000)
     read_write_color = AttributeEnum(1000003, enums.Color)
     read_write_double = AttributeViReal64(1000001)
-    simulate = AttributeViString(1000002)
+    read_write_string = AttributeViString(1000002)
 
     def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):
         self.library = library.get_library()

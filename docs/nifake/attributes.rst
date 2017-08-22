@@ -75,7 +75,7 @@ NI-FAKE Attributes
             - LabVIEW Property: **Fake attributes:Read Write Float**
             - C Attribute: **NIFAKE_ATTR_READ_WRITE_DOUBLE**
 
-.. py:attribute:: simulate
+.. py:attribute:: read_write_string
 
     
 
@@ -97,6 +97,6 @@ NI-FAKE Attributes
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Fake attributes:Read Write String**
-            - C Attribute: **NIFAKE_ATTR_SIMULATE**
+            - C Attribute: **NIFAKE_ATTR_READ_WRITE_STRING**
 
 
