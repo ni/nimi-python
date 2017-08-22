@@ -14,9 +14,9 @@ COMMAND_LOG_SH := $(GENERATED_DIR)/command_history.sh
 export COMMAND_LOG_SH
 
 define log_command
-	$1
 	@echo '$1' >> $(COMMAND_LOG_BATCH)
 	@echo '$1' >> $(COMMAND_LOG_SH)
+	$1
 endef
 
 ifeq (,$(PRINT))
