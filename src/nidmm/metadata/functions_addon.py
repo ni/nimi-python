@@ -45,6 +45,7 @@ functions_enums = {
     'ConfigureWaveformCoupling':    { 'parameters': { 1: { 'enum': 'WaveformCouplingMode',      }, }, },
     'ConfigureTransducerType':      { 'parameters': { 1: { 'enum': 'TemperatureTransducerType', }, }, },
     'ConfigureThermistorType':      { 'parameters': { 1: { 'enum': 'TemperatureThermistorType', }, }, },
+    'ConfigureThermocouple':        { 'parameters': { 1: { 'enum': 'ThermocoupleType',          }, }, },
 
 }
 
