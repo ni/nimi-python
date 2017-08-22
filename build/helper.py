@@ -66,7 +66,7 @@ def extract_ivi_dance_parameter(parameters):
 
 def find_parameter(name, parameters):
     parameter = [x for x in parameters if x['name'] == name]
-    assert len(parameter) == 1, 'Parameter {1} not found. Check your metadata.'.format(name)
+    assert len(parameter) == 1, 'Parameter {0} not found. Check your metadata.'.format(name)
     return parameter[0]
 
 def find_size_parameter(parameter, parameters):
@@ -529,9 +529,6 @@ def fix_references(doc, cfg, make_link=False):
 
     doc = attr_re.sub(replace_attribute_python_name, doc)
     doc = func_re.sub(replace_func_python_name, doc)
-
-    if doc.find('niDMM') != -1:
-        print('Found niDMM: ' + doc)
 
     if not make_link:
         doc = doc.replace('\_', '_')
