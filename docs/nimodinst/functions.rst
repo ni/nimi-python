@@ -219,7 +219,7 @@ NI-ModInst Functions
 
         WHERE
 
-        handle (ViSession):
+        handle (ViSession): 
 
 
             A pointer to a ViSession variable that receives the value of the
