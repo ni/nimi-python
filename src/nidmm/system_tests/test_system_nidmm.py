@@ -202,7 +202,7 @@ def test_writeonly_attribute(device_info):
 def test_invalid_value_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         try:
-            session.settle_time = "q"
+            session.settle_time = 5
         except nidmm.Error as e:
             assert e.code == -1074135024 #Error : Invalid value for parameter or property.
 
