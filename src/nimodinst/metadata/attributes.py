@@ -7,7 +7,9 @@ attributes = {
         'type': 'ViString',
         'enum': None,
         'access': 'read',
-        'short_description': 'The name of the device, which can be used to open an instrument driver session for that device',
+        'documentation': {
+            'description': 'The name of the device, which can be used to open an instrument driver session for that device',
+        },
     },
     1: {
         'access': 'read only',
@@ -17,7 +19,9 @@ attributes = {
         'type': 'ViString',
         'enum': None,
         'access': 'read',
-        'short_description': 'The model of the device (for example, NI PXI-5122)',
+        'documentation': {
+            'description': 'The model of the device (for example, NI PXI-5122)',
+        },
     },
     2: {
         'access': 'read only',
@@ -27,7 +31,9 @@ attributes = {
         'type': 'ViString',
         'enum': None,
         'access': 'read',
-        'short_description': 'The serial number of the device',
+        'documentation': {
+            'description': 'The serial number of the device',
+        },
     },
     10: {
         'access': 'read only',
@@ -37,7 +43,9 @@ attributes = {
         'type': 'ViInt32',
         'enum': None,
         'access': 'read',
-        'short_description': 'The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.',
+        'documentation': {
+            'description': 'The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.',
+        },
     },
     11: {
         'access': 'read only',
@@ -47,7 +55,9 @@ attributes = {
         'type': 'ViInt32',
         'enum': None,
         'access': 'read',
-        'short_description': 'The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.',
+        'documentation': {
+            'description': 'The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.',
+        },
     },
     12: {
         'access': 'read only',
@@ -57,7 +67,9 @@ attributes = {
         'type': 'ViInt32',
         'enum': None,
         'access': 'read',
-        'short_description': 'The bus on which the device has been enumerated.',
+        'documentation': {
+            'description': 'The bus on which the device has been enumerated.',
+        },
     },
     13: {
         'access': 'read only',
@@ -67,7 +79,9 @@ attributes = {
         'type': 'ViInt32',
         'enum': None,
         'access': 'read',
-        'short_description': 'The socket number on which the device has been enumerated',
+        'documentation': {
+            'description': 'The socket number on which the device has been enumerated',
+        },
     },
     17: {
         'access': 'read only',
@@ -77,7 +91,9 @@ attributes = {
         'type': 'ViInt32',
         'enum': None,
         'access': 'read',
-        'short_description': '**PCIEXPRESS_LINK_WIDTH**',
+        'documentation': {
+            'description': '**PCIEXPRESS_LINK_WIDTH**',
+        },
     },
     18: {
         'access': 'read only',
@@ -87,7 +103,9 @@ attributes = {
         'type': 'ViInt32',
         'enum': None,
         'access': 'read',
-        'short_description': '**MAX_PCIEXPRESS_LINK_WIDTH**',
+        'documentation': {
+            'description': '**MAX_PCIEXPRESS_LINK_WIDTH**',
+        },
     },
 }
 

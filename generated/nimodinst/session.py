@@ -238,5 +238,5 @@ class Session(object):
         device_count_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niModInst_OpenInstalledDevicesSession(driver.encode('ascii'), ctypes.pointer(handle_ctype), ctypes.pointer(device_count_ctype))
         errors._handle_error(self, error_code)
-        return handle_ctype.value, device_count_ctype.value
+        return python_types.ViSession(handle_ctype.value), python_types.ViInt32(device_count_ctype.value)
 

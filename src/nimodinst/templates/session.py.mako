@@ -55,9 +55,9 @@ class Device(object):
     def __init__(self, owner, index):
 % for attribute in helper.sorted_attrs(attributes):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(owner, ${attribute}, index=index)
-%   if 'short_description' in attributes[attribute]:
+%   if 'documentation' in attributes[attribute]:
         '''
-        ${helper.get_indented_docstring_snippet(attributes[attribute]['short_description'], indent=8)}
+        ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
         '''
 %   endif
 % endfor
@@ -72,9 +72,9 @@ class Session(object):
     def __init__(self, driver):
 % for attribute in helper.sorted_attrs(attributes):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(self, ${attribute})
-%   if 'short_description' in attributes[attribute]:
+%   if 'documentation' in attributes[attribute]:
         '''
-        ${helper.get_indented_docstring_snippet(attributes[attribute]['short_description'], indent=8)}
+        ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
         '''
 %   endif
 % endfor
