@@ -98,6 +98,14 @@ def _add_python_type(parameter):
         parameter['python_type'] = 'enums.' + parameter['enum']
     return parameter
 
+def _add_intrinsic_type(parameter):
+    '''Adds a intrinsic (basic python type) key/value pair to the parameter metadata'''
+    if parameter['enum'] is None:
+        parameter['intrinsic_type'] = get_intrinsic_type_from_visa_type(parameter['type'])
+    else:
+        parameter['intrinsic_type'] = parameter['python_type']
+    return parameter
+
 def _add_ctypes_variable_name(parameter):
     '''Adds a ctypes_variable_name key/value pair to the parameter metadata for a corresponding ctypes variable'''
     parameter['ctypes_variable_name'] = parameter['python_name'] + '_ctype'
@@ -138,6 +146,7 @@ def add_all_metadata(functions):
         for p in functions[f]['parameters']:
             _add_python_parameter_name(p)
             _add_python_type(p)
+            _add_intrinsic_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
             _add_buffer_info(p)
@@ -231,14 +240,20 @@ def get_library_call_parameter_types_snippet(parameters_list):
 def _get_output_param_return_snippet(output_parameter, parameters):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
     assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
+    return_type_snippet = ''
+    if output_parameter['enum'] is not None:
+        return_type_snippet = 'enums.' + output_parameter['enum'] + '('
+    else:
+        return_type_snippet = 'python_types.' + output_parameter['python_type'] + '('
+
     if output_parameter['is_buffer']:
         if output_parameter['type'] == 'ViChar' or output_parameter['type'] == 'ViString':
             snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
         else:
             size_parameter = find_size_parameter(output_parameter, parameters)
-            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i].value for i in range(' + size_parameter['python_name'] + ')]'
+            snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i].value) for i in range(' + size_parameter['python_name'] + ')]'
     else:
-        snippet = output_parameter['ctypes_variable_name'] + '.value'
+        snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + '.value)'
 
     return snippet
 
@@ -545,7 +560,7 @@ def get_function_rst(fname, config, indent=0):
         rst +=  '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
         rst += get_documentation_for_node_rst(p, config, indent + 4)
 
-        p_type = p['python_type']
+        p_type = p['intrinsic_type']
         if p_type.startswith('enums.'):
             p_type = p_type.replace('enums.', '')
             p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
@@ -557,7 +572,7 @@ def get_function_rst(fname, config, indent=0):
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple ('+ ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
-            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type']) + '\n'
+            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type']) + '\n'
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
@@ -584,14 +599,14 @@ def get_function_docstring(fname, config, indent=0):
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
-        docstring +=  '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type'])
+        docstring +=  '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['intrinsic_type'])
         docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     output_params = extract_output_parameters(function['parameters'])
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type'])
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['intrinsic_type'])
             docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     return docstring
@@ -704,15 +719,15 @@ def add_to_path(p):
     finally:
         sys.path = old_path
 
-def get_python_type_from_visa_type(visa_type):
+def get_intrinsic_type_from_visa_type(visa_type):
+    '''Returns the underlying intrinsic (python) type from the visa type'''
     if sys.version_info.major < 3:
         with add_to_path('build/templates'):
             p_types = importlib.import_module('python_types')
     else:
         p_types = importlib.import_module('build.templates.python_types')
     v_type = getattr(p_types, visa_type)
-    p_type = v_type().python_type()
 
-    return p_type
+    return type(v_type()).__name__
 
 
