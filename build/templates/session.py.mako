@@ -28,6 +28,7 @@ from ${module_name} import ctypes_types
 from ${module_name} import enums
 from ${module_name} import errors
 from ${module_name} import library
+from ${module_name} import python_types
 
 
 class AttributeViInt32(object):
@@ -80,10 +81,10 @@ class AttributeViBoolean(object):
 
     def __get__(self, obj, objtype):
         assert objtype is Session
-        return obj._get_attribute_vi_boolean(self.channel, self.attribute_id) is not 0
+        return obj._get_attribute_vi_boolean(self.channel, self.attribute_id)
 
     def __set__(self, obj, value):
-        obj._set_attribute_vi_boolean(self.channel, self.attribute_id, (value is not 0))
+        obj._set_attribute_vi_boolean(self.channel, self.attribute_id, value)
 
 
 class AttributeEnum(object):
@@ -132,9 +133,9 @@ class Session(object):
     %else:
     ${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(${attribute})
     %endif
-%   if 'short_description' in attributes[attribute]:
+%   if 'documentation' in attributes[attribute]:
     '''
-    ${helper.get_indented_docstring_snippet(attributes[attribute]['short_description'], indent=4)}
+    ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
     '''
 %   endif
 % endfor
@@ -225,7 +226,8 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
 %>
     def ${f['python_name']}(${helper.get_method_parameters_snippet(parameters, skip_session_handle = True, skip_output_parameters = True, skip_ivi_dance_size_parameter = True)}):
         '''${f['python_name']}
-${helper.get_function_docstring(func_name, config, indent=8)}
+
+        ${helper.get_function_docstring(func_name, config, indent=8)}
         '''
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}

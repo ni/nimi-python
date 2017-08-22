@@ -59,10 +59,10 @@ class NimodinstCtypesLibrary(object):
                 self.niModInst_GetInstalledDeviceAttributeViString_cfunc.restype = nimodinst.python_types.ViStatus
         return self.niModInst_GetInstalledDeviceAttributeViString_cfunc(handle, index, attribute_id, attribute_value_buffer_size, attribute_value)
 
-    def niModInst_OpenInstalledDevicesSession(self, driver, handle, item_count):  # noqa: N802
+    def niModInst_OpenInstalledDevicesSession(self, driver, handle, device_count):  # noqa: N802
         with self._func_lock:
             if self.niModInst_OpenInstalledDevicesSession_cfunc is None:
                 self.niModInst_OpenInstalledDevicesSession_cfunc = self._library.niModInst_OpenInstalledDevicesSession
                 self.niModInst_OpenInstalledDevicesSession_cfunc.argtypes = [ViConstString_ctype, ctypes.POINTER(ViSession_ctype), ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
                 self.niModInst_OpenInstalledDevicesSession_cfunc.restype = nimodinst.python_types.ViStatus
-        return self.niModInst_OpenInstalledDevicesSession_cfunc(driver, handle, item_count)
+        return self.niModInst_OpenInstalledDevicesSession_cfunc(driver, handle, device_count)

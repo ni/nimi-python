@@ -15,9 +15,9 @@ class ${enum_name}(Enum):
     % else:
     ${enum_value['name']} = ${enum_value['value']}
     % endif
-    % if 'description' in enum_value and len(enum_value['description'].strip()) > 0:
+    % if 'documentation' in enum_value:
     '''
-    ${helper.get_indented_docstring_snippet(enum_value['description'], indent=4)}
+    ${helper.get_documentation_for_node_docstring(enum_value, config, indent=4)}
     '''
     % endif
     % endfor

@@ -283,8 +283,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetPath", param='path')
         if buffer_size == 0:
             return len(self._defaults['GetPath']['path'])
-        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetPath']['path'].encode('ascii'))
-        path.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
+        t = niswitch.ctypes_types.ViChar_ctype(self._defaults['GetPath']['path'].encode('ascii'))
+        path.value = ctypes.cast(t, niswitch.ctypes_types.ViChar_ctype).value
         return self._defaults['GetPath']['return']
 
     def niSwitch_GetRelayCount(self, vi, relay_name, relay_count):  # noqa: N802

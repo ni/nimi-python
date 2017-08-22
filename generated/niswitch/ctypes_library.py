@@ -257,7 +257,7 @@ class NiswitchCtypesLibrary(object):
         with self._func_lock:
             if self.niSwitch_GetPath_cfunc is None:
                 self.niSwitch_GetPath_cfunc = self._library.niSwitch_GetPath
-                self.niSwitch_GetPath_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViConstString_ctype, ViInt32_ctype, ViString_ctype]  # noqa: F405
+                self.niSwitch_GetPath_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViConstString_ctype, ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
                 self.niSwitch_GetPath_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_GetPath_cfunc(vi, channel1, channel2, buffer_size, path)
 
@@ -513,6 +513,6 @@ class NiswitchCtypesLibrary(object):
         with self._func_lock:
             if self.niSwitch_self_test_cfunc is None:
                 self.niSwitch_self_test_cfunc = self._library.niSwitch_self_test
-                self.niSwitch_self_test_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViInt16_ctype), ViString_ctype]  # noqa: F405
+                self.niSwitch_self_test_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViInt16_ctype), ctypes.POINTER(ViChar_ctype)]  # noqa: F405
                 self.niSwitch_self_test_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_self_test_cfunc(vi, self_test_result, self_test_message)
