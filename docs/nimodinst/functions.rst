@@ -20,7 +20,7 @@ NI-ModInst Functions
 
         
 
-    :type handle: ViSession
+    :type handle: int
 
 .. function:: _get_extended_error_info(error_info_buffer_size, error_info)
 
@@ -55,7 +55,7 @@ NI-ModInst Functions
 
         
 
-    :type error_info_buffer_size: ViInt32
+    :type error_info_buffer_size: int
 
 .. function:: _get_installed_device_attribute_vi_int32(handle, index, attribute_id, attribute_value)
 
@@ -77,7 +77,7 @@ NI-ModInst Functions
 
         
 
-    :type handle: ViSession
+    :type handle: int
     :param index:
 
 
@@ -88,7 +88,7 @@ NI-ModInst Functions
 
         
 
-    :type index: ViInt32
+    :type index: int
     :param attribute_id:
 
 
@@ -107,7 +107,7 @@ NI-ModInst Functions
 
         
 
-    :type attribute_id: ViInt32
+    :type attribute_id: int
 
     :rtype: ViInt32
 
@@ -144,7 +144,7 @@ NI-ModInst Functions
 
         
 
-    :type handle: ViSession
+    :type handle: int
     :param index:
 
 
@@ -155,7 +155,7 @@ NI-ModInst Functions
 
         
 
-    :type index: ViInt32
+    :type index: int
     :param attribute_id:
 
 
@@ -168,7 +168,7 @@ NI-ModInst Functions
 
         
 
-    :type attribute_id: ViInt32
+    :type attribute_id: int
     :param attribute_value_buffer_size:
 
 
@@ -180,7 +180,7 @@ NI-ModInst Functions
 
         
 
-    :type attribute_value_buffer_size: ViInt32
+    :type attribute_value_buffer_size: int
 
 .. function:: _open_installed_devices_session(driver, handle, device_count)
 
@@ -213,7 +213,7 @@ NI-ModInst Functions
 
         
 
-    :type driver: ViConstString
+    :type driver: str
 
     :rtype: tuple (handle, device_count)
 
@@ -228,7 +228,7 @@ NI-ModInst Functions
 
             
 
-        device_count (ViInt32):
+        device_count (ViInt32): 
 
 
             A pointer to an integer variable that receives the number of devices

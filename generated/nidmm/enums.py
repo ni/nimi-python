@@ -421,7 +421,8 @@ class SampleTrigger(Enum):
     '''
     SOFTWARE_TRIG = 3
     '''
-    Configures the DMM to wait until niDMM Send Software Trigger is called.
+    Configures the DMM to wait until `niDMM Send Software
+    Trigger <dmmviref.chm::/niDMM_Send_Software_Trigger.html>`__ is called.
     '''
     INTERVAL = 10
     '''
@@ -577,7 +578,8 @@ class TriggerSource(Enum):
     '''
     SOFTWARE_TRIG = 3
     '''
-    Waits until niDMM Send Software Trigger is called.
+    Waits until `niDMM Send Software
+    Trigger <dmmviref.chm::/niDMM_Send_Software_Trigger.html>`__ is called.
     '''
     _TTL_0 = 111
     '''
