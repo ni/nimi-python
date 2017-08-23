@@ -233,7 +233,7 @@ class NiswitchCtypesLibrary(object):
         with self._func_lock:
             if self.niSwitch_GetError_cfunc is None:
                 self.niSwitch_GetError_cfunc = self._library.niSwitch_GetError
-                self.niSwitch_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ViString_ctype]  # noqa: F405
+                self.niSwitch_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
                 self.niSwitch_GetError_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_GetError_cfunc(vi, code, buffersize, description)
 
@@ -257,7 +257,7 @@ class NiswitchCtypesLibrary(object):
         with self._func_lock:
             if self.niSwitch_GetPath_cfunc is None:
                 self.niSwitch_GetPath_cfunc = self._library.niSwitch_GetPath
-                self.niSwitch_GetPath_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViConstString_ctype, ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
+                self.niSwitch_GetPath_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViConstString_ctype, ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niSwitch_GetPath_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_GetPath_cfunc(vi, channel1, channel2, buffer_size, path)
 
@@ -481,7 +481,7 @@ class NiswitchCtypesLibrary(object):
         with self._func_lock:
             if self.niSwitch_error_message_cfunc is None:
                 self.niSwitch_error_message_cfunc = self._library.niSwitch_error_message
-                self.niSwitch_error_message_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ViString_ctype]  # noqa: F405
+                self.niSwitch_error_message_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
                 self.niSwitch_error_message_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_error_message_cfunc(vi, error_code, error_message)
 
@@ -489,7 +489,7 @@ class NiswitchCtypesLibrary(object):
         with self._func_lock:
             if self.niSwitch_error_query_cfunc is None:
                 self.niSwitch_error_query_cfunc = self._library.niSwitch_error_query
-                self.niSwitch_error_query_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViInt32_ctype), ViString_ctype]  # noqa: F405
+                self.niSwitch_error_query_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViInt32_ctype), ctypes.POINTER(ViChar_ctype)]  # noqa: F405
                 self.niSwitch_error_query_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_error_query_cfunc(vi, error_code, error_message)
 
@@ -505,7 +505,7 @@ class NiswitchCtypesLibrary(object):
         with self._func_lock:
             if self.niSwitch_revision_query_cfunc is None:
                 self.niSwitch_revision_query_cfunc = self._library.niSwitch_revision_query
-                self.niSwitch_revision_query_cfunc.argtypes = [ViSession_ctype, ViString_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
+                self.niSwitch_revision_query_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViChar_ctype), ctypes.POINTER(ViChar_ctype)]  # noqa: F405
                 self.niSwitch_revision_query_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_revision_query_cfunc(vi, instrument_driver_revision, firmware_revision)
 

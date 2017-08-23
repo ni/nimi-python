@@ -202,7 +202,7 @@ class Session(object):
     def _get_error_description(self, error_code):
         new_error_code = ctypes_types.ViStatus_ctype(0)
         buffer_size = self.library.niSwitch_GetError(self.vi, ctypes.byref(new_error_code), 0, None)
-        assert (new_error_code.value == error_code)
+        assert (new_error_code.value == error_code), 'buffer_size is {0}, new_error_code.value is {1}, error_code is {2}'.format(buffer_size, new_error_code.value, error_code)
 
         if (buffer_size > 0):
             '''
@@ -466,7 +466,7 @@ class Session(object):
         error_code = self.library.niSwitch_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         array_size = error_code
         attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
@@ -487,7 +487,7 @@ class Session(object):
         error_code = self.library.niSwitch_GetChannelName(self.vi, index, buffer_size, channel_name_buffer_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         channel_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetChannelName(self.vi, index, buffer_size, channel_name_buffer_ctype)
@@ -511,9 +511,9 @@ class Session(object):
         error_code = self.library.niSwitch_GetError(self.vi, ctypes.pointer(code_ctype), buffersize, description_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffersize = error_code
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffersize), ctypes_types.ViString_ctype)
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffersize), ctypes_types.ViChar_ctype)
         error_code = self.library.niSwitch_GetError(self.vi, ctypes.pointer(code_ctype), buffersize, description_ctype)
         errors._handle_error(self, error_code)
         return python_types.ViStatus(code_ctype.value), description_ctype.value.decode("ascii")
@@ -531,7 +531,7 @@ class Session(object):
         error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, coercion_record_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         coercion_record_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, coercion_record_ctype)
@@ -551,7 +551,7 @@ class Session(object):
         error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
@@ -573,9 +573,9 @@ class Session(object):
         error_code = self.library.niSwitch_GetPath(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
-        path_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        path_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetPath(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
         errors._handle_error(self, error_code)
         return path_ctype.value.decode("ascii")
@@ -610,7 +610,7 @@ class Session(object):
         error_code = self.library.niSwitch_GetRelayName(self.vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         relay_name_buffer_size = error_code
         relay_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(relay_name_buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetRelayName(self.vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
@@ -949,10 +949,10 @@ class Session(object):
             error_code (int):
 
         Returns:
-            error_message (str):
+            error_message (int):
         '''
-        error_message_ctype = (ctypes_types.ViString_ctype * 256)()
-        error_code = self.library.niSwitch_error_message(self.vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)))
+        error_message_ctype = (ctypes_types.ViChar_ctype * 256)()
+        error_code = self.library.niSwitch_error_message(self.vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return error_message_ctype.value.decode("ascii")
 
@@ -963,11 +963,11 @@ class Session(object):
 
         Returns:
             error_code (int):
-            error_message (str):
+            error_message (int):
         '''
         error_code_ctype = ctypes_types.ViInt32_ctype(0)
-        error_message_ctype = (ctypes_types.ViString_ctype * 256)()
-        error_code = self.library.niSwitch_error_query(self.vi, ctypes.pointer(error_code_ctype), ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)))
+        error_message_ctype = (ctypes_types.ViChar_ctype * 256)()
+        error_code = self.library.niSwitch_error_query(self.vi, ctypes.pointer(error_code_ctype), ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return python_types.ViInt32(error_code_ctype.value), error_message_ctype.value.decode("ascii")
 
@@ -986,14 +986,14 @@ class Session(object):
         
 
         Returns:
-            instrument_driver_revision (str):
+            instrument_driver_revision (int):
             firmware_revision (int):
         '''
-        instrument_driver_revision_ctype = (ctypes_types.ViString_ctype * 256)()
-        firmware_revision_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niSwitch_revision_query(self.vi, ctypes.cast(instrument_driver_revision_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)), ctypes.pointer(firmware_revision_ctype))
+        instrument_driver_revision_ctype = (ctypes_types.ViChar_ctype * 256)()
+        firmware_revision_ctype = (ctypes_types.ViChar_ctype * 256)()
+        error_code = self.library.niSwitch_revision_query(self.vi, ctypes.cast(instrument_driver_revision_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)), ctypes.cast(firmware_revision_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
-        return instrument_driver_revision_ctype.value.decode("ascii"), python_types.ViChar(firmware_revision_ctype.value)
+        return instrument_driver_revision_ctype.value.decode("ascii"), firmware_revision_ctype.value.decode("ascii")
 
     def self_test(self):
         '''self_test

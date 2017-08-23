@@ -881,7 +881,7 @@ class Session(object):
     def _get_error_description(self, error_code):
         new_error_code = ctypes_types.ViStatus_ctype(0)
         buffer_size = self.library.niDMM_GetError(self.vi, ctypes.byref(new_error_code), 0, None)
-        assert (new_error_code.value == error_code)
+        assert (new_error_code.value == error_code), 'buffer_size is {0}, new_error_code.value is {1}, error_code is {2}'.format(buffer_size, new_error_code.value, error_code)
 
         if (buffer_size > 0):
             '''
@@ -2128,7 +2128,7 @@ class Session(object):
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
@@ -2300,7 +2300,7 @@ class Session(object):
         error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
         error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
@@ -2329,7 +2329,7 @@ class Session(object):
         error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
         error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
@@ -2467,7 +2467,7 @@ class Session(object):
         error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
         error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)

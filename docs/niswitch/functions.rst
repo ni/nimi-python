@@ -405,7 +405,7 @@ NI-SWITCH Functions
 
     :type error_code: int
 
-    :rtype: ViString
+    :rtype: ViChar
 
 
 .. function:: error_query(error_code, error_message)
@@ -416,7 +416,7 @@ NI-SWITCH Functions
 
         error_code (ViInt32): 
 
-        error_message (ViString): 
+        error_message (ViChar): 
 
 
 .. function:: reset()
@@ -427,7 +427,7 @@ NI-SWITCH Functions
 
         WHERE
 
-        instrument_driver_revision (ViString): 
+        instrument_driver_revision (ViChar): 
 
         firmware_revision (ViChar): 
 
