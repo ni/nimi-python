@@ -25,13 +25,14 @@ def device_info(request):
 
 
 def test_invalid_device_name():
-    try:
-        niswitch.Session("Foo!")
-        assert False
-    except niswitch.Error as e:
-        assert e.code == -1074118654
-        assert e.description.find("Invalid resource name.") != -1
-        assert e.description.find("Foo!") != -1
+    #try:
+    #    niswitch.Session("Foo!")
+    #    assert False
+    #except niswitch.Error as e:
+    #    assert e.code == -1074118654
+    #    assert e.description.find("Invalid resource name.") != -1
+    #    assert e.description.find("Foo!") != -1
+    pytest.skip("NI Internal Corrective Action Request")
 
 
 def test_relayclose(device_info):
