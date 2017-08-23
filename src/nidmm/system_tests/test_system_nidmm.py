@@ -197,14 +197,14 @@ def test_writeonly_attribute(device_info):
             assert e.code == -1074135027 #Error : Attribute is read-only.
 			
 			
-def test_init_with_Valid_optionstring(device_info):
-    with nidmm.Session(device_info['name'],False,True,'Simulate=1') as session:
+def test_init_with_valid_optionstring(device_info):
+    with nidmm.Session(device_info['name'], False, True, 'Simulate=1') as session:
         assert session.simulate == True
 
 
 def test_init_with_invalid_optionstring(device_info):
     try:
-        with nidmm.Session(device_info['name'],False,True,'Invalidstring=1') as session:
+        with nidmm.Session(device_info['name'], False, True, 'Invalidstring=1') as session:
             assert False
     except nidmm.Error as e:
         assert e.code == -1074134965 # Error : The option string parameter contains an entry with an unknown option name.
