@@ -3,7 +3,7 @@ import nifake
 
 from mock import ANY
 from mock import patch
-#from mock import call
+# from mock import call
 
 SESSION_NUM_FOR_TEST = 42
 
@@ -80,7 +80,7 @@ class TestSession(object):
             #self.patched_ctypes_library.niFake_GetAttributeViString.assert_has_calls(calls)
     '''
 
-    #TODO(marcoskirsch): Flesh out test coverage for all NI-FAKE functions and attributes.
+    # TODO(marcoskirsch): Flesh out test coverage for all NI-FAKE functions and attributes.
 
     '''
     # Test with multiple pointer types, ensuring proper return values (i.e. parameters in correct order)
