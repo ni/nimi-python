@@ -21,15 +21,12 @@ functions_codegen_method = {
 
 # TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval?
 functions_params_types = {
-    'GetError':                     { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'error_message':                { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
-    'error_query':                  { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
-    'revision_query':               { 'parameters': { 1: { 'type': 'ViString',                  }, }, },
     'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
     'GetNextInterchangeWarning':    { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'GetNextCoercionRecord':        { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'GetChannelName':               { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetRelayName':                 { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
+    'GetPath':                      { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
@@ -50,7 +47,8 @@ functions_buffer_info = {
     'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'buffersize'}, }, }, },
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'error_query':                  { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'revision_query':               { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'revision_query':               { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, },       # From documentation
+                                                      2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI
     'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'arraySize'}, }, }, },
     'GetNextInterchangeWarning':    { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
