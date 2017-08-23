@@ -3,6 +3,7 @@
 import niswitch
 import pytest
 import nimodinst
+import re
 
 @pytest.fixture(scope='function')
 def device_info(request):
@@ -23,7 +24,7 @@ def device_info(request):
     return device_info
 
 
-def best_invalid_device_name():
+def test_invalid_device_name():
     try:
         niswitch.Session("Foo!")
         assert False
@@ -37,21 +38,21 @@ def test_relayclose(device_info):
     with niswitch.Session(device_info['name']) as session:
         relayName = session.get_relay_name(1)
         print (relayName)
-        positionInitial = session.get_relay_position(relayName)
-        if positionInitial == 10: # if relay is open, close relay
+        position_initial = session.get_relay_position(relayName)
+        if position_initial == 10: # if relay is open, close relay
             session.relay_control(relayName, 21)
         else:
             session.relay_control(relayName, 20)
-        positionMiddle = session.get_relay_position(relayName)
-        if positionMiddle == 10: # if relay is open, close relay
+        position_middle = session.get_relay_position(relayName)
+        if position_middle == 10: # if relay is open, close relay
             session.relay_control(relayName, 21)
         else:
             session.relay_control(relayName, 20)
-        positionFinal = session.get_relay_position(relayName)
+        position_final = session.get_relay_position(relayName)
         assert relayName
-        assert positionInitial != positionMiddle
-        assert positionMiddle != positionFinal
-        assert positionInitial == positionFinal
+        assert position_initial != position_middle
+        assert position_middle != position_final
+        assert position_initial == position_final
 
 
 def test_channel_connection(device_info):
@@ -190,18 +191,85 @@ def test_writeonly_attribute(device_info):
             assert e.code == -1074135027 #Error : Attribute is read-only.
 
 
-def test_string_functions(device_info):
+def test_functions_addon_string_changes_get_relay_name(device_info):
     with niswitch.Session(device_info['name']) as session:
-        result, message = session.self_test()
+        string = session.get_relay_name(1)
+        assert len(string) > 1
+        pattern = r'[a-z][0-9]'
+        assert re.search(pattern, string.lower()) != None #string should contain something like "k0" or "kb0c0"
+
+
+def test_functions_addon_string_changes_get_channel_name(device_info):
+    with niswitch.Session(device_info['name']) as session:
+        string = session.get_channel_name(1)
+        assert len(string) > 1
+        pattern = r'[a-z][0-9]'
+        assert re.search(pattern, string.lower()) != None #string should contain something like "c0" or "ch0"
+
+
+
+def test_functions_addon_string_changes_revision_query(device_info):
+    with niswitch.Session(device_info['name']) as session:
+        string1, string2 = session.revision_query()
+        assert len(string1) > 1
+        assert string1.lower().find('switch') != -1 #string should contain the name of the driver somewhere
+        assert len(string2) > 1
+        assert string2.lower().find('revision') != -1 #string should contain that there is no revision information
+
+
+def test_functions_addon_string_changes_get_next_coercion_record(device_info):
+    with niswitch.Session(device_info['name']) as session:
+        string = session.get_next_coercion_record()
+        assert len(string) == 0
+
+
+def test_functions_addon_string_changes_get_next_interchange_warning(device_info):
+    with niswitch.Session(device_info['name']) as session:
+        string = session.get_next_interchange_warning()
+        assert len(string) == 0
+
+
+def test_functions_addon_string_changes_self_test(device_info):
+    with niswitch.Session(device_info['name']) as session:
+        result, string = session.self_test()
         assert result == 0
-        assert len(message) > 1
+        assert len(string) > 1
+        assert string.lower().find('pass') != -1  #self test should return the word pass somewhere
+
+
+def test_functions_addon_string_changes_get_path(device_info):
+    with niswitch.Session(device_info['name']) as session:
         channel1 = session.get_channel_name(1)
         for x in range (2, session.channel_count):
             channel2 = session.get_channel_name(x)
             if session.can_connect(channel1, channel2) == 1: #path available
-                path = session.get_path(channel1, channel2)
-                assert len(path) > 1
+                session.connect(channel1, channel2)
+                string = session.get_path(channel1, channel2)
+                assert len(string) > 1
+                assert string.find('->') != -1   #path should contain -> as in "c0->r0"
+                session.disconnect(channel1, channel2)
+                session.set_path(string)
+                pass
                 break
+
+
+def test_functions_addon_string_changes_error_query(device_info):
+    with niswitch.Session(device_info['name']) as session:
+        try:
+            result, string = session.error_query()
+        except niswitch.Warning as w: #NI-SWITCH does not support error_query and throws a warning
+            print(w)
+            pass
+
+
+def test_functions_addon_string_changes_error_message(device_info):
+    with niswitch.Session(device_info['name']) as session:
+        string = session.error_message(-1074126847)
+        assert len(string) > 1
+        assert string.lower().find('invalid') != -1  #should return invalid path string
         
-        
-        
+def best_functions_addon_string_changes_private_get_error_description(device_info):
+    with niswitch.Session(device_info['name']) as session:
+        string = session._get_error_description(0)
+        #assert len(string) > 1
+        #assert string.lower().find('invalid') != -1  #should return invalid path string
