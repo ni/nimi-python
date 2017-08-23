@@ -182,7 +182,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
     def _get_error_description(self, error_code):
         new_error_code = ctypes_types.ViStatus_ctype(0)
         buffer_size = self.library.${c_function_prefix}GetError(self.vi, ctypes.byref(new_error_code), 0, None)
-        assert (new_error_code.value == error_code)
+        assert (new_error_code.value == error_code), 'buffer_size is {0}, new_error_code.value is {1}, error_code is {2}'.format(buffer_size, new_error_code.value, error_code)
 
         if (buffer_size > 0):
             '''
@@ -245,7 +245,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
