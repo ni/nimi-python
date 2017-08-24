@@ -180,38 +180,12 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
 
     # method needed for generic driver exceptions
     def _get_error_description(self, error_code):
-        new_error_code = ctypes_types.ViStatus_ctype(0)
-        buffer_size = self.library.${c_function_prefix}GetError(self.vi, ctypes.byref(new_error_code), 0, None)
-        assert (new_error_code.value == error_code)
-
-        if (buffer_size > 0):
-            '''
-            Return code > 0 from first call to GetError represents the size of
-            the description.  Call it again.
-            Ignore incoming IVI error code and return description from the driver
-            (trust that the IVI error code was properly stored in the session
-            by the driver)
-            '''
-            error_code = ctypes_types.ViStatus_ctype(error_code)
-            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
-            self.library.${c_function_prefix}GetError(self.vi, ctypes.byref(error_code), buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        else:
-            '''
-            Return code <= 0 from GetError indicates a problem.  This is expected
-            when the session is invalid (IVI spec requires GetError to fail).
-            Use GetErrorMessage instead.  It doesn't require a session.
-
-            Call ${c_function_prefix}GetErrorMessage, pass VI_NULL for the buffer in order to retrieve
-            the length of the error message.
-            '''
-            error_code = buffer_size
-            buffer_size = self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, 0, None)
-            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
-            self.library.${c_function_prefix}GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-
-        # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
-        #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
-        return new_error_code.value, error_message.value.decode("ascii")
+        try:
+            (new_error_code, new_error_string) = self._get_error()
+            return new_error_code, new_error_string
+        except errors.Error:
+            (new_error_code, new_error_string) = self._get_error_message(error_code)
+            return new_error_code, new_error_string
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
@@ -245,7 +219,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
