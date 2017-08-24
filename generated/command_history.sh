@@ -1,4 +1,29 @@
 # This is the list of commands that make invoked in order to build nimi-python. If you want to reproduce the build but don't have GNU Make setup in your system, you can invoke this script.
+mkdir -p /mnt/d/GitHub/nimi-python/bin/nifake
+mkdir -p /mnt/d/GitHub/nimi-python/bin/nifake/nifake
+mkdir -p /mnt/d/GitHub/nimi-python/bin/nifake/nifake/tests
+mkdir -p /mnt/d/GitHub/nimi-python/bin/nifake/log
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/enums.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nifake/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/library.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nifake/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/session.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nifake/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/errors.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nifake/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/ctypes_library.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nifake/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/mock_helper.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nifake/nifake/tests/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/__init__.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nifake/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/session.rst.mako --dest-dir  /mnt/d/GitHub/nimi-python/docs/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/enums.rst.mako --dest-dir  /mnt/d/GitHub/nimi-python/docs/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/attributes.rst.mako --dest-dir  /mnt/d/GitHub/nimi-python/docs/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/functions.rst.mako --dest-dir  /mnt/d/GitHub/nimi-python/docs/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+cp /mnt/d/GitHub/nimi-python/src/nifake/tests/test_session.py /mnt/d/GitHub/nimi-python/bin/nifake/nifake/tests/test_session.py
+python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/setup.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
+rm -Rf /mnt/d/GitHub/nimi-python/generated/nifake
+mkdir -p /mnt/d/GitHub/nimi-python/generated/nifake
+cp -Rf /mnt/d/GitHub/nimi-python/bin/nifake/nifake/* /mnt/d/GitHub/nimi-python/generated/nifake
+cp -Rf /mnt/d/GitHub/nimi-python/bin/nifake/setup.py /mnt/d/GitHub/nimi-python/generated/nifake
+cp /mnt/d/GitHub/nimi-python/README.rst /mnt/d/GitHub/nimi-python/bin/nifake/README.rst
+cd /mnt/d/GitHub/nimi-python/bin/nifake && python3 -m pytest -s > /mnt/d/GitHub/nimi-python/bin/nifake/log/test_results.log
+cd /mnt/d/GitHub/nimi-python/bin/nifake && python3 setup.py bdist_wheel --universal > /mnt/d/GitHub/nimi-python/bin/nifake/log/wheel.log
+cd /mnt/d/GitHub/nimi-python/bin/nifake && python3 setup.py sdist > /mnt/d/GitHub/nimi-python/bin/nifake/log/sdist.log
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm/tests
@@ -47,6 +72,8 @@ cd /mnt/d/GitHub/nimi-python/bin/nimodinst && python3 -m pytest -s > /mnt/d/GitH
 cd /mnt/d/GitHub/nimi-python/bin/nimodinst && python3 setup.py bdist_wheel --universal > /mnt/d/GitHub/nimi-python/bin/nimodinst/log/wheel.log
 cd /mnt/d/GitHub/nimi-python/bin/nimodinst && python3 setup.py sdist > /mnt/d/GitHub/nimi-python/bin/nimodinst/log/sdist.log
 python3 -msphinx -M html "/mnt/d/GitHub/nimi-python/docs" "/mnt/d/GitHub/nimi-python/bin/docs" 
+cp /mnt/d/GitHub/nimi-python/tox.ini /mnt/d/GitHub/nimi-python/bin/nifake/tox.ini
+cd /mnt/d/GitHub/nimi-python/bin/nifake && tox -e flake8
 cp /mnt/d/GitHub/nimi-python/tox.ini /mnt/d/GitHub/nimi-python/bin/nidmm/tox.ini
 cd /mnt/d/GitHub/nimi-python/bin/nidmm && tox -e flake8
 cp /mnt/d/GitHub/nimi-python/tox.ini /mnt/d/GitHub/nimi-python/bin/nimodinst/tox.ini
