@@ -5,7 +5,7 @@ NI-FAKE Attributes
 
 .. py:attribute:: read_write_bool
 
-    
+    An attribute of type bool with read/write access.
 
     The following table lists the characteristics of this property.
 
@@ -29,7 +29,7 @@ NI-FAKE Attributes
 
 .. py:attribute:: read_write_color
 
-    
+    An attribute of type Color with read/write access.
 
     The following table lists the characteristics of this property.
 
@@ -53,7 +53,7 @@ NI-FAKE Attributes
 
 .. py:attribute:: read_write_double
 
-    
+    An attribute of type float with read/write access.
 
     The following table lists the characteristics of this property.
 
@@ -77,7 +77,7 @@ NI-FAKE Attributes
 
 .. py:attribute:: read_write_string
 
-    
+    An attribute of type string with read/write access.
 
     The following table lists the characteristics of this property.
 

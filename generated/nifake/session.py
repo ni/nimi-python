@@ -101,9 +101,21 @@ class Session(object):
     _is_frozen = False
 
     read_write_bool = AttributeViBoolean(1000000)
+    '''
+    An attribute of type bool with read/write access.
+    '''
     read_write_color = AttributeEnum(1000003, enums.Color)
+    '''
+    An attribute of type Color with read/write access.
+    '''
     read_write_double = AttributeViReal64(1000001)
+    '''
+    An attribute of type float with read/write access.
+    '''
     read_write_string = AttributeViString(1000002)
+    '''
+    An attribute of type string with read/write access.
+    '''
 
     def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):
         self.library = library.get_library()
