@@ -23,8 +23,10 @@ attributes = {
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
         'resettable': 'No',
-        'short_description': '''An attribute of type bool with read/write access.''',
         'type': 'ViBoolean',
+        'documentation': {
+            'description':'An attribute of type bool with read/write access.',
+        },
     },
     1000001: {
         'access': 'read-write',
@@ -33,8 +35,10 @@ attributes = {
         'lv_property': 'Fake attributes:Read Write Float',
         'name': 'READ_WRITE_DOUBLE',
         'resettable': 'No',
-        'short_description': '''An attribute of type float with read/write access.''',
         'type': 'ViReal64',
+        'documentation': {
+            'description':'An attribute of type float with read/write access.',
+        },
     },
     1000002: {
         'access': 'read-write',
@@ -43,8 +47,10 @@ attributes = {
         'lv_property': 'Fake attributes:Read Write String',
         'name': 'READ_WRITE_STRING',
         'resettable': 'No',
-        'short_description': '''An attribute of type string with read/write access.''',
         'type': 'ViString',
+        'documentation': {
+            'description':'An attribute of type string with read/write access.',
+        },
     },
     1000003: {
         'access': 'read-write',
@@ -53,7 +59,9 @@ attributes = {
         'lv_property': 'Fake attributes:Read Write Color',
         'name': 'READ_WRITE_COLOR',
         'resettable': 'No',
-        'short_description': '''An attribute of type Color with read/write access.''',
         'type': 'ViInt32',
+        'documentation': {
+            'description':'An attribute of type Color with read/write access.',
+        },
     },
 }
