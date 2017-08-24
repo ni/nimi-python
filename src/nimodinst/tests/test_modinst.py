@@ -25,7 +25,7 @@ class TestSession(object):
         self.patched_ctypes_library.niModInst_CloseInstalledDevicesSession.side_effect = self.side_effects_helper.niModInst_CloseInstalledDevicesSession
 
         self.side_effects_helper['OpenInstalledDevicesSession']['handle'] = SESSION_NUM_FOR_TEST
-        self.side_effects_helper['OpenInstalledDevicesSession']['item_count'] = 1
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
 
     def teardown_method(self, method):
         self.errors_patcher.stop()
@@ -67,7 +67,7 @@ class TestSession(object):
                 pass
 
     def test_iterating(self):
-        self.side_effects_helper['OpenInstalledDevicesSession']['item_count'] = 2
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
         with nimodinst.Session('') as session:
             assert len(session) == 2
             for d in session:
