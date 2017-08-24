@@ -42,9 +42,13 @@ class SideEffectsHelper(object):
         self._defaults[func] = val
 
     def niModInst_CloseInstalledDevicesSession(self, handle):  # noqa: N802
+        if self._defaults['CloseInstalledDevicesSession']['return'] != 0:
+            return self._defaults['CloseInstalledDevicesSession']['return']
         return self._defaults['CloseInstalledDevicesSession']['return']
 
     def niModInst_GetExtendedErrorInfo(self, error_info_buffer_size, error_info):  # noqa: N802
+        if self._defaults['GetExtendedErrorInfo']['return'] != 0:
+            return self._defaults['GetExtendedErrorInfo']['return']
         if self._defaults['GetExtendedErrorInfo']['errorInfo'] is None:
             raise MockFunctionCallError("niModInst_GetExtendedErrorInfo", param='errorInfo')
         if error_info_buffer_size == 0:
@@ -54,12 +58,16 @@ class SideEffectsHelper(object):
         return self._defaults['GetExtendedErrorInfo']['return']
 
     def niModInst_GetInstalledDeviceAttributeViInt32(self, handle, index, attribute_id, attribute_value):  # noqa: N802
+        if self._defaults['GetInstalledDeviceAttributeViInt32']['return'] != 0:
+            return self._defaults['GetInstalledDeviceAttributeViInt32']['return']
         if self._defaults['GetInstalledDeviceAttributeViInt32']['attributeValue'] is None:
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViInt32", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetInstalledDeviceAttributeViInt32']['attributeValue']
         return self._defaults['GetInstalledDeviceAttributeViInt32']['return']
 
     def niModInst_GetInstalledDeviceAttributeViString(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
+        if self._defaults['GetInstalledDeviceAttributeViString']['return'] != 0:
+            return self._defaults['GetInstalledDeviceAttributeViString']['return']
         if self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViString", param='attributeValue')
         if attribute_value_buffer_size == 0:
@@ -69,6 +77,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetInstalledDeviceAttributeViString']['return']
 
     def niModInst_OpenInstalledDevicesSession(self, driver, handle, device_count):  # noqa: N802
+        if self._defaults['OpenInstalledDevicesSession']['return'] != 0:
+            return self._defaults['OpenInstalledDevicesSession']['return']
         if self._defaults['OpenInstalledDevicesSession']['handle'] is None:
             raise MockFunctionCallError("niModInst_OpenInstalledDevicesSession", param='handle')
         handle.contents.value = self._defaults['OpenInstalledDevicesSession']['handle']
