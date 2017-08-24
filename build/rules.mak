@@ -98,4 +98,12 @@ update_generated_files: $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
 	$(_hide_cmds)$(call log_command,cp -Rf $(MODULE_DIR)/* $(GENERATED_DIR)/$(DRIVER))
 	$(_hide_cmds)$(call log_command,cp -Rf $(OUTPUT_DIR)/setup.py $(GENERATED_DIR)/$(DRIVER))
 
+SYSTEM_TESTS_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/system_tests/*)
+SYSTEM_TESTS_FILES := $(addprefix $(SYSTEM_TEST_DIR)/,$(notdir $(SYSTEM_TESTS_FILES_TO_COPY)))
+update_system_tests: $(SYSTEM_TESTS_FILES)
+
+$(SYSTEM_TEST_DIR)/%.py: $(DRIVER_DIR)/system_tests/%.py
+	@echo Creating $(DRIVER) $(notdir $@)
+	$(_hide_cmds)$(call log_command,cp $< $@)
+
 

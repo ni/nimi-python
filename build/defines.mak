@@ -2,6 +2,7 @@ OUTPUT_DIR := $(BIN_DIR)/$(DRIVER)
 LOG_DIR := $(OUTPUT_DIR)/log
 MODULE_DIR := $(OUTPUT_DIR)/$(DRIVER)
 UNIT_TEST_DIR := $(MODULE_DIR)/tests
+SYSTEM_TEST_DIR := $(OUTPUT_DIR)/system_tests
 TEMPLATE_DIR := $(BUILD_HELPER_DIR)/templates
 TOX_INI := $(OUTPUT_DIR)/tox.ini
 
@@ -25,6 +26,7 @@ MKDIRECTORIES += \
                  $(MODULE_DIR) \
                  $(UNIT_TEST_DIR) \
                  $(LOG_DIR) \
+                 $(SYSTEM_TEST_DIR) \
 
 VPATH = $(TEMPLATE_DIR)
 
