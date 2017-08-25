@@ -3,24 +3,6 @@
 import pytest
 import nimodinst
 
-@pytest.fixture(scope='function')
-def device_info(request):
-    device_info = {}
-    device_name = "unknown"
-    device_sn = "unknown"
-    try:
-        with nimodinst.Session('nidmm') as session:
-            if len(session) > 0:
-                device_name = session.device_name[0]
-                device_sn = session.serial_number[0]
-
-    except nimodinst.Error as e:
-        sys.stderr.write(str(e))
-        sys.exit(e.code)
-    device_info['name'] = device_name
-    device_info['sn'] = device_sn
-    return device_info
-
 
 def test_bad_device_family():
     with nimodinst.Session('FAKE') as session:
@@ -62,7 +44,7 @@ def test_string_attribute_error_not_existant():
             assert e.description.lower().find('the device index is out of the range of valid device indices for this session.') != -1
 
 
-def test_writeonly_attribute(device_info):
+def test_writeonly_attribute():
     with nimodinst.Session('') as session:
         assert len(session) > 0
         try:
