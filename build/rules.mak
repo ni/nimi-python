@@ -6,9 +6,9 @@ MODULE_FILES := \
 RST_FILES := \
                 $(addprefix $(DRIVER_DOCS_DIR)/,$(RST_FILES_TO_GENERATE)) \
 
-overall_all: unit_test
-
 MKDIR: $(MKDIRECTORIES)
+
+CURRENT_DIR := $(shell pwd)
 
 define log_command
 	$1
@@ -16,33 +16,35 @@ define log_command
 	@echo '$1' >> $(COMMAND_LOG_SH)
 endef
 
+
 define mkdir_rule
 $1:
+	@echo "Making directory $(subst $(CURRENT_DIR)/,,$1)"
 	$(_hide_cmds)$(call log_command,mkdir -p $1)
 endef
 $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 
 $(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
-	@echo Creating $(DRIVER) $(notdir $@)
+	@echo Generating $(DRIVER) $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 $(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
-	@echo Creating $(DRIVER) $(notdir $@)
+	@echo Generating $(DRIVER) $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 $(MODULE_DIR)/%.py: %.py
-	@echo Creating $(DRIVER) $(notdir $@)
+	@echo Copying $(DRIVER) $(notdir $@)
 	$(_hide_cmds)cp $< $@
 
 $(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
-	@echo Creating $(DRIVER) $(notdir $@)
+	@echo Generating $(DRIVER) $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 UNIT_TEST_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/tests/*.py)
 UNIT_TEST_FILES := $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_COPY)))
 
 $(UNIT_TEST_DIR)/%.py: $(DRIVER_DIR)/tests/%.py
-	@echo Creating $(DRIVER) $(notdir $@)
+	@echo Copying $(DRIVER) $(notdir $@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
 
 clean:
@@ -51,28 +53,31 @@ clean:
 $(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
 module: $(MODULE_FILES)
 
+
 $(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
+
 unit_tests: $(UNIT_TEST_FILES)
 
-$(LOG_DIR)/test_results.log: unit_tests
+$(LOG_DIR)/tests_passed: $(UNIT_TEST_FILES)
 	@echo Running unit tests for $(DRIVER)
+	$(_hide_cmds)$(call log_command,touch $(LOG_DIR)/tests_passed)
+	$(_hide_cmds)$(call log_command,rm $(LOG_DIR)/tests_passed)
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 -m pytest -s $(LOG_OUTPUT) $(LOG_DIR)/test_results.log)
+	$(_hide_cmds)$(call log_command,touch $(LOG_DIR)/tests_passed)
 
 $(OUTPUT_DIR)/README.rst: $(ROOT_DIR)/README.rst
-	@echo Creating $(DRIVER) $(notdir $@)
+	@echo Copying $(DRIVER) $(notdir $@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
 
 $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako
-	@echo Creating $(DRIVER) $(notdir $@)
+	@echo Generating $(DRIVER) file: $(notdir $@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
-sdist: $(SDIST)
-$(SDIST): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/test_results.log
+sdist: $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/tests_passed
 	@echo Creating Source distribution for $(DRIVER)
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
 
-wheel: $(WHEEL)
-$(WHEEL): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/test_results.log
+wheel: $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/tests_passed
 	@echo Creating Wheel distribution for $(DRIVER)
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
@@ -80,7 +85,7 @@ $(WHEEL): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
 
 $(TOX_INI): $(ROOT_DIR)/tox.ini
-	@echo Copying tox.ini to $(DRIVER) $(TOX_INI)
+	@echo Copying tox.ini to $(DRIVER) $@
 	$(_hide_cmds)$(call log_command,cp $< $@)
 
 test: $(TOX_INI)
