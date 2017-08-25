@@ -17,34 +17,38 @@ define log_command
 endef
 
 
+define trace_to_console
+	@echo "$1: $(subst $(CURRENT_DIR)/,,$2)"
+endef
+
 define mkdir_rule
 $1:
-	@echo "    Making dir: $(subst $(CURRENT_DIR)/,,$1)"
+	$(call trace_to_console, "\ \ \ \ Making dir",$1)
 	$(_hide_cmds)$(call log_command,mkdir -p $1)
 endef
 $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 
 $(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
-	@echo "    Generating: $(subst $(CURRENT_DIR)/,,$@)"
+	$(call trace_to_console, "\ \ \ \ Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 $(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
-	@echo "    Generating: $(subst $(CURRENT_DIR)/,,$@)"
+	$(call trace_to_console, "\ \ \ \ Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 $(MODULE_DIR)/%.py: %.py
-	@echo "       Copying: $(subst $(CURRENT_DIR)/,,$@)"
+	$(call trace_to_console, "\ \ \ \ \ \ \ Copying",$@)
 	$(_hide_cmds)cp $< $@
 
 $(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
-	@echo "    Generating: $(subst $(CURRENT_DIR)/,,$@)"
+	$(call trace_to_console, "\ \ \ \ Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 UNIT_TEST_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/tests/*.py)
 UNIT_TEST_FILES := $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_COPY)))
 
 $(UNIT_TEST_DIR)/%.py: $(DRIVER_DIR)/tests/%.py
-	@echo "       Copying: $(subst $(CURRENT_DIR)/,,$@)"
+	$(call trace_to_console, "\ \ \ \ \ \ \ Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
 
 clean:
@@ -59,45 +63,45 @@ $(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
 unit_tests: $(UNIT_TEST_FILES)
 
 $(LOG_DIR)/tests_passed: $(UNIT_TEST_FILES)
-	@echo Running pytest: $(subst $(CURRENT_DIR)/,,$(OUTPUT_DIR))
+	$(call trace_to_console, "Running pytest",$@)
 	$(_hide_cmds)$(call log_command,touch $(LOG_DIR)/tests_passed)
 	$(_hide_cmds)$(call log_command,rm $(LOG_DIR)/tests_passed)
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 -m pytest -s $(LOG_OUTPUT) $(LOG_DIR)/test_results.log)
 	$(_hide_cmds)$(call log_command,touch $(LOG_DIR)/tests_passed)
 
 $(OUTPUT_DIR)/README.rst: $(ROOT_DIR)/README.rst
-	@echo "       Copying: $(subst $(CURRENT_DIR)/,,$@)"
+	$(call trace_to_console, "\ \ \ \ \ \ \ Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
 
 $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako
-	@echo "    Generating: $(subst $(CURRENT_DIR)/,,$@)"
+	$(call trace_to_console, "\ \ \ \ Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 sdist: $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/tests_passed
-	@echo Creating sdist: $(subst $(CURRENT_DIR)/,,$(OUTPUT_DIR)/dist)
+	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
 
 wheel: $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/tests_passed
-	@echo Creating wheel: $(subst $(CURRENT_DIR)/,,$(OUTPUT_DIR)/dist)
+	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
 
 $(TOX_INI): $(ROOT_DIR)/tox.ini
-	@echo Copying tox.ini to $(DRIVER) $@
+	$(call trace_to_console, "\ \ \ \ \ \ \ Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
 
 test: $(TOX_INI)
-	@echo Running tox tests for $(DRIVER)
+	$(call trace_to_console, "\ \ \ \ \ \ \ Running tox",$(OUTPUT_DIR))
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && set DRIVER=$(DRIVER) && tox)
 
 flake8: $(TOX_INI)
-	@echo Running flake8 for $(DRIVER)
+	$(call trace_to_console, "\ \ \ \ \ Running flake",$(OUTPUT_DIR))
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && tox -e flake8)
 
 update_generated_files: $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
-	@echo "      Updating: $(subst $(CURRENT_DIR)/,,$(GENERATED_DIR)/$(DRIVER)/)"
+	$(call trace_to_console, "\ \ \ \ \ \ Updating",$(GENERATED_DIR)/$(DRIVER)/)
 	$(_hide_cmds)$(call log_command,rm -Rf $(GENERATED_DIR)/$(DRIVER))
 	$(_hide_cmds)$(call log_command,mkdir -p $(GENERATED_DIR)/$(DRIVER))
 	$(_hide_cmds)$(call log_command,cp -Rf $(MODULE_DIR)/* $(GENERATED_DIR)/$(DRIVER))
