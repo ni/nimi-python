@@ -140,7 +140,7 @@ class NifakeCtypesLibrary(object):
         with self._func_lock:
             if self.niFake_GetError_cfunc is None:
                 self.niFake_GetError_cfunc = self._library.niFake_GetError
-                self.niFake_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
+                self.niFake_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niFake_GetError_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_GetError_cfunc(vi, error_code, buffer_size, description)
 
