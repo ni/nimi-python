@@ -200,11 +200,7 @@ class Session(object):
 
     # method needed for generic driver exceptions
     def _get_error_description(self, error_code):
-        new_error_code = ctypes_types.ViStatus_ctype(0)
-        buffer_size = self.library.niSwitch_GetError(self.vi, ctypes.byref(new_error_code), 0, None)
-        assert (new_error_code.value == error_code), 'buffer_size is {0}, new_error_code.value is {1}, error_code is {2}'.format(buffer_size, new_error_code.value, error_code)
-
-        if (buffer_size > 0):
+        try:
             '''
             Return code > 0 from first call to GetError represents the size of
             the description.  Call it again.
@@ -212,10 +208,13 @@ class Session(object):
             (trust that the IVI error code was properly stored in the session
             by the driver)
             '''
-            error_code = ctypes_types.ViStatus_ctype(error_code)
-            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
-            self.library.niSwitch_GetError(self.vi, ctypes.byref(error_code), buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        else:
+            # TODO(texasaggie97) This currently does not work - _get_error() will raise
+            # an exception that then calls this function, causing infinite recursion.
+            # Fix is beyond the scope of this PR
+            # Also fix documentation.
+            (new_error_code, new_error_string) = self._get_error()
+            return new_error_code, new_error_string
+        except errors.Error:
             '''
             Return code <= 0 from GetError indicates a problem.  This is expected
             when the session is invalid (IVI spec requires GetError to fail).
@@ -224,14 +223,8 @@ class Session(object):
             Call niSwitch_GetErrorMessage, pass VI_NULL for the buffer in order to retrieve
             the length of the error message.
             '''
-            error_code = buffer_size
-            buffer_size = self.library.niSwitch_GetErrorMessage(self.vi, error_code, 0, None)
-            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
-            self.library.niSwitch_GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-
-        # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
-        #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
-        return new_error_code.value, error_message.value.decode("ascii")
+            new_error_string = self._get_error_message(error_code)
+            return error_code, new_error_string
 
     ''' These are code-generated '''
 
@@ -1009,4 +1002,3 @@ class Session(object):
         error_code = self.library.niSwitch_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
-

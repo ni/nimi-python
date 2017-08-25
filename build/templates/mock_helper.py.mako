@@ -66,6 +66,8 @@ ivi_dance_param = helper.extract_ivi_dance_parameter(params)
 ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 %>\
     def ${c_function_prefix}${func_name}(${helper.get_method_parameters_snippet(params, skip_session_handle = False, skip_output_parameters = False, skip_ivi_dance_size_parameter = False)}):  # noqa: N802
+        if self._defaults['${func_name}']['return'] != 0:
+            return self._defaults['${func_name}']['return']
 %    for p in output_params:
         if self._defaults['${func_name}']['${p['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${p['name']}')
