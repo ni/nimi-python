@@ -1041,32 +1041,6 @@ functions = {
             'note': 'Splinter is not supported.',
         },
     },
-    'reset': {
-        'codegen_method': 'public',
-        'returns': 'ViStatus',
-        'parameters': [
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'vi',
-                'type': 'ViSession',
-                'documentation': {
-                    'description': '''
-Identifies a particular instrument session. You obtain the **vi**
-parameter from niDMM\_init or niDMM\_InitWithOptions. The default is
-None.
-''',
-                },
-            },
-        ],
-        'documentation': {
-            'description': '''
-Resets the instrument to a known state and sends initialization commands
-to the instrument. The initialization commands set instrument settings
-to the state necessary for the operation of the instrument driver.
-''',
-        },
-    },
 
     #TODO(marcoskirsch): Lots more cases to add:
     #     Returning arrays (not strings) through all 3 mechanisms
