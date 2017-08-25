@@ -137,11 +137,10 @@ class TestSession(object):
             assert(session.read_write_string == 'A string')
             #calls = [call(SESSION_NUM_FOR_TEST, '', 1000002, 0, ANY), call(SESSION_NUM_FOR_TEST, '', 1000002, 0, ANY)]
             #self.patched_ctypes_library.niFake_GetAttributeViString.assert_has_calls(calls)
-    '''
+
 
     # TODO(marcoskirsch): Flesh out test coverage for all NI-FAKE functions and attributes.
 
-    '''
     # Test with multiple pointer types, ensuring proper return values (i.e. parameters in correct order)
     def test_multiple_return_params(self):
         self.patched_ctypes_library.niFake_GetCalDateAndTime.side_effect = self.side_effects_helper.niFake_GetCalDateAndTime
@@ -161,18 +160,17 @@ class TestSession(object):
             assert self.patched_errors._handle_error.call_count == 2
             self.patched_errors._handle_error.assert_called_with(session, self.patched_ctypes_library.niFake_GetCalDateAndTime.return_value)
     '''
-
-    '''
-    # Test getting a string attribute (IVI dance to get string)
     def test_get_string_attribute(self):
         self.patched_ctypes_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
-        self.side_effects_helper['GetAttributeViString']['attributeValue'] = 'Testing is fun?'
+        string = 'Testing is fun?'
+        self.side_effects_helper['GetAttributeViString']['attributeValue'] = string
         with nifake.Session('dev1') as session:
             attr_string = session._get_attribute_vi_string("", 5)
-            assert(attr_string == 'Testing is fun?')
-            assert self.patched_errors._handle_error.call_count == 2
+            assert(attr_string == string)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, b"", 5, 0, None), call(SESSION_NUM_FOR_TEST, b"", 5, 15, ANY)]
+            self.patched_ctypes_library.niFake_GetAttributeViString.assert_has_calls(calls)
             assert self.patched_ctypes_library.niFake_GetAttributeViString.call_count == 2
-    '''
 
     '''
     def test_acquisition_context_manager(self):

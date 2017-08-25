@@ -21,7 +21,10 @@ mkdir -p /mnt/d/GitHub/nimi-python/generated/nifake
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nifake/nifake/* /mnt/d/GitHub/nimi-python/generated/nifake
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nifake/setup.py /mnt/d/GitHub/nimi-python/generated/nifake
 cp /mnt/d/GitHub/nimi-python/README.rst /mnt/d/GitHub/nimi-python/bin/nifake/README.rst
+touch /mnt/d/GitHub/nimi-python/bin/nifake/log/tests_passed
+rm /mnt/d/GitHub/nimi-python/bin/nifake/log/tests_passed
 cd /mnt/d/GitHub/nimi-python/bin/nifake && python3 -m pytest -s > /mnt/d/GitHub/nimi-python/bin/nifake/log/test_results.log
+touch /mnt/d/GitHub/nimi-python/bin/nifake/log/tests_passed
 cd /mnt/d/GitHub/nimi-python/bin/nifake && python3 setup.py bdist_wheel --universal > /mnt/d/GitHub/nimi-python/bin/nifake/log/wheel.log
 cd /mnt/d/GitHub/nimi-python/bin/nifake && python3 setup.py sdist > /mnt/d/GitHub/nimi-python/bin/nifake/log/sdist.log
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm
@@ -46,7 +49,10 @@ mkdir -p /mnt/d/GitHub/nimi-python/generated/nidmm
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm/* /mnt/d/GitHub/nimi-python/generated/nidmm
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nidmm/setup.py /mnt/d/GitHub/nimi-python/generated/nidmm
 cp /mnt/d/GitHub/nimi-python/README.rst /mnt/d/GitHub/nimi-python/bin/nidmm/README.rst
+touch /mnt/d/GitHub/nimi-python/bin/nidmm/log/tests_passed
+rm /mnt/d/GitHub/nimi-python/bin/nidmm/log/tests_passed
 cd /mnt/d/GitHub/nimi-python/bin/nidmm && python3 -m pytest -s > /mnt/d/GitHub/nimi-python/bin/nidmm/log/test_results.log
+touch /mnt/d/GitHub/nimi-python/bin/nidmm/log/tests_passed
 cd /mnt/d/GitHub/nimi-python/bin/nidmm && python3 setup.py bdist_wheel --universal > /mnt/d/GitHub/nimi-python/bin/nidmm/log/wheel.log
 cd /mnt/d/GitHub/nimi-python/bin/nidmm && python3 setup.py sdist > /mnt/d/GitHub/nimi-python/bin/nidmm/log/sdist.log
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nimodinst
@@ -68,7 +74,10 @@ mkdir -p /mnt/d/GitHub/nimi-python/generated/nimodinst
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst/* /mnt/d/GitHub/nimi-python/generated/nimodinst
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nimodinst/setup.py /mnt/d/GitHub/nimi-python/generated/nimodinst
 cp /mnt/d/GitHub/nimi-python/README.rst /mnt/d/GitHub/nimi-python/bin/nimodinst/README.rst
+touch /mnt/d/GitHub/nimi-python/bin/nimodinst/log/tests_passed
+rm /mnt/d/GitHub/nimi-python/bin/nimodinst/log/tests_passed
 cd /mnt/d/GitHub/nimi-python/bin/nimodinst && python3 -m pytest -s > /mnt/d/GitHub/nimi-python/bin/nimodinst/log/test_results.log
+touch /mnt/d/GitHub/nimi-python/bin/nimodinst/log/tests_passed
 cd /mnt/d/GitHub/nimi-python/bin/nimodinst && python3 setup.py bdist_wheel --universal > /mnt/d/GitHub/nimi-python/bin/nimodinst/log/wheel.log
 cd /mnt/d/GitHub/nimi-python/bin/nimodinst && python3 setup.py sdist > /mnt/d/GitHub/nimi-python/bin/nimodinst/log/sdist.log
 python3 -msphinx -M html "/mnt/d/GitHub/nimi-python/docs" "/mnt/d/GitHub/nimi-python/bin/docs" 

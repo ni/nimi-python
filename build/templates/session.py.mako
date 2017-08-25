@@ -215,7 +215,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
-        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        ${ivi_dance_parameter['ctypes_variable_name']} = None
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):

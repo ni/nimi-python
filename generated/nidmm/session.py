@@ -2098,7 +2098,7 @@ class Session(object):
                 you can pass VI_NULL for the **Attribute_Value** buffer parameter.
         '''
         buffer_size = 0
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        attribute_value_ctype = None
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
@@ -2270,7 +2270,7 @@ class Session(object):
         '''
         error_code_ctype = ctypes_types.ViStatus_ctype(0)
         buffer_size = 0
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        description_ctype = None
         error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
@@ -2299,7 +2299,7 @@ class Session(object):
                 for **Error_Message**.
         '''
         buffer_size = 0
-        error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        error_message_ctype = None
         error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
@@ -2437,7 +2437,7 @@ class Session(object):
                 value is None.
         '''
         buffer_size = 0
-        interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        interchange_warning_ctype = None
         error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):

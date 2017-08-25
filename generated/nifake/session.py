@@ -302,7 +302,7 @@ class Session(object):
             buffer_size (int):Number of bytes in attributeValue. You can IVI-dance with this.
         '''
         buffer_size = 0
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        attribute_value_ctype = None
         error_code = self.library.niFake_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
@@ -355,7 +355,7 @@ class Session(object):
         '''
         error_code_ctype = ctypes_types.ViStatus_ctype(0)
         buffer_size = 0
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        description_ctype = None
         error_code = self.library.niFake_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
@@ -376,7 +376,7 @@ class Session(object):
             buffer_size (int):Number of bytes allocated for errorMessage
         '''
         buffer_size = 0
-        error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        error_message_ctype = None
         error_code = self.library.niFake_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
