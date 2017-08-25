@@ -6,14 +6,19 @@ ${encoding_tag}
 # This file was generated
 <%
     import build.helper as helper
+
     config        = template_parameters['metadata'].config
     attributes    = config['attributes']
     functions     = config['functions']
+
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
+
     import pprint
+
     pp = pprint.PrettyPrinter(indent=4)
+
     functions = helper.extract_codegen_functions(functions)
     functions = helper.add_all_metadata(functions)
 %>\
@@ -241,3 +246,4 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
 % endfor
+
