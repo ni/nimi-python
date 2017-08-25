@@ -27,6 +27,7 @@ functions_params_types = {
     'GetChannelName':               { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetRelayName':                 { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetPath':                      { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
+    'GetError':                     { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
