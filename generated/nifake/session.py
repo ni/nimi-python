@@ -156,8 +156,8 @@ class Session(object):
             (new_error_code, new_error_string) = self._get_error()
             return new_error_code, new_error_string
         except errors.Error:
-            (new_error_code, new_error_string) = self._get_error_message(error_code)
-            return new_error_code, new_error_string
+            new_error_string = self._get_error_message(error_code)
+            return error_code, new_error_string
 
     ''' These are code-generated '''
 
@@ -355,13 +355,13 @@ class Session(object):
         '''
         error_code_ctype = ctypes_types.ViStatus_ctype(0)
         buffer_size = 0
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niFake_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
             raise errors.Error(self, error_code)
         buffer_size = error_code
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niFake_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors._handle_error(self, error_code)
         return python_types.ViStatus(error_code_ctype.value), description_ctype.value.decode("ascii")
@@ -586,4 +586,15 @@ class Session(object):
         error_code = self.library.niFake_error_message(self.vi, error_code, ctypes.pointer(error_message_ctype))
         errors._handle_error(self, error_code)
         return python_types.ViChar(error_message_ctype.value)
+
+    def reset(self):
+        '''reset
+
+        Resets the instrument to a known state and sends initialization commands
+        to the instrument. The initialization commands set instrument settings
+        to the state necessary for the operation of the instrument driver.
+        '''
+        error_code = self.library.niFake_reset(self.vi)
+        errors._handle_error(self, error_code)
+        return
 

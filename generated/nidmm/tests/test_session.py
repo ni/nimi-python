@@ -27,17 +27,17 @@ class TestSession(object):
         self.patched_ctypes_library_patcher.stop()
 
     def test_init_with_options(self):
-        self.errors_patcher = patch('nidmm.session.errors', spec_set=['_handle_error', '_is_error'])
-        self.patched_errors = self.errors_patcher.start()
-        self.patched_errors._is_error.return_value = 0
+        errors_patcher = patch('nidmm.session.errors', spec_set=['_handle_error', '_is_error'])
+        patched_errors = errors_patcher.start()
+        patched_errors._is_error.return_value = 0
 
         self.patched_ctypes_library.niDMM_close.side_effect = self.disallow_close
         session = nidmm.Session('dev1')
         assert(session.vi == SESSION_NUM_FOR_TEST)
         self.patched_ctypes_library.niDMM_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
-        self.patched_errors._handle_error.assert_called_once_with(session, self.patched_ctypes_library.niDMM_InitWithOptions.return_value)
+        patched_errors._handle_error.assert_called_once_with(session, self.patched_ctypes_library.niDMM_InitWithOptions.return_value)
 
-        self.errors_patcher.stop()
+        errors_patcher.stop()
 
     def test_close(self):
         session = nidmm.Session('dev1')
@@ -55,20 +55,6 @@ class TestSession(object):
         with nidmm.Session('dev1') as session:
             session.reset()
             self.patched_ctypes_library.niDMM_reset.assert_called_once_with(SESSION_NUM_FOR_TEST)
-
-    def test_with_error(self):
-        self.patched_ctypes_library.niDMM_reset.side_effect = self.side_effects_helper.niDMM_reset
-        self.side_effects_helper['reset']['return'] = -42
-        self.patched_ctypes_library.niDMM_GetError.side_effect = self.side_effects_helper.niDMM_GetError
-        self.side_effects_helper['GetError']['errorCode'] = -42
-        self.side_effects_helper['GetError']['description'] = "The answer to the ultimate question"
-        with nidmm.Session('dev1') as session:
-            try:
-                session.reset()
-                assert False
-            except nidmm.Error as e:
-                assert e.code == -42
-                assert e.description == "The answer to the ultimate question"
 
     # Additional tests
 
@@ -96,21 +82,6 @@ class TestSession(object):
         with nidmm.Session('dev1') as session:
             attr_string = session._get_attribute_vi_string("", 5)
             assert attr_string == 'Testing is fun?'
-
-    def test_get_string_attribute_with_error(self):
-        self.patched_ctypes_library.niDMM_GetAttributeViString.side_effect = self.side_effects_helper.niDMM_GetAttributeViString
-        self.side_effects_helper['GetAttributeViString']['attributeValue'] = 'Testing is fun?'
-        self.side_effects_helper['GetAttributeViString']['return'] = -1234
-        self.patched_ctypes_library.niDMM_GetError.side_effect = self.side_effects_helper.niDMM_GetError
-        self.side_effects_helper['GetError']['errorCode'] = -1234
-        self.side_effects_helper['GetError']['description'] = "ascending order"
-        with nidmm.Session('dev1') as session:
-            try:
-                session._get_attribute_vi_string("", 5)
-                assert False
-            except nidmm.Error as e:
-                assert e.code == -1234
-                assert e.description == "ascending order"
 
     # Get string attribute works from attribute type
     def test_get_string_attribute_type(self):
