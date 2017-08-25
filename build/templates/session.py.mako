@@ -181,11 +181,30 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
     # method needed for generic driver exceptions
     def _get_error_description(self, error_code):
         try:
+            '''
+            Return code > 0 from first call to GetError represents the size of
+            the description.  Call it again.
+            Ignore incoming IVI error code and return description from the driver
+            (trust that the IVI error code was properly stored in the session
+            by the driver)
+            '''
+            # TODO(texasaggie97) This currently does not work - _get_error() will raise
+            # an exception that then calls this function, causing infinite recursion.
+            # Fix is beyond the scope of this PR
+            # Also fix documentation.
             (new_error_code, new_error_string) = self._get_error()
             return new_error_code, new_error_string
         except errors.Error:
-            (new_error_code, new_error_string) = self._get_error_message(error_code)
-            return new_error_code, new_error_string
+            '''
+            Return code <= 0 from GetError indicates a problem.  This is expected
+            when the session is invalid (IVI spec requires GetError to fail).
+            Use GetErrorMessage instead.  It doesn't require a session.
+
+            Call ${c_function_prefix}GetErrorMessage, pass VI_NULL for the buffer in order to retrieve
+            the length of the error message.
+            '''
+            new_error_string = self._get_error_message(error_code)
+            return error_code, new_error_string
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
@@ -215,7 +234,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
-        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        ${ivi_dance_parameter['ctypes_variable_name']} = None
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):

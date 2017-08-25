@@ -195,6 +195,7 @@ def test_writeonly_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         try:
             session.channel_count = 5
+            assert False
         except nidmm.Error as e:
             assert e.code == -1074135027  # Error : Attribute is read-only.
 
@@ -212,4 +213,16 @@ def test_init_with_invalid_optionstring(device_info):
         assert e.code == -1074134965  # Error : The option string parameter contains an entry with an unknown option name.
 
 
+def test_invalid_value_attribute(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        try:
+            session.settle_time = -5
+            assert False
+        except nidmm.Error as e:
+            assert e.code == -1074135024  # Error : Invalid value for parameter or property.
+
+
+def test_vi_int32_output_function(device_info):
+    with nidmm.Session(device_info['name']) as session:
+        assert isinstance(session.get_cal_count(0), int)
 

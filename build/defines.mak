@@ -22,6 +22,7 @@ WHEEL := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION)-py2.py3-none-any.whl
 SDIST := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION).tar.gz
 
 MKDIRECTORIES += \
+                 $(DRIVER_DOCS_DIR) \
                  $(OUTPUT_DIR) \
                  $(MODULE_DIR) \
                  $(UNIT_TEST_DIR) \

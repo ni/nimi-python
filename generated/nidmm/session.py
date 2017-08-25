@@ -879,11 +879,7 @@ class Session(object):
 
     # method needed for generic driver exceptions
     def _get_error_description(self, error_code):
-        new_error_code = ctypes_types.ViStatus_ctype(0)
-        buffer_size = self.library.niDMM_GetError(self.vi, ctypes.byref(new_error_code), 0, None)
-        assert (new_error_code.value == error_code)
-
-        if (buffer_size > 0):
+        try:
             '''
             Return code > 0 from first call to GetError represents the size of
             the description.  Call it again.
@@ -891,10 +887,13 @@ class Session(object):
             (trust that the IVI error code was properly stored in the session
             by the driver)
             '''
-            error_code = ctypes_types.ViStatus_ctype(error_code)
-            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
-            self.library.niDMM_GetError(self.vi, ctypes.byref(error_code), buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        else:
+            # TODO(texasaggie97) This currently does not work - _get_error() will raise
+            # an exception that then calls this function, causing infinite recursion.
+            # Fix is beyond the scope of this PR
+            # Also fix documentation.
+            (new_error_code, new_error_string) = self._get_error()
+            return new_error_code, new_error_string
+        except errors.Error:
             '''
             Return code <= 0 from GetError indicates a problem.  This is expected
             when the session is invalid (IVI spec requires GetError to fail).
@@ -903,14 +902,8 @@ class Session(object):
             Call niDMM_GetErrorMessage, pass VI_NULL for the buffer in order to retrieve
             the length of the error message.
             '''
-            error_code = buffer_size
-            buffer_size = self.library.niDMM_GetErrorMessage(self.vi, error_code, 0, None)
-            error_message = (ctypes_types.ViChar_ctype * buffer_size)()
-            self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, ctypes.cast(error_message, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-
-        # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
-        #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
-        return new_error_code.value, error_message.value.decode("ascii")
+            new_error_string = self._get_error_message(error_code)
+            return error_code, new_error_string
 
     ''' These are code-generated '''
 
@@ -2124,11 +2117,11 @@ class Session(object):
                 you can pass VI_NULL for the **Attribute_Value** buffer parameter.
         '''
         buffer_size = 0
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        attribute_value_ctype = None
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
@@ -2296,13 +2289,13 @@ class Session(object):
         '''
         error_code_ctype = ctypes_types.ViStatus_ctype(0)
         buffer_size = 0
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        description_ctype = None
         error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors._handle_error(self, error_code)
         return python_types.ViStatus(error_code_ctype.value), description_ctype.value.decode("ascii")
@@ -2325,11 +2318,11 @@ class Session(object):
                 for **Error_Message**.
         '''
         buffer_size = 0
-        error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        error_message_ctype = None
         error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
         error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
@@ -2463,11 +2456,11 @@ class Session(object):
                 value is None.
         '''
         buffer_size = 0
-        interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        interchange_warning_ctype = None
         error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
         # Don't use _handle_error, because positive value in error_code means size, not warning.
         if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+            raise errors.Error(self, error_code)
         buffer_size = error_code
         interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
         error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
