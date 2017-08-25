@@ -679,13 +679,4 @@ NI-FAKE Functions
             
 
 
-.. function:: reset()
-
-    Resets the instrument to a known state and sends initialization commands
-    to the instrument. The initialization commands set instrument settings
-    to the state necessary for the operation of the instrument driver.
-
-    
-
-
 

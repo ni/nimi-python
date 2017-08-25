@@ -91,8 +91,6 @@ class SideEffectsHelper(object):
         self._defaults['error_message'] = {}
         self._defaults['error_message']['return'] = 0
         self._defaults['error_message']['errorMessage'] = None
-        self._defaults['reset'] = {}
-        self._defaults['reset']['return'] = 0
 
     def __getitem__(self, func):
         return self._defaults[func]
@@ -299,11 +297,6 @@ class SideEffectsHelper(object):
         error_message.contents.value = self._defaults['error_message']['errorMessage']
         return self._defaults['error_message']['return']
 
-    def niFake_reset(self, vi):  # noqa: N802
-        if self._defaults['reset']['return'] != 0:
-            return self._defaults['reset']['return']
-        return self._defaults['reset']['return']
-
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niFake_Abort.side_effect = MockFunctionCallError("niFake_Abort")
@@ -358,5 +351,3 @@ class SideEffectsHelper(object):
         mock_library.niFake_close.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_error_message.side_effect = MockFunctionCallError("niFake_error_message")
         mock_library.niFake_error_message.return_value = nifake.python_types.ViStatus(0)
-        mock_library.niFake_reset.side_effect = MockFunctionCallError("niFake_reset")
-        mock_library.niFake_reset.return_value = nifake.python_types.ViStatus(0)

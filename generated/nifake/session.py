@@ -606,14 +606,3 @@ class Session(object):
         errors._handle_error(self, error_code)
         return python_types.ViChar(error_message_ctype.value)
 
-    def reset(self):
-        '''reset
-
-        Resets the instrument to a known state and sends initialization commands
-        to the instrument. The initialization commands set instrument settings
-        to the state necessary for the operation of the instrument driver.
-        '''
-        error_code = self.library.niFake_reset(self.vi)
-        errors._handle_error(self, error_code)
-        return
-

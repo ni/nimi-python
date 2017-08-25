@@ -79,17 +79,29 @@ class TestSession(object):
             assert error_desc == test_error_desc
     '''
 
+    '''
+    #TODO(marcoskirsch): unit test in which niFake_InitWithOptions returns an error.
+    def test_session_error(self):
+        pass
+    '''
+
+    def test_simple_function(self):
+        self.patched_ctypes_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        with nifake.Session('dev1') as session:
+            session.simple_function()
+            self.patched_ctypes_library.niFake_SimpleFunction.assert_called_once_with(SESSION_NUM_FOR_TEST)
+
     def test_method_with_error(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
-        self.patched_ctypes_library.niFake_reset.side_effect = self.side_effects_helper.niFake_reset
-        self.side_effects_helper['reset']['return'] = test_error_code
+        self.patched_ctypes_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
         self.patched_ctypes_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
             try:
-                session.reset()
+                session.simple_function()
                 assert False
             except nifake.Error as e:
                 assert e.code == test_error_code
@@ -111,18 +123,6 @@ class TestSession(object):
             except nifake.Error as e:
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
-
-    '''
-    #TODO(marcoskirsch): unit test in which niFake_InitWithOptions returns an error.
-    def test_session_error(self):
-        pass
-    '''
-
-    def test_simple_function(self):
-        self.patched_ctypes_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        with nifake.Session('dev1') as session:
-            session.simple_function()
-            self.patched_ctypes_library.niFake_SimpleFunction.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
     '''
     def test_set_string_attribute(self):
