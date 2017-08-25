@@ -184,8 +184,8 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
             (new_error_code, new_error_string) = self._get_error()
             return new_error_code, new_error_string
         except errors.Error:
-            (new_error_code, new_error_string) = self._get_error_message(error_code)
-            return new_error_code, new_error_string
+            new_error_string = self._get_error_message(error_code)
+            return error_code, new_error_string
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
