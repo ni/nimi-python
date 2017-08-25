@@ -474,7 +474,7 @@ class NidmmCtypesLibrary(object):
         with self._func_lock:
             if self.niDMM_GetError_cfunc is None:
                 self.niDMM_GetError_cfunc = self._library.niDMM_GetError
-                self.niDMM_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
+                self.niDMM_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niDMM_GetError_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_GetError_cfunc(vi, error_code, buffer_size, description)
 

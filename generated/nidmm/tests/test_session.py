@@ -13,9 +13,6 @@ class TestSession(object):
         self.patched_ctypes_library = self.patched_ctypes_library_patcher.start()
         self.patched_get_library_patcher = patch('nidmm.session.library.get_library', return_value=self.patched_ctypes_library)
         self.patched_get_library_patcher.start()
-        self.errors_patcher = patch('nidmm.session.errors', spec_set=['_handle_error', '_is_error'])
-        self.patched_errors = self.errors_patcher.start()
-        self.patched_errors._is_error.return_value = 0
 
         self.side_effects_helper = mock_helper.SideEffectsHelper()
         self.side_effects_helper.set_side_effects_and_return_values(self.patched_ctypes_library)
@@ -26,16 +23,21 @@ class TestSession(object):
         self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
 
     def teardown_method(self, method):
-        self.errors_patcher.stop()
         self.patched_get_library_patcher.stop()
         self.patched_ctypes_library_patcher.stop()
 
     def test_init_with_options(self):
+        errors_patcher = patch('nidmm.session.errors', spec_set=['_handle_error', '_is_error'])
+        patched_errors = errors_patcher.start()
+        patched_errors._is_error.return_value = 0
+
         self.patched_ctypes_library.niDMM_close.side_effect = self.disallow_close
         session = nidmm.Session('dev1')
         assert(session.vi == SESSION_NUM_FOR_TEST)
         self.patched_ctypes_library.niDMM_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
-        self.patched_errors._handle_error.assert_called_once_with(session, self.patched_ctypes_library.niDMM_InitWithOptions.return_value)
+        patched_errors._handle_error.assert_called_once_with(session, self.patched_ctypes_library.niDMM_InitWithOptions.return_value)
+
+        errors_patcher.stop()
 
     def test_close(self):
         session = nidmm.Session('dev1')
@@ -46,7 +48,6 @@ class TestSession(object):
         with nidmm.Session('dev1') as session:
             assert(session.vi == SESSION_NUM_FOR_TEST)
             self.patched_ctypes_library.niDMM_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
-            self.patched_errors._handle_error.assert_called_once_with(session, self.patched_ctypes_library.niDMM_InitWithOptions.return_value)
         self.patched_ctypes_library.niDMM_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
     def test_reset(self):
@@ -54,8 +55,6 @@ class TestSession(object):
         with nidmm.Session('dev1') as session:
             session.reset()
             self.patched_ctypes_library.niDMM_reset.assert_called_once_with(SESSION_NUM_FOR_TEST)
-            assert self.patched_errors._handle_error.call_count == 2
-            self.patched_errors._handle_error.assert_called_with(session, self.patched_ctypes_library.niDMM_reset.return_value)
 
     # Additional tests
 
@@ -75,8 +74,6 @@ class TestSession(object):
             assert(hour == 10)
             assert(minute == 12)
             self.patched_ctypes_library.niDMM_GetCalDateAndTime.assert_called_once_with(SESSION_NUM_FOR_TEST, 0, ANY, ANY, ANY, ANY, ANY)
-            assert self.patched_errors._handle_error.call_count == 2
-            self.patched_errors._handle_error.assert_called_with(session, self.patched_ctypes_library.niDMM_GetCalDateAndTime.return_value)
 
     # Test getting a string attribute (IVI dance to get string)
     def test_get_string_attribute(self):
@@ -84,9 +81,7 @@ class TestSession(object):
         self.side_effects_helper['GetAttributeViString']['attributeValue'] = 'Testing is fun?'
         with nidmm.Session('dev1') as session:
             attr_string = session._get_attribute_vi_string("", 5)
-            assert(attr_string == 'Testing is fun?')
-            assert self.patched_errors._handle_error.call_count == 2
-            assert self.patched_ctypes_library.niDMM_GetAttributeViString.call_count == 2
+            assert attr_string == 'Testing is fun?'
 
     # Get string attribute works from attribute type
     def test_get_string_attribute_type(self):
