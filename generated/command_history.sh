@@ -21,7 +21,10 @@ mkdir -p /Users/kirsch/Developer/nimi-python/generated/nifake
 cp -Rf /Users/kirsch/Developer/nimi-python/bin/nifake/nifake/* /Users/kirsch/Developer/nimi-python/generated/nifake
 cp -Rf /Users/kirsch/Developer/nimi-python/bin/nifake/setup.py /Users/kirsch/Developer/nimi-python/generated/nifake
 cp /Users/kirsch/Developer/nimi-python/README.rst /Users/kirsch/Developer/nimi-python/bin/nifake/README.rst
+touch /Users/kirsch/Developer/nimi-python/bin/nifake/log/tests_passed
+rm /Users/kirsch/Developer/nimi-python/bin/nifake/log/tests_passed
 cd /Users/kirsch/Developer/nimi-python/bin/nifake && python3 -m pytest -s > /Users/kirsch/Developer/nimi-python/bin/nifake/log/test_results.log
+touch /Users/kirsch/Developer/nimi-python/bin/nifake/log/tests_passed
 cd /Users/kirsch/Developer/nimi-python/bin/nifake && python3 setup.py bdist_wheel --universal > /Users/kirsch/Developer/nimi-python/bin/nifake/log/wheel.log
 cd /Users/kirsch/Developer/nimi-python/bin/nifake && python3 setup.py sdist > /Users/kirsch/Developer/nimi-python/bin/nifake/log/sdist.log
 mkdir -p /Users/kirsch/Developer/nimi-python/bin/nidmm
@@ -46,7 +49,10 @@ mkdir -p /Users/kirsch/Developer/nimi-python/generated/nidmm
 cp -Rf /Users/kirsch/Developer/nimi-python/bin/nidmm/nidmm/* /Users/kirsch/Developer/nimi-python/generated/nidmm
 cp -Rf /Users/kirsch/Developer/nimi-python/bin/nidmm/setup.py /Users/kirsch/Developer/nimi-python/generated/nidmm
 cp /Users/kirsch/Developer/nimi-python/README.rst /Users/kirsch/Developer/nimi-python/bin/nidmm/README.rst
+touch /Users/kirsch/Developer/nimi-python/bin/nidmm/log/tests_passed
+rm /Users/kirsch/Developer/nimi-python/bin/nidmm/log/tests_passed
 cd /Users/kirsch/Developer/nimi-python/bin/nidmm && python3 -m pytest -s > /Users/kirsch/Developer/nimi-python/bin/nidmm/log/test_results.log
+touch /Users/kirsch/Developer/nimi-python/bin/nidmm/log/tests_passed
 cd /Users/kirsch/Developer/nimi-python/bin/nidmm && python3 setup.py bdist_wheel --universal > /Users/kirsch/Developer/nimi-python/bin/nidmm/log/wheel.log
 cd /Users/kirsch/Developer/nimi-python/bin/nidmm && python3 setup.py sdist > /Users/kirsch/Developer/nimi-python/bin/nidmm/log/sdist.log
 mkdir -p /Users/kirsch/Developer/nimi-python/bin/nimodinst
@@ -68,6 +74,10 @@ mkdir -p /Users/kirsch/Developer/nimi-python/generated/nimodinst
 cp -Rf /Users/kirsch/Developer/nimi-python/bin/nimodinst/nimodinst/* /Users/kirsch/Developer/nimi-python/generated/nimodinst
 cp -Rf /Users/kirsch/Developer/nimi-python/bin/nimodinst/setup.py /Users/kirsch/Developer/nimi-python/generated/nimodinst
 cp /Users/kirsch/Developer/nimi-python/README.rst /Users/kirsch/Developer/nimi-python/bin/nimodinst/README.rst
+touch /Users/kirsch/Developer/nimi-python/bin/nimodinst/log/tests_passed
+rm /Users/kirsch/Developer/nimi-python/bin/nimodinst/log/tests_passed
 cd /Users/kirsch/Developer/nimi-python/bin/nimodinst && python3 -m pytest -s > /Users/kirsch/Developer/nimi-python/bin/nimodinst/log/test_results.log
+touch /Users/kirsch/Developer/nimi-python/bin/nimodinst/log/tests_passed
 cd /Users/kirsch/Developer/nimi-python/bin/nimodinst && python3 setup.py bdist_wheel --universal > /Users/kirsch/Developer/nimi-python/bin/nimodinst/log/wheel.log
 cd /Users/kirsch/Developer/nimi-python/bin/nimodinst && python3 setup.py sdist > /Users/kirsch/Developer/nimi-python/bin/nimodinst/log/sdist.log
+
