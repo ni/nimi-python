@@ -79,7 +79,7 @@ class TestSession(object):
             assert error_desc == test_error_desc
     '''
 
-    def test_with_error(self):
+    def test_method_with_error(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
         self.patched_ctypes_library.niFake_reset.side_effect = self.side_effects_helper.niFake_reset
