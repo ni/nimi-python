@@ -880,9 +880,28 @@ class Session(object):
     # method needed for generic driver exceptions
     def _get_error_description(self, error_code):
         try:
+            '''
+            Return code > 0 from first call to GetError represents the size of
+            the description.  Call it again.
+            Ignore incoming IVI error code and return description from the driver
+            (trust that the IVI error code was properly stored in the session
+            by the driver)
+            '''
+            # TODO(texasaggie97) This currently does not work - _get_error() will raise
+            # an exception that then calls this function, causing infinite recursion.
+            # Fix is beyond the scope of this PR
+            # Also fix documentation.
             (new_error_code, new_error_string) = self._get_error()
             return new_error_code, new_error_string
         except errors.Error:
+            '''
+            Return code <= 0 from GetError indicates a problem.  This is expected
+            when the session is invalid (IVI spec requires GetError to fail).
+            Use GetErrorMessage instead.  It doesn't require a session.
+
+            Call niDMM_GetErrorMessage, pass VI_NULL for the buffer in order to retrieve
+            the length of the error message.
+            '''
             new_error_string = self._get_error_message(error_code)
             return error_code, new_error_string
 
