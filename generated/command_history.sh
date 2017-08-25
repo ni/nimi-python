@@ -80,4 +80,3 @@ cd /Users/kirsch/Developer/nimi-python/bin/nimodinst && python3 -m pytest -s > /
 touch /Users/kirsch/Developer/nimi-python/bin/nimodinst/log/tests_passed
 cd /Users/kirsch/Developer/nimi-python/bin/nimodinst && python3 setup.py bdist_wheel --universal > /Users/kirsch/Developer/nimi-python/bin/nimodinst/log/wheel.log
 cd /Users/kirsch/Developer/nimi-python/bin/nimodinst && python3 setup.py sdist > /Users/kirsch/Developer/nimi-python/bin/nimodinst/log/sdist.log
-

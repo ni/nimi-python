@@ -78,7 +78,7 @@ $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 sdist: $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/tests_passed
-	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
+	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
 
 wheel: $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/tests_passed
