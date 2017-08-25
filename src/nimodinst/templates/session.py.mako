@@ -105,7 +105,7 @@ class Session(object):
     # TODO(texasaggie97) Rewrite to use session function instead of library once buffer
     #   retrieval is working
     def _get_error_description(self, error_code):
-        buffer_size = library.${c_function_prefix}GetExtendedErrorInfo(0, None)
+        buffer_size = self.library.${c_function_prefix}GetExtendedErrorInfo(0, None)
 
         if (buffer_size > 0):
             '''
@@ -117,11 +117,11 @@ class Session(object):
             '''
             error_code = ctypes_types.ViStatus_ctype(error_code)
             error_message = ctypes.create_string_buffer(buffer_size)
-            library.${c_function_prefix}GetExtendedErrorInfo(buffer_size, error_message)
+            self.library.${c_function_prefix}GetExtendedErrorInfo(buffer_size, error_message)
 
         # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
-        return error_code, error_message.value.decode("ascii")
+        return error_code.value, error_message.value.decode("ascii")
 
     # Iterator functions
     def __len__(self):
