@@ -11,9 +11,9 @@ from nifake import python_types
 
 class AttributeViInt32(object):
 
-    def __init__(self, attribute_id):
+    def __init__(self, attribute_id, channel = ''):
         self.attribute_id = attribute_id
-        self.channel = ''
+        self.channel = channel
 
     def __get__(self, obj, objtype):
         assert objtype is Session
@@ -25,9 +25,9 @@ class AttributeViInt32(object):
 
 class AttributeViReal64(object):
 
-    def __init__(self, attribute_id):
+    def __init__(self, attribute_id, channel = ''):
         self.attribute_id = attribute_id
-        self.channel = ''
+        self.channel = channel
 
     def __get__(self, obj, objtype):
         assert objtype is Session
@@ -39,9 +39,9 @@ class AttributeViReal64(object):
 
 class AttributeViString(object):
 
-    def __init__(self, attribute_id):
+    def __init__(self, attribute_id, channel = ''):
         self.attribute_id = attribute_id
-        self.channel = ''
+        self.channel = channel
 
     def __get__(self, obj, objtype):
         assert objtype is Session
@@ -53,9 +53,9 @@ class AttributeViString(object):
 
 class AttributeViBoolean(object):
 
-    def __init__(self, attribute_id):
+    def __init__(self, attribute_id, channel = ''):
         self.attribute_id = attribute_id
-        self.channel = ''
+        self.channel = channel
 
     def __get__(self, obj, objtype):
         assert objtype is Session
@@ -67,10 +67,10 @@ class AttributeViBoolean(object):
 
 class AttributeEnum(object):
 
-    def __init__(self, attribute_id, enum_meta_class):
+    def __init__(self, attribute_id, enum_meta_class, channel = ''):
         self.attribute_id = attribute_id
         self.attribute_type = enum_meta_class
-        self.channel = ''
+        self.channel = channel
 
     def __get__(self, obj, objtype):
         assert objtype is Session
