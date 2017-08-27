@@ -69,4 +69,10 @@ DEFAULT_RST_FILES_TO_GENERATE := \
                      attributes.rst \
                      functions.rst \
 
+# Files for tracking parts of the build
+UNIT_TESTS_PASSED := $(LOG_DIR)/tests_passed
+FLAKE8_PASSED := $(LOG_DIR)/flake8_passed
+WHEEL_BUILT := $(LOG_DIR)/wheel_built
+SDIST_BUILT := $(LOG_DIR)/sdist_built
+GENERATED_FILES_COPIED := $(LOG_DIR)/generated_files_copied
 
