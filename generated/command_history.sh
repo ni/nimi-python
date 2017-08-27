@@ -81,6 +81,7 @@ rm -Rf /mnt/d/GitHub/nimi-python/generated/nimodinst
 mkdir -p /mnt/d/GitHub/nimi-python/generated/nimodinst
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst/* /mnt/d/GitHub/nimi-python/generated/nimodinst
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nimodinst/setup.py /mnt/d/GitHub/nimi-python/generated/nimodinst
+cp /mnt/d/GitHub/nimi-python/src/nimodinst/system_tests/test_system_nimodinst.py /mnt/d/GitHub/nimi-python/bin/nimodinst/system_tests/test_system_nimodinst.py
 cp /mnt/d/GitHub/nimi-python/src/nimodinst/examples/nimodinst_all_devices.py /mnt/d/GitHub/nimi-python/bin/nimodinst/examples/nimodinst_all_devices.py
 cp /mnt/d/GitHub/nimi-python/README.rst /mnt/d/GitHub/nimi-python/bin/nimodinst/README.rst
 touch /mnt/d/GitHub/nimi-python/bin/nimodinst/log/tests_passed
