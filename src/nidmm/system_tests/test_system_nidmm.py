@@ -66,25 +66,25 @@ def test_warning(device_info):
             pytest.skip("Simulated")
 
 
-def test_ViBoolean_attribute(device_info):  # noqa: N802
+def test_vi_boolean_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert session.interchange_check is False
         # TODO(marcoskirsch): set a boolean
 
 
-def test_ViString_attribute(device_info):  # noqa: N802
+def test_vi_string_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert device_info['name'] == session.io_resource_descriptor
         # TODO(marcoskirsch): set a string
 
 
-def test_ViInt32_attribute(device_info):  # noqa: N802
+def test_vi_int32_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         session.sample_count = 5
         assert 5 == session.sample_count
 
 
-def test_ViReal64_attribute(device_info):  # noqa: N802
+def test_vi_real64_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         session.range = 50  # Coerces up!
         assert 100 == session.range
@@ -181,7 +181,7 @@ def test_method_with_noinput_nooutput(device_info):
         assert session.reset_with_defaults() is None
 
 
-def test_method_with_ViBoolean_output_type_method(device_info):  # noqa: N802
+def test_method_with_vi_boolean_output_type_method(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert session.get_self_cal_supported() in [True, False]
 
