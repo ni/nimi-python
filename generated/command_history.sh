@@ -3,6 +3,8 @@ mkdir -p /mnt/d/GitHub/nimi-python/bin/nifake
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nifake/nifake
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nifake/nifake/tests
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nifake/log
+mkdir -p /mnt/d/GitHub/nimi-python/bin/nifake/system_tests
+mkdir -p /mnt/d/GitHub/nimi-python/bin/nifake/examples
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/enums.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nifake/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/library.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nifake/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/session.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nifake/nifake/ --metadata  /mnt/d/GitHub/nimi-python/src/nifake/metadata 
@@ -31,6 +33,8 @@ mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm/tests
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm/log
+mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm/system_tests
+mkdir -p /mnt/d/GitHub/nimi-python/bin/nidmm/examples
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/enums.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm/ --metadata  /mnt/d/GitHub/nimi-python/src/nidmm/metadata 
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/library.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm/ --metadata  /mnt/d/GitHub/nimi-python/src/nidmm/metadata 
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/session.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm/ --metadata  /mnt/d/GitHub/nimi-python/src/nidmm/metadata 
@@ -48,6 +52,8 @@ rm -Rf /mnt/d/GitHub/nimi-python/generated/nidmm
 mkdir -p /mnt/d/GitHub/nimi-python/generated/nidmm
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nidmm/nidmm/* /mnt/d/GitHub/nimi-python/generated/nidmm
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nidmm/setup.py /mnt/d/GitHub/nimi-python/generated/nidmm
+cp /mnt/d/GitHub/nimi-python/src/nidmm/system_tests/test_system_nidmm.py /mnt/d/GitHub/nimi-python/bin/nidmm/system_tests/test_system_nidmm.py
+cp /mnt/d/GitHub/nimi-python/src/nidmm/examples/nidmm_measurement.py /mnt/d/GitHub/nimi-python/bin/nidmm/examples/nidmm_measurement.py
 cp /mnt/d/GitHub/nimi-python/README.rst /mnt/d/GitHub/nimi-python/bin/nidmm/README.rst
 touch /mnt/d/GitHub/nimi-python/bin/nidmm/log/tests_passed
 rm /mnt/d/GitHub/nimi-python/bin/nidmm/log/tests_passed
@@ -59,6 +65,8 @@ mkdir -p /mnt/d/GitHub/nimi-python/bin/nimodinst
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst/tests
 mkdir -p /mnt/d/GitHub/nimi-python/bin/nimodinst/log
+mkdir -p /mnt/d/GitHub/nimi-python/bin/nimodinst/system_tests
+mkdir -p /mnt/d/GitHub/nimi-python/bin/nimodinst/examples
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/library.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst/ --metadata  /mnt/d/GitHub/nimi-python/src/nimodinst/metadata 
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/errors.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst/ --metadata  /mnt/d/GitHub/nimi-python/src/nimodinst/metadata 
 python3 -m build --template  /mnt/d/GitHub/nimi-python/build/templates/ctypes_library.py.mako --dest-dir  /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst/ --metadata  /mnt/d/GitHub/nimi-python/src/nimodinst/metadata 
@@ -73,6 +81,8 @@ rm -Rf /mnt/d/GitHub/nimi-python/generated/nimodinst
 mkdir -p /mnt/d/GitHub/nimi-python/generated/nimodinst
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nimodinst/nimodinst/* /mnt/d/GitHub/nimi-python/generated/nimodinst
 cp -Rf /mnt/d/GitHub/nimi-python/bin/nimodinst/setup.py /mnt/d/GitHub/nimi-python/generated/nimodinst
+cp /mnt/d/GitHub/nimi-python/src/nimodinst/system_tests/test_system_nimodinst.py /mnt/d/GitHub/nimi-python/bin/nimodinst/system_tests/test_system_nimodinst.py
+cp /mnt/d/GitHub/nimi-python/src/nimodinst/examples/nimodinst_all_devices.py /mnt/d/GitHub/nimi-python/bin/nimodinst/examples/nimodinst_all_devices.py
 cp /mnt/d/GitHub/nimi-python/README.rst /mnt/d/GitHub/nimi-python/bin/nimodinst/README.rst
 touch /mnt/d/GitHub/nimi-python/bin/nimodinst/log/tests_passed
 rm /mnt/d/GitHub/nimi-python/bin/nimodinst/log/tests_passed

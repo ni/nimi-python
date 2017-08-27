@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import pytest
 import nimodinst
 import re
 
@@ -32,7 +31,7 @@ def test_int_attribute_error_on_non_existant_device():
             session.slot_number[device]
             assert False
         except nimodinst.Error as e:
-            assert e.code == -250202 # NIMODINST_ERROR_INVALID_DEVICE_INDEX
+            assert e.code == -250202  # NIMODINST_ERROR_INVALID_DEVICE_INDEX
             assert e.description.lower().find('the device index is out of the range of valid device indices for this session.') != -1
 
 
@@ -43,7 +42,7 @@ def test_string_attribute_error_on_non_existant_device():
             session.slot_number[device]
             assert False
         except nimodinst.Error as e:
-            assert e.code == -250202 # NIMODINST_ERROR_INVALID_DEVICE_INDEX
+            assert e.code == -250202  # NIMODINST_ERROR_INVALID_DEVICE_INDEX
             assert e.description.lower().find('the device index is out of the range of valid device indices for this session.') != -1
 
 
@@ -61,7 +60,7 @@ def test_device_name_attribute():
     with nimodinst.Session('') as session:
         assert len(session) > 0, 'Must have hardware for ModInst tests to be valid.'
         assert isinstance(session.device_name[0], str)
-        assert len(session.device_name[0]) > 0 #device name must be at least 1 character
+        assert len(session.device_name[0]) > 0  # device name must be at least 1 character
 
 
 def test_device_model_attribute():
@@ -70,7 +69,7 @@ def test_device_model_attribute():
         assert len(session.device_model[0]) > 0
         assert isinstance(session.device_model[0], str)
         pattern = r'(NI )?[A-Z]+e?-\d\d\d\d'
-        assert re.search(pattern,session.device_model[0]) != None # NI Model numbers are generally "NI PXIe-2532", but might also be "USB-2532"
+        assert re.search(pattern, session.device_model[0]) is not None  # NI Model numbers are generally "NI PXIe-2532", but might also be "USB-2532"
 
 
 def test_serial_number_attribute():
@@ -78,7 +77,7 @@ def test_serial_number_attribute():
         assert len(session) > 0, 'Must have hardware for ModInst tests to be valid.'
         pattern = r'^[0-9A-F]+$'
         assert isinstance(session.serial_number[0], str)
-        assert (len(session.serial_number[0]) == 0) | (re.search(pattern,session.serial_number[0]) != None) # NI Serial numbers hex unless it is simulated than it is 0
+        assert (len(session.serial_number[0]) == 0) | (re.search(pattern, session.serial_number[0]) is not None)  # NI Serial numbers hex unless it is simulated than it is 0
 
 
 def test_bus_number_attribute():
