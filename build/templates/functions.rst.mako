@@ -15,7 +15,9 @@ ${helper.get_rst_header_snippet(module_name + '.Session methods', '=')}
 .. py:currentmodule:: ${module_name}
 
 % for fname in sorted(functions):
+%    if functions[fname]['codegen_method'] == 'public':
 ${helper.get_function_rst(fname, config, indent=0)}
 
+%    endif
 % endfor
 
