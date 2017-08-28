@@ -89,15 +89,15 @@ $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
-sdist: $(SDIST_DONE)
+sdist: $(SDIST_BUILD_DONE) $(UNIT_TEST_FILES)
 
-$(SDIST_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
+$(SDIST_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
 
-wheel: $(WHEEL_DONE)
+wheel: $(WHEEL_BUILD_DONE) $(UNIT_TEST_FILES)
 
-$(WHEEL_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
+$(WHEEL_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
@@ -112,10 +112,10 @@ test: $(TOX_INI)
 	$(call trace_to_console, "Running tox",$(OUTPUT_DIR))
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && set DRIVER=$(DRIVER) && tox)
 
-update_generated_files: $(GENERATED_FILES_DONE)
+update_generated_files: $(GENERATED_FILES_COPY_DONE)
 
 # Can't use make_with_tracking_file since there are multiple commands
-$(GENERATED_FILES_DONE): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
+$(GENERATED_FILES_COPY_DONE): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py $(UNIT_TEST_FILES)
 	$(call trace_to_console, "Updating",$(GENERATED_DIR)/$(DRIVER)/)
 	$(_hide_cmds)$(call log_command,touch $@)
 	$(_hide_cmds)$(call log_command,rm $@)
