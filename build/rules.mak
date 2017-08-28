@@ -16,9 +16,15 @@ define log_command
 	@echo '$1' >> $(COMMAND_LOG_SH)
 endef
 
-
 define trace_to_console
 	@echo "$1: $(subst $(CURRENT_DIR)/,,$2)"
+endef
+
+define make_with_tracking_file
+	$(_hide_cmds)$(call log_command,touch $1)
+	$(_hide_cmds)$(call log_command,rm $1)
+	$(_hide_cmds)$(call log_command,$2)
+	$(_hide_cmds)$(call log_command,touch $1)
 endef
 
 define mkdir_rule
@@ -64,10 +70,7 @@ unit_tests: $(UNIT_TESTS_PASSED)
 
 $(UNIT_TESTS_PASSED): $(UNIT_TEST_FILES)
 	$(call trace_to_console, "Running pytest",$@)
-	$(_hide_cmds)$(call log_command,touch $@)
-	$(_hide_cmds)$(call log_command,rm $@)
-	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 -m pytest -s $(LOG_OUTPUT) $(LOG_DIR)/test_results.log)
-	$(_hide_cmds)$(call log_command,touch $@)
+	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 -m pytest -s $(LOG_OUTPUT) $(LOG_DIR)/test_results.log)
 
 $(OUTPUT_DIR)/README.rst: $(ROOT_DIR)/README.rst
 	$(call trace_to_console, "\ \ \ \ \ \ \ Copying",$@)
@@ -81,19 +84,13 @@ sdist: $(SDIST_BUILT)
 
 $(SDIST_BUILT): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call log_command,touch $@)
-	$(_hide_cmds)$(call log_command,rm $@)
-	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
-	$(_hide_cmds)$(call log_command,touch $@)
+	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
 
 wheel: $(WHEEL_BUILT)
 
 $(WHEEL_BUILT): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call log_command,touch $@)
-	$(_hide_cmds)$(call log_command,rm $@)
-	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
-	$(_hide_cmds)$(call log_command,touch $@)
+	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
@@ -142,9 +139,6 @@ flake8: $(FLAKE8_PASSED)
 
 $(FLAKE8_PASSED): $(TOX_INI) $(UNIT_TEST_FILES) $(MODULE_FILES) $(SYSTEM_TESTS_FILES) $(EXAMPLE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "\ \ \ \ \ Running flake",$(OUTPUT_DIR))
-	$(_hide_cmds)$(call log_command,touch $@)
-	$(_hide_cmds)$(call log_command,rm $@)
-	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && tox -e flake8)
-	$(_hide_cmds)$(call log_command,touch $@)
+	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && tox -e flake8)
 
 
