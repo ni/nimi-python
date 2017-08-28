@@ -1,5 +1,5 @@
-NI-DMM Functions
-================
+nidmm.Session methods
+=====================
 
 .. py:currentmodule:: nidmm
 

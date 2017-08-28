@@ -1,5 +1,5 @@
-NI-DMM Session
-==============
+nidmm.Session
+=============
 
 .. py:module:: nidmm
 
