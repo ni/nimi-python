@@ -10,32 +10,6 @@ MKDIR: $(MKDIRECTORIES)
 
 CURRENT_DIR := $(shell pwd)
 
-# Executes a command, then logs it to $(COMMAND_LOG_BATCH) and $(COMMAND_LOG_SH).
-# $1 is the command.
-# TODO(marcoskirsch): This is duplicated in Makefile.
-define log_command
-	$1
-	@echo '$1' >> $(COMMAND_LOG_BATCH)
-	@echo '$1' >> $(COMMAND_LOG_SH)
-endef
-
-
-# Traces to console, nicely formatted.
-# $1 is the Action, for example: "Generating"
-# $2 is a Path.
-# Action will be padded on the left so colons align, for readability.
-# Path will be turned from absolute to relative, for readability.
-define trace_to_console
-	@echo "$(shell printf '%15s' $1): $(subst $(CURRENT_DIR)/,,$2)"
-endef
-
-define make_with_tracking_file
-	$(_hide_cmds)$(call log_command,touch $1)
-	$(_hide_cmds)$(call log_command,rm $1)
-	$(_hide_cmds)$(call log_command,$2)
-	$(_hide_cmds)$(call log_command,touch $1)
-endef
-
 define mkdir_rule
 $1:
 	$(call trace_to_console, "Making dir",$1)

@@ -13,11 +13,6 @@ export COMMAND_LOG_BATCH
 COMMAND_LOG_SH := $(GENERATED_DIR)/command_history.sh
 export COMMAND_LOG_SH
 
-define log_command
-	@echo '$1' >> $(COMMAND_LOG_BATCH)
-	@echo '$1' >> $(COMMAND_LOG_SH)
-	$1
-endef
 
 ifeq (,$(PRINT))
 _hide_cmds := @
