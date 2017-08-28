@@ -66,9 +66,9 @@ module: $(MODULE_FILES)
 
 $(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
 
-unit_tests: $(UNIT_TESTS_PASSED)
+unit_tests: $(UNIT_TESTS_DONE)
 
-$(UNIT_TESTS_PASSED): $(UNIT_TEST_FILES)
+$(UNIT_TESTS_DONE): $(UNIT_TEST_FILES)
 	$(call trace_to_console, "Running pytest",$@)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 -m pytest -s $(LOG_OUTPUT) $(LOG_DIR)/test_results.log)
 
@@ -80,15 +80,15 @@ $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako
 	$(call trace_to_console, "\ \ \ \ Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
-sdist: $(SDIST_BUILT)
+sdist: $(SDIST_DONE)
 
-$(SDIST_BUILT): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
+$(SDIST_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
 
-wheel: $(WHEEL_BUILT)
+wheel: $(WHEEL_DONE)
 
-$(WHEEL_BUILT): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
+$(WHEEL_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
@@ -103,9 +103,10 @@ test: $(TOX_INI)
 	$(call trace_to_console, "\ \ \ \ \ \ \ Running tox",$(OUTPUT_DIR))
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && set DRIVER=$(DRIVER) && tox)
 
-update_generated_files: $(GENERATED_FILES_COPIED)
+update_generated_files: $(GENERATED_FILES_DONE)
 
-$(GENERATED_FILES_COPIED): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
+# Can't use make_with_tracking_file since there are multiple commands
+$(GENERATED_FILES_DONE): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
 	$(call trace_to_console, "\ \ \ \ \ \ Updating",$(GENERATED_DIR)/$(DRIVER)/)
 	$(_hide_cmds)$(call log_command,touch $@)
 	$(_hide_cmds)$(call log_command,rm $@)
@@ -135,9 +136,9 @@ $(EXAMPLES_DIR)/%.py: $(DRIVER_DIR)/examples/%.py
 	$(call trace_to_console, "\ \ \ \ \ \ \ Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
 
-flake8: $(FLAKE8_PASSED) 
+flake8: $(FLAKE8_DONE) 
 
-$(FLAKE8_PASSED): $(TOX_INI) $(UNIT_TEST_FILES) $(MODULE_FILES) $(SYSTEM_TESTS_FILES) $(EXAMPLE_FILES) $(UNIT_TESTS_PASSED)
+$(FLAKE8_DONE): $(TOX_INI) $(UNIT_TEST_FILES) $(MODULE_FILES) $(SYSTEM_TESTS_FILES) $(EXAMPLE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "\ \ \ \ \ Running flake",$(OUTPUT_DIR))
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && tox -e flake8)
 
