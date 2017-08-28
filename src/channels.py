@@ -1,24 +1,25 @@
 import functools
 import copy
 
-# Promising for methods: https://docs.python.org/3/library/functools.html#functools.partial
-
-class AttributeViInt32(object):
+class Attribute(object):
 
     def __init__(self, attribute_id, default_channel = ''):
-        print("AttributeViInt32.__init__")
+        print("Attribute.__init__")
         self.attribute_id = attribute_id
         self.default_channel = default_channel
 
     def __get__(self, obj, objtype):
-        print("AttributeViInt32.__get__")
+        print("Attribute.__get__")
         assert objtype is Session
         return self.get(session, self.default_channel)
 
     def __set__(self, obj, value):
-        print("AttributeViInt32.__set__")
+        print("Attribute.__set__")
         assert type(obj) is Session
         self.set(obj, self.default_channel, value)
+
+# TODO: One per type...
+class AttributeViInt32(Attribute):
 
     def get(self, session, channel):
         print("AttributeViInt32.get")
@@ -30,28 +31,32 @@ class AttributeViInt32(object):
 
 class Session(object):
 
-    foo = AttributeViInt32(42)
+    voltage_level = AttributeViInt32(42)
 
     def __init__(self):
         print("Session.__init__")
-        super().__init__()
-        self.foo_value = 0
+        super().__init__() # makes Python 2 unhappy
+        self.voltage_level_value = 0
 
     def _get_attribute_vi_int32(self, channel, attribute_id):
         print("Session._get_attribute_vi_int32('{0}', {1})".format(channel, attribute_id))
-        return self.foo_value
+        return self.voltage_level_value
 
     def _set_attribute_vi_int32(self, channel, attribute_id, value):
         print("****Session._set_attribute_vi_int32('{0}', {1}, {2})".format(channel, attribute_id, value))
-        self.foo_value = value
+        self.voltage_level_value = value
 
     def channel(self, channel):
         print("Session.channel({0})".format(channel))
         return SessionWithChannels(self, channel)
 
-    def _get_attribute_object(self, name):
-        print("Session._get_attribute_object('{0}')".format(name))
+    def _get_session_member(self, name):
+        print("Session._get_session_member('{0}')".format(name))
         return type(self).__dict__[name]
+
+    def read_from_channel(self, channel = ''):
+        print("Session.read_from_channel('{0}')".format(channel))
+        return 5.1
 
 class SessionWithChannels(object):
 
@@ -76,7 +81,13 @@ class SessionWithChannels(object):
         else:
             # Get item from session
             print("Forward attribute set to Session")
-            return self.session._get_attribute_object(name).set(self.session, self.channel, value)
+            attr = self.session._get_session_member(name)
+            print(attr)
+            if(isinstance(attr, Attribute)):
+                return attr.set(self.session, self.channel, value)
+            else:
+                # invoke function but use self.channel
+                return functools.partial(attr, self=self.session, channel=self.channel)
 
     def __getattr__(self, name):
         print("SessionWithChannels.__getattr__({0})".format(name))
@@ -87,21 +98,34 @@ class SessionWithChannels(object):
         else:
             # Get item from session
             print("Forward attribute get to Session")
-            return self.session._get_attribute_object(name).get(self.session, self.channel)
+            attr = self.session._get_session_member(name)
+            print(attr)
+            if(isinstance(attr, Attribute)):
+                return attr.get(self.session, self.channel)
+            else:
+                # invoke function but use self.channel
+                return functools.partial(attr, self=self.session, channel=self.channel)
+                pass
 
 session = Session()
 
 print("")
 print("Setting attributes")
-session.foo = 10
-with session.channel(5) as c:
+session.voltage_level = 10
+with session.channel(1) as c:
     print("Channel operations")
-    c.foo = 1
+    c.voltage_level = 1
 
 print("")
 print("Getting attributes")
-print(session.foo)
+print(session.voltage_level)
 with session.channel(2) as c:
     print("Channel operations")
-    c.foo = 1
-    print (c.foo)
+    c.voltage_level = 1
+    print (c.voltage_level)
+
+print("")
+print("Calling function")
+with session.channel(3) as c:
+    print("Channel operations")
+    c.read_from_channel()
