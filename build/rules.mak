@@ -122,7 +122,7 @@ endif
 update_system_tests: $(SYSTEM_TESTS_FILES)
 
 $(SYSTEM_TEST_DIR)/%.py: $(DRIVER_DIR)/system_tests/%.py
-	$(call trace_to_console, "\ \ \ \ \ \ \ Copying",$@)
+	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
 
 ifneq (,$(wildcard $(DRIVER_DIR)/examples))
@@ -132,7 +132,7 @@ endif
 update_examples: $(EXAMPLE_FILES)
 
 $(EXAMPLES_DIR)/%.py: $(DRIVER_DIR)/examples/%.py
-	$(call trace_to_console, "\ \ \ \ \ \ \ Copying",$@)
+	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
 
 
