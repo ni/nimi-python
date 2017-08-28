@@ -10,7 +10,7 @@ try:
             print("{: >20} {: >15} {: >10}".format('Name', 'Model', 'S/N'))
         for d in session:
             print("{: >20} {: >15} {: >10}".format(d.device_name, d.device_model, d.serial_number))
-            
+
 except nimodinst.Error as e:
     sys.stderr.write(str(e))
     sys.exit(e.code)

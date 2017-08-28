@@ -1,8 +1,10 @@
 #!/usr/bin/python
 
 import nidmm
-import pytest
 import nimodinst
+import pytest
+import sys
+
 
 @pytest.fixture(scope='function')
 def device_info(request):
@@ -36,7 +38,7 @@ def test_invalid_device_name():
 def test_take_simple_measurement_works(device_info):
     with nidmm.Session(device_info['name']) as session:
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
-        assert session.read(1000) != 0 # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
+        assert session.read(1000) != 0  # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
 
 
 def test_wrong_parameter_type(device_info):
@@ -54,41 +56,41 @@ def test_warning(device_info):
     with nidmm.Session(device_info['name']) as session:
         session.configure_measurement_digits(nidmm.Function._2_WIRE_RESISTANCE, 1e6, 3.5)
         if not session.simulate:
-           try:
-               print(session.read(1000)) # Assume nothing is connected to device, overrange!
-               assert False
-           except nidmm.Warning as w:
-               print(w)
-               pass
+            try:
+                print(session.read(1000))  # Assume nothing is connected to device, overrange!
+                assert False
+            except nidmm.Warning as w:
+                print(w)
+                pass
         else:
-           pytest.skip("Simulated")
+            pytest.skip("Simulated")
 
 
-def test_ViBoolean_attribute(device_info):
+def test_vi_boolean_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert session.interchange_check is False
         # TODO(marcoskirsch): set a boolean
 
 
-def test_ViString_attribute(device_info):
+def test_vi_string_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert device_info['name'] == session.io_resource_descriptor
         # TODO(marcoskirsch): set a string
 
 
-def test_ViInt32_attribute(device_info):
+def test_vi_int32_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         session.sample_count = 5
         assert 5 == session.sample_count
 
 
-def test_ViReal64_attribute(device_info):
+def test_vi_real64_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
-        session.range = 50 # Coerces up!
+        session.range = 50  # Coerces up!
         assert 100 == session.range
 
 
-def test_Enum_attribute(device_info):
+def test_enum_attribute(device_info):
     with nidmm.Session(device_info['name']) as session:
         session.function = nidmm.Function.AC_CURRENT
         assert session.function == nidmm.Function.AC_CURRENT
@@ -112,7 +114,7 @@ def test_acquisition(device_info):
 
 def test_method_call_with_zero_parameter(device_info):
     with nidmm.Session(device_info['name']) as session:
-        assert session.get_aperture_time_info()[1] == nidmm.ApertureTimeUnits.SECONDS # Assuming default aperture time unit will be seconds
+        assert session.get_aperture_time_info()[1] == nidmm.ApertureTimeUnits.SECONDS  # Assuming default aperture time unit will be seconds
 
 
 def test_method_call_with_one_parameter(device_info):
@@ -121,13 +123,13 @@ def test_method_call_with_one_parameter(device_info):
 
 
 def test_invalid_method_call(device_info):
-    #calling a function, without parameter, But it has a mandate parameter
+    # calling a function, without parameter, But it has a mandate parameter
     with nidmm.Session(device_info['name']) as session:
         try:
             session.configure_power_line_frequency()
             assert False
         except TypeError as e:
-            print (e)
+            print(e)
             pass
 
 
@@ -137,7 +139,7 @@ def test_method_call_with_two_parameter(device_info):
         try:
             session.configure_trigger(nidmm.TriggerSource.IMMEDIATE, 1)
         except nidmm.Error as e:
-            print (e)
+            print(e)
             assert True
 
 
@@ -176,10 +178,10 @@ def test_get_dev_temp(device_info):
 
 def test_method_with_noinput_nooutput(device_info):
     with nidmm.Session(device_info['name']) as session:
-        assert session.reset_with_defaults() == None
+        assert session.reset_with_defaults() is None
 
 
-def test_method_with_ViBoolean_output_type_method(device_info):
+def test_method_with_vi_boolean_output_type_method(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert session.get_self_cal_supported() in [True, False]
 
@@ -195,21 +197,20 @@ def test_writeonly_attribute(device_info):
             session.channel_count = 5
             assert False
         except nidmm.Error as e:
-            assert e.code == -1074135027 #Error : Attribute is read-only.
-			
-			
+            assert e.code == -1074135027  # Error : Attribute is read-only.
+
+
 def test_init_with_valid_optionstring(device_info):
     with nidmm.Session(device_info['name'], False, True, 'Simulate = 1') as session:
-        assert session.simulate == True
+        assert session.simulate is True
 
 
 def test_init_with_invalid_optionstring(device_info):
     try:
-        with nidmm.Session(device_info['name'], False, True, 'Invalidstring = 1') as session:
+        with nidmm.Session(device_info['name'], False, True, 'Invalidstring = 1'):
             assert False
     except nidmm.Error as e:
-        assert e.code == -1074134965 # Error : The option string parameter contains an entry with an unknown option name.
-
+        assert e.code == -1074134965  # Error : The option string parameter contains an entry with an unknown option name.
 
 
 def test_invalid_value_attribute(device_info):
@@ -218,10 +219,10 @@ def test_invalid_value_attribute(device_info):
             session.settle_time = -5
             assert False
         except nidmm.Error as e:
-            assert e.code == -1074135024 #Error : Invalid value for parameter or property.
+            assert e.code == -1074135024  # Error : Invalid value for parameter or property.
 
 
-def test_ViInt32_output_function(device_info):
+def test_vi_int32_output_function(device_info):
     with nidmm.Session(device_info['name']) as session:
         assert isinstance(session.get_cal_count(0), int)
 
