@@ -119,10 +119,4 @@ $(EXAMPLES_DIR)/%.py: $(DRIVER_DIR)/examples/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
 
-flake8: $(FLAKE8_DONE) 
-
-$(FLAKE8_DONE): $(TOX_INI) $(UNIT_TEST_FILES) $(MODULE_FILES) $(SYSTEM_TESTS_FILES) $(EXAMPLE_FILES) $(UNIT_TESTS_PASSED)
-	$(call trace_to_console, "Running flake",$(OUTPUT_DIR))
-	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && tox -e flake8)
-
 

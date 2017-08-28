@@ -2,7 +2,7 @@
 DEFAULT_TARGETS := module unit_tests update_generated_files update_system_tests update_examples run_unit_tests wheel sdist
 export DEFAULT_TARGETS
 
-ADDITIONAL_TARGETS := test flake8
+ADDITIONAL_TARGETS := 
 export ADDITIONAL_TARGETS
 
 GENERATED_DIR := $(ROOT_DIR)/generated
