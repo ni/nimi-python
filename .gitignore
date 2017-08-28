@@ -2,7 +2,8 @@
 .cache
 .com.apple.timemachine.supported
 bin/
-
+.eggs/
+.tox/
 .com.apple.timemachine.supported
 
 
