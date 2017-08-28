@@ -115,4 +115,24 @@ update_generated_files: $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
 	$(_hide_cmds)$(call log_command,cp -Rf $(MODULE_DIR)/* $(GENERATED_DIR)/$(DRIVER))
 	$(_hide_cmds)$(call log_command,cp -Rf $(OUTPUT_DIR)/setup.py $(GENERATED_DIR)/$(DRIVER))
 
+ifneq (,$(wildcard $(DRIVER_DIR)/system_tests))
+SYSTEM_TESTS_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/system_tests/*)
+SYSTEM_TESTS_FILES := $(addprefix $(SYSTEM_TEST_DIR)/,$(notdir $(SYSTEM_TESTS_FILES_TO_COPY)))
+endif
+update_system_tests: $(SYSTEM_TESTS_FILES)
+
+$(SYSTEM_TEST_DIR)/%.py: $(DRIVER_DIR)/system_tests/%.py
+	$(call trace_to_console, "\ \ \ \ \ \ \ Copying",$@)
+	$(_hide_cmds)$(call log_command,cp $< $@)
+
+ifneq (,$(wildcard $(DRIVER_DIR)/examples))
+EXAMPLE_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/examples/*)
+EXAMPLE_FILES := $(addprefix $(EXAMPLES_DIR)/,$(notdir $(EXAMPLE_FILES_TO_COPY)))
+endif
+update_examples: $(EXAMPLE_FILES)
+
+$(EXAMPLES_DIR)/%.py: $(DRIVER_DIR)/examples/%.py
+	$(call trace_to_console, "\ \ \ \ \ \ \ Copying",$@)
+	$(_hide_cmds)$(call log_command,cp $< $@)
+
 
