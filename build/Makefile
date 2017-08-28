@@ -1,5 +1,5 @@
 
-DEFAULT_TARGETS := module unit_tests update_generated_files update_system_tests update_examples run_unit_tests wheel sdist
+DEFAULT_TARGETS := module unit_tests update_generated_files update_system_tests update_examples wheel sdist
 export DEFAULT_TARGETS
 
 ADDITIONAL_TARGETS := 
@@ -13,12 +13,13 @@ export COMMAND_LOG_BATCH
 COMMAND_LOG_SH := $(GENERATED_DIR)/command_history.sh
 export COMMAND_LOG_SH
 
+include $(BUILD_HELPER_DIR)/tools.mak
 
 ifeq (,$(PRINT))
 _hide_cmds := @
 endif
 
-all: $(DRIVERS)
+all: $(DRIVERS) test
 
 define per_driver_per_target
 $1_$2: start
@@ -50,7 +51,7 @@ endef
 # run when all is used, but we want it to work
 $(foreach t,$(DEFAULT_TARGETS) $(ADDITIONAL_TARGETS),$(eval $(call per_target,$(t))))
 
-SUPPRESS_ERROR_OUTPUT := 2> /dev/null
+SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 clean: start
 	@echo 'Cleaning...'
 	-@rm -Rf $(BIN_DIR) $(SUPPRESS_ERROR_OUTPUT)
@@ -97,20 +98,19 @@ printvar:
 	$(_hide_cmds)$(foreach d,$(DRIVERS),$(call per_driver_variable_print,$(d),$(VAR)) && ) echo
 
 
-# Minimal makefile for Sphinx documentation
-#
 PYTHON_CMD ?= python3
-
-# You can set these variables from the command line.
-SPHINXOPTS    =
-SPHINXBUILD   = $(PYTHON_CMD) -msphinx
-SPHINXPROJ    = NIModularInstrumentsPythonAPI
-SOURCEDIR     = $(ROOT_DIR)/docs
-BUILDDIR      = $(BIN_DIR)/docs
-
-html:
-	$(_hide_cmds)$(call log_command,$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS))
 
 .PHONY: help Makefile
 
 
+# Any step that any driver build does that would invalidate unit testing, flake8 or generated html
+# needs to delete this file. This will trigger a tox run.
+TOX_RUN_DONE := bin/tox_run_done
+export TOX_RUN_DONE
+
+test: $(TOX_RUN_DONE)
+
+$(TOX_RUN_DONE): 
+	@echo
+	$(call trace_to_console, "Running tox",$@)
+	$(_hide_cmds)$(call make_with_tracking_file,$@,tox)
