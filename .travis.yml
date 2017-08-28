@@ -24,7 +24,7 @@ install:
   - pip install --upgrade coveralls
 
 script:
-  - make clean all flake8 test html PRINT=1 PYTHON_CMD=python
+  - make clean all test PRINT=1 PYTHON_CMD=python
 
 #after_success:
 #  - coveralls
