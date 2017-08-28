@@ -1,5 +1,5 @@
-NI-ModInst Session
-==================
+nimodinst.Session
+=================
 
 .. py:module:: nimodinst
 

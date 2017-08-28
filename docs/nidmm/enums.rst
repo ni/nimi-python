@@ -1,5 +1,5 @@
-NI-DMM Enums
-============
+nidmm enums
+===========
 
 Enums used in NI-DMM
 

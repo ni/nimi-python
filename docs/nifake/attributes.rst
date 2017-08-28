@@ -1,5 +1,5 @@
-NI-FAKE Attributes
-==================
+nifake.Session properties
+=========================
 
 .. py:currentmodule:: nifake
 
