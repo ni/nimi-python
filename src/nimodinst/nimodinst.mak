@@ -1,5 +1,3 @@
-
-
 include $(BUILD_HELPER_DIR)/defines.mak
 
 # We want everything but enums.py
@@ -14,6 +12,6 @@ include $(BUILD_HELPER_DIR)/rules.mak
 # We need to override the default rule for generating session since we have
 # a specialized copy for ModInst
 $(MODULE_DIR)/session.py: $(DRIVER_DIR)/templates/session.py.mako
-	$(call trace_to_console, "\ \ \ \ Generating",$@)
+	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(MODULE_DIR), $(METADATA_DIR))
 
