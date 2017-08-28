@@ -29,6 +29,13 @@ define trace_to_console
 	@echo "$(shell printf '%15s' $1): $(subst $(CURRENT_DIR)/,,$2)"
 endef
 
+define make_with_tracking_file
+	$(_hide_cmds)$(call log_command,touch $1)
+	$(_hide_cmds)$(call log_command,rm $1)
+	$(_hide_cmds)$(call log_command,$2)
+	$(_hide_cmds)$(call log_command,touch $1)
+endef
+
 define mkdir_rule
 $1:
 	$(call trace_to_console, "Making dir",$1)
@@ -68,14 +75,11 @@ module: $(MODULE_FILES)
 
 $(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
 
-unit_tests: $(UNIT_TEST_FILES)
+unit_tests: $(UNIT_TESTS_DONE)
 
-$(LOG_DIR)/tests_passed: $(UNIT_TEST_FILES)
+$(UNIT_TESTS_DONE): $(UNIT_TEST_FILES)
 	$(call trace_to_console, "Running pytest",$@)
-	$(_hide_cmds)$(call log_command,touch $(LOG_DIR)/tests_passed)
-	$(_hide_cmds)$(call log_command,rm $(LOG_DIR)/tests_passed)
-	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 -m pytest -s $(LOG_OUTPUT) $(LOG_DIR)/test_results.log)
-	$(_hide_cmds)$(call log_command,touch $(LOG_DIR)/tests_passed)
+	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 -m pytest -s $(LOG_OUTPUT) $(LOG_DIR)/test_results.log)
 
 $(OUTPUT_DIR)/README.rst: $(ROOT_DIR)/README.rst
 	$(call trace_to_console, "Copying",$@)
@@ -85,13 +89,17 @@ $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
-sdist: $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/tests_passed
-	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
+sdist: $(SDIST_DONE)
 
-wheel: $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(LOG_DIR)/tests_passed
+$(SDIST_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
+	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
+	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
+
+wheel: $(WHEEL_DONE)
+
+$(WHEEL_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
+	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
@@ -104,16 +112,18 @@ test: $(TOX_INI)
 	$(call trace_to_console, "Running tox",$(OUTPUT_DIR))
 	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && set DRIVER=$(DRIVER) && tox)
 
-flake8: $(TOX_INI)
-	$(call trace_to_console, "Running flake",$(OUTPUT_DIR))
-	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && tox -e flake8)
+update_generated_files: $(GENERATED_FILES_DONE)
 
-update_generated_files: $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
+# Can't use make_with_tracking_file since there are multiple commands
+$(GENERATED_FILES_DONE): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
 	$(call trace_to_console, "Updating",$(GENERATED_DIR)/$(DRIVER)/)
+	$(_hide_cmds)$(call log_command,touch $@)
+	$(_hide_cmds)$(call log_command,rm $@)
 	$(_hide_cmds)$(call log_command,rm -Rf $(GENERATED_DIR)/$(DRIVER))
 	$(_hide_cmds)$(call log_command,mkdir -p $(GENERATED_DIR)/$(DRIVER))
 	$(_hide_cmds)$(call log_command,cp -Rf $(MODULE_DIR)/* $(GENERATED_DIR)/$(DRIVER))
 	$(_hide_cmds)$(call log_command,cp -Rf $(OUTPUT_DIR)/setup.py $(GENERATED_DIR)/$(DRIVER))
+	$(_hide_cmds)$(call log_command,touch $@)
 
 ifneq (,$(wildcard $(DRIVER_DIR)/system_tests))
 SYSTEM_TESTS_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/system_tests/*)
@@ -134,5 +144,11 @@ update_examples: $(EXAMPLE_FILES)
 $(EXAMPLES_DIR)/%.py: $(DRIVER_DIR)/examples/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
+
+flake8: $(FLAKE8_DONE) 
+
+$(FLAKE8_DONE): $(TOX_INI) $(UNIT_TEST_FILES) $(MODULE_FILES) $(SYSTEM_TESTS_FILES) $(EXAMPLE_FILES) $(UNIT_TESTS_PASSED)
+	$(call trace_to_console, "Running flake",$(OUTPUT_DIR))
+	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && tox -e flake8)
 
 
