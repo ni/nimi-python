@@ -1,5 +1,5 @@
-NI-FAKE Session
-===============
+nifake.Session
+==============
 
 .. py:module:: nifake
 

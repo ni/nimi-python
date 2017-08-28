@@ -1,5 +1,5 @@
-NI-FAKE Functions
-=================
+nifake.Session methods
+======================
 
 .. py:currentmodule:: nifake
 

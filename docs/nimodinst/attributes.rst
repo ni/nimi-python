@@ -1,5 +1,5 @@
-NI-ModInst Attributes
-=====================
+nimodinst.Session properties
+============================
 
 .. py:currentmodule:: nimodinst
 

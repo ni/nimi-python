@@ -1,5 +1,5 @@
-NI-DMM Attributes
-=================
+nidmm.Session properties
+========================
 
 .. py:currentmodule:: nidmm
 

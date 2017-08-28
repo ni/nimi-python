@@ -1,5 +1,5 @@
-NI-ModInst Functions
-====================
+nimodinst.Session methods
+=========================
 
 .. py:currentmodule:: nimodinst
 
