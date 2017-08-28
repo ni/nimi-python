@@ -76,6 +76,10 @@ $(WHEEL_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FI
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
+$(OUTPUT_DIR)/README.rst: $(ROOT_DIR)/README.rst
+	$(call trace_to_console, "Copying",$@)
+	$(_hide_cmds)$(call log_command,cp $< $@)
+
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
 
