@@ -1,9 +1,7 @@
-NI-SWITCH Functions
-===================
+niswitch.Session methods
+========================
 
 .. py:currentmodule:: niswitch
-
-.. function:: _abort_scan()
 
 .. function:: can_connect(channel1, channel2, path_capability)
 
@@ -16,8 +14,6 @@ NI-SWITCH Functions
 
     :rtype: ViInt32
 
-
-.. function:: _clear_error()
 
 .. function:: clear_interchange_warnings()
 
@@ -78,66 +74,6 @@ NI-SWITCH Functions
 
     :type disconnection_list: str
 
-.. function:: _get_attribute_vi_boolean(channel_name, attribute_id, attribute_value)
-
-    :param channel_name:
-
-    :type channel_name: str
-    :param attribute_id:
-
-    :type attribute_id: int
-
-    :rtype: ViBoolean
-
-
-.. function:: _get_attribute_vi_int32(channel_name, attribute_id, attribute_value)
-
-    :param channel_name:
-
-    :type channel_name: str
-    :param attribute_id:
-
-    :type attribute_id: int
-
-    :rtype: ViInt32
-
-
-.. function:: _get_attribute_vi_real64(channel_name, attribute_id, attribute_value)
-
-    :param channel_name:
-
-    :type channel_name: str
-    :param attribute_id:
-
-    :type attribute_id: int
-
-    :rtype: ViReal64
-
-
-.. function:: _get_attribute_vi_session(channel_name, attribute_id, attribute_value)
-
-    :param channel_name:
-
-    :type channel_name: str
-    :param attribute_id:
-
-    :type attribute_id: int
-
-    :rtype: ViSession
-
-
-.. function:: _get_attribute_vi_string(channel_name, attribute_id, array_size, attribute_value)
-
-    :param channel_name:
-
-    :type channel_name: str
-    :param attribute_id:
-
-    :type attribute_id: int
-    :param array_size:
-
-    :type array_size: int
-
 .. function:: get_channel_name(index, buffer_size, channel_name_buffer)
 
     :param index:
@@ -146,15 +82,6 @@ NI-SWITCH Functions
     :param buffer_size:
 
     :type buffer_size: int
-
-.. function:: _get_error(code, buffersize, description)
-
-    :param buffersize:
-
-    :type buffersize: int
-
-    :rtype: ViStatus
-
 
 .. function:: get_next_coercion_record(buffer_size, coercion_record)
 
@@ -207,24 +134,6 @@ NI-SWITCH Functions
     :rtype: ViInt32
 
 
-.. function:: _init_with_options(resource_name, id_query, reset_device, options_string)
-
-    :param resource_name:
-
-    :type resource_name: str
-    :param id_query:
-
-    :type id_query: bool
-    :param reset_device:
-
-    :type reset_device: bool
-    :param options_string:
-
-    :type options_string: str
-
-    :rtype: ViSession
-
-
 .. function:: init_with_topology(resource_name, topology, simulate, reset_device)
 
     :param resource_name:
@@ -243,19 +152,12 @@ NI-SWITCH Functions
     :rtype: ViSession
 
 
-.. function:: _initiate_scan()
-
 .. function:: is_debounced(is_debounced)
 
     :rtype: ViBoolean
 
 
 .. function:: is_scanning(is_scanning)
-
-    :rtype: ViBoolean
-
-
-.. function:: _lock_session(caller_has_lock)
 
     :rtype: ViBoolean
 
@@ -308,66 +210,6 @@ NI-SWITCH Functions
 
 .. function:: send_software_trigger()
 
-.. function:: _set_attribute_vi_boolean(channel_name, attribute_id, attribute_value)
-
-    :param channel_name:
-
-    :type channel_name: str
-    :param attribute_id:
-
-    :type attribute_id: int
-    :param attribute_value:
-
-    :type attribute_value: bool
-
-.. function:: _set_attribute_vi_int32(channel_name, attribute_id, attribute_value)
-
-    :param channel_name:
-
-    :type channel_name: str
-    :param attribute_id:
-
-    :type attribute_id: int
-    :param attribute_value:
-
-    :type attribute_value: int
-
-.. function:: _set_attribute_vi_real64(channel_name, attribute_id, attribute_value)
-
-    :param channel_name:
-
-    :type channel_name: str
-    :param attribute_id:
-
-    :type attribute_id: int
-    :param attribute_value:
-
-    :type attribute_value: float
-
-.. function:: _set_attribute_vi_session(channel_name, attribute_id, attribute_value)
-
-    :param channel_name:
-
-    :type channel_name: str
-    :param attribute_id:
-
-    :type attribute_id: int
-    :param attribute_value:
-
-    :type attribute_value: int
-
-.. function:: _set_attribute_vi_string(channel_name, attribute_id, attribute_value)
-
-    :param channel_name:
-
-    :type channel_name: str
-    :param attribute_id:
-
-    :type attribute_id: int
-    :param attribute_value:
-
-    :type attribute_value: int
-
 .. function:: set_continuous_scan(continuous_scan)
 
     :param continuous_scan:
@@ -380,11 +222,6 @@ NI-SWITCH Functions
 
     :type path_list: str
 
-.. function:: _unlock_session(caller_has_lock)
-
-    :rtype: ViBoolean
-
-
 .. function:: wait_for_debounce(maximum_time_ms)
 
     :param maximum_time_ms:
@@ -396,8 +233,6 @@ NI-SWITCH Functions
     :param maximum_time_ms:
 
     :type maximum_time_ms: int
-
-.. function:: _close()
 
 .. function:: error_message(error_code, error_message)
 

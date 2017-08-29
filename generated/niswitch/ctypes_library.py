@@ -233,7 +233,7 @@ class NiswitchCtypesLibrary(object):
         with self._func_lock:
             if self.niSwitch_GetError_cfunc is None:
                 self.niSwitch_GetError_cfunc = self._library.niSwitch_GetError
-                self.niSwitch_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
+                self.niSwitch_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niSwitch_GetError_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_GetError_cfunc(vi, code, buffersize, description)
 

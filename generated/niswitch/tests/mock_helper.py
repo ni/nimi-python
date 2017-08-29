@@ -296,8 +296,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetError", param='description')
         if buffersize == 0:
             return len(self._defaults['GetError']['description'])
-        t = niswitch.ctypes_types.ViChar_ctype(self._defaults['GetError']['description'].encode('ascii'))
-        description.value = ctypes.cast(t, niswitch.ctypes_types.ViChar_ctype).value
+        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetError']['description'].encode('ascii'))
+        description.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetError']['return']
 
     def niSwitch_GetNextCoercionRecord(self, vi, buffer_size, coercion_record):  # noqa: N802

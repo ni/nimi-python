@@ -3455,3 +3455,4 @@ class Session(object):
         error_code = self.library.niDMM_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors._handle_error(self, error_code)
         return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
+

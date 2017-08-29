@@ -605,3 +605,4 @@ class Session(object):
         error_code = self.library.niFake_error_message(self.vi, error_code, ctypes.pointer(error_message_ctype))
         errors._handle_error(self, error_code)
         return python_types.ViChar(error_message_ctype.value)
+
