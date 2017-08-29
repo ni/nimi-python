@@ -2,7 +2,8 @@
 
 import nimodinst
 import re
-        
+
+
 def test_bad_device_family(family):
     with nimodinst.Session('FAKE') as session:
         assert len(session) == 0
@@ -14,8 +15,8 @@ def test_no_device_family(family):
 
 
 def test_device_family_string_with_dashes(family):
-    modifiedFamily = family.upper()[:2] + '-' + family.upper()[2:] #Changing nidmm to NI-DMM
-    with nimodinst.Session(modifiedFamily) as session:
+    modified_family = family.upper()[:2] + '-' + family.upper()[2:]  # Changing nidmm to NI-DMM
+    with nimodinst.Session(modified_family) as session:
         assert len(session) > 0, 'Must have hardware for this tests to be valid.'
 
 

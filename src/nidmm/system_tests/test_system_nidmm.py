@@ -18,7 +18,7 @@ def device_info(request, name):
                     if (session.device_name[x] == device_name):
                         device_sn = session.serial_number[x]
                         break
-                if (device_sn == "unknown") :
+                if (device_sn == "unknown"):
                     device_name = session.device_name[0]
                     device_sn = session.serial_number[0]
     except nimodinst.Error as e:
@@ -27,7 +27,6 @@ def device_info(request, name):
     device_info['name'] = device_name
     device_info['sn'] = device_sn
     return device_info
-
 
 
 def test_invalid_device_name():
