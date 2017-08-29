@@ -13,7 +13,7 @@ python:
 
 install:
   - pip install --upgrade tox tox-travis coveralls
-  - pip2.7 install --upgrade --user travis pip setuptools wheel virtualenv
+  - pip2.7 install --upgrade pip setuptools wheel virtualenv
 
 script:
   - tox -e clean,codegen PRINT=1 PYTHON_CMD=python
