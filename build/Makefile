@@ -29,16 +29,16 @@ define per_driver_per_target
 $1_$2: start
 	@echo
 	@echo "Making $1"
-	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1 MKDIR
-	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1 $2
+	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 MKDIR
+	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 $2
 endef
 
 define per_driver_all
 $1: start
 	@echo
 	@echo "Making $1"
-	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1 MKDIR
-	$(_hide_cmds)make --no-print-directory -f src/$1/$1.mak DRIVER=$1
+	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 MKDIR
+	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1
 endef
 
 $(foreach d,$(ALL_DRIVERS),$(eval $(call per_driver_all,$(d))))
@@ -55,14 +55,14 @@ endef
 # run when all is used, but we want it to work
 $(foreach t,$(DEFAULT_TARGETS) $(ADDITIONAL_TARGETS),$(eval $(call per_target,$(t))))
 
-SUPPRESS_ERROR_OUTPUT := 2> /dev/null
+SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 clean: start
 	@echo 'Cleaning...'
-	-@rm -Rf $(BIN_DIR) $(SUPPRESS_ERROR_OUTPUT)
-	-@find $(ROOT_DIR) -path '*/__pycache__/*' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT)
-	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT)
-	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT)
-	-@rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*.rst) $(SUPPRESS_ERROR_OUTPUT)
+	-@rm -Rf $(BIN_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
+	-@find $(ROOT_DIR) -path '*/__pycache__/*' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
+	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
+	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
+	-@rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*.rst) $(SUPPRESS_ERROR_OUTPUT) ||:
 
 start:
 	-@echo "rem This is the list of commands that make invoked in order to build nimi-python. If you want to reproduce the build but don't have GNU Make setup in your system, you can invoke this script." > $(COMMAND_LOG_BATCH)

@@ -7,7 +7,7 @@
     driver_name = config['driver_name']
     c_function_prefix = config['c_function_prefix']
 %>\
-${helper.get_rst_header_snippet(driver_name + ' Session', '=')}
+${helper.get_rst_header_snippet(module_name + '.Session', '=')}
 
 .. py:module:: ${module_name}
 

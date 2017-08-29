@@ -1,5 +1,5 @@
-NI-FAKE Enums
-=============
+nifake enums
+============
 
 Enums used in NI-FAKE
 
