@@ -12,7 +12,6 @@ python:
   - 3.6
 
 install:
-  - pip install --upgrade setuptools 
   - pip install --upgrade tox 
   - pip install --upgrade tox-travis 
   - pip install --upgrade coveralls
