@@ -15,6 +15,8 @@ METADATA_FILES := $(wildcard $(METADATA_DIR)/*.py)
 
 BUILD_HELPER_SCRIPT := $(BUILD_HELPER_DIR)/helper.py
 
+DRIVER_GENERATED_DIR := $(GENERATED_DIR)/$(DRIVER)
+
 DOCS_DIR := $(ROOT_DIR)/docs
 DRIVER_DOCS_DIR := $(DOCS_DIR)/$(DRIVER)
 
@@ -30,6 +32,7 @@ MKDIRECTORIES += \
                  $(LOG_DIR) \
                  $(SYSTEM_TEST_DIR) \
                  $(EXAMPLES_DIR) \
+                 $(DRIVER_GENERATED_DIR) \
 
 VPATH = $(TEMPLATE_DIR)
 

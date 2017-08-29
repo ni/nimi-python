@@ -3,9 +3,6 @@ include $(BUILD_HELPER_DIR)/tools.mak
 DEFAULT_TARGETS := module unit_tests update_generated_files update_system_tests update_examples wheel sdist
 export DEFAULT_TARGETS
 
-ADDITIONAL_TARGETS := 
-export ADDITIONAL_TARGETS
-
 GENERATED_DIR := $(ROOT_DIR)/generated
 export GENERATED_DIR
 
@@ -38,7 +35,7 @@ endef
 
 $(foreach d,$(ALL_DRIVERS),$(eval $(call per_driver_all,$(d))))
 $(foreach d,$(ALL_DRIVERS),\
-   $(foreach t,$(DEFAULT_TARGETS) $(ADDITIONAL_TARGETS),\
+   $(foreach t,$(DEFAULT_TARGETS),\
       $(eval $(call per_driver_per_target,$(d),$(t)))))
 
 define per_target
@@ -48,7 +45,7 @@ endef
 
 # We add test when we create the $(DEFAULT_TARGETS). This is because it shouldn't be
 # run when all is used, but we want it to work
-$(foreach t,$(DEFAULT_TARGETS) $(ADDITIONAL_TARGETS),$(eval $(call per_target,$(t))))
+$(foreach t,$(DEFAULT_TARGETS),$(eval $(call per_target,$(t))))
 
 SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 clean: start
@@ -66,10 +63,10 @@ start:
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
 DRIVER_ALL_TARGETS_HELP := echo Drivers: $(addprefix  && echo - ,$(ALL_DRIVERS))
-TARGETS_HELP := echo Targets: $(addprefix  && echo - ,$(DEFAULT_TARGETS) $(ADDITIONAL_TARGETS))
+TARGETS_HELP := echo Targets: $(addprefix  && echo - ,$(DEFAULT_TARGETS))
 PER_DRIVER_PER_TARGET := \
    $(foreach d,$(ALL_DRIVERS),\
-      $(foreach t,$(DEFAULT_TARGETS) $(ADDITIONAL_TARGETS),\
+      $(foreach t,$(DEFAULT_TARGETS),\
          $(d)_$(t)))
 DRIVER_TARGETS_HELP := echo Per driver, per target: $(addprefix  && echo - ,$(PER_DRIVER_PER_TARGET))
 help:

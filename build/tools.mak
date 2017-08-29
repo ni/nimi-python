@@ -28,7 +28,7 @@ define make_with_tracking_file =
 	$(_hide_cmds)$(call log_command,touch $1)
 endef
 
-# Delete the file that will trigger tox to run
+# Delete the file whose absence will trigger tox to run
 define trigger_tests =
 	$(_hide_cmds)$(if $(wildcard $(TOX_RUN_DONE)),rm $(TOX_RUN_DONE))
 endef
