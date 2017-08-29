@@ -6,7 +6,7 @@ Contributions to **[nimi-python](https://github.com/ni/nimi-python)** are welcom
 **[nimi-python](https://github.com/ni/nimi-python)** is managed via [Git](https://git-scm.com), with the canonical
 upstream repository hosted on [GitHub](http://developercertificate.org/).
 
-**[nimi-python](https://github.com/ni/nimi-python)** follows a pull-request model for development.
+**[nimi-python](https://github.com/ni/nimi-python)** follows a pull request model for development.
 If you wish to contribute, you will need to create a GitHub account, fork this project,
 push a branch with your changes to your project, and then submit a pull request.
 
@@ -18,7 +18,7 @@ Getting Started
 
 To contribute to this project, it is recommended that you follow these steps:
 
-###System Requirements
+### System Requirements
 
 In order to build **[nimi-python](https://github.com/ni/nimi-python)**, you must have the
 following installed:
@@ -57,7 +57,7 @@ In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Test
     * NI-ModInst is included as part of these runtimes.
     * NI-TClk is included as part of NI-SCOPE and NI-FGEN.
 
-###How to build
+### How to build
 
 1. Fork the repository on GitHub and clone it to your local system.
 2. On a terminal, CD to the **[nimi-python](https://github.com/ni/nimi-python)** root
@@ -75,13 +75,13 @@ This will
 * Run [flake8](http://flake8.pycqa.org/)
 * Generate [HTML documentation](http://www.sphinx-doc.org/)
 
-###Running System Tests
+### Running System Tests
 
 System tests exercise the Python bindings. After you have successfully built
 **[nimi-python](https://github.com/ni/nimi-python)**, install the locally built PyPI
 packages using PyPI. For example:
 
-    python3 -m pip install -U bin\nidmm\dist\nidmm-0.1.0.dev4-py2.py3-none-any.whl
+    python3 -m pip install -U bin/nidmm/dist/nidmm-0.1.0.dev4-py2.py3-none-any.whl
 
 You can install all locally built packages in one fell swoop using the following command.
 This will work on Unix-based systems including Windows Subsystem for Linux.
@@ -90,7 +90,7 @@ This will work on Unix-based systems including Windows Subsystem for Linux.
 
 Then run the system tests for the desired driver, for example:
 
-    pytest bin\nidmm\system_tests
+    pytest bin/nidmm/system_tests
 
 Contributing
 ------------
@@ -99,15 +99,16 @@ After you've verified that you can successfully build and run system tests for
 **[nimi-python](https://github.com/ni/nimi-python)**, you may fork the repository and
 begin contributing to to the project.
 
-* If you are modifying the code generator, write new NI-FAKE unit tests that demonstrate
-  the new bugfix or feature. If the new functionality requires changes ot metadata, apply
-  those to NI-FAKE. These new tests should fail.
-* If you are modifying driver-specific metadata, write new system tests that demonstrate
-  the new bugfix or feature. These new tests should fail.
-* Make your change.
-* Verify all tests, including the new ones, pass.
-* Send a GitHub Pull Request to the main repository's master branch. GitHub
-   Pull Requests are the expected method of code collaboration on this project.
+1. Write a failing test for the new feature / bugfix.
+    * If you are modifying the code generator, write new [NI-FAKE](src/nifake/tests) unit
+      tests. If the new functionality requires changes to [metadata](src/nifake/metadata),
+      apply those to NI-FAKE.
+    * If you are modifying driver-specific metadata, write new
+      [system tests](src/nidmm/system_tests).
+2. Make your change.
+3. Verify all tests, including the new ones, pass.
+4. On GitHub, send a New pull request to the main repository's master branch. GitHub
+   pull requests are the expected method of code collaboration on this project.
 
 Developer Certificate of Origin (DCO)
 -------------------------------------
