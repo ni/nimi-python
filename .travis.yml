@@ -13,14 +13,13 @@ python:
 
 install:
   - pip install --upgrade setuptools 
-  - pip install --upgrade mako 
   - pip install --upgrade tox 
   - pip install --upgrade tox-travis 
-  - pip install --upgrade wheel 
   - pip install --upgrade coveralls
 
 script:
-  - make clean all PRINT=1 PYTHON_CMD=python
+  - make clean
+  - tox -e codegen PRINT=1 PYTHON_CMD=python
   - tox
   - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then tox -e flake8; fi
   - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then tox -e docs; fi

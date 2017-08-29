@@ -15,7 +15,7 @@ ifeq (,$(PRINT))
 _hide_cmds := @
 endif
 
-all: $(DRIVERS) test
+all: $(DRIVERS)
 
 define per_driver_per_target
 $1_$2: start
