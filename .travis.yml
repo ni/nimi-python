@@ -17,8 +17,6 @@ install:
 script:
   - tox -e clean,codegen PRINT=1 PYTHON_CMD=python
   - tox
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then tox -e flake8; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then tox -e docs; fi
 
 #after_success:
 #  - coveralls
