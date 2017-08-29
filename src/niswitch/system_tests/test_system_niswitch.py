@@ -57,11 +57,10 @@ def test_warning(session):
 
 
 def test_ViBoolean_attribute(session):
-    #session.interchange_check = False
-    #assert session.interchange_check is False
-    #session.interchange_check = True
-    #assert session.interchange_check is True
-  pytest.skip("Issue 144")
+    session.interchange_check = False
+    assert session.interchange_check is False
+    session.interchange_check = True
+    assert session.interchange_check is True
 
 
 def test_ViString_attribute(session):
@@ -189,6 +188,7 @@ def test_functions_addon_string_changes_error_message(session):
     string = session.error_message(-1074126847)
     assert len(string) > 1
     assert string == 'Invalid path string.'
+
 
 def test_functions_addon_string_changes_private_get_error_description(session):
     error, string = session._get_error_description(0)   #expect no errors
