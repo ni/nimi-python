@@ -1,4 +1,5 @@
 include $(BUILD_HELPER_DIR)/defines.mak
+include $(BUILD_HELPER_DIR)/tools.mak
 
 # We want everything but enums.py
 MODULE_FILES_TO_GENERATE := $(filter-out enums.py,$(DEFAULT_PY_FILES_TO_GENERATE))
@@ -14,4 +15,6 @@ include $(BUILD_HELPER_DIR)/rules.mak
 $(MODULE_DIR)/session.py: $(DRIVER_DIR)/templates/session.py.mako
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(MODULE_DIR), $(METADATA_DIR))
+# Need to signal the top level makefile to run tests again
+	$(_hide_cmds)$(call trigger_tests)
 

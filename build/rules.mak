@@ -1,4 +1,6 @@
 
+include $(BUILD_HELPER_DIR)/tools.mak
+
 MODULE_FILES := \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_GENERATE)) \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_COPY))
@@ -10,32 +12,6 @@ MKDIR: $(MKDIRECTORIES)
 
 CURRENT_DIR := $(shell pwd)
 
-# Executes a command, then logs it to $(COMMAND_LOG_BATCH) and $(COMMAND_LOG_SH).
-# $1 is the command.
-# TODO(marcoskirsch): This is duplicated in Makefile.
-define log_command
-	$1
-	@echo '$1' >> $(COMMAND_LOG_BATCH)
-	@echo '$1' >> $(COMMAND_LOG_SH)
-endef
-
-
-# Traces to console, nicely formatted.
-# $1 is the Action, for example: "Generating"
-# $2 is a Path.
-# Action will be padded on the left so colons align, for readability.
-# Path will be turned from absolute to relative, for readability.
-define trace_to_console
-	@echo "$(shell printf '%15s' $1): $(subst $(CURRENT_DIR)/,,$2)"
-endef
-
-define make_with_tracking_file
-	$(_hide_cmds)$(call log_command,touch $1)
-	$(_hide_cmds)$(call log_command,rm $1)
-	$(_hide_cmds)$(call log_command,$2)
-	$(_hide_cmds)$(call log_command,touch $1)
-endef
-
 define mkdir_rule
 $1:
 	$(call trace_to_console, "Making dir",$1)
@@ -46,18 +22,26 @@ $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 $(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
+# Need to signal the top level makefile to run tests again
+	$(_hide_cmds)$(call trigger_tests)
 
 $(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
+# Need to signal the top level makefile to run tests again
+	$(_hide_cmds)$(call trigger_tests)
 
 $(MODULE_DIR)/%.py: %.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)cp $< $@
+# Need to signal the top level makefile to run tests again
+	$(_hide_cmds)$(call trigger_tests)
 
 $(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
+# Need to signal the top level makefile to run tests again
+	$(_hide_cmds)$(call trigger_tests)
 
 UNIT_TEST_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/tests/*.py)
 UNIT_TEST_FILES := $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_COPY)))
@@ -65,6 +49,8 @@ UNIT_TEST_FILES := $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_C
 $(UNIT_TEST_DIR)/%.py: $(DRIVER_DIR)/tests/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
+# Need to signal the top level makefile to run tests again
+	$(_hide_cmds)$(call trigger_tests)
 
 clean:
 
@@ -72,58 +58,40 @@ clean:
 $(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
 module: $(MODULE_FILES)
 
-
 $(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
-
-unit_tests: $(UNIT_TESTS_DONE)
-
-$(UNIT_TESTS_DONE): $(UNIT_TEST_FILES)
-	$(call trace_to_console, "Running pytest",$@)
-	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 -m pytest -s $(LOG_OUTPUT) $(LOG_DIR)/test_results.log)
-
-$(OUTPUT_DIR)/README.rst: $(ROOT_DIR)/README.rst
-	$(call trace_to_console, "Copying",$@)
-	$(_hide_cmds)$(call log_command,cp $< $@)
 
 $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
-sdist: $(SDIST_DONE)
+sdist: $(SDIST_BUILD_DONE) $(UNIT_TEST_FILES)
 
-$(SDIST_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
+$(SDIST_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
 
-wheel: $(WHEEL_DONE)
+wheel: $(WHEEL_BUILD_DONE) $(UNIT_TEST_FILES)
 
-$(WHEEL_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
+$(WHEEL_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
+
+$(OUTPUT_DIR)/README.rst: $(ROOT_DIR)/README.rst
+	$(call trace_to_console, "Copying",$@)
+	$(_hide_cmds)$(call log_command,cp $< $@)
 
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
 
-$(TOX_INI): $(ROOT_DIR)/tox.ini
-	$(call trace_to_console, "Copying",$@)
-	$(_hide_cmds)$(call log_command,cp $< $@)
+update_generated_files: $(GENERATED_FILES_COPY_DONE)
 
-test: $(TOX_INI)
-	$(call trace_to_console, "Running tox",$(OUTPUT_DIR))
-	$(_hide_cmds)$(call log_command,cd $(OUTPUT_DIR) && set DRIVER=$(DRIVER) && tox)
-
-update_generated_files: $(GENERATED_FILES_DONE)
-
-# Can't use make_with_tracking_file since there are multiple commands
-$(GENERATED_FILES_DONE): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py
-	$(call trace_to_console, "Updating",$(GENERATED_DIR)/$(DRIVER)/)
-	$(_hide_cmds)$(call log_command,touch $@)
-	$(_hide_cmds)$(call log_command,rm $@)
-	$(_hide_cmds)$(call log_command,rm -Rf $(GENERATED_DIR)/$(DRIVER))
-	$(_hide_cmds)$(call log_command,mkdir -p $(GENERATED_DIR)/$(DRIVER))
-	$(_hide_cmds)$(call log_command,cp -Rf $(MODULE_DIR)/* $(GENERATED_DIR)/$(DRIVER))
-	$(_hide_cmds)$(call log_command,cp -Rf $(OUTPUT_DIR)/setup.py $(GENERATED_DIR)/$(DRIVER))
-	$(_hide_cmds)$(call log_command,touch $@)
+$(GENERATED_FILES_COPY_DONE): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py $(UNIT_TEST_FILES)
+	$(call trace_to_console, "Updating",$(DRIVER_GENERATED_DIR)/)
+	$(_hide_cmds)$(call make_with_tracking_file, $@, \
+      rm -Rf $(DRIVER_GENERATED_DIR)/* && \
+      cp -Rf $(MODULE_DIR)/* $(DRIVER_GENERATED_DIR) && \
+      cp -Rf $(OUTPUT_DIR)/setup.py $(DRIVER_GENERATED_DIR) \
+   )
 
 ifneq (,$(wildcard $(DRIVER_DIR)/system_tests))
 SYSTEM_TESTS_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/system_tests/*.py)
@@ -134,6 +102,8 @@ update_system_tests: $(SYSTEM_TESTS_FILES)
 $(SYSTEM_TEST_DIR)/%.py: $(DRIVER_DIR)/system_tests/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
+# Need to signal the top level makefile to run tests again
+	$(_hide_cmds)$(call trigger_tests)
 
 ifneq (,$(wildcard $(DRIVER_DIR)/examples))
 EXAMPLE_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/examples/*.py)
@@ -144,11 +114,7 @@ update_examples: $(EXAMPLE_FILES)
 $(EXAMPLES_DIR)/%.py: $(DRIVER_DIR)/examples/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
-
-flake8: $(FLAKE8_DONE) 
-
-$(FLAKE8_DONE): $(TOX_INI) $(UNIT_TEST_FILES) $(MODULE_FILES) $(SYSTEM_TESTS_FILES) $(EXAMPLE_FILES) $(UNIT_TESTS_PASSED)
-	$(call trace_to_console, "Running flake",$(OUTPUT_DIR))
-	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && tox -e flake8)
+# Need to signal the top level makefile to run tests again
+	$(_hide_cmds)$(call trigger_tests)
 
 
