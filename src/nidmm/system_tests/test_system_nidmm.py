@@ -7,16 +7,20 @@ import sys
 
 
 @pytest.fixture(scope='function')
-def device_info(request):
+def device_info(request, name):
     device_info = {}
-    device_name = "unknown"
+    device_name = name
     device_sn = "unknown"
     try:
         with nimodinst.Session('nidmm') as session:
             if len(session) > 0:
-                device_name = session.device_name[0]
-                device_sn = session.serial_number[0]
-
+                for x in range(0, len(session)):
+                    if (session.device_name[x] == device_name):
+                        device_sn = session.serial_number[x]
+                        break
+                if (device_sn == "unknown"):
+                    device_name = session.device_name[0]
+                    device_sn = session.serial_number[0]
     except nimodinst.Error as e:
         sys.stderr.write(str(e))
         sys.exit(e.code)
