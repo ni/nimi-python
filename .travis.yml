@@ -19,7 +19,7 @@ script:
   - tox -e clean,codegen PRINT=1 PYTHON_CMD=python
   - tox
 
-#after_success:
-#  - coveralls
+after_success:
+  - coveralls
 
 
