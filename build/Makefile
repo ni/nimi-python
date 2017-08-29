@@ -1,3 +1,4 @@
+include $(BUILD_HELPER_DIR)/tools.mak
 
 DEFAULT_TARGETS := module unit_tests update_generated_files update_system_tests update_examples wheel sdist
 export DEFAULT_TARGETS
@@ -12,8 +13,6 @@ COMMAND_LOG_BATCH := $(GENERATED_DIR)/command_history.bat
 export COMMAND_LOG_BATCH
 COMMAND_LOG_SH := $(GENERATED_DIR)/command_history.sh
 export COMMAND_LOG_SH
-
-include $(BUILD_HELPER_DIR)/tools.mak
 
 ifeq (,$(PRINT))
 _hide_cmds := @
@@ -110,7 +109,7 @@ export TOX_RUN_DONE
 
 test: $(TOX_RUN_DONE)
 
-$(TOX_RUN_DONE): 
+$(TOX_RUN_DONE):
 	@echo
 	$(call trace_to_console, "Running tox",$@)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,tox)

@@ -115,7 +115,7 @@ update_examples: $(EXAMPLE_FILES)
 $(EXAMPLES_DIR)/%.py: $(DRIVER_DIR)/examples/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
-	# Need to signal the top level makefile to run tests again
+# Need to signal the top level makefile to run tests again
 	$(_hide_cmds)$(call trigger_tests)
 
 
