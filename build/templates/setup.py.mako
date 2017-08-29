@@ -29,7 +29,7 @@ def read_contents(file_to_read):
 
 setup(
     name=pypi_name,
-    zip_safe=False,
+    zip_safe=True,
     version='${config['module_version']}',
     description='${config['driver_name']} Python API',
     long_description=read_contents('README.rst'),
