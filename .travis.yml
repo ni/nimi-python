@@ -20,6 +20,7 @@ script:
   - tox
 
 after_success:
-  - coveralls --base_dir bin/nifake
+  - coveralls --help
+  - coveralls
 
 
