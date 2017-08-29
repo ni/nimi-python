@@ -17,8 +17,10 @@ install:
 script:
   - tox -e clean,codegen PRINT=1 PYTHON_CMD=python
   - tox
+  - 
 
 after_success:
+  - cp bin/nifake/.coverage .
   - coveralls -v
 
 
