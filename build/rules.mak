@@ -95,7 +95,7 @@ $(GENERATED_FILES_COPY_DONE): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py $(UNIT_TEST
    )
 
 ifneq (,$(wildcard $(DRIVER_DIR)/system_tests))
-SYSTEM_TESTS_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/system_tests/*)
+SYSTEM_TESTS_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/system_tests/*.py)
 SYSTEM_TESTS_FILES := $(addprefix $(SYSTEM_TEST_DIR)/,$(notdir $(SYSTEM_TESTS_FILES_TO_COPY)))
 endif
 update_system_tests: $(SYSTEM_TESTS_FILES)
@@ -107,7 +107,7 @@ $(SYSTEM_TEST_DIR)/%.py: $(DRIVER_DIR)/system_tests/%.py
 	$(_hide_cmds)$(call trigger_tests)
 
 ifneq (,$(wildcard $(DRIVER_DIR)/examples))
-EXAMPLE_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/examples/*)
+EXAMPLE_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/examples/*.py)
 EXAMPLE_FILES := $(addprefix $(EXAMPLES_DIR)/,$(notdir $(EXAMPLE_FILES_TO_COPY)))
 endif
 update_examples: $(EXAMPLE_FILES)
