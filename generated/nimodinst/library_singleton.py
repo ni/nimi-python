@@ -2,8 +2,8 @@
 
 import platform
 
-from nimodinst import library
 from nimodinst import errors
+from nimodinst import library
 
 
 class LibrarySingleton(object):

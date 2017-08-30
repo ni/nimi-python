@@ -2,8 +2,8 @@
 
 import platform
 
-from nidmm import library
 from nidmm import errors
+from nidmm import library
 
 
 class LibrarySingleton(object):

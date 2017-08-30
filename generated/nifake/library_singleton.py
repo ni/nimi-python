@@ -2,8 +2,8 @@
 
 import platform
 
-from nifake import library
 from nifake import errors
+from nifake import library
 
 
 class LibrarySingleton(object):
