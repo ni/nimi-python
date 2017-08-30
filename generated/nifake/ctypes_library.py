@@ -1,9 +1,5 @@
 # This file was generated
 
-# Python ctypes wrapper around driver DLL.
-# ctypes is a library to manage calling into C/C++ DLLs. It will ensure the correct
-#  number and types of parameters are passed into the different entry points
-
 import ctypes
 import threading
 
@@ -11,7 +7,13 @@ from nifake.ctypes_types import *  # noqa: F403,H303
 import nifake.python_types
 
 
-class NifakeCtypesLibrary(object):
+class Library(object):
+    """
+    Wrapper around driver library.
+    Class will setup the correct ctypes arguments / return type for every function
+    as needed.
+    """
+
     def __init__(self, library_name, library_type):
         self._func_lock = threading.Lock()
         # We cache the cfunc object from the ctypes.CDLL object

@@ -9,7 +9,7 @@ SESSION_NUM_FOR_TEST = 42
 
 class TestSession(object):
     def setup_method(self, method):
-        self.patched_ctypes_library_patcher = patch('nidmm.ctypes_library.NidmmCtypesLibrary', autospec=True)
+        self.patched_ctypes_library_patcher = patch('nidmm.ctypes_library.Library', autospec=True)
         self.patched_ctypes_library = self.patched_ctypes_library_patcher.start()
         self.patched_get_library_patcher = patch('nidmm.session.library.get_library', return_value=self.patched_ctypes_library)
         self.patched_get_library_patcher.start()

@@ -30,7 +30,7 @@ class LibrarySingleton(object):
     def __init__(self):
         if LibrarySingleton.instance is None:
             try:
-                LibrarySingleton.instance = ctypes_library.NifakeCtypesLibrary(get_library_name(), get_library_type())
+                LibrarySingleton.instance = ctypes_library.Library(get_library_name(), get_library_type())
             except OSError:
                 raise errors.DriverNotInstalledError()
 
