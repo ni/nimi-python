@@ -27,7 +27,7 @@ import ctypes
 from ${module_name} import ctypes_types
 from ${module_name} import enums
 from ${module_name} import errors
-from ${module_name} import library
+from ${module_name} import library_singleton
 from ${module_name} import python_types
 
 
@@ -141,7 +141,7 @@ class Session(object):
 % endfor
 
     def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):
-        self.library = library.LibrarySingleton.get()
+        self.library = library_singleton.LibrarySingleton.get()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
 
