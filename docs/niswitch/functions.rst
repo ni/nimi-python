@@ -12,7 +12,7 @@ niswitch.Session methods
 
     :type channel2: str
 
-    :rtype: ViInt32
+    :rtype: enums.PathCapability
 
 
 .. function:: clear_interchange_warnings()
@@ -26,7 +26,7 @@ niswitch.Session methods
     :type scanlist: str
     :param scan_mode:
 
-    :type scan_mode: int
+    :type scan_mode: :py:data:`niswitch.ScanMode`
 
 .. function:: configure_scan_trigger(scan_delay, trigger_input, scan_advanced_output)
 
@@ -35,10 +35,10 @@ niswitch.Session methods
     :type scan_delay: float
     :param trigger_input:
 
-    :type trigger_input: int
+    :type trigger_input: :py:data:`niswitch.TriggerInputConfigureScanTrigger`
     :param scan_advanced_output:
 
-    :type scan_advanced_output: int
+    :type scan_advanced_output: :py:data:`niswitch.ScanAdvancedOutputConfigureScanTrigger`
 
 .. function:: connect(channel1, channel2)
 
@@ -131,7 +131,7 @@ niswitch.Session methods
 
     :type relay_name: str
 
-    :rtype: ViInt32
+    :rtype: enums.RelayPosition
 
 
 .. function:: init_with_topology(resource_name, topology, simulate, reset_device)
@@ -169,7 +169,7 @@ niswitch.Session methods
     :type relay_name: str
     :param relay_action:
 
-    :type relay_action: int
+    :type relay_action: :py:data:`niswitch.RelayAction`
 
 .. function:: reset_interchange_check()
 
@@ -179,10 +179,10 @@ niswitch.Session methods
 
     :param scan_advanced_output_connector:
 
-    :type scan_advanced_output_connector: int
+    :type scan_advanced_output_connector: :py:data:`niswitch.TriggerInputConnector`
     :param scan_advanced_output_bus_line:
 
-    :type scan_advanced_output_bus_line: int
+    :type scan_advanced_output_bus_line: :py:data:`niswitch.TriggerInputBusLine`
     :param invert:
 
     :type invert: bool
@@ -191,10 +191,10 @@ niswitch.Session methods
 
     :param trigger_input_connector:
 
-    :type trigger_input_connector: int
+    :type trigger_input_connector: :py:data:`niswitch.TriggerInputConnector`
     :param trigger_input_bus_line:
 
-    :type trigger_input_bus_line: int
+    :type trigger_input_bus_line: :py:data:`niswitch.TriggerInputBusLine`
     :param invert:
 
     :type invert: bool

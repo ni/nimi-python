@@ -983,12 +983,12 @@ class Session(object):
             channel2 (str):
 
         Returns:
-            path_capability (int):
+            path_capability (enums.PathCapability):
         '''
         path_capability_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niSwitch_CanConnect(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), ctypes.pointer(path_capability_ctype))
         errors._handle_error(self, error_code)
-        return python_types.ViInt32(path_capability_ctype.value)
+        return enums.PathCapability(path_capability_ctype.value)
 
     def _clear_error(self):
         '''_clear_error
@@ -1024,9 +1024,11 @@ class Session(object):
 
         Args:
             scanlist (str):
-            scan_mode (int):
+            scan_mode (enums.ScanMode):
         '''
-        error_code = self.library.niSwitch_ConfigureScanList(self.vi, scanlist.encode('ascii'), scan_mode)
+        if type(scan_mode) is not enums.ScanMode:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScanMode))
+        error_code = self.library.niSwitch_ConfigureScanList(self.vi, scanlist.encode('ascii'), scan_mode.value)
         errors._handle_error(self, error_code)
         return
 
@@ -1037,10 +1039,14 @@ class Session(object):
 
         Args:
             scan_delay (float):
-            trigger_input (int):
-            scan_advanced_output (int):
+            trigger_input (enums.TriggerInputConfigureScanTrigger):
+            scan_advanced_output (enums.ScanAdvancedOutputConfigureScanTrigger):
         '''
-        error_code = self.library.niSwitch_ConfigureScanTrigger(self.vi, scan_delay, trigger_input, scan_advanced_output)
+        if type(trigger_input) is not enums.TriggerInputConfigureScanTrigger:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputConfigureScanTrigger))
+        if type(scan_advanced_output) is not enums.ScanAdvancedOutputConfigureScanTrigger:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutputConfigureScanTrigger))
+        error_code = self.library.niSwitch_ConfigureScanTrigger(self.vi, scan_delay, trigger_input.value, scan_advanced_output.value)
         errors._handle_error(self, error_code)
         return
 
@@ -1355,12 +1361,12 @@ class Session(object):
             relay_name (str):
 
         Returns:
-            relay_position (int):
+            relay_position (enums.RelayPosition):
         '''
         relay_position_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niSwitch_GetRelayPosition(self.vi, relay_name.encode('ascii'), ctypes.pointer(relay_position_ctype))
         errors._handle_error(self, error_code)
-        return python_types.ViInt32(relay_position_ctype.value)
+        return enums.RelayPosition(relay_position_ctype.value)
 
     def _init_with_options(self, resource_name, id_query, reset_device, options_string):
         '''_init_with_options
@@ -1455,9 +1461,11 @@ class Session(object):
 
         Args:
             relay_name (str):
-            relay_action (int):
+            relay_action (enums.RelayAction):
         '''
-        error_code = self.library.niSwitch_RelayControl(self.vi, relay_name.encode('ascii'), relay_action)
+        if type(relay_action) is not enums.RelayAction:
+            raise TypeError('Parameter mode must be of type ' + str(enums.RelayAction))
+        error_code = self.library.niSwitch_RelayControl(self.vi, relay_name.encode('ascii'), relay_action.value)
         errors._handle_error(self, error_code)
         return
 
@@ -1485,11 +1493,15 @@ class Session(object):
         
 
         Args:
-            scan_advanced_output_connector (int):
-            scan_advanced_output_bus_line (int):
+            scan_advanced_output_connector (enums.TriggerInputConnector):
+            scan_advanced_output_bus_line (enums.TriggerInputBusLine):
             invert (bool):
         '''
-        error_code = self.library.niSwitch_RouteScanAdvancedOutput(self.vi, scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
+        if type(scan_advanced_output_connector) is not enums.TriggerInputConnector:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputConnector))
+        if type(scan_advanced_output_bus_line) is not enums.TriggerInputBusLine:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputBusLine))
+        error_code = self.library.niSwitch_RouteScanAdvancedOutput(self.vi, scan_advanced_output_connector.value, scan_advanced_output_bus_line.value, invert)
         errors._handle_error(self, error_code)
         return
 
@@ -1499,11 +1511,15 @@ class Session(object):
         
 
         Args:
-            trigger_input_connector (int):
-            trigger_input_bus_line (int):
+            trigger_input_connector (enums.TriggerInputConnector):
+            trigger_input_bus_line (enums.TriggerInputBusLine):
             invert (bool):
         '''
-        error_code = self.library.niSwitch_RouteTriggerInput(self.vi, trigger_input_connector, trigger_input_bus_line, invert)
+        if type(trigger_input_connector) is not enums.TriggerInputConnector:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputConnector))
+        if type(trigger_input_bus_line) is not enums.TriggerInputBusLine:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputBusLine))
+        error_code = self.library.niSwitch_RouteTriggerInput(self.vi, trigger_input_connector.value, trigger_input_bus_line.value, invert)
         errors._handle_error(self, error_code)
         return
 

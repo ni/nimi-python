@@ -404,6 +404,105 @@ Enums used in NI-SWITCH
 
 
 
+.. py:data:: PathCapability
+
+    .. py:attribute:: PATH_AVAILABLE
+
+
+
+        Path Available
+
+        
+
+
+    .. py:attribute:: PATH_EXISTS
+
+
+
+        Path Exists
+
+        
+
+
+    .. py:attribute:: PATH_UNSUPPORTED
+
+
+
+        Path Unsupported
+
+        
+
+
+    .. py:attribute:: RESOURCE_IN_USE
+
+
+
+        Resource in use
+
+        
+
+
+    .. py:attribute:: SOURCE_CONFLICT
+
+
+
+        Source conflict
+
+        
+
+
+    .. py:attribute:: CHANNEL_NOT_AVAILABLE
+
+
+
+        Channel not available
+
+        
+
+
+
+.. py:data:: RelayAction
+
+    .. py:attribute:: OPEN_RELAY
+
+
+
+        Open Relay
+
+        
+
+
+    .. py:attribute:: CLOSE_RELAY
+
+
+
+        Close Relay
+
+        
+
+
+
+.. py:data:: RelayPosition
+
+    .. py:attribute:: OPEN
+
+
+
+        Open
+
+        
+
+
+    .. py:attribute:: CLOSED
+
+
+
+        Closed
+
+        
+
+
+
 .. py:data:: ScanAdvancedOutput
 
     .. py:attribute:: NONE
@@ -771,6 +870,360 @@ Enums used in NI-SWITCH
 
         The switch module produces the Scan Advanced Output Trigger on the front
         connector module 12.
+
+        
+
+
+
+.. py:data:: ScanAdvancedOutputConfigureScanTrigger
+
+    .. py:attribute:: NONE
+
+
+
+        None
+
+        
+
+
+    .. py:attribute:: EXTERNAL
+
+
+
+        External
+
+        
+
+
+    .. py:attribute:: TTL0
+
+
+
+        TTL0
+
+        
+
+
+    .. py:attribute:: TTL1
+
+
+
+        TTL1
+
+        
+
+
+    .. py:attribute:: TTL2
+
+
+
+        TTL2
+
+        
+
+
+    .. py:attribute:: TTL3
+
+
+
+        TTL3
+
+        
+
+
+    .. py:attribute:: TTL4
+
+
+
+        TTL4
+
+        
+
+
+    .. py:attribute:: TTL5
+
+
+
+        TTL5
+
+        
+
+
+    .. py:attribute:: TTL6
+
+
+
+        TTL6
+
+        
+
+
+    .. py:attribute:: TTL7
+
+
+
+        TTL7
+
+        
+
+
+    .. py:attribute:: ECL0
+
+
+
+        ECL0
+
+        
+
+
+    .. py:attribute:: ECL1
+
+
+
+        ECL1
+
+        
+
+
+    .. py:attribute:: PXI_STAR
+
+
+
+        PXI Star
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR
+
+
+
+        Rear Connector
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR
+
+
+
+        Front Connector
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_1
+
+
+
+        Rear Connector Module 1
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_2
+
+
+
+        Rear Connector Module 2
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_3
+
+
+
+        Rear Connector Module 3
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_4
+
+
+
+        Rear Connector Module 4
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_5
+
+
+
+        Rear Connector Module 5
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_6
+
+
+
+        Rear Connector Module 6
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_7
+
+
+
+        Rear Connector Module 7
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_8
+
+
+
+        Rear Connector Module 8
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_9
+
+
+
+        Rear Connector Module 9
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_10
+
+
+
+        Rear Connector Module 10
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_11
+
+
+
+        Rear Connector Module 11
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_MODULE_12
+
+
+
+        Rear Connector Module 12
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_1
+
+
+
+        Front Connector Module 1
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_2
+
+
+
+        Front Connector Module 2
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_3
+
+
+
+        Front Connector Module 3
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_4
+
+
+
+        Front Connector Module 4
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_5
+
+
+
+        Front Connector Module 5
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_6
+
+
+
+        Front Connector Module 6
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_7
+
+
+
+        Front Connector Module 7
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_8
+
+
+
+        Front Connector Module 8
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_9
+
+
+
+        Front Connector Module 9
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_10
+
+
+
+        Front Connector Module 10
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_11
+
+
+
+        Front Connector Module 11
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_MODULE_12
+
+
+
+        Front Connector Module 12
 
         
 
@@ -1209,6 +1662,474 @@ Enums used in NI-SWITCH
 
         The switch module waits until it receives a trigger on the front
         connector module 12.
+
+        
+
+
+
+.. py:data:: TriggerInputBusLine
+
+    .. py:attribute:: NONE
+
+
+
+        None
+
+        
+
+
+    .. py:attribute:: TTL0
+
+
+
+        TTL0
+
+        
+
+
+    .. py:attribute:: TTL1
+
+
+
+        TTL1
+
+        
+
+
+    .. py:attribute:: TTL2
+
+
+
+        TTL2
+
+        
+
+
+    .. py:attribute:: TTL3
+
+
+
+        TTL3
+
+        
+
+
+    .. py:attribute:: TTL4
+
+
+
+        TTL4
+
+        
+
+
+    .. py:attribute:: TTL5
+
+
+
+        TTL5
+
+        
+
+
+    .. py:attribute:: TTL6
+
+
+
+        TTL6
+
+        
+
+
+    .. py:attribute:: TTL7
+
+
+
+        TTL7
+
+        
+
+
+
+.. py:data:: TriggerInputConfigureScanTrigger
+
+    .. py:attribute:: IMMEDIATE
+
+
+
+        Immediate
+
+        
+
+
+    .. py:attribute:: EXTERNAL
+
+
+
+        External
+
+        
+
+
+    .. py:attribute:: TTL0
+
+
+
+        TTL0
+
+        
+
+
+    .. py:attribute:: TTL1
+
+
+
+        TTL1
+
+        
+
+
+    .. py:attribute:: TTL2
+
+
+
+        TTL2
+
+        
+
+
+    .. py:attribute:: TTL3
+
+
+
+        TTL3
+
+        
+
+
+    .. py:attribute:: TTL4
+
+
+
+        TTL4
+
+        
+
+
+    .. py:attribute:: TTL5
+
+
+
+        TTL5
+
+        
+
+
+    .. py:attribute:: TTL6
+
+
+
+        TTL6
+
+        
+
+
+    .. py:attribute:: TTL7
+
+
+
+        TTL7
+
+        
+
+
+    .. py:attribute:: ECL0
+
+
+
+        ECL0
+
+        
+
+
+    .. py:attribute:: ECL1
+
+
+
+        ECL1
+
+        
+
+
+    .. py:attribute:: PXI_STAR
+
+
+
+        PXI Star
+
+        
+
+
+    .. py:attribute:: SOFTWARE_TRIGGER_FUNCTION
+
+
+
+        Software Trigger Function
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR
+
+
+
+        Rear Connector
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR
+
+
+
+        Front Connector
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_1
+
+
+
+        Rear Connector of Module 1
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_2
+
+
+
+        Rear Connector of Module 2
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_3
+
+
+
+        Rear Connector of Module 3
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_4
+
+
+
+        Rear Connector of Module 4
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_5
+
+
+
+        Rear Connector of Module 5
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_6
+
+
+
+        Rear Connector of Module 6
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_7
+
+
+
+        Rear Connector of Module 7
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_8
+
+
+
+        Rear Connector of Module 8
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_9
+
+
+
+        Rear Connector of Module 9
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_10
+
+
+
+        Rear Connector of Module 10
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_11
+
+
+
+        Rear Connector of Module 11
+
+        
+
+
+    .. py:attribute:: REAR_CONNECTOR_OF_MODULE_12
+
+
+
+        Rear Connector of Module 12
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_1
+
+
+
+        Front Connector of Module 1
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_2
+
+
+
+        Front Connector of Module 2
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_3
+
+
+
+        Front Connector of Module 3
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_4
+
+
+
+        Front Connector of Module 4
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_5
+
+
+
+        Front Connector of Module 5
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_6
+
+
+
+        Front Connector of Module 6
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_7
+
+
+
+        Front Connector of Module 7
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_8
+
+
+
+        Front Connector of Module 8
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_9
+
+
+
+        Front Connector of Module 9
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_10
+
+
+
+        Front Connector of Module 10
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_11
+
+
+
+        Front Connector of Module 11
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR_OF_MODULE_12
+
+
+
+        Front Connector of Module 12
+
+        
+
+
+
+.. py:data:: TriggerInputConnector
+
+    .. py:attribute:: REAR_CONNECTOR
+
+
+
+        Rear Connector
+
+        
+
+
+    .. py:attribute:: FRONT_CONNECTOR
+
+
+
+        Front Connector
 
         
 
