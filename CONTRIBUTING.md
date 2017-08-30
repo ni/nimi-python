@@ -47,7 +47,7 @@ following installed:
 
 * Additional Python Modules (install using [PyPI](https://pypi.python.org/pypi))
 
-        sudo pip3 install pytest mako setuptools tox mock sphinx sphinx_rtd_theme --upgrade
+        sudo pip3 install tox --upgrade
 
 In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Tests:
 
@@ -61,19 +61,25 @@ In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Test
 
 1. Fork the repository on GitHub and clone it to your local system.
 2. On a terminal, CD to the **[nimi-python](https://github.com/ni/nimi-python)** root
-directory. Then type:
+   directory. Then type:
+```
+tox
+```
 
-    make
+   This will
 
-This will
+   * For each driver
+      * Generate Python bindings
+      * Generate [RST documentation](http://www.sphinx-doc.org/)
+      * Create installer packages
+   * Run NI-FAKE unit tests
+   * Run [flake8](http://flake8.pycqa.org/)
+   * Generate [HTML documentation](http://www.sphinx-doc.org/)
 
-* For each driver
-    * Generate Python bindings
-    * Generate [RST documentation](http://www.sphinx-doc.org/)
-    * Create installer packages
-* Run NI-FAKE unit tests
-* Run [flake8](http://flake8.pycqa.org/)
-* Generate [HTML documentation](http://www.sphinx-doc.org/)
+3. To clean everything and start fresh, type:
+```
+tox -e clean
+```
 
 ### Running System Tests
 
