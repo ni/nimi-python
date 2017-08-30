@@ -16,7 +16,7 @@
 import ctypes
 from ${module_name} import ctypes_types
 from ${module_name} import errors
-from ${module_name} import library
+from ${module_name} import library_singleton
 from ${module_name} import python_types
 
 
@@ -82,7 +82,7 @@ class Session(object):
         self.handle = 0
         self.item_count = 0
         self.current_item = 0
-        self.library = library.LibrarySingleton.get()
+        self.library = library_singleton.LibrarySingleton.get()
         self.handle, self.item_count = self._open_installed_devices_session(driver)
 
         self._is_frozen = True
