@@ -178,21 +178,24 @@ class TestSession(object):
     def test_library_singleton(self):
         with nifake.Session('dev1') as session:
             lib1 = session.library
-        with nifake.Session('dev1') as session:
+        with nifake.Session('dev2') as session:
             lib2 = session.library
-        assert lib1 == lib2
+        assert lib1 is lib2
 
     def test_one_input_function(self):
+        test_number = 1
         self.patched_ctypes_library.niFake_OneInputFunction.side_effect = self.side_effects_helper.niFake_OneInputFunction
         with nifake.Session('dev1') as session:
-            session.one_input_function(1)
-            self.patched_ctypes_library.niFake_OneInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, 1)
+            session.one_input_function(test_number)
+            self.patched_ctypes_library.niFake_OneInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number)
 
     def test_two_input_function(self):
+        test_number = 1.5
+        test_string = 'test'
         self.patched_ctypes_library.niFake_TwoInputFunction.side_effect = self.side_effects_helper.niFake_TwoInputFunction
         with nifake.Session('dev1') as session:
-            session.two_input_function(1, 2)
-            self.patched_ctypes_library.niFake_TwoInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, 1, 2)
+            session.two_input_function(test_number, test_string)
+            self.patched_ctypes_library.niFake_TwoInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number, test_string)
 
     def test_get_enum_value(self):
         test_number = 1

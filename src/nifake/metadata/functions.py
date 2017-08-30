@@ -790,7 +790,7 @@ functions = {
                 'direction': 'in',
                 'enum': None,
                 'name': 'aNumber',
-                'type': 'ViInt16',
+                'type': 'ViInt32',
                 'documentation': {
                     'description': 'Contains a number',
                 },
@@ -818,7 +818,7 @@ functions = {
                 'direction': 'in',
                 'enum': None,
                 'name': 'aNumber',
-                'type': 'ViInt16',
+                'type': 'ViReal64',
                 'documentation': {
                     'description': 'Contains a number',
                 },
@@ -826,10 +826,10 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'aNumber2',
-                'type': 'ViInt16',
+                'name': 'aString',
+                'type': 'ViChar',
                 'documentation': {
-                    'description': 'Contains another number',
+                    'description': 'Contains a string',
                 },
             },
         ],
