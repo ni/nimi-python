@@ -608,16 +608,16 @@ class Session(object):
         errors._handle_error(self, error_code)
         return
 
-    def two_input_function(self, a_number, a_number2):
+    def two_input_function(self, a_number, a_string):
         '''two_input_function
 
         This function takes two parameters other than the session.
 
         Args:
-            a_number (int):Contains a number
-            a_number2 (int):Contains another number
+            a_number (float):Contains a number
+            a_string (int):Contains another number
         '''
-        error_code = self.library.niFake_TwoInputFunction(self.vi, a_number, a_number2)
+        error_code = self.library.niFake_TwoInputFunction(self.vi, a_number, a_string)
         errors._handle_error(self, error_code)
         return
 

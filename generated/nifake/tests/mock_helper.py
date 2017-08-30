@@ -304,7 +304,7 @@ class SideEffectsHelper(object):
             return self._defaults['SimpleFunction']['return']
         return self._defaults['SimpleFunction']['return']
 
-    def niFake_TwoInputFunction(self, vi, a_number, a_number2):  # noqa: N802
+    def niFake_TwoInputFunction(self, vi, a_number, a_string):  # noqa: N802
         if self._defaults['TwoInputFunction']['return'] != 0:
             return self._defaults['TwoInputFunction']['return']
         return self._defaults['TwoInputFunction']['return']

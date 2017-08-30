@@ -234,7 +234,7 @@ nifake.Session methods
     
 
 
-.. function:: two_input_function(a_number, a_number2)
+.. function:: two_input_function(a_number, a_string)
 
     This function takes two parameters other than the session.
 
@@ -248,15 +248,15 @@ nifake.Session methods
 
         
 
-    :type a_number: int
-    :param a_number2:
+    :type a_number: float
+    :param a_string:
 
 
         Contains another number
 
         
 
-    :type a_number2: int
+    :type a_string: int
 
 .. function:: error_message(error_code, error_message)
 

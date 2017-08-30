@@ -183,7 +183,7 @@ class NifakeCtypesLibrary(object):
         with self._func_lock:
             if self.niFake_OneInputFunction_cfunc is None:
                 self.niFake_OneInputFunction_cfunc = self._library.niFake_OneInputFunction
-                self.niFake_OneInputFunction_cfunc.argtypes = [ViSession_ctype, ViInt16_ctype]  # noqa: F405
+                self.niFake_OneInputFunction_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype]  # noqa: F405
                 self.niFake_OneInputFunction_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_OneInputFunction_cfunc(vi, a_number)
 
@@ -259,13 +259,13 @@ class NifakeCtypesLibrary(object):
                 self.niFake_SimpleFunction_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_SimpleFunction_cfunc(vi)
 
-    def niFake_TwoInputFunction(self, vi, a_number, a_number2):  # noqa: N802
+    def niFake_TwoInputFunction(self, vi, a_number, a_string):  # noqa: N802
         with self._func_lock:
             if self.niFake_TwoInputFunction_cfunc is None:
                 self.niFake_TwoInputFunction_cfunc = self._library.niFake_TwoInputFunction
-                self.niFake_TwoInputFunction_cfunc.argtypes = [ViSession_ctype, ViInt16_ctype, ViInt16_ctype]  # noqa: F405
+                self.niFake_TwoInputFunction_cfunc.argtypes = [ViSession_ctype, ViReal64_ctype, ViChar_ctype]  # noqa: F405
                 self.niFake_TwoInputFunction_cfunc.restype = nifake.python_types.ViStatus
-        return self.niFake_TwoInputFunction_cfunc(vi, a_number, a_number2)
+        return self.niFake_TwoInputFunction_cfunc(vi, a_number, a_string)
 
     def niFake_close(self, vi):  # noqa: N802
         with self._func_lock:
