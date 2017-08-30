@@ -3,6 +3,23 @@ nifake.Session methods
 
 .. py:currentmodule:: nifake
 
+.. function:: get_a_boolean(a_boolean)
+
+    Returns a boolean.
+
+    
+
+    .. note:: This function rules!
+
+
+    :rtype: ViBoolean
+
+
+            Contains a boolean.
+
+            
+
+
 .. function:: get_a_number(a_number)
 
     Returns a number.
@@ -45,7 +62,7 @@ nifake.Session methods
     :param buffer_size:
 
 
-        String comes back here. Buffer must be 256 big.
+        Buffersize of the string.
 
         
 
@@ -96,6 +113,22 @@ nifake.Session methods
             | 3 | Mich elangelo |
             +---+---------------+
 
+
+.. function:: one_input_function(a_number)
+
+    This function takes one parameter other than the session.
+
+    
+
+
+    :param a_number:
+
+
+        Contains a number
+
+        
+
+    :type a_number: int
 
 .. function:: read(maximum_time, reading)
 
@@ -200,6 +233,30 @@ nifake.Session methods
 
     
 
+
+.. function:: two_input_function(a_number, a_number2)
+
+    This function takes two parameters other than the session.
+
+    
+
+
+    :param a_number:
+
+
+        Contains a number
+
+        
+
+    :type a_number: int
+    :param a_number2:
+
+
+        Contains another number
+
+        
+
+    :type a_number2: int
 
 .. function:: error_message(error_code, error_message)
 

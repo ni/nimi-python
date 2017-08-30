@@ -23,6 +23,9 @@ class SideEffectsHelper(object):
         self._defaults['Abort']['return'] = 0
         self._defaults['ClearError'] = {}
         self._defaults['ClearError']['return'] = 0
+        self._defaults['GetABoolean'] = {}
+        self._defaults['GetABoolean']['return'] = 0
+        self._defaults['GetABoolean']['aBoolean'] = None
         self._defaults['GetANumber'] = {}
         self._defaults['GetANumber']['return'] = 0
         self._defaults['GetANumber']['aNumber'] = None
@@ -63,6 +66,8 @@ class SideEffectsHelper(object):
         self._defaults['InitWithOptions']['vi'] = None
         self._defaults['Initiate'] = {}
         self._defaults['Initiate']['return'] = 0
+        self._defaults['OneInputFunction'] = {}
+        self._defaults['OneInputFunction']['return'] = 0
         self._defaults['Read'] = {}
         self._defaults['Read']['return'] = 0
         self._defaults['Read']['reading'] = None
@@ -86,6 +91,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['SimpleFunction'] = {}
         self._defaults['SimpleFunction']['return'] = 0
+        self._defaults['TwoInputFunction'] = {}
+        self._defaults['TwoInputFunction']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['error_message'] = {}
@@ -107,6 +114,14 @@ class SideEffectsHelper(object):
         if self._defaults['ClearError']['return'] != 0:
             return self._defaults['ClearError']['return']
         return self._defaults['ClearError']['return']
+
+    def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
+        if self._defaults['GetABoolean']['return'] != 0:
+            return self._defaults['GetABoolean']['return']
+        if self._defaults['GetABoolean']['aBoolean'] is None:
+            raise MockFunctionCallError("niFake_GetABoolean", param='aBoolean')
+        a_boolean.contents.value = self._defaults['GetABoolean']['aBoolean']
+        return self._defaults['GetABoolean']['return']
 
     def niFake_GetANumber(self, vi, a_number):  # noqa: N802
         if self._defaults['GetANumber']['return'] != 0:
@@ -224,6 +239,11 @@ class SideEffectsHelper(object):
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
 
+    def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
+        if self._defaults['OneInputFunction']['return'] != 0:
+            return self._defaults['OneInputFunction']['return']
+        return self._defaults['OneInputFunction']['return']
+
     def niFake_Read(self, vi, maximum_time, reading):  # noqa: N802
         if self._defaults['Read']['return'] != 0:
             return self._defaults['Read']['return']
@@ -284,6 +304,11 @@ class SideEffectsHelper(object):
             return self._defaults['SimpleFunction']['return']
         return self._defaults['SimpleFunction']['return']
 
+    def niFake_TwoInputFunction(self, vi, a_number, a_number2):  # noqa: N802
+        if self._defaults['TwoInputFunction']['return'] != 0:
+            return self._defaults['TwoInputFunction']['return']
+        return self._defaults['TwoInputFunction']['return']
+
     def niFake_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
             return self._defaults['close']['return']
@@ -303,6 +328,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_Abort.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_ClearError.side_effect = MockFunctionCallError("niFake_ClearError")
         mock_library.niFake_ClearError.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")
+        mock_library.niFake_GetABoolean.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_GetANumber.side_effect = MockFunctionCallError("niFake_GetANumber")
         mock_library.niFake_GetANumber.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_GetAStringOfFixedMaximumSize.side_effect = MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize")
@@ -329,6 +356,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_InitWithOptions.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_Initiate.side_effect = MockFunctionCallError("niFake_Initiate")
         mock_library.niFake_Initiate.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_OneInputFunction.side_effect = MockFunctionCallError("niFake_OneInputFunction")
+        mock_library.niFake_OneInputFunction.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_Read.side_effect = MockFunctionCallError("niFake_Read")
         mock_library.niFake_Read.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_ReadMultiPoint.side_effect = MockFunctionCallError("niFake_ReadMultiPoint")
@@ -347,6 +376,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_SetAttributeViString.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_SimpleFunction.side_effect = MockFunctionCallError("niFake_SimpleFunction")
         mock_library.niFake_SimpleFunction.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_TwoInputFunction.side_effect = MockFunctionCallError("niFake_TwoInputFunction")
+        mock_library.niFake_TwoInputFunction.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_close.side_effect = MockFunctionCallError("niFake_close")
         mock_library.niFake_close.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_error_message.side_effect = MockFunctionCallError("niFake_error_message")
