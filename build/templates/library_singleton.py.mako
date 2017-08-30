@@ -8,8 +8,8 @@ module_name = config['module_name']
 
 import platform
 
-from ${module_name} import library
 from ${module_name} import errors
+from ${module_name} import library
 
 
 class LibrarySingleton(object):

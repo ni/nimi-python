@@ -22,10 +22,11 @@ import ${module_name}.python_types
 
 
 class Library(object):
-    """
+    '''Library
+
     Wrapper around driver library.
     Class will setup the correct ctypes information for every function on first call.
-    """
+    '''
 
     def __init__(self, library_name, library_type):
         self._func_lock = threading.Lock()
