@@ -10,9 +10,9 @@ nidmm module
    :maxdepth: 3
    :caption: API Reference:
 
-   nidmm/session
-   nidmm/functions
-   nidmm/attributes
-   nidmm/enums
+   nidmm/session_link
+   nidmm/functions_link
+   nidmm/attributes_link
+   nidmm/enums_link
 
 
