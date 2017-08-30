@@ -17,6 +17,21 @@ functions_codegen_method = {
     'ClearError':       { 'codegen_method': 'private',  },
     'LockSession':      { 'codegen_method': 'private',  },
     'UnlockSession':    { 'codegen_method': 'private',  },
+    'UnlockSession':    { 'codegen_method': 'private',  },
+}
+
+# Attach the given parameter to the given enum from enums.py
+functions_enums = {
+    'GetRelayPosition':             { 'parameters': { 2: { 'enum': 'RelayPosition',                                        }, }, },
+    'RelayControl':                 { 'parameters': { 2: { 'enum': 'RelayAction',                                          }, }, },
+    'CanConnect':                   { 'parameters': { 3: { 'enum': 'PathCapability',                                       }, }, },
+    'RouteScanAdvancedOutput':      { 'parameters': { 1: { 'enum': 'TriggerInputConnector',                                }, 
+                                                      2: { 'enum': 'TriggerInputBusLine',                                  }, }, },
+    'RouteTriggerInput':            { 'parameters': { 1: { 'enum': 'TriggerInputConnector',                                }, 
+                                                      2: { 'enum': 'TriggerInputBusLine',                                  }, }, },
+    'ConfigureScanList':            { 'parameters': { 2: { 'enum': 'ScanMode',                                             }, }, },
+    'ConfigureScanTrigger':         { 'parameters': { 2: { 'enum': 'TriggerInputConfigureScanTrigger',                     }, 
+                                                      3: { 'enum': 'ScanAdvancedOutputConfigureScanTrigger',               }, }, },
 }
 
 # TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval?

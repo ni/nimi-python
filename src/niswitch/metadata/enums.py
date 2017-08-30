@@ -384,6 +384,88 @@ line before processing the next entry in the scan list.
             },
         ],
     },
+    'PathCapability': {
+        'values': [
+            {
+                'name': 'PATH_AVAILABLE',
+                'value': 1,
+'documentation': {
+'description': 'Path Available',
+},
+            },
+            {
+                'name': 'PATH_EXISTS',
+                'value': 2,
+'documentation': {
+'description': 'Path Exists',
+},
+            },
+            {
+                'name': 'PATH_UNSUPPORTED',
+                'value': 3,
+'documentation': {
+'description': 'Path Unsupported',
+},
+            },
+            {
+                'name': 'RESOURCE_IN_USE',
+                'value': 4,
+'documentation': {
+'description': 'Resource in use',
+},
+            },
+            {
+                'name': 'SOURCE_CONFLICT',
+                'value': 5,
+'documentation': {
+'description': 'Source conflict',
+},
+            },
+            {
+                'name': 'CHANNEL_NOT_AVAILABLE',
+                'value': 6,
+'documentation': {
+'description': 'Channel not available',
+},
+            },
+        ],
+    },
+    'RelayAction': {
+        'values': [
+            {
+                'name': 'OPEN_RELAY',
+                'value': 20,
+'documentation': {
+'description': 'Open Relay',
+},
+            },
+            {
+                'name': 'CLOSE_RELAY',
+                'value': 21,
+'documentation': {
+'description': 'Close Relay',
+},
+            },
+        ],
+    },
+    'RelayPosition': {
+        'values': [
+            {
+                'name': 'OPEN',
+                'value': 10,
+'documentation': {
+'description': 'Open',
+},
+            },
+            {
+                'name': 'CLOSED',
+                'value': 11,
+'documentation': {
+'description': 'Closed',
+},
+            },
+        ],
+    },
     'ScanAdvancedOutput': {
         'values': [
             {
@@ -751,6 +833,283 @@ connector module 11.
 The switch module produces the Scan Advanced Output Trigger on the front
 connector module 12.
 ''',
+},
+            },
+        ],
+    },
+    'ScanAdvancedOutputConfigureScanTrigger': {
+        'values': [
+            {
+                'name': 'NONE',
+                'value': 0,
+'documentation': {
+'description': 'None',
+},
+            },
+            {
+                'name': 'EXTERNAL',
+                'value': 1,
+'documentation': {
+'description': 'External',
+},
+            },
+            {
+                'name': 'TTL0',
+                'value': 2,
+'documentation': {
+'description': 'TTL0',
+},
+            },
+            {
+                'name': 'TTL1',
+                'value': 3,
+'documentation': {
+'description': 'TTL1',
+},
+            },
+            {
+                'name': 'TTL2',
+                'value': 4,
+'documentation': {
+'description': 'TTL2',
+},
+            },
+            {
+                'name': 'TTL3',
+                'value': 5,
+'documentation': {
+'description': 'TTL3',
+},
+            },
+            {
+                'name': 'TTL4',
+                'value': 6,
+'documentation': {
+'description': 'TTL4',
+},
+            },
+            {
+                'name': 'TTL5',
+                'value': 7,
+'documentation': {
+'description': 'TTL5',
+},
+            },
+            {
+                'name': 'TTL6',
+                'value': 8,
+'documentation': {
+'description': 'TTL6',
+},
+            },
+            {
+                'name': 'TTL7',
+                'value': 9,
+'documentation': {
+'description': 'TTL7',
+},
+            },
+            {
+                'name': 'ECL0',
+                'value': 10,
+'documentation': {
+'description': 'ECL0',
+},
+            },
+            {
+                'name': 'ECL1',
+                'value': 11,
+'documentation': {
+'description': 'ECL1',
+},
+            },
+            {
+                'name': 'PXI_STAR',
+                'value': 12,
+'documentation': {
+'description': 'PXI Star',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR',
+                'value': 13,
+'documentation': {
+'description': 'Rear Connector',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR',
+                'value': 14,
+'documentation': {
+'description': 'Front Connector',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_1',
+                'value': 15,
+'documentation': {
+'description': 'Rear Connector Module 1',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_2',
+                'value': 16,
+'documentation': {
+'description': 'Rear Connector Module 2',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_3',
+                'value': 17,
+'documentation': {
+'description': 'Rear Connector Module 3',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_4',
+                'value': 18,
+'documentation': {
+'description': 'Rear Connector Module 4',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_5',
+                'value': 19,
+'documentation': {
+'description': 'Rear Connector Module 5',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_6',
+                'value': 20,
+'documentation': {
+'description': 'Rear Connector Module 6',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_7',
+                'value': 21,
+'documentation': {
+'description': 'Rear Connector Module 7',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_8',
+                'value': 22,
+'documentation': {
+'description': 'Rear Connector Module 8',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_9',
+                'value': 23,
+'documentation': {
+'description': 'Rear Connector Module 9',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_10',
+                'value': 24,
+'documentation': {
+'description': 'Rear Connector Module 10',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_11',
+                'value': 25,
+'documentation': {
+'description': 'Rear Connector Module 11',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_MODULE_12',
+                'value': 26,
+'documentation': {
+'description': 'Rear Connector Module 12',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_1',
+                'value': 27,
+'documentation': {
+'description': 'Front Connector Module 1',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_2',
+                'value': 28,
+'documentation': {
+'description': 'Front Connector Module 2',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_3',
+                'value': 29,
+'documentation': {
+'description': 'Front Connector Module 3',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_4',
+                'value': 30,
+'documentation': {
+'description': 'Front Connector Module 4',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_5',
+                'value': 31,
+'documentation': {
+'description': 'Front Connector Module 5',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_6',
+                'value': 32,
+'documentation': {
+'description': 'Front Connector Module 6',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_7',
+                'value': 33,
+'documentation': {
+'description': 'Front Connector Module 7',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_8',
+                'value': 34,
+'documentation': {
+'description': 'Front Connector Module 8',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_9',
+                'value': 35,
+'documentation': {
+'description': 'Front Connector Module 9',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_10',
+                'value': 36,
+'documentation': {
+'description': 'Front Connector Module 10',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_11',
+                'value': 37,
+'documentation': {
+'description': 'Front Connector Module 11',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_MODULE_12',
+                'value': 38,
+'documentation': {
+'description': 'Front Connector Module 12',
 },
             },
         ],
@@ -1186,6 +1545,375 @@ connector module 11.
 The switch module waits until it receives a trigger on the front
 connector module 12.
 ''',
+},
+            },
+        ],
+    },
+    'TriggerInputBusLine': {
+        'values': [
+            {
+                'name': 'NONE',
+                'value': 0,
+'documentation': {
+'description': 'None',
+},
+            },
+            {
+                'name': 'TTL0',
+                'value': 2,
+'documentation': {
+'description': 'TTL0',
+},
+            },
+            {
+                'name': 'TTL1',
+                'value': 3,
+'documentation': {
+'description': 'TTL1',
+},
+            },
+            {
+                'name': 'TTL2',
+                'value': 4,
+'documentation': {
+'description': 'TTL2',
+},
+            },
+            {
+                'name': 'TTL3',
+                'value': 5,
+'documentation': {
+'description': 'TTL3',
+},
+            },
+            {
+                'name': 'TTL4',
+                'value': 6,
+'documentation': {
+'description': 'TTL4',
+},
+            },
+            {
+                'name': 'TTL5',
+                'value': 7,
+'documentation': {
+'description': 'TTL5',
+},
+            },
+            {
+                'name': 'TTL6',
+                'value': 8,
+'documentation': {
+'description': 'TTL6',
+},
+            },
+            {
+                'name': 'TTL7',
+                'value': 9,
+'documentation': {
+'description': 'TTL7',
+},
+            },
+        ],
+    },
+    'TriggerInputConfigureScanTrigger': {
+        'values': [
+            {
+                'name': 'IMMEDIATE',
+                'value': 0,
+'documentation': {
+'description': 'Immediate',
+},
+            },
+            {
+                'name': 'EXTERNAL',
+                'value': 1,
+'documentation': {
+'description': 'External',
+},
+            },
+            {
+                'name': 'TTL0',
+                'value': 2,
+'documentation': {
+'description': 'TTL0',
+},
+            },
+            {
+                'name': 'TTL1',
+                'value': 3,
+'documentation': {
+'description': 'TTL1',
+},
+            },
+            {
+                'name': 'TTL2',
+                'value': 4,
+'documentation': {
+'description': 'TTL2',
+},
+            },
+            {
+                'name': 'TTL3',
+                'value': 5,
+'documentation': {
+'description': 'TTL3',
+},
+            },
+            {
+                'name': 'TTL4',
+                'value': 6,
+'documentation': {
+'description': 'TTL4',
+},
+            },
+            {
+                'name': 'TTL5',
+                'value': 7,
+'documentation': {
+'description': 'TTL5',
+},
+            },
+            {
+                'name': 'TTL6',
+                'value': 8,
+'documentation': {
+'description': 'TTL6',
+},
+            },
+            {
+                'name': 'TTL7',
+                'value': 9,
+'documentation': {
+'description': 'TTL7',
+},
+            },
+            {
+                'name': 'ECL0',
+                'value': 10,
+'documentation': {
+'description': 'ECL0',
+},
+            },
+            {
+                'name': 'ECL1',
+                'value': 11,
+'documentation': {
+'description': 'ECL1',
+},
+            },
+            {
+                'name': 'PXI_STAR',
+                'value': 12,
+'documentation': {
+'description': 'PXI Star',
+},
+            },
+            {
+                'name': 'SOFTWARE_TRIGGER_FUNCTION',
+                'value': 13,
+'documentation': {
+'description': 'Software Trigger Function',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR',
+                'value': 14,
+'documentation': {
+'description': 'Rear Connector',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR',
+                'value': 15,
+'documentation': {
+'description': 'Front Connector',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_1',
+                'value': 16,
+'documentation': {
+'description': 'Rear Connector of Module 1',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_2',
+                'value': 17,
+'documentation': {
+'description': 'Rear Connector of Module 2',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_3',
+                'value': 18,
+'documentation': {
+'description': 'Rear Connector of Module 3',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_4',
+                'value': 19,
+'documentation': {
+'description': 'Rear Connector of Module 4',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_5',
+                'value': 20,
+'documentation': {
+'description': 'Rear Connector of Module 5',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_6',
+                'value': 21,
+'documentation': {
+'description': 'Rear Connector of Module 6',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_7',
+                'value': 22,
+'documentation': {
+'description': 'Rear Connector of Module 7',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_8',
+                'value': 23,
+'documentation': {
+'description': 'Rear Connector of Module 8',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_9',
+                'value': 24,
+'documentation': {
+'description': 'Rear Connector of Module 9',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_10',
+                'value': 25,
+'documentation': {
+'description': 'Rear Connector of Module 10',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_11',
+                'value': 26,
+'documentation': {
+'description': 'Rear Connector of Module 11',
+},
+            },
+            {
+                'name': 'REAR_CONNECTOR_OF_MODULE_12',
+                'value': 27,
+'documentation': {
+'description': 'Rear Connector of Module 12',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_1',
+                'value': 28,
+'documentation': {
+'description': 'Front Connector of Module 1',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_2',
+                'value': 29,
+'documentation': {
+'description': 'Front Connector of Module 2',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_3',
+                'value': 30,
+'documentation': {
+'description': 'Front Connector of Module 3',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_4',
+                'value': 31,
+'documentation': {
+'description': 'Front Connector of Module 4',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_5',
+                'value': 32,
+'documentation': {
+'description': 'Front Connector of Module 5',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_6',
+                'value': 33,
+'documentation': {
+'description': 'Front Connector of Module 6',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_7',
+                'value': 34,
+'documentation': {
+'description': 'Front Connector of Module 7',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_8',
+                'value': 35,
+'documentation': {
+'description': 'Front Connector of Module 8',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_9',
+                'value': 36,
+'documentation': {
+'description': 'Front Connector of Module 9',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_10',
+                'value': 37,
+'documentation': {
+'description': 'Front Connector of Module 10',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_11',
+                'value': 38,
+'documentation': {
+'description': 'Front Connector of Module 11',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR_OF_MODULE_12',
+                'value': 39,
+'documentation': {
+'description': 'Front Connector of Module 12',
+},
+            },
+        ],
+    },
+    'TriggerInputConnector': {
+        'values': [
+            {
+                'name': 'REAR_CONNECTOR',
+                'value': 1000,
+'documentation': {
+'description': 'Rear Connector',
+},
+            },
+            {
+                'name': 'FRONT_CONNECTOR',
+                'value': 1001,
+'documentation': {
+'description': 'Front Connector',
 },
             },
         ],
