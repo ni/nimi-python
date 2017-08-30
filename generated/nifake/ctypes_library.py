@@ -10,8 +10,7 @@ import nifake.python_types
 class Library(object):
     """
     Wrapper around driver library.
-    Class will setup the correct ctypes arguments / return type for every function
-    as needed.
+    Class will setup the correct ctypes information for every function on first call.
     """
 
     def __init__(self, library_name, library_type):

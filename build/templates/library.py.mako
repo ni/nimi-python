@@ -12,35 +12,31 @@ from ${module_name} import ctypes_library
 from ${module_name} import errors
 
 
-def get_library_name():
-    try:
-        return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['name']
-    except KeyError:
-        raise errors.UnsupportedConfigurationError
-
-
-def get_library_type():
-    try:
-        return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['type']
-    except KeyError:
-        raise errors.UnsupportedConfigurationError
-
-
 class LibrarySingleton(object):
-    instance = None
+
+    _instance = None
+
+    def _get_library_name():
+        try:
+            return ${helper.get_dictionary_snippet(config['library_info'], indent=19)}[platform.system()][platform.architecture()[0]]['name']
+        except KeyError:
+            raise errors.UnsupportedConfigurationError
+
+    def _get_library_type():
+        try:
+            return ${helper.get_dictionary_snippet(config['library_info'], indent=19)}[platform.system()][platform.architecture()[0]]['type']
+        except KeyError:
+            raise errors.UnsupportedConfigurationError
 
     def __init__(self):
-        if LibrarySingleton.instance is None:
+        if LibrarySingleton._instance is None:
             try:
-                LibrarySingleton.instance = ctypes_library.Library(get_library_name(), get_library_type())
+                LibrarySingleton._instance = ctypes_library.Library(LibrarySingleton._get_library_name(), LibrarySingleton._get_library_type())
             except OSError:
                 raise errors.DriverNotInstalledError()
 
-        self._library = LibrarySingleton.instance
+        self._library = LibrarySingleton._instance
 
-    def get_library(self):
+    def get(self):
         return self._library
 
-
-def get_library():
-    return LibrarySingleton().get_library()

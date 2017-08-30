@@ -13,7 +13,7 @@ class TestSession(object):
     def setup_method(self, method):
         self.patched_ctypes_library_patcher = patch('nifake.ctypes_library.Library', autospec=True)
         self.patched_ctypes_library = self.patched_ctypes_library_patcher.start()
-        self.patched_get_library_patcher = patch('nifake.session.library.get_library', return_value=self.patched_ctypes_library)
+        self.patched_get_library_patcher = patch('nifake.session.library.LibrarySingleton.get', return_value=self.patched_ctypes_library)
         self.patched_get_library_patcher.start()
 
         self.side_effects_helper = mock_helper.SideEffectsHelper()

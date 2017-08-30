@@ -12,7 +12,7 @@ class TestSession(object):
     def setup_method(self, method):
         self.patched_ctypes_library_patcher = patch('nimodinst.ctypes_library.Library', autospec=True)
         self.patched_ctypes_library = self.patched_ctypes_library_patcher.start()
-        self.patched_get_library_patcher = patch('nimodinst.session.library.get_library', return_value=self.patched_ctypes_library)
+        self.patched_get_library_patcher = patch('nimodinst.session.library.LibrarySingleton.get', return_value=self.patched_ctypes_library)
         self.patched_get_library_patcher.start()
         self.errors_patcher = patch('nimodinst.session.errors', spec_set=['_handle_error', '_is_error'])
         self.patched_errors = self.errors_patcher.start()
