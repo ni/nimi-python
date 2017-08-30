@@ -22,28 +22,34 @@ def test_invalid_device_name():
 
 def test_relayclose(session):
     relayName = 'kr0c0'
-    assert session.get_relay_position(relayName) == 10
-    session.relay_control(relayName, 21)
-    assert session.get_relay_position(relayName) == 11
+    assert session.get_relay_position(relayName) == niswitch.RelayPosition.OPEN
+    session.relay_control(relayName, niswitch.RelayAction.CLOSE_RELAY)
+    assert session.get_relay_position(relayName) == niswitch.RelayPosition.CLOSED
     assert relayName
 
 
 def test_channel_connection(session):
     channel1 = 'c0'
     channel2 = 'r0'
-    assert session.can_connect(channel1, channel2) == 1 #path available
+    assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
     session.connect(channel1, channel2)
-    assert session.can_connect(channel1, channel2) != 1 #path available
+    assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_EXISTS
     session.disconnect(channel1, channel2)
-    assert session.can_connect(channel1, channel2) == 1 #path available
+    assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
     session.connect(channel1, channel2)
-    assert session.can_connect(channel1, channel2) != 1 #path available
+    assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_EXISTS
     session.disconnect_all()
-    assert session.can_connect(channel1, channel2) == 1 #path available
+    assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
 
 
 def test_wrong_parameter_type(session):
-    pytest.skip("No Enums in non-scanning functions yet.")
+    relayName = 'kr0c0'
+    try:
+        session.relay_control(relayName, 10)
+        assert False
+    except TypeError as e:
+        print(e)
+        pass
 
 
 def test_warning(session):
@@ -76,8 +82,9 @@ def test_ViReal64_attribute(session):
     assert session.settling_time == 0.1
 
 
-def test_Enum_attribute(session):
-    pytest.skip("No Enums in non-scanning functions yet.")
+def test_Enum_attribute():
+    with niswitch.Session('', False, True, 'Simulate=1, DriverSetup=topology:2532/1-Wire 4x128 Matrix') as session:
+        assert session.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
 
 def test_method_call_with_zero_parameter(session):
     session.reset()
@@ -114,10 +121,6 @@ def test_library_singleton():
 
 def test_method_with_noinput_nooutput(session):
     assert session.reset_with_defaults() == None
-
-
-def test_method_with_enum(session):
-    pytest.skip("No Enums in non-scanning functions yet.")
 
 
 def test_writeonly_attribute(session):
