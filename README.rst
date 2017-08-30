@@ -1,5 +1,5 @@
 +----------------------+------------------------------------------------------------+
-| master branch status | |BuildStatus| |Docs| |MITLicense|                          |
+| master branch status | |BuildStatus| |Docs| |MITLicense| |CoverageStatus|         |
 +----------------------+------------------------------------------------------------+
 | GitHub status        | |OpenIssues| |OpenPullRequests|                            |
 +----------------------+------------+-----------------------------------------------+
@@ -8,10 +8,10 @@
 |                      | NI-ModInst | |ModInstLatestVersion| |ModInstPythonVersion| |
 +----------------------+------------+-----------------------------------------------+
 
-===========  =================================================================================================================
+===========  ============================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
 Author       National Instruments
-===========  =================================================================================================================
+===========  ============================================================================================================================
 
 +-----------+-----------------------------------------------------------------------+
 | WARNING!! | NI Modular Instruments Python API is currently under development. You |
@@ -188,4 +188,3 @@ licenses allow for non-commercial and commercial use.
     :scale: 100%
     :target: https://github.com/ni/nimi-python/pulls
 
-..  |CoverageStatus|
