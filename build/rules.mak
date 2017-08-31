@@ -60,7 +60,7 @@ module: $(MODULE_FILES)
 
 $(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
 
-$(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako
+$(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
