@@ -234,7 +234,7 @@ class TestSession(object):
             try:
                 session.read_write_color = 5
             except TypeError as e:
-                assert str(e) == "Must be nifake.Color not int"
+                assert str(e) == 'must be nifake.Color not int'
 
     '''
     def test_acquisition_context_manager(self):
