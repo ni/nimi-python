@@ -12,31 +12,31 @@ from ${module_name} import errors
 from ${module_name} import library
 
 
-class LibrarySingleton(object):
+_instance = None
 
-    _instance = None
+def _get_library_name():
+    try:
+        return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['name']
+    except KeyError:
+        raise errors.UnsupportedConfigurationError
 
-    def _get_library_name():
+def _get_library_type():
+    try:
+        return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['type']
+    except KeyError:
+        raise errors.UnsupportedConfigurationError
+
+def get():
+    '''get
+
+    Returns the library.Library singleton for ${config['module_name']}.
+    '''
+    global _instance
+    if _instance is None:
         try:
-            return ${helper.get_dictionary_snippet(config['library_info'], indent=19)}[platform.system()][platform.architecture()[0]]['name']
-        except KeyError:
-            raise errors.UnsupportedConfigurationError
+            _instance = library.Library(_get_library_name(), _get_library_type())
+        except OSError:
+            raise errors.DriverNotInstalledError()
 
-    def _get_library_type():
-        try:
-            return ${helper.get_dictionary_snippet(config['library_info'], indent=19)}[platform.system()][platform.architecture()[0]]['type']
-        except KeyError:
-            raise errors.UnsupportedConfigurationError
-
-    def __init__(self):
-        if LibrarySingleton._instance is None:
-            try:
-                LibrarySingleton._instance = library.Library(LibrarySingleton._get_library_name(), LibrarySingleton._get_library_type())
-            except OSError:
-                raise errors.DriverNotInstalledError()
-
-        self._library = LibrarySingleton._instance
-
-    def get(self):
-        return self._library
+    return _instance
 
