@@ -19,6 +19,7 @@ class Library(object):
         # We cache the cfunc object from the ctypes.CDLL object
         self.niFake_Abort_cfunc = None
         self.niFake_ClearError_cfunc = None
+        self.niFake_GetABoolean_cfunc = None
         self.niFake_GetANumber_cfunc = None
         self.niFake_GetAStringOfFixedMaximumSize_cfunc = None
         self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc = None
@@ -32,6 +33,7 @@ class Library(object):
         self.niFake_GetErrorMessage_cfunc = None
         self.niFake_InitWithOptions_cfunc = None
         self.niFake_Initiate_cfunc = None
+        self.niFake_OneInputFunction_cfunc = None
         self.niFake_Read_cfunc = None
         self.niFake_ReadMultiPoint_cfunc = None
         self.niFake_ReturnANumberAndAString_cfunc = None
@@ -41,6 +43,7 @@ class Library(object):
         self.niFake_SetAttributeViSession_cfunc = None
         self.niFake_SetAttributeViString_cfunc = None
         self.niFake_SimpleFunction_cfunc = None
+        self.niFake_TwoInputFunction_cfunc = None
         self.niFake_close_cfunc = None
         self.niFake_error_message_cfunc = None
 
@@ -65,6 +68,14 @@ class Library(object):
                 self.niFake_ClearError_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niFake_ClearError_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_ClearError_cfunc(vi)
+
+    def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetABoolean_cfunc is None:
+                self.niFake_GetABoolean_cfunc = self._library.niFake_GetABoolean
+                self.niFake_GetABoolean_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViBoolean_ctype)]  # noqa: F405
+                self.niFake_GetABoolean_cfunc.restype = nifake.python_types.ViStatus
+        return self.niFake_GetABoolean_cfunc(vi, a_boolean)
 
     def niFake_GetANumber(self, vi, a_number):  # noqa: N802
         with self._func_lock:
@@ -170,6 +181,14 @@ class Library(object):
                 self.niFake_Initiate_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_Initiate_cfunc(vi)
 
+    def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_OneInputFunction_cfunc is None:
+                self.niFake_OneInputFunction_cfunc = self._library.niFake_OneInputFunction
+                self.niFake_OneInputFunction_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype]  # noqa: F405
+                self.niFake_OneInputFunction_cfunc.restype = nifake.python_types.ViStatus
+        return self.niFake_OneInputFunction_cfunc(vi, a_number)
+
     def niFake_Read(self, vi, maximum_time, reading):  # noqa: N802
         with self._func_lock:
             if self.niFake_Read_cfunc is None:
@@ -241,6 +260,14 @@ class Library(object):
                 self.niFake_SimpleFunction_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niFake_SimpleFunction_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_SimpleFunction_cfunc(vi)
+
+    def niFake_TwoInputFunction(self, vi, a_number, a_string):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_TwoInputFunction_cfunc is None:
+                self.niFake_TwoInputFunction_cfunc = self._library.niFake_TwoInputFunction
+                self.niFake_TwoInputFunction_cfunc.argtypes = [ViSession_ctype, ViReal64_ctype, ViChar_ctype]  # noqa: F405
+                self.niFake_TwoInputFunction_cfunc.restype = nifake.python_types.ViStatus
+        return self.niFake_TwoInputFunction_cfunc(vi, a_number, a_string)
 
     def niFake_close(self, vi):  # noqa: N802
         with self._func_lock:

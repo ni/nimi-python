@@ -198,6 +198,21 @@ class Session(object):
         errors._handle_error(self, error_code)
         return
 
+    def get_a_boolean(self):
+        '''get_a_boolean
+
+        Returns a boolean.
+
+        Note: This function rules!
+
+        Returns:
+            a_boolean (bool):Contains a boolean.
+        '''
+        a_boolean_ctype = ctypes_types.ViBoolean_ctype(0)
+        error_code = self.library.niFake_GetABoolean(self.vi, ctypes.pointer(a_boolean_ctype))
+        errors._handle_error(self, error_code)
+        return python_types.ViBoolean(a_boolean_ctype.value)
+
     def get_a_number(self):
         '''get_a_number
 
@@ -232,15 +247,15 @@ class Session(object):
         Illustrates resturning a string where user specifies the size.
 
         Args:
-            buffer_size (int):String comes back here. Buffer must be 256 big.
+            buffer_size (int):Buffersize of the string.
 
         Returns:
             a_string (int):String comes back here. Buffer must be at least bufferSize big.
         '''
-        a_string_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niFake_GetAStringWithSpecifiedMaximumSize(self.vi, ctypes.pointer(a_string_ctype), buffer_size)
+        a_string_ctype = (ctypes_types.ViChar_ctype * buffer_size)()
+        error_code = self.library.niFake_GetAStringWithSpecifiedMaximumSize(self.vi, ctypes.cast(a_string_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)), buffer_size)
         errors._handle_error(self, error_code)
-        return python_types.ViChar(a_string_ctype.value)
+        return a_string_ctype.value.decode("ascii")
 
     def _get_attribute_vi_boolean(self, channel_name, attribute_id):
         '''_get_attribute_vi_boolean
@@ -448,6 +463,18 @@ class Session(object):
         errors._handle_error(self, error_code)
         return
 
+    def one_input_function(self, a_number):
+        '''one_input_function
+
+        This function takes one parameter other than the session.
+
+        Args:
+            a_number (int):Contains a number
+        '''
+        error_code = self.library.niFake_OneInputFunction(self.vi, a_number)
+        errors._handle_error(self, error_code)
+        return
+
     def read(self, maximum_time):
         '''read
 
@@ -578,6 +605,19 @@ class Session(object):
         This function takes no parameters other than the session.
         '''
         error_code = self.library.niFake_SimpleFunction(self.vi)
+        errors._handle_error(self, error_code)
+        return
+
+    def two_input_function(self, a_number, a_string):
+        '''two_input_function
+
+        This function takes two parameters other than the session.
+
+        Args:
+            a_number (float):Contains a number
+            a_string (int):Contains a string
+        '''
+        error_code = self.library.niFake_TwoInputFunction(self.vi, a_number, a_string)
         errors._handle_error(self, error_code)
         return
 
