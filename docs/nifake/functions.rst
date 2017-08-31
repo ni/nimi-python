@@ -252,7 +252,7 @@ nifake.Session methods
     :param a_string:
 
 
-        Contains another number
+        Contains a string
 
         
 
