@@ -6,35 +6,35 @@ from nimodinst import errors
 from nimodinst import library
 
 
-class LibrarySingleton(object):
+_instance = None
 
-    _instance = None
+def _get_library_name():
+    try:
+        return {'Linux': {'64bit': {'name': 'libnimodinst.so', 'type': 'cdll'}},
+                'Windows': {'32bit': {'name': 'nimodinst.dll', 'type': 'windll'},
+                            '64bit': {'name': 'nimodinst_64.dll', 'type': 'cdll'}}}[platform.system()][platform.architecture()[0]]['name']
+    except KeyError:
+        raise errors.UnsupportedConfigurationError
 
-    def _get_library_name():
+def _get_library_type():
+    try:
+        return {'Linux': {'64bit': {'name': 'libnimodinst.so', 'type': 'cdll'}},
+                'Windows': {'32bit': {'name': 'nimodinst.dll', 'type': 'windll'},
+                            '64bit': {'name': 'nimodinst_64.dll', 'type': 'cdll'}}}[platform.system()][platform.architecture()[0]]['type']
+    except KeyError:
+        raise errors.UnsupportedConfigurationError
+
+def get():
+    '''get
+
+    Returns the library.Library singleton for nimodinst.
+    '''
+    global _instance
+    if _instance is None:
         try:
-            return {'Linux': {'64bit': {'name': 'libnimodinst.so', 'type': 'cdll'}},
-                    'Windows': {'32bit': {'name': 'nimodinst.dll', 'type': 'windll'},
-                                '64bit': {'name': 'nimodinst_64.dll', 'type': 'cdll'}}}[platform.system()][platform.architecture()[0]]['name']
-        except KeyError:
-            raise errors.UnsupportedConfigurationError
+            _instance = library.Library(_get_library_name(), _get_library_type())
+        except OSError:
+            raise errors.DriverNotInstalledError()
 
-    def _get_library_type():
-        try:
-            return {'Linux': {'64bit': {'name': 'libnimodinst.so', 'type': 'cdll'}},
-                    'Windows': {'32bit': {'name': 'nimodinst.dll', 'type': 'windll'},
-                                '64bit': {'name': 'nimodinst_64.dll', 'type': 'cdll'}}}[platform.system()][platform.architecture()[0]]['type']
-        except KeyError:
-            raise errors.UnsupportedConfigurationError
-
-    def __init__(self):
-        if LibrarySingleton._instance is None:
-            try:
-                LibrarySingleton._instance = library.Library(LibrarySingleton._get_library_name(), LibrarySingleton._get_library_type())
-            except OSError:
-                raise errors.DriverNotInstalledError()
-
-        self._library = LibrarySingleton._instance
-
-    def get(self):
-        return self._library
+    return _instance
 
