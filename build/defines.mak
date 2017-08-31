@@ -56,9 +56,9 @@ all: $(TARGETS)
 DEFAULT_PY_FILES_TO_GENERATE := \
                      enums.py \
                      library.py \
+                     library_singleton.py \
                      session.py \
                      errors.py \
-                     ctypes_library.py \
                      tests/mock_helper.py \
                      __init__.py \
 
