@@ -5,7 +5,7 @@ import ctypes
 from nifake import ctypes_types
 from nifake import enums
 from nifake import errors
-from nifake import library
+from nifake import library_singleton
 from nifake import python_types
 
 
@@ -118,7 +118,7 @@ class Session(object):
     '''
 
     def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):
-        self.library = library.get_library()
+        self.library = library_singleton.LibrarySingleton.get()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
 

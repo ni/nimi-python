@@ -11,51 +11,51 @@ SESSION_NUM_FOR_TEST = 42
 class TestSession(object):
 
     def setup_method(self, method):
-        self.patched_ctypes_library_patcher = patch('nifake.ctypes_library.NifakeCtypesLibrary', autospec=True)
-        self.patched_ctypes_library = self.patched_ctypes_library_patcher.start()
-        self.patched_get_library_patcher = patch('nifake.session.library.get_library', return_value=self.patched_ctypes_library)
-        self.patched_get_library_patcher.start()
+        self.patched_library_patcher = patch('nifake.library.Library', autospec=True)
+        self.patched_library = self.patched_library_patcher.start()
+        self.patched_library_singleton_get = patch('nifake.session.library_singleton.LibrarySingleton.get', return_value=self.patched_library)
+        self.patched_library_singleton_get.start()
 
         self.side_effects_helper = mock_helper.SideEffectsHelper()
-        self.side_effects_helper.set_side_effects_and_return_values(self.patched_ctypes_library)
-        self.patched_ctypes_library.niFake_InitWithOptions.side_effect = self.side_effects_helper.niFake_InitWithOptions
-        self.disallow_close = self.patched_ctypes_library.niFake_close.side_effect
-        self.patched_ctypes_library.niFake_close.side_effect = self.side_effects_helper.niFake_close
+        self.side_effects_helper.set_side_effects_and_return_values(self.patched_library)
+        self.patched_library.niFake_InitWithOptions.side_effect = self.side_effects_helper.niFake_InitWithOptions
+        self.disallow_close = self.patched_library.niFake_close.side_effect
+        self.patched_library.niFake_close.side_effect = self.side_effects_helper.niFake_close
 
         self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
 
     def teardown_method(self, method):
-        self.patched_get_library_patcher.stop()
-        self.patched_ctypes_library_patcher.stop()
+        self.patched_library_singleton_get.stop()
+        self.patched_library_patcher.stop()
 
     def test_init_with_options(self):
         errors_patcher = patch('nifake.session.errors', spec_set=['_handle_error', '_is_error'])
         patched_errors = errors_patcher.start()
         patched_errors._is_error.return_value = 0
 
-        self.patched_ctypes_library.niFake_close.side_effect = self.disallow_close
+        self.patched_library.niFake_close.side_effect = self.disallow_close
         session = nifake.Session('dev1')
         assert(session.vi == SESSION_NUM_FOR_TEST)
-        self.patched_ctypes_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
-        patched_errors._handle_error.assert_called_once_with(session, self.patched_ctypes_library.niFake_InitWithOptions.return_value)
+        self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
+        patched_errors._handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value)
 
         errors_patcher.stop()
 
     def test_close(self):
         session = nifake.Session('dev1')
         session.close()
-        self.patched_ctypes_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
     def test_session_context_manager(self):
         with nifake.Session('dev1') as session:
             assert(session.vi == SESSION_NUM_FOR_TEST)
-            self.patched_ctypes_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
-        self.patched_ctypes_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+            self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
+        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
     def test_get_error_description_get_error(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
-        self.patched_ctypes_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
@@ -67,11 +67,11 @@ class TestSession(object):
     def test_get_error_description_get_error_message(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
-        self.patched_ctypes_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = -1
         self.side_effects_helper['GetError']['description'] = "Shouldn't get this"
         self.side_effects_helper['GetError']['return'] = -2
-        self.patched_ctypes_library.niFake_GetErrorMessage.side_effect = self.side_effects_helper.niFake_GetErrorMessage
+        self.patched_library.niFake_GetErrorMessage.side_effect = self.side_effects_helper.niFake_GetErrorMessage
         self.side_effects_helper['GetErrorMessage']['errorMessage'] = test_error_desc
         with nifake.Session('dev1') as session:
             error_code, error_desc = session._get_error_description(test_error_code)
@@ -86,17 +86,17 @@ class TestSession(object):
     '''
 
     def test_simple_function(self):
-        self.patched_ctypes_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
         with nifake.Session('dev1') as session:
             session.simple_function()
-            self.patched_ctypes_library.niFake_SimpleFunction.assert_called_once_with(SESSION_NUM_FOR_TEST)
+            self.patched_library.niFake_SimpleFunction.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
     def test_method_with_error(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
-        self.patched_ctypes_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
         self.side_effects_helper['SimpleFunction']['return'] = test_error_code
-        self.patched_ctypes_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
@@ -110,10 +110,10 @@ class TestSession(object):
     def test_ivi_dance_with_error(self):
         test_error_code = -1234
         test_error_desc = "ascending order"
-        self.patched_ctypes_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
+        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
         self.side_effects_helper['GetAttributeViString']['attributeValue'] = 'Testing is fun?'
         self.side_effects_helper['GetAttributeViString']['return'] = test_error_code
-        self.patched_ctypes_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
@@ -131,19 +131,19 @@ class TestSession(object):
 
     '''
     def test_get_string_attribute(self):
-        self.patched_ctypes_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
+        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
         self.side_effects_helper['GetAttributeViString']['attributeValue'] = 'A string'
         with nifake.Session('dev1') as session:
             assert(session.read_write_string == 'A string')
             #calls = [call(SESSION_NUM_FOR_TEST, '', 1000002, 0, ANY), call(SESSION_NUM_FOR_TEST, '', 1000002, 0, ANY)]
-            #self.patched_ctypes_library.niFake_GetAttributeViString.assert_has_calls(calls)
+            #self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
 
 
     # TODO(marcoskirsch): Flesh out test coverage for all NI-FAKE functions and attributes.
 
     # Test with multiple pointer types, ensuring proper return values (i.e. parameters in correct order)
     def test_multiple_return_params(self):
-        self.patched_ctypes_library.niFake_GetCalDateAndTime.side_effect = self.side_effects_helper.niFake_GetCalDateAndTime
+        self.patched_library.niFake_GetCalDateAndTime.side_effect = self.side_effects_helper.niFake_GetCalDateAndTime
         self.side_effects_helper['GetCalDateAndTime']['month'] = 6
         self.side_effects_helper['GetCalDateAndTime']['day'] = 30
         self.side_effects_helper['GetCalDateAndTime']['year'] = 2017
@@ -156,12 +156,12 @@ class TestSession(object):
             assert(year == 2017)
             assert(hour == 10)
             assert(minute == 12)
-            self.patched_ctypes_library.niFake_GetCalDateAndTime.assert_called_once_with(SESSION_NUM_FOR_TEST, 0, ANY, ANY, ANY, ANY, ANY)
+            self.patched_library.niFake_GetCalDateAndTime.assert_called_once_with(SESSION_NUM_FOR_TEST, 0, ANY, ANY, ANY, ANY, ANY)
             assert self.patched_errors._handle_error.call_count == 2
-            self.patched_errors._handle_error.assert_called_with(session, self.patched_ctypes_library.niFake_GetCalDateAndTime.return_value)
+            self.patched_errors._handle_error.assert_called_with(session, self.patched_library.niFake_GetCalDateAndTime.return_value)
     '''
     def test_get_string_attribute(self):
-        self.patched_ctypes_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
+        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
         string = 'Testing is fun?'
         self.side_effects_helper['GetAttributeViString']['attributeValue'] = string
         with nifake.Session('dev1') as session:
@@ -169,18 +169,18 @@ class TestSession(object):
             assert(attr_string == string)
             from mock import call
             calls = [call(SESSION_NUM_FOR_TEST, b"", 5, 0, None), call(SESSION_NUM_FOR_TEST, b"", 5, 15, ANY)]
-            self.patched_ctypes_library.niFake_GetAttributeViString.assert_has_calls(calls)
-            assert self.patched_ctypes_library.niFake_GetAttributeViString.call_count == 2
+            self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAttributeViString.call_count == 2
 
     '''
     def test_acquisition_context_manager(self):
-        self.patched_ctypes_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate
-        self.patched_ctypes_library.niFake_Abort.side_effect = self.side_effects_helper.niFake_Abort
+        self.patched_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate
+        self.patched_library.niFake_Abort.side_effect = self.side_effects_helper.niFake_Abort
         with nifake.Session('dev1') as session:
             with session.initiate():
-                self.patched_ctypes_library.niFake_Initiate.assert_called_once_with(SESSION_NUM_FOR_TEST)
-            self.patched_ctypes_library.niFake_Abort.assert_called_once_with(SESSION_NUM_FOR_TEST)
-        self.patched_ctypes_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+                self.patched_library.niFake_Initiate.assert_called_once_with(SESSION_NUM_FOR_TEST)
+            self.patched_library.niFake_Abort.assert_called_once_with(SESSION_NUM_FOR_TEST)
+        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
     '''
 
     '''
