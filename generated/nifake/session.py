@@ -78,7 +78,7 @@ class AttributeEnum(object):
 
     def __set__(self, obj, value):
         if type(value) is not self.attribute_type:
-            raise TypeError('Value mode must be of type ' + str(self.attribute_type))
+            raise TypeError('Must be nifake.' + str(self.attribute_type.__name__) + ' not ' + str(type(value).__name__))
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
 
 
