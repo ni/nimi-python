@@ -29,7 +29,7 @@ class TestSession(object):
         self.patched_library_patcher.stop()
 
     def test_init_with_options(self):
-        errors_patcher = patch('nifake.session.errors', spec_set=['_handle_error', '_is_error'])
+        errors_patcher = patch('nifake.session.errors', spec_set=['handle_error', '_is_error'])
         patched_errors = errors_patcher.start()
         patched_errors._is_error.return_value = 0
 
@@ -37,7 +37,7 @@ class TestSession(object):
         session = nifake.Session('dev1')
         assert(session.vi == SESSION_NUM_FOR_TEST)
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
-        patched_errors._handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value)
+        patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False)
 
         errors_patcher.stop()
 
@@ -59,8 +59,7 @@ class TestSession(object):
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
-            error_code, error_desc = session._get_error_description(test_error_code)
-            assert error_code == test_error_code
+            error_desc = session.get_error_description(test_error_code)
             assert error_desc == test_error_desc
 
     def test_simple_function(self):
@@ -304,6 +303,6 @@ class TestSession(object):
             assert(hour == 10)
             assert(minute == 12)
             self.patched_library.niFake_GetCalDateAndTime.assert_called_once_with(SESSION_NUM_FOR_TEST, 0, ANY, ANY, ANY, ANY, ANY)
-            assert self.patched_errors._handle_error.call_count == 2
-            self.patched_errors._handle_error.assert_called_with(session, self.patched_library.niFake_GetCalDateAndTime.return_value)
+            assert self.patched_errors.handle_error.call_count == 2
+            self.patched_errors.handle_error.assert_called_with(session, self.patched_library.niFake_GetCalDateAndTime.return_value)
     '''
