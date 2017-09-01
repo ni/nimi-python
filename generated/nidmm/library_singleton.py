@@ -8,6 +8,7 @@ from nidmm import library
 
 _instance = None
 
+
 def _get_library_name():
     try:
         return {'Linux': {'64bit': {'name': 'libnidmm.so', 'type': 'cdll'}},
@@ -16,6 +17,7 @@ def _get_library_name():
     except KeyError:
         raise errors.UnsupportedConfigurationError
 
+
 def _get_library_type():
     try:
         return {'Linux': {'64bit': {'name': 'libnidmm.so', 'type': 'cdll'}},
@@ -23,6 +25,7 @@ def _get_library_type():
                             '64bit': {'name': 'nidmm_64.dll', 'type': 'cdll'}}}[platform.system()][platform.architecture()[0]]['type']
     except KeyError:
         raise errors.UnsupportedConfigurationError
+
 
 def get():
     '''get
@@ -35,6 +38,5 @@ def get():
             _instance = library.Library(_get_library_name(), _get_library_type())
         except OSError:
             raise errors.DriverNotInstalledError()
-
     return _instance
 
