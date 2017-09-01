@@ -125,7 +125,7 @@ class Session(object):
         self.handle = 0
         self.item_count = 0
         self.current_item = 0
-        self.library = library_singleton.LibrarySingleton.get()
+        self.library = library_singleton.get()
         self.handle, self.item_count = self._open_installed_devices_session(driver)
 
         self._is_frozen = True
