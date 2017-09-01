@@ -220,6 +220,21 @@ class TestSession(object):
             assert test_result == test_boolean
             self.patched_library.niFake_GetABoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
 
+    def test_set_enum_attribute(self):
+        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
+        attribute_id = 1000003
+        enum = nifake.Color.RED
+        with nifake.Session('dev1') as session:
+            session.read_write_color = enum
+            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
+
+    def test_set_enum_attribute_bad_type(self):
+        with nifake.Session('dev1') as session:
+            try:
+                session.read_write_color = 5
+            except TypeError as e:
+                assert str(e) == 'must be nifake.Color not int'
+
     '''
     def test_acquisition_context_manager(self):
         self.patched_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate

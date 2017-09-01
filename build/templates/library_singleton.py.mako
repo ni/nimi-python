@@ -14,17 +14,20 @@ from ${module_name} import library
 
 _instance = None
 
+
 def _get_library_name():
     try:
         return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['name']
     except KeyError:
         raise errors.UnsupportedConfigurationError
 
+
 def _get_library_type():
     try:
         return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['type']
     except KeyError:
         raise errors.UnsupportedConfigurationError
+
 
 def get():
     '''get
@@ -37,6 +40,5 @@ def get():
             _instance = library.Library(_get_library_name(), _get_library_type())
         except OSError:
             raise errors.DriverNotInstalledError()
-
     return _instance
 
