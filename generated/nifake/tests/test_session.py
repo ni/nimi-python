@@ -13,7 +13,7 @@ class TestSession(object):
     def setup_method(self, method):
         self.patched_library_patcher = patch('nifake.library.Library', autospec=True)
         self.patched_library = self.patched_library_patcher.start()
-        self.patched_library_singleton_get = patch('nifake.session.library_singleton.LibrarySingleton.get', return_value=self.patched_library)
+        self.patched_library_singleton_get = patch('nifake.session.library_singleton.get', return_value=self.patched_library)
         self.patched_library_singleton_get.start()
 
         self.side_effects_helper = mock_helper.SideEffectsHelper()
