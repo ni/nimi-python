@@ -55,10 +55,10 @@ $(UNIT_TEST_DIR)/%.py: $(DRIVER_DIR)/tests/%.py
 clean:
 
 .PHONY: module unit_tests sdist wheel
-$(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
+$(UNIT_TEST_FILES): $(MODULE_FILES)
 module: $(MODULE_FILES)
 
-$(UNIT_TEST_FILES): $(MODULE_FILES) $(RST_FILES)
+$(UNIT_TEST_FILES): $(MODULE_FILES)
 
 $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
@@ -85,7 +85,7 @@ print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
 
 update_generated_files: $(GENERATED_FILES_COPY_DONE)
 
-$(GENERATED_FILES_COPY_DONE): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py $(UNIT_TEST_FILES)
+$(GENERATED_FILES_COPY_DONE): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py $(UNIT_TEST_FILES) $(RST_FILES)
 	$(call trace_to_console, "Updating",$(DRIVER_GENERATED_DIR)/)
 	$(_hide_cmds)$(call make_with_tracking_file, $@, \
       rm -Rf $(DRIVER_GENERATED_DIR)/* && \
