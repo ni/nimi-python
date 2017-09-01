@@ -64,8 +64,8 @@ class DriverNotInstalledError(Exception):
         super(DriverNotInstalledError, self).__init__('The ${driver_name} runtime is not installed. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
 
 
-def _handle_error(session, error_code):
-    if (_is_success(error_code)):
+def handle_error(session, error_code, ignore_warnings):
+    if _is_success(error_code) or (_is_warning(error_code) and ignore_warnings):
         return
     try:
         error_description = session.get_error_description(error_code)

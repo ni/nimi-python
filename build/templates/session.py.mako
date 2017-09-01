@@ -219,19 +219,17 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
 % endfor
 % if ivi_dance_parameter is None:
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=False)
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = None
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        # Don't use _handle_error alone, because positive value in error_code means size, not warning.
-        if (errors._is_error(error_code)):
-            errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=True)
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=False)
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
 % endfor

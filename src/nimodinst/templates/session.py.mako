@@ -106,12 +106,7 @@ class Session(object):
 
         Returns the error description.
         '''
-        return self._get_error_description(error_code)
-
-    # method needed for generic driver exceptions
-    # TODO(texasaggie97) Rewrite to use session function instead of library once buffer
-    #   retrieval is working
-    def _get_error_description(self, error_code):
+        # TODO(texasaggie97) Rewrite to use code generated method, if possible.
         buffer_size = self.library.${c_function_prefix}GetExtendedErrorInfo(0, None)
 
         if (buffer_size > 0):
@@ -178,19 +173,17 @@ class Session(object):
 % endfor
 % if ivi_dance_parameter is None:
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
-        errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=False)
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
-        # Don't use _handle_error alone, because positive value in error_code means size, not warning.
-        if (errors._is_error(error_code)):
-            errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=True)
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
-        errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=False)
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
 % endfor
