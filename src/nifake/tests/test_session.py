@@ -59,8 +59,7 @@ class TestSession(object):
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
-            error_code, error_desc = session._get_error_description(test_error_code)
-            assert error_code == test_error_code
+            error_desc = session.get_error_description(test_error_code)
             assert error_desc == test_error_desc
 
     def test_simple_function(self):
