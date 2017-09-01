@@ -773,6 +773,71 @@ functions = {
         },
     },
 
+    'OneInputFunction': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi**',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'aNumber',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Contains a number',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function takes one parameter other than the session.',
+        },
+    },
+    
+    'TwoInputFunction': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi**',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'aNumber',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'Contains a number',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'aString',
+                'type': 'ViChar',
+                'documentation': {
+                    'description': 'Contains a string',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function takes two parameters other than the session.',
+        },
+    },
+
     'GetANumber': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -798,6 +863,35 @@ functions = {
         ],
         'documentation': {
             'description': 'Returns a number.',
+            'note': 'This function rules!',
+        },
+    },
+    
+    'GetABoolean': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'aBoolean',
+                'type': 'ViBoolean',
+                'documentation': {
+                    'description': 'Contains a boolean.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns a boolean.',
             'note': 'This function rules!',
         },
     },
@@ -860,7 +954,7 @@ functions = {
                 'name': 'bufferSize',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'String comes back here. Buffer must be 256 big.',
+                    'description': 'Buffersize of the string.',
                 },
             },
         ],

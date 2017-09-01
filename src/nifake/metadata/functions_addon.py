@@ -43,11 +43,12 @@ functions_params_types = {
 #                       'value' should be the name of the parameter through which the size (0, then the real
 #                       one) is passed in. This parameter won't exist in the corresponding Python Session method.
 functions_buffer_info = {
-    'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'GetErrorMessage':              { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'buffer_size'}, }, }, },
-    'ReadMultiPoint':               { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
-    'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'InitWithOptions':              { 'parameters': { 0: { 'is_buffer': True, },
-                                                      3: { 'is_buffer': True, }, }, },
-    '.etAttribute.+':               { 'parameters': { 1: { 'is_buffer': True, }, }, },
+    'GetError':                              { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'GetErrorMessage':                       { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'buffer_size'}, }, }, },
+    'ReadMultiPoint':                        { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
+    'GetAttributeViString':                  { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'GetAStringWithSpecifiedMaximumSize':    { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'bufferSize'}, }, }, },
+    'InitWithOptions':                       { 'parameters': { 0: { 'is_buffer': True, },
+                                                               3: { 'is_buffer': True, }, }, },
+    '.etAttribute.+':                        { 'parameters': { 1: { 'is_buffer': True, }, }, },
 }
