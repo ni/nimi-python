@@ -21,13 +21,9 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 * ### NI-DMM
   * #### Added
     * Initial release
-  * #### Changed
-  * #### Removed
 * ### NI-ModInst
   * #### Added
     * Initial release
-  * #### Changed
-  * #### Removed
 
 
 <!-- 
