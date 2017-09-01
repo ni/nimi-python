@@ -102,7 +102,7 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
-    def test_get_string_attribute(self):
+    def test_get_string_attribute_private(self):
         self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
         string = 'Testing is fun?'
         self.side_effects_helper['GetAttributeViString']['attributeValue'] = string
@@ -111,6 +111,18 @@ class TestSession(object):
             assert(attr_string == string)
             from mock import call
             calls = [call(SESSION_NUM_FOR_TEST, b"", 5, 0, None), call(SESSION_NUM_FOR_TEST, b"", 5, 15, ANY)]
+            self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAttributeViString.call_count == 2
+
+    def test_get_string_attribute(self):
+        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
+        string = 'Testing is fun?'
+        self.side_effects_helper['GetAttributeViString']['attributeValue'] = string
+        with nifake.Session('dev1') as session:
+            attr_string = session.read_write_string
+            assert(attr_string == string)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, b"", 1000002, 0, None), call(SESSION_NUM_FOR_TEST, b"", 1000002, 15, ANY)]
             self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViString.call_count == 2
 
@@ -236,7 +248,6 @@ class TestSession(object):
             except TypeError as e:
                 assert str(e) == 'must be nifake.Color not int'
 
-    '''
     def test_acquisition_context_manager(self):
         self.patched_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate
         self.patched_library.niFake_Abort.side_effect = self.side_effects_helper.niFake_Abort
@@ -245,24 +256,19 @@ class TestSession(object):
                 self.patched_library.niFake_Initiate.assert_called_once_with(SESSION_NUM_FOR_TEST)
             self.patched_library.niFake_Abort.assert_called_once_with(SESSION_NUM_FOR_TEST)
         self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
-    '''
 
-    '''
     def test_cannot_add_properties_to_session(self):
         with nifake.Session('dev1') as session:
             try:
                 session.nonexistent_property = 5
                 assert False
             except TypeError as e:
-                print(e)
                 pass
             try:
                 value = session.nonexistent_property  # noqa: F841
                 assert False
             except AttributeError as e:
-                print(e)
                 pass
-    '''
 
     '''
     # Re-enable after issue 205 is fixed
