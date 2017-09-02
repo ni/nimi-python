@@ -3,6 +3,7 @@
 
 
 import platform
+import warnings
 
 
 def _is_success(error_code):
@@ -19,26 +20,27 @@ def _is_warning(error_code):
 
 class _ErrorBase(Exception):
 
-    def __init__(self, session, error_code):
+    def __init__(self, error_code, error_description):
 
-        self.code, self.description = session._get_error_description(error_code)
+        self.code = error_code
+        self.description = error_description
         super(_ErrorBase, self).__init__(str(self.code) + ": " + self.description)
 
 
 class Error(_ErrorBase):
     '''An error originating from the NI-ModInst driver'''
 
-    def __init__(self, session, error_code):
+    def __init__(self, error_code, error_description):
         assert (_is_error(error_code)), "Should not raise Error if error_code is not fatal."
-        super(Error, self).__init__(session, error_code)
+        super(Error, self).__init__(error_code, error_description)
 
 
-class Warning(_ErrorBase):
+class NimodinstWarning(Warning):
     '''A warning originating from the NI-ModInst driver'''
 
-    def __init__(self, session, error_code):
-        assert (_is_warning(error_code)), "Should not raise Warning if error_code is not positive."
-        super(Warning, self).__init__(session, error_code)
+    def __init__(self, warning_code, warning_description):
+        assert (_is_warning(warning_code)), "Should not raise Warning if error_code is not positive."
+        super(NimodinstWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(warning_code, warning_description))
 
 
 class UnsupportedConfigurationError(Exception):
@@ -55,10 +57,18 @@ class DriverNotInstalledError(Exception):
         super(DriverNotInstalledError, self).__init__('The NI-ModInst runtime is not installed. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
 
 
-def _handle_error(session, error_code):
-    if (_is_success(error_code)):
+def handle_error(session, error_code, ignore_warnings):
+    if _is_success(error_code) or (_is_warning(error_code) and ignore_warnings):
         return
+    try:
+        error_description = session.get_error_description(error_code)
+    except Exception as e:
+        # TODO(marcoskirsch): Log this exception.
+        error_description = ""
     if (_is_error(error_code)):
-        raise Error(session, error_code)
+        raise Error(error_code, error_description)
     if (_is_warning(error_code)):
-        raise Warning(session, error_code)
+        warnings.warn(NimodinstWarning(error_code, error_description))
+
+
+warnings.filterwarnings("always", category=NimodinstWarning)
