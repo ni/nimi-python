@@ -6,11 +6,13 @@ attributes    = config['attributes']
 functions     = config['functions']
 
 module_name = config['module_name']
+module_name_class = module_name.title()
 c_function_prefix = config['c_function_prefix']
 driver_name = config['driver_name']
 %>
 
 import platform
+import warnings
 
 
 def _is_success(error_code):
@@ -45,9 +47,9 @@ class Error(_ErrorBase):
 class ${module_name_class}Warning(Warning):
     '''A warning originating from the ${driver_name} driver'''
 
-    def __init__(self, error_code, error_description):
-        assert (_is_warning(error_code)), "Should not raise Warning if error_code is not positive."
-        super(Warning, self).__init__(error_code, error_description)
+    def __init__(self, warning_code, warning_description):
+        assert (_is_warning(warning_code)), "Should not raise Warning if error_code is not positive."
+        super(${module_name_class}Warning, self).__init__('Warning {0} occurred.\n\n{1}'.format(warning_code, warning_description))
 
 
 class UnsupportedConfigurationError(Exception):
@@ -75,5 +77,7 @@ def handle_error(session, error_code, ignore_warnings):
     if (_is_error(error_code)):
         raise Error(error_code, error_description)
     if (_is_warning(error_code)):
-        # TODO(marcoskirsch): Log instead of raising in the warning case.
-        raise Warning(error_code, error_description)
+        warnings.warn(${module_name_class}Warning(error_code, error_description))
+
+
+warnings.filterwarnings("always", category=${module_name_class}Warning)
