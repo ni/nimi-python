@@ -5,5 +5,6 @@ bin/
 .eggs/
 .tox/
 .coverage
+commands.log
 
 
