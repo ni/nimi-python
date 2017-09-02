@@ -6,10 +6,8 @@ export DEFAULT_TARGETS
 GENERATED_DIR := $(ROOT_DIR)/generated
 export GENERATED_DIR
 
-COMMAND_LOG_BATCH := $(GENERATED_DIR)/command_history.bat
-export COMMAND_LOG_BATCH
-COMMAND_LOG_SH := $(GENERATED_DIR)/command_history.sh
-export COMMAND_LOG_SH
+COMMAND_LOG := $(ROOT_DIR)/commands.log
+export COMMAND_LOG
 
 ifeq (,$(PRINT))
 _hide_cmds := @
@@ -57,8 +55,9 @@ clean: start
 	-@rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*.rst) $(SUPPRESS_ERROR_OUTPUT) ||:
 
 start:
-	-@echo "rem This is the list of commands that make invoked in order to build nimi-python. If you want to reproduce the build but don't have GNU Make setup in your system, you can invoke this script." > $(COMMAND_LOG_BATCH)
-	-@echo "# This is the list of commands that make invoked in order to build nimi-python. If you want to reproduce the build but don't have GNU Make setup in your system, you can invoke this script." > $(COMMAND_LOG_SH)
+	-@echo "# This is the list of commands that make invoked in order to build nimi-python. If" > $(COMMAND_LOG)
+	-@echo "# you want to reproduce the build but don't have GNU Make setup in your system, you" >> $(COMMAND_LOG)
+	-@echo "# can use the commands in this log file." >> $(COMMAND_LOG)
 
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
