@@ -178,3 +178,8 @@ def test_vi_int32_output_function(session):
     assert isinstance(backlog, int)
     assert backlog == 0
 
+
+def test_initialize_nondefault():
+    with nidmm.Session('FakeDevice', False, False, 'Simulate = 1,RangeCheck=0,QueryInstrStatus=1,Cache=0,DriverSetup=Model:4080; BoardType:PXIe') as session:
+        assert session.simulate is True
+
