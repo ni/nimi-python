@@ -42,7 +42,7 @@ class Error(_ErrorBase):
         super(Error, self).__init__(error_code, error_description)
 
 
-class Warning(_ErrorBase):
+class ${module_name_class}Warning(Warning):
     '''A warning originating from the ${driver_name} driver'''
 
     def __init__(self, error_code, error_description):
