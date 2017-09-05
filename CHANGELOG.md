@@ -8,6 +8,8 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 * #### ALL
   * #### Added
   * #### Changed
+    * Warnings no longer raise an exception
+      * Warnings are now added to warnings.warn()
   * #### Removed
 * #### NI-DMM
   * #### Added
