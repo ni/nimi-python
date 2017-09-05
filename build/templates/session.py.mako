@@ -160,9 +160,6 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
         return ${context_name.title()}(self)
 % endfor
 
-    def __del__(self):
-        pass
-
     def __enter__(self):
         return self
 
