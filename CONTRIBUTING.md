@@ -60,11 +60,10 @@ In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Test
 ### How to build
 
 1. Fork the repository on GitHub and clone it to your local system.
-2. On a terminal, CD to the **[nimi-python](https://github.com/ni/nimi-python)** root
+1. On a terminal, CD to the **[nimi-python](https://github.com/ni/nimi-python)** root
    directory. Then type:
-```
-tox
-```
+
+         tox
 
    This will
 
@@ -76,10 +75,10 @@ tox
    * Run [flake8](http://flake8.pycqa.org/)
    * Generate [HTML documentation](http://www.sphinx-doc.org/)
 
-3. To clean everything and start fresh, type:
-```
-tox -e clean
-```
+1. To clean everything and start fresh, type:
+
+         tox -e clean
+
 
 ### Running System Tests
 
@@ -111,9 +110,12 @@ begin contributing to to the project.
       apply those to NI-FAKE.
     * If you are modifying driver-specific metadata, write new
       [system tests](src/nidmm/system_tests).
-2. Make your change.
-3. Verify all tests, including the new ones, pass.
-4. On GitHub, send a New pull request to the main repository's master branch. GitHub
+1. Make your change.
+1. Verify all tests, including the new ones, pass.
+1. Update CHANGELOG.md if applicable.
+    * If the change applies to all generated driver bindings, put the change into the **ALL** section
+    * If it only applies to a single driver binding, put the change in the section associated with that driver
+1. On GitHub, send a New pull request to the main repository's master branch. GitHub
    pull requests are the expected method of code collaboration on this project.
 
 Developer Certificate of Origin (DCO)
@@ -149,3 +151,4 @@ By making a contribution to this project, I certify that:
 
 See [LICENSE](https://github.com/ni/nimi-python/blob/master/LICENSE) for details about
 how **[nimi-python](https://github.com/ni/nimi-python)** is licensed.
+
