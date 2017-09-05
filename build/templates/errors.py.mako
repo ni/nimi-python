@@ -49,7 +49,7 @@ class ${module_name_class}Warning(Warning):
 
     def __init__(self, code, description):
         assert (_is_warning(code)), "Should not create Warning if code is not positive."
-        super(${module_name_class}Warning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, arning_description))
+        super(${module_name_class}Warning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
 
 
 class UnsupportedConfigurationError(Exception):
