@@ -66,8 +66,8 @@ class SideEffectsHelper(object):
         self._defaults['GetChannelName']['channelNameBuffer'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
-        self._defaults['GetError']['code'] = None
-        self._defaults['GetError']['description'] = None
+        self._defaults['GetError']['Code'] = None
+        self._defaults['GetError']['Description'] = None
         self._defaults['GetNextCoercionRecord'] = {}
         self._defaults['GetNextCoercionRecord']['return'] = 0
         self._defaults['GetNextCoercionRecord']['coercionRecord'] = None
@@ -76,7 +76,7 @@ class SideEffectsHelper(object):
         self._defaults['GetNextInterchangeWarning']['interchangeWarning'] = None
         self._defaults['GetPath'] = {}
         self._defaults['GetPath']['return'] = 0
-        self._defaults['GetPath']['path'] = None
+        self._defaults['GetPath']['Path'] = None
         self._defaults['GetRelayCount'] = {}
         self._defaults['GetRelayCount']['return'] = 0
         self._defaults['GetRelayCount']['relayCount'] = None
@@ -286,17 +286,17 @@ class SideEffectsHelper(object):
         channel_name_buffer.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetChannelName']['return']
 
-    def niSwitch_GetError(self, vi, code, buffersize, description):  # noqa: N802
+    def niSwitch_GetError(self, vi, code, buffer_size, description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
             return self._defaults['GetError']['return']
-        if self._defaults['GetError']['code'] is None:
-            raise MockFunctionCallError("niSwitch_GetError", param='code')
-        code.contents.value = self._defaults['GetError']['code']
-        if self._defaults['GetError']['description'] is None:
-            raise MockFunctionCallError("niSwitch_GetError", param='description')
-        if buffersize == 0:
-            return len(self._defaults['GetError']['description'])
-        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetError']['description'].encode('ascii'))
+        if self._defaults['GetError']['Code'] is None:
+            raise MockFunctionCallError("niSwitch_GetError", param='Code')
+        code.contents.value = self._defaults['GetError']['Code']
+        if self._defaults['GetError']['Description'] is None:
+            raise MockFunctionCallError("niSwitch_GetError", param='Description')
+        if buffer_size == 0:
+            return len(self._defaults['GetError']['Description'])
+        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetError']['Description'].encode('ascii'))
         description.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetError']['return']
 
@@ -325,11 +325,11 @@ class SideEffectsHelper(object):
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
         if self._defaults['GetPath']['return'] != 0:
             return self._defaults['GetPath']['return']
-        if self._defaults['GetPath']['path'] is None:
-            raise MockFunctionCallError("niSwitch_GetPath", param='path')
+        if self._defaults['GetPath']['Path'] is None:
+            raise MockFunctionCallError("niSwitch_GetPath", param='Path')
         if buffer_size == 0:
-            return len(self._defaults['GetPath']['path'])
-        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetPath']['path'].encode('ascii'))
+            return len(self._defaults['GetPath']['Path'])
+        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetPath']['Path'].encode('ascii'))
         path.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetPath']['return']
 

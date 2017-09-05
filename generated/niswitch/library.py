@@ -231,13 +231,13 @@ class Library(object):
                 self.niSwitch_GetChannelName_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_GetChannelName_cfunc(vi, index, buffer_size, channel_name_buffer)
 
-    def niSwitch_GetError(self, vi, code, buffersize, description):  # noqa: N802
+    def niSwitch_GetError(self, vi, code, buffer_size, description):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetError_cfunc is None:
                 self.niSwitch_GetError_cfunc = self._library.niSwitch_GetError
                 self.niSwitch_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niSwitch_GetError_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_GetError_cfunc(vi, code, buffersize, description)
+        return self.niSwitch_GetError_cfunc(vi, code, buffer_size, description)
 
     def niSwitch_GetNextCoercionRecord(self, vi, buffer_size, coercion_record):  # noqa: N802
         with self._func_lock:

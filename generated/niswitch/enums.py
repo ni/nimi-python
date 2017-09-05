@@ -5,9 +5,6 @@ from enum import Enum
 
 class CabledModuleScanAdvancedBus(Enum):
     NONE = 0
-    '''
-    
-    '''
     PXI_TRIG0 = 111
     '''
     The switch module waits until it receives a trigger on the PXI_Trig0
@@ -52,41 +49,14 @@ class CabledModuleScanAdvancedBus(Enum):
 
 class CabledModuleTriggerBus(Enum):
     NONE = 0
-    '''
-    
-    '''
     PXI_TRIG0 = 111
-    '''
-    
-    '''
     PXI_TRIG1 = 112
-    '''
-    
-    '''
     PXI_TRIG2 = 113
-    '''
-    
-    '''
     PXI_TRIG3 = 114
-    '''
-    
-    '''
     PXI_TRIG4 = 115
-    '''
-    
-    '''
     PXI_TRIG5 = 116
-    '''
-    
-    '''
     PXI_TRIG6 = 117
-    '''
-    
-    '''
     PXI_TRIG7 = 118
-    '''
-    
-    '''
 
 
 class HandshakingInitiation(Enum):
@@ -118,9 +88,6 @@ class HandshakingInitiation(Enum):
 
 class MasterSlaveScanAdvancedBus(Enum):
     NONE = 0
-    '''
-    
-    '''
     PXI_TRIG0 = 111
     '''
     The switch module waits until it receives a trigger on the PXI_Trig0
@@ -165,9 +132,6 @@ class MasterSlaveScanAdvancedBus(Enum):
 
 class MasterSlaveTriggerBus(Enum):
     NONE = 0
-    '''
-    
-    '''
     PXI_TRIG0 = 111
     '''
     The switch module waits until it receives a trigger on the PXI_Trig0
@@ -1054,14 +1018,5 @@ class TriggerInputPolarity(Enum):
 
 class TriggerMode(Enum):
     SINGLE = 0
-    '''
-    
-    '''
     MASTER = 1
-    '''
-    
-    '''
     SLAVE = 2
-    '''
-    
-    '''
