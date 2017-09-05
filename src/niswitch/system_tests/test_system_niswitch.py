@@ -2,6 +2,7 @@
 
 import niswitch
 import pytest
+import warnings
 
 
 @pytest.fixture(scope='function')
@@ -135,11 +136,12 @@ def test_functions_get_path(session):
 
 
 def test_functions_error_query(session):
-    try:
+    with warnings.catch_warnings(record=True) as w:
+        test_error_desc = '1073479940'  # Error Query not supported.
         result, string = session.error_query()
-        assert 0
-    except niswitch.Warning as w:  # NI-SWITCH does not support error_query and throws a warning
-        pass
+        assert len(w) == 1
+        assert issubclass(w[0].category, niswitch.NiswitchWarning)
+        assert test_error_desc in str(w[0].message)
 
 
 def test_functions_error_message(session):
