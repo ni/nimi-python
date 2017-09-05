@@ -92,9 +92,6 @@ class Session(object):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
 
-    def __del__(self):
-        pass
-
     def __enter__(self):
         return self
 
@@ -177,7 +174,7 @@ class Session(object):
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
-        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        ${ivi_dance_parameter['ctypes_variable_name']} = None
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
         errors.handle_error(self, error_code, ignore_warnings=True)
         ${ivi_dance_size_parameter['python_name']} = error_code
