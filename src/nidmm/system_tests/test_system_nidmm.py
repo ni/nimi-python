@@ -17,17 +17,15 @@ def test_take_simple_measurement_works(session):
 def test_acquisition(session):
     session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
     with session.initiate():
-        print(session.fetch(1000))
+        session.fetch(1000)
     with session.initiate():
-        print(session.fetch(1000))
+        session.fetch(1000)
 
 
 def test_multi_point_acquisition(session):
     session.configure_multi_point(4, 2, nidmm.SampleTrigger.IMMEDIATE, 0)
     session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
     measurements, numberOfMeasurements = session.read_multi_point(-1, 8)
-    for measurement in measurements:
-        print('{:10.4f}'.format(measurement))
     assert len(measurements) == 8
     assert numberOfMeasurements == 8
 
@@ -96,7 +94,6 @@ def test_method_self_test(session):
 
 def test_method_get_dev_temp(session):
     temperature = session.get_dev_temp('')
-    print(temperature)
     assert 20 <= temperature <= 50
 
 
