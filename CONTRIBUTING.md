@@ -1,17 +1,16 @@
 Contributing to nimi-python
 ===========================
 
-Contributions to ** nimi-python** are welcome from all!
+Contributions to **[nimi-python](https://github.com/ni/nimi-python)** are welcome from all!
 
-**nimi-python** is managed via `git <https://git-scm.com>`_, with the canonical
-upstream repository hosted on `GitHub <http://developercertificate.org/>`_.
+**[nimi-python](https://github.com/ni/nimi-python)** is managed via [Git](https://git-scm.com), with the canonical
+upstream repository hosted on [GitHub](http://developercertificate.org/).
 
-**nimi-python** follows a pull-request model for development. If you wish to
-contribute, you will need to create a GitHub account, fork this project,
-push a branch with your changes to your project, and then submit a pull
-request.
+**[nimi-python](https://github.com/ni/nimi-python)** follows a pull request model for development.
+If you wish to contribute, you will need to create a GitHub account, fork this project,
+push a branch with your changes to your project, and then submit a pull request.
 
-See `GitHub's official documentation <https://help.github.com/articles/using-pull-requests/>`_
+See [GitHub's official documentation](https://help.github.com/articles/using-pull-requests/)
 for more details.
 
 Getting Started
@@ -19,61 +18,103 @@ Getting Started
 
 To contribute to this project, it is recommended that you follow these steps:
 
-1. Fork the repository on GitHub.
-2. Build. Unit tests will execute as part of this.
-   - To build on a Windows Machine
-      1. Install Python from https://www.python.org/downloads/ . 
-      2. Add Python install location to the Windows path.
-      3. Install PyPI, following the instructions on https://pip.pypa.io/en/latest/installing/ .
-      4. Install required Python Modules using PyPI.
-         - wheel (https://pypi.python.org/pypi/wheel/) .
-         - mock (https://pypi.python.org/pypi/mock/) .
-         - mako (https://pypi.python.org/pypi/mako/) .
-      5. Install mingw (msys-base) following the instructions on http://www.mingw.org/wiki/Getting_Started/ . 
-      6. Add <mingw Install Path>\msys\1.0\bin to Windows path.
-      7. Call "make clean".
-      8. Call "make".
-3. Run system tests on your system (see Testing section). At this point,
-   if any tests fail, do not begin development. Try to investigate these
-   failures. If you're unable to do so, report an issue through our
-   `GitHub issues page <http://github.com/nimi-python/issues>`_.
-4. Write new unit tests  and system tests that demonstrate your bug or feature. Ensure that these
-   new tests fail.
-5. Make your change.
-6. Run all the tests again (which include the tests you just added),
-   and confirm that they all pass.
-7. Send a GitHub Pull Request to the main repository's master branch. GitHub
-   Pull Requests are the expected method of code collaboration on this project.
+### System Requirements
 
-.. _testing-section:
+In order to build **[nimi-python](https://github.com/ni/nimi-python)**, you must have the
+following installed:
 
-Testing
--------
+* [Python 3](https://www.python.org/downloads/)
+    - Add Python install location to the Windows path.
+* [GNU Make](https://www.gnu.org/software/make/)
+    - If you're on Windows 10
+        - Install the [Windows Subsystem for Linux]
+        (https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
+        - Install make
 
-Unit tests are self-contained and invoked as part of the build process.
+                sudo apt-get install make
 
-System tests are distinct on a per-driver basis and require the following:
+    - If you're on Windows 7 or 8:
+        - [Install mingw (msys-base)](http://www.mingw.org/wiki/Getting_Started).
+        - Add <mingw Install Path>\msys\1.0\bin to Windows path.
 
-  - Full driver or runtime is installed (i.e. NI-DMM).
-  - Supported version of CPython is installed.
-  - Compatible device is connected to it (i.e. NI 4080).
+    - If you're on macOS
+        - Install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
+        - Install command line developer tools
+* [PyPI](https://pip.pypa.io/en/latest/installing/)
 
-* TODO(marcoskirsch): update all this when we have clearer information*
+        sudo apt-get install python3-pip
+        sudo pip3 install pip --upgrade
 
-NI-DMM system tests assume your device has a specific alias "DMM1" specified in MAX. Rename your device in MAX to match.
+* Additional Python Modules (install using [PyPI](https://pypi.python.org/pypi))
 
-To run the **nidmm** unit tests in a specific version of Python, run the following command in the root of the distribution::
+        sudo pip3 install tox --upgrade
 
-  $ <Python executable> setup.py test
+In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Tests:
 
-To run the unit tests in all Python interpreters supported by **nidmm**,
-run the following commands in the root of the distribution::
+* Install corresponding driver runtimes.
+    * Download the latest installers for NI-DMM, NI-SCOPE, NI-DCPower, NI-SWITCH, NI-FGEN
+    from [ni.com](http://www.ni.com/downloads/ni-drivers/)
+    * NI-ModInst is included as part of these runtimes.
+    * NI-TClk is included as part of NI-SCOPE and NI-FGEN.
 
-  $ pip install tox
-  $ tox
+### How to build
 
-This requires you to have all the Python interpreters supported by
-**nidmm** installed on your machine.
+1. Fork the repository on GitHub and clone it to your local system.
+2. On a terminal, CD to the **[nimi-python](https://github.com/ni/nimi-python)** root
+   directory. Then type:
+```
+tox
+```
+
+   This will
+
+   * For each driver
+      * Generate Python bindings
+      * Generate [RST documentation](http://www.sphinx-doc.org/)
+      * Create installer packages
+   * Run NI-FAKE unit tests
+   * Run [flake8](http://flake8.pycqa.org/)
+   * Generate [HTML documentation](http://www.sphinx-doc.org/)
+
+3. To clean everything and start fresh, type:
+```
+tox -e clean
+```
+
+### Running System Tests
+
+System tests exercise the Python bindings. After you have successfully built
+**[nimi-python](https://github.com/ni/nimi-python)**, install the locally built PyPI
+packages using PyPI. For example:
+
+    python3 -m pip install -U bin/nidmm/dist/nidmm-0.1.0.dev4-py2.py3-none-any.whl
+
+You can install all locally built packages in one fell swoop using the following command.
+This will work on Unix-based systems including Windows Subsystem for Linux.
+
+    find bin | grep \.whl | xargs sudo python3 -m pip install -U
+
+Then run the system tests for the desired driver, for example:
+
+    pytest bin/nidmm/system_tests
+
+Contributing
+------------
+
+After you've verified that you can successfully build and run system tests for
+**[nimi-python](https://github.com/ni/nimi-python)**, you may fork the repository and
+begin contributing to to the project.
+
+1. Write a failing test for the new feature / bugfix.
+    * If you are modifying the code generator, write new [NI-FAKE](src/nifake/tests) unit
+      tests. If the new functionality requires changes to [metadata](src/nifake/metadata),
+      apply those to NI-FAKE.
+    * If you are modifying driver-specific metadata, write new
+      [system tests](src/nidmm/system_tests).
+2. Make your change.
+3. Verify all tests, including the new ones, pass.
+4. On GitHub, send a New pull request to the main repository's master branch. GitHub
+   pull requests are the expected method of code collaboration on this project.
 
 Developer Certificate of Origin (DCO)
 -------------------------------------
@@ -104,7 +145,7 @@ By making a contribution to this project, I certify that:
     maintained indefinitely and may be redistributed consistent with
     this project or the open source license(s) involved.
 
-(taken from `developercertificate.org <http://developercertificate.org/>`_)
+(taken from [developercertificate.org](http://developercertificate.org/))
 
-See `LICENSE <https://github.com/ni/nimi-python/blob/master/LICENSE>`_
-for details about how **nimi-python** is licensed.
+See [LICENSE](https://github.com/ni/nimi-python/blob/master/LICENSE) for details about
+how **[nimi-python](https://github.com/ni/nimi-python)** is licensed.

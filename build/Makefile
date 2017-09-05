@@ -1,9 +1,7 @@
+include $(BUILD_HELPER_DIR)/tools.mak
 
-DEFAULT_TARGETS := module unit_tests update_generated_files update_system_tests update_examples run_unit_tests wheel sdist
+DEFAULT_TARGETS := module unit_tests update_generated_files update_system_tests update_examples wheel sdist
 export DEFAULT_TARGETS
-
-ADDITIONAL_TARGETS := test flake8
-export ADDITIONAL_TARGETS
 
 GENERATED_DIR := $(ROOT_DIR)/generated
 export GENERATED_DIR
@@ -12,12 +10,6 @@ COMMAND_LOG_BATCH := $(GENERATED_DIR)/command_history.bat
 export COMMAND_LOG_BATCH
 COMMAND_LOG_SH := $(GENERATED_DIR)/command_history.sh
 export COMMAND_LOG_SH
-
-define log_command
-	@echo '$1' >> $(COMMAND_LOG_BATCH)
-	@echo '$1' >> $(COMMAND_LOG_SH)
-	$1
-endef
 
 ifeq (,$(PRINT))
 _hide_cmds := @
@@ -43,7 +35,7 @@ endef
 
 $(foreach d,$(ALL_DRIVERS),$(eval $(call per_driver_all,$(d))))
 $(foreach d,$(ALL_DRIVERS),\
-   $(foreach t,$(DEFAULT_TARGETS) $(ADDITIONAL_TARGETS),\
+   $(foreach t,$(DEFAULT_TARGETS),\
       $(eval $(call per_driver_per_target,$(d),$(t)))))
 
 define per_target
@@ -53,7 +45,7 @@ endef
 
 # We add test when we create the $(DEFAULT_TARGETS). This is because it shouldn't be
 # run when all is used, but we want it to work
-$(foreach t,$(DEFAULT_TARGETS) $(ADDITIONAL_TARGETS),$(eval $(call per_target,$(t))))
+$(foreach t,$(DEFAULT_TARGETS),$(eval $(call per_target,$(t))))
 
 SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 clean: start
@@ -71,10 +63,10 @@ start:
 
 # From https://stackoverflow.com/questions/14760124/how-to-split-in-gnu-makefile-list-of-files-into-separate-lines
 DRIVER_ALL_TARGETS_HELP := echo Drivers: $(addprefix  && echo - ,$(ALL_DRIVERS))
-TARGETS_HELP := echo Targets: $(addprefix  && echo - ,$(DEFAULT_TARGETS) $(ADDITIONAL_TARGETS))
+TARGETS_HELP := echo Targets: $(addprefix  && echo - ,$(DEFAULT_TARGETS))
 PER_DRIVER_PER_TARGET := \
    $(foreach d,$(ALL_DRIVERS),\
-      $(foreach t,$(DEFAULT_TARGETS) $(ADDITIONAL_TARGETS),\
+      $(foreach t,$(DEFAULT_TARGETS),\
          $(d)_$(t)))
 DRIVER_TARGETS_HELP := echo Per driver, per target: $(addprefix  && echo - ,$(PER_DRIVER_PER_TARGET))
 help:
@@ -102,20 +94,19 @@ printvar:
 	$(_hide_cmds)$(foreach d,$(DRIVERS),$(call per_driver_variable_print,$(d),$(VAR)) && ) echo
 
 
-# Minimal makefile for Sphinx documentation
-#
 PYTHON_CMD ?= python3
-
-# You can set these variables from the command line.
-SPHINXOPTS    =
-SPHINXBUILD   = $(PYTHON_CMD) -msphinx
-SPHINXPROJ    = NIModularInstrumentsPythonAPI
-SOURCEDIR     = $(ROOT_DIR)/docs
-BUILDDIR      = $(BIN_DIR)/docs
-
-html:
-	$(_hide_cmds)$(call log_command,$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS))
 
 .PHONY: help Makefile
 
 
+# Any step that any driver build does that would invalidate unit testing, flake8 or generated html
+# needs to delete this file. This will trigger a tox run.
+TOX_RUN_DONE := bin/tox_run_done
+export TOX_RUN_DONE
+
+test: $(TOX_RUN_DONE)
+
+$(TOX_RUN_DONE):
+	@echo
+	$(call trace_to_console, "Running tox",$@)
+	$(_hide_cmds)$(call make_with_tracking_file,$@,tox)

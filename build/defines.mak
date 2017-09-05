@@ -15,6 +15,8 @@ METADATA_FILES := $(wildcard $(METADATA_DIR)/*.py)
 
 BUILD_HELPER_SCRIPT := $(BUILD_HELPER_DIR)/helper.py
 
+DRIVER_GENERATED_DIR := $(GENERATED_DIR)/$(DRIVER)
+
 DOCS_DIR := $(ROOT_DIR)/docs
 DRIVER_DOCS_DIR := $(DOCS_DIR)/$(DRIVER)
 
@@ -30,6 +32,7 @@ MKDIRECTORIES += \
                  $(LOG_DIR) \
                  $(SYSTEM_TEST_DIR) \
                  $(EXAMPLES_DIR) \
+                 $(DRIVER_GENERATED_DIR) \
 
 VPATH = $(TEMPLATE_DIR)
 
@@ -53,9 +56,9 @@ all: $(TARGETS)
 DEFAULT_PY_FILES_TO_GENERATE := \
                      enums.py \
                      library.py \
+                     library_singleton.py \
                      session.py \
                      errors.py \
-                     ctypes_library.py \
                      tests/mock_helper.py \
                      __init__.py \
 
@@ -70,9 +73,7 @@ DEFAULT_RST_FILES_TO_GENERATE := \
                      functions.rst \
 
 # Files for tracking parts of the build
-UNIT_TESTS_DONE := $(LOG_DIR)/tests_passed
-FLAKE8_DONE := $(LOG_DIR)/flake8_passed
-WHEEL_DONE := $(LOG_DIR)/wheel_built
-SDIST_DONE := $(LOG_DIR)/sdist_built
-GENERATED_FILES_DONE := $(LOG_DIR)/generated_files_copied
+WHEEL_BUILD_DONE := $(LOG_DIR)/wheel_build_done
+SDIST_BUILD_DONE := $(LOG_DIR)/sdist_build_done
+GENERATED_FILES_COPY_DONE := $(LOG_DIR)/generated_files_copy_done
 

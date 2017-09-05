@@ -16,7 +16,7 @@
 import ctypes
 from ${module_name} import ctypes_types
 from ${module_name} import errors
-from ${module_name} import library
+from ${module_name} import library_singleton
 from ${module_name} import python_types
 
 
@@ -82,7 +82,7 @@ class Session(object):
         self.handle = 0
         self.item_count = 0
         self.current_item = 0
-        self.library = library.get_library()
+        self.library = library_singleton.get()
         self.handle, self.item_count = self._open_installed_devices_session(driver)
 
         self._is_frozen = True
@@ -101,10 +101,12 @@ class Session(object):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
-    # method needed for generic driver exceptions
-    # TODO(texasaggie97) Rewrite to use session function instead of library once buffer
-    #   retrieval is working
-    def _get_error_description(self, error_code):
+    def get_error_description(self, error_code):
+        '''get_error_description
+
+        Returns the error description.
+        '''
+        # TODO(texasaggie97) Rewrite to use code generated method, if possible.
         buffer_size = self.library.${c_function_prefix}GetExtendedErrorInfo(0, None)
 
         if (buffer_size > 0):
@@ -121,7 +123,7 @@ class Session(object):
 
         # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
         #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
-        return error_code.value, error_message.value.decode("ascii")
+        return error_message.value.decode("ascii")
 
     # Iterator functions
     def __len__(self):
@@ -171,19 +173,17 @@ class Session(object):
 % endfor
 % if ivi_dance_parameter is None:
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
-        errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=False)
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
-        # Don't use _handle_error, because positive value in error_code means size, not warning.
-        if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=True)
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
-        errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=False)
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
 % endfor

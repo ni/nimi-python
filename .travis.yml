@@ -4,29 +4,22 @@ dist: trusty
 language: python
 # For pypy versions, see https://github.com/pyenv/pyenv/tree/master/plugins/python-build/share/python-build
 python: 
-  - "pypy-5.6.0"
-  - "pypy3.5-5.8.0"
-  - 2.7
-  - 3.4
-  - 3.5
   - 3.6
+  - 3.5
+  - 3.4
+  - 2.7
+  - "pypy3.5-5.8.0"
+  - "pypy-5.6.0"
 
 install:
-  - pip install --upgrade setuptools 
-  - pip install --upgrade mako 
-  - pip install --upgrade mock 
-  - pip install --upgrade tox 
-  - pip install --upgrade tox-travis 
-  - pip install --upgrade flake8
-  - pip install --upgrade wheel 
-  - pip install --upgrade sphinx 
-  - pip install --upgrade sphinx_rtd_theme 
-  - pip install --upgrade coveralls
+  - pip install --upgrade tox tox-travis coveralls
 
 script:
-  - make clean all flake8 test html PRINT=1 PYTHON_CMD=python
+  - tox -e clean,codegen PRINT=1 PYTHON_CMD=python
+  - tox
 
-#after_success:
-#  - coveralls
+after_success:
+  - cp bin/nifake/.coverage .
+  - coveralls
 
 

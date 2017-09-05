@@ -4,6 +4,6 @@
 bin/
 .eggs/
 .tox/
-.com.apple.timemachine.supported
+.coverage
 
 
