@@ -149,6 +149,5 @@ def test_functions_error_message(session):
 
 
 def test_functions_get_error_description(session):
-    error, string = session._get_error_description(0)   # expect no errors
-    assert error == 0
+    string = session.get_error_description(0)   # expect no errors
     assert string == ''
