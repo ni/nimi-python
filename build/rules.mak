@@ -68,13 +68,13 @@ sdist: $(SDIST_BUILD_DONE) $(UNIT_TEST_FILES)
 
 $(SDIST_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
+	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
 
 wheel: $(WHEEL_BUILD_DONE) $(UNIT_TEST_FILES)
 
 $(WHEEL_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(OUTPUT_DIR)/README.rst $(MODULE_FILES) $(UNIT_TESTS_PASSED)
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && python3 setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
+	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
 $(OUTPUT_DIR)/README.rst: $(ROOT_DIR)/README.rst
 	$(call trace_to_console, "Copying",$@)
