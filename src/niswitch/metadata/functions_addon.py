@@ -34,7 +34,7 @@ functions_enums = {
                                                       3: { 'enum': 'ScanAdvancedOutputConfigureScanTrigger',               }, }, },
 }
 
-# TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval?
+# TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval? Issue #259
 functions_params_types = {
     'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
     'GetNextInterchangeWarning':    { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
