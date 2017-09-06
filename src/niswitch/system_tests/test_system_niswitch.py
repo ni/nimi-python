@@ -78,11 +78,8 @@ def test_method_set_path(session):
 
 
 def test_method_can_connect(session):
-    try:
-        session.can_connect('r0', 'r1')
-        assert False
-    except niswitch.Error as e:
-        pass
+    path_capability = session.can_connect('r0', 'r1')
+    assert path_capability == niswitch.PathCapability.PATH_UNSUPPORTED
 
 
 def test_method_reset_with_defaults(session):
@@ -90,13 +87,13 @@ def test_method_reset_with_defaults(session):
 
 
 def test_functions_get_relay_name(session):
-    string = session.get_relay_name(1)
-    assert string == 'kr0c0'
+    relay_name = session.get_relay_name(1)
+    assert relay_name == 'kr0c0'
 
 
 def test_functions_get_channel_name(session):
-    string = session.get_channel_name(1)
-    assert string == 'r0'
+    channel_name = session.get_channel_name(1)
+    assert channel_name == 'r0'
 
 
 def test_functions_revision_query(session):
@@ -106,45 +103,45 @@ def test_functions_revision_query(session):
 
 
 def test_functions_get_next_coercion_record(session):
-    string = session.get_next_coercion_record()
-    assert len(string) == 0
+    coercion_record = session.get_next_coercion_record()
+    assert len(coercion_record) == 0
 
 
 def test_functions_get_next_interchange_warning(session):
-    string = session.get_next_interchange_warning()
-    assert len(string) == 0
+    interchange_warning = session.get_next_interchange_warning()
+    assert len(interchange_warning) == 0
 
 
 def test_functions_self_test(session):
-    result, string = session.self_test()
-    assert result == 0
-    assert string == 'No Error'
+    self_test_result, self_test_string = session.self_test()
+    assert self_test_result == 0
+    assert self_test_string == 'No Error'
 
 
 def test_functions_get_path(session):
     channel1 = 'r0'
     channel2 = 'c0'
     session.connect(channel1, channel2)
-    string = session.get_path(channel1, channel2)
-    assert string == 'r0->c0'
+    path = session.get_path(channel1, channel2)
+    assert path == 'r0->c0'
     session.disconnect(channel1, channel2)
-    session.set_path(string)
+    session.set_path(path)
 
 
 def test_functions_error_query(session):
     with warnings.catch_warnings(record=True) as w:
         test_error_desc = '1073479940'  # Error Query not supported.
-        result, string = session.error_query()
+        error_result, error_string = session.error_query()
         assert len(w) == 1
         assert issubclass(w[0].category, niswitch.NiswitchWarning)
         assert test_error_desc in str(w[0].message)
 
 
 def test_functions_error_message(session):
-    string = session.error_message(-1074126847)
-    assert string == 'Invalid path string.'
+    message = session.error_message(-1074126847)
+    assert message == 'Invalid path string.'
 
 
 def test_functions_get_error_description(session):
-    string = session.get_error_description(0)   # expect no errors
-    assert string == ''
+    description = session.get_error_description(0)   # expect no errors
+    assert description == ''
