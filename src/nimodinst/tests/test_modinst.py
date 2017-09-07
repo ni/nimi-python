@@ -72,3 +72,12 @@ class TestSession(object):
             assert len(session) == 2
             for d in session:
                 pass
+
+    def test_get_attribute_for_loop(self):
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32int = 123
+        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = 5
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
+        with nimodinst.Session('') as session:
+            for d in session:
+                attr_int = d.chassis_number
+                assert(attr_int == 5)
