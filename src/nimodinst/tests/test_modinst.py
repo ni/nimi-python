@@ -56,14 +56,12 @@ class TestSession(object):
             try:
                 session.nonexistent_property = 5
                 assert False
-            except TypeError as e:
-                print(e)
+            except TypeError:
                 pass
             try:
-                value = session.nonexistent_property  # noqa: F841
+                session.nonexistent_property
                 assert False
-            except AttributeError as e:
-                print(e)
+            except AttributeError:
                 pass
 
     def test_iterating(self):
@@ -73,11 +71,46 @@ class TestSession(object):
             for d in session:
                 pass
 
+    def test_get_attribute_session(self):
+        val = 123
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = val
+        with nimodinst.Session('') as session:
+            attr_int = session[0].chassis_number
+            assert(attr_int == val)
+
+    def test_get_attribute_session_no_index(self):
+        val = 123
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = val
+        with nimodinst.Session('') as session:
+            try:
+                session.chassis_number
+                assert False
+            except AttributeError:
+                pass
+
+    def test_get_attribute_session_index_wrong_location(self):
+        val = 123
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = val
+        with nimodinst.Session('') as session:
+            try:
+                session.chassis_number[0]
+                assert False
+            except AttributeError:
+                pass
+
     def test_get_attribute_for_loop(self):
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32int = 123
-        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = 5
+        val = 123
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = val
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
         with nimodinst.Session('') as session:
             for d in session:
                 attr_int = d.chassis_number
-                assert(attr_int == 5)
+                assert(attr_int == val)
+
