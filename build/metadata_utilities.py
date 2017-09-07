@@ -14,7 +14,7 @@ def merge_dicts(into, outof):
             elif type(into) is list:
                 for item2 in outof[item]:
                     into[item][item2] = outof[item][item2]
-            else:                
+            else:
                 # Handle regex in addon
                 for item2 in into:
                     if re.search(item, item2):
