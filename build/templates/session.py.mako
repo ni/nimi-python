@@ -19,8 +19,8 @@ ${encoding_tag}
 
     pp = pprint.PrettyPrinter(indent=4)
 
-    functions = helper.extract_codegen_functions(functions)
     functions = helper.add_all_metadata(functions)
+    functions = helper.extract_codegen_functions(functions)
 %>\
 import ctypes
 

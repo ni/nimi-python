@@ -7,8 +7,8 @@
     c_function_prefix = config['c_function_prefix']
 
     functions = template_parameters['metadata'].functions
-    functions = helper.extract_codegen_functions(functions)
     functions = helper.add_all_metadata(functions)
+    functions = helper.extract_codegen_functions(functions)
 %>\
 ${helper.get_rst_header_snippet(module_name + '.Session methods', '=')}
 

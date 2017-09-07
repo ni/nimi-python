@@ -21,6 +21,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Removed
 * #### NI-Switch
   * #### Added
+    * Initial Release
   * #### Changed
   * #### Removed
 ## [0.1.0] - 2017-09-01
