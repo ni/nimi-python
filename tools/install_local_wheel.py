@@ -37,11 +37,6 @@ Install the wheel found in bin/<driver>/dist
 
     verbosityGroup = parser.add_argument_group("Verbosity, Logging & Debugging")
     verbosityGroup.add_argument(
-        "--exporting",
-        action="store_true", dest="exporting", default=False,
-        help="Are we building an official export? If false, don't actually interact with perforce."
-        )
-    verbosityGroup.add_argument(
         "-v", "--verbose",
         action="count", dest="verbose", default=0,
         help="Verbose output"
