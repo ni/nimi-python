@@ -74,20 +74,6 @@ class TestSession(object):
             d2 = session.next()
             assert d1 != d2
 
-    def best_get_attribute_for_loop(self):
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
-        int = 123
-        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = int
-        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
-        with nimodinst.Session('') as session:
-            for d in session:
-                attr_int = d.chassis_number
-                assert(attr_int == int)
-                from mock import call
-                calls = [call(SESSION_NUM_FOR_TEST, 0, 11, ANY)]
-                self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.assert_has_calls(calls)
-                assert self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.call_count == 1
-
     def test_get_int_attribute(self):
         self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
         int = 123
@@ -154,3 +140,20 @@ class TestSession(object):
         with nimodinst.Session('') as session:
             result = session._get_extended_error_info()
             assert result == error_string
+
+
+'''
+    def test_get_attribute_for_loop(self):
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        int = 123
+        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = int
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
+        with nimodinst.Session('') as session:
+            for d in session:
+                attr_int = d.chassis_number
+                assert(attr_int == int)
+                from mock import call
+                calls = [call(SESSION_NUM_FOR_TEST, 0, 11, ANY)]
+                self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.assert_has_calls(calls)
+                assert self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.call_count == 1
+'''
