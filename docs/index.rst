@@ -13,6 +13,7 @@ NI Modular Instruments Python Documentation
    :caption: Drivers
 
    nidmm
+   niswitch
    nimodinst
 
 Indices and tables

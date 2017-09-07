@@ -1,15 +1,6 @@
 #!/usr/bin/python
 # This file was generated
-<%
-config        = template_parameters['metadata'].config
-attributes    = config['attributes']
-functions     = config['functions']
 
-module_name = config['module_name']
-module_name_class = module_name.title()
-c_function_prefix = config['c_function_prefix']
-driver_name = config['driver_name']
-%>
 
 import platform
 import warnings
@@ -37,19 +28,19 @@ class _ErrorBase(Exception):
 
 
 class Error(_ErrorBase):
-    '''An error originating from the ${driver_name} driver'''
+    '''An error originating from the NI-SWITCH driver'''
 
     def __init__(self, code, description):
         assert (_is_error(code)), "Should not raise Error if code is not fatal."
         super(Error, self).__init__(code, description)
 
 
-class ${module_name_class}Warning(Warning):
-    '''A warning originating from the ${driver_name} driver'''
+class NiswitchWarning(Warning):
+    '''A warning originating from the NI-SWITCH driver'''
 
     def __init__(self, code, description):
         assert (_is_warning(code)), "Should not create Warning if code is not positive."
-        super(${module_name_class}Warning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
+        super(NiswitchWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
 
 
 class UnsupportedConfigurationError(Exception):
@@ -63,7 +54,7 @@ class DriverNotInstalledError(Exception):
     '''An error due to using this module without the driver runtime installed.'''
 
     def __init__(self):
-        super(DriverNotInstalledError, self).__init__('The ${driver_name} runtime is not installed. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
+        super(DriverNotInstalledError, self).__init__('The NI-SWITCH runtime is not installed. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
 
 
 def handle_error(session, code, ignore_warnings):
@@ -77,7 +68,7 @@ def handle_error(session, code, ignore_warnings):
     if (_is_error(code)):
         raise Error(code, description)
     if (_is_warning(code)):
-        warnings.warn(${module_name_class}Warning(code, description))
+        warnings.warn(NiswitchWarning(code, description))
 
 
-warnings.filterwarnings("always", category=${module_name_class}Warning)
+warnings.filterwarnings("always", category=NiswitchWarning)

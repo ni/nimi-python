@@ -19,8 +19,8 @@ ${encoding_tag}
 
     pp = pprint.PrettyPrinter(indent=4)
 
-    functions = helper.extract_codegen_functions(functions)
     functions = helper.add_all_metadata(functions)
+    functions = helper.extract_codegen_functions(functions)
 %>\
 import ctypes
 
@@ -159,9 +159,6 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
     def initiate(self):
         return ${context_name.title()}(self)
 % endfor
-
-    def __del__(self):
-        pass
 
     def __enter__(self):
         return self

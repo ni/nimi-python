@@ -9,12 +9,11 @@ define trace_to_console
 	@echo "$(shell printf '%15s' $1): $(subst $(CURRENT_DIR)/,,$2)"
 endef
 
-# Executes a command, then logs it to $(COMMAND_LOG_BATCH) and $(COMMAND_LOG_SH).
+# Executes a command, then logs it to $(COMMAND_LOG).
 # $1 is the command.
 define log_command
 	$1
-	@echo '$1' >> $(COMMAND_LOG_BATCH)
-	@echo '$1' >> $(COMMAND_LOG_SH)
+	@echo '$1' >> $(COMMAND_LOG)
 endef
 
 # Helper function for running a command with a tracking file 
