@@ -2,6 +2,12 @@
 
 import re
 def merge_dicts(into, outof):
+    '''Recursively merge one dictionary into another
+
+    Args:
+        into (dict) - Dictionary that will be a combination of into and outof when complete
+        outof (dict) - Dictionary that should be merged into into
+    '''
     for item in sorted(outof):
         if type(outof[item]) is dict:
             if item in into and type(into[item] is list):
