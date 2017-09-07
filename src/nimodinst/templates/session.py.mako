@@ -70,15 +70,6 @@ class Session(object):
     _is_frozen = False
 
     def __init__(self, driver):
-% for attribute in helper.sorted_attrs(attributes):
-        self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(self, ${attribute})
-%   if 'documentation' in attributes[attribute]:
-        '''
-        ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
-        '''
-%   endif
-% endfor
-
         self.handle = 0
         self.item_count = 0
         self.current_item = 0
