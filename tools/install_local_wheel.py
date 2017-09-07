@@ -64,7 +64,7 @@ Install the wheel found in bin/<driver>/dist
 
     rel_path = os.path.join('bin', args.driver, 'dist')
     wheel = None
-    for file in os.listdir("rel_path"):
+    for file in os.listdir(rel_path):
         if file.endswith(".whl"):
             if wheel is not None:
                 logging.error('More than one wheel has been found: {0} and {1}'.format(wheel, os.path.join(rel_path, file)))
