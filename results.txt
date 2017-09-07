@@ -1,156 +1,0 @@
-codegen installed: Mako==1.0.7,MarkupSafe==1.0
-codegen runtests: PYTHONHASHSEED='235'
-codegen runtests: commands[0] | make
-
-Making nifake
-
-Making nidmm
-
-Making niswitch
-
-Making nimodinst
-     Generating: bin/nimodinst/nimodinst/session.py
-        Copying: bin/nimodinst/nimodinst/tests/test_modinst.py
-       Updating: generated/nimodinst/
- Creating wheel: bin/nimodinst/dist
- Creating sdist: bin/nimodinst/dist
-py27-test create: C:\Users\Administrator\Desktop\Git\nimi-python\.tox\py27-test
-ERROR: InterpreterNotFound: python2.7
-py34-test create: C:\Users\Administrator\Desktop\Git\nimi-python\.tox\py34-test
-ERROR: InterpreterNotFound: python3.4
-py35-test create: C:\Users\Administrator\Desktop\Git\nimi-python\.tox\py35-test
-ERROR: InterpreterNotFound: python3.5
-py36-test installed: colorama==0.3.9,coverage==4.4.1,mock==2.0.0,pbr==3.1.1,py==1.4.34,pytest==3.2.1,six==1.10.0
-py36-test runtests: PYTHONHASHSEED='235'
-py36-test runtests: commands[0] | coverage run --source nifake --omit *\library* -m py.test bin/nifake/nifake
-============================= test session starts =============================
-platform win32 -- Python 3.6.2, pytest-3.2.1, py-1.4.34, pluggy-0.4.0 -- c:\users\administrator\desktop\git\nimi-python\.tox\py36-test\scripts\python.exe
-cachedir: .cache
-rootdir: C:\Users\Administrator\Desktop\Git\nimi-python, inifile: tox.ini
-collecting ... collected 26 items
-
-bin/nifake/nifake/tests/test_session.py::TestSession::test_init_with_options PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_close PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_session_context_manager PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_get_error_description_get_error PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_simple_function PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_method_with_error PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_method_with_warning PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_ivi_dance_with_error PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_get_string_attribute_private PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_get_string_attribute PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_get_vi_real64_attribute_private PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_get_vi_real64_attribute PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_get_a_number PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_invalid_attribute_value PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_error_on_init PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_invalid_method_call_not_enough_parameters PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_invalid_method_call_wrong_type PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_library_singleton PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_one_input_function PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_two_input_function PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_get_enum_value PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_get_a_boolean PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_set_enum_attribute PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_set_enum_attribute_bad_type PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_acquisition_context_manager PASSED
-bin/nifake/nifake/tests/test_session.py::TestSession::test_cannot_add_properties_to_session PASSED
-
-========================== 26 passed in 1.24 seconds ==========================
-py36-test runtests: commands[1] | coverage run --append --source nimodinst --omit *\library* -m py.test bin/nimodinst/nimodinst
-============================= test session starts =============================
-platform win32 -- Python 3.6.2, pytest-3.2.1, py-1.4.34, pluggy-0.4.0 -- c:\users\administrator\desktop\git\nimi-python\.tox\py36-test\scripts\python.exe
-cachedir: .cache
-rootdir: C:\Users\Administrator\Desktop\Git\nimi-python, inifile: tox.ini
-collecting ... collected 9 items
-
-bin/nimodinst/nimodinst/tests/test_modinst.py::TestSession::test_open PASSED
-bin/nimodinst/nimodinst/tests/test_modinst.py::TestSession::test_close PASSED
-bin/nimodinst/nimodinst/tests/test_modinst.py::TestSession::test_context_manager PASSED
-bin/nimodinst/nimodinst/tests/test_modinst.py::TestSession::test_cannot_add_properties_to_session PASSED
-bin/nimodinst/nimodinst/tests/test_modinst.py::TestSession::test_iterating_for PASSED
-bin/nimodinst/nimodinst/tests/test_modinst.py::TestSession::test_iterating_next PASSED
-bin/nimodinst/nimodinst/tests/test_modinst.py::TestSession::test_get_int_attribute PASSED
-bin/nimodinst/nimodinst/tests/test_modinst.py::TestSession::test_get_string_attribute PASSED
-bin/nimodinst/nimodinst/tests/test_modinst.py::TestSession::test_int_attribute_error_on_non_existant_device FAILED
-
-================================== FAILURES ===================================
-_________ TestSession.test_int_attribute_error_on_non_existant_device _________
-
-self = <test_modinst.TestSession object at 0x0334DCF0>
-
-    def test_int_attribute_error_on_non_existant_device(self):
-        error_code = -1234
-        error_string = 'Error'
-        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
-        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = -1
-        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['return'] = error_code
-    
-        self.patched_library.niModInst_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
-        self.side_effects_helper['GetExtendedErrorInfo']['return'] = error_code
-        self.side_effects_helper['GetExtendedErrorInfo']['errorInfo'] = error_string
-        with nimodinst.Session('') as session:
-            device = len(session) + 1
-            try:
-                session.chassis_number[device]
-                session._get_installed_device_attribute_vi_int32(SESSION_NUM_FOR_TEST, 2, 11)
-                from mock import call
-                calls = [call(SESSION_NUM_FOR_TEST, 2, 11, ANY)]
-                self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.assert_has_calls(calls)
-                assert self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.call_count == 2
->               assert False
-E               assert False
-
-bin\nimodinst\nimodinst\tests\test_modinst.py:144: AssertionError
-===================== 1 failed, 8 passed in 0.29 seconds ======================
-ERROR: InvocationError: 'C:\\Users\\Administrator\\Desktop\\Git\\nimi-python\\.tox\\py36-test\\Scripts\\coverage.EXE run --append --source nimodinst --omit *\\library* -m py.test bin/nimodinst/nimodinst'
-pypy-test create: C:\Users\Administrator\Desktop\Git\nimi-python\.tox\pypy-test
-ERROR: InterpreterNotFound: pypy
-pypy3-test create: C:\Users\Administrator\Desktop\Git\nimi-python\.tox\pypy3-test
-ERROR: InterpreterNotFound: pypy3
-flake8 installed: flake8==3.4.1,hacking==0.13.0,mccabe==0.6.1,pbr==3.1.1,pep8==1.5.7,pep8-naming==0.4.1,pycodestyle==2.3.1,pyflakes==1.5.0,six==1.10.0
-flake8 runtests: PYTHONHASHSEED='235'
-flake8 runtests: commands[0] | flake8
-docs installed: alabaster==0.7.10,Babel==2.5.0,certifi==2017.7.27.1,chardet==3.0.4,colorama==0.3.9,docutils==0.14,idna==2.6,imagesize==0.7.1,Jinja2==2.9.6,MarkupSafe==1.0,Pygments==2.2.0,pytz==2017.2,requests==2.18.4,six==1.10.0,snowballstemmer==1.2.1,Sphinx==1.6.3,sphinx-rtd-theme==0.2.4,sphinxcontrib-websupport==1.0.1,urllib3==1.22
-docs runtests: PYTHONHASHSEED='235'
-docs runtests: commands[0] | sphinx-build -b html -d C:\Users\Administrator\Desktop\Git\nimi-python\.tox\docs\tmp/doctrees . ../bin/docs/html
-Running Sphinx v1.6.3
-loading pickled environment... not yet created
-loading intersphinx inventory from https://docs.python.org/objects.inv...
-intersphinx inventory has moved: https://docs.python.org/objects.inv -> https://docs.python.org/2/objects.inv
-building [mo]: targets for 0 po files that are out of date
-building [html]: targets for 19 source files that are out of date
-updating environment: 19 added, 0 changed, 0 removed
-reading sources... [  5%] index                                                reading sources... [ 10%] nidmm                                                reading sources... [ 15%] nidmm/attributes                                     reading sources... [ 21%] nidmm/enums                                          reading sources... [ 26%] nidmm/functions                                      reading sources... [ 31%] nidmm/session                                        reading sources... [ 36%] nifake/attributes                                    reading sources... [ 42%] nifake/enums                                         reading sources... [ 47%] nifake/functions                                     reading sources... [ 52%] nifake/session                                       reading sources... [ 57%] nimodinst                                            reading sources... [ 63%] nimodinst/attributes                                 reading sources... [ 68%] nimodinst/functions                                  reading sources... [ 73%] nimodinst/session                                    reading sources... [ 78%] niswitch                                             reading sources... [ 84%] niswitch/attributes                                  reading sources... [ 89%] niswitch/enums                                       reading sources... [ 94%] niswitch/functions                                   reading sources... [100%] niswitch/session                                     
-C:\Users\Administrator\Desktop\Git\nimi-python\docs\niswitch\functions.rst:877: WARNING: duplicate object description of niswitch.is_debounced, other instance in C:\Users\Administrator\Desktop\Git\nimi-python\docs\niswitch\attributes.rst, use :noindex: for one of them
-C:\Users\Administrator\Desktop\Git\nimi-python\docs\niswitch\functions.rst:894: WARNING: duplicate object description of niswitch.is_scanning, other instance in C:\Users\Administrator\Desktop\Git\nimi-python\docs\niswitch\attributes.rst, use :noindex: for one of them
-looking for now-outdated files... none found
-pickling environment... done
-checking consistency... C:\Users\Administrator\Desktop\Git\nimi-python\docs\nifake\attributes.rst: WARNING: document isn't included in any toctree
-C:\Users\Administrator\Desktop\Git\nimi-python\docs\nifake\enums.rst: WARNING: document isn't included in any toctree
-C:\Users\Administrator\Desktop\Git\nimi-python\docs\nifake\functions.rst: WARNING: document isn't included in any toctree
-C:\Users\Administrator\Desktop\Git\nimi-python\docs\nifake\session.rst: WARNING: document isn't included in any toctree
-done
-preparing documents... done
-writing output... [  5%] index                                                 writing output... [ 10%] nidmm                                                 writing output... [ 15%] nidmm/attributes                                      writing output... [ 21%] nidmm/enums                                           writing output... [ 26%] nidmm/functions                                       writing output... [ 31%] nidmm/session                                         writing output... [ 36%] nifake/attributes                                     writing output... [ 42%] nifake/enums                                          writing output... [ 47%] nifake/functions                                      writing output... [ 52%] nifake/session                                        writing output... [ 57%] nimodinst                                             writing output... [ 63%] nimodinst/attributes                                  writing output... [ 68%] nimodinst/functions                                   writing output... [ 73%] nimodinst/session                                     writing output... [ 78%] niswitch                                              writing output... [ 84%] niswitch/attributes                                   writing output... [ 89%] niswitch/enums                                        writing output... [ 94%] niswitch/functions                                    writing output... [100%] niswitch/session                                      
-../README.rst:: WARNING: Could not obtain image size. :scale: option is ignored.
-../README.rst:: WARNING: Could not obtain image size. :scale: option is ignored.
-generating indices... genindex py-modindex
-highlighting module code... [ 14%] nidmm.enums                                 highlighting module code... [ 28%] nidmm.session                               highlighting module code... [ 42%] nifake.enums                                highlighting module code... [ 57%] nifake.session                              highlighting module code... [ 71%] nimodinst.session                           highlighting module code... [ 85%] niswitch.enums                              highlighting module code... [100%] niswitch.session                            
-writing additional pages... search
-copying static files... done
-copying extra files... done
-dumping search index in English (code: en) ... done
-dumping object inventory... done
-build succeeded, 8 warnings.
-___________________________________ summary ___________________________________
-  codegen: commands succeeded
-SKIPPED:  py27-test: InterpreterNotFound: python2.7
-SKIPPED:  py34-test: InterpreterNotFound: python3.4
-SKIPPED:  py35-test: InterpreterNotFound: python3.5
-ERROR:   py36-test: commands failed
-SKIPPED:  pypy-test: InterpreterNotFound: pypy
-SKIPPED:  pypy3-test: InterpreterNotFound: pypy3
-  flake8: commands succeeded
-  docs: commands succeeded
