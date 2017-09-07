@@ -51,6 +51,7 @@ class AttributeViString(object):
 class Device(object):
 
     def __init__(self, owner, index):
+        self._index = index
 % for attribute in helper.sorted_attrs(attributes):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(owner, ${attribute}, index=index)
 %   if 'documentation' in attributes[attribute]:
@@ -59,6 +60,9 @@ class Device(object):
         '''
 %   endif
 % endfor
+
+    def __getattribute__(self, name):
+        return object.__getattribute__(self, name).__getitem__(None)
 
 
 class Session(object):
@@ -80,6 +84,9 @@ class Session(object):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
+
+    def __getitem__(self, index):
+        return Device(self, index)
 
     def __enter__(self):
         return self
