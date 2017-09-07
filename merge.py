@@ -1218,14 +1218,12 @@ def merge_dicts(into, outof):
     '''
     for item in sorted(outof):
         if type(outof[item]) is dict:
-            if item in into and type(into[item] is list):
-                merge_dicts(into[item], outof[item])
-            elif item in into:
+            if item in into:
                 merge_dicts(into[item], outof[item])
             elif type(into) is list:
                 for item2 in outof[item]:
                     into[item][item2] = outof[item][item2]
-            else:
+            else:                
                 # Handle regex in addon
                 for item2 in into:
                     if re.search(item, item2):
@@ -1286,6 +1284,18 @@ def test_merge_6():
     a        = {'a':1, 'b':{'b1':5, 'b2':6}, 'c':['x', 'y', 'z']}
     b        = {'b':{'b3':7, 'b1':8}, 'c':{0:'r', 1:'s', 2:'t'}}
     expected = {'a':1, 'b':{'b1':8, 'b2':6, 'b3':7}, 'c':['r', 's', 't']}
+    do_the_test(a,b, expected)
+
+def test_merge_6():
+    a        = {'a':1, 'b':{'b1':2, 'b2':3}, 'c':['x', 'y', 'z']}
+    b        = {'b':{'b3':7, 'b1':8}, 'c':{0:'r', 1:'s', 2:'t'}}
+    expected = {'a':1, 'b':{'b1':8, 'b2':3, 'b3':7}, 'c':['r', 's', 't']}
+    do_the_test(a,b, expected)
+
+def test_merge_7():
+    a        = {'aaa':{}, 'aaaa':{'x':98}, 'aaaaa':{}, 'bbb':{'bbb1':2, 'bbb2':3}, 'ccc':['x', 'y', 'z']}
+    b        = {'a+':{'z':99}}
+    expected = {'aaa':{'z':99}, 'aaaa':{'x':98, 'z':99}, 'aaaaa':{'z':99}, 'bbb':{'bbb1':2, 'bbb2':3}, 'ccc':['x', 'y', 'z']}
     do_the_test(a,b, expected)
 
 merge_dicts(functions, functions_codegen_method)
