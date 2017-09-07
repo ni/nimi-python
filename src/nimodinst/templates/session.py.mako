@@ -31,9 +31,6 @@ class AttributeViInt32(object):
         i = self._index if self._index is not None else index
         return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, i, self._attribute_id)
 
-    def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id), format_spec)
-
 
 class AttributeViString(object):
 
@@ -45,9 +42,6 @@ class AttributeViString(object):
     def __getitem__(self, index):
         i = self._index if self._index is not None else index
         return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, i, self._attribute_id)
-
-    def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id), format_spec)
 
 
 class Device(object):
