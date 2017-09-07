@@ -146,7 +146,7 @@ class TestSession(object):
         double = 1.5
         self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = double
         with nifake.Session('dev1') as session:
-            attr_double = session._get_attribute_vi_real64('',123)
+            attr_double = session._get_attribute_vi_real64('', 123)
             assert(attr_double == double)
             from mock import call
             calls = [call(SESSION_NUM_FOR_TEST, b"", 123, ANY)]

@@ -92,7 +92,7 @@ class TestSession(object):
                 calls = [call(SESSION_NUM_FOR_TEST, 0, 11, ANY)]
                 self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.assert_has_calls(calls)
                 assert self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.call_count == 1
-            
+
     def test_get_int_attribute_private(self):
         self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
         int = 123
@@ -157,7 +157,7 @@ class TestSession(object):
         with nimodinst.Session('') as session:
             device = len(session) + 1
             try:
-                #session.chassis_number[device]
+                session.chassis_number[device]
                 session._get_installed_device_attribute_vi_int32(SESSION_NUM_FOR_TEST, 2, 11)
                 from mock import call
                 calls = [call(SESSION_NUM_FOR_TEST, 2, 11, ANY)]
