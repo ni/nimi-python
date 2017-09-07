@@ -18,9 +18,6 @@ class AttributeViInt32(object):
         i = self._index if self._index is not None else index
         return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, i, self._attribute_id)
 
-    def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id), format_spec)
-
 
 class AttributeViString(object):
 
@@ -32,9 +29,6 @@ class AttributeViString(object):
     def __getitem__(self, index):
         i = self._index if self._index is not None else index
         return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, i, self._attribute_id)
-
-    def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id), format_spec)
 
 
 class Device(object):
@@ -198,7 +192,6 @@ class Session(object):
     def _close_installed_devices_session(self, handle):
         error_code = self.library.niModInst_CloseInstalledDevicesSession(self.handle)
         errors.handle_error(self, error_code, ignore_warnings=False)
-        print(error_code)
         return
 
     def _get_extended_error_info(self):
@@ -216,7 +209,6 @@ class Session(object):
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niModInst_GetInstalledDeviceAttributeViInt32(self.handle, index, attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False)
-        print(error_code)
         return python_types.ViInt32(attribute_value_ctype.value)
 
     def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id):
@@ -235,6 +227,5 @@ class Session(object):
         device_count_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niModInst_OpenInstalledDevicesSession(driver.encode('ascii'), ctypes.pointer(handle_ctype), ctypes.pointer(device_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False)
-        print(error_code)
         return python_types.ViSession(handle_ctype.value), python_types.ViInt32(device_count_ctype.value)
 

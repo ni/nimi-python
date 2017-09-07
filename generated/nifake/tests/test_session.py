@@ -141,6 +141,30 @@ class TestSession(object):
             self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViString.call_count == 2
 
+    def test_get_vi_real64_attribute_private(self):
+        self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
+        double = 1.5
+        self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = double
+        with nifake.Session('dev1') as session:
+            attr_double = session._get_attribute_vi_real64('', 123)
+            assert(attr_double == double)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, b"", 123, ANY)]
+            self.patched_library.niFake_GetAttributeViReal64.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAttributeViReal64.call_count == 1
+
+    def test_get_vi_real64_attribute(self):
+        self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
+        double = 1.5
+        self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = double
+        with nifake.Session('dev1') as session:
+            attr_double = session.read_write_double
+            assert(attr_double == double)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, b"", 1000001, ANY)]
+            self.patched_library.niFake_GetAttributeViReal64.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAttributeViReal64.call_count == 1
+
     def test_get_a_number(self):
         test_number = 16
         self.patched_library.niFake_GetANumber.side_effect = self.side_effects_helper.niFake_GetANumber
