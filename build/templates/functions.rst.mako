@@ -10,8 +10,6 @@
     functions = helper.add_all_metadata(functions)
     functions = helper.extract_codegen_functions(functions)
 %>\
-${helper.get_rst_header_snippet(module_name + '.Session methods', '=')}
-
 .. py:currentmodule:: ${module_name}
 
 % for fname in sorted(functions):

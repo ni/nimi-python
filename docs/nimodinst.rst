@@ -10,8 +10,8 @@ nimodinst module
    :maxdepth: 3
    :caption: API References:
 
-   nimodinst/session
-   nimodinst/functions
-   nimodinst/attributes
+   nimodinst/session_link
+   nimodinst/functions_link
+   nimodinst/attributes_link
 
 

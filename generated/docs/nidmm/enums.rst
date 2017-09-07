@@ -1,6 +1,3 @@
-nidmm enums
-===========
-
 Enums used in NI-DMM
 
 .. py:currentmodule:: nidmm

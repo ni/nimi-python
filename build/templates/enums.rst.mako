@@ -6,8 +6,6 @@
     driver_name = config['driver_name']
     enums = config['enums']
 %>\
-${helper.get_rst_header_snippet(module_name + ' enums', '=')}
-
 Enums used in ${driver_name}
 
 .. py:currentmodule:: ${module_name}

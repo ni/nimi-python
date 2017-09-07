@@ -7,8 +7,6 @@
     c_function_prefix = config['c_function_prefix']
     attributes = config['attributes']
 %>\
-${helper.get_rst_header_snippet(module_name + '.Session properties', '=')}
-
 .. py:currentmodule:: ${module_name}
 
 % for attr in helper.sorted_attrs(attributes):

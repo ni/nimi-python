@@ -22,25 +22,25 @@ $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 $(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
-# Need to signal the top level makefile to run tests again
+   # Need to signal the top level makefile to run tests again
 	$(_hide_cmds)$(call trigger_tests)
 
 $(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
-# Need to signal the top level makefile to run tests again
+   # Need to signal the top level makefile to run tests again
 	$(_hide_cmds)$(call trigger_tests)
 
 $(MODULE_DIR)/%.py: %.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)cp $< $@
-# Need to signal the top level makefile to run tests again
+   # Need to signal the top level makefile to run tests again
 	$(_hide_cmds)$(call trigger_tests)
 
 $(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
-# Need to signal the top level makefile to run tests again
+   # Need to signal the top level makefile to run tests again
 	$(_hide_cmds)$(call trigger_tests)
 
 UNIT_TEST_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/tests/*.py)
@@ -49,7 +49,7 @@ UNIT_TEST_FILES := $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_C
 $(UNIT_TEST_DIR)/%.py: $(DRIVER_DIR)/tests/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
-# Need to signal the top level makefile to run tests again
+   # Need to signal the top level makefile to run tests again
 	$(_hide_cmds)$(call trigger_tests)
 
 clean:
@@ -102,7 +102,7 @@ update_system_tests: $(SYSTEM_TESTS_FILES)
 $(SYSTEM_TEST_DIR)/%.py: $(DRIVER_DIR)/system_tests/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
-# Need to signal the top level makefile to run tests again
+   # Need to signal the top level makefile to run tests again
 	$(_hide_cmds)$(call trigger_tests)
 
 ifneq (,$(wildcard $(DRIVER_DIR)/examples))
@@ -114,7 +114,7 @@ update_examples: $(EXAMPLE_FILES)
 $(EXAMPLES_DIR)/%.py: $(DRIVER_DIR)/examples/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)$(call log_command,cp $< $@)
-# Need to signal the top level makefile to run tests again
+   # Need to signal the top level makefile to run tests again
 	$(_hide_cmds)$(call trigger_tests)
 
 

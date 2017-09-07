@@ -1,6 +1,3 @@
-nifake.Session properties
-=========================
-
 .. py:currentmodule:: nifake
 
 .. py:attribute:: read_write_bool

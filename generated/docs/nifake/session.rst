@@ -1,6 +1,3 @@
-nifake.Session
-==============
-
 .. py:module:: nifake
 
 .. py:class:: Session

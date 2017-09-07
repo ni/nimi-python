@@ -1,0 +1,3 @@
+.. py:currentmodule:: nimodinst
+
+

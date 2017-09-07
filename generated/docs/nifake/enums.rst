@@ -1,6 +1,3 @@
-nifake enums
-============
-
 Enums used in NI-FAKE
 
 .. py:currentmodule:: nifake

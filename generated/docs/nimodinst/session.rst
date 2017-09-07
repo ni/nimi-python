@@ -1,6 +1,3 @@
-nimodinst.Session
-=================
-
 .. py:module:: nimodinst
 
 .. py:class:: Session

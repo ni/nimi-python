@@ -1,6 +1,3 @@
-nidmm.Session methods
-=====================
-
 .. py:currentmodule:: nidmm
 
 .. function:: clear_interchange_warnings()

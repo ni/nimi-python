@@ -1,6 +1,3 @@
-nifake.Session methods
-======================
-
 .. py:currentmodule:: nifake
 
 .. function:: get_a_boolean(a_boolean)

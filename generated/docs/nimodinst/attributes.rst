@@ -1,6 +1,3 @@
-nimodinst.Session properties
-============================
-
 .. py:currentmodule:: nimodinst
 
 .. py:attribute:: bus_number

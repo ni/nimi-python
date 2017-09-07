@@ -1,6 +1,3 @@
-nidmm.Session
-=============
-
 .. py:module:: nidmm
 
 .. py:class:: Session
