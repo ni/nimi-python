@@ -492,7 +492,7 @@ def replace_func_python_name(f_match):
     '''
     fname = "Unknown"
     if f_match:
-        fname = f_match.group(1).replace('.', '').replace(',', '')
+        fname = f_match.group(1).replace('.', '').replace(',', '').replace('\\', '')
         fname = config['functions'][fname]['python_name']
     else:
         print('Unknown function name: {0}'.format(f_match.group(1)))
