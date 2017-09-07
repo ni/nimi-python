@@ -916,9 +916,6 @@ class Session(object):
     def initiate(self):
         return Acquisition(self)
 
-    def __del__(self):
-        pass
-
     def __enter__(self):
         return self
 
