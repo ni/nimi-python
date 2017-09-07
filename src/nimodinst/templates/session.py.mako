@@ -22,7 +22,7 @@ from ${module_name} import python_types
 
 class AttributeViInt32(object):
 
-    def __init__(self, owner, attribute_id, index=None):
+    def __init__(self, owner, attribute_id, index):
         self._owner = owner
         self._index = index
         self._attribute_id = attribute_id
@@ -37,7 +37,7 @@ class AttributeViInt32(object):
 
 class AttributeViString(object):
 
-    def __init__(self, owner, attribute_id, index=None):
+    def __init__(self, owner, attribute_id, index):
         self._owner = owner
         self._index = index
         self._attribute_id = attribute_id
