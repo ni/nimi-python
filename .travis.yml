@@ -20,6 +20,6 @@ script:
 
 after_success:
   - cp bin/nifake/.coverage .
-  - coveralls
+  - coveralls --include */nifake/*,*/nimodinst/session.py --omit */library*
 
 
