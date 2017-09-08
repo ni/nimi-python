@@ -10,7 +10,6 @@
     c_function_prefix = config['c_function_prefix']
 
     functions = helper.extract_codegen_functions(functions)
-    functions = helper.add_all_metadata(functions)
 %>\
 
 import ctypes
