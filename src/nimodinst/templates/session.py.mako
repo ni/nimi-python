@@ -22,31 +22,33 @@ from ${module_name} import python_types
 
 class AttributeViInt32(object):
 
-    def __init__(self, owner, attribute_id, index=None):
+    def __init__(self, owner, attribute_id, index):
         self._owner = owner
         self._index = index
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        i = self._index if self._index is not None else index
-        return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, i, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id)
 
 
 class AttributeViString(object):
 
-    def __init__(self, owner, attribute_id, index=None):
+    def __init__(self, owner, attribute_id, index):
         self._owner = owner
         self._index = index
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        i = self._index if self._index is not None else index
-        return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, i, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id)
 
 
 class Device(object):
 
+    # This is needed during __init__. Without it, __setattr__ raises an exception
+    _is_frozen = False
+
     def __init__(self, owner, index):
+        self._index = index
 % for attribute in helper.sorted_attrs(attributes):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(owner, ${attribute}, index=index)
 %   if 'documentation' in attributes[attribute]:
@@ -55,6 +57,18 @@ class Device(object):
         '''
 %   endif
 % endfor
+        self._is_frozen = True
+
+    def __getattribute__(self, name):
+        if name in ['_is_frozen', 'index']:
+            return object.__getattribute__(self, name)
+        else:
+            return object.__getattribute__(self, name).__getitem__(None)
+
+    def __setattr__(self, name, value):
+        if self._is_frozen and name not in ['_is_frozen', 'index']:
+            raise TypeError("%s is not writable" % name)
+        object.__setattr__(self, name, value)
 
 
 class Session(object):
@@ -64,15 +78,6 @@ class Session(object):
     _is_frozen = False
 
     def __init__(self, driver):
-% for attribute in helper.sorted_attrs(attributes):
-        self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(self, ${attribute})
-%   if 'documentation' in attributes[attribute]:
-        '''
-        ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
-        '''
-%   endif
-% endfor
-
         self.handle = 0
         self.item_count = 0
         self.current_item = 0
@@ -85,6 +90,9 @@ class Session(object):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
+
+    def __getitem__(self, index):
+        return Device(self, index)
 
     def __enter__(self):
         return self

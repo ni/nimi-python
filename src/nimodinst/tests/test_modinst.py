@@ -1,4 +1,4 @@
-
+import ctypes
 import mock_helper
 import nimodinst
 import warnings
@@ -25,9 +25,30 @@ class TestSession(object):
         self.side_effects_helper['OpenInstalledDevicesSession']['handle'] = SESSION_NUM_FOR_TEST
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
 
+        self.iteration_device_looping = 0
+        self.num_int_devices_looping = 3
+        self.int_vals_device_looping = [123, 456, 789]
+        self.num_string_devices_looping = 4
+        self.string_vals_device_looping = ["Life", "liberty", "and", "happiness"]
+
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
         self.patched_library_patcher.stop()
+
+    # Helper function for mocking multiple devices
+    def niModInst_GetInstalledDeviceAttributeViString_looping(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
+        if attribute_value_buffer_size == 0:
+            return (len(self.string_vals_device_looping[self.iteration_device_looping]))
+        t = nimodinst.ctypes_types.ViString_ctype(self.string_vals_device_looping[self.iteration_device_looping].encode('ascii'))
+        attribute_value.value = ctypes.cast(t, nimodinst.ctypes_types.ViString_ctype).value
+        self.iteration_device_looping += 1
+        return 0
+
+    # Helper function for mocking multiple devices
+    def niModInst_GetInstalledDeviceAttributeViInt32_looping(self, handle, index, attribute_id, attribute_value):  # noqa: N802
+        attribute_value.contents.value = self.int_vals_device_looping[self.iteration_device_looping]
+        self.iteration_device_looping += 1
+        return 0
 
     def test_open(self):
         self.patched_library.niModInst_CloseInstalledDevicesSession.side_effect = self.disallow_close
@@ -52,11 +73,48 @@ class TestSession(object):
                 session.nonexistent_property = 5
                 assert False
             except TypeError as e:
+                assert str(e).find(' is a frozen class') != -1
                 pass
             try:
-                value = session.nonexistent_property  # noqa: F841
+                session.nonexistent_property
                 assert False
             except AttributeError as e:
+                assert str(e) == "'Session' object has no attribute 'nonexistent_property'"
+                pass
+
+    def test_cannot_add_properties_to_device(self):
+        with nimodinst.Session('') as session:
+            try:
+                session[0].nonexistent_property = 5
+                assert False
+            except TypeError as e:
+                assert str(e) == 'nonexistent_property is not writable'
+                pass
+            try:
+                session[0].nonexistent_property
+                assert False
+            except AttributeError as e:
+                assert str(e) == "'Device' object has no attribute 'nonexistent_property'"
+                pass
+
+    def test_vi_int32_attribute_read_only(self):
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
+        with nimodinst.Session('') as session:
+            try:
+                session[0].chassis_number = 5
+                assert False
+            except TypeError as e:
+                assert str(e) == 'chassis_number is not writable'
+                pass
+
+    def test_vi_string_attribute_read_only(self):
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
+        with nimodinst.Session('') as session:
+            try:
+                session[0].device_name = "Not Possible"
+                assert False
+            except TypeError as e:
+                assert str(e) == 'device_name is not writable'
                 pass
 
     def test_iterating_for(self):
@@ -74,34 +132,6 @@ class TestSession(object):
             d2 = session.next()
             assert d1 != d2
 
-    def test_get_int_attribute(self):
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
-        int = 123
-        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = int
-        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
-        with nimodinst.Session('') as session:
-            attr_int = session.chassis_number[0]
-            attr_int = session._get_installed_device_attribute_vi_int32(SESSION_NUM_FOR_TEST, 0, 11)
-            assert(attr_int == int)
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, 0, 11, ANY), call(SESSION_NUM_FOR_TEST, 0, 11, ANY)]
-            self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.assert_has_calls(calls)
-            assert self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.call_count == 2
-
-    def test_get_string_attribute(self):
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViString
-        string = 'Testing is fun?'
-        self.side_effects_helper['GetInstalledDeviceAttributeViString']['attributeValue'] = string
-        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
-        with nimodinst.Session('') as session:
-            attr_string = session.device_model[0]
-            attr_string = session._get_installed_device_attribute_vi_string(SESSION_NUM_FOR_TEST, 0, 1)
-            assert(attr_string == string)
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, 0, 1, 0, None), call(SESSION_NUM_FOR_TEST, 0, 1, 15, ANY), call(SESSION_NUM_FOR_TEST, 0, 1, 0, None), call(SESSION_NUM_FOR_TEST, 0, 1, 15, ANY)]
-            self.patched_library.niModInst_GetInstalledDeviceAttributeViString.assert_has_calls(calls)
-            assert self.patched_library.niModInst_GetInstalledDeviceAttributeViString.call_count == 4
-
     def test_int_attribute_error(self):
         error_code = -1234
         error_string = 'Error'
@@ -112,7 +142,7 @@ class TestSession(object):
         self.side_effects_helper['GetExtendedErrorInfo']['errorInfo'] = error_string
         with nimodinst.Session('') as session:
             try:
-                session.chassis_number[0]
+                session[0].chassis_number
                 assert False
             except nimodinst.Error as e:
                 assert e.code == error_code
@@ -128,7 +158,7 @@ class TestSession(object):
         self.side_effects_helper['GetExtendedErrorInfo']['errorInfo'] = error_string
         with nimodinst.Session('') as session:
             with warnings.catch_warnings(record=True) as w:
-                session.chassis_number[0]
+                session[0].chassis_number
                 assert len(w) == 1
                 assert issubclass(w[0].category, nimodinst.NimodinstWarning)
                 assert error_string in str(w[0].message)
@@ -141,19 +171,69 @@ class TestSession(object):
             result = session._get_extended_error_info()
             assert result == error_string
 
-
-'''
-    def test_get_attribute_for_loop(self):
+    def test_get_attribute_session(self):
+        val = 123
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
         self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
-        int = 123
-        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = int
+        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = val
+        with nimodinst.Session('') as session:
+            attr_int = session[0].chassis_number
+            assert(attr_int == val)
+
+    def test_get_attribute_vi_int32_for_loop_index(self):
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.niModInst_GetInstalledDeviceAttributeViInt32_looping
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_int_devices_looping
+        index = 0
+        with nimodinst.Session('') as session:
+            attr_int = session[index].chassis_number
+            index += 1
+            assert(attr_int == self.int_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
+
+    def test_get_attribute_vi_string_for_loop_index(self):
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.niModInst_GetInstalledDeviceAttributeViString_looping
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_string_devices_looping
+        index = 0
+        with nimodinst.Session('') as session:
+            attr_int = session[index].device_name
+            index += 1
+            assert(attr_int == self.string_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
+
+    def test_get_attribute_session_no_index(self):
+        val = 123
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = val
+        with nimodinst.Session('') as session:
+            try:
+                session.chassis_number
+                assert False
+            except AttributeError as e:
+                assert str(e) == "'Session' object has no attribute 'chassis_number'"
+                pass
+
+    def test_get_attribute_for_loop(self):
+        val = 123
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
+        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = val
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
         with nimodinst.Session('') as session:
             for d in session:
                 attr_int = d.chassis_number
-                assert(attr_int == int)
-                from mock import call
-                calls = [call(SESSION_NUM_FOR_TEST, 0, 11, ANY)]
-                self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.assert_has_calls(calls)
-                assert self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.call_count == 1
-'''
+                assert(attr_int == val)
+
+    def test_get_attribute_vi_int32_for_loop_multiple_devices(self):
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.niModInst_GetInstalledDeviceAttributeViInt32_looping
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_int_devices_looping
+        with nimodinst.Session('') as session:
+            for d in session:
+                attr_int = d.chassis_number
+                assert(attr_int == self.int_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
+
+    def test_get_attribute_vi_string_for_loop_multiple_devices(self):
+        self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.niModInst_GetInstalledDeviceAttributeViString_looping
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_string_devices_looping
+        with nimodinst.Session('') as session:
+            for d in session:
+                attr_int = d.device_name
+                assert(attr_int == self.string_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
+
