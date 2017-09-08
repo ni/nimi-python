@@ -9,14 +9,16 @@ from nimodinst import python_types
 
 class AttributeViInt32(object):
 
-    def __init__(self, owner, attribute_id, index=None):
+    def __init__(self, owner, attribute_id, index):
         self._owner = owner
         self._index = index
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        i = self._index if self._index is not None else index
-        return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, i, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id)
+
+    def __setitem__(self, index):
+        raise TypeError('%r is read only' % self)
 
     def __format__(self, format_spec):
         return format(self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id), format_spec)
@@ -24,14 +26,16 @@ class AttributeViInt32(object):
 
 class AttributeViString(object):
 
-    def __init__(self, owner, attribute_id, index=None):
+    def __init__(self, owner, attribute_id, index):
         self._owner = owner
         self._index = index
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        i = self._index if self._index is not None else index
-        return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, i, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id)
+
+    def __setitem__(self, index):
+        raise TypeError('%r is read only' % self)
 
     def __format__(self, format_spec):
         return format(self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id), format_spec)
@@ -39,7 +43,11 @@ class AttributeViString(object):
 
 class Device(object):
 
+    # This is needed during __init__. Without it, __setattr__ raises an exception
+    _is_frozen = False
+
     def __init__(self, owner, index):
+        self._index = index
         self.bus_number = AttributeViInt32(owner, 12, index=index)
         '''
         The bus on which the device has been enumerated.
@@ -76,6 +84,18 @@ class Device(object):
         '''
         The socket number on which the device has been enumerated
         '''
+        self._is_frozen = True
+
+    def __getattribute__(self, name):
+        if name in ['_is_frozen', 'index']:
+            return object.__getattribute__(self, name)
+        else:
+            return object.__getattribute__(self, name).__getitem__(None)
+
+    def __setattr__(self, name, value):
+        if self._is_frozen and name not in ['_is_frozen', 'index']:
+            raise TypeError("%s is not writable" % name)
+        object.__setattr__(self, name, value)
 
 
 class Session(object):
@@ -85,43 +105,6 @@ class Session(object):
     _is_frozen = False
 
     def __init__(self, driver):
-        self.bus_number = AttributeViInt32(self, 12)
-        '''
-        The bus on which the device has been enumerated.
-        '''
-        self.chassis_number = AttributeViInt32(self, 11)
-        '''
-        The number of the chassis in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
-        '''
-        self.device_model = AttributeViString(self, 1)
-        '''
-        The model of the device (for example, NI PXI-5122)
-        '''
-        self.device_name = AttributeViString(self, 0)
-        '''
-        The name of the device, which can be used to open an instrument driver session for that device
-        '''
-        self.max_pciexpress_link_width = AttributeViInt32(self, 18)
-        '''
-        **MAX_PCIEXPRESS_LINK_WIDTH**
-        '''
-        self.pciexpress_link_width = AttributeViInt32(self, 17)
-        '''
-        **PCIEXPRESS_LINK_WIDTH**
-        '''
-        self.serial_number = AttributeViString(self, 2)
-        '''
-        The serial number of the device
-        '''
-        self.slot_number = AttributeViInt32(self, 10)
-        '''
-        The slot (for example, in a PXI chassis) in which the device is installed. This attribute can only be queried for PXI devices installed in a chassis that has been properly identified in MAX.
-        '''
-        self.socket_number = AttributeViInt32(self, 13)
-        '''
-        The socket number on which the device has been enumerated
-        '''
-
         self.handle = 0
         self.item_count = 0
         self.current_item = 0
@@ -134,6 +117,9 @@ class Session(object):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
+
+    def __getitem__(self, index):
+        return Device(self, index)
 
     def __enter__(self):
         return self

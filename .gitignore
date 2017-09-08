@@ -6,6 +6,9 @@ bin/
 .tox/
 .coverage
 commands.log
-htmlcov/
 
 
+
+.vscode/launch.json
+
+.vscode/settings.json
