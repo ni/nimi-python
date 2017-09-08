@@ -184,6 +184,9 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
             _, error_string = self._get_error()
             return error_string
         except errors.Error:
+            pass
+
+        try:
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
@@ -191,6 +194,8 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
             '''
             error_string = self._get_error_message(error_code)
             return error_string
+        except errors.Error:
+            return "Failed to retrieve error description."
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
