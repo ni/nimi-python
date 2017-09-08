@@ -12,9 +12,10 @@ functions_codegen_method = {
     'CheckAttribute.+': { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
     '.etAttribute.+':   { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'init':             { 'codegen_method': 'no',       },
+    'error_message':    { 'codegen_method': 'no',       },
     'GetError':         { 'codegen_method': 'private',  },
     'GetErrorMessage':  { 'codegen_method': 'private',  },
-    'ClearError':       { 'codegen_method': 'private',  },
+    'ClearError':       { 'codegen_method': 'no',       },
     'Control':          { 'codegen_method': 'no',       },
     'LockSession':      { 'codegen_method': 'private',  },
     'UnlockSession':    { 'codegen_method': 'private',  },
@@ -94,6 +95,7 @@ functions_buffer_info = {
 # change how error handling is done within those functions themselves - basically, if an error occurs,
 # dont try to handle it, since the functions are only used within the context of error handling.
 functions_is_error_handling = {
+    'error_message':                { 'is_error_handling': True },
     'GetError':                     { 'is_error_handling': True },
     'GetErrorMessage':              { 'is_error_handling': True },
 }

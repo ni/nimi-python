@@ -11,9 +11,10 @@ functions_codegen_method = {
     'close':            { 'codegen_method': 'private',  },
     'Abort':            { 'codegen_method': 'private',  },
     '.etAttribute.+':   { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
+    'error_message':    { 'codegen_method': 'no',       },
     'GetError':         { 'codegen_method': 'private',  },
     'GetErrorMessage':  { 'codegen_method': 'private',  },
-    'ClearError':       { 'codegen_method': 'private',  },
+    'ClearError':       { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
