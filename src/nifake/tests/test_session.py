@@ -296,7 +296,7 @@ class TestSession(object):
             calls = [call(SESSION_NUM_FOR_TEST, b"", 1000001, ANY)]
             self.patched_library.niFake_GetAttributeViReal64.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViReal64.call_count == 1
-                       
+
     def test_get_vi_bool_attribute(self):
         self.patched_library.niFake_GetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_GetAttributeViBoolean
         bool = True
@@ -308,7 +308,7 @@ class TestSession(object):
             calls = [call(SESSION_NUM_FOR_TEST, b"", 1000000, ANY)]
             self.patched_library.niFake_GetAttributeViBoolean.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViBoolean.call_count == 1
-            
+
     '''
     # Re-enable after issue 205 is fixed
     def test_get_error_description_get_error_message(self):
@@ -352,4 +352,3 @@ class TestSession(object):
             assert self.patched_errors.handle_error.call_count == 2
             self.patched_errors.handle_error.assert_called_with(session, self.patched_library.niFake_GetCalDateAndTime.return_value)
     '''
-    
