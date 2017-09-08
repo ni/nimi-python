@@ -66,18 +66,21 @@ class DriverNotInstalledError(Exception):
         super(DriverNotInstalledError, self).__init__('The ${driver_name} runtime is not installed. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
 
 
-def handle_error(session, code, ignore_warnings):
+def handle_error(session, code, ignore_warnings, is_error_handling):
     if _is_success(code) or (_is_warning(code) and ignore_warnings):
         return
-    try:
-        description = session.get_error_description(code)
-    except Exception as e:
-        # TODO(marcoskirsch): Log this exception.
+
+    if is_error_handling:
+        warnings.warn(${module_name_class}Warning(e.code, "Cannot retrieve error description."))
         description = ""
-    if (_is_error(code)):
+    else:
+        description = session.get_error_description(code)
+
+    if _is_error(code):
         raise Error(code, description)
-    if (_is_warning(code)):
-        warnings.warn(${module_name_class}Warning(code, description))
+
+    assert _is_warning(code)
+    warnings.warn(${module_name_class}Warning(code, description))
 
 
 warnings.filterwarnings("always", category=${module_name_class}Warning)
