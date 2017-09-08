@@ -77,7 +77,7 @@ def test_serial_number_attribute():
         assert len(session) > 0, 'Must have hardware for ModInst tests to be valid.'
         pattern = r'^[0-9A-F]+$'
         assert isinstance(session[0].serial_number, str)
-        assert (len(session[0].serial_number) == 0) | (re.search(pattern, session.serial_number[0]) is not None)  # NI Serial numbers hex unless it is simulated than it is 0
+        assert (len(session[0].serial_number) == 0) | (re.search(pattern, session[0].serial_number) is not None)  # NI Serial numbers hex unless it is simulated than it is 0
 
 
 def test_bus_number_attribute():
