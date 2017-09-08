@@ -131,10 +131,7 @@ def _add_is_error_handling(f):
     # TODO(marcoskirsch): The information is added in functions_addon.py. I think we can instead infer from method
     # name but I am not sure if it's a good idea (heuristics vs being explicit - both error prone in different ways).
     try:
-        #print(f)
-        #print("")
         f['is_error_handling']
-        assert False, str(f)
     except KeyError:
         # Not populated, assume False
         f['is_error_handling'] = False
