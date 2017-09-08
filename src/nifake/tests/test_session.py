@@ -328,3 +328,28 @@ class TestSession(object):
             assert self.patched_errors.handle_error.call_count == 2
             self.patched_errors.handle_error.assert_called_with(session, self.patched_library.niFake_GetCalDateAndTime.return_value)
     '''
+
+    def test_get_vi_int32_attribute(self):
+        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
+        int = 3
+        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = int
+        with nifake.Session('dev1') as session:
+            attr_int = session.read_write_integer
+            assert(attr_int == int)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, b"", 1000004, ANY)]
+            self.patched_library.niFake_GetAttributeViInt32.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAttributeViInt32.call_count == 1
+
+    def test_set_vi_int32_attribute(self):
+        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
+        attribute_id = 1000004
+        int = 1
+        with nifake.Session('dev1') as session:
+            session.read_write_integer = int
+            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
+
+    def test_error_on_close(self):
+        with nifake.Session('dev1') as session:
+            with nifake.Session('dev1') as session:
+                assert True
