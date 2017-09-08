@@ -67,12 +67,21 @@ class DriverNotInstalledError(Exception):
 
 
 def handle_error(session, code, ignore_warnings, is_error_handling):
+    '''handle_error
+
+    Helper function for handling errors returned by ${module_name}.Library.
+    It calls back into the session to get the corresponding error description
+    and raises if necessary.
+    '''
+
     if _is_success(code) or (_is_warning(code) and ignore_warnings):
         return
 
     if is_error_handling:
-        warnings.warn(${module_name_class}Warning(e.code, "Cannot retrieve error description."))
-        description = ""
+        # The caller is in the midst of error handling. Don't get the
+        # error description in this case as that could itself fail.
+        description = "Failed to retrieve error description."
+        warnings.warn(description)
     else:
         description = session.get_error_description(code)
 
