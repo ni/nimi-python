@@ -92,9 +92,6 @@ class Session(object):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
 
-    def __del__(self):
-        pass
-
     def __enter__(self):
         return self
 

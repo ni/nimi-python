@@ -28,19 +28,19 @@ class _ErrorBase(Exception):
 
 
 class Error(_ErrorBase):
-    '''An error originating from the NI-DMM driver'''
+    '''An error originating from the NI-SWITCH driver'''
 
     def __init__(self, code, description):
         assert (_is_error(code)), "Should not raise Error if code is not fatal."
         super(Error, self).__init__(code, description)
 
 
-class NidmmWarning(Warning):
-    '''A warning originating from the NI-DMM driver'''
+class NiswitchWarning(Warning):
+    '''A warning originating from the NI-SWITCH driver'''
 
     def __init__(self, code, description):
         assert (_is_warning(code)), "Should not create Warning if code is not positive."
-        super(NidmmWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
+        super(NiswitchWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
 
 
 class UnsupportedConfigurationError(Exception):
@@ -54,7 +54,7 @@ class DriverNotInstalledError(Exception):
     '''An error due to using this module without the driver runtime installed.'''
 
     def __init__(self):
-        super(DriverNotInstalledError, self).__init__('The NI-DMM runtime is not installed. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
+        super(DriverNotInstalledError, self).__init__('The NI-SWITCH runtime is not installed. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
 
 
 def handle_error(session, code, ignore_warnings, is_error_handling):
@@ -62,7 +62,7 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
         return
 
     if is_error_handling:
-        warnings.warn(NidmmWarning(e.code, "Cannot retrieve error description."))
+        warnings.warn(NiswitchWarning(e.code, "Cannot retrieve error description."))
         description = ""
     else:
         description = session.get_error_description(code)
@@ -71,7 +71,7 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
         raise Error(code, description)
 
     assert _is_warning(code)
-    warnings.warn(NidmmWarning(code, description))
+    warnings.warn(NiswitchWarning(code, description))
 
 
-warnings.filterwarnings("always", category=NidmmWarning)
+warnings.filterwarnings("always", category=NiswitchWarning)

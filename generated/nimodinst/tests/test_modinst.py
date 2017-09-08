@@ -37,7 +37,7 @@ class TestSession(object):
         session = nimodinst.Session('')
         assert(session.handle == SESSION_NUM_FOR_TEST)
         self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
-        self.patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niModInst_OpenInstalledDevicesSession.return_value, ignore_warnings=False)
+        self.patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niModInst_OpenInstalledDevicesSession.return_value, ignore_warnings=False, is_error_handling=False)
 
     def test_close(self):
         session = nimodinst.Session('')
@@ -48,7 +48,7 @@ class TestSession(object):
         with nimodinst.Session('') as session:
             assert(session.handle == SESSION_NUM_FOR_TEST)
             self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
-            self.patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niModInst_OpenInstalledDevicesSession.return_value, ignore_warnings=False)
+            self.patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niModInst_OpenInstalledDevicesSession.return_value, ignore_warnings=False, is_error_handling=False)
         self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
     def test_cannot_add_properties_to_session(self):

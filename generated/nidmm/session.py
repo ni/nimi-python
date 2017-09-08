@@ -859,9 +859,6 @@ class Session(object):
     def initiate(self):
         return Acquisition(self)
 
-    def __del__(self):
-        pass
-
     def __enter__(self):
         return self
 
@@ -903,7 +900,7 @@ class Session(object):
         Idle state.
         '''
         error_code = self.library.niDMM_Abort(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _clear_error(self):
@@ -915,7 +912,7 @@ class Session(object):
         information only for the current execution thread.
         '''
         error_code = self.library.niDMM_ClearError(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def clear_interchange_warnings(self):
@@ -924,7 +921,7 @@ class Session(object):
         Clears the list of current interchange warnings.
         '''
         error_code = self.library.niDMM_ClearInterchangeWarnings(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_ac_bandwidth(self, ac_minimum_frequency_hz, ac_maximum_frequency_hz):
@@ -954,7 +951,7 @@ class Session(object):
                 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
         '''
         error_code = self.library.niDMM_ConfigureACBandwidth(self.vi, ac_minimum_frequency_hz, ac_maximum_frequency_hz)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_adc_calibration(self, adc_calibration):
@@ -993,7 +990,7 @@ class Session(object):
         if type(adc_calibration) is not enums.ADCCalibration:
             raise TypeError('Parameter mode must be of type ' + str(enums.ADCCalibration))
         error_code = self.library.niDMM_ConfigureADCCalibration(self.vi, adc_calibration.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_auto_zero_mode(self, auto_zero_mode):
@@ -1046,7 +1043,7 @@ class Session(object):
         if type(auto_zero_mode) is not enums.AutoZero:
             raise TypeError('Parameter mode must be of type ' + str(enums.AutoZero))
         error_code = self.library.niDMM_ConfigureAutoZeroMode(self.vi, auto_zero_mode.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_cable_comp_type(self, cable_comp_type):
@@ -1063,7 +1060,7 @@ class Session(object):
         if type(cable_comp_type) is not enums.CableCompensationType:
             raise TypeError('Parameter mode must be of type ' + str(enums.CableCompensationType))
         error_code = self.library.niDMM_ConfigureCableCompType(self.vi, cable_comp_type.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_current_source(self, current_source):
@@ -1090,7 +1087,7 @@ class Session(object):
         if type(current_source) is not enums.CurrentSource:
             raise TypeError('Parameter mode must be of type ' + str(enums.CurrentSource))
         error_code = self.library.niDMM_ConfigureCurrentSource(self.vi, current_source.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_fixed_ref_junction(self, fixed_reference_junction):
@@ -1106,7 +1103,7 @@ class Session(object):
                 Junction property. The default is 25.00 (°C).
         '''
         error_code = self.library.niDMM_ConfigureFixedRefJunction(self.vi, fixed_reference_junction)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_frequency_voltage_range(self, voltage_range):
@@ -1139,7 +1136,7 @@ class Session(object):
                 +-----------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
         '''
         error_code = self.library.niDMM_ConfigureFrequencyVoltageRange(self.vi, voltage_range)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_meas_complete_dest(self, meas_complete_destination):
@@ -1165,7 +1162,7 @@ class Session(object):
         if type(meas_complete_destination) is not enums.MeasurementCompleteDest:
             raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementCompleteDest))
         error_code = self.library.niDMM_ConfigureMeasCompleteDest(self.vi, meas_complete_destination.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_meas_complete_slope(self, meas_complete_slope):
@@ -1187,7 +1184,7 @@ class Session(object):
         if type(meas_complete_slope) is not enums.Slope:
             raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
         error_code = self.library.niDMM_ConfigureMeasCompleteSlope(self.vi, meas_complete_slope.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
@@ -1239,7 +1236,7 @@ class Session(object):
         if type(measurement_function) is not enums.Function:
             raise TypeError('Parameter mode must be of type ' + str(enums.Function))
         error_code = self.library.niDMM_ConfigureMeasurementAbsolute(self.vi, measurement_function.value, range, resolution_absolute)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_measurement_digits(self, measurement_function, range, resolution_digits):
@@ -1294,7 +1291,7 @@ class Session(object):
         if type(measurement_function) is not enums.Function:
             raise TypeError('Parameter mode must be of type ' + str(enums.Function))
         error_code = self.library.niDMM_ConfigureMeasurementDigits(self.vi, measurement_function.value, range, resolution_digits)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger, sample_interval):
@@ -1346,7 +1343,7 @@ class Session(object):
         if type(sample_trigger) is not enums.SampleTrigger:
             raise TypeError('Parameter mode must be of type ' + str(enums.SampleTrigger))
         error_code = self.library.niDMM_ConfigureMultiPoint(self.vi, trigger_count, sample_count, sample_trigger.value, sample_interval)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_offset_comp_ohms(self, offset_comp_ohms):
@@ -1375,7 +1372,7 @@ class Session(object):
         if type(offset_comp_ohms) is not enums.OffsetCompensatedOhms:
             raise TypeError('Parameter mode must be of type ' + str(enums.OffsetCompensatedOhms))
         error_code = self.library.niDMM_ConfigureOffsetCompOhms(self.vi, offset_comp_ohms.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_open_cable_comp_values(self, conductance, susceptance):
@@ -1390,7 +1387,7 @@ class Session(object):
             susceptance (float):Specifies the open cable compensation **susceptance**.
         '''
         error_code = self.library.niDMM_ConfigureOpenCableCompValues(self.vi, conductance, susceptance)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_power_line_frequency(self, power_line_frequency_hz):
@@ -1403,7 +1400,7 @@ class Session(object):
                 NI-DMM sets the Powerline Frequency property to this value.
         '''
         error_code = self.library.niDMM_ConfigurePowerLineFrequency(self.vi, power_line_frequency_hz)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_rtd_custom(self, rtd_a, rtd_b, rtd_c):
@@ -1423,7 +1420,7 @@ class Session(object):
                 The default is -4.183e-12 (Pt3851).
         '''
         error_code = self.library.niDMM_ConfigureRTDCustom(self.vi, rtd_a, rtd_b, rtd_c)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_rtd_type(self, rtd_type, rtd_resistance):
@@ -1459,7 +1456,7 @@ class Session(object):
                 set the RTD Resistance property. The default is 100 (Ω).
         '''
         error_code = self.library.niDMM_ConfigureRTDType(self.vi, rtd_type, rtd_resistance)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_sample_trigger_slope(self, sample_trigger_slope):
@@ -1483,7 +1480,7 @@ class Session(object):
         if type(sample_trigger_slope) is not enums.Slope:
             raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
         error_code = self.library.niDMM_ConfigureSampleTriggerSlope(self.vi, sample_trigger_slope.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_short_cable_comp_values(self, resistance, reactance):
@@ -1498,7 +1495,7 @@ class Session(object):
             reactance (float):Specifies the short cable compensation **reactance**.
         '''
         error_code = self.library.niDMM_ConfigureShortCableCompValues(self.vi, resistance, reactance)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_thermistor_custom(self, thermistor_a, thermistor_b, thermistor_c):
@@ -1518,7 +1515,7 @@ class Session(object):
                 function. The default is 1.568e-7 (44006).
         '''
         error_code = self.library.niDMM_ConfigureThermistorCustom(self.vi, thermistor_a, thermistor_b, thermistor_c)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_thermistor_type(self, thermistor_type):
@@ -1551,7 +1548,7 @@ class Session(object):
         if type(thermistor_type) is not enums.TemperatureThermistorType:
             raise TypeError('Parameter mode must be of type ' + str(enums.TemperatureThermistorType))
         error_code = self.library.niDMM_ConfigureThermistorType(self.vi, thermistor_type.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_thermocouple(self, thermocouple_type, reference_junction_type):
@@ -1590,7 +1587,7 @@ class Session(object):
         if type(thermocouple_type) is not enums.ThermocoupleType:
             raise TypeError('Parameter mode must be of type ' + str(enums.ThermocoupleType))
         error_code = self.library.niDMM_ConfigureThermocouple(self.vi, thermocouple_type.value, reference_junction_type)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_transducer_type(self, transducer_type):
@@ -1616,7 +1613,7 @@ class Session(object):
         if type(transducer_type) is not enums.TemperatureTransducerType:
             raise TypeError('Parameter mode must be of type ' + str(enums.TemperatureTransducerType))
         error_code = self.library.niDMM_ConfigureTransducerType(self.vi, transducer_type.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_trigger(self, trigger_source, trigger_delay):
@@ -1655,7 +1652,7 @@ class Session(object):
         if type(trigger_source) is not enums.TriggerSource:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         error_code = self.library.niDMM_ConfigureTrigger(self.vi, trigger_source.value, trigger_delay)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_trigger_slope(self, trigger_slope):
@@ -1679,7 +1676,7 @@ class Session(object):
         if type(trigger_slope) is not enums.Slope:
             raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
         error_code = self.library.niDMM_ConfigureTriggerSlope(self.vi, trigger_slope.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_waveform_acquisition(self, measurement_function, range, rate, waveform_points):
@@ -1726,7 +1723,7 @@ class Session(object):
         if type(measurement_function) is not enums.Function:
             raise TypeError('Parameter mode must be of type ' + str(enums.Function))
         error_code = self.library.niDMM_ConfigureWaveformAcquisition(self.vi, measurement_function.value, range, rate, waveform_points)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_waveform_coupling(self, waveform_coupling):
@@ -1750,7 +1747,7 @@ class Session(object):
         if type(waveform_coupling) is not enums.WaveformCouplingMode:
             raise TypeError('Parameter mode must be of type ' + str(enums.WaveformCouplingMode))
         error_code = self.library.niDMM_ConfigureWaveformCoupling(self.vi, waveform_coupling.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def disable(self):
@@ -1761,7 +1758,7 @@ class Session(object):
         progress when this function is called, the measurement is aborted.
         '''
         error_code = self.library.niDMM_Disable(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def fetch(self, maximum_time):
@@ -1787,7 +1784,7 @@ class Session(object):
         '''
         reading_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_Fetch(self.vi, maximum_time, ctypes.pointer(reading_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(reading_ctype.value)
 
     def fetch_multi_point(self, maximum_time, array_size):
@@ -1829,7 +1826,7 @@ class Session(object):
         reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_FetchMultiPoint(self.vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [python_types.ViReal64(reading_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
 
     def fetch_waveform(self, maximum_time, array_size):
@@ -1863,7 +1860,7 @@ class Session(object):
         waveform_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_FetchWaveform(self.vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [python_types.ViReal64(waveform_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
 
     def format_meas_absolute(self, measurement_function, range, resolution, measurement):
@@ -1892,7 +1889,7 @@ class Session(object):
         range_string_ctype = ctypes_types.ViChar_ctype(0)
         data_string_ctype = ctypes_types.ViChar_ctype(0)
         error_code = self.library.niDMM_FormatMeasAbsolute(measurement_function, range, resolution, measurement, ctypes.pointer(mode_string_ctype), ctypes.pointer(range_string_ctype), ctypes.pointer(data_string_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViChar(mode_string_ctype.value), python_types.ViChar(range_string_ctype.value), python_types.ViChar(data_string_ctype.value)
 
     def get_aperture_time_info(self):
@@ -1934,7 +1931,7 @@ class Session(object):
         aperture_time_ctype = ctypes_types.ViReal64_ctype(0)
         aperture_time_units_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_GetApertureTimeInfo(self.vi, ctypes.pointer(aperture_time_ctype), ctypes.pointer(aperture_time_units_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(aperture_time_ctype.value), enums.ApertureTimeUnits(aperture_time_units_ctype.value)
 
     def _get_attribute_vi_boolean(self, channel_name, attribute_id):
@@ -1966,7 +1963,7 @@ class Session(object):
         '''
         attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niDMM_GetAttributeViBoolean(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(attribute_value_ctype.value)
 
     def _get_attribute_vi_int32(self, channel_name, attribute_id):
@@ -1998,7 +1995,7 @@ class Session(object):
         '''
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_GetAttributeViInt32(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(attribute_value_ctype.value)
 
     def _get_attribute_vi_real64(self, channel_name, attribute_id):
@@ -2030,7 +2027,7 @@ class Session(object):
         '''
         attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_GetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(attribute_value_ctype.value)
 
     def _get_attribute_vi_session(self, channel_name, attribute_id):
@@ -2062,7 +2059,7 @@ class Session(object):
         '''
         attribute_value_ctype = ctypes_types.ViSession_ctype(0)
         error_code = self.library.niDMM_GetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViSession(attribute_value_ctype.value)
 
     def _get_attribute_vi_string(self, channel_name, attribute_id):
@@ -2108,11 +2105,11 @@ class Session(object):
         buffer_size = 0
         attribute_value_ctype = None
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niDMM_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode("ascii")
 
     def get_auto_range_value(self):
@@ -2128,7 +2125,7 @@ class Session(object):
         '''
         actual_range_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_GetAutoRangeValue(self.vi, ctypes.pointer(actual_range_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(actual_range_ctype.value)
 
     def get_cal_count(self, cal_type):
@@ -2155,7 +2152,7 @@ class Session(object):
         '''
         count_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_GetCalCount(self.vi, cal_type, ctypes.pointer(count_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(count_ctype.value)
 
     def get_cal_date_and_time(self, cal_type):
@@ -2190,7 +2187,7 @@ class Session(object):
         hour_ctype = ctypes_types.ViInt32_ctype(0)
         minute_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_GetCalDateAndTime(self.vi, cal_type, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(month_ctype.value), python_types.ViInt32(day_ctype.value), python_types.ViInt32(year_ctype.value), python_types.ViInt32(hour_ctype.value), python_types.ViInt32(minute_ctype.value)
 
     def get_channel_name(self, index, buffer_size):
@@ -2224,7 +2221,7 @@ class Session(object):
         '''
         channel_string_ctype = ctypes_types.ViChar_ctype(0)
         error_code = self.library.niDMM_GetChannelName(self.vi, index, buffer_size, ctypes.pointer(channel_string_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViChar(channel_string_ctype.value)
 
     def get_dev_temp(self, options):
@@ -2242,7 +2239,7 @@ class Session(object):
         '''
         temperature_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_GetDevTemp(self.vi, options.encode('ascii'), ctypes.pointer(temperature_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(temperature_ctype.value)
 
     def _get_error(self):
@@ -2278,11 +2275,11 @@ class Session(object):
         buffer_size = 0
         description_ctype = None
         error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViStatus(error_code_ctype.value), description_ctype.value.decode("ascii")
 
     def _get_error_message(self, error_code):
@@ -2305,11 +2302,11 @@ class Session(object):
         buffer_size = 0
         error_message_ctype = None
         error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
         error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return error_message_ctype.value.decode("ascii")
 
     def get_last_cal_temp(self, cal_type):
@@ -2336,7 +2333,7 @@ class Session(object):
         '''
         temperature_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_GetLastCalTemp(self.vi, cal_type, ctypes.pointer(temperature_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(temperature_ctype.value)
 
     def get_measurement_period(self):
@@ -2359,7 +2356,7 @@ class Session(object):
         '''
         period_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_GetMeasurementPeriod(self.vi, ctypes.pointer(period_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(period_ctype.value)
 
     def get_next_coercion_record(self, buffer_size):
@@ -2402,7 +2399,7 @@ class Session(object):
         '''
         coercion_record_ctype = ctypes_types.ViChar_ctype(0)
         error_code = self.library.niDMM_GetNextCoercionRecord(self.vi, buffer_size, ctypes.pointer(coercion_record_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViChar(coercion_record_ctype.value)
 
     def get_next_interchange_warning(self):
@@ -2441,11 +2438,11 @@ class Session(object):
         buffer_size = 0
         interchange_warning_ctype = None
         error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
         error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return interchange_warning_ctype.value.decode("ascii")
 
     def get_self_cal_supported(self):
@@ -2466,7 +2463,7 @@ class Session(object):
         '''
         self_cal_supported_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niDMM_GetSelfCalSupported(self.vi, ctypes.pointer(self_cal_supported_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(self_cal_supported_ctype.value)
 
     def _init_with_options(self, resource_name, id_query, reset_device, option_string):
@@ -2567,7 +2564,7 @@ class Session(object):
         '''
         vi_ctype = ctypes_types.ViSession_ctype(0)
         error_code = self.library.niDMM_InitWithOptions(resource_name.encode('ascii'), id_query, reset_device, option_string.encode('ascii'), ctypes.pointer(vi_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViSession(vi_ctype.value)
 
     def _initiate(self):
@@ -2580,7 +2577,7 @@ class Session(object):
         retrieve the measurement data.
         '''
         error_code = self.library.niDMM_Initiate(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def is_over_range(self, measurement_value):
@@ -2608,7 +2605,7 @@ class Session(object):
         '''
         is_over_range_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niDMM_IsOverRange(self.vi, measurement_value, ctypes.pointer(is_over_range_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(is_over_range_ctype.value)
 
     def is_under_range(self, measurement_value):
@@ -2636,7 +2633,7 @@ class Session(object):
         '''
         is_under_range_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niDMM_IsUnderRange(self.vi, measurement_value, ctypes.pointer(is_under_range_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(is_under_range_ctype.value)
 
     def _lock_session(self):
@@ -2743,7 +2740,7 @@ class Session(object):
         '''
         caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niDMM_LockSession(self.vi, ctypes.pointer(caller_has_lock_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(caller_has_lock_ctype.value)
 
     def perform_open_cable_comp(self):
@@ -2768,7 +2765,7 @@ class Session(object):
         conductance_ctype = ctypes_types.ViReal64_ctype(0)
         susceptance_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_PerformOpenCableComp(self.vi, ctypes.pointer(conductance_ctype), ctypes.pointer(susceptance_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(conductance_ctype.value), python_types.ViReal64(susceptance_ctype.value)
 
     def perform_short_cable_comp(self):
@@ -2792,7 +2789,7 @@ class Session(object):
         resistance_ctype = ctypes_types.ViReal64_ctype(0)
         reactance_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_PerformShortCableComp(self.vi, ctypes.pointer(resistance_ctype), ctypes.pointer(reactance_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(resistance_ctype.value), python_types.ViReal64(reactance_ctype.value)
 
     def read(self, maximum_time):
@@ -2817,7 +2814,7 @@ class Session(object):
         '''
         reading_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niDMM_Read(self.vi, maximum_time, ctypes.pointer(reading_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(reading_ctype.value)
 
     def read_multi_point(self, maximum_time, array_size):
@@ -2858,7 +2855,7 @@ class Session(object):
         reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_ReadMultiPoint(self.vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [python_types.ViReal64(reading_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
 
     def read_status(self):
@@ -2899,7 +2896,7 @@ class Session(object):
         acquisition_backlog_ctype = ctypes_types.ViInt32_ctype(0)
         acquisition_status_ctype = ctypes_types.ViInt16_ctype(0)
         error_code = self.library.niDMM_ReadStatus(self.vi, ctypes.pointer(acquisition_backlog_ctype), ctypes.pointer(acquisition_status_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
     def read_waveform(self, maximum_time, array_size):
@@ -2938,7 +2935,7 @@ class Session(object):
         waveform_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niDMM_ReadWaveform(self.vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [python_types.ViReal64(waveform_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
 
     def reset_interchange_check(self):
@@ -2973,7 +2970,7 @@ class Session(object):
         warnings, you can call clear_interchange_warnings.
         '''
         error_code = self.library.niDMM_ResetInterchangeCheck(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def reset_with_defaults(self):
@@ -2985,7 +2982,7 @@ class Session(object):
         values associated with a logical name are applied after setting the DMM.
         '''
         error_code = self.library.niDMM_ResetWithDefaults(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def self_cal(self):
@@ -3000,7 +2997,7 @@ class Session(object):
         values after the call returns.
         '''
         error_code = self.library.niDMM_SelfCal(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def send_software_trigger(self):
@@ -3015,7 +3012,7 @@ class Session(object):
         and trigger the device. The NI 4050 and NI 4060 are not supported.
         '''
         error_code = self.library.niDMM_SendSoftwareTrigger(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):
@@ -3058,7 +3055,7 @@ class Session(object):
             attribute_value (bool):Pass the value that you want to set the attribute to.
         '''
         error_code = self.library.niDMM_SetAttributeViBoolean(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):
@@ -3101,7 +3098,7 @@ class Session(object):
             attribute_value (int):Pass the value that you want to set the attribute to.
         '''
         error_code = self.library.niDMM_SetAttributeViInt32(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):
@@ -3144,7 +3141,7 @@ class Session(object):
             attribute_value (float):Pass the value that you want to set the attribute to.
         '''
         error_code = self.library.niDMM_SetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_session(self, channel_name, attribute_id, attribute_value):
@@ -3174,7 +3171,7 @@ class Session(object):
             attribute_value (int):Pass the value that you want to set the attribute to.
         '''
         error_code = self.library.niDMM_SetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):
@@ -3217,7 +3214,7 @@ class Session(object):
             attribute_value (str):Pass the value that you want to set the attribute to.
         '''
         error_code = self.library.niDMM_SetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _unlock_session(self):
@@ -3308,7 +3305,7 @@ class Session(object):
         '''
         caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niDMM_UnlockSession(self.vi, ctypes.pointer(caller_has_lock_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(caller_has_lock_ctype.value)
 
     def _close(self):
@@ -3317,7 +3314,7 @@ class Session(object):
         Closes the specified session and deallocates resources that it reserved.
         '''
         error_code = self.library.niDMM_close(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def error_message(self, error_code):
@@ -3335,7 +3332,7 @@ class Session(object):
         '''
         error_message_ctype = ctypes_types.ViChar_ctype(0)
         error_code = self.library.niDMM_error_message(self.vi, error_code, ctypes.pointer(error_message_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViChar(error_message_ctype.value)
 
     def error_query(self):
@@ -3357,7 +3354,7 @@ class Session(object):
         error_code_ctype = ctypes_types.ViStatus_ctype(0)
         error_message_ctype = ctypes_types.ViChar_ctype(0)
         error_code = self.library.niDMM_error_query(self.vi, ctypes.pointer(error_code_ctype), ctypes.pointer(error_message_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViStatus(error_code_ctype.value), python_types.ViChar(error_message_ctype.value)
 
     def reset(self):
@@ -3368,7 +3365,7 @@ class Session(object):
         to the state necessary for the operation of the instrument driver.
         '''
         error_code = self.library.niDMM_reset(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def revision_query(self):
@@ -3390,7 +3387,7 @@ class Session(object):
         instrument_driver_revision_ctype = ctypes_types.ViChar_ctype(0)
         firmware_revision_ctype = ctypes_types.ViChar_ctype(0)
         error_code = self.library.niDMM_revision_query(self.vi, ctypes.pointer(instrument_driver_revision_ctype), ctypes.pointer(firmware_revision_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViChar(instrument_driver_revision_ctype.value), python_types.ViChar(firmware_revision_ctype.value)
 
     def self_test(self):
@@ -3434,6 +3431,6 @@ class Session(object):
         self_test_result_ctype = ctypes_types.ViInt16_ctype(0)
         self_test_message_ctype = (ctypes_types.ViChar_ctype * 256)()
         error_code = self.library.niDMM_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
 

@@ -6,5 +6,6 @@ bin/
 .tox/
 .coverage
 commands.log
+htmlcov/
 
 
