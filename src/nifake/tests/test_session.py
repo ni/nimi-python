@@ -350,6 +350,17 @@ class TestSession(object):
             self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
 
     def test_error_on_close(self):
-        with nifake.Session('dev1') as session:
-            with nifake.Session('dev1') as session:
-                assert True
+        test_error_code = -1
+        test_error_desc = 'Test'
+        self.patched_library.niFake_close.side_effect = self.side_effects_helper.niFake_close
+        self.side_effects_helper['close']['return'] = test_error_code
+        self.side_effects_helper['close']['vi'] = SESSION_NUM_FOR_TEST
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        session = nifake.Session('dev1')
+        session1 = nifake.Session('dev1')
+        session.close()
+        session1.close()
+        assert True
+
