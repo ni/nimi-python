@@ -333,4 +333,3 @@ class TestSession(object):
         session = nifake.Session('FakeDevice', 1, True, 'Some string')
         assert(session.vi == SESSION_NUM_FOR_TEST)
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'FakeDevice', 1, True, ANY, ANY)
-
