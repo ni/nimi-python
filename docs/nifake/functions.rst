@@ -258,28 +258,4 @@ nifake.Session methods
 
     :type a_string: int
 
-.. function:: error_message(error_code, error_message)
-
-    Takes the errorCode returned by a functiona and returns it as a user-readable string.
-
-    
-
-
-    :param error_code:
-
-
-        The errorCode returned from the instrument.
-
-        
-
-    :type error_code: int
-
-    :rtype: ViChar
-
-
-            The error information formatted into a string.
-
-            
-
-
 

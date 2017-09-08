@@ -19,7 +19,6 @@ class Library(object):
         # We cache the cfunc object from the ctypes.CDLL object
         self.niSwitch_AbortScan_cfunc = None
         self.niSwitch_CanConnect_cfunc = None
-        self.niSwitch_ClearError_cfunc = None
         self.niSwitch_ClearInterchangeWarnings_cfunc = None
         self.niSwitch_Commit_cfunc = None
         self.niSwitch_ConfigureScanList_cfunc = None
@@ -67,7 +66,6 @@ class Library(object):
         self.niSwitch_WaitForDebounce_cfunc = None
         self.niSwitch_WaitForScanComplete_cfunc = None
         self.niSwitch_close_cfunc = None
-        self.niSwitch_error_message_cfunc = None
         self.niSwitch_error_query_cfunc = None
         self.niSwitch_reset_cfunc = None
         self.niSwitch_revision_query_cfunc = None
@@ -94,14 +92,6 @@ class Library(object):
                 self.niSwitch_CanConnect_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViConstString_ctype, ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
                 self.niSwitch_CanConnect_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_CanConnect_cfunc(vi, channel1, channel2, path_capability)
-
-    def niSwitch_ClearError(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_ClearError_cfunc is None:
-                self.niSwitch_ClearError_cfunc = self._library.niSwitch_ClearError
-                self.niSwitch_ClearError_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niSwitch_ClearError_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_ClearError_cfunc(vi)
 
     def niSwitch_ClearInterchangeWarnings(self, vi):  # noqa: N802
         with self._func_lock:
@@ -478,14 +468,6 @@ class Library(object):
                 self.niSwitch_close_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niSwitch_close_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_close_cfunc(vi)
-
-    def niSwitch_error_message(self, vi, error_code, error_message):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_error_message_cfunc is None:
-                self.niSwitch_error_message_cfunc = self._library.niSwitch_error_message
-                self.niSwitch_error_message_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
-                self.niSwitch_error_message_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_error_message_cfunc(vi, error_code, error_message)
 
     def niSwitch_error_query(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:

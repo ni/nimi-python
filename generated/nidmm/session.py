@@ -883,6 +883,9 @@ class Session(object):
             _, error_string = self._get_error()
             return error_string
         except errors.Error:
+            pass
+
+        try:
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
@@ -890,6 +893,8 @@ class Session(object):
             '''
             error_string = self._get_error_message(error_code)
             return error_string
+        except errors.Error:
+            return "Failed to retrieve error description."
 
     ''' These are code-generated '''
 
@@ -900,18 +905,6 @@ class Session(object):
         Idle state.
         '''
         error_code = self.library.niDMM_Abort(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _clear_error(self):
-        '''_clear_error
-
-        Clears the error information for the current execution thread and the
-        IVI session you specify. If you pass VI_NULL for the
-        **Instrument_Handle** parameter, this function clears the error
-        information only for the current execution thread.
-        '''
-        error_code = self.library.niDMM_ClearError(self.vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2275,11 +2268,11 @@ class Session(object):
         buffer_size = 0
         description_ctype = None
         error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
         description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niDMM_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return python_types.ViStatus(error_code_ctype.value), description_ctype.value.decode("ascii")
 
     def _get_error_message(self, error_code):
@@ -2302,11 +2295,11 @@ class Session(object):
         buffer_size = 0
         error_message_ctype = None
         error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
-        error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
+        error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niDMM_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode("ascii")
 
     def get_last_cal_temp(self, cal_type):
@@ -3316,24 +3309,6 @@ class Session(object):
         error_code = self.library.niDMM_close(self.vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def error_message(self, error_code):
-        '''error_message
-
-        Takes the **Error_Code** returned by the instrument driver functions,
-        interprets it, and returns it as a user-readable string.
-
-        Args:
-            error_code (int):The **error_code** returned from the instrument. The default is 0,
-                indicating VI_SUCCESS.
-
-        Returns:
-            error_message (int):The error information formatted into a string.
-        '''
-        error_message_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niDMM_error_message(self.vi, error_code, ctypes.pointer(error_message_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(error_message_ctype.value)
 
     def error_query(self):
         '''error_query

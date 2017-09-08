@@ -190,11 +190,11 @@ class Session(object):
         error_info_buffer_size = 0
         error_info_ctype = ctypes.cast(ctypes.create_string_buffer(error_info_buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         error_info_buffer_size = error_code
         error_info_ctype = ctypes.cast(ctypes.create_string_buffer(error_info_buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode("ascii")
 
     def _get_installed_device_attribute_vi_int32(self, handle, index, attribute_id):

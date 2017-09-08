@@ -940,6 +940,9 @@ class Session(object):
             _, error_string = self._get_error()
             return error_string
         except errors.Error:
+            pass
+
+        try:
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
@@ -947,6 +950,8 @@ class Session(object):
             '''
             error_string = self._get_error_message(error_code)
             return error_string
+        except errors.Error:
+            return "Failed to retrieve error description."
 
     ''' These are code-generated '''
 
@@ -1005,27 +1010,6 @@ class Session(object):
         error_code = self.library.niSwitch_CanConnect(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), ctypes.pointer(path_capability_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
-
-    def _clear_error(self):
-        '''_clear_error
-
-        This function clears the error code and error description for the IVI
-        session. If the user specifies a valid IVI session for the
-        instrument_handle parameter, this function clears the error information
-        for the session. If the user passes VI_NULL for the Vi parameter, this
-        function clears the error information for the current execution thread.
-        If the Vi parameter is an invalid session, the function does nothing and
-        returns an error. The function clears the error code by setting it to
-        VI_SUCCESS, If the error description string is non-NULL, the function
-        deallocates the error description string and sets the address to
-        VI_NULL. Maintaining the error information separately for each thread
-        is useful if the user does not have a session handle to pass to the
-        _get_error function, which occurs when a call to init
-        or _init_with_options fails.
-        '''
-        error_code = self.library.niSwitch_ClearError(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
 
     def clear_interchange_warnings(self):
         '''clear_interchange_warnings
@@ -1549,7 +1533,7 @@ class Session(object):
         current execution thread. If the InstrumentHandle parameter is an
         invalid session, the function does nothing and returns an error.
         Normally, the error information describes the first error that occurred
-        since the user last called _get_error or _clear_error.
+        since the user last called _get_error or clear_error.
 
         Args:
             buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
@@ -2835,27 +2819,6 @@ class Session(object):
         error_code = self.library.niSwitch_close(self.vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def error_message(self, error_code):
-        '''error_message
-
-        Converts an error code returned by NI-SWITCH into a user-readable
-        string. Generally this information is supplied in error out of any
-        NI-SWITCH VI. Use error_message for a static lookup of an
-        error code description.
-
-        Args:
-            error_code (int):Status code returned by any NI-SWITCH function. Default Value: 0
-                (VI_SUCCESS)
-
-        Returns:
-            error_message (int):The error information formatted into a string. You must pass a ViChar
-                array with at least 256 bytes.
-        '''
-        error_message_ctype = (ctypes_types.ViChar_ctype * 256)()
-        error_code = self.library.niSwitch_error_message(self.vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return error_message_ctype.value.decode("ascii")
 
     def error_query(self):
         '''error_query

@@ -2074,32 +2074,6 @@ nidmm.Session methods
     
 
 
-.. function:: error_message(error_code, error_message)
-
-    Takes the **Error\_Code** returned by the instrument driver functions,
-    interprets it, and returns it as a user-readable string.
-
-    
-
-
-    :param error_code:
-
-
-        The **error\_code** returned from the instrument. The default is 0,
-        indicating VI\_SUCCESS.
-
-        
-
-    :type error_code: int
-
-    :rtype: ViChar
-
-
-            The error information formatted into a string.
-
-            
-
-
 .. function:: error_query(error_code, error_message)
 
     Reads an **Error\_Code** and message from the DMM error queue. National

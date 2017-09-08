@@ -4,7 +4,6 @@ import warnings
 
 from mock import ANY
 from mock import patch
-# from mock import call
 
 SESSION_NUM_FOR_TEST = 42
 
@@ -297,7 +296,9 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             error_desc = session.get_error_description(test_error_code)
             assert error_desc == test_error_desc
-        self.patched_library.niFake_GetErrorMessage.assert_called_once_with(SESSION_NUM_FOR_TEST, test_error_code, 0, None)
+        from mock import call
+        calls = [call(SESSION_NUM_FOR_TEST, test_error_code, 0, None), call(SESSION_NUM_FOR_TEST, len(test_error_desc), len(test_error_desc), ANY)]
+        self.patched_library.niFake_GetErrorMessage.assert_has_calls(calls)
 
     '''
     def test_set_string_attribute(self):

@@ -1251,35 +1251,6 @@ niswitch.Session methods
 
     :type maximum_time_ms: int
 
-.. function:: error_message(error_code, error_message)
-
-    Converts an error code returned by NI-SWITCH into a user-readable
-    string. Generally this information is supplied in error out of any
-    NI-SWITCH VI. Use :py:func:`niswitch.error_message` for a static lookup of an
-    error code description.
-
-    
-
-
-    :param error_code:
-
-
-        Status code returned by any NI-SWITCH function. Default Value: 0
-        (VI\_SUCCESS)
-
-        
-
-    :type error_code: int
-
-    :rtype: ViChar
-
-
-            The error information formatted into a string. You must pass a ViChar
-            array with at least 256 bytes.
-
-            
-
-
 .. function:: error_query(error_code, error_message)
 
     This function reads an error code and a message from the instrument's
