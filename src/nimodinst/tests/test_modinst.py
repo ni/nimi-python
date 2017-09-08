@@ -64,6 +64,37 @@ class TestSession(object):
             except AttributeError:
                 pass
 
+    def test_cannot_add_properties_to_device(self):
+        with nimodinst.Session('') as session:
+            try:
+                session[0].nonexistent_property = 5
+                assert False
+            except TypeError:
+                pass
+            try:
+                session[0].nonexistent_property
+                assert False
+            except AttributeError:
+                pass
+
+    def test_vi_int32_attribute_read_only(self):
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
+        with nimodinst.Session('') as session:
+            try:
+                session[0].chassis_number = 5
+                assert False
+            except TypeError:
+                pass
+
+    def test_vi_string_attribute_read_only(self):
+        self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
+        with nimodinst.Session('') as session:
+            try:
+                session[0].device_name = "Not Possible"
+                assert False
+            except TypeError:
+                pass
+
     def test_iterating(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
         with nimodinst.Session('') as session:
