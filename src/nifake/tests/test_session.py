@@ -333,3 +333,29 @@ class TestSession(object):
         session = nifake.Session('FakeDevice', 1, True, 'Some string')
         assert(session.vi == SESSION_NUM_FOR_TEST)
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'FakeDevice', 1, True, ANY, ANY)
+
+    def test_read(self):
+        test_maximum_time = 1000
+        test_reading = 5
+        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
+        self.side_effects_helper['Read']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            session.read(test_maximum_time)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, ANY)]
+            self.patched_library.niFake_Read.assert_has_calls(calls)
+            assert self.patched_library.niFake_Read.call_count == 1
+
+    def test_read_multipoint(self):
+        test_maximum_time = 1000
+        test_reading_array = 1.2
+        test_actual_number_of_points = test_array_size = 2
+        self.patched_library.niFake_ReadMultiPoint.side_effect = self.side_effects_helper.niFake_ReadMultiPoint
+        self.side_effects_helper['ReadMultiPoint']['readingArray'] = test_reading_array
+        self.side_effects_helper['ReadMultiPoint']['actualNumberOfPoints'] = test_actual_number_of_points
+        with nifake.Session('dev1') as session:
+            session.read_multi_point(test_maximum_time, test_array_size)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, test_array_size, ANY, ANY)]
+            self.patched_library.niFake_ReadMultiPoint.assert_has_calls(calls)
+            assert self.patched_library.niFake_ReadMultiPoint.call_count == 1
