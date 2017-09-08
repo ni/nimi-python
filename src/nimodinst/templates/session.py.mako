@@ -30,12 +30,6 @@ class AttributeViInt32(object):
     def __getitem__(self, index):
         return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id)
 
-    def __setitem__(self, index):
-        raise TypeError('%r is read only' % self)
-
-    def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id), format_spec)
-
 
 class AttributeViString(object):
 
@@ -46,12 +40,6 @@ class AttributeViString(object):
 
     def __getitem__(self, index):
         return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id)
-
-    def __setitem__(self, index):
-        raise TypeError('%r is read only' % self)
-
-    def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id), format_spec)
 
 
 class Device(object):
@@ -188,7 +176,7 @@ class Session(object):
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
-        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        ${ivi_dance_parameter['ctypes_variable_name']} = None
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
