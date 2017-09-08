@@ -46,16 +46,6 @@ def test_string_attribute_error_on_non_existant_device():
             assert e.description.lower().find('the device index is out of the range of valid device indices for this session.') != -1
 
 
-def test_writeonly_attribute():
-    with nimodinst.Session('') as session:
-        assert len(session) > 0, 'Must have hardware for ModInst tests to be valid.'
-        try:
-            session[0].device_name = 'New Name'
-            assert False
-        except TypeError as e:
-            assert str(e).find('does not support item assignment') != -1
-
-
 def test_device_name_attribute():
     with nimodinst.Session('') as session:
         assert len(session) > 0, 'Must have hardware for ModInst tests to be valid.'
