@@ -8,3 +8,7 @@ bin/
 commands.log
 
 
+
+.vscode/launch.json
+
+.vscode/settings.json
