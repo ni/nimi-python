@@ -17,12 +17,6 @@ class AttributeViInt32(object):
     def __getitem__(self, index):
         return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id)
 
-    def __setitem__(self, index):
-        raise TypeError('%r is read only' % self)
-
-    def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id), format_spec)
-
 
 class AttributeViString(object):
 
@@ -33,12 +27,6 @@ class AttributeViString(object):
 
     def __getitem__(self, index):
         return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id)
-
-    def __setitem__(self, index):
-        raise TypeError('%r is read only' % self)
-
-    def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id), format_spec)
 
 
 class Device(object):
@@ -188,7 +176,7 @@ class Session(object):
 
     def _get_extended_error_info(self):
         error_info_buffer_size = 0
-        error_info_ctype = ctypes.cast(ctypes.create_string_buffer(error_info_buffer_size), ctypes_types.ViString_ctype)
+        error_info_ctype = None
         error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True)
         error_info_buffer_size = error_code
@@ -205,7 +193,7 @@ class Session(object):
 
     def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id):
         attribute_value_buffer_size = 0
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(attribute_value_buffer_size), ctypes_types.ViString_ctype)
+        attribute_value_ctype = None
         error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True)
         attribute_value_buffer_size = error_code
