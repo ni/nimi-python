@@ -129,7 +129,6 @@ class TestSession(object):
                 assert False
             except AttributeError as e:
                 assert str(e) == "'Session' object has no attribute 'chassis_number'"
-                pass
 
     def test_get_attribute_vi_int32_for_loop_multiple_devices(self):
         self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.niModInst_GetInstalledDeviceAttributeViInt32_looping
@@ -155,13 +154,11 @@ class TestSession(object):
                 assert False
             except TypeError as e:
                 assert str(e).find(' is a frozen class') != -1
-                pass
             try:
                 session.nonexistent_property
                 assert False
             except AttributeError as e:
                 assert str(e) == "'Session' object has no attribute 'nonexistent_property'"
-                pass
 
     def test_cannot_add_properties_to_device(self):
         with nimodinst.Session('') as session:
@@ -170,13 +167,11 @@ class TestSession(object):
                 assert False
             except TypeError as e:
                 assert str(e) == 'nonexistent_property is not writable'
-                pass
             try:
                 session[0].nonexistent_property
                 assert False
             except AttributeError as e:
                 assert str(e) == "'Device' object has no attribute 'nonexistent_property'"
-                pass
 
     def test_vi_int32_attribute_read_only(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
@@ -186,7 +181,6 @@ class TestSession(object):
                 assert False
             except TypeError as e:
                 assert str(e) == 'chassis_number is not writable'
-                pass
 
     def test_vi_string_attribute_read_only(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
@@ -196,7 +190,6 @@ class TestSession(object):
                 assert False
             except TypeError as e:
                 assert str(e) == 'device_name is not writable'
-                pass
 
     def test_int_attribute_error(self):
         error_code = -1234
