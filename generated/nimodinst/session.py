@@ -17,6 +17,9 @@ class AttributeViInt32(object):
     def __getitem__(self, index):
         return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id)
 
+    def __setitem__(self, index):
+        raise TypeError('%r is read only' % self)
+
     def __format__(self, format_spec):
         return format(self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id), format_spec)
 
@@ -31,11 +34,17 @@ class AttributeViString(object):
     def __getitem__(self, index):
         return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id)
 
+    def __setitem__(self, index):
+        raise TypeError('%r is read only' % self)
+
     def __format__(self, format_spec):
         return format(self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id), format_spec)
 
 
 class Device(object):
+
+    # This is needed during __init__. Without it, __setattr__ raises an exception
+    _is_frozen = False
 
     def __init__(self, owner, index):
         self._index = index
@@ -75,9 +84,18 @@ class Device(object):
         '''
         The socket number on which the device has been enumerated
         '''
+        self._is_frozen = True
 
     def __getattribute__(self, name):
-        return object.__getattribute__(self, name).__getitem__(None)
+        if name in ['_is_frozen', 'index']:
+            return object.__getattribute__(self, name)
+        else:
+            return object.__getattribute__(self, name).__getitem__(None)
+
+    def __setattr__(self, name, value):
+        if self._is_frozen and name not in ['_is_frozen', 'index']:
+            raise TypeError("%s is not writable" % name)
+        object.__setattr__(self, name, value)
 
 
 class Session(object):
