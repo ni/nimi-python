@@ -32,10 +32,12 @@ def merge_dicts(into, outof):
 from metadata.functions_addon import functions_codegen_method
 from metadata.functions_addon import functions_params_types
 from metadata.functions_addon import functions_buffer_info
+from metadata.functions_addon import functions_is_error_handling
 
 merge_dicts(functions, functions_codegen_method)
 merge_dicts(functions, functions_params_types)
 merge_dicts(functions, functions_buffer_info)
+merge_dicts(functions, functions_is_error_handling)
 
 __version__ = config['module_version']
 
