@@ -569,12 +569,20 @@ def get_function_rst(fname, config, indent=0):
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple ('+ ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
-            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type']) + '\n'
+            p_type = p['intrinsic_type']
+            if p_type.startswith('enums.'):
+                p_type = p_type.replace('enums.', '')
+                p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p_type) + '\n'
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
-        rst += '\n\n' + (' ' * indent) + ':rtype: '+ p['python_type'] + '\n'
         rst += get_documentation_for_node_rst(p, config, indent + 8)
+        p_type = p['intrinsic_type']
+        if p_type.startswith('enums.'):
+            p_type = p_type.replace('enums.', '')
+            p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+        rst += '\n\n' + (' ' * indent) + ':rtype: '+ p_type + '\n'
 
     return rst
 
