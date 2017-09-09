@@ -577,12 +577,12 @@ def get_function_rst(fname, config, indent=0):
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
-        rst += get_documentation_for_node_rst(p, config, indent + 8)
         p_type = p['intrinsic_type']
         if p_type.startswith('enums.'):
             p_type = p_type.replace('enums.', '')
             p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
         rst += '\n\n' + (' ' * indent) + ':rtype: '+ p_type + '\n'
+        rst += (' ' * indent) + ':return:\n' + get_documentation_for_node_rst(p, config, indent + 8)
 
     return rst
 
