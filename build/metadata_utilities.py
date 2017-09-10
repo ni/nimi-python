@@ -163,10 +163,10 @@ def test_merge_dict_with_regex():
     expected = {'aaa':{'z':99}, 'aaaa':{'x':98, 'z':99}, 'aaaaa':{'z':99}, 'bbb':{'bbb1':2, 'bbb2':3}, 'ccc':['x', 'y', 'z']}
     _do_the_test_merge_dicts(a,b, expected)
 
-def _do_the_test_add_all_metadata(funtions, expected):
-    actual = copy.deepcopy(funtions)
+def _do_the_test_add_all_metadata(functions, expected):
+    actual = copy.deepcopy(functions)
     actual = add_all_metadata(actual)
-    assert expected == actual, "\nfunctions = {0}\nexpected = {1}\nactual = {2}".format(pp.pformat(funtions), pp.pformat(expected), pp.pformat(actual))
+    assert expected == actual, "\nfunctions = {0}\nexpected = {1}\nactual = {2}".format(pp.pformat(functions), pp.pformat(expected), pp.pformat(actual))
 
 def test_add_all_metadata_simple():
     functions = {
