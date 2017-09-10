@@ -31,8 +31,6 @@ def merge_dicts(into, outof):
         else:
             into[item] = outof[item]
 
-    return
-
 # Functions to add information to metadata structures that are specific to our codegen needs.
 
 def _add_python_method_name(function, name):
