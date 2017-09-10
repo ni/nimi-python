@@ -12,7 +12,8 @@ nifake.Session methods
     .. note:: This function rules!
 
 
-    :rtype: ViBoolean
+    :rtype: bool
+    :return:
 
 
             Contains a boolean.
@@ -29,7 +30,8 @@ nifake.Session methods
     .. note:: This function rules!
 
 
-    :rtype: ViInt16
+    :rtype: int
+    :return:
 
 
             Contains a number.
@@ -44,7 +46,8 @@ nifake.Session methods
     
 
 
-    :rtype: ViChar
+    :rtype: int
+    :return:
 
 
             String comes back here. Buffer must be 256 big.
@@ -68,7 +71,8 @@ nifake.Session methods
 
     :type buffer_size: int
 
-    :rtype: ViChar
+    :rtype: int
+    :return:
 
 
             String comes back here. Buffer must be at least bufferSize big.
@@ -89,7 +93,7 @@ nifake.Session methods
 
         WHERE
 
-        a_quantity (ViInt32): 
+        a_quantity (int): 
 
 
             This is an amount.
@@ -98,7 +102,7 @@ nifake.Session methods
 
             .. note:: The amount will be between -2^31 and (2^31-1)
 
-        a_turtle (enums.Turtle): 
+        a_turtle (:py:data:`nifake.Turtle`): 
 
 
             Indicates a ninja turtle
@@ -146,7 +150,8 @@ nifake.Session methods
 
     :type maximum_time: int
 
-    :rtype: ViReal64
+    :rtype: float
+    :return:
 
 
             The measured value.
@@ -182,7 +187,7 @@ nifake.Session methods
 
         WHERE
 
-        reading_array (ViReal64): 
+        reading_array (float): 
 
 
             An array of measurement values.
@@ -191,7 +196,7 @@ nifake.Session methods
 
             .. note:: The size must be at least arraySize.
 
-        actual_number_of_points (ViInt32): 
+        actual_number_of_points (int): 
 
 
             Indicates the number of measured values actually retrieved.
@@ -212,14 +217,14 @@ nifake.Session methods
 
         WHERE
 
-        a_number (ViInt16): 
+        a_number (int): 
 
 
             Contains a number.
 
             
 
-        a_string (ViChar): 
+        a_string (int): 
 
 
             Contains a string.

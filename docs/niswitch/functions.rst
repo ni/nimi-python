@@ -37,7 +37,8 @@ niswitch.Session methods
 
     :type channel2: str
 
-    :rtype: enums.PathCapability
+    :rtype: :py:data:`niswitch.PathCapability`
+    :return:
 
 
             Indicates whether a path is valid. Possible values include:
@@ -534,7 +535,8 @@ niswitch.Session methods
 
     :type relay_name: str
 
-    :rtype: ViInt32
+    :rtype: int
+    :return:
 
 
             The number of relay cycles.
@@ -599,7 +601,8 @@ niswitch.Session methods
 
     :type relay_name: str
 
-    :rtype: enums.RelayPosition
+    :rtype: :py:data:`niswitch.RelayPosition`
+    :return:
 
 
             Indicates whether the relay is open or closed. NISWITCH\_VAL\_OPEN 10
@@ -864,7 +867,8 @@ niswitch.Session methods
 
     :type reset_device: bool
 
-    :rtype: ViSession
+    :rtype: int
+    :return:
 
 
             A particular NI-SWITCH session established with
@@ -882,7 +886,8 @@ niswitch.Session methods
     
 
 
-    :rtype: ViBoolean
+    :rtype: bool
+    :return:
 
 
             VI\_TRUE indicates that all created paths have settled. VI\_FALSE
@@ -898,7 +903,8 @@ niswitch.Session methods
     
 
 
-    :rtype: ViBoolean
+    :rtype: bool
+    :return:
 
 
             The driver returns the value of :py:data:`niswitch.IS\_SCANNING` attribute.
@@ -1264,7 +1270,7 @@ niswitch.Session methods
 
         WHERE
 
-        error_code (ViInt32): 
+        error_code (int): 
 
 
             Returns the error code read from the instrument's error queue. NI-SWITCH
@@ -1272,7 +1278,7 @@ niswitch.Session methods
 
             
 
-        error_message (ViChar): 
+        error_message (int): 
 
 
             Returns the error message string read from the instrument's error
@@ -1303,7 +1309,7 @@ niswitch.Session methods
 
         WHERE
 
-        instrument_driver_revision (ViChar): 
+        instrument_driver_revision (int): 
 
 
             NI-SWITCH software revision numbers in the form of a string. You must
@@ -1311,7 +1317,7 @@ niswitch.Session methods
 
             
 
-        firmware_revision (ViChar): 
+        firmware_revision (int): 
 
 
             Currently unsupported.
@@ -1330,14 +1336,14 @@ niswitch.Session methods
 
         WHERE
 
-        self_test_result (ViInt16): 
+        self_test_result (int): 
 
 
             Value returned from the switch device self-test. Passed 0 Failed 1
 
             
 
-        self_test_message (ViChar): 
+        self_test_message (int): 
 
 
             Self-test response string from the switch device. You must pass a ViChar
