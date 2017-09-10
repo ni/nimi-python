@@ -13,5 +13,6 @@ nimodinst module
    nimodinst/session
    nimodinst/functions
    nimodinst/attributes
+   nimodinst/examples
 
 

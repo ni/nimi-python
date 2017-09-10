@@ -14,5 +14,6 @@ niswitch module
    niswitch/functions
    niswitch/attributes
    niswitch/enums
+   niswitch/examples
 
 
