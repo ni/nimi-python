@@ -18,6 +18,8 @@ build.metadata_utilities.merge_dicts(functions, functions_params_types)
 build.metadata_utilities.merge_dicts(functions, functions_buffer_info)
 build.metadata_utilities.merge_dicts(functions, functions_is_error_handling)
 
+build.metadata_utilities.add_all_metadata(functions)
+
 __version__ = config['module_version']
 
 config['functions'] = functions

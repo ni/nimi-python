@@ -12,7 +12,6 @@ driver_name = config['driver_name']
 
 functions = template_parameters['metadata'].functions
 functions = helper.extract_codegen_functions(functions)
-functions = helper.add_all_metadata(functions)
 %>\
 
 import ctypes
