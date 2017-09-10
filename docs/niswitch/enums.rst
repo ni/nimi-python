@@ -1,5 +1,5 @@
-niswitch enums
-==============
+Enums
+=====
 
 Enums used in NI-SWITCH
 
