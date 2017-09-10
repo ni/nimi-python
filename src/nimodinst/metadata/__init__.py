@@ -9,10 +9,12 @@ import build.metadata_utilities
 from metadata.functions_addon import functions_codegen_method
 from metadata.functions_addon import functions_params_types
 from metadata.functions_addon import functions_buffer_info
+from metadata.functions_addon import functions_is_error_handling
 
 build.metadata_utilities.merge_dicts(functions, functions_codegen_method)
 build.metadata_utilities.merge_dicts(functions, functions_params_types)
 build.metadata_utilities.merge_dicts(functions, functions_buffer_info)
+build.metadata_utilities.merge_dicts(functions, functions_is_error_handling)
 
 __version__ = config['module_version']
 

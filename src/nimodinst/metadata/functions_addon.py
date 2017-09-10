@@ -37,3 +37,10 @@ functions_buffer_info = {
     'GetInstalledDeviceAttributeViString':  { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'attributeValueBufferSize'}, }, }, },
     'GetExtendedErrorInfo':                 { 'parameters': { 1: { 'size': {'mechanism':'ivi-dance', 'value':'errorInfoBufferSize'}, }, }, },
 }
+
+# These are functions we mark as "error_handling":True. The generator uses this information to
+# change how error handling is done within those functions themselves - basically, if an error occurs,
+# dont try to handle it, since the functions are only used within the context of error handling.
+functions_is_error_handling = {
+    'GetExtendedErrorInfo': { 'is_error_handling': True },
+}

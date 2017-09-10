@@ -126,6 +126,17 @@ def _add_python_return_type(f):
     f['returns_python'] = f['returns']
     return f
 
+def _add_is_error_handling(f):
+    '''Adds is_error_handling information to the function metadata if it isn't already defined. Defaults to False.'''
+    # TODO(marcoskirsch): The information is added in functions_addon.py. I think we can instead infer from method
+    # name but I am not sure if it's a good idea (heuristics vs being explicit - both error prone in different ways).
+    try:
+        f['is_error_handling']
+    except KeyError:
+        # Not populated, assume False
+        f['is_error_handling'] = False
+    return f
+
 def _add_buffer_info(parameter):
     '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
     try:
@@ -143,6 +154,7 @@ def add_all_metadata(functions):
         _add_python_method_name(functions[f], f)
         _add_ctypes_return_type(functions[f])
         _add_python_return_type(functions[f])
+        _add_is_error_handling(functions[f])
         for p in functions[f]['parameters']:
             _add_python_parameter_name(p)
             _add_python_type(p)
