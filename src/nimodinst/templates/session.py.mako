@@ -104,24 +104,10 @@ class Session(object):
 
         Returns the error description.
         '''
-        # TODO(texasaggie97) Rewrite to use code generated method, if possible.
-        buffer_size = self.library.${c_function_prefix}GetExtendedErrorInfo(0, None)
-
-        if (buffer_size > 0):
-            '''
-            Return code > 0 from first call to GetError represents the size of
-            the description.  Call it again.
-            Ignore incoming IVI error code and return description from the driver
-            (trust that the IVI error code was properly stored in the session
-            by the driver)
-            '''
-            error_code = ctypes_types.ViStatus_ctype(error_code)
-            error_message = ctypes.create_string_buffer(buffer_size)
-            self.library.${c_function_prefix}GetExtendedErrorInfo(buffer_size, error_message)
-
-        # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
-        #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
-        return error_message.value.decode("ascii")
+        try:
+            return self._get_extended_error_info()
+        except errors.Error:
+            return "Failed to retrieve error description."
 
     # Iterator functions
     def __len__(self):
