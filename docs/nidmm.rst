@@ -14,5 +14,5 @@ nidmm module
    nidmm/functions
    nidmm/attributes
    nidmm/enums
-
+   nidmm/examples
 
