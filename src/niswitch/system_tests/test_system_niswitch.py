@@ -140,11 +140,6 @@ def test_functions_error_query(session):
         assert test_error_desc in str(w[0].message)
 
 
-def test_functions_error_message(session):
-    message = session.error_message(-1074126847)
-    assert message == 'Invalid path string.'
-
-
 def test_functions_get_error_description(session):
     description = session.get_error_description(0)   # expect no errors
     assert description == ''
