@@ -171,41 +171,41 @@ class Session(object):
 
     def _close_installed_devices_session(self, handle):
         error_code = self.library.niModInst_CloseInstalledDevicesSession(self.handle)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _get_extended_error_info(self):
         error_info_buffer_size = 0
         error_info_ctype = None
         error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         error_info_buffer_size = error_code
         error_info_ctype = ctypes.cast(ctypes.create_string_buffer(error_info_buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode("ascii")
 
     def _get_installed_device_attribute_vi_int32(self, handle, index, attribute_id):
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niModInst_GetInstalledDeviceAttributeViInt32(self.handle, index, attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(attribute_value_ctype.value)
 
     def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id):
         attribute_value_buffer_size = 0
         attribute_value_ctype = None
         error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         attribute_value_buffer_size = error_code
         attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(attribute_value_buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niModInst_GetInstalledDeviceAttributeViString(self.handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode("ascii")
 
     def _open_installed_devices_session(self, driver):
         handle_ctype = ctypes_types.ViSession_ctype(0)
         device_count_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niModInst_OpenInstalledDevicesSession(driver.encode('ascii'), ctypes.pointer(handle_ctype), ctypes.pointer(device_count_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViSession(handle_ctype.value), python_types.ViInt32(device_count_ctype.value)
 

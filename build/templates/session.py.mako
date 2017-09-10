@@ -183,6 +183,9 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
             _, error_string = self._get_error()
             return error_string
         except errors.Error:
+            pass
+
+        try:
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
@@ -190,6 +193,8 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
             '''
             error_string = self._get_error_message(error_code)
             return error_string
+        except errors.Error:
+            return "Failed to retrieve error description."
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
@@ -215,17 +220,17 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
 % endfor
 % if ivi_dance_parameter is None:
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = None
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
 % endfor

@@ -21,8 +21,6 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
-        self._defaults['ClearError'] = {}
-        self._defaults['ClearError']['return'] = 0
         self._defaults['ClearInterchangeWarnings'] = {}
         self._defaults['ClearInterchangeWarnings']['return'] = 0
         self._defaults['ConfigureACBandwidth'] = {}
@@ -217,9 +215,6 @@ class SideEffectsHelper(object):
         self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
-        self._defaults['error_message'] = {}
-        self._defaults['error_message']['return'] = 0
-        self._defaults['error_message']['errorMessage'] = None
         self._defaults['error_query'] = {}
         self._defaults['error_query']['return'] = 0
         self._defaults['error_query']['errorCode'] = None
@@ -245,11 +240,6 @@ class SideEffectsHelper(object):
         if self._defaults['Abort']['return'] != 0:
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
-
-    def niDMM_ClearError(self, vi):  # noqa: N802
-        if self._defaults['ClearError']['return'] != 0:
-            return self._defaults['ClearError']['return']
-        return self._defaults['ClearError']['return']
 
     def niDMM_ClearInterchangeWarnings(self, vi):  # noqa: N802
         if self._defaults['ClearInterchangeWarnings']['return'] != 0:
@@ -567,8 +557,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetErrorMessage", param='errorMessage')
         if buffer_size == 0:
             return len(self._defaults['GetErrorMessage']['errorMessage'])
-        t = nidmm.ctypes_types.ViChar_ctype(self._defaults['GetErrorMessage']['errorMessage'].encode('ascii'))
-        error_message.value = ctypes.cast(t, nidmm.ctypes_types.ViChar_ctype).value
+        t = nidmm.ctypes_types.ViString_ctype(self._defaults['GetErrorMessage']['errorMessage'].encode('ascii'))
+        error_message.value = ctypes.cast(t, nidmm.ctypes_types.ViString_ctype).value
         return self._defaults['GetErrorMessage']['return']
 
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
@@ -772,14 +762,6 @@ class SideEffectsHelper(object):
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
-    def niDMM_error_message(self, vi, error_code, error_message):  # noqa: N802
-        if self._defaults['error_message']['return'] != 0:
-            return self._defaults['error_message']['return']
-        if self._defaults['error_message']['errorMessage'] is None:
-            raise MockFunctionCallError("niDMM_error_message", param='errorMessage')
-        error_message.contents.value = self._defaults['error_message']['errorMessage']
-        return self._defaults['error_message']['return']
-
     def niDMM_error_query(self, vi, error_code, error_message):  # noqa: N802
         if self._defaults['error_query']['return'] != 0:
             return self._defaults['error_query']['return']
@@ -822,8 +804,6 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niDMM_Abort.side_effect = MockFunctionCallError("niDMM_Abort")
         mock_library.niDMM_Abort.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_ClearError.side_effect = MockFunctionCallError("niDMM_ClearError")
-        mock_library.niDMM_ClearError.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ClearInterchangeWarnings.side_effect = MockFunctionCallError("niDMM_ClearInterchangeWarnings")
         mock_library.niDMM_ClearInterchangeWarnings.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ConfigureACBandwidth.side_effect = MockFunctionCallError("niDMM_ConfigureACBandwidth")
@@ -970,8 +950,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_UnlockSession.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_close.side_effect = MockFunctionCallError("niDMM_close")
         mock_library.niDMM_close.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_error_message.side_effect = MockFunctionCallError("niDMM_error_message")
-        mock_library.niDMM_error_message.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_error_query.side_effect = MockFunctionCallError("niDMM_error_query")
         mock_library.niDMM_error_query.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_reset.side_effect = MockFunctionCallError("niDMM_reset")

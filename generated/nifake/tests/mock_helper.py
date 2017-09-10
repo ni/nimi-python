@@ -21,8 +21,6 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
-        self._defaults['ClearError'] = {}
-        self._defaults['ClearError']['return'] = 0
         self._defaults['GetABoolean'] = {}
         self._defaults['GetABoolean']['return'] = 0
         self._defaults['GetABoolean']['aBoolean'] = None
@@ -95,9 +93,6 @@ class SideEffectsHelper(object):
         self._defaults['TwoInputFunction']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
-        self._defaults['error_message'] = {}
-        self._defaults['error_message']['return'] = 0
-        self._defaults['error_message']['errorMessage'] = None
 
     def __getitem__(self, func):
         return self._defaults[func]
@@ -109,11 +104,6 @@ class SideEffectsHelper(object):
         if self._defaults['Abort']['return'] != 0:
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
-
-    def niFake_ClearError(self, vi):  # noqa: N802
-        if self._defaults['ClearError']['return'] != 0:
-            return self._defaults['ClearError']['return']
-        return self._defaults['ClearError']['return']
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         if self._defaults['GetABoolean']['return'] != 0:
@@ -222,8 +212,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetErrorMessage", param='errorMessage')
         if buffer_size == 0:
             return len(self._defaults['GetErrorMessage']['errorMessage'])
-        t = nifake.ctypes_types.ViChar_ctype(self._defaults['GetErrorMessage']['errorMessage'].encode('ascii'))
-        error_message.value = ctypes.cast(t, nifake.ctypes_types.ViChar_ctype).value
+        t = nifake.ctypes_types.ViString_ctype(self._defaults['GetErrorMessage']['errorMessage'].encode('ascii'))
+        error_message.value = ctypes.cast(t, nifake.ctypes_types.ViString_ctype).value
         return self._defaults['GetErrorMessage']['return']
 
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
@@ -314,20 +304,10 @@ class SideEffectsHelper(object):
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
-    def niFake_error_message(self, vi, error_code, error_message):  # noqa: N802
-        if self._defaults['error_message']['return'] != 0:
-            return self._defaults['error_message']['return']
-        if self._defaults['error_message']['errorMessage'] is None:
-            raise MockFunctionCallError("niFake_error_message", param='errorMessage')
-        error_message.contents.value = self._defaults['error_message']['errorMessage']
-        return self._defaults['error_message']['return']
-
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niFake_Abort.side_effect = MockFunctionCallError("niFake_Abort")
         mock_library.niFake_Abort.return_value = nifake.python_types.ViStatus(0)
-        mock_library.niFake_ClearError.side_effect = MockFunctionCallError("niFake_ClearError")
-        mock_library.niFake_ClearError.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")
         mock_library.niFake_GetABoolean.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_GetANumber.side_effect = MockFunctionCallError("niFake_GetANumber")
@@ -380,5 +360,3 @@ class SideEffectsHelper(object):
         mock_library.niFake_TwoInputFunction.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_close.side_effect = MockFunctionCallError("niFake_close")
         mock_library.niFake_close.return_value = nifake.python_types.ViStatus(0)
-        mock_library.niFake_error_message.side_effect = MockFunctionCallError("niFake_error_message")
-        mock_library.niFake_error_message.return_value = nifake.python_types.ViStatus(0)
