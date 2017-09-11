@@ -284,6 +284,47 @@ class TestSession(object):
             except AttributeError as e:
                 pass
 
+    def test_get_vi_real64_attribute(self):
+        self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
+        test_number = 1.5
+        self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = test_number
+        with nifake.Session('dev1') as session:
+            attr_double = session.read_write_double
+            assert(attr_double == test_number)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, b"", 1000001, ANY)]
+            self.patched_library.niFake_GetAttributeViReal64.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAttributeViReal64.call_count == 1
+
+    def test_get_vi_bool_attribute(self):
+        self.patched_library.niFake_GetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_GetAttributeViBoolean
+        test_boolean = True
+        self.side_effects_helper['GetAttributeViBoolean']['attributeValue'] = test_boolean
+        with nifake.Session('dev1') as session:
+            attr_bool = session.read_write_bool
+            assert(attr_bool == test_boolean)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, b"", 1000000, ANY)]
+            self.patched_library.niFake_GetAttributeViBoolean.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAttributeViBoolean.call_count == 1
+
+    def test_error_get_vi_real64_attribute(self):
+        test_error_code = -123
+        test_error_desc = "ascending order"
+        self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
+        self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = 'Testing is fun?'
+        self.side_effects_helper['GetAttributeViReal64']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            try:
+                session._get_attribute_vi_real64("", 'invalidattribute')
+                assert False
+            except nifake.Error as e:
+                assert e.code == test_error_code
+                assert e.description == test_error_desc
+
     def test_get_error_description_get_error_message(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
