@@ -156,7 +156,7 @@ licenses allow for non-commercial and commercial use.
     :scale: 100%
     :target: https://opensource.org/licenses/MIT
 
-.. |CoverageStatus| image:: https://coveralls.io/repos/github/ni/nimi-python/badge.svg?branch=master
+.. |CoverageStatus| image:: https://coveralls.io/repos/github/ni/nimi-python/badge.svg?branch=master&dummy=no_cache_please_1
     :alt: Test Coverage - master branch
     :scale: 100%
     :target: https://coveralls.io/github/ni/nimi-python?branch=master
