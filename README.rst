@@ -34,6 +34,7 @@ The **nimi-python** repository generates Python bindings (Application Programmin
 
 * NI-DMM (Python module: nidmm)
 * NI-ModInst (Python module: nimodinst)
+* NI-SWITCH (Python module: niswitch)
 
 It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is called through its public C API using the
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
