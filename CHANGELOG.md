@@ -18,9 +18,16 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 * #### NI-ModInst
   * #### Added
   * #### Changed
+    * Device index is now on session not attribute. The correct way is now
+      ```python
+      i = 0
+      with nimodinst.Session('nidmm') as session:
+          name = session[i].device_name
+      ```
   * #### Removed
 * #### NI-Switch
   * #### Added
+    * Initial Release
   * #### Changed
   * #### Removed
 ## [0.1.0] - 2017-09-01
@@ -51,3 +58,4 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Changed
   * #### Removed
 -->
+

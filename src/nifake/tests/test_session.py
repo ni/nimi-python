@@ -4,7 +4,6 @@ import warnings
 
 from mock import ANY
 from mock import patch
-# from mock import call
 
 SESSION_NUM_FOR_TEST = 42
 
@@ -38,7 +37,7 @@ class TestSession(object):
         session = nifake.Session('dev1')
         assert(session.vi == SESSION_NUM_FOR_TEST)
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
-        patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False)
+        patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False, is_error_handling=False)
 
         errors_patcher.stop()
 
@@ -325,8 +324,7 @@ class TestSession(object):
             except nifake.Error as e:
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
-    '''
-    # Re-enable after issue 205 is fixed
+
     def test_get_error_description_get_error_message(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
@@ -337,10 +335,11 @@ class TestSession(object):
         self.patched_library.niFake_GetErrorMessage.side_effect = self.side_effects_helper.niFake_GetErrorMessage
         self.side_effects_helper['GetErrorMessage']['errorMessage'] = test_error_desc
         with nifake.Session('dev1') as session:
-            error_code, error_desc = session._get_error_description(test_error_code)
-            assert error_code == test_error_code
+            error_desc = session.get_error_description(test_error_code)
             assert error_desc == test_error_desc
-    '''
+        from mock import call
+        calls = [call(SESSION_NUM_FOR_TEST, test_error_code, 0, None), call(SESSION_NUM_FOR_TEST, len(test_error_desc), len(test_error_desc), ANY)]
+        self.patched_library.niFake_GetErrorMessage.assert_has_calls(calls)
 
     '''
     def test_set_string_attribute(self):

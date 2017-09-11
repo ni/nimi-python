@@ -75,83 +75,6 @@ def find_size_parameter(parameter, parameters):
         return None
     return find_parameter(parameter['size']['value'], parameters)
 
-# Functions to add information to metadata structures that are specific to our codegen needs.
-
-def _add_python_method_name(function, name):
-    '''Adds a python_name' key/value pair to the function metadata'''
-    if function['codegen_method'] == 'private':
-        function['python_name'] = '_' + camelcase_to_snakecase(name)
-    else:
-        function['python_name'] = camelcase_to_snakecase(name)
-    return function
-
-def _add_python_parameter_name(parameter):
-    '''Adds a python_name' key/value pair to the parameter metadata'''
-    parameter['python_name'] = camelcase_to_snakecase(parameter['name'])
-    return parameter
-
-def _add_python_type(parameter):
-    '''Adds a python_type key/value pair to the parameter metadata'''
-    if parameter['enum'] is None:
-        parameter['python_type'] = parameter['type']
-    else:
-        parameter['python_type'] = 'enums.' + parameter['enum']
-    return parameter
-
-def _add_intrinsic_type(parameter):
-    '''Adds a intrinsic (basic python type) key/value pair to the parameter metadata'''
-    if parameter['enum'] is None:
-        parameter['intrinsic_type'] = get_intrinsic_type_from_visa_type(parameter['type'])
-    else:
-        parameter['intrinsic_type'] = parameter['python_type']
-    return parameter
-
-def _add_ctypes_variable_name(parameter):
-    '''Adds a ctypes_variable_name key/value pair to the parameter metadata for a corresponding ctypes variable'''
-    parameter['ctypes_variable_name'] = parameter['python_name'] + '_ctype'
-    return parameter
-
-def _add_ctypes_type(parameter):
-    '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
-    parameter['ctypes_type'] = parameter['type'] + '_ctype'
-    return parameter
-
-def _add_ctypes_return_type(f):
-    '''Adds the ctypes_type key/value pair to the function metadata for the return type'''
-    f['returns_ctype'] = f['returns'] + '_ctype'
-    return f
-
-def _add_python_return_type(f):
-    '''Adds the ctypes_type key/value pair to the function metadata for the return type'''
-    f['returns_python'] = f['returns']
-    return f
-
-def _add_buffer_info(parameter):
-    '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
-    try:
-        parameter['size']
-        parameter['is_buffer'] = True
-    except KeyError:
-        # Not populated, assume False
-        parameter['size'] = {'mechanism':'fixed','value':1}
-        parameter['is_buffer'] = False
-    return parameter
-
-def add_all_metadata(functions):
-    '''Adds all codegen-specific metada to the function metadata list'''
-    for f in functions:
-        _add_python_method_name(functions[f], f)
-        _add_ctypes_return_type(functions[f])
-        _add_python_return_type(functions[f])
-        for p in functions[f]['parameters']:
-            _add_python_parameter_name(p)
-            _add_python_type(p)
-            _add_intrinsic_type(p)
-            _add_ctypes_variable_name(p)
-            _add_ctypes_type(p)
-            _add_buffer_info(p)
-    return functions
-
 # Python 2/3 compatibility
 
 def normalize_string_type(d):
@@ -492,7 +415,7 @@ def replace_func_python_name(f_match):
     '''
     fname = "Unknown"
     if f_match:
-        fname = f_match.group(1).replace('.', '').replace(',', '')
+        fname = f_match.group(1).replace('.', '').replace(',', '').replace('\\', '')
         fname = config['functions'][fname]['python_name']
     else:
         print('Unknown function name: {0}'.format(f_match.group(1)))
@@ -569,12 +492,20 @@ def get_function_rst(fname, config, indent=0):
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple ('+ ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
-            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p['python_type']) + '\n'
+            p_type = p['intrinsic_type']
+            if p_type.startswith('enums.'):
+                p_type = p_type.replace('enums.', '')
+                p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p_type) + '\n'
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
-        rst += '\n\n' + (' ' * indent) + ':rtype: '+ p['python_type'] + '\n'
-        rst += get_documentation_for_node_rst(p, config, indent + 8)
+        p_type = p['intrinsic_type']
+        if p_type.startswith('enums.'):
+            p_type = p_type.replace('enums.', '')
+            p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+        rst += '\n\n' + (' ' * indent) + ':rtype: '+ p_type + '\n'
+        rst += (' ' * indent) + ':return:\n' + get_documentation_for_node_rst(p, config, indent + 8)
 
     return rst
 

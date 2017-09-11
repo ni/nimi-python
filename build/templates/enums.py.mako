@@ -15,7 +15,7 @@ class ${enum_name}(Enum):
     % else:
     ${enum_value['name']} = ${enum_value['value']}
     % endif
-    % if 'documentation' in enum_value:
+    % if 'documentation' in enum_value and len(helper.get_documentation_for_node_docstring(enum_value, config, indent=4).strip()) > 0:
     '''
     ${helper.get_documentation_for_node_docstring(enum_value, config, indent=4)}
     '''
