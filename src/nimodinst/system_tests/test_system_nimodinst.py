@@ -58,6 +58,7 @@ def test_device_model_attribute():
         assert len(session) > 0, 'Must have hardware for ModInst tests to be valid.'
         assert len(session[0].device_model) > 0
         assert isinstance(session[0].device_model, str)
+        assert False
         pattern = r'(NI )?[A-Z]+e?-\d\d\d\d'
         assert re.search(pattern, session[0].device_model) is not None  # NI Model numbers are generally "NI PXIe-2532", but might also be "USB-2532"
 
