@@ -6,6 +6,8 @@
 | Versions             | NI-DMM     | |DMMLatestVersion| |DMMPythonVersion|         |
 |                      +------------+-----------------------------------------------+
 |                      | NI-ModInst | |ModInstLatestVersion| |ModInstPythonVersion| |
+|                      +------------+-----------------------------------------------+
+|                      | NI-SWITCH  | |SwitchLatestVersion| |SwitchPythonVersion|   |
 +----------------------+------------+-----------------------------------------------+
 
 ===========  ============================================================================================================================
@@ -163,20 +165,30 @@ licenses allow for non-commercial and commercial use.
     :scale: 100%
     :target: http://pypi.python.org/pypi/nidmm
 
-.. |ModInstLatestVersion| image:: http://img.shields.io/pypi/v/nimodinst.svg
-    :alt: Latest NI-ModInst Version
-    :scale: 100%
-    :target: http://pypi.python.org/pypi/nimodinst
-
 .. |DMMPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidmm.svg
     :alt: NI-DMM supported Python versions
     :scale: 100%
     :target: http://pypi.python.org/pypi/nidmm
 
+.. |ModInstLatestVersion| image:: http://img.shields.io/pypi/v/nimodinst.svg
+    :alt: Latest NI-ModInst Version
+    :scale: 100%
+    :target: http://pypi.python.org/pypi/nimodinst
+
 .. |ModInstPythonVersion| image:: http://img.shields.io/pypi/pyversions/nimodinst.svg
     :alt: NI-ModInst supported Python versions
     :scale: 100%
     :target: http://pypi.python.org/pypi/nimodinst
+
+.. |SwitchLatestVersion| image:: http://img.shields.io/pypi/v/niswitch.svg
+    :alt: Latest NI-SWITCH Version
+    :scale: 100%
+    :target: http://pypi.python.org/pypi/niswitch
+
+.. |SwitchPythonVersion| image:: http://img.shields.io/pypi/pyversions/niswitch.svg
+    :alt: NI-SWITCH supported Python versions
+    :scale: 100%
+    :target: http://pypi.python.org/pypi/niswitch
 
 .. |OpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python.svg
     :alt: Open Issues + Pull Requests
