@@ -101,13 +101,9 @@ class AttributeEnum(object):
         if type(value) is not self.attribute_type:
             raise TypeError('must be ${module_name}.' + str(self.attribute_type.__name__) + ' not ' + str(type(value).__name__))
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
-% for c in config['context_manager']:
-<%
-context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
-%>\
 
 
-class ${context_name.title()}(object):
+class ${config['context_manager_name'].title()}(object):
     def __init__(self, session):
         self.session = session
 
@@ -117,7 +113,6 @@ class ${context_name.title()}(object):
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.session._abort()
-% endfor
 
 
 class Session(object):
@@ -150,14 +145,9 @@ class Session(object):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
-% for c in config['context_manager']:
-<%
-context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
-%>\
 
     def initiate(self):
-        return ${context_name.title()}(self)
-% endfor
+        return ${config['context_manager_name'].title()}(self)
 
     def __enter__(self):
         return self
