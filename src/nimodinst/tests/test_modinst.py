@@ -100,7 +100,7 @@ class TestSession(object):
             try:
                 session[0].chassis_number
             except nimodinst.Error as e:
-                assert e.code == -1 # we want the original error code from getting the attribute.
+                assert e.code == -1  # we want the original error code from getting the attribute.
                 assert e.description == "Failed to retrieve error description."
 
     def test_get_attribute_session(self):
