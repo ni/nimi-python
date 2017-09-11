@@ -309,7 +309,7 @@ class TestSession(object):
             assert self.patched_library.niFake_GetAttributeViBoolean.call_count == 1
 
     def test_error_get_vi_real64_attribute(self):
-        test_error_code = -1234
+        test_error_code = -123
         test_error_desc = "ascending order"
         self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
         self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = 'Testing is fun?'
