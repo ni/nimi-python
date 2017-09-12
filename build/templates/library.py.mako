@@ -44,7 +44,7 @@ class Library(object):
     f = functions[func_name]
     c_func_name = c_function_prefix + func_name
     params = f['parameters']
-    param_names_method = helper.get_method_parameters_snippet(params, skip_session_handle = False, skip_output_parameters = False, skip_ivi_dance_size_parameter = False)
+    param_names_method = helper.get_params_snippet(f, helper.ParamListType.FUNCTION)
     param_names_function = helper.get_function_parameters_snippet(params, session_name=False)
 %>\
 

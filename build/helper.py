@@ -2,6 +2,7 @@
 # TODO(marcoskirsch): Figure out unit test for this.
 
 from contextlib import contextmanager
+from enum import Enum
 import importlib
 import pprint
 import re
@@ -98,27 +99,57 @@ def normalize_string_type(d):
             d = d.decode('utf-8')
     return d
 
+
 # Functions that return snippets that can be placed directly in the templates.
+class ParamListType(Enum):
+    '''Type of parameter list to return'''
+    METHOD = 1
+    '''Used for methods'''
+    FUNCTION = 2
+    '''Used for functions'''
 
 
-def get_method_parameters_snippet(parameters, skip_session_handle, skip_output_parameters, skip_ivi_dance_size_parameter, session_name='vi'):
-    '''Returns a string suitable for the parameter list of a method given a list of parameter objects.
+def get_params_snippet(function, param_type, options={}):
+    '''Get a parameter list snippet based on type and options'''
+    if type(param_type) is not ParamListType:
+        raise TypeError('param_type must be of type ' + str(ParamListType))
+    if type(options) is not dict:
+        raise TypeError('param_type must be of type ' + str(dict))
 
-    You can optionally skip session handle parameter, the parameter used for an output
-    buffer size (i.e. you don't want it in a Session method), and output parameters.
-    '''
+    params_to_use = function['parameters']
+    if param_type == ParamListType.METHOD:
+        name_to_use = 'python_name'
+        default_options = {
+            'skip_session_handle': True,
+            'skip_output_parameters': True,
+            'skip_ivi_dance_size_parameter': True,
+            'session_name': 'vi',
+        }
+    elif param_type == ParamListType.FUNCTION:
+        name_to_use = 'python_name'
+        default_options = {
+            'skip_session_handle': False,
+            'skip_output_parameters': False,
+            'skip_ivi_dance_size_parameter': False,
+            'session_name': 'vi',
+        }
+
+    options_to_use = default_options
+    for o in options:
+        options_to_use[o] = options[o]
+
     snippets = ['self']
-    ivi_dance_size_parameter = find_size_parameter(extract_ivi_dance_parameter(parameters), parameters)
-    for x in parameters:
+    ivi_dance_size_parameter = find_size_parameter(extract_ivi_dance_parameter(params_to_use), params_to_use)
+    for x in params_to_use:
         skip = False
-        if x['direction'] == 'out' and skip_output_parameters:
+        if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
             skip = True
-        if x == ivi_dance_size_parameter and skip_ivi_dance_size_parameter:
+        if x == ivi_dance_size_parameter and options_to_use['skip_ivi_dance_size_parameter']:
             skip = True
-        if x['name'] == session_name and skip_session_handle:
+        if x['name'] == options_to_use['session_name'] and options_to_use['skip_session_handle']:
             skip = True
         if not skip:
-            snippets.append(x['python_name'])
+            snippets.append(x[name_to_use])
     return ', '.join(snippets)
 
 
