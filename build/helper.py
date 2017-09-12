@@ -152,6 +152,8 @@ def get_params_snippet(function, param_type, options={}):
         raise TypeError('param_type must be of type ' + str(dict))
 
     params_to_use = function['parameters']
+    name_to_use = 'python_name'
+
     options_to_use = ParamListTypeDefaults[param_type]
     for o in options:
         options_to_use[o] = options[o]
