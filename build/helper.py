@@ -111,7 +111,7 @@ class ParamListType(Enum):
     IMPL_METHOD = 2
     '''Used for methods param list for implementation'''
     DISPLAY_METHOD = 3
-    '''Used for methods param list for disple (rst)'''
+    '''Used for methods param list for display (rst)'''
     LIBRARY_METHOD = 4
     '''Used for methods param list when calling library'''
     LIBRARY_CALL = 5
