@@ -5,6 +5,7 @@ config = {
     'c_function_prefix': 'niFake_',
     'driver_name': 'NI-FAKE',
     'session_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
+    'session_name': 'vi',
     'library_info':
     {
         'Windows': {

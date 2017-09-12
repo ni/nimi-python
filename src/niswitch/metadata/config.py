@@ -5,6 +5,7 @@ config = {
     'c_function_prefix': 'niSwitch_',
     'driver_name': 'NI-SWITCH',
     'session_description': 'An NI-SWITCH session to a National Instruments Switch Module',
+    'session_name': 'vi',
     'library_info':
     {
         'Windows': {
