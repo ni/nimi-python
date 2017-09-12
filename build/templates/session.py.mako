@@ -20,6 +20,8 @@ ${encoding_tag}
     pp = pprint.PrettyPrinter(indent=4)
 
     functions = helper.extract_codegen_functions(functions)
+
+    session_context_manager = '_' + config['context_manager_name']['session'].title() if 'session' in config['context_manager_name'] else None
 %>\
 import ctypes
 
@@ -103,7 +105,8 @@ class AttributeEnum(object):
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
 
 
-class ${config['context_manager_name'].title()}(object):
+% if session_context_manager is not None:
+class ${session_context_manager}(object):
     def __init__(self, session):
         self.session = session
 
@@ -115,6 +118,7 @@ class ${config['context_manager_name'].title()}(object):
         self.session._abort()
 
 
+% endif
 class Session(object):
     '''${config['session_description']}'''
 
@@ -147,7 +151,7 @@ class Session(object):
         object.__setattr__(self, key, value)
 
     def initiate(self):
-        return ${config['context_manager_name'].title()}(self)
+        return ${session_context_manager}(self)
 
     def __enter__(self):
         return self
