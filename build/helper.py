@@ -156,7 +156,10 @@ def get_params_snippet(function, param_type, options={}):
     for o in options:
         options_to_use[o] = options[o]
 
-    snippets = ['self']
+    snippets = []
+    if not options_to_use['skip_self']:
+        snippets.append('self')
+
     ivi_dance_size_parameter = find_size_parameter(extract_ivi_dance_parameter(params_to_use), params_to_use)
     for x in params_to_use:
         skip = False
