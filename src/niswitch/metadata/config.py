@@ -15,10 +15,8 @@ config = {
             '64bit': {'name': 'libniswitch.so', 'type': 'cdll'},
         },
     },
-    'context_manager': [
-        {
-            'direction': 'input'
-        },
-    ]
+    'context_manager_name': {
+        'task': 'scan',
+    },
 }
 
