@@ -56,7 +56,7 @@ def test_vi_real64_attribute(session):
 
 
 def test_enum_attribute():
-    with niswitch.Session('', False, True, 'Simulate=1, DriverSetup=topology:2532/1-Wire 4x128 Matrix') as session:
+    with niswitch.Session('', False, False, 'Simulate=1, DriverSetup=topology:2532/1-Wire 4x128 Matrix') as session:
         assert session.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
 
 
