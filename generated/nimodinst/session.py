@@ -129,8 +129,9 @@ class Session(object):
         if error_code <= 0:
             return "Failed to retrieve error description."
         error_info_buffer_size = error_code
-        #error_info_ctype = ctypes.cast(ctypes.create_string_buffer(error_info_buffer_size), ctypes_types.ViChar_ctype)
         error_info_ctype = ctypes.create_string_buffer(error_info_buffer_size)
+        # Note we don't look at the return value. This is intentional as niModInst returns the
+        # original error code rather than 0 (VI_SUCCESS).
         self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
         return error_info_ctype.value.decode("ascii")
 
