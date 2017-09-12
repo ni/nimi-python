@@ -253,7 +253,9 @@ def get_enum_type_check_snippet(parameter, indent):
     '''Returns python snippet to check that the type of a parameter is what is expected'''
     assert parameter['enum'] is not None, pp.pformat(parameter)
     assert parameter['direction'] == 'in', pp.pformat(parameter)
-    return 'if type(' + parameter['python_name'] + ') is not ' + parameter['python_type'] + ':\n' + (' ' * indent) + 'raise TypeError(\'Parameter mode must be of type \' + str(' + parameter['python_type'] + '))'
+    enum_check = 'if type(' + parameter['python_name'] + ') is not ' + parameter['python_type'] + ':\n'
+    enum_check += (' ' * indent) + 'raise TypeError(\'Parameter mode must be of type \' + str(' + parameter['python_type'] + '))'
+    return enum_check
 
 
 def get_ctype_variable_declaration_snippet(parameter, parameters):
@@ -356,7 +358,8 @@ def get_rst_table_snippet(d, config, indent=0, make_link=True):
 def get_rst_admonition_snippet(admonition, d, config, indent=0):
     '''Returns a rst formatted admonition if the given admonition ('note', 'caution') exists in the dictionary'''
     if admonition in d:
-        a = '\n\n' + (' ' * indent) + '.. {0}:: '.format(admonition) + get_indented_docstring_snippet(fix_references(d[admonition], config, make_link=True), indent + 4)
+        a = '\n\n' + (' ' * indent) + '.. {0}:: '.format(admonition)
+        a += get_indented_docstring_snippet(fix_references(d[admonition], config, make_link=True), indent + 4)
         return a
     else:
         return ''
@@ -640,8 +643,7 @@ def as_rest_table(data, full=False, header=True):
     data = data if data else [['No Data']]
     table = []
     # max size of each column
-    sizes = map(max, zip(*[[len(str(elt)) for elt in member]
-                           for member in data]))
+    sizes = map(max, zip(*[[len(str(elt)) for elt in member] for member in data]))
     if sys.version_info.major >= 3:
         sizes = list(sizes)
     num_elts = len(sizes)
@@ -657,11 +659,8 @@ def as_rest_table(data, full=False, header=True):
         end_of_line = ''
         line_marker = '='
 
-    meta_template = vertical_separator.join(['{{{{{0}:{{{0}}}}}}}'.format(i)
-                                             for i in range(num_elts)])
-    template = '{0}{1}{2}'.format(start_of_line,
-                                  meta_template.format(*sizes),
-                                  end_of_line)
+    meta_template = vertical_separator.join(['{{{{{0}:{{{0}}}}}}}'.format(i) for i in range(num_elts)])
+    template = '{0}{1}{2}'.format(start_of_line, meta_template.format(*sizes), end_of_line)
     # determine top/bottom borders
     if full:
         to_separator = {ord('|'): '+', ord(' '): '-'}
@@ -674,9 +673,7 @@ def as_rest_table(data, full=False, header=True):
     start_of_line = start_of_line.translate(to_separator)
     vertical_separator = vertical_separator.translate(to_separator)
     end_of_line = end_of_line.translate(to_separator)
-    separator = '{0}{1}{2}'.format(start_of_line,
-                                   vertical_separator.join([x * line_marker for x in sizes]),
-                                   end_of_line)
+    separator = '{0}{1}{2}'.format(start_of_line, vertical_separator.join([x * line_marker for x in sizes]), end_of_line)
     # determine header separator
     th_separator_tr = {ord('-'): '='}
     if sys.version_info.major < 3:
@@ -685,9 +682,7 @@ def as_rest_table(data, full=False, header=True):
     line_marker = line_marker.translate(th_separator_tr)
     vertical_separator = vertical_separator.translate(th_separator_tr)
     end_of_line = end_of_line.translate(th_separator_tr)
-    th_separator = '{0}{1}{2}'.format(start_of_line,
-                                      vertical_separator.join([x * line_marker for x in sizes]),
-                                      end_of_line)
+    th_separator = '{0}{1}{2}'.format(start_of_line, vertical_separator.join([x * line_marker for x in sizes]), end_of_line)
     # prepare result
     table.append(separator)
     # set table header
