@@ -104,10 +104,18 @@ class Session(object):
 
         Returns the error description.
         '''
-        try:
-            return self._get_extended_error_info()
-        except errors.Error:
+        # We hand-maintain the code that calls into self.library rather than leverage code-generation
+        # because niModInst_GetExtendedErrorInfo() does not properly do the IVI-dance.
+        # See https://github.com/ni/nimi-python/issues/166
+        error_info_buffer_size = 0
+        error_info_ctype = None
+        error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        if error_code <= 0:
             return "Failed to retrieve error description."
+        error_info_buffer_size = error_code
+        error_info_ctype = ctypes.create_string_buffer(error_info_buffer_size)
+        self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        return error_info_ctype.value.decode("ascii")
 
     # Iterator functions
     def __len__(self):
