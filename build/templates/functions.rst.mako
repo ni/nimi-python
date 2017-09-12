@@ -8,7 +8,6 @@
 
     functions = template_parameters['metadata'].functions
     functions = helper.extract_codegen_functions(functions)
-    functions = helper.add_all_metadata(functions)
 %>\
 ${helper.get_rst_header_snippet(module_name + '.Session methods', '=')}
 

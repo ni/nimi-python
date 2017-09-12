@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'nimodinst',
-    'module_version': '0.1.0.dev4',
+    'module_version': '0.2.0.dev1',
     'c_function_prefix': 'niModInst_',
     'driver_name': 'NI-ModInst',
     'session_description': 'A NI-ModInst session to get device information',

@@ -4,6 +4,11 @@
 bin/
 .eggs/
 .tox/
-.com.apple.timemachine.supported
+.coverage
+commands.log
 
 
+
+.vscode/launch.json
+
+.vscode/settings.json

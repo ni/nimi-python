@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to NI Modular Instruments Python API's documentation
+NI Modular Instruments Python Documentation
 ============================================================
 
 .. include:: ../README.rst
@@ -13,6 +13,7 @@ Welcome to NI Modular Instruments Python API's documentation
    :caption: Drivers
 
    nidmm
+   niswitch
    nimodinst
 
 Indices and tables

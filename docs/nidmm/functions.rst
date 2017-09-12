@@ -1045,7 +1045,8 @@ nidmm.Session methods
 
     :type maximum_time: int
 
-    :rtype: ViReal64
+    :rtype: float
+    :return:
 
 
             The measured value returned from the DMM.
@@ -1100,7 +1101,7 @@ nidmm.Session methods
 
         WHERE
 
-        reading_array (ViReal64): 
+        reading_array (float): 
 
 
             An array of measurement values.
@@ -1110,7 +1111,7 @@ nidmm.Session methods
             .. note:: The size of the **Reading\_Array** must be at least the size that you
                 specify for the **Array\_Size** parameter.
 
-        actual_number_of_points (ViInt32): 
+        actual_number_of_points (int): 
 
 
             Indicates the number of measured values actually retrieved from the DMM.
@@ -1160,7 +1161,7 @@ nidmm.Session methods
 
         WHERE
 
-        waveform_array (ViReal64): 
+        waveform_array (float): 
 
 
             **Waveform Array** is an array of measurement values stored in waveform
@@ -1168,7 +1169,7 @@ nidmm.Session methods
 
             
 
-        actual_number_of_points (ViInt32): 
+        actual_number_of_points (int): 
 
 
             Indicates the number of measured values actually retrieved from the DMM.
@@ -1223,14 +1224,14 @@ nidmm.Session methods
 
         WHERE
 
-        mode_string (ViChar): 
+        mode_string (int): 
 
 
             Returns a string containing the units of the **Measurement** mode.
 
             
 
-        range_string (ViChar): 
+        range_string (int): 
 
 
             Returns the :py:data:`nidmm.range` of the **Measurement**, formatted into a
@@ -1238,7 +1239,7 @@ nidmm.Session methods
 
             
 
-        data_string (ViChar): 
+        data_string (int): 
 
 
             Returns the **Measurement**, formatted according to the
@@ -1259,7 +1260,7 @@ nidmm.Session methods
 
         WHERE
 
-        aperture_time (ViReal64): 
+        aperture_time (float): 
 
 
             Specifies the amount of time the DMM digitizes the input signal for a
@@ -1285,7 +1286,7 @@ nidmm.Session methods
 
             
 
-        aperture_time_units (enums.ApertureTimeUnits): 
+        aperture_time_units (:py:data:`nidmm.ApertureTimeUnits`): 
 
 
             Indicates the units of aperture time as powerline cycles (PLCs) or
@@ -1307,7 +1308,8 @@ nidmm.Session methods
     
 
 
-    :rtype: ViReal64
+    :rtype: float
+    :return:
 
 
             Indicates the **actual\_range** the DMM is using. Returns the value of
@@ -1342,7 +1344,8 @@ nidmm.Session methods
 
     :type cal_type: int
 
-    :rtype: ViInt32
+    :rtype: int
+    :return:
 
 
             The number of times calibration has been performed.
@@ -1379,35 +1382,35 @@ nidmm.Session methods
 
         WHERE
 
-        month (ViInt32): 
+        month (int): 
 
 
             Indicates the **month** of the last calibration.
 
             
 
-        day (ViInt32): 
+        day (int): 
 
 
             Indicates the **day** of the last calibration.
 
             
 
-        year (ViInt32): 
+        year (int): 
 
 
             Indicates the **year** of the last calibration.
 
             
 
-        hour (ViInt32): 
+        hour (int): 
 
 
             Indicates the **hour** of the last calibration.
 
             
 
-        minute (ViInt32): 
+        minute (int): 
 
 
             Indicates the **minute** of the last calibration.
@@ -1454,7 +1457,8 @@ nidmm.Session methods
 
     :type buffer_size: int
 
-    :rtype: ViChar
+    :rtype: int
+    :return:
 
 
             Returns the **channel\_string** that is in the channel table at the
@@ -1482,7 +1486,8 @@ nidmm.Session methods
 
     :type options: str
 
-    :rtype: ViReal64
+    :rtype: float
+    :return:
 
 
             Returns the current **temperature** of the device.
@@ -1515,7 +1520,8 @@ nidmm.Session methods
 
     :type cal_type: int
 
-    :rtype: ViReal64
+    :rtype: float
+    :return:
 
 
             Returns the **temperature** during the last calibration.
@@ -1534,7 +1540,8 @@ nidmm.Session methods
     
 
 
-    :rtype: ViReal64
+    :rtype: float
+    :return:
 
 
             Returns the number of seconds it takes to make one measurement.
@@ -1587,7 +1594,8 @@ nidmm.Session methods
 
     :type buffer_size: int
 
-    :rtype: ViChar
+    :rtype: int
+    :return:
 
 
             Returns the next **coercion\_record** for the IVI session.
@@ -1648,7 +1656,8 @@ nidmm.Session methods
     
 
 
-    :rtype: ViBoolean
+    :rtype: bool
+    :return:
 
 
             Returns whether Self Cal is supported for the device specified by the
@@ -1681,7 +1690,8 @@ nidmm.Session methods
 
     :type measurement_value: float
 
-    :rtype: ViBoolean
+    :rtype: bool
+    :return:
 
 
             Returns whether the measurement value is a valid measurement or an
@@ -1714,7 +1724,8 @@ nidmm.Session methods
 
     :type measurement_value: float
 
-    :rtype: ViBoolean
+    :rtype: bool
+    :return:
 
 
             Returns whether the **Measurement\_Value** is a valid measurement or an
@@ -1746,7 +1757,7 @@ nidmm.Session methods
 
         WHERE
 
-        conductance (ViReal64): 
+        conductance (float): 
 
 
             **conductance** is the measured value of open cable compensation
@@ -1754,7 +1765,7 @@ nidmm.Session methods
 
             
 
-        susceptance (ViReal64): 
+        susceptance (float): 
 
 
             **susceptance** is the measured value of open cable compensation
@@ -1781,7 +1792,7 @@ nidmm.Session methods
 
         WHERE
 
-        resistance (ViReal64): 
+        resistance (float): 
 
 
             **resistance** is the measured value of short cable compensation
@@ -1789,7 +1800,7 @@ nidmm.Session methods
 
             
 
-        reactance (ViReal64): 
+        reactance (float): 
 
 
             **reactance** is the measured value of short cable compensation
@@ -1823,7 +1834,8 @@ nidmm.Session methods
 
     :type maximum_time: int
 
-    :rtype: ViReal64
+    :rtype: float
+    :return:
 
 
             The measured value returned from the DMM.
@@ -1877,7 +1889,7 @@ nidmm.Session methods
 
         WHERE
 
-        reading_array (ViReal64): 
+        reading_array (float): 
 
 
             An array of measurement values.
@@ -1887,7 +1899,7 @@ nidmm.Session methods
             .. note:: The size of the **Reading\_Array** must be at least the size that you
                 specify for the **Array\_Size** parameter.
 
-        actual_number_of_points (ViInt32): 
+        actual_number_of_points (int): 
 
 
             Indicates the number of measured values actually retrieved from the DMM.
@@ -1910,7 +1922,7 @@ nidmm.Session methods
 
         WHERE
 
-        acquisition_backlog (ViInt32): 
+        acquisition_backlog (int): 
 
 
             The number of measurements available to be read. If the backlog
@@ -1925,7 +1937,7 @@ nidmm.Session methods
                 AUTO RANGE ONCE (-3). These behaviors are due to the autorange model of
                 the devices.
 
-        acquisition_status (enums.AcquisitionStatus): 
+        acquisition_status (:py:data:`nidmm.AcquisitionStatus`): 
 
 
             Indicates status of the acquisition. The following table shows the
@@ -1988,7 +2000,7 @@ nidmm.Session methods
 
         WHERE
 
-        waveform_array (ViReal64): 
+        waveform_array (float): 
 
 
             An array of measurement values.
@@ -1998,7 +2010,7 @@ nidmm.Session methods
             .. note:: The size of the **Waveform\_Array** must be at least the size that you
                 specify for the **Array\_Size** parameter.
 
-        actual_number_of_points (ViInt32): 
+        actual_number_of_points (int): 
 
 
             Indicates the number of measured values actually retrieved from the DMM.
@@ -2074,32 +2086,6 @@ nidmm.Session methods
     
 
 
-.. function:: error_message(error_code, error_message)
-
-    Takes the **Error\_Code** returned by the instrument driver functions,
-    interprets it, and returns it as a user-readable string.
-
-    
-
-
-    :param error_code:
-
-
-        The **error\_code** returned from the instrument. The default is 0,
-        indicating VI\_SUCCESS.
-
-        
-
-    :type error_code: int
-
-    :rtype: ViChar
-
-
-            The error information formatted into a string.
-
-            
-
-
 .. function:: error_query(error_code, error_message)
 
     Reads an **Error\_Code** and message from the DMM error queue. National
@@ -2114,7 +2100,7 @@ nidmm.Session methods
 
         WHERE
 
-        error_code (ViStatus): 
+        error_code (int): 
 
 
             The **error\_code** returned from the instrument.
@@ -2123,7 +2109,7 @@ nidmm.Session methods
 
             
 
-        error_message (ViChar): 
+        error_message (int): 
 
 
             Formats the **Error\_Code** into a user-readable message string.
@@ -2154,7 +2140,7 @@ nidmm.Session methods
 
         WHERE
 
-        instrument_driver_revision (ViChar): 
+        instrument_driver_revision (int): 
 
 
             Returns a string containing the instrument driver software revision
@@ -2164,7 +2150,7 @@ nidmm.Session methods
 
             .. note:: The array must contain at least 256 elements ViChar[256].
 
-        firmware_revision (ViChar): 
+        firmware_revision (int): 
 
 
             Returns a string containing the instrument **firmware\_revision**
@@ -2191,7 +2177,7 @@ nidmm.Session methods
 
         WHERE
 
-        self_test_result (ViInt16): 
+        self_test_result (int): 
 
 
             Contains the value returned from the instrument self-test. Zero
@@ -2206,7 +2192,7 @@ nidmm.Session methods
                 NI 4081. Hence, even if the fuse is blown on the device, self-test does
                 not return error code 1013.
 
-        self_test_message (ViChar): 
+        self_test_message (int): 
 
 
             This parameter contains the string returned from the instrument

@@ -3,42 +3,44 @@
 
 
 import platform
+import warnings
 
 
-def _is_success(error_code):
-    return (error_code == 0)
+def _is_success(code):
+    return (code == 0)
 
 
-def _is_error(error_code):
-    return (error_code < 0)
+def _is_error(code):
+    return (code < 0)
 
 
-def _is_warning(error_code):
-    return (error_code > 0)
+def _is_warning(code):
+    return (code > 0)
 
 
 class _ErrorBase(Exception):
 
-    def __init__(self, session, error_code):
+    def __init__(self, code, description):
 
-        self.code, self.description = session._get_error_description(error_code)
+        self.code = code
+        self.description = description
         super(_ErrorBase, self).__init__(str(self.code) + ": " + self.description)
 
 
 class Error(_ErrorBase):
     '''An error originating from the NI-DMM driver'''
 
-    def __init__(self, session, error_code):
-        assert (_is_error(error_code)), "Should not raise Error if error_code is not fatal."
-        super(Error, self).__init__(session, error_code)
+    def __init__(self, code, description):
+        assert (_is_error(code)), "Should not raise Error if code is not fatal."
+        super(Error, self).__init__(code, description)
 
 
-class Warning(_ErrorBase):
+class NidmmWarning(Warning):
     '''A warning originating from the NI-DMM driver'''
 
-    def __init__(self, session, error_code):
-        assert (_is_warning(error_code)), "Should not raise Warning if error_code is not positive."
-        super(Warning, self).__init__(session, error_code)
+    def __init__(self, code, description):
+        assert (_is_warning(code)), "Should not create Warning if code is not positive."
+        super(NidmmWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
 
 
 class UnsupportedConfigurationError(Exception):
@@ -55,10 +57,30 @@ class DriverNotInstalledError(Exception):
         super(DriverNotInstalledError, self).__init__('The NI-DMM runtime is not installed. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
 
 
-def _handle_error(session, error_code):
-    if (_is_success(error_code)):
+def handle_error(session, code, ignore_warnings, is_error_handling):
+    '''handle_error
+
+    Helper function for handling errors returned by nidmm.Library.
+    It calls back into the session to get the corresponding error description
+    and raises if necessary.
+    '''
+
+    if _is_success(code) or (_is_warning(code) and ignore_warnings):
         return
-    if (_is_error(error_code)):
-        raise Error(session, error_code)
-    if (_is_warning(error_code)):
-        raise Warning(session, error_code)
+
+    if is_error_handling:
+        # The caller is in the midst of error handling. Don't get the
+        # error description in this case as that could itself fail.
+        description = "Failed to retrieve error description."
+        warnings.warn(description)
+    else:
+        description = session.get_error_description(code)
+
+    if _is_error(code):
+        raise Error(code, description)
+
+    assert _is_warning(code)
+    warnings.warn(NidmmWarning(code, description))
+
+
+warnings.filterwarnings("always", category=NidmmWarning)

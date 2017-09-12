@@ -10,49 +10,44 @@
     c_function_prefix = config['c_function_prefix']
 
     functions = helper.extract_codegen_functions(functions)
-    functions = helper.add_all_metadata(functions)
 %>\
 
 import ctypes
 from ${module_name} import ctypes_types
 from ${module_name} import errors
-from ${module_name} import library
+from ${module_name} import library_singleton
 from ${module_name} import python_types
 
 
 class AttributeViInt32(object):
 
-    def __init__(self, owner, attribute_id, index=None):
+    def __init__(self, owner, attribute_id, index):
         self._owner = owner
         self._index = index
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        i = self._index if self._index is not None else index
-        return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, i, self._attribute_id)
-
-    def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id), format_spec)
+        return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id)
 
 
 class AttributeViString(object):
 
-    def __init__(self, owner, attribute_id, index=None):
+    def __init__(self, owner, attribute_id, index):
         self._owner = owner
         self._index = index
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        i = self._index if self._index is not None else index
-        return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, i, self._attribute_id)
-
-    def __format__(self, format_spec):
-        return format(self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id), format_spec)
+        return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id)
 
 
 class Device(object):
 
+    # This is needed during __init__. Without it, __setattr__ raises an exception
+    _is_frozen = False
+
     def __init__(self, owner, index):
+        self._index = index
 % for attribute in helper.sorted_attrs(attributes):
         self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(owner, ${attribute}, index=index)
 %   if 'documentation' in attributes[attribute]:
@@ -61,6 +56,18 @@ class Device(object):
         '''
 %   endif
 % endfor
+        self._is_frozen = True
+
+    def __getattribute__(self, name):
+        if name in ['_is_frozen', 'index']:
+            return object.__getattribute__(self, name)
+        else:
+            return object.__getattribute__(self, name).__getitem__(None)
+
+    def __setattr__(self, name, value):
+        if self._is_frozen and name not in ['_is_frozen', 'index']:
+            raise TypeError("%s is not writable" % name)
+        object.__setattr__(self, name, value)
 
 
 class Session(object):
@@ -70,19 +77,10 @@ class Session(object):
     _is_frozen = False
 
     def __init__(self, driver):
-% for attribute in helper.sorted_attrs(attributes):
-        self.${attributes[attribute]['name'].lower()} = Attribute${attributes[attribute]['type']}(self, ${attribute})
-%   if 'documentation' in attributes[attribute]:
-        '''
-        ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
-        '''
-%   endif
-% endfor
-
         self.handle = 0
         self.item_count = 0
         self.current_item = 0
-        self.library = library.get_library()
+        self.library = library_singleton.get()
         self.handle, self.item_count = self._open_installed_devices_session(driver)
 
         self._is_frozen = True
@@ -92,8 +90,8 @@ class Session(object):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
 
-    def __del__(self):
-        pass
+    def __getitem__(self, index):
+        return Device(self, index)
 
     def __enter__(self):
         return self
@@ -101,27 +99,25 @@ class Session(object):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
-    # method needed for generic driver exceptions
-    # TODO(texasaggie97) Rewrite to use session function instead of library once buffer
-    #   retrieval is working
-    def _get_error_description(self, error_code):
-        buffer_size = self.library.${c_function_prefix}GetExtendedErrorInfo(0, None)
+    def get_error_description(self, error_code):
+        '''get_error_description
 
-        if (buffer_size > 0):
-            '''
-            Return code > 0 from first call to GetError represents the size of
-            the description.  Call it again.
-            Ignore incoming IVI error code and return description from the driver
-            (trust that the IVI error code was properly stored in the session
-            by the driver)
-            '''
-            error_code = ctypes_types.ViStatus_ctype(error_code)
-            error_message = ctypes.create_string_buffer(buffer_size)
-            self.library.${c_function_prefix}GetExtendedErrorInfo(buffer_size, error_message)
-
-        # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
-        #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
-        return error_code.value, error_message.value.decode("ascii")
+        Returns the error description.
+        '''
+        # We hand-maintain the code that calls into self.library rather than leverage code-generation
+        # because niModInst_GetExtendedErrorInfo() does not properly do the IVI-dance.
+        # See https://github.com/ni/nimi-python/issues/166
+        error_info_buffer_size = 0
+        error_info_ctype = None
+        error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        if error_code <= 0:
+            return "Failed to retrieve error description."
+        error_info_buffer_size = error_code
+        error_info_ctype = ctypes.create_string_buffer(error_info_buffer_size)
+        # Note we don't look at the return value. This is intentional as niModInst returns the
+        # original error code rather than 0 (VI_SUCCESS).
+        self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        return error_info_ctype.value.decode("ascii")
 
     # Iterator functions
     def __len__(self):
@@ -171,19 +167,17 @@ class Session(object):
 % endfor
 % if ivi_dance_parameter is None:
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
-        errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
-        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        ${ivi_dance_parameter['ctypes_variable_name']} = None
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
-        # Don't use _handle_error, because positive value in error_code means size, not warning.
-        if (errors._is_error(error_code)):
-            raise errors.Error(self.library, self.vi, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
-        errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
 % endfor

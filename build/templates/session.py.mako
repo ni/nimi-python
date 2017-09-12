@@ -20,14 +20,15 @@ ${encoding_tag}
     pp = pprint.PrettyPrinter(indent=4)
 
     functions = helper.extract_codegen_functions(functions)
-    functions = helper.add_all_metadata(functions)
+
+    session_context_manager = '_' + config['context_manager_name']['task'].title() if 'task' in config['context_manager_name'] else None
 %>\
 import ctypes
 
 from ${module_name} import ctypes_types
 from ${module_name} import enums
 from ${module_name} import errors
-from ${module_name} import library
+from ${module_name} import library_singleton
 from ${module_name} import python_types
 
 
@@ -100,15 +101,12 @@ class AttributeEnum(object):
 
     def __set__(self, obj, value):
         if type(value) is not self.attribute_type:
-            raise TypeError('Value mode must be of type ' + str(self.attribute_type))
+            raise TypeError('must be ${module_name}.' + str(self.attribute_type.__name__) + ' not ' + str(type(value).__name__))
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
-% for c in config['context_manager']:
-<%
-context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
-%>\
 
 
-class ${context_name.title()}(object):
+% if session_context_manager is not None:
+class ${session_context_manager}(object):
     def __init__(self, session):
         self.session = session
 
@@ -118,9 +116,9 @@ class ${context_name.title()}(object):
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.session._abort()
-% endfor
 
 
+% endif
 class Session(object):
     '''${config['session_description']}'''
 
@@ -140,8 +138,8 @@ class Session(object):
 %   endif
 % endfor
 
-    def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):
-        self.library = library.get_library()
+    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
+        self.library = library_singleton.get()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
 
@@ -151,17 +149,9 @@ class Session(object):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
-% for c in config['context_manager']:
-<%
-context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
-%>\
 
     def initiate(self):
-        return ${context_name.title()}(self)
-% endfor
-
-    def __del__(self):
-        pass
+        return ${session_context_manager}(self)
 
     def __enter__(self):
         return self
@@ -178,33 +168,27 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
             print("Failed to close session.")
         self.vi = 0
 
-    # method needed for generic driver exceptions
-    def _get_error_description(self, error_code):
+    def get_error_description(self, error_code):
+        '''get_error_description
+
+        Returns the error description.
+        '''
+        try:
+            _, error_string = self._get_error()
+            return error_string
+        except errors.Error:
+            pass
+
         try:
             '''
-            Return code > 0 from first call to GetError represents the size of
-            the description.  Call it again.
-            Ignore incoming IVI error code and return description from the driver
-            (trust that the IVI error code was properly stored in the session
-            by the driver)
+            It is expected for _get_error to raise when the session is invalid
+            (IVI spec requires GetError to fail).
+            Use _get_error_message instead. It doesn't require a session.
             '''
-            # TODO(texasaggie97) This currently does not work - _get_error() will raise
-            # an exception that then calls this function, causing infinite recursion.
-            # Fix is beyond the scope of this PR
-            # Also fix documentation.
-            (new_error_code, new_error_string) = self._get_error()
-            return new_error_code, new_error_string
+            error_string = self._get_error_message(error_code)
+            return error_string
         except errors.Error:
-            '''
-            Return code <= 0 from GetError indicates a problem.  This is expected
-            when the session is invalid (IVI spec requires GetError to fail).
-            Use GetErrorMessage instead.  It doesn't require a session.
-
-            Call ${c_function_prefix}GetErrorMessage, pass VI_NULL for the buffer in order to retrieve
-            the length of the error message.
-            '''
-            new_error_string = self._get_error_message(error_code)
-            return error_code, new_error_string
+            return "Failed to retrieve error description."
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
@@ -230,19 +214,17 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
 % endfor
 % if ivi_dance_parameter is None:
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = None
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        # Don't use _handle_error, because positive value in error_code means size, not warning.
-        if (errors._is_error(error_code)):
-            raise errors.Error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
         error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
-        errors._handle_error(self, error_code)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
 % endfor
