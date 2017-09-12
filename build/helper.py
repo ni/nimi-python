@@ -34,6 +34,7 @@ def function_to_method_name(f):
     # Method name is camelCase.
     return f['name'][0].lower() + f['name'][1:]
 
+
 # Filters
 
 
@@ -71,6 +72,7 @@ def extract_ivi_dance_parameter(parameters):
     assert param[0]['is_buffer'], "ivi-dance parameter must have 'is_buffer':True. Check your metadata."
     return param[0]
 
+
 # Find utilities
 
 
@@ -85,6 +87,7 @@ def find_size_parameter(parameter, parameters):
     if not parameter:
         return None
     return find_parameter(parameter['size']['value'], parameters)
+
 
 # Python 2/3 compatibility
 
