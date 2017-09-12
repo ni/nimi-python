@@ -71,6 +71,7 @@ DEFAULT_RST_FILES_TO_GENERATE := \
                      enums.rst \
                      attributes.rst \
                      functions.rst \
+                     examples.rst \
 
 # Files for tracking parts of the build
 WHEEL_BUILD_DONE := $(LOG_DIR)/wheel_build_done

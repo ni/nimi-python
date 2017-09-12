@@ -24,8 +24,6 @@ class SideEffectsHelper(object):
         self._defaults['CanConnect'] = {}
         self._defaults['CanConnect']['return'] = 0
         self._defaults['CanConnect']['pathCapability'] = None
-        self._defaults['ClearError'] = {}
-        self._defaults['ClearError']['return'] = 0
         self._defaults['ClearInterchangeWarnings'] = {}
         self._defaults['ClearInterchangeWarnings']['return'] = 0
         self._defaults['Commit'] = {}
@@ -140,9 +138,6 @@ class SideEffectsHelper(object):
         self._defaults['WaitForScanComplete']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
-        self._defaults['error_message'] = {}
-        self._defaults['error_message']['return'] = 0
-        self._defaults['error_message']['errorMessage'] = None
         self._defaults['error_query'] = {}
         self._defaults['error_query']['return'] = 0
         self._defaults['error_query']['errorCode'] = None
@@ -176,11 +171,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_CanConnect", param='pathCapability')
         path_capability.contents.value = self._defaults['CanConnect']['pathCapability']
         return self._defaults['CanConnect']['return']
-
-    def niSwitch_ClearError(self, vi):  # noqa: N802
-        if self._defaults['ClearError']['return'] != 0:
-            return self._defaults['ClearError']['return']
-        return self._defaults['ClearError']['return']
 
     def niSwitch_ClearInterchangeWarnings(self, vi):  # noqa: N802
         if self._defaults['ClearInterchangeWarnings']['return'] != 0:
@@ -498,14 +488,6 @@ class SideEffectsHelper(object):
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
-    def niSwitch_error_message(self, vi, error_code, error_message):  # noqa: N802
-        if self._defaults['error_message']['return'] != 0:
-            return self._defaults['error_message']['return']
-        if self._defaults['error_message']['errorMessage'] is None:
-            raise MockFunctionCallError("niSwitch_error_message", param='errorMessage')
-        error_message.contents.value = self._defaults['error_message']['errorMessage']
-        return self._defaults['error_message']['return']
-
     def niSwitch_error_query(self, vi, error_code, error_message):  # noqa: N802
         if self._defaults['error_query']['return'] != 0:
             return self._defaults['error_query']['return']
@@ -550,8 +532,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_AbortScan.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_CanConnect.side_effect = MockFunctionCallError("niSwitch_CanConnect")
         mock_library.niSwitch_CanConnect.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_ClearError.side_effect = MockFunctionCallError("niSwitch_ClearError")
-        mock_library.niSwitch_ClearError.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_ClearInterchangeWarnings.side_effect = MockFunctionCallError("niSwitch_ClearInterchangeWarnings")
         mock_library.niSwitch_ClearInterchangeWarnings.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_Commit.side_effect = MockFunctionCallError("niSwitch_Commit")
@@ -646,8 +626,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_WaitForScanComplete.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_close.side_effect = MockFunctionCallError("niSwitch_close")
         mock_library.niSwitch_close.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_error_message.side_effect = MockFunctionCallError("niSwitch_error_message")
-        mock_library.niSwitch_error_message.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_error_query.side_effect = MockFunctionCallError("niSwitch_error_query")
         mock_library.niSwitch_error_query.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_reset.side_effect = MockFunctionCallError("niSwitch_reset")

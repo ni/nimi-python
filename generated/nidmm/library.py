@@ -18,7 +18,6 @@ class Library(object):
         self._func_lock = threading.Lock()
         # We cache the cfunc object from the ctypes.CDLL object
         self.niDMM_Abort_cfunc = None
-        self.niDMM_ClearError_cfunc = None
         self.niDMM_ClearInterchangeWarnings_cfunc = None
         self.niDMM_ConfigureACBandwidth_cfunc = None
         self.niDMM_ConfigureADCCalibration_cfunc = None
@@ -92,7 +91,6 @@ class Library(object):
         self.niDMM_SetAttributeViString_cfunc = None
         self.niDMM_UnlockSession_cfunc = None
         self.niDMM_close_cfunc = None
-        self.niDMM_error_message_cfunc = None
         self.niDMM_error_query_cfunc = None
         self.niDMM_reset_cfunc = None
         self.niDMM_revision_query_cfunc = None
@@ -111,14 +109,6 @@ class Library(object):
                 self.niDMM_Abort_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niDMM_Abort_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_Abort_cfunc(vi)
-
-    def niDMM_ClearError(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_ClearError_cfunc is None:
-                self.niDMM_ClearError_cfunc = self._library.niDMM_ClearError
-                self.niDMM_ClearError_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDMM_ClearError_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_ClearError_cfunc(vi)
 
     def niDMM_ClearInterchangeWarnings(self, vi):  # noqa: N802
         with self._func_lock:
@@ -484,7 +474,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_GetErrorMessage_cfunc is None:
                 self.niDMM_GetErrorMessage_cfunc = self._library.niDMM_GetErrorMessage
-                self.niDMM_GetErrorMessage_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
+                self.niDMM_GetErrorMessage_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niDMM_GetErrorMessage_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_GetErrorMessage_cfunc(vi, error_code, buffer_size, error_message)
 
@@ -703,14 +693,6 @@ class Library(object):
                 self.niDMM_close_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niDMM_close_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_close_cfunc(vi)
-
-    def niDMM_error_message(self, vi, error_code, error_message):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_error_message_cfunc is None:
-                self.niDMM_error_message_cfunc = self._library.niDMM_error_message
-                self.niDMM_error_message_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
-                self.niDMM_error_message_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_error_message_cfunc(vi, error_code, error_message)
 
     def niDMM_error_query(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:

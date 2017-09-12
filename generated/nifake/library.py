@@ -18,7 +18,6 @@ class Library(object):
         self._func_lock = threading.Lock()
         # We cache the cfunc object from the ctypes.CDLL object
         self.niFake_Abort_cfunc = None
-        self.niFake_ClearError_cfunc = None
         self.niFake_GetABoolean_cfunc = None
         self.niFake_GetANumber_cfunc = None
         self.niFake_GetAStringOfFixedMaximumSize_cfunc = None
@@ -45,7 +44,6 @@ class Library(object):
         self.niFake_SimpleFunction_cfunc = None
         self.niFake_TwoInputFunction_cfunc = None
         self.niFake_close_cfunc = None
-        self.niFake_error_message_cfunc = None
 
         if library_type == 'windll':
             self._library = ctypes.WinDLL(library_name)
@@ -60,14 +58,6 @@ class Library(object):
                 self.niFake_Abort_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niFake_Abort_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_Abort_cfunc(vi)
-
-    def niFake_ClearError(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niFake_ClearError_cfunc is None:
-                self.niFake_ClearError_cfunc = self._library.niFake_ClearError
-                self.niFake_ClearError_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niFake_ClearError_cfunc.restype = nifake.python_types.ViStatus
-        return self.niFake_ClearError_cfunc(vi)
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         with self._func_lock:
@@ -161,7 +151,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetErrorMessage_cfunc is None:
                 self.niFake_GetErrorMessage_cfunc = self._library.niFake_GetErrorMessage
-                self.niFake_GetErrorMessage_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
+                self.niFake_GetErrorMessage_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niFake_GetErrorMessage_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_GetErrorMessage_cfunc(vi, error_code, buffer_size, error_message)
 
@@ -276,11 +266,3 @@ class Library(object):
                 self.niFake_close_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niFake_close_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_close_cfunc(vi)
-
-    def niFake_error_message(self, vi, error_code, error_message):  # noqa: N802
-        with self._func_lock:
-            if self.niFake_error_message_cfunc is None:
-                self.niFake_error_message_cfunc = self._library.niFake_error_message
-                self.niFake_error_message_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
-                self.niFake_error_message_cfunc.restype = nifake.python_types.ViStatus
-        return self.niFake_error_message_cfunc(vi, error_code, error_message)

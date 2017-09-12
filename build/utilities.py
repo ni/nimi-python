@@ -6,6 +6,7 @@ import logging
 import os
 import sys
 
+
 # From https://stackoverflow.com/questions/41861427/python-3-5-how-to-dynamically-import-a-module-given-the-full-file-path-in-the
 @contextmanager
 def add_to_path(p):
@@ -20,16 +21,18 @@ def add_to_path(p):
         logging.debug("Removing path %s" % p)
         sys.path = old_path
 
-def path_import(absolute_path):
-   '''implementation taken from https://docs.python.org/3/library/importlib.html#importing-a-source-file-directly'''
-   if not os.path.isabs(absolute_path):
-       absolute_path = os.path.join(sys.path[0], absolute_path)
-   logging.debug("Importing %s" % absolute_path)
-   with add_to_path(os.path.dirname(absolute_path)):
-       module = importlib.import_module(os.path.basename(absolute_path))
-       return module
 
-def configure_logging(lvl = logging.WARNING, logfile = None):
+def path_import(absolute_path):
+    '''implementation taken from https://docs.python.org/3/library/importlib.html#importing-a-source-file-directly'''
+    if not os.path.isabs(absolute_path):
+        absolute_path = os.path.join(sys.path[0], absolute_path)
+    logging.debug("Importing %s" % absolute_path)
+    with add_to_path(os.path.dirname(absolute_path)):
+        module = importlib.import_module(os.path.basename(absolute_path))
+        return module
+
+
+def configure_logging(lvl=logging.WARNING, logfile=None):
     root = logging.getLogger()
     # Remove all handlers. We will add our own
     while root.handlers:
@@ -43,6 +46,7 @@ def configure_logging(lvl = logging.WARNING, logfile = None):
         hndlr = logging.FileHandler(logfile)
     hndlr.setFormatter(formatter)
     root.addHandler(hndlr)
+
 
 def load_build(m):
     metadata = path_import(m)
