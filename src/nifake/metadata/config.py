@@ -16,7 +16,7 @@ config = {
         },
     },
     'context_manager_name': {
-        'session': 'acquisition',
+        'task': 'acquisition',
     },
 }
 

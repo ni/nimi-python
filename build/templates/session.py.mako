@@ -21,7 +21,7 @@ ${encoding_tag}
 
     functions = helper.extract_codegen_functions(functions)
 
-    session_context_manager = '_' + config['context_manager_name']['session'].title() if 'session' in config['context_manager_name'] else None
+    session_context_manager = '_' + config['context_manager_name']['task'].title() if 'task' in config['context_manager_name'] else None
 %>\
 import ctypes
 
