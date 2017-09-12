@@ -120,24 +120,20 @@ class Session(object):
 
         Returns the error description.
         '''
-        # TODO(texasaggie97) Rewrite to use code generated method, if possible.
-        buffer_size = self.library.niModInst_GetExtendedErrorInfo(0, None)
-
-        if (buffer_size > 0):
-            '''
-            Return code > 0 from first call to GetError represents the size of
-            the description.  Call it again.
-            Ignore incoming IVI error code and return description from the driver
-            (trust that the IVI error code was properly stored in the session
-            by the driver)
-            '''
-            error_code = ctypes_types.ViStatus_ctype(error_code)
-            error_message = ctypes.create_string_buffer(buffer_size)
-            self.library.niModInst_GetExtendedErrorInfo(buffer_size, error_message)
-
-        # TODO(marcoskirsch): By hardcoding encoding "ascii", internationalized strings will throw.
-        #       Which encoding should we be using? https://docs.python.org/3/library/codecs.html#standard-encodings
-        return error_message.value.decode("ascii")
+        # We hand-maintain the code that calls into self.library rather than leverage code-generation
+        # because niModInst_GetExtendedErrorInfo() does not properly do the IVI-dance.
+        # See https://github.com/ni/nimi-python/issues/166
+        error_info_buffer_size = 0
+        error_info_ctype = None
+        error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        if error_code <= 0:
+            return "Failed to retrieve error description."
+        error_info_buffer_size = error_code
+        error_info_ctype = ctypes.create_string_buffer(error_info_buffer_size)
+        # Note we don't look at the return value. This is intentional as niModInst returns the
+        # original error code rather than 0 (VI_SUCCESS).
+        self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        return error_info_ctype.value.decode("ascii")
 
     # Iterator functions
     def __len__(self):
