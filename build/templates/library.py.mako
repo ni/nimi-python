@@ -44,8 +44,8 @@ class Library(object):
     f = functions[func_name]
     c_func_name = c_function_prefix + func_name
     params = f['parameters']
-    param_names_method = helper.get_params_snippet(f, helper.ParamListType.FUNCTION)
     param_names_function = helper.get_function_parameters_snippet(params, session_name=False)
+    param_names_method = helper.get_params_snippet(f, helper.ParamListType.IMPL_METHOD)
 %>\
 
     def ${c_func_name}(${param_names_method}):  # noqa: N802

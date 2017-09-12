@@ -207,7 +207,7 @@ context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
     ivi_dance_parameter = helper.extract_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.METHOD)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.API_METHOD)}):
         '''${f['python_name']}
 
         ${helper.get_function_docstring(func_name, config, indent=8)}

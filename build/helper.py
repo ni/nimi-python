@@ -103,10 +103,10 @@ def normalize_string_type(d):
 # Functions that return snippets that can be placed directly in the templates.
 class ParamListType(Enum):
     '''Type of parameter list to return'''
-    METHOD = 1
-    '''Used for methods'''
-    FUNCTION = 2
-    '''Used for functions'''
+    API_METHOD = 1
+    '''Used for methods param list for the public API'''
+    IMPL_METHOD = 2
+    '''Used for methods param list for implementation'''
 
 
 def get_params_snippet(function, param_type, options={}):
