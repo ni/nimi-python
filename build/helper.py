@@ -114,6 +114,8 @@ class ParamListType(Enum):
     '''Used for methods param list for disple (rst)'''
     LIBRARY_METHOD = 4
     '''Used for methods param list when calling library'''
+    LIBRARY_CALL = 5
+    '''Used for methods param list when calling into the DLL'''
 
 
 ParamListTypeDefaults = {}
@@ -145,6 +147,13 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
     'skip_ivi_dance_size_parameter': False,
     'session_name': 'vi',
 }
+ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
+    'skip_self': True,
+    'skip_session_handle': False,
+    'skip_output_parameters': False,
+    'skip_ivi_dance_size_parameter': False,
+    'session_name': 'vi',
+}
 
 
 def get_params_snippet(function, param_type, options={}):
@@ -156,6 +165,8 @@ def get_params_snippet(function, param_type, options={}):
 
     params_to_use = function['parameters']
     name_to_use = 'python_name'
+    if param_type == ParamListType.LIBRARY_CALL:
+        name_to_use = 'library_call_name'
 
     options_to_use = ParamListTypeDefaults[param_type]
     for o in options:
@@ -176,30 +187,6 @@ def get_params_snippet(function, param_type, options={}):
             skip = True
         if not skip:
             snippets.append(x[name_to_use])
-    return ', '.join(snippets)
-
-
-def get_library_call_parameter_snippet(parameters_list, session_name='vi'):
-    '''Returns a string suitable to use as the parameters to the library object, i.e. "self, mode, range, digits_of_resolution"'''
-    snippets = []
-    for x in parameters_list:
-        if x['direction'] == 'in':
-            if x['name'] == session_name:
-                snippet = 'self.' + session_name
-            else:
-                snippet = x['python_name']
-                snippet += '.value' if x['enum'] is not None else ''
-                if x['type'] == 'ViString' or x['type'] == 'ViConstString' or x['type'] == 'ViRsrc':
-                    snippet += '.encode(\'ascii\')'
-        else:
-            assert x['direction'] == 'out', pp.pformat(x)
-            if x['size']['mechanism'] == 'ivi-dance':
-                snippet = x['ctypes_variable_name']
-            elif x['is_buffer']:
-                snippet = 'ctypes.cast(' + x['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + x['ctypes_type'] + '))'
-            else:
-                snippet = 'ctypes.pointer(' + (x['ctypes_variable_name']) + ')'
-        snippets.append(snippet)
     return ', '.join(snippets)
 
 
