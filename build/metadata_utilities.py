@@ -77,6 +77,15 @@ def _add_ctypes_variable_name(parameter):
 def _add_ctypes_type(parameter):
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
     parameter['ctypes_type'] = parameter['type'] + '_ctype'
+    if parameter['direction'] == 'out':
+        if parameter['type'] == 'ViString' or parameter['type'] == 'ViRsrc' or parameter['type'] == 'ViConstString':
+            # These are defined as c_char_p which is already a pointer!
+            parameter['ctypes_type_library_call'] = parameter['ctypes_type']
+        else:
+            parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + parameter['ctypes_type'] + ")"
+    else:
+        parameter['ctypes_type_library_call'] = parameter['ctypes_type']
+
     return parameter
 
 
@@ -255,6 +264,7 @@ def test_add_all_metadata_simple():
                 {
                     'ctypes_type': 'ViSession_ctype',
                     'ctypes_variable_name': 'vi_ctype',
+                    'ctypes_type_library_call': 'ViSession_ctype',
                     'direction': 'in',
                     'documentation': {
                         'description': 'Identifies a particular instrument session.'

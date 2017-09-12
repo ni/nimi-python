@@ -116,6 +116,8 @@ class ParamListType(Enum):
     '''Used for methods param list when calling library'''
     LIBRARY_CALL = 5
     '''Used for methods param list when calling into the DLL'''
+    LIBRARY_CALL_TYPES = 6
+    '''Used for methods param list types when calling into the DLL'''
 
 
 ParamListTypeDefaults = {}
@@ -154,6 +156,13 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
     'skip_ivi_dance_size_parameter': False,
     'session_name': 'vi',
 }
+ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
+    'skip_self': True,
+    'skip_session_handle': False,
+    'skip_output_parameters': False,
+    'skip_ivi_dance_size_parameter': False,
+    'session_name': 'vi',
+}
 
 
 def get_params_snippet(function, param_type, options={}):
@@ -167,6 +176,8 @@ def get_params_snippet(function, param_type, options={}):
     name_to_use = 'python_name'
     if param_type == ParamListType.LIBRARY_CALL:
         name_to_use = 'library_call_name'
+    if param_type == ParamListType.LIBRARY_CALL_TYPES:
+        name_to_use = 'ctypes_type_library_call'
 
     options_to_use = ParamListTypeDefaults[param_type]
     for o in options:
@@ -187,22 +198,6 @@ def get_params_snippet(function, param_type, options={}):
             skip = True
         if not skip:
             snippets.append(x[name_to_use])
-    return ', '.join(snippets)
-
-
-def get_library_call_parameter_types_snippet(parameters_list):
-    '''Returns a string suitable to use as the parameters to the library definition object'''
-    snippets = []
-    for x in parameters_list:
-        if x['direction'] == 'out':
-            if x['type'] == 'ViString' or x['type'] == 'ViRsrc' or x['type'] == 'ViConstString_ctype':
-                # These are defined as c_char_p which is already a pointer!
-                snippets.append(x['ctypes_type'])
-            else:
-                snippets.append("ctypes.POINTER(" + x['ctypes_type'] + ")")
-        else:
-            assert x['direction'] == 'in', pp.pformat(x)
-            snippets.append(x['ctypes_type'])
     return ', '.join(snippets)
 
 
