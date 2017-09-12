@@ -1,22 +1,21 @@
 #!/usr/bin/python3
 
 import codecs
-from mako.template import Template
-from mako.exceptions import RichTraceback
 import logging
-import argparse
-import os
+from mako.exceptions import RichTraceback
+from mako.template import Template
 import pprint
 import sys
 
 pp = pprint.PrettyPrinter(indent=4)
+
 
 def generate_template(template_name, template_params, dest_file, in_zip_file=False):
     try:
         template = Template(filename=template_name)
         rendered_template = template.render(template_parameters=template_params)
 
-    except:
+    except Exception:
         # Because mako expands into python, we catch all errors, not just MakoException.
         # Ideally, we'd use text_error_template, but it sucks.  html_error_template,
         # however, is useful.  Unfortunately emitting html isn't acceptable.  So we
@@ -26,7 +25,7 @@ def generate_template(template_name, template_params, dest_file, in_zip_file=Fal
         lines = tback.source.split('\n')
 
         # The underlying error.
-        logging.error("\n%s: %s\n" % ( str(tback.error.__class__.__name__), str(tback.error) ))
+        logging.error("\n%s: %s\n" % (str(tback.error.__class__.__name__), str(tback.error)))
         logging.error("Offending Template: %s\n" % template_name)
 
         # Show a source listing of the template, with offending line marked.
@@ -45,13 +44,13 @@ def generate_template(template_name, template_params, dest_file, in_zip_file=Fal
 
     logging.debug(rendered_template)
     if sys.version_info.major < 3:
-        fileHandlePublic = codecs.open(dest_file, mode="w", encoding='utf-8')
-        fileHandlePublic.write(rendered_template)
-        fileHandlePublic.close()
+        file_handle_public = codecs.open(dest_file, mode="w", encoding='utf-8')
+        file_handle_public.write(rendered_template)
+        file_handle_public.close()
     else:
-        fileHandlePublic = open(dest_file, 'wb')
-        fileHandlePublic.write(bytes(rendered_template, "UTF-8"))
-        fileHandlePublic.close()
+        file_handle_public = open(dest_file, 'wb')
+        file_handle_public.write(bytes(rendered_template, "UTF-8"))
+        file_handle_public.close()
 
 
 
