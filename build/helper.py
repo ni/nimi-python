@@ -113,6 +113,37 @@ class ParamListType(Enum):
     '''Used for methods param list when calling library'''
 
 
+ParamListTypeDefaults = {}
+ParamListTypeDefaults[ParamListType.API_METHOD] = {
+    'skip_self': False,
+    'skip_session_handle': True,
+    'skip_output_parameters': True,
+    'skip_ivi_dance_size_parameter': True,
+    'session_name': 'vi',
+}
+ParamListTypeDefaults[ParamListType.IMPL_METHOD] = {
+    'skip_self': False,
+    'skip_session_handle': False,
+    'skip_output_parameters': False,
+    'skip_ivi_dance_size_parameter': False,
+    'session_name': 'vi',
+}
+ParamListTypeDefaults[ParamListType.DISPLAY_METHOD] = {
+    'skip_self': True,
+    'skip_session_handle': True,
+    'skip_output_parameters': True,
+    'skip_ivi_dance_size_parameter': True,
+    'session_name': 'vi',
+}
+ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
+    'skip_self': True,
+    'skip_session_handle': False,
+    'skip_output_parameters': False,
+    'skip_ivi_dance_size_parameter': False,
+    'session_name': 'vi',
+}
+
+
 def get_params_snippet(function, param_type, options={}):
     '''Get a parameter list snippet based on type and options'''
     if type(param_type) is not ParamListType:
@@ -121,24 +152,7 @@ def get_params_snippet(function, param_type, options={}):
         raise TypeError('param_type must be of type ' + str(dict))
 
     params_to_use = function['parameters']
-    if param_type == ParamListType.METHOD:
-        name_to_use = 'python_name'
-        default_options = {
-            'skip_session_handle': True,
-            'skip_output_parameters': True,
-            'skip_ivi_dance_size_parameter': True,
-            'session_name': 'vi',
-        }
-    elif param_type == ParamListType.FUNCTION:
-        name_to_use = 'python_name'
-        default_options = {
-            'skip_session_handle': False,
-            'skip_output_parameters': False,
-            'skip_ivi_dance_size_parameter': False,
-            'session_name': 'vi',
-        }
-
-    options_to_use = default_options
+    options_to_use = ParamListTypeDefaults[param_type]
     for o in options:
         options_to_use[o] = options[o]
 
