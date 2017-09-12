@@ -82,7 +82,7 @@ class AttributeEnum(object):
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
 
 
-class Acquisition(object):
+class _Scan(object):
     def __init__(self, session):
         self.session = session
 
@@ -914,7 +914,7 @@ class Session(object):
         object.__setattr__(self, key, value)
 
     def initiate(self):
-        return Acquisition(self)
+        return _Scan(self)
 
     def __enter__(self):
         return self

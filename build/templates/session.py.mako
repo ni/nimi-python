@@ -20,6 +20,8 @@ ${encoding_tag}
     pp = pprint.PrettyPrinter(indent=4)
 
     functions = helper.extract_codegen_functions(functions)
+
+    session_context_manager = '_' + config['context_manager_name']['task'].title() if 'task' in config['context_manager_name'] else None
 %>\
 import ctypes
 
@@ -101,13 +103,10 @@ class AttributeEnum(object):
         if type(value) is not self.attribute_type:
             raise TypeError('must be ${module_name}.' + str(self.attribute_type.__name__) + ' not ' + str(type(value).__name__))
         obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
-% for c in config['context_manager']:
-<%
-context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
-%>\
 
 
-class ${context_name.title()}(object):
+% if session_context_manager is not None:
+class ${session_context_manager}(object):
     def __init__(self, session):
         self.session = session
 
@@ -117,9 +116,9 @@ class ${context_name.title()}(object):
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.session._abort()
-% endfor
 
 
+% endif
 class Session(object):
     '''${config['session_description']}'''
 
@@ -150,14 +149,9 @@ class Session(object):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
-% for c in config['context_manager']:
-<%
-context_name = 'acquisition' if c['direction'] == 'input' else 'generation'
-%>\
 
     def initiate(self):
-        return ${context_name.title()}(self)
-% endfor
+        return ${session_context_manager}(self)
 
     def __enter__(self):
         return self

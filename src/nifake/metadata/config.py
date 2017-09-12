@@ -16,11 +16,8 @@ config = {
             '64bit': {'name': 'libnifake.so', 'type': 'cdll'},
         },
     },
-    'context_manager': [
-        {
-            #TODO(marcoskirsch): I question the need for this, need to understand how it's used better.
-            'direction': 'input'
-        },
-    ]
+    'context_manager_name': {
+        'task': 'acquisition',
+    },
 }
 
