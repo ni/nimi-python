@@ -44,8 +44,8 @@ class Library(object):
     f = functions[func_name]
     c_func_name = c_function_prefix + func_name
     params = f['parameters']
-    param_names_function = helper.get_function_parameters_snippet(params, session_name=False)
     param_names_method = helper.get_params_snippet(f, helper.ParamListType.IMPL_METHOD)
+    param_names_library = helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD)
 %>\
 
     def ${c_func_name}(${param_names_method}):  # noqa: N802
@@ -54,5 +54,5 @@ class Library(object):
                 self.${c_func_name}_cfunc = self._library.${c_func_name}
                 self.${c_func_name}_cfunc.argtypes = [${helper.get_library_call_parameter_types_snippet(params)}]  # noqa: F405
                 self.${c_func_name}_cfunc.restype = ${module_name}.python_types.${f['returns_python']}
-        return self.${c_func_name}_cfunc(${param_names_function})
+        return self.${c_func_name}_cfunc(${param_names_library})
 % endfor

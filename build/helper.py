@@ -107,6 +107,10 @@ class ParamListType(Enum):
     '''Used for methods param list for the public API'''
     IMPL_METHOD = 2
     '''Used for methods param list for implementation'''
+    DISPLAY_METHOD = 3
+    '''Used for methods param list for disple (rst)'''
+    LIBRARY_METHOD = 4
+    '''Used for methods param list when calling library'''
 
 
 def get_params_snippet(function, param_type, options={}):
@@ -527,7 +531,7 @@ def get_function_rst(fname, config, indent=0):
     '''
     function = config['functions'][fname]
     rst = '.. function:: ' + function['python_name'] + '('
-    rst += get_function_parameters_snippet(function['parameters'], session_name='vi') + ')'
+    rst += get_params_snippet(function, ParamListType.DISPLAY_METHOD) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
