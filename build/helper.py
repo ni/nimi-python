@@ -176,19 +176,6 @@ def get_params_snippet(function, param_type, options={}):
     return ', '.join(snippets)
 
 
-def get_function_parameters_snippet(parameters, session_name='vi'):
-    '''Returns a string suitable for the parameter list of a method given a list of parameter objects
-
-    If session_name set, skip that parameter
-    '''
-    snippets = []
-    for x in parameters:
-        if session_name is not None and x['python_name'] == session_name:
-            continue
-        snippets.append(x['python_name'])
-    return ', '.join(snippets)
-
-
 def get_library_call_parameter_snippet(parameters_list, session_name='vi'):
     '''Returns a string suitable to use as the parameters to the library object, i.e. "self, mode, range, digits_of_resolution"'''
     snippets = []
