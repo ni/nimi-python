@@ -15,6 +15,8 @@ config = {
             '64bit': {'name': 'libnifake.so', 'type': 'cdll'},
         },
     },
-    'context_manager_name': '_Acquisition',
+    'context_manager_name': {
+        'session': 'acquisition',
+    },
 }
 
