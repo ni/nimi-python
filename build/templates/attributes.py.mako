@@ -8,6 +8,7 @@ ${encoding_tag}
     module_name = template_parameters['metadata'].config['module_name']
 %>\
 
+
 class Attribute(object):
     '''Base class for all typed attributes.'''
 

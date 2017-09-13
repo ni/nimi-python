@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
+
 class Attribute(object):
     '''Base class for all typed attributes.'''
 
