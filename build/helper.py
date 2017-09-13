@@ -108,57 +108,69 @@ class ParamListType(Enum):
     '''Type of parameter list to return'''
     API_METHOD = 1
     '''Used for methods param list for the public API
-    
+
     'skip_self': False,
     'skip_session_handle': True,
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'session_name': 'vi',
+    'name_to_use': 'python_name',
+    'params_to_use': 'parameters'
     '''
     IMPL_METHOD = 2
     '''Used for methods param list for implementation
-    
+
     'skip_self': False,
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'session_name': 'vi',
+    'name_to_use': 'python_name',
+    'params_to_use': 'parameters'
     '''
     DISPLAY_METHOD = 3
     '''Used for methods param list for display (rst)
-    
+
     'skip_self': True,
     'skip_session_handle': True,
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'session_name': 'vi',
+    'name_to_use': 'python_name',
+    'params_to_use': 'parameters'
     '''
     LIBRARY_METHOD = 4
     '''Used for methods param list when calling library
-    
+
     'skip_self': True,
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'session_name': 'vi',
+    'name_to_use': 'python_name',
+    'params_to_use': 'parameters'
     '''
     LIBRARY_CALL = 5
     '''Used for methods param list when calling into the DLL
-    
+
     'skip_self': True,
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'session_name': 'vi',
+    'name_to_use': 'library_call_name',
+    'params_to_use': 'parameters'
     '''
     LIBRARY_CALL_TYPES = 6
     '''Used for methods param list types when calling into the DLL
-    
+
     'skip_self': True,
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'session_name': 'vi',
+    'name_to_use': 'ctypes_type_library_call',
+    'params_to_use': 'parameters'
     '''
 
 
@@ -169,6 +181,8 @@ ParamListTypeDefaults[ParamListType.API_METHOD] = {
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'session_name': 'vi',
+    'name_to_use': 'python_name',
+    'params_to_use': 'parameters'
 }
 ParamListTypeDefaults[ParamListType.IMPL_METHOD] = {
     'skip_self': False,
@@ -176,6 +190,8 @@ ParamListTypeDefaults[ParamListType.IMPL_METHOD] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'session_name': 'vi',
+    'name_to_use': 'python_name',
+    'params_to_use': 'parameters'
 }
 ParamListTypeDefaults[ParamListType.DISPLAY_METHOD] = {
     'skip_self': True,
@@ -183,6 +199,8 @@ ParamListTypeDefaults[ParamListType.DISPLAY_METHOD] = {
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'session_name': 'vi',
+    'name_to_use': 'python_name',
+    'params_to_use': 'parameters'
 }
 ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
     'skip_self': True,
@@ -190,6 +208,8 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'session_name': 'vi',
+    'name_to_use': 'python_name',
+    'params_to_use': 'parameters'
 }
 ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
     'skip_self': True,
@@ -197,6 +217,8 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'session_name': 'vi',
+    'name_to_use': 'library_call_name',
+    'params_to_use': 'parameters'
 }
 ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
     'skip_self': True,
@@ -204,12 +226,14 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'session_name': 'vi',
+    'name_to_use': 'ctypes_type_library_call',
+    'params_to_use': 'parameters'
 }
 
 
 def get_params_snippet(function, param_type, options={}):
     '''Get a parameter list snippet based on type and options
-    
+
     Name used:
         ParamListType.LIBRARY_CALL uses 'library_call_name'
         ParamListType.LIBRARY_CALL_TYPES uses 'ctypes_type_library_call'
@@ -220,16 +244,12 @@ def get_params_snippet(function, param_type, options={}):
     if type(options) is not dict:
         raise TypeError('param_type must be of type ' + str(dict))
 
-    params_to_use = function['parameters']
-    name_to_use = 'python_name'
-    if param_type == ParamListType.LIBRARY_CALL:
-        name_to_use = 'library_call_name'
-    if param_type == ParamListType.LIBRARY_CALL_TYPES:
-        name_to_use = 'ctypes_type_library_call'
-
     options_to_use = ParamListTypeDefaults[param_type]
     for o in options:
         options_to_use[o] = options[o]
+
+    name_to_use = options_to_use['name_to_use']
+    params_to_use = function[options_to_use['params_to_use']]
 
     snippets = []
     if not options_to_use['skip_self']:
