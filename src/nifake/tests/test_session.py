@@ -249,11 +249,11 @@ class TestSession(object):
 
     def test_set_enum_attribute(self):
         self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
-        attribute_id = 1000003
-        enum = nifake.Color.RED
+        enum_value = nifake.Color.RED
         with nifake.Session('dev1') as session:
-            session.read_write_color = enum
-            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
+            session.read_write_color = enum_value
+            attribute_id = 1000003
+            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, enum_value.value)
 
     def test_set_enum_attribute_bad_type(self):
         with nifake.Session('dev1') as session:
@@ -261,6 +261,14 @@ class TestSession(object):
                 session.read_write_color = 5
             except TypeError as e:
                 assert str(e) == 'must be nifake.Color not int'
+
+    def test_get_enum_attribute(self):
+        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
+        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = nifake.Color.BLUE.value
+        with nifake.Session('dev1') as session:
+            assert session.read_write_color == nifake.Color.BLUE
+            attribute_id = 1000003
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, ANY)
 
     def test_acquisition_context_manager(self):
         self.patched_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate
