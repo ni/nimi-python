@@ -133,8 +133,8 @@ class Session(object):
 
     def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
         self.library = library_singleton.get()
-        self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+        self.${config['session_handle_parameter_name']} = 0  # This must be set before calling _init_with_options.
+        self.${config['session_handle_parameter_name']} = self._init_with_options(resource_name, id_query, reset_device, options_string)
 
         self._is_frozen = True
 
@@ -159,7 +159,7 @@ class Session(object):
         except errors.Error:
             # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
             print("Failed to close session.")
-        self.vi = 0
+        self.${config['session_handle_parameter_name']} = 0
 
     def get_error_description(self, error_code):
         '''get_error_description

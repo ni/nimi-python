@@ -77,11 +77,11 @@ class Session(object):
     _is_frozen = False
 
     def __init__(self, driver):
-        self.handle = 0
+        self.${config['session_handle_parameter_name']} = 0
         self.item_count = 0
         self.current_item = 0
         self.library = library_singleton.get()
-        self.handle, self.item_count = self._open_installed_devices_session(driver)
+        self.${config['session_handle_parameter_name']}, self.item_count = self._open_installed_devices_session(driver)
 
         self._is_frozen = True
 
@@ -145,7 +145,7 @@ class Session(object):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         if(self.handle != 0):
             self._close_installed_devices_session(self.handle)
-            self.handle = 0
+            self.${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
