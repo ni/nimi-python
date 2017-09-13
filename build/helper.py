@@ -105,9 +105,12 @@ def normalize_string_type(d):
 
 # Functions that return snippets that can be placed directly in the templates.
 class ParamListType(Enum):
-    '''Type of parameter list to return'''
+    '''Type of parameter list to return
+
+    Used by different parts of the code generator to create the parameter list
+    '''
     API_METHOD = 1
-    '''Used for methods param list for the public API
+    '''Used for methods param list for the public API declaration
 
     'skip_self': False,
     'skip_session_handle': True,
