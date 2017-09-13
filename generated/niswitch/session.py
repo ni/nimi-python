@@ -2,77 +2,12 @@
 # This file was generated
 import ctypes
 
+from niswitch import attributes
 from niswitch import ctypes_types
 from niswitch import enums
 from niswitch import errors
 from niswitch import library_singleton
 from niswitch import python_types
-
-
-class Attribute(object):
-    '''Base class for all typed attributes.'''
-
-    def __init__(self, attribute_id, default_channel=''):
-        self._attribute_id = attribute_id
-        self._default_channel = default_channel
-
-    def __get__(self, obj, objtype):
-        assert objtype is Session
-        return self.get(obj, self._default_channel)
-
-    def __set__(self, obj, value):
-        return self.set(obj, self._default_channel, value)
-
-
-class AttributeViInt32(Attribute):
-
-    def get(self, session, channel):
-        return session._get_attribute_vi_int32(channel, self._attribute_id)
-
-    def set(self, session, channel, value):
-        session._set_attribute_vi_int32(channel, self._attribute_id, value)
-
-
-class AttributeViReal64(Attribute):
-
-    def get(self, session, channel):
-        return session._get_attribute_vi_real64(channel, self._attribute_id)
-
-    def set(self, session, channel, value):
-        session._set_attribute_vi_real64(channel, self._attribute_id, value)
-
-
-class AttributeViString(Attribute):
-
-    def get(self, session, channel):
-        return session._get_attribute_vi_string(channel, self._attribute_id)
-
-    def set(self, session, channel, value):
-        session._set_attribute_vi_string(channel, self._attribute_id, value)
-
-
-class AttributeViBoolean(Attribute):
-
-    def get(self, session, channel):
-        return session._get_attribute_vi_boolean(channel, self._attribute_id)
-
-    def set(self, session, channel, value):
-        session._set_attribute_vi_boolean(channel, self._attribute_id, value)
-
-
-class AttributeEnum(AttributeViInt32):
-
-    def __init__(self, attribute_id, enum_meta_class, channel=''):
-        self._attribute_type = enum_meta_class
-        super(AttributeEnum, self).__init__(attribute_id, channel)
-
-    def get(self, session, channel):
-        return self._attribute_type(super(AttributeEnum, self).get(session, channel))
-
-    def set(self, session, channel, value):
-        if type(value) is not self._attribute_type:
-            raise TypeError('must be niswitch.' + str(self._attribute_type.__name__) + ' not ' + str(type(value).__name__))
-        return super(AttributeEnum, self).set(session, channel, value.value)
 
 
 class _Scan(object):
@@ -93,7 +28,7 @@ class Session(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    analog_bus_sharing_enable = AttributeViBoolean(1150018)
+    analog_bus_sharing_enable = attributes.AttributeViBoolean(1150018)
     '''
     Enables or disables sharing of an analog bus line so that multiple
     NI SwitchBlock devices may connect to it simultaneously. To enable
@@ -108,7 +43,7 @@ class Session(object):
     Analog Bus on an NI SwitchBlock
     Carrier <switch.chm::/SwitchBlock_analog_bus_reservation.html>`__
     '''
-    bandwidth = AttributeViReal64(1250005)
+    bandwidth = attributes.AttributeViReal64(1250005)
     '''
     Returns the bandwidth for the channel in hertz.
 
@@ -118,21 +53,21 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
     Considerations <SWITCH.chm::/rf.html>`__
     '''
-    cabled_module_scan_advanced_bus = AttributeViInt32(1150009)
+    cabled_module_scan_advanced_bus = attributes.AttributeViInt32(1150009)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH. Use `niSwitch Route Scan Advanced
     Output <switchviref.chm::/niSwitch_Route_Scan_Advanced_Output.html>`__
     VI instead.
     '''
-    cabled_module_trigger_bus = AttributeViInt32(1150008)
+    cabled_module_trigger_bus = attributes.AttributeViInt32(1150008)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH. Use the `niSwitch Route Trigger
     Input <switchviref.chm::/niSwitch_Route_Trigger_Input.html>`__ VI
     instead.
     '''
-    cache = AttributeViBoolean(1050004)
+    cache = attributes.AttributeViBoolean(1050004)
     '''
     Specifies whether to cache the value of properties. The default value is
     TRUE. Use the `niSwitch Initialize With
@@ -150,7 +85,7 @@ class Session(object):
     Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    channel_count = AttributeViInt32(1050203)
+    channel_count = attributes.AttributeViInt32(1050203)
     '''
     Contains the number of channels that the instrument driver supports.
 
@@ -160,7 +95,7 @@ class Session(object):
     Name <switchviref.chm::/niSwitch_Get_Channel_Name.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    characteristic_impedance = AttributeViReal64(1250016)
+    characteristic_impedance = attributes.AttributeViReal64(1250016)
     '''
     Returns the characteristic impedance for the channel in ohms.
 
@@ -171,7 +106,7 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
     Considerations <SWITCH.chm::/rf.html>`__
     '''
-    continuous_scan = AttributeViBoolean(1150002)
+    continuous_scan = attributes.AttributeViBoolean(1150002)
     '''
     Specifies whether to continuously scan through a scan list. Set the
     property to FALSE to stop scanning after one pass through the scan list.
@@ -188,7 +123,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    digital_filter_enable = AttributeViBoolean(1150016)
+    digital_filter_enable = attributes.AttributeViBoolean(1150016)
     '''
     Specifies whether to apply the pulse width filter to the Trigger Input.
     Set the property to TRUE to prevent the switch module from being
@@ -203,7 +138,7 @@ class Session(object):
     `Disabling Digital Filtering <SWITCH.chm::/fast_pxi_triggering.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    driver_setup = AttributeViString(1050007)
+    driver_setup = attributes.AttributeViString(1050007)
     '''
     Contains the Driver Setup string that you specified when initializing
     the instrument driver.
@@ -226,7 +161,7 @@ class Session(object):
     Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    group_capabilities = AttributeViString(1050401)
+    group_capabilities = attributes.AttributeViString(1050401)
     '''
     Contains a comma-separated (,) list of class-extension groups that the
     instrument driver implements.
@@ -235,7 +170,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    handshaking_initiation = AttributeEnum(1150013, enums.HandshakingInitiation)
+    handshaking_initiation = attributes.AttributeEnum(1150013, enums.HandshakingInitiation)
     '''
     Specifies how to start handshaking with a measurement device.
 
@@ -245,7 +180,7 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    instrument_firmware_revision = AttributeViString(1050510)
+    instrument_firmware_revision = attributes.AttributeViString(1050510)
     '''
     Contains the firmware revision information for the instrument currently
     in use.
@@ -255,7 +190,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `niSwitch
     Revision Query <switchviref.chm::/niSwitch_Revision_Query.html>`__
     '''
-    instrument_manufacturer = AttributeViString(1050511)
+    instrument_manufacturer = attributes.AttributeViString(1050511)
     '''
     Contains the name of the manufacturer of the instrument currently in
     use.
@@ -264,7 +199,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    instrument_model = AttributeViString(1050512)
+    instrument_model = attributes.AttributeViString(1050512)
     '''
     Contains the model number or name of the instrument currently in use.
 
@@ -272,7 +207,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    interchange_check = AttributeViBoolean(1050021)
+    interchange_check = attributes.AttributeViBoolean(1050021)
     '''
     Specifies whether to perform interchangeability checking and retrieve
     interchangeability warnings when you call the `niSwitch Connect
@@ -305,7 +240,7 @@ class Session(object):
     Reset Interchange
     Check <switchviref.chm::/niSwitch_Reset_Interchange_Check.html>`__
     '''
-    io_resource_descriptor = AttributeViString(1050304)
+    io_resource_descriptor = attributes.AttributeViString(1050304)
     '''
     Contains the resource descriptor the instrument driver uses to identify
     the physical device.
@@ -320,7 +255,7 @@ class Session(object):
     `Initialization <SWITCH.chm::/flow_init.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    is_configuration_channel = AttributeViBoolean(1250003)
+    is_configuration_channel = attributes.AttributeViBoolean(1250003)
     '''
     Specifies whether to designate the channel as a configuration channel—a
     channel reserved for internal path creation. The instrument driver uses
@@ -341,7 +276,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
     Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
     '''
-    is_debounced = AttributeViBoolean(1250002)
+    is_debounced = attributes.AttributeViBoolean(1250002)
     '''
     Indicates whether the entire switch module has settled since the last
     switching command. A value of TRUE indicates that all signals going
@@ -353,7 +288,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Settling
     Time <SWITCH.chm::/settling_time.html>`__
     '''
-    is_scanning = AttributeViBoolean(1250024)
+    is_scanning = attributes.AttributeViBoolean(1250024)
     '''
     Indicates whether the switch module has completed the scan operation.
     TRUE indicates that the scan has completed.
@@ -363,7 +298,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    is_source_channel = AttributeViBoolean(1250001)
+    is_source_channel = attributes.AttributeViBoolean(1250001)
     '''
     Specifies whether to designate the channel as a source channel.
 
@@ -381,7 +316,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
     Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
     '''
-    is_waiting_for_trig = AttributeViBoolean(1150004)
+    is_waiting_for_trig = attributes.AttributeViBoolean(1150004)
     '''
     Indicates with a semi-colon (;) that at that point in the scan list, the
     scan engine should pause until a trigger is received from the trigger
@@ -397,7 +332,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    logical_name = AttributeViString(1050305)
+    logical_name = attributes.AttributeViString(1050305)
     '''
     Contains the logical name you specified when opening the current IVI
     session.
@@ -417,21 +352,21 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__ `Using NI Switches in
     IVI <SWITCH.chm::/switches_in_ivi.html>`__
     '''
-    master_slave_scan_advanced_bus = AttributeViInt32(1150007)
+    master_slave_scan_advanced_bus = attributes.AttributeViInt32(1150007)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH. Use `niSwitch Route Scan Advanced
     Output <switchviref.chm::/niSwitch_Route_Scan_Advanced_Output.html>`__
     VI instead.
     '''
-    master_slave_trigger_bus = AttributeViInt32(1150006)
+    master_slave_trigger_bus = attributes.AttributeViInt32(1150006)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH. Use the `niSwitch Route Trigger
     Input <switchviref.chm::/niSwitch_Route_Trigger_Input.html>`__ VI
     instead.
     '''
-    max_ac_voltage = AttributeViReal64(1250007)
+    max_ac_voltage = attributes.AttributeViReal64(1250007)
     '''
     Returns the maximum AC voltage the channel can switch in volts RMS.
 
@@ -440,7 +375,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_carry_ac_current = AttributeViReal64(1250011)
+    max_carry_ac_current = attributes.AttributeViReal64(1250011)
     '''
     Returns the maximum AC current the channel can carry in amperes RMS.
 
@@ -449,7 +384,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_carry_ac_power = AttributeViReal64(1250015)
+    max_carry_ac_power = attributes.AttributeViReal64(1250015)
     '''
     Returns the maximum AC power the channel can carry in volt-amperes.
 
@@ -458,7 +393,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_carry_dc_current = AttributeViReal64(1250010)
+    max_carry_dc_current = attributes.AttributeViReal64(1250010)
     '''
     Returns the maximum DC current the channel can carry in amperes.
 
@@ -467,7 +402,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_carry_dc_power = AttributeViReal64(1250014)
+    max_carry_dc_power = attributes.AttributeViReal64(1250014)
     '''
     Returns the maximum DC power the channel can carry in watts.
 
@@ -476,7 +411,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_dc_voltage = AttributeViReal64(1250006)
+    max_dc_voltage = attributes.AttributeViReal64(1250006)
     '''
     Returns the maximum DC voltage the channel can switch in volts.
 
@@ -485,7 +420,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_switching_ac_current = AttributeViReal64(1250009)
+    max_switching_ac_current = attributes.AttributeViReal64(1250009)
     '''
     Returns the maximum AC current the channel can switch in amperes RMS.
 
@@ -494,7 +429,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Current <SWITCH.chm::/switching_current.html>`__
     '''
-    max_switching_ac_power = AttributeViReal64(1250013)
+    max_switching_ac_power = attributes.AttributeViReal64(1250013)
     '''
     Returns the maximum AC power the channel can switch in volt-amperes.
 
@@ -503,7 +438,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Power <SWITCH.chm::/switching_power.html>`__
     '''
-    max_switching_dc_current = AttributeViReal64(1250008)
+    max_switching_dc_current = attributes.AttributeViReal64(1250008)
     '''
     Returns the maximum DC current the channel can switch in amperes.
 
@@ -512,7 +447,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Current <SWITCH.chm::/switching_current.html>`__
     '''
-    max_switching_dc_power = AttributeViReal64(1250012)
+    max_switching_dc_power = attributes.AttributeViReal64(1250012)
     '''
     Returns the maximum DC power the channel can switch in watts.
 
@@ -521,7 +456,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Power <SWITCH.chm::/switching_power.html>`__
     '''
-    number_of_relays = AttributeViInt32(1150014)
+    number_of_relays = attributes.AttributeViInt32(1150014)
     '''
     Returns the number of relays that the instrument driver supports.
 
@@ -531,7 +466,7 @@ class Session(object):
     Name <switchviref.chm::/niSwitch_Get_Relay_Name.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    num_of_columns = AttributeViInt32(1250019)
+    num_of_columns = attributes.AttributeViInt32(1250019)
     '''
     Returns the number of channels on the column of a matrix or scanner. If
     the switch module is a scanner, this property returns the number of
@@ -547,7 +482,7 @@ class Session(object):
     `Matrix <SWITCH.chm::/matrix.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    num_of_rows = AttributeViInt32(1250018)
+    num_of_rows = attributes.AttributeViInt32(1250018)
     '''
     Returns the number of channels on the row of a matrix or scanner. If the
     switch module is a scanner, this property returns the number of output
@@ -563,12 +498,12 @@ class Session(object):
     `Matrix <SWITCH.chm::/matrix.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    parsed_scan_list = AttributeViString(1150012)
+    parsed_scan_list = attributes.AttributeViString(1150012)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH.
     '''
-    power_down_latching_relays_after_debounce = AttributeViBoolean(1150017)
+    power_down_latching_relays_after_debounce = attributes.AttributeViBoolean(1150017)
     '''
     Specifies whether to power down latching relays after calling the
     `niSwitch Wait For
@@ -582,7 +517,7 @@ class Session(object):
     `Armature Relays <SWITCH.chm::/armature_relay.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    query_instrument_status = AttributeViBoolean(1050003)
+    query_instrument_status = attributes.AttributeViBoolean(1050003)
     '''
     Specifies whether the instrument driver queries the instrument status
     after each operation. The default value is TRUE. Use the `niSwitch
@@ -600,7 +535,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    range_check = AttributeViBoolean(1050002)
+    range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate property values and VI parameters. The
     default value is TRUE. Use the `niSwitch Initialize With
@@ -616,7 +551,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    record_coercions = AttributeViBoolean(1050006)
+    record_coercions = attributes.AttributeViBoolean(1050006)
     '''
     Specifies whether the IVI engine keeps a list of the value coercions it
     makes for properties with ViInt32 and ViReal64 datatypes. The default
@@ -634,7 +569,7 @@ class Session(object):
     Record <switchviref.chm::/niSwitch_Get_Next_Coercion_Record.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    scan_advanced_output = AttributeEnum(1250023, enums.ScanAdvancedOutput)
+    scan_advanced_output = attributes.AttributeEnum(1250023, enums.ScanAdvancedOutput)
     '''
     Specifies the method to use to notify another instrument that all
     signals through the switch module have settled following the processing
@@ -645,7 +580,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    scan_advanced_polarity = AttributeEnum(1150011, enums.ScanAdvancedPolarity)
+    scan_advanced_polarity = attributes.AttributeEnum(1150011, enums.ScanAdvancedPolarity)
     '''
     Specifies the driving level for the Scan Advanced Output signal sent
     from the switch module through either the external (PXI/PXIe) or front
@@ -659,7 +594,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    scan_delay = AttributeViReal64(1250025)
+    scan_delay = attributes.AttributeViReal64(1250025)
     '''
     Specifies the minimum amount of time the switch module waits before it
     asserts the scan advanced output trigger after opening or closing the
@@ -673,7 +608,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    scan_list = AttributeViString(1250020)
+    scan_list = attributes.AttributeViString(1250020)
     '''
     Contains a scan list (a string that specifies channel connections and
     trigger conditions). The `niSwitch Initiate
@@ -716,7 +651,7 @@ class Session(object):
     Lists <SWITCH.chm::/scan_list.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    scan_mode = AttributeEnum(1250021, enums.ScanMode)
+    scan_mode = attributes.AttributeEnum(1250021, enums.ScanMode)
     '''
     Specifies how to handle existing connections that conflict with the
     connections you make in a scan list. For example, if CH1 is already
@@ -737,7 +672,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    serial_number = AttributeViString(1150015)
+    serial_number = attributes.AttributeViString(1150015)
     '''
     Returns the serial number for the switch module controlled by the
     instrument driver. If the switch module does not return a serial number,
@@ -747,12 +682,12 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    serial_number_i32 = AttributeViInt32(1150001)
+    serial_number_i32 = attributes.AttributeViInt32(1150001)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH.
     '''
-    settling_time = AttributeViReal64(1250004)
+    settling_time = attributes.AttributeViReal64(1250004)
     '''
     Returns the maximum length of time in seconds from after you make a
     connection until the signal flowing through the channel settles.
@@ -763,7 +698,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Settling
     Time <SWITCH.chm::/settling_time.html>`__
     '''
-    simulate = AttributeViBoolean(1050005)
+    simulate = attributes.AttributeViBoolean(1050005)
     '''
     Specifies whether to simulate instrument driver I/O operations. The
     default value is FALSE. Use the `niSwitch Initialize With
@@ -780,7 +715,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Simulating
     a Switch <SWITCH.chm::/simulate.html>`__
     '''
-    specific_driver_class_spec_major_version = AttributeViInt32(1050515)
+    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''
     Contains the major version number of the IviSwtch class specification.
 
@@ -788,7 +723,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    specific_driver_class_spec_minor_version = AttributeViInt32(1050516)
+    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
     '''
     Contains the minor version number of the class specification with which
     the instrument driver is compliant.
@@ -797,7 +732,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    specific_driver_description = AttributeViString(1050514)
+    specific_driver_description = attributes.AttributeViString(1050514)
     '''
     Contains a brief description of the instrument driver.
 
@@ -805,7 +740,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    specific_driver_prefix = AttributeViString(1050302)
+    specific_driver_prefix = attributes.AttributeViString(1050302)
     '''
     Contains the prefix for all of the instrument driver VIs.
 
@@ -813,7 +748,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    specific_driver_revision = AttributeViString(1050551)
+    specific_driver_revision = attributes.AttributeViString(1050551)
     '''
     Contains additional version information about the instrument driver.
 
@@ -822,7 +757,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `niSwitch
     Revision Query VI <switchviref.chm::/niSwitch_Revision_Query.html>`__
     '''
-    specific_driver_vendor = AttributeViString(1050513)
+    specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
     Contains the name of the vendor that supplies the instrument driver.
 
@@ -830,7 +765,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    supported_instrument_models = AttributeViString(1050327)
+    supported_instrument_models = attributes.AttributeViString(1050327)
     '''
     Contains a comma-separated (,) list of supported instrument models.
 
@@ -838,7 +773,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    temperature = AttributeViReal64(1150019)
+    temperature = attributes.AttributeViReal64(1150019)
     '''
     Returns the temperature as read by the Switch module in degrees Celsius.
     Refer to the device documentation for more information.
@@ -847,7 +782,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    trigger_input = AttributeEnum(1250022, enums.TriggerInput)
+    trigger_input = attributes.AttributeEnum(1250022, enums.TriggerInput)
     '''
     Specifies the source of the trigger for which the switch module can wait
     upon encountering a semi-colon (;) when processing a scan list. When the
@@ -861,7 +796,7 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    trigger_input_polarity = AttributeEnum(1150010, enums.TriggerInputPolarity)
+    trigger_input_polarity = attributes.AttributeEnum(1150010, enums.TriggerInputPolarity)
     '''
     Determines the behavior of the trigger input.
 
@@ -870,7 +805,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    trigger_mode = AttributeViInt32(1150005)
+    trigger_mode = attributes.AttributeViInt32(1150005)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH. Use the `niSwitch Route Trigger
@@ -879,7 +814,7 @@ class Session(object):
     Output <switchviref.chm::/niSwitch_Route_Scan_Advanced_Output.html>`__
     VIs instead.
     '''
-    wire_mode = AttributeViInt32(1250017)
+    wire_mode = attributes.AttributeViInt32(1250017)
     '''
     Returns the wire mode of the switch module. This property affects the
     values of the `Number of Rows <pniSwitch_NumberofRows.html>`__ and
