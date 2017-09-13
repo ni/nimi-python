@@ -71,7 +71,7 @@ class Device(object):
 
 
 class Session(object):
-    '''${config['session_description']}'''
+    '''${config['session_class_description']}'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False

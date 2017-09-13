@@ -52,7 +52,7 @@ class Library(object):
         with self._func_lock:
             if self.${c_func_name}_cfunc is None:
                 self.${c_func_name}_cfunc = self._library.${c_func_name}
-                self.${c_func_name}_cfunc.argtypes = [${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL_TYPES, {'session_name': config['session_name']})}]  # noqa: F405
+                self.${c_func_name}_cfunc.argtypes = [${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL_TYPES, {'session_name': config['session_handle_parameter_name']})}]  # noqa: F405
                 self.${c_func_name}_cfunc.restype = ${module_name}.python_types.${f['returns_python']}
         return self.${c_func_name}_cfunc(${param_names_library})
 % endfor

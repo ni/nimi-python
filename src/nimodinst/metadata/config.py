@@ -4,8 +4,8 @@ config = {
     'module_version': '0.2.0.dev1',
     'c_function_prefix': 'niModInst_',
     'driver_name': 'NI-ModInst',
-    'session_description': 'A NI-ModInst session to get device information',
-    'session_name': 'handle',
+    'session_class_description': 'A NI-ModInst session to get device information',
+    'session_handle_parameter_name': 'handle',
     'library_info':
     {
         'Windows': {

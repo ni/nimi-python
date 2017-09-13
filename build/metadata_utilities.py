@@ -159,7 +159,7 @@ def add_all_metadata(functions, config):
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
             _add_buffer_info(p)
-            _add_library_call_name(p, config['session_name'])
+            _add_library_call_name(p, config['session_handle_parameter_name'])
     return functions
 
 
@@ -228,7 +228,7 @@ def test_merge_dict_with_regex():
 
 def _do_the_test_add_all_metadata(functions, expected):
     actual = copy.deepcopy(functions)
-    actual = add_all_metadata(actual, {'session_name': 'vi'})
+    actual = add_all_metadata(actual, {'session_handle_parameter_name': 'vi'})
     assert expected == actual, "\nfunctions = {0}\nexpected = {1}\nactual = {2}".format(pp.pformat(functions), pp.pformat(expected), pp.pformat(actual))
 
 
