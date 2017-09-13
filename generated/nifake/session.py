@@ -2,77 +2,12 @@
 # This file was generated
 import ctypes
 
+from nifake import attributes
 from nifake import ctypes_types
 from nifake import enums
 from nifake import errors
 from nifake import library_singleton
 from nifake import python_types
-
-
-class Attribute(object):
-    '''Base class for all typed attributes.'''
-
-    def __init__(self, attribute_id, default_channel=''):
-        self._attribute_id = attribute_id
-        self._default_channel = default_channel
-
-    def __get__(self, obj, objtype):
-        assert objtype is Session
-        return self.get(obj, self._default_channel)
-
-    def __set__(self, obj, value):
-        return self.set(obj, self._default_channel, value)
-
-
-class AttributeViInt32(Attribute):
-
-    def get(self, session, channel):
-        return session._get_attribute_vi_int32(channel, self._attribute_id)
-
-    def set(self, session, channel, value):
-        session._set_attribute_vi_int32(channel, self._attribute_id, value)
-
-
-class AttributeViReal64(Attribute):
-
-    def get(self, session, channel):
-        return session._get_attribute_vi_real64(channel, self._attribute_id)
-
-    def set(self, session, channel, value):
-        session._set_attribute_vi_real64(channel, self._attribute_id, value)
-
-
-class AttributeViString(Attribute):
-
-    def get(self, session, channel):
-        return session._get_attribute_vi_string(channel, self._attribute_id)
-
-    def set(self, session, channel, value):
-        session._set_attribute_vi_string(channel, self._attribute_id, value)
-
-
-class AttributeViBoolean(Attribute):
-
-    def get(self, session, channel):
-        return session._get_attribute_vi_boolean(channel, self._attribute_id)
-
-    def set(self, session, channel, value):
-        session._set_attribute_vi_boolean(channel, self._attribute_id, value)
-
-
-class AttributeEnum(AttributeViInt32):
-
-    def __init__(self, attribute_id, enum_meta_class, channel=''):
-        self._attribute_type = enum_meta_class
-        super(AttributeEnum, self).__init__(attribute_id, channel)
-
-    def get(self, session, channel):
-        return self._attribute_type(super(AttributeEnum, self).get(session, channel))
-
-    def set(self, session, channel, value):
-        if type(value) is not self._attribute_type:
-            raise TypeError('must be nifake.' + str(self._attribute_type.__name__) + ' not ' + str(type(value).__name__))
-        return super(AttributeEnum, self).set(session, channel, value.value)
 
 
 class _Acquisition(object):
@@ -93,19 +28,19 @@ class Session(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    read_write_bool = AttributeViBoolean(1000000)
+    read_write_bool = attributes.AttributeViBoolean(1000000)
     '''
     An attribute of type bool with read/write access.
     '''
-    read_write_color = AttributeEnum(1000003, enums.Color)
+    read_write_color = attributes.AttributeEnum(1000003, enums.Color)
     '''
     An attribute of type Color with read/write access.
     '''
-    read_write_double = AttributeViReal64(1000001)
+    read_write_double = attributes.AttributeViReal64(1000001)
     '''
     An attribute of type float with read/write access.
     '''
-    read_write_string = AttributeViString(1000002)
+    read_write_string = attributes.AttributeViString(1000002)
     '''
     An attribute of type string with read/write access.
     '''
