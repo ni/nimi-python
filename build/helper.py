@@ -107,17 +107,59 @@ def normalize_string_type(d):
 class ParamListType(Enum):
     '''Type of parameter list to return'''
     API_METHOD = 1
-    '''Used for methods param list for the public API'''
+    '''Used for methods param list for the public API
+    
+    'skip_self': False,
+    'skip_session_handle': True,
+    'skip_output_parameters': True,
+    'skip_ivi_dance_size_parameter': True,
+    'session_name': 'vi',
+    '''
     IMPL_METHOD = 2
-    '''Used for methods param list for implementation'''
+    '''Used for methods param list for implementation
+    
+    'skip_self': False,
+    'skip_session_handle': False,
+    'skip_output_parameters': False,
+    'skip_ivi_dance_size_parameter': False,
+    'session_name': 'vi',
+    '''
     DISPLAY_METHOD = 3
-    '''Used for methods param list for display (rst)'''
+    '''Used for methods param list for display (rst)
+    
+    'skip_self': True,
+    'skip_session_handle': True,
+    'skip_output_parameters': True,
+    'skip_ivi_dance_size_parameter': True,
+    'session_name': 'vi',
+    '''
     LIBRARY_METHOD = 4
-    '''Used for methods param list when calling library'''
+    '''Used for methods param list when calling library
+    
+    'skip_self': True,
+    'skip_session_handle': False,
+    'skip_output_parameters': False,
+    'skip_ivi_dance_size_parameter': False,
+    'session_name': 'vi',
+    '''
     LIBRARY_CALL = 5
-    '''Used for methods param list when calling into the DLL'''
+    '''Used for methods param list when calling into the DLL
+    
+    'skip_self': True,
+    'skip_session_handle': False,
+    'skip_output_parameters': False,
+    'skip_ivi_dance_size_parameter': False,
+    'session_name': 'vi',
+    '''
     LIBRARY_CALL_TYPES = 6
-    '''Used for methods param list types when calling into the DLL'''
+    '''Used for methods param list types when calling into the DLL
+    
+    'skip_self': True,
+    'skip_session_handle': False,
+    'skip_output_parameters': False,
+    'skip_ivi_dance_size_parameter': False,
+    'session_name': 'vi',
+    '''
 
 
 ParamListTypeDefaults = {}
@@ -166,7 +208,13 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
 
 
 def get_params_snippet(function, param_type, options={}):
-    '''Get a parameter list snippet based on type and options'''
+    '''Get a parameter list snippet based on type and options
+    
+    Name used:
+        ParamListType.LIBRARY_CALL uses 'library_call_name'
+        ParamListType.LIBRARY_CALL_TYPES uses 'ctypes_type_library_call'
+        All others use 'python_name'
+    '''
     if type(param_type) is not ParamListType:
         raise TypeError('param_type must be of type ' + str(ParamListType))
     if type(options) is not dict:
