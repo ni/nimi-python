@@ -349,6 +349,25 @@ class TestSession(object):
         calls = [call(SESSION_NUM_FOR_TEST, test_error_code, 0, None), call(SESSION_NUM_FOR_TEST, len(test_error_desc), len(test_error_desc), ANY)]
         self.patched_library.niFake_GetErrorMessage.assert_has_calls(calls)
 
+    def test_get_error_and_get_error_message_returns_error(self):
+        test_error_code = -42
+        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = -1
+        self.side_effects_helper['GetError']['description'] = "Shouldn't get this"
+        self.side_effects_helper['GetError']['return'] = -2
+        self.patched_library.niFake_GetErrorMessage.side_effect = self.side_effects_helper.niFake_GetErrorMessage
+        self.side_effects_helper['GetErrorMessage']['errorMessage'] = "Also shouldn't get this"
+        self.side_effects_helper['GetErrorMessage']['return'] = -3
+        with nifake.Session('dev1') as session:
+            try:
+                session.simple_function()
+            except nifake.Error as e:
+                assert e.code == test_error_code
+                assert e.description == 'Failed to retrieve error description.'
+
+
     '''
     def test_set_string_attribute(self):
         pass
