@@ -367,7 +367,6 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == 'Failed to retrieve error description.'
 
-
     '''
     def test_set_string_attribute(self):
         pass
