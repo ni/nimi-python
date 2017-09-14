@@ -14,7 +14,7 @@ ${helper.get_rst_header_snippet('Examples', '=')}
 % for e in examples:
 ${helper.get_rst_header_snippet(e, '-')}
 
-.. literalinclude:: ${os.path.join('..', '..', examples_dir, e)}
+.. literalinclude:: ${os.path.join('..', '..', examples_dir, e).replace('\\', '/')}
    :language: python
    :linenos:
    :encoding: utf8
