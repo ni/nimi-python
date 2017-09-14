@@ -16,7 +16,7 @@ helper.merge_dicts(functions, functions_params_types)
 helper.merge_dicts(functions, functions_buffer_info)
 helper.merge_dicts(functions, functions_is_error_handling)
 
-helper.add_all_metadata(functions, config)
+helper.add_all_function_metadata(functions, config)
 
 __version__ = config['module_version']
 
