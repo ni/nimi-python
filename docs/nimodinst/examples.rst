@@ -4,7 +4,7 @@ Examples
 nimodinst_all_devices.py
 ------------------------
 
-.. literalinclude:: ..\..\src\nimodinst\examples\nimodinst_all_devices.py
+.. literalinclude:: ../../src/nimodinst/examples/nimodinst_all_devices.py
    :language: python
    :linenos:
    :encoding: utf8
