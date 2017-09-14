@@ -1019,7 +1019,7 @@ nidmm.Session methods
     
 
 
-.. function:: fetch(maximum_time, reading)
+.. function:: fetch(maximum_time)
 
     Returns the value from a previously initiated measurement. You must call
     :py:func:`nidmm._initiate` before calling this function.
@@ -1054,7 +1054,7 @@ nidmm.Session methods
             
 
 
-.. function:: fetch_multi_point(maximum_time, array_size, reading_array, actual_number_of_points)
+.. function:: fetch_multi_point(maximum_time, array_size)
 
     Returns an array of values from a previously initiated multipoint
     measurement. The number of measurements the DMM makes is determined by
@@ -1119,7 +1119,7 @@ nidmm.Session methods
             
 
 
-.. function:: fetch_waveform(maximum_time, array_size, waveform_array, actual_number_of_points)
+.. function:: fetch_waveform(maximum_time, array_size)
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
     values from a previously initiated waveform acquisition. You must call
@@ -1177,7 +1177,7 @@ nidmm.Session methods
             
 
 
-.. function:: format_meas_absolute(measurement_function, range, resolution, measurement, mode_string, range_string, data_string)
+.. function:: format_meas_absolute(measurement_function, range, resolution, measurement)
 
     Formats the **Measurement** to the proper number of displayed digits
     according to the **Measurement\_Function**, **Range**, and
@@ -1249,7 +1249,7 @@ nidmm.Session methods
             
 
 
-.. function:: get_aperture_time_info(aperture_time, aperture_time_units)
+.. function:: get_aperture_time_info()
 
     Returns the DMM **Aperture\_Time** and **Aperture\_Time\_Units**.
 
@@ -1300,7 +1300,7 @@ nidmm.Session methods
             +---------------------------------+---+------------------+
 
 
-.. function:: get_auto_range_value(actual_range)
+.. function:: get_auto_range_value()
 
     Returns the **Actual\_Range** that the DMM is using, even when Auto
     Range is off.
@@ -1319,7 +1319,7 @@ nidmm.Session methods
             
 
 
-.. function:: get_cal_count(cal_type, count)
+.. function:: get_cal_count(cal_type)
 
     Returns the calibration **Count** for the specified type of calibration.
 
@@ -1353,7 +1353,7 @@ nidmm.Session methods
             
 
 
-.. function:: get_cal_date_and_time(cal_type, month, day, year, hour, minute)
+.. function:: get_cal_date_and_time(cal_type)
 
     Returns the date and time of the last calibration performed.
 
@@ -1418,7 +1418,7 @@ nidmm.Session methods
             
 
 
-.. function:: get_channel_name(index, buffer_size, channel_string)
+.. function:: get_channel_name(index, buffer_size)
 
     Returns the **Channel\_String** that is in the channel table at an
     **Index** you specify. Not applicable to National Instruments DMMs.
@@ -1468,7 +1468,7 @@ nidmm.Session methods
             
 
 
-.. function:: get_dev_temp(options, temperature)
+.. function:: get_dev_temp(options)
 
     Returns the current **Temperature** of the device.
 
@@ -1495,7 +1495,7 @@ nidmm.Session methods
             
 
 
-.. function:: get_last_cal_temp(cal_type, temperature)
+.. function:: get_last_cal_temp(cal_type)
 
     Returns the **Temperature** during the last calibration procedure.
 
@@ -1529,7 +1529,7 @@ nidmm.Session methods
             
 
 
-.. function:: get_measurement_period(period)
+.. function:: get_measurement_period()
 
     Returns the measurement **Period**, which is the amount of time it takes
     to complete one measurement with the current configuration. Use this
@@ -1555,7 +1555,7 @@ nidmm.Session methods
             
 
 
-.. function:: get_next_coercion_record(buffer_size, coercion_record)
+.. function:: get_next_coercion_record(buffer_size)
 
     This function returns the coercion information associated with the IVI
     session, and it retrieves and clears the oldest instance in which NI-DMM
@@ -1607,7 +1607,7 @@ nidmm.Session methods
             
 
 
-.. function:: get_next_interchange_warning(buffer_size, interchange_warning)
+.. function:: get_next_interchange_warning()
 
     This function returns the interchangeability warnings associated with
     the IVI session. It retrieves and clears the oldest instance in which
@@ -1648,7 +1648,7 @@ nidmm.Session methods
 
     :type buffer_size: int
 
-.. function:: get_self_cal_supported(self_cal_supported)
+.. function:: get_self_cal_supported()
 
     Returns a Boolean value that expresses whether or not the DMM that you
     are using can perform self-calibration.
@@ -1670,7 +1670,7 @@ nidmm.Session methods
             +-----------+---+-------------------------------------------------------------+
 
 
-.. function:: is_over_range(measurement_value, is_over_range)
+.. function:: is_over_range(measurement_value)
 
     Takes a **Measurement\_Value** and determines if the value is a valid
     measurement or a value indicating that an overrange condition occurred.
@@ -1704,7 +1704,7 @@ nidmm.Session methods
             +-----------+---+-----------------------------------------------------------+
 
 
-.. function:: is_under_range(measurement_value, is_under_range)
+.. function:: is_under_range(measurement_value)
 
     Takes a **Measurement\_Value** and determines if the value is a valid
     measurement or a value indicating that an underrange condition occurred.
@@ -1738,7 +1738,7 @@ nidmm.Session methods
             +-----------+---+------------------------------------------------------------+
 
 
-.. function:: perform_open_cable_comp(conductance, susceptance)
+.. function:: perform_open_cable_comp()
 
     For the NI 4082 and NI 4072 only, performs the open cable compensation
     measurements for the current capacitance/inductance range, and returns
@@ -1774,7 +1774,7 @@ nidmm.Session methods
             
 
 
-.. function:: perform_short_cable_comp(resistance, reactance)
+.. function:: perform_short_cable_comp()
 
     Performs the short cable compensation measurements for the current
     capacitance/inductance range, and returns short cable compensation
@@ -1809,7 +1809,7 @@ nidmm.Session methods
             
 
 
-.. function:: read(maximum_time, reading)
+.. function:: read(maximum_time)
 
     Acquires a single measurement and returns the measured value.
 
@@ -1843,7 +1843,7 @@ nidmm.Session methods
             
 
 
-.. function:: read_multi_point(maximum_time, array_size, reading_array, actual_number_of_points)
+.. function:: read_multi_point(maximum_time, array_size)
 
     Acquires multiple measurements and returns an array of measured values.
     The number of measurements the DMM makes is determined by the values you
@@ -1907,7 +1907,7 @@ nidmm.Session methods
             
 
 
-.. function:: read_status(acquisition_backlog, acquisition_status)
+.. function:: read_status()
 
     Returns measurement backlog and acquisition status. Use this function to
     determine how many measurements are available before calling
@@ -1956,7 +1956,7 @@ nidmm.Session methods
             +---+----------------------------+
 
 
-.. function:: read_waveform(maximum_time, array_size, waveform_array, actual_number_of_points)
+.. function:: read_waveform(maximum_time, array_size)
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
     and returns data as an array of values or as a waveform data type. The
@@ -2086,7 +2086,7 @@ nidmm.Session methods
     
 
 
-.. function:: error_query(error_code, error_message)
+.. function:: error_query()
 
     Reads an **Error\_Code** and message from the DMM error queue. National
     Instruments DMMs do not contain an error queue. Errors are reported as
@@ -2128,7 +2128,7 @@ nidmm.Session methods
     
 
 
-.. function:: revision_query(instrument_driver_revision, firmware_revision)
+.. function:: revision_query()
 
     Returns the revision numbers of the instrument driver and instrument
     firmware.
@@ -2161,7 +2161,7 @@ nidmm.Session methods
             .. note:: The array must contain at least 256 elements ViChar[256].
 
 
-.. function:: self_test(self_test_result, self_test_message)
+.. function:: self_test()
 
     Performs a self-test on the DMM to ensure that the DMM is functioning
     properly. Self-test does not calibrate the DMM.

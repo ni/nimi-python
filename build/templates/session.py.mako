@@ -44,7 +44,7 @@ class ${session_context_manager}(object):
 
 % endif
 class Session(object):
-    '''${config['session_description']}'''
+    '''${config['session_class_description']}'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -64,8 +64,8 @@ class Session(object):
 
     def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
         self.library = library_singleton.get()
-        self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+        self.${config['session_handle_parameter_name']} = 0  # This must be set before calling _init_with_options.
+        self.${config['session_handle_parameter_name']} = self._init_with_options(resource_name, id_query, reset_device, options_string)
 
         self._is_frozen = True
 
@@ -90,7 +90,7 @@ class Session(object):
         except errors.Error:
             # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
             print("Failed to close session.")
-        self.vi = 0
+        self.${config['session_handle_parameter_name']} = 0
 
     def get_error_description(self, error_code):
         '''get_error_description
@@ -125,7 +125,7 @@ class Session(object):
     ivi_dance_parameter = helper.extract_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
-    def ${f['python_name']}(${helper.get_method_parameters_snippet(parameters, skip_session_handle = True, skip_output_parameters = True, skip_ivi_dance_size_parameter = True)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.API_METHOD)}):
         '''${f['python_name']}
 
         ${helper.get_function_docstring(func_name, config, indent=8)}
@@ -137,17 +137,17 @@ class Session(object):
         ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
 % endfor
 % if ivi_dance_parameter is None:
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = None
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'])})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
