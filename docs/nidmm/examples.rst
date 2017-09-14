@@ -4,7 +4,7 @@ Examples
 nidmm_measurement.py
 --------------------
 
-.. literalinclude:: ../../src/nidmm/examples/nidmm_measurement.py
+.. literalinclude:: ..\..\src\nidmm\examples\nidmm_measurement.py
    :language: python
    :linenos:
    :encoding: utf8

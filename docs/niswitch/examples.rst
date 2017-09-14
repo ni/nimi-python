@@ -4,7 +4,7 @@ Examples
 niswitch_connect_channels.py
 ----------------------------
 
-.. literalinclude:: ../../src/niswitch/examples/niswitch_connect_channels.py
+.. literalinclude:: ..\..\src\niswitch\examples\niswitch_connect_channels.py
    :language: python
    :linenos:
    :encoding: utf8
