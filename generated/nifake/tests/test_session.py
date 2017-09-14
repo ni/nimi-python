@@ -375,3 +375,8 @@ class TestSession(object):
             assert self.patched_errors.handle_error.call_count == 2
             self.patched_errors.handle_error.assert_called_with(session, self.patched_library.niFake_GetCalDateAndTime.return_value)
     '''
+
+    def test_init_with_options_nondefault(self):
+        session = nifake.Session('FakeDevice', True, True, 'Some string')
+        assert(session.vi == SESSION_NUM_FOR_TEST)
+        self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'FakeDevice', True, True, b'Some string', ANY)
