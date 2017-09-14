@@ -32,7 +32,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Channel Configuration:Analog Bus Sharing Enable**
@@ -62,7 +62,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Bandwidth**
@@ -89,7 +89,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete Attributes:Cabled Module Scan Advanced Bus**
@@ -116,7 +116,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete Attributes:Cabled Module Trigger Bus**
@@ -154,7 +154,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
@@ -184,7 +184,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Channel Count**
@@ -215,7 +215,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Characteristic Impedance**
@@ -252,7 +252,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Continuous Scan**
@@ -287,7 +287,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Digital Filter Enable**
@@ -330,7 +330,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Driver Setup**
@@ -359,7 +359,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities**
@@ -389,7 +389,7 @@ niswitch.Session properties
     | Resettable     | No                               |
     +----------------+----------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Handshaking Initiation**
@@ -419,7 +419,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Firmware Revision**
@@ -448,7 +448,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Manufacturer**
@@ -476,7 +476,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Model**
@@ -529,7 +529,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
@@ -564,7 +564,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:IO Resource Descriptor**
@@ -605,7 +605,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Channel Configuration:Is Configuration Channel**
@@ -637,7 +637,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Is Debounced**
@@ -667,7 +667,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Is Scanning**
@@ -705,7 +705,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Channel Configuration:Is Source Channel**
@@ -741,7 +741,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Is Waiting for Trigger?**
@@ -781,7 +781,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
@@ -808,7 +808,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete Attributes:Master Slave Scan Advanced Bus**
@@ -835,7 +835,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete Attributes:Master Slave Trigger Bus**
@@ -864,7 +864,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Maximum AC Voltage**
@@ -893,7 +893,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Maximum Carry AC Current**
@@ -922,7 +922,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Maximum Carry AC Power**
@@ -951,7 +951,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Maximum Carry DC Current**
@@ -980,7 +980,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Maximum Carry DC Power**
@@ -1009,7 +1009,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Maximum DC Voltage**
@@ -1038,7 +1038,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Maximum Switching AC Current**
@@ -1067,7 +1067,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Maximum Switching AC Power**
@@ -1096,7 +1096,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Maximum Switching DC Current**
@@ -1125,7 +1125,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Maximum Switching DC Power**
@@ -1155,7 +1155,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Number of Relays**
@@ -1191,7 +1191,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Matrix Configuration:Number of Columns**
@@ -1227,7 +1227,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Matrix Configuration:Number of Rows**
@@ -1252,7 +1252,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete Attributes:Parsed Scan List**
@@ -1286,7 +1286,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Power Down Latching Relays After Debounce**
@@ -1324,7 +1324,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
@@ -1360,7 +1360,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Range Check**
@@ -1398,7 +1398,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
@@ -1429,7 +1429,7 @@ niswitch.Session properties
     | Resettable     | No                            |
     +----------------+-------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Scan Advanced Output**
@@ -1463,7 +1463,7 @@ niswitch.Session properties
     | Resettable     | No                              |
     +----------------+---------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Scan Advanced Polarity**
@@ -1497,7 +1497,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Scan Delay**
@@ -1560,7 +1560,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Scan List**
@@ -1601,7 +1601,7 @@ niswitch.Session properties
     | Resettable     | No                  |
     +----------------+---------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Scan Mode**
@@ -1631,7 +1631,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Serial Number**
@@ -1656,7 +1656,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete Attributes:Serial Number**
@@ -1687,7 +1687,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Settling Time**
@@ -1724,7 +1724,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
@@ -1752,7 +1752,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Class Specification Major Version**
@@ -1781,7 +1781,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Class Specification Minor Version**
@@ -1809,7 +1809,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Description**
@@ -1837,7 +1837,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Prefix**
@@ -1866,7 +1866,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Revision**
@@ -1894,7 +1894,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Vendor**
@@ -1922,7 +1922,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models**
@@ -1951,7 +1951,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Temperature**
@@ -1985,7 +1985,7 @@ niswitch.Session properties
     | Resettable     | No                      |
     +----------------+-------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Trigger Input**
@@ -2014,7 +2014,7 @@ niswitch.Session properties
     | Resettable     | No                              |
     +----------------+---------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Scanning Configuration:Trigger Input Polarity**
@@ -2043,7 +2043,7 @@ niswitch.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete Attributes:Trigger Mode**
@@ -2077,7 +2077,7 @@ niswitch.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Module Characteristics:Wire mode**
