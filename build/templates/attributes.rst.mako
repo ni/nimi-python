@@ -26,7 +26,7 @@ table_contents = [
          ('Channel Based', a['channel_based']),
          ('Resettable', a['resettable']),
          ]
-table = helper.as_rest_table(table_contents, full=True)
+table = helper.as_rest_table(table_contents)
 
 desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 %>\
@@ -36,7 +36,7 @@ desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 
     ${helper.get_indented_docstring_snippet(table, indent=4)}
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
 %   if 'lv_property' in attributes[attr]:
