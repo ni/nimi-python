@@ -12,7 +12,7 @@ include $(BUILD_HELPER_DIR)/rules.mak
 
 # We need to override the default rule for generating session since we have
 # a specialized copy for ModInst
-$(MODULE_DIR)/session.py: $(DRIVER_DIR)/templates/session.py.mako
+$(MODULE_DIR)/session.py: $(DRIVER_DIR)/templates/session.py.mako $(BUILD_HELPER_SCRIPTS)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(MODULE_DIR), $(METADATA_DIR))
 # Need to signal the top level makefile to run tests again
