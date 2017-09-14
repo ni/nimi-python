@@ -9,9 +9,8 @@ import sys
 
 pp = pprint.PrettyPrinter(indent=4)
 
+
 # Coding convention transformation functions.
-
-
 # TODO(marcoskirsch): not being used
 def shoutcase_to_camelcase(shout_string):
     '''Converts a C-style SHOUT_CASE string to camelCase'''
