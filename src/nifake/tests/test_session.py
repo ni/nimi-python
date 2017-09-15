@@ -383,7 +383,7 @@ class TestSession(object):
         self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
         self.side_effects_helper['Read']['reading'] = test_reading
         with nifake.Session('dev1') as session:
-            session.read(test_maximum_time)
+            assert test_reading == session.read(test_maximum_time)
             from mock import call
             calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, ANY)]
             self.patched_library.niFake_Read.assert_has_calls(calls)
