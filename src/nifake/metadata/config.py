@@ -19,5 +19,6 @@ config = {
     'context_manager_name': {
         'task': 'acquisition',
     },
+    'init_function': 'InitWithOptions',
 }
 
