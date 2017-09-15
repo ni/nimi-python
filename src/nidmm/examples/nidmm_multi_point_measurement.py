@@ -4,7 +4,7 @@ import argparse
 import nidmm
 import sys
 
-parser = argparse.ArgumentParser(description='Performs a single measurement using the NI-DMM API.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser = argparse.ArgumentParser(description='Performs a multi point measurement using the NI-DMM API.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-n', '--name', default='PXI1Slot2', help='Resource name of a National Instruments Digital Multimeter.')
 parser.add_argument('-f', '--function', default='DC_VOLTS', choices=nidmm.Function.__members__.keys(), type=str.upper, help='Measurement function.')
 parser.add_argument('-r', '--range', default=10, type=float, help='Measurement range.')
