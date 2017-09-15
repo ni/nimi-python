@@ -24,15 +24,15 @@ class ParamListType(Enum):
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
     'session_name': 'vi',
-    'name_to_use': 'python_name',
+    'name_to_use': 'python_name_with_default',
     '''
     API_METHOD_CALL = 2
     '''Used for methods param list for the public API call
 
-    'skip_self': False,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
+    'skip_self': True,
+    'skip_session_handle': True,
+    'skip_output_parameters': True,
+    'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
     'session_name': 'vi',
     'name_to_use': 'python_name',
@@ -81,6 +81,17 @@ class ParamListType(Enum):
     'session_name': 'vi',
     'name_to_use': 'ctypes_type_library_call',
     '''
+    LIBRARY_IMPL_METHOD = 7
+    '''Used for methods param list for implementation
+
+    'skip_self': False,
+    'skip_session_handle': False,
+    'skip_output_parameters': False,
+    'skip_ivi_dance_size_parameter': False,
+    'reordered_for_default_values': False,
+    'session_name': 'vi',
+    'name_to_use': 'python_name',
+    '''
 
 
 ParamListTypeDefaults = {}
@@ -91,7 +102,7 @@ ParamListTypeDefaults[ParamListType.API_METHOD_DECLARATION] = {
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
     'session_name': 'vi',
-    'name_to_use': 'python_name',
+    'name_to_use': 'python_name_with_default',
 }
 ParamListTypeDefaults[ParamListType.API_METHOD_CALL] = {
     'skip_self': True,
@@ -116,7 +127,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
-    'reordered_for_default_values': True,
+    'reordered_for_default_values': False,
     'session_name': 'vi',
     'name_to_use': 'python_name',
 }
@@ -137,6 +148,15 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
     'reordered_for_default_values': False,
     'session_name': 'vi',
     'name_to_use': 'ctypes_type_library_call',
+}
+ParamListTypeDefaults[ParamListType.LIBRARY_IMPL_METHOD] = {
+    'skip_self': False,
+    'skip_session_handle': False,
+    'skip_output_parameters': False,
+    'skip_ivi_dance_size_parameter': False,
+    'reordered_for_default_values': False,
+    'session_name': 'vi',
+    'name_to_use': 'python_name',
 }
 
 
