@@ -19,6 +19,6 @@ config = {
     'context_manager_name': {
         'task': 'scan',
     },
-    'init_function': 'InitWithOptions',
+    'init_function': 'InitWithTopology',
 }
 

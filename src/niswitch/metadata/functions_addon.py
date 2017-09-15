@@ -86,8 +86,12 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 function_default_value = {
-    'InitWithOptions':  { 'parameters': { 1: { 'default_value': False, },
-                                          2: { 'default_value': False, },
-                                          3: { 'default_value': '', }, }, },
+    'InitWithOptions':   { 'parameters': { 1: { 'default_value': False, },
+                                           2: { 'default_value': False, },
+                                           3: { 'default_value': '', }, }, },
+    'InitWithTopology':  { 'parameters': { 1: { 'default_value': '', },
+                                           2: { 'default_value': False, },
+                                           3: { 'default_value': False, },
+                                           4: { 'default_value': '', }, }, },
 }
 
