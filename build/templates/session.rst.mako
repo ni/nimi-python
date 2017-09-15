@@ -3,6 +3,8 @@
 
     config        = template_parameters['metadata'].config
     attributes    = config['attributes']
+    functions     = config['functions']
+    functions     = helper.extract_codegen_functions(functions)
     module_name = config['module_name']
     driver_name = config['driver_name']
     c_function_prefix = config['c_function_prefix']
@@ -17,7 +19,7 @@ ${helper.get_rst_header_snippet(module_name + '.Session', '=')}
 
 <%
 table_contents = []
-table_contents.append(('Name', 'Type'))
+table_contents.append(('Property', 'Datatype'))
 for attr in helper.sorted_attrs(attributes):
     if attributes[attr]['enum'] is not None:
         t = ':py:data:`' + attributes[attr]["enum"] + '`'
@@ -28,7 +30,21 @@ for attr in helper.sorted_attrs(attributes):
 
 table = helper.as_rest_table(table_contents, full=True)
 %>\
-   **Attributes**
+   **Properties**
+
+   ${helper.get_indented_docstring_snippet(table, indent=3)}
+
+<%
+table_contents = []
+for f in sorted(functions):
+    if functions[f]['codegen_method'] == 'public':
+        name = functions[f]['python_name']
+        param_list = helper.get_params_snippet(functions[f], helper.ParamListType.DISPLAY_METHOD)
+        table_contents.append((':py:func:`{0}.{1}`'.format(module_name, name),))
+
+table = helper.as_rest_table(table_contents, full=True, header=False)
+%>\
+   **Public methods**
 
    ${helper.get_indented_docstring_snippet(table, indent=3)}
 
