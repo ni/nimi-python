@@ -829,10 +829,10 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=''):
+    def __init__(self, resource_name, topology='', simulate=False, reset_device=False):
         self.library = library_singleton.get()
         self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+        self.vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
 
         self._is_frozen = True
 
@@ -1788,7 +1788,7 @@ class Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViSession(vi_ctype.value)
 
-    def init_with_topology(self, resource_name, topology, simulate, reset_device):
+    def init_with_topology(self, resource_name, topology='', simulate=False, reset_device=False):
         '''init_with_topology
 
         Returns a session handle used to identify the switch in all subsequent
