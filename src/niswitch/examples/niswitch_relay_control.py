@@ -19,7 +19,7 @@ try:
         raise Exception('Invalid relay action')
     with niswitch.Session(args.name) as session:
         session.relay_control(args.relay_name, action)
-        print("Relay ", args.relay_name, " has had the action ", args.relay_action, " performed.")
+        print('Relay ', args.relay_name, ' has had the action ', args.relay_action, ' performed.')
 except niswitch.Error as e:
     sys.stderr.write(str(e))
     sys.exit(e.code)
