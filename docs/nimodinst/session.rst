@@ -7,10 +7,10 @@ nimodinst.Session
 
    A NI-ModInst session to get device information
 
-   **Attributes**
+   **Properties**
 
    +--------------------------------------+----------+
-   | Name                                 | Type     |
+   | Property                             | Datatype |
    +======================================+==========+
    | :py:attr:`bus_number`                | ViInt32  |
    +--------------------------------------+----------+
@@ -30,5 +30,13 @@ nimodinst.Session
    +--------------------------------------+----------+
    | :py:attr:`socket_number`             | ViInt32  |
    +--------------------------------------+----------+
+
+   **Public methods**
+
+   +---------+
+   | No Data |
+   +---------+
+   | No Data |
+   +---------+
 
 
