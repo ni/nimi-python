@@ -61,11 +61,16 @@ class Session(object):
     '''
 %   endif
 % endfor
+<%
+init_function = functions['InitWithOptions']
+init_method_params = helper.get_params_snippet(init_function, helper.ParamListType.API_METHOD_DECLARATION)
+init_call_params = helper.get_params_snippet(init_function, helper.ParamListType.API_METHOD_CALL)
+%>\
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
+    def __init__(${init_method_params}):
         self.library = library_singleton.get()
         self.${config['session_handle_parameter_name']} = 0  # This must be set before calling _init_with_options.
-        self.${config['session_handle_parameter_name']} = self._init_with_options(resource_name, id_query, reset_device, options_string)
+        self.${config['session_handle_parameter_name']} = self._init_with_options(${init_call_params})
 
         self._is_frozen = True
 
@@ -125,7 +130,7 @@ class Session(object):
     ivi_dance_parameter = helper.extract_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.API_METHOD)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.API_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
         ${helper.get_function_docstring(func_name, config, indent=8)}

@@ -15,7 +15,7 @@ class ParamListType(Enum):
 
     Used by different parts of the code generator to create the parameter list
     '''
-    API_METHOD = 1
+    API_METHOD_DECLARATION = 1
     '''Used for methods param list for the public API declaration
 
     'skip_self': False,
@@ -26,8 +26,8 @@ class ParamListType(Enum):
     'session_name': 'vi',
     'name_to_use': 'python_name',
     '''
-    IMPL_METHOD = 2
-    '''Used for methods param list for implementation
+    API_METHOD_CALL = 2
+    '''Used for methods param list for the public API call
 
     'skip_self': False,
     'skip_session_handle': False,
@@ -84,7 +84,7 @@ class ParamListType(Enum):
 
 
 ParamListTypeDefaults = {}
-ParamListTypeDefaults[ParamListType.API_METHOD] = {
+ParamListTypeDefaults[ParamListType.API_METHOD_DECLARATION] = {
     'skip_self': False,
     'skip_session_handle': True,
     'skip_output_parameters': True,
@@ -93,11 +93,11 @@ ParamListTypeDefaults[ParamListType.API_METHOD] = {
     'session_name': 'vi',
     'name_to_use': 'python_name',
 }
-ParamListTypeDefaults[ParamListType.IMPL_METHOD] = {
-    'skip_self': False,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
+ParamListTypeDefaults[ParamListType.API_METHOD_CALL] = {
+    'skip_self': True,
+    'skip_session_handle': True,
+    'skip_output_parameters': True,
+    'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
     'session_name': 'vi',
     'name_to_use': 'python_name',
