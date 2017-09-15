@@ -397,4 +397,3 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             session.read_write_integer = test_number
             self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
- 
