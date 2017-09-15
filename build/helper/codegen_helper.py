@@ -22,6 +22,7 @@ class ParamListType(Enum):
     'skip_session_handle': True,
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
+    'reordered_for_default_values': True,
     'session_name': 'vi',
     'name_to_use': 'python_name',
     '''
@@ -32,6 +33,7 @@ class ParamListType(Enum):
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
+    'reordered_for_default_values': True,
     'session_name': 'vi',
     'name_to_use': 'python_name',
     '''
@@ -42,6 +44,7 @@ class ParamListType(Enum):
     'skip_session_handle': True,
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
+    'reordered_for_default_values': True,
     'session_name': 'vi',
     'name_to_use': 'python_name',
     '''
@@ -52,6 +55,7 @@ class ParamListType(Enum):
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
+    'reordered_for_default_values': True,
     'session_name': 'vi',
     'name_to_use': 'python_name',
     '''
@@ -62,6 +66,7 @@ class ParamListType(Enum):
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
+    'reordered_for_default_values': False,
     'session_name': 'vi',
     'name_to_use': 'library_call_name',
     '''
@@ -72,6 +77,7 @@ class ParamListType(Enum):
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
+    'reordered_for_default_values': False,
     'session_name': 'vi',
     'name_to_use': 'ctypes_type_library_call',
     '''
@@ -83,6 +89,7 @@ ParamListTypeDefaults[ParamListType.API_METHOD] = {
     'skip_session_handle': True,
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
+    'reordered_for_default_values': True,
     'session_name': 'vi',
     'name_to_use': 'python_name',
 }
@@ -91,6 +98,7 @@ ParamListTypeDefaults[ParamListType.IMPL_METHOD] = {
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
+    'reordered_for_default_values': True,
     'session_name': 'vi',
     'name_to_use': 'python_name',
 }
@@ -99,6 +107,7 @@ ParamListTypeDefaults[ParamListType.DISPLAY_METHOD] = {
     'skip_session_handle': True,
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
+    'reordered_for_default_values': True,
     'session_name': 'vi',
     'name_to_use': 'python_name',
 }
@@ -107,6 +116,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
+    'reordered_for_default_values': True,
     'session_name': 'vi',
     'name_to_use': 'python_name',
 }
@@ -115,6 +125,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
+    'reordered_for_default_values': False,
     'session_name': 'vi',
     'name_to_use': 'library_call_name',
 }
@@ -123,6 +134,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
     'skip_session_handle': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
+    'reordered_for_default_values': False,
     'session_name': 'vi',
     'name_to_use': 'ctypes_type_library_call',
 }
@@ -152,6 +164,7 @@ def get_params_snippet(function, param_type, options={}):
     if not options_to_use['skip_self']:
         snippets.append('self')
 
+    # Filter based on options
     ivi_dance_size_parameter = find_size_parameter(extract_ivi_dance_parameter(function['parameters']), function['parameters'])
     for x in function['parameters']:
         skip = False
@@ -164,6 +177,19 @@ def get_params_snippet(function, param_type, options={}):
         if not skip:
             params_to_use.append(x)
 
+    # Reorder based on options
+    if options_to_use['reordered_for_default_values']:
+        new_order = []
+        for x in params_to_use:
+            if 'default_value' not in x:
+                new_order.append(x)
+        for x in params_to_use:
+            if 'default_value' in x:
+                new_order.append(x)
+
+        params_to_use = new_order
+
+    # Render based on options
     for x in params_to_use:
             snippets.append(x[name_to_use])
     return ', '.join(snippets)
