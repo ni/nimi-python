@@ -65,15 +65,14 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
     and raises if necessary.
     '''
 
-    description = ''
-
     if _is_success(code) or (_is_warning(code) and ignore_warnings):
         return
 
-    if not is_error_handling:
-        # The caller is not in the midst of error handling. Get the
-        # error description. We do not want to call get_error_description
-        # if the function is an error handling function as this creates recursion.
+    if is_error_handling:
+        # The caller is in the midst of error handling and an error occurred.
+        # Don't try to get the description or we'll start recursing until the stack overflows.
+        description = ''
+    else:
         description = session.get_error_description(code)
 
     if _is_error(code):
