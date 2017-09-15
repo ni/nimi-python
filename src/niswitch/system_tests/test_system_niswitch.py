@@ -55,12 +55,9 @@ def test_vi_real64_attribute(session):
     assert session.settling_time == 0.1
 
 
-# Causes access violation and fails (#268)
-'''
 def test_enum_attribute():
-    with niswitch.Session('', False, True, 'Simulate=1, DriverSetup=topology:2532/1-Wire 4x128 Matrix') as session:
+    with niswitch.Session('', False, False, 'Simulate=1, DriverSetup=topology:2532/1-Wire 4x128 Matrix') as session:
         assert session.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
-'''
 
 
 def test_write_only_attribute(session):
@@ -138,11 +135,6 @@ def test_functions_error_query(session):
         assert len(w) == 1
         assert issubclass(w[0].category, niswitch.NiswitchWarning)
         assert test_error_desc in str(w[0].message)
-
-
-def test_functions_error_message(session):
-    message = session.error_message(-1074126847)
-    assert message == 'Invalid path string.'
 
 
 def test_functions_get_error_description(session):

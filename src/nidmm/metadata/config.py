@@ -1,10 +1,11 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'nidmm',
-    'module_version': '0.2.0.dev0',
+    'module_version': '0.2.0.dev1',
     'c_function_prefix': 'niDMM_',
     'driver_name': 'NI-DMM',
-    'session_description': 'An NI-DMM session to a National Instruments Digital Multimeter',
+    'session_class_description': 'An NI-DMM session to a National Instruments Digital Multimeter',
+    'session_handle_parameter_name': 'vi',
     'library_info':
     {
         'Windows': {
@@ -15,10 +16,8 @@ config = {
             '64bit': {'name': 'libnidmm.so', 'type': 'cdll'},
         },
     },
-    'context_manager': [
-        {
-            'direction': 'input'
-        },
-    ]
+    'context_manager_name': {
+        'task': 'acquisition',
+    },
 }
 

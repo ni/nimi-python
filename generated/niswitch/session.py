@@ -2,6 +2,7 @@
 # This file was generated
 import ctypes
 
+from niswitch import attributes
 from niswitch import ctypes_types
 from niswitch import enums
 from niswitch import errors
@@ -9,80 +10,7 @@ from niswitch import library_singleton
 from niswitch import python_types
 
 
-class AttributeViInt32(object):
-
-    def __init__(self, attribute_id):
-        self.attribute_id = attribute_id
-        self.channel = ''
-
-    def __get__(self, obj, objtype):
-        assert objtype is Session
-        return obj._get_attribute_vi_int32(self.channel, self.attribute_id)
-
-    def __set__(self, obj, value):
-        obj._set_attribute_vi_int32(self.channel, self.attribute_id, value)
-
-
-class AttributeViReal64(object):
-
-    def __init__(self, attribute_id):
-        self.attribute_id = attribute_id
-        self.channel = ''
-
-    def __get__(self, obj, objtype):
-        assert objtype is Session
-        return obj._get_attribute_vi_real64(self.channel, self.attribute_id)
-
-    def __set__(self, obj, value):
-        obj._set_attribute_vi_real64(self.channel, self.attribute_id, value)
-
-
-class AttributeViString(object):
-
-    def __init__(self, attribute_id):
-        self.attribute_id = attribute_id
-        self.channel = ''
-
-    def __get__(self, obj, objtype):
-        assert objtype is Session
-        return obj._get_attribute_vi_string(self.channel, self.attribute_id)
-
-    def __set__(self, obj, value):
-        obj._set_attribute_vi_string(self.channel, self.attribute_id, value)
-
-
-class AttributeViBoolean(object):
-
-    def __init__(self, attribute_id):
-        self.attribute_id = attribute_id
-        self.channel = ''
-
-    def __get__(self, obj, objtype):
-        assert objtype is Session
-        return obj._get_attribute_vi_boolean(self.channel, self.attribute_id)
-
-    def __set__(self, obj, value):
-        obj._set_attribute_vi_boolean(self.channel, self.attribute_id, value)
-
-
-class AttributeEnum(object):
-
-    def __init__(self, attribute_id, enum_meta_class):
-        self.attribute_id = attribute_id
-        self.attribute_type = enum_meta_class
-        self.channel = ''
-
-    def __get__(self, obj, objtype):
-        assert objtype is Session
-        return self.attribute_type(obj._get_attribute_vi_int32(self.channel, self.attribute_id))
-
-    def __set__(self, obj, value):
-        if type(value) is not self.attribute_type:
-            raise TypeError('must be niswitch.' + str(self.attribute_type.__name__) + ' not ' + str(type(value).__name__))
-        obj._set_attribute_vi_int32(self.channel, self.attribute_id, value.value)
-
-
-class Acquisition(object):
+class _Scan(object):
     def __init__(self, session):
         self.session = session
 
@@ -100,7 +28,7 @@ class Session(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    analog_bus_sharing_enable = AttributeViBoolean(1150018)
+    analog_bus_sharing_enable = attributes.AttributeViBoolean(1150018)
     '''
     Enables or disables sharing of an analog bus line so that multiple
     NI SwitchBlock devices may connect to it simultaneously. To enable
@@ -115,7 +43,7 @@ class Session(object):
     Analog Bus on an NI SwitchBlock
     Carrier <switch.chm::/SwitchBlock_analog_bus_reservation.html>`__
     '''
-    bandwidth = AttributeViReal64(1250005)
+    bandwidth = attributes.AttributeViReal64(1250005)
     '''
     Returns the bandwidth for the channel in hertz.
 
@@ -125,21 +53,21 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
     Considerations <SWITCH.chm::/rf.html>`__
     '''
-    cabled_module_scan_advanced_bus = AttributeViInt32(1150009)
+    cabled_module_scan_advanced_bus = attributes.AttributeViInt32(1150009)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH. Use `niSwitch Route Scan Advanced
     Output <switchviref.chm::/niSwitch_Route_Scan_Advanced_Output.html>`__
     VI instead.
     '''
-    cabled_module_trigger_bus = AttributeViInt32(1150008)
+    cabled_module_trigger_bus = attributes.AttributeViInt32(1150008)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH. Use the `niSwitch Route Trigger
     Input <switchviref.chm::/niSwitch_Route_Trigger_Input.html>`__ VI
     instead.
     '''
-    cache = AttributeViBoolean(1050004)
+    cache = attributes.AttributeViBoolean(1050004)
     '''
     Specifies whether to cache the value of properties. The default value is
     TRUE. Use the `niSwitch Initialize With
@@ -157,7 +85,7 @@ class Session(object):
     Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    channel_count = AttributeViInt32(1050203)
+    channel_count = attributes.AttributeViInt32(1050203)
     '''
     Contains the number of channels that the instrument driver supports.
 
@@ -167,7 +95,7 @@ class Session(object):
     Name <switchviref.chm::/niSwitch_Get_Channel_Name.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    characteristic_impedance = AttributeViReal64(1250016)
+    characteristic_impedance = attributes.AttributeViReal64(1250016)
     '''
     Returns the characteristic impedance for the channel in ohms.
 
@@ -178,7 +106,7 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
     Considerations <SWITCH.chm::/rf.html>`__
     '''
-    continuous_scan = AttributeViBoolean(1150002)
+    continuous_scan = attributes.AttributeViBoolean(1150002)
     '''
     Specifies whether to continuously scan through a scan list. Set the
     property to FALSE to stop scanning after one pass through the scan list.
@@ -195,7 +123,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    digital_filter_enable = AttributeViBoolean(1150016)
+    digital_filter_enable = attributes.AttributeViBoolean(1150016)
     '''
     Specifies whether to apply the pulse width filter to the Trigger Input.
     Set the property to TRUE to prevent the switch module from being
@@ -210,7 +138,7 @@ class Session(object):
     `Disabling Digital Filtering <SWITCH.chm::/fast_pxi_triggering.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    driver_setup = AttributeViString(1050007)
+    driver_setup = attributes.AttributeViString(1050007)
     '''
     Contains the Driver Setup string that you specified when initializing
     the instrument driver.
@@ -233,7 +161,7 @@ class Session(object):
     Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    group_capabilities = AttributeViString(1050401)
+    group_capabilities = attributes.AttributeViString(1050401)
     '''
     Contains a comma-separated (,) list of class-extension groups that the
     instrument driver implements.
@@ -242,7 +170,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    handshaking_initiation = AttributeEnum(1150013, enums.HandshakingInitiation)
+    handshaking_initiation = attributes.AttributeEnum(1150013, enums.HandshakingInitiation)
     '''
     Specifies how to start handshaking with a measurement device.
 
@@ -252,7 +180,7 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    instrument_firmware_revision = AttributeViString(1050510)
+    instrument_firmware_revision = attributes.AttributeViString(1050510)
     '''
     Contains the firmware revision information for the instrument currently
     in use.
@@ -262,7 +190,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `niSwitch
     Revision Query <switchviref.chm::/niSwitch_Revision_Query.html>`__
     '''
-    instrument_manufacturer = AttributeViString(1050511)
+    instrument_manufacturer = attributes.AttributeViString(1050511)
     '''
     Contains the name of the manufacturer of the instrument currently in
     use.
@@ -271,7 +199,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    instrument_model = AttributeViString(1050512)
+    instrument_model = attributes.AttributeViString(1050512)
     '''
     Contains the model number or name of the instrument currently in use.
 
@@ -279,7 +207,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    interchange_check = AttributeViBoolean(1050021)
+    interchange_check = attributes.AttributeViBoolean(1050021)
     '''
     Specifies whether to perform interchangeability checking and retrieve
     interchangeability warnings when you call the `niSwitch Connect
@@ -312,7 +240,7 @@ class Session(object):
     Reset Interchange
     Check <switchviref.chm::/niSwitch_Reset_Interchange_Check.html>`__
     '''
-    io_resource_descriptor = AttributeViString(1050304)
+    io_resource_descriptor = attributes.AttributeViString(1050304)
     '''
     Contains the resource descriptor the instrument driver uses to identify
     the physical device.
@@ -327,7 +255,7 @@ class Session(object):
     `Initialization <SWITCH.chm::/flow_init.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    is_configuration_channel = AttributeViBoolean(1250003)
+    is_configuration_channel = attributes.AttributeViBoolean(1250003)
     '''
     Specifies whether to designate the channel as a configuration channel—a
     channel reserved for internal path creation. The instrument driver uses
@@ -348,7 +276,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
     Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
     '''
-    is_debounced = AttributeViBoolean(1250002)
+    is_debounced = attributes.AttributeViBoolean(1250002)
     '''
     Indicates whether the entire switch module has settled since the last
     switching command. A value of TRUE indicates that all signals going
@@ -360,7 +288,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Settling
     Time <SWITCH.chm::/settling_time.html>`__
     '''
-    is_scanning = AttributeViBoolean(1250024)
+    is_scanning = attributes.AttributeViBoolean(1250024)
     '''
     Indicates whether the switch module has completed the scan operation.
     TRUE indicates that the scan has completed.
@@ -370,7 +298,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    is_source_channel = AttributeViBoolean(1250001)
+    is_source_channel = attributes.AttributeViBoolean(1250001)
     '''
     Specifies whether to designate the channel as a source channel.
 
@@ -388,7 +316,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
     Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
     '''
-    is_waiting_for_trig = AttributeViBoolean(1150004)
+    is_waiting_for_trig = attributes.AttributeViBoolean(1150004)
     '''
     Indicates with a semi-colon (;) that at that point in the scan list, the
     scan engine should pause until a trigger is received from the trigger
@@ -404,7 +332,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    logical_name = AttributeViString(1050305)
+    logical_name = attributes.AttributeViString(1050305)
     '''
     Contains the logical name you specified when opening the current IVI
     session.
@@ -424,21 +352,21 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__ `Using NI Switches in
     IVI <SWITCH.chm::/switches_in_ivi.html>`__
     '''
-    master_slave_scan_advanced_bus = AttributeViInt32(1150007)
+    master_slave_scan_advanced_bus = attributes.AttributeViInt32(1150007)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH. Use `niSwitch Route Scan Advanced
     Output <switchviref.chm::/niSwitch_Route_Scan_Advanced_Output.html>`__
     VI instead.
     '''
-    master_slave_trigger_bus = AttributeViInt32(1150006)
+    master_slave_trigger_bus = attributes.AttributeViInt32(1150006)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH. Use the `niSwitch Route Trigger
     Input <switchviref.chm::/niSwitch_Route_Trigger_Input.html>`__ VI
     instead.
     '''
-    max_ac_voltage = AttributeViReal64(1250007)
+    max_ac_voltage = attributes.AttributeViReal64(1250007)
     '''
     Returns the maximum AC voltage the channel can switch in volts RMS.
 
@@ -447,7 +375,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_carry_ac_current = AttributeViReal64(1250011)
+    max_carry_ac_current = attributes.AttributeViReal64(1250011)
     '''
     Returns the maximum AC current the channel can carry in amperes RMS.
 
@@ -456,7 +384,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_carry_ac_power = AttributeViReal64(1250015)
+    max_carry_ac_power = attributes.AttributeViReal64(1250015)
     '''
     Returns the maximum AC power the channel can carry in volt-amperes.
 
@@ -465,7 +393,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_carry_dc_current = AttributeViReal64(1250010)
+    max_carry_dc_current = attributes.AttributeViReal64(1250010)
     '''
     Returns the maximum DC current the channel can carry in amperes.
 
@@ -474,7 +402,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_carry_dc_power = AttributeViReal64(1250014)
+    max_carry_dc_power = attributes.AttributeViReal64(1250014)
     '''
     Returns the maximum DC power the channel can carry in watts.
 
@@ -483,7 +411,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_dc_voltage = AttributeViReal64(1250006)
+    max_dc_voltage = attributes.AttributeViReal64(1250006)
     '''
     Returns the maximum DC voltage the channel can switch in volts.
 
@@ -492,7 +420,7 @@ class Session(object):
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    max_switching_ac_current = AttributeViReal64(1250009)
+    max_switching_ac_current = attributes.AttributeViReal64(1250009)
     '''
     Returns the maximum AC current the channel can switch in amperes RMS.
 
@@ -501,7 +429,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Current <SWITCH.chm::/switching_current.html>`__
     '''
-    max_switching_ac_power = AttributeViReal64(1250013)
+    max_switching_ac_power = attributes.AttributeViReal64(1250013)
     '''
     Returns the maximum AC power the channel can switch in volt-amperes.
 
@@ -510,7 +438,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Power <SWITCH.chm::/switching_power.html>`__
     '''
-    max_switching_dc_current = AttributeViReal64(1250008)
+    max_switching_dc_current = attributes.AttributeViReal64(1250008)
     '''
     Returns the maximum DC current the channel can switch in amperes.
 
@@ -519,7 +447,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Current <SWITCH.chm::/switching_current.html>`__
     '''
-    max_switching_dc_power = AttributeViReal64(1250012)
+    max_switching_dc_power = attributes.AttributeViReal64(1250012)
     '''
     Returns the maximum DC power the channel can switch in watts.
 
@@ -528,7 +456,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Power <SWITCH.chm::/switching_power.html>`__
     '''
-    number_of_relays = AttributeViInt32(1150014)
+    number_of_relays = attributes.AttributeViInt32(1150014)
     '''
     Returns the number of relays that the instrument driver supports.
 
@@ -538,7 +466,7 @@ class Session(object):
     Name <switchviref.chm::/niSwitch_Get_Relay_Name.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    num_of_columns = AttributeViInt32(1250019)
+    num_of_columns = attributes.AttributeViInt32(1250019)
     '''
     Returns the number of channels on the column of a matrix or scanner. If
     the switch module is a scanner, this property returns the number of
@@ -554,7 +482,7 @@ class Session(object):
     `Matrix <SWITCH.chm::/matrix.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    num_of_rows = AttributeViInt32(1250018)
+    num_of_rows = attributes.AttributeViInt32(1250018)
     '''
     Returns the number of channels on the row of a matrix or scanner. If the
     switch module is a scanner, this property returns the number of output
@@ -570,12 +498,12 @@ class Session(object):
     `Matrix <SWITCH.chm::/matrix.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    parsed_scan_list = AttributeViString(1150012)
+    parsed_scan_list = attributes.AttributeViString(1150012)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH.
     '''
-    power_down_latching_relays_after_debounce = AttributeViBoolean(1150017)
+    power_down_latching_relays_after_debounce = attributes.AttributeViBoolean(1150017)
     '''
     Specifies whether to power down latching relays after calling the
     `niSwitch Wait For
@@ -589,7 +517,7 @@ class Session(object):
     `Armature Relays <SWITCH.chm::/armature_relay.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    query_instrument_status = AttributeViBoolean(1050003)
+    query_instrument_status = attributes.AttributeViBoolean(1050003)
     '''
     Specifies whether the instrument driver queries the instrument status
     after each operation. The default value is TRUE. Use the `niSwitch
@@ -607,7 +535,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    range_check = AttributeViBoolean(1050002)
+    range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate property values and VI parameters. The
     default value is TRUE. Use the `niSwitch Initialize With
@@ -623,7 +551,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    record_coercions = AttributeViBoolean(1050006)
+    record_coercions = attributes.AttributeViBoolean(1050006)
     '''
     Specifies whether the IVI engine keeps a list of the value coercions it
     makes for properties with ViInt32 and ViReal64 datatypes. The default
@@ -641,7 +569,7 @@ class Session(object):
     Record <switchviref.chm::/niSwitch_Get_Next_Coercion_Record.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    scan_advanced_output = AttributeEnum(1250023, enums.ScanAdvancedOutput)
+    scan_advanced_output = attributes.AttributeEnum(1250023, enums.ScanAdvancedOutput)
     '''
     Specifies the method to use to notify another instrument that all
     signals through the switch module have settled following the processing
@@ -652,7 +580,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    scan_advanced_polarity = AttributeEnum(1150011, enums.ScanAdvancedPolarity)
+    scan_advanced_polarity = attributes.AttributeEnum(1150011, enums.ScanAdvancedPolarity)
     '''
     Specifies the driving level for the Scan Advanced Output signal sent
     from the switch module through either the external (PXI/PXIe) or front
@@ -666,7 +594,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    scan_delay = AttributeViReal64(1250025)
+    scan_delay = attributes.AttributeViReal64(1250025)
     '''
     Specifies the minimum amount of time the switch module waits before it
     asserts the scan advanced output trigger after opening or closing the
@@ -680,7 +608,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    scan_list = AttributeViString(1250020)
+    scan_list = attributes.AttributeViString(1250020)
     '''
     Contains a scan list (a string that specifies channel connections and
     trigger conditions). The `niSwitch Initiate
@@ -723,7 +651,7 @@ class Session(object):
     Lists <SWITCH.chm::/scan_list.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    scan_mode = AttributeEnum(1250021, enums.ScanMode)
+    scan_mode = attributes.AttributeEnum(1250021, enums.ScanMode)
     '''
     Specifies how to handle existing connections that conflict with the
     connections you make in a scan list. For example, if CH1 is already
@@ -744,7 +672,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    serial_number = AttributeViString(1150015)
+    serial_number = attributes.AttributeViString(1150015)
     '''
     Returns the serial number for the switch module controlled by the
     instrument driver. If the switch module does not return a serial number,
@@ -754,12 +682,12 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    serial_number_i32 = AttributeViInt32(1150001)
+    serial_number_i32 = attributes.AttributeViInt32(1150001)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH.
     '''
-    settling_time = AttributeViReal64(1250004)
+    settling_time = attributes.AttributeViReal64(1250004)
     '''
     Returns the maximum length of time in seconds from after you make a
     connection until the signal flowing through the channel settles.
@@ -770,7 +698,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Settling
     Time <SWITCH.chm::/settling_time.html>`__
     '''
-    simulate = AttributeViBoolean(1050005)
+    simulate = attributes.AttributeViBoolean(1050005)
     '''
     Specifies whether to simulate instrument driver I/O operations. The
     default value is FALSE. Use the `niSwitch Initialize With
@@ -787,7 +715,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Simulating
     a Switch <SWITCH.chm::/simulate.html>`__
     '''
-    specific_driver_class_spec_major_version = AttributeViInt32(1050515)
+    specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''
     Contains the major version number of the IviSwtch class specification.
 
@@ -795,7 +723,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    specific_driver_class_spec_minor_version = AttributeViInt32(1050516)
+    specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
     '''
     Contains the minor version number of the class specification with which
     the instrument driver is compliant.
@@ -804,7 +732,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    specific_driver_description = AttributeViString(1050514)
+    specific_driver_description = attributes.AttributeViString(1050514)
     '''
     Contains a brief description of the instrument driver.
 
@@ -812,7 +740,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    specific_driver_prefix = AttributeViString(1050302)
+    specific_driver_prefix = attributes.AttributeViString(1050302)
     '''
     Contains the prefix for all of the instrument driver VIs.
 
@@ -820,7 +748,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    specific_driver_revision = AttributeViString(1050551)
+    specific_driver_revision = attributes.AttributeViString(1050551)
     '''
     Contains additional version information about the instrument driver.
 
@@ -829,7 +757,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `niSwitch
     Revision Query VI <switchviref.chm::/niSwitch_Revision_Query.html>`__
     '''
-    specific_driver_vendor = AttributeViString(1050513)
+    specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
     Contains the name of the vendor that supplies the instrument driver.
 
@@ -837,7 +765,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    supported_instrument_models = AttributeViString(1050327)
+    supported_instrument_models = attributes.AttributeViString(1050327)
     '''
     Contains a comma-separated (,) list of supported instrument models.
 
@@ -845,7 +773,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    temperature = AttributeViReal64(1150019)
+    temperature = attributes.AttributeViReal64(1150019)
     '''
     Returns the temperature as read by the Switch module in degrees Celsius.
     Refer to the device documentation for more information.
@@ -854,7 +782,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    trigger_input = AttributeEnum(1250022, enums.TriggerInput)
+    trigger_input = attributes.AttributeEnum(1250022, enums.TriggerInput)
     '''
     Specifies the source of the trigger for which the switch module can wait
     upon encountering a semi-colon (;) when processing a scan list. When the
@@ -868,7 +796,7 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    trigger_input_polarity = AttributeEnum(1150010, enums.TriggerInputPolarity)
+    trigger_input_polarity = attributes.AttributeEnum(1150010, enums.TriggerInputPolarity)
     '''
     Determines the behavior of the trigger input.
 
@@ -877,7 +805,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    trigger_mode = AttributeViInt32(1150005)
+    trigger_mode = attributes.AttributeViInt32(1150005)
     '''
     This property has been deprecated and might be removed from a future
     release of NI-SWITCH. Use the `niSwitch Route Trigger
@@ -886,7 +814,7 @@ class Session(object):
     Output <switchviref.chm::/niSwitch_Route_Scan_Advanced_Output.html>`__
     VIs instead.
     '''
-    wire_mode = AttributeViInt32(1250017)
+    wire_mode = attributes.AttributeViInt32(1250017)
     '''
     Returns the wire mode of the switch module. This property affects the
     values of the `Number of Rows <pniSwitch_NumberofRows.html>`__ and
@@ -901,7 +829,7 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
 
-    def __init__(self, resource_name, id_query=0, reset_device=False, options_string=""):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
         self.library = library_singleton.get()
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
@@ -914,7 +842,7 @@ class Session(object):
         object.__setattr__(self, key, value)
 
     def initiate(self):
-        return Acquisition(self)
+        return _Scan(self)
 
     def __enter__(self):
         return self
@@ -940,6 +868,9 @@ class Session(object):
             _, error_string = self._get_error()
             return error_string
         except errors.Error:
+            pass
+
+        try:
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
@@ -947,6 +878,8 @@ class Session(object):
             '''
             error_string = self._get_error_message(error_code)
             return error_string
+        except errors.Error:
+            return "Failed to retrieve error description."
 
     ''' These are code-generated '''
 
@@ -958,7 +891,7 @@ class Session(object):
         NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
         '''
         error_code = self.library.niSwitch_AbortScan(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def can_connect(self, channel1, channel2):
@@ -1003,29 +936,8 @@ class Session(object):
         '''
         path_capability_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niSwitch_CanConnect(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), ctypes.pointer(path_capability_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
-
-    def _clear_error(self):
-        '''_clear_error
-
-        This function clears the error code and error description for the IVI
-        session. If the user specifies a valid IVI session for the
-        instrument_handle parameter, this function clears the error information
-        for the session. If the user passes VI_NULL for the Vi parameter, this
-        function clears the error information for the current execution thread.
-        If the Vi parameter is an invalid session, the function does nothing and
-        returns an error. The function clears the error code by setting it to
-        VI_SUCCESS, If the error description string is non-NULL, the function
-        deallocates the error description string and sets the address to
-        VI_NULL. Maintaining the error information separately for each thread
-        is useful if the user does not have a session handle to pass to the
-        _get_error function, which occurs when a call to init
-        or _init_with_options fails.
-        '''
-        error_code = self.library.niSwitch_ClearError(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
-        return
 
     def clear_interchange_warnings(self):
         '''clear_interchange_warnings
@@ -1033,7 +945,7 @@ class Session(object):
         This function clears the list of current interchange warnings.
         '''
         error_code = self.library.niSwitch_ClearInterchangeWarnings(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def commit(self):
@@ -1045,7 +957,7 @@ class Session(object):
         order or to control when expensive hardware operations are performed.
         '''
         error_code = self.library.niSwitch_Commit(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_scan_list(self, scanlist, scan_mode):
@@ -1073,7 +985,7 @@ class Session(object):
         if type(scan_mode) is not enums.ScanMode:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanMode))
         error_code = self.library.niSwitch_ConfigureScanList(self.vi, scanlist.encode('ascii'), scan_mode.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def configure_scan_trigger(self, scan_delay, trigger_input, scan_advanced_output):
@@ -1114,7 +1026,7 @@ class Session(object):
         if type(scan_advanced_output) is not enums.ScanAdvancedOutputConfigureScanTrigger:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutputConfigureScanTrigger))
         error_code = self.library.niSwitch_ConfigureScanTrigger(self.vi, scan_delay, trigger_input.value, scan_advanced_output.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def connect(self, channel1, channel2):
@@ -1150,7 +1062,7 @@ class Session(object):
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
         '''
         error_code = self.library.niSwitch_Connect(self.vi, channel1.encode('ascii'), channel2.encode('ascii'))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def connect_multiple(self, connection_list):
@@ -1187,7 +1099,7 @@ class Session(object):
                 r2 is a configuration channel. Default value: None
         '''
         error_code = self.library.niSwitch_ConnectMultiple(self.vi, connection_list.encode('ascii'))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def disable(self):
@@ -1198,7 +1110,7 @@ class Session(object):
         disconnected and any scan in progress is aborted.
         '''
         error_code = self.library.niSwitch_Disable(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def disconnect(self, channel1, channel2):
@@ -1220,7 +1132,7 @@ class Session(object):
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
         '''
         error_code = self.library.niSwitch_Disconnect(self.vi, channel1.encode('ascii'), channel2.encode('ascii'))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def disconnect_all(self):
@@ -1230,7 +1142,7 @@ class Session(object):
         NISWITCH_WARN_PATH_REMAINS warning is returned.
         '''
         error_code = self.library.niSwitch_DisconnectAll(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def disconnect_multiple(self, disconnection_list):
@@ -1252,7 +1164,7 @@ class Session(object):
                 None
         '''
         error_code = self.library.niSwitch_DisconnectMultiple(self.vi, disconnection_list.encode('ascii'))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _get_attribute_vi_boolean(self, channel_name, attribute_id):
@@ -1297,7 +1209,7 @@ class Session(object):
         '''
         attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niSwitch_GetAttributeViBoolean(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(attribute_value_ctype.value)
 
     def _get_attribute_vi_int32(self, channel_name, attribute_id):
@@ -1342,7 +1254,7 @@ class Session(object):
         '''
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niSwitch_GetAttributeViInt32(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(attribute_value_ctype.value)
 
     def _get_attribute_vi_real64(self, channel_name, attribute_id):
@@ -1387,7 +1299,7 @@ class Session(object):
         '''
         attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self.library.niSwitch_GetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(attribute_value_ctype.value)
 
     def _get_attribute_vi_session(self, channel_name, attribute_id):
@@ -1432,7 +1344,7 @@ class Session(object):
         '''
         attribute_value_ctype = ctypes_types.ViSession_ctype(0)
         error_code = self.library.niSwitch_GetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViSession(attribute_value_ctype.value)
 
     def _get_attribute_vi_string(self, channel_name, attribute_id):
@@ -1493,11 +1405,11 @@ class Session(object):
         array_size = 0
         attribute_value_ctype = None
         error_code = self.library.niSwitch_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size = error_code
         attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode("ascii")
 
     def get_channel_name(self, index):
@@ -1526,11 +1438,11 @@ class Session(object):
         buffer_size = 0
         channel_name_buffer_ctype = None
         error_code = self.library.niSwitch_GetChannelName(self.vi, index, buffer_size, channel_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         channel_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetChannelName(self.vi, index, buffer_size, channel_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_buffer_ctype.value.decode("ascii")
 
     def _get_error(self):
@@ -1549,7 +1461,7 @@ class Session(object):
         current execution thread. If the InstrumentHandle parameter is an
         invalid session, the function does nothing and returns an error.
         Normally, the error information describes the first error that occurred
-        since the user last called _get_error or _clear_error.
+        since the user last called _get_error or clear_error.
 
         Args:
             buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
@@ -1572,11 +1484,11 @@ class Session(object):
         buffer_size = 0
         description_ctype = None
         error_code = self.library.niSwitch_GetError(self.vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetError(self.vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViStatus(code_ctype.value), description_ctype.value.decode("ascii")
 
     def get_next_coercion_record(self):
@@ -1617,11 +1529,11 @@ class Session(object):
         buffer_size = 0
         coercion_record_ctype = None
         error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, coercion_record_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         coercion_record_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, coercion_record_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return coercion_record_ctype.value.decode("ascii")
 
     def get_next_interchange_warning(self):
@@ -1656,11 +1568,11 @@ class Session(object):
         buffer_size = 0
         interchange_warning_ctype = None
         error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return interchange_warning_ctype.value.decode("ascii")
 
     def get_path(self, channel1, channel2):
@@ -1702,11 +1614,11 @@ class Session(object):
         buffer_size = 0
         path_ctype = None
         error_code = self.library.niSwitch_GetPath(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         path_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetPath(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return path_ctype.value.decode("ascii")
 
     def get_relay_count(self, relay_name):
@@ -1728,7 +1640,7 @@ class Session(object):
         '''
         relay_count_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niSwitch_GetRelayCount(self.vi, relay_name.encode('ascii'), ctypes.pointer(relay_count_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(relay_count_ctype.value)
 
     def get_relay_name(self, index):
@@ -1757,11 +1669,11 @@ class Session(object):
         relay_name_buffer_size = 0
         relay_name_buffer_ctype = None
         error_code = self.library.niSwitch_GetRelayName(self.vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         relay_name_buffer_size = error_code
         relay_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(relay_name_buffer_size), ctypes_types.ViString_ctype)
         error_code = self.library.niSwitch_GetRelayName(self.vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return relay_name_buffer_ctype.value.decode("ascii")
 
     def get_relay_position(self, relay_name):
@@ -1781,7 +1693,7 @@ class Session(object):
         '''
         relay_position_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self.library.niSwitch_GetRelayPosition(self.vi, relay_name.encode('ascii'), ctypes.pointer(relay_position_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
 
     def _init_with_options(self, resource_name, id_query, reset_device, options_string):
@@ -1873,7 +1785,7 @@ class Session(object):
         '''
         vi_ctype = ctypes_types.ViSession_ctype(0)
         error_code = self.library.niSwitch_InitWithOptions(resource_name.encode('ascii'), id_query, reset_device, options_string.encode('ascii'), ctypes.pointer(vi_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViSession(vi_ctype.value)
 
     def init_with_topology(self, resource_name, topology, simulate, reset_device):
@@ -2110,7 +2022,7 @@ class Session(object):
         '''
         vi_ctype = ctypes_types.ViSession_ctype(0)
         error_code = self.library.niSwitch_InitWithTopology(resource_name.encode('ascii'), topology.encode('ascii'), simulate, reset_device, ctypes.pointer(vi_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViSession(vi_ctype.value)
 
     def _initiate_scan(self):
@@ -2126,7 +2038,7 @@ class Session(object):
         _abort_scan.
         '''
         error_code = self.library.niSwitch_InitiateScan(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def is_debounced(self):
@@ -2141,7 +2053,7 @@ class Session(object):
         '''
         is_debounced_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niSwitch_IsDebounced(self.vi, ctypes.pointer(is_debounced_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(is_debounced_ctype.value)
 
     def is_scanning(self):
@@ -2156,7 +2068,7 @@ class Session(object):
         '''
         is_scanning_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niSwitch_IsScanning(self.vi, ctypes.pointer(is_scanning_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(is_scanning_ctype.value)
 
     def _lock_session(self):
@@ -2214,7 +2126,7 @@ class Session(object):
         '''
         caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niSwitch_LockSession(self.vi, ctypes.pointer(caller_has_lock_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(caller_has_lock_ctype.value)
 
     def relay_control(self, relay_name, relay_action):
@@ -2238,7 +2150,7 @@ class Session(object):
         if type(relay_action) is not enums.RelayAction:
             raise TypeError('Parameter mode must be of type ' + str(enums.RelayAction))
         error_code = self.library.niSwitch_RelayControl(self.vi, relay_name.encode('ascii'), relay_action.value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def reset_interchange_check(self):
@@ -2272,7 +2184,7 @@ class Session(object):
         clear_interchange_warnings function.
         '''
         error_code = self.library.niSwitch_ResetInterchangeCheck(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def reset_with_defaults(self):
@@ -2284,7 +2196,7 @@ class Session(object):
         reset.
         '''
         error_code = self.library.niSwitch_ResetWithDefaults(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):
@@ -2311,7 +2223,7 @@ class Session(object):
         if type(scan_advanced_output_bus_line) is not enums.TriggerInputBusLine:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputBusLine))
         error_code = self.library.niSwitch_RouteScanAdvancedOutput(self.vi, scan_advanced_output_connector.value, scan_advanced_output_bus_line.value, invert)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert):
@@ -2339,7 +2251,7 @@ class Session(object):
         if type(trigger_input_bus_line) is not enums.TriggerInputBusLine:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputBusLine))
         error_code = self.library.niSwitch_RouteTriggerInput(self.vi, trigger_input_connector.value, trigger_input_bus_line.value, invert)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def scan(self, scanlist, initiation):
@@ -2413,7 +2325,7 @@ class Session(object):
                 initiated Default value: NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED
         '''
         error_code = self.library.niSwitch_Scan(self.vi, scanlist.encode('ascii'), initiation)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def send_software_trigger(self):
@@ -2427,7 +2339,7 @@ class Session(object):
         called.
         '''
         error_code = self.library.niSwitch_SendSoftwareTrigger(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):
@@ -2483,7 +2395,7 @@ class Session(object):
                 the current settings of the instrument session. Default Value: none
         '''
         error_code = self.library.niSwitch_SetAttributeViBoolean(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):
@@ -2539,7 +2451,7 @@ class Session(object):
                 the current settings of the instrument session. Default Value: none
         '''
         error_code = self.library.niSwitch_SetAttributeViInt32(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):
@@ -2595,7 +2507,7 @@ class Session(object):
                 the current settings of the instrument session. Default Value: none
         '''
         error_code = self.library.niSwitch_SetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_session(self, channel_name, attribute_id, attribute_value):
@@ -2651,7 +2563,7 @@ class Session(object):
                 the current settings of the instrument session. Default Value: none
         '''
         error_code = self.library.niSwitch_SetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):
@@ -2707,7 +2619,7 @@ class Session(object):
                 the current settings of the instrument session. Default Value: none
         '''
         error_code = self.library.niSwitch_SetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def set_continuous_scan(self, continuous_scan):
@@ -2722,7 +2634,7 @@ class Session(object):
                 Default value: VI_FALSE
         '''
         error_code = self.library.niSwitch_SetContinuousScan(self.vi, continuous_scan)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def set_path(self, path_list):
@@ -2742,7 +2654,7 @@ class Session(object):
                 previously created path with get_path.
         '''
         error_code = self.library.niSwitch_SetPath(self.vi, path_list.encode('ascii'))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _unlock_session(self):
@@ -2783,7 +2695,7 @@ class Session(object):
         '''
         caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self.library.niSwitch_UnlockSession(self.vi, ctypes.pointer(caller_has_lock_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(caller_has_lock_ctype.value)
 
     def wait_for_debounce(self, maximum_time_ms):
@@ -2801,7 +2713,7 @@ class Session(object):
                 Default Value:5000 ms
         '''
         error_code = self.library.niSwitch_WaitForDebounce(self.vi, maximum_time_ms)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def wait_for_scan_complete(self, maximum_time_ms):
@@ -2820,7 +2732,7 @@ class Session(object):
                 Value:5000 ms
         '''
         error_code = self.library.niSwitch_WaitForScanComplete(self.vi, maximum_time_ms)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def _close(self):
@@ -2833,29 +2745,8 @@ class Session(object):
         call init or _init_with_options.
         '''
         error_code = self.library.niSwitch_close(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def error_message(self, error_code):
-        '''error_message
-
-        Converts an error code returned by NI-SWITCH into a user-readable
-        string. Generally this information is supplied in error out of any
-        NI-SWITCH VI. Use error_message for a static lookup of an
-        error code description.
-
-        Args:
-            error_code (int):Status code returned by any NI-SWITCH function. Default Value: 0
-                (VI_SUCCESS)
-
-        Returns:
-            error_message (int):The error information formatted into a string. You must pass a ViChar
-                array with at least 256 bytes.
-        '''
-        error_message_ctype = (ctypes_types.ViChar_ctype * 256)()
-        error_code = self.library.niSwitch_error_message(self.vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False)
-        return error_message_ctype.value.decode("ascii")
 
     def error_query(self):
         '''error_query
@@ -2875,7 +2766,7 @@ class Session(object):
         error_code_ctype = ctypes_types.ViInt32_ctype(0)
         error_message_ctype = (ctypes_types.ViChar_ctype * 256)()
         error_code = self.library.niSwitch_error_query(self.vi, ctypes.pointer(error_code_ctype), ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(error_code_ctype.value), error_message_ctype.value.decode("ascii")
 
     def reset(self):
@@ -2886,7 +2777,7 @@ class Session(object):
         remain unchanged.
         '''
         error_code = self.library.niSwitch_reset(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     def revision_query(self):
@@ -2902,7 +2793,7 @@ class Session(object):
         instrument_driver_revision_ctype = (ctypes_types.ViChar_ctype * 256)()
         firmware_revision_ctype = (ctypes_types.ViChar_ctype * 256)()
         error_code = self.library.niSwitch_revision_query(self.vi, ctypes.cast(instrument_driver_revision_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)), ctypes.cast(firmware_revision_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return instrument_driver_revision_ctype.value.decode("ascii"), firmware_revision_ctype.value.decode("ascii")
 
     def self_test(self):
@@ -2918,6 +2809,6 @@ class Session(object):
         self_test_result_ctype = ctypes_types.ViInt16_ctype(0)
         self_test_message_ctype = (ctypes_types.ViChar_ctype * 256)()
         error_code = self.library.niSwitch_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
 

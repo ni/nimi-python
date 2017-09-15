@@ -2,8 +2,6 @@ OUTPUT_DIR := $(BIN_DIR)/$(DRIVER)
 LOG_DIR := $(OUTPUT_DIR)/log
 MODULE_DIR := $(OUTPUT_DIR)/$(DRIVER)
 UNIT_TEST_DIR := $(MODULE_DIR)/tests
-SYSTEM_TEST_DIR := $(OUTPUT_DIR)/system_tests
-EXAMPLES_DIR := $(OUTPUT_DIR)/examples
 TEMPLATE_DIR := $(BUILD_HELPER_DIR)/templates
 TOX_INI := $(OUTPUT_DIR)/tox.ini
 
@@ -25,14 +23,12 @@ WHEEL := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION)-py2.py3-none-any.whl
 SDIST := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION).tar.gz
 
 MKDIRECTORIES += \
-                 $(DRIVER_DOCS_DIR) \
-                 $(OUTPUT_DIR) \
-                 $(MODULE_DIR) \
-                 $(UNIT_TEST_DIR) \
-                 $(LOG_DIR) \
-                 $(SYSTEM_TEST_DIR) \
-                 $(EXAMPLES_DIR) \
-                 $(DRIVER_GENERATED_DIR) \
+    $(DRIVER_DOCS_DIR) \
+    $(OUTPUT_DIR) \
+    $(MODULE_DIR) \
+    $(UNIT_TEST_DIR) \
+    $(LOG_DIR) \
+    $(DRIVER_GENERATED_DIR) \
 
 VPATH = $(TEMPLATE_DIR)
 
@@ -54,23 +50,25 @@ TARGETS := $(filter-out run_unit_tests,$(DEFAULT_TARGETS))
 all: $(TARGETS)
 
 DEFAULT_PY_FILES_TO_GENERATE := \
-                     enums.py \
-                     library.py \
-                     library_singleton.py \
-                     session.py \
-                     errors.py \
-                     tests/mock_helper.py \
-                     __init__.py \
+    attributes.py \
+    enums.py \
+    library.py \
+    library_singleton.py \
+    session.py \
+    errors.py \
+    tests/mock_helper.py \
+    __init__.py \
 
 DEFAULT_PY_FILES_TO_COPY := \
-                     ctypes_types.py \
-                     python_types.py \
+    ctypes_types.py \
+    python_types.py \
 
 DEFAULT_RST_FILES_TO_GENERATE := \
-                     session.rst \
-                     enums.rst \
-                     attributes.rst \
-                     functions.rst \
+    session.rst \
+    enums.rst \
+    attributes.rst \
+    functions.rst \
+    examples.rst \
 
 # Files for tracking parts of the build
 WHEEL_BUILD_DONE := $(LOG_DIR)/wheel_build_done

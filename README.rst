@@ -6,6 +6,8 @@
 | Versions             | NI-DMM     | |DMMLatestVersion| |DMMPythonVersion|         |
 |                      +------------+-----------------------------------------------+
 |                      | NI-ModInst | |ModInstLatestVersion| |ModInstPythonVersion| |
+|                      +------------+-----------------------------------------------+
+|                      | NI-SWITCH  | |SwitchLatestVersion| |SwitchPythonVersion|   |
 +----------------------+------------+-----------------------------------------------+
 
 ===========  ============================================================================================================================
@@ -32,6 +34,7 @@ The **nimi-python** repository generates Python bindings (Application Programmin
 
 * NI-DMM (Python module: nidmm)
 * NI-ModInst (Python module: nimodinst)
+* NI-SWITCH (Python module: niswitch)
 
 It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is called through its public C API using the
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
@@ -153,7 +156,7 @@ licenses allow for non-commercial and commercial use.
     :scale: 100%
     :target: https://opensource.org/licenses/MIT
 
-.. |CoverageStatus| image:: https://coveralls.io/repos/github/ni/nimi-python/badge.svg?branch=master
+.. |CoverageStatus| image:: https://coveralls.io/repos/github/ni/nimi-python/badge.svg?branch=master&dummy=no_cache_please_1
     :alt: Test Coverage - master branch
     :scale: 100%
     :target: https://coveralls.io/github/ni/nimi-python?branch=master
@@ -163,20 +166,30 @@ licenses allow for non-commercial and commercial use.
     :scale: 100%
     :target: http://pypi.python.org/pypi/nidmm
 
-.. |ModInstLatestVersion| image:: http://img.shields.io/pypi/v/nimodinst.svg
-    :alt: Latest NI-ModInst Version
-    :scale: 100%
-    :target: http://pypi.python.org/pypi/nimodinst
-
 .. |DMMPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidmm.svg
     :alt: NI-DMM supported Python versions
     :scale: 100%
     :target: http://pypi.python.org/pypi/nidmm
 
+.. |ModInstLatestVersion| image:: http://img.shields.io/pypi/v/nimodinst.svg
+    :alt: Latest NI-ModInst Version
+    :scale: 100%
+    :target: http://pypi.python.org/pypi/nimodinst
+
 .. |ModInstPythonVersion| image:: http://img.shields.io/pypi/pyversions/nimodinst.svg
     :alt: NI-ModInst supported Python versions
     :scale: 100%
     :target: http://pypi.python.org/pypi/nimodinst
+
+.. |SwitchLatestVersion| image:: http://img.shields.io/pypi/v/niswitch.svg
+    :alt: Latest NI-SWITCH Version
+    :scale: 100%
+    :target: http://pypi.python.org/pypi/niswitch
+
+.. |SwitchPythonVersion| image:: http://img.shields.io/pypi/pyversions/niswitch.svg
+    :alt: NI-SWITCH supported Python versions
+    :scale: 100%
+    :target: http://pypi.python.org/pypi/niswitch
 
 .. |OpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python.svg
     :alt: Open Issues + Pull Requests

@@ -1,6 +1,6 @@
 include $(BUILD_HELPER_DIR)/tools.mak
 
-DEFAULT_TARGETS := module unit_tests update_generated_files update_system_tests update_examples wheel sdist
+DEFAULT_TARGETS := module unit_tests update_generated_files wheel sdist
 export DEFAULT_TARGETS
 
 GENERATED_DIR := $(ROOT_DIR)/generated
@@ -53,6 +53,7 @@ clean: start
 	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*.rst) $(SUPPRESS_ERROR_OUTPUT) ||:
+	-@rm -Rf $(ROOT_DIR)/.coverage $(SUPPRESS_ERROR_OUTPUT) ||:
 
 start:
 	-@echo "# This is the list of commands that make invoked in order to build nimi-python. If" > $(COMMAND_LOG)

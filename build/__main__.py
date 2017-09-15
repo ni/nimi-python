@@ -7,8 +7,8 @@ import pprint
 import sys
 
 # Part of this package
-import utilities
 import generate_template
+import utilities
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -20,25 +20,21 @@ verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
 verbosity_group.add_argument(
     "-v", "--verbose",
     action="count", dest="verbose", default=0,
-    help="Verbose output"
-    )
+    help="Verbose output")
 verbosity_group.add_argument(
     "--test",
     action="store_true", dest="test", default=False,
-    help="Run doctests and quit"
-    )
+    help="Run doctests and quit")
 verbosity_group.add_argument(
     "--log-file",
     action="store", dest="logfile", default=None,
-    help="Send logging to listed file instead of stdout"
-    )
+    help="Send logging to listed file instead of stdout")
 build_group = parser.add_argument_group("Build")
 build_group.add_argument(
     "--metadata",
     action='append', dest='metadata', default=[],
     help='Absolute or relative path to metadata package. Multiple allowed. ' +
-         'Will build in order added to command line.'
-    )
+    'Will build in order added to command line.')
 utility_group = parser.add_argument_group("Utility")
 utility_group.add_argument(
     "--template",
