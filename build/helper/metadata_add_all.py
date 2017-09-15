@@ -131,7 +131,7 @@ def _add_default_value_name(parameter):
     else:
         name = parameter['python_name']
 
-    parameter['name_with_default'] = name
+    parameter['python_name_with_default'] = name
 
 
 def add_all_function_metadata(functions, config):
@@ -201,8 +201,8 @@ def test_add_all_metadata_simple():
                     'intrinsic_type': 'int',
                     'is_buffer': False,
                     'name': 'vi',
-                    'name_with_default': 'vi',
                     'python_name': 'vi',
+                    'python_name_with_default': 'vi',
                     'python_type': 'ViSession',
                     'size': {
                         'mechanism': 'fixed',
