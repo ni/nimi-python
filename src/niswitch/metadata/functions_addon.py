@@ -89,7 +89,7 @@ function_default_value = {
     'InitWithOptions':   { 'parameters': { 1: { 'default_value': False, },
                                            2: { 'default_value': False, },
                                            3: { 'default_value': '', }, }, },
-    'InitWithTopology':  { 'parameters': { 1: { 'default_value': '', },
+    'InitWithTopology':  { 'parameters': { 1: { 'default_value': 'Configured Topology', },
                                            2: { 'default_value': False, },
                                            3: { 'default_value': False, },
                                            4: { 'default_value': '', }, }, },
