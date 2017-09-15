@@ -13,7 +13,7 @@ ${helper.get_rst_header_snippet(module_name + '.Session', '=')}
 
 .. py:class:: Session
 
-   ${helper.get_indented_docstring_snippet(config['session_description'], indent=3)}
+   ${helper.get_indented_docstring_snippet(config['session_class_description'], indent=3)}
 
 <%
 table_contents = []

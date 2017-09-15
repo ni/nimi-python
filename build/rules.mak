@@ -95,28 +95,4 @@ $(GENERATED_FILES_COPY_DONE): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py $(UNIT_TEST
       cp -Rf $(OUTPUT_DIR)/setup.py $(DRIVER_GENERATED_DIR) \
    )
 
-ifneq (,$(wildcard $(DRIVER_DIR)/system_tests))
-SYSTEM_TESTS_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/system_tests/*.py)
-SYSTEM_TESTS_FILES := $(addprefix $(SYSTEM_TEST_DIR)/,$(notdir $(SYSTEM_TESTS_FILES_TO_COPY)))
-endif
-update_system_tests: $(SYSTEM_TESTS_FILES)
-
-$(SYSTEM_TEST_DIR)/%.py: $(DRIVER_DIR)/system_tests/%.py
-	$(call trace_to_console, "Copying",$@)
-	$(_hide_cmds)$(call log_command,cp $< $@)
-# Need to signal the top level makefile to run tests again
-	$(_hide_cmds)$(call trigger_tests)
-
-ifneq (,$(wildcard $(DRIVER_DIR)/examples))
-EXAMPLE_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/examples/*.py)
-EXAMPLE_FILES := $(addprefix $(EXAMPLES_DIR)/,$(notdir $(EXAMPLE_FILES_TO_COPY)))
-endif
-update_examples: $(EXAMPLE_FILES)
-
-$(EXAMPLES_DIR)/%.py: $(DRIVER_DIR)/examples/%.py
-	$(call trace_to_console, "Copying",$@)
-	$(_hide_cmds)$(call log_command,cp $< $@)
-# Need to signal the top level makefile to run tests again
-	$(_hide_cmds)$(call trigger_tests)
-
 

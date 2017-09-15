@@ -71,17 +71,17 @@ class Device(object):
 
 
 class Session(object):
-    '''${config['session_description']}'''
+    '''${config['session_class_description']}'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
     def __init__(self, driver):
-        self.handle = 0
+        self.${config['session_handle_parameter_name']} = 0
         self.item_count = 0
         self.current_item = 0
         self.library = library_singleton.get()
-        self.handle, self.item_count = self._open_installed_devices_session(driver)
+        self.${config['session_handle_parameter_name']}, self.item_count = self._open_installed_devices_session(driver)
 
         self._is_frozen = True
 
@@ -145,7 +145,7 @@ class Session(object):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         if(self.handle != 0):
             self._close_installed_devices_session(self.handle)
-            self.handle = 0
+            self.${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
@@ -158,7 +158,7 @@ class Session(object):
     ivi_dance_parameter = helper.extract_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
-    def ${f['python_name']}(${helper.get_method_parameters_snippet(parameters, skip_session_handle = True, skip_output_parameters = True, skip_ivi_dance_size_parameter = True)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.API_METHOD)}):
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter)}
 % endfor
@@ -166,17 +166,17 @@ class Session(object):
         ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
 % endfor
 % if ivi_dance_parameter is None:
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL, {'session_name': 'handle'})})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = None
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL, {'session_name': 'handle'})})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_library_call_parameter_snippet(f['parameters'], session_name='handle')})
+        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL, {'session_name': 'handle'})})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif

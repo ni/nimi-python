@@ -77,6 +77,15 @@ def _add_ctypes_variable_name(parameter):
 def _add_ctypes_type(parameter):
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
     parameter['ctypes_type'] = parameter['type'] + '_ctype'
+    if parameter['direction'] == 'out':
+        if parameter['type'] == 'ViString' or parameter['type'] == 'ViRsrc' or parameter['type'] == 'ViConstString':
+            # These are defined as c_char_p which is already a pointer!
+            parameter['ctypes_type_library_call'] = parameter['ctypes_type']
+        else:
+            parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + parameter['ctypes_type'] + ")"
+    else:
+        parameter['ctypes_type_library_call'] = parameter['ctypes_type']
+
     return parameter
 
 
@@ -116,7 +125,27 @@ def _add_buffer_info(parameter):
     return parameter
 
 
-def add_all_metadata(functions):
+def _add_library_call_name(parameter, session_name):
+    if parameter['direction'] == 'in':
+        if parameter['name'] == session_name:
+            library_call_name = 'self.' + session_name
+        else:
+            library_call_name = parameter['python_name']
+            library_call_name += '.value' if parameter['enum'] is not None else ''
+            if parameter['type'] == 'ViString' or parameter['type'] == 'ViConstString' or parameter['type'] == 'ViRsrc':
+                library_call_name += '.encode(\'ascii\')'
+    else:
+        assert parameter['direction'] == 'out', pp.pformat(parameter)
+        if parameter['size']['mechanism'] == 'ivi-dance':
+            library_call_name = parameter['ctypes_variable_name']
+        elif parameter['is_buffer']:
+            library_call_name = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + parameter['ctypes_type'] + '))'
+        else:
+            library_call_name = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
+    parameter['library_call_name'] = library_call_name
+
+
+def add_all_metadata(functions, config):
     '''Adds all codegen-specific metada to the function metadata list'''
     for f in functions:
         _add_python_method_name(functions[f], f)
@@ -130,6 +159,7 @@ def add_all_metadata(functions):
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
             _add_buffer_info(p)
+            _add_library_call_name(p, config['session_handle_parameter_name'])
     return functions
 
 
@@ -198,7 +228,7 @@ def test_merge_dict_with_regex():
 
 def _do_the_test_add_all_metadata(functions, expected):
     actual = copy.deepcopy(functions)
-    actual = add_all_metadata(actual)
+    actual = add_all_metadata(actual, {'session_handle_parameter_name': 'vi'})
     assert expected == actual, "\nfunctions = {0}\nexpected = {1}\nactual = {2}".format(pp.pformat(functions), pp.pformat(expected), pp.pformat(actual))
 
 
@@ -234,6 +264,7 @@ def test_add_all_metadata_simple():
                 {
                     'ctypes_type': 'ViSession_ctype',
                     'ctypes_variable_name': 'vi_ctype',
+                    'ctypes_type_library_call': 'ViSession_ctype',
                     'direction': 'in',
                     'documentation': {
                         'description': 'Identifies a particular instrument session.'
@@ -248,7 +279,8 @@ def test_add_all_metadata_simple():
                         'mechanism': 'fixed',
                         'value': 1
                     },
-                    'type': 'ViSession'
+                    'type': 'ViSession',
+                    'library_call_name': 'self.vi',
                 }
             ],
             'python_name': 'close',

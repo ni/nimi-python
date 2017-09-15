@@ -18,14 +18,14 @@ _instance = None
 def _get_library_name():
     try:
         return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['name']
-    except KeyError:
+    except KeyError:  # pragma: no cover
         raise errors.UnsupportedConfigurationError
 
 
 def _get_library_type():
     try:
         return ${helper.get_dictionary_snippet(config['library_info'], indent=15)}[platform.system()][platform.architecture()[0]]['type']
-    except KeyError:
+    except KeyError:  # pragma: no cover
         raise errors.UnsupportedConfigurationError
 
 
@@ -38,7 +38,7 @@ def get():
     if _instance is None:
         try:
             _instance = library.Library(_get_library_name(), _get_library_type())
-        except OSError:
+        except OSError:  # pragma: no cover
             raise errors.DriverNotInstalledError()
     return _instance
 
