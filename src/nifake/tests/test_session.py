@@ -1,3 +1,4 @@
+import math
 import mock_helper
 import nifake
 import warnings
@@ -398,3 +399,23 @@ class TestSession(object):
         session = nifake.Session('FakeDevice', True, True, 'Some string')
         assert(session.vi == SESSION_NUM_FOR_TEST)
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'FakeDevice', True, True, b'Some string', ANY)
+
+    def test_read(self):
+        test_maximum_time = 10
+        test_reading = 5
+        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
+        self.side_effects_helper['Read']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            assert test_reading == session.read(test_maximum_time)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, ANY)]
+            self.patched_library.niFake_Read.assert_has_calls(calls)
+            assert self.patched_library.niFake_Read.call_count == 1
+
+    def test_read_returning_nan(self):
+        test_maximum_time = 10
+        test_reading = float('NaN')
+        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
+        self.side_effects_helper['Read']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            assert math.isnan(session.read(test_maximum_time))
