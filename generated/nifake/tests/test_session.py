@@ -400,6 +400,23 @@ class TestSession(object):
         assert(session.vi == SESSION_NUM_FOR_TEST)
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'FakeDevice', True, True, b'Some string', ANY)
 
+    def test_get_vi_int32_attribute(self):
+        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
+        test_number = 3
+        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = test_number
+        with nifake.Session('dev1') as session:
+            attr_int = session.read_write_integer
+            assert(attr_int == test_number)
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', 1000004, ANY)
+
+    def test_set_vi_int32_attribute(self):
+        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
+        attribute_id = 1000004
+        test_number = 1
+        with nifake.Session('dev1') as session:
+            session.read_write_integer = test_number
+            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, test_number)
+
     def test_read(self):
         test_maximum_time = 10
         test_reading = 5

@@ -44,6 +44,10 @@ class Session(object):
     '''
     An attribute of type string with read/write access.
     '''
+    read_write_integer = AttributeViInt32(1000004)
+    '''
+    An attribute of type integer with read/write access.
+    '''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
         self.library = library_singleton.get()
