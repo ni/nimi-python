@@ -1,4 +1,7 @@
+
+
 # Filters
+# TODO(texasaggie97) these need to be renamed to filter_*
 def extract_codegen_functions(functions):
     '''Returns function metadata only for those functions to be included in codegen'''
     funcs = {}
