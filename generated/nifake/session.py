@@ -42,15 +42,11 @@ class _SessionBase(object):
     '''
     read_write_integer = attributes.AttributeViInt32(1000004)
     '''
-    An attribute of type ViInt32 with read/write access.
+    An attribute of type integer with read/write access.
     '''
     read_write_string = attributes.AttributeViString(1000002)
     '''
     An attribute of type string with read/write access.
-    '''
-    read_write_integer = AttributeViInt32(1000004)
-    '''
-    An attribute of type integer with read/write access.
     '''
 
     def __init__(self, default_channel):
