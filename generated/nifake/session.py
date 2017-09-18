@@ -542,7 +542,6 @@ class Session(_SessionBase):
         # TODO(marcoskirsch): private members should start with _
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
-
         self._is_frozen = True
 
     def __enter__(self):

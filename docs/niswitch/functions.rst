@@ -3,7 +3,7 @@ niswitch.Session methods
 
 .. py:currentmodule:: niswitch
 
-.. function:: can_connect(channel1, channel2, path_capability)
+.. function:: can_connect(channel1, channel2)
 
     Verifies that a path between channel 1 and channel 2 can be created. If
     a path is possible in the switch module, the availability of that path
@@ -337,7 +337,7 @@ niswitch.Session methods
 
     :type disconnection_list: str
 
-.. function:: get_channel_name(index, buffer_size, channel_name_buffer)
+.. function:: get_channel_name(index)
 
     Returns the channel string that is in the channel table at the specified
     index. Use :py:func:`niswitch.get_channel_name` in a For Loop to get a complete list
@@ -375,7 +375,7 @@ niswitch.Session methods
 
     :type buffer_size: int
 
-.. function:: get_next_coercion_record(buffer_size, coercion_record)
+.. function:: get_next_coercion_record()
 
     This function returns the coercion information associated with the IVI
     session. This function retrieves and clears the oldest instance in which
@@ -418,7 +418,7 @@ niswitch.Session methods
 
     :type buffer_size: int
 
-.. function:: get_next_interchange_warning(buffer_size, interchange_warning)
+.. function:: get_next_interchange_warning()
 
     This function returns the interchangeability warnings associated with
     the IVI session. It retrieves and clears the oldest instance in which
@@ -455,7 +455,7 @@ niswitch.Session methods
 
     :type buffer_size: int
 
-.. function:: get_path(channel1, channel2, buffer_size, path)
+.. function:: get_path(channel1, channel2)
 
     Returns a string that identifies the explicit path created with
     :py:func:`niswitch.connect`. Pass this string to :py:func:`niswitch.set_path` to establish
@@ -513,7 +513,7 @@ niswitch.Session methods
 
     :type buffer_size: int
 
-.. function:: get_relay_count(relay_name, relay_count)
+.. function:: get_relay_count(relay_name)
 
     Returns the number of times the relay has changed from Closed to Open.
     Relay count is useful for tracking relay lifetime and usage. Call
@@ -544,7 +544,7 @@ niswitch.Session methods
             
 
 
-.. function:: get_relay_name(index, relay_name_buffer_size, relay_name_buffer)
+.. function:: get_relay_name(index)
 
     Returns the relay name string that is in the relay list at the specified
     index. Use :py:func:`niswitch.get_relay_name` in a For Loop to get a complete list
@@ -582,7 +582,7 @@ niswitch.Session methods
 
     :type relay_name_buffer_size: int
 
-.. function:: get_relay_position(relay_name, relay_position)
+.. function:: get_relay_position(relay_name)
 
     Returns the relay position for the relay specified in the Relay Name
     parameter.
@@ -878,7 +878,7 @@ niswitch.Session methods
             
 
 
-.. function:: is_debounced(is_debounced)
+.. function:: is_debounced()
 
     Indicates if all created paths have settled by returning the value of
     the :py:data:`niswitch.IS\_DEBOUNCED` attribute.
@@ -896,7 +896,7 @@ niswitch.Session methods
             
 
 
-.. function:: is_scanning(is_scanning)
+.. function:: is_scanning()
 
     Indicates the status of the scan.
 
@@ -1257,7 +1257,7 @@ niswitch.Session methods
 
     :type maximum_time_ms: int
 
-.. function:: error_query(error_code, error_message)
+.. function:: error_query()
 
     This function reads an error code and a message from the instrument's
     error queue. NI-SWITCH does not have an error queue, so this function
@@ -1298,7 +1298,7 @@ niswitch.Session methods
     
 
 
-.. function:: revision_query(instrument_driver_revision, firmware_revision)
+.. function:: revision_query()
 
     Returns the revision of the NI-SWITCH driver.
 
@@ -1325,7 +1325,7 @@ niswitch.Session methods
             
 
 
-.. function:: self_test(self_test_result, self_test_message)
+.. function:: self_test()
 
     Verifies that the driver can communicate with the switch module.
 

@@ -25,7 +25,7 @@ class Library(object):
 
         if library_type == 'windll':
             self._library = ctypes.WinDLL(library_name)
-        else:
+        else:  # pragma: no cover
             assert library_type == 'cdll'
             self._library = ctypes.CDLL(library_name)
 
