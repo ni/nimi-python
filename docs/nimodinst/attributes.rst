@@ -21,7 +21,7 @@ nimodinst.Session properties
     | Resettable     | No    |
     +----------------+-------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - C Attribute: **NIMODINST_ATTR_BUS_NUMBER**
@@ -44,7 +44,7 @@ nimodinst.Session properties
     | Resettable     | No    |
     +----------------+-------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - C Attribute: **NIMODINST_ATTR_CHASSIS_NUMBER**
@@ -67,7 +67,7 @@ nimodinst.Session properties
     | Resettable     | No    |
     +----------------+-------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - C Attribute: **NIMODINST_ATTR_DEVICE_MODEL**
@@ -90,7 +90,7 @@ nimodinst.Session properties
     | Resettable     | No    |
     +----------------+-------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - C Attribute: **NIMODINST_ATTR_DEVICE_NAME**
@@ -113,7 +113,7 @@ nimodinst.Session properties
     | Resettable     | No    |
     +----------------+-------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - C Attribute: **NIMODINST_ATTR_MAX_PCIEXPRESS_LINK_WIDTH**
@@ -136,7 +136,7 @@ nimodinst.Session properties
     | Resettable     | No    |
     +----------------+-------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - C Attribute: **NIMODINST_ATTR_PCIEXPRESS_LINK_WIDTH**
@@ -159,7 +159,7 @@ nimodinst.Session properties
     | Resettable     | No    |
     +----------------+-------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - C Attribute: **NIMODINST_ATTR_SERIAL_NUMBER**
@@ -182,7 +182,7 @@ nimodinst.Session properties
     | Resettable     | No    |
     +----------------+-------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - C Attribute: **NIMODINST_ATTR_SLOT_NUMBER**
@@ -205,7 +205,7 @@ nimodinst.Session properties
     | Resettable     | No    |
     +----------------+-------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - C Attribute: **NIMODINST_ATTR_SOCKET_NUMBER**
