@@ -16,7 +16,7 @@ build.metadata_utilities.merge_dicts(functions, functions_enums)
 build.metadata_utilities.merge_dicts(functions, functions_params_types)
 build.metadata_utilities.merge_dicts(functions, functions_buffer_info)
 
-build.metadata_utilities.add_all_metadata(functions)
+build.metadata_utilities.add_all_metadata(functions, config)
 
 __version__ = config['module_version']
 
