@@ -64,4 +64,16 @@ attributes = {
             'description':'An attribute of type Color with read/write access.',
         },
     },
+    1000004: {
+        'access': 'read-write',
+        'channel_based': 'True',
+        'enum': None,
+        'lv_property': 'Fake attributes:Read Write Integer',
+        'name': 'READ_WRITE_INTEGER',
+        'resettable': 'No',
+        'type': 'ViInt32',
+        'documentation': {
+            'description':'An attribute of type ViInt32 with read/write access.',
+        },
+    },
 }
