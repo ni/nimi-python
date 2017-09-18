@@ -48,6 +48,10 @@ class _SessionBase(object):
     '''
     An attribute of type string with read/write access.
     '''
+    read_write_integer = AttributeViInt32(1000004)
+    '''
+    An attribute of type integer with read/write access.
+    '''
 
     def __init__(self, default_channel):
         # TODO(marcoskirsch): private members should start with _

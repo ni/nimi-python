@@ -66,14 +66,24 @@ attributes = {
     },
     1000004: {
         'access': 'read-write',
+<<<<<<< HEAD
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Fake attributes:Read Write Integer',
+=======
+        'channel_based': 'False',
+        'enum': None,
+        'lv_property': 'Fake attributes:Read Write Int',
+>>>>>>> master
         'name': 'READ_WRITE_INTEGER',
         'resettable': 'No',
         'type': 'ViInt32',
         'documentation': {
+<<<<<<< HEAD
             'description':'An attribute of type ViInt32 with read/write access.',
+=======
+            'description':'An attribute of type integer with read/write access.',
+>>>>>>> master
         },
     },
 }
