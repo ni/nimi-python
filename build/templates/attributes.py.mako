@@ -61,8 +61,8 @@ class AttributeViBoolean(Attribute):
 
 class AttributeEnum(object):
 
-    def __init__(self, underlying_meta_class, enum_meta_class, attribute_id, default_channel=''):
-        self._underlying_attribute = underlying_meta_class(attribute_id, default_channel)
+    def __init__(self, underlying_attribute_meta_class, enum_meta_class, attribute_id, default_channel=''):
+        self._underlying_attribute = underlying_attribute_meta_class(attribute_id, default_channel)
         self._attribute_type = enum_meta_class
         self._attribute_id = attribute_id
         self._default_channel = default_channel
