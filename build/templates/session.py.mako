@@ -43,47 +43,8 @@ class ${session_context_manager}(object):
 
 
 % endif
-class ChannelContext(object):
-    '''Allows for setting/getting property values for specific channels in your session.'''
-
-    def __init__(self, session, channel):
-        self._session = session
-        self._channel = channel
-        self._initialization_complete = True
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        pass
-
-    def __setattr__(self, name, value):
-        if '_initialization_complete' not in self.__dict__ or name in self.__dict__:
-            # Allow normal behavior during __init__ and for properties that exist.
-            return dict.__setattr__(self, name, value)
-        else:
-            self._get_session_attribute(name).set(self._session, self._channel, value)
-
-    def __getattr__(self, name):
-        if '_initialization_complete' not in self.__dict__ or name in self.__dict__:
-            assert False, 'Dead code'  # TODO(marcoskirsch): Can this ever be hit?
-            return dict.__getattr__(self, name)
-        else:
-            # Set on the corresponding Attribute instance in self._session using self._channel.
-            return self._get_session_attribute(name).get(self._session, self._channel)
-
-    def _get_session_attribute(self, name):
-        '''Returns the Attribute object from the session.'''
-        attribute_object = type(self._session).__dict__[name]
-        if isinstance(attribute_object, attributes.Attribute):
-            return attribute_object
-        else:
-            # TODO(marcoskirsch): Eventually we want this to work on methods too.
-            raise KeyError('{0} is not a property of ${module_name}.Session'.format(name))
-
-
-class Session(object):
-    '''${config['session_description']}'''
+class _SessionBase(object):
+    '''Base class for all ${config['driver_name']} sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -101,39 +62,15 @@ class Session(object):
 %   endif
 % endfor
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
+    def __init__(self, default_channel):
         # TODO(marcoskirsch): private members should start with _
         self.library = library_singleton.get()
-        self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
-
-        self._is_frozen = True
+        self._default_channel = default_channel
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-
-    def initiate(self):
-        return ${session_context_manager}(self)
-
-    def channel(self, channel):
-        return ChannelContext(self, channel)
-
-    def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        try:
-            self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
-        self.vi = 0
 
     def get_error_description(self, error_code):
         '''get_error_description
@@ -195,4 +132,53 @@ class Session(object):
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
 % endfor
+
+
+class ChannelContextSession(_SessionBase):
+    '''Allows for setting/getting property values for specific channels in your session.'''
+
+    def __init__(self, vi, channel):
+        super(ChannelContextSession, self).__init__(default_channel=channel)
+        self.vi = vi
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
+class Session(_SessionBase):
+    '''${config['session_description']}'''
+
+    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
+        super(Session, self).__init__(default_channel='')
+        # TODO(marcoskirsch): private members should start with _
+        self.vi = 0  # This must be set before calling _init_with_options.
+        self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def initiate(self):
+        return ${session_context_manager}(self)
+
+    def channel(self, channel):
+        return ChannelContextSession(self.vi, channel)
+
+    def close(self):
+        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
+        try:
+            self._close()
+        except errors.Error:
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
+            print("Failed to close session.")
+        self.vi = 0
+
 
