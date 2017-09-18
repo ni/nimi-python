@@ -59,7 +59,7 @@ class AttributeViBoolean(Attribute):
         session._set_attribute_vi_boolean(channel, self._attribute_id, value)
 
 
-class AttributeEnum(Attribute):
+class AttributeEnum(object):
 
     def __init__(self, underlying_attr_type, enum_meta_class):
         self._underlying_attr_type = underlying_attr_type
