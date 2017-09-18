@@ -51,7 +51,7 @@ class Session(object):
 
 % for attribute in helper.sorted_attrs(attributes):
     %if attributes[attribute]['enum']:
-    ${attributes[attribute]['name'].lower()} = attributes.AttributeEnum(${attribute}, enums.${attributes[attribute]['enum']})
+    ${attributes[attribute]['name'].lower()} = attributes.AttributeEnum(attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
     %else:
     ${attributes[attribute]['name'].lower()} = attributes.Attribute${attributes[attribute]['type']}(${attribute})
     %endif

@@ -54,7 +54,7 @@ class Session(object):
     for the NI 4080/4081/4082 and NI 4070/4071/4072, 10 Hz-100 Hz for the NI
     4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
     '''
-    adc_calibration = attributes.AttributeEnum(1150022, enums.ADCCalibration)
+    adc_calibration = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ADCCalibration, 1150022)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the ADC
     calibration mode.
@@ -84,7 +84,7 @@ class Session(object):
     are 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is
     50 Hz, the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
     '''
-    aperture_time_units = attributes.AttributeEnum(1250322, enums.ApertureTimeUnits)
+    aperture_time_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ApertureTimeUnits, 1250322)
     '''
     Specifies the units of aperture time for the current configuration.
 
@@ -96,7 +96,7 @@ class Session(object):
     actual value of the active range. The value of this property is set
     during a read operation.
     '''
-    auto_zero = attributes.AttributeEnum(1250332, enums.AutoZero)
+    auto_zero = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AutoZero, 1250332)
     '''
     Specifies the AutoZero mode. This property is not supported for the NI
     4050.
@@ -107,7 +107,7 @@ class Session(object):
     is 134,217,727 (0X7FFFFFF) samples. When set to Auto (-1), NI-DMM
     chooses the buffer size.
     '''
-    cable_comp_type = attributes.AttributeEnum(1150045, enums.CableCompensationType)
+    cable_comp_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CableCompensationType, 1150045)
     '''
     For the NI 4081 and NI 4072 only, specifies the type of cable
     compensation that is applied to the current capacitance or inductance
@@ -142,18 +142,18 @@ class Session(object):
     '''
     The PCI product ID.
     '''
-    current_source = attributes.AttributeEnum(1150025, enums.CurrentSource)
+    current_source = attributes.AttributeEnum(attributes.AttributeViReal64, enums.CurrentSource, 1150025)
     '''
     Specifies the current source provided during diode measurements.
 
     The NI 4050 and NI 4060 are not supported.
     '''
-    dc_bias = attributes.AttributeEnum(1150053, enums.DCBias)
+    dc_bias = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DCBias, 1150053)
     '''
     For the NI 4082 and NI 4072 only, controls the available DC bias for
     capacitance measurements.
     '''
-    dc_noise_rejection = attributes.AttributeEnum(1150026, enums.DCNoiseRejection)
+    dc_noise_rejection = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DCNoiseRejection, 1150026)
     '''
     Specifies the DC noise rejection mode.
 
@@ -208,7 +208,7 @@ class Session(object):
     | Auto Range Off | -2.0 | Disables Auto Ranging. NI-DMM sets the voltage range to the last calculated voltage range.                                       |
     +----------------+------+----------------------------------------------------------------------------------------------------------------------------------+
     '''
-    function = attributes.AttributeEnum(1250001, enums.Function)
+    function = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Function, 1250001)
     '''
     Specifies the measurement function. If you are setting this property
     directly, you must also set the `Operation
@@ -229,7 +229,7 @@ class Session(object):
     '''
     A string containing the type of instrument used in the current session.
     '''
-    input_resistance = attributes.AttributeEnum(1150029, enums.InputResistance)
+    input_resistance = attributes.AttributeEnum(attributes.AttributeViReal64, enums.InputResistance, 1150029)
     '''
     Specifies the input resistance of the instrument.
 
@@ -280,7 +280,7 @@ class Session(object):
     instrument to an internal buffer. When set to Auto (-1), NI-DMM chooses
     the transfer size.
     '''
-    lc_calculation_model = attributes.AttributeEnum(1150052, enums.LCCalculationModel)
+    lc_calculation_model = attributes.AttributeEnum(attributes.AttributeViInt32, enums.LCCalculationModel, 1150052)
     '''
     For the NI 4082 and NI 4072 only, specifies the type of algorithm that
     the measurement processing uses for capacitance and inductance
@@ -295,7 +295,7 @@ class Session(object):
     '''
     A string containing the logical name of the instrument.
     '''
-    meas_complete_dest = attributes.AttributeEnum(1250305, enums.MeasurementCompleteDest)
+    meas_complete_dest = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MeasurementCompleteDest, 1250305)
     '''
     Specifies the destination of the measurement complete (MC) signal.
 
@@ -305,7 +305,7 @@ class Session(object):
 
     Note: The NI 4050 is not supported.
     '''
-    meas_dest_slope = attributes.AttributeEnum(1150002, enums.MeasurementDestinationSlope)
+    meas_dest_slope = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MeasurementDestinationSlope, 1150002)
     '''
     Specifies the polarity of the generated measurement complete signal.
     '''
@@ -319,7 +319,7 @@ class Session(object):
 
     The NI 4050 and NI 4060 are not supported.
     '''
-    offset_comp_ohms = attributes.AttributeEnum(1150023, enums.OffsetCompensatedOhms)
+    offset_comp_ohms = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OffsetCompensatedOhms, 1150023)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, enables or disables
     offset compensated ohms.
@@ -350,7 +350,7 @@ class Session(object):
     Measurement <dmmviref.chm::/niDMM_Config_Measurement.html>`__ resets
     this property to the default value.
     '''
-    operation_mode = attributes.AttributeEnum(1150014, enums.OperationMode)
+    operation_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OperationMode, 1150014)
     '''
     Specifies how the DMM acquires data.
 
@@ -365,7 +365,7 @@ class Session(object):
 
     Note: The NI 4050 and NI 4060 are not supported.
     '''
-    powerline_freq = attributes.AttributeEnum(1250333, enums.PowerlineFrequency)
+    powerline_freq = attributes.AttributeEnum(attributes.AttributeViReal64, enums.PowerlineFrequency, 1250333)
     '''
     Specifies the powerline frequency. The NI 4060 and NI 4050 use this
     value to select an aperture time to reject powerline noise by selecting
@@ -456,7 +456,7 @@ class Session(object):
     on the NI 4082 and NI 4072. To achieve better resolution for such
     measurements, use the Number of LC Measurements to Average property.
     '''
-    resolution_digits = attributes.AttributeEnum(1250003, enums.DigitsResolution)
+    resolution_digits = attributes.AttributeEnum(attributes.AttributeViReal64, enums.DigitsResolution, 1250003)
     '''
     Specifies the measurement resolution in digits. Setting this property to
     higher values increases the measurement accuracy. Setting this property
@@ -509,7 +509,7 @@ class Session(object):
 
     Note: The NI 4080/4081/4082 and NI 4050 are not supported.
     '''
-    sample_trigger = attributes.AttributeEnum(1250302, enums.SampleTrigger)
+    sample_trigger = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SampleTrigger, 1250302)
     '''
     Specifies the sample trigger source.
 
@@ -517,7 +517,7 @@ class Session(object):
     `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
     in the *NI Digital Multimeters Help*.
     '''
-    sample_trigger_slope = attributes.AttributeEnum(1150010, enums.SampleTrigSlope)
+    sample_trigger_slope = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SampleTrigSlope, 1150010)
     '''
     Specifies the edge of the signal from the specified sample trigger
     source on which the DMM is triggered.
@@ -653,7 +653,7 @@ class Session(object):
     '''
     Specifies the RTD resistance at 0 degrees Celsius.
     '''
-    temp_rtd_type = attributes.AttributeEnum(1150120, enums.RTDType)
+    temp_rtd_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RTDType, 1150120)
     '''
     Specifies the RTD type.
     '''
@@ -662,11 +662,11 @@ class Session(object):
     Specifies the value of the fixed reference junction temperature for a
     thermocouple in degrees Celsius.
     '''
-    temp_tc_ref_junc_type = attributes.AttributeEnum(1250232, enums.ThermocoupleReferenceJunctionType)
+    temp_tc_ref_junc_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ThermocoupleReferenceJunctionType, 1250232)
     '''
     Specifies the thermocouple reference junction type.
     '''
-    temp_tc_type = attributes.AttributeEnum(1250231, enums.ThermocoupleType)
+    temp_tc_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ThermocoupleType, 1250231)
     '''
     Specifies the thermocouple type.
     '''
@@ -685,11 +685,11 @@ class Session(object):
     Specifies the Steinhart-Hart C coefficient for thermistor scaling when
     the **Thermistor Type property** is set to Custom.
     '''
-    temp_thermistor_type = attributes.AttributeEnum(1150124, enums.ThermistorType)
+    temp_thermistor_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ThermistorType, 1150124)
     '''
     Specifies the thermistor type.
     '''
-    temp_transducer_type = attributes.AttributeEnum(1250201, enums.TransducerType)
+    temp_transducer_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TransducerType, 1250201)
     '''
     Specifies the transducer type.
     '''
@@ -735,12 +735,12 @@ class Session(object):
 
     Default Value: Auto Delay
     '''
-    trigger_slope = attributes.AttributeEnum(1250334, enums.TriggerSlope)
+    trigger_slope = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSlope, 1250334)
     '''
     Specifies the edge of the signal from the specified trigger source on
     which the DMM is triggered.
     '''
-    trigger_source = attributes.AttributeEnum(1250004, enums.TriggerSource)
+    trigger_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSource, 1250004)
     '''
     Specifies the trigger source. When `niDMM
     Initiate <dmmviref.chm::/niDMM_Initiate.html>`__ is called, the DMM
@@ -753,7 +753,7 @@ class Session(object):
     `LabVIEW Trigger Routing <dmm.chm::/LVtrigger_routing.html>`__ section
     in the *NI Digital Multimeters Help*.
     '''
-    waveform_coupling = attributes.AttributeEnum(1150027, enums.WaveformCoupling)
+    waveform_coupling = attributes.AttributeEnum(attributes.AttributeViInt32, enums.WaveformCoupling, 1150027)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072 only, specifies the
     coupling during a waveform acquisition.

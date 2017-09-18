@@ -14,6 +14,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 * #### NI-DMM
   * #### Added
   * #### Changed
+    * Added support for enums with types other than ViInt32 (Fixes [#330](https://github.com/ni/nimi-python/issues/330))
   * #### Removed
 * #### NI-ModInst
   * #### Added

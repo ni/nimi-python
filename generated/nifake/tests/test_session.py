@@ -256,6 +256,14 @@ class TestSession(object):
             attribute_id = 1000003
             self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, enum_value.value)
 
+    def test_set_float_enum_attribute(self):
+        self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
+        enum_value = nifake.FloatEnum._5_5
+        with nifake.Session('dev1') as session:
+            session.float_enum = enum_value
+            attribute_id = 1000005
+            self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, enum_value.value)
+
     def test_set_enum_attribute_bad_type(self):
         with nifake.Session('dev1') as session:
             try:
@@ -270,6 +278,15 @@ class TestSession(object):
             assert session.read_write_color == nifake.Color.BLUE
             attribute_id = 1000003
             self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, ANY)
+
+    def test_get_float_enum_attribute(self):
+        self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
+        enum_value = nifake.FloatEnum._6_5
+        self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = enum_value.value
+        with nifake.Session('dev1') as session:
+            assert session.float_enum == enum_value
+            attribute_id = 1000005
+            self.patched_library.niFake_GetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, ANY)
 
     def test_acquisition_context_manager(self):
         self.patched_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate
@@ -415,7 +432,7 @@ class TestSession(object):
         test_number = 1
         with nifake.Session('dev1') as session:
             session.read_write_integer = test_number
-            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, test_number)
+            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
 
     def test_read(self):
         test_maximum_time = 10
@@ -436,3 +453,6 @@ class TestSession(object):
         self.side_effects_helper['Read']['reading'] = test_reading
         with nifake.Session('dev1') as session:
             assert math.isnan(session.read(test_maximum_time))
+
+
+
