@@ -28,11 +28,15 @@ class Session(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
+    float_enum = attributes.AttributeEnum(attributes.AttributeViReal64(1000005), enums.FloatEnum)
+    '''
+    An attribute with an enum that is also a float
+    '''
     read_write_bool = attributes.AttributeViBoolean(1000000)
     '''
     An attribute of type bool with read/write access.
     '''
-    read_write_color = attributes.AttributeEnum(1000003, enums.Color)
+    read_write_color = attributes.AttributeEnum(attributes.AttributeViInt32(1000003), enums.Color)
     '''
     An attribute of type Color with read/write access.
     '''
@@ -40,13 +44,13 @@ class Session(object):
     '''
     An attribute of type float with read/write access.
     '''
+    read_write_integer = attributes.AttributeViInt32(1000004)
+    '''
+    An attribute of type integer with read/write access.
+    '''
     read_write_string = attributes.AttributeViString(1000002)
     '''
     An attribute of type string with read/write access.
-    '''
-    read_write_integer = AttributeViInt32(1000004)
-    '''
-    An attribute of type integer with read/write access.
     '''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):

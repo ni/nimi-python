@@ -170,7 +170,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    handshaking_initiation = attributes.AttributeEnum(1150013, enums.HandshakingInitiation)
+    handshaking_initiation = attributes.AttributeEnum(attributes.AttributeViInt32(1150013), enums.HandshakingInitiation)
     '''
     Specifies how to start handshaking with a measurement device.
 
@@ -569,7 +569,7 @@ class Session(object):
     Record <switchviref.chm::/niSwitch_Get_Next_Coercion_Record.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    scan_advanced_output = attributes.AttributeEnum(1250023, enums.ScanAdvancedOutput)
+    scan_advanced_output = attributes.AttributeEnum(attributes.AttributeViInt32(1250023), enums.ScanAdvancedOutput)
     '''
     Specifies the method to use to notify another instrument that all
     signals through the switch module have settled following the processing
@@ -580,7 +580,7 @@ class Session(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    scan_advanced_polarity = attributes.AttributeEnum(1150011, enums.ScanAdvancedPolarity)
+    scan_advanced_polarity = attributes.AttributeEnum(attributes.AttributeViInt32(1150011), enums.ScanAdvancedPolarity)
     '''
     Specifies the driving level for the Scan Advanced Output signal sent
     from the switch module through either the external (PXI/PXIe) or front
@@ -651,7 +651,7 @@ class Session(object):
     Lists <SWITCH.chm::/scan_list.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    scan_mode = attributes.AttributeEnum(1250021, enums.ScanMode)
+    scan_mode = attributes.AttributeEnum(attributes.AttributeViInt32(1250021), enums.ScanMode)
     '''
     Specifies how to handle existing connections that conflict with the
     connections you make in a scan list. For example, if CH1 is already
@@ -782,7 +782,7 @@ class Session(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    trigger_input = attributes.AttributeEnum(1250022, enums.TriggerInput)
+    trigger_input = attributes.AttributeEnum(attributes.AttributeViInt32(1250022), enums.TriggerInput)
     '''
     Specifies the source of the trigger for which the switch module can wait
     upon encountering a semi-colon (;) when processing a scan list. When the
@@ -796,7 +796,7 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__
     `Scanning <SWITCH.chm::/scanning_fundamentals.html>`__
     '''
-    trigger_input_polarity = attributes.AttributeEnum(1150010, enums.TriggerInputPolarity)
+    trigger_input_polarity = attributes.AttributeEnum(attributes.AttributeViInt32(1150010), enums.TriggerInputPolarity)
     '''
     Determines the behavior of the trigger input.
 
