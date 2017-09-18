@@ -52,20 +52,20 @@ class AttributeViBoolean(Attribute):
         session._set_attribute_vi_boolean(channel, self._attribute_id, value)
 
 
-class AttributeEnum(Attribute):
+class AttributeEnum(object):
 
-    def __init__(self, underlying_attr_type, enum_meta_class):
-        self._underlying_attr_type = underlying_attr_type
+    def __init__(self, underlying_attr_type, enum_meta_class, attribute_id, default_channel=''):
+        self._underlying_attribute = underlying_attr_type(attribute_id, default_channel)
         self._attribute_type = enum_meta_class
-        # To avoid redundancy, we get the attribute_id and channel from the underlying type
-        super(AttributeEnum, self).__init__(self._underlying_attr_type._attribute_id, self._underlying_attr_type._default_channel)
+        self._attribute_id = attribute_id
+        self._default_channel = default_channel
 
-    def get(self, session, channel):
-        return self._attribute_type(self._underlying_attr_type.get(session, channel))
+    def __get__(self, obj, objtype):
+        return self._attribute_type(self._underlying_attribute.get(obj, self._default_channel))
 
-    def set(self, session, channel, value):
+    def __set__(self, obj, value):
         if type(value) is not self._attribute_type:
             raise TypeError('must be nidmm.' + str(self._attribute_type.__name__) + ' not ' + str(type(value).__name__))
-        return self._underlying_attr_type.set(session, channel, value.value)
+        return self._underlying_attribute.set(obj, self._default_channel, value.value)
 
 
