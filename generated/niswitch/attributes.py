@@ -5,15 +5,14 @@
 class Attribute(object):
     '''Base class for all typed attributes.'''
 
-    def __init__(self, attribute_id, default_channel=''):
+    def __init__(self, attribute_id):
         self._attribute_id = attribute_id
-        self._default_channel = default_channel
 
-    def __get__(self, obj, objtype):
-        return self.get(obj, self._default_channel)
+    def __get__(self, session, session_type):
+        return self.get(session, session._default_channel)
 
-    def __set__(self, obj, value):
-        return self.set(obj, self._default_channel, value)
+    def __set__(self, session, value):
+        return self.set(session, session._default_channel, value)
 
 
 class AttributeViInt32(Attribute):
@@ -54,9 +53,9 @@ class AttributeViBoolean(Attribute):
 
 class AttributeEnum(AttributeViInt32):
 
-    def __init__(self, attribute_id, enum_meta_class, channel=''):
+    def __init__(self, attribute_id, enum_meta_class):
+        super(AttributeEnum, self).__init__(attribute_id)
         self._attribute_type = enum_meta_class
-        super(AttributeEnum, self).__init__(attribute_id, channel)
 
     def get(self, session, channel):
         return self._attribute_type(super(AttributeEnum, self).get(session, channel))

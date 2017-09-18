@@ -22,8 +22,8 @@ class _Acquisition(object):
         self.session._abort()
 
 
-class Session(object):
-    '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
+class _SessionBase(object):
+    '''Base class for all NI-FAKE sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -40,40 +40,24 @@ class Session(object):
     '''
     An attribute of type float with read/write access.
     '''
+    read_write_integer = attributes.AttributeViInt32(1000004)
+    '''
+    An attribute of type ViInt32 with read/write access.
+    '''
     read_write_string = attributes.AttributeViString(1000002)
     '''
     An attribute of type string with read/write access.
     '''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
+    def __init__(self, default_channel):
+        # TODO(marcoskirsch): private members should start with _
         self.library = library_singleton.get()
-        self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
-
-        self._is_frozen = True
+        self._default_channel = default_channel
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
-
-    def initiate(self):
-        return _Acquisition(self)
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-
-    def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        try:
-            self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
-        self.vi = 0
 
     def get_error_description(self, error_code):
         '''get_error_description
@@ -533,4 +517,53 @@ class Session(object):
         error_code = self.library.niFake_close(self.vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+
+class ChannelContextSession(_SessionBase):
+    '''Allows for setting/getting property values for specific channels in your session.'''
+
+    def __init__(self, vi, channel):
+        super(ChannelContextSession, self).__init__(default_channel=channel)
+        self.vi = vi
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
+class Session(_SessionBase):
+    '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
+
+    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
+        super(Session, self).__init__(default_channel='')
+        # TODO(marcoskirsch): private members should start with _
+        self.vi = 0  # This must be set before calling _init_with_options.
+        self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def initiate(self):
+        return _Acquisition(self)
+
+    def channel(self, channel):
+        return ChannelContextSession(self.vi, channel)
+
+    def close(self):
+        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
+        try:
+            self._close()
+        except errors.Error:
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
+            print("Failed to close session.")
+        self.vi = 0
+
 
