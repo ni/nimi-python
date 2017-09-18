@@ -28,11 +28,15 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
+    float_enum = attributes.AttributeEnum(attributes.AttributeViReal64, enums.FloatEnum, 1000005)
+    '''
+    An attribute with an enum that is also a float
+    '''
     read_write_bool = attributes.AttributeViBoolean(1000000)
     '''
     An attribute of type bool with read/write access.
     '''
-    read_write_color = attributes.AttributeEnum(1000003, enums.Color)
+    read_write_color = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Color, 1000003)
     '''
     An attribute of type Color with read/write access.
     '''

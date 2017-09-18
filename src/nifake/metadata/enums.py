@@ -66,5 +66,44 @@ enums = {
                 }
             },
         ],
-    }
+    },
+    'FloatEnum': {
+        'values': [
+            {
+                'name': '_3_5',
+                'value': 3.5,
+                'documentation': {
+                    'description': 'Specifies 3.5 digits resolution.',
+                },
+            },
+            {
+                'name': '_4_5',
+                'value': 4.5,
+                'documentation': {
+                    'description': 'Specifies 4.5 digits resolution.',
+                },
+            },
+            {
+                'name': '_5_5',
+                'value': 5.5,
+                'documentation': {
+                    'description': 'Specifies 5.5 digits resolution.',
+                },
+            },
+            {
+                'name': '_6_5',
+                'value': 6.5,
+                'documentation': {
+                    'description': 'Specifies 6.5 digits resolution.',
+                },
+            },
+            {
+                'name': '_7_5',
+                'value': 7.5,
+                'documentation': {
+                    'description': 'Specifies 7.5 digits resolution.',
+                },
+            },
+        ],
+    },
 }
