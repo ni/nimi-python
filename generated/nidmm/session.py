@@ -3350,7 +3350,7 @@ class Session(_SessionBase):
         self.close()
 
     def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capabiilty (i.e. channels)'''
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
         return _RepeatedCapability(self.vi, repeated_capability)
 
     def initiate(self):
