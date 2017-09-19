@@ -7,7 +7,7 @@
     import os
 
     examples_dir = os.path.join('src', module_name, 'examples')
-    examples = [f for f in os.listdir(examples_dir) if os.path.isfile(os.path.join(examples_dir, f))]
+    examples = [f for f in os.listdir(examples_dir) if os.path.isfile(os.path.join(examples_dir, f)) and f.endswith('.py')]
 %>\
 ${helper.get_rst_header_snippet('Examples', '=')}
 
