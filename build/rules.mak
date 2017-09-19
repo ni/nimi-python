@@ -5,8 +5,6 @@ MODULE_FILES := \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_GENERATE)) \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_COPY))
 
-$(MODULE_FILES) : $(BUILD_HELPER_DIR)/metadata_utilities.py
-
 RST_FILES := \
                 $(addprefix $(DRIVER_DOCS_DIR)/,$(RST_FILES_TO_GENERATE)) \
 
@@ -21,13 +19,13 @@ $1:
 endef
 $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 
-$(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
+$(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 # Need to signal the top level makefile to run tests again
 	$(_hide_cmds)$(call trigger_tests)
 
-$(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
+$(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 # Need to signal the top level makefile to run tests again
@@ -39,7 +37,7 @@ $(MODULE_DIR)/%.py: %.py
 # Need to signal the top level makefile to run tests again
 	$(_hide_cmds)$(call trigger_tests)
 
-$(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPT) $(METADATA_FILES)
+$(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 # Need to signal the top level makefile to run tests again

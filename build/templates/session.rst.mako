@@ -26,7 +26,7 @@ for attr in helper.sorted_attrs(attributes):
 
     table_contents.append((':py:attr:`' + attributes[attr]["name"].lower() + '`', t))
 
-table = helper.as_rest_table(table_contents, full=True)
+table = helper.as_rest_table(table_contents)
 %>\
    **Attributes**
 
