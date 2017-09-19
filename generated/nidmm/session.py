@@ -773,7 +773,7 @@ class _SessionBase(object):
     '''
 
     def __init__(self, default_channel):
-        # TODO(marcoskirsch): private members should start with _
+        # TODO(marcoskirsch): rename to _library.
         self.library = library_singleton.get()
         self._default_channel = default_channel
 
@@ -2367,7 +2367,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(self_cal_supported_ctype.value)
 
-    def _init_with_options(self, resource_name, id_query, reset_device, option_string):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
         '''_init_with_options
 
         This function completes the following tasks:
@@ -3336,11 +3336,11 @@ class ChannelContextSession(_SessionBase):
 class Session(_SessionBase):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
+    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
         super(Session, self).__init__(default_channel='')
         # TODO(marcoskirsch): private members should start with _
         self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+        self.vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
         self._is_frozen = True
 
     def __enter__(self):
