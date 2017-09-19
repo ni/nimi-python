@@ -25,7 +25,7 @@ $(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 # Need to signal the top level makefile to run tests again
 	$(_hide_cmds)$(call trigger_tests)
 
-$(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPST) $(METADATA_FILES)
+$(MODULE_DIR)/tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 # Need to signal the top level makefile to run tests again

@@ -772,10 +772,10 @@ class Session(object):
     value is 1,800,000 samples per second. Not supported by NI 4065.
     '''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
+    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
         self.library = library_singleton.get()
         self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+        self.vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
 
         self._is_frozen = True
 
@@ -2387,7 +2387,7 @@ class Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(self_cal_supported_ctype.value)
 
-    def _init_with_options(self, resource_name, id_query, reset_device, option_string):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
         '''_init_with_options
 
         This function completes the following tasks:

@@ -121,6 +121,19 @@ def _add_library_call_name(parameter, session_name):
     parameter['library_call_name'] = library_call_name
 
 
+def _add_default_value_name(parameter):
+    '''Declaration with default value, if set'''
+    if 'default_value' in parameter:
+        if type(parameter['default_value']) is str:
+            name = parameter['python_name'] + "='" + parameter['default_value'] + "'"
+        else:
+            name = parameter['python_name'] + "=" + str(parameter['default_value'])
+    else:
+        name = parameter['python_name']
+
+    parameter['python_name_with_default'] = name
+
+
 def add_all_function_metadata(functions, config):
     '''Adds all codegen-specific metada to the function metadata list'''
     for f in functions:
@@ -136,6 +149,7 @@ def add_all_function_metadata(functions, config):
             _add_ctypes_type(p)
             _add_buffer_info(p)
             _add_library_call_name(p, config['session_handle_parameter_name'])
+            _add_default_value_name(p)
     return functions
 
 
@@ -188,6 +202,7 @@ def test_add_all_metadata_simple():
                     'is_buffer': False,
                     'name': 'vi',
                     'python_name': 'vi',
+                    'python_name_with_default': 'vi',
                     'python_type': 'ViSession',
                     'size': {
                         'mechanism': 'fixed',
