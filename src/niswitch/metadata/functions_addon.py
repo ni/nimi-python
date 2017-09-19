@@ -5,7 +5,7 @@
 # This will override that with private - add '_' to the beginning of the name, or
 # don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':  { 'codegen_method': 'private',  },
+    'InitWithOptions':  { 'codegen_method': 'no',       },
     'Initiate':         { 'codegen_method': 'private',  },
     'close':            { 'codegen_method': 'private',  },
     'Abort':            { 'codegen_method': 'private',  },
@@ -86,9 +86,6 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 function_default_value = {
-    'InitWithOptions':   { 'parameters': { 1: { 'default_value': False, },
-                                           2: { 'default_value': False, },
-                                           3: { 'default_value': '', }, }, },
     'InitWithTopology':  { 'parameters': { 1: { 'default_value': 'Configured Topology', },
                                            2: { 'default_value': False, },
                                            3: { 'default_value': False, },
