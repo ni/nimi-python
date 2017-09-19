@@ -62,7 +62,7 @@ class Session(object):
 %   endif
 % endfor
 <%
-init_function = functions['InitWithOptions']
+init_function = functions[config['init_function']]
 init_method_params = helper.get_params_snippet(init_function, helper.ParamListType.API_METHOD_DECLARATION)
 init_call_params = helper.get_params_snippet(init_function, helper.ParamListType.API_METHOD_CALL)
 %>\
@@ -70,7 +70,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParamListType
     def __init__(${init_method_params}):
         self.library = library_singleton.get()
         self.${config['session_handle_parameter_name']} = 0  # This must be set before calling _init_with_options.
-        self.${config['session_handle_parameter_name']} = self._init_with_options(${init_call_params})
+        self.${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
 
         self._is_frozen = True
 

@@ -84,9 +84,6 @@ class SideEffectsHelper(object):
         self._defaults['GetRelayPosition'] = {}
         self._defaults['GetRelayPosition']['return'] = 0
         self._defaults['GetRelayPosition']['relayPosition'] = None
-        self._defaults['InitWithOptions'] = {}
-        self._defaults['InitWithOptions']['return'] = 0
-        self._defaults['InitWithOptions']['vi'] = None
         self._defaults['InitWithTopology'] = {}
         self._defaults['InitWithTopology']['return'] = 0
         self._defaults['InitWithTopology']['vi'] = None
@@ -375,15 +372,6 @@ class SideEffectsHelper(object):
         relay_position.contents.value = self._defaults['GetRelayPosition']['relayPosition']
         return self._defaults['GetRelayPosition']['return']
 
-    def niSwitch_InitWithOptions(self, resource_name, id_query, reset_device, options_string, vi):  # noqa: N802
-        if self._defaults['InitWithOptions']['return'] < 0:
-            # In the error case, skip all other side effects.
-            return self._defaults['InitWithOptions']['return']
-        if self._defaults['InitWithOptions']['vi'] is None:
-            raise MockFunctionCallError("niSwitch_InitWithOptions", param='vi')
-        vi.contents.value = self._defaults['InitWithOptions']['vi']
-        return self._defaults['InitWithOptions']['return']
-
     def niSwitch_InitWithTopology(self, resource_name, topology, simulate, reset_device, vi):  # noqa: N802
         if self._defaults['InitWithTopology']['return'] < 0:
             # In the error case, skip all other side effects.
@@ -631,8 +619,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_GetRelayName.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_GetRelayPosition.side_effect = MockFunctionCallError("niSwitch_GetRelayPosition")
         mock_library.niSwitch_GetRelayPosition.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_InitWithOptions.side_effect = MockFunctionCallError("niSwitch_InitWithOptions")
-        mock_library.niSwitch_InitWithOptions.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_InitWithTopology.side_effect = MockFunctionCallError("niSwitch_InitWithTopology")
         mock_library.niSwitch_InitWithTopology.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_InitiateScan.side_effect = MockFunctionCallError("niSwitch_InitiateScan")
