@@ -239,13 +239,12 @@ class TestSession(object):
             self.patched_library.niFake_GetEnumValue.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
 
     def test_get_a_boolean(self):
-        test_boolean = True
         self.patched_library.niFake_GetABoolean.side_effect = self.side_effects_helper.niFake_GetABoolean
-        self.side_effects_helper['GetABoolean']['aBoolean'] = test_boolean
+        self.side_effects_helper['GetABoolean']['aBoolean'] = 1
         with nifake.Session('dev1') as session:
             test_result = session.get_a_boolean()
             assert isinstance(test_result, bool)
-            assert test_result == test_boolean
+            assert test_result
             self.patched_library.niFake_GetABoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
 
     def test_set_enum_attribute(self):
@@ -324,15 +323,10 @@ class TestSession(object):
 
     def test_get_vi_bool_attribute(self):
         self.patched_library.niFake_GetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_GetAttributeViBoolean
-        test_boolean = True
-        self.side_effects_helper['GetAttributeViBoolean']['attributeValue'] = test_boolean
+        self.side_effects_helper['GetAttributeViBoolean']['attributeValue'] = 1
         with nifake.Session('dev1') as session:
-            attr_bool = session.read_write_bool
-            assert attr_bool == test_boolean
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, b"", 1000000, ANY)]
-            self.patched_library.niFake_GetAttributeViBoolean.assert_has_calls(calls)
-            assert self.patched_library.niFake_GetAttributeViBoolean.call_count == 1
+            assert session.read_write_bool
+            self.patched_library.niFake_GetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b"", 1000000, ANY)
 
     def test_error_get_vi_real64_attribute(self):
         test_error_code = -123
@@ -351,7 +345,6 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
-    '''
     def test_get_channel_based_attribute(self):
         self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
         pi = 3.14159
@@ -359,20 +352,17 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             attr_double = session.channel('0,1').read_write_double
             assert attr_double == pi
-            from mock import call
-            self.patched_library.niFake_GetAttributeViReal64.assert_called_once_with(call(SESSION_NUM_FOR_TEST, b'0,1', 1000001, ANY))
+            self.patched_library.niFake_GetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'0,1', 1000001, ANY)
 
     def test_channel_based_attribute_with_context_manager(self):
-        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
-        self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_GetAttributeViBoolean
+        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
+        self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
         with nifake.Session('dev1') as session:
             with session.channel('3') as chan:
                 chan.read_write_integer = 13
                 chan.read_write_bool = True
-            from mock import call
-            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(call(SESSION_NUM_FOR_TEST, b'3', 1000004, 13))
-            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(call(SESSION_NUM_FOR_TEST, b'3', 1000001, 1))
-    '''
+            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', 1000004, 13)
+            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', 1000000, 1)
 
     def test_get_error_description_get_error_message(self):
         test_error_code = -42
