@@ -1,14 +1,14 @@
 Examples
 ========
 
-niswitch_channel_properties.py
-------------------------------
+.DS_Store
+---------
 
-.. literalinclude:: ../../src/niswitch/examples/niswitch_channel_properties.py
+.. literalinclude:: ../../src/niswitch/examples/.DS_Store
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(source) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/niswitch_channel_properties.py>`_
+   :caption: `(source) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/.DS_Store>`_
 
 niswitch_connect_channels.py
 ----------------------------
