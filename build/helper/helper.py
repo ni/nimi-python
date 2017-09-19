@@ -1,6 +1,3 @@
-# TODO(marcoskirsch): This file should definitely not live here but I had trouble getting import to work.
-# TODO(marcoskirsch): Figure out unit test for this.
-
 from contextlib import contextmanager
 import importlib
 import pprint

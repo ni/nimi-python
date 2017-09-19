@@ -78,10 +78,9 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
         return
 
     if is_error_handling:
-        # The caller is in the midst of error handling. Don't get the
-        # error description in this case as that could itself fail.
-        description = "Failed to retrieve error description."
-        warnings.warn(description)
+        # The caller is in the midst of error handling and an error occurred.
+        # Don't try to get the description or we'll start recursing until the stack overflows.
+        description = ''
     else:
         description = session.get_error_description(code)
 

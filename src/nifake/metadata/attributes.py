@@ -64,4 +64,28 @@ attributes = {
             'description':'An attribute of type Color with read/write access.',
         },
     },
+    1000004: {
+        'access': 'read-write',
+        'channel_based': 'False',
+        'enum': None,
+        'lv_property': 'Fake attributes:Read Write Int',
+        'name': 'READ_WRITE_INTEGER',
+        'resettable': 'No',
+        'type': 'ViInt32',
+        'documentation': {
+            'description':'An attribute of type integer with read/write access.',
+        },
+    },
+    1000005: {
+        'access': 'read-write',
+        'channel_based': 'False',
+        'enum': 'FloatEnum',
+        'lv_property': 'Fake attributes:Float enum',
+        'name': 'FLOAT_ENUM',
+        'resettable': 'No',
+        'type': 'ViReal64',
+        'documentation': {
+            'description': 'An attribute with an enum that is also a float',
+        },
+    },
 }
