@@ -1,97 +1,16 @@
-# TODO(marcoskirsch): This file should definitely not live here but I had trouble getting import to work.
-# TODO(marcoskirsch): Figure out unit test for this.
 
-from contextlib import contextmanager
-from enum import Enum
-import importlib
-import pprint
+from .metadata_filters import extract_input_parameters
+from .metadata_filters import extract_output_parameters
+
+from .codegen_helper import get_params_snippet
+from .codegen_helper import ParamListType
+
 import re
 import string
 import sys
 
-pp = pprint.PrettyPrinter(indent=4)
-
-# Coding convention transformation functions.
-
-
-# TODO(marcoskirsch): not being used
-def shoutcase_to_camelcase(shout_string):
-    '''Converts a C-style SHOUT_CASE string to camelCase'''
-    components = shout_string.split('_')
-    return components[0].lower() + "".join(component.title() for component in components[1:])
-
-
-def camelcase_to_snakecase(camelcase_string):
-    '''Converts a camelCase string to lower_case_snake_case'''
-    # https://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
-    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', camelcase_string)
-    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
-
-
-# TODO(marcoskirsch): not being used
-def function_to_method_name(f):
-    '''Returns an appropriate session method name for a given function'''
-    # Method name is camelCase.
-    return f['name'][0].lower() + f['name'][1:]
-
-
-# Filters
-
-
-def extract_codegen_functions(functions):
-    '''Returns function metadata only for those functions to be included in codegen'''
-    funcs = {}
-    for x in functions:
-        if functions[x]['codegen_method'] != 'no':
-            funcs[x] = functions[x]
-    return funcs
-
-
-def extract_input_parameters(parameters, session_name='vi'):
-    '''Returns list of parameters that includes only input parameters, except the session parameter if it exists'''
-    return [x for x in parameters if x['direction'] == 'in' and x['name'] != session_name]
-
-
-def extract_output_parameters(parameters):
-    '''Returns list of parameters that includes only output parameters, except the ivi-dance parameter if it exists'''
-    return [x for x in parameters if x['direction'] == 'out' and x['size']['mechanism'] != 'ivi-dance']
-
-
-def extract_enum_parameters(parameters):
-    '''Returns a list of parameters whose type is an enum'''
-    return [x for x in parameters if x['enum'] is not None]
-
-
-def extract_ivi_dance_parameter(parameters):
-    '''Returns the ivi-dance parameter of a session method if there is one. This is the parameter whose size is determined at runtime.'''
-    param = [x for x in parameters if x['size']['mechanism'] == 'ivi-dance']
-    assert len(param) <= 1, '{0} ivi-dance parameters. No more than one is allowed'.format(len(param))
-    if len(param) == 0:
-        return None
-    assert param[0]['direction'] == 'out', "ivi-dance parameter must have 'direction':'out'. Check your metadata."
-    assert param[0]['is_buffer'], "ivi-dance parameter must have 'is_buffer':True. Check your metadata."
-    return param[0]
-
-
-# Find utilities
-
-
-def find_parameter(name, parameters):
-    parameter = [x for x in parameters if x['name'] == name]
-    assert len(parameter) == 1, 'Parameter {0} not found. Check your metadata.'.format(name)
-    return parameter[0]
-
-
-def find_size_parameter(parameter, parameters):
-    '''Returns the parameter that is used to specify the size of another parameter. Applies to 'ivi-dance' and 'passed-in'.'''
-    if not parameter:
-        return None
-    return find_parameter(parameter['size']['value'], parameters)
-
 
 # Python 2/3 compatibility
-
-
 def normalize_string_type(d):
     '''Normalize string type between python2 & python3'''
     if sys.version_info.major < 3:
@@ -101,236 +20,6 @@ def normalize_string_type(d):
         elif type(d) is str:
             d = d.decode('utf-8')
     return d
-
-
-# Functions that return snippets that can be placed directly in the templates.
-class ParamListType(Enum):
-    '''Type of parameter list to return
-
-    Used by different parts of the code generator to create the parameter list
-    '''
-    API_METHOD = 1
-    '''Used for methods param list for the public API declaration
-
-    'skip_self': False,
-    'skip_session_handle': True,
-    'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
-    'session_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
-    IMPL_METHOD = 2
-    '''Used for methods param list for implementation
-
-    'skip_self': False,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'session_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
-    DISPLAY_METHOD = 3
-    '''Used for methods param list for display (rst)
-
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
-    'session_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
-    LIBRARY_METHOD = 4
-    '''Used for methods param list when calling library
-
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'session_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
-    LIBRARY_CALL = 5
-    '''Used for methods param list when calling into the DLL
-
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'session_name': 'vi',
-    'name_to_use': 'library_call_name',
-    '''
-    LIBRARY_CALL_TYPES = 6
-    '''Used for methods param list types when calling into the DLL
-
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'session_name': 'vi',
-    'name_to_use': 'ctypes_type_library_call',
-    '''
-
-
-ParamListTypeDefaults = {}
-ParamListTypeDefaults[ParamListType.API_METHOD] = {
-    'skip_self': False,
-    'skip_session_handle': True,
-    'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
-    'session_name': 'vi',
-    'name_to_use': 'python_name',
-}
-ParamListTypeDefaults[ParamListType.IMPL_METHOD] = {
-    'skip_self': False,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'session_name': 'vi',
-    'name_to_use': 'python_name',
-}
-ParamListTypeDefaults[ParamListType.DISPLAY_METHOD] = {
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
-    'session_name': 'vi',
-    'name_to_use': 'python_name',
-}
-ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'session_name': 'vi',
-    'name_to_use': 'python_name',
-}
-ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'session_name': 'vi',
-    'name_to_use': 'library_call_name',
-}
-ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'session_name': 'vi',
-    'name_to_use': 'ctypes_type_library_call',
-}
-
-
-def get_params_snippet(function, param_type, options={}):
-    '''Get a parameter list snippet based on type and options
-
-    Name used:
-        ParamListType.LIBRARY_CALL uses 'library_call_name'
-        ParamListType.LIBRARY_CALL_TYPES uses 'ctypes_type_library_call'
-        All others use 'python_name'
-    '''
-    if type(param_type) is not ParamListType:
-        raise TypeError('param_type must be of type ' + str(ParamListType))
-    if type(options) is not dict:
-        raise TypeError('param_type must be of type ' + str(dict))
-
-    options_to_use = ParamListTypeDefaults[param_type]
-    for o in options:
-        options_to_use[o] = options[o]
-
-    name_to_use = options_to_use['name_to_use']
-    params_to_use = []
-
-    snippets = []
-    if not options_to_use['skip_self']:
-        snippets.append('self')
-
-    ivi_dance_size_parameter = find_size_parameter(extract_ivi_dance_parameter(function['parameters']), function['parameters'])
-    for x in function['parameters']:
-        skip = False
-        if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
-            skip = True
-        if x == ivi_dance_size_parameter and options_to_use['skip_ivi_dance_size_parameter']:
-            skip = True
-        if x['name'] == options_to_use['session_name'] and options_to_use['skip_session_handle']:
-            skip = True
-        if not skip:
-            params_to_use.append(x)
-
-    for x in params_to_use:
-            snippets.append(x[name_to_use])
-    return ', '.join(snippets)
-
-
-def _get_output_param_return_snippet(output_parameter, parameters):
-    '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
-    assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
-    return_type_snippet = ''
-    if output_parameter['enum'] is not None:
-        return_type_snippet = 'enums.' + output_parameter['enum'] + '('
-    else:
-        return_type_snippet = 'python_types.' + output_parameter['python_type'] + '('
-
-    if output_parameter['is_buffer']:
-        if output_parameter['type'] == 'ViChar' or output_parameter['type'] == 'ViString':
-            snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
-        else:
-            size_parameter = find_size_parameter(output_parameter, parameters)
-            snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i].value) for i in range(' + size_parameter['python_name'] + ')]'
-    else:
-        snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + '.value)'
-
-    return snippet
-
-
-def get_method_return_snippet(parameters):
-    '''Returns a string suitable to use as the return argument of a Session method, i.e. "return reading_ctype.value"'''
-    snippets = []
-    for x in parameters:
-        if x['direction'] == 'out' or x['size']['mechanism'] == 'ivi-dance':
-            snippets.append(_get_output_param_return_snippet(x, parameters))
-    return ('return ' + ', '.join(snippets)).strip()
-
-
-def get_enum_type_check_snippet(parameter, indent):
-    '''Returns python snippet to check that the type of a parameter is what is expected'''
-    assert parameter['enum'] is not None, pp.pformat(parameter)
-    assert parameter['direction'] == 'in', pp.pformat(parameter)
-    enum_check = 'if type(' + parameter['python_name'] + ') is not ' + parameter['python_type'] + ':\n'
-    enum_check += (' ' * indent) + 'raise TypeError(\'Parameter mode must be of type \' + str(' + parameter['python_type'] + '))'
-    return enum_check
-
-
-def get_ctype_variable_declaration_snippet(parameter, parameters):
-    '''Returns python snippet to declare and initialize the corresponding ctypes variable'''
-    assert parameter['direction'] == 'out', pp.pformat(parameter)
-    snippet = parameter['ctypes_variable_name'] + ' = '
-    if parameter['is_buffer']:
-        if parameter['size']['mechanism'] == 'fixed':
-            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']['value']) + ')()'
-        elif parameter['size']['mechanism'] == 'ivi-dance':
-            # TODO(marcoskirsch): remove.
-            assert False, "THIS IS DEAD CODE!"
-            snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)  # TODO(marcoskirsch): Do the IVI-dance!'
-        else:
-            assert parameter['size']['mechanism'] == 'passed-in', parameter['size']['mechanism']
-            size_parameter = find_size_parameter(parameter, parameters)
-            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + size_parameter['python_name'] + ')()'
-    else:
-        snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)'
-    return snippet
-
-
-def get_dictionary_snippet(d, indent=4):
-    '''Returns a formatted dictionary'''
-    d_str = pprint.pformat(d)
-    d_lines = d_str.splitlines()
-    return ('\n' + (' ' * indent)).join(d_lines)
-
-
-def sorted_attrs(a):
-    return sorted(a, key=lambda k: a[k]['name'])
 
 
 def get_indented_docstring_snippet(d, indent=4):
@@ -395,7 +84,7 @@ def get_rst_table_snippet(d, config, indent=0, make_link=True):
             line_contents.append(contents)
         table_contents.append(line_contents)
 
-    table = as_rest_table(table_contents, full=True, header=header)
+    table = as_rest_table(table_contents, header=header)
     return get_indented_docstring_snippet(table, indent)
 
 
@@ -659,14 +348,13 @@ def get_function_docstring(fname, config, indent=0):
 
 
 # From http://code.activestate.com/recipes/579054-generate-sphinx-table/
-def as_rest_table(data, full=False, header=True):
+def as_rest_table(data, header=True):
     """Create rst formatted table
 
-    >>> from report_table import as_rest_table
     >>> data = [('what', 'how', 'who'),
     ...         ('lorem', 'that is a long value', 3.1415),
     ...         ('ipsum', 89798, 0.2)]
-    >>> print as_rest_table(data, full=True)
+    >>> print(as_rest_table(data))
     +-------+----------------------+--------+
     | what  | how                  | who    |
     +=======+======================+========+
@@ -674,15 +362,14 @@ def as_rest_table(data, full=False, header=True):
     +-------+----------------------+--------+
     | ipsum |                89798 |    0.2 |
     +-------+----------------------+--------+
-
-    >>> print as_rest_table(data)
-    =====  ====================  ======
-    what   how                   who
-    =====  ====================  ======
-    lorem  that is a long value  3.1415
-    ipsum                 89798     0.2
-    =====  ====================  ======
-
+    >>> print(as_rest_table(data, header=False))
+    +-------+----------------------+--------+
+    | what  | how                  | who    |
+    +-------+----------------------+--------+
+    | lorem | that is a long value | 3.1415 |
+    +-------+----------------------+--------+
+    | ipsum |                89798 |    0.2 |
+    +-------+----------------------+--------+
     """
     data = data if data else [['No Data']]
     table = []
@@ -692,28 +379,18 @@ def as_rest_table(data, full=False, header=True):
         sizes = list(sizes)
     num_elts = len(sizes)
 
-    if full:
-        start_of_line = '| '
-        vertical_separator = ' | '
-        end_of_line = ' |'
-        line_marker = '-'
-    else:
-        start_of_line = ''
-        vertical_separator = '  '
-        end_of_line = ''
-        line_marker = '='
+    start_of_line = '| '
+    vertical_separator = ' | '
+    end_of_line = ' |'
+    line_marker = '-'
 
     meta_template = vertical_separator.join(['{{{{{0}:{{{0}}}}}}}'.format(i) for i in range(num_elts)])
     template = '{0}{1}{2}'.format(start_of_line, meta_template.format(*sizes), end_of_line)
     # determine top/bottom borders
-    if full:
-        to_separator = {ord('|'): '+', ord(' '): '-'}
-        if sys.version_info.major < 3:
-            to_separator = string.maketrans('| ', '+-')
-    else:
-        to_separator = {ord('|'): '+'}
-        if sys.version_info.major < 3:
-            to_separator = string.maketrans('|', '+')
+    to_separator = {ord('|'): '+', ord(' '): '-'}
+    if sys.version_info.major < 3:
+        to_separator = string.maketrans('| ', '+-')
+
     start_of_line = start_of_line.translate(to_separator)
     vertical_separator = vertical_separator.translate(to_separator)
     end_of_line = end_of_line.translate(to_separator)
@@ -732,6 +409,7 @@ def as_rest_table(data, full=False, header=True):
     # set table header
     titles = data[0]
     table.append(template.format(*titles))
+
     if header:
         table.append(th_separator)
     else:
@@ -739,36 +417,10 @@ def as_rest_table(data, full=False, header=True):
 
     for d in data[1:-1]:
         table.append(template.format(*d))
-        if full:
-            table.append(separator)
+        table.append(separator)
     table.append(template.format(*data[-1]))
     table.append(separator)
     return '\n'.join(table)
 
-
-# We need this to allow us to dynamically add and remove a folder to the search
-# path becaise importlib.import_module() won't work with a module hierarchy in python2
-@contextmanager
-def add_to_path(p):
-    import sys
-    old_path = sys.path
-    sys.path = sys.path[:]
-    sys.path.insert(0, p)
-    try:
-        yield
-    finally:
-        sys.path = old_path
-
-
-def get_intrinsic_type_from_visa_type(visa_type):
-    '''Returns the underlying intrinsic (python) type from the visa type'''
-    if sys.version_info.major < 3:
-        with add_to_path('build/templates'):
-            p_types = importlib.import_module('python_types')
-    else:
-        p_types = importlib.import_module('build.templates.python_types')
-    v_type = getattr(p_types, visa_type)
-
-    return type(v_type()).__name__
 
 

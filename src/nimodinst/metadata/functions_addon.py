@@ -44,3 +44,11 @@ functions_buffer_info = {
 functions_is_error_handling = {
     'GetExtendedErrorInfo': { 'is_error_handling': True },
 }
+
+# Default values for method parameters
+function_default_value = {
+    'InitWithOptions':  { 'parameters': { 1: { 'default_value': False, },
+                                          2: { 'default_value': False, },
+                                          3: { 'default_value': '', }, }, },
+}
+

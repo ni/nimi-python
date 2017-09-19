@@ -35,7 +35,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Max Frequency**
@@ -63,7 +63,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Min Frequency**
@@ -88,7 +88,7 @@ nidmm.Session properties
     | Resettable     | No                        |
     +----------------+---------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:ADC Calibration**
@@ -133,7 +133,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Advanced:Aperture Time**
@@ -161,7 +161,7 @@ nidmm.Session properties
     | Resettable     | No                           |
     +----------------+------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Advanced:Aperture Time Units**
@@ -187,7 +187,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Auto Range Value**
@@ -212,7 +212,7 @@ nidmm.Session properties
     | Resettable     | No                  |
     +----------------+---------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Auto Zero**
@@ -238,7 +238,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Advanced:Buffer Size**
@@ -271,7 +271,7 @@ nidmm.Session properties
     | Resettable     | No                               |
     +----------------+----------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**
@@ -303,7 +303,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
@@ -330,7 +330,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Capabilities:Channel Count**
@@ -354,7 +354,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
@@ -380,7 +380,7 @@ nidmm.Session properties
     | Resettable     | No                       |
     +----------------+--------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Current Source**
@@ -405,7 +405,7 @@ nidmm.Session properties
     | Resettable     | No                |
     +----------------+-------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias**
@@ -433,7 +433,7 @@ nidmm.Session properties
     | Resettable     | No                          |
     +----------------+-----------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:DC Noise Rejection**
@@ -466,7 +466,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Driver Setup**
@@ -490,7 +490,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Major Version**
@@ -514,7 +514,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Minor Version**
@@ -539,7 +539,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Version Info:Engine Revision**
@@ -564,7 +564,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Error Info:Error Elaboration**
@@ -591,7 +591,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
@@ -622,7 +622,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Range**
@@ -654,7 +654,7 @@ nidmm.Session properties
     | Resettable     | No                  |
     +----------------+---------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Function**
@@ -679,7 +679,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities**
@@ -703,7 +703,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Misc:IDQuery response**
@@ -731,7 +731,7 @@ nidmm.Session properties
     | Resettable     | No                         |
     +----------------+----------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Input Resistance**
@@ -755,7 +755,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision**
@@ -779,7 +779,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer**
@@ -803,7 +803,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Model**
@@ -846,7 +846,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
@@ -870,7 +870,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**
@@ -896,7 +896,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Advanced:Latency**
@@ -922,7 +922,7 @@ nidmm.Session properties
     | Resettable     | No                            |
     +----------------+-------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model**
@@ -947,7 +947,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**
@@ -971,7 +971,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
@@ -1003,7 +1003,7 @@ nidmm.Session properties
     | Resettable     | No                                 |
     +----------------+------------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Trigger:Measurement Complete Dest**
@@ -1027,7 +1027,7 @@ nidmm.Session properties
     | Resettable     | No                                     |
     +----------------+----------------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Trigger:Measurement Destination Slope**
@@ -1057,7 +1057,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Advanced:Number Of Averages**
@@ -1082,7 +1082,7 @@ nidmm.Session properties
     | Resettable     | No                               |
     +----------------+----------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Offset Compensated Ohms**
@@ -1116,7 +1116,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**
@@ -1150,7 +1150,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**
@@ -1187,7 +1187,7 @@ nidmm.Session properties
     | Resettable     | No                       |
     +----------------+--------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Advanced:Operation Mode**
@@ -1227,7 +1227,7 @@ nidmm.Session properties
     | Resettable     | No                            |
     +----------------+-------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Powerline Frequency**
@@ -1256,7 +1256,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Error Info:Primary Error**
@@ -1288,7 +1288,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
@@ -1327,7 +1327,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Range**
@@ -1358,7 +1358,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Range Check**
@@ -1388,7 +1388,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
@@ -1420,7 +1420,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Absolute Resolution**
@@ -1453,7 +1453,7 @@ nidmm.Session properties
     | Resettable     | No                          |
     +----------------+-----------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Digits Resolution**
@@ -1483,7 +1483,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Count**
@@ -1513,7 +1513,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Delay Mode**
@@ -1556,7 +1556,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Interval**
@@ -1584,7 +1584,7 @@ nidmm.Session properties
     | Resettable     | No                       |
     +----------------+--------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Trigger**
@@ -1609,7 +1609,7 @@ nidmm.Session properties
     | Resettable     | No                         |
     +----------------+----------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Sample Trig Slope**
@@ -1636,7 +1636,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Obsolete:Inherent IVI Attributes:Error Info:Secondary Error**
@@ -1662,7 +1662,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**
@@ -1692,7 +1692,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Advanced:Settle Time**
@@ -1725,7 +1725,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**
@@ -1758,7 +1758,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
@@ -1788,7 +1788,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Shunt Value**
@@ -1825,7 +1825,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
@@ -1850,7 +1850,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version**
@@ -1875,7 +1875,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version**
@@ -1899,7 +1899,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description**
@@ -1923,7 +1923,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Major Version**
@@ -1947,7 +1947,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Minor Version**
@@ -1973,7 +1973,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Capabilities:Specific Driver Prefix**
@@ -1998,7 +1998,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Revision**
@@ -2022,7 +2022,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor**
@@ -2047,7 +2047,7 @@ nidmm.Session properties
     | Resettable     | No        |
     +----------------+-----------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models**
@@ -2072,7 +2072,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**
@@ -2097,7 +2097,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**
@@ -2122,7 +2122,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**
@@ -2146,7 +2146,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**
@@ -2170,7 +2170,7 @@ nidmm.Session properties
     | Resettable     | No                 |
     +----------------+--------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**
@@ -2195,7 +2195,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction**
@@ -2219,7 +2219,7 @@ nidmm.Session properties
     | Resettable     | No                                           |
     +----------------+----------------------------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type**
@@ -2243,7 +2243,7 @@ nidmm.Session properties
     | Resettable     | No                          |
     +----------------+-----------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**
@@ -2268,7 +2268,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor A**
@@ -2293,7 +2293,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor B**
@@ -2318,7 +2318,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor C**
@@ -2342,7 +2342,7 @@ nidmm.Session properties
     | Resettable     | No                        |
     +----------------+---------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type**
@@ -2366,7 +2366,7 @@ nidmm.Session properties
     | Resettable     | No                        |
     +----------------+---------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Configuration:Measurement Options:Temperature:Transducer Type**
@@ -2397,7 +2397,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Multi Point Acquisition:Trigger Count**
@@ -2448,7 +2448,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Trigger:Trigger Delay**
@@ -2473,7 +2473,7 @@ nidmm.Session properties
     | Resettable     | No                      |
     +----------------+-------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Trigger:Trigger Slope**
@@ -2506,7 +2506,7 @@ nidmm.Session properties
     | Resettable     | No                       |
     +----------------+--------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Trigger:Trigger Source**
@@ -2531,7 +2531,7 @@ nidmm.Session properties
     | Resettable     | No                          |
     +----------------+-----------------------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Waveform Acquisition:Waveform Coupling**
@@ -2556,7 +2556,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Waveform Acquisition:Waveform Points**
@@ -2584,7 +2584,7 @@ nidmm.Session properties
     | Resettable     | No         |
     +----------------+------------+
 
-    .. tip:: 
+    .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
             - LabVIEW Property: **Waveform Acquisition:Waveform Rate**

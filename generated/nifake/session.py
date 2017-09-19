@@ -28,11 +28,15 @@ class Session(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
+    float_enum = attributes.AttributeEnum(attributes.AttributeViReal64, enums.FloatEnum, 1000005)
+    '''
+    An attribute with an enum that is also a float
+    '''
     read_write_bool = attributes.AttributeViBoolean(1000000)
     '''
     An attribute of type bool with read/write access.
     '''
-    read_write_color = attributes.AttributeEnum(1000003, enums.Color)
+    read_write_color = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Color, 1000003)
     '''
     An attribute of type Color with read/write access.
     '''
@@ -40,15 +44,19 @@ class Session(object):
     '''
     An attribute of type float with read/write access.
     '''
+    read_write_integer = attributes.AttributeViInt32(1000004)
+    '''
+    An attribute of type integer with read/write access.
+    '''
     read_write_string = attributes.AttributeViString(1000002)
     '''
     An attribute of type string with read/write access.
     '''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=""):
+    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
         self.library = library_singleton.get()
         self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+        self.vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
 
         self._is_frozen = True
 
@@ -325,7 +333,7 @@ class Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode("ascii")
 
-    def _init_with_options(self, resource_name, id_query, reset_device, option_string):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
         '''_init_with_options
 
         Creates a new IVI instrument driver session.
