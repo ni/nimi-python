@@ -1676,99 +1676,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
 
-    def _init_with_options(self, resource_name, id_query=False, reset_device=False, options_string=''):
-        '''_init_with_options
-
-        Returns a session handle used to identify the switch module in all
-        subsequent instrument driver calls and optionally sets the initial state
-        of the session. _init_with_options creates a new IVI instrument
-        driver session for the switch module specified in the resource name
-        parameter. If multiple topologies are valid for that device, the driver
-        uses the default topology specified in MAX. The topology is also
-        configurable in the options string parameter. Note: When initializing an
-        NI SwitchBlock device with topology, you must specify the topology
-        created when you configured the device in MAX, using either Configured
-        Topology or the topology string of the device. Refer to the Initializing
-        with Topology for NI SwitchBlock Devices topic in the NI Switches Help
-        for information about determining the topology string of an NI
-        SwitchBlock device. By default, the switch module is reset to a known
-        state. Enable simulation in the options string parameter. An error is
-        returned if a session to the specified resource exists in another
-        process. The same session is returned if _init_with_options is
-        called twice in the same process for the same resource with the same
-        topology.
-
-        Args:
-            resource_name (str):Resource name of the switch module to initialize. Default value: None
-                Syntax: Optional fields are shown in square brackets ([]). Configured in
-                MAX Under Valid Syntax Devices and Interfaces DeviceName Traditional
-                NI-DAQ Devices SCXI[chassis ID]::slot number PXI System PXI[bus
-                number]::device number TIP: IVI logical names are also valid for the
-                resource name. Default values for optional fields: chassis ID = 1 bus
-                number = 0 Example resource names: Resource Name Description SC1Mod3
-                NI-DAQmx module in chassis "SC1" slot 3 MySwitch NI-DAQmx module renamed
-                to "MySwitch" SCXI1::3 Traditional NI-DAQ module in chassis 1, slot 3
-                SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
-                0, device number 16 PXI::16 PXI bus 0, device number 16
-            id_query (bool):This parameter is ignored. Because NI-SWITCH supports multiple switch
-                modules, it always queries the switch device to determine which device
-                is installed. For this reason, this VI may return
-                NISWITCH_ERROR_FAIL_ID_QUERY even if this parameter is set to
-                VI_FALSE. Valid Values: VI_TRUE - (Default Value) VI_FALSE -
-                Currently unsupported.
-            reset_device (bool):Specifies whether to reset the switch module during the initialization
-                process. Valid Values: VI_TRUE - Reset Device (Default Value) VI_FALSE
-                - Currently unsupported. The device will not reset.
-            options_string (str):Sets initial values of certain attributes for the NI-SWITCH session.
-                Default value: Simulate=0,RangeCheck=1,DriverSetup=topology:1127/2-Wire
-                32x1 Mux The following table lists the attribute string names you can
-                use: RangeCheck 1 RANGE_CHECK QueryInstrStatus 1
-                QUERY_INSTRUMENT_STATUS Cache 1 cache
-                Simulate 0 simulate RecordCoercions 0
-                RECORD_COERCIONS DriverSetup topology 1127/2-Wire 32x1
-                Mux The format of the option string is, "AttributeStringName=Value"
-                where AttributeStringName is the string name of the attribute shown
-                above and Value is the value to which the attribute will be set. To set
-                multiple attributes, separate assignments with a comma. If you pass an
-                empty string for this parameter, the NI-SWITCH session uses the default
-                values for the attributes. You can override the default values by
-                explicitly assigning a value. You do not have to specify all of the
-                available attributes. If you do not specify an attribute, its default
-                value is used. Use the DriverSetup attribute to set the topology or the
-                resource type (DAQmx or Traditional DAQ) of the switch module. This
-                attribute can contain config token/value pairs within it.
-                DriverSetup=[config token]:[value];[config token 2]:[value 2] Valid
-                Config Tokens and Values: Config Token topology - Refer to Device book
-                for your switch in the NI Switches Help for valid values. You can also
-                set the value of the topology config token to Configured Topology to
-                specify the last topology that was configured for the device in MAX.
-                Default: MAX configured topology for each device. resourcetype - "daqmx"
-                for devices configured under NI-DAQmx Devices in MAX or "legacy" for
-                devices configured under Traditional NI-DAQ Devices in MAX. Default:
-                daqmx For example, use the following string to set an NI SCXI-1127 as a
-                2-wire 32x1 multiplexer configured in MAX under DAQmx Devices:
-                "DriverSetup=topology:1127/2-Wire 32x1 Mux;resourcetype:daqmx" The
-                DriverSetup string is particularly important when using NI-SWITCH
-                through the IviSwitch class driver. To enable simulation, set simulate
-                equal to 1 and specify the switch module and topology of the switch
-                module to simulate. The following string enables simulation for an
-                SCXI-1127 configured as a 2-wire 32x1 multiplexer. "Simulate=1,
-                DriverSetup=topology:1127/2-Wire 32x1 Mux" If simulate is set to 1 and
-                the DriverSetup string specifies a topology, the topology is used to
-                determine which device to simulate. If the DriverSetup string does not
-                specify a topology, the device specified in resource name is simulated.
-
-        Returns:
-            vi (int):A particular NI-SWITCH session established with
-                init_with_topology, _init_with_options, or init
-                and used for all subsequent NI-SWITCH calls.
-        '''
-        vi_ctype = ctypes_types.ViSession_ctype(0)
-        error_code = self.library.niSwitch_InitWithOptions(resource_name.encode('ascii'), id_query, reset_device, options_string.encode('ascii'), ctypes.pointer(vi_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(vi_ctype.value)
-
-    def init_with_topology(self, resource_name, topology, simulate, reset_device):
+    def init_with_topology(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
         '''init_with_topology
 
         Returns a session handle used to identify the switch in all subsequent
@@ -1997,7 +1905,7 @@ class _SessionBase(object):
 
         Returns:
             vi (int):A particular NI-SWITCH session established with
-                init_with_topology, _init_with_options, or init
+                init_with_topology, init_with_options, or init
                 and used for all subsequent NI-SWITCH calls.
         '''
         vi_ctype = ctypes_types.ViSession_ctype(0)
@@ -2722,7 +2630,7 @@ class _SessionBase(object):
         deallocates any memory resources the driver uses. Notes: (1) You must
         unlock the session before calling _close. (2) After calling
         _close, you cannot use the instrument driver again until you
-        call init or _init_with_options.
+        call init or init_with_options.
         '''
         error_code = self.library.niSwitch_close(self.vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2811,11 +2719,11 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-SWITCH session to a National Instruments Switch Module'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options_string=''):
+    def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
         super(Session, self).__init__(repeated_capability='')
         # TODO(marcoskirsch): private members should start with _
         self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self._init_with_options(resource_name, id_query, reset_device, options_string)
+        self.vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
         self._is_frozen = True
 
     def __enter__(self):

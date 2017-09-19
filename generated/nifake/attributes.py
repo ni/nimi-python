@@ -53,18 +53,17 @@ class AttributeViBoolean(Attribute):
 
 class AttributeEnum(object):
 
-    def __init__(self, underlying_attribute_meta_class, enum_meta_class, attribute_id, repeated_capability=''):
+    def __init__(self, underlying_attribute_meta_class, enum_meta_class, attribute_id):
         self._underlying_attribute = underlying_attribute_meta_class(attribute_id)
         self._attribute_type = enum_meta_class
         self._attribute_id = attribute_id
-        self._repeated_capability = repeated_capability
 
-    def __get__(self, obj, objtype):
-        return self._attribute_type(self._underlying_attribute.get(obj, self._repeated_capability))
+    def __get__(self, session, objtype):
+        return self._attribute_type(self._underlying_attribute.get(session, session._repeated_capability))
 
-    def __set__(self, obj, value):
+    def __set__(self, session, value):
         if type(value) is not self._attribute_type:
             raise TypeError('must be nifake.' + str(self._attribute_type.__name__) + ' not ' + str(type(value).__name__))
-        return self._underlying_attribute.set(obj, self._repeated_capability, value.value)
+        return self._underlying_attribute.set(session, session._repeated_capability, value.value)
 
 
