@@ -62,7 +62,7 @@ class _SessionBase(object):
 %   endif
 % endfor
 <%
-init_function = functions['InitWithOptions']
+init_function = functions[config['init_function']]
 init_method_params = helper.get_params_snippet(init_function, helper.ParamListType.API_METHOD_DECLARATION)
 init_call_params = helper.get_params_snippet(init_function, helper.ParamListType.API_METHOD_CALL)
 %>\
@@ -161,7 +161,7 @@ class Session(_SessionBase):
         super(Session, self).__init__(repeated_capability='')
         # TODO(marcoskirsch): private members should start with _
         self.${config['session_handle_parameter_name']} = 0  # This must be set before calling _init_with_options.
-        self.${config['session_handle_parameter_name']} = self._init_with_options(${init_call_params})
+        self.${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
         self._is_frozen = True
 
     def __enter__(self):
