@@ -42,7 +42,6 @@ class Library(object):
         self.niSwitch_GetRelayCount_cfunc = None
         self.niSwitch_GetRelayName_cfunc = None
         self.niSwitch_GetRelayPosition_cfunc = None
-        self.niSwitch_InitWithOptions_cfunc = None
         self.niSwitch_InitWithTopology_cfunc = None
         self.niSwitch_InitiateScan_cfunc = None
         self.niSwitch_IsDebounced_cfunc = None
@@ -276,14 +275,6 @@ class Library(object):
                 self.niSwitch_GetRelayPosition_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
                 self.niSwitch_GetRelayPosition_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_GetRelayPosition_cfunc(vi, relay_name, relay_position)
-
-    def niSwitch_InitWithOptions(self, resource_name, id_query, reset_device, options_string, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_InitWithOptions_cfunc is None:
-                self.niSwitch_InitWithOptions_cfunc = self._library.niSwitch_InitWithOptions
-                self.niSwitch_InitWithOptions_cfunc.argtypes = [ViRsrc_ctype, ViBoolean_ctype, ViBoolean_ctype, ViConstString_ctype, ctypes.POINTER(ViSession_ctype)]  # noqa: F405
-                self.niSwitch_InitWithOptions_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_InitWithOptions_cfunc(resource_name, id_query, reset_device, options_string, vi)
 
     def niSwitch_InitWithTopology(self, resource_name, topology, simulate, reset_device, vi):  # noqa: N802
         with self._func_lock:
