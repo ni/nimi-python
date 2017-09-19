@@ -140,11 +140,11 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParamListType
 
 
 class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting property values for specific channels in your session.'''
+    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
 
-    def __init__(self, vi, channel):
-        super(_RepeatedCapability, self).__init__(repeated_capability=channel)
-        self.vi = vi
+    def __init__(self, vi, repeated_capability):
+        super(_RepeatedCapability, self).__init__(repeated_capability)
+        self.${config['session_handle_parameter_name']} = vi
         self._is_frozen = True
 
     def __enter__(self):
@@ -178,12 +178,11 @@ class Session(_SessionBase):
         return ${session_context_manager}(self)
 
     def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         try:
             self._close()
         except errors.Error:
             # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
             print("Failed to close session.")
-        self.vi = 0
+        self.${config['session_handle_parameter_name']} = 0
 
 

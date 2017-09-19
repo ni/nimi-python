@@ -3319,10 +3319,10 @@ class _SessionBase(object):
 
 
 class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting property values for specific channels in your session.'''
+    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
 
-    def __init__(self, vi, channel):
-        super(_RepeatedCapability, self).__init__(repeated_capability=channel)
+    def __init__(self, vi, repeated_capability):
+        super(_RepeatedCapability, self).__init__(repeated_capability)
         self.vi = vi
         self._is_frozen = True
 
@@ -3357,7 +3357,6 @@ class Session(_SessionBase):
         return _Acquisition(self)
 
     def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         try:
             self._close()
         except errors.Error:
