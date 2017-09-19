@@ -7,7 +7,7 @@ import warnings
 
 @pytest.fixture(scope='function')
 def session():
-    with niswitch.Session('', False, True, 'Simulate=1, DriverSetup=topology:2737/2-Wire 4x64 Matrix') as simulated_session:
+    with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True) as simulated_session:
         yield simulated_session
 
 
@@ -56,7 +56,7 @@ def test_vi_real64_attribute(session):
 
 
 def test_enum_attribute():
-    with niswitch.Session('', False, False, 'Simulate=1, DriverSetup=topology:2532/1-Wire 4x128 Matrix') as session:
+    with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
         assert session.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
 
 
@@ -140,3 +140,4 @@ def test_functions_error_query(session):
 def test_functions_get_error_description(session):
     description = session.get_error_description(0)   # expect no errors
     assert description == ''
+
