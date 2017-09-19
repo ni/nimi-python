@@ -101,12 +101,14 @@ class SideEffectsHelper(object):
         self._defaults[func] = val
 
     def niFake_Abort(self, vi):  # noqa: N802
-        if self._defaults['Abort']['return'] != 0:
+        if self._defaults['Abort']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
-        if self._defaults['GetABoolean']['return'] != 0:
+        if self._defaults['GetABoolean']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetABoolean']['return']
         if self._defaults['GetABoolean']['aBoolean'] is None:
             raise MockFunctionCallError("niFake_GetABoolean", param='aBoolean')
@@ -114,7 +116,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetABoolean']['return']
 
     def niFake_GetANumber(self, vi, a_number):  # noqa: N802
-        if self._defaults['GetANumber']['return'] != 0:
+        if self._defaults['GetANumber']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetANumber']['return']
         if self._defaults['GetANumber']['aNumber'] is None:
             raise MockFunctionCallError("niFake_GetANumber", param='aNumber')
@@ -122,7 +125,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetANumber']['return']
 
     def niFake_GetAStringOfFixedMaximumSize(self, vi, a_string):  # noqa: N802
-        if self._defaults['GetAStringOfFixedMaximumSize']['return'] != 0:
+        if self._defaults['GetAStringOfFixedMaximumSize']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetAStringOfFixedMaximumSize']['return']
         if self._defaults['GetAStringOfFixedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize", param='aString')
@@ -130,7 +134,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetAStringOfFixedMaximumSize']['return']
 
     def niFake_GetAStringWithSpecifiedMaximumSize(self, vi, a_string, buffer_size):  # noqa: N802
-        if self._defaults['GetAStringWithSpecifiedMaximumSize']['return'] != 0:
+        if self._defaults['GetAStringWithSpecifiedMaximumSize']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
         if self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringWithSpecifiedMaximumSize", param='aString')
@@ -138,7 +143,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
 
     def niFake_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeViBoolean']['return'] != 0:
+        if self._defaults['GetAttributeViBoolean']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetAttributeViBoolean']['return']
         if self._defaults['GetAttributeViBoolean']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViBoolean", param='attributeValue')
@@ -146,7 +152,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetAttributeViBoolean']['return']
 
     def niFake_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeViInt32']['return'] != 0:
+        if self._defaults['GetAttributeViInt32']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetAttributeViInt32']['return']
         if self._defaults['GetAttributeViInt32']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViInt32", param='attributeValue')
@@ -154,7 +161,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetAttributeViInt32']['return']
 
     def niFake_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeViReal64']['return'] != 0:
+        if self._defaults['GetAttributeViReal64']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetAttributeViReal64']['return']
         if self._defaults['GetAttributeViReal64']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViReal64", param='attributeValue')
@@ -162,7 +170,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetAttributeViReal64']['return']
 
     def niFake_GetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeViSession']['return'] != 0:
+        if self._defaults['GetAttributeViSession']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetAttributeViSession']['return']
         if self._defaults['GetAttributeViSession']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViSession", param='attributeValue')
@@ -170,7 +179,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetAttributeViSession']['return']
 
     def niFake_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeViString']['return'] != 0:
+        if self._defaults['GetAttributeViString']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetAttributeViString']['return']
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViString", param='attributeValue')
@@ -181,7 +191,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetAttributeViString']['return']
 
     def niFake_GetEnumValue(self, vi, a_quantity, a_turtle):  # noqa: N802
-        if self._defaults['GetEnumValue']['return'] != 0:
+        if self._defaults['GetEnumValue']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetEnumValue']['return']
         if self._defaults['GetEnumValue']['aQuantity'] is None:
             raise MockFunctionCallError("niFake_GetEnumValue", param='aQuantity')
@@ -192,7 +203,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetEnumValue']['return']
 
     def niFake_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
-        if self._defaults['GetError']['return'] != 0:
+        if self._defaults['GetError']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetError']['return']
         if self._defaults['GetError']['errorCode'] is None:
             raise MockFunctionCallError("niFake_GetError", param='errorCode')
@@ -206,7 +218,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetError']['return']
 
     def niFake_GetErrorMessage(self, vi, error_code, buffer_size, error_message):  # noqa: N802
-        if self._defaults['GetErrorMessage']['return'] != 0:
+        if self._defaults['GetErrorMessage']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['GetErrorMessage']['return']
         if self._defaults['GetErrorMessage']['errorMessage'] is None:
             raise MockFunctionCallError("niFake_GetErrorMessage", param='errorMessage')
@@ -217,7 +230,8 @@ class SideEffectsHelper(object):
         return self._defaults['GetErrorMessage']['return']
 
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
-        if self._defaults['InitWithOptions']['return'] != 0:
+        if self._defaults['InitWithOptions']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['InitWithOptions']['return']
         if self._defaults['InitWithOptions']['vi'] is None:
             raise MockFunctionCallError("niFake_InitWithOptions", param='vi')
@@ -225,17 +239,20 @@ class SideEffectsHelper(object):
         return self._defaults['InitWithOptions']['return']
 
     def niFake_Initiate(self, vi):  # noqa: N802
-        if self._defaults['Initiate']['return'] != 0:
+        if self._defaults['Initiate']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
 
     def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
-        if self._defaults['OneInputFunction']['return'] != 0:
+        if self._defaults['OneInputFunction']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['OneInputFunction']['return']
         return self._defaults['OneInputFunction']['return']
 
     def niFake_Read(self, vi, maximum_time, reading):  # noqa: N802
-        if self._defaults['Read']['return'] != 0:
+        if self._defaults['Read']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['Read']['return']
         if self._defaults['Read']['reading'] is None:
             raise MockFunctionCallError("niFake_Read", param='reading')
@@ -243,7 +260,8 @@ class SideEffectsHelper(object):
         return self._defaults['Read']['return']
 
     def niFake_ReadMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
-        if self._defaults['ReadMultiPoint']['return'] != 0:
+        if self._defaults['ReadMultiPoint']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['ReadMultiPoint']['return']
         if self._defaults['ReadMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niFake_ReadMultiPoint", param='readingArray')
@@ -254,7 +272,8 @@ class SideEffectsHelper(object):
         return self._defaults['ReadMultiPoint']['return']
 
     def niFake_ReturnANumberAndAString(self, vi, a_number, a_string):  # noqa: N802
-        if self._defaults['ReturnANumberAndAString']['return'] != 0:
+        if self._defaults['ReturnANumberAndAString']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['ReturnANumberAndAString']['return']
         if self._defaults['ReturnANumberAndAString']['aNumber'] is None:
             raise MockFunctionCallError("niFake_ReturnANumberAndAString", param='aNumber')
@@ -265,42 +284,50 @@ class SideEffectsHelper(object):
         return self._defaults['ReturnANumberAndAString']['return']
 
     def niFake_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['SetAttributeViBoolean']['return'] != 0:
+        if self._defaults['SetAttributeViBoolean']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['SetAttributeViBoolean']['return']
         return self._defaults['SetAttributeViBoolean']['return']
 
     def niFake_SetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['SetAttributeViInt32']['return'] != 0:
+        if self._defaults['SetAttributeViInt32']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['SetAttributeViInt32']['return']
         return self._defaults['SetAttributeViInt32']['return']
 
     def niFake_SetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['SetAttributeViReal64']['return'] != 0:
+        if self._defaults['SetAttributeViReal64']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['SetAttributeViReal64']['return']
         return self._defaults['SetAttributeViReal64']['return']
 
     def niFake_SetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['SetAttributeViSession']['return'] != 0:
+        if self._defaults['SetAttributeViSession']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['SetAttributeViSession']['return']
         return self._defaults['SetAttributeViSession']['return']
 
     def niFake_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['SetAttributeViString']['return'] != 0:
+        if self._defaults['SetAttributeViString']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
 
     def niFake_SimpleFunction(self, vi):  # noqa: N802
-        if self._defaults['SimpleFunction']['return'] != 0:
+        if self._defaults['SimpleFunction']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['SimpleFunction']['return']
         return self._defaults['SimpleFunction']['return']
 
     def niFake_TwoInputFunction(self, vi, a_number, a_string):  # noqa: N802
-        if self._defaults['TwoInputFunction']['return'] != 0:
+        if self._defaults['TwoInputFunction']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['TwoInputFunction']['return']
         return self._defaults['TwoInputFunction']['return']
 
     def niFake_close(self, vi):  # noqa: N802
-        if self._defaults['close']['return'] != 0:
+        if self._defaults['close']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
