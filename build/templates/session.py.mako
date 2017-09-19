@@ -67,10 +67,10 @@ init_method_params = helper.get_params_snippet(init_function, helper.ParamListTy
 init_call_params = helper.get_params_snippet(init_function, helper.ParamListType.API_METHOD_CALL)
 %>\
 
-    def __init__(self, default_channel):
+    def __init__(self, repeated_capability):
         # TODO(marcoskirsch): rename to _library.
         self.library = library_singleton.get()
-        self._default_channel = default_channel
+        self._repeated_capability = repeated_capability
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -139,11 +139,11 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParamListType
 % endfor
 
 
-class ChannelContextSession(_SessionBase):
+class _RepeatedCapability(_SessionBase):
     '''Allows for setting/getting property values for specific channels in your session.'''
 
     def __init__(self, vi, channel):
-        super(ChannelContextSession, self).__init__(default_channel=channel)
+        super(_RepeatedCapability, self).__init__(repeated_capability=channel)
         self.vi = vi
         self._is_frozen = True
 
@@ -158,7 +158,7 @@ class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
     def __init__(${init_method_params}):
-        super(Session, self).__init__(default_channel='')
+        super(Session, self).__init__(repeated_capability='')
         # TODO(marcoskirsch): private members should start with _
         self.${config['session_handle_parameter_name']} = 0  # This must be set before calling _init_with_options.
         self.${config['session_handle_parameter_name']} = self._init_with_options(${init_call_params})
@@ -170,11 +170,12 @@ class Session(_SessionBase):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capabiilty (i.e. channels)'''
+        return _RepeatedCapability(self.vi, repeated_capability)
+
     def initiate(self):
         return ${session_context_manager}(self)
-
-    def channel(self, channel):
-        return ChannelContextSession(self.vi, channel)
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
