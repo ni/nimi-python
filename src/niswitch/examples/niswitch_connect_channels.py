@@ -13,7 +13,9 @@ args = parser.parse_args()
 try:
     with niswitch.Session(args.name) as session:
         session.connect(args.channel1, args.channel2)
-        print("Channel ", args.channel1, " and ", args.channel2, " are now connected")
+        print('Channel ', args.channel1, ' and ', args.channel2, ' are now connected.')
+        session.disconnect(args.channel1, args.channel2)
+        print('Channel ', args.channel1, ' and ', args.channel2, ' are now disconnected.')
 except niswitch.Error as e:
     sys.stderr.write(str(e))
     sys.exit(e.code)
