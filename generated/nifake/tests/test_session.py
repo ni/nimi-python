@@ -350,7 +350,7 @@ class TestSession(object):
         pi = 3.14159
         self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = pi
         with nifake.Session('dev1') as session:
-            attr_double = session.channel('0,1').read_write_double
+            attr_double = session['0,1'].read_write_double
             assert attr_double == pi
             self.patched_library.niFake_GetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'0,1', 1000001, ANY)
 
@@ -358,9 +358,9 @@ class TestSession(object):
         self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
         self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
         with nifake.Session('dev1') as session:
-            with session.channel('3') as chan:
-                chan.read_write_integer = 13
-                chan.read_write_bool = True
+            with session['3'] as channel3:
+                channel3.read_write_integer = 13
+                channel3.read_write_bool = True
             self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', 1000004, 13)
             self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', 1000000, 1)
 

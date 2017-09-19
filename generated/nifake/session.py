@@ -53,10 +53,10 @@ class _SessionBase(object):
     An attribute of type string with read/write access.
     '''
 
-    def __init__(self, default_channel):
+    def __init__(self, repeated_capability):
         # TODO(marcoskirsch): rename to _library.
         self.library = library_singleton.get()
-        self._default_channel = default_channel
+        self._repeated_capability = repeated_capability
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -523,11 +523,11 @@ class _SessionBase(object):
         return
 
 
-class ChannelContextSession(_SessionBase):
+class _RepeatedCapability(_SessionBase):
     '''Allows for setting/getting property values for specific channels in your session.'''
 
     def __init__(self, vi, channel):
-        super(ChannelContextSession, self).__init__(default_channel=channel)
+        super(_RepeatedCapability, self).__init__(repeated_capability=channel)
         self.vi = vi
         self._is_frozen = True
 
@@ -542,7 +542,7 @@ class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
-        super(Session, self).__init__(default_channel='')
+        super(Session, self).__init__(repeated_capability='')
         # TODO(marcoskirsch): private members should start with _
         self.vi = 0  # This must be set before calling _init_with_options.
         self.vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
@@ -554,11 +554,12 @@ class Session(_SessionBase):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capabiilty (i.e. channels)'''
+        return _RepeatedCapability(self.vi, repeated_capability)
+
     def initiate(self):
         return _Acquisition(self)
-
-    def channel(self, channel):
-        return ChannelContextSession(self.vi, channel)
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
