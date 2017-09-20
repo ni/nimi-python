@@ -65,7 +65,8 @@ ivi_dance_param = helper.extract_ivi_dance_parameter(params)
 ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 %>\
     def ${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_IMPL_METHOD)}):  # noqa: N802
-        if self._defaults['${func_name}']['return'] != 0:
+        if self._defaults['${func_name}']['return'] < 0:
+            # In the error case, skip all other side effects.
             return self._defaults['${func_name}']['return']
 %    for p in output_params:
         if self._defaults['${func_name}']['${p['name']}'] is None:
