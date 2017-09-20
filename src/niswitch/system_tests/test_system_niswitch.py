@@ -38,6 +38,8 @@ def test_channel_connection(session):
 def test_continuous_software_scanning(session):
     with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
         scan_list = 'r0->c0; r1->c1'
+        session.scan_list = scan_list
+        assert session.scan_list == scan_list
         session.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE, False)
         session.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.PXI_TRIG0, False)
         session.configure_scan_list(scan_list, niswitch.ScanMode.BREAK_BEFORE_MAKE)
@@ -79,9 +81,6 @@ def test_vi_real64_attribute(session):
 def test_enum_attribute():
     with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
         assert session.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
-        scan_list = 'r0->c0; r1->c1'
-        session.scan_list = scan_list
-        assert session.scan_list == scan_list
 
 
 def test_write_only_attribute(session):
