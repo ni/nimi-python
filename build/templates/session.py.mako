@@ -43,8 +43,8 @@ class ${session_context_manager}(object):
 
 
 % endif
-class Session(object):
-    '''${config['session_class_description']}'''
+class _SessionBase(object):
+    '''Base class for all ${config['driver_name']} sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -67,35 +67,15 @@ init_method_params = helper.get_params_snippet(init_function, helper.ParamListTy
 init_call_params = helper.get_params_snippet(init_function, helper.ParamListType.API_METHOD_CALL)
 %>\
 
-    def __init__(${init_method_params}):
+    def __init__(self, repeated_capability):
+        # TODO(marcoskirsch): rename to _library.
         self.library = library_singleton.get()
-        self.${config['session_handle_parameter_name']} = 0  # This must be set before calling _init_with_options.
-        self.${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
-
-        self._is_frozen = True
+        self._repeated_capability = repeated_capability
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
-
-    def initiate(self):
-        return ${session_context_manager}(self)
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-
-    def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        try:
-            self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
-        self.${config['session_handle_parameter_name']} = 0
 
     def get_error_description(self, error_code):
         '''get_error_description
@@ -157,4 +137,52 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParamListType
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
 % endfor
+
+
+class _RepeatedCapability(_SessionBase):
+    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
+
+    def __init__(self, vi, repeated_capability):
+        super(_RepeatedCapability, self).__init__(repeated_capability)
+        self.${config['session_handle_parameter_name']} = vi
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
+class Session(_SessionBase):
+    '''${config['session_class_description']}'''
+
+    def __init__(${init_method_params}):
+        super(Session, self).__init__(repeated_capability='')
+        # TODO(marcoskirsch): private members should start with _
+        self.${config['session_handle_parameter_name']} = 0  # This must be set before calling _init_with_options.
+        self.${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        return _RepeatedCapability(self.vi, repeated_capability)
+
+    def initiate(self):
+        return ${session_context_manager}(self)
+
+    def close(self):
+        try:
+            self._close()
+        except errors.Error:
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
+            print("Failed to close session.")
+        self.${config['session_handle_parameter_name']} = 0
+
 

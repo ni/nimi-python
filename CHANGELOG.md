@@ -7,6 +7,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 ## [Unreleased]
 * #### ALL
   * #### Added
+    * Suport for channel-based properties
   * #### Changed
     * Warnings no longer raise an exception
       * Warnings are now added to warnings.warn()
@@ -40,7 +41,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * Initial release
 
 
-<!-- 
+<!--
 ## [Unreleased]
 * #### ALL
   * #### Added

@@ -22,8 +22,8 @@ class _Scan(object):
         self.session._abort()
 
 
-class Session(object):
-    '''An NI-SWITCH session to a National Instruments Switch Module'''
+class _SessionBase(object):
+    '''Base class for all NI-SWITCH sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -829,35 +829,15 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
 
-    def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
+    def __init__(self, repeated_capability):
+        # TODO(marcoskirsch): rename to _library.
         self.library = library_singleton.get()
-        self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
-
-        self._is_frozen = True
+        self._repeated_capability = repeated_capability
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
-
-    def initiate(self):
-        return _Scan(self)
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-
-    def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        try:
-            self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
-        self.vi = 0
 
     def get_error_description(self, error_code):
         '''get_error_description
@@ -2519,4 +2499,52 @@ class Session(object):
         error_code = self.library.niSwitch_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
+
+
+class _RepeatedCapability(_SessionBase):
+    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
+
+    def __init__(self, vi, repeated_capability):
+        super(_RepeatedCapability, self).__init__(repeated_capability)
+        self.vi = vi
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
+class Session(_SessionBase):
+    '''An NI-SWITCH session to a National Instruments Switch Module'''
+
+    def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
+        super(Session, self).__init__(repeated_capability='')
+        # TODO(marcoskirsch): private members should start with _
+        self.vi = 0  # This must be set before calling _init_with_options.
+        self.vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        return _RepeatedCapability(self.vi, repeated_capability)
+
+    def initiate(self):
+        return _Scan(self)
+
+    def close(self):
+        try:
+            self._close()
+        except errors.Error:
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
+            print("Failed to close session.")
+        self.vi = 0
+
 
