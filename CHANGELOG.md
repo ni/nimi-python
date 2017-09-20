@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Python Versioning](http://legacy.python.org/dev/peps/pep-0396/).
 
+## [Unreleased]
+* #### ALL
+  * #### Added
+  * #### Changed
+  * #### Removed
+* #### NI-DMM
+  * #### Added
+  * #### Changed
+  * #### Removed
+* #### NI-ModInst
+  * #### Added
+  * #### Changed
+  * #### Removed
+* #### NI-SWITCH
+  * #### Added
+  * #### Changed
+  * #### Removed
+* #### NI-DCPower
+  * #### Added
+  * #### Changed
+  * #### Removed
+
 ## [0.2.0] - 2017-09-20
 * #### ALL
   * #### Added
@@ -22,7 +44,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
       with nimodinst.Session('nidmm') as session:
           name = session[i].device_name
       ```
-* #### NI-Switch
+* #### NI-SWITCH
   * #### Added
     * Initial Release
 
@@ -53,5 +75,9 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Added
   * #### Changed
   * #### Removed
+* #### NI-DCPower
+ * #### Added
+ * #### Changed
+ * #### Removed
 -->
 
