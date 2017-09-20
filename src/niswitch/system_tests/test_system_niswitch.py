@@ -17,7 +17,8 @@ def test_relayclose(session):
     assert session.get_relay_position(relay_name) == niswitch.RelayPosition.OPEN
     session.relay_control(relay_name, niswitch.RelayAction.CLOSE_RELAY)
     assert session.get_relay_position(relay_name) == niswitch.RelayPosition.CLOSED
-    assert relay_name
+    relay_count = session.get_relay_count(relay_name)
+    assert relay_count == 0
 
 
 def test_channel_connection(session):
@@ -25,6 +26,8 @@ def test_channel_connection(session):
     channel2 = 'r0'
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
     session.connect(channel1, channel2)
+    session.wait_for_debounce(5000)
+    assert session.is_debounced() is True
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_EXISTS
     session.disconnect(channel1, channel2)
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
@@ -141,3 +144,20 @@ def test_functions_get_error_description(session):
     description = session.get_error_description(0)   # expect no errors
     assert description == ''
 
+
+def test_functions_connect_disconnect_multiple(session):
+    session.connect_multiple('c0->r0, c0->r1')   # expect no errors
+    session.disconnect_multiple('c0->r0, c0->r1')   # expect no errors
+
+
+def test_functions_disable(session):
+    channel1 = 'c0'
+    channel2 = 'r0'
+    session.connect(channel1, channel2)
+    session.disable()   # expect no errors
+    assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
+
+
+def test_functions_interchange(session):
+    session.clear_interchange_warnings()   # expect no errors
+    session.reset_interchange_check()   # expect no errors
