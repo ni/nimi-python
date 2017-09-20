@@ -53,9 +53,6 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViReal64']['attributeValue'] = None
-        self._defaults['GetAttributeViSession'] = {}
-        self._defaults['GetAttributeViSession']['return'] = 0
-        self._defaults['GetAttributeViSession']['attributeValue'] = None
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['attributeValue'] = None
@@ -95,9 +92,6 @@ class SideEffectsHelper(object):
         self._defaults['IsScanning'] = {}
         self._defaults['IsScanning']['return'] = 0
         self._defaults['IsScanning']['isScanning'] = None
-        self._defaults['LockSession'] = {}
-        self._defaults['LockSession']['return'] = 0
-        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['RelayControl'] = {}
         self._defaults['RelayControl']['return'] = 0
         self._defaults['ResetInterchangeCheck'] = {}
@@ -116,17 +110,12 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViInt32']['return'] = 0
         self._defaults['SetAttributeViReal64'] = {}
         self._defaults['SetAttributeViReal64']['return'] = 0
-        self._defaults['SetAttributeViSession'] = {}
-        self._defaults['SetAttributeViSession']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['SetContinuousScan'] = {}
         self._defaults['SetContinuousScan']['return'] = 0
         self._defaults['SetPath'] = {}
         self._defaults['SetPath']['return'] = 0
-        self._defaults['UnlockSession'] = {}
-        self._defaults['UnlockSession']['return'] = 0
-        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['WaitForDebounce'] = {}
         self._defaults['WaitForDebounce']['return'] = 0
         self._defaults['WaitForScanComplete'] = {}
@@ -240,14 +229,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetAttributeViReal64", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
         return self._defaults['GetAttributeViReal64']['return']
-
-    def niSwitch_GetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeViSession']['return'] != 0:
-            return self._defaults['GetAttributeViSession']['return']
-        if self._defaults['GetAttributeViSession']['attributeValue'] is None:
-            raise MockFunctionCallError("niSwitch_GetAttributeViSession", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViSession']['attributeValue']
-        return self._defaults['GetAttributeViSession']['return']
 
     def niSwitch_GetAttributeViString(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
@@ -374,14 +355,6 @@ class SideEffectsHelper(object):
         is_scanning.contents.value = self._defaults['IsScanning']['isScanning']
         return self._defaults['IsScanning']['return']
 
-    def niSwitch_LockSession(self, vi, caller_has_lock):  # noqa: N802
-        if self._defaults['LockSession']['return'] != 0:
-            return self._defaults['LockSession']['return']
-        if self._defaults['LockSession']['callerHasLock'] is None:
-            raise MockFunctionCallError("niSwitch_LockSession", param='callerHasLock')
-        caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
-        return self._defaults['LockSession']['return']
-
     def niSwitch_RelayControl(self, vi, relay_name, relay_action):  # noqa: N802
         if self._defaults['RelayControl']['return'] != 0:
             return self._defaults['RelayControl']['return']
@@ -427,11 +400,6 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViReal64']['return']
         return self._defaults['SetAttributeViReal64']['return']
 
-    def niSwitch_SetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['SetAttributeViSession']['return'] != 0:
-            return self._defaults['SetAttributeViSession']['return']
-        return self._defaults['SetAttributeViSession']['return']
-
     def niSwitch_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['SetAttributeViString']['return'] != 0:
             return self._defaults['SetAttributeViString']['return']
@@ -446,14 +414,6 @@ class SideEffectsHelper(object):
         if self._defaults['SetPath']['return'] != 0:
             return self._defaults['SetPath']['return']
         return self._defaults['SetPath']['return']
-
-    def niSwitch_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
-        if self._defaults['UnlockSession']['return'] != 0:
-            return self._defaults['UnlockSession']['return']
-        if self._defaults['UnlockSession']['callerHasLock'] is None:
-            raise MockFunctionCallError("niSwitch_UnlockSession", param='callerHasLock')
-        caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
-        return self._defaults['UnlockSession']['return']
 
     def niSwitch_WaitForDebounce(self, vi, maximum_time_ms):  # noqa: N802
         if self._defaults['WaitForDebounce']['return'] != 0:
@@ -540,8 +500,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_GetAttributeViInt32.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_GetAttributeViReal64.side_effect = MockFunctionCallError("niSwitch_GetAttributeViReal64")
         mock_library.niSwitch_GetAttributeViReal64.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_GetAttributeViSession.side_effect = MockFunctionCallError("niSwitch_GetAttributeViSession")
-        mock_library.niSwitch_GetAttributeViSession.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_GetAttributeViString.side_effect = MockFunctionCallError("niSwitch_GetAttributeViString")
         mock_library.niSwitch_GetAttributeViString.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_GetChannelName.side_effect = MockFunctionCallError("niSwitch_GetChannelName")
@@ -568,8 +526,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_IsDebounced.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_IsScanning.side_effect = MockFunctionCallError("niSwitch_IsScanning")
         mock_library.niSwitch_IsScanning.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_LockSession.side_effect = MockFunctionCallError("niSwitch_LockSession")
-        mock_library.niSwitch_LockSession.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_RelayControl.side_effect = MockFunctionCallError("niSwitch_RelayControl")
         mock_library.niSwitch_RelayControl.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_ResetInterchangeCheck.side_effect = MockFunctionCallError("niSwitch_ResetInterchangeCheck")
@@ -588,16 +544,12 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_SetAttributeViInt32.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_SetAttributeViReal64.side_effect = MockFunctionCallError("niSwitch_SetAttributeViReal64")
         mock_library.niSwitch_SetAttributeViReal64.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_SetAttributeViSession.side_effect = MockFunctionCallError("niSwitch_SetAttributeViSession")
-        mock_library.niSwitch_SetAttributeViSession.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_SetAttributeViString.side_effect = MockFunctionCallError("niSwitch_SetAttributeViString")
         mock_library.niSwitch_SetAttributeViString.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_SetContinuousScan.side_effect = MockFunctionCallError("niSwitch_SetContinuousScan")
         mock_library.niSwitch_SetContinuousScan.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_SetPath.side_effect = MockFunctionCallError("niSwitch_SetPath")
         mock_library.niSwitch_SetPath.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_UnlockSession.side_effect = MockFunctionCallError("niSwitch_UnlockSession")
-        mock_library.niSwitch_UnlockSession.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_WaitForDebounce.side_effect = MockFunctionCallError("niSwitch_WaitForDebounce")
         mock_library.niSwitch_WaitForDebounce.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_WaitForScanComplete.side_effect = MockFunctionCallError("niSwitch_WaitForScanComplete")

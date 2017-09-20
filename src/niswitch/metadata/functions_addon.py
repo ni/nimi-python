@@ -5,21 +5,22 @@
 # This will override that with private - add '_' to the beginning of the name, or
 # don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':  { 'codegen_method': 'no',       },
-    'Initiate':         { 'codegen_method': 'private',  },
-    'close':            { 'codegen_method': 'private',  },
-    'Abort':            { 'codegen_method': 'private',  },
-    'CheckAttribute.+': { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
-    '.etAttribute.+':   { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
-    'init':             { 'codegen_method': 'no',       },
-    'error_message':    { 'codegen_method': 'no',       },
-    'GetError':         { 'codegen_method': 'private',  },
-    'GetErrorMessage':  { 'codegen_method': 'private',  },
-    'ClearError':       { 'codegen_method': 'no',       },
-    'LockSession':      { 'codegen_method': 'private',  },
-    'UnlockSession':    { 'codegen_method': 'private',  },
-    'UnlockSession':    { 'codegen_method': 'private',  },
-    'Scan':             { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
+    'InitWithOptions':         { 'codegen_method': 'no',       },
+    'Initiate':                { 'codegen_method': 'private',  },
+    'close':                   { 'codegen_method': 'private',  },
+    'Abort':                   { 'codegen_method': 'private',  },
+    'CheckAttribute.+':        { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
+    '.etAttribute.+':          { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
+    'init':                    { 'codegen_method': 'no',       },
+    'error_message':           { 'codegen_method': 'no',       },
+    'GetError':                { 'codegen_method': 'private',  },
+    'GetErrorMessage':         { 'codegen_method': 'private',  },
+    'ClearError':              { 'codegen_method': 'no',       },
+    'LockSession':             { 'codegen_method': 'no',       },
+    'UnlockSession':           { 'codegen_method': 'no',       },
+    'SetAttributeViSession':   { 'codegen_method': 'no',       },
+    'GetAttributeViSession':   { 'codegen_method': 'no',       },
+    'Scan':                    { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
 }
 
 # Attach the given parameter to the given enum from enums.py

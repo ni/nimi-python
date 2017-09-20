@@ -22,8 +22,8 @@ class _Scan(object):
         self.session._abort()
 
 
-class Session(object):
-    '''An NI-SWITCH session to a National Instruments Switch Module'''
+class _SessionBase(object):
+    '''Base class for all NI-SWITCH sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -829,35 +829,15 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
 
-    def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
+    def __init__(self, repeated_capability):
+        # TODO(marcoskirsch): rename to _library.
         self.library = library_singleton.get()
-        self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
-
-        self._is_frozen = True
+        self._repeated_capability = repeated_capability
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
-
-    def initiate(self):
-        return _Scan(self)
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-
-    def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        try:
-            self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
-        self.vi = 0
 
     def get_error_description(self, error_code):
         '''get_error_description
@@ -1301,51 +1281,6 @@ class Session(object):
         error_code = self.library.niSwitch_GetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(attribute_value_ctype.value)
-
-    def _get_attribute_vi_session(self, channel_name, attribute_id):
-        '''_get_attribute_vi_session
-
-        This function queries the value of a ViSession attribute. You can use
-        this function to get the values of instrument specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases: -
-        State caching is disabled for the entire session or for the particular
-        attribute. - State caching is enabled and the currently cached value is
-        invalid.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . A ring control at the top of the
-                dialog box allows you to see all IVI attributes or only the attributes
-                of the ViInt32 type. If you choose to see all IVI attributes, the data
-                types appear to the right of the attribute names in the list box. The
-                data types that are not consistent with this function are dim. If you
-                select an attribute data type that is dim, LabWindows/CVI transfers you
-                to the function panel for the corresponding function that is consistent
-                with the data type. - If you want to enter a variable name, press to
-                change this ring control to a manual input box. - If the attribute in
-                this ring control has constants as valid values, you can view the
-                constants by moving to the Attribute Value control and pressing .
-
-        Returns:
-            attribute_value (int):Returns the current value of the attribute. Pass the address of a
-                ViSession variable. From the function panel window, you can use this
-                control as follows. - If the attribute currently showing in the
-                Attribute ID ring control has constants as valid values, you can view a
-                list of the constants by pressing on this control. Select a value by
-                double-clicking on it or by selecting it and then pressing .
-        '''
-        attribute_value_ctype = ctypes_types.ViSession_ctype(0)
-        error_code = self.library.niSwitch_GetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(attribute_value_ctype.value)
 
     def _get_attribute_vi_string(self, channel_name, attribute_id):
         '''_get_attribute_vi_string
@@ -1979,64 +1914,6 @@ class Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(is_scanning_ctype.value)
 
-    def _lock_session(self):
-        '''_lock_session
-
-        This function obtains a multithread lock on the instrument session.
-        Before it does so, it waits until all other execution threads have
-        released their locks on the instrument session. Other threads might have
-        obtained a lock on this session in the following ways: - The user's
-        application called _lock_session. - A call to the instrument
-        driver locked the session. - A call to the IVI engine locked the
-        session. After your call to _lock_session returns successfully,
-        no other threads can access the instrument session until you call
-        _unlock_session. Use _lock_session and
-        _unlock_session around a sequence of calls to instrument driver
-        functions if you require that the instrument retain its settings through
-        the end of the sequence. You can safely make nested calls to
-        _lock_session within the same thread. To completely unlock the
-        session, you must balance each call to _lock_session with a call
-        to _unlock_session. If, however, you use the Caller Has Lock
-        parameter in all calls to _lock_session and
-        _unlock_session within a function, the IVI Library locks the
-        session only once within the function regardless of the number of calls
-        you make to _lock_session. This allows you to call
-        _unlock_session just once at the end of the function.
-
-        Returns:
-            caller_has_lock (bool):This parameter serves as a convenience. If you do not want to use this
-                parameter, pass VI_NULL. Use this parameter in complex functions to
-                keep track of whether you obtain a lock and therefore need to unlock the
-                session. Pass the address of a local ViBoolean variable. In the
-                declaration of the local variable, initialize it to VI_FALSE. Pass the
-                address of the same local variable to any other calls you make to
-                _lock_session or _unlock_session in the same function.
-                The parameter is an input/output parameter. _lock_session and
-                _unlock_session each inspect the current value and take the
-                following actions: - If the value is VI_TRUE, _lock_session
-                does not lock the session again. If the value is VI_FALSE,
-                _lock_session obtains the lock and sets the value of the
-                parameter to VI_TRUE. - If the value is VI_FALSE,
-                _unlock_session does not attempt to unlock the session. If the
-                value is VI_TRUE, _unlock_session releases the lock and sets
-                the value of the parameter to VI_FALSE. Thus, you can, call
-                _unlock_session at the end of your function without worrying
-                about whether you actually have the lock. Example: ViStatus TestFunc
-                (ViSession vi, ViInt32 flags) { ViStatus error = VI_SUCCESS; ViBoolean
-                haveLock = VI_FALSE; if (flags & BIT_1) { viCheckErr(
-                _lock_session(vi, &haveLock;)); viCheckErr( TakeAction1(vi)); if
-                (flags & BIT_2) { viCheckErr( _unlock_session(vi, &haveLock;));
-                viCheckErr( TakeAction2(vi)); viCheckErr( _lock_session(vi,
-                &haveLock;); } if (flags & BIT_3) viCheckErr( TakeAction3(vi)); }
-                Error: /\* At this point, you cannot really be sure that you have the
-                lock. Fortunately, the haveLock variable takes care of that for you. \*/
-                _unlock_session(vi, &haveLock;); return error; }
-        '''
-        caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self.library.niSwitch_LockSession(self.vi, ctypes.pointer(caller_has_lock_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(caller_has_lock_ctype.value)
-
     def relay_control(self, relay_name, relay_action):
         '''relay_control
 
@@ -2344,62 +2221,6 @@ class Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_session(self, channel_name, attribute_id, attribute_value):
-        '''_set_attribute_vi_session
-
-        This function sets the value of a ViSession attribute. This is a
-        low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
-        instrument I/O in the following cases: - State caching is disabled for
-        the entire session or for the particular attribute. - State caching is
-        enabled and the currently cached value is invalid or is different than
-        the value you specify. This instrument driver contains high-level
-        functions that set most of the instrument attributes. It is best to use
-        the high-level driver functions as much as possible. They handle order
-        dependencies and multithread locking for you. In addition, they perform
-        status checking only after setting all of the attributes. In contrast,
-        when you set multiple attributes using the SetAttribute functions, the
-        functions check the instrument status after each call. Also, when state
-        caching is enabled, the high-level functions that configure multiple
-        attributes perform instrument I/O only for the attributes whose value
-        you change. Thus, you can safely call the high-level functions without
-        the penalty of redundant instrument I/O.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . Read-only attributes appear dim
-                in the list box. If you select a read-only attribute, an error message
-                appears. A ring control at the top of the dialog box allows you to see
-                all IVI attributes or only the attributes of the ViInt32 type. If you
-                choose to see all IVI attributes, the data types appear to the right of
-                the attribute names in the list box. The data types that are not
-                consistent with this function are dim. If you select an attribute data
-                type that is dim, LabWindows/CVI transfers you to the function panel for
-                the corresponding function that is consistent with the data type. - If
-                you want to enter a variable name, press to change this ring control to
-                a manual input box. - If the attribute in this ring control has
-                constants as valid values, you can view the constants by moving to the
-                Attribute Value control and pressing .
-            attribute_value (int):Pass the value to which you want to set the attribute. From the function
-                panel window, you can use this control as follows. - If the attribute
-                currently showing in the Attribute ID ring control has constants as
-                valid values, you can view a list of the constants by pressing on this
-                control. Select a value by double-clicking on it or by selecting it and
-                then pressing . Note: Some of the values might not be valid depending on
-                the current settings of the instrument session. Default Value: none
-        '''
-        error_code = self.library.niSwitch_SetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
@@ -2490,47 +2311,6 @@ class Session(object):
         error_code = self.library.niSwitch_SetPath(self.vi, path_list.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def _unlock_session(self):
-        '''_unlock_session
-
-        This function releases a lock that you acquired on an instrument session
-        using _lock_session. Refer to _lock_session for
-        additional information on session locks.
-
-        Returns:
-            caller_has_lock (bool):This parameter serves as a convenience. If you do not want to use this
-                parameter, pass VI_NULL. Use this parameter in complex functions to
-                keep track of whether you obtain a lock and therefore need to unlock the
-                session. Pass the address of a local ViBoolean variable. In the
-                declaration of the local variable, initialize it to VI_FALSE. Pass the
-                address of the same local variable to any other calls you make to
-                _lock_session or _unlock_session in the same function.
-                The parameter is an input/output parameter. _lock_session and
-                _unlock_session each inspect the current value and take the
-                following actions: - If the value is VI_TRUE, _lock_session
-                does not lock the session again. If the value is VI_FALSE,
-                _lock_session obtains the lock and sets the value of the
-                parameter to VI_TRUE. - If the value is VI_FALSE,
-                _unlock_session does not attempt to unlock the session. If the
-                value is VI_TRUE, _unlock_session releases the lock and sets
-                the value of the parameter to VI_FALSE. Thus, you can, call
-                _unlock_session at the end of your function without worrying
-                about whether you actually have the lock. Example: ViStatus TestFunc
-                (ViSession vi, ViInt32 flags) { ViStatus error = VI_SUCCESS; ViBoolean
-                haveLock = VI_FALSE; if (flags & BIT_1) { viCheckErr(
-                _lock_session(vi, &haveLock;)); viCheckErr( TakeAction1(vi)); if
-                (flags & BIT_2) { viCheckErr( _unlock_session(vi, &haveLock;));
-                viCheckErr( TakeAction2(vi)); viCheckErr( _lock_session(vi,
-                &haveLock;); } if (flags & BIT_3) viCheckErr( TakeAction3(vi)); }
-                Error: /\* At this point, you cannot really be sure that you have the
-                lock. Fortunately, the haveLock variable takes care of that for you. \*/
-                _unlock_session(vi, &haveLock;); return error; }
-        '''
-        caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self.library.niSwitch_UnlockSession(self.vi, ctypes.pointer(caller_has_lock_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(caller_has_lock_ctype.value)
 
     def wait_for_debounce(self, maximum_time_ms):
         '''wait_for_debounce
@@ -2645,4 +2425,52 @@ class Session(object):
         error_code = self.library.niSwitch_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
+
+
+class _RepeatedCapability(_SessionBase):
+    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
+
+    def __init__(self, vi, repeated_capability):
+        super(_RepeatedCapability, self).__init__(repeated_capability)
+        self.vi = vi
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
+class Session(_SessionBase):
+    '''An NI-SWITCH session to a National Instruments Switch Module'''
+
+    def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
+        super(Session, self).__init__(repeated_capability='')
+        # TODO(marcoskirsch): private members should start with _
+        self.vi = 0  # This must be set before calling _init_with_options.
+        self.vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        return _RepeatedCapability(self.vi, repeated_capability)
+
+    def initiate(self):
+        return _Scan(self)
+
+    def close(self):
+        try:
+            self._close()
+        except errors.Error:
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
+            print("Failed to close session.")
+        self.vi = 0
+
 
