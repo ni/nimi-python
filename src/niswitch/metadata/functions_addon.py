@@ -19,25 +19,27 @@ functions_codegen_method = {
     'LockSession':      { 'codegen_method': 'private',  },
     'UnlockSession':    { 'codegen_method': 'private',  },
     'UnlockSession':    { 'codegen_method': 'private',  },
+    'Scan':             { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
 }
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    'GetRelayPosition':             { 'parameters': { 2: { 'enum': 'RelayPosition',                                        }, }, },
-    'RelayControl':                 { 'parameters': { 2: { 'enum': 'RelayAction',                                          }, }, },
-    'CanConnect':                   { 'parameters': { 3: { 'enum': 'PathCapability',                                       }, }, },
-    'RouteScanAdvancedOutput':      { 'parameters': { 1: { 'enum': 'TriggerInputConnector',                                },
-                                                      2: { 'enum': 'TriggerInputBusLine',                                  }, }, },
-    'RouteTriggerInput':            { 'parameters': { 1: { 'enum': 'TriggerInputConnector',                                },
-                                                      2: { 'enum': 'TriggerInputBusLine',                                  }, }, },
-    'ConfigureScanList':            { 'parameters': { 2: { 'enum': 'ScanMode',                                             }, }, },
-    'ConfigureScanTrigger':         { 'parameters': { 2: { 'enum': 'TriggerInputConfigureScanTrigger',                     },
-                                                      3: { 'enum': 'ScanAdvancedOutputConfigureScanTrigger',               }, }, },
+    'GetRelayPosition':             { 'parameters': { 2: { 'enum': 'RelayPosition',            }, }, },
+    'RelayControl':                 { 'parameters': { 2: { 'enum': 'RelayAction',              }, }, },
+    'CanConnect':                   { 'parameters': { 3: { 'enum': 'PathCapability',           }, }, },
+    'RouteScanAdvancedOutput':      { 'parameters': { 1: { 'enum': 'ScanAdvancedOutput',       },
+                                                      2: { 'enum': 'ScanAdvancedOutput',       }, }, },
+    'RouteTriggerInput':            { 'parameters': { 1: { 'enum': 'TriggerInput',             },
+                                                      2: { 'enum': 'TriggerInput',             }, }, },
+    'ConfigureScanList':            { 'parameters': { 2: { 'enum': 'ScanMode',                 }, }, },
+    'ConfigureScanTrigger':         { 'parameters': { 2: { 'enum': 'TriggerInput',             },
+                                                      3: { 'enum': 'ScanAdvancedOutput',       }, }, },
 }
 
 # TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval? Issue #259
 functions_params_types = {
     'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
+    'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetNextInterchangeWarning':    { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'GetNextCoercionRecord':        { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'GetChannelName':               { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
