@@ -233,25 +233,6 @@ class TestSession(object):
             except AttributeError as e:
                 pass
 
-    def test_get_channel_based_attribute(self):
-        self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
-        pi = 3.14159
-        self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = pi
-        with nifake.Session('dev1') as session:
-            attr_double = session['0,1'].read_write_double
-            assert attr_double == pi
-            self.patched_library.niFake_GetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'0,1', 1000001, ANY)
-
-    def test_channel_based_attribute_with_context_manager(self):
-        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
-        self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
-        with nifake.Session('dev1') as session:
-            with session['3'] as channel3:
-                channel3.read_write_integer = 13
-                channel3.read_write_bool = True
-            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', 1000004, 13)
-            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', 1000000, 1)
-
     # Retrieving buffers and strings
 
     # TODO(marcoskirsch):
@@ -400,6 +381,49 @@ class TestSession(object):
             session.float_enum = enum_value
             attribute_id = 1000005
             self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, enum_value.value)
+
+    def test_get_attribute_channel_int32(self):
+        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
+        test_number = 100
+        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = test_number
+        with nifake.Session('dev1') as session:
+            attr_int = session['0,1'].read_write_integer
+            assert(attr_int == test_number)
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'0,1', 1000004, ANY)
+
+    def test_set_attribute_channel_real64(self):
+        self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
+        attribute_id = 1000001
+        test_number = 0.001
+        with nifake.Session('dev1') as session:
+            session['0-24'].read_write_double = test_number
+            self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'0-24', attribute_id, test_number)
+
+    def test_get_attribute_channel_context_manager_string_and_boolean(self):
+        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
+        test_string = 'Hello World!'
+        self.side_effects_helper['GetAttributeViString']['attributeValue'] = test_string
+        self.patched_library.niFake_GetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_GetAttributeViBoolean
+        self.side_effects_helper['GetAttributeViBoolean']['attributeValue'] = 0
+        with nifake.Session('dev1') as session:
+            with session['5'] as channel5:
+                assert test_string == channel5.read_write_string
+                assert not channel5.read_write_bool
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, b'5', 1000002, 0, None), call(SESSION_NUM_FOR_TEST, b'5', 1000002, len('Hello World!'), ANY)]
+            self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAttributeViString.call_count == 2
+            self.patched_library.niFake_GetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b'5', 1000000, ANY)
+
+    def test_set_attribute_channel_context_manager_boolean_and_enum(self):
+        self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
+        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
+        with nifake.Session('dev1') as session:
+            with session['3'] as channel3:
+                channel3.read_write_bool = True
+                channel3.read_write_color = nifake.Color.YELLOW
+            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', 1000003, 2)
+            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', 1000000, 1)
 
     def test_set_attribute_error(self):
         test_error_code = -1
