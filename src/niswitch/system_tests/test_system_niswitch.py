@@ -34,6 +34,29 @@ def test_channel_connection(session):
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
 
 
+'''
+def test_continuous_software_scanning(session):
+    with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
+        scan_list = 'r0->c0; r1->c1'
+        session.scan_list = scan_list
+        assert session.scan_list == scan_list
+        session.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE, False)
+        session.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.PXI_TRIG0, False)
+        session.configure_scan_list(scan_list, niswitch.ScanMode.BREAK_BEFORE_MAKE)
+        session.configure_scan_trigger(0, niswitch.TriggerInput.SW_TRIG_FUNC, niswitch.ScanAdvancedOutput.NONE)
+        session.set_continuous_scan(True)
+        session.commit()
+        with session.initiate():
+            assert session.is_scanning() is True
+            session.send_software_trigger()
+            try:
+                session.wait_for_scan_complete(100)
+                assert False
+            except niswitch.Error as e:
+                assert e.code == -1074126826  # Error : Max time exceeded.
+'''
+
+
 # Attribute Tests
 def test_vi_boolean_attribute(session):
     session.interchange_check = False

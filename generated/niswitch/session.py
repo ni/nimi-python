@@ -986,14 +986,14 @@ class _SessionBase(object):
                 scan delay is in addition to the settling time.The driver uses this
                 value to set the SCAN_DELAY attribute. Express this
                 value in seconds. Default value: 0.0 s
-            trigger_input (enums.TriggerInputConfigureScanTrigger):Trigger source you want the switch module to use during scanning. The
+            trigger_input (enums.TriggerInput):Trigger source you want the switch module to use during scanning. The
                 driver uses this value to set the TRIGGER_INPUT
                 attribute. The switch device waits for the trigger you specify when it
                 encounters a semicolon in the scanlist. When the trigger occurs, the
                 switch device advances to the next entry in the scanlist. Refer to the
                 TRIGGER_INPUT topic in the NI Switches Help for a list
                 of valid values.
-            scan_advanced_output (enums.ScanAdvancedOutputConfigureScanTrigger):Output destination of the scan advanced trigger signal. The driver uses
+            scan_advanced_output (enums.ScanAdvancedOutput):Output destination of the scan advanced trigger signal. The driver uses
                 this value to set the SCAN_ADVANCED_OUTPUT attribute.
                 After the switch processes each entry in the scan list, it waits the
                 length of time you specify in the Scan Delay parameter and then asserts
@@ -1001,10 +1001,10 @@ class _SessionBase(object):
                 SCAN_ADVANCED_OUTPUT topic in the NI Switches Help for
                 a list of valid values.
         '''
-        if type(trigger_input) is not enums.TriggerInputConfigureScanTrigger:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputConfigureScanTrigger))
-        if type(scan_advanced_output) is not enums.ScanAdvancedOutputConfigureScanTrigger:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutputConfigureScanTrigger))
+        if type(trigger_input) is not enums.TriggerInput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
+        if type(scan_advanced_output) is not enums.ScanAdvancedOutput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
         error_code = self.library.niSwitch_ConfigureScanTrigger(self.vi, scan_delay, trigger_input.value, scan_advanced_output.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1991,10 +1991,10 @@ class _SessionBase(object):
         to the front or rear connector.
 
         Args:
-            scan_advanced_output_connector (enums.TriggerInputConnector):The scan advanced trigger destination. Valid locations are the
+            scan_advanced_output_connector (enums.ScanAdvancedOutput):The scan advanced trigger destination. Valid locations are the
                 NISWITCH_VAL_FRONTCONNECTOR and NISWITCH_VAL_REARCONNECTOR. Default
                 value: NISWITCH_VAL_FRONTCONNECTOR
-            scan_advanced_output_bus_line (enums.TriggerInputBusLine):The trigger line to route the scan advanced output trigger from the
+            scan_advanced_output_bus_line (enums.ScanAdvancedOutput):The trigger line to route the scan advanced output trigger from the
                 front or rear connector. Select NISWITCH_VAL_NONE to break an existing
                 route. Default value: None Valid Values: NISWITCH_VAL_NONE
                 NISWITCH_VAL_TTL0 NISWITCH_VAL_TTL1 NISWITCH_VAL_TTL2
@@ -2003,10 +2003,10 @@ class _SessionBase(object):
             invert (bool):If VI_TRUE, inverts the input trigger signal from falling to rising or
                 vice versa. Default value: VI_FALSE
         '''
-        if type(scan_advanced_output_connector) is not enums.TriggerInputConnector:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputConnector))
-        if type(scan_advanced_output_bus_line) is not enums.TriggerInputBusLine:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputBusLine))
+        if type(scan_advanced_output_connector) is not enums.ScanAdvancedOutput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
+        if type(scan_advanced_output_bus_line) is not enums.ScanAdvancedOutput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
         error_code = self.library.niSwitch_RouteScanAdvancedOutput(self.vi, scan_advanced_output_connector.value, scan_advanced_output_bus_line.value, invert)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2019,11 +2019,11 @@ class _SessionBase(object):
         specify None for trigger bus line parameter.
 
         Args:
-            trigger_input_connector (enums.TriggerInputConnector):The location of the input trigger source on the switch module. Valid
+            trigger_input_connector (enums.TriggerInput):The location of the input trigger source on the switch module. Valid
                 locations are the NISWITCH_VAL_FRONTCONNECTOR and
                 NISWITCH_VAL_REARCONNECTOR. Default value:
                 NISWITCH_VAL_FRONTCONNECTOR
-            trigger_input_bus_line (enums.TriggerInputBusLine):The trigger line to route the input trigger. Select NISWITCH_VAL_NONE
+            trigger_input_bus_line (enums.TriggerInput):The trigger line to route the input trigger. Select NISWITCH_VAL_NONE
                 to break an existing route. Default value: None Valid Values:
                 NISWITCH_VAL_NONE NISWITCH_VAL_TTL0 NISWITCH_VAL_TTL1
                 NISWITCH_VAL_TTL2 NISWITCH_VAL_TTL3 NISWITCH_VAL_TTL4
@@ -2031,85 +2031,11 @@ class _SessionBase(object):
             invert (bool):If VI_TRUE, inverts the input trigger signal from falling to rising or
                 vice versa. Default value: VI_FALSE
         '''
-        if type(trigger_input_connector) is not enums.TriggerInputConnector:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputConnector))
-        if type(trigger_input_bus_line) is not enums.TriggerInputBusLine:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputBusLine))
+        if type(trigger_input_connector) is not enums.TriggerInput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
+        if type(trigger_input_bus_line) is not enums.TriggerInput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
         error_code = self.library.niSwitch_RouteTriggerInput(self.vi, trigger_input_connector.value, trigger_input_bus_line.value, invert)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def scan(self, scanlist, initiation):
-        '''scan
-
-        This function is a high level operation for scanning. It takes the scan
-        list provided, programs the switching hardware and initiates the scan.
-        Once initiation is complete, the operation will return. The scan list
-        itself is comprised of a list of channel connections separated by
-        semicolons. For example, the following scan list would scan the first
-        three channels of a multiplexer. Example: com0->ch0; com0->ch1;
-        com0->ch2; For more information on scan list syntax, refer to the NI
-        Switches Help. To see the status of the scan, you can call either
-        is_scanning or wait_for_scan_complete. Use the
-        configure_scan_trigger function to configure the scan trigger.
-        Use the _abort_scan function to stop the scan if you are in
-        continuous scan mode (Refer to set_continuous_scan); otherwise
-        the scan halts automatically when the end of the scan list is reached.
-        For reference, this operation is equivalent to calling
-        configure_scan_list and _initiate_scan.
-
-        Args:
-            scanlist (str):Pass the scan list you want the instrument to use. The driver uses this
-                value to set the SCAN_LIST attribute. The scan list is
-                a string that specifies channel connections and trigger conditions for
-                scanning. After you call the _initiate_scan function, the
-                instrument makes or breaks connections and waits for triggers according
-                to the instructions in the scan list. The scan list is comprised of
-                channel names that you separate with special characters. These special
-                characters determine the operation the scanner performs on the channels
-                when it executes this scan list. To create a path between two channels,
-                use '->' (a dash followed by a '>' sign) between the two channel names.
-                Example: "CH1->CH2" instructs the switch to make a path from channel CH1
-                to channel CH2. To break or clear a path, use a '~' (tilde) as a prefix
-                before the path. Example: "~CH1->CH2" instructs the switch to break the
-                path from channel CH1 to channel CH2. To wait for a trigger event, use a
-                ';' (semicolon) as a separator between paths. Example:
-                "CH1->CH2;CH3->CH4" instructs the switch to make the path from channel
-                CH1 to channel CH2, wait for a trigger, and then make the path from CH3
-                to CH4. To tell the switch device to create multiple paths
-                simultaneously, use an '&' (ampersand) character as a separator between
-                the paths. Example: "CH0->CH1; CH1->CH2 & CH3->CH4" instructs the
-                scanner to make the path between channels CH0 and CH1, wait for a
-                trigger, and then simultaneously make the paths between channels CH1 and
-                CH2 and between channels CH3 and CH4. For SCXI use the following syntax
-                : - For a single channel: sc!md!ch -> com0; For example: for Chassis 1,
-                module in slot 3, and ch 30 the syntax is: sc1!md3!ch30 ->com0; For
-                multiple sequential channels: sc!md!ch -> com0; For example: for Chassis
-                1, module in slot 3, and ch 30 to 19 the syntax is: sc1!md3!ch30:19
-                ->com0; will scan from channel 30 to 19 sequentially. For multiple
-                randomly ordered channels: sc!md!ch -> com0; sc!md!ch -> com0; For
-                example: for Chassis 1, module in slot 3 and slot 4, and ch 30 and 5 on
-                slot 3 and channel 19 on slot 4the syntax is: sc1!md3!ch30 ->com0;
-                sc1!md4!ch19 ->com0; sc1!md3!ch5 ->com0; This will scan ch30 of slot 3
-                then ch19 of slot 4 then ch5 of slot3. For more information on scan list
-                syntax, refer to the NI Switches Help. Default Value: None
-            initiation (int):Use the initiation paramater to specify whether the switch device or the
-                measurement device will be initiating the scan trigger handshake. This
-                parameter determines whether to wait for the scan to reach a trigger
-                point before completing. If the Measurement Device will initiate the
-                scan, set this parameter to
-                NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED. This function will then
-                wait until the switch is waiting for a trigger from the measurement
-                device before completing. If the Switch will initiate the scan, set this
-                parameter to NISWITCH_VAL_SWITCH_INITIATED. This function will then
-                complete immediately after initating the scan. You should have already
-                set up your DMM to wait for a trigger before calling this function with
-                initiation set to NISWITCH_VAL_SWITCH_INITIATED. Valid values:
-                NISWITCH_VAL_SWITCH_INITIATED - Switch Initiated
-                NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED - Measurement device
-                initiated Default value: NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED
-        '''
-        error_code = self.library.niSwitch_Scan(self.vi, scanlist.encode('ascii'), initiation)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2339,7 +2265,7 @@ class _SessionBase(object):
                 a manual input box. - If the attribute in this ring control has
                 constants as valid values, you can view the constants by moving to the
                 Attribute Value control and pressing .
-            attribute_value (int):Pass the value to which you want to set the attribute. From the function
+            attribute_value (str):Pass the value to which you want to set the attribute. From the function
                 panel window, you can use this control as follows. - If the attribute
                 currently showing in the Attribute ID ring control has constants as
                 valid values, you can view a list of the constants by pressing on this
@@ -2347,7 +2273,7 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self.library.niSwitch_SetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self.library.niSwitch_SetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

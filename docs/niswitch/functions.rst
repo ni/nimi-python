@@ -157,7 +157,7 @@ niswitch.Session methods
 
         
 
-    :type trigger_input: :py:data:`niswitch.TriggerInputConfigureScanTrigger`
+    :type trigger_input: :py:data:`niswitch.TriggerInput`
     :param scan_advanced_output:
 
 
@@ -171,7 +171,7 @@ niswitch.Session methods
 
         
 
-    :type scan_advanced_output: :py:data:`niswitch.ScanAdvancedOutputConfigureScanTrigger`
+    :type scan_advanced_output: :py:data:`niswitch.ScanAdvancedOutput`
 
 .. function:: connect(channel1, channel2)
 
@@ -1006,7 +1006,7 @@ niswitch.Session methods
 
         
 
-    :type scan_advanced_output_connector: :py:data:`niswitch.TriggerInputConnector`
+    :type scan_advanced_output_connector: :py:data:`niswitch.ScanAdvancedOutput`
     :param scan_advanced_output_bus_line:
 
 
@@ -1019,7 +1019,7 @@ niswitch.Session methods
 
         
 
-    :type scan_advanced_output_bus_line: :py:data:`niswitch.TriggerInputBusLine`
+    :type scan_advanced_output_bus_line: :py:data:`niswitch.ScanAdvancedOutput`
     :param invert:
 
 
@@ -1049,7 +1049,7 @@ niswitch.Session methods
 
         
 
-    :type trigger_input_connector: :py:data:`niswitch.TriggerInputConnector`
+    :type trigger_input_connector: :py:data:`niswitch.TriggerInput`
     :param trigger_input_bus_line:
 
 
@@ -1061,7 +1061,7 @@ niswitch.Session methods
 
         
 
-    :type trigger_input_bus_line: :py:data:`niswitch.TriggerInputBusLine`
+    :type trigger_input_bus_line: :py:data:`niswitch.TriggerInput`
     :param invert:
 
 
@@ -1071,91 +1071,6 @@ niswitch.Session methods
         
 
     :type invert: bool
-
-.. function:: scan(scanlist, initiation)
-
-    This function is a high level operation for scanning. It takes the scan
-    list provided, programs the switching hardware and initiates the scan.
-    Once initiation is complete, the operation will return. The scan list
-    itself is comprised of a list of channel connections separated by
-    semicolons. For example, the following scan list would scan the first
-    three channels of a multiplexer. Example: com0->ch0; com0->ch1;
-    com0->ch2; For more information on scan list syntax, refer to the NI
-    Switches Help. To see the status of the scan, you can call either
-    :py:func:`niswitch.is_scanning` or :py:func:`niswitch.wait_for_scan_complete`. Use the
-    :py:func:`niswitch.configure_scan_trigger` function to configure the scan trigger.
-    Use the :py:func:`niswitch._abort_scan` function to stop the scan if you are in
-    continuous scan mode (Refer to :py:func:`niswitch.set_continuous_scan`); otherwise
-    the scan halts automatically when the end of the scan list is reached.
-    For reference, this operation is equivalent to calling
-    :py:func:`niswitch.configure_scan_list` and :py:func:`niswitch._initiate_scan`.
-
-    
-
-
-    :param scanlist:
-
-
-        Pass the scan list you want the instrument to use. The driver uses this
-        value to set the :py:data:`niswitch.SCAN\_LIST` attribute. The scan list is
-        a string that specifies channel connections and trigger conditions for
-        scanning. After you call the :py:func:`niswitch._initiate_scan` function, the
-        instrument makes or breaks connections and waits for triggers according
-        to the instructions in the scan list. The scan list is comprised of
-        channel names that you separate with special characters. These special
-        characters determine the operation the scanner performs on the channels
-        when it executes this scan list. To create a path between two channels,
-        use '->' (a dash followed by a '>' sign) between the two channel names.
-        Example: "CH1->CH2" instructs the switch to make a path from channel CH1
-        to channel CH2. To break or clear a path, use a '~' (tilde) as a prefix
-        before the path. Example: "~CH1->CH2" instructs the switch to break the
-        path from channel CH1 to channel CH2. To wait for a trigger event, use a
-        ';' (semicolon) as a separator between paths. Example:
-        "CH1->CH2;CH3->CH4" instructs the switch to make the path from channel
-        CH1 to channel CH2, wait for a trigger, and then make the path from CH3
-        to CH4. To tell the switch device to create multiple paths
-        simultaneously, use an '&' (ampersand) character as a separator between
-        the paths. Example: "CH0->CH1; CH1->CH2 & CH3->CH4" instructs the
-        scanner to make the path between channels CH0 and CH1, wait for a
-        trigger, and then simultaneously make the paths between channels CH1 and
-        CH2 and between channels CH3 and CH4. For SCXI use the following syntax
-        : - For a single channel: sc!md!ch -> com0; For example: for Chassis 1,
-        module in slot 3, and ch 30 the syntax is: sc1!md3!ch30 ->com0; For
-        multiple sequential channels: sc!md!ch -> com0; For example: for Chassis
-        1, module in slot 3, and ch 30 to 19 the syntax is: sc1!md3!ch30:19
-        ->com0; will scan from channel 30 to 19 sequentially. For multiple
-        randomly ordered channels: sc!md!ch -> com0; sc!md!ch -> com0; For
-        example: for Chassis 1, module in slot 3 and slot 4, and ch 30 and 5 on
-        slot 3 and channel 19 on slot 4the syntax is: sc1!md3!ch30 ->com0;
-        sc1!md4!ch19 ->com0; sc1!md3!ch5 ->com0; This will scan ch30 of slot 3
-        then ch19 of slot 4 then ch5 of slot3. For more information on scan list
-        syntax, refer to the NI Switches Help. Default Value: None
-
-        
-
-    :type scanlist: str
-    :param initiation:
-
-
-        Use the initiation paramater to specify whether the switch device or the
-        measurement device will be initiating the scan trigger handshake. This
-        parameter determines whether to wait for the scan to reach a trigger
-        point before completing. If the Measurement Device will initiate the
-        scan, set this parameter to
-        NISWITCH\_VAL\_MEASUREMENT\_DEVICE\_INITIATED. This function will then
-        wait until the switch is waiting for a trigger from the measurement
-        device before completing. If the Switch will initiate the scan, set this
-        parameter to NISWITCH\_VAL\_SWITCH\_INITIATED. This function will then
-        complete immediately after initating the scan. You should have already
-        set up your DMM to wait for a trigger before calling this function with
-        initiation set to NISWITCH\_VAL\_SWITCH\_INITIATED. Valid values:
-        NISWITCH\_VAL\_SWITCH\_INITIATED - Switch Initiated
-        NISWITCH\_VAL\_MEASUREMENT\_DEVICE\_INITIATED - Measurement device
-        initiated Default value: NISWITCH\_VAL\_MEASUREMENT\_DEVICE\_INITIATED
-
-        
-
-    :type initiation: int
 
 .. function:: send_software_trigger()
 
