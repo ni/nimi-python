@@ -108,9 +108,6 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViReal64']['attributeValue'] = None
-        self._defaults['GetAttributeViSession'] = {}
-        self._defaults['GetAttributeViSession']['return'] = 0
-        self._defaults['GetAttributeViSession']['attributeValue'] = None
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['attributeValue'] = None
@@ -166,9 +163,6 @@ class SideEffectsHelper(object):
         self._defaults['IsUnderRange'] = {}
         self._defaults['IsUnderRange']['return'] = 0
         self._defaults['IsUnderRange']['isUnderRange'] = None
-        self._defaults['LockSession'] = {}
-        self._defaults['LockSession']['return'] = 0
-        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['PerformOpenCableComp'] = {}
         self._defaults['PerformOpenCableComp']['return'] = 0
         self._defaults['PerformOpenCableComp']['conductance'] = None
@@ -206,13 +200,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViInt32']['return'] = 0
         self._defaults['SetAttributeViReal64'] = {}
         self._defaults['SetAttributeViReal64']['return'] = 0
-        self._defaults['SetAttributeViSession'] = {}
-        self._defaults['SetAttributeViSession']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
-        self._defaults['UnlockSession'] = {}
-        self._defaults['UnlockSession']['return'] = 0
-        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['error_query'] = {}
@@ -465,14 +454,6 @@ class SideEffectsHelper(object):
         attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
         return self._defaults['GetAttributeViReal64']['return']
 
-    def niDMM_GetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeViSession']['return'] != 0:
-            return self._defaults['GetAttributeViSession']['return']
-        if self._defaults['GetAttributeViSession']['attributeValue'] is None:
-            raise MockFunctionCallError("niDMM_GetAttributeViSession", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViSession']['attributeValue']
-        return self._defaults['GetAttributeViSession']['return']
-
     def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
@@ -633,14 +614,6 @@ class SideEffectsHelper(object):
         is_under_range.contents.value = self._defaults['IsUnderRange']['isUnderRange']
         return self._defaults['IsUnderRange']['return']
 
-    def niDMM_LockSession(self, vi, caller_has_lock):  # noqa: N802
-        if self._defaults['LockSession']['return'] != 0:
-            return self._defaults['LockSession']['return']
-        if self._defaults['LockSession']['callerHasLock'] is None:
-            raise MockFunctionCallError("niDMM_LockSession", param='callerHasLock')
-        caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
-        return self._defaults['LockSession']['return']
-
     def niDMM_PerformOpenCableComp(self, vi, conductance, susceptance):  # noqa: N802
         if self._defaults['PerformOpenCableComp']['return'] != 0:
             return self._defaults['PerformOpenCableComp']['return']
@@ -739,23 +712,10 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViReal64']['return']
         return self._defaults['SetAttributeViReal64']['return']
 
-    def niDMM_SetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['SetAttributeViSession']['return'] != 0:
-            return self._defaults['SetAttributeViSession']['return']
-        return self._defaults['SetAttributeViSession']['return']
-
     def niDMM_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['SetAttributeViString']['return'] != 0:
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
-
-    def niDMM_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
-        if self._defaults['UnlockSession']['return'] != 0:
-            return self._defaults['UnlockSession']['return']
-        if self._defaults['UnlockSession']['callerHasLock'] is None:
-            raise MockFunctionCallError("niDMM_UnlockSession", param='callerHasLock')
-        caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
-        return self._defaults['UnlockSession']['return']
 
     def niDMM_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
@@ -878,8 +838,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_GetAttributeViInt32.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetAttributeViReal64.side_effect = MockFunctionCallError("niDMM_GetAttributeViReal64")
         mock_library.niDMM_GetAttributeViReal64.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_GetAttributeViSession.side_effect = MockFunctionCallError("niDMM_GetAttributeViSession")
-        mock_library.niDMM_GetAttributeViSession.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetAttributeViString.side_effect = MockFunctionCallError("niDMM_GetAttributeViString")
         mock_library.niDMM_GetAttributeViString.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetAutoRangeValue.side_effect = MockFunctionCallError("niDMM_GetAutoRangeValue")
@@ -914,8 +872,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_IsOverRange.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_IsUnderRange.side_effect = MockFunctionCallError("niDMM_IsUnderRange")
         mock_library.niDMM_IsUnderRange.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_LockSession.side_effect = MockFunctionCallError("niDMM_LockSession")
-        mock_library.niDMM_LockSession.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_PerformOpenCableComp.side_effect = MockFunctionCallError("niDMM_PerformOpenCableComp")
         mock_library.niDMM_PerformOpenCableComp.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_PerformShortCableComp.side_effect = MockFunctionCallError("niDMM_PerformShortCableComp")
@@ -942,12 +898,8 @@ class SideEffectsHelper(object):
         mock_library.niDMM_SetAttributeViInt32.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_SetAttributeViReal64.side_effect = MockFunctionCallError("niDMM_SetAttributeViReal64")
         mock_library.niDMM_SetAttributeViReal64.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_SetAttributeViSession.side_effect = MockFunctionCallError("niDMM_SetAttributeViSession")
-        mock_library.niDMM_SetAttributeViSession.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_SetAttributeViString.side_effect = MockFunctionCallError("niDMM_SetAttributeViString")
         mock_library.niDMM_SetAttributeViString.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_UnlockSession.side_effect = MockFunctionCallError("niDMM_UnlockSession")
-        mock_library.niDMM_UnlockSession.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_close.side_effect = MockFunctionCallError("niDMM_close")
         mock_library.niDMM_close.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_error_query.side_effect = MockFunctionCallError("niDMM_error_query")
