@@ -18,6 +18,8 @@ config = {
     },
     'context_manager_name': {
         'task': 'scan',
+        'initiate': 'initiate_scan',
+        'abort': 'abort_scan',
     },
     'init_function': 'InitWithTopology',
 }

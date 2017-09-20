@@ -18,6 +18,8 @@ ${encoding_tag}
     functions = helper.extract_codegen_functions(functions)
 
     session_context_manager = '_' + config['context_manager_name']['task'].title() if 'task' in config['context_manager_name'] else None
+    session_context_manager_initiate = '_' + config['context_manager_name']['initiate']
+    session_context_manager_abort = '_' + config['context_manager_name']['abort']
 %>\
 import ctypes
 
@@ -35,11 +37,11 @@ class ${session_context_manager}(object):
         self.session = session
 
     def __enter__(self):
-        self.session._initiate()
+        self.session.${session_context_manager_initiate}()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.session._abort()
+        self.session.${session_context_manager_abort}()
 
 
 % endif
