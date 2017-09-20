@@ -55,7 +55,6 @@ class Library(object):
         self.niDMM_GetAttributeViBoolean_cfunc = None
         self.niDMM_GetAttributeViInt32_cfunc = None
         self.niDMM_GetAttributeViReal64_cfunc = None
-        self.niDMM_GetAttributeViSession_cfunc = None
         self.niDMM_GetAttributeViString_cfunc = None
         self.niDMM_GetAutoRangeValue_cfunc = None
         self.niDMM_GetCalCount_cfunc = None
@@ -73,7 +72,6 @@ class Library(object):
         self.niDMM_Initiate_cfunc = None
         self.niDMM_IsOverRange_cfunc = None
         self.niDMM_IsUnderRange_cfunc = None
-        self.niDMM_LockSession_cfunc = None
         self.niDMM_PerformOpenCableComp_cfunc = None
         self.niDMM_PerformShortCableComp_cfunc = None
         self.niDMM_Read_cfunc = None
@@ -87,9 +85,7 @@ class Library(object):
         self.niDMM_SetAttributeViBoolean_cfunc = None
         self.niDMM_SetAttributeViInt32_cfunc = None
         self.niDMM_SetAttributeViReal64_cfunc = None
-        self.niDMM_SetAttributeViSession_cfunc = None
         self.niDMM_SetAttributeViString_cfunc = None
-        self.niDMM_UnlockSession_cfunc = None
         self.niDMM_close_cfunc = None
         self.niDMM_error_query_cfunc = None
         self.niDMM_reset_cfunc = None
@@ -406,14 +402,6 @@ class Library(object):
                 self.niDMM_GetAttributeViReal64_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def niDMM_GetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_GetAttributeViSession_cfunc is None:
-                self.niDMM_GetAttributeViSession_cfunc = self._library.niDMM_GetAttributeViSession
-                self.niDMM_GetAttributeViSession_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViAttr_ctype, ctypes.POINTER(ViSession_ctype)]  # noqa: F405
-                self.niDMM_GetAttributeViSession_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_GetAttributeViSession_cfunc(vi, channel_name, attribute_id, attribute_value)
-
     def niDMM_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetAttributeViString_cfunc is None:
@@ -550,14 +538,6 @@ class Library(object):
                 self.niDMM_IsUnderRange_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_IsUnderRange_cfunc(vi, measurement_value, is_under_range)
 
-    def niDMM_LockSession(self, vi, caller_has_lock):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_LockSession_cfunc is None:
-                self.niDMM_LockSession_cfunc = self._library.niDMM_LockSession
-                self.niDMM_LockSession_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViBoolean_ctype)]  # noqa: F405
-                self.niDMM_LockSession_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_LockSession_cfunc(vi, caller_has_lock)
-
     def niDMM_PerformOpenCableComp(self, vi, conductance, susceptance):  # noqa: N802
         with self._func_lock:
             if self.niDMM_PerformOpenCableComp_cfunc is None:
@@ -662,14 +642,6 @@ class Library(object):
                 self.niDMM_SetAttributeViReal64_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def niDMM_SetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_SetAttributeViSession_cfunc is None:
-                self.niDMM_SetAttributeViSession_cfunc = self._library.niDMM_SetAttributeViSession
-                self.niDMM_SetAttributeViSession_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViAttr_ctype, ViSession_ctype]  # noqa: F405
-                self.niDMM_SetAttributeViSession_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_SetAttributeViSession_cfunc(vi, channel_name, attribute_id, attribute_value)
-
     def niDMM_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDMM_SetAttributeViString_cfunc is None:
@@ -677,14 +649,6 @@ class Library(object):
                 self.niDMM_SetAttributeViString_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViAttr_ctype, ViString_ctype]  # noqa: F405
                 self.niDMM_SetAttributeViString_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
-
-    def niDMM_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_UnlockSession_cfunc is None:
-                self.niDMM_UnlockSession_cfunc = self._library.niDMM_UnlockSession
-                self.niDMM_UnlockSession_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViBoolean_ctype)]  # noqa: F405
-                self.niDMM_UnlockSession_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_UnlockSession_cfunc(vi, caller_has_lock)
 
     def niDMM_close(self, vi):  # noqa: N802
         with self._func_lock:
