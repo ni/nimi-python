@@ -52,7 +52,6 @@ class Library(object):
         self.niSwitch_ResetWithDefaults_cfunc = None
         self.niSwitch_RouteScanAdvancedOutput_cfunc = None
         self.niSwitch_RouteTriggerInput_cfunc = None
-        self.niSwitch_Scan_cfunc = None
         self.niSwitch_SendSoftwareTrigger_cfunc = None
         self.niSwitch_SetAttributeViBoolean_cfunc = None
         self.niSwitch_SetAttributeViInt32_cfunc = None
@@ -356,14 +355,6 @@ class Library(object):
                 self.niSwitch_RouteTriggerInput_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_RouteTriggerInput_cfunc(vi, trigger_input_connector, trigger_input_bus_line, invert)
 
-    def niSwitch_Scan(self, vi, scanlist, initiation):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_Scan_cfunc is None:
-                self.niSwitch_Scan_cfunc = self._library.niSwitch_Scan
-                self.niSwitch_Scan_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViInt16_ctype]  # noqa: F405
-                self.niSwitch_Scan_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_Scan_cfunc(vi, scanlist, initiation)
-
     def niSwitch_SendSoftwareTrigger(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_SendSoftwareTrigger_cfunc is None:
@@ -408,7 +399,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_SetAttributeViString_cfunc is None:
                 self.niSwitch_SetAttributeViString_cfunc = self._library.niSwitch_SetAttributeViString
-                self.niSwitch_SetAttributeViString_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViAttr_ctype, ViChar_ctype]  # noqa: F405
+                self.niSwitch_SetAttributeViString_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViAttr_ctype, ViString_ctype]  # noqa: F405
                 self.niSwitch_SetAttributeViString_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
