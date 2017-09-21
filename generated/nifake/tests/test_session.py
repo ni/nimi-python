@@ -449,6 +449,7 @@ class TestSession(object):
             assert math.isnan(session.read(test_maximum_time))
 
     '''
+    # TODO(bhaswath): Enable test once issue 320 is fixed
     def test_read_with_warning(self):
         test_maximum_time = 10
         test_reading = float('nan')
