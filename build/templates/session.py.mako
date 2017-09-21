@@ -17,9 +17,11 @@ ${encoding_tag}
 
     functions = helper.extract_codegen_functions(functions)
 
-    session_context_manager = '_' + config['context_manager_name']['task'].title() if 'task' in config['context_manager_name'] else None
-    session_context_manager_initiate = '_' + config['context_manager_name']['initiate']
-    session_context_manager_abort = '_' + config['context_manager_name']['abort']
+    session_context_manager = None
+    if 'task' in config['context_manager_name']:
+        session_context_manager = '_' + config['context_manager_name']['task'].title()
+        session_context_manager_initiate = '_' + config['context_manager_name']['initiate']
+        session_context_manager_abort = '_' + config['context_manager_name']['abort']
 %>\
 import ctypes
 
