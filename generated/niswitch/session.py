@@ -15,11 +15,11 @@ class _Scan(object):
         self.session = session
 
     def __enter__(self):
-        self.session._initiate()
+        self.session._initiate_scan()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.session._abort()
+        self.session._abort_scan()
 
 
 class _SessionBase(object):

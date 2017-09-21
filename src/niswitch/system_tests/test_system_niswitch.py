@@ -34,7 +34,6 @@ def test_channel_connection(session):
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
 
 
-'''
 def test_continuous_software_scanning(session):
     with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
         scan_list = 'r0->c0; r1->c1'
@@ -54,7 +53,6 @@ def test_continuous_software_scanning(session):
                 assert False
             except niswitch.Error as e:
                 assert e.code == -1074126826  # Error : Max time exceeded.
-'''
 
 
 # Attribute Tests
