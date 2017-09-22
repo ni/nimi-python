@@ -395,4 +395,4 @@ class TestSession(object):
         attrib_string = 'This is test string'
         with nifake.Session('dev1') as session:
             session.read_write_string = attrib_string
-            self.patched_library.niFake_SetAttributeViString.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, bytes(attrib_string()
+            self.patched_library.niFake_SetAttributeViString.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, bytes(attrib_string())
