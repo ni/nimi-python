@@ -122,10 +122,6 @@ class SideEffectsHelper(object):
         self._defaults['WaitForScanComplete']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
-        self._defaults['error_query'] = {}
-        self._defaults['error_query']['return'] = 0
-        self._defaults['error_query']['errorCode'] = None
-        self._defaults['error_query']['errorMessage'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
         self._defaults['revision_query'] = {}
@@ -271,10 +267,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetNextCoercionRecord']['return']
         if self._defaults['GetNextCoercionRecord']['coercionRecord'] is None:
             raise MockFunctionCallError("niSwitch_GetNextCoercionRecord", param='coercionRecord')
-        if buffer_size == 0:
-            return len(self._defaults['GetNextCoercionRecord']['coercionRecord'])
-        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetNextCoercionRecord']['coercionRecord'].encode('ascii'))
-        coercion_record.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
+        coercion_record.contents.value = self._defaults['GetNextCoercionRecord']['coercionRecord']
         return self._defaults['GetNextCoercionRecord']['return']
 
     def niSwitch_GetNextInterchangeWarning(self, vi, buffer_size, interchange_warning):  # noqa: N802
@@ -282,10 +275,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetNextInterchangeWarning']['return']
         if self._defaults['GetNextInterchangeWarning']['interchangeWarning'] is None:
             raise MockFunctionCallError("niSwitch_GetNextInterchangeWarning", param='interchangeWarning')
-        if buffer_size == 0:
-            return len(self._defaults['GetNextInterchangeWarning']['interchangeWarning'])
-        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetNextInterchangeWarning']['interchangeWarning'].encode('ascii'))
-        interchange_warning.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
+        interchange_warning.contents.value = self._defaults['GetNextInterchangeWarning']['interchangeWarning']
         return self._defaults['GetNextInterchangeWarning']['return']
 
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
@@ -430,17 +420,6 @@ class SideEffectsHelper(object):
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
-    def niSwitch_error_query(self, vi, error_code, error_message):  # noqa: N802
-        if self._defaults['error_query']['return'] != 0:
-            return self._defaults['error_query']['return']
-        if self._defaults['error_query']['errorCode'] is None:
-            raise MockFunctionCallError("niSwitch_error_query", param='errorCode')
-        error_code.contents.value = self._defaults['error_query']['errorCode']
-        if self._defaults['error_query']['errorMessage'] is None:
-            raise MockFunctionCallError("niSwitch_error_query", param='errorMessage')
-        error_message.contents.value = self._defaults['error_query']['errorMessage']
-        return self._defaults['error_query']['return']
-
     def niSwitch_reset(self, vi):  # noqa: N802
         if self._defaults['reset']['return'] != 0:
             return self._defaults['reset']['return']
@@ -556,8 +535,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_WaitForScanComplete.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_close.side_effect = MockFunctionCallError("niSwitch_close")
         mock_library.niSwitch_close.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_error_query.side_effect = MockFunctionCallError("niSwitch_error_query")
-        mock_library.niSwitch_error_query.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_reset.side_effect = MockFunctionCallError("niSwitch_reset")
         mock_library.niSwitch_reset.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_revision_query.side_effect = MockFunctionCallError("niSwitch_revision_query")

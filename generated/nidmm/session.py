@@ -2271,7 +2271,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViChar(coercion_record_ctype.value)
 
-    def get_next_interchange_warning(self):
+    def get_next_interchange_warning(self, buffer_size):
         '''get_next_interchange_warning
 
         This function returns the interchangeability warnings associated with
@@ -2303,16 +2303,17 @@ class _SessionBase(object):
                 of the number of bytes in the value. If you pass 0, you can pass
                 VI_NULL for the **Interchange_Warning** buffer parameter. The default
                 value is None.
+
+        Returns:
+            interchange_warning (int):Returns the next interchange warning for the IVI session. If there are
+                no interchange warnings, the function returns an empty string. The
+                buffer must contain at least as many elements as the value you specify
+                with the **Buffer_Size** parameter.
         '''
-        buffer_size = 0
-        interchange_warning_ctype = None
-        error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
-        error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
+        interchange_warning_ctype = ctypes_types.ViChar_ctype(0)
+        error_code = self.library.niDMM_GetNextInterchangeWarning(self.vi, buffer_size, ctypes.pointer(interchange_warning_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return interchange_warning_ctype.value.decode("ascii")
+        return python_types.ViChar(interchange_warning_ctype.value)
 
     def get_self_cal_supported(self):
         '''get_self_cal_supported
@@ -2957,28 +2958,6 @@ class _SessionBase(object):
         error_code = self.library.niDMM_close(self.vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def error_query(self):
-        '''error_query
-
-        Reads an **Error_Code** and message from the DMM error queue. National
-        Instruments DMMs do not contain an error queue. Errors are reported as
-        they occur. Therefore, this function does not detect errors; it is
-        included for compliance with the *IviDmm Class Specification*.
-
-        Returns:
-            error_code (int):The **error_code** returned from the instrument.
-
-                The default value is VI_SUCCESS (0).
-            error_message (int):Formats the **Error_Code** into a user-readable message string.
-
-                Note: The array must contain at least 256 elements ViChar[256].
-        '''
-        error_code_ctype = ctypes_types.ViStatus_ctype(0)
-        error_message_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niDMM_error_query(self.vi, ctypes.pointer(error_code_ctype), ctypes.pointer(error_message_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViStatus(error_code_ctype.value), python_types.ViChar(error_message_ctype.value)
 
     def reset(self):
         '''reset

@@ -204,10 +204,6 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
-        self._defaults['error_query'] = {}
-        self._defaults['error_query']['return'] = 0
-        self._defaults['error_query']['errorCode'] = None
-        self._defaults['error_query']['errorMessage'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
         self._defaults['revision_query'] = {}
@@ -571,10 +567,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetNextInterchangeWarning']['return']
         if self._defaults['GetNextInterchangeWarning']['interchangeWarning'] is None:
             raise MockFunctionCallError("niDMM_GetNextInterchangeWarning", param='interchangeWarning')
-        if buffer_size == 0:
-            return len(self._defaults['GetNextInterchangeWarning']['interchangeWarning'])
-        t = nidmm.ctypes_types.ViChar_ctype(self._defaults['GetNextInterchangeWarning']['interchangeWarning'].encode('ascii'))
-        interchange_warning.value = ctypes.cast(t, nidmm.ctypes_types.ViChar_ctype).value
+        interchange_warning.contents.value = self._defaults['GetNextInterchangeWarning']['interchangeWarning']
         return self._defaults['GetNextInterchangeWarning']['return']
 
     def niDMM_GetSelfCalSupported(self, vi, self_cal_supported):  # noqa: N802
@@ -721,17 +714,6 @@ class SideEffectsHelper(object):
         if self._defaults['close']['return'] != 0:
             return self._defaults['close']['return']
         return self._defaults['close']['return']
-
-    def niDMM_error_query(self, vi, error_code, error_message):  # noqa: N802
-        if self._defaults['error_query']['return'] != 0:
-            return self._defaults['error_query']['return']
-        if self._defaults['error_query']['errorCode'] is None:
-            raise MockFunctionCallError("niDMM_error_query", param='errorCode')
-        error_code.contents.value = self._defaults['error_query']['errorCode']
-        if self._defaults['error_query']['errorMessage'] is None:
-            raise MockFunctionCallError("niDMM_error_query", param='errorMessage')
-        error_message.contents.value = self._defaults['error_query']['errorMessage']
-        return self._defaults['error_query']['return']
 
     def niDMM_reset(self, vi):  # noqa: N802
         if self._defaults['reset']['return'] != 0:
@@ -902,8 +884,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_SetAttributeViString.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_close.side_effect = MockFunctionCallError("niDMM_close")
         mock_library.niDMM_close.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_error_query.side_effect = MockFunctionCallError("niDMM_error_query")
-        mock_library.niDMM_error_query.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_reset.side_effect = MockFunctionCallError("niDMM_reset")
         mock_library.niDMM_reset.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_revision_query.side_effect = MockFunctionCallError("niDMM_revision_query")

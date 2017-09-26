@@ -60,7 +60,6 @@ class Library(object):
         self.niSwitch_WaitForDebounce_cfunc = None
         self.niSwitch_WaitForScanComplete_cfunc = None
         self.niSwitch_close_cfunc = None
-        self.niSwitch_error_query_cfunc = None
         self.niSwitch_reset_cfunc = None
         self.niSwitch_revision_query_cfunc = None
         self.niSwitch_self_test_cfunc = None
@@ -414,14 +413,6 @@ class Library(object):
                 self.niSwitch_close_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niSwitch_close_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_close_cfunc(vi)
-
-    def niSwitch_error_query(self, vi, error_code, error_message):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_error_query_cfunc is None:
-                self.niSwitch_error_query_cfunc = self._library.niSwitch_error_query
-                self.niSwitch_error_query_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViInt32_ctype), ctypes.POINTER(ViChar_ctype)]  # noqa: F405
-                self.niSwitch_error_query_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_error_query_cfunc(vi, error_code, error_message)
 
     def niSwitch_reset(self, vi):  # noqa: N802
         with self._func_lock:

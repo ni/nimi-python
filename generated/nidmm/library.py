@@ -87,7 +87,6 @@ class Library(object):
         self.niDMM_SetAttributeViReal64_cfunc = None
         self.niDMM_SetAttributeViString_cfunc = None
         self.niDMM_close_cfunc = None
-        self.niDMM_error_query_cfunc = None
         self.niDMM_reset_cfunc = None
         self.niDMM_revision_query_cfunc = None
         self.niDMM_self_test_cfunc = None
@@ -657,14 +656,6 @@ class Library(object):
                 self.niDMM_close_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niDMM_close_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_close_cfunc(vi)
-
-    def niDMM_error_query(self, vi, error_code, error_message):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_error_query_cfunc is None:
-                self.niDMM_error_query_cfunc = self._library.niDMM_error_query
-                self.niDMM_error_query_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ctypes.POINTER(ViChar_ctype)]  # noqa: F405
-                self.niDMM_error_query_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_error_query_cfunc(vi, error_code, error_message)
 
     def niDMM_reset(self, vi):  # noqa: N802
         with self._func_lock:

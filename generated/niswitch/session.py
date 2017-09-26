@@ -1426,7 +1426,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViStatus(code_ctype.value), description_ctype.value.decode("ascii")
 
-    def get_next_coercion_record(self):
+    def get_next_coercion_record(self, buffer_size):
         '''get_next_coercion_record
 
         This function returns the coercion information associated with the IVI
@@ -1460,18 +1460,26 @@ class _SessionBase(object):
                 function copies the value to the buffer regardless of the number of
                 bytes in the value. If you pass 0, you can pass VI_NULL for the
                 Coercion Record buffer parameter. Default Value: None
-        '''
-        buffer_size = 0
-        coercion_record_ctype = None
-        error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, coercion_record_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        coercion_record_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, coercion_record_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return coercion_record_ctype.value.decode("ascii")
 
-    def get_next_interchange_warning(self):
+        Returns:
+            coercion_record (str):Returns the next coercion record for the IVI session. If there are no
+                coercion records, the function returns an empty string. The buffer must
+                contain at least as many elements as the value you specify with the
+                Buffer Size parameter. If the next coercion record string, including the
+                terminating NUL byte, contains more bytes than you indicate with the
+                Buffer Size parameter, the function copies Buffer Size - 1 bytes into
+                the buffer, places an ASCII NUL byte at the end of the buffer, and
+                returns the buffer size you must pass to get the entire value. For
+                example, if the value is "123456" and the Buffer Size is 4, the function
+                places "123" into the buffer and returns 7. This parameter returns an
+                empty string if no coercion records remain for the session.
+        '''
+        coercion_record_ctype = ctypes_types.ViString_ctype(0)
+        error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, ctypes.pointer(coercion_record_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViString(coercion_record_ctype.value)
+
+    def get_next_interchange_warning(self, buffer_size):
         '''get_next_interchange_warning
 
         This function returns the interchangeability warnings associated with
@@ -1499,16 +1507,25 @@ class _SessionBase(object):
                 number, the function copies the value to the buffer regardless of the
                 number of bytes in the value. If you pass 0, you can pass VI_NULL for
                 the Interchange Warning buffer parameter. Default Value: None
+
+        Returns:
+            interchange_warning (str):Returns the next interchange warning for the IVI session. If there are
+                no interchange warnings, the function returns an empty string. The
+                buffer must contain at least as many elements as the value you specify
+                with the Buffer Size parameter. If the next interchangeability warning
+                string, including the terminating NUL byte, contains more bytes than you
+                indicate with the Buffer Size parameter, the function copies Buffer Size
+                - 1 bytes into the buffer, places an ASCII NUL byte at the end of the
+                buffer, and returns the buffer size you must pass to get the entire
+                value. For example, if the value is "123456" and the Buffer Size is 4,
+                the function places "123" into the buffer and returns 7. This parameter
+                returns an empty string if no interchangeability warnings remain for the
+                session.
         '''
-        buffer_size = 0
-        interchange_warning_ctype = None
-        error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
+        interchange_warning_ctype = ctypes_types.ViString_ctype(0)
+        error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, ctypes.pointer(interchange_warning_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return interchange_warning_ctype.value.decode("ascii")
+        return python_types.ViString(interchange_warning_ctype.value)
 
     def get_path(self, channel1, channel2):
         '''get_path
@@ -2361,27 +2378,6 @@ class _SessionBase(object):
         error_code = self.library.niSwitch_close(self.vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def error_query(self):
-        '''error_query
-
-        This function reads an error code and a message from the instrument's
-        error queue. NI-SWITCH does not have an error queue, so this function
-        never returns any errors.
-
-        Returns:
-            error_code (int):Returns the error code read from the instrument's error queue. NI-SWITCH
-                does not have an error queue, so this function never returns any errors.
-            error_message (int):Returns the error message string read from the instrument's error
-                message queue. You must pass a ViChar array with at least 256 bytes.
-                NI-SWITCH does not have an error queue, so this function never returns
-                anything other than "No error".
-        '''
-        error_code_ctype = ctypes_types.ViInt32_ctype(0)
-        error_message_ctype = (ctypes_types.ViChar_ctype * 256)()
-        error_code = self.library.niSwitch_error_query(self.vi, ctypes.pointer(error_code_ctype), ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(error_code_ctype.value), error_message_ctype.value.decode("ascii")
 
     def reset(self):
         '''reset

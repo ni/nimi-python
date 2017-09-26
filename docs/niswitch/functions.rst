@@ -375,7 +375,7 @@ niswitch.Session methods
 
     :type buffer_size: int
 
-.. function:: get_next_coercion_record()
+.. function:: get_next_coercion_record(buffer_size)
 
     This function returns the coercion information associated with the IVI
     session. This function retrieves and clears the oldest instance in which
@@ -418,7 +418,26 @@ niswitch.Session methods
 
     :type buffer_size: int
 
-.. function:: get_next_interchange_warning()
+    :rtype: str
+    :return:
+
+
+            Returns the next coercion record for the IVI session. If there are no
+            coercion records, the function returns an empty string. The buffer must
+            contain at least as many elements as the value you specify with the
+            Buffer Size parameter. If the next coercion record string, including the
+            terminating NUL byte, contains more bytes than you indicate with the
+            Buffer Size parameter, the function copies Buffer Size - 1 bytes into
+            the buffer, places an ASCII NUL byte at the end of the buffer, and
+            returns the buffer size you must pass to get the entire value. For
+            example, if the value is "123456" and the Buffer Size is 4, the function
+            places "123" into the buffer and returns 7. This parameter returns an
+            empty string if no coercion records remain for the session.
+
+            
+
+
+.. function:: get_next_interchange_warning(buffer_size)
 
     This function returns the interchangeability warnings associated with
     the IVI session. It retrieves and clears the oldest instance in which
@@ -454,6 +473,26 @@ niswitch.Session methods
         
 
     :type buffer_size: int
+
+    :rtype: str
+    :return:
+
+
+            Returns the next interchange warning for the IVI session. If there are
+            no interchange warnings, the function returns an empty string. The
+            buffer must contain at least as many elements as the value you specify
+            with the Buffer Size parameter. If the next interchangeability warning
+            string, including the terminating NUL byte, contains more bytes than you
+            indicate with the Buffer Size parameter, the function copies Buffer Size
+            - 1 bytes into the buffer, places an ASCII NUL byte at the end of the
+            buffer, and returns the buffer size you must pass to get the entire
+            value. For example, if the value is "123456" and the Buffer Size is 4,
+            the function places "123" into the buffer and returns 7. This parameter
+            returns an empty string if no interchangeability warnings remain for the
+            session.
+
+            
+
 
 .. function:: get_path(channel1, channel2)
 
@@ -1171,38 +1210,6 @@ niswitch.Session methods
         
 
     :type maximum_time_ms: int
-
-.. function:: error_query()
-
-    This function reads an error code and a message from the instrument's
-    error queue. NI-SWITCH does not have an error queue, so this function
-    never returns any errors.
-
-    
-
-
-    :rtype: tuple (error_code, error_message)
-
-        WHERE
-
-        error_code (int): 
-
-
-            Returns the error code read from the instrument's error queue. NI-SWITCH
-            does not have an error queue, so this function never returns any errors.
-
-            
-
-        error_message (int): 
-
-
-            Returns the error message string read from the instrument's error
-            message queue. You must pass a ViChar array with at least 256 bytes.
-            NI-SWITCH does not have an error queue, so this function never returns
-            anything other than "No error".
-
-            
-
 
 .. function:: reset()
 

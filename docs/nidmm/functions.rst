@@ -1607,7 +1607,7 @@ nidmm.Session methods
             
 
 
-.. function:: get_next_interchange_warning()
+.. function:: get_next_interchange_warning(buffer_size)
 
     This function returns the interchangeability warnings associated with
     the IVI session. It retrieves and clears the oldest instance in which
@@ -1647,6 +1647,18 @@ nidmm.Session methods
         
 
     :type buffer_size: int
+
+    :rtype: int
+    :return:
+
+
+            Returns the next interchange warning for the IVI session. If there are
+            no interchange warnings, the function returns an empty string. The
+            buffer must contain at least as many elements as the value you specify
+            with the **Buffer\_Size** parameter.
+
+            
+
 
 .. function:: get_self_cal_supported()
 
@@ -2084,39 +2096,6 @@ nidmm.Session methods
     and trigger the device. The NI 4050 and NI 4060 are not supported.
 
     
-
-
-.. function:: error_query()
-
-    Reads an **Error\_Code** and message from the DMM error queue. National
-    Instruments DMMs do not contain an error queue. Errors are reported as
-    they occur. Therefore, this function does not detect errors; it is
-    included for compliance with the *IviDmm Class Specification*.
-
-    
-
-
-    :rtype: tuple (error_code, error_message)
-
-        WHERE
-
-        error_code (int): 
-
-
-            The **error\_code** returned from the instrument.
-
-            The default value is VI\_SUCCESS (0).
-
-            
-
-        error_message (int): 
-
-
-            Formats the **Error\_Code** into a user-readable message string.
-
-            
-
-            .. note:: The array must contain at least 256 elements ViChar[256].
 
 
 .. function:: reset()
