@@ -21,12 +21,12 @@ functions_codegen_method = {
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
     'GetAttributeViSession':           { 'codegen_method': 'no',       },
     'Scan':                            { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
-    'get_next_interchange_warning':    { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'reset_interchange_check':         { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'clear_interchange_warnings':      { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'get_next_coercion_record':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
     'error_query':                     { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'reset_with_defaults':             { 'codegen_method': 'no',       },  # Should use traditional reset function
+    'ResetWithDefaults':               { 'codegen_method': 'no',       },  # Should use traditional reset function
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -47,8 +47,6 @@ functions_enums = {
 functions_params_types = {
     'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
     'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'GetNextInterchangeWarning':    { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
-    'GetNextCoercionRecord':        { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'GetChannelName':               { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetRelayName':                 { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetPath':                      { 'parameters': { 4: { 'type': 'ViString',                  }, }, },

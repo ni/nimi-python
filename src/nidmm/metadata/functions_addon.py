@@ -25,17 +25,17 @@ functions_codegen_method = {
     'SetCalPassword':                  { 'codegen_method': 'no',       },
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
     'GetAttributeViSession':           { 'codegen_method': 'no',       },
-    'get_next_interchange_warning':    { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'reset_interchange_check':         { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'clear_interchange_warnings':      { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'get_next_coercion_record':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
     'error_query':                     { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'reset_with_defaults':             { 'codegen_method': 'no',       },  # Should use traditional reset function
-    'get_channel_name':                { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument DMMs
-    'get_cal_count':                   { 'codegen_method': 'no',       },  # Calibration function not exposed in Python APIs
-    'format_meas_absolute':            { 'codegen_method': 'no',       },  # Utility function for C customers
-    'is_under_range':                  { 'codegen_method': 'no',       },  # Utility function for C customers
-    'is_over_range':                   { 'codegen_method': 'no',       },  # Utility function for C customers
+    'ResetWithDefaults':               { 'codegen_method': 'no',       },  # Should use traditional reset function
+    'GetChannelName':                  { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument DMMs
+    'GetCalCount':                     { 'codegen_method': 'no',       },  # Calibration function not exposed in Python APIs
+    'FormatMeasAbsolute':              { 'codegen_method': 'no',       },  # Utility function for C customers
+    'IsUnderRange':                    { 'codegen_method': 'no',       },  # Utility function for C customers
+    'IsOverRange':                     { 'codegen_method': 'no',       },  # Utility function for C customers
 }
 
 # Attach the given parameter to the given enum from enums.py
