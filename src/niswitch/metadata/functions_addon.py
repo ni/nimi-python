@@ -5,39 +5,42 @@
 # This will override that with private - add '_' to the beginning of the name, or
 # don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':  { 'codegen_method': 'private',  },
-    'Initiate':         { 'codegen_method': 'private',  },
-    'close':            { 'codegen_method': 'private',  },
-    'Abort':            { 'codegen_method': 'private',  },
-    'CheckAttribute.+': { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
-    '.etAttribute.+':   { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
-    'init':             { 'codegen_method': 'no',       },
-    'error_message':    { 'codegen_method': 'no',       },
-    'GetError':         { 'codegen_method': 'private',  },
-    'GetErrorMessage':  { 'codegen_method': 'private',  },
-    'ClearError':       { 'codegen_method': 'no',       },
-    'LockSession':      { 'codegen_method': 'private',  },
-    'UnlockSession':    { 'codegen_method': 'private',  },
-    'UnlockSession':    { 'codegen_method': 'private',  },
+    'InitWithOptions':         { 'codegen_method': 'no',       },
+    'Initiate':                { 'codegen_method': 'private',  },
+    'close':                   { 'codegen_method': 'private',  },
+    'Abort':                   { 'codegen_method': 'private',  },
+    'CheckAttribute.+':        { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
+    '.etAttribute.+':          { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
+    'init':                    { 'codegen_method': 'no',       },
+    'error_message':           { 'codegen_method': 'no',       },
+    'GetError':                { 'codegen_method': 'private',  },
+    'GetErrorMessage':         { 'codegen_method': 'private',  },
+    'ClearError':              { 'codegen_method': 'no',       },
+    'LockSession':             { 'codegen_method': 'no',       },
+    'UnlockSession':           { 'codegen_method': 'no',       },
+    'SetAttributeViSession':   { 'codegen_method': 'no',       },
+    'GetAttributeViSession':   { 'codegen_method': 'no',       },
+    'Scan':                    { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
 }
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    'GetRelayPosition':             { 'parameters': { 2: { 'enum': 'RelayPosition',                                        }, }, },
-    'RelayControl':                 { 'parameters': { 2: { 'enum': 'RelayAction',                                          }, }, },
-    'CanConnect':                   { 'parameters': { 3: { 'enum': 'PathCapability',                                       }, }, },
-    'RouteScanAdvancedOutput':      { 'parameters': { 1: { 'enum': 'TriggerInputConnector',                                },
-                                                      2: { 'enum': 'TriggerInputBusLine',                                  }, }, },
-    'RouteTriggerInput':            { 'parameters': { 1: { 'enum': 'TriggerInputConnector',                                },
-                                                      2: { 'enum': 'TriggerInputBusLine',                                  }, }, },
-    'ConfigureScanList':            { 'parameters': { 2: { 'enum': 'ScanMode',                                             }, }, },
-    'ConfigureScanTrigger':         { 'parameters': { 2: { 'enum': 'TriggerInputConfigureScanTrigger',                     },
-                                                      3: { 'enum': 'ScanAdvancedOutputConfigureScanTrigger',               }, }, },
+    'GetRelayPosition':             { 'parameters': { 2: { 'enum': 'RelayPosition',            }, }, },
+    'RelayControl':                 { 'parameters': { 2: { 'enum': 'RelayAction',              }, }, },
+    'CanConnect':                   { 'parameters': { 3: { 'enum': 'PathCapability',           }, }, },
+    'RouteScanAdvancedOutput':      { 'parameters': { 1: { 'enum': 'ScanAdvancedOutput',       },
+                                                      2: { 'enum': 'ScanAdvancedOutput',       }, }, },
+    'RouteTriggerInput':            { 'parameters': { 1: { 'enum': 'TriggerInput',             },
+                                                      2: { 'enum': 'TriggerInput',             }, }, },
+    'ConfigureScanList':            { 'parameters': { 2: { 'enum': 'ScanMode',                 }, }, },
+    'ConfigureScanTrigger':         { 'parameters': { 2: { 'enum': 'TriggerInput',             },
+                                                      3: { 'enum': 'ScanAdvancedOutput',       }, }, },
 }
 
 # TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval? Issue #259
 functions_params_types = {
     'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
+    'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetNextInterchangeWarning':    { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'GetNextCoercionRecord':        { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'GetChannelName':               { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
@@ -83,3 +86,12 @@ functions_is_error_handling = {
     'GetError':                     { 'is_error_handling': True, },
     'GetErrorMessage':              { 'is_error_handling': True, },
 }
+
+# Default values for method parameters
+function_default_value = {
+    'InitWithTopology':  { 'parameters': { 1: { 'default_value': 'Configured Topology', },
+                                           2: { 'default_value': False, },
+                                           3: { 'default_value': False, },
+                                           4: { 'default_value': '', }, }, },
+}
+
