@@ -108,18 +108,16 @@ function_default_value = {
     'InitWithOptions':  { 'parameters': { 1: { 'default_value': False, },
                                           2: { 'default_value': False, },
                                           3: { 'default_value': '', }, }, },
+    'ConfigureMultiPoint':       { 'parameters': { 3: { 'default_value': 'enums.SampleTrigger.IMMEDIATE', },
+                                                   4: { 'default_value': -1, }, }, },
+    'ConfigureThermocouple':     { 'parameters': { 2: { 'default_value': 'enums.ThermocoupleReferenceJunctionType.FIXED', }, }, },
+    'ConfigureTrigger':          { 'parameters': { 2: { 'default_value': -1, }, }, },
+    'Fetch':                     { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'FetchMultiPoint':           { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'FetchWaveform':             { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'GetDevTemp':                { 'parameters': { 1: { 'default_value': '', }, }, },
+    'Read':                      { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'ReadMultiPoint':            { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'ReadWaveform':              { 'parameters': { 1: { 'default_value': -1, }, }, },
 }
-
-# new defaults
-
-configure_multi_point : sample_trigger to immediate, sample_interval to -1
-configure_thermocouple: reference_junction_type defualt to NIDMM_VAL_TEMP_REF_JUNC_FIXED
-configure_trigger: trigger_delay default to -1 ---- get second opinion, there's also a trigger source
-fetch maximum_time -1
-fetch_multi_point maximum_time -1
-fetch_waveform maximum_time -1
-get_dev_temp: arg 1 options should be ''
-read: #1 maximumt_time -1
-read_multi_point:  #1 maximumt_time -1
-read_waveform:  #1 maximumt_time -1
 
