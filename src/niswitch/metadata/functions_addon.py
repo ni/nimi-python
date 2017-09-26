@@ -26,7 +26,6 @@ functions_codegen_method = {
     'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
     'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
     'error_query':                     { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'ResetWithDefaults':               { 'codegen_method': 'no',       },  # Should use traditional reset function
 }
 
 # Attach the given parameter to the given enum from enums.py

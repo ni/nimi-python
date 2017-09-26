@@ -105,6 +105,10 @@ def test_method_can_connect(session):
     assert path_capability == niswitch.PathCapability.PATH_UNSUPPORTED
 
 
+def test_method_reset_with_defaults(session):
+    assert session.reset_with_defaults() is None
+
+
 def test_functions_get_relay_name(session):
     relay_name = session.get_relay_name(1)
     assert relay_name == 'kr0c0'
