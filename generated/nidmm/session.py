@@ -3065,12 +3065,6 @@ class _RepeatedCapability(_SessionBase):
         self._vi = vi
         self._is_frozen = True
 
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        pass
-
 
 class Session(_SessionBase):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''

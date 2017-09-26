@@ -150,12 +150,6 @@ class _RepeatedCapability(_SessionBase):
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._is_frozen = True
 
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        pass
-
 
 class Session(_SessionBase):
     '''${config['session_class_description']}'''

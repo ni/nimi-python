@@ -530,12 +530,6 @@ class _RepeatedCapability(_SessionBase):
         self._vi = vi
         self._is_frozen = True
 
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        pass
-
 
 class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
