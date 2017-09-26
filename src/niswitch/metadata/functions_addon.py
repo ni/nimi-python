@@ -95,3 +95,11 @@ function_default_value = {
                                            4: { 'default_value': '', }, }, },
 }
 
+# defaults
+
+configure_Scan_list scan_mode #2 should be be defualt to break before make
+confugre_scan)trigger #1 scan delay should be 0.0
+route_scan_advanced_output #3 invert should be defualt to false
+route_trigger_input #3 invert should degault false
+wait_for_debounce #1 timeout shouldb be 5000 ms
+wait_for_scan_complete #1 timput 5000
