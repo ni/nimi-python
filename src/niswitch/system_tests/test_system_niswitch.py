@@ -26,7 +26,7 @@ def test_channel_connection(session):
     channel2 = 'r0'
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
     session.connect(channel1, channel2)
-    session.wait_for_debounce(5000)
+    session.wait_for_debounce()
     assert session.is_debounced() is True
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_EXISTS
     session.disconnect(channel1, channel2)
@@ -42,17 +42,17 @@ def test_continuous_software_scanning(session):
         scan_list = 'r0->c0; r1->c1'
         session.scan_list = scan_list
         assert session.scan_list == scan_list
-        session.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE, False)
-        session.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.PXI_TRIG0, False)
+        session.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE)
+        session.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.PXI_TRIG0)
         session.configure_scan_list(scan_list, niswitch.ScanMode.BREAK_BEFORE_MAKE)
-        session.configure_scan_trigger(0, niswitch.TriggerInput.SW_TRIG_FUNC, niswitch.ScanAdvancedOutput.NONE)
+        session.configure_scan_trigger(niswitch.TriggerInput.SW_TRIG_FUNC, niswitch.ScanAdvancedOutput.NONE)
         session.set_continuous_scan(True)
         session.commit()
         with session.initiate():
             assert session.is_scanning() is True
             session.send_software_trigger()
             try:
-                session.wait_for_scan_complete(100)
+                session.wait_for_scan_complete()
                 assert False
             except niswitch.Error as e:
                 assert e.code == -1074126826  # Error : Max time exceeded.
