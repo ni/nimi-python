@@ -110,3 +110,16 @@ function_default_value = {
                                           3: { 'default_value': '', }, }, },
 }
 
+# new defaults
+
+configure_multi_point : sample_trigger to immediate, sample_interval to -1
+configure_thermocouple: reference_junction_type defualt to NIDMM_VAL_TEMP_REF_JUNC_FIXED
+configure_trigger: trigger_delay default to -1 ---- get second opinion, there's also a trigger source
+fetch maximum_time -1
+fetch_multi_point maximum_time -1
+fetch_waveform maximum_time -1
+get_dev_temp: arg 1 options should be ''
+read: #1 maximumt_time -1
+read_multi_point:  #1 maximumt_time -1
+read_waveform:  #1 maximumt_time -1
+
