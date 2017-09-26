@@ -12,14 +12,14 @@ from nifake import python_types
 
 class _Acquisition(object):
     def __init__(self, session):
-        self.session = session
+        self._session = session
 
     def __enter__(self):
-        self.session._initiate()
+        self._session._initiate()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.session._abort()
+        self._session._abort()
 
 
 class _SessionBase(object):
@@ -54,8 +54,7 @@ class _SessionBase(object):
     '''
 
     def __init__(self, repeated_capability):
-        # TODO(marcoskirsch): rename to _library.
-        self.library = library_singleton.get()
+        self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
 
     def __setattr__(self, key, value):
@@ -92,7 +91,7 @@ class _SessionBase(object):
 
         Aborts a previously initiated thingie.
         '''
-        error_code = self.library.niFake_Abort(self.vi)
+        error_code = self._library.niFake_Abort(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -107,7 +106,7 @@ class _SessionBase(object):
             a_boolean (bool):Contains a boolean.
         '''
         a_boolean_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self.library.niFake_GetABoolean(self.vi, ctypes.pointer(a_boolean_ctype))
+        error_code = self._library.niFake_GetABoolean(self._vi, ctypes.pointer(a_boolean_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(a_boolean_ctype.value)
 
@@ -122,7 +121,7 @@ class _SessionBase(object):
             a_number (int):Contains a number.
         '''
         a_number_ctype = ctypes_types.ViInt16_ctype(0)
-        error_code = self.library.niFake_GetANumber(self.vi, ctypes.pointer(a_number_ctype))
+        error_code = self._library.niFake_GetANumber(self._vi, ctypes.pointer(a_number_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt16(a_number_ctype.value)
 
@@ -135,7 +134,7 @@ class _SessionBase(object):
             a_string (int):String comes back here. Buffer must be 256 big.
         '''
         a_string_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niFake_GetAStringOfFixedMaximumSize(self.vi, ctypes.pointer(a_string_ctype))
+        error_code = self._library.niFake_GetAStringOfFixedMaximumSize(self._vi, ctypes.pointer(a_string_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViChar(a_string_ctype.value)
 
@@ -151,7 +150,7 @@ class _SessionBase(object):
             a_string (int):String comes back here. Buffer must be at least bufferSize big.
         '''
         a_string_ctype = (ctypes_types.ViChar_ctype * buffer_size)()
-        error_code = self.library.niFake_GetAStringWithSpecifiedMaximumSize(self.vi, ctypes.cast(a_string_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)), buffer_size)
+        error_code = self._library.niFake_GetAStringWithSpecifiedMaximumSize(self._vi, ctypes.cast(a_string_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)), buffer_size)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode("ascii")
 
@@ -168,7 +167,7 @@ class _SessionBase(object):
             attribute_value (bool):Returns the value of the attribute.
         '''
         attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self.library.niFake_GetAttributeViBoolean(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niFake_GetAttributeViBoolean(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(attribute_value_ctype.value)
 
@@ -185,7 +184,7 @@ class _SessionBase(object):
             attribute_value (int):Returns the value of the attribute.
         '''
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niFake_GetAttributeViInt32(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niFake_GetAttributeViInt32(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(attribute_value_ctype.value)
 
@@ -202,7 +201,7 @@ class _SessionBase(object):
             attribute_value (float):Returns the value of the attribute.
         '''
         attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self.library.niFake_GetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niFake_GetAttributeViReal64(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(attribute_value_ctype.value)
 
@@ -219,7 +218,7 @@ class _SessionBase(object):
             attribute_value (int):Returns the value of the attribute.
         '''
         attribute_value_ctype = ctypes_types.ViSession_ctype(0)
-        error_code = self.library.niFake_GetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niFake_GetAttributeViSession(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViSession(attribute_value_ctype.value)
 
@@ -235,11 +234,11 @@ class _SessionBase(object):
         '''
         buffer_size = 0
         attribute_value_ctype = None
-        error_code = self.library.niFake_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        error_code = self._library.niFake_GetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niFake_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        error_code = self._library.niFake_GetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode("ascii")
 
@@ -268,7 +267,7 @@ class _SessionBase(object):
         '''
         a_quantity_ctype = ctypes_types.ViInt32_ctype(0)
         a_turtle_ctype = ctypes_types.ViInt16_ctype(0)
-        error_code = self.library.niFake_GetEnumValue(self.vi, ctypes.pointer(a_quantity_ctype), ctypes.pointer(a_turtle_ctype))
+        error_code = self._library.niFake_GetEnumValue(self._vi, ctypes.pointer(a_quantity_ctype), ctypes.pointer(a_turtle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
 
@@ -286,11 +285,11 @@ class _SessionBase(object):
         error_code_ctype = ctypes_types.ViStatus_ctype(0)
         buffer_size = 0
         description_ctype = None
-        error_code = self.library.niFake_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
         description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niFake_GetError(self.vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return python_types.ViStatus(error_code_ctype.value), description_ctype.value.decode("ascii")
 
@@ -305,11 +304,11 @@ class _SessionBase(object):
         '''
         buffer_size = 0
         error_message_ctype = None
-        error_code = self.library.niFake_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
+        error_code = self._library.niFake_GetErrorMessage(self._vi, error_code, buffer_size, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
         error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niFake_GetErrorMessage(self.vi, error_code, buffer_size, error_message_ctype)
+        error_code = self._library.niFake_GetErrorMessage(self._vi, error_code, buffer_size, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode("ascii")
 
@@ -342,7 +341,7 @@ class _SessionBase(object):
             vi (int):Returns a ViSession handle that you use.
         '''
         vi_ctype = ctypes_types.ViSession_ctype(0)
-        error_code = self.library.niFake_InitWithOptions(resource_name.encode('ascii'), id_query, reset_device, option_string.encode('ascii'), ctypes.pointer(vi_ctype))
+        error_code = self._library.niFake_InitWithOptions(resource_name.encode('ascii'), id_query, reset_device, option_string.encode('ascii'), ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViSession(vi_ctype.value)
 
@@ -351,7 +350,7 @@ class _SessionBase(object):
 
         Initiates a thingie.
         '''
-        error_code = self.library.niFake_Initiate(self.vi)
+        error_code = self._library.niFake_Initiate(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -363,7 +362,7 @@ class _SessionBase(object):
         Args:
             a_number (int):Contains a number
         '''
-        error_code = self.library.niFake_OneInputFunction(self.vi, a_number)
+        error_code = self._library.niFake_OneInputFunction(self._vi, a_number)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -379,7 +378,7 @@ class _SessionBase(object):
             reading (float):The measured value.
         '''
         reading_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self.library.niFake_Read(self.vi, maximum_time, ctypes.pointer(reading_ctype))
+        error_code = self._library.niFake_Read(self._vi, maximum_time, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(reading_ctype.value)
 
@@ -400,7 +399,7 @@ class _SessionBase(object):
         '''
         reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niFake_ReadMultiPoint(self.vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
+        error_code = self._library.niFake_ReadMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [python_types.ViReal64(reading_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
 
@@ -417,7 +416,7 @@ class _SessionBase(object):
         '''
         a_number_ctype = ctypes_types.ViInt16_ctype(0)
         a_string_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self.library.niFake_ReturnANumberAndAString(self.vi, ctypes.pointer(a_number_ctype), ctypes.pointer(a_string_ctype))
+        error_code = self._library.niFake_ReturnANumberAndAString(self._vi, ctypes.pointer(a_number_ctype), ctypes.pointer(a_string_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt16(a_number_ctype.value), python_types.ViChar(a_string_ctype.value)
 
@@ -431,7 +430,7 @@ class _SessionBase(object):
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (bool):Pass the value that you want to set the attribute to.
         '''
-        error_code = self.library.niFake_SetAttributeViBoolean(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niFake_SetAttributeViBoolean(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -445,7 +444,7 @@ class _SessionBase(object):
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (int):Pass the value that you want to set the attribute to.
         '''
-        error_code = self.library.niFake_SetAttributeViInt32(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niFake_SetAttributeViInt32(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -459,7 +458,7 @@ class _SessionBase(object):
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (float):Pass the value that you want to set the attribute to.
         '''
-        error_code = self.library.niFake_SetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niFake_SetAttributeViReal64(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -473,7 +472,7 @@ class _SessionBase(object):
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (int):Pass the value that you want to set the attribute to.
         '''
-        error_code = self.library.niFake_SetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niFake_SetAttributeViSession(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -487,7 +486,7 @@ class _SessionBase(object):
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (str):Pass the value that you want to set the attribute to.
         '''
-        error_code = self.library.niFake_SetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
+        error_code = self._library.niFake_SetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -496,7 +495,7 @@ class _SessionBase(object):
 
         This function takes no parameters other than the session.
         '''
-        error_code = self.library.niFake_SimpleFunction(self.vi)
+        error_code = self._library.niFake_SimpleFunction(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -509,7 +508,7 @@ class _SessionBase(object):
             a_number (float):Contains a number
             a_string (int):Contains a string
         '''
-        error_code = self.library.niFake_TwoInputFunction(self.vi, a_number, a_string)
+        error_code = self._library.niFake_TwoInputFunction(self._vi, a_number, a_string)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -518,7 +517,7 @@ class _SessionBase(object):
 
         Closes the specified session and deallocates resources that it reserved.
         '''
-        error_code = self.library.niFake_close(self.vi)
+        error_code = self._library.niFake_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -528,7 +527,7 @@ class _RepeatedCapability(_SessionBase):
 
     def __init__(self, vi, repeated_capability):
         super(_RepeatedCapability, self).__init__(repeated_capability)
-        self.vi = vi
+        self._vi = vi
         self._is_frozen = True
 
 
@@ -537,9 +536,8 @@ class Session(_SessionBase):
 
     def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
         super(Session, self).__init__(repeated_capability='')
-        # TODO(marcoskirsch): private members should start with _
-        self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._vi = 0  # This must be set before calling _init_with_options().
+        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
         self._is_frozen = True
 
     def __enter__(self):
@@ -550,7 +548,7 @@ class Session(_SessionBase):
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        return _RepeatedCapability(self.vi, repeated_capability)
+        return _RepeatedCapability(self._vi, repeated_capability)
 
     def initiate(self):
         return _Acquisition(self)
@@ -561,6 +559,6 @@ class Session(_SessionBase):
         except errors.Error:
             # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
             print("Failed to close session.")
-        self.vi = 0
+        self._vi = 0
 
 

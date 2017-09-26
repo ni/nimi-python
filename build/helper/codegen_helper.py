@@ -11,6 +11,7 @@ pp = pprint.PrettyPrinter(indent=4)
 
 # Functions that return snippets that can be placed directly in the templates.
 class ParamListType(Enum):
+    # TODO(marcoskirsch): DRY - seems like a shame to type this for doc and later for declaration.
     '''Type of parameter list to return
 
     Used by different parts of the code generator to create the parameter list
@@ -23,7 +24,7 @@ class ParamListType(Enum):
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name_with_default',
     '''
     API_METHOD_CALL = 2
@@ -34,7 +35,7 @@ class ParamListType(Enum):
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
     '''
     DISPLAY_METHOD = 3
@@ -45,7 +46,7 @@ class ParamListType(Enum):
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
     '''
     LIBRARY_METHOD = 4
@@ -56,7 +57,7 @@ class ParamListType(Enum):
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': True,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
     '''
     LIBRARY_CALL = 5
@@ -67,8 +68,8 @@ class ParamListType(Enum):
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
-    'session_name': 'vi',
-    'name_to_use': 'library_call_name',
+    'session_handle_parameter_name': 'vi',
+    'name_to_use': 'library_call_snippet',
     '''
     LIBRARY_CALL_TYPES = 6
     '''Used for methods param list types when calling into the DLL
@@ -78,7 +79,7 @@ class ParamListType(Enum):
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'ctypes_type_library_call',
     '''
     LIBRARY_IMPL_METHOD = 7
@@ -89,7 +90,7 @@ class ParamListType(Enum):
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
     '''
 
@@ -101,7 +102,7 @@ ParamListTypeDefaults[ParamListType.API_METHOD_DECLARATION] = {
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name_with_default',
 }
 ParamListTypeDefaults[ParamListType.API_METHOD_CALL] = {
@@ -110,7 +111,7 @@ ParamListTypeDefaults[ParamListType.API_METHOD_CALL] = {
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
 }
 ParamListTypeDefaults[ParamListType.DISPLAY_METHOD] = {
@@ -119,7 +120,7 @@ ParamListTypeDefaults[ParamListType.DISPLAY_METHOD] = {
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
 }
 ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
@@ -128,7 +129,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
 }
 ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
@@ -137,8 +138,8 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
-    'session_name': 'vi',
-    'name_to_use': 'library_call_name',
+    'session_handle_parameter_name': 'vi',
+    'name_to_use': 'library_call_snippet',
 }
 ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
     'skip_self': True,
@@ -146,7 +147,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'ctypes_type_library_call',
 }
 ParamListTypeDefaults[ParamListType.LIBRARY_IMPL_METHOD] = {
@@ -155,7 +156,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_IMPL_METHOD] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
-    'session_name': 'vi',
+    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
 }
 
@@ -164,7 +165,7 @@ def get_params_snippet(function, param_type, options={}):
     '''Get a parameter list snippet based on type and options
 
     Name used:
-        ParamListType.LIBRARY_CALL uses 'library_call_name'
+        ParamListType.LIBRARY_CALL uses 'library_call_snippet'
         ParamListType.LIBRARY_CALL_TYPES uses 'ctypes_type_library_call'
         All others use 'python_name'
     '''
@@ -177,7 +178,6 @@ def get_params_snippet(function, param_type, options={}):
     for o in options:
         options_to_use[o] = options[o]
 
-    name_to_use = options_to_use['name_to_use']
     params_to_use = []
 
     snippets = []
@@ -192,7 +192,7 @@ def get_params_snippet(function, param_type, options={}):
             skip = True
         if x == ivi_dance_size_parameter and options_to_use['skip_ivi_dance_size_parameter']:
             skip = True
-        if x['name'] == options_to_use['session_name'] and options_to_use['skip_session_handle']:
+        if x['name'] == options_to_use['session_handle_parameter_name'] and options_to_use['skip_session_handle']:
             skip = True
         if not skip:
             params_to_use.append(x)
@@ -211,7 +211,7 @@ def get_params_snippet(function, param_type, options={}):
 
     # Render based on options
     for x in params_to_use:
-            snippets.append(x[name_to_use])
+            snippets.append(x[options_to_use['name_to_use']])
     return ', '.join(snippets)
 
 
