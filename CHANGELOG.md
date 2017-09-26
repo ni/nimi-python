@@ -12,7 +12,9 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 * #### NI-DMM
   * #### Added
   * #### Changed
+    * Added default values for some methods.
   * #### Removed
+    * Removed some unnecessary methods.
 * #### NI-ModInst
   * #### Added
   * #### Changed
@@ -20,7 +22,9 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 * #### NI-SWITCH
   * #### Added
   * #### Changed
+    * Added default values for some methods.
   * #### Removed
+    * Removed some unnecessary methods.
 * #### NI-DCPower
   * #### Added
   * #### Changed
