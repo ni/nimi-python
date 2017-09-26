@@ -1845,6 +1845,18 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def reset_with_defaults(self):
+        '''reset_with_defaults
+
+        Resets the switch module and applies initial user specified settings
+        from the logical name used to initialize the session. If the session was
+        created without a logical name, this function is equivalent to
+        reset.
+        '''
+        error_code = self.library.niSwitch_ResetWithDefaults(self.vi)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):
         '''route_scan_advanced_output
 

@@ -70,6 +70,7 @@ class Library(object):
         self.niDMM_ReadMultiPoint_cfunc = None
         self.niDMM_ReadStatus_cfunc = None
         self.niDMM_ReadWaveform_cfunc = None
+        self.niDMM_ResetWithDefaults_cfunc = None
         self.niDMM_SelfCal_cfunc = None
         self.niDMM_SendSoftwareTrigger_cfunc = None
         self.niDMM_SetAttributeViBoolean_cfunc = None
@@ -510,6 +511,14 @@ class Library(object):
                 self.niDMM_ReadWaveform_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ctypes.POINTER(ViReal64_ctype), ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
                 self.niDMM_ReadWaveform_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_ReadWaveform_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
+
+    def niDMM_ResetWithDefaults(self, vi):  # noqa: N802
+        with self._func_lock:
+            if self.niDMM_ResetWithDefaults_cfunc is None:
+                self.niDMM_ResetWithDefaults_cfunc = self._library.niDMM_ResetWithDefaults
+                self.niDMM_ResetWithDefaults_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
+                self.niDMM_ResetWithDefaults_cfunc.restype = nidmm.python_types.ViStatus
+        return self.niDMM_ResetWithDefaults_cfunc(vi)
 
     def niDMM_SelfCal(self, vi):  # noqa: N802
         with self._func_lock:

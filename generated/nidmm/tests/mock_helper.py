@@ -161,6 +161,8 @@ class SideEffectsHelper(object):
         self._defaults['ReadWaveform']['return'] = 0
         self._defaults['ReadWaveform']['waveformArray'] = None
         self._defaults['ReadWaveform']['actualNumberOfPoints'] = None
+        self._defaults['ResetWithDefaults'] = {}
+        self._defaults['ResetWithDefaults']['return'] = 0
         self._defaults['SelfCal'] = {}
         self._defaults['SelfCal']['return'] = 0
         self._defaults['SendSoftwareTrigger'] = {}
@@ -574,6 +576,11 @@ class SideEffectsHelper(object):
         actual_number_of_points.contents.value = self._defaults['ReadWaveform']['actualNumberOfPoints']
         return self._defaults['ReadWaveform']['return']
 
+    def niDMM_ResetWithDefaults(self, vi):  # noqa: N802
+        if self._defaults['ResetWithDefaults']['return'] != 0:
+            return self._defaults['ResetWithDefaults']['return']
+        return self._defaults['ResetWithDefaults']['return']
+
     def niDMM_SelfCal(self, vi):  # noqa: N802
         if self._defaults['SelfCal']['return'] != 0:
             return self._defaults['SelfCal']['return']
@@ -744,6 +751,8 @@ class SideEffectsHelper(object):
         mock_library.niDMM_ReadStatus.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ReadWaveform.side_effect = MockFunctionCallError("niDMM_ReadWaveform")
         mock_library.niDMM_ReadWaveform.return_value = nidmm.python_types.ViStatus(0)
+        mock_library.niDMM_ResetWithDefaults.side_effect = MockFunctionCallError("niDMM_ResetWithDefaults")
+        mock_library.niDMM_ResetWithDefaults.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_SelfCal.side_effect = MockFunctionCallError("niDMM_SelfCal")
         mock_library.niDMM_SelfCal.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_SendSoftwareTrigger.side_effect = MockFunctionCallError("niDMM_SendSoftwareTrigger")

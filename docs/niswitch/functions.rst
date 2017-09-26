@@ -860,6 +860,16 @@ niswitch.Session methods
 
     :type relay_action: :py:data:`niswitch.RelayAction`
 
+.. function:: reset_with_defaults()
+
+    Resets the switch module and applies initial user specified settings
+    from the logical name used to initialize the session. If the session was
+    created without a logical name, this function is equivalent to
+    :py:func:`niswitch.reset`.
+
+    
+
+
 .. function:: route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
 
     Routes the scan advanced output trigger from a trigger bus line (TTLx)

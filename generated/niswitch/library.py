@@ -43,6 +43,7 @@ class Library(object):
         self.niSwitch_IsDebounced_cfunc = None
         self.niSwitch_IsScanning_cfunc = None
         self.niSwitch_RelayControl_cfunc = None
+        self.niSwitch_ResetWithDefaults_cfunc = None
         self.niSwitch_RouteScanAdvancedOutput_cfunc = None
         self.niSwitch_RouteTriggerInput_cfunc = None
         self.niSwitch_SendSoftwareTrigger_cfunc = None
@@ -272,6 +273,14 @@ class Library(object):
                 self.niSwitch_RelayControl_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViInt32_ctype]  # noqa: F405
                 self.niSwitch_RelayControl_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_RelayControl_cfunc(vi, relay_name, relay_action)
+
+    def niSwitch_ResetWithDefaults(self, vi):  # noqa: N802
+        with self._func_lock:
+            if self.niSwitch_ResetWithDefaults_cfunc is None:
+                self.niSwitch_ResetWithDefaults_cfunc = self._library.niSwitch_ResetWithDefaults
+                self.niSwitch_ResetWithDefaults_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
+                self.niSwitch_ResetWithDefaults_cfunc.restype = niswitch.python_types.ViStatus
+        return self.niSwitch_ResetWithDefaults_cfunc(vi)
 
     def niSwitch_RouteScanAdvancedOutput(self, vi, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):  # noqa: N802
         with self._func_lock:

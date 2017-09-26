@@ -1694,6 +1694,16 @@ nidmm.Session methods
             
 
 
+.. function:: reset_with_defaults()
+
+    Resets the instrument to a known state and sends initialization commands
+    to the DMM. The initialization commands set the DMM settings to the
+    state necessary for the operation of NI-DMM. All user-defined default
+    values associated with a logical name are applied after setting the DMM.
+
+    
+
+
 .. function:: self_cal()
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the

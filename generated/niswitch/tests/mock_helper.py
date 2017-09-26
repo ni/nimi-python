@@ -86,6 +86,8 @@ class SideEffectsHelper(object):
         self._defaults['IsScanning']['isScanning'] = None
         self._defaults['RelayControl'] = {}
         self._defaults['RelayControl']['return'] = 0
+        self._defaults['ResetWithDefaults'] = {}
+        self._defaults['ResetWithDefaults']['return'] = 0
         self._defaults['RouteScanAdvancedOutput'] = {}
         self._defaults['RouteScanAdvancedOutput']['return'] = 0
         self._defaults['RouteTriggerInput'] = {}
@@ -317,6 +319,11 @@ class SideEffectsHelper(object):
             return self._defaults['RelayControl']['return']
         return self._defaults['RelayControl']['return']
 
+    def niSwitch_ResetWithDefaults(self, vi):  # noqa: N802
+        if self._defaults['ResetWithDefaults']['return'] != 0:
+            return self._defaults['ResetWithDefaults']['return']
+        return self._defaults['ResetWithDefaults']['return']
+
     def niSwitch_RouteScanAdvancedOutput(self, vi, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):  # noqa: N802
         if self._defaults['RouteScanAdvancedOutput']['return'] != 0:
             return self._defaults['RouteScanAdvancedOutput']['return']
@@ -458,6 +465,8 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_IsScanning.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_RelayControl.side_effect = MockFunctionCallError("niSwitch_RelayControl")
         mock_library.niSwitch_RelayControl.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_ResetWithDefaults.side_effect = MockFunctionCallError("niSwitch_ResetWithDefaults")
+        mock_library.niSwitch_ResetWithDefaults.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_RouteScanAdvancedOutput.side_effect = MockFunctionCallError("niSwitch_RouteScanAdvancedOutput")
         mock_library.niSwitch_RouteScanAdvancedOutput.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_RouteTriggerInput.side_effect = MockFunctionCallError("niSwitch_RouteTriggerInput")

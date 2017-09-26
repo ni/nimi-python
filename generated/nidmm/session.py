@@ -2459,6 +2459,18 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [python_types.ViReal64(waveform_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
 
+    def reset_with_defaults(self):
+        '''reset_with_defaults
+
+        Resets the instrument to a known state and sends initialization commands
+        to the DMM. The initialization commands set the DMM settings to the
+        state necessary for the operation of NI-DMM. All user-defined default
+        values associated with a logical name are applied after setting the DMM.
+        '''
+        error_code = self.library.niDMM_ResetWithDefaults(self.vi)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def self_cal(self):
         '''self_cal
 
