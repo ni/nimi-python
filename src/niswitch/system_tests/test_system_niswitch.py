@@ -2,7 +2,6 @@
 
 import niswitch
 import pytest
-import warnings
 
 
 @pytest.fixture(scope='function')
@@ -126,16 +125,6 @@ def test_functions_revision_query(session):
     assert string2 == 'No revision information available'
 
 
-def test_functions_get_next_coercion_record(session):
-    coercion_record = session.get_next_coercion_record()
-    assert len(coercion_record) == 0
-
-
-def test_functions_get_next_interchange_warning(session):
-    interchange_warning = session.get_next_interchange_warning()
-    assert len(interchange_warning) == 0
-
-
 def test_functions_self_test(session):
     self_test_result, self_test_string = session.self_test()
     assert self_test_result == 0
@@ -150,15 +139,6 @@ def test_functions_get_path(session):
     assert path == 'r0->c0'
     session.disconnect(channel1, channel2)
     session.set_path(path)
-
-
-def test_functions_error_query(session):
-    with warnings.catch_warnings(record=True) as w:
-        test_error_desc = '1073479940'  # Error Query not supported.
-        error_result, error_string = session.error_query()
-        assert len(w) == 1
-        assert issubclass(w[0].category, niswitch.NiswitchWarning)
-        assert test_error_desc in str(w[0].message)
 
 
 def test_functions_get_error_description(session):
@@ -177,8 +157,3 @@ def test_functions_disable(session):
     session.connect(channel1, channel2)
     session.disable()   # expect no errors
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
-
-
-def test_functions_interchange(session):
-    session.clear_interchange_warnings()   # expect no errors
-    session.reset_interchange_check()   # expect no errors

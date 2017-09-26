@@ -5,22 +5,27 @@
 # This will override that with private - add '_' to the beginning of the name, or
 # don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':         { 'codegen_method': 'no',       },
-    'Initiate':                { 'codegen_method': 'private',  },
-    'close':                   { 'codegen_method': 'private',  },
-    'Abort':                   { 'codegen_method': 'private',  },
-    'CheckAttribute.+':        { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
-    '.etAttribute.+':          { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
-    'init':                    { 'codegen_method': 'no',       },
-    'error_message':           { 'codegen_method': 'no',       },
-    'GetError':                { 'codegen_method': 'private',  },
-    'GetErrorMessage':         { 'codegen_method': 'private',  },
-    'ClearError':              { 'codegen_method': 'no',       },
-    'LockSession':             { 'codegen_method': 'no',       },
-    'UnlockSession':           { 'codegen_method': 'no',       },
-    'SetAttributeViSession':   { 'codegen_method': 'no',       },
-    'GetAttributeViSession':   { 'codegen_method': 'no',       },
-    'Scan':                    { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
+    'InitWithOptions':                 { 'codegen_method': 'no',       },
+    'Initiate':                        { 'codegen_method': 'private',  },
+    'close':                           { 'codegen_method': 'private',  },
+    'Abort':                           { 'codegen_method': 'private',  },
+    'CheckAttribute.+':                { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
+    '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
+    'init':                            { 'codegen_method': 'no',       },
+    'error_message':                   { 'codegen_method': 'no',       },
+    'GetError':                        { 'codegen_method': 'private',  },
+    'GetErrorMessage':                 { 'codegen_method': 'private',  },
+    'ClearError':                      { 'codegen_method': 'no',       },
+    'LockSession':                     { 'codegen_method': 'no',       },
+    'UnlockSession':                   { 'codegen_method': 'no',       },
+    'SetAttributeViSession':           { 'codegen_method': 'no',       },
+    'GetAttributeViSession':           { 'codegen_method': 'no',       },
+    'Scan':                            { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
+    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'error_query':                     { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -41,8 +46,6 @@ functions_enums = {
 functions_params_types = {
     'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
     'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'GetNextInterchangeWarning':    { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
-    'GetNextCoercionRecord':        { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
     'GetChannelName':               { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetRelayName':                 { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetPath':                      { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
@@ -66,13 +69,10 @@ functions_params_types = {
 functions_buffer_info = {
     'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'BufferSize'}, }, }, },
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'error_query':                  { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'revision_query':               { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, },       # From documentation
                                                       2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI
     'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'arraySize'}, }, }, },
-    'GetNextInterchangeWarning':    { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'GetNextCoercionRecord':        { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetRelayName':                 { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'relayNameBufferSize'}, }, }, },
     'GetPath':                      { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },

@@ -815,15 +815,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def clear_interchange_warnings(self):
-        '''clear_interchange_warnings
-
-        Clears the list of current interchange warnings.
-        '''
-        error_code = self._library.niDMM_ClearInterchangeWarnings(self._vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_ac_bandwidth(self, ac_minimum_frequency_hz, ac_maximum_frequency_hz):
         '''configure_ac_bandwidth
 
@@ -1763,35 +1754,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [python_types.ViReal64(waveform_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
 
-    def format_meas_absolute(self, measurement_function, range, resolution, measurement):
-        '''format_meas_absolute
-
-        Formats the **Measurement** to the proper number of displayed digits
-        according to the **Measurement_Function**, **Range**, and
-        **Resolution**. Returns the formatted data, range, and mode strings.
-
-        Args:
-            measurement_function (int):Specifies the **measurement_function** used to acquire the measurement.
-                The driver sets function to this value.
-            range (float):Specifies the range used to acquire the **Measurement**.
-            resolution (float):Specifies the RESOLUTION_ABSOLUTE of the **Measurement**.
-            measurement (float):Specifies the measured value returned from the DMM.
-
-        Returns:
-            mode_string (int):Returns a string containing the units of the **Measurement** mode.
-            range_string (int):Returns the range of the **Measurement**, formatted into a
-                string with the correct number of display digits.
-            data_string (int):Returns the **Measurement**, formatted according to the
-                function, range, and
-                RESOLUTION_ABSOLUTE.
-        '''
-        mode_string_ctype = ctypes_types.ViChar_ctype(0)
-        range_string_ctype = ctypes_types.ViChar_ctype(0)
-        data_string_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDMM_FormatMeasAbsolute(measurement_function, range, resolution, measurement, ctypes.pointer(mode_string_ctype), ctypes.pointer(range_string_ctype), ctypes.pointer(data_string_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(mode_string_ctype.value), python_types.ViChar(range_string_ctype.value), python_types.ViChar(data_string_ctype.value)
-
     def get_aperture_time_info(self):
         '''get_aperture_time_info
 
@@ -1996,33 +1958,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(actual_range_ctype.value)
 
-    def get_cal_count(self, cal_type):
-        '''get_cal_count
-
-        Returns the calibration **Count** for the specified type of calibration.
-
-        Note: The NI 4050, NI 4060, and NI 4080/4081/4082 are not supported.
-
-        Args:
-            cal_type (int):Specifies the type of calibration performed (external or
-                self-calibration).
-
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_INTERNAL_AREA (default) | 0 | Self-Calibration     |
-                +-----------------------------------+---+----------------------+
-                | NIDMM_VAL_EXTERNAL_AREA           | 1 | External Calibration |
-                +-----------------------------------+---+----------------------+
-
-                Note: The NI 4065 does not support self-calibration.
-
-        Returns:
-            count (int):The number of times calibration has been performed.
-        '''
-        count_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niDMM_GetCalCount(self._vi, cal_type, ctypes.pointer(count_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(count_ctype.value)
-
     def get_cal_date_and_time(self, cal_type):
         '''get_cal_date_and_time
 
@@ -2057,40 +1992,6 @@ class _SessionBase(object):
         error_code = self._library.niDMM_GetCalDateAndTime(self._vi, cal_type, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(month_ctype.value), python_types.ViInt32(day_ctype.value), python_types.ViInt32(year_ctype.value), python_types.ViInt32(hour_ctype.value), python_types.ViInt32(minute_ctype.value)
-
-    def get_channel_name(self, index, buffer_size):
-        '''get_channel_name
-
-        Returns the **Channel_String** that is in the channel table at an
-        **Index** you specify. Not applicable to National Instruments DMMs.
-        Included for compliance with the *IviDmm Class Specification*.
-
-        Args:
-            index (int):A 1–based **index** into the channel table.
-            buffer_size (int):Passes the number of bytes in the ViChar array you specify for the
-                **Channel_String** parameter. If the next **Channel_String**,
-                including the terminating NULL byte, contains more bytes than you
-                indicate in this parameter, the function copies
-                **buffer_size** –1 bytes into the buffer, places an ASCII NULL byte at
-                the end of the buffer, and returns the buffer size you must pass to get
-                the entire value.
-
-                For example, if the value is "123456" and the **buffer_size** is 4, the
-                function places "123" into the buffer and returns 7. If you pass a
-                negative number, the function copies the value to the buffer regardless
-                of the number of bytes in the value. If you pass 0, you can pass
-                VI_NULL for the **Channel_String** buffer parameter. The default value
-                is None.
-
-        Returns:
-            channel_string (int):Returns the **channel_string** that is in the channel table at the
-                **Index** you specify. Do not modify the contents of the
-                **channel_string**.
-        '''
-        channel_string_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDMM_GetChannelName(self._vi, index, buffer_size, ctypes.pointer(channel_string_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(channel_string_ctype.value)
 
     def get_dev_temp(self, options):
         '''get_dev_temp
@@ -2227,92 +2128,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(period_ctype.value)
 
-    def get_next_coercion_record(self, buffer_size):
-        '''get_next_coercion_record
-
-        This function returns the coercion information associated with the IVI
-        session, and it retrieves and clears the oldest instance in which NI-DMM
-        coerced a value you specified to another value.
-
-        If you set RECORD_COERCIONS to VI_TRUE (1), NI-DMM keeps
-        a list of all coercions it makes on ViInt32 or ViReal64 values that you
-        pass to NI-DMM functions. Use this function to retrieve information from
-        that list.
-
-        Args:
-            buffer_size (int):Passes the number of bytes in the ViChar array you specify for the
-                **Coercion_Record** parameter. If the next coercion record string,
-                including the terminating NULL byte, contains more bytes than you
-                indicate in this parameter, the function copies **buffer_size** – 1
-                bytes into the buffer, places an ASCII NULL byte at the end of the
-                buffer, and returns the buffer size you must pass to get the entire
-                value.
-
-                For example, if the value is "123456" and the **buffer_size** is 4, the
-                function places "123" into the buffer and returns 7. If you pass a
-                negative number, the function copies the value to the buffer regardless
-                of the number of bytes in the value.
-
-                If you pass 0, you can pass VI_NULL for the **Coercion_Record** buffer
-                parameter.
-
-                The default value is None.
-
-        Returns:
-            coercion_record (int):Returns the next **coercion_record** for the IVI session.
-
-                If there are no coercions records, the function returns an empty string.
-                The buffer must contain at least as many elements as the value you
-                specify with the **Buffer_Size** parameter.
-        '''
-        coercion_record_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDMM_GetNextCoercionRecord(self._vi, buffer_size, ctypes.pointer(coercion_record_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(coercion_record_ctype.value)
-
-    def get_next_interchange_warning(self):
-        '''get_next_interchange_warning
-
-        This function returns the interchangeability warnings associated with
-        the IVI session. It retrieves and clears the oldest instance in which
-        the class driver recorded an interchangeability warning.
-        Interchangeability warnings indicate that using your application with a
-        different instrument might cause different behavior.
-
-        The driver performs interchangeability checking when
-        INTERCHANGE_CHECK is set to VI_TRUE (1). The function
-        returns an empty string in the **Interchange_Warning** parameter if no
-        interchangeability warnings remain for the session. In general, the
-        instrument driver generates interchangeability warnings when an
-        attribute that affects the behavior of the instrument is in a state that
-        you did not specify.
-
-        Args:
-            buffer_size (int):Passes the number of bytes in the ViChar array you specify for the
-                **Interchange_Warning** parameter. If the next interchangeability
-                warning string, including the terminating NULL byte, contains more bytes
-                than you indicate in this parameter, the function copies
-                **buffer_size** –1 bytes into the buffer, places an ASCII NULL byte at
-                the end of the buffer, and returns the buffer size you must pass to get
-                the entire value.
-
-                For example, if the value is "123456" and the **buffer_size** is 4, the
-                function places "123" into the buffer and returns 7. If you pass a
-                negative number, the function copies the value to the buffer regardless
-                of the number of bytes in the value. If you pass 0, you can pass
-                VI_NULL for the **Interchange_Warning** buffer parameter. The default
-                value is None.
-        '''
-        buffer_size = 0
-        interchange_warning_ctype = None
-        error_code = self._library.niDMM_GetNextInterchangeWarning(self._vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViChar_ctype)
-        error_code = self._library.niDMM_GetNextInterchangeWarning(self._vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return interchange_warning_ctype.value.decode("ascii")
-
     def get_self_cal_supported(self):
         '''get_self_cal_supported
 
@@ -2447,62 +2262,6 @@ class _SessionBase(object):
         error_code = self._library.niDMM_Initiate(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def is_over_range(self, measurement_value):
-        '''is_over_range
-
-        Takes a **Measurement_Value** and determines if the value is a valid
-        measurement or a value indicating that an overrange condition occurred.
-
-        Args:
-            measurement_value (float):The measured value returned from the DMM.
-
-                Note:
-                If an overrange condition occurs, the **Measurement_Value** contains
-                an IEEE-defined NaN (Not a Number) value.
-
-        Returns:
-            is_over_range (bool):Returns whether the measurement value is a valid measurement or an
-                overrange condition.
-
-                +----------+---+-----------------------------------------------------------+
-                | VI_TRUE  | 1 | The value indicates that an overrange condition occurred. |
-                +----------+---+-----------------------------------------------------------+
-                | VI_FALSE | 0 | The value is a valid measurement.                         |
-                +----------+---+-----------------------------------------------------------+
-        '''
-        is_over_range_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self._library.niDMM_IsOverRange(self._vi, measurement_value, ctypes.pointer(is_over_range_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(is_over_range_ctype.value)
-
-    def is_under_range(self, measurement_value):
-        '''is_under_range
-
-        Takes a **Measurement_Value** and determines if the value is a valid
-        measurement or a value indicating that an underrange condition occurred.
-
-        Args:
-            measurement_value (float):The measured value returned from the DMM.
-
-                Note:
-                If an overrange condition occurs, the **Measurement_Value** contains
-                an IEEE-defined NaN (Not a Number) value.
-
-        Returns:
-            is_under_range (bool):Returns whether the **Measurement_Value** is a valid measurement or an
-                underrange condition.
-
-                +----------+---+------------------------------------------------------------+
-                | VI_TRUE  | 1 | The value indicates that an underrange condition occurred. |
-                +----------+---+------------------------------------------------------------+
-                | VI_FALSE | 0 | The value is a valid measurement.                          |
-                +----------+---+------------------------------------------------------------+
-        '''
-        is_under_range_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self._library.niDMM_IsUnderRange(self._vi, measurement_value, ctypes.pointer(is_under_range_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(is_under_range_ctype.value)
 
     def perform_open_cable_comp(self):
         '''perform_open_cable_comp
@@ -2698,41 +2457,6 @@ class _SessionBase(object):
         error_code = self._library.niDMM_ReadWaveform(self._vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [python_types.ViReal64(waveform_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
-
-    def reset_interchange_check(self):
-        '''reset_interchange_check
-
-        When developing a complex test system that consists of multiple test
-        modules, it is generally a good idea to design the test modules so that
-        they can run in any order. To do so requires ensuring that each test
-        module completely configures the state of each instrument it uses.
-
-        If a particular test module does not completely configure the state of
-        an instrument, the state of the instrument depends on the configuration
-        from a previously executed test module. If you execute the test modules
-        in a different order, the behavior of the instrument and therefore the
-        entire test module is likely to change. This change in behavior is
-        generally instrument specific and represents an interchangeability
-        problem. You can use this function to test for such cases. After you
-        call this function, the interchangeability checking algorithms in NI-DMM
-        ignore all previous configuration operations. By calling this function
-        at the beginning of a test module, you can determine whether the test
-        module has dependencies on the operation of previously executed test
-        modules.
-
-        This function does not clear the interchangeability warnings from the
-        list of previously recorded interchangeability warnings. If you want to
-        guarantee that get_next_interchange_warning only returns those
-        interchangeability warnings that are generated after calling this
-        function, you must clear the list of interchangeability warnings. You
-        can clear the interchangeability warnings list by repeatedly calling
-        get_next_interchange_warning until no more interchangeability
-        warnings are returned. If you are not interested in the content of those
-        warnings, you can call clear_interchange_warnings.
-        '''
-        error_code = self._library.niDMM_ResetInterchangeCheck(self._vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
 
     def reset_with_defaults(self):
         '''reset_with_defaults
@@ -2956,28 +2680,6 @@ class _SessionBase(object):
         error_code = self._library.niDMM_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def error_query(self):
-        '''error_query
-
-        Reads an **Error_Code** and message from the DMM error queue. National
-        Instruments DMMs do not contain an error queue. Errors are reported as
-        they occur. Therefore, this function does not detect errors; it is
-        included for compliance with the *IviDmm Class Specification*.
-
-        Returns:
-            error_code (int):The **error_code** returned from the instrument.
-
-                The default value is VI_SUCCESS (0).
-            error_message (int):Formats the **Error_Code** into a user-readable message string.
-
-                Note: The array must contain at least 256 elements ViChar[256].
-        '''
-        error_code_ctype = ctypes_types.ViStatus_ctype(0)
-        error_message_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDMM_error_query(self._vi, ctypes.pointer(error_code_ctype), ctypes.pointer(error_message_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViStatus(error_code_ctype.value), python_types.ViChar(error_message_ctype.value)
 
     def reset(self):
         '''reset
