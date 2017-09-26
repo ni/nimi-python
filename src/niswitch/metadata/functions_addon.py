@@ -89,9 +89,17 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 function_default_value = {
-    'InitWithTopology':  { 'parameters': { 1: { 'default_value': 'Configured Topology', },
-                                           2: { 'default_value': False, },
-                                           3: { 'default_value': False, },
-                                           4: { 'default_value': '', }, }, },
-}
+    'InitWithTopology':         { 'parameters': { 1: { 'default_value': 'Configured Topology', },
+                                                  2: { 'default_value': False, },
+                                                  3: { 'default_value': False, },
+                                                  4: { 'default_value': '', }, }, },
+    'ConfigureScanList':        { 'parameters': { 2: { 'default_value': 'enums.ScanMode.BREAK_BEFORE_MAKE', }, }, },
+    'ConfigureScanTrigger':     { 'parameters': { 1: { 'default_value': 0.0, }, }, },
+    'RouteScanAdvancedOutput':  { 'parameters': { 3: { 'default_value': False, }, }, },
+    'RouteTriggerInput':        { 'parameters': { 3: { 'default_value': False, }, }, },
+    'WaitForDebounce':          { 'parameters': { 1: { 'default_value': 5000, }, }, },
+    'WaitForScanComplete':      { 'parameters': { 1: { 'default_value': 5000, }, }, },
 
+
+
+}

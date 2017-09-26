@@ -111,7 +111,7 @@ niswitch.Session methods
 
     :type scan_mode: :py:data:`niswitch.ScanMode`
 
-.. function:: configure_scan_trigger(scan_delay, trigger_input, scan_advanced_output)
+.. function:: configure_scan_trigger(trigger_input, scan_advanced_output, scan_delay)
 
     Configures the scan triggers for the scan list established with
     :py:func:`niswitch.configure_scan_list`. Refer to Devices Overview to determine if
