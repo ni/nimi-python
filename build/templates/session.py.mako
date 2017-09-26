@@ -156,7 +156,6 @@ class Session(_SessionBase):
 
     def __init__(${init_method_params}):
         super(Session, self).__init__(repeated_capability='')
-        # TODO(marcoskirsch): private members should start with _
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
         self._is_frozen = True
