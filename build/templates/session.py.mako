@@ -151,12 +151,6 @@ class _RepeatedCapability(_SessionBase):
         self.${config['session_handle_parameter_name']} = vi
         self._is_frozen = True
 
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        pass
-
 
 class Session(_SessionBase):
     '''${config['session_class_description']}'''
