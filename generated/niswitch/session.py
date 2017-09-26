@@ -919,15 +919,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
 
-    def clear_interchange_warnings(self):
-        '''clear_interchange_warnings
-
-        This function clears the list of current interchange warnings.
-        '''
-        error_code = self.library.niSwitch_ClearInterchangeWarnings(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def commit(self):
         '''commit
 
@@ -1426,107 +1417,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViStatus(code_ctype.value), description_ctype.value.decode("ascii")
 
-    def get_next_coercion_record(self, buffer_size):
-        '''get_next_coercion_record
-
-        This function returns the coercion information associated with the IVI
-        session. This function retrieves and clears the oldest instance in which
-        the instrument driver coerced a value you specified to another value. If
-        you set the RECORD_COERCIONS attribute to VI_TRUE, the
-        instrument driver keeps a list of all coercions it makes on ViInt32 or
-        ViReal64 values you pass to instrument driver functions. You use this
-        function to retrieve information from that list. If the next coercion
-        record string, including the terminating NUL byte, contains more bytes
-        than you indicate in this parameter, the function copies Buffer Size - 1
-        bytes into the buffer, places an ASCII NUL byte at the end of the
-        buffer, and returns the buffer size you must pass to get the entire
-        value. For example, if the value is "123456" and the Buffer Size is 4,
-        the function places "123" into the buffer and returns 7. If you pass a
-        negative number, the function copies the value to the buffer regardless
-        of the number of bytes in the value. If you pass 0, you can pass
-        VI_NULL for the Coercion Record buffer parameter. The function returns
-        an empty string in the Coercion Record parameter if no coercion records
-        remain for the session.
-
-        Args:
-            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
-                Coercion Record parameter. If the next coercion record string, including
-                the terminating NUL byte, contains more bytes than you indicate in this
-                parameter, the function copies Buffer Size - 1 bytes into the buffer,
-                places an ASCII NUL byte at the end of the buffer, and returns the
-                buffer size you must pass to get the entire value. For example, if the
-                value is "123456" and the Buffer Size is 4, the function places "123"
-                into the buffer and returns 7. If you pass a negative number, the
-                function copies the value to the buffer regardless of the number of
-                bytes in the value. If you pass 0, you can pass VI_NULL for the
-                Coercion Record buffer parameter. Default Value: None
-
-        Returns:
-            coercion_record (str):Returns the next coercion record for the IVI session. If there are no
-                coercion records, the function returns an empty string. The buffer must
-                contain at least as many elements as the value you specify with the
-                Buffer Size parameter. If the next coercion record string, including the
-                terminating NUL byte, contains more bytes than you indicate with the
-                Buffer Size parameter, the function copies Buffer Size - 1 bytes into
-                the buffer, places an ASCII NUL byte at the end of the buffer, and
-                returns the buffer size you must pass to get the entire value. For
-                example, if the value is "123456" and the Buffer Size is 4, the function
-                places "123" into the buffer and returns 7. This parameter returns an
-                empty string if no coercion records remain for the session.
-        '''
-        coercion_record_ctype = ctypes_types.ViString_ctype(0)
-        error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, ctypes.pointer(coercion_record_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViString(coercion_record_ctype.value)
-
-    def get_next_interchange_warning(self, buffer_size):
-        '''get_next_interchange_warning
-
-        This function returns the interchangeability warnings associated with
-        the IVI session. It retrieves and clears the oldest instance in which
-        the class driver recorded an interchangeability warning.
-        Interchangeability warnings indicate that using your application with a
-        different instrument might cause different behavior. You use this
-        function to retrieve interchangeability warnings. The driver performs
-        interchangeability checking when the INTERCHANGE_CHECK
-        attribute is set to VI_TRUE. The function returns an empty string in
-        the Interchange Warning parameter if no interchangeability warnings
-        remain for the session. In general, the instrument driver generates
-        interchangeability warnings when an attribute that affects the behavior
-        of the instrument is in a state that you did not specify.
-
-        Args:
-            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
-                Interchange Warning parameter. If the next interchangeability warning
-                string, including the terminating NUL byte, contains more bytes than you
-                indicate in this parameter, the function copies Buffer Size - 1 bytes
-                into the buffer, places an ASCII NUL byte at the end of the buffer, and
-                returns the buffer size you must pass to get the entire value. For
-                example, if the value is "123456" and the Buffer Size is 4, the function
-                places "123" into the buffer and returns 7. If you pass a negative
-                number, the function copies the value to the buffer regardless of the
-                number of bytes in the value. If you pass 0, you can pass VI_NULL for
-                the Interchange Warning buffer parameter. Default Value: None
-
-        Returns:
-            interchange_warning (str):Returns the next interchange warning for the IVI session. If there are
-                no interchange warnings, the function returns an empty string. The
-                buffer must contain at least as many elements as the value you specify
-                with the Buffer Size parameter. If the next interchangeability warning
-                string, including the terminating NUL byte, contains more bytes than you
-                indicate with the Buffer Size parameter, the function copies Buffer Size
-                - 1 bytes into the buffer, places an ASCII NUL byte at the end of the
-                buffer, and returns the buffer size you must pass to get the entire
-                value. For example, if the value is "123456" and the Buffer Size is 4,
-                the function places "123" into the buffer and returns 7. This parameter
-                returns an empty string if no interchangeability warnings remain for the
-                session.
-        '''
-        interchange_warning_ctype = ctypes_types.ViString_ctype(0)
-        error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, ctypes.pointer(interchange_warning_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViString(interchange_warning_ctype.value)
-
     def get_path(self, channel1, channel2):
         '''get_path
 
@@ -1952,52 +1842,6 @@ class _SessionBase(object):
         if type(relay_action) is not enums.RelayAction:
             raise TypeError('Parameter mode must be of type ' + str(enums.RelayAction))
         error_code = self.library.niSwitch_RelayControl(self.vi, relay_name.encode('ascii'), relay_action.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def reset_interchange_check(self):
-        '''reset_interchange_check
-
-        When developing a complex test system that consists of multiple test
-        modules, it is generally a good idea to design the test modules so that
-        they can run in any order. To do so requires ensuring that each test
-        module completely configures the state of each instrument it uses. If a
-        particular test module does not completely configure the state of an
-        instrument, the state of the instrument depends on the configuration
-        from a previously executed test module. If you execute the test modules
-        in a different order, the behavior of the instrument and therefore the
-        entire test module is likely to change. This change in behavior is
-        generally instrument specific and represents an interchangeability
-        problem. You can use this function to test for such cases. After you
-        call this function, the interchangeability checking algorithms in the
-        specific driver ignore all previous configuration operations. By calling
-        this function at the beginning of a test module, you can determine
-        whether the test module has dependencies on the operation of previously
-        executed test modules. This function does not clear the
-        interchangeability warnings from the list of previously recorded
-        interchangeability warnings. If you want to guarantee that the
-        get_next_interchange_warning function only returns those
-        interchangeability warnings that are generated after calling this
-        function, you must clear the list of interchangeability warnings. You
-        can clear the interchangeability warnings list by repeatedly calling the
-        get_next_interchange_warning function until no more
-        interchangeability warnings are returned. If you are not interested in
-        the content of those warnings, you can call the
-        clear_interchange_warnings function.
-        '''
-        error_code = self.library.niSwitch_ResetInterchangeCheck(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def reset_with_defaults(self):
-        '''reset_with_defaults
-
-        Resets the switch module and applies initial user specified settings
-        from the logical name used to initialize the session. If the session was
-        created without a logical name, this function is equivalent to
-        reset.
-        '''
-        error_code = self.library.niSwitch_ResetWithDefaults(self.vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

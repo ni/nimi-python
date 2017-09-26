@@ -24,8 +24,6 @@ class SideEffectsHelper(object):
         self._defaults['CanConnect'] = {}
         self._defaults['CanConnect']['return'] = 0
         self._defaults['CanConnect']['pathCapability'] = None
-        self._defaults['ClearInterchangeWarnings'] = {}
-        self._defaults['ClearInterchangeWarnings']['return'] = 0
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
         self._defaults['ConfigureScanList'] = {}
@@ -63,12 +61,6 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['Code'] = None
         self._defaults['GetError']['Description'] = None
-        self._defaults['GetNextCoercionRecord'] = {}
-        self._defaults['GetNextCoercionRecord']['return'] = 0
-        self._defaults['GetNextCoercionRecord']['coercionRecord'] = None
-        self._defaults['GetNextInterchangeWarning'] = {}
-        self._defaults['GetNextInterchangeWarning']['return'] = 0
-        self._defaults['GetNextInterchangeWarning']['interchangeWarning'] = None
         self._defaults['GetPath'] = {}
         self._defaults['GetPath']['return'] = 0
         self._defaults['GetPath']['Path'] = None
@@ -94,10 +86,6 @@ class SideEffectsHelper(object):
         self._defaults['IsScanning']['isScanning'] = None
         self._defaults['RelayControl'] = {}
         self._defaults['RelayControl']['return'] = 0
-        self._defaults['ResetInterchangeCheck'] = {}
-        self._defaults['ResetInterchangeCheck']['return'] = 0
-        self._defaults['ResetWithDefaults'] = {}
-        self._defaults['ResetWithDefaults']['return'] = 0
         self._defaults['RouteScanAdvancedOutput'] = {}
         self._defaults['RouteScanAdvancedOutput']['return'] = 0
         self._defaults['RouteTriggerInput'] = {}
@@ -151,11 +139,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_CanConnect", param='pathCapability')
         path_capability.contents.value = self._defaults['CanConnect']['pathCapability']
         return self._defaults['CanConnect']['return']
-
-    def niSwitch_ClearInterchangeWarnings(self, vi):  # noqa: N802
-        if self._defaults['ClearInterchangeWarnings']['return'] != 0:
-            return self._defaults['ClearInterchangeWarnings']['return']
-        return self._defaults['ClearInterchangeWarnings']['return']
 
     def niSwitch_Commit(self, vi):  # noqa: N802
         if self._defaults['Commit']['return'] != 0:
@@ -262,22 +245,6 @@ class SideEffectsHelper(object):
         description.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
         return self._defaults['GetError']['return']
 
-    def niSwitch_GetNextCoercionRecord(self, vi, buffer_size, coercion_record):  # noqa: N802
-        if self._defaults['GetNextCoercionRecord']['return'] != 0:
-            return self._defaults['GetNextCoercionRecord']['return']
-        if self._defaults['GetNextCoercionRecord']['coercionRecord'] is None:
-            raise MockFunctionCallError("niSwitch_GetNextCoercionRecord", param='coercionRecord')
-        coercion_record.contents.value = self._defaults['GetNextCoercionRecord']['coercionRecord']
-        return self._defaults['GetNextCoercionRecord']['return']
-
-    def niSwitch_GetNextInterchangeWarning(self, vi, buffer_size, interchange_warning):  # noqa: N802
-        if self._defaults['GetNextInterchangeWarning']['return'] != 0:
-            return self._defaults['GetNextInterchangeWarning']['return']
-        if self._defaults['GetNextInterchangeWarning']['interchangeWarning'] is None:
-            raise MockFunctionCallError("niSwitch_GetNextInterchangeWarning", param='interchangeWarning')
-        interchange_warning.contents.value = self._defaults['GetNextInterchangeWarning']['interchangeWarning']
-        return self._defaults['GetNextInterchangeWarning']['return']
-
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
         if self._defaults['GetPath']['return'] != 0:
             return self._defaults['GetPath']['return']
@@ -349,16 +316,6 @@ class SideEffectsHelper(object):
         if self._defaults['RelayControl']['return'] != 0:
             return self._defaults['RelayControl']['return']
         return self._defaults['RelayControl']['return']
-
-    def niSwitch_ResetInterchangeCheck(self, vi):  # noqa: N802
-        if self._defaults['ResetInterchangeCheck']['return'] != 0:
-            return self._defaults['ResetInterchangeCheck']['return']
-        return self._defaults['ResetInterchangeCheck']['return']
-
-    def niSwitch_ResetWithDefaults(self, vi):  # noqa: N802
-        if self._defaults['ResetWithDefaults']['return'] != 0:
-            return self._defaults['ResetWithDefaults']['return']
-        return self._defaults['ResetWithDefaults']['return']
 
     def niSwitch_RouteScanAdvancedOutput(self, vi, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):  # noqa: N802
         if self._defaults['RouteScanAdvancedOutput']['return'] != 0:
@@ -453,8 +410,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_AbortScan.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_CanConnect.side_effect = MockFunctionCallError("niSwitch_CanConnect")
         mock_library.niSwitch_CanConnect.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_ClearInterchangeWarnings.side_effect = MockFunctionCallError("niSwitch_ClearInterchangeWarnings")
-        mock_library.niSwitch_ClearInterchangeWarnings.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_Commit.side_effect = MockFunctionCallError("niSwitch_Commit")
         mock_library.niSwitch_Commit.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_ConfigureScanList.side_effect = MockFunctionCallError("niSwitch_ConfigureScanList")
@@ -485,10 +440,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_GetChannelName.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_GetError.side_effect = MockFunctionCallError("niSwitch_GetError")
         mock_library.niSwitch_GetError.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_GetNextCoercionRecord.side_effect = MockFunctionCallError("niSwitch_GetNextCoercionRecord")
-        mock_library.niSwitch_GetNextCoercionRecord.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_GetNextInterchangeWarning.side_effect = MockFunctionCallError("niSwitch_GetNextInterchangeWarning")
-        mock_library.niSwitch_GetNextInterchangeWarning.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_GetPath.side_effect = MockFunctionCallError("niSwitch_GetPath")
         mock_library.niSwitch_GetPath.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_GetRelayCount.side_effect = MockFunctionCallError("niSwitch_GetRelayCount")
@@ -507,10 +458,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_IsScanning.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_RelayControl.side_effect = MockFunctionCallError("niSwitch_RelayControl")
         mock_library.niSwitch_RelayControl.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_ResetInterchangeCheck.side_effect = MockFunctionCallError("niSwitch_ResetInterchangeCheck")
-        mock_library.niSwitch_ResetInterchangeCheck.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_ResetWithDefaults.side_effect = MockFunctionCallError("niSwitch_ResetWithDefaults")
-        mock_library.niSwitch_ResetWithDefaults.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_RouteScanAdvancedOutput.side_effect = MockFunctionCallError("niSwitch_RouteScanAdvancedOutput")
         mock_library.niSwitch_RouteScanAdvancedOutput.return_value = niswitch.python_types.ViStatus(0)
         mock_library.niSwitch_RouteTriggerInput.side_effect = MockFunctionCallError("niSwitch_RouteTriggerInput")

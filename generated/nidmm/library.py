@@ -18,7 +18,6 @@ class Library(object):
         self._func_lock = threading.Lock()
         # We cache the cfunc object from the ctypes.CDLL object
         self.niDMM_Abort_cfunc = None
-        self.niDMM_ClearInterchangeWarnings_cfunc = None
         self.niDMM_ConfigureACBandwidth_cfunc = None
         self.niDMM_ConfigureADCCalibration_cfunc = None
         self.niDMM_ConfigureAutoZeroMode_cfunc = None
@@ -50,36 +49,27 @@ class Library(object):
         self.niDMM_Fetch_cfunc = None
         self.niDMM_FetchMultiPoint_cfunc = None
         self.niDMM_FetchWaveform_cfunc = None
-        self.niDMM_FormatMeasAbsolute_cfunc = None
         self.niDMM_GetApertureTimeInfo_cfunc = None
         self.niDMM_GetAttributeViBoolean_cfunc = None
         self.niDMM_GetAttributeViInt32_cfunc = None
         self.niDMM_GetAttributeViReal64_cfunc = None
         self.niDMM_GetAttributeViString_cfunc = None
         self.niDMM_GetAutoRangeValue_cfunc = None
-        self.niDMM_GetCalCount_cfunc = None
         self.niDMM_GetCalDateAndTime_cfunc = None
-        self.niDMM_GetChannelName_cfunc = None
         self.niDMM_GetDevTemp_cfunc = None
         self.niDMM_GetError_cfunc = None
         self.niDMM_GetErrorMessage_cfunc = None
         self.niDMM_GetLastCalTemp_cfunc = None
         self.niDMM_GetMeasurementPeriod_cfunc = None
-        self.niDMM_GetNextCoercionRecord_cfunc = None
-        self.niDMM_GetNextInterchangeWarning_cfunc = None
         self.niDMM_GetSelfCalSupported_cfunc = None
         self.niDMM_InitWithOptions_cfunc = None
         self.niDMM_Initiate_cfunc = None
-        self.niDMM_IsOverRange_cfunc = None
-        self.niDMM_IsUnderRange_cfunc = None
         self.niDMM_PerformOpenCableComp_cfunc = None
         self.niDMM_PerformShortCableComp_cfunc = None
         self.niDMM_Read_cfunc = None
         self.niDMM_ReadMultiPoint_cfunc = None
         self.niDMM_ReadStatus_cfunc = None
         self.niDMM_ReadWaveform_cfunc = None
-        self.niDMM_ResetInterchangeCheck_cfunc = None
-        self.niDMM_ResetWithDefaults_cfunc = None
         self.niDMM_SelfCal_cfunc = None
         self.niDMM_SendSoftwareTrigger_cfunc = None
         self.niDMM_SetAttributeViBoolean_cfunc = None
@@ -104,14 +94,6 @@ class Library(object):
                 self.niDMM_Abort_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niDMM_Abort_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_Abort_cfunc(vi)
-
-    def niDMM_ClearInterchangeWarnings(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_ClearInterchangeWarnings_cfunc is None:
-                self.niDMM_ClearInterchangeWarnings_cfunc = self._library.niDMM_ClearInterchangeWarnings
-                self.niDMM_ClearInterchangeWarnings_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDMM_ClearInterchangeWarnings_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_ClearInterchangeWarnings_cfunc(vi)
 
     def niDMM_ConfigureACBandwidth(self, vi, ac_minimum_frequency_hz, ac_maximum_frequency_hz):  # noqa: N802
         with self._func_lock:
@@ -361,14 +343,6 @@ class Library(object):
                 self.niDMM_FetchWaveform_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_FetchWaveform_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
 
-    def niDMM_FormatMeasAbsolute(self, measurement_function, range, resolution, measurement, mode_string, range_string, data_string):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_FormatMeasAbsolute_cfunc is None:
-                self.niDMM_FormatMeasAbsolute_cfunc = self._library.niDMM_FormatMeasAbsolute
-                self.niDMM_FormatMeasAbsolute_cfunc.argtypes = [ViInt32_ctype, ViReal64_ctype, ViReal64_ctype, ViReal64_ctype, ctypes.POINTER(ViChar_ctype), ctypes.POINTER(ViChar_ctype), ctypes.POINTER(ViChar_ctype)]  # noqa: F405
-                self.niDMM_FormatMeasAbsolute_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_FormatMeasAbsolute_cfunc(measurement_function, range, resolution, measurement, mode_string, range_string, data_string)
-
     def niDMM_GetApertureTimeInfo(self, vi, aperture_time, aperture_time_units):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetApertureTimeInfo_cfunc is None:
@@ -417,14 +391,6 @@ class Library(object):
                 self.niDMM_GetAutoRangeValue_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_GetAutoRangeValue_cfunc(vi, actual_range)
 
-    def niDMM_GetCalCount(self, vi, cal_type, count):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_GetCalCount_cfunc is None:
-                self.niDMM_GetCalCount_cfunc = self._library.niDMM_GetCalCount
-                self.niDMM_GetCalCount_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
-                self.niDMM_GetCalCount_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_GetCalCount_cfunc(vi, cal_type, count)
-
     def niDMM_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetCalDateAndTime_cfunc is None:
@@ -432,14 +398,6 @@ class Library(object):
                 self.niDMM_GetCalDateAndTime_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ctypes.POINTER(ViInt32_ctype), ctypes.POINTER(ViInt32_ctype), ctypes.POINTER(ViInt32_ctype), ctypes.POINTER(ViInt32_ctype), ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
                 self.niDMM_GetCalDateAndTime_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_GetCalDateAndTime_cfunc(vi, cal_type, month, day, year, hour, minute)
-
-    def niDMM_GetChannelName(self, vi, index, buffer_size, channel_string):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_GetChannelName_cfunc is None:
-                self.niDMM_GetChannelName_cfunc = self._library.niDMM_GetChannelName
-                self.niDMM_GetChannelName_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
-                self.niDMM_GetChannelName_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_GetChannelName_cfunc(vi, index, buffer_size, channel_string)
 
     def niDMM_GetDevTemp(self, vi, options, temperature):  # noqa: N802
         with self._func_lock:
@@ -481,22 +439,6 @@ class Library(object):
                 self.niDMM_GetMeasurementPeriod_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_GetMeasurementPeriod_cfunc(vi, period)
 
-    def niDMM_GetNextCoercionRecord(self, vi, buffer_size, coercion_record):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_GetNextCoercionRecord_cfunc is None:
-                self.niDMM_GetNextCoercionRecord_cfunc = self._library.niDMM_GetNextCoercionRecord
-                self.niDMM_GetNextCoercionRecord_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
-                self.niDMM_GetNextCoercionRecord_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_GetNextCoercionRecord_cfunc(vi, buffer_size, coercion_record)
-
-    def niDMM_GetNextInterchangeWarning(self, vi, buffer_size, interchange_warning):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_GetNextInterchangeWarning_cfunc is None:
-                self.niDMM_GetNextInterchangeWarning_cfunc = self._library.niDMM_GetNextInterchangeWarning
-                self.niDMM_GetNextInterchangeWarning_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
-                self.niDMM_GetNextInterchangeWarning_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_GetNextInterchangeWarning_cfunc(vi, buffer_size, interchange_warning)
-
     def niDMM_GetSelfCalSupported(self, vi, self_cal_supported):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetSelfCalSupported_cfunc is None:
@@ -520,22 +462,6 @@ class Library(object):
                 self.niDMM_Initiate_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niDMM_Initiate_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_Initiate_cfunc(vi)
-
-    def niDMM_IsOverRange(self, vi, measurement_value, is_over_range):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_IsOverRange_cfunc is None:
-                self.niDMM_IsOverRange_cfunc = self._library.niDMM_IsOverRange
-                self.niDMM_IsOverRange_cfunc.argtypes = [ViSession_ctype, ViReal64_ctype, ctypes.POINTER(ViBoolean_ctype)]  # noqa: F405
-                self.niDMM_IsOverRange_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_IsOverRange_cfunc(vi, measurement_value, is_over_range)
-
-    def niDMM_IsUnderRange(self, vi, measurement_value, is_under_range):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_IsUnderRange_cfunc is None:
-                self.niDMM_IsUnderRange_cfunc = self._library.niDMM_IsUnderRange
-                self.niDMM_IsUnderRange_cfunc.argtypes = [ViSession_ctype, ViReal64_ctype, ctypes.POINTER(ViBoolean_ctype)]  # noqa: F405
-                self.niDMM_IsUnderRange_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_IsUnderRange_cfunc(vi, measurement_value, is_under_range)
 
     def niDMM_PerformOpenCableComp(self, vi, conductance, susceptance):  # noqa: N802
         with self._func_lock:
@@ -584,22 +510,6 @@ class Library(object):
                 self.niDMM_ReadWaveform_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ctypes.POINTER(ViReal64_ctype), ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
                 self.niDMM_ReadWaveform_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_ReadWaveform_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
-
-    def niDMM_ResetInterchangeCheck(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_ResetInterchangeCheck_cfunc is None:
-                self.niDMM_ResetInterchangeCheck_cfunc = self._library.niDMM_ResetInterchangeCheck
-                self.niDMM_ResetInterchangeCheck_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDMM_ResetInterchangeCheck_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_ResetInterchangeCheck_cfunc(vi)
-
-    def niDMM_ResetWithDefaults(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_ResetWithDefaults_cfunc is None:
-                self.niDMM_ResetWithDefaults_cfunc = self._library.niDMM_ResetWithDefaults
-                self.niDMM_ResetWithDefaults_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDMM_ResetWithDefaults_cfunc.restype = nidmm.python_types.ViStatus
-        return self.niDMM_ResetWithDefaults_cfunc(vi)
 
     def niDMM_SelfCal(self, vi):  # noqa: N802
         with self._func_lock:
