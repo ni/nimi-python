@@ -89,17 +89,17 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 function_default_value = {
-    'InitWithTopology':  { 'parameters': { 1: { 'default_value': 'Configured Topology', },
-                                           2: { 'default_value': False, },
-                                           3: { 'default_value': False, },
-                                           4: { 'default_value': '', }, }, },
+    'InitWithTopology':         { 'parameters': { 1: { 'default_value': 'Configured Topology', },
+                                                  2: { 'default_value': False, },
+                                                  3: { 'default_value': False, },
+                                                  4: { 'default_value': '', }, }, },
+    #'ConfigureScanList':        { 'parameters': { 2: { 'default_value': niswitch.ScanMode.BREAK_BEFORE_MAKE, },},},
+    'ConfigureScanTrigger':     { 'parameters': { 1: { 'default_value': 0.0, },},},
+    'RouteScanAdvancedOutput':  { 'parameters': { 3: { 'default_value': False, },},},
+    'RouteTriggerInput':        { 'parameters': { 3: { 'default_value': False, },},},
+    'WaitForDebounce':          { 'parameters': { 1: { 'default_value': 5000, },},},
+    'WaitForScanComplete':      { 'parameters': { 1: { 'default_value': 5000, },},},
+
+
+
 }
-
-# defaults
-
-configure_Scan_list scan_mode #2 should be be defualt to break before make
-confugre_scan)trigger #1 scan delay should be 0.0
-route_scan_advanced_output #3 invert should be defualt to false
-route_trigger_input #3 invert should degault false
-wait_for_debounce #1 timeout shouldb be 5000 ms
-wait_for_scan_complete #1 timput 5000
