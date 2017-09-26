@@ -40,9 +40,9 @@ for f in sorted(functions):
     if functions[f]['codegen_method'] == 'public':
         name = functions[f]['python_name']
         param_list = helper.get_params_snippet(functions[f], helper.ParamListType.DISPLAY_METHOD)
-        table_contents.append((':py:func:`{0}.{1}`'.format(module_name, name),))
+        table_contents.append((':py:func:`{0}`'.format(name),))
 
-table = helper.as_rest_table(table_contents, full=True, header=False)
+table = helper.as_rest_table(table_contents)
 %>\
    **Public methods**
 
