@@ -5,26 +5,37 @@
 # This will override that with private - add '_' to the beginning of the name, or
 # don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':         { 'codegen_method': 'private',  },
-    'Initiate':                { 'codegen_method': 'private',  },
-    'close':                   { 'codegen_method': 'private',  },
-    'Abort':                   { 'codegen_method': 'private',  },
-    'CheckAttribute.+':        { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
-    '.etAttribute.+':          { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
-    'init':                    { 'codegen_method': 'no',       },
-    'error_message':           { 'codegen_method': 'no',       },
-    'GetError':                { 'codegen_method': 'private',  },
-    'GetErrorMessage':         { 'codegen_method': 'private',  },
-    'ClearError':              { 'codegen_method': 'no',       },
-    'Control':                 { 'codegen_method': 'no',       },
-    'LockSession':             { 'codegen_method': 'no',       },
-    'UnlockSession':           { 'codegen_method': 'no',       },
-    '.+ExtCal':                { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'CalAdjust.+':             { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    '.+UserDefined.+':         { 'codegen_method': 'no',       },
-    'SetCalPassword':          { 'codegen_method': 'no',       },
-    'SetAttributeViSession':   { 'codegen_method': 'no',       },
-    'GetAttributeViSession':   { 'codegen_method': 'no',       },
+    'InitWithOptions':                 { 'codegen_method': 'private',  },
+    'Initiate':                        { 'codegen_method': 'private',  },
+    'close':                           { 'codegen_method': 'private',  },
+    'Abort':                           { 'codegen_method': 'private',  },
+    'CheckAttribute.+':                { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
+    '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
+    'init':                            { 'codegen_method': 'no',       },
+    'error_message':                   { 'codegen_method': 'no',       },
+    'GetError':                        { 'codegen_method': 'private',  },
+    'GetErrorMessage':                 { 'codegen_method': 'private',  },
+    'ClearError':                      { 'codegen_method': 'no',       },
+    'Control':                         { 'codegen_method': 'no',       },
+    'LockSession':                     { 'codegen_method': 'no',       },
+    'UnlockSession':                   { 'codegen_method': 'no',       },
+    '.+ExtCal':                        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    '.+UserDefined.+':                 { 'codegen_method': 'no',       },
+    'SetCalPassword':                  { 'codegen_method': 'no',       },
+    'SetAttributeViSession':           { 'codegen_method': 'no',       },
+    'GetAttributeViSession':           { 'codegen_method': 'no',       },
+    'get_next_interchange_warning':    { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'reset_interchange_check':         { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'clear_interchange_warnings':      { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'get_next_coercion_record':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'error_query':                     { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'reset_with_defaults':             { 'codegen_method': 'no',       },  # Should use traditional reset function
+    'get_channel_name':                { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument DMMs
+    'get_cal_count':                   { 'codegen_method': 'no',       },  # Calibration function not exposed in Python APIs
+    'format_meas_absolute':            { 'codegen_method': 'no',       },  # Utility function for C customers
+    'is_under_range':                  { 'codegen_method': 'no',       },  # Utility function for C customers
+    'is_over_range':                   { 'codegen_method': 'no',       },  # Utility function for C customers
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -83,7 +94,6 @@ functions_buffer_info = {
     'FetchWaveform':                { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
     'ReadWaveform':                 { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
     'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'GetNextInterchangeWarning':    { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetCalUserDefinedInfo':        { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
     'init':                         { 'parameters': { 0: { 'is_buffer': True, }, }, },
     'InitWithOptions':              { 'parameters': { 0: { 'is_buffer': True, },
