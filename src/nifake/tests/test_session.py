@@ -38,7 +38,7 @@ class TestSession(object):
 
         self.patched_library.niFake_close.side_effect = self.disallow_close
         session = nifake.Session('dev1')
-        assert session.vi == SESSION_NUM_FOR_TEST
+        assert session._vi == SESSION_NUM_FOR_TEST
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
         patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False, is_error_handling=False)
 
@@ -46,7 +46,7 @@ class TestSession(object):
 
     def test_init_with_options_nondefault(self):
         session = nifake.Session('FakeDevice', True, True, 'Some string')
-        assert(session.vi == SESSION_NUM_FOR_TEST)
+        assert(session._vi == SESSION_NUM_FOR_TEST)
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'FakeDevice', True, True, b'Some string', ANY)
 
     def test_error_on_init(self):
@@ -75,7 +75,7 @@ class TestSession(object):
 
     def test_session_context_manager(self):
         with nifake.Session('dev1') as session:
-            assert session.vi == SESSION_NUM_FOR_TEST
+            assert session._vi == SESSION_NUM_FOR_TEST
             self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
         self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
@@ -168,9 +168,9 @@ class TestSession(object):
 
     def test_library_singleton(self):
         with nifake.Session('dev1') as session:
-            lib1 = session.library
+            lib1 = session._library
         with nifake.Session('dev2') as session:
-            lib2 = session.library
+            lib2 = session._library
         assert lib1 is lib2
 
     def test_one_input_function(self):
