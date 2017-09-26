@@ -24,7 +24,7 @@ try:
                 backlog, acquisition_state = session.read_status()
                 if (acquisition_state == nidmm.AcquisitionStatus.FINISHED_WITH_NO_BACKLOG):
                     break
-                measurements = session.fetch_waveform(maximum_time=-1, array_size=backlog)
+                measurements = session.fetch_waveform(array_size=backlog)
                 print(measurements)
 except nidmm.Error as e:
     sys.stderr.write(str(e))
