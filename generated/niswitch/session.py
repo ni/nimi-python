@@ -918,15 +918,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
 
-    def clear_interchange_warnings(self):
-        '''clear_interchange_warnings
-
-        This function clears the list of current interchange warnings.
-        '''
-        error_code = self._library.niSwitch_ClearInterchangeWarnings(self._vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def commit(self):
         '''commit
 
@@ -939,7 +930,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_scan_list(self, scanlist, scan_mode):
+    def configure_scan_list(self, scanlist, scan_mode=enums.ScanMode.BREAK_BEFORE_MAKE):
         '''configure_scan_list
 
         Configures the scan list and scan mode used for scanning. Refer to
@@ -967,7 +958,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_scan_trigger(self, scan_delay, trigger_input, scan_advanced_output):
+    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=0.0):
         '''configure_scan_trigger
 
         Configures the scan triggers for the scan list established with
@@ -1425,90 +1416,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViStatus(code_ctype.value), description_ctype.value.decode("ascii")
 
-    def get_next_coercion_record(self):
-        '''get_next_coercion_record
-
-        This function returns the coercion information associated with the IVI
-        session. This function retrieves and clears the oldest instance in which
-        the instrument driver coerced a value you specified to another value. If
-        you set the RECORD_COERCIONS attribute to VI_TRUE, the
-        instrument driver keeps a list of all coercions it makes on ViInt32 or
-        ViReal64 values you pass to instrument driver functions. You use this
-        function to retrieve information from that list. If the next coercion
-        record string, including the terminating NUL byte, contains more bytes
-        than you indicate in this parameter, the function copies Buffer Size - 1
-        bytes into the buffer, places an ASCII NUL byte at the end of the
-        buffer, and returns the buffer size you must pass to get the entire
-        value. For example, if the value is "123456" and the Buffer Size is 4,
-        the function places "123" into the buffer and returns 7. If you pass a
-        negative number, the function copies the value to the buffer regardless
-        of the number of bytes in the value. If you pass 0, you can pass
-        VI_NULL for the Coercion Record buffer parameter. The function returns
-        an empty string in the Coercion Record parameter if no coercion records
-        remain for the session.
-
-        Args:
-            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
-                Coercion Record parameter. If the next coercion record string, including
-                the terminating NUL byte, contains more bytes than you indicate in this
-                parameter, the function copies Buffer Size - 1 bytes into the buffer,
-                places an ASCII NUL byte at the end of the buffer, and returns the
-                buffer size you must pass to get the entire value. For example, if the
-                value is "123456" and the Buffer Size is 4, the function places "123"
-                into the buffer and returns 7. If you pass a negative number, the
-                function copies the value to the buffer regardless of the number of
-                bytes in the value. If you pass 0, you can pass VI_NULL for the
-                Coercion Record buffer parameter. Default Value: None
-        '''
-        buffer_size = 0
-        coercion_record_ctype = None
-        error_code = self._library.niSwitch_GetNextCoercionRecord(self._vi, buffer_size, coercion_record_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        coercion_record_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self._library.niSwitch_GetNextCoercionRecord(self._vi, buffer_size, coercion_record_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return coercion_record_ctype.value.decode("ascii")
-
-    def get_next_interchange_warning(self):
-        '''get_next_interchange_warning
-
-        This function returns the interchangeability warnings associated with
-        the IVI session. It retrieves and clears the oldest instance in which
-        the class driver recorded an interchangeability warning.
-        Interchangeability warnings indicate that using your application with a
-        different instrument might cause different behavior. You use this
-        function to retrieve interchangeability warnings. The driver performs
-        interchangeability checking when the INTERCHANGE_CHECK
-        attribute is set to VI_TRUE. The function returns an empty string in
-        the Interchange Warning parameter if no interchangeability warnings
-        remain for the session. In general, the instrument driver generates
-        interchangeability warnings when an attribute that affects the behavior
-        of the instrument is in a state that you did not specify.
-
-        Args:
-            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
-                Interchange Warning parameter. If the next interchangeability warning
-                string, including the terminating NUL byte, contains more bytes than you
-                indicate in this parameter, the function copies Buffer Size - 1 bytes
-                into the buffer, places an ASCII NUL byte at the end of the buffer, and
-                returns the buffer size you must pass to get the entire value. For
-                example, if the value is "123456" and the Buffer Size is 4, the function
-                places "123" into the buffer and returns 7. If you pass a negative
-                number, the function copies the value to the buffer regardless of the
-                number of bytes in the value. If you pass 0, you can pass VI_NULL for
-                the Interchange Warning buffer parameter. Default Value: None
-        '''
-        buffer_size = 0
-        interchange_warning_ctype = None
-        error_code = self._library.niSwitch_GetNextInterchangeWarning(self._vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self._library.niSwitch_GetNextInterchangeWarning(self._vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return interchange_warning_ctype.value.decode("ascii")
-
     def get_path(self, channel1, channel2):
         '''get_path
 
@@ -1937,40 +1844,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def reset_interchange_check(self):
-        '''reset_interchange_check
-
-        When developing a complex test system that consists of multiple test
-        modules, it is generally a good idea to design the test modules so that
-        they can run in any order. To do so requires ensuring that each test
-        module completely configures the state of each instrument it uses. If a
-        particular test module does not completely configure the state of an
-        instrument, the state of the instrument depends on the configuration
-        from a previously executed test module. If you execute the test modules
-        in a different order, the behavior of the instrument and therefore the
-        entire test module is likely to change. This change in behavior is
-        generally instrument specific and represents an interchangeability
-        problem. You can use this function to test for such cases. After you
-        call this function, the interchangeability checking algorithms in the
-        specific driver ignore all previous configuration operations. By calling
-        this function at the beginning of a test module, you can determine
-        whether the test module has dependencies on the operation of previously
-        executed test modules. This function does not clear the
-        interchangeability warnings from the list of previously recorded
-        interchangeability warnings. If you want to guarantee that the
-        get_next_interchange_warning function only returns those
-        interchangeability warnings that are generated after calling this
-        function, you must clear the list of interchangeability warnings. You
-        can clear the interchangeability warnings list by repeatedly calling the
-        get_next_interchange_warning function until no more
-        interchangeability warnings are returned. If you are not interested in
-        the content of those warnings, you can call the
-        clear_interchange_warnings function.
-        '''
-        error_code = self._library.niSwitch_ResetInterchangeCheck(self._vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def reset_with_defaults(self):
         '''reset_with_defaults
 
@@ -1983,7 +1856,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):
+    def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False):
         '''route_scan_advanced_output
 
         Routes the scan advanced output trigger from a trigger bus line (TTLx)
@@ -2010,7 +1883,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert):
+    def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert=False):
         '''route_trigger_input
 
         Routes the input trigger from the front or rear connector to a trigger
@@ -2311,7 +2184,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_debounce(self, maximum_time_ms):
+    def wait_for_debounce(self, maximum_time_ms=5000):
         '''wait_for_debounce
 
         Pauses until all created paths have settled. If the time you specify
@@ -2329,7 +2202,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_scan_complete(self, maximum_time_ms):
+    def wait_for_scan_complete(self, maximum_time_ms=5000):
         '''wait_for_scan_complete
 
         Pauses until the switch module stops scanning or the maximum time has
@@ -2360,27 +2233,6 @@ class _SessionBase(object):
         error_code = self._library.niSwitch_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def error_query(self):
-        '''error_query
-
-        This function reads an error code and a message from the instrument's
-        error queue. NI-SWITCH does not have an error queue, so this function
-        never returns any errors.
-
-        Returns:
-            error_code (int):Returns the error code read from the instrument's error queue. NI-SWITCH
-                does not have an error queue, so this function never returns any errors.
-            error_message (int):Returns the error message string read from the instrument's error
-                message queue. You must pass a ViChar array with at least 256 bytes.
-                NI-SWITCH does not have an error queue, so this function never returns
-                anything other than "No error".
-        '''
-        error_code_ctype = ctypes_types.ViInt32_ctype(0)
-        error_message_ctype = (ctypes_types.ViChar_ctype * 256)()
-        error_code = self._library.niSwitch_error_query(self._vi, ctypes.pointer(error_code_ctype), ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(error_code_ctype.value), error_message_ctype.value.decode("ascii")
 
     def reset(self):
         '''reset

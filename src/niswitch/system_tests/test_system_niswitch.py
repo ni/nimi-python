@@ -2,7 +2,6 @@
 
 import niswitch
 import pytest
-import warnings
 
 
 @pytest.fixture(scope='function')
@@ -26,7 +25,7 @@ def test_channel_connection(session):
     channel2 = 'r0'
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
     session.connect(channel1, channel2)
-    session.wait_for_debounce(5000)
+    session.wait_for_debounce()
     assert session.is_debounced() is True
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_EXISTS
     session.disconnect(channel1, channel2)
@@ -42,17 +41,17 @@ def test_continuous_software_scanning(session):
         scan_list = 'r0->c0; r1->c1'
         session.scan_list = scan_list
         assert session.scan_list == scan_list
-        session.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE, False)
-        session.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.PXI_TRIG0, False)
+        session.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE)
+        session.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.PXI_TRIG0)
         session.configure_scan_list(scan_list, niswitch.ScanMode.BREAK_BEFORE_MAKE)
-        session.configure_scan_trigger(0, niswitch.TriggerInput.SW_TRIG_FUNC, niswitch.ScanAdvancedOutput.NONE)
+        session.configure_scan_trigger(niswitch.TriggerInput.SW_TRIG_FUNC, niswitch.ScanAdvancedOutput.NONE)
         session.set_continuous_scan(True)
         session.commit()
         with session.initiate():
             assert session.is_scanning() is True
             session.send_software_trigger()
             try:
-                session.wait_for_scan_complete(100)
+                session.wait_for_scan_complete()
                 assert False
             except niswitch.Error as e:
                 assert e.code == -1074126826  # Error : Max time exceeded.
@@ -126,16 +125,6 @@ def test_functions_revision_query(session):
     assert string2 == 'No revision information available'
 
 
-def test_functions_get_next_coercion_record(session):
-    coercion_record = session.get_next_coercion_record()
-    assert len(coercion_record) == 0
-
-
-def test_functions_get_next_interchange_warning(session):
-    interchange_warning = session.get_next_interchange_warning()
-    assert len(interchange_warning) == 0
-
-
 def test_functions_self_test(session):
     self_test_result, self_test_string = session.self_test()
     assert self_test_result == 0
@@ -150,15 +139,6 @@ def test_functions_get_path(session):
     assert path == 'r0->c0'
     session.disconnect(channel1, channel2)
     session.set_path(path)
-
-
-def test_functions_error_query(session):
-    with warnings.catch_warnings(record=True) as w:
-        test_error_desc = '1073479940'  # Error Query not supported.
-        error_result, error_string = session.error_query()
-        assert len(w) == 1
-        assert issubclass(w[0].category, niswitch.NiswitchWarning)
-        assert test_error_desc in str(w[0].message)
 
 
 def test_functions_get_error_description(session):
@@ -177,8 +157,3 @@ def test_functions_disable(session):
     session.connect(channel1, channel2)
     session.disable()   # expect no errors
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
-
-
-def test_functions_interchange(session):
-    session.clear_interchange_warnings()   # expect no errors
-    session.reset_interchange_check()   # expect no errors

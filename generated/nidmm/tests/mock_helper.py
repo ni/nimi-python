@@ -21,8 +21,6 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
-        self._defaults['ClearInterchangeWarnings'] = {}
-        self._defaults['ClearInterchangeWarnings']['return'] = 0
         self._defaults['ConfigureACBandwidth'] = {}
         self._defaults['ConfigureACBandwidth']['return'] = 0
         self._defaults['ConfigureADCCalibration'] = {}
@@ -90,11 +88,6 @@ class SideEffectsHelper(object):
         self._defaults['FetchWaveform']['return'] = 0
         self._defaults['FetchWaveform']['waveformArray'] = None
         self._defaults['FetchWaveform']['actualNumberOfPoints'] = None
-        self._defaults['FormatMeasAbsolute'] = {}
-        self._defaults['FormatMeasAbsolute']['return'] = 0
-        self._defaults['FormatMeasAbsolute']['modeString'] = None
-        self._defaults['FormatMeasAbsolute']['rangeString'] = None
-        self._defaults['FormatMeasAbsolute']['dataString'] = None
         self._defaults['GetApertureTimeInfo'] = {}
         self._defaults['GetApertureTimeInfo']['return'] = 0
         self._defaults['GetApertureTimeInfo']['apertureTime'] = None
@@ -114,9 +107,6 @@ class SideEffectsHelper(object):
         self._defaults['GetAutoRangeValue'] = {}
         self._defaults['GetAutoRangeValue']['return'] = 0
         self._defaults['GetAutoRangeValue']['actualRange'] = None
-        self._defaults['GetCalCount'] = {}
-        self._defaults['GetCalCount']['return'] = 0
-        self._defaults['GetCalCount']['count'] = None
         self._defaults['GetCalDateAndTime'] = {}
         self._defaults['GetCalDateAndTime']['return'] = 0
         self._defaults['GetCalDateAndTime']['month'] = None
@@ -124,9 +114,6 @@ class SideEffectsHelper(object):
         self._defaults['GetCalDateAndTime']['year'] = None
         self._defaults['GetCalDateAndTime']['hour'] = None
         self._defaults['GetCalDateAndTime']['minute'] = None
-        self._defaults['GetChannelName'] = {}
-        self._defaults['GetChannelName']['return'] = 0
-        self._defaults['GetChannelName']['channelString'] = None
         self._defaults['GetDevTemp'] = {}
         self._defaults['GetDevTemp']['return'] = 0
         self._defaults['GetDevTemp']['temperature'] = None
@@ -143,12 +130,6 @@ class SideEffectsHelper(object):
         self._defaults['GetMeasurementPeriod'] = {}
         self._defaults['GetMeasurementPeriod']['return'] = 0
         self._defaults['GetMeasurementPeriod']['period'] = None
-        self._defaults['GetNextCoercionRecord'] = {}
-        self._defaults['GetNextCoercionRecord']['return'] = 0
-        self._defaults['GetNextCoercionRecord']['coercionRecord'] = None
-        self._defaults['GetNextInterchangeWarning'] = {}
-        self._defaults['GetNextInterchangeWarning']['return'] = 0
-        self._defaults['GetNextInterchangeWarning']['interchangeWarning'] = None
         self._defaults['GetSelfCalSupported'] = {}
         self._defaults['GetSelfCalSupported']['return'] = 0
         self._defaults['GetSelfCalSupported']['selfCalSupported'] = None
@@ -157,12 +138,6 @@ class SideEffectsHelper(object):
         self._defaults['InitWithOptions']['vi'] = None
         self._defaults['Initiate'] = {}
         self._defaults['Initiate']['return'] = 0
-        self._defaults['IsOverRange'] = {}
-        self._defaults['IsOverRange']['return'] = 0
-        self._defaults['IsOverRange']['isOverRange'] = None
-        self._defaults['IsUnderRange'] = {}
-        self._defaults['IsUnderRange']['return'] = 0
-        self._defaults['IsUnderRange']['isUnderRange'] = None
         self._defaults['PerformOpenCableComp'] = {}
         self._defaults['PerformOpenCableComp']['return'] = 0
         self._defaults['PerformOpenCableComp']['conductance'] = None
@@ -186,8 +161,6 @@ class SideEffectsHelper(object):
         self._defaults['ReadWaveform']['return'] = 0
         self._defaults['ReadWaveform']['waveformArray'] = None
         self._defaults['ReadWaveform']['actualNumberOfPoints'] = None
-        self._defaults['ResetInterchangeCheck'] = {}
-        self._defaults['ResetInterchangeCheck']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
         self._defaults['ResetWithDefaults']['return'] = 0
         self._defaults['SelfCal'] = {}
@@ -204,10 +177,6 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
-        self._defaults['error_query'] = {}
-        self._defaults['error_query']['return'] = 0
-        self._defaults['error_query']['errorCode'] = None
-        self._defaults['error_query']['errorMessage'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
         self._defaults['revision_query'] = {}
@@ -229,11 +198,6 @@ class SideEffectsHelper(object):
         if self._defaults['Abort']['return'] != 0:
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
-
-    def niDMM_ClearInterchangeWarnings(self, vi):  # noqa: N802
-        if self._defaults['ClearInterchangeWarnings']['return'] != 0:
-            return self._defaults['ClearInterchangeWarnings']['return']
-        return self._defaults['ClearInterchangeWarnings']['return']
 
     def niDMM_ConfigureACBandwidth(self, vi, ac_minimum_frequency_hz, ac_maximum_frequency_hz):  # noqa: N802
         if self._defaults['ConfigureACBandwidth']['return'] != 0:
@@ -405,20 +369,6 @@ class SideEffectsHelper(object):
         actual_number_of_points.contents.value = self._defaults['FetchWaveform']['actualNumberOfPoints']
         return self._defaults['FetchWaveform']['return']
 
-    def niDMM_FormatMeasAbsolute(self, measurement_function, range, resolution, measurement, mode_string, range_string, data_string):  # noqa: N802
-        if self._defaults['FormatMeasAbsolute']['return'] != 0:
-            return self._defaults['FormatMeasAbsolute']['return']
-        if self._defaults['FormatMeasAbsolute']['modeString'] is None:
-            raise MockFunctionCallError("niDMM_FormatMeasAbsolute", param='modeString')
-        mode_string.contents.value = self._defaults['FormatMeasAbsolute']['modeString']
-        if self._defaults['FormatMeasAbsolute']['rangeString'] is None:
-            raise MockFunctionCallError("niDMM_FormatMeasAbsolute", param='rangeString')
-        range_string.contents.value = self._defaults['FormatMeasAbsolute']['rangeString']
-        if self._defaults['FormatMeasAbsolute']['dataString'] is None:
-            raise MockFunctionCallError("niDMM_FormatMeasAbsolute", param='dataString')
-        data_string.contents.value = self._defaults['FormatMeasAbsolute']['dataString']
-        return self._defaults['FormatMeasAbsolute']['return']
-
     def niDMM_GetApertureTimeInfo(self, vi, aperture_time, aperture_time_units):  # noqa: N802
         if self._defaults['GetApertureTimeInfo']['return'] != 0:
             return self._defaults['GetApertureTimeInfo']['return']
@@ -473,14 +423,6 @@ class SideEffectsHelper(object):
         actual_range.contents.value = self._defaults['GetAutoRangeValue']['actualRange']
         return self._defaults['GetAutoRangeValue']['return']
 
-    def niDMM_GetCalCount(self, vi, cal_type, count):  # noqa: N802
-        if self._defaults['GetCalCount']['return'] != 0:
-            return self._defaults['GetCalCount']['return']
-        if self._defaults['GetCalCount']['count'] is None:
-            raise MockFunctionCallError("niDMM_GetCalCount", param='count')
-        count.contents.value = self._defaults['GetCalCount']['count']
-        return self._defaults['GetCalCount']['return']
-
     def niDMM_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
         if self._defaults['GetCalDateAndTime']['return'] != 0:
             return self._defaults['GetCalDateAndTime']['return']
@@ -500,14 +442,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetCalDateAndTime", param='minute')
         minute.contents.value = self._defaults['GetCalDateAndTime']['minute']
         return self._defaults['GetCalDateAndTime']['return']
-
-    def niDMM_GetChannelName(self, vi, index, buffer_size, channel_string):  # noqa: N802
-        if self._defaults['GetChannelName']['return'] != 0:
-            return self._defaults['GetChannelName']['return']
-        if self._defaults['GetChannelName']['channelString'] is None:
-            raise MockFunctionCallError("niDMM_GetChannelName", param='channelString')
-        channel_string.contents.value = self._defaults['GetChannelName']['channelString']
-        return self._defaults['GetChannelName']['return']
 
     def niDMM_GetDevTemp(self, vi, options, temperature):  # noqa: N802
         if self._defaults['GetDevTemp']['return'] != 0:
@@ -558,25 +492,6 @@ class SideEffectsHelper(object):
         period.contents.value = self._defaults['GetMeasurementPeriod']['period']
         return self._defaults['GetMeasurementPeriod']['return']
 
-    def niDMM_GetNextCoercionRecord(self, vi, buffer_size, coercion_record):  # noqa: N802
-        if self._defaults['GetNextCoercionRecord']['return'] != 0:
-            return self._defaults['GetNextCoercionRecord']['return']
-        if self._defaults['GetNextCoercionRecord']['coercionRecord'] is None:
-            raise MockFunctionCallError("niDMM_GetNextCoercionRecord", param='coercionRecord')
-        coercion_record.contents.value = self._defaults['GetNextCoercionRecord']['coercionRecord']
-        return self._defaults['GetNextCoercionRecord']['return']
-
-    def niDMM_GetNextInterchangeWarning(self, vi, buffer_size, interchange_warning):  # noqa: N802
-        if self._defaults['GetNextInterchangeWarning']['return'] != 0:
-            return self._defaults['GetNextInterchangeWarning']['return']
-        if self._defaults['GetNextInterchangeWarning']['interchangeWarning'] is None:
-            raise MockFunctionCallError("niDMM_GetNextInterchangeWarning", param='interchangeWarning')
-        if buffer_size == 0:
-            return len(self._defaults['GetNextInterchangeWarning']['interchangeWarning'])
-        t = nidmm.ctypes_types.ViChar_ctype(self._defaults['GetNextInterchangeWarning']['interchangeWarning'].encode('ascii'))
-        interchange_warning.value = ctypes.cast(t, nidmm.ctypes_types.ViChar_ctype).value
-        return self._defaults['GetNextInterchangeWarning']['return']
-
     def niDMM_GetSelfCalSupported(self, vi, self_cal_supported):  # noqa: N802
         if self._defaults['GetSelfCalSupported']['return'] != 0:
             return self._defaults['GetSelfCalSupported']['return']
@@ -597,22 +512,6 @@ class SideEffectsHelper(object):
         if self._defaults['Initiate']['return'] != 0:
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
-
-    def niDMM_IsOverRange(self, vi, measurement_value, is_over_range):  # noqa: N802
-        if self._defaults['IsOverRange']['return'] != 0:
-            return self._defaults['IsOverRange']['return']
-        if self._defaults['IsOverRange']['isOverRange'] is None:
-            raise MockFunctionCallError("niDMM_IsOverRange", param='isOverRange')
-        is_over_range.contents.value = self._defaults['IsOverRange']['isOverRange']
-        return self._defaults['IsOverRange']['return']
-
-    def niDMM_IsUnderRange(self, vi, measurement_value, is_under_range):  # noqa: N802
-        if self._defaults['IsUnderRange']['return'] != 0:
-            return self._defaults['IsUnderRange']['return']
-        if self._defaults['IsUnderRange']['isUnderRange'] is None:
-            raise MockFunctionCallError("niDMM_IsUnderRange", param='isUnderRange')
-        is_under_range.contents.value = self._defaults['IsUnderRange']['isUnderRange']
-        return self._defaults['IsUnderRange']['return']
 
     def niDMM_PerformOpenCableComp(self, vi, conductance, susceptance):  # noqa: N802
         if self._defaults['PerformOpenCableComp']['return'] != 0:
@@ -677,11 +576,6 @@ class SideEffectsHelper(object):
         actual_number_of_points.contents.value = self._defaults['ReadWaveform']['actualNumberOfPoints']
         return self._defaults['ReadWaveform']['return']
 
-    def niDMM_ResetInterchangeCheck(self, vi):  # noqa: N802
-        if self._defaults['ResetInterchangeCheck']['return'] != 0:
-            return self._defaults['ResetInterchangeCheck']['return']
-        return self._defaults['ResetInterchangeCheck']['return']
-
     def niDMM_ResetWithDefaults(self, vi):  # noqa: N802
         if self._defaults['ResetWithDefaults']['return'] != 0:
             return self._defaults['ResetWithDefaults']['return']
@@ -722,17 +616,6 @@ class SideEffectsHelper(object):
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
-    def niDMM_error_query(self, vi, error_code, error_message):  # noqa: N802
-        if self._defaults['error_query']['return'] != 0:
-            return self._defaults['error_query']['return']
-        if self._defaults['error_query']['errorCode'] is None:
-            raise MockFunctionCallError("niDMM_error_query", param='errorCode')
-        error_code.contents.value = self._defaults['error_query']['errorCode']
-        if self._defaults['error_query']['errorMessage'] is None:
-            raise MockFunctionCallError("niDMM_error_query", param='errorMessage')
-        error_message.contents.value = self._defaults['error_query']['errorMessage']
-        return self._defaults['error_query']['return']
-
     def niDMM_reset(self, vi):  # noqa: N802
         if self._defaults['reset']['return'] != 0:
             return self._defaults['reset']['return']
@@ -764,8 +647,6 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niDMM_Abort.side_effect = MockFunctionCallError("niDMM_Abort")
         mock_library.niDMM_Abort.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_ClearInterchangeWarnings.side_effect = MockFunctionCallError("niDMM_ClearInterchangeWarnings")
-        mock_library.niDMM_ClearInterchangeWarnings.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ConfigureACBandwidth.side_effect = MockFunctionCallError("niDMM_ConfigureACBandwidth")
         mock_library.niDMM_ConfigureACBandwidth.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ConfigureADCCalibration.side_effect = MockFunctionCallError("niDMM_ConfigureADCCalibration")
@@ -828,8 +709,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_FetchMultiPoint.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_FetchWaveform.side_effect = MockFunctionCallError("niDMM_FetchWaveform")
         mock_library.niDMM_FetchWaveform.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_FormatMeasAbsolute.side_effect = MockFunctionCallError("niDMM_FormatMeasAbsolute")
-        mock_library.niDMM_FormatMeasAbsolute.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetApertureTimeInfo.side_effect = MockFunctionCallError("niDMM_GetApertureTimeInfo")
         mock_library.niDMM_GetApertureTimeInfo.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetAttributeViBoolean.side_effect = MockFunctionCallError("niDMM_GetAttributeViBoolean")
@@ -842,12 +721,8 @@ class SideEffectsHelper(object):
         mock_library.niDMM_GetAttributeViString.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetAutoRangeValue.side_effect = MockFunctionCallError("niDMM_GetAutoRangeValue")
         mock_library.niDMM_GetAutoRangeValue.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_GetCalCount.side_effect = MockFunctionCallError("niDMM_GetCalCount")
-        mock_library.niDMM_GetCalCount.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetCalDateAndTime.side_effect = MockFunctionCallError("niDMM_GetCalDateAndTime")
         mock_library.niDMM_GetCalDateAndTime.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_GetChannelName.side_effect = MockFunctionCallError("niDMM_GetChannelName")
-        mock_library.niDMM_GetChannelName.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetDevTemp.side_effect = MockFunctionCallError("niDMM_GetDevTemp")
         mock_library.niDMM_GetDevTemp.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetError.side_effect = MockFunctionCallError("niDMM_GetError")
@@ -858,20 +733,12 @@ class SideEffectsHelper(object):
         mock_library.niDMM_GetLastCalTemp.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetMeasurementPeriod.side_effect = MockFunctionCallError("niDMM_GetMeasurementPeriod")
         mock_library.niDMM_GetMeasurementPeriod.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_GetNextCoercionRecord.side_effect = MockFunctionCallError("niDMM_GetNextCoercionRecord")
-        mock_library.niDMM_GetNextCoercionRecord.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_GetNextInterchangeWarning.side_effect = MockFunctionCallError("niDMM_GetNextInterchangeWarning")
-        mock_library.niDMM_GetNextInterchangeWarning.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetSelfCalSupported.side_effect = MockFunctionCallError("niDMM_GetSelfCalSupported")
         mock_library.niDMM_GetSelfCalSupported.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_InitWithOptions.side_effect = MockFunctionCallError("niDMM_InitWithOptions")
         mock_library.niDMM_InitWithOptions.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_Initiate.side_effect = MockFunctionCallError("niDMM_Initiate")
         mock_library.niDMM_Initiate.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_IsOverRange.side_effect = MockFunctionCallError("niDMM_IsOverRange")
-        mock_library.niDMM_IsOverRange.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_IsUnderRange.side_effect = MockFunctionCallError("niDMM_IsUnderRange")
-        mock_library.niDMM_IsUnderRange.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_PerformOpenCableComp.side_effect = MockFunctionCallError("niDMM_PerformOpenCableComp")
         mock_library.niDMM_PerformOpenCableComp.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_PerformShortCableComp.side_effect = MockFunctionCallError("niDMM_PerformShortCableComp")
@@ -884,8 +751,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_ReadStatus.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ReadWaveform.side_effect = MockFunctionCallError("niDMM_ReadWaveform")
         mock_library.niDMM_ReadWaveform.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_ResetInterchangeCheck.side_effect = MockFunctionCallError("niDMM_ResetInterchangeCheck")
-        mock_library.niDMM_ResetInterchangeCheck.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_ResetWithDefaults.side_effect = MockFunctionCallError("niDMM_ResetWithDefaults")
         mock_library.niDMM_ResetWithDefaults.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_SelfCal.side_effect = MockFunctionCallError("niDMM_SelfCal")
@@ -902,8 +767,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_SetAttributeViString.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_close.side_effect = MockFunctionCallError("niDMM_close")
         mock_library.niDMM_close.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_error_query.side_effect = MockFunctionCallError("niDMM_error_query")
-        mock_library.niDMM_error_query.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_reset.side_effect = MockFunctionCallError("niDMM_reset")
         mock_library.niDMM_reset.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_revision_query.side_effect = MockFunctionCallError("niDMM_revision_query")

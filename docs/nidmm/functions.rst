@@ -3,13 +3,6 @@ nidmm.Session methods
 
 .. py:currentmodule:: nidmm
 
-.. function:: clear_interchange_warnings()
-
-    Clears the list of current interchange warnings.
-
-    
-
-
 .. function:: configure_ac_bandwidth(ac_minimum_frequency_hz, ac_maximum_frequency_hz)
 
     Configures the :py:data:`nidmm.AC\_MIN\_FREQ` and :py:data:`nidmm.AC\_MAX\_FREQ`
@@ -1177,78 +1170,6 @@ nidmm.Session methods
             
 
 
-.. function:: format_meas_absolute(measurement_function, range, resolution, measurement)
-
-    Formats the **Measurement** to the proper number of displayed digits
-    according to the **Measurement\_Function**, **Range**, and
-    **Resolution**. Returns the formatted data, range, and mode strings.
-
-    
-
-
-    :param measurement_function:
-
-
-        Specifies the **measurement\_function** used to acquire the measurement.
-        The driver sets :py:data:`nidmm.function` to this value.
-
-        
-
-    :type measurement_function: int
-    :param range:
-
-
-        Specifies the :py:data:`nidmm.range` used to acquire the **Measurement**.
-
-        
-
-    :type range: float
-    :param resolution:
-
-
-        Specifies the :py:data:`nidmm.RESOLUTION\_ABSOLUTE` of the **Measurement**.
-
-        
-
-    :type resolution: float
-    :param measurement:
-
-
-        Specifies the measured value returned from the DMM.
-
-        
-
-    :type measurement: float
-
-    :rtype: tuple (mode_string, range_string, data_string)
-
-        WHERE
-
-        mode_string (int): 
-
-
-            Returns a string containing the units of the **Measurement** mode.
-
-            
-
-        range_string (int): 
-
-
-            Returns the :py:data:`nidmm.range` of the **Measurement**, formatted into a
-            string with the correct number of display digits.
-
-            
-
-        data_string (int): 
-
-
-            Returns the **Measurement**, formatted according to the
-            :py:data:`nidmm.function`, :py:data:`nidmm.range`, and
-            :py:data:`nidmm.RESOLUTION\_ABSOLUTE`.
-
-            
-
-
 .. function:: get_aperture_time_info()
 
     Returns the DMM **Aperture\_Time** and **Aperture\_Time\_Units**.
@@ -1319,40 +1240,6 @@ nidmm.Session methods
             
 
 
-.. function:: get_cal_count(cal_type)
-
-    Returns the calibration **Count** for the specified type of calibration.
-
-    
-
-    .. note:: The NI 4050, NI 4060, and NI 4080/4081/4082 are not supported.
-
-
-    :param cal_type:
-
-
-        Specifies the type of calibration performed (external or
-        self-calibration).
-
-        +--------------------------------------+---+----------------------+
-        | NIDMM\_VAL\_INTERNAL\_AREA (default) | 0 | Self-Calibration     |
-        +--------------------------------------+---+----------------------+
-        | NIDMM\_VAL\_EXTERNAL\_AREA           | 1 | External Calibration |
-        +--------------------------------------+---+----------------------+
-
-        .. note:: The NI 4065 does not support self-calibration.
-
-    :type cal_type: int
-
-    :rtype: int
-    :return:
-
-
-            The number of times calibration has been performed.
-
-            
-
-
 .. function:: get_cal_date_and_time(cal_type)
 
     Returns the date and time of the last calibration performed.
@@ -1414,56 +1301,6 @@ nidmm.Session methods
 
 
             Indicates the **minute** of the last calibration.
-
-            
-
-
-.. function:: get_channel_name(index, buffer_size)
-
-    Returns the **Channel\_String** that is in the channel table at an
-    **Index** you specify. Not applicable to National Instruments DMMs.
-    Included for compliance with the *IviDmm Class Specification*.
-
-    
-
-
-    :param index:
-
-
-        A 1–based **index** into the channel table.
-
-        
-
-    :type index: int
-    :param buffer_size:
-
-
-        Passes the number of bytes in the ViChar array you specify for the
-        **Channel\_String** parameter. If the next **Channel\_String**,
-        including the terminating NULL byte, contains more bytes than you
-        indicate in this parameter, the function copies
-        **buffer\_size** –1 bytes into the buffer, places an ASCII NULL byte at
-        the end of the buffer, and returns the buffer size you must pass to get
-        the entire value.
-
-        For example, if the value is "123456" and the **buffer\_size** is 4, the
-        function places "123" into the buffer and returns 7. If you pass a
-        negative number, the function copies the value to the buffer regardless
-        of the number of bytes in the value. If you pass 0, you can pass
-        VI\_NULL for the **Channel\_String** buffer parameter. The default value
-        is None.
-
-        
-
-    :type buffer_size: int
-
-    :rtype: int
-    :return:
-
-
-            Returns the **channel\_string** that is in the channel table at the
-            **Index** you specify. Do not modify the contents of the
-            **channel\_string**.
 
             
 
@@ -1555,99 +1392,6 @@ nidmm.Session methods
             
 
 
-.. function:: get_next_coercion_record(buffer_size)
-
-    This function returns the coercion information associated with the IVI
-    session, and it retrieves and clears the oldest instance in which NI-DMM
-    coerced a value you specified to another value.
-
-    If you set :py:data:`nidmm.RECORD\_COERCIONS` to VI\_TRUE (1), NI-DMM keeps
-    a list of all coercions it makes on ViInt32 or ViReal64 values that you
-    pass to NI-DMM functions. Use this function to retrieve information from
-    that list.
-
-    
-
-
-    :param buffer_size:
-
-
-        Passes the number of bytes in the ViChar array you specify for the
-        **Coercion\_Record** parameter. If the next coercion record string,
-        including the terminating NULL byte, contains more bytes than you
-        indicate in this parameter, the function copies **buffer\_size** – 1
-        bytes into the buffer, places an ASCII NULL byte at the end of the
-        buffer, and returns the buffer size you must pass to get the entire
-        value.
-
-        For example, if the value is "123456" and the **buffer\_size** is 4, the
-        function places "123" into the buffer and returns 7. If you pass a
-        negative number, the function copies the value to the buffer regardless
-        of the number of bytes in the value.
-
-        If you pass 0, you can pass VI\_NULL for the **Coercion\_Record** buffer
-        parameter.
-
-        The default value is None.
-
-        
-
-    :type buffer_size: int
-
-    :rtype: int
-    :return:
-
-
-            Returns the next **coercion\_record** for the IVI session.
-
-            If there are no coercions records, the function returns an empty string.
-            The buffer must contain at least as many elements as the value you
-            specify with the **Buffer\_Size** parameter.
-
-            
-
-
-.. function:: get_next_interchange_warning()
-
-    This function returns the interchangeability warnings associated with
-    the IVI session. It retrieves and clears the oldest instance in which
-    the class driver recorded an interchangeability warning.
-    Interchangeability warnings indicate that using your application with a
-    different instrument might cause different behavior.
-
-    The driver performs interchangeability checking when
-    :py:data:`nidmm.INTERCHANGE\_CHECK` is set to VI\_TRUE (1). The function
-    returns an empty string in the **Interchange\_Warning** parameter if no
-    interchangeability warnings remain for the session. In general, the
-    instrument driver generates interchangeability warnings when an
-    attribute that affects the behavior of the instrument is in a state that
-    you did not specify.
-
-    
-
-
-    :param buffer_size:
-
-
-        Passes the number of bytes in the ViChar array you specify for the
-        **Interchange\_Warning** parameter. If the next interchangeability
-        warning string, including the terminating NULL byte, contains more bytes
-        than you indicate in this parameter, the function copies
-        **buffer\_size** –1 bytes into the buffer, places an ASCII NULL byte at
-        the end of the buffer, and returns the buffer size you must pass to get
-        the entire value.
-
-        For example, if the value is "123456" and the **buffer\_size** is 4, the
-        function places "123" into the buffer and returns 7. If you pass a
-        negative number, the function copies the value to the buffer regardless
-        of the number of bytes in the value. If you pass 0, you can pass
-        VI\_NULL for the **Interchange\_Warning** buffer parameter. The default
-        value is None.
-
-        
-
-    :type buffer_size: int
-
 .. function:: get_self_cal_supported()
 
     Returns a Boolean value that expresses whether or not the DMM that you
@@ -1668,74 +1412,6 @@ nidmm.Session methods
             +-----------+---+-------------------------------------------------------------+
             | VI\_FALSE | 0 | The DMM that you are using cannot perform self-calibration. |
             +-----------+---+-------------------------------------------------------------+
-
-
-.. function:: is_over_range(measurement_value)
-
-    Takes a **Measurement\_Value** and determines if the value is a valid
-    measurement or a value indicating that an overrange condition occurred.
-
-    
-
-
-    :param measurement_value:
-
-
-        The measured value returned from the DMM.
-
-        
-
-        .. note:: If an overrange condition occurs, the **Measurement\_Value** contains
-            an IEEE-defined NaN (Not a Number) value.
-
-    :type measurement_value: float
-
-    :rtype: bool
-    :return:
-
-
-            Returns whether the measurement value is a valid measurement or an
-            overrange condition.
-
-            +-----------+---+-----------------------------------------------------------+
-            | VI\_TRUE  | 1 | The value indicates that an overrange condition occurred. |
-            +-----------+---+-----------------------------------------------------------+
-            | VI\_FALSE | 0 | The value is a valid measurement.                         |
-            +-----------+---+-----------------------------------------------------------+
-
-
-.. function:: is_under_range(measurement_value)
-
-    Takes a **Measurement\_Value** and determines if the value is a valid
-    measurement or a value indicating that an underrange condition occurred.
-
-    
-
-
-    :param measurement_value:
-
-
-        The measured value returned from the DMM.
-
-        
-
-        .. note:: If an overrange condition occurs, the **Measurement\_Value** contains
-            an IEEE-defined NaN (Not a Number) value.
-
-    :type measurement_value: float
-
-    :rtype: bool
-    :return:
-
-
-            Returns whether the **Measurement\_Value** is a valid measurement or an
-            underrange condition.
-
-            +-----------+---+------------------------------------------------------------+
-            | VI\_TRUE  | 1 | The value indicates that an underrange condition occurred. |
-            +-----------+---+------------------------------------------------------------+
-            | VI\_FALSE | 0 | The value is a valid measurement.                          |
-            +-----------+---+------------------------------------------------------------+
 
 
 .. function:: perform_open_cable_comp()
@@ -2018,39 +1694,6 @@ nidmm.Session methods
             
 
 
-.. function:: reset_interchange_check()
-
-    When developing a complex test system that consists of multiple test
-    modules, it is generally a good idea to design the test modules so that
-    they can run in any order. To do so requires ensuring that each test
-    module completely configures the state of each instrument it uses.
-
-    If a particular test module does not completely configure the state of
-    an instrument, the state of the instrument depends on the configuration
-    from a previously executed test module. If you execute the test modules
-    in a different order, the behavior of the instrument and therefore the
-    entire test module is likely to change. This change in behavior is
-    generally instrument specific and represents an interchangeability
-    problem. You can use this function to test for such cases. After you
-    call this function, the interchangeability checking algorithms in NI-DMM
-    ignore all previous configuration operations. By calling this function
-    at the beginning of a test module, you can determine whether the test
-    module has dependencies on the operation of previously executed test
-    modules.
-
-    This function does not clear the interchangeability warnings from the
-    list of previously recorded interchangeability warnings. If you want to
-    guarantee that :py:func:`nidmm.get_next_interchange_warning` only returns those
-    interchangeability warnings that are generated after calling this
-    function, you must clear the list of interchangeability warnings. You
-    can clear the interchangeability warnings list by repeatedly calling
-    :py:func:`nidmm.get_next_interchange_warning` until no more interchangeability
-    warnings are returned. If you are not interested in the content of those
-    warnings, you can call :py:func:`nidmm.clear_interchange_warnings`.
-
-    
-
-
 .. function:: reset_with_defaults()
 
     Resets the instrument to a known state and sends initialization commands
@@ -2084,39 +1727,6 @@ nidmm.Session methods
     and trigger the device. The NI 4050 and NI 4060 are not supported.
 
     
-
-
-.. function:: error_query()
-
-    Reads an **Error\_Code** and message from the DMM error queue. National
-    Instruments DMMs do not contain an error queue. Errors are reported as
-    they occur. Therefore, this function does not detect errors; it is
-    included for compliance with the *IviDmm Class Specification*.
-
-    
-
-
-    :rtype: tuple (error_code, error_message)
-
-        WHERE
-
-        error_code (int): 
-
-
-            The **error\_code** returned from the instrument.
-
-            The default value is VI\_SUCCESS (0).
-
-            
-
-        error_message (int): 
-
-
-            Formats the **Error\_Code** into a user-readable message string.
-
-            
-
-            .. note:: The array must contain at least 256 elements ViChar[256].
 
 
 .. function:: reset()
