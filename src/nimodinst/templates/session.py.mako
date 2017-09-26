@@ -27,7 +27,7 @@ class AttributeViInt32(object):
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        return self._owner._get_installed_device_attribute_vi_int32(self._owner._handle, self._index, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_int32(self._owner._${config['session_handle_parameter_name']}, self._index, self._attribute_id)
 
 
 class AttributeViString(object):
@@ -38,7 +38,7 @@ class AttributeViString(object):
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        return self._owner._get_installed_device_attribute_vi_string(self._owner._handle, self._index, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_string(self._owner._${config['session_handle_parameter_name']}, self._index, self._attribute_id)
 
 
 class Device(object):
@@ -143,8 +143,8 @@ class Session(object):
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        if(self._handle != 0):
-            self._close_installed_devices_session(self._handle)
+        if(self._${config['session_handle_parameter_name']} != 0):
+            self._close_installed_devices_session(self._${config['session_handle_parameter_name']})
             self._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
