@@ -968,7 +968,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_scan_trigger(self, scan_delay, trigger_input, scan_advanced_output):
+    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=0.0):
         '''configure_scan_trigger
 
         Configures the scan triggers for the scan list established with
@@ -1984,7 +1984,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):
+    def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False):
         '''route_scan_advanced_output
 
         Routes the scan advanced output trigger from a trigger bus line (TTLx)
@@ -2011,7 +2011,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert):
+    def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert=False):
         '''route_trigger_input
 
         Routes the input trigger from the front or rear connector to a trigger
@@ -2312,7 +2312,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_debounce(self, maximum_time_ms):
+    def wait_for_debounce(self, maximum_time_ms=5000):
         '''wait_for_debounce
 
         Pauses until all created paths have settled. If the time you specify
@@ -2330,7 +2330,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_scan_complete(self, maximum_time_ms):
+    def wait_for_scan_complete(self, maximum_time_ms=5000):
         '''wait_for_scan_complete
 
         Pauses until the switch module stops scanning or the maximum time has
