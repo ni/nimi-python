@@ -940,7 +940,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_scan_list(self, scanlist, scan_mode):
+    def configure_scan_list(self, scanlist, scan_mode=enums.ScanMode.BREAK_BEFORE_MAKE):
         '''configure_scan_list
 
         Configures the scan list and scan mode used for scanning. Refer to
