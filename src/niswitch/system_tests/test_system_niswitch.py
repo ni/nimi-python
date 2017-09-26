@@ -2,7 +2,6 @@
 
 import niswitch
 import pytest
-import warnings
 
 
 @pytest.fixture(scope='function')
@@ -106,10 +105,6 @@ def test_method_can_connect(session):
     assert path_capability == niswitch.PathCapability.PATH_UNSUPPORTED
 
 
-def test_method_reset_with_defaults(session):
-    assert session.reset_with_defaults() is None
-
-
 def test_functions_get_relay_name(session):
     relay_name = session.get_relay_name(1)
     assert relay_name == 'kr0c0'
@@ -124,16 +119,6 @@ def test_functions_revision_query(session):
     string1, string2 = session.revision_query()
     assert string1.find('Driver: NI-SWITCH for SwitchCA4 Device Support') != -1
     assert string2 == 'No revision information available'
-
-
-def test_functions_get_next_coercion_record(session):
-    coercion_record = session.get_next_coercion_record()
-    assert len(coercion_record) == 0
-
-
-def test_functions_get_next_interchange_warning(session):
-    interchange_warning = session.get_next_interchange_warning()
-    assert len(interchange_warning) == 0
 
 
 def test_functions_self_test(session):
@@ -152,15 +137,6 @@ def test_functions_get_path(session):
     session.set_path(path)
 
 
-def test_functions_error_query(session):
-    with warnings.catch_warnings(record=True) as w:
-        test_error_desc = '1073479940'  # Error Query not supported.
-        error_result, error_string = session.error_query()
-        assert len(w) == 1
-        assert issubclass(w[0].category, niswitch.NiswitchWarning)
-        assert test_error_desc in str(w[0].message)
-
-
 def test_functions_get_error_description(session):
     description = session.get_error_description(0)   # expect no errors
     assert description == ''
@@ -177,8 +153,3 @@ def test_functions_disable(session):
     session.connect(channel1, channel2)
     session.disable()   # expect no errors
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
-
-
-def test_functions_interchange(session):
-    session.clear_interchange_warnings()   # expect no errors
-    session.reset_interchange_check()   # expect no errors

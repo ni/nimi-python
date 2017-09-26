@@ -97,10 +97,6 @@ def test_method_get_dev_temp(session):
     assert 20 <= temperature <= 50
 
 
-def test_method_reset_with_defaults(session):
-    assert session.reset_with_defaults() is None
-
-
 def test_method_get_self_cal_supported(session):
     assert session.get_self_cal_supported() in [True, False]
 
