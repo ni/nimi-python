@@ -1054,7 +1054,7 @@ nidmm.Session methods
             
 
 
-.. function:: fetch_multi_point(maximum_time, array_size)
+.. function:: fetch_multi_point(array_size, maximum_time)
 
     Returns an array of values from a previously initiated multipoint
     measurement. The number of measurements the DMM makes is determined by
@@ -1119,7 +1119,7 @@ nidmm.Session methods
             
 
 
-.. function:: fetch_waveform(maximum_time, array_size)
+.. function:: fetch_waveform(array_size, maximum_time)
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
     values from a previously initiated waveform acquisition. You must call
@@ -1843,7 +1843,7 @@ nidmm.Session methods
             
 
 
-.. function:: read_multi_point(maximum_time, array_size)
+.. function:: read_multi_point(array_size, maximum_time)
 
     Acquires multiple measurements and returns an array of measured values.
     The number of measurements the DMM makes is determined by the values you
@@ -1956,7 +1956,7 @@ nidmm.Session methods
             +---+----------------------------+
 
 
-.. function:: read_waveform(maximum_time, array_size)
+.. function:: read_waveform(array_size, maximum_time)
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
     and returns data as an array of values or as a waveform data type. The

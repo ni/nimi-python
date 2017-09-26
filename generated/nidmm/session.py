@@ -1195,7 +1195,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_multi_point(self, trigger_count, sample_count, sample_trigger, sample_interval):
+    def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=-1):
         '''configure_multi_point
 
         Configures the attributes for multipoint measurements. These attributes
@@ -1452,7 +1452,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_thermocouple(self, thermocouple_type, reference_junction_type):
+    def configure_thermocouple(self, thermocouple_type, reference_junction_type='enums.ThermocoupleReferenceJunctionType.FIXED'):
         '''configure_thermocouple
 
         Configures the thermocouple type and reference junction type for a
@@ -1517,7 +1517,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger(self, trigger_source, trigger_delay):
+    def configure_trigger(self, trigger_source, trigger_delay=-1):
         '''configure_trigger
 
         Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
@@ -1662,7 +1662,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch(self, maximum_time):
+    def fetch(self, maximum_time=-1):
         '''fetch
 
         Returns the value from a previously initiated measurement. You must call
@@ -1688,7 +1688,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(reading_ctype.value)
 
-    def fetch_multi_point(self, maximum_time, array_size):
+    def fetch_multi_point(self, array_size, maximum_time=-1):
         '''fetch_multi_point
 
         Returns an array of values from a previously initiated multipoint
@@ -1730,7 +1730,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [python_types.ViReal64(reading_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
 
-    def fetch_waveform(self, maximum_time, array_size):
+    def fetch_waveform(self, array_size, maximum_time=-1):
         '''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -2093,7 +2093,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViChar(channel_string_ctype.value)
 
-    def get_dev_temp(self, options):
+    def get_dev_temp(self, options=''):
         '''get_dev_temp
 
         Returns the current **Temperature** of the device.
@@ -2554,7 +2554,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(resistance_ctype.value), python_types.ViReal64(reactance_ctype.value)
 
-    def read(self, maximum_time):
+    def read(self, maximum_time=-1):
         '''read
 
         Acquires a single measurement and returns the measured value.
@@ -2579,7 +2579,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(reading_ctype.value)
 
-    def read_multi_point(self, maximum_time, array_size):
+    def read_multi_point(self, array_size, maximum_time=-1):
         '''read_multi_point
 
         Acquires multiple measurements and returns an array of measured values.
@@ -2661,7 +2661,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
-    def read_waveform(self, maximum_time, array_size):
+    def read_waveform(self, array_size, maximum_time=-1):
         '''read_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
