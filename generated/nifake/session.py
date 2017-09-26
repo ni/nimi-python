@@ -536,7 +536,6 @@ class Session(_SessionBase):
 
     def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
         super(Session, self).__init__(repeated_capability='')
-        # TODO(marcoskirsch): private members should start with _
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
         self._is_frozen = True

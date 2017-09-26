@@ -2440,7 +2440,6 @@ class Session(_SessionBase):
 
     def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
         super(Session, self).__init__(repeated_capability='')
-        # TODO(marcoskirsch): private members should start with _
         self._vi = 0  # This must be set before calling init_with_topology().
         self._vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
         self._is_frozen = True
