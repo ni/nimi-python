@@ -11,88 +11,24 @@ pp = pprint.PrettyPrinter(indent=4)
 
 # Functions that return snippets that can be placed directly in the templates.
 class ParamListType(Enum):
-    # TODO(marcoskirsch): DRY - seems like a shame to type this for doc and later for declaration.
-    '''Type of parameter list to return
+    '''Type of parameter list code snippet to return
 
     Used by different parts of the code generator to create the parameter list
     '''
     API_METHOD_DECLARATION = 1
-    '''Used for methods param list for the public API declaration
-
-    'skip_self': False,
-    'skip_session_handle': True,
-    'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
-    'reordered_for_default_values': True,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'python_name_with_default',
-    '''
+    '''For declaring a method in Session'''
     API_METHOD_CALL = 2
-    '''Used for methods param list for the public API call
-
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
-    'reordered_for_default_values': True,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
+    '''For calling into a Session method.'''
     DISPLAY_METHOD = 3
-    '''Used for methods param list for display (rst)
-
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
-    'reordered_for_default_values': True,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
+    '''For documentation (rst) of Session methods'''
     LIBRARY_METHOD = 4
-    '''Used for methods param list when calling library
-
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'reordered_for_default_values': True,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
+    '''For Library implementation calling into the DLL'''
     LIBRARY_CALL = 5
-    '''Used for methods param list when calling into the DLL
-
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'reordered_for_default_values': False,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'library_call_snippet',
-    '''
+    '''For calling into a Library method.'''
     LIBRARY_CALL_TYPES = 6
-    '''Used for methods param list types when calling into the DLL
-
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'reordered_for_default_values': False,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'ctypes_type_library_call',
-    '''
+    '''For setting up the ctypes argument types'''
     LIBRARY_IMPL_METHOD = 7
-    '''Used for methods param list for implementation
-
-    'skip_self': False,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'reordered_for_default_values': False,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
+    '''For declaring a method in Library'''
 
 
 ParamListTypeDefaults = {}
