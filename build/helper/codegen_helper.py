@@ -15,24 +15,24 @@ class ParamListType(Enum):
 
     Used by different parts of the code generator to create the parameter list
     '''
-    API_METHOD_DECLARATION = 1
+    SESSION_METHOD_DECLARATION = 1
     '''For declaring a method in Session'''
-    API_METHOD_CALL = 2
+    SESSION_METHOD_CALL = 2
     '''For calling into a Session method.'''
-    DISPLAY_METHOD = 3
+    DOCUMENTATION_SESSION_METHOD = 3
     '''For documentation (rst) of Session methods'''
-    LIBRARY_METHOD = 4
-    '''For Library implementation calling into the DLL'''
-    LIBRARY_CALL = 5
-    '''For calling into a Library method.'''
-    LIBRARY_CALL_TYPES = 6
+    CTYPES_CALL = 4
+    '''For Library implementation calling into the DLL via ctypes'''
+    LIBRARY_METHOD_CALL = 5
+    '''For calling into a method in Library.'''
+    CTYPES_ARGTYPES = 6
     '''For setting up the ctypes argument types'''
-    LIBRARY_IMPL_METHOD = 7
+    LIBRARY_METHOD_DECLARATION = 7
     '''For declaring a method in Library'''
 
 
 ParamListTypeDefaults = {}
-ParamListTypeDefaults[ParamListType.API_METHOD_DECLARATION] = {
+ParamListTypeDefaults[ParamListType.SESSION_METHOD_DECLARATION] = {
     'skip_self': False,
     'skip_session_handle': True,
     'skip_output_parameters': True,
@@ -41,7 +41,7 @@ ParamListTypeDefaults[ParamListType.API_METHOD_DECLARATION] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name_with_default',
 }
-ParamListTypeDefaults[ParamListType.API_METHOD_CALL] = {
+ParamListTypeDefaults[ParamListType.SESSION_METHOD_CALL] = {
     'skip_self': True,
     'skip_session_handle': True,
     'skip_output_parameters': True,
@@ -50,7 +50,7 @@ ParamListTypeDefaults[ParamListType.API_METHOD_CALL] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
 }
-ParamListTypeDefaults[ParamListType.DISPLAY_METHOD] = {
+ParamListTypeDefaults[ParamListType.DOCUMENTATION_SESSION_METHOD] = {
     'skip_self': True,
     'skip_session_handle': True,
     'skip_output_parameters': True,
@@ -59,7 +59,7 @@ ParamListTypeDefaults[ParamListType.DISPLAY_METHOD] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
 }
-ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
+ParamListTypeDefaults[ParamListType.CTYPES_CALL] = {
     'skip_self': True,
     'skip_session_handle': False,
     'skip_output_parameters': False,
@@ -68,7 +68,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
 }
-ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
+ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_CALL] = {
     'skip_self': True,
     'skip_session_handle': False,
     'skip_output_parameters': False,
@@ -77,7 +77,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'library_call_snippet',
 }
-ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
+ParamListTypeDefaults[ParamListType.CTYPES_ARGTYPES] = {
     'skip_self': True,
     'skip_session_handle': False,
     'skip_output_parameters': False,
@@ -86,7 +86,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'ctypes_type_library_call',
 }
-ParamListTypeDefaults[ParamListType.LIBRARY_IMPL_METHOD] = {
+ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_DECLARATION] = {
     'skip_self': False,
     'skip_session_handle': False,
     'skip_output_parameters': False,
@@ -102,7 +102,7 @@ def get_params_snippet(function, param_type, options={}):
 
     Name used:
         ParamListType.LIBRARY_CALL uses 'library_call_snippet'
-        ParamListType.LIBRARY_CALL_TYPES uses 'ctypes_type_library_call'
+        ParamListType.CTYPES_ARGTYPES uses 'ctypes_type_library_call'
         All others use 'python_name'
     '''
     if type(param_type) is not ParamListType:

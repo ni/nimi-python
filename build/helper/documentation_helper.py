@@ -276,7 +276,7 @@ def get_function_rst(fname, config, indent=0):
     '''
     function = config['functions'][fname]
     rst = '.. function:: ' + function['python_name'] + '('
-    rst += get_params_snippet(function, ParamListType.DISPLAY_METHOD) + ')'
+    rst += get_params_snippet(function, ParamListType.DOCUMENTATION_SESSION_METHOD) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
