@@ -11,92 +11,28 @@ pp = pprint.PrettyPrinter(indent=4)
 
 # Functions that return snippets that can be placed directly in the templates.
 class ParamListType(Enum):
-    # TODO(marcoskirsch): DRY - seems like a shame to type this for doc and later for declaration.
-    '''Type of parameter list to return
+    '''Type of parameter list code snippet to return
 
     Used by different parts of the code generator to create the parameter list
     '''
-    API_METHOD_DECLARATION = 1
-    '''Used for methods param list for the public API declaration
-
-    'skip_self': False,
-    'skip_session_handle': True,
-    'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
-    'reordered_for_default_values': True,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'python_name_with_default',
-    '''
-    API_METHOD_CALL = 2
-    '''Used for methods param list for the public API call
-
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
-    'reordered_for_default_values': True,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
-    DISPLAY_METHOD = 3
-    '''Used for methods param list for display (rst)
-
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
-    'reordered_for_default_values': True,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
-    LIBRARY_METHOD = 4
-    '''Used for methods param list when calling library
-
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'reordered_for_default_values': True,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
-    LIBRARY_CALL = 5
-    '''Used for methods param list when calling into the DLL
-
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'reordered_for_default_values': False,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'library_call_snippet',
-    '''
-    LIBRARY_CALL_TYPES = 6
-    '''Used for methods param list types when calling into the DLL
-
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'reordered_for_default_values': False,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'ctypes_type_library_call',
-    '''
-    LIBRARY_IMPL_METHOD = 7
-    '''Used for methods param list for implementation
-
-    'skip_self': False,
-    'skip_session_handle': False,
-    'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
-    'reordered_for_default_values': False,
-    'session_handle_parameter_name': 'vi',
-    'name_to_use': 'python_name',
-    '''
+    SESSION_METHOD_DECLARATION = 1
+    '''For declaring a method in Session'''
+    SESSION_METHOD_CALL = 2
+    '''For calling into a Session method.'''
+    DOCUMENTATION_SESSION_METHOD = 3
+    '''For documentation (rst) of Session methods'''
+    CTYPES_CALL = 4
+    '''For Library implementation calling into the DLL via ctypes'''
+    LIBRARY_METHOD_CALL = 5
+    '''For calling into a method in Library.'''
+    CTYPES_ARGTYPES = 6
+    '''For setting up the ctypes argument types'''
+    LIBRARY_METHOD_DECLARATION = 7
+    '''For declaring a method in Library'''
 
 
 ParamListTypeDefaults = {}
-ParamListTypeDefaults[ParamListType.API_METHOD_DECLARATION] = {
+ParamListTypeDefaults[ParamListType.SESSION_METHOD_DECLARATION] = {
     'skip_self': False,
     'skip_session_handle': True,
     'skip_output_parameters': True,
@@ -105,7 +41,7 @@ ParamListTypeDefaults[ParamListType.API_METHOD_DECLARATION] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name_with_default',
 }
-ParamListTypeDefaults[ParamListType.API_METHOD_CALL] = {
+ParamListTypeDefaults[ParamListType.SESSION_METHOD_CALL] = {
     'skip_self': True,
     'skip_session_handle': True,
     'skip_output_parameters': True,
@@ -114,7 +50,7 @@ ParamListTypeDefaults[ParamListType.API_METHOD_CALL] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
 }
-ParamListTypeDefaults[ParamListType.DISPLAY_METHOD] = {
+ParamListTypeDefaults[ParamListType.DOCUMENTATION_SESSION_METHOD] = {
     'skip_self': True,
     'skip_session_handle': True,
     'skip_output_parameters': True,
@@ -123,7 +59,7 @@ ParamListTypeDefaults[ParamListType.DISPLAY_METHOD] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
 }
-ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
+ParamListTypeDefaults[ParamListType.CTYPES_CALL] = {
     'skip_self': True,
     'skip_session_handle': False,
     'skip_output_parameters': False,
@@ -132,7 +68,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
 }
-ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
+ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_CALL] = {
     'skip_self': True,
     'skip_session_handle': False,
     'skip_output_parameters': False,
@@ -141,7 +77,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'library_call_snippet',
 }
-ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
+ParamListTypeDefaults[ParamListType.CTYPES_ARGTYPES] = {
     'skip_self': True,
     'skip_session_handle': False,
     'skip_output_parameters': False,
@@ -150,7 +86,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_CALL_TYPES] = {
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'ctypes_type_library_call',
 }
-ParamListTypeDefaults[ParamListType.LIBRARY_IMPL_METHOD] = {
+ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_DECLARATION] = {
     'skip_self': False,
     'skip_session_handle': False,
     'skip_output_parameters': False,
@@ -166,7 +102,7 @@ def get_params_snippet(function, param_type, options={}):
 
     Name used:
         ParamListType.LIBRARY_CALL uses 'library_call_snippet'
-        ParamListType.LIBRARY_CALL_TYPES uses 'ctypes_type_library_call'
+        ParamListType.CTYPES_ARGTYPES uses 'ctypes_type_library_call'
         All others use 'python_name'
     '''
     if type(param_type) is not ParamListType:

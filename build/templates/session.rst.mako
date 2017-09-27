@@ -39,7 +39,7 @@ table_contents = []
 for f in sorted(functions):
     if functions[f]['codegen_method'] == 'public':
         name = functions[f]['python_name']
-        param_list = helper.get_params_snippet(functions[f], helper.ParamListType.DISPLAY_METHOD)
+        param_list = helper.get_params_snippet(functions[f], helper.ParamListType.DOCUMENTATION_SESSION_METHOD)
         table_contents.append((':py:func:`{0}`'.format(name),))
 
 table = helper.as_rest_table(table_contents)
