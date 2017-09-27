@@ -117,5 +117,16 @@ function_default_value = {
     'InitWithOptions':  { 'parameters': { 1: { 'default_value': False, },
                                           2: { 'default_value': False, },
                                           3: { 'default_value': '', }, }, },
+    'ConfigureMultiPoint':       { 'parameters': { 3: { 'default_value': 'enums.SampleTrigger.IMMEDIATE', },
+                                                   4: { 'default_value': -1, }, }, },
+    'ConfigureThermocouple':     { 'parameters': { 2: { 'default_value': 'enums.ThermocoupleReferenceJunctionType.FIXED', }, }, },
+    'ConfigureTrigger':          { 'parameters': { 2: { 'default_value': -1, }, }, },
+    'Fetch':                     { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'FetchMultiPoint':           { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'FetchWaveform':             { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'GetDevTemp':                { 'parameters': { 1: { 'default_value': '', }, }, },
+    'Read':                      { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'ReadMultiPoint':            { 'parameters': { 1: { 'default_value': -1, }, }, },
+    'ReadWaveform':              { 'parameters': { 1: { 'default_value': -1, }, }, },
 }
 

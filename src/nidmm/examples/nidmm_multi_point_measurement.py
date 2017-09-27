@@ -16,8 +16,8 @@ args = parser.parse_args()
 try:
     with nidmm.Session(args.name) as session:
         session.configure_measurement_digits(nidmm.Function[args.function], args.range, args.digits)
-        session.configure_multi_point(args.triggers, args.samples, nidmm.SampleTrigger.IMMEDIATE, sample_interval=-1)
-        measurements, numberOfMeasurements = session.read_multi_point(maximum_time=-1, array_size=args.samples)
+        session.configure_multi_point(args.triggers, args.samples)
+        measurements, numberOfMeasurements = session.read_multi_point(array_size=args.samples)
         print('Number of measurements: ', numberOfMeasurements)
         print('Measurements: ', measurements)
 except nidmm.Error as e:
