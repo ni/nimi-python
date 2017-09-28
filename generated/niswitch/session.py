@@ -1137,7 +1137,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _get_attribute_vi_boolean(self, channel_name, attribute_id):
+    def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
         This function queries the value of a ViBoolean attribute. You can use
@@ -1178,11 +1178,11 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
         '''
         attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self._library.niSwitch_GetAttributeViBoolean(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niSwitch_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(attribute_value_ctype.value)
 
-    def _get_attribute_vi_int32(self, channel_name, attribute_id):
+    def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
         This function queries the value of a ViInt32 attribute. You can use this
@@ -1223,11 +1223,11 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
         '''
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niSwitch_GetAttributeViInt32(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niSwitch_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(attribute_value_ctype.value)
 
-    def _get_attribute_vi_real64(self, channel_name, attribute_id):
+    def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
         This function queries the value of a ViReal64 attribute. You can use
@@ -1268,11 +1268,11 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
         '''
         attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self._library.niSwitch_GetAttributeViReal64(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niSwitch_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(attribute_value_ctype.value)
 
-    def _get_attribute_vi_string(self, channel_name, attribute_id):
+    def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
         This function queries the value of a ViString attribute. You can use
@@ -1329,11 +1329,11 @@ class _SessionBase(object):
         '''
         array_size = 0
         attribute_value_ctype = None
-        error_code = self._library.niSwitch_GetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
+        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size = error_code
         attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), ctypes_types.ViString_ctype)
-        error_code = self._library.niSwitch_GetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
+        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode("ascii")
 
@@ -1925,7 +1925,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):
+    def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
         This function sets the value of a ViBoolean attribute. This is a
@@ -1977,11 +1977,11 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViBoolean(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niSwitch_SetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):
+    def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
         This function sets the value of a ViInt32 attribute. This is a low-level
@@ -2033,11 +2033,11 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViInt32(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niSwitch_SetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):
+    def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
         This function sets the value of a ViReal64 attribute. This is a
@@ -2089,11 +2089,11 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViReal64(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niSwitch_SetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):
+    def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
         This function sets the value of a ViString attribute. This is a
@@ -2145,7 +2145,7 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
+        error_code = self._library.niSwitch_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
