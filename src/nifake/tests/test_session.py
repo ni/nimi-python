@@ -469,3 +469,12 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == 'Failed to retrieve error description.'
 
+    def test_enum_input_function_with_defaults(self):
+        test_turtle = nifake.Turtle.DONATELLO
+        self.patched_library.niFake_EnumInputFunctionWithDefaults.side_effect = self.side_effects_helper.niFake_EnumInputFunctionWithDefaults
+        with nifake.Session('dev1') as session:
+            session.enum_input_function_with_defaults()
+            session.enum_input_function_with_defaults(test_turtle)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, 0), call(SESSION_NUM_FOR_TEST, 1)]  # 0 is the value of the default of nifake.Turtle.LEONARDO, 1 is the value of nifake.Turtle.DONATELLO
+            self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
