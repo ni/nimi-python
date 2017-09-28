@@ -1,6 +1,6 @@
 from .metadata_find import find_size_parameter
 
-from .metadata_filters import extract_ivi_dance_parameter
+from .metadata_filters import filter_ivi_dance_parameter
 
 from enum import Enum
 
@@ -121,7 +121,7 @@ def get_params_snippet(function, param_type, options={}):
         snippets.append('self')
 
     # Filter based on options
-    ivi_dance_size_parameter = find_size_parameter(extract_ivi_dance_parameter(function['parameters']), function['parameters'])
+    ivi_dance_size_parameter = find_size_parameter(filter_ivi_dance_parameter(function['parameters']), function['parameters'])
     for x in function['parameters']:
         skip = False
         if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
