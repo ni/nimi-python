@@ -306,8 +306,6 @@ class TestSession(object):
         self.patched_library.niFake_ReadFromChannel.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', test_maximum_time, ANY)
         assert value == test_reading
 
-    # TODO(marcoskirsch): implement
-    '''
     def test_device_method_not_exist_on_session(self):
         with nifake.Session('dev1') as session:
             try:
@@ -315,7 +313,6 @@ class TestSession(object):
                 assert False, 'Method has no repeated capability so it shouldn\'t exist on _RepeatedCapability'
             except AttributeError:
                 pass
-    '''
 
     # Attributes
 
