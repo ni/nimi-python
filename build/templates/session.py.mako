@@ -23,13 +23,10 @@ ${encoding_tag}
         session_context_manager_initiate = '_' + config['context_manager_name']['initiate']
         session_context_manager_abort = '_' + config['context_manager_name']['abort']
 %>\
-<%def name="render_method(function_name, f)">\
+<%def name="render_method(f)">\
 <%
     '''Renders a Session method corresponding to the passed-in function metadata.'''
 
-    # TODO(marcoskirsch): It's strange to take in function_name separately from its metadata.
-    #                     I think this indicates that we should change metadata format to be more like parameters:
-    #                     A list of functions, with a key/value pair 'name':'foo'. See issue #372
     parameters = f['parameters']
     output_parameters = helper.extract_output_parameters(parameters)
     enum_input_parameters = helper.extract_enum_parameters(helper.extract_input_parameters(parameters))
@@ -39,7 +36,7 @@ ${encoding_tag}
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
-        ${helper.get_function_docstring(function_name, config, indent=8)}
+        ${helper.get_function_docstring(f['name'], config, indent=8)}
         '''
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
@@ -48,17 +45,17 @@ ${encoding_tag}
         ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
 % endfor
 % if ivi_dance_parameter is None:
-        error_code = self._library.${c_function_prefix}${function_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
+        error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(parameters)}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = None
-        error_code = self._library.${c_function_prefix}${function_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
+        error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
-        error_code = self._library.${c_function_prefix}${function_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
+        error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(parameters)}
 % endif
@@ -145,7 +142,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParamListType
     ''' These are code-generated '''
 
 % for func_name in sorted(functions):
-${render_method(func_name, functions[func_name])}
+${render_method(functions[func_name])}
 % endfor
 
 class _RepeatedCapability(_SessionBase):

@@ -11,6 +11,12 @@ pp = pprint.PrettyPrinter(indent=4, width=80)
 # Functions to add information to metadata structures that are specific to our codegen needs.
 
 
+def _add_name(function, name):
+    '''Adds a name' key/value pair to the function metadata'''
+    assert 'name' not in function, "'name' is already populated which means you already fixed 372, rendering _add_name() redundant."
+    function['name'] = name
+    return function
+
 def _add_python_method_name(function, name):
     '''Adds a python_name' key/value pair to the function metadata'''
     if function['codegen_method'] == 'private':
@@ -159,6 +165,7 @@ def _add_is_repeated_capability(parameter):
 def add_all_function_metadata(functions, config):
     '''Adds all codegen-specific metada to the function metadata list'''
     for f in functions:
+        _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_ctypes_return_type(functions[f])
         _add_python_return_type(functions[f])
