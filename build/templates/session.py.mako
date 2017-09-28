@@ -7,15 +7,13 @@ ${encoding_tag}
 <%
     import build.helper as helper
 
-    config        = template_parameters['metadata'].config
-    attributes    = config['attributes']
-    functions     = config['functions']
+    config = template_parameters['metadata'].config
+    attributes = config['attributes']
+    functions = helper.filter_codegen_functions(config['functions'])
 
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
-
-    functions = helper.filter_codegen_functions(functions)
 
     session_context_manager = None
     if 'task' in config['context_manager_name']:
@@ -141,7 +139,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParamListType
 
     ''' These are code-generated '''
 
-% for func_name in sorted(functions):
+% for func_name in sorted({k: v for k, v in functions.items() if v['has_repeated_capability']}):
 ${render_method(functions[func_name])}
 % endfor
 
@@ -183,5 +181,11 @@ class Session(_SessionBase):
             # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
             print("Failed to close session.")
         self._${config['session_handle_parameter_name']} = 0
+
+    ''' These are code-generated '''
+
+% for func_name in sorted({k: v for k, v in functions.items() if not v['has_repeated_capability']}):
+${render_method(functions[func_name])}
+% endfor
 
 
