@@ -107,7 +107,8 @@ def _add_library_method_call_snippet(parameter, session_handle_parameter_name):
         if parameter['name'] == session_handle_parameter_name:
             library_method_call_snippet = 'self._' + session_handle_parameter_name
         elif parameter['is_repeated_capability']:
-            library_method_call_snippet = 'self._repeated_capability'
+            # TODO(marcoskirsch): .encode('ascii') is a problem if the repeated capability contains non-ASCII characters.
+            library_method_call_snippet = 'self._repeated_capability.encode(\'ascii\')'
         else:
             library_method_call_snippet = parameter['python_name']
             library_method_call_snippet += '.value' if parameter['enum'] is not None else ''
@@ -263,7 +264,7 @@ def test_add_all_metadata_simple():
                     'python_type': 'ViString',
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViString',
-                    'library_method_call_snippet': 'self._repeated_capability',
+                    'library_method_call_snippet': 'self._repeated_capability.encode(\'ascii\')',
                 },
             ],
             'python_name': 'foo',
