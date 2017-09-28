@@ -177,6 +177,9 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
+        self._defaults['error_message'] = {}
+        self._defaults['error_message']['return'] = 0
+        self._defaults['error_message']['errorMessage'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
         self._defaults['revision_query'] = {}
@@ -616,6 +619,14 @@ class SideEffectsHelper(object):
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
+    def niDMM_error_message(self, vi, error_code, error_message):  # noqa: N802
+        if self._defaults['error_message']['return'] != 0:
+            return self._defaults['error_message']['return']
+        if self._defaults['error_message']['errorMessage'] is None:
+            raise MockFunctionCallError("niDMM_error_message", param='errorMessage')
+        error_message.contents.value = self._defaults['error_message']['errorMessage']
+        return self._defaults['error_message']['return']
+
     def niDMM_reset(self, vi):  # noqa: N802
         if self._defaults['reset']['return'] != 0:
             return self._defaults['reset']['return']
@@ -767,6 +778,8 @@ class SideEffectsHelper(object):
         mock_library.niDMM_SetAttributeViString.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_close.side_effect = MockFunctionCallError("niDMM_close")
         mock_library.niDMM_close.return_value = nidmm.python_types.ViStatus(0)
+        mock_library.niDMM_error_message.side_effect = MockFunctionCallError("niDMM_error_message")
+        mock_library.niDMM_error_message.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_reset.side_effect = MockFunctionCallError("niDMM_reset")
         mock_library.niDMM_reset.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_revision_query.side_effect = MockFunctionCallError("niDMM_revision_query")

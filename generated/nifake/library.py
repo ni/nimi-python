@@ -45,6 +45,7 @@ class Library(object):
         self.niFake_SimpleFunction_cfunc = None
         self.niFake_TwoInputFunction_cfunc = None
         self.niFake_close_cfunc = None
+        self.niFake_error_message_cfunc = None
 
         if library_type == 'windll':
             self._library = ctypes.WinDLL(library_name)
@@ -275,3 +276,11 @@ class Library(object):
                 self.niFake_close_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niFake_close_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_close_cfunc(vi)
+
+    def niFake_error_message(self, vi, error_code, error_message):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_error_message_cfunc is None:
+                self.niFake_error_message_cfunc = self._library.niFake_error_message
+                self.niFake_error_message_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ViString_ctype]  # noqa: F405
+                self.niFake_error_message_cfunc.restype = nifake.python_types.ViStatus
+        return self.niFake_error_message_cfunc(vi, error_code, error_message)
