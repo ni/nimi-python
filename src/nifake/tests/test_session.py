@@ -309,7 +309,7 @@ class TestSession(object):
     def test_device_method_not_exist_on_repeated_capability(self):
         with nifake.Session('dev1') as session:
             try:
-                value = session['3'].simple_function()
+                session['3'].simple_function()
                 assert False, 'Method has no repeated capability so it shouldn\'t exist on _RepeatedCapability'
             except AttributeError:
                 pass
