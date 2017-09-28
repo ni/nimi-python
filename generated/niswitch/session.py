@@ -862,6 +862,472 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    def _get_attribute_vi_boolean(self, attribute_id):
+        '''_get_attribute_vi_boolean
+
+        This function queries the value of a ViBoolean attribute. You can use
+        this function to get the values of instrument specific attributes and
+        inherent IVI attributes. If the attribute represents an instrument
+        state, this function performs instrument I/O in the following cases: -
+        State caching is disabled for the entire session or for the particular
+        attribute. - State caching is enabled and the currently cached value is
+        invalid.
+
+        Args:
+            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+                channel. Other attributes are unique per switch device. Pass VI_NULL or
+                an empty string for this parameter. Default Value: ""
+            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+                this control as follows. - Click on the control or press , , or , to
+                display a dialog box containing a hierarchical list of the available
+                attributes. Attributes whose value cannot be set are dim. Help text is
+                shown for each attribute. Select an attribute by double-clicking on it
+                or by selecting it and then pressing . A ring control at the top of the
+                dialog box allows you to see all IVI attributes or only the attributes
+                of the ViInt32 type. If you choose to see all IVI attributes, the data
+                types appear to the right of the attribute names in the list box. The
+                data types that are not consistent with this function are dim. If you
+                select an attribute data type that is dim, LabWindows/CVI transfers you
+                to the function panel for the corresponding function that is consistent
+                with the data type. - If you want to enter a variable name, press to
+                change this ring control to a manual input box. - If the attribute in
+                this ring control has constants as valid values, you can view the
+                constants by moving to the Attribute Value control and pressing .
+
+        Returns:
+            attribute_value (bool):Returns the current value of the attribute. Pass the address of a
+                ViBoolean variable. From the function panel window, you can use this
+                control as follows. - If the attribute currently showing in the
+                Attribute ID ring control has constants as valid values, you can view a
+                list of the constants by pressing on this control. Select a value by
+                double-clicking on it or by selecting it and then pressing .
+        '''
+        attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
+        error_code = self._library.niSwitch_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViBoolean(attribute_value_ctype.value)
+
+    def _get_attribute_vi_int32(self, attribute_id):
+        '''_get_attribute_vi_int32
+
+        This function queries the value of a ViInt32 attribute. You can use this
+        function to get the values of instrument specific attributes and
+        inherent IVI attributes. If the attribute represents an instrument
+        state, this function performs instrument I/O in the following cases: -
+        State caching is disabled for the entire session or for the particular
+        attribute. - State caching is enabled and the currently cached value is
+        invalid.
+
+        Args:
+            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+                channel. Other attributes are unique per switch device. Pass VI_NULL or
+                an empty string for this parameter. Default Value: ""
+            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+                this control as follows. - Click on the control or press , , or , to
+                display a dialog box containing a hierarchical list of the available
+                attributes. Attributes whose value cannot be set are dim. Help text is
+                shown for each attribute. Select an attribute by double-clicking on it
+                or by selecting it and then pressing . A ring control at the top of the
+                dialog box allows you to see all IVI attributes or only the attributes
+                of the ViInt32 type. If you choose to see all IVI attributes, the data
+                types appear to the right of the attribute names in the list box. The
+                data types that are not consistent with this function are dim. If you
+                select an attribute data type that is dim, LabWindows/CVI transfers you
+                to the function panel for the corresponding function that is consistent
+                with the data type. - If you want to enter a variable name, press to
+                change this ring control to a manual input box. - If the attribute in
+                this ring control has constants as valid values, you can view the
+                constants by moving to the Attribute Value control and pressing .
+
+        Returns:
+            attribute_value (int):Returns the current value of the attribute. Pass the address of a
+                ViInt32 variable. From the function panel window, you can use this
+                control as follows. - If the attribute currently showing in the
+                Attribute ID ring control has constants as valid values, you can view a
+                list of the constants by pressing on this control. Select a value by
+                double-clicking on it or by selecting it and then pressing .
+        '''
+        attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
+        error_code = self._library.niSwitch_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViInt32(attribute_value_ctype.value)
+
+    def _get_attribute_vi_real64(self, attribute_id):
+        '''_get_attribute_vi_real64
+
+        This function queries the value of a ViReal64 attribute. You can use
+        this function to get the values of instrument specific attributes and
+        inherent IVI attributes. If the attribute represents an instrument
+        state, this function performs instrument I/O in the following cases: -
+        State caching is disabled for the entire session or for the particular
+        attribute. - State caching is enabled and the currently cached value is
+        invalid.
+
+        Args:
+            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+                channel. Other attributes are unique per switch device. Pass VI_NULL or
+                an empty string for this parameter. Default Value: ""
+            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+                this control as follows. - Click on the control or press , , or , to
+                display a dialog box containing a hierarchical list of the available
+                attributes. Attributes whose value cannot be set are dim. Help text is
+                shown for each attribute. Select an attribute by double-clicking on it
+                or by selecting it and then pressing . A ring control at the top of the
+                dialog box allows you to see all IVI attributes or only the attributes
+                of the ViInt32 type. If you choose to see all IVI attributes, the data
+                types appear to the right of the attribute names in the list box. The
+                data types that are not consistent with this function are dim. If you
+                select an attribute data type that is dim, LabWindows/CVI transfers you
+                to the function panel for the corresponding function that is consistent
+                with the data type. - If you want to enter a variable name, press to
+                change this ring control to a manual input box. - If the attribute in
+                this ring control has constants as valid values, you can view the
+                constants by moving to the Attribute Value control and pressing .
+
+        Returns:
+            attribute_value (float):Returns the current value of the attribute. Pass the address of a
+                ViReal64 variable. From the function panel window, you can use this
+                control as follows. - If the attribute currently showing in the
+                Attribute ID ring control has constants as valid values, you can view a
+                list of the constants by pressing on this control. Select a value by
+                double-clicking on it or by selecting it and then pressing .
+        '''
+        attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
+        error_code = self._library.niSwitch_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViReal64(attribute_value_ctype.value)
+
+    def _get_attribute_vi_string(self, attribute_id):
+        '''_get_attribute_vi_string
+
+        This function queries the value of a ViString attribute. You can use
+        this function to get the values of instrument specific attributes and
+        inherent IVI attributes. If the attribute represents an instrument
+        state, this function performs instrument I/O in the following cases: -
+        State caching is disabled for the entire session or for the particular
+        attribute. - State caching is enabled and the currently cached value is
+        invalid. You must provide a ViChar array to serve as a buffer for the
+        value. You pass the number of bytes in the buffer as the Array Size
+        parameter. If the current value of the attribute, including the
+        terminating NULL byte, is larger than the size you indicate in the Array
+        Size parameter, the function copies Array Size-1 bytes into the buffer,
+        places an ASCII NULL byte at the end of the buffer, and returns the
+        array size you must pass to get the entire value. For example, if the
+        value is "123456" and the Array Size is 4, the function places "123"
+        into the buffer and returns 7. If you want to call this function just to
+        get the required array size, you can pass 0 for the Array Size and
+        VI_NULL for the Attribute Value buffer. If you want the function to
+        fill in the buffer regardless of the number of bytes in the value, pass
+        a negative number for the Array Size parameter.
+
+        Args:
+            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+                channel. Other attributes are unique per switch device. Pass VI_NULL or
+                an empty string for this parameter. Default Value: ""
+            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+                this control as follows. - Click on the control or press , , or , to
+                display a dialog box containing a hierarchical list of the available
+                attributes. Attributes whose value cannot be set are dim. Help text is
+                shown for each attribute. Select an attribute by double-clicking on it
+                or by selecting it and then pressing . A ring control at the top of the
+                dialog box allows you to see all IVI attributes or only the attributes
+                of the ViInt32 type. If you choose to see all IVI attributes, the data
+                types appear to the right of the attribute names in the list box. The
+                data types that are not consistent with this function are dim. If you
+                select an attribute data type that is dim, LabWindows/CVI transfers you
+                to the function panel for the corresponding function that is consistent
+                with the data type. - If you want to enter a variable name, press to
+                change this ring control to a manual input box. - If the attribute in
+                this ring control has constants as valid values, you can view the
+                constants by moving to the Attribute Value control and pressing .
+            array_size (int):Pass the number of bytes in the ViChar array you specify for the
+                Attribute Value parameter. If the current value of the attribute,
+                including the terminating NUL byte, contains more bytes that you
+                indicate in this parameter, the function copies Array Size-1 bytes into
+                the buffer, places an ASCII NUL byte at the end of the buffer, and
+                returns the array size you must pass to get the entire value. For
+                example, if the value is "123456" and the Array Size is 4, the function
+                places "123" into the buffer and returns 7. If you pass a negative
+                number, the function copies the value to the buffer regardless of the
+                number of bytes in the value. If you pass 0, you can pass VI_NULL for
+                the Attribute Value buffer parameter. Default Value:512
+        '''
+        array_size = 0
+        attribute_value_ctype = None
+        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        array_size = error_code
+        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), ctypes_types.ViString_ctype)
+        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return attribute_value_ctype.value.decode("ascii")
+
+    def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_boolean
+
+        This function sets the value of a ViBoolean attribute. This is a
+        low-level function that you can use to set the values of
+        instrument-specific attributes and inherent IVI attributes. If the
+        attribute represents an instrument state, this function performs
+        instrument I/O in the following cases: - State caching is disabled for
+        the entire session or for the particular attribute. - State caching is
+        enabled and the currently cached value is invalid or is different than
+        the value you specify. This instrument driver contains high-level
+        functions that set most of the instrument attributes. It is best to use
+        the high-level driver functions as much as possible. They handle order
+        dependencies and multithread locking for you. In addition, they perform
+        status checking only after setting all of the attributes. In contrast,
+        when you set multiple attributes using the SetAttribute functions, the
+        functions check the instrument status after each call. Also, when state
+        caching is enabled, the high-level functions that configure multiple
+        attributes perform instrument I/O only for the attributes whose value
+        you change. Thus, you can safely call the high-level functions without
+        the penalty of redundant instrument I/O.
+
+        Args:
+            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+                channel. Other attributes are unique per switch device. Pass VI_NULL or
+                an empty string for this parameter. Default Value: ""
+            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+                this control as follows. - Click on the control or press , , or , to
+                display a dialog box containing a hierarchical list of the available
+                attributes. Attributes whose value cannot be set are dim. Help text is
+                shown for each attribute. Select an attribute by double-clicking on it
+                or by selecting it and then pressing . Read-only attributes appear dim
+                in the list box. If you select a read-only attribute, an error message
+                appears. A ring control at the top of the dialog box allows you to see
+                all IVI attributes or only the attributes of the ViInt32 type. If you
+                choose to see all IVI attributes, the data types appear to the right of
+                the attribute names in the list box. The data types that are not
+                consistent with this function are dim. If you select an attribute data
+                type that is dim, LabWindows/CVI transfers you to the function panel for
+                the corresponding function that is consistent with the data type. - If
+                you want to enter a variable name, press to change this ring control to
+                a manual input box. - If the attribute in this ring control has
+                constants as valid values, you can view the constants by moving to the
+                Attribute Value control and pressing .
+            attribute_value (bool):Pass the value to which you want to set the attribute. From the function
+                panel window, you can use this control as follows. - If the attribute
+                currently showing in the Attribute ID ring control has constants as
+                valid values, you can view a list of the constants by pressing on this
+                control. Select a value by double-clicking on it or by selecting it and
+                then pressing . Note: Some of the values might not be valid depending on
+                the current settings of the instrument session. Default Value: none
+        '''
+        error_code = self._library.niSwitch_SetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_int32(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_int32
+
+        This function sets the value of a ViInt32 attribute. This is a low-level
+        function that you can use to set the values of instrument-specific
+        attributes and inherent IVI attributes. If the attribute represents an
+        instrument state, this function performs instrument I/O in the following
+        cases: - State caching is disabled for the entire session or for the
+        particular attribute. - State caching is enabled and the currently
+        cached value is invalid or is different than the value you specify. This
+        instrument driver contains high-level functions that set most of the
+        instrument attributes. It is best to use the high-level driver functions
+        as much as possible. They handle order dependencies and multithread
+        locking for you. In addition, they perform status checking only after
+        setting all of the attributes. In contrast, when you set multiple
+        attributes using the SetAttribute functions, the functions check the
+        instrument status after each call. Also, when state caching is enabled,
+        the high-level functions that configure multiple attributes perform
+        instrument I/O only for the attributes whose value you change. Thus, you
+        can safely call the high-level functions without the penalty of
+        redundant instrument I/O.
+
+        Args:
+            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+                channel. Other attributes are unique per switch device. Pass VI_NULL or
+                an empty string for this parameter. Default Value: ""
+            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+                this control as follows. - Click on the control or press , , or , to
+                display a dialog box containing a hierarchical list of the available
+                attributes. Attributes whose value cannot be set are dim. Help text is
+                shown for each attribute. Select an attribute by double-clicking on it
+                or by selecting it and then pressing . Read-only attributes appear dim
+                in the list box. If you select a read-only attribute, an error message
+                appears. A ring control at the top of the dialog box allows you to see
+                all IVI attributes or only the attributes of the ViInt32 type. If you
+                choose to see all IVI attributes, the data types appear to the right of
+                the attribute names in the list box. The data types that are not
+                consistent with this function are dim. If you select an attribute data
+                type that is dim, LabWindows/CVI transfers you to the function panel for
+                the corresponding function that is consistent with the data type. - If
+                you want to enter a variable name, press to change this ring control to
+                a manual input box. - If the attribute in this ring control has
+                constants as valid values, you can view the constants by moving to the
+                Attribute Value control and pressing .
+            attribute_value (int):Pass the value to which you want to set the attribute. From the function
+                panel window, you can use this control as follows. - If the attribute
+                currently showing in the Attribute ID ring control has constants as
+                valid values, you can view a list of the constants by pressing on this
+                control. Select a value by double-clicking on it or by selecting it and
+                then pressing . Note: Some of the values might not be valid depending on
+                the current settings of the instrument session. Default Value: none
+        '''
+        error_code = self._library.niSwitch_SetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_real64(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_real64
+
+        This function sets the value of a ViReal64 attribute. This is a
+        low-level function that you can use to set the values of
+        instrument-specific attributes and inherent IVI attributes. If the
+        attribute represents an instrument state, this function performs
+        instrument I/O in the following cases: - State caching is disabled for
+        the entire session or for the particular attribute. - State caching is
+        enabled and the currently cached value is invalid or is different than
+        the value you specify. This instrument driver contains high-level
+        functions that set most of the instrument attributes. It is best to use
+        the high-level driver functions as much as possible. They handle order
+        dependencies and multithread locking for you. In addition, they perform
+        status checking only after setting all of the attributes. In contrast,
+        when you set multiple attributes using the SetAttribute functions, the
+        functions check the instrument status after each call. Also, when state
+        caching is enabled, the high-level functions that configure multiple
+        attributes perform instrument I/O only for the attributes whose value
+        you change. Thus, you can safely call the high-level functions without
+        the penalty of redundant instrument I/O.
+
+        Args:
+            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+                channel. Other attributes are unique per switch device. Pass VI_NULL or
+                an empty string for this parameter. Default Value: ""
+            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+                this control as follows. - Click on the control or press , , or , to
+                display a dialog box containing a hierarchical list of the available
+                attributes. Attributes whose value cannot be set are dim. Help text is
+                shown for each attribute. Select an attribute by double-clicking on it
+                or by selecting it and then pressing . Read-only attributes appear dim
+                in the list box. If you select a read-only attribute, an error message
+                appears. A ring control at the top of the dialog box allows you to see
+                all IVI attributes or only the attributes of the ViInt32 type. If you
+                choose to see all IVI attributes, the data types appear to the right of
+                the attribute names in the list box. The data types that are not
+                consistent with this function are dim. If you select an attribute data
+                type that is dim, LabWindows/CVI transfers you to the function panel for
+                the corresponding function that is consistent with the data type. - If
+                you want to enter a variable name, press to change this ring control to
+                a manual input box. - If the attribute in this ring control has
+                constants as valid values, you can view the constants by moving to the
+                Attribute Value control and pressing .
+            attribute_value (float):Pass the value to which you want to set the attribute. From the function
+                panel window, you can use this control as follows. - If the attribute
+                currently showing in the Attribute ID ring control has constants as
+                valid values, you can view a list of the constants by pressing on this
+                control. Select a value by double-clicking on it or by selecting it and
+                then pressing . Note: Some of the values might not be valid depending on
+                the current settings of the instrument session. Default Value: none
+        '''
+        error_code = self._library.niSwitch_SetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_string(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_string
+
+        This function sets the value of a ViString attribute. This is a
+        low-level function that you can use to set the values of
+        instrument-specific attributes and inherent IVI attributes. If the
+        attribute represents an instrument state, this function performs
+        instrument I/O in the following cases: - State caching is disabled for
+        the entire session or for the particular attribute. - State caching is
+        enabled and the currently cached value is invalid or is different than
+        the value you specify. This instrument driver contains high-level
+        functions that set most of the instrument attributes. It is best to use
+        the high-level driver functions as much as possible. They handle order
+        dependencies and multithread locking for you. In addition, they perform
+        status checking only after setting all of the attributes. In contrast,
+        when you set multiple attributes using the SetAttribute functions, the
+        functions check the instrument status after each call. Also, when state
+        caching is enabled, the high-level functions that configure multiple
+        attributes perform instrument I/O only for the attributes whose value
+        you change. Thus, you can safely call the high-level functions without
+        the penalty of redundant instrument I/O.
+
+        Args:
+            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+                channel. Other attributes are unique per switch device. Pass VI_NULL or
+                an empty string for this parameter. Default Value: ""
+            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+                this control as follows. - Click on the control or press , , or , to
+                display a dialog box containing a hierarchical list of the available
+                attributes. Attributes whose value cannot be set are dim. Help text is
+                shown for each attribute. Select an attribute by double-clicking on it
+                or by selecting it and then pressing . Read-only attributes appear dim
+                in the list box. If you select a read-only attribute, an error message
+                appears. A ring control at the top of the dialog box allows you to see
+                all IVI attributes or only the attributes of the ViInt32 type. If you
+                choose to see all IVI attributes, the data types appear to the right of
+                the attribute names in the list box. The data types that are not
+                consistent with this function are dim. If you select an attribute data
+                type that is dim, LabWindows/CVI transfers you to the function panel for
+                the corresponding function that is consistent with the data type. - If
+                you want to enter a variable name, press to change this ring control to
+                a manual input box. - If the attribute in this ring control has
+                constants as valid values, you can view the constants by moving to the
+                Attribute Value control and pressing .
+            attribute_value (str):Pass the value to which you want to set the attribute. From the function
+                panel window, you can use this control as follows. - If the attribute
+                currently showing in the Attribute ID ring control has constants as
+                valid values, you can view a list of the constants by pressing on this
+                control. Select a value by double-clicking on it or by selecting it and
+                then pressing . Note: Some of the values might not be valid depending on
+                the current settings of the instrument session. Default Value: none
+        '''
+        error_code = self._library.niSwitch_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+
+class _RepeatedCapability(_SessionBase):
+    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
+
+    def __init__(self, vi, repeated_capability):
+        super(_RepeatedCapability, self).__init__(repeated_capability)
+        self._vi = vi
+        self._is_frozen = True
+
+
+class Session(_SessionBase):
+    '''An NI-SWITCH session to a National Instruments Switch Module'''
+
+    def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
+        super(Session, self).__init__(repeated_capability='')
+        self._vi = 0  # This must be set before calling init_with_topology().
+        self._vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        return _RepeatedCapability(self._vi, repeated_capability)
+
+    def initiate(self):
+        return _Scan(self)
+
+    def close(self):
+        try:
+            self._close()
+        except errors.Error:
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
+            print("Failed to close session.")
+        self._vi = 0
+
+    ''' These are code-generated '''
+
     def _abort_scan(self):
         '''_abort_scan
 
@@ -1136,206 +1602,6 @@ class _SessionBase(object):
         error_code = self._library.niSwitch_DisconnectMultiple(self._vi, disconnection_list.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def _get_attribute_vi_boolean(self, attribute_id):
-        '''_get_attribute_vi_boolean
-
-        This function queries the value of a ViBoolean attribute. You can use
-        this function to get the values of instrument specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases: -
-        State caching is disabled for the entire session or for the particular
-        attribute. - State caching is enabled and the currently cached value is
-        invalid.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . A ring control at the top of the
-                dialog box allows you to see all IVI attributes or only the attributes
-                of the ViInt32 type. If you choose to see all IVI attributes, the data
-                types appear to the right of the attribute names in the list box. The
-                data types that are not consistent with this function are dim. If you
-                select an attribute data type that is dim, LabWindows/CVI transfers you
-                to the function panel for the corresponding function that is consistent
-                with the data type. - If you want to enter a variable name, press to
-                change this ring control to a manual input box. - If the attribute in
-                this ring control has constants as valid values, you can view the
-                constants by moving to the Attribute Value control and pressing .
-
-        Returns:
-            attribute_value (bool):Returns the current value of the attribute. Pass the address of a
-                ViBoolean variable. From the function panel window, you can use this
-                control as follows. - If the attribute currently showing in the
-                Attribute ID ring control has constants as valid values, you can view a
-                list of the constants by pressing on this control. Select a value by
-                double-clicking on it or by selecting it and then pressing .
-        '''
-        attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self._library.niSwitch_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(attribute_value_ctype.value)
-
-    def _get_attribute_vi_int32(self, attribute_id):
-        '''_get_attribute_vi_int32
-
-        This function queries the value of a ViInt32 attribute. You can use this
-        function to get the values of instrument specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases: -
-        State caching is disabled for the entire session or for the particular
-        attribute. - State caching is enabled and the currently cached value is
-        invalid.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . A ring control at the top of the
-                dialog box allows you to see all IVI attributes or only the attributes
-                of the ViInt32 type. If you choose to see all IVI attributes, the data
-                types appear to the right of the attribute names in the list box. The
-                data types that are not consistent with this function are dim. If you
-                select an attribute data type that is dim, LabWindows/CVI transfers you
-                to the function panel for the corresponding function that is consistent
-                with the data type. - If you want to enter a variable name, press to
-                change this ring control to a manual input box. - If the attribute in
-                this ring control has constants as valid values, you can view the
-                constants by moving to the Attribute Value control and pressing .
-
-        Returns:
-            attribute_value (int):Returns the current value of the attribute. Pass the address of a
-                ViInt32 variable. From the function panel window, you can use this
-                control as follows. - If the attribute currently showing in the
-                Attribute ID ring control has constants as valid values, you can view a
-                list of the constants by pressing on this control. Select a value by
-                double-clicking on it or by selecting it and then pressing .
-        '''
-        attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niSwitch_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(attribute_value_ctype.value)
-
-    def _get_attribute_vi_real64(self, attribute_id):
-        '''_get_attribute_vi_real64
-
-        This function queries the value of a ViReal64 attribute. You can use
-        this function to get the values of instrument specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases: -
-        State caching is disabled for the entire session or for the particular
-        attribute. - State caching is enabled and the currently cached value is
-        invalid.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . A ring control at the top of the
-                dialog box allows you to see all IVI attributes or only the attributes
-                of the ViInt32 type. If you choose to see all IVI attributes, the data
-                types appear to the right of the attribute names in the list box. The
-                data types that are not consistent with this function are dim. If you
-                select an attribute data type that is dim, LabWindows/CVI transfers you
-                to the function panel for the corresponding function that is consistent
-                with the data type. - If you want to enter a variable name, press to
-                change this ring control to a manual input box. - If the attribute in
-                this ring control has constants as valid values, you can view the
-                constants by moving to the Attribute Value control and pressing .
-
-        Returns:
-            attribute_value (float):Returns the current value of the attribute. Pass the address of a
-                ViReal64 variable. From the function panel window, you can use this
-                control as follows. - If the attribute currently showing in the
-                Attribute ID ring control has constants as valid values, you can view a
-                list of the constants by pressing on this control. Select a value by
-                double-clicking on it or by selecting it and then pressing .
-        '''
-        attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self._library.niSwitch_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(attribute_value_ctype.value)
-
-    def _get_attribute_vi_string(self, attribute_id):
-        '''_get_attribute_vi_string
-
-        This function queries the value of a ViString attribute. You can use
-        this function to get the values of instrument specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases: -
-        State caching is disabled for the entire session or for the particular
-        attribute. - State caching is enabled and the currently cached value is
-        invalid. You must provide a ViChar array to serve as a buffer for the
-        value. You pass the number of bytes in the buffer as the Array Size
-        parameter. If the current value of the attribute, including the
-        terminating NULL byte, is larger than the size you indicate in the Array
-        Size parameter, the function copies Array Size-1 bytes into the buffer,
-        places an ASCII NULL byte at the end of the buffer, and returns the
-        array size you must pass to get the entire value. For example, if the
-        value is "123456" and the Array Size is 4, the function places "123"
-        into the buffer and returns 7. If you want to call this function just to
-        get the required array size, you can pass 0 for the Array Size and
-        VI_NULL for the Attribute Value buffer. If you want the function to
-        fill in the buffer regardless of the number of bytes in the value, pass
-        a negative number for the Array Size parameter.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . A ring control at the top of the
-                dialog box allows you to see all IVI attributes or only the attributes
-                of the ViInt32 type. If you choose to see all IVI attributes, the data
-                types appear to the right of the attribute names in the list box. The
-                data types that are not consistent with this function are dim. If you
-                select an attribute data type that is dim, LabWindows/CVI transfers you
-                to the function panel for the corresponding function that is consistent
-                with the data type. - If you want to enter a variable name, press to
-                change this ring control to a manual input box. - If the attribute in
-                this ring control has constants as valid values, you can view the
-                constants by moving to the Attribute Value control and pressing .
-            array_size (int):Pass the number of bytes in the ViChar array you specify for the
-                Attribute Value parameter. If the current value of the attribute,
-                including the terminating NUL byte, contains more bytes that you
-                indicate in this parameter, the function copies Array Size-1 bytes into
-                the buffer, places an ASCII NUL byte at the end of the buffer, and
-                returns the array size you must pass to get the entire value. For
-                example, if the value is "123456" and the Array Size is 4, the function
-                places "123" into the buffer and returns 7. If you pass a negative
-                number, the function copies the value to the buffer regardless of the
-                number of bytes in the value. If you pass 0, you can pass VI_NULL for
-                the Attribute Value buffer parameter. Default Value:512
-        '''
-        array_size = 0
-        attribute_value_ctype = None
-        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size = error_code
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), ctypes_types.ViString_ctype)
-        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode("ascii")
 
     def get_channel_name(self, index):
         '''get_channel_name
@@ -1925,230 +2191,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_boolean
-
-        This function sets the value of a ViBoolean attribute. This is a
-        low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
-        instrument I/O in the following cases: - State caching is disabled for
-        the entire session or for the particular attribute. - State caching is
-        enabled and the currently cached value is invalid or is different than
-        the value you specify. This instrument driver contains high-level
-        functions that set most of the instrument attributes. It is best to use
-        the high-level driver functions as much as possible. They handle order
-        dependencies and multithread locking for you. In addition, they perform
-        status checking only after setting all of the attributes. In contrast,
-        when you set multiple attributes using the SetAttribute functions, the
-        functions check the instrument status after each call. Also, when state
-        caching is enabled, the high-level functions that configure multiple
-        attributes perform instrument I/O only for the attributes whose value
-        you change. Thus, you can safely call the high-level functions without
-        the penalty of redundant instrument I/O.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . Read-only attributes appear dim
-                in the list box. If you select a read-only attribute, an error message
-                appears. A ring control at the top of the dialog box allows you to see
-                all IVI attributes or only the attributes of the ViInt32 type. If you
-                choose to see all IVI attributes, the data types appear to the right of
-                the attribute names in the list box. The data types that are not
-                consistent with this function are dim. If you select an attribute data
-                type that is dim, LabWindows/CVI transfers you to the function panel for
-                the corresponding function that is consistent with the data type. - If
-                you want to enter a variable name, press to change this ring control to
-                a manual input box. - If the attribute in this ring control has
-                constants as valid values, you can view the constants by moving to the
-                Attribute Value control and pressing .
-            attribute_value (bool):Pass the value to which you want to set the attribute. From the function
-                panel window, you can use this control as follows. - If the attribute
-                currently showing in the Attribute ID ring control has constants as
-                valid values, you can view a list of the constants by pressing on this
-                control. Select a value by double-clicking on it or by selecting it and
-                then pressing . Note: Some of the values might not be valid depending on
-                the current settings of the instrument session. Default Value: none
-        '''
-        error_code = self._library.niSwitch_SetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_int32(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_int32
-
-        This function sets the value of a ViInt32 attribute. This is a low-level
-        function that you can use to set the values of instrument-specific
-        attributes and inherent IVI attributes. If the attribute represents an
-        instrument state, this function performs instrument I/O in the following
-        cases: - State caching is disabled for the entire session or for the
-        particular attribute. - State caching is enabled and the currently
-        cached value is invalid or is different than the value you specify. This
-        instrument driver contains high-level functions that set most of the
-        instrument attributes. It is best to use the high-level driver functions
-        as much as possible. They handle order dependencies and multithread
-        locking for you. In addition, they perform status checking only after
-        setting all of the attributes. In contrast, when you set multiple
-        attributes using the SetAttribute functions, the functions check the
-        instrument status after each call. Also, when state caching is enabled,
-        the high-level functions that configure multiple attributes perform
-        instrument I/O only for the attributes whose value you change. Thus, you
-        can safely call the high-level functions without the penalty of
-        redundant instrument I/O.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . Read-only attributes appear dim
-                in the list box. If you select a read-only attribute, an error message
-                appears. A ring control at the top of the dialog box allows you to see
-                all IVI attributes or only the attributes of the ViInt32 type. If you
-                choose to see all IVI attributes, the data types appear to the right of
-                the attribute names in the list box. The data types that are not
-                consistent with this function are dim. If you select an attribute data
-                type that is dim, LabWindows/CVI transfers you to the function panel for
-                the corresponding function that is consistent with the data type. - If
-                you want to enter a variable name, press to change this ring control to
-                a manual input box. - If the attribute in this ring control has
-                constants as valid values, you can view the constants by moving to the
-                Attribute Value control and pressing .
-            attribute_value (int):Pass the value to which you want to set the attribute. From the function
-                panel window, you can use this control as follows. - If the attribute
-                currently showing in the Attribute ID ring control has constants as
-                valid values, you can view a list of the constants by pressing on this
-                control. Select a value by double-clicking on it or by selecting it and
-                then pressing . Note: Some of the values might not be valid depending on
-                the current settings of the instrument session. Default Value: none
-        '''
-        error_code = self._library.niSwitch_SetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_real64(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_real64
-
-        This function sets the value of a ViReal64 attribute. This is a
-        low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
-        instrument I/O in the following cases: - State caching is disabled for
-        the entire session or for the particular attribute. - State caching is
-        enabled and the currently cached value is invalid or is different than
-        the value you specify. This instrument driver contains high-level
-        functions that set most of the instrument attributes. It is best to use
-        the high-level driver functions as much as possible. They handle order
-        dependencies and multithread locking for you. In addition, they perform
-        status checking only after setting all of the attributes. In contrast,
-        when you set multiple attributes using the SetAttribute functions, the
-        functions check the instrument status after each call. Also, when state
-        caching is enabled, the high-level functions that configure multiple
-        attributes perform instrument I/O only for the attributes whose value
-        you change. Thus, you can safely call the high-level functions without
-        the penalty of redundant instrument I/O.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . Read-only attributes appear dim
-                in the list box. If you select a read-only attribute, an error message
-                appears. A ring control at the top of the dialog box allows you to see
-                all IVI attributes or only the attributes of the ViInt32 type. If you
-                choose to see all IVI attributes, the data types appear to the right of
-                the attribute names in the list box. The data types that are not
-                consistent with this function are dim. If you select an attribute data
-                type that is dim, LabWindows/CVI transfers you to the function panel for
-                the corresponding function that is consistent with the data type. - If
-                you want to enter a variable name, press to change this ring control to
-                a manual input box. - If the attribute in this ring control has
-                constants as valid values, you can view the constants by moving to the
-                Attribute Value control and pressing .
-            attribute_value (float):Pass the value to which you want to set the attribute. From the function
-                panel window, you can use this control as follows. - If the attribute
-                currently showing in the Attribute ID ring control has constants as
-                valid values, you can view a list of the constants by pressing on this
-                control. Select a value by double-clicking on it or by selecting it and
-                then pressing . Note: Some of the values might not be valid depending on
-                the current settings of the instrument session. Default Value: none
-        '''
-        error_code = self._library.niSwitch_SetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_string(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_string
-
-        This function sets the value of a ViString attribute. This is a
-        low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
-        instrument I/O in the following cases: - State caching is disabled for
-        the entire session or for the particular attribute. - State caching is
-        enabled and the currently cached value is invalid or is different than
-        the value you specify. This instrument driver contains high-level
-        functions that set most of the instrument attributes. It is best to use
-        the high-level driver functions as much as possible. They handle order
-        dependencies and multithread locking for you. In addition, they perform
-        status checking only after setting all of the attributes. In contrast,
-        when you set multiple attributes using the SetAttribute functions, the
-        functions check the instrument status after each call. Also, when state
-        caching is enabled, the high-level functions that configure multiple
-        attributes perform instrument I/O only for the attributes whose value
-        you change. Thus, you can safely call the high-level functions without
-        the penalty of redundant instrument I/O.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . Read-only attributes appear dim
-                in the list box. If you select a read-only attribute, an error message
-                appears. A ring control at the top of the dialog box allows you to see
-                all IVI attributes or only the attributes of the ViInt32 type. If you
-                choose to see all IVI attributes, the data types appear to the right of
-                the attribute names in the list box. The data types that are not
-                consistent with this function are dim. If you select an attribute data
-                type that is dim, LabWindows/CVI transfers you to the function panel for
-                the corresponding function that is consistent with the data type. - If
-                you want to enter a variable name, press to change this ring control to
-                a manual input box. - If the attribute in this ring control has
-                constants as valid values, you can view the constants by moving to the
-                Attribute Value control and pressing .
-            attribute_value (str):Pass the value to which you want to set the attribute. From the function
-                panel window, you can use this control as follows. - If the attribute
-                currently showing in the Attribute ID ring control has constants as
-                valid values, you can view a list of the constants by pressing on this
-                control. Select a value by double-clicking on it or by selecting it and
-                then pressing . Note: Some of the values might not be valid depending on
-                the current settings of the instrument session. Default Value: none
-        '''
-        error_code = self._library.niSwitch_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def set_continuous_scan(self, continuous_scan):
         '''set_continuous_scan
 
@@ -2277,44 +2319,5 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
 
-
-class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
-
-    def __init__(self, vi, repeated_capability):
-        super(_RepeatedCapability, self).__init__(repeated_capability)
-        self._vi = vi
-        self._is_frozen = True
-
-
-class Session(_SessionBase):
-    '''An NI-SWITCH session to a National Instruments Switch Module'''
-
-    def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
-        super(Session, self).__init__(repeated_capability='')
-        self._vi = 0  # This must be set before calling init_with_topology().
-        self._vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
-        self._is_frozen = True
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        return _RepeatedCapability(self._vi, repeated_capability)
-
-    def initiate(self):
-        return _Scan(self)
-
-    def close(self):
-        try:
-            self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
-        self._vi = 0
 
 
