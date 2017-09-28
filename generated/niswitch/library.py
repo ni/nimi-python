@@ -383,7 +383,7 @@ class Library(object):
         with self._func_lock:
             if self.niSwitch_error_message_cfunc is None:
                 self.niSwitch_error_message_cfunc = self._library.niSwitch_error_message
-                self.niSwitch_error_message_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ViString_ctype]  # noqa: F405
+                self.niSwitch_error_message_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
                 self.niSwitch_error_message_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_error_message_cfunc(vi, error_code, error_message)
 

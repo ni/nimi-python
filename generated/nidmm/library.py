@@ -581,7 +581,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_error_message_cfunc is None:
                 self.niDMM_error_message_cfunc = self._library.niDMM_error_message
-                self.niDMM_error_message_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ViString_ctype]  # noqa: F405
+                self.niDMM_error_message_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
                 self.niDMM_error_message_cfunc.restype = nidmm.python_types.ViStatus
         return self.niDMM_error_message_cfunc(vi, error_code, error_message)
 

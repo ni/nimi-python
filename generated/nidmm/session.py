@@ -2692,10 +2692,10 @@ class _SessionBase(object):
                 indicating VI_SUCCESS.
 
         Returns:
-            error_message (str):The error information formatted into a string.
+            error_message (int):The error information formatted into a string.
         '''
-        error_message_ctype = (ctypes_types.ViString_ctype * 256)()
-        error_code = self._library.niDMM_error_message(self._vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViString_ctype)))
+        error_message_ctype = (ctypes_types.ViChar_ctype * 256)()
+        error_code = self._library.niDMM_error_message(self._vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode("ascii")
 
