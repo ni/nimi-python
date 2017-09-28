@@ -17,6 +17,7 @@ def _add_name(function, name):
     function['name'] = name
     return function
 
+
 def _add_python_method_name(function, name):
     '''Adds a python_name' key/value pair to the function metadata'''
     if function['codegen_method'] == 'private':
@@ -193,7 +194,7 @@ def _do_the_test_add_all_metadata(functions, expected):
 
 def test_add_all_metadata_simple():
     functions = {
-        'foo': {
+        'makeAFoo': {
             'codegen_method': 'public',
             'returns': 'ViStatus',
             'parameters': [
@@ -222,7 +223,8 @@ def test_add_all_metadata_simple():
         },
     }
     expected = {
-        'foo': {
+        'makeAFoo': {
+            'name': 'makeAFoo',
             'codegen_method': 'public',
             'documentation': {
                 'description': 'Performs a foo, and performs it well.'
@@ -274,7 +276,7 @@ def test_add_all_metadata_simple():
                     'library_method_call_snippet': 'self._repeated_capability.encode(\'ascii\')',
                 },
             ],
-            'python_name': 'foo',
+            'python_name': 'make_a_foo',
             'returns': 'ViStatus',
             'returns_ctype': 'ViStatus_ctype',
             'returns_python': 'ViStatus'
