@@ -1,6 +1,6 @@
 
-from .metadata_filters import extract_input_parameters
-from .metadata_filters import extract_output_parameters
+from .metadata_filters import filter_input_parameters
+from .metadata_filters import filter_output_parameters
 
 from .codegen_helper import get_params_snippet
 from .codegen_helper import ParamListType
@@ -280,7 +280,7 @@ def get_function_rst(fname, config, indent=0):
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
-    input_params = extract_input_parameters(function['parameters'])
+    input_params = filter_input_parameters(function['parameters'])
     if len(input_params) > 0:
         rst += '\n'
     for p in input_params:
@@ -293,7 +293,7 @@ def get_function_rst(fname, config, indent=0):
             p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
-    output_params = extract_output_parameters(function['parameters'])
+    output_params = filter_output_parameters(function['parameters'])
     if len(output_params) > 1:
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
@@ -330,14 +330,14 @@ def get_function_docstring(fname, config, indent=0):
     function = config['functions'][fname]
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
-    input_params = extract_input_parameters(function['parameters'])
+    input_params = filter_input_parameters(function['parameters'])
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
         docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['intrinsic_type'])
         docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
-    output_params = extract_output_parameters(function['parameters'])
+    output_params = filter_output_parameters(function['parameters'])
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
