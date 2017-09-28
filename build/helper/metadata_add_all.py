@@ -101,24 +101,27 @@ def _add_buffer_info(parameter):
     return parameter
 
 
-def _add_library_call_snippet(parameter, session_handle_parameter_name):
+def _add_library_method_call_snippet(parameter, session_handle_parameter_name):
+    '''Code snippet for calling a method of Library for this parameter.'''
     if parameter['direction'] == 'in':
         if parameter['name'] == session_handle_parameter_name:
-            library_call_snippet = 'self._' + session_handle_parameter_name
+            library_method_call_snippet = 'self._' + session_handle_parameter_name
+        elif parameter['is_repeated_capability']:
+            library_method_call_snippet = 'self._repeated_capability'
         else:
-            library_call_snippet = parameter['python_name']
-            library_call_snippet += '.value' if parameter['enum'] is not None else ''
+            library_method_call_snippet = parameter['python_name']
+            library_method_call_snippet += '.value' if parameter['enum'] is not None else ''
             if parameter['type'] == 'ViString' or parameter['type'] == 'ViConstString' or parameter['type'] == 'ViRsrc':
-                library_call_snippet += '.encode(\'ascii\')'
+                library_method_call_snippet += '.encode(\'ascii\')'
     else:
         assert parameter['direction'] == 'out', pp.pformat(parameter)
         if parameter['size']['mechanism'] == 'ivi-dance':
-            library_call_snippet = parameter['ctypes_variable_name']
+            library_method_call_snippet = parameter['ctypes_variable_name']
         elif parameter['is_buffer']:
-            library_call_snippet = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + parameter['ctypes_type'] + '))'
+            library_method_call_snippet = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + parameter['ctypes_type'] + '))'
         else:
-            library_call_snippet = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
-    parameter['library_call_snippet'] = library_call_snippet
+            library_method_call_snippet = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
+    parameter['library_method_call_snippet'] = library_method_call_snippet
 
 
 def _add_default_value_name(parameter):
@@ -135,6 +138,23 @@ def _add_default_value_name(parameter):
     parameter['python_name_with_default'] = name
 
 
+# Parameter names denoting channel/repeated capabilities was compiled by looking at public header files for different MI drivers.
+_repeated_capability_parameter_names = ['channelName', 'channelList', 'channel', 'channelNameList']
+
+
+def _add_has_repeated_capability(f):
+    '''Adds a boolean 'has_repeated_capability' to the function metadata by inferring it from its parameter names, if not previously populated..'''
+    if 'has_repeated_capability' not in f:
+        for p in f['parameters']:
+            f['has_repeated_capability'] = p['name'] in _repeated_capability_parameter_names
+
+
+def _add_is_repeated_capability(parameter):
+    '''Adds a boolean 'is_repeated_capability' to the parameter metadata by inferring it from its name, if not previously populated.'''
+    if 'is_repeated_capability' not in parameter:
+        parameter['is_repeated_capability'] = parameter['name'] in _repeated_capability_parameter_names
+
+
 def add_all_function_metadata(functions, config):
     '''Adds all codegen-specific metada to the function metadata list'''
     for f in functions:
@@ -142,6 +162,7 @@ def add_all_function_metadata(functions, config):
         _add_ctypes_return_type(functions[f])
         _add_python_return_type(functions[f])
         _add_is_error_handling(functions[f])
+        _add_has_repeated_capability(functions[f])
         for p in functions[f]['parameters']:
             _add_python_parameter_name(p)
             _add_python_type(p)
@@ -149,8 +170,9 @@ def add_all_function_metadata(functions, config):
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
             _add_buffer_info(p)
-            _add_library_call_snippet(p, config['session_handle_parameter_name'])
             _add_default_value_name(p)
+            _add_is_repeated_capability(p)
+            _add_library_method_call_snippet(p, config['session_handle_parameter_name'])
     return functions
 
 
@@ -163,7 +185,7 @@ def _do_the_test_add_all_metadata(functions, expected):
 
 def test_add_all_metadata_simple():
     functions = {
-        'close': {
+        'foo': {
             'codegen_method': 'public',
             'returns': 'ViStatus',
             'parameters': [
@@ -176,18 +198,28 @@ def test_add_all_metadata_simple():
                         'description': 'Identifies a particular instrument session.',
                     },
                 },
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'channelName',
+                    'type': 'ViString',
+                    'documentation': {
+                        'description': 'The channel to call this on.',
+                    },
+                },
             ],
             'documentation': {
-                'description': 'Closes the specified session and deallocates resources that it reserved.',
+                'description': 'Performs a foo, and performs it well.',
             },
         },
     }
     expected = {
-        'close': {
+        'foo': {
             'codegen_method': 'public',
             'documentation': {
-                'description': 'Closes the specified session and deallocates resources that it reserved.'
+                'description': 'Performs a foo, and performs it well.'
             },
+            'has_repeated_capability': True,
             'is_error_handling': False,
             'parameters': [
                 {
@@ -198,6 +230,7 @@ def test_add_all_metadata_simple():
                     'documentation': {
                         'description': 'Identifies a particular instrument session.'
                     },
+                    'is_repeated_capability': False,
                     'enum': None,
                     'intrinsic_type': 'int',
                     'is_buffer': False,
@@ -210,10 +243,30 @@ def test_add_all_metadata_simple():
                         'value': 1
                     },
                     'type': 'ViSession',
-                    'library_call_snippet': 'self._vi',
-                }
+                    'library_method_call_snippet': 'self._vi',
+                },
+                {
+                    'ctypes_type': 'ViString_ctype',
+                    'ctypes_variable_name': 'channel_name_ctype',
+                    'ctypes_type_library_call': 'ViString_ctype',
+                    'direction': 'in',
+                    'documentation': {
+                        'description': 'The channel to call this on.'
+                    },
+                    'is_repeated_capability': True,
+                    'enum': None,
+                    'intrinsic_type': 'str',
+                    'is_buffer': False,
+                    'name': 'channelName',
+                    'python_name': 'channel_name',
+                    'python_name_with_default': 'channel_name',
+                    'python_type': 'ViString',
+                    'size': {'mechanism': 'fixed', 'value': 1},
+                    'type': 'ViString',
+                    'library_method_call_snippet': 'self._repeated_capability',
+                },
             ],
-            'python_name': 'close',
+            'python_name': 'foo',
             'returns': 'ViStatus',
             'returns_ctype': 'ViStatus_ctype',
             'returns_python': 'ViStatus'

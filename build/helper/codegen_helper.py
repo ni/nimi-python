@@ -75,7 +75,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_CALL] = {
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
     'session_handle_parameter_name': 'vi',
-    'name_to_use': 'library_call_snippet',
+    'name_to_use': 'library_method_call_snippet',
 }
 ParamListTypeDefaults[ParamListType.CTYPES_ARGTYPES] = {
     'skip_self': True,
@@ -101,7 +101,7 @@ def get_params_snippet(function, param_type, options={}):
     '''Get a parameter list snippet based on type and options
 
     Name used:
-        ParamListType.LIBRARY_CALL uses 'library_call_snippet'
+        ParamListType.LIBRARY_CALL uses 'library_method_call_snippet'
         ParamListType.CTYPES_ARGTYPES uses 'ctypes_type_library_call'
         All others use 'python_name'
     '''
