@@ -68,7 +68,6 @@ functions_params_types = {
     'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetError':                     { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetErrorMessage':              { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'error_message':                { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
