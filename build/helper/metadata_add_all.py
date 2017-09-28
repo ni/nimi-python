@@ -153,8 +153,9 @@ _repeated_capability_parameter_names = ['channelName', 'channelList', 'channel',
 def _add_has_repeated_capability(f):
     '''Adds a boolean 'has_repeated_capability' to the function metadata by inferring it from its parameter names, if not previously populated..'''
     if 'has_repeated_capability' not in f:
+        f['has_repeated_capability'] = False
         for p in f['parameters']:
-            f['has_repeated_capability'] = p['name'] in _repeated_capability_parameter_names
+            f['has_repeated_capability'] = f['has_repeated_capability'] or p['name'] in _repeated_capability_parameter_names
 
 
 def _add_is_repeated_capability(parameter):
