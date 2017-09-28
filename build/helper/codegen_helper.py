@@ -40,6 +40,7 @@ ParamListTypeDefaults[ParamListType.SESSION_METHOD_DECLARATION] = {
     'reordered_for_default_values': True,
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name_with_default',
+    'skip_repeated_capability_parameter': True,
 }
 ParamListTypeDefaults[ParamListType.SESSION_METHOD_CALL] = {
     'skip_self': True,
@@ -49,6 +50,7 @@ ParamListTypeDefaults[ParamListType.SESSION_METHOD_CALL] = {
     'reordered_for_default_values': True,
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
+    'skip_repeated_capability_parameter': True,
 }
 ParamListTypeDefaults[ParamListType.DOCUMENTATION_SESSION_METHOD] = {
     'skip_self': True,
@@ -58,6 +60,7 @@ ParamListTypeDefaults[ParamListType.DOCUMENTATION_SESSION_METHOD] = {
     'reordered_for_default_values': True,
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
+    'skip_repeated_capability_parameter': True,
 }
 ParamListTypeDefaults[ParamListType.CTYPES_CALL] = {
     'skip_self': True,
@@ -67,6 +70,7 @@ ParamListTypeDefaults[ParamListType.CTYPES_CALL] = {
     'reordered_for_default_values': False,
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
+    'skip_repeated_capability_parameter': False,
 }
 ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_CALL] = {
     'skip_self': True,
@@ -76,6 +80,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_CALL] = {
     'reordered_for_default_values': False,
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'library_method_call_snippet',
+    'skip_repeated_capability_parameter': False,
 }
 ParamListTypeDefaults[ParamListType.CTYPES_ARGTYPES] = {
     'skip_self': True,
@@ -85,6 +90,7 @@ ParamListTypeDefaults[ParamListType.CTYPES_ARGTYPES] = {
     'reordered_for_default_values': False,
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'ctypes_type_library_call',
+    'skip_repeated_capability_parameter': False,
 }
 ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_DECLARATION] = {
     'skip_self': False,
@@ -94,6 +100,7 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_DECLARATION] = {
     'reordered_for_default_values': False,
     'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
+    'skip_repeated_capability_parameter': False,
 }
 
 
@@ -129,6 +136,8 @@ def get_params_snippet(function, param_type, options={}):
         if x == ivi_dance_size_parameter and options_to_use['skip_ivi_dance_size_parameter']:
             skip = True
         if x['name'] == options_to_use['session_handle_parameter_name'] and options_to_use['skip_session_handle']:
+            skip = True
+        if x['is_repeated_capability'] and options_to_use['skip_repeated_capability_parameter']:
             skip = True
         if not skip:
             params_to_use.append(x)
