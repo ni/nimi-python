@@ -64,13 +64,6 @@ niswitch.Session methods
             
 
 
-.. function:: clear_interchange_warnings()
-
-    This function clears the list of current interchange warnings.
-
-    
-
-
 .. function:: commit()
 
     Downloads the configured scan list and trigger settings to hardware.
@@ -118,7 +111,7 @@ niswitch.Session methods
 
     :type scan_mode: :py:data:`niswitch.ScanMode`
 
-.. function:: configure_scan_trigger(scan_delay, trigger_input, scan_advanced_output)
+.. function:: configure_scan_trigger(trigger_input, scan_advanced_output, scan_delay)
 
     Configures the scan triggers for the scan list established with
     :py:func:`niswitch.configure_scan_list`. Refer to Devices Overview to determine if
@@ -157,7 +150,7 @@ niswitch.Session methods
 
         
 
-    :type trigger_input: :py:data:`niswitch.TriggerInputConfigureScanTrigger`
+    :type trigger_input: :py:data:`niswitch.TriggerInput`
     :param scan_advanced_output:
 
 
@@ -171,7 +164,7 @@ niswitch.Session methods
 
         
 
-    :type scan_advanced_output: :py:data:`niswitch.ScanAdvancedOutputConfigureScanTrigger`
+    :type scan_advanced_output: :py:data:`niswitch.ScanAdvancedOutput`
 
 .. function:: connect(channel1, channel2)
 
@@ -370,86 +363,6 @@ niswitch.Session methods
         function copies the value to the buffer regardless of the number of
         bytes in the value. If you pass 0, you can pass VI\_NULL for the
         Coercion Record buffer parameter. Default Value: None
-
-        
-
-    :type buffer_size: int
-
-.. function:: get_next_coercion_record()
-
-    This function returns the coercion information associated with the IVI
-    session. This function retrieves and clears the oldest instance in which
-    the instrument driver coerced a value you specified to another value. If
-    you set the :py:data:`niswitch.RECORD\_COERCIONS` attribute to VI\_TRUE, the
-    instrument driver keeps a list of all coercions it makes on ViInt32 or
-    ViReal64 values you pass to instrument driver functions. You use this
-    function to retrieve information from that list. If the next coercion
-    record string, including the terminating NUL byte, contains more bytes
-    than you indicate in this parameter, the function copies Buffer Size - 1
-    bytes into the buffer, places an ASCII NUL byte at the end of the
-    buffer, and returns the buffer size you must pass to get the entire
-    value. For example, if the value is "123456" and the Buffer Size is 4,
-    the function places "123" into the buffer and returns 7. If you pass a
-    negative number, the function copies the value to the buffer regardless
-    of the number of bytes in the value. If you pass 0, you can pass
-    VI\_NULL for the Coercion Record buffer parameter. The function returns
-    an empty string in the Coercion Record parameter if no coercion records
-    remain for the session.
-
-    
-
-
-    :param buffer_size:
-
-
-        Pass the number of bytes in the ViChar array you specify for the
-        Coercion Record parameter. If the next coercion record string, including
-        the terminating NUL byte, contains more bytes than you indicate in this
-        parameter, the function copies Buffer Size - 1 bytes into the buffer,
-        places an ASCII NUL byte at the end of the buffer, and returns the
-        buffer size you must pass to get the entire value. For example, if the
-        value is "123456" and the Buffer Size is 4, the function places "123"
-        into the buffer and returns 7. If you pass a negative number, the
-        function copies the value to the buffer regardless of the number of
-        bytes in the value. If you pass 0, you can pass VI\_NULL for the
-        Coercion Record buffer parameter. Default Value: None
-
-        
-
-    :type buffer_size: int
-
-.. function:: get_next_interchange_warning()
-
-    This function returns the interchangeability warnings associated with
-    the IVI session. It retrieves and clears the oldest instance in which
-    the class driver recorded an interchangeability warning.
-    Interchangeability warnings indicate that using your application with a
-    different instrument might cause different behavior. You use this
-    function to retrieve interchangeability warnings. The driver performs
-    interchangeability checking when the :py:data:`niswitch.INTERCHANGE\_CHECK`
-    attribute is set to VI\_TRUE. The function returns an empty string in
-    the Interchange Warning parameter if no interchangeability warnings
-    remain for the session. In general, the instrument driver generates
-    interchangeability warnings when an attribute that affects the behavior
-    of the instrument is in a state that you did not specify.
-
-    
-
-
-    :param buffer_size:
-
-
-        Pass the number of bytes in the ViChar array you specify for the
-        Interchange Warning parameter. If the next interchangeability warning
-        string, including the terminating NUL byte, contains more bytes than you
-        indicate in this parameter, the function copies Buffer Size - 1 bytes
-        into the buffer, places an ASCII NUL byte at the end of the buffer, and
-        returns the buffer size you must pass to get the entire value. For
-        example, if the value is "123456" and the Buffer Size is 4, the function
-        places "123" into the buffer and returns 7. If you pass a negative
-        number, the function copies the value to the buffer regardless of the
-        number of bytes in the value. If you pass 0, you can pass VI\_NULL for
-        the Interchange Warning buffer parameter. Default Value: None
 
         
 
@@ -947,38 +860,6 @@ niswitch.Session methods
 
     :type relay_action: :py:data:`niswitch.RelayAction`
 
-.. function:: reset_interchange_check()
-
-    When developing a complex test system that consists of multiple test
-    modules, it is generally a good idea to design the test modules so that
-    they can run in any order. To do so requires ensuring that each test
-    module completely configures the state of each instrument it uses. If a
-    particular test module does not completely configure the state of an
-    instrument, the state of the instrument depends on the configuration
-    from a previously executed test module. If you execute the test modules
-    in a different order, the behavior of the instrument and therefore the
-    entire test module is likely to change. This change in behavior is
-    generally instrument specific and represents an interchangeability
-    problem. You can use this function to test for such cases. After you
-    call this function, the interchangeability checking algorithms in the
-    specific driver ignore all previous configuration operations. By calling
-    this function at the beginning of a test module, you can determine
-    whether the test module has dependencies on the operation of previously
-    executed test modules. This function does not clear the
-    interchangeability warnings from the list of previously recorded
-    interchangeability warnings. If you want to guarantee that the
-    :py:func:`niswitch.get_next_interchange_warning` function only returns those
-    interchangeability warnings that are generated after calling this
-    function, you must clear the list of interchangeability warnings. You
-    can clear the interchangeability warnings list by repeatedly calling the
-    :py:func:`niswitch.get_next_interchange_warning` function until no more
-    interchangeability warnings are returned. If you are not interested in
-    the content of those warnings, you can call the
-    :py:func:`niswitch.clear_interchange_warnings` function.
-
-    
-
-
 .. function:: reset_with_defaults()
 
     Resets the switch module and applies initial user specified settings
@@ -1006,7 +887,7 @@ niswitch.Session methods
 
         
 
-    :type scan_advanced_output_connector: :py:data:`niswitch.TriggerInputConnector`
+    :type scan_advanced_output_connector: :py:data:`niswitch.ScanAdvancedOutput`
     :param scan_advanced_output_bus_line:
 
 
@@ -1019,7 +900,7 @@ niswitch.Session methods
 
         
 
-    :type scan_advanced_output_bus_line: :py:data:`niswitch.TriggerInputBusLine`
+    :type scan_advanced_output_bus_line: :py:data:`niswitch.ScanAdvancedOutput`
     :param invert:
 
 
@@ -1049,7 +930,7 @@ niswitch.Session methods
 
         
 
-    :type trigger_input_connector: :py:data:`niswitch.TriggerInputConnector`
+    :type trigger_input_connector: :py:data:`niswitch.TriggerInput`
     :param trigger_input_bus_line:
 
 
@@ -1061,7 +942,7 @@ niswitch.Session methods
 
         
 
-    :type trigger_input_bus_line: :py:data:`niswitch.TriggerInputBusLine`
+    :type trigger_input_bus_line: :py:data:`niswitch.TriggerInput`
     :param invert:
 
 
@@ -1071,91 +952,6 @@ niswitch.Session methods
         
 
     :type invert: bool
-
-.. function:: scan(scanlist, initiation)
-
-    This function is a high level operation for scanning. It takes the scan
-    list provided, programs the switching hardware and initiates the scan.
-    Once initiation is complete, the operation will return. The scan list
-    itself is comprised of a list of channel connections separated by
-    semicolons. For example, the following scan list would scan the first
-    three channels of a multiplexer. Example: com0->ch0; com0->ch1;
-    com0->ch2; For more information on scan list syntax, refer to the NI
-    Switches Help. To see the status of the scan, you can call either
-    :py:func:`niswitch.is_scanning` or :py:func:`niswitch.wait_for_scan_complete`. Use the
-    :py:func:`niswitch.configure_scan_trigger` function to configure the scan trigger.
-    Use the :py:func:`niswitch._abort_scan` function to stop the scan if you are in
-    continuous scan mode (Refer to :py:func:`niswitch.set_continuous_scan`); otherwise
-    the scan halts automatically when the end of the scan list is reached.
-    For reference, this operation is equivalent to calling
-    :py:func:`niswitch.configure_scan_list` and :py:func:`niswitch._initiate_scan`.
-
-    
-
-
-    :param scanlist:
-
-
-        Pass the scan list you want the instrument to use. The driver uses this
-        value to set the :py:data:`niswitch.SCAN\_LIST` attribute. The scan list is
-        a string that specifies channel connections and trigger conditions for
-        scanning. After you call the :py:func:`niswitch._initiate_scan` function, the
-        instrument makes or breaks connections and waits for triggers according
-        to the instructions in the scan list. The scan list is comprised of
-        channel names that you separate with special characters. These special
-        characters determine the operation the scanner performs on the channels
-        when it executes this scan list. To create a path between two channels,
-        use '->' (a dash followed by a '>' sign) between the two channel names.
-        Example: "CH1->CH2" instructs the switch to make a path from channel CH1
-        to channel CH2. To break or clear a path, use a '~' (tilde) as a prefix
-        before the path. Example: "~CH1->CH2" instructs the switch to break the
-        path from channel CH1 to channel CH2. To wait for a trigger event, use a
-        ';' (semicolon) as a separator between paths. Example:
-        "CH1->CH2;CH3->CH4" instructs the switch to make the path from channel
-        CH1 to channel CH2, wait for a trigger, and then make the path from CH3
-        to CH4. To tell the switch device to create multiple paths
-        simultaneously, use an '&' (ampersand) character as a separator between
-        the paths. Example: "CH0->CH1; CH1->CH2 & CH3->CH4" instructs the
-        scanner to make the path between channels CH0 and CH1, wait for a
-        trigger, and then simultaneously make the paths between channels CH1 and
-        CH2 and between channels CH3 and CH4. For SCXI use the following syntax
-        : - For a single channel: sc!md!ch -> com0; For example: for Chassis 1,
-        module in slot 3, and ch 30 the syntax is: sc1!md3!ch30 ->com0; For
-        multiple sequential channels: sc!md!ch -> com0; For example: for Chassis
-        1, module in slot 3, and ch 30 to 19 the syntax is: sc1!md3!ch30:19
-        ->com0; will scan from channel 30 to 19 sequentially. For multiple
-        randomly ordered channels: sc!md!ch -> com0; sc!md!ch -> com0; For
-        example: for Chassis 1, module in slot 3 and slot 4, and ch 30 and 5 on
-        slot 3 and channel 19 on slot 4the syntax is: sc1!md3!ch30 ->com0;
-        sc1!md4!ch19 ->com0; sc1!md3!ch5 ->com0; This will scan ch30 of slot 3
-        then ch19 of slot 4 then ch5 of slot3. For more information on scan list
-        syntax, refer to the NI Switches Help. Default Value: None
-
-        
-
-    :type scanlist: str
-    :param initiation:
-
-
-        Use the initiation paramater to specify whether the switch device or the
-        measurement device will be initiating the scan trigger handshake. This
-        parameter determines whether to wait for the scan to reach a trigger
-        point before completing. If the Measurement Device will initiate the
-        scan, set this parameter to
-        NISWITCH\_VAL\_MEASUREMENT\_DEVICE\_INITIATED. This function will then
-        wait until the switch is waiting for a trigger from the measurement
-        device before completing. If the Switch will initiate the scan, set this
-        parameter to NISWITCH\_VAL\_SWITCH\_INITIATED. This function will then
-        complete immediately after initating the scan. You should have already
-        set up your DMM to wait for a trigger before calling this function with
-        initiation set to NISWITCH\_VAL\_SWITCH\_INITIATED. Valid values:
-        NISWITCH\_VAL\_SWITCH\_INITIATED - Switch Initiated
-        NISWITCH\_VAL\_MEASUREMENT\_DEVICE\_INITIATED - Measurement device
-        initiated Default value: NISWITCH\_VAL\_MEASUREMENT\_DEVICE\_INITIATED
-
-        
-
-    :type initiation: int
 
 .. function:: send_software_trigger()
 
@@ -1256,38 +1052,6 @@ niswitch.Session methods
         
 
     :type maximum_time_ms: int
-
-.. function:: error_query()
-
-    This function reads an error code and a message from the instrument's
-    error queue. NI-SWITCH does not have an error queue, so this function
-    never returns any errors.
-
-    
-
-
-    :rtype: tuple (error_code, error_message)
-
-        WHERE
-
-        error_code (int): 
-
-
-            Returns the error code read from the instrument's error queue. NI-SWITCH
-            does not have an error queue, so this function never returns any errors.
-
-            
-
-        error_message (int): 
-
-
-            Returns the error message string read from the instrument's error
-            message queue. You must pass a ViChar array with at least 256 bytes.
-            NI-SWITCH does not have an error queue, so this function never returns
-            anything other than "No error".
-
-            
-
 
 .. function:: reset()
 

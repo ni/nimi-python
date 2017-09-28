@@ -8,16 +8,39 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 * #### ALL
   * #### Added
   * #### Changed
-    * Warnings no longer raise an exception
-      * Warnings are now added to warnings.warn()
   * #### Removed
 * #### NI-DMM
   * #### Added
   * #### Changed
-    * Added support for enums with types other than ViInt32 (Fixes [#330](https://github.com/ni/nimi-python/issues/330))
+    * Added default values to some parameters.
   * #### Removed
+    * Removed methods that aren’t useful in the Python bindings.
 * #### NI-ModInst
   * #### Added
+  * #### Changed
+  * #### Removed
+* #### NI-SWITCH
+  * #### Added
+  * #### Changed
+    * Added default values to some parameters.
+  * #### Removed
+    * Removed methods that aren’t useful in the Python bindings.
+* #### NI-DCPower
+  * #### Added
+  * #### Changed
+  * #### Removed
+
+## [0.2.0] - 2017-09-20
+* #### ALL
+  * #### Added
+    * Suport for channel-based properties
+  * #### Changed
+    * Warnings no longer raise an exception
+      * Warnings are now added to warnings.warn()
+* #### NI-DMM
+  * #### Changed
+    * Added support for enums with types other than ViInt32 (Fixes [#330](https://github.com/ni/nimi-python/issues/330))
+* #### NI-ModInst
   * #### Changed
     * Device index is now on session not attribute. The correct way is now
       ```python
@@ -25,12 +48,10 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
       with nimodinst.Session('nidmm') as session:
           name = session[i].device_name
       ```
-  * #### Removed
-* #### NI-Switch
+* #### NI-SWITCH
   * #### Added
     * Initial Release
-  * #### Changed
-  * #### Removed
+
 ## [0.1.0] - 2017-09-01
 * ### NI-DMM
   * #### Added
@@ -40,7 +61,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * Initial release
 
 
-<!-- 
+<!--
 ## [Unreleased]
 * #### ALL
   * #### Added
@@ -58,5 +79,9 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Added
   * #### Changed
   * #### Removed
+* #### NI-DCPower
+ * #### Added
+ * #### Changed
+ * #### Removed
 -->
 

@@ -11,21 +11,21 @@ def session():
 # Basic usability tests
 def test_take_simple_measurement_works(session):
     session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
-    assert session.read(1000) != 0  # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
+    assert session.read() != 0  # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
 
 
 def test_acquisition(session):
     session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
     with session.initiate():
-        session.fetch(1000)
+        session.fetch()
     with session.initiate():
-        session.fetch(1000)
+        session.fetch()
 
 
 def test_multi_point_acquisition(session):
-    session.configure_multi_point(4, 2, nidmm.SampleTrigger.IMMEDIATE, 0)
+    session.configure_multi_point(4, 2)
     session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
-    measurements, numberOfMeasurements = session.read_multi_point(-1, 8)
+    measurements, numberOfMeasurements = session.read_multi_point(8)
     assert len(measurements) == 8
     assert numberOfMeasurements == 8
 
@@ -81,7 +81,7 @@ def test_method_configure_power_line_frequency(session):
 def test_method_configure_trigger(session):
     # Calling Configure Trigger function and asserting True if any error occurred while function call.
     try:
-        session.configure_trigger(nidmm.TriggerSource.IMMEDIATE, 1)
+        session.configure_trigger(nidmm.TriggerSource.IMMEDIATE)
     except nidmm.Error as e:
         assert True
 

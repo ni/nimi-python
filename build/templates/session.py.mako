@@ -17,7 +17,11 @@ ${encoding_tag}
 
     functions = helper.extract_codegen_functions(functions)
 
-    session_context_manager = '_' + config['context_manager_name']['task'].title() if 'task' in config['context_manager_name'] else None
+    session_context_manager = None
+    if 'task' in config['context_manager_name']:
+        session_context_manager = '_' + config['context_manager_name']['task'].title()
+        session_context_manager_initiate = '_' + config['context_manager_name']['initiate']
+        session_context_manager_abort = '_' + config['context_manager_name']['abort']
 %>\
 import ctypes
 
@@ -32,19 +36,19 @@ from ${module_name} import python_types
 % if session_context_manager is not None:
 class ${session_context_manager}(object):
     def __init__(self, session):
-        self.session = session
+        self._session = session
 
     def __enter__(self):
-        self.session._initiate()
+        self._session.${session_context_manager_initiate}()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.session._abort()
+        self._session.${session_context_manager_abort}()
 
 
 % endif
-class Session(object):
-    '''${config['session_class_description']}'''
+class _SessionBase(object):
+    '''Base class for all ${config['driver_name']} sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -63,39 +67,18 @@ class Session(object):
 % endfor
 <%
 init_function = functions[config['init_function']]
-init_method_params = helper.get_params_snippet(init_function, helper.ParamListType.API_METHOD_DECLARATION)
-init_call_params = helper.get_params_snippet(init_function, helper.ParamListType.API_METHOD_CALL)
+init_method_params = helper.get_params_snippet(init_function, helper.ParamListType.SESSION_METHOD_DECLARATION)
+init_call_params = helper.get_params_snippet(init_function, helper.ParamListType.SESSION_METHOD_CALL)
 %>\
 
-    def __init__(${init_method_params}):
-        self.library = library_singleton.get()
-        self.${config['session_handle_parameter_name']} = 0  # This must be set before calling _init_with_options.
-        self.${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
-
-        self._is_frozen = True
+    def __init__(self, repeated_capability):
+        self._library = library_singleton.get()
+        self._repeated_capability = repeated_capability
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
-
-    def initiate(self):
-        return ${session_context_manager}(self)
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-
-    def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        try:
-            self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
-        self.${config['session_handle_parameter_name']} = 0
 
     def get_error_description(self, error_code):
         '''get_error_description
@@ -130,7 +113,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParamListType
     ivi_dance_parameter = helper.extract_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.API_METHOD_DECLARATION)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
         ${helper.get_function_docstring(func_name, config, indent=8)}
@@ -142,19 +125,60 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParamListType
         ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
 % endfor
 % if ivi_dance_parameter is None:
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL)})
+        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = None
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL)})
+        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL)})
+        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
 % endfor
+
+
+class _RepeatedCapability(_SessionBase):
+    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
+
+    def __init__(self, ${config['session_handle_parameter_name']}, repeated_capability):
+        super(_RepeatedCapability, self).__init__(repeated_capability)
+        self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
+        self._is_frozen = True
+
+
+class Session(_SessionBase):
+    '''${config['session_class_description']}'''
+
+    def __init__(${init_method_params}):
+        super(Session, self).__init__(repeated_capability='')
+        self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
+        self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        return _RepeatedCapability(self._${config['session_handle_parameter_name']}, repeated_capability)
+
+    def initiate(self):
+        return ${session_context_manager}(self)
+
+    def close(self):
+        try:
+            self._close()
+        except errors.Error:
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
+            print("Failed to close session.")
+        self._${config['session_handle_parameter_name']} = 0
+
 

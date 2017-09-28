@@ -19,7 +19,6 @@ class Library(object):
         # We cache the cfunc object from the ctypes.CDLL object
         self.niSwitch_AbortScan_cfunc = None
         self.niSwitch_CanConnect_cfunc = None
-        self.niSwitch_ClearInterchangeWarnings_cfunc = None
         self.niSwitch_Commit_cfunc = None
         self.niSwitch_ConfigureScanList_cfunc = None
         self.niSwitch_ConfigureScanTrigger_cfunc = None
@@ -32,12 +31,9 @@ class Library(object):
         self.niSwitch_GetAttributeViBoolean_cfunc = None
         self.niSwitch_GetAttributeViInt32_cfunc = None
         self.niSwitch_GetAttributeViReal64_cfunc = None
-        self.niSwitch_GetAttributeViSession_cfunc = None
         self.niSwitch_GetAttributeViString_cfunc = None
         self.niSwitch_GetChannelName_cfunc = None
         self.niSwitch_GetError_cfunc = None
-        self.niSwitch_GetNextCoercionRecord_cfunc = None
-        self.niSwitch_GetNextInterchangeWarning_cfunc = None
         self.niSwitch_GetPath_cfunc = None
         self.niSwitch_GetRelayCount_cfunc = None
         self.niSwitch_GetRelayName_cfunc = None
@@ -46,26 +42,20 @@ class Library(object):
         self.niSwitch_InitiateScan_cfunc = None
         self.niSwitch_IsDebounced_cfunc = None
         self.niSwitch_IsScanning_cfunc = None
-        self.niSwitch_LockSession_cfunc = None
         self.niSwitch_RelayControl_cfunc = None
-        self.niSwitch_ResetInterchangeCheck_cfunc = None
         self.niSwitch_ResetWithDefaults_cfunc = None
         self.niSwitch_RouteScanAdvancedOutput_cfunc = None
         self.niSwitch_RouteTriggerInput_cfunc = None
-        self.niSwitch_Scan_cfunc = None
         self.niSwitch_SendSoftwareTrigger_cfunc = None
         self.niSwitch_SetAttributeViBoolean_cfunc = None
         self.niSwitch_SetAttributeViInt32_cfunc = None
         self.niSwitch_SetAttributeViReal64_cfunc = None
-        self.niSwitch_SetAttributeViSession_cfunc = None
         self.niSwitch_SetAttributeViString_cfunc = None
         self.niSwitch_SetContinuousScan_cfunc = None
         self.niSwitch_SetPath_cfunc = None
-        self.niSwitch_UnlockSession_cfunc = None
         self.niSwitch_WaitForDebounce_cfunc = None
         self.niSwitch_WaitForScanComplete_cfunc = None
         self.niSwitch_close_cfunc = None
-        self.niSwitch_error_query_cfunc = None
         self.niSwitch_reset_cfunc = None
         self.niSwitch_revision_query_cfunc = None
         self.niSwitch_self_test_cfunc = None
@@ -91,14 +81,6 @@ class Library(object):
                 self.niSwitch_CanConnect_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViConstString_ctype, ctypes.POINTER(ViInt32_ctype)]  # noqa: F405
                 self.niSwitch_CanConnect_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_CanConnect_cfunc(vi, channel1, channel2, path_capability)
-
-    def niSwitch_ClearInterchangeWarnings(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_ClearInterchangeWarnings_cfunc is None:
-                self.niSwitch_ClearInterchangeWarnings_cfunc = self._library.niSwitch_ClearInterchangeWarnings
-                self.niSwitch_ClearInterchangeWarnings_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niSwitch_ClearInterchangeWarnings_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_ClearInterchangeWarnings_cfunc(vi)
 
     def niSwitch_Commit(self, vi):  # noqa: N802
         with self._func_lock:
@@ -196,14 +178,6 @@ class Library(object):
                 self.niSwitch_GetAttributeViReal64_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_GetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def niSwitch_GetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_GetAttributeViSession_cfunc is None:
-                self.niSwitch_GetAttributeViSession_cfunc = self._library.niSwitch_GetAttributeViSession
-                self.niSwitch_GetAttributeViSession_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViAttr_ctype, ctypes.POINTER(ViSession_ctype)]  # noqa: F405
-                self.niSwitch_GetAttributeViSession_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_GetAttributeViSession_cfunc(vi, channel_name, attribute_id, attribute_value)
-
     def niSwitch_GetAttributeViString(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetAttributeViString_cfunc is None:
@@ -227,22 +201,6 @@ class Library(object):
                 self.niSwitch_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niSwitch_GetError_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_GetError_cfunc(vi, code, buffer_size, description)
-
-    def niSwitch_GetNextCoercionRecord(self, vi, buffer_size, coercion_record):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_GetNextCoercionRecord_cfunc is None:
-                self.niSwitch_GetNextCoercionRecord_cfunc = self._library.niSwitch_GetNextCoercionRecord
-                self.niSwitch_GetNextCoercionRecord_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViString_ctype]  # noqa: F405
-                self.niSwitch_GetNextCoercionRecord_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_GetNextCoercionRecord_cfunc(vi, buffer_size, coercion_record)
-
-    def niSwitch_GetNextInterchangeWarning(self, vi, buffer_size, interchange_warning):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_GetNextInterchangeWarning_cfunc is None:
-                self.niSwitch_GetNextInterchangeWarning_cfunc = self._library.niSwitch_GetNextInterchangeWarning
-                self.niSwitch_GetNextInterchangeWarning_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViString_ctype]  # noqa: F405
-                self.niSwitch_GetNextInterchangeWarning_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_GetNextInterchangeWarning_cfunc(vi, buffer_size, interchange_warning)
 
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
         with self._func_lock:
@@ -308,14 +266,6 @@ class Library(object):
                 self.niSwitch_IsScanning_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_IsScanning_cfunc(vi, is_scanning)
 
-    def niSwitch_LockSession(self, vi, caller_has_lock):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_LockSession_cfunc is None:
-                self.niSwitch_LockSession_cfunc = self._library.niSwitch_LockSession
-                self.niSwitch_LockSession_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViBoolean_ctype)]  # noqa: F405
-                self.niSwitch_LockSession_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_LockSession_cfunc(vi, caller_has_lock)
-
     def niSwitch_RelayControl(self, vi, relay_name, relay_action):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_RelayControl_cfunc is None:
@@ -323,14 +273,6 @@ class Library(object):
                 self.niSwitch_RelayControl_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViInt32_ctype]  # noqa: F405
                 self.niSwitch_RelayControl_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_RelayControl_cfunc(vi, relay_name, relay_action)
-
-    def niSwitch_ResetInterchangeCheck(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_ResetInterchangeCheck_cfunc is None:
-                self.niSwitch_ResetInterchangeCheck_cfunc = self._library.niSwitch_ResetInterchangeCheck
-                self.niSwitch_ResetInterchangeCheck_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niSwitch_ResetInterchangeCheck_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_ResetInterchangeCheck_cfunc(vi)
 
     def niSwitch_ResetWithDefaults(self, vi):  # noqa: N802
         with self._func_lock:
@@ -355,14 +297,6 @@ class Library(object):
                 self.niSwitch_RouteTriggerInput_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ViInt32_ctype, ViBoolean_ctype]  # noqa: F405
                 self.niSwitch_RouteTriggerInput_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_RouteTriggerInput_cfunc(vi, trigger_input_connector, trigger_input_bus_line, invert)
-
-    def niSwitch_Scan(self, vi, scanlist, initiation):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_Scan_cfunc is None:
-                self.niSwitch_Scan_cfunc = self._library.niSwitch_Scan
-                self.niSwitch_Scan_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViInt16_ctype]  # noqa: F405
-                self.niSwitch_Scan_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_Scan_cfunc(vi, scanlist, initiation)
 
     def niSwitch_SendSoftwareTrigger(self, vi):  # noqa: N802
         with self._func_lock:
@@ -396,19 +330,11 @@ class Library(object):
                 self.niSwitch_SetAttributeViReal64_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_SetAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
 
-    def niSwitch_SetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_SetAttributeViSession_cfunc is None:
-                self.niSwitch_SetAttributeViSession_cfunc = self._library.niSwitch_SetAttributeViSession
-                self.niSwitch_SetAttributeViSession_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViAttr_ctype, ViSession_ctype]  # noqa: F405
-                self.niSwitch_SetAttributeViSession_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_SetAttributeViSession_cfunc(vi, channel_name, attribute_id, attribute_value)
-
     def niSwitch_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_SetAttributeViString_cfunc is None:
                 self.niSwitch_SetAttributeViString_cfunc = self._library.niSwitch_SetAttributeViString
-                self.niSwitch_SetAttributeViString_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViAttr_ctype, ViChar_ctype]  # noqa: F405
+                self.niSwitch_SetAttributeViString_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViAttr_ctype, ViString_ctype]  # noqa: F405
                 self.niSwitch_SetAttributeViString_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
@@ -427,14 +353,6 @@ class Library(object):
                 self.niSwitch_SetPath_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype]  # noqa: F405
                 self.niSwitch_SetPath_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_SetPath_cfunc(vi, path_list)
-
-    def niSwitch_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_UnlockSession_cfunc is None:
-                self.niSwitch_UnlockSession_cfunc = self._library.niSwitch_UnlockSession
-                self.niSwitch_UnlockSession_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViBoolean_ctype)]  # noqa: F405
-                self.niSwitch_UnlockSession_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_UnlockSession_cfunc(vi, caller_has_lock)
 
     def niSwitch_WaitForDebounce(self, vi, maximum_time_ms):  # noqa: N802
         with self._func_lock:
@@ -459,14 +377,6 @@ class Library(object):
                 self.niSwitch_close_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niSwitch_close_cfunc.restype = niswitch.python_types.ViStatus
         return self.niSwitch_close_cfunc(vi)
-
-    def niSwitch_error_query(self, vi, error_code, error_message):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_error_query_cfunc is None:
-                self.niSwitch_error_query_cfunc = self._library.niSwitch_error_query
-                self.niSwitch_error_query_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViInt32_ctype), ctypes.POINTER(ViChar_ctype)]  # noqa: F405
-                self.niSwitch_error_query_cfunc.restype = niswitch.python_types.ViStatus
-        return self.niSwitch_error_query_cfunc(vi, error_code, error_message)
 
     def niSwitch_reset(self, vi):  # noqa: N802
         with self._func_lock:

@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'nidmm',
-    'module_version': '0.2.0.dev1',
+    'module_version': '0.3.0.dev0',
     'c_function_prefix': 'niDMM_',
     'driver_name': 'NI-DMM',
     'session_class_description': 'An NI-DMM session to a National Instruments Digital Multimeter',
@@ -18,6 +18,8 @@ config = {
     },
     'context_manager_name': {
         'task': 'acquisition',
+        'initiate': 'initiate',
+        'abort': 'abort',
     },
     'init_function': 'InitWithOptions',
 }

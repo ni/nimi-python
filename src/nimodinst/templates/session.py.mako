@@ -27,7 +27,7 @@ class AttributeViInt32(object):
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        return self._owner._get_installed_device_attribute_vi_int32(self._owner.handle, self._index, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_int32(self._owner._${config['session_handle_parameter_name']}, self._index, self._attribute_id)
 
 
 class AttributeViString(object):
@@ -38,7 +38,7 @@ class AttributeViString(object):
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        return self._owner._get_installed_device_attribute_vi_string(self._owner.handle, self._index, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_string(self._owner._${config['session_handle_parameter_name']}, self._index, self._attribute_id)
 
 
 class Device(object):
@@ -77,11 +77,11 @@ class Session(object):
     _is_frozen = False
 
     def __init__(self, driver):
-        self.${config['session_handle_parameter_name']} = 0
-        self.item_count = 0
-        self.current_item = 0
-        self.library = library_singleton.get()
-        self.${config['session_handle_parameter_name']}, self.item_count = self._open_installed_devices_session(driver)
+        self._${config['session_handle_parameter_name']} = 0
+        self._item_count = 0
+        self._current_item = 0
+        self._library = library_singleton.get()
+        self._${config['session_handle_parameter_name']}, self._item_count = self._open_installed_devices_session(driver)
 
         self._is_frozen = True
 
@@ -104,35 +104,35 @@ class Session(object):
 
         Returns the error description.
         '''
-        # We hand-maintain the code that calls into self.library rather than leverage code-generation
+        # We hand-maintain the code that calls into self._library rather than leverage code-generation
         # because niModInst_GetExtendedErrorInfo() does not properly do the IVI-dance.
         # See https://github.com/ni/nimi-python/issues/166
         error_info_buffer_size = 0
         error_info_ctype = None
-        error_code = self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
         if error_code <= 0:
             return "Failed to retrieve error description."
         error_info_buffer_size = error_code
         error_info_ctype = ctypes.create_string_buffer(error_info_buffer_size)
         # Note we don't look at the return value. This is intentional as niModInst returns the
         # original error code rather than 0 (VI_SUCCESS).
-        self.library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
         return error_info_ctype.value.decode("ascii")
 
     # Iterator functions
     def __len__(self):
-        return self.item_count
+        return self._item_count
 
     def __iter__(self):
-        self.current_item = 0
+        self._current_item = 0
         return self
 
     def get_next(self):
-        if self.current_item + 1 > self.item_count:
+        if self._current_item + 1 > self._item_count:
             raise StopIteration
         else:
-            result = Device(self, self.current_item)
-            self.current_item += 1
+            result = Device(self, self._current_item)
+            self._current_item += 1
             return result
 
     def next(self):
@@ -143,9 +143,9 @@ class Session(object):
 
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        if(self.handle != 0):
-            self._close_installed_devices_session(self.handle)
-            self.${config['session_handle_parameter_name']} = 0
+        if(self._${config['session_handle_parameter_name']} != 0):
+            self._close_installed_devices_session(self._${config['session_handle_parameter_name']})
+            self._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
@@ -158,7 +158,7 @@ class Session(object):
     ivi_dance_parameter = helper.extract_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.API_METHOD_DECLARATION)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.SESSION_METHOD_DECLARATION)}):
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter)}
 % endfor
@@ -166,17 +166,17 @@ class Session(object):
         ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
 % endfor
 % if ivi_dance_parameter is None:
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL, {'session_name': 'handle'})})
+        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL, {'session_handle_parameter_name': '_' + config['session_handle_parameter_name']})})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = None
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL, {'session_name': 'handle'})})
+        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL, {'session_handle_parameter_name': '_' + config['session_handle_parameter_name']})})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
-        error_code = self.library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL, {'session_name': 'handle'})})
+        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL, {'session_handle_parameter_name': '_' + config['session_handle_parameter_name']})})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif

@@ -54,7 +54,7 @@ class TestSession(object):
     def test_open(self):
         self.patched_library.niModInst_CloseInstalledDevicesSession.side_effect = self.disallow_close
         session = nimodinst.Session('')
-        assert(session.handle == SESSION_NUM_FOR_TEST)
+        assert(session._handle == SESSION_NUM_FOR_TEST)
         self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
 
     def test_close(self):
@@ -64,7 +64,7 @@ class TestSession(object):
 
     def test_context_manager(self):
         with nimodinst.Session('') as session:
-            assert(session.handle == SESSION_NUM_FOR_TEST)
+            assert(session._handle == SESSION_NUM_FOR_TEST)
             self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
         self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
 

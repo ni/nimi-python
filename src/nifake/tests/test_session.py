@@ -29,6 +29,8 @@ class TestSession(object):
         self.patched_library_singleton_get.stop()
         self.patched_library_patcher.stop()
 
+    # Session management
+
     def test_init_with_options(self):
         errors_patcher = patch('nifake.session.errors', spec_set=['handle_error', '_is_error'])
         patched_errors = errors_patcher.start()
@@ -36,23 +38,54 @@ class TestSession(object):
 
         self.patched_library.niFake_close.side_effect = self.disallow_close
         session = nifake.Session('dev1')
-        assert session.vi == SESSION_NUM_FOR_TEST
+        assert session._vi == SESSION_NUM_FOR_TEST
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
         patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False, is_error_handling=False)
 
         errors_patcher.stop()
+
+    def test_init_with_options_nondefault(self):
+        session = nifake.Session('FakeDevice', True, True, 'Some string')
+        assert(session._vi == SESSION_NUM_FOR_TEST)
+        self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'FakeDevice', True, True, b'Some string', ANY)
+
+    def test_error_on_init(self):
+        test_error_code = -1
+        test_error_desc = 'Test'
+        self.patched_library.niFake_InitWithOptions.side_effect = self.side_effects_helper.niFake_InitWithOptions
+        self.side_effects_helper['InitWithOptions']['return'] = test_error_code
+        self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        try:
+            nifake.Session('dev1')
+            assert False
+        except nifake.Error as e:
+            assert e.code == test_error_code
+            assert e.description == test_error_desc
 
     def test_close(self):
         session = nifake.Session('dev1')
         session.close()
         self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
+    # TODO(marcoskirsch): This should test that when close errors it raises.
+    # def test_close_errors(self):
+
     def test_session_context_manager(self):
         with nifake.Session('dev1') as session:
-            assert session.vi == SESSION_NUM_FOR_TEST
+            assert session._vi == SESSION_NUM_FOR_TEST
             self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
         self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
+    # TODO(marcoskirsch): This should test that when init errors it raises.
+    # def test_session_context_manager_error_on_init
+
+    # TODO(marcoskirsch): This should test that when close errors it logs a warning.
+    # def test_session_context_manager_error_on_close
+
+    # TODO(marcoskirsch): Remove test and make get_error_description() private - it's not meant to be called by clients.
     def test_get_error_description_get_error(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
@@ -62,6 +95,8 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             error_desc = session.get_error_description(test_error_code)
             assert error_desc == test_error_desc
+
+    # Methods
 
     def test_simple_function(self):
         self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
@@ -100,47 +135,6 @@ class TestSession(object):
                 assert issubclass(w[0].category, nifake.NifakeWarning)
                 assert test_error_desc in str(w[0].message)
 
-    def test_ivi_dance_with_error(self):
-        test_error_code = -1234
-        test_error_desc = "ascending order"
-        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
-        self.side_effects_helper['GetAttributeViString']['attributeValue'] = 'Testing is fun?'
-        self.side_effects_helper['GetAttributeViString']['return'] = test_error_code
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = test_error_code
-        self.side_effects_helper['GetError']['description'] = test_error_desc
-        with nifake.Session('dev1') as session:
-            try:
-                session._get_attribute_vi_string("", 5)
-                assert False
-            except nifake.Error as e:
-                assert e.code == test_error_code
-                assert e.description == test_error_desc
-
-    def test_get_string_attribute_private(self):
-        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
-        string = 'Testing is fun?'
-        self.side_effects_helper['GetAttributeViString']['attributeValue'] = string
-        with nifake.Session('dev1') as session:
-            attr_string = session._get_attribute_vi_string("", 5)
-            assert attr_string == string
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, b"", 5, 0, None), call(SESSION_NUM_FOR_TEST, b"", 5, 15, ANY)]
-            self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
-            assert self.patched_library.niFake_GetAttributeViString.call_count == 2
-
-    def test_get_string_attribute(self):
-        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
-        string = 'Testing is fun?'
-        self.side_effects_helper['GetAttributeViString']['attributeValue'] = string
-        with nifake.Session('dev1') as session:
-            attr_string = session.read_write_string
-            assert attr_string == string
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, b"", 1000002, 0, None), call(SESSION_NUM_FOR_TEST, b"", 1000002, 15, ANY)]
-            self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
-            assert self.patched_library.niFake_GetAttributeViString.call_count == 2
-
     def test_get_a_number(self):
         test_number = 16
         self.patched_library.niFake_GetANumber.side_effect = self.side_effects_helper.niFake_GetANumber
@@ -151,38 +145,8 @@ class TestSession(object):
             assert test_result == test_number
             self.patched_library.niFake_GetANumber.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
 
-    def test_invalid_attribute_value(self):
-        test_error_code = -1
-        test_error_desc = 'Test'
-        self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
-        self.side_effects_helper['SetAttributeViReal64']['return'] = test_error_code
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = test_error_code
-        self.side_effects_helper['GetError']['description'] = test_error_desc
-        with nifake.Session('dev1') as session:
-            try:
-                session.read_write_double = -42
-                assert False
-            except nifake.Error as e:
-                assert e.code == test_error_code
-                assert e.description == test_error_desc
-                self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', 1000001, -42)
-
-    def test_error_on_init(self):
-        test_error_code = -1
-        test_error_desc = 'Test'
-        self.patched_library.niFake_InitWithOptions.side_effect = self.side_effects_helper.niFake_InitWithOptions
-        self.side_effects_helper['InitWithOptions']['return'] = test_error_code
-        self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = test_error_code
-        self.side_effects_helper['GetError']['description'] = test_error_desc
-        try:
-            nifake.Session('dev1')
-            assert False
-        except nifake.Error as e:
-            assert e.code == test_error_code
-            assert e.description == test_error_desc
+    # TODO(marcoskirsch):
+    # def test_multiple_outputs of different types
 
     def test_invalid_method_call_not_enough_parameters(self):
         self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
@@ -204,9 +168,9 @@ class TestSession(object):
 
     def test_library_singleton(self):
         with nifake.Session('dev1') as session:
-            lib1 = session.library
+            lib1 = session._library
         with nifake.Session('dev2') as session:
-            lib2 = session.library
+            lib2 = session._library
         assert lib1 is lib2
 
     def test_one_input_function(self):
@@ -247,46 +211,6 @@ class TestSession(object):
             assert test_result
             self.patched_library.niFake_GetABoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
 
-    def test_set_enum_attribute(self):
-        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
-        enum_value = nifake.Color.RED
-        with nifake.Session('dev1') as session:
-            session.read_write_color = enum_value
-            attribute_id = 1000003
-            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, enum_value.value)
-
-    def test_set_float_enum_attribute(self):
-        self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
-        enum_value = nifake.FloatEnum._5_5
-        with nifake.Session('dev1') as session:
-            session.float_enum = enum_value
-            attribute_id = 1000005
-            self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, enum_value.value)
-
-    def test_set_enum_attribute_bad_type(self):
-        with nifake.Session('dev1') as session:
-            try:
-                session.read_write_color = 5
-            except TypeError as e:
-                assert str(e) == 'must be nifake.Color not int'
-
-    def test_get_enum_attribute(self):
-        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
-        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = nifake.Color.BLUE.value
-        with nifake.Session('dev1') as session:
-            assert session.read_write_color == nifake.Color.BLUE
-            attribute_id = 1000003
-            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, ANY)
-
-    def test_get_float_enum_attribute(self):
-        self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
-        enum_value = nifake.FloatEnum._6_5
-        self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = enum_value.value
-        with nifake.Session('dev1') as session:
-            assert session.float_enum == enum_value
-            attribute_id = 1000005
-            self.patched_library.niFake_GetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, ANY)
-
     def test_acquisition_context_manager(self):
         self.patched_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate
         self.patched_library.niFake_Abort.side_effect = self.side_effects_helper.niFake_Abort
@@ -309,7 +233,76 @@ class TestSession(object):
             except AttributeError as e:
                 pass
 
-    def test_get_vi_real64_attribute(self):
+    # Retrieving buffers and strings
+
+    # TODO(marcoskirsch):
+    # def test_get_string_ivi(self)
+
+    def test_get_string_ivi_error(self):
+        test_error_code = -1234
+        test_error_desc = "ascending order"
+        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
+        self.side_effects_helper['GetAttributeViString']['attributeValue'] = 'Testing is fun?'
+        self.side_effects_helper['GetAttributeViString']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            try:
+                session._get_attribute_vi_string("", 5)
+                assert False
+            except nifake.Error as e:
+                assert e.code == test_error_code
+                assert e.description == test_error_desc
+
+    # TODO(marcoskirsch):
+    # def test_get_string_fixed_size(self)
+
+    # TODO(marcoskirsch):
+    # def test_get_string_size_passed_in(self)
+
+    def test_single_point_read(self):
+        test_maximum_time = 10
+        test_reading = 5
+        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
+        self.side_effects_helper['Read']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            assert test_reading == session.read(test_maximum_time)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, ANY)]
+            self.patched_library.niFake_Read.assert_has_calls(calls)
+            assert self.patched_library.niFake_Read.call_count == 1
+
+    def test_single_point_read_nan(self):
+        test_maximum_time = 10
+        test_reading = float('NaN')
+        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
+        self.side_effects_helper['Read']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            assert math.isnan(session.read(test_maximum_time))
+
+    # TODO(marcoskirsch): Other variations: multi-point/waveform with ViReal64 and ViInt16 * 3 mechanisms
+
+    # Attributes
+
+    def test_get_attribute_int32(self):
+        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
+        test_number = 3
+        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = test_number
+        with nifake.Session('dev1') as session:
+            attr_int = session.read_write_integer
+            assert(attr_int == test_number)
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', 1000004, ANY)
+
+    def test_set_attribute_int32(self):
+        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
+        attribute_id = 1000004
+        test_number = -10
+        with nifake.Session('dev1') as session:
+            session.read_write_integer = test_number
+            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, test_number)
+
+    def test_get_attribute_real64(self):
         self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
         test_number = 1.5
         self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = test_number
@@ -321,14 +314,109 @@ class TestSession(object):
             self.patched_library.niFake_GetAttributeViReal64.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViReal64.call_count == 1
 
-    def test_get_vi_bool_attribute(self):
+    # TODO(marcoskirsch):
+    # def test_set_attribute_real64(self):
+
+    def test_get_attribute_string(self):
+        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
+        string = 'Testing is fun?'
+        self.side_effects_helper['GetAttributeViString']['attributeValue'] = string
+        with nifake.Session('dev1') as session:
+            attr_string = session.read_write_string
+            assert attr_string == string
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, b"", 1000002, 0, None), call(SESSION_NUM_FOR_TEST, b"", 1000002, 15, ANY)]
+            self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAttributeViString.call_count == 2
+
+    # TODO(marcoskirsch):
+    # def test_set_attribute_string
+
+    def test_get_attribute_boolean(self):
         self.patched_library.niFake_GetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_GetAttributeViBoolean
         self.side_effects_helper['GetAttributeViBoolean']['attributeValue'] = 1
         with nifake.Session('dev1') as session:
             assert session.read_write_bool
             self.patched_library.niFake_GetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b"", 1000000, ANY)
 
-    def test_error_get_vi_real64_attribute(self):
+    # TODO(marcoskirsch):
+    # def test_set_attribute_boolean(self):
+
+    def test_get_attribute_enum_int32(self):
+        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
+        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = nifake.Color.BLUE.value
+        with nifake.Session('dev1') as session:
+            assert session.read_write_color == nifake.Color.BLUE
+            attribute_id = 1000003
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, ANY)
+
+    def test_set_attribute_enum_int32(self):
+        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
+        enum_value = nifake.Color.RED
+        with nifake.Session('dev1') as session:
+            session.read_write_color = enum_value
+            attribute_id = 1000003
+            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, enum_value.value)
+
+    def test_set_enum_attribute_int32_bad_type(self):
+        with nifake.Session('dev1') as session:
+            try:
+                session.read_write_color = 5
+            except TypeError as e:
+                assert str(e) == 'must be nifake.Color not int'
+
+    def test_get_attribute_enum_real64(self):
+        self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
+        enum_value = nifake.FloatEnum._6_5
+        self.side_effects_helper['GetAttributeViReal64']['attributeValue'] = enum_value.value
+        with nifake.Session('dev1') as session:
+            assert session.float_enum == enum_value
+            attribute_id = 1000005
+            self.patched_library.niFake_GetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, ANY)
+
+    def test_set_attribute_enum_real64(self):
+        self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
+        enum_value = nifake.FloatEnum._5_5
+        with nifake.Session('dev1') as session:
+            session.float_enum = enum_value
+            attribute_id = 1000005
+            self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, enum_value.value)
+
+    def test_get_attribute_channel_int32(self):
+        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
+        test_number = 100
+        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = test_number
+        with nifake.Session('dev1') as session:
+            attr_int = session['0,1'].read_write_integer
+            assert(attr_int == test_number)
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'0,1', 1000004, ANY)
+
+    def test_set_attribute_channel_real64(self):
+        self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
+        attribute_id = 1000001
+        test_number = 0.001
+        with nifake.Session('dev1') as session:
+            session['0-24'].read_write_double = test_number
+            self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'0-24', attribute_id, test_number)
+
+    def test_set_attribute_error(self):
+        test_error_code = -1
+        test_error_desc = 'Test'
+        self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
+        self.side_effects_helper['SetAttributeViReal64']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            try:
+                session.read_write_double = -42
+                assert False
+            except nifake.Error as e:
+                assert e.code == test_error_code
+                assert e.description == test_error_desc
+                self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', 1000001, -42)
+
+    def test_get_attribute_error(self):
         test_error_code = -123
         test_error_desc = "ascending order"
         self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
@@ -344,6 +432,8 @@ class TestSession(object):
             except nifake.Error as e:
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
+
+    # Error descriptions
 
     def test_get_error_description_get_error_message(self):
         test_error_code = -42
@@ -378,75 +468,6 @@ class TestSession(object):
             except nifake.Error as e:
                 assert e.code == test_error_code
                 assert e.description == 'Failed to retrieve error description.'
-
-    '''
-    def test_set_string_attribute(self):
-        pass
-    '''
-
-    ''''
-    # TODO(marcoskirsch): Flesh out test coverage for all NI-FAKE functions and attributes.
-    # Test with multiple pointer types, ensuring proper return values (i.e. parameters in correct order)
-    def test_multiple_return_params(self):
-        self.patched_library.niFake_GetCalDateAndTime.side_effect = self.side_effects_helper.niFake_GetCalDateAndTime
-        self.side_effects_helper['GetCalDateAndTime']['month'] = 6
-        self.side_effects_helper['GetCalDateAndTime']['day'] = 30
-        self.side_effects_helper['GetCalDateAndTime']['year'] = 2017
-        self.side_effects_helper['GetCalDateAndTime']['hour'] = 10
-        self.side_effects_helper['GetCalDateAndTime']['minute'] = 12
-        with nifake.Session('dev1') as session:
-            month, day, year, hour, minute = session.get_cal_date_and_time(0)
-            assert(month == 6)
-            assert(day == 30)
-            assert(year == 2017)
-            assert(hour == 10)
-            assert(minute == 12)
-            self.patched_library.niFake_GetCalDateAndTime.assert_called_once_with(SESSION_NUM_FOR_TEST, 0, ANY, ANY, ANY, ANY, ANY)
-            assert self.patched_errors.handle_error.call_count == 2
-            self.patched_errors.handle_error.assert_called_with(session, self.patched_library.niFake_GetCalDateAndTime.return_value)
-    '''
-
-    def test_init_with_options_nondefault(self):
-        session = nifake.Session('FakeDevice', True, True, 'Some string')
-        assert(session.vi == SESSION_NUM_FOR_TEST)
-        self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'FakeDevice', True, True, b'Some string', ANY)
-
-    def test_get_vi_int32_attribute(self):
-        self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
-        test_number = 3
-        self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = test_number
-        with nifake.Session('dev1') as session:
-            attr_int = session.read_write_integer
-            assert(attr_int == test_number)
-            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', 1000004, ANY)
-
-    def test_set_vi_int32_attribute(self):
-        self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
-        attribute_id = 1000004
-        test_number = -10
-        with nifake.Session('dev1') as session:
-            session.read_write_integer = test_number
-            self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, test_number)
-
-    def test_read(self):
-        test_maximum_time = 10
-        test_reading = 5
-        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
-        self.side_effects_helper['Read']['reading'] = test_reading
-        with nifake.Session('dev1') as session:
-            assert test_reading == session.read(test_maximum_time)
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, ANY)]
-            self.patched_library.niFake_Read.assert_has_calls(calls)
-            assert self.patched_library.niFake_Read.call_count == 1
-
-    def test_read_returning_nan(self):
-        test_maximum_time = 10
-        test_reading = float('NaN')
-        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
-        self.side_effects_helper['Read']['reading'] = test_reading
-        with nifake.Session('dev1') as session:
-            assert math.isnan(session.read(test_maximum_time))
 
     '''
     # TODO(bhaswath): Enable test once issue 320 is fixed

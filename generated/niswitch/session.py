@@ -12,18 +12,18 @@ from niswitch import python_types
 
 class _Scan(object):
     def __init__(self, session):
-        self.session = session
+        self._session = session
 
     def __enter__(self):
-        self.session._initiate()
+        self._session._initiate_scan()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.session._abort()
+        self._session._abort_scan()
 
 
-class Session(object):
-    '''An NI-SWITCH session to a National Instruments Switch Module'''
+class _SessionBase(object):
+    '''Base class for all NI-SWITCH sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -829,35 +829,14 @@ class Session(object):
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
 
-    def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
-        self.library = library_singleton.get()
-        self.vi = 0  # This must be set before calling _init_with_options.
-        self.vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
-
-        self._is_frozen = True
+    def __init__(self, repeated_capability):
+        self._library = library_singleton.get()
+        self._repeated_capability = repeated_capability
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
-
-    def initiate(self):
-        return _Scan(self)
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-
-    def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        try:
-            self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
-        self.vi = 0
 
     def get_error_description(self, error_code):
         '''get_error_description
@@ -890,7 +869,7 @@ class Session(object):
         _initiate_scan. If the switch module is not scanning,
         NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
         '''
-        error_code = self.library.niSwitch_AbortScan(self.vi)
+        error_code = self._library.niSwitch_AbortScan(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -935,18 +914,9 @@ class Session(object):
                 configuration channel and thus unavailable for external connections.
         '''
         path_capability_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niSwitch_CanConnect(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), ctypes.pointer(path_capability_ctype))
+        error_code = self._library.niSwitch_CanConnect(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), ctypes.pointer(path_capability_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
-
-    def clear_interchange_warnings(self):
-        '''clear_interchange_warnings
-
-        This function clears the list of current interchange warnings.
-        '''
-        error_code = self.library.niSwitch_ClearInterchangeWarnings(self.vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
 
     def commit(self):
         '''commit
@@ -956,11 +926,11 @@ class Session(object):
         _initiate_scan. Use commit to arm triggers in a given
         order or to control when expensive hardware operations are performed.
         '''
-        error_code = self.library.niSwitch_Commit(self.vi)
+        error_code = self._library.niSwitch_Commit(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_scan_list(self, scanlist, scan_mode):
+    def configure_scan_list(self, scanlist, scan_mode=enums.ScanMode.BREAK_BEFORE_MAKE):
         '''configure_scan_list
 
         Configures the scan list and scan mode used for scanning. Refer to
@@ -984,11 +954,11 @@ class Session(object):
         '''
         if type(scan_mode) is not enums.ScanMode:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanMode))
-        error_code = self.library.niSwitch_ConfigureScanList(self.vi, scanlist.encode('ascii'), scan_mode.value)
+        error_code = self._library.niSwitch_ConfigureScanList(self._vi, scanlist.encode('ascii'), scan_mode.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_scan_trigger(self, scan_delay, trigger_input, scan_advanced_output):
+    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=0.0):
         '''configure_scan_trigger
 
         Configures the scan triggers for the scan list established with
@@ -1006,14 +976,14 @@ class Session(object):
                 scan delay is in addition to the settling time.The driver uses this
                 value to set the SCAN_DELAY attribute. Express this
                 value in seconds. Default value: 0.0 s
-            trigger_input (enums.TriggerInputConfigureScanTrigger):Trigger source you want the switch module to use during scanning. The
+            trigger_input (enums.TriggerInput):Trigger source you want the switch module to use during scanning. The
                 driver uses this value to set the TRIGGER_INPUT
                 attribute. The switch device waits for the trigger you specify when it
                 encounters a semicolon in the scanlist. When the trigger occurs, the
                 switch device advances to the next entry in the scanlist. Refer to the
                 TRIGGER_INPUT topic in the NI Switches Help for a list
                 of valid values.
-            scan_advanced_output (enums.ScanAdvancedOutputConfigureScanTrigger):Output destination of the scan advanced trigger signal. The driver uses
+            scan_advanced_output (enums.ScanAdvancedOutput):Output destination of the scan advanced trigger signal. The driver uses
                 this value to set the SCAN_ADVANCED_OUTPUT attribute.
                 After the switch processes each entry in the scan list, it waits the
                 length of time you specify in the Scan Delay parameter and then asserts
@@ -1021,11 +991,11 @@ class Session(object):
                 SCAN_ADVANCED_OUTPUT topic in the NI Switches Help for
                 a list of valid values.
         '''
-        if type(trigger_input) is not enums.TriggerInputConfigureScanTrigger:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputConfigureScanTrigger))
-        if type(scan_advanced_output) is not enums.ScanAdvancedOutputConfigureScanTrigger:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutputConfigureScanTrigger))
-        error_code = self.library.niSwitch_ConfigureScanTrigger(self.vi, scan_delay, trigger_input.value, scan_advanced_output.value)
+        if type(trigger_input) is not enums.TriggerInput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
+        if type(scan_advanced_output) is not enums.ScanAdvancedOutput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
+        error_code = self._library.niSwitch_ConfigureScanTrigger(self._vi, scan_delay, trigger_input.value, scan_advanced_output.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1061,7 +1031,7 @@ class Session(object):
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
         '''
-        error_code = self.library.niSwitch_Connect(self.vi, channel1.encode('ascii'), channel2.encode('ascii'))
+        error_code = self._library.niSwitch_Connect(self._vi, channel1.encode('ascii'), channel2.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1098,7 +1068,7 @@ class Session(object):
                 of a valid connection list: c0 -> r1, [c2 -> r2 -> c3] In this example,
                 r2 is a configuration channel. Default value: None
         '''
-        error_code = self.library.niSwitch_ConnectMultiple(self.vi, connection_list.encode('ascii'))
+        error_code = self._library.niSwitch_ConnectMultiple(self._vi, connection_list.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1109,7 +1079,7 @@ class Session(object):
         impact on the system to which it is connected. All channels are
         disconnected and any scan in progress is aborted.
         '''
-        error_code = self.library.niSwitch_Disable(self.vi)
+        error_code = self._library.niSwitch_Disable(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1131,7 +1101,7 @@ class Session(object):
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
         '''
-        error_code = self.library.niSwitch_Disconnect(self.vi, channel1.encode('ascii'), channel2.encode('ascii'))
+        error_code = self._library.niSwitch_Disconnect(self._vi, channel1.encode('ascii'), channel2.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1141,7 +1111,7 @@ class Session(object):
         Breaks all existing paths. If the switch module cannot break all paths,
         NISWITCH_WARN_PATH_REMAINS warning is returned.
         '''
-        error_code = self.library.niSwitch_DisconnectAll(self.vi)
+        error_code = self._library.niSwitch_DisconnectAll(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1163,7 +1133,7 @@ class Session(object):
                 r2 -> c3] In this example, r2 is a configuration channel. Default value:
                 None
         '''
-        error_code = self.library.niSwitch_DisconnectMultiple(self.vi, disconnection_list.encode('ascii'))
+        error_code = self._library.niSwitch_DisconnectMultiple(self._vi, disconnection_list.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1208,7 +1178,7 @@ class Session(object):
                 double-clicking on it or by selecting it and then pressing .
         '''
         attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self.library.niSwitch_GetAttributeViBoolean(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niSwitch_GetAttributeViBoolean(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(attribute_value_ctype.value)
 
@@ -1253,7 +1223,7 @@ class Session(object):
                 double-clicking on it or by selecting it and then pressing .
         '''
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niSwitch_GetAttributeViInt32(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niSwitch_GetAttributeViInt32(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(attribute_value_ctype.value)
 
@@ -1298,54 +1268,9 @@ class Session(object):
                 double-clicking on it or by selecting it and then pressing .
         '''
         attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self.library.niSwitch_GetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niSwitch_GetAttributeViReal64(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(attribute_value_ctype.value)
-
-    def _get_attribute_vi_session(self, channel_name, attribute_id):
-        '''_get_attribute_vi_session
-
-        This function queries the value of a ViSession attribute. You can use
-        this function to get the values of instrument specific attributes and
-        inherent IVI attributes. If the attribute represents an instrument
-        state, this function performs instrument I/O in the following cases: -
-        State caching is disabled for the entire session or for the particular
-        attribute. - State caching is enabled and the currently cached value is
-        invalid.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . A ring control at the top of the
-                dialog box allows you to see all IVI attributes or only the attributes
-                of the ViInt32 type. If you choose to see all IVI attributes, the data
-                types appear to the right of the attribute names in the list box. The
-                data types that are not consistent with this function are dim. If you
-                select an attribute data type that is dim, LabWindows/CVI transfers you
-                to the function panel for the corresponding function that is consistent
-                with the data type. - If you want to enter a variable name, press to
-                change this ring control to a manual input box. - If the attribute in
-                this ring control has constants as valid values, you can view the
-                constants by moving to the Attribute Value control and pressing .
-
-        Returns:
-            attribute_value (int):Returns the current value of the attribute. Pass the address of a
-                ViSession variable. From the function panel window, you can use this
-                control as follows. - If the attribute currently showing in the
-                Attribute ID ring control has constants as valid values, you can view a
-                list of the constants by pressing on this control. Select a value by
-                double-clicking on it or by selecting it and then pressing .
-        '''
-        attribute_value_ctype = ctypes_types.ViSession_ctype(0)
-        error_code = self.library.niSwitch_GetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(attribute_value_ctype.value)
 
     def _get_attribute_vi_string(self, channel_name, attribute_id):
         '''_get_attribute_vi_string
@@ -1404,11 +1329,11 @@ class Session(object):
         '''
         array_size = 0
         attribute_value_ctype = None
-        error_code = self.library.niSwitch_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
+        error_code = self._library.niSwitch_GetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size = error_code
         attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niSwitch_GetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
+        error_code = self._library.niSwitch_GetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode("ascii")
 
@@ -1437,11 +1362,11 @@ class Session(object):
         '''
         buffer_size = 0
         channel_name_buffer_ctype = None
-        error_code = self.library.niSwitch_GetChannelName(self.vi, index, buffer_size, channel_name_buffer_ctype)
+        error_code = self._library.niSwitch_GetChannelName(self._vi, index, buffer_size, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         channel_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niSwitch_GetChannelName(self.vi, index, buffer_size, channel_name_buffer_ctype)
+        error_code = self._library.niSwitch_GetChannelName(self._vi, index, buffer_size, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_buffer_ctype.value.decode("ascii")
 
@@ -1483,97 +1408,13 @@ class Session(object):
         code_ctype = ctypes_types.ViStatus_ctype(0)
         buffer_size = 0
         description_ctype = None
-        error_code = self.library.niSwitch_GetError(self.vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
+        error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niSwitch_GetError(self.vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
+        error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViStatus(code_ctype.value), description_ctype.value.decode("ascii")
-
-    def get_next_coercion_record(self):
-        '''get_next_coercion_record
-
-        This function returns the coercion information associated with the IVI
-        session. This function retrieves and clears the oldest instance in which
-        the instrument driver coerced a value you specified to another value. If
-        you set the RECORD_COERCIONS attribute to VI_TRUE, the
-        instrument driver keeps a list of all coercions it makes on ViInt32 or
-        ViReal64 values you pass to instrument driver functions. You use this
-        function to retrieve information from that list. If the next coercion
-        record string, including the terminating NUL byte, contains more bytes
-        than you indicate in this parameter, the function copies Buffer Size - 1
-        bytes into the buffer, places an ASCII NUL byte at the end of the
-        buffer, and returns the buffer size you must pass to get the entire
-        value. For example, if the value is "123456" and the Buffer Size is 4,
-        the function places "123" into the buffer and returns 7. If you pass a
-        negative number, the function copies the value to the buffer regardless
-        of the number of bytes in the value. If you pass 0, you can pass
-        VI_NULL for the Coercion Record buffer parameter. The function returns
-        an empty string in the Coercion Record parameter if no coercion records
-        remain for the session.
-
-        Args:
-            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
-                Coercion Record parameter. If the next coercion record string, including
-                the terminating NUL byte, contains more bytes than you indicate in this
-                parameter, the function copies Buffer Size - 1 bytes into the buffer,
-                places an ASCII NUL byte at the end of the buffer, and returns the
-                buffer size you must pass to get the entire value. For example, if the
-                value is "123456" and the Buffer Size is 4, the function places "123"
-                into the buffer and returns 7. If you pass a negative number, the
-                function copies the value to the buffer regardless of the number of
-                bytes in the value. If you pass 0, you can pass VI_NULL for the
-                Coercion Record buffer parameter. Default Value: None
-        '''
-        buffer_size = 0
-        coercion_record_ctype = None
-        error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, coercion_record_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        coercion_record_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niSwitch_GetNextCoercionRecord(self.vi, buffer_size, coercion_record_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return coercion_record_ctype.value.decode("ascii")
-
-    def get_next_interchange_warning(self):
-        '''get_next_interchange_warning
-
-        This function returns the interchangeability warnings associated with
-        the IVI session. It retrieves and clears the oldest instance in which
-        the class driver recorded an interchangeability warning.
-        Interchangeability warnings indicate that using your application with a
-        different instrument might cause different behavior. You use this
-        function to retrieve interchangeability warnings. The driver performs
-        interchangeability checking when the INTERCHANGE_CHECK
-        attribute is set to VI_TRUE. The function returns an empty string in
-        the Interchange Warning parameter if no interchangeability warnings
-        remain for the session. In general, the instrument driver generates
-        interchangeability warnings when an attribute that affects the behavior
-        of the instrument is in a state that you did not specify.
-
-        Args:
-            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
-                Interchange Warning parameter. If the next interchangeability warning
-                string, including the terminating NUL byte, contains more bytes than you
-                indicate in this parameter, the function copies Buffer Size - 1 bytes
-                into the buffer, places an ASCII NUL byte at the end of the buffer, and
-                returns the buffer size you must pass to get the entire value. For
-                example, if the value is "123456" and the Buffer Size is 4, the function
-                places "123" into the buffer and returns 7. If you pass a negative
-                number, the function copies the value to the buffer regardless of the
-                number of bytes in the value. If you pass 0, you can pass VI_NULL for
-                the Interchange Warning buffer parameter. Default Value: None
-        '''
-        buffer_size = 0
-        interchange_warning_ctype = None
-        error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        interchange_warning_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niSwitch_GetNextInterchangeWarning(self.vi, buffer_size, interchange_warning_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return interchange_warning_ctype.value.decode("ascii")
 
     def get_path(self, channel1, channel2):
         '''get_path
@@ -1613,11 +1454,11 @@ class Session(object):
         '''
         buffer_size = 0
         path_ctype = None
-        error_code = self.library.niSwitch_GetPath(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
+        error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         path_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niSwitch_GetPath(self.vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
+        error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return path_ctype.value.decode("ascii")
 
@@ -1639,7 +1480,7 @@ class Session(object):
             relay_count (int):The number of relay cycles.
         '''
         relay_count_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niSwitch_GetRelayCount(self.vi, relay_name.encode('ascii'), ctypes.pointer(relay_count_ctype))
+        error_code = self._library.niSwitch_GetRelayCount(self._vi, relay_name.encode('ascii'), ctypes.pointer(relay_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(relay_count_ctype.value)
 
@@ -1668,11 +1509,11 @@ class Session(object):
         '''
         relay_name_buffer_size = 0
         relay_name_buffer_ctype = None
-        error_code = self.library.niSwitch_GetRelayName(self.vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
+        error_code = self._library.niSwitch_GetRelayName(self._vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         relay_name_buffer_size = error_code
         relay_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(relay_name_buffer_size), ctypes_types.ViString_ctype)
-        error_code = self.library.niSwitch_GetRelayName(self.vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
+        error_code = self._library.niSwitch_GetRelayName(self._vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return relay_name_buffer_ctype.value.decode("ascii")
 
@@ -1692,7 +1533,7 @@ class Session(object):
                 NIWITCH_VAL_CLOSED 11
         '''
         relay_position_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self.library.niSwitch_GetRelayPosition(self.vi, relay_name.encode('ascii'), ctypes.pointer(relay_position_ctype))
+        error_code = self._library.niSwitch_GetRelayPosition(self._vi, relay_name.encode('ascii'), ctypes.pointer(relay_position_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
 
@@ -1929,7 +1770,7 @@ class Session(object):
                 and used for all subsequent NI-SWITCH calls.
         '''
         vi_ctype = ctypes_types.ViSession_ctype(0)
-        error_code = self.library.niSwitch_InitWithTopology(resource_name.encode('ascii'), topology.encode('ascii'), simulate, reset_device, ctypes.pointer(vi_ctype))
+        error_code = self._library.niSwitch_InitWithTopology(resource_name.encode('ascii'), topology.encode('ascii'), simulate, reset_device, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViSession(vi_ctype.value)
 
@@ -1945,7 +1786,7 @@ class Session(object):
         scanning operation, To stop the scanning operation, call
         _abort_scan.
         '''
-        error_code = self.library.niSwitch_InitiateScan(self.vi)
+        error_code = self._library.niSwitch_InitiateScan(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1960,7 +1801,7 @@ class Session(object):
                 indicates that all created paths have not settled.
         '''
         is_debounced_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self.library.niSwitch_IsDebounced(self.vi, ctypes.pointer(is_debounced_ctype))
+        error_code = self._library.niSwitch_IsDebounced(self._vi, ctypes.pointer(is_debounced_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(is_debounced_ctype.value)
 
@@ -1975,67 +1816,9 @@ class Session(object):
                 indicates that the switch device is idle.
         '''
         is_scanning_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self.library.niSwitch_IsScanning(self.vi, ctypes.pointer(is_scanning_ctype))
+        error_code = self._library.niSwitch_IsScanning(self._vi, ctypes.pointer(is_scanning_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(is_scanning_ctype.value)
-
-    def _lock_session(self):
-        '''_lock_session
-
-        This function obtains a multithread lock on the instrument session.
-        Before it does so, it waits until all other execution threads have
-        released their locks on the instrument session. Other threads might have
-        obtained a lock on this session in the following ways: - The user's
-        application called _lock_session. - A call to the instrument
-        driver locked the session. - A call to the IVI engine locked the
-        session. After your call to _lock_session returns successfully,
-        no other threads can access the instrument session until you call
-        _unlock_session. Use _lock_session and
-        _unlock_session around a sequence of calls to instrument driver
-        functions if you require that the instrument retain its settings through
-        the end of the sequence. You can safely make nested calls to
-        _lock_session within the same thread. To completely unlock the
-        session, you must balance each call to _lock_session with a call
-        to _unlock_session. If, however, you use the Caller Has Lock
-        parameter in all calls to _lock_session and
-        _unlock_session within a function, the IVI Library locks the
-        session only once within the function regardless of the number of calls
-        you make to _lock_session. This allows you to call
-        _unlock_session just once at the end of the function.
-
-        Returns:
-            caller_has_lock (bool):This parameter serves as a convenience. If you do not want to use this
-                parameter, pass VI_NULL. Use this parameter in complex functions to
-                keep track of whether you obtain a lock and therefore need to unlock the
-                session. Pass the address of a local ViBoolean variable. In the
-                declaration of the local variable, initialize it to VI_FALSE. Pass the
-                address of the same local variable to any other calls you make to
-                _lock_session or _unlock_session in the same function.
-                The parameter is an input/output parameter. _lock_session and
-                _unlock_session each inspect the current value and take the
-                following actions: - If the value is VI_TRUE, _lock_session
-                does not lock the session again. If the value is VI_FALSE,
-                _lock_session obtains the lock and sets the value of the
-                parameter to VI_TRUE. - If the value is VI_FALSE,
-                _unlock_session does not attempt to unlock the session. If the
-                value is VI_TRUE, _unlock_session releases the lock and sets
-                the value of the parameter to VI_FALSE. Thus, you can, call
-                _unlock_session at the end of your function without worrying
-                about whether you actually have the lock. Example: ViStatus TestFunc
-                (ViSession vi, ViInt32 flags) { ViStatus error = VI_SUCCESS; ViBoolean
-                haveLock = VI_FALSE; if (flags & BIT_1) { viCheckErr(
-                _lock_session(vi, &haveLock;)); viCheckErr( TakeAction1(vi)); if
-                (flags & BIT_2) { viCheckErr( _unlock_session(vi, &haveLock;));
-                viCheckErr( TakeAction2(vi)); viCheckErr( _lock_session(vi,
-                &haveLock;); } if (flags & BIT_3) viCheckErr( TakeAction3(vi)); }
-                Error: /\* At this point, you cannot really be sure that you have the
-                lock. Fortunately, the haveLock variable takes care of that for you. \*/
-                _unlock_session(vi, &haveLock;); return error; }
-        '''
-        caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self.library.niSwitch_LockSession(self.vi, ctypes.pointer(caller_has_lock_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(caller_has_lock_ctype.value)
 
     def relay_control(self, relay_name, relay_action):
         '''relay_control
@@ -2057,41 +1840,7 @@ class Session(object):
         '''
         if type(relay_action) is not enums.RelayAction:
             raise TypeError('Parameter mode must be of type ' + str(enums.RelayAction))
-        error_code = self.library.niSwitch_RelayControl(self.vi, relay_name.encode('ascii'), relay_action.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def reset_interchange_check(self):
-        '''reset_interchange_check
-
-        When developing a complex test system that consists of multiple test
-        modules, it is generally a good idea to design the test modules so that
-        they can run in any order. To do so requires ensuring that each test
-        module completely configures the state of each instrument it uses. If a
-        particular test module does not completely configure the state of an
-        instrument, the state of the instrument depends on the configuration
-        from a previously executed test module. If you execute the test modules
-        in a different order, the behavior of the instrument and therefore the
-        entire test module is likely to change. This change in behavior is
-        generally instrument specific and represents an interchangeability
-        problem. You can use this function to test for such cases. After you
-        call this function, the interchangeability checking algorithms in the
-        specific driver ignore all previous configuration operations. By calling
-        this function at the beginning of a test module, you can determine
-        whether the test module has dependencies on the operation of previously
-        executed test modules. This function does not clear the
-        interchangeability warnings from the list of previously recorded
-        interchangeability warnings. If you want to guarantee that the
-        get_next_interchange_warning function only returns those
-        interchangeability warnings that are generated after calling this
-        function, you must clear the list of interchangeability warnings. You
-        can clear the interchangeability warnings list by repeatedly calling the
-        get_next_interchange_warning function until no more
-        interchangeability warnings are returned. If you are not interested in
-        the content of those warnings, you can call the
-        clear_interchange_warnings function.
-        '''
-        error_code = self.library.niSwitch_ResetInterchangeCheck(self.vi)
+        error_code = self._library.niSwitch_RelayControl(self._vi, relay_name.encode('ascii'), relay_action.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2103,21 +1852,21 @@ class Session(object):
         created without a logical name, this function is equivalent to
         reset.
         '''
-        error_code = self.library.niSwitch_ResetWithDefaults(self.vi)
+        error_code = self._library.niSwitch_ResetWithDefaults(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):
+    def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False):
         '''route_scan_advanced_output
 
         Routes the scan advanced output trigger from a trigger bus line (TTLx)
         to the front or rear connector.
 
         Args:
-            scan_advanced_output_connector (enums.TriggerInputConnector):The scan advanced trigger destination. Valid locations are the
+            scan_advanced_output_connector (enums.ScanAdvancedOutput):The scan advanced trigger destination. Valid locations are the
                 NISWITCH_VAL_FRONTCONNECTOR and NISWITCH_VAL_REARCONNECTOR. Default
                 value: NISWITCH_VAL_FRONTCONNECTOR
-            scan_advanced_output_bus_line (enums.TriggerInputBusLine):The trigger line to route the scan advanced output trigger from the
+            scan_advanced_output_bus_line (enums.ScanAdvancedOutput):The trigger line to route the scan advanced output trigger from the
                 front or rear connector. Select NISWITCH_VAL_NONE to break an existing
                 route. Default value: None Valid Values: NISWITCH_VAL_NONE
                 NISWITCH_VAL_TTL0 NISWITCH_VAL_TTL1 NISWITCH_VAL_TTL2
@@ -2126,15 +1875,15 @@ class Session(object):
             invert (bool):If VI_TRUE, inverts the input trigger signal from falling to rising or
                 vice versa. Default value: VI_FALSE
         '''
-        if type(scan_advanced_output_connector) is not enums.TriggerInputConnector:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputConnector))
-        if type(scan_advanced_output_bus_line) is not enums.TriggerInputBusLine:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputBusLine))
-        error_code = self.library.niSwitch_RouteScanAdvancedOutput(self.vi, scan_advanced_output_connector.value, scan_advanced_output_bus_line.value, invert)
+        if type(scan_advanced_output_connector) is not enums.ScanAdvancedOutput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
+        if type(scan_advanced_output_bus_line) is not enums.ScanAdvancedOutput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
+        error_code = self._library.niSwitch_RouteScanAdvancedOutput(self._vi, scan_advanced_output_connector.value, scan_advanced_output_bus_line.value, invert)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert):
+    def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert=False):
         '''route_trigger_input
 
         Routes the input trigger from the front or rear connector to a trigger
@@ -2142,11 +1891,11 @@ class Session(object):
         specify None for trigger bus line parameter.
 
         Args:
-            trigger_input_connector (enums.TriggerInputConnector):The location of the input trigger source on the switch module. Valid
+            trigger_input_connector (enums.TriggerInput):The location of the input trigger source on the switch module. Valid
                 locations are the NISWITCH_VAL_FRONTCONNECTOR and
                 NISWITCH_VAL_REARCONNECTOR. Default value:
                 NISWITCH_VAL_FRONTCONNECTOR
-            trigger_input_bus_line (enums.TriggerInputBusLine):The trigger line to route the input trigger. Select NISWITCH_VAL_NONE
+            trigger_input_bus_line (enums.TriggerInput):The trigger line to route the input trigger. Select NISWITCH_VAL_NONE
                 to break an existing route. Default value: None Valid Values:
                 NISWITCH_VAL_NONE NISWITCH_VAL_TTL0 NISWITCH_VAL_TTL1
                 NISWITCH_VAL_TTL2 NISWITCH_VAL_TTL3 NISWITCH_VAL_TTL4
@@ -2154,85 +1903,11 @@ class Session(object):
             invert (bool):If VI_TRUE, inverts the input trigger signal from falling to rising or
                 vice versa. Default value: VI_FALSE
         '''
-        if type(trigger_input_connector) is not enums.TriggerInputConnector:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputConnector))
-        if type(trigger_input_bus_line) is not enums.TriggerInputBusLine:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInputBusLine))
-        error_code = self.library.niSwitch_RouteTriggerInput(self.vi, trigger_input_connector.value, trigger_input_bus_line.value, invert)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def scan(self, scanlist, initiation):
-        '''scan
-
-        This function is a high level operation for scanning. It takes the scan
-        list provided, programs the switching hardware and initiates the scan.
-        Once initiation is complete, the operation will return. The scan list
-        itself is comprised of a list of channel connections separated by
-        semicolons. For example, the following scan list would scan the first
-        three channels of a multiplexer. Example: com0->ch0; com0->ch1;
-        com0->ch2; For more information on scan list syntax, refer to the NI
-        Switches Help. To see the status of the scan, you can call either
-        is_scanning or wait_for_scan_complete. Use the
-        configure_scan_trigger function to configure the scan trigger.
-        Use the _abort_scan function to stop the scan if you are in
-        continuous scan mode (Refer to set_continuous_scan); otherwise
-        the scan halts automatically when the end of the scan list is reached.
-        For reference, this operation is equivalent to calling
-        configure_scan_list and _initiate_scan.
-
-        Args:
-            scanlist (str):Pass the scan list you want the instrument to use. The driver uses this
-                value to set the SCAN_LIST attribute. The scan list is
-                a string that specifies channel connections and trigger conditions for
-                scanning. After you call the _initiate_scan function, the
-                instrument makes or breaks connections and waits for triggers according
-                to the instructions in the scan list. The scan list is comprised of
-                channel names that you separate with special characters. These special
-                characters determine the operation the scanner performs on the channels
-                when it executes this scan list. To create a path between two channels,
-                use '->' (a dash followed by a '>' sign) between the two channel names.
-                Example: "CH1->CH2" instructs the switch to make a path from channel CH1
-                to channel CH2. To break or clear a path, use a '~' (tilde) as a prefix
-                before the path. Example: "~CH1->CH2" instructs the switch to break the
-                path from channel CH1 to channel CH2. To wait for a trigger event, use a
-                ';' (semicolon) as a separator between paths. Example:
-                "CH1->CH2;CH3->CH4" instructs the switch to make the path from channel
-                CH1 to channel CH2, wait for a trigger, and then make the path from CH3
-                to CH4. To tell the switch device to create multiple paths
-                simultaneously, use an '&' (ampersand) character as a separator between
-                the paths. Example: "CH0->CH1; CH1->CH2 & CH3->CH4" instructs the
-                scanner to make the path between channels CH0 and CH1, wait for a
-                trigger, and then simultaneously make the paths between channels CH1 and
-                CH2 and between channels CH3 and CH4. For SCXI use the following syntax
-                : - For a single channel: sc!md!ch -> com0; For example: for Chassis 1,
-                module in slot 3, and ch 30 the syntax is: sc1!md3!ch30 ->com0; For
-                multiple sequential channels: sc!md!ch -> com0; For example: for Chassis
-                1, module in slot 3, and ch 30 to 19 the syntax is: sc1!md3!ch30:19
-                ->com0; will scan from channel 30 to 19 sequentially. For multiple
-                randomly ordered channels: sc!md!ch -> com0; sc!md!ch -> com0; For
-                example: for Chassis 1, module in slot 3 and slot 4, and ch 30 and 5 on
-                slot 3 and channel 19 on slot 4the syntax is: sc1!md3!ch30 ->com0;
-                sc1!md4!ch19 ->com0; sc1!md3!ch5 ->com0; This will scan ch30 of slot 3
-                then ch19 of slot 4 then ch5 of slot3. For more information on scan list
-                syntax, refer to the NI Switches Help. Default Value: None
-            initiation (int):Use the initiation paramater to specify whether the switch device or the
-                measurement device will be initiating the scan trigger handshake. This
-                parameter determines whether to wait for the scan to reach a trigger
-                point before completing. If the Measurement Device will initiate the
-                scan, set this parameter to
-                NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED. This function will then
-                wait until the switch is waiting for a trigger from the measurement
-                device before completing. If the Switch will initiate the scan, set this
-                parameter to NISWITCH_VAL_SWITCH_INITIATED. This function will then
-                complete immediately after initating the scan. You should have already
-                set up your DMM to wait for a trigger before calling this function with
-                initiation set to NISWITCH_VAL_SWITCH_INITIATED. Valid values:
-                NISWITCH_VAL_SWITCH_INITIATED - Switch Initiated
-                NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED - Measurement device
-                initiated Default value: NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED
-        '''
-        error_code = self.library.niSwitch_Scan(self.vi, scanlist.encode('ascii'), initiation)
+        if type(trigger_input_connector) is not enums.TriggerInput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
+        if type(trigger_input_bus_line) is not enums.TriggerInput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
+        error_code = self._library.niSwitch_RouteTriggerInput(self._vi, trigger_input_connector.value, trigger_input_bus_line.value, invert)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2246,7 +1921,7 @@ class Session(object):
         a semi-colon (wait for trigger) until send_software_trigger is
         called.
         '''
-        error_code = self.library.niSwitch_SendSoftwareTrigger(self.vi)
+        error_code = self._library.niSwitch_SendSoftwareTrigger(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2302,7 +1977,7 @@ class Session(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self.library.niSwitch_SetAttributeViBoolean(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niSwitch_SetAttributeViBoolean(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2358,7 +2033,7 @@ class Session(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self.library.niSwitch_SetAttributeViInt32(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niSwitch_SetAttributeViInt32(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2414,63 +2089,7 @@ class Session(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self.library.niSwitch_SetAttributeViReal64(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_session(self, channel_name, attribute_id, attribute_value):
-        '''_set_attribute_vi_session
-
-        This function sets the value of a ViSession attribute. This is a
-        low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes. If the
-        attribute represents an instrument state, this function performs
-        instrument I/O in the following cases: - State caching is disabled for
-        the entire session or for the particular attribute. - State caching is
-        enabled and the currently cached value is invalid or is different than
-        the value you specify. This instrument driver contains high-level
-        functions that set most of the instrument attributes. It is best to use
-        the high-level driver functions as much as possible. They handle order
-        dependencies and multithread locking for you. In addition, they perform
-        status checking only after setting all of the attributes. In contrast,
-        when you set multiple attributes using the SetAttribute functions, the
-        functions check the instrument status after each call. Also, when state
-        caching is enabled, the high-level functions that configure multiple
-        attributes perform instrument I/O only for the attributes whose value
-        you change. Thus, you can safely call the high-level functions without
-        the penalty of redundant instrument I/O.
-
-        Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
-                this control as follows. - Click on the control or press , , or , to
-                display a dialog box containing a hierarchical list of the available
-                attributes. Attributes whose value cannot be set are dim. Help text is
-                shown for each attribute. Select an attribute by double-clicking on it
-                or by selecting it and then pressing . Read-only attributes appear dim
-                in the list box. If you select a read-only attribute, an error message
-                appears. A ring control at the top of the dialog box allows you to see
-                all IVI attributes or only the attributes of the ViInt32 type. If you
-                choose to see all IVI attributes, the data types appear to the right of
-                the attribute names in the list box. The data types that are not
-                consistent with this function are dim. If you select an attribute data
-                type that is dim, LabWindows/CVI transfers you to the function panel for
-                the corresponding function that is consistent with the data type. - If
-                you want to enter a variable name, press to change this ring control to
-                a manual input box. - If the attribute in this ring control has
-                constants as valid values, you can view the constants by moving to the
-                Attribute Value control and pressing .
-            attribute_value (int):Pass the value to which you want to set the attribute. From the function
-                panel window, you can use this control as follows. - If the attribute
-                currently showing in the Attribute ID ring control has constants as
-                valid values, you can view a list of the constants by pressing on this
-                control. Select a value by double-clicking on it or by selecting it and
-                then pressing . Note: Some of the values might not be valid depending on
-                the current settings of the instrument session. Default Value: none
-        '''
-        error_code = self.library.niSwitch_SetAttributeViSession(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niSwitch_SetAttributeViReal64(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2518,7 +2137,7 @@ class Session(object):
                 a manual input box. - If the attribute in this ring control has
                 constants as valid values, you can view the constants by moving to the
                 Attribute Value control and pressing .
-            attribute_value (int):Pass the value to which you want to set the attribute. From the function
+            attribute_value (str):Pass the value to which you want to set the attribute. From the function
                 panel window, you can use this control as follows. - If the attribute
                 currently showing in the Attribute ID ring control has constants as
                 valid values, you can view a list of the constants by pressing on this
@@ -2526,7 +2145,7 @@ class Session(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self.library.niSwitch_SetAttributeViString(self.vi, channel_name.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niSwitch_SetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2541,7 +2160,7 @@ class Session(object):
                 If VI_FALSE, the scan stops after one pass through the scan list.
                 Default value: VI_FALSE
         '''
-        error_code = self.library.niSwitch_SetContinuousScan(self.vi, continuous_scan)
+        error_code = self._library.niSwitch_SetContinuousScan(self._vi, continuous_scan)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2561,52 +2180,11 @@ class Session(object):
                 configuration channel. Default value: None Obtain the path list for a
                 previously created path with get_path.
         '''
-        error_code = self.library.niSwitch_SetPath(self.vi, path_list.encode('ascii'))
+        error_code = self._library.niSwitch_SetPath(self._vi, path_list.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _unlock_session(self):
-        '''_unlock_session
-
-        This function releases a lock that you acquired on an instrument session
-        using _lock_session. Refer to _lock_session for
-        additional information on session locks.
-
-        Returns:
-            caller_has_lock (bool):This parameter serves as a convenience. If you do not want to use this
-                parameter, pass VI_NULL. Use this parameter in complex functions to
-                keep track of whether you obtain a lock and therefore need to unlock the
-                session. Pass the address of a local ViBoolean variable. In the
-                declaration of the local variable, initialize it to VI_FALSE. Pass the
-                address of the same local variable to any other calls you make to
-                _lock_session or _unlock_session in the same function.
-                The parameter is an input/output parameter. _lock_session and
-                _unlock_session each inspect the current value and take the
-                following actions: - If the value is VI_TRUE, _lock_session
-                does not lock the session again. If the value is VI_FALSE,
-                _lock_session obtains the lock and sets the value of the
-                parameter to VI_TRUE. - If the value is VI_FALSE,
-                _unlock_session does not attempt to unlock the session. If the
-                value is VI_TRUE, _unlock_session releases the lock and sets
-                the value of the parameter to VI_FALSE. Thus, you can, call
-                _unlock_session at the end of your function without worrying
-                about whether you actually have the lock. Example: ViStatus TestFunc
-                (ViSession vi, ViInt32 flags) { ViStatus error = VI_SUCCESS; ViBoolean
-                haveLock = VI_FALSE; if (flags & BIT_1) { viCheckErr(
-                _lock_session(vi, &haveLock;)); viCheckErr( TakeAction1(vi)); if
-                (flags & BIT_2) { viCheckErr( _unlock_session(vi, &haveLock;));
-                viCheckErr( TakeAction2(vi)); viCheckErr( _lock_session(vi,
-                &haveLock;); } if (flags & BIT_3) viCheckErr( TakeAction3(vi)); }
-                Error: /\* At this point, you cannot really be sure that you have the
-                lock. Fortunately, the haveLock variable takes care of that for you. \*/
-                _unlock_session(vi, &haveLock;); return error; }
-        '''
-        caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self.library.niSwitch_UnlockSession(self.vi, ctypes.pointer(caller_has_lock_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(caller_has_lock_ctype.value)
-
-    def wait_for_debounce(self, maximum_time_ms):
+    def wait_for_debounce(self, maximum_time_ms=5000):
         '''wait_for_debounce
 
         Pauses until all created paths have settled. If the time you specify
@@ -2620,11 +2198,11 @@ class Session(object):
                 before all relays active or deactivate, a timeout error is returned.
                 Default Value:5000 ms
         '''
-        error_code = self.library.niSwitch_WaitForDebounce(self.vi, maximum_time_ms)
+        error_code = self._library.niSwitch_WaitForDebounce(self._vi, maximum_time_ms)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_scan_complete(self, maximum_time_ms):
+    def wait_for_scan_complete(self, maximum_time_ms=5000):
         '''wait_for_scan_complete
 
         Pauses until the switch module stops scanning or the maximum time has
@@ -2639,7 +2217,7 @@ class Session(object):
                 NISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default
                 Value:5000 ms
         '''
-        error_code = self.library.niSwitch_WaitForScanComplete(self.vi, maximum_time_ms)
+        error_code = self._library.niSwitch_WaitForScanComplete(self._vi, maximum_time_ms)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2652,30 +2230,9 @@ class Session(object):
         _close, you cannot use the instrument driver again until you
         call init or init_with_options.
         '''
-        error_code = self.library.niSwitch_close(self.vi)
+        error_code = self._library.niSwitch_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def error_query(self):
-        '''error_query
-
-        This function reads an error code and a message from the instrument's
-        error queue. NI-SWITCH does not have an error queue, so this function
-        never returns any errors.
-
-        Returns:
-            error_code (int):Returns the error code read from the instrument's error queue. NI-SWITCH
-                does not have an error queue, so this function never returns any errors.
-            error_message (int):Returns the error message string read from the instrument's error
-                message queue. You must pass a ViChar array with at least 256 bytes.
-                NI-SWITCH does not have an error queue, so this function never returns
-                anything other than "No error".
-        '''
-        error_code_ctype = ctypes_types.ViInt32_ctype(0)
-        error_message_ctype = (ctypes_types.ViChar_ctype * 256)()
-        error_code = self.library.niSwitch_error_query(self.vi, ctypes.pointer(error_code_ctype), ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(error_code_ctype.value), error_message_ctype.value.decode("ascii")
 
     def reset(self):
         '''reset
@@ -2684,7 +2241,7 @@ class Session(object):
         at initialization. Configuration channel and source channel settings
         remain unchanged.
         '''
-        error_code = self.library.niSwitch_reset(self.vi)
+        error_code = self._library.niSwitch_reset(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2700,7 +2257,7 @@ class Session(object):
         '''
         instrument_driver_revision_ctype = (ctypes_types.ViChar_ctype * 256)()
         firmware_revision_ctype = (ctypes_types.ViChar_ctype * 256)()
-        error_code = self.library.niSwitch_revision_query(self.vi, ctypes.cast(instrument_driver_revision_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)), ctypes.cast(firmware_revision_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+        error_code = self._library.niSwitch_revision_query(self._vi, ctypes.cast(instrument_driver_revision_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)), ctypes.cast(firmware_revision_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return instrument_driver_revision_ctype.value.decode("ascii"), firmware_revision_ctype.value.decode("ascii")
 
@@ -2716,7 +2273,48 @@ class Session(object):
         '''
         self_test_result_ctype = ctypes_types.ViInt16_ctype(0)
         self_test_message_ctype = (ctypes_types.ViChar_ctype * 256)()
-        error_code = self.library.niSwitch_self_test(self.vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+        error_code = self._library.niSwitch_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
+
+
+class _RepeatedCapability(_SessionBase):
+    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
+
+    def __init__(self, vi, repeated_capability):
+        super(_RepeatedCapability, self).__init__(repeated_capability)
+        self._vi = vi
+        self._is_frozen = True
+
+
+class Session(_SessionBase):
+    '''An NI-SWITCH session to a National Instruments Switch Module'''
+
+    def __init__(self, resource_name, topology='Configured Topology', simulate=False, reset_device=False):
+        super(Session, self).__init__(repeated_capability='')
+        self._vi = 0  # This must be set before calling init_with_topology().
+        self._vi = self.init_with_topology(resource_name, topology, simulate, reset_device)
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        return _RepeatedCapability(self._vi, repeated_capability)
+
+    def initiate(self):
+        return _Scan(self)
+
+    def close(self):
+        try:
+            self._close()
+        except errors.Error:
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
+            print("Failed to close session.")
+        self._vi = 0
+
 

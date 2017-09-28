@@ -44,9 +44,9 @@ class Library(object):
     f = functions[func_name]
     c_func_name = c_function_prefix + func_name
     params = f['parameters']
-    param_names_method = helper.get_params_snippet(f, helper.ParamListType.LIBRARY_IMPL_METHOD)
-    param_names_library = helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD)
-    param_ctypes_library = helper.get_params_snippet(f, helper.ParamListType.LIBRARY_CALL_TYPES, {'session_name': config['session_handle_parameter_name']})
+    param_names_method = helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_DECLARATION)
+    param_names_library = helper.get_params_snippet(f, helper.ParamListType.CTYPES_CALL)
+    param_ctypes_library = helper.get_params_snippet(f, helper.ParamListType.CTYPES_ARGTYPES, {'session_name': config['session_handle_parameter_name']})
 %>\
 
     def ${c_func_name}(${param_names_method}):  # noqa: N802

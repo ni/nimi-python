@@ -101,33 +101,34 @@ def _add_buffer_info(parameter):
     return parameter
 
 
-def _add_library_call_name(parameter, session_name):
+def _add_library_call_snippet(parameter, session_handle_parameter_name):
     if parameter['direction'] == 'in':
-        if parameter['name'] == session_name:
-            library_call_name = 'self.' + session_name
+        if parameter['name'] == session_handle_parameter_name:
+            library_call_snippet = 'self._' + session_handle_parameter_name
         else:
-            library_call_name = parameter['python_name']
-            library_call_name += '.value' if parameter['enum'] is not None else ''
+            library_call_snippet = parameter['python_name']
+            library_call_snippet += '.value' if parameter['enum'] is not None else ''
             if parameter['type'] == 'ViString' or parameter['type'] == 'ViConstString' or parameter['type'] == 'ViRsrc':
-                library_call_name += '.encode(\'ascii\')'
+                library_call_snippet += '.encode(\'ascii\')'
     else:
         assert parameter['direction'] == 'out', pp.pformat(parameter)
         if parameter['size']['mechanism'] == 'ivi-dance':
-            library_call_name = parameter['ctypes_variable_name']
+            library_call_snippet = parameter['ctypes_variable_name']
         elif parameter['is_buffer']:
-            library_call_name = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + parameter['ctypes_type'] + '))'
+            library_call_snippet = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + parameter['ctypes_type'] + '))'
         else:
-            library_call_name = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
-    parameter['library_call_name'] = library_call_name
+            library_call_snippet = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
+    parameter['library_call_snippet'] = library_call_snippet
 
 
 def _add_default_value_name(parameter):
     '''Declaration with default value, if set'''
     if 'default_value' in parameter:
-        if type(parameter['default_value']) is str:
-            name = parameter['python_name'] + "='" + parameter['default_value'] + "'"
+        if 'enum' in parameter and parameter['enum'] is not None:
+            name = parameter['python_name'] + "=" + parameter['default_value']
         else:
-            name = parameter['python_name'] + "=" + str(parameter['default_value'])
+            name = parameter['python_name'] + "=" + repr(parameter['default_value'])
+
     else:
         name = parameter['python_name']
 
@@ -148,7 +149,7 @@ def add_all_function_metadata(functions, config):
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
             _add_buffer_info(p)
-            _add_library_call_name(p, config['session_handle_parameter_name'])
+            _add_library_call_snippet(p, config['session_handle_parameter_name'])
             _add_default_value_name(p)
     return functions
 
@@ -209,7 +210,7 @@ def test_add_all_metadata_simple():
                         'value': 1
                     },
                     'type': 'ViSession',
-                    'library_call_name': 'self.vi',
+                    'library_call_snippet': 'self._vi',
                 }
             ],
             'python_name': 'close',

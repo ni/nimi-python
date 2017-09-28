@@ -6,6 +6,7 @@ bin/
 .tox/
 .coverage
 commands.log
+junit-*
 
 
 
