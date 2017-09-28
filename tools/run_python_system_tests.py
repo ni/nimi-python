@@ -1,12 +1,12 @@
-import os
-import sys
-import pip
-import time
-import json
-import zipfile
 import argparse
+import json
+import os
+import pip
+import sys
 import tempfile
+import time
 import urllib.request
+import zipfile
 
 parser = argparse.ArgumentParser(description='Downloads the latest release nimi-python and runs system tests on the specified driver.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-d', '--driver', required=True, type=str, help='Driver Name.')
