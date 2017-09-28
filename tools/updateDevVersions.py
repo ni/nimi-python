@@ -30,38 +30,13 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 """
     parser = argparse.ArgumentParser(description=usage)
     fileGroup = parser.add_argument_group("Input and Output files")
-    fileGroup.add_argument
-    (
-        "--src-file",
-        action="store", dest="src_file", default=None, required=True,  # noqa: E999
-        help="Source file"
-    )
+    fileGroup.add_argument("--src-file", action="store", dest="src_file", default=None, required=True, help="Source file")
 
     verbosityGroup = parser.add_argument_group("Verbosity, Logging & Debugging")
-    verbosityGroup.add_argument
-    (
-        "--exporting",
-        action="store_true", dest="exporting", default=False,
-        help="Are we building an official export? If false, don't actually interact with perforce."
-    )
-    verbosityGroup.add_argument
-    (
-        "-v", "--verbose",
-        action="count", dest="verbose", default=0,
-        help="Verbose output"
-    )
-    verbosityGroup.add_argument
-    (
-        "--test",
-        action="store_true", dest="test", default=False,
-        help="Run doctests and quit"
-    )
-    verbosityGroup.add_argument
-    (
-        "--log-file",
-        action="store", dest="logfile", default=None,
-        help="Send logging to listed file instead of stdout"
-    )
+    verbosityGroup.add_argument("--exporting", action="store_true", dest="exporting", default=False, help="Are we building an official export? If false, don't actually interact with perforce.")
+    verbosityGroup.add_argument("-v", "--verbose", action="count", dest="verbose", default=0, help="Verbose output")
+    verbosityGroup.add_argument("--test", action="store_true", dest="test", default=False, help="Run doctests and quit")
+    verbosityGroup.add_argument("--log-file", action="store", dest="logfile", default=None, help="Send logging to listed file instead of stdout")
     args = parser.parse_args()
 
     if args.verbose > 1:
