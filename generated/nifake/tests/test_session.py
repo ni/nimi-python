@@ -469,3 +469,49 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == 'Failed to retrieve error description.'
 
+    def test_set_bool_attribute(self):
+        self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
+        attribute_id = 1000000
+        attrib_bool = True
+        with nifake.Session('dev1') as session:
+            session.read_write_bool = attrib_bool
+            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
+
+    def test_set_vi_string_attribute(self):
+        self.patched_library.niFake_SetAttributeViString.side_effect = self.side_effects_helper.niFake_SetAttributeViString
+        attribute_id = 1000002
+        attrib_string = b'This is test string'
+        with nifake.Session('dev1') as session:
+            session.read_write_string = attrib_string
+            self.patched_library.niFake_SetAttributeViString.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, b'This is test string')
+
+    def test_string_with_specified_buffer(self):
+        single_character_string = 'a'
+        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
+        self.side_effects_helper['GetAStringWithSpecifiedMaximumSize']['aString'] = single_character_string
+        with nifake.Session('dev1') as session:
+            buffer_size = 19
+            string_with_specified_buffer = session.get_a_string_with_specified_maximum_size(buffer_size)
+            assert(string_with_specified_buffer == single_character_string)
+            self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
+
+    def test_string_with_fixed_buffer(self):
+        fixed_buffer_string = "this method will return fixed buffer string"
+        self.patched_library.niFake_GetAStringOfFixedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringOfFixedMaximumSize
+        self.side_effects_helper['GetAStringOfFixedMaximumSize']['aString'] = fixed_buffer_string
+        with nifake.Session('dev1') as session:
+            returned_string = session.get_a_string_of_fixed_maximum_size()
+            assert (returned_string == fixed_buffer_string)
+            self.patched_library.niFake_GetAStringOfFixedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
+
+    def test_retunring_string_and_number(self):
+        test_string = "this string"
+        test_number = 13
+        self.patched_library.niFake_ReturnANumberAndAString.side_effect = self.side_effects_helper.niFake_ReturnANumberAndAString
+        self.side_effects_helper['ReturnANumberAndAString']['aString'] = test_string
+        self.side_effects_helper['ReturnANumberAndAString']['aNumber'] = test_number
+        with nifake.Session('dev1') as session:
+            returned_number, returned_string = session.return_a_number_and_a_string()
+            assert (returned_string == test_string)
+            assert (returned_number == test_number)
+            self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
