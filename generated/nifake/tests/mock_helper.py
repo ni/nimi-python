@@ -21,6 +21,8 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
+        self._defaults['EnumInputFunctionWithDefaults'] = {}
+        self._defaults['EnumInputFunctionWithDefaults']['return'] = 0
         self._defaults['GetABoolean'] = {}
         self._defaults['GetABoolean']['return'] = 0
         self._defaults['GetABoolean']['aBoolean'] = None
@@ -107,6 +109,11 @@ class SideEffectsHelper(object):
         if self._defaults['Abort']['return'] != 0:
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
+
+    def niFake_EnumInputFunctionWithDefaults(self, vi, a_turtle):  # noqa: N802
+        if self._defaults['EnumInputFunctionWithDefaults']['return'] != 0:
+            return self._defaults['EnumInputFunctionWithDefaults']['return']
+        return self._defaults['EnumInputFunctionWithDefaults']['return']
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         if self._defaults['GetABoolean']['return'] != 0:
@@ -319,6 +326,8 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niFake_Abort.side_effect = MockFunctionCallError("niFake_Abort")
         mock_library.niFake_Abort.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_EnumInputFunctionWithDefaults.side_effect = MockFunctionCallError("niFake_EnumInputFunctionWithDefaults")
+        mock_library.niFake_EnumInputFunctionWithDefaults.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")
         mock_library.niFake_GetABoolean.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_GetANumber.side_effect = MockFunctionCallError("niFake_GetANumber")

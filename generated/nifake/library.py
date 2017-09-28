@@ -18,6 +18,7 @@ class Library(object):
         self._func_lock = threading.Lock()
         # We cache the cfunc object from the ctypes.CDLL object
         self.niFake_Abort_cfunc = None
+        self.niFake_EnumInputFunctionWithDefaults_cfunc = None
         self.niFake_GetABoolean_cfunc = None
         self.niFake_GetANumber_cfunc = None
         self.niFake_GetAStringOfFixedMaximumSize_cfunc = None
@@ -59,6 +60,14 @@ class Library(object):
                 self.niFake_Abort_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niFake_Abort_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_Abort_cfunc(vi)
+
+    def niFake_EnumInputFunctionWithDefaults(self, vi, a_turtle):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_EnumInputFunctionWithDefaults_cfunc is None:
+                self.niFake_EnumInputFunctionWithDefaults_cfunc = self._library.niFake_EnumInputFunctionWithDefaults
+                self.niFake_EnumInputFunctionWithDefaults_cfunc.argtypes = [ViSession_ctype, ViInt16_ctype]  # noqa: F405
+                self.niFake_EnumInputFunctionWithDefaults_cfunc.restype = nifake.python_types.ViStatus
+        return self.niFake_EnumInputFunctionWithDefaults_cfunc(vi, a_turtle)
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         with self._func_lock:
