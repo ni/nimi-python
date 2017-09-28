@@ -11,7 +11,7 @@ functions_codegen_method = {
     'close':            { 'codegen_method': 'private',  },
     'Abort':            { 'codegen_method': 'private',  },
     '.etAttribute.+':   { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
-    'error_message':    { 'codegen_method': 'no',       },
+    'error_message':    { 'codegen_method': 'private',  },
     'GetError':         { 'codegen_method': 'private',  },
     'GetErrorMessage':  { 'codegen_method': 'private',  },
     'ClearError':       { 'codegen_method': 'no',       },
@@ -29,6 +29,7 @@ functions_params_types = {
     'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetError':                     { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetErrorMessage':              { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
+    'error_message':                { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
@@ -54,12 +55,14 @@ functions_buffer_info = {
     'InitWithOptions':                       { 'parameters': { 0: { 'is_buffer': True, },
                                                                3: { 'is_buffer': True, }, }, },
     '.etAttribute.+':                        { 'parameters': { 1: { 'is_buffer': True, }, }, },
+    'error_message':                         { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
 # change how error handling is done within those functions themselves - basically, if an error occurs,
 # dont try to handle it, since the functions are only used within the context of error handling.
 functions_is_error_handling = {
+    'error_message':                { 'is_error_handling': True, },
     'GetError':                     { 'is_error_handling': True, },
     'GetErrorMessage':              { 'is_error_handling': True, },
 }

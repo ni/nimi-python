@@ -12,7 +12,7 @@ functions_codegen_method = {
     'CheckAttribute.+':                { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'init':                            { 'codegen_method': 'no',       },
-    'error_message':                   { 'codegen_method': 'no',       },
+    'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
     'GetErrorMessage':                 { 'codegen_method': 'private',  },
     'ClearError':                      { 'codegen_method': 'no',       },
@@ -50,6 +50,7 @@ functions_params_types = {
     'GetRelayName':                 { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetPath':                      { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
     'GetError':                     { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
+    'error_message':                { 'parameters': { 2: { 'type': 'ViString',                  }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
@@ -76,6 +77,7 @@ functions_buffer_info = {
     'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetRelayName':                 { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'relayNameBufferSize'}, }, }, },
     'GetPath':                      { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
