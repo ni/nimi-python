@@ -471,7 +471,7 @@ class TestSession(object):
 
     def test_multipoint_read(self):
         test_maximum_time = 1000
-        test_reading_array = [1.0,0.1]
+        test_reading_array = [1.0, 0.1]
         test_actual_number_of_points = 2
         self.patched_library.niFake_ReadMultiPoint.side_effect = self.side_effects_helper.niFake_ReadMultiPoint
         self.side_effects_helper['ReadMultiPoint']['readingArray'] = test_reading_array
