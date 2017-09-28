@@ -469,3 +469,18 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == 'Failed to retrieve error description.'
 
+    def test_multipoint_read(self):
+        test_maximum_time = 1000
+        test_reading_array = [1.0,0.1]
+        test_actual_number_of_points = 2
+        self.patched_library.niFake_ReadMultiPoint.side_effect = self.side_effects_helper.niFake_ReadMultiPoint
+        self.side_effects_helper['ReadMultiPoint']['readingArray'] = test_reading_array
+        self.side_effects_helper['ReadMultiPoint']['actualNumberOfPoints'] = test_actual_number_of_points
+        with nifake.Session('dev1') as session:
+            measurements, points = session.read_multi_point(test_maximum_time, len(test_reading_array))
+            assert len(measurements) == test_actual_number_of_points
+            assert points == test_actual_number_of_points
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, len(test_reading_array), ANY, ANY)]
+            self.patched_library.niFake_ReadMultiPoint.assert_has_calls(calls)
+            assert self.patched_library.niFake_ReadMultiPoint.call_count == 1
