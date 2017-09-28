@@ -15,7 +15,7 @@ ${encoding_tag}
     c_function_prefix = config['c_function_prefix']
     attributes = template_parameters['metadata'].attributes
 
-    functions = helper.extract_codegen_functions(functions)
+    functions = helper.filter_codegen_functions(functions)
 
     session_context_manager = None
     if 'task' in config['context_manager_name']:
@@ -28,9 +28,9 @@ ${encoding_tag}
     '''Renders a Session method corresponding to the passed-in function metadata.'''
 
     parameters = f['parameters']
-    output_parameters = helper.extract_output_parameters(parameters)
-    enum_input_parameters = helper.extract_enum_parameters(helper.extract_input_parameters(parameters))
-    ivi_dance_parameter = helper.extract_ivi_dance_parameter(parameters)
+    output_parameters = helper.filter_output_parameters(parameters)
+    enum_input_parameters = helper.filter_enum_parameters(helper.filter_input_parameters(parameters))
+    ivi_dance_parameter = helper.filter_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>\
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.SESSION_METHOD_DECLARATION)}):

@@ -10,7 +10,7 @@ c_function_prefix = config['c_function_prefix']
 driver_name = config['driver_name']
 
 functions = config['functions']
-functions = helper.extract_codegen_functions(functions)
+functions = helper.filter_codegen_functions(functions)
 %>\
 
 import ctypes
