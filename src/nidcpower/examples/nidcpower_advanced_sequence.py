@@ -14,6 +14,7 @@ args = parser.parse_args()
 try:
     with nidcpower.Session(args.name) as session:
         # Placeholder. Use "NI-DCPower Advanced Sequence Changing Output Function.vi" as reference
+        pass
 except nidmm.Error as e:
     sys.stderr.write(str(e))
     sys.exit(e.code)
