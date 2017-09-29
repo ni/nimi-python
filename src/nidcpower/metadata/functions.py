@@ -1237,7 +1237,7 @@ channel(s).
 **Valid Values:**
 The valid values for this parameter are defined by the current level
 range that is configured using the
-`niDCPower\_ConfigureCurrentlevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentlevelRange.html')>`__
+`niDCPower\_ConfigureCurrentLevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLevelRange.html')>`__
 function.
 ''',
 },
@@ -1245,7 +1245,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureCurrentlevel(ViSession vi, ViConstString
+Vistatus niDCPower\_ConfigureCurrentLevel(ViSession vi, ViConstString
 channelName, ViReal64 level);
 
 Configures the current level the device attempts to generate for the
@@ -1322,7 +1322,7 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureCurrentLevelrange(ViSession vi,
+Vistatus niDCPower\_ConfigureCurrentLevelRange(ViSession vi,
 ViConstString channelName, ViReal64 range);
 
 Configures the current level range for the specified channel(s). The
@@ -1408,7 +1408,7 @@ negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the current limit
 range that is configured using the
-`niDCPower\_ConfigureCurrentlimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentlimitRange.html')>`__
+`niDCPower\_ConfigureCurrentLimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLimitRange.html')>`__
 function.
 ''',
 },
@@ -1416,7 +1416,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureCurrentlimit(ViSession vi, ViConstString
+Vistatus niDCPower\_ConfigureCurrentLimit(ViSession vi, ViConstString
 channelName, ViInt32 behavior, ViReal64 limit);
 
 | Configures the current limit for the specified channel(s). The channel
@@ -1490,7 +1490,7 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureCurrentLimitrange(ViSession vi,
+Vistatus niDCPower\_ConfigureCurrentLimitRange(ViSession vi,
 ViConstString channelName, ViReal64 range);
 
 Configures the current limit range for the specified channel(s).The
@@ -1572,7 +1572,7 @@ rising or falling edge.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureDigitaledgeMeasureTrigger(ViSession vi,
+Vistatus niDCPower\_ConfigureDigitalEdgeMeasureTrigger(ViSession vi,
 ViConstString inputTerminal, ViInt32 edge);
 
 Configures the Measure trigger for digital edge triggering.
@@ -1644,7 +1644,7 @@ or falling edge.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureDigitaledgePulseTrigger(ViSession vi,
+Vistatus niDCPower\_ConfigureDigitalEdgePulseTrigger(ViSession vi,
 ViConstString inputTerminal, ViInt32 edge);
 
 Configures the Pulse trigger for digital edge triggering.
@@ -1717,7 +1717,7 @@ the rising or falling edge.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureDigitaledgeSequenceAdvanceTrigger(ViSession
+Vistatus niDCPower\_ConfigureDigitalEdgeSequenceAdvanceTrigger(ViSession
 vi, ViConstString inputTerminal, ViInt32 edge);
 
 Configures the Sequence Advance trigger for digital edge triggering.
@@ -1789,7 +1789,7 @@ rising or falling edge.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureDigitaledgeSourceTrigger(ViSession vi,
+Vistatus niDCPower\_ConfigureDigitalEdgeSourceTrigger(ViSession vi,
 ViConstString inputTerminal, ViInt32 edge);
 
 Configures the Source trigger for digital edge triggering.
@@ -1861,7 +1861,7 @@ or falling edge.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureDigitaledgeStartTrigger(ViSession vi,
+Vistatus niDCPower\_ConfigureDigitalEdgeStartTrigger(ViSession vi,
 ViConstString inputTerminal, ViInt32 edge);
 
 Configures the Start trigger for digital edge triggering.
@@ -1926,7 +1926,7 @@ Specifies whether the output is enabled or disabled.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureOutputenabled(ViSession vi, ViConstString
+Vistatus niDCPower\_ConfigureOutputEnabled(ViSession vi, ViConstString
 channelName, ViBoolean enabled);
 
 Enables or disables generation on the specified channel(s). Depending on
@@ -1997,7 +1997,7 @@ Configures the function to generate for the specified channel(s).
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureOutputfunction(ViSession vi, ViConstString
+Vistatus niDCPower\_ConfigureOutputFunction(ViSession vi, ViConstString
 channelName, ViInt32 function);
 
 Configures the function the device attempts to generate for the
@@ -2121,7 +2121,7 @@ at a time may be calibrated.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureOutputrange(ViSession vi, ViConstString
+Vistatus niDCPower\_ConfigureOutputRange(ViSession vi, ViConstString
 channelName, ViInt32 rangeType, ViReal64 range);
 
 Configures either the voltage level range or the current limit range. If
@@ -2134,7 +2134,7 @@ settings. Refer to the
 function for more information.
 
 This is a deprecated function. You must use the following functions
-instead of theniDCPower\_ConfigureOutputrange function:
+instead of theniDCPower\_ConfigureOutputRange function:
 
 -  `niDCPower\_ConfigureVoltageLevel <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLevel.html')>`__
 -  `niDCPower\_ConfigureVoltageLimit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLimit.html')>`__
@@ -2203,7 +2203,7 @@ about configuring output resistance.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureOutputresistance(ViSession vi,
+Vistatus niDCPower\_ConfigureOutputResistance(ViSession vi,
 ViConstString channelName, ViReal64 resistance);
 
 Configures the output resistance that the device attempts to generate
@@ -2350,7 +2350,7 @@ channel(s).
 **Valid Values:**
 The valid values for this parameter are defined by the pulse current
 level range that is configured using the
-`niDCPower\_ConfigurePulseCurrentlevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentlevelRange.html')>`__
+`niDCPower\_ConfigurePulseCurrentLevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevelRange.html')>`__
 function.
 ''',
 },
@@ -2358,7 +2358,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseBiasCurrentlevel(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseBiasCurrentLevel(ViSession vi,
 ViConstString channelName, ViReal64 level);
 
 Configures the pulse bias current level that the device attempts to
@@ -2436,7 +2436,7 @@ positive and negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the pulse current
 limit range that is configured using the
-`niDCPower\_ConfigurePulseCurrentlimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentlimitRange.html')>`__
+`niDCPower\_ConfigurePulseCurrentLimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimitRange.html')>`__
 function.
 ''',
 },
@@ -2444,7 +2444,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseBiasCurrentlimit(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseBiasCurrentLimit(ViSession vi,
 ViConstString channelName, ViReal64 limit);
 
 Configures the pulse bias current limit for the specified channel(s).
@@ -2518,7 +2518,7 @@ generation.
 **Valid Values**:
 The valid values for this parameter are defined by the pulse voltage
 level range that is selected using the
-`niDCPower\_ConfigurePulseVoltagelevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltagelevelRange.html')>`__
+`niDCPower\_ConfigurePulseVoltageLevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevelRange.html')>`__
 function.
 ''',
 },
@@ -2526,7 +2526,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseBiasVoltagelevel(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseBiasVoltageLevel(ViSession vi,
 ViConstString channelName, ViReal64 level);
 
 Configures the pulse bias voltage level that the device attempts to
@@ -2604,7 +2604,7 @@ positive and negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the pulse voltage
 limit range that is configured using the
-`niDCPower\_ConfigurePulseVoltagelimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltagelimitRange.html')>`__
+`niDCPower\_ConfigurePulseVoltageLimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimitRange.html')>`__
 function.
 ''',
 },
@@ -2612,7 +2612,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseBiasVoltagelimit(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseBiasVoltageLimit(ViSession vi,
 ViConstString channelName, ViReal64 limit);
 
 Configures the pulse bias voltage limit for the specified channel(s).
@@ -2685,7 +2685,7 @@ Specifies the pulse current level, in amps, on the specified channel(s).
 **Valid Values:**
 The valid values for this parameter are defined by the pulse current
 level range that is configured using the
-`niDCPower\_ConfigureCurrentPulselevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentlevelRange.html')>`__
+`niDCPower\_ConfigurePulseCurrentLevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevelRange.html')>`__
 function.
 ''',
 },
@@ -2693,7 +2693,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseCurrentlevel(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseCurrentLevel(ViSession vi,
 ViConstString channelName, ViReal64 level);
 
 Configures the pulse current level that the device attempts to generate
@@ -2774,7 +2774,7 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseCurrentLevelrange(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseCurrentLevelRange(ViSession vi,
 ViConstString channelName, ViReal64 range);
 
 Configures the pulse current level range for the specified channel(s).
@@ -2847,7 +2847,7 @@ negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the pulse current
 limit range that is configured using the
-`niDCPower\_ConfigurePulseCurrentlimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentlimitRange.html')>`__
+`niDCPower\_ConfigurePulseCurrentLimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimitRange.html')>`__
 function.
 ''',
 },
@@ -2855,7 +2855,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseCurrentlimit(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseCurrentLimit(ViSession vi,
 ViConstString channelName, ViReal64 limit);
 
 Configures the pulse current limit for the specified channel(s). The
@@ -2933,7 +2933,7 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseCurrentLimitrange(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseCurrentLimitRange(ViSession vi,
 ViConstString channelName, ViReal64 range);
 
 Configures the pulse current limit range for the specified channel(s).
@@ -3005,7 +3005,7 @@ generation.
 **Valid Values**:
 The valid values for this parameter are defined by the voltage level
 range that is selected using the
-`niDCPower\_ConfigurePulseVoltagelevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltagelevelRange.html')>`__
+`niDCPower\_ConfigurePulseVoltageLevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevelRange.html')>`__
 function.
 ''',
 },
@@ -3013,7 +3013,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseVoltagelevel(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseVoltageLevel(ViSession vi,
 ViConstString channelName, ViReal64 level);
 
 Configures the pulse voltage level that the device attempts to generate
@@ -3094,7 +3094,7 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseVoltageLevelrange(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseVoltageLevelRange(ViSession vi,
 ViConstString channelName, ViReal64 range);
 
 Configures the pulse voltage level range for the specified channel(s).
@@ -3167,7 +3167,7 @@ positive and negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the pulse voltage
 limit range that is configured using the
-`niDCPower\_ConfigurePulseVoltagelimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltagelimitRange.html')>`__
+`niDCPower\_ConfigurePulseVoltageLimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimitRange.html')>`__
 function.
 ''',
 },
@@ -3175,7 +3175,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseVoltagelimit(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseVoltageLimit(ViSession vi,
 ViConstString channelName, ViReal64 limit);
 
 Configures the pulse voltage limit for the specified channel(s). The
@@ -3253,7 +3253,7 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigurePulseVoltageLimitrange(ViSession vi,
+Vistatus niDCPower\_ConfigurePulseVoltageLimitRange(ViSession vi,
 ViConstString channelName, ViReal64 range);
 
 Configures the pulse voltage limit range for the specified channel(s).
@@ -3331,7 +3331,7 @@ Specifies local or remote sensing on the specified channel(s).
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_Configuresense(ViSession vi, ViConstString
+Vistatus niDCPower\_ConfigureSense(ViSession vi, ViConstString
 channelName, ViInt32 sense);
 
 Specifies whether to use
@@ -3617,7 +3617,7 @@ generation.
 **Valid Values**:
 The valid values for this parameter are defined by the voltage level
 range that is selected using the
-`niDCPower\_ConfigureVoltagelevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltagelevelRange.html')>`__
+`niDCPower\_ConfigureVoltageLevelRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLevelRange.html')>`__
 function.
 ''',
 },
@@ -3625,7 +3625,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureVoltagelevel(ViSession vi, ViConstString
+Vistatus niDCPower\_ConfigureVoltageLevel(ViSession vi, ViConstString
 channelName, ViReal64 level);
 
 Configures the voltage level the device attempts to generate for the
@@ -3704,7 +3704,7 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureVoltageLevelrange(ViSession vi,
+Vistatus niDCPower\_ConfigureVoltageLevelRange(ViSession vi,
 ViConstString channelName, ViReal64 range);
 
 Configures the voltage level range for the specified channel(s). The
@@ -3776,7 +3776,7 @@ positive and negative limits are enforced simultaneously.
 **Valid Values:**
 The valid values for this parameter are defined by the voltage limit
 range that is configured using the
-`niDCPower\_ConfigureVoltagelimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltagelimitRange.html')>`__
+`niDCPower\_ConfigureVoltageLimitRange <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimitRange.html')>`__
 function.
 ''',
 },
@@ -3784,7 +3784,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureVoltagelimit(ViSession vi, ViConstString
+Vistatus niDCPower\_ConfigureVoltageLimit(ViSession vi, ViConstString
 channelName, ViReal64 limit);
 
 Configures the voltage limit for the specified channel(s). The channel
@@ -3860,7 +3860,7 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ConfigureVoltageLimitrange(ViSession vi,
+Vistatus niDCPower\_ConfigureVoltageLimitRange(ViSession vi,
 ViConstString channelName, ViReal64 range);
 
 Configures the voltage limit range for the specified channel(s). The
@@ -4396,7 +4396,7 @@ Specifies where to export the selected signal.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_Exportsignal(ViSession vi, ViInt32 signal,
+Vistatus niDCPower\_ExportSignal(ViSession vi, ViInt32 signal,
 ViConstString signalIdentifier, ViConstString outputTerminal);
 
 Routes signals (triggers and events) to the output terminal you specify.
@@ -5188,7 +5188,7 @@ EEPROM.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_GetCalUserDefinedinfo(ViSession vi, ViString info);
+Vistatus niDCPower\_GetCalUserDefinedInfo(ViSession vi, ViString info);
 
 Returns the user-defined information in the device onboard EEPROM.
 ''',
@@ -6124,7 +6124,7 @@ subsequent NI-DCPower function calls.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_InitializeWithchannels(ViRsrc resourceName,
+Vistatus niDCPower\_InitializeWithChannels(ViRsrc resourceName,
 ViConstString channels, ViBoolean reset, ViConstString optionString,
 ViSession \*vi);
 
@@ -6835,7 +6835,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_ReadCurrenttemperature(ViSession vi, ViReal64
+Vistatus niDCPower\_ReadCurrentTemperature(ViSession vi, ViReal64
 \*temperature);
 
 Returns the current onboard **temperature**, in degrees Celsius, of the
@@ -7008,7 +7008,7 @@ Specifies which trigger to assert.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_SendSoftwareEdgetrigger(ViSession vi, ViInt32
+Vistatus niDCPower\_SendSoftwareEdgeTrigger(ViSession vi, ViInt32
 trigger);
 
 Asserts the specified trigger. This function can override an external
@@ -7647,7 +7647,7 @@ function.
         ],
 'documentation': {
 'description': '''
-Vistatus niDCPower\_SetCalUserDefinedinfo(ViSession vi, ViConstString
+Vistatus niDCPower\_SetCalUserDefinedInfo(ViSession vi, ViConstString
 info);
 
 Stores a user-defined string of characters in the device onboard EEPROM.
@@ -7798,19 +7798,19 @@ function.
 | Pass the address of a local ViBoolean variable. In the declaration of
   the local variable, initialize it to VI\_FALSE. Pass the address of
   the same local variable to any other calls you make to
-  niDCPower\_LockSession or niDCPower\_UnlockSessionin the same
+  niDCPower\_LockSession or niDCPower\_UnlockSession in the same
   function.
 | The parameter is an input/output parameter. niDCPower\_LockSession and
-  niDCPower\_UnlockSessioneach inspect the current value and take the
+  niDCPower\_UnlockSession each inspect the current value and take the
   following actions.
 
 -  If the value is VI\_TRUE, niDCPower\_LockSession does not lock the
    session again.
 -  If the value is VI\_FALSE, niDCPower\_LockSession obtains the lock
    and sets the value of the parameter to VI\_TRUE.
--  If the value is VI\_FALSE, niDCPower\_UnlockSessiondoes not attempt
+-  If the value is VI\_FALSE, niDCPower\_UnlockSession does not attempt
    to unlock the session.
--  If the value is VI\_TRUE, niDCPower\_UnlockSessionreleases the lock
+-  If the value is VI\_TRUE, niDCPower\_UnlockSession releases the lock
    and sets the value of the parameter to VI\_FALSE.
 
 | Thus, you can, call niDCPower\_UnlockSession at the end of your
