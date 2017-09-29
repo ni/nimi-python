@@ -18,8 +18,8 @@ config = {
     },
     'context_manager_name': {
         'task': 'acquisition',
-        'initiate': 'initiate',
-        'abort': 'abort',
+        'initiate_function': 'Initiate',
+        'abort_function': 'Abort',
     },
     'init_function': 'InitializeWithChannels',
 }
