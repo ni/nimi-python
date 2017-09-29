@@ -19,7 +19,8 @@ functions_codegen_method = {
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    'GetEnumValue':                 { 'parameters': { 2: { 'enum': 'Turtle',    }, }, },
+    'GetEnumValue':                     { 'parameters': { 2: { 'enum': 'Turtle',    }, }, },
+    'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'enum': 'Turtle',    }, }, },
 }
 
 # TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval? Issue #259
@@ -65,8 +66,9 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 function_default_value = {
-    'InitWithOptions':  { 'parameters': { 1: { 'default_value': False, },
-                                          2: { 'default_value': False, },
-                                          3: { 'default_value': '', }, }, },
+    'InitWithOptions':                 { 'parameters': { 1: { 'default_value': False, },
+                                                         2: { 'default_value': False, },
+                                                         3: { 'default_value': '', }, }, },
+    'EnumInputFunctionWithDefaults':   { 'parameters': { 1: { 'default_value': 'enums.Turtle.LEONARDO', }, }, },
 }
 

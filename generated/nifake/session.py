@@ -95,6 +95,30 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
+        '''enum_input_function_with_defaults
+
+        This function takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.
+
+        Args:
+            a_turtle (enums.Turtle):Indicates a ninja turtle
+
+                +---+---------------+
+                | 0 | Leonardo      |
+                +---+---------------+
+                | 1 | Donatello     |
+                +---+---------------+
+                | 2 | Raphael       |
+                +---+---------------+
+                | 3 | Mich elangelo |
+                +---+---------------+
+        '''
+        if type(a_turtle) is not enums.Turtle:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Turtle))
+        error_code = self._library.niFake_EnumInputFunctionWithDefaults(self._vi, a_turtle.value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def get_a_boolean(self):
         '''get_a_boolean
 
