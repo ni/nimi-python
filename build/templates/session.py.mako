@@ -18,8 +18,8 @@ ${encoding_tag}
     session_context_manager = None
     if 'task' in config['context_manager_name']:
         session_context_manager = '_' + config['context_manager_name']['task'].title()
-        session_context_manager_initiate = '_' + config['context_manager_name']['initiate']
-        session_context_manager_abort = '_' + config['context_manager_name']['abort']
+        session_context_manager_initiate = functions[config['context_manager_name']['initiate_function']]['python_name']
+        session_context_manager_abort = functions[config['context_manager_name']['abort_function']]['python_name']
 %>\
 <%def name="render_method(f)">\
 <%
