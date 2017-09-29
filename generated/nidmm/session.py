@@ -1802,7 +1802,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_thermocouple(self, thermocouple_type, reference_junction_type='enums.ThermocoupleReferenceJunctionType.FIXED'):
+    def configure_thermocouple(self, thermocouple_type, reference_junction_type='ThermocoupleReferenceJunctionType.FIXED'):
         '''configure_thermocouple
 
         Configures the thermocouple type and reference junction type for a

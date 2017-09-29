@@ -74,7 +74,7 @@ niswitch.Session methods
     
 
 
-.. function:: configure_scan_list(scanlist, scan_mode)
+.. function:: configure_scan_list(scanlist, scan_mode=niswitch.ScanMode.BREAK_BEFORE_MAKE)
 
     Configures the scan list and scan mode used for scanning. Refer to
     Devices Overview to determine if the switch module supports scanning.
@@ -111,7 +111,7 @@ niswitch.Session methods
 
     :type scan_mode: :py:data:`niswitch.ScanMode`
 
-.. function:: configure_scan_trigger(trigger_input, scan_advanced_output, scan_delay)
+.. function:: configure_scan_trigger(trigger_input, scan_advanced_output, scan_delay=0.0)
 
     Configures the scan triggers for the scan list established with
     :py:func:`niswitch.configure_scan_list`. Refer to Devices Overview to determine if
@@ -524,7 +524,7 @@ niswitch.Session methods
             
 
 
-.. function:: init_with_topology(resource_name, topology, simulate, reset_device)
+.. function:: init_with_topology(resource_name, topology='Configured Topology', simulate=False, reset_device=False)
 
     Returns a session handle used to identify the switch in all subsequent
     instrument driver calls and sets the topology of the switch.
@@ -870,7 +870,7 @@ niswitch.Session methods
     
 
 
-.. function:: route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
+.. function:: route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False)
 
     Routes the scan advanced output trigger from a trigger bus line (TTLx)
     to the front or rear connector.
@@ -911,7 +911,7 @@ niswitch.Session methods
 
     :type invert: bool
 
-.. function:: route_trigger_input(trigger_input_connector, trigger_input_bus_line, invert)
+.. function:: route_trigger_input(trigger_input_connector, trigger_input_bus_line, invert=False)
 
     Routes the input trigger from the front or rear connector to a trigger
     bus line (TTLx). To disconnect the route, call this function again and
@@ -1008,7 +1008,7 @@ niswitch.Session methods
 
     :type path_list: str
 
-.. function:: wait_for_debounce(maximum_time_ms)
+.. function:: wait_for_debounce(maximum_time_ms=5000)
 
     Pauses until all created paths have settled. If the time you specify
     with the Maximum Time (ms) parameter elapsed before the switch paths
@@ -1030,7 +1030,7 @@ niswitch.Session methods
 
     :type maximum_time_ms: int
 
-.. function:: wait_for_scan_complete(maximum_time_ms)
+.. function:: wait_for_scan_complete(maximum_time_ms=5000)
 
     Pauses until the switch module stops scanning or the maximum time has
     elapsed and returns a timeout error. If the time you specify with the
