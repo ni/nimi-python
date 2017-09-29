@@ -18,6 +18,6 @@ ${helper.get_rst_header_snippet(e, '-')}
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(source) <https://github.com/ni/nimi-python/blob/master/src/${module_name}/examples/${e}>`_
+   :caption: `(${e}) <https://github.com/ni/nimi-python/blob/master/src/${module_name}/examples/${e}>`_
 
 % endfor
