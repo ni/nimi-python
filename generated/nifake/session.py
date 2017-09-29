@@ -595,6 +595,24 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def use64_bit_number(self, input):
+        '''use64_bit_number
+
+        Returns a number and a string.
+
+        Note: This function rules!
+
+        Args:
+            input (int):A big number on its way in.
+
+        Returns:
+            output (int):A big number on its way out.
+        '''
+        output_ctype = ctypes_types.ViInt64_ctype(0)
+        error_code = self._library.niFake_Use64BitNumber(self._vi, input, ctypes.pointer(output_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViInt64(output_ctype.value)
+
     def _close(self):
         '''_close
 
