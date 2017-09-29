@@ -40,7 +40,6 @@ class ViUInt16(int):
         return int(val)
 
 
-# TODO(marcoskirsch): See issue #379, int may not be large enough in some cases.
 class ViInt64(int):
     def __new__(cls, val=0):
         return int(val)
