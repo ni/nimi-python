@@ -204,7 +204,7 @@ def add_all_function_metadata(functions, config):
 # Unit Tests
 def _do_the_test_add_all_metadata(functions, expected):
     actual = copy.deepcopy(functions)
-    actual = add_all_function_metadata(actual, {'session_handle_parameter_name': 'vi'})
+    actual = add_all_function_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake'})
     assert expected == actual, "\nfunctions = {0}\nexpected = {1}\nactual = {2}".format(pp.pformat(functions), pp.pformat(expected), pp.pformat(actual))
 
 
