@@ -3,7 +3,9 @@
 +----------------------+------------------------------------------------------------+
 | GitHub status        | |OpenIssues| |OpenPullRequests|                            |
 +----------------------+------------+-----------------------------------------------+
-| Versions             | NI-DMM     | |DMMLatestVersion| |DMMPythonVersion|         |
+| Versions             | NI-DCPower | |DCPowerLatestVersion| |DCPowerPythonVersion| |
+|                      +------------+-----------------------------------------------+
+|                      | NI-DMM     | |DMMLatestVersion| |DMMPythonVersion|         |
 |                      +------------+-----------------------------------------------+
 |                      | NI-ModInst | |ModInstLatestVersion| |ModInstPythonVersion| |
 |                      +------------+-----------------------------------------------+
@@ -32,6 +34,7 @@ About
 
 The **nimi-python** repository generates Python bindings (Application Programming Interface) for interacting with the Modular Instrument drivers. Currently, the following drivers are supported:
 
+* NI-DCPower (Python module: nidcpower)
 * NI-DMM (Python module: nidmm)
 * NI-ModInst (Python module: nimodinst)
 * NI-SWITCH (Python module: niswitch)
@@ -161,10 +164,20 @@ licenses allow for non-commercial and commercial use.
     :scale: 100%
     :target: https://coveralls.io/github/ni/nimi-python?branch=master
 
-.. |DMMLatestVersion| image:: http://img.shields.io/pypi/v/nidmm.svg
+.. |DCPowerLatestVersion| image:: http://img.shields.io/pypi/v/nidcpower.svg
     :alt: Latest NI-DMM Version
     :scale: 100%
     :target: http://pypi.python.org/pypi/nidmm
+
+.. |DCPowerPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidcpower.svg
+    :alt: NI-DCPower supported Python versions
+    :scale: 100%
+    :target: http://pypi.python.org/pypi/nidcpower
+
+.. |DMMLatestVersion| image:: http://img.shields.io/pypi/v/nidcpower.svg
+    :alt: Latest NI-DCPower Version
+    :scale: 100%
+    :target: http://pypi.python.org/pypi/nidcpower
 
 .. |DMMPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidmm.svg
     :alt: NI-DMM supported Python versions
