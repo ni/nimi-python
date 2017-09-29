@@ -69,6 +69,6 @@ function_default_value = {
     'InitWithOptions':                 { 'parameters': { 1: { 'default_value': False, },
                                                          2: { 'default_value': False, },
                                                          3: { 'default_value': '', }, }, },
-    'EnumInputFunctionWithDefaults':   { 'parameters': { 1: { 'default_value': 'enums.Turtle.LEONARDO', }, }, },
+    'EnumInputFunctionWithDefaults':   { 'parameters': { 1: { 'default_value': 'Turtle.LEONARDO', }, }, },
 }
 

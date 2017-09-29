@@ -59,7 +59,7 @@ ParamListTypeDefaults[ParamListType.DOCUMENTATION_SESSION_METHOD] = {
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
     'session_handle_parameter_name': 'vi',
-    'name_to_use': 'python_name',
+    'name_to_use': 'python_name_with_doc_default',
     'skip_repeated_capability_parameter': True,
 }
 ParamListTypeDefaults[ParamListType.CTYPES_CALL] = {
