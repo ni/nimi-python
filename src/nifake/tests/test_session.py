@@ -509,6 +509,27 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == 'Failed to retrieve error description.'
 
+    '''
+    # TODO(bhaswath): Enable test once issue 320 is fixed
+    def test_read_with_warning(self):
+        test_maximum_time = 10
+        test_reading = float('nan')
+        test_error_code = 42
+        test_error_desc = "The answer to the ultimate question, only positive"
+        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
+        self.side_effects_helper['Read']['return'] = test_error_code
+        self.side_effects_helper['Read']['reading'] = test_reading
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            with warnings.catch_warnings(record=True) as w:
+                assert test_reading == session.read(test_maximum_time)
+                assert len(w) == 1
+                assert issubclass(w[0].category, nifake.NifakeWarning)
+                assert test_error_desc in str(w[0].message)
+    '''
+
     def test_enum_input_function_with_defaults(self):
         test_turtle = nifake.Turtle.DONATELLO
         self.patched_library.niFake_EnumInputFunctionWithDefaults.side_effect = self.side_effects_helper.niFake_EnumInputFunctionWithDefaults
