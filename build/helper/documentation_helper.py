@@ -215,7 +215,7 @@ def replace_func_python_name(f_match):
     '''callback function for regex sub command when link needed
 
     Args:
-        m (match object): Match object from the function substitution command
+        f_match (match object): Match object from the function substitution command
 
     Returns:
         str: rst link to function using python name
@@ -223,7 +223,10 @@ def replace_func_python_name(f_match):
     fname = "Unknown"
     if f_match:
         fname = f_match.group(1).replace('.', '').replace(',', '').replace('\\', '')
-        fname = config['functions'][fname]['python_name']
+        try:
+            fname = config['functions'][fname]['python_name']
+        except KeyError as e:
+            print('Warning: "{0}" not found in function metadata. Typo? Generated code will be funky!'.format(fname))
     else:
         print('Unknown function name: {0}'.format(f_match.group(1)))
         print(config['functions'])
