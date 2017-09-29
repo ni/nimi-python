@@ -1002,6 +1002,44 @@ functions = {
         },
     },
 
+    'Use64BitNumber': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'input',
+                'type': 'ViInt64',
+                'documentation': {
+                    'description': 'A big number on its way in.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'output',
+                'type': 'ViInt64',
+                'documentation': {
+                    'description': 'A big number on its way out.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns a number and a string.',
+            'note': 'This function rules!',
+        },
+    },
+
     'Read': {
         'codegen_method': 'public',
         'returns': 'ViStatus',

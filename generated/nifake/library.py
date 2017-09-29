@@ -45,6 +45,7 @@ class Library(object):
         self.niFake_SetAttributeViString_cfunc = None
         self.niFake_SimpleFunction_cfunc = None
         self.niFake_TwoInputFunction_cfunc = None
+        self.niFake_Use64BitNumber_cfunc = None
         self.niFake_close_cfunc = None
 
         if library_type == 'windll':
@@ -276,6 +277,14 @@ class Library(object):
                 self.niFake_TwoInputFunction_cfunc.argtypes = [ViSession_ctype, ViReal64_ctype, ViChar_ctype]  # noqa: F405
                 self.niFake_TwoInputFunction_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_TwoInputFunction_cfunc(vi, a_number, a_string)
+
+    def niFake_Use64BitNumber(self, vi, input, output):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_Use64BitNumber_cfunc is None:
+                self.niFake_Use64BitNumber_cfunc = self._library.niFake_Use64BitNumber
+                self.niFake_Use64BitNumber_cfunc.argtypes = [ViSession_ctype, ViInt64_ctype, ctypes.POINTER(ViInt64_ctype)]  # noqa: F405
+                self.niFake_Use64BitNumber_cfunc.restype = nifake.python_types.ViStatus
+        return self.niFake_Use64BitNumber_cfunc(vi, input, output)
 
     def niFake_close(self, vi):  # noqa: N802
         with self._func_lock:

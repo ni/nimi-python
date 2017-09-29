@@ -40,6 +40,11 @@ class ViUInt16(int):
         return int(val)
 
 
+class ViInt64(int):
+    def __new__(cls, val=0):
+        return int(val)
+
+
 class ViString(str):
     def __new__(cls, val=0):
         return str(val)

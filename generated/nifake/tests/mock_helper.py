@@ -96,6 +96,9 @@ class SideEffectsHelper(object):
         self._defaults['SimpleFunction']['return'] = 0
         self._defaults['TwoInputFunction'] = {}
         self._defaults['TwoInputFunction']['return'] = 0
+        self._defaults['Use64BitNumber'] = {}
+        self._defaults['Use64BitNumber']['return'] = 0
+        self._defaults['Use64BitNumber']['output'] = None
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
 
@@ -317,6 +320,14 @@ class SideEffectsHelper(object):
             return self._defaults['TwoInputFunction']['return']
         return self._defaults['TwoInputFunction']['return']
 
+    def niFake_Use64BitNumber(self, vi, input, output):  # noqa: N802
+        if self._defaults['Use64BitNumber']['return'] != 0:
+            return self._defaults['Use64BitNumber']['return']
+        if self._defaults['Use64BitNumber']['output'] is None:
+            raise MockFunctionCallError("niFake_Use64BitNumber", param='output')
+        output.contents.value = self._defaults['Use64BitNumber']['output']
+        return self._defaults['Use64BitNumber']['return']
+
     def niFake_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
             return self._defaults['close']['return']
@@ -380,5 +391,7 @@ class SideEffectsHelper(object):
         mock_library.niFake_SimpleFunction.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_TwoInputFunction.side_effect = MockFunctionCallError("niFake_TwoInputFunction")
         mock_library.niFake_TwoInputFunction.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_Use64BitNumber.side_effect = MockFunctionCallError("niFake_Use64BitNumber")
+        mock_library.niFake_Use64BitNumber.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_close.side_effect = MockFunctionCallError("niFake_close")
         mock_library.niFake_close.return_value = nifake.python_types.ViStatus(0)

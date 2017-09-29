@@ -180,6 +180,15 @@ class TestSession(object):
             session.one_input_function(test_number)
             self.patched_library.niFake_OneInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number)
 
+    def test_vi_int_64_function(self):
+        input_value = 1099511627776  # 2^40
+        output_value = 2199023255552  # 2^41
+        self.patched_library.niFake_Use64BitNumber.side_effect = self.side_effects_helper.niFake_Use64BitNumber
+        self.side_effects_helper['Use64BitNumber']['output'] = output_value
+        with nifake.Session('dev1') as session:
+            assert session.use64_bit_number(input_value) == output_value
+            self.patched_library.niFake_Use64BitNumber.assert_called_once_with(SESSION_NUM_FOR_TEST, input_value, ANY)
+
     def test_two_input_function(self):
         test_number = 1.5
         test_string = 'test'
