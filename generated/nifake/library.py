@@ -35,6 +35,7 @@ class Library(object):
         self.niFake_Initiate_cfunc = None
         self.niFake_OneInputFunction_cfunc = None
         self.niFake_Read_cfunc = None
+        self.niFake_ReadFromChannel_cfunc = None
         self.niFake_ReadMultiPoint_cfunc = None
         self.niFake_ReturnANumberAndAString_cfunc = None
         self.niFake_SetAttributeViBoolean_cfunc = None
@@ -195,6 +196,14 @@ class Library(object):
                 self.niFake_Read_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype, ctypes.POINTER(ViReal64_ctype)]  # noqa: F405
                 self.niFake_Read_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_Read_cfunc(vi, maximum_time, reading)
+
+    def niFake_ReadFromChannel(self, vi, channel_name, maximum_time, reading):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ReadFromChannel_cfunc is None:
+                self.niFake_ReadFromChannel_cfunc = self._library.niFake_ReadFromChannel
+                self.niFake_ReadFromChannel_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViInt32_ctype, ctypes.POINTER(ViReal64_ctype)]  # noqa: F405
+                self.niFake_ReadFromChannel_cfunc.restype = nifake.python_types.ViStatus
+        return self.niFake_ReadFromChannel_cfunc(vi, channel_name, maximum_time, reading)
 
     def niFake_ReadMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
         with self._func_lock:

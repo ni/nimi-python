@@ -3,11 +3,7 @@
 
 def filter_codegen_functions(functions):
     '''Returns function metadata only for those functions to be included in codegen'''
-    funcs = {}
-    for x in functions:
-        if functions[x]['codegen_method'] != 'no':
-            funcs[x] = functions[x]
-    return funcs
+    return {k: v for k, v in functions.items() if v['codegen_method'] != 'no'}
 
 
 def filter_input_parameters(parameters, session_name='vi'):

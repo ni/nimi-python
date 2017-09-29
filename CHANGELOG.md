@@ -8,6 +8,11 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 * #### ALL
   * #### Added
   * #### Changed
+    * Modified how methods with repeated capabilities are invoked. There's no longer (for example) a "channel_name" input. Instead:
+      ```python
+      # Sets sequence on channels 0 through 3
+      session['0-3'].set_sequence(values, source_delays)
+      ```
   * #### Removed
 * #### NI-DMM
   * #### Added
