@@ -9,7 +9,7 @@ attributes = {
     1050002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Range Check',
         'name': 'RANGE_CHECK',
         'resettable': 'No',
@@ -36,7 +36,7 @@ the default value by device.
     1050003: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Query Instrument Status',
         'name': 'QUERY_INSTRUMENT_STATUS',
         'resettable': 'No',
@@ -66,7 +66,7 @@ the default value by device.
     1050004: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Cache',
         'name': 'CACHE',
         'resettable': 'No',
@@ -95,7 +95,7 @@ the default value by device.
     1050005: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
         'resettable': 'No',
@@ -114,7 +114,7 @@ the default value by device.
     1050006: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Record Value Coercions',
         'name': 'RECORD_COERCIONS',
         'resettable': 'No',
@@ -170,7 +170,7 @@ empty string.
     1050021: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Interchange Check',
         'name': 'INTERCHANGE_CHECK',
         'resettable': 'No',
@@ -472,7 +472,7 @@ source to generate power.
     1150002: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Advanced:Auxiliary Power Source Available',
         'name': 'AUXILIARY_POWER_SOURCE_AVAILABLE',
         'resettable': 'No',
@@ -615,7 +615,7 @@ about enabling the output channel.
     1150006: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Measurement:Advanced:Reset Average Before Measurement',
         'name': 'RESET_AVERAGE_BEFORE_MEASUREMENT',
         'resettable': 'No',
@@ -655,7 +655,7 @@ information about supported devices.
     1150007: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Source:Advanced:Overranging Enabled',
         'name': 'OVERRANGING_ENABLED',
         'resettable': 'No',
@@ -2225,7 +2225,7 @@ information about supported devices.
     1150060: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Source:Output Connected',
         'name': 'OUTPUT_CONNECTED',
         'resettable': 'No',
@@ -2346,7 +2346,7 @@ the default value by device.
     1150064: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Measurement:Measure Record Length Is Finite',
         'name': 'MEASURE_RECORD_LENGTH_IS_FINITE',
         'resettable': 'No',
@@ -2694,7 +2694,7 @@ information about supported devices.
     1150078: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Source:Advanced:Sequence Loop Count Is Finite',
         'name': 'SEQUENCE_LOOP_COUNT_IS_FINITE',
         'resettable': 'No',
@@ -3449,7 +3449,7 @@ information about supported devices.
     1150105: {
         'access': 'read only',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Advanced:Interlock Input Open',
         'name': 'INTERLOCK_INPUT_OPEN',
         'resettable': 'No',
@@ -3510,7 +3510,7 @@ property for more information about enabling the output channel.
     1250002: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Source:Advanced:OVP Enabled',
         'name': 'OVP_ENABLED',
         'resettable': 'No',
@@ -3589,18 +3589,6 @@ information about supported devices.
 ''',
 },
     },
-    1250004: {
-        'access': 'read only',
-        'channel_based': 'False',
-        'enum': 'CurrentLimitBehavior',
-        'lv_property': '',
-        'name': 'CURRENT_LIMIT_BEHAVIOR',
-        'resettable': 'No',
-        'type': 'ViInt32',
-'documentation': {
-'description': '',
-},
-    },
     1250005: {
         'access': 'read-write',
         'channel_based': 'False',
@@ -3638,7 +3626,7 @@ property for more information about enabling the output channel.
     1250006: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'tBoolean',
+        'enum': None,
         'lv_property': 'Source:Output Enabled',
         'name': 'OUTPUT_ENABLED',
         'resettable': 'No',
