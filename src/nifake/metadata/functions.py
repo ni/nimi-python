@@ -1136,6 +1136,34 @@ functions = {
         },
     },
 
+    'EnumInputFunctionWithDefaults': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi**',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': 'Turtle',
+                'name': 'aTurtle',
+                'type': 'ViInt16',
+                'documentation': {
+                    'description': 'Indicates a ninja turtle',
+                    'table_body': [['0', 'Leonardo'], ['1', 'Donatello'], ['2', 'Raphael'], ['3', 'Mich elangelo']],
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.',
+        },
+    },
     #TODO(marcoskirsch): Lots more cases to add:
     #     Returning arrays (not strings) through all 3 mechanisms
     #     Returning strings using ivi-dance
