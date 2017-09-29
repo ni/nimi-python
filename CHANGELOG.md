@@ -27,6 +27,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * Removed methods that aren’t useful in the Python bindings.
 * #### NI-DCPower
   * #### Added
+    * Initial release
   * #### Changed
   * #### Removed
 
@@ -50,7 +51,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
       ```
 * #### NI-SWITCH
   * #### Added
-    * Initial Release
+    * Initial release
 
 ## [0.1.0] - 2017-09-01
 * ### NI-DMM
