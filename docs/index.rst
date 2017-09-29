@@ -12,6 +12,7 @@ NI Modular Instruments Python Documentation
    :maxdepth: 1
    :caption: Drivers
 
+   nidcpower
    nidmm
    niswitch
    nimodinst
