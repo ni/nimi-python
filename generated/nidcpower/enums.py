@@ -295,8 +295,3 @@ class VoltageLimitAutorange(Enum):
     '''
     NI-DCPower automatically selects the voltage limit range.
     '''
-
-
-class tBoolean(Enum):
-    FALSE = 0
-    TRUE = 1

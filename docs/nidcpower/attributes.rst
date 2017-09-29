@@ -222,17 +222,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read only           |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | bool      |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -261,17 +261,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -614,30 +614,6 @@ nidcpower.Session properties
 
             - LabVIEW Property: **Source:DC Voltage:Current Limit Autorange**
             - C Attribute: **NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE**
-
-.. py:attribute:: current_limit_behavior
-
-    
-
-    The following table lists the characteristics of this property.
-
-    +----------------+---------------------------------+
-    | Characteristic | Value                           |
-    +================+=================================+
-    | Datatype       | :py:data:`CurrentLimitBehavior` |
-    +----------------+---------------------------------+
-    | Permissions    | read only                       |
-    +----------------+---------------------------------+
-    | Channel Based  | False                           |
-    +----------------+---------------------------------+
-    | Resettable     | No                              |
-    +----------------+---------------------------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: ****
-            - C Attribute: **NIDCPOWER_ATTR_CURRENT_LIMIT_BEHAVIOR**
 
 .. py:attribute:: current_limit_range
 
@@ -1618,17 +1594,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1660,17 +1636,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read only           |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | bool      |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2024,17 +2000,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2187,17 +2163,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2233,17 +2209,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2378,17 +2354,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2437,17 +2413,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3408,17 +3384,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3445,17 +3421,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3593,17 +3569,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3644,17 +3620,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4155,17 +4131,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4184,17 +4160,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------+
-    | Characteristic | Value               |
-    +================+=====================+
-    | Datatype       | :py:data:`tBoolean` |
-    +----------------+---------------------+
-    | Permissions    | read-write          |
-    +----------------+---------------------+
-    | Channel Based  | False               |
-    +----------------+---------------------+
-    | Resettable     | No                  |
-    +----------------+---------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | bool       |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | No         |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

@@ -555,24 +555,3 @@ Enums used in NI-DCPower
 
         
 
-
-
-.. py:data:: tBoolean
-
-    .. py:attribute:: FALSE
-
-
-
-        
-
-        
-
-
-    .. py:attribute:: TRUE
-
-
-
-        
-
-        
-

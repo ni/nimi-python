@@ -15,11 +15,11 @@ class _Acquisition(object):
         self._session = session
 
     def __enter__(self):
-        self._session.initiate()
+        self._session._initiate()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session.abort()
+        self._session._abort()
 
 
 class _SessionBase(object):
@@ -116,7 +116,7 @@ class _SessionBase(object):
 
     `Auto Zero <NI_DC_Power_Supplies_Help.chm::/AutoZero.html>`__
     '''
-    auxiliary_power_source_available = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1150002)
+    auxiliary_power_source_available = attributes.AttributeViBoolean(1150002)
     '''
     Indicates whether an auxiliary power source is connected to the device.
 
@@ -140,7 +140,7 @@ class _SessionBase(object):
     Use <pniDCPower_PowerSourceInUse.html>`__ property to retrieve that
     information.
     '''
-    cache = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1050004)
+    cache = attributes.AttributeViBoolean(1050004)
     '''
     Specifies whether to cache the value of properties.
 
@@ -329,10 +329,6 @@ class _SessionBase(object):
     **Related topics:**
 
     `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
-    '''
-    current_limit_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CurrentLimitBehavior, 1250004)
-    '''
-    
     '''
     current_limit_range = attributes.AttributeViReal64(1150004)
     '''
@@ -786,7 +782,7 @@ class _SessionBase(object):
     '''
     Contains the model number or name of the device you are currently using.
     '''
-    interchange_check = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1050021)
+    interchange_check = attributes.AttributeViBoolean(1050021)
     '''
     Specifies whether to perform interchangeability checking and log
     interchangeability warnings when you call NI-DCPower VIs. TRUE specifies
@@ -813,7 +809,7 @@ class _SessionBase(object):
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
     '''
-    interlock_input_open = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1150105)
+    interlock_input_open = attributes.AttributeViBoolean(1150105)
     '''
     Indicates whether the safety interlock circuit is open.
 
@@ -974,7 +970,7 @@ class _SessionBase(object):
 
     Note: This property is not available in a session involving multiple channels.
     '''
-    measure_record_length_is_finite = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1150064)
+    measure_record_length_is_finite = attributes.AttributeViBoolean(1150064)
     '''
     Specifies whether to take continuous measurements. Call the `niDCPower
     Abort <NIDCPowerVIRef.chm::/niDCPower_Abort.html>`__ VI to stop
@@ -1048,7 +1044,7 @@ class _SessionBase(object):
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     information about supported devices.
     '''
-    output_connected = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1150060)
+    output_connected = attributes.AttributeViBoolean(1150060)
     '''
     Specifies whether the output relay is connected (closed) or disconnected
     (open). The `Output Enabled <pniDCPower_OutputEnabled.html>`__ property
@@ -1070,7 +1066,7 @@ class _SessionBase(object):
     electromechanical relays, such as those used by the NI PXI-4132 or NI
     PXIe-4138/39.
     '''
-    output_enabled = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1250006)
+    output_enabled = attributes.AttributeViBoolean(1250006)
     '''
     Specifies whether the output is enabled (TRUE) or disabled (FALSE).
 
@@ -1154,7 +1150,7 @@ class _SessionBase(object):
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     information about supported devices.
     '''
-    overranging_enabled = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1150007)
+    overranging_enabled = attributes.AttributeViBoolean(1150007)
     '''
     Specifies whether NI-DCPower allows setting the `voltage
     level <NIDCPowerVIRef.chm::/niDCPower_Configure_Voltage_Level.html>`__,
@@ -1179,7 +1175,7 @@ class _SessionBase(object):
 
     `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
     '''
-    ovp_enabled = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1250002)
+    ovp_enabled = attributes.AttributeViBoolean(1250002)
     '''
     Enables (TRUE) or disables (FALSE) overvoltage protection (OVP).
 
@@ -1668,7 +1664,7 @@ class _SessionBase(object):
     Enabled <pniDCPower_OutputEnabled.html>`__ property for more information
     about enabling the output channel.
     '''
-    query_instrument_status = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1050003)
+    query_instrument_status = attributes.AttributeViBoolean(1050003)
     '''
     Specifies whether NI-DCPower queries the device status after each
     operation.
@@ -1688,7 +1684,7 @@ class _SessionBase(object):
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
     '''
-    range_check = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1050002)
+    range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate property values and VI parameters.
 
@@ -1753,7 +1749,7 @@ class _SessionBase(object):
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     information about supported devices.
     '''
-    record_coercions = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1050006)
+    record_coercions = attributes.AttributeViBoolean(1050006)
     '''
     Specifies whether the IVI engine records the value coercions it makes
     for ViInt32 and ViReal64 properties.
@@ -1770,7 +1766,7 @@ class _SessionBase(object):
     Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
     the default value by device.
     '''
-    reset_average_before_measurement = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1150006)
+    reset_average_before_measurement = attributes.AttributeViBoolean(1150006)
     '''
     Specifies whether the measurement returned from any measurement call
     starts with a new measurement call (TRUE) or returns a measurement that
@@ -2040,7 +2036,7 @@ class _SessionBase(object):
     Finite <pniDCPower_SequenceLoopCountIsFinite.html>`__ property is set to
     FALSE, the Sequence Loop Count property is ignored.
     '''
-    sequence_loop_count_is_finite = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1150078)
+    sequence_loop_count_is_finite = attributes.AttributeViBoolean(1150078)
     '''
     Specifies whether a sequence should repeat indefinitely.
 
@@ -2061,7 +2057,7 @@ class _SessionBase(object):
     Finite property is set to FALSE, the `Sequence Loop
     Count <pniDCPower_SequenceLoopCount.html>`__ property is ignored.
     '''
-    simulate = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.tBoolean, 1050005)
+    simulate = attributes.AttributeViBoolean(1050005)
     '''
     Specifies whether to simulate NI-DCPower I/O operations. TRUE specifies
     that operation is simulated.
@@ -2491,262 +2487,6 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    def cal_adjust_current_limit(self, range, number_of_measurements, requested_outputs, measured_outputs):
-        '''cal_adjust_current_limit
-
-        Vistatus cal_adjust_current_limit(ViSession vi, ViConstString
-        channelName, ViReal64 range, ViUInt32 numberOfMeasurements, ViReal64
-        requestedOutputs[], ViReal64 measuredOutputs[]);
-
-        Calculates the calibration constants for the current limit for the
-        specified output channel and range. This function compares the array in
-        **requestedOutputs** to the array in **measuredOutputs** and calculates
-        the calibration constants for the current limit returned by the device.
-        Refer to the calibration procedure for the device you are calibrating
-        for detailed instructions on the appropriate use of this function. This
-        function can only be called from an external calibration session.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the channel name to which these calibration settings apply.
-            range (float):Specifies the range to calibrate with these settings. Only one channel
-                at a time may be calibrated.
-            number_of_measurements (int):Specifies the number of elements in **requestedOutputs** and
-                **measuredOutputs**.
-            requested_outputs (float):Specifies an array of the output values that were requested in the
-                `configure_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureCurrentLimit.html')>`__
-                function.
-            measured_outputs (float):Specifies an array of the output values measured by an external
-                precision digital multimeter.
-        '''
-        error_code = self._library.niDCPower_CalAdjustCurrentLimit(self._vi, self._repeated_capability.encode('ascii'), range, number_of_measurements, requested_outputs, measured_outputs)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def cal_adjust_current_measurement(self, range, number_of_measurements, reported_outputs, measured_outputs):
-        '''cal_adjust_current_measurement
-
-        Vistatus cal_adjust_current_measurement(ViSession vi,
-        ViConstString channelName, ViReal64 range, ViUInt32
-        numberOfMeasurements, ViReal64 reportedOutputs[], ViReal64
-        measuredOutputs[]);
-
-        Calibrates the current measurements returned by the
-        `measure <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Measure.html')>`__
-        function for the specified output channel. This function calculates new
-        calibration coefficients for the specified current measurement range
-        based on the **reportedOutputs** and **measuredOutputs**. Refer to the
-        calibration procedure for the device you are calibrating for detailed
-        instructions about the appropriate use of this function. This function
-        can only be called in an external calibration session.
-
-        Args:
-            channel_name (int):Specifies the output channel name to which these calibration settings
-                apply.
-            range (float):Specifies the range to calibrate with these settings. Only one channel
-                at a time may be calibrated.
-            number_of_measurements (int):Specifies the number of elements in **reportedOutputs** and
-                **measuredOutputs**.
-            reported_outputs (float):Specifies an array of the output values that were returned by the
-                `measure <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Measure.html')>`__
-                function.
-            measured_outputs (float):Specifies an array of the output values measured by an external
-                precision digital multimeter.
-        '''
-        error_code = self._library.niDCPower_CalAdjustCurrentMeasurement(self._vi, self._repeated_capability.encode('ascii'), range, number_of_measurements, reported_outputs, measured_outputs)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def cal_adjust_output_resistance(self, number_of_measurements, requested_outputs, measured_outputs):
-        '''cal_adjust_output_resistance
-
-        Vistatus cal_adjust_output_resistance(ViSession vi,
-        ViConstString channelName, ViUInt32 numberOfValues, ViReal64
-        requestedOutputs[], ViReal64 measuredOutputs[]);
-
-        Compares the array in **requestedOutputs** to the array in
-        **measuredOutputs** and calculates the calibration constants for the
-        output resistance of the specified channel. Refer to the calibration
-        procedure for the device you are calibrating for detailed instructions
-        on the appropriate use of this function. This function can only be
-        called from an external calibration session.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel name to which these calibration settings
-                apply. Only one channel at a time can be calibrated.
-            number_of_measurements (int):Specifies the number of elements in **requestedOutputs** and
-                **measuredOutputs**.
-            requested_outputs (float):Specifies an array of the output values that were requested in the
-                `configure_output_resistance <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputResistance.html')>`__
-                function.
-            measured_outputs (float):Specifies an array of the output values measured by an external
-                precision digital multimeter.
-        '''
-        error_code = self._library.niDCPower_CalAdjustOutputResistance(self._vi, self._repeated_capability.encode('ascii'), number_of_measurements, requested_outputs, measured_outputs)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def cal_adjust_residual_current_offset(self):
-        '''cal_adjust_residual_current_offset
-
-        Vistatus cal_adjust_residual_current_offset(ViSession vi,
-        ViConstString channelName);
-
-        Calculates the calibration constants for the residual current offsets
-        for the specified output channel. Residual offsets account for minor
-        offset effects on the device that lie outside of the self-calibration
-        circuitry. These offsets can include multiplexer input offsets and
-        leakage effects from internal switching.
-
-        This function requires that the output be open prior to it being
-        invoked.
-
-        Refer to the calibration procedure for the device you are calibrating
-        for detailed instructions on the appropriate use of this function. This
-        function can be called only in an external calibration session.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-        '''
-        error_code = self._library.niDCPower_CalAdjustResidualCurrentOffset(self._vi, self._repeated_capability.encode('ascii'))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def cal_adjust_residual_voltage_offset(self):
-        '''cal_adjust_residual_voltage_offset
-
-        Vistatus cal_adjust_residual_voltage_offset(ViSession vi,
-        ViConstString channelName);
-
-        Calculates the calibration constants for the residual voltage offsets
-        for the specified output channel. Residual offsets account for minor
-        offset effects on the device that lie outside of the self-calibration
-        circuitry. These offsets can include multiplexer input offsets and
-        leakage effects from internal switching.
-
-        This function requires that the output be shorted prior to it being
-        invoked.
-
-        Refer to the calibration procedure for the device you are calibrating
-        for detailed instructions on the appropriate use of this function. This
-        function can be called only in an external calibration session.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-        '''
-        error_code = self._library.niDCPower_CalAdjustResidualVoltageOffset(self._vi, self._repeated_capability.encode('ascii'))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def cal_adjust_voltage_level(self, range, number_of_measurements, requested_outputs, measured_outputs):
-        '''cal_adjust_voltage_level
-
-        Vistatus cal_adjust_voltage_level(ViSession vi,ViConstString
-        channelName, ViReal64 range, ViUInt32 numberOfMeasurements, ViReal64
-        requestedOutputs[], ViReal64 measuredOutputs[]);
-
-        Calculates the calibration constants for the voltage level for the
-        specified output channel. This function compares the array in
-        **requestedOutputs** to the array in **measuredOutputs** and calculates
-        the calibration constants for the voltage level of the output channel.
-        Refer to the calibration procedure of the device you are calibrating for
-        detailed instructions on the appropriate use of this function. This
-        function can be called only in an external calibration session.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel to which these calibration settings apply.
-            range (float):Specifies the range to calibrate with these settings. Only one channel
-                at a time may be calibrated.
-            number_of_measurements (int):Specifies the number of elements in **requestedOutputs** and
-                **measuredOutputs**.
-            requested_outputs (float):Specifies an array of the output values requested in the
-                `configure_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLevel.html')>`__
-                function.
-            measured_outputs (float):Specifies an array of the output values measured by an external
-                precision digital multimeter.
-        '''
-        error_code = self._library.niDCPower_CalAdjustVoltageLevel(self._vi, self._repeated_capability.encode('ascii'), range, number_of_measurements, requested_outputs, measured_outputs)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def cal_adjust_voltage_measurement(self, range, number_of_measurements, reported_outputs, measured_outputs):
-        '''cal_adjust_voltage_measurement
-
-        Vistatus cal_adjust_voltage_measurement(ViSession vi,
-        ViConstString channelName, ViReal64 range, ViUInt32
-        numberOfMeasurements, ViReal64 reportedOutputs[], ViReal64
-        measuredOutputs[]);
-
-        Calculates the calibration constants for the voltage measurements
-        returned by the
-        `measure <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Measure.html')>`__
-        function for the specified output channel. This function compares the
-        array in **reportedOutputs** to the array in **measuredOutputs** and
-        calculates the calibration constants for the voltage measurements
-        returned by the measure function. Refer to the calibration
-        procedure for the device you are calibrating for detailed instructions
-        on the appropriate use of this function. This function can only be
-        called in an external calibration session.
-
-        Args:
-            channel_name (int):Specifies the channel name to which these calibration settings apply.
-            range (float):Specifies the range to calibrate with these settings. Only one channel
-                at a time may be calibrated.
-            number_of_measurements (int):Specifies the number of elements in **reportedOutputs** and
-                **measuredOutputs**.
-            reported_outputs (float):Specifies an array of the output values that were returned by the
-                `measure <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Measure.html')>`__
-                function.
-            measured_outputs (float):Specifies an array of the output values measured by an external
-                precision digital multimeter.
-        '''
-        error_code = self._library.niDCPower_CalAdjustVoltageMeasurement(self._vi, self._repeated_capability.encode('ascii'), range, number_of_measurements, reported_outputs, measured_outputs)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def cal_self_calibrate(self):
         '''cal_self_calibrate
 
@@ -2880,7 +2620,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            auto_zero (int):Specifies the auto-zero setting. Refer to the *Measurement Configuration
+            auto_zero (enums.AutoZero):Specifies the auto-zero setting. Refer to the *Measurement Configuration
                 and Timing* topic and the *Auto Zero* topic for your device for more
                 information about how to configure your measurements.
                 **Defined Values:**
@@ -2893,7 +2633,9 @@ class _SessionBase(object):
                 | NIDCPOWER_VAL_ON (1)      | Makes zero conversions for every measurement.                                                                                                                                                                     |
                 +---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureAutoZero(self._vi, self._repeated_capability.encode('ascii'), auto_zero)
+        if type(auto_zero) is not enums.AutoZero:
+            raise TypeError('Parameter mode must be of type ' + str(enums.AutoZero))
+        error_code = self._library.niDCPower_ConfigureAutoZero(self._vi, self._repeated_capability.encode('ascii'), auto_zero.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3097,7 +2839,7 @@ class _SessionBase(object):
         If the device is in the
         `Uncommitted <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#uncommitted')>`__
         state, enabling the output does not take effect until you call the
-        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_Initiate.html')>`__
+        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_Initiate.html')>`__
         function.
 
         Args:
@@ -4120,7 +3862,7 @@ class _SessionBase(object):
         should not be used when the
         `MEASURE_WHEN <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_MEASURE_WHEN.html')>`__
         attribute is set to NIDCPOWER_VAL_ON_DEMAND. You must first call
-        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
+        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
         before calling this function.
 
         Refer to the `Acquiring
@@ -4174,10 +3916,10 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(voltage_measurements_ctype.value), python_types.ViReal64(current_measurements_ctype.value), python_types.ViBoolean(in_compliance_ctype.value), python_types.ViInt32(actual_count_ctype.value)
 
-    def get_attribute_vi_boolean(self, attribute_id):
-        '''get_attribute_vi_boolean
+    def _get_attribute_vi_boolean(self, attribute_id):
+        '''_get_attribute_vi_boolean
 
-        Vistatus get_attribute_vi_boolean(ViSession vi, ViConstString
+        Vistatus _get_attribute_vi_boolean(ViSession vi, ViConstString
         channelName, ViAttr attribute, ViBoolean \*value);
 
         | Queries the value of a ViBoolean attribute.
@@ -4226,10 +3968,10 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(attribute_value_ctype.value)
 
-    def get_attribute_vi_int32(self, attribute_id):
-        '''get_attribute_vi_int32
+    def _get_attribute_vi_int32(self, attribute_id):
+        '''_get_attribute_vi_int32
 
-        Vistatus get_attribute_vi_int32(ViSession vi, ViConstString
+        Vistatus _get_attribute_vi_int32(ViSession vi, ViConstString
         channelName, ViAttr attribute, ViInt32 \*value);
 
         | Queries the value of a ViInt32 attribute.
@@ -4278,10 +4020,10 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(attribute_value_ctype.value)
 
-    def get_attribute_vi_int64(self, attribute_id):
-        '''get_attribute_vi_int64
+    def _get_attribute_vi_int64(self, attribute_id):
+        '''_get_attribute_vi_int64
 
-        Vistatus get_attribute_vi_int64(ViSession vi, ViConstString
+        Vistatus _get_attribute_vi_int64(ViSession vi, ViConstString
         channelName, ViAttr attribute, ViInt64 \*value);
 
         | Queries the value of a ViInt64 attribute.
@@ -4330,10 +4072,10 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt64(attribute_value_ctype.value)
 
-    def get_attribute_vi_real64(self, attribute_id):
-        '''get_attribute_vi_real64
+    def _get_attribute_vi_real64(self, attribute_id):
+        '''_get_attribute_vi_real64
 
-        Vistatus get_attribute_vi_real64(ViSession vi, ViConstString
+        Vistatus _get_attribute_vi_real64(ViSession vi, ViConstString
         channelName, ViAttr attribute, ViReal64 \*value);
 
         | Queries the value of a ViReal64 attribute.
@@ -4382,62 +4124,10 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(attribute_value_ctype.value)
 
-    def get_attribute_vi_session(self, attribute_id):
-        '''get_attribute_vi_session
+    def _get_attribute_vi_string(self, attribute_id):
+        '''_get_attribute_vi_string
 
-        Vistatus get_attribute_vi_session(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViSession \*value);
-
-        | Queries the value of a ViSession attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Help text is shown for each attribute.
-                   Select an attribute by double-clicking on it or by selecting it and
-                   then pressing **Enter**.
-                -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViSession. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViSession are dim. If you select an attribute data type that is
-                   dim, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-
-        Returns:
-            attribute_value (int):Returns the current value of the attribute. Passes the address of a
-                ViSession variable.
-                If the attribute currently showing in the attribute ring control has
-                constants as valid values, you can view a list of the constants by
-                pressing **Enter** on this control. Select a value by double-clicking on
-                it or by selecting it and then pressing **Enter**.
-        '''
-        attribute_value_ctype = ctypes_types.ViSession_ctype(0)
-        error_code = self._library.niDCPower_GetAttributeViSession(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(attribute_value_ctype.value)
-
-    def get_attribute_vi_string(self, attribute_id, buffer_size):
-        '''get_attribute_vi_string
-
-        ViStatus get_attribute_vi_string(ViSession vi, ViConstString
+        ViStatus _get_attribute_vi_string(ViSession vi, ViConstString
         channelName, ViAttr attribute, ViInt32 bufSize, ViChar value[]);
 
         | Queries the value of a ViString attribute.
@@ -4484,61 +4174,16 @@ class _SessionBase(object):
                 and VI_NULL for **value**. If you want the function to fill in the
                 buffer regardless of the number of bytes in the value, pass a negative
                 number for this attribute.
-
-        Returns:
-            attribute_value (int):The buffer in which the function returns the current value of the
-                attribute. The buffer must be of type ViChar and have at least as many
-                bytes as indicated in **bufSize**.
-                If the current value of the attribute, including the terminating NUL
-                byte, contains more bytes that you indicate in this attribute, the
-                function copies (buffer size -1) bytes into the buffer, places an ASCII
-                NUL byte at the end of the buffer, and returns the buffer size you must
-                pass to get the entire value. For example, if the value is 123456 and
-                the buffer size is 4, the function places 123 into the buffer and
-                returns 7.
-                If you specify 0 for **bufSize**, you can pass VI_NULL for this
-                attribute.
-                If the attribute currently showing in the attribute ring control has
-                constants as valid values, you can view a list of the constants by
-                pressing on this control. Select a value by double-clicking on it or by
-                selecting it and then pressing .
         '''
-        attribute_value_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDCPower_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, ctypes.pointer(attribute_value_ctype))
+        buffer_size = 0
+        attribute_value_ctype = None
+        error_code = self._library.niDCPower_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size = error_code
+        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        error_code = self._library.niDCPower_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(attribute_value_ctype.value)
-
-    def get_channel_name(self, index, buffer_size):
-        '''get_channel_name
-
-        ViStatus get_channel_name(ViSession vi, ViInt32 index, ViInt32
-        bufferSize, ViChar channelName[]);
-
-        Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the
-        `CHANNEL_COUNT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CHANNEL_COUNT.html')>`__
-        attribute to determine the upper bound of valid values for **index**.
-
-        Args:
-            index (int):Specifies which output channel name to return. The index values begin at
-                1.
-            buffer_size (int):Specifies the number of bytes in the ViChar array you specify for
-                **channelName**. If the **channelName**, including the terminating NUL
-                byte, contains more bytes than you indicate in this attribute, the
-                function copies (buffer size - 1) bytes into the buffer, places an ASCII
-                NUL byte at the end of the buffer, and returns the buffer size you must
-                pass to get the entire value. For example, if the value is 123456 and
-                the buffer size is 4, the function places 123 into the buffer and
-                returns 7.
-                If you pass 0, you can pass VI_NULL for **channelName**.
-
-        Returns:
-            channel_name (int):Returns the output channel name that corresponds to **index**.
-        '''
-        channel_name_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDCPower_GetChannelName(self._vi, index, buffer_size, ctypes.pointer(channel_name_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(channel_name_ctype.value)
+        return attribute_value_ctype.value.decode("ascii")
 
     def measure(self, measurement_type):
         '''measure
@@ -4766,10 +4411,10 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(in_state_ctype.value)
 
-    def set_attribute_vi_boolean(self, attribute_id, attribute_value):
-        '''set_attribute_vi_boolean
+    def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_boolean
 
-        Vistatus set_attribute_vi_boolean(ViSession vi, ViConstString
+        Vistatus _set_attribute_vi_boolean(ViSession vi, ViConstString
         channelName, ViAttr attribute, ViBoolean value);
 
         | Sets the value of a ViBoolean attribute.
@@ -4820,10 +4465,10 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_attribute_vi_int32(self, attribute_id, attribute_value):
-        '''set_attribute_vi_int32
+    def _set_attribute_vi_int32(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_int32
 
-        Vistatus set_attribute_vi_int32(ViSession vi, ViConstString
+        Vistatus _set_attribute_vi_int32(ViSession vi, ViConstString
         channelName, ViAttr attribute, ViInt32 value);
 
         | Sets the value of a ViInt32 attribute.
@@ -4874,10 +4519,10 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_attribute_vi_int64(self, attribute_id, attribute_value):
-        '''set_attribute_vi_int64
+    def _set_attribute_vi_int64(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_int64
 
-        Vistatus set_attribute_vi_int64(ViSession vi, ViConstString
+        Vistatus _set_attribute_vi_int64(ViSession vi, ViConstString
         channelName, ViAttr attribute, ViInt64 value);
 
         | Sets the value of a ViInt64 attribute.
@@ -4928,10 +4573,10 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_attribute_vi_real64(self, attribute_id, attribute_value):
-        '''set_attribute_vi_real64
+    def _set_attribute_vi_real64(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_real64
 
-        Vistatus set_attribute_vi_real64(ViSession vi, ViConstString
+        Vistatus _set_attribute_vi_real64(ViSession vi, ViConstString
         channelName, ViAttr attribute, ViReal64 value);
 
         | Sets the value of a ViReal64 attribute.
@@ -4982,64 +4627,10 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_attribute_vi_session(self, attribute_id, attribute_value):
-        '''set_attribute_vi_session
+    def _set_attribute_vi_string(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_string
 
-        Vistatus set_attribute_vi_session(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViSession value);
-
-        | Sets the value of a ViSession attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
-                   double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViSession. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViSession are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
-                   that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-            attribute_value (int):Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
-                as valid values, you can view a list of the constants by pressing
-                **Enter** on this control. Select a value by double-clicking on it or by
-                selecting it and then pressing **Enter**.
-
-                Note:
-                Some of the values might not be valid depending upon the current
-                settings of the device session.
-        '''
-        error_code = self._library.niDCPower_SetAttributeViSession(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def set_attribute_vi_string(self, attribute_id, attribute_value):
-        '''set_attribute_vi_string
-
-        Vistatus set_attribute_vi_string(ViSession vi, ViConstString
+        Vistatus _set_attribute_vi_string(ViSession vi, ViConstString
         channelName, ViAttr attribute, ViConstString value);
 
         | Sets the value of a ViString attribute.
@@ -5076,7 +4667,7 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
-            attribute_value (int):Specifies the value to which you want to set the attribute. If the
+            attribute_value (str):Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
@@ -5086,7 +4677,7 @@ class _SessionBase(object):
                 Some of the values might not be valid depending upon the current
                 settings of the device session.
         '''
-        error_code = self._library.niDCPower_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niDCPower_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5180,18 +4771,18 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def abort(self):
-        '''abort
+    def _abort(self):
+        '''_abort
 
-        Vistatus abort(ViSession vi);
+        Vistatus _abort(ViSession vi);
 
         Transitions the NI-DCPower session from the Running state to the
         Committed state. If a sequence is running, it is stopped. Any
         configuration functions called after this function are not applied until
         the
-        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
+        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
         function is called. If power output is enabled when you call the
-        abort function, the output channels remain in their current
+        _abort function, the output channels remain in their current
         state and continue providing power.
 
         Use the
@@ -5214,125 +4805,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def cal_adjust_internal_reference(self, internal_reference, adjusted_internal_reference):
-        '''cal_adjust_internal_reference
-
-        Vistatus cal_adjust_internal_reference(ViSession vi, ViSession
-        vi, ViInt32 internal_reference, ViReal64
-        adjusted_internal_reference;
-
-        Programs the adjusted reference value to the device. Refer to the
-        calibration procedure for the device you are calibrating for detailed
-        instructions on the appropriate use of this function. This function can
-        only be called from an external calibration session.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            internal_reference (int):Specifies the internal reference to be connected to the calibration pin.
-                **Defined Values**:
-
-                +-------------------------------------------------+---------------------------------------------------------+
-                | NIDCPOWER_VAL_INTERNAL_REFERENCE_5V (1054)      | Calibration pin connected to 5 V internal reference.    |
-                +-------------------------------------------------+---------------------------------------------------------+
-                | NIDCPOWER_VAL_INTERNAL_REFERENCE_100KOHM (1055) | Calibration pin connected to 100 kΩ internal reference. |
-                +-------------------------------------------------+---------------------------------------------------------+
-            adjusted_internal_reference (float):Specifies the updated value of the internal reference that will be
-                programmed to the device.
-        '''
-        error_code = self._library.niDCPower_CalAdjustInternalReference(self._vi, internal_reference, adjusted_internal_reference)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def change_ext_cal_password(self, old_password, new_password):
-        '''change_ext_cal_password
-
-        Vistatus change_ext_cal_password(ViSession vi, ViConstString
-        oldPassword, ViConstString newPassword);
-
-        Changes the **password** that is required to initialize an external
-        calibration session. The **password** can be a maximum of four
-        alphanumeric characters. If you call this function in a session,
-        **password** is changed immediately. If you call this function in an
-        external calibration session, **password** is changed only after you
-        close the session using the
-        `close_ext_cal <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_CloseExtCal.html')>`__
-        function with **action** set to NIDCPOWER_VAL_COMMIT.
-
-        Args:
-            old_password (int):Specifies the previous password used to protect the calibration values.
-            new_password (int):Specifies the new password to use to protect the calibration values.
-        '''
-        error_code = self._library.niDCPower_ChangeExtCalPassword(self._vi, old_password, new_password)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def clear_error(self):
-        '''clear_error
-
-        Vistatus clear_error(ViSession vi);
-
-        | Clears the error code and error description for the IVI session. If
-          the user specifies a valid IVI session for **vi**, this function
-          clears the error information for the session. If the user passes
-          VI_NULL for **vi**, this function clears the error information for
-          the current execution thread. If the ViSession parameter is an invalid
-          session, the function does nothing and returns an error.
-        | The function clears the error code by setting it to VI_SUCCESS. If
-          the error description string is non-NULL, the function de-allocates
-          the error description string and sets the address to VI_NULL.
-        | Maintaining the error information separately for each thread is useful
-          if the user does not have a session handle to pass to the
-          `get_error <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_GetError.html')>`__
-          function, which occurs when a call to
-          `initialize_with_channels <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_InitializeWithChannels.html')>`__
-          fails.
-        '''
-        error_code = self._library.niDCPower_ClearError(self._vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def clear_interchange_warnings(self):
-        '''clear_interchange_warnings
-
-        Vistatus clear_interchange_warnings(ViSession vi);
-
-        Clears the list of current interchange warnings.
-        '''
-        error_code = self._library.niDCPower_ClearInterchangeWarnings(self._vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def close_ext_cal(self, action):
-        '''close_ext_cal
-
-        Vistatus close_ext_cal(ViSession vi, ViInt32 action);
-
-        Closes the session specified in **vi** and deallocates the resources
-        that NI-DCPower reserved for calibration. Refer to the calibration
-        procedure for the device you are calibrating for detailed instructions
-        on the appropriate use of this function.
-
-        Args:
-            action (int):Specifies how to use the calibration values from this session as the
-                session is closed.
-
-                **Defined Values**:
-
-                +-----------------------------+-------------------------------------------------------------------------+
-                | NIDCPOWER_VAL_COMMIT (1002) | The new calibration constants are stored in the EEPROM.                 |
-                +-----------------------------+-------------------------------------------------------------------------+
-                | NIDCPOWER_VAL_CANCEL (1001) | The old calibration constants are kept, and the new ones are discarded. |
-                +-----------------------------+-------------------------------------------------------------------------+
-        '''
-        error_code = self._library.niDCPower_CloseExtCal(self._vi, action)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def commit(self):
         '''commit
 
@@ -5343,7 +4815,7 @@ class Session(_SessionBase):
         the Committed state. After calling this function, modifying any
         attribute reverts the NI-DCPower session to the Uncommitted state. Use
         the
-        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
+        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
         function to transition to the Running state. Refer to the `Programming
         States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
         topic in the *NI DC Power Supplies and SMUs Help* for details about the
@@ -6181,44 +5653,10 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def get_cal_user_defined_info(self):
-        '''get_cal_user_defined_info
+    def _get_error(self):
+        '''_get_error
 
-        Vistatus get_cal_user_defined_info(ViSession vi, ViString info);
-
-        Returns the user-defined information in the device onboard EEPROM.
-
-        Returns:
-            info (int):Returns the user-defined information stored in the device onboard
-                EEPROM.
-        '''
-        info_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDCPower_GetCalUserDefinedInfo(self._vi, ctypes.pointer(info_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(info_ctype.value)
-
-    def get_cal_user_defined_info_max_size(self):
-        '''get_cal_user_defined_info_max_size
-
-        Vistatus get_cal_user_defined_info_max_size(ViSession vi,
-        ViInt32\*infoSize);
-
-        Returns the maximum number of characters that can be used to store
-        user-defined information in the device onboard EEPROM.
-
-        Returns:
-            info_size (int):Returns the number of characters that can be stored in the device
-                onboard EEPROM.
-        '''
-        info_size_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niDCPower_GetCalUserDefinedInfoMaxSize(self._vi, ctypes.pointer(info_size_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(info_size_ctype.value)
-
-    def get_error(self, buffer_size):
-        '''get_error
-
-        ViStatus get_error(ViSession vi, ViStatus \*code, ViInt32
+        ViStatus _get_error(ViSession vi, ViStatus \*code, ViInt32
         bufferSize, ViChar description[]);
 
         | Retrieves and then clears the IVI error information for the session or
@@ -6233,7 +5671,7 @@ class Session(_SessionBase):
           clears the error information for the current execution thread. If
           **vi** is an invalid session, the function does nothing and returns an
           error. Normally, the error information describes the first error that
-          occurred since the user last called get_error or
+          occurred since the user last called _get_error or
           `clear_error <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ClearError.html')>`__.
 
         Args:
@@ -6250,159 +5688,17 @@ class Session(_SessionBase):
 
         Returns:
             code (int):Returns the error code for the session or execution thread.
-            description (int):Returns the error description for the IVI session or execution thread.
-                If there is no description, the function returns an empty string.
-                The buffer must contain at least as many elements as the value you
-                specify with **bufferSize**. If the error description, including the
-                terminating NUL byte, contains more bytes than you indicate with
-                **bufferSize**, the function copies (buffer size - 1) bytes into the
-                buffer, places an ASCII NUL byte at the end of the buffer, and returns
-                the buffer size you must pass to get the entire value. For example, if
-                the value is 123456 and the buffer size is 4, the function places 123
-                into the buffer and returns 7.
-                If you pass 0 for **bufferSize**, you can pass VI_NULL for this
-                attribute.
         '''
         code_ctype = ctypes_types.ViStatus_ctype(0)
-        description_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDCPower_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, ctypes.pointer(description_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViStatus(code_ctype.value), python_types.ViChar(description_ctype.value)
-
-    def get_ext_cal_last_date_and_time(self):
-        '''get_ext_cal_last_date_and_time
-
-        Vistatus get_ext_cal_last_date_and_time(ViSession vi, ViInt32
-        \*year, ViInt32 \*month, ViInt32 \*day, ViInt32 \*hour, ViInt32
-        \*minute);
-
-        Returns the date and time of the last successful calibration. The time
-        returned is 24-hour (military) local time; for example, if the device
-        was calibrated at 2:30 PM, this function returns 14 for **hours** and 30
-        for **minutes**.
-
-        Returns:
-            year (int):Returns the **year** the device was last calibrated.
-            month (int):Returns the **month** in which the device was last calibrated.
-            day (int):Returns the **day** on which the device was last calibrated.
-            hour (int):Returns the **hour** (in 24-hour time) in which the device was last
-                calibrated.
-            minute (int):Returns the **minute** in which the device was last calibrated.
-        '''
-        year_ctype = ctypes_types.ViInt32_ctype(0)
-        month_ctype = ctypes_types.ViInt32_ctype(0)
-        day_ctype = ctypes_types.ViInt32_ctype(0)
-        hour_ctype = ctypes_types.ViInt32_ctype(0)
-        minute_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niDCPower_GetExtCalLastDateAndTime(self._vi, ctypes.pointer(year_ctype), ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(year_ctype.value), python_types.ViInt32(month_ctype.value), python_types.ViInt32(day_ctype.value), python_types.ViInt32(hour_ctype.value), python_types.ViInt32(minute_ctype.value)
-
-    def get_ext_cal_last_temp(self):
-        '''get_ext_cal_last_temp
-
-        Vistatus get_ext_cal_last_temp(ViSession vi, ViReal64
-        \*temperature);
-
-        Returns the onboard **temperature** of the device, in degrees Celsius,
-        during the last successful external calibration.
-
-        Returns:
-            temperature (float):Returns the onboard **temperature** of the device, in degrees Celsius,
-                during the last successful external calibration.
-        '''
-        temperature_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self._library.niDCPower_GetExtCalLastTemp(self._vi, ctypes.pointer(temperature_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(temperature_ctype.value)
-
-    def get_ext_cal_recommended_interval(self):
-        '''get_ext_cal_recommended_interval
-
-        Vistatus get_ext_cal_recommended_interval(ViSession vi, ViInt32
-        \*months);
-
-        Returns the recommended maximum interval, in **months**, between
-        external calibrations.
-
-        Returns:
-            months (int):Specifies the recommended maximum interval, in **months**, between
-                external calibrations.
-        '''
-        months_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niDCPower_GetExtCalRecommendedInterval(self._vi, ctypes.pointer(months_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(months_ctype.value)
-
-    def get_next_coercion_record(self, buffer_size):
-        '''get_next_coercion_record
-
-        ViStatus get_next_coercion_record(ViSession vi, ViInt32
-        bufferSize, ViChar coercionRecord[]);
-
-        Returns the coercion information associated with the IVI session and
-        clears the earliest instance in which NI-DCPower coerced a value you
-        specified.
-
-        Args:
-            buffer_size (int):Specifies the number of bytes in the ViChar array you specify for
-                **coercionRecord**. If the next coercion record string, including the
-                terminating NUL byte, contains more bytes than you indicate in this
-                attribute, the function copies (buffer size - 1) bytes into the buffer,
-                places an ASCII NUL byte at the end of the buffer, and returns the
-                buffer size you must pass to get the entire value. For example, if the
-                value is 123456 and the buffer size is 4, the function places 123 into
-                the buffer and returns 7.
-                If you pass 0, you can pass VI_NULL for **coercionRecord**.
-
-        Returns:
-            coercion_record (int):Returns the next **coercionRecord** for the IVI session. If there are no
-                **coercionRecords**, the function returns an empty string.
-        '''
-        coercion_record_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDCPower_GetNextCoercionRecord(self._vi, buffer_size, ctypes.pointer(coercion_record_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(coercion_record_ctype.value)
-
-    def get_next_interchange_warning(self, buffer_size):
-        '''get_next_interchange_warning
-
-        ViStatus get_next_interchange_warning(ViSession vi, ViInt32
-        bufferSize, ViChar interchangeWarning[]);
-
-        This function returns the interchangeability warning associated with the
-        IVI session. It retrieves and clears the earliest instance in which the
-        class driver recorded an interchangeability warning. Interchangeability
-        warnings indicate that using your application with a different device
-        may cause a different behavior.
-
-        NI-DCPower performs interchangeability checking when the
-        `INTERCHANGE_CHECK <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','NIDCPOWER_ATTR_INTERCHANGE_CHECK.html')>`__
-        attribute is set to VI_TRUE. This function returns an empty string in
-        warning if no interchangeability warnings remain for the session. In
-        general, NI-DCPower generates interchangeability warnings when an
-        attribute that affects the behavior of the device is in a state that you
-        did not specify.
-
-        Args:
-            buffer_size (int):Specifies the number of bytes in the ViChar array you specify for
-                **interchangeWarning**. If the next interchangeability warning string,
-                including the terminating NUL byte, contains more bytes than you
-                indicate in this attribute, the function copies (buffer size - 1) bytes
-                into the buffer, places an ASCII NUL byte at the end of the buffer, and
-                returns the buffer size you must pass to get the entire value. For
-                example, if the value is 123456 and the buffer size is 4, the function
-                places 123 into the buffer and returns 7.
-                If you pass 0, you can pass VI_NULL for **interchangeWarning**.
-
-        Returns:
-            interchange_warning (int):Returns the next interchange warning for the IVI session. If there are
-                no interchange warnings, the function returns an empty string.
-        '''
-        interchange_warning_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDCPower_GetNextInterchangeWarning(self._vi, buffer_size, ctypes.pointer(interchange_warning_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(interchange_warning_ctype.value)
+        buffer_size = 0
+        description_ctype = None
+        error_code = self._library.niDCPower_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        buffer_size = error_code
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        error_code = self._library.niDCPower_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return python_types.ViStatus(code_ctype.value), description_ctype.value.decode("ascii")
 
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
@@ -6474,47 +5770,10 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViReal64(temperature_ctype.value)
 
-    def init_ext_cal(self, resource_name, password):
-        '''init_ext_cal
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
+        '''_init_with_options
 
-        Vistatus init_ext_cal(ViRsrc resourceName, ViConstString
-        password, ViSession \*vi);
-
-        If **password** is valid, this function creates a new IVI instrument
-        driver session to the device specified in **resourceName** and returns
-        an instrument handle you use to identify the device in all subsequent
-        NI-DCPower function calls. This function also sends initialization
-        commands to set the device to the state necessary for the operation of
-        NI-DCPower.
-
-        Opening a calibration session always performs a reset. Refer to the
-        calibration procedure for the device you are calibrating for detailed
-        instructions on the appropriate use of this function. This function uses
-        the `deprecated programming state
-        model <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/initializedeprecatedmodel/>`__.
-
-        Args:
-            resource_name (str):Specifies the **resourceName** assigned by Measurement & Automation
-                Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
-                instrument's **resourceName**. **resourceName** can also be a logical
-                IVI name.
-            password (int):Specifies the **password** for opening a calibration session. The
-                initial password is factory configured to "NI". **password** can be a
-                maximum of four alphanumeric characters.
-
-        Returns:
-            vi (int):Returns a handle that you use to identify the session in all subsequent
-                NI-DCPower function calls.
-        '''
-        vi_ctype = ctypes_types.ViSession_ctype(0)
-        error_code = self._library.niDCPower_InitExtCal(resource_name.encode('ascii'), password, ctypes.pointer(vi_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(vi_ctype.value)
-
-    def init_with_options(self, resource_name, id_query, reset_device, option_string):
-        '''init_with_options
-
-        Vistatus init_with_options(ViRsrc resourceName, ViBoolean
+        Vistatus _init_with_options(ViRsrc resourceName, ViBoolean
         IDQuery, ViBoolean resetDevice, ViString optionString, ViSession \*vi);
 
         This function is deprecated. Use
@@ -6546,10 +5805,10 @@ class Session(_SessionBase):
         To open a session and leave the device in its existing configuration
         without passing through a transitional output state, set **resetDevice**
         to VI_FALSE, and immediately call the
-        `abort <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Abort.html')>`__
+        `_abort <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Abort.html')>`__
         function. Then configure the device as in the previous session changing
         only the desired settings, and then call the
-        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
+        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
         function.
 
         Refer to the `deprecated programming state
@@ -6621,7 +5880,7 @@ class Session(_SessionBase):
         without passing through a transitional output state, set **reset** to
         VI_FALSE. Then configure the device as in the previous session,
         changing only the desired settings, and then call the
-        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
+        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
         function.
 
         **Related Topics:**
@@ -6668,15 +5927,15 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViSession(vi_ctype.value)
 
-    def initiate(self):
-        '''initiate
+    def _initiate(self):
+        '''_initiate
 
-        Vistatus initiate(ViSession vi);
+        Vistatus _initiate(ViSession vi);
 
         Starts generation or acquisition, causing the NI-DCPower session to
         leave the Uncommitted state or Committed state and enter the Running
         state. To return to the Committed state call the
-        `abort <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Abort.html')>`__
+        `_abort <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Abort.html')>`__
         function. Refer to the `Programming
         States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
         topic in the *NI DC Power Supplies and SMUs Help* for information about
@@ -6690,97 +5949,6 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_Initiate(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def lock_session(self):
-        '''lock_session
-
-        Vistatus lock_session(ViSession vi, ViBoolean
-        \*callerHasLock);
-
-        | Obtains a multithread lock on the device session. Before doing so, the
-          software waits until all other execution threads release their locks
-          on the device session.
-        | Other threads may have obtained a lock on this session for the
-          following reasons:
-
-        -  The application called the lock_session function.
-        -  A call to NI-DCPower locked the session.
-        -  A call to the IVI engine locked the session.
-        -  After a call to the lock_session function returns
-           successfully, no other threads can access the device session until
-           you call the
-           `unlock_session <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_UnlockSession.html')>`__
-           function.
-        -  Use the lock_session function and the
-           unlock_session function around a sequence of calls to
-           instrument driver functions if you require that the device retain its
-           settings through the end of the sequence.
-
-        You can safely make nested calls to the lock_session function
-        within the same thread. To completely unlock the session, you must
-        balance each call to the lock_session function with a call to
-        the unlock_session function. If, however, you use
-        **caller_has_lock** in all calls to the lock_session and
-        unlock_session function within a function, the IVI Library
-        locks the session only once within the function regardless of the number
-        of calls you make to the lock_session function. This behavior
-        allows you to call the unlock_session function just once at
-        the end of the function.
-
-        Returns:
-            caller_has_lock (bool):| This parameter is optional. If you do not want to use this parameter,
-                  pass VI_NULL.
-                | Use this parameter in complex functions to keep track of whether you
-                  obtain a lock and therefore need to unlock the session. Pass the
-                  address of a local ViBoolean variable. In the declaration of the local
-                  variable, initialize it to VI_FALSE. Pass the address of the same
-                  local variable to any other calls you make to the
-                  lock_session function or the unlock_session
-                  function in the same function.
-                | The parameter is an input/output parameter. The lock_session
-                  and unlock_session functions each inspect the current value
-                  and take the following actions.
-
-                -  If the value is VI_TRUE, the lock_session function does
-                   not lock the session again.
-                -  If the value is VI_FALSE, the lock_session function
-                   obtains the lock and sets the value of the parameter to VI_TRUE.
-                -  If the value is VI_FALSE, the unlock_session function does
-                   not attempt to unlock the session.
-                -  If the value is VI_TRUE, the unlock_session function
-                   releases the lock and sets the value of the parameter to VI_FALSE.
-
-                | Thus, you can, call the unlock_session function at the end
-                  of your function without worrying about whether you actually have the
-                  lock, as shown in the following example.
-                | ViStatus TestFunc (ViSession vi, ViInt32 flags)
-                  {
-                  ViStatus error = VI_SUCCESS;
-                  ViBoolean haveLock = VI_FALSE;
-                  if (flags & BIT_1)
-                  {
-                  viCheckErr( lock_session(vi, &haveLock;));
-                  viCheckErr( TakeAction1(vi));
-                  if (flags & BIT_2)
-                  {
-                  viCheckErr( unlock_session(vi, &haveLock;));
-                  viCheckErr( TakeAction2(vi));
-                  viCheckErr( lock_session(vi, &haveLock;);
-                  }
-                  if (flags & BIT_3)
-                  viCheckErr( TakeAction3(vi));
-                  }
-                  Error:
-                  /\*At this point, you cannot really be sure that you have the lock.
-                  Fortunately, the haveLock variable takes care of that for you.\*/
-                  unlock_session(vi, &haveLock;);
-                  return error;
-                | }
-        '''
-        caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self._library.niDCPower_LockSession(self._vi, ctypes.pointer(caller_has_lock_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(caller_has_lock_ctype.value)
 
     def read_current_temperature(self):
         '''read_current_temperature
@@ -6819,52 +5987,6 @@ class Session(_SessionBase):
         relay.
         '''
         error_code = self._library.niDCPower_ResetDevice(self._vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def reset_interchange_check(self):
-        '''reset_interchange_check
-
-        Vistatus reset_interchange_check(ViSession vi);
-
-        When developing a complex test system that consists of multiple test
-        modules, it is generally a good idea to design the test modules so that
-        they can run in any order. To do so requires ensuring that each test
-        module completely configures the state of each instrument it uses. If a
-        particular test module does not completely configure the state of an
-        instrument, the state of the instrument depends on the configuration
-        from a previously executed test module. If you execute the test modules
-        in a different order, the behavior of the instrument and therefore the
-        entire test module is likely to change. This change in behavior is
-        generally instrument specific and represents an interchangeability
-        problem.
-
-        You can use this function to test for such cases. After you call this
-        function, the interchangeability checking algorithms in the specific
-        driver ignore all previous configuration operations. By calling this
-        function at the beginning of a test module, you can determine whether
-        the test module has dependencies on the operation of previously executed
-        test modules.
-
-        This function does not clear the interchangeability warnings from the
-        list of previously recorded interchangeability warnings. If you want to
-        guarantee that the
-        `get_next_interchange_warning <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_GetNextInterchangeWarning.html')>`__
-        function only returns those interchangeability warnings that are
-        generated after calling this function, you must clear the list of
-        interchangeability warnings. You can clear the interchangeability
-        warnings list by repeatedly calling the
-        get_next_interchange_warning function until no more
-        interchangeability warnings are returned. If you are not interested in
-        the content of those warnings, you can call the
-        `clear_interchange_warnings <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ClearInterchangeWarnings.html')>`__
-        function.
-
-        Note:
-        get_next_interchange_warning does not mark any attributes for
-        an interchange check.
-        '''
-        error_code = self._library.niDCPower_ResetInterchangeCheck(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6925,96 +6047,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_cal_user_defined_info(self, info):
-        '''set_cal_user_defined_info
-
-        Vistatus set_cal_user_defined_info(ViSession vi, ViConstString
-        info);
-
-        Stores a user-defined string of characters in the device onboard EEPROM.
-        If the string is longer than the maximum allowable size, it is
-        truncated. This function overwrites any existing user-defined
-        information.
-
-        If you call this function in a session, **info** is immediately changed.
-        If you call this function in an external calibration session, **info**
-        is changed only after you close the session using the
-        `close_ext_cal <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_CloseExtCal.html')>`__
-        function with **action** set to NIDCPOWER_VAL_COMMIT.
-
-        Args:
-            info (int):Specifies the string to store in the device onboard EEPROM.
-        '''
-        error_code = self._library.niDCPower_SetCalUserDefinedInfo(self._vi, info)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def unlock_session(self):
-        '''unlock_session
-
-        Vistatus unlock_session(ViSession vi, ViBoolean
-        \*callerHasLock);
-
-        Releases a lock that you acquired on an device session using
-        `lock_session <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_LockSession.html')>`__.
-        Refer to lock_session for additional information on session
-        locks.
-
-        Returns:
-            caller_has_lock (bool):| This attribute is optional. If you do not want to use this attribute,
-                  pass VI_NULL.
-                | Use this attribute in complex functions to keep track of whether you
-                  obtain a lock and therefore need to unlock the session.
-                | Pass the address of a local ViBoolean variable. In the declaration of
-                  the local variable, initialize it to VI_FALSE. Pass the address of
-                  the same local variable to any other calls you make to
-                  lock_session or unlock_session in the same
-                  function.
-                | The parameter is an input/output parameter. lock_session and
-                  unlock_session each inspect the current value and take the
-                  following actions.
-
-                -  If the value is VI_TRUE, lock_session does not lock the
-                   session again.
-                -  If the value is VI_FALSE, lock_session obtains the lock
-                   and sets the value of the parameter to VI_TRUE.
-                -  If the value is VI_FALSE, unlock_session does not attempt
-                   to unlock the session.
-                -  If the value is VI_TRUE, unlock_session releases the lock
-                   and sets the value of the parameter to VI_FALSE.
-
-                | Thus, you can, call unlock_session at the end of your
-                  function without worrying about whether you actually have the lock, as
-                  the following example shows.
-                | ViStatus TestFunc (ViSession vi, ViInt32 flags)
-                  {
-                  ViStatus error = VI_SUCCESS;
-                  ViBoolean haveLock = VI_FALSE;
-                  if (flags & BIT_1)
-                  {
-                  viCheckErr( lock_session(vi, &haveLock;));
-                  viCheckErr( TakeAction1(vi));
-                  if (flags & BIT_2)
-                  {
-                  viCheckErr( unlock_session(vi, &haveLock;));
-                  viCheckErr( TakeAction2(vi));
-                  viCheckErr( lock_session(vi, &haveLock;);
-                  }
-                  if (flags & BIT_3)
-                  viCheckErr( TakeAction3(vi));
-                  }
-                  Error:
-                  /\*At this point, you cannot really be sure that you have the lock.
-                  Fortunately, the haveLock variable takes care of that for you.\*/
-                  unlock_session(vi, &haveLock;);
-                  return error;
-                  }
-        '''
-        caller_has_lock_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self._library.niDCPower_UnlockSession(self._vi, ctypes.pointer(caller_has_lock_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(caller_has_lock_ctype.value)
-
     def wait_for_event(self, event_id, timeout):
         '''wait_for_event
 
@@ -7025,7 +6057,7 @@ class Session(_SessionBase):
 
         The session monitors whether each type of event has occurred at least
         once since the last time this function or the
-        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
+        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
         function were called. If an event has only been generated once and you
         call this function successively, the function times out. Individual
         events must be generated between separate calls of this function.
@@ -7065,10 +6097,10 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def close(self):
-        '''close
+    def _close(self):
+        '''_close
 
-        Vistatus close(ViSession vi);
+        Vistatus _close(ViSession vi);
 
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
@@ -7087,95 +6119,6 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def error_message(self, error_code):
-        '''error_message
-
-        Vistatus error_message(ViSession vi, Vistatus errorCode,
-        ViChar errorMessage[256]);
-
-        Converts a status code returned by an instrument driver function into a
-        user-readable string.
-
-        Args:
-            error_code (int):Specifies the **status** parameter that is returned from any of the
-                NI-DCPower functions.
-
-        Returns:
-            error_message (int):Returns the user-readable message string that corresponds to the status
-                code you specify.
-                You must pass a ViChar array with at least 256 bytes.
-        '''
-        error_message_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDCPower_error_message(self._vi, error_code, ctypes.pointer(error_message_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(error_message_ctype.value)
-
-    def init(self, resource_name, id_query, reset_device):
-        '''init
-
-        Vistatus init(ViRsrc resourceName, ViBoolean IDQuery,
-        ViBoolean resetDevice, ViSession \*vi);
-
-        This function is deprecated. Use
-        `initialize_with_channels <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_InitializeWithChannels.html')>`__
-        instead.
-
-        Creates a new IVI instrument driver session to the device specified in
-        **resourceName** and returns a session handle you use to identify the
-        device in all subsequent NI-DCPower function calls. This function also
-        sends initialization commands to set the device to the state necessary
-        for the operation of NI-DCPower.
-
-        To place the device in a known start-up state when creating a new
-        session, set **resetDevice** to VI_TRUE. This action is equivalent to
-        using the
-        `reset <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
-        function.
-
-        To open a session and leave the device in its existing configuration
-        without passing through a transitional output state, set **resetDevice**
-        to VI_FALSE, and immediately call the
-        `abort <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Abort.html')>`__
-        function. Then configure the device as in the previous session, changing
-        only the desired settings, and then call the
-        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
-        function. Refer to the `deprecated programming state
-        model <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/initializedeprecatedmodel/>`__
-        for information about the specific software states.
-
-        Args:
-            resource_name (str):Specifies the **resourceName** assigned by Measurement & Automation
-                Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
-                instrument's **resourceName**. **resourceName** can also be a logical
-                IVI name.
-            id_query (bool):Specifies whether the device is queried to determine if the device is a
-                valid instrument for NI-DCPower.
-                **Defined Values**:
-
-                +--------------+--------------------------+
-                | VI_TRUE (1)  | Perform ID query.        |
-                +--------------+--------------------------+
-                | VI_FALSE (0) | Do not perform ID query. |
-                +--------------+--------------------------+
-            reset_device (bool):Specifies whether to reset the device during the initialization
-                procedure.
-                **Defined Values**:
-
-                +--------------+--------------------------+
-                | VI_TRUE (1)  | Reset the device.        |
-                +--------------+--------------------------+
-                | VI_FALSE (0) | Do not reset the device. |
-                +--------------+--------------------------+
-
-        Returns:
-            vi (int):Returns a session handle that you use to identify the session in all
-                subsequent NI-DCPower function calls.
-        '''
-        vi_ctype = ctypes_types.ViSession_ctype(0)
-        error_code = self._library.niDCPower_init(resource_name.encode('ascii'), id_query, reset_device, ctypes.pointer(vi_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(vi_ctype.value)
 
     def reset(self):
         '''reset
@@ -7237,10 +6180,10 @@ class Session(_SessionBase):
                 least 256 bytes.
         '''
         self_test_result_ctype = ctypes_types.ViInt16_ctype(0)
-        self_test_message_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDCPower_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.pointer(self_test_message_ctype))
+        self_test_message_ctype = (ctypes_types.ViChar_ctype * 256)()
+        error_code = self._library.niDCPower_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt16(self_test_result_ctype.value), python_types.ViChar(self_test_message_ctype.value)
+        return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
 
 
 
