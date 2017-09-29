@@ -14,6 +14,7 @@ args = parser.parse_args()
 try:
     with nidcpower.Session(args.name) as session:
         # Placeholder. Use "NI-DCPower Hardware-Timed Single Point.vi" as reference
-except nidmm.Error as e:
+        pass
+except nidcpower.Error as e:
     sys.stderr.write(str(e))
     sys.exit(e.code)
