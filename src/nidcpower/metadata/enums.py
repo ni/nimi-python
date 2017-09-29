@@ -503,22 +503,4 @@ for supported devices.
             },
         ],
     },
-    'tBoolean': {
-        'values': [
-            {
-                'name': 'FALSE',
-                'value': 0,
-'documentation': {
-'description': '',
-},
-            },
-            {
-                'name': 'TRUE',
-                'value': 1,
-'documentation': {
-'description': '',
-},
-            },
-        ],
-    },
 }
