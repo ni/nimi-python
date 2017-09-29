@@ -35,6 +35,7 @@ class Library(object):
         self.niFake_Initiate_cfunc = None
         self.niFake_OneInputFunction_cfunc = None
         self.niFake_Read_cfunc = None
+        self.niFake_ReadFromChannel_cfunc = None
         self.niFake_ReadMultiPoint_cfunc = None
         self.niFake_ReturnANumberAndAString_cfunc = None
         self.niFake_SetAttributeViBoolean_cfunc = None
@@ -44,6 +45,7 @@ class Library(object):
         self.niFake_SetAttributeViString_cfunc = None
         self.niFake_SimpleFunction_cfunc = None
         self.niFake_TwoInputFunction_cfunc = None
+        self.niFake_Use64BitNumber_cfunc = None
         self.niFake_close_cfunc = None
 
         if library_type == 'windll':
@@ -196,6 +198,14 @@ class Library(object):
                 self.niFake_Read_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_Read_cfunc(vi, maximum_time, reading)
 
+    def niFake_ReadFromChannel(self, vi, channel_name, maximum_time, reading):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ReadFromChannel_cfunc is None:
+                self.niFake_ReadFromChannel_cfunc = self._library.niFake_ReadFromChannel
+                self.niFake_ReadFromChannel_cfunc.argtypes = [ViSession_ctype, ViConstString_ctype, ViInt32_ctype, ctypes.POINTER(ViReal64_ctype)]  # noqa: F405
+                self.niFake_ReadFromChannel_cfunc.restype = nifake.python_types.ViStatus
+        return self.niFake_ReadFromChannel_cfunc(vi, channel_name, maximum_time, reading)
+
     def niFake_ReadMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
         with self._func_lock:
             if self.niFake_ReadMultiPoint_cfunc is None:
@@ -267,6 +277,14 @@ class Library(object):
                 self.niFake_TwoInputFunction_cfunc.argtypes = [ViSession_ctype, ViReal64_ctype, ViChar_ctype]  # noqa: F405
                 self.niFake_TwoInputFunction_cfunc.restype = nifake.python_types.ViStatus
         return self.niFake_TwoInputFunction_cfunc(vi, a_number, a_string)
+
+    def niFake_Use64BitNumber(self, vi, input, output):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_Use64BitNumber_cfunc is None:
+                self.niFake_Use64BitNumber_cfunc = self._library.niFake_Use64BitNumber
+                self.niFake_Use64BitNumber_cfunc.argtypes = [ViSession_ctype, ViInt64_ctype, ctypes.POINTER(ViInt64_ctype)]  # noqa: F405
+                self.niFake_Use64BitNumber_cfunc.restype = nifake.python_types.ViStatus
+        return self.niFake_Use64BitNumber_cfunc(vi, input, output)
 
     def niFake_close(self, vi):  # noqa: N802
         with self._func_lock:

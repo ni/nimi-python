@@ -15,11 +15,11 @@ class _Acquisition(object):
         self._session = session
 
     def __enter__(self):
-        self._session._initiate()
+        self._session.initiate()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session._abort()
+        self._session.abort()
 
 
 class _SessionBase(object):
@@ -2491,41 +2491,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    def abort(self):
-        '''abort
-
-        Vistatus abort(ViSession vi);
-
-        Transitions the NI-DCPower session from the Running state to the
-        Committed state. If a sequence is running, it is stopped. Any
-        configuration functions called after this function are not applied until
-        the
-        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
-        function is called. If power output is enabled when you call the
-        abort function, the output channels remain in their current
-        state and continue providing power.
-
-        Use the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function to disable power output on a per channel basis. Use the
-        `reset <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
-        function to disable output on all channels.
-
-        Refer to the `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-        topic in the *NI DC Power Supplies and SMUs Help* for information about
-        the specific NI-DCPower software states.
-
-        **Related Topics:**
-
-        `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-        '''
-        error_code = self._library.niDCPower_Abort(self._vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def cal_adjust_current_limit(self, channel_name, range, number_of_measurements, requested_outputs, measured_outputs):
+    def cal_adjust_current_limit(self, range, number_of_measurements, requested_outputs, measured_outputs):
         '''cal_adjust_current_limit
 
         Vistatus cal_adjust_current_limit(ViSession vi, ViConstString
@@ -2558,11 +2524,11 @@ class _SessionBase(object):
             measured_outputs (float):Specifies an array of the output values measured by an external
                 precision digital multimeter.
         '''
-        error_code = self._library.niDCPower_CalAdjustCurrentLimit(self._vi, channel_name, range, number_of_measurements, requested_outputs, measured_outputs)
+        error_code = self._library.niDCPower_CalAdjustCurrentLimit(self._vi, self._repeated_capability.encode('ascii'), range, number_of_measurements, requested_outputs, measured_outputs)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def cal_adjust_current_measurement(self, channel_name, range, number_of_measurements, reported_outputs, measured_outputs):
+    def cal_adjust_current_measurement(self, range, number_of_measurements, reported_outputs, measured_outputs):
         '''cal_adjust_current_measurement
 
         Vistatus cal_adjust_current_measurement(ViSession vi,
@@ -2592,45 +2558,11 @@ class _SessionBase(object):
             measured_outputs (float):Specifies an array of the output values measured by an external
                 precision digital multimeter.
         '''
-        error_code = self._library.niDCPower_CalAdjustCurrentMeasurement(self._vi, channel_name, range, number_of_measurements, reported_outputs, measured_outputs)
+        error_code = self._library.niDCPower_CalAdjustCurrentMeasurement(self._vi, self._repeated_capability.encode('ascii'), range, number_of_measurements, reported_outputs, measured_outputs)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def cal_adjust_internal_reference(self, internal_reference, adjusted_internal_reference):
-        '''cal_adjust_internal_reference
-
-        Vistatus cal_adjust_internal_reference(ViSession vi, ViSession
-        vi, ViInt32 internal_reference, ViReal64
-        adjusted_internal_reference;
-
-        Programs the adjusted reference value to the device. Refer to the
-        calibration procedure for the device you are calibrating for detailed
-        instructions on the appropriate use of this function. This function can
-        only be called from an external calibration session.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            internal_reference (int):Specifies the internal reference to be connected to the calibration pin.
-                **Defined Values**:
-
-                +-------------------------------------------------+---------------------------------------------------------+
-                | NIDCPOWER_VAL_INTERNAL_REFERENCE_5V (1054)      | Calibration pin connected to 5 V internal reference.    |
-                +-------------------------------------------------+---------------------------------------------------------+
-                | NIDCPOWER_VAL_INTERNAL_REFERENCE_100KOHM (1055) | Calibration pin connected to 100 kΩ internal reference. |
-                +-------------------------------------------------+---------------------------------------------------------+
-            adjusted_internal_reference (float):Specifies the updated value of the internal reference that will be
-                programmed to the device.
-        '''
-        error_code = self._library.niDCPower_CalAdjustInternalReference(self._vi, internal_reference, adjusted_internal_reference)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def cal_adjust_output_resistance(self, channel_name, number_of_measurements, requested_outputs, measured_outputs):
+    def cal_adjust_output_resistance(self, number_of_measurements, requested_outputs, measured_outputs):
         '''cal_adjust_output_resistance
 
         Vistatus cal_adjust_output_resistance(ViSession vi,
@@ -2661,11 +2593,11 @@ class _SessionBase(object):
             measured_outputs (float):Specifies an array of the output values measured by an external
                 precision digital multimeter.
         '''
-        error_code = self._library.niDCPower_CalAdjustOutputResistance(self._vi, channel_name, number_of_measurements, requested_outputs, measured_outputs)
+        error_code = self._library.niDCPower_CalAdjustOutputResistance(self._vi, self._repeated_capability.encode('ascii'), number_of_measurements, requested_outputs, measured_outputs)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def cal_adjust_residual_current_offset(self, channel_name):
+    def cal_adjust_residual_current_offset(self):
         '''cal_adjust_residual_current_offset
 
         Vistatus cal_adjust_residual_current_offset(ViSession vi,
@@ -2700,11 +2632,11 @@ class _SessionBase(object):
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
         '''
-        error_code = self._library.niDCPower_CalAdjustResidualCurrentOffset(self._vi, channel_name)
+        error_code = self._library.niDCPower_CalAdjustResidualCurrentOffset(self._vi, self._repeated_capability.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def cal_adjust_residual_voltage_offset(self, channel_name):
+    def cal_adjust_residual_voltage_offset(self):
         '''cal_adjust_residual_voltage_offset
 
         Vistatus cal_adjust_residual_voltage_offset(ViSession vi,
@@ -2739,11 +2671,11 @@ class _SessionBase(object):
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
         '''
-        error_code = self._library.niDCPower_CalAdjustResidualVoltageOffset(self._vi, channel_name)
+        error_code = self._library.niDCPower_CalAdjustResidualVoltageOffset(self._vi, self._repeated_capability.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def cal_adjust_voltage_level(self, channel_name, range, number_of_measurements, requested_outputs, measured_outputs):
+    def cal_adjust_voltage_level(self, range, number_of_measurements, requested_outputs, measured_outputs):
         '''cal_adjust_voltage_level
 
         Vistatus cal_adjust_voltage_level(ViSession vi,ViConstString
@@ -2776,11 +2708,11 @@ class _SessionBase(object):
             measured_outputs (float):Specifies an array of the output values measured by an external
                 precision digital multimeter.
         '''
-        error_code = self._library.niDCPower_CalAdjustVoltageLevel(self._vi, channel_name, range, number_of_measurements, requested_outputs, measured_outputs)
+        error_code = self._library.niDCPower_CalAdjustVoltageLevel(self._vi, self._repeated_capability.encode('ascii'), range, number_of_measurements, requested_outputs, measured_outputs)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def cal_adjust_voltage_measurement(self, channel_name, range, number_of_measurements, reported_outputs, measured_outputs):
+    def cal_adjust_voltage_measurement(self, range, number_of_measurements, reported_outputs, measured_outputs):
         '''cal_adjust_voltage_measurement
 
         Vistatus cal_adjust_voltage_measurement(ViSession vi,
@@ -2811,11 +2743,11 @@ class _SessionBase(object):
             measured_outputs (float):Specifies an array of the output values measured by an external
                 precision digital multimeter.
         '''
-        error_code = self._library.niDCPower_CalAdjustVoltageMeasurement(self._vi, channel_name, range, number_of_measurements, reported_outputs, measured_outputs)
+        error_code = self._library.niDCPower_CalAdjustVoltageMeasurement(self._vi, self._repeated_capability.encode('ascii'), range, number_of_measurements, reported_outputs, measured_outputs)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def cal_self_calibrate(self, channel_name):
+    def cal_self_calibrate(self):
         '''cal_self_calibrate
 
         Vistatus cal_self_calibrate(ViSession vi, ViConstString
@@ -2856,7 +2788,2463 @@ class _SessionBase(object):
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
         '''
-        error_code = self._library.niDCPower_CalSelfCalibrate(self._vi, channel_name)
+        error_code = self._library.niDCPower_CalSelfCalibrate(self._vi, self._repeated_capability.encode('ascii'))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_aperture_time(self, aperture_time, units):
+        '''configure_aperture_time
+
+        Vistatus configure_aperture_time(ViSession vi, ViConstString
+        channelName, ViReal64 apertureTime, ViInt32 units);
+
+        Configures the aperture time on the specified channel(s).
+
+        The supported values depend on the **units**. Refer to the *Aperture
+        Time* topic for your device in the *NI DC Power Supplies and SMUs Help*
+        for more information. In general, devices support discrete
+        **apertureTime** values, and if you configure **apertureTime** to some
+        unsupported value, NI-DCPower coerces it up to the next supported value.
+
+        Refer to the *Measurement Configuration and Timing* or *DC Noise
+        Rejection* topic for your device in the *NI DC Power Supplies and SMUs
+        Help* for more information about how to configure your measurements.
+
+        **Related Topics:**
+
+        `Aperture
+        Time <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/aperture/>`__
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            aperture_time (float):Specifies the aperture time. Refer to the *Aperture Time* topic for your
+                device in the *NI DC Power Supplies and SMUs Help* for more information.
+            units (int):Specifies the units for **apertureTime**.
+                **Defined Values**:
+
+                +----------------------------------------+------------------------------+
+                | NIDCPOWER_VAL_SECONDS (1028)           | Specifies seconds.           |
+                +----------------------------------------+------------------------------+
+                | NIDCPOWER_VAL_POWER_LINE_CYCLES (1029) | Specifies Power Line Cycles. |
+                +----------------------------------------+------------------------------+
+        '''
+        error_code = self._library.niDCPower_ConfigureApertureTime(self._vi, self._repeated_capability.encode('ascii'), aperture_time, units)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_auto_zero(self, auto_zero):
+        '''configure_auto_zero
+
+        Vistatus configure_auto_zero(ViSession vi, ViConstString
+        channelName, ViInt32 autoZero);
+
+        Configures auto zero for the device.
+
+        Refer to the `NI PXI-4132 Auto
+        Zero <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4132_autozero/>`__
+        and `NI PXI-4132 Measurement Configuration and
+        Timing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4132_measureconfigtiming/>`__
+        topics in the *NI DC Power Supplies and SMUs Help* for more information
+        about how to configure your measurements.
+
+        **Related Topics:**
+
+        `Auto
+        Zero <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/autozero/>`__
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            auto_zero (int):Specifies the auto-zero setting. Refer to the *Measurement Configuration
+                and Timing* topic and the *Auto Zero* topic for your device for more
+                information about how to configure your measurements.
+                **Defined Values:**
+
+                +---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_OFF (0)     | Disables auto-zero.                                                                                                                                                                                               |
+                +---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_ONCE (1024) | Makes zero conversions following the first measurement after initiating the device. The device uses these zero conversions for the preceding measurement and future measurements until the device is reinitiated. |
+                +---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_ON (1)      | Makes zero conversions for every measurement.                                                                                                                                                                     |
+                +---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        '''
+        error_code = self._library.niDCPower_ConfigureAutoZero(self._vi, self._repeated_capability.encode('ascii'), auto_zero)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_current_level(self, level):
+        '''configure_current_level
+
+        Vistatus configure_current_level(ViSession vi, ViConstString
+        channelName, ViReal64 level);
+
+        Configures the current level the device attempts to generate for the
+        specified channel(s). The channel must be enabled for the specified
+        current level to take effect. Refer to the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel.
+
+        The current level setting is applicable only if the output function of
+        the channel is set to NIDCPOWER_VAL_DC_CURRENT. Use
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
+        to set the output function. The device actively regulates the current at
+        the specified level unless doing so causes a voltage greater than the
+        `voltage
+        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimit.html')>`__
+        across the channels' output terminals.
+
+        **Related Topics:**
+
+        `Constant Current
+        Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/constant_current/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            level (float):Specifies the current level, in amps, to generate for the specified
+                channel(s).
+                **Valid Values:**
+                The valid values for this parameter are defined by the current level
+                range that is configured using the
+                `configure_current_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLevelRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigureCurrentLevel(self._vi, self._repeated_capability.encode('ascii'), level)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_current_level_range(self, range):
+        '''configure_current_level_range
+
+        Vistatus configure_current_level_range(ViSession vi,
+        ViConstString channelName, ViReal64 range);
+
+        Configures the current level range for the specified channel(s). The
+        configured range defines the valid values the current level can be set
+        to using the
+        `configure_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureCurrentLevel.html')>`__
+        function. The current level range setting is applicable only if the
+        output function of the channel is set to NIDCPOWER_VAL_DC_CURRENT.
+        Use
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
+        to set the output function.
+
+        Use the
+        `CURRENT_LEVEL_AUTORANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE.html')>`__
+        attribute to enable automatic selection of the current level range.
+
+        **Related Topics:**
+
+        `ranges <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/ranges/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            range (float):Specifies the current level range, in amps, for the specified channel.
+                For valid ranges, refer to the *ranges* topic for your device in the *NI
+                DC Power Supplies and SMUs Help*.
+        '''
+        error_code = self._library.niDCPower_ConfigureCurrentLevelRange(self._vi, self._repeated_capability.encode('ascii'), range)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_current_limit(self, behavior, limit):
+        '''configure_current_limit
+
+        Vistatus configure_current_limit(ViSession vi, ViConstString
+        channelName, ViInt32 behavior, ViReal64 limit);
+
+        | Configures the current limit for the specified channel(s). The channel
+          must be enabled for the specified current limit to take effect. Refer
+          to the
+          `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputEnabled.html')>`__
+          function for more information about enabling the output channel.
+        | The current limit is the current that the output should not exceed
+          when generating the desired `voltage
+          level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLevel.html')>`__.
+          The current limit setting is applicable only if the output function of
+          the channel is set to NIDCPOWER_VAL_DC_VOLTAGE. Use
+          `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
+          to set the output function.
+
+        **Related Topics:**
+
+        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            behavior (int):Specifies how the output should behave when the current limit is
+                reached.
+                **Defined Values:**
+
+                +--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_CURRENT_REGULATE | Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached. |
+                +--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+                | NIDCPOWER_VAL_CURRENT_REGULATE | Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached. |
+                +--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+            limit (float):Specifies the current limit, in amps, on the specified channel(s). The
+                limit is specified as a positive value, but symmetric positive and
+                negative limits are enforced simultaneously.
+                **Valid Values:**
+                The valid values for this parameter are defined by the current limit
+                range that is configured using the
+                `configure_current_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLimitRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigureCurrentLimit(self._vi, self._repeated_capability.encode('ascii'), behavior, limit)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_current_limit_range(self, range):
+        '''configure_current_limit_range
+
+        Vistatus configure_current_limit_range(ViSession vi,
+        ViConstString channelName, ViReal64 range);
+
+        Configures the current limit range for the specified channel(s).The
+        configured range defines the valid values the current limit can be set
+        to using the
+        `configure_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureCurrentLimit.html')>`__
+        function. The current limit range setting is applicable only if the
+        output function of the channel is set to NIDCPOWER_VAL_DC_VOLTAGE.
+        Use
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
+        to set the output function.
+
+        Use the
+        `CURRENT_LIMIT_AUTORANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE.html')>`__
+        attribute to enable automatic selection of the current limit range.
+
+        **Related Topics:**
+
+        `ranges <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/ranges/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            range (float):Specifies the current limit range, in amps, for the specified channel.
+                For valid ranges, refer to the *ranges* topic for your device in the *NI
+                DC Power Supplies and SMUs Help*.
+        '''
+        error_code = self._library.niDCPower_ConfigureCurrentLimitRange(self._vi, self._repeated_capability.encode('ascii'), range)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_output_enabled(self, enabled):
+        '''configure_output_enabled
+
+        Vistatus configure_output_enabled(ViSession vi, ViConstString
+        channelName, ViBoolean enabled);
+
+        Enables or disables generation on the specified channel(s). Depending on
+        the selected output function, the voltage level, current level,or output
+        resistance must be set in addition to enabling the output to generate
+        the desired level. For more information about configuring the output
+        level, refer to
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__.
+
+        Note:
+        If the device is in the
+        `Uncommitted <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#uncommitted')>`__
+        state, enabling the output does not take effect until you call the
+        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_Initiate.html')>`__
+        function.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            enabled (bool):Specifies whether the output is enabled or disabled.
+                **Defined Values**:
+
+                +----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | VI_TRUE  | Enables generation on the specified output channel(s).                                                                                                                        |
+                +----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | VI_FALSE | Disables generation on the specified output channel(s). This parameter has no effect on the output disconnect relay. To toggle the relay, use the OUTPUT_CONNECTED attribute. |
+                +----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        '''
+        error_code = self._library.niDCPower_ConfigureOutputEnabled(self._vi, self._repeated_capability.encode('ascii'), enabled)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_output_function(self, function):
+        '''configure_output_function
+
+        Vistatus configure_output_function(ViSession vi, ViConstString
+        channelName, ViInt32 function);
+
+        Configures the function the device attempts to generate for the
+        specified channel(s).
+
+        When NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the
+        desired voltage level on the output as long as the output current is
+        below the current limit. The following functions can be used to
+        configure the channel when NIDCPOWER_VAL_DC_VOLTAGE is selected:
+
+        -  `configure_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLevel.html')>`__
+        -  `configure_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLimit.html')>`__
+        -  `configure_voltage_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLevelRange.html')>`__
+        -  `configure_current_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLimitRange.html')>`__
+
+        When NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the
+        desired current level on the output as long as the output voltage is
+        below the voltage limit. The following functions can be used to
+        configure the channel when NIDCPOWER_VAL_DC_CURRENT is selected:
+
+        -  `configure_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLevel.html')>`__
+        -  `configure_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimit.html')>`__
+        -  `configure_current_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLevelRange.html')>`__
+        -  `configure_voltage_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimitRange.html')>`__
+
+        When NIDCPOWER_VAL_PULSE_VOLTAGE is selected, the device generates
+        pulses at the desired voltage levels on the output as long as the output
+        current is below the current limit. The following VIs can be used to
+        configure the channel when NIDCPOWER_VAL_PULSE_VOLTAGE is selected:
+
+        -  `configure_pulse_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevel.html')>`__
+        -  `configure_pulse_bias_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasVoltageLevel.html')>`__
+        -  `configure_pulse_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimit.html')>`__
+        -  `configure_pulse_bias_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasCurrentLimit.html')>`__
+        -  `configure_pulse_voltage_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevelRange.html')>`__
+        -  `configure_pulse_current_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimitRange.html')>`__
+
+        When NIDCPOWER_VAL_PULSE_CURRENT is selected, the device generates
+        pulses at the desired current levels on the output as long as the output
+        voltage is below the voltage limit. The following VIs can be used to
+        configure the channel when NIDCPOWER_VAL_PULSE_CURRENT is selected:
+
+        -  `configure_pulse_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevel.html')>`__
+        -  `configure_pulse_bias_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasCurrentLevel.html')>`__
+        -  `configure_pulse_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimit.html')>`__
+        -  `configure_pulse_bias_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasVoltageLimit.html')>`__
+        -  `configure_pulse_current_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevelRange.html')>`__
+        -  `configure_pulse_voltage_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimitRange.html')>`__
+
+        **Related Topics:**
+
+        `Constant Voltage
+        Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/constant_voltage/>`__
+
+        `Constant Current
+        Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/constant_current/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            function (int):Configures the function to generate for the specified channel(s).
+                **Defined Values**:
+
+                +------------------------------------+--------------------------------------------+
+                | NIDCPOWER_VAL_DC_VOLTAGE (1006)    | Sets the output function to DC voltage.    |
+                +------------------------------------+--------------------------------------------+
+                | NIDCPOWER_VAL_DC_CURRENT (1007)    | Sets the output function to DC current.    |
+                +------------------------------------+--------------------------------------------+
+                | NIDCPOWER_VAL_PULSE_VOLTAGE (1049) | Sets the output function to pulse voltage. |
+                +------------------------------------+--------------------------------------------+
+                | NIDCPOWER_VAL_PULSE_CURRENT (1050) | Sets the output function to pulse current. |
+                +------------------------------------+--------------------------------------------+
+        '''
+        error_code = self._library.niDCPower_ConfigureOutputFunction(self._vi, self._repeated_capability.encode('ascii'), function)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_output_range(self, range_type, range):
+        '''configure_output_range
+
+        Vistatus configure_output_range(ViSession vi, ViConstString
+        channelName, ViInt32 rangeType, ViReal64 range);
+
+        Configures either the voltage level range or the current limit range. If
+        **range type** is Voltage, the voltage level range is configured. If
+        **range type** is Current, the current limit range is configured.
+
+        This function does not configure any of the DC Current output function
+        settings. Refer to the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputFunction.html')>`__
+        function for more information.
+
+        This is a deprecated function. You must use the following functions
+        instead of theconfigure_output_range function:
+
+        -  `configure_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLevel.html')>`__
+        -  `configure_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLimit.html')>`__
+        -  `configure_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureCurrentLevel.html')>`__
+        -  `configure_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureCurrentLimit.html')>`__
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            range_type (int):Specifies the type of the range: voltage or current.
+                **Defined Values**:
+
+                +---------------------------------+------------------------------------------+
+                | NIDCPOWER_VAL_RANGE_CURRENT (0) | NI-DCPower configures the current range. |
+                +---------------------------------+------------------------------------------+
+                | NIDCPOWER_VAL_RANGE_VOLTAGE (1) | NI-DCPower configures the voltage range. |
+                +---------------------------------+------------------------------------------+
+            range (float):Specifies the range to calibrate with these settings. Only one channel
+                at a time may be calibrated.
+        '''
+        error_code = self._library.niDCPower_ConfigureOutputRange(self._vi, self._repeated_capability.encode('ascii'), range_type, range)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_output_resistance(self, resistance):
+        '''configure_output_resistance
+
+        Vistatus configure_output_resistance(ViSession vi,
+        ViConstString channelName, ViReal64 resistance);
+
+        Configures the output resistance that the device attempts to generate
+        for the specified channel or channels. The channel must be enabled for
+        the specified output resistance to take effect.
+
+        Refer to the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel.
+
+        For NI PXIe-4141/4143/4145 devices, output resistance is only supported
+        if the output function of the channel is set to
+        NIDCPOWER_VAL_DC_VOLTAGE using the configure_output_function
+        function.
+
+        For PXIe-4135, NI PXIe-4137, and NI PXIe-4139 devices, output resistance
+        is supported if the output function of the channel is set to
+        NIDCPOWER_VAL_DC_CURRENT or NIDCPOWER_VAL_DC_VOLTAGE using the
+        configure_output_function function.
+
+        The device actively regulates the current and voltage to reach the
+        specified output resistance, although in DC Voltage output mode, the
+        voltage at the output experiences a "virtual drop" that is proportional
+        to its current. In DC Current output mode, the output experiences a
+        "virtual leakage current" that is proportional to the output voltage.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            resistance (float):Specifies the output resistance, in ohms, for the specified channel.
+                Refer to the `NI PXIe-4141 Programmable Output
+                resistance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4140_4141_progoutputresist/>`__,
+                `NI PXIe-4143 Programmable Output
+                resistance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4142_4143_progoutputresist/>`__,
+                `NI PXIe-4145 Programmable Output
+                resistance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4144_4145_progoutputresist/>`__,or
+                `NI PXIe-4154 Programmable Output
+                resistance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4154_prog_output_resist/>`__
+                topic in the NI DC Power Supplies and SMUs Help for more information
+                about configuring output resistance.
+        '''
+        error_code = self._library.niDCPower_ConfigureOutputResistance(self._vi, self._repeated_capability.encode('ascii'), resistance)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_bias_current_level(self, level):
+        '''configure_pulse_bias_current_level
+
+        Vistatus configure_pulse_bias_current_level(ViSession vi,
+        ViConstString channelName, ViReal64 level);
+
+        Configures the pulse bias current level that the device attempts to
+        generate for the specified channel(s) during the off phase of a pulse.
+        The channel must be enabled for the specified current level to take
+        effect.
+
+        Refer to the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel. The
+        pulse current level setting is applicable only if the channel is set to
+        the NIDCPOWER_VAL_PULSE_CURRENT output function using the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function.
+
+        The device actively regulates the current at the specified level unless
+        doing so causes a voltage drop greater than the `pulse bias voltage
+        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT.html')>`__
+        across the channels' output terminals.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            level (float):Specifies the pulse bias current level, in amps, on the specified
+                channel(s).
+                **Valid Values:**
+                The valid values for this parameter are defined by the pulse current
+                level range that is configured using the
+                `configure_pulse_current_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevelRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseBiasCurrentLevel(self._vi, self._repeated_capability.encode('ascii'), level)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_bias_current_limit(self, limit):
+        '''configure_pulse_bias_current_limit
+
+        Vistatus configure_pulse_bias_current_limit(ViSession vi,
+        ViConstString channelName, ViReal64 limit);
+
+        Configures the pulse bias current limit for the specified channel(s).
+        The channel must be enabled for the specified current limit to take
+        effect.
+
+        Refer to the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel. The
+        pulse bias current limit is the current that the output must not exceed
+        when generating the desired `pulse bias voltage
+        level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_pULSE_bIAS_vOLTAGE_lEVEL.html')>`__.
+        The pulse bias current limit setting is only applicable if the channel
+        is set to the NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            limit (float):Specifies the pulse bias current limit, in amps, on the specified
+                channel(s). The limit is specified as a positive value, but symmetric
+                positive and negative limits are enforced simultaneously.
+                **Valid Values:**
+                The valid values for this parameter are defined by the pulse current
+                limit range that is configured using the
+                `configure_pulse_current_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimitRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseBiasCurrentLimit(self._vi, self._repeated_capability.encode('ascii'), limit)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_bias_voltage_level(self, level):
+        '''configure_pulse_bias_voltage_level
+
+        Vistatus configure_pulse_bias_voltage_level(ViSession vi,
+        ViConstString channelName, ViReal64 level);
+
+        Configures the pulse bias voltage level that the device attempts to
+        generate for the specified channel(s) during the off phase of a pulse.
+        The channel must be enabled for the specified voltage level to take
+        effect.
+
+        Refer to the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel. The
+        pulse bias voltage level setting is applicable only if the channel is
+        set to the NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function.
+
+        The device actively regulates the voltage at the specified level unless
+        doing so causes a current greater than the `pulse bias current
+        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT.html')>`__
+        through the channels' output terminals.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            level (float):Specifies the pulse bias voltage level, in volts, for the output channel
+                generation.
+                **Valid Values**:
+                The valid values for this parameter are defined by the pulse voltage
+                level range that is selected using the
+                `configure_pulse_voltage_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevelRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseBiasVoltageLevel(self._vi, self._repeated_capability.encode('ascii'), level)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_bias_voltage_limit(self, limit):
+        '''configure_pulse_bias_voltage_limit
+
+        Vistatus configure_pulse_bias_voltage_limit(ViSession vi,
+        ViConstString channelName, ViReal64 limit);
+
+        Configures the pulse bias voltage limit for the specified channel(s).
+        The channel must be enabled for the specified voltage limit to take
+        effect.
+
+        Refer to the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel. The
+        pulse bias voltage limit is the voltage that the output must not exceed
+        when generating the desired `pulse bias current
+        level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_bIAS_cURRENT_lEVEL.html')>`__.
+        The pulse bias voltage limit setting is only applicable if the channel
+        is set to the NIDCPOWER_VAL_PULSE_CURRENT output function using the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            limit (float):Specifies the pulse bias voltage limit, in volts, on the specified
+                channel(s). The limit is specified as a positive value, but symmetric
+                positive and negative limits are enforced simultaneously.
+                **Valid Values:**
+                The valid values for this parameter are defined by the pulse voltage
+                limit range that is configured using the
+                `configure_pulse_voltage_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimitRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseBiasVoltageLimit(self._vi, self._repeated_capability.encode('ascii'), limit)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_current_level(self, level):
+        '''configure_pulse_current_level
+
+        Vistatus configure_pulse_current_level(ViSession vi,
+        ViConstString channelName, ViReal64 level);
+
+        Configures the pulse current level that the device attempts to generate
+        for the specified channel(s) during the on phase of a pulse. The channel
+        must be enabled for the specified current level to take effect.
+
+        Refer to the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel. The
+        pulse current level setting is applicable only if the channel is set to
+        the NIDCPOWER_VAL_PULSE_CURRENT output function using the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function.
+
+        The device actively regulates the current at the specified level unless
+        doing so causes a voltage drop greater than the `pulse voltage
+        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_VOLTAGE_lIMIT.html')>`__
+        across the channels' output terminals.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            level (float):Specifies the pulse current level, in amps, on the specified channel(s).
+                **Valid Values:**
+                The valid values for this parameter are defined by the pulse current
+                level range that is configured using the
+                `configure_pulse_current_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevelRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseCurrentLevel(self._vi, self._repeated_capability.encode('ascii'), level)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_current_level_range(self, range):
+        '''configure_pulse_current_level_range
+
+        Vistatus configure_pulse_current_level_range(ViSession vi,
+        ViConstString channelName, ViReal64 range);
+
+        Configures the pulse current level range for the specified channel(s).
+
+        The configured range defines the valid values to which you can set the
+        pulse current level and pulse bias current level using the
+        `configure_pulse_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevel.html')>`__
+        and
+        `configure_pulse_bias_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasCurrentLevel.html')>`__
+        functions. The pulse current level range setting is applicable only if
+        the channel is set to the NIDCPOWER_VAL_PULSE_CURRENT output function
+        using the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            range (float):Specifies the pulse current level range, in amps, on the specified
+                channel(s).
+                For valid ranges, refer to the *ranges* topic for your device in the *NI
+                DC Power Supplies and SMUs Help*.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseCurrentLevelRange(self._vi, self._repeated_capability.encode('ascii'), range)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_current_limit(self, limit):
+        '''configure_pulse_current_limit
+
+        Vistatus configure_pulse_current_limit(ViSession vi,
+        ViConstString channelName, ViReal64 limit);
+
+        Configures the pulse current limit for the specified channel(s). The
+        channel must be enabled for the specified current limit to take effect.
+
+        Refer to the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel. The
+        pulse current limit is the current that the output must not exceed when
+        generating the desired `pulse voltage
+        level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_vOLTAGE_lEVEL.html')>`__.
+        The pulse current limit setting is only applicable if the channel is set
+        to the NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            limit (float):Specifies the pulse current limit, in amps, on the specified channel(s).
+                The limit is specified as a positive value, but symmetric positive and
+                negative limits are enforced simultaneously.
+                **Valid Values:**
+                The valid values for this parameter are defined by the pulse current
+                limit range that is configured using the
+                `configure_pulse_current_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimitRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseCurrentLimit(self._vi, self._repeated_capability.encode('ascii'), limit)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_current_limit_range(self, range):
+        '''configure_pulse_current_limit_range
+
+        Vistatus configure_pulse_current_limit_range(ViSession vi,
+        ViConstString channelName, ViReal64 range);
+
+        Configures the pulse current limit range for the specified channel(s).
+
+        The configured range defines the valid values to which you can set the
+        pulse current limit and pulse bias current limit using the
+        `configure_pulse_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimit.html')>`__
+        and
+        `configure_pulse_bias_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasCurrentLimit.html')>`__
+        functions. The pulse current limit range setting is applicable only if
+        the channel is set to the NIDCPOWER_VAL_PULSE_VOLTAGE output function
+        using the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            range (float):Specifies the pulse current limit range, in amps, on the specified
+                channel(s).
+                For valid ranges, refer to the *ranges* topic for your device in the *NI
+                DC Power Supplies and SMUs Help*.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseCurrentLimitRange(self._vi, self._repeated_capability.encode('ascii'), range)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_voltage_level(self, level):
+        '''configure_pulse_voltage_level
+
+        Vistatus configure_pulse_voltage_level(ViSession vi,
+        ViConstString channelName, ViReal64 level);
+
+        Configures the pulse voltage level that the device attempts to generate
+        for the specified channel(s) during the on phase of a pulse. The channel
+        must be enabled for the specified voltage level to take effect.
+
+        Refer to the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel. The
+        pulse voltage level setting is applicable only if the channel is set to
+        the NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function.
+
+        The device actively regulates the voltage at the specified level unless
+        doing so causes a current greater than the `pulse current
+        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_cURRENT_lIMIT.html')>`__
+        through the channels' output terminals.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            level (float):Specifies the pulse voltage level, in volts, for the output channel
+                generation.
+                **Valid Values**:
+                The valid values for this parameter are defined by the voltage level
+                range that is selected using the
+                `configure_pulse_voltage_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevelRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseVoltageLevel(self._vi, self._repeated_capability.encode('ascii'), level)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_voltage_level_range(self, range):
+        '''configure_pulse_voltage_level_range
+
+        Vistatus configure_pulse_voltage_level_range(ViSession vi,
+        ViConstString channelName, ViReal64 range);
+
+        Configures the pulse voltage level range for the specified channel(s).
+
+        The configured range defines the valid values to which you can set the
+        pulse voltage level and pulse bias voltage level using the
+        `configure_pulse_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevel.html')>`__
+        and
+        `configure_pulse_bias_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasVoltageLevel.html')>`__
+        functions. The pulse voltage level range setting is applicable only if
+        the channel is set to the NIDCPOWER_VAL_PULSE_VOLTAGE output function
+        using the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            range (float):Specifies the pulse voltage level range, in volts, on the specified
+                channel(s).
+                For valid ranges, refer to the *ranges* topic for your device in the *NI
+                DC Power Supplies and SMUs Help*.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseVoltageLevelRange(self._vi, self._repeated_capability.encode('ascii'), range)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_voltage_limit(self, limit):
+        '''configure_pulse_voltage_limit
+
+        Vistatus configure_pulse_voltage_limit(ViSession vi,
+        ViConstString channelName, ViReal64 limit);
+
+        Configures the pulse voltage limit for the specified channel(s). The
+        channel must be enabled for the specified voltage limit to take effect.
+
+        Refer to the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel. The
+        pulse voltage limit is the voltage that the output must not exceed when
+        generating the desired `pulse current
+        level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_cURRENT_lEVEL.html')>`__.
+        The pulse voltage limit setting is only applicable if the channel is set
+        to the NIDCPOWER_VAL_PULSE_CURRENT output function using the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            limit (float):Specifies the pulse voltage limit, in volts, on the specified output
+                channel(s). The limit is specified as a positive value, but symmetric
+                positive and negative limits are enforced simultaneously.
+                **Valid Values:**
+                The valid values for this parameter are defined by the pulse voltage
+                limit range that is configured using the
+                `configure_pulse_voltage_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimitRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseVoltageLimit(self._vi, self._repeated_capability.encode('ascii'), limit)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_pulse_voltage_limit_range(self, range):
+        '''configure_pulse_voltage_limit_range
+
+        Vistatus configure_pulse_voltage_limit_range(ViSession vi,
+        ViConstString channelName, ViReal64 range);
+
+        Configures the pulse voltage limit range for the specified channel(s).
+
+        The configured range defines the valid values to which you can set the
+        pulse voltage limit and pulse bias voltage limit using the
+        `configure_pulse_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimit.html')>`__
+        and
+        `configure_pulse_bias_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasVoltageLimit.html')>`__
+        functions. The pulse voltage limit range setting is applicable only if
+        the channel is set to the NIDCPOWER_VAL_PULSE_CURRENT output function
+        using the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function.
+
+        .
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            range (float):Specifies the pulse voltage limit range, in volts, on the specified
+                channel(s).
+                For valid ranges, refer to the *ranges* topic for your device in the *NI
+                DC Power Supplies and SMUs Help*.
+        '''
+        error_code = self._library.niDCPower_ConfigurePulseVoltageLimitRange(self._vi, self._repeated_capability.encode('ascii'), range)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_sense(self, sense):
+        '''configure_sense
+
+        Vistatus configure_sense(ViSession vi, ViConstString
+        channelName, ViInt32 sense);
+
+        Specifies whether to use
+        `local <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','local_and_remote_sense.html')>`__
+        or
+        `remote <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','local_and_remote_sense.html')>`__
+        sensing of the output voltage on the specified channel(s). Refer to the
+        *Devices* topic specific to your device in the *NI DC Power Supplies and
+        SMUs* Help for more information about sensing voltage on supported
+        channels.
+
+        **Related Topics:**
+
+        `Local and Remote
+        sense <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4112_localandremotesense/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            sense (int):Specifies local or remote sensing on the specified channel(s).
+                **Defined Values:**
+
+                +-----------------------------+----------------+
+                | NIDCPOWER_VAL_LOCAL (1008)  | Local sensing  |
+                +-----------------------------+----------------+
+                | NIDCPOWER_VAL_REMOTE (1009) | Remote sensing |
+                +-----------------------------+----------------+
+        '''
+        error_code = self._library.niDCPower_ConfigureSense(self._vi, self._repeated_capability.encode('ascii'), sense)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_voltage_level(self, level):
+        '''configure_voltage_level
+
+        Vistatus configure_voltage_level(ViSession vi, ViConstString
+        channelName, ViReal64 level);
+
+        Configures the voltage level the device attempts to generate for the
+        specified channel(s). The channel must be enabled for the specified
+        voltage level to take effect. Refer to the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel.
+
+        The voltage level setting is applicable only if the output function of
+        the channel is set to NIDCPOWER_VAL_DC_VOLTAGE. Use
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
+        to set the output function.
+
+        The device actively regulates the voltage at the specified level unless
+        doing so causes a current output greater than the `current
+        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_LIMIT.html')>`__
+        across the channels' output terminals.
+
+        **Related Topics:**
+
+        `Constant Voltage
+        Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/constant_voltage/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            level (float):Specifies the voltage level, in volts, for the output channel
+                generation.
+                **Valid Values**:
+                The valid values for this parameter are defined by the voltage level
+                range that is selected using the
+                `configure_voltage_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLevelRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigureVoltageLevel(self._vi, self._repeated_capability.encode('ascii'), level)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_voltage_level_range(self, range):
+        '''configure_voltage_level_range
+
+        Vistatus configure_voltage_level_range(ViSession vi,
+        ViConstString channelName, ViReal64 range);
+
+        Configures the voltage level range for the specified channel(s). The
+        configured range defines the valid values the voltage level can be set
+        to using the
+        `configure_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLevel.html')>`__
+        function. The voltage level range setting is applicable only if the
+        output function of the channel is set to NIDCPOWER_VAL_DC_VOLTAGE.
+        Use
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
+        to set the output function.
+
+        Use the
+        `VOLTAGE_LEVEL_AUTORANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE.html')>`__
+        attribute to enable automatic selection of the voltage level range.
+
+        **Related Topics:**
+
+        `ranges <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/ranges/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            range (float):Specifies the voltage level range, in volts, on the specified
+                channel(s).
+                For valid ranges, refer to the *ranges* topic for your device in the *NI
+                DC Power Supplies and SMUs Help*.
+        '''
+        error_code = self._library.niDCPower_ConfigureVoltageLevelRange(self._vi, self._repeated_capability.encode('ascii'), range)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_voltage_limit(self, limit):
+        '''configure_voltage_limit
+
+        Vistatus configure_voltage_limit(ViSession vi, ViConstString
+        channelName, ViReal64 limit);
+
+        Configures the voltage limit for the specified channel(s). The channel
+        must be enabled for the specified voltage limit to take effect. Refer to
+        the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function for more information about enabling the output channel.
+
+        The voltage limit is the voltage that the output should not exceed when
+        generating the desired `current
+        level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureCurrentLevel.html')>`__.
+        The voltage limit setting is applicable only if the output function of
+        the channel is set to NIDCPOWER_VAL_DC_CURRENT. Use
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
+        to set the output function.
+
+        **Related Topics:**
+
+        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            limit (float):Specifies the voltage limit, in volts, on the specified output
+                channel(s). The limit is specified as a positive value, but symmetric
+                positive and negative limits are enforced simultaneously.
+                **Valid Values:**
+                The valid values for this parameter are defined by the voltage limit
+                range that is configured using the
+                `configure_voltage_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimitRange.html')>`__
+                function.
+        '''
+        error_code = self._library.niDCPower_ConfigureVoltageLimit(self._vi, self._repeated_capability.encode('ascii'), limit)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_voltage_limit_range(self, range):
+        '''configure_voltage_limit_range
+
+        Vistatus configure_voltage_limit_range(ViSession vi,
+        ViConstString channelName, ViReal64 range);
+
+        Configures the voltage limit range for the specified channel(s). The
+        configured range defines the valid values the voltage limit can be set
+        to using the
+        `configure_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLimit.html')>`__
+        function. The voltage limit range setting is applicable only if the
+        output function of the channel is set to NIDCPOWER_VAL_DC_CURRENT.
+        Use
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
+        to set the output function.
+
+        Use the
+        `VOLTAGE_LIMIT_AUTORANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE.html')>`__
+        attribute to enable automatic selection of the voltage limit range.
+
+        **Related Topics:**
+
+        `ranges <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/ranges/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            range (float):Specifies the voltage limit range, in volts, on the specified
+                channel(s).
+                For valid ranges, refer to the *ranges* topic for your device in the *NI
+                DC Power Supplies and SMUs Help*.
+        '''
+        error_code = self._library.niDCPower_ConfigureVoltageLimitRange(self._vi, self._repeated_capability.encode('ascii'), range)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def fetch_multiple(self, timeout, count):
+        '''fetch_multiple
+
+        Vistatus fetch_multiple(ViSession vi, ViConstString
+        channelName, ViReal64 timeout, ViInt32 count, ViReal64
+        voltageMeasurements[], ViReal64 currentMeasurements[], ViBoolean
+        inCompliance[], ViInt32\* actualcount);
+
+        Returns an array of voltage measurements, an array of current
+        measurements, and an array of compliance measurements that were
+        previously taken and are stored in the NI-DCPower buffer. This function
+        should not be used when the
+        `MEASURE_WHEN <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_MEASURE_WHEN.html')>`__
+        attribute is set to NIDCPOWER_VAL_ON_DEMAND. You must first call
+        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
+        before calling this function.
+
+        Refer to the `Acquiring
+        Measurements <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/acquiringmeasurements/>`__
+        and
+        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
+        topics in the *NI DC Power Supplies and SMUs Help* for more information
+        about configuring this function.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            timeout (float):Specifies the maximum time allowed for this function to complete, in
+                seconds. If the function does not complete within this time interval,
+                NI-DCPower returns an error.
+
+                Note:
+                When setting the timeout interval, ensure you take into account any
+                triggers so that the timeout interval is long enough for your
+                application.
+            count (int):Specifies the number of measurements to fetch.
+
+        Returns:
+            voltage_measurements (float):Returns an array of voltage measurements. Ensure that sufficient space
+                has been allocated for the returned array.
+            current_measurements (float):Returns an array of current measurements. Ensure that sufficient space
+                has been allocated for the returned array.
+            in_compliance (bool):Returns an array of Boolean values indicating whether the output was in
+                compliance at the time the measurement was taken. Ensure that sufficient
+                space has been allocated for the returned array.
+            actual_count (int):Indicates the number of measured values actually retrieved from the
+                device.
+        '''
+        voltage_measurements_ctype = ctypes_types.ViReal64_ctype(0)
+        current_measurements_ctype = ctypes_types.ViReal64_ctype(0)
+        in_compliance_ctype = ctypes_types.ViBoolean_ctype(0)
+        actual_count_ctype = ctypes_types.ViInt32_ctype(0)
+        error_code = self._library.niDCPower_FetchMultiple(self._vi, self._repeated_capability.encode('ascii'), timeout, count, ctypes.pointer(voltage_measurements_ctype), ctypes.pointer(current_measurements_ctype), ctypes.pointer(in_compliance_ctype), ctypes.pointer(actual_count_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViReal64(voltage_measurements_ctype.value), python_types.ViReal64(current_measurements_ctype.value), python_types.ViBoolean(in_compliance_ctype.value), python_types.ViInt32(actual_count_ctype.value)
+
+    def get_attribute_vi_boolean(self, attribute_id):
+        '''get_attribute_vi_boolean
+
+        Vistatus get_attribute_vi_boolean(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViBoolean \*value);
+
+        | Queries the value of a ViBoolean attribute.
+        | You can use this function to get the values of device-specific
+          attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press **Enter**
+                   or the spacebar to display a dialog box containing hierarchical list
+                   of the available attributes. Help text is shown for each attribute.
+                   Select an attribute by double-clicking on it or by selecting it and
+                   then pressing **Enter**.
+                -  A ring control at the top of the dialog box allows you to see all IVI
+                   attributes or only the attributes of type ViBoolean. If you choose to
+                   see all IVI attributes, the data types appear to the right of the
+                   attribute names in the list box. Attributes with data types other
+                   than ViBoolean are dim. If you select an attribute data type that is
+                   dim, LabWindows/CVI transfers you to the function panel for the
+                   corresponding function that is consistent with the data type.
+                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
+                   change this ring control to a manual input box. If the attribute in
+                   this ring control has named constants as valid values, you can view
+                   the constants by moving to the value control and pressing **Enter**.
+
+        Returns:
+            attribute_value (bool):Returns the current value of the attribute. Passes the address of a
+                ViBoolean variable.
+                If the attribute currently showing in the attribute ring control has
+                constants as valid values, you can view a list of the constants by
+                pressing **Enter** on this control. Select a value by double-clicking on
+                it or by selecting it and then pressing **Enter**.
+        '''
+        attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
+        error_code = self._library.niDCPower_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViBoolean(attribute_value_ctype.value)
+
+    def get_attribute_vi_int32(self, attribute_id):
+        '''get_attribute_vi_int32
+
+        Vistatus get_attribute_vi_int32(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViInt32 \*value);
+
+        | Queries the value of a ViInt32 attribute.
+        | You can use this function to get the values of device-specific
+          attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press **Enter**
+                   or the spacebar to display a dialog box containing hierarchical list
+                   of the available attributes. Help text is shown for each attribute.
+                   Select an attribute by double-clicking on it or by selecting it and
+                   then pressing **Enter**.
+                -  A ring control at the top of the dialog box allows you to see all IVI
+                   attributes or only the attributes of type ViInt32. If you choose to
+                   see all IVI attributes, the data types appear to the right of the
+                   attribute names in the list box. Attributes with data types other
+                   than ViInt32 are dim. If you select an attribute data type that is
+                   dim, LabWindows/CVI transfers you to the function panel for the
+                   corresponding function that is consistent with the data type.
+                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
+                   change this ring control to a manual input box. If the attribute in
+                   this ring control has named constants as valid values, you can view
+                   the constants by moving to the value control and pressing **Enter**.
+
+        Returns:
+            attribute_value (int):Returns the current value of the attribute. Passes the address of a
+                ViInt32 variable.
+                If the attribute currently showing in the attribute ring control has
+                constants as valid values, you can view a list of the constants by
+                pressing **Enter** on this control. Select a value by double-clicking on
+                it or by selecting it and then pressing **Enter**.
+        '''
+        attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
+        error_code = self._library.niDCPower_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViInt32(attribute_value_ctype.value)
+
+    def get_attribute_vi_int64(self, attribute_id):
+        '''get_attribute_vi_int64
+
+        Vistatus get_attribute_vi_int64(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViInt64 \*value);
+
+        | Queries the value of a ViInt64 attribute.
+        | You can use this function to get the values of device-specific
+          attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press **Enter**
+                   or the spacebar to display a dialog box containing hierarchical list
+                   of the available attributes. Help text is shown for each attribute.
+                   Select an attribute by double-clicking on it or by selecting it and
+                   then pressing **Enter**.
+                -  A ring control at the top of the dialog box allows you to see all IVI
+                   attributes or only the attributes of type ViReal64. If you choose to
+                   see all IVI attributes, the data types appear to the right of the
+                   attribute names in the list box. Attributes with data types other
+                   than ViReal64 are dim. If you select an attribute data type that is
+                   dim, LabWindows/CVI transfers you to the function panel for the
+                   corresponding function that is consistent with the data type.
+                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
+                   change this ring control to a manual input box. If the attribute in
+                   this ring control has named constants as valid values, you can view
+                   the constants by moving to the value control and pressing **Enter**.
+
+        Returns:
+            attribute_value (int):Returns the current value of the attribute. Passes the address of a
+                ViReal64 variable.
+                If the attribute currently showing in the attribute ring control has
+                constants as valid values, you can view a list of the constants by
+                pressing **Enter** on this control. Select a value by double-clicking on
+                it or by selecting it and then pressing **Enter**.
+        '''
+        attribute_value_ctype = ctypes_types.ViInt64_ctype(0)
+        error_code = self._library.niDCPower_GetAttributeViInt64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViInt64(attribute_value_ctype.value)
+
+    def get_attribute_vi_real64(self, attribute_id):
+        '''get_attribute_vi_real64
+
+        Vistatus get_attribute_vi_real64(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViReal64 \*value);
+
+        | Queries the value of a ViReal64 attribute.
+        | You can use this function to get the values of device-specific
+          attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press **Enter**
+                   or the spacebar to display a dialog box containing hierarchical list
+                   of the available attributes. Help text is shown for each attribute.
+                   Select an attribute by double-clicking on it or by selecting it and
+                   then pressing **Enter**.
+                -  A ring control at the top of the dialog box allows you to see all IVI
+                   attributes or only the attributes of type ViReal64. If you choose to
+                   see all IVI attributes, the data types appear to the right of the
+                   attribute names in the list box. Attributes with data types other
+                   than ViReal64 are dim. If you select an attribute data type that is
+                   dim, LabWindows/CVI transfers you to the function panel for the
+                   corresponding function that is consistent with the data type.
+                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
+                   change this ring control to a manual input box. If the attribute in
+                   this ring control has named constants as valid values, you can view
+                   the constants by moving to the value control and pressing **Enter**.
+
+        Returns:
+            attribute_value (float):Returns the current value of the attribute. Passes the address of a
+                ViReal64 variable.
+                If the attribute currently showing in the attribute ring control has
+                constants as valid values, you can view a list of the constants by
+                pressing **Enter** on this control. Select a value by double-clicking on
+                it or by selecting it and then pressing **Enter**.
+        '''
+        attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
+        error_code = self._library.niDCPower_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViReal64(attribute_value_ctype.value)
+
+    def get_attribute_vi_session(self, attribute_id):
+        '''get_attribute_vi_session
+
+        Vistatus get_attribute_vi_session(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViSession \*value);
+
+        | Queries the value of a ViSession attribute.
+        | You can use this function to get the values of device-specific
+          attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press **Enter**
+                   or the spacebar to display a dialog box containing hierarchical list
+                   of the available attributes. Help text is shown for each attribute.
+                   Select an attribute by double-clicking on it or by selecting it and
+                   then pressing **Enter**.
+                -  A ring control at the top of the dialog box allows you to see all IVI
+                   attributes or only the attributes of type ViSession. If you choose to
+                   see all IVI attributes, the data types appear to the right of the
+                   attribute names in the list box. Attributes with data types other
+                   than ViSession are dim. If you select an attribute data type that is
+                   dim, LabWindows/CVI transfers you to the function panel for the
+                   corresponding function that is consistent with the data type.
+                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
+                   change this ring control to a manual input box. If the attribute in
+                   this ring control has named constants as valid values, you can view
+                   the constants by moving to the value control and pressing **Enter**.
+
+        Returns:
+            attribute_value (int):Returns the current value of the attribute. Passes the address of a
+                ViSession variable.
+                If the attribute currently showing in the attribute ring control has
+                constants as valid values, you can view a list of the constants by
+                pressing **Enter** on this control. Select a value by double-clicking on
+                it or by selecting it and then pressing **Enter**.
+        '''
+        attribute_value_ctype = ctypes_types.ViSession_ctype(0)
+        error_code = self._library.niDCPower_GetAttributeViSession(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViSession(attribute_value_ctype.value)
+
+    def get_attribute_vi_string(self, attribute_id, buffer_size):
+        '''get_attribute_vi_string
+
+        ViStatus get_attribute_vi_string(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViInt32 bufSize, ViChar value[]);
+
+        | Queries the value of a ViString attribute.
+        | You can use this function to get the values of device-specific
+          attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press or the
+                   spacebar to display a dialog box containing hierarchical list of the
+                   available attributes. Help text is shown for each attribute. Select
+                   an attribute by double-clicking on it or by selecting it and then
+                   pressing .
+                -  A ring control at the top of the dialog box allows you to see all IVI
+                   attributes or only the attributes of type ViString. If you choose to
+                   see all IVI attributes, the data types appear to the right of the
+                   attribute names in the list box. Attributes with data types other
+                   than ViString are dimmed. If you select an attribute data type that
+                   is dimmed, LabWindows/CVI transfers you to the function panel for the
+                   corresponding function that is consistent with the data type.
+                -  If you want to enter a variable name, press to change this ring
+                   control to a manual input control. If the attribute in this ring
+                   control has named constants as valid values, you can view the
+                   constants by moving to the value control and pressing .
+            buffer_size (int):Passes the number of bytes in the buffer and specifies the number of
+                bytes in the ViChar array you specify for **value**. If the current
+                value of **value**, including the terminating NUL byte, is larger than
+                the size you indicate in this parameter, the function copies (buffer
+                size - 1) bytes into the buffer, places an ASCII NUL byte at the end of
+                the buffer, and returns the buffer size you must pass to get the entire
+                value. For example, if the value is 123456 and the buffer size is 4, the
+                function places 123 into the buffer and returns 7.
+                To obtain the required buffer size, you can pass 0 for this attribute
+                and VI_NULL for **value**. If you want the function to fill in the
+                buffer regardless of the number of bytes in the value, pass a negative
+                number for this attribute.
+
+        Returns:
+            attribute_value (int):The buffer in which the function returns the current value of the
+                attribute. The buffer must be of type ViChar and have at least as many
+                bytes as indicated in **bufSize**.
+                If the current value of the attribute, including the terminating NUL
+                byte, contains more bytes that you indicate in this attribute, the
+                function copies (buffer size -1) bytes into the buffer, places an ASCII
+                NUL byte at the end of the buffer, and returns the buffer size you must
+                pass to get the entire value. For example, if the value is 123456 and
+                the buffer size is 4, the function places 123 into the buffer and
+                returns 7.
+                If you specify 0 for **bufSize**, you can pass VI_NULL for this
+                attribute.
+                If the attribute currently showing in the attribute ring control has
+                constants as valid values, you can view a list of the constants by
+                pressing on this control. Select a value by double-clicking on it or by
+                selecting it and then pressing .
+        '''
+        attribute_value_ctype = ctypes_types.ViChar_ctype(0)
+        error_code = self._library.niDCPower_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViChar(attribute_value_ctype.value)
+
+    def get_channel_name(self, index, buffer_size):
+        '''get_channel_name
+
+        ViStatus get_channel_name(ViSession vi, ViInt32 index, ViInt32
+        bufferSize, ViChar channelName[]);
+
+        Retrieves the output **channelName** that corresponds to the requested
+        **index**. Use the
+        `CHANNEL_COUNT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CHANNEL_COUNT.html')>`__
+        attribute to determine the upper bound of valid values for **index**.
+
+        Args:
+            index (int):Specifies which output channel name to return. The index values begin at
+                1.
+            buffer_size (int):Specifies the number of bytes in the ViChar array you specify for
+                **channelName**. If the **channelName**, including the terminating NUL
+                byte, contains more bytes than you indicate in this attribute, the
+                function copies (buffer size - 1) bytes into the buffer, places an ASCII
+                NUL byte at the end of the buffer, and returns the buffer size you must
+                pass to get the entire value. For example, if the value is 123456 and
+                the buffer size is 4, the function places 123 into the buffer and
+                returns 7.
+                If you pass 0, you can pass VI_NULL for **channelName**.
+
+        Returns:
+            channel_name (int):Returns the output channel name that corresponds to **index**.
+        '''
+        channel_name_ctype = ctypes_types.ViChar_ctype(0)
+        error_code = self._library.niDCPower_GetChannelName(self._vi, index, buffer_size, ctypes.pointer(channel_name_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViChar(channel_name_ctype.value)
+
+    def measure(self, measurement_type):
+        '''measure
+
+        Vistatus measure(ViSession vi, ViConstString channelName,
+        ViInt32 measurementType, ViReal64 \*measurement)
+
+        Returns the measured value of either the voltage or current on the
+        specified output channel. Each call to this function blocks other
+        function calls until the hardware returns the **measurement**. To
+        measure multiple output channels, use the
+        `measure_multiple <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_MeasureMultiple.html')>`__
+        function.
+
+        Args:
+            channel_name (int):Specifies the output channel to measure. Only one measurement at a time
+                may be made with the measure function. Use the
+                `measure_multiple <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_MeasureMultiple.html')>`__
+                function to measure multiple channels.
+            measurement_type (int):Specifies whether a voltage or current value is measured.
+                **Defined Values**:
+
+                +-----------------------------------+------------------------------+
+                | NIDCPOWER_VAL_MEASURE_VOLTAGE (1) | The device measures voltage. |
+                +-----------------------------------+------------------------------+
+                | NIDCPOWER_VAL_MEASURE_CURRENT (0) | The device measures current. |
+                +-----------------------------------+------------------------------+
+
+        Returns:
+            measurement (float):Returns the value of the measurement, either in volts for voltage or
+                amps for current.
+        '''
+        measurement_ctype = ctypes_types.ViReal64_ctype(0)
+        error_code = self._library.niDCPower_Measure(self._vi, self._repeated_capability.encode('ascii'), measurement_type, ctypes.pointer(measurement_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViReal64(measurement_ctype.value)
+
+    def measure_multiple(self):
+        '''measure_multiple
+
+        Vistatus measure_multiple(ViSession vi, ViConstString
+        channelName, ViReal64 voltageMeasurements[], ViReal64
+        currentMeasurements[]);
+
+        Returns arrays of the measured voltage and current values on the
+        specified output channel(s). Each call to this function blocks other
+        function calls until the measurements are returned from the device. The
+        order of the measurements returned in the array corresponds to the order
+        on the specified output channel(s).
+
+        Args:
+            channel_name (int):Specifies the output channels to measure. You can specify multiple
+                channels by using a channel list or a channel range. A channel list is a
+                comma (,) separated sequence of channel names (e.g. 0,2 specifies
+                channels 0 and 2). A channel range is a lower bound channel followed by
+                a hyphen (-) or colon (:) followed by an upper bound channel (e.g. 0-2
+                specifies channels 0, 1, and 2). If you do not specify a channel name,
+                the function uses all channels in the session.
+
+        Returns:
+            voltage_measurements (float):Returns an array of voltage measurements. The measurements in the array
+                are returned in the same order as the channels specified in
+                **channelName**. Ensure that sufficient space has been allocated for the
+                returned array.
+            current_measurements (float):Returns an array of current measurements. The measurements in the array
+                are returned in the same order as the channels specified in
+                **channelName**. Ensure that sufficient space has been allocated for the
+                returned array.
+        '''
+        voltage_measurements_ctype = ctypes_types.ViReal64_ctype(0)
+        current_measurements_ctype = ctypes_types.ViReal64_ctype(0)
+        error_code = self._library.niDCPower_MeasureMultiple(self._vi, self._repeated_capability.encode('ascii'), ctypes.pointer(voltage_measurements_ctype), ctypes.pointer(current_measurements_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViReal64(voltage_measurements_ctype.value), python_types.ViReal64(current_measurements_ctype.value)
+
+    def query_in_compliance(self):
+        '''query_in_compliance
+
+        Vistatus query_in_compliance(ViSession vi, ViConstString
+        channelName, ViBoolean \*inCompliance);
+
+        Queries the specified output device to determine if it is operating at
+        the
+        `compliance <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'compliance.html')>`__
+        limit.
+
+        The compliance limit is the current limit when the output function is
+        set to NIDCPOWER_VAL_DC_VOLTAGE. If the output is operating at the
+        compliance limit, the output reaches the current limit before the
+        desired voltage level. Refer to the
+        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
+        function and the
+        `configure_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLimit.html')>`__
+        function for more information about output function and current limit,
+        respectively.
+
+        The compliance limit is the voltage limit when the output function is
+        set to NIDCPOWER_VAL_DC_CURRENT. If the output is operating at the
+        compliance limit, the output reaches the voltage limit before the
+        desired current level. Refer to the configure_output_function
+        function and the
+        `configure_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimit.html')>`__
+        function for more information about output function and voltage limit,
+        respectively.
+
+        **Related Topics:**
+
+        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel to query. Compliance status can only be
+                queried for one channel at a time.
+
+        Returns:
+            in_compliance (bool):Returns whether the device output channel is in compliance.
+        '''
+        in_compliance_ctype = ctypes_types.ViBoolean_ctype(0)
+        error_code = self._library.niDCPower_QueryInCompliance(self._vi, self._repeated_capability.encode('ascii'), ctypes.pointer(in_compliance_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViBoolean(in_compliance_ctype.value)
+
+    def query_max_current_limit(self, voltage_level):
+        '''query_max_current_limit
+
+        Vistatus query_max_current_limit(ViSession vi, ViConstString
+        channelName, ViReal64 voltageLevel, ViReal64 \*maxCurrentLimit);
+
+        Queries the maximum current limit on an output channel if the output
+        channel is set to the specified **voltageLevel**.
+
+        Args:
+            channel_name (int):Specifies the output channel to query. The maximum current limit may
+                only be queried for one channel at a time.
+            voltage_level (float):Specifies the voltage level to use when calculating the
+                **maxCurrentLimit**.
+
+        Returns:
+            max_current_limit (float):Returns the maximum current limit that can be set with the specified
+                **voltageLevel**.
+        '''
+        max_current_limit_ctype = ctypes_types.ViReal64_ctype(0)
+        error_code = self._library.niDCPower_QueryMaxCurrentLimit(self._vi, self._repeated_capability.encode('ascii'), voltage_level, ctypes.pointer(max_current_limit_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViReal64(max_current_limit_ctype.value)
+
+    def query_max_voltage_level(self, current_limit):
+        '''query_max_voltage_level
+
+        Vistatus query_max_voltage_level(ViSession vi, ViConstString
+        channelName, ViReal64 currentLimit, ViReal64 \*maxVoltageLevel);
+
+        Queries the maximum voltage level on an output channel if the output
+        channel is set to the specified **currentLimit**.
+
+        Args:
+            channel_name (int):Specifies the output channel to query. The maximum voltage level may
+                only be queried for one channel at a time.
+            current_limit (float):Specifies the current limit to use when calculating the
+                **maxVoltageLevel**.
+
+        Returns:
+            max_voltage_level (float):Returns the maximum voltage level that can be set on an output channel
+                with the specified **currentLimit**.
+        '''
+        max_voltage_level_ctype = ctypes_types.ViReal64_ctype(0)
+        error_code = self._library.niDCPower_QueryMaxVoltageLevel(self._vi, self._repeated_capability.encode('ascii'), current_limit, ctypes.pointer(max_voltage_level_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViReal64(max_voltage_level_ctype.value)
+
+    def query_min_current_limit(self, voltage_level):
+        '''query_min_current_limit
+
+        Vistatus query_min_current_limit(ViSession vi, ViConstString
+        channelName, ViReal64 voltageLevel, ViReal64 \*minCurrentLimit);
+
+        Queries the minimum current limit on an output channel if the output
+        channel is set to the specified **voltageLevel**.
+
+        Args:
+            channel_name (int):Specifies the output channel to query. The minimum current limit may
+                only be queried for one channel at a time.
+            voltage_level (float):Specifies the voltage level to use when calculating the
+                **minCurrentLimit**.
+
+        Returns:
+            min_current_limit (float):Returns the minimum current limit that can be set on an output channel
+                with the specified **voltageLevel**.
+        '''
+        min_current_limit_ctype = ctypes_types.ViReal64_ctype(0)
+        error_code = self._library.niDCPower_QueryMinCurrentLimit(self._vi, self._repeated_capability.encode('ascii'), voltage_level, ctypes.pointer(min_current_limit_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViReal64(min_current_limit_ctype.value)
+
+    def query_output_state(self, output_state):
+        '''query_output_state
+
+        Vistatus query_output_state(ViSession vi, ViConstString
+        channelName, ViInt32 outputState, ViBoolean \*inState);
+
+        Queries the specified output channel to determine if the output channel
+        is currently in the state specified by **outputState**.
+
+        **Related Topics:**
+
+        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
+
+        Args:
+            channel_name (int):Specifies the output channel to query. The output state may only be
+                queried for one channel at a time.
+            output_state (int):Specifies the output state of the output channel that is being queried.
+                **Defined Values**:
+
+                +-------------------------------------------+-------------------------------------------------------------------+
+                | NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE (0) | The device maintains a constant voltage by adjusting the current. |
+                +-------------------------------------------+-------------------------------------------------------------------+
+                | NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT (1) | The device maintains a constant current by adjusting the voltage. |
+                +-------------------------------------------+-------------------------------------------------------------------+
+
+        Returns:
+            in_state (bool):Returns whether the device output channel is in the specified output
+                state.
+        '''
+        in_state_ctype = ctypes_types.ViBoolean_ctype(0)
+        error_code = self._library.niDCPower_QueryOutputState(self._vi, self._repeated_capability.encode('ascii'), output_state, ctypes.pointer(in_state_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViBoolean(in_state_ctype.value)
+
+    def set_attribute_vi_boolean(self, attribute_id, attribute_value):
+        '''set_attribute_vi_boolean
+
+        Vistatus set_attribute_vi_boolean(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViBoolean value);
+
+        | Sets the value of a ViBoolean attribute.
+        | This is a low-level function that you can use to set the values of
+          device-specific attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press **Enter**
+                   or the spacebar to display a dialog box containing hierarchical list
+                   of the available attributes. Attributes whose value cannot be set are
+                   dim. Help text is shown for each attribute. Select an attribute by
+                   double-clicking on it or by selecting it and then pressing **Enter**.
+                -  Read-only attributes appear dim in the list box. If you select a
+                   read-only attribute, an error message appears. A ring control at the
+                   top of the dialog box allows you to see all IVI attributes or only
+                   the attributes of type ViBoolean. If you choose to see all IVI
+                   attributes, the data types appear to the right of the attribute names
+                   in the list box. Attributes with data types other than ViBoolean are
+                   dim. If you select an attribute data type that is dim, LabWindows/CVI
+                   transfers you to the function panel for the corresponding function
+                   that is consistent with the data type.
+                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
+                   change this ring control to a manual input box. If the attribute in
+                   this ring control has named constants as valid values, you can view
+                   the constants by moving to the value control and pressing **Enter**.
+            attribute_value (bool):Specifies the value to which you want to set the attribute. If the
+                attribute currently showing in the attribute ring control has constants
+                as valid values, you can view a list of the constants by pressing
+                **Enter** on this control. Select a value by double-clicking on it or by
+                selecting it and then pressing **Enter**.
+
+                Note:
+                Some of the values might not be valid depending upon the current
+                settings of the device session.
+        '''
+        error_code = self._library.niDCPower_SetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_attribute_vi_int32(self, attribute_id, attribute_value):
+        '''set_attribute_vi_int32
+
+        Vistatus set_attribute_vi_int32(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViInt32 value);
+
+        | Sets the value of a ViInt32 attribute.
+        | This is a low-level function that you can use to set the values of
+          device-specific attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press **Enter**
+                   or the spacebar to display a dialog box containing hierarchical list
+                   of the available attributes. Attributes whose value cannot be set are
+                   dim. Help text is shown for each attribute. Select an attribute by
+                   double-clicking on it or by selecting it and then pressing **Enter**.
+                -  Read-only attributes appear dim in the list box. If you select a
+                   read-only attribute, an error message appears. A ring control at the
+                   top of the dialog box allows you to see all IVI attributes or only
+                   the attributes of type ViInt32. If you choose to see all IVI
+                   attributes, the data types appear to the right of the attribute names
+                   in the list box. Attributes with data types other than ViInt32 are
+                   dim. If you select an attribute data type that is dim, LabWindows/CVI
+                   transfers you to the function panel for the corresponding function
+                   that is consistent with the data type.
+                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
+                   change this ring control to a manual input box. If the attribute in
+                   this ring control has named constants as valid values, you can view
+                   the constants by moving to the value control and pressing **Enter**.
+            attribute_value (int):Specifies the value to which you want to set the attribute. If the
+                attribute currently showing in the attribute ring control has constants
+                as valid values, you can view a list of the constants by pressing
+                **Enter** on this control. Select a value by double-clicking on it or by
+                selecting it and then pressing **Enter**.
+
+                Note:
+                Some of the values might not be valid depending upon the current
+                settings of the device session.
+        '''
+        error_code = self._library.niDCPower_SetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_attribute_vi_int64(self, attribute_id, attribute_value):
+        '''set_attribute_vi_int64
+
+        Vistatus set_attribute_vi_int64(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViInt64 value);
+
+        | Sets the value of a ViInt64 attribute.
+        | This is a low-level function that you can use to set the values of
+          device-specific attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press **Enter**
+                   or the spacebar to display a dialog box containing hierarchical list
+                   of the available attributes. Attributes whose value cannot be set are
+                   dim. Help text is shown for each attribute. Select an attribute by
+                   double-clicking on it or by selecting it and then pressing **Enter**.
+                -  Read-only attributes appear dim in the list box. If you select a
+                   read-only attribute, an error message appears. A ring control at the
+                   top of the dialog box allows you to see all IVI attributes or only
+                   the attributes of type ViReal64. If you choose to see all IVI
+                   attributes, the data types appear to the right of the attribute names
+                   in the list box. Attributes with data types other than ViReal64 are
+                   dim. If you select an attribute data type that is dim, LabWindows/CVI
+                   transfers you to the function panel for the corresponding function
+                   that is consistent with the data type.
+                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
+                   change this ring control to a manual input box. If the attribute in
+                   this ring control has named constants as valid values, you can view
+                   the constants by moving to the value control and pressing **Enter**.
+            attribute_value (int):Specifies the value to which you want to set the attribute. If the
+                attribute currently showing in the attribute ring control has constants
+                as valid values, you can view a list of the constants by pressing
+                **Enter** on this control. Select a value by double-clicking on it or by
+                selecting it and then pressing **Enter**.
+
+                Note:
+                Some of the values might not be valid depending upon the current
+                settings of the device session.
+        '''
+        error_code = self._library.niDCPower_SetAttributeViInt64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_attribute_vi_real64(self, attribute_id, attribute_value):
+        '''set_attribute_vi_real64
+
+        Vistatus set_attribute_vi_real64(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViReal64 value);
+
+        | Sets the value of a ViReal64 attribute.
+        | This is a low-level function that you can use to set the values of
+          device-specific attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press **Enter**
+                   or the spacebar to display a dialog box containing hierarchical list
+                   of the available attributes. Attributes whose value cannot be set are
+                   dim. Help text is shown for each attribute. Select an attribute by
+                   double-clicking on it or by selecting it and then pressing **Enter**.
+                -  Read-only attributes appear dim in the list box. If you select a
+                   read-only attribute, an error message appears. A ring control at the
+                   top of the dialog box allows you to see all IVI attributes or only
+                   the attributes of type ViReal64. If you choose to see all IVI
+                   attributes, the data types appear to the right of the attribute names
+                   in the list box. Attributes with data types other than ViReal64 are
+                   dim. If you select an attribute data type that is dim, LabWindows/CVI
+                   transfers you to the function panel for the corresponding function
+                   that is consistent with the data type.
+                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
+                   change this ring control to a manual input box. If the attribute in
+                   this ring control has named constants as valid values, you can view
+                   the constants by moving to the value control and pressing **Enter**.
+            attribute_value (float):Specifies the value to which you want to set the attribute. If the
+                attribute currently showing in the attribute ring control has constants
+                as valid values, you can view a list of the constants by pressing
+                **Enter** on this control. Select a value by double-clicking on it or by
+                selecting it and then pressing **Enter**.
+
+                Note:
+                Some of the values might not be valid depending upon the current
+                settings of the device session.
+        '''
+        error_code = self._library.niDCPower_SetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_attribute_vi_session(self, attribute_id, attribute_value):
+        '''set_attribute_vi_session
+
+        Vistatus set_attribute_vi_session(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViSession value);
+
+        | Sets the value of a ViSession attribute.
+        | This is a low-level function that you can use to set the values of
+          device-specific attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press **Enter**
+                   or the spacebar to display a dialog box containing hierarchical list
+                   of the available attributes. Attributes whose value cannot be set are
+                   dim. Help text is shown for each attribute. Select an attribute by
+                   double-clicking on it or by selecting it and then pressing **Enter**.
+                -  Read-only attributes appear dim in the list box. If you select a
+                   read-only attribute, an error message appears. A ring control at the
+                   top of the dialog box allows you to see all IVI attributes or only
+                   the attributes of type ViSession. If you choose to see all IVI
+                   attributes, the data types appear to the right of the attribute names
+                   in the list box. Attributes with data types other than ViSession are
+                   dim. If you select an attribute data type that is dim, LabWindows/CVI
+                   transfers you to the function panel for the corresponding function
+                   that is consistent with the data type.
+                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
+                   change this ring control to a manual input box. If the attribute in
+                   this ring control has named constants as valid values, you can view
+                   the constants by moving to the value control and pressing **Enter**.
+            attribute_value (int):Specifies the value to which you want to set the attribute. If the
+                attribute currently showing in the attribute ring control has constants
+                as valid values, you can view a list of the constants by pressing
+                **Enter** on this control. Select a value by double-clicking on it or by
+                selecting it and then pressing **Enter**.
+
+                Note:
+                Some of the values might not be valid depending upon the current
+                settings of the device session.
+        '''
+        error_code = self._library.niDCPower_SetAttributeViSession(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_attribute_vi_string(self, attribute_id, attribute_value):
+        '''set_attribute_vi_string
+
+        Vistatus set_attribute_vi_string(ViSession vi, ViConstString
+        channelName, ViAttr attribute, ViConstString value);
+
+        | Sets the value of a ViString attribute.
+        | This is a low-level function that you can use to set the values of
+          device-specific attributes and inherent IVI attributes.
+
+        Args:
+            channel_name (int):Specifies the output channel(s) to which this configuration value
+                applies. Specify multiple channels by using a channel list or a channel
+                range. A channel list is a comma (,) separated sequence of channel names
+                (for example, 0,2 specifies channels 0 and 2). A channel range is a
+                lower bound channel followed by a hyphen (-) or colon (:) followed by an
+                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+                In the Running state, multiple output channel configurations are
+                performed sequentially based on the order specified in this parameter.
+            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+                can use this control as follows.
+
+                -  In the function panel window, click on the control or press **Enter**
+                   or the spacebar to display a dialog box containing hierarchical list
+                   of the available attributes. Attributes whose value cannot be set are
+                   dim. Help text is shown for each attribute. Select an attribute by
+                   double-clicking on it or by selecting it and then pressing **Enter**.
+                -  Read-only attributes appear dim in the list box. If you select a
+                   read-only attribute, an error message appears. A ring control at the
+                   top of the dialog box allows you to see all IVI attributes or only
+                   the attributes of type ViString. If you choose to see all IVI
+                   attributes, the data types appear to the right of the attribute names
+                   in the list box. Attributes with data types other than ViString are
+                   dim. If you select an attribute data type that is dim, LabWindows/CVI
+                   transfers you to the function panel for the corresponding function
+                   that is consistent with the data type.
+                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
+                   change this ring control to a manual input box. If the attribute in
+                   this ring control has named constants as valid values, you can view
+                   the constants by moving to the value control and pressing **Enter**.
+            attribute_value (int):Specifies the value to which you want to set the attribute. If the
+                attribute currently showing in the attribute ring control has constants
+                as valid values, you can view a list of the constants by pressing
+                **Enter** on this control. Select a value by double-clicking on it or by
+                selecting it and then pressing **Enter**.
+
+                Note:
+                Some of the values might not be valid depending upon the current
+                settings of the device session.
+        '''
+        error_code = self._library.niDCPower_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_sequence(self, values, source_delays, size):
+        '''set_sequence
+
+        Vistatus set_sequence(ViSession vi, ViConstString channelName,
+        ViReal64 values[], ViReal64 sourceDelays[], ViUInt32 size);
+
+        Configures a series of voltage or current outputs and corresponding
+        source delays. The source mode must be set to
+        `Sequence <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/sequencing/>`__
+        for this function to take effect.
+
+        Refer to the `Configuring the Source
+        Unit <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/configuringthesourceunit/>`__
+        topic in the *NI DC Power Supplies and SMUs Help* for more information
+        about how to configure your device.
+
+        Use this function in the Uncommitted or Committed programming states.
+        Refer to the `Programming
+        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+        topic in the *NI DC Power Supplies and SMUs Help* for more information
+        about NI-DCPower programming states.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            channel_name (int):Specifies the output channel to which this configuration value applies.
+                You can only set a sequence for one channel at a time.
+            values (float):Specifies the series of voltage levels or current levels, depending on
+                the configured `output
+                function <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programming_output/>`__.
+                **Valid values**:
+                The valid values for this parameter are defined by the voltage level
+                range or current level range.
+            source_delays (float):Specifies the source delay that follows the configuration of each value
+                in the sequence.
+                **Valid Values**:
+                The valid values are between 0 and 167 seconds.
+            size (int):The number of elements in the Values and the Source Delays arrays. The
+                Values and Source Delays arrays should have the same size.
+        '''
+        error_code = self._library.niDCPower_SetSequence(self._vi, self._repeated_capability.encode('ascii'), values, source_delays, size)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+
+class _RepeatedCapability(_SessionBase):
+    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
+
+    def __init__(self, vi, repeated_capability):
+        super(_RepeatedCapability, self).__init__(repeated_capability)
+        self._vi = vi
+        self._is_frozen = True
+
+
+class Session(_SessionBase):
+    '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
+
+    def __init__(self, resource_name, channels, reset, option_string):
+        super(Session, self).__init__(repeated_capability='')
+        self._vi = 0  # This must be set before calling initialize_with_channels().
+        self._vi = self.initialize_with_channels(resource_name, channels, reset, option_string)
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        return _RepeatedCapability(self._vi, repeated_capability)
+
+    def initiate(self):
+        return _Acquisition(self)
+
+    def close(self):
+        try:
+            self._close()
+        except errors.Error:
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
+            print("Failed to close session.")
+        self._vi = 0
+
+    ''' These are code-generated '''
+
+    def abort(self):
+        '''abort
+
+        Vistatus abort(ViSession vi);
+
+        Transitions the NI-DCPower session from the Running state to the
+        Committed state. If a sequence is running, it is stopped. Any
+        configuration functions called after this function are not applied until
+        the
+        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
+        function is called. If power output is enabled when you call the
+        abort function, the output channels remain in their current
+        state and continue providing power.
+
+        Use the
+        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputEnabled.html')>`__
+        function to disable power output on a per channel basis. Use the
+        `reset <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
+        function to disable output on all channels.
+
+        Refer to the `Programming
+        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+        topic in the *NI DC Power Supplies and SMUs Help* for information about
+        the specific NI-DCPower software states.
+
+        **Related Topics:**
+
+        `Programming
+        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+        '''
+        error_code = self._library.niDCPower_Abort(self._vi)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def cal_adjust_internal_reference(self, internal_reference, adjusted_internal_reference):
+        '''cal_adjust_internal_reference
+
+        Vistatus cal_adjust_internal_reference(ViSession vi, ViSession
+        vi, ViInt32 internal_reference, ViReal64
+        adjusted_internal_reference;
+
+        Programs the adjusted reference value to the device. Refer to the
+        calibration procedure for the device you are calibrating for detailed
+        instructions on the appropriate use of this function. This function can
+        only be called from an external calibration session.
+
+        Note:
+        This function is not supported on all devices. Refer to `Supported
+        Functions by
+        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        for more information about supported devices.
+
+        Args:
+            internal_reference (int):Specifies the internal reference to be connected to the calibration pin.
+                **Defined Values**:
+
+                +-------------------------------------------------+---------------------------------------------------------+
+                | NIDCPOWER_VAL_INTERNAL_REFERENCE_5V (1054)      | Calibration pin connected to 5 V internal reference.    |
+                +-------------------------------------------------+---------------------------------------------------------+
+                | NIDCPOWER_VAL_INTERNAL_REFERENCE_100KOHM (1055) | Calibration pin connected to 100 kΩ internal reference. |
+                +-------------------------------------------------+---------------------------------------------------------+
+            adjusted_internal_reference (float):Specifies the updated value of the internal reference that will be
+                programmed to the device.
+        '''
+        error_code = self._library.niDCPower_CalAdjustInternalReference(self._vi, internal_reference, adjusted_internal_reference)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2967,294 +5355,6 @@ class _SessionBase(object):
         States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
         '''
         error_code = self._library.niDCPower_Commit(self._vi)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_aperture_time(self, channel_name, aperture_time, units):
-        '''configure_aperture_time
-
-        Vistatus configure_aperture_time(ViSession vi, ViConstString
-        channelName, ViReal64 apertureTime, ViInt32 units);
-
-        Configures the aperture time on the specified channel(s).
-
-        The supported values depend on the **units**. Refer to the *Aperture
-        Time* topic for your device in the *NI DC Power Supplies and SMUs Help*
-        for more information. In general, devices support discrete
-        **apertureTime** values, and if you configure **apertureTime** to some
-        unsupported value, NI-DCPower coerces it up to the next supported value.
-
-        Refer to the *Measurement Configuration and Timing* or *DC Noise
-        Rejection* topic for your device in the *NI DC Power Supplies and SMUs
-        Help* for more information about how to configure your measurements.
-
-        **Related Topics:**
-
-        `Aperture
-        Time <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/aperture/>`__
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            aperture_time (float):Specifies the aperture time. Refer to the *Aperture Time* topic for your
-                device in the *NI DC Power Supplies and SMUs Help* for more information.
-            units (int):Specifies the units for **apertureTime**.
-                **Defined Values**:
-
-                +----------------------------------------+------------------------------+
-                | NIDCPOWER_VAL_SECONDS (1028)           | Specifies seconds.           |
-                +----------------------------------------+------------------------------+
-                | NIDCPOWER_VAL_POWER_LINE_CYCLES (1029) | Specifies Power Line Cycles. |
-                +----------------------------------------+------------------------------+
-        '''
-        error_code = self._library.niDCPower_ConfigureApertureTime(self._vi, channel_name, aperture_time, units)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_auto_zero(self, channel_name, auto_zero):
-        '''configure_auto_zero
-
-        Vistatus configure_auto_zero(ViSession vi, ViConstString
-        channelName, ViInt32 autoZero);
-
-        Configures auto zero for the device.
-
-        Refer to the `NI PXI-4132 Auto
-        Zero <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4132_autozero/>`__
-        and `NI PXI-4132 Measurement Configuration and
-        Timing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4132_measureconfigtiming/>`__
-        topics in the *NI DC Power Supplies and SMUs Help* for more information
-        about how to configure your measurements.
-
-        **Related Topics:**
-
-        `Auto
-        Zero <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/autozero/>`__
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            auto_zero (int):Specifies the auto-zero setting. Refer to the *Measurement Configuration
-                and Timing* topic and the *Auto Zero* topic for your device for more
-                information about how to configure your measurements.
-                **Defined Values:**
-
-                +---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDCPOWER_VAL_OFF (0)     | Disables auto-zero.                                                                                                                                                                                               |
-                +---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDCPOWER_VAL_ONCE (1024) | Makes zero conversions following the first measurement after initiating the device. The device uses these zero conversions for the preceding measurement and future measurements until the device is reinitiated. |
-                +---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDCPOWER_VAL_ON (1)      | Makes zero conversions for every measurement.                                                                                                                                                                     |
-                +---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        '''
-        error_code = self._library.niDCPower_ConfigureAutoZero(self._vi, channel_name, auto_zero)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_current_level(self, channel_name, level):
-        '''configure_current_level
-
-        Vistatus configure_current_level(ViSession vi, ViConstString
-        channelName, ViReal64 level);
-
-        Configures the current level the device attempts to generate for the
-        specified channel(s). The channel must be enabled for the specified
-        current level to take effect. Refer to the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel.
-
-        The current level setting is applicable only if the output function of
-        the channel is set to NIDCPOWER_VAL_DC_CURRENT. Use
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
-        to set the output function. The device actively regulates the current at
-        the specified level unless doing so causes a voltage greater than the
-        `voltage
-        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimit.html')>`__
-        across the channels' output terminals.
-
-        **Related Topics:**
-
-        `Constant Current
-        Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/constant_current/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            level (float):Specifies the current level, in amps, to generate for the specified
-                channel(s).
-                **Valid Values:**
-                The valid values for this parameter are defined by the current level
-                range that is configured using the
-                `configure_current_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLevelRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigureCurrentLevel(self._vi, channel_name, level)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_current_level_range(self, channel_name, range):
-        '''configure_current_level_range
-
-        Vistatus configure_current_level_range(ViSession vi,
-        ViConstString channelName, ViReal64 range);
-
-        Configures the current level range for the specified channel(s). The
-        configured range defines the valid values the current level can be set
-        to using the
-        `configure_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureCurrentLevel.html')>`__
-        function. The current level range setting is applicable only if the
-        output function of the channel is set to NIDCPOWER_VAL_DC_CURRENT.
-        Use
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
-        to set the output function.
-
-        Use the
-        `CURRENT_LEVEL_AUTORANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE.html')>`__
-        attribute to enable automatic selection of the current level range.
-
-        **Related Topics:**
-
-        `ranges <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/ranges/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            range (float):Specifies the current level range, in amps, for the specified channel.
-                For valid ranges, refer to the *ranges* topic for your device in the *NI
-                DC Power Supplies and SMUs Help*.
-        '''
-        error_code = self._library.niDCPower_ConfigureCurrentLevelRange(self._vi, channel_name, range)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_current_limit(self, channel_name, behavior, limit):
-        '''configure_current_limit
-
-        Vistatus configure_current_limit(ViSession vi, ViConstString
-        channelName, ViInt32 behavior, ViReal64 limit);
-
-        | Configures the current limit for the specified channel(s). The channel
-          must be enabled for the specified current limit to take effect. Refer
-          to the
-          `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputEnabled.html')>`__
-          function for more information about enabling the output channel.
-        | The current limit is the current that the output should not exceed
-          when generating the desired `voltage
-          level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLevel.html')>`__.
-          The current limit setting is applicable only if the output function of
-          the channel is set to NIDCPOWER_VAL_DC_VOLTAGE. Use
-          `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
-          to set the output function.
-
-        **Related Topics:**
-
-        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            behavior (int):Specifies how the output should behave when the current limit is
-                reached.
-                **Defined Values:**
-
-                +--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDCPOWER_VAL_CURRENT_REGULATE | Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached. |
-                +--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDCPOWER_VAL_CURRENT_REGULATE | Controls output current so that it does not exceed the current limit. Power continues to generate even if the current limit is reached. |
-                +--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-            limit (float):Specifies the current limit, in amps, on the specified channel(s). The
-                limit is specified as a positive value, but symmetric positive and
-                negative limits are enforced simultaneously.
-                **Valid Values:**
-                The valid values for this parameter are defined by the current limit
-                range that is configured using the
-                `configure_current_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLimitRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigureCurrentLimit(self._vi, channel_name, behavior, limit)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_current_limit_range(self, channel_name, range):
-        '''configure_current_limit_range
-
-        Vistatus configure_current_limit_range(ViSession vi,
-        ViConstString channelName, ViReal64 range);
-
-        Configures the current limit range for the specified channel(s).The
-        configured range defines the valid values the current limit can be set
-        to using the
-        `configure_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureCurrentLimit.html')>`__
-        function. The current limit range setting is applicable only if the
-        output function of the channel is set to NIDCPOWER_VAL_DC_VOLTAGE.
-        Use
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
-        to set the output function.
-
-        Use the
-        `CURRENT_LIMIT_AUTORANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE.html')>`__
-        attribute to enable automatic selection of the current limit range.
-
-        **Related Topics:**
-
-        `ranges <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/ranges/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            range (float):Specifies the current limit range, in amps, for the specified channel.
-                For valid ranges, refer to the *ranges* topic for your device in the *NI
-                DC Power Supplies and SMUs Help*.
-        '''
-        error_code = self._library.niDCPower_ConfigureCurrentLimitRange(self._vi, channel_name, range)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3474,243 +5574,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_output_enabled(self, channel_name, enabled):
-        '''configure_output_enabled
-
-        Vistatus configure_output_enabled(ViSession vi, ViConstString
-        channelName, ViBoolean enabled);
-
-        Enables or disables generation on the specified channel(s). Depending on
-        the selected output function, the voltage level, current level,or output
-        resistance must be set in addition to enabling the output to generate
-        the desired level. For more information about configuring the output
-        level, refer to
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__.
-
-        Note:
-        If the device is in the
-        `Uncommitted <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#uncommitted')>`__
-        state, enabling the output does not take effect until you call the
-        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_Initiate.html')>`__
-        function.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            enabled (bool):Specifies whether the output is enabled or disabled.
-                **Defined Values**:
-
-                +----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | VI_TRUE  | Enables generation on the specified output channel(s).                                                                                                                        |
-                +----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | VI_FALSE | Disables generation on the specified output channel(s). This parameter has no effect on the output disconnect relay. To toggle the relay, use the OUTPUT_CONNECTED attribute. |
-                +----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        '''
-        error_code = self._library.niDCPower_ConfigureOutputEnabled(self._vi, channel_name, enabled)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_output_function(self, channel_name, function):
-        '''configure_output_function
-
-        Vistatus configure_output_function(ViSession vi, ViConstString
-        channelName, ViInt32 function);
-
-        Configures the function the device attempts to generate for the
-        specified channel(s).
-
-        When NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the
-        desired voltage level on the output as long as the output current is
-        below the current limit. The following functions can be used to
-        configure the channel when NIDCPOWER_VAL_DC_VOLTAGE is selected:
-
-        -  `configure_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLevel.html')>`__
-        -  `configure_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLimit.html')>`__
-        -  `configure_voltage_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLevelRange.html')>`__
-        -  `configure_current_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLimitRange.html')>`__
-
-        When NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the
-        desired current level on the output as long as the output voltage is
-        below the voltage limit. The following functions can be used to
-        configure the channel when NIDCPOWER_VAL_DC_CURRENT is selected:
-
-        -  `configure_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLevel.html')>`__
-        -  `configure_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimit.html')>`__
-        -  `configure_current_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLevelRange.html')>`__
-        -  `configure_voltage_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimitRange.html')>`__
-
-        When NIDCPOWER_VAL_PULSE_VOLTAGE is selected, the device generates
-        pulses at the desired voltage levels on the output as long as the output
-        current is below the current limit. The following VIs can be used to
-        configure the channel when NIDCPOWER_VAL_PULSE_VOLTAGE is selected:
-
-        -  `configure_pulse_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevel.html')>`__
-        -  `configure_pulse_bias_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasVoltageLevel.html')>`__
-        -  `configure_pulse_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimit.html')>`__
-        -  `configure_pulse_bias_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasCurrentLimit.html')>`__
-        -  `configure_pulse_voltage_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevelRange.html')>`__
-        -  `configure_pulse_current_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimitRange.html')>`__
-
-        When NIDCPOWER_VAL_PULSE_CURRENT is selected, the device generates
-        pulses at the desired current levels on the output as long as the output
-        voltage is below the voltage limit. The following VIs can be used to
-        configure the channel when NIDCPOWER_VAL_PULSE_CURRENT is selected:
-
-        -  `configure_pulse_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevel.html')>`__
-        -  `configure_pulse_bias_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasCurrentLevel.html')>`__
-        -  `configure_pulse_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimit.html')>`__
-        -  `configure_pulse_bias_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasVoltageLimit.html')>`__
-        -  `configure_pulse_current_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevelRange.html')>`__
-        -  `configure_pulse_voltage_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimitRange.html')>`__
-
-        **Related Topics:**
-
-        `Constant Voltage
-        Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/constant_voltage/>`__
-
-        `Constant Current
-        Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/constant_current/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            function (int):Configures the function to generate for the specified channel(s).
-                **Defined Values**:
-
-                +------------------------------------+--------------------------------------------+
-                | NIDCPOWER_VAL_DC_VOLTAGE (1006)    | Sets the output function to DC voltage.    |
-                +------------------------------------+--------------------------------------------+
-                | NIDCPOWER_VAL_DC_CURRENT (1007)    | Sets the output function to DC current.    |
-                +------------------------------------+--------------------------------------------+
-                | NIDCPOWER_VAL_PULSE_VOLTAGE (1049) | Sets the output function to pulse voltage. |
-                +------------------------------------+--------------------------------------------+
-                | NIDCPOWER_VAL_PULSE_CURRENT (1050) | Sets the output function to pulse current. |
-                +------------------------------------+--------------------------------------------+
-        '''
-        error_code = self._library.niDCPower_ConfigureOutputFunction(self._vi, channel_name, function)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_output_range(self, channel_name, range_type, range):
-        '''configure_output_range
-
-        Vistatus configure_output_range(ViSession vi, ViConstString
-        channelName, ViInt32 rangeType, ViReal64 range);
-
-        Configures either the voltage level range or the current limit range. If
-        **range type** is Voltage, the voltage level range is configured. If
-        **range type** is Current, the current limit range is configured.
-
-        This function does not configure any of the DC Current output function
-        settings. Refer to the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputFunction.html')>`__
-        function for more information.
-
-        This is a deprecated function. You must use the following functions
-        instead of theconfigure_output_range function:
-
-        -  `configure_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLevel.html')>`__
-        -  `configure_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLimit.html')>`__
-        -  `configure_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureCurrentLevel.html')>`__
-        -  `configure_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureCurrentLimit.html')>`__
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            range_type (int):Specifies the type of the range: voltage or current.
-                **Defined Values**:
-
-                +---------------------------------+------------------------------------------+
-                | NIDCPOWER_VAL_RANGE_CURRENT (0) | NI-DCPower configures the current range. |
-                +---------------------------------+------------------------------------------+
-                | NIDCPOWER_VAL_RANGE_VOLTAGE (1) | NI-DCPower configures the voltage range. |
-                +---------------------------------+------------------------------------------+
-            range (float):Specifies the range to calibrate with these settings. Only one channel
-                at a time may be calibrated.
-        '''
-        error_code = self._library.niDCPower_ConfigureOutputRange(self._vi, channel_name, range_type, range)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_output_resistance(self, channel_name, resistance):
-        '''configure_output_resistance
-
-        Vistatus configure_output_resistance(ViSession vi,
-        ViConstString channelName, ViReal64 resistance);
-
-        Configures the output resistance that the device attempts to generate
-        for the specified channel or channels. The channel must be enabled for
-        the specified output resistance to take effect.
-
-        Refer to the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel.
-
-        For NI PXIe-4141/4143/4145 devices, output resistance is only supported
-        if the output function of the channel is set to
-        NIDCPOWER_VAL_DC_VOLTAGE using the configure_output_function
-        function.
-
-        For PXIe-4135, NI PXIe-4137, and NI PXIe-4139 devices, output resistance
-        is supported if the output function of the channel is set to
-        NIDCPOWER_VAL_DC_CURRENT or NIDCPOWER_VAL_DC_VOLTAGE using the
-        configure_output_function function.
-
-        The device actively regulates the current and voltage to reach the
-        specified output resistance, although in DC Voltage output mode, the
-        voltage at the output experiences a "virtual drop" that is proportional
-        to its current. In DC Current output mode, the output experiences a
-        "virtual leakage current" that is proportional to the output voltage.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            resistance (float):Specifies the output resistance, in ohms, for the specified channel.
-                Refer to the `NI PXIe-4141 Programmable Output
-                resistance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4140_4141_progoutputresist/>`__,
-                `NI PXIe-4143 Programmable Output
-                resistance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4142_4143_progoutputresist/>`__,
-                `NI PXIe-4145 Programmable Output
-                resistance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4144_4145_progoutputresist/>`__,or
-                `NI PXIe-4154 Programmable Output
-                resistance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4154_prog_output_resist/>`__
-                topic in the NI DC Power Supplies and SMUs Help for more information
-                about configuring output resistance.
-        '''
-        error_code = self._library.niDCPower_ConfigureOutputResistance(self._vi, channel_name, resistance)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_power_line_frequency(self, powerline_frequency):
         '''configure_power_line_frequency
 
@@ -3755,617 +5618,6 @@ class _SessionBase(object):
                 Note: Set this parameter to the frequency of the AC power line.
         '''
         error_code = self._library.niDCPower_ConfigurePowerLineFrequency(self._vi, powerline_frequency)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_bias_current_level(self, channel_name, level):
-        '''configure_pulse_bias_current_level
-
-        Vistatus configure_pulse_bias_current_level(ViSession vi,
-        ViConstString channelName, ViReal64 level);
-
-        Configures the pulse bias current level that the device attempts to
-        generate for the specified channel(s) during the off phase of a pulse.
-        The channel must be enabled for the specified current level to take
-        effect.
-
-        Refer to the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel. The
-        pulse current level setting is applicable only if the channel is set to
-        the NIDCPOWER_VAL_PULSE_CURRENT output function using the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function.
-
-        The device actively regulates the current at the specified level unless
-        doing so causes a voltage drop greater than the `pulse bias voltage
-        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT.html')>`__
-        across the channels' output terminals.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            level (float):Specifies the pulse bias current level, in amps, on the specified
-                channel(s).
-                **Valid Values:**
-                The valid values for this parameter are defined by the pulse current
-                level range that is configured using the
-                `configure_pulse_current_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevelRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseBiasCurrentLevel(self._vi, channel_name, level)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_bias_current_limit(self, channel_name, limit):
-        '''configure_pulse_bias_current_limit
-
-        Vistatus configure_pulse_bias_current_limit(ViSession vi,
-        ViConstString channelName, ViReal64 limit);
-
-        Configures the pulse bias current limit for the specified channel(s).
-        The channel must be enabled for the specified current limit to take
-        effect.
-
-        Refer to the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel. The
-        pulse bias current limit is the current that the output must not exceed
-        when generating the desired `pulse bias voltage
-        level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_pULSE_bIAS_vOLTAGE_lEVEL.html')>`__.
-        The pulse bias current limit setting is only applicable if the channel
-        is set to the NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            limit (float):Specifies the pulse bias current limit, in amps, on the specified
-                channel(s). The limit is specified as a positive value, but symmetric
-                positive and negative limits are enforced simultaneously.
-                **Valid Values:**
-                The valid values for this parameter are defined by the pulse current
-                limit range that is configured using the
-                `configure_pulse_current_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimitRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseBiasCurrentLimit(self._vi, channel_name, limit)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_bias_voltage_level(self, channel_name, level):
-        '''configure_pulse_bias_voltage_level
-
-        Vistatus configure_pulse_bias_voltage_level(ViSession vi,
-        ViConstString channelName, ViReal64 level);
-
-        Configures the pulse bias voltage level that the device attempts to
-        generate for the specified channel(s) during the off phase of a pulse.
-        The channel must be enabled for the specified voltage level to take
-        effect.
-
-        Refer to the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel. The
-        pulse bias voltage level setting is applicable only if the channel is
-        set to the NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function.
-
-        The device actively regulates the voltage at the specified level unless
-        doing so causes a current greater than the `pulse bias current
-        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT.html')>`__
-        through the channels' output terminals.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            level (float):Specifies the pulse bias voltage level, in volts, for the output channel
-                generation.
-                **Valid Values**:
-                The valid values for this parameter are defined by the pulse voltage
-                level range that is selected using the
-                `configure_pulse_voltage_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevelRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseBiasVoltageLevel(self._vi, channel_name, level)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_bias_voltage_limit(self, channel_name, limit):
-        '''configure_pulse_bias_voltage_limit
-
-        Vistatus configure_pulse_bias_voltage_limit(ViSession vi,
-        ViConstString channelName, ViReal64 limit);
-
-        Configures the pulse bias voltage limit for the specified channel(s).
-        The channel must be enabled for the specified voltage limit to take
-        effect.
-
-        Refer to the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel. The
-        pulse bias voltage limit is the voltage that the output must not exceed
-        when generating the desired `pulse bias current
-        level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_bIAS_cURRENT_lEVEL.html')>`__.
-        The pulse bias voltage limit setting is only applicable if the channel
-        is set to the NIDCPOWER_VAL_PULSE_CURRENT output function using the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            limit (float):Specifies the pulse bias voltage limit, in volts, on the specified
-                channel(s). The limit is specified as a positive value, but symmetric
-                positive and negative limits are enforced simultaneously.
-                **Valid Values:**
-                The valid values for this parameter are defined by the pulse voltage
-                limit range that is configured using the
-                `configure_pulse_voltage_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimitRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseBiasVoltageLimit(self._vi, channel_name, limit)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_current_level(self, channel_name, level):
-        '''configure_pulse_current_level
-
-        Vistatus configure_pulse_current_level(ViSession vi,
-        ViConstString channelName, ViReal64 level);
-
-        Configures the pulse current level that the device attempts to generate
-        for the specified channel(s) during the on phase of a pulse. The channel
-        must be enabled for the specified current level to take effect.
-
-        Refer to the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel. The
-        pulse current level setting is applicable only if the channel is set to
-        the NIDCPOWER_VAL_PULSE_CURRENT output function using the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function.
-
-        The device actively regulates the current at the specified level unless
-        doing so causes a voltage drop greater than the `pulse voltage
-        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_VOLTAGE_lIMIT.html')>`__
-        across the channels' output terminals.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            level (float):Specifies the pulse current level, in amps, on the specified channel(s).
-                **Valid Values:**
-                The valid values for this parameter are defined by the pulse current
-                level range that is configured using the
-                `configure_pulse_current_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevelRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseCurrentLevel(self._vi, channel_name, level)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_current_level_range(self, channel_name, range):
-        '''configure_pulse_current_level_range
-
-        Vistatus configure_pulse_current_level_range(ViSession vi,
-        ViConstString channelName, ViReal64 range);
-
-        Configures the pulse current level range for the specified channel(s).
-
-        The configured range defines the valid values to which you can set the
-        pulse current level and pulse bias current level using the
-        `configure_pulse_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLevel.html')>`__
-        and
-        `configure_pulse_bias_current_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasCurrentLevel.html')>`__
-        functions. The pulse current level range setting is applicable only if
-        the channel is set to the NIDCPOWER_VAL_PULSE_CURRENT output function
-        using the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            range (float):Specifies the pulse current level range, in amps, on the specified
-                channel(s).
-                For valid ranges, refer to the *ranges* topic for your device in the *NI
-                DC Power Supplies and SMUs Help*.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseCurrentLevelRange(self._vi, channel_name, range)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_current_limit(self, channel_name, limit):
-        '''configure_pulse_current_limit
-
-        Vistatus configure_pulse_current_limit(ViSession vi,
-        ViConstString channelName, ViReal64 limit);
-
-        Configures the pulse current limit for the specified channel(s). The
-        channel must be enabled for the specified current limit to take effect.
-
-        Refer to the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel. The
-        pulse current limit is the current that the output must not exceed when
-        generating the desired `pulse voltage
-        level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_vOLTAGE_lEVEL.html')>`__.
-        The pulse current limit setting is only applicable if the channel is set
-        to the NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            limit (float):Specifies the pulse current limit, in amps, on the specified channel(s).
-                The limit is specified as a positive value, but symmetric positive and
-                negative limits are enforced simultaneously.
-                **Valid Values:**
-                The valid values for this parameter are defined by the pulse current
-                limit range that is configured using the
-                `configure_pulse_current_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimitRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseCurrentLimit(self._vi, channel_name, limit)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_current_limit_range(self, channel_name, range):
-        '''configure_pulse_current_limit_range
-
-        Vistatus configure_pulse_current_limit_range(ViSession vi,
-        ViConstString channelName, ViReal64 range);
-
-        Configures the pulse current limit range for the specified channel(s).
-
-        The configured range defines the valid values to which you can set the
-        pulse current limit and pulse bias current limit using the
-        `configure_pulse_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseCurrentLimit.html')>`__
-        and
-        `configure_pulse_bias_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasCurrentLimit.html')>`__
-        functions. The pulse current limit range setting is applicable only if
-        the channel is set to the NIDCPOWER_VAL_PULSE_VOLTAGE output function
-        using the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            range (float):Specifies the pulse current limit range, in amps, on the specified
-                channel(s).
-                For valid ranges, refer to the *ranges* topic for your device in the *NI
-                DC Power Supplies and SMUs Help*.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseCurrentLimitRange(self._vi, channel_name, range)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_voltage_level(self, channel_name, level):
-        '''configure_pulse_voltage_level
-
-        Vistatus configure_pulse_voltage_level(ViSession vi,
-        ViConstString channelName, ViReal64 level);
-
-        Configures the pulse voltage level that the device attempts to generate
-        for the specified channel(s) during the on phase of a pulse. The channel
-        must be enabled for the specified voltage level to take effect.
-
-        Refer to the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel. The
-        pulse voltage level setting is applicable only if the channel is set to
-        the NIDCPOWER_VAL_PULSE_VOLTAGE output function using the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function.
-
-        The device actively regulates the voltage at the specified level unless
-        doing so causes a current greater than the `pulse current
-        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_cURRENT_lIMIT.html')>`__
-        through the channels' output terminals.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            level (float):Specifies the pulse voltage level, in volts, for the output channel
-                generation.
-                **Valid Values**:
-                The valid values for this parameter are defined by the voltage level
-                range that is selected using the
-                `configure_pulse_voltage_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevelRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseVoltageLevel(self._vi, channel_name, level)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_voltage_level_range(self, channel_name, range):
-        '''configure_pulse_voltage_level_range
-
-        Vistatus configure_pulse_voltage_level_range(ViSession vi,
-        ViConstString channelName, ViReal64 range);
-
-        Configures the pulse voltage level range for the specified channel(s).
-
-        The configured range defines the valid values to which you can set the
-        pulse voltage level and pulse bias voltage level using the
-        `configure_pulse_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLevel.html')>`__
-        and
-        `configure_pulse_bias_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasVoltageLevel.html')>`__
-        functions. The pulse voltage level range setting is applicable only if
-        the channel is set to the NIDCPOWER_VAL_PULSE_VOLTAGE output function
-        using the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            range (float):Specifies the pulse voltage level range, in volts, on the specified
-                channel(s).
-                For valid ranges, refer to the *ranges* topic for your device in the *NI
-                DC Power Supplies and SMUs Help*.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseVoltageLevelRange(self._vi, channel_name, range)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_voltage_limit(self, channel_name, limit):
-        '''configure_pulse_voltage_limit
-
-        Vistatus configure_pulse_voltage_limit(ViSession vi,
-        ViConstString channelName, ViReal64 limit);
-
-        Configures the pulse voltage limit for the specified channel(s). The
-        channel must be enabled for the specified voltage limit to take effect.
-
-        Refer to the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel. The
-        pulse voltage limit is the voltage that the output must not exceed when
-        generating the desired `pulse current
-        level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_cURRENT_lEVEL.html')>`__.
-        The pulse voltage limit setting is only applicable if the channel is set
-        to the NIDCPOWER_VAL_PULSE_CURRENT output function using the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            limit (float):Specifies the pulse voltage limit, in volts, on the specified output
-                channel(s). The limit is specified as a positive value, but symmetric
-                positive and negative limits are enforced simultaneously.
-                **Valid Values:**
-                The valid values for this parameter are defined by the pulse voltage
-                limit range that is configured using the
-                `configure_pulse_voltage_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimitRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseVoltageLimit(self._vi, channel_name, limit)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_pulse_voltage_limit_range(self, channel_name, range):
-        '''configure_pulse_voltage_limit_range
-
-        Vistatus configure_pulse_voltage_limit_range(ViSession vi,
-        ViConstString channelName, ViReal64 range);
-
-        Configures the pulse voltage limit range for the specified channel(s).
-
-        The configured range defines the valid values to which you can set the
-        pulse voltage limit and pulse bias voltage limit using the
-        `configure_pulse_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseVoltageLimit.html')>`__
-        and
-        `configure_pulse_bias_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','NIDCPowerCRef.chm','cviniDCPower_ConfigurePulseBiasVoltageLimit.html')>`__
-        functions. The pulse voltage limit range setting is applicable only if
-        the channel is set to the NIDCPOWER_VAL_PULSE_CURRENT output function
-        using the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function.
-
-        .
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            range (float):Specifies the pulse voltage limit range, in volts, on the specified
-                channel(s).
-                For valid ranges, refer to the *ranges* topic for your device in the *NI
-                DC Power Supplies and SMUs Help*.
-        '''
-        error_code = self._library.niDCPower_ConfigurePulseVoltageLimitRange(self._vi, channel_name, range)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_sense(self, channel_name, sense):
-        '''configure_sense
-
-        Vistatus configure_sense(ViSession vi, ViConstString
-        channelName, ViInt32 sense);
-
-        Specifies whether to use
-        `local <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','local_and_remote_sense.html')>`__
-        or
-        `remote <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm','local_and_remote_sense.html')>`__
-        sensing of the output voltage on the specified channel(s). Refer to the
-        *Devices* topic specific to your device in the *NI DC Power Supplies and
-        SMUs* Help for more information about sensing voltage on supported
-        channels.
-
-        **Related Topics:**
-
-        `Local and Remote
-        sense <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4112_localandremotesense/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            sense (int):Specifies local or remote sensing on the specified channel(s).
-                **Defined Values:**
-
-                +-----------------------------+----------------+
-                | NIDCPOWER_VAL_LOCAL (1008)  | Local sensing  |
-                +-----------------------------+----------------+
-                | NIDCPOWER_VAL_REMOTE (1009) | Remote sensing |
-                +-----------------------------+----------------+
-        '''
-        error_code = self._library.niDCPower_ConfigureSense(self._vi, channel_name, sense)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4492,184 +5744,6 @@ class _SessionBase(object):
                 +-----------------------------------+-------------------------------------------------------------------+
         '''
         error_code = self._library.niDCPower_ConfigureSourceMode(self._vi, source_mode)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_voltage_level(self, channel_name, level):
-        '''configure_voltage_level
-
-        Vistatus configure_voltage_level(ViSession vi, ViConstString
-        channelName, ViReal64 level);
-
-        Configures the voltage level the device attempts to generate for the
-        specified channel(s). The channel must be enabled for the specified
-        voltage level to take effect. Refer to the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel.
-
-        The voltage level setting is applicable only if the output function of
-        the channel is set to NIDCPOWER_VAL_DC_VOLTAGE. Use
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
-        to set the output function.
-
-        The device actively regulates the voltage at the specified level unless
-        doing so causes a current output greater than the `current
-        limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_LIMIT.html')>`__
-        across the channels' output terminals.
-
-        **Related Topics:**
-
-        `Constant Voltage
-        Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/constant_voltage/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            level (float):Specifies the voltage level, in volts, for the output channel
-                generation.
-                **Valid Values**:
-                The valid values for this parameter are defined by the voltage level
-                range that is selected using the
-                `configure_voltage_level_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLevelRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigureVoltageLevel(self._vi, channel_name, level)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_voltage_level_range(self, channel_name, range):
-        '''configure_voltage_level_range
-
-        Vistatus configure_voltage_level_range(ViSession vi,
-        ViConstString channelName, ViReal64 range);
-
-        Configures the voltage level range for the specified channel(s). The
-        configured range defines the valid values the voltage level can be set
-        to using the
-        `configure_voltage_level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLevel.html')>`__
-        function. The voltage level range setting is applicable only if the
-        output function of the channel is set to NIDCPOWER_VAL_DC_VOLTAGE.
-        Use
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
-        to set the output function.
-
-        Use the
-        `VOLTAGE_LEVEL_AUTORANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE.html')>`__
-        attribute to enable automatic selection of the voltage level range.
-
-        **Related Topics:**
-
-        `ranges <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/ranges/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            range (float):Specifies the voltage level range, in volts, on the specified
-                channel(s).
-                For valid ranges, refer to the *ranges* topic for your device in the *NI
-                DC Power Supplies and SMUs Help*.
-        '''
-        error_code = self._library.niDCPower_ConfigureVoltageLevelRange(self._vi, channel_name, range)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_voltage_limit(self, channel_name, limit):
-        '''configure_voltage_limit
-
-        Vistatus configure_voltage_limit(ViSession vi, ViConstString
-        channelName, ViReal64 limit);
-
-        Configures the voltage limit for the specified channel(s). The channel
-        must be enabled for the specified voltage limit to take effect. Refer to
-        the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function for more information about enabling the output channel.
-
-        The voltage limit is the voltage that the output should not exceed when
-        generating the desired `current
-        level <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureCurrentLevel.html')>`__.
-        The voltage limit setting is applicable only if the output function of
-        the channel is set to NIDCPOWER_VAL_DC_CURRENT. Use
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
-        to set the output function.
-
-        **Related Topics:**
-
-        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            limit (float):Specifies the voltage limit, in volts, on the specified output
-                channel(s). The limit is specified as a positive value, but symmetric
-                positive and negative limits are enforced simultaneously.
-                **Valid Values:**
-                The valid values for this parameter are defined by the voltage limit
-                range that is configured using the
-                `configure_voltage_limit_range <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimitRange.html')>`__
-                function.
-        '''
-        error_code = self._library.niDCPower_ConfigureVoltageLimit(self._vi, channel_name, limit)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_voltage_limit_range(self, channel_name, range):
-        '''configure_voltage_limit_range
-
-        Vistatus configure_voltage_limit_range(ViSession vi,
-        ViConstString channelName, ViReal64 range);
-
-        Configures the voltage limit range for the specified channel(s). The
-        configured range defines the valid values the voltage limit can be set
-        to using the
-        `configure_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureVoltageLimit.html')>`__
-        function. The voltage limit range setting is applicable only if the
-        output function of the channel is set to NIDCPOWER_VAL_DC_CURRENT.
-        Use
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cvinidcpower_ConfigureOutputFunction.html')>`__
-        to set the output function.
-
-        Use the
-        `VOLTAGE_LIMIT_AUTORANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE.html')>`__
-        attribute to enable automatic selection of the voltage limit range.
-
-        **Related Topics:**
-
-        `ranges <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/ranges/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            range (float):Specifies the voltage limit range, in volts, on the specified
-                channel(s).
-                For valid ranges, refer to the *ranges* topic for your device in the *NI
-                DC Power Supplies and SMUs Help*.
-        '''
-        error_code = self._library.niDCPower_ConfigureVoltageLimitRange(self._vi, channel_name, range)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5107,408 +6181,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch_multiple(self, channel_name, timeout, count):
-        '''fetch_multiple
-
-        Vistatus fetch_multiple(ViSession vi, ViConstString
-        channelName, ViReal64 timeout, ViInt32 count, ViReal64
-        voltageMeasurements[], ViReal64 currentMeasurements[], ViBoolean
-        inCompliance[], ViInt32\* actualcount);
-
-        Returns an array of voltage measurements, an array of current
-        measurements, and an array of compliance measurements that were
-        previously taken and are stored in the NI-DCPower buffer. This function
-        should not be used when the
-        `MEASURE_WHEN <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_MEASURE_WHEN.html')>`__
-        attribute is set to NIDCPOWER_VAL_ON_DEMAND. You must first call
-        `initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
-        before calling this function.
-
-        Refer to the `Acquiring
-        Measurements <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/acquiringmeasurements/>`__
-        and
-        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
-        topics in the *NI DC Power Supplies and SMUs Help* for more information
-        about configuring this function.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            timeout (float):Specifies the maximum time allowed for this function to complete, in
-                seconds. If the function does not complete within this time interval,
-                NI-DCPower returns an error.
-
-                Note:
-                When setting the timeout interval, ensure you take into account any
-                triggers so that the timeout interval is long enough for your
-                application.
-            count (int):Specifies the number of measurements to fetch.
-
-        Returns:
-            voltage_measurements (float):Returns an array of voltage measurements. Ensure that sufficient space
-                has been allocated for the returned array.
-            current_measurements (float):Returns an array of current measurements. Ensure that sufficient space
-                has been allocated for the returned array.
-            in_compliance (bool):Returns an array of Boolean values indicating whether the output was in
-                compliance at the time the measurement was taken. Ensure that sufficient
-                space has been allocated for the returned array.
-            actual_count (int):Indicates the number of measured values actually retrieved from the
-                device.
-        '''
-        voltage_measurements_ctype = ctypes_types.ViReal64_ctype(0)
-        current_measurements_ctype = ctypes_types.ViReal64_ctype(0)
-        in_compliance_ctype = ctypes_types.ViBoolean_ctype(0)
-        actual_count_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niDCPower_FetchMultiple(self._vi, channel_name, timeout, count, ctypes.pointer(voltage_measurements_ctype), ctypes.pointer(current_measurements_ctype), ctypes.pointer(in_compliance_ctype), ctypes.pointer(actual_count_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(voltage_measurements_ctype.value), python_types.ViReal64(current_measurements_ctype.value), python_types.ViBoolean(in_compliance_ctype.value), python_types.ViInt32(actual_count_ctype.value)
-
-    def get_attribute_vi_boolean(self, channel_name, attribute_id):
-        '''get_attribute_vi_boolean
-
-        Vistatus get_attribute_vi_boolean(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViBoolean \*value);
-
-        | Queries the value of a ViBoolean attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Help text is shown for each attribute.
-                   Select an attribute by double-clicking on it or by selecting it and
-                   then pressing **Enter**.
-                -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViBoolean. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViBoolean are dim. If you select an attribute data type that is
-                   dim, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-
-        Returns:
-            attribute_value (bool):Returns the current value of the attribute. Passes the address of a
-                ViBoolean variable.
-                If the attribute currently showing in the attribute ring control has
-                constants as valid values, you can view a list of the constants by
-                pressing **Enter** on this control. Select a value by double-clicking on
-                it or by selecting it and then pressing **Enter**.
-        '''
-        attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self._library.niDCPower_GetAttributeViBoolean(self._vi, channel_name, attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(attribute_value_ctype.value)
-
-    def get_attribute_vi_int32(self, channel_name, attribute_id):
-        '''get_attribute_vi_int32
-
-        Vistatus get_attribute_vi_int32(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViInt32 \*value);
-
-        | Queries the value of a ViInt32 attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Help text is shown for each attribute.
-                   Select an attribute by double-clicking on it or by selecting it and
-                   then pressing **Enter**.
-                -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViInt32. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViInt32 are dim. If you select an attribute data type that is
-                   dim, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-
-        Returns:
-            attribute_value (int):Returns the current value of the attribute. Passes the address of a
-                ViInt32 variable.
-                If the attribute currently showing in the attribute ring control has
-                constants as valid values, you can view a list of the constants by
-                pressing **Enter** on this control. Select a value by double-clicking on
-                it or by selecting it and then pressing **Enter**.
-        '''
-        attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niDCPower_GetAttributeViInt32(self._vi, channel_name, attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(attribute_value_ctype.value)
-
-    def get_attribute_vi_int64(self, channel_name, attribute_id):
-        '''get_attribute_vi_int64
-
-        Vistatus get_attribute_vi_int64(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViInt64 \*value);
-
-        | Queries the value of a ViInt64 attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Help text is shown for each attribute.
-                   Select an attribute by double-clicking on it or by selecting it and
-                   then pressing **Enter**.
-                -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViReal64. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViReal64 are dim. If you select an attribute data type that is
-                   dim, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-
-        Returns:
-            attribute_value (int):Returns the current value of the attribute. Passes the address of a
-                ViReal64 variable.
-                If the attribute currently showing in the attribute ring control has
-                constants as valid values, you can view a list of the constants by
-                pressing **Enter** on this control. Select a value by double-clicking on
-                it or by selecting it and then pressing **Enter**.
-        '''
-        attribute_value_ctype = ctypes_types.ViInt64_ctype(0)
-        error_code = self._library.niDCPower_GetAttributeViInt64(self._vi, channel_name, attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt64(attribute_value_ctype.value)
-
-    def get_attribute_vi_real64(self, channel_name, attribute_id):
-        '''get_attribute_vi_real64
-
-        Vistatus get_attribute_vi_real64(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViReal64 \*value);
-
-        | Queries the value of a ViReal64 attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Help text is shown for each attribute.
-                   Select an attribute by double-clicking on it or by selecting it and
-                   then pressing **Enter**.
-                -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViReal64. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViReal64 are dim. If you select an attribute data type that is
-                   dim, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-
-        Returns:
-            attribute_value (float):Returns the current value of the attribute. Passes the address of a
-                ViReal64 variable.
-                If the attribute currently showing in the attribute ring control has
-                constants as valid values, you can view a list of the constants by
-                pressing **Enter** on this control. Select a value by double-clicking on
-                it or by selecting it and then pressing **Enter**.
-        '''
-        attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self._library.niDCPower_GetAttributeViReal64(self._vi, channel_name, attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(attribute_value_ctype.value)
-
-    def get_attribute_vi_session(self, channel_name, attribute_id):
-        '''get_attribute_vi_session
-
-        Vistatus get_attribute_vi_session(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViSession \*value);
-
-        | Queries the value of a ViSession attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Help text is shown for each attribute.
-                   Select an attribute by double-clicking on it or by selecting it and
-                   then pressing **Enter**.
-                -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViSession. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViSession are dim. If you select an attribute data type that is
-                   dim, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-
-        Returns:
-            attribute_value (int):Returns the current value of the attribute. Passes the address of a
-                ViSession variable.
-                If the attribute currently showing in the attribute ring control has
-                constants as valid values, you can view a list of the constants by
-                pressing **Enter** on this control. Select a value by double-clicking on
-                it or by selecting it and then pressing **Enter**.
-        '''
-        attribute_value_ctype = ctypes_types.ViSession_ctype(0)
-        error_code = self._library.niDCPower_GetAttributeViSession(self._vi, channel_name, attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(attribute_value_ctype.value)
-
-    def get_attribute_vi_string(self, channel_name, attribute_id, buffer_size):
-        '''get_attribute_vi_string
-
-        ViStatus get_attribute_vi_string(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViInt32 bufSize, ViChar value[]);
-
-        | Queries the value of a ViString attribute.
-        | You can use this function to get the values of device-specific
-          attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press or the
-                   spacebar to display a dialog box containing hierarchical list of the
-                   available attributes. Help text is shown for each attribute. Select
-                   an attribute by double-clicking on it or by selecting it and then
-                   pressing .
-                -  A ring control at the top of the dialog box allows you to see all IVI
-                   attributes or only the attributes of type ViString. If you choose to
-                   see all IVI attributes, the data types appear to the right of the
-                   attribute names in the list box. Attributes with data types other
-                   than ViString are dimmed. If you select an attribute data type that
-                   is dimmed, LabWindows/CVI transfers you to the function panel for the
-                   corresponding function that is consistent with the data type.
-                -  If you want to enter a variable name, press to change this ring
-                   control to a manual input control. If the attribute in this ring
-                   control has named constants as valid values, you can view the
-                   constants by moving to the value control and pressing .
-            buffer_size (int):Passes the number of bytes in the buffer and specifies the number of
-                bytes in the ViChar array you specify for **value**. If the current
-                value of **value**, including the terminating NUL byte, is larger than
-                the size you indicate in this parameter, the function copies (buffer
-                size - 1) bytes into the buffer, places an ASCII NUL byte at the end of
-                the buffer, and returns the buffer size you must pass to get the entire
-                value. For example, if the value is 123456 and the buffer size is 4, the
-                function places 123 into the buffer and returns 7.
-                To obtain the required buffer size, you can pass 0 for this attribute
-                and VI_NULL for **value**. If you want the function to fill in the
-                buffer regardless of the number of bytes in the value, pass a negative
-                number for this attribute.
-
-        Returns:
-            attribute_value (int):The buffer in which the function returns the current value of the
-                attribute. The buffer must be of type ViChar and have at least as many
-                bytes as indicated in **bufSize**.
-                If the current value of the attribute, including the terminating NUL
-                byte, contains more bytes that you indicate in this attribute, the
-                function copies (buffer size -1) bytes into the buffer, places an ASCII
-                NUL byte at the end of the buffer, and returns the buffer size you must
-                pass to get the entire value. For example, if the value is 123456 and
-                the buffer size is 4, the function places 123 into the buffer and
-                returns 7.
-                If you specify 0 for **bufSize**, you can pass VI_NULL for this
-                attribute.
-                If the attribute currently showing in the attribute ring control has
-                constants as valid values, you can view a list of the constants by
-                pressing on this control. Select a value by double-clicking on it or by
-                selecting it and then pressing .
-        '''
-        attribute_value_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDCPower_GetAttributeViString(self._vi, channel_name, attribute_id, buffer_size, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(attribute_value_ctype.value)
-
     def get_cal_user_defined_info(self):
         '''get_cal_user_defined_info
 
@@ -5542,38 +6214,6 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_GetCalUserDefinedInfoMaxSize(self._vi, ctypes.pointer(info_size_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt32(info_size_ctype.value)
-
-    def get_channel_name(self, index, buffer_size):
-        '''get_channel_name
-
-        ViStatus get_channel_name(ViSession vi, ViInt32 index, ViInt32
-        bufferSize, ViChar channelName[]);
-
-        Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the
-        `CHANNEL_COUNT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CHANNEL_COUNT.html')>`__
-        attribute to determine the upper bound of valid values for **index**.
-
-        Args:
-            index (int):Specifies which output channel name to return. The index values begin at
-                1.
-            buffer_size (int):Specifies the number of bytes in the ViChar array you specify for
-                **channelName**. If the **channelName**, including the terminating NUL
-                byte, contains more bytes than you indicate in this attribute, the
-                function copies (buffer size - 1) bytes into the buffer, places an ASCII
-                NUL byte at the end of the buffer, and returns the buffer size you must
-                pass to get the entire value. For example, if the value is 123456 and
-                the buffer size is 4, the function places 123 into the buffer and
-                returns 7.
-                If you pass 0, you can pass VI_NULL for **channelName**.
-
-        Returns:
-            channel_name (int):Returns the output channel name that corresponds to **index**.
-        '''
-        channel_name_ctype = ctypes_types.ViChar_ctype(0)
-        error_code = self._library.niDCPower_GetChannelName(self._vi, index, buffer_size, ctypes.pointer(channel_name_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(channel_name_ctype.value)
 
     def get_error(self, buffer_size):
         '''get_error
@@ -6142,232 +6782,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViBoolean(caller_has_lock_ctype.value)
 
-    def measure(self, channel_name, measurement_type):
-        '''measure
-
-        Vistatus measure(ViSession vi, ViConstString channelName,
-        ViInt32 measurementType, ViReal64 \*measurement)
-
-        Returns the measured value of either the voltage or current on the
-        specified output channel. Each call to this function blocks other
-        function calls until the hardware returns the **measurement**. To
-        measure multiple output channels, use the
-        `measure_multiple <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_MeasureMultiple.html')>`__
-        function.
-
-        Args:
-            channel_name (int):Specifies the output channel to measure. Only one measurement at a time
-                may be made with the measure function. Use the
-                `measure_multiple <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_MeasureMultiple.html')>`__
-                function to measure multiple channels.
-            measurement_type (int):Specifies whether a voltage or current value is measured.
-                **Defined Values**:
-
-                +-----------------------------------+------------------------------+
-                | NIDCPOWER_VAL_MEASURE_VOLTAGE (1) | The device measures voltage. |
-                +-----------------------------------+------------------------------+
-                | NIDCPOWER_VAL_MEASURE_CURRENT (0) | The device measures current. |
-                +-----------------------------------+------------------------------+
-
-        Returns:
-            measurement (float):Returns the value of the measurement, either in volts for voltage or
-                amps for current.
-        '''
-        measurement_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self._library.niDCPower_Measure(self._vi, channel_name, measurement_type, ctypes.pointer(measurement_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(measurement_ctype.value)
-
-    def measure_multiple(self, channel_name):
-        '''measure_multiple
-
-        Vistatus measure_multiple(ViSession vi, ViConstString
-        channelName, ViReal64 voltageMeasurements[], ViReal64
-        currentMeasurements[]);
-
-        Returns arrays of the measured voltage and current values on the
-        specified output channel(s). Each call to this function blocks other
-        function calls until the measurements are returned from the device. The
-        order of the measurements returned in the array corresponds to the order
-        on the specified output channel(s).
-
-        Args:
-            channel_name (int):Specifies the output channels to measure. You can specify multiple
-                channels by using a channel list or a channel range. A channel list is a
-                comma (,) separated sequence of channel names (e.g. 0,2 specifies
-                channels 0 and 2). A channel range is a lower bound channel followed by
-                a hyphen (-) or colon (:) followed by an upper bound channel (e.g. 0-2
-                specifies channels 0, 1, and 2). If you do not specify a channel name,
-                the function uses all channels in the session.
-
-        Returns:
-            voltage_measurements (float):Returns an array of voltage measurements. The measurements in the array
-                are returned in the same order as the channels specified in
-                **channelName**. Ensure that sufficient space has been allocated for the
-                returned array.
-            current_measurements (float):Returns an array of current measurements. The measurements in the array
-                are returned in the same order as the channels specified in
-                **channelName**. Ensure that sufficient space has been allocated for the
-                returned array.
-        '''
-        voltage_measurements_ctype = ctypes_types.ViReal64_ctype(0)
-        current_measurements_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self._library.niDCPower_MeasureMultiple(self._vi, channel_name, ctypes.pointer(voltage_measurements_ctype), ctypes.pointer(current_measurements_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(voltage_measurements_ctype.value), python_types.ViReal64(current_measurements_ctype.value)
-
-    def query_in_compliance(self, channel_name):
-        '''query_in_compliance
-
-        Vistatus query_in_compliance(ViSession vi, ViConstString
-        channelName, ViBoolean \*inCompliance);
-
-        Queries the specified output device to determine if it is operating at
-        the
-        `compliance <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'compliance.html')>`__
-        limit.
-
-        The compliance limit is the current limit when the output function is
-        set to NIDCPOWER_VAL_DC_VOLTAGE. If the output is operating at the
-        compliance limit, the output reaches the current limit before the
-        desired voltage level. Refer to the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function and the
-        `configure_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLimit.html')>`__
-        function for more information about output function and current limit,
-        respectively.
-
-        The compliance limit is the voltage limit when the output function is
-        set to NIDCPOWER_VAL_DC_CURRENT. If the output is operating at the
-        compliance limit, the output reaches the voltage limit before the
-        desired current level. Refer to the configure_output_function
-        function and the
-        `configure_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimit.html')>`__
-        function for more information about output function and voltage limit,
-        respectively.
-
-        **Related Topics:**
-
-        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel to query. Compliance status can only be
-                queried for one channel at a time.
-
-        Returns:
-            in_compliance (bool):Returns whether the device output channel is in compliance.
-        '''
-        in_compliance_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self._library.niDCPower_QueryInCompliance(self._vi, channel_name, ctypes.pointer(in_compliance_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(in_compliance_ctype.value)
-
-    def query_max_current_limit(self, channel_name, voltage_level):
-        '''query_max_current_limit
-
-        Vistatus query_max_current_limit(ViSession vi, ViConstString
-        channelName, ViReal64 voltageLevel, ViReal64 \*maxCurrentLimit);
-
-        Queries the maximum current limit on an output channel if the output
-        channel is set to the specified **voltageLevel**.
-
-        Args:
-            channel_name (int):Specifies the output channel to query. The maximum current limit may
-                only be queried for one channel at a time.
-            voltage_level (float):Specifies the voltage level to use when calculating the
-                **maxCurrentLimit**.
-
-        Returns:
-            max_current_limit (float):Returns the maximum current limit that can be set with the specified
-                **voltageLevel**.
-        '''
-        max_current_limit_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self._library.niDCPower_QueryMaxCurrentLimit(self._vi, channel_name, voltage_level, ctypes.pointer(max_current_limit_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(max_current_limit_ctype.value)
-
-    def query_max_voltage_level(self, channel_name, current_limit):
-        '''query_max_voltage_level
-
-        Vistatus query_max_voltage_level(ViSession vi, ViConstString
-        channelName, ViReal64 currentLimit, ViReal64 \*maxVoltageLevel);
-
-        Queries the maximum voltage level on an output channel if the output
-        channel is set to the specified **currentLimit**.
-
-        Args:
-            channel_name (int):Specifies the output channel to query. The maximum voltage level may
-                only be queried for one channel at a time.
-            current_limit (float):Specifies the current limit to use when calculating the
-                **maxVoltageLevel**.
-
-        Returns:
-            max_voltage_level (float):Returns the maximum voltage level that can be set on an output channel
-                with the specified **currentLimit**.
-        '''
-        max_voltage_level_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self._library.niDCPower_QueryMaxVoltageLevel(self._vi, channel_name, current_limit, ctypes.pointer(max_voltage_level_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(max_voltage_level_ctype.value)
-
-    def query_min_current_limit(self, channel_name, voltage_level):
-        '''query_min_current_limit
-
-        Vistatus query_min_current_limit(ViSession vi, ViConstString
-        channelName, ViReal64 voltageLevel, ViReal64 \*minCurrentLimit);
-
-        Queries the minimum current limit on an output channel if the output
-        channel is set to the specified **voltageLevel**.
-
-        Args:
-            channel_name (int):Specifies the output channel to query. The minimum current limit may
-                only be queried for one channel at a time.
-            voltage_level (float):Specifies the voltage level to use when calculating the
-                **minCurrentLimit**.
-
-        Returns:
-            min_current_limit (float):Returns the minimum current limit that can be set on an output channel
-                with the specified **voltageLevel**.
-        '''
-        min_current_limit_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self._library.niDCPower_QueryMinCurrentLimit(self._vi, channel_name, voltage_level, ctypes.pointer(min_current_limit_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(min_current_limit_ctype.value)
-
-    def query_output_state(self, channel_name, output_state):
-        '''query_output_state
-
-        Vistatus query_output_state(ViSession vi, ViConstString
-        channelName, ViInt32 outputState, ViBoolean \*inState);
-
-        Queries the specified output channel to determine if the output channel
-        is currently in the state specified by **outputState**.
-
-        **Related Topics:**
-
-        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
-
-        Args:
-            channel_name (int):Specifies the output channel to query. The output state may only be
-                queried for one channel at a time.
-            output_state (int):Specifies the output state of the output channel that is being queried.
-                **Defined Values**:
-
-                +-------------------------------------------+-------------------------------------------------------------------+
-                | NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE (0) | The device maintains a constant voltage by adjusting the current. |
-                +-------------------------------------------+-------------------------------------------------------------------+
-                | NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT (1) | The device maintains a constant current by adjusting the voltage. |
-                +-------------------------------------------+-------------------------------------------------------------------+
-
-        Returns:
-            in_state (bool):Returns whether the device output channel is in the specified output
-                state.
-        '''
-        in_state_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self._library.niDCPower_QueryOutputState(self._vi, channel_name, output_state, ctypes.pointer(in_state_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(in_state_ctype.value)
-
     def read_current_temperature(self):
         '''read_current_temperature
 
@@ -6511,330 +6925,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):
-        '''set_attribute_vi_boolean
-
-        Vistatus set_attribute_vi_boolean(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViBoolean value);
-
-        | Sets the value of a ViBoolean attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
-                   double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViBoolean. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViBoolean are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
-                   that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-            attribute_value (bool):Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
-                as valid values, you can view a list of the constants by pressing
-                **Enter** on this control. Select a value by double-clicking on it or by
-                selecting it and then pressing **Enter**.
-
-                Note:
-                Some of the values might not be valid depending upon the current
-                settings of the device session.
-        '''
-        error_code = self._library.niDCPower_SetAttributeViBoolean(self._vi, channel_name, attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):
-        '''set_attribute_vi_int32
-
-        Vistatus set_attribute_vi_int32(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViInt32 value);
-
-        | Sets the value of a ViInt32 attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
-                   double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViInt32. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViInt32 are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
-                   that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-            attribute_value (int):Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
-                as valid values, you can view a list of the constants by pressing
-                **Enter** on this control. Select a value by double-clicking on it or by
-                selecting it and then pressing **Enter**.
-
-                Note:
-                Some of the values might not be valid depending upon the current
-                settings of the device session.
-        '''
-        error_code = self._library.niDCPower_SetAttributeViInt32(self._vi, channel_name, attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def set_attribute_vi_int64(self, channel_name, attribute_id, attribute_value):
-        '''set_attribute_vi_int64
-
-        Vistatus set_attribute_vi_int64(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViInt64 value);
-
-        | Sets the value of a ViInt64 attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
-                   double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViReal64. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViReal64 are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
-                   that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-            attribute_value (int):Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
-                as valid values, you can view a list of the constants by pressing
-                **Enter** on this control. Select a value by double-clicking on it or by
-                selecting it and then pressing **Enter**.
-
-                Note:
-                Some of the values might not be valid depending upon the current
-                settings of the device session.
-        '''
-        error_code = self._library.niDCPower_SetAttributeViInt64(self._vi, channel_name, attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):
-        '''set_attribute_vi_real64
-
-        Vistatus set_attribute_vi_real64(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViReal64 value);
-
-        | Sets the value of a ViReal64 attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
-                   double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViReal64. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViReal64 are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
-                   that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-            attribute_value (float):Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
-                as valid values, you can view a list of the constants by pressing
-                **Enter** on this control. Select a value by double-clicking on it or by
-                selecting it and then pressing **Enter**.
-
-                Note:
-                Some of the values might not be valid depending upon the current
-                settings of the device session.
-        '''
-        error_code = self._library.niDCPower_SetAttributeViReal64(self._vi, channel_name, attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def set_attribute_vi_session(self, channel_name, attribute_id, attribute_value):
-        '''set_attribute_vi_session
-
-        Vistatus set_attribute_vi_session(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViSession value);
-
-        | Sets the value of a ViSession attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
-                   double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViSession. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViSession are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
-                   that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-            attribute_value (int):Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
-                as valid values, you can view a list of the constants by pressing
-                **Enter** on this control. Select a value by double-clicking on it or by
-                selecting it and then pressing **Enter**.
-
-                Note:
-                Some of the values might not be valid depending upon the current
-                settings of the device session.
-        '''
-        error_code = self._library.niDCPower_SetAttributeViSession(self._vi, channel_name, attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):
-        '''set_attribute_vi_string
-
-        Vistatus set_attribute_vi_string(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViConstString value);
-
-        | Sets the value of a ViString attribute.
-        | This is a low-level function that you can use to set the values of
-          device-specific attributes and inherent IVI attributes.
-
-        Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
-                can use this control as follows.
-
-                -  In the function panel window, click on the control or press **Enter**
-                   or the spacebar to display a dialog box containing hierarchical list
-                   of the available attributes. Attributes whose value cannot be set are
-                   dim. Help text is shown for each attribute. Select an attribute by
-                   double-clicking on it or by selecting it and then pressing **Enter**.
-                -  Read-only attributes appear dim in the list box. If you select a
-                   read-only attribute, an error message appears. A ring control at the
-                   top of the dialog box allows you to see all IVI attributes or only
-                   the attributes of type ViString. If you choose to see all IVI
-                   attributes, the data types appear to the right of the attribute names
-                   in the list box. Attributes with data types other than ViString are
-                   dim. If you select an attribute data type that is dim, LabWindows/CVI
-                   transfers you to the function panel for the corresponding function
-                   that is consistent with the data type.
-                -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
-                   change this ring control to a manual input box. If the attribute in
-                   this ring control has named constants as valid values, you can view
-                   the constants by moving to the value control and pressing **Enter**.
-            attribute_value (int):Specifies the value to which you want to set the attribute. If the
-                attribute currently showing in the attribute ring control has constants
-                as valid values, you can view a list of the constants by pressing
-                **Enter** on this control. Select a value by double-clicking on it or by
-                selecting it and then pressing **Enter**.
-
-                Note:
-                Some of the values might not be valid depending upon the current
-                settings of the device session.
-        '''
-        error_code = self._library.niDCPower_SetAttributeViString(self._vi, channel_name, attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def set_cal_user_defined_info(self, info):
         '''set_cal_user_defined_info
 
@@ -6856,54 +6946,6 @@ class _SessionBase(object):
             info (int):Specifies the string to store in the device onboard EEPROM.
         '''
         error_code = self._library.niDCPower_SetCalUserDefinedInfo(self._vi, info)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def set_sequence(self, channel_name, values, source_delays, size):
-        '''set_sequence
-
-        Vistatus set_sequence(ViSession vi, ViConstString channelName,
-        ViReal64 values[], ViReal64 sourceDelays[], ViUInt32 size);
-
-        Configures a series of voltage or current outputs and corresponding
-        source delays. The source mode must be set to
-        `Sequence <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/sequencing/>`__
-        for this function to take effect.
-
-        Refer to the `Configuring the Source
-        Unit <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/configuringthesourceunit/>`__
-        topic in the *NI DC Power Supplies and SMUs Help* for more information
-        about how to configure your device.
-
-        Use this function in the Uncommitted or Committed programming states.
-        Refer to the `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-        topic in the *NI DC Power Supplies and SMUs Help* for more information
-        about NI-DCPower programming states.
-
-        Note:
-        This function is not supported on all devices. Refer to `Supported
-        Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
-        for more information about supported devices.
-
-        Args:
-            channel_name (int):Specifies the output channel to which this configuration value applies.
-                You can only set a sequence for one channel at a time.
-            values (float):Specifies the series of voltage levels or current levels, depending on
-                the configured `output
-                function <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programming_output/>`__.
-                **Valid values**:
-                The valid values for this parameter are defined by the voltage level
-                range or current level range.
-            source_delays (float):Specifies the source delay that follows the configuration of each value
-                in the sequence.
-                **Valid Values**:
-                The valid values are between 0 and 167 seconds.
-            size (int):The number of elements in the Values and the Source Delays arrays. The
-                Values and Source Delays arrays should have the same size.
-        '''
-        error_code = self._library.niDCPower_SetSequence(self._vi, channel_name, values, source_delays, size)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -7200,44 +7242,5 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt16(self_test_result_ctype.value), python_types.ViChar(self_test_message_ctype.value)
 
-
-class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
-
-    def __init__(self, vi, repeated_capability):
-        super(_RepeatedCapability, self).__init__(repeated_capability)
-        self._vi = vi
-        self._is_frozen = True
-
-
-class Session(_SessionBase):
-    '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
-
-    def __init__(self, resource_name, channels, reset, option_string):
-        super(Session, self).__init__(repeated_capability='')
-        self._vi = 0  # This must be set before calling initialize_with_channels().
-        self._vi = self.initialize_with_channels(resource_name, channels, reset, option_string)
-        self._is_frozen = True
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        return _RepeatedCapability(self._vi, repeated_capability)
-
-    def initiate(self):
-        return _Acquisition(self)
-
-    def close(self):
-        try:
-            self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
-        self._vi = 0
 
 

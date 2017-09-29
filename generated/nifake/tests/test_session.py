@@ -85,6 +85,13 @@ class TestSession(object):
     # TODO(marcoskirsch): This should test that when close errors it logs a warning.
     # def test_session_context_manager_error_on_close
 
+    def test_library_singleton(self):
+        with nifake.Session('dev1') as session:
+            lib1 = session._library
+        with nifake.Session('dev2') as session:
+            lib2 = session._library
+        assert lib1 is lib2
+
     # TODO(marcoskirsch): Remove test and make get_error_description() private - it's not meant to be called by clients.
     def test_get_error_description_get_error(self):
         test_error_code = -42
@@ -166,19 +173,21 @@ class TestSession(object):
             except TypeError as e:
                 pass
 
-    def test_library_singleton(self):
-        with nifake.Session('dev1') as session:
-            lib1 = session._library
-        with nifake.Session('dev2') as session:
-            lib2 = session._library
-        assert lib1 is lib2
-
     def test_one_input_function(self):
         test_number = 1
         self.patched_library.niFake_OneInputFunction.side_effect = self.side_effects_helper.niFake_OneInputFunction
         with nifake.Session('dev1') as session:
             session.one_input_function(test_number)
             self.patched_library.niFake_OneInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number)
+
+    def test_vi_int_64_function(self):
+        input_value = 1099511627776  # 2^40
+        output_value = 2199023255552  # 2^41
+        self.patched_library.niFake_Use64BitNumber.side_effect = self.side_effects_helper.niFake_Use64BitNumber
+        self.side_effects_helper['Use64BitNumber']['output'] = output_value
+        with nifake.Session('dev1') as session:
+            assert session.use64_bit_number(input_value) == output_value
+            self.patched_library.niFake_Use64BitNumber.assert_called_once_with(SESSION_NUM_FOR_TEST, input_value, ANY)
 
     def test_two_input_function(self):
         test_number = 1.5
@@ -236,9 +245,10 @@ class TestSession(object):
     # Retrieving buffers and strings
 
     # TODO(marcoskirsch):
-    # def test_get_string_ivi(self)
+    # def test_get_string_ivi_dance(self)
 
-    def test_get_string_ivi_error(self):
+    def test_get_string_ivi_dance_error(self):
+        # TODO(marcoskirsch): Don't use private method to test this. Use a public niFake function.
         test_error_code = -1234
         test_error_desc = "ascending order"
         self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
@@ -249,7 +259,7 @@ class TestSession(object):
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
             try:
-                session._get_attribute_vi_string("", 5)
+                session._get_attribute_vi_string(5)
                 assert False
             except nifake.Error as e:
                 assert e.code == test_error_code
@@ -282,6 +292,36 @@ class TestSession(object):
             assert math.isnan(session.read(test_maximum_time))
 
     # TODO(marcoskirsch): Other variations: multi-point/waveform with ViReal64 and ViInt16 * 3 mechanisms
+
+    # Repeated Capabilities
+
+    def test_repeated_capability_method_on_session(self):
+        test_maximum_time = 10
+        test_reading = 5
+        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
+        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            value = session.read_from_channel(test_maximum_time)
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', test_maximum_time, ANY)
+        assert value == test_reading
+
+    def test_repeated_capability_method_on_specific_channel(self):
+        test_maximum_time = 10
+        test_reading = 5
+        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
+        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            value = session['3'].read_from_channel(test_maximum_time)
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', test_maximum_time, ANY)
+        assert value == test_reading
+
+    def test_device_method_not_exist_on_repeated_capability(self):
+        with nifake.Session('dev1') as session:
+            try:
+                session['3'].simple_function()
+                assert False, 'Method has no repeated capability so it shouldn\'t exist on _RepeatedCapability'
+            except AttributeError:
+                pass
 
     # Attributes
 
@@ -427,7 +467,7 @@ class TestSession(object):
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
             try:
-                session._get_attribute_vi_real64("", 'invalidattribute')
+                session.read_write_double
                 assert False
             except nifake.Error as e:
                 assert e.code == test_error_code

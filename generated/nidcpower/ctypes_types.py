@@ -35,6 +35,10 @@ class ViUInt16_ctype(ctypes.c_ushort):  # noqa: N801
 class ViInt64_ctype(ctypes.c_longlong):  # noqa: N801
     pass
 
+class ViInt64_ctype(ctypes.c_longlong):  # noqa: N801
+    pass
+
+
 class ViString_ctype(ctypes.c_char_p):  # noqa: N801
     pass
 

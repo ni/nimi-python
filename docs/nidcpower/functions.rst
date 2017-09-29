@@ -35,7 +35,7 @@ nidcpower.Session methods
     
 
 
-.. function:: cal_adjust_current_limit(channel_name, range, number_of_measurements, requested_outputs, measured_outputs)
+.. function:: cal_adjust_current_limit(range, number_of_measurements, requested_outputs, measured_outputs)
 
     Vistatus :py:func:`nidcpower.cal_adjust_current_limit`(ViSession vi, ViConstString
     channelName, ViReal64 range, ViUInt32 numberOfMeasurements, ViReal64
@@ -103,7 +103,7 @@ nidcpower.Session methods
 
     :type measured_outputs: float
 
-.. function:: cal_adjust_current_measurement(channel_name, range, number_of_measurements, reported_outputs, measured_outputs)
+.. function:: cal_adjust_current_measurement(range, number_of_measurements, reported_outputs, measured_outputs)
 
     Vistatus :py:func:`nidcpower.cal_adjust_current_measurement`(ViSession vi,
     ViConstString channelName, ViReal64 range, ViUInt32
@@ -211,7 +211,7 @@ nidcpower.Session methods
 
     :type adjusted_internal_reference: float
 
-.. function:: cal_adjust_output_resistance(channel_name, number_of_measurements, requested_outputs, measured_outputs)
+.. function:: cal_adjust_output_resistance(number_of_measurements, requested_outputs, measured_outputs)
 
     Vistatus :py:func:`nidcpower.cal_adjust_output_resistance`(ViSession vi,
     ViConstString channelName, ViUInt32 numberOfValues, ViReal64
@@ -270,7 +270,7 @@ nidcpower.Session methods
 
     :type measured_outputs: float
 
-.. function:: cal_adjust_residual_current_offset(channel_name)
+.. function:: cal_adjust_residual_current_offset()
 
     Vistatus :py:func:`nidcpower.cal_adjust_residual_current_offset`(ViSession vi,
     ViConstString channelName);
@@ -312,7 +312,7 @@ nidcpower.Session methods
 
     :type channel_name: int
 
-.. function:: cal_adjust_residual_voltage_offset(channel_name)
+.. function:: cal_adjust_residual_voltage_offset()
 
     Vistatus :py:func:`nidcpower.cal_adjust_residual_voltage_offset`(ViSession vi,
     ViConstString channelName);
@@ -354,7 +354,7 @@ nidcpower.Session methods
 
     :type channel_name: int
 
-.. function:: cal_adjust_voltage_level(channel_name, range, number_of_measurements, requested_outputs, measured_outputs)
+.. function:: cal_adjust_voltage_level(range, number_of_measurements, requested_outputs, measured_outputs)
 
     Vistatus :py:func:`nidcpower.cal_adjust_voltage_level`(ViSession vi,ViConstString
     channelName, ViReal64 range, ViUInt32 numberOfMeasurements, ViReal64
@@ -422,7 +422,7 @@ nidcpower.Session methods
 
     :type measured_outputs: float
 
-.. function:: cal_adjust_voltage_measurement(channel_name, range, number_of_measurements, reported_outputs, measured_outputs)
+.. function:: cal_adjust_voltage_measurement(range, number_of_measurements, reported_outputs, measured_outputs)
 
     Vistatus :py:func:`nidcpower.cal_adjust_voltage_measurement`(ViSession vi,
     ViConstString channelName, ViReal64 range, ViUInt32
@@ -489,7 +489,7 @@ nidcpower.Session methods
 
     :type measured_outputs: float
 
-.. function:: cal_self_calibrate(channel_name)
+.. function:: cal_self_calibrate()
 
     Vistatus :py:func:`nidcpower.cal_self_calibrate`(ViSession vi, ViConstString
     channelName);
@@ -654,7 +654,7 @@ nidcpower.Session methods
     
 
 
-.. function:: configure_aperture_time(channel_name, aperture_time, units)
+.. function:: configure_aperture_time(aperture_time, units)
 
     Vistatus :py:func:`nidcpower.configure_aperture_time`(ViSession vi, ViConstString
     channelName, ViReal64 apertureTime, ViInt32 units);
@@ -722,7 +722,7 @@ nidcpower.Session methods
 
     :type units: int
 
-.. function:: configure_auto_zero(channel_name, auto_zero)
+.. function:: configure_auto_zero(auto_zero)
 
     Vistatus :py:func:`nidcpower.configure_auto_zero`(ViSession vi, ViConstString
     channelName, ViInt32 autoZero);
@@ -782,7 +782,7 @@ nidcpower.Session methods
 
     :type auto_zero: int
 
-.. function:: configure_current_level(channel_name, level)
+.. function:: configure_current_level(level)
 
     Vistatus :py:func:`nidcpower.configure_current_level`(ViSession vi, ViConstString
     channelName, ViReal64 level);
@@ -840,7 +840,7 @@ nidcpower.Session methods
 
     :type level: float
 
-.. function:: configure_current_level_range(channel_name, range)
+.. function:: configure_current_level_range(range)
 
     Vistatus :py:func:`nidcpower.configure_current_level_range`(ViSession vi,
     ViConstString channelName, ViReal64 range);
@@ -892,7 +892,7 @@ nidcpower.Session methods
 
     :type range: float
 
-.. function:: configure_current_limit(channel_name, behavior, limit)
+.. function:: configure_current_limit(behavior, limit)
 
     Vistatus :py:func:`nidcpower.configure_current_limit`(ViSession vi, ViConstString
     channelName, ViInt32 behavior, ViReal64 limit);
@@ -962,7 +962,7 @@ nidcpower.Session methods
 
     :type limit: float
 
-.. function:: configure_current_limit_range(channel_name, range)
+.. function:: configure_current_limit_range(range)
 
     Vistatus :py:func:`nidcpower.configure_current_limit_range`(ViSession vi,
     ViConstString channelName, ViReal64 range);
@@ -1270,7 +1270,7 @@ nidcpower.Session methods
 
     :type edge: int
 
-.. function:: configure_output_enabled(channel_name, enabled)
+.. function:: configure_output_enabled(enabled)
 
     Vistatus :py:func:`nidcpower.configure_output_enabled`(ViSession vi, ViConstString
     channelName, ViBoolean enabled);
@@ -1320,7 +1320,7 @@ nidcpower.Session methods
 
     :type enabled: bool
 
-.. function:: configure_output_function(channel_name, function)
+.. function:: configure_output_function(function)
 
     Vistatus :py:func:`nidcpower.configure_output_function`(ViSession vi, ViConstString
     channelName, ViInt32 function);
@@ -1416,7 +1416,7 @@ nidcpower.Session methods
 
     :type function: int
 
-.. function:: configure_output_range(channel_name, range_type, range)
+.. function:: configure_output_range(range_type, range)
 
     Vistatus :py:func:`nidcpower.configure_output_range`(ViSession vi, ViConstString
     channelName, ViInt32 rangeType, ViReal64 range);
@@ -1479,7 +1479,7 @@ nidcpower.Session methods
 
     :type range: float
 
-.. function:: configure_output_resistance(channel_name, resistance)
+.. function:: configure_output_resistance(resistance)
 
     Vistatus :py:func:`nidcpower.configure_output_resistance`(ViSession vi,
     ViConstString channelName, ViReal64 resistance);
@@ -1598,7 +1598,7 @@ nidcpower.Session methods
 
     :type powerline_frequency: float
 
-.. function:: configure_pulse_bias_current_level(channel_name, level)
+.. function:: configure_pulse_bias_current_level(level)
 
     Vistatus :py:func:`nidcpower.configure_pulse_bias_current_level`(ViSession vi,
     ViConstString channelName, ViReal64 level);
@@ -1659,7 +1659,7 @@ nidcpower.Session methods
 
     :type level: float
 
-.. function:: configure_pulse_bias_current_limit(channel_name, limit)
+.. function:: configure_pulse_bias_current_limit(limit)
 
     Vistatus :py:func:`nidcpower.configure_pulse_bias_current_limit`(ViSession vi,
     ViConstString channelName, ViReal64 limit);
@@ -1718,7 +1718,7 @@ nidcpower.Session methods
 
     :type limit: float
 
-.. function:: configure_pulse_bias_voltage_level(channel_name, level)
+.. function:: configure_pulse_bias_voltage_level(level)
 
     Vistatus :py:func:`nidcpower.configure_pulse_bias_voltage_level`(ViSession vi,
     ViConstString channelName, ViReal64 level);
@@ -1779,7 +1779,7 @@ nidcpower.Session methods
 
     :type level: float
 
-.. function:: configure_pulse_bias_voltage_limit(channel_name, limit)
+.. function:: configure_pulse_bias_voltage_limit(limit)
 
     Vistatus :py:func:`nidcpower.configure_pulse_bias_voltage_limit`(ViSession vi,
     ViConstString channelName, ViReal64 limit);
@@ -1838,7 +1838,7 @@ nidcpower.Session methods
 
     :type limit: float
 
-.. function:: configure_pulse_current_level(channel_name, level)
+.. function:: configure_pulse_current_level(level)
 
     Vistatus :py:func:`nidcpower.configure_pulse_current_level`(ViSession vi,
     ViConstString channelName, ViReal64 level);
@@ -1897,7 +1897,7 @@ nidcpower.Session methods
 
     :type level: float
 
-.. function:: configure_pulse_current_level_range(channel_name, range)
+.. function:: configure_pulse_current_level_range(range)
 
     Vistatus :py:func:`nidcpower.configure_pulse_current_level_range`(ViSession vi,
     ViConstString channelName, ViReal64 range);
@@ -1950,7 +1950,7 @@ nidcpower.Session methods
 
     :type range: float
 
-.. function:: configure_pulse_current_limit(channel_name, limit)
+.. function:: configure_pulse_current_limit(limit)
 
     Vistatus :py:func:`nidcpower.configure_pulse_current_limit`(ViSession vi,
     ViConstString channelName, ViReal64 limit);
@@ -2008,7 +2008,7 @@ nidcpower.Session methods
 
     :type limit: float
 
-.. function:: configure_pulse_current_limit_range(channel_name, range)
+.. function:: configure_pulse_current_limit_range(range)
 
     Vistatus :py:func:`nidcpower.configure_pulse_current_limit_range`(ViSession vi,
     ViConstString channelName, ViReal64 range);
@@ -2061,7 +2061,7 @@ nidcpower.Session methods
 
     :type range: float
 
-.. function:: configure_pulse_voltage_level(channel_name, level)
+.. function:: configure_pulse_voltage_level(level)
 
     Vistatus :py:func:`nidcpower.configure_pulse_voltage_level`(ViSession vi,
     ViConstString channelName, ViReal64 level);
@@ -2121,7 +2121,7 @@ nidcpower.Session methods
 
     :type level: float
 
-.. function:: configure_pulse_voltage_level_range(channel_name, range)
+.. function:: configure_pulse_voltage_level_range(range)
 
     Vistatus :py:func:`nidcpower.configure_pulse_voltage_level_range`(ViSession vi,
     ViConstString channelName, ViReal64 range);
@@ -2174,7 +2174,7 @@ nidcpower.Session methods
 
     :type range: float
 
-.. function:: configure_pulse_voltage_limit(channel_name, limit)
+.. function:: configure_pulse_voltage_limit(limit)
 
     Vistatus :py:func:`nidcpower.configure_pulse_voltage_limit`(ViSession vi,
     ViConstString channelName, ViReal64 limit);
@@ -2232,7 +2232,7 @@ nidcpower.Session methods
 
     :type limit: float
 
-.. function:: configure_pulse_voltage_limit_range(channel_name, range)
+.. function:: configure_pulse_voltage_limit_range(range)
 
     Vistatus :py:func:`nidcpower.configure_pulse_voltage_limit_range`(ViSession vi,
     ViConstString channelName, ViReal64 range);
@@ -2287,7 +2287,7 @@ nidcpower.Session methods
 
     :type range: float
 
-.. function:: configure_sense(channel_name, sense)
+.. function:: configure_sense(sense)
 
     Vistatus :py:func:`nidcpower.configure_sense`(ViSession vi, ViConstString
     channelName, ViInt32 sense);
@@ -2451,7 +2451,7 @@ nidcpower.Session methods
 
     :type source_mode: int
 
-.. function:: configure_voltage_level(channel_name, level)
+.. function:: configure_voltage_level(level)
 
     Vistatus :py:func:`nidcpower.configure_voltage_level`(ViSession vi, ViConstString
     channelName, ViReal64 level);
@@ -2510,7 +2510,7 @@ nidcpower.Session methods
 
     :type level: float
 
-.. function:: configure_voltage_level_range(channel_name, range)
+.. function:: configure_voltage_level_range(range)
 
     Vistatus :py:func:`nidcpower.configure_voltage_level_range`(ViSession vi,
     ViConstString channelName, ViReal64 range);
@@ -2563,7 +2563,7 @@ nidcpower.Session methods
 
     :type range: float
 
-.. function:: configure_voltage_limit(channel_name, limit)
+.. function:: configure_voltage_limit(limit)
 
     Vistatus :py:func:`nidcpower.configure_voltage_limit`(ViSession vi, ViConstString
     channelName, ViReal64 limit);
@@ -2620,7 +2620,7 @@ nidcpower.Session methods
 
     :type limit: float
 
-.. function:: configure_voltage_limit_range(channel_name, range)
+.. function:: configure_voltage_limit_range(range)
 
     Vistatus :py:func:`nidcpower.configure_voltage_limit_range`(ViSession vi,
     ViConstString channelName, ViReal64 range);
@@ -3135,7 +3135,7 @@ nidcpower.Session methods
 
     :type output_terminal: int
 
-.. function:: fetch_multiple(channel_name, timeout, count)
+.. function:: fetch_multiple(timeout, count)
 
     Vistatus :py:func:`nidcpower.fetch_multiple`(ViSession vi, ViConstString
     channelName, ViReal64 timeout, ViInt32 count, ViReal64
@@ -3242,7 +3242,7 @@ nidcpower.Session methods
             
 
 
-.. function:: get_attribute_vi_boolean(channel_name, attribute_id)
+.. function:: get_attribute_vi_boolean(attribute_id)
 
     Vistatus :py:func:`nidcpower.get_attribute_vi_boolean`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViBoolean \*value);
@@ -3310,7 +3310,7 @@ nidcpower.Session methods
             
 
 
-.. function:: get_attribute_vi_int32(channel_name, attribute_id)
+.. function:: get_attribute_vi_int32(attribute_id)
 
     Vistatus :py:func:`nidcpower.get_attribute_vi_int32`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViInt32 \*value);
@@ -3378,7 +3378,7 @@ nidcpower.Session methods
             
 
 
-.. function:: get_attribute_vi_int64(channel_name, attribute_id)
+.. function:: get_attribute_vi_int64(attribute_id)
 
     Vistatus :py:func:`nidcpower.get_attribute_vi_int64`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViInt64 \*value);
@@ -3446,7 +3446,7 @@ nidcpower.Session methods
             
 
 
-.. function:: get_attribute_vi_real64(channel_name, attribute_id)
+.. function:: get_attribute_vi_real64(attribute_id)
 
     Vistatus :py:func:`nidcpower.get_attribute_vi_real64`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViReal64 \*value);
@@ -3514,7 +3514,7 @@ nidcpower.Session methods
             
 
 
-.. function:: get_attribute_vi_session(channel_name, attribute_id)
+.. function:: get_attribute_vi_session(attribute_id)
 
     Vistatus :py:func:`nidcpower.get_attribute_vi_session`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViSession \*value);
@@ -3582,7 +3582,7 @@ nidcpower.Session methods
             
 
 
-.. function:: get_attribute_vi_string(channel_name, attribute_id, buffer_size)
+.. function:: get_attribute_vi_string(attribute_id, buffer_size)
 
     ViStatus :py:func:`nidcpower.get_attribute_vi_string`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViInt32 bufSize, ViChar value[]);
@@ -4505,7 +4505,7 @@ nidcpower.Session methods
             
 
 
-.. function:: measure(channel_name, measurement_type)
+.. function:: measure(measurement_type)
 
     Vistatus :py:func:`nidcpower.measure`(ViSession vi, ViConstString channelName,
     ViInt32 measurementType, ViReal64 \*measurement)
@@ -4555,7 +4555,7 @@ nidcpower.Session methods
             
 
 
-.. function:: measure_multiple(channel_name)
+.. function:: measure_multiple()
 
     Vistatus :py:func:`nidcpower.measure_multiple`(ViSession vi, ViConstString
     channelName, ViReal64 voltageMeasurements[], ViReal64
@@ -4610,7 +4610,7 @@ nidcpower.Session methods
             
 
 
-.. function:: query_in_compliance(channel_name)
+.. function:: query_in_compliance()
 
     Vistatus :py:func:`nidcpower.query_in_compliance`(ViSession vi, ViConstString
     channelName, ViBoolean \*inCompliance);
@@ -4665,7 +4665,7 @@ nidcpower.Session methods
             
 
 
-.. function:: query_max_current_limit(channel_name, voltage_level)
+.. function:: query_max_current_limit(voltage_level)
 
     Vistatus :py:func:`nidcpower.query_max_current_limit`(ViSession vi, ViConstString
     channelName, ViReal64 voltageLevel, ViReal64 \*maxCurrentLimit);
@@ -4705,7 +4705,7 @@ nidcpower.Session methods
             
 
 
-.. function:: query_max_voltage_level(channel_name, current_limit)
+.. function:: query_max_voltage_level(current_limit)
 
     Vistatus :py:func:`nidcpower.query_max_voltage_level`(ViSession vi, ViConstString
     channelName, ViReal64 currentLimit, ViReal64 \*maxVoltageLevel);
@@ -4745,7 +4745,7 @@ nidcpower.Session methods
             
 
 
-.. function:: query_min_current_limit(channel_name, voltage_level)
+.. function:: query_min_current_limit(voltage_level)
 
     Vistatus :py:func:`nidcpower.query_min_current_limit`(ViSession vi, ViConstString
     channelName, ViReal64 voltageLevel, ViReal64 \*minCurrentLimit);
@@ -4785,7 +4785,7 @@ nidcpower.Session methods
             
 
 
-.. function:: query_output_state(channel_name, output_state)
+.. function:: query_output_state(output_state)
 
     Vistatus :py:func:`nidcpower.query_output_state`(ViSession vi, ViConstString
     channelName, ViInt32 outputState, ViBoolean \*inState);
@@ -4973,7 +4973,7 @@ nidcpower.Session methods
 
     :type trigger: int
 
-.. function:: set_attribute_vi_boolean(channel_name, attribute_id, attribute_value)
+.. function:: set_attribute_vi_boolean(attribute_id, attribute_value)
 
     Vistatus :py:func:`nidcpower.set_attribute_vi_boolean`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViBoolean value);
@@ -5044,7 +5044,7 @@ nidcpower.Session methods
 
     :type attribute_value: bool
 
-.. function:: set_attribute_vi_int32(channel_name, attribute_id, attribute_value)
+.. function:: set_attribute_vi_int32(attribute_id, attribute_value)
 
     Vistatus :py:func:`nidcpower.set_attribute_vi_int32`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViInt32 value);
@@ -5115,7 +5115,7 @@ nidcpower.Session methods
 
     :type attribute_value: int
 
-.. function:: set_attribute_vi_int64(channel_name, attribute_id, attribute_value)
+.. function:: set_attribute_vi_int64(attribute_id, attribute_value)
 
     Vistatus :py:func:`nidcpower.set_attribute_vi_int64`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViInt64 value);
@@ -5186,7 +5186,7 @@ nidcpower.Session methods
 
     :type attribute_value: int
 
-.. function:: set_attribute_vi_real64(channel_name, attribute_id, attribute_value)
+.. function:: set_attribute_vi_real64(attribute_id, attribute_value)
 
     Vistatus :py:func:`nidcpower.set_attribute_vi_real64`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViReal64 value);
@@ -5257,7 +5257,7 @@ nidcpower.Session methods
 
     :type attribute_value: float
 
-.. function:: set_attribute_vi_session(channel_name, attribute_id, attribute_value)
+.. function:: set_attribute_vi_session(attribute_id, attribute_value)
 
     Vistatus :py:func:`nidcpower.set_attribute_vi_session`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViSession value);
@@ -5328,7 +5328,7 @@ nidcpower.Session methods
 
     :type attribute_value: int
 
-.. function:: set_attribute_vi_string(channel_name, attribute_id, attribute_value)
+.. function:: set_attribute_vi_string(attribute_id, attribute_value)
 
     Vistatus :py:func:`nidcpower.set_attribute_vi_string`(ViSession vi, ViConstString
     channelName, ViAttr attribute, ViConstString value);
@@ -5427,7 +5427,7 @@ nidcpower.Session methods
 
     :type info: int
 
-.. function:: set_sequence(channel_name, values, source_delays, size)
+.. function:: set_sequence(values, source_delays, size)
 
     Vistatus :py:func:`nidcpower.set_sequence`(ViSession vi, ViConstString channelName,
     ViReal64 values[], ViReal64 sourceDelays[], ViUInt32 size);
