@@ -136,7 +136,7 @@ def _add_default_value_name(parameter):
     '''Declaration with default value, if set'''
     if 'default_value' in parameter:
         if 'enum' in parameter and parameter['enum'] is not None:
-            name = parameter['python_name'] + "=" + parameter['default_value']
+            name = parameter['python_name'] + "=enum." + parameter['default_value']
         else:
             name = parameter['python_name'] + "=" + repr(parameter['default_value'])
 
@@ -144,6 +144,20 @@ def _add_default_value_name(parameter):
         name = parameter['python_name']
 
     parameter['python_name_with_default'] = name
+
+
+def _add_default_value_name_for_docs(parameter, module_name):
+    '''Declaration with default value, if set'''
+    if 'default_value' in parameter:
+        if 'enum' in parameter and parameter['enum'] is not None:
+            name = parameter['python_name'] + "=" + module_name + '.' + parameter['default_value']
+        else:
+            name = parameter['python_name'] + "=" + repr(parameter['default_value'])
+
+    else:
+        name = parameter['python_name']
+
+    parameter['python_name_with_doc_default'] = name
 
 
 # Parameter names denoting channel/repeated capabilities was compiled by looking at public header files for different MI drivers.
@@ -181,6 +195,7 @@ def add_all_function_metadata(functions, config):
             _add_ctypes_type(p)
             _add_buffer_info(p)
             _add_default_value_name(p)
+            _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
             _add_library_method_call_snippet(p, config['session_handle_parameter_name'])
     return functions
@@ -248,6 +263,7 @@ def test_add_all_metadata_simple():
                     'name': 'vi',
                     'python_name': 'vi',
                     'python_name_with_default': 'vi',
+                    'python_name_with_doc_default': 'vi',
                     'python_type': 'ViSession',
                     'size': {
                         'mechanism': 'fixed',
@@ -271,6 +287,7 @@ def test_add_all_metadata_simple():
                     'name': 'channelName',
                     'python_name': 'channel_name',
                     'python_name_with_default': 'channel_name',
+                    'python_name_with_doc_default': 'channel_name',
                     'python_type': 'ViString',
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViString',
