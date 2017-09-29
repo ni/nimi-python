@@ -2,13 +2,17 @@
 
 TODO: Check the above box with an 'x' indicating you've read and followed [CONTRIBUTING.md](https://github.com/ni/<reponame>/blob/master/CONTRIBUTING.md).
 
+[ ] I've updated [CHANGELOG.md](https://github.com/ni/<reponame>/blob/master/CHANGELOG.md) if applicable.
+
+TODO: Check the above box with an 'x' if you've documented client facing changes in [CHANGELOG.md](https://github.com/ni/<reponame>/blob/master/CHANGELOG.md).
+
 ### What does this Pull Request accomplish?
 
 TODO: Include high-level description of the changes in this pull request.
 
-### Why should this Pull Request be merged?
+### List issues fixed by this Pull Request below, if any.
 
-TODO: Justify why this contribution should be part of the project.
+TODO: List of issues.
 
 ### What testing has been done?
 
