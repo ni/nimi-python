@@ -25,6 +25,15 @@ class AttributeViInt32(Attribute):
         session._set_attribute_vi_int32(self._attribute_id, value)
 
 
+class AttributeViInt64(Attribute):
+
+    def __get__(self, session, session_type):
+        return session._get_attribute_vi_int64(self._attribute_id)
+
+    def __set__(self, session, value):
+        session._set_attribute_vi_int64(self._attribute_id, value)
+
+
 class AttributeViReal64(Attribute):
 
     def __get__(self, session, session_type):

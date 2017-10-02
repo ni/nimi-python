@@ -342,6 +342,10 @@ class TestSession(object):
             session.read_write_integer = test_number
             self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, test_number)
 
+    # TODO(marcoskirsch)
+    # def test_get_attribute_int64(self):
+    # def test_set_attribute_int64(self):
+
     def test_get_attribute_real64(self):
         self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
         test_number = 1.5

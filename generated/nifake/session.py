@@ -44,6 +44,10 @@ class _SessionBase(object):
     '''
     An attribute of type float with read/write access.
     '''
+    read_write_int64 = attributes.AttributeViInt64(1000006)
+    '''
+    An attribute of type 64-bit integer with read/write access.
+    '''
     read_write_integer = attributes.AttributeViInt32(1000004)
     '''
     An attribute of type integer with read/write access.
