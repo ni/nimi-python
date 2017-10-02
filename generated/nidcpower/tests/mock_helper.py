@@ -21,22 +21,10 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
-        self._defaults['CalSelfCalibrate'] = {}
-        self._defaults['CalSelfCalibrate']['return'] = 0
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
         self._defaults['ConfigureApertureTime'] = {}
         self._defaults['ConfigureApertureTime']['return'] = 0
-        self._defaults['ConfigureAutoZero'] = {}
-        self._defaults['ConfigureAutoZero']['return'] = 0
-        self._defaults['ConfigureCurrentLevel'] = {}
-        self._defaults['ConfigureCurrentLevel']['return'] = 0
-        self._defaults['ConfigureCurrentLevelRange'] = {}
-        self._defaults['ConfigureCurrentLevelRange']['return'] = 0
-        self._defaults['ConfigureCurrentLimit'] = {}
-        self._defaults['ConfigureCurrentLimit']['return'] = 0
-        self._defaults['ConfigureCurrentLimitRange'] = {}
-        self._defaults['ConfigureCurrentLimitRange']['return'] = 0
         self._defaults['ConfigureDigitalEdgeMeasureTrigger'] = {}
         self._defaults['ConfigureDigitalEdgeMeasureTrigger']['return'] = 0
         self._defaults['ConfigureDigitalEdgePulseTrigger'] = {}
@@ -47,64 +35,6 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureDigitalEdgeSourceTrigger']['return'] = 0
         self._defaults['ConfigureDigitalEdgeStartTrigger'] = {}
         self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] = 0
-        self._defaults['ConfigureOutputEnabled'] = {}
-        self._defaults['ConfigureOutputEnabled']['return'] = 0
-        self._defaults['ConfigureOutputFunction'] = {}
-        self._defaults['ConfigureOutputFunction']['return'] = 0
-        self._defaults['ConfigureOutputRange'] = {}
-        self._defaults['ConfigureOutputRange']['return'] = 0
-        self._defaults['ConfigureOutputResistance'] = {}
-        self._defaults['ConfigureOutputResistance']['return'] = 0
-        self._defaults['ConfigurePowerLineFrequency'] = {}
-        self._defaults['ConfigurePowerLineFrequency']['return'] = 0
-        self._defaults['ConfigurePulseBiasCurrentLevel'] = {}
-        self._defaults['ConfigurePulseBiasCurrentLevel']['return'] = 0
-        self._defaults['ConfigurePulseBiasCurrentLimit'] = {}
-        self._defaults['ConfigurePulseBiasCurrentLimit']['return'] = 0
-        self._defaults['ConfigurePulseBiasVoltageLevel'] = {}
-        self._defaults['ConfigurePulseBiasVoltageLevel']['return'] = 0
-        self._defaults['ConfigurePulseBiasVoltageLimit'] = {}
-        self._defaults['ConfigurePulseBiasVoltageLimit']['return'] = 0
-        self._defaults['ConfigurePulseCurrentLevel'] = {}
-        self._defaults['ConfigurePulseCurrentLevel']['return'] = 0
-        self._defaults['ConfigurePulseCurrentLevelRange'] = {}
-        self._defaults['ConfigurePulseCurrentLevelRange']['return'] = 0
-        self._defaults['ConfigurePulseCurrentLimit'] = {}
-        self._defaults['ConfigurePulseCurrentLimit']['return'] = 0
-        self._defaults['ConfigurePulseCurrentLimitRange'] = {}
-        self._defaults['ConfigurePulseCurrentLimitRange']['return'] = 0
-        self._defaults['ConfigurePulseVoltageLevel'] = {}
-        self._defaults['ConfigurePulseVoltageLevel']['return'] = 0
-        self._defaults['ConfigurePulseVoltageLevelRange'] = {}
-        self._defaults['ConfigurePulseVoltageLevelRange']['return'] = 0
-        self._defaults['ConfigurePulseVoltageLimit'] = {}
-        self._defaults['ConfigurePulseVoltageLimit']['return'] = 0
-        self._defaults['ConfigurePulseVoltageLimitRange'] = {}
-        self._defaults['ConfigurePulseVoltageLimitRange']['return'] = 0
-        self._defaults['ConfigureSense'] = {}
-        self._defaults['ConfigureSense']['return'] = 0
-        self._defaults['ConfigureSoftwareEdgeMeasureTrigger'] = {}
-        self._defaults['ConfigureSoftwareEdgeMeasureTrigger']['return'] = 0
-        self._defaults['ConfigureSoftwareEdgePulseTrigger'] = {}
-        self._defaults['ConfigureSoftwareEdgePulseTrigger']['return'] = 0
-        self._defaults['ConfigureSoftwareEdgeSequenceAdvanceTrigger'] = {}
-        self._defaults['ConfigureSoftwareEdgeSequenceAdvanceTrigger']['return'] = 0
-        self._defaults['ConfigureSoftwareEdgeSourceTrigger'] = {}
-        self._defaults['ConfigureSoftwareEdgeSourceTrigger']['return'] = 0
-        self._defaults['ConfigureSoftwareEdgeStartTrigger'] = {}
-        self._defaults['ConfigureSoftwareEdgeStartTrigger']['return'] = 0
-        self._defaults['ConfigureSourceMode'] = {}
-        self._defaults['ConfigureSourceMode']['return'] = 0
-        self._defaults['ConfigureVoltageLevel'] = {}
-        self._defaults['ConfigureVoltageLevel']['return'] = 0
-        self._defaults['ConfigureVoltageLevelRange'] = {}
-        self._defaults['ConfigureVoltageLevelRange']['return'] = 0
-        self._defaults['ConfigureVoltageLimit'] = {}
-        self._defaults['ConfigureVoltageLimit']['return'] = 0
-        self._defaults['ConfigureVoltageLimitRange'] = {}
-        self._defaults['ConfigureVoltageLimitRange']['return'] = 0
-        self._defaults['ConnectInternalReference'] = {}
-        self._defaults['ConnectInternalReference']['return'] = 0
         self._defaults['CreateAdvancedSequence'] = {}
         self._defaults['CreateAdvancedSequence']['return'] = 0
         self._defaults['CreateAdvancedSequenceStep'] = {}
@@ -113,14 +43,6 @@ class SideEffectsHelper(object):
         self._defaults['DeleteAdvancedSequence']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
-        self._defaults['DisablePulseTrigger'] = {}
-        self._defaults['DisablePulseTrigger']['return'] = 0
-        self._defaults['DisableSequenceAdvanceTrigger'] = {}
-        self._defaults['DisableSequenceAdvanceTrigger']['return'] = 0
-        self._defaults['DisableSourceTrigger'] = {}
-        self._defaults['DisableSourceTrigger']['return'] = 0
-        self._defaults['DisableStartTrigger'] = {}
-        self._defaults['DisableStartTrigger']['return'] = 0
         self._defaults['ExportSignal'] = {}
         self._defaults['ExportSignal']['return'] = 0
         self._defaults['FetchMultiple'] = {}
@@ -158,9 +80,6 @@ class SideEffectsHelper(object):
         self._defaults['GetSelfCalLastTemp'] = {}
         self._defaults['GetSelfCalLastTemp']['return'] = 0
         self._defaults['GetSelfCalLastTemp']['Temperature'] = None
-        self._defaults['InitWithOptions'] = {}
-        self._defaults['InitWithOptions']['return'] = 0
-        self._defaults['InitWithOptions']['vi'] = None
         self._defaults['InitializeWithChannels'] = {}
         self._defaults['InitializeWithChannels']['return'] = 0
         self._defaults['InitializeWithChannels']['vi'] = None
@@ -235,11 +154,6 @@ class SideEffectsHelper(object):
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
 
-    def niDCPower_CalSelfCalibrate(self, vi, channel_name):  # noqa: N802
-        if self._defaults['CalSelfCalibrate']['return'] != 0:
-            return self._defaults['CalSelfCalibrate']['return']
-        return self._defaults['CalSelfCalibrate']['return']
-
     def niDCPower_Commit(self, vi):  # noqa: N802
         if self._defaults['Commit']['return'] != 0:
             return self._defaults['Commit']['return']
@@ -249,31 +163,6 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureApertureTime']['return'] != 0:
             return self._defaults['ConfigureApertureTime']['return']
         return self._defaults['ConfigureApertureTime']['return']
-
-    def niDCPower_ConfigureAutoZero(self, vi, channel_name, auto_zero):  # noqa: N802
-        if self._defaults['ConfigureAutoZero']['return'] != 0:
-            return self._defaults['ConfigureAutoZero']['return']
-        return self._defaults['ConfigureAutoZero']['return']
-
-    def niDCPower_ConfigureCurrentLevel(self, vi, channel_name, level):  # noqa: N802
-        if self._defaults['ConfigureCurrentLevel']['return'] != 0:
-            return self._defaults['ConfigureCurrentLevel']['return']
-        return self._defaults['ConfigureCurrentLevel']['return']
-
-    def niDCPower_ConfigureCurrentLevelRange(self, vi, channel_name, range):  # noqa: N802
-        if self._defaults['ConfigureCurrentLevelRange']['return'] != 0:
-            return self._defaults['ConfigureCurrentLevelRange']['return']
-        return self._defaults['ConfigureCurrentLevelRange']['return']
-
-    def niDCPower_ConfigureCurrentLimit(self, vi, channel_name, behavior, limit):  # noqa: N802
-        if self._defaults['ConfigureCurrentLimit']['return'] != 0:
-            return self._defaults['ConfigureCurrentLimit']['return']
-        return self._defaults['ConfigureCurrentLimit']['return']
-
-    def niDCPower_ConfigureCurrentLimitRange(self, vi, channel_name, range):  # noqa: N802
-        if self._defaults['ConfigureCurrentLimitRange']['return'] != 0:
-            return self._defaults['ConfigureCurrentLimitRange']['return']
-        return self._defaults['ConfigureCurrentLimitRange']['return']
 
     def niDCPower_ConfigureDigitalEdgeMeasureTrigger(self, vi, input_terminal, edge):  # noqa: N802
         if self._defaults['ConfigureDigitalEdgeMeasureTrigger']['return'] != 0:
@@ -300,151 +189,6 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
         return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
 
-    def niDCPower_ConfigureOutputEnabled(self, vi, channel_name, enabled):  # noqa: N802
-        if self._defaults['ConfigureOutputEnabled']['return'] != 0:
-            return self._defaults['ConfigureOutputEnabled']['return']
-        return self._defaults['ConfigureOutputEnabled']['return']
-
-    def niDCPower_ConfigureOutputFunction(self, vi, channel_name, function):  # noqa: N802
-        if self._defaults['ConfigureOutputFunction']['return'] != 0:
-            return self._defaults['ConfigureOutputFunction']['return']
-        return self._defaults['ConfigureOutputFunction']['return']
-
-    def niDCPower_ConfigureOutputRange(self, vi, channel_name, range_type, range):  # noqa: N802
-        if self._defaults['ConfigureOutputRange']['return'] != 0:
-            return self._defaults['ConfigureOutputRange']['return']
-        return self._defaults['ConfigureOutputRange']['return']
-
-    def niDCPower_ConfigureOutputResistance(self, vi, channel_name, resistance):  # noqa: N802
-        if self._defaults['ConfigureOutputResistance']['return'] != 0:
-            return self._defaults['ConfigureOutputResistance']['return']
-        return self._defaults['ConfigureOutputResistance']['return']
-
-    def niDCPower_ConfigurePowerLineFrequency(self, vi, powerline_frequency):  # noqa: N802
-        if self._defaults['ConfigurePowerLineFrequency']['return'] != 0:
-            return self._defaults['ConfigurePowerLineFrequency']['return']
-        return self._defaults['ConfigurePowerLineFrequency']['return']
-
-    def niDCPower_ConfigurePulseBiasCurrentLevel(self, vi, channel_name, level):  # noqa: N802
-        if self._defaults['ConfigurePulseBiasCurrentLevel']['return'] != 0:
-            return self._defaults['ConfigurePulseBiasCurrentLevel']['return']
-        return self._defaults['ConfigurePulseBiasCurrentLevel']['return']
-
-    def niDCPower_ConfigurePulseBiasCurrentLimit(self, vi, channel_name, limit):  # noqa: N802
-        if self._defaults['ConfigurePulseBiasCurrentLimit']['return'] != 0:
-            return self._defaults['ConfigurePulseBiasCurrentLimit']['return']
-        return self._defaults['ConfigurePulseBiasCurrentLimit']['return']
-
-    def niDCPower_ConfigurePulseBiasVoltageLevel(self, vi, channel_name, level):  # noqa: N802
-        if self._defaults['ConfigurePulseBiasVoltageLevel']['return'] != 0:
-            return self._defaults['ConfigurePulseBiasVoltageLevel']['return']
-        return self._defaults['ConfigurePulseBiasVoltageLevel']['return']
-
-    def niDCPower_ConfigurePulseBiasVoltageLimit(self, vi, channel_name, limit):  # noqa: N802
-        if self._defaults['ConfigurePulseBiasVoltageLimit']['return'] != 0:
-            return self._defaults['ConfigurePulseBiasVoltageLimit']['return']
-        return self._defaults['ConfigurePulseBiasVoltageLimit']['return']
-
-    def niDCPower_ConfigurePulseCurrentLevel(self, vi, channel_name, level):  # noqa: N802
-        if self._defaults['ConfigurePulseCurrentLevel']['return'] != 0:
-            return self._defaults['ConfigurePulseCurrentLevel']['return']
-        return self._defaults['ConfigurePulseCurrentLevel']['return']
-
-    def niDCPower_ConfigurePulseCurrentLevelRange(self, vi, channel_name, range):  # noqa: N802
-        if self._defaults['ConfigurePulseCurrentLevelRange']['return'] != 0:
-            return self._defaults['ConfigurePulseCurrentLevelRange']['return']
-        return self._defaults['ConfigurePulseCurrentLevelRange']['return']
-
-    def niDCPower_ConfigurePulseCurrentLimit(self, vi, channel_name, limit):  # noqa: N802
-        if self._defaults['ConfigurePulseCurrentLimit']['return'] != 0:
-            return self._defaults['ConfigurePulseCurrentLimit']['return']
-        return self._defaults['ConfigurePulseCurrentLimit']['return']
-
-    def niDCPower_ConfigurePulseCurrentLimitRange(self, vi, channel_name, range):  # noqa: N802
-        if self._defaults['ConfigurePulseCurrentLimitRange']['return'] != 0:
-            return self._defaults['ConfigurePulseCurrentLimitRange']['return']
-        return self._defaults['ConfigurePulseCurrentLimitRange']['return']
-
-    def niDCPower_ConfigurePulseVoltageLevel(self, vi, channel_name, level):  # noqa: N802
-        if self._defaults['ConfigurePulseVoltageLevel']['return'] != 0:
-            return self._defaults['ConfigurePulseVoltageLevel']['return']
-        return self._defaults['ConfigurePulseVoltageLevel']['return']
-
-    def niDCPower_ConfigurePulseVoltageLevelRange(self, vi, channel_name, range):  # noqa: N802
-        if self._defaults['ConfigurePulseVoltageLevelRange']['return'] != 0:
-            return self._defaults['ConfigurePulseVoltageLevelRange']['return']
-        return self._defaults['ConfigurePulseVoltageLevelRange']['return']
-
-    def niDCPower_ConfigurePulseVoltageLimit(self, vi, channel_name, limit):  # noqa: N802
-        if self._defaults['ConfigurePulseVoltageLimit']['return'] != 0:
-            return self._defaults['ConfigurePulseVoltageLimit']['return']
-        return self._defaults['ConfigurePulseVoltageLimit']['return']
-
-    def niDCPower_ConfigurePulseVoltageLimitRange(self, vi, channel_name, range):  # noqa: N802
-        if self._defaults['ConfigurePulseVoltageLimitRange']['return'] != 0:
-            return self._defaults['ConfigurePulseVoltageLimitRange']['return']
-        return self._defaults['ConfigurePulseVoltageLimitRange']['return']
-
-    def niDCPower_ConfigureSense(self, vi, channel_name, sense):  # noqa: N802
-        if self._defaults['ConfigureSense']['return'] != 0:
-            return self._defaults['ConfigureSense']['return']
-        return self._defaults['ConfigureSense']['return']
-
-    def niDCPower_ConfigureSoftwareEdgeMeasureTrigger(self, vi):  # noqa: N802
-        if self._defaults['ConfigureSoftwareEdgeMeasureTrigger']['return'] != 0:
-            return self._defaults['ConfigureSoftwareEdgeMeasureTrigger']['return']
-        return self._defaults['ConfigureSoftwareEdgeMeasureTrigger']['return']
-
-    def niDCPower_ConfigureSoftwareEdgePulseTrigger(self, vi):  # noqa: N802
-        if self._defaults['ConfigureSoftwareEdgePulseTrigger']['return'] != 0:
-            return self._defaults['ConfigureSoftwareEdgePulseTrigger']['return']
-        return self._defaults['ConfigureSoftwareEdgePulseTrigger']['return']
-
-    def niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger(self, vi):  # noqa: N802
-        if self._defaults['ConfigureSoftwareEdgeSequenceAdvanceTrigger']['return'] != 0:
-            return self._defaults['ConfigureSoftwareEdgeSequenceAdvanceTrigger']['return']
-        return self._defaults['ConfigureSoftwareEdgeSequenceAdvanceTrigger']['return']
-
-    def niDCPower_ConfigureSoftwareEdgeSourceTrigger(self, vi):  # noqa: N802
-        if self._defaults['ConfigureSoftwareEdgeSourceTrigger']['return'] != 0:
-            return self._defaults['ConfigureSoftwareEdgeSourceTrigger']['return']
-        return self._defaults['ConfigureSoftwareEdgeSourceTrigger']['return']
-
-    def niDCPower_ConfigureSoftwareEdgeStartTrigger(self, vi):  # noqa: N802
-        if self._defaults['ConfigureSoftwareEdgeStartTrigger']['return'] != 0:
-            return self._defaults['ConfigureSoftwareEdgeStartTrigger']['return']
-        return self._defaults['ConfigureSoftwareEdgeStartTrigger']['return']
-
-    def niDCPower_ConfigureSourceMode(self, vi, source_mode):  # noqa: N802
-        if self._defaults['ConfigureSourceMode']['return'] != 0:
-            return self._defaults['ConfigureSourceMode']['return']
-        return self._defaults['ConfigureSourceMode']['return']
-
-    def niDCPower_ConfigureVoltageLevel(self, vi, channel_name, level):  # noqa: N802
-        if self._defaults['ConfigureVoltageLevel']['return'] != 0:
-            return self._defaults['ConfigureVoltageLevel']['return']
-        return self._defaults['ConfigureVoltageLevel']['return']
-
-    def niDCPower_ConfigureVoltageLevelRange(self, vi, channel_name, range):  # noqa: N802
-        if self._defaults['ConfigureVoltageLevelRange']['return'] != 0:
-            return self._defaults['ConfigureVoltageLevelRange']['return']
-        return self._defaults['ConfigureVoltageLevelRange']['return']
-
-    def niDCPower_ConfigureVoltageLimit(self, vi, channel_name, limit):  # noqa: N802
-        if self._defaults['ConfigureVoltageLimit']['return'] != 0:
-            return self._defaults['ConfigureVoltageLimit']['return']
-        return self._defaults['ConfigureVoltageLimit']['return']
-
-    def niDCPower_ConfigureVoltageLimitRange(self, vi, channel_name, range):  # noqa: N802
-        if self._defaults['ConfigureVoltageLimitRange']['return'] != 0:
-            return self._defaults['ConfigureVoltageLimitRange']['return']
-        return self._defaults['ConfigureVoltageLimitRange']['return']
-
-    def niDCPower_ConnectInternalReference(self, vi, internal_reference):  # noqa: N802
-        if self._defaults['ConnectInternalReference']['return'] != 0:
-            return self._defaults['ConnectInternalReference']['return']
-        return self._defaults['ConnectInternalReference']['return']
-
     def niDCPower_CreateAdvancedSequence(self, vi, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):  # noqa: N802
         if self._defaults['CreateAdvancedSequence']['return'] != 0:
             return self._defaults['CreateAdvancedSequence']['return']
@@ -464,26 +208,6 @@ class SideEffectsHelper(object):
         if self._defaults['Disable']['return'] != 0:
             return self._defaults['Disable']['return']
         return self._defaults['Disable']['return']
-
-    def niDCPower_DisablePulseTrigger(self, vi):  # noqa: N802
-        if self._defaults['DisablePulseTrigger']['return'] != 0:
-            return self._defaults['DisablePulseTrigger']['return']
-        return self._defaults['DisablePulseTrigger']['return']
-
-    def niDCPower_DisableSequenceAdvanceTrigger(self, vi):  # noqa: N802
-        if self._defaults['DisableSequenceAdvanceTrigger']['return'] != 0:
-            return self._defaults['DisableSequenceAdvanceTrigger']['return']
-        return self._defaults['DisableSequenceAdvanceTrigger']['return']
-
-    def niDCPower_DisableSourceTrigger(self, vi):  # noqa: N802
-        if self._defaults['DisableSourceTrigger']['return'] != 0:
-            return self._defaults['DisableSourceTrigger']['return']
-        return self._defaults['DisableSourceTrigger']['return']
-
-    def niDCPower_DisableStartTrigger(self, vi):  # noqa: N802
-        if self._defaults['DisableStartTrigger']['return'] != 0:
-            return self._defaults['DisableStartTrigger']['return']
-        return self._defaults['DisableStartTrigger']['return']
 
     def niDCPower_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
         if self._defaults['ExportSignal']['return'] != 0:
@@ -591,14 +315,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetSelfCalLastTemp", param='Temperature')
         temperature.contents.value = self._defaults['GetSelfCalLastTemp']['Temperature']
         return self._defaults['GetSelfCalLastTemp']['return']
-
-    def niDCPower_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
-        if self._defaults['InitWithOptions']['return'] != 0:
-            return self._defaults['InitWithOptions']['return']
-        if self._defaults['InitWithOptions']['vi'] is None:
-            raise MockFunctionCallError("niDCPower_InitWithOptions", param='vi')
-        vi.contents.value = self._defaults['InitWithOptions']['vi']
-        return self._defaults['InitWithOptions']['return']
 
     def niDCPower_InitializeWithChannels(self, resource_name, channels, reset, option_string, vi):  # noqa: N802
         if self._defaults['InitializeWithChannels']['return'] != 0:
@@ -766,22 +482,10 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niDCPower_Abort.side_effect = MockFunctionCallError("niDCPower_Abort")
         mock_library.niDCPower_Abort.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_CalSelfCalibrate.side_effect = MockFunctionCallError("niDCPower_CalSelfCalibrate")
-        mock_library.niDCPower_CalSelfCalibrate.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_Commit.side_effect = MockFunctionCallError("niDCPower_Commit")
         mock_library.niDCPower_Commit.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_ConfigureApertureTime.side_effect = MockFunctionCallError("niDCPower_ConfigureApertureTime")
         mock_library.niDCPower_ConfigureApertureTime.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureAutoZero.side_effect = MockFunctionCallError("niDCPower_ConfigureAutoZero")
-        mock_library.niDCPower_ConfigureAutoZero.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureCurrentLevel.side_effect = MockFunctionCallError("niDCPower_ConfigureCurrentLevel")
-        mock_library.niDCPower_ConfigureCurrentLevel.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureCurrentLevelRange.side_effect = MockFunctionCallError("niDCPower_ConfigureCurrentLevelRange")
-        mock_library.niDCPower_ConfigureCurrentLevelRange.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureCurrentLimit.side_effect = MockFunctionCallError("niDCPower_ConfigureCurrentLimit")
-        mock_library.niDCPower_ConfigureCurrentLimit.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureCurrentLimitRange.side_effect = MockFunctionCallError("niDCPower_ConfigureCurrentLimitRange")
-        mock_library.niDCPower_ConfigureCurrentLimitRange.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_ConfigureDigitalEdgeMeasureTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgeMeasureTrigger")
         mock_library.niDCPower_ConfigureDigitalEdgeMeasureTrigger.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_ConfigureDigitalEdgePulseTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgePulseTrigger")
@@ -792,64 +496,6 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_ConfigureDigitalEdgeSourceTrigger.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_ConfigureDigitalEdgeStartTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgeStartTrigger")
         mock_library.niDCPower_ConfigureDigitalEdgeStartTrigger.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureOutputEnabled.side_effect = MockFunctionCallError("niDCPower_ConfigureOutputEnabled")
-        mock_library.niDCPower_ConfigureOutputEnabled.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureOutputFunction.side_effect = MockFunctionCallError("niDCPower_ConfigureOutputFunction")
-        mock_library.niDCPower_ConfigureOutputFunction.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureOutputRange.side_effect = MockFunctionCallError("niDCPower_ConfigureOutputRange")
-        mock_library.niDCPower_ConfigureOutputRange.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureOutputResistance.side_effect = MockFunctionCallError("niDCPower_ConfigureOutputResistance")
-        mock_library.niDCPower_ConfigureOutputResistance.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePowerLineFrequency.side_effect = MockFunctionCallError("niDCPower_ConfigurePowerLineFrequency")
-        mock_library.niDCPower_ConfigurePowerLineFrequency.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseBiasCurrentLevel.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseBiasCurrentLevel")
-        mock_library.niDCPower_ConfigurePulseBiasCurrentLevel.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseBiasCurrentLimit.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseBiasCurrentLimit")
-        mock_library.niDCPower_ConfigurePulseBiasCurrentLimit.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseBiasVoltageLevel.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseBiasVoltageLevel")
-        mock_library.niDCPower_ConfigurePulseBiasVoltageLevel.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseBiasVoltageLimit.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseBiasVoltageLimit")
-        mock_library.niDCPower_ConfigurePulseBiasVoltageLimit.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseCurrentLevel.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseCurrentLevel")
-        mock_library.niDCPower_ConfigurePulseCurrentLevel.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseCurrentLevelRange.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseCurrentLevelRange")
-        mock_library.niDCPower_ConfigurePulseCurrentLevelRange.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseCurrentLimit.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseCurrentLimit")
-        mock_library.niDCPower_ConfigurePulseCurrentLimit.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseCurrentLimitRange.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseCurrentLimitRange")
-        mock_library.niDCPower_ConfigurePulseCurrentLimitRange.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseVoltageLevel.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseVoltageLevel")
-        mock_library.niDCPower_ConfigurePulseVoltageLevel.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseVoltageLevelRange.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseVoltageLevelRange")
-        mock_library.niDCPower_ConfigurePulseVoltageLevelRange.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseVoltageLimit.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseVoltageLimit")
-        mock_library.niDCPower_ConfigurePulseVoltageLimit.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigurePulseVoltageLimitRange.side_effect = MockFunctionCallError("niDCPower_ConfigurePulseVoltageLimitRange")
-        mock_library.niDCPower_ConfigurePulseVoltageLimitRange.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureSense.side_effect = MockFunctionCallError("niDCPower_ConfigureSense")
-        mock_library.niDCPower_ConfigureSense.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureSoftwareEdgeMeasureTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureSoftwareEdgeMeasureTrigger")
-        mock_library.niDCPower_ConfigureSoftwareEdgeMeasureTrigger.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureSoftwareEdgePulseTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureSoftwareEdgePulseTrigger")
-        mock_library.niDCPower_ConfigureSoftwareEdgePulseTrigger.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger")
-        mock_library.niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureSoftwareEdgeSourceTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureSoftwareEdgeSourceTrigger")
-        mock_library.niDCPower_ConfigureSoftwareEdgeSourceTrigger.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureSoftwareEdgeStartTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureSoftwareEdgeStartTrigger")
-        mock_library.niDCPower_ConfigureSoftwareEdgeStartTrigger.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureSourceMode.side_effect = MockFunctionCallError("niDCPower_ConfigureSourceMode")
-        mock_library.niDCPower_ConfigureSourceMode.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureVoltageLevel.side_effect = MockFunctionCallError("niDCPower_ConfigureVoltageLevel")
-        mock_library.niDCPower_ConfigureVoltageLevel.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureVoltageLevelRange.side_effect = MockFunctionCallError("niDCPower_ConfigureVoltageLevelRange")
-        mock_library.niDCPower_ConfigureVoltageLevelRange.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureVoltageLimit.side_effect = MockFunctionCallError("niDCPower_ConfigureVoltageLimit")
-        mock_library.niDCPower_ConfigureVoltageLimit.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConfigureVoltageLimitRange.side_effect = MockFunctionCallError("niDCPower_ConfigureVoltageLimitRange")
-        mock_library.niDCPower_ConfigureVoltageLimitRange.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_ConnectInternalReference.side_effect = MockFunctionCallError("niDCPower_ConnectInternalReference")
-        mock_library.niDCPower_ConnectInternalReference.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_CreateAdvancedSequence.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequence")
         mock_library.niDCPower_CreateAdvancedSequence.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_CreateAdvancedSequenceStep.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceStep")
@@ -858,14 +504,6 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_DeleteAdvancedSequence.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_Disable.side_effect = MockFunctionCallError("niDCPower_Disable")
         mock_library.niDCPower_Disable.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_DisablePulseTrigger.side_effect = MockFunctionCallError("niDCPower_DisablePulseTrigger")
-        mock_library.niDCPower_DisablePulseTrigger.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_DisableSequenceAdvanceTrigger.side_effect = MockFunctionCallError("niDCPower_DisableSequenceAdvanceTrigger")
-        mock_library.niDCPower_DisableSequenceAdvanceTrigger.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_DisableSourceTrigger.side_effect = MockFunctionCallError("niDCPower_DisableSourceTrigger")
-        mock_library.niDCPower_DisableSourceTrigger.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_DisableStartTrigger.side_effect = MockFunctionCallError("niDCPower_DisableStartTrigger")
-        mock_library.niDCPower_DisableStartTrigger.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_ExportSignal.side_effect = MockFunctionCallError("niDCPower_ExportSignal")
         mock_library.niDCPower_ExportSignal.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_FetchMultiple.side_effect = MockFunctionCallError("niDCPower_FetchMultiple")
@@ -886,8 +524,6 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_GetSelfCalLastDateAndTime.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_GetSelfCalLastTemp.side_effect = MockFunctionCallError("niDCPower_GetSelfCalLastTemp")
         mock_library.niDCPower_GetSelfCalLastTemp.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_InitWithOptions.side_effect = MockFunctionCallError("niDCPower_InitWithOptions")
-        mock_library.niDCPower_InitWithOptions.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_InitializeWithChannels.side_effect = MockFunctionCallError("niDCPower_InitializeWithChannels")
         mock_library.niDCPower_InitializeWithChannels.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_Initiate.side_effect = MockFunctionCallError("niDCPower_Initiate")
