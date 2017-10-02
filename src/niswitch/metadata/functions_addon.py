@@ -21,11 +21,11 @@ functions_codegen_method = {
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
     'GetAttributeViSession':           { 'codegen_method': 'no',       },
     'Scan':                            { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
-    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'error_query':                     { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'error_query':                     { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
