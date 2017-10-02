@@ -18,56 +18,17 @@ class Library(object):
         self._func_lock = threading.Lock()
         # We cache the cfunc object from the ctypes.CDLL object
         self.niDCPower_Abort_cfunc = None
-        self.niDCPower_CalSelfCalibrate_cfunc = None
         self.niDCPower_Commit_cfunc = None
         self.niDCPower_ConfigureApertureTime_cfunc = None
-        self.niDCPower_ConfigureAutoZero_cfunc = None
-        self.niDCPower_ConfigureCurrentLevel_cfunc = None
-        self.niDCPower_ConfigureCurrentLevelRange_cfunc = None
-        self.niDCPower_ConfigureCurrentLimit_cfunc = None
-        self.niDCPower_ConfigureCurrentLimitRange_cfunc = None
         self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc = None
         self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc = None
         self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc = None
         self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc = None
         self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc = None
-        self.niDCPower_ConfigureOutputEnabled_cfunc = None
-        self.niDCPower_ConfigureOutputFunction_cfunc = None
-        self.niDCPower_ConfigureOutputRange_cfunc = None
-        self.niDCPower_ConfigureOutputResistance_cfunc = None
-        self.niDCPower_ConfigurePowerLineFrequency_cfunc = None
-        self.niDCPower_ConfigurePulseBiasCurrentLevel_cfunc = None
-        self.niDCPower_ConfigurePulseBiasCurrentLimit_cfunc = None
-        self.niDCPower_ConfigurePulseBiasVoltageLevel_cfunc = None
-        self.niDCPower_ConfigurePulseBiasVoltageLimit_cfunc = None
-        self.niDCPower_ConfigurePulseCurrentLevel_cfunc = None
-        self.niDCPower_ConfigurePulseCurrentLevelRange_cfunc = None
-        self.niDCPower_ConfigurePulseCurrentLimit_cfunc = None
-        self.niDCPower_ConfigurePulseCurrentLimitRange_cfunc = None
-        self.niDCPower_ConfigurePulseVoltageLevel_cfunc = None
-        self.niDCPower_ConfigurePulseVoltageLevelRange_cfunc = None
-        self.niDCPower_ConfigurePulseVoltageLimit_cfunc = None
-        self.niDCPower_ConfigurePulseVoltageLimitRange_cfunc = None
-        self.niDCPower_ConfigureSense_cfunc = None
-        self.niDCPower_ConfigureSoftwareEdgeMeasureTrigger_cfunc = None
-        self.niDCPower_ConfigureSoftwareEdgePulseTrigger_cfunc = None
-        self.niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger_cfunc = None
-        self.niDCPower_ConfigureSoftwareEdgeSourceTrigger_cfunc = None
-        self.niDCPower_ConfigureSoftwareEdgeStartTrigger_cfunc = None
-        self.niDCPower_ConfigureSourceMode_cfunc = None
-        self.niDCPower_ConfigureVoltageLevel_cfunc = None
-        self.niDCPower_ConfigureVoltageLevelRange_cfunc = None
-        self.niDCPower_ConfigureVoltageLimit_cfunc = None
-        self.niDCPower_ConfigureVoltageLimitRange_cfunc = None
-        self.niDCPower_ConnectInternalReference_cfunc = None
         self.niDCPower_CreateAdvancedSequence_cfunc = None
         self.niDCPower_CreateAdvancedSequenceStep_cfunc = None
         self.niDCPower_DeleteAdvancedSequence_cfunc = None
         self.niDCPower_Disable_cfunc = None
-        self.niDCPower_DisablePulseTrigger_cfunc = None
-        self.niDCPower_DisableSequenceAdvanceTrigger_cfunc = None
-        self.niDCPower_DisableSourceTrigger_cfunc = None
-        self.niDCPower_DisableStartTrigger_cfunc = None
         self.niDCPower_ExportSignal_cfunc = None
         self.niDCPower_FetchMultiple_cfunc = None
         self.niDCPower_GetAttributeViBoolean_cfunc = None
@@ -78,7 +39,6 @@ class Library(object):
         self.niDCPower_GetError_cfunc = None
         self.niDCPower_GetSelfCalLastDateAndTime_cfunc = None
         self.niDCPower_GetSelfCalLastTemp_cfunc = None
-        self.niDCPower_InitWithOptions_cfunc = None
         self.niDCPower_InitializeWithChannels_cfunc = None
         self.niDCPower_Initiate_cfunc = None
         self.niDCPower_Measure_cfunc = None
@@ -118,14 +78,6 @@ class Library(object):
                 self.niDCPower_Abort_cfunc.restype = nidcpower.python_types.ViStatus
         return self.niDCPower_Abort_cfunc(vi)
 
-    def niDCPower_CalSelfCalibrate(self, vi, channel_name):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_CalSelfCalibrate_cfunc is None:
-                self.niDCPower_CalSelfCalibrate_cfunc = self._library.niDCPower_CalSelfCalibrate
-                self.niDCPower_CalSelfCalibrate_cfunc.argtypes = [ViSession_ctype, ViChar_ctype]  # noqa: F405
-                self.niDCPower_CalSelfCalibrate_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_CalSelfCalibrate_cfunc(vi, channel_name)
-
     def niDCPower_Commit(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_Commit_cfunc is None:
@@ -141,46 +93,6 @@ class Library(object):
                 self.niDCPower_ConfigureApertureTime_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype, ViInt32_ctype]  # noqa: F405
                 self.niDCPower_ConfigureApertureTime_cfunc.restype = nidcpower.python_types.ViStatus
         return self.niDCPower_ConfigureApertureTime_cfunc(vi, channel_name, aperture_time, units)
-
-    def niDCPower_ConfigureAutoZero(self, vi, channel_name, auto_zero):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureAutoZero_cfunc is None:
-                self.niDCPower_ConfigureAutoZero_cfunc = self._library.niDCPower_ConfigureAutoZero
-                self.niDCPower_ConfigureAutoZero_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViInt32_ctype]  # noqa: F405
-                self.niDCPower_ConfigureAutoZero_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureAutoZero_cfunc(vi, channel_name, auto_zero)
-
-    def niDCPower_ConfigureCurrentLevel(self, vi, channel_name, level):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureCurrentLevel_cfunc is None:
-                self.niDCPower_ConfigureCurrentLevel_cfunc = self._library.niDCPower_ConfigureCurrentLevel
-                self.niDCPower_ConfigureCurrentLevel_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigureCurrentLevel_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureCurrentLevel_cfunc(vi, channel_name, level)
-
-    def niDCPower_ConfigureCurrentLevelRange(self, vi, channel_name, range):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureCurrentLevelRange_cfunc is None:
-                self.niDCPower_ConfigureCurrentLevelRange_cfunc = self._library.niDCPower_ConfigureCurrentLevelRange
-                self.niDCPower_ConfigureCurrentLevelRange_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigureCurrentLevelRange_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureCurrentLevelRange_cfunc(vi, channel_name, range)
-
-    def niDCPower_ConfigureCurrentLimit(self, vi, channel_name, behavior, limit):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureCurrentLimit_cfunc is None:
-                self.niDCPower_ConfigureCurrentLimit_cfunc = self._library.niDCPower_ConfigureCurrentLimit
-                self.niDCPower_ConfigureCurrentLimit_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViInt32_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigureCurrentLimit_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureCurrentLimit_cfunc(vi, channel_name, behavior, limit)
-
-    def niDCPower_ConfigureCurrentLimitRange(self, vi, channel_name, range):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureCurrentLimitRange_cfunc is None:
-                self.niDCPower_ConfigureCurrentLimitRange_cfunc = self._library.niDCPower_ConfigureCurrentLimitRange
-                self.niDCPower_ConfigureCurrentLimitRange_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigureCurrentLimitRange_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureCurrentLimitRange_cfunc(vi, channel_name, range)
 
     def niDCPower_ConfigureDigitalEdgeMeasureTrigger(self, vi, input_terminal, edge):  # noqa: N802
         with self._func_lock:
@@ -222,238 +134,6 @@ class Library(object):
                 self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc.restype = nidcpower.python_types.ViStatus
         return self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc(vi, input_terminal, edge)
 
-    def niDCPower_ConfigureOutputEnabled(self, vi, channel_name, enabled):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureOutputEnabled_cfunc is None:
-                self.niDCPower_ConfigureOutputEnabled_cfunc = self._library.niDCPower_ConfigureOutputEnabled
-                self.niDCPower_ConfigureOutputEnabled_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViBoolean_ctype]  # noqa: F405
-                self.niDCPower_ConfigureOutputEnabled_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureOutputEnabled_cfunc(vi, channel_name, enabled)
-
-    def niDCPower_ConfigureOutputFunction(self, vi, channel_name, function):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureOutputFunction_cfunc is None:
-                self.niDCPower_ConfigureOutputFunction_cfunc = self._library.niDCPower_ConfigureOutputFunction
-                self.niDCPower_ConfigureOutputFunction_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViInt32_ctype]  # noqa: F405
-                self.niDCPower_ConfigureOutputFunction_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureOutputFunction_cfunc(vi, channel_name, function)
-
-    def niDCPower_ConfigureOutputRange(self, vi, channel_name, range_type, range):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureOutputRange_cfunc is None:
-                self.niDCPower_ConfigureOutputRange_cfunc = self._library.niDCPower_ConfigureOutputRange
-                self.niDCPower_ConfigureOutputRange_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViInt32_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigureOutputRange_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureOutputRange_cfunc(vi, channel_name, range_type, range)
-
-    def niDCPower_ConfigureOutputResistance(self, vi, channel_name, resistance):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureOutputResistance_cfunc is None:
-                self.niDCPower_ConfigureOutputResistance_cfunc = self._library.niDCPower_ConfigureOutputResistance
-                self.niDCPower_ConfigureOutputResistance_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigureOutputResistance_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureOutputResistance_cfunc(vi, channel_name, resistance)
-
-    def niDCPower_ConfigurePowerLineFrequency(self, vi, powerline_frequency):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePowerLineFrequency_cfunc is None:
-                self.niDCPower_ConfigurePowerLineFrequency_cfunc = self._library.niDCPower_ConfigurePowerLineFrequency
-                self.niDCPower_ConfigurePowerLineFrequency_cfunc.argtypes = [ViSession_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePowerLineFrequency_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePowerLineFrequency_cfunc(vi, powerline_frequency)
-
-    def niDCPower_ConfigurePulseBiasCurrentLevel(self, vi, channel_name, level):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseBiasCurrentLevel_cfunc is None:
-                self.niDCPower_ConfigurePulseBiasCurrentLevel_cfunc = self._library.niDCPower_ConfigurePulseBiasCurrentLevel
-                self.niDCPower_ConfigurePulseBiasCurrentLevel_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseBiasCurrentLevel_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseBiasCurrentLevel_cfunc(vi, channel_name, level)
-
-    def niDCPower_ConfigurePulseBiasCurrentLimit(self, vi, channel_name, limit):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseBiasCurrentLimit_cfunc is None:
-                self.niDCPower_ConfigurePulseBiasCurrentLimit_cfunc = self._library.niDCPower_ConfigurePulseBiasCurrentLimit
-                self.niDCPower_ConfigurePulseBiasCurrentLimit_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseBiasCurrentLimit_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseBiasCurrentLimit_cfunc(vi, channel_name, limit)
-
-    def niDCPower_ConfigurePulseBiasVoltageLevel(self, vi, channel_name, level):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseBiasVoltageLevel_cfunc is None:
-                self.niDCPower_ConfigurePulseBiasVoltageLevel_cfunc = self._library.niDCPower_ConfigurePulseBiasVoltageLevel
-                self.niDCPower_ConfigurePulseBiasVoltageLevel_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseBiasVoltageLevel_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseBiasVoltageLevel_cfunc(vi, channel_name, level)
-
-    def niDCPower_ConfigurePulseBiasVoltageLimit(self, vi, channel_name, limit):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseBiasVoltageLimit_cfunc is None:
-                self.niDCPower_ConfigurePulseBiasVoltageLimit_cfunc = self._library.niDCPower_ConfigurePulseBiasVoltageLimit
-                self.niDCPower_ConfigurePulseBiasVoltageLimit_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseBiasVoltageLimit_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseBiasVoltageLimit_cfunc(vi, channel_name, limit)
-
-    def niDCPower_ConfigurePulseCurrentLevel(self, vi, channel_name, level):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseCurrentLevel_cfunc is None:
-                self.niDCPower_ConfigurePulseCurrentLevel_cfunc = self._library.niDCPower_ConfigurePulseCurrentLevel
-                self.niDCPower_ConfigurePulseCurrentLevel_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseCurrentLevel_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseCurrentLevel_cfunc(vi, channel_name, level)
-
-    def niDCPower_ConfigurePulseCurrentLevelRange(self, vi, channel_name, range):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseCurrentLevelRange_cfunc is None:
-                self.niDCPower_ConfigurePulseCurrentLevelRange_cfunc = self._library.niDCPower_ConfigurePulseCurrentLevelRange
-                self.niDCPower_ConfigurePulseCurrentLevelRange_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseCurrentLevelRange_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseCurrentLevelRange_cfunc(vi, channel_name, range)
-
-    def niDCPower_ConfigurePulseCurrentLimit(self, vi, channel_name, limit):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseCurrentLimit_cfunc is None:
-                self.niDCPower_ConfigurePulseCurrentLimit_cfunc = self._library.niDCPower_ConfigurePulseCurrentLimit
-                self.niDCPower_ConfigurePulseCurrentLimit_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseCurrentLimit_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseCurrentLimit_cfunc(vi, channel_name, limit)
-
-    def niDCPower_ConfigurePulseCurrentLimitRange(self, vi, channel_name, range):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseCurrentLimitRange_cfunc is None:
-                self.niDCPower_ConfigurePulseCurrentLimitRange_cfunc = self._library.niDCPower_ConfigurePulseCurrentLimitRange
-                self.niDCPower_ConfigurePulseCurrentLimitRange_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseCurrentLimitRange_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseCurrentLimitRange_cfunc(vi, channel_name, range)
-
-    def niDCPower_ConfigurePulseVoltageLevel(self, vi, channel_name, level):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseVoltageLevel_cfunc is None:
-                self.niDCPower_ConfigurePulseVoltageLevel_cfunc = self._library.niDCPower_ConfigurePulseVoltageLevel
-                self.niDCPower_ConfigurePulseVoltageLevel_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseVoltageLevel_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseVoltageLevel_cfunc(vi, channel_name, level)
-
-    def niDCPower_ConfigurePulseVoltageLevelRange(self, vi, channel_name, range):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseVoltageLevelRange_cfunc is None:
-                self.niDCPower_ConfigurePulseVoltageLevelRange_cfunc = self._library.niDCPower_ConfigurePulseVoltageLevelRange
-                self.niDCPower_ConfigurePulseVoltageLevelRange_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseVoltageLevelRange_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseVoltageLevelRange_cfunc(vi, channel_name, range)
-
-    def niDCPower_ConfigurePulseVoltageLimit(self, vi, channel_name, limit):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseVoltageLimit_cfunc is None:
-                self.niDCPower_ConfigurePulseVoltageLimit_cfunc = self._library.niDCPower_ConfigurePulseVoltageLimit
-                self.niDCPower_ConfigurePulseVoltageLimit_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseVoltageLimit_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseVoltageLimit_cfunc(vi, channel_name, limit)
-
-    def niDCPower_ConfigurePulseVoltageLimitRange(self, vi, channel_name, range):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigurePulseVoltageLimitRange_cfunc is None:
-                self.niDCPower_ConfigurePulseVoltageLimitRange_cfunc = self._library.niDCPower_ConfigurePulseVoltageLimitRange
-                self.niDCPower_ConfigurePulseVoltageLimitRange_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigurePulseVoltageLimitRange_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigurePulseVoltageLimitRange_cfunc(vi, channel_name, range)
-
-    def niDCPower_ConfigureSense(self, vi, channel_name, sense):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureSense_cfunc is None:
-                self.niDCPower_ConfigureSense_cfunc = self._library.niDCPower_ConfigureSense
-                self.niDCPower_ConfigureSense_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViInt32_ctype]  # noqa: F405
-                self.niDCPower_ConfigureSense_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureSense_cfunc(vi, channel_name, sense)
-
-    def niDCPower_ConfigureSoftwareEdgeMeasureTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureSoftwareEdgeMeasureTrigger_cfunc is None:
-                self.niDCPower_ConfigureSoftwareEdgeMeasureTrigger_cfunc = self._library.niDCPower_ConfigureSoftwareEdgeMeasureTrigger
-                self.niDCPower_ConfigureSoftwareEdgeMeasureTrigger_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDCPower_ConfigureSoftwareEdgeMeasureTrigger_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureSoftwareEdgeMeasureTrigger_cfunc(vi)
-
-    def niDCPower_ConfigureSoftwareEdgePulseTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureSoftwareEdgePulseTrigger_cfunc is None:
-                self.niDCPower_ConfigureSoftwareEdgePulseTrigger_cfunc = self._library.niDCPower_ConfigureSoftwareEdgePulseTrigger
-                self.niDCPower_ConfigureSoftwareEdgePulseTrigger_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDCPower_ConfigureSoftwareEdgePulseTrigger_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureSoftwareEdgePulseTrigger_cfunc(vi)
-
-    def niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger_cfunc is None:
-                self.niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger_cfunc = self._library.niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger
-                self.niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureSoftwareEdgeSequenceAdvanceTrigger_cfunc(vi)
-
-    def niDCPower_ConfigureSoftwareEdgeSourceTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureSoftwareEdgeSourceTrigger_cfunc is None:
-                self.niDCPower_ConfigureSoftwareEdgeSourceTrigger_cfunc = self._library.niDCPower_ConfigureSoftwareEdgeSourceTrigger
-                self.niDCPower_ConfigureSoftwareEdgeSourceTrigger_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDCPower_ConfigureSoftwareEdgeSourceTrigger_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureSoftwareEdgeSourceTrigger_cfunc(vi)
-
-    def niDCPower_ConfigureSoftwareEdgeStartTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureSoftwareEdgeStartTrigger_cfunc is None:
-                self.niDCPower_ConfigureSoftwareEdgeStartTrigger_cfunc = self._library.niDCPower_ConfigureSoftwareEdgeStartTrigger
-                self.niDCPower_ConfigureSoftwareEdgeStartTrigger_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDCPower_ConfigureSoftwareEdgeStartTrigger_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureSoftwareEdgeStartTrigger_cfunc(vi)
-
-    def niDCPower_ConfigureSourceMode(self, vi, source_mode):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureSourceMode_cfunc is None:
-                self.niDCPower_ConfigureSourceMode_cfunc = self._library.niDCPower_ConfigureSourceMode
-                self.niDCPower_ConfigureSourceMode_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype]  # noqa: F405
-                self.niDCPower_ConfigureSourceMode_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureSourceMode_cfunc(vi, source_mode)
-
-    def niDCPower_ConfigureVoltageLevel(self, vi, channel_name, level):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureVoltageLevel_cfunc is None:
-                self.niDCPower_ConfigureVoltageLevel_cfunc = self._library.niDCPower_ConfigureVoltageLevel
-                self.niDCPower_ConfigureVoltageLevel_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigureVoltageLevel_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureVoltageLevel_cfunc(vi, channel_name, level)
-
-    def niDCPower_ConfigureVoltageLevelRange(self, vi, channel_name, range):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureVoltageLevelRange_cfunc is None:
-                self.niDCPower_ConfigureVoltageLevelRange_cfunc = self._library.niDCPower_ConfigureVoltageLevelRange
-                self.niDCPower_ConfigureVoltageLevelRange_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigureVoltageLevelRange_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureVoltageLevelRange_cfunc(vi, channel_name, range)
-
-    def niDCPower_ConfigureVoltageLimit(self, vi, channel_name, limit):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureVoltageLimit_cfunc is None:
-                self.niDCPower_ConfigureVoltageLimit_cfunc = self._library.niDCPower_ConfigureVoltageLimit
-                self.niDCPower_ConfigureVoltageLimit_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigureVoltageLimit_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureVoltageLimit_cfunc(vi, channel_name, limit)
-
-    def niDCPower_ConfigureVoltageLimitRange(self, vi, channel_name, range):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureVoltageLimitRange_cfunc is None:
-                self.niDCPower_ConfigureVoltageLimitRange_cfunc = self._library.niDCPower_ConfigureVoltageLimitRange
-                self.niDCPower_ConfigureVoltageLimitRange_cfunc.argtypes = [ViSession_ctype, ViChar_ctype, ViReal64_ctype]  # noqa: F405
-                self.niDCPower_ConfigureVoltageLimitRange_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConfigureVoltageLimitRange_cfunc(vi, channel_name, range)
-
-    def niDCPower_ConnectInternalReference(self, vi, internal_reference):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConnectInternalReference_cfunc is None:
-                self.niDCPower_ConnectInternalReference_cfunc = self._library.niDCPower_ConnectInternalReference
-                self.niDCPower_ConnectInternalReference_cfunc.argtypes = [ViSession_ctype, ViInt32_ctype]  # noqa: F405
-                self.niDCPower_ConnectInternalReference_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_ConnectInternalReference_cfunc(vi, internal_reference)
-
     def niDCPower_CreateAdvancedSequence(self, vi, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_CreateAdvancedSequence_cfunc is None:
@@ -485,38 +165,6 @@ class Library(object):
                 self.niDCPower_Disable_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niDCPower_Disable_cfunc.restype = nidcpower.python_types.ViStatus
         return self.niDCPower_Disable_cfunc(vi)
-
-    def niDCPower_DisablePulseTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_DisablePulseTrigger_cfunc is None:
-                self.niDCPower_DisablePulseTrigger_cfunc = self._library.niDCPower_DisablePulseTrigger
-                self.niDCPower_DisablePulseTrigger_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDCPower_DisablePulseTrigger_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_DisablePulseTrigger_cfunc(vi)
-
-    def niDCPower_DisableSequenceAdvanceTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_DisableSequenceAdvanceTrigger_cfunc is None:
-                self.niDCPower_DisableSequenceAdvanceTrigger_cfunc = self._library.niDCPower_DisableSequenceAdvanceTrigger
-                self.niDCPower_DisableSequenceAdvanceTrigger_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDCPower_DisableSequenceAdvanceTrigger_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_DisableSequenceAdvanceTrigger_cfunc(vi)
-
-    def niDCPower_DisableSourceTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_DisableSourceTrigger_cfunc is None:
-                self.niDCPower_DisableSourceTrigger_cfunc = self._library.niDCPower_DisableSourceTrigger
-                self.niDCPower_DisableSourceTrigger_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDCPower_DisableSourceTrigger_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_DisableSourceTrigger_cfunc(vi)
-
-    def niDCPower_DisableStartTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_DisableStartTrigger_cfunc is None:
-                self.niDCPower_DisableStartTrigger_cfunc = self._library.niDCPower_DisableStartTrigger
-                self.niDCPower_DisableStartTrigger_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
-                self.niDCPower_DisableStartTrigger_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_DisableStartTrigger_cfunc(vi)
 
     def niDCPower_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
         with self._func_lock:
@@ -597,14 +245,6 @@ class Library(object):
                 self.niDCPower_GetSelfCalLastTemp_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViReal64_ctype)]  # noqa: F405
                 self.niDCPower_GetSelfCalLastTemp_cfunc.restype = nidcpower.python_types.ViStatus
         return self.niDCPower_GetSelfCalLastTemp_cfunc(vi, temperature)
-
-    def niDCPower_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_InitWithOptions_cfunc is None:
-                self.niDCPower_InitWithOptions_cfunc = self._library.niDCPower_InitWithOptions
-                self.niDCPower_InitWithOptions_cfunc.argtypes = [ViRsrc_ctype, ViBoolean_ctype, ViBoolean_ctype, ViChar_ctype, ctypes.POINTER(ViSession_ctype)]  # noqa: F405
-                self.niDCPower_InitWithOptions_cfunc.restype = nidcpower.python_types.ViStatus
-        return self.niDCPower_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
 
     def niDCPower_InitializeWithChannels(self, resource_name, channels, reset, option_string, vi):  # noqa: N802
         with self._func_lock:
