@@ -5,7 +5,8 @@
 # This will override that with private - add '_' to the beginning of the name, or
 # don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':                 { 'codegen_method': 'private',  },
+    'InitializeWithChannels':          { 'codegen_method': 'private',  },
+    'InitWithOptions':                 { 'codegen_method': 'no',       },
     'Initiate':                        { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
     'Abort':                           { 'codegen_method': 'private',  },
@@ -18,14 +19,27 @@ functions_codegen_method = {
     'UnlockSession':                   { 'codegen_method': 'no',       },
     '.+ExtCal':                        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'CalSelfCalibrate':                { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'ConnectInternalReference':        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     '.+UserDefined.+':                 { 'codegen_method': 'no',       },
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
     'GetAttributeViSession':           { 'codegen_method': 'no',       },
-    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'GetChannelName':                  { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument DMMs
+    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'GetChannelName':                  { 'codegen_method': 'no',       },
+    'error_query':                     { 'codegen_method': 'no',       },
+    'ConfigureAutoZero':               { 'codegen_method': 'no',       },
+    'ConfigureCurrent.+':              { 'codegen_method': 'no',       },
+    'ConfigureOutput.+':               { 'codegen_method': 'no',       },
+    'ConfigurePowerLineFrequency':     { 'codegen_method': 'no',       },
+    'ConfigurePulse.+':                { 'codegen_method': 'no',       },
+    'ConfigureSense':                  { 'codegen_method': 'no',       },
+    'ConfigureVoltageL.+':             { 'codegen_method': 'no',       },
+    'ConfigureSourceMode':             { 'codegen_method': 'no',       },
+    'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
+    'Disable.+Trigger':                { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
