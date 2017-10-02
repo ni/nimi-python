@@ -25,13 +25,13 @@ functions_codegen_method = {
     'SetCalPassword':                  { 'codegen_method': 'no',       },
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
     'GetAttributeViSession':           { 'codegen_method': 'no',       },
-    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'error_query':                     { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'error_query':                     { 'codegen_method': 'no',       },  # Not applicable to Python API
     'GetChannelName':                  { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument DMMs
-    'GetCalCount':                     { 'codegen_method': 'no',       },  # Calibration function not exposed in Python APIs
+    'GetCalCount':                     { 'codegen_method': 'no',       },  # Calibration function not exposed in Python API
     'FormatMeasAbsolute':              { 'codegen_method': 'no',       },  # Utility function for C customers
     'IsUnderRange':                    { 'codegen_method': 'no',       },  # Utility function for C customers
     'IsOverRange':                     { 'codegen_method': 'no',       },  # Utility function for C customers
