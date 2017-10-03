@@ -33,21 +33,12 @@ def _add_python_parameter_name(parameter):
     return parameter
 
 
-def _add_python_type(parameter):
-    '''Adds a python_type key/value pair to the parameter metadata'''
-    if parameter['enum'] is None:
-        parameter['python_type'] = parameter['type']
-    else:
-        parameter['python_type'] = 'enums.' + parameter['enum']
-    return parameter
-
-
 def _add_intrinsic_type(parameter):
     '''Adds a intrinsic (basic python type) key/value pair to the parameter metadata'''
     if parameter['enum'] is None:
         parameter['intrinsic_type'] = get_intrinsic_type_from_visa_type(parameter['type'])
     else:
-        parameter['intrinsic_type'] = parameter['python_type']
+        parameter['intrinsic_type'] = 'enums.' + parameter['enum']
     return parameter
 
 
@@ -78,9 +69,9 @@ def _add_ctypes_return_type(f):
     return f
 
 
-def _add_python_return_type(f):
-    '''Adds the ctypes_type key/value pair to the function metadata for the return type'''
-    f['returns_python'] = f['returns']
+def _add_intrinsic_return_type(f):
+    '''Adds a intrinsic (basic python type) key/value pair to the function metadata'''
+    f['intrinsic_return_type'] = get_intrinsic_type_from_visa_type(f['returns'])
     return f
 
 
@@ -184,12 +175,11 @@ def add_all_function_metadata(functions, config):
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_ctypes_return_type(functions[f])
-        _add_python_return_type(functions[f])
+        _add_intrinsic_return_type(functions[f])
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
         for p in functions[f]['parameters']:
             _add_python_parameter_name(p)
-            _add_python_type(p)
             _add_intrinsic_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
@@ -289,7 +279,6 @@ def test_add_all_metadata_simple():
                     'python_name': 'vi',
                     'python_name_with_default': 'vi',
                     'python_name_with_doc_default': 'vi',
-                    'python_type': 'ViSession',
                     'size': {
                         'mechanism': 'fixed',
                         'value': 1
@@ -313,7 +302,6 @@ def test_add_all_metadata_simple():
                     'python_name': 'channel_name',
                     'python_name_with_default': 'channel_name',
                     'python_name_with_doc_default': 'channel_name',
-                    'python_type': 'ViString',
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViString',
                     'library_method_call_snippet': 'self._repeated_capability.encode(\'ascii\')',
@@ -322,7 +310,7 @@ def test_add_all_metadata_simple():
             'python_name': 'make_a_foo',
             'returns': 'ViStatus',
             'returns_ctype': 'ViStatus_ctype',
-            'returns_python': 'ViStatus'
+            'intrinsic_return_type': 'int',
         }
     }
 

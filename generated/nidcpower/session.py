@@ -7,7 +7,6 @@ from nidcpower import ctypes_types
 from nidcpower import enums
 from nidcpower import errors
 from nidcpower import library_singleton
-from nidcpower import python_types
 
 
 class _Acquisition(object):
@@ -2606,7 +2605,7 @@ class _SessionBase(object):
         actual_count_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niDCPower_FetchMultiple(self._vi, self._repeated_capability.encode('ascii'), timeout, count, ctypes.pointer(voltage_measurements_ctype), ctypes.pointer(current_measurements_ctype), ctypes.pointer(in_compliance_ctype), ctypes.pointer(actual_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(voltage_measurements_ctype.value), python_types.ViReal64(current_measurements_ctype.value), python_types.ViBoolean(in_compliance_ctype.value), python_types.ViInt32(actual_count_ctype.value)
+        return float(voltage_measurements_ctype.value), float(current_measurements_ctype.value), bool(in_compliance_ctype.value), int(actual_count_ctype.value)
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
@@ -2658,7 +2657,7 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self._library.niDCPower_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(attribute_value_ctype.value)
+        return bool(attribute_value_ctype.value)
 
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
@@ -2710,7 +2709,7 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niDCPower_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(attribute_value_ctype.value)
+        return int(attribute_value_ctype.value)
 
     def _get_attribute_vi_int64(self, attribute_id):
         '''_get_attribute_vi_int64
@@ -2762,7 +2761,7 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes_types.ViInt64_ctype(0)
         error_code = self._library.niDCPower_GetAttributeViInt64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt64(attribute_value_ctype.value)
+        return int(attribute_value_ctype.value)
 
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
@@ -2814,7 +2813,7 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDCPower_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(attribute_value_ctype.value)
+        return float(attribute_value_ctype.value)
 
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
@@ -2911,7 +2910,7 @@ class _SessionBase(object):
         measurement_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDCPower_Measure(self._vi, self._repeated_capability.encode('ascii'), measurement_type, ctypes.pointer(measurement_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(measurement_ctype.value)
+        return float(measurement_ctype.value)
 
     def measure_multiple(self):
         '''measure_multiple
@@ -2949,7 +2948,7 @@ class _SessionBase(object):
         current_measurements_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDCPower_MeasureMultiple(self._vi, self._repeated_capability.encode('ascii'), ctypes.pointer(voltage_measurements_ctype), ctypes.pointer(current_measurements_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(voltage_measurements_ctype.value), python_types.ViReal64(current_measurements_ctype.value)
+        return float(voltage_measurements_ctype.value), float(current_measurements_ctype.value)
 
     def query_in_compliance(self):
         '''query_in_compliance
@@ -2995,7 +2994,7 @@ class _SessionBase(object):
         in_compliance_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self._library.niDCPower_QueryInCompliance(self._vi, self._repeated_capability.encode('ascii'), ctypes.pointer(in_compliance_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(in_compliance_ctype.value)
+        return bool(in_compliance_ctype.value)
 
     def query_max_current_limit(self, voltage_level):
         '''query_max_current_limit
@@ -3019,7 +3018,7 @@ class _SessionBase(object):
         max_current_limit_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDCPower_QueryMaxCurrentLimit(self._vi, self._repeated_capability.encode('ascii'), voltage_level, ctypes.pointer(max_current_limit_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(max_current_limit_ctype.value)
+        return float(max_current_limit_ctype.value)
 
     def query_max_voltage_level(self, current_limit):
         '''query_max_voltage_level
@@ -3043,7 +3042,7 @@ class _SessionBase(object):
         max_voltage_level_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDCPower_QueryMaxVoltageLevel(self._vi, self._repeated_capability.encode('ascii'), current_limit, ctypes.pointer(max_voltage_level_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(max_voltage_level_ctype.value)
+        return float(max_voltage_level_ctype.value)
 
     def query_min_current_limit(self, voltage_level):
         '''query_min_current_limit
@@ -3067,7 +3066,7 @@ class _SessionBase(object):
         min_current_limit_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDCPower_QueryMinCurrentLimit(self._vi, self._repeated_capability.encode('ascii'), voltage_level, ctypes.pointer(min_current_limit_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(min_current_limit_ctype.value)
+        return float(min_current_limit_ctype.value)
 
     def query_output_state(self, output_state):
         '''query_output_state
@@ -3101,7 +3100,7 @@ class _SessionBase(object):
         in_state_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self._library.niDCPower_QueryOutputState(self._vi, self._repeated_capability.encode('ascii'), output_state, ctypes.pointer(in_state_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(in_state_ctype.value)
+        return bool(in_state_ctype.value)
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
@@ -4094,7 +4093,7 @@ class Session(_SessionBase):
         description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self._library.niDCPower_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return python_types.ViStatus(code_ctype.value), description_ctype.value.decode("ascii")
+        return int(code_ctype.value), description_ctype.value.decode("ascii")
 
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
@@ -4133,7 +4132,7 @@ class Session(_SessionBase):
         minute_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niDCPower_GetSelfCalLastDateAndTime(self._vi, ctypes.pointer(year_ctype), ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(year_ctype.value), python_types.ViInt32(month_ctype.value), python_types.ViInt32(day_ctype.value), python_types.ViInt32(hour_ctype.value), python_types.ViInt32(minute_ctype.value)
+        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_self_cal_last_temp(self):
         '''get_self_cal_last_temp
@@ -4164,7 +4163,7 @@ class Session(_SessionBase):
         temperature_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDCPower_GetSelfCalLastTemp(self._vi, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(temperature_ctype.value)
+        return float(temperature_ctype.value)
 
     def _initialize_with_channels(self, resource_name, channels, reset, option_string):
         '''_initialize_with_channels
@@ -4241,7 +4240,7 @@ class Session(_SessionBase):
         vi_ctype = ctypes_types.ViSession_ctype(0)
         error_code = self._library.niDCPower_InitializeWithChannels(resource_name.encode('ascii'), channels, reset, option_string, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(vi_ctype.value)
+        return int(vi_ctype.value)
 
     def _initiate(self):
         '''_initiate
@@ -4281,7 +4280,7 @@ class Session(_SessionBase):
         temperature_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDCPower_ReadCurrentTemperature(self._vi, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(temperature_ctype.value)
+        return float(temperature_ctype.value)
 
     def reset_device(self):
         '''reset_device
@@ -4492,7 +4491,7 @@ class Session(_SessionBase):
         firmware_revision_ctype = ctypes_types.ViChar_ctype(0)
         error_code = self._library.niDCPower_revision_query(self._vi, ctypes.pointer(instrument_driver_revision_ctype), ctypes.pointer(firmware_revision_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(instrument_driver_revision_ctype.value), python_types.ViChar(firmware_revision_ctype.value)
+        return int(instrument_driver_revision_ctype.value), int(firmware_revision_ctype.value)
 
     def self_test(self):
         '''self_test
@@ -4522,7 +4521,7 @@ class Session(_SessionBase):
         self_test_message_ctype = (ctypes_types.ViChar_ctype * 256)()
         error_code = self._library.niDCPower_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
+        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
 
 
 
