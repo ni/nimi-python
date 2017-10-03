@@ -2265,33 +2265,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return python_types.ViStatus(error_code_ctype.value), description_ctype.value.decode("ascii")
 
-    def _get_error_message(self, error_code):
-        '''_get_error_message
-
-        Returns the **Error_Message** as a user-readable string for the
-        provided **Error_Code**. Calling this function with a **Buffer_Size**
-        of 0 returns the size needed for the **Error_Message**.
-
-        Args:
-            error_code (int):The error code returned from the instrument for which you want to get a
-                user-readable string.
-            buffer_size (int):Specifies the number of bytes allocated for the **Error_Message**
-                ViChar array. If the error description that this function returns
-                (including terminating NULL byte) is larger than you indicated in
-                **buffer_size**, the error description will be truncated to fit. If you
-                pass 0 for **buffer_size**, the function returns the buffer size needed
-                for **Error_Message**.
-        '''
-        buffer_size = 0
-        error_message_ctype = None
-        error_code = self._library.niDMM_GetErrorMessage(self._vi, error_code, buffer_size, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self._library.niDMM_GetErrorMessage(self._vi, error_code, buffer_size, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode("ascii")
-
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
 

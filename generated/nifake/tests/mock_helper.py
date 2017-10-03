@@ -58,9 +58,6 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['description'] = None
-        self._defaults['GetErrorMessage'] = {}
-        self._defaults['GetErrorMessage']['return'] = 0
-        self._defaults['GetErrorMessage']['errorMessage'] = None
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
         self._defaults['InitWithOptions']['vi'] = None
@@ -221,17 +218,6 @@ class SideEffectsHelper(object):
         description.value = ctypes.cast(t, nifake.ctypes_types.ViString_ctype).value
         return self._defaults['GetError']['return']
 
-    def niFake_GetErrorMessage(self, vi, error_code, buffer_size, error_message):  # noqa: N802
-        if self._defaults['GetErrorMessage']['return'] != 0:
-            return self._defaults['GetErrorMessage']['return']
-        if self._defaults['GetErrorMessage']['errorMessage'] is None:
-            raise MockFunctionCallError("niFake_GetErrorMessage", param='errorMessage')
-        if buffer_size == 0:
-            return len(self._defaults['GetErrorMessage']['errorMessage'])
-        t = nifake.ctypes_types.ViString_ctype(self._defaults['GetErrorMessage']['errorMessage'].encode('ascii'))
-        error_message.value = ctypes.cast(t, nifake.ctypes_types.ViString_ctype).value
-        return self._defaults['GetErrorMessage']['return']
-
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
             return self._defaults['InitWithOptions']['return']
@@ -341,7 +327,7 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niFake_error_message", param='errorMessage')
-        error_message.contents.value = self._defaults['error_message']['errorMessage'].encode('ascii')
+        error_message.contents.value = self._defaults['error_message']['errorMessage']
         return self._defaults['error_message']['return']
 
     # Helper function to setup Mock object with default side effects and return values
@@ -372,8 +358,6 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetEnumValue.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_GetError.side_effect = MockFunctionCallError("niFake_GetError")
         mock_library.niFake_GetError.return_value = nifake.python_types.ViStatus(0)
-        mock_library.niFake_GetErrorMessage.side_effect = MockFunctionCallError("niFake_GetErrorMessage")
-        mock_library.niFake_GetErrorMessage.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_InitWithOptions.side_effect = MockFunctionCallError("niFake_InitWithOptions")
         mock_library.niFake_InitWithOptions.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_Initiate.side_effect = MockFunctionCallError("niFake_Initiate")

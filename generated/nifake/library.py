@@ -29,7 +29,6 @@ class Library(object):
         self.niFake_GetAttributeViString_cfunc = None
         self.niFake_GetEnumValue_cfunc = None
         self.niFake_GetError_cfunc = None
-        self.niFake_GetErrorMessage_cfunc = None
         self.niFake_InitWithOptions_cfunc = None
         self.niFake_Initiate_cfunc = None
         self.niFake_OneInputFunction_cfunc = None
@@ -157,14 +156,6 @@ class Library(object):
                 self.niFake_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niFake_GetError_cfunc.restype = ViStatus_ctype  # noqa: F405
         return self.niFake_GetError_cfunc(vi, error_code, buffer_size, description).value
-
-    def niFake_GetErrorMessage(self, vi, error_code, buffer_size, error_message):  # noqa: N802
-        with self._func_lock:
-            if self.niFake_GetErrorMessage_cfunc is None:
-                self.niFake_GetErrorMessage_cfunc = self._library.niFake_GetErrorMessage
-                self.niFake_GetErrorMessage_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ViInt32_ctype, ViString_ctype]  # noqa: F405
-                self.niFake_GetErrorMessage_cfunc.restype = ViStatus_ctype  # noqa: F405
-        return self.niFake_GetErrorMessage_cfunc(vi, error_code, buffer_size, error_message).value
 
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:

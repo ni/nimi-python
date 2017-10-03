@@ -57,7 +57,6 @@ class Library(object):
         self.niDMM_GetCalDateAndTime_cfunc = None
         self.niDMM_GetDevTemp_cfunc = None
         self.niDMM_GetError_cfunc = None
-        self.niDMM_GetErrorMessage_cfunc = None
         self.niDMM_GetLastCalTemp_cfunc = None
         self.niDMM_GetMeasurementPeriod_cfunc = None
         self.niDMM_GetSelfCalSupported_cfunc = None
@@ -415,14 +414,6 @@ class Library(object):
                 self.niDMM_GetError_cfunc.argtypes = [ViSession_ctype, ctypes.POINTER(ViStatus_ctype), ViInt32_ctype, ViString_ctype]  # noqa: F405
                 self.niDMM_GetError_cfunc.restype = ViStatus_ctype  # noqa: F405
         return self.niDMM_GetError_cfunc(vi, error_code, buffer_size, description).value
-
-    def niDMM_GetErrorMessage(self, vi, error_code, buffer_size, error_message):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_GetErrorMessage_cfunc is None:
-                self.niDMM_GetErrorMessage_cfunc = self._library.niDMM_GetErrorMessage
-                self.niDMM_GetErrorMessage_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ViInt32_ctype, ViString_ctype]  # noqa: F405
-                self.niDMM_GetErrorMessage_cfunc.restype = ViStatus_ctype  # noqa: F405
-        return self.niDMM_GetErrorMessage_cfunc(vi, error_code, buffer_size, error_message).value
 
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
         with self._func_lock:

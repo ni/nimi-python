@@ -121,9 +121,6 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['description'] = None
-        self._defaults['GetErrorMessage'] = {}
-        self._defaults['GetErrorMessage']['return'] = 0
-        self._defaults['GetErrorMessage']['errorMessage'] = None
         self._defaults['GetLastCalTemp'] = {}
         self._defaults['GetLastCalTemp']['return'] = 0
         self._defaults['GetLastCalTemp']['temperature'] = None
@@ -468,17 +465,6 @@ class SideEffectsHelper(object):
         description.value = ctypes.cast(t, nidmm.ctypes_types.ViString_ctype).value
         return self._defaults['GetError']['return']
 
-    def niDMM_GetErrorMessage(self, vi, error_code, buffer_size, error_message):  # noqa: N802
-        if self._defaults['GetErrorMessage']['return'] != 0:
-            return self._defaults['GetErrorMessage']['return']
-        if self._defaults['GetErrorMessage']['errorMessage'] is None:
-            raise MockFunctionCallError("niDMM_GetErrorMessage", param='errorMessage')
-        if buffer_size == 0:
-            return len(self._defaults['GetErrorMessage']['errorMessage'])
-        t = nidmm.ctypes_types.ViString_ctype(self._defaults['GetErrorMessage']['errorMessage'].encode('ascii'))
-        error_message.value = ctypes.cast(t, nidmm.ctypes_types.ViString_ctype).value
-        return self._defaults['GetErrorMessage']['return']
-
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
         if self._defaults['GetLastCalTemp']['return'] != 0:
             return self._defaults['GetLastCalTemp']['return']
@@ -738,8 +724,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_GetDevTemp.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetError.side_effect = MockFunctionCallError("niDMM_GetError")
         mock_library.niDMM_GetError.return_value = nidmm.python_types.ViStatus(0)
-        mock_library.niDMM_GetErrorMessage.side_effect = MockFunctionCallError("niDMM_GetErrorMessage")
-        mock_library.niDMM_GetErrorMessage.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetLastCalTemp.side_effect = MockFunctionCallError("niDMM_GetLastCalTemp")
         mock_library.niDMM_GetLastCalTemp.return_value = nidmm.python_types.ViStatus(0)
         mock_library.niDMM_GetMeasurementPeriod.side_effect = MockFunctionCallError("niDMM_GetMeasurementPeriod")
