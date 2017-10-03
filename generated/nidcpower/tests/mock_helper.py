@@ -269,8 +269,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetAttributeViString", param='attributeValue')
         if buffer_size == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        t = nidcpower.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nidcpower.ctypes_types.ViString_ctype).value
+        t = nidcpower.ctypes_types.ViString(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
+        attribute_value.value = ctypes.cast(t, nidcpower.ctypes_types.ViString).value
         return self._defaults['GetAttributeViString']['return']
 
     def niDCPower_GetError(self, vi, code, buffer_size, description):  # noqa: N802
@@ -283,8 +283,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetError", param='Description')
         if buffer_size == 0:
             return len(self._defaults['GetError']['Description'])
-        t = nidcpower.ctypes_types.ViString_ctype(self._defaults['GetError']['Description'].encode('ascii'))
-        description.value = ctypes.cast(t, nidcpower.ctypes_types.ViString_ctype).value
+        t = nidcpower.ctypes_types.ViString(self._defaults['GetError']['Description'].encode('ascii'))
+        description.value = ctypes.cast(t, nidcpower.ctypes_types.ViString).value
         return self._defaults['GetError']['return']
 
     def niDCPower_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802

@@ -901,7 +901,7 @@ class _SessionBase(object):
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
         '''
-        attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
+        attribute_value_ctype = ctypes_types.ViBoolean(0)
         error_code = self._library.niSwitch_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
@@ -946,7 +946,7 @@ class _SessionBase(object):
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
         '''
-        attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
+        attribute_value_ctype = ctypes_types.ViInt32(0)
         error_code = self._library.niSwitch_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -991,7 +991,7 @@ class _SessionBase(object):
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
         '''
-        attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
+        attribute_value_ctype = ctypes_types.ViReal64(0)
         error_code = self._library.niSwitch_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
@@ -1056,7 +1056,7 @@ class _SessionBase(object):
         error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size = error_code
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), ctypes_types.ViString_ctype)
+        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), ctypes_types.ViString)
         error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode("ascii")
@@ -1378,7 +1378,7 @@ class Session(_SessionBase):
                 create a path between the two channels because one of the channels is a
                 configuration channel and thus unavailable for external connections.
         '''
-        path_capability_ctype = ctypes_types.ViInt32_ctype(0)
+        path_capability_ctype = ctypes_types.ViInt32(0)
         error_code = self._library.niSwitch_CanConnect(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), ctypes.pointer(path_capability_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
@@ -1630,7 +1630,7 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_GetChannelName(self._vi, index, buffer_size, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
-        channel_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        channel_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
         error_code = self._library.niSwitch_GetChannelName(self._vi, index, buffer_size, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_buffer_ctype.value.decode("ascii")
@@ -1670,13 +1670,13 @@ class Session(_SessionBase):
             code (int):Returns the error code for the session or execution thread. If you pass
                 0 for the Buffer Size, you can pass VI_NULL for this parameter.
         '''
-        code_ctype = ctypes_types.ViStatus_ctype(0)
+        code_ctype = ctypes_types.ViStatus(0)
         buffer_size = 0
         description_ctype = None
         error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
         error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(code_ctype.value), description_ctype.value.decode("ascii")
@@ -1722,7 +1722,7 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
-        path_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        path_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
         error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return path_ctype.value.decode("ascii")
@@ -1744,7 +1744,7 @@ class Session(_SessionBase):
         Returns:
             relay_count (int):The number of relay cycles.
         '''
-        relay_count_ctype = ctypes_types.ViInt32_ctype(0)
+        relay_count_ctype = ctypes_types.ViInt32(0)
         error_code = self._library.niSwitch_GetRelayCount(self._vi, relay_name.encode('ascii'), ctypes.pointer(relay_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(relay_count_ctype.value)
@@ -1777,7 +1777,7 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_GetRelayName(self._vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         relay_name_buffer_size = error_code
-        relay_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(relay_name_buffer_size), ctypes_types.ViString_ctype)
+        relay_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(relay_name_buffer_size), ctypes_types.ViString)
         error_code = self._library.niSwitch_GetRelayName(self._vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return relay_name_buffer_ctype.value.decode("ascii")
@@ -1797,7 +1797,7 @@ class Session(_SessionBase):
             relay_position (enums.RelayPosition):Indicates whether the relay is open or closed. NISWITCH_VAL_OPEN 10
                 NIWITCH_VAL_CLOSED 11
         '''
-        relay_position_ctype = ctypes_types.ViInt32_ctype(0)
+        relay_position_ctype = ctypes_types.ViInt32(0)
         error_code = self._library.niSwitch_GetRelayPosition(self._vi, relay_name.encode('ascii'), ctypes.pointer(relay_position_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
@@ -2034,7 +2034,7 @@ class Session(_SessionBase):
                 init_with_topology, init_with_options, or init
                 and used for all subsequent NI-SWITCH calls.
         '''
-        vi_ctype = ctypes_types.ViSession_ctype(0)
+        vi_ctype = ctypes_types.ViSession(0)
         error_code = self._library.niSwitch_InitWithTopology(resource_name.encode('ascii'), topology.encode('ascii'), simulate, reset_device, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
@@ -2065,7 +2065,7 @@ class Session(_SessionBase):
             is_debounced (bool):VI_TRUE indicates that all created paths have settled. VI_FALSE
                 indicates that all created paths have not settled.
         '''
-        is_debounced_ctype = ctypes_types.ViBoolean_ctype(0)
+        is_debounced_ctype = ctypes_types.ViBoolean(0)
         error_code = self._library.niSwitch_IsDebounced(self._vi, ctypes.pointer(is_debounced_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_debounced_ctype.value)
@@ -2080,7 +2080,7 @@ class Session(_SessionBase):
                 VI_TRUE indicates that the switch device is scanning. VI_FALSE
                 indicates that the switch device is idle.
         '''
-        is_scanning_ctype = ctypes_types.ViBoolean_ctype(0)
+        is_scanning_ctype = ctypes_types.ViBoolean(0)
         error_code = self._library.niSwitch_IsScanning(self._vi, ctypes.pointer(is_scanning_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_scanning_ctype.value)
@@ -2296,9 +2296,9 @@ class Session(_SessionBase):
                 pass a ViChar array with at least 256 bytes.
             firmware_revision (int):Currently unsupported.
         '''
-        instrument_driver_revision_ctype = (ctypes_types.ViChar_ctype * 256)()
-        firmware_revision_ctype = (ctypes_types.ViChar_ctype * 256)()
-        error_code = self._library.niSwitch_revision_query(self._vi, ctypes.cast(instrument_driver_revision_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)), ctypes.cast(firmware_revision_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+        instrument_driver_revision_ctype = (ctypes_types.ViChar * 256)()
+        firmware_revision_ctype = (ctypes_types.ViChar * 256)()
+        error_code = self._library.niSwitch_revision_query(self._vi, ctypes.cast(instrument_driver_revision_ctype, ctypes.POINTER(ctypes_types.ViChar)), ctypes.cast(firmware_revision_ctype, ctypes.POINTER(ctypes_types.ViChar)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return instrument_driver_revision_ctype.value.decode("ascii"), firmware_revision_ctype.value.decode("ascii")
 
@@ -2312,9 +2312,9 @@ class Session(_SessionBase):
             self_test_message (int):Self-test response string from the switch device. You must pass a ViChar
                 array with at least 256 bytes.
         '''
-        self_test_result_ctype = ctypes_types.ViInt16_ctype(0)
-        self_test_message_ctype = (ctypes_types.ViChar_ctype * 256)()
-        error_code = self._library.niSwitch_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+        self_test_result_ctype = ctypes_types.ViInt16(0)
+        self_test_message_ctype = (ctypes_types.ViChar * 256)()
+        error_code = self._library.niSwitch_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
 
