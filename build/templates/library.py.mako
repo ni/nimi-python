@@ -17,7 +17,6 @@ import ctypes
 import threading
 
 from ${module_name}.ctypes_types import *  # noqa: F403,H303
-import ${module_name}.python_types
 
 
 class Library(object):
@@ -54,6 +53,6 @@ class Library(object):
             if self.${c_func_name}_cfunc is None:
                 self.${c_func_name}_cfunc = self._library.${c_func_name}
                 self.${c_func_name}_cfunc.argtypes = [${param_ctypes_library}]  # noqa: F405
-                self.${c_func_name}_cfunc.restype = ${module_name}.python_types.${f['returns_python']}
+                self.${c_func_name}_cfunc.restype = ${f['returns_ctype']}
         return self.${c_func_name}_cfunc(${param_names_library})
 % endfor

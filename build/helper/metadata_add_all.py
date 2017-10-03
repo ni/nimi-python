@@ -33,21 +33,12 @@ def _add_python_parameter_name(parameter):
     return parameter
 
 
-def _add_python_type(parameter):
-    '''Adds a python_type key/value pair to the parameter metadata'''
-    if parameter['enum'] is None:
-        parameter['python_type'] = parameter['type']
-    else:
-        parameter['python_type'] = 'enums.' + parameter['enum']
-    return parameter
-
-
 def _add_intrinsic_type(parameter):
     '''Adds a intrinsic (basic python type) key/value pair to the parameter metadata'''
     if parameter['enum'] is None:
         parameter['intrinsic_type'] = get_intrinsic_type_from_visa_type(parameter['type'])
     else:
-        parameter['intrinsic_type'] = parameter['python_type']
+        parameter['intrinsic_type'] = 'enums.' + parameter['enum']
     return parameter
 
 
@@ -78,9 +69,9 @@ def _add_ctypes_return_type(f):
     return f
 
 
-def _add_python_return_type(f):
-    '''Adds the ctypes_type key/value pair to the function metadata for the return type'''
-    f['returns_python'] = f['returns']
+def _add_intrinsic_return_type(f):
+    '''Adds a intrinsic (basic python type) key/value pair to the function metadata'''
+    f['intrinsic_return_type'] = get_intrinsic_type_from_visa_type(f['returns'])
     return f
 
 
@@ -184,12 +175,11 @@ def add_all_function_metadata(functions, config):
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_ctypes_return_type(functions[f])
-        _add_python_return_type(functions[f])
+        _add_intrinsic_return_type(functions[f])
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
         for p in functions[f]['parameters']:
             _add_python_parameter_name(p)
-            _add_python_type(p)
             _add_intrinsic_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
@@ -201,11 +191,36 @@ def add_all_function_metadata(functions, config):
     return functions
 
 
+def _compare_values(actual, expected):
+    if type(actual) is dict:
+        _compare_dicts(actual, expected)
+    elif type(actual) is list:
+        _compare_lists(actual, expected)
+    else:
+        assert actual == expected, 'Value mismatch, {0} != {1}'.format(actual, expected)
+
+
+def _compare_lists(actual, expected):
+    assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
+    assert len(actual) == len(expected), 'Length mismatch, {0} != {1}'.format(len(actual), len(expected))
+    for k in range(len(actual)):
+        _compare_values(actual[k], expected[k])
+
+
+def _compare_dicts(actual, expected):
+    assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
+    for k in actual:
+        assert k in expected, 'Key {0} not in expected'.format(k)
+        _compare_values(actual[k], expected[k])
+    for k in expected:
+        assert k in actual, 'Key {0} not in actual'.format(k)
+
+
 # Unit Tests
 def _do_the_test_add_all_metadata(functions, expected):
     actual = copy.deepcopy(functions)
     actual = add_all_function_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake'})
-    assert expected == actual, "\nfunctions = {0}\nexpected = {1}\nactual = {2}".format(pp.pformat(functions), pp.pformat(expected), pp.pformat(actual))
+    _compare_dicts(actual, expected)
 
 
 def test_add_all_metadata_simple():
@@ -291,7 +306,6 @@ def test_add_all_metadata_simple():
                     'python_name': 'vi',
                     'python_name_with_default': 'vi',
                     'python_name_with_doc_default': 'vi',
-                    'python_type': 'ViSession',
                     'size': {
                         'mechanism': 'fixed',
                         'value': 1
@@ -315,7 +329,6 @@ def test_add_all_metadata_simple():
                     'python_name': 'channel_name',
                     'python_name_with_default': 'channel_name',
                     'python_name_with_doc_default': 'channel_name',
-                    'python_type': 'ViString',
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViString',
                     'library_method_call_snippet': 'self._repeated_capability.encode(\'ascii\')',
@@ -324,7 +337,7 @@ def test_add_all_metadata_simple():
             'python_name': 'make_a_foo',
             'returns': 'ViStatus',
             'returns_ctype': 'ViStatus_ctype',
-            'returns_python': 'ViStatus'
+            'intrinsic_return_type': 'int',
         },
         'private_method': {
             'codegen_method': 'private',
@@ -351,7 +364,7 @@ def test_add_all_metadata_simple():
                     'name': 'vi',
                     'python_name': 'vi',
                     'python_name_with_default': 'vi',
-                    'python_type': 'ViSession',
+                    'python_name_with_doc_default': 'vi',
                     'size': {
                         'mechanism': 'fixed',
                         'value': 1
@@ -374,7 +387,7 @@ def test_add_all_metadata_simple():
                     'name': 'status',
                     'python_name': 'status',
                     'python_name_with_default': 'status',
-                    'python_type': 'ViString',
+                    'python_name_with_doc_default': 'status',
                     'size': {
                         'mechanism': 'fixed',
                         'value': 1
@@ -385,7 +398,7 @@ def test_add_all_metadata_simple():
             'python_name': '_private_method',
             'returns': 'ViStatus',
             'returns_ctype': 'ViStatus_ctype',
-            'returns_python': 'ViStatus'
+            'intrinsic_return_type': 'int',
         }
     }
 

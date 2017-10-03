@@ -17,7 +17,6 @@ functions = helper.filter_codegen_functions(functions)
 import ctypes
 
 import ${module_name}.ctypes_types
-import ${module_name}.python_types
 
 
 class MockFunctionCallError(Exception):
@@ -90,5 +89,5 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 f = functions[func_name]
 %>\
         mock_library.${c_function_prefix}${func_name}.side_effect = MockFunctionCallError("${c_function_prefix}${func_name}")
-        mock_library.${c_function_prefix}${func_name}.return_value = ${module_name}.python_types.${f['returns_python']}(0)
+        mock_library.${c_function_prefix}${func_name}.return_value = ${module_name}.ctypes_types.${f['returns_ctype']}(0)
 % endfor

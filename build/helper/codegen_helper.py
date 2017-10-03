@@ -167,7 +167,7 @@ def _get_output_param_return_snippet(output_parameter, parameters):
     if output_parameter['enum'] is not None:
         return_type_snippet = 'enums.' + output_parameter['enum'] + '('
     else:
-        return_type_snippet = 'python_types.' + output_parameter['python_type'] + '('
+        return_type_snippet = output_parameter['intrinsic_type'] + '('
 
     if output_parameter['is_buffer']:
         if output_parameter['type'] == 'ViChar' or output_parameter['type'] == 'ViString':
@@ -194,8 +194,8 @@ def get_enum_type_check_snippet(parameter, indent):
     '''Returns python snippet to check that the type of a parameter is what is expected'''
     assert parameter['enum'] is not None, pp.pformat(parameter)
     assert parameter['direction'] == 'in', pp.pformat(parameter)
-    enum_check = 'if type(' + parameter['python_name'] + ') is not ' + parameter['python_type'] + ':\n'
-    enum_check += (' ' * indent) + 'raise TypeError(\'Parameter mode must be of type \' + str(' + parameter['python_type'] + '))'
+    enum_check = 'if type(' + parameter['python_name'] + ') is not ' + parameter['intrinsic_type'] + ':\n'
+    enum_check += (' ' * indent) + 'raise TypeError(\'Parameter mode must be of type \' + str(' + parameter['intrinsic_type'] + '))'
     return enum_check
 
 

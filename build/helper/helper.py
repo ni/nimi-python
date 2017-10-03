@@ -1,8 +1,6 @@
 from contextlib import contextmanager
-import importlib
 import pprint
 import re
-import sys
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -12,7 +10,8 @@ pp = pprint.PrettyPrinter(indent=4)
 def shoutcase_to_camelcase(shout_string):
     '''Converts a C-style SHOUT_CASE string to camelCase'''
     components = shout_string.split('_')
-    return components[0].lower() + "".join(component.title() for component in components[1:])
+    return components[0].lower() \
+        + "".join(component.title() for component in components[1:])
 
 
 def camelcase_to_snakecase(camelcase_string):
@@ -47,15 +46,29 @@ def add_to_path(p):
         sys.path = old_path
 
 
+type_mapping = {
+    'ViString': 'str',
+    'ViConstString': 'str',
+    'ViString': 'str',
+    'ViInt16': 'int',
+    'ViUInt16': 'int',
+    'ViInt32': 'int',
+    'ViUInt32': 'int',
+    'ViInt64': 'int',
+    'ViUInt64': 'int',
+    'ViReal32': 'float',
+    'ViReal64': 'float',
+    'ViStatus': 'int',
+    'ViSession': 'int',
+    'ViAttr': 'int',
+    'ViChar': 'int',
+    'ViBoolean': 'bool',
+    'ViRsrc': 'str',
+}
+
+
 def get_intrinsic_type_from_visa_type(visa_type):
     '''Returns the underlying intrinsic (python) type from the visa type'''
-    if sys.version_info.major < 3:
-        with add_to_path('build/templates'):
-            p_types = importlib.import_module('python_types')
-    else:
-        p_types = importlib.import_module('build.templates.python_types')
-    v_type = getattr(p_types, visa_type)
-
-    return type(v_type()).__name__
+    return type_mapping[visa_type]
 
 
