@@ -13,7 +13,7 @@ functions_codegen_method = {
     '.etAttribute.+':   { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'error_message':    { 'codegen_method': 'private',  },
     'GetError':         { 'codegen_method': 'private',  },
-    'GetErrorMessage':  { 'codegen_method': 'private',  },
+    'GetErrorMessage':  { 'codegen_method': 'no',  },
     'ClearError':       { 'codegen_method': 'no',       },
 }
 
@@ -28,7 +28,6 @@ functions_params_types = {
     'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
     'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
     'GetError':                     { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'GetErrorMessage':              { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
@@ -47,7 +46,6 @@ functions_params_types = {
 #                       one) is passed in. This parameter won't exist in the corresponding Python Session method.
 functions_buffer_info = {
     'GetError':                              { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'GetErrorMessage':                       { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'buffer_size'}, }, }, },
     'ReadMultiPoint':                        { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
     'GetAttributeViString':                  { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetAStringWithSpecifiedMaximumSize':    { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'bufferSize'}, }, }, },
@@ -63,7 +61,6 @@ functions_buffer_info = {
 functions_is_error_handling = {
     'error_message':                { 'is_error_handling': True, },
     'GetError':                     { 'is_error_handling': True, },
-    'GetErrorMessage':              { 'is_error_handling': True, },
 }
 
 # Default values for method parameters
