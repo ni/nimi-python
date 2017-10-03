@@ -477,8 +477,7 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
-    # Error descriptions
-
+    '''
     def test_get_error_description_error_message(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
@@ -494,6 +493,7 @@ class TestSession(object):
         from mock import call
         calls = [call(SESSION_NUM_FOR_TEST, test_error_code, 0, None), call(SESSION_NUM_FOR_TEST, len(test_error_desc), len(test_error_desc), ANY)]
         self.patched_library.niFake_error_message.assert_has_calls(calls)
+    '''
 
     def test_get_error_and_error_message_returns_error(self):
         test_error_code = -42
