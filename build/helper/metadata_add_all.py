@@ -191,36 +191,11 @@ def add_all_function_metadata(functions, config):
     return functions
 
 
-def _compare_values(actual, expected):
-    if type(actual) is dict:
-        _compare_dicts(actual, expected)
-    elif type(actual) is list:
-        _compare_lists(actual, expected)
-    else:
-        assert actual == expected, 'Value mismatch, {0} != {1}'.format(actual, expected)
-
-
-def _compare_lists(actual, expected):
-    assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
-    assert len(actual) == len(expected), 'Length mismatch, {0} != {1}'.format(len(actual), len(expected))
-    for k in range(len(actual)):
-        _compare_values(actual[k], expected[k])
-
-
-def _compare_dicts(actual, expected):
-    assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
-    for k in actual:
-        assert k in expected, 'Key {0} not in expected'.format(k)
-        _compare_values(actual[k], expected[k])
-    for k in expected:
-        assert k in actual, 'Key {0} not in actual'.format(k)
-
-
 # Unit Tests
 def _do_the_test_add_all_metadata(functions, expected):
     actual = copy.deepcopy(functions)
     actual = add_all_function_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake'})
-    _compare_dicts(actual, expected)
+    assert expected == actual, "\nfunctions = {0}\nexpected = {1}\nactual = {2}".format(pp.pformat(functions), pp.pformat(expected), pp.pformat(actual))
 
 
 def test_add_all_metadata_simple():
