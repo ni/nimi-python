@@ -237,7 +237,7 @@ def test_add_all_metadata_simple():
                 'description': 'Performs a foo, and performs it well.',
             },
         },
-        'private_method': {
+        'makeAPrivateMethod': {
             'codegen_method': 'private',
             'returns': 'ViStatus',
             'parameters': [
@@ -261,7 +261,7 @@ def test_add_all_metadata_simple():
                 }
             ],
             'documentation': {
-                'description': 'create a private method',
+                'description': 'Perform actions as method defined',
             },
         },
     }
@@ -326,14 +326,14 @@ def test_add_all_metadata_simple():
             'returns_ctype': 'ViStatus_ctype',
             'returns_python': 'ViStatus'
         },
-        'private_method': {
+        'makeAPrivateMethod': {
             'codegen_method': 'private',
             'documentation': {
-                'description': 'create a private method'
+                'description': 'Perform actions as method defined'
             },
             'has_repeated_capability': False,
             'is_error_handling': False,
-            'name': 'private_method',
+            'name': 'makeAPrivateMethod',
             'parameters': [
                 {
                     'ctypes_type': 'ViSession_ctype',
@@ -384,7 +384,7 @@ def test_add_all_metadata_simple():
                     'type': 'ViString'
                 }
             ],
-            'python_name': '_private_method',
+            'python_name': '_make_a_private_method',
             'returns': 'ViStatus',
             'returns_ctype': 'ViStatus_ctype',
             'returns_python': 'ViStatus'
