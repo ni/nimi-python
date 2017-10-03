@@ -17,7 +17,6 @@ import ctypes
 import threading
 
 from ${module_name}.ctypes_types import *  # noqa: F403,H303
-import ${module_name}.python_types
 
 
 class Library(object):
