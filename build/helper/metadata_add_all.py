@@ -1,7 +1,7 @@
 # Useful functions for use in the metadata modules
 
 from .helper import camelcase_to_snakecase
-from .helper import get_intrinsic_type_from_visa_type
+from .helper import get_python_type_for_visa_type
 
 import copy
 import pprint
@@ -28,17 +28,17 @@ def _add_python_method_name(function, name):
 
 
 def _add_python_parameter_name(parameter):
-    '''Adds a python_name' key/value pair to the parameter metadata'''
+    '''Adds a python_name key/value pair to the parameter metadata'''
     parameter['python_name'] = camelcase_to_snakecase(parameter['name'])
     return parameter
 
 
-def _add_intrinsic_type(parameter):
-    '''Adds a intrinsic (basic python type) key/value pair to the parameter metadata'''
+def _add_python_type(parameter):
+    '''Adds the type to use in the Python API to the parameter metadata'''
     if parameter['enum'] is None:
-        parameter['intrinsic_type'] = get_intrinsic_type_from_visa_type(parameter['type'])
+        parameter['python_type'] = get_python_type_for_visa_type(parameter['type'])
     else:
-        parameter['intrinsic_type'] = 'enums.' + parameter['enum']
+        parameter['python_type'] = 'enums.' + parameter['enum']
     return parameter
 
 
@@ -66,12 +66,6 @@ def _add_ctypes_type(parameter):
 def _add_ctypes_return_type(f):
     '''Adds the ctypes_type key/value pair to the function metadata for the return type'''
     f['returns_ctype'] = f['returns'] + '_ctype'
-    return f
-
-
-def _add_intrinsic_return_type(f):
-    '''Adds a intrinsic (basic python type) key/value pair to the function metadata'''
-    f['intrinsic_return_type'] = get_intrinsic_type_from_visa_type(f['returns'])
     return f
 
 
@@ -175,12 +169,11 @@ def add_all_function_metadata(functions, config):
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_ctypes_return_type(functions[f])
-        _add_intrinsic_return_type(functions[f])
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
         for p in functions[f]['parameters']:
             _add_python_parameter_name(p)
-            _add_intrinsic_type(p)
+            _add_python_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
             _add_buffer_info(p)
@@ -273,7 +266,7 @@ def test_add_all_metadata_simple():
                     },
                     'is_repeated_capability': False,
                     'enum': None,
-                    'intrinsic_type': 'int',
+                    'python_type': 'int',
                     'is_buffer': False,
                     'name': 'vi',
                     'python_name': 'vi',
@@ -296,7 +289,7 @@ def test_add_all_metadata_simple():
                     },
                     'is_repeated_capability': True,
                     'enum': None,
-                    'intrinsic_type': 'str',
+                    'python_type': 'str',
                     'is_buffer': False,
                     'name': 'channelName',
                     'python_name': 'channel_name',
@@ -310,7 +303,6 @@ def test_add_all_metadata_simple():
             'python_name': 'make_a_foo',
             'returns': 'ViStatus',
             'returns_ctype': 'ViStatus_ctype',
-            'intrinsic_return_type': 'int',
         }
     }
 
