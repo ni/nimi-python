@@ -1,6 +1,6 @@
 import nidmm
 import pytest
-
+import time
 
 @pytest.fixture(scope='function')
 def session():
@@ -109,14 +109,14 @@ def test_method_read_status(session):
     backlog, status = session.read_status()
     assert isinstance(backlog, int)
     assert backlog == 0
-	
+
 
 def test_fetch_error_while_not_initiated(session):
     try:
         session.fetch(1000)
         assert False
     except nidmm.Error as e:
-        assert e.code == -1074118641 # called fetch before calling Initiate or after calling Abort
+        assert e.code == -1074118641   # called fetch before calling Initiate or after calling Abort
 
 
 def test_multi_point_acquisition_with_measurement_absolute(session):
@@ -138,9 +138,10 @@ def test_disable(session):
         backlog, acquisition_state = session.read_status()
         assert acquisition_state == nidmm.AcquisitionStatus.NO_ACQUISITION_IN_PROGRESS
 
+
 def test_fetch_multiple(session):
     session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 10, 5.5)
-    session.configure_multi_point(sample_count = 10, trigger_count =1)
+    session.configure_multi_point(sample_count=10, trigger_count=1)
     iteration = 0
     with session.initiate():
         while True:
@@ -159,7 +160,7 @@ def test_fetch_multiple(session):
 def test_get_auto_range_value(session):
     session.read()
     auto_range_value = session.get_auto_range_value()
-    assert auto_range_value == 300 # simulated device auto_range_value to maximum 300
+    assert auto_range_value == 300   # simulated device auto_range_value to maximum 300
 
 
 def test_get_cal_date_time(session):
@@ -169,10 +170,10 @@ def test_get_cal_date_time(session):
     assert year == 1940
     assert hour == 0
     assert minute == 0
-    #cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00
+    ''' cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00 '''
 
 
 def test_get_last_cal_temperature(session):
     last_cal_temp = session.get_last_cal_temp(0)
-    assert last_cal_temp ==25
-    #last_cal_temp should be 25 for simulated 408x devices; 407x and 4065 returns 0
+    assert last_cal_temp == 25
+    '''last_cal_temp should be 25 for simulated 408x devices; 407x and 4065 returns 0 '''
