@@ -1,7 +1,7 @@
 # Useful functions for use in the metadata modules
 
 from .helper import camelcase_to_snakecase
-from .helper import get_intrinsic_type_from_visa_type
+from .helper import get_python_type_for_visa_type
 
 import copy
 import pprint
@@ -28,15 +28,15 @@ def _add_python_method_name(function, name):
 
 
 def _add_python_parameter_name(parameter):
-    '''Adds a python_name' key/value pair to the parameter metadata'''
+    '''Adds a python_name key/value pair to the parameter metadata'''
     parameter['python_name'] = camelcase_to_snakecase(parameter['name'])
     return parameter
 
 
 def _add_python_type(parameter):
-    '''Adds a intrinsic (basic python type) key/value pair to the parameter metadata'''
+    '''Adds the type to use in the Python API to the parameter metadata'''
     if parameter['enum'] is None:
-        parameter['python_type'] = get_intrinsic_type_from_visa_type(parameter['type'])
+        parameter['python_type'] = get_python_type_for_visa_type(parameter['type'])
     else:
         parameter['python_type'] = 'enums.' + parameter['enum']
     return parameter
