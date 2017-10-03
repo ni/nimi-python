@@ -69,12 +69,6 @@ def _add_ctypes_return_type(f):
     return f
 
 
-def _add_intrinsic_return_type(f):
-    '''Adds a intrinsic (basic python type) key/value pair to the function metadata'''
-    f['intrinsic_return_type'] = get_intrinsic_type_from_visa_type(f['returns'])
-    return f
-
-
 def _add_is_error_handling(f):
     '''Adds is_error_handling information to the function metadata if it isn't already defined. Defaults to False.'''
     # TODO(marcoskirsch): The information is added in functions_addon.py. I think we can instead infer from method
@@ -175,7 +169,6 @@ def add_all_function_metadata(functions, config):
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_ctypes_return_type(functions[f])
-        _add_intrinsic_return_type(functions[f])
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
         for p in functions[f]['parameters']:
