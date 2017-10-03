@@ -132,6 +132,9 @@ class SideEffectsHelper(object):
         self._defaults['WaitForEvent']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
+        self._defaults['error_message'] = {}
+        self._defaults['error_message']['return'] = 0
+        self._defaults['error_message']['errorMessage'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
         self._defaults['revision_query'] = {}
@@ -451,6 +454,14 @@ class SideEffectsHelper(object):
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
+    def niDCPower_error_message(self, vi, error_code, error_message):  # noqa: N802
+        if self._defaults['error_message']['return'] != 0:
+            return self._defaults['error_message']['return']
+        if self._defaults['error_message']['errorMessage'] is None:
+            raise MockFunctionCallError("niDCPower_error_message", param='errorMessage')
+        error_message.contents.value = self._defaults['error_message']['errorMessage']
+        return self._defaults['error_message']['return']
+
     def niDCPower_reset(self, vi):  # noqa: N802
         if self._defaults['reset']['return'] != 0:
             return self._defaults['reset']['return']
@@ -566,6 +577,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_WaitForEvent.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_close.side_effect = MockFunctionCallError("niDCPower_close")
         mock_library.niDCPower_close.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_error_message.side_effect = MockFunctionCallError("niDCPower_error_message")
+        mock_library.niDCPower_error_message.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_reset.side_effect = MockFunctionCallError("niDCPower_reset")
         mock_library.niDCPower_reset.return_value = nidcpower.python_types.ViStatus(0)
         mock_library.niDCPower_revision_query.side_effect = MockFunctionCallError("niDCPower_revision_query")
