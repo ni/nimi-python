@@ -7,7 +7,6 @@ from nidmm import ctypes_types
 from nidmm import enums
 from nidmm import errors
 from nidmm import library_singleton
-from nidmm import python_types
 
 
 class _Acquisition(object):
@@ -835,7 +834,7 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self._library.niDMM_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(attribute_value_ctype.value)
+        return bool(attribute_value_ctype.value)
 
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
@@ -867,7 +866,7 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niDMM_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(attribute_value_ctype.value)
+        return int(attribute_value_ctype.value)
 
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
@@ -899,7 +898,7 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDMM_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(attribute_value_ctype.value)
+        return float(attribute_value_ctype.value)
 
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
@@ -2036,7 +2035,7 @@ class Session(_SessionBase):
         reading_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDMM_Fetch(self._vi, maximum_time, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(reading_ctype.value)
+        return float(reading_ctype.value)
 
     def fetch_multi_point(self, array_size, maximum_time=-1):
         '''fetch_multi_point
@@ -2078,7 +2077,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niDMM_FetchMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [python_types.ViReal64(reading_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
+        return [float(reading_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def fetch_waveform(self, array_size, maximum_time=-1):
         '''fetch_waveform
@@ -2112,7 +2111,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niDMM_FetchWaveform(self._vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [python_types.ViReal64(waveform_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
+        return [float(waveform_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def get_aperture_time_info(self):
         '''get_aperture_time_info
@@ -2154,7 +2153,7 @@ class Session(_SessionBase):
         aperture_time_units_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niDMM_GetApertureTimeInfo(self._vi, ctypes.pointer(aperture_time_ctype), ctypes.pointer(aperture_time_units_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(aperture_time_ctype.value), enums.ApertureTimeUnits(aperture_time_units_ctype.value)
+        return float(aperture_time_ctype.value), enums.ApertureTimeUnits(aperture_time_units_ctype.value)
 
     def get_auto_range_value(self):
         '''get_auto_range_value
@@ -2170,7 +2169,7 @@ class Session(_SessionBase):
         actual_range_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDMM_GetAutoRangeValue(self._vi, ctypes.pointer(actual_range_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(actual_range_ctype.value)
+        return float(actual_range_ctype.value)
 
     def get_cal_date_and_time(self, cal_type):
         '''get_cal_date_and_time
@@ -2205,7 +2204,7 @@ class Session(_SessionBase):
         minute_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niDMM_GetCalDateAndTime(self._vi, cal_type, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(month_ctype.value), python_types.ViInt32(day_ctype.value), python_types.ViInt32(year_ctype.value), python_types.ViInt32(hour_ctype.value), python_types.ViInt32(minute_ctype.value)
+        return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_dev_temp(self, options=''):
         '''get_dev_temp
@@ -2223,7 +2222,7 @@ class Session(_SessionBase):
         temperature_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDMM_GetDevTemp(self._vi, options.encode('ascii'), ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(temperature_ctype.value)
+        return float(temperature_ctype.value)
 
     def _get_error(self):
         '''_get_error
@@ -2263,7 +2262,7 @@ class Session(_SessionBase):
         description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return python_types.ViStatus(error_code_ctype.value), description_ctype.value.decode("ascii")
+        return int(error_code_ctype.value), description_ctype.value.decode("ascii")
 
     def _get_error_message(self, error_code):
         '''_get_error_message
@@ -2317,7 +2316,7 @@ class Session(_SessionBase):
         temperature_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDMM_GetLastCalTemp(self._vi, cal_type, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(temperature_ctype.value)
+        return float(temperature_ctype.value)
 
     def get_measurement_period(self):
         '''get_measurement_period
@@ -2340,7 +2339,7 @@ class Session(_SessionBase):
         period_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDMM_GetMeasurementPeriod(self._vi, ctypes.pointer(period_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(period_ctype.value)
+        return float(period_ctype.value)
 
     def get_self_cal_supported(self):
         '''get_self_cal_supported
@@ -2361,7 +2360,7 @@ class Session(_SessionBase):
         self_cal_supported_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self._library.niDMM_GetSelfCalSupported(self._vi, ctypes.pointer(self_cal_supported_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(self_cal_supported_ctype.value)
+        return bool(self_cal_supported_ctype.value)
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
         '''_init_with_options
@@ -2462,7 +2461,7 @@ class Session(_SessionBase):
         vi_ctype = ctypes_types.ViSession_ctype(0)
         error_code = self._library.niDMM_InitWithOptions(resource_name.encode('ascii'), id_query, reset_device, option_string.encode('ascii'), ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(vi_ctype.value)
+        return int(vi_ctype.value)
 
     def _initiate(self):
         '''_initiate
@@ -2500,7 +2499,7 @@ class Session(_SessionBase):
         susceptance_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDMM_PerformOpenCableComp(self._vi, ctypes.pointer(conductance_ctype), ctypes.pointer(susceptance_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(conductance_ctype.value), python_types.ViReal64(susceptance_ctype.value)
+        return float(conductance_ctype.value), float(susceptance_ctype.value)
 
     def perform_short_cable_comp(self):
         '''perform_short_cable_comp
@@ -2524,7 +2523,7 @@ class Session(_SessionBase):
         reactance_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDMM_PerformShortCableComp(self._vi, ctypes.pointer(resistance_ctype), ctypes.pointer(reactance_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(resistance_ctype.value), python_types.ViReal64(reactance_ctype.value)
+        return float(resistance_ctype.value), float(reactance_ctype.value)
 
     def read(self, maximum_time=-1):
         '''read
@@ -2549,7 +2548,7 @@ class Session(_SessionBase):
         reading_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niDMM_Read(self._vi, maximum_time, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(reading_ctype.value)
+        return float(reading_ctype.value)
 
     def read_multi_point(self, array_size, maximum_time=-1):
         '''read_multi_point
@@ -2590,7 +2589,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niDMM_ReadMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [python_types.ViReal64(reading_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
+        return [float(reading_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def read_status(self):
         '''read_status
@@ -2631,7 +2630,7 @@ class Session(_SessionBase):
         acquisition_status_ctype = ctypes_types.ViInt16_ctype(0)
         error_code = self._library.niDMM_ReadStatus(self._vi, ctypes.pointer(acquisition_backlog_ctype), ctypes.pointer(acquisition_status_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
+        return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
     def read_waveform(self, array_size, maximum_time=-1):
         '''read_waveform
@@ -2670,7 +2669,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niDMM_ReadWaveform(self._vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [python_types.ViReal64(waveform_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
+        return [float(waveform_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def reset_with_defaults(self):
         '''reset_with_defaults
@@ -2754,7 +2753,7 @@ class Session(_SessionBase):
         firmware_revision_ctype = ctypes_types.ViChar_ctype(0)
         error_code = self._library.niDMM_revision_query(self._vi, ctypes.pointer(instrument_driver_revision_ctype), ctypes.pointer(firmware_revision_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(instrument_driver_revision_ctype.value), python_types.ViChar(firmware_revision_ctype.value)
+        return int(instrument_driver_revision_ctype.value), int(firmware_revision_ctype.value)
 
     def self_test(self):
         '''self_test
@@ -2798,7 +2797,7 @@ class Session(_SessionBase):
         self_test_message_ctype = (ctypes_types.ViChar_ctype * 256)()
         error_code = self._library.niDMM_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
+        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
 
 
 

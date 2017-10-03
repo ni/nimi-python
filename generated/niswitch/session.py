@@ -7,7 +7,6 @@ from niswitch import ctypes_types
 from niswitch import enums
 from niswitch import errors
 from niswitch import library_singleton
-from niswitch import python_types
 
 
 class _Scan(object):
@@ -905,7 +904,7 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self._library.niSwitch_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(attribute_value_ctype.value)
+        return bool(attribute_value_ctype.value)
 
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
@@ -950,7 +949,7 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niSwitch_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(attribute_value_ctype.value)
+        return int(attribute_value_ctype.value)
 
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
@@ -995,7 +994,7 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
         error_code = self._library.niSwitch_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(attribute_value_ctype.value)
+        return float(attribute_value_ctype.value)
 
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
@@ -1680,7 +1679,7 @@ class Session(_SessionBase):
         description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
         error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViStatus(code_ctype.value), description_ctype.value.decode("ascii")
+        return int(code_ctype.value), description_ctype.value.decode("ascii")
 
     def get_path(self, channel1, channel2):
         '''get_path
@@ -1748,7 +1747,7 @@ class Session(_SessionBase):
         relay_count_ctype = ctypes_types.ViInt32_ctype(0)
         error_code = self._library.niSwitch_GetRelayCount(self._vi, relay_name.encode('ascii'), ctypes.pointer(relay_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(relay_count_ctype.value)
+        return int(relay_count_ctype.value)
 
     def get_relay_name(self, index):
         '''get_relay_name
@@ -2038,7 +2037,7 @@ class Session(_SessionBase):
         vi_ctype = ctypes_types.ViSession_ctype(0)
         error_code = self._library.niSwitch_InitWithTopology(resource_name.encode('ascii'), topology.encode('ascii'), simulate, reset_device, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(vi_ctype.value)
+        return int(vi_ctype.value)
 
     def _initiate_scan(self):
         '''_initiate_scan
@@ -2069,7 +2068,7 @@ class Session(_SessionBase):
         is_debounced_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self._library.niSwitch_IsDebounced(self._vi, ctypes.pointer(is_debounced_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(is_debounced_ctype.value)
+        return bool(is_debounced_ctype.value)
 
     def is_scanning(self):
         '''is_scanning
@@ -2084,7 +2083,7 @@ class Session(_SessionBase):
         is_scanning_ctype = ctypes_types.ViBoolean_ctype(0)
         error_code = self._library.niSwitch_IsScanning(self._vi, ctypes.pointer(is_scanning_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(is_scanning_ctype.value)
+        return bool(is_scanning_ctype.value)
 
     def relay_control(self, relay_name, relay_action):
         '''relay_control
@@ -2317,7 +2316,7 @@ class Session(_SessionBase):
         self_test_message_ctype = (ctypes_types.ViChar_ctype * 256)()
         error_code = self._library.niSwitch_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
+        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
 
 
 
