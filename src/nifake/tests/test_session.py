@@ -477,7 +477,9 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
+    # Error descriptions
     '''
+    Unit testing does not properly handle passed in or fixed strings. Re-add when #392 is fixed
     def test_get_error_description_error_message(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
