@@ -341,7 +341,7 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niFake_error_message", param='errorMessage')
-        error_message.contents.value = self._defaults['error_message']['errorMessage']
+        error_message.contents.value = self._defaults['error_message']['errorMessage'].encode('ascii')
         return self._defaults['error_message']['return']
 
     # Helper function to setup Mock object with default side effects and return values
