@@ -310,7 +310,7 @@ def test_add_all_metadata_simple():
             'python_name': 'make_a_foo',
             'returns': 'ViStatus',
             'returns_ctype': 'ViStatus_ctype',
-            'returns_python': 'ViStatus'
+            'intrinsic_return_type': 'int',
         }
     }
 

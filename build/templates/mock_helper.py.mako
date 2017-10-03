@@ -89,5 +89,5 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 f = functions[func_name]
 %>\
         mock_library.${c_function_prefix}${func_name}.side_effect = MockFunctionCallError("${c_function_prefix}${func_name}")
-        mock_library.${c_function_prefix}${func_name}.return_value = ${module_name}.ctypes_types.${f['returns_ctype']}(0)
+        mock_library.${c_function_prefix}${func_name}.return_value = 0
 % endfor
