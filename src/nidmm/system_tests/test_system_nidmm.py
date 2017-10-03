@@ -159,9 +159,10 @@ def test_fetch_multiple(session):
 
 
 def test_get_auto_range_value(session):
-    session.read()
-    auto_range_value = session.get_auto_range_value()
-    assert auto_range_value == 300   # simulated device auto_range_value to maximum 300
+    with session.initiate():
+        session.fetch()
+        auto_range_value = session.get_auto_range_value()
+        assert auto_range_value == 300   # simulated device auto_range_value to maximum 300
 
 
 def test_get_cal_date_time(session):
