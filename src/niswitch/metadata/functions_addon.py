@@ -21,11 +21,11 @@ functions_codegen_method = {
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
     'GetAttributeViSession':           { 'codegen_method': 'no',       },
     'Scan':                            { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
-    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'error_query':                     { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'error_query':                     { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -94,7 +94,7 @@ function_default_value = {
                                                   2: { 'default_value': False, },
                                                   3: { 'default_value': False, },
                                                   4: { 'default_value': '', }, }, },
-    'ConfigureScanList':        { 'parameters': { 2: { 'default_value': 'enums.ScanMode.BREAK_BEFORE_MAKE', }, }, },
+    'ConfigureScanList':        { 'parameters': { 2: { 'default_value': 'ScanMode.BREAK_BEFORE_MAKE', }, }, },
     'ConfigureScanTrigger':     { 'parameters': { 1: { 'default_value': 0.0, }, }, },
     'RouteScanAdvancedOutput':  { 'parameters': { 3: { 'default_value': False, }, }, },
     'RouteTriggerInput':        { 'parameters': { 3: { 'default_value': False, }, }, },

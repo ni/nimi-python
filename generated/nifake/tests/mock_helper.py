@@ -71,6 +71,9 @@ class SideEffectsHelper(object):
         self._defaults['Read'] = {}
         self._defaults['Read']['return'] = 0
         self._defaults['Read']['reading'] = None
+        self._defaults['ReadFromChannel'] = {}
+        self._defaults['ReadFromChannel']['return'] = 0
+        self._defaults['ReadFromChannel']['reading'] = None
         self._defaults['ReadMultiPoint'] = {}
         self._defaults['ReadMultiPoint']['return'] = 0
         self._defaults['ReadMultiPoint']['readingArray'] = None
@@ -93,6 +96,9 @@ class SideEffectsHelper(object):
         self._defaults['SimpleFunction']['return'] = 0
         self._defaults['TwoInputFunction'] = {}
         self._defaults['TwoInputFunction']['return'] = 0
+        self._defaults['Use64BitNumber'] = {}
+        self._defaults['Use64BitNumber']['return'] = 0
+        self._defaults['Use64BitNumber']['output'] = None
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['error_message'] = {}
@@ -252,6 +258,14 @@ class SideEffectsHelper(object):
         reading.contents.value = self._defaults['Read']['reading']
         return self._defaults['Read']['return']
 
+    def niFake_ReadFromChannel(self, vi, channel_name, maximum_time, reading):  # noqa: N802
+        if self._defaults['ReadFromChannel']['return'] != 0:
+            return self._defaults['ReadFromChannel']['return']
+        if self._defaults['ReadFromChannel']['reading'] is None:
+            raise MockFunctionCallError("niFake_ReadFromChannel", param='reading')
+        reading.contents.value = self._defaults['ReadFromChannel']['reading']
+        return self._defaults['ReadFromChannel']['return']
+
     def niFake_ReadMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
         if self._defaults['ReadMultiPoint']['return'] != 0:
             return self._defaults['ReadMultiPoint']['return']
@@ -309,6 +323,14 @@ class SideEffectsHelper(object):
             return self._defaults['TwoInputFunction']['return']
         return self._defaults['TwoInputFunction']['return']
 
+    def niFake_Use64BitNumber(self, vi, input, output):  # noqa: N802
+        if self._defaults['Use64BitNumber']['return'] != 0:
+            return self._defaults['Use64BitNumber']['return']
+        if self._defaults['Use64BitNumber']['output'] is None:
+            raise MockFunctionCallError("niFake_Use64BitNumber", param='output')
+        output.contents.value = self._defaults['Use64BitNumber']['output']
+        return self._defaults['Use64BitNumber']['return']
+
     def niFake_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
             return self._defaults['close']['return']
@@ -360,6 +382,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_OneInputFunction.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_Read.side_effect = MockFunctionCallError("niFake_Read")
         mock_library.niFake_Read.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_ReadFromChannel.side_effect = MockFunctionCallError("niFake_ReadFromChannel")
+        mock_library.niFake_ReadFromChannel.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_ReadMultiPoint.side_effect = MockFunctionCallError("niFake_ReadMultiPoint")
         mock_library.niFake_ReadMultiPoint.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_ReturnANumberAndAString.side_effect = MockFunctionCallError("niFake_ReturnANumberAndAString")
@@ -378,6 +402,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_SimpleFunction.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_TwoInputFunction.side_effect = MockFunctionCallError("niFake_TwoInputFunction")
         mock_library.niFake_TwoInputFunction.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_Use64BitNumber.side_effect = MockFunctionCallError("niFake_Use64BitNumber")
+        mock_library.niFake_Use64BitNumber.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_close.side_effect = MockFunctionCallError("niFake_close")
         mock_library.niFake_close.return_value = nifake.python_types.ViStatus(0)
         mock_library.niFake_error_message.side_effect = MockFunctionCallError("niFake_error_message")

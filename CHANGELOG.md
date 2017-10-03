@@ -7,7 +7,13 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 ## [Unreleased]
 * #### ALL
   * #### Added
+    * Support for ViInt64 (64-bit integers)
   * #### Changed
+    * Modified how methods with repeated capabilities are invoked. There's no longer (for example) a "channel_name" input. Instead:
+      ```python
+      # Sets sequence on channels 0 through 3
+      session['0-3'].set_sequence(values, source_delays)
+      ```
   * #### Removed
 * #### NI-DMM
   * #### Added
@@ -27,6 +33,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * Removed methods that aren’t useful in the Python bindings.
 * #### NI-DCPower
   * #### Added
+    * Initial release
   * #### Changed
   * #### Removed
 
@@ -50,7 +57,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
       ```
 * #### NI-SWITCH
   * #### Added
-    * Initial Release
+    * Initial release
 
 ## [0.1.0] - 2017-09-01
 * ### NI-DMM

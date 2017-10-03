@@ -8,7 +8,7 @@ niswitch_connect_channels.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(source) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/niswitch_connect_channels.py>`_
+   :caption: `(niswitch_connect_channels.py) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/niswitch_connect_channels.py>`_
 
 niswitch_get_device_info.py
 ---------------------------
@@ -17,7 +17,7 @@ niswitch_get_device_info.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(source) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/niswitch_get_device_info.py>`_
+   :caption: `(niswitch_get_device_info.py) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/niswitch_get_device_info.py>`_
 
 niswitch_relay_control.py
 -------------------------
@@ -26,5 +26,5 @@ niswitch_relay_control.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(source) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/niswitch_relay_control.py>`_
+   :caption: `(niswitch_relay_control.py) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/niswitch_relay_control.py>`_
 

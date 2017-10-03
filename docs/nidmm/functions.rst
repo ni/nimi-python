@@ -417,7 +417,7 @@ nidmm.Session methods
 
     :type resolution_digits: float
 
-.. function:: configure_multi_point(trigger_count, sample_count, sample_trigger, sample_interval)
+.. function:: configure_multi_point(trigger_count, sample_count, sample_trigger=nidmm.SampleTrigger.IMMEDIATE, sample_interval=-1)
 
     Configures the attributes for multipoint measurements. These attributes
     include :py:data:`nidmm.TRIGGER\_COUNT`, :py:data:`nidmm.SAMPLE\_COUNT`,
@@ -769,7 +769,7 @@ nidmm.Session methods
 
     :type thermistor_type: :py:data:`nidmm.TemperatureThermistorType`
 
-.. function:: configure_thermocouple(thermocouple_type, reference_junction_type)
+.. function:: configure_thermocouple(thermocouple_type, reference_junction_type='ThermocoupleReferenceJunctionType.FIXED')
 
     Configures the thermocouple type and reference junction type for a
     chosen thermocouple.
@@ -841,7 +841,7 @@ nidmm.Session methods
 
     :type transducer_type: :py:data:`nidmm.TemperatureTransducerType`
 
-.. function:: configure_trigger(trigger_source, trigger_delay)
+.. function:: configure_trigger(trigger_source, trigger_delay=-1)
 
     Configures the DMM **Trigger\_Source** and **Trigger\_Delay**. Refer to
     `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
@@ -1012,7 +1012,7 @@ nidmm.Session methods
     
 
 
-.. function:: fetch(maximum_time)
+.. function:: fetch(maximum_time=-1)
 
     Returns the value from a previously initiated measurement. You must call
     :py:func:`nidmm._initiate` before calling this function.
@@ -1047,7 +1047,7 @@ nidmm.Session methods
             
 
 
-.. function:: fetch_multi_point(array_size, maximum_time)
+.. function:: fetch_multi_point(array_size, maximum_time=-1)
 
     Returns an array of values from a previously initiated multipoint
     measurement. The number of measurements the DMM makes is determined by
@@ -1112,7 +1112,7 @@ nidmm.Session methods
             
 
 
-.. function:: fetch_waveform(array_size, maximum_time)
+.. function:: fetch_waveform(array_size, maximum_time=-1)
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
     values from a previously initiated waveform acquisition. You must call
@@ -1305,7 +1305,7 @@ nidmm.Session methods
             
 
 
-.. function:: get_dev_temp(options)
+.. function:: get_dev_temp(options='')
 
     Returns the current **Temperature** of the device.
 
@@ -1485,7 +1485,7 @@ nidmm.Session methods
             
 
 
-.. function:: read(maximum_time)
+.. function:: read(maximum_time=-1)
 
     Acquires a single measurement and returns the measured value.
 
@@ -1519,7 +1519,7 @@ nidmm.Session methods
             
 
 
-.. function:: read_multi_point(array_size, maximum_time)
+.. function:: read_multi_point(array_size, maximum_time=-1)
 
     Acquires multiple measurements and returns an array of measured values.
     The number of measurements the DMM makes is determined by the values you
@@ -1632,7 +1632,7 @@ nidmm.Session methods
             +---+----------------------------+
 
 
-.. function:: read_waveform(array_size, maximum_time)
+.. function:: read_waveform(array_size, maximum_time=-1)
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
     and returns data as an array of values or as a waveform data type. The

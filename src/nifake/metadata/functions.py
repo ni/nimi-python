@@ -800,7 +800,7 @@ functions = {
             'description': 'This function takes one parameter other than the session.',
         },
     },
-    
+
     'TwoInputFunction': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -866,7 +866,7 @@ functions = {
             'note': 'This function rules!',
         },
     },
-    
+
     'GetABoolean': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -993,6 +993,44 @@ functions = {
                 'type': 'ViChar',
                 'documentation': {
                     'description': 'Contains a string.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns a number and a string.',
+            'note': 'This function rules!',
+        },
+    },
+
+    'Use64BitNumber': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'input',
+                'type': 'ViInt64',
+                'documentation': {
+                    'description': 'A big number on its way in.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'output',
+                'type': 'ViInt64',
+                'documentation': {
+                    'description': 'A big number on its way out.',
                 },
             },
         ],
@@ -1136,6 +1174,52 @@ functions = {
         },
     },
 
+    'ReadFromChannel': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'documentation': {
+                    'description': 'This is the channel(s) that this function will apply to.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'maximumTime',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Specifies the **maximum\_time** allowed in years.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'reading',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'The measured value.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Acquires a single measurement and returns the measured value.',
+        },
+    },
+
     'EnumInputFunctionWithDefaults': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -1169,7 +1253,7 @@ functions = {
     #     Returning strings using ivi-dance
     #     Returning lots of numbers
     #     Taking parameters of all types
-    #     Input buffers ans trings
+    #     Input buffers and strings
     #     Returning parameters of all types
     #     Enums enums enums
     #     Waveforms as inputs and outputs

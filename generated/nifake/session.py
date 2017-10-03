@@ -44,6 +44,10 @@ class _SessionBase(object):
     '''
     An attribute of type float with read/write access.
     '''
+    read_write_int64 = attributes.AttributeViInt64(1000006)
+    '''
+    An attribute of type 64-bit integer with read/write access.
+    '''
     read_write_integer = attributes.AttributeViInt32(1000004)
     '''
     An attribute of type integer with read/write access.
@@ -83,6 +87,223 @@ class _SessionBase(object):
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
+
+    ''' These are code-generated '''
+
+    def _get_attribute_vi_boolean(self, attribute_id):
+        '''_get_attribute_vi_boolean
+
+        Queries the value of a ViBoolean attribute.
+
+        Args:
+            channel_name (str):This is the channel(s) that this function will apply to.
+            attribute_id (int):Pass the ID of an attribute.
+
+        Returns:
+            attribute_value (bool):Returns the value of the attribute.
+        '''
+        attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
+        error_code = self._library.niFake_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViBoolean(attribute_value_ctype.value)
+
+    def _get_attribute_vi_int32(self, attribute_id):
+        '''_get_attribute_vi_int32
+
+        Queries the value of a ViInt32 attribute.
+
+        Args:
+            channel_name (str):This is the channel(s) that this function will apply to.
+            attribute_id (int):Pass the ID of an attribute.
+
+        Returns:
+            attribute_value (int):Returns the value of the attribute.
+        '''
+        attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
+        error_code = self._library.niFake_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViInt32(attribute_value_ctype.value)
+
+    def _get_attribute_vi_real64(self, attribute_id):
+        '''_get_attribute_vi_real64
+
+        Queries the value of a ViReal attribute.
+
+        Args:
+            channel_name (str):This is the channel(s) that this function will apply to.
+            attribute_id (int):Pass the ID of an attribute.
+
+        Returns:
+            attribute_value (float):Returns the value of the attribute.
+        '''
+        attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
+        error_code = self._library.niFake_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViReal64(attribute_value_ctype.value)
+
+    def _get_attribute_vi_session(self, attribute_id):
+        '''_get_attribute_vi_session
+
+        Queries the value of a ViSession attribute.
+
+        Args:
+            channel_name (str):This is the channel(s) that this function will apply to.
+            attribute_id (int):Pass the ID of an attribute.
+
+        Returns:
+            attribute_value (int):Returns the value of the attribute.
+        '''
+        attribute_value_ctype = ctypes_types.ViSession_ctype(0)
+        error_code = self._library.niFake_GetAttributeViSession(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViSession(attribute_value_ctype.value)
+
+    def _get_attribute_vi_string(self, attribute_id):
+        '''_get_attribute_vi_string
+
+        Queries the value of a ViBoolean attribute.
+
+        Args:
+            channel_name (str):This is the channel(s) that this function will apply to.
+            attribute_id (int):Pass the ID of an attribute.
+            buffer_size (int):Number of bytes in attributeValue. You can IVI-dance with this.
+        '''
+        buffer_size = 0
+        attribute_value_ctype = None
+        error_code = self._library.niFake_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size = error_code
+        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        error_code = self._library.niFake_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return attribute_value_ctype.value.decode("ascii")
+
+    def read_from_channel(self, maximum_time):
+        '''read_from_channel
+
+        Acquires a single measurement and returns the measured value.
+
+        Args:
+            channel_name (str):This is the channel(s) that this function will apply to.
+            maximum_time (int):Specifies the **maximum_time** allowed in years.
+
+        Returns:
+            reading (float):The measured value.
+        '''
+        reading_ctype = ctypes_types.ViReal64_ctype(0)
+        error_code = self._library.niFake_ReadFromChannel(self._vi, self._repeated_capability.encode('ascii'), maximum_time, ctypes.pointer(reading_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViReal64(reading_ctype.value)
+
+    def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_boolean
+
+        This function sets the value of a ViBoolean attribute.
+
+        Args:
+            channel_name (str):This is the channel(s) that this function will apply to.
+            attribute_id (int):Pass the ID of an attribute.
+            attribute_value (bool):Pass the value that you want to set the attribute to.
+        '''
+        error_code = self._library.niFake_SetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_int32(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_int32
+
+        This function sets the value of a ViInt32 attribute.
+
+        Args:
+            channel_name (str):This is the channel(s) that this function will apply to.
+            attribute_id (int):Pass the ID of an attribute.
+            attribute_value (int):Pass the value that you want to set the attribute to.
+        '''
+        error_code = self._library.niFake_SetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_real64(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_real64
+
+        This function sets the value of a ViReal64 attribute.
+
+        Args:
+            channel_name (str):This is the channel(s) that this function will apply to.
+            attribute_id (int):Pass the ID of an attribute.
+            attribute_value (float):Pass the value that you want to set the attribute to.
+        '''
+        error_code = self._library.niFake_SetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_session(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_session
+
+        This function sets the value of a ViSession attribute.
+
+        Args:
+            channel_name (str):This is the channel(s) that this function will apply to.
+            attribute_id (int):Pass the ID of an attribute.
+            attribute_value (int):Pass the value that you want to set the attribute to.
+        '''
+        error_code = self._library.niFake_SetAttributeViSession(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_string(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_string
+
+        This function sets the value of a ViString attribute.
+
+        Args:
+            channel_name (str):This is the channel(s) that this function will apply to.
+            attribute_id (int):Pass the ID of an attribute.
+            attribute_value (str):Pass the value that you want to set the attribute to.
+        '''
+        error_code = self._library.niFake_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+
+class _RepeatedCapability(_SessionBase):
+    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
+
+    def __init__(self, vi, repeated_capability):
+        super(_RepeatedCapability, self).__init__(repeated_capability)
+        self._vi = vi
+        self._is_frozen = True
+
+
+class Session(_SessionBase):
+    '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
+
+    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
+        super(Session, self).__init__(repeated_capability='')
+        self._vi = 0  # This must be set before calling _init_with_options().
+        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        return _RepeatedCapability(self._vi, repeated_capability)
+
+    def initiate(self):
+        return _Acquisition(self)
+
+    def close(self):
+        try:
+            self._close()
+        except errors.Error:
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
+            print("Failed to close session.")
+        self._vi = 0
 
     ''' These are code-generated '''
 
@@ -177,94 +398,6 @@ class _SessionBase(object):
         error_code = self._library.niFake_GetAStringWithSpecifiedMaximumSize(self._vi, ctypes.cast(a_string_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)), buffer_size)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode("ascii")
-
-    def _get_attribute_vi_boolean(self, channel_name, attribute_id):
-        '''_get_attribute_vi_boolean
-
-        Queries the value of a ViBoolean attribute.
-
-        Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-
-        Returns:
-            attribute_value (bool):Returns the value of the attribute.
-        '''
-        attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self._library.niFake_GetAttributeViBoolean(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(attribute_value_ctype.value)
-
-    def _get_attribute_vi_int32(self, channel_name, attribute_id):
-        '''_get_attribute_vi_int32
-
-        Queries the value of a ViInt32 attribute.
-
-        Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-
-        Returns:
-            attribute_value (int):Returns the value of the attribute.
-        '''
-        attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niFake_GetAttributeViInt32(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(attribute_value_ctype.value)
-
-    def _get_attribute_vi_real64(self, channel_name, attribute_id):
-        '''_get_attribute_vi_real64
-
-        Queries the value of a ViReal attribute.
-
-        Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-
-        Returns:
-            attribute_value (float):Returns the value of the attribute.
-        '''
-        attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self._library.niFake_GetAttributeViReal64(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(attribute_value_ctype.value)
-
-    def _get_attribute_vi_session(self, channel_name, attribute_id):
-        '''_get_attribute_vi_session
-
-        Queries the value of a ViSession attribute.
-
-        Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-
-        Returns:
-            attribute_value (int):Returns the value of the attribute.
-        '''
-        attribute_value_ctype = ctypes_types.ViSession_ctype(0)
-        error_code = self._library.niFake_GetAttributeViSession(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(attribute_value_ctype.value)
-
-    def _get_attribute_vi_string(self, channel_name, attribute_id):
-        '''_get_attribute_vi_string
-
-        Queries the value of a ViBoolean attribute.
-
-        Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            buffer_size (int):Number of bytes in attributeValue. You can IVI-dance with this.
-        '''
-        buffer_size = 0
-        attribute_value_ctype = None
-        error_code = self._library.niFake_GetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self._library.niFake_GetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode("ascii")
 
     def get_enum_value(self):
         '''get_enum_value
@@ -444,76 +577,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return python_types.ViInt16(a_number_ctype.value), python_types.ViChar(a_string_ctype.value)
 
-    def _set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):
-        '''_set_attribute_vi_boolean
-
-        This function sets the value of a ViBoolean attribute.
-
-        Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (bool):Pass the value that you want to set the attribute to.
-        '''
-        error_code = self._library.niFake_SetAttributeViBoolean(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):
-        '''_set_attribute_vi_int32
-
-        This function sets the value of a ViInt32 attribute.
-
-        Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (int):Pass the value that you want to set the attribute to.
-        '''
-        error_code = self._library.niFake_SetAttributeViInt32(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):
-        '''_set_attribute_vi_real64
-
-        This function sets the value of a ViReal64 attribute.
-
-        Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (float):Pass the value that you want to set the attribute to.
-        '''
-        error_code = self._library.niFake_SetAttributeViReal64(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_session(self, channel_name, attribute_id, attribute_value):
-        '''_set_attribute_vi_session
-
-        This function sets the value of a ViSession attribute.
-
-        Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (int):Pass the value that you want to set the attribute to.
-        '''
-        error_code = self._library.niFake_SetAttributeViSession(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):
-        '''_set_attribute_vi_string
-
-        This function sets the value of a ViString attribute.
-
-        Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (str):Pass the value that you want to set the attribute to.
-        '''
-        error_code = self._library.niFake_SetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def simple_function(self):
         '''simple_function
 
@@ -535,6 +598,24 @@ class _SessionBase(object):
         error_code = self._library.niFake_TwoInputFunction(self._vi, a_number, a_string)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def use64_bit_number(self, input):
+        '''use64_bit_number
+
+        Returns a number and a string.
+
+        Note: This function rules!
+
+        Args:
+            input (int):A big number on its way in.
+
+        Returns:
+            output (int):A big number on its way out.
+        '''
+        output_ctype = ctypes_types.ViInt64_ctype(0)
+        error_code = self._library.niFake_Use64BitNumber(self._vi, input, ctypes.pointer(output_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return python_types.ViInt64(output_ctype.value)
 
     def _close(self):
         '''_close
@@ -561,44 +642,5 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode("ascii")
 
-
-class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
-
-    def __init__(self, vi, repeated_capability):
-        super(_RepeatedCapability, self).__init__(repeated_capability)
-        self._vi = vi
-        self._is_frozen = True
-
-
-class Session(_SessionBase):
-    '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
-
-    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
-        super(Session, self).__init__(repeated_capability='')
-        self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
-        self._is_frozen = True
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        return _RepeatedCapability(self._vi, repeated_capability)
-
-    def initiate(self):
-        return _Acquisition(self)
-
-    def close(self):
-        try:
-            self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
-        self._vi = 0
 
 
