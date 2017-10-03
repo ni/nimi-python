@@ -59,6 +59,7 @@ class Library(object):
         self.niDCPower_SetSequence_cfunc = None
         self.niDCPower_WaitForEvent_cfunc = None
         self.niDCPower_close_cfunc = None
+        self.niDCPower_error_message_cfunc = None
         self.niDCPower_reset_cfunc = None
         self.niDCPower_revision_query_cfunc = None
         self.niDCPower_self_test_cfunc = None
@@ -412,6 +413,14 @@ class Library(object):
                 self.niDCPower_close_cfunc.argtypes = [ViSession_ctype]  # noqa: F405
                 self.niDCPower_close_cfunc.restype = ViStatus_ctype  # noqa: F405
         return self.niDCPower_close_cfunc(vi).value
+
+    def niDCPower_error_message(self, vi, error_code, error_message):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_error_message_cfunc is None:
+                self.niDCPower_error_message_cfunc = self._library.niDCPower_error_message
+                self.niDCPower_error_message_cfunc.argtypes = [ViSession_ctype, ViStatus_ctype, ctypes.POINTER(ViChar_ctype)]  # noqa: F405
+                self.niDCPower_error_message_cfunc.restype = ViStatus_ctype  # noqa: F405
+        return self.niDCPower_error_message_cfunc(vi, error_code, error_message).value
 
     def niDCPower_reset(self, vi):  # noqa: N802
         with self._func_lock:
