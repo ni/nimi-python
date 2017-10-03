@@ -351,6 +351,7 @@ def test_add_all_metadata_simple():
                     'name': 'vi',
                     'python_name': 'vi',
                     'python_name_with_default': 'vi',
+                    'python_name_with_doc_default': 'vi',
                     'python_type': 'ViSession',
                     'size': {
                         'mechanism': 'fixed',
@@ -374,6 +375,7 @@ def test_add_all_metadata_simple():
                     'name': 'status',
                     'python_name': 'status',
                     'python_name_with_default': 'status',
+                    'python_name_with_doc_default': 'status',
                     'python_type': 'ViString',
                     'size': {
                         'mechanism': 'fixed',
