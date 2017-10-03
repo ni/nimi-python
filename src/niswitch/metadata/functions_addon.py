@@ -14,7 +14,6 @@ functions_codegen_method = {
     'init':                            { 'codegen_method': 'no',       },
     'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
-    'GetErrorMessage':                 { 'codegen_method': 'private',  },
     'ClearError':                      { 'codegen_method': 'no',       },
     'LockSession':                     { 'codegen_method': 'no',       },
     'UnlockSession':                   { 'codegen_method': 'no',       },
@@ -85,7 +84,6 @@ functions_buffer_info = {
 functions_is_error_handling = {
     'error_message':                { 'is_error_handling': True, },
     'GetError':                     { 'is_error_handling': True, },
-    'GetErrorMessage':              { 'is_error_handling': True, },
 }
 
 # Default values for method parameters
