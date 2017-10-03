@@ -852,9 +852,9 @@ class _SessionBase(object):
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
-            Use _get_error_message instead. It doesn't require a session.
+            Use _error_message instead. It doesn't require a session.
             '''
-            error_string = self._get_error_message(error_code)
+            error_string = self._error_message(error_code)
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
@@ -1674,11 +1674,11 @@ class Session(_SessionBase):
         buffer_size = 0
         description_ctype = None
         error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
         description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
         error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode("ascii")
 
     def get_path(self, channel1, channel2):
@@ -2274,6 +2274,27 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def _error_message(self, error_code):
+        '''_error_message
+
+        Converts an error code returned by NI-SWITCH into a user-readable
+        string. Generally this information is supplied in error out of any
+        NI-SWITCH VI. Use _error_message for a static lookup of an
+        error code description.
+
+        Args:
+            error_code (int):Status code returned by any NI-SWITCH function. Default Value: 0
+                (VI_SUCCESS)
+
+        Returns:
+            error_message (int):The error information formatted into a string. You must pass a ViChar
+                array with at least 256 bytes.
+        '''
+        error_message_ctype = (ctypes_types.ViChar * 256)()
+        error_code = self._library.niSwitch_error_message(self._vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_message_ctype.value.decode("ascii")
 
     def reset(self):
         '''reset

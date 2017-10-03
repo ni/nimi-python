@@ -795,9 +795,9 @@ class _SessionBase(object):
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
-            Use _get_error_message instead. It doesn't require a session.
+            Use _error_message instead. It doesn't require a session.
             '''
-            error_string = self._get_error_message(error_code)
+            error_string = self._error_message(error_code)
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
@@ -2264,33 +2264,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode("ascii")
 
-    def _get_error_message(self, error_code):
-        '''_get_error_message
-
-        Returns the **Error_Message** as a user-readable string for the
-        provided **Error_Code**. Calling this function with a **Buffer_Size**
-        of 0 returns the size needed for the **Error_Message**.
-
-        Args:
-            error_code (int):The error code returned from the instrument for which you want to get a
-                user-readable string.
-            buffer_size (int):Specifies the number of bytes allocated for the **Error_Message**
-                ViChar array. If the error description that this function returns
-                (including terminating NULL byte) is larger than you indicated in
-                **buffer_size**, the error description will be truncated to fit. If you
-                pass 0 for **buffer_size**, the function returns the buffer size needed
-                for **Error_Message**.
-        '''
-        buffer_size = 0
-        error_message_ctype = None
-        error_code = self._library.niDMM_GetErrorMessage(self._vi, error_code, buffer_size, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
-        error_code = self._library.niDMM_GetErrorMessage(self._vi, error_code, buffer_size, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode("ascii")
-
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
 
@@ -2721,6 +2694,24 @@ class Session(_SessionBase):
         error_code = self._library.niDMM_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def _error_message(self, error_code):
+        '''_error_message
+
+        Takes the **Error_Code** returned by the instrument driver functions,
+        interprets it, and returns it as a user-readable string.
+
+        Args:
+            error_code (int):The **error_code** returned from the instrument. The default is 0,
+                indicating VI_SUCCESS.
+
+        Returns:
+            error_message (int):The error information formatted into a string.
+        '''
+        error_message_ctype = (ctypes_types.ViChar * 256)()
+        error_code = self._library.niDMM_error_message(self._vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_message_ctype.value.decode("ascii")
 
     def reset(self):
         '''reset

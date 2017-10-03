@@ -111,6 +111,9 @@ class SideEffectsHelper(object):
         self._defaults['WaitForScanComplete']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
+        self._defaults['error_message'] = {}
+        self._defaults['error_message']['return'] = 0
+        self._defaults['error_message']['errorMessage'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
         self._defaults['revision_query'] = {}
@@ -383,6 +386,14 @@ class SideEffectsHelper(object):
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
+    def niSwitch_error_message(self, vi, error_code, error_message):  # noqa: N802
+        if self._defaults['error_message']['return'] != 0:
+            return self._defaults['error_message']['return']
+        if self._defaults['error_message']['errorMessage'] is None:
+            raise MockFunctionCallError("niSwitch_error_message", param='errorMessage')
+        error_message.contents.value = self._defaults['error_message']['errorMessage']
+        return self._defaults['error_message']['return']
+
     def niSwitch_reset(self, vi):  # noqa: N802
         if self._defaults['reset']['return'] != 0:
             return self._defaults['reset']['return']
@@ -490,6 +501,8 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_WaitForScanComplete.return_value = 0
         mock_library.niSwitch_close.side_effect = MockFunctionCallError("niSwitch_close")
         mock_library.niSwitch_close.return_value = 0
+        mock_library.niSwitch_error_message.side_effect = MockFunctionCallError("niSwitch_error_message")
+        mock_library.niSwitch_error_message.return_value = 0
         mock_library.niSwitch_reset.side_effect = MockFunctionCallError("niSwitch_reset")
         mock_library.niSwitch_reset.return_value = 0
         mock_library.niSwitch_revision_query.side_effect = MockFunctionCallError("niSwitch_revision_query")

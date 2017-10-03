@@ -177,6 +177,7 @@ def add_all_function_metadata(functions, config):
     return functions
 
 
+# Unit Tests
 def _compare_values(actual, expected):
     if type(actual) is dict:
         _compare_dicts(actual, expected)
@@ -202,7 +203,6 @@ def _compare_dicts(actual, expected):
         assert k in actual, 'Key {0} not in actual'.format(k)
 
 
-# Unit Tests
 def _do_the_test_add_all_metadata(functions, expected):
     actual = copy.deepcopy(functions)
     actual = add_all_function_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake'})
