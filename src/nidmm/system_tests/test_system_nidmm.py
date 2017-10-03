@@ -2,6 +2,7 @@ import nidmm
 import pytest
 import time
 
+
 @pytest.fixture(scope='function')
 def session():
     with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4080; BoardType:PXIe') as simulated_session:
