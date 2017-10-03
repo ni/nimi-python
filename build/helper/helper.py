@@ -46,7 +46,7 @@ def add_to_path(p):
         sys.path = old_path
 
 
-def get_python_type_from_visa_type(visa_type):
+def get_python_type_for_visa_type(visa_type):
     '''Returns the type to use in the Python API from the original visa type used in the C API
 
     Do not use this with enums.
