@@ -34,7 +34,7 @@ def _add_python_parameter_name(parameter):
 
 
 def _add_python_type(parameter):
-    '''Adds a python type key/value pair to the parameter metadata'''
+    '''Adds the type to use in the Python API to the parameter metadata'''
     if parameter['enum'] is None:
         parameter['python_type'] = get_python_type_for_visa_type(parameter['type'])
     else:
