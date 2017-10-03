@@ -237,6 +237,33 @@ def test_add_all_metadata_simple():
                 'description': 'Performs a foo, and performs it well.',
             },
         },
+        'private_method': {
+            'codegen_method': 'private',
+            'returns': 'ViStatus',
+            'parameters': [
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'vi',
+                    'type': 'ViSession',
+                    'documentation': {
+                        'description': 'Identifies a particular instrument session.',
+                    },
+                },
+                {
+                    'direction': 'out',
+                    'enum': None,
+                    'name': 'status',
+                    'type': 'ViString',
+                    'documentation': {
+                        'description': 'Return a device status',
+                    },
+                }
+            ],
+            'documentation': {
+                'description': 'create a private method',
+            },
+        },
     }
     expected = {
         'makeAFoo': {
@@ -298,9 +325,70 @@ def test_add_all_metadata_simple():
             'returns': 'ViStatus',
             'returns_ctype': 'ViStatus_ctype',
             'returns_python': 'ViStatus'
+        },
+        'private_method': {
+            'codegen_method': 'private',
+            'documentation': {
+                'description': 'create a private method'
+            },
+            'has_repeated_capability': False,
+            'is_error_handling': False,
+            'name': 'private_method',
+            'parameters': [
+                {
+                    'ctypes_type': 'ViSession_ctype',
+                    'ctypes_type_library_call': 'ViSession_ctype',
+                    'ctypes_variable_name': 'vi_ctype',
+                    'direction': 'in',
+                    'documentation': {
+                        'description': 'Identifies a particular instrument session.'
+                    },
+                    'enum': None,
+                    'intrinsic_type': 'int',
+                    'is_buffer': False,
+                    'is_repeated_capability': False,
+                    'library_method_call_snippet': 'self._vi',
+                    'name': 'vi',
+                    'python_name': 'vi',
+                    'python_name_with_default': 'vi',
+                    'python_name_with_doc_default': 'vi',
+                    'python_type': 'ViSession',
+                    'size': {
+                        'mechanism': 'fixed',
+                        'value': 1
+                    },
+                    'type': 'ViSession'
+                },
+                {
+                    'ctypes_type': 'ViString_ctype',
+                    'ctypes_type_library_call': 'ViString_ctype',
+                    'ctypes_variable_name': 'status_ctype',
+                    'direction': 'out',
+                    'documentation': {
+                        'description': 'Return a device status'
+                    },
+                    'enum': None,
+                    'intrinsic_type': 'str',
+                    'is_buffer': False,
+                    'is_repeated_capability': False,
+                    'library_method_call_snippet': 'ctypes.pointer(status_ctype)',
+                    'name': 'status',
+                    'python_name': 'status',
+                    'python_name_with_default': 'status',
+                    'python_name_with_doc_default': 'status',
+                    'python_type': 'ViString',
+                    'size': {
+                        'mechanism': 'fixed',
+                        'value': 1
+                    },
+                    'type': 'ViString'
+                }
+            ],
+            'python_name': '_private_method',
+            'returns': 'ViStatus',
+            'returns_ctype': 'ViStatus_ctype',
+            'returns_python': 'ViStatus'
         }
     }
 
     _do_the_test_add_all_metadata(functions, expected)
-
-
