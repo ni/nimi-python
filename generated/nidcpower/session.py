@@ -2477,9 +2477,9 @@ class _SessionBase(object):
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
-            Use _get_error_message instead. It doesn't require a session.
+            Use _error_message instead. It doesn't require a session.
             '''
-            error_string = self._get_error_message(error_code)
+            error_string = self._error_message(error_code)
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
@@ -4434,6 +4434,29 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def _error_message(self, error_code):
+        '''_error_message
+
+        Vistatus _error_message(ViSession vi, Vistatus errorCode,
+        ViChar errorMessage[256]);
+
+        Converts a status code returned by an instrument driver function into a
+        user-readable string.
+
+        Args:
+            error_code (int):Specifies the **status** parameter that is returned from any of the
+                NI-DCPower functions.
+
+        Returns:
+            error_message (int):Returns the user-readable message string that corresponds to the status
+                code you specify.
+                You must pass a ViChar array with at least 256 bytes.
+        '''
+        error_message_ctype = (ctypes_types.ViChar_ctype * 256)()
+        error_code = self._library.niDCPower_error_message(self._vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_message_ctype.value.decode("ascii")
 
     def reset(self):
         '''reset
