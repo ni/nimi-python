@@ -46,29 +46,28 @@ def add_to_path(p):
         sys.path = old_path
 
 
-type_mapping = {
-    'ViString': 'str',
-    'ViConstString': 'str',
-    'ViString': 'str',
-    'ViInt16': 'int',
-    'ViUInt16': 'int',
-    'ViInt32': 'int',
-    'ViUInt32': 'int',
-    'ViInt64': 'int',
-    'ViUInt64': 'int',
-    'ViReal32': 'float',
-    'ViReal64': 'float',
-    'ViStatus': 'int',
-    'ViSession': 'int',
-    'ViAttr': 'int',
-    'ViChar': 'int',
-    'ViBoolean': 'bool',
-    'ViRsrc': 'str',
-}
-
-
 def get_intrinsic_type_from_visa_type(visa_type):
     '''Returns the underlying intrinsic (python) type from the visa type'''
-    return type_mapping[visa_type]
+    type_map = {
+        'ViString': 'str',
+        'ViConstString': 'str',
+        'ViString': 'str',
+        'ViInt16': 'int',
+        'ViUInt16': 'int',
+        'ViInt32': 'int',
+        'ViUInt32': 'int',
+        'ViInt64': 'int',
+        'ViUInt64': 'int',
+        'ViReal32': 'float',
+        'ViReal64': 'float',
+        'ViStatus': 'int',
+        'ViSession': 'int',
+        'ViAttr': 'int',
+        'ViChar': 'int',
+        'ViBoolean': 'bool',
+        'ViRsrc': 'str',
+    }
+
+    return type_map[visa_type]
 
 
