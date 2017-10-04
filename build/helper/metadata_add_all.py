@@ -211,7 +211,7 @@ def _do_the_test_add_all_metadata(functions, expected):
 
 def test_add_all_metadata_simple():
     functions = {
-        'makeAFoo': {
+        'MakeAFoo': {
             'codegen_method': 'public',
             'returns': 'ViStatus',
             'parameters': [
@@ -267,8 +267,8 @@ def test_add_all_metadata_simple():
         },
     }
     expected = {
-        'makeAFoo': {
-            'name': 'makeAFoo',
+        'MakeAFoo': {
+            'name': 'MakeAFoo',
             'codegen_method': 'public',
             'documentation': {
                 'description': 'Performs a foo, and performs it well.'
