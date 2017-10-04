@@ -156,8 +156,9 @@ def test_get_auto_range_value(session):
         session.fetch()
         auto_range_value_property = session.auto_range_value
         auto_range_value_function = session.get_auto_range_value()
-        assert auto_range_value_function == auto_range_value_property   
+        assert auto_range_value_function == auto_range_value_property
         assert auto_range_value_function == 300   # simulated device auto_range_value to maximum 300
+        assert auto_range_value_function == auto_range_value_property
 
 
 def test_get_cal_date_time(session):
@@ -166,12 +167,12 @@ def test_get_cal_date_time(session):
     assert day == 1
     assert year == 1940
     assert hour == 0
-    assert minute == 0   # cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00 
+    assert minute == 0   # cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00
 
 
 def test_get_last_cal_temperature(session):
     last_cal_temp = session.get_last_cal_temp(0)
-    assert last_cal_temp == 25   # last_cal_temp should be 25 for simulated 408x devices; 407x and 4065 returns 0 
+    assert last_cal_temp == 25   # last_cal_temp should be 25 for simulated 408x devices; 407x and 4065 returns 0
 
 
 def test_trigger_max_time_exceeded_errror(session):
