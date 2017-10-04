@@ -158,7 +158,6 @@ def test_get_auto_range_value(session):
         auto_range_value_function = session.get_auto_range_value()
         assert auto_range_value_function == auto_range_value_property
         assert auto_range_value_function == 300   # simulated device auto_range_value to maximum 300
-        assert auto_range_value_function == auto_range_value_property
 
 
 def test_get_cal_date_time(session):
