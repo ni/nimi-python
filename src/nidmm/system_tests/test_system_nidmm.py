@@ -200,19 +200,23 @@ def test_self_cal(session):
 
 
 def test_configure_functions(session):
-    session.configure_ac_bandwidth(1, 300)
-    assert session.ac_min_freq == 1
+    session.configure_ac_bandwidth(2, 300)
+    assert session.ac_min_freq == 2
     assert session.ac_max_freq == 300
-    session.configure_rtd_custom(3.9083e-3, -5.775e-7, -4.183e-12)
-    assert session.temp_rtd_a == 3.9083e-3
-    assert session.temp_rtd_b == -5.775e-7
-    assert session.temp_rtd_c == -4.183e-12
-    session.configure_rtd_type(nidmm.RTDType.PT_3750, 100)
-    assert session.temp_rtd_type == nidmm.RTDType.PT_3750
-    assert session.temp_rtd_res == 100
-    session.configure_thermistor_custom(1.0295e-3, 2.391e-4, 1.568e-7)
-    session.configure_thermocouple(nidmm.ThermocoupleType.J, nidmm.ThermocoupleReferenceJunctionType.FIXED)
-    assert session.temp_tc_type == nidmm.ThermocoupleType.J
+    session.configure_rtd_type(nidmm.RTDType.CUSTOM, 110)
+    assert session.temp_rtd_type == nidmm.RTDType.CUSTOM
+    session.configure_rtd_custom(0.1, 0.2, 0.3)
+    assert session.temp_rtd_a == 0.1
+    assert session.temp_rtd_b == 0.2
+    assert session.temp_rtd_c == 0.3
+    assert session.temp_rtd_res == 110
+    session.temp_thermistor_type = nidmm.ThermistorType.CUSTOM
+    session.configure_thermistor_custom(0.1, 0.2, 0.3)
+    assert session.temp_thermistor_a == 0.1
+    assert session.temp_thermistor_b == 0.2
+    assert session.temp_thermistor_c == 0.3
+    session.configure_thermocouple(nidmm.ThermocoupleType.K, nidmm.ThermocoupleReferenceJunctionType.FIXED)
+    assert session.temp_tc_type == nidmm.ThermocoupleType.K
     assert session.temp_tc_ref_junc_type == nidmm.ThermocoupleReferenceJunctionType.FIXED
     session.configure_open_cable_comp_values(100, 101)
     assert session.open_cable_comp_conductance == 100
@@ -220,8 +224,8 @@ def test_configure_functions(session):
     session.configure_short_cable_comp_values(100, 101)
     assert session.short_cable_comp_resistance == 100
     assert session.short_cable_comp_reactance == 101
-    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, 500)
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 100, 100000, 400)
     assert session.function == nidmm.Function.WAVEFORM_VOLTAGE
-    assert session.range == 10
-    assert session.waveform_rate == 1800000
-    assert session.waveform_points == 500
+    assert session.range == 100
+    assert session.waveform_rate == 100000
+    assert session.waveform_points == 400
