@@ -545,3 +545,19 @@ class TestSession(object):
             from mock import call
             calls = [call(SESSION_NUM_FOR_TEST, 0), call(SESSION_NUM_FOR_TEST, 1)]  # 0 is the value of the default of nifake.Turtle.LEONARDO, 1 is the value of nifake.Turtle.DONATELLO
             self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
+
+    def test_set_bool_attribute(self):
+        self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
+        attribute_id = 1000000
+        attrib_bool = True
+        with nifake.Session('dev1') as session:
+            session.read_write_bool = attrib_bool
+            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
+
+    def test_set_vi_string_attribute(self):
+        self.patched_library.niFake_SetAttributeViString.side_effect = self.side_effects_helper.niFake_SetAttributeViString
+        attribute_id = 1000002
+        attrib_string = 'This is test string'
+        with nifake.Session('dev1') as session:
+            session.read_write_string = attrib_string
+            self.patched_library.niFake_SetAttributeViString.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, b'This is test string')
