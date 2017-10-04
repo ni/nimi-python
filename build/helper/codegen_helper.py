@@ -167,7 +167,7 @@ def _get_output_param_return_snippet(output_parameter, parameters):
     if output_parameter['enum'] is not None:
         return_type_snippet = 'enums.' + output_parameter['enum'] + '('
     else:
-        return_type_snippet = 'python_types.' + output_parameter['python_type'] + '('
+        return_type_snippet = output_parameter['python_type'] + '('
 
     if output_parameter['is_buffer']:
         if output_parameter['type'] == 'ViChar' or output_parameter['type'] == 'ViString':

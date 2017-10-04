@@ -65,7 +65,6 @@ from ${module_name} import ctypes_types
 from ${module_name} import enums
 from ${module_name} import errors
 from ${module_name} import library_singleton
-from ${module_name} import python_types
 
 
 % if session_context_manager is not None:
@@ -130,9 +129,9 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParamListType
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
-            Use _get_error_message instead. It doesn't require a session.
+            Use _error_message instead. It doesn't require a session.
             '''
-            error_string = self._get_error_message(error_code)
+            error_string = self._error_message(error_code)
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
