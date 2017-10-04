@@ -160,5 +160,6 @@ def test_functions_disable(session):
 
 
 def test_error_message(session):
+    # Testing a private function, as there is no way to natively get to this function on a simulated session.
     message = session._error_message(-1074135027)
     assert message == 'IVI:  (Hex 0xBFFA000D) Attribute is read-only.'
