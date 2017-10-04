@@ -1,5 +1,6 @@
 import nidmm
 import pytest
+import re
 import time
 
 
@@ -135,7 +136,6 @@ def test_disable(session):
         backlog, acquisition_state = session.read_status()
         assert acquisition_state == nidmm.AcquisitionStatus.FINISHED_WITH_BACKLOG
         session.disable()
-        time.sleep(0.1)
         backlog, acquisition_state = session.read_status()
         assert acquisition_state == nidmm.AcquisitionStatus.NO_ACQUISITION_IN_PROGRESS
 
@@ -143,26 +143,21 @@ def test_disable(session):
 def test_fetch_multiple(session):
     session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 10, 5.5)
     session.configure_multi_point(sample_count=10, trigger_count=1)
-    iteration = 0
     with session.initiate():
-        while True:
-            time.sleep(0.1)
-            backlog, acquisition_state = session.read_status()
-            measurements = session.fetch_multi_point(5)
-            assert len(measurements[0]) == 5
-            iteration += 1
-            if (iteration == 2):
-                backlog, acquisition_state = session.read_status()
-                assert backlog == 0
-                assert acquisition_state == nidmm.AcquisitionStatus.FINISHED_WITH_NO_BACKLOG
-                break
+        measurements = session.fetch_multi_point(5)
+        assert len(measurements[0]) == 5
+        measurements = session.fetch_multi_point(5)
+        backlog, acquisition_state = session.read_status()
+        assert acquisition_state == nidmm.AcquisitionStatus.FINISHED_WITH_NO_BACKLOG
 
 
 def test_get_auto_range_value(session):
     with session.initiate():
         session.fetch()
-        auto_range_value = session.get_auto_range_value()
-        assert auto_range_value == 300   # simulated device auto_range_value to maximum 300
+        auto_range_value_property = session.auto_range_value
+        auto_range_value_function = session.get_auto_range_value()
+        assert auto_range_value_function == auto_range_value_property   
+        assert auto_range_value_function == 300   # simulated device auto_range_value to maximum 300
 
 
 def test_get_cal_date_time(session):
@@ -171,11 +166,34 @@ def test_get_cal_date_time(session):
     assert day == 1
     assert year == 1940
     assert hour == 0
-    assert minute == 0
-    ''' cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00 '''
+    assert minute == 0   # cal_date_and_time should be 03/01/1940:00:00 for simulated 408x devices; 407x and 4065 returns 00/00/0000:00:00 
 
 
 def test_get_last_cal_temperature(session):
     last_cal_temp = session.get_last_cal_temp(0)
-    assert last_cal_temp == 25
-    '''last_cal_temp should be 25 for simulated 408x devices; 407x and 4065 returns 0 '''
+    assert last_cal_temp == 25   # last_cal_temp should be 25 for simulated 408x devices; 407x and 4065 returns 0 
+
+
+def test_trigger_max_time_exceeded_errror(session):
+    try:
+        session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 10, 5.5)
+        session.configure_multi_point(sample_count=10, trigger_count=1)
+        measurements, numberOfMeasurements = session.read_multi_point(15)
+    except nidmm.Error as e:
+        assert e.code == -1074126845  # Max Time exceeded before operation completed
+
+
+'''
+# TODO(injaleea): Enable test after #396 is fixed
+def test_revision_query_string(session):
+    instr_driver_version, firmware_revision = session.revision_query()
+    pattern = re.compile("\d+\.\d+\.\d")
+    assert pattern.match(instr_driver_version)  # Assuming driver version will be always Major.Minor.Build format
+'''
+
+
+def test_self_cal(session):
+    try:
+        session.self_cal()
+    except nidmm.Error as e:
+        assert False
