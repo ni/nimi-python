@@ -77,6 +77,15 @@ def _add_is_error_handling(f):
 
 def _add_buffer_info(parameter):
     '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
+
+    # We are going to treat ViChar[], ViString, ViConstString and ViRsrc the same. For simplicity in the generated
+    # code, we will treat them as 'ViChar' and is_buffer true
+    t = parameter['type']
+    if (t.find('[ ]') > 0) or (t.find('[]') > 0) or t == 'ViString' or t == 'ViConstString' or t == 'ViRsrc':
+        parameter['type'] = 'ViChar'
+        parameter['original_type'] = t
+        parameter['is_buffer'] = True
+
     try:
         parameter['size']
         parameter['is_buffer'] = True
@@ -98,14 +107,12 @@ def _add_library_method_call_snippet(parameter, session_handle_parameter_name):
         else:
             library_method_call_snippet = parameter['python_name']
             library_method_call_snippet += '.value' if parameter['enum'] is not None else ''
-            if parameter['type'] == 'ViString' or parameter['type'] == 'ViConstString' or parameter['type'] == 'ViRsrc':
+            if parameter['type'] == 'ViChar':
                 library_method_call_snippet += '.encode(\'ascii\')'
     else:
         assert parameter['direction'] == 'out', pp.pformat(parameter)
         if parameter['size']['mechanism'] == 'ivi-dance':
             library_method_call_snippet = parameter['ctypes_variable_name']
-        elif parameter['is_buffer']:
-            library_method_call_snippet = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + parameter['ctypes_type'] + '))'
         else:
             library_method_call_snippet = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
     parameter['library_method_call_snippet'] = library_method_call_snippet
@@ -165,11 +172,11 @@ def add_all_function_metadata(functions, config):
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
         for p in functions[f]['parameters']:
+            _add_buffer_info(p)
             _add_python_parameter_name(p)
             _add_python_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
-            _add_buffer_info(p)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
@@ -178,27 +185,27 @@ def add_all_function_metadata(functions, config):
 
 
 # Unit Tests
-def _compare_values(actual, expected):
+def _compare_values(actual, expected, k):
     if type(actual) is dict:
         _compare_dicts(actual, expected)
     elif type(actual) is list:
         _compare_lists(actual, expected)
     else:
-        assert actual == expected, 'Value mismatch, {0} != {1}'.format(actual, expected)
+        assert actual == expected, "Value mismatch with key/index '{0}', {1} != {2}".format(k, actual, expected)
 
 
 def _compare_lists(actual, expected):
     assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
     assert len(actual) == len(expected), 'Length mismatch, {0} != {1}'.format(len(actual), len(expected))
     for k in range(len(actual)):
-        _compare_values(actual[k], expected[k])
+        _compare_values(actual[k], expected[k], k)
 
 
 def _compare_dicts(actual, expected):
     assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
     for k in actual:
         assert k in expected, 'Key {0} not in expected'.format(k)
-        _compare_values(actual[k], expected[k])
+        _compare_values(actual[k], expected[k], k)
     for k in expected:
         assert k in actual, 'Key {0} not in actual'.format(k)
 
@@ -273,9 +280,9 @@ def test_add_all_metadata_simple():
                     'library_method_call_snippet': 'self._vi',
                 },
                 {
-                    'ctypes_type': 'ViString',
+                    'ctypes_type': 'ViChar',
                     'ctypes_variable_name': 'channel_name_ctype',
-                    'ctypes_type_library_call': 'ViString',
+                    'ctypes_type_library_call': 'ViChar',
                     'direction': 'in',
                     'documentation': {
                         'description': 'The channel to call this on.'
@@ -289,7 +296,8 @@ def test_add_all_metadata_simple():
                     'python_name_with_default': 'channel_name',
                     'python_name_with_doc_default': 'channel_name',
                     'size': {'mechanism': 'fixed', 'value': 1},
-                    'type': 'ViString',
+                    'type': 'ViChar',
+                    'original_type': 'ViString',
                     'library_method_call_snippet': 'self._repeated_capability.encode(\'ascii\')',
                 },
             ],

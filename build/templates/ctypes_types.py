@@ -5,10 +5,6 @@ class ViStatus(ctypes.c_long):  # noqa: N801
     pass
 
 
-class ViRsrc(ctypes.c_char_p):  # noqa: N801
-    pass
-
-
 class ViSession(ctypes.c_ulong):  # noqa: N801
     pass
 
@@ -37,18 +33,8 @@ class ViInt64(ctypes.c_longlong):  # noqa: N801
     pass
 
 
-class ViString(ctypes.c_char_p):  # noqa: N801
-    pass
-
-
 class ViAttr(ctypes.c_long):  # noqa: N801
     pass
-
-
-class ViConstString(ViString):  # noqa: N801
-    @property
-    def value(self):  # Makes 'value' readonly
-        return super(ViConstString, ViString).value
 
 
 class ViBoolean(ctypes.c_ushort):  # noqa: N801
