@@ -469,22 +469,6 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == 'Failed to retrieve error description.'
 
-    def test_set_bool_attribute(self):
-        self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
-        attribute_id = 1000000
-        attrib_bool = True
-        with nifake.Session('dev1') as session:
-            session.read_write_bool = attrib_bool
-            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
-
-    def test_set_vi_string_attribute(self):
-        self.patched_library.niFake_SetAttributeViString.side_effect = self.side_effects_helper.niFake_SetAttributeViString
-        attribute_id = 1000002
-        attrib_string = b'This is test string'
-        with nifake.Session('dev1') as session:
-            session.read_write_string = attrib_string
-            self.patched_library.niFake_SetAttributeViString.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, b'This is test string')
-
     def test_string_with_specified_buffer(self):
         single_character_string = 'a'
         self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
