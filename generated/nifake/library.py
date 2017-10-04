@@ -3,7 +3,7 @@
 import ctypes
 import threading
 
-from nifake.ctypes_types import *  # noqa: F403,H303
+from nifake.visatype import *  # noqa: F403,H303
 
 
 class Library(object):
