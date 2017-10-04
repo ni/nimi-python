@@ -48,7 +48,6 @@ class Library(object):
         self.niDMM_GetSelfCalSupported_cfunc = None
         self.niDMM_InitWithOptions_cfunc = None
         self.niDMM_Initiate_cfunc = None
-        self.niDMM_IsOverRange_cfunc = None
         self.niDMM_PerformOpenCableComp_cfunc = None
         self.niDMM_PerformShortCableComp_cfunc = None
         self.niDMM_Read_cfunc = None
@@ -329,14 +328,6 @@ class Library(object):
                 self.niDMM_Initiate_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Initiate_cfunc(vi).value
-
-    def niDMM_IsOverRange(self, vi, measurement_value, is_over_range):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_IsOverRange_cfunc is None:
-                self.niDMM_IsOverRange_cfunc = self._library.niDMM_IsOverRange
-                self.niDMM_IsOverRange_cfunc.argtypes = [ViSession, ViReal64, ctypes.POINTER(ViBoolean)]  # noqa: F405
-                self.niDMM_IsOverRange_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_IsOverRange_cfunc(vi, measurement_value, is_over_range).value
 
     def niDMM_PerformOpenCableComp(self, vi, conductance, susceptance):  # noqa: N802
         with self._func_lock:

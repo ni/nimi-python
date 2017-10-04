@@ -106,9 +106,6 @@ class SideEffectsHelper(object):
         self._defaults['InitWithOptions']['vi'] = None
         self._defaults['Initiate'] = {}
         self._defaults['Initiate']['return'] = 0
-        self._defaults['IsOverRange'] = {}
-        self._defaults['IsOverRange']['return'] = 0
-        self._defaults['IsOverRange']['isOverRange'] = None
         self._defaults['PerformOpenCableComp'] = {}
         self._defaults['PerformOpenCableComp']['return'] = 0
         self._defaults['PerformOpenCableComp']['conductance'] = None
@@ -406,14 +403,6 @@ class SideEffectsHelper(object):
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
 
-    def niDMM_IsOverRange(self, vi, measurement_value, is_over_range):  # noqa: N802
-        if self._defaults['IsOverRange']['return'] != 0:
-            return self._defaults['IsOverRange']['return']
-        if self._defaults['IsOverRange']['isOverRange'] is None:
-            raise MockFunctionCallError("niDMM_IsOverRange", param='isOverRange')
-        is_over_range.contents.value = self._defaults['IsOverRange']['isOverRange']
-        return self._defaults['IsOverRange']['return']
-
     def niDMM_PerformOpenCableComp(self, vi, conductance, susceptance):  # noqa: N802
         if self._defaults['PerformOpenCableComp']['return'] != 0:
             return self._defaults['PerformOpenCableComp']['return']
@@ -618,8 +607,6 @@ class SideEffectsHelper(object):
         mock_library.niDMM_InitWithOptions.return_value = 0
         mock_library.niDMM_Initiate.side_effect = MockFunctionCallError("niDMM_Initiate")
         mock_library.niDMM_Initiate.return_value = 0
-        mock_library.niDMM_IsOverRange.side_effect = MockFunctionCallError("niDMM_IsOverRange")
-        mock_library.niDMM_IsOverRange.return_value = 0
         mock_library.niDMM_PerformOpenCableComp.side_effect = MockFunctionCallError("niDMM_PerformOpenCableComp")
         mock_library.niDMM_PerformOpenCableComp.return_value = 0
         mock_library.niDMM_PerformShortCableComp.side_effect = MockFunctionCallError("niDMM_PerformShortCableComp")

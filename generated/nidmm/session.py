@@ -2060,34 +2060,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def is_over_range(self, measurement_value):
-        '''is_over_range
-
-        Takes a **Measurement_Value** and determines if the value is a valid
-        measurement or a value indicating that an overrange condition occurred.
-
-        Args:
-            measurement_value (float):The measured value returned from the DMM.
-
-                Note:
-                If an overrange condition occurs, the **Measurement_Value** contains
-                an IEEE-defined NaN (Not a Number) value.
-
-        Returns:
-            is_over_range (bool):Returns whether the measurement value is a valid measurement or an
-                overrange condition.
-
-                +----------+---+-----------------------------------------------------------+
-                | VI_TRUE  | 1 | The value indicates that an overrange condition occurred. |
-                +----------+---+-----------------------------------------------------------+
-                | VI_FALSE | 0 | The value is a valid measurement.                         |
-                +----------+---+-----------------------------------------------------------+
-        '''
-        is_over_range_ctype = ctypes_types.ViBoolean(0)
-        error_code = self._library.niDMM_IsOverRange(self._vi, measurement_value, ctypes.pointer(is_over_range_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(is_over_range_ctype.value)
-
     def perform_open_cable_comp(self):
         '''perform_open_cable_comp
 

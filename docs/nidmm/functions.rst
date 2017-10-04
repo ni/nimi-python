@@ -1010,40 +1010,6 @@ nidmm.Session methods
             +-----------+---+-------------------------------------------------------------+
 
 
-.. function:: is_over_range(measurement_value)
-
-    Takes a **Measurement\_Value** and determines if the value is a valid
-    measurement or a value indicating that an overrange condition occurred.
-
-    
-
-
-    :param measurement_value:
-
-
-        The measured value returned from the DMM.
-
-        
-
-        .. note:: If an overrange condition occurs, the **Measurement\_Value** contains
-            an IEEE-defined NaN (Not a Number) value.
-
-    :type measurement_value: float
-
-    :rtype: bool
-    :return:
-
-
-            Returns whether the measurement value is a valid measurement or an
-            overrange condition.
-
-            +-----------+---+-----------------------------------------------------------+
-            | VI\_TRUE  | 1 | The value indicates that an overrange condition occurred. |
-            +-----------+---+-----------------------------------------------------------+
-            | VI\_FALSE | 0 | The value is a valid measurement.                         |
-            +-----------+---+-----------------------------------------------------------+
-
-
 .. function:: perform_open_cable_comp()
 
     For the NI 4082 and NI 4072 only, performs the open cable compensation

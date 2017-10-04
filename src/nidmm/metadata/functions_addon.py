@@ -34,20 +34,21 @@ functions_codegen_method = {
     'GetCalCount':                     { 'codegen_method': 'no',       },  # Calibration function not exposed in Python API
     'FormatMeasAbsolute':              { 'codegen_method': 'no',       },  # Utility function for C customers
     'IsUnderRange':                    { 'codegen_method': 'no',       },  # Utility function for C customers
-    'ConfigureThermistorType':         { 'codegen_method': 'no',       },  # Utility function for C customers
-    'ConfigureTransducerType':         { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureTriggerSlope':           { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureSampleTriggerSlope':     { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureMeasCompleteDest':       { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureMeasCompleteSlope':      { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureAutoZeroMode':           { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureCableCompType':          { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureCurrentSource':          { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureFixedRefJunction':       { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureFrequencyVoltageRange':  { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureOffsetCompOhms':         { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureWaveformCoupling':       { 'codegen_method': 'no',       },  # Attribute already available
-    'ConfigureADCCalibration':         { 'codegen_method': 'no',       },  # Attribute already available
+    'IsOverRange':                     { 'codegen_method': 'no',       },  # Utility function for C customers
+    'ConfigureThermistorType':         { 'codegen_method': 'no',       },
+    'ConfigureTransducerType':         { 'codegen_method': 'no',       },
+    'ConfigureTriggerSlope':           { 'codegen_method': 'no',       },
+    'ConfigureSampleTriggerSlope':     { 'codegen_method': 'no',       },
+    'ConfigureMeasCompleteDest':       { 'codegen_method': 'no',       },
+    'ConfigureMeasCompleteSlope':      { 'codegen_method': 'no',       },
+    'ConfigureAutoZeroMode':           { 'codegen_method': 'no',       },
+    'ConfigureCableCompType':          { 'codegen_method': 'no',       },
+    'ConfigureCurrentSource':          { 'codegen_method': 'no',       },
+    'ConfigureFixedRefJunction':       { 'codegen_method': 'no',       },
+    'ConfigureFrequencyVoltageRange':  { 'codegen_method': 'no',       },
+    'ConfigureOffsetCompOhms':         { 'codegen_method': 'no',       },
+    'ConfigureWaveformCoupling':       { 'codegen_method': 'no',       },
+    'ConfigureADCCalibration':         { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
