@@ -105,7 +105,7 @@ def _add_library_method_call_snippet(parameter, session_handle_parameter_name):
         if parameter['size']['mechanism'] == 'ivi-dance':
             library_method_call_snippet = parameter['ctypes_variable_name']
         elif parameter['is_buffer']:
-            library_method_call_snippet = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + parameter['ctypes_type'] + '))'
+            library_method_call_snippet = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(visatype.' + parameter['ctypes_type'] + '))'
         else:
             library_method_call_snippet = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
     parameter['library_method_call_snippet'] = library_method_call_snippet
