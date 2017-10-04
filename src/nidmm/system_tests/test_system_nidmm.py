@@ -198,12 +198,13 @@ def test_self_cal(session):
     except nidmm.Error as e:
         assert False
 
+
 def test_configure_functions(session):
-    session.configure_ac_bandwidth(1,300)
+    session.configure_ac_bandwidth(1, 300)
     session.configure_rtd_custom(3.9083e-3, -5.775e-7, -4.183e-12)
     session.configure_rtd_type(nidmm.RTDType.PT_3750, 100)
     session.configure_thermistor_custom(1.0295e-3, 2.391e-4, 1.568e-7)
     session.configure_thermocouple(nidmm.ThermocoupleType.J, nidmm.ThermocoupleReferenceJunctionType.FIXED)
     session.configure_open_cable_comp_values(100, 101)
-    session.configure_short_cable_comp_values(100,101)
-    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000,500)
+    session.configure_short_cable_comp_values(100, 101)
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, 500)
