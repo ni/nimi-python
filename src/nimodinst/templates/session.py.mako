@@ -16,7 +16,6 @@ import ctypes
 from ${module_name} import ctypes_types
 from ${module_name} import errors
 from ${module_name} import library_singleton
-from ${module_name} import python_types
 
 
 class AttributeViInt32(object):
