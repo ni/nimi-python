@@ -2,7 +2,7 @@
 
 import ctypes
 
-import nidmm.ctypes_types
+import nidmm.visatype
 
 
 class MockFunctionCallError(Exception):
@@ -410,8 +410,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetAttributeViString", param='attributeValue')
         if buffer_size == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        t = nidmm.ctypes_types.ViString(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nidmm.ctypes_types.ViString).value
+        t = nidmm.visatype.ViString(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
+        attribute_value.value = ctypes.cast(t, nidmm.visatype.ViString).value
         return self._defaults['GetAttributeViString']['return']
 
     def niDMM_GetAutoRangeValue(self, vi, actual_range):  # noqa: N802
@@ -460,8 +460,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetError", param='description')
         if buffer_size == 0:
             return len(self._defaults['GetError']['description'])
-        t = nidmm.ctypes_types.ViString(self._defaults['GetError']['description'].encode('ascii'))
-        description.value = ctypes.cast(t, nidmm.ctypes_types.ViString).value
+        t = nidmm.visatype.ViString(self._defaults['GetError']['description'].encode('ascii'))
+        description.value = ctypes.cast(t, nidmm.visatype.ViString).value
         return self._defaults['GetError']['return']
 
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802

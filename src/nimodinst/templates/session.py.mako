@@ -13,9 +13,9 @@
 %>\
 
 import ctypes
-from ${module_name} import ctypes_types
 from ${module_name} import errors
 from ${module_name} import library_singleton
+from ${module_name} import visatype
 
 
 class AttributeViInt32(object):
@@ -174,7 +174,7 @@ class Session(object):
         error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL, {'session_handle_parameter_name': '_' + config['session_handle_parameter_name']})})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
-        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), visatype.${ivi_dance_parameter['ctypes_type']})
         error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL, {'session_handle_parameter_name': '_' + config['session_handle_parameter_name']})})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}

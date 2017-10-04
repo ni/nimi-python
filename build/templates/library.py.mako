@@ -16,7 +16,7 @@ functions = helper.filter_codegen_functions(functions)
 import ctypes
 import threading
 
-from ${module_name}.ctypes_types import *  # noqa: F403,H303
+from ${module_name}.visatype import *  # noqa: F403,H303
 
 
 class Library(object):

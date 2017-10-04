@@ -1,6 +1,11 @@
 import ctypes
 
 
+'''Definitions of the VISA types used by the C API of the driver runtime. These are subclases of ctypes types so can
+be used directly to call into the library.
+'''
+
+
 class ViStatus(ctypes.c_long):  # noqa: N801
     pass
 

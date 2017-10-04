@@ -52,7 +52,7 @@ ${encoding_tag}
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
-        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
+        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), visatype.${ivi_dance_parameter['ctypes_type']})
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(parameters)}
@@ -61,10 +61,10 @@ ${encoding_tag}
 import ctypes
 
 from ${module_name} import attributes
-from ${module_name} import ctypes_types
 from ${module_name} import enums
 from ${module_name} import errors
 from ${module_name} import library_singleton
+from ${module_name} import visatype
 
 
 % if session_context_manager is not None:

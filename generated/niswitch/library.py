@@ -3,7 +3,7 @@
 import ctypes
 import threading
 
-from niswitch.ctypes_types import *  # noqa: F403,H303
+from niswitch.visatype import *  # noqa: F403,H303
 
 
 class Library(object):
