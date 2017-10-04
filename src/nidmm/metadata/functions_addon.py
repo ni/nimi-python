@@ -34,31 +34,34 @@ functions_codegen_method = {
     'GetCalCount':                     { 'codegen_method': 'no',       },  # Calibration function not exposed in Python API
     'FormatMeasAbsolute':              { 'codegen_method': 'no',       },  # Utility function for C customers
     'IsUnderRange':                    { 'codegen_method': 'no',       },  # Utility function for C customers
-    'IsOverRange':                     { 'codegen_method': 'no',       },  # Utility function for C customers
+    'ConfigureThermistorType':         { 'codegen_method': 'no',       },  # Utility function for C customers
+    'ConfigureTransducerType':         { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureTriggerSlope':           { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureSampleTriggerSlope':     { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureMeasCompleteDest':       { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureMeasCompleteSlope':      { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureAutoZeroMode':           { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureCableCompType':          { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureCurrentSource':          { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureFixedRefJunction':       { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureFrequencyVoltageRange':  { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureOffsetCompOhms':         { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureWaveformCoupling':       { 'codegen_method': 'no',       },  # Attribute already available
+    'ConfigureADCCalibration':         { 'codegen_method': 'no',       },  # Attribute already available
 }
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    'ConfigureTrigger':             { 'parameters': { 1: { 'enum': 'TriggerSource',             }, }, },
-    'ConfigureMeasCompleteDest':    { 'parameters': { 1: { 'enum': 'MeasurementCompleteDest',   }, }, },
-    'ConfigureMultiPoint':          { 'parameters': { 3: { 'enum': 'SampleTrigger',             }, }, },
-    'ConfigureTriggerSlope':        { 'parameters': { 1: { 'enum': 'Slope',                     }, }, },
-    'GetApertureTimeInfo':          { 'parameters': { 2: { 'enum': 'ApertureTimeUnits',         }, }, },
-    'ConfigureAutoZeroMode':        { 'parameters': { 1: { 'enum': 'AutoZero',                  }, }, },
-    'ConfigureMeasurementDigits':   { 'parameters': { 1: { 'enum': 'Function',                  }, }, },
-    'ConfigureMeasurementAbsolute': { 'parameters': { 1: { 'enum': 'Function',                  }, }, },
-    'ConfigureMeasCompleteSlope':   { 'parameters': { 1: { 'enum': 'Slope',                     }, }, },
-    'ConfigureSampleTriggerSlope':  { 'parameters': { 1: { 'enum': 'Slope',                     }, }, },
-    'ReadStatus':                   { 'parameters': { 2: { 'enum': 'AcquisitionStatus',         }, }, },
-    'ConfigureADCCalibration':      { 'parameters': { 1: { 'enum': 'ADCCalibration',            }, }, },
-    'ConfigureOffsetCompOhms':      { 'parameters': { 1: { 'enum': 'OffsetCompensatedOhms',     }, }, },
-    'ConfigureCurrentSource':       { 'parameters': { 1: { 'enum': 'CurrentSource',             }, }, },
-    'ConfigureCableCompType':       { 'parameters': { 1: { 'enum': 'CableCompensationType',     }, }, },
-    'ConfigureWaveformAcquisition': { 'parameters': { 1: { 'enum': 'Function',                  }, }, },
-    'ConfigureWaveformCoupling':    { 'parameters': { 1: { 'enum': 'WaveformCouplingMode',      }, }, },
-    'ConfigureTransducerType':      { 'parameters': { 1: { 'enum': 'TemperatureTransducerType', }, }, },
-    'ConfigureThermistorType':      { 'parameters': { 1: { 'enum': 'TemperatureThermistorType', }, }, },
-    'ConfigureThermocouple':        { 'parameters': { 1: { 'enum': 'ThermocoupleType',          }, }, },
+    'ConfigureTrigger':             { 'parameters': { 1: { 'enum': 'TriggerSource',                     }, }, },
+    'ConfigureMultiPoint':          { 'parameters': { 3: { 'enum': 'SampleTrigger',                     }, }, },
+    'GetApertureTimeInfo':          { 'parameters': { 2: { 'enum': 'ApertureTimeUnits',                 }, }, },
+    'ConfigureMeasurementDigits':   { 'parameters': { 1: { 'enum': 'Function',                          }, }, },
+    'ConfigureMeasurementAbsolute': { 'parameters': { 1: { 'enum': 'Function',                          }, }, },
+    'ReadStatus':                   { 'parameters': { 2: { 'enum': 'AcquisitionStatus',                 }, }, },
+    'ConfigureWaveformAcquisition': { 'parameters': { 1: { 'enum': 'Function',                          }, }, },
+    'ConfigureThermocouple':        { 'parameters': { 1: { 'enum': 'ThermocoupleType',                  },
+                                                      2: { 'enum': 'ThermocoupleReferenceJunctionType', },    }, },
+    'ConfigureRTDType':             { 'parameters': { 1: { 'enum': 'RTDType',                           }, }, },
 
 }
 
