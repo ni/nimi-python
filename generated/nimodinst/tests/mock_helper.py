@@ -52,8 +52,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niModInst_GetExtendedErrorInfo", param='errorInfo')
         if error_info_buffer_size == 0:
             return len(self._defaults['GetExtendedErrorInfo']['errorInfo'])
-        t = nimodinst.ctypes_types.ViString_ctype(self._defaults['GetExtendedErrorInfo']['errorInfo'].encode('ascii'))
-        error_info.value = ctypes.cast(t, nimodinst.ctypes_types.ViString_ctype).value
+        t = nimodinst.ctypes_types.ViString(self._defaults['GetExtendedErrorInfo']['errorInfo'].encode('ascii'))
+        error_info.value = ctypes.cast(t, nimodinst.ctypes_types.ViString).value
         return self._defaults['GetExtendedErrorInfo']['return']
 
     def niModInst_GetInstalledDeviceAttributeViInt32(self, handle, index, attribute_id, attribute_value):  # noqa: N802
@@ -71,8 +71,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViString", param='attributeValue')
         if attribute_value_buffer_size == 0:
             return len(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'])
-        t = nimodinst.ctypes_types.ViString_ctype(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nimodinst.ctypes_types.ViString_ctype).value
+        t = nimodinst.ctypes_types.ViString(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'].encode('ascii'))
+        attribute_value.value = ctypes.cast(t, nimodinst.ctypes_types.ViString).value
         return self._defaults['GetInstalledDeviceAttributeViString']['return']
 
     def niModInst_OpenInstalledDevicesSession(self, driver, handle, device_count):  # noqa: N802

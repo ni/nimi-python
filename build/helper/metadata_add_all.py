@@ -50,7 +50,7 @@ def _add_ctypes_variable_name(parameter):
 
 def _add_ctypes_type(parameter):
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
-    parameter['ctypes_type'] = parameter['type'] + '_ctype'
+    parameter['ctypes_type'] = parameter['type']
     if parameter['direction'] == 'out':
         if parameter['type'] == 'ViString' or parameter['type'] == 'ViRsrc' or parameter['type'] == 'ViConstString':
             # These are defined as c_char_p which is already a pointer!
@@ -61,12 +61,6 @@ def _add_ctypes_type(parameter):
         parameter['ctypes_type_library_call'] = parameter['ctypes_type']
 
     return parameter
-
-
-def _add_ctypes_return_type(f):
-    '''Adds the ctypes_type key/value pair to the function metadata for the return type'''
-    f['returns_ctype'] = f['returns'] + '_ctype'
-    return f
 
 
 def _add_is_error_handling(f):
@@ -168,7 +162,6 @@ def add_all_function_metadata(functions, config):
     for f in functions:
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
-        _add_ctypes_return_type(functions[f])
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
         for p in functions[f]['parameters']:
@@ -257,9 +250,9 @@ def test_add_all_metadata_simple():
             'is_error_handling': False,
             'parameters': [
                 {
-                    'ctypes_type': 'ViSession_ctype',
+                    'ctypes_type': 'ViSession',
                     'ctypes_variable_name': 'vi_ctype',
-                    'ctypes_type_library_call': 'ViSession_ctype',
+                    'ctypes_type_library_call': 'ViSession',
                     'direction': 'in',
                     'documentation': {
                         'description': 'Identifies a particular instrument session.'
@@ -280,9 +273,9 @@ def test_add_all_metadata_simple():
                     'library_method_call_snippet': 'self._vi',
                 },
                 {
-                    'ctypes_type': 'ViString_ctype',
+                    'ctypes_type': 'ViString',
                     'ctypes_variable_name': 'channel_name_ctype',
-                    'ctypes_type_library_call': 'ViString_ctype',
+                    'ctypes_type_library_call': 'ViString',
                     'direction': 'in',
                     'documentation': {
                         'description': 'The channel to call this on.'
@@ -302,7 +295,6 @@ def test_add_all_metadata_simple():
             ],
             'python_name': 'make_a_foo',
             'returns': 'ViStatus',
-            'returns_ctype': 'ViStatus_ctype',
         }
     }
 
