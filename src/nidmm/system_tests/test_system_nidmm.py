@@ -1,6 +1,6 @@
 import nidmm
 import pytest
-#import re  used in commented test test_revision_query_string. Disabling since flake-8 fails for unused import
+# import re  used in commented test test_revision_query_string. Disabling since flake-8 fails for unused import
 import time
 
 
