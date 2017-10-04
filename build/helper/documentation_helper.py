@@ -1,6 +1,6 @@
 
-from .metadata_filters import extract_input_parameters
-from .metadata_filters import extract_output_parameters
+from .metadata_filters import filter_input_parameters
+from .metadata_filters import filter_output_parameters
 
 from .codegen_helper import get_params_snippet
 from .codegen_helper import ParamListType
@@ -215,7 +215,7 @@ def replace_func_python_name(f_match):
     '''callback function for regex sub command when link needed
 
     Args:
-        m (match object): Match object from the function substitution command
+        f_match (match object): Match object from the function substitution command
 
     Returns:
         str: rst link to function using python name
@@ -223,7 +223,10 @@ def replace_func_python_name(f_match):
     fname = "Unknown"
     if f_match:
         fname = f_match.group(1).replace('.', '').replace(',', '').replace('\\', '')
-        fname = config['functions'][fname]['python_name']
+        try:
+            fname = config['functions'][fname]['python_name']
+        except KeyError as e:
+            print('Warning: "{0}" not found in function metadata. Typo? Generated code will be funky!'.format(fname))
     else:
         print('Unknown function name: {0}'.format(f_match.group(1)))
         print(config['functions'])
@@ -280,25 +283,25 @@ def get_function_rst(fname, config, indent=0):
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
-    input_params = extract_input_parameters(function['parameters'])
+    input_params = filter_input_parameters(function['parameters'])
     if len(input_params) > 0:
         rst += '\n'
     for p in input_params:
         rst += '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
         rst += get_documentation_for_node_rst(p, config, indent + 4)
 
-        p_type = p['intrinsic_type']
+        p_type = p['python_type']
         if p_type.startswith('enums.'):
             p_type = p_type.replace('enums.', '')
             p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
-    output_params = extract_output_parameters(function['parameters'])
+    output_params = filter_output_parameters(function['parameters'])
     if len(output_params) > 1:
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
-            p_type = p['intrinsic_type']
+            p_type = p['python_type']
             if p_type.startswith('enums.'):
                 p_type = p_type.replace('enums.', '')
                 p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
@@ -306,7 +309,7 @@ def get_function_rst(fname, config, indent=0):
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
-        p_type = p['intrinsic_type']
+        p_type = p['python_type']
         if p_type.startswith('enums.'):
             p_type = p_type.replace('enums.', '')
             p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
@@ -330,18 +333,18 @@ def get_function_docstring(fname, config, indent=0):
     function = config['functions'][fname]
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
-    input_params = extract_input_parameters(function['parameters'])
+    input_params = filter_input_parameters(function['parameters'])
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
-        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['intrinsic_type'])
+        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type'])
         docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
-    output_params = extract_output_parameters(function['parameters'])
+    output_params = filter_output_parameters(function['parameters'])
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['intrinsic_type'])
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type'])
             docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     return docstring

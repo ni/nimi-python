@@ -9,14 +9,13 @@
     module_name       = config['module_name']
     c_function_prefix = config['c_function_prefix']
 
-    functions = helper.extract_codegen_functions(functions)
+    functions = helper.filter_codegen_functions(functions)
 %>\
 
 import ctypes
 from ${module_name} import ctypes_types
 from ${module_name} import errors
 from ${module_name} import library_singleton
-from ${module_name} import python_types
 
 
 class AttributeViInt32(object):
@@ -152,10 +151,10 @@ class Session(object):
 <%
     f = functions[func_name]
     parameters = f['parameters']
-    input_parameters = helper.extract_input_parameters(parameters)
-    output_parameters = helper.extract_output_parameters(parameters)
-    enum_input_parameters = helper.extract_enum_parameters(input_parameters)
-    ivi_dance_parameter = helper.extract_ivi_dance_parameter(parameters)
+    input_parameters = helper.filter_input_parameters(parameters)
+    output_parameters = helper.filter_output_parameters(parameters)
+    enum_input_parameters = helper.filter_enum_parameters(input_parameters)
+    ivi_dance_parameter = helper.filter_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.SESSION_METHOD_DECLARATION)}):

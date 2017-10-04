@@ -7,7 +7,6 @@ from nidmm import ctypes_types
 from nidmm import enums
 from nidmm import errors
 from nidmm import library_singleton
-from nidmm import python_types
 
 
 class _Acquisition(object):
@@ -796,12 +795,372 @@ class _SessionBase(object):
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
-            Use _get_error_message instead. It doesn't require a session.
+            Use _error_message instead. It doesn't require a session.
             '''
-            error_string = self._get_error_message(error_code)
+            error_string = self._error_message(error_code)
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
+
+    ''' These are code-generated '''
+
+    def _get_attribute_vi_boolean(self, attribute_id):
+        '''_get_attribute_vi_boolean
+
+        Queries the value of a ViBoolean attribute. You can use this function to
+        get the values of instrument-specific attributes and inherent IVI
+        attributes.
+
+        If the attribute represents an instrument state, this function performs
+        instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular attribute.
+        -  State caching is enabled, and the currently cached value is invalid.
+
+        Args:
+            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+                channel names since they only have a single channel. This parameter is
+                included in order to support interchangeability and upgradability to
+                multiple channel DMMs.
+
+                The default value is " " (an empty string).
+            attribute_id (int):Pass the ID of an attribute.
+
+        Returns:
+            attribute_value (bool):Returns the current value of the attribute. Pass the address of a
+                ViBoolean variable.
+        '''
+        attribute_value_ctype = ctypes_types.ViBoolean(0)
+        error_code = self._library.niDMM_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return bool(attribute_value_ctype.value)
+
+    def _get_attribute_vi_int32(self, attribute_id):
+        '''_get_attribute_vi_int32
+
+        Queries the value of a ViInt32 attribute. You can use this function to
+        get the values of instrument-specific attributes and inherent IVI
+        attributes.
+
+        If the attribute represents an instrument state, this function performs
+        instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular attribute.
+        -  State caching is enabled, and the currently cached value is invalid.
+
+        Args:
+            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+                channel names since they only have a single channel. This parameter is
+                included in order to support interchangeability and upgradability to
+                multiple channel DMMs.
+
+                The default value is " " (an empty string).
+            attribute_id (int):Pass the ID of an attribute.
+
+        Returns:
+            attribute_value (int):Returns the current value of the attribute. Pass the address of a
+                ViInt32 variable.
+        '''
+        attribute_value_ctype = ctypes_types.ViInt32(0)
+        error_code = self._library.niDMM_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(attribute_value_ctype.value)
+
+    def _get_attribute_vi_real64(self, attribute_id):
+        '''_get_attribute_vi_real64
+
+        Queries the value of a ViReal64 attribute. You can use this function to
+        get the values of instrument-specific attributes and inherent IVI
+        attributes.
+
+        If the attribute represents an instrument state, this function performs
+        instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular attribute.
+        -  State caching is enabled, and the currently cached value is invalid.
+
+        Args:
+            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+                channel names since they only have a single channel. This parameter is
+                included in order to support interchangeability and upgradability to
+                multiple channel DMMs.
+
+                The default value is " " (an empty string).
+            attribute_id (int):Pass the ID of an attribute.
+
+        Returns:
+            attribute_value (float):Returns the current value of the attribute. Pass the address of a
+                ViReal64 variable.
+        '''
+        attribute_value_ctype = ctypes_types.ViReal64(0)
+        error_code = self._library.niDMM_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(attribute_value_ctype.value)
+
+    def _get_attribute_vi_string(self, attribute_id):
+        '''_get_attribute_vi_string
+
+        Queries the value of a ViString attribute. You can use this function to
+        get the values of instrument-specific attributes and inherent IVI
+        attributes.
+
+        If the attribute represents an instrument state, this function performs
+        instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular attribute.
+        -  State caching is enabled, and the currently cached value is invalid.
+           You must provide a ViChar array to serve as a buffer for the value.
+           You pass the number of bytes in the buffer as the Array Size
+           parameter.
+
+        Args:
+            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+                channel names since they only have a single channel. This parameter is
+                included in order to support interchangeability and upgradability to
+                multiple channel DMMs.
+
+                The default value is " " (an empty string).
+            attribute_id (int):Pass the ID of an attribute.
+            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
+                **Attribute_Value** parameter.
+
+                If the current value of the attribute, including the terminating NULL
+                byte, contains more bytes that you indicate in this parameter, the
+                function copies **buffer_size**—1 bytes into the buffer, places an
+                ASCII NUL byte at the end of the buffer, and returns the buffer size you
+                must pass to get the entire value. For example, if the value is "123456"
+                and the **buffer_size** is 4, the function places "123" into the buffer
+                and returns 7.
+
+                If you pass a negative number, the function copies the value to the
+                buffer regardless of the number of bytes in the value. If you pass 0,
+                you can pass VI_NULL for the **Attribute_Value** buffer parameter.
+        '''
+        buffer_size = 0
+        attribute_value_ctype = None
+        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size = error_code
+        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
+        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return attribute_value_ctype.value.decode("ascii")
+
+    def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_boolean
+
+        This function sets the value of a ViBoolean attribute.
+
+        This is a low-level function that you can use to set the values of
+        instrument-specific attributes and inherent IVI attributes.
+
+        If the attribute represents an instrument state, this function performs
+        instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular attribute.
+        -  State caching is enabled, and the currently cached value is invalid
+           or is different than the value you specify.
+
+        This instrument driver contains high-level functions that set most of
+        the instrument attributes. It is best to use the high-level driver
+        functions as much as possible. They handle order dependencies and
+        multithread locking for you. In addition, they perform status checking
+        only after setting all of the attributes.
+
+        In contrast, when you set multiple attributes using the SetAttribute
+        functions, the functions check the instrument status after each call.
+        Also, when state caching is enabled, the high-level functions that
+        configure multiple attributes perform instrument I/O only for the
+        attributes whose value you change. Thus, you can safely call the
+        high-level functions without the penalty of redundant instrument I/O.
+
+        Args:
+            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+                channel names since they only have a single channel. This parameter is
+                included in order to support interchangeability and upgradability to
+                multiple channel DMMs.
+
+                The default value is " " (an empty string).
+            attribute_id (int):Pass the ID of an attribute.
+            attribute_value (bool):Pass the value that you want to set the attribute to.
+        '''
+        error_code = self._library.niDMM_SetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_int32(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_int32
+
+        This function sets the value of a ViInt32 attribute.
+
+        This is a low-level function that you can use to set the values of
+        instrument-specific attributes and inherent IVI attributes.
+
+        If the attribute represents an instrument state, this function performs
+        instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular attribute.
+        -  State caching is enabled, and the currently cached value is invalid
+           or is different than the value you specify.
+
+        This instrument driver contains high-level functions that set most of
+        the instrument attributes. It is best to use the high-level driver
+        functions as much as possible. They handle order dependencies and
+        multithread locking for you. In addition, they perform status checking
+        only after setting all of the attributes.
+
+        In contrast, when you set multiple attributes using the SetAttribute
+        functions, the functions check the instrument status after each call.
+        Also, when state caching is enabled, the high-level functions that
+        configure multiple attributes perform instrument I/O only for the
+        attributes whose value you change. Thus, you can safely call the
+        high-level functions without the penalty of redundant instrument I/O.
+
+        Args:
+            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+                channel names since they only have a single channel. This parameter is
+                included in order to support interchangeability and upgradability to
+                multiple channel DMMs.
+
+                The default value is " " (an empty string).
+            attribute_id (int):Pass the ID of an attribute.
+            attribute_value (int):Pass the value that you want to set the attribute to.
+        '''
+        error_code = self._library.niDMM_SetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_real64(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_real64
+
+        This function sets the value of a ViReal64 attribute.
+
+        This is a low-level function that you can use to set the values of
+        instrument-specific attributes and inherent IVI attributes.
+
+        If the attribute represents an instrument state, this function performs
+        instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular attribute.
+        -  State caching is enabled, and the currently cached value is invalid
+           or is different than the value you specify.
+
+        This instrument driver contains high-level functions that set most of
+        the instrument attributes. It is best to use the high-level driver
+        functions as much as possible. They handle order dependencies and
+        multithread locking for you. In addition, they perform status checking
+        only after setting all of the attributes.
+
+        In contrast, when you set multiple attributes using the SetAttribute
+        functions, the functions check the instrument status after each call.
+        Also, when state caching is enabled, the high-level functions that
+        configure multiple attributes perform instrument I/O only for the
+        attributes whose value you change. Thus, you can safely call the
+        high-level functions without the penalty of redundant instrument I/O.
+
+        Args:
+            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+                channel names since they only have a single channel. This parameter is
+                included in order to support interchangeability and upgradability to
+                multiple channel DMMs.
+
+                The default value is " " (an empty string).
+            attribute_id (int):Pass the ID of an attribute.
+            attribute_value (float):Pass the value that you want to set the attribute to.
+        '''
+        error_code = self._library.niDMM_SetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_string(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_string
+
+        This function sets the value of a ViString attribute.
+
+        This is a low-level function that you can use to set the values of
+        instrument-specific attributes and inherent IVI attributes.
+
+        If the attribute represents an instrument state, this function performs
+        instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular attribute.
+        -  State caching is enabled, and the currently cached value is invalid
+           or is different than the value you specify.
+
+        This instrument driver contains high-level functions that set most of
+        the instrument attributes. It is best to use the high-level driver
+        functions as much as possible. They handle order dependencies and
+        multithread locking for you. In addition, they perform status checking
+        only after setting all of the attributes.
+
+        In contrast, when you set multiple attributes using the SetAttribute
+        functions, the functions check the instrument status after each call.
+        Also, when state caching is enabled, the high-level functions that
+        configure multiple attributes perform instrument I/O only for the
+        attributes whose value you change. Thus, you can safely call the
+        high-level functions without the penalty of redundant instrument I/O.
+
+        Args:
+            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+                channel names since they only have a single channel. This parameter is
+                included in order to support interchangeability and upgradability to
+                multiple channel DMMs.
+
+                The default value is " " (an empty string).
+            attribute_id (int):Pass the ID of an attribute.
+            attribute_value (str):Pass the value that you want to set the attribute to.
+        '''
+        error_code = self._library.niDMM_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+
+class _RepeatedCapability(_SessionBase):
+    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
+
+    def __init__(self, vi, repeated_capability):
+        super(_RepeatedCapability, self).__init__(repeated_capability)
+        self._vi = vi
+        self._is_frozen = True
+
+
+class Session(_SessionBase):
+    '''An NI-DMM session to a National Instruments Digital Multimeter'''
+
+    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
+        super(Session, self).__init__(repeated_capability='')
+        self._vi = 0  # This must be set before calling _init_with_options().
+        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._is_frozen = True
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def __getitem__(self, repeated_capability):
+        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
+        return _RepeatedCapability(self._vi, repeated_capability)
+
+    def initiate(self):
+        return _Acquisition(self)
+
+    def close(self):
+        try:
+            self._close()
+        except errors.Error:
+            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
+            print("Failed to close session.")
+        self._vi = 0
 
     ''' These are code-generated '''
 
@@ -1442,7 +1801,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_thermocouple(self, thermocouple_type, reference_junction_type='enums.ThermocoupleReferenceJunctionType.FIXED'):
+    def configure_thermocouple(self, thermocouple_type, reference_junction_type='ThermocoupleReferenceJunctionType.FIXED'):
         '''configure_thermocouple
 
         Configures the thermocouple type and reference junction type for a
@@ -1673,10 +2032,10 @@ class _SessionBase(object):
         Returns:
             reading (float):The measured value returned from the DMM.
         '''
-        reading_ctype = ctypes_types.ViReal64_ctype(0)
+        reading_ctype = ctypes_types.ViReal64(0)
         error_code = self._library.niDMM_Fetch(self._vi, maximum_time, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(reading_ctype.value)
+        return float(reading_ctype.value)
 
     def fetch_multi_point(self, array_size, maximum_time=-1):
         '''fetch_multi_point
@@ -1714,11 +2073,11 @@ class _SessionBase(object):
                 specify for the **Array_Size** parameter.
             actual_number_of_points (int):Indicates the number of measured values actually retrieved from the DMM.
         '''
-        reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
-        actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niDMM_FetchMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
+        reading_array_ctype = (ctypes_types.ViReal64 * array_size)()
+        actual_number_of_points_ctype = ctypes_types.ViInt32(0)
+        error_code = self._library.niDMM_FetchMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [python_types.ViReal64(reading_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
+        return [float(reading_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def fetch_waveform(self, array_size, maximum_time=-1):
         '''fetch_waveform
@@ -1748,11 +2107,11 @@ class _SessionBase(object):
                 data type.
             actual_number_of_points (int):Indicates the number of measured values actually retrieved from the DMM.
         '''
-        waveform_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
-        actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niDMM_FetchWaveform(self._vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
+        waveform_array_ctype = (ctypes_types.ViReal64 * array_size)()
+        actual_number_of_points_ctype = ctypes_types.ViInt32(0)
+        error_code = self._library.niDMM_FetchWaveform(self._vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [python_types.ViReal64(waveform_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
+        return [float(waveform_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def get_aperture_time_info(self):
         '''get_aperture_time_info
@@ -1790,157 +2149,11 @@ class _SessionBase(object):
                 | NIDMM_VAL_POWER_LINE_CYCLES | 1 | Powerline Cycles |
                 +-----------------------------+---+------------------+
         '''
-        aperture_time_ctype = ctypes_types.ViReal64_ctype(0)
-        aperture_time_units_ctype = ctypes_types.ViInt32_ctype(0)
+        aperture_time_ctype = ctypes_types.ViReal64(0)
+        aperture_time_units_ctype = ctypes_types.ViInt32(0)
         error_code = self._library.niDMM_GetApertureTimeInfo(self._vi, ctypes.pointer(aperture_time_ctype), ctypes.pointer(aperture_time_units_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(aperture_time_ctype.value), enums.ApertureTimeUnits(aperture_time_units_ctype.value)
-
-    def _get_attribute_vi_boolean(self, channel_name, attribute_id):
-        '''_get_attribute_vi_boolean
-
-        Queries the value of a ViBoolean attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes.
-
-        If the attribute represents an instrument state, this function performs
-        instrument I/O in the following cases:
-
-        -  State caching is disabled for the entire session or for the
-           particular attribute.
-        -  State caching is enabled, and the currently cached value is invalid.
-
-        Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-
-        Returns:
-            attribute_value (bool):Returns the current value of the attribute. Pass the address of a
-                ViBoolean variable.
-        '''
-        attribute_value_ctype = ctypes_types.ViBoolean_ctype(0)
-        error_code = self._library.niDMM_GetAttributeViBoolean(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(attribute_value_ctype.value)
-
-    def _get_attribute_vi_int32(self, channel_name, attribute_id):
-        '''_get_attribute_vi_int32
-
-        Queries the value of a ViInt32 attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes.
-
-        If the attribute represents an instrument state, this function performs
-        instrument I/O in the following cases:
-
-        -  State caching is disabled for the entire session or for the
-           particular attribute.
-        -  State caching is enabled, and the currently cached value is invalid.
-
-        Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-
-        Returns:
-            attribute_value (int):Returns the current value of the attribute. Pass the address of a
-                ViInt32 variable.
-        '''
-        attribute_value_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niDMM_GetAttributeViInt32(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(attribute_value_ctype.value)
-
-    def _get_attribute_vi_real64(self, channel_name, attribute_id):
-        '''_get_attribute_vi_real64
-
-        Queries the value of a ViReal64 attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes.
-
-        If the attribute represents an instrument state, this function performs
-        instrument I/O in the following cases:
-
-        -  State caching is disabled for the entire session or for the
-           particular attribute.
-        -  State caching is enabled, and the currently cached value is invalid.
-
-        Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-
-        Returns:
-            attribute_value (float):Returns the current value of the attribute. Pass the address of a
-                ViReal64 variable.
-        '''
-        attribute_value_ctype = ctypes_types.ViReal64_ctype(0)
-        error_code = self._library.niDMM_GetAttributeViReal64(self._vi, channel_name.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(attribute_value_ctype.value)
-
-    def _get_attribute_vi_string(self, channel_name, attribute_id):
-        '''_get_attribute_vi_string
-
-        Queries the value of a ViString attribute. You can use this function to
-        get the values of instrument-specific attributes and inherent IVI
-        attributes.
-
-        If the attribute represents an instrument state, this function performs
-        instrument I/O in the following cases:
-
-        -  State caching is disabled for the entire session or for the
-           particular attribute.
-        -  State caching is enabled, and the currently cached value is invalid.
-           You must provide a ViChar array to serve as a buffer for the value.
-           You pass the number of bytes in the buffer as the Array Size
-           parameter.
-
-        Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
-                **Attribute_Value** parameter.
-
-                If the current value of the attribute, including the terminating NULL
-                byte, contains more bytes that you indicate in this parameter, the
-                function copies **buffer_size**—1 bytes into the buffer, places an
-                ASCII NUL byte at the end of the buffer, and returns the buffer size you
-                must pass to get the entire value. For example, if the value is "123456"
-                and the **buffer_size** is 4, the function places "123" into the buffer
-                and returns 7.
-
-                If you pass a negative number, the function copies the value to the
-                buffer regardless of the number of bytes in the value. If you pass 0,
-                you can pass VI_NULL for the **Attribute_Value** buffer parameter.
-        '''
-        buffer_size = 0
-        attribute_value_ctype = None
-        error_code = self._library.niDMM_GetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self._library.niDMM_GetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode("ascii")
+        return float(aperture_time_ctype.value), enums.ApertureTimeUnits(aperture_time_units_ctype.value)
 
     def get_auto_range_value(self):
         '''get_auto_range_value
@@ -1953,10 +2166,10 @@ class _SessionBase(object):
                 the AUTO_RANGE_VALUE attribute. The units of the returned
                 value depend on the function.
         '''
-        actual_range_ctype = ctypes_types.ViReal64_ctype(0)
+        actual_range_ctype = ctypes_types.ViReal64(0)
         error_code = self._library.niDMM_GetAutoRangeValue(self._vi, ctypes.pointer(actual_range_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(actual_range_ctype.value)
+        return float(actual_range_ctype.value)
 
     def get_cal_date_and_time(self, cal_type):
         '''get_cal_date_and_time
@@ -1984,14 +2197,14 @@ class _SessionBase(object):
             hour (int):Indicates the **hour** of the last calibration.
             minute (int):Indicates the **minute** of the last calibration.
         '''
-        month_ctype = ctypes_types.ViInt32_ctype(0)
-        day_ctype = ctypes_types.ViInt32_ctype(0)
-        year_ctype = ctypes_types.ViInt32_ctype(0)
-        hour_ctype = ctypes_types.ViInt32_ctype(0)
-        minute_ctype = ctypes_types.ViInt32_ctype(0)
+        month_ctype = ctypes_types.ViInt32(0)
+        day_ctype = ctypes_types.ViInt32(0)
+        year_ctype = ctypes_types.ViInt32(0)
+        hour_ctype = ctypes_types.ViInt32(0)
+        minute_ctype = ctypes_types.ViInt32(0)
         error_code = self._library.niDMM_GetCalDateAndTime(self._vi, cal_type, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(month_ctype.value), python_types.ViInt32(day_ctype.value), python_types.ViInt32(year_ctype.value), python_types.ViInt32(hour_ctype.value), python_types.ViInt32(minute_ctype.value)
+        return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_dev_temp(self, options=''):
         '''get_dev_temp
@@ -2006,10 +2219,10 @@ class _SessionBase(object):
         Returns:
             temperature (float):Returns the current **temperature** of the device.
         '''
-        temperature_ctype = ctypes_types.ViReal64_ctype(0)
+        temperature_ctype = ctypes_types.ViReal64(0)
         error_code = self._library.niDMM_GetDevTemp(self._vi, options.encode('ascii'), ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(temperature_ctype.value)
+        return float(temperature_ctype.value)
 
     def _get_error(self):
         '''_get_error
@@ -2040,43 +2253,16 @@ class _SessionBase(object):
                 pass 0 for the **Buffer_Size**, you can pass VI_NULL for this
                 parameter.
         '''
-        error_code_ctype = ctypes_types.ViStatus_ctype(0)
+        error_code_ctype = ctypes_types.ViStatus(0)
         buffer_size = 0
         description_ctype = None
         error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
         error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return python_types.ViStatus(error_code_ctype.value), description_ctype.value.decode("ascii")
-
-    def _get_error_message(self, error_code):
-        '''_get_error_message
-
-        Returns the **Error_Message** as a user-readable string for the
-        provided **Error_Code**. Calling this function with a **Buffer_Size**
-        of 0 returns the size needed for the **Error_Message**.
-
-        Args:
-            error_code (int):The error code returned from the instrument for which you want to get a
-                user-readable string.
-            buffer_size (int):Specifies the number of bytes allocated for the **Error_Message**
-                ViChar array. If the error description that this function returns
-                (including terminating NULL byte) is larger than you indicated in
-                **buffer_size**, the error description will be truncated to fit. If you
-                pass 0 for **buffer_size**, the function returns the buffer size needed
-                for **Error_Message**.
-        '''
-        buffer_size = 0
-        error_message_ctype = None
-        error_code = self._library.niDMM_GetErrorMessage(self._vi, error_code, buffer_size, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        error_message_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString_ctype)
-        error_code = self._library.niDMM_GetErrorMessage(self._vi, error_code, buffer_size, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode("ascii")
+        return int(error_code_ctype.value), description_ctype.value.decode("ascii")
 
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
@@ -2100,10 +2286,10 @@ class _SessionBase(object):
         Returns:
             temperature (float):Returns the **temperature** during the last calibration.
         '''
-        temperature_ctype = ctypes_types.ViReal64_ctype(0)
+        temperature_ctype = ctypes_types.ViReal64(0)
         error_code = self._library.niDMM_GetLastCalTemp(self._vi, cal_type, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(temperature_ctype.value)
+        return float(temperature_ctype.value)
 
     def get_measurement_period(self):
         '''get_measurement_period
@@ -2123,10 +2309,10 @@ class _SessionBase(object):
                 Time required for internal measurements, such as
                 AUTO_ZERO, is included.
         '''
-        period_ctype = ctypes_types.ViReal64_ctype(0)
+        period_ctype = ctypes_types.ViReal64(0)
         error_code = self._library.niDMM_GetMeasurementPeriod(self._vi, ctypes.pointer(period_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(period_ctype.value)
+        return float(period_ctype.value)
 
     def get_self_cal_supported(self):
         '''get_self_cal_supported
@@ -2144,10 +2330,10 @@ class _SessionBase(object):
                 | VI_FALSE | 0 | The DMM that you are using cannot perform self-calibration. |
                 +----------+---+-------------------------------------------------------------+
         '''
-        self_cal_supported_ctype = ctypes_types.ViBoolean_ctype(0)
+        self_cal_supported_ctype = ctypes_types.ViBoolean(0)
         error_code = self._library.niDMM_GetSelfCalSupported(self._vi, ctypes.pointer(self_cal_supported_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViBoolean(self_cal_supported_ctype.value)
+        return bool(self_cal_supported_ctype.value)
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
         '''_init_with_options
@@ -2245,10 +2431,10 @@ class _SessionBase(object):
             vi (int):Returns a ViSession handle that you use to identify the instrument in
                 all subsequent instrument driver function calls.
         '''
-        vi_ctype = ctypes_types.ViSession_ctype(0)
+        vi_ctype = ctypes_types.ViSession(0)
         error_code = self._library.niDMM_InitWithOptions(resource_name.encode('ascii'), id_query, reset_device, option_string.encode('ascii'), ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViSession(vi_ctype.value)
+        return int(vi_ctype.value)
 
     def _initiate(self):
         '''_initiate
@@ -2282,11 +2468,11 @@ class _SessionBase(object):
             susceptance (float):**susceptance** is the measured value of open cable compensation
                 **susceptance**.
         '''
-        conductance_ctype = ctypes_types.ViReal64_ctype(0)
-        susceptance_ctype = ctypes_types.ViReal64_ctype(0)
+        conductance_ctype = ctypes_types.ViReal64(0)
+        susceptance_ctype = ctypes_types.ViReal64(0)
         error_code = self._library.niDMM_PerformOpenCableComp(self._vi, ctypes.pointer(conductance_ctype), ctypes.pointer(susceptance_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(conductance_ctype.value), python_types.ViReal64(susceptance_ctype.value)
+        return float(conductance_ctype.value), float(susceptance_ctype.value)
 
     def perform_short_cable_comp(self):
         '''perform_short_cable_comp
@@ -2306,11 +2492,11 @@ class _SessionBase(object):
             reactance (float):**reactance** is the measured value of short cable compensation
                 **reactance**.
         '''
-        resistance_ctype = ctypes_types.ViReal64_ctype(0)
-        reactance_ctype = ctypes_types.ViReal64_ctype(0)
+        resistance_ctype = ctypes_types.ViReal64(0)
+        reactance_ctype = ctypes_types.ViReal64(0)
         error_code = self._library.niDMM_PerformShortCableComp(self._vi, ctypes.pointer(resistance_ctype), ctypes.pointer(reactance_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(resistance_ctype.value), python_types.ViReal64(reactance_ctype.value)
+        return float(resistance_ctype.value), float(reactance_ctype.value)
 
     def read(self, maximum_time=-1):
         '''read
@@ -2332,10 +2518,10 @@ class _SessionBase(object):
         Returns:
             reading (float):The measured value returned from the DMM.
         '''
-        reading_ctype = ctypes_types.ViReal64_ctype(0)
+        reading_ctype = ctypes_types.ViReal64(0)
         error_code = self._library.niDMM_Read(self._vi, maximum_time, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViReal64(reading_ctype.value)
+        return float(reading_ctype.value)
 
     def read_multi_point(self, array_size, maximum_time=-1):
         '''read_multi_point
@@ -2372,11 +2558,11 @@ class _SessionBase(object):
                 specify for the **Array_Size** parameter.
             actual_number_of_points (int):Indicates the number of measured values actually retrieved from the DMM.
         '''
-        reading_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
-        actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niDMM_ReadMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
+        reading_array_ctype = (ctypes_types.ViReal64 * array_size)()
+        actual_number_of_points_ctype = ctypes_types.ViInt32(0)
+        error_code = self._library.niDMM_ReadMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [python_types.ViReal64(reading_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
+        return [float(reading_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def read_status(self):
         '''read_status
@@ -2413,11 +2599,11 @@ class _SessionBase(object):
                 | 4 | No acquisition in progress |
                 +---+----------------------------+
         '''
-        acquisition_backlog_ctype = ctypes_types.ViInt32_ctype(0)
-        acquisition_status_ctype = ctypes_types.ViInt16_ctype(0)
+        acquisition_backlog_ctype = ctypes_types.ViInt32(0)
+        acquisition_status_ctype = ctypes_types.ViInt16(0)
         error_code = self._library.niDMM_ReadStatus(self._vi, ctypes.pointer(acquisition_backlog_ctype), ctypes.pointer(acquisition_status_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt32(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
+        return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
     def read_waveform(self, array_size, maximum_time=-1):
         '''read_waveform
@@ -2452,11 +2638,11 @@ class _SessionBase(object):
                 specify for the **Array_Size** parameter.
             actual_number_of_points (int):Indicates the number of measured values actually retrieved from the DMM.
         '''
-        waveform_array_ctype = (ctypes_types.ViReal64_ctype * array_size)()
-        actual_number_of_points_ctype = ctypes_types.ViInt32_ctype(0)
-        error_code = self._library.niDMM_ReadWaveform(self._vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64_ctype)), ctypes.pointer(actual_number_of_points_ctype))
+        waveform_array_ctype = (ctypes_types.ViReal64 * array_size)()
+        actual_number_of_points_ctype = ctypes_types.ViInt32(0)
+        error_code = self._library.niDMM_ReadWaveform(self._vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [python_types.ViReal64(waveform_array_ctype[i].value) for i in range(array_size)], python_types.ViInt32(actual_number_of_points_ctype.value)
+        return [float(waveform_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def reset_with_defaults(self):
         '''reset_with_defaults
@@ -2500,178 +2686,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):
-        '''_set_attribute_vi_boolean
-
-        This function sets the value of a ViBoolean attribute.
-
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes.
-
-        If the attribute represents an instrument state, this function performs
-        instrument I/O in the following cases:
-
-        -  State caching is disabled for the entire session or for the
-           particular attribute.
-        -  State caching is enabled, and the currently cached value is invalid
-           or is different than the value you specify.
-
-        This instrument driver contains high-level functions that set most of
-        the instrument attributes. It is best to use the high-level driver
-        functions as much as possible. They handle order dependencies and
-        multithread locking for you. In addition, they perform status checking
-        only after setting all of the attributes.
-
-        In contrast, when you set multiple attributes using the SetAttribute
-        functions, the functions check the instrument status after each call.
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
-
-        Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (bool):Pass the value that you want to set the attribute to.
-        '''
-        error_code = self._library.niDMM_SetAttributeViBoolean(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):
-        '''_set_attribute_vi_int32
-
-        This function sets the value of a ViInt32 attribute.
-
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes.
-
-        If the attribute represents an instrument state, this function performs
-        instrument I/O in the following cases:
-
-        -  State caching is disabled for the entire session or for the
-           particular attribute.
-        -  State caching is enabled, and the currently cached value is invalid
-           or is different than the value you specify.
-
-        This instrument driver contains high-level functions that set most of
-        the instrument attributes. It is best to use the high-level driver
-        functions as much as possible. They handle order dependencies and
-        multithread locking for you. In addition, they perform status checking
-        only after setting all of the attributes.
-
-        In contrast, when you set multiple attributes using the SetAttribute
-        functions, the functions check the instrument status after each call.
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
-
-        Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (int):Pass the value that you want to set the attribute to.
-        '''
-        error_code = self._library.niDMM_SetAttributeViInt32(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):
-        '''_set_attribute_vi_real64
-
-        This function sets the value of a ViReal64 attribute.
-
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes.
-
-        If the attribute represents an instrument state, this function performs
-        instrument I/O in the following cases:
-
-        -  State caching is disabled for the entire session or for the
-           particular attribute.
-        -  State caching is enabled, and the currently cached value is invalid
-           or is different than the value you specify.
-
-        This instrument driver contains high-level functions that set most of
-        the instrument attributes. It is best to use the high-level driver
-        functions as much as possible. They handle order dependencies and
-        multithread locking for you. In addition, they perform status checking
-        only after setting all of the attributes.
-
-        In contrast, when you set multiple attributes using the SetAttribute
-        functions, the functions check the instrument status after each call.
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
-
-        Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (float):Pass the value that you want to set the attribute to.
-        '''
-        error_code = self._library.niDMM_SetAttributeViReal64(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def _set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):
-        '''_set_attribute_vi_string
-
-        This function sets the value of a ViString attribute.
-
-        This is a low-level function that you can use to set the values of
-        instrument-specific attributes and inherent IVI attributes.
-
-        If the attribute represents an instrument state, this function performs
-        instrument I/O in the following cases:
-
-        -  State caching is disabled for the entire session or for the
-           particular attribute.
-        -  State caching is enabled, and the currently cached value is invalid
-           or is different than the value you specify.
-
-        This instrument driver contains high-level functions that set most of
-        the instrument attributes. It is best to use the high-level driver
-        functions as much as possible. They handle order dependencies and
-        multithread locking for you. In addition, they perform status checking
-        only after setting all of the attributes.
-
-        In contrast, when you set multiple attributes using the SetAttribute
-        functions, the functions check the instrument status after each call.
-        Also, when state caching is enabled, the high-level functions that
-        configure multiple attributes perform instrument I/O only for the
-        attributes whose value you change. Thus, you can safely call the
-        high-level functions without the penalty of redundant instrument I/O.
-
-        Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (str):Pass the value that you want to set the attribute to.
-        '''
-        error_code = self._library.niDMM_SetAttributeViString(self._vi, channel_name.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _close(self):
         '''_close
 
@@ -2680,6 +2694,24 @@ class _SessionBase(object):
         error_code = self._library.niDMM_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def _error_message(self, error_code):
+        '''_error_message
+
+        Takes the **Error_Code** returned by the instrument driver functions,
+        interprets it, and returns it as a user-readable string.
+
+        Args:
+            error_code (int):The **error_code** returned from the instrument. The default is 0,
+                indicating VI_SUCCESS.
+
+        Returns:
+            error_message (int):The error information formatted into a string.
+        '''
+        error_message_ctype = (ctypes_types.ViChar * 256)()
+        error_code = self._library.niDMM_error_message(self._vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_message_ctype.value.decode("ascii")
 
     def reset(self):
         '''reset
@@ -2708,11 +2740,11 @@ class _SessionBase(object):
 
                 Note: The array must contain at least 256 elements ViChar[256].
         '''
-        instrument_driver_revision_ctype = ctypes_types.ViChar_ctype(0)
-        firmware_revision_ctype = ctypes_types.ViChar_ctype(0)
+        instrument_driver_revision_ctype = ctypes_types.ViChar(0)
+        firmware_revision_ctype = ctypes_types.ViChar(0)
         error_code = self._library.niDMM_revision_query(self._vi, ctypes.pointer(instrument_driver_revision_ctype), ctypes.pointer(firmware_revision_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViChar(instrument_driver_revision_ctype.value), python_types.ViChar(firmware_revision_ctype.value)
+        return int(instrument_driver_revision_ctype.value), int(firmware_revision_ctype.value)
 
     def self_test(self):
         '''self_test
@@ -2752,50 +2784,11 @@ class _SessionBase(object):
                 returned for a self-test failure is NIDMM_ERROR_SELF_TEST_FAILURE.
                 This error code indicates that the DMM should be repaired.
         '''
-        self_test_result_ctype = ctypes_types.ViInt16_ctype(0)
-        self_test_message_ctype = (ctypes_types.ViChar_ctype * 256)()
-        error_code = self._library.niDMM_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar_ctype)))
+        self_test_result_ctype = ctypes_types.ViInt16(0)
+        self_test_message_ctype = (ctypes_types.ViChar * 256)()
+        error_code = self._library.niDMM_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return python_types.ViInt16(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
+        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
 
-
-class _RepeatedCapability(_SessionBase):
-    '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
-
-    def __init__(self, vi, repeated_capability):
-        super(_RepeatedCapability, self).__init__(repeated_capability)
-        self._vi = vi
-        self._is_frozen = True
-
-
-class Session(_SessionBase):
-    '''An NI-DMM session to a National Instruments Digital Multimeter'''
-
-    def __init__(self, resource_name, id_query=False, reset_device=False, option_string=''):
-        super(Session, self).__init__(repeated_capability='')
-        self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
-        self._is_frozen = True
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        return _RepeatedCapability(self._vi, repeated_capability)
-
-    def initiate(self):
-        return _Acquisition(self)
-
-    def close(self):
-        try:
-            self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
-        self._vi = 0
 
 

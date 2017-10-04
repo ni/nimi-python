@@ -12,20 +12,19 @@ functions_codegen_method = {
     'CheckAttribute.+':                { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'init':                            { 'codegen_method': 'no',       },
-    'error_message':                   { 'codegen_method': 'no',       },
+    'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
-    'GetErrorMessage':                 { 'codegen_method': 'private',  },
     'ClearError':                      { 'codegen_method': 'no',       },
     'LockSession':                     { 'codegen_method': 'no',       },
     'UnlockSession':                   { 'codegen_method': 'no',       },
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
     'GetAttributeViSession':           { 'codegen_method': 'no',       },
     'Scan':                            { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
-    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
-    'error_query':                     { 'codegen_method': 'no',       },  # IVI Function not used by National Instrument Drivers
+    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'error_query':                     { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -76,6 +75,7 @@ functions_buffer_info = {
     'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetRelayName':                 { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'relayNameBufferSize'}, }, }, },
     'GetPath':                      { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -84,7 +84,6 @@ functions_buffer_info = {
 functions_is_error_handling = {
     'error_message':                { 'is_error_handling': True, },
     'GetError':                     { 'is_error_handling': True, },
-    'GetErrorMessage':              { 'is_error_handling': True, },
 }
 
 # Default values for method parameters
@@ -93,7 +92,7 @@ function_default_value = {
                                                   2: { 'default_value': False, },
                                                   3: { 'default_value': False, },
                                                   4: { 'default_value': '', }, }, },
-    'ConfigureScanList':        { 'parameters': { 2: { 'default_value': 'enums.ScanMode.BREAK_BEFORE_MAKE', }, }, },
+    'ConfigureScanList':        { 'parameters': { 2: { 'default_value': 'ScanMode.BREAK_BEFORE_MAKE', }, }, },
     'ConfigureScanTrigger':     { 'parameters': { 1: { 'default_value': 0.0, }, }, },
     'RouteScanAdvancedOutput':  { 'parameters': { 3: { 'default_value': False, }, }, },
     'RouteTriggerInput':        { 'parameters': { 3: { 'default_value': False, }, }, },

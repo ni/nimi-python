@@ -11,13 +11,12 @@ c_function_prefix = config['c_function_prefix']
 driver_name = config['driver_name']
 
 functions = template_parameters['metadata'].functions
-functions = helper.extract_codegen_functions(functions)
+functions = helper.filter_codegen_functions(functions)
 %>\
 
 import ctypes
 
 import ${module_name}.ctypes_types
-import ${module_name}.python_types
 
 
 class MockFunctionCallError(Exception):
@@ -33,17 +32,17 @@ class MockFunctionCallError(Exception):
 class SideEffectsHelper(object):
     def __init__(self):
         self._defaults = {}
-% for func_name in sorted(helper.extract_codegen_functions(functions)):
+% for func_name in sorted(helper.filter_codegen_functions(functions)):
 <%
 f = functions[func_name]
 %>\
         self._defaults['${func_name}'] = {}
         self._defaults['${func_name}']['return'] = 0
-% for p in helper.extract_output_parameters(f['parameters']):
+% for p in helper.filter_output_parameters(f['parameters']):
         self._defaults['${func_name}']['${p['name']}'] = None
 % endfor
 <%
-ivi_dance_param = helper.extract_ivi_dance_parameter(f['parameters'])
+ivi_dance_param = helper.filter_ivi_dance_parameter(f['parameters'])
 %>\
 % if ivi_dance_param is not None:
         self._defaults['${func_name}']['${ivi_dance_param['name']}'] = None
@@ -56,12 +55,12 @@ ivi_dance_param = helper.extract_ivi_dance_parameter(f['parameters'])
     def __setitem__(self, func, val):
         self._defaults[func] = val
 
-% for func_name in sorted(helper.extract_codegen_functions(functions)):
+% for func_name in sorted(helper.filter_codegen_functions(functions)):
 <%
 f = functions[func_name]
 params = f['parameters']
-output_params = helper.extract_output_parameters(params)
-ivi_dance_param = helper.extract_ivi_dance_parameter(params)
+output_params = helper.filter_output_parameters(params)
+ivi_dance_param = helper.filter_ivi_dance_parameter(params)
 ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 %>\
     def ${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_DECLARATION)}):  # noqa: N802
@@ -85,10 +84,10 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 % endfor
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
-% for func_name in sorted(helper.extract_codegen_functions(functions)):
+% for func_name in sorted(helper.filter_codegen_functions(functions)):
 <%
 f = functions[func_name]
 %>\
         mock_library.${c_function_prefix}${func_name}.side_effect = MockFunctionCallError("${c_function_prefix}${func_name}")
-        mock_library.${c_function_prefix}${func_name}.return_value = ${module_name}.python_types.${f['returns_python']}(0)
+        mock_library.${c_function_prefix}${func_name}.return_value = 0
 % endfor

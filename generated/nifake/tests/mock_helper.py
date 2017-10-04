@@ -3,7 +3,6 @@
 import ctypes
 
 import nifake.ctypes_types
-import nifake.python_types
 
 
 class MockFunctionCallError(Exception):
@@ -21,6 +20,8 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
+        self._defaults['EnumInputFunctionWithDefaults'] = {}
+        self._defaults['EnumInputFunctionWithDefaults']['return'] = 0
         self._defaults['GetABoolean'] = {}
         self._defaults['GetABoolean']['return'] = 0
         self._defaults['GetABoolean']['aBoolean'] = None
@@ -56,9 +57,6 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['description'] = None
-        self._defaults['GetErrorMessage'] = {}
-        self._defaults['GetErrorMessage']['return'] = 0
-        self._defaults['GetErrorMessage']['errorMessage'] = None
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
         self._defaults['InitWithOptions']['vi'] = None
@@ -69,6 +67,9 @@ class SideEffectsHelper(object):
         self._defaults['Read'] = {}
         self._defaults['Read']['return'] = 0
         self._defaults['Read']['reading'] = None
+        self._defaults['ReadFromChannel'] = {}
+        self._defaults['ReadFromChannel']['return'] = 0
+        self._defaults['ReadFromChannel']['reading'] = None
         self._defaults['ReadMultiPoint'] = {}
         self._defaults['ReadMultiPoint']['return'] = 0
         self._defaults['ReadMultiPoint']['readingArray'] = None
@@ -91,8 +92,14 @@ class SideEffectsHelper(object):
         self._defaults['SimpleFunction']['return'] = 0
         self._defaults['TwoInputFunction'] = {}
         self._defaults['TwoInputFunction']['return'] = 0
+        self._defaults['Use64BitNumber'] = {}
+        self._defaults['Use64BitNumber']['return'] = 0
+        self._defaults['Use64BitNumber']['output'] = None
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
+        self._defaults['error_message'] = {}
+        self._defaults['error_message']['return'] = 0
+        self._defaults['error_message']['errorMessage'] = None
 
     def __getitem__(self, func):
         return self._defaults[func]
@@ -104,6 +111,11 @@ class SideEffectsHelper(object):
         if self._defaults['Abort']['return'] != 0:
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
+
+    def niFake_EnumInputFunctionWithDefaults(self, vi, a_turtle):  # noqa: N802
+        if self._defaults['EnumInputFunctionWithDefaults']['return'] != 0:
+            return self._defaults['EnumInputFunctionWithDefaults']['return']
+        return self._defaults['EnumInputFunctionWithDefaults']['return']
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         if self._defaults['GetABoolean']['return'] != 0:
@@ -176,8 +188,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetAttributeViString", param='attributeValue')
         if buffer_size == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        t = nifake.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nifake.ctypes_types.ViString_ctype).value
+        t = nifake.ctypes_types.ViString(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
+        attribute_value.value = ctypes.cast(t, nifake.ctypes_types.ViString).value
         return self._defaults['GetAttributeViString']['return']
 
     def niFake_GetEnumValue(self, vi, a_quantity, a_turtle):  # noqa: N802
@@ -201,20 +213,9 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetError", param='description')
         if buffer_size == 0:
             return len(self._defaults['GetError']['description'])
-        t = nifake.ctypes_types.ViString_ctype(self._defaults['GetError']['description'].encode('ascii'))
-        description.value = ctypes.cast(t, nifake.ctypes_types.ViString_ctype).value
+        t = nifake.ctypes_types.ViString(self._defaults['GetError']['description'].encode('ascii'))
+        description.value = ctypes.cast(t, nifake.ctypes_types.ViString).value
         return self._defaults['GetError']['return']
-
-    def niFake_GetErrorMessage(self, vi, error_code, buffer_size, error_message):  # noqa: N802
-        if self._defaults['GetErrorMessage']['return'] != 0:
-            return self._defaults['GetErrorMessage']['return']
-        if self._defaults['GetErrorMessage']['errorMessage'] is None:
-            raise MockFunctionCallError("niFake_GetErrorMessage", param='errorMessage')
-        if buffer_size == 0:
-            return len(self._defaults['GetErrorMessage']['errorMessage'])
-        t = nifake.ctypes_types.ViString_ctype(self._defaults['GetErrorMessage']['errorMessage'].encode('ascii'))
-        error_message.value = ctypes.cast(t, nifake.ctypes_types.ViString_ctype).value
-        return self._defaults['GetErrorMessage']['return']
 
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
@@ -241,6 +242,14 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_Read", param='reading')
         reading.contents.value = self._defaults['Read']['reading']
         return self._defaults['Read']['return']
+
+    def niFake_ReadFromChannel(self, vi, channel_name, maximum_time, reading):  # noqa: N802
+        if self._defaults['ReadFromChannel']['return'] != 0:
+            return self._defaults['ReadFromChannel']['return']
+        if self._defaults['ReadFromChannel']['reading'] is None:
+            raise MockFunctionCallError("niFake_ReadFromChannel", param='reading')
+        reading.contents.value = self._defaults['ReadFromChannel']['reading']
+        return self._defaults['ReadFromChannel']['return']
 
     def niFake_ReadMultiPoint(self, vi, maximum_time, array_size, reading_array, actual_number_of_points):  # noqa: N802
         if self._defaults['ReadMultiPoint']['return'] != 0:
@@ -299,64 +308,86 @@ class SideEffectsHelper(object):
             return self._defaults['TwoInputFunction']['return']
         return self._defaults['TwoInputFunction']['return']
 
+    def niFake_Use64BitNumber(self, vi, input, output):  # noqa: N802
+        if self._defaults['Use64BitNumber']['return'] != 0:
+            return self._defaults['Use64BitNumber']['return']
+        if self._defaults['Use64BitNumber']['output'] is None:
+            raise MockFunctionCallError("niFake_Use64BitNumber", param='output')
+        output.contents.value = self._defaults['Use64BitNumber']['output']
+        return self._defaults['Use64BitNumber']['return']
+
     def niFake_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
+    def niFake_error_message(self, vi, error_code, error_message):  # noqa: N802
+        if self._defaults['error_message']['return'] != 0:
+            return self._defaults['error_message']['return']
+        if self._defaults['error_message']['errorMessage'] is None:
+            raise MockFunctionCallError("niFake_error_message", param='errorMessage')
+        error_message.contents.value = self._defaults['error_message']['errorMessage']
+        return self._defaults['error_message']['return']
+
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niFake_Abort.side_effect = MockFunctionCallError("niFake_Abort")
-        mock_library.niFake_Abort.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_Abort.return_value = 0
+        mock_library.niFake_EnumInputFunctionWithDefaults.side_effect = MockFunctionCallError("niFake_EnumInputFunctionWithDefaults")
+        mock_library.niFake_EnumInputFunctionWithDefaults.return_value = 0
         mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")
-        mock_library.niFake_GetABoolean.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetABoolean.return_value = 0
         mock_library.niFake_GetANumber.side_effect = MockFunctionCallError("niFake_GetANumber")
-        mock_library.niFake_GetANumber.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetANumber.return_value = 0
         mock_library.niFake_GetAStringOfFixedMaximumSize.side_effect = MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize")
-        mock_library.niFake_GetAStringOfFixedMaximumSize.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetAStringOfFixedMaximumSize.return_value = 0
         mock_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = MockFunctionCallError("niFake_GetAStringWithSpecifiedMaximumSize")
-        mock_library.niFake_GetAStringWithSpecifiedMaximumSize.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetAStringWithSpecifiedMaximumSize.return_value = 0
         mock_library.niFake_GetAttributeViBoolean.side_effect = MockFunctionCallError("niFake_GetAttributeViBoolean")
-        mock_library.niFake_GetAttributeViBoolean.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetAttributeViBoolean.return_value = 0
         mock_library.niFake_GetAttributeViInt32.side_effect = MockFunctionCallError("niFake_GetAttributeViInt32")
-        mock_library.niFake_GetAttributeViInt32.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetAttributeViInt32.return_value = 0
         mock_library.niFake_GetAttributeViReal64.side_effect = MockFunctionCallError("niFake_GetAttributeViReal64")
-        mock_library.niFake_GetAttributeViReal64.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetAttributeViReal64.return_value = 0
         mock_library.niFake_GetAttributeViSession.side_effect = MockFunctionCallError("niFake_GetAttributeViSession")
-        mock_library.niFake_GetAttributeViSession.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetAttributeViSession.return_value = 0
         mock_library.niFake_GetAttributeViString.side_effect = MockFunctionCallError("niFake_GetAttributeViString")
-        mock_library.niFake_GetAttributeViString.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetAttributeViString.return_value = 0
         mock_library.niFake_GetEnumValue.side_effect = MockFunctionCallError("niFake_GetEnumValue")
-        mock_library.niFake_GetEnumValue.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetEnumValue.return_value = 0
         mock_library.niFake_GetError.side_effect = MockFunctionCallError("niFake_GetError")
-        mock_library.niFake_GetError.return_value = nifake.python_types.ViStatus(0)
-        mock_library.niFake_GetErrorMessage.side_effect = MockFunctionCallError("niFake_GetErrorMessage")
-        mock_library.niFake_GetErrorMessage.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_GetError.return_value = 0
         mock_library.niFake_InitWithOptions.side_effect = MockFunctionCallError("niFake_InitWithOptions")
-        mock_library.niFake_InitWithOptions.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_InitWithOptions.return_value = 0
         mock_library.niFake_Initiate.side_effect = MockFunctionCallError("niFake_Initiate")
-        mock_library.niFake_Initiate.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_Initiate.return_value = 0
         mock_library.niFake_OneInputFunction.side_effect = MockFunctionCallError("niFake_OneInputFunction")
-        mock_library.niFake_OneInputFunction.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_OneInputFunction.return_value = 0
         mock_library.niFake_Read.side_effect = MockFunctionCallError("niFake_Read")
-        mock_library.niFake_Read.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_Read.return_value = 0
+        mock_library.niFake_ReadFromChannel.side_effect = MockFunctionCallError("niFake_ReadFromChannel")
+        mock_library.niFake_ReadFromChannel.return_value = 0
         mock_library.niFake_ReadMultiPoint.side_effect = MockFunctionCallError("niFake_ReadMultiPoint")
-        mock_library.niFake_ReadMultiPoint.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_ReadMultiPoint.return_value = 0
         mock_library.niFake_ReturnANumberAndAString.side_effect = MockFunctionCallError("niFake_ReturnANumberAndAString")
-        mock_library.niFake_ReturnANumberAndAString.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_ReturnANumberAndAString.return_value = 0
         mock_library.niFake_SetAttributeViBoolean.side_effect = MockFunctionCallError("niFake_SetAttributeViBoolean")
-        mock_library.niFake_SetAttributeViBoolean.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_SetAttributeViBoolean.return_value = 0
         mock_library.niFake_SetAttributeViInt32.side_effect = MockFunctionCallError("niFake_SetAttributeViInt32")
-        mock_library.niFake_SetAttributeViInt32.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_SetAttributeViInt32.return_value = 0
         mock_library.niFake_SetAttributeViReal64.side_effect = MockFunctionCallError("niFake_SetAttributeViReal64")
-        mock_library.niFake_SetAttributeViReal64.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_SetAttributeViReal64.return_value = 0
         mock_library.niFake_SetAttributeViSession.side_effect = MockFunctionCallError("niFake_SetAttributeViSession")
-        mock_library.niFake_SetAttributeViSession.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_SetAttributeViSession.return_value = 0
         mock_library.niFake_SetAttributeViString.side_effect = MockFunctionCallError("niFake_SetAttributeViString")
-        mock_library.niFake_SetAttributeViString.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_SetAttributeViString.return_value = 0
         mock_library.niFake_SimpleFunction.side_effect = MockFunctionCallError("niFake_SimpleFunction")
-        mock_library.niFake_SimpleFunction.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_SimpleFunction.return_value = 0
         mock_library.niFake_TwoInputFunction.side_effect = MockFunctionCallError("niFake_TwoInputFunction")
-        mock_library.niFake_TwoInputFunction.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_TwoInputFunction.return_value = 0
+        mock_library.niFake_Use64BitNumber.side_effect = MockFunctionCallError("niFake_Use64BitNumber")
+        mock_library.niFake_Use64BitNumber.return_value = 0
         mock_library.niFake_close.side_effect = MockFunctionCallError("niFake_close")
-        mock_library.niFake_close.return_value = nifake.python_types.ViStatus(0)
+        mock_library.niFake_close.return_value = 0
+        mock_library.niFake_error_message.side_effect = MockFunctionCallError("niFake_error_message")
+        mock_library.niFake_error_message.return_value = 0

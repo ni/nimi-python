@@ -88,4 +88,16 @@ attributes = {
             'description': 'An attribute with an enum that is also a float',
         },
     },
+    1000006: {
+        'access': 'read-write',
+        'channel_based': 'False',
+        'enum': None,
+        'lv_property': 'Fake attributes:Read Write long long',
+        'name': 'READ_WRITE_INT64',
+        'resettable': 'No',
+        'type': 'ViInt64',
+        'documentation': {
+            'description':'An attribute of type 64-bit integer with read/write access.',
+        },
+    },
 }
