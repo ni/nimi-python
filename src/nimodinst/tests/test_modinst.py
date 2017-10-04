@@ -39,8 +39,8 @@ class TestSession(object):
     def niModInst_GetInstalledDeviceAttributeViString_looping(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
         if attribute_value_buffer_size == 0:
             return (len(self.string_vals_device_looping[self.iteration_device_looping]))
-        t = nimodinst.ctypes_types.ViString(self.string_vals_device_looping[self.iteration_device_looping].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nimodinst.ctypes_types.ViString).value
+        t = self.string_vals_device_looping[self.iteration_device_looping].encode('ascii')
+        attribute_value.value = t
         self.iteration_device_looping += 1
         return 0
 
