@@ -1204,239 +1204,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_adc_calibration(self, adc_calibration):
-        '''configure_adc_calibration
-
-        For the NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
-        compensate for gain drift since the last external calibration or
-        self-calibration. When **ADC_Calibration** is ON, the DMM measures an
-        internal reference to calculate the correct gain for the measurement.
-        When **ADC_Calibration** is OFF, the DMM does not compensate for
-        changes to the gain.
-
-        Args:
-            adc_calibration (enums.ADCCalibration):Specifies the **ADC_Calibration** setting. The driver sets
-                ADC_CALIBRATION to this value.
-                NIDMM_VAL_ADC_CALIBRATION_ON enables **ADC_Calibration**.
-                NIDMM_VAL_ADC_CALIBRATION_OFF disables **ADC_Calibration**. If you
-                set the value to NIDMM_VAL_ADC_CALIBRATION_AUTO, the driver
-                determines whether to enable **ADC_Calibration** based on the
-                measurement function and resolution that you configure. If you configure
-                the NI 4080/4081/4082 or NI 4070/4071/4072 for a 6½–digit and greater
-                resolution DC measurement, the driver enables ADC Calibration. For all
-                other measurement configurations, the driver disables
-                **ADC_Calibration**.
-
-                +------------------------------------------+-------+--------------------------------------------------------------------------------------------------+
-                | Name                                     | Value | Description                                                                                      |
-                +==========================================+=======+==================================================================================================+
-                | NIDMM_VAL_ADC_CALIBRATION_AUTO (default) | -1.0  | The DMM enables or disables **ADC_Calibration** based on the configured function and resolution. |
-                +------------------------------------------+-------+--------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_ADC_CALIBRATION_OFF            | 0     | The DMM does not compensate for changes to the gain.                                             |
-                +------------------------------------------+-------+--------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_ADC_CALIBRATION_ON             | 1     | The DMM measures an internal reference to calculate the correct gain for the measurement.        |
-                +------------------------------------------+-------+--------------------------------------------------------------------------------------------------+
-        '''
-        if type(adc_calibration) is not enums.ADCCalibration:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ADCCalibration))
-        error_code = self._library.niDMM_ConfigureADCCalibration(self._vi, adc_calibration.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_auto_zero_mode(self, auto_zero_mode):
-        '''configure_auto_zero_mode
-
-        Configures the DMM for **Auto_Zero_Mode**. When **Auto_Zero_Mode**
-        is ON, the DMM internally disconnects the input signal and takes a zero
-        reading. It then subtracts the zero reading from the measurement. This
-        prevents offset voltages present on the input circuitry of the DMM from
-        affecting measurement accuracy. When **Auto_Zero_Mode** is OFF, the
-        DMM does not compensate for zero reading offset.
-
-        Args:
-            auto_zero_mode (enums.AutoZero):Specifies the **auto_zero_mode**. NI-DMM sets the
-                AUTO_ZERO attribute to this value.
-
-                ON enables **auto_zero_mode** for each measurement. ONCE enables
-                **auto_zero_mode** before the next measurement. The
-                **auto_zero_mode** value is stored and used in subsequent measurements
-                until the device is reconfigured.
-
-                OFF disables **auto_zero_mode**. If you set this parameter to AUTO,
-                NI-DMM determines whether to enable Auto Zero based on the measurement
-                function that you configure. If you configure the NI 4080/4081/4082 or
-                the NI 4070/4071/4072 for a 6½–digit and greater resolution DC
-                measurement, NI-DMM sets **auto_zero_mode** to ON.
-
-                For all other DC measurement configurations on the NI 4080/4081/4082 or
-                the NI 4070/4071/4072, NI-DMM sets **auto_zero_mode** to ONCE. For all
-                AC measurements or waveform acquisitions on the NI 4080/4081/4082 or the
-                NI 4070/4071/4072, NI-DMM sets **auto_zero_mode** to OFF. For NI 4060,
-                **auto_zero_mode** is set to OFF when AUTO is selected.
-
-                For NI 4065 devices, **auto_zero_mode** is always ON.
-                **auto_zero_mode** is an integral part of the signal measurement phase
-                and adds no extra time to the overall measurement.
-
-                +------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_AUTO_ZERO_AUTO (default) | -1 | NI-DMM chooses the Auto Zero setting based on the configured function and resolution.                                                                                                                      |
-                +------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_AUTO_ZERO_OFF            | 0  | Disables Auto Zero.                                                                                                                                                                                        |
-                +------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_AUTO_ZERO_ON             | 1  | The DMM internally disconnects the input signal following each measurement and takes a zero reading. It then subtracts the zero reading from the preceding reading.                                        |
-                +------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_AUTO_ZERO_ONCE           | 2  | The DMM internally disconnects the input signal following the first measurement and takes a zero reading. It then subtracts the zero reading from the preceding reading and each measurement that follows. |
-                +------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-                Note: The NI 4060/4065 does *not* support this setting.
-        '''
-        if type(auto_zero_mode) is not enums.AutoZero:
-            raise TypeError('Parameter mode must be of type ' + str(enums.AutoZero))
-        error_code = self._library.niDMM_ConfigureAutoZeroMode(self._vi, auto_zero_mode.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_cable_comp_type(self, cable_comp_type):
-        '''configure_cable_comp_type
-
-        For the NI 4082 and NI 4072 only, sets the
-        CABLE_COMP_TYPE attribute for the current
-        capacitance/inductance mode range.
-
-        Args:
-            cable_comp_type (enums.CableCompensationType):Specifies the type of cable compensation that is used for the current
-                range.
-        '''
-        if type(cable_comp_type) is not enums.CableCompensationType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.CableCompensationType))
-        error_code = self._library.niDMM_ConfigureCableCompType(self._vi, cable_comp_type.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_current_source(self, current_source):
-        '''configure_current_source
-
-        The NI 4050 and NI 4060 are not supported. Configures the
-        **Current_Source** for diode measurements.
-
-        Args:
-            current_source (enums.CurrentSource):Specifies the **current_source** provided during diode measurements.
-                For valid ranges, refer to the device sections for your device. The
-                driver sets CURRENT_SOURCE to this value.
-
-                +--------------------------------+--------+---------------------------------------------------+
-                | NIDMM_VAL_1_MICROAMP           | 1 µA   | NI 4080/4081/4082 and NI 4070/4071/4072           |
-                +--------------------------------+--------+---------------------------------------------------+
-                | NIDMM_VAL_10_MICROAMP          | 10 µA  | NI 4080/4081/4082 and NI 4070/4071/4072 only      |
-                +--------------------------------+--------+---------------------------------------------------+
-                | NIDMM_VAL_100_MICROAMP         | 100 µA | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 |
-                +--------------------------------+--------+---------------------------------------------------+
-                | NIDMM_VAL_1_MILLIAMP (default) | 1 mA   | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 |
-                +--------------------------------+--------+---------------------------------------------------+
-        '''
-        if type(current_source) is not enums.CurrentSource:
-            raise TypeError('Parameter mode must be of type ' + str(enums.CurrentSource))
-        error_code = self._library.niDMM_ConfigureCurrentSource(self._vi, current_source.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_fixed_ref_junction(self, fixed_reference_junction):
-        '''configure_fixed_ref_junction
-
-        Configures the fixed reference junction temperature for a thermocouple
-        with a fixed reference junction type.
-
-        Args:
-            fixed_reference_junction (float):Specifies the reference junction temperature when a fixed reference
-                junction is used to take a thermocouple measurement. The units are
-                degrees Celsius. NI-DMM uses this value to set the Fixed Reference
-                Junction property. The default is 25.00 (°C).
-        '''
-        error_code = self._library.niDMM_ConfigureFixedRefJunction(self._vi, fixed_reference_junction)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_frequency_voltage_range(self, voltage_range):
-        '''configure_frequency_voltage_range
-
-        For the NI 4080/4081/4082 and the NI 4070/4071/4072 only, specifies the
-        expected maximum amplitude of the input signal for frequency and period
-        measurements.
-
-        Args:
-            voltage_range (float):Sets the expected maximum amplitude of the input signal. Refer to the
-                `NI 4080 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4080_functional_overview/>`__,
-                `NI 4081 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4081_functional_overview/>`__,
-                `NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4082/>`__,
-                `NI 4070 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4070_functional_overview/>`__,
-                `NI 4071 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4071_functional_overview/>`__,
-                and
-                `NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4072/>`__
-                sections for a list of valid values. NI-DMM sets
-                FREQ_VOLTAGE_RANGE to this value. The minimum
-                peak-to-peak signal amplitude that can be detected is 10% of the
-                specified **voltage_range**.
-
-                +-----------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
-                | Name                              | Value | Description                                                                                                                      |
-                +===================================+=======+==================================================================================================================================+
-                | NIDMM_VAL_AUTO_RANGE_ON (default) | -1.0  | Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement. |
-                +-----------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_AUTO_RANGE_OFF          | -2.0  | Disables Auto Ranging. The driver sets the voltage range to the last calculated voltage range.                                   |
-                +-----------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
-        '''
-        error_code = self._library.niDMM_ConfigureFrequencyVoltageRange(self._vi, voltage_range)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_meas_complete_dest(self, meas_complete_destination):
-        '''configure_meas_complete_dest
-
-        Specifies the destination of the DMM Measurement Complete (MC) signal.
-        Refer to
-        `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
-        for more information.
-
-        Args:
-            meas_complete_destination (enums.MeasurementCompleteDest):Specifies the destination of the Measurement Complete signal. This
-                signal is issued when the DMM completes a single measurement. The driver
-                sets the MEAS_COMPLETE_DEST attribute to this value. This
-                signal is commonly referred to as Voltmeter Complete.
-
-                Note:
-                To determine which values are supported by each device, refer to the
-                `LabWindows/CVI Trigger
-                Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-                section.
-        '''
-        if type(meas_complete_destination) is not enums.MeasurementCompleteDest:
-            raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementCompleteDest))
-        error_code = self._library.niDMM_ConfigureMeasCompleteDest(self._vi, meas_complete_destination.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_meas_complete_slope(self, meas_complete_slope):
-        '''configure_meas_complete_slope
-
-        Sets the Measurement Complete signal to either rising edge (positive) or
-        falling edge (negative) polarity.
-
-        Args:
-            meas_complete_slope (enums.Slope):Specifies the polarity of the signal that is generated. The driver sets
-                MEAS_DEST_SLOPE to this value.
-
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-                | Rising Edge            | 0 | NIDMM_VAL_POSITIVE | The driver triggers on the rising edge of the trigger signal.  |
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-                | Falling Edge (default) | 1 | NIDMM_VAL_NEGATIVE | The driver triggers on the falling edge of the trigger signal. |
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-        '''
-        if type(meas_complete_slope) is not enums.Slope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
-        error_code = self._library.niDMM_ConfigureMeasCompleteSlope(self._vi, meas_complete_slope.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
         '''configure_measurement_absolute
 
@@ -1596,35 +1363,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_offset_comp_ohms(self, offset_comp_ohms):
-        '''configure_offset_comp_ohms
-
-        For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
-        compensate for voltage offsets in resistance measurements. When
-        **Offset_Comp_Ohms** is enabled, the DMM measures the resistance twice
-        (once with the current source on and again with it turned off). Any
-        voltage offset present in both measurements is cancelled out.
-        **Offset_Comp_Ohms** is useful when measuring resistance values less
-        than 10 KΩ.
-
-        Args:
-            offset_comp_ohms (enums.OffsetCompensatedOhms):Enables or disables **offset_comp_ohms**. The driver sets
-                OFFSET_COMP_OHMS to this value.
-
-                +------------------------------------------+-------+------------------------------------+
-                | Name                                     | Value | Description                        |
-                +==========================================+=======+====================================+
-                | NIDMM_VAL_OFFSET_COMP_OHMS_OFF (default) | 0     | Off disables **Offset_Comp_Ohms**. |
-                +------------------------------------------+-------+------------------------------------+
-                | NIDMM_VAL_OFFSET_COMP_OHMS_ON            | 1     | On enables **Offset_Comp_Ohms**.   |
-                +------------------------------------------+-------+------------------------------------+
-        '''
-        if type(offset_comp_ohms) is not enums.OffsetCompensatedOhms:
-            raise TypeError('Parameter mode must be of type ' + str(enums.OffsetCompensatedOhms))
-        error_code = self._library.niDMM_ConfigureOffsetCompOhms(self._vi, offset_comp_ohms.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_open_cable_comp_values(self, conductance, susceptance):
         '''configure_open_cable_comp_values
 
@@ -1679,7 +1417,7 @@ class Session(_SessionBase):
         Configures the RTD Type and RTD Resistance parameters for an RTD.
 
         Args:
-            rtd_type (int):Specifies the type of RTD used to measure the temperature resistance.
+            rtd_type (enums.RTDType):Specifies the type of RTD used to measure the temperature resistance.
                 NI-DMM uses this value to set the RTD Type property. The default is
                 NIDMM_VAL_TEMP_RTD_PT3851.
 
@@ -1705,31 +1443,9 @@ class Session(_SessionBase):
             rtd_resistance (float):Specifies the RTD resistance in ohms at 0 °C. NI-DMM uses this value to
                 set the RTD Resistance property. The default is 100 (Ω).
         '''
-        error_code = self._library.niDMM_ConfigureRTDType(self._vi, rtd_type, rtd_resistance)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_sample_trigger_slope(self, sample_trigger_slope):
-        '''configure_sample_trigger_slope
-
-        Sets the SAMPLE_TRIGGER_SLOPE to either rising edge
-        (positive) or falling edge (negative) polarity.
-
-        Args:
-            sample_trigger_slope (enums.Slope):Specifies the polarity of the Trigger signal on which the measurement is
-                triggered for values of either NIDMM_VAL_POSITIVE or
-                NIDMM_VAL_NEGATIVE. The driver sets
-                SAMPLE_TRIGGER_SLOPE to this value.
-
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-                | Rising Edge            | 0 | NIDMM_VAL_POSITIVE | The driver triggers on the rising edge of the trigger signal.  |
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-                | Falling Edge (default) | 1 | NIDMM_VAL_NEGATIVE | The driver triggers on the falling edge of the trigger signal. |
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-        '''
-        if type(sample_trigger_slope) is not enums.Slope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
-        error_code = self._library.niDMM_ConfigureSampleTriggerSlope(self._vi, sample_trigger_slope.value)
+        if type(rtd_type) is not enums.RTDType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.RTDType))
+        error_code = self._library.niDMM_ConfigureRTDType(self._vi, rtd_type.value, rtd_resistance)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1768,40 +1484,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_thermistor_type(self, thermistor_type):
-        '''configure_thermistor_type
-
-        Configures the thermistor type.
-
-        Args:
-            thermistor_type (enums.TemperatureThermistorType):Specifies the type of thermistor used to measure the temperature. NI-DMM
-                uses this value to set the Thermistor Type property. The default is
-                NIDMM_VAL_TEMP_THERMISTOR_44006.
-
-                +--------------------+--------------------+--------------------+--------------------+
-                | **Defined Values** | **Thermistor       | **Value**          | **25 °C            |
-                |                    | Type**             |                    | Resistance**       |
-                +--------------------+--------------------+--------------------+--------------------+
-                | NIDMM_VAL_TEMP_ | Custom             | 0                  | —                  |
-                | THERMISTOR_CUSTOM |                    |                    |                    |
-                +--------------------+--------------------+--------------------+--------------------+
-                | NIDMM_VAL_TEMP_ | 44004              | 1                  | 2.25 kΩ            |
-                | THERMISTOR_44004  |                    |                    |                    |
-                +--------------------+--------------------+--------------------+--------------------+
-                | NIDMM_VAL_TEMP_ | 44006              | 2                  | 10 kΩ              |
-                | THERMISTOR_44006  |                    |                    |                    |
-                +--------------------+--------------------+--------------------+--------------------+
-                | NIDMM_VAL_TEMP_ | 44007              | 3                  | 5 kΩ               |
-                | THERMISTOR_44007  |                    |                    |                    |
-                +--------------------+--------------------+--------------------+--------------------+
-        '''
-        if type(thermistor_type) is not enums.TemperatureThermistorType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TemperatureThermistorType))
-        error_code = self._library.niDMM_ConfigureThermistorType(self._vi, thermistor_type.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_thermocouple(self, thermocouple_type, reference_junction_type='ThermocoupleReferenceJunctionType.FIXED'):
+    def configure_thermocouple(self, thermocouple_type, reference_junction_type=enums.ThermocoupleReferenceJunctionType.FIXED):
         '''configure_thermocouple
 
         Configures the thermocouple type and reference junction type for a
@@ -1829,40 +1512,16 @@ class Session(_SessionBase):
                 +---------------------+---------------------+
                 | NIDMM_VAL_TEMP_TC_T | Thermocouple type T |
                 +---------------------+---------------------+
-            reference_junction_type (int):Specifies the type of reference junction to be used in the reference
+            reference_junction_type (enums.ThermocoupleReferenceJunctionType):Specifies the type of reference junction to be used in the reference
                 junction compensation of a thermocouple measurement. NI-DMM uses this
                 value to set the Reference Junction Type property. The only supported
                 value is NIDMM_VAL_TEMP_REF_JUNC_FIXED.
         '''
         if type(thermocouple_type) is not enums.ThermocoupleType:
             raise TypeError('Parameter mode must be of type ' + str(enums.ThermocoupleType))
-        error_code = self._library.niDMM_ConfigureThermocouple(self._vi, thermocouple_type.value, reference_junction_type)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_transducer_type(self, transducer_type):
-        '''configure_transducer_type
-
-        Configures the transducer type.
-
-        Args:
-            transducer_type (enums.TemperatureTransducerType):Specifies the type of device used to measure the temperature. NI-DMM
-                uses this value to set the Transducer Type property. The default is
-                NIDMM_VAL_THERMOCOUPLE.
-
-                +------------------------+--------------+
-                | NIDMM_VAL_2_WIRE_RTD   | 2-wire RTD   |
-                +------------------------+--------------+
-                | NIDMM_VAL_4_WIRE_RTD   | 4-wire RTD   |
-                +------------------------+--------------+
-                | NIDMM_VAL_THERMISTOR   | Thermistor   |
-                +------------------------+--------------+
-                | NIDMM_VAL_THERMOCOUPLE | Thermocouple |
-                +------------------------+--------------+
-        '''
-        if type(transducer_type) is not enums.TemperatureTransducerType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TemperatureTransducerType))
-        error_code = self._library.niDMM_ConfigureTransducerType(self._vi, transducer_type.value)
+        if type(reference_junction_type) is not enums.ThermocoupleReferenceJunctionType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ThermocoupleReferenceJunctionType))
+        error_code = self._library.niDMM_ConfigureThermocouple(self._vi, thermocouple_type.value, reference_junction_type.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1902,30 +1561,6 @@ class Session(_SessionBase):
         if type(trigger_source) is not enums.TriggerSource:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         error_code = self._library.niDMM_ConfigureTrigger(self._vi, trigger_source.value, trigger_delay)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_trigger_slope(self, trigger_slope):
-        '''configure_trigger_slope
-
-        Sets the TRIGGER_SLOPE attribute to either rising edge
-        (positive) or falling edge (negative) polarity.
-
-        Args:
-            trigger_slope (enums.Slope):Specifies the polarity of the trigger signal on which the measurement is
-                triggered for values of either NIDMM_VAL_POSITIVE or
-                NIDMM_VAL_NEGATIVE. The driver sets the TRIGGER_SLOPE
-                attribute to this value.
-
-                +------------------------------+---+----------------------------------------------------------------+
-                | NIDMM_VAL_POSITIVE           | 0 | The driver triggers on the rising edge of the trigger signal.  |
-                +------------------------------+---+----------------------------------------------------------------+
-                | NIDMM_VAL_NEGATIVE (default) | 1 | The driver triggers on the falling edge of the trigger signal. |
-                +------------------------------+---+----------------------------------------------------------------+
-        '''
-        if type(trigger_slope) is not enums.Slope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
-        error_code = self._library.niDMM_ConfigureTriggerSlope(self._vi, trigger_slope.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1973,30 +1608,6 @@ class Session(_SessionBase):
         if type(measurement_function) is not enums.Function:
             raise TypeError('Parameter mode must be of type ' + str(enums.Function))
         error_code = self._library.niDMM_ConfigureWaveformAcquisition(self._vi, measurement_function.value, range, rate, waveform_points)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_waveform_coupling(self, waveform_coupling):
-        '''configure_waveform_coupling
-
-        For the NI 4080/4081/4082 and the NI 4070/4071/4072, configures
-        instrument coupling for voltage waveforms.
-
-        Args:
-            waveform_coupling (enums.WaveformCouplingMode):Selects DC or AC coupling. The driver sets
-                WAVEFORM_COUPLING to this value.
-
-                +------------------------------------------+-------+-------------+
-                | Name                                     | Value | Description |
-                +==========================================+=======+=============+
-                | NIDMM_VAL_WAVEFORM_COUPLING_AC           | 0     | AC coupling |
-                +------------------------------------------+-------+-------------+
-                | NIDMM_VAL_WAVEFORM_COUPLING_DC (default) | 1     | DC coupling |
-                +------------------------------------------+-------+-------------+
-        '''
-        if type(waveform_coupling) is not enums.WaveformCouplingMode:
-            raise TypeError('Parameter mode must be of type ' + str(enums.WaveformCouplingMode))
-        error_code = self._library.niDMM_ConfigureWaveformCoupling(self._vi, waveform_coupling.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2448,6 +2059,34 @@ class Session(_SessionBase):
         error_code = self._library.niDMM_Initiate(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def is_over_range(self, measurement_value):
+        '''is_over_range
+
+        Takes a **Measurement_Value** and determines if the value is a valid
+        measurement or a value indicating that an overrange condition occurred.
+
+        Args:
+            measurement_value (float):The measured value returned from the DMM.
+
+                Note:
+                If an overrange condition occurs, the **Measurement_Value** contains
+                an IEEE-defined NaN (Not a Number) value.
+
+        Returns:
+            is_over_range (bool):Returns whether the measurement value is a valid measurement or an
+                overrange condition.
+
+                +----------+---+-----------------------------------------------------------+
+                | VI_TRUE  | 1 | The value indicates that an overrange condition occurred. |
+                +----------+---+-----------------------------------------------------------+
+                | VI_FALSE | 0 | The value is a valid measurement.                         |
+                +----------+---+-----------------------------------------------------------+
+        '''
+        is_over_range_ctype = ctypes_types.ViBoolean(0)
+        error_code = self._library.niDMM_IsOverRange(self._vi, measurement_value, ctypes.pointer(is_over_range_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return bool(is_over_range_ctype.value)
 
     def perform_open_cable_comp(self):
         '''perform_open_cable_comp

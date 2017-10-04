@@ -200,29 +200,11 @@ nidmm.Session
    +----------------------------------------------+
    | :py:func:`configure_ac_bandwidth`            |
    +==============================================+
-   | :py:func:`configure_adc_calibration`         |
-   +----------------------------------------------+
-   | :py:func:`configure_auto_zero_mode`          |
-   +----------------------------------------------+
-   | :py:func:`configure_cable_comp_type`         |
-   +----------------------------------------------+
-   | :py:func:`configure_current_source`          |
-   +----------------------------------------------+
-   | :py:func:`configure_fixed_ref_junction`      |
-   +----------------------------------------------+
-   | :py:func:`configure_frequency_voltage_range` |
-   +----------------------------------------------+
-   | :py:func:`configure_meas_complete_dest`      |
-   +----------------------------------------------+
-   | :py:func:`configure_meas_complete_slope`     |
-   +----------------------------------------------+
    | :py:func:`configure_measurement_absolute`    |
    +----------------------------------------------+
    | :py:func:`configure_measurement_digits`      |
    +----------------------------------------------+
    | :py:func:`configure_multi_point`             |
-   +----------------------------------------------+
-   | :py:func:`configure_offset_comp_ohms`        |
    +----------------------------------------------+
    | :py:func:`configure_open_cable_comp_values`  |
    +----------------------------------------------+
@@ -232,25 +214,15 @@ nidmm.Session
    +----------------------------------------------+
    | :py:func:`configure_rtd_type`                |
    +----------------------------------------------+
-   | :py:func:`configure_sample_trigger_slope`    |
-   +----------------------------------------------+
    | :py:func:`configure_short_cable_comp_values` |
    +----------------------------------------------+
    | :py:func:`configure_thermistor_custom`       |
    +----------------------------------------------+
-   | :py:func:`configure_thermistor_type`         |
-   +----------------------------------------------+
    | :py:func:`configure_thermocouple`            |
-   +----------------------------------------------+
-   | :py:func:`configure_transducer_type`         |
    +----------------------------------------------+
    | :py:func:`configure_trigger`                 |
    +----------------------------------------------+
-   | :py:func:`configure_trigger_slope`           |
-   +----------------------------------------------+
    | :py:func:`configure_waveform_acquisition`    |
-   +----------------------------------------------+
-   | :py:func:`configure_waveform_coupling`       |
    +----------------------------------------------+
    | :py:func:`disable`                           |
    +----------------------------------------------+
@@ -273,6 +245,8 @@ nidmm.Session
    | :py:func:`get_measurement_period`            |
    +----------------------------------------------+
    | :py:func:`get_self_cal_supported`            |
+   +----------------------------------------------+
+   | :py:func:`is_over_range`                     |
    +----------------------------------------------+
    | :py:func:`perform_open_cable_comp`           |
    +----------------------------------------------+
