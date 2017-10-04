@@ -210,7 +210,7 @@ def _do_the_test_add_all_metadata(functions, expected):
 
 def test_add_all_metadata_simple():
     functions = {
-        'makeAFoo': {
+        'MakeAFoo': {
             'codegen_method': 'public',
             'returns': 'ViStatus',
             'parameters': [
@@ -237,7 +237,7 @@ def test_add_all_metadata_simple():
                 'description': 'Performs a foo, and performs it well.',
             },
         },
-        'makeAPrivateMethod': {
+        'MakeAPrivateMethod': {
             'codegen_method': 'private',
             'returns': 'ViStatus',
             'parameters': [
@@ -266,8 +266,8 @@ def test_add_all_metadata_simple():
         },
     }
     expected = {
-        'makeAFoo': {
-            'name': 'makeAFoo',
+        'MakeAFoo': {
+            'name': 'MakeAFoo',
             'codegen_method': 'public',
             'documentation': {
                 'description': 'Performs a foo, and performs it well.'
@@ -326,14 +326,14 @@ def test_add_all_metadata_simple():
             'returns_ctype': 'ViStatus_ctype',
             'returns_python': 'ViStatus'
         },
-        'makeAPrivateMethod': {
+        'MakeAPrivateMethod': {
             'codegen_method': 'private',
             'documentation': {
                 'description': 'Perform actions as method defined'
             },
             'has_repeated_capability': False,
             'is_error_handling': False,
-            'name': 'makeAPrivateMethod',
+            'name': 'MakeAPrivateMethod',
             'parameters': [
                 {
                     'ctypes_type': 'ViSession_ctype',
