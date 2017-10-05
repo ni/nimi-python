@@ -64,6 +64,6 @@ class Library(object):
         with self._func_lock:
             if self.niModInst_OpenInstalledDevicesSession_cfunc is None:
                 self.niModInst_OpenInstalledDevicesSession_cfunc = self._library.niModInst_OpenInstalledDevicesSession
-                self.niModInst_OpenInstalledDevicesSession_cfunc.argtypes = [ViChar, ctypes.POINTER(ViSession), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niModInst_OpenInstalledDevicesSession_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViSession), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niModInst_OpenInstalledDevicesSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niModInst_OpenInstalledDevicesSession_cfunc(driver, handle, device_count)

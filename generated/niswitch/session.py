@@ -831,6 +831,7 @@ class _SessionBase(object):
     def __init__(self, repeated_capability):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
+        self._encoding = 'windows-1251'
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -902,7 +903,7 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
         '''
         attribute_value_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niSwitch_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niSwitch_GetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
@@ -947,7 +948,7 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
         '''
         attribute_value_ctype = visatype.ViInt32(0)
-        error_code = self._library.niSwitch_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niSwitch_GetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -992,7 +993,7 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
         '''
         attribute_value_ctype = visatype.ViReal64(0)
-        error_code = self._library.niSwitch_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niSwitch_GetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
@@ -1053,13 +1054,13 @@ class _SessionBase(object):
         '''
         array_size = 0
         attribute_value_ctype = None
-        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
+        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, array_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size = error_code
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), visatype.ViChar)
-        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
+        attribute_value_ctype = (visatype.ViChar * array_size)()
+        error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, array_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode("ascii")
+        return attribute_value_ctype.value.decode(self._encoding)
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
@@ -1113,7 +1114,7 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niSwitch_SetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1169,7 +1170,7 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niSwitch_SetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1225,7 +1226,7 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niSwitch_SetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1281,7 +1282,7 @@ class _SessionBase(object):
                 then pressing . Note: Some of the values might not be valid depending on
                 the current settings of the instrument session. Default Value: none
         '''
-        error_code = self._library.niSwitch_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
+        error_code = self._library.niSwitch_SetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1379,7 +1380,7 @@ class Session(_SessionBase):
                 configuration channel and thus unavailable for external connections.
         '''
         path_capability_ctype = visatype.ViInt32(0)
-        error_code = self._library.niSwitch_CanConnect(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), ctypes.pointer(path_capability_ctype))
+        error_code = self._library.niSwitch_CanConnect(self._vi, channel1.encode(self._encoding), channel2.encode(self._encoding), ctypes.pointer(path_capability_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
 
@@ -1419,7 +1420,7 @@ class Session(_SessionBase):
         '''
         if type(scan_mode) is not enums.ScanMode:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanMode))
-        error_code = self._library.niSwitch_ConfigureScanList(self._vi, scanlist.encode('ascii'), scan_mode.value)
+        error_code = self._library.niSwitch_ConfigureScanList(self._vi, scanlist.encode(self._encoding), scan_mode.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1496,7 +1497,7 @@ class Session(_SessionBase):
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
         '''
-        error_code = self._library.niSwitch_Connect(self._vi, channel1.encode('ascii'), channel2.encode('ascii'))
+        error_code = self._library.niSwitch_Connect(self._vi, channel1.encode(self._encoding), channel2.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1533,7 +1534,7 @@ class Session(_SessionBase):
                 of a valid connection list: c0 -> r1, [c2 -> r2 -> c3] In this example,
                 r2 is a configuration channel. Default value: None
         '''
-        error_code = self._library.niSwitch_ConnectMultiple(self._vi, connection_list.encode('ascii'))
+        error_code = self._library.niSwitch_ConnectMultiple(self._vi, connection_list.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1566,7 +1567,7 @@ class Session(_SessionBase):
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
         '''
-        error_code = self._library.niSwitch_Disconnect(self._vi, channel1.encode('ascii'), channel2.encode('ascii'))
+        error_code = self._library.niSwitch_Disconnect(self._vi, channel1.encode(self._encoding), channel2.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1598,7 +1599,7 @@ class Session(_SessionBase):
                 r2 -> c3] In this example, r2 is a configuration channel. Default value:
                 None
         '''
-        error_code = self._library.niSwitch_DisconnectMultiple(self._vi, disconnection_list.encode('ascii'))
+        error_code = self._library.niSwitch_DisconnectMultiple(self._vi, disconnection_list.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1630,10 +1631,10 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_GetChannelName(self._vi, index, buffer_size, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
-        channel_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViChar)
+        channel_name_buffer_ctype = (visatype.ViChar * buffer_size)()
         error_code = self._library.niSwitch_GetChannelName(self._vi, index, buffer_size, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return channel_name_buffer_ctype.value.decode("ascii")
+        return channel_name_buffer_ctype.value.decode(self._encoding)
 
     def _get_error(self):
         '''_get_error
@@ -1676,10 +1677,10 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViChar)
+        description_ctype = (visatype.ViChar * buffer_size)()
         error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(code_ctype.value), description_ctype.value.decode("ascii")
+        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
     def get_path(self, channel1, channel2):
         '''get_path
@@ -1719,13 +1720,13 @@ class Session(_SessionBase):
         '''
         buffer_size = 0
         path_ctype = None
-        error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
+        error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode(self._encoding), channel2.encode(self._encoding), buffer_size, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
-        path_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViChar)
-        error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
+        path_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode(self._encoding), channel2.encode(self._encoding), buffer_size, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return path_ctype.value.decode("ascii")
+        return path_ctype.value.decode(self._encoding)
 
     def get_relay_count(self, relay_name):
         '''get_relay_count
@@ -1745,7 +1746,7 @@ class Session(_SessionBase):
             relay_count (int):The number of relay cycles.
         '''
         relay_count_ctype = visatype.ViInt32(0)
-        error_code = self._library.niSwitch_GetRelayCount(self._vi, relay_name.encode('ascii'), ctypes.pointer(relay_count_ctype))
+        error_code = self._library.niSwitch_GetRelayCount(self._vi, relay_name.encode(self._encoding), ctypes.pointer(relay_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(relay_count_ctype.value)
 
@@ -1777,10 +1778,10 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_GetRelayName(self._vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         relay_name_buffer_size = error_code
-        relay_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(relay_name_buffer_size), visatype.ViChar)
+        relay_name_buffer_ctype = (visatype.ViChar * relay_name_buffer_size)()
         error_code = self._library.niSwitch_GetRelayName(self._vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return relay_name_buffer_ctype.value.decode("ascii")
+        return relay_name_buffer_ctype.value.decode(self._encoding)
 
     def get_relay_position(self, relay_name):
         '''get_relay_position
@@ -1798,7 +1799,7 @@ class Session(_SessionBase):
                 NIWITCH_VAL_CLOSED 11
         '''
         relay_position_ctype = visatype.ViInt32(0)
-        error_code = self._library.niSwitch_GetRelayPosition(self._vi, relay_name.encode('ascii'), ctypes.pointer(relay_position_ctype))
+        error_code = self._library.niSwitch_GetRelayPosition(self._vi, relay_name.encode(self._encoding), ctypes.pointer(relay_position_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
 
@@ -2035,7 +2036,7 @@ class Session(_SessionBase):
                 and used for all subsequent NI-SWITCH calls.
         '''
         vi_ctype = visatype.ViSession(0)
-        error_code = self._library.niSwitch_InitWithTopology(resource_name.encode('ascii'), topology.encode('ascii'), simulate, reset_device, ctypes.pointer(vi_ctype))
+        error_code = self._library.niSwitch_InitWithTopology(resource_name.encode(self._encoding), topology.encode(self._encoding), simulate, reset_device, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -2105,7 +2106,7 @@ class Session(_SessionBase):
         '''
         if type(relay_action) is not enums.RelayAction:
             raise TypeError('Parameter mode must be of type ' + str(enums.RelayAction))
-        error_code = self._library.niSwitch_RelayControl(self._vi, relay_name.encode('ascii'), relay_action.value)
+        error_code = self._library.niSwitch_RelayControl(self._vi, relay_name.encode(self._encoding), relay_action.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2221,7 +2222,7 @@ class Session(_SessionBase):
                 configuration channel. Default value: None Obtain the path list for a
                 previously created path with get_path.
         '''
-        error_code = self._library.niSwitch_SetPath(self._vi, path_list.encode('ascii'))
+        error_code = self._library.niSwitch_SetPath(self._vi, path_list.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2292,9 +2293,9 @@ class Session(_SessionBase):
                 array with at least 256 bytes.
         '''
         error_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niSwitch_error_message(self._vi, error_code, ctypes.pointer(error_message_ctype))
+        error_code = self._library.niSwitch_error_message(self._vi, error_code, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode("ascii")
+        return error_message_ctype.value.decode(self._encoding)
 
     def reset(self):
         '''reset
@@ -2319,9 +2320,9 @@ class Session(_SessionBase):
         '''
         instrument_driver_revision_ctype = (visatype.ViChar * 256)()
         firmware_revision_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niSwitch_revision_query(self._vi, ctypes.pointer(instrument_driver_revision_ctype), ctypes.pointer(firmware_revision_ctype))
+        error_code = self._library.niSwitch_revision_query(self._vi, instrument_driver_revision_ctype, firmware_revision_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return instrument_driver_revision_ctype.value.decode("ascii"), firmware_revision_ctype.value.decode("ascii")
+        return instrument_driver_revision_ctype.value.decode(self._encoding), firmware_revision_ctype.value.decode(self._encoding)
 
     def self_test(self):
         '''self_test
@@ -2335,9 +2336,9 @@ class Session(_SessionBase):
         '''
         self_test_result_ctype = visatype.ViInt16(0)
         self_test_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niSwitch_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.pointer(self_test_message_ctype))
+        error_code = self._library.niSwitch_self_test(self._vi, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
+        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 
 
 
