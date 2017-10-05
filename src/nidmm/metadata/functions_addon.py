@@ -97,6 +97,8 @@ functions_buffer_info = {
     'InitExtCal':                   { 'parameters': { 0: { 'is_buffer': True, }, }, }, # Not actually used since External Cal not part of API
     'GetDevTemp':                   { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'revision_query':               { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, 
+                                                      2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
