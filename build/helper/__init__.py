@@ -1,9 +1,10 @@
+from build.helper.codegen_helper import filter_parameters  # noqa: F401
 from build.helper.codegen_helper import get_ctype_variable_declaration_snippet  # noqa: F401
 from build.helper.codegen_helper import get_dictionary_snippet  # noqa: F401
 from build.helper.codegen_helper import get_enum_type_check_snippet  # noqa: F401
 from build.helper.codegen_helper import get_method_return_snippet  # noqa: F401
 from build.helper.codegen_helper import get_params_snippet  # noqa: F401
-from build.helper.codegen_helper import ParamListType  # noqa: F401
+from build.helper.codegen_helper import ParameterUsageOptions  # noqa: F401
 
 from build.helper.documentation_helper import as_rest_table  # noqa: F401
 from build.helper.documentation_helper import get_documentation_for_node_docstring  # noqa: F401

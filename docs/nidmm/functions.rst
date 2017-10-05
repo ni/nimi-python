@@ -44,248 +44,6 @@ nidmm.Session methods
 
     :type ac_maximum_frequency_hz: float
 
-.. function:: configure_adc_calibration(adc_calibration)
-
-    For the NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
-    compensate for gain drift since the last external calibration or
-    self-calibration. When **ADC\_Calibration** is ON, the DMM measures an
-    internal reference to calculate the correct gain for the measurement.
-    When **ADC\_Calibration** is OFF, the DMM does not compensate for
-    changes to the gain.
-
-    
-
-
-    :param adc_calibration:
-
-
-        Specifies the **ADC\_Calibration** setting. The driver sets
-        :py:data:`nidmm.ADC\_CALIBRATION` to this value.
-        NIDMM\_VAL\_ADC\_CALIBRATION\_ON enables **ADC\_Calibration**.
-        NIDMM\_VAL\_ADC\_CALIBRATION\_OFF disables **ADC\_Calibration**. If you
-        set the value to NIDMM\_VAL\_ADC\_CALIBRATION\_AUTO, the driver
-        determines whether to enable **ADC\_Calibration** based on the
-        measurement function and resolution that you configure. If you configure
-        the NI 4080/4081/4082 or NI 4070/4071/4072 for a 6½–digit and greater
-        resolution DC measurement, the driver enables ADC Calibration. For all
-        other measurement configurations, the driver disables
-        **ADC\_Calibration**.
-
-        +----------------------------------------------+-------+---------------------------------------------------------------------------------------------------+
-        | Name                                         | Value | Description                                                                                       |
-        +==============================================+=======+===================================================================================================+
-        | NIDMM\_VAL\_ADC\_CALIBRATION\_AUTO (default) | -1.0  | The DMM enables or disables **ADC\_Calibration** based on the configured function and resolution. |
-        +----------------------------------------------+-------+---------------------------------------------------------------------------------------------------+
-        | NIDMM\_VAL\_ADC\_CALIBRATION\_OFF            | 0     | The DMM does not compensate for changes to the gain.                                              |
-        +----------------------------------------------+-------+---------------------------------------------------------------------------------------------------+
-        | NIDMM\_VAL\_ADC\_CALIBRATION\_ON             | 1     | The DMM measures an internal reference to calculate the correct gain for the measurement.         |
-        +----------------------------------------------+-------+---------------------------------------------------------------------------------------------------+
-
-    :type adc_calibration: :py:data:`nidmm.ADCCalibration`
-
-.. function:: configure_auto_zero_mode(auto_zero_mode)
-
-    Configures the DMM for **Auto\_Zero\_Mode**. When **Auto\_Zero\_Mode**
-    is ON, the DMM internally disconnects the input signal and takes a zero
-    reading. It then subtracts the zero reading from the measurement. This
-    prevents offset voltages present on the input circuitry of the DMM from
-    affecting measurement accuracy. When **Auto\_Zero\_Mode** is OFF, the
-    DMM does not compensate for zero reading offset.
-
-    
-
-
-    :param auto_zero_mode:
-
-
-        Specifies the **auto\_zero\_mode**. NI-DMM sets the
-        :py:data:`nidmm.AUTO\_ZERO` attribute to this value.
-
-        ON enables **auto\_zero\_mode** for each measurement. ONCE enables
-        **auto\_zero\_mode** before the next measurement. The
-        **auto\_zero\_mode** value is stored and used in subsequent measurements
-        until the device is reconfigured.
-
-        OFF disables **auto\_zero\_mode**. If you set this parameter to AUTO,
-        NI-DMM determines whether to enable Auto Zero based on the measurement
-        function that you configure. If you configure the NI 4080/4081/4082 or
-        the NI 4070/4071/4072 for a 6½–digit and greater resolution DC
-        measurement, NI-DMM sets **auto\_zero\_mode** to ON.
-
-        For all other DC measurement configurations on the NI 4080/4081/4082 or
-        the NI 4070/4071/4072, NI-DMM sets **auto\_zero\_mode** to ONCE. For all
-        AC measurements or waveform acquisitions on the NI 4080/4081/4082 or the
-        NI 4070/4071/4072, NI-DMM sets **auto\_zero\_mode** to OFF. For NI 4060,
-        **auto\_zero\_mode** is set to OFF when AUTO is selected.
-
-        For NI 4065 devices, **auto\_zero\_mode** is always ON.
-        **auto\_zero\_mode** is an integral part of the signal measurement phase
-        and adds no extra time to the overall measurement.
-
-        +----------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIDMM\_VAL\_AUTO\_ZERO\_AUTO (default) | -1 | NI-DMM chooses the Auto Zero setting based on the configured function and resolution.                                                                                                                      |
-        +----------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIDMM\_VAL\_AUTO\_ZERO\_OFF            | 0  | Disables Auto Zero.                                                                                                                                                                                        |
-        +----------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIDMM\_VAL\_AUTO\_ZERO\_ON             | 1  | The DMM internally disconnects the input signal following each measurement and takes a zero reading. It then subtracts the zero reading from the preceding reading.                                        |
-        +----------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIDMM\_VAL\_AUTO\_ZERO\_ONCE           | 2  | The DMM internally disconnects the input signal following the first measurement and takes a zero reading. It then subtracts the zero reading from the preceding reading and each measurement that follows. |
-        +----------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: The NI 4060/4065 does *not* support this setting.
-
-    :type auto_zero_mode: :py:data:`nidmm.AutoZero`
-
-.. function:: configure_cable_comp_type(cable_comp_type)
-
-    For the NI 4082 and NI 4072 only, sets the
-    :py:data:`nidmm.CABLE\_COMP\_TYPE` attribute for the current
-    capacitance/inductance mode range.
-
-    
-
-
-    :param cable_comp_type:
-
-
-        Specifies the type of cable compensation that is used for the current
-        range.
-
-        
-
-    :type cable_comp_type: :py:data:`nidmm.CableCompensationType`
-
-.. function:: configure_current_source(current_source)
-
-    The NI 4050 and NI 4060 are not supported. Configures the
-    **Current\_Source** for diode measurements.
-
-    
-
-
-    :param current_source:
-
-
-        Specifies the **current\_source** provided during diode measurements.
-        For valid ranges, refer to the device sections for your device. The
-        driver sets :py:data:`nidmm.CURRENT\_SOURCE` to this value.
-
-        +-----------------------------------+--------+---------------------------------------------------+
-        | NIDMM\_VAL\_1\_MICROAMP           | 1 µA   | NI 4080/4081/4082 and NI 4070/4071/4072           |
-        +-----------------------------------+--------+---------------------------------------------------+
-        | NIDMM\_VAL\_10\_MICROAMP          | 10 µA  | NI 4080/4081/4082 and NI 4070/4071/4072 only      |
-        +-----------------------------------+--------+---------------------------------------------------+
-        | NIDMM\_VAL\_100\_MICROAMP         | 100 µA | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 |
-        +-----------------------------------+--------+---------------------------------------------------+
-        | NIDMM\_VAL\_1\_MILLIAMP (default) | 1 mA   | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 |
-        +-----------------------------------+--------+---------------------------------------------------+
-
-    :type current_source: :py:data:`nidmm.CurrentSource`
-
-.. function:: configure_fixed_ref_junction(fixed_reference_junction)
-
-    Configures the fixed reference junction temperature for a thermocouple
-    with a fixed reference junction type.
-
-    
-
-
-    :param fixed_reference_junction:
-
-
-        Specifies the reference junction temperature when a fixed reference
-        junction is used to take a thermocouple measurement. The units are
-        degrees Celsius. NI-DMM uses this value to set the Fixed Reference
-        Junction property. The default is 25.00 (°C).
-
-        
-
-    :type fixed_reference_junction: float
-
-.. function:: configure_frequency_voltage_range(voltage_range)
-
-    For the NI 4080/4081/4082 and the NI 4070/4071/4072 only, specifies the
-    expected maximum amplitude of the input signal for frequency and period
-    measurements.
-
-    
-
-
-    :param voltage_range:
-
-
-        Sets the expected maximum amplitude of the input signal. Refer to the
-        `NI 4080 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4080_functional_overview/>`__,
-        `NI 4081 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4081_functional_overview/>`__,
-        `NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4082/>`__,
-        `NI 4070 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4070_functional_overview/>`__,
-        `NI 4071 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4071_functional_overview/>`__,
-        and
-        `NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4072/>`__
-        sections for a list of valid values. NI-DMM sets
-        :py:data:`nidmm.FREQ\_VOLTAGE\_RANGE` to this value. The minimum
-        peak-to-peak signal amplitude that can be detected is 10% of the
-        specified **voltage\_range**.
-
-        +---------------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                  | Value | Description                                                                                                                      |
-        +=======================================+=======+==================================================================================================================================+
-        | NIDMM\_VAL\_AUTO\_RANGE\_ON (default) | -1.0  | Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement. |
-        +---------------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
-        | NIDMM\_VAL\_AUTO\_RANGE\_OFF          | -2.0  | Disables Auto Ranging. The driver sets the voltage range to the last calculated voltage range.                                   |
-        +---------------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
-
-    :type voltage_range: float
-
-.. function:: configure_meas_complete_dest(meas_complete_destination)
-
-    Specifies the destination of the DMM Measurement Complete (MC) signal.
-    Refer to
-    `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
-    for more information.
-
-    
-
-
-    :param meas_complete_destination:
-
-
-        Specifies the destination of the Measurement Complete signal. This
-        signal is issued when the DMM completes a single measurement. The driver
-        sets the :py:data:`nidmm.MEAS\_COMPLETE\_DEST` attribute to this value. This
-        signal is commonly referred to as Voltmeter Complete.
-
-        
-
-        .. note:: To determine which values are supported by each device, refer to the
-            `LabWindows/CVI Trigger
-            Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-            section.
-
-    :type meas_complete_destination: :py:data:`nidmm.MeasurementCompleteDest`
-
-.. function:: configure_meas_complete_slope(meas_complete_slope)
-
-    Sets the Measurement Complete signal to either rising edge (positive) or
-    falling edge (negative) polarity.
-
-    
-
-
-    :param meas_complete_slope:
-
-
-        Specifies the polarity of the signal that is generated. The driver sets
-        :py:data:`nidmm.MEAS\_DEST\_SLOPE` to this value.
-
-        +------------------------+---+----------------------+----------------------------------------------------------------+
-        | Rising Edge            | 0 | NIDMM\_VAL\_POSITIVE | The driver triggers on the rising edge of the trigger signal.  |
-        +------------------------+---+----------------------+----------------------------------------------------------------+
-        | Falling Edge (default) | 1 | NIDMM\_VAL\_NEGATIVE | The driver triggers on the falling edge of the trigger signal. |
-        +------------------------+---+----------------------+----------------------------------------------------------------+
-
-    :type meas_complete_slope: :py:data:`nidmm.Slope`
-
 .. function:: configure_measurement_absolute(measurement_function, range, resolution_absolute)
 
     Configures the common attributes of the measurement. These attributes
@@ -491,35 +249,6 @@ nidmm.Session methods
 
     :type sample_interval: float
 
-.. function:: configure_offset_comp_ohms(offset_comp_ohms)
-
-    For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
-    compensate for voltage offsets in resistance measurements. When
-    **Offset\_Comp\_Ohms** is enabled, the DMM measures the resistance twice
-    (once with the current source on and again with it turned off). Any
-    voltage offset present in both measurements is cancelled out.
-    **Offset\_Comp\_Ohms** is useful when measuring resistance values less
-    than 10 KΩ.
-
-    
-
-
-    :param offset_comp_ohms:
-
-
-        Enables or disables **offset\_comp\_ohms**. The driver sets
-        :py:data:`nidmm.OFFSET\_COMP\_OHMS` to this value.
-
-        +-----------------------------------------------+-------+--------------------------------------+
-        | Name                                          | Value | Description                          |
-        +===============================================+=======+======================================+
-        | NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_OFF (default) | 0     | Off disables **Offset\_Comp\_Ohms**. |
-        +-----------------------------------------------+-------+--------------------------------------+
-        | NIDMM\_VAL\_OFFSET\_COMP\_OHMS\_ON            | 1     | On enables **Offset\_Comp\_Ohms**.   |
-        +-----------------------------------------------+-------+--------------------------------------+
-
-    :type offset_comp_ohms: :py:data:`nidmm.OffsetCompensatedOhms`
-
 .. function:: configure_open_cable_comp_values(conductance, susceptance)
 
     For the NI 4082 and NI 4072 only, configures the
@@ -635,7 +364,7 @@ nidmm.Session methods
         | \*No standard. Check the TCR.   |
         +---------------------------------+
 
-    :type rtd_type: int
+    :type rtd_type: :py:data:`nidmm.RTDType`
     :param rtd_resistance:
 
 
@@ -645,30 +374,6 @@ nidmm.Session methods
         
 
     :type rtd_resistance: float
-
-.. function:: configure_sample_trigger_slope(sample_trigger_slope)
-
-    Sets the :py:data:`nidmm.SAMPLE\_TRIGGER\_SLOPE` to either rising edge
-    (positive) or falling edge (negative) polarity.
-
-    
-
-
-    :param sample_trigger_slope:
-
-
-        Specifies the polarity of the Trigger signal on which the measurement is
-        triggered for values of either NIDMM\_VAL\_POSITIVE or
-        NIDMM\_VAL\_NEGATIVE. The driver sets
-        :py:data:`nidmm.SAMPLE\_TRIGGER\_SLOPE` to this value.
-
-        +------------------------+---+----------------------+----------------------------------------------------------------+
-        | Rising Edge            | 0 | NIDMM\_VAL\_POSITIVE | The driver triggers on the rising edge of the trigger signal.  |
-        +------------------------+---+----------------------+----------------------------------------------------------------+
-        | Falling Edge (default) | 1 | NIDMM\_VAL\_NEGATIVE | The driver triggers on the falling edge of the trigger signal. |
-        +------------------------+---+----------------------+----------------------------------------------------------------+
-
-    :type sample_trigger_slope: :py:data:`nidmm.Slope`
 
 .. function:: configure_short_cable_comp_values(resistance, reactance)
 
@@ -734,42 +439,7 @@ nidmm.Session methods
 
     :type thermistor_c: float
 
-.. function:: configure_thermistor_type(thermistor_type)
-
-    Configures the thermistor type.
-
-    
-
-
-    :param thermistor_type:
-
-
-        Specifies the type of thermistor used to measure the temperature. NI-DMM
-        uses this value to set the Thermistor Type property. The default is
-        NIDMM\_VAL\_TEMP\_THERMISTOR\_44006.
-
-        +--------------------+--------------------+--------------------+--------------------+
-        | **Defined Values** | **Thermistor       | **Value**          | **25 °C            |
-        |                    | Type**             |                    | Resistance**       |
-        +--------------------+--------------------+--------------------+--------------------+
-        | NIDMM\_VAL\_TEMP\_ | Custom             | 0                  | —                  |
-        | THERMISTOR\_CUSTOM |                    |                    |                    |
-        +--------------------+--------------------+--------------------+--------------------+
-        | NIDMM\_VAL\_TEMP\_ | 44004              | 1                  | 2.25 kΩ            |
-        | THERMISTOR\_44004  |                    |                    |                    |
-        +--------------------+--------------------+--------------------+--------------------+
-        | NIDMM\_VAL\_TEMP\_ | 44006              | 2                  | 10 kΩ              |
-        | THERMISTOR\_44006  |                    |                    |                    |
-        +--------------------+--------------------+--------------------+--------------------+
-        | NIDMM\_VAL\_TEMP\_ | 44007              | 3                  | 5 kΩ               |
-        | THERMISTOR\_44007  |                    |                    |                    |
-        +--------------------+--------------------+--------------------+--------------------+
-
-        
-
-    :type thermistor_type: :py:data:`nidmm.TemperatureThermistorType`
-
-.. function:: configure_thermocouple(thermocouple_type, reference_junction_type='ThermocoupleReferenceJunctionType.FIXED')
+.. function:: configure_thermocouple(thermocouple_type, reference_junction_type=nidmm.ThermocoupleReferenceJunctionType.FIXED)
 
     Configures the thermocouple type and reference junction type for a
     chosen thermocouple.
@@ -813,33 +483,7 @@ nidmm.Session methods
 
         
 
-    :type reference_junction_type: int
-
-.. function:: configure_transducer_type(transducer_type)
-
-    Configures the transducer type.
-
-    
-
-
-    :param transducer_type:
-
-
-        Specifies the type of device used to measure the temperature. NI-DMM
-        uses this value to set the Transducer Type property. The default is
-        NIDMM\_VAL\_THERMOCOUPLE.
-
-        +--------------------------+--------------+
-        | NIDMM\_VAL\_2\_WIRE\_RTD | 2-wire RTD   |
-        +--------------------------+--------------+
-        | NIDMM\_VAL\_4\_WIRE\_RTD | 4-wire RTD   |
-        +--------------------------+--------------+
-        | NIDMM\_VAL\_THERMISTOR   | Thermistor   |
-        +--------------------------+--------------+
-        | NIDMM\_VAL\_THERMOCOUPLE | Thermocouple |
-        +--------------------------+--------------+
-
-    :type transducer_type: :py:data:`nidmm.TemperatureTransducerType`
+    :type reference_junction_type: :py:data:`nidmm.ThermocoupleReferenceJunctionType`
 
 .. function:: configure_trigger(trigger_source, trigger_delay=-1)
 
@@ -886,30 +530,6 @@ nidmm.Session methods
             NIDMM\_VAL\_AUTO\_DELAY (-1).
 
     :type trigger_delay: float
-
-.. function:: configure_trigger_slope(trigger_slope)
-
-    Sets the :py:data:`nidmm.TRIGGER\_SLOPE` attribute to either rising edge
-    (positive) or falling edge (negative) polarity.
-
-    
-
-
-    :param trigger_slope:
-
-
-        Specifies the polarity of the trigger signal on which the measurement is
-        triggered for values of either NIDMM\_VAL\_POSITIVE or
-        NIDMM\_VAL\_NEGATIVE. The driver sets the :py:data:`nidmm.TRIGGER\_SLOPE`
-        attribute to this value.
-
-        +--------------------------------+---+----------------------------------------------------------------+
-        | NIDMM\_VAL\_POSITIVE           | 0 | The driver triggers on the rising edge of the trigger signal.  |
-        +--------------------------------+---+----------------------------------------------------------------+
-        | NIDMM\_VAL\_NEGATIVE (default) | 1 | The driver triggers on the falling edge of the trigger signal. |
-        +--------------------------------+---+----------------------------------------------------------------+
-
-    :type trigger_slope: :py:data:`nidmm.Slope`
 
 .. function:: configure_waveform_acquisition(measurement_function, range, rate, waveform_points)
 
@@ -978,30 +598,6 @@ nidmm.Session methods
         
 
     :type waveform_points: int
-
-.. function:: configure_waveform_coupling(waveform_coupling)
-
-    For the NI 4080/4081/4082 and the NI 4070/4071/4072, configures
-    instrument coupling for voltage waveforms.
-
-    
-
-
-    :param waveform_coupling:
-
-
-        Selects DC or AC coupling. The driver sets
-        :py:data:`nidmm.WAVEFORM\_COUPLING` to this value.
-
-        +----------------------------------------------+-------+-------------+
-        | Name                                         | Value | Description |
-        +==============================================+=======+=============+
-        | NIDMM\_VAL\_WAVEFORM\_COUPLING\_AC           | 0     | AC coupling |
-        +----------------------------------------------+-------+-------------+
-        | NIDMM\_VAL\_WAVEFORM\_COUPLING\_DC (default) | 1     | DC coupling |
-        +----------------------------------------------+-------+-------------+
-
-    :type waveform_coupling: :py:data:`nidmm.WaveformCouplingMode`
 
 .. function:: disable()
 
@@ -1321,7 +917,7 @@ nidmm.Session methods
 
         
 
-    :type options: str
+    :type options: int
 
     :rtype: float
     :return:

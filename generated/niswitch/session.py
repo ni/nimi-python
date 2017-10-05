@@ -3,10 +3,10 @@
 import ctypes
 
 from niswitch import attributes
-from niswitch import ctypes_types
 from niswitch import enums
 from niswitch import errors
 from niswitch import library_singleton
+from niswitch import visatype
 
 
 class _Scan(object):
@@ -873,7 +873,7 @@ class _SessionBase(object):
         invalid.
 
         Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
             attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
@@ -901,7 +901,7 @@ class _SessionBase(object):
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
         '''
-        attribute_value_ctype = ctypes_types.ViBoolean(0)
+        attribute_value_ctype = visatype.ViBoolean(0)
         error_code = self._library.niSwitch_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
@@ -918,7 +918,7 @@ class _SessionBase(object):
         invalid.
 
         Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
             attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
@@ -946,7 +946,7 @@ class _SessionBase(object):
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
         '''
-        attribute_value_ctype = ctypes_types.ViInt32(0)
+        attribute_value_ctype = visatype.ViInt32(0)
         error_code = self._library.niSwitch_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -963,7 +963,7 @@ class _SessionBase(object):
         invalid.
 
         Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
             attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
@@ -991,7 +991,7 @@ class _SessionBase(object):
                 list of the constants by pressing on this control. Select a value by
                 double-clicking on it or by selecting it and then pressing .
         '''
-        attribute_value_ctype = ctypes_types.ViReal64(0)
+        attribute_value_ctype = visatype.ViReal64(0)
         error_code = self._library.niSwitch_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
@@ -1020,7 +1020,7 @@ class _SessionBase(object):
         a negative number for the Array Size parameter.
 
         Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
             attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
@@ -1056,7 +1056,7 @@ class _SessionBase(object):
         error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size = error_code
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), ctypes_types.ViString)
+        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(array_size), visatype.ViChar)
         error_code = self._library.niSwitch_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, array_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode("ascii")
@@ -1084,7 +1084,7 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
             attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
@@ -1140,7 +1140,7 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
             attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
@@ -1196,7 +1196,7 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
             attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
@@ -1252,7 +1252,7 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (str):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
             attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
@@ -1273,7 +1273,7 @@ class _SessionBase(object):
                 a manual input box. - If the attribute in this ring control has
                 constants as valid values, you can view the constants by moving to the
                 Attribute Value control and pressing .
-            attribute_value (str):Pass the value to which you want to set the attribute. From the function
+            attribute_value (int):Pass the value to which you want to set the attribute. From the function
                 panel window, you can use this control as follows. - If the attribute
                 currently showing in the Attribute ID ring control has constants as
                 valid values, you can view a list of the constants by pressing on this
@@ -1348,11 +1348,11 @@ class Session(_SessionBase):
         returned.
 
         Args:
-            channel1 (str):Input one of the channel names of the desired path. Pass the other
+            channel1 (int):Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
-            channel2 (str):Input one of the channel names of the desired path. Pass the other
+            channel2 (int):Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
@@ -1378,7 +1378,7 @@ class Session(_SessionBase):
                 create a path between the two channels because one of the channels is a
                 configuration channel and thus unavailable for external connections.
         '''
-        path_capability_ctype = ctypes_types.ViInt32(0)
+        path_capability_ctype = visatype.ViInt32(0)
         error_code = self._library.niSwitch_CanConnect(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), ctypes.pointer(path_capability_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
@@ -1410,7 +1410,7 @@ class Session(_SessionBase):
         function to start the scan.
 
         Args:
-            scanlist (str):The scan list to use. The driver uses this value to set the Scan List
+            scanlist (int):The scan list to use. The driver uses this value to set the Scan List
                 attribute. Default value: None
             scan_mode (enums.ScanMode):Specifies how the switch module breaks existing connections when
                 scanning. The driver uses this value to set the Scan Mode attribute.
@@ -1487,11 +1487,11 @@ class Session(_SessionBase):
         CH2, then the path also exists between channels CH2 and CH1.
 
         Args:
-            channel1 (str):Input one of the channel names of the desired path. Pass the other
+            channel1 (int):Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
-            channel2 (str):Input one of the channel names of the desired path. Pass the other
+            channel2 (int):Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
@@ -1525,7 +1525,7 @@ class Session(_SessionBase):
         ch2, then the path also exists between channels ch1 and ch2.
 
         Args:
-            connection_list (str):Connection List specifies a list of connections between channels to
+            connection_list (int):Connection List specifies a list of connections between channels to
                 make. NI-SWITCH validates the connection list, and aborts execution of
                 the list if errors are returned. Refer to Connection and Disconnection
                 List Syntax for valid connection list syntax and examples. Refer to
@@ -1557,11 +1557,11 @@ class Session(_SessionBase):
         IVISWTCH_ERROR_NO_SUCH_PATH error.
 
         Args:
-            channel1 (str):Input one of the channel names of the path to break. Pass the other
+            channel1 (int):Input one of the channel names of the path to break. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
-            channel2 (str):Input one of the channel names of the path to break. Pass the other
+            channel2 (int):Input one of the channel names of the path to break. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
@@ -1589,7 +1589,7 @@ class Session(_SessionBase):
         error occurred.
 
         Args:
-            disconnection_list (str):Disconnection List specifies a list of connections between channels to
+            disconnection_list (int):Disconnection List specifies a list of connections between channels to
                 break. NI-SWITCH validates the disconnection list, and aborts execution
                 of the list if errors are returned. Refer to Connection and
                 Disconnection List Syntax for valid disconnection list syntax and
@@ -1630,7 +1630,7 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_GetChannelName(self._vi, index, buffer_size, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
-        channel_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
+        channel_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViChar)
         error_code = self._library.niSwitch_GetChannelName(self._vi, index, buffer_size, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_buffer_ctype.value.decode("ascii")
@@ -1670,13 +1670,13 @@ class Session(_SessionBase):
             code (int):Returns the error code for the session or execution thread. If you pass
                 0 for the Buffer Size, you can pass VI_NULL for this parameter.
         '''
-        code_ctype = ctypes_types.ViStatus(0)
+        code_ctype = visatype.ViStatus(0)
         buffer_size = 0
         description_ctype = None
         error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViChar)
         error_code = self._library.niSwitch_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode("ascii")
@@ -1697,11 +1697,11 @@ class Session(_SessionBase):
         error is returned
 
         Args:
-            channel1 (str):Input one of the channel names of the desired path. Pass the other
+            channel1 (int):Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
-            channel2 (str):Input one of the channel names of the desired path. Pass the other
+            channel2 (int):Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
@@ -1722,7 +1722,7 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
-        path_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
+        path_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViChar)
         error_code = self._library.niSwitch_GetPath(self._vi, channel1.encode('ascii'), channel2.encode('ascii'), buffer_size, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return path_ctype.value.decode("ascii")
@@ -1737,14 +1737,14 @@ class Session(_SessionBase):
         to determine if the switch module supports relay counting.
 
         Args:
-            relay_name (str):Name of the relay. Default value: None Examples of valid relay names:
+            relay_name (int):Name of the relay. Default value: None Examples of valid relay names:
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
 
         Returns:
             relay_count (int):The number of relay cycles.
         '''
-        relay_count_ctype = ctypes_types.ViInt32(0)
+        relay_count_ctype = visatype.ViInt32(0)
         error_code = self._library.niSwitch_GetRelayCount(self._vi, relay_name.encode('ascii'), ctypes.pointer(relay_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(relay_count_ctype.value)
@@ -1777,7 +1777,7 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_GetRelayName(self._vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         relay_name_buffer_size = error_code
-        relay_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(relay_name_buffer_size), ctypes_types.ViString)
+        relay_name_buffer_ctype = ctypes.cast(ctypes.create_string_buffer(relay_name_buffer_size), visatype.ViChar)
         error_code = self._library.niSwitch_GetRelayName(self._vi, index, relay_name_buffer_size, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return relay_name_buffer_ctype.value.decode("ascii")
@@ -1789,7 +1789,7 @@ class Session(_SessionBase):
         parameter.
 
         Args:
-            relay_name (str):Name of the relay. Default value: None Examples of valid relay names:
+            relay_name (int):Name of the relay. Default value: None Examples of valid relay names:
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
 
@@ -1797,7 +1797,7 @@ class Session(_SessionBase):
             relay_position (enums.RelayPosition):Indicates whether the relay is open or closed. NISWITCH_VAL_OPEN 10
                 NIWITCH_VAL_CLOSED 11
         '''
-        relay_position_ctype = ctypes_types.ViInt32(0)
+        relay_position_ctype = visatype.ViInt32(0)
         error_code = self._library.niSwitch_GetRelayPosition(self._vi, relay_name.encode('ascii'), ctypes.pointer(relay_position_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
@@ -1821,7 +1821,7 @@ class Session(_SessionBase):
         and setting the simulate parameter to VI_TRUE.
 
         Args:
-            resource_name (str):Resource name of the switch module to initialize. Default value: None
+            resource_name (int):Resource name of the switch module to initialize. Default value: None
                 Syntax: Optional fields are shown in square brackets ([]). Configured in
                 MAX Under Valid Syntax Devices and Interfaces DeviceName Traditional
                 NI-DAQ Devices SCXI[chassis ID]::slot number PXI System PXI[bus
@@ -1832,7 +1832,7 @@ class Session(_SessionBase):
                 to "MySwitch" SCXI1::3 Traditional NI-DAQ module in chassis 1, slot 3
                 SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
                 0, device number 16 PXI::16 PXI bus 0, device number 16
-            topology (str):Pass the topology name you want to use for the switch you specify with
+            topology (int):Pass the topology name you want to use for the switch you specify with
                 Resource Name parameter. You can also pass
                 NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY to use the last topology that
                 was configured for the device in MAX. Default Value:
@@ -2034,7 +2034,7 @@ class Session(_SessionBase):
                 init_with_topology, init_with_options, or init
                 and used for all subsequent NI-SWITCH calls.
         '''
-        vi_ctype = ctypes_types.ViSession(0)
+        vi_ctype = visatype.ViSession(0)
         error_code = self._library.niSwitch_InitWithTopology(resource_name.encode('ascii'), topology.encode('ascii'), simulate, reset_device, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
@@ -2065,7 +2065,7 @@ class Session(_SessionBase):
             is_debounced (bool):VI_TRUE indicates that all created paths have settled. VI_FALSE
                 indicates that all created paths have not settled.
         '''
-        is_debounced_ctype = ctypes_types.ViBoolean(0)
+        is_debounced_ctype = visatype.ViBoolean(0)
         error_code = self._library.niSwitch_IsDebounced(self._vi, ctypes.pointer(is_debounced_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_debounced_ctype.value)
@@ -2080,7 +2080,7 @@ class Session(_SessionBase):
                 VI_TRUE indicates that the switch device is scanning. VI_FALSE
                 indicates that the switch device is idle.
         '''
-        is_scanning_ctype = ctypes_types.ViBoolean(0)
+        is_scanning_ctype = visatype.ViBoolean(0)
         error_code = self._library.niSwitch_IsScanning(self._vi, ctypes.pointer(is_scanning_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_scanning_ctype.value)
@@ -2096,7 +2096,7 @@ class Session(_SessionBase):
         supports individual relay control.
 
         Args:
-            relay_name (str):Name of the relay. Default value: None Examples of valid relay names:
+            relay_name (int):Name of the relay. Default value: None Examples of valid relay names:
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
             relay_action (enums.RelayAction):Specifies whether to open or close a given relay. Default value: Relay
@@ -2214,7 +2214,7 @@ class Session(_SessionBase):
         is not necessary, use connect.
 
         Args:
-            path_list (str):A string composed of comma-separated paths between channel 1 and channel
+            path_list (int):A string composed of comma-separated paths between channel 1 and channel
                 2. The first and last names in the path are the endpoints of the path.
                 Every other channel in the path are configuration channels. Example of a
                 valid path list string: ch0->com0, com0->ab0. In this example, com0 is a
@@ -2291,8 +2291,8 @@ class Session(_SessionBase):
             error_message (int):The error information formatted into a string. You must pass a ViChar
                 array with at least 256 bytes.
         '''
-        error_message_ctype = (ctypes_types.ViChar * 256)()
-        error_code = self._library.niSwitch_error_message(self._vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar)))
+        error_message_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niSwitch_error_message(self._vi, error_code, ctypes.pointer(error_message_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode("ascii")
 
@@ -2317,9 +2317,9 @@ class Session(_SessionBase):
                 pass a ViChar array with at least 256 bytes.
             firmware_revision (int):Currently unsupported.
         '''
-        instrument_driver_revision_ctype = (ctypes_types.ViChar * 256)()
-        firmware_revision_ctype = (ctypes_types.ViChar * 256)()
-        error_code = self._library.niSwitch_revision_query(self._vi, ctypes.cast(instrument_driver_revision_ctype, ctypes.POINTER(ctypes_types.ViChar)), ctypes.cast(firmware_revision_ctype, ctypes.POINTER(ctypes_types.ViChar)))
+        instrument_driver_revision_ctype = (visatype.ViChar * 256)()
+        firmware_revision_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niSwitch_revision_query(self._vi, ctypes.pointer(instrument_driver_revision_ctype), ctypes.pointer(firmware_revision_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return instrument_driver_revision_ctype.value.decode("ascii"), firmware_revision_ctype.value.decode("ascii")
 
@@ -2333,9 +2333,9 @@ class Session(_SessionBase):
             self_test_message (int):Self-test response string from the switch device. You must pass a ViChar
                 array with at least 256 bytes.
         '''
-        self_test_result_ctype = ctypes_types.ViInt16(0)
-        self_test_message_ctype = (ctypes_types.ViChar * 256)()
-        error_code = self._library.niSwitch_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar)))
+        self_test_result_ctype = visatype.ViInt16(0)
+        self_test_message_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niSwitch_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.pointer(self_test_message_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
 

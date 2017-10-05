@@ -2,7 +2,7 @@
 
 import ctypes
 
-import nifake.ctypes_types
+import nifake.visatype
 
 
 class MockFunctionCallError(Exception):
@@ -188,8 +188,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetAttributeViString", param='attributeValue')
         if buffer_size == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        t = nifake.ctypes_types.ViString(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nifake.ctypes_types.ViString).value
+        t = nifake.visatype.ViChar(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
+        attribute_value.value = ctypes.cast(t, nifake.visatype.ViChar).value
         return self._defaults['GetAttributeViString']['return']
 
     def niFake_GetEnumValue(self, vi, a_quantity, a_turtle):  # noqa: N802
@@ -213,8 +213,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetError", param='description')
         if buffer_size == 0:
             return len(self._defaults['GetError']['description'])
-        t = nifake.ctypes_types.ViString(self._defaults['GetError']['description'].encode('ascii'))
-        description.value = ctypes.cast(t, nifake.ctypes_types.ViString).value
+        t = nifake.visatype.ViChar(self._defaults['GetError']['description'].encode('ascii'))
+        description.value = ctypes.cast(t, nifake.visatype.ViChar).value
         return self._defaults['GetError']['return']
 
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802

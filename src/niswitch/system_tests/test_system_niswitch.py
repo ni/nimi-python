@@ -157,3 +157,9 @@ def test_functions_disable(session):
     session.connect(channel1, channel2)
     session.disable()   # expect no errors
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
+
+
+def test_error_message(session):
+    # Testing a private function, as there is no way to natively get to this function on a simulated session.
+    message = session._error_message(-1074135027)
+    assert message == 'IVI:  (Hex 0xBFFA000D) Attribute is read-only.'

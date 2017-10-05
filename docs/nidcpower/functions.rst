@@ -398,7 +398,7 @@ nidcpower.Session methods
 
         
 
-    :type sequence_name: str
+    :type sequence_name: int
     :param attribute_id_count:
 
 
@@ -594,7 +594,7 @@ nidcpower.Session methods
 
         
 
-    :type sequence_name: str
+    :type sequence_name: int
 
 .. function:: disable()
 

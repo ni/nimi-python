@@ -3,7 +3,7 @@ from .metadata_filters import filter_input_parameters
 from .metadata_filters import filter_output_parameters
 
 from .codegen_helper import get_params_snippet
-from .codegen_helper import ParamListType
+from .codegen_helper import ParameterUsageOptions
 
 import re
 import string
@@ -279,7 +279,7 @@ def get_function_rst(fname, config, indent=0):
     '''
     function = config['functions'][fname]
     rst = '.. function:: ' + function['python_name'] + '('
-    rst += get_params_snippet(function, ParamListType.DOCUMENTATION_SESSION_METHOD) + ')'
+    rst += get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 

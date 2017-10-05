@@ -3,10 +3,10 @@
 import ctypes
 
 from nidcpower import attributes
-from nidcpower import ctypes_types
 from nidcpower import enums
 from nidcpower import errors
 from nidcpower import library_singleton
+from nidcpower import visatype
 
 
 class _Acquisition(object):
@@ -2599,10 +2599,10 @@ class _SessionBase(object):
             actual_count (int):Indicates the number of measured values actually retrieved from the
                 device.
         '''
-        voltage_measurements_ctype = ctypes_types.ViReal64(0)
-        current_measurements_ctype = ctypes_types.ViReal64(0)
-        in_compliance_ctype = ctypes_types.ViBoolean(0)
-        actual_count_ctype = ctypes_types.ViInt32(0)
+        voltage_measurements_ctype = visatype.ViReal64(0)
+        current_measurements_ctype = visatype.ViReal64(0)
+        in_compliance_ctype = visatype.ViBoolean(0)
+        actual_count_ctype = visatype.ViInt32(0)
         error_code = self._library.niDCPower_FetchMultiple(self._vi, self._repeated_capability.encode('ascii'), timeout, count, ctypes.pointer(voltage_measurements_ctype), ctypes.pointer(current_measurements_ctype), ctypes.pointer(in_compliance_ctype), ctypes.pointer(actual_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(voltage_measurements_ctype.value), float(current_measurements_ctype.value), bool(in_compliance_ctype.value), int(actual_count_ctype.value)
@@ -2654,7 +2654,7 @@ class _SessionBase(object):
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
         '''
-        attribute_value_ctype = ctypes_types.ViBoolean(0)
+        attribute_value_ctype = visatype.ViBoolean(0)
         error_code = self._library.niDCPower_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
@@ -2706,7 +2706,7 @@ class _SessionBase(object):
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
         '''
-        attribute_value_ctype = ctypes_types.ViInt32(0)
+        attribute_value_ctype = visatype.ViInt32(0)
         error_code = self._library.niDCPower_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -2758,7 +2758,7 @@ class _SessionBase(object):
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
         '''
-        attribute_value_ctype = ctypes_types.ViInt64(0)
+        attribute_value_ctype = visatype.ViInt64(0)
         error_code = self._library.niDCPower_GetAttributeViInt64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -2810,7 +2810,7 @@ class _SessionBase(object):
                 pressing **Enter** on this control. Select a value by double-clicking on
                 it or by selecting it and then pressing **Enter**.
         '''
-        attribute_value_ctype = ctypes_types.ViReal64(0)
+        attribute_value_ctype = visatype.ViReal64(0)
         error_code = self._library.niDCPower_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
@@ -2871,7 +2871,7 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
+        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViChar)
         error_code = self._library.niDCPower_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode("ascii")
@@ -2907,7 +2907,7 @@ class _SessionBase(object):
             measurement (float):Returns the value of the measurement, either in volts for voltage or
                 amps for current.
         '''
-        measurement_ctype = ctypes_types.ViReal64(0)
+        measurement_ctype = visatype.ViReal64(0)
         error_code = self._library.niDCPower_Measure(self._vi, self._repeated_capability.encode('ascii'), measurement_type, ctypes.pointer(measurement_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
@@ -2944,8 +2944,8 @@ class _SessionBase(object):
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
         '''
-        voltage_measurements_ctype = ctypes_types.ViReal64(0)
-        current_measurements_ctype = ctypes_types.ViReal64(0)
+        voltage_measurements_ctype = visatype.ViReal64(0)
+        current_measurements_ctype = visatype.ViReal64(0)
         error_code = self._library.niDCPower_MeasureMultiple(self._vi, self._repeated_capability.encode('ascii'), ctypes.pointer(voltage_measurements_ctype), ctypes.pointer(current_measurements_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(voltage_measurements_ctype.value), float(current_measurements_ctype.value)
@@ -2991,7 +2991,7 @@ class _SessionBase(object):
         Returns:
             in_compliance (bool):Returns whether the device output channel is in compliance.
         '''
-        in_compliance_ctype = ctypes_types.ViBoolean(0)
+        in_compliance_ctype = visatype.ViBoolean(0)
         error_code = self._library.niDCPower_QueryInCompliance(self._vi, self._repeated_capability.encode('ascii'), ctypes.pointer(in_compliance_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_compliance_ctype.value)
@@ -3015,7 +3015,7 @@ class _SessionBase(object):
             max_current_limit (float):Returns the maximum current limit that can be set with the specified
                 **voltageLevel**.
         '''
-        max_current_limit_ctype = ctypes_types.ViReal64(0)
+        max_current_limit_ctype = visatype.ViReal64(0)
         error_code = self._library.niDCPower_QueryMaxCurrentLimit(self._vi, self._repeated_capability.encode('ascii'), voltage_level, ctypes.pointer(max_current_limit_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(max_current_limit_ctype.value)
@@ -3039,7 +3039,7 @@ class _SessionBase(object):
             max_voltage_level (float):Returns the maximum voltage level that can be set on an output channel
                 with the specified **currentLimit**.
         '''
-        max_voltage_level_ctype = ctypes_types.ViReal64(0)
+        max_voltage_level_ctype = visatype.ViReal64(0)
         error_code = self._library.niDCPower_QueryMaxVoltageLevel(self._vi, self._repeated_capability.encode('ascii'), current_limit, ctypes.pointer(max_voltage_level_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(max_voltage_level_ctype.value)
@@ -3063,7 +3063,7 @@ class _SessionBase(object):
             min_current_limit (float):Returns the minimum current limit that can be set on an output channel
                 with the specified **voltageLevel**.
         '''
-        min_current_limit_ctype = ctypes_types.ViReal64(0)
+        min_current_limit_ctype = visatype.ViReal64(0)
         error_code = self._library.niDCPower_QueryMinCurrentLimit(self._vi, self._repeated_capability.encode('ascii'), voltage_level, ctypes.pointer(min_current_limit_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(min_current_limit_ctype.value)
@@ -3097,7 +3097,7 @@ class _SessionBase(object):
             in_state (bool):Returns whether the device output channel is in the specified output
                 state.
         '''
-        in_state_ctype = ctypes_types.ViBoolean(0)
+        in_state_ctype = visatype.ViBoolean(0)
         error_code = self._library.niDCPower_QueryOutputState(self._vi, self._repeated_capability.encode('ascii'), output_state, ctypes.pointer(in_state_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_state_ctype.value)
@@ -3358,7 +3358,7 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
-            attribute_value (str):Specifies the value to which you want to set the attribute. If the
+            attribute_value (int):Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
@@ -3560,7 +3560,7 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(self._vi, input_terminal, edge)
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(self._vi, input_terminal.encode('ascii'), edge)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3603,7 +3603,7 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(self._vi, input_terminal, edge)
+        error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(self._vi, input_terminal.encode('ascii'), edge)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3647,7 +3647,7 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(self._vi, input_terminal, edge)
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(self._vi, input_terminal.encode('ascii'), edge)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3690,7 +3690,7 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(self._vi, input_terminal, edge)
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(self._vi, input_terminal.encode('ascii'), edge)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3733,7 +3733,7 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(self._vi, input_terminal, edge)
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(self._vi, input_terminal.encode('ascii'), edge)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3778,7 +3778,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            sequence_name (str):Specifies the name of the sequence to create.
+            sequence_name (int):Specifies the name of the sequence to create.
             attribute_id_count (int):Specifies the number of attributes in the attributeIDs array.
             attribute_ids (int):Specifies the attributes you reconfigure per step in the advanced
                 sequence. The following table lists which attributes can be configured
@@ -3949,7 +3949,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            sequence_name (str):specifies the name of the sequence to delete.
+            sequence_name (int):specifies the name of the sequence to delete.
         '''
         error_code = self._library.niDCPower_DeleteAdvancedSequence(self._vi, sequence_name.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -4044,7 +4044,7 @@ class Session(_SessionBase):
                 | "PXI_Trig7" | PXI trigger line 7   |
                 +-------------+----------------------+
         '''
-        error_code = self._library.niDCPower_ExportSignal(self._vi, signal, signal_identifier, output_terminal)
+        error_code = self._library.niDCPower_ExportSignal(self._vi, signal, signal_identifier.encode('ascii'), output_terminal.encode('ascii'))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4084,13 +4084,13 @@ class Session(_SessionBase):
         Returns:
             code (int):Returns the error code for the session or execution thread.
         '''
-        code_ctype = ctypes_types.ViStatus(0)
+        code_ctype = visatype.ViStatus(0)
         buffer_size = 0
         description_ctype = None
         error_code = self._library.niDCPower_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
+        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViChar)
         error_code = self._library.niDCPower_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode("ascii")
@@ -4125,11 +4125,11 @@ class Session(_SessionBase):
                 calibrated.
             minute (int):Returns the **minute** in which the device was last calibrated.
         '''
-        year_ctype = ctypes_types.ViInt32(0)
-        month_ctype = ctypes_types.ViInt32(0)
-        day_ctype = ctypes_types.ViInt32(0)
-        hour_ctype = ctypes_types.ViInt32(0)
-        minute_ctype = ctypes_types.ViInt32(0)
+        year_ctype = visatype.ViInt32(0)
+        month_ctype = visatype.ViInt32(0)
+        day_ctype = visatype.ViInt32(0)
+        hour_ctype = visatype.ViInt32(0)
+        minute_ctype = visatype.ViInt32(0)
         error_code = self._library.niDCPower_GetSelfCalLastDateAndTime(self._vi, ctypes.pointer(year_ctype), ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
@@ -4160,7 +4160,7 @@ class Session(_SessionBase):
             temperature (float):Returns the onboard **temperature** of the device, in degrees Celsius,
                 during the oldest successful calibration.
         '''
-        temperature_ctype = ctypes_types.ViReal64(0)
+        temperature_ctype = visatype.ViReal64(0)
         error_code = self._library.niDCPower_GetSelfCalLastTemp(self._vi, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
@@ -4204,7 +4204,7 @@ class Session(_SessionBase):
         States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
 
         Args:
-            resource_name (str):Specifies the **resourceName** assigned by Measurement & Automation
+            resource_name (int):Specifies the **resourceName** assigned by Measurement & Automation
                 Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
                 instrument's **resourceName**. **resourceName** can also be a logical
                 IVI name.
@@ -4237,8 +4237,8 @@ class Session(_SessionBase):
             vi (int):Returns a session handle that you use to identify the device in all
                 subsequent NI-DCPower function calls.
         '''
-        vi_ctype = ctypes_types.ViSession(0)
-        error_code = self._library.niDCPower_InitializeWithChannels(resource_name.encode('ascii'), channels, reset, option_string, ctypes.pointer(vi_ctype))
+        vi_ctype = visatype.ViSession(0)
+        error_code = self._library.niDCPower_InitializeWithChannels(resource_name.encode('ascii'), channels.encode('ascii'), reset, option_string.encode('ascii'), ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -4277,7 +4277,7 @@ class Session(_SessionBase):
         Returns:
             temperature (float):Returns the onboard **temperature**, in degrees Celsius, of the device.
         '''
-        temperature_ctype = ctypes_types.ViReal64(0)
+        temperature_ctype = visatype.ViReal64(0)
         error_code = self._library.niDCPower_ReadCurrentTemperature(self._vi, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
@@ -4453,8 +4453,8 @@ class Session(_SessionBase):
                 code you specify.
                 You must pass a ViChar array with at least 256 bytes.
         '''
-        error_message_ctype = (ctypes_types.ViChar * 256)()
-        error_code = self._library.niDCPower_error_message(self._vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar)))
+        error_message_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niDCPower_error_message(self._vi, error_code, ctypes.pointer(error_message_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode("ascii")
 
@@ -4487,8 +4487,8 @@ class Session(_SessionBase):
             firmware_revision (int):Returns firmware revision information for the device you are using. The
                 size of this array must be at least 256 bytes.
         '''
-        instrument_driver_revision_ctype = ctypes_types.ViChar(0)
-        firmware_revision_ctype = ctypes_types.ViChar(0)
+        instrument_driver_revision_ctype = visatype.ViChar(0)
+        firmware_revision_ctype = visatype.ViChar(0)
         error_code = self._library.niDCPower_revision_query(self._vi, ctypes.pointer(instrument_driver_revision_ctype), ctypes.pointer(firmware_revision_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(instrument_driver_revision_ctype.value), int(firmware_revision_ctype.value)
@@ -4517,9 +4517,9 @@ class Session(_SessionBase):
             self_test_message (int):Returns the self-test result message. The size of this array must be at
                 least 256 bytes.
         '''
-        self_test_result_ctype = ctypes_types.ViInt16(0)
-        self_test_message_ctype = (ctypes_types.ViChar * 256)()
-        error_code = self._library.niDCPower_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar)))
+        self_test_result_ctype = visatype.ViInt16(0)
+        self_test_message_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niDCPower_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.pointer(self_test_message_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
 
