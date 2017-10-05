@@ -2,7 +2,7 @@
 
 import ctypes
 
-import nidmm.ctypes_types
+import nidmm.visatype
 
 
 class MockFunctionCallError(Exception):
@@ -22,30 +22,12 @@ class SideEffectsHelper(object):
         self._defaults['Abort']['return'] = 0
         self._defaults['ConfigureACBandwidth'] = {}
         self._defaults['ConfigureACBandwidth']['return'] = 0
-        self._defaults['ConfigureADCCalibration'] = {}
-        self._defaults['ConfigureADCCalibration']['return'] = 0
-        self._defaults['ConfigureAutoZeroMode'] = {}
-        self._defaults['ConfigureAutoZeroMode']['return'] = 0
-        self._defaults['ConfigureCableCompType'] = {}
-        self._defaults['ConfigureCableCompType']['return'] = 0
-        self._defaults['ConfigureCurrentSource'] = {}
-        self._defaults['ConfigureCurrentSource']['return'] = 0
-        self._defaults['ConfigureFixedRefJunction'] = {}
-        self._defaults['ConfigureFixedRefJunction']['return'] = 0
-        self._defaults['ConfigureFrequencyVoltageRange'] = {}
-        self._defaults['ConfigureFrequencyVoltageRange']['return'] = 0
-        self._defaults['ConfigureMeasCompleteDest'] = {}
-        self._defaults['ConfigureMeasCompleteDest']['return'] = 0
-        self._defaults['ConfigureMeasCompleteSlope'] = {}
-        self._defaults['ConfigureMeasCompleteSlope']['return'] = 0
         self._defaults['ConfigureMeasurementAbsolute'] = {}
         self._defaults['ConfigureMeasurementAbsolute']['return'] = 0
         self._defaults['ConfigureMeasurementDigits'] = {}
         self._defaults['ConfigureMeasurementDigits']['return'] = 0
         self._defaults['ConfigureMultiPoint'] = {}
         self._defaults['ConfigureMultiPoint']['return'] = 0
-        self._defaults['ConfigureOffsetCompOhms'] = {}
-        self._defaults['ConfigureOffsetCompOhms']['return'] = 0
         self._defaults['ConfigureOpenCableCompValues'] = {}
         self._defaults['ConfigureOpenCableCompValues']['return'] = 0
         self._defaults['ConfigurePowerLineFrequency'] = {}
@@ -54,26 +36,16 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureRTDCustom']['return'] = 0
         self._defaults['ConfigureRTDType'] = {}
         self._defaults['ConfigureRTDType']['return'] = 0
-        self._defaults['ConfigureSampleTriggerSlope'] = {}
-        self._defaults['ConfigureSampleTriggerSlope']['return'] = 0
         self._defaults['ConfigureShortCableCompValues'] = {}
         self._defaults['ConfigureShortCableCompValues']['return'] = 0
         self._defaults['ConfigureThermistorCustom'] = {}
         self._defaults['ConfigureThermistorCustom']['return'] = 0
-        self._defaults['ConfigureThermistorType'] = {}
-        self._defaults['ConfigureThermistorType']['return'] = 0
         self._defaults['ConfigureThermocouple'] = {}
         self._defaults['ConfigureThermocouple']['return'] = 0
-        self._defaults['ConfigureTransducerType'] = {}
-        self._defaults['ConfigureTransducerType']['return'] = 0
         self._defaults['ConfigureTrigger'] = {}
         self._defaults['ConfigureTrigger']['return'] = 0
-        self._defaults['ConfigureTriggerSlope'] = {}
-        self._defaults['ConfigureTriggerSlope']['return'] = 0
         self._defaults['ConfigureWaveformAcquisition'] = {}
         self._defaults['ConfigureWaveformAcquisition']['return'] = 0
-        self._defaults['ConfigureWaveformCoupling'] = {}
-        self._defaults['ConfigureWaveformCoupling']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
         self._defaults['Fetch'] = {}
@@ -203,46 +175,6 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureACBandwidth']['return']
         return self._defaults['ConfigureACBandwidth']['return']
 
-    def niDMM_ConfigureADCCalibration(self, vi, adc_calibration):  # noqa: N802
-        if self._defaults['ConfigureADCCalibration']['return'] != 0:
-            return self._defaults['ConfigureADCCalibration']['return']
-        return self._defaults['ConfigureADCCalibration']['return']
-
-    def niDMM_ConfigureAutoZeroMode(self, vi, auto_zero_mode):  # noqa: N802
-        if self._defaults['ConfigureAutoZeroMode']['return'] != 0:
-            return self._defaults['ConfigureAutoZeroMode']['return']
-        return self._defaults['ConfigureAutoZeroMode']['return']
-
-    def niDMM_ConfigureCableCompType(self, vi, cable_comp_type):  # noqa: N802
-        if self._defaults['ConfigureCableCompType']['return'] != 0:
-            return self._defaults['ConfigureCableCompType']['return']
-        return self._defaults['ConfigureCableCompType']['return']
-
-    def niDMM_ConfigureCurrentSource(self, vi, current_source):  # noqa: N802
-        if self._defaults['ConfigureCurrentSource']['return'] != 0:
-            return self._defaults['ConfigureCurrentSource']['return']
-        return self._defaults['ConfigureCurrentSource']['return']
-
-    def niDMM_ConfigureFixedRefJunction(self, vi, fixed_reference_junction):  # noqa: N802
-        if self._defaults['ConfigureFixedRefJunction']['return'] != 0:
-            return self._defaults['ConfigureFixedRefJunction']['return']
-        return self._defaults['ConfigureFixedRefJunction']['return']
-
-    def niDMM_ConfigureFrequencyVoltageRange(self, vi, voltage_range):  # noqa: N802
-        if self._defaults['ConfigureFrequencyVoltageRange']['return'] != 0:
-            return self._defaults['ConfigureFrequencyVoltageRange']['return']
-        return self._defaults['ConfigureFrequencyVoltageRange']['return']
-
-    def niDMM_ConfigureMeasCompleteDest(self, vi, meas_complete_destination):  # noqa: N802
-        if self._defaults['ConfigureMeasCompleteDest']['return'] != 0:
-            return self._defaults['ConfigureMeasCompleteDest']['return']
-        return self._defaults['ConfigureMeasCompleteDest']['return']
-
-    def niDMM_ConfigureMeasCompleteSlope(self, vi, meas_complete_slope):  # noqa: N802
-        if self._defaults['ConfigureMeasCompleteSlope']['return'] != 0:
-            return self._defaults['ConfigureMeasCompleteSlope']['return']
-        return self._defaults['ConfigureMeasCompleteSlope']['return']
-
     def niDMM_ConfigureMeasurementAbsolute(self, vi, measurement_function, range, resolution_absolute):  # noqa: N802
         if self._defaults['ConfigureMeasurementAbsolute']['return'] != 0:
             return self._defaults['ConfigureMeasurementAbsolute']['return']
@@ -257,11 +189,6 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureMultiPoint']['return'] != 0:
             return self._defaults['ConfigureMultiPoint']['return']
         return self._defaults['ConfigureMultiPoint']['return']
-
-    def niDMM_ConfigureOffsetCompOhms(self, vi, offset_comp_ohms):  # noqa: N802
-        if self._defaults['ConfigureOffsetCompOhms']['return'] != 0:
-            return self._defaults['ConfigureOffsetCompOhms']['return']
-        return self._defaults['ConfigureOffsetCompOhms']['return']
 
     def niDMM_ConfigureOpenCableCompValues(self, vi, conductance, susceptance):  # noqa: N802
         if self._defaults['ConfigureOpenCableCompValues']['return'] != 0:
@@ -283,11 +210,6 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureRTDType']['return']
         return self._defaults['ConfigureRTDType']['return']
 
-    def niDMM_ConfigureSampleTriggerSlope(self, vi, sample_trigger_slope):  # noqa: N802
-        if self._defaults['ConfigureSampleTriggerSlope']['return'] != 0:
-            return self._defaults['ConfigureSampleTriggerSlope']['return']
-        return self._defaults['ConfigureSampleTriggerSlope']['return']
-
     def niDMM_ConfigureShortCableCompValues(self, vi, resistance, reactance):  # noqa: N802
         if self._defaults['ConfigureShortCableCompValues']['return'] != 0:
             return self._defaults['ConfigureShortCableCompValues']['return']
@@ -298,40 +220,20 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureThermistorCustom']['return']
         return self._defaults['ConfigureThermistorCustom']['return']
 
-    def niDMM_ConfigureThermistorType(self, vi, thermistor_type):  # noqa: N802
-        if self._defaults['ConfigureThermistorType']['return'] != 0:
-            return self._defaults['ConfigureThermistorType']['return']
-        return self._defaults['ConfigureThermistorType']['return']
-
     def niDMM_ConfigureThermocouple(self, vi, thermocouple_type, reference_junction_type):  # noqa: N802
         if self._defaults['ConfigureThermocouple']['return'] != 0:
             return self._defaults['ConfigureThermocouple']['return']
         return self._defaults['ConfigureThermocouple']['return']
-
-    def niDMM_ConfigureTransducerType(self, vi, transducer_type):  # noqa: N802
-        if self._defaults['ConfigureTransducerType']['return'] != 0:
-            return self._defaults['ConfigureTransducerType']['return']
-        return self._defaults['ConfigureTransducerType']['return']
 
     def niDMM_ConfigureTrigger(self, vi, trigger_source, trigger_delay):  # noqa: N802
         if self._defaults['ConfigureTrigger']['return'] != 0:
             return self._defaults['ConfigureTrigger']['return']
         return self._defaults['ConfigureTrigger']['return']
 
-    def niDMM_ConfigureTriggerSlope(self, vi, trigger_slope):  # noqa: N802
-        if self._defaults['ConfigureTriggerSlope']['return'] != 0:
-            return self._defaults['ConfigureTriggerSlope']['return']
-        return self._defaults['ConfigureTriggerSlope']['return']
-
     def niDMM_ConfigureWaveformAcquisition(self, vi, measurement_function, range, rate, waveform_points):  # noqa: N802
         if self._defaults['ConfigureWaveformAcquisition']['return'] != 0:
             return self._defaults['ConfigureWaveformAcquisition']['return']
         return self._defaults['ConfigureWaveformAcquisition']['return']
-
-    def niDMM_ConfigureWaveformCoupling(self, vi, waveform_coupling):  # noqa: N802
-        if self._defaults['ConfigureWaveformCoupling']['return'] != 0:
-            return self._defaults['ConfigureWaveformCoupling']['return']
-        return self._defaults['ConfigureWaveformCoupling']['return']
 
     def niDMM_Disable(self, vi):  # noqa: N802
         if self._defaults['Disable']['return'] != 0:
@@ -410,8 +312,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetAttributeViString", param='attributeValue')
         if buffer_size == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        t = nidmm.ctypes_types.ViString(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nidmm.ctypes_types.ViString).value
+        t = nidmm.visatype.ViString(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
+        attribute_value.value = ctypes.cast(t, nidmm.visatype.ViString).value
         return self._defaults['GetAttributeViString']['return']
 
     def niDMM_GetAutoRangeValue(self, vi, actual_range):  # noqa: N802
@@ -460,8 +362,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetError", param='description')
         if buffer_size == 0:
             return len(self._defaults['GetError']['description'])
-        t = nidmm.ctypes_types.ViString(self._defaults['GetError']['description'].encode('ascii'))
-        description.value = ctypes.cast(t, nidmm.ctypes_types.ViString).value
+        t = nidmm.visatype.ViString(self._defaults['GetError']['description'].encode('ascii'))
+        description.value = ctypes.cast(t, nidmm.visatype.ViString).value
         return self._defaults['GetError']['return']
 
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
@@ -645,30 +547,12 @@ class SideEffectsHelper(object):
         mock_library.niDMM_Abort.return_value = 0
         mock_library.niDMM_ConfigureACBandwidth.side_effect = MockFunctionCallError("niDMM_ConfigureACBandwidth")
         mock_library.niDMM_ConfigureACBandwidth.return_value = 0
-        mock_library.niDMM_ConfigureADCCalibration.side_effect = MockFunctionCallError("niDMM_ConfigureADCCalibration")
-        mock_library.niDMM_ConfigureADCCalibration.return_value = 0
-        mock_library.niDMM_ConfigureAutoZeroMode.side_effect = MockFunctionCallError("niDMM_ConfigureAutoZeroMode")
-        mock_library.niDMM_ConfigureAutoZeroMode.return_value = 0
-        mock_library.niDMM_ConfigureCableCompType.side_effect = MockFunctionCallError("niDMM_ConfigureCableCompType")
-        mock_library.niDMM_ConfigureCableCompType.return_value = 0
-        mock_library.niDMM_ConfigureCurrentSource.side_effect = MockFunctionCallError("niDMM_ConfigureCurrentSource")
-        mock_library.niDMM_ConfigureCurrentSource.return_value = 0
-        mock_library.niDMM_ConfigureFixedRefJunction.side_effect = MockFunctionCallError("niDMM_ConfigureFixedRefJunction")
-        mock_library.niDMM_ConfigureFixedRefJunction.return_value = 0
-        mock_library.niDMM_ConfigureFrequencyVoltageRange.side_effect = MockFunctionCallError("niDMM_ConfigureFrequencyVoltageRange")
-        mock_library.niDMM_ConfigureFrequencyVoltageRange.return_value = 0
-        mock_library.niDMM_ConfigureMeasCompleteDest.side_effect = MockFunctionCallError("niDMM_ConfigureMeasCompleteDest")
-        mock_library.niDMM_ConfigureMeasCompleteDest.return_value = 0
-        mock_library.niDMM_ConfigureMeasCompleteSlope.side_effect = MockFunctionCallError("niDMM_ConfigureMeasCompleteSlope")
-        mock_library.niDMM_ConfigureMeasCompleteSlope.return_value = 0
         mock_library.niDMM_ConfigureMeasurementAbsolute.side_effect = MockFunctionCallError("niDMM_ConfigureMeasurementAbsolute")
         mock_library.niDMM_ConfigureMeasurementAbsolute.return_value = 0
         mock_library.niDMM_ConfigureMeasurementDigits.side_effect = MockFunctionCallError("niDMM_ConfigureMeasurementDigits")
         mock_library.niDMM_ConfigureMeasurementDigits.return_value = 0
         mock_library.niDMM_ConfigureMultiPoint.side_effect = MockFunctionCallError("niDMM_ConfigureMultiPoint")
         mock_library.niDMM_ConfigureMultiPoint.return_value = 0
-        mock_library.niDMM_ConfigureOffsetCompOhms.side_effect = MockFunctionCallError("niDMM_ConfigureOffsetCompOhms")
-        mock_library.niDMM_ConfigureOffsetCompOhms.return_value = 0
         mock_library.niDMM_ConfigureOpenCableCompValues.side_effect = MockFunctionCallError("niDMM_ConfigureOpenCableCompValues")
         mock_library.niDMM_ConfigureOpenCableCompValues.return_value = 0
         mock_library.niDMM_ConfigurePowerLineFrequency.side_effect = MockFunctionCallError("niDMM_ConfigurePowerLineFrequency")
@@ -677,26 +561,16 @@ class SideEffectsHelper(object):
         mock_library.niDMM_ConfigureRTDCustom.return_value = 0
         mock_library.niDMM_ConfigureRTDType.side_effect = MockFunctionCallError("niDMM_ConfigureRTDType")
         mock_library.niDMM_ConfigureRTDType.return_value = 0
-        mock_library.niDMM_ConfigureSampleTriggerSlope.side_effect = MockFunctionCallError("niDMM_ConfigureSampleTriggerSlope")
-        mock_library.niDMM_ConfigureSampleTriggerSlope.return_value = 0
         mock_library.niDMM_ConfigureShortCableCompValues.side_effect = MockFunctionCallError("niDMM_ConfigureShortCableCompValues")
         mock_library.niDMM_ConfigureShortCableCompValues.return_value = 0
         mock_library.niDMM_ConfigureThermistorCustom.side_effect = MockFunctionCallError("niDMM_ConfigureThermistorCustom")
         mock_library.niDMM_ConfigureThermistorCustom.return_value = 0
-        mock_library.niDMM_ConfigureThermistorType.side_effect = MockFunctionCallError("niDMM_ConfigureThermistorType")
-        mock_library.niDMM_ConfigureThermistorType.return_value = 0
         mock_library.niDMM_ConfigureThermocouple.side_effect = MockFunctionCallError("niDMM_ConfigureThermocouple")
         mock_library.niDMM_ConfigureThermocouple.return_value = 0
-        mock_library.niDMM_ConfigureTransducerType.side_effect = MockFunctionCallError("niDMM_ConfigureTransducerType")
-        mock_library.niDMM_ConfigureTransducerType.return_value = 0
         mock_library.niDMM_ConfigureTrigger.side_effect = MockFunctionCallError("niDMM_ConfigureTrigger")
         mock_library.niDMM_ConfigureTrigger.return_value = 0
-        mock_library.niDMM_ConfigureTriggerSlope.side_effect = MockFunctionCallError("niDMM_ConfigureTriggerSlope")
-        mock_library.niDMM_ConfigureTriggerSlope.return_value = 0
         mock_library.niDMM_ConfigureWaveformAcquisition.side_effect = MockFunctionCallError("niDMM_ConfigureWaveformAcquisition")
         mock_library.niDMM_ConfigureWaveformAcquisition.return_value = 0
-        mock_library.niDMM_ConfigureWaveformCoupling.side_effect = MockFunctionCallError("niDMM_ConfigureWaveformCoupling")
-        mock_library.niDMM_ConfigureWaveformCoupling.return_value = 0
         mock_library.niDMM_Disable.side_effect = MockFunctionCallError("niDMM_Disable")
         mock_library.niDMM_Disable.return_value = 0
         mock_library.niDMM_Fetch.side_effect = MockFunctionCallError("niDMM_Fetch")

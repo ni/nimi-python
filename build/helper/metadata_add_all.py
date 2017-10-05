@@ -105,7 +105,7 @@ def _add_library_method_call_snippet(parameter, session_handle_parameter_name):
         if parameter['size']['mechanism'] == 'ivi-dance':
             library_method_call_snippet = parameter['ctypes_variable_name']
         elif parameter['is_buffer']:
-            library_method_call_snippet = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + parameter['ctypes_type'] + '))'
+            library_method_call_snippet = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(visatype.' + parameter['ctypes_type'] + '))'
         else:
             library_method_call_snippet = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
     parameter['library_method_call_snippet'] = library_method_call_snippet
@@ -211,7 +211,7 @@ def _do_the_test_add_all_metadata(functions, expected):
 
 def test_add_all_metadata_simple():
     functions = {
-        'makeAFoo': {
+        'MakeAFoo': {
             'codegen_method': 'public',
             'returns': 'ViStatus',
             'parameters': [
@@ -238,10 +238,37 @@ def test_add_all_metadata_simple():
                 'description': 'Performs a foo, and performs it well.',
             },
         },
+        'MakeAPrivateMethod': {
+            'codegen_method': 'private',
+            'returns': 'ViStatus',
+            'parameters': [
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'vi',
+                    'type': 'ViSession',
+                    'documentation': {
+                        'description': 'Identifies a particular instrument session.',
+                    },
+                },
+                {
+                    'direction': 'out',
+                    'enum': None,
+                    'name': 'status',
+                    'type': 'ViString',
+                    'documentation': {
+                        'description': 'Return a device status',
+                    },
+                }
+            ],
+            'documentation': {
+                'description': 'Perform actions as method defined',
+            },
+        },
     }
     expected = {
-        'makeAFoo': {
-            'name': 'makeAFoo',
+        'MakeAFoo': {
+            'name': 'MakeAFoo',
             'codegen_method': 'public',
             'documentation': {
                 'description': 'Performs a foo, and performs it well.'
@@ -295,9 +322,63 @@ def test_add_all_metadata_simple():
             ],
             'python_name': 'make_a_foo',
             'returns': 'ViStatus',
+        },
+        'MakeAPrivateMethod': {
+            'codegen_method': 'private',
+            'returns': 'ViStatus',
+            'parameters': [{
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'python_name': 'vi',
+                'python_type': 'int',
+                'ctypes_variable_name': 'vi_ctype',
+                'ctypes_type': 'ViSession',
+                'ctypes_type_library_call': 'ViSession',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'is_buffer': False,
+                'python_name_with_default': 'vi',
+                'python_name_with_doc_default': 'vi',
+                'is_repeated_capability': False,
+                'library_method_call_snippet': 'self._vi'
+            }, {
+                'direction': 'out',
+                'enum': None,
+                'name': 'status',
+                'type': 'ViString',
+                'documentation': {
+                    'description': 'Return a device status'
+                },
+                'python_name': 'status',
+                'python_type': 'str',
+                'ctypes_variable_name': 'status_ctype',
+                'ctypes_type': 'ViString',
+                'ctypes_type_library_call': 'ViString',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'is_buffer': False,
+                'python_name_with_default': 'status',
+                'python_name_with_doc_default': 'status',
+                'is_repeated_capability': False,
+                'library_method_call_snippet': 'ctypes.pointer(status_ctype)'
+            }],
+            'documentation': {
+                'description': 'Perform actions as method defined'
+            },
+            'name': 'MakeAPrivateMethod',
+            'python_name': '_make_a_private_method',
+            'is_error_handling': False,
+            'has_repeated_capability': False
         }
     }
 
     _do_the_test_add_all_metadata(functions, expected)
-
-

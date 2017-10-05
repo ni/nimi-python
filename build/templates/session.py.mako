@@ -61,10 +61,10 @@ ${encoding_tag}
 import ctypes
 
 from ${module_name} import attributes
-from ${module_name} import ctypes_types
 from ${module_name} import enums
 from ${module_name} import errors
 from ${module_name} import library_singleton
+from ${module_name} import visatype
 
 
 % if session_context_manager is not None:

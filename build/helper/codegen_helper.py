@@ -196,7 +196,7 @@ def _get_output_param_return_snippet(output_parameter, parameters):
             snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
         else:
             size_parameter = find_size_parameter(output_parameter, parameters)
-            snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i].value) for i in range(' + size_parameter['python_name'] + ')]'
+            snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size_parameter['python_name'] + ')]'
     else:
         snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + '.value)'
 
@@ -227,17 +227,17 @@ def get_ctype_variable_declaration_snippet(parameter, parameters):
     snippet = parameter['ctypes_variable_name'] + ' = '
     if parameter['is_buffer']:
         if parameter['size']['mechanism'] == 'fixed':
-            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']['value']) + ')()'
+            snippet += '(' + 'visatype.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']['value']) + ')()'
         elif parameter['size']['mechanism'] == 'ivi-dance':
             # TODO(marcoskirsch): remove.
             assert False, "THIS IS DEAD CODE!"
-            snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)  # TODO(marcoskirsch): Do the IVI-dance!'
+            snippet += 'visatype.' + parameter['ctypes_type'] + '(0)  # TODO(marcoskirsch): Do the IVI-dance!'
         else:
             assert parameter['size']['mechanism'] == 'passed-in', parameter['size']['mechanism']
             size_parameter = find_size_parameter(parameter, parameters)
-            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + size_parameter['python_name'] + ')()'
+            snippet += '(' + 'visatype.' + parameter['ctypes_type'] + ' * ' + size_parameter['python_name'] + ')()'
     else:
-        snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)'
+        snippet += 'visatype.' + parameter['ctypes_type'] + '(0)'
     return snippet
 
 
