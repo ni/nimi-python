@@ -244,3 +244,65 @@ def test_configure_waveform_acquisition(session):
     assert session.range == 100
     assert session.waveform_rate == 100000
     assert session.waveform_points == 400
+
+
+def test_fetch_waveform(session):
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1000, 10)
+    with session.initiate():
+        number_of_points_to_read = 10
+        measurements = session.fetch_waveform(array_size=number_of_points_to_read)[1]
+        assert measurements == number_of_points_to_read
+
+
+def test_fetch_waveform_error(session):
+    try:
+        session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1000, 10)
+        with session.initiate():
+            number_of_points_to_read = 100
+            session.fetch_waveform(array_size=number_of_points_to_read)   # trying to fetch points more than configured
+    except nidmm.Error as e:
+        assert e.code == -1074126845  # Max Time exceeded before operation completed
+
+
+def test_get_measurement_peiod():
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4072; BoardType:PXI') as session:
+            session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 10, 5.5)
+            measurement_period = session.get_measurement_period()
+            assert measurement_period == 0.0071333333333333335   # 0.0071333333333333335 is the time required for 4072 to take a DC_VOLT measurement with range 10V on Digits_resolution 5.5
+
+
+def test_perform_cable_compensation(session):
+    session.configure_measurement_digits(nidmm.Function.CAPACITANCE, 0.002, 5.5)
+    conductance, susceptance = session.perform_open_cable_comp()
+    assert conductance == 0
+    assert susceptance == 0
+    resistance, reactance = session.perform_short_cable_comp()
+    assert resistance == 0
+    assert reactance == 0
+
+
+def test_read_waveform(session):
+    session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, 1000)
+    with session.initiate():
+        number_of_points_to_read = 100
+        measurements = session.read_waveform(array_size=number_of_points_to_read)[1]
+        assert measurements == number_of_points_to_read
+
+
+def test_send_software_trigger(session):
+    try:
+        session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 10, 5.5)
+        session.configure_multi_point(sample_count=0, sample_trigger=nidmm.SampleTrigger.SOFTWARE_TRIG, trigger_count=1)
+        with session.initiate():
+            session.send_software_trigger()    # Send_software_trigger will send triggers automatically for simulated devices. This line of code confirms there is no error while calling send_trigger function
+            session.fetch_multi_point(3)
+    except nidmm.Error as e:
+        assert False
+
+
+def test_reset_method(session):
+    default_function = session.function
+    session.function = nidmm.Function.PERIOD
+    session.reset()
+    function_after_reset = session.function
+    assert default_function == function_after_reset
