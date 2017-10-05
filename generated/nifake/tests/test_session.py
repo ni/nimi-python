@@ -1,6 +1,7 @@
 import math
 import mock_helper
 import nifake
+import sys
 import warnings
 
 from mock import ANY
@@ -195,7 +196,10 @@ class TestSession(object):
         self.patched_library.niFake_TwoInputFunction.side_effect = self.side_effects_helper.niFake_TwoInputFunction
         with nifake.Session('dev1') as session:
             session.two_input_function(test_number, test_string)
-            self.patched_library.niFake_TwoInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number, test_string)
+            if sys.version_info.major < 3:
+                self.patched_library.niFake_TwoInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number, test_string)
+            else:
+                self.patched_library.niFake_TwoInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number, test_string.encode('ascii'))
 
     def test_get_enum_value(self):
         test_number = 1
