@@ -174,7 +174,7 @@ def _get_output_param_return_snippet(output_parameter, parameters):
             snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
         else:
             size_parameter = find_size_parameter(output_parameter, parameters)
-            snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i].value) for i in range(' + size_parameter['python_name'] + ')]'
+            snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size_parameter['python_name'] + ')]'
     else:
         snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + '.value)'
 
