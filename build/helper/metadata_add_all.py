@@ -380,7 +380,7 @@ def test_add_all_metadata_simple():
                 'python_name_with_default': 'status',
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
-                'library_method_call_snippet': 'ctypes.pointer(status_ctype)'
+                'library_method_call_snippet': 'status_ctype'
             }],
             'documentation': {
                 'description': 'Perform actions as method defined'
