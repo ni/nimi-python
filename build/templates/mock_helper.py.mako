@@ -14,10 +14,6 @@ functions = template_parameters['metadata'].functions
 functions = helper.filter_codegen_functions(functions)
 %>\
 
-import ctypes
-
-import ${module_name}.visatype
-
 
 class MockFunctionCallError(Exception):
     def __init__(self, function, param=None):
