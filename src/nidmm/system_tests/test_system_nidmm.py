@@ -1,6 +1,6 @@
 import nidmm
 import pytest
-# import re  used in commented test test_revision_query_string. Disabling since flake-8 fails for unused import
+import re
 import time
 
 
@@ -183,13 +183,10 @@ def test_trigger_max_time_exceeded_errror(session):
         assert e.code == -1074126845  # Max Time exceeded before operation completed
 
 
-'''
-# TODO(injaleea): Enable test after #396 is fixed
 def test_revision_query_string(session):
     instr_driver_version, firmware_revision = session.revision_query()
     pattern = re.compile("\d+\.\d+\.\d")
     assert pattern.match(instr_driver_version)  # Assuming driver version will be always Major.Minor.Build format
-'''
 
 
 def test_self_cal(session):
