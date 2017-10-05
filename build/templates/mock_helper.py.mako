@@ -76,8 +76,7 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${ivi_dance_param['name']}')
         if ${ivi_dance_size_param['python_name']} == 0:
             return len(self._defaults['${func_name}']['${ivi_dance_param['name']}'])
-        t = ${module_name}.visatype.${ivi_dance_param['ctypes_type']}(self._defaults['${func_name}']['${ivi_dance_param['name']}'].encode('ascii'))
-        ${ivi_dance_param['python_name']}.value = ctypes.cast(t, ${module_name}.visatype.${ivi_dance_param['ctypes_type']}).value
+        ${ivi_dance_param['python_name']}.value = self._defaults['${func_name}']['${ivi_dance_param['name']}'].encode('ascii')
 %    endif
         return self._defaults['${func_name}']['return']
 
