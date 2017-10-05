@@ -157,7 +157,7 @@ class Session(object):
     ivi_dance_parameter = helper.filter_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
 %>
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter)}
 % endfor
@@ -165,17 +165,17 @@ class Session(object):
         ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
 % endfor
 % if ivi_dance_parameter is None:
-        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL, {'session_handle_parameter_name': '_' + config['session_handle_parameter_name']})})
+        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL, {'session_handle_parameter_name': '_' + config['session_handle_parameter_name']})})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % else:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = None
-        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL, {'session_handle_parameter_name': '_' + config['session_handle_parameter_name']})})
+        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL, {'session_handle_parameter_name': '_' + config['session_handle_parameter_name']})})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
-        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL, {'session_handle_parameter_name': '_' + config['session_handle_parameter_name']})})
+        error_code = self._library.${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL, {'session_handle_parameter_name': '_' + config['session_handle_parameter_name']})})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(f['parameters'])}
 % endif
