@@ -192,11 +192,16 @@ def _get_output_param_return_snippet(output_parameter, parameters):
         return_type_snippet = output_parameter['python_type'] + '('
 
     if output_parameter['is_buffer']:
-        if output_parameter['type'] == 'ViChar' or output_parameter['type'] == 'ViString':
-            snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
+        if output_parameter['type'] == 'ViChar':
+            # 'self._encoding' is a variable on the session object
+            snippet = output_parameter['ctypes_variable_name'] + '.value.decode(self._encoding)'
         else:
-            size_parameter = find_size_parameter(output_parameter, parameters)
-            snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size_parameter['python_name'] + ')]'
+            if output_parameter['size']['mechanism'] == 'fixed':
+                size = str(output_parameter['size']['value'])
+            else:
+                size_parameter = find_size_parameter(output_parameter, parameters)
+                size = size_parameter['python_name']
+            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i] for i in range(' + size + ')]'
     else:
         snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + '.value)'
 

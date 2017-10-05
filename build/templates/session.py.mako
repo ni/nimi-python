@@ -42,21 +42,17 @@ ${encoding_tag}
 % for output_parameter in output_parameters:
         ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
 % endfor
-% if ivi_dance_parameter is None:
-        error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
-        ${helper.get_method_return_snippet(parameters)}
-% else:
+% if ivi_dance_parameter is not None:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = None
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
-        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), visatype.${ivi_dance_parameter['ctypes_type']})
+        ${ivi_dance_parameter['ctypes_variable_name']} = (visatype.${ivi_dance_parameter['ctypes_type']} * ${ivi_dance_size_parameter['python_name']})()
+% endif
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(parameters)}
-% endif
 </%def>\
 import ctypes
 
@@ -108,6 +104,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
     def __init__(self, repeated_capability):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
+        self._encoding = 'windows-1251'
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):

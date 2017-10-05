@@ -51,12 +51,8 @@ def _add_ctypes_variable_name(parameter):
 def _add_ctypes_type(parameter):
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
     parameter['ctypes_type'] = parameter['type']
-    if parameter['direction'] == 'out':
-        if parameter['type'] == 'ViString' or parameter['type'] == 'ViRsrc' or parameter['type'] == 'ViConstString':
-            # These are defined as c_char_p which is already a pointer!
-            parameter['ctypes_type_library_call'] = parameter['ctypes_type']
-        else:
-            parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + parameter['ctypes_type'] + ")"
+    if parameter['direction'] == 'out' or parameter['is_buffer'] is True:
+        parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + parameter['ctypes_type'] + ")"
     else:
         parameter['ctypes_type_library_call'] = parameter['ctypes_type']
 
@@ -88,11 +84,16 @@ def _add_buffer_info(parameter):
 
     try:
         parameter['size']
-        parameter['is_buffer'] = True
+    except KeyError:
+        # Not populated, assume {'mechanism': 'fixed', 'value': 1}
+        parameter['size'] = {'mechanism': 'fixed', 'value': 1}
+
+    try:
+        parameter['is_buffer']
     except KeyError:
         # Not populated, assume False
-        parameter['size'] = {'mechanism': 'fixed', 'value': 1}
         parameter['is_buffer'] = False
+
     return parameter
 
 
@@ -102,16 +103,17 @@ def _add_library_method_call_snippet(parameter, session_handle_parameter_name):
         if parameter['name'] == session_handle_parameter_name:
             library_method_call_snippet = 'self._' + session_handle_parameter_name
         elif parameter['is_repeated_capability']:
-            # TODO(marcoskirsch): .encode('ascii') is a problem if the repeated capability contains non-ASCII characters.
-            library_method_call_snippet = 'self._repeated_capability.encode(\'ascii\')'
+            # 'self._encoding' is a variable on the session object
+            library_method_call_snippet = 'self._repeated_capability.encode(self._encoding)'
         else:
             library_method_call_snippet = parameter['python_name']
             library_method_call_snippet += '.value' if parameter['enum'] is not None else ''
-            if parameter['type'] == 'ViChar':
-                library_method_call_snippet += '.encode(\'ascii\')'
+            # 'self._encoding' is a variable on the session object
+            library_method_call_snippet += '.encode(self._encoding)' if parameter['type'] == 'ViChar' else ''
+
     else:
         assert parameter['direction'] == 'out', pp.pformat(parameter)
-        if parameter['size']['mechanism'] == 'ivi-dance':
+        if parameter['is_buffer'] is True:
             library_method_call_snippet = parameter['ctypes_variable_name']
         else:
             library_method_call_snippet = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
@@ -309,7 +311,7 @@ def test_add_all_metadata_simple():
                 {
                     'ctypes_type': 'ViChar',
                     'ctypes_variable_name': 'channel_name_ctype',
-                    'ctypes_type_library_call': 'ViChar',
+                    'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
                     'direction': 'in',
                     'documentation': {
                         'description': 'The channel to call this on.'
@@ -317,7 +319,7 @@ def test_add_all_metadata_simple():
                     'is_repeated_capability': True,
                     'enum': None,
                     'python_type': 'int',
-                    'is_buffer': False,
+                    'is_buffer': True,
                     'name': 'channelName',
                     'python_name': 'channel_name',
                     'python_name_with_default': 'channel_name',
@@ -325,7 +327,7 @@ def test_add_all_metadata_simple():
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViChar',
                     'original_type': 'ViString',
-                    'library_method_call_snippet': 'self._repeated_capability.encode(\'ascii\')',
+                    'library_method_call_snippet': 'self._repeated_capability.encode(self._encoding)',
                 },
             ],
             'python_name': 'make_a_foo',
@@ -374,7 +376,7 @@ def test_add_all_metadata_simple():
                     'mechanism': 'fixed',
                     'value': 1
                 },
-                'is_buffer': False,
+                'is_buffer': True,
                 'python_name_with_default': 'status',
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
