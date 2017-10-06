@@ -487,7 +487,7 @@ nidmm.Session methods
 
 .. function:: configure_trigger(trigger_source, trigger_delay=-1)
 
-    Configures the DMM **Trigger\_Source** and **Trigger\_Delay**. Refer to
+    Configures the DMM **trigger_source** and **trigger_delay**. Refer to
     `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
     and `Using
     Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__
@@ -690,7 +690,7 @@ nidmm.Session methods
 
         WHERE
 
-        reading_array (list of float): 
+        reading_array (string): 
 
 
             An array of measurement values.
@@ -750,7 +750,7 @@ nidmm.Session methods
 
         WHERE
 
-        waveform_array (list of float): 
+        waveform_array (string): 
 
 
             **Waveform Array** is an array of measurement values stored in waveform
@@ -768,7 +768,7 @@ nidmm.Session methods
 
 .. function:: get_aperture_time_info()
 
-    Returns the DMM **Aperture\_Time** and **Aperture\_Time\_Units**.
+    Returns the DMM **aperture_time** and **aperture_time\_Units**.
 
     
 
@@ -819,7 +819,7 @@ nidmm.Session methods
 
 .. function:: get_auto_range_value()
 
-    Returns the **Actual\_Range** that the DMM is using, even when Auto
+    Returns the **actual_range** that the DMM is using, even when Auto
     Range is off.
 
     
@@ -903,7 +903,7 @@ nidmm.Session methods
 
 .. function:: get_dev_temp(options='')
 
-    Returns the current **Temperature** of the device.
+    Returns the current **temperature** of the device.
 
     
 
@@ -930,7 +930,7 @@ nidmm.Session methods
 
 .. function:: get_last_cal_temp(cal_type)
 
-    Returns the **Temperature** during the last calibration procedure.
+    Returns the **temperature** during the last calibration procedure.
 
     
 
@@ -964,7 +964,7 @@ nidmm.Session methods
 
 .. function:: get_measurement_period()
 
-    Returns the measurement **Period**, which is the amount of time it takes
+    Returns the measurement **period**, which is the amount of time it takes
     to complete one measurement with the current configuration. Use this
     function right before you begin acquiring data—after you have completely
     configured the measurement and after all configuration functions have
@@ -1014,7 +1014,7 @@ nidmm.Session methods
 
     For the NI 4082 and NI 4072 only, performs the open cable compensation
     measurements for the current capacitance/inductance range, and returns
-    open cable compensation **Conductance** and **Susceptance** values. You
+    open cable compensation **conductance** and **susceptance** values. You
     can use the return values of this function as inputs to
     :py:func:`nidmm.configure_open_cable_comp_values`.
 
@@ -1050,7 +1050,7 @@ nidmm.Session methods
 
     Performs the short cable compensation measurements for the current
     capacitance/inductance range, and returns short cable compensation
-    **Resistance** and **Reactance** values. You can use the return values
+    **resistance** and **reactance** values. You can use the return values
     of this function as inputs to :py:func:`nidmm.configure_short_cable_comp_values`.
 
     This function returns an error if the value of the :py:data:`nidmm.function`
@@ -1161,7 +1161,7 @@ nidmm.Session methods
 
         WHERE
 
-        reading_array (list of float): 
+        reading_array (string): 
 
 
             An array of measurement values.
@@ -1232,7 +1232,7 @@ nidmm.Session methods
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
     and returns data as an array of values or as a waveform data type. The
-    number of elements in the **Waveform\_Array** is determined by the
+    number of elements in the **waveform_array** is determined by the
     values you specify for the **Waveform\_Points** parameter in
     :py:func:`nidmm.configure_waveform_acquisition`.
 
@@ -1272,7 +1272,7 @@ nidmm.Session methods
 
         WHERE
 
-        waveform_array (list of float): 
+        waveform_array (string): 
 
 
             An array of measurement values.

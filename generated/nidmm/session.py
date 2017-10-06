@@ -1529,7 +1529,7 @@ class Session(_SessionBase):
     def configure_trigger(self, trigger_source, trigger_delay=-1):
         '''configure_trigger
 
-        Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
+        Configures the DMM **trigger_source** and **trigger_delay**. Refer to
         `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
         and `Using
         Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__
@@ -1678,18 +1678,18 @@ class Session(_SessionBase):
                 positive ViInt32. The default value is 1.
 
         Returns:
-            reading_array (list of float): An array of measurement values.
+            reading_array (string): An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        reading_array_ctype = (visatype.ViReal64 * array_size)()
+        reading_array_ctype = (visatype.ViChar * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
         error_code = self._library.niDMM_FetchMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return reading_array_ctype.value.decode(self._encoding), int(actual_number_of_points_ctype.value)
 
     def fetch_waveform(self, array_size, maximum_time=-1):
         '''fetch_waveform
@@ -1715,20 +1715,20 @@ class Session(_SessionBase):
                 1.
 
         Returns:
-            waveform_array (list of float): **Waveform Array** is an array of measurement values stored in waveform
+            waveform_array (string): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        waveform_array_ctype = (visatype.ViReal64 * array_size)()
+        waveform_array_ctype = (visatype.ViChar * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
         error_code = self._library.niDMM_FetchWaveform(self._vi, maximum_time, array_size, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [waveform_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return waveform_array_ctype.value.decode(self._encoding), int(actual_number_of_points_ctype.value)
 
     def get_aperture_time_info(self):
         '''get_aperture_time_info
 
-        Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
+        Returns the DMM **aperture_time** and **aperture_time_Units**.
 
         Returns:
             aperture_time (float): Specifies the amount of time the DMM digitizes the input signal for a
@@ -1770,7 +1770,7 @@ class Session(_SessionBase):
     def get_auto_range_value(self):
         '''get_auto_range_value
 
-        Returns the **Actual_Range** that the DMM is using, even when Auto
+        Returns the **actual_range** that the DMM is using, even when Auto
         Range is off.
 
         Returns:
@@ -1821,7 +1821,7 @@ class Session(_SessionBase):
     def get_dev_temp(self, options=''):
         '''get_dev_temp
 
-        Returns the current **Temperature** of the device.
+        Returns the current **temperature** of the device.
 
         Note: The NI 4050 and NI 4060 are not supported.
 
@@ -1840,9 +1840,9 @@ class Session(_SessionBase):
         '''_get_error
 
         Returns the error information associated with the
-        **Instrument_Handle**. This function retrieves and then clears the
+        **vi**. This function retrieves and then clears the
         error information for the session. If you leave the
-        **Instrument_Handle** unwired, this function retrieves and then clears
+        **vi** unwired, this function retrieves and then clears
         the error information for the process.
 
         Args:
@@ -1879,7 +1879,7 @@ class Session(_SessionBase):
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
 
-        Returns the **Temperature** during the last calibration procedure.
+        Returns the **temperature** during the last calibration procedure.
 
         Note: The NI 4050 and NI 4060 are not supported.
 
@@ -1906,7 +1906,7 @@ class Session(_SessionBase):
     def get_measurement_period(self):
         '''get_measurement_period
 
-        Returns the measurement **Period**, which is the amount of time it takes
+        Returns the measurement **period**, which is the amount of time it takes
         to complete one measurement with the current configuration. Use this
         function right before you begin acquiring data—after you have completely
         configured the measurement and after all configuration functions have
@@ -1957,11 +1957,11 @@ class Session(_SessionBase):
            RANGE_CHECK, QUERY_INSTR_STATUS,
            cache, simulate,
            RECORD_COERCIONS.
-        -  Opens a session to the device you specify for the **Resource_Name**
+        -  Opens a session to the device you specify for the **resource_name**
            parameter. If the **ID_Query** parameter is set to VI_TRUE, this
            function queries the instrument ID and checks that it is valid for
            this instrument driver.
-        -  If the **Reset_Device** parameter is set to VI_TRUE, this function
+        -  If the **reset_device** parameter is set to VI_TRUE, this function
            resets the instrument to a known state. Sends initialization commands
            to set the instrument to the state necessary for the operation of the
            instrument driver.
@@ -2066,7 +2066,7 @@ class Session(_SessionBase):
 
         For the NI 4082 and NI 4072 only, performs the open cable compensation
         measurements for the current capacitance/inductance range, and returns
-        open cable compensation **Conductance** and **Susceptance** values. You
+        open cable compensation **conductance** and **susceptance** values. You
         can use the return values of this function as inputs to
         configure_open_cable_comp_values.
 
@@ -2091,7 +2091,7 @@ class Session(_SessionBase):
 
         Performs the short cable compensation measurements for the current
         capacitance/inductance range, and returns short cable compensation
-        **Resistance** and **Reactance** values. You can use the return values
+        **resistance** and **reactance** values. You can use the return values
         of this function as inputs to configure_short_cable_comp_values.
 
         This function returns an error if the value of the function
@@ -2163,18 +2163,18 @@ class Session(_SessionBase):
                 positive ViInt32. The default value is 1.
 
         Returns:
-            reading_array (list of float): An array of measurement values.
+            reading_array (string): An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        reading_array_ctype = (visatype.ViReal64 * array_size)()
+        reading_array_ctype = (visatype.ViChar * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
         error_code = self._library.niDMM_ReadMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return reading_array_ctype.value.decode(self._encoding), int(actual_number_of_points_ctype.value)
 
     def read_status(self):
         '''read_status
@@ -2222,7 +2222,7 @@ class Session(_SessionBase):
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
         and returns data as an array of values or as a waveform data type. The
-        number of elements in the **Waveform_Array** is determined by the
+        number of elements in the **waveform_array** is determined by the
         values you specify for the **Waveform_Points** parameter in
         configure_waveform_acquisition.
 
@@ -2243,18 +2243,18 @@ class Session(_SessionBase):
                 1.
 
         Returns:
-            waveform_array (list of float): An array of measurement values.
+            waveform_array (string): An array of measurement values.
 
                 Note:
                 The size of the **Waveform_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        waveform_array_ctype = (visatype.ViReal64 * array_size)()
+        waveform_array_ctype = (visatype.ViChar * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
         error_code = self._library.niDMM_ReadWaveform(self._vi, maximum_time, array_size, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [waveform_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return waveform_array_ctype.value.decode(self._encoding), int(actual_number_of_points_ctype.value)
 
     def reset_with_defaults(self):
         '''reset_with_defaults
@@ -2310,7 +2310,7 @@ class Session(_SessionBase):
     def _error_message(self, error_code):
         '''_error_message
 
-        Takes the **Error_Code** returned by the instrument driver functions,
+        Takes the **error_code** returned by the instrument driver functions,
         interprets it, and returns it as a user-readable string.
 
         Args:

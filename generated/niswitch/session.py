@@ -1641,7 +1641,7 @@ class Session(_SessionBase):
 
         This function retrieves and then clears the IVI error information for
         the session or the current execution thread. One exception exists: If
-        the BufferSize parameter is 0, the function does not clear the error
+        the buffer_size parameter is 0, the function does not clear the error
         information. By passing 0 for the buffer size, the caller can ascertain
         the buffer size required to get the entire error description string and
         then call the function again with a sufficiently large buffer. If the
@@ -1686,13 +1686,13 @@ class Session(_SessionBase):
         '''get_path
 
         Returns a string that identifies the explicit path created with
-        connect. Pass this string to set_path to establish
+        connect. Pass this string to Setpath to establish
         the exact same path in future connections. In some cases, multiple paths
         are available between two channels. When you call connect, the
         driver selects an available path. With connect, there is no
         guarantee that the driver selected path will always be the same path
-        through the switch module. get_path only returns those paths
-        explicitly created by niSwitch Connect Channels or set_path.
+        through the switch module. Getpath only returns those paths
+        explicitly created by niSwitch Connect Channels or Setpath.
         For example, if you connect channels CH1 and CH3,and then channels CH2
         and CH3, an explicit path between channels CH1 and CH2 does not exist an
         error is returned
@@ -1808,7 +1808,7 @@ class Session(_SessionBase):
 
         Returns a session handle used to identify the switch in all subsequent
         instrument driver calls and sets the topology of the switch.
-        init_with_topology creates a new IVI instrument driver session
+        InitWithtopology creates a new IVI instrument driver session
         for the switch specified in the resourceName parameter. The driver uses
         the topology specified in the topology parameter and overrides the
         topology specified in MAX. Note: When initializing an NI SwitchBlock

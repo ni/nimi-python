@@ -138,7 +138,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_CreateAdvancedSequence_cfunc is None:
                 self.niDCPower_CreateAdvancedSequence_cfunc = self._library.niDCPower_CreateAdvancedSequence
-                self.niDCPower_CreateAdvancedSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32), ViBoolean]  # noqa: F405
+                self.niDCPower_CreateAdvancedSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViChar), ViBoolean]  # noqa: F405
                 self.niDCPower_CreateAdvancedSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_CreateAdvancedSequence_cfunc(vi, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence)
 
@@ -178,7 +178,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_FetchMultiple_cfunc is None:
                 self.niDCPower_FetchMultiple_cfunc = self._library.niDCPower_FetchMultiple
-                self.niDCPower_FetchMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViBoolean), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDCPower_FetchMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_FetchMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_FetchMultiple_cfunc(vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count)
 
@@ -274,7 +274,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_MeasureMultiple_cfunc is None:
                 self.niDCPower_MeasureMultiple_cfunc = self._library.niDCPower_MeasureMultiple
-                self.niDCPower_MeasureMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDCPower_MeasureMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_MeasureMultiple_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_MeasureMultiple_cfunc(vi, channel_name, voltage_measurements, current_measurements)
 
@@ -394,7 +394,7 @@ class Library(object):
         with self._func_lock:
             if self.niDCPower_SetSequence_cfunc is None:
                 self.niDCPower_SetSequence_cfunc = self._library.niDCPower_SetSequence
-                self.niDCPower_SetSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViUInt32]  # noqa: F405
+                self.niDCPower_SetSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViUInt32]  # noqa: F405
                 self.niDCPower_SetSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetSequence_cfunc(vi, channel_name, values, source_delays, size)
 
