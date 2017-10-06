@@ -267,6 +267,20 @@ def fix_references(doc, cfg, make_link=False):
     return doc
 
 
+def _format_type_for_rst_documentation(param, config):
+    p_type = param['python_type']
+    if param['enum'] is not None:
+        p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
+
+    # We assume everything that is a buffer of ViChar is really a string (otherwise
+    # it would end up as 'list of int'
+    if param['type'] == 'ViChar' and param['is_buffer'] is True:
+        p_type = 'string'
+    elif param['is_buffer'] is True:
+        p_type = 'list of ' + p_type
+    return p_type
+
+
 def get_function_rst(fname, config, indent=0):
     '''Gets rst formatted documentation for given function
 
@@ -290,10 +304,7 @@ def get_function_rst(fname, config, indent=0):
         rst += '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
         rst += get_documentation_for_node_rst(p, config, indent + 4)
 
-        p_type = p['python_type']
-        if p_type.startswith('enums.'):
-            p_type = p_type.replace('enums.', '')
-            p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+        p_type = _format_type_for_rst_documentation(p, config)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
     output_params = filter_output_parameters(function['parameters'])
@@ -301,22 +312,28 @@ def get_function_rst(fname, config, indent=0):
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
-            p_type = p['python_type']
-            if p_type.startswith('enums.'):
-                p_type = p_type.replace('enums.', '')
-                p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+            p_type =_format_type_for_rst_documentation(p, config)
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p_type) + '\n'
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
-        p_type = p['python_type']
-        if p_type.startswith('enums.'):
-            p_type = p_type.replace('enums.', '')
-            p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+        p_type = _format_type_for_rst_documentation(p, config)
         rst += '\n\n' + (' ' * indent) + ':rtype: ' + p_type + '\n'
         rst += (' ' * indent) + ':return:\n' + get_documentation_for_node_rst(p, config, indent + 8)
 
     return rst
+
+
+def _format_type_for_docstring(param, config):
+    p_type = param['python_type']
+
+    # We assume everything that is a buffer of ViChar is really a string (otherwise
+    # it would end up as 'list of int'
+    if param['type'] == 'ViChar' and param['is_buffer'] is True:
+        p_type = 'string'
+    elif param['is_buffer'] is True:
+        p_type = 'list of ' + p_type
+    return p_type
 
 
 def get_function_docstring(fname, config, indent=0):
@@ -337,14 +354,14 @@ def get_function_docstring(fname, config, indent=0):
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
-        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type'])
+        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], _format_type_for_docstring(p, config))
         docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     output_params = filter_output_parameters(function['parameters'])
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type'])
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], _format_type_for_docstring(p, config))
             docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     return docstring
