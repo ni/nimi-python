@@ -74,8 +74,8 @@ def _add_is_error_handling(f):
 def _add_buffer_info(parameter):
     '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
 
-    # We are going to treat ViChar[], ViString, ViConstString and ViRsrc the same. For simplicity in the generated
-    # code, we will treat them as 'ViChar' and is_buffer true
+    # For simplicity, we are going to treat ViChar[], ViString, ViConstString, and ViRsrc the same: As ViChar 
+    # and is_buffer True
     t = parameter['type']
     if (t.find('[ ]') > 0) or (t.find('[]') > 0) or t == 'ViString' or t == 'ViConstString' or t == 'ViRsrc':
         parameter['type'] = 'ViChar'
