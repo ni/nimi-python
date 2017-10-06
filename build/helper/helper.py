@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 import pprint
 import re
 
@@ -29,6 +30,20 @@ def function_to_method_name(f):
 
 def sorted_attrs(a):
     return sorted(a, key=lambda k: a[k]['name'])
+
+
+# We need this to allow us to dynamically add and remove a folder to the search
+# path becaise importlib.import_module() won't work with a module hierarchy in python2
+@contextmanager
+def add_to_path(p):
+    import sys
+    old_path = sys.path
+    sys.path = sys.path[:]
+    sys.path.insert(0, p)
+    try:
+        yield
+    finally:
+        sys.path = old_path
 
 
 def get_python_type_for_visa_type(visa_type):
