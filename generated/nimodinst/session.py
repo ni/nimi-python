@@ -173,7 +173,7 @@ class Session(object):
         finished using the session handle and do not use this handle again.
 
         Args:
-            handle (int):The NI-ModInst session handle created by
+            handle (int): The NI-ModInst session handle created by
                 _open_installed_devices_session.
         '''
         error_code = self._library.niModInst_CloseInstalledDevicesSession(self._handle)
@@ -199,7 +199,7 @@ class Session(object):
         call this function again.
 
         Args:
-            error_info_buffer_size (int):The size of the buffer allocated and passed in as the errorInfo
+            error_info_buffer_size (int): The size of the buffer allocated and passed in as the errorInfo
                 parameter. The buffer should be large enough to hold the errorInfo
                 string (including a NULL terminating character). The size of the buffer
                 allocated and passed in as the errorInfo parameter. The buffer should be
@@ -228,13 +228,13 @@ class Session(object):
         the list for which you want the attribute.
 
         Args:
-            handle (int):The NI-ModInst session handle created by
+            handle (int): The NI-ModInst session handle created by
                 _open_installed_devices_session.
-            index (int):A zero-based index that specifies the device for which you want the
+            index (int): A zero-based index that specifies the device for which you want the
                 attribute. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
                 returned by _open_installed_devices_session.
-            attribute_id (int):The ID of the integer attribute you want to query. Valid Values Slot
+            attribute_id (int): The ID of the integer attribute you want to query. Valid Values Slot
                 Number--the slot (for example, in a PXI chassis) in which the device is
                 installed. This attribute can only be queried for PXI devices installed
                 in a chassis that has been properly identified in MAX. Chassis
@@ -248,7 +248,7 @@ class Session(object):
                 chassis number, bus number, and socket number attributes.
 
         Returns:
-            attribute_value (int):A pointer to a signed 32-bit integer variable that receives the value of
+            attribute_value (int): A pointer to a signed 32-bit integer variable that receives the value of
                 the requested attribute.
         '''
         attribute_value_ctype = visatype.ViInt32(0)
@@ -273,19 +273,19 @@ class Session(object):
         buffer and call this function again.
 
         Args:
-            handle (int):The NI-ModInst session handle created by
+            handle (int): The NI-ModInst session handle created by
                 _open_installed_devices_session.
-            index (int):A zero-based index that specifies the device for which you want the
+            index (int): A zero-based index that specifies the device for which you want the
                 attribute. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
                 returned by _open_installed_devices_session.
-            attribute_id (int):The ID of the string attribute you want to query. Valid Values
+            attribute_id (int): The ID of the string attribute you want to query. Valid Values
                 DEVICE_NAME--the name of the device, which can be used
                 to open an instrument driver session for that device
                 DEVICE_MODEL--the model of the device (for example, NI
                 PXI-5122) SERIAL_NUMBER--the serial number of the
                 device
-            attribute_value_buffer_size (int):The size of the buffer allocated and passed in as the attributeValue
+            attribute_value_buffer_size (int): The size of the buffer allocated and passed in as the attributeValue
                 parameter. The buffer should be large enough to hold the attribute value
                 string (including a NULL terminating character). Refer to the
                 Description section for information on how to determine the exact buffer
@@ -320,17 +320,17 @@ class Session(object):
         this function.
 
         Args:
-            driver (int):A string specifying the driver whose supported devices you want to find.
+            driver (string): A string specifying the driver whose supported devices you want to find.
                 This string is not case-sensitive. Some examples are: NI-SCOPE niScope
                 NI-FGEN niFgen NI-HSDIO niHSDIO NI-DMM niDMM NI-SWITCH niSwitch Note If
                 you use the empty string for this parameter, NI-ModInst creates a list
                 of all Modular Instruments devices installed in the system.
 
         Returns:
-            handle (int):A pointer to a ViSession variable that receives the value of the
+            handle (int): A pointer to a ViSession variable that receives the value of the
                 NI-ModInst session handle. This value acts as a handle to the list of
                 installed devices and is used in other NI-ModInst functions.
-            device_count (int):A pointer to an integer variable that receives the number of devices
+            device_count (int): A pointer to an integer variable that receives the number of devices
                 found in the system that are supported by the driver specified in the
                 driver parameter.
         '''
