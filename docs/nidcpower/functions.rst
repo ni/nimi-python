@@ -807,6 +807,45 @@ nidcpower.Session methods
             
 
 
+.. function:: get_channel_name(index)
+
+    ViStatus :py:func:`nidcpower.get_channel_name`(ViSession vi, ViInt32 index, ViInt32
+    bufferSize, ViChar channelName[]);
+
+    Retrieves the output **channelName** that corresponds to the requested
+    **index**. Use the
+    `:py:data:`nidcpower.CHANNEL\_COUNT` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CHANNEL_COUNT.html')>`__
+    attribute to determine the upper bound of valid values for **index**.
+
+    
+
+
+    :param index:
+
+
+        Specifies which output channel name to return. The index values begin at
+        1.
+
+        
+
+    :type index: int
+    :param buffer_size:
+
+
+        Specifies the number of bytes in the ViChar array you specify for
+        **channelName**. If the **channelName**, including the terminating NUL
+        byte, contains more bytes than you indicate in this attribute, the
+        function copies (buffer size - 1) bytes into the buffer, places an ASCII
+        NUL byte at the end of the buffer, and returns the buffer size you must
+        pass to get the entire value. For example, if the value is 123456 and
+        the buffer size is 4, the function places 123 into the buffer and
+        returns 7.
+        If you pass 0, you can pass VI\_NULL for **channelName**.
+
+        
+
+    :type buffer_size: int
+
 .. function:: get_self_cal_last_date_and_time()
 
     Vistatus :py:func:`nidcpower.get_self_cal_last_date_and_time`(ViSession vi, ViInt32

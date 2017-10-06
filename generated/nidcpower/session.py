@@ -2877,6 +2877,40 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    def get_channel_name(self, index):
+        '''get_channel_name
+
+        ViStatus get_channel_name(ViSession vi, ViInt32 index, ViInt32
+        bufferSize, ViChar channelName[]);
+
+        Retrieves the output **channelName** that corresponds to the requested
+        **index**. Use the
+        `CHANNEL_COUNT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CHANNEL_COUNT.html')>`__
+        attribute to determine the upper bound of valid values for **index**.
+
+        Args:
+            index (int):Specifies which output channel name to return. The index values begin at
+                1.
+            buffer_size (int):Specifies the number of bytes in the ViChar array you specify for
+                **channelName**. If the **channelName**, including the terminating NUL
+                byte, contains more bytes than you indicate in this attribute, the
+                function copies (buffer size - 1) bytes into the buffer, places an ASCII
+                NUL byte at the end of the buffer, and returns the buffer size you must
+                pass to get the entire value. For example, if the value is 123456 and
+                the buffer size is 4, the function places 123 into the buffer and
+                returns 7.
+                If you pass 0, you can pass VI_NULL for **channelName**.
+        '''
+        buffer_size = 0
+        channel_name_ctype = None
+        error_code = self._library.niDCPower_GetChannelName(self._vi, index, buffer_size, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size = error_code
+        channel_name_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niDCPower_GetChannelName(self._vi, index, buffer_size, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return channel_name_ctype.value.decode(self._encoding)
+
     def measure(self, measurement_type):
         '''measure
 
@@ -3434,7 +3468,7 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
 
-    def __init__(self, resource_name, channels, reset, option_string):
+    def __init__(self, resource_name, channels='', reset=False, option_string=''):
         super(Session, self).__init__(repeated_capability='')
         self._vi = 0  # This must be set before calling _initialize_with_channels().
         self._vi = self._initialize_with_channels(resource_name, channels, reset, option_string)
@@ -4166,7 +4200,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
-    def _initialize_with_channels(self, resource_name, channels, reset, option_string):
+    def _initialize_with_channels(self, resource_name, channels='', reset=False, option_string=''):
         '''_initialize_with_channels
 
         Vistatus _initialize_with_channels(ViRsrc resourceName,
@@ -4488,8 +4522,8 @@ class Session(_SessionBase):
             firmware_revision (int):Returns firmware revision information for the device you are using. The
                 size of this array must be at least 256 bytes.
         '''
-        instrument_driver_revision_ctype = (visatype.ViChar * 1)()
-        firmware_revision_ctype = (visatype.ViChar * 1)()
+        instrument_driver_revision_ctype = (visatype.ViChar * 256)()
+        firmware_revision_ctype = (visatype.ViChar * 256)()
         error_code = self._library.niDCPower_revision_query(self._vi, instrument_driver_revision_ctype, firmware_revision_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return instrument_driver_revision_ctype.value.decode(self._encoding), firmware_revision_ctype.value.decode(self._encoding)
