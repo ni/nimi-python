@@ -774,6 +774,7 @@ class _SessionBase(object):
     def __init__(self, repeated_capability):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
+        self._encoding = 'windows-1251'
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -819,7 +820,7 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (int):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
@@ -832,7 +833,7 @@ class _SessionBase(object):
                 ViBoolean variable.
         '''
         attribute_value_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niDMM_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niDMM_GetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
@@ -851,7 +852,7 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (int):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
@@ -864,7 +865,7 @@ class _SessionBase(object):
                 ViInt32 variable.
         '''
         attribute_value_ctype = visatype.ViInt32(0)
-        error_code = self._library.niDMM_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niDMM_GetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -883,7 +884,7 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (int):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
@@ -896,7 +897,7 @@ class _SessionBase(object):
                 ViReal64 variable.
         '''
         attribute_value_ctype = visatype.ViReal64(0)
-        error_code = self._library.niDMM_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niDMM_GetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
@@ -918,7 +919,7 @@ class _SessionBase(object):
            parameter.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (int):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
@@ -942,13 +943,13 @@ class _SessionBase(object):
         '''
         buffer_size = 0
         attribute_value_ctype = None
-        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViString)
-        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        attribute_value_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode("ascii")
+        return attribute_value_ctype.value.decode(self._encoding)
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
@@ -980,7 +981,7 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (int):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
@@ -989,7 +990,7 @@ class _SessionBase(object):
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (bool):Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niDMM_SetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niDMM_SetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1023,7 +1024,7 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (int):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
@@ -1032,7 +1033,7 @@ class _SessionBase(object):
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (int):Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niDMM_SetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niDMM_SetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1066,7 +1067,7 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (int):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
@@ -1075,7 +1076,7 @@ class _SessionBase(object):
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (float):Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niDMM_SetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niDMM_SetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1109,16 +1110,16 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (int):This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
             attribute_id (int):Pass the ID of an attribute.
-            attribute_value (str):Pass the value that you want to set the attribute to.
+            attribute_value (int):Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niDMM_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
+        error_code = self._library.niDMM_SetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1686,9 +1687,9 @@ class Session(_SessionBase):
         '''
         reading_array_ctype = (visatype.ViReal64 * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
-        error_code = self._library.niDMM_FetchMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(visatype.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
+        error_code = self._library.niDMM_FetchMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def fetch_waveform(self, array_size, maximum_time=-1):
         '''fetch_waveform
@@ -1720,9 +1721,9 @@ class Session(_SessionBase):
         '''
         waveform_array_ctype = (visatype.ViReal64 * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
-        error_code = self._library.niDMM_FetchWaveform(self._vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(visatype.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
+        error_code = self._library.niDMM_FetchWaveform(self._vi, maximum_time, array_size, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [waveform_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def get_aperture_time_info(self):
         '''get_aperture_time_info
@@ -1825,13 +1826,13 @@ class Session(_SessionBase):
         Note: The NI 4050 and NI 4060 are not supported.
 
         Args:
-            options (str):Reserved.
+            options (int):Reserved.
 
         Returns:
             temperature (float):Returns the current **temperature** of the device.
         '''
         temperature_ctype = visatype.ViReal64(0)
-        error_code = self._library.niDMM_GetDevTemp(self._vi, options.encode('ascii'), ctypes.pointer(temperature_ctype))
+        error_code = self._library.niDMM_GetDevTemp(self._vi, options.encode(self._encoding), ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -1870,10 +1871,10 @@ class Session(_SessionBase):
         error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViString)
+        description_ctype = (visatype.ViChar * buffer_size)()
         error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(error_code_ctype.value), description_ctype.value.decode("ascii")
+        return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
@@ -1968,7 +1969,7 @@ class Session(_SessionBase):
            all subsequent instrument driver function calls.
 
         Args:
-            resource_name (str):Caution:
+            resource_name (int):Caution:
                 All IVI names for the **Resource_Name**, such as logical names or
                 virtual names, are case-sensitive. If you use logical names, driver
                 session names, or virtual names in your program, you must make sure that
@@ -2007,7 +2008,7 @@ class Session(_SessionBase):
                 +-------------------+---+--------------+
                 | VI_FALSE          | 0 | Don't Reset  |
                 +-------------------+---+--------------+
-            option_string (str):| Sets the initial value of certain attributes for the session. The
+            option_string (int):| Sets the initial value of certain attributes for the session. The
                   following table specifies the attribute name, attribute constant, and
                   default value for each attribute that you can use in this parameter:
 
@@ -2043,7 +2044,7 @@ class Session(_SessionBase):
                 all subsequent instrument driver function calls.
         '''
         vi_ctype = visatype.ViSession(0)
-        error_code = self._library.niDMM_InitWithOptions(resource_name.encode('ascii'), id_query, reset_device, option_string.encode('ascii'), ctypes.pointer(vi_ctype))
+        error_code = self._library.niDMM_InitWithOptions(resource_name.encode(self._encoding), id_query, reset_device, option_string.encode(self._encoding), ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -2171,9 +2172,9 @@ class Session(_SessionBase):
         '''
         reading_array_ctype = (visatype.ViReal64 * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
-        error_code = self._library.niDMM_ReadMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(visatype.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
+        error_code = self._library.niDMM_ReadMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def read_status(self):
         '''read_status
@@ -2251,9 +2252,9 @@ class Session(_SessionBase):
         '''
         waveform_array_ctype = (visatype.ViReal64 * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
-        error_code = self._library.niDMM_ReadWaveform(self._vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(visatype.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
+        error_code = self._library.niDMM_ReadWaveform(self._vi, maximum_time, array_size, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [waveform_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def reset_with_defaults(self):
         '''reset_with_defaults
@@ -2320,9 +2321,9 @@ class Session(_SessionBase):
             error_message (int):The error information formatted into a string.
         '''
         error_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niDMM_error_message(self._vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(visatype.ViChar)))
+        error_code = self._library.niDMM_error_message(self._vi, error_code, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode("ascii")
+        return error_message_ctype.value.decode(self._encoding)
 
     def reset(self):
         '''reset
@@ -2351,11 +2352,11 @@ class Session(_SessionBase):
 
                 Note: The array must contain at least 256 elements ViChar[256].
         '''
-        instrument_driver_revision_ctype = visatype.ViChar(0)
-        firmware_revision_ctype = visatype.ViChar(0)
-        error_code = self._library.niDMM_revision_query(self._vi, ctypes.pointer(instrument_driver_revision_ctype), ctypes.pointer(firmware_revision_ctype))
+        instrument_driver_revision_ctype = (visatype.ViChar * 256)()
+        firmware_revision_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niDMM_revision_query(self._vi, instrument_driver_revision_ctype, firmware_revision_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(instrument_driver_revision_ctype.value), int(firmware_revision_ctype.value)
+        return instrument_driver_revision_ctype.value.decode(self._encoding), firmware_revision_ctype.value.decode(self._encoding)
 
     def self_test(self):
         '''self_test
@@ -2397,9 +2398,9 @@ class Session(_SessionBase):
         '''
         self_test_result_ctype = visatype.ViInt16(0)
         self_test_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niDMM_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(visatype.ViChar)))
+        error_code = self._library.niDMM_self_test(self._vi, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
+        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 
 
 

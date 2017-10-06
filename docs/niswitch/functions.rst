@@ -24,7 +24,7 @@ niswitch.Session methods
 
         
 
-    :type channel1: str
+    :type channel1: int
     :param channel2:
 
 
@@ -35,7 +35,7 @@ niswitch.Session methods
 
         
 
-    :type channel2: str
+    :type channel2: int
 
     :rtype: :py:data:`niswitch.PathCapability`
     :return:
@@ -98,7 +98,7 @@ niswitch.Session methods
 
         
 
-    :type scanlist: str
+    :type scanlist: int
     :param scan_mode:
 
 
@@ -200,7 +200,7 @@ niswitch.Session methods
 
         
 
-    :type channel1: str
+    :type channel1: int
     :param channel2:
 
 
@@ -211,7 +211,7 @@ niswitch.Session methods
 
         
 
-    :type channel2: str
+    :type channel2: int
 
 .. function:: connect_multiple(connection_list)
 
@@ -252,7 +252,7 @@ niswitch.Session methods
 
         
 
-    :type connection_list: str
+    :type connection_list: int
 
 .. function:: disable()
 
@@ -283,7 +283,7 @@ niswitch.Session methods
 
         
 
-    :type channel1: str
+    :type channel1: int
     :param channel2:
 
 
@@ -294,7 +294,7 @@ niswitch.Session methods
 
         
 
-    :type channel2: str
+    :type channel2: int
 
 .. function:: disconnect_all()
 
@@ -328,7 +328,7 @@ niswitch.Session methods
 
         
 
-    :type disconnection_list: str
+    :type disconnection_list: int
 
 .. function:: get_channel_name(index)
 
@@ -395,7 +395,7 @@ niswitch.Session methods
 
         
 
-    :type channel1: str
+    :type channel1: int
     :param channel2:
 
 
@@ -406,7 +406,7 @@ niswitch.Session methods
 
         
 
-    :type channel2: str
+    :type channel2: int
     :param buffer_size:
 
 
@@ -446,7 +446,7 @@ niswitch.Session methods
 
         
 
-    :type relay_name: str
+    :type relay_name: int
 
     :rtype: int
     :return:
@@ -512,7 +512,7 @@ niswitch.Session methods
 
         
 
-    :type relay_name: str
+    :type relay_name: int
 
     :rtype: :py:data:`niswitch.RelayPosition`
     :return:
@@ -561,7 +561,7 @@ niswitch.Session methods
 
         
 
-    :type resource_name: str
+    :type resource_name: int
     :param topology:
 
 
@@ -758,7 +758,7 @@ niswitch.Session methods
 
         
 
-    :type topology: str
+    :type topology: int
     :param simulate:
 
 
@@ -848,7 +848,7 @@ niswitch.Session methods
 
         
 
-    :type relay_name: str
+    :type relay_name: int
     :param relay_action:
 
 
@@ -1006,7 +1006,7 @@ niswitch.Session methods
 
         
 
-    :type path_list: str
+    :type path_list: int
 
 .. function:: wait_for_debounce(maximum_time_ms=5000)
 

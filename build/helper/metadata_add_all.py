@@ -51,12 +51,8 @@ def _add_ctypes_variable_name(parameter):
 def _add_ctypes_type(parameter):
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
     parameter['ctypes_type'] = parameter['type']
-    if parameter['direction'] == 'out':
-        if parameter['type'] == 'ViString' or parameter['type'] == 'ViRsrc' or parameter['type'] == 'ViConstString':
-            # These are defined as c_char_p which is already a pointer!
-            parameter['ctypes_type_library_call'] = parameter['ctypes_type']
-        else:
-            parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + parameter['ctypes_type'] + ")"
+    if parameter['direction'] == 'out' or parameter['is_buffer'] is True:
+        parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + parameter['ctypes_type'] + ")"
     else:
         parameter['ctypes_type_library_call'] = parameter['ctypes_type']
 
@@ -77,13 +73,27 @@ def _add_is_error_handling(f):
 
 def _add_buffer_info(parameter):
     '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
+
+    # For simplicity, we are going to treat ViChar[], ViString, ViConstString, and ViRsrc the same: As ViChar 
+    # and is_buffer True
+    t = parameter['type']
+    if (t.find('[ ]') > 0) or (t.find('[]') > 0) or t == 'ViString' or t == 'ViConstString' or t == 'ViRsrc':
+        parameter['type'] = 'ViChar'
+        parameter['original_type'] = t
+        parameter['is_buffer'] = True
+
     try:
         parameter['size']
-        parameter['is_buffer'] = True
+    except KeyError:
+        # Not populated, assume {'mechanism': 'fixed', 'value': 1}
+        parameter['size'] = {'mechanism': 'fixed', 'value': 1}
+
+    try:
+        parameter['is_buffer']
     except KeyError:
         # Not populated, assume False
-        parameter['size'] = {'mechanism': 'fixed', 'value': 1}
         parameter['is_buffer'] = False
+
     return parameter
 
 
@@ -93,19 +103,18 @@ def _add_library_method_call_snippet(parameter, session_handle_parameter_name):
         if parameter['name'] == session_handle_parameter_name:
             library_method_call_snippet = 'self._' + session_handle_parameter_name
         elif parameter['is_repeated_capability']:
-            # TODO(marcoskirsch): .encode('ascii') is a problem if the repeated capability contains non-ASCII characters.
-            library_method_call_snippet = 'self._repeated_capability.encode(\'ascii\')'
+            # 'self._encoding' is a variable on the session object
+            library_method_call_snippet = 'self._repeated_capability.encode(self._encoding)'
         else:
             library_method_call_snippet = parameter['python_name']
             library_method_call_snippet += '.value' if parameter['enum'] is not None else ''
-            if parameter['type'] == 'ViString' or parameter['type'] == 'ViConstString' or parameter['type'] == 'ViRsrc':
-                library_method_call_snippet += '.encode(\'ascii\')'
+            # 'self._encoding' is a variable on the session object
+            library_method_call_snippet += '.encode(self._encoding)' if parameter['type'] == 'ViChar' else ''
+
     else:
         assert parameter['direction'] == 'out', pp.pformat(parameter)
-        if parameter['size']['mechanism'] == 'ivi-dance':
+        if parameter['is_buffer'] is True:
             library_method_call_snippet = parameter['ctypes_variable_name']
-        elif parameter['is_buffer']:
-            library_method_call_snippet = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(visatype.' + parameter['ctypes_type'] + '))'
         else:
             library_method_call_snippet = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
     parameter['library_method_call_snippet'] = library_method_call_snippet
@@ -165,11 +174,11 @@ def add_all_function_metadata(functions, config):
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
         for p in functions[f]['parameters']:
+            _add_buffer_info(p)
             _add_python_parameter_name(p)
             _add_python_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
-            _add_buffer_info(p)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
@@ -178,27 +187,27 @@ def add_all_function_metadata(functions, config):
 
 
 # Unit Tests
-def _compare_values(actual, expected):
+def _compare_values(actual, expected, k):
     if type(actual) is dict:
         _compare_dicts(actual, expected)
     elif type(actual) is list:
         _compare_lists(actual, expected)
     else:
-        assert actual == expected, 'Value mismatch, {0} != {1}'.format(actual, expected)
+        assert actual == expected, "Value mismatch with key/index '{0}', {1} != {2}".format(k, actual, expected)
 
 
 def _compare_lists(actual, expected):
     assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
     assert len(actual) == len(expected), 'Length mismatch, {0} != {1}'.format(len(actual), len(expected))
     for k in range(len(actual)):
-        _compare_values(actual[k], expected[k])
+        _compare_values(actual[k], expected[k], k)
 
 
 def _compare_dicts(actual, expected):
     assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
     for k in actual:
         assert k in expected, 'Key {0} not in expected'.format(k)
-        _compare_values(actual[k], expected[k])
+        _compare_values(actual[k], expected[k], k)
     for k in expected:
         assert k in actual, 'Key {0} not in actual'.format(k)
 
@@ -300,24 +309,25 @@ def test_add_all_metadata_simple():
                     'library_method_call_snippet': 'self._vi',
                 },
                 {
-                    'ctypes_type': 'ViString',
+                    'ctypes_type': 'ViChar',
                     'ctypes_variable_name': 'channel_name_ctype',
-                    'ctypes_type_library_call': 'ViString',
+                    'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
                     'direction': 'in',
                     'documentation': {
                         'description': 'The channel to call this on.'
                     },
                     'is_repeated_capability': True,
                     'enum': None,
-                    'python_type': 'str',
-                    'is_buffer': False,
+                    'python_type': 'int',
+                    'is_buffer': True,
                     'name': 'channelName',
                     'python_name': 'channel_name',
                     'python_name_with_default': 'channel_name',
                     'python_name_with_doc_default': 'channel_name',
                     'size': {'mechanism': 'fixed', 'value': 1},
-                    'type': 'ViString',
-                    'library_method_call_snippet': 'self._repeated_capability.encode(\'ascii\')',
+                    'type': 'ViChar',
+                    'original_type': 'ViString',
+                    'library_method_call_snippet': 'self._repeated_capability.encode(self._encoding)',
                 },
             ],
             'python_name': 'make_a_foo',
@@ -352,24 +362,25 @@ def test_add_all_metadata_simple():
                 'direction': 'out',
                 'enum': None,
                 'name': 'status',
-                'type': 'ViString',
+                'type': 'ViChar',
+                'original_type': 'ViString',
                 'documentation': {
                     'description': 'Return a device status'
                 },
                 'python_name': 'status',
-                'python_type': 'str',
+                'python_type': 'int',
                 'ctypes_variable_name': 'status_ctype',
-                'ctypes_type': 'ViString',
-                'ctypes_type_library_call': 'ViString',
+                'ctypes_type': 'ViChar',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
                 'size': {
                     'mechanism': 'fixed',
                     'value': 1
                 },
-                'is_buffer': False,
+                'is_buffer': True,
                 'python_name_with_default': 'status',
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
-                'library_method_call_snippet': 'ctypes.pointer(status_ctype)'
+                'library_method_call_snippet': 'status_ctype'
             }],
             'documentation': {
                 'description': 'Perform actions as method defined'

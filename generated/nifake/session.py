@@ -59,6 +59,7 @@ class _SessionBase(object):
     def __init__(self, repeated_capability):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
+        self._encoding = 'windows-1251'
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -95,14 +96,14 @@ class _SessionBase(object):
         Queries the value of a ViBoolean attribute.
 
         Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
+            channel_name (int):This is the channel(s) that this function will apply to.
             attribute_id (int):Pass the ID of an attribute.
 
         Returns:
             attribute_value (bool):Returns the value of the attribute.
         '''
         attribute_value_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niFake_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niFake_GetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
@@ -112,14 +113,14 @@ class _SessionBase(object):
         Queries the value of a ViInt32 attribute.
 
         Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
+            channel_name (int):This is the channel(s) that this function will apply to.
             attribute_id (int):Pass the ID of an attribute.
 
         Returns:
             attribute_value (int):Returns the value of the attribute.
         '''
         attribute_value_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFake_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niFake_GetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -129,14 +130,14 @@ class _SessionBase(object):
         Queries the value of a ViReal attribute.
 
         Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
+            channel_name (int):This is the channel(s) that this function will apply to.
             attribute_id (int):Pass the ID of an attribute.
 
         Returns:
             attribute_value (float):Returns the value of the attribute.
         '''
         attribute_value_ctype = visatype.ViReal64(0)
-        error_code = self._library.niFake_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niFake_GetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
@@ -146,14 +147,14 @@ class _SessionBase(object):
         Queries the value of a ViSession attribute.
 
         Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
+            channel_name (int):This is the channel(s) that this function will apply to.
             attribute_id (int):Pass the ID of an attribute.
 
         Returns:
             attribute_value (int):Returns the value of the attribute.
         '''
         attribute_value_ctype = visatype.ViSession(0)
-        error_code = self._library.niFake_GetAttributeViSession(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niFake_GetAttributeViSession(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -163,19 +164,19 @@ class _SessionBase(object):
         Queries the value of a ViBoolean attribute.
 
         Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
+            channel_name (int):This is the channel(s) that this function will apply to.
             attribute_id (int):Pass the ID of an attribute.
             buffer_size (int):Number of bytes in attributeValue. You can IVI-dance with this.
         '''
         buffer_size = 0
         attribute_value_ctype = None
-        error_code = self._library.niFake_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        error_code = self._library.niFake_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViString)
-        error_code = self._library.niFake_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        attribute_value_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niFake_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode("ascii")
+        return attribute_value_ctype.value.decode(self._encoding)
 
     def read_from_channel(self, maximum_time):
         '''read_from_channel
@@ -183,14 +184,14 @@ class _SessionBase(object):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
+            channel_name (int):This is the channel(s) that this function will apply to.
             maximum_time (int):Specifies the **maximum_time** allowed in years.
 
         Returns:
             reading (float):The measured value.
         '''
         reading_ctype = visatype.ViReal64(0)
-        error_code = self._library.niFake_ReadFromChannel(self._vi, self._repeated_capability.encode('ascii'), maximum_time, ctypes.pointer(reading_ctype))
+        error_code = self._library.niFake_ReadFromChannel(self._vi, self._repeated_capability.encode(self._encoding), maximum_time, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
@@ -200,11 +201,11 @@ class _SessionBase(object):
         This function sets the value of a ViBoolean attribute.
 
         Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
+            channel_name (int):This is the channel(s) that this function will apply to.
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (bool):Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niFake_SetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niFake_SetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -214,11 +215,11 @@ class _SessionBase(object):
         This function sets the value of a ViInt32 attribute.
 
         Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
+            channel_name (int):This is the channel(s) that this function will apply to.
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (int):Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niFake_SetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niFake_SetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -228,11 +229,11 @@ class _SessionBase(object):
         This function sets the value of a ViReal64 attribute.
 
         Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
+            channel_name (int):This is the channel(s) that this function will apply to.
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (float):Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niFake_SetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niFake_SetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -242,11 +243,11 @@ class _SessionBase(object):
         This function sets the value of a ViSession attribute.
 
         Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
+            channel_name (int):This is the channel(s) that this function will apply to.
             attribute_id (int):Pass the ID of an attribute.
             attribute_value (int):Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niFake_SetAttributeViSession(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niFake_SetAttributeViSession(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -256,11 +257,11 @@ class _SessionBase(object):
         This function sets the value of a ViString attribute.
 
         Args:
-            channel_name (str):This is the channel(s) that this function will apply to.
+            channel_name (int):This is the channel(s) that this function will apply to.
             attribute_id (int):Pass the ID of an attribute.
-            attribute_value (str):Pass the value that you want to set the attribute to.
+            attribute_value (int):Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niFake_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
+        error_code = self._library.niFake_SetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -377,10 +378,10 @@ class Session(_SessionBase):
         Returns:
             a_string (int):String comes back here. Buffer must be 256 big.
         '''
-        a_string_ctype = visatype.ViChar(0)
-        error_code = self._library.niFake_GetAStringOfFixedMaximumSize(self._vi, ctypes.pointer(a_string_ctype))
+        a_string_ctype = (visatype.ViChar * 1)()
+        error_code = self._library.niFake_GetAStringOfFixedMaximumSize(self._vi, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(a_string_ctype.value)
+        return a_string_ctype.value.decode(self._encoding)
 
     def get_a_string_with_specified_maximum_size(self, buffer_size):
         '''get_a_string_with_specified_maximum_size
@@ -394,9 +395,9 @@ class Session(_SessionBase):
             a_string (int):String comes back here. Buffer must be at least bufferSize big.
         '''
         a_string_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niFake_GetAStringWithSpecifiedMaximumSize(self._vi, ctypes.cast(a_string_ctype, ctypes.POINTER(visatype.ViChar)), buffer_size)
+        error_code = self._library.niFake_GetAStringWithSpecifiedMaximumSize(self._vi, a_string_ctype, buffer_size)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return a_string_ctype.value.decode("ascii")
+        return a_string_ctype.value.decode(self._encoding)
 
     def get_enum_value(self):
         '''get_enum_value
@@ -444,10 +445,10 @@ class Session(_SessionBase):
         error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), visatype.ViString)
+        description_ctype = (visatype.ViChar * buffer_size)()
         error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(error_code_ctype.value), description_ctype.value.decode("ascii")
+        return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
         '''_init_with_options
@@ -455,7 +456,7 @@ class Session(_SessionBase):
         Creates a new IVI instrument driver session.
 
         Args:
-            resource_name (str):Caution: This is just some string.
+            resource_name (int):Caution: This is just some string.
 
                 Contains the **resource_name** of the device to initialize.
             id_query (bool):NI-FAKE is probably not needed.
@@ -472,13 +473,13 @@ class Session(_SessionBase):
                 +-------------------+---+--------------+
                 | VI_FALSE          | 0 | Don't Reset  |
                 +-------------------+---+--------------+
-            option_string (str):Some options
+            option_string (int):Some options
 
         Returns:
             vi (int):Returns a ViSession handle that you use.
         '''
         vi_ctype = visatype.ViSession(0)
-        error_code = self._library.niFake_InitWithOptions(resource_name.encode('ascii'), id_query, reset_device, option_string.encode('ascii'), ctypes.pointer(vi_ctype))
+        error_code = self._library.niFake_InitWithOptions(resource_name.encode(self._encoding), id_query, reset_device, option_string.encode(self._encoding), ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -536,9 +537,9 @@ class Session(_SessionBase):
         '''
         reading_array_ctype = (visatype.ViReal64 * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFake_ReadMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(visatype.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
+        error_code = self._library.niFake_ReadMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def return_a_number_and_a_string(self):
         '''return_a_number_and_a_string
@@ -552,10 +553,10 @@ class Session(_SessionBase):
             a_string (int):Contains a string.
         '''
         a_number_ctype = visatype.ViInt16(0)
-        a_string_ctype = visatype.ViChar(0)
-        error_code = self._library.niFake_ReturnANumberAndAString(self._vi, ctypes.pointer(a_number_ctype), ctypes.pointer(a_string_ctype))
+        a_string_ctype = (visatype.ViChar * 1)()
+        error_code = self._library.niFake_ReturnANumberAndAString(self._vi, ctypes.pointer(a_number_ctype), a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(a_number_ctype.value), int(a_string_ctype.value)
+        return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
 
     def simple_function(self):
         '''simple_function
@@ -575,7 +576,7 @@ class Session(_SessionBase):
             a_number (float):Contains a number
             a_string (int):Contains a string
         '''
-        error_code = self._library.niFake_TwoInputFunction(self._vi, a_number, a_string)
+        error_code = self._library.niFake_TwoInputFunction(self._vi, a_number, a_string.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -618,9 +619,9 @@ class Session(_SessionBase):
             error_message (int):The error information formatted into a string.
         '''
         error_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niFake_error_message(self._vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(visatype.ViChar)))
+        error_code = self._library.niFake_error_message(self._vi, error_code, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode("ascii")
+        return error_message_ctype.value.decode(self._encoding)
 
 
 

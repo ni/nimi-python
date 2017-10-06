@@ -917,7 +917,7 @@ nidmm.Session methods
 
         
 
-    :type options: str
+    :type options: int
 
     :rtype: float
     :return:

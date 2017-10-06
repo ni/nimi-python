@@ -1,9 +1,5 @@
 # This file was generated
 
-import ctypes
-
-import niswitch.visatype
-
 
 class MockFunctionCallError(Exception):
     def __init__(self, function, param=None):
@@ -220,8 +216,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetAttributeViString", param='attributeValue')
         if array_size == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        t = niswitch.visatype.ViString(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, niswitch.visatype.ViString).value
+        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niSwitch_GetChannelName(self, vi, index, buffer_size, channel_name_buffer):  # noqa: N802
@@ -231,8 +226,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetChannelName", param='channelNameBuffer')
         if buffer_size == 0:
             return len(self._defaults['GetChannelName']['channelNameBuffer'])
-        t = niswitch.visatype.ViString(self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii'))
-        channel_name_buffer.value = ctypes.cast(t, niswitch.visatype.ViString).value
+        channel_name_buffer.value = self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii')
         return self._defaults['GetChannelName']['return']
 
     def niSwitch_GetError(self, vi, code, buffer_size, description):  # noqa: N802
@@ -245,8 +239,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetError", param='Description')
         if buffer_size == 0:
             return len(self._defaults['GetError']['Description'])
-        t = niswitch.visatype.ViString(self._defaults['GetError']['Description'].encode('ascii'))
-        description.value = ctypes.cast(t, niswitch.visatype.ViString).value
+        description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
@@ -256,8 +249,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetPath", param='Path')
         if buffer_size == 0:
             return len(self._defaults['GetPath']['Path'])
-        t = niswitch.visatype.ViString(self._defaults['GetPath']['Path'].encode('ascii'))
-        path.value = ctypes.cast(t, niswitch.visatype.ViString).value
+        path.value = self._defaults['GetPath']['Path'].encode('ascii')
         return self._defaults['GetPath']['return']
 
     def niSwitch_GetRelayCount(self, vi, relay_name, relay_count):  # noqa: N802
@@ -275,8 +267,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetRelayName", param='relayNameBuffer')
         if relay_name_buffer_size == 0:
             return len(self._defaults['GetRelayName']['relayNameBuffer'])
-        t = niswitch.visatype.ViString(self._defaults['GetRelayName']['relayNameBuffer'].encode('ascii'))
-        relay_name_buffer.value = ctypes.cast(t, niswitch.visatype.ViString).value
+        relay_name_buffer.value = self._defaults['GetRelayName']['relayNameBuffer'].encode('ascii')
         return self._defaults['GetRelayName']['return']
 
     def niSwitch_GetRelayPosition(self, vi, relay_name, relay_position):  # noqa: N802
