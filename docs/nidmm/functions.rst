@@ -690,7 +690,7 @@ nidmm.Session methods
 
         WHERE
 
-        reading_array (float): 
+        reading_array (list of float): 
 
 
             An array of measurement values.
@@ -750,7 +750,7 @@ nidmm.Session methods
 
         WHERE
 
-        waveform_array (float): 
+        waveform_array (list of float): 
 
 
             **Waveform Array** is an array of measurement values stored in waveform
@@ -917,7 +917,7 @@ nidmm.Session methods
 
         
 
-    :type options: str
+    :type options: string
 
     :rtype: float
     :return:
@@ -1161,7 +1161,7 @@ nidmm.Session methods
 
         WHERE
 
-        reading_array (float): 
+        reading_array (list of float): 
 
 
             An array of measurement values.
@@ -1272,7 +1272,7 @@ nidmm.Session methods
 
         WHERE
 
-        waveform_array (float): 
+        waveform_array (list of float): 
 
 
             An array of measurement values.
@@ -1346,7 +1346,7 @@ nidmm.Session methods
 
         WHERE
 
-        instrument_driver_revision (int): 
+        instrument_driver_revision (string): 
 
 
             Returns a string containing the instrument driver software revision
@@ -1356,7 +1356,7 @@ nidmm.Session methods
 
             .. note:: The array must contain at least 256 elements ViChar[256].
 
-        firmware_revision (int): 
+        firmware_revision (string): 
 
 
             Returns a string containing the instrument **firmware\_revision**
@@ -1398,7 +1398,7 @@ nidmm.Session methods
                 NI 4081. Hence, even if the fuse is blown on the device, self-test does
                 not return error code 1013.
 
-        self_test_message (int): 
+        self_test_message (string): 
 
 
             This parameter contains the string returned from the instrument

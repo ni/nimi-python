@@ -1,9 +1,5 @@
 # This file was generated
 
-import ctypes
-
-import nidmm.visatype
-
 
 class MockFunctionCallError(Exception):
     def __init__(self, function, param=None):
@@ -253,7 +249,9 @@ class SideEffectsHelper(object):
             return self._defaults['FetchMultiPoint']['return']
         if self._defaults['FetchMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niDMM_FetchMultiPoint", param='readingArray')
-        reading_array.contents.value = self._defaults['FetchMultiPoint']['readingArray']
+        assert len(reading_array) == len(self._defaults['FetchMultiPoint']['readingArray'])
+        for i in range(len(reading_array)):
+            reading_array[i] = self._defaults['FetchMultiPoint']['readingArray'][i]
         if self._defaults['FetchMultiPoint']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_FetchMultiPoint", param='actualNumberOfPoints')
         actual_number_of_points.contents.value = self._defaults['FetchMultiPoint']['actualNumberOfPoints']
@@ -264,7 +262,9 @@ class SideEffectsHelper(object):
             return self._defaults['FetchWaveform']['return']
         if self._defaults['FetchWaveform']['waveformArray'] is None:
             raise MockFunctionCallError("niDMM_FetchWaveform", param='waveformArray')
-        waveform_array.contents.value = self._defaults['FetchWaveform']['waveformArray']
+        assert len(waveform_array) == len(self._defaults['FetchWaveform']['waveformArray'])
+        for i in range(len(waveform_array)):
+            waveform_array[i] = self._defaults['FetchWaveform']['waveformArray'][i]
         if self._defaults['FetchWaveform']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_FetchWaveform", param='actualNumberOfPoints')
         actual_number_of_points.contents.value = self._defaults['FetchWaveform']['actualNumberOfPoints']
@@ -312,8 +312,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetAttributeViString", param='attributeValue')
         if buffer_size == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        t = nidmm.visatype.ViString(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nidmm.visatype.ViString).value
+        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niDMM_GetAutoRangeValue(self, vi, actual_range):  # noqa: N802
@@ -362,8 +361,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDMM_GetError", param='description')
         if buffer_size == 0:
             return len(self._defaults['GetError']['description'])
-        t = nidmm.visatype.ViString(self._defaults['GetError']['description'].encode('ascii'))
-        description.value = ctypes.cast(t, nidmm.visatype.ViString).value
+        description.value = self._defaults['GetError']['description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niDMM_GetLastCalTemp(self, vi, cal_type, temperature):  # noqa: N802
@@ -438,7 +436,9 @@ class SideEffectsHelper(object):
             return self._defaults['ReadMultiPoint']['return']
         if self._defaults['ReadMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niDMM_ReadMultiPoint", param='readingArray')
-        reading_array.contents.value = self._defaults['ReadMultiPoint']['readingArray']
+        assert len(reading_array) == len(self._defaults['ReadMultiPoint']['readingArray'])
+        for i in range(len(reading_array)):
+            reading_array[i] = self._defaults['ReadMultiPoint']['readingArray'][i]
         if self._defaults['ReadMultiPoint']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_ReadMultiPoint", param='actualNumberOfPoints')
         actual_number_of_points.contents.value = self._defaults['ReadMultiPoint']['actualNumberOfPoints']
@@ -460,7 +460,9 @@ class SideEffectsHelper(object):
             return self._defaults['ReadWaveform']['return']
         if self._defaults['ReadWaveform']['waveformArray'] is None:
             raise MockFunctionCallError("niDMM_ReadWaveform", param='waveformArray')
-        waveform_array.contents.value = self._defaults['ReadWaveform']['waveformArray']
+        assert len(waveform_array) == len(self._defaults['ReadWaveform']['waveformArray'])
+        for i in range(len(waveform_array)):
+            waveform_array[i] = self._defaults['ReadWaveform']['waveformArray'][i]
         if self._defaults['ReadWaveform']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niDMM_ReadWaveform", param='actualNumberOfPoints')
         actual_number_of_points.contents.value = self._defaults['ReadWaveform']['actualNumberOfPoints']
@@ -511,7 +513,9 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niDMM_error_message", param='errorMessage')
-        error_message.contents.value = self._defaults['error_message']['errorMessage']
+        assert len(error_message) == len(self._defaults['error_message']['errorMessage'])
+        for i in range(len(error_message)):
+            error_message[i] = self._defaults['error_message']['errorMessage'][i]
         return self._defaults['error_message']['return']
 
     def niDMM_reset(self, vi):  # noqa: N802
@@ -524,10 +528,14 @@ class SideEffectsHelper(object):
             return self._defaults['revision_query']['return']
         if self._defaults['revision_query']['instrumentDriverRevision'] is None:
             raise MockFunctionCallError("niDMM_revision_query", param='instrumentDriverRevision')
-        instrument_driver_revision.contents.value = self._defaults['revision_query']['instrumentDriverRevision']
+        assert len(instrument_driver_revision) == len(self._defaults['revision_query']['instrumentDriverRevision'])
+        for i in range(len(instrument_driver_revision)):
+            instrument_driver_revision[i] = self._defaults['revision_query']['instrumentDriverRevision'][i]
         if self._defaults['revision_query']['firmwareRevision'] is None:
             raise MockFunctionCallError("niDMM_revision_query", param='firmwareRevision')
-        firmware_revision.contents.value = self._defaults['revision_query']['firmwareRevision']
+        assert len(firmware_revision) == len(self._defaults['revision_query']['firmwareRevision'])
+        for i in range(len(firmware_revision)):
+            firmware_revision[i] = self._defaults['revision_query']['firmwareRevision'][i]
         return self._defaults['revision_query']['return']
 
     def niDMM_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
@@ -538,7 +546,9 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niDMM_self_test", param='selfTestMessage')
-        self_test_message.contents.value = self._defaults['self_test']['selfTestMessage']
+        assert len(self_test_message) == len(self._defaults['self_test']['selfTestMessage'])
+        for i in range(len(self_test_message)):
+            self_test_message[i] = self._defaults['self_test']['selfTestMessage'][i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values

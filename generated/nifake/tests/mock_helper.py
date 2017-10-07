@@ -1,9 +1,5 @@
 # This file was generated
 
-import ctypes
-
-import nifake.visatype
-
 
 class MockFunctionCallError(Exception):
     def __init__(self, function, param=None):
@@ -138,7 +134,9 @@ class SideEffectsHelper(object):
             return self._defaults['GetAStringOfFixedMaximumSize']['return']
         if self._defaults['GetAStringOfFixedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize", param='aString')
-        a_string.contents.value = self._defaults['GetAStringOfFixedMaximumSize']['aString']
+        assert len(a_string) == len(self._defaults['GetAStringOfFixedMaximumSize']['aString'])
+        for i in range(len(a_string)):
+            a_string[i] = self._defaults['GetAStringOfFixedMaximumSize']['aString'][i]
         return self._defaults['GetAStringOfFixedMaximumSize']['return']
 
     def niFake_GetAStringWithSpecifiedMaximumSize(self, vi, a_string, buffer_size):  # noqa: N802
@@ -146,7 +144,9 @@ class SideEffectsHelper(object):
             return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
         if self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringWithSpecifiedMaximumSize", param='aString')
-        a_string.contents.value = self._defaults['GetAStringWithSpecifiedMaximumSize']['aString']
+        assert len(a_string) == len(self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'])
+        for i in range(len(a_string)):
+            a_string[i] = self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'][i]
         return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
 
     def niFake_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -188,8 +188,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetAttributeViString", param='attributeValue')
         if buffer_size == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        t = nifake.visatype.ViString(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nifake.visatype.ViString).value
+        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niFake_GetEnumValue(self, vi, a_quantity, a_turtle):  # noqa: N802
@@ -213,8 +212,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetError", param='description')
         if buffer_size == 0:
             return len(self._defaults['GetError']['description'])
-        t = nifake.visatype.ViString(self._defaults['GetError']['description'].encode('ascii'))
-        description.value = ctypes.cast(t, nifake.visatype.ViString).value
+        description.value = self._defaults['GetError']['description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
@@ -256,7 +254,9 @@ class SideEffectsHelper(object):
             return self._defaults['ReadMultiPoint']['return']
         if self._defaults['ReadMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niFake_ReadMultiPoint", param='readingArray')
-        reading_array.contents.value = self._defaults['ReadMultiPoint']['readingArray']
+        assert len(reading_array) == len(self._defaults['ReadMultiPoint']['readingArray'])
+        for i in range(len(reading_array)):
+            reading_array[i] = self._defaults['ReadMultiPoint']['readingArray'][i]
         if self._defaults['ReadMultiPoint']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niFake_ReadMultiPoint", param='actualNumberOfPoints')
         actual_number_of_points.contents.value = self._defaults['ReadMultiPoint']['actualNumberOfPoints']
@@ -270,7 +270,9 @@ class SideEffectsHelper(object):
         a_number.contents.value = self._defaults['ReturnANumberAndAString']['aNumber']
         if self._defaults['ReturnANumberAndAString']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnANumberAndAString", param='aString')
-        a_string.contents.value = self._defaults['ReturnANumberAndAString']['aString']
+        assert len(a_string) == len(self._defaults['ReturnANumberAndAString']['aString'])
+        for i in range(len(a_string)):
+            a_string[i] = self._defaults['ReturnANumberAndAString']['aString'][i]
         return self._defaults['ReturnANumberAndAString']['return']
 
     def niFake_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -326,7 +328,9 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niFake_error_message", param='errorMessage')
-        error_message.contents.value = self._defaults['error_message']['errorMessage']
+        assert len(error_message) == len(self._defaults['error_message']['errorMessage'])
+        for i in range(len(error_message)):
+            error_message[i] = self._defaults['error_message']['errorMessage'][i]
         return self._defaults['error_message']['return']
 
     # Helper function to setup Mock object with default side effects and return values

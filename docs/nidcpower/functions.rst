@@ -70,7 +70,7 @@ nidcpower.Session methods
 
         
 
-    :type channel_name: int
+    :type channel_name: string
     :param aperture_time:
 
 
@@ -129,7 +129,7 @@ nidcpower.Session methods
 
         
 
-    :type input_terminal: int
+    :type input_terminal: string
     :param edge:
 
 
@@ -180,7 +180,7 @@ nidcpower.Session methods
 
         
 
-    :type input_terminal: int
+    :type input_terminal: string
     :param edge:
 
 
@@ -232,7 +232,7 @@ nidcpower.Session methods
 
         
 
-    :type input_terminal: int
+    :type input_terminal: string
     :param edge:
 
 
@@ -283,7 +283,7 @@ nidcpower.Session methods
 
         
 
-    :type input_terminal: int
+    :type input_terminal: string
     :param edge:
 
 
@@ -334,7 +334,7 @@ nidcpower.Session methods
 
         
 
-    :type input_terminal: int
+    :type input_terminal: string
     :param edge:
 
 
@@ -398,7 +398,7 @@ nidcpower.Session methods
 
         
 
-    :type sequence_name: str
+    :type sequence_name: string
     :param attribute_id_count:
 
 
@@ -501,7 +501,7 @@ nidcpower.Session methods
         | `:py:data:`nidcpower.TRANSIENT\_RESPONSE` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_TRANSIENT_RESPONSE.html')>`__                          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
         +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
 
-    :type attribute_ids: int
+    :type attribute_ids: list of int
     :param set_as_active_sequence:
 
 
@@ -594,7 +594,7 @@ nidcpower.Session methods
 
         
 
-    :type sequence_name: str
+    :type sequence_name: string
 
 .. function:: disable()
 
@@ -671,7 +671,7 @@ nidcpower.Session methods
 
         
 
-    :type signal_identifier: int
+    :type signal_identifier: string
     :param output_terminal:
 
 
@@ -698,7 +698,7 @@ nidcpower.Session methods
         | "PXI\_Trig7" | PXI trigger line 7   |
         +--------------+----------------------+
 
-    :type output_terminal: int
+    :type output_terminal: string
 
 .. function:: fetch_multiple(timeout, count)
 
@@ -745,7 +745,7 @@ nidcpower.Session methods
 
         
 
-    :type channel_name: int
+    :type channel_name: string
     :param timeout:
 
 
@@ -773,7 +773,7 @@ nidcpower.Session methods
 
         WHERE
 
-        voltage_measurements (float): 
+        voltage_measurements (list of float): 
 
 
             Returns an array of voltage measurements. Ensure that sufficient space
@@ -781,7 +781,7 @@ nidcpower.Session methods
 
             
 
-        current_measurements (float): 
+        current_measurements (list of float): 
 
 
             Returns an array of current measurements. Ensure that sufficient space
@@ -789,7 +789,7 @@ nidcpower.Session methods
 
             
 
-        in_compliance (bool): 
+        in_compliance (list of bool): 
 
 
             Returns an array of Boolean values indicating whether the output was in
@@ -929,7 +929,7 @@ nidcpower.Session methods
 
         
 
-    :type channel_name: int
+    :type channel_name: string
     :param measurement_type:
 
 
@@ -982,13 +982,13 @@ nidcpower.Session methods
 
         
 
-    :type channel_name: int
+    :type channel_name: string
 
     :rtype: tuple (voltage_measurements, current_measurements)
 
         WHERE
 
-        voltage_measurements (float): 
+        voltage_measurements (list of float): 
 
 
             Returns an array of voltage measurements. The measurements in the array
@@ -998,7 +998,7 @@ nidcpower.Session methods
 
             
 
-        current_measurements (float): 
+        current_measurements (list of float): 
 
 
             Returns an array of current measurements. The measurements in the array
@@ -1053,7 +1053,7 @@ nidcpower.Session methods
 
         
 
-    :type channel_name: int
+    :type channel_name: string
 
     :rtype: bool
     :return:
@@ -1083,7 +1083,7 @@ nidcpower.Session methods
 
         
 
-    :type channel_name: int
+    :type channel_name: string
     :param voltage_level:
 
 
@@ -1123,7 +1123,7 @@ nidcpower.Session methods
 
         
 
-    :type channel_name: int
+    :type channel_name: string
     :param current_limit:
 
 
@@ -1163,7 +1163,7 @@ nidcpower.Session methods
 
         
 
-    :type channel_name: int
+    :type channel_name: string
     :param voltage_level:
 
 
@@ -1207,7 +1207,7 @@ nidcpower.Session methods
 
         
 
-    :type channel_name: int
+    :type channel_name: string
     :param output_state:
 
 
@@ -1366,7 +1366,7 @@ nidcpower.Session methods
 
         
 
-    :type channel_name: int
+    :type channel_name: string
     :param values:
 
 
@@ -1379,7 +1379,7 @@ nidcpower.Session methods
 
         
 
-    :type values: float
+    :type values: list of float
     :param source_delays:
 
 
@@ -1390,7 +1390,7 @@ nidcpower.Session methods
 
         
 
-    :type source_delays: float
+    :type source_delays: list of float
     :param size:
 
 
@@ -1486,14 +1486,14 @@ nidcpower.Session methods
 
         WHERE
 
-        instrument_driver_revision (int): 
+        instrument_driver_revision (string): 
 
 
             Returns the driver revision information for NI-DCPower.
 
             
 
-        firmware_revision (int): 
+        firmware_revision (string): 
 
 
             Returns firmware revision information for the device you are using. The
@@ -1532,7 +1532,7 @@ nidcpower.Session methods
             | 1              | Self test failed. |
             +----------------+-------------------+
 
-        self_test_message (int): 
+        self_test_message (string): 
 
 
             Returns the self-test result message. The size of this array must be at
