@@ -2517,7 +2517,7 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -2525,9 +2525,9 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            aperture_time (float):Specifies the aperture time. Refer to the *Aperture Time* topic for your
+            aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your
                 device in the *NI DC Power Supplies and SMUs Help* for more information.
-            units (int):Specifies the units for **apertureTime**.
+            units (int): Specifies the units for **apertureTime**.
                 **Defined Values**:
 
                 +----------------------------------------+------------------------------+
@@ -2571,7 +2571,7 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -2579,7 +2579,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            timeout (float):Specifies the maximum time allowed for this function to complete, in
+            timeout (float): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -2587,17 +2587,17 @@ class _SessionBase(object):
                 When setting the timeout interval, ensure you take into account any
                 triggers so that the timeout interval is long enough for your
                 application.
-            count (int):Specifies the number of measurements to fetch.
+            count (int): Specifies the number of measurements to fetch.
 
         Returns:
-            voltage_measurements (float):Returns an array of voltage measurements. Ensure that sufficient space
+            voltage_measurements (list of float): Returns an array of voltage measurements. Ensure that sufficient space
                 has been allocated for the returned array.
-            current_measurements (float):Returns an array of current measurements. Ensure that sufficient space
+            current_measurements (list of float): Returns an array of current measurements. Ensure that sufficient space
                 has been allocated for the returned array.
-            in_compliance (bool):Returns an array of Boolean values indicating whether the output was in
+            in_compliance (list of bool): Returns an array of Boolean values indicating whether the output was in
                 compliance at the time the measurement was taken. Ensure that sufficient
                 space has been allocated for the returned array.
-            actual_count (int):Indicates the number of measured values actually retrieved from the
+            actual_count (int): Indicates the number of measured values actually retrieved from the
                 device.
         '''
         voltage_measurements_ctype = (visatype.ViReal64 * 1)()
@@ -2619,7 +2619,7 @@ class _SessionBase(object):
           attributes and inherent IVI attributes.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -2627,7 +2627,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
                 -  In the function panel window, click on the control or press **Enter**
@@ -2648,7 +2648,7 @@ class _SessionBase(object):
                    the constants by moving to the value control and pressing **Enter**.
 
         Returns:
-            attribute_value (bool):Returns the current value of the attribute. Passes the address of a
+            attribute_value (bool): Returns the current value of the attribute. Passes the address of a
                 ViBoolean variable.
                 If the attribute currently showing in the attribute ring control has
                 constants as valid values, you can view a list of the constants by
@@ -2671,7 +2671,7 @@ class _SessionBase(object):
           attributes and inherent IVI attributes.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -2679,7 +2679,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
                 -  In the function panel window, click on the control or press **Enter**
@@ -2700,7 +2700,7 @@ class _SessionBase(object):
                    the constants by moving to the value control and pressing **Enter**.
 
         Returns:
-            attribute_value (int):Returns the current value of the attribute. Passes the address of a
+            attribute_value (int): Returns the current value of the attribute. Passes the address of a
                 ViInt32 variable.
                 If the attribute currently showing in the attribute ring control has
                 constants as valid values, you can view a list of the constants by
@@ -2723,7 +2723,7 @@ class _SessionBase(object):
           attributes and inherent IVI attributes.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -2731,7 +2731,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
                 -  In the function panel window, click on the control or press **Enter**
@@ -2752,7 +2752,7 @@ class _SessionBase(object):
                    the constants by moving to the value control and pressing **Enter**.
 
         Returns:
-            attribute_value (int):Returns the current value of the attribute. Passes the address of a
+            attribute_value (int): Returns the current value of the attribute. Passes the address of a
                 ViReal64 variable.
                 If the attribute currently showing in the attribute ring control has
                 constants as valid values, you can view a list of the constants by
@@ -2775,7 +2775,7 @@ class _SessionBase(object):
           attributes and inherent IVI attributes.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -2783,7 +2783,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
                 -  In the function panel window, click on the control or press **Enter**
@@ -2804,7 +2804,7 @@ class _SessionBase(object):
                    the constants by moving to the value control and pressing **Enter**.
 
         Returns:
-            attribute_value (float):Returns the current value of the attribute. Passes the address of a
+            attribute_value (float): Returns the current value of the attribute. Passes the address of a
                 ViReal64 variable.
                 If the attribute currently showing in the attribute ring control has
                 constants as valid values, you can view a list of the constants by
@@ -2827,7 +2827,7 @@ class _SessionBase(object):
           attributes and inherent IVI attributes.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -2835,7 +2835,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
                 -  In the function panel window, click on the control or press or the
@@ -2854,7 +2854,7 @@ class _SessionBase(object):
                    control to a manual input control. If the attribute in this ring
                    control has named constants as valid values, you can view the
                    constants by moving to the value control and pressing .
-            buffer_size (int):Passes the number of bytes in the buffer and specifies the number of
+            buffer_size (int): Passes the number of bytes in the buffer and specifies the number of
                 bytes in the ViChar array you specify for **value**. If the current
                 value of **value**, including the terminating NUL byte, is larger than
                 the size you indicate in this parameter, the function copies (buffer
@@ -2891,11 +2891,11 @@ class _SessionBase(object):
         function.
 
         Args:
-            channel_name (int):Specifies the output channel to measure. Only one measurement at a time
+            channel_name (string): Specifies the output channel to measure. Only one measurement at a time
                 may be made with the measure function. Use the
                 `measure_multiple <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_MeasureMultiple.html')>`__
                 function to measure multiple channels.
-            measurement_type (int):Specifies whether a voltage or current value is measured.
+            measurement_type (int): Specifies whether a voltage or current value is measured.
                 **Defined Values**:
 
                 +-----------------------------------+------------------------------+
@@ -2905,7 +2905,7 @@ class _SessionBase(object):
                 +-----------------------------------+------------------------------+
 
         Returns:
-            measurement (float):Returns the value of the measurement, either in volts for voltage or
+            measurement (float): Returns the value of the measurement, either in volts for voltage or
                 amps for current.
         '''
         measurement_ctype = visatype.ViReal64(0)
@@ -2927,7 +2927,7 @@ class _SessionBase(object):
         on the specified output channel(s).
 
         Args:
-            channel_name (int):Specifies the output channels to measure. You can specify multiple
+            channel_name (string): Specifies the output channels to measure. You can specify multiple
                 channels by using a channel list or a channel range. A channel list is a
                 comma (,) separated sequence of channel names (e.g. 0,2 specifies
                 channels 0 and 2). A channel range is a lower bound channel followed by
@@ -2936,11 +2936,11 @@ class _SessionBase(object):
                 the function uses all channels in the session.
 
         Returns:
-            voltage_measurements (float):Returns an array of voltage measurements. The measurements in the array
+            voltage_measurements (list of float): Returns an array of voltage measurements. The measurements in the array
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
-            current_measurements (float):Returns an array of current measurements. The measurements in the array
+            current_measurements (list of float): Returns an array of current measurements. The measurements in the array
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
@@ -2986,11 +2986,11 @@ class _SessionBase(object):
         `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
 
         Args:
-            channel_name (int):Specifies the output channel to query. Compliance status can only be
+            channel_name (string): Specifies the output channel to query. Compliance status can only be
                 queried for one channel at a time.
 
         Returns:
-            in_compliance (bool):Returns whether the device output channel is in compliance.
+            in_compliance (bool): Returns whether the device output channel is in compliance.
         '''
         in_compliance_ctype = visatype.ViBoolean(0)
         error_code = self._library.niDCPower_QueryInCompliance(self._vi, self._repeated_capability.encode(self._encoding), ctypes.pointer(in_compliance_ctype))
@@ -3007,13 +3007,13 @@ class _SessionBase(object):
         channel is set to the specified **voltageLevel**.
 
         Args:
-            channel_name (int):Specifies the output channel to query. The maximum current limit may
+            channel_name (string): Specifies the output channel to query. The maximum current limit may
                 only be queried for one channel at a time.
-            voltage_level (float):Specifies the voltage level to use when calculating the
+            voltage_level (float): Specifies the voltage level to use when calculating the
                 **maxCurrentLimit**.
 
         Returns:
-            max_current_limit (float):Returns the maximum current limit that can be set with the specified
+            max_current_limit (float): Returns the maximum current limit that can be set with the specified
                 **voltageLevel**.
         '''
         max_current_limit_ctype = visatype.ViReal64(0)
@@ -3031,13 +3031,13 @@ class _SessionBase(object):
         channel is set to the specified **currentLimit**.
 
         Args:
-            channel_name (int):Specifies the output channel to query. The maximum voltage level may
+            channel_name (string): Specifies the output channel to query. The maximum voltage level may
                 only be queried for one channel at a time.
-            current_limit (float):Specifies the current limit to use when calculating the
+            current_limit (float): Specifies the current limit to use when calculating the
                 **maxVoltageLevel**.
 
         Returns:
-            max_voltage_level (float):Returns the maximum voltage level that can be set on an output channel
+            max_voltage_level (float): Returns the maximum voltage level that can be set on an output channel
                 with the specified **currentLimit**.
         '''
         max_voltage_level_ctype = visatype.ViReal64(0)
@@ -3055,13 +3055,13 @@ class _SessionBase(object):
         channel is set to the specified **voltageLevel**.
 
         Args:
-            channel_name (int):Specifies the output channel to query. The minimum current limit may
+            channel_name (string): Specifies the output channel to query. The minimum current limit may
                 only be queried for one channel at a time.
-            voltage_level (float):Specifies the voltage level to use when calculating the
+            voltage_level (float): Specifies the voltage level to use when calculating the
                 **minCurrentLimit**.
 
         Returns:
-            min_current_limit (float):Returns the minimum current limit that can be set on an output channel
+            min_current_limit (float): Returns the minimum current limit that can be set on an output channel
                 with the specified **voltageLevel**.
         '''
         min_current_limit_ctype = visatype.ViReal64(0)
@@ -3083,9 +3083,9 @@ class _SessionBase(object):
         `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
 
         Args:
-            channel_name (int):Specifies the output channel to query. The output state may only be
+            channel_name (string): Specifies the output channel to query. The output state may only be
                 queried for one channel at a time.
-            output_state (int):Specifies the output state of the output channel that is being queried.
+            output_state (int): Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
                 +-------------------------------------------+-------------------------------------------------------------------+
@@ -3095,7 +3095,7 @@ class _SessionBase(object):
                 +-------------------------------------------+-------------------------------------------------------------------+
 
         Returns:
-            in_state (bool):Returns whether the device output channel is in the specified output
+            in_state (bool): Returns whether the device output channel is in the specified output
                 state.
         '''
         in_state_ctype = visatype.ViBoolean(0)
@@ -3114,7 +3114,7 @@ class _SessionBase(object):
           device-specific attributes and inherent IVI attributes.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -3122,7 +3122,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
                 -  In the function panel window, click on the control or press **Enter**
@@ -3143,7 +3143,7 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
-            attribute_value (bool):Specifies the value to which you want to set the attribute. If the
+            attribute_value (bool): Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
@@ -3168,7 +3168,7 @@ class _SessionBase(object):
           device-specific attributes and inherent IVI attributes.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -3176,7 +3176,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
                 -  In the function panel window, click on the control or press **Enter**
@@ -3197,7 +3197,7 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
-            attribute_value (int):Specifies the value to which you want to set the attribute. If the
+            attribute_value (int): Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
@@ -3222,7 +3222,7 @@ class _SessionBase(object):
           device-specific attributes and inherent IVI attributes.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -3230,7 +3230,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
                 -  In the function panel window, click on the control or press **Enter**
@@ -3251,7 +3251,7 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
-            attribute_value (int):Specifies the value to which you want to set the attribute. If the
+            attribute_value (int): Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
@@ -3276,7 +3276,7 @@ class _SessionBase(object):
           device-specific attributes and inherent IVI attributes.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -3284,7 +3284,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
                 -  In the function panel window, click on the control or press **Enter**
@@ -3305,7 +3305,7 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
-            attribute_value (float):Specifies the value to which you want to set the attribute. If the
+            attribute_value (float): Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
@@ -3330,7 +3330,7 @@ class _SessionBase(object):
           device-specific attributes and inherent IVI attributes.
 
         Args:
-            channel_name (int):Specifies the output channel(s) to which this configuration value
+            channel_name (string): Specifies the output channel(s) to which this configuration value
                 applies. Specify multiple channels by using a channel list or a channel
                 range. A channel list is a comma (,) separated sequence of channel names
                 (for example, 0,2 specifies channels 0 and 2). A channel range is a
@@ -3338,7 +3338,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            attribute_id (int):Specifies the ID of an attribute. From the function panel window, you
+            attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
                 -  In the function panel window, click on the control or press **Enter**
@@ -3359,7 +3359,7 @@ class _SessionBase(object):
                    change this ring control to a manual input box. If the attribute in
                    this ring control has named constants as valid values, you can view
                    the constants by moving to the value control and pressing **Enter**.
-            attribute_value (int):Specifies the value to which you want to set the attribute. If the
+            attribute_value (string): Specifies the value to which you want to set the attribute. If the
                 attribute currently showing in the attribute ring control has constants
                 as valid values, you can view a list of the constants by pressing
                 **Enter** on this control. Select a value by double-clicking on it or by
@@ -3402,19 +3402,19 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Args:
-            channel_name (int):Specifies the output channel to which this configuration value applies.
+            channel_name (string): Specifies the output channel to which this configuration value applies.
                 You can only set a sequence for one channel at a time.
-            values (float):Specifies the series of voltage levels or current levels, depending on
+            values (list of float): Specifies the series of voltage levels or current levels, depending on
                 the configured `output
                 function <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programming_output/>`__.
                 **Valid values**:
                 The valid values for this parameter are defined by the voltage level
                 range or current level range.
-            source_delays (float):Specifies the source delay that follows the configuration of each value
+            source_delays (list of float): Specifies the source delay that follows the configuration of each value
                 in the sequence.
                 **Valid Values**:
                 The valid values are between 0 and 167 seconds.
-            size (int):The number of elements in the Values and the Source Delays arrays. The
+            size (int): The number of elements in the Values and the Source Delays arrays. The
                 Values and Source Delays arrays should have the same size.
         '''
         error_code = self._library.niDCPower_SetSequence(self._vi, self._repeated_capability.encode(self._encoding), values, source_delays, size)
@@ -3537,7 +3537,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            input_terminal (int):Specifies the input terminal for the digital edge Measure trigger.
+            input_terminal (string): Specifies the input terminal for the digital edge Measure trigger.
 
                 You can specify any valid input terminal for this function. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
@@ -3551,7 +3551,7 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-            edge (int):Specifies whether to configure the Measure trigger to assert on the
+            edge (int): Specifies whether to configure the Measure trigger to assert on the
                 rising or falling edge.
                 **Defined Values:**
 
@@ -3580,7 +3580,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            input_terminal (int):Specifies the input terminal for the digital edge Pulse trigger.
+            input_terminal (string): Specifies the input terminal for the digital edge Pulse trigger.
 
                 You can specify any valid input terminal for this function. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
@@ -3594,7 +3594,7 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-            edge (int):Specifies whether to configure the Pulse trigger to assert on the rising
+            edge (int): Specifies whether to configure the Pulse trigger to assert on the rising
                 or falling edge.
                 **Defined Values:**
 
@@ -3623,7 +3623,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            input_terminal (int):Specifies the input terminal for the digital edge Sequence Advance
+            input_terminal (string): Specifies the input terminal for the digital edge Sequence Advance
                 trigger.
 
                 You can specify any valid input terminal for this function. Valid
@@ -3638,7 +3638,7 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-            edge (int):Specifies whether to configure the Sequence Advance trigger to assert on
+            edge (int): Specifies whether to configure the Sequence Advance trigger to assert on
                 the rising or falling edge.
                 **Defined Values:**
 
@@ -3667,7 +3667,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            input_terminal (int):Specifies the input terminal for the digital edge Source trigger.
+            input_terminal (string): Specifies the input terminal for the digital edge Source trigger.
 
                 You can specify any valid input terminal for this function. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
@@ -3681,7 +3681,7 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-            edge (int):Specifies whether to configure the Source trigger to assert on the
+            edge (int): Specifies whether to configure the Source trigger to assert on the
                 rising or falling edge.
                 **Defined Values:**
 
@@ -3710,7 +3710,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            input_terminal (int):Specifies the input terminal for the digital edge Start trigger.
+            input_terminal (string): Specifies the input terminal for the digital edge Start trigger.
 
                 You can specify any valid input terminal for this function. Valid
                 terminals are listed in MAX under the **Device Routes** tab. For
@@ -3724,7 +3724,7 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-            edge (int):Specifies whether to configure the Start trigger to assert on the rising
+            edge (int): Specifies whether to configure the Start trigger to assert on the rising
                 or falling edge.
                 **Defined Values:**
 
@@ -3779,9 +3779,9 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            sequence_name (int):Specifies the name of the sequence to create.
-            attribute_id_count (int):Specifies the number of attributes in the attributeIDs array.
-            attribute_ids (int):Specifies the attributes you reconfigure per step in the advanced
+            sequence_name (string): Specifies the name of the sequence to create.
+            attribute_id_count (int): Specifies the number of attributes in the attributeIDs array.
+            attribute_ids (list of int): Specifies the attributes you reconfigure per step in the advanced
                 sequence. The following table lists which attributes can be configured
                 in an advanced sequence for each NI-DCPower device that supports
                 advanced sequencing. A ✓ indicates that the attribute can be configured
@@ -3871,7 +3871,7 @@ class Session(_SessionBase):
                 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
                 | `TRANSIENT_RESPONSE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_TRANSIENT_RESPONSE.html')>`__                         | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
                 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-            set_as_active_sequence (bool):Specifies that this current sequence is active.
+            set_as_active_sequence (bool): Specifies that this current sequence is active.
         '''
         error_code = self._library.niDCPower_CreateAdvancedSequence(self._vi, sequence_name.encode(self._encoding), attribute_id_count, attribute_ids, set_as_active_sequence)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3913,7 +3913,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            set_as_active_step (bool):Specifies that this current step in the active sequence is active.
+            set_as_active_step (bool): Specifies that this current step in the active sequence is active.
         '''
         error_code = self._library.niDCPower_CreateAdvancedSequenceStep(self._vi, set_as_active_step)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3950,7 +3950,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            sequence_name (int):specifies the name of the sequence to delete.
+            sequence_name (string): specifies the name of the sequence to delete.
         '''
         error_code = self._library.niDCPower_DeleteAdvancedSequence(self._vi, sequence_name.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3995,7 +3995,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            signal (int):Specifies which trigger or event to export.
+            signal (int): Specifies which trigger or event to export.
                 **Defined Values:**
 
                 +--------------------------------------------------------+------------------------------------------------+
@@ -4021,8 +4021,8 @@ class Session(_SessionBase):
                 +--------------------------------------------------------+------------------------------------------------+
                 | NIDCPOWER_VAL_PULSE_TRIGGER (1053)                     | Exports the Pulse trigger.                     |
                 +--------------------------------------------------------+------------------------------------------------+
-            signal_identifier (int):Reserved for future use. Pass in an empty string for this parameter.
-            output_terminal (int):Specifies where to export the selected signal.
+            signal_identifier (string): Reserved for future use. Pass in an empty string for this parameter.
+            output_terminal (string): Specifies where to export the selected signal.
                 **Relative Terminals**:
 
                 +-------------+----------------------+
@@ -4071,7 +4071,7 @@ class Session(_SessionBase):
           `clear_error <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ClearError.html')>`__.
 
         Args:
-            buffer_size (int):Specifies the number of bytes in the ViChar array you specify for
+            buffer_size (int): Specifies the number of bytes in the ViChar array you specify for
                 **description**.
                 If the error description, including the terminating NUL byte, contains
                 more bytes than you indicate in this attribute, the function copies
@@ -4083,7 +4083,7 @@ class Session(_SessionBase):
                 **description**.
 
         Returns:
-            code (int):Returns the error code for the session or execution thread.
+            code (int): Returns the error code for the session or execution thread.
         '''
         code_ctype = visatype.ViStatus(0)
         buffer_size = 0
@@ -4119,12 +4119,12 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Returns:
-            year (int):Returns the **year** the device was last calibrated.
-            month (int):Returns the **month** in which the device was last calibrated.
-            day (int):Returns the **day** on which the device was last calibrated.
-            hour (int):Returns the **hour** (in 24-hour time) in which the device was last
+            year (int): Returns the **year** the device was last calibrated.
+            month (int): Returns the **month** in which the device was last calibrated.
+            day (int): Returns the **day** on which the device was last calibrated.
+            hour (int): Returns the **hour** (in 24-hour time) in which the device was last
                 calibrated.
-            minute (int):Returns the **minute** in which the device was last calibrated.
+            minute (int): Returns the **minute** in which the device was last calibrated.
         '''
         year_ctype = visatype.ViInt32(0)
         month_ctype = visatype.ViInt32(0)
@@ -4158,7 +4158,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Returns:
-            temperature (float):Returns the onboard **temperature** of the device, in degrees Celsius,
+            temperature (float): Returns the onboard **temperature** of the device, in degrees Celsius,
                 during the oldest successful calibration.
         '''
         temperature_ctype = visatype.ViReal64(0)
@@ -4205,11 +4205,11 @@ class Session(_SessionBase):
         States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
 
         Args:
-            resource_name (int):Specifies the **resourceName** assigned by Measurement & Automation
+            resource_name (string): Specifies the **resourceName** assigned by Measurement & Automation
                 Explorer (MAX), for example "PXI1Slot3" where "PXI1Slot3" is an
                 instrument's **resourceName**. **resourceName** can also be a logical
                 IVI name.
-            channels (int):Specifies which output channel(s) to include in a new session. Specify
+            channels (string): Specifies which output channel(s) to include in a new session. Specify
                 multiple channels by using a channel list or a channel range. A channel
                 list is a comma (,) separated sequence of channel names (for example,
                 0,2 specifies channels 0 and 2). A channel range is a lower bound
@@ -4219,9 +4219,9 @@ class Session(_SessionBase):
                 sequentially based on the order specified in this parameter. If you do
                 not specify any channels, by default all channels on the device are
                 included in the session.
-            reset (bool):Specifies whether to reset the device during the initialization
+            reset (bool): Specifies whether to reset the device during the initialization
                 procedure.
-            option_string (int):Specifies the initial value of certain attributes for the session. The
+            option_string (string): Specifies the initial value of certain attributes for the session. The
                 syntax for **optionString** is a list of attributes with an assigned
                 value where 1 is VI_TRUE and 0 is VI_FALSE. For example:
 
@@ -4235,7 +4235,7 @@ class Session(_SessionBase):
                 SMU <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/simulate/>`__.
 
         Returns:
-            vi (int):Returns a session handle that you use to identify the device in all
+            vi (int): Returns a session handle that you use to identify the device in all
                 subsequent NI-DCPower function calls.
         '''
         vi_ctype = visatype.ViSession(0)
@@ -4276,7 +4276,7 @@ class Session(_SessionBase):
         device.
 
         Returns:
-            temperature (float):Returns the onboard **temperature**, in degrees Celsius, of the device.
+            temperature (float): Returns the onboard **temperature**, in degrees Celsius, of the device.
         '''
         temperature_ctype = visatype.ViReal64(0)
         error_code = self._library.niDCPower_ReadCurrentTemperature(self._vi, ctypes.pointer(temperature_ctype))
@@ -4344,7 +4344,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            trigger (int):Specifies which trigger to assert.
+            trigger (int): Specifies which trigger to assert.
                 **Defined Values:**
 
                 +-----------------------------------------------+---------------------------------------+
@@ -4384,7 +4384,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            event_id (int):Specifies which event to wait for.
+            event_id (int): Specifies which event to wait for.
                 **Defined Values:**
 
                 +--------------------------------------------------------+--------------------------------------------------+
@@ -4400,7 +4400,7 @@ class Session(_SessionBase):
                 +--------------------------------------------------------+--------------------------------------------------+
                 | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
                 +--------------------------------------------------------+--------------------------------------------------+
-            timeout (float):Specifies the maximum time allowed for this function to complete, in
+            timeout (float): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -4446,11 +4446,11 @@ class Session(_SessionBase):
         user-readable string.
 
         Args:
-            error_code (int):Specifies the **status** parameter that is returned from any of the
+            error_code (int): Specifies the **status** parameter that is returned from any of the
                 NI-DCPower functions.
 
         Returns:
-            error_message (int):Returns the user-readable message string that corresponds to the status
+            error_message (string): Returns the user-readable message string that corresponds to the status
                 code you specify.
                 You must pass a ViChar array with at least 256 bytes.
         '''
@@ -4484,8 +4484,8 @@ class Session(_SessionBase):
         Returns the revision information of NI-DCPower and the device firmware.
 
         Returns:
-            instrument_driver_revision (int):Returns the driver revision information for NI-DCPower.
-            firmware_revision (int):Returns firmware revision information for the device you are using. The
+            instrument_driver_revision (string): Returns the driver revision information for NI-DCPower.
+            firmware_revision (string): Returns firmware revision information for the device you are using. The
                 size of this array must be at least 256 bytes.
         '''
         instrument_driver_revision_ctype = (visatype.ViChar * 1)()
@@ -4506,7 +4506,7 @@ class Session(_SessionBase):
         function.
 
         Returns:
-            self_test_result (int):Returns the value result from the device self-test.
+            self_test_result (int): Returns the value result from the device self-test.
 
                 +----------------+-------------------+
                 | Self-Test Code | Description       |
@@ -4515,7 +4515,7 @@ class Session(_SessionBase):
                 +----------------+-------------------+
                 | 1              | Self test failed. |
                 +----------------+-------------------+
-            self_test_message (int):Returns the self-test result message. The size of this array must be at
+            self_test_message (string): Returns the self-test result message. The size of this array must be at
                 least 256 bytes.
         '''
         self_test_result_ctype = visatype.ViInt16(0)
