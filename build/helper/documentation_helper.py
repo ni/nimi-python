@@ -613,7 +613,7 @@ def test_get_function_docstring():
 Note: The RAPHAEL Turtles dont have an ID.
 
 Args:
-    turtle_type (int):Specifies the type of Turtle type
+    turtle_type (int): Specifies the type of Turtle type
         wanted to choose.
 
         +-------------------------------+---+--------------+
@@ -629,7 +629,7 @@ Args:
         Note: You wont be able to import RAPHAEL
 
 Returns:
-    turtle_id (float):Returns the **ID** of selected turtle.''' # noqa
+    turtle_id (float): Returns the **ID** of selected turtle.''' # noqa
     assert expected_function_docstring == actual_function_docstring
 
 
