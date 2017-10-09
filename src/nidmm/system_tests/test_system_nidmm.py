@@ -316,5 +316,7 @@ def test_error_message(session):
 
 
 def test_set_boolean_attribute(session):
+    session.cache = False
+    assert session.cache is False
     session.cache = True
     assert session.cache is True
