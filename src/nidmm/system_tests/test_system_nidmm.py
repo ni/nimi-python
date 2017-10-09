@@ -1,6 +1,5 @@
 import nidmm
 import pytest
-import re
 import time
 
 

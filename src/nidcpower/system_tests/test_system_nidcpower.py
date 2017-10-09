@@ -1,6 +1,5 @@
 import nidcpower
 import pytest
-import re
 
 
 @pytest.fixture(scope='function')
