@@ -1,6 +1,7 @@
 import math
 import mock_helper
 import nifake
+import sys
 import warnings
 
 from mock import ANY
@@ -195,7 +196,10 @@ class TestSession(object):
         self.patched_library.niFake_TwoInputFunction.side_effect = self.side_effects_helper.niFake_TwoInputFunction
         with nifake.Session('dev1') as session:
             session.two_input_function(test_number, test_string)
-            self.patched_library.niFake_TwoInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number, test_string)
+            if sys.version_info.major < 3:
+                self.patched_library.niFake_TwoInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number, test_string)
+            else:
+                self.patched_library.niFake_TwoInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number, test_string.encode('ascii'))
 
     def test_get_enum_value(self):
         test_number = 1
@@ -576,3 +580,37 @@ class TestSession(object):
             from mock import call
             calls = [call(SESSION_NUM_FOR_TEST, 0), call(SESSION_NUM_FOR_TEST, 1)]  # 0 is the value of the default of nifake.Turtle.LEONARDO, 1 is the value of nifake.Turtle.DONATELLO
             self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
+
+    def test_set_bool_attribute(self):
+        self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
+        attribute_id = 1000000
+        attrib_bool = True
+        with nifake.Session('dev1') as session:
+            session.read_write_bool = attrib_bool
+            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
+
+    def test_set_vi_string_attribute(self):
+        self.patched_library.niFake_SetAttributeViString.side_effect = self.side_effects_helper.niFake_SetAttributeViString
+        attribute_id = 1000002
+        attrib_string = 'This is test string'
+        with nifake.Session('dev1') as session:
+            session.read_write_string = attrib_string
+            self.patched_library.niFake_SetAttributeViString.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, b'This is test string')
+
+    def test_multipoint_read(self):
+        test_maximum_time = 1000
+        test_reading_array = [1.0, 0.1, 42, .42]
+        test_actual_number_of_points = len(test_reading_array)
+        self.patched_library.niFake_ReadMultiPoint.side_effect = self.side_effects_helper.niFake_ReadMultiPoint
+        self.side_effects_helper['ReadMultiPoint']['readingArray'] = test_reading_array
+        self.side_effects_helper['ReadMultiPoint']['actualNumberOfPoints'] = test_actual_number_of_points
+        with nifake.Session('dev1') as session:
+            measurements, points = session.read_multi_point(test_maximum_time, len(test_reading_array))
+            assert len(measurements) == test_actual_number_of_points
+            assert points == test_actual_number_of_points
+            assert measurements == test_reading_array
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, len(test_reading_array), ANY, ANY)]
+            self.patched_library.niFake_ReadMultiPoint.assert_has_calls(calls)
+            assert self.patched_library.niFake_ReadMultiPoint.call_count == 1
+

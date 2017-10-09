@@ -1,20 +1,15 @@
-from .metadata_find import find_size_parameter
-
 from .metadata_filters import filter_ivi_dance_parameter
-
+from .metadata_find import find_size_parameter
 from enum import Enum
-
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
 
 
 # Functions that return snippets that can be placed directly in the templates.
-class ParamListType(Enum):
-    '''Type of parameter list code snippet to return
+class ParameterUsageOptions(Enum):
+    '''Different usage options for parameter lists.'''
 
-    Used by different parts of the code generator to create the parameter list
-    '''
     SESSION_METHOD_DECLARATION = 1
     '''For declaring a method in Session'''
     SESSION_METHOD_CALL = 2
@@ -31,10 +26,12 @@ class ParamListType(Enum):
     '''For declaring a method in Library'''
 
 
-ParamListTypeDefaults = {}
-ParamListTypeDefaults[ParamListType.SESSION_METHOD_DECLARATION] = {
+_parameterUsageOptions = {}
+
+_parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
     'skip_self': False,
     'skip_session_handle': True,
+    'skip_input_parameters': False,
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
@@ -42,9 +39,10 @@ ParamListTypeDefaults[ParamListType.SESSION_METHOD_DECLARATION] = {
     'name_to_use': 'python_name_with_default',
     'skip_repeated_capability_parameter': True,
 }
-ParamListTypeDefaults[ParamListType.SESSION_METHOD_CALL] = {
+_parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_self': True,
     'skip_session_handle': True,
+    'skip_input_parameters': False,
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
@@ -52,9 +50,10 @@ ParamListTypeDefaults[ParamListType.SESSION_METHOD_CALL] = {
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': True,
 }
-ParamListTypeDefaults[ParamListType.DOCUMENTATION_SESSION_METHOD] = {
+_parameterUsageOptions[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_self': True,
     'skip_session_handle': True,
+    'skip_input_parameters': False,
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
@@ -62,9 +61,10 @@ ParamListTypeDefaults[ParamListType.DOCUMENTATION_SESSION_METHOD] = {
     'name_to_use': 'python_name_with_doc_default',
     'skip_repeated_capability_parameter': True,
 }
-ParamListTypeDefaults[ParamListType.CTYPES_CALL] = {
+_parameterUsageOptions[ParameterUsageOptions.CTYPES_CALL] = {
     'skip_self': True,
     'skip_session_handle': False,
+    'skip_input_parameters': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
@@ -72,9 +72,10 @@ ParamListTypeDefaults[ParamListType.CTYPES_CALL] = {
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': False,
 }
-ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_CALL] = {
+_parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'skip_self': True,
     'skip_session_handle': False,
+    'skip_input_parameters': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
@@ -82,9 +83,10 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_CALL] = {
     'name_to_use': 'library_method_call_snippet',
     'skip_repeated_capability_parameter': False,
 }
-ParamListTypeDefaults[ParamListType.CTYPES_ARGTYPES] = {
+_parameterUsageOptions[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'skip_self': True,
     'skip_session_handle': False,
+    'skip_input_parameters': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
@@ -92,9 +94,10 @@ ParamListTypeDefaults[ParamListType.CTYPES_ARGTYPES] = {
     'name_to_use': 'ctypes_type_library_call',
     'skip_repeated_capability_parameter': False,
 }
-ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_DECLARATION] = {
+_parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
     'skip_self': False,
     'skip_session_handle': False,
+    'skip_input_parameters': False,
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
@@ -104,34 +107,30 @@ ParamListTypeDefaults[ParamListType.LIBRARY_METHOD_DECLARATION] = {
 }
 
 
-def get_params_snippet(function, param_type, options={}):
-    '''Get a parameter list snippet based on type and options
+def filter_parameters(function, parameter_usage_options, options_override={}):
+    '''filter_parameters
 
-    Name used:
-        ParamListType.LIBRARY_CALL uses 'library_method_call_snippet'
-        ParamListType.CTYPES_ARGTYPES uses 'ctypes_type_library_call'
-        All others use 'python_name'
+    Filters and reorders the parameters of the function passed in based on parameter_usage_options.
+    You may override specifics by passing them in the options_override dictionary.
     '''
-    if type(param_type) is not ParamListType:
-        raise TypeError('param_type must be of type ' + str(ParamListType))
-    if type(options) is not dict:
-        raise TypeError('param_type must be of type ' + str(dict))
+    if type(parameter_usage_options) is not ParameterUsageOptions:
+        raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
+    if type(options_override) is not dict:
+        raise TypeError('parameter_usage_options must be of type ' + str(dict))
 
-    options_to_use = ParamListTypeDefaults[param_type]
-    for o in options:
-        options_to_use[o] = options[o]
+    options_to_use = _parameterUsageOptions[parameter_usage_options]
+    for o in options_override:
+        options_to_use[o] = options_override[o]
 
-    params_to_use = []
-
-    snippets = []
-    if not options_to_use['skip_self']:
-        snippets.append('self')
+    parameters_to_use = []
 
     # Filter based on options
     ivi_dance_size_parameter = find_size_parameter(filter_ivi_dance_parameter(function['parameters']), function['parameters'])
     for x in function['parameters']:
         skip = False
         if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
+            skip = True
+        if x['direction'] == 'in' and options_to_use['skip_input_parameters']:
             skip = True
         if x == ivi_dance_size_parameter and options_to_use['skip_ivi_dance_size_parameter']:
             skip = True
@@ -140,22 +139,45 @@ def get_params_snippet(function, param_type, options={}):
         if x['is_repeated_capability'] and options_to_use['skip_repeated_capability_parameter']:
             skip = True
         if not skip:
-            params_to_use.append(x)
+            parameters_to_use.append(x)
 
     # Reorder based on options
     if options_to_use['reordered_for_default_values']:
         new_order = []
-        for x in params_to_use:
+        for x in parameters_to_use:
             if 'default_value' not in x:
                 new_order.append(x)
-        for x in params_to_use:
+        for x in parameters_to_use:
             if 'default_value' in x:
                 new_order.append(x)
+        parameters_to_use = new_order
 
-        params_to_use = new_order
+    return parameters_to_use
+
+
+def get_params_snippet(function, parameter_usage_options, options_override={}):
+    '''get_params_snippet
+
+    Get a parameter list snippet based on parameter_usage_options.
+    You may override specifics by passing them in the options_override dictionary.
+    '''
+    if type(parameter_usage_options) is not ParameterUsageOptions:
+        raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
+    if type(options_override) is not dict:
+        raise TypeError('parameter_usage_options must be of type ' + str(dict))
+
+    options_to_use = _parameterUsageOptions[parameter_usage_options]
+    for o in options_override:
+        options_to_use[o] = options_override[o]
+
+    parameters_to_use = filter_parameters(function, parameter_usage_options, options_override)
+
+    snippets = []
+    if not options_to_use['skip_self']:
+        snippets.append('self')
 
     # Render based on options
-    for x in params_to_use:
+    for x in parameters_to_use:
             snippets.append(x[options_to_use['name_to_use']])
     return ', '.join(snippets)
 
@@ -170,11 +192,16 @@ def _get_output_param_return_snippet(output_parameter, parameters):
         return_type_snippet = output_parameter['python_type'] + '('
 
     if output_parameter['is_buffer']:
-        if output_parameter['type'] == 'ViChar' or output_parameter['type'] == 'ViString':
-            snippet = output_parameter['ctypes_variable_name'] + '.value.decode("ascii")'
+        if output_parameter['type'] == 'ViChar':
+            # 'self._encoding' is a variable on the session object
+            snippet = output_parameter['ctypes_variable_name'] + '.value.decode(self._encoding)'
         else:
-            size_parameter = find_size_parameter(output_parameter, parameters)
-            snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i].value) for i in range(' + size_parameter['python_name'] + ')]'
+            if output_parameter['size']['mechanism'] == 'fixed':
+                size = str(output_parameter['size']['value'])
+            else:
+                size_parameter = find_size_parameter(output_parameter, parameters)
+                size = size_parameter['python_name']
+            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i] for i in range(' + size + ')]'
     else:
         snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + '.value)'
 
@@ -205,17 +232,17 @@ def get_ctype_variable_declaration_snippet(parameter, parameters):
     snippet = parameter['ctypes_variable_name'] + ' = '
     if parameter['is_buffer']:
         if parameter['size']['mechanism'] == 'fixed':
-            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']['value']) + ')()'
+            snippet += '(' + 'visatype.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']['value']) + ')()'
         elif parameter['size']['mechanism'] == 'ivi-dance':
             # TODO(marcoskirsch): remove.
             assert False, "THIS IS DEAD CODE!"
-            snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)  # TODO(marcoskirsch): Do the IVI-dance!'
+            snippet += 'visatype.' + parameter['ctypes_type'] + '(0)  # TODO(marcoskirsch): Do the IVI-dance!'
         else:
             assert parameter['size']['mechanism'] == 'passed-in', parameter['size']['mechanism']
             size_parameter = find_size_parameter(parameter, parameters)
-            snippet += '(' + 'ctypes_types.' + parameter['ctypes_type'] + ' * ' + size_parameter['python_name'] + ')()'
+            snippet += '(' + 'visatype.' + parameter['ctypes_type'] + ' * ' + size_parameter['python_name'] + ')()'
     else:
-        snippet += 'ctypes_types.' + parameter['ctypes_type'] + '(0)'
+        snippet += 'visatype.' + parameter['ctypes_type'] + '(0)'
     return snippet
 
 
@@ -224,6 +251,4 @@ def get_dictionary_snippet(d, indent=4):
     d_str = pprint.pformat(d)
     d_lines = d_str.splitlines()
     return ('\n' + (' ' * indent)).join(d_lines)
-
-
 

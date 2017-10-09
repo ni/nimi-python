@@ -3,7 +3,7 @@ from .metadata_filters import filter_input_parameters
 from .metadata_filters import filter_output_parameters
 
 from .codegen_helper import get_params_snippet
-from .codegen_helper import ParamListType
+from .codegen_helper import ParameterUsageOptions
 
 import re
 import string
@@ -267,6 +267,20 @@ def fix_references(doc, cfg, make_link=False):
     return doc
 
 
+def _format_type_for_rst_documentation(param, config):
+    p_type = param['python_type']
+    if param['enum'] is not None:
+        p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
+
+    # We assume everything that is a buffer of ViChar is really a string (otherwise
+    # it would end up as 'list of int'
+    if param['type'] == 'ViChar' and param['is_buffer'] is True:
+        p_type = 'string'
+    elif param['is_buffer'] is True:
+        p_type = 'list of ' + p_type
+    return p_type
+
+
 def get_function_rst(fname, config, indent=0):
     '''Gets rst formatted documentation for given function
 
@@ -279,7 +293,7 @@ def get_function_rst(fname, config, indent=0):
     '''
     function = config['functions'][fname]
     rst = '.. function:: ' + function['python_name'] + '('
-    rst += get_params_snippet(function, ParamListType.DOCUMENTATION_SESSION_METHOD) + ')'
+    rst += get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
@@ -290,10 +304,7 @@ def get_function_rst(fname, config, indent=0):
         rst += '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
         rst += get_documentation_for_node_rst(p, config, indent + 4)
 
-        p_type = p['python_type']
-        if p_type.startswith('enums.'):
-            p_type = p_type.replace('enums.', '')
-            p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+        p_type = _format_type_for_rst_documentation(p, config)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
     output_params = filter_output_parameters(function['parameters'])
@@ -301,22 +312,28 @@ def get_function_rst(fname, config, indent=0):
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
-            p_type = p['python_type']
-            if p_type.startswith('enums.'):
-                p_type = p_type.replace('enums.', '')
-                p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+            p_type = _format_type_for_rst_documentation(p, config)
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p_type) + '\n'
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
-        p_type = p['python_type']
-        if p_type.startswith('enums.'):
-            p_type = p_type.replace('enums.', '')
-            p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+        p_type = _format_type_for_rst_documentation(p, config)
         rst += '\n\n' + (' ' * indent) + ':rtype: ' + p_type + '\n'
         rst += (' ' * indent) + ':return:\n' + get_documentation_for_node_rst(p, config, indent + 8)
 
     return rst
+
+
+def _format_type_for_docstring(param, config):
+    p_type = param['python_type']
+
+    # We assume everything that is a buffer of ViChar is really a string (otherwise
+    # it would end up as 'list of int'
+    if param['type'] == 'ViChar' and param['is_buffer'] is True:
+        p_type = 'string'
+    elif param['is_buffer'] is True:
+        p_type = 'list of ' + p_type
+    return p_type
 
 
 def get_function_docstring(fname, config, indent=0):
@@ -337,14 +354,14 @@ def get_function_docstring(fname, config, indent=0):
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
-        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type'])
+        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], _format_type_for_docstring(p, config))
         docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     output_params = filter_output_parameters(function['parameters'])
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['python_type'])
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], _format_type_for_docstring(p, config))
             docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     return docstring
@@ -426,4 +443,234 @@ def as_rest_table(data, header=True):
     return '\n'.join(table)
 
 
+# Unit Tests
+config = {
+    'functions': {
+        'GetTurtleID': {
+            'codegen_method': 'public',
+            'returns': 'ViStatus',
+            'parameters': [
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'vi',
+                    'type': 'ViSession',
+                    'documentation': {
+                        'description': 'Identifies a particular instrument session.'
+                    },
+                    'python_name': 'vi',
+                    'python_type': 'int',
+                    'ctypes_variable_name': 'vi_ctype',
+                    'ctypes_type': 'ViSession',
+                    'ctypes_type_library_call': 'ViSession',
+                    'size': {
+                        'mechanism': 'fixed',
+                        'value': 1
+                    },
+                    'is_buffer': False,
+                    'python_name_with_default': 'vi',
+                    'python_name_with_doc_default': 'vi',
+                    'is_repeated_capability': False,
+                    'library_method_call_snippet': 'self._vi'
+                },
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'turtleType',
+                    'type': 'ViInt32',
+                    'documentation': {
+                        'description': '''Specifies the type of Turtle type
+wanted to choose.''',
+                        'note': 'You wont be able to import RAPHAEL',
+                        'table_body': [
+                            ['NIFake\\_VAL\\_LEONARDO (default)', '0', 'LEONARDO'],
+                            ['NIFake\\_VAL\\_DONATELLO', '1', 'DONATELLO'],
+                            ['NIFake\\_VAL\\_RAPHAEL', '2', 'RAPHAEL'],
+                            ['NIFake\\_VAL\\_MICHELANGELO', '3', 'MICHELANGELO']
+                        ]
+                    },
+                    'python_name': 'turtle_type',
+                    'python_type': 'int',
+                    'ctypes_variable_name': 'turtle_type_ctype',
+                    'ctypes_type': 'ViInt32',
+                    'ctypes_type_library_call': 'ViInt32',
+                    'size': {
+                        'mechanism': 'fixed',
+                        'value': 1
+                    },
+                    'is_buffer': False,
+                    'python_name_with_default': 'turtle_type',
+                    'python_name_with_doc_default': 'turtle_type',
+                    'is_repeated_capability': False,
+                    'library_method_call_snippet': 'turtle_type'
+                },
+                {
+                    'direction': 'out',
+                    'enum': None,
+                    'name': 'turtleId',
+                    'type': 'ViReal64',
+                    'documentation': {
+                        'description': 'Returns the **ID** of selected turtle.'
+                    },
+                    'python_name': 'turtle_id',
+                    'python_type': 'float',
+                    'ctypes_variable_name': 'turtleId_ctype',
+                    'ctypes_type': 'ViReal64',
+                    'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
+                    'size': {
+                        'mechanism': 'fixed',
+                        'value': 1
+                    },
+                    'is_buffer': False,
+                    'python_name_with_default': 'turtleId',
+                    'python_name_with_doc_default': 'turtleId',
+                    'is_repeated_capability': False,
+                    'library_method_call_snippet': 'ctypes.pointer(turtleId_ctype)'
+                }
+            ],
+            'documentation': {
+                'description': 'Returns the **ID** of selected Turtle Type.',
+                'note': 'The RAPHAEL Turtles dont have an ID.'
+            },
+            'name': 'GetTurtleID',
+            'python_name': 'get_turtle_id',
+            'is_error_handling': False,
+            'has_repeated_capability': False
+        }
+    },
+    'metadata_version': '1.0',
+    'module_name': 'nifake',
+    'module_version': '0.3.0.dev0',
+    'c_function_prefix': 'niFake_',
+    'driver_name': 'NI-FAKE',
+    'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
+    'session_handle_parameter_name': 'vi',
+    'library_info':
+    {
+        'Windows': {
+            '32bit': {'name': 'nifake_32.dll', 'type': 'windll'},
+            '64bit': {'name': 'nifake_64.dll', 'type': 'cdll'},
+        },
+        'Linux': {
+            '64bit': {'name': 'libnifake.so', 'type': 'cdll'},
+        },
+    },
+    'context_manager_name': {
+        'task': 'acquisition',
+        'initiate_function': 'Initiate',
+        'abort_function': 'Abort',
+    },
+    'init_function': 'InitWithOptions',
+}
 
+
+def test_get_function_rst():
+    actual_function_rst = get_function_rst('GetTurtleID', config, 0)
+    expected_fuction_rst = '''.. function:: get_turtle_id(turtle_type)
+
+    Returns the **ID** of selected Turtle Type.
+
+    
+
+    .. note:: The RAPHAEL Turtles dont have an ID.
+
+
+    :param turtle_type:
+
+
+        Specifies the type of Turtle type
+        wanted to choose.
+
+        +---------------------------------+---+--------------+
+        | NIFake\_VAL\_LEONARDO (default) | 0 | LEONARDO     |
+        +---------------------------------+---+--------------+
+        | NIFake\_VAL\_DONATELLO          | 1 | DONATELLO    |
+        +---------------------------------+---+--------------+
+        | NIFake\_VAL\_RAPHAEL            | 2 | RAPHAEL      |
+        +---------------------------------+---+--------------+
+        | NIFake\_VAL\_MICHELANGELO       | 3 | MICHELANGELO |
+        +---------------------------------+---+--------------+
+
+        .. note:: You wont be able to import RAPHAEL
+
+    :type turtle_type: int
+
+    :rtype: float
+    :return:
+
+
+            Returns the **ID** of selected turtle.
+
+            
+''' # noqa
+    assert actual_function_rst == expected_fuction_rst
+
+
+def test_get_function_docstring():
+    actual_function_docstring = get_function_docstring('GetTurtleID', config, 0)
+    expected_function_docstring = '''Returns the **ID** of selected Turtle Type.
+
+Note: The RAPHAEL Turtles dont have an ID.
+
+Args:
+    turtle_type (int): Specifies the type of Turtle type
+        wanted to choose.
+
+        +-------------------------------+---+--------------+
+        | NIFake_VAL_LEONARDO (default) | 0 | LEONARDO     |
+        +-------------------------------+---+--------------+
+        | NIFake_VAL_DONATELLO          | 1 | DONATELLO    |
+        +-------------------------------+---+--------------+
+        | NIFake_VAL_RAPHAEL            | 2 | RAPHAEL      |
+        +-------------------------------+---+--------------+
+        | NIFake_VAL_MICHELANGELO       | 3 | MICHELANGELO |
+        +-------------------------------+---+--------------+
+
+        Note: You wont be able to import RAPHAEL
+
+Returns:
+    turtle_id (float): Returns the **ID** of selected turtle.''' # noqa
+    assert expected_function_docstring == actual_function_docstring
+
+
+def test_get_rst_header_snippet():
+    header = "This will be your method header"
+    actual_rst_header = get_rst_header_snippet(header)
+    expected_rst_header = """This will be your method header
+==============================="""
+    assert actual_rst_header == expected_rst_header
+
+
+def test_get_documentation_for_node_docstring():
+    caution = """ this is a very
+long string if I had the
+energy to type more and more ..."""
+    description = """ This string might be
+at maximum size I can handle"""
+    node = {
+        'documentation': {
+            'caution': caution,
+            'description': description,
+            'table_header': ['what', 'how', 'who'],
+            'table_body': [
+                ['lorem', 'that is a dummy string', 'Place holder string'],
+                ['ipsum', 'this is a random strinf', 'Yes, I am a random string']
+            ]
+        }
+    }
+    actual_documentation = get_documentation_for_node_docstring(node, config, indent=4)
+    expected_documentation = """Caution:  this is a very
+    long string if I had the
+    energy to type more and more ...
+
+    This string might be
+    at maximum size I can handle
+
+    +-------+-------------------------+---------------------------+
+    | what  | how                     | who                       |
+    +=======+=========================+===========================+
+    | lorem | that is a dummy string  | Place holder string       |
+    +-------+-------------------------+---------------------------+
+    | ipsum | this is a random strinf | Yes, I am a random string |
+    +-------+-------------------------+---------------------------+""" # noqa
+    assert expected_documentation == actual_documentation

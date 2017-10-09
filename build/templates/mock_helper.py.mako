@@ -14,10 +14,6 @@ functions = template_parameters['metadata'].functions
 functions = helper.filter_codegen_functions(functions)
 %>\
 
-import ctypes
-
-import ${module_name}.ctypes_types
-
 
 class MockFunctionCallError(Exception):
     def __init__(self, function, param=None):
@@ -63,21 +59,26 @@ output_params = helper.filter_output_parameters(params)
 ivi_dance_param = helper.filter_ivi_dance_parameter(params)
 ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 %>\
-    def ${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_DECLARATION)}):  # noqa: N802
+    def ${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_DECLARATION)}):  # noqa: N802
         if self._defaults['${func_name}']['return'] != 0:
             return self._defaults['${func_name}']['return']
 %    for p in output_params:
         if self._defaults['${func_name}']['${p['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${p['name']}')
+%       if p['is_buffer']:
+        assert len(${p['python_name']}) == len(self._defaults['${func_name}']['${p['name']}'])
+        for i in range(len(${p['python_name']})):
+            ${p['python_name']}[i] = self._defaults['${func_name}']['${p['name']}'][i]
+%       else:
         ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
+%       endif
 %    endfor
 %    if ivi_dance_param is not None:
         if self._defaults['${func_name}']['${ivi_dance_param['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${ivi_dance_param['name']}')
         if ${ivi_dance_size_param['python_name']} == 0:
             return len(self._defaults['${func_name}']['${ivi_dance_param['name']}'])
-        t = ${module_name}.ctypes_types.${ivi_dance_param['ctypes_type']}(self._defaults['${func_name}']['${ivi_dance_param['name']}'].encode('ascii'))
-        ${ivi_dance_param['python_name']}.value = ctypes.cast(t, ${module_name}.ctypes_types.${ivi_dance_param['ctypes_type']}).value
+        ${ivi_dance_param['python_name']}.value = self._defaults['${func_name}']['${ivi_dance_param['name']}'].encode('ascii')
 %    endif
         return self._defaults['${func_name}']['return']
 

@@ -28,7 +28,6 @@ functions_codegen_method = {
     'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # Not applicable to Python API
     'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
     'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'GetChannelName':                  { 'codegen_method': 'no',       },
     'error_query':                     { 'codegen_method': 'no',       },
     'ConfigureAutoZero':               { 'codegen_method': 'no',       },
     'ConfigureCurrent.+':              { 'codegen_method': 'no',       },
@@ -46,13 +45,6 @@ functions_codegen_method = {
 functions_enums = {
     'ConfigureAutoZero':   { 'parameters': { 2: { 'enum': 'AutoZero',                  }, }, },
     # @TODO add all enums
-}
-
-# TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval? Issue #259
-functions_params_types = {
-    'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
-    'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'GetError':                     { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
@@ -75,11 +67,15 @@ functions_buffer_info = {
     'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetCalUserDefinedInfo':        { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'revision_query':               { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, 
+                                                      2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'init':                         { 'parameters': { 0: { 'is_buffer': True, }, }, },
-    'InitWithOptions':              { 'parameters': { 0: { 'is_buffer': True, },
-                                                      3: { 'is_buffer': True, }, }, },
     '.etAttribute.+':               { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'GetDevTemp':                   { 'parameters': { 1: { 'is_buffer': True, }, }, },
+    'InitializeWithChannels':       { 'parameters': { 0: { 'is_buffer': True, },
+                                                      1: { 'is_buffer': True, },
+                                                      3: { 'is_buffer': True, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -92,8 +88,8 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 function_default_value = {
-    'InitWithOptions':  { 'parameters': { 1: { 'default_value': False, },
-                                          2: { 'default_value': False, },
-                                          3: { 'default_value': '', }, }, },
+    'InitializeWithChannels':  { 'parameters': { 1: { 'default_value': '', },
+                                                 2: { 'default_value': False, },
+                                                 3: { 'default_value': '', }, }, },
 }
 

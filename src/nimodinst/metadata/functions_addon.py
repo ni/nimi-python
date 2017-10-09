@@ -13,12 +13,6 @@ functions_codegen_method = {
 }
 
 
-# TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval? Issue #259
-functions_params_types = {
-    'GetInstalledDeviceAttributeViString':  { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
-    'GetExtendedErrorInfo':                 { 'parameters': { 1: { 'type': 'ViString',                  }, }, },
-}
-
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
 # {'is_buffer': True} is required for all parameters that are arrays. Some were able to be detected as an array when
 #   generating functions.py. This sets 'is_buffer' for those parameters where the dectection didn't work

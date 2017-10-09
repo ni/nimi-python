@@ -3,10 +3,10 @@
 import ctypes
 
 from nidmm import attributes
-from nidmm import ctypes_types
 from nidmm import enums
 from nidmm import errors
 from nidmm import library_singleton
+from nidmm import visatype
 
 
 class _Acquisition(object):
@@ -774,6 +774,7 @@ class _SessionBase(object):
     def __init__(self, repeated_capability):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
+        self._encoding = 'windows-1251'
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
@@ -819,20 +820,20 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an attribute.
 
         Returns:
-            attribute_value (bool):Returns the current value of the attribute. Pass the address of a
+            attribute_value (bool): Returns the current value of the attribute. Pass the address of a
                 ViBoolean variable.
         '''
-        attribute_value_ctype = ctypes_types.ViBoolean(0)
-        error_code = self._library.niDMM_GetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        attribute_value_ctype = visatype.ViBoolean(0)
+        error_code = self._library.niDMM_GetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
@@ -851,20 +852,20 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an attribute.
 
         Returns:
-            attribute_value (int):Returns the current value of the attribute. Pass the address of a
+            attribute_value (int): Returns the current value of the attribute. Pass the address of a
                 ViInt32 variable.
         '''
-        attribute_value_ctype = ctypes_types.ViInt32(0)
-        error_code = self._library.niDMM_GetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        attribute_value_ctype = visatype.ViInt32(0)
+        error_code = self._library.niDMM_GetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -883,20 +884,20 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
+            attribute_id (int): Pass the ID of an attribute.
 
         Returns:
-            attribute_value (float):Returns the current value of the attribute. Pass the address of a
+            attribute_value (float): Returns the current value of the attribute. Pass the address of a
                 ViReal64 variable.
         '''
-        attribute_value_ctype = ctypes_types.ViReal64(0)
-        error_code = self._library.niDMM_GetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, ctypes.pointer(attribute_value_ctype))
+        attribute_value_ctype = visatype.ViReal64(0)
+        error_code = self._library.niDMM_GetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
@@ -918,14 +919,14 @@ class _SessionBase(object):
            parameter.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
+            attribute_id (int): Pass the ID of an attribute.
+            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
                 **Attribute_Value** parameter.
 
                 If the current value of the attribute, including the terminating NULL
@@ -942,13 +943,13 @@ class _SessionBase(object):
         '''
         buffer_size = 0
         attribute_value_ctype = None
-        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
-        attribute_value_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
-        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, buffer_size, attribute_value_ctype)
+        attribute_value_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, buffer_size, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode("ascii")
+        return attribute_value_ctype.value.decode(self._encoding)
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
@@ -980,16 +981,16 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (bool):Pass the value that you want to set the attribute to.
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (bool): Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niDMM_SetAttributeViBoolean(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niDMM_SetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1023,16 +1024,16 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (int):Pass the value that you want to set the attribute to.
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (int): Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niDMM_SetAttributeViInt32(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niDMM_SetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1066,16 +1067,16 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (float):Pass the value that you want to set the attribute to.
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (float): Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niDMM_SetAttributeViReal64(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value)
+        error_code = self._library.niDMM_SetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1109,16 +1110,16 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (str):This parameter is ignored. National Instruments DMMs do not support
+            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
                 channel names since they only have a single channel. This parameter is
                 included in order to support interchangeability and upgradability to
                 multiple channel DMMs.
 
                 The default value is " " (an empty string).
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (str):Pass the value that you want to set the attribute to.
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (string): Pass the value that you want to set the attribute to.
         '''
-        error_code = self._library.niDMM_SetAttributeViString(self._vi, self._repeated_capability.encode('ascii'), attribute_id, attribute_value.encode('ascii'))
+        error_code = self._library.niDMM_SetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1181,7 +1182,7 @@ class Session(_SessionBase):
         attributes, which the DMM uses for AC measurements.
 
         Args:
-            ac_minimum_frequency_hz (float):Specifies the minimum expected frequency component of the input signal
+            ac_minimum_frequency_hz (float): Specifies the minimum expected frequency component of the input signal
                 in hertz. This parameter affects the DMM only when you set the
                 function attribute to AC measurements. NI-DMM uses this
                 parameter to calculate the proper aperture for the measurement.
@@ -1189,7 +1190,7 @@ class Session(_SessionBase):
                 The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
                 4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
                 NI 4050 and NI 4060.
-            ac_maximum_frequency_hz (float):Specifies the maximum expected frequency component of the input signal
+            ac_maximum_frequency_hz (float): Specifies the maximum expected frequency component of the input signal
                 in hertz within the device limits. This parameter is used only for error
                 checking and verifies that the value of this parameter is less than the
                 maximum frequency of the device.
@@ -1204,239 +1205,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_adc_calibration(self, adc_calibration):
-        '''configure_adc_calibration
-
-        For the NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
-        compensate for gain drift since the last external calibration or
-        self-calibration. When **ADC_Calibration** is ON, the DMM measures an
-        internal reference to calculate the correct gain for the measurement.
-        When **ADC_Calibration** is OFF, the DMM does not compensate for
-        changes to the gain.
-
-        Args:
-            adc_calibration (enums.ADCCalibration):Specifies the **ADC_Calibration** setting. The driver sets
-                ADC_CALIBRATION to this value.
-                NIDMM_VAL_ADC_CALIBRATION_ON enables **ADC_Calibration**.
-                NIDMM_VAL_ADC_CALIBRATION_OFF disables **ADC_Calibration**. If you
-                set the value to NIDMM_VAL_ADC_CALIBRATION_AUTO, the driver
-                determines whether to enable **ADC_Calibration** based on the
-                measurement function and resolution that you configure. If you configure
-                the NI 4080/4081/4082 or NI 4070/4071/4072 for a 6½–digit and greater
-                resolution DC measurement, the driver enables ADC Calibration. For all
-                other measurement configurations, the driver disables
-                **ADC_Calibration**.
-
-                +------------------------------------------+-------+--------------------------------------------------------------------------------------------------+
-                | Name                                     | Value | Description                                                                                      |
-                +==========================================+=======+==================================================================================================+
-                | NIDMM_VAL_ADC_CALIBRATION_AUTO (default) | -1.0  | The DMM enables or disables **ADC_Calibration** based on the configured function and resolution. |
-                +------------------------------------------+-------+--------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_ADC_CALIBRATION_OFF            | 0     | The DMM does not compensate for changes to the gain.                                             |
-                +------------------------------------------+-------+--------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_ADC_CALIBRATION_ON             | 1     | The DMM measures an internal reference to calculate the correct gain for the measurement.        |
-                +------------------------------------------+-------+--------------------------------------------------------------------------------------------------+
-        '''
-        if type(adc_calibration) is not enums.ADCCalibration:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ADCCalibration))
-        error_code = self._library.niDMM_ConfigureADCCalibration(self._vi, adc_calibration.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_auto_zero_mode(self, auto_zero_mode):
-        '''configure_auto_zero_mode
-
-        Configures the DMM for **Auto_Zero_Mode**. When **Auto_Zero_Mode**
-        is ON, the DMM internally disconnects the input signal and takes a zero
-        reading. It then subtracts the zero reading from the measurement. This
-        prevents offset voltages present on the input circuitry of the DMM from
-        affecting measurement accuracy. When **Auto_Zero_Mode** is OFF, the
-        DMM does not compensate for zero reading offset.
-
-        Args:
-            auto_zero_mode (enums.AutoZero):Specifies the **auto_zero_mode**. NI-DMM sets the
-                AUTO_ZERO attribute to this value.
-
-                ON enables **auto_zero_mode** for each measurement. ONCE enables
-                **auto_zero_mode** before the next measurement. The
-                **auto_zero_mode** value is stored and used in subsequent measurements
-                until the device is reconfigured.
-
-                OFF disables **auto_zero_mode**. If you set this parameter to AUTO,
-                NI-DMM determines whether to enable Auto Zero based on the measurement
-                function that you configure. If you configure the NI 4080/4081/4082 or
-                the NI 4070/4071/4072 for a 6½–digit and greater resolution DC
-                measurement, NI-DMM sets **auto_zero_mode** to ON.
-
-                For all other DC measurement configurations on the NI 4080/4081/4082 or
-                the NI 4070/4071/4072, NI-DMM sets **auto_zero_mode** to ONCE. For all
-                AC measurements or waveform acquisitions on the NI 4080/4081/4082 or the
-                NI 4070/4071/4072, NI-DMM sets **auto_zero_mode** to OFF. For NI 4060,
-                **auto_zero_mode** is set to OFF when AUTO is selected.
-
-                For NI 4065 devices, **auto_zero_mode** is always ON.
-                **auto_zero_mode** is an integral part of the signal measurement phase
-                and adds no extra time to the overall measurement.
-
-                +------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_AUTO_ZERO_AUTO (default) | -1 | NI-DMM chooses the Auto Zero setting based on the configured function and resolution.                                                                                                                      |
-                +------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_AUTO_ZERO_OFF            | 0  | Disables Auto Zero.                                                                                                                                                                                        |
-                +------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_AUTO_ZERO_ON             | 1  | The DMM internally disconnects the input signal following each measurement and takes a zero reading. It then subtracts the zero reading from the preceding reading.                                        |
-                +------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_AUTO_ZERO_ONCE           | 2  | The DMM internally disconnects the input signal following the first measurement and takes a zero reading. It then subtracts the zero reading from the preceding reading and each measurement that follows. |
-                +------------------------------------+----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-                Note: The NI 4060/4065 does *not* support this setting.
-        '''
-        if type(auto_zero_mode) is not enums.AutoZero:
-            raise TypeError('Parameter mode must be of type ' + str(enums.AutoZero))
-        error_code = self._library.niDMM_ConfigureAutoZeroMode(self._vi, auto_zero_mode.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_cable_comp_type(self, cable_comp_type):
-        '''configure_cable_comp_type
-
-        For the NI 4082 and NI 4072 only, sets the
-        CABLE_COMP_TYPE attribute for the current
-        capacitance/inductance mode range.
-
-        Args:
-            cable_comp_type (enums.CableCompensationType):Specifies the type of cable compensation that is used for the current
-                range.
-        '''
-        if type(cable_comp_type) is not enums.CableCompensationType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.CableCompensationType))
-        error_code = self._library.niDMM_ConfigureCableCompType(self._vi, cable_comp_type.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_current_source(self, current_source):
-        '''configure_current_source
-
-        The NI 4050 and NI 4060 are not supported. Configures the
-        **Current_Source** for diode measurements.
-
-        Args:
-            current_source (enums.CurrentSource):Specifies the **current_source** provided during diode measurements.
-                For valid ranges, refer to the device sections for your device. The
-                driver sets CURRENT_SOURCE to this value.
-
-                +--------------------------------+--------+---------------------------------------------------+
-                | NIDMM_VAL_1_MICROAMP           | 1 µA   | NI 4080/4081/4082 and NI 4070/4071/4072           |
-                +--------------------------------+--------+---------------------------------------------------+
-                | NIDMM_VAL_10_MICROAMP          | 10 µA  | NI 4080/4081/4082 and NI 4070/4071/4072 only      |
-                +--------------------------------+--------+---------------------------------------------------+
-                | NIDMM_VAL_100_MICROAMP         | 100 µA | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 |
-                +--------------------------------+--------+---------------------------------------------------+
-                | NIDMM_VAL_1_MILLIAMP (default) | 1 mA   | NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 |
-                +--------------------------------+--------+---------------------------------------------------+
-        '''
-        if type(current_source) is not enums.CurrentSource:
-            raise TypeError('Parameter mode must be of type ' + str(enums.CurrentSource))
-        error_code = self._library.niDMM_ConfigureCurrentSource(self._vi, current_source.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_fixed_ref_junction(self, fixed_reference_junction):
-        '''configure_fixed_ref_junction
-
-        Configures the fixed reference junction temperature for a thermocouple
-        with a fixed reference junction type.
-
-        Args:
-            fixed_reference_junction (float):Specifies the reference junction temperature when a fixed reference
-                junction is used to take a thermocouple measurement. The units are
-                degrees Celsius. NI-DMM uses this value to set the Fixed Reference
-                Junction property. The default is 25.00 (°C).
-        '''
-        error_code = self._library.niDMM_ConfigureFixedRefJunction(self._vi, fixed_reference_junction)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_frequency_voltage_range(self, voltage_range):
-        '''configure_frequency_voltage_range
-
-        For the NI 4080/4081/4082 and the NI 4070/4071/4072 only, specifies the
-        expected maximum amplitude of the input signal for frequency and period
-        measurements.
-
-        Args:
-            voltage_range (float):Sets the expected maximum amplitude of the input signal. Refer to the
-                `NI 4080 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4080_functional_overview/>`__,
-                `NI 4081 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4081_functional_overview/>`__,
-                `NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4082/>`__,
-                `NI 4070 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4070_functional_overview/>`__,
-                `NI 4071 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4071_functional_overview/>`__,
-                and
-                `NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4072/>`__
-                sections for a list of valid values. NI-DMM sets
-                FREQ_VOLTAGE_RANGE to this value. The minimum
-                peak-to-peak signal amplitude that can be detected is 10% of the
-                specified **voltage_range**.
-
-                +-----------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
-                | Name                              | Value | Description                                                                                                                      |
-                +===================================+=======+==================================================================================================================================+
-                | NIDMM_VAL_AUTO_RANGE_ON (default) | -1.0  | Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement. |
-                +-----------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
-                | NIDMM_VAL_AUTO_RANGE_OFF          | -2.0  | Disables Auto Ranging. The driver sets the voltage range to the last calculated voltage range.                                   |
-                +-----------------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------+
-        '''
-        error_code = self._library.niDMM_ConfigureFrequencyVoltageRange(self._vi, voltage_range)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_meas_complete_dest(self, meas_complete_destination):
-        '''configure_meas_complete_dest
-
-        Specifies the destination of the DMM Measurement Complete (MC) signal.
-        Refer to
-        `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
-        for more information.
-
-        Args:
-            meas_complete_destination (enums.MeasurementCompleteDest):Specifies the destination of the Measurement Complete signal. This
-                signal is issued when the DMM completes a single measurement. The driver
-                sets the MEAS_COMPLETE_DEST attribute to this value. This
-                signal is commonly referred to as Voltmeter Complete.
-
-                Note:
-                To determine which values are supported by each device, refer to the
-                `LabWindows/CVI Trigger
-                Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-                section.
-        '''
-        if type(meas_complete_destination) is not enums.MeasurementCompleteDest:
-            raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementCompleteDest))
-        error_code = self._library.niDMM_ConfigureMeasCompleteDest(self._vi, meas_complete_destination.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_meas_complete_slope(self, meas_complete_slope):
-        '''configure_meas_complete_slope
-
-        Sets the Measurement Complete signal to either rising edge (positive) or
-        falling edge (negative) polarity.
-
-        Args:
-            meas_complete_slope (enums.Slope):Specifies the polarity of the signal that is generated. The driver sets
-                MEAS_DEST_SLOPE to this value.
-
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-                | Rising Edge            | 0 | NIDMM_VAL_POSITIVE | The driver triggers on the rising edge of the trigger signal.  |
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-                | Falling Edge (default) | 1 | NIDMM_VAL_NEGATIVE | The driver triggers on the falling edge of the trigger signal. |
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-        '''
-        if type(meas_complete_slope) is not enums.Slope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
-        error_code = self._library.niDMM_ConfigureMeasCompleteSlope(self._vi, meas_complete_slope.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
         '''configure_measurement_absolute
 
@@ -1445,9 +1213,9 @@ class Session(_SessionBase):
         RESOLUTION_ABSOLUTE.
 
         Args:
-            measurement_function (enums.Function):Specifies the **measurement_function** used to acquire the measurement.
+            measurement_function (enums.Function): Specifies the **measurement_function** used to acquire the measurement.
                 The driver sets function to this value.
-            range (float):Specifies the **range** for the function specified in the
+            range (float): Specifies the **range** for the function specified in the
                 **Measurement_Function** parameter. When frequency is specified in the
                 **Measurement_Function** parameter, you must supply the minimum
                 frequency expected in the **range** parameter. For example, you must
@@ -1471,7 +1239,7 @@ class Session(_SessionBase):
                 Note:
                 The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
                 trigger and sample trigger are set to IMMEDIATE.
-            resolution_absolute (float):Specifies the absolute resolution for the measurement. NI-DMM sets
+            resolution_absolute (float): Specifies the absolute resolution for the measurement. NI-DMM sets
                 RESOLUTION_ABSOLUTE to this value. This parameter is
                 ignored when the **Range** parameter is set to
                 NIDMM_VAL_AUTO_RANGE_ON (-1.0) or NIDMM_VAL_AUTO_RANGE_ONCE
@@ -1497,9 +1265,9 @@ class Session(_SessionBase):
         RESOLUTION_DIGITS.
 
         Args:
-            measurement_function (enums.Function):Specifies the **measurement_function** used to acquire the measurement.
+            measurement_function (enums.Function): Specifies the **measurement_function** used to acquire the measurement.
                 The driver sets function to this value.
-            range (float):Specifies the range for the function specified in the
+            range (float): Specifies the range for the function specified in the
                 **Measurement_Function** parameter. When frequency is specified in the
                 **Measurement_Function** parameter, you must supply the minimum
                 frequency expected in the **range** parameter. For example, you must
@@ -1523,7 +1291,7 @@ class Session(_SessionBase):
                 Note:
                 The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
                 trigger and sample trigger are set to IMMEDIATE.
-            resolution_digits (float):Specifies the resolution of the measurement in digits. The driver sets
+            resolution_digits (float): Specifies the resolution of the measurement in digits. The driver sets
                 the `Devices
                 Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
                 for a list of valid ranges. The driver sets
@@ -1560,13 +1328,13 @@ class Session(_SessionBase):
         Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__.
 
         Args:
-            trigger_count (int):Sets the number of triggers you want the DMM to receive before returning
+            trigger_count (int): Sets the number of triggers you want the DMM to receive before returning
                 to the Idle state. The driver sets TRIGGER_COUNT to this
                 value. The default value is 1.
-            sample_count (int):Sets the number of measurements the DMM makes in each measurement
+            sample_count (int): Sets the number of measurements the DMM makes in each measurement
                 sequence initiated by a trigger. The driver sets
                 SAMPLE_COUNT to this value. The default value is 1.
-            sample_trigger (enums.SampleTrigger):Specifies the **sample_trigger** source you want to use. The driver
+            sample_trigger (enums.SampleTrigger): Specifies the **sample_trigger** source you want to use. The driver
                 sets SAMPLE_TRIGGER to this value. The default is
                 Immediate.
 
@@ -1575,7 +1343,7 @@ class Session(_SessionBase):
                 `LabWindows/CVI Trigger
                 Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
                 section.
-            sample_interval (float):Sets the amount of time in seconds the DMM waits between measurement
+            sample_interval (float): Sets the amount of time in seconds the DMM waits between measurement
                 cycles. The driver sets SAMPLE_INTERVAL to this value.
                 Specify a sample interval to add settling time between measurement
                 cycles or to decrease the measurement rate. **sample_interval** only
@@ -1596,35 +1364,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_offset_comp_ohms(self, offset_comp_ohms):
-        '''configure_offset_comp_ohms
-
-        For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
-        compensate for voltage offsets in resistance measurements. When
-        **Offset_Comp_Ohms** is enabled, the DMM measures the resistance twice
-        (once with the current source on and again with it turned off). Any
-        voltage offset present in both measurements is cancelled out.
-        **Offset_Comp_Ohms** is useful when measuring resistance values less
-        than 10 KΩ.
-
-        Args:
-            offset_comp_ohms (enums.OffsetCompensatedOhms):Enables or disables **offset_comp_ohms**. The driver sets
-                OFFSET_COMP_OHMS to this value.
-
-                +------------------------------------------+-------+------------------------------------+
-                | Name                                     | Value | Description                        |
-                +==========================================+=======+====================================+
-                | NIDMM_VAL_OFFSET_COMP_OHMS_OFF (default) | 0     | Off disables **Offset_Comp_Ohms**. |
-                +------------------------------------------+-------+------------------------------------+
-                | NIDMM_VAL_OFFSET_COMP_OHMS_ON            | 1     | On enables **Offset_Comp_Ohms**.   |
-                +------------------------------------------+-------+------------------------------------+
-        '''
-        if type(offset_comp_ohms) is not enums.OffsetCompensatedOhms:
-            raise TypeError('Parameter mode must be of type ' + str(enums.OffsetCompensatedOhms))
-        error_code = self._library.niDMM_ConfigureOffsetCompOhms(self._vi, offset_comp_ohms.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_open_cable_comp_values(self, conductance, susceptance):
         '''configure_open_cable_comp_values
 
@@ -1633,8 +1372,8 @@ class Session(_SessionBase):
         OPEN_CABLE_COMP_SUSCEPTANCE attributes.
 
         Args:
-            conductance (float):Specifies the open cable compensation **conductance**.
-            susceptance (float):Specifies the open cable compensation **susceptance**.
+            conductance (float): Specifies the open cable compensation **conductance**.
+            susceptance (float): Specifies the open cable compensation **susceptance**.
         '''
         error_code = self._library.niDMM_ConfigureOpenCableCompValues(self._vi, conductance, susceptance)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1646,7 +1385,7 @@ class Session(_SessionBase):
         Specifies the powerline frequency.
 
         Args:
-            power_line_frequency_hz (float):**Powerline Frequency** specifies the powerline frequency in hertz.
+            power_line_frequency_hz (float): **Powerline Frequency** specifies the powerline frequency in hertz.
                 NI-DMM sets the Powerline Frequency property to this value.
         '''
         error_code = self._library.niDMM_ConfigurePowerLineFrequency(self._vi, power_line_frequency_hz)
@@ -1659,13 +1398,13 @@ class Session(_SessionBase):
         Configures the A, B, and C parameters for a custom RTD.
 
         Args:
-            rtd_a (float):Specifies the Callendar-Van Dusen A coefficient for RTD scaling when RTD
+            rtd_a (float): Specifies the Callendar-Van Dusen A coefficient for RTD scaling when RTD
                 Type parameter is set to Custom in the configure_rtd_type function.
                 The default is 3.9083e-3 (Pt3851)
-            rtd_b (float):Specifies the Callendar-Van Dusen B coefficient for RTD scaling when RTD
+            rtd_b (float): Specifies the Callendar-Van Dusen B coefficient for RTD scaling when RTD
                 Type parameter is set to Custom in the configure_rtd_type function.
                 The default is -5.775e-7 (Pt3851).
-            rtd_c (float):Specifies the Callendar-Van Dusen C coefficient for RTD scaling when RTD
+            rtd_c (float): Specifies the Callendar-Van Dusen C coefficient for RTD scaling when RTD
                 Type parameter is set to Custom in the configure_rtd_type function.
                 The default is -4.183e-12 (Pt3851).
         '''
@@ -1679,7 +1418,7 @@ class Session(_SessionBase):
         Configures the RTD Type and RTD Resistance parameters for an RTD.
 
         Args:
-            rtd_type (int):Specifies the type of RTD used to measure the temperature resistance.
+            rtd_type (enums.RTDType): Specifies the type of RTD used to measure the temperature resistance.
                 NI-DMM uses this value to set the RTD Type property. The default is
                 NIDMM_VAL_TEMP_RTD_PT3851.
 
@@ -1702,34 +1441,12 @@ class Session(_SessionBase):
                 +---------------------------------+
                 | \*No standard. Check the TCR.   |
                 +---------------------------------+
-            rtd_resistance (float):Specifies the RTD resistance in ohms at 0 °C. NI-DMM uses this value to
+            rtd_resistance (float): Specifies the RTD resistance in ohms at 0 °C. NI-DMM uses this value to
                 set the RTD Resistance property. The default is 100 (Ω).
         '''
-        error_code = self._library.niDMM_ConfigureRTDType(self._vi, rtd_type, rtd_resistance)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_sample_trigger_slope(self, sample_trigger_slope):
-        '''configure_sample_trigger_slope
-
-        Sets the SAMPLE_TRIGGER_SLOPE to either rising edge
-        (positive) or falling edge (negative) polarity.
-
-        Args:
-            sample_trigger_slope (enums.Slope):Specifies the polarity of the Trigger signal on which the measurement is
-                triggered for values of either NIDMM_VAL_POSITIVE or
-                NIDMM_VAL_NEGATIVE. The driver sets
-                SAMPLE_TRIGGER_SLOPE to this value.
-
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-                | Rising Edge            | 0 | NIDMM_VAL_POSITIVE | The driver triggers on the rising edge of the trigger signal.  |
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-                | Falling Edge (default) | 1 | NIDMM_VAL_NEGATIVE | The driver triggers on the falling edge of the trigger signal. |
-                +------------------------+---+--------------------+----------------------------------------------------------------+
-        '''
-        if type(sample_trigger_slope) is not enums.Slope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
-        error_code = self._library.niDMM_ConfigureSampleTriggerSlope(self._vi, sample_trigger_slope.value)
+        if type(rtd_type) is not enums.RTDType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.RTDType))
+        error_code = self._library.niDMM_ConfigureRTDType(self._vi, rtd_type.value, rtd_resistance)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1741,8 +1458,8 @@ class Session(_SessionBase):
         SHORT_CABLE_COMP_REACTANCE attributes.
 
         Args:
-            resistance (float):Specifies the short cable compensation **resistance**.
-            reactance (float):Specifies the short cable compensation **reactance**.
+            resistance (float): Specifies the short cable compensation **resistance**.
+            reactance (float): Specifies the short cable compensation **reactance**.
         '''
         error_code = self._library.niDMM_ConfigureShortCableCompValues(self._vi, resistance, reactance)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1754,13 +1471,13 @@ class Session(_SessionBase):
         Configures the A, B, and C parameters for a custom thermistor.
 
         Args:
-            thermistor_a (float):Specifies the Steinhart-Hart A coefficient for thermistor scaling when
+            thermistor_a (float): Specifies the Steinhart-Hart A coefficient for thermistor scaling when
                 Thermistor Type is set to Custom in the configure_thermistor_type
                 function. The default is 1.0295e-3 (44006).
-            thermistor_b (float):Specifies the Steinhart-Hart B coefficient for thermistor scaling when
+            thermistor_b (float): Specifies the Steinhart-Hart B coefficient for thermistor scaling when
                 Thermistor Type is set to Custom in the configure_thermistor_type
                 function. The default is 2.391e-4 (44006).
-            thermistor_c (float):Specifies the Steinhart-Hart C coefficient for thermistor scaling when
+            thermistor_c (float): Specifies the Steinhart-Hart C coefficient for thermistor scaling when
                 Thermistor Type is set to Custom in the configure_thermistor_type
                 function. The default is 1.568e-7 (44006).
         '''
@@ -1768,47 +1485,14 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_thermistor_type(self, thermistor_type):
-        '''configure_thermistor_type
-
-        Configures the thermistor type.
-
-        Args:
-            thermistor_type (enums.TemperatureThermistorType):Specifies the type of thermistor used to measure the temperature. NI-DMM
-                uses this value to set the Thermistor Type property. The default is
-                NIDMM_VAL_TEMP_THERMISTOR_44006.
-
-                +--------------------+--------------------+--------------------+--------------------+
-                | **Defined Values** | **Thermistor       | **Value**          | **25 °C            |
-                |                    | Type**             |                    | Resistance**       |
-                +--------------------+--------------------+--------------------+--------------------+
-                | NIDMM_VAL_TEMP_ | Custom             | 0                  | —                  |
-                | THERMISTOR_CUSTOM |                    |                    |                    |
-                +--------------------+--------------------+--------------------+--------------------+
-                | NIDMM_VAL_TEMP_ | 44004              | 1                  | 2.25 kΩ            |
-                | THERMISTOR_44004  |                    |                    |                    |
-                +--------------------+--------------------+--------------------+--------------------+
-                | NIDMM_VAL_TEMP_ | 44006              | 2                  | 10 kΩ              |
-                | THERMISTOR_44006  |                    |                    |                    |
-                +--------------------+--------------------+--------------------+--------------------+
-                | NIDMM_VAL_TEMP_ | 44007              | 3                  | 5 kΩ               |
-                | THERMISTOR_44007  |                    |                    |                    |
-                +--------------------+--------------------+--------------------+--------------------+
-        '''
-        if type(thermistor_type) is not enums.TemperatureThermistorType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TemperatureThermistorType))
-        error_code = self._library.niDMM_ConfigureThermistorType(self._vi, thermistor_type.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_thermocouple(self, thermocouple_type, reference_junction_type='ThermocoupleReferenceJunctionType.FIXED'):
+    def configure_thermocouple(self, thermocouple_type, reference_junction_type=enums.ThermocoupleReferenceJunctionType.FIXED):
         '''configure_thermocouple
 
         Configures the thermocouple type and reference junction type for a
         chosen thermocouple.
 
         Args:
-            thermocouple_type (enums.ThermocoupleType):Specifies the type of thermocouple used to measure the temperature.
+            thermocouple_type (enums.ThermocoupleType): Specifies the type of thermocouple used to measure the temperature.
                 NI-DMM uses this value to set the Thermocouple Type property. The
                 default is NIDMM_VAL_TEMP_TC_J.
 
@@ -1829,40 +1513,16 @@ class Session(_SessionBase):
                 +---------------------+---------------------+
                 | NIDMM_VAL_TEMP_TC_T | Thermocouple type T |
                 +---------------------+---------------------+
-            reference_junction_type (int):Specifies the type of reference junction to be used in the reference
+            reference_junction_type (enums.ThermocoupleReferenceJunctionType): Specifies the type of reference junction to be used in the reference
                 junction compensation of a thermocouple measurement. NI-DMM uses this
                 value to set the Reference Junction Type property. The only supported
                 value is NIDMM_VAL_TEMP_REF_JUNC_FIXED.
         '''
         if type(thermocouple_type) is not enums.ThermocoupleType:
             raise TypeError('Parameter mode must be of type ' + str(enums.ThermocoupleType))
-        error_code = self._library.niDMM_ConfigureThermocouple(self._vi, thermocouple_type.value, reference_junction_type)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_transducer_type(self, transducer_type):
-        '''configure_transducer_type
-
-        Configures the transducer type.
-
-        Args:
-            transducer_type (enums.TemperatureTransducerType):Specifies the type of device used to measure the temperature. NI-DMM
-                uses this value to set the Transducer Type property. The default is
-                NIDMM_VAL_THERMOCOUPLE.
-
-                +------------------------+--------------+
-                | NIDMM_VAL_2_WIRE_RTD   | 2-wire RTD   |
-                +------------------------+--------------+
-                | NIDMM_VAL_4_WIRE_RTD   | 4-wire RTD   |
-                +------------------------+--------------+
-                | NIDMM_VAL_THERMISTOR   | Thermistor   |
-                +------------------------+--------------+
-                | NIDMM_VAL_THERMOCOUPLE | Thermocouple |
-                +------------------------+--------------+
-        '''
-        if type(transducer_type) is not enums.TemperatureTransducerType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TemperatureTransducerType))
-        error_code = self._library.niDMM_ConfigureTransducerType(self._vi, transducer_type.value)
+        if type(reference_junction_type) is not enums.ThermocoupleReferenceJunctionType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ThermocoupleReferenceJunctionType))
+        error_code = self._library.niDMM_ConfigureThermocouple(self._vi, thermocouple_type.value, reference_junction_type.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1876,7 +1536,7 @@ class Session(_SessionBase):
         for more information.
 
         Args:
-            trigger_source (enums.TriggerSource):Specifies the **trigger_source** that initiates the acquisition. The
+            trigger_source (enums.TriggerSource): Specifies the **trigger_source** that initiates the acquisition. The
                 driver sets TRIGGER_SOURCE to this value. Software
                 configures the DMM to wait until send_software_trigger is called
                 before triggering the DMM.
@@ -1886,7 +1546,7 @@ class Session(_SessionBase):
                 `LabWindows/CVI Trigger
                 Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
                 section.
-            trigger_delay (float):Specifies the time that the DMM waits after it has received a trigger
+            trigger_delay (float): Specifies the time that the DMM waits after it has received a trigger
                 before taking a measurement. The driver sets the
                 TRIGGER_DELAY attribute to this value. By default,
                 **trigger_delay** is NIDMM_VAL_AUTO_DELAY (-1), which means the DMM
@@ -1905,30 +1565,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_trigger_slope(self, trigger_slope):
-        '''configure_trigger_slope
-
-        Sets the TRIGGER_SLOPE attribute to either rising edge
-        (positive) or falling edge (negative) polarity.
-
-        Args:
-            trigger_slope (enums.Slope):Specifies the polarity of the trigger signal on which the measurement is
-                triggered for values of either NIDMM_VAL_POSITIVE or
-                NIDMM_VAL_NEGATIVE. The driver sets the TRIGGER_SLOPE
-                attribute to this value.
-
-                +------------------------------+---+----------------------------------------------------------------+
-                | NIDMM_VAL_POSITIVE           | 0 | The driver triggers on the rising edge of the trigger signal.  |
-                +------------------------------+---+----------------------------------------------------------------+
-                | NIDMM_VAL_NEGATIVE (default) | 1 | The driver triggers on the falling edge of the trigger signal. |
-                +------------------------------+---+----------------------------------------------------------------+
-        '''
-        if type(trigger_slope) is not enums.Slope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Slope))
-        error_code = self._library.niDMM_ConfigureTriggerSlope(self._vi, trigger_slope.value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_waveform_acquisition(self, measurement_function, range, rate, waveform_points):
         '''configure_waveform_acquisition
 
@@ -1936,7 +1572,7 @@ class Session(_SessionBase):
         on the NI 4080/4081/4082 and the NI 4070/4071/4072.
 
         Args:
-            measurement_function (enums.Function):Specifies the **measurement_function** used in a waveform acquisition.
+            measurement_function (enums.Function): Specifies the **measurement_function** used in a waveform acquisition.
                 The driver sets function to this value.
 
                 +--------------------------------------+------+------------------+
@@ -1944,7 +1580,7 @@ class Session(_SessionBase):
                 +--------------------------------------+------+------------------+
                 | NIDMM_VAL_WAVEFORM_CURRENT           | 1004 | Current Waveform |
                 +--------------------------------------+------+------------------+
-            range (float):Specifies the expected maximum amplitude of the input signal and sets
+            range (float): Specifies the expected maximum amplitude of the input signal and sets
                 the **range** for the **Measurement_Function**. NI-DMM sets
                 range to this value. **range** values are coerced up to the
                 closest input **range**. The default is 10.0.
@@ -1953,13 +1589,13 @@ class Session(_SessionBase):
                 `Devices <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__.
 
                 Auto-ranging is not supported during waveform acquisitions.
-            rate (float):Specifies the **rate** of the acquisition in samples per second. NI-DMM
+            rate (float): Specifies the **rate** of the acquisition in samples per second. NI-DMM
                 sets WAVEFORM_RATE to this value.
 
                 The valid **Range** is 10.0–1,800,000 S/s. **rate** values are coerced
                 to the closest integer divisor of 1,800,000. The default value is
                 1,800,000.
-            waveform_points (int):Specifies the number of points to acquire before the waveform
+            waveform_points (int): Specifies the number of points to acquire before the waveform
                 acquisition completes. NI-DMM sets WAVEFORM_POINTS to this
                 value.
 
@@ -1973,30 +1609,6 @@ class Session(_SessionBase):
         if type(measurement_function) is not enums.Function:
             raise TypeError('Parameter mode must be of type ' + str(enums.Function))
         error_code = self._library.niDMM_ConfigureWaveformAcquisition(self._vi, measurement_function.value, range, rate, waveform_points)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_waveform_coupling(self, waveform_coupling):
-        '''configure_waveform_coupling
-
-        For the NI 4080/4081/4082 and the NI 4070/4071/4072, configures
-        instrument coupling for voltage waveforms.
-
-        Args:
-            waveform_coupling (enums.WaveformCouplingMode):Selects DC or AC coupling. The driver sets
-                WAVEFORM_COUPLING to this value.
-
-                +------------------------------------------+-------+-------------+
-                | Name                                     | Value | Description |
-                +==========================================+=======+=============+
-                | NIDMM_VAL_WAVEFORM_COUPLING_AC           | 0     | AC coupling |
-                +------------------------------------------+-------+-------------+
-                | NIDMM_VAL_WAVEFORM_COUPLING_DC (default) | 1     | DC coupling |
-                +------------------------------------------+-------+-------------+
-        '''
-        if type(waveform_coupling) is not enums.WaveformCouplingMode:
-            raise TypeError('Parameter mode must be of type ' + str(enums.WaveformCouplingMode))
-        error_code = self._library.niDMM_ConfigureWaveformCoupling(self._vi, waveform_coupling.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2018,7 +1630,7 @@ class Session(_SessionBase):
         _initiate before calling this function.
 
         Args:
-            maximum_time (int):Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2030,9 +1642,9 @@ class Session(_SessionBase):
                 automatically.
 
         Returns:
-            reading (float):The measured value returned from the DMM.
+            reading (float): The measured value returned from the DMM.
         '''
-        reading_ctype = ctypes_types.ViReal64(0)
+        reading_ctype = visatype.ViReal64(0)
         error_code = self._library.niDMM_Fetch(self._vi, maximum_time, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
@@ -2047,7 +1659,7 @@ class Session(_SessionBase):
         _initiate to initiate a measurement before calling this function.
 
         Args:
-            maximum_time (int):Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2057,7 +1669,7 @@ class Session(_SessionBase):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (int):Specifies the number of measurements to acquire. The maximum number of
+            array_size (int): Specifies the number of measurements to acquire. The maximum number of
                 measurements for a finite acquisition is the (**Trigger Count** x
                 **Sample Count**) parameters in configure_multi_point.
 
@@ -2066,18 +1678,18 @@ class Session(_SessionBase):
                 positive ViInt32. The default value is 1.
 
         Returns:
-            reading_array (float):An array of measurement values.
+            reading_array (list of float): An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
-            actual_number_of_points (int):Indicates the number of measured values actually retrieved from the DMM.
+            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        reading_array_ctype = (ctypes_types.ViReal64 * array_size)()
-        actual_number_of_points_ctype = ctypes_types.ViInt32(0)
-        error_code = self._library.niDMM_FetchMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
+        reading_array_ctype = (visatype.ViReal64 * array_size)()
+        actual_number_of_points_ctype = visatype.ViInt32(0)
+        error_code = self._library.niDMM_FetchMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def fetch_waveform(self, array_size, maximum_time=-1):
         '''fetch_waveform
@@ -2087,7 +1699,7 @@ class Session(_SessionBase):
         _initiate before calling this function.
 
         Args:
-            maximum_time (int):Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2097,21 +1709,21 @@ class Session(_SessionBase):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (int):Specifies the number of waveform points to return. You specify the total
+            array_size (int): Specifies the number of waveform points to return. You specify the total
                 number of points that the DMM acquires in the **Waveform Points**
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
         Returns:
-            waveform_array (float):**Waveform Array** is an array of measurement values stored in waveform
+            waveform_array (list of float): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
-            actual_number_of_points (int):Indicates the number of measured values actually retrieved from the DMM.
+            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        waveform_array_ctype = (ctypes_types.ViReal64 * array_size)()
-        actual_number_of_points_ctype = ctypes_types.ViInt32(0)
-        error_code = self._library.niDMM_FetchWaveform(self._vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
+        waveform_array_ctype = (visatype.ViReal64 * array_size)()
+        actual_number_of_points_ctype = visatype.ViInt32(0)
+        error_code = self._library.niDMM_FetchWaveform(self._vi, maximum_time, array_size, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [waveform_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def get_aperture_time_info(self):
         '''get_aperture_time_info
@@ -2119,7 +1731,7 @@ class Session(_SessionBase):
         Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
 
         Returns:
-            aperture_time (float):Specifies the amount of time the DMM digitizes the input signal for a
+            aperture_time (float): Specifies the amount of time the DMM digitizes the input signal for a
                 single measurement. This parameter does not include settling time.
                 Returns the value of the APERTURE_TIME attribute. The
                 units of this attribute depend on the value of the
@@ -2139,7 +1751,7 @@ class Session(_SessionBase):
                 On the NI 4060, when the powerline frequency is 60, the PLCs allowed are
                 1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50,
                 the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
-            aperture_time_units (enums.ApertureTimeUnits):Indicates the units of aperture time as powerline cycles (PLCs) or
+            aperture_time_units (enums.ApertureTimeUnits): Indicates the units of aperture time as powerline cycles (PLCs) or
                 seconds. Returns the value of the APERTURE_TIME_UNITS
                 attribute.
 
@@ -2149,8 +1761,8 @@ class Session(_SessionBase):
                 | NIDMM_VAL_POWER_LINE_CYCLES | 1 | Powerline Cycles |
                 +-----------------------------+---+------------------+
         '''
-        aperture_time_ctype = ctypes_types.ViReal64(0)
-        aperture_time_units_ctype = ctypes_types.ViInt32(0)
+        aperture_time_ctype = visatype.ViReal64(0)
+        aperture_time_units_ctype = visatype.ViInt32(0)
         error_code = self._library.niDMM_GetApertureTimeInfo(self._vi, ctypes.pointer(aperture_time_ctype), ctypes.pointer(aperture_time_units_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(aperture_time_ctype.value), enums.ApertureTimeUnits(aperture_time_units_ctype.value)
@@ -2162,11 +1774,11 @@ class Session(_SessionBase):
         Range is off.
 
         Returns:
-            actual_range (float):Indicates the **actual_range** the DMM is using. Returns the value of
+            actual_range (float): Indicates the **actual_range** the DMM is using. Returns the value of
                 the AUTO_RANGE_VALUE attribute. The units of the returned
                 value depend on the function.
         '''
-        actual_range_ctype = ctypes_types.ViReal64(0)
+        actual_range_ctype = visatype.ViReal64(0)
         error_code = self._library.niDMM_GetAutoRangeValue(self._vi, ctypes.pointer(actual_range_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(actual_range_ctype.value)
@@ -2179,7 +1791,7 @@ class Session(_SessionBase):
         Note: The NI 4050 and NI 4060 are not supported.
 
         Args:
-            cal_type (int):Specifies the type of calibration performed (external or
+            cal_type (int): Specifies the type of calibration performed (external or
                 self-calibration).
 
                 +-----------------------------------+---+----------------------+
@@ -2191,17 +1803,17 @@ class Session(_SessionBase):
                 Note: The NI 4065 does not support self-calibration.
 
         Returns:
-            month (int):Indicates the **month** of the last calibration.
-            day (int):Indicates the **day** of the last calibration.
-            year (int):Indicates the **year** of the last calibration.
-            hour (int):Indicates the **hour** of the last calibration.
-            minute (int):Indicates the **minute** of the last calibration.
+            month (int): Indicates the **month** of the last calibration.
+            day (int): Indicates the **day** of the last calibration.
+            year (int): Indicates the **year** of the last calibration.
+            hour (int): Indicates the **hour** of the last calibration.
+            minute (int): Indicates the **minute** of the last calibration.
         '''
-        month_ctype = ctypes_types.ViInt32(0)
-        day_ctype = ctypes_types.ViInt32(0)
-        year_ctype = ctypes_types.ViInt32(0)
-        hour_ctype = ctypes_types.ViInt32(0)
-        minute_ctype = ctypes_types.ViInt32(0)
+        month_ctype = visatype.ViInt32(0)
+        day_ctype = visatype.ViInt32(0)
+        year_ctype = visatype.ViInt32(0)
+        hour_ctype = visatype.ViInt32(0)
+        minute_ctype = visatype.ViInt32(0)
         error_code = self._library.niDMM_GetCalDateAndTime(self._vi, cal_type, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
@@ -2214,13 +1826,13 @@ class Session(_SessionBase):
         Note: The NI 4050 and NI 4060 are not supported.
 
         Args:
-            options (str):Reserved.
+            options (string): Reserved.
 
         Returns:
-            temperature (float):Returns the current **temperature** of the device.
+            temperature (float): Returns the current **temperature** of the device.
         '''
-        temperature_ctype = ctypes_types.ViReal64(0)
-        error_code = self._library.niDMM_GetDevTemp(self._vi, options.encode('ascii'), ctypes.pointer(temperature_ctype))
+        temperature_ctype = visatype.ViReal64(0)
+        error_code = self._library.niDMM_GetDevTemp(self._vi, options.encode(self._encoding), ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -2234,7 +1846,7 @@ class Session(_SessionBase):
         the error information for the process.
 
         Args:
-            buffer_size (int):Passes the number of bytes in the ViChar array you specify for the
+            buffer_size (int): Passes the number of bytes in the ViChar array you specify for the
                 **Description** parameter. If the error description, including the
                 terminating NULL byte, contains more bytes than you indicate in this
                 parameter, the function copies **buffer_size** –1 bytes into the
@@ -2249,20 +1861,20 @@ class Session(_SessionBase):
                 None.
 
         Returns:
-            error_code (int):Returns the **error_code** for the session or execution thread. If you
+            error_code (int): Returns the **error_code** for the session or execution thread. If you
                 pass 0 for the **Buffer_Size**, you can pass VI_NULL for this
                 parameter.
         '''
-        error_code_ctype = ctypes_types.ViStatus(0)
+        error_code_ctype = visatype.ViStatus(0)
         buffer_size = 0
         description_ctype = None
         error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
-        description_ctype = ctypes.cast(ctypes.create_string_buffer(buffer_size), ctypes_types.ViString)
+        description_ctype = (visatype.ViChar * buffer_size)()
         error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(error_code_ctype.value), description_ctype.value.decode("ascii")
+        return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
@@ -2272,7 +1884,7 @@ class Session(_SessionBase):
         Note: The NI 4050 and NI 4060 are not supported.
 
         Args:
-            cal_type (int):Specifies the type of calibration performed (external or
+            cal_type (int): Specifies the type of calibration performed (external or
                 self-calibration).
 
                 +-----------------------------------+---+----------------------+
@@ -2284,9 +1896,9 @@ class Session(_SessionBase):
                 Note: The NI 4065 does not support self-calibration.
 
         Returns:
-            temperature (float):Returns the **temperature** during the last calibration.
+            temperature (float): Returns the **temperature** during the last calibration.
         '''
-        temperature_ctype = ctypes_types.ViReal64(0)
+        temperature_ctype = visatype.ViReal64(0)
         error_code = self._library.niDMM_GetLastCalTemp(self._vi, cal_type, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
@@ -2301,7 +1913,7 @@ class Session(_SessionBase):
         been called.
 
         Returns:
-            period (float):Returns the number of seconds it takes to make one measurement.
+            period (float): Returns the number of seconds it takes to make one measurement.
 
                 The first measurement in a multipoint acquisition requires additional
                 settling time. This function does not include this additional time or
@@ -2309,7 +1921,7 @@ class Session(_SessionBase):
                 Time required for internal measurements, such as
                 AUTO_ZERO, is included.
         '''
-        period_ctype = ctypes_types.ViReal64(0)
+        period_ctype = visatype.ViReal64(0)
         error_code = self._library.niDMM_GetMeasurementPeriod(self._vi, ctypes.pointer(period_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(period_ctype.value)
@@ -2321,7 +1933,7 @@ class Session(_SessionBase):
         are using can perform self-calibration.
 
         Returns:
-            self_cal_supported (bool):Returns whether Self Cal is supported for the device specified by the
+            self_cal_supported (bool): Returns whether Self Cal is supported for the device specified by the
                 given session.
 
                 +----------+---+-------------------------------------------------------------+
@@ -2330,7 +1942,7 @@ class Session(_SessionBase):
                 | VI_FALSE | 0 | The DMM that you are using cannot perform self-calibration. |
                 +----------+---+-------------------------------------------------------------+
         '''
-        self_cal_supported_ctype = ctypes_types.ViBoolean(0)
+        self_cal_supported_ctype = visatype.ViBoolean(0)
         error_code = self._library.niDMM_GetSelfCalSupported(self._vi, ctypes.pointer(self_cal_supported_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
@@ -2357,7 +1969,7 @@ class Session(_SessionBase):
            all subsequent instrument driver function calls.
 
         Args:
-            resource_name (str):Caution:
+            resource_name (string): Caution:
                 All IVI names for the **Resource_Name**, such as logical names or
                 virtual names, are case-sensitive. If you use logical names, driver
                 session names, or virtual names in your program, you must make sure that
@@ -2377,7 +1989,7 @@ class Session(_SessionBase):
                 -  DAQ::NI-DAQmx name[::INSTR]
                 -  DAQ::Traditional NI-DAQ device number[::INSTR]
                 -  IVI logical name
-            id_query (bool):Verifies that the device you initialize is one that the driver supports.
+            id_query (bool): Verifies that the device you initialize is one that the driver supports.
                 NI-DMM automatically performs this query, so setting this parameter is
                 not necessary.
                 Defined Values:
@@ -2387,7 +1999,7 @@ class Session(_SessionBase):
                 +-------------------+---+------------------+
                 | VI_FALSE          | 0 | Skip ID Query    |
                 +-------------------+---+------------------+
-            reset_device (bool):Specifies whether to reset the instrument during the initialization
+            reset_device (bool): Specifies whether to reset the instrument during the initialization
                 procedure.
                 Defined Values:
 
@@ -2396,7 +2008,7 @@ class Session(_SessionBase):
                 +-------------------+---+--------------+
                 | VI_FALSE          | 0 | Don't Reset  |
                 +-------------------+---+--------------+
-            option_string (str):| Sets the initial value of certain attributes for the session. The
+            option_string (string): | Sets the initial value of certain attributes for the session. The
                   following table specifies the attribute name, attribute constant, and
                   default value for each attribute that you can use in this parameter:
 
@@ -2428,11 +2040,11 @@ class Session(_SessionBase):
                 +------------------+--------------------+-------------------+----+
 
         Returns:
-            vi (int):Returns a ViSession handle that you use to identify the instrument in
+            vi (int): Returns a ViSession handle that you use to identify the instrument in
                 all subsequent instrument driver function calls.
         '''
-        vi_ctype = ctypes_types.ViSession(0)
-        error_code = self._library.niDMM_InitWithOptions(resource_name.encode('ascii'), id_query, reset_device, option_string.encode('ascii'), ctypes.pointer(vi_ctype))
+        vi_ctype = visatype.ViSession(0)
+        error_code = self._library.niDMM_InitWithOptions(resource_name.encode(self._encoding), id_query, reset_device, option_string.encode(self._encoding), ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -2463,13 +2075,13 @@ class Session(_SessionBase):
         NIDMM_VAL_INDUCTANCE (1006).
 
         Returns:
-            conductance (float):**conductance** is the measured value of open cable compensation
+            conductance (float): **conductance** is the measured value of open cable compensation
                 **conductance**.
-            susceptance (float):**susceptance** is the measured value of open cable compensation
+            susceptance (float): **susceptance** is the measured value of open cable compensation
                 **susceptance**.
         '''
-        conductance_ctype = ctypes_types.ViReal64(0)
-        susceptance_ctype = ctypes_types.ViReal64(0)
+        conductance_ctype = visatype.ViReal64(0)
+        susceptance_ctype = visatype.ViReal64(0)
         error_code = self._library.niDMM_PerformOpenCableComp(self._vi, ctypes.pointer(conductance_ctype), ctypes.pointer(susceptance_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(conductance_ctype.value), float(susceptance_ctype.value)
@@ -2487,13 +2099,13 @@ class Session(_SessionBase):
         NIDMM_VAL_INDUCTANCE (1006).
 
         Returns:
-            resistance (float):**resistance** is the measured value of short cable compensation
+            resistance (float): **resistance** is the measured value of short cable compensation
                 **resistance**.
-            reactance (float):**reactance** is the measured value of short cable compensation
+            reactance (float): **reactance** is the measured value of short cable compensation
                 **reactance**.
         '''
-        resistance_ctype = ctypes_types.ViReal64(0)
-        reactance_ctype = ctypes_types.ViReal64(0)
+        resistance_ctype = visatype.ViReal64(0)
+        reactance_ctype = visatype.ViReal64(0)
         error_code = self._library.niDMM_PerformShortCableComp(self._vi, ctypes.pointer(resistance_ctype), ctypes.pointer(reactance_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(resistance_ctype.value), float(reactance_ctype.value)
@@ -2504,7 +2116,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (int):Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2516,9 +2128,9 @@ class Session(_SessionBase):
                 automatically.
 
         Returns:
-            reading (float):The measured value returned from the DMM.
+            reading (float): The measured value returned from the DMM.
         '''
-        reading_ctype = ctypes_types.ViReal64(0)
+        reading_ctype = visatype.ViReal64(0)
         error_code = self._library.niDMM_Read(self._vi, maximum_time, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
@@ -2532,7 +2144,7 @@ class Session(_SessionBase):
         configure_multi_point.
 
         Args:
-            maximum_time (int):Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2542,7 +2154,7 @@ class Session(_SessionBase):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (int):Specifies the number of measurements to acquire. The maximum number of
+            array_size (int): Specifies the number of measurements to acquire. The maximum number of
                 measurements for a finite acquisition is the (**Trigger Count** x
                 **Sample Count**) parameters in configure_multi_point.
 
@@ -2551,18 +2163,18 @@ class Session(_SessionBase):
                 positive ViInt32. The default value is 1.
 
         Returns:
-            reading_array (float):An array of measurement values.
+            reading_array (list of float): An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
-            actual_number_of_points (int):Indicates the number of measured values actually retrieved from the DMM.
+            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        reading_array_ctype = (ctypes_types.ViReal64 * array_size)()
-        actual_number_of_points_ctype = ctypes_types.ViInt32(0)
-        error_code = self._library.niDMM_ReadMultiPoint(self._vi, maximum_time, array_size, ctypes.cast(reading_array_ctype, ctypes.POINTER(ctypes_types.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
+        reading_array_ctype = (visatype.ViReal64 * array_size)()
+        actual_number_of_points_ctype = visatype.ViInt32(0)
+        error_code = self._library.niDMM_ReadMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def read_status(self):
         '''read_status
@@ -2574,7 +2186,7 @@ class Session(_SessionBase):
         Note: The NI 4050 is not supported.
 
         Returns:
-            acquisition_backlog (int):The number of measurements available to be read. If the backlog
+            acquisition_backlog (int): The number of measurements available to be read. If the backlog
                 continues to increase, data is eventually overwritten, resulting in an
                 error.
 
@@ -2584,7 +2196,7 @@ class Session(_SessionBase):
                 RANGE ON (-1), or before the first point is fetched when Range is set to
                 AUTO RANGE ONCE (-3). These behaviors are due to the autorange model of
                 the devices.
-            acquisition_status (enums.AcquisitionStatus):Indicates status of the acquisition. The following table shows the
+            acquisition_status (enums.AcquisitionStatus): Indicates status of the acquisition. The following table shows the
                 acquisition states:
 
                 +---+----------------------------+
@@ -2599,8 +2211,8 @@ class Session(_SessionBase):
                 | 4 | No acquisition in progress |
                 +---+----------------------------+
         '''
-        acquisition_backlog_ctype = ctypes_types.ViInt32(0)
-        acquisition_status_ctype = ctypes_types.ViInt16(0)
+        acquisition_backlog_ctype = visatype.ViInt32(0)
+        acquisition_status_ctype = visatype.ViInt16(0)
         error_code = self._library.niDMM_ReadStatus(self._vi, ctypes.pointer(acquisition_backlog_ctype), ctypes.pointer(acquisition_status_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
@@ -2615,7 +2227,7 @@ class Session(_SessionBase):
         configure_waveform_acquisition.
 
         Args:
-            maximum_time (int):Specifies the **maximum_time** allowed for this function to complete in
+            maximum_time (int): Specifies the **maximum_time** allowed for this function to complete in
                 milliseconds. If the function does not complete within this time
                 interval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2625,24 +2237,24 @@ class Session(_SessionBase):
                 The valid range is 0–86400000. The default value is
                 NIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout
                 automatically.
-            array_size (int):Specifies the number of waveform points to return. You specify the total
+            array_size (int): Specifies the number of waveform points to return. You specify the total
                 number of points that the DMM acquires in the **Waveform Points**
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
         Returns:
-            waveform_array (float):An array of measurement values.
+            waveform_array (list of float): An array of measurement values.
 
                 Note:
                 The size of the **Waveform_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
-            actual_number_of_points (int):Indicates the number of measured values actually retrieved from the DMM.
+            actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        waveform_array_ctype = (ctypes_types.ViReal64 * array_size)()
-        actual_number_of_points_ctype = ctypes_types.ViInt32(0)
-        error_code = self._library.niDMM_ReadWaveform(self._vi, maximum_time, array_size, ctypes.cast(waveform_array_ctype, ctypes.POINTER(ctypes_types.ViReal64)), ctypes.pointer(actual_number_of_points_ctype))
+        waveform_array_ctype = (visatype.ViReal64 * array_size)()
+        actual_number_of_points_ctype = visatype.ViInt32(0)
+        error_code = self._library.niDMM_ReadWaveform(self._vi, maximum_time, array_size, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_array_ctype[i].value) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [waveform_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def reset_with_defaults(self):
         '''reset_with_defaults
@@ -2702,16 +2314,16 @@ class Session(_SessionBase):
         interprets it, and returns it as a user-readable string.
 
         Args:
-            error_code (int):The **error_code** returned from the instrument. The default is 0,
+            error_code (int): The **error_code** returned from the instrument. The default is 0,
                 indicating VI_SUCCESS.
 
         Returns:
-            error_message (int):The error information formatted into a string.
+            error_message (string): The error information formatted into a string.
         '''
-        error_message_ctype = (ctypes_types.ViChar * 256)()
-        error_code = self._library.niDMM_error_message(self._vi, error_code, ctypes.cast(error_message_ctype, ctypes.POINTER(ctypes_types.ViChar)))
+        error_message_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niDMM_error_message(self._vi, error_code, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode("ascii")
+        return error_message_ctype.value.decode(self._encoding)
 
     def reset(self):
         '''reset
@@ -2731,20 +2343,20 @@ class Session(_SessionBase):
         firmware.
 
         Returns:
-            instrument_driver_revision (int):Returns a string containing the instrument driver software revision
+            instrument_driver_revision (string): Returns a string containing the instrument driver software revision
                 numbers.
 
                 Note: The array must contain at least 256 elements ViChar[256].
-            firmware_revision (int):Returns a string containing the instrument **firmware_revision**
+            firmware_revision (string): Returns a string containing the instrument **firmware_revision**
                 numbers.
 
                 Note: The array must contain at least 256 elements ViChar[256].
         '''
-        instrument_driver_revision_ctype = ctypes_types.ViChar(0)
-        firmware_revision_ctype = ctypes_types.ViChar(0)
-        error_code = self._library.niDMM_revision_query(self._vi, ctypes.pointer(instrument_driver_revision_ctype), ctypes.pointer(firmware_revision_ctype))
+        instrument_driver_revision_ctype = (visatype.ViChar * 256)()
+        firmware_revision_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niDMM_revision_query(self._vi, instrument_driver_revision_ctype, firmware_revision_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(instrument_driver_revision_ctype.value), int(firmware_revision_ctype.value)
+        return instrument_driver_revision_ctype.value.decode(self._encoding), firmware_revision_ctype.value.decode(self._encoding)
 
     def self_test(self):
         '''self_test
@@ -2758,7 +2370,7 @@ class Session(_SessionBase):
         values after the call returns.
 
         Returns:
-            self_test_result (int):Contains the value returned from the instrument self-test. Zero
+            self_test_result (int): Contains the value returned from the instrument self-test. Zero
                 indicates success.
 
                 On the NI 4080/4082 and NI 4070/4072, the error code 1013 indicates that
@@ -2768,7 +2380,7 @@ class Session(_SessionBase):
                 Self-test does not check the fuse on the NI 4065, NI 4071, and
                 NI 4081. Hence, even if the fuse is blown on the device, self-test does
                 not return error code 1013.
-            self_test_message (int):This parameter contains the string returned from the instrument
+            self_test_message (string): This parameter contains the string returned from the instrument
                 self-test. The array must contain at least 256 elements.
 
                 For the NI 4050 and NI 4060, the error codes returned for self-test
@@ -2784,11 +2396,11 @@ class Session(_SessionBase):
                 returned for a self-test failure is NIDMM_ERROR_SELF_TEST_FAILURE.
                 This error code indicates that the DMM should be repaired.
         '''
-        self_test_result_ctype = ctypes_types.ViInt16(0)
-        self_test_message_ctype = (ctypes_types.ViChar * 256)()
-        error_code = self._library.niDMM_self_test(self._vi, ctypes.pointer(self_test_result_ctype), ctypes.cast(self_test_message_ctype, ctypes.POINTER(ctypes_types.ViChar)))
+        self_test_result_ctype = visatype.ViInt16(0)
+        self_test_message_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niDMM_self_test(self._vi, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode("ascii")
+        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 
 
 
