@@ -94,7 +94,7 @@ nidcpower.Session methods
 
     :type units: int
 
-.. function:: configure_digital_edge_measure_trigger(edge, input_terminal=nidcpower.TriggerSlope.POSITIVE)
+.. function:: configure_digital_edge_measure_trigger(edge, input_terminal=nidcpower.DigitalEdge.RISING)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_measure_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -145,7 +145,7 @@ nidcpower.Session methods
 
     :type edge: int
 
-.. function:: configure_digital_edge_pulse_trigger(edge, input_terminal=nidcpower.TriggerSlope.POSITIVE)
+.. function:: configure_digital_edge_pulse_trigger(edge, input_terminal=nidcpower.DigitalEdge.RISING)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_pulse_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -196,7 +196,7 @@ nidcpower.Session methods
 
     :type edge: int
 
-.. function:: configure_digital_edge_sequence_advance_trigger(edge, input_terminal=nidcpower.TriggerSlope.POSITIVE)
+.. function:: configure_digital_edge_sequence_advance_trigger(edge, input_terminal=nidcpower.DigitalEdge.RISING)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_sequence_advance_trigger`(ViSession
     vi, ViConstString inputTerminal, ViInt32 edge);
@@ -248,7 +248,7 @@ nidcpower.Session methods
 
     :type edge: int
 
-.. function:: configure_digital_edge_source_trigger(edge, input_terminal=nidcpower.TriggerSlope.POSITIVE)
+.. function:: configure_digital_edge_source_trigger(edge, input_terminal=nidcpower.DigitalEdge.RISING)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_source_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -299,7 +299,7 @@ nidcpower.Session methods
 
     :type edge: int
 
-.. function:: configure_digital_edge_start_trigger(edge, input_terminal=nidcpower.TriggerSlope.POSITIVE)
+.. function:: configure_digital_edge_start_trigger(edge, input_terminal=nidcpower.DigitalEdge.RISING)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_start_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -350,7 +350,7 @@ nidcpower.Session methods
 
     :type edge: int
 
-.. function:: create_advanced_sequence(sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence)
+.. function:: create_advanced_sequence(sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence=True)
 
     Vistatus :py:func:`nidcpower.create_advanced_sequence`(ViSession vi, ViConstString
     sequenceName, ViInt32 attributeIDCount,ViInt32 attributeIDs[], viBoolean
@@ -511,7 +511,7 @@ nidcpower.Session methods
 
     :type set_as_active_sequence: bool
 
-.. function:: create_advanced_sequence_step(set_as_active_step)
+.. function:: create_advanced_sequence_step(set_as_active_step=True)
 
     Vistatus :py:func:`nidcpower.create_advanced_sequence_step`(ViSession vi, viBoolean
     setAsActiveSequenceStep);
@@ -612,7 +612,7 @@ nidcpower.Session methods
     
 
 
-.. function:: export_signal(signal, signal_identifier, output_terminal)
+.. function:: export_signal(signal, output_terminal, signal_identifier='')
 
     Vistatus :py:func:`nidcpower.export_signal`(ViSession vi, ViInt32 signal,
     ViConstString signalIdentifier, ViConstString outputTerminal);
@@ -1328,7 +1328,7 @@ nidcpower.Session methods
     
 
 
-.. function:: send_software_edge_trigger(trigger)
+.. function:: send_software_edge_trigger(trigger=nidcpower.SendSoftwareEdgeTriggerType.START)
 
     Vistatus :py:func:`nidcpower.send_software_edge_trigger`(ViSession vi, ViInt32
     trigger);
@@ -1366,7 +1366,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_PULSE\_TRIGGER (1053              | Asserts the Pulse trigger.            |
         +---------------------------------------------------+---------------------------------------+
 
-    :type trigger: int
+    :type trigger: :py:data:`nidcpower.SendSoftwareEdgeTriggerType`
 
 .. function:: set_sequence(source_delays, size, values='')
 
@@ -1440,7 +1440,7 @@ nidcpower.Session methods
 
     :type size: int
 
-.. function:: wait_for_event(event_id, timeout)
+.. function:: wait_for_event(timeout, event_id=10.0)
 
     Vistatus :py:func:`nidcpower.wait_for_event`(ViSession vi, ViInt32 eventId, ViReal64
     timeout);
@@ -1495,7 +1495,7 @@ nidcpower.Session methods
             triggers so that the timeout interval is long enough for your
             application.
 
-    :type timeout: float
+    :type timeout: :py:data:`nidcpower.Event`
 
 .. function:: reset()
 
