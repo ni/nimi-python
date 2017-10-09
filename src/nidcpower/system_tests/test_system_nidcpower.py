@@ -1,5 +1,6 @@
 import nidcpower
 import pytest
+import re
 
 
 @pytest.fixture(scope='function')
@@ -16,7 +17,8 @@ def test_self_test(session):
 
 def test_revision_query(session):
     driver_revision, firmware_revision = session.revision_query()
-    assert driver_revision == '17.1.0'
+    pattern = '\d\d.\d.\d'
+    assert re.match(pattern, driver_revision)
     assert firmware_revision == 'Not Available'
 
 
@@ -33,7 +35,7 @@ def test_get_attribute_string(session):
 def test_error_message(session):
     # Testing a private function, as there is no way to natively get to this function on a simulated session.
     message = session._error_message(-1074135027)
-    assert message == 'IVI:  (Hex 0xBFFA000D) Attribute is read-only.'
+    assert message.find('Attribute is read-only.') != -1
 
 
 def test_get_error(session):
@@ -42,4 +44,4 @@ def test_get_error(session):
         assert False
     except nidcpower.Error as e:
         assert e.code == -1074135027  # Error : Attribute is read-only.
-        assert e.description == 'IVI:  (Hex 0xBFFA000D) Attribute is read-only.\n\nAttribute: IVI_ATTR_INSTRUMENT_MODEL'
+        assert e.description.find('Attribute is read-only.') != -1
