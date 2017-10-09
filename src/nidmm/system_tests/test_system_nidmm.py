@@ -307,3 +307,14 @@ def test_reset_method(session):
     session.reset()
     function_after_reset = session.function
     assert default_function == function_after_reset
+
+
+def test_error_message(session):
+    # Testing a private function, as there is no way to natively get to this function on a simulated session.
+    message = session._error_message(-1074118641)
+    assert message == 'The data is not available. This can be caused by calling Fetch or FetchMultiPoint before calling Initiate or after calling Abort.'
+
+
+def test_set_boolean_attribute(session):
+    session.cache = True
+    assert session.cache is True
