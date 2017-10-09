@@ -153,7 +153,6 @@ class Session(object):
     f = functions[func_name]
     parameters = f['parameters']
     input_parameters = helper.filter_input_parameters(parameters)
-    output_parameters = helper.filter_output_parameters(parameters)
     enum_input_parameters = helper.filter_enum_parameters(input_parameters)
     ivi_dance_parameter = helper.filter_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
@@ -166,8 +165,8 @@ class Session(object):
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
-% for output_parameter in output_parameters:
-        ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
+% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
+        ${helper.get_ctype_variable_declaration_snippet(p, parameters)}
 % endfor
 % if ivi_dance_parameter is not None:
         ${ivi_dance_size_parameter['python_name']} = 0
