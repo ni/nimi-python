@@ -183,12 +183,6 @@ def test_trigger_max_time_exceeded_errror(session):
         assert e.code == -1074126845  # Max Time exceeded before operation completed
 
 
-def test_revision_query_string(session):
-    instr_driver_version, firmware_revision = session.revision_query()
-    pattern = re.compile("\d+\.\d+\.\d")
-    assert pattern.match(instr_driver_version)  # Assuming driver version will be always Major.Minor.Build format
-
-
 def test_self_cal(session):
     try:
         session.self_cal()

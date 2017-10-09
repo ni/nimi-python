@@ -15,13 +15,6 @@ def test_self_test(session):
     assert message == 'Self test passed'
 
 
-def test_revision_query(session):
-    driver_revision, firmware_revision = session.revision_query()
-    pattern = '\d\d.\d.\d'
-    assert re.match(pattern, driver_revision)
-    assert firmware_revision == 'Not Available'
-
-
 def test_get_channel_name(session):
     name = session.get_channel_name(1)
     assert name == '0'

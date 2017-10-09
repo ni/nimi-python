@@ -119,12 +119,6 @@ def test_functions_get_channel_name(session):
     assert channel_name == 'r0'
 
 
-def test_functions_revision_query(session):
-    string1, string2 = session.revision_query()
-    assert string1.find('Driver: NI-SWITCH for SwitchCA4 Device Support') != -1
-    assert string2 == 'No revision information available'
-
-
 def test_functions_self_test(session):
     self_test_result, self_test_string = session.self_test()
     assert self_test_result == 0
