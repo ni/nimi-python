@@ -378,7 +378,7 @@ class Session(_SessionBase):
         Returns:
             a_string (string): String comes back here. Buffer must be 256 big.
         '''
-        a_string_ctype = (visatype.ViChar * 1)()
+        a_string_ctype = (visatype.ViChar * 256)()
         error_code = self._library.niFake_GetAStringOfFixedMaximumSize(self._vi, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
@@ -553,7 +553,7 @@ class Session(_SessionBase):
             a_string (string): Contains a string.
         '''
         a_number_ctype = visatype.ViInt16(0)
-        a_string_ctype = (visatype.ViChar * 1)()
+        a_string_ctype = (visatype.ViChar * 256)()
         error_code = self._library.niFake_ReturnANumberAndAString(self._vi, ctypes.pointer(a_number_ctype), a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
