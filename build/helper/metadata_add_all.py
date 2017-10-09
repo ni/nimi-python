@@ -173,6 +173,7 @@ def _add_is_session_handle(parameter):
 
 def add_all_function_metadata(functions, config):
     '''Adds all codegen-specific metada to the function metadata list'''
+    # for f in {k: v for k, v in functions.items() if v['codegen_method'] != 'no'}:
     for f in functions:
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)

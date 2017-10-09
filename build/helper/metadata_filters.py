@@ -14,6 +14,7 @@ def filter_input_parameters(parameters, session_name='vi'):
 def filter_output_parameters(parameters):
     '''Returns list of parameters that includes only output parameters, except the ivi-dance parameter if it exists'''
     return [x for x in parameters if x['direction'] == 'out' and x['size']['mechanism'] != 'ivi-dance']
+    # return [x for x in parameters if x['direction'] == 'out' and 'size' in x and x['size']['mechanism'] != 'ivi-dance']
 
 
 def filter_enum_parameters(parameters):
@@ -23,6 +24,7 @@ def filter_enum_parameters(parameters):
 
 def filter_ivi_dance_parameter(parameters):
     '''Returns the ivi-dance parameter of a session method if there is one. This is the parameter whose size is determined at runtime.'''
+    # param = [x for x in parameters if 'size' in x and x['size']['mechanism'] == 'ivi-dance']
     param = [x for x in parameters if x['size']['mechanism'] == 'ivi-dance']
     assert len(param) <= 1, '{0} ivi-dance parameters. No more than one is allowed'.format(len(param))
     if len(param) == 0:
