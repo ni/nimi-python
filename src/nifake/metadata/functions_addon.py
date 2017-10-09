@@ -46,7 +46,7 @@ functions_buffer_info = {
                                                                3: { 'is_buffer': True, }, }, },
     '.etAttribute.+':                        { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'error_message':                         { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'ArrayInputFunction':                    { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'bufferSize'}, }, }, },
+    'ArrayInputFunction':                    { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

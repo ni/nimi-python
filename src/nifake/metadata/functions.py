@@ -1264,17 +1264,17 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'bufferSize',
+                'name': 'numberOfElements',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Buffersize of the array.',
+                    'description': 'Number of elements in the array.',
                 },
             },
             {
                 'direction': 'in',
                 'enum': None,
                 'is_buffer': True,
-                'name': 'aArray',
+                'name': 'anArray',
                 'type': 'ViReal64',
                 'documentation': {
                     'description': 'Contains an array of float numbers',
@@ -1282,7 +1282,7 @@ functions = {
             },
         ],
         'documentation': {
-            'description': 'This function takes one parameter other than the session.',
+            'description': 'This function takes an array parameter.',
         },
     },
     #TODO(marcoskirsch): Lots more cases to add:
