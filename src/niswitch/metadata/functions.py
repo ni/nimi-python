@@ -1918,13 +1918,13 @@ returned paths: ch0->com0, com0->ab0
 'documentation': {
 'description': '''
 Returns a string that identifies the explicit path created with
-niSwitch\_Connect. Pass this string to niSwitch\_Setpath to establish
+niSwitch\_Connect. Pass this string to niSwitch\_SetPath to establish
 the exact same path in future connections. In some cases, multiple paths
 are available between two channels. When you call niSwitch\_Connect, the
 driver selects an available path. With niSwitch\_Connect, there is no
 guarantee that the driver selected path will always be the same path
-through the switch module. niSwitch\_Getpath only returns those paths
-explicitly created by niSwitch Connect Channels or niSwitch\_Setpath.
+through the switch module. niSwitch\_GetPath only returns those paths
+explicitly created by niSwitch Connect Channels or niSwitch\_SetPath.
 For example, if you connect channels CH1 and CH3,and then channels CH2
 and CH3, an explicit path between channels CH1 and CH2 does not exist an
 error is returned
@@ -2508,7 +2508,7 @@ and used for all subsequent NI-SWITCH calls.
 'description': '''
 Returns a session handle used to identify the switch in all subsequent
 instrument driver calls and sets the topology of the switch.
-niSwitch\_InitWithtopology creates a new IVI instrument driver session
+niSwitch\_InitWithTopology creates a new IVI instrument driver session
 for the switch specified in the resourceName parameter. The driver uses
 the topology specified in the topology parameter and overrides the
 topology specified in MAX. Note: When initializing an NI SwitchBlock

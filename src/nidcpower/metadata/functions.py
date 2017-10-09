@@ -27,14 +27,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_Abort
-================
-
-Vistatus niDCPower\_Abort(ViSession vi);
-
-Purpose
--------
-
 Transitions the NI-DCPower session from the Running state to the
 Committed state. If a sequence is running, it is stopped. Any
 configuration functions called after this function are not applied until
@@ -47,14 +39,14 @@ output on a per channel basis. Use the niDCPower\_reset function to
 disable output on all channels.
 
 Refer to the `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic in
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
 the *NI DC Power Supplies and SMUs Help* for information about the
 specific NI-DCPower software states.
 
 **Related Topics:**
 
 `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 ''',
 },
     },
@@ -134,16 +126,6 @@ precision digital multimeter.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CalAdjustCurrentLimit
-================================
-
-Vistatus niDCPower\_CalAdjustCurrentLimit(ViSession vi, ViConstString
-channelName, ViReal64 range, ViUInt32 numberOfMeasurements, ViReal64
-requestedOutputs[], ViReal64 measuredOutputs[]);
-
-Purpose
--------
-
 Calculates the calibration constants for the current limit for the
 specified output channel and range. This function compares the array in
 **requestedOutputs** to the array in **measuredOutputs** and calculates
@@ -155,7 +137,7 @@ function can only be called from an external calibration session.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -239,17 +221,6 @@ precision digital multimeter.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CalAdjustCurrentMeasurement
-======================================
-
-Vistatus niDCPower\_CalAdjustCurrentMeasurement(ViSession vi,
-ViConstString channelName, ViReal64 range, ViUInt32
-numberOfMeasurements, ViReal64 reportedOutputs[], ViReal64
-measuredOutputs[]);
-
-Purpose
--------
-
 Calibrates the current measurements returned by the niDCPower\_Measure
 function for the specified output channel. This function calculates new
 calibration coefficients for the specified current measurement range
@@ -304,16 +275,6 @@ programmed to the device.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CalAdjustInternalReference
-=====================================
-
-Vistatus niDCPower\_CalAdjustInternalReference(ViSession vi, ViSession
-vi, ViInt32 internal_reference, ViReal64
-adjusted_internal_reference;
-
-Purpose
--------
-
 Programs the adjusted reference value to the device. Refer to the
 calibration procedure for the device you are calibrating for detailed
 instructions on the appropriate use of this function. This function can
@@ -322,7 +283,7 @@ only be called from an external calibration session.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -394,16 +355,6 @@ precision digital multimeter.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CalAdjustOutputResistance
-====================================
-
-Vistatus niDCPower\_CalAdjustOutputResistance(ViSession vi,
-ViConstString channelName, ViUInt32 numberOfValues, ViReal64
-requestedOutputs[], ViReal64 measuredOutputs[]);
-
-Purpose
--------
-
 Compares the array in **requestedOutputs** to the array in
 **measuredOutputs** and calculates the calibration constants for the
 output resistance of the specified channel. Refer to the calibration
@@ -414,7 +365,7 @@ called from an external calibration session.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -456,15 +407,6 @@ performed sequentially based on the order specified in this parameter.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CalAdjustResidualCurrentOffset
-=========================================
-
-Vistatus niDCPower\_CalAdjustResidualCurrentOffset(ViSession vi,
-ViConstString channelName);
-
-Purpose
--------
-
 Calculates the calibration constants for the residual current offsets
 for the specified output channel. Residual offsets account for minor
 offset effects on the device that lie outside of the self-calibration
@@ -481,7 +423,7 @@ function can be called only in an external calibration session.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -523,15 +465,6 @@ performed sequentially based on the order specified in this parameter.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CalAdjustResidualVoltageOffset
-=========================================
-
-Vistatus niDCPower\_CalAdjustResidualVoltageOffset(ViSession vi,
-ViConstString channelName);
-
-Purpose
--------
-
 Calculates the calibration constants for the residual voltage offsets
 for the specified output channel. Residual offsets account for minor
 offset effects on the device that lie outside of the self-calibration
@@ -548,7 +481,7 @@ function can be called only in an external calibration session.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -629,16 +562,6 @@ precision digital multimeter.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CalAdjustVoltageLevel
-================================
-
-Vistatus niDCPower\_CalAdjustVoltageLevel(ViSession vi,ViConstString
-channelName, ViReal64 range, ViUInt32 numberOfMeasurements, ViReal64
-requestedOutputs[], ViReal64 measuredOutputs[]);
-
-Purpose
--------
-
 Calculates the calibration constants for the voltage level for the
 specified output channel. This function compares the array in
 **requestedOutputs** to the array in **measuredOutputs** and calculates
@@ -650,7 +573,7 @@ function can be called only in an external calibration session.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -731,17 +654,6 @@ precision digital multimeter.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CalAdjustVoltageMeasurement
-======================================
-
-Vistatus niDCPower\_CalAdjustVoltageMeasurement(ViSession vi,
-ViConstString channelName, ViReal64 range, ViUInt32
-numberOfMeasurements, ViReal64 reportedOutputs[], ViReal64
-measuredOutputs[]);
-
-Purpose
--------
-
 Calculates the calibration constants for the voltage measurements
 returned by the niDCPower\_Measure function for the specified output
 channel. This function compares the array in **reportedOutputs** to the
@@ -791,15 +703,6 @@ performed sequentially based on the order specified in this parameter.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CalSelfCalibrate
-===========================
-
-Vistatus niDCPower\_CalSelfCalibrate(ViSession vi, ViConstString
-channelName);
-
-Purpose
--------
-
 Performs a self-calibration upon the specified channel(s).
 
 This function disables the output, performs several internal
@@ -811,17 +714,17 @@ NIDCPOWER\_ATTR\_SELF\_CALIBRATION\_PERSISTENCE attribute topic for more
 information about the settings for this attribute.
 
 Refer to the
-`Self-Calibration <REPLACE_WITH_DRIVER_SPECIFIC_URL(selfcal)>`__ topic
-for more information about this function.
+`Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__ topic for
+more information about this function.
 
 **Related Topics:**
 
-`Self-Calibration <REPLACE_WITH_DRIVER_SPECIFIC_URL(selfcal)>`__
+`Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -863,15 +766,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ChangeExtCalPassword
-===============================
-
-Vistatus niDCPower\_ChangeExtCalPassword(ViSession vi, ViConstString
-oldPassword, ViConstString newPassword);
-
-Purpose
--------
-
 Changes the **password** that is required to initialize an external
 calibration session. The **password** can be a maximum of four
 alphanumeric characters. If you call this function in a session,
@@ -901,14 +795,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ClearError
-=====================
-
-Vistatus niDCPower\_ClearError(ViSession vi);
-
-Purpose
--------
-
 | Clears the error code and error description for the IVI session. If
   the user specifies a valid IVI session for **vi**, this function
   clears the error information for the session. If the user passes
@@ -943,17 +829,7 @@ niDCPower\_InitializeWithChannels function.
             },
         ],
 'documentation': {
-'description': '''
-niDCPower\_ClearInterchangeWarnings
-===================================
-
-Vistatus niDCPower\_ClearInterchangeWarnings(ViSession vi);
-
-Purpose
--------
-
-Clears the list of current interchange warnings.
-''',
+'description': 'Clears the list of current interchange warnings.',
 },
     },
     'CloseExtCal': {
@@ -990,14 +866,6 @@ session is closed.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CloseExtCal
-======================
-
-Vistatus niDCPower\_CloseExtCal(ViSession vi, ViInt32 action);
-
-Purpose
--------
-
 Closes the session specified in **vi** and deallocates the resources
 that NI-DCPower reserved for calibration. Refer to the calibration
 procedure for the device you are calibrating for detailed instructions
@@ -1024,28 +892,20 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_Commit
-=================
-
-Vistatus niDCPower\_Commit(ViSession vi);
-
-Purpose
--------
-
 Applies previously configured settings to the device. Calling this
 function moves the NI-DCPower session from the Uncommitted state into
 the Committed state. After calling this function, modifying any
 attribute reverts the NI-DCPower session to the Uncommitted state. Use
 the niDCPower\_Initiate function to transition to the Running state.
 Refer to the `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic in
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
 the *NI DC Power Supplies and SMUs Help* for details about the specific
 NI-DCPower software states.
 
 **Related Topics:**
 
 `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 ''',
 },
     },
@@ -1111,15 +971,6 @@ Specifies the units for **apertureTime**.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureApertureTime
-================================
-
-Vistatus niDCPower\_ConfigureApertureTime(ViSession vi, ViConstString
-channelName, ViReal64 apertureTime, ViInt32 units);
-
-Purpose
--------
-
 Configures the aperture time on the specified channel(s).
 
 The supported values depend on the **units**. Refer to the *Aperture
@@ -1134,12 +985,12 @@ Help* for more information about how to configure your measurements.
 
 **Related Topics:**
 
-`Aperture Time <REPLACE_WITH_DRIVER_SPECIFIC_URL(aperture)>`__
+`Aperture Time <REPLACE_DRIVER_SPECIFIC_URL_1(aperture)>`__
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -1196,32 +1047,23 @@ information about how to configure your measurements.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureAutoZero
-============================
-
-Vistatus niDCPower\_ConfigureAutoZero(ViSession vi, ViConstString
-channelName, ViInt32 autoZero);
-
-Purpose
--------
-
 Configures auto zero for the device.
 
 Refer to the `NI PXI-4132 Auto
-Zero <REPLACE_WITH_DRIVER_SPECIFIC_URL(4132_autozero)>`__ and `NI
-PXI-4132 Measurement Configuration and
-Timing <REPLACE_WITH_DRIVER_SPECIFIC_URL(4132_measureconfigtiming)>`__
+Zero <REPLACE_DRIVER_SPECIFIC_URL_1(4132_autozero)>`__ and `NI PXI-4132
+Measurement Configuration and
+Timing <REPLACE_DRIVER_SPECIFIC_URL_1(4132_measureconfigtiming)>`__
 topics in the *NI DC Power Supplies and SMUs Help* for more information
 about how to configure your measurements.
 
 **Related Topics:**
 
-`Auto Zero <REPLACE_WITH_DRIVER_SPECIFIC_URL(autozero)>`__
+`Auto Zero <REPLACE_DRIVER_SPECIFIC_URL_1(autozero)>`__
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -1279,15 +1121,6 @@ function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureCurrentlevel
-================================
-
-Vistatus niDCPower\_ConfigureCurrentlevel(ViSession vi, ViConstString
-channelName, ViReal64 level);
-
-Purpose
--------
-
 Configures the current level the device attempts to generate for the
 specified channel(s). The channel must be enabled for the specified
 current level to take effect. Refer to the
@@ -1304,7 +1137,7 @@ niDCPower\_ConfigureVoltageLimit across the channels' output terminals.
 **Related Topics:**
 
 `Constant Current
-Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(constant_current)>`__
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(constant_current)>`__
 ''',
 },
     },
@@ -1358,15 +1191,6 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureCurrentLevelrange
-=====================================
-
-Vistatus niDCPower\_ConfigureCurrentLevelrange(ViSession vi,
-ViConstString channelName, ViReal64 range);
-
-Purpose
--------
-
 Configures the current level range for the specified channel(s). The
 configured range defines the valid values the current level can be set
 to using the niDCPower\_ConfigureCurrentLevel function. The current
@@ -1379,7 +1203,7 @@ automatic selection of the current level range.
 
 **Related Topics:**
 
-`ranges <REPLACE_WITH_DRIVER_SPECIFIC_URL(ranges)>`__
+`Ranges <REPLACE_DRIVER_SPECIFIC_URL_1(ranges)>`__
 ''',
 },
     },
@@ -1451,15 +1275,6 @@ function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureCurrentlimit
-================================
-
-Vistatus niDCPower\_ConfigureCurrentlimit(ViSession vi, ViConstString
-channelName, ViInt32 behavior, ViReal64 limit);
-
-Purpose
--------
-
 | Configures the current limit for the specified channel(s). The channel
   must be enabled for the specified current limit to take effect. Refer
   to the niDCPower\_ConfigureOutputEnabled function for more information
@@ -1472,7 +1287,7 @@ Purpose
 
 **Related Topics:**
 
-`Compliance <REPLACE_WITH_DRIVER_SPECIFIC_URL(compliance)>`__
+`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 ''',
 },
     },
@@ -1526,15 +1341,6 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureCurrentLimitrange
-=====================================
-
-Vistatus niDCPower\_ConfigureCurrentLimitrange(ViSession vi,
-ViConstString channelName, ViReal64 range);
-
-Purpose
--------
-
 Configures the current limit range for the specified channel(s).The
 configured range defines the valid values the current limit can be set
 to using the niDCPower\_ConfigureCurrentLimit function. The current
@@ -1547,7 +1353,7 @@ automatic selection of the current limit range.
 
 **Related Topics:**
 
-`ranges <REPLACE_WITH_DRIVER_SPECIFIC_URL(ranges)>`__
+`Ranges <REPLACE_DRIVER_SPECIFIC_URL_1(ranges)>`__
 ''',
 },
     },
@@ -1607,22 +1413,11 @@ rising or falling edge.
             },
         ],
 'documentation': {
-'description': '''
-niDCPower\_ConfigureDigitaledgeMeasureTrigger
-=============================================
-
-Vistatus niDCPower\_ConfigureDigitaledgeMeasureTrigger(ViSession vi,
-ViConstString inputTerminal, ViInt32 edge);
-
-Purpose
--------
-
-Configures the Measure trigger for digital edge triggering.
-''',
+'description': 'Configures the Measure trigger for digital edge triggering.',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -1683,22 +1478,11 @@ or falling edge.
             },
         ],
 'documentation': {
-'description': '''
-niDCPower\_ConfigureDigitaledgePulseTrigger
-===========================================
-
-Vistatus niDCPower\_ConfigureDigitaledgePulseTrigger(ViSession vi,
-ViConstString inputTerminal, ViInt32 edge);
-
-Purpose
--------
-
-Configures the Pulse trigger for digital edge triggering.
-''',
+'description': 'Configures the Pulse trigger for digital edge triggering.',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -1760,22 +1544,11 @@ the rising or falling edge.
             },
         ],
 'documentation': {
-'description': '''
-niDCPower\_ConfigureDigitaledgeSequenceAdvanceTrigger
-=====================================================
-
-Vistatus niDCPower\_ConfigureDigitaledgeSequenceAdvanceTrigger(ViSession
-vi, ViConstString inputTerminal, ViInt32 edge);
-
-Purpose
--------
-
-Configures the Sequence Advance trigger for digital edge triggering.
-''',
+'description': 'Configures the Sequence Advance trigger for digital edge triggering.',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -1836,22 +1609,11 @@ rising or falling edge.
             },
         ],
 'documentation': {
-'description': '''
-niDCPower\_ConfigureDigitaledgeSourceTrigger
-============================================
-
-Vistatus niDCPower\_ConfigureDigitaledgeSourceTrigger(ViSession vi,
-ViConstString inputTerminal, ViInt32 edge);
-
-Purpose
--------
-
-Configures the Source trigger for digital edge triggering.
-''',
+'description': 'Configures the Source trigger for digital edge triggering.',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -1912,22 +1674,11 @@ or falling edge.
             },
         ],
 'documentation': {
-'description': '''
-niDCPower\_ConfigureDigitaledgeStartTrigger
-===========================================
-
-Vistatus niDCPower\_ConfigureDigitaledgeStartTrigger(ViSession vi,
-ViConstString inputTerminal, ViInt32 edge);
-
-Purpose
--------
-
-Configures the Start trigger for digital edge triggering.
-''',
+'description': 'Configures the Start trigger for digital edge triggering.',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -1982,15 +1733,6 @@ Specifies whether the output is enabled or disabled.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureOutputenabled
-=================================
-
-Vistatus niDCPower\_ConfigureOutputenabled(ViSession vi, ViConstString
-channelName, ViBoolean enabled);
-
-Purpose
--------
-
 Enables or disables generation on the specified channel(s). Depending on
 the selected output function, the voltage level, current level,or output
 resistance must be set in addition to enabling the output to generate
@@ -2055,15 +1797,6 @@ Configures the function to generate for the specified channel(s).
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureOutputfunction
-==================================
-
-Vistatus niDCPower\_ConfigureOutputfunction(ViSession vi, ViConstString
-channelName, ViInt32 function);
-
-Purpose
--------
-
 Configures the function the device attempts to generate for the
 specified channel(s).
 
@@ -2114,10 +1847,10 @@ configure the channel when NIDCPOWER\_VAL\_PULSE\_CURRENT is selected:
 **Related Topics:**
 
 `Constant Voltage
-Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(constant_voltage)>`__
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(constant_voltage)>`__
 
 `Constant Current
-Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(constant_current)>`__
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(constant_current)>`__
 ''',
 },
     },
@@ -2183,15 +1916,6 @@ at a time may be calibrated.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureOutputrange (Obsolete)
-==========================================
-
-Vistatus niDCPower\_ConfigureOutputrange(ViSession vi, ViConstString
-channelName, ViInt32 rangeType, ViReal64 range);
-
-Purpose
--------
-
 Configures either the voltage level range or the current limit range. If
 **range type** is Voltage, the voltage level range is configured. If
 **range type** is Current, the current limit range is configured.
@@ -2201,7 +1925,7 @@ settings. Refer to the niDCPower\_ConfigureOutputFunction function for
 more information.
 
 This is a deprecated function. You must use the following functions
-instead of theniDCPower\_ConfigureOutputrange function:
+instead of theniDCPower\_ConfigureOutputRange function:
 
 -  niDCPower\_ConfigureVoltageLevel
 -  niDCPower\_ConfigureVoltageLimit
@@ -2253,13 +1977,13 @@ performed sequentially based on the order specified in this parameter.
 'description': '''
 Specifies the output resistance, in ohms, for the specified channel.
 Refer to the `NI PXIe-4141 Programmable Output
-resistance <REPLACE_WITH_DRIVER_SPECIFIC_URL(4140_4141_progoutputresist)>`__,
+resistance <REPLACE_DRIVER_SPECIFIC_URL_1(4140_4141_progoutputresist)>`__,
 `NI PXIe-4143 Programmable Output
-resistance <REPLACE_WITH_DRIVER_SPECIFIC_URL(4142_4143_progoutputresist)>`__,
+resistance <REPLACE_DRIVER_SPECIFIC_URL_1(4142_4143_progoutputresist)>`__,
 `NI PXIe-4145 Programmable Output
-resistance <REPLACE_WITH_DRIVER_SPECIFIC_URL(4144_4145_progoutputresist)>`__,or
+resistance <REPLACE_DRIVER_SPECIFIC_URL_1(4144_4145_progoutputresist)>`__,or
 `NI PXIe-4154 Programmable Output
-resistance <REPLACE_WITH_DRIVER_SPECIFIC_URL(4154_prog_output_resist)>`__
+resistance <REPLACE_DRIVER_SPECIFIC_URL_1(4154_prog_output_resist)>`__
 topic in the NI DC Power Supplies and SMUs Help for more information
 about configuring output resistance.
 ''',
@@ -2268,15 +1992,6 @@ about configuring output resistance.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureOutputresistance
-====================================
-
-Vistatus niDCPower\_ConfigureOutputresistance(ViSession vi,
-ViConstString channelName, ViReal64 resistance);
-
-Purpose
--------
-
 Configures the output resistance that the device attempts to generate
 for the specified channel or channels. The channel must be enabled for
 the specified output resistance to take effect.
@@ -2303,7 +2018,7 @@ to its current. In DC Current output mode, the output experiences a
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -2345,15 +2060,6 @@ about how to configure your measurements.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePowerLineFrequency
-======================================
-
-Vistatus niDCPower\_ConfigurePowerLineFrequency(ViSession vi, ViReal64
-powerLineFrequency);
-
-Purpose
--------
-
 Specifies the power line frequency for specified channel(s). NI-DCPower
 uses this value to select a timebase for setting the
 niDCPower\_ConfigureApertureTime function in power line cycles (PLCs).
@@ -2365,12 +2071,12 @@ about how to configure your measurements.
 **Related Topics:**
 
 `Measurement Noise
-Rejection <REPLACE_WITH_DRIVER_SPECIFIC_URL(noiserejectmeasure)>`__
+Rejection <REPLACE_DRIVER_SPECIFIC_URL_1(noiserejectmeasure)>`__
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -2428,15 +2134,6 @@ niDCPower\_ConfigurePulseCurrentlevelRange function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseBiasCurrentlevel
-=========================================
-
-Vistatus niDCPower\_ConfigurePulseBiasCurrentlevel(ViSession vi,
-ViConstString channelName, ViReal64 level);
-
-Purpose
--------
-
 Configures the pulse bias current level that the device attempts to
 generate for the specified channel(s) during the off phase of a pulse.
 The channel must be enabled for the specified current level to take
@@ -2456,7 +2153,7 @@ terminals.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -2515,15 +2212,6 @@ niDCPower\_ConfigurePulseCurrentlimitRange function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseBiasCurrentlimit
-=========================================
-
-Vistatus niDCPower\_ConfigurePulseBiasCurrentlimit(ViSession vi,
-ViConstString channelName, ViReal64 limit);
-
-Purpose
--------
-
 Configures the pulse bias current limit for the specified channel(s).
 The channel must be enabled for the specified current limit to take
 effect.
@@ -2539,7 +2227,7 @@ niDCPower\_ConfigureOutputFunction function.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -2597,15 +2285,6 @@ niDCPower\_ConfigurePulseVoltagelevelRange function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseBiasVoltagelevel
-=========================================
-
-Vistatus niDCPower\_ConfigurePulseBiasVoltagelevel(ViSession vi,
-ViConstString channelName, ViReal64 level);
-
-Purpose
--------
-
 Configures the pulse bias voltage level that the device attempts to
 generate for the specified channel(s) during the off phase of a pulse.
 The channel must be enabled for the specified voltage level to take
@@ -2625,7 +2304,7 @@ output terminals.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -2684,15 +2363,6 @@ niDCPower\_ConfigurePulseVoltagelimitRange function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseBiasVoltagelimit
-=========================================
-
-Vistatus niDCPower\_ConfigurePulseBiasVoltagelimit(ViSession vi,
-ViConstString channelName, ViReal64 limit);
-
-Purpose
--------
-
 Configures the pulse bias voltage limit for the specified channel(s).
 The channel must be enabled for the specified voltage limit to take
 effect.
@@ -2708,7 +2378,7 @@ niDCPower\_ConfigureOutputFunction function.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -2765,15 +2435,6 @@ niDCPower\_ConfigurePulseCurrentlevelRange function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseCurrentlevel
-=====================================
-
-Vistatus niDCPower\_ConfigurePulseCurrentlevel(ViSession vi,
-ViConstString channelName, ViReal64 level);
-
-Purpose
--------
-
 Configures the pulse current level that the device attempts to generate
 for the specified channel(s) during the on phase of a pulse. The channel
 must be enabled for the specified current level to take effect.
@@ -2792,7 +2453,7 @@ terminals.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -2848,15 +2509,6 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseCurrentLevelrange
-==========================================
-
-Vistatus niDCPower\_ConfigurePulseCurrentLevelrange(ViSession vi,
-ViConstString channelName, ViReal64 range);
-
-Purpose
--------
-
 Configures the pulse current level range for the specified channel(s).
 
 The configured range defines the valid values to which you can set the
@@ -2870,7 +2522,7 @@ niDCPower\_ConfigureOutputFunction function.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -2929,15 +2581,6 @@ niDCPower\_ConfigurePulseCurrentlimitRange function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseCurrentlimit
-=====================================
-
-Vistatus niDCPower\_ConfigurePulseCurrentlimit(ViSession vi,
-ViConstString channelName, ViReal64 limit);
-
-Purpose
--------
-
 Configures the pulse current limit for the specified channel(s). The
 channel must be enabled for the specified current limit to take effect.
 
@@ -2952,7 +2595,7 @@ niDCPower\_ConfigureOutputFunction function.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -3008,15 +2651,6 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseCurrentLimitrange
-==========================================
-
-Vistatus niDCPower\_ConfigurePulseCurrentLimitrange(ViSession vi,
-ViConstString channelName, ViReal64 range);
-
-Purpose
--------
-
 Configures the pulse current limit range for the specified channel(s).
 
 The configured range defines the valid values to which you can set the
@@ -3030,7 +2664,7 @@ niDCPower\_ConfigureOutputFunction function.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -3088,15 +2722,6 @@ niDCPower\_ConfigurePulseVoltagelevelRange function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseVoltagelevel
-=====================================
-
-Vistatus niDCPower\_ConfigurePulseVoltagelevel(ViSession vi,
-ViConstString channelName, ViReal64 level);
-
-Purpose
--------
-
 Configures the pulse voltage level that the device attempts to generate
 for the specified channel(s) during the on phase of a pulse. The channel
 must be enabled for the specified voltage level to take effect.
@@ -3115,7 +2740,7 @@ terminals.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -3171,15 +2796,6 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseVoltageLevelrange
-==========================================
-
-Vistatus niDCPower\_ConfigurePulseVoltageLevelrange(ViSession vi,
-ViConstString channelName, ViReal64 range);
-
-Purpose
--------
-
 Configures the pulse voltage level range for the specified channel(s).
 
 The configured range defines the valid values to which you can set the
@@ -3193,7 +2809,7 @@ niDCPower\_ConfigureOutputFunction function.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -3252,15 +2868,6 @@ niDCPower\_ConfigurePulseVoltagelimitRange function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseVoltagelimit
-=====================================
-
-Vistatus niDCPower\_ConfigurePulseVoltagelimit(ViSession vi,
-ViConstString channelName, ViReal64 limit);
-
-Purpose
--------
-
 Configures the pulse voltage limit for the specified channel(s). The
 channel must be enabled for the specified voltage limit to take effect.
 
@@ -3275,7 +2882,7 @@ niDCPower\_ConfigureOutputFunction function.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -3331,15 +2938,6 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigurePulseVoltageLimitrange
-==========================================
-
-Vistatus niDCPower\_ConfigurePulseVoltageLimitrange(ViSession vi,
-ViConstString channelName, ViReal64 range);
-
-Purpose
--------
-
 Configures the pulse voltage limit range for the specified channel(s).
 
 The configured range defines the valid values to which you can set the
@@ -3355,7 +2953,7 @@ niDCPower\_ConfigureOutputFunction function.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -3410,18 +3008,9 @@ Specifies local or remote sensing on the specified channel(s).
         ],
 'documentation': {
 'description': '''
-niDCPower\_Configuresense
-=========================
-
-Vistatus niDCPower\_Configuresense(ViSession vi, ViConstString
-channelName, ViInt32 sense);
-
-Purpose
--------
-
 Specifies whether to use
-`local <REPLACE_WITH_DRIVER_SPECIFIC_URL(local_and_remote_sense)>`__ or
-`remote <REPLACE_WITH_DRIVER_SPECIFIC_URL(local_and_remote_sense)>`__
+`local <REPLACE_DRIVER_SPECIFIC_URL_2(local_and_remote_sense)>`__ or
+`remote <REPLACE_DRIVER_SPECIFIC_URL_2(local_and_remote_sense)>`__
 sensing of the output voltage on the specified channel(s). Refer to the
 *Devices* topic specific to your device in the *NI DC Power Supplies and
 SMUs* Help for more information about sensing voltage on supported
@@ -3430,7 +3019,7 @@ channels.
 **Related Topics:**
 
 `Local and Remote
-sense <REPLACE_WITH_DRIVER_SPECIFIC_URL(4112_localandremotesense)>`__
+Sense <REPLACE_DRIVER_SPECIFIC_URL_1(4112_localandremotesense)>`__
 ''',
 },
     },
@@ -3453,14 +3042,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureSoftwareEdgeMeasureTrigger
-==============================================
-
-Vistatus niDCPower\_ConfigureSoftwareEdgeMeasureTrigger(ViSession vi);
-
-Purpose
--------
-
 Configures the Measure trigger for software triggering. Use the
 niDCPower\_SendSoftwareEdgeTrigger function to assert the trigger
 condition.
@@ -3468,7 +3049,7 @@ condition.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -3492,14 +3073,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureSoftwareEdgePulseTrigger
-============================================
-
-Vistatus niDCPower\_ConfigureSoftwareEdgePulseTrigger(ViSession vi);
-
-Purpose
--------
-
 Configures the Pulse trigger for software triggering. Use the
 niDCPower\_SendSoftwareEdgeTrigger function to assert the trigger
 condition.
@@ -3507,7 +3080,7 @@ condition.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -3531,15 +3104,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureSoftwareEdgeSequenceAdvanceTrigger
-======================================================
-
-Vistatus
-niDCPower\_ConfigureSoftwareEdgeSequenceAdvanceTrigger(ViSession vi);
-
-Purpose
--------
-
 Configures the Sequence Advance trigger for software triggering. Use the
 niDCPower\_SendSoftwareEdgeTrigger function to assert the trigger
 condition.
@@ -3547,7 +3111,7 @@ condition.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -3571,14 +3135,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureSoftwareEdgeSourceTrigger
-=============================================
-
-Vistatus niDCPower\_ConfigureSoftwareEdgeSourceTrigger(ViSession vi);
-
-Purpose
--------
-
 Configures the Source trigger for software triggering. Use the
 niDCPower\_SendSoftwareEdgeTrigger function to assert the trigger
 condition.
@@ -3586,7 +3142,7 @@ condition.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -3610,14 +3166,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureSoftwareEdgeStartTrigger
-============================================
-
-Vistatus niDCPower\_ConfigureSoftwareEdgeStartTrigger(ViSession vi);
-
-Purpose
--------
-
 Configures the Start trigger for software triggering. Use the
 niDCPower\_SendSoftwareEdgeTrigger function to assert the trigger
 condition.
@@ -3625,7 +3173,7 @@ condition.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -3662,19 +3210,10 @@ Specifies the source mode for the NI-DCPower session.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureSourceMode
-==============================
-
-Vistatus niDCPower\_ConfigureSourceMode(ViSession vi, ViInt32
-sourceMode);
-
-Purpose
--------
-
 Configures the NIDCPOWER\_ATTR\_SOURCE\_MODE attribute. Specifies
 whether to run a single output point or a sequence. Refer to the `Single
-Point Source Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(singlept)>`__ and
-`Sequence Source Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(sequencing)>`__
+Point Source Mode <REPLACE_DRIVER_SPECIFIC_URL_1(singlept)>`__ and
+`Sequence Source Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__
 topics in the *NI DC Power Supplies and SMUs Help* for more information
 about using this function.
 ''',
@@ -3733,15 +3272,6 @@ function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureVoltagelevel
-================================
-
-Vistatus niDCPower\_ConfigureVoltagelevel(ViSession vi, ViConstString
-channelName, ViReal64 level);
-
-Purpose
--------
-
 Configures the voltage level the device attempts to generate for the
 specified channel(s). The channel must be enabled for the specified
 voltage level to take effect. Refer to the
@@ -3759,7 +3289,7 @@ NIDCPOWER\_ATTR\_CURRENT\_LIMIT across the channels' output terminals.
 **Related Topics:**
 
 `Constant Voltage
-Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(constant_voltage)>`__
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(constant_voltage)>`__
 ''',
 },
     },
@@ -3814,15 +3344,6 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureVoltageLevelrange
-=====================================
-
-Vistatus niDCPower\_ConfigureVoltageLevelrange(ViSession vi,
-ViConstString channelName, ViReal64 range);
-
-Purpose
--------
-
 Configures the voltage level range for the specified channel(s). The
 configured range defines the valid values the voltage level can be set
 to using the niDCPower\_ConfigureVoltageLevel function. The voltage
@@ -3835,7 +3356,7 @@ automatic selection of the voltage level range.
 
 **Related Topics:**
 
-`ranges <REPLACE_WITH_DRIVER_SPECIFIC_URL(ranges)>`__
+`Ranges <REPLACE_DRIVER_SPECIFIC_URL_1(ranges)>`__
 ''',
 },
     },
@@ -3893,15 +3414,6 @@ function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureVoltagelimit
-================================
-
-Vistatus niDCPower\_ConfigureVoltagelimit(ViSession vi, ViConstString
-channelName, ViReal64 limit);
-
-Purpose
--------
-
 Configures the voltage limit for the specified channel(s). The channel
 must be enabled for the specified voltage limit to take effect. Refer to
 the niDCPower\_ConfigureOutputEnabled function for more information
@@ -3915,7 +3427,7 @@ nidcpower\_ConfigureOutputFunction to set the output function.
 
 **Related Topics:**
 
-`Compliance <REPLACE_WITH_DRIVER_SPECIFIC_URL(compliance)>`__
+`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 ''',
 },
     },
@@ -3970,15 +3482,6 @@ DC Power Supplies and SMUs Help*.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConfigureVoltageLimitrange
-=====================================
-
-Vistatus niDCPower\_ConfigureVoltageLimitrange(ViSession vi,
-ViConstString channelName, ViReal64 range);
-
-Purpose
--------
-
 Configures the voltage limit range for the specified channel(s). The
 configured range defines the valid values the voltage limit can be set
 to using the niDCPower\_ConfigureVoltageLimit function. The voltage
@@ -3991,7 +3494,7 @@ automatic selection of the voltage limit range.
 
 **Related Topics:**
 
-`ranges <REPLACE_WITH_DRIVER_SPECIFIC_URL(ranges)>`__
+`Ranges <REPLACE_DRIVER_SPECIFIC_URL_1(ranges)>`__
 ''',
 },
     },
@@ -4027,15 +3530,6 @@ Specifies the internal reference to be connected to the calibration pin.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ConnectInternalReference
-===================================
-
-Vistatus niDCPower\_ConnectInternalReference(ViSession vi, ViSession
-vi, ViInt32 internal_reference;
-
-Purpose
--------
-
 Routes the internal reference to the calibration pin in preparation for
 adjustment. Refer to the calibration procedure for the device you are
 calibrating for detailed instructions on the appropriate use of this
@@ -4045,7 +3539,7 @@ session.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -4114,16 +3608,6 @@ configured in advanced sequencing.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CreateAdvancedSequence
-=================================
-
-Vistatus niDCPower\_CreateAdvancedSequence(ViSession vi, ViConstString
-sequenceName, ViInt32 attributeIDCount,ViInt32 attributeIDs[], viBoolean
-setAsActiveSequence);
-
-Purpose
--------
-
 Creates an empty advanced sequence. Call the
 niDCPower\_CreateAdvancedSequenceStep function to add steps to the
 active advanced sequence.
@@ -4137,24 +3621,24 @@ functions is unsupported.
 
 Use this function in the Uncommitted or Committed programming states.
 Refer to the `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic in
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
 the *NI DC Power Supplies and SMUs Help* for more information about
 NI-DCPower programming states.
 
 **Related Topics**:
 
 `Advanced Sequence
-Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(advancedsequencemode)>`__
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
 `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
 niDCPower\_CreateAdvancedSequenceStep
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -4187,15 +3671,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_CreateAdvancedSequenceStep
-=====================================
-
-Vistatus niDCPower\_CreateAdvancedSequenceStep(ViSession vi, viBoolean
-setAsActiveSequenceStep);
-
-Purpose
--------
-
 Creates a new advanced sequence step in the advanced sequence specified
 by the Active advanced sequence. When you create an advanced sequence
 step, each attribute you passed to the niDCPower\_CreateAdvancedSequence
@@ -4212,17 +3687,17 @@ functions is unsupported.
 **Related Topics**:
 
 `Advanced Sequence
-Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(advancedsequencemode)>`__
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
 `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
 niDCPower\_CreateAdvancedSequence
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -4255,15 +3730,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_DeleteAdvancedSequence
-=================================
-
-Vistatus niDCPower\_DeleteAdvancedSequence(ViSession vi, viConstString
-sequenceName);
-
-Purpose
--------
-
 Deletes a previously created advanced sequence and all the advanced
 sequence steps in the advanced sequence.
 
@@ -4277,15 +3743,15 @@ functions is unsupported.
 **Related Topics**:
 
 `Advanced Sequence
-Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(advancedsequencemode)>`__
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
 `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -4309,14 +3775,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_Disable
-==================
-
-Vistatus niDCPower\_Disable(ViSession vi);
-
-Purpose
--------
-
 This function performs the same actions as the niDCPower\_reset
 function, except that this function also immediately sets the
 NIDCPOWER\_ATTR\_OUTPUT\_ENABLED attribute to VI\_FALSE.
@@ -4345,19 +3803,11 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_DisablePulseTrigger
-==============================
-
-Vistatus niDCPower\_DisablePulseTrigger(ViSession vi);
-
-Purpose
--------
-
 Disables the Pulse trigger. The device does not wait for a pulse trigger
 before performing a pulse operation. Refer to `Pulse
-Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(pulsemode)>`__ and `Sequence
-Source Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(sequencing)>`__ for more
-information about the Pulse trigger.
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(pulsemode)>`__ and `Sequence Source
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for more information
+about the Pulse trigger.
 
 This function is necessary only if you configured a Pulse trigger in the
 past and now want to disable it.
@@ -4365,7 +3815,7 @@ past and now want to disable it.
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -4389,24 +3839,16 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_DisableSequenceAdvanceTrigger
-========================================
-
-Vistatus niDCPower\_DisableSequenceAdvanceTrigger(ViSession vi);
-
-Purpose
--------
-
 Disables the Sequence Advance trigger. The device does not wait for a
 Sequence Advance trigger before advancing to the next iteration of the
 sequence. Refer to the `Sequence Source
-Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(sequencing)>`__ topic for more
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ topic for more
 information about the Sequence Advance trigger.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -4430,24 +3872,16 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_DisableSourceTrigger
-===============================
-
-Vistatus niDCPower\_DisableSourceTrigger(ViSession vi);
-
-Purpose
--------
-
 Disables the Source trigger. The device does not wait for a source
 trigger before performing a source operation. Refer to the `Single Point
-Source Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(singlept)>`__ and
-`Sequence Source Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(sequencing)>`__
-topics for more information about the Source trigger.
+Source Mode <REPLACE_DRIVER_SPECIFIC_URL_1(singlept)>`__ and `Sequence
+Source Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ topics for
+more information about the Source trigger.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -4471,21 +3905,13 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_DisableStartTrigger
-==============================
-
-Vistatus niDCPower\_DisableStartTrigger(ViSession vi);
-
-Purpose
--------
-
 Disables the Start trigger. The device does not wait for a Start trigger
 when starting generation or acquisition.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -4544,26 +3970,17 @@ Specifies where to export the selected signal.
         ],
 'documentation': {
 'description': '''
-niDCPower\_Exportsignal
-=======================
-
-Vistatus niDCPower\_Exportsignal(ViSession vi, ViInt32 signal,
-ViConstString signalIdentifier, ViConstString outputTerminal);
-
-Purpose
--------
-
 Routes signals (triggers and events) to the output terminal you specify.
 The route is created when the session is niDCPower\_Commit.
 
 **Related Topics:**
 
-`Triggers <REPLACE_WITH_DRIVER_SPECIFIC_URL(trigger)>`__
+`Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -4681,17 +4098,6 @@ device.
         ],
 'documentation': {
 'description': '''
-niDCPower\_FetchMultiple
-========================
-
-Vistatus niDCPower\_FetchMultiple(ViSession vi, ViConstString
-channelName, ViReal64 timeout, ViInt32 count, ViReal64
-voltageMeasurements[], ViReal64 currentMeasurements[], ViBoolean
-inCompliance[], ViInt32\* actualcount);
-
-Purpose
--------
-
 Returns an array of voltage measurements, an array of current
 measurements, and an array of compliance measurements that were
 previously taken and are stored in the NI-DCPower buffer. This function
@@ -4700,15 +4106,15 @@ set to NIDCPOWER\_VAL\_ON\_DEMAND. You must first call
 niDCPower\_Initiate before calling this function.
 
 Refer to the `Acquiring
-Measurements <REPLACE_WITH_DRIVER_SPECIFIC_URL(acquiringmeasurements)>`__
-and `Compliance <REPLACE_WITH_DRIVER_SPECIFIC_URL(compliance)>`__ topics
-in the *NI DC Power Supplies and SMUs Help* for more information about
+Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
+and `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in
+the *NI DC Power Supplies and SMUs Help* for more information about
 configuring this function.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -4795,15 +4201,6 @@ it or by selecting it and then pressing **Enter**.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetAttributeViBoolean
-================================
-
-Vistatus niDCPower\_GetAttributeViBoolean(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViBoolean \*value);
-
-Purpose
--------
-
 | Queries the value of a ViBoolean attribute.
 | You can use this function to get the values of device-specific
   attributes and inherent IVI attributes.
@@ -4892,15 +4289,6 @@ it or by selecting it and then pressing **Enter**.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetAttributeViInt32
-==============================
-
-Vistatus niDCPower\_GetAttributeViInt32(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViInt32 \*value);
-
-Purpose
--------
-
 | Queries the value of a ViInt32 attribute.
 | You can use this function to get the values of device-specific
   attributes and inherent IVI attributes.
@@ -4989,15 +4377,6 @@ it or by selecting it and then pressing **Enter**.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetAttributeViInt64
-==============================
-
-Vistatus niDCPower\_GetAttributeViInt64(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViInt64 \*value);
-
-Purpose
--------
-
 | Queries the value of a ViInt64 attribute.
 | You can use this function to get the values of device-specific
   attributes and inherent IVI attributes.
@@ -5086,15 +4465,6 @@ it or by selecting it and then pressing **Enter**.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetAttributeViReal64
-===============================
-
-Vistatus niDCPower\_GetAttributeViReal64(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViReal64 \*value);
-
-Purpose
--------
-
 | Queries the value of a ViReal64 attribute.
 | You can use this function to get the values of device-specific
   attributes and inherent IVI attributes.
@@ -5183,15 +4553,6 @@ it or by selecting it and then pressing **Enter**.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetAttributeViSession
-================================
-
-Vistatus niDCPower\_GetAttributeViSession(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViSession \*value);
-
-Purpose
--------
-
 | Queries the value of a ViSession attribute.
 | You can use this function to get the values of device-specific
   attributes and inherent IVI attributes.
@@ -5312,15 +4673,6 @@ selecting it and then pressing .
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetAttributeViString
-===============================
-
-ViStatus niDCPower\_GetAttributeViString(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViInt32 bufSize, ViChar value[]);
-
-Purpose
--------
-
 | Queries the value of a ViString attribute.
 | You can use this function to get the values of device-specific
   attributes and inherent IVI attributes.
@@ -5357,17 +4709,7 @@ EEPROM.
             },
         ],
 'documentation': {
-'description': '''
-niDCPower\_GetCalUserDefinedinfo
-================================
-
-Vistatus niDCPower\_GetCalUserDefinedinfo(ViSession vi, ViString info);
-
-Purpose
--------
-
-Returns the user-defined information in the device onboard EEPROM.
-''',
+'description': 'Returns the user-defined information in the device onboard EEPROM.',
 },
     },
     'GetCalUserDefinedInfoMaxSize': {
@@ -5401,15 +4743,6 @@ onboard EEPROM.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetCalUserDefinedInfoMaxSize
-=======================================
-
-Vistatus niDCPower\_GetCalUserDefinedInfoMaxSize(ViSession vi,
-ViInt32\*infoSize);
-
-Purpose
--------
-
 Returns the maximum number of characters that can be used to store
 user-defined information in the device onboard EEPROM.
 ''',
@@ -5474,15 +4807,6 @@ If you pass 0, you can pass VI\_NULL for **channelName**.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetChannelName
-=========================
-
-ViStatus niDCPower\_GetChannelName(ViSession vi, ViInt32 index, ViInt32
-bufferSize, ViChar channelName[]);
-
-Purpose
--------
-
 Retrieves the output **channelName** that corresponds to the requested
 **index**. Use the NIDCPOWER\_ATTR\_CHANNEL\_COUNT attribute to
 determine the upper bound of valid values for **index**.
@@ -5559,15 +4883,6 @@ attribute.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetError
-===================
-
-ViStatus niDCPower\_GetError(ViSession vi, ViStatus \*code, ViInt32
-bufferSize, ViChar description[]);
-
-Purpose
--------
-
 | Retrieves and then clears the IVI error information for the session or
   the current execution thread unless **bufferSize** is 0, in which case
   the function does not clear the error information. By passing 0 for
@@ -5652,16 +4967,6 @@ calibrated.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetExtCalLastDateAndTime
-===================================
-
-Vistatus niDCPower\_GetExtCalLastDateAndTime(ViSession vi, ViInt32
-\*year, ViInt32 \*month, ViInt32 \*day, ViInt32 \*hour, ViInt32
-\*minute);
-
-Purpose
--------
-
 Returns the date and time of the last successful calibration. The time
 returned is 24-hour (military) local time; for example, if the device
 was calibrated at 2:30 PM, this function returns 14 for **hours** and 30
@@ -5700,15 +5005,6 @@ during the last successful external calibration.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetExtCalLastTemp
-============================
-
-Vistatus niDCPower\_GetExtCalLastTemp(ViSession vi, ViReal64
-\*temperature);
-
-Purpose
--------
-
 Returns the onboard **temperature** of the device, in degrees Celsius,
 during the last successful external calibration.
 ''',
@@ -5745,15 +5041,6 @@ external calibrations.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetExtCalRecommendedInterval
-=======================================
-
-Vistatus niDCPower\_GetExtCalRecommendedInterval(ViSession vi, ViInt32
-\*months);
-
-Purpose
--------
-
 Returns the recommended maximum interval, in **months**, between
 external calibrations.
 ''',
@@ -5809,15 +5096,6 @@ Returns the next **coercionRecord** for the IVI session. If there are no
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetNextCoercionRecord
-================================
-
-ViStatus niDCPower\_GetNextCoercionRecord(ViSession vi, ViInt32
-bufferSize, ViChar coercionRecord[]);
-
-Purpose
--------
-
 Returns the coercion information associated with the IVI session and
 clears the earliest instance in which NI-DCPower coerced a value you
 specified.
@@ -5874,15 +5152,6 @@ no interchange warnings, the function returns an empty string.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetNextInterchangeWarning
-====================================
-
-ViStatus niDCPower\_GetNextInterchangeWarning(ViSession vi, ViInt32
-bufferSize, ViChar interchangeWarning[]);
-
-Purpose
--------
-
 This function returns the interchangeability warning associated with the
 IVI session. It retrieves and clears the earliest instance in which the
 class driver recorded an interchangeability warning. Interchangeability
@@ -5965,16 +5234,6 @@ calibrated.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetSelfCalLastDateAndTime
-====================================
-
-Vistatus niDCPower\_GetSelfCalLastDateAndTime(ViSession vi, ViInt32
-\*year, ViInt32 \*month, ViInt32 \*day, ViInt32 \*hour, ViInt32
-\*minute);
-
-Purpose
--------
-
 Returns the date and time of the oldest successful self-calibration from
 among the channels in the session.
 
@@ -5987,7 +5246,7 @@ on channel 2 at 3:00 PM on the same day, this function returns 14 for
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -6023,15 +5282,6 @@ during the oldest successful calibration.
         ],
 'documentation': {
 'description': '''
-niDCPower\_GetSelfCalLastTemp
-=============================
-
-Vistatus niDCPower\_GetSelfCalLastTemp(ViSession vi, ViReal64
-\*temperature);
-
-Purpose
--------
-
 Returns the onboard temperature of the device, in degrees Celsius,
 during the oldest successful self-calibration from among the channels in
 the session.
@@ -6045,7 +5295,7 @@ degrees Celsius at 2:00, and a self-calibration was performed on channel
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -6096,15 +5346,6 @@ NI-DCPower function calls.
         ],
 'documentation': {
 'description': '''
-niDCPower\_InitExtCal
-=====================
-
-Vistatus niDCPower\_InitExtCal(ViRsrc resourceName, ViConstString
-password, ViSession \*vi);
-
-Purpose
--------
-
 If **password** is valid, this function creates a new IVI instrument
 driver session to the device specified in **resourceName** and returns
 an instrument handle you use to identify the device in all subsequent
@@ -6116,7 +5357,7 @@ Opening a calibration session always performs a reset. Refer to the
 calibration procedure for the device you are calibrating for detailed
 instructions on the appropriate use of this function. This function uses
 the `deprecated programming state
-model <REPLACE_WITH_DRIVER_SPECIFIC_URL(initializedeprecatedmodel)>`__.
+model <REPLACE_DRIVER_SPECIFIC_URL_1(initializedeprecatedmodel)>`__.
 ''',
 },
     },
@@ -6183,7 +5424,7 @@ You do not have to specify a value for all the attributes. If you do not
 specify a value for an attribute, the default value is used.
 
 For more information about simulating a device, refer to `Simulating a
-Power Supply or SMU <REPLACE_WITH_DRIVER_SPECIFIC_URL(simulate)>`__.
+Power Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.
 ''',
 },
             },
@@ -6202,15 +5443,6 @@ NI-DCPower function calls.
         ],
 'documentation': {
 'description': '''
-niDCPower\_InitWithOptions (Obsolete)
-=====================================
-
-Vistatus niDCPower\_InitWithOptions(ViRsrc resourceName, ViBoolean
-IDQuery, ViBoolean resetDevice, ViString optionString, ViSession \*vi);
-
-Purpose
--------
-
 This function is deprecated. Use niDCPower\_InitializeWithChannels
 instead.
 
@@ -6241,8 +5473,8 @@ configure the device as in the previous session changing only the
 desired settings, and then call the niDCPower\_Initiate function.
 
 Refer to the `deprecated programming state
-model <REPLACE_WITH_DRIVER_SPECIFIC_URL(initializedeprecatedmodel)>`__
-for information about the specific software states.
+model <REPLACE_DRIVER_SPECIFIC_URL_1(initializedeprecatedmodel)>`__ for
+information about the specific software states.
 ''',
 },
     },
@@ -6313,7 +5545,7 @@ You do not have to specify a value for all the attributes. If you do not
 specify a value for an attribute, the default value is used.
 
 For more information about simulating a device, refer to `Simulating a
-Power Supply or SMU <REPLACE_WITH_DRIVER_SPECIFIC_URL(simulate)>`__.
+Power Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.
 ''',
 },
             },
@@ -6332,16 +5564,6 @@ subsequent NI-DCPower function calls.
         ],
 'documentation': {
 'description': '''
-niDCPower\_InitializeWithchannels
-=================================
-
-Vistatus niDCPower\_InitializeWithchannels(ViRsrc resourceName,
-ViConstString channels, ViBoolean reset, ViConstString optionString,
-ViSession \*vi);
-
-Purpose
--------
-
 Creates and returns a new NI-DCPower session to the power supply or SMU
 specified in **resource name** to be used in all subsequent NI-DCPower
 function calls. With this function, you can optionally set the initial
@@ -6352,8 +5574,8 @@ state of the following session attributes:
 
 After calling this function, the session will be in the Uncommitted
 state. Refer to the `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic
-for details about specific software states.
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+details about specific software states.
 
 To place the device in a known start-up state when creating a new
 session, set **reset** to VI\_TRUE. This action is equivalent to using
@@ -6369,7 +5591,7 @@ niDCPower\_Initiate function.
 **Related Topics:**
 
 `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 ''',
 },
     },
@@ -6392,26 +5614,18 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_Initiate
-===================
-
-Vistatus niDCPower\_Initiate(ViSession vi);
-
-Purpose
--------
-
 Starts generation or acquisition, causing the NI-DCPower session to
 leave the Uncommitted state or Committed state and enter the Running
 state. To return to the Committed state call the niDCPower\_Abort
 function. Refer to the `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic in
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
 the *NI DC Power Supplies and SMUs Help* for information about the
 specific NI-DCPower software states.
 
 **Related Topics:**
 
 `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 ''',
 },
     },
@@ -6492,15 +5706,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_LockSession
-======================
-
-Vistatus niDCPower\_LockSession(ViSession vi, ViBoolean
-\*callerHasLock);
-
-Purpose
--------
-
 | Obtains a multithread lock on the device session. Before doing so, the
   software waits until all other execution threads release their locks
   on the device session.
@@ -6522,7 +5727,7 @@ You can safely make nested calls to the niDCPower\_LockSession function
 within the same thread. To completely unlock the session, you must
 balance each call to the niDCPower\_LockSession function with a call to
 the niDCPower\_UnlockSession function. If, however, you use
-**caller_has_lock** in all calls to the niDCPower\_LockSession and
+**Caller\_Has\_Lock** in all calls to the niDCPower\_LockSession and
 niDCPower\_UnlockSession function within a function, the IVI Library
 locks the session only once within the function regardless of the number
 of calls you make to the niDCPower\_LockSession function. This behavior
@@ -6588,15 +5793,6 @@ amps for current.
         ],
 'documentation': {
 'description': '''
-niDCPower\_Measure
-==================
-
-Vistatus niDCPower\_Measure(ViSession vi, ViConstString channelName,
-ViInt32 measurementType, ViReal64 \*measurement)
-
-Purpose
--------
-
 Returns the measured value of either the voltage or current on the
 specified output channel. Each call to this function blocks other
 function calls until the hardware returns the **measurement**. To
@@ -6669,16 +5865,6 @@ returned array.
         ],
 'documentation': {
 'description': '''
-niDCPower\_MeasureMultiple
-==========================
-
-Vistatus niDCPower\_MeasureMultiple(ViSession vi, ViConstString
-channelName, ViReal64 voltageMeasurements[], ViReal64
-currentMeasurements[]);
-
-Purpose
--------
-
 Returns arrays of the measured voltage and current values on the
 specified output channel(s). Each call to this function blocks other
 function calls until the measurements are returned from the device. The
@@ -6727,17 +5913,8 @@ queried for one channel at a time.
         ],
 'documentation': {
 'description': '''
-niDCPower\_QueryInCompliance
-============================
-
-Vistatus niDCPower\_QueryInCompliance(ViSession vi, ViConstString
-channelName, ViBoolean \*inCompliance);
-
-Purpose
--------
-
 Queries the specified output device to determine if it is operating at
-the `compliance <REPLACE_WITH_DRIVER_SPECIFIC_URL(compliance)>`__ limit.
+the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
 
 The compliance limit is the current limit when the output function is
 set to NIDCPOWER\_VAL\_DC\_VOLTAGE. If the output is operating at the
@@ -6755,7 +5932,7 @@ information about output function and voltage limit, respectively.
 
 **Related Topics:**
 
-`Compliance <REPLACE_WITH_DRIVER_SPECIFIC_URL(compliance)>`__
+`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 ''',
 },
     },
@@ -6814,15 +5991,6 @@ Returns the maximum current limit that can be set with the specified
         ],
 'documentation': {
 'description': '''
-niDCPower\_QueryMaxCurrentLimit
-===============================
-
-Vistatus niDCPower\_QueryMaxCurrentLimit(ViSession vi, ViConstString
-channelName, ViReal64 voltageLevel, ViReal64 \*maxCurrentLimit);
-
-Purpose
--------
-
 Queries the maximum current limit on an output channel if the output
 channel is set to the specified **voltageLevel**.
 ''',
@@ -6883,15 +6051,6 @@ with the specified **currentLimit**.
         ],
 'documentation': {
 'description': '''
-niDCPower\_QueryMaxVoltageLevel
-===============================
-
-Vistatus niDCPower\_QueryMaxVoltageLevel(ViSession vi, ViConstString
-channelName, ViReal64 currentLimit, ViReal64 \*maxVoltageLevel);
-
-Purpose
--------
-
 Queries the maximum voltage level on an output channel if the output
 channel is set to the specified **currentLimit**.
 ''',
@@ -6952,15 +6111,6 @@ with the specified **voltageLevel**.
         ],
 'documentation': {
 'description': '''
-niDCPower\_QueryMinCurrentLimit
-===============================
-
-Vistatus niDCPower\_QueryMinCurrentLimit(ViSession vi, ViConstString
-channelName, ViReal64 voltageLevel, ViReal64 \*minCurrentLimit);
-
-Purpose
--------
-
 Queries the minimum current limit on an output channel if the output
 channel is set to the specified **voltageLevel**.
 ''',
@@ -7022,21 +6172,12 @@ state.
         ],
 'documentation': {
 'description': '''
-niDCPower\_QueryOutputState
-===========================
-
-Vistatus niDCPower\_QueryOutputState(ViSession vi, ViConstString
-channelName, ViInt32 outputState, ViBoolean \*inState);
-
-Purpose
--------
-
 Queries the specified output channel to determine if the output channel
 is currently in the state specified by **outputState**.
 
 **Related Topics:**
 
-`Compliance <REPLACE_WITH_DRIVER_SPECIFIC_URL(compliance)>`__
+`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 ''',
 },
     },
@@ -7068,15 +6209,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ReadCurrenttemperature
-=================================
-
-Vistatus niDCPower\_ReadCurrenttemperature(ViSession vi, ViReal64
-\*temperature);
-
-Purpose
--------
-
 Returns the current onboard **temperature**, in degrees Celsius, of the
 device.
 ''',
@@ -7101,14 +6233,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ResetDevice
-======================
-
-Vistatus niDCPower\_ResetDevice(ViSession vi);
-
-Purpose
--------
-
 Resets the device to a known state. The function disables power
 generation, resets session attributes to their default values, clears
 errors such as overtemperature and unexpected loss of auxiliary power,
@@ -7117,8 +6241,8 @@ Uncommitted state. This function also performs a hard reset on the
 device and driver software. This function has the same functionality as
 using reset in Measurement & Automation Explorer. Refer to the
 `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic
-for more information about NI-DCPower software states.
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+more information about NI-DCPower software states.
 
 This will also open the output relay on devices that have an output
 relay.
@@ -7144,14 +6268,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ResetInterchangeCheck
-================================
-
-Vistatus niDCPower\_ResetInterchangeCheck(ViSession vi);
-
-Purpose
--------
-
 When developing a complex test system that consists of multiple test
 modules, it is generally a good idea to design the test modules so that
 they can run in any order. To do so requires ensuring that each test
@@ -7207,14 +6323,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_ResetWithDefaults
-============================
-
-Vistatus niDCPower\_ResetWithDefaults(ViSession vi);
-
-Purpose
--------
-
 Resets the device to a known state. This function disables power
 generation, resets session attributes to their default values, commits
 the session attributes, and leaves the session in the
@@ -7257,26 +6365,17 @@ Specifies which trigger to assert.
         ],
 'documentation': {
 'description': '''
-niDCPower\_SendSoftwareEdgetrigger
-==================================
-
-Vistatus niDCPower\_SendSoftwareEdgetrigger(ViSession vi, ViInt32
-trigger);
-
-Purpose
--------
-
 Asserts the specified trigger. This function can override an external
 edge trigger.
 
 **Related Topics:**
 
-`triggers <REPLACE_WITH_DRIVER_SPECIFIC_URL(trigger)>`__
+`Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -7368,15 +6467,6 @@ settings of the device session.
         ],
 'documentation': {
 'description': '''
-niDCPower\_SetAttributeViBoolean
-================================
-
-Vistatus niDCPower\_SetAttributeViBoolean(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViBoolean value);
-
-Purpose
--------
-
 | Sets the value of a ViBoolean attribute.
 | This is a low-level function that you can use to set the values of
   device-specific attributes and inherent IVI attributes.
@@ -7470,15 +6560,6 @@ settings of the device session.
         ],
 'documentation': {
 'description': '''
-niDCPower\_SetAttributeViInt32
-==============================
-
-Vistatus niDCPower\_SetAttributeViInt32(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViInt32 value);
-
-Purpose
--------
-
 | Sets the value of a ViInt32 attribute.
 | This is a low-level function that you can use to set the values of
   device-specific attributes and inherent IVI attributes.
@@ -7572,15 +6653,6 @@ settings of the device session.
         ],
 'documentation': {
 'description': '''
-niDCPower\_SetAttributeViInt64
-==============================
-
-Vistatus niDCPower\_SetAttributeViInt64(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViInt64 value);
-
-Purpose
--------
-
 | Sets the value of a ViInt64 attribute.
 | This is a low-level function that you can use to set the values of
   device-specific attributes and inherent IVI attributes.
@@ -7674,15 +6746,6 @@ settings of the device session.
         ],
 'documentation': {
 'description': '''
-niDCPower\_SetAttributeViReal64
-===============================
-
-Vistatus niDCPower\_SetAttributeViReal64(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViReal64 value);
-
-Purpose
--------
-
 | Sets the value of a ViReal64 attribute.
 | This is a low-level function that you can use to set the values of
   device-specific attributes and inherent IVI attributes.
@@ -7776,15 +6839,6 @@ settings of the device session.
         ],
 'documentation': {
 'description': '''
-niDCPower\_SetAttributeViSession
-================================
-
-Vistatus niDCPower\_SetAttributeViSession(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViSession value);
-
-Purpose
--------
-
 | Sets the value of a ViSession attribute.
 | This is a low-level function that you can use to set the values of
   device-specific attributes and inherent IVI attributes.
@@ -7878,15 +6932,6 @@ settings of the device session.
         ],
 'documentation': {
 'description': '''
-niDCPower\_SetAttributeViString
-===============================
-
-Vistatus niDCPower\_SetAttributeViString(ViSession vi, ViConstString
-channelName, ViAttr attribute, ViConstString value);
-
-Purpose
--------
-
 | Sets the value of a ViString attribute.
 | This is a low-level function that you can use to set the values of
   device-specific attributes and inherent IVI attributes.
@@ -7921,15 +6966,6 @@ niDCPower\_InitExtCal or niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_SetCalUserDefinedinfo
-================================
-
-Vistatus niDCPower\_SetCalUserDefinedinfo(ViSession vi, ViConstString
-info);
-
-Purpose
--------
-
 Stores a user-defined string of characters in the device onboard EEPROM.
 If the string is longer than the maximum allowable size, it is
 truncated. This function overwrites any existing user-defined
@@ -7980,7 +7016,7 @@ You can only set a sequence for one channel at a time.
 'description': '''
 Specifies the series of voltage levels or current levels, depending on
 the configured `output
-function <REPLACE_WITH_DRIVER_SPECIFIC_URL(programming_output)>`__.
+function <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
 **Valid values**:
 The valid values for this parameter are defined by the voltage level
 range or current level range.
@@ -8016,35 +7052,26 @@ Values and Source Delays arrays should have the same size.
         ],
 'documentation': {
 'description': '''
-niDCPower\_SetSequence
-======================
-
-Vistatus niDCPower\_SetSequence(ViSession vi, ViConstString channelName,
-ViReal64 values[], ViReal64 sourceDelays[], ViUInt32 size);
-
-Purpose
--------
-
 Configures a series of voltage or current outputs and corresponding
 source delays. The source mode must be set to
-`Sequence <REPLACE_WITH_DRIVER_SPECIFIC_URL(sequencing)>`__ for this
+`Sequence <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for this
 function to take effect.
 
 Refer to the `Configuring the Source
-Unit <REPLACE_WITH_DRIVER_SPECIFIC_URL(configuringthesourceunit)>`__
-topic in the *NI DC Power Supplies and SMUs Help* for more information
-about how to configure your device.
+Unit <REPLACE_DRIVER_SPECIFIC_URL_1(configuringthesourceunit)>`__ topic
+in the *NI DC Power Supplies and SMUs Help* for more information about
+how to configure your device.
 
 Use this function in the Uncommitted or Committed programming states.
 Refer to the `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic in
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
 the *NI DC Power Supplies and SMUs Help* for more information about
 NI-DCPower programming states.
 ''',
 'note': '''
 This function is not supported on all devices. Refer to `Supported
 Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -8126,15 +7153,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_UnlockSession
-========================
-
-Vistatus niDCPower\_UnlockSession(ViSession vi, ViBoolean
-\*callerHasLock);
-
-Purpose
--------
-
 Releases a lock that you acquired on an device session using
 niDCPower\_LockSession. Refer to niDCPower\_LockSession for additional
 information on session locks.
@@ -8191,15 +7209,6 @@ application.
         ],
 'documentation': {
 'description': '''
-niDCPower\_WaitForEvent
-=======================
-
-Vistatus niDCPower\_WaitForEvent(ViSession vi, ViInt32 eventId, ViReal64
-timeout);
-
-Purpose
--------
-
 Waits until the device has generated the specified event.
 
 The session monitors whether each type of event has occurred at least
@@ -8210,7 +7219,7 @@ events must be generated between separate calls of this function.
 ''',
 'note': '''
 Refer to `Supported Functions by
-Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
 ''',
 },
@@ -8234,14 +7243,6 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_close
-================
-
-Vistatus niDCPower\_close(ViSession vi);
-
-Purpose
--------
-
 Closes the session specified in **vi** and deallocates the resources
 that NI-DCPower reserves. If power output is enabled when you call this
 function, the output channels remain in their existing state and
@@ -8252,7 +7253,7 @@ niDCPower\_reset function to disable power output on all channel(s).
 **Related Topics:**
 
 `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 ''',
 },
     },
@@ -8300,15 +7301,6 @@ You must pass a ViChar array with at least 256 bytes.
         ],
 'documentation': {
 'description': '''
-niDCPower\_error\_message
-=========================
-
-Vistatus niDCPower\_error\_message(ViSession vi, Vistatus errorCode,
-ViChar errorMessage[256]);
-
-Purpose
--------
-
 Converts a status code returned by an instrument driver function into a
 user-readable string.
 ''',
@@ -8375,15 +7367,6 @@ subsequent NI-DCPower function calls.
         ],
 'documentation': {
 'description': '''
-niDCPower\_init (Obsolete)
-==========================
-
-Vistatus niDCPower\_init(ViRsrc resourceName, ViBoolean IDQuery,
-ViBoolean resetDevice, ViSession \*vi);
-
-Purpose
--------
-
 This function is deprecated. Use niDCPower\_InitializeWithChannels
 instead.
 
@@ -8403,8 +7386,8 @@ to VI\_FALSE, and immediately call the niDCPower\_Abort function. Then
 configure the device as in the previous session, changing only the
 desired settings, and then call the niDCPower\_Initiate function. Refer
 to the `deprecated programming state
-model <REPLACE_WITH_DRIVER_SPECIFIC_URL(initializedeprecatedmodel)>`__
-for information about the specific software states.
+model <REPLACE_DRIVER_SPECIFIC_URL_1(initializedeprecatedmodel)>`__ for
+information about the specific software states.
 ''',
 },
     },
@@ -8427,20 +7410,12 @@ niDCPower\_InitializeWithChannels function.
         ],
 'documentation': {
 'description': '''
-niDCPower\_reset
-================
-
-Vistatus niDCPower\_reset(ViSession vi);
-
-Purpose
--------
-
 Resets the device to a known state. This function disables power
 generation, resets session attributes to their default values, commits
 the session attributes, and leaves the session in the Uncommitted state.
 Refer to the `Programming
-States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic
-for more information about NI-DCPower software states.
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+more information about NI-DCPower software states.
 ''',
 },
     },
@@ -8483,18 +7458,7 @@ size of this array must be at least 256 bytes.
             },
         ],
 'documentation': {
-'description': '''
-niDCPower\_revision\_query
-==========================
-
-Vistatus niDCPower\_revision\_query(ViSession vi, ViChar
-instrumentDriverRevision[], ViChar firmwareRevision[]);
-
-Purpose
--------
-
-Returns the revision information of NI-DCPower and the device firmware.
-''',
+'description': 'Returns the revision information of NI-DCPower and the device firmware.',
 },
     },
     'self_test': {
@@ -8539,15 +7503,6 @@ least 256 bytes.
         ],
 'documentation': {
 'description': '''
-niDCPower\_self\_test
-=====================
-
-Vistatus niDCPower\_self\_test(ViSession vi, ViInt16 \*selfTestResult,
-ViChar selfTestMessage[]);
-
-Purpose
--------
-
 Performs the device self-test routine and returns the test result(s).
 Calling this function implicitly calls the niDCPower\_reset function.
 ''',

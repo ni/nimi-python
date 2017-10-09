@@ -98,8 +98,8 @@ Auto-ranging is not supported for calibration operations.
 'documentation': {
 'description': '''
 For the NI 4080/4081/4082 and the NI 4070/4071/4072, calibrates the
-filter coefficients used for AC measurements of the supplied **mode**
-and **range**.
+filter coefficients used for AC measurements of the supplied **Mode**
+and **Range**.
 ''',
 'note': '''
 Refer to the calibration procedure for your device before using this
@@ -175,8 +175,8 @@ Specifies the **input\_resistance** that the device should use.
         ],
 'documentation': {
 'description': '''
-Calibrates the gain coefficient for the supplied **mode**, **range**,
-and **input_resistance**.
+Calibrates the gain coefficient for the supplied **Mode**, **Range**,
+and **Input\_Resistance**.
 ''',
 'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The NI 4050 and NI 4060 are not supported. Refer to the calibration procedure for your device before using this function.']],
 },
@@ -211,7 +211,7 @@ identifies a particular instrument calibration session.
 'documentation': {
 'description': '''
 For the NI 4082 and NI 4072 only, performs a specialized LC calibration
-step depending on the specified **type**.
+step depending on the specified **Type**.
 ''',
 'note': '''
 Refer to the calibration procedure for your device before using this
@@ -321,7 +321,7 @@ identifies a particular instrument calibration session.
 'documentation': {
 'description': '''
 Performs a specialized calibration step depending on the specified
-**type**.
+**Type**.
 ''',
 'note': '''
 The NI 4050 and NI 4060 are not supported.
@@ -389,8 +389,8 @@ Specifies the **input\_resistance** that the device should use.
         ],
 'documentation': {
 'description': '''
-Calibrates the offset and Auto Zero offset for the supplied **mode**,
-**range**, and **input_resistance**.
+Calibrates the offset and Auto Zero offset for the supplied **Mode**,
+**Range**, and **Input\_Resistance**.
 ''',
 'note': '''
 The NI 4050 and NI 4060 are not supported.
@@ -716,7 +716,7 @@ None.
 'description': '''
 Clears the error information for the current execution thread and the
 IVI session you specify. If you pass VI\_NULL for the
-**vi** parameter, this function clears the error
+**Instrument\_Handle** parameter, this function clears the error
 information only for the current execution thread.
 ''',
 },
@@ -772,7 +772,7 @@ identifies a particular instrument calibration session.
         ],
 'documentation': {
 'description': '''
-Performs the specified **action**, closes the specified external
+Performs the specified **Action**, closes the specified external
 calibration session obtained from niDMM\_InitExtCal, and deallocates
 resources that it reserved.
 ''',
@@ -953,11 +953,11 @@ and adds no extra time to the overall measurement.
         ],
 'documentation': {
 'description': '''
-Configures the DMM for **auto_zero_mode**. When **auto_zero_mode**
+Configures the DMM for **Auto\_Zero\_Mode**. When **Auto\_Zero\_Mode**
 is ON, the DMM internally disconnects the input signal and takes a zero
 reading. It then subtracts the zero reading from the measurement. This
 prevents offset voltages present on the input circuitry of the DMM from
-affecting measurement accuracy. When **auto_zero_mode** is OFF, the
+affecting measurement accuracy. When **Auto\_Zero\_Mode** is OFF, the
 DMM does not compensate for zero reading offset.
 ''',
 },
@@ -1035,7 +1035,7 @@ driver sets NIDMM\_ATTR\_CURRENT\_SOURCE to this value.
 'documentation': {
 'description': '''
 The NI 4050 and NI 4060 are not supported. Configures the
-**current_source** for diode measurements.
+**Current\_Source** for diode measurements.
 ''',
 },
     },
@@ -1103,17 +1103,15 @@ None.
 'documentation': {
 'description': '''
 Sets the expected maximum amplitude of the input signal. Refer to the
-`NI 4080 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4080_functional_overview/>`__,
-`NI 4081 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4081_functional_overview/>`__,
-`NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4082/>`__,
-`NI 4070 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4070_functional_overview/>`__,
-`NI 4071 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4071_functional_overview/>`__,
-and
-`NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4072/>`__
-sections for a list of valid values. NI-DMM sets
-NIDMM\_ATTR\_FREQ\_VOLTAGE\_RANGE to this value. The minimum
-peak-to-peak signal amplitude that can be detected is 10% of the
-specified **voltage\_range**.
+`NI 4080 <REPLACE_DRIVER_SPECIFIC_URL_1(4080_functional_overview)>`__,
+`NI 4081 <REPLACE_DRIVER_SPECIFIC_URL_1(4081_functional_overview)>`__,
+`NI 4072 <REPLACE_DRIVER_SPECIFIC_URL_1(4082)>`__,
+`NI 4070 <REPLACE_DRIVER_SPECIFIC_URL_1(4070_functional_overview)>`__,
+`NI 4071 <REPLACE_DRIVER_SPECIFIC_URL_1(4071_functional_overview)>`__,
+and `NI 4072 <REPLACE_DRIVER_SPECIFIC_URL_1(4072)>`__ sections for a
+list of valid values. NI-DMM sets NIDMM\_ATTR\_FREQ\_VOLTAGE\_RANGE to
+this value. The minimum peak-to-peak signal amplitude that can be
+detected is 10% of the specified **voltage\_range**.
 ''',
 'table_body': [['NIDMM\\_VAL\\_AUTO\\_RANGE\\_ON (default)', '-1.0', 'Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement.'], ['NIDMM\\_VAL\\_AUTO\\_RANGE\\_OFF', '-2.0', 'Disables Auto Ranging. The driver sets the voltage range to the last calculated voltage range.']],
 'table_header': ['Name', 'Value', 'Description'],
@@ -1160,8 +1158,7 @@ signal is commonly referred to as Voltmeter Complete.
 'note': '''
 To determine which values are supported by each device, refer to the
 `LabWindows/CVI Trigger
-Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-section.
+Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 ''',
 },
             },
@@ -1169,9 +1166,8 @@ section.
 'documentation': {
 'description': '''
 Specifies the destination of the DMM Measurement Complete (MC) signal.
-Refer to
-`Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
-for more information.
+Refer to `Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__ for
+more information.
 ''',
 },
     },
@@ -1258,9 +1254,9 @@ For all other functions, you must supply a **range** that exceeds the
 value that you are measuring. For example, you must type in 10 V if you
 are measuring 9 V. **range** values are coerced up to the closest input
 **range**. Refer to the `Devices
-Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-for a list of valid ranges. The driver sets NIDMM\_ATTR\_RANGE to this
-value. The default is 0.02 V.
+Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a list of valid
+ranges. The driver sets NIDMM\_ATTR\_RANGE to this value. The default is
+0.02 V.
 ''',
 'note': '''
 The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
@@ -1344,9 +1340,9 @@ For all other functions, you must supply a range that exceeds the value
 that you are measuring. For example, you must type in 10 V if you are
 measuring 9 V. range values are coerced up to the closest input range.
 Refer to the `Devices
-Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-for a list of valid ranges. The driver sets NIDMM\_ATTR\_RANGE to this
-value. The default is 0.02 V.
+Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a list of valid
+ranges. The driver sets NIDMM\_ATTR\_RANGE to this value. The default is
+0.02 V.
 ''',
 'note': '''
 The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
@@ -1363,13 +1359,11 @@ trigger and sample trigger are set to IMMEDIATE.
 'documentation': {
 'description': '''
 Specifies the resolution of the measurement in digits. The driver sets
-the `Devices
-Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-for a list of valid ranges. The driver sets
-NIDMM\_ATTR\_RESOLUTION\_DIGITS attribute to this value. This parameter
-is ignored when the **Range** parameter is set to
-NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
-(-3.0). The default is 5½.
+the `Devices Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a
+list of valid ranges. The driver sets NIDMM\_ATTR\_RESOLUTION\_DIGITS
+attribute to this value. This parameter is ignored when the **Range**
+parameter is set to NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or
+NIDMM\_VAL\_AUTO\_RANGE\_ONCE (-3.0). The default is 5½.
 ''',
 'note': '''
 NI-DMM ignores this parameter for capacitance and inductance
@@ -1445,8 +1439,7 @@ Immediate.
 'note': '''
 To determine which values are supported by each device, refer to the
 `LabWindows/CVI Trigger
-Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-section.
+Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 ''',
 },
             },
@@ -1483,10 +1476,9 @@ NIDMM\_ATTR\_SAMPLE\_TRIGGER, and NIDMM\_ATTR\_SAMPLE\_INTERVAL.
 For continuous acquisitions, set NIDMM\_ATTR\_TRIGGER\_COUNT or
 NIDMM\_ATTR\_SAMPLE\_COUNT to zero. For more information, refer to
 `Multiple Point
-Acquisitions <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/multi_point/>`__,
-`Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__,
-and `Using
-Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__.
+Acquisitions <REPLACE_DRIVER_SPECIFIC_URL_1(multi_point)>`__,
+`Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__, and `Using
+Switches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__.
 ''',
 },
     },
@@ -1526,10 +1518,10 @@ NIDMM\_ATTR\_OFFSET\_COMP\_OHMS to this value.
 'description': '''
 For NI 4080/4081/4082 and NI 4070/4071/4072, allows the DMM to
 compensate for voltage offsets in resistance measurements. When
-**offset_comp_ohms** is enabled, the DMM measures the resistance twice
+**Offset\_Comp\_Ohms** is enabled, the DMM measures the resistance twice
 (once with the current source on and again with it turned off). Any
 voltage offset present in both measurements is cancelled out.
-**offset_comp_ohms** is useful when measuring resistance values less
+**Offset\_Comp\_Ohms** is useful when measuring resistance values less
 than 10 KΩ.
 ''',
 },
@@ -2040,8 +2032,7 @@ before triggering the DMM.
 'note': '''
 To determine which values are supported by each device, refer to the
 `LabWindows/CVI Trigger
-Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-section.
+Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 ''',
 },
             },
@@ -2070,11 +2061,10 @@ NIDMM\_VAL\_AUTO\_DELAY (-1).
         ],
 'documentation': {
 'description': '''
-Configures the DMM **trigger_source** and **trigger_delay**. Refer to
-`Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
-and `Using
-Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__
-for more information.
+Configures the DMM **Trigger\_Source** and **Trigger\_Delay**. Refer to
+`Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__ and `Using
+Switches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__ for more
+information.
 ''',
 },
     },
@@ -2161,7 +2151,7 @@ NIDMM\_ATTR\_RANGE to this value. **range** values are coerced up to the
 closest input **range**. The default is 10.0.
 
 For valid ranges refer to the topics in
-`Devices <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__.
+`Devices <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__.
 
 Auto-ranging is not supported during waveform acquisitions.
 ''',
@@ -2196,8 +2186,7 @@ value.
 
 To calculate the maximum and minimum number of waveform points that you
 can acquire in one acquisition, refer to the `Waveform Acquisition
-Measurement
-Cycle <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/waveform_cycle/>`__.
+Measurement Cycle <REPLACE_DRIVER_SPECIFIC_URL_1(waveform_cycle)>`__.
 
 The default value is 500.
 ''',
@@ -2618,9 +2607,9 @@ NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE.
         ],
 'documentation': {
 'description': '''
-Formats the **measurement** to the proper number of displayed digits
-according to the **measurement\_Function**, **range**, and
-**resolution**. Returns the formatted data, range, and mode strings.
+Formats the **Measurement** to the proper number of displayed digits
+according to the **Measurement\_Function**, **Range**, and
+**Resolution**. Returns the formatted data, range, and mode strings.
 ''',
 },
     },
@@ -2687,7 +2676,7 @@ attribute.
             },
         ],
 'documentation': {
-'description': 'Returns the DMM **aperture_time** and **aperture_time\_Units**.',
+'description': 'Returns the DMM **Aperture\_Time** and **Aperture\_Time\_Units**.',
 },
     },
     'GetAttributeViBoolean': {
@@ -3104,7 +3093,7 @@ value depend on the function.
         ],
 'documentation': {
 'description': '''
-Returns the **actual_range** that the DMM is using, even when Auto
+Returns the **Actual\_Range** that the DMM is using, even when Auto
 Range is off.
 ''',
 },
@@ -3151,7 +3140,7 @@ self-calibration).
             },
         ],
 'documentation': {
-'description': 'Returns the calibration **count** for the specified type of calibration.',
+'description': 'Returns the calibration **Count** for the specified type of calibration.',
 'note': 'The NI 4050, NI 4060, and NI 4080/4081/4082 are not supported.',
 },
     },
@@ -3402,8 +3391,8 @@ Returns the **channel\_string** that is in the channel table at the
         ],
 'documentation': {
 'description': '''
-Returns the **channel_string** that is in the channel table at an
-**index** you specify. Not applicable to National Instruments DMMs.
+Returns the **Channel\_String** that is in the channel table at an
+**Index** you specify. Not applicable to National Instruments DMMs.
 Included for compliance with the *IviDmm Class Specification*.
 ''',
 },
@@ -3445,7 +3434,7 @@ None.
             },
         ],
 'documentation': {
-'description': 'Returns the current **temperature** of the device.',
+'description': 'Returns the current **Temperature** of the device.',
 'note': 'The NI 4050 and NI 4060 are not supported.',
 },
     },
@@ -3521,9 +3510,9 @@ you specify with the **Buffer\_Size** parameter. If you pass 0 for the
 'documentation': {
 'description': '''
 Returns the error information associated with the
-**vi**. This function retrieves and then clears the
+**Instrument\_Handle**. This function retrieves and then clears the
 error information for the session. If you leave the
-**vi** unwired, this function retrieves and then clears
+**Instrument\_Handle** unwired, this function retrieves and then clears
 the error information for the process.
 ''',
 },
@@ -3590,9 +3579,9 @@ specify with the **Buffer\_Size** parameter. If you pass 0 for
         ],
 'documentation': {
 'description': '''
-Returns the **error_message** as a user-readable string for the
-provided **error_code**. Calling this function with a **Buffer\_Size**
-of 0 returns the size needed for the **error_message**.
+Returns the **Error\_Message** as a user-readable string for the
+provided **Error\_Code**. Calling this function with a **Buffer\_Size**
+of 0 returns the size needed for the **Error\_Message**.
 ''',
 },
     },
@@ -3629,7 +3618,7 @@ calibrations.
 'documentation': {
 'description': '''
 Returns the recommended interval between external recalibration in
-**months**.
+**Months**.
 ''',
 'note': 'The NI 4050 and NI 4060 are not supported.',
 },
@@ -3676,7 +3665,7 @@ self-calibration).
             },
         ],
 'documentation': {
-'description': 'Returns the **temperature** during the last calibration procedure.',
+'description': 'Returns the **Temperature** during the last calibration procedure.',
 'note': 'The NI 4050 and NI 4060 are not supported.',
 },
     },
@@ -3717,7 +3706,7 @@ NIDMM\_ATTR\_AUTO\_ZERO, is included.
         ],
 'documentation': {
 'description': '''
-Returns the measurement **period**, which is the amount of time it takes
+Returns the measurement **Period**, which is the amount of time it takes
 to complete one measurement with the current configuration. Use this
 function right before you begin acquiring data—after you have completely
 configured the measurement and after all configuration functions have
@@ -3864,7 +3853,7 @@ different instrument might cause different behavior.
 
 The driver performs interchangeability checking when
 NIDMM\_ATTR\_INTERCHANGE\_CHECK is set to VI\_TRUE (1). The function
-returns an empty string in the **interchange_warning** parameter if no
+returns an empty string in the **Interchange\_Warning** parameter if no
 interchangeability warnings remain for the session. In general, the
 instrument driver generates interchangeability warnings when an
 attribute that affects the behavior of the instrument is in a state that
@@ -3932,7 +3921,7 @@ name.
 | Contains the **resource\_name** of the device to initialize. The
   **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
-  Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
+  Documentation <REPLACE_DRIVER_SPECIFIC_URL_1(related_documentation)>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
   information about configuring and testing the DMM in MAX.
 | Valid Syntax:
@@ -3974,11 +3963,11 @@ identifies a particular instrument calibration session.
         ],
 'documentation': {
 'description': '''
-The following operations are performed if the **calibration_password**
+The following operations are performed if the **Calibration\_Password**
 is valid:
 
 -  Creates a new session for external calibration to the device you
-   specify for the **resource_name** parameter.
+   specify for the **Resource\_Name** parameter.
 -  Resets the device and prepares the EEPROM for new calibration
    coefficients.
 -  Returns a ViSession handle that you use to identify the instrument in
@@ -4022,7 +4011,7 @@ name.
 | Contains the **resource\_name** of the device to initialize. The
   **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
-  Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
+  Documentation <REPLACE_DRIVER_SPECIFIC_URL_1(related_documentation)>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
   information about configuring and testing the DMM in MAX.
 | Valid Syntax:
@@ -4084,8 +4073,8 @@ parameter. You do not have to specify all of the attributes and may
 leave any of them out (those left out use the default value).
 
 Refer to `Simulating NI Digital
-Multimeters <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/simulation/>`__
-for more information.
+Multimeters <REPLACE_DRIVER_SPECIFIC_URL_1(simulation)>`__ for more
+information.
 ''',
 'table_body': [['Check', 'NIDMM\\_ATTR\\_RANGE\\_CHECK', 'VI\\_TRUE', '1'], ['QueryInstrStatus', 'NIDMM\\_ATTR\\_QUERY\\_INSTR\\_STATUS', 'VI\\_FALSE', '0'], ['Cache', 'NIDMM\\_ATTR\\_CACHE', 'VI\\_TRUE', '1'], ['Simulate', 'NIDMM\\_ATTR\\_SIMULATE', 'VI\\_FALSE', '0'], ['RecordCoercions', 'NIDMM\\_ATTR\\_RECORD\\_COERCIONS', 'VI\\_FALSE', '0'], ['DriverSetup', 'NIDMM\\_ATTR\\_DRIVER\\_SETUP', '"" (empty string)', '""']],
 },
@@ -4112,11 +4101,11 @@ This function completes the following tasks:
    NIDMM\_ATTR\_RANGE\_CHECK, NIDMM\_ATTR\_QUERY\_INSTR\_STATUS,
    NIDMM\_ATTR\_CACHE, NIDMM\_ATTR\_SIMULATE,
    NIDMM\_ATTR\_RECORD\_COERCIONS.
--  Opens a session to the device you specify for the **resource_name**
+-  Opens a session to the device you specify for the **Resource\_Name**
    parameter. If the **ID\_Query** parameter is set to VI\_TRUE, this
    function queries the instrument ID and checks that it is valid for
    this instrument driver.
--  If the **reset_device** parameter is set to VI\_TRUE, this function
+-  If the **Reset\_Device** parameter is set to VI\_TRUE, this function
    resets the instrument to a known state. Sends initialization commands
    to set the instrument to the state necessary for the operation of the
    instrument driver.
@@ -4199,7 +4188,7 @@ overrange condition.
         ],
 'documentation': {
 'description': '''
-Takes a **measurement_value** and determines if the value is a valid
+Takes a **Measurement\_Value** and determines if the value is a valid
 measurement or a value indicating that an overrange condition occurred.
 ''',
 },
@@ -4250,7 +4239,7 @@ underrange condition.
         ],
 'documentation': {
 'description': '''
-Takes a **measurement_value** and determines if the value is a valid
+Takes a **Measurement\_Value** and determines if the value is a valid
 measurement or a value indicating that an underrange condition occurred.
 ''',
 },
@@ -4376,7 +4365,7 @@ calls to this function within the same thread.
 
 To completely unlock the session, you must balance each call to this
 function with a call to niDMM\_UnlockSession. If, however, you use the
-**caller_has_lock** parameter in all calls to this function and
+**Caller\_Has\_Lock** parameter in all calls to this function and
 niDMM\_UnlockSession within a function, the IVI Library locks the
 session only once within the function regardless of the number of calls
 you make to this function. This feature allows you to call
@@ -4430,7 +4419,7 @@ None.
 'description': '''
 For the NI 4082 and NI 4072 only, performs the open cable compensation
 measurements for the current capacitance/inductance range, and returns
-open cable compensation **conductance** and **susceptance** values. You
+open cable compensation **Conductance** and **Susceptance** values. You
 can use the return values of this function as inputs to
 niDMM\_ConfigureOpenCableCompValues.
 
@@ -4486,7 +4475,7 @@ None.
 'description': '''
 Performs the short cable compensation measurements for the current
 capacitance/inductance range, and returns short cable compensation
-**resistance** and **reactance** values. You can use the return values
+**Resistance** and **Reactance** values. You can use the return values
 of this function as inputs to niDMM\_ConfigureShortCableCompValues.
 
 This function returns an error if the value of the NIDMM\_ATTR\_FUNCTION
@@ -4770,7 +4759,7 @@ specify for the **Array\_Size** parameter.
 'description': '''
 For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
 and returns data as an array of values or as a waveform data type. The
-number of elements in the **waveform_array** is determined by the
+number of elements in the **Waveform\_Array** is determined by the
 values you specify for the **Waveform\_Points** parameter in
 niDMM\_ConfigureWaveformAcquisition.
 ''',
@@ -5433,8 +5422,8 @@ information as possible, truncates the remainder, and return a warning.
 'documentation': {
 'description': '''
 Stores the user-defined information in the EEPROM. Use
-niDMM\_GetCalUserDefinedinfoMaxSize to learn the maximum string size
-that is allowed. If the **info** string size is larger than the maximum
+niDMM\_GetCalUserDefinedInfoMaxSize to learn the maximum string size
+that is allowed. If the **Info** string size is larger than the maximum
 string size, NI-DMM stores as much of the information as possible,
 truncates the remainder, and returns a warning.
 ''',
@@ -5617,7 +5606,7 @@ indicating VI\_SUCCESS.
         ],
 'documentation': {
 'description': '''
-Takes the **error_code** returned by the instrument driver functions,
+Takes the **Error\_Code** returned by the instrument driver functions,
 interprets it, and returns it as a user-readable string.
 ''',
 },
@@ -5665,7 +5654,7 @@ The default value is VI\_SUCCESS (0).
         ],
 'documentation': {
 'description': '''
-Reads an **error_code** and message from the DMM error queue. National
+Reads an **Error\_Code** and message from the DMM error queue. National
 Instruments DMMs do not contain an error queue. Errors are reported as
 they occur. Therefore, this function does not detect errors; it is
 included for compliance with the *IviDmm Class Specification*.
@@ -5694,7 +5683,7 @@ name.
 | Contains the **resource\_name** of the device to initialize. The
   **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
-  Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
+  Documentation <REPLACE_DRIVER_SPECIFIC_URL_1(related_documentation)>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
   information about configuring and testing the DMM in MAX.
 | Valid Syntax:
@@ -5753,14 +5742,14 @@ all subsequent instrument driver function calls.
 This function completes the following tasks:
 
 -  Creates a new IVI instrument driver session.
--  Opens a session to the device you specify for the **resource_name**
+-  Opens a session to the device you specify for the **Resource\_Name**
    parameter.
 
 -  If the **ID\_Query** parameter is set to VI\_TRUE (1), this function
    queries the instrument ID and checks that it is valid for this
    instrument driver.
 
--  If the **reset_device** parameter is set to VI\_TRUE (1), this
+-  If the **Reset\_Device** parameter is set to VI\_TRUE (1), this
    function resets the instrument to a known state. Sends initialization
    commands to set the instrument to the state necessary for the
    operation of the instrument driver.
