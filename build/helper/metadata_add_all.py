@@ -63,9 +63,7 @@ def _add_is_error_handling(f):
     '''Adds is_error_handling information to the function metadata if it isn't already defined. Defaults to False.'''
     # TODO(marcoskirsch): The information is added in functions_addon.py. I think we can instead infer from method
     # name but I am not sure if it's a good idea (heuristics vs being explicit - both error prone in different ways).
-    try:
-        f['is_error_handling']
-    except KeyError:
+    if 'is_error_handling' not in f:
         # Not populated, assume False
         f['is_error_handling'] = False
     return f
@@ -82,20 +80,16 @@ def _add_buffer_info(parameter):
         parameter['original_type'] = t
         parameter['is_buffer'] = True
 
-    try:
-        parameter['size']
-    except KeyError:
     if (t.find('[ ]') > 0) or (t.find('[]') > 0):
         parameter['type'] = t.replace('[ ]', '').replace('[]', '')
         parameter['original_type'] = t
         parameter['is_buffer'] = True
 
+    if 'size' not in parameter:
         # Not populated, assume {'mechanism': 'fixed', 'value': 1}
         parameter['size'] = {'mechanism': 'fixed', 'value': 1}
 
-    try:
-        parameter['is_buffer']
-    except KeyError:
+    if 'is_buffer' not in parameter:
         # Not populated, assume False
         parameter['is_buffer'] = False
 
