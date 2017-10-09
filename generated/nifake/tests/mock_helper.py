@@ -110,7 +110,7 @@ class SideEffectsHelper(object):
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
 
-    def niFake_ArrayInputFunction(self, vi, buffer_size, a_array):  # noqa: N802
+    def niFake_ArrayInputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
         if self._defaults['ArrayInputFunction']['return'] != 0:
             return self._defaults['ArrayInputFunction']['return']
         return self._defaults['ArrayInputFunction']['return']
