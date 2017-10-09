@@ -471,6 +471,7 @@ config = {
                     'python_name_with_default': 'vi',
                     'python_name_with_doc_default': 'vi',
                     'is_repeated_capability': False,
+                    'is_session_handle': True,
                     'library_method_call_snippet': 'self._vi'
                 },
                 {
@@ -502,6 +503,7 @@ wanted to choose.''',
                     'python_name_with_default': 'turtle_type',
                     'python_name_with_doc_default': 'turtle_type',
                     'is_repeated_capability': False,
+                    'is_session_handle': False,
                     'library_method_call_snippet': 'turtle_type'
                 },
                 {
@@ -525,6 +527,7 @@ wanted to choose.''',
                     'python_name_with_default': 'turtleId',
                     'python_name_with_doc_default': 'turtleId',
                     'is_repeated_capability': False,
+                    'is_session_handle': False,
                     'library_method_call_snippet': 'ctypes.pointer(turtleId_ctype)'
                 }
             ],

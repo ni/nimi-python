@@ -39,9 +39,6 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViReal64']['attributeValue'] = None
-        self._defaults['GetAttributeViSession'] = {}
-        self._defaults['GetAttributeViSession']['return'] = 0
-        self._defaults['GetAttributeViSession']['attributeValue'] = None
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['attributeValue'] = None
@@ -80,8 +77,6 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViInt32']['return'] = 0
         self._defaults['SetAttributeViReal64'] = {}
         self._defaults['SetAttributeViReal64']['return'] = 0
-        self._defaults['SetAttributeViSession'] = {}
-        self._defaults['SetAttributeViSession']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['SimpleFunction'] = {}
@@ -172,14 +167,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetAttributeViReal64", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
         return self._defaults['GetAttributeViReal64']['return']
-
-    def niFake_GetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeViSession']['return'] != 0:
-            return self._defaults['GetAttributeViSession']['return']
-        if self._defaults['GetAttributeViSession']['attributeValue'] is None:
-            raise MockFunctionCallError("niFake_GetAttributeViSession", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViSession']['attributeValue']
-        return self._defaults['GetAttributeViSession']['return']
 
     def niFake_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
@@ -290,11 +277,6 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViReal64']['return']
         return self._defaults['SetAttributeViReal64']['return']
 
-    def niFake_SetAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['SetAttributeViSession']['return'] != 0:
-            return self._defaults['SetAttributeViSession']['return']
-        return self._defaults['SetAttributeViSession']['return']
-
     def niFake_SetAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['SetAttributeViString']['return'] != 0:
             return self._defaults['SetAttributeViString']['return']
@@ -353,8 +335,6 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetAttributeViInt32.return_value = 0
         mock_library.niFake_GetAttributeViReal64.side_effect = MockFunctionCallError("niFake_GetAttributeViReal64")
         mock_library.niFake_GetAttributeViReal64.return_value = 0
-        mock_library.niFake_GetAttributeViSession.side_effect = MockFunctionCallError("niFake_GetAttributeViSession")
-        mock_library.niFake_GetAttributeViSession.return_value = 0
         mock_library.niFake_GetAttributeViString.side_effect = MockFunctionCallError("niFake_GetAttributeViString")
         mock_library.niFake_GetAttributeViString.return_value = 0
         mock_library.niFake_GetEnumValue.side_effect = MockFunctionCallError("niFake_GetEnumValue")
@@ -381,8 +361,6 @@ class SideEffectsHelper(object):
         mock_library.niFake_SetAttributeViInt32.return_value = 0
         mock_library.niFake_SetAttributeViReal64.side_effect = MockFunctionCallError("niFake_SetAttributeViReal64")
         mock_library.niFake_SetAttributeViReal64.return_value = 0
-        mock_library.niFake_SetAttributeViSession.side_effect = MockFunctionCallError("niFake_SetAttributeViSession")
-        mock_library.niFake_SetAttributeViSession.return_value = 0
         mock_library.niFake_SetAttributeViString.side_effect = MockFunctionCallError("niFake_SetAttributeViString")
         mock_library.niFake_SetAttributeViString.return_value = 0
         mock_library.niFake_SimpleFunction.side_effect = MockFunctionCallError("niFake_SimpleFunction")
