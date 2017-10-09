@@ -61,6 +61,9 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['attributeValue'] = None
+        self._defaults['GetChannelName'] = {}
+        self._defaults['GetChannelName']['return'] = 0
+        self._defaults['GetChannelName']['channelName'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['Code'] = None
@@ -276,6 +279,16 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
+
+    def niDCPower_GetChannelName(self, vi, index, buffer_size, channel_name):  # noqa: N802
+        if self._defaults['GetChannelName']['return'] != 0:
+            return self._defaults['GetChannelName']['return']
+        if self._defaults['GetChannelName']['channelName'] is None:
+            raise MockFunctionCallError("niDCPower_GetChannelName", param='channelName')
+        if buffer_size == 0:
+            return len(self._defaults['GetChannelName']['channelName'])
+        channel_name.value = self._defaults['GetChannelName']['channelName'].encode('ascii')
+        return self._defaults['GetChannelName']['return']
 
     def niDCPower_GetError(self, vi, code, buffer_size, description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
@@ -540,6 +553,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_GetAttributeViReal64.return_value = 0
         mock_library.niDCPower_GetAttributeViString.side_effect = MockFunctionCallError("niDCPower_GetAttributeViString")
         mock_library.niDCPower_GetAttributeViString.return_value = 0
+        mock_library.niDCPower_GetChannelName.side_effect = MockFunctionCallError("niDCPower_GetChannelName")
+        mock_library.niDCPower_GetChannelName.return_value = 0
         mock_library.niDCPower_GetError.side_effect = MockFunctionCallError("niDCPower_GetError")
         mock_library.niDCPower_GetError.return_value = 0
         mock_library.niDCPower_GetSelfCalLastDateAndTime.side_effect = MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime")
