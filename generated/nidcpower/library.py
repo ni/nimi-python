@@ -35,6 +35,7 @@ class Library(object):
         self.niDCPower_GetAttributeViInt64_cfunc = None
         self.niDCPower_GetAttributeViReal64_cfunc = None
         self.niDCPower_GetAttributeViString_cfunc = None
+        self.niDCPower_GetChannelName_cfunc = None
         self.niDCPower_GetError_cfunc = None
         self.niDCPower_GetSelfCalLastDateAndTime_cfunc = None
         self.niDCPower_GetSelfCalLastTemp_cfunc = None
@@ -221,6 +222,14 @@ class Library(object):
                 self.niDCPower_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
+
+    def niDCPower_GetChannelName(self, vi, index, buffer_size, channel_name):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetChannelName_cfunc is None:
+                self.niDCPower_GetChannelName_cfunc = self._library.niDCPower_GetChannelName
+                self.niDCPower_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetChannelName_cfunc(vi, index, buffer_size, channel_name)
 
     def niDCPower_GetError(self, vi, code, buffer_size, description):  # noqa: N802
         with self._func_lock:
