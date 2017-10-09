@@ -586,6 +586,25 @@ class TestSession(object):
     '''
 
     '''
+    Unit testing does not properly handle passed in or fixed strings. Re-add when #392 is fixed
+    def test_get_error_description_error_message(self):
+        test_error_code = -42
+        test_error_desc = "The answer to the ultimate question"
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = -1
+        self.side_effects_helper['GetError']['description'] = "Shouldn't get this"
+        self.side_effects_helper['GetError']['return'] = -2
+        self.patched_library.niFake_error_message.side_effect = self.side_effects_helper.niFake_error_message
+        self.side_effects_helper['error_message']['errorMessage'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            error_desc = session.get_error_description(test_error_code)
+            assert error_desc == test_error_desc
+        from mock import call
+        calls = [call(SESSION_NUM_FOR_TEST, test_error_code, 0, None), call(SESSION_NUM_FOR_TEST, len(test_error_desc), len(test_error_desc), ANY)]
+        self.patched_library.niFake_error_message.assert_has_calls(calls)
+    '''
+
+    '''
     # TODO(bhaswath): Enable test once issue 320 is fixed
     def test_read_with_warning(self):
         test_maximum_time = 10
@@ -604,23 +623,4 @@ class TestSession(object):
                 assert len(w) == 1
                 assert issubclass(w[0].category, nifake.NifakeWarning)
                 assert test_error_desc in str(w[0].message)
-    '''
-
-    '''
-    Unit testing does not properly handle passed in or fixed strings. Re-add when #392 is fixed
-    def test_get_error_description_error_message(self):
-        test_error_code = -42
-        test_error_desc = "The answer to the ultimate question"
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = -1
-        self.side_effects_helper['GetError']['description'] = "Shouldn't get this"
-        self.side_effects_helper['GetError']['return'] = -2
-        self.patched_library.niFake_error_message.side_effect = self.side_effects_helper.niFake_error_message
-        self.side_effects_helper['error_message']['errorMessage'] = test_error_desc
-        with nifake.Session('dev1') as session:
-            error_desc = session.get_error_description(test_error_code)
-            assert error_desc == test_error_desc
-        from mock import call
-        calls = [call(SESSION_NUM_FOR_TEST, test_error_code, 0, None), call(SESSION_NUM_FOR_TEST, len(test_error_desc), len(test_error_desc), ANY)]
-        self.patched_library.niFake_error_message.assert_has_calls(calls)
     '''
