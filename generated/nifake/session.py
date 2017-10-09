@@ -316,15 +316,16 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def array_input_function(self, a_array):
+    def array_input_function(self, buffer_size, a_array):
         '''array_input_function
 
         This function takes one parameter other than the session.
 
         Args:
+            buffer_size (int): Buffersize of the array.
             a_array (list of float): Contains an array of float numbers
         '''
-        error_code = self._library.niFake_ArrayInputFunction(self._vi, a_array)
+        error_code = self._library.niFake_ArrayInputFunction(self._vi, buffer_size, a_array)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
