@@ -573,7 +573,7 @@ def test_get_function_rst():
 
     Returns the **ID** of selected Turtle Type.
 
-
+    
 
     .. note:: The RAPHAEL Turtles dont have an ID.
 
@@ -604,7 +604,7 @@ def test_get_function_rst():
 
             Returns the **ID** of selected turtle.
 
-
+            
 ''' # noqa
     assert actual_function_rst == expected_fuction_rst
 
