@@ -874,9 +874,6 @@ class _SessionBase(object):
         invalid.
 
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -919,9 +916,6 @@ class _SessionBase(object):
         invalid.
 
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -964,9 +958,6 @@ class _SessionBase(object):
         invalid.
 
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -1021,9 +1012,6 @@ class _SessionBase(object):
         a negative number for the Array Size parameter.
 
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -1085,9 +1073,6 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -1141,9 +1126,6 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -1197,9 +1179,6 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -1253,9 +1232,6 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available

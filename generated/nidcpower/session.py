@@ -2517,14 +2517,6 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your
                 device in the *NI DC Power Supplies and SMUs Help* for more information.
             units (int): Specifies the units for **apertureTime**.
@@ -2571,14 +2563,6 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             timeout (float): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
@@ -2619,14 +2603,6 @@ class _SessionBase(object):
           attributes and inherent IVI attributes.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -2671,14 +2647,6 @@ class _SessionBase(object):
           attributes and inherent IVI attributes.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -2723,14 +2691,6 @@ class _SessionBase(object):
           attributes and inherent IVI attributes.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -2775,14 +2735,6 @@ class _SessionBase(object):
           attributes and inherent IVI attributes.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -2827,14 +2779,6 @@ class _SessionBase(object):
           attributes and inherent IVI attributes.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -2925,10 +2869,6 @@ class _SessionBase(object):
         function.
 
         Args:
-            channel_name (string): Specifies the output channel to measure. Only one measurement at a time
-                may be made with the measure function. Use the
-                `measure_multiple <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_MeasureMultiple.html')>`__
-                function to measure multiple channels.
             measurement_type (int): Specifies whether a voltage or current value is measured.
                 **Defined Values**:
 
@@ -2959,15 +2899,6 @@ class _SessionBase(object):
         function calls until the measurements are returned from the device. The
         order of the measurements returned in the array corresponds to the order
         on the specified output channel(s).
-
-        Args:
-            channel_name (string): Specifies the output channels to measure. You can specify multiple
-                channels by using a channel list or a channel range. A channel list is a
-                comma (,) separated sequence of channel names (e.g. 0,2 specifies
-                channels 0 and 2). A channel range is a lower bound channel followed by
-                a hyphen (-) or colon (:) followed by an upper bound channel (e.g. 0-2
-                specifies channels 0, 1, and 2). If you do not specify a channel name,
-                the function uses all channels in the session.
 
         Returns:
             voltage_measurements (list of float): Returns an array of voltage measurements. The measurements in the array
@@ -3019,10 +2950,6 @@ class _SessionBase(object):
 
         `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
 
-        Args:
-            channel_name (string): Specifies the output channel to query. Compliance status can only be
-                queried for one channel at a time.
-
         Returns:
             in_compliance (bool): Returns whether the device output channel is in compliance.
         '''
@@ -3041,8 +2968,6 @@ class _SessionBase(object):
         channel is set to the specified **voltageLevel**.
 
         Args:
-            channel_name (string): Specifies the output channel to query. The maximum current limit may
-                only be queried for one channel at a time.
             voltage_level (float): Specifies the voltage level to use when calculating the
                 **maxCurrentLimit**.
 
@@ -3065,8 +2990,6 @@ class _SessionBase(object):
         channel is set to the specified **currentLimit**.
 
         Args:
-            channel_name (string): Specifies the output channel to query. The maximum voltage level may
-                only be queried for one channel at a time.
             current_limit (float): Specifies the current limit to use when calculating the
                 **maxVoltageLevel**.
 
@@ -3089,8 +3012,6 @@ class _SessionBase(object):
         channel is set to the specified **voltageLevel**.
 
         Args:
-            channel_name (string): Specifies the output channel to query. The minimum current limit may
-                only be queried for one channel at a time.
             voltage_level (float): Specifies the voltage level to use when calculating the
                 **minCurrentLimit**.
 
@@ -3117,8 +3038,6 @@ class _SessionBase(object):
         `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
 
         Args:
-            channel_name (string): Specifies the output channel to query. The output state may only be
-                queried for one channel at a time.
             output_state (int): Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
@@ -3148,14 +3067,6 @@ class _SessionBase(object):
           device-specific attributes and inherent IVI attributes.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -3202,14 +3113,6 @@ class _SessionBase(object):
           device-specific attributes and inherent IVI attributes.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -3256,14 +3159,6 @@ class _SessionBase(object):
           device-specific attributes and inherent IVI attributes.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -3310,14 +3205,6 @@ class _SessionBase(object):
           device-specific attributes and inherent IVI attributes.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -3364,14 +3251,6 @@ class _SessionBase(object):
           device-specific attributes and inherent IVI attributes.
 
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -3436,8 +3315,6 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Args:
-            channel_name (string): Specifies the output channel to which this configuration value applies.
-                You can only set a sequence for one channel at a time.
             values (list of float): Specifies the series of voltage levels or current levels, depending on
                 the configured `output
                 function <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programming_output/>`__.

@@ -96,7 +96,6 @@ class _SessionBase(object):
         Queries the value of a ViBoolean attribute.
 
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -113,7 +112,6 @@ class _SessionBase(object):
         Queries the value of a ViInt32 attribute.
 
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -130,7 +128,6 @@ class _SessionBase(object):
         Queries the value of a ViReal attribute.
 
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -147,7 +144,6 @@ class _SessionBase(object):
         Queries the value of a ViBoolean attribute.
 
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
             buffer_size (int): Number of bytes in attributeValue. You can IVI-dance with this.
         '''
@@ -167,7 +163,6 @@ class _SessionBase(object):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             maximum_time (int): Specifies the **maximum_time** allowed in years.
 
         Returns:
@@ -184,7 +179,6 @@ class _SessionBase(object):
         This function sets the value of a ViBoolean attribute.
 
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (bool): Pass the value that you want to set the attribute to.
         '''
@@ -198,7 +192,6 @@ class _SessionBase(object):
         This function sets the value of a ViInt32 attribute.
 
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (int): Pass the value that you want to set the attribute to.
         '''
@@ -212,7 +205,6 @@ class _SessionBase(object):
         This function sets the value of a ViReal64 attribute.
 
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (float): Pass the value that you want to set the attribute to.
         '''
@@ -226,7 +218,6 @@ class _SessionBase(object):
         This function sets the value of a ViString attribute.
 
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (string): Pass the value that you want to set the attribute to.
         '''

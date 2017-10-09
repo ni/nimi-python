@@ -820,12 +820,6 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -852,12 +846,6 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -884,12 +872,6 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -919,12 +901,6 @@ class _SessionBase(object):
            parameter.
 
         Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
             attribute_id (int): Pass the ID of an attribute.
             buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
                 **Attribute_Value** parameter.
@@ -981,12 +957,6 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (bool): Pass the value that you want to set the attribute to.
         '''
@@ -1024,12 +994,6 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (int): Pass the value that you want to set the attribute to.
         '''
@@ -1067,12 +1031,6 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (float): Pass the value that you want to set the attribute to.
         '''
@@ -1110,12 +1068,6 @@ class _SessionBase(object):
         high-level functions without the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
-
-                The default value is " " (an empty string).
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (string): Pass the value that you want to set the attribute to.
         '''

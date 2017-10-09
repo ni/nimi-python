@@ -56,21 +56,6 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    :param channel_name:
-
-
-        Specifies the output channel(s) to which this configuration value
-        applies. Specify multiple channels by using a channel list or a channel
-        range. A channel list is a comma (,) separated sequence of channel names
-        (for example, 0,2 specifies channels 0 and 2). A channel range is a
-        lower bound channel followed by a hyphen (-) or colon (:) followed by an
-        upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-        In the Running state, multiple output channel configurations are
-        performed sequentially based on the order specified in this parameter.
-
-        
-
-    :type channel_name: string
     :param aperture_time:
 
 
@@ -731,21 +716,6 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    :param channel_name:
-
-
-        Specifies the output channel(s) to which this configuration value
-        applies. Specify multiple channels by using a channel list or a channel
-        range. A channel list is a comma (,) separated sequence of channel names
-        (for example, 0,2 specifies channels 0 and 2). A channel range is a
-        lower bound channel followed by a hyphen (-) or colon (:) followed by an
-        upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-        In the Running state, multiple output channel configurations are
-        performed sequentially based on the order specified in this parameter.
-
-        
-
-    :type channel_name: string
     :param timeout:
 
 
@@ -958,17 +928,6 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
-
-
-        Specifies the output channel to measure. Only one measurement at a time
-        may be made with the :py:func:`nidcpower.measure` function. Use the
-        `:py:func:`nidcpower.measure_multiple` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_MeasureMultiple.html')>`__
-        function to measure multiple channels.
-
-        
-
-    :type channel_name: string
     :param measurement_type:
 
 
@@ -1007,21 +966,6 @@ nidcpower.Session methods
 
     
 
-
-    :param channel_name:
-
-
-        Specifies the output channels to measure. You can specify multiple
-        channels by using a channel list or a channel range. A channel list is a
-        comma (,) separated sequence of channel names (e.g. 0,2 specifies
-        channels 0 and 2). A channel range is a lower bound channel followed by
-        a hyphen (-) or colon (:) followed by an upper bound channel (e.g. 0-2
-        specifies channels 0, 1, and 2). If you do not specify a channel name,
-        the function uses all channels in the session.
-
-        
-
-    :type channel_name: string
 
     :rtype: tuple (voltage_measurements, current_measurements)
 
@@ -1084,16 +1028,6 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
-
-
-        Specifies the output channel to query. Compliance status can only be
-        queried for one channel at a time.
-
-        
-
-    :type channel_name: string
-
     :rtype: bool
     :return:
 
@@ -1114,15 +1048,6 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
-
-
-        Specifies the output channel to query. The maximum current limit may
-        only be queried for one channel at a time.
-
-        
-
-    :type channel_name: string
     :param voltage_level:
 
 
@@ -1154,15 +1079,6 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
-
-
-        Specifies the output channel to query. The maximum voltage level may
-        only be queried for one channel at a time.
-
-        
-
-    :type channel_name: string
     :param current_limit:
 
 
@@ -1194,15 +1110,6 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
-
-
-        Specifies the output channel to query. The minimum current limit may
-        only be queried for one channel at a time.
-
-        
-
-    :type channel_name: string
     :param voltage_level:
 
 
@@ -1238,15 +1145,6 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
-
-
-        Specifies the output channel to query. The output state may only be
-        queried for one channel at a time.
-
-        
-
-    :type channel_name: string
     :param output_state:
 
 
@@ -1397,15 +1295,6 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    :param channel_name:
-
-
-        Specifies the output channel to which this configuration value applies.
-        You can only set a sequence for one channel at a time.
-
-        
-
-    :type channel_name: string
     :param values:
 
 

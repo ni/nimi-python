@@ -171,10 +171,6 @@ class Session(object):
         Cleans up the NI-ModInst session created by a call to
         _open_installed_devices_session. Call this function when you are
         finished using the session handle and do not use this handle again.
-
-        Args:
-            handle (int): The NI-ModInst session handle created by
-                _open_installed_devices_session.
         '''
         error_code = self._library.niModInst_CloseInstalledDevicesSession(self._handle)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -228,8 +224,6 @@ class Session(object):
         the list for which you want the attribute.
 
         Args:
-            handle (int): The NI-ModInst session handle created by
-                _open_installed_devices_session.
             index (int): A zero-based index that specifies the device for which you want the
                 attribute. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
@@ -273,8 +267,6 @@ class Session(object):
         buffer and call this function again.
 
         Args:
-            handle (int): The NI-ModInst session handle created by
-                _open_installed_devices_session.
             index (int): A zero-based index that specifies the device for which you want the
                 attribute. This index parameter should be between 0 and (deviceCount -
                 1), inclusive, where deviceCount is the number of installed devices
