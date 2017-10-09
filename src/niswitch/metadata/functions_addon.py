@@ -25,6 +25,7 @@ functions_codegen_method = {
     'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
     'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
     'error_query':                     { 'codegen_method': 'no',       },
+    'revision_query':                  { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -58,8 +59,6 @@ functions_enums = {
 functions_buffer_info = {
     'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'BufferSize'}, }, }, },
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'revision_query':               { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, },       # From documentation
-                                                      2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI
     'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'arraySize'}, }, }, },
     'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
