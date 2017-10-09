@@ -1264,6 +1264,15 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
+                'name': 'bufferSize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Buffersize of the array.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
                 'is_buffer': True,
                 'name': 'aArray',
                 'type': 'ViReal64',
