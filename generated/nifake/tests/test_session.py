@@ -483,7 +483,7 @@ class TestSession(object):
 
     # Error descriptions
     '''
-    Unit testing does not properly handle passed in or fixed strings. Re-add when #392 is fixed
+    Unit testing does not properly handle passed in or fixed strings. Re-add when #429 is fixed
     def test_get_error_description_error_message(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
@@ -583,3 +583,9 @@ class TestSession(object):
             self.patched_library.niFake_ReadMultiPoint.assert_has_calls(calls)
             assert self.patched_library.niFake_ReadMultiPoint.call_count == 1
 
+    def test_array_input_function(self):
+        test_array = [1, 2, 3, 4]
+        self.patched_library.niFake_ArrayInputFunction.side_effect = self.side_effects_helper.niFake_ArrayInputFunction
+        with nifake.Session('dev1') as session:
+            session.array_input_function(test_array)
+            self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array)

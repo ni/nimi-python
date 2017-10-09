@@ -316,6 +316,18 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def array_input_function(self, a_array):
+        '''array_input_function
+
+        This function takes one parameter other than the session.
+
+        Args:
+            a_array (list of float): Contains an array of float numbers
+        '''
+        error_code = self._library.niFake_ArrayInputFunction(self._vi, a_array)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
         '''enum_input_function_with_defaults
 

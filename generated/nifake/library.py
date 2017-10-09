@@ -17,6 +17,7 @@ class Library(object):
         self._func_lock = threading.Lock()
         # We cache the cfunc object from the ctypes.CDLL object
         self.niFake_Abort_cfunc = None
+        self.niFake_ArrayInputFunction_cfunc = None
         self.niFake_EnumInputFunctionWithDefaults_cfunc = None
         self.niFake_GetABoolean_cfunc = None
         self.niFake_GetANumber_cfunc = None
@@ -60,6 +61,14 @@ class Library(object):
                 self.niFake_Abort_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFake_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Abort_cfunc(vi)
+
+    def niFake_ArrayInputFunction(self, vi, a_array):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ArrayInputFunction_cfunc is None:
+                self.niFake_ArrayInputFunction_cfunc = self._library.niFake_ArrayInputFunction
+                self.niFake_ArrayInputFunction_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_ArrayInputFunction_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_ArrayInputFunction_cfunc(vi, a_array)
 
     def niFake_EnumInputFunctionWithDefaults(self, vi, a_turtle):  # noqa: N802
         with self._func_lock:
