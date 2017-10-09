@@ -35,7 +35,6 @@ _parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
-    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name_with_default',
     'skip_repeated_capability_parameter': True,
 }
@@ -46,7 +45,6 @@ _parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
-    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': True,
 }
@@ -57,7 +55,6 @@ _parameterUsageOptions[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_output_parameters': True,
     'skip_ivi_dance_size_parameter': True,
     'reordered_for_default_values': True,
-    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name_with_doc_default',
     'skip_repeated_capability_parameter': True,
 }
@@ -68,7 +65,6 @@ _parameterUsageOptions[ParameterUsageOptions.CTYPES_CALL] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
-    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': False,
 }
@@ -79,7 +75,6 @@ _parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
-    'session_handle_parameter_name': 'vi',
     'name_to_use': 'library_method_call_snippet',
     'skip_repeated_capability_parameter': False,
 }
@@ -90,7 +85,6 @@ _parameterUsageOptions[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
-    'session_handle_parameter_name': 'vi',
     'name_to_use': 'ctypes_type_library_call',
     'skip_repeated_capability_parameter': False,
 }
@@ -101,7 +95,6 @@ _parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
     'skip_output_parameters': False,
     'skip_ivi_dance_size_parameter': False,
     'reordered_for_default_values': False,
-    'session_handle_parameter_name': 'vi',
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': False,
 }
@@ -134,9 +127,9 @@ def filter_parameters(function, parameter_usage_options, options_override={}):
             skip = True
         if x == ivi_dance_size_parameter and options_to_use['skip_ivi_dance_size_parameter']:
             skip = True
-        if x['name'] == options_to_use['session_handle_parameter_name'] and options_to_use['skip_session_handle']:
+        if x['is_session_handle'] is True and options_to_use['skip_session_handle']:
             skip = True
-        if x['is_repeated_capability'] and options_to_use['skip_repeated_capability_parameter']:
+        if x['is_repeated_capability'] is True and options_to_use['skip_repeated_capability_parameter']:
             skip = True
         if not skip:
             parameters_to_use.append(x)
