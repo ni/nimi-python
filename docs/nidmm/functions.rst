@@ -1334,39 +1334,6 @@ nidmm.Session methods
     
 
 
-.. function:: revision_query()
-
-    Returns the revision numbers of the instrument driver and instrument
-    firmware.
-
-    
-
-
-    :rtype: tuple (instrument_driver_revision, firmware_revision)
-
-        WHERE
-
-        instrument_driver_revision (string): 
-
-
-            Returns a string containing the instrument driver software revision
-            numbers.
-
-            
-
-            .. note:: The array must contain at least 256 elements ViChar[256].
-
-        firmware_revision (string): 
-
-
-            Returns a string containing the instrument **firmware\_revision**
-            numbers.
-
-            
-
-            .. note:: The array must contain at least 256 elements ViChar[256].
-
-
 .. function:: self_test()
 
     Performs a self-test on the DMM to ensure that the DMM is functioning

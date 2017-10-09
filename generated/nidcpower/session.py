@@ -4509,25 +4509,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def revision_query(self):
-        '''revision_query
-
-        Vistatus revision_query(ViSession vi, ViChar
-        instrumentDriverRevision[], ViChar firmwareRevision[]);
-
-        Returns the revision information of NI-DCPower and the device firmware.
-
-        Returns:
-            instrument_driver_revision (string): Returns the driver revision information for NI-DCPower.
-            firmware_revision (string): Returns firmware revision information for the device you are using. The
-                size of this array must be at least 256 bytes.
-        '''
-        instrument_driver_revision_ctype = (visatype.ViChar * 256)()
-        firmware_revision_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niDCPower_revision_query(self._vi, instrument_driver_revision_ctype, firmware_revision_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return instrument_driver_revision_ctype.value.decode(self._encoding), firmware_revision_ctype.value.decode(self._encoding)
-
     def self_test(self):
         '''self_test
 

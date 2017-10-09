@@ -1511,36 +1511,6 @@ nidcpower.Session methods
     
 
 
-.. function:: revision_query()
-
-    Vistatus :py:func:`nidcpower.revision_query`(ViSession vi, ViChar
-    instrumentDriverRevision[], ViChar firmwareRevision[]);
-
-    Returns the revision information of NI-DCPower and the device firmware.
-
-    
-
-
-    :rtype: tuple (instrument_driver_revision, firmware_revision)
-
-        WHERE
-
-        instrument_driver_revision (string): 
-
-
-            Returns the driver revision information for NI-DCPower.
-
-            
-
-        firmware_revision (string): 
-
-
-            Returns firmware revision information for the device you are using. The
-            size of this array must be at least 256 bytes.
-
-            
-
-
 .. function:: self_test()
 
     Vistatus :py:func:`nidcpower.self_test`(ViSession vi, ViInt16 \*selfTestResult,

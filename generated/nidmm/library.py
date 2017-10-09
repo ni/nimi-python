@@ -64,7 +64,6 @@ class Library(object):
         self.niDMM_close_cfunc = None
         self.niDMM_error_message_cfunc = None
         self.niDMM_reset_cfunc = None
-        self.niDMM_revision_query_cfunc = None
         self.niDMM_self_test_cfunc = None
 
         if library_type == 'windll':
@@ -456,14 +455,6 @@ class Library(object):
                 self.niDMM_reset_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDMM_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_reset_cfunc(vi)
-
-    def niDMM_revision_query(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_revision_query_cfunc is None:
-                self.niDMM_revision_query_cfunc = self._library.niDMM_revision_query
-                self.niDMM_revision_query_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDMM_revision_query_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_revision_query_cfunc(vi, instrument_driver_revision, firmware_revision)
 
     def niDMM_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:

@@ -2308,22 +2308,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def revision_query(self):
-        '''revision_query
-
-        Returns the revision of the NI-SWITCH driver.
-
-        Returns:
-            instrument_driver_revision (string): NI-SWITCH software revision numbers in the form of a string. You must
-                pass a ViChar array with at least 256 bytes.
-            firmware_revision (string): Currently unsupported.
-        '''
-        instrument_driver_revision_ctype = (visatype.ViChar * 256)()
-        firmware_revision_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niSwitch_revision_query(self._vi, instrument_driver_revision_ctype, firmware_revision_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return instrument_driver_revision_ctype.value.decode(self._encoding), firmware_revision_ctype.value.decode(self._encoding)
-
     def self_test(self):
         '''self_test
 

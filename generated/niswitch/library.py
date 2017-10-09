@@ -57,7 +57,6 @@ class Library(object):
         self.niSwitch_close_cfunc = None
         self.niSwitch_error_message_cfunc = None
         self.niSwitch_reset_cfunc = None
-        self.niSwitch_revision_query_cfunc = None
         self.niSwitch_self_test_cfunc = None
 
         if library_type == 'windll':
@@ -393,14 +392,6 @@ class Library(object):
                 self.niSwitch_reset_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niSwitch_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_reset_cfunc(vi)
-
-    def niSwitch_revision_query(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
-        with self._func_lock:
-            if self.niSwitch_revision_query_cfunc is None:
-                self.niSwitch_revision_query_cfunc = self._library.niSwitch_revision_query
-                self.niSwitch_revision_query_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niSwitch_revision_query_cfunc.restype = ViStatus  # noqa: F405
-        return self.niSwitch_revision_query_cfunc(vi, instrument_driver_revision, firmware_revision)
 
     def niSwitch_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:
