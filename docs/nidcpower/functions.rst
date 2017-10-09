@@ -475,7 +475,7 @@ nidcpower.Session methods
         | :py:data:`nidcpower.TRANSIENT\_RESPONSE`              | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
         +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
 
-    :type attribute_ids: string
+    :type attribute_ids: list of int
     :param set_as_active_sequence:
 
 
@@ -725,7 +725,7 @@ nidcpower.Session methods
 
         WHERE
 
-        voltage_measurements (string): 
+        voltage_measurements (list of float): 
 
 
             Returns an array of voltage measurements. Ensure that sufficient space
@@ -733,7 +733,7 @@ nidcpower.Session methods
 
             
 
-        current_measurements (string): 
+        current_measurements (list of float): 
 
 
             Returns an array of current measurements. Ensure that sufficient space
@@ -741,7 +741,7 @@ nidcpower.Session methods
 
             
 
-        in_compliance (string): 
+        in_compliance (list of bool): 
 
 
             Returns an array of Boolean values indicating whether the output was in
@@ -959,7 +959,7 @@ nidcpower.Session methods
 
         WHERE
 
-        voltage_measurements (string): 
+        voltage_measurements (list of float): 
 
 
             Returns an array of voltage measurements. The measurements in the array
@@ -969,7 +969,7 @@ nidcpower.Session methods
 
             
 
-        current_measurements (string): 
+        current_measurements (list of float): 
 
 
             Returns an array of current measurements. The measurements in the array
@@ -1314,7 +1314,7 @@ nidcpower.Session methods
 
         
 
-    :type values: string
+    :type values: list of float
     :param source_delays:
 
 
@@ -1325,7 +1325,7 @@ nidcpower.Session methods
 
         
 
-    :type source_delays: string
+    :type source_delays: list of float
     :param size:
 
 

@@ -2578,23 +2578,23 @@ class _SessionBase(object):
             count (int): Specifies the number of measurements to fetch.
 
         Returns:
-            voltage_measurements (string): Returns an array of voltage measurements. Ensure that sufficient space
+            voltage_measurements (list of float): Returns an array of voltage measurements. Ensure that sufficient space
                 has been allocated for the returned array.
-            current_measurements (string): Returns an array of current measurements. Ensure that sufficient space
+            current_measurements (list of float): Returns an array of current measurements. Ensure that sufficient space
                 has been allocated for the returned array.
-            in_compliance (string): Returns an array of Boolean values indicating whether the output was in
+            in_compliance (list of bool): Returns an array of Boolean values indicating whether the output was in
                 compliance at the time the measurement was taken. Ensure that sufficient
                 space has been allocated for the returned array.
             actual_count (int): Indicates the number of measured values actually retrieved from the
                 device.
         '''
-        voltage_measurements_ctype = (visatype.ViChar * 1)()
-        current_measurements_ctype = (visatype.ViChar * 1)()
-        in_compliance_ctype = (visatype.ViChar * 1)()
+        voltage_measurements_ctype = (visatype.ViReal64 * 1)()
+        current_measurements_ctype = (visatype.ViReal64 * 1)()
+        in_compliance_ctype = (visatype.ViBoolean * 1)()
         actual_count_ctype = visatype.ViInt32(0)
         error_code = self._library.niDCPower_FetchMultiple(self._vi, self._repeated_capability.encode(self._encoding), timeout, count, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, ctypes.pointer(actual_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return voltage_measurements_ctype.value.decode(self._encoding), current_measurements_ctype.value.decode(self._encoding), in_compliance_ctype.value.decode(self._encoding), int(actual_count_ctype.value)
+        return [voltage_measurements_ctype[i] for i in range(1)], [current_measurements_ctype[i] for i in range(1)], [in_compliance_ctype[i] for i in range(1)], int(actual_count_ctype.value)
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
@@ -2930,20 +2930,20 @@ class _SessionBase(object):
                 the function uses all channels in the session.
 
         Returns:
-            voltage_measurements (string): Returns an array of voltage measurements. The measurements in the array
+            voltage_measurements (list of float): Returns an array of voltage measurements. The measurements in the array
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
-            current_measurements (string): Returns an array of current measurements. The measurements in the array
+            current_measurements (list of float): Returns an array of current measurements. The measurements in the array
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
         '''
-        voltage_measurements_ctype = (visatype.ViChar * 1)()
-        current_measurements_ctype = (visatype.ViChar * 1)()
+        voltage_measurements_ctype = (visatype.ViReal64 * 1)()
+        current_measurements_ctype = (visatype.ViReal64 * 1)()
         error_code = self._library.niDCPower_MeasureMultiple(self._vi, self._repeated_capability.encode(self._encoding), voltage_measurements_ctype, current_measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return voltage_measurements_ctype.value.decode(self._encoding), current_measurements_ctype.value.decode(self._encoding)
+        return [voltage_measurements_ctype[i] for i in range(1)], [current_measurements_ctype[i] for i in range(1)]
 
     def query_in_compliance(self):
         '''query_in_compliance
@@ -3358,20 +3358,20 @@ class _SessionBase(object):
         Args:
             channel_name (string): Specifies the output channel to which this configuration value applies.
                 You can only set a sequence for one channel at a time.
-            values (string): Specifies the series of voltage levels or current levels, depending on
+            values (list of float): Specifies the series of voltage levels or current levels, depending on
                 the configured `output
                 function <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
                 **Valid values**:
                 The valid values for this parameter are defined by the voltage level
                 range or current level range.
-            source_delays (string): Specifies the source delay that follows the configuration of each value
+            source_delays (list of float): Specifies the source delay that follows the configuration of each value
                 in the sequence.
                 **Valid Values**:
                 The valid values are between 0 and 167 seconds.
             size (int): The number of elements in the Values and the Source Delays arrays. The
                 Values and Source Delays arrays should have the same size.
         '''
-        error_code = self._library.niDCPower_SetSequence(self._vi, self._repeated_capability.encode(self._encoding), values.encode(self._encoding), source_delays.encode(self._encoding), size)
+        error_code = self._library.niDCPower_SetSequence(self._vi, self._repeated_capability.encode(self._encoding), values, source_delays, size)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3707,7 +3707,7 @@ class Session(_SessionBase):
         Args:
             sequence_name (string): Specifies the name of the sequence to create.
             attribute_id_count (int): Specifies the number of attributes in the attributeIDs array.
-            attribute_ids (string): Specifies the attributes you reconfigure per step in the advanced
+            attribute_ids (list of int): Specifies the attributes you reconfigure per step in the advanced
                 sequence. The following table lists which attributes can be configured
                 in an advanced sequence for each NI-DCPower device that supports
                 advanced sequencing. A ✓ indicates that the attribute can be configured
@@ -3799,7 +3799,7 @@ class Session(_SessionBase):
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
             set_as_active_sequence (bool): Specifies that this current sequence is active.
         '''
-        error_code = self._library.niDCPower_CreateAdvancedSequence(self._vi, sequence_name.encode(self._encoding), attribute_id_count, attribute_ids.encode(self._encoding), set_as_active_sequence)
+        error_code = self._library.niDCPower_CreateAdvancedSequence(self._vi, sequence_name.encode(self._encoding), attribute_id_count, attribute_ids, set_as_active_sequence)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

@@ -1671,18 +1671,18 @@ class Session(_SessionBase):
                 positive ViInt32. The default value is 1.
 
         Returns:
-            reading_array (string): An array of measurement values.
+            reading_array (list of float): An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        reading_array_ctype = (visatype.ViChar * array_size)()
+        reading_array_ctype = (visatype.ViReal64 * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
         error_code = self._library.niDMM_FetchMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return reading_array_ctype.value.decode(self._encoding), int(actual_number_of_points_ctype.value)
+        return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def fetch_waveform(self, array_size, maximum_time=-1):
         '''fetch_waveform
@@ -1708,15 +1708,15 @@ class Session(_SessionBase):
                 1.
 
         Returns:
-            waveform_array (string): **Waveform Array** is an array of measurement values stored in waveform
+            waveform_array (list of float): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        waveform_array_ctype = (visatype.ViChar * array_size)()
+        waveform_array_ctype = (visatype.ViReal64 * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
         error_code = self._library.niDMM_FetchWaveform(self._vi, maximum_time, array_size, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return waveform_array_ctype.value.decode(self._encoding), int(actual_number_of_points_ctype.value)
+        return [waveform_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def get_aperture_time_info(self):
         '''get_aperture_time_info
@@ -2156,18 +2156,18 @@ class Session(_SessionBase):
                 positive ViInt32. The default value is 1.
 
         Returns:
-            reading_array (string): An array of measurement values.
+            reading_array (list of float): An array of measurement values.
 
                 Note:
                 The size of the **Reading_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        reading_array_ctype = (visatype.ViChar * array_size)()
+        reading_array_ctype = (visatype.ViReal64 * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
         error_code = self._library.niDMM_ReadMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return reading_array_ctype.value.decode(self._encoding), int(actual_number_of_points_ctype.value)
+        return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def read_status(self):
         '''read_status
@@ -2236,18 +2236,18 @@ class Session(_SessionBase):
                 1.
 
         Returns:
-            waveform_array (string): An array of measurement values.
+            waveform_array (list of float): An array of measurement values.
 
                 Note:
                 The size of the **Waveform_Array** must be at least the size that you
                 specify for the **Array_Size** parameter.
             actual_number_of_points (int): Indicates the number of measured values actually retrieved from the DMM.
         '''
-        waveform_array_ctype = (visatype.ViChar * array_size)()
+        waveform_array_ctype = (visatype.ViReal64 * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
         error_code = self._library.niDMM_ReadWaveform(self._vi, maximum_time, array_size, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return waveform_array_ctype.value.decode(self._encoding), int(actual_number_of_points_ctype.value)
+        return [waveform_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def reset_with_defaults(self):
         '''reset_with_defaults

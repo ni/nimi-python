@@ -205,7 +205,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_FetchMultiPoint_cfunc is None:
                 self.niDMM_FetchMultiPoint_cfunc = self._library.niDMM_FetchMultiPoint
-                self.niDMM_FetchMultiPoint_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDMM_FetchMultiPoint_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_FetchMultiPoint_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_FetchMultiPoint_cfunc(vi, maximum_time, array_size, reading_array, actual_number_of_points)
 
@@ -213,7 +213,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_FetchWaveform_cfunc is None:
                 self.niDMM_FetchWaveform_cfunc = self._library.niDMM_FetchWaveform
-                self.niDMM_FetchWaveform_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDMM_FetchWaveform_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_FetchWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_FetchWaveform_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
 
@@ -357,7 +357,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_ReadMultiPoint_cfunc is None:
                 self.niDMM_ReadMultiPoint_cfunc = self._library.niDMM_ReadMultiPoint
-                self.niDMM_ReadMultiPoint_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDMM_ReadMultiPoint_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_ReadMultiPoint_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ReadMultiPoint_cfunc(vi, maximum_time, array_size, reading_array, actual_number_of_points)
 
@@ -373,7 +373,7 @@ class Library(object):
         with self._func_lock:
             if self.niDMM_ReadWaveform_cfunc is None:
                 self.niDMM_ReadWaveform_cfunc = self._library.niDMM_ReadWaveform
-                self.niDMM_ReadWaveform_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDMM_ReadWaveform_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_ReadWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ReadWaveform_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
 
