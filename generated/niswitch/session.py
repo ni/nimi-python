@@ -874,10 +874,10 @@ class _SessionBase(object):
         invalid.
 
         Args:
-            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 attributes. Attributes whose value cannot be set are dim. Help text is
@@ -895,7 +895,7 @@ class _SessionBase(object):
                 constants by moving to the Attribute Value control and pressing .
 
         Returns:
-            attribute_value (bool):Returns the current value of the attribute. Pass the address of a
+            attribute_value (bool): Returns the current value of the attribute. Pass the address of a
                 ViBoolean variable. From the function panel window, you can use this
                 control as follows. - If the attribute currently showing in the
                 Attribute ID ring control has constants as valid values, you can view a
@@ -919,10 +919,10 @@ class _SessionBase(object):
         invalid.
 
         Args:
-            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 attributes. Attributes whose value cannot be set are dim. Help text is
@@ -940,7 +940,7 @@ class _SessionBase(object):
                 constants by moving to the Attribute Value control and pressing .
 
         Returns:
-            attribute_value (int):Returns the current value of the attribute. Pass the address of a
+            attribute_value (int): Returns the current value of the attribute. Pass the address of a
                 ViInt32 variable. From the function panel window, you can use this
                 control as follows. - If the attribute currently showing in the
                 Attribute ID ring control has constants as valid values, you can view a
@@ -964,10 +964,10 @@ class _SessionBase(object):
         invalid.
 
         Args:
-            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 attributes. Attributes whose value cannot be set are dim. Help text is
@@ -985,7 +985,7 @@ class _SessionBase(object):
                 constants by moving to the Attribute Value control and pressing .
 
         Returns:
-            attribute_value (float):Returns the current value of the attribute. Pass the address of a
+            attribute_value (float): Returns the current value of the attribute. Pass the address of a
                 ViReal64 variable. From the function panel window, you can use this
                 control as follows. - If the attribute currently showing in the
                 Attribute ID ring control has constants as valid values, you can view a
@@ -1021,10 +1021,10 @@ class _SessionBase(object):
         a negative number for the Array Size parameter.
 
         Args:
-            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 attributes. Attributes whose value cannot be set are dim. Help text is
@@ -1040,7 +1040,7 @@ class _SessionBase(object):
                 change this ring control to a manual input box. - If the attribute in
                 this ring control has constants as valid values, you can view the
                 constants by moving to the Attribute Value control and pressing .
-            array_size (int):Pass the number of bytes in the ViChar array you specify for the
+            array_size (int): Pass the number of bytes in the ViChar array you specify for the
                 Attribute Value parameter. If the current value of the attribute,
                 including the terminating NUL byte, contains more bytes that you
                 indicate in this parameter, the function copies Array Size-1 bytes into
@@ -1085,10 +1085,10 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 attributes. Attributes whose value cannot be set are dim. Help text is
@@ -1106,7 +1106,7 @@ class _SessionBase(object):
                 a manual input box. - If the attribute in this ring control has
                 constants as valid values, you can view the constants by moving to the
                 Attribute Value control and pressing .
-            attribute_value (bool):Pass the value to which you want to set the attribute. From the function
+            attribute_value (bool): Pass the value to which you want to set the attribute. From the function
                 panel window, you can use this control as follows. - If the attribute
                 currently showing in the Attribute ID ring control has constants as
                 valid values, you can view a list of the constants by pressing on this
@@ -1141,10 +1141,10 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Args:
-            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 attributes. Attributes whose value cannot be set are dim. Help text is
@@ -1162,7 +1162,7 @@ class _SessionBase(object):
                 a manual input box. - If the attribute in this ring control has
                 constants as valid values, you can view the constants by moving to the
                 Attribute Value control and pressing .
-            attribute_value (int):Pass the value to which you want to set the attribute. From the function
+            attribute_value (int): Pass the value to which you want to set the attribute. From the function
                 panel window, you can use this control as follows. - If the attribute
                 currently showing in the Attribute ID ring control has constants as
                 valid values, you can view a list of the constants by pressing on this
@@ -1197,10 +1197,10 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 attributes. Attributes whose value cannot be set are dim. Help text is
@@ -1218,7 +1218,7 @@ class _SessionBase(object):
                 a manual input box. - If the attribute in this ring control has
                 constants as valid values, you can view the constants by moving to the
                 Attribute Value control and pressing .
-            attribute_value (float):Pass the value to which you want to set the attribute. From the function
+            attribute_value (float): Pass the value to which you want to set the attribute. From the function
                 panel window, you can use this control as follows. - If the attribute
                 currently showing in the Attribute ID ring control has constants as
                 valid values, you can view a list of the constants by pressing on this
@@ -1253,10 +1253,10 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Args:
-            channel_name (int):Some attributes are unique per channel. For these, pass the name of the
+            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
                 channel. Other attributes are unique per switch device. Pass VI_NULL or
                 an empty string for this parameter. Default Value: ""
-            attribute_id (int):Pass the ID of an attribute. From the function panel window, you can use
+            attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 attributes. Attributes whose value cannot be set are dim. Help text is
@@ -1274,7 +1274,7 @@ class _SessionBase(object):
                 a manual input box. - If the attribute in this ring control has
                 constants as valid values, you can view the constants by moving to the
                 Attribute Value control and pressing .
-            attribute_value (int):Pass the value to which you want to set the attribute. From the function
+            attribute_value (string): Pass the value to which you want to set the attribute. From the function
                 panel window, you can use this control as follows. - If the attribute
                 currently showing in the Attribute ID ring control has constants as
                 valid values, you can view a list of the constants by pressing on this
@@ -1349,17 +1349,17 @@ class Session(_SessionBase):
         returned.
 
         Args:
-            channel1 (int):Input one of the channel names of the desired path. Pass the other
+            channel1 (string): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
-            channel2 (int):Input one of the channel names of the desired path. Pass the other
+            channel2 (string): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
 
         Returns:
-            path_capability (enums.PathCapability):Indicates whether a path is valid. Possible values include:
+            path_capability (enums.PathCapability): Indicates whether a path is valid. Possible values include:
                 ------------------------------------ NISWITCH_VAL_PATH_AVAILABLE 1
                 NISWITCH_VAL_PATH_EXISTS 2 NISWITCH_VAL_PATH_UNSUPPORTED 3
                 NISWITCH_VAL_RSRC_IN_USE 4 NISWITCH_VAL_SOURCE_CONFLICT 5
@@ -1411,9 +1411,9 @@ class Session(_SessionBase):
         function to start the scan.
 
         Args:
-            scanlist (int):The scan list to use. The driver uses this value to set the Scan List
+            scanlist (string): The scan list to use. The driver uses this value to set the Scan List
                 attribute. Default value: None
-            scan_mode (enums.ScanMode):Specifies how the switch module breaks existing connections when
+            scan_mode (enums.ScanMode): Specifies how the switch module breaks existing connections when
                 scanning. The driver uses this value to set the Scan Mode attribute.
                 Refer to scan modes for more information. Default value: Break Before
                 Make
@@ -1436,20 +1436,20 @@ class Session(_SessionBase):
         the scan list.
 
         Args:
-            scan_delay (float):The minimum length of time you want the switch device to wait after it
+            scan_delay (float): The minimum length of time you want the switch device to wait after it
                 creates a path until it asserts a trigger on the scan advanced output
                 line. The driver uses this value to set the Scan Delay attribute. The
                 scan delay is in addition to the settling time.The driver uses this
                 value to set the SCAN_DELAY attribute. Express this
                 value in seconds. Default value: 0.0 s
-            trigger_input (enums.TriggerInput):Trigger source you want the switch module to use during scanning. The
+            trigger_input (enums.TriggerInput): Trigger source you want the switch module to use during scanning. The
                 driver uses this value to set the TRIGGER_INPUT
                 attribute. The switch device waits for the trigger you specify when it
                 encounters a semicolon in the scanlist. When the trigger occurs, the
                 switch device advances to the next entry in the scanlist. Refer to the
                 TRIGGER_INPUT topic in the NI Switches Help for a list
                 of valid values.
-            scan_advanced_output (enums.ScanAdvancedOutput):Output destination of the scan advanced trigger signal. The driver uses
+            scan_advanced_output (enums.ScanAdvancedOutput): Output destination of the scan advanced trigger signal. The driver uses
                 this value to set the SCAN_ADVANCED_OUTPUT attribute.
                 After the switch processes each entry in the scan list, it waits the
                 length of time you specify in the Scan Delay parameter and then asserts
@@ -1488,11 +1488,11 @@ class Session(_SessionBase):
         CH2, then the path also exists between channels CH2 and CH1.
 
         Args:
-            channel1 (int):Input one of the channel names of the desired path. Pass the other
+            channel1 (string): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
-            channel2 (int):Input one of the channel names of the desired path. Pass the other
+            channel2 (string): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
@@ -1526,7 +1526,7 @@ class Session(_SessionBase):
         ch2, then the path also exists between channels ch1 and ch2.
 
         Args:
-            connection_list (int):Connection List specifies a list of connections between channels to
+            connection_list (string): Connection List specifies a list of connections between channels to
                 make. NI-SWITCH validates the connection list, and aborts execution of
                 the list if errors are returned. Refer to Connection and Disconnection
                 List Syntax for valid connection list syntax and examples. Refer to
@@ -1558,11 +1558,11 @@ class Session(_SessionBase):
         IVISWTCH_ERROR_NO_SUCH_PATH error.
 
         Args:
-            channel1 (int):Input one of the channel names of the path to break. Pass the other
+            channel1 (string): Input one of the channel names of the path to break. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
-            channel2 (int):Input one of the channel names of the path to break. Pass the other
+            channel2 (string): Input one of the channel names of the path to break. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
@@ -1590,7 +1590,7 @@ class Session(_SessionBase):
         error occurred.
 
         Args:
-            disconnection_list (int):Disconnection List specifies a list of connections between channels to
+            disconnection_list (string): Disconnection List specifies a list of connections between channels to
                 break. NI-SWITCH validates the disconnection list, and aborts execution
                 of the list if errors are returned. Refer to Connection and
                 Disconnection List Syntax for valid disconnection list syntax and
@@ -1612,9 +1612,9 @@ class Session(_SessionBase):
         attribute to determine the number of channels.
 
         Args:
-            index (int):A 1-based index into the channel table. Default value: 1 Maximum value:
+            index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
                 Value of Channel Count attribute.
-            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the Channel
+            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the Channel
                 Name Buffer parameter. If the channel name string, including the
                 terminating NUL byte, contains more bytes than you indicate in this
                 parameter, the function copies Buffer Size - 1 bytes into the buffer,
@@ -1655,7 +1655,7 @@ class Session(_SessionBase):
         since the user last called _get_error or clear_error.
 
         Args:
-            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the
+            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
                 Description parameter. If the error description, including the
                 terminating NUL byte, contains more bytes than you indicate in this
                 parameter, the function copies buffer_size - 1 bytes into the buffer,
@@ -1668,7 +1668,7 @@ class Session(_SessionBase):
                 Description buffer parameter. Default Value: None
 
         Returns:
-            code (int):Returns the error code for the session or execution thread. If you pass
+            code (int): Returns the error code for the session or execution thread. If you pass
                 0 for the Buffer Size, you can pass VI_NULL for this parameter.
         '''
         code_ctype = visatype.ViStatus(0)
@@ -1698,15 +1698,15 @@ class Session(_SessionBase):
         error is returned
 
         Args:
-            channel1 (int):Input one of the channel names of the desired path. Pass the other
+            channel1 (string): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 2 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
-            channel2 (int):Input one of the channel names of the desired path. Pass the other
+            channel2 (string): Input one of the channel names of the desired path. Pass the other
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
-            buffer_size (int):Pass the number of bytes in the ViChar array you specify for the Path
+            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the Path
                 List parameter. If the current value of the attribute, including the
                 terminating NULL byte, contains more bytes that you indicate in this
                 parameter, the function copies Buffer Size - 1 bytes into the buffer,
@@ -1738,12 +1738,12 @@ class Session(_SessionBase):
         to determine if the switch module supports relay counting.
 
         Args:
-            relay_name (int):Name of the relay. Default value: None Examples of valid relay names:
+            relay_name (string): Name of the relay. Default value: None Examples of valid relay names:
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
 
         Returns:
-            relay_count (int):The number of relay cycles.
+            relay_count (int): The number of relay cycles.
         '''
         relay_count_ctype = visatype.ViInt32(0)
         error_code = self._library.niSwitch_GetRelayCount(self._vi, relay_name.encode(self._encoding), ctypes.pointer(relay_count_ctype))
@@ -1759,9 +1759,9 @@ class Session(_SessionBase):
         attribute to determine the number of relays.
 
         Args:
-            index (int):A 1-based index into the channel table. Default value: 1 Maximum value:
+            index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
                 Value of Channel Count attribute.
-            relay_name_buffer_size (int):Pass the number of bytes in the ViChar array you specify for the Relay
+            relay_name_buffer_size (int): Pass the number of bytes in the ViChar array you specify for the Relay
                 Name Buffer parameter. If the relay name string, including the
                 terminating NUL byte, contains more bytes than you indicate in this
                 parameter, the function copies Buffer Size - 1 bytes into the buffer,
@@ -1790,12 +1790,12 @@ class Session(_SessionBase):
         parameter.
 
         Args:
-            relay_name (int):Name of the relay. Default value: None Examples of valid relay names:
+            relay_name (string): Name of the relay. Default value: None Examples of valid relay names:
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
 
         Returns:
-            relay_position (enums.RelayPosition):Indicates whether the relay is open or closed. NISWITCH_VAL_OPEN 10
+            relay_position (enums.RelayPosition): Indicates whether the relay is open or closed. NISWITCH_VAL_OPEN 10
                 NIWITCH_VAL_CLOSED 11
         '''
         relay_position_ctype = visatype.ViInt32(0)
@@ -1822,7 +1822,7 @@ class Session(_SessionBase):
         and setting the simulate parameter to VI_TRUE.
 
         Args:
-            resource_name (int):Resource name of the switch module to initialize. Default value: None
+            resource_name (string): Resource name of the switch module to initialize. Default value: None
                 Syntax: Optional fields are shown in square brackets ([]). Configured in
                 MAX Under Valid Syntax Devices and Interfaces DeviceName Traditional
                 NI-DAQ Devices SCXI[chassis ID]::slot number PXI System PXI[bus
@@ -1833,7 +1833,7 @@ class Session(_SessionBase):
                 to "MySwitch" SCXI1::3 Traditional NI-DAQ module in chassis 1, slot 3
                 SCXI::3 Traditional NI-DAQ module in chassis 1, slot 3 PXI0::16 PXI bus
                 0, device number 16 PXI::16 PXI bus 0, device number 16
-            topology (int):Pass the topology name you want to use for the switch you specify with
+            topology (string): Pass the topology name you want to use for the switch you specify with
                 Resource Name parameter. You can also pass
                 NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY to use the last topology that
                 was configured for the device in MAX. Default Value:
@@ -2023,15 +2023,15 @@ class Session(_SessionBase):
                 NISWITCH_TOPOLOGY_2797_6X1_TERMINATED_MUX
                 NISWITCH_TOPOLOGY_2798_DUAL_TRANSFER
                 NISWITCH_TOPOLOGY_2799_2_SPDT
-            simulate (bool):Enables simulation of the switch module specified in the resource name
+            simulate (bool): Enables simulation of the switch module specified in the resource name
                 parameter. Valid Values: VI_TRUE - simulate VI_FALSE - Don't simulate
                 (Default Value)
-            reset_device (bool):Specifies whether to reset the switch module during the initialization
+            reset_device (bool): Specifies whether to reset the switch module during the initialization
                 process. Valid Values: VI_TRUE - Reset Device (Default Value) VI_FALSE
                 - Currently unsupported. The device will not reset.
 
         Returns:
-            vi (int):A particular NI-SWITCH session established with
+            vi (int): A particular NI-SWITCH session established with
                 init_with_topology, init_with_options, or init
                 and used for all subsequent NI-SWITCH calls.
         '''
@@ -2063,7 +2063,7 @@ class Session(_SessionBase):
         the IS_DEBOUNCED attribute.
 
         Returns:
-            is_debounced (bool):VI_TRUE indicates that all created paths have settled. VI_FALSE
+            is_debounced (bool): VI_TRUE indicates that all created paths have settled. VI_FALSE
                 indicates that all created paths have not settled.
         '''
         is_debounced_ctype = visatype.ViBoolean(0)
@@ -2077,7 +2077,7 @@ class Session(_SessionBase):
         Indicates the status of the scan.
 
         Returns:
-            is_scanning (bool):The driver returns the value of IS_SCANNING attribute.
+            is_scanning (bool): The driver returns the value of IS_SCANNING attribute.
                 VI_TRUE indicates that the switch device is scanning. VI_FALSE
                 indicates that the switch device is idle.
         '''
@@ -2097,10 +2097,10 @@ class Session(_SessionBase):
         supports individual relay control.
 
         Args:
-            relay_name (int):Name of the relay. Default value: None Examples of valid relay names:
+            relay_name (string): Name of the relay. Default value: None Examples of valid relay names:
                 ch0, ab0, 1wire, hlselect Refer to Devices Overview for a list of valid
                 relay names for the switch module.
-            relay_action (enums.RelayAction):Specifies whether to open or close a given relay. Default value: Relay
+            relay_action (enums.RelayAction): Specifies whether to open or close a given relay. Default value: Relay
                 Close Defined values: NISWITCH_VAL_OPEN_RELAY
                 NISWITCH_VAL_CLOSE_RELAY (Default Value)
         '''
@@ -2129,16 +2129,16 @@ class Session(_SessionBase):
         to the front or rear connector.
 
         Args:
-            scan_advanced_output_connector (enums.ScanAdvancedOutput):The scan advanced trigger destination. Valid locations are the
+            scan_advanced_output_connector (enums.ScanAdvancedOutput): The scan advanced trigger destination. Valid locations are the
                 NISWITCH_VAL_FRONTCONNECTOR and NISWITCH_VAL_REARCONNECTOR. Default
                 value: NISWITCH_VAL_FRONTCONNECTOR
-            scan_advanced_output_bus_line (enums.ScanAdvancedOutput):The trigger line to route the scan advanced output trigger from the
+            scan_advanced_output_bus_line (enums.ScanAdvancedOutput): The trigger line to route the scan advanced output trigger from the
                 front or rear connector. Select NISWITCH_VAL_NONE to break an existing
                 route. Default value: None Valid Values: NISWITCH_VAL_NONE
                 NISWITCH_VAL_TTL0 NISWITCH_VAL_TTL1 NISWITCH_VAL_TTL2
                 NISWITCH_VAL_TTL3 NISWITCH_VAL_TTL4 NISWITCH_VAL_TTL5
                 NISWITCH_VAL_TTL6 NISWITCH_VAL_TTL7
-            invert (bool):If VI_TRUE, inverts the input trigger signal from falling to rising or
+            invert (bool): If VI_TRUE, inverts the input trigger signal from falling to rising or
                 vice versa. Default value: VI_FALSE
         '''
         if type(scan_advanced_output_connector) is not enums.ScanAdvancedOutput:
@@ -2157,16 +2157,16 @@ class Session(_SessionBase):
         specify None for trigger bus line parameter.
 
         Args:
-            trigger_input_connector (enums.TriggerInput):The location of the input trigger source on the switch module. Valid
+            trigger_input_connector (enums.TriggerInput): The location of the input trigger source on the switch module. Valid
                 locations are the NISWITCH_VAL_FRONTCONNECTOR and
                 NISWITCH_VAL_REARCONNECTOR. Default value:
                 NISWITCH_VAL_FRONTCONNECTOR
-            trigger_input_bus_line (enums.TriggerInput):The trigger line to route the input trigger. Select NISWITCH_VAL_NONE
+            trigger_input_bus_line (enums.TriggerInput): The trigger line to route the input trigger. Select NISWITCH_VAL_NONE
                 to break an existing route. Default value: None Valid Values:
                 NISWITCH_VAL_NONE NISWITCH_VAL_TTL0 NISWITCH_VAL_TTL1
                 NISWITCH_VAL_TTL2 NISWITCH_VAL_TTL3 NISWITCH_VAL_TTL4
                 NISWITCH_VAL_TTL5 NISWITCH_VAL_TTL6 NISWITCH_VAL_TTL7
-            invert (bool):If VI_TRUE, inverts the input trigger signal from falling to rising or
+            invert (bool): If VI_TRUE, inverts the input trigger signal from falling to rising or
                 vice versa. Default value: VI_FALSE
         '''
         if type(trigger_input_connector) is not enums.TriggerInput:
@@ -2198,7 +2198,7 @@ class Session(_SessionBase):
         after one pass through the scan list.
 
         Args:
-            continuous_scan (bool):If VI_TRUE, loops continuously through the scan list during scanning.
+            continuous_scan (bool): If VI_TRUE, loops continuously through the scan list during scanning.
                 If VI_FALSE, the scan stops after one pass through the scan list.
                 Default value: VI_FALSE
         '''
@@ -2215,7 +2215,7 @@ class Session(_SessionBase):
         is not necessary, use connect.
 
         Args:
-            path_list (int):A string composed of comma-separated paths between channel 1 and channel
+            path_list (string): A string composed of comma-separated paths between channel 1 and channel
                 2. The first and last names in the path are the endpoints of the path.
                 Every other channel in the path are configuration channels. Example of a
                 valid path list string: ch0->com0, com0->ab0. In this example, com0 is a
@@ -2235,7 +2235,7 @@ class Session(_SessionBase):
         NISWITCH_ERROR_MAX_TIME_EXCEEDED error.
 
         Args:
-            maximum_time_ms (int):Specifies the maximum length of time to wait for all relays in the
+            maximum_time_ms (int): Specifies the maximum length of time to wait for all relays in the
                 switch module to activate or deactivate. If the specified time elapses
                 before all relays active or deactivate, a timeout error is returned.
                 Default Value:5000 ms
@@ -2254,7 +2254,7 @@ class Session(_SessionBase):
         error.
 
         Args:
-            maximum_time_ms (int):Specifies the maximum length of time to wait for the switch module to
+            maximum_time_ms (int): Specifies the maximum length of time to wait for the switch module to
                 stop scanning. If the specified time elapses before the scan ends,
                 NISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default
                 Value:5000 ms
@@ -2285,11 +2285,11 @@ class Session(_SessionBase):
         error code description.
 
         Args:
-            error_code (int):Status code returned by any NI-SWITCH function. Default Value: 0
+            error_code (int): Status code returned by any NI-SWITCH function. Default Value: 0
                 (VI_SUCCESS)
 
         Returns:
-            error_message (int):The error information formatted into a string. You must pass a ViChar
+            error_message (string): The error information formatted into a string. You must pass a ViChar
                 array with at least 256 bytes.
         '''
         error_message_ctype = (visatype.ViChar * 256)()
@@ -2314,9 +2314,9 @@ class Session(_SessionBase):
         Returns the revision of the NI-SWITCH driver.
 
         Returns:
-            instrument_driver_revision (int):NI-SWITCH software revision numbers in the form of a string. You must
+            instrument_driver_revision (string): NI-SWITCH software revision numbers in the form of a string. You must
                 pass a ViChar array with at least 256 bytes.
-            firmware_revision (int):Currently unsupported.
+            firmware_revision (string): Currently unsupported.
         '''
         instrument_driver_revision_ctype = (visatype.ViChar * 256)()
         firmware_revision_ctype = (visatype.ViChar * 256)()
@@ -2330,8 +2330,8 @@ class Session(_SessionBase):
         Verifies that the driver can communicate with the switch module.
 
         Returns:
-            self_test_result (int):Value returned from the switch device self-test. Passed 0 Failed 1
-            self_test_message (int):Self-test response string from the switch device. You must pass a ViChar
+            self_test_result (int): Value returned from the switch device self-test. Passed 0 Failed 1
+            self_test_message (string): Self-test response string from the switch device. You must pass a ViChar
                 array with at least 256 bytes.
         '''
         self_test_result_ctype = visatype.ViInt16(0)

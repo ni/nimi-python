@@ -96,11 +96,11 @@ class _SessionBase(object):
         Queries the value of a ViBoolean attribute.
 
         Args:
-            channel_name (int):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
+            channel_name (string): This is the channel(s) that this function will apply to.
+            attribute_id (int): Pass the ID of an attribute.
 
         Returns:
-            attribute_value (bool):Returns the value of the attribute.
+            attribute_value (bool): Returns the value of the attribute.
         '''
         attribute_value_ctype = visatype.ViBoolean(0)
         error_code = self._library.niFake_GetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
@@ -113,11 +113,11 @@ class _SessionBase(object):
         Queries the value of a ViInt32 attribute.
 
         Args:
-            channel_name (int):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
+            channel_name (string): This is the channel(s) that this function will apply to.
+            attribute_id (int): Pass the ID of an attribute.
 
         Returns:
-            attribute_value (int):Returns the value of the attribute.
+            attribute_value (int): Returns the value of the attribute.
         '''
         attribute_value_ctype = visatype.ViInt32(0)
         error_code = self._library.niFake_GetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
@@ -130,11 +130,11 @@ class _SessionBase(object):
         Queries the value of a ViReal attribute.
 
         Args:
-            channel_name (int):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
+            channel_name (string): This is the channel(s) that this function will apply to.
+            attribute_id (int): Pass the ID of an attribute.
 
         Returns:
-            attribute_value (float):Returns the value of the attribute.
+            attribute_value (float): Returns the value of the attribute.
         '''
         attribute_value_ctype = visatype.ViReal64(0)
         error_code = self._library.niFake_GetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
@@ -147,11 +147,11 @@ class _SessionBase(object):
         Queries the value of a ViSession attribute.
 
         Args:
-            channel_name (int):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
+            channel_name (string): This is the channel(s) that this function will apply to.
+            attribute_id (int): Pass the ID of an attribute.
 
         Returns:
-            attribute_value (int):Returns the value of the attribute.
+            attribute_value (int): Returns the value of the attribute.
         '''
         attribute_value_ctype = visatype.ViSession(0)
         error_code = self._library.niFake_GetAttributeViSession(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
@@ -164,9 +164,9 @@ class _SessionBase(object):
         Queries the value of a ViBoolean attribute.
 
         Args:
-            channel_name (int):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            buffer_size (int):Number of bytes in attributeValue. You can IVI-dance with this.
+            channel_name (string): This is the channel(s) that this function will apply to.
+            attribute_id (int): Pass the ID of an attribute.
+            buffer_size (int): Number of bytes in attributeValue. You can IVI-dance with this.
         '''
         buffer_size = 0
         attribute_value_ctype = None
@@ -184,11 +184,11 @@ class _SessionBase(object):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            channel_name (int):This is the channel(s) that this function will apply to.
-            maximum_time (int):Specifies the **maximum_time** allowed in years.
+            channel_name (string): This is the channel(s) that this function will apply to.
+            maximum_time (int): Specifies the **maximum_time** allowed in years.
 
         Returns:
-            reading (float):The measured value.
+            reading (float): The measured value.
         '''
         reading_ctype = visatype.ViReal64(0)
         error_code = self._library.niFake_ReadFromChannel(self._vi, self._repeated_capability.encode(self._encoding), maximum_time, ctypes.pointer(reading_ctype))
@@ -201,9 +201,9 @@ class _SessionBase(object):
         This function sets the value of a ViBoolean attribute.
 
         Args:
-            channel_name (int):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (bool):Pass the value that you want to set the attribute to.
+            channel_name (string): This is the channel(s) that this function will apply to.
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (bool): Pass the value that you want to set the attribute to.
         '''
         error_code = self._library.niFake_SetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -215,9 +215,9 @@ class _SessionBase(object):
         This function sets the value of a ViInt32 attribute.
 
         Args:
-            channel_name (int):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (int):Pass the value that you want to set the attribute to.
+            channel_name (string): This is the channel(s) that this function will apply to.
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (int): Pass the value that you want to set the attribute to.
         '''
         error_code = self._library.niFake_SetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -229,9 +229,9 @@ class _SessionBase(object):
         This function sets the value of a ViReal64 attribute.
 
         Args:
-            channel_name (int):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (float):Pass the value that you want to set the attribute to.
+            channel_name (string): This is the channel(s) that this function will apply to.
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (float): Pass the value that you want to set the attribute to.
         '''
         error_code = self._library.niFake_SetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -243,9 +243,9 @@ class _SessionBase(object):
         This function sets the value of a ViSession attribute.
 
         Args:
-            channel_name (int):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (int):Pass the value that you want to set the attribute to.
+            channel_name (string): This is the channel(s) that this function will apply to.
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (int): Pass the value that you want to set the attribute to.
         '''
         error_code = self._library.niFake_SetAttributeViSession(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -257,9 +257,9 @@ class _SessionBase(object):
         This function sets the value of a ViString attribute.
 
         Args:
-            channel_name (int):This is the channel(s) that this function will apply to.
-            attribute_id (int):Pass the ID of an attribute.
-            attribute_value (int):Pass the value that you want to set the attribute to.
+            channel_name (string): This is the channel(s) that this function will apply to.
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (string): Pass the value that you want to set the attribute to.
         '''
         error_code = self._library.niFake_SetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -322,7 +322,7 @@ class Session(_SessionBase):
         This function takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.
 
         Args:
-            a_turtle (enums.Turtle):Indicates a ninja turtle
+            a_turtle (enums.Turtle): Indicates a ninja turtle
 
                 +---+---------------+
                 | 0 | Leonardo      |
@@ -348,7 +348,7 @@ class Session(_SessionBase):
         Note: This function rules!
 
         Returns:
-            a_boolean (bool):Contains a boolean.
+            a_boolean (bool): Contains a boolean.
         '''
         a_boolean_ctype = visatype.ViBoolean(0)
         error_code = self._library.niFake_GetABoolean(self._vi, ctypes.pointer(a_boolean_ctype))
@@ -363,7 +363,7 @@ class Session(_SessionBase):
         Note: This function rules!
 
         Returns:
-            a_number (int):Contains a number.
+            a_number (int): Contains a number.
         '''
         a_number_ctype = visatype.ViInt16(0)
         error_code = self._library.niFake_GetANumber(self._vi, ctypes.pointer(a_number_ctype))
@@ -376,7 +376,7 @@ class Session(_SessionBase):
         Illustrates resturning a string of fixed size.
 
         Returns:
-            a_string (int):String comes back here. Buffer must be 256 big.
+            a_string (string): String comes back here. Buffer must be 256 big.
         '''
         a_string_ctype = (visatype.ViChar * 1)()
         error_code = self._library.niFake_GetAStringOfFixedMaximumSize(self._vi, a_string_ctype)
@@ -389,10 +389,10 @@ class Session(_SessionBase):
         Illustrates resturning a string where user specifies the size.
 
         Args:
-            buffer_size (int):Buffersize of the string.
+            buffer_size (int): Buffersize of the string.
 
         Returns:
-            a_string (int):String comes back here. Buffer must be at least bufferSize big.
+            a_string (string): String comes back here. Buffer must be at least bufferSize big.
         '''
         a_string_ctype = (visatype.ViChar * buffer_size)()
         error_code = self._library.niFake_GetAStringWithSpecifiedMaximumSize(self._vi, a_string_ctype, buffer_size)
@@ -407,10 +407,10 @@ class Session(_SessionBase):
         Note: Splinter is not supported.
 
         Returns:
-            a_quantity (int):This is an amount.
+            a_quantity (int): This is an amount.
 
                 Note: The amount will be between -2^31 and (2^31-1)
-            a_turtle (enums.Turtle):Indicates a ninja turtle
+            a_turtle (enums.Turtle): Indicates a ninja turtle
 
                 +---+---------------+
                 | 0 | Leonardo      |
@@ -434,10 +434,10 @@ class Session(_SessionBase):
         Returns the error information associated with the session.
 
         Args:
-            buffer_size (int):Number of bytes in description buffer.
+            buffer_size (int): Number of bytes in description buffer.
 
         Returns:
-            error_code (int):Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
+            error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
         '''
         error_code_ctype = visatype.ViStatus(0)
         buffer_size = 0
@@ -456,27 +456,27 @@ class Session(_SessionBase):
         Creates a new IVI instrument driver session.
 
         Args:
-            resource_name (int):Caution: This is just some string.
+            resource_name (string): Caution: This is just some string.
 
                 Contains the **resource_name** of the device to initialize.
-            id_query (bool):NI-FAKE is probably not needed.
+            id_query (bool): NI-FAKE is probably not needed.
 
                 +-------------------+---+------------------+
                 | VI_TRUE (default) | 1 | Perform ID Query |
                 +-------------------+---+------------------+
                 | VI_FALSE          | 0 | Skip ID Query    |
                 +-------------------+---+------------------+
-            reset_device (bool):Specifies whether to reset
+            reset_device (bool): Specifies whether to reset
 
                 +-------------------+---+--------------+
                 | VI_TRUE (default) | 1 | Reset Device |
                 +-------------------+---+--------------+
                 | VI_FALSE          | 0 | Don't Reset  |
                 +-------------------+---+--------------+
-            option_string (int):Some options
+            option_string (string): Some options
 
         Returns:
-            vi (int):Returns a ViSession handle that you use.
+            vi (int): Returns a ViSession handle that you use.
         '''
         vi_ctype = visatype.ViSession(0)
         error_code = self._library.niFake_InitWithOptions(resource_name.encode(self._encoding), id_query, reset_device, option_string.encode(self._encoding), ctypes.pointer(vi_ctype))
@@ -498,7 +498,7 @@ class Session(_SessionBase):
         This function takes one parameter other than the session.
 
         Args:
-            a_number (int):Contains a number
+            a_number (int): Contains a number
         '''
         error_code = self._library.niFake_OneInputFunction(self._vi, a_number)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -510,10 +510,10 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (int):Specifies the **maximum_time** allowed in years.
+            maximum_time (int): Specifies the **maximum_time** allowed in years.
 
         Returns:
-            reading (float):The measured value.
+            reading (float): The measured value.
         '''
         reading_ctype = visatype.ViReal64(0)
         error_code = self._library.niFake_Read(self._vi, maximum_time, ctypes.pointer(reading_ctype))
@@ -526,14 +526,14 @@ class Session(_SessionBase):
         Acquires multiple measurements and returns an array of measured values.
 
         Args:
-            maximum_time (int):Specifies the **maximum_time** allowed in years.
-            array_size (int):Number of measurements to acquire.
+            maximum_time (int): Specifies the **maximum_time** allowed in years.
+            array_size (int): Number of measurements to acquire.
 
         Returns:
-            reading_array (float):An array of measurement values.
+            reading_array (list of float): An array of measurement values.
 
                 Note: The size must be at least arraySize.
-            actual_number_of_points (int):Indicates the number of measured values actually retrieved.
+            actual_number_of_points (int): Indicates the number of measured values actually retrieved.
         '''
         reading_array_ctype = (visatype.ViReal64 * array_size)()
         actual_number_of_points_ctype = visatype.ViInt32(0)
@@ -549,8 +549,8 @@ class Session(_SessionBase):
         Note: This function rules!
 
         Returns:
-            a_number (int):Contains a number.
-            a_string (int):Contains a string.
+            a_number (int): Contains a number.
+            a_string (string): Contains a string.
         '''
         a_number_ctype = visatype.ViInt16(0)
         a_string_ctype = (visatype.ViChar * 1)()
@@ -573,8 +573,8 @@ class Session(_SessionBase):
         This function takes two parameters other than the session.
 
         Args:
-            a_number (float):Contains a number
-            a_string (int):Contains a string
+            a_number (float): Contains a number
+            a_string (int): Contains a string
         '''
         error_code = self._library.niFake_TwoInputFunction(self._vi, a_number, a_string.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -588,10 +588,10 @@ class Session(_SessionBase):
         Note: This function rules!
 
         Args:
-            input (int):A big number on its way in.
+            input (int): A big number on its way in.
 
         Returns:
-            output (int):A big number on its way out.
+            output (int): A big number on its way out.
         '''
         output_ctype = visatype.ViInt64(0)
         error_code = self._library.niFake_Use64BitNumber(self._vi, input, ctypes.pointer(output_ctype))
@@ -613,10 +613,10 @@ class Session(_SessionBase):
         Takes the errorCode returned by a functiona and returns it as a user-readable string.
 
         Args:
-            error_code (int):The errorCode returned from the instrument.
+            error_code (int): The errorCode returned from the instrument.
 
         Returns:
-            error_message (int):The error information formatted into a string.
+            error_message (string): The error information formatted into a string.
         '''
         error_message_ctype = (visatype.ViChar * 256)()
         error_code = self._library.niFake_error_message(self._vi, error_code, error_message_ctype)

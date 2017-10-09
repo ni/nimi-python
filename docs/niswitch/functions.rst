@@ -24,7 +24,7 @@ niswitch.Session methods
 
         
 
-    :type channel1: int
+    :type channel1: string
     :param channel2:
 
 
@@ -35,7 +35,7 @@ niswitch.Session methods
 
         
 
-    :type channel2: int
+    :type channel2: string
 
     :rtype: :py:data:`niswitch.PathCapability`
     :return:
@@ -98,7 +98,7 @@ niswitch.Session methods
 
         
 
-    :type scanlist: int
+    :type scanlist: string
     :param scan_mode:
 
 
@@ -200,7 +200,7 @@ niswitch.Session methods
 
         
 
-    :type channel1: int
+    :type channel1: string
     :param channel2:
 
 
@@ -211,7 +211,7 @@ niswitch.Session methods
 
         
 
-    :type channel2: int
+    :type channel2: string
 
 .. function:: connect_multiple(connection_list)
 
@@ -252,7 +252,7 @@ niswitch.Session methods
 
         
 
-    :type connection_list: int
+    :type connection_list: string
 
 .. function:: disable()
 
@@ -283,7 +283,7 @@ niswitch.Session methods
 
         
 
-    :type channel1: int
+    :type channel1: string
     :param channel2:
 
 
@@ -294,7 +294,7 @@ niswitch.Session methods
 
         
 
-    :type channel2: int
+    :type channel2: string
 
 .. function:: disconnect_all()
 
@@ -328,7 +328,7 @@ niswitch.Session methods
 
         
 
-    :type disconnection_list: int
+    :type disconnection_list: string
 
 .. function:: get_channel_name(index)
 
@@ -395,7 +395,7 @@ niswitch.Session methods
 
         
 
-    :type channel1: int
+    :type channel1: string
     :param channel2:
 
 
@@ -406,7 +406,7 @@ niswitch.Session methods
 
         
 
-    :type channel2: int
+    :type channel2: string
     :param buffer_size:
 
 
@@ -446,7 +446,7 @@ niswitch.Session methods
 
         
 
-    :type relay_name: int
+    :type relay_name: string
 
     :rtype: int
     :return:
@@ -512,7 +512,7 @@ niswitch.Session methods
 
         
 
-    :type relay_name: int
+    :type relay_name: string
 
     :rtype: :py:data:`niswitch.RelayPosition`
     :return:
@@ -561,7 +561,7 @@ niswitch.Session methods
 
         
 
-    :type resource_name: int
+    :type resource_name: string
     :param topology:
 
 
@@ -758,7 +758,7 @@ niswitch.Session methods
 
         
 
-    :type topology: int
+    :type topology: string
     :param simulate:
 
 
@@ -848,7 +848,7 @@ niswitch.Session methods
 
         
 
-    :type relay_name: int
+    :type relay_name: string
     :param relay_action:
 
 
@@ -1006,7 +1006,7 @@ niswitch.Session methods
 
         
 
-    :type path_list: int
+    :type path_list: string
 
 .. function:: wait_for_debounce(maximum_time_ms=5000)
 
@@ -1073,7 +1073,7 @@ niswitch.Session methods
 
         WHERE
 
-        instrument_driver_revision (int): 
+        instrument_driver_revision (string): 
 
 
             NI-SWITCH software revision numbers in the form of a string. You must
@@ -1081,7 +1081,7 @@ niswitch.Session methods
 
             
 
-        firmware_revision (int): 
+        firmware_revision (string): 
 
 
             Currently unsupported.
@@ -1107,7 +1107,7 @@ niswitch.Session methods
 
             
 
-        self_test_message (int): 
+        self_test_message (string): 
 
 
             Self-test response string from the switch device. You must pass a ViChar
