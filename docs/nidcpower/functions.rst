@@ -26,7 +26,7 @@ nidcpower.Session methods
     
 
 
-.. function:: configure_aperture_time(aperture_time, units)
+.. function:: configure_aperture_time(units, aperture_time=nidcpower.ApertureTimeUnits.SECONDS)
 
     Vistatus :py:func:`nidcpower.configure_aperture_time`(ViSession vi, ViConstString
     channelName, ViReal64 apertureTime, ViInt32 units);
@@ -79,7 +79,7 @@ nidcpower.Session methods
 
         
 
-    :type aperture_time: float
+    :type aperture_time: :py:data:`nidcpower.ApertureTimeUnits`
     :param units:
 
 
@@ -94,7 +94,7 @@ nidcpower.Session methods
 
     :type units: int
 
-.. function:: configure_digital_edge_measure_trigger(input_terminal, edge)
+.. function:: configure_digital_edge_measure_trigger(edge, input_terminal=nidcpower.TriggerSlope.POSITIVE)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_measure_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -145,7 +145,7 @@ nidcpower.Session methods
 
     :type edge: int
 
-.. function:: configure_digital_edge_pulse_trigger(input_terminal, edge)
+.. function:: configure_digital_edge_pulse_trigger(edge, input_terminal=nidcpower.TriggerSlope.POSITIVE)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_pulse_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -196,7 +196,7 @@ nidcpower.Session methods
 
     :type edge: int
 
-.. function:: configure_digital_edge_sequence_advance_trigger(input_terminal, edge)
+.. function:: configure_digital_edge_sequence_advance_trigger(edge, input_terminal=nidcpower.TriggerSlope.POSITIVE)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_sequence_advance_trigger`(ViSession
     vi, ViConstString inputTerminal, ViInt32 edge);
@@ -248,7 +248,7 @@ nidcpower.Session methods
 
     :type edge: int
 
-.. function:: configure_digital_edge_source_trigger(input_terminal, edge)
+.. function:: configure_digital_edge_source_trigger(edge, input_terminal=nidcpower.TriggerSlope.POSITIVE)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_source_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -299,7 +299,7 @@ nidcpower.Session methods
 
     :type edge: int
 
-.. function:: configure_digital_edge_start_trigger(input_terminal, edge)
+.. function:: configure_digital_edge_start_trigger(edge, input_terminal=nidcpower.TriggerSlope.POSITIVE)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_start_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -700,7 +700,7 @@ nidcpower.Session methods
 
     :type output_terminal: string
 
-.. function:: fetch_multiple(timeout, count)
+.. function:: fetch_multiple(count, timeout=1)
 
     Vistatus :py:func:`nidcpower.fetch_multiple`(ViSession vi, ViConstString
     channelName, ViReal64 timeout, ViInt32 count, ViReal64
@@ -1368,7 +1368,7 @@ nidcpower.Session methods
 
     :type trigger: int
 
-.. function:: set_sequence(values, source_delays, size)
+.. function:: set_sequence(source_delays, size, values='')
 
     Vistatus :py:func:`nidcpower.set_sequence`(ViSession vi, ViConstString channelName,
     ViReal64 values[], ViReal64 sourceDelays[], ViUInt32 size);

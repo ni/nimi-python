@@ -2487,7 +2487,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    def configure_aperture_time(self, aperture_time, units):
+    def configure_aperture_time(self, units, aperture_time=enums.ApertureTimeUnits.SECONDS):
         '''configure_aperture_time
 
         Vistatus configure_aperture_time(ViSession vi, ViConstString
@@ -2525,7 +2525,7 @@ class _SessionBase(object):
                 upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
                 In the Running state, multiple output channel configurations are
                 performed sequentially based on the order specified in this parameter.
-            aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your
+            aperture_time (enums.ApertureTimeUnits): Specifies the aperture time. Refer to the *Aperture Time* topic for your
                 device in the *NI DC Power Supplies and SMUs Help* for more information.
             units (int): Specifies the units for **apertureTime**.
                 **Defined Values**:
@@ -2536,11 +2536,13 @@ class _SessionBase(object):
                 | NIDCPOWER_VAL_POWER_LINE_CYCLES (1029) | Specifies Power Line Cycles. |
                 +----------------------------------------+------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureApertureTime(self._vi, self._repeated_capability.encode(self._encoding), aperture_time, units)
+        if type(aperture_time) is not enums.ApertureTimeUnits:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ApertureTimeUnits))
+        error_code = self._library.niDCPower_ConfigureApertureTime(self._vi, self._repeated_capability.encode(self._encoding), aperture_time.value, units)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch_multiple(self, timeout, count):
+    def fetch_multiple(self, count, timeout=1):
         '''fetch_multiple
 
         Vistatus fetch_multiple(ViSession vi, ViConstString
@@ -3407,7 +3409,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_sequence(self, values, source_delays, size):
+    def set_sequence(self, source_delays, size, values=''):
         '''set_sequence
 
         Vistatus set_sequence(ViSession vi, ViConstString channelName,
@@ -3556,7 +3558,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_measure_trigger(self, input_terminal, edge):
+    def configure_digital_edge_measure_trigger(self, edge, input_terminal=enums.TriggerSlope.POSITIVE):
         '''configure_digital_edge_measure_trigger
 
         Vistatus configure_digital_edge_measure_trigger(ViSession vi,
@@ -3595,11 +3597,13 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(self._vi, input_terminal.encode(self._encoding), edge)
+        if type(input_terminal) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(self._vi, input_terminal.value.encode(self._encoding), edge)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_pulse_trigger(self, input_terminal, edge):
+    def configure_digital_edge_pulse_trigger(self, edge, input_terminal=enums.TriggerSlope.POSITIVE):
         '''configure_digital_edge_pulse_trigger
 
         Vistatus configure_digital_edge_pulse_trigger(ViSession vi,
@@ -3638,11 +3642,13 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(self._vi, input_terminal.encode(self._encoding), edge)
+        if type(input_terminal) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+        error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(self._vi, input_terminal.value.encode(self._encoding), edge)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_sequence_advance_trigger(self, input_terminal, edge):
+    def configure_digital_edge_sequence_advance_trigger(self, edge, input_terminal=enums.TriggerSlope.POSITIVE):
         '''configure_digital_edge_sequence_advance_trigger
 
         Vistatus configure_digital_edge_sequence_advance_trigger(ViSession
@@ -3682,11 +3688,13 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(self._vi, input_terminal.encode(self._encoding), edge)
+        if type(input_terminal) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(self._vi, input_terminal.value.encode(self._encoding), edge)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_source_trigger(self, input_terminal, edge):
+    def configure_digital_edge_source_trigger(self, edge, input_terminal=enums.TriggerSlope.POSITIVE):
         '''configure_digital_edge_source_trigger
 
         Vistatus configure_digital_edge_source_trigger(ViSession vi,
@@ -3725,11 +3733,13 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(self._vi, input_terminal.encode(self._encoding), edge)
+        if type(input_terminal) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(self._vi, input_terminal.value.encode(self._encoding), edge)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_start_trigger(self, input_terminal, edge):
+    def configure_digital_edge_start_trigger(self, edge, input_terminal=enums.TriggerSlope.POSITIVE):
         '''configure_digital_edge_start_trigger
 
         Vistatus configure_digital_edge_start_trigger(ViSession vi,
@@ -3768,7 +3778,9 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(self._vi, input_terminal.encode(self._encoding), edge)
+        if type(input_terminal) is not enums.TriggerSlope:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(self._vi, input_terminal.value.encode(self._encoding), edge)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

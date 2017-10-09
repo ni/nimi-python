@@ -43,7 +43,13 @@ functions_codegen_method = {
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    'ConfigureAutoZero':   { 'parameters': { 2: { 'enum': 'AutoZero',                  }, }, },
+    'ConfigureAutoZero':                            { 'parameters': { 2: { 'enum': 'AutoZero',            }, }, },
+    'ConfigureApertureTime':                        { 'parameters': { 2: { 'enum': 'ApertureTimeUnits',   }, }, },
+    'ConfigureDigitalEdgeMeasureTrigger':           { 'parameters': { 1: { 'enum': 'TriggerSlope',        }, }, },
+    'ConfigureDigitalEdgePulseTrigger':             { 'parameters': { 1: { 'enum': 'TriggerSlope',         }, }, },
+    'ConfigureDigitalEdgeSequenceAdvanceTrigger':   { 'parameters': { 1: { 'enum': 'TriggerSlope',         }, }, },
+    'ConfigureDigitalEdgeSourceTrigger':            { 'parameters': { 1: { 'enum': 'TriggerSlope',         }, }, },
+    'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 1: { 'enum': 'TriggerSlope',         }, }, },
     # @TODO add all enums
 }
 
@@ -70,6 +76,7 @@ functions_buffer_info = {
     'revision_query':               { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, 
                                                       2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'SetSequence':                  { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'Size'}, }, }, },
     'init':                         { 'parameters': { 0: { 'is_buffer': True, }, }, },
     '.etAttribute.+':               { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'GetDevTemp':                   { 'parameters': { 1: { 'is_buffer': True, }, }, },
@@ -88,8 +95,17 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 function_default_value = {
-    'InitializeWithChannels':  { 'parameters': { 1: { 'default_value': '', },
-                                                 2: { 'default_value': False, },
-                                                 3: { 'default_value': '', }, }, },
+    'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '', },
+                                                                       2: { 'default_value': False, },
+                                                                       3: { 'default_value': '', }, }, },
+    'ConfigureApertureTime':                         { 'parameters': { 2: { 'default_value': 'ApertureTimeUnits.SECONDS', }, }, },
+    'SetSequence':                                   { 'parameters': { 2: { 'default_value': '', }, }, },
+    'ConfigureDigitalEdgeMeasureTrigger':            { 'parameters': { 1: { 'default_value': 'TriggerSlope.POSITIVE', }, }, },
+    'ConfigureDigitalEdgePulseTrigger':              { 'parameters': { 1: { 'default_value': 'TriggerSlope.POSITIVE', }, }, },
+    'ConfigureDigitalEdgeSequenceAdvanceTrigger':    { 'parameters': { 1: { 'default_value': 'TriggerSlope.POSITIVE', }, }, },
+    'ConfigureDigitalEdgeSourceTrigger':             { 'parameters': { 1: { 'default_value': 'TriggerSlope.POSITIVE', }, }, },
+    'ConfigureDigitalEdgeStartTrigger':              { 'parameters': { 1: { 'default_value': 'TriggerSlope.POSITIVE', }, }, },
+    'FetchMultiple':                                 { 'parameters': { 1: { 'default_value': 1.0, },
+                                                                       2: { 'default_value': 1, }, }, },
 }
 
