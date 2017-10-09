@@ -77,7 +77,7 @@ def _add_buffer_info(parameter):
     # For simplicity, we are going to treat ViChar[], ViString, ViConstString, and ViRsrc the same: As ViChar
     # and is_buffer True
     t = parameter['type']
-    if (t.find('[ ]') > 0) or (t.find('[]') > 0) or t == 'ViString' or t == 'ViConstString' or t == 'ViRsrc':
+    if t == 'ViString' or t == 'ViConstString' or t == 'ViRsrc':
         parameter['type'] = 'ViChar'
         parameter['original_type'] = t
         parameter['is_buffer'] = True
@@ -85,6 +85,11 @@ def _add_buffer_info(parameter):
     try:
         parameter['size']
     except KeyError:
+    if (t.find('[ ]') > 0) or (t.find('[]') > 0):
+        parameter['type'] = t.replace('[ ]', '').replace('[]', '')
+        parameter['original_type'] = t
+        parameter['is_buffer'] = True
+
         # Not populated, assume {'mechanism': 'fixed', 'value': 1}
         parameter['size'] = {'mechanism': 'fixed', 'value': 1}
 
