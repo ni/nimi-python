@@ -9,7 +9,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: CabledModuleScanAdvancedBus
 
-    .. py:attribute:: NONE
+    .. py:attribute:: niswitch.CabledModuleScanAdvancedBus.NONE
 
 
 
@@ -18,7 +18,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG0
+    .. py:attribute:: niswitch.CabledModuleScanAdvancedBus.PXI_TRIG0
 
 
 
@@ -28,7 +28,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG1
+    .. py:attribute:: niswitch.CabledModuleScanAdvancedBus.PXI_TRIG1
 
 
 
@@ -38,7 +38,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG2
+    .. py:attribute:: niswitch.CabledModuleScanAdvancedBus.PXI_TRIG2
 
 
 
@@ -48,7 +48,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG3
+    .. py:attribute:: niswitch.CabledModuleScanAdvancedBus.PXI_TRIG3
 
 
 
@@ -58,7 +58,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG4
+    .. py:attribute:: niswitch.CabledModuleScanAdvancedBus.PXI_TRIG4
 
 
 
@@ -68,7 +68,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG5
+    .. py:attribute:: niswitch.CabledModuleScanAdvancedBus.PXI_TRIG5
 
 
 
@@ -78,7 +78,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG6
+    .. py:attribute:: niswitch.CabledModuleScanAdvancedBus.PXI_TRIG6
 
 
 
@@ -88,7 +88,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG7
+    .. py:attribute:: niswitch.CabledModuleScanAdvancedBus.PXI_TRIG7
 
 
 
@@ -101,7 +101,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: CabledModuleTriggerBus
 
-    .. py:attribute:: NONE
+    .. py:attribute:: niswitch.CabledModuleTriggerBus.NONE
 
 
 
@@ -110,7 +110,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG0
+    .. py:attribute:: niswitch.CabledModuleTriggerBus.PXI_TRIG0
 
 
 
@@ -119,7 +119,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG1
+    .. py:attribute:: niswitch.CabledModuleTriggerBus.PXI_TRIG1
 
 
 
@@ -128,7 +128,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG2
+    .. py:attribute:: niswitch.CabledModuleTriggerBus.PXI_TRIG2
 
 
 
@@ -137,7 +137,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG3
+    .. py:attribute:: niswitch.CabledModuleTriggerBus.PXI_TRIG3
 
 
 
@@ -146,7 +146,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG4
+    .. py:attribute:: niswitch.CabledModuleTriggerBus.PXI_TRIG4
 
 
 
@@ -155,7 +155,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG5
+    .. py:attribute:: niswitch.CabledModuleTriggerBus.PXI_TRIG5
 
 
 
@@ -164,7 +164,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG6
+    .. py:attribute:: niswitch.CabledModuleTriggerBus.PXI_TRIG6
 
 
 
@@ -173,7 +173,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG7
+    .. py:attribute:: niswitch.CabledModuleTriggerBus.PXI_TRIG7
 
 
 
@@ -185,7 +185,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: HandshakingInitiation
 
-    .. py:attribute:: MEASUREMENT_DEVICE_INITIATED
+    .. py:attribute:: niswitch.HandshakingInitiation.MEASUREMENT_DEVICE_INITIATED
 
 
 
@@ -204,7 +204,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: SWITCH_INITIATED
+    .. py:attribute:: niswitch.HandshakingInitiation.SWITCH_INITIATED
 
 
 
@@ -222,7 +222,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: MasterSlaveScanAdvancedBus
 
-    .. py:attribute:: NONE
+    .. py:attribute:: niswitch.MasterSlaveScanAdvancedBus.NONE
 
 
 
@@ -231,7 +231,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG0
+    .. py:attribute:: niswitch.MasterSlaveScanAdvancedBus.PXI_TRIG0
 
 
 
@@ -241,7 +241,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG1
+    .. py:attribute:: niswitch.MasterSlaveScanAdvancedBus.PXI_TRIG1
 
 
 
@@ -251,7 +251,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG2
+    .. py:attribute:: niswitch.MasterSlaveScanAdvancedBus.PXI_TRIG2
 
 
 
@@ -261,7 +261,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG3
+    .. py:attribute:: niswitch.MasterSlaveScanAdvancedBus.PXI_TRIG3
 
 
 
@@ -271,7 +271,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG4
+    .. py:attribute:: niswitch.MasterSlaveScanAdvancedBus.PXI_TRIG4
 
 
 
@@ -281,7 +281,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG5
+    .. py:attribute:: niswitch.MasterSlaveScanAdvancedBus.PXI_TRIG5
 
 
 
@@ -291,7 +291,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG6
+    .. py:attribute:: niswitch.MasterSlaveScanAdvancedBus.PXI_TRIG6
 
 
 
@@ -301,7 +301,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG7
+    .. py:attribute:: niswitch.MasterSlaveScanAdvancedBus.PXI_TRIG7
 
 
 
@@ -314,7 +314,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: MasterSlaveTriggerBus
 
-    .. py:attribute:: NONE
+    .. py:attribute:: niswitch.MasterSlaveTriggerBus.NONE
 
 
 
@@ -323,7 +323,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG0
+    .. py:attribute:: niswitch.MasterSlaveTriggerBus.PXI_TRIG0
 
 
 
@@ -333,7 +333,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG1
+    .. py:attribute:: niswitch.MasterSlaveTriggerBus.PXI_TRIG1
 
 
 
@@ -343,7 +343,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG2
+    .. py:attribute:: niswitch.MasterSlaveTriggerBus.PXI_TRIG2
 
 
 
@@ -353,7 +353,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG3
+    .. py:attribute:: niswitch.MasterSlaveTriggerBus.PXI_TRIG3
 
 
 
@@ -363,7 +363,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG4
+    .. py:attribute:: niswitch.MasterSlaveTriggerBus.PXI_TRIG4
 
 
 
@@ -373,7 +373,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG5
+    .. py:attribute:: niswitch.MasterSlaveTriggerBus.PXI_TRIG5
 
 
 
@@ -383,7 +383,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG6
+    .. py:attribute:: niswitch.MasterSlaveTriggerBus.PXI_TRIG6
 
 
 
@@ -393,7 +393,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG7
+    .. py:attribute:: niswitch.MasterSlaveTriggerBus.PXI_TRIG7
 
 
 
@@ -406,7 +406,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: PathCapability
 
-    .. py:attribute:: PATH_AVAILABLE
+    .. py:attribute:: niswitch.PathCapability.PATH_AVAILABLE
 
 
 
@@ -415,7 +415,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PATH_EXISTS
+    .. py:attribute:: niswitch.PathCapability.PATH_EXISTS
 
 
 
@@ -424,7 +424,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PATH_UNSUPPORTED
+    .. py:attribute:: niswitch.PathCapability.PATH_UNSUPPORTED
 
 
 
@@ -433,7 +433,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: RESOURCE_IN_USE
+    .. py:attribute:: niswitch.PathCapability.RESOURCE_IN_USE
 
 
 
@@ -442,7 +442,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: SOURCE_CONFLICT
+    .. py:attribute:: niswitch.PathCapability.SOURCE_CONFLICT
 
 
 
@@ -451,7 +451,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: CHANNEL_NOT_AVAILABLE
+    .. py:attribute:: niswitch.PathCapability.CHANNEL_NOT_AVAILABLE
 
 
 
@@ -463,7 +463,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: RelayAction
 
-    .. py:attribute:: OPEN_RELAY
+    .. py:attribute:: niswitch.RelayAction.OPEN_RELAY
 
 
 
@@ -472,7 +472,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: CLOSE_RELAY
+    .. py:attribute:: niswitch.RelayAction.CLOSE_RELAY
 
 
 
@@ -484,7 +484,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: RelayPosition
 
-    .. py:attribute:: OPEN
+    .. py:attribute:: niswitch.RelayPosition.OPEN
 
 
 
@@ -493,7 +493,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: CLOSED
+    .. py:attribute:: niswitch.RelayPosition.CLOSED
 
 
 
@@ -505,7 +505,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: ScanAdvancedOutput
 
-    .. py:attribute:: NONE
+    .. py:attribute:: niswitch.ScanAdvancedOutput.NONE
 
 
 
@@ -514,7 +514,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: EXTERNAL
+    .. py:attribute:: niswitch.ScanAdvancedOutput.EXTERNAL
 
 
 
@@ -524,7 +524,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG0
+    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG0
 
 
 
@@ -534,7 +534,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG1
+    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG1
 
 
 
@@ -544,7 +544,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG2
+    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG2
 
 
 
@@ -554,7 +554,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG3
+    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG3
 
 
 
@@ -564,7 +564,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG4
+    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG4
 
 
 
@@ -574,7 +574,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG5
+    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG5
 
 
 
@@ -584,7 +584,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG6
+    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG6
 
 
 
@@ -594,7 +594,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG7
+    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_TRIG7
 
 
 
@@ -604,7 +604,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_STAR
+    .. py:attribute:: niswitch.ScanAdvancedOutput.PXI_STAR
 
 
 
@@ -614,7 +614,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR
 
 
 
@@ -624,7 +624,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR
 
 
 
@@ -634,7 +634,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE1
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE1
 
 
 
@@ -644,7 +644,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE2
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE2
 
 
 
@@ -654,7 +654,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE3
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE3
 
 
 
@@ -664,7 +664,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE4
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE4
 
 
 
@@ -674,7 +674,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE5
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE5
 
 
 
@@ -684,7 +684,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE6
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE6
 
 
 
@@ -694,7 +694,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE7
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE7
 
 
 
@@ -704,7 +704,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE8
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE8
 
 
 
@@ -714,7 +714,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE9
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE9
 
 
 
@@ -724,7 +724,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE10
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE10
 
 
 
@@ -734,7 +734,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE11
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE11
 
 
 
@@ -744,7 +744,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE12
+    .. py:attribute:: niswitch.ScanAdvancedOutput.REARCONNECTOR_MODULE12
 
 
 
@@ -754,7 +754,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE1
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE1
 
 
 
@@ -764,7 +764,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE2
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE2
 
 
 
@@ -774,7 +774,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE3
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE3
 
 
 
@@ -784,7 +784,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE4
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE4
 
 
 
@@ -794,7 +794,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE5
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE5
 
 
 
@@ -804,7 +804,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE6
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE6
 
 
 
@@ -814,7 +814,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE7
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE7
 
 
 
@@ -824,7 +824,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE8
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE8
 
 
 
@@ -834,7 +834,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE9
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE9
 
 
 
@@ -844,7 +844,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE10
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE10
 
 
 
@@ -854,7 +854,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE11
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE11
 
 
 
@@ -864,7 +864,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE12
+    .. py:attribute:: niswitch.ScanAdvancedOutput.FRONTCONNECTOR_MODULE12
 
 
 
@@ -877,7 +877,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: ScanAdvancedPolarity
 
-    .. py:attribute:: RISING_EDGE
+    .. py:attribute:: niswitch.ScanAdvancedPolarity.RISING_EDGE
 
 
 
@@ -886,7 +886,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FALLING_EDGE
+    .. py:attribute:: niswitch.ScanAdvancedPolarity.FALLING_EDGE
 
 
 
@@ -898,7 +898,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: ScanMode
 
-    .. py:attribute:: NONE
+    .. py:attribute:: niswitch.ScanMode.NONE
 
 
 
@@ -907,7 +907,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: BREAK_BEFORE_MAKE
+    .. py:attribute:: niswitch.ScanMode.BREAK_BEFORE_MAKE
 
 
 
@@ -917,7 +917,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: BREAK_AFTER_MAKE
+    .. py:attribute:: niswitch.ScanMode.BREAK_AFTER_MAKE
 
 
 
@@ -930,7 +930,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: TriggerInput
 
-    .. py:attribute:: IMMEDIATE
+    .. py:attribute:: niswitch.TriggerInput.IMMEDIATE
 
 
 
@@ -940,7 +940,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: EXTERNAL
+    .. py:attribute:: niswitch.TriggerInput.EXTERNAL
 
 
 
@@ -951,7 +951,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: SW_TRIG_FUNC
+    .. py:attribute:: niswitch.TriggerInput.SW_TRIG_FUNC
 
 
 
@@ -962,7 +962,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG0
+    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG0
 
 
 
@@ -972,7 +972,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG1
+    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG1
 
 
 
@@ -982,7 +982,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG2
+    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG2
 
 
 
@@ -992,7 +992,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG3
+    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG3
 
 
 
@@ -1002,7 +1002,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG4
+    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG4
 
 
 
@@ -1012,7 +1012,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG5
+    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG5
 
 
 
@@ -1022,7 +1022,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG6
+    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG6
 
 
 
@@ -1032,7 +1032,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_TRIG7
+    .. py:attribute:: niswitch.TriggerInput.PXI_TRIG7
 
 
 
@@ -1042,7 +1042,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: PXI_STAR
+    .. py:attribute:: niswitch.TriggerInput.PXI_STAR
 
 
 
@@ -1052,7 +1052,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR
 
 
 
@@ -1062,7 +1062,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR
 
 
 
@@ -1072,7 +1072,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE1
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE1
 
 
 
@@ -1082,7 +1082,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE2
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE2
 
 
 
@@ -1092,7 +1092,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE3
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE3
 
 
 
@@ -1102,7 +1102,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE4
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE4
 
 
 
@@ -1112,7 +1112,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE5
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE5
 
 
 
@@ -1122,7 +1122,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE6
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE6
 
 
 
@@ -1132,7 +1132,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE7
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE7
 
 
 
@@ -1142,7 +1142,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE8
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE8
 
 
 
@@ -1152,7 +1152,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE9
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE9
 
 
 
@@ -1162,7 +1162,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE10
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE10
 
 
 
@@ -1172,7 +1172,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE11
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE11
 
 
 
@@ -1182,7 +1182,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: REARCONNECTOR_MODULE12
+    .. py:attribute:: niswitch.TriggerInput.REARCONNECTOR_MODULE12
 
 
 
@@ -1192,7 +1192,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE1
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE1
 
 
 
@@ -1202,7 +1202,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE2
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE2
 
 
 
@@ -1212,7 +1212,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE3
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE3
 
 
 
@@ -1222,7 +1222,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE4
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE4
 
 
 
@@ -1232,7 +1232,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE5
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE5
 
 
 
@@ -1242,7 +1242,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE6
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE6
 
 
 
@@ -1252,7 +1252,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE7
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE7
 
 
 
@@ -1262,7 +1262,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE8
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE8
 
 
 
@@ -1272,7 +1272,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE9
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE9
 
 
 
@@ -1282,7 +1282,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE10
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE10
 
 
 
@@ -1292,7 +1292,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE11
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE11
 
 
 
@@ -1302,7 +1302,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FRONTCONNECTOR_MODULE12
+    .. py:attribute:: niswitch.TriggerInput.FRONTCONNECTOR_MODULE12
 
 
 
@@ -1315,7 +1315,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: TriggerInputPolarity
 
-    .. py:attribute:: RISING_EDGE
+    .. py:attribute:: niswitch.TriggerInputPolarity.RISING_EDGE
 
 
 
@@ -1324,7 +1324,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: FALLING_EDGE
+    .. py:attribute:: niswitch.TriggerInputPolarity.FALLING_EDGE
 
 
 
@@ -1336,7 +1336,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: TriggerMode
 
-    .. py:attribute:: SINGLE
+    .. py:attribute:: niswitch.TriggerMode.SINGLE
 
 
 
@@ -1345,7 +1345,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: MASTER
+    .. py:attribute:: niswitch.TriggerMode.MASTER
 
 
 
@@ -1354,7 +1354,7 @@ Enums used in NI-SWITCH
         
 
 
-    .. py:attribute:: SLAVE
+    .. py:attribute:: niswitch.TriggerMode.SLAVE
 
 
 
