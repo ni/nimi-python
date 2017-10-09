@@ -2889,9 +2889,9 @@ class _SessionBase(object):
         attribute to determine the upper bound of valid values for **index**.
 
         Args:
-            index (int):Specifies which output channel name to return. The index values begin at
+            index (int): Specifies which output channel name to return. The index values begin at
                 1.
-            buffer_size (int):Specifies the number of bytes in the ViChar array you specify for
+            buffer_size (int): Specifies the number of bytes in the ViChar array you specify for
                 **channelName**. If the **channelName**, including the terminating NUL
                 byte, contains more bytes than you indicate in this attribute, the
                 function copies (buffer size - 1) bytes into the buffer, places an ASCII
