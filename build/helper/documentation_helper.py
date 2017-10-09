@@ -189,7 +189,7 @@ def find_attribute_by_name(attributes, name):
     return attr[0]
 
 
-def replace_attribute_python_name(a_match):
+def _replace_attribute_python_name(a_match):
     '''callback function for regex sub command when link not needed
 
     Args:
@@ -211,7 +211,7 @@ def replace_attribute_python_name(a_match):
         return '{0}'.format(aname)
 
 
-def replace_func_python_name(f_match):
+def _replace_func_python_name(f_match):
     '''callback function for regex sub command when link needed
 
     Args:
@@ -237,6 +237,25 @@ def replace_func_python_name(f_match):
         return '{0}'.format(fname)
 
 
+def _replace_urls(u_match):
+    '''callback function for regex when url link needed
+
+    Args:
+        u_match (match object): Match object from the function substitution command
+
+    Returns:
+        str: replacement url
+    '''
+    if config['make_link']:
+        pages = u_match.group(1)
+        pages_list = pages.split(',')
+        url_template = config['driver_urls'][config['url_key']]
+        url = url_template.format(*pages_list)
+        return url
+    else:
+        return u_match.group(1)
+
+
 def fix_references(doc, cfg, make_link=False):
     '''Replace ATTR and function mentions in documentation
 
@@ -259,8 +278,14 @@ def fix_references(doc, cfg, make_link=False):
     attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
     func_re = re.compile('{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', '')))
 
-    doc = attr_re.sub(replace_attribute_python_name, doc)
-    doc = func_re.sub(replace_func_python_name, doc)
+    doc = attr_re.sub(_replace_attribute_python_name, doc)
+    doc = func_re.sub(_replace_func_python_name, doc)
+
+    if 'driver_urls' in cfg:
+        for url_key in cfg['driver_urls']:
+            url_re = re.compile('{0}\((.+?)\)'.format(url_key))
+            config['url_key'] = url_key
+            doc = url_re.sub(_replace_urls, doc)
 
     if not make_link:
         doc = doc.replace('\_', '_')
