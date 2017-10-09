@@ -100,20 +100,15 @@ _parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
 }
 
 
-def filter_parameters(function, parameter_usage_options, options_override={}):
+def filter_parameters(function, parameter_usage_options):
     '''filter_parameters
 
     Filters and reorders the parameters of the function passed in based on parameter_usage_options.
-    You may override specifics by passing them in the options_override dictionary.
     '''
     if type(parameter_usage_options) is not ParameterUsageOptions:
         raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
-    if type(options_override) is not dict:
-        raise TypeError('parameter_usage_options must be of type ' + str(dict))
 
     options_to_use = _parameterUsageOptions[parameter_usage_options]
-    for o in options_override:
-        options_to_use[o] = options_override[o]
 
     parameters_to_use = []
 
@@ -148,22 +143,17 @@ def filter_parameters(function, parameter_usage_options, options_override={}):
     return parameters_to_use
 
 
-def get_params_snippet(function, parameter_usage_options, options_override={}):
+def get_params_snippet(function, parameter_usage_options):
     '''get_params_snippet
 
     Get a parameter list snippet based on parameter_usage_options.
-    You may override specifics by passing them in the options_override dictionary.
     '''
     if type(parameter_usage_options) is not ParameterUsageOptions:
         raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
-    if type(options_override) is not dict:
-        raise TypeError('parameter_usage_options must be of type ' + str(dict))
 
     options_to_use = _parameterUsageOptions[parameter_usage_options]
-    for o in options_override:
-        options_to_use[o] = options_override[o]
 
-    parameters_to_use = filter_parameters(function, parameter_usage_options, options_override)
+    parameters_to_use = filter_parameters(function, parameter_usage_options)
 
     snippets = []
     if not options_to_use['skip_self']:
