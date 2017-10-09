@@ -11,14 +11,14 @@ nidcpower.Session methods
     attribute reverts the NI-DCPower session to the Uncommitted state. Use
     the :py:func:`nidcpower._initiate` function to transition to the Running state.
     Refer to the `Programming
-    States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic in
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
     the *NI DC Power Supplies and SMUs Help* for details about the specific
     NI-DCPower software states.
 
     **Related Topics:**
 
     `Programming
-    States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
     
 
@@ -39,13 +39,13 @@ nidcpower.Session methods
 
     **Related Topics:**
 
-    `Aperture Time <REPLACE_WITH_DRIVER_SPECIFIC_URL(aperture)>`__
+    `Aperture Time <REPLACE_DRIVER_SPECIFIC_URL_1(aperture)>`__
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -95,7 +95,7 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -143,7 +143,7 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -191,7 +191,7 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -240,7 +240,7 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -288,7 +288,7 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -343,17 +343,17 @@ nidcpower.Session methods
 
     Use this function in the Uncommitted or Committed programming states.
     Refer to the `Programming
-    States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic in
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
     the *NI DC Power Supplies and SMUs Help* for more information about
     NI-DCPower programming states.
 
     **Related Topics**:
 
     `Advanced Sequence
-    Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(advancedsequencemode)>`__
+    Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
     `Programming
-    States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
     :py:func:`nidcpower.create_advanced_sequence_step`
 
@@ -361,7 +361,7 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -503,10 +503,10 @@ nidcpower.Session methods
     **Related Topics**:
 
     `Advanced Sequence
-    Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(advancedsequencemode)>`__
+    Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
     `Programming
-    States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
     :py:func:`nidcpower.create_advanced_sequence`
 
@@ -514,7 +514,7 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -542,16 +542,16 @@ nidcpower.Session methods
     **Related Topics**:
 
     `Advanced Sequence
-    Mode <REPLACE_WITH_DRIVER_SPECIFIC_URL(advancedsequencemode)>`__
+    Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
     `Programming
-    States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -583,13 +583,13 @@ nidcpower.Session methods
 
     **Related Topics:**
 
-    `Triggers <REPLACE_WITH_DRIVER_SPECIFIC_URL(trigger)>`__
+    `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -670,16 +670,16 @@ nidcpower.Session methods
     :py:func:`nidcpower._initiate` before calling this function.
 
     Refer to the `Acquiring
-    Measurements <REPLACE_WITH_DRIVER_SPECIFIC_URL(acquiringmeasurements)>`__
-    and `Compliance <REPLACE_WITH_DRIVER_SPECIFIC_URL(compliance)>`__ topics
-    in the *NI DC Power Supplies and SMUs Help* for more information about
+    Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
+    and `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in
+    the *NI DC Power Supplies and SMUs Help* for more information about
     configuring this function.
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -774,7 +774,7 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -835,7 +835,7 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -948,7 +948,7 @@ nidcpower.Session methods
 .. function:: query_in_compliance()
 
     Queries the specified output device to determine if it is operating at
-    the `compliance <REPLACE_WITH_DRIVER_SPECIFIC_URL(compliance)>`__ limit.
+    the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
 
     The compliance limit is the current limit when the output function is
     set to NIDCPOWER\_VAL\_DC\_VOLTAGE. If the output is operating at the
@@ -966,7 +966,7 @@ nidcpower.Session methods
 
     **Related Topics:**
 
-    `Compliance <REPLACE_WITH_DRIVER_SPECIFIC_URL(compliance)>`__
+    `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
     
 
@@ -1108,7 +1108,7 @@ nidcpower.Session methods
 
     **Related Topics:**
 
-    `Compliance <REPLACE_WITH_DRIVER_SPECIFIC_URL(compliance)>`__
+    `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
     
 
@@ -1173,8 +1173,8 @@ nidcpower.Session methods
     device and driver software. This function has the same functionality as
     using reset in Measurement & Automation Explorer. Refer to the
     `Programming
-    States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic
-    for more information about NI-DCPower software states.
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+    more information about NI-DCPower software states.
 
     This will also open the output relay on devices that have an output
     relay.
@@ -1202,13 +1202,13 @@ nidcpower.Session methods
 
     **Related Topics:**
 
-    `triggers <REPLACE_WITH_DRIVER_SPECIFIC_URL(trigger)>`__
+    `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -1236,17 +1236,17 @@ nidcpower.Session methods
 
     Configures a series of voltage or current outputs and corresponding
     source delays. The source mode must be set to
-    `Sequence <REPLACE_WITH_DRIVER_SPECIFIC_URL(sequencing)>`__ for this
+    `Sequence <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for this
     function to take effect.
 
     Refer to the `Configuring the Source
-    Unit <REPLACE_WITH_DRIVER_SPECIFIC_URL(configuringthesourceunit)>`__
-    topic in the *NI DC Power Supplies and SMUs Help* for more information
-    about how to configure your device.
+    Unit <REPLACE_DRIVER_SPECIFIC_URL_1(configuringthesourceunit)>`__ topic
+    in the *NI DC Power Supplies and SMUs Help* for more information about
+    how to configure your device.
 
     Use this function in the Uncommitted or Committed programming states.
     Refer to the `Programming
-    States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic in
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
     the *NI DC Power Supplies and SMUs Help* for more information about
     NI-DCPower programming states.
 
@@ -1254,7 +1254,7 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -1272,7 +1272,7 @@ nidcpower.Session methods
 
         Specifies the series of voltage levels or current levels, depending on
         the configured `output
-        function <REPLACE_WITH_DRIVER_SPECIFIC_URL(programming_output)>`__.
+        function <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
         **Valid values**:
         The valid values for this parameter are defined by the voltage level
         range or current level range.
@@ -1314,7 +1314,7 @@ nidcpower.Session methods
     
 
     .. note:: Refer to `Supported Functions by
-        Device <REPLACE_WITH_DRIVER_SPECIFIC_URL(nidcpowercref.chm',%20'supportedfunctions)>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
@@ -1360,8 +1360,8 @@ nidcpower.Session methods
     generation, resets session attributes to their default values, commits
     the session attributes, and leaves the session in the Uncommitted state.
     Refer to the `Programming
-    States <REPLACE_WITH_DRIVER_SPECIFIC_URL(programmingstates)>`__ topic
-    for more information about NI-DCPower software states.
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+    more information about NI-DCPower software states.
 
     
 

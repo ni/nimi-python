@@ -74,9 +74,9 @@ nidmm.Session methods
         value that you are measuring. For example, you must type in 10 V if you
         are measuring 9 V. **range** values are coerced up to the closest input
         **range**. Refer to the `Devices
-        Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-        for a list of valid ranges. The driver sets :py:data:`nidmm.range` to this
-        value. The default is 0.02 V.
+        Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a list of valid
+        ranges. The driver sets :py:data:`nidmm.range` to this value. The default is
+        0.02 V.
 
         +-------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | NIDMM\_VAL\_AUTO\_RANGE\_ON   | -1.0 | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                                            |
@@ -138,9 +138,9 @@ nidmm.Session methods
         that you are measuring. For example, you must type in 10 V if you are
         measuring 9 V. range values are coerced up to the closest input range.
         Refer to the `Devices
-        Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-        for a list of valid ranges. The driver sets :py:data:`nidmm.range` to this
-        value. The default is 0.02 V.
+        Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a list of valid
+        ranges. The driver sets :py:data:`nidmm.range` to this value. The default is
+        0.02 V.
 
         +-------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | NIDMM\_VAL\_AUTO\_RANGE\_ON   | -1.0 | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                                            |
@@ -158,13 +158,11 @@ nidmm.Session methods
 
 
         Specifies the resolution of the measurement in digits. The driver sets
-        the `Devices
-        Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-        for a list of valid ranges. The driver sets
-        :py:data:`nidmm.RESOLUTION\_DIGITS` attribute to this value. This parameter
-        is ignored when the **Range** parameter is set to
-        NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
-        (-3.0). The default is 5½.
+        the `Devices Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a
+        list of valid ranges. The driver sets :py:data:`nidmm.RESOLUTION\_DIGITS`
+        attribute to this value. This parameter is ignored when the **Range**
+        parameter is set to NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or
+        NIDMM\_VAL\_AUTO\_RANGE\_ONCE (-3.0). The default is 5½.
 
         
 
@@ -185,8 +183,7 @@ nidmm.Session methods
     :py:data:`nidmm.SAMPLE\_COUNT` to zero. For more information, refer to
     `Multiple Point
     Acquisitions <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/multi_point/>`__,
-    `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__,
-    and `Using
+    `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__, and `Using
     Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__.
 
     
@@ -223,8 +220,7 @@ nidmm.Session methods
 
         .. note:: To determine which values are supported by each device, refer to the
             `LabWindows/CVI Trigger
-            Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-            section.
+            Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__ section.
 
     :type sample_trigger: :py:data:`nidmm.SampleTrigger`
     :param sample_interval:
@@ -487,11 +483,10 @@ nidmm.Session methods
 
 .. function:: configure_trigger(trigger_source, trigger_delay=-1)
 
-    Configures the DMM **trigger_source** and **trigger_delay**. Refer to
-    `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
-    and `Using
-    Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__
-    for more information.
+    Configures the DMM **Trigger\_Source** and **Trigger\_Delay**. Refer to
+    `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__ and `Using
+    Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__ for more
+    information.
 
     
 
@@ -508,8 +503,7 @@ nidmm.Session methods
 
         .. note:: To determine which values are supported by each device, refer to the
             `LabWindows/CVI Trigger
-            Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-            section.
+            Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__ section.
 
     :type trigger_source: :py:data:`nidmm.TriggerSource`
     :param trigger_delay:
@@ -590,8 +584,7 @@ nidmm.Session methods
 
         To calculate the maximum and minimum number of waveform points that you
         can acquire in one acquisition, refer to the `Waveform Acquisition
-        Measurement
-        Cycle <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/waveform_cycle/>`__.
+        Measurement Cycle <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/waveform_cycle/>`__.
 
         The default value is 500.
 
@@ -768,7 +761,7 @@ nidmm.Session methods
 
 .. function:: get_aperture_time_info()
 
-    Returns the DMM **aperture_time** and **aperture_time\_Units**.
+    Returns the DMM **Aperture\_Time** and **Aperture\_Time\_Units**.
 
     
 
@@ -819,7 +812,7 @@ nidmm.Session methods
 
 .. function:: get_auto_range_value()
 
-    Returns the **actual_range** that the DMM is using, even when Auto
+    Returns the **Actual\_Range** that the DMM is using, even when Auto
     Range is off.
 
     
@@ -903,7 +896,7 @@ nidmm.Session methods
 
 .. function:: get_dev_temp(options='')
 
-    Returns the current **temperature** of the device.
+    Returns the current **Temperature** of the device.
 
     
 
@@ -930,7 +923,7 @@ nidmm.Session methods
 
 .. function:: get_last_cal_temp(cal_type)
 
-    Returns the **temperature** during the last calibration procedure.
+    Returns the **Temperature** during the last calibration procedure.
 
     
 
@@ -964,7 +957,7 @@ nidmm.Session methods
 
 .. function:: get_measurement_period()
 
-    Returns the measurement **period**, which is the amount of time it takes
+    Returns the measurement **Period**, which is the amount of time it takes
     to complete one measurement with the current configuration. Use this
     function right before you begin acquiring data—after you have completely
     configured the measurement and after all configuration functions have
@@ -1014,7 +1007,7 @@ nidmm.Session methods
 
     For the NI 4082 and NI 4072 only, performs the open cable compensation
     measurements for the current capacitance/inductance range, and returns
-    open cable compensation **conductance** and **susceptance** values. You
+    open cable compensation **Conductance** and **Susceptance** values. You
     can use the return values of this function as inputs to
     :py:func:`nidmm.configure_open_cable_comp_values`.
 
@@ -1050,7 +1043,7 @@ nidmm.Session methods
 
     Performs the short cable compensation measurements for the current
     capacitance/inductance range, and returns short cable compensation
-    **resistance** and **reactance** values. You can use the return values
+    **Resistance** and **Reactance** values. You can use the return values
     of this function as inputs to :py:func:`nidmm.configure_short_cable_comp_values`.
 
     This function returns an error if the value of the :py:data:`nidmm.function`
@@ -1232,7 +1225,7 @@ nidmm.Session methods
 
     For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
     and returns data as an array of values or as a waveform data type. The
-    number of elements in the **waveform_array** is determined by the
+    number of elements in the **Waveform\_Array** is determined by the
     values you specify for the **Waveform\_Points** parameter in
     :py:func:`nidmm.configure_waveform_acquisition`.
 

@@ -371,13 +371,13 @@ niswitch.Session methods
 .. function:: get_path(channel1, channel2)
 
     Returns a string that identifies the explicit path created with
-    :py:func:`niswitch.connect`. Pass this string to :py:func:`niswitch.Setpath` to establish
+    :py:func:`niswitch.connect`. Pass this string to :py:func:`niswitch.set_path` to establish
     the exact same path in future connections. In some cases, multiple paths
     are available between two channels. When you call :py:func:`niswitch.connect`, the
     driver selects an available path. With :py:func:`niswitch.connect`, there is no
     guarantee that the driver selected path will always be the same path
-    through the switch module. :py:func:`niswitch.Getpath` only returns those paths
-    explicitly created by niSwitch Connect Channels or :py:func:`niswitch.Setpath`.
+    through the switch module. :py:func:`niswitch.get_path` only returns those paths
+    explicitly created by niSwitch Connect Channels or :py:func:`niswitch.set_path`.
     For example, if you connect channels CH1 and CH3,and then channels CH2
     and CH3, an explicit path between channels CH1 and CH2 does not exist an
     error is returned
@@ -528,7 +528,7 @@ niswitch.Session methods
 
     Returns a session handle used to identify the switch in all subsequent
     instrument driver calls and sets the topology of the switch.
-    :py:func:`niswitch.InitWithtopology` creates a new IVI instrument driver session
+    :py:func:`niswitch.init_with_topology` creates a new IVI instrument driver session
     for the switch specified in the resourceName parameter. The driver uses
     the topology specified in the topology parameter and overrides the
     topology specified in MAX. Note: When initializing an NI SwitchBlock

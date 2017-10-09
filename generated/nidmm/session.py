@@ -1224,9 +1224,9 @@ class Session(_SessionBase):
                 value that you are measuring. For example, you must type in 10 V if you
                 are measuring 9 V. **range** values are coerced up to the closest input
                 **range**. Refer to the `Devices
-                Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-                for a list of valid ranges. The driver sets range to this
-                value. The default is 0.02 V.
+                Overview <devices>`__ for a list of valid
+                ranges. The driver sets range to this value. The default is
+                0.02 V.
 
                 +---------------------------+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
                 | NIDMM_VAL_AUTO_RANGE_ON   | -1.0 | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                         |
@@ -1276,9 +1276,9 @@ class Session(_SessionBase):
                 that you are measuring. For example, you must type in 10 V if you are
                 measuring 9 V. range values are coerced up to the closest input range.
                 Refer to the `Devices
-                Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-                for a list of valid ranges. The driver sets range to this
-                value. The default is 0.02 V.
+                Overview <devices>`__ for a list of valid
+                ranges. The driver sets range to this value. The default is
+                0.02 V.
 
                 +---------------------------+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
                 | NIDMM_VAL_AUTO_RANGE_ON   | -1.0 | NI-DMM performs an Auto Range before acquiring the measurement.                                                                                                                         |
@@ -1292,13 +1292,11 @@ class Session(_SessionBase):
                 The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
                 trigger and sample trigger are set to IMMEDIATE.
             resolution_digits (float): Specifies the resolution of the measurement in digits. The driver sets
-                the `Devices
-                Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-                for a list of valid ranges. The driver sets
-                RESOLUTION_DIGITS attribute to this value. This parameter
-                is ignored when the **Range** parameter is set to
-                NIDMM_VAL_AUTO_RANGE_ON (-1.0) or NIDMM_VAL_AUTO_RANGE_ONCE
-                (-3.0). The default is 5½.
+                the `Devices Overview <devices>`__ for a
+                list of valid ranges. The driver sets RESOLUTION_DIGITS
+                attribute to this value. This parameter is ignored when the **Range**
+                parameter is set to NIDMM_VAL_AUTO_RANGE_ON (-1.0) or
+                NIDMM_VAL_AUTO_RANGE_ONCE (-3.0). The default is 5½.
 
                 Note:
                 NI-DMM ignores this parameter for capacitance and inductance
@@ -1322,10 +1320,9 @@ class Session(_SessionBase):
         For continuous acquisitions, set TRIGGER_COUNT or
         SAMPLE_COUNT to zero. For more information, refer to
         `Multiple Point
-        Acquisitions <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/multi_point/>`__,
-        `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__,
-        and `Using
-        Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__.
+        Acquisitions <multi_point>`__,
+        `Triggering <trigger>`__, and `Using
+        Switches <switch_selection>`__.
 
         Args:
             trigger_count (int): Sets the number of triggers you want the DMM to receive before returning
@@ -1341,8 +1338,7 @@ class Session(_SessionBase):
                 Note:
                 To determine which values are supported by each device, refer to the
                 `LabWindows/CVI Trigger
-                Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-                section.
+                Routing <cvitrigger_routing>`__ section.
             sample_interval (float): Sets the amount of time in seconds the DMM waits between measurement
                 cycles. The driver sets SAMPLE_INTERVAL to this value.
                 Specify a sample interval to add settling time between measurement
@@ -1529,11 +1525,10 @@ class Session(_SessionBase):
     def configure_trigger(self, trigger_source, trigger_delay=-1):
         '''configure_trigger
 
-        Configures the DMM **trigger_source** and **trigger_delay**. Refer to
-        `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
-        and `Using
-        Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__
-        for more information.
+        Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
+        `Triggering <trigger>`__ and `Using
+        Switches <switch_selection>`__ for more
+        information.
 
         Args:
             trigger_source (enums.TriggerSource): Specifies the **trigger_source** that initiates the acquisition. The
@@ -1544,8 +1539,7 @@ class Session(_SessionBase):
                 Note:
                 To determine which values are supported by each device, refer to the
                 `LabWindows/CVI Trigger
-                Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-                section.
+                Routing <cvitrigger_routing>`__ section.
             trigger_delay (float): Specifies the time that the DMM waits after it has received a trigger
                 before taking a measurement. The driver sets the
                 TRIGGER_DELAY attribute to this value. By default,
@@ -1586,7 +1580,7 @@ class Session(_SessionBase):
                 closest input **range**. The default is 10.0.
 
                 For valid ranges refer to the topics in
-                `Devices <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__.
+                `Devices <devices>`__.
 
                 Auto-ranging is not supported during waveform acquisitions.
             rate (float): Specifies the **rate** of the acquisition in samples per second. NI-DMM
@@ -1601,8 +1595,7 @@ class Session(_SessionBase):
 
                 To calculate the maximum and minimum number of waveform points that you
                 can acquire in one acquisition, refer to the `Waveform Acquisition
-                Measurement
-                Cycle <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/waveform_cycle/>`__.
+                Measurement Cycle <waveform_cycle>`__.
 
                 The default value is 500.
         '''
@@ -1728,7 +1721,7 @@ class Session(_SessionBase):
     def get_aperture_time_info(self):
         '''get_aperture_time_info
 
-        Returns the DMM **aperture_time** and **aperture_time_Units**.
+        Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
 
         Returns:
             aperture_time (float): Specifies the amount of time the DMM digitizes the input signal for a
@@ -1770,7 +1763,7 @@ class Session(_SessionBase):
     def get_auto_range_value(self):
         '''get_auto_range_value
 
-        Returns the **actual_range** that the DMM is using, even when Auto
+        Returns the **Actual_Range** that the DMM is using, even when Auto
         Range is off.
 
         Returns:
@@ -1821,7 +1814,7 @@ class Session(_SessionBase):
     def get_dev_temp(self, options=''):
         '''get_dev_temp
 
-        Returns the current **temperature** of the device.
+        Returns the current **Temperature** of the device.
 
         Note: The NI 4050 and NI 4060 are not supported.
 
@@ -1840,9 +1833,9 @@ class Session(_SessionBase):
         '''_get_error
 
         Returns the error information associated with the
-        **vi**. This function retrieves and then clears the
+        **Instrument_Handle**. This function retrieves and then clears the
         error information for the session. If you leave the
-        **vi** unwired, this function retrieves and then clears
+        **Instrument_Handle** unwired, this function retrieves and then clears
         the error information for the process.
 
         Args:
@@ -1879,7 +1872,7 @@ class Session(_SessionBase):
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
 
-        Returns the **temperature** during the last calibration procedure.
+        Returns the **Temperature** during the last calibration procedure.
 
         Note: The NI 4050 and NI 4060 are not supported.
 
@@ -1906,7 +1899,7 @@ class Session(_SessionBase):
     def get_measurement_period(self):
         '''get_measurement_period
 
-        Returns the measurement **period**, which is the amount of time it takes
+        Returns the measurement **Period**, which is the amount of time it takes
         to complete one measurement with the current configuration. Use this
         function right before you begin acquiring data—after you have completely
         configured the measurement and after all configuration functions have
@@ -1957,11 +1950,11 @@ class Session(_SessionBase):
            RANGE_CHECK, QUERY_INSTR_STATUS,
            cache, simulate,
            RECORD_COERCIONS.
-        -  Opens a session to the device you specify for the **resource_name**
+        -  Opens a session to the device you specify for the **Resource_Name**
            parameter. If the **ID_Query** parameter is set to VI_TRUE, this
            function queries the instrument ID and checks that it is valid for
            this instrument driver.
-        -  If the **reset_device** parameter is set to VI_TRUE, this function
+        -  If the **Reset_Device** parameter is set to VI_TRUE, this function
            resets the instrument to a known state. Sends initialization commands
            to set the instrument to the state necessary for the operation of the
            instrument driver.
@@ -1980,7 +1973,7 @@ class Session(_SessionBase):
                 | Contains the **resource_name** of the device to initialize. The
                   **resource_name** is assigned in Measurement & Automation Explorer
                   (MAX). Refer to `Related
-                  Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
+                  Documentation <related_documentation>`__
                   for the *NI Digital Multimeters Getting Started Guide* for more
                   information about configuring and testing the DMM in MAX.
                 | Valid Syntax:
@@ -2022,8 +2015,8 @@ class Session(_SessionBase):
                 leave any of them out (those left out use the default value).
 
                 Refer to `Simulating NI Digital
-                Multimeters <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/simulation/>`__
-                for more information.
+                Multimeters <simulation>`__ for more
+                information.
 
                 +------------------+--------------------+-------------------+----+
                 | Check            | RANGE_CHECK        | VI_TRUE           | 1  |
@@ -2066,7 +2059,7 @@ class Session(_SessionBase):
 
         For the NI 4082 and NI 4072 only, performs the open cable compensation
         measurements for the current capacitance/inductance range, and returns
-        open cable compensation **conductance** and **susceptance** values. You
+        open cable compensation **Conductance** and **Susceptance** values. You
         can use the return values of this function as inputs to
         configure_open_cable_comp_values.
 
@@ -2091,7 +2084,7 @@ class Session(_SessionBase):
 
         Performs the short cable compensation measurements for the current
         capacitance/inductance range, and returns short cable compensation
-        **resistance** and **reactance** values. You can use the return values
+        **Resistance** and **Reactance** values. You can use the return values
         of this function as inputs to configure_short_cable_comp_values.
 
         This function returns an error if the value of the function
@@ -2222,7 +2215,7 @@ class Session(_SessionBase):
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
         and returns data as an array of values or as a waveform data type. The
-        number of elements in the **waveform_array** is determined by the
+        number of elements in the **Waveform_Array** is determined by the
         values you specify for the **Waveform_Points** parameter in
         configure_waveform_acquisition.
 
@@ -2310,7 +2303,7 @@ class Session(_SessionBase):
     def _error_message(self, error_code):
         '''_error_message
 
-        Takes the **error_code** returned by the instrument driver functions,
+        Takes the **Error_Code** returned by the instrument driver functions,
         interprets it, and returns it as a user-readable string.
 
         Args:
