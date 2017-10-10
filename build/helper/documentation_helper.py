@@ -174,7 +174,7 @@ def get_documentation_for_node_docstring(node, config, indent=0):
         doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('Note: ' + nd['note'], config, make_link=False), indent)
 
     if 'tip' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(fix_references('Tip: ' + nd['tip'], config, make_link=False), indent)
+        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('Tip: ' + nd['tip'], config, make_link=False), indent)
 
     return doc.strip()
 
@@ -313,9 +313,9 @@ def _format_type_for_rst_documentation(param, config):
 
 
 rep_cap_method_desc = '''
-This method requires repeated capabilities (usually channels). If called directly on the 
-{0}.Session object, then the method will use all repeated capabilities in the session. 
-You can specify a subset of repeated capabilities using the Python index notation on an 
+This method requires repeated capabilities (usually channels). If called directly on the
+{0}.Session object, then the method will use all repeated capabilities in the session.
+You can specify a subset of repeated capabilities using the Python index notation on an
 {0}.Session instance, and calling this method on the result.:
 '''
 rep_cap_method_desc_rst = rep_cap_method_desc + '''
