@@ -469,6 +469,12 @@ def as_rest_table(data, header=True):
 
 
 # Unit Tests
+
+def _remove_trailing_whitespace(s):
+    '''Removes trailing whitespace in multi-line strings. https://stackoverflow.com/a/17350806/316875'''
+    return re.sub(r'\s+$', '', s, flags=re.M)
+
+
 config = {
     'functions': {
         'GetTurtleID': {
@@ -631,7 +637,7 @@ def test_get_function_rst():
 
 
 ''' # noqa
-    assert actual_function_rst == expected_fuction_rst
+    assert _remove_trailing_whitespace(actual_function_rst) == _remove_trailing_whitespace(expected_fuction_rst)
 
 
 def test_get_function_docstring():
