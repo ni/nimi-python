@@ -339,3 +339,4 @@ class Session(object):
         error_code = self._library.niModInst_OpenInstalledDevicesSession(driver.encode(self._encoding), ctypes.pointer(handle_ctype), ctypes.pointer(device_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(handle_ctype.value), int(device_count_ctype.value)
+
