@@ -25,7 +25,8 @@ def test_get_attribute_string(session):
 
 
 def test_error_message(session):
-    # Testing a private function, as there is no way to natively get to this function on a simulated session.
+    # Calling the private function directly, as _get_error_message() only gets called when you have an invalid session, 
+    # and there is no good way for us to invalidate a simulated session.
     message = session._error_message(-1074135027)
     assert message.find('Attribute is read-only.') != -1
 
