@@ -141,6 +141,7 @@ def get_documentation_for_node_docstring(node, config, indent=0):
     - 'description'
     - table made of 'table_header' and 'table_body'
     - 'note' admonition
+    - 'tip' admonition
 
     Args:
         node (dict) - Node possibly containing documentation
@@ -171,6 +172,9 @@ def get_documentation_for_node_docstring(node, config, indent=0):
 
     if 'note' in nd:
         doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(fix_references('Note: ' + nd['note'], config, make_link=False), indent)
+
+    if 'tip' in nd:
+        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(fix_references('Tip: ' + nd['tip'], config, make_link=False), indent)
 
     return doc.strip()
 
@@ -312,7 +316,8 @@ rep_cap_method_desc = '''
 This method uses repeated capabilities (usually channels). If called directly on the {0}.Session object, then 
 it will apply to the full session. You can specify what repeated capabilities to use using the Python
 index notation:
-
+'''
+rep_cap_method_desc_rst = rep_cap_method_desc + '''
 .. code:: python
 
     session['0,1'].{1}({2})
@@ -331,7 +336,7 @@ def get_function_rst(fname, config, indent=0):
     '''
     function = config['functions'][fname]
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
+        function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
 
     rst = '.. function:: ' + function['python_name'] + '('
     rst += get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD) + ')'
@@ -377,6 +382,11 @@ def _format_type_for_docstring(param, config):
     return p_type
 
 
+rep_cap_method_desc_docstring = rep_cap_method_desc + '''
+    session['0,1'].{1}({2})
+'''
+
+
 def get_function_docstring(fname, config, indent=0):
     '''Gets formatted documentation for given function that can be used as a docstring
 
@@ -389,6 +399,9 @@ def get_function_docstring(fname, config, indent=0):
     '''
     docstring = ''
     function = config['functions'][fname]
+    if function['has_repeated_capability'] is True:
+        function['documentation']['tip'] = rep_cap_method_desc_docstring.format(config['module_name'], function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
+
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
     input_params = filter_input_parameters(function['parameters'])
