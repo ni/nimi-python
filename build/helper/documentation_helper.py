@@ -470,9 +470,19 @@ def as_rest_table(data, header=True):
 
 # Unit Tests
 
+
 def _remove_trailing_whitespace(s):
-    '''Removes trailing whitespace in multi-line strings. https://stackoverflow.com/a/17350806/316875'''
+    '''Removes trailing whitespace and empty lines in multi-line strings. https://stackoverflow.com/a/17350806/316875'''
     return re.sub(r'\s+$', '', s, flags=re.M)
+
+
+def assert_rst_strings_are_equal(expected, actual):
+    '''Asserts rst formatted strings (multiline) are equal. Ignores trailing whitespace and empty lines.'''
+    expected = _remove_trailing_whitespace(expected).splitlines()
+    actual = _remove_trailing_whitespace(actual).splitlines()
+    assert len(expected) == len(actual), 'Strings have different number of non-empty lines.'
+    for expected_line, actual_line in zip(expected, actual):
+        assert expected_line == actual_line, 'Difference found:\n{0}\n{1}'.format(expected_line, actual_line)
 
 
 config = {
@@ -604,7 +614,7 @@ def test_get_function_rst():
 
     Returns the **ID** of selected Turtle Type.
 
-    
+
 
     .. note:: The RAPHAEL Turtles dont have an ID.
 
@@ -635,7 +645,7 @@ def test_get_function_rst():
 
             Returns the **ID** of selected turtle.
 
-            
+
 ''' # noqa
     assert_rst_strings_are_equal(actual_function_rst, expected_fuction_rst)
 
@@ -664,7 +674,7 @@ Args:
 
 Returns:
     turtle_id (float): Returns the **ID** of selected turtle.''' # noqa
-    assert expected_function_docstring == actual_function_docstring
+    assert_rst_strings_are_equal(expected_function_docstring, actual_function_docstring)
 
 
 def test_get_rst_header_snippet():
@@ -707,4 +717,4 @@ at maximum size I can handle"""
     +-------+-------------------------+---------------------------+
     | ipsum | this is a random strinf | Yes, I am a random string |
     +-------+-------------------------+---------------------------+""" # noqa
-    assert expected_documentation == actual_documentation
+    assert_rst_strings_are_equal(expected_documentation, actual_documentation)
