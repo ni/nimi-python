@@ -21,15 +21,35 @@ def filter_enum_parameters(parameters):
     return [x for x in parameters if x['enum'] is not None]
 
 
-def filter_ivi_dance_parameter(parameters):
-    '''Returns the ivi-dance parameter of a session method if there is one. This is the parameter whose size is determined at runtime.'''
-    param = [x for x in parameters if x['size']['mechanism'] == 'ivi-dance']
-    assert len(param) <= 1, '{0} ivi-dance parameters. No more than one is allowed'.format(len(param))
+def _filter_size_parameter(parameters, mechanism, direction):
+    '''Returns the parameter what matches the given mechanism
+
+    Args:
+        paramaters: Parameters from function
+        mechanism: which mechanism we are looking for
+        direction: optional, will be used to verify the direction of the found parameter
+
+    Returns:
+        Parameter that matches the mechanism
+    '''
+    param = [x for x in parameters if x['size']['mechanism'] == mechanism]
+    assert len(param) <= 1, '{0} {1} parameters. No more than one is allowed'.format(len(param), mechanism)
     if len(param) == 0:
         return None
-    assert param[0]['direction'] == 'out', "ivi-dance parameter must have 'direction':'out'. Check your metadata."
-    assert param[0]['is_buffer'], "ivi-dance parameter must have 'is_buffer':True. Check your metadata."
+    if direction is not None:
+        assert param[0]['direction'] == direction, "{0} parameter must have 'direction':'{1}'. Check your metadata.".format(mechanism, direction)
+    assert param[0]['is_buffer'], "{0} parameter must have 'is_buffer':True. Check your metadata.".format(mechanism)
     return param[0]
+
+
+def filter_ivi_dance_parameter(parameters):
+    '''Returns the ivi-dance parameter of a session method if there is one. This is the parameter whose size is determined at runtime.'''
+    return _filter_size_parameter(parameters, 'ivi-dance', 'out')
+
+
+def filter_len_parameter(parameters):
+    '''Returns the len parameter of a session method if there is one. This is the parameter whose size is determined at runtime.'''
+    return _filter_size_parameter(parameters, 'len', 'in')
 
 
 

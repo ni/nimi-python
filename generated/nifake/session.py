@@ -285,7 +285,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def array_input_function(self, number_of_elements, an_array):
+    def array_input_function(self, an_array):
         '''array_input_function
 
         This function takes an array parameter.
@@ -294,6 +294,7 @@ class Session(_SessionBase):
             number_of_elements (int): Number of elements in the array.
             an_array (list of float): Contains an array of float numbers
         '''
+        number_of_elements = len(an_array)
         error_code = self._library.niFake_ArrayInputFunction(self._vi, number_of_elements, an_array)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
