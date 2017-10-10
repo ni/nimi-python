@@ -122,6 +122,7 @@ def get_documentation_for_node_rst(node, config, indent=0):
     nd = node['documentation']
     doc += get_rst_admonition_snippet('caution', nd, config, indent)
     if 'description' in nd:
+        doc += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(_fix_references(nd['description'], config, make_link=True), indent)
 
     doc += '\n\n' + (' ' * indent) + _get_rst_table_snippet(nd, config, indent)
     doc += get_rst_admonition_snippet('note', nd, config, indent)
