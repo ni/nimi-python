@@ -86,9 +86,10 @@ class _SessionBase(object):
 % for attribute in helper.sorted_attrs(attributes):
 <%
 rep_cap_attr_desc = '''
-This attribute uses repeated capabilities (usually channels). If you set or get this attribute directly on the
-{0}.Session object, then all repeated capabilities will be used. You can specify what repeated capabilities to
-use using the Python index notation:
+This attribute requires repeated capabilities (usually channels). If set or get directly on the 
+{0}.Session object, then the set/get will use all repeated capabilities in the session. 
+You can specify a subset of repeated capabilities using the Python index notation on an 
+{0}.Session instance, and calling set/get value on the result.:
 
     session['0,1'].{0} = var
     var = session['0,1'].{0}

@@ -313,9 +313,10 @@ def _format_type_for_rst_documentation(param, config):
 
 
 rep_cap_method_desc = '''
-This method uses repeated capabilities (usually channels). If called directly on the {0}.Session object, then 
-it will apply to the full session. You can specify what repeated capabilities to use using the Python
-index notation:
+This method requires repeated capabilities (usually channels). If called directly on the 
+{0}.Session object, then the method will use all repeated capabilities in the session. 
+You can specify a subset of repeated capabilities using the Python index notation on an 
+{0}.Session instance, and calling this method on the result.:
 '''
 rep_cap_method_desc_rst = rep_cap_method_desc + '''
 .. code:: python
