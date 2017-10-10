@@ -127,6 +127,8 @@ def get_documentation_for_node_rst(node, config, indent=0):
     doc += '\n\n' + (' ' * indent) + get_rst_table_snippet(nd, config, indent)
     doc += get_rst_admonition_snippet('note', nd, config, indent)
     doc += '\n'
+    doc += get_rst_admonition_snippet('tip', nd, config, indent)
+    doc += '\n'
 
     return doc
 
@@ -281,6 +283,17 @@ def _format_type_for_rst_documentation(param, config):
     return p_type
 
 
+rep_cap_method_desc = '''
+This method uses repeated capabilities (usually channels). If you call this method on the base session, then
+all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+index notation:
+
+.. code:: python
+
+    session['0-2,4'].{0}({1})
+'''
+
+
 def get_function_rst(fname, config, indent=0):
     '''Gets rst formatted documentation for given function
 
@@ -292,6 +305,9 @@ def get_function_rst(fname, config, indent=0):
         str: rst formatted documentation
     '''
     function = config['functions'][fname]
+    if function['has_repeated_capability'] is True:
+        function['documentation']['tip'] = rep_cap_method_desc.format(function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
+
     rst = '.. function:: ' + function['python_name'] + '('
     rst += get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD) + ')'
     indent += 4

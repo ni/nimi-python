@@ -28,6 +28,20 @@ table_contents = [
          ]
 table = helper.as_rest_table(table_contents)
 
+rep_cap_attr_desc = '''
+This attribute can use repeated capabilities (usually channels). If you set or get this method on the base session, then
+all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+index notation:
+
+.. code:: python
+
+    session['0-2,4'].{0} = var
+    var = session['0-2,4'].{0}
+'''
+
+if a['channel_based'] == 'True':
+    a['documentation']['tip'] = rep_cap_attr_desc.format(a["name"].lower())
+
 desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 %>\
     ${helper.get_indented_docstring_snippet(desc, indent=4)}
