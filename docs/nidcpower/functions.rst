@@ -50,9 +50,10 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
-        it will apply to the full session. You can specify what repeated capabilities to use using the Python
-        index notation:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
         .. code:: python
 
@@ -709,9 +710,10 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
-        it will apply to the full session. You can specify what repeated capabilities to use using the Python
-        index notation:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
         .. code:: python
 
@@ -794,9 +796,10 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
-        it will apply to the full session. You can specify what repeated capabilities to use using the Python
-        index notation:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
         .. code:: python
 
@@ -940,9 +943,10 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
-        it will apply to the full session. You can specify what repeated capabilities to use using the Python
-        index notation:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
         .. code:: python
 
@@ -986,9 +990,10 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
-        it will apply to the full session. You can specify what repeated capabilities to use using the Python
-        index notation:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
         .. code:: python
 
@@ -1048,9 +1053,10 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
-        it will apply to the full session. You can specify what repeated capabilities to use using the Python
-        index notation:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
         .. code:: python
 
@@ -1075,9 +1081,10 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
-        it will apply to the full session. You can specify what repeated capabilities to use using the Python
-        index notation:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
         .. code:: python
 
@@ -1114,9 +1121,10 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
-        it will apply to the full session. You can specify what repeated capabilities to use using the Python
-        index notation:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
         .. code:: python
 
@@ -1153,9 +1161,10 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
-        it will apply to the full session. You can specify what repeated capabilities to use using the Python
-        index notation:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
         .. code:: python
 
@@ -1196,9 +1205,10 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
-        it will apply to the full session. You can specify what repeated capabilities to use using the Python
-        index notation:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
         .. code:: python
 
@@ -1349,9 +1359,10 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
-        it will apply to the full session. You can specify what repeated capabilities to use using the Python
-        index notation:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
         .. code:: python
 

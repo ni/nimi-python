@@ -2512,6 +2512,14 @@ class _SessionBase(object):
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].configure_aperture_time(aperture_time, units)
+
         Args:
             aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your
                 device in the *NI DC Power Supplies and SMUs Help* for more information.
@@ -2550,6 +2558,14 @@ class _SessionBase(object):
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].fetch_multiple(timeout, count)
+
         Args:
             timeout (float): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
@@ -2586,6 +2602,14 @@ class _SessionBase(object):
         | Queries the value of a ViBoolean attribute.
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2628,6 +2652,14 @@ class _SessionBase(object):
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_int32(attribute_id)
+
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
@@ -2668,6 +2700,14 @@ class _SessionBase(object):
         | Queries the value of a ViInt64 attribute.
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_int64(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2710,6 +2750,14 @@ class _SessionBase(object):
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_real64(attribute_id)
+
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
@@ -2750,6 +2798,14 @@ class _SessionBase(object):
         | Queries the value of a ViString attribute.
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -2801,6 +2857,14 @@ class _SessionBase(object):
         **index**. Use the CHANNEL_COUNT attribute to
         determine the upper bound of valid values for **index**.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].get_channel_name(index)
+
         Args:
             index (int): Specifies which output channel name to return. The index values begin at
                 1.
@@ -2833,6 +2897,14 @@ class _SessionBase(object):
         measure multiple output channels, use the measure_multiple
         function.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].measure(measurement_type)
+
         Args:
             measurement_type (int): Specifies whether a voltage or current value is measured.
                 **Defined Values**:
@@ -2860,6 +2932,14 @@ class _SessionBase(object):
         function calls until the measurements are returned from the device. The
         order of the measurements returned in the array corresponds to the order
         on the specified output channel(s).
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].measure_multiple()
 
         Returns:
             voltage_measurements (list of float): Returns an array of voltage measurements. The measurements in the array
@@ -2901,6 +2981,14 @@ class _SessionBase(object):
 
         `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].query_in_compliance()
+
         Returns:
             in_compliance (bool): Returns whether the device output channel is in compliance.
         '''
@@ -2914,6 +3002,14 @@ class _SessionBase(object):
 
         Queries the maximum current limit on an output channel if the output
         channel is set to the specified **voltageLevel**.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].query_max_current_limit(voltage_level)
 
         Args:
             voltage_level (float): Specifies the voltage level to use when calculating the
@@ -2934,6 +3030,14 @@ class _SessionBase(object):
         Queries the maximum voltage level on an output channel if the output
         channel is set to the specified **currentLimit**.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].query_max_voltage_level(current_limit)
+
         Args:
             current_limit (float): Specifies the current limit to use when calculating the
                 **maxVoltageLevel**.
@@ -2952,6 +3056,14 @@ class _SessionBase(object):
 
         Queries the minimum current limit on an output channel if the output
         channel is set to the specified **voltageLevel**.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].query_min_current_limit(voltage_level)
 
         Args:
             voltage_level (float): Specifies the voltage level to use when calculating the
@@ -2975,6 +3087,14 @@ class _SessionBase(object):
         **Related Topics:**
 
         `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].query_output_state(output_state)
 
         Args:
             output_state (int): Specifies the output state of the output channel that is being queried.
@@ -3001,6 +3121,14 @@ class _SessionBase(object):
         | Sets the value of a ViBoolean attribute.
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -3045,6 +3173,14 @@ class _SessionBase(object):
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
@@ -3087,6 +3223,14 @@ class _SessionBase(object):
         | Sets the value of a ViInt64 attribute.
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -3131,6 +3275,14 @@ class _SessionBase(object):
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
@@ -3173,6 +3325,14 @@ class _SessionBase(object):
         | Sets the value of a ViString attribute.
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
@@ -3234,6 +3394,14 @@ class _SessionBase(object):
         Functions by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].set_sequence(values, source_delays, size)
 
         Args:
             values (list of float): Specifies the series of voltage levels or current levels, depending on

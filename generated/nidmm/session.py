@@ -819,6 +819,14 @@ class _SessionBase(object):
            particular attribute.
         -  State caching is enabled, and the currently cached value is invalid.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_boolean(attribute_id)
+
         Args:
             attribute_id (int): Pass the ID of an attribute.
 
@@ -845,6 +853,14 @@ class _SessionBase(object):
            particular attribute.
         -  State caching is enabled, and the currently cached value is invalid.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_int32(attribute_id)
+
         Args:
             attribute_id (int): Pass the ID of an attribute.
 
@@ -870,6 +886,14 @@ class _SessionBase(object):
         -  State caching is disabled for the entire session or for the
            particular attribute.
         -  State caching is enabled, and the currently cached value is invalid.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -899,6 +923,14 @@ class _SessionBase(object):
            You must provide a ViChar array to serve as a buffer for the value.
            You pass the number of bytes in the buffer as the Array Size
            parameter.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -956,6 +988,14 @@ class _SessionBase(object):
         attributes whose value you change. Thus, you can safely call the
         high-level functions without the penalty of redundant instrument I/O.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+
         Args:
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (bool): Pass the value that you want to set the attribute to.
@@ -992,6 +1032,14 @@ class _SessionBase(object):
         configure multiple attributes perform instrument I/O only for the
         attributes whose value you change. Thus, you can safely call the
         high-level functions without the penalty of redundant instrument I/O.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
@@ -1030,6 +1078,14 @@ class _SessionBase(object):
         attributes whose value you change. Thus, you can safely call the
         high-level functions without the penalty of redundant instrument I/O.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+
         Args:
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (float): Pass the value that you want to set the attribute to.
@@ -1066,6 +1122,14 @@ class _SessionBase(object):
         configure multiple attributes perform instrument I/O only for the
         attributes whose value you change. Thus, you can safely call the
         high-level functions without the penalty of redundant instrument I/O.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of an attribute.
