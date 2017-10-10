@@ -7,7 +7,7 @@ def filter_codegen_functions(functions):
 
 
 def filter_input_parameters(parameters):
-    '''Returns list of parameters that includes only input parameters, except the session parameter if it exists'''
+    '''Returns list of parameters that includes only input parameters, except the session parameter or repeated capability parameter if they exists'''
     return [x for x in parameters if x['direction'] == 'in' and not x['is_session_handle'] and not x['is_repeated_capability']]
 
 
