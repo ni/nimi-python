@@ -471,29 +471,6 @@ class TestSession(object):
                 assert e.description == test_error_desc
 
     # Error descriptions
-    '''
-    Unit testing does not properly handle passed in or fixed strings. Re-add when #429 is fixed
-    def test_get_error_description_error_message(self):
-        test_error_code = -42
-        test_error_desc = "The answer to the ultimate question"
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = -1
-        self.side_effects_helper['GetError']['description'] = "Shouldn't get this"
-        self.side_effects_helper['GetError']['return'] = -2
-        self.patched_library.niFake_error_message.side_effect = self.side_effects_helper.niFake_error_message
-        self.side_effects_helper['error_message']['errorMessage'] = test_error_desc
-        with nifake.Session('dev1') as session:
-            try:
-                session.simple_function()
-            except nifake.Error as e:
-                assert e.code == test_error_code
-                assert e.description == test_error_desc
-        from mock import call
-        calls = [call(SESSION_NUM_FOR_TEST, test_error_code, ANY)]
-        self.patched_library.niFake_error_message.assert_has_calls(calls)
-    '''
 
     def test_get_error_and_error_message_returns_error(self):
         test_error_code = -42
@@ -512,27 +489,6 @@ class TestSession(object):
             except nifake.Error as e:
                 assert e.code == test_error_code
                 assert e.description == 'Failed to retrieve error description.'
-
-    '''
-    # TODO(bhaswath): Enable test once issue 320 is fixed
-    def test_read_with_warning(self):
-        test_maximum_time = 10
-        test_reading = float('nan')
-        test_error_code = 42
-        test_error_desc = "The answer to the ultimate question, only positive"
-        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
-        self.side_effects_helper['Read']['return'] = test_error_code
-        self.side_effects_helper['Read']['reading'] = test_reading
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = test_error_code
-        self.side_effects_helper['GetError']['description'] = test_error_desc
-        with nifake.Session('dev1') as session:
-            with warnings.catch_warnings(record=True) as w:
-                assert test_reading == session.read(test_maximum_time)
-                assert len(w) == 1
-                assert issubclass(w[0].category, nifake.NifakeWarning)
-                assert test_error_desc in str(w[0].message)
-    '''
 
     def test_enum_input_function_with_defaults(self):
         test_turtle = nifake.Turtle.DONATELLO
@@ -582,5 +538,78 @@ class TestSession(object):
         test_array_size = len(test_array)
         self.patched_library.niFake_ArrayInputFunction.side_effect = self.side_effects_helper.niFake_ArrayInputFunction
         with nifake.Session('dev1') as session:
-            session.array_input_function(test_array_size, test_array)
+            session.array_input_function(test_array)
             self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
+
+    def test_get_a_string_with_specified_maximum_size(self):
+        single_character_string = 'a'
+        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
+        self.side_effects_helper['GetAStringWithSpecifiedMaximumSize']['aString'] = single_character_string
+        with nifake.Session('dev1') as session:
+            buffer_size = 19
+            string_with_specified_buffer = session.get_a_string_with_specified_maximum_size(buffer_size)
+            assert(string_with_specified_buffer == single_character_string)
+            self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
+
+    def test_get_a_string_of_fixed_maximum_size(self):
+        fixed_buffer_string = "this method will return fixed buffer string"
+        self.patched_library.niFake_GetAStringOfFixedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringOfFixedMaximumSize
+        self.side_effects_helper['GetAStringOfFixedMaximumSize']['aString'] = fixed_buffer_string
+        with nifake.Session('dev1') as session:
+            returned_string = session.get_a_string_of_fixed_maximum_size()
+            assert (returned_string == fixed_buffer_string)
+            self.patched_library.niFake_GetAStringOfFixedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
+
+    def test_return_a_number_and_a_string(self):
+        test_string = "this string"
+        test_number = 13
+        self.patched_library.niFake_ReturnANumberAndAString.side_effect = self.side_effects_helper.niFake_ReturnANumberAndAString
+        self.side_effects_helper['ReturnANumberAndAString']['aString'] = test_string
+        self.side_effects_helper['ReturnANumberAndAString']['aNumber'] = test_number
+        with nifake.Session('dev1') as session:
+            returned_number, returned_string = session.return_a_number_and_a_string()
+            assert (returned_string == test_string)
+            assert (returned_number == test_number)
+            self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
+
+    def test_get_error_description_error_message(self):
+        test_error_code = -42
+        test_error_desc = "The answer to the ultimate question"
+        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = -1
+        self.side_effects_helper['GetError']['description'] = "Shouldn't get this"
+        self.side_effects_helper['GetError']['return'] = -2
+        self.patched_library.niFake_error_message.side_effect = self.side_effects_helper.niFake_error_message
+        self.side_effects_helper['error_message']['errorMessage'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            try:
+                session.simple_function()
+            except nifake.Error as e:
+                assert e.code == test_error_code
+                assert e.description == test_error_desc
+        from mock import call
+        calls = [call(SESSION_NUM_FOR_TEST, test_error_code, ANY)]
+        self.patched_library.niFake_error_message.assert_has_calls(calls)
+
+    '''
+    # TODO(bhaswath): Enable test once issue 320 is fixed
+    def test_read_with_warning(self):
+        test_maximum_time = 10
+        test_reading = float('nan')
+        test_error_code = 42
+        test_error_desc = "The answer to the ultimate question, only positive"
+        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
+        self.side_effects_helper['Read']['return'] = test_error_code
+        self.side_effects_helper['Read']['reading'] = test_reading
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            with warnings.catch_warnings(record=True) as w:
+                assert test_reading == session.read(test_maximum_time)
+                assert len(w) == 1
+                assert issubclass(w[0].category, nifake.NifakeWarning)
+                assert test_error_desc in str(w[0].message)
+    '''

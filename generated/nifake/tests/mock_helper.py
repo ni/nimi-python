@@ -136,8 +136,12 @@ class SideEffectsHelper(object):
             return self._defaults['GetAStringOfFixedMaximumSize']['return']
         if self._defaults['GetAStringOfFixedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize", param='aString')
-        for i in range(len(a_string)):
-            a_string[i] = self._defaults['GetAStringOfFixedMaximumSize']['aString'][i]
+        a = self._defaults['GetAStringOfFixedMaximumSize']['aString']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(a_string), len(a))):
+            a_string[i] = a[i]
         return self._defaults['GetAStringOfFixedMaximumSize']['return']
 
     def niFake_GetAStringWithSpecifiedMaximumSize(self, vi, a_string, buffer_size):  # noqa: N802
@@ -145,8 +149,12 @@ class SideEffectsHelper(object):
             return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
         if self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringWithSpecifiedMaximumSize", param='aString')
-        for i in range(len(a_string)):
-            a_string[i] = self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'][i]
+        a = self._defaults['GetAStringWithSpecifiedMaximumSize']['aString']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(a_string), len(a))):
+            a_string[i] = a[i]
         return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
 
     def niFake_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -246,8 +254,12 @@ class SideEffectsHelper(object):
             return self._defaults['ReadMultiPoint']['return']
         if self._defaults['ReadMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niFake_ReadMultiPoint", param='readingArray')
-        for i in range(len(reading_array)):
-            reading_array[i] = self._defaults['ReadMultiPoint']['readingArray'][i]
+        a = self._defaults['ReadMultiPoint']['readingArray']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(reading_array), len(a))):
+            reading_array[i] = a[i]
         if self._defaults['ReadMultiPoint']['actualNumberOfPoints'] is None:
             raise MockFunctionCallError("niFake_ReadMultiPoint", param='actualNumberOfPoints')
         actual_number_of_points.contents.value = self._defaults['ReadMultiPoint']['actualNumberOfPoints']
@@ -261,8 +273,12 @@ class SideEffectsHelper(object):
         a_number.contents.value = self._defaults['ReturnANumberAndAString']['aNumber']
         if self._defaults['ReturnANumberAndAString']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnANumberAndAString", param='aString')
-        for i in range(len(a_string)):
-            a_string[i] = self._defaults['ReturnANumberAndAString']['aString'][i]
+        a = self._defaults['ReturnANumberAndAString']['aString']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(a_string), len(a))):
+            a_string[i] = a[i]
         return self._defaults['ReturnANumberAndAString']['return']
 
     def niFake_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -313,8 +329,12 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niFake_error_message", param='errorMessage')
-        for i in range(len(error_message)):
-            error_message[i] = self._defaults['error_message']['errorMessage'][i]
+        a = self._defaults['error_message']['errorMessage']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(error_message), len(a))):
+            error_message[i] = a[i]
         return self._defaults['error_message']['return']
 
     # Helper function to setup Mock object with default side effects and return values

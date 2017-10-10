@@ -24,7 +24,7 @@ nidcpower.Session methods
 
 
 
-.. function:: configure_aperture_time(aperture_time, units)
+.. function:: configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
     Configures the aperture time on the specified channel(s).
 
@@ -57,7 +57,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_aperture_time(aperture_time, units)
+            session['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
 
     :param aperture_time:
@@ -83,9 +83,9 @@ nidcpower.Session methods
         +--------------------------------------------+------------------------------+
 
 
-    :type units: int
+    :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
-.. function:: configure_digital_edge_measure_trigger(input_terminal, edge)
+.. function:: configure_digital_edge_measure_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Measure trigger for digital edge triggering.
 
@@ -134,9 +134,9 @@ nidcpower.Session methods
         +--------------------------------+----------------------------------------------------------------+
 
 
-    :type edge: int
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_pulse_trigger(input_terminal, edge)
+.. function:: configure_digital_edge_pulse_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Pulse trigger for digital edge triggering.
 
@@ -185,9 +185,9 @@ nidcpower.Session methods
         +--------------------------------+----------------------------------------------------------------+
 
 
-    :type edge: int
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_sequence_advance_trigger(input_terminal, edge)
+.. function:: configure_digital_edge_sequence_advance_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Sequence Advance trigger for digital edge triggering.
 
@@ -237,9 +237,9 @@ nidcpower.Session methods
         +--------------------------------+----------------------------------------------------------------+
 
 
-    :type edge: int
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_source_trigger(input_terminal, edge)
+.. function:: configure_digital_edge_source_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Source trigger for digital edge triggering.
 
@@ -288,9 +288,9 @@ nidcpower.Session methods
         +--------------------------------+----------------------------------------------------------------+
 
 
-    :type edge: int
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_start_trigger(input_terminal, edge)
+.. function:: configure_digital_edge_start_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Start trigger for digital edge triggering.
 
@@ -339,9 +339,9 @@ nidcpower.Session methods
         +--------------------------------+----------------------------------------------------------------+
 
 
-    :type edge: int
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: create_advanced_sequence(sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence)
+.. function:: create_advanced_sequence(sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence=True)
 
     Creates an empty advanced sequence. Call the
     :py:func:`nidcpower.create_advanced_sequence_step` function to add steps to the
@@ -503,7 +503,7 @@ nidcpower.Session methods
 
     :type set_as_active_sequence: bool
 
-.. function:: create_advanced_sequence_step(set_as_active_step)
+.. function:: create_advanced_sequence_step(set_as_active_step=True)
 
     Creates a new advanced sequence step in the advanced sequence specified
     by the Active advanced sequence. When you create an advanced sequence
@@ -599,7 +599,7 @@ nidcpower.Session methods
 
 
 
-.. function:: export_signal(signal, signal_identifier, output_terminal)
+.. function:: export_signal(signal, output_terminal, signal_identifier='')
 
     Routes signals (triggers and events) to the output terminal you specify.
     The route is created when the session is :py:func:`nidcpower.commit`.
@@ -687,7 +687,7 @@ nidcpower.Session methods
 
     :type output_terminal: string
 
-.. function:: fetch_multiple(timeout, count)
+.. function:: fetch_multiple(count, timeout=1.0)
 
     Returns an array of voltage measurements, an array of current
     measurements, and an array of compliance measurements that were
@@ -717,7 +717,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].fetch_multiple(timeout, count)
+            session['0,1'].fetch_multiple(count, timeout=1.0)
 
 
     :param timeout:
@@ -1294,7 +1294,7 @@ nidcpower.Session methods
 
 
 
-.. function:: send_software_edge_trigger(trigger)
+.. function:: send_software_edge_trigger(trigger=nidcpower.SendSoftwareEdgeTriggerType.START)
 
     Asserts the specified trigger. This function can override an external
     edge trigger.
@@ -1331,9 +1331,9 @@ nidcpower.Session methods
         +---------------------------------------------------+---------------------------------------+
 
 
-    :type trigger: int
+    :type trigger: :py:data:`nidcpower.SendSoftwareEdgeTriggerType`
 
-.. function:: set_sequence(values, source_delays, size)
+.. function:: set_sequence(source_delays, size, values=None)
 
     Configures a series of voltage or current outputs and corresponding
     source delays. The source mode must be set to
@@ -1366,7 +1366,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].set_sequence(values, source_delays, size)
+            session['0,1'].set_sequence(source_delays, size, values=None)
 
 
     :param values:
@@ -1406,7 +1406,7 @@ nidcpower.Session methods
 
     :type size: int
 
-.. function:: wait_for_event(event_id, timeout)
+.. function:: wait_for_event(timeout, event_id=10.0)
 
     Waits until the device has generated the specified event.
 
@@ -1460,7 +1460,7 @@ nidcpower.Session methods
             application.
 
 
-    :type timeout: float
+    :type timeout: :py:data:`nidcpower.Event`
 
 .. function:: reset()
 

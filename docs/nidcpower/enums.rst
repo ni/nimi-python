@@ -182,6 +182,57 @@ Enums used in NI-DCPower
 
 
 
+.. py:data:: Event
+
+    .. py:attribute:: nidcpower.Event.SOURCE_COMPLETE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Event.MEASURE_COMPLETE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Event.SEQUENCE_ITERATION_COMPLETE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Event.SEQUENCE_ENGINE_DONE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Event.PULSE_COMPLETE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Event.READY_FOR_PULSE_TRIGGER
+
+
+
+        
+
+
+
+
 .. py:data:: MeasureWhen
 
     .. py:attribute:: nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
@@ -418,6 +469,49 @@ Enums used in NI-DCPower
         Write new self-calibration values to hardware. Refer to your device
         documentation for more information about the implications of frequent
         writes to the EEPROM.
+
+        
+
+
+
+
+.. py:data:: SendSoftwareEdgeTriggerType
+
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.START
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SOURCE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.MEASURE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.PULSE
+
+
 
         
 

@@ -348,7 +348,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def array_input_function(self, number_of_elements, an_array):
+    def array_input_function(self, an_array):
         '''array_input_function
 
         This function takes an array parameter.
@@ -357,6 +357,7 @@ class Session(_SessionBase):
             number_of_elements (int): Number of elements in the array.
             an_array (list of float): Contains an array of float numbers
         '''
+        number_of_elements = len(an_array)
         error_code = self._library.niFake_ArrayInputFunction(self._vi, number_of_elements, an_array)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -423,7 +424,7 @@ class Session(_SessionBase):
         Returns:
             a_string (string): String comes back here. Buffer must be 256 big.
         '''
-        a_string_ctype = (visatype.ViChar * 1)()
+        a_string_ctype = (visatype.ViChar * 256)()
         error_code = self._library.niFake_GetAStringOfFixedMaximumSize(self._vi, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
@@ -598,7 +599,7 @@ class Session(_SessionBase):
             a_string (string): Contains a string.
         '''
         a_number_ctype = visatype.ViInt16(0)
-        a_string_ctype = (visatype.ViChar * 1)()
+        a_string_ctype = (visatype.ViChar * 256)()
         error_code = self._library.niFake_ReturnANumberAndAString(self._vi, ctypes.pointer(a_number_ctype), a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
