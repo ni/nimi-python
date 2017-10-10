@@ -66,8 +66,12 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
         if self._defaults['${func_name}']['${p['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${p['name']}')
 %       if p['is_buffer']:
-        for i in range(len(${p['python_name']})):
-            ${p['python_name']}[i] = self._defaults['${func_name}']['${p['name']}'][i]
+        a = self._defaults['${func_name}']['${p['name']}']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(${p['python_name']}), len(a))):
+            ${p['python_name']}[i] = a[i]
 %       else:
         ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
 %       endif

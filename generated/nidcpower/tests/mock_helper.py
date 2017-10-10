@@ -216,16 +216,28 @@ class SideEffectsHelper(object):
             return self._defaults['FetchMultiple']['return']
         if self._defaults['FetchMultiple']['voltageMeasurements'] is None:
             raise MockFunctionCallError("niDCPower_FetchMultiple", param='voltageMeasurements')
-        for i in range(len(voltage_measurements)):
-            voltage_measurements[i] = self._defaults['FetchMultiple']['voltageMeasurements'][i]
+        a = self._defaults['FetchMultiple']['voltageMeasurements']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(voltage_measurements), len(a))):
+            voltage_measurements[i] = a[i]
         if self._defaults['FetchMultiple']['currentMeasurements'] is None:
             raise MockFunctionCallError("niDCPower_FetchMultiple", param='currentMeasurements')
-        for i in range(len(current_measurements)):
-            current_measurements[i] = self._defaults['FetchMultiple']['currentMeasurements'][i]
+        a = self._defaults['FetchMultiple']['currentMeasurements']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(current_measurements), len(a))):
+            current_measurements[i] = a[i]
         if self._defaults['FetchMultiple']['inCompliance'] is None:
             raise MockFunctionCallError("niDCPower_FetchMultiple", param='inCompliance')
-        for i in range(len(in_compliance)):
-            in_compliance[i] = self._defaults['FetchMultiple']['inCompliance'][i]
+        a = self._defaults['FetchMultiple']['inCompliance']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(in_compliance), len(a))):
+            in_compliance[i] = a[i]
         if self._defaults['FetchMultiple']['actualCount'] is None:
             raise MockFunctionCallError("niDCPower_FetchMultiple", param='actualCount')
         actual_count.contents.value = self._defaults['FetchMultiple']['actualCount']
@@ -350,12 +362,20 @@ class SideEffectsHelper(object):
             return self._defaults['MeasureMultiple']['return']
         if self._defaults['MeasureMultiple']['voltageMeasurements'] is None:
             raise MockFunctionCallError("niDCPower_MeasureMultiple", param='voltageMeasurements')
-        for i in range(len(voltage_measurements)):
-            voltage_measurements[i] = self._defaults['MeasureMultiple']['voltageMeasurements'][i]
+        a = self._defaults['MeasureMultiple']['voltageMeasurements']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(voltage_measurements), len(a))):
+            voltage_measurements[i] = a[i]
         if self._defaults['MeasureMultiple']['currentMeasurements'] is None:
             raise MockFunctionCallError("niDCPower_MeasureMultiple", param='currentMeasurements')
-        for i in range(len(current_measurements)):
-            current_measurements[i] = self._defaults['MeasureMultiple']['currentMeasurements'][i]
+        a = self._defaults['MeasureMultiple']['currentMeasurements']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(current_measurements), len(a))):
+            current_measurements[i] = a[i]
         return self._defaults['MeasureMultiple']['return']
 
     def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
@@ -466,8 +486,12 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niDCPower_error_message", param='errorMessage')
-        for i in range(len(error_message)):
-            error_message[i] = self._defaults['error_message']['errorMessage'][i]
+        a = self._defaults['error_message']['errorMessage']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(error_message), len(a))):
+            error_message[i] = a[i]
         return self._defaults['error_message']['return']
 
     def niDCPower_reset(self, vi):  # noqa: N802
@@ -483,8 +507,12 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niDCPower_self_test", param='selfTestMessage')
-        for i in range(len(self_test_message)):
-            self_test_message[i] = self._defaults['self_test']['selfTestMessage'][i]
+        a = self._defaults['self_test']['selfTestMessage']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(self_test_message), len(a))):
+            self_test_message[i] = a[i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values
