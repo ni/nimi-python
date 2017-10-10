@@ -235,7 +235,6 @@ class TestSession(object):
     # def test_get_string_ivi_dance(self)
 
     def test_get_string_ivi_dance_error(self):
-        # TODO(marcoskirsch): Don't use private method to test this. Use a public niFake function.
         test_error_code = -1234
         test_error_desc = "ascending order"
         self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString

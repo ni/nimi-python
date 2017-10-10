@@ -57,6 +57,11 @@ class TestSession(object):
         session.close()
         self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
+    def test_close(self):
+        session = nimodinst.Session('')
+        session.close()
+        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
+
     def test_context_manager(self):
         with nimodinst.Session('') as session:
             assert type(session) == nimodinst.Session
