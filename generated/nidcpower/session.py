@@ -2487,7 +2487,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    def configure_aperture_time(self, aperture_time, units):
+    def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
         '''configure_aperture_time
 
         Configures the aperture time on the specified channel(s).
@@ -2523,7 +2523,7 @@ class _SessionBase(object):
                 performed sequentially based on the order specified in this parameter.
             aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your
                 device in the *NI DC Power Supplies and SMUs Help* for more information.
-            units (int): Specifies the units for **apertureTime**.
+            units (enums.ApertureTimeUnits): Specifies the units for **apertureTime**.
                 **Defined Values**:
 
                 +----------------------------------------+------------------------------+
@@ -2532,11 +2532,13 @@ class _SessionBase(object):
                 | NIDCPOWER_VAL_POWER_LINE_CYCLES (1029) | Specifies Power Line Cycles. |
                 +----------------------------------------+------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureApertureTime(self._vi, self._repeated_capability.encode(self._encoding), aperture_time, units)
+        if type(units) is not enums.ApertureTimeUnits:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ApertureTimeUnits))
+        error_code = self._library.niDCPower_ConfigureApertureTime(self._vi, self._repeated_capability.encode(self._encoding), aperture_time, units.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def fetch_multiple(self, timeout, count):
+    def fetch_multiple(self, count, timeout=1.0):
         '''fetch_multiple
 
         Returns an array of voltage measurements, an array of current
@@ -3330,7 +3332,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_sequence(self, values, source_delays, size):
+    def set_sequence(self, source_delays, size, values=None):
         '''set_sequence
 
         Configures a series of voltage or current outputs and corresponding
@@ -3467,7 +3469,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_measure_trigger(self, input_terminal, edge):
+    def configure_digital_edge_measure_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_measure_trigger
 
         Configures the Measure trigger for digital edge triggering.
@@ -3493,7 +3495,7 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-            edge (int): Specifies whether to configure the Measure trigger to assert on the
+            edge (enums.DigitalEdge): Specifies whether to configure the Measure trigger to assert on the
                 rising or falling edge.
                 **Defined Values:**
 
@@ -3503,11 +3505,13 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(self._vi, input_terminal.encode(self._encoding), edge)
+        if type(edge) is not enums.DigitalEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(self._vi, input_terminal.encode(self._encoding), edge.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_pulse_trigger(self, input_terminal, edge):
+    def configure_digital_edge_pulse_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_pulse_trigger
 
         Configures the Pulse trigger for digital edge triggering.
@@ -3533,7 +3537,7 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-            edge (int): Specifies whether to configure the Pulse trigger to assert on the rising
+            edge (enums.DigitalEdge): Specifies whether to configure the Pulse trigger to assert on the rising
                 or falling edge.
                 **Defined Values:**
 
@@ -3543,11 +3547,13 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(self._vi, input_terminal.encode(self._encoding), edge)
+        if type(edge) is not enums.DigitalEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
+        error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(self._vi, input_terminal.encode(self._encoding), edge.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_sequence_advance_trigger(self, input_terminal, edge):
+    def configure_digital_edge_sequence_advance_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_sequence_advance_trigger
 
         Configures the Sequence Advance trigger for digital edge triggering.
@@ -3574,7 +3580,7 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-            edge (int): Specifies whether to configure the Sequence Advance trigger to assert on
+            edge (enums.DigitalEdge): Specifies whether to configure the Sequence Advance trigger to assert on
                 the rising or falling edge.
                 **Defined Values:**
 
@@ -3584,11 +3590,13 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(self._vi, input_terminal.encode(self._encoding), edge)
+        if type(edge) is not enums.DigitalEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(self._vi, input_terminal.encode(self._encoding), edge.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_source_trigger(self, input_terminal, edge):
+    def configure_digital_edge_source_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_source_trigger
 
         Configures the Source trigger for digital edge triggering.
@@ -3614,7 +3622,7 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-            edge (int): Specifies whether to configure the Source trigger to assert on the
+            edge (enums.DigitalEdge): Specifies whether to configure the Source trigger to assert on the
                 rising or falling edge.
                 **Defined Values:**
 
@@ -3624,11 +3632,13 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(self._vi, input_terminal.encode(self._encoding), edge)
+        if type(edge) is not enums.DigitalEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(self._vi, input_terminal.encode(self._encoding), edge.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_start_trigger(self, input_terminal, edge):
+    def configure_digital_edge_start_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_start_trigger
 
         Configures the Start trigger for digital edge triggering.
@@ -3654,7 +3664,7 @@ class Session(_SessionBase):
                 shortened terminal name, PXI_Trig0. The input terminal can also be a
                 terminal from another device. For example, you can set the input
                 terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-            edge (int): Specifies whether to configure the Start trigger to assert on the rising
+            edge (enums.DigitalEdge): Specifies whether to configure the Start trigger to assert on the rising
                 or falling edge.
                 **Defined Values:**
 
@@ -3664,11 +3674,13 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
                 +------------------------------+----------------------------------------------------------------+
         '''
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(self._vi, input_terminal.encode(self._encoding), edge)
+        if type(edge) is not enums.DigitalEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
+        error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(self._vi, input_terminal.encode(self._encoding), edge.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_advanced_sequence(self, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):
+    def create_advanced_sequence(self, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence=True):
         '''create_advanced_sequence
 
         Creates an empty advanced sequence. Call the
@@ -3803,7 +3815,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_advanced_sequence_step(self, set_as_active_step):
+    def create_advanced_sequence_step(self, set_as_active_step=True):
         '''create_advanced_sequence_step
 
         Creates a new advanced sequence step in the advanced sequence specified
@@ -3890,7 +3902,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def export_signal(self, signal, signal_identifier, output_terminal):
+    def export_signal(self, signal, output_terminal, signal_identifier=''):
         '''export_signal
 
         Routes signals (triggers and events) to the output terminal you specify.
@@ -4208,7 +4220,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def send_software_edge_trigger(self, trigger):
+    def send_software_edge_trigger(self, trigger=enums.SendSoftwareEdgeTriggerType.START):
         '''send_software_edge_trigger
 
         Asserts the specified trigger. This function can override an external
@@ -4225,7 +4237,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            trigger (int): Specifies which trigger to assert.
+            trigger (enums.SendSoftwareEdgeTriggerType): Specifies which trigger to assert.
                 **Defined Values:**
 
                 +-----------------------------------------------+---------------------------------------+
@@ -4240,11 +4252,13 @@ class Session(_SessionBase):
                 | NIDCPOWER_VAL_PULSE_TRIGGER (1053             | Asserts the Pulse trigger.            |
                 +-----------------------------------------------+---------------------------------------+
         '''
-        error_code = self._library.niDCPower_SendSoftwareEdgeTrigger(self._vi, trigger)
+        if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
+            raise TypeError('Parameter mode must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
+        error_code = self._library.niDCPower_SendSoftwareEdgeTrigger(self._vi, trigger.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_event(self, event_id, timeout):
+    def wait_for_event(self, timeout, event_id=10.0):
         '''wait_for_event
 
         Waits until the device has generated the specified event.
@@ -4277,7 +4291,7 @@ class Session(_SessionBase):
                 +--------------------------------------------------------+--------------------------------------------------+
                 | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
                 +--------------------------------------------------------+--------------------------------------------------+
-            timeout (float): Specifies the maximum time allowed for this function to complete, in
+            timeout (enums.Event): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -4286,7 +4300,9 @@ class Session(_SessionBase):
                 triggers so that the timeout interval is long enough for your
                 application.
         '''
-        error_code = self._library.niDCPower_WaitForEvent(self._vi, event_id, timeout)
+        if type(timeout) is not enums.Event:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Event))
+        error_code = self._library.niDCPower_WaitForEvent(self._vi, event_id, timeout.value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

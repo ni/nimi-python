@@ -66,11 +66,20 @@ class TestSession(object):
             assert e.code == test_error_code
             assert e.description == test_error_desc
 
+    # TODO(marcoskirsch): This should test that when close errors it raises.
+    # def test_close_errors(self):
+
     def test_session_context_manager(self):
         with nifake.Session('dev1') as session:
             assert type(session) == nifake.Session
             self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
         self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+
+    # TODO(marcoskirsch): This should test that when init errors it raises.
+    # def test_session_context_manager_error_on_init
+
+    # TODO(marcoskirsch): This should test that when close errors it logs a warning.
+    # def test_session_context_manager_error_on_close
 
     # Methods
 
@@ -120,6 +129,9 @@ class TestSession(object):
             assert isinstance(test_result, int)
             assert test_result == test_number
             self.patched_library.niFake_GetANumber.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
+
+    # TODO(marcoskirsch):
+    # def test_multiple_outputs of different types
 
     def test_invalid_method_call_not_enough_parameters(self):
         self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
@@ -248,6 +260,9 @@ class TestSession(object):
 
     # Retrieving buffers and strings
 
+    # TODO(marcoskirsch):
+    # def test_get_string_ivi_dance(self)
+
     def test_get_string_ivi_dance_error(self):
         test_error_code = -1234
         test_error_desc = "ascending order"
@@ -285,6 +300,10 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             assert math.isnan(session.read(test_maximum_time))
 
+    # TODO(marcoskirsch): Other variations: multi-point/waveform with ViReal64 and ViInt16 * 3 mechanisms
+
+    # Repeated Capabilities
+
     def test_repeated_capability_method_on_session(self):
         test_maximum_time = 10
         test_reading = 5
@@ -313,6 +332,37 @@ class TestSession(object):
             except AttributeError:
                 pass
 
+    def test_get_a_string_with_specified_maximum_size(self):
+        single_character_string = 'a'
+        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
+        self.side_effects_helper['GetAStringWithSpecifiedMaximumSize']['aString'] = single_character_string
+        with nifake.Session('dev1') as session:
+            buffer_size = 19
+            string_with_specified_buffer = session.get_a_string_with_specified_maximum_size(buffer_size)
+            assert(string_with_specified_buffer == single_character_string)
+            self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
+
+    def test_get_a_string_of_fixed_maximum_size(self):
+        fixed_buffer_string = "this method will return fixed buffer string"
+        self.patched_library.niFake_GetAStringOfFixedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringOfFixedMaximumSize
+        self.side_effects_helper['GetAStringOfFixedMaximumSize']['aString'] = fixed_buffer_string
+        with nifake.Session('dev1') as session:
+            returned_string = session.get_a_string_of_fixed_maximum_size()
+            assert (returned_string == fixed_buffer_string)
+            self.patched_library.niFake_GetAStringOfFixedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
+
+    def test_return_a_number_and_a_string(self):
+        test_string = "this string"
+        test_number = 13
+        self.patched_library.niFake_ReturnANumberAndAString.side_effect = self.side_effects_helper.niFake_ReturnANumberAndAString
+        self.side_effects_helper['ReturnANumberAndAString']['aString'] = test_string
+        self.side_effects_helper['ReturnANumberAndAString']['aNumber'] = test_number
+        with nifake.Session('dev1') as session:
+            returned_number, returned_string = session.return_a_number_and_a_string()
+            assert (returned_string == test_string)
+            assert (returned_number == test_number)
+            self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
+
     # Attributes
 
     def test_get_attribute_int32(self):
@@ -331,6 +381,10 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             session.read_write_integer = test_number
             self.patched_library.niFake_SetAttributeViInt32.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, test_number)
+
+    # TODO(marcoskirsch)
+    # def test_get_attribute_int64(self):
+    # def test_set_attribute_int64(self):
 
     def test_get_attribute_real64(self):
         self.patched_library.niFake_GetAttributeViReal64.side_effect = self.side_effects_helper.niFake_GetAttributeViReal64
@@ -490,8 +544,6 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == 'Failed to retrieve error description.'
 
-    '''
-    Unit testing does not properly handle passed in or fixed strings. Re-add when #429 is fixed
     def test_get_error_description_error_message(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
@@ -512,7 +564,6 @@ class TestSession(object):
         from mock import call
         calls = [call(SESSION_NUM_FOR_TEST, test_error_code, ANY)]
         self.patched_library.niFake_error_message.assert_has_calls(calls)
-    '''
 
     '''
     # TODO(bhaswath): Enable test once issue 320 is fixed
@@ -534,31 +585,3 @@ class TestSession(object):
                 assert issubclass(w[0].category, nifake.NifakeWarning)
                 assert test_error_desc in str(w[0].message)
     '''
-
-    # TODO(marcoskirsch):
-    # def test_get_string_fixed_size(self)
-
-    # TODO(marcoskirsch):
-    # def test_get_string_size_passed_in(self)
-
-    # TODO(marcoskirsch): This should test that when init errors it raises.
-    # def test_session_context_manager_error_on_init
-
-    # TODO(marcoskirsch): This should test that when close errors it logs a warning.
-    # def test_session_context_manager_error_on_close
-
-    # TODO(marcoskirsch): This should test that when close errors it raises.
-    # def test_close_errors(self):
-
-    # TODO(marcoskirsch)
-    # def test_get_attribute_int64(self):
-    # def test_set_attribute_int64(self):
-
-    # TODO(marcoskirsch):
-    # def test_multiple_outputs of different types
-
-    # TODO(marcoskirsch):
-    # def test_get_string_ivi_dance(self)
-
-    # TODO(marcoskirsch): Other variations: multi-point/waveform with ViReal64 and ViInt16 * 3 mechanisms
-    # Repeated Capabilities
