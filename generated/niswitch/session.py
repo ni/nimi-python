@@ -1641,7 +1641,7 @@ class Session(_SessionBase):
 
         This function retrieves and then clears the IVI error information for
         the session or the current execution thread. One exception exists: If
-        the BufferSize parameter is 0, the function does not clear the error
+        the buffer_size parameter is 0, the function does not clear the error
         information. By passing 0 for the buffer size, the caller can ascertain
         the buffer size required to get the entire error description string and
         then call the function again with a sufficiently large buffer. If the

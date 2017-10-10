@@ -14,7 +14,7 @@ class AttributeViInt32(object):
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        return self._owner._get_installed_device_attribute_vi_int32(self._owner._handle, self._index, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_int32(self._index, self._attribute_id)
 
 
 class AttributeViString(object):
@@ -25,7 +25,7 @@ class AttributeViString(object):
         self._attribute_id = attribute_id
 
     def __getitem__(self, index):
-        return self._owner._get_installed_device_attribute_vi_string(self._owner._handle, self._index, self._attribute_id)
+        return self._owner._get_installed_device_attribute_vi_string(self._index, self._attribute_id)
 
 
 class Device(object):
@@ -160,12 +160,12 @@ class Session(object):
     def close(self):
         # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
         if(self._handle != 0):
-            self._close_installed_devices_session(self._handle)
+            self._close_installed_devices_session()
             self._handle = 0
 
     ''' These are code-generated '''
 
-    def _close_installed_devices_session(self, handle):
+    def _close_installed_devices_session(self):
         '''_close_installed_devices_session
 
         Cleans up the NI-ModInst session created by a call to
@@ -217,7 +217,7 @@ class Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode(self._encoding)
 
-    def _get_installed_device_attribute_vi_int32(self, handle, index, attribute_id):
+    def _get_installed_device_attribute_vi_int32(self, index, attribute_id):
         '''_get_installed_device_attribute_vi_int32
 
         Returns an integer attribute specified by the attributeID parameter for
@@ -256,7 +256,7 @@ class Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
-    def _get_installed_device_attribute_vi_string(self, handle, index, attribute_id):
+    def _get_installed_device_attribute_vi_string(self, index, attribute_id):
         '''_get_installed_device_attribute_vi_string
 
         Returns a string attribute specified by the attributeID parameter for a

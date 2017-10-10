@@ -6,15 +6,16 @@
 # don't generate at all
 
 functions_codegen_method = {
-    'InitWithOptions':  { 'codegen_method': 'private',  },
-    'Initiate':         { 'codegen_method': 'private',  },
-    'close':            { 'codegen_method': 'private',  },
-    'Abort':            { 'codegen_method': 'private',  },
-    '.etAttribute.+':   { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
-    'error_message':    { 'codegen_method': 'private',  },
-    'GetError':         { 'codegen_method': 'private',  },
-    'GetErrorMessage':  { 'codegen_method': 'no',  },
-    'ClearError':       { 'codegen_method': 'no',       },
+    'InitWithOptions':          { 'codegen_method': 'private',  },
+    'Initiate':                 { 'codegen_method': 'private',  },
+    'close':                    { 'codegen_method': 'private',  },
+    'Abort':                    { 'codegen_method': 'private',  },
+    '.etAttribute.+':           { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
+    '.etAttributeViSession':    { 'codegen_method': 'no',       },  # Except ViSession ones that aren't applicable to Python
+    'error_message':            { 'codegen_method': 'private',  },
+    'GetError':                 { 'codegen_method': 'private',  },
+    'GetErrorMessage':          { 'codegen_method': 'no',       },
+    'ClearError':               { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -48,6 +49,7 @@ functions_buffer_info = {
                                                                3: { 'is_buffer': True, }, }, },
     '.etAttribute.+':                        { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'error_message':                         { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'ArrayInputFunction':                    { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

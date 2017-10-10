@@ -482,6 +482,7 @@ class TestSession(object):
                 assert e.description == test_error_desc
 
     # Error descriptions
+
     def test_get_error_and_error_message_returns_error(self):
         test_error_code = -42
         self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
@@ -543,22 +544,24 @@ class TestSession(object):
             self.patched_library.niFake_ReadMultiPoint.assert_has_calls(calls)
             assert self.patched_library.niFake_ReadMultiPoint.call_count == 1
 
-    '''
-    Unit testing does not properly handle passed in or fixed strings. Re-add when #392 is fixed
+    def test_array_input_function(self):
+        test_array = [1, 2, 3, 4]
+        test_array_size = len(test_array)
+        self.patched_library.niFake_ArrayInputFunction.side_effect = self.side_effects_helper.niFake_ArrayInputFunction
+        with nifake.Session('dev1') as session:
+            session.array_input_function(test_array_size, test_array)
+            self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
+
     def test_get_a_string_with_specified_maximum_size(self):
-        single_character_string = 'a'
+        test_string = 'Test'
         self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
-        self.side_effects_helper['GetAStringWithSpecifiedMaximumSize']['aString'] = single_character_string
+        self.side_effects_helper['GetAStringWithSpecifiedMaximumSize']['aString'] = test_string
         with nifake.Session('dev1') as session:
             buffer_size = 19
             string_with_specified_buffer = session.get_a_string_with_specified_maximum_size(buffer_size)
-            assert(string_with_specified_buffer == single_character_string)
+            assert(string_with_specified_buffer == test_string)
             self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
 
-    '''
-
-    '''
-    Unit testing does not properly handle passed in or fixed strings. Re-add when #392 is fixed
     def test_get_a_string_of_fixed_maximum_size(self):
         fixed_buffer_string = "this method will return fixed buffer string"
         self.patched_library.niFake_GetAStringOfFixedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringOfFixedMaximumSize
@@ -567,10 +570,7 @@ class TestSession(object):
             returned_string = session.get_a_string_of_fixed_maximum_size()
             assert (returned_string == fixed_buffer_string)
             self.patched_library.niFake_GetAStringOfFixedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
-    '''
 
-    '''
-    Unit testing does not properly handle passed in or fixed strings. Re-add when #392 is fixed
     def test_return_a_number_and_a_string(self):
         test_string = "this string"
         test_number = 13
@@ -583,10 +583,6 @@ class TestSession(object):
             assert (returned_number == test_number)
             self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
 
-    '''
-
-    '''
-    Unit testing does not properly handle passed in or fixed strings. Re-add when #392 is fixed
     def test_get_error_description_error_message(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
@@ -602,7 +598,6 @@ class TestSession(object):
         from mock import call
         calls = [call(SESSION_NUM_FOR_TEST, test_error_code, 0, None), call(SESSION_NUM_FOR_TEST, len(test_error_desc), len(test_error_desc), ANY)]
         self.patched_library.niFake_error_message.assert_has_calls(calls)
-    '''
 
     '''
     # TODO(bhaswath): Enable test once issue 320 is fixed

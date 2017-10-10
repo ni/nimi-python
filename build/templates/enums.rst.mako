@@ -18,7 +18,7 @@ Enums used in ${driver_name}
 .. py:data:: ${enum_name}
     % for enum_value in enums[enum_name]['values']:
 
-    .. py:attribute:: ${enum_value['name']}
+    .. py:attribute:: ${module_name}.${enum_name}.${enum_value['name']}
 
 ${helper.get_documentation_for_node_rst(enum_value, config, indent=8)}
     % endfor

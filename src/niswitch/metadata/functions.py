@@ -516,9 +516,8 @@ Attribute Value control and pressing .
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'attributeValue',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 Pass the value which you want to verify as a valid value for the
@@ -1464,9 +1463,8 @@ the Attribute Value buffer parameter. Default Value:512
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'attributeValue',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 The buffer in which the function returns the current value of the
@@ -1565,9 +1563,8 @@ Coercion Record buffer parameter. Default Value: None
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'channelNameBuffer',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 Returns the channel name that is in the channel table at the index you
@@ -1638,9 +1635,8 @@ Description buffer parameter. Default Value: None
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'Description',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 Returns the error description for the IVI session or execution thread.
@@ -1662,7 +1658,7 @@ Size, you can pass VI\_NULL for this parameter.
 'description': '''
 This function retrieves and then clears the IVI error information for
 the session or the current execution thread. One exception exists: If
-the BufferSize parameter is 0, the function does not clear the error
+the buffer_size parameter is 0, the function does not clear the error
 information. By passing 0 for the buffer size, the caller can ascertain
 the buffer size required to get the entire error description string and
 then call the function again with a sufficiently large buffer. If the
@@ -1718,9 +1714,8 @@ Coercion Record buffer parameter. Default Value: None
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'coercionRecord',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 Returns the next coercion record for the IVI session. If there are no
@@ -1802,9 +1797,8 @@ the Interchange Warning buffer parameter. Default Value: None
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'interchangeWarning',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 Returns the next interchange warning for the IVI session. If there are
@@ -1909,9 +1903,8 @@ again.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'Path',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 A string composed of comma-separated paths between channel 1 and channel
@@ -2041,9 +2034,8 @@ Coercion Record buffer parameter. Default Value: None
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'relayNameBuffer',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': 'Returns the relay name for the index you specify.',
 },
@@ -3571,9 +3563,8 @@ Attribute Value control and pressing .
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'attributeValue',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 Pass the value to which you want to set the attribute. From the function
@@ -3897,9 +3888,8 @@ Status code returned by any NI-SWITCH function. Default Value: 0
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'errorMessage',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 The error information formatted into a string. You must pass a ViChar
@@ -3949,9 +3939,8 @@ does not have an error queue, so this function never returns any errors.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'errorMessage',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 Returns the error message string read from the instrument's error
@@ -4098,9 +4087,8 @@ and used for all subsequent NI-SWITCH calls.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'instrumentDriverRevision',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 NI-SWITCH software revision numbers in the form of a string. You must
@@ -4111,9 +4099,8 @@ pass a ViChar array with at least 256 bytes.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'firmwareRevision',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': 'Currently unsupported.',
 },
@@ -4152,9 +4139,8 @@ and used for all subsequent NI-SWITCH calls.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'selfTestMessage',
-                'type': 'ViChar',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 Self-test response string from the switch device. You must pass a ViChar

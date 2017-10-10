@@ -1248,15 +1248,49 @@ functions = {
             'description': 'This function takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.',
         },
     },
+    'ArrayInputFunction': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi**',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfElements',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of elements in the array.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'anArray',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'Contains an array of float numbers',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function takes an array parameter.',
+        },
+    },
     #TODO(marcoskirsch): Lots more cases to add:
     #     Returning arrays (not strings) through all 3 mechanisms
-    #     Returning strings using ivi-dance
     #     Returning lots of numbers
     #     Taking parameters of all types
-    #     Input buffers and strings
     #     Returning parameters of all types
     #     Enums enums enums
     #     Waveforms as inputs and outputs
     #     ... etc
-
 }

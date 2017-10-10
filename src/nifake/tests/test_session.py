@@ -482,6 +482,7 @@ class TestSession(object):
                 assert e.description == test_error_desc
 
     # Error descriptions
+
     def test_get_error_and_error_message_returns_error(self):
         test_error_code = -42
         self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
@@ -542,6 +543,14 @@ class TestSession(object):
             calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, len(test_reading_array), ANY, ANY)]
             self.patched_library.niFake_ReadMultiPoint.assert_has_calls(calls)
             assert self.patched_library.niFake_ReadMultiPoint.call_count == 1
+
+    def test_array_input_function(self):
+        test_array = [1, 2, 3, 4]
+        test_array_size = len(test_array)
+        self.patched_library.niFake_ArrayInputFunction.side_effect = self.side_effects_helper.niFake_ArrayInputFunction
+        with nifake.Session('dev1') as session:
+            session.array_input_function(test_array_size, test_array)
+            self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
 
     def test_get_a_string_with_specified_maximum_size(self):
         single_character_string = 'a'

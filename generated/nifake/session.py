@@ -141,23 +141,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
-    def _get_attribute_vi_session(self, attribute_id):
-        '''_get_attribute_vi_session
-
-        Queries the value of a ViSession attribute.
-
-        Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
-            attribute_id (int): Pass the ID of an attribute.
-
-        Returns:
-            attribute_value (int): Returns the value of the attribute.
-        '''
-        attribute_value_ctype = visatype.ViSession(0)
-        error_code = self._library.niFake_GetAttributeViSession(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(attribute_value_ctype.value)
-
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
@@ -237,20 +220,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_session(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_session
-
-        This function sets the value of a ViSession attribute.
-
-        Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
-            attribute_id (int): Pass the ID of an attribute.
-            attribute_value (int): Pass the value that you want to set the attribute to.
-        '''
-        error_code = self._library.niFake_SetAttributeViSession(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
@@ -313,6 +282,19 @@ class Session(_SessionBase):
         Aborts a previously initiated thingie.
         '''
         error_code = self._library.niFake_Abort(self._vi)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def array_input_function(self, number_of_elements, an_array):
+        '''array_input_function
+
+        This function takes an array parameter.
+
+        Args:
+            number_of_elements (int): Number of elements in the array.
+            an_array (list of float): Contains an array of float numbers
+        '''
+        error_code = self._library.niFake_ArrayInputFunction(self._vi, number_of_elements, an_array)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
