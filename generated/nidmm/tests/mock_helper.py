@@ -146,10 +146,6 @@ class SideEffectsHelper(object):
         self._defaults['error_message']['errorMessage'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
-        self._defaults['revision_query'] = {}
-        self._defaults['revision_query']['return'] = 0
-        self._defaults['revision_query']['instrumentDriverRevision'] = None
-        self._defaults['revision_query']['firmwareRevision'] = None
         self._defaults['self_test'] = {}
         self._defaults['self_test']['return'] = 0
         self._defaults['self_test']['selfTestResult'] = None
@@ -518,19 +514,6 @@ class SideEffectsHelper(object):
             return self._defaults['reset']['return']
         return self._defaults['reset']['return']
 
-    def niDMM_revision_query(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
-        if self._defaults['revision_query']['return'] != 0:
-            return self._defaults['revision_query']['return']
-        if self._defaults['revision_query']['instrumentDriverRevision'] is None:
-            raise MockFunctionCallError("niDMM_revision_query", param='instrumentDriverRevision')
-        for i in range(len(instrument_driver_revision)):
-            instrument_driver_revision[i] = self._defaults['revision_query']['instrumentDriverRevision'][i]
-        if self._defaults['revision_query']['firmwareRevision'] is None:
-            raise MockFunctionCallError("niDMM_revision_query", param='firmwareRevision')
-        for i in range(len(firmware_revision)):
-            firmware_revision[i] = self._defaults['revision_query']['firmwareRevision'][i]
-        return self._defaults['revision_query']['return']
-
     def niDMM_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         if self._defaults['self_test']['return'] != 0:
             return self._defaults['self_test']['return']
@@ -641,7 +624,5 @@ class SideEffectsHelper(object):
         mock_library.niDMM_error_message.return_value = 0
         mock_library.niDMM_reset.side_effect = MockFunctionCallError("niDMM_reset")
         mock_library.niDMM_reset.return_value = 0
-        mock_library.niDMM_revision_query.side_effect = MockFunctionCallError("niDMM_revision_query")
-        mock_library.niDMM_revision_query.return_value = 0
         mock_library.niDMM_self_test.side_effect = MockFunctionCallError("niDMM_self_test")
         mock_library.niDMM_self_test.return_value = 0
