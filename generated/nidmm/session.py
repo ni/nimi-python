@@ -837,7 +837,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
         attribute_value_ctype = visatype.ViBoolean()  # case 11
-        error_code = self._library.niDMM_GetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niDMM_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
@@ -872,7 +872,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
         attribute_value_ctype = visatype.ViInt32()  # case 11
-        error_code = self._library.niDMM_GetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niDMM_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -907,7 +907,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
         attribute_value_ctype = visatype.ViReal64()  # case 11
-        error_code = self._library.niDMM_GetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niDMM_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
@@ -958,11 +958,11 @@ class _SessionBase(object):
         attribute_value_ctype = None  # case 9
         buffer_size = 0
         attribute_value_ctype = None
-        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, buffer_size, attribute_value_ctype)
+        error_code = self._library.niDMM_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size = error_code
         attribute_value_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niDMM_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, buffer_size, attribute_value_ctype)
+        error_code = self._library.niDMM_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
@@ -1009,7 +1009,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
         attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case 6
-        error_code = self._library.niDMM_SetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        error_code = self._library.niDMM_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1056,7 +1056,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
         attribute_value_ctype = visatype.ViInt32(attribute_value)  # case 6
-        error_code = self._library.niDMM_SetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        error_code = self._library.niDMM_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1103,7 +1103,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
         attribute_value_ctype = visatype.ViReal64(attribute_value)  # case 6
-        error_code = self._library.niDMM_SetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        error_code = self._library.niDMM_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1150,7 +1150,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
         attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case 3
-        error_code = self._library.niDMM_SetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value.encode(self._encoding))
+        error_code = self._library.niDMM_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1203,7 +1203,7 @@ class Session(_SessionBase):
         Idle state.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niDMM_Abort(self._vi)
+        error_code = self._library.niDMM_Abort(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1236,7 +1236,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         ac_minimum_frequency_hz_ctype = visatype.ViReal64(ac_minimum_frequency_hz)  # case 6
         ac_maximum_frequency_hz_ctype = visatype.ViReal64(ac_maximum_frequency_hz)  # case 6
-        error_code = self._library.niDMM_ConfigureACBandwidth(self._vi, ac_minimum_frequency_hz, ac_maximum_frequency_hz)
+        error_code = self._library.niDMM_ConfigureACBandwidth(vi_ctype, ac_minimum_frequency_hz_ctype, ac_maximum_frequency_hz_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1292,7 +1292,7 @@ class Session(_SessionBase):
         measurement_function_ctype = visatype.ViInt32(measurement_function.value)  # case 7
         range_ctype = visatype.ViReal64(range)  # case 6
         resolution_absolute_ctype = visatype.ViReal64(resolution_absolute)  # case 6
-        error_code = self._library.niDMM_ConfigureMeasurementAbsolute(self._vi, measurement_function.value, range, resolution_absolute)
+        error_code = self._library.niDMM_ConfigureMeasurementAbsolute(vi_ctype, measurement_function_ctype, range_ctype, resolution_absolute_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1349,7 +1349,7 @@ class Session(_SessionBase):
         measurement_function_ctype = visatype.ViInt32(measurement_function.value)  # case 7
         range_ctype = visatype.ViReal64(range)  # case 6
         resolution_digits_ctype = visatype.ViReal64(resolution_digits)  # case 6
-        error_code = self._library.niDMM_ConfigureMeasurementDigits(self._vi, measurement_function.value, range, resolution_digits)
+        error_code = self._library.niDMM_ConfigureMeasurementDigits(vi_ctype, measurement_function_ctype, range_ctype, resolution_digits_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1404,7 +1404,7 @@ class Session(_SessionBase):
         sample_count_ctype = visatype.ViInt32(sample_count)  # case 6
         sample_trigger_ctype = visatype.ViInt32(sample_trigger.value)  # case 7
         sample_interval_ctype = visatype.ViReal64(sample_interval)  # case 6
-        error_code = self._library.niDMM_ConfigureMultiPoint(self._vi, trigger_count, sample_count, sample_trigger.value, sample_interval)
+        error_code = self._library.niDMM_ConfigureMultiPoint(vi_ctype, trigger_count_ctype, sample_count_ctype, sample_trigger_ctype, sample_interval_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1422,7 +1422,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         conductance_ctype = visatype.ViReal64(conductance)  # case 6
         susceptance_ctype = visatype.ViReal64(susceptance)  # case 6
-        error_code = self._library.niDMM_ConfigureOpenCableCompValues(self._vi, conductance, susceptance)
+        error_code = self._library.niDMM_ConfigureOpenCableCompValues(vi_ctype, conductance_ctype, susceptance_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1437,7 +1437,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         power_line_frequency_hz_ctype = visatype.ViReal64(power_line_frequency_hz)  # case 6
-        error_code = self._library.niDMM_ConfigurePowerLineFrequency(self._vi, power_line_frequency_hz)
+        error_code = self._library.niDMM_ConfigurePowerLineFrequency(vi_ctype, power_line_frequency_hz_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1461,7 +1461,7 @@ class Session(_SessionBase):
         rtd_a_ctype = visatype.ViReal64(rtd_a)  # case 6
         rtd_b_ctype = visatype.ViReal64(rtd_b)  # case 6
         rtd_c_ctype = visatype.ViReal64(rtd_c)  # case 6
-        error_code = self._library.niDMM_ConfigureRTDCustom(self._vi, rtd_a, rtd_b, rtd_c)
+        error_code = self._library.niDMM_ConfigureRTDCustom(vi_ctype, rtd_a_ctype, rtd_b_ctype, rtd_c_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1502,7 +1502,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         rtd_type_ctype = visatype.ViInt32(rtd_type.value)  # case 7
         rtd_resistance_ctype = visatype.ViReal64(rtd_resistance)  # case 6
-        error_code = self._library.niDMM_ConfigureRTDType(self._vi, rtd_type.value, rtd_resistance)
+        error_code = self._library.niDMM_ConfigureRTDType(vi_ctype, rtd_type_ctype, rtd_resistance_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1520,7 +1520,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         resistance_ctype = visatype.ViReal64(resistance)  # case 6
         reactance_ctype = visatype.ViReal64(reactance)  # case 6
-        error_code = self._library.niDMM_ConfigureShortCableCompValues(self._vi, resistance, reactance)
+        error_code = self._library.niDMM_ConfigureShortCableCompValues(vi_ctype, resistance_ctype, reactance_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1544,7 +1544,7 @@ class Session(_SessionBase):
         thermistor_a_ctype = visatype.ViReal64(thermistor_a)  # case 6
         thermistor_b_ctype = visatype.ViReal64(thermistor_b)  # case 6
         thermistor_c_ctype = visatype.ViReal64(thermistor_c)  # case 6
-        error_code = self._library.niDMM_ConfigureThermistorCustom(self._vi, thermistor_a, thermistor_b, thermistor_c)
+        error_code = self._library.niDMM_ConfigureThermistorCustom(vi_ctype, thermistor_a_ctype, thermistor_b_ctype, thermistor_c_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1588,7 +1588,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         thermocouple_type_ctype = visatype.ViInt32(thermocouple_type.value)  # case 7
         reference_junction_type_ctype = visatype.ViInt32(reference_junction_type.value)  # case 7
-        error_code = self._library.niDMM_ConfigureThermocouple(self._vi, thermocouple_type.value, reference_junction_type.value)
+        error_code = self._library.niDMM_ConfigureThermocouple(vi_ctype, thermocouple_type_ctype, reference_junction_type_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1628,7 +1628,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_source_ctype = visatype.ViInt32(trigger_source.value)  # case 7
         trigger_delay_ctype = visatype.ViReal64(trigger_delay)  # case 6
-        error_code = self._library.niDMM_ConfigureTrigger(self._vi, trigger_source.value, trigger_delay)
+        error_code = self._library.niDMM_ConfigureTrigger(vi_ctype, trigger_source_ctype, trigger_delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1679,7 +1679,7 @@ class Session(_SessionBase):
         range_ctype = visatype.ViReal64(range)  # case 6
         rate_ctype = visatype.ViReal64(rate)  # case 6
         waveform_points_ctype = visatype.ViInt32(waveform_points)  # case 6
-        error_code = self._library.niDMM_ConfigureWaveformAcquisition(self._vi, measurement_function.value, range, rate, waveform_points)
+        error_code = self._library.niDMM_ConfigureWaveformAcquisition(vi_ctype, measurement_function_ctype, range_ctype, rate_ctype, waveform_points_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1691,7 +1691,7 @@ class Session(_SessionBase):
         progress when this function is called, the measurement is aborted.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niDMM_Disable(self._vi)
+        error_code = self._library.niDMM_Disable(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1719,7 +1719,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 6
         reading_ctype = visatype.ViReal64()  # case 11
-        error_code = self._library.niDMM_Fetch(self._vi, maximum_time, ctypes.pointer(reading_ctype))
+        error_code = self._library.niDMM_Fetch(vi_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
@@ -1764,7 +1764,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(0)  # case 5
         reading_array_ctype = (visatype.ViReal64 * array_size)()  # case 10
         actual_number_of_points_ctype = visatype.ViInt32()  # case 11
-        error_code = self._library.niDMM_FetchMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
+        error_code = self._library.niDMM_FetchMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
@@ -1801,7 +1801,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(0)  # case 5
         waveform_array_ctype = (visatype.ViReal64 * array_size)()  # case 10
         actual_number_of_points_ctype = visatype.ViInt32()  # case 11
-        error_code = self._library.niDMM_FetchWaveform(self._vi, maximum_time, array_size, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
+        error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
@@ -1844,7 +1844,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         aperture_time_ctype = visatype.ViReal64()  # case 11
         aperture_time_units_ctype = visatype.ViInt32()  # case 11
-        error_code = self._library.niDMM_GetApertureTimeInfo(self._vi, ctypes.pointer(aperture_time_ctype), ctypes.pointer(aperture_time_units_ctype))
+        error_code = self._library.niDMM_GetApertureTimeInfo(vi_ctype, ctypes.pointer(aperture_time_ctype), ctypes.pointer(aperture_time_units_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(aperture_time_ctype.value), enums.ApertureTimeUnits(aperture_time_units_ctype.value)
 
@@ -1861,7 +1861,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         actual_range_ctype = visatype.ViReal64()  # case 11
-        error_code = self._library.niDMM_GetAutoRangeValue(self._vi, ctypes.pointer(actual_range_ctype))
+        error_code = self._library.niDMM_GetAutoRangeValue(vi_ctype, ctypes.pointer(actual_range_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(actual_range_ctype.value)
 
@@ -1898,7 +1898,7 @@ class Session(_SessionBase):
         year_ctype = visatype.ViInt32()  # case 11
         hour_ctype = visatype.ViInt32()  # case 11
         minute_ctype = visatype.ViInt32()  # case 11
-        error_code = self._library.niDMM_GetCalDateAndTime(self._vi, cal_type, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
+        error_code = self._library.niDMM_GetCalDateAndTime(vi_ctype, cal_type_ctype, ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(year_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
@@ -1918,7 +1918,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         options_ctype = ctypes.create_string_buffer(options.encode(self._encoding))  # case 3
         temperature_ctype = visatype.ViReal64()  # case 11
-        error_code = self._library.niDMM_GetDevTemp(self._vi, options.encode(self._encoding), ctypes.pointer(temperature_ctype))
+        error_code = self._library.niDMM_GetDevTemp(vi_ctype, options_ctype, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -1957,11 +1957,11 @@ class Session(_SessionBase):
         description_ctype = None  # case 9
         buffer_size = 0
         description_ctype = None
-        error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        error_code = self._library.niDMM_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size = error_code
         description_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        error_code = self._library.niDMM_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
@@ -1990,7 +1990,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         cal_type_ctype = visatype.ViInt32(cal_type)  # case 6
         temperature_ctype = visatype.ViReal64()  # case 11
-        error_code = self._library.niDMM_GetLastCalTemp(self._vi, cal_type, ctypes.pointer(temperature_ctype))
+        error_code = self._library.niDMM_GetLastCalTemp(vi_ctype, cal_type_ctype, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -2014,7 +2014,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         period_ctype = visatype.ViReal64()  # case 11
-        error_code = self._library.niDMM_GetMeasurementPeriod(self._vi, ctypes.pointer(period_ctype))
+        error_code = self._library.niDMM_GetMeasurementPeriod(vi_ctype, ctypes.pointer(period_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(period_ctype.value)
 
@@ -2036,7 +2036,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         self_cal_supported_ctype = visatype.ViBoolean()  # case 11
-        error_code = self._library.niDMM_GetSelfCalSupported(self._vi, ctypes.pointer(self_cal_supported_ctype))
+        error_code = self._library.niDMM_GetSelfCalSupported(vi_ctype, ctypes.pointer(self_cal_supported_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
 
@@ -2141,7 +2141,7 @@ class Session(_SessionBase):
         reset_device_ctype = visatype.ViBoolean(reset_device)  # case 6
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case 3
         vi_ctype = visatype.ViSession()  # case 11
-        error_code = self._library.niDMM_InitWithOptions(resource_name.encode(self._encoding), id_query, reset_device, option_string.encode(self._encoding), ctypes.pointer(vi_ctype))
+        error_code = self._library.niDMM_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -2155,7 +2155,7 @@ class Session(_SessionBase):
         retrieve the measurement data.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niDMM_Initiate(self._vi)
+        error_code = self._library.niDMM_Initiate(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2181,7 +2181,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         conductance_ctype = visatype.ViReal64()  # case 11
         susceptance_ctype = visatype.ViReal64()  # case 11
-        error_code = self._library.niDMM_PerformOpenCableComp(self._vi, ctypes.pointer(conductance_ctype), ctypes.pointer(susceptance_ctype))
+        error_code = self._library.niDMM_PerformOpenCableComp(vi_ctype, ctypes.pointer(conductance_ctype), ctypes.pointer(susceptance_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(conductance_ctype.value), float(susceptance_ctype.value)
 
@@ -2206,7 +2206,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         resistance_ctype = visatype.ViReal64()  # case 11
         reactance_ctype = visatype.ViReal64()  # case 11
-        error_code = self._library.niDMM_PerformShortCableComp(self._vi, ctypes.pointer(resistance_ctype), ctypes.pointer(reactance_ctype))
+        error_code = self._library.niDMM_PerformShortCableComp(vi_ctype, ctypes.pointer(resistance_ctype), ctypes.pointer(reactance_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(resistance_ctype.value), float(reactance_ctype.value)
 
@@ -2233,7 +2233,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 6
         reading_ctype = visatype.ViReal64()  # case 11
-        error_code = self._library.niDMM_Read(self._vi, maximum_time, ctypes.pointer(reading_ctype))
+        error_code = self._library.niDMM_Read(vi_ctype, maximum_time_ctype, ctypes.pointer(reading_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
@@ -2277,7 +2277,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(0)  # case 5
         reading_array_ctype = (visatype.ViReal64 * array_size)()  # case 10
         actual_number_of_points_ctype = visatype.ViInt32()  # case 11
-        error_code = self._library.niDMM_ReadMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
+        error_code = self._library.niDMM_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
@@ -2319,7 +2319,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         acquisition_backlog_ctype = visatype.ViInt32()  # case 11
         acquisition_status_ctype = visatype.ViInt16()  # case 11
-        error_code = self._library.niDMM_ReadStatus(self._vi, ctypes.pointer(acquisition_backlog_ctype), ctypes.pointer(acquisition_status_ctype))
+        error_code = self._library.niDMM_ReadStatus(vi_ctype, ctypes.pointer(acquisition_backlog_ctype), ctypes.pointer(acquisition_status_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
@@ -2361,7 +2361,7 @@ class Session(_SessionBase):
         array_size_ctype = visatype.ViInt32(0)  # case 5
         waveform_array_ctype = (visatype.ViReal64 * array_size)()  # case 10
         actual_number_of_points_ctype = visatype.ViInt32()  # case 11
-        error_code = self._library.niDMM_ReadWaveform(self._vi, maximum_time, array_size, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
+        error_code = self._library.niDMM_ReadWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
@@ -2374,7 +2374,7 @@ class Session(_SessionBase):
         values associated with a logical name are applied after setting the DMM.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niDMM_ResetWithDefaults(self._vi)
+        error_code = self._library.niDMM_ResetWithDefaults(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2390,7 +2390,7 @@ class Session(_SessionBase):
         values after the call returns.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niDMM_SelfCal(self._vi)
+        error_code = self._library.niDMM_SelfCal(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2406,7 +2406,7 @@ class Session(_SessionBase):
         and trigger the device. The NI 4050 and NI 4060 are not supported.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niDMM_SendSoftwareTrigger(self._vi)
+        error_code = self._library.niDMM_SendSoftwareTrigger(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2416,7 +2416,7 @@ class Session(_SessionBase):
         Closes the specified session and deallocates resources that it reserved.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niDMM_close(self._vi)
+        error_code = self._library.niDMM_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2436,7 +2436,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code_ctype = visatype.ViStatus(error_code)  # case 6
         error_message_ctype = (visatype.ViChar * 256)()  # case 8
-        error_code = self._library.niDMM_error_message(self._vi, error_code, error_message_ctype)
+        error_code = self._library.niDMM_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
 
@@ -2448,7 +2448,7 @@ class Session(_SessionBase):
         to the state necessary for the operation of the instrument driver.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niDMM_reset(self._vi)
+        error_code = self._library.niDMM_reset(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2493,7 +2493,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         self_test_result_ctype = visatype.ViInt16()  # case 11
         self_test_message_ctype = (visatype.ViChar * 256)()  # case 8
-        error_code = self._library.niDMM_self_test(self._vi, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
+        error_code = self._library.niDMM_self_test(vi_ctype, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 

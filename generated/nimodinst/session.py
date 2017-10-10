@@ -177,7 +177,7 @@ class Session(object):
                 _open_installed_devices_session.
         '''
         handle_ctype = visatype.ViSession(self._handle)  # case 1
-        error_code = self._library.niModInst_CloseInstalledDevicesSession(self._handle)
+        error_code = self._library.niModInst_CloseInstalledDevicesSession(handle_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -212,11 +212,11 @@ class Session(object):
         error_info_ctype = None  # case 9
         error_info_buffer_size = 0
         error_info_ctype = None
-        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         error_info_buffer_size = error_code
         error_info_ctype = (visatype.ViChar * error_info_buffer_size)()
-        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode(self._encoding)
 
@@ -258,7 +258,7 @@ class Session(object):
         index_ctype = visatype.ViInt32(index)  # case 6
         attribute_id_ctype = visatype.ViInt32(attribute_id)  # case 6
         attribute_value_ctype = visatype.ViInt32()  # case 11
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(self._handle, index, attribute_id, ctypes.pointer(attribute_value_ctype))
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(handle_ctype, index_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -304,11 +304,11 @@ class Session(object):
         attribute_value_ctype = None  # case 9
         attribute_value_buffer_size = 0
         attribute_value_ctype = None
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(self._handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         attribute_value_buffer_size = error_code
         attribute_value_ctype = (visatype.ViChar * attribute_value_buffer_size)()
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(self._handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
@@ -348,7 +348,7 @@ class Session(object):
         driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case 3
         handle_ctype = visatype.ViSession()  # case 11
         device_count_ctype = visatype.ViInt32()  # case 11
-        error_code = self._library.niModInst_OpenInstalledDevicesSession(driver.encode(self._encoding), ctypes.pointer(handle_ctype), ctypes.pointer(device_count_ctype))
+        error_code = self._library.niModInst_OpenInstalledDevicesSession(driver_ctype, ctypes.pointer(handle_ctype), ctypes.pointer(device_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(handle_ctype.value), int(device_count_ctype.value)
 
