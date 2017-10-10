@@ -241,7 +241,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters):
         elif parameter['type'] == 'ViChar':
             definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
         elif parameter['is_buffer'] is True:
-            definition = '(visatype.{0} * len({1}))(*{1}  # case 4'.format(parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            definition = '(visatype.{0} * len({1}))(*{1})  # case 4'.format(parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
             if _is_size_parameter(parameter, parameters):
                 definition = 'visatype.{0}(0)  # case 5'.format(parameter['ctypes_type'])
