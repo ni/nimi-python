@@ -51,20 +51,14 @@ class TestSession(object):
         return 0
 
     # API Tests
-    def test_open(self):
-        self.patched_library.niModInst_CloseInstalledDevicesSession.side_effect = self.disallow_close
+    def test_open_and_close(self):
         session = nimodinst.Session('')
-        assert(session._handle == SESSION_NUM_FOR_TEST)
         self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
-
-    def test_close(self):
-        session = nimodinst.Session('')
         session.close()
         self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
     def test_context_manager(self):
         with nimodinst.Session('') as session:
-            assert(session._handle == SESSION_NUM_FOR_TEST)
             self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
         self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
