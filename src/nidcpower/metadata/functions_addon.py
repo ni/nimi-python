@@ -44,7 +44,15 @@ functions_codegen_method = {
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    'ConfigureAutoZero':   { 'parameters': { 2: { 'enum': 'AutoZero',                  }, }, },
+    'ConfigureAutoZero':                            { 'parameters': { 2: { 'enum': 'AutoZero',                    }, }, },
+    'ConfigureApertureTime':                        { 'parameters': { 3: { 'enum': 'ApertureTimeUnits',           }, }, },
+    'ConfigureDigitalEdgeMeasureTrigger':           { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
+    'ConfigureDigitalEdgePulseTrigger':             { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
+    'ConfigureDigitalEdgeSequenceAdvanceTrigger':   { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
+    'ConfigureDigitalEdgeSourceTrigger':            { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
+    'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
+    'SendSoftwareEdgeTrigger':                      { 'parameters': { 1: { 'enum': 'SendSoftwareEdgeTriggerType', }, }, },
+    'WaitForEvent':                                 { 'parameters': { 2: { 'enum': 'Event', }, }, },
     # @TODO add all enums
 }
 
@@ -69,6 +77,8 @@ functions_buffer_info = {
     'GetCalUserDefinedInfo':        { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'SetSequence':                  { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'Size'}, }, }, },
+    'CreateAdvancedSequence':       { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'attributeIdCount'}, }, }, },
     'init':                         { 'parameters': { 0: { 'is_buffer': True, }, }, },
     '.etAttribute.+':               { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'GetDevTemp':                   { 'parameters': { 1: { 'is_buffer': True, }, }, },
@@ -87,8 +97,23 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 function_default_value = {
-    'InitializeWithChannels':  { 'parameters': { 1: { 'default_value': '', },
-                                                 2: { 'default_value': False, },
-                                                 3: { 'default_value': '', }, }, },
+    'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '', },
+                                                                       2: { 'default_value': False, },
+                                                                       3: { 'default_value': '', }, }, },
+    'ConfigureApertureTime':                         { 'parameters': { 3: { 'default_value': 'ApertureTimeUnits.SECONDS', }, }, },
+    'SetSequence':                                   { 'parameters': { 2: { 'default_value': None, }, }, },
+    'ConfigureDigitalEdgeMeasureTrigger':            { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
+    'ConfigureDigitalEdgePulseTrigger':              { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
+    'ConfigureDigitalEdgeSequenceAdvanceTrigger':    { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
+    'ConfigureDigitalEdgeSourceTrigger':             { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
+    'ConfigureDigitalEdgeStartTrigger':              { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
+    'CreateAdvancedSequence':                        { 'parameters': { 4: { 'default_value': True, }, }, },
+    'CreateAdvancedSequenceStep':                    { 'parameters': { 1: { 'default_value': True, }, }, },
+    'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '', }, }, },
+    'SendSoftwareEdgeTrigger':                       { 'parameters': { 1: { 'default_value': 'SendSoftwareEdgeTriggerType.START', }, }, },
+    'WaitForEvent':                                  { 'parameters': { 1: { 'default_value': 10.0, },}, },
+    'FetchMultiple':                                 { 'parameters': { 1: { 'default_value': 1.0, },
+                                                                       2: { 'default_value': 1.0, }, }, },
+
 }
 
