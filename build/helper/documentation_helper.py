@@ -309,13 +309,13 @@ def _format_type_for_rst_documentation(param, config):
 
 
 rep_cap_method_desc = '''
-This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+This method uses repeated capabilities (usually channels). If called directly on the {0}.Session object, then 
+it will apply to the full session. You can specify what repeated capabilities to use using the Python
 index notation:
 
 .. code:: python
 
-    session['0-2,4'].{0}({1})
+    session['0,1'].{1}({2})
 '''
 
 
@@ -331,7 +331,7 @@ def get_function_rst(fname, config, indent=0):
     '''
     function = config['functions'][fname]
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc.format(function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
+        function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
 
     rst = '.. function:: ' + function['python_name'] + '('
     rst += get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD) + ')'

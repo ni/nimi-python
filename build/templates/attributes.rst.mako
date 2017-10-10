@@ -29,14 +29,14 @@ table_contents = [
 table = helper.as_rest_table(table_contents)
 
 rep_cap_attr_desc = '''
-This attribute can use repeated capabilities (usually channels). If you set or get this method on the base session, then
-all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
-index notation:
+This attribute uses repeated capabilities (usually channels). If you set or get this attribute directly on the
+{0}.Session object, then all repeated capabilities will be used. You can specify what repeated capabilities to
+use using the Python index notation:
 
 .. code:: python
 
-    session['0-2,4'].{0} = var
-    var = session['0-2,4'].{0}
+    session['0,1'].{0} = var
+    var = session['0,1'].{0}
 '''
 
 if a['channel_based'] == 'True':
