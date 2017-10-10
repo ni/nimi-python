@@ -114,7 +114,7 @@ def filter_parameters(function, parameter_usage_options):
     parameters_to_use = []
 
     # Filter based on options
-    # Find the size parameter - we are assuming there can only be one, eother from mechanism == 'ivi-dance' or mechanism == 'len'
+    # Find the size parameter - we are assuming there can only be one, other from mechanism == 'ivi-dance' or mechanism == 'len'
     size_parameter = find_size_parameter(filter_ivi_dance_parameter(function['parameters']), function['parameters'])
     if size_parameter is None:
         size_parameter = find_size_parameter(filter_len_parameter(function['parameters']), function['parameters'])
