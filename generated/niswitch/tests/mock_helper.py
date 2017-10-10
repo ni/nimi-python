@@ -378,8 +378,12 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niSwitch_error_message", param='errorMessage')
-        for i in range(min(len(error_message), len(self._defaults['error_message']['errorMessage']))):
-            error_message[i] = self._defaults['error_message']['errorMessage'][i].encode('ascii')
+        a = self._defaults['error_message']['errorMessage']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(error_message), len(a))):
+            error_message[i] = a[i]
         return self._defaults['error_message']['return']
 
     def niSwitch_reset(self, vi):  # noqa: N802
@@ -395,8 +399,12 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niSwitch_self_test", param='selfTestMessage')
-        for i in range(min(len(self_test_message), len(self._defaults['self_test']['selfTestMessage']))):
-            self_test_message[i] = self._defaults['self_test']['selfTestMessage'][i].encode('ascii')
+        a = self._defaults['self_test']['selfTestMessage']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(self_test_message), len(a))):
+            self_test_message[i] = a[i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values
