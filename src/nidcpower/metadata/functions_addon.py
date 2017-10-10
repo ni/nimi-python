@@ -44,7 +44,7 @@ functions_codegen_method = {
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
     'ConfigureAutoZero':                            { 'parameters': { 2: { 'enum': 'AutoZero',                    }, }, },
-    'ConfigureApertureTime':                        { 'parameters': { 2: { 'enum': 'ApertureTimeUnits',           }, }, },
+    'ConfigureApertureTime':                        { 'parameters': { 3: { 'enum': 'ApertureTimeUnits',           }, }, },
     'ConfigureDigitalEdgeMeasureTrigger':           { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
     'ConfigureDigitalEdgePulseTrigger':             { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
     'ConfigureDigitalEdgeSequenceAdvanceTrigger':   { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
@@ -101,7 +101,7 @@ function_default_value = {
     'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '', },
                                                                        2: { 'default_value': False, },
                                                                        3: { 'default_value': '', }, }, },
-    'ConfigureApertureTime':                         { 'parameters': { 2: { 'default_value': 'ApertureTimeUnits.SECONDS', }, }, },
+    'ConfigureApertureTime':                         { 'parameters': { 3: { 'default_value': 'ApertureTimeUnits.SECONDS', }, }, },
     'SetSequence':                                   { 'parameters': { 2: { 'default_value': None, }, }, },
     'ConfigureDigitalEdgeMeasureTrigger':            { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
     'ConfigureDigitalEdgePulseTrigger':              { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
