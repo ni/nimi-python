@@ -112,10 +112,6 @@ class SideEffectsHelper(object):
         self._defaults['error_message']['errorMessage'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
-        self._defaults['revision_query'] = {}
-        self._defaults['revision_query']['return'] = 0
-        self._defaults['revision_query']['instrumentDriverRevision'] = None
-        self._defaults['revision_query']['firmwareRevision'] = None
         self._defaults['self_test'] = {}
         self._defaults['self_test']['return'] = 0
         self._defaults['self_test']['selfTestResult'] = None
@@ -382,7 +378,6 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niSwitch_error_message", param='errorMessage')
-        assert len(error_message) == len(self._defaults['error_message']['errorMessage'])
         for i in range(len(error_message)):
             error_message[i] = self._defaults['error_message']['errorMessage'][i]
         return self._defaults['error_message']['return']
@@ -392,21 +387,6 @@ class SideEffectsHelper(object):
             return self._defaults['reset']['return']
         return self._defaults['reset']['return']
 
-    def niSwitch_revision_query(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
-        if self._defaults['revision_query']['return'] != 0:
-            return self._defaults['revision_query']['return']
-        if self._defaults['revision_query']['instrumentDriverRevision'] is None:
-            raise MockFunctionCallError("niSwitch_revision_query", param='instrumentDriverRevision')
-        assert len(instrument_driver_revision) == len(self._defaults['revision_query']['instrumentDriverRevision'])
-        for i in range(len(instrument_driver_revision)):
-            instrument_driver_revision[i] = self._defaults['revision_query']['instrumentDriverRevision'][i]
-        if self._defaults['revision_query']['firmwareRevision'] is None:
-            raise MockFunctionCallError("niSwitch_revision_query", param='firmwareRevision')
-        assert len(firmware_revision) == len(self._defaults['revision_query']['firmwareRevision'])
-        for i in range(len(firmware_revision)):
-            firmware_revision[i] = self._defaults['revision_query']['firmwareRevision'][i]
-        return self._defaults['revision_query']['return']
-
     def niSwitch_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         if self._defaults['self_test']['return'] != 0:
             return self._defaults['self_test']['return']
@@ -415,7 +395,6 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niSwitch_self_test", param='selfTestMessage')
-        assert len(self_test_message) == len(self._defaults['self_test']['selfTestMessage'])
         for i in range(len(self_test_message)):
             self_test_message[i] = self._defaults['self_test']['selfTestMessage'][i]
         return self._defaults['self_test']['return']
@@ -504,7 +483,5 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_error_message.return_value = 0
         mock_library.niSwitch_reset.side_effect = MockFunctionCallError("niSwitch_reset")
         mock_library.niSwitch_reset.return_value = 0
-        mock_library.niSwitch_revision_query.side_effect = MockFunctionCallError("niSwitch_revision_query")
-        mock_library.niSwitch_revision_query.return_value = 0
         mock_library.niSwitch_self_test.side_effect = MockFunctionCallError("niSwitch_self_test")
         mock_library.niSwitch_self_test.return_value = 0

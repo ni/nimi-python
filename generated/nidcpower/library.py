@@ -62,7 +62,6 @@ class Library(object):
         self.niDCPower_close_cfunc = None
         self.niDCPower_error_message_cfunc = None
         self.niDCPower_reset_cfunc = None
-        self.niDCPower_revision_query_cfunc = None
         self.niDCPower_self_test_cfunc = None
 
         if library_type == 'windll':
@@ -438,14 +437,6 @@ class Library(object):
                 self.niDCPower_reset_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_reset_cfunc(vi)
-
-    def niDCPower_revision_query(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_revision_query_cfunc is None:
-                self.niDCPower_revision_query_cfunc = self._library.niDCPower_revision_query
-                self.niDCPower_revision_query_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDCPower_revision_query_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_revision_query_cfunc(vi, instrument_driver_revision, firmware_revision)
 
     def niDCPower_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         with self._func_lock:

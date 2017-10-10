@@ -1,10 +1,10 @@
-[ ] This contribution adheres to [CONTRIBUTING.md](https://github.com/ni/<reponame>/blob/master/CONTRIBUTING.md).
+[ ] This contribution adheres to [CONTRIBUTING.md](https://github.com/ni/nimi-python/blob/master/CONTRIBUTING.md).
 
-TODO: Check the above box with an 'x' indicating you've read and followed [CONTRIBUTING.md](https://github.com/ni/<reponame>/blob/master/CONTRIBUTING.md).
+TODO: Check the above box with an 'x' indicating you've read and followed [CONTRIBUTING.md](https://github.com/ni/nimi-python/blob/master/CONTRIBUTING.md).
 
-[ ] I've updated [CHANGELOG.md](https://github.com/ni/<reponame>/blob/master/CHANGELOG.md) if applicable.
+[ ] I've updated [CHANGELOG.md](https://github.com/ni/nimi-python/blob/master/CHANGELOG.md) if applicable.
 
-TODO: Check the above box with an 'x' if you've documented client facing changes in [CHANGELOG.md](https://github.com/ni/<reponame>/blob/master/CHANGELOG.md).
+TODO: Check the above box with an 'x' if you've documented client facing changes in [CHANGELOG.md](https://github.com/ni/nimi-python/blob/master/CHANGELOG.md).
 
 ### What does this Pull Request accomplish?
 
