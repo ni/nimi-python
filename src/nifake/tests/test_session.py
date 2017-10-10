@@ -258,6 +258,20 @@ class TestSession(object):
             calls = [call(SESSION_NUM_FOR_TEST, 0), call(SESSION_NUM_FOR_TEST, 1)]  # 0 is the value of the default of nifake.Turtle.LEONARDO, 1 is the value of nifake.Turtle.DONATELLO
             self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
 
+    def test_single_point_read(self):
+        test_maximum_time = 10
+        test_reading = 5
+        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
+        self.side_effects_helper['Read']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            assert test_reading == session.read(test_maximum_time)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, ANY)]
+            self.patched_library.niFake_Read.assert_has_calls(calls)
+            assert self.patched_library.niFake_Read.call_count == 1
+
+    # TODO(marcoskirsch): Other variations: multi-point/waveform with ViReal64 and ViInt16 * 3 mechanisms
+
     # Retrieving buffers and strings
 
     # TODO(marcoskirsch):
@@ -280,18 +294,6 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
-    def test_single_point_read(self):
-        test_maximum_time = 10
-        test_reading = 5
-        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
-        self.side_effects_helper['Read']['reading'] = test_reading
-        with nifake.Session('dev1') as session:
-            assert test_reading == session.read(test_maximum_time)
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, ANY)]
-            self.patched_library.niFake_Read.assert_has_calls(calls)
-            assert self.patched_library.niFake_Read.call_count == 1
-
     def test_single_point_read_nan(self):
         test_maximum_time = 10
         test_reading = float('NaN')
@@ -299,38 +301,6 @@ class TestSession(object):
         self.side_effects_helper['Read']['reading'] = test_reading
         with nifake.Session('dev1') as session:
             assert math.isnan(session.read(test_maximum_time))
-
-    # TODO(marcoskirsch): Other variations: multi-point/waveform with ViReal64 and ViInt16 * 3 mechanisms
-
-    # Repeated Capabilities
-
-    def test_repeated_capability_method_on_session(self):
-        test_maximum_time = 10
-        test_reading = 5
-        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
-        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
-        with nifake.Session('dev1') as session:
-            value = session.read_from_channel(test_maximum_time)
-        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', test_maximum_time, ANY)
-        assert value == test_reading
-
-    def test_repeated_capability_method_on_specific_channel(self):
-        test_maximum_time = 10
-        test_reading = 5
-        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
-        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
-        with nifake.Session('dev1') as session:
-            value = session['3'].read_from_channel(test_maximum_time)
-        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', test_maximum_time, ANY)
-        assert value == test_reading
-
-    def test_device_method_not_exist_on_repeated_capability(self):
-        with nifake.Session('dev1') as session:
-            try:
-                session['3'].simple_function()
-                assert False, 'Method has no repeated capability so it shouldn\'t exist on _RepeatedCapability'
-            except AttributeError:
-                pass
 
     def test_get_a_string_with_specified_maximum_size(self):
         single_character_string = 'a'
@@ -362,6 +332,36 @@ class TestSession(object):
             assert (returned_string == test_string)
             assert (returned_number == test_number)
             self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
+
+    # Repeated Capabilities
+
+    def test_repeated_capability_method_on_session(self):
+        test_maximum_time = 10
+        test_reading = 5
+        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
+        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            value = session.read_from_channel(test_maximum_time)
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', test_maximum_time, ANY)
+        assert value == test_reading
+
+    def test_repeated_capability_method_on_specific_channel(self):
+        test_maximum_time = 10
+        test_reading = 5
+        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
+        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            value = session['3'].read_from_channel(test_maximum_time)
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', test_maximum_time, ANY)
+        assert value == test_reading
+
+    def test_device_method_not_exist_on_repeated_capability(self):
+        with nifake.Session('dev1') as session:
+            try:
+                session['3'].simple_function()
+                assert False, 'Method has no repeated capability so it shouldn\'t exist on _RepeatedCapability'
+            except AttributeError:
+                pass
 
     # Attributes
 
