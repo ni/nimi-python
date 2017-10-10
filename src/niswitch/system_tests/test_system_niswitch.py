@@ -135,11 +135,6 @@ def test_functions_get_path(session):
     session.set_path(path)
 
 
-def test_functions_get_error_description(session):
-    description = session.get_error_description(0)   # expect no errors
-    assert description == ''
-
-
 def test_functions_connect_disconnect_multiple(session):
     session.connect_multiple('c0->r0, c0->r1')   # expect no errors
     session.disconnect_multiple('c0->r0, c0->r1')   # expect no errors

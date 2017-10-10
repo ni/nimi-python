@@ -781,8 +781,8 @@ class _SessionBase(object):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
 
-    def get_error_description(self, error_code):
-        '''get_error_description
+    def _get_error_description(self, error_code):
+        '''_get_error_description
 
         Returns the error description.
         '''
