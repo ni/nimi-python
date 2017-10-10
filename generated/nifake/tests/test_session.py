@@ -42,6 +42,7 @@ class TestSession(object):
         patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False, is_error_handling=False)
         session.close()
         self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+
         errors_patcher.stop()
 
     def test_init_with_options_nondefault_and_close(self):
@@ -65,6 +66,11 @@ class TestSession(object):
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
+
+    def test_close(self):
+        session = nifake.Session('dev1')
+        session.close()
+        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
     # TODO(marcoskirsch): This should test that when close errors it raises.
     # def test_close_errors(self):
@@ -223,61 +229,13 @@ class TestSession(object):
             except AttributeError as e:
                 pass
 
-    def test_multipoint_read(self):
-        test_maximum_time = 1000
-        test_reading_array = [1.0, 0.1, 42, .42]
-        test_actual_number_of_points = len(test_reading_array)
-        self.patched_library.niFake_ReadMultiPoint.side_effect = self.side_effects_helper.niFake_ReadMultiPoint
-        self.side_effects_helper['ReadMultiPoint']['readingArray'] = test_reading_array
-        self.side_effects_helper['ReadMultiPoint']['actualNumberOfPoints'] = test_actual_number_of_points
-        with nifake.Session('dev1') as session:
-            measurements, points = session.read_multi_point(test_maximum_time, len(test_reading_array))
-            assert len(measurements) == test_actual_number_of_points
-            assert points == test_actual_number_of_points
-            assert measurements == test_reading_array
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, len(test_reading_array), ANY, ANY)]
-            self.patched_library.niFake_ReadMultiPoint.assert_has_calls(calls)
-            assert self.patched_library.niFake_ReadMultiPoint.call_count == 1
-
-    def test_array_input_function(self):
-        test_array = [1, 2, 3, 4]
-        test_array_size = len(test_array)
-        self.patched_library.niFake_ArrayInputFunction.side_effect = self.side_effects_helper.niFake_ArrayInputFunction
-        with nifake.Session('dev1') as session:
-            session.array_input_function(test_array_size, test_array)
-            self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
-
-    def test_enum_input_function_with_defaults(self):
-        test_turtle = nifake.Turtle.DONATELLO
-        self.patched_library.niFake_EnumInputFunctionWithDefaults.side_effect = self.side_effects_helper.niFake_EnumInputFunctionWithDefaults
-        with nifake.Session('dev1') as session:
-            session.enum_input_function_with_defaults()
-            session.enum_input_function_with_defaults(test_turtle)
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, 0), call(SESSION_NUM_FOR_TEST, 1)]  # 0 is the value of the default of nifake.Turtle.LEONARDO, 1 is the value of nifake.Turtle.DONATELLO
-            self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
-
-    def test_single_point_read(self):
-        test_maximum_time = 10
-        test_reading = 5
-        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
-        self.side_effects_helper['Read']['reading'] = test_reading
-        with nifake.Session('dev1') as session:
-            assert test_reading == session.read(test_maximum_time)
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, ANY)]
-            self.patched_library.niFake_Read.assert_has_calls(calls)
-            assert self.patched_library.niFake_Read.call_count == 1
-
-    # TODO(marcoskirsch): Other variations: multi-point/waveform with ViReal64 and ViInt16 * 3 mechanisms
-
     # Retrieving buffers and strings
 
     # TODO(marcoskirsch):
     # def test_get_string_ivi_dance(self)
 
     def test_get_string_ivi_dance_error(self):
+        # TODO(marcoskirsch): Don't use private method to test this. Use a public niFake function.
         test_error_code = -1234
         test_error_desc = "ascending order"
         self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
@@ -294,6 +252,24 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
+    # TODO(marcoskirsch):
+    # def test_get_string_fixed_size(self)
+
+    # TODO(marcoskirsch):
+    # def test_get_string_size_passed_in(self)
+
+    def test_single_point_read(self):
+        test_maximum_time = 10
+        test_reading = 5
+        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
+        self.side_effects_helper['Read']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            assert test_reading == session.read(test_maximum_time)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, ANY)]
+            self.patched_library.niFake_Read.assert_has_calls(calls)
+            assert self.patched_library.niFake_Read.call_count == 1
+
     def test_single_point_read_nan(self):
         test_maximum_time = 10
         test_reading = float('NaN')
@@ -302,36 +278,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             assert math.isnan(session.read(test_maximum_time))
 
-    def test_get_a_string_with_specified_maximum_size(self):
-        single_character_string = 'a'
-        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
-        self.side_effects_helper['GetAStringWithSpecifiedMaximumSize']['aString'] = single_character_string
-        with nifake.Session('dev1') as session:
-            buffer_size = 19
-            string_with_specified_buffer = session.get_a_string_with_specified_maximum_size(buffer_size)
-            assert(string_with_specified_buffer == single_character_string)
-            self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
-
-    def test_get_a_string_of_fixed_maximum_size(self):
-        fixed_buffer_string = "this method will return fixed buffer string"
-        self.patched_library.niFake_GetAStringOfFixedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringOfFixedMaximumSize
-        self.side_effects_helper['GetAStringOfFixedMaximumSize']['aString'] = fixed_buffer_string
-        with nifake.Session('dev1') as session:
-            returned_string = session.get_a_string_of_fixed_maximum_size()
-            assert (returned_string == fixed_buffer_string)
-            self.patched_library.niFake_GetAStringOfFixedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
-
-    def test_return_a_number_and_a_string(self):
-        test_string = "this string"
-        test_number = 13
-        self.patched_library.niFake_ReturnANumberAndAString.side_effect = self.side_effects_helper.niFake_ReturnANumberAndAString
-        self.side_effects_helper['ReturnANumberAndAString']['aString'] = test_string
-        self.side_effects_helper['ReturnANumberAndAString']['aNumber'] = test_number
-        with nifake.Session('dev1') as session:
-            returned_number, returned_string = session.return_a_number_and_a_string()
-            assert (returned_string == test_string)
-            assert (returned_number == test_number)
-            self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
+    # TODO(marcoskirsch): Other variations: multi-point/waveform with ViReal64 and ViInt16 * 3 mechanisms
 
     # Repeated Capabilities
 
@@ -398,6 +345,9 @@ class TestSession(object):
             self.patched_library.niFake_GetAttributeViReal64.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViReal64.call_count == 1
 
+    # TODO(marcoskirsch):
+    # def test_set_attribute_real64(self):
+
     def test_get_attribute_string(self):
         self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
         string = 'Testing is fun?'
@@ -410,12 +360,18 @@ class TestSession(object):
             self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViString.call_count == 2
 
+    # TODO(marcoskirsch):
+    # def test_set_attribute_string
+
     def test_get_attribute_boolean(self):
         self.patched_library.niFake_GetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_GetAttributeViBoolean
         self.side_effects_helper['GetAttributeViBoolean']['attributeValue'] = 1
         with nifake.Session('dev1') as session:
             assert session.read_write_bool
             self.patched_library.niFake_GetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b"", 1000000, ANY)
+
+    # TODO(marcoskirsch):
+    # def test_set_attribute_boolean(self):
 
     def test_get_attribute_enum_int32(self):
         self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
@@ -508,22 +464,6 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
-    def test_set_bool_attribute(self):
-        self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
-        attribute_id = 1000000
-        attrib_bool = True
-        with nifake.Session('dev1') as session:
-            session.read_write_bool = attrib_bool
-            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
-
-    def test_set_vi_string_attribute(self):
-        self.patched_library.niFake_SetAttributeViString.side_effect = self.side_effects_helper.niFake_SetAttributeViString
-        attribute_id = 1000002
-        attrib_string = 'This is test string'
-        with nifake.Session('dev1') as session:
-            session.read_write_string = attrib_string
-            self.patched_library.niFake_SetAttributeViString.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, b'This is test string')
-
     # Error descriptions
 
     def test_get_error_and_error_message_returns_error(self):
@@ -543,6 +483,88 @@ class TestSession(object):
             except nifake.Error as e:
                 assert e.code == test_error_code
                 assert e.description == 'Failed to retrieve error description.'
+
+    def test_enum_input_function_with_defaults(self):
+        test_turtle = nifake.Turtle.DONATELLO
+        self.patched_library.niFake_EnumInputFunctionWithDefaults.side_effect = self.side_effects_helper.niFake_EnumInputFunctionWithDefaults
+        with nifake.Session('dev1') as session:
+            session.enum_input_function_with_defaults()
+            session.enum_input_function_with_defaults(test_turtle)
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, 0), call(SESSION_NUM_FOR_TEST, 1)]  # 0 is the value of the default of nifake.Turtle.LEONARDO, 1 is the value of nifake.Turtle.DONATELLO
+            self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
+
+    def test_set_bool_attribute(self):
+        self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
+        attribute_id = 1000000
+        attrib_bool = True
+        with nifake.Session('dev1') as session:
+            session.read_write_bool = attrib_bool
+            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, 1)
+
+    def test_set_vi_string_attribute(self):
+        self.patched_library.niFake_SetAttributeViString.side_effect = self.side_effects_helper.niFake_SetAttributeViString
+        attribute_id = 1000002
+        attrib_string = 'This is test string'
+        with nifake.Session('dev1') as session:
+            session.read_write_string = attrib_string
+            self.patched_library.niFake_SetAttributeViString.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, b'This is test string')
+
+    def test_multipoint_read(self):
+        test_maximum_time = 1000
+        test_reading_array = [1.0, 0.1, 42, .42]
+        test_actual_number_of_points = len(test_reading_array)
+        self.patched_library.niFake_ReadMultiPoint.side_effect = self.side_effects_helper.niFake_ReadMultiPoint
+        self.side_effects_helper['ReadMultiPoint']['readingArray'] = test_reading_array
+        self.side_effects_helper['ReadMultiPoint']['actualNumberOfPoints'] = test_actual_number_of_points
+        with nifake.Session('dev1') as session:
+            measurements, points = session.read_multi_point(test_maximum_time, len(test_reading_array))
+            assert len(measurements) == test_actual_number_of_points
+            assert points == test_actual_number_of_points
+            assert measurements == test_reading_array
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, len(test_reading_array), ANY, ANY)]
+            self.patched_library.niFake_ReadMultiPoint.assert_has_calls(calls)
+            assert self.patched_library.niFake_ReadMultiPoint.call_count == 1
+
+    def test_array_input_function(self):
+        test_array = [1, 2, 3, 4]
+        test_array_size = len(test_array)
+        self.patched_library.niFake_ArrayInputFunction.side_effect = self.side_effects_helper.niFake_ArrayInputFunction
+        with nifake.Session('dev1') as session:
+            session.array_input_function(test_array)
+            self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
+
+    def test_get_a_string_with_specified_maximum_size(self):
+        single_character_string = 'a'
+        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
+        self.side_effects_helper['GetAStringWithSpecifiedMaximumSize']['aString'] = single_character_string
+        with nifake.Session('dev1') as session:
+            buffer_size = 19
+            string_with_specified_buffer = session.get_a_string_with_specified_maximum_size(buffer_size)
+            assert(string_with_specified_buffer == single_character_string)
+            self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
+
+    def test_get_a_string_of_fixed_maximum_size(self):
+        fixed_buffer_string = "this method will return fixed buffer string"
+        self.patched_library.niFake_GetAStringOfFixedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringOfFixedMaximumSize
+        self.side_effects_helper['GetAStringOfFixedMaximumSize']['aString'] = fixed_buffer_string
+        with nifake.Session('dev1') as session:
+            returned_string = session.get_a_string_of_fixed_maximum_size()
+            assert (returned_string == fixed_buffer_string)
+            self.patched_library.niFake_GetAStringOfFixedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
+
+    def test_return_a_number_and_a_string(self):
+        test_string = "this string"
+        test_number = 13
+        self.patched_library.niFake_ReturnANumberAndAString.side_effect = self.side_effects_helper.niFake_ReturnANumberAndAString
+        self.side_effects_helper['ReturnANumberAndAString']['aString'] = test_string
+        self.side_effects_helper['ReturnANumberAndAString']['aNumber'] = test_number
+        with nifake.Session('dev1') as session:
+            returned_number, returned_string = session.return_a_number_and_a_string()
+            assert (returned_string == test_string)
+            assert (returned_number == test_number)
+            self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
 
     def test_get_error_description_error_message(self):
         test_error_code = -42
