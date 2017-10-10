@@ -596,7 +596,7 @@ class TestSession(object):
             error_desc = session.get_error_description(test_error_code)
             assert error_desc == test_error_desc
         from mock import call
-        calls = [call(SESSION_NUM_FOR_TEST, test_error_code, 0, None), call(SESSION_NUM_FOR_TEST, len(test_error_desc), len(test_error_desc), ANY)]
+        calls = [call(SESSION_NUM_FOR_TEST, test_error_code, ANY)]
         self.patched_library.niFake_error_message.assert_has_calls(calls)
 
     '''
