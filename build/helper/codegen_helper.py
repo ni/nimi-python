@@ -1,4 +1,5 @@
 from .metadata_filters import filter_ivi_dance_parameter
+from .metadata_filters import filter_len_parameter
 from .metadata_find import find_size_parameter
 from enum import Enum
 import pprint
@@ -33,7 +34,7 @@ _parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
+    'skip_size_parameter': True,
     'reordered_for_default_values': True,
     'name_to_use': 'python_name_with_default',
     'skip_repeated_capability_parameter': True,
@@ -43,7 +44,7 @@ _parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
+    'skip_size_parameter': True,
     'reordered_for_default_values': True,
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': True,
@@ -53,7 +54,7 @@ _parameterUsageOptions[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
-    'skip_ivi_dance_size_parameter': True,
+    'skip_size_parameter': True,
     'reordered_for_default_values': True,
     'name_to_use': 'python_name_with_doc_default',
     'skip_repeated_capability_parameter': True,
@@ -63,7 +64,7 @@ _parameterUsageOptions[ParameterUsageOptions.CTYPES_CALL] = {
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
+    'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': False,
@@ -73,7 +74,7 @@ _parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
+    'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'name_to_use': 'library_method_call_snippet',
     'skip_repeated_capability_parameter': False,
@@ -83,7 +84,7 @@ _parameterUsageOptions[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
+    'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'name_to_use': 'ctypes_type_library_call',
     'skip_repeated_capability_parameter': False,
@@ -93,7 +94,7 @@ _parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
-    'skip_ivi_dance_size_parameter': False,
+    'skip_size_parameter': False,
     'reordered_for_default_values': False,
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': False,
@@ -113,14 +114,17 @@ def filter_parameters(function, parameter_usage_options):
     parameters_to_use = []
 
     # Filter based on options
-    ivi_dance_size_parameter = find_size_parameter(filter_ivi_dance_parameter(function['parameters']), function['parameters'])
+    # Find the size parameter - we are assuming there can only be one, eother from mechanism == 'ivi-dance' or mechanism == 'len'
+    size_parameter = find_size_parameter(filter_ivi_dance_parameter(function['parameters']), function['parameters'])
+    if size_parameter is None:
+        size_parameter = find_size_parameter(filter_len_parameter(function['parameters']), function['parameters'])
     for x in function['parameters']:
         skip = False
         if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
             skip = True
         if x['direction'] == 'in' and options_to_use['skip_input_parameters']:
             skip = True
-        if x == ivi_dance_size_parameter and options_to_use['skip_ivi_dance_size_parameter']:
+        if x == size_parameter and options_to_use['skip_size_parameter']:
             skip = True
         if x['is_session_handle'] is True and options_to_use['skip_session_handle']:
             skip = True
