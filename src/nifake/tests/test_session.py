@@ -453,7 +453,7 @@ class TestSession(object):
             except nifake.Error as e:
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
-                
+
     def test_set_bool_attribute(self):
         self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
         attribute_id = 1000000
@@ -554,7 +554,7 @@ class TestSession(object):
     # def test_get_attribute_int64(self):
     # def test_set_attribute_int64(self):
 
-     # TODO(marcoskirsch):
+    # TODO(marcoskirsch):
     # def test_multiple_outputs of different types
 
     # TODO(marcoskirsch):
