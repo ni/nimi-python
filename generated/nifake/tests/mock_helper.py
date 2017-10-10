@@ -16,6 +16,8 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
+        self._defaults['ArrayInputFunction'] = {}
+        self._defaults['ArrayInputFunction']['return'] = 0
         self._defaults['EnumInputFunctionWithDefaults'] = {}
         self._defaults['EnumInputFunctionWithDefaults']['return'] = 0
         self._defaults['GetABoolean'] = {}
@@ -103,6 +105,11 @@ class SideEffectsHelper(object):
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
 
+    def niFake_ArrayInputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
+        if self._defaults['ArrayInputFunction']['return'] != 0:
+            return self._defaults['ArrayInputFunction']['return']
+        return self._defaults['ArrayInputFunction']['return']
+
     def niFake_EnumInputFunctionWithDefaults(self, vi, a_turtle):  # noqa: N802
         if self._defaults['EnumInputFunctionWithDefaults']['return'] != 0:
             return self._defaults['EnumInputFunctionWithDefaults']['return']
@@ -129,7 +136,6 @@ class SideEffectsHelper(object):
             return self._defaults['GetAStringOfFixedMaximumSize']['return']
         if self._defaults['GetAStringOfFixedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize", param='aString')
-        assert len(a_string) == len(self._defaults['GetAStringOfFixedMaximumSize']['aString'])
         for i in range(len(a_string)):
             a_string[i] = self._defaults['GetAStringOfFixedMaximumSize']['aString'][i]
         return self._defaults['GetAStringOfFixedMaximumSize']['return']
@@ -139,7 +145,6 @@ class SideEffectsHelper(object):
             return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
         if self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAStringWithSpecifiedMaximumSize", param='aString')
-        assert len(a_string) == len(self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'])
         for i in range(len(a_string)):
             a_string[i] = self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'][i]
         return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
@@ -241,7 +246,6 @@ class SideEffectsHelper(object):
             return self._defaults['ReadMultiPoint']['return']
         if self._defaults['ReadMultiPoint']['readingArray'] is None:
             raise MockFunctionCallError("niFake_ReadMultiPoint", param='readingArray')
-        assert len(reading_array) == len(self._defaults['ReadMultiPoint']['readingArray'])
         for i in range(len(reading_array)):
             reading_array[i] = self._defaults['ReadMultiPoint']['readingArray'][i]
         if self._defaults['ReadMultiPoint']['actualNumberOfPoints'] is None:
@@ -257,7 +261,6 @@ class SideEffectsHelper(object):
         a_number.contents.value = self._defaults['ReturnANumberAndAString']['aNumber']
         if self._defaults['ReturnANumberAndAString']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnANumberAndAString", param='aString')
-        assert len(a_string) == len(self._defaults['ReturnANumberAndAString']['aString'])
         for i in range(len(a_string)):
             a_string[i] = self._defaults['ReturnANumberAndAString']['aString'][i]
         return self._defaults['ReturnANumberAndAString']['return']
@@ -310,7 +313,6 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niFake_error_message", param='errorMessage')
-        assert len(error_message) == len(self._defaults['error_message']['errorMessage'])
         for i in range(len(error_message)):
             error_message[i] = self._defaults['error_message']['errorMessage'][i]
         return self._defaults['error_message']['return']
@@ -319,6 +321,8 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niFake_Abort.side_effect = MockFunctionCallError("niFake_Abort")
         mock_library.niFake_Abort.return_value = 0
+        mock_library.niFake_ArrayInputFunction.side_effect = MockFunctionCallError("niFake_ArrayInputFunction")
+        mock_library.niFake_ArrayInputFunction.return_value = 0
         mock_library.niFake_EnumInputFunctionWithDefaults.side_effect = MockFunctionCallError("niFake_EnumInputFunctionWithDefaults")
         mock_library.niFake_EnumInputFunctionWithDefaults.return_value = 0
         mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")

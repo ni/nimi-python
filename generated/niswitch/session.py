@@ -1700,7 +1700,7 @@ class Session(_SessionBase):
 
         This function retrieves and then clears the IVI error information for
         the session or the current execution thread. One exception exists: If
-        the BufferSize parameter is 0, the function does not clear the error
+        the buffer_size parameter is 0, the function does not clear the error
         information. By passing 0 for the buffer size, the caller can ascertain
         the buffer size required to get the entire error description string and
         then call the function again with a sufficiently large buffer. If the
@@ -2414,23 +2414,6 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_reset(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def revision_query(self):
-        '''revision_query
-
-        Returns the revision of the NI-SWITCH driver.
-
-        Returns:
-            instrument_driver_revision (string): NI-SWITCH software revision numbers in the form of a string. You must
-                pass a ViChar array with at least 256 bytes.
-            firmware_revision (string): Currently unsupported.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        instrument_driver_revision_ctype = (visatype.ViChar * 256)()  # case 8
-        firmware_revision_ctype = (visatype.ViChar * 256)()  # case 8
-        error_code = self._library.niSwitch_revision_query(self._vi, instrument_driver_revision_ctype, firmware_revision_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return instrument_driver_revision_ctype.value.decode(self._encoding), firmware_revision_ctype.value.decode(self._encoding)
 
     def self_test(self):
         '''self_test

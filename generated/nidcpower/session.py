@@ -2491,9 +2491,6 @@ class _SessionBase(object):
     def configure_aperture_time(self, aperture_time, units):
         '''configure_aperture_time
 
-        Vistatus configure_aperture_time(ViSession vi, ViConstString
-        channelName, ViReal64 apertureTime, ViInt32 units);
-
         Configures the aperture time on the specified channel(s).
 
         The supported values depend on the **units**. Refer to the *Aperture
@@ -2508,13 +2505,12 @@ class _SessionBase(object):
 
         **Related Topics:**
 
-        `Aperture
-        Time <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/aperture/>`__
+        `Aperture Time <REPLACE_DRIVER_SPECIFIC_URL_1(aperture)>`__
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -2548,31 +2544,23 @@ class _SessionBase(object):
     def fetch_multiple(self, timeout, count):
         '''fetch_multiple
 
-        Vistatus fetch_multiple(ViSession vi, ViConstString
-        channelName, ViReal64 timeout, ViInt32 count, ViReal64
-        voltageMeasurements[], ViReal64 currentMeasurements[], ViBoolean
-        inCompliance[], ViInt32\* actualcount);
-
         Returns an array of voltage measurements, an array of current
         measurements, and an array of compliance measurements that were
         previously taken and are stored in the NI-DCPower buffer. This function
-        should not be used when the
-        `MEASURE_WHEN <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_MEASURE_WHEN.html')>`__
-        attribute is set to NIDCPOWER_VAL_ON_DEMAND. You must first call
-        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
-        before calling this function.
+        should not be used when the MEASURE_WHEN attribute is
+        set to NIDCPOWER_VAL_ON_DEMAND. You must first call
+        _initiate before calling this function.
 
         Refer to the `Acquiring
-        Measurements <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/acquiringmeasurements/>`__
-        and
-        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
-        topics in the *NI DC Power Supplies and SMUs Help* for more information
-        about configuring this function.
+        Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
+        and `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in
+        the *NI DC Power Supplies and SMUs Help* for more information about
+        configuring this function.
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -2619,9 +2607,6 @@ class _SessionBase(object):
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
-
-        Vistatus _get_attribute_vi_boolean(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViBoolean \*value);
 
         | Queries the value of a ViBoolean attribute.
         | You can use this function to get the values of device-specific
@@ -2675,9 +2660,6 @@ class _SessionBase(object):
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
-        Vistatus _get_attribute_vi_int32(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViInt32 \*value);
-
         | Queries the value of a ViInt32 attribute.
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
@@ -2729,9 +2711,6 @@ class _SessionBase(object):
 
     def _get_attribute_vi_int64(self, attribute_id):
         '''_get_attribute_vi_int64
-
-        Vistatus _get_attribute_vi_int64(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViInt64 \*value);
 
         | Queries the value of a ViInt64 attribute.
         | You can use this function to get the values of device-specific
@@ -2785,9 +2764,6 @@ class _SessionBase(object):
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
-        Vistatus _get_attribute_vi_real64(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViReal64 \*value);
-
         | Queries the value of a ViReal64 attribute.
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
@@ -2839,9 +2815,6 @@ class _SessionBase(object):
 
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
-
-        ViStatus _get_attribute_vi_string(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViInt32 bufSize, ViChar value[]);
 
         | Queries the value of a ViString attribute.
         | You can use this function to get the values of device-specific
@@ -2906,13 +2879,9 @@ class _SessionBase(object):
     def get_channel_name(self, index):
         '''get_channel_name
 
-        ViStatus get_channel_name(ViSession vi, ViInt32 index, ViInt32
-        bufferSize, ViChar channelName[]);
-
         Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the
-        `CHANNEL_COUNT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CHANNEL_COUNT.html')>`__
-        attribute to determine the upper bound of valid values for **index**.
+        **index**. Use the CHANNEL_COUNT attribute to
+        determine the upper bound of valid values for **index**.
 
         Args:
             index (int): Specifies which output channel name to return. The index values begin at
@@ -2944,21 +2913,16 @@ class _SessionBase(object):
     def measure(self, measurement_type):
         '''measure
 
-        Vistatus measure(ViSession vi, ViConstString channelName,
-        ViInt32 measurementType, ViReal64 \*measurement)
-
         Returns the measured value of either the voltage or current on the
         specified output channel. Each call to this function blocks other
         function calls until the hardware returns the **measurement**. To
-        measure multiple output channels, use the
-        `measure_multiple <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_MeasureMultiple.html')>`__
+        measure multiple output channels, use the measure_multiple
         function.
 
         Args:
             channel_name (string): Specifies the output channel to measure. Only one measurement at a time
                 may be made with the measure function. Use the
-                `measure_multiple <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_MeasureMultiple.html')>`__
-                function to measure multiple channels.
+                measure_multiple function to measure multiple channels.
             measurement_type (int): Specifies whether a voltage or current value is measured.
                 **Defined Values**:
 
@@ -2982,10 +2946,6 @@ class _SessionBase(object):
 
     def measure_multiple(self):
         '''measure_multiple
-
-        Vistatus measure_multiple(ViSession vi, ViConstString
-        channelName, ViReal64 voltageMeasurements[], ViReal64
-        currentMeasurements[]);
 
         Returns arrays of the measured voltage and current values on the
         specified output channel(s). Each call to this function blocks other
@@ -3023,36 +2983,26 @@ class _SessionBase(object):
     def query_in_compliance(self):
         '''query_in_compliance
 
-        Vistatus query_in_compliance(ViSession vi, ViConstString
-        channelName, ViBoolean \*inCompliance);
-
         Queries the specified output device to determine if it is operating at
-        the
-        `compliance <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'compliance.html')>`__
-        limit.
+        the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
 
         The compliance limit is the current limit when the output function is
         set to NIDCPOWER_VAL_DC_VOLTAGE. If the output is operating at the
         compliance limit, the output reaches the current limit before the
-        desired voltage level. Refer to the
-        `configure_output_function <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-        function and the
-        `configure_current_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLimit.html')>`__
-        function for more information about output function and current limit,
-        respectively.
+        desired voltage level. Refer to the configure_output_function
+        function and the configure_current_limit function for more
+        information about output function and current limit, respectively.
 
         The compliance limit is the voltage limit when the output function is
         set to NIDCPOWER_VAL_DC_CURRENT. If the output is operating at the
         compliance limit, the output reaches the voltage limit before the
         desired current level. Refer to the configure_output_function
-        function and the
-        `configure_voltage_limit <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimit.html')>`__
-        function for more information about output function and voltage limit,
-        respectively.
+        function and the configure_voltage_limit function for more
+        information about output function and voltage limit, respectively.
 
         **Related Topics:**
 
-        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
+        `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
         Args:
             channel_name (string): Specifies the output channel to query. Compliance status can only be
@@ -3070,9 +3020,6 @@ class _SessionBase(object):
 
     def query_max_current_limit(self, voltage_level):
         '''query_max_current_limit
-
-        Vistatus query_max_current_limit(ViSession vi, ViConstString
-        channelName, ViReal64 voltageLevel, ViReal64 \*maxCurrentLimit);
 
         Queries the maximum current limit on an output channel if the output
         channel is set to the specified **voltageLevel**.
@@ -3098,9 +3045,6 @@ class _SessionBase(object):
     def query_max_voltage_level(self, current_limit):
         '''query_max_voltage_level
 
-        Vistatus query_max_voltage_level(ViSession vi, ViConstString
-        channelName, ViReal64 currentLimit, ViReal64 \*maxVoltageLevel);
-
         Queries the maximum voltage level on an output channel if the output
         channel is set to the specified **currentLimit**.
 
@@ -3124,9 +3068,6 @@ class _SessionBase(object):
 
     def query_min_current_limit(self, voltage_level):
         '''query_min_current_limit
-
-        Vistatus query_min_current_limit(ViSession vi, ViConstString
-        channelName, ViReal64 voltageLevel, ViReal64 \*minCurrentLimit);
 
         Queries the minimum current limit on an output channel if the output
         channel is set to the specified **voltageLevel**.
@@ -3152,15 +3093,12 @@ class _SessionBase(object):
     def query_output_state(self, output_state):
         '''query_output_state
 
-        Vistatus query_output_state(ViSession vi, ViConstString
-        channelName, ViInt32 outputState, ViBoolean \*inState);
-
         Queries the specified output channel to determine if the output channel
         is currently in the state specified by **outputState**.
 
         **Related Topics:**
 
-        `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
+        `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
         Args:
             channel_name (string): Specifies the output channel to query. The output state may only be
@@ -3188,9 +3126,6 @@ class _SessionBase(object):
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
-
-        Vistatus _set_attribute_vi_boolean(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViBoolean value);
 
         | Sets the value of a ViBoolean attribute.
         | This is a low-level function that you can use to set the values of
@@ -3247,9 +3182,6 @@ class _SessionBase(object):
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
-        Vistatus _set_attribute_vi_int32(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViInt32 value);
-
         | Sets the value of a ViInt32 attribute.
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
@@ -3304,9 +3236,6 @@ class _SessionBase(object):
 
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int64
-
-        Vistatus _set_attribute_vi_int64(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViInt64 value);
 
         | Sets the value of a ViInt64 attribute.
         | This is a low-level function that you can use to set the values of
@@ -3363,9 +3292,6 @@ class _SessionBase(object):
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
-        Vistatus _set_attribute_vi_real64(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViReal64 value);
-
         | Sets the value of a ViReal64 attribute.
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
@@ -3420,9 +3346,6 @@ class _SessionBase(object):
 
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
-
-        Vistatus _set_attribute_vi_string(ViSession vi, ViConstString
-        channelName, ViAttr attribute, ViConstString value);
 
         | Sets the value of a ViString attribute.
         | This is a low-level function that you can use to set the values of
@@ -3479,29 +3402,26 @@ class _SessionBase(object):
     def set_sequence(self, values, source_delays, size):
         '''set_sequence
 
-        Vistatus set_sequence(ViSession vi, ViConstString channelName,
-        ViReal64 values[], ViReal64 sourceDelays[], ViUInt32 size);
-
         Configures a series of voltage or current outputs and corresponding
         source delays. The source mode must be set to
-        `Sequence <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/sequencing/>`__
-        for this function to take effect.
+        `Sequence <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for this
+        function to take effect.
 
         Refer to the `Configuring the Source
-        Unit <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/configuringthesourceunit/>`__
-        topic in the *NI DC Power Supplies and SMUs Help* for more information
-        about how to configure your device.
+        Unit <REPLACE_DRIVER_SPECIFIC_URL_1(configuringthesourceunit)>`__ topic
+        in the *NI DC Power Supplies and SMUs Help* for more information about
+        how to configure your device.
 
         Use this function in the Uncommitted or Committed programming states.
         Refer to the `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-        topic in the *NI DC Power Supplies and SMUs Help* for more information
-        about NI-DCPower programming states.
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for more information about
+        NI-DCPower programming states.
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -3509,7 +3429,7 @@ class _SessionBase(object):
                 You can only set a sequence for one channel at a time.
             values (list of float): Specifies the series of voltage levels or current levels, depending on
                 the configured `output
-                function <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programming_output/>`__.
+                function <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
                 **Valid values**:
                 The valid values for this parameter are defined by the voltage level
                 range or current level range.
@@ -3522,8 +3442,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        values_ctype = (visatype.ViReal64 * len(values))(*values  # case 4
-        source_delays_ctype = (visatype.ViReal64 * len(source_delays))(*source_delays  # case 4
+        values_ctype = (visatype.ViReal64 * len(values))(*values)  # case 4
+        source_delays_ctype = (visatype.ViReal64 * len(source_delays))(*source_delays)  # case 4
         size_ctype = visatype.ViUInt32(size)  # case 6
         error_code = self._library.niDCPower_SetSequence(self._vi, self._repeated_capability.encode(self._encoding), values, source_delays, size)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3574,32 +3494,26 @@ class Session(_SessionBase):
     def _abort(self):
         '''_abort
 
-        Vistatus _abort(ViSession vi);
-
         Transitions the NI-DCPower session from the Running state to the
         Committed state. If a sequence is running, it is stopped. Any
         configuration functions called after this function are not applied until
-        the
-        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
-        function is called. If power output is enabled when you call the
-        _abort function, the output channels remain in their current
-        state and continue providing power.
+        the _initiate function is called. If power output is enabled
+        when you call the _abort function, the output channels remain
+        in their current state and continue providing power.
 
-        Use the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputEnabled.html')>`__
-        function to disable power output on a per channel basis. Use the
-        `reset <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
-        function to disable output on all channels.
+        Use the configure_output_enabled function to disable power
+        output on a per channel basis. Use the reset function to
+        disable output on all channels.
 
         Refer to the `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-        topic in the *NI DC Power Supplies and SMUs Help* for information about
-        the specific NI-DCPower software states.
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for information about the
+        specific NI-DCPower software states.
 
         **Related Topics:**
 
         `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code = self._library.niDCPower_Abort(self._vi)
@@ -3609,23 +3523,20 @@ class Session(_SessionBase):
     def commit(self):
         '''commit
 
-        Vistatus commit(ViSession vi);
-
         Applies previously configured settings to the device. Calling this
         function moves the NI-DCPower session from the Uncommitted state into
         the Committed state. After calling this function, modifying any
         attribute reverts the NI-DCPower session to the Uncommitted state. Use
-        the
-        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
-        function to transition to the Running state. Refer to the `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-        topic in the *NI DC Power Supplies and SMUs Help* for details about the
-        specific NI-DCPower software states.
+        the _initiate function to transition to the Running state.
+        Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for details about the specific
+        NI-DCPower software states.
 
         **Related Topics:**
 
         `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code = self._library.niDCPower_Commit(self._vi)
@@ -3635,15 +3546,12 @@ class Session(_SessionBase):
     def configure_digital_edge_measure_trigger(self, input_terminal, edge):
         '''configure_digital_edge_measure_trigger
 
-        Vistatus configure_digital_edge_measure_trigger(ViSession vi,
-        ViConstString inputTerminal, ViInt32 edge);
-
         Configures the Measure trigger for digital edge triggering.
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -3681,15 +3589,12 @@ class Session(_SessionBase):
     def configure_digital_edge_pulse_trigger(self, input_terminal, edge):
         '''configure_digital_edge_pulse_trigger
 
-        Vistatus configure_digital_edge_pulse_trigger(ViSession vi,
-        ViConstString inputTerminal, ViInt32 edge);
-
         Configures the Pulse trigger for digital edge triggering.
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -3727,15 +3632,12 @@ class Session(_SessionBase):
     def configure_digital_edge_sequence_advance_trigger(self, input_terminal, edge):
         '''configure_digital_edge_sequence_advance_trigger
 
-        Vistatus configure_digital_edge_sequence_advance_trigger(ViSession
-        vi, ViConstString inputTerminal, ViInt32 edge);
-
         Configures the Sequence Advance trigger for digital edge triggering.
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -3774,15 +3676,12 @@ class Session(_SessionBase):
     def configure_digital_edge_source_trigger(self, input_terminal, edge):
         '''configure_digital_edge_source_trigger
 
-        Vistatus configure_digital_edge_source_trigger(ViSession vi,
-        ViConstString inputTerminal, ViInt32 edge);
-
         Configures the Source trigger for digital edge triggering.
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -3820,15 +3719,12 @@ class Session(_SessionBase):
     def configure_digital_edge_start_trigger(self, input_terminal, edge):
         '''configure_digital_edge_start_trigger
 
-        Vistatus configure_digital_edge_start_trigger(ViSession vi,
-        ViConstString inputTerminal, ViInt32 edge);
-
         Configures the Start trigger for digital edge triggering.
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -3866,10 +3762,6 @@ class Session(_SessionBase):
     def create_advanced_sequence(self, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):
         '''create_advanced_sequence
 
-        Vistatus create_advanced_sequence(ViSession vi, ViConstString
-        sequenceName, ViInt32 attributeIDCount,ViInt32 attributeIDs[], viBoolean
-        setAsActiveSequence);
-
         Creates an empty advanced sequence. Call the
         create_advanced_sequence_step function to add steps to the
         active advanced sequence.
@@ -3883,24 +3775,24 @@ class Session(_SessionBase):
 
         Use this function in the Uncommitted or Committed programming states.
         Refer to the `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-        topic in the *NI DC Power Supplies and SMUs Help* for more information
-        about NI-DCPower programming states.
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for more information about
+        NI-DCPower programming states.
 
         **Related Topics**:
 
         `Advanced Sequence
-        Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/advancedsequencemode/>`__
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
         `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-        `create_advanced_sequence_step <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_CreateAdvancedSequenceStep.html')>`__
+        create_advanced_sequence_step
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -3913,95 +3805,95 @@ class Session(_SessionBase):
                 in advanced sequencing. An ✕ indicates that the attribute cannot be
                 configured in advanced sequencing.
 
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | Attribute                                                                                                                                                                        | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
-                +==================================================================================================================================================================================+===========+=========+=========+=========+=========+===================+===================+================+
-                | `DC_NOISE_REJECTION <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_DC_NOISE_REJECTION.html')>`__                         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `APERTURE_TIME <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_APERTURE_TIME.html')>`__                                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `MEASURE_RECORD_LENGTH <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_MEASURE_RECORD_LENGTH.html')>`__                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `sense <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_SENSE.html')>`__                                                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `OVP_ENABLED <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OVP_ENABLED.html')>`__                                       | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `OVP_LIMIT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OVP_LIMIT.html')>`__                                           | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_BIAS_DELAY <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_DELAY.html')>`__                             | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_OFF_TIME <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_OFF_TIME.html')>`__                                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_ON_TIME <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_ON_TIME.html')>`__                                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `SOURCE_DELAY <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_SOURCE_DELAY.html')>`__                                     | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `CURRENT_COMPENSATION_FREQUENCY <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_COMPENSATION_FREQUENCY.html')>`__ | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `CURRENT_GAIN_BANDWIDTH <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_GAIN_BANDWIDTH.html')>`__                 | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `CURRENT_POLE_ZERO_RATIO <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_POLE_ZERO_RATIO.html')>`__               | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `VOLTAGE_COMPENSATION_FREQUENCY <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_COMPENSATION_FREQUENCY.html')>`__ | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `VOLTAGE_GAIN_BANDWIDTH <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_GAIN_BANDWIDTH.html')>`__                 | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `VOLTAGE_POLE_ZERO_RATIO <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_POLE_ZERO_RATIO.html')>`__               | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `CURRENT_LEVEL <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_LEVEL.html')>`__                                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `CURRENT_LEVEL_RANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `VOLTAGE_LIMIT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_LIMIT.html')>`__                                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `VOLTAGE_LIMIT_RANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `CURRENT_LIMIT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_LIMIT.html')>`__                                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `CURRENT_LIMIT_RANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `VOLTAGE_LEVEL <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_LEVEL.html')>`__                                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `VOLTAGE_LEVEL_RANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `OUTPUT_ENABLED <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OUTPUT_ENABLED.html')>`__                                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `OUTPUT_FUNCTION <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OUTPUT_FUNCTION.html')>`__                               | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `OUTPUT_RESISTANCE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OUTPUT_RESISTANCE.html')>`__                           | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_BIAS_CURRENT_LEVEL <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LEVEL.html')>`__             | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_BIAS_VOLTAGE_LIMIT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT.html')>`__             | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_CURRENT_LEVEL <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_CURRENT_LEVEL_RANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL_RANGE.html')>`__           | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_VOLTAGE_LIMIT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_VOLTAGE_LIMIT_RANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE.html')>`__           | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_BIAS_CURRENT_LIMIT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT.html')>`__             | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_BIAS_VOLTAGE_LEVEL <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LEVEL.html')>`__             | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_CURRENT_LIMIT <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_CURRENT_LIMIT_RANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE.html')>`__           | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_VOLTAGE_LEVEL <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_VOLTAGE_LEVEL.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `PULSE_VOLTAGE_LEVEL_RANGE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_VOLTAGE_LEVEL_RANGE.html')>`__           | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | `TRANSIENT_RESPONSE <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_TRANSIENT_RESPONSE.html')>`__                         | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | Attribute                      | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
+                +================================+===========+=========+=========+=========+=========+===================+===================+================+
+                | DC_NOISE_REJECTION             | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | APERTURE_TIME                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | MEASURE_RECORD_LENGTH          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | sense                          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | OVP_ENABLED                    | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | OVP_LIMIT                      | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_BIAS_DELAY               | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_OFF_TIME                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_ON_TIME                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | SOURCE_DELAY                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | CURRENT_COMPENSATION_FREQUENCY | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | CURRENT_GAIN_BANDWIDTH         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | CURRENT_POLE_ZERO_RATIO        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | VOLTAGE_COMPENSATION_FREQUENCY | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | VOLTAGE_GAIN_BANDWIDTH         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | VOLTAGE_POLE_ZERO_RATIO        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | CURRENT_LEVEL                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | CURRENT_LEVEL_RANGE            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | VOLTAGE_LIMIT                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | VOLTAGE_LIMIT_RANGE            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | CURRENT_LIMIT                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | CURRENT_LIMIT_RANGE            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | VOLTAGE_LEVEL                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | VOLTAGE_LEVEL_RANGE            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | OUTPUT_ENABLED                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | OUTPUT_FUNCTION                | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | OUTPUT_RESISTANCE              | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_BIAS_CURRENT_LEVEL       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_BIAS_VOLTAGE_LIMIT       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_CURRENT_LEVEL            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_CURRENT_LEVEL_RANGE      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_VOLTAGE_LIMIT            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_VOLTAGE_LIMIT_RANGE      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_BIAS_CURRENT_LIMIT       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_BIAS_VOLTAGE_LEVEL       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_CURRENT_LIMIT            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_CURRENT_LIMIT_RANGE      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_VOLTAGE_LEVEL            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | PULSE_VOLTAGE_LEVEL_RANGE      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                | TRANSIENT_RESPONSE             | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
             set_as_active_sequence (bool): Specifies that this current sequence is active.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case 3
         attribute_id_count_ctype = visatype.ViInt32(attribute_id_count)  # case 6
-        attribute_ids_ctype = (visatype.ViInt32 * len(attribute_ids))(*attribute_ids  # case 4
+        attribute_ids_ctype = (visatype.ViInt32 * len(attribute_ids))(*attribute_ids)  # case 4
         set_as_active_sequence_ctype = visatype.ViBoolean(set_as_active_sequence)  # case 6
         error_code = self._library.niDCPower_CreateAdvancedSequence(self._vi, sequence_name.encode(self._encoding), attribute_id_count, attribute_ids, set_as_active_sequence)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -4009,9 +3901,6 @@ class Session(_SessionBase):
 
     def create_advanced_sequence_step(self, set_as_active_step):
         '''create_advanced_sequence_step
-
-        Vistatus create_advanced_sequence_step(ViSession vi, viBoolean
-        setAsActiveSequenceStep);
 
         Creates a new advanced sequence step in the advanced sequence specified
         by the Active advanced sequence. When you create an advanced sequence
@@ -4029,17 +3918,17 @@ class Session(_SessionBase):
         **Related Topics**:
 
         `Advanced Sequence
-        Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/advancedsequencemode/>`__
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
         `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-        `create_advanced_sequence <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_CreateAdvancedSequence.html')>`__
+        create_advanced_sequence
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -4054,9 +3943,6 @@ class Session(_SessionBase):
     def delete_advanced_sequence(self, sequence_name):
         '''delete_advanced_sequence
 
-        Vistatus delete_advanced_sequence(ViSession vi, viConstString
-        sequenceName);
-
         Deletes a previously created advanced sequence and all the advanced
         sequence steps in the advanced sequence.
 
@@ -4070,15 +3956,15 @@ class Session(_SessionBase):
         **Related Topics**:
 
         `Advanced Sequence
-        Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/advancedsequencemode/>`__
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
         `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -4093,13 +3979,9 @@ class Session(_SessionBase):
     def disable(self):
         '''disable
 
-        Vistatus disable(ViSession vi);
-
-        This function performs the same actions as the
-        `reset <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
+        This function performs the same actions as the reset
         function, except that this function also immediately sets the
-        `OUTPUT_ENABLED <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OUTPUT_ENABLED.html')>`__
-        attribute to VI_FALSE.
+        OUTPUT_ENABLED attribute to VI_FALSE.
 
         This function opens the output relay on devices that have an output
         relay.
@@ -4112,21 +3994,17 @@ class Session(_SessionBase):
     def export_signal(self, signal, signal_identifier, output_terminal):
         '''export_signal
 
-        Vistatus export_signal(ViSession vi, ViInt32 signal,
-        ViConstString signalIdentifier, ViConstString outputTerminal);
-
         Routes signals (triggers and events) to the output terminal you specify.
-        The route is created when the session is
-        `committed <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Commit.html')>`__.
+        The route is created when the session is commit.
 
         **Related Topics:**
 
-        `Triggers <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
+        `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -4191,9 +4069,6 @@ class Session(_SessionBase):
     def _get_error(self):
         '''_get_error
 
-        ViStatus _get_error(ViSession vi, ViStatus \*code, ViInt32
-        bufferSize, ViChar description[]);
-
         | Retrieves and then clears the IVI error information for the session or
           the current execution thread unless **bufferSize** is 0, in which case
           the function does not clear the error information. By passing 0 for
@@ -4207,7 +4082,7 @@ class Session(_SessionBase):
           **vi** is an invalid session, the function does nothing and returns an
           error. Normally, the error information describes the first error that
           occurred since the user last called _get_error or
-          `clear_error <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ClearError.html')>`__.
+          clear_error.
 
         Args:
             buffer_size (int): Specifies the number of bytes in the ViChar array you specify for
@@ -4241,10 +4116,6 @@ class Session(_SessionBase):
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
 
-        Vistatus get_self_cal_last_date_and_time(ViSession vi, ViInt32
-        \*year, ViInt32 \*month, ViInt32 \*day, ViInt32 \*hour, ViInt32
-        \*minute);
-
         Returns the date and time of the oldest successful self-calibration from
         among the channels in the session.
 
@@ -4257,7 +4128,7 @@ class Session(_SessionBase):
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Returns:
@@ -4281,9 +4152,6 @@ class Session(_SessionBase):
     def get_self_cal_last_temp(self):
         '''get_self_cal_last_temp
 
-        Vistatus get_self_cal_last_temp(ViSession vi, ViReal64
-        \*temperature);
-
         Returns the onboard temperature of the device, in degrees Celsius,
         during the oldest successful self-calibration from among the channels in
         the session.
@@ -4297,7 +4165,7 @@ class Session(_SessionBase):
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Returns:
@@ -4313,40 +4181,34 @@ class Session(_SessionBase):
     def _initialize_with_channels(self, resource_name, channels='', reset=False, option_string=''):
         '''_initialize_with_channels
 
-        Vistatus _initialize_with_channels(ViRsrc resourceName,
-        ViConstString channels, ViBoolean reset, ViConstString optionString,
-        ViSession \*vi);
-
         Creates and returns a new NI-DCPower session to the power supply or SMU
         specified in **resource name** to be used in all subsequent NI-DCPower
         function calls. With this function, you can optionally set the initial
         state of the following session attributes:
 
-        -  `simulate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_SIMULATE.html')>`__
-        -  `DRIVER_SETUP <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_DRIVER_SETUP.html')>`__
+        -  simulate
+        -  DRIVER_SETUP
 
         After calling this function, the session will be in the Uncommitted
         state. Refer to the `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-        topic for details about specific software states.
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+        details about specific software states.
 
         To place the device in a known start-up state when creating a new
         session, set **reset** to VI_TRUE. This action is equivalent to using
-        the
-        `reset <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
-        function immediately after initializing the session.
+        the reset function immediately after initializing the
+        session.
 
         To open a session and leave the device in its existing configuration
         without passing through a transitional output state, set **reset** to
         VI_FALSE. Then configure the device as in the previous session,
         changing only the desired settings, and then call the
-        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
-        function.
+        _initiate function.
 
         **Related Topics:**
 
         `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
         Args:
             resource_name (string): Specifies the **resourceName** assigned by Measurement & Automation
@@ -4375,8 +4237,7 @@ class Session(_SessionBase):
                 specify a value for an attribute, the default value is used.
 
                 For more information about simulating a device, refer to `Simulating a
-                Power Supply or
-                SMU <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/simulate/>`__.
+                Power Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.
 
         Returns:
             vi (int): Returns a session handle that you use to identify the device in all
@@ -4394,21 +4255,18 @@ class Session(_SessionBase):
     def _initiate(self):
         '''_initiate
 
-        Vistatus _initiate(ViSession vi);
-
         Starts generation or acquisition, causing the NI-DCPower session to
         leave the Uncommitted state or Committed state and enter the Running
-        state. To return to the Committed state call the
-        `_abort <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Abort.html')>`__
+        state. To return to the Committed state call the _abort
         function. Refer to the `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-        topic in the *NI DC Power Supplies and SMUs Help* for information about
-        the specific NI-DCPower software states.
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for information about the
+        specific NI-DCPower software states.
 
         **Related Topics:**
 
         `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code = self._library.niDCPower_Initiate(self._vi)
@@ -4417,9 +4275,6 @@ class Session(_SessionBase):
 
     def read_current_temperature(self):
         '''read_current_temperature
-
-        Vistatus read_current_temperature(ViSession vi, ViReal64
-        \*temperature);
 
         Returns the current onboard **temperature**, in degrees Celsius, of the
         device.
@@ -4436,8 +4291,6 @@ class Session(_SessionBase):
     def reset_device(self):
         '''reset_device
 
-        Vistatus reset_device(ViSession vi);
-
         Resets the device to a known state. The function disables power
         generation, resets session attributes to their default values, clears
         errors such as overtemperature and unexpected loss of auxiliary power,
@@ -4446,8 +4299,8 @@ class Session(_SessionBase):
         device and driver software. This function has the same functionality as
         using reset in Measurement & Automation Explorer. Refer to the
         `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-        topic for more information about NI-DCPower software states.
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+        more information about NI-DCPower software states.
 
         This will also open the output relay on devices that have an output
         relay.
@@ -4460,14 +4313,11 @@ class Session(_SessionBase):
     def reset_with_defaults(self):
         '''reset_with_defaults
 
-        Vistatus reset_with_defaults(ViSession vi);
-
         Resets the device to a known state. This function disables power
         generation, resets session attributes to their default values, commits
         the session attributes, and leaves the session in the
         `Running <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#running')>`__
-        state. In addition to exhibiting the behavior of the
-        `reset <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
+        state. In addition to exhibiting the behavior of the reset
         function, this function can assign user-defined default values for
         configurable attributes from the IVI configuration.
         '''
@@ -4479,20 +4329,17 @@ class Session(_SessionBase):
     def send_software_edge_trigger(self, trigger):
         '''send_software_edge_trigger
 
-        Vistatus send_software_edge_trigger(ViSession vi, ViInt32
-        trigger);
-
         Asserts the specified trigger. This function can override an external
         edge trigger.
 
         **Related Topics:**
 
-        `triggers <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
+        `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
 
         Note:
         This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -4520,21 +4367,17 @@ class Session(_SessionBase):
     def wait_for_event(self, event_id, timeout):
         '''wait_for_event
 
-        Vistatus wait_for_event(ViSession vi, ViInt32 eventId, ViReal64
-        timeout);
-
         Waits until the device has generated the specified event.
 
         The session monitors whether each type of event has occurred at least
-        once since the last time this function or the
-        `_initiate <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
+        once since the last time this function or the _initiate
         function were called. If an event has only been generated once and you
         call this function successively, the function times out. Individual
         events must be generated between separate calls of this function.
 
         Note:
         Refer to `Supported Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
         Args:
@@ -4573,21 +4416,17 @@ class Session(_SessionBase):
     def _close(self):
         '''_close
 
-        Vistatus _close(ViSession vi);
-
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
         function, the output channels remain in their existing state and
-        continue providing power. Use the
-        `configure_output_enabled <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_ConfigureOutputEnabled.html')>`__
+        continue providing power. Use the configure_output_enabled
         function to disable power output on a per channel basis. Use the
-        `reset <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
-        function to disable power output on all channel(s).
+        reset function to disable power output on all channel(s).
 
         **Related Topics:**
 
         `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code = self._library.niDCPower_close(self._vi)
@@ -4596,9 +4435,6 @@ class Session(_SessionBase):
 
     def _error_message(self, error_code):
         '''_error_message
-
-        Vistatus _error_message(ViSession vi, Vistatus errorCode,
-        ViChar errorMessage[256]);
 
         Converts a status code returned by an instrument driver function into a
         user-readable string.
@@ -4622,50 +4458,23 @@ class Session(_SessionBase):
     def reset(self):
         '''reset
 
-        Vistatus reset(ViSession vi);
-
         Resets the device to a known state. This function disables power
         generation, resets session attributes to their default values, commits
         the session attributes, and leaves the session in the Uncommitted state.
         Refer to the `Programming
-        States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-        topic for more information about NI-DCPower software states.
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+        more information about NI-DCPower software states.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code = self._library.niDCPower_reset(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def revision_query(self):
-        '''revision_query
-
-        Vistatus revision_query(ViSession vi, ViChar
-        instrumentDriverRevision[], ViChar firmwareRevision[]);
-
-        Returns the revision information of NI-DCPower and the device firmware.
-
-        Returns:
-            instrument_driver_revision (string): Returns the driver revision information for NI-DCPower.
-            firmware_revision (string): Returns firmware revision information for the device you are using. The
-                size of this array must be at least 256 bytes.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        instrument_driver_revision_ctype = (visatype.ViChar * 256)()  # case 8
-        firmware_revision_ctype = (visatype.ViChar * 256)()  # case 8
-        error_code = self._library.niDCPower_revision_query(self._vi, instrument_driver_revision_ctype, firmware_revision_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return instrument_driver_revision_ctype.value.decode(self._encoding), firmware_revision_ctype.value.decode(self._encoding)
-
     def self_test(self):
         '''self_test
 
-        Vistatus self_test(ViSession vi, ViInt16 \*selfTestResult,
-        ViChar selfTestMessage[]);
-
         Performs the device self-test routine and returns the test result(s).
-        Calling this function implicitly calls the
-        `reset <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
-        function.
+        Calling this function implicitly calls the reset function.
 
         Returns:
             self_test_result (int): Returns the value result from the device self-test.
