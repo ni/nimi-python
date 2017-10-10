@@ -26,7 +26,7 @@ nidcpower.Session methods
     
 
 
-.. function:: configure_aperture_time(units, aperture_time=nidcpower.ApertureTimeUnits.SECONDS)
+.. function:: configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
     Vistatus :py:func:`nidcpower.configure_aperture_time`(ViSession vi, ViConstString
     channelName, ViReal64 apertureTime, ViInt32 units);
@@ -79,7 +79,7 @@ nidcpower.Session methods
 
         
 
-    :type aperture_time: :py:data:`nidcpower.ApertureTimeUnits`
+    :type aperture_time: float
     :param units:
 
 
@@ -92,9 +92,9 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_POWER\_LINE\_CYCLES (1029) | Specifies Power Line Cycles. |
         +--------------------------------------------+------------------------------+
 
-    :type units: int
+    :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
-.. function:: configure_digital_edge_measure_trigger(edge, input_terminal=nidcpower.DigitalEdge.RISING)
+.. function:: configure_digital_edge_measure_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_measure_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -143,9 +143,9 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
-    :type edge: int
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_pulse_trigger(edge, input_terminal=nidcpower.DigitalEdge.RISING)
+.. function:: configure_digital_edge_pulse_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_pulse_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -194,9 +194,9 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
-    :type edge: int
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_sequence_advance_trigger(edge, input_terminal=nidcpower.DigitalEdge.RISING)
+.. function:: configure_digital_edge_sequence_advance_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_sequence_advance_trigger`(ViSession
     vi, ViConstString inputTerminal, ViInt32 edge);
@@ -246,9 +246,9 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
-    :type edge: int
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_source_trigger(edge, input_terminal=nidcpower.DigitalEdge.RISING)
+.. function:: configure_digital_edge_source_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_source_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -297,9 +297,9 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
-    :type edge: int
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: configure_digital_edge_start_trigger(edge, input_terminal=nidcpower.DigitalEdge.RISING)
+.. function:: configure_digital_edge_start_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Vistatus :py:func:`nidcpower.configure_digital_edge_start_trigger`(ViSession vi,
     ViConstString inputTerminal, ViInt32 edge);
@@ -348,7 +348,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
-    :type edge: int
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
 .. function:: create_advanced_sequence(sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence=True)
 
@@ -700,7 +700,7 @@ nidcpower.Session methods
 
     :type output_terminal: string
 
-.. function:: fetch_multiple(count, timeout=1)
+.. function:: fetch_multiple(count, timeout=1.0)
 
     Vistatus :py:func:`nidcpower.fetch_multiple`(ViSession vi, ViConstString
     channelName, ViReal64 timeout, ViInt32 count, ViReal64
@@ -1368,7 +1368,7 @@ nidcpower.Session methods
 
     :type trigger: :py:data:`nidcpower.SendSoftwareEdgeTriggerType`
 
-.. function:: set_sequence(source_delays, size, values='')
+.. function:: set_sequence(source_delays, size, values=None)
 
     Vistatus :py:func:`nidcpower.set_sequence`(ViSession vi, ViConstString channelName,
     ViReal64 values[], ViReal64 sourceDelays[], ViUInt32 size);
