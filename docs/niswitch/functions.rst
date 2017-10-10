@@ -1062,33 +1062,6 @@ niswitch.Session methods
     
 
 
-.. function:: revision_query()
-
-    Returns the revision of the NI-SWITCH driver.
-
-    
-
-
-    :rtype: tuple (instrument_driver_revision, firmware_revision)
-
-        WHERE
-
-        instrument_driver_revision (string): 
-
-
-            NI-SWITCH software revision numbers in the form of a string. You must
-            pass a ViChar array with at least 256 bytes.
-
-            
-
-        firmware_revision (string): 
-
-
-            Currently unsupported.
-
-            
-
-
 .. function:: self_test()
 
     Verifies that the driver can communicate with the switch module.
