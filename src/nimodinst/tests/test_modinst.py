@@ -59,6 +59,7 @@ class TestSession(object):
 
     def test_context_manager(self):
         with nimodinst.Session('') as session:
+            assert type(session) == nimodinst.Session
             self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
         self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
@@ -76,26 +77,6 @@ class TestSession(object):
             d1 = session.next()
             d2 = session.next()
             assert d1 != d2
-
-    def test_get_extended_error_info(self):
-        error_string = 'Error'
-        self.patched_library.niModInst_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
-        self.side_effects_helper['GetExtendedErrorInfo']['errorInfo'] = error_string
-        with nimodinst.Session('') as session:
-            result = session._get_extended_error_info()
-            assert result == error_string
-
-    def test_get_error_description_fails(self):
-        self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
-        self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['return'] = -1
-        self.patched_library.niModInst_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
-        self.side_effects_helper['GetExtendedErrorInfo']['return'] = -2
-        with nimodinst.Session('') as session:
-            try:
-                session[0].chassis_number
-            except nimodinst.Error as e:
-                assert e.code == -1  # we want the original error code from getting the attribute.
-                assert e.description == "Failed to retrieve error description."
 
     def test_get_attribute_session(self):
         val = 123
