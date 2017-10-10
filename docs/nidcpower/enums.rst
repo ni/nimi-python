@@ -169,42 +169,42 @@ Enums used in NI-DCPower
 
 .. py:data:: Event
 
-    .. py:attribute:: SOURCE_COMPLETE
+    .. py:attribute:: nidcpower.Event.SOURCE_COMPLETE
 
 
 
         
 
 
-    .. py:attribute:: MEASURE_COMPLETE
+    .. py:attribute:: nidcpower.Event.MEASURE_COMPLETE
 
 
 
         
 
 
-    .. py:attribute:: SEQUENCE_ITERATION_COMPLETE
+    .. py:attribute:: nidcpower.Event.SEQUENCE_ITERATION_COMPLETE
 
 
 
         
 
 
-    .. py:attribute:: SEQUENCE_ENGINE_DONE
+    .. py:attribute:: nidcpower.Event.SEQUENCE_ENGINE_DONE
 
 
 
         
 
 
-    .. py:attribute:: PULSE_COMPLETE
+    .. py:attribute:: nidcpower.Event.PULSE_COMPLETE
 
 
 
         
 
 
-    .. py:attribute:: READY_FOR_PULSE_TRIGGER
+    .. py:attribute:: nidcpower.Event.READY_FOR_PULSE_TRIGGER
 
 
 
@@ -436,35 +436,35 @@ Enums used in NI-DCPower
 
 .. py:data:: SendSoftwareEdgeTriggerType
 
-    .. py:attribute:: START
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.START
 
 
 
         
 
 
-    .. py:attribute:: SOURCE
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SOURCE
 
 
 
         
 
 
-    .. py:attribute:: MEASURE
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.MEASURE
 
 
 
         
 
 
-    .. py:attribute:: SEQUENCE_ADVANCE
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE
 
 
 
         
 
 
-    .. py:attribute:: PULSE
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.PULSE
 
 
 
