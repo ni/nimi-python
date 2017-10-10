@@ -50,13 +50,13 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-        all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
+        it will apply to the full session. You can specify what repeated capabilities to use using the Python
         index notation:
 
         .. code:: python
 
-            session['0-2,4'].configure_aperture_time(aperture_time, units)
+            session['0,1'].configure_aperture_time(aperture_time, units)
 
 
     :param aperture_time:
@@ -709,13 +709,13 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-        all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
+        it will apply to the full session. You can specify what repeated capabilities to use using the Python
         index notation:
 
         .. code:: python
 
-            session['0-2,4'].fetch_multiple(timeout, count)
+            session['0,1'].fetch_multiple(timeout, count)
 
 
     :param timeout:
@@ -794,13 +794,13 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-        all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
+        it will apply to the full session. You can specify what repeated capabilities to use using the Python
         index notation:
 
         .. code:: python
 
-            session['0-2,4'].get_channel_name(index)
+            session['0,1'].get_channel_name(index)
 
 
     :param index:
@@ -940,13 +940,13 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-        all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
+        it will apply to the full session. You can specify what repeated capabilities to use using the Python
         index notation:
 
         .. code:: python
 
-            session['0-2,4'].measure(measurement_type)
+            session['0,1'].measure(measurement_type)
 
 
     :param measurement_type:
@@ -986,13 +986,13 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-        all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
+        it will apply to the full session. You can specify what repeated capabilities to use using the Python
         index notation:
 
         .. code:: python
 
-            session['0-2,4'].measure_multiple()
+            session['0,1'].measure_multiple()
 
 
     :rtype: tuple (voltage_measurements, current_measurements)
@@ -1048,13 +1048,13 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-        all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
+        it will apply to the full session. You can specify what repeated capabilities to use using the Python
         index notation:
 
         .. code:: python
 
-            session['0-2,4'].query_in_compliance()
+            session['0,1'].query_in_compliance()
 
 
     :rtype: bool
@@ -1075,13 +1075,13 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-        all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
+        it will apply to the full session. You can specify what repeated capabilities to use using the Python
         index notation:
 
         .. code:: python
 
-            session['0-2,4'].query_max_current_limit(voltage_level)
+            session['0,1'].query_max_current_limit(voltage_level)
 
 
     :param voltage_level:
@@ -1114,13 +1114,13 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-        all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
+        it will apply to the full session. You can specify what repeated capabilities to use using the Python
         index notation:
 
         .. code:: python
 
-            session['0-2,4'].query_max_voltage_level(current_limit)
+            session['0,1'].query_max_voltage_level(current_limit)
 
 
     :param current_limit:
@@ -1153,13 +1153,13 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-        all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
+        it will apply to the full session. You can specify what repeated capabilities to use using the Python
         index notation:
 
         .. code:: python
 
-            session['0-2,4'].query_min_current_limit(voltage_level)
+            session['0,1'].query_min_current_limit(voltage_level)
 
 
     :param voltage_level:
@@ -1196,13 +1196,13 @@ nidcpower.Session methods
     
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-        all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
+        it will apply to the full session. You can specify what repeated capabilities to use using the Python
         index notation:
 
         .. code:: python
 
-            session['0-2,4'].query_output_state(output_state)
+            session['0,1'].query_output_state(output_state)
 
 
     :param output_state:
@@ -1349,13 +1349,13 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    .. tip:: This method uses repeated capabilities (usually channels). If you call this method on the base session, then
-        all repeated capabilities will be used. You can limit what repeated capabilities to use using the Python
+    .. tip:: This method uses repeated capabilities (usually channels). If called directly on the nidcpower.Session object, then
+        it will apply to the full session. You can specify what repeated capabilities to use using the Python
         index notation:
 
         .. code:: python
 
-            session['0-2,4'].set_sequence(values, source_delays, size)
+            session['0,1'].set_sequence(values, source_delays, size)
 
 
     :param values:
