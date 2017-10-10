@@ -88,17 +88,6 @@ class TestSession(object):
             lib2 = session._library
         assert lib1 is lib2
 
-    # TODO(marcoskirsch): Remove test and make get_error_description() private - it's not meant to be called by clients.
-    def test_get_error_description_get_error(self):
-        test_error_code = -42
-        test_error_desc = "The answer to the ultimate question"
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = test_error_code
-        self.side_effects_helper['GetError']['description'] = test_error_desc
-        with nifake.Session('dev1') as session:
-            error_desc = session.get_error_description(test_error_code)
-            assert error_desc == test_error_desc
-
     # Methods
 
     def test_simple_function(self):
@@ -482,6 +471,8 @@ class TestSession(object):
     def test_get_error_description_error_message(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
+        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = -1
         self.side_effects_helper['GetError']['description'] = "Shouldn't get this"
@@ -489,10 +480,13 @@ class TestSession(object):
         self.patched_library.niFake_error_message.side_effect = self.side_effects_helper.niFake_error_message
         self.side_effects_helper['error_message']['errorMessage'] = test_error_desc
         with nifake.Session('dev1') as session:
-            error_desc = session.get_error_description(test_error_code)
-            assert error_desc == test_error_desc
+            try:
+                session.simple_function()
+            except nifake.Error as e:
+                assert e.code == test_error_code
+                assert e.description == test_error_desc
         from mock import call
-        calls = [call(SESSION_NUM_FOR_TEST, test_error_code, 0, None), call(SESSION_NUM_FOR_TEST, len(test_error_desc), len(test_error_desc), ANY)]
+        calls = [call(SESSION_NUM_FOR_TEST, test_error_code, ANY)]
         self.patched_library.niFake_error_message.assert_has_calls(calls)
     '''
 

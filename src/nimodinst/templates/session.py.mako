@@ -99,8 +99,8 @@ class Session(object):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
-    def get_error_description(self, error_code):
-        '''get_error_description
+    def _get_error_description(self, error_code):
+        '''_get_error_description
 
         Returns the error description.
         '''
