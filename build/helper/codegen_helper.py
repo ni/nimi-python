@@ -160,8 +160,8 @@ def get_params_snippet(function, parameter_usage_options):
         snippets.append('self')
 
     # Render based on options
-    for x in parameters_to_use:
-            snippets.append(x[options_to_use['name_to_use']])
+    for p in parameters_to_use:
+            snippets.append(p[options_to_use['name_to_use']])
     return ', '.join(snippets)
 
 
