@@ -67,8 +67,8 @@ class _SessionBase(object):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
 
-    def get_error_description(self, error_code):
-        '''get_error_description
+    def _get_error_description(self, error_code):
+        '''_get_error_description
 
         Returns the error description.
         '''
@@ -403,7 +403,7 @@ class Session(_SessionBase):
             a_string (string): String comes back here. Buffer must be 256 big.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        a_string_ctype = (visatype.ViChar * 1)()  # case 8
+        a_string_ctype = (visatype.ViChar * 256)()  # case 8
         error_code = self._library.niFake_GetAStringOfFixedMaximumSize(self._vi, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
@@ -597,7 +597,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         a_number_ctype = visatype.ViInt16()  # case 11
-        a_string_ctype = (visatype.ViChar * 1)()  # case 8
+        a_string_ctype = (visatype.ViChar * 256)()  # case 8
         error_code = self._library.niFake_ReturnANumberAndAString(self._vi, ctypes.pointer(a_number_ctype), a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
