@@ -18,6 +18,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG0
 
 
@@ -26,6 +27,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG1
@@ -38,6 +40,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG2
 
 
@@ -46,6 +49,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG3
@@ -58,6 +62,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG4
 
 
@@ -66,6 +71,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG5
@@ -78,6 +84,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG6
 
 
@@ -88,6 +95,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG7
 
 
@@ -96,6 +104,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
 
@@ -110,6 +119,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG0
 
 
@@ -117,6 +127,7 @@ Enums used in NI-SWITCH
         
 
         
+
 
 
     .. py:attribute:: PXI_TRIG1
@@ -128,6 +139,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG2
 
 
@@ -135,6 +147,7 @@ Enums used in NI-SWITCH
         
 
         
+
 
 
     .. py:attribute:: PXI_TRIG3
@@ -146,6 +159,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG4
 
 
@@ -153,6 +167,7 @@ Enums used in NI-SWITCH
         
 
         
+
 
 
     .. py:attribute:: PXI_TRIG5
@@ -164,6 +179,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG6
 
 
@@ -173,6 +189,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG7
 
 
@@ -180,6 +197,7 @@ Enums used in NI-SWITCH
         
 
         
+
 
 
 
@@ -204,6 +222,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: SWITCH_INITIATED
 
 
@@ -220,6 +239,7 @@ Enums used in NI-SWITCH
 
 
 
+
 .. py:data:: MasterSlaveScanAdvancedBus
 
     .. py:attribute:: NONE
@@ -229,6 +249,7 @@ Enums used in NI-SWITCH
         
 
         
+
 
 
     .. py:attribute:: PXI_TRIG0
@@ -241,6 +262,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG1
 
 
@@ -249,6 +271,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG2
@@ -261,6 +284,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG3
 
 
@@ -269,6 +293,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG4
@@ -281,6 +306,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG5
 
 
@@ -289,6 +315,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG6
@@ -301,6 +328,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG7
 
 
@@ -309,6 +337,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
 
@@ -323,6 +352,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG0
 
 
@@ -331,6 +361,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG1
@@ -343,6 +374,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG2
 
 
@@ -351,6 +383,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG3
@@ -363,6 +396,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG4
 
 
@@ -371,6 +405,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG5
@@ -383,6 +418,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG6
 
 
@@ -393,6 +429,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG7
 
 
@@ -401,6 +438,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
 
@@ -415,6 +453,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PATH_EXISTS
 
 
@@ -422,6 +461,7 @@ Enums used in NI-SWITCH
         Path Exists
 
         
+
 
 
     .. py:attribute:: PATH_UNSUPPORTED
@@ -433,6 +473,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: RESOURCE_IN_USE
 
 
@@ -440,6 +481,7 @@ Enums used in NI-SWITCH
         Resource in use
 
         
+
 
 
     .. py:attribute:: SOURCE_CONFLICT
@@ -451,6 +493,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: CHANNEL_NOT_AVAILABLE
 
 
@@ -458,6 +501,7 @@ Enums used in NI-SWITCH
         Channel not available
 
         
+
 
 
 
@@ -472,6 +516,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: CLOSE_RELAY
 
 
@@ -479,6 +524,7 @@ Enums used in NI-SWITCH
         Close Relay
 
         
+
 
 
 
@@ -493,6 +539,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: CLOSED
 
 
@@ -500,6 +547,7 @@ Enums used in NI-SWITCH
         Closed
 
         
+
 
 
 
@@ -514,6 +562,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: EXTERNAL
 
 
@@ -522,6 +571,7 @@ Enums used in NI-SWITCH
         external trigger output.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG0
@@ -534,6 +584,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG1
 
 
@@ -542,6 +593,7 @@ Enums used in NI-SWITCH
         PXI\_Trig1 line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG2
@@ -554,6 +606,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG3
 
 
@@ -562,6 +615,7 @@ Enums used in NI-SWITCH
         PXI\_Trig3 line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG4
@@ -574,6 +628,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG5
 
 
@@ -582,6 +637,7 @@ Enums used in NI-SWITCH
         PXI\_Trig5 line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG6
@@ -594,6 +650,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG7
 
 
@@ -602,6 +659,7 @@ Enums used in NI-SWITCH
         PXI\_Trig7 line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_STAR
@@ -614,6 +672,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR
 
 
@@ -622,6 +681,7 @@ Enums used in NI-SWITCH
         connector.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR
@@ -634,6 +694,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE1
 
 
@@ -642,6 +703,7 @@ Enums used in NI-SWITCH
         connector module 1.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE2
@@ -654,6 +716,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE3
 
 
@@ -662,6 +725,7 @@ Enums used in NI-SWITCH
         connector module 3.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE4
@@ -674,6 +738,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE5
 
 
@@ -682,6 +747,7 @@ Enums used in NI-SWITCH
         connector module 5.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE6
@@ -694,6 +760,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE7
 
 
@@ -702,6 +769,7 @@ Enums used in NI-SWITCH
         connector module 7.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE8
@@ -714,6 +782,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE9
 
 
@@ -722,6 +791,7 @@ Enums used in NI-SWITCH
         connector module 9.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE10
@@ -734,6 +804,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE11
 
 
@@ -742,6 +813,7 @@ Enums used in NI-SWITCH
         connector module 11.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE12
@@ -754,6 +826,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE1
 
 
@@ -762,6 +835,7 @@ Enums used in NI-SWITCH
         connector module 1.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR_MODULE2
@@ -774,6 +848,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE3
 
 
@@ -782,6 +857,7 @@ Enums used in NI-SWITCH
         connector module 3.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR_MODULE4
@@ -794,6 +870,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE5
 
 
@@ -802,6 +879,7 @@ Enums used in NI-SWITCH
         connector module 5.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR_MODULE6
@@ -814,6 +892,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE7
 
 
@@ -822,6 +901,7 @@ Enums used in NI-SWITCH
         connector module 7.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR_MODULE8
@@ -834,6 +914,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE9
 
 
@@ -842,6 +923,7 @@ Enums used in NI-SWITCH
         connector module 9.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR_MODULE10
@@ -854,6 +936,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE11
 
 
@@ -864,6 +947,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE12
 
 
@@ -872,6 +956,7 @@ Enums used in NI-SWITCH
         connector module 12.
 
         
+
 
 
 
@@ -886,6 +971,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FALLING_EDGE
 
 
@@ -893,6 +979,7 @@ Enums used in NI-SWITCH
         The trigger occurs on the falling edge of the signal.
 
         
+
 
 
 
@@ -907,6 +994,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: BREAK_BEFORE_MAKE
 
 
@@ -917,6 +1005,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: BREAK_AFTER_MAKE
 
 
@@ -925,6 +1014,7 @@ Enums used in NI-SWITCH
         making new connections.
 
         
+
 
 
 
@@ -940,6 +1030,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: EXTERNAL
 
 
@@ -949,6 +1040,7 @@ Enums used in NI-SWITCH
         entry in the scan list.
 
         
+
 
 
     .. py:attribute:: SW_TRIG_FUNC
@@ -962,6 +1054,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG0
 
 
@@ -970,6 +1063,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG1
@@ -982,6 +1076,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG2
 
 
@@ -990,6 +1085,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG3
@@ -1002,6 +1098,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG4
 
 
@@ -1010,6 +1107,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG5
@@ -1022,6 +1120,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_TRIG6
 
 
@@ -1030,6 +1129,7 @@ Enums used in NI-SWITCH
         line before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: PXI_TRIG7
@@ -1042,6 +1142,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: PXI_STAR
 
 
@@ -1050,6 +1151,7 @@ Enums used in NI-SWITCH
         trigger bus before processing the next entry in the scan list.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR
@@ -1062,6 +1164,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR
 
 
@@ -1070,6 +1173,7 @@ Enums used in NI-SWITCH
         connector.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE1
@@ -1082,6 +1186,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE2
 
 
@@ -1090,6 +1195,7 @@ Enums used in NI-SWITCH
         connector module 2.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE3
@@ -1102,6 +1208,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE4
 
 
@@ -1110,6 +1217,7 @@ Enums used in NI-SWITCH
         connector module 4.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE5
@@ -1122,6 +1230,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE6
 
 
@@ -1130,6 +1239,7 @@ Enums used in NI-SWITCH
         connector module 6.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE7
@@ -1142,6 +1252,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE8
 
 
@@ -1150,6 +1261,7 @@ Enums used in NI-SWITCH
         connector module 8.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE9
@@ -1162,6 +1274,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE10
 
 
@@ -1170,6 +1283,7 @@ Enums used in NI-SWITCH
         connector module 10.
 
         
+
 
 
     .. py:attribute:: REARCONNECTOR_MODULE11
@@ -1182,6 +1296,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: REARCONNECTOR_MODULE12
 
 
@@ -1190,6 +1305,7 @@ Enums used in NI-SWITCH
         connector module 12.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR_MODULE1
@@ -1202,6 +1318,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE2
 
 
@@ -1210,6 +1327,7 @@ Enums used in NI-SWITCH
         connector module 2.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR_MODULE3
@@ -1222,6 +1340,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE4
 
 
@@ -1230,6 +1349,7 @@ Enums used in NI-SWITCH
         connector module 4.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR_MODULE5
@@ -1242,6 +1362,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE6
 
 
@@ -1250,6 +1371,7 @@ Enums used in NI-SWITCH
         connector module 6.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR_MODULE7
@@ -1262,6 +1384,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE8
 
 
@@ -1270,6 +1393,7 @@ Enums used in NI-SWITCH
         connector module 8.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR_MODULE9
@@ -1282,6 +1406,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE10
 
 
@@ -1290,6 +1415,7 @@ Enums used in NI-SWITCH
         connector module 10.
 
         
+
 
 
     .. py:attribute:: FRONTCONNECTOR_MODULE11
@@ -1302,6 +1428,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FRONTCONNECTOR_MODULE12
 
 
@@ -1310,6 +1437,7 @@ Enums used in NI-SWITCH
         connector module 12.
 
         
+
 
 
 
@@ -1324,6 +1452,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: FALLING_EDGE
 
 
@@ -1331,6 +1460,7 @@ Enums used in NI-SWITCH
         The trigger occurs on the falling edge of the signal.
 
         
+
 
 
 
@@ -1345,6 +1475,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: MASTER
 
 
@@ -1354,6 +1485,7 @@ Enums used in NI-SWITCH
         
 
 
+
     .. py:attribute:: SLAVE
 
 
@@ -1361,4 +1493,5 @@ Enums used in NI-SWITCH
         
 
         
+
 
