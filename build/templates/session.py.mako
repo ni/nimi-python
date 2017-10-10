@@ -30,6 +30,8 @@ ${encoding_tag}
     enum_input_parameters = helper.filter_enum_parameters(helper.filter_input_parameters(parameters))
     ivi_dance_parameter = helper.filter_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
+    len_parameter = helper.filter_len_parameter(parameters)
+    len_size_parameter = helper.find_size_parameter(len_parameter, parameters)
 %>\
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
