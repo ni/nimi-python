@@ -14,6 +14,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
       # Sets sequence on channels 0 through 3
       session['0-3'].set_sequence(values, source_delays)
       ```
+    * Enum value documentation lists the fully qualified name - this is to allow easy copy/paste
   * #### Removed
 * #### NI-DMM
   * #### Added

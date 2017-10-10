@@ -378,7 +378,6 @@ class SideEffectsHelper(object):
             return self._defaults['error_message']['return']
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niSwitch_error_message", param='errorMessage')
-        assert len(error_message) == len(self._defaults['error_message']['errorMessage'])
         for i in range(len(error_message)):
             error_message[i] = self._defaults['error_message']['errorMessage'][i]
         return self._defaults['error_message']['return']
@@ -396,7 +395,6 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niSwitch_self_test", param='selfTestMessage')
-        assert len(self_test_message) == len(self._defaults['self_test']['selfTestMessage'])
         for i in range(len(self_test_message)):
             self_test_message[i] = self._defaults['self_test']['selfTestMessage'][i]
         return self._defaults['self_test']['return']
