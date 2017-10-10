@@ -553,13 +553,13 @@ class TestSession(object):
             self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
 
     def test_get_a_string_with_specified_maximum_size(self):
-        test_string = 'Test'
+        single_character_string = 'a'
         self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
-        self.side_effects_helper['GetAStringWithSpecifiedMaximumSize']['aString'] = test_string
+        self.side_effects_helper['GetAStringWithSpecifiedMaximumSize']['aString'] = single_character_string
         with nifake.Session('dev1') as session:
             buffer_size = 19
             string_with_specified_buffer = session.get_a_string_with_specified_maximum_size(buffer_size)
-            assert(string_with_specified_buffer == test_string)
+            assert(string_with_specified_buffer == single_character_string)
             self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
 
     def test_get_a_string_of_fixed_maximum_size(self):
