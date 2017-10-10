@@ -32,6 +32,7 @@ ${encoding_tag}
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
     len_parameter = helper.filter_len_parameter(parameters)
     len_size_parameter = helper.find_size_parameter(len_parameter, parameters)
+    assert ivi_dance_size_parameter is None or len_size_parameter is None
 %>\
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
