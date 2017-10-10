@@ -24,6 +24,7 @@ from build.helper.metadata_filters import filter_codegen_functions  # noqa: F401
 from build.helper.metadata_filters import filter_enum_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_input_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_ivi_dance_parameter  # noqa: F401
+from build.helper.metadata_filters import filter_len_parameter  # noqa: F401
 from build.helper.metadata_filters import filter_output_parameters  # noqa: F401
 
 from build.helper.metadata_find import find_size_parameter  # noqa: F401
