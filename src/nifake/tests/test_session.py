@@ -81,13 +81,6 @@ class TestSession(object):
     # TODO(marcoskirsch): This should test that when close errors it logs a warning.
     # def test_session_context_manager_error_on_close
 
-    def test_library_singleton(self):
-        with nifake.Session('dev1') as session:
-            lib1 = session._library
-        with nifake.Session('dev2') as session:
-            lib2 = session._library
-        assert lib1 is lib2
-
     # Methods
 
     def test_simple_function(self):
