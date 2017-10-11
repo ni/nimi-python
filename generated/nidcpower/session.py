@@ -2596,7 +2596,7 @@ class _SessionBase(object):
         actual_count_ctype = visatype.ViInt32(0)
         error_code = self._library.niDCPower_FetchMultiple(self._vi, self._repeated_capability.encode(self._encoding), timeout, count, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, ctypes.pointer(actual_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [voltage_measurements_ctype[i] for i in range(1)], [current_measurements_ctype[i] for i in range(1)], [in_compliance_ctype[i] for i in range(1)], int(actual_count_ctype.value)
+        return [float(voltage_measurements_ctype[i]) for i in range(1)], [float(current_measurements_ctype[i]) for i in range(1)], [bool(in_compliance_ctype[i]) for i in range(1)], int(actual_count_ctype.value)
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
@@ -2957,7 +2957,7 @@ class _SessionBase(object):
         current_measurements_ctype = (visatype.ViReal64 * 1)()
         error_code = self._library.niDCPower_MeasureMultiple(self._vi, self._repeated_capability.encode(self._encoding), voltage_measurements_ctype, current_measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [voltage_measurements_ctype[i] for i in range(1)], [current_measurements_ctype[i] for i in range(1)]
+        return [float(voltage_measurements_ctype[i]) for i in range(1)], [float(current_measurements_ctype[i]) for i in range(1)]
 
     def query_in_compliance(self):
         '''query_in_compliance
