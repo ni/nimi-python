@@ -320,7 +320,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def array_input_function(self, number_of_elements, an_array):
+    def array_input_function(self, an_array):
         '''array_input_function
 
         This function takes an array parameter.
@@ -332,6 +332,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(0)  # case 5
         an_array_ctype = (visatype.ViReal64 * len(an_array))(*an_array)  # case 4
+        number_of_elements = len(an_array)
         error_code = self._library.niFake_ArrayInputFunction(vi_ctype, number_of_elements_ctype, an_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

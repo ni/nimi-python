@@ -29,6 +29,9 @@ ${encoding_tag}
     enum_input_parameters = helper.filter_enum_parameters(helper.filter_input_parameters(parameters))
     ivi_dance_parameter = helper.filter_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
+    len_parameter = helper.filter_len_parameter(parameters)
+    len_size_parameter = helper.find_size_parameter(len_parameter, parameters)
+    assert ivi_dance_size_parameter is None or len_size_parameter is None
 %>\
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
@@ -48,6 +51,8 @@ ${encoding_tag}
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
         ${ivi_dance_parameter['ctypes_variable_name']} = (visatype.${ivi_dance_parameter['ctypes_type']} * ${ivi_dance_size_parameter['python_name']})()
+% elif len_parameter is not None:
+        ${len_size_parameter['python_name']} = len(${len_parameter['python_name']})
 % endif
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})

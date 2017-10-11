@@ -538,7 +538,7 @@ class TestSession(object):
         test_array_size = len(test_array)
         self.patched_library.niFake_ArrayInputFunction.side_effect = self.side_effects_helper.niFake_ArrayInputFunction
         with nifake.Session('dev1') as session:
-            session.array_input_function(test_array_size, test_array)
+            session.array_input_function(test_array)
             self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
 
     def test_get_a_string_with_specified_maximum_size(self):
