@@ -50,6 +50,7 @@ functions_buffer_info = {
     '.etAttribute.+':                        { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'error_message':                         { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'ArrayInputFunction':                    { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfElements'}, }, }, },
+    'GetAnIviDanceString':                   { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

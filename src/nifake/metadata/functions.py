@@ -986,6 +986,44 @@ functions = {
         },
     },
 
+    'GetAnIviDanceString': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'bufferSize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of bytes in aString You can IVI-dance with this.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'aString',
+                'type': 'ViChar',
+                'documentation': {
+                    'description': 'Returns the string.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns a string using the IVI dance.',
+        },
+    },
+    
     'GetAStringOfFixedMaximumSize': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
