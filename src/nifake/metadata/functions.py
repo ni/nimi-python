@@ -221,6 +221,51 @@ functions = {
             'description': 'Queries the value of a ViInt32 attribute.',
         },
     },
+    'GetAttributeViInt64': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'documentation': {
+                    'description': 'This is the channel(s) that this function will apply to.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'attributeId',
+                'type': 'ViAttr',
+                'documentation': {
+                    'description': 'Pass the ID of an attribute.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'attributeValue',
+                'type': 'ViInt64',
+                'documentation': {
+                    'description': 'Returns the value of the attribute.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Queries the value of a ViInt64 attribute.',
+        },
+    },
     'GetAttributeViReal64': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -459,6 +504,51 @@ functions = {
         ],
         'documentation': {
             'description': 'This function sets the value of a ViInt32 attribute.',
+        },
+    },
+    'SetAttributeViInt64': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'documentation': {
+                    'description': 'This is the channel(s) that this function will apply to.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'attributeId',
+                'type': 'ViAttr',
+                'documentation': {
+                    'description': 'Pass the ID of an attribute.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'attributeValue',
+                'type': 'ViInt64',
+                'documentation': {
+                    'description': 'Pass the value that you want to set the attribute to.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function sets the value of a ViInt64 attribute.',
         },
     },
     'SetAttributeViReal64': {
