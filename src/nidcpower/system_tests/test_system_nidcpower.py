@@ -42,6 +42,7 @@ def test_get_error(session):
 def test_config_aperture_time(session):
     with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
         expected_default_aperture_time = 0.016666666666666666
+        default_aperture_time = session.aperture_time
         assert session.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
         default_aperture_time_in_range = abs(default_aperture_time - expected_default_aperture_time) <= max(1e-09 * max(abs(default_aperture_time), abs(expected_default_aperture_time)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
         assert default_aperture_time_in_range is True
