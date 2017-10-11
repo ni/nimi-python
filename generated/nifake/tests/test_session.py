@@ -78,14 +78,55 @@ class TestSession(object):
             assert e.code == test_error_code
             assert e.description == test_error_desc
 
-    # TODO(marcoskirsch): This should test that when close errors it raises.
-    # def test_close_errors(self):
+    def test_close_with_error(self):
+        test_error_code = -1
+        test_error_desc = 'Test'
+        self.patched_library.niFake_close.side_effect = self.side_effects_helper.niFake_close
+        session = nifake.Session('dev1')
+        self.side_effects_helper['close']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        try:
+            session.close()
+            assert False
+        except nifake.Error as e:
+            assert e.code == test_error_code
+            assert e.description == test_error_desc
+        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
-    # TODO(marcoskirsch): This should test that when init errors it raises.
-    # def test_session_context_manager_error_on_init
+    def test_session_context_manager_init_with_error(self):
+        test_error_code = -1
+        test_error_desc = 'Test'
+        self.patched_library.niFake_InitWithOptions.side_effect = self.side_effects_helper.niFake_InitWithOptions
+        self.side_effects_helper['InitWithOptions']['return'] = test_error_code
+        self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        try:
+            with nifake.Session('dev1') as session:
+                assert type(session) == nifake.Session
+            assert False
+        except nifake.Error as e:
+            assert e.code == test_error_code
+            assert e.description == test_error_desc
 
-    # TODO(marcoskirsch): This should test that when close errors it logs a warning.
-    # def test_session_context_manager_error_on_close
+    def test_session_context_manager_close_with_error(self):
+        test_error_code = -1
+        test_error_desc = 'Test'
+        self.patched_library.niFake_close.side_effect = self.side_effects_helper.niFake_close
+        self.side_effects_helper['close']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        try:
+            with nifake.Session('dev1') as session:
+                assert type(session) == nifake.Session
+            assert False
+        except nifake.Error as e:
+            assert e.code == test_error_code
+            assert e.description == test_error_desc
 
     # Methods
 
@@ -267,7 +308,7 @@ class TestSession(object):
                 assert False
             except TypeError as e:
                 pass
-                
+
     def test_method_with_warning(self):
         test_error_code = 42
         test_error_desc = "The answer to the ultimate question, only positive"
