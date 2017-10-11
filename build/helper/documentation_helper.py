@@ -1,7 +1,7 @@
 
 from .codegen_helper import filter_parameters
 from .codegen_helper import get_params_snippet
-from .codegen_helper import ParameterUsageOptions
+from .parameter_usage_options import ParameterUsageOptions
 
 import re
 import string
