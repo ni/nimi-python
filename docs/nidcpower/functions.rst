@@ -917,7 +917,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_MEASURE\_CURRENT (0) | The device measures current. |
         +--------------------------------------+------------------------------+
 
-    :type measurement_type: int
+    :type measurement_type: :py:data:`nidcpower.MeasurementTypes`
 
     :rtype: float
     :return:
@@ -1169,7 +1169,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_OUTPUT\_CONSTANT\_CURRENT (1) | The device maintains a constant current by adjusting the voltage. |
         +-----------------------------------------------+-------------------------------------------------------------------+
 
-    :type output_state: int
+    :type output_state: :py:data:`nidcpower.OutputStates`
 
     :rtype: bool
     :return:
