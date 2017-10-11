@@ -258,6 +258,16 @@ class TestSession(object):
             except TypeError as e:
                 pass
 
+    def test_enum_input_function_with_defaults_bad_type_error(self):
+        test_turtle = 123
+        self.patched_library.niFake_EnumInputFunctionWithDefaults.side_effect = self.side_effects_helper.niFake_EnumInputFunctionWithDefaults
+        with nifake.Session('dev1') as session:
+            try:
+                session.enum_input_function_with_defaults(test_turtle)
+                assert False
+            except TypeError as e:
+                pass
+
     def test_method_with_warning(self):
         test_error_code = 42
         test_error_desc = "The answer to the ultimate question, only positive"
