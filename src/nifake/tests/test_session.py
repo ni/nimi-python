@@ -260,7 +260,7 @@ class TestSession(object):
             session.array_input_function(test_array)
             self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
 
-    # TODO(marcoskirsch): Other read variations: waveform with ViReal64 and ViInt16 * 3 mechanisms
+    # TODO(marcoskirsch): Other read variations: waveform with ViReal64
 
     # TODO(marcoskirsch):
     # def test_multiple_outputs of different types
