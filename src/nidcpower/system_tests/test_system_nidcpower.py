@@ -39,16 +39,19 @@ def test_get_error(session):
         assert e.description.find('Attribute is read-only.') != -1
 
 
-'''
-TODO: (Jaleel) Dependent on PR#439 and Issue $428,#371 : Error -1074134972  (Hex 0xBFFA0044) Channel or or repeated capability name required
 def test_config_aperture_time(session):
-    session.configure_aperture_time(2, nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES)
-    session.configure_aperture_time(0.01666, nidcpower.ApertureTimeUnits.SECONDS)
-    assert session.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
-    assert session.aperture_time == 0.01666
+    with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
+        session.configure_aperture_time(2, nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES)
+        session.configure_aperture_time(0.01666, nidcpower.ApertureTimeUnits.SECONDS)
+        assert session.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
+        aperture_time = session.aperture_time
+        expected_aperture_time = 0.01666
+        aperture_time_in_range = abs(aperture_time - expected_aperture_time) <= max(1e-09 * max(abs(aperture_time), abs(expected_aperture_time)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+        assert aperture_time_in_range is True
 
 
-TODO: (Jaleel) Dependent on PR#439 and Issue $428,#371 : Error -1074134972  (Hex 0xBFFA0044) Channel or or repeated capability name required
+'''
+TODO: (Jaleel) Python Crashes when running these examples : Issue#444,445
 def test_fetch_multiple(session):
     session.source_mode = nidcpower.SourceMode.SINGLE_POINT
     session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
@@ -66,7 +69,6 @@ def test_fetch_multiple(session):
         assert in_compliance[1] in [True, False]
 
 
-TODO:(Jaleel) Check after #444 fixed
 def test_measure_multiple(session):
     session.source_mode = nidcpower.SourceMode.SINGLE_POINT
     session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
@@ -81,35 +83,49 @@ def test_measure_multiple(session):
     assert isinstance(current_measurements[1], float)
 
 
-TODO: (Jaleel) Following tests need to be validated once issue $428,#371 fixed : Error -1074134972  (Hex 0xBFFA0044) Channel or or repeated capability name required
+TODO(Jaleel) : Enable once measurementTypes enums available
 def test_measure(session):
-    session.source_mode = nidcpower.SourceMode.SINGLE_POINT
-    session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
-    session.voltage_level_range = 6
-    session.voltage_level = 2
-    with session.initiate():
-        reading = session.measure(1) ## enum missing from enum.py. Shouldn't be an enum ?
-    assert session.query_in_compliance(1) is False
-    assert reading == 2
+    with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
+        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+        session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+        session.voltage_level_range = 6
+        session.voltage_level = 2
+        with session.initiate():
+            reading = session.measure(nidcpower.MeasurementTypes.MEASURE_VOLTAGE)
+            assert session.query_in_compliance() is False
+        assert reading == 2
+'''
 
 
 def test_query_max_current_limit(session):
-    max_current_limit = session.query_max_current_limit(6)
-    assert max_current_limit == 0.150000  # for a simulated 4143 max current limit should be 0.150000 for 6V Voltage level
+    with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
+        max_current_limit = session.query_max_current_limit(6)
+        expected_max_current_limit = 0.150000  # for a simulated 4143 max current limit should be 0.150000 for 6V Voltage level
+        max_current_limit_in_range = abs(max_current_limit - expected_max_current_limit) <= max(1e-09 * max(abs(max_current_limit), abs(expected_max_current_limit)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+        assert max_current_limit_in_range is True
 
 
 def test_query_max_voltage_level(session):
-    max_voltage_level = session.query_max_voltage_level(0.03)
-    assert max_voltage_level == 24  # for a simulated 4143 max voltage level should be 24V for 30mA current limit
+    with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
+        max_voltage_level = session.query_max_voltage_level(0.03)
+        expected_max_voltage_level = 24  # for a simulated 4143 max voltage level should be 24V for 30mA current limit
+        max_voltage_level_in_range = abs(max_voltage_level - expected_max_voltage_level) <= max(1e-09 * max(abs(max_voltage_level), abs(expected_max_voltage_level)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+        assert max_voltage_level_in_range is True
 
 
 def test_query_min_current_limit(session):
-    min_current_limit = session.query_min_current_limit(0.03)
-    assert min_current_limit ==  0.0000001  # for a simulated 4143 min_current_limit should be 1uA for 6V voltage level
+    with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
+        min_current_limit = session.query_min_current_limit(0.03)
+        expected_min_current_limit = 0.0000001  # for a simulated 4143 min_current_limit should be 1uA for 6V voltage level
+        min_current_limit_in_range = abs(min_current_limit - expected_min_current_limit) <= max(1e-09 * max(abs(min_current_limit), abs(expected_min_current_limit)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+        assert min_current_limit_in_range is True
 
 
+'''
+TODO(Jaleel): Enable once OutputStates enum available
 def test_query_output_state(session):
-    with session.initiate():
-        assert session.query_output_state(0) is True   # since default function is DCVolt when initiated output state for DC Volt\DC current should be True and False respectively
-        assert session.query_output_state(1) is False
+    with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
+        with session.initiate():
+            assert session.query_output_state(nidcpower.OutputStates.OUTPUT_CONSTANT_VOLTAGE) is True   # since default function is DCVolt when initiated output state for DC Volt\DC current should be True and False respectively
+            assert session.query_output_state(nidcpower.OutputStates.OUTPUT_CONSTANT_CURRENT) is False
 '''
