@@ -188,7 +188,8 @@ def _get_output_param_return_snippet(output_parameter, parameters):
             else:
                 size_parameter = find_size_parameter(output_parameter, parameters)
                 size = size_parameter['python_name']
-            snippet = '[' + output_parameter['ctypes_variable_name'] + '[i] for i in range(' + size + ')]'
+
+            snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
     else:
         snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + '.value)'
 
