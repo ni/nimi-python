@@ -117,13 +117,13 @@ class MeasureWhen(Enum):
 
 
 class MeasurementTypes(Enum):
-    MEASURE_VOLTAGE = 1
-    '''
-    The device measures voltage.
-    '''
     MEASURE_CURRENT = 0
     '''
     The device measures current.
+    '''
+    MEASURE_VOLTAGE = 1
+    '''
+    The device measures voltage.
     '''
 
 

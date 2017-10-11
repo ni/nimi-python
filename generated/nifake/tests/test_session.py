@@ -32,23 +32,24 @@ class TestSession(object):
 
     # Session management
 
-    def test_init_with_options(self):
+    def test_init_with_options_and_close(self):
         errors_patcher = patch('nifake.session.errors', spec_set=['handle_error', '_is_error'])
         patched_errors = errors_patcher.start()
         patched_errors._is_error.return_value = 0
 
-        self.patched_library.niFake_close.side_effect = self.disallow_close
         session = nifake.Session('dev1')
-        assert session._vi == SESSION_NUM_FOR_TEST
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
         patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False, is_error_handling=False)
+        session.close()
+        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
         errors_patcher.stop()
 
-    def test_init_with_options_nondefault(self):
+    def test_init_with_options_nondefault_and_close(self):
         session = nifake.Session('FakeDevice', True, True, 'Some string')
-        assert(session._vi == SESSION_NUM_FOR_TEST)
         self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'FakeDevice', True, True, b'Some string', ANY)
+        session.close()
+        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
     def test_error_on_init(self):
         test_error_code = -1
@@ -76,7 +77,7 @@ class TestSession(object):
 
     def test_session_context_manager(self):
         with nifake.Session('dev1') as session:
-            assert session._vi == SESSION_NUM_FOR_TEST
+            assert type(session) == nifake.Session
             self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
         self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
@@ -85,13 +86,6 @@ class TestSession(object):
 
     # TODO(marcoskirsch): This should test that when close errors it logs a warning.
     # def test_session_context_manager_error_on_close
-
-    def test_library_singleton(self):
-        with nifake.Session('dev1') as session:
-            lib1 = session._library
-        with nifake.Session('dev2') as session:
-            lib2 = session._library
-        assert lib1 is lib2
 
     # Methods
 
@@ -241,7 +235,6 @@ class TestSession(object):
     # def test_get_string_ivi_dance(self)
 
     def test_get_string_ivi_dance_error(self):
-        # TODO(marcoskirsch): Don't use private method to test this. Use a public niFake function.
         test_error_code = -1234
         test_error_desc = "ascending order"
         self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
@@ -252,17 +245,11 @@ class TestSession(object):
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
             try:
-                session._get_attribute_vi_string(5)
+                session.read_write_string
                 assert False
             except nifake.Error as e:
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
-
-    # TODO(marcoskirsch):
-    # def test_get_string_fixed_size(self)
-
-    # TODO(marcoskirsch):
-    # def test_get_string_size_passed_in(self)
 
     def test_single_point_read(self):
         test_maximum_time = 10
@@ -366,18 +353,12 @@ class TestSession(object):
             self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViString.call_count == 2
 
-    # TODO(marcoskirsch):
-    # def test_set_attribute_string
-
     def test_get_attribute_boolean(self):
         self.patched_library.niFake_GetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_GetAttributeViBoolean
         self.side_effects_helper['GetAttributeViBoolean']['attributeValue'] = 1
         with nifake.Session('dev1') as session:
             assert session.read_write_bool
             self.patched_library.niFake_GetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b"", 1000000, ANY)
-
-    # TODO(marcoskirsch):
-    # def test_set_attribute_boolean(self):
 
     def test_get_attribute_enum_int32(self):
         self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32

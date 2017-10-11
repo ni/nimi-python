@@ -873,10 +873,15 @@ class _SessionBase(object):
         attribute. - State caching is enabled and the currently cached value is
         invalid.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niswitch.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niswitch.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_boolean(attribute_id)
+
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -918,10 +923,15 @@ class _SessionBase(object):
         attribute. - State caching is enabled and the currently cached value is
         invalid.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niswitch.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niswitch.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_int32(attribute_id)
+
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -963,10 +973,15 @@ class _SessionBase(object):
         attribute. - State caching is enabled and the currently cached value is
         invalid.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niswitch.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niswitch.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_real64(attribute_id)
+
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -1020,10 +1035,15 @@ class _SessionBase(object):
         fill in the buffer regardless of the number of bytes in the value, pass
         a negative number for the Array Size parameter.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niswitch.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niswitch.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_string(attribute_id)
+
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -1084,10 +1104,15 @@ class _SessionBase(object):
         you change. Thus, you can safely call the high-level functions without
         the penalty of redundant instrument I/O.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niswitch.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niswitch.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -1140,10 +1165,15 @@ class _SessionBase(object):
         can safely call the high-level functions without the penalty of
         redundant instrument I/O.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niswitch.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niswitch.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -1196,10 +1226,15 @@ class _SessionBase(object):
         you change. Thus, you can safely call the high-level functions without
         the penalty of redundant instrument I/O.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niswitch.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niswitch.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
@@ -1252,10 +1287,15 @@ class _SessionBase(object):
         you change. Thus, you can safely call the high-level functions without
         the penalty of redundant instrument I/O.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niswitch.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niswitch.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): Some attributes are unique per channel. For these, pass the name of the
-                channel. Other attributes are unique per switch device. Pass VI_NULL or
-                an empty string for this parameter. Default Value: ""
             attribute_id (int): Pass the ID of an attribute. From the function panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
