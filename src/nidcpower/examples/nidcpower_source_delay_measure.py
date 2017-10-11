@@ -19,6 +19,7 @@ def print_fetched_measurements(voltage_measurements, current_measurements, in_co
     print('              Current: {:f} A'.format(current_measurements[0]))
     print('        In compliance: {0}'.format(in_compliance[0]))
 
+
 timeout = args.delay + 1.0
 
 try:
