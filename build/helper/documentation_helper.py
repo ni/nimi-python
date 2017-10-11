@@ -342,7 +342,7 @@ def get_function_rst(fname, config, indent=0):
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
-    input_params = filter_parameters(function['parameters'], ParameterUsageOptions.INPUT_PARAMETERS)
+    input_params = filter_parameters(function, ParameterUsageOptions.INPUT_PARAMETERS)
     if len(input_params) > 0:
         rst += '\n'
     for p in input_params:
@@ -352,7 +352,7 @@ def get_function_rst(fname, config, indent=0):
         p_type = _format_type_for_rst_documentation(p, config)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
-    output_params = filter_parameters(function['parameters'], ParameterUsageOptions.OUTPUT_PARAMETERS)
+    output_params = filter_parameters(function, ParameterUsageOptions.OUTPUT_PARAMETERS)
     if len(output_params) > 1:
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
@@ -403,14 +403,14 @@ def get_function_docstring(fname, config, indent=0):
 
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
-    input_params = filter_parameters(function['parameters'], ParameterUsageOptions.INPUT_PARAMETERS)
+    input_params = filter_parameters(function, ParameterUsageOptions.INPUT_PARAMETERS)
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
         docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], _format_type_for_docstring(p, config))
         docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
-    output_params = filter_parameters(function['parameters'], ParameterUsageOptions.OUTPUT_PARAMETERS)
+    output_params = filter_parameters(function, ParameterUsageOptions.OUTPUT_PARAMETERS)
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:

@@ -26,8 +26,8 @@ ${encoding_tag}
     '''Renders a Session method corresponding to the passed-in function metadata.'''
 
     parameters = f['parameters']
-    output_parameters = helper.filter_output_parameters(parameters)
-    enum_input_parameters = helper.filter_enum_parameters(helper.filter_parameters(parameters, ParameterUsageOptions.INPUT_PARAMETERS))
+    output_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_PARAMETERS)
+    enum_input_parameters = helper.filter_enum_parameters(helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_PARAMETERS))
     ivi_dance_parameter = helper.filter_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
     len_parameter = helper.filter_len_parameter(parameters)

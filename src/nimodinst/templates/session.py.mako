@@ -152,8 +152,8 @@ class Session(object):
 <%
     f = functions[func_name]
     parameters = f['parameters']
-    input_parameters = helper.filter_parameters(parameters, ParameterUsageOptions.INPUT_PARAMETERS)
-    output_parameters = helper.filter_parameters(parameters, ParameterUsageOptions.OUTPUT_PARAMETERS)
+    input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_PARAMETERS)
+    output_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_PARAMETERS)
     enum_input_parameters = helper.filter_enum_parameters(input_parameters)
     ivi_dance_parameter = helper.filter_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)

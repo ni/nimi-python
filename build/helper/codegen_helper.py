@@ -130,7 +130,7 @@ _parameterUsageOptions[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
     'reordered_for_default_values': False,
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': False,
-    'mechanism': 'fixed, passed-in, len', # any but ivi-dance
+    'mechanism': 'fixed, passed-in, len',  # any but ivi-dance
 }
 
 
