@@ -251,12 +251,6 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
-    # TODO(marcoskirsch):
-    # def test_get_string_fixed_size(self)
-
-    # TODO(marcoskirsch):
-    # def test_get_string_size_passed_in(self)
-
     def test_single_point_read(self):
         test_maximum_time = 10
         test_reading = 5
@@ -359,18 +353,12 @@ class TestSession(object):
             self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViString.call_count == 2
 
-    # TODO(marcoskirsch):
-    # def test_set_attribute_string
-
     def test_get_attribute_boolean(self):
         self.patched_library.niFake_GetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_GetAttributeViBoolean
         self.side_effects_helper['GetAttributeViBoolean']['attributeValue'] = 1
         with nifake.Session('dev1') as session:
             assert session.read_write_bool
             self.patched_library.niFake_GetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b"", 1000000, ANY)
-
-    # TODO(marcoskirsch):
-    # def test_set_attribute_boolean(self):
 
     def test_get_attribute_enum_int32(self):
         self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
