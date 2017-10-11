@@ -51,7 +51,18 @@ class TestSession(object):
         session.close()
         self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
-    def test_error_on_init(self):
+    def test_close(self):
+        session = nifake.Session('dev1')
+        session.close()
+        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+
+    def test_session_context_manager(self):
+        with nifake.Session('dev1') as session:
+            assert type(session) == nifake.Session
+            self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
+        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+
+    def test_init_with_error(self):
         test_error_code = -1
         test_error_desc = 'Test'
         self.patched_library.niFake_InitWithOptions.side_effect = self.side_effects_helper.niFake_InitWithOptions
@@ -66,17 +77,6 @@ class TestSession(object):
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
-
-    def test_close(self):
-        session = nifake.Session('dev1')
-        session.close()
-        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
-
-    def test_session_context_manager(self):
-        with nifake.Session('dev1') as session:
-            assert type(session) == nifake.Session
-            self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
-        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
     # TODO(marcoskirsch): This should test that when close errors it raises.
     # def test_close_errors(self):
@@ -95,37 +95,6 @@ class TestSession(object):
             session.simple_function()
             self.patched_library.niFake_SimpleFunction.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
-    def test_method_with_error(self):
-        test_error_code = -42
-        test_error_desc = "The answer to the ultimate question"
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = test_error_code
-        self.side_effects_helper['GetError']['description'] = test_error_desc
-        with nifake.Session('dev1') as session:
-            try:
-                session.simple_function()
-                assert False
-            except nifake.Error as e:
-                assert e.code == test_error_code
-                assert e.description == test_error_desc
-
-    def test_method_with_warning(self):
-        test_error_code = 42
-        test_error_desc = "The answer to the ultimate question, only positive"
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = test_error_code
-        self.side_effects_helper['GetError']['description'] = test_error_desc
-        with nifake.Session('dev1') as session:
-            with warnings.catch_warnings(record=True) as w:
-                session.simple_function()
-                assert len(w) == 1
-                assert issubclass(w[0].category, nifake.NifakeWarning)
-                assert test_error_desc in str(w[0].message)
-
     def test_get_a_number(self):
         test_number = 16
         self.patched_library.niFake_GetANumber.side_effect = self.side_effects_helper.niFake_GetANumber
@@ -135,24 +104,6 @@ class TestSession(object):
             assert isinstance(test_result, int)
             assert test_result == test_number
             self.patched_library.niFake_GetANumber.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
-
-    def test_invalid_method_call_not_enough_parameters(self):
-        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
-        with nifake.Session('dev1') as session:
-            try:
-                session.get_a_string_with_specified_maximum_size()
-                assert False
-            except TypeError as e:
-                pass
-
-    def test_invalid_method_call_wrong_type(self):
-        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
-        with nifake.Session('dev1') as session:
-            try:
-                session.get_a_string_with_specified_maximum_size('potato')
-                assert False
-            except TypeError as e:
-                pass
 
     def test_one_input_function(self):
         test_number = 1
@@ -268,6 +219,60 @@ class TestSession(object):
             session.array_input_function(test_array)
             self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
 
+    # TODO(marcoskirsch): Other read variations: waveform with ViReal64 and ViInt16 * 3 mechanisms
+
+    # TODO(marcoskirsch):
+    # def test_multiple_outputs of different types
+
+    def test_method_with_error(self):
+        test_error_code = -42
+        test_error_desc = "The answer to the ultimate question"
+        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            try:
+                session.simple_function()
+                assert False
+            except nifake.Error as e:
+                assert e.code == test_error_code
+                assert e.description == test_error_desc
+
+    def test_method_with_warning(self):
+        test_error_code = 42
+        test_error_desc = "The answer to the ultimate question, only positive"
+        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            with warnings.catch_warnings(record=True) as w:
+                session.simple_function()
+                assert len(w) == 1
+                assert issubclass(w[0].category, nifake.NifakeWarning)
+                assert test_error_desc in str(w[0].message)
+
+    def test_invalid_method_call_not_enough_parameters_error(self):
+        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
+        with nifake.Session('dev1') as session:
+            try:
+                session.get_a_string_with_specified_maximum_size()
+                assert False
+            except TypeError as e:
+                pass
+
+    def test_invalid_method_call_wrong_type_error(self):
+        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
+        with nifake.Session('dev1') as session:
+            try:
+                session.get_a_string_with_specified_maximum_size('potato')
+                assert False
+            except TypeError as e:
+                pass
+
     '''
     # TODO(bhaswath): Enable test once issue 320 is fixed
     def test_read_with_warning(self):
@@ -289,29 +294,7 @@ class TestSession(object):
                 assert test_error_desc in str(w[0].message)
     '''
 
-    # TODO(marcoskirsch): Other read variations: waveform with ViReal64 and ViInt16 * 3 mechanisms
-
-    # TODO(marcoskirsch):
-    # def test_multiple_outputs of different types
-
     # Retrieving buffers and strings
-
-    def test_get_string_ivi_dance_error(self):
-        test_error_code = -1234
-        test_error_desc = "ascending order"
-        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
-        self.side_effects_helper['GetAttributeViString']['attributeValue'] = 'Testing is fun?'
-        self.side_effects_helper['GetAttributeViString']['return'] = test_error_code
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = test_error_code
-        self.side_effects_helper['GetError']['description'] = test_error_desc
-        with nifake.Session('dev1') as session:
-            try:
-                session.read_write_string
-                assert False
-            except nifake.Error as e:
-                assert e.code == test_error_code
-                assert e.description == test_error_desc
 
     def test_get_a_string_with_specified_maximum_size(self):
         single_character_string = 'a'
@@ -347,6 +330,23 @@ class TestSession(object):
     # TODO(marcoskirsch):
     # def test_get_string_ivi_dance(self)
 
+    def test_get_string_ivi_dance_error(self):
+        test_error_code = -1234
+        test_error_desc = "ascending order"
+        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
+        self.side_effects_helper['GetAttributeViString']['attributeValue'] = 'Testing is fun?'
+        self.side_effects_helper['GetAttributeViString']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            try:
+                session.read_write_string
+                assert False
+            except nifake.Error as e:
+                assert e.code == test_error_code
+                assert e.description == test_error_desc
+
     # Repeated Capabilities
 
     def test_repeated_capability_method_on_session(self):
@@ -369,7 +369,7 @@ class TestSession(object):
         self.patched_library.niFake_ReadFromChannel.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', test_maximum_time, ANY)
         assert value == test_reading
 
-    def test_device_method_not_exist_on_repeated_capability(self):
+    def test_device_method_not_exist_on_repeated_capability_error(self):
         with nifake.Session('dev1') as session:
             try:
                 session['3'].simple_function()
@@ -574,7 +574,7 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == 'Failed to retrieve error description.'
 
-    def test_get_error_description_error_message(self):
+    def test_get_error_description_error_message_error(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"
         self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
