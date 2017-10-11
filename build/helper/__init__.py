@@ -1,4 +1,3 @@
-from build.helper.codegen_helper import filter_parameters  # noqa: F401
 from build.helper.codegen_helper import get_ctype_variable_declaration_snippet  # noqa: F401
 from build.helper.codegen_helper import get_dictionary_snippet  # noqa: F401
 from build.helper.codegen_helper import get_enum_type_check_snippet  # noqa: F401
@@ -22,9 +21,9 @@ from build.helper.helper import sorted_attrs  # noqa: F401
 from build.helper.metadata_add_all import add_all_function_metadata  # noqa: F401
 
 from build.helper.metadata_filters import filter_codegen_functions  # noqa: F401
-from build.helper.metadata_filters import filter_enum_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_ivi_dance_parameter  # noqa: F401
 from build.helper.metadata_filters import filter_len_parameter  # noqa: F401
+from build.helper.metadata_filters import filter_parameters  # noqa: F401
 
 from build.helper.metadata_find import find_size_parameter  # noqa: F401
 

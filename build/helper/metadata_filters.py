@@ -1,11 +1,12 @@
+from .metadata_find import find_size_parameter
 from .parameter_usage_options import ParameterUsageOptions
+
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 # Filters
 
 _parameterUsageOptionsFiltering = {}
 
-def filter_codegen_functions(functions):
-    '''Returns function metadata only for those functions to be included in codegen'''
-    return {k: v for k, v in functions.items() if v['codegen_method'] != 'no'}
 _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
@@ -128,41 +129,101 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_ENUM_PARAMETERS] = {
 }
 
 
+def filter_parameters(function, parameter_usage_options):
+    '''filter_parameters
 
-def filter_enum_parameters(parameters):
-    '''Returns a list of parameters whose type is an enum'''
-    return [x for x in parameters if x['enum'] is not None]
+    Filters and reorders the parameters of the function passed in based on parameter_usage_options.
+    '''
+    if type(parameter_usage_options) is not ParameterUsageOptions:
+        raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
+
+    options_to_use = _parameterUsageOptionsFiltering[parameter_usage_options]
+
+    parameters_to_use = []
+
+    # Filter based on options
+    size_parameter = ''
+    # If we are being called looking for the ivi-dance param or the len param, we do not care about the size param so we do
+    #  not call back into ourselves, to avoid infinite recursion
+    if not parameter_usage_options == ParameterUsageOptions.IVI_DANCE_PARAMETER and not parameter_usage_options == ParameterUsageOptions.LEN_PARAMETER:
+        # Find the size parameter - we are assuming there can only be one, other from mechanism == 'ivi-dance' or mechanism == 'len'
+        size_parameter = find_size_parameter(filter_ivi_dance_parameter(function), function['parameters'])
+        if size_parameter is None:
+            size_parameter = find_size_parameter(filter_len_parameter(function), function['parameters'])
+    for x in function['parameters']:
+        skip = False
+        if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
+            skip = True
+        if x['direction'] == 'in' and options_to_use['skip_input_parameters']:
+            skip = True
+        if x == size_parameter and options_to_use['skip_size_parameter']:
+            skip = True
+        if x['is_session_handle'] is True and options_to_use['skip_session_handle']:
+            skip = True
+        if x['is_repeated_capability'] is True and options_to_use['skip_repeated_capability_parameter']:
+            skip = True
+        if x['enum'] is None and options_to_use['skip_non_enum_parameter']:
+            skip = True
+        if options_to_use['mechanism'] != 'any' and x['size']['mechanism'] not in options_to_use['mechanism']:
+            skip = True
+        if not skip:
+            parameters_to_use.append(x)
+
+    # Reorder based on options
+    if options_to_use['reordered_for_default_values']:
+        new_order = []
+        for x in parameters_to_use:
+            if 'default_value' not in x:
+                new_order.append(x)
+        for x in parameters_to_use:
+            if 'default_value' in x:
+                new_order.append(x)
+        parameters_to_use = new_order
+
+    return parameters_to_use
 
 
-def _filter_size_parameter(parameters, mechanism, direction):
-    '''Returns the parameter what matches the given mechanism
+def filter_ivi_dance_parameter(function):
+    '''Returns the ivi-dance parameter of a session method if there is one. This is the parameter whose size is determined at runtime.
+
+    asserts if more than one parameter found
+    Args:
+        function: function whose parameters should be checked
+
+    Return:
+        None if no ivi-dance parameter found
+        Parameter dict if one is found
+    '''
+    params = filter_parameters(function, ParameterUsageOptions.IVI_DANCE_PARAMETER)
+    if len(params) == 0:
+        return None
+    assert len(params) == 1, 'Found more than one ivi-dance parameter: {0}'.format(pp.pformat(params))
+    return params[0]
+
+
+def filter_len_parameter(function):
+    '''Returns the len parameter of a session method if there is one. This is the parameter whose size is determined at runtime.
+
+
+    asserts if more than one parameter found
 
     Args:
-        paramaters: Parameters from function
-        mechanism: which mechanism we are looking for
-        direction: optional, will be used to verify the direction of the found parameter
+        function: function whose parameters should be checked
 
-    Returns:
-        Parameter that matches the mechanism
+    Return:
+        None if no len parameter found
+        Parameter dict if one is found
     '''
-    param = [x for x in parameters if x['size']['mechanism'] == mechanism]
-    assert len(param) <= 1, '{0} {1} parameters. No more than one is allowed'.format(len(param), mechanism)
-    if len(param) == 0:
+    params = filter_parameters(function, ParameterUsageOptions.LEN_PARAMETER)
+    if len(params) == 0:
         return None
-    if direction is not None:
-        assert param[0]['direction'] == direction, "{0} parameter must have 'direction':'{1}'. Check your metadata.".format(mechanism, direction)
-    assert param[0]['is_buffer'], "{0} parameter must have 'is_buffer':True. Check your metadata.".format(mechanism)
-    return param[0]
+    assert len(params) == 1, 'Found more than one len parameter: {0}'.format(pp.pformat(params))
+    return params[0]
 
 
-def filter_ivi_dance_parameter(parameters):
-    '''Returns the ivi-dance parameter of a session method if there is one. This is the parameter whose size is determined at runtime.'''
-    return _filter_size_parameter(parameters, 'ivi-dance', 'out')
-
-
-def filter_len_parameter(parameters):
-    '''Returns the len parameter of a session method if there is one. This is the parameter whose size is determined at runtime.'''
-    return _filter_size_parameter(parameters, 'len', 'in')
+def filter_codegen_functions(functions):
+    '''Returns function metadata only for those functions to be included in codegen'''
+    return {k: v for k, v in functions.items() if v['codegen_method'] != 'no'}
 
 
 

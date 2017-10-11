@@ -1,11 +1,11 @@
-from .metadata_filters import filter_ivi_dance_parameter
-from .metadata_filters import filter_len_parameter
+from .metadata_filters import filter_parameters
 from .metadata_find import find_size_parameter
-from enum import Enum
+from .parameter_usage_options import ParameterUsageOptions
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
 
+_parameterUsageOptionsSnippet = {}
 
 _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
     'skip_self': False,
@@ -43,54 +43,7 @@ _parameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] 
 #   ParameterUsageOptions.INPUT_ENUM_PARAMETERS
 
 
-def filter_parameters(function, parameter_usage_options):
-    '''filter_parameters
-
-    Filters and reorders the parameters of the function passed in based on parameter_usage_options.
-    '''
-    if type(parameter_usage_options) is not ParameterUsageOptions:
-        raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
-
-    options_to_use = _parameterUsageOptions[parameter_usage_options]
-
-    parameters_to_use = []
-
-    # Filter based on options
-    # Find the size parameter - we are assuming there can only be one, other from mechanism == 'ivi-dance' or mechanism == 'len'
-    size_parameter = find_size_parameter(filter_ivi_dance_parameter(function['parameters']), function['parameters'])
-    if size_parameter is None:
-        size_parameter = find_size_parameter(filter_len_parameter(function['parameters']), function['parameters'])
-    for x in function['parameters']:
-        skip = False
-        if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
-            skip = True
-        if x['direction'] == 'in' and options_to_use['skip_input_parameters']:
-            skip = True
-        if x == size_parameter and options_to_use['skip_size_parameter']:
-            skip = True
-        if x['is_session_handle'] is True and options_to_use['skip_session_handle']:
-            skip = True
-        if x['is_repeated_capability'] is True and options_to_use['skip_repeated_capability_parameter']:
-            skip = True
-        if options_to_use['mechanism'] != 'any' and x['size']['mechanism'] not in options_to_use['mechanism']:
-            skip = True
-        if not skip:
-            parameters_to_use.append(x)
-
-    # Reorder based on options
-    if options_to_use['reordered_for_default_values']:
-        new_order = []
-        for x in parameters_to_use:
-            if 'default_value' not in x:
-                new_order.append(x)
-        for x in parameters_to_use:
-            if 'default_value' in x:
-                new_order.append(x)
-        parameters_to_use = new_order
-
-    return parameters_to_use
-
-
+# Functions that return snippets that can be placed directly in the templates.
 def get_params_snippet(function, parameter_usage_options):
     '''get_params_snippet
 
@@ -99,7 +52,7 @@ def get_params_snippet(function, parameter_usage_options):
     if type(parameter_usage_options) is not ParameterUsageOptions:
         raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
 
-    options_to_use = _parameterUsageOptions[parameter_usage_options]
+    options_to_use = _parameterUsageOptionsSnippet[parameter_usage_options]
 
     parameters_to_use = filter_parameters(function, parameter_usage_options)
 

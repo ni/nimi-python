@@ -38,7 +38,7 @@ f = functions[func_name]
         self._defaults['${func_name}']['${p['name']}'] = None
 % endfor
 <%
-ivi_dance_param = helper.filter_ivi_dance_parameter(f['parameters'])
+ivi_dance_param = helper.filter_ivi_dance_parameter(f)
 %>\
 % if ivi_dance_param is not None:
         self._defaults['${func_name}']['${ivi_dance_param['name']}'] = None
@@ -56,7 +56,7 @@ ivi_dance_param = helper.filter_ivi_dance_parameter(f['parameters'])
 f = functions[func_name]
 params = f['parameters']
 output_params = helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_PARAMETERS)
-ivi_dance_param = helper.filter_ivi_dance_parameter(params)
+ivi_dance_param = helper.filter_ivi_dance_parameter(f)
 ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 %>\
     def ${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_DECLARATION)}):  # noqa: N802
