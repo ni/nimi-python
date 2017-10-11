@@ -1,7 +1,7 @@
 # Useful functions for use in the metadata modules
 
 from .helper import camelcase_to_snakecase
-from .helper import get_intrinsic_type_from_visa_type
+from .helper import get_python_type_for_visa_type
 
 import copy
 import pprint
@@ -28,26 +28,17 @@ def _add_python_method_name(function, name):
 
 
 def _add_python_parameter_name(parameter):
-    '''Adds a python_name' key/value pair to the parameter metadata'''
+    '''Adds a python_name key/value pair to the parameter metadata'''
     parameter['python_name'] = camelcase_to_snakecase(parameter['name'])
     return parameter
 
 
 def _add_python_type(parameter):
-    '''Adds a python_type key/value pair to the parameter metadata'''
+    '''Adds the type to use in the Python API to the parameter metadata'''
     if parameter['enum'] is None:
-        parameter['python_type'] = parameter['type']
+        parameter['python_type'] = get_python_type_for_visa_type(parameter['type'])
     else:
         parameter['python_type'] = 'enums.' + parameter['enum']
-    return parameter
-
-
-def _add_intrinsic_type(parameter):
-    '''Adds a intrinsic (basic python type) key/value pair to the parameter metadata'''
-    if parameter['enum'] is None:
-        parameter['intrinsic_type'] = get_intrinsic_type_from_visa_type(parameter['type'])
-    else:
-        parameter['intrinsic_type'] = parameter['python_type']
     return parameter
 
 
@@ -59,38 +50,20 @@ def _add_ctypes_variable_name(parameter):
 
 def _add_ctypes_type(parameter):
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
-    parameter['ctypes_type'] = parameter['type'] + '_ctype'
-    if parameter['direction'] == 'out':
-        if parameter['type'] == 'ViString' or parameter['type'] == 'ViRsrc' or parameter['type'] == 'ViConstString':
-            # These are defined as c_char_p which is already a pointer!
-            parameter['ctypes_type_library_call'] = parameter['ctypes_type']
-        else:
-            parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + parameter['ctypes_type'] + ")"
+    parameter['ctypes_type'] = parameter['type']
+    if parameter['direction'] == 'out' or parameter['is_buffer'] is True:
+        parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + parameter['ctypes_type'] + ")"
     else:
         parameter['ctypes_type_library_call'] = parameter['ctypes_type']
 
     return parameter
 
 
-def _add_ctypes_return_type(f):
-    '''Adds the ctypes_type key/value pair to the function metadata for the return type'''
-    f['returns_ctype'] = f['returns'] + '_ctype'
-    return f
-
-
-def _add_python_return_type(f):
-    '''Adds the ctypes_type key/value pair to the function metadata for the return type'''
-    f['returns_python'] = f['returns']
-    return f
-
-
 def _add_is_error_handling(f):
     '''Adds is_error_handling information to the function metadata if it isn't already defined. Defaults to False.'''
     # TODO(marcoskirsch): The information is added in functions_addon.py. I think we can instead infer from method
     # name but I am not sure if it's a good idea (heuristics vs being explicit - both error prone in different ways).
-    try:
-        f['is_error_handling']
-    except KeyError:
+    if 'is_error_handling' not in f:
         # Not populated, assume False
         f['is_error_handling'] = False
     return f
@@ -98,35 +71,49 @@ def _add_is_error_handling(f):
 
 def _add_buffer_info(parameter):
     '''Adds buffer information to the parameter metadata iff 'size' is defined else assume not a buffer'''
-    try:
-        parameter['size']
+
+    # For simplicity, we are going to treat ViChar[], ViString, ViConstString, and ViRsrc the same: As ViChar
+    # and is_buffer True
+    t = parameter['type']
+    if t == 'ViString' or t == 'ViConstString' or t == 'ViRsrc':
+        parameter['type'] = 'ViChar'
+        parameter['original_type'] = t
         parameter['is_buffer'] = True
-    except KeyError:
-        # Not populated, assume False
+
+    if (t.find('[ ]') > 0) or (t.find('[]') > 0):
+        parameter['type'] = t.replace('[ ]', '').replace('[]', '')
+        parameter['original_type'] = t
+        parameter['is_buffer'] = True
+
+    if 'size' not in parameter:
+        # Not populated, assume {'mechanism': 'fixed', 'value': 1}
         parameter['size'] = {'mechanism': 'fixed', 'value': 1}
+
+    if 'is_buffer' not in parameter:
+        # Not populated, assume False
         parameter['is_buffer'] = False
+
     return parameter
 
 
-def _add_library_method_call_snippet(parameter, session_handle_parameter_name):
+def _add_library_method_call_snippet(parameter):
     '''Code snippet for calling a method of Library for this parameter.'''
     if parameter['direction'] == 'in':
-        if parameter['name'] == session_handle_parameter_name:
-            library_method_call_snippet = 'self._' + session_handle_parameter_name
+        if parameter['is_session_handle'] is True:
+            library_method_call_snippet = 'self._' + parameter['name']
         elif parameter['is_repeated_capability']:
-            # TODO(marcoskirsch): .encode('ascii') is a problem if the repeated capability contains non-ASCII characters.
-            library_method_call_snippet = 'self._repeated_capability.encode(\'ascii\')'
+            # 'self._encoding' is a variable on the session object
+            library_method_call_snippet = 'self._repeated_capability.encode(self._encoding)'
         else:
             library_method_call_snippet = parameter['python_name']
             library_method_call_snippet += '.value' if parameter['enum'] is not None else ''
-            if parameter['type'] == 'ViString' or parameter['type'] == 'ViConstString' or parameter['type'] == 'ViRsrc':
-                library_method_call_snippet += '.encode(\'ascii\')'
+            # 'self._encoding' is a variable on the session object
+            library_method_call_snippet += '.encode(self._encoding)' if parameter['type'] == 'ViChar' else ''
+
     else:
         assert parameter['direction'] == 'out', pp.pformat(parameter)
-        if parameter['size']['mechanism'] == 'ivi-dance':
+        if parameter['is_buffer'] is True:
             library_method_call_snippet = parameter['ctypes_variable_name']
-        elif parameter['is_buffer']:
-            library_method_call_snippet = 'ctypes.cast(' + parameter['ctypes_variable_name'] + ', ctypes.POINTER(ctypes_types.' + parameter['ctypes_type'] + '))'
         else:
             library_method_call_snippet = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
     parameter['library_method_call_snippet'] = library_method_call_snippet
@@ -178,39 +165,68 @@ def _add_is_repeated_capability(parameter):
         parameter['is_repeated_capability'] = parameter['name'] in _repeated_capability_parameter_names
 
 
+def _add_is_session_handle(parameter):
+    '''Adds a boolean 'is_session_handle' to the parameter metadata by inferring it from its type, if not previously populated.'''
+    if 'is_session_handle' not in parameter:
+        parameter['is_session_handle'] = parameter['type'] == 'ViSession' and parameter['direction'] == 'in'
+
+
 def add_all_function_metadata(functions, config):
     '''Adds all codegen-specific metada to the function metadata list'''
     for f in functions:
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
-        _add_ctypes_return_type(functions[f])
-        _add_python_return_type(functions[f])
         _add_is_error_handling(functions[f])
         _add_has_repeated_capability(functions[f])
         for p in functions[f]['parameters']:
+            _add_buffer_info(p)
             _add_python_parameter_name(p)
             _add_python_type(p)
-            _add_intrinsic_type(p)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
-            _add_buffer_info(p)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
-            _add_library_method_call_snippet(p, config['session_handle_parameter_name'])
+            _add_is_session_handle(p)
+            _add_library_method_call_snippet(p)
     return functions
 
 
 # Unit Tests
+def _compare_values(actual, expected, k):
+    if type(actual) is dict:
+        _compare_dicts(actual, expected)
+    elif type(actual) is list:
+        _compare_lists(actual, expected)
+    else:
+        assert actual == expected, "Value mismatch with key/index '{0}', {1} != {2}".format(k, actual, expected)
+
+
+def _compare_lists(actual, expected):
+    assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
+    assert len(actual) == len(expected), 'Length mismatch, {0} != {1}'.format(len(actual), len(expected))
+    for k in range(len(actual)):
+        _compare_values(actual[k], expected[k], k)
+
+
+def _compare_dicts(actual, expected):
+    assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
+    for k in actual:
+        assert k in expected, 'Key {0} not in expected'.format(k)
+        _compare_values(actual[k], expected[k], k)
+    for k in expected:
+        assert k in actual, 'Key {0} not in actual'.format(k)
+
+
 def _do_the_test_add_all_metadata(functions, expected):
     actual = copy.deepcopy(functions)
     actual = add_all_function_metadata(actual, {'session_handle_parameter_name': 'vi', 'module_name': 'nifake'})
-    assert expected == actual, "\nfunctions = {0}\nexpected = {1}\nactual = {2}".format(pp.pformat(functions), pp.pformat(expected), pp.pformat(actual))
+    _compare_dicts(actual, expected)
 
 
 def test_add_all_metadata_simple():
     functions = {
-        'makeAFoo': {
+        'MakeAFoo': {
             'codegen_method': 'public',
             'returns': 'ViStatus',
             'parameters': [
@@ -237,7 +253,7 @@ def test_add_all_metadata_simple():
                 'description': 'Performs a foo, and performs it well.',
             },
         },
-        'private_method': {
+        'MakeAPrivateMethod': {
             'codegen_method': 'private',
             'returns': 'ViStatus',
             'parameters': [
@@ -261,13 +277,13 @@ def test_add_all_metadata_simple():
                 }
             ],
             'documentation': {
-                'description': 'create a private method',
+                'description': 'Perform actions as method defined',
             },
         },
     }
     expected = {
-        'makeAFoo': {
-            'name': 'makeAFoo',
+        'MakeAFoo': {
+            'name': 'MakeAFoo',
             'codegen_method': 'public',
             'documentation': {
                 'description': 'Performs a foo, and performs it well.'
@@ -276,22 +292,22 @@ def test_add_all_metadata_simple():
             'is_error_handling': False,
             'parameters': [
                 {
-                    'ctypes_type': 'ViSession_ctype',
+                    'ctypes_type': 'ViSession',
                     'ctypes_variable_name': 'vi_ctype',
-                    'ctypes_type_library_call': 'ViSession_ctype',
+                    'ctypes_type_library_call': 'ViSession',
                     'direction': 'in',
                     'documentation': {
                         'description': 'Identifies a particular instrument session.'
                     },
                     'is_repeated_capability': False,
+                    'is_session_handle': True,
                     'enum': None,
-                    'intrinsic_type': 'int',
+                    'python_type': 'int',
                     'is_buffer': False,
                     'name': 'vi',
                     'python_name': 'vi',
                     'python_name_with_default': 'vi',
                     'python_name_with_doc_default': 'vi',
-                    'python_type': 'ViSession',
                     'size': {
                         'mechanism': 'fixed',
                         'value': 1
@@ -300,92 +316,89 @@ def test_add_all_metadata_simple():
                     'library_method_call_snippet': 'self._vi',
                 },
                 {
-                    'ctypes_type': 'ViString_ctype',
+                    'ctypes_type': 'ViChar',
                     'ctypes_variable_name': 'channel_name_ctype',
-                    'ctypes_type_library_call': 'ViString_ctype',
+                    'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
                     'direction': 'in',
                     'documentation': {
                         'description': 'The channel to call this on.'
                     },
                     'is_repeated_capability': True,
+                    'is_session_handle': False,
                     'enum': None,
-                    'intrinsic_type': 'str',
-                    'is_buffer': False,
+                    'python_type': 'int',
+                    'is_buffer': True,
                     'name': 'channelName',
                     'python_name': 'channel_name',
                     'python_name_with_default': 'channel_name',
                     'python_name_with_doc_default': 'channel_name',
-                    'python_type': 'ViString',
                     'size': {'mechanism': 'fixed', 'value': 1},
-                    'type': 'ViString',
-                    'library_method_call_snippet': 'self._repeated_capability.encode(\'ascii\')',
+                    'type': 'ViChar',
+                    'original_type': 'ViString',
+                    'library_method_call_snippet': 'self._repeated_capability.encode(self._encoding)',
                 },
             ],
             'python_name': 'make_a_foo',
             'returns': 'ViStatus',
-            'returns_ctype': 'ViStatus_ctype',
-            'returns_python': 'ViStatus'
         },
-        'private_method': {
+        'MakeAPrivateMethod': {
             'codegen_method': 'private',
-            'documentation': {
-                'description': 'create a private method'
-            },
-            'has_repeated_capability': False,
-            'is_error_handling': False,
-            'name': 'private_method',
-            'parameters': [
-                {
-                    'ctypes_type': 'ViSession_ctype',
-                    'ctypes_type_library_call': 'ViSession_ctype',
-                    'ctypes_variable_name': 'vi_ctype',
-                    'direction': 'in',
-                    'documentation': {
-                        'description': 'Identifies a particular instrument session.'
-                    },
-                    'enum': None,
-                    'intrinsic_type': 'int',
-                    'is_buffer': False,
-                    'is_repeated_capability': False,
-                    'library_method_call_snippet': 'self._vi',
-                    'name': 'vi',
-                    'python_name': 'vi',
-                    'python_name_with_default': 'vi',
-                    'python_type': 'ViSession',
-                    'size': {
-                        'mechanism': 'fixed',
-                        'value': 1
-                    },
-                    'type': 'ViSession'
-                },
-                {
-                    'ctypes_type': 'ViString_ctype',
-                    'ctypes_type_library_call': 'ViString_ctype',
-                    'ctypes_variable_name': 'status_ctype',
-                    'direction': 'out',
-                    'documentation': {
-                        'description': 'Return a device status'
-                    },
-                    'enum': None,
-                    'intrinsic_type': 'str',
-                    'is_buffer': False,
-                    'is_repeated_capability': False,
-                    'library_method_call_snippet': 'ctypes.pointer(status_ctype)',
-                    'name': 'status',
-                    'python_name': 'status',
-                    'python_name_with_default': 'status',
-                    'python_type': 'ViString',
-                    'size': {
-                        'mechanism': 'fixed',
-                        'value': 1
-                    },
-                    'type': 'ViString'
-                }
-            ],
-            'python_name': '_private_method',
             'returns': 'ViStatus',
-            'returns_ctype': 'ViStatus_ctype',
-            'returns_python': 'ViStatus'
+            'parameters': [{
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'python_name': 'vi',
+                'python_type': 'int',
+                'ctypes_variable_name': 'vi_ctype',
+                'ctypes_type': 'ViSession',
+                'ctypes_type_library_call': 'ViSession',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'is_buffer': False,
+                'python_name_with_default': 'vi',
+                'python_name_with_doc_default': 'vi',
+                'is_repeated_capability': False,
+                'is_session_handle': True,
+                'library_method_call_snippet': 'self._vi'
+            }, {
+                'direction': 'out',
+                'enum': None,
+                'name': 'status',
+                'type': 'ViChar',
+                'original_type': 'ViString',
+                'documentation': {
+                    'description': 'Return a device status'
+                },
+                'python_name': 'status',
+                'python_type': 'int',
+                'ctypes_variable_name': 'status_ctype',
+                'ctypes_type': 'ViChar',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'is_buffer': True,
+                'python_name_with_default': 'status',
+                'python_name_with_doc_default': 'status',
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'library_method_call_snippet': 'status_ctype'
+            }],
+            'documentation': {
+                'description': 'Perform actions as method defined'
+            },
+            'name': 'MakeAPrivateMethod',
+            'python_name': '_make_a_private_method',
+            'is_error_handling': False,
+            'has_repeated_capability': False
         }
     }
 

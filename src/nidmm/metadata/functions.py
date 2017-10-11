@@ -52,7 +52,7 @@ identifies a particular instrument calibration session.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'mode',
+                'name': 'Mode',
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
@@ -65,7 +65,7 @@ For valid modes, refer to the calibration procedure for your device.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'range',
+                'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -79,7 +79,7 @@ Auto-ranging is not supported for calibration operations.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'frequency',
+                'name': 'Frequency',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'Specifies the **frequency** of the input signal.',
@@ -126,7 +126,7 @@ identifies a particular instrument calibration session.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'mode',
+                'name': 'Mode',
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
@@ -139,7 +139,7 @@ For valid modes, refer to the calibration procedure for your device.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'range',
+                'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -200,7 +200,7 @@ identifies a particular instrument calibration session.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'type',
+                'name': 'Type',
                 'type': 'ViInt32',
 'documentation': {
 'description': 'Specifies which of the LC calibration steps to perform.',
@@ -238,7 +238,7 @@ identifies a particular instrument calibration session.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'function',
+                'name': 'Function',
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
@@ -252,7 +252,7 @@ Procedure*.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'range',
+                'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -310,7 +310,7 @@ identifies a particular instrument calibration session.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'type',
+                'name': 'Type',
                 'type': 'ViInt32',
 'documentation': {
 'description': 'Specifies which of the miscellaneous calibration steps to perform.',
@@ -349,7 +349,7 @@ identifies a particular instrument calibration session.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'mode',
+                'name': 'Mode',
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
@@ -362,7 +362,7 @@ For valid modes, refer to the calibration procedure for your device.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'range',
+                'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -680,9 +680,8 @@ The default value is " " (an empty string).
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'attributeValue',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': 'Pass the value that you want to set the attribute to.',
 },
@@ -763,7 +762,7 @@ identifies a particular instrument calibration session.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'action',
+                'name': 'Action',
                 'type': 'ViInt32',
 'documentation': {
 'description': 'Specifies whether the driver saves the updated calibration constants.',
@@ -1104,17 +1103,15 @@ None.
 'documentation': {
 'description': '''
 Sets the expected maximum amplitude of the input signal. Refer to the
-`NI 4080 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4080_functional_overview/>`__,
-`NI 4081 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4081_functional_overview/>`__,
-`NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4082/>`__,
-`NI 4070 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4070_functional_overview/>`__,
-`NI 4071 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4071_functional_overview/>`__,
-and
-`NI 4072 <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/4072/>`__
-sections for a list of valid values. NI-DMM sets
-NIDMM\_ATTR\_FREQ\_VOLTAGE\_RANGE to this value. The minimum
-peak-to-peak signal amplitude that can be detected is 10% of the
-specified **voltage\_range**.
+`NI 4080 <REPLACE_DRIVER_SPECIFIC_URL_1(4080_functional_overview)>`__,
+`NI 4081 <REPLACE_DRIVER_SPECIFIC_URL_1(4081_functional_overview)>`__,
+`NI 4072 <REPLACE_DRIVER_SPECIFIC_URL_1(4082)>`__,
+`NI 4070 <REPLACE_DRIVER_SPECIFIC_URL_1(4070_functional_overview)>`__,
+`NI 4071 <REPLACE_DRIVER_SPECIFIC_URL_1(4071_functional_overview)>`__,
+and `NI 4072 <REPLACE_DRIVER_SPECIFIC_URL_1(4072)>`__ sections for a
+list of valid values. NI-DMM sets NIDMM\_ATTR\_FREQ\_VOLTAGE\_RANGE to
+this value. The minimum peak-to-peak signal amplitude that can be
+detected is 10% of the specified **voltage\_range**.
 ''',
 'table_body': [['NIDMM\\_VAL\\_AUTO\\_RANGE\\_ON (default)', '-1.0', 'Configures the DMM to take an Auto Range measurement to calculate the voltage range before each frequency or period measurement.'], ['NIDMM\\_VAL\\_AUTO\\_RANGE\\_OFF', '-2.0', 'Disables Auto Ranging. The driver sets the voltage range to the last calculated voltage range.']],
 'table_header': ['Name', 'Value', 'Description'],
@@ -1161,8 +1158,7 @@ signal is commonly referred to as Voltmeter Complete.
 'note': '''
 To determine which values are supported by each device, refer to the
 `LabWindows/CVI Trigger
-Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-section.
+Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 ''',
 },
             },
@@ -1170,9 +1166,8 @@ section.
 'documentation': {
 'description': '''
 Specifies the destination of the DMM Measurement Complete (MC) signal.
-Refer to
-`Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
-for more information.
+Refer to `Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__ for
+more information.
 ''',
 },
     },
@@ -1246,7 +1241,7 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'range',
+                'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -1259,9 +1254,9 @@ For all other functions, you must supply a **range** that exceeds the
 value that you are measuring. For example, you must type in 10 V if you
 are measuring 9 V. **range** values are coerced up to the closest input
 **range**. Refer to the `Devices
-Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-for a list of valid ranges. The driver sets NIDMM\_ATTR\_RANGE to this
-value. The default is 0.02 V.
+Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a list of valid
+ranges. The driver sets NIDMM\_ATTR\_RANGE to this value. The default is
+0.02 V.
 ''',
 'note': '''
 The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
@@ -1332,7 +1327,7 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'range',
+                'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -1345,9 +1340,9 @@ For all other functions, you must supply a range that exceeds the value
 that you are measuring. For example, you must type in 10 V if you are
 measuring 9 V. range values are coerced up to the closest input range.
 Refer to the `Devices
-Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-for a list of valid ranges. The driver sets NIDMM\_ATTR\_RANGE to this
-value. The default is 0.02 V.
+Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a list of valid
+ranges. The driver sets NIDMM\_ATTR\_RANGE to this value. The default is
+0.02 V.
 ''',
 'note': '''
 The NI 4050, NI 4060, and NI 4065 only support Auto Range when the
@@ -1364,13 +1359,11 @@ trigger and sample trigger are set to IMMEDIATE.
 'documentation': {
 'description': '''
 Specifies the resolution of the measurement in digits. The driver sets
-the `Devices
-Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__
-for a list of valid ranges. The driver sets
-NIDMM\_ATTR\_RESOLUTION\_DIGITS attribute to this value. This parameter
-is ignored when the **Range** parameter is set to
-NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or NIDMM\_VAL\_AUTO\_RANGE\_ONCE
-(-3.0). The default is 5½.
+the `Devices Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a
+list of valid ranges. The driver sets NIDMM\_ATTR\_RESOLUTION\_DIGITS
+attribute to this value. This parameter is ignored when the **Range**
+parameter is set to NIDMM\_VAL\_AUTO\_RANGE\_ON (-1.0) or
+NIDMM\_VAL\_AUTO\_RANGE\_ONCE (-3.0). The default is 5½.
 ''',
 'note': '''
 NI-DMM ignores this parameter for capacitance and inductance
@@ -1446,8 +1439,7 @@ Immediate.
 'note': '''
 To determine which values are supported by each device, refer to the
 `LabWindows/CVI Trigger
-Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-section.
+Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 ''',
 },
             },
@@ -1484,10 +1476,9 @@ NIDMM\_ATTR\_SAMPLE\_TRIGGER, and NIDMM\_ATTR\_SAMPLE\_INTERVAL.
 For continuous acquisitions, set NIDMM\_ATTR\_TRIGGER\_COUNT or
 NIDMM\_ATTR\_SAMPLE\_COUNT to zero. For more information, refer to
 `Multiple Point
-Acquisitions <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/multi_point/>`__,
-`Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__,
-and `Using
-Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__.
+Acquisitions <REPLACE_DRIVER_SPECIFIC_URL_1(multi_point)>`__,
+`Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__, and `Using
+Switches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__.
 ''',
 },
     },
@@ -1555,7 +1546,7 @@ None.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'conductance',
+                'name': 'Conductance',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'Specifies the open cable compensation **conductance**.',
@@ -1564,7 +1555,7 @@ None.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'susceptance',
+                'name': 'Susceptance',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'Specifies the open cable compensation **susceptance**.',
@@ -1783,7 +1774,7 @@ None.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'resistance',
+                'name': 'Resistance',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'Specifies the short cable compensation **resistance**.',
@@ -1792,7 +1783,7 @@ None.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'reactance',
+                'name': 'Reactance',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'Specifies the short cable compensation **reactance**.',
@@ -2041,8 +2032,7 @@ before triggering the DMM.
 'note': '''
 To determine which values are supported by each device, refer to the
 `LabWindows/CVI Trigger
-Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__
-section.
+Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 ''',
 },
             },
@@ -2072,10 +2062,9 @@ NIDMM\_VAL\_AUTO\_DELAY (-1).
 'documentation': {
 'description': '''
 Configures the DMM **Trigger\_Source** and **Trigger\_Delay**. Refer to
-`Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
-and `Using
-Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__
-for more information.
+`Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__ and `Using
+Switches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__ for more
+information.
 ''',
 },
     },
@@ -2152,7 +2141,7 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'range',
+                'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -2162,7 +2151,7 @@ NIDMM\_ATTR\_RANGE to this value. **range** values are coerced up to the
 closest input **range**. The default is 10.0.
 
 For valid ranges refer to the topics in
-`Devices <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__.
+`Devices <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__.
 
 Auto-ranging is not supported during waveform acquisitions.
 ''',
@@ -2171,7 +2160,7 @@ Auto-ranging is not supported during waveform acquisitions.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'rate',
+                'name': 'Rate',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -2197,8 +2186,7 @@ value.
 
 To calculate the maximum and minimum number of waveform points that you
 can acquire in one acquisition, refer to the `Waveform Acquisition
-Measurement
-Cycle <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/waveform_cycle/>`__.
+Measurement Cycle <REPLACE_DRIVER_SPECIFIC_URL_1(waveform_cycle)>`__.
 
 The default value is 500.
 ''',
@@ -2357,7 +2345,7 @@ automatically.
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'reading',
+                'name': 'Reading',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'The measured value returned from the DMM.',
@@ -2428,9 +2416,8 @@ positive ViInt32. The default value is 1.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'readingArray',
-                'type': 'ViReal64',
+                'type': 'ViReal64[ ]',
 'documentation': {
 'description': 'An array of measurement values.',
 'note': '''
@@ -2513,9 +2500,8 @@ parameter of niDMM\_ConfigureWaveformAcquisition. The default value is
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'waveformArray',
-                'type': 'ViReal64',
+                'type': 'ViReal64[ ]',
 'documentation': {
 'description': '''
 **Waveform Array** is an array of measurement values stored in waveform
@@ -2560,7 +2546,7 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'range',
+                'name': 'Range',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'Specifies the NIDMM\_ATTR\_RANGE used to acquire the **Measurement**.',
@@ -2569,7 +2555,7 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'resolution',
+                'name': 'Resolution',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'Specifies the NIDMM\_ATTR\_RESOLUTION\_ABSOLUTE of the **Measurement**.',
@@ -2578,7 +2564,7 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'measurement',
+                'name': 'Measurement',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'Specifies the measured value returned from the DMM.',
@@ -2587,9 +2573,8 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'modeString',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': 'Returns a string containing the units of the **Measurement** mode.',
 },
@@ -2597,9 +2582,8 @@ The driver sets NIDMM\_ATTR\_FUNCTION to this value.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'rangeString',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Returns the NIDMM\_ATTR\_RANGE of the **Measurement**, formatted into a
@@ -2610,9 +2594,8 @@ string with the correct number of display digits.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'dataString',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Returns the **Measurement**, formatted according to the
@@ -3045,9 +3028,8 @@ you can pass VI\_NULL for the **Attribute\_Value** buffer parameter.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'attributeValue',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 The buffer in which the function returns the current value of the
@@ -3150,7 +3132,7 @@ self-calibration).
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'count',
+                'name': 'Count',
                 'type': 'ViInt32',
 'documentation': {
 'description': 'The number of times calibration has been performed.',
@@ -3196,7 +3178,7 @@ self-calibration).
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'month',
+                'name': 'Month',
                 'type': 'ViInt32',
 'documentation': {
 'description': 'Indicates the **month** of the last calibration.',
@@ -3205,7 +3187,7 @@ self-calibration).
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'day',
+                'name': 'Day',
                 'type': 'ViInt32',
 'documentation': {
 'description': 'Indicates the **day** of the last calibration.',
@@ -3214,7 +3196,7 @@ self-calibration).
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'year',
+                'name': 'Year',
                 'type': 'ViInt32',
 'documentation': {
 'description': 'Indicates the **year** of the last calibration.',
@@ -3223,7 +3205,7 @@ self-calibration).
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'hour',
+                'name': 'Hour',
                 'type': 'ViInt32',
 'documentation': {
 'description': 'Indicates the **hour** of the last calibration.',
@@ -3232,7 +3214,7 @@ self-calibration).
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'minute',
+                'name': 'Minute',
                 'type': 'ViInt32',
 'documentation': {
 'description': 'Indicates the **minute** of the last calibration.',
@@ -3288,9 +3270,8 @@ of the number of bytes in the value.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
-                'name': 'info',
-                'type': 'ViChar',
+                'name': 'Info',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Returns the user-defined calibration information stored in the EEPROM.
@@ -3364,7 +3345,7 @@ None.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'index',
+                'name': 'Index',
                 'type': 'ViInt32',
 'documentation': {
 'description': 'A 1–based **index** into the channel table.',
@@ -3397,9 +3378,8 @@ is None.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'channelString',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Returns the **channel\_string** that is in the channel table at the
@@ -3437,7 +3417,7 @@ None.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'options',
+                'name': 'Options',
                 'type': 'ViString',
 'documentation': {
 'description': 'Reserved.',
@@ -3446,7 +3426,7 @@ None.
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'temperature',
+                'name': 'Temperature',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'Returns the current **temperature** of the device.',
@@ -3514,9 +3494,8 @@ None.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
-                'name': 'description',
-                'type': 'ViChar',
+                'name': 'Description',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Returns the error **description** for the IVI session or execution
@@ -3570,25 +3549,24 @@ user-readable string.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'buffer_size',
+                'name': 'Buffer_Size',
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
 Specifies the number of bytes allocated for the **Error\_Message**
 ViChar array. If the error description that this function returns
 (including terminating NULL byte) is larger than you indicated in
-**buffer\_size**, the error description will be truncated to fit. If you
-pass 0 for **buffer\_size**, the function returns the buffer size needed
-for **Error\_Message**.
+**buffer\_\_size**, the error description will be truncated to fit. If
+you pass 0 for **buffer\_\_size**, the function returns the buffer size
+needed for **Error\_Message**.
 ''',
 },
             },
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'errorMessage',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Contains the error information formatted into a user-readable string.
@@ -3627,7 +3605,7 @@ None.
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'months',
+                'name': 'Months',
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
@@ -3679,7 +3657,7 @@ self-calibration).
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'temperature',
+                'name': 'Temperature',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'Returns the **temperature** during the last calibration.',
@@ -3711,7 +3689,7 @@ None.
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'period',
+                'name': 'Period',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -3783,9 +3761,8 @@ The default value is None.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'coercionRecord',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Returns the next **coercion\_record** for the IVI session.
@@ -3854,9 +3831,8 @@ value is None.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'interchangeWarning',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Returns the next interchange warning for the IVI session. If there are
@@ -3945,7 +3921,7 @@ name.
 | Contains the **resource\_name** of the device to initialize. The
   **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
-  Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
+  Documentation <REPLACE_DRIVER_SPECIFIC_URL_1(related_documentation)>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
   information about configuring and testing the DMM in MAX.
 | Valid Syntax:
@@ -3960,9 +3936,8 @@ name.
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'calibrationPassword',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Specifies the password required to enable external calibration
@@ -4036,7 +4011,7 @@ name.
 | Contains the **resource\_name** of the device to initialize. The
   **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
-  Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
+  Documentation <REPLACE_DRIVER_SPECIFIC_URL_1(related_documentation)>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
   information about configuring and testing the DMM in MAX.
 | Valid Syntax:
@@ -4098,8 +4073,8 @@ parameter. You do not have to specify all of the attributes and may
 leave any of them out (those left out use the default value).
 
 Refer to `Simulating NI Digital
-Multimeters <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/simulation/>`__
-for more information.
+Multimeters <REPLACE_DRIVER_SPECIFIC_URL_1(simulation)>`__ for more
+information.
 ''',
 'table_body': [['Check', 'NIDMM\\_ATTR\\_RANGE\\_CHECK', 'VI\\_TRUE', '1'], ['QueryInstrStatus', 'NIDMM\\_ATTR\\_QUERY\\_INSTR\\_STATUS', 'VI\\_FALSE', '0'], ['Cache', 'NIDMM\\_ATTR\\_CACHE', 'VI\\_TRUE', '1'], ['Simulate', 'NIDMM\\_ATTR\\_SIMULATE', 'VI\\_FALSE', '0'], ['RecordCoercions', 'NIDMM\\_ATTR\\_RECORD\\_COERCIONS', 'VI\\_FALSE', '0'], ['DriverSetup', 'NIDMM\\_ATTR\\_DRIVER\\_SETUP', '"" (empty string)', '""']],
 },
@@ -4418,7 +4393,7 @@ None.
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'conductance',
+                'name': 'Conductance',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -4430,7 +4405,7 @@ None.
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'susceptance',
+                'name': 'Susceptance',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -4474,7 +4449,7 @@ None.
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'resistance',
+                'name': 'Resistance',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -4486,7 +4461,7 @@ None.
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'reactance',
+                'name': 'Reactance',
                 'type': 'ViReal64',
 'documentation': {
 'description': '''
@@ -4549,7 +4524,7 @@ automatically.
             {
                 'direction': 'out',
                 'enum': None,
-                'name': 'reading',
+                'name': 'Reading',
                 'type': 'ViReal64',
 'documentation': {
 'description': 'The measured value returned from the DMM.',
@@ -4617,9 +4592,8 @@ positive ViInt32. The default value is 1.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'readingArray',
-                'type': 'ViReal64',
+                'type': 'ViReal64[ ]',
 'documentation': {
 'description': 'An array of measurement values.',
 'note': '''
@@ -4761,9 +4735,8 @@ parameter of niDMM\_ConfigureWaveformAcquisition. The default value is
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'waveformArray',
-                'type': 'ViReal64',
+                'type': 'ViReal64[ ]',
 'documentation': {
 'description': 'An array of measurement values.',
 'note': '''
@@ -5321,9 +5294,8 @@ The default value is " " (an empty string).
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'attributeValue',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': 'Pass the value that you want to set the attribute to.',
 },
@@ -5379,9 +5351,8 @@ None.
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'oldPassword',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Specifies the current password required to enable external calibration
@@ -5393,9 +5364,8 @@ excluding the termination character.
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'newPassword',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Specifies the **new\_password** required to enable external calibration
@@ -5435,9 +5405,8 @@ None.
             {
                 'direction': 'in',
                 'enum': None,
-                'is_buffer': True,
-                'name': 'info',
-                'type': 'ViChar',
+                'name': 'Info',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Specifies the user-defined information to be stored in the EEPROM such
@@ -5628,9 +5597,8 @@ indicating VI\_SUCCESS.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'errorMessage',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': 'The error information formatted into a string.',
 },
@@ -5676,9 +5644,8 @@ The default value is VI\_SUCCESS (0).
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'errorMessage',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': 'Formats the **Error\_Code** into a user-readable message string.',
 'note': 'The array must contain at least 256 elements ViChar[256].',
@@ -5716,7 +5683,7 @@ name.
 | Contains the **resource\_name** of the device to initialize. The
   **resource\_name** is assigned in Measurement & Automation Explorer
   (MAX). Refer to `Related
-  Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
+  Documentation <REPLACE_DRIVER_SPECIFIC_URL_1(related_documentation)>`__
   for the *NI Digital Multimeters Getting Started Guide* for more
   information about configuring and testing the DMM in MAX.
 | Valid Syntax:
@@ -5838,9 +5805,8 @@ None.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'instrumentDriverRevision',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Returns a string containing the instrument driver software revision
@@ -5852,9 +5818,8 @@ numbers.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'firmwareRevision',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 Returns a string containing the instrument **firmware\_revision**
@@ -5911,9 +5876,8 @@ not return error code 1013.
             {
                 'direction': 'out',
                 'enum': None,
-                'is_buffer': True,
                 'name': 'selfTestMessage',
-                'type': 'ViChar',
+                'type': 'ViChar[ ]',
 'documentation': {
 'description': '''
 This parameter contains the string returned from the instrument

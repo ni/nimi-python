@@ -1,10 +1,5 @@
 # This file was generated
 
-import ctypes
-
-import niswitch.ctypes_types
-import niswitch.python_types
-
 
 class MockFunctionCallError(Exception):
     def __init__(self, function, param=None):
@@ -112,12 +107,11 @@ class SideEffectsHelper(object):
         self._defaults['WaitForScanComplete']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
+        self._defaults['error_message'] = {}
+        self._defaults['error_message']['return'] = 0
+        self._defaults['error_message']['errorMessage'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
-        self._defaults['revision_query'] = {}
-        self._defaults['revision_query']['return'] = 0
-        self._defaults['revision_query']['instrumentDriverRevision'] = None
-        self._defaults['revision_query']['firmwareRevision'] = None
         self._defaults['self_test'] = {}
         self._defaults['self_test']['return'] = 0
         self._defaults['self_test']['selfTestResult'] = None
@@ -218,8 +212,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetAttributeViString", param='attributeValue')
         if array_size == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
+        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niSwitch_GetChannelName(self, vi, index, buffer_size, channel_name_buffer):  # noqa: N802
@@ -229,8 +222,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetChannelName", param='channelNameBuffer')
         if buffer_size == 0:
             return len(self._defaults['GetChannelName']['channelNameBuffer'])
-        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii'))
-        channel_name_buffer.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
+        channel_name_buffer.value = self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii')
         return self._defaults['GetChannelName']['return']
 
     def niSwitch_GetError(self, vi, code, buffer_size, description):  # noqa: N802
@@ -243,8 +235,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetError", param='Description')
         if buffer_size == 0:
             return len(self._defaults['GetError']['Description'])
-        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetError']['Description'].encode('ascii'))
-        description.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
+        description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
@@ -254,8 +245,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetPath", param='Path')
         if buffer_size == 0:
             return len(self._defaults['GetPath']['Path'])
-        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetPath']['Path'].encode('ascii'))
-        path.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
+        path.value = self._defaults['GetPath']['Path'].encode('ascii')
         return self._defaults['GetPath']['return']
 
     def niSwitch_GetRelayCount(self, vi, relay_name, relay_count):  # noqa: N802
@@ -273,8 +263,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetRelayName", param='relayNameBuffer')
         if relay_name_buffer_size == 0:
             return len(self._defaults['GetRelayName']['relayNameBuffer'])
-        t = niswitch.ctypes_types.ViString_ctype(self._defaults['GetRelayName']['relayNameBuffer'].encode('ascii'))
-        relay_name_buffer.value = ctypes.cast(t, niswitch.ctypes_types.ViString_ctype).value
+        relay_name_buffer.value = self._defaults['GetRelayName']['relayNameBuffer'].encode('ascii')
         return self._defaults['GetRelayName']['return']
 
     def niSwitch_GetRelayPosition(self, vi, relay_name, relay_position):  # noqa: N802
@@ -384,21 +373,23 @@ class SideEffectsHelper(object):
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
+    def niSwitch_error_message(self, vi, error_code, error_message):  # noqa: N802
+        if self._defaults['error_message']['return'] != 0:
+            return self._defaults['error_message']['return']
+        if self._defaults['error_message']['errorMessage'] is None:
+            raise MockFunctionCallError("niSwitch_error_message", param='errorMessage')
+        a = self._defaults['error_message']['errorMessage']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(error_message), len(a))):
+            error_message[i] = a[i]
+        return self._defaults['error_message']['return']
+
     def niSwitch_reset(self, vi):  # noqa: N802
         if self._defaults['reset']['return'] != 0:
             return self._defaults['reset']['return']
         return self._defaults['reset']['return']
-
-    def niSwitch_revision_query(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
-        if self._defaults['revision_query']['return'] != 0:
-            return self._defaults['revision_query']['return']
-        if self._defaults['revision_query']['instrumentDriverRevision'] is None:
-            raise MockFunctionCallError("niSwitch_revision_query", param='instrumentDriverRevision')
-        instrument_driver_revision.contents.value = self._defaults['revision_query']['instrumentDriverRevision']
-        if self._defaults['revision_query']['firmwareRevision'] is None:
-            raise MockFunctionCallError("niSwitch_revision_query", param='firmwareRevision')
-        firmware_revision.contents.value = self._defaults['revision_query']['firmwareRevision']
-        return self._defaults['revision_query']['return']
 
     def niSwitch_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         if self._defaults['self_test']['return'] != 0:
@@ -408,92 +399,97 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niSwitch_self_test", param='selfTestMessage')
-        self_test_message.contents.value = self._defaults['self_test']['selfTestMessage']
+        a = self._defaults['self_test']['selfTestMessage']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(self_test_message), len(a))):
+            self_test_message[i] = a[i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niSwitch_AbortScan.side_effect = MockFunctionCallError("niSwitch_AbortScan")
-        mock_library.niSwitch_AbortScan.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_AbortScan.return_value = 0
         mock_library.niSwitch_CanConnect.side_effect = MockFunctionCallError("niSwitch_CanConnect")
-        mock_library.niSwitch_CanConnect.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_CanConnect.return_value = 0
         mock_library.niSwitch_Commit.side_effect = MockFunctionCallError("niSwitch_Commit")
-        mock_library.niSwitch_Commit.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_Commit.return_value = 0
         mock_library.niSwitch_ConfigureScanList.side_effect = MockFunctionCallError("niSwitch_ConfigureScanList")
-        mock_library.niSwitch_ConfigureScanList.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_ConfigureScanList.return_value = 0
         mock_library.niSwitch_ConfigureScanTrigger.side_effect = MockFunctionCallError("niSwitch_ConfigureScanTrigger")
-        mock_library.niSwitch_ConfigureScanTrigger.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_ConfigureScanTrigger.return_value = 0
         mock_library.niSwitch_Connect.side_effect = MockFunctionCallError("niSwitch_Connect")
-        mock_library.niSwitch_Connect.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_Connect.return_value = 0
         mock_library.niSwitch_ConnectMultiple.side_effect = MockFunctionCallError("niSwitch_ConnectMultiple")
-        mock_library.niSwitch_ConnectMultiple.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_ConnectMultiple.return_value = 0
         mock_library.niSwitch_Disable.side_effect = MockFunctionCallError("niSwitch_Disable")
-        mock_library.niSwitch_Disable.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_Disable.return_value = 0
         mock_library.niSwitch_Disconnect.side_effect = MockFunctionCallError("niSwitch_Disconnect")
-        mock_library.niSwitch_Disconnect.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_Disconnect.return_value = 0
         mock_library.niSwitch_DisconnectAll.side_effect = MockFunctionCallError("niSwitch_DisconnectAll")
-        mock_library.niSwitch_DisconnectAll.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_DisconnectAll.return_value = 0
         mock_library.niSwitch_DisconnectMultiple.side_effect = MockFunctionCallError("niSwitch_DisconnectMultiple")
-        mock_library.niSwitch_DisconnectMultiple.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_DisconnectMultiple.return_value = 0
         mock_library.niSwitch_GetAttributeViBoolean.side_effect = MockFunctionCallError("niSwitch_GetAttributeViBoolean")
-        mock_library.niSwitch_GetAttributeViBoolean.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_GetAttributeViBoolean.return_value = 0
         mock_library.niSwitch_GetAttributeViInt32.side_effect = MockFunctionCallError("niSwitch_GetAttributeViInt32")
-        mock_library.niSwitch_GetAttributeViInt32.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_GetAttributeViInt32.return_value = 0
         mock_library.niSwitch_GetAttributeViReal64.side_effect = MockFunctionCallError("niSwitch_GetAttributeViReal64")
-        mock_library.niSwitch_GetAttributeViReal64.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_GetAttributeViReal64.return_value = 0
         mock_library.niSwitch_GetAttributeViString.side_effect = MockFunctionCallError("niSwitch_GetAttributeViString")
-        mock_library.niSwitch_GetAttributeViString.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_GetAttributeViString.return_value = 0
         mock_library.niSwitch_GetChannelName.side_effect = MockFunctionCallError("niSwitch_GetChannelName")
-        mock_library.niSwitch_GetChannelName.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_GetChannelName.return_value = 0
         mock_library.niSwitch_GetError.side_effect = MockFunctionCallError("niSwitch_GetError")
-        mock_library.niSwitch_GetError.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_GetError.return_value = 0
         mock_library.niSwitch_GetPath.side_effect = MockFunctionCallError("niSwitch_GetPath")
-        mock_library.niSwitch_GetPath.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_GetPath.return_value = 0
         mock_library.niSwitch_GetRelayCount.side_effect = MockFunctionCallError("niSwitch_GetRelayCount")
-        mock_library.niSwitch_GetRelayCount.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_GetRelayCount.return_value = 0
         mock_library.niSwitch_GetRelayName.side_effect = MockFunctionCallError("niSwitch_GetRelayName")
-        mock_library.niSwitch_GetRelayName.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_GetRelayName.return_value = 0
         mock_library.niSwitch_GetRelayPosition.side_effect = MockFunctionCallError("niSwitch_GetRelayPosition")
-        mock_library.niSwitch_GetRelayPosition.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_GetRelayPosition.return_value = 0
         mock_library.niSwitch_InitWithTopology.side_effect = MockFunctionCallError("niSwitch_InitWithTopology")
-        mock_library.niSwitch_InitWithTopology.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_InitWithTopology.return_value = 0
         mock_library.niSwitch_InitiateScan.side_effect = MockFunctionCallError("niSwitch_InitiateScan")
-        mock_library.niSwitch_InitiateScan.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_InitiateScan.return_value = 0
         mock_library.niSwitch_IsDebounced.side_effect = MockFunctionCallError("niSwitch_IsDebounced")
-        mock_library.niSwitch_IsDebounced.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_IsDebounced.return_value = 0
         mock_library.niSwitch_IsScanning.side_effect = MockFunctionCallError("niSwitch_IsScanning")
-        mock_library.niSwitch_IsScanning.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_IsScanning.return_value = 0
         mock_library.niSwitch_RelayControl.side_effect = MockFunctionCallError("niSwitch_RelayControl")
-        mock_library.niSwitch_RelayControl.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_RelayControl.return_value = 0
         mock_library.niSwitch_ResetWithDefaults.side_effect = MockFunctionCallError("niSwitch_ResetWithDefaults")
-        mock_library.niSwitch_ResetWithDefaults.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_ResetWithDefaults.return_value = 0
         mock_library.niSwitch_RouteScanAdvancedOutput.side_effect = MockFunctionCallError("niSwitch_RouteScanAdvancedOutput")
-        mock_library.niSwitch_RouteScanAdvancedOutput.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_RouteScanAdvancedOutput.return_value = 0
         mock_library.niSwitch_RouteTriggerInput.side_effect = MockFunctionCallError("niSwitch_RouteTriggerInput")
-        mock_library.niSwitch_RouteTriggerInput.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_RouteTriggerInput.return_value = 0
         mock_library.niSwitch_SendSoftwareTrigger.side_effect = MockFunctionCallError("niSwitch_SendSoftwareTrigger")
-        mock_library.niSwitch_SendSoftwareTrigger.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_SendSoftwareTrigger.return_value = 0
         mock_library.niSwitch_SetAttributeViBoolean.side_effect = MockFunctionCallError("niSwitch_SetAttributeViBoolean")
-        mock_library.niSwitch_SetAttributeViBoolean.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_SetAttributeViBoolean.return_value = 0
         mock_library.niSwitch_SetAttributeViInt32.side_effect = MockFunctionCallError("niSwitch_SetAttributeViInt32")
-        mock_library.niSwitch_SetAttributeViInt32.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_SetAttributeViInt32.return_value = 0
         mock_library.niSwitch_SetAttributeViReal64.side_effect = MockFunctionCallError("niSwitch_SetAttributeViReal64")
-        mock_library.niSwitch_SetAttributeViReal64.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_SetAttributeViReal64.return_value = 0
         mock_library.niSwitch_SetAttributeViString.side_effect = MockFunctionCallError("niSwitch_SetAttributeViString")
-        mock_library.niSwitch_SetAttributeViString.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_SetAttributeViString.return_value = 0
         mock_library.niSwitch_SetContinuousScan.side_effect = MockFunctionCallError("niSwitch_SetContinuousScan")
-        mock_library.niSwitch_SetContinuousScan.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_SetContinuousScan.return_value = 0
         mock_library.niSwitch_SetPath.side_effect = MockFunctionCallError("niSwitch_SetPath")
-        mock_library.niSwitch_SetPath.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_SetPath.return_value = 0
         mock_library.niSwitch_WaitForDebounce.side_effect = MockFunctionCallError("niSwitch_WaitForDebounce")
-        mock_library.niSwitch_WaitForDebounce.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_WaitForDebounce.return_value = 0
         mock_library.niSwitch_WaitForScanComplete.side_effect = MockFunctionCallError("niSwitch_WaitForScanComplete")
-        mock_library.niSwitch_WaitForScanComplete.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_WaitForScanComplete.return_value = 0
         mock_library.niSwitch_close.side_effect = MockFunctionCallError("niSwitch_close")
-        mock_library.niSwitch_close.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_close.return_value = 0
+        mock_library.niSwitch_error_message.side_effect = MockFunctionCallError("niSwitch_error_message")
+        mock_library.niSwitch_error_message.return_value = 0
         mock_library.niSwitch_reset.side_effect = MockFunctionCallError("niSwitch_reset")
-        mock_library.niSwitch_reset.return_value = niswitch.python_types.ViStatus(0)
-        mock_library.niSwitch_revision_query.side_effect = MockFunctionCallError("niSwitch_revision_query")
-        mock_library.niSwitch_revision_query.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_reset.return_value = 0
         mock_library.niSwitch_self_test.side_effect = MockFunctionCallError("niSwitch_self_test")
-        mock_library.niSwitch_self_test.return_value = niswitch.python_types.ViStatus(0)
+        mock_library.niSwitch_self_test.return_value = 0

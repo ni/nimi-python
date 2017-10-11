@@ -60,8 +60,7 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     __init__.py \
 
 DEFAULT_PY_FILES_TO_COPY := \
-    ctypes_types.py \
-    python_types.py \
+    visatype.py \
 
 DEFAULT_RST_FILES_TO_GENERATE := \
     session.rst \

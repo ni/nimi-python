@@ -82,7 +82,7 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
         # Don't try to get the description or we'll start recursing until the stack overflows.
         description = ''
     else:
-        description = session.get_error_description(code)
+        description = session._get_error_description(code)
 
     if _is_error(code):
         raise Error(code, description)

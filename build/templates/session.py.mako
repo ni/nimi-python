@@ -30,8 +30,11 @@ ${encoding_tag}
     enum_input_parameters = helper.filter_enum_parameters(helper.filter_input_parameters(parameters))
     ivi_dance_parameter = helper.filter_ivi_dance_parameter(parameters)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
+    len_parameter = helper.filter_len_parameter(parameters)
+    len_size_parameter = helper.find_size_parameter(len_parameter, parameters)
+    assert ivi_dance_size_parameter is None or len_size_parameter is None
 %>\
-    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParamListType.SESSION_METHOD_DECLARATION)}):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
         ${helper.get_function_docstring(f['name'], config, indent=8)}
@@ -42,30 +45,27 @@ ${encoding_tag}
 % for output_parameter in output_parameters:
         ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
 % endfor
-% if ivi_dance_parameter is None:
-        error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
-        ${helper.get_method_return_snippet(parameters)}
-% else:
+% if ivi_dance_parameter is not None:
         ${ivi_dance_size_parameter['python_name']} = 0
         ${ivi_dance_parameter['ctypes_variable_name']} = None
-        error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
+        error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['python_name']} = error_code
-        ${ivi_dance_parameter['ctypes_variable_name']} = ctypes.cast(ctypes.create_string_buffer(${ivi_dance_size_parameter['python_name']}), ctypes_types.${ivi_dance_parameter['ctypes_type']})
-        error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_CALL)})
+        ${ivi_dance_parameter['ctypes_variable_name']} = (visatype.${ivi_dance_parameter['ctypes_type']} * ${ivi_dance_size_parameter['python_name']})()
+% elif len_parameter is not None:
+        ${len_size_parameter['python_name']} = len(${len_parameter['python_name']})
+% endif
+        error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
         ${helper.get_method_return_snippet(parameters)}
-% endif
 </%def>\
 import ctypes
 
 from ${module_name} import attributes
-from ${module_name} import ctypes_types
 from ${module_name} import enums
 from ${module_name} import errors
 from ${module_name} import library_singleton
-from ${module_name} import python_types
+from ${module_name} import visatype
 
 
 % if session_context_manager is not None:
@@ -89,6 +89,19 @@ class _SessionBase(object):
     _is_frozen = False
 
 % for attribute in helper.sorted_attrs(attributes):
+<%
+rep_cap_attr_desc = '''
+This property can use repeated capabilities (usually channels). If set or get directly on the 
+{0}.Session object, then the set/get will use all repeated capabilities in the session. 
+You can specify a subset of repeated capabilities using the Python index notation on an 
+{0}.Session instance, and calling set/get value on the result.:
+
+    session['0,1'].{0} = var
+    var = session['0,1'].{0}
+'''
+if attributes[attribute]['channel_based'] == 'True':
+    attributes[attribute]['documentation']['tip'] = rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
+%>\
     %if attributes[attribute]['enum']:
     ${attributes[attribute]['name'].lower()} = attributes.AttributeEnum(attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
     %else:
@@ -102,21 +115,22 @@ class _SessionBase(object):
 % endfor
 <%
 init_function = functions[config['init_function']]
-init_method_params = helper.get_params_snippet(init_function, helper.ParamListType.SESSION_METHOD_DECLARATION)
-init_call_params = helper.get_params_snippet(init_function, helper.ParamListType.SESSION_METHOD_CALL)
+init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
+init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
 %>\
 
     def __init__(self, repeated_capability):
         self._library = library_singleton.get()
         self._repeated_capability = repeated_capability
+        self._encoding = 'windows-1251'
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
             raise TypeError("%r is a frozen class" % self)
         object.__setattr__(self, key, value)
 
-    def get_error_description(self, error_code):
-        '''get_error_description
+    def _get_error_description(self, error_code):
+        '''_get_error_description
 
         Returns the error description.
         '''
@@ -130,9 +144,9 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParamListType
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
-            Use _get_error_message instead. It doesn't require a session.
+            Use _error_message instead. It doesn't require a session.
             '''
-            error_string = self._get_error_message(error_code)
+            error_string = self._error_message(error_code)
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."

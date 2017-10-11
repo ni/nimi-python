@@ -12,9 +12,9 @@ functions_codegen_method = {
     'CheckAttribute.+':                { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'init':                            { 'codegen_method': 'no',       },
-    'error_message':                   { 'codegen_method': 'no',       },
+    'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
-    'GetErrorMessage':                 { 'codegen_method': 'private',  },
+    'GetErrorMessage':                 { 'codegen_method': 'no',  },
     'ClearError':                      { 'codegen_method': 'no',       },
     'Control':                         { 'codegen_method': 'no',       },
     'LockSession':                     { 'codegen_method': 'no',       },
@@ -35,39 +35,36 @@ functions_codegen_method = {
     'FormatMeasAbsolute':              { 'codegen_method': 'no',       },  # Utility function for C customers
     'IsUnderRange':                    { 'codegen_method': 'no',       },  # Utility function for C customers
     'IsOverRange':                     { 'codegen_method': 'no',       },  # Utility function for C customers
+    'ConfigureThermistorType':         { 'codegen_method': 'no',       },
+    'ConfigureTransducerType':         { 'codegen_method': 'no',       },
+    'ConfigureTriggerSlope':           { 'codegen_method': 'no',       },
+    'ConfigureSampleTriggerSlope':     { 'codegen_method': 'no',       },
+    'ConfigureMeasCompleteDest':       { 'codegen_method': 'no',       },
+    'ConfigureMeasCompleteSlope':      { 'codegen_method': 'no',       },
+    'ConfigureAutoZeroMode':           { 'codegen_method': 'no',       },
+    'ConfigureCableCompType':          { 'codegen_method': 'no',       },
+    'ConfigureCurrentSource':          { 'codegen_method': 'no',       },
+    'ConfigureFixedRefJunction':       { 'codegen_method': 'no',       },
+    'ConfigureFrequencyVoltageRange':  { 'codegen_method': 'no',       },
+    'ConfigureOffsetCompOhms':         { 'codegen_method': 'no',       },
+    'ConfigureWaveformCoupling':       { 'codegen_method': 'no',       },
+    'ConfigureADCCalibration':         { 'codegen_method': 'no',       },
+    'revision_query':                  { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    'ConfigureTrigger':             { 'parameters': { 1: { 'enum': 'TriggerSource',             }, }, },
-    'ConfigureMeasCompleteDest':    { 'parameters': { 1: { 'enum': 'MeasurementCompleteDest',   }, }, },
-    'ConfigureMultiPoint':          { 'parameters': { 3: { 'enum': 'SampleTrigger',             }, }, },
-    'ConfigureTriggerSlope':        { 'parameters': { 1: { 'enum': 'Slope',                     }, }, },
-    'GetApertureTimeInfo':          { 'parameters': { 2: { 'enum': 'ApertureTimeUnits',         }, }, },
-    'ConfigureAutoZeroMode':        { 'parameters': { 1: { 'enum': 'AutoZero',                  }, }, },
-    'ConfigureMeasurementDigits':   { 'parameters': { 1: { 'enum': 'Function',                  }, }, },
-    'ConfigureMeasurementAbsolute': { 'parameters': { 1: { 'enum': 'Function',                  }, }, },
-    'ConfigureMeasCompleteSlope':   { 'parameters': { 1: { 'enum': 'Slope',                     }, }, },
-    'ConfigureSampleTriggerSlope':  { 'parameters': { 1: { 'enum': 'Slope',                     }, }, },
-    'ReadStatus':                   { 'parameters': { 2: { 'enum': 'AcquisitionStatus',         }, }, },
-    'ConfigureADCCalibration':      { 'parameters': { 1: { 'enum': 'ADCCalibration',            }, }, },
-    'ConfigureOffsetCompOhms':      { 'parameters': { 1: { 'enum': 'OffsetCompensatedOhms',     }, }, },
-    'ConfigureCurrentSource':       { 'parameters': { 1: { 'enum': 'CurrentSource',             }, }, },
-    'ConfigureCableCompType':       { 'parameters': { 1: { 'enum': 'CableCompensationType',     }, }, },
-    'ConfigureWaveformAcquisition': { 'parameters': { 1: { 'enum': 'Function',                  }, }, },
-    'ConfigureWaveformCoupling':    { 'parameters': { 1: { 'enum': 'WaveformCouplingMode',      }, }, },
-    'ConfigureTransducerType':      { 'parameters': { 1: { 'enum': 'TemperatureTransducerType', }, }, },
-    'ConfigureThermistorType':      { 'parameters': { 1: { 'enum': 'TemperatureThermistorType', }, }, },
-    'ConfigureThermocouple':        { 'parameters': { 1: { 'enum': 'ThermocoupleType',          }, }, },
+    'ConfigureTrigger':             { 'parameters': { 1: { 'enum': 'TriggerSource',                     }, }, },
+    'ConfigureMultiPoint':          { 'parameters': { 3: { 'enum': 'SampleTrigger',                     }, }, },
+    'GetApertureTimeInfo':          { 'parameters': { 2: { 'enum': 'ApertureTimeUnits',                 }, }, },
+    'ConfigureMeasurementDigits':   { 'parameters': { 1: { 'enum': 'Function',                          }, }, },
+    'ConfigureMeasurementAbsolute': { 'parameters': { 1: { 'enum': 'Function',                          }, }, },
+    'ReadStatus':                   { 'parameters': { 2: { 'enum': 'AcquisitionStatus',                 }, }, },
+    'ConfigureWaveformAcquisition': { 'parameters': { 1: { 'enum': 'Function',                          }, }, },
+    'ConfigureThermocouple':        { 'parameters': { 1: { 'enum': 'ThermocoupleType',                  },
+                                                      2: { 'enum': 'ThermocoupleReferenceJunctionType', },    }, },
+    'ConfigureRTDType':             { 'parameters': { 1: { 'enum': 'RTDType',                           }, }, },
 
-}
-
-# TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval? Issue #259
-functions_params_types = {
-    'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
-    'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'GetError':                     { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'GetErrorMessage':              { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
@@ -86,7 +83,6 @@ functions_params_types = {
 #                       one) is passed in. This parameter won't exist in the corresponding Python Session method.
 functions_buffer_info = {
     'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'GetErrorMessage':              { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'buffer_size'}, }, }, },
     'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'ReadMultiPoint':               { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
     'FetchMultiPoint':              { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
@@ -101,16 +97,17 @@ functions_buffer_info = {
     'CheckAttribute.+':             { 'parameters': { 1: { 'is_buffer': True, }, }, }, # Not actually used since CheckAttribute* not part of API
     'InitExtCal':                   { 'parameters': { 0: { 'is_buffer': True, }, }, }, # Not actually used since External Cal not part of API
     'GetDevTemp':                   { 'parameters': { 1: { 'is_buffer': True, }, }, },
+    'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
 # change how error handling is done within those functions themselves - basically, if an error occurs,
 # dont try to handle it, since the functions are only used within the context of error handling.
 functions_is_error_handling = {
-    'error_message':                { 'is_error_handling': True },
-    'GetError':                     { 'is_error_handling': True },
-    'GetErrorMessage':              { 'is_error_handling': True },
+    'error_message':                { 'is_error_handling': True, },
+    'GetError':                     { 'is_error_handling': True, },
 }
+
 
 # Default values for method parameters
 function_default_value = {

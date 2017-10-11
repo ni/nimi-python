@@ -12,9 +12,8 @@ functions_codegen_method = {
     'CheckAttribute.+':                { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'init':                            { 'codegen_method': 'no',       },
-    'error_message':                   { 'codegen_method': 'no',       },
+    'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
-    'GetErrorMessage':                 { 'codegen_method': 'private',  },
     'ClearError':                      { 'codegen_method': 'no',       },
     'LockSession':                     { 'codegen_method': 'no',       },
     'UnlockSession':                   { 'codegen_method': 'no',       },
@@ -26,6 +25,7 @@ functions_codegen_method = {
     'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
     'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
     'error_query':                     { 'codegen_method': 'no',       },
+    'revision_query':                  { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -40,16 +40,6 @@ functions_enums = {
     'ConfigureScanList':            { 'parameters': { 2: { 'enum': 'ScanMode',                 }, }, },
     'ConfigureScanTrigger':         { 'parameters': { 2: { 'enum': 'TriggerInput',             },
                                                       3: { 'enum': 'ScanAdvancedOutput',       }, }, },
-}
-
-# TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval? Issue #259
-functions_params_types = {
-    'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
-    'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'GetChannelName':               { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'GetRelayName':                 { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'GetPath':                      { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
-    'GetError':                     { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
@@ -69,13 +59,12 @@ functions_params_types = {
 functions_buffer_info = {
     'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'BufferSize'}, }, }, },
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'revision_query':               { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, },       # From documentation
-                                                      2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI
     'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'arraySize'}, }, }, },
     'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetRelayName':                 { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'relayNameBufferSize'}, }, }, },
     'GetPath':                      { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -84,7 +73,6 @@ functions_buffer_info = {
 functions_is_error_handling = {
     'error_message':                { 'is_error_handling': True, },
     'GetError':                     { 'is_error_handling': True, },
-    'GetErrorMessage':              { 'is_error_handling': True, },
 }
 
 # Default values for method parameters

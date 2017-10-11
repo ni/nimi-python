@@ -16,8 +16,7 @@ functions = helper.filter_codegen_functions(functions)
 import ctypes
 import threading
 
-from ${module_name}.ctypes_types import *  # noqa: F403,H303
-import ${module_name}.python_types
+from ${module_name}.visatype import *  # noqa: F403,H303
 
 
 class Library(object):
@@ -44,9 +43,9 @@ class Library(object):
     f = functions[func_name]
     c_func_name = c_function_prefix + func_name
     params = f['parameters']
-    param_names_method = helper.get_params_snippet(f, helper.ParamListType.LIBRARY_METHOD_DECLARATION)
-    param_names_library = helper.get_params_snippet(f, helper.ParamListType.CTYPES_CALL)
-    param_ctypes_library = helper.get_params_snippet(f, helper.ParamListType.CTYPES_ARGTYPES, {'session_name': config['session_handle_parameter_name']})
+    param_names_method = helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_DECLARATION)
+    param_names_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.CTYPES_CALL)
+    param_ctypes_library = helper.get_params_snippet(f, helper.ParameterUsageOptions.CTYPES_ARGTYPES)
 %>\
 
     def ${c_func_name}(${param_names_method}):  # noqa: N802
@@ -54,6 +53,6 @@ class Library(object):
             if self.${c_func_name}_cfunc is None:
                 self.${c_func_name}_cfunc = self._library.${c_func_name}
                 self.${c_func_name}_cfunc.argtypes = [${param_ctypes_library}]  # noqa: F405
-                self.${c_func_name}_cfunc.restype = ${module_name}.python_types.${f['returns_python']}
+                self.${c_func_name}_cfunc.restype = ${f['returns']}  # noqa: F405
         return self.${c_func_name}_cfunc(${param_names_library})
 % endfor

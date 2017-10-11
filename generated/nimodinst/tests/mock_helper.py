@@ -1,10 +1,5 @@
 # This file was generated
 
-import ctypes
-
-import nimodinst.ctypes_types
-import nimodinst.python_types
-
 
 class MockFunctionCallError(Exception):
     def __init__(self, function, param=None):
@@ -53,8 +48,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niModInst_GetExtendedErrorInfo", param='errorInfo')
         if error_info_buffer_size == 0:
             return len(self._defaults['GetExtendedErrorInfo']['errorInfo'])
-        t = nimodinst.ctypes_types.ViString_ctype(self._defaults['GetExtendedErrorInfo']['errorInfo'].encode('ascii'))
-        error_info.value = ctypes.cast(t, nimodinst.ctypes_types.ViString_ctype).value
+        error_info.value = self._defaults['GetExtendedErrorInfo']['errorInfo'].encode('ascii')
         return self._defaults['GetExtendedErrorInfo']['return']
 
     def niModInst_GetInstalledDeviceAttributeViInt32(self, handle, index, attribute_id, attribute_value):  # noqa: N802
@@ -72,8 +66,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViString", param='attributeValue')
         if attribute_value_buffer_size == 0:
             return len(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'])
-        t = nimodinst.ctypes_types.ViString_ctype(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nimodinst.ctypes_types.ViString_ctype).value
+        attribute_value.value = self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetInstalledDeviceAttributeViString']['return']
 
     def niModInst_OpenInstalledDevicesSession(self, driver, handle, device_count):  # noqa: N802
@@ -90,12 +83,12 @@ class SideEffectsHelper(object):
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niModInst_CloseInstalledDevicesSession.side_effect = MockFunctionCallError("niModInst_CloseInstalledDevicesSession")
-        mock_library.niModInst_CloseInstalledDevicesSession.return_value = nimodinst.python_types.ViStatus(0)
+        mock_library.niModInst_CloseInstalledDevicesSession.return_value = 0
         mock_library.niModInst_GetExtendedErrorInfo.side_effect = MockFunctionCallError("niModInst_GetExtendedErrorInfo")
-        mock_library.niModInst_GetExtendedErrorInfo.return_value = nimodinst.python_types.ViStatus(0)
+        mock_library.niModInst_GetExtendedErrorInfo.return_value = 0
         mock_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViInt32")
-        mock_library.niModInst_GetInstalledDeviceAttributeViInt32.return_value = nimodinst.python_types.ViStatus(0)
+        mock_library.niModInst_GetInstalledDeviceAttributeViInt32.return_value = 0
         mock_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViString")
-        mock_library.niModInst_GetInstalledDeviceAttributeViString.return_value = nimodinst.python_types.ViStatus(0)
+        mock_library.niModInst_GetInstalledDeviceAttributeViString.return_value = 0
         mock_library.niModInst_OpenInstalledDevicesSession.side_effect = MockFunctionCallError("niModInst_OpenInstalledDevicesSession")
-        mock_library.niModInst_OpenInstalledDevicesSession.return_value = nimodinst.python_types.ViStatus(0)
+        mock_library.niModInst_OpenInstalledDevicesSession.return_value = 0

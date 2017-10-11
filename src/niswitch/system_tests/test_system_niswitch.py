@@ -119,12 +119,6 @@ def test_functions_get_channel_name(session):
     assert channel_name == 'r0'
 
 
-def test_functions_revision_query(session):
-    string1, string2 = session.revision_query()
-    assert string1.find('Driver: NI-SWITCH for SwitchCA4 Device Support') != -1
-    assert string2 == 'No revision information available'
-
-
 def test_functions_self_test(session):
     self_test_result, self_test_string = session.self_test()
     assert self_test_result == 0
@@ -141,11 +135,6 @@ def test_functions_get_path(session):
     session.set_path(path)
 
 
-def test_functions_get_error_description(session):
-    description = session.get_error_description(0)   # expect no errors
-    assert description == ''
-
-
 def test_functions_connect_disconnect_multiple(session):
     session.connect_multiple('c0->r0, c0->r1')   # expect no errors
     session.disconnect_multiple('c0->r0, c0->r1')   # expect no errors
@@ -157,3 +146,10 @@ def test_functions_disable(session):
     session.connect(channel1, channel2)
     session.disable()   # expect no errors
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
+
+
+def test_error_message(session):
+    # Calling the private function directly, as _get_error_message() only gets called when you have an invalid session,
+    # and there is no good way for us to invalidate a simulated session.
+    message = session._error_message(-1074135027)
+    assert message == 'IVI:  (Hex 0xBFFA000D) Attribute is read-only.'

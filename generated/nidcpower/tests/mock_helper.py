@@ -1,10 +1,5 @@
 # This file was generated
 
-import ctypes
-
-import nidcpower.ctypes_types
-import nidcpower.python_types
-
 
 class MockFunctionCallError(Exception):
     def __init__(self, function, param=None):
@@ -66,6 +61,9 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['attributeValue'] = None
+        self._defaults['GetChannelName'] = {}
+        self._defaults['GetChannelName']['return'] = 0
+        self._defaults['GetChannelName']['channelName'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['Code'] = None
@@ -132,12 +130,11 @@ class SideEffectsHelper(object):
         self._defaults['WaitForEvent']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
+        self._defaults['error_message'] = {}
+        self._defaults['error_message']['return'] = 0
+        self._defaults['error_message']['errorMessage'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
-        self._defaults['revision_query'] = {}
-        self._defaults['revision_query']['return'] = 0
-        self._defaults['revision_query']['instrumentDriverRevision'] = None
-        self._defaults['revision_query']['firmwareRevision'] = None
         self._defaults['self_test'] = {}
         self._defaults['self_test']['return'] = 0
         self._defaults['self_test']['selfTestResult'] = None
@@ -219,13 +216,28 @@ class SideEffectsHelper(object):
             return self._defaults['FetchMultiple']['return']
         if self._defaults['FetchMultiple']['voltageMeasurements'] is None:
             raise MockFunctionCallError("niDCPower_FetchMultiple", param='voltageMeasurements')
-        voltage_measurements.contents.value = self._defaults['FetchMultiple']['voltageMeasurements']
+        a = self._defaults['FetchMultiple']['voltageMeasurements']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(voltage_measurements), len(a))):
+            voltage_measurements[i] = a[i]
         if self._defaults['FetchMultiple']['currentMeasurements'] is None:
             raise MockFunctionCallError("niDCPower_FetchMultiple", param='currentMeasurements')
-        current_measurements.contents.value = self._defaults['FetchMultiple']['currentMeasurements']
+        a = self._defaults['FetchMultiple']['currentMeasurements']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(current_measurements), len(a))):
+            current_measurements[i] = a[i]
         if self._defaults['FetchMultiple']['inCompliance'] is None:
             raise MockFunctionCallError("niDCPower_FetchMultiple", param='inCompliance')
-        in_compliance.contents.value = self._defaults['FetchMultiple']['inCompliance']
+        a = self._defaults['FetchMultiple']['inCompliance']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(in_compliance), len(a))):
+            in_compliance[i] = a[i]
         if self._defaults['FetchMultiple']['actualCount'] is None:
             raise MockFunctionCallError("niDCPower_FetchMultiple", param='actualCount')
         actual_count.contents.value = self._defaults['FetchMultiple']['actualCount']
@@ -270,9 +282,18 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetAttributeViString", param='attributeValue')
         if buffer_size == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
-        t = nidcpower.ctypes_types.ViString_ctype(self._defaults['GetAttributeViString']['attributeValue'].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nidcpower.ctypes_types.ViString_ctype).value
+        attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
+
+    def niDCPower_GetChannelName(self, vi, index, buffer_size, channel_name):  # noqa: N802
+        if self._defaults['GetChannelName']['return'] != 0:
+            return self._defaults['GetChannelName']['return']
+        if self._defaults['GetChannelName']['channelName'] is None:
+            raise MockFunctionCallError("niDCPower_GetChannelName", param='channelName')
+        if buffer_size == 0:
+            return len(self._defaults['GetChannelName']['channelName'])
+        channel_name.value = self._defaults['GetChannelName']['channelName'].encode('ascii')
+        return self._defaults['GetChannelName']['return']
 
     def niDCPower_GetError(self, vi, code, buffer_size, description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
@@ -284,8 +305,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetError", param='Description')
         if buffer_size == 0:
             return len(self._defaults['GetError']['Description'])
-        t = nidcpower.ctypes_types.ViString_ctype(self._defaults['GetError']['Description'].encode('ascii'))
-        description.value = ctypes.cast(t, nidcpower.ctypes_types.ViString_ctype).value
+        description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niDCPower_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
@@ -342,10 +362,20 @@ class SideEffectsHelper(object):
             return self._defaults['MeasureMultiple']['return']
         if self._defaults['MeasureMultiple']['voltageMeasurements'] is None:
             raise MockFunctionCallError("niDCPower_MeasureMultiple", param='voltageMeasurements')
-        voltage_measurements.contents.value = self._defaults['MeasureMultiple']['voltageMeasurements']
+        a = self._defaults['MeasureMultiple']['voltageMeasurements']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(voltage_measurements), len(a))):
+            voltage_measurements[i] = a[i]
         if self._defaults['MeasureMultiple']['currentMeasurements'] is None:
             raise MockFunctionCallError("niDCPower_MeasureMultiple", param='currentMeasurements')
-        current_measurements.contents.value = self._defaults['MeasureMultiple']['currentMeasurements']
+        a = self._defaults['MeasureMultiple']['currentMeasurements']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(current_measurements), len(a))):
+            current_measurements[i] = a[i]
         return self._defaults['MeasureMultiple']['return']
 
     def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
@@ -451,21 +481,23 @@ class SideEffectsHelper(object):
             return self._defaults['close']['return']
         return self._defaults['close']['return']
 
+    def niDCPower_error_message(self, vi, error_code, error_message):  # noqa: N802
+        if self._defaults['error_message']['return'] != 0:
+            return self._defaults['error_message']['return']
+        if self._defaults['error_message']['errorMessage'] is None:
+            raise MockFunctionCallError("niDCPower_error_message", param='errorMessage')
+        a = self._defaults['error_message']['errorMessage']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(error_message), len(a))):
+            error_message[i] = a[i]
+        return self._defaults['error_message']['return']
+
     def niDCPower_reset(self, vi):  # noqa: N802
         if self._defaults['reset']['return'] != 0:
             return self._defaults['reset']['return']
         return self._defaults['reset']['return']
-
-    def niDCPower_revision_query(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
-        if self._defaults['revision_query']['return'] != 0:
-            return self._defaults['revision_query']['return']
-        if self._defaults['revision_query']['instrumentDriverRevision'] is None:
-            raise MockFunctionCallError("niDCPower_revision_query", param='instrumentDriverRevision')
-        instrument_driver_revision.contents.value = self._defaults['revision_query']['instrumentDriverRevision']
-        if self._defaults['revision_query']['firmwareRevision'] is None:
-            raise MockFunctionCallError("niDCPower_revision_query", param='firmwareRevision')
-        firmware_revision.contents.value = self._defaults['revision_query']['firmwareRevision']
-        return self._defaults['revision_query']['return']
 
     def niDCPower_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
         if self._defaults['self_test']['return'] != 0:
@@ -475,100 +507,107 @@ class SideEffectsHelper(object):
         self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niDCPower_self_test", param='selfTestMessage')
-        self_test_message.contents.value = self._defaults['self_test']['selfTestMessage']
+        a = self._defaults['self_test']['selfTestMessage']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(self_test_message), len(a))):
+            self_test_message[i] = a[i]
         return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niDCPower_Abort.side_effect = MockFunctionCallError("niDCPower_Abort")
-        mock_library.niDCPower_Abort.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_Abort.return_value = 0
         mock_library.niDCPower_Commit.side_effect = MockFunctionCallError("niDCPower_Commit")
-        mock_library.niDCPower_Commit.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_Commit.return_value = 0
         mock_library.niDCPower_ConfigureApertureTime.side_effect = MockFunctionCallError("niDCPower_ConfigureApertureTime")
-        mock_library.niDCPower_ConfigureApertureTime.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_ConfigureApertureTime.return_value = 0
         mock_library.niDCPower_ConfigureDigitalEdgeMeasureTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgeMeasureTrigger")
-        mock_library.niDCPower_ConfigureDigitalEdgeMeasureTrigger.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_ConfigureDigitalEdgeMeasureTrigger.return_value = 0
         mock_library.niDCPower_ConfigureDigitalEdgePulseTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgePulseTrigger")
-        mock_library.niDCPower_ConfigureDigitalEdgePulseTrigger.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_ConfigureDigitalEdgePulseTrigger.return_value = 0
         mock_library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger")
-        mock_library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger.return_value = 0
         mock_library.niDCPower_ConfigureDigitalEdgeSourceTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgeSourceTrigger")
-        mock_library.niDCPower_ConfigureDigitalEdgeSourceTrigger.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_ConfigureDigitalEdgeSourceTrigger.return_value = 0
         mock_library.niDCPower_ConfigureDigitalEdgeStartTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgeStartTrigger")
-        mock_library.niDCPower_ConfigureDigitalEdgeStartTrigger.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_ConfigureDigitalEdgeStartTrigger.return_value = 0
         mock_library.niDCPower_CreateAdvancedSequence.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequence")
-        mock_library.niDCPower_CreateAdvancedSequence.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_CreateAdvancedSequence.return_value = 0
         mock_library.niDCPower_CreateAdvancedSequenceStep.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceStep")
-        mock_library.niDCPower_CreateAdvancedSequenceStep.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_CreateAdvancedSequenceStep.return_value = 0
         mock_library.niDCPower_DeleteAdvancedSequence.side_effect = MockFunctionCallError("niDCPower_DeleteAdvancedSequence")
-        mock_library.niDCPower_DeleteAdvancedSequence.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_DeleteAdvancedSequence.return_value = 0
         mock_library.niDCPower_Disable.side_effect = MockFunctionCallError("niDCPower_Disable")
-        mock_library.niDCPower_Disable.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_Disable.return_value = 0
         mock_library.niDCPower_ExportSignal.side_effect = MockFunctionCallError("niDCPower_ExportSignal")
-        mock_library.niDCPower_ExportSignal.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_ExportSignal.return_value = 0
         mock_library.niDCPower_FetchMultiple.side_effect = MockFunctionCallError("niDCPower_FetchMultiple")
-        mock_library.niDCPower_FetchMultiple.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_FetchMultiple.return_value = 0
         mock_library.niDCPower_GetAttributeViBoolean.side_effect = MockFunctionCallError("niDCPower_GetAttributeViBoolean")
-        mock_library.niDCPower_GetAttributeViBoolean.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_GetAttributeViBoolean.return_value = 0
         mock_library.niDCPower_GetAttributeViInt32.side_effect = MockFunctionCallError("niDCPower_GetAttributeViInt32")
-        mock_library.niDCPower_GetAttributeViInt32.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_GetAttributeViInt32.return_value = 0
         mock_library.niDCPower_GetAttributeViInt64.side_effect = MockFunctionCallError("niDCPower_GetAttributeViInt64")
-        mock_library.niDCPower_GetAttributeViInt64.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_GetAttributeViInt64.return_value = 0
         mock_library.niDCPower_GetAttributeViReal64.side_effect = MockFunctionCallError("niDCPower_GetAttributeViReal64")
-        mock_library.niDCPower_GetAttributeViReal64.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_GetAttributeViReal64.return_value = 0
         mock_library.niDCPower_GetAttributeViString.side_effect = MockFunctionCallError("niDCPower_GetAttributeViString")
-        mock_library.niDCPower_GetAttributeViString.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_GetAttributeViString.return_value = 0
+        mock_library.niDCPower_GetChannelName.side_effect = MockFunctionCallError("niDCPower_GetChannelName")
+        mock_library.niDCPower_GetChannelName.return_value = 0
         mock_library.niDCPower_GetError.side_effect = MockFunctionCallError("niDCPower_GetError")
-        mock_library.niDCPower_GetError.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_GetError.return_value = 0
         mock_library.niDCPower_GetSelfCalLastDateAndTime.side_effect = MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime")
-        mock_library.niDCPower_GetSelfCalLastDateAndTime.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_GetSelfCalLastDateAndTime.return_value = 0
         mock_library.niDCPower_GetSelfCalLastTemp.side_effect = MockFunctionCallError("niDCPower_GetSelfCalLastTemp")
-        mock_library.niDCPower_GetSelfCalLastTemp.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_GetSelfCalLastTemp.return_value = 0
         mock_library.niDCPower_InitializeWithChannels.side_effect = MockFunctionCallError("niDCPower_InitializeWithChannels")
-        mock_library.niDCPower_InitializeWithChannels.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_InitializeWithChannels.return_value = 0
         mock_library.niDCPower_Initiate.side_effect = MockFunctionCallError("niDCPower_Initiate")
-        mock_library.niDCPower_Initiate.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_Initiate.return_value = 0
         mock_library.niDCPower_Measure.side_effect = MockFunctionCallError("niDCPower_Measure")
-        mock_library.niDCPower_Measure.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_Measure.return_value = 0
         mock_library.niDCPower_MeasureMultiple.side_effect = MockFunctionCallError("niDCPower_MeasureMultiple")
-        mock_library.niDCPower_MeasureMultiple.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_MeasureMultiple.return_value = 0
         mock_library.niDCPower_QueryInCompliance.side_effect = MockFunctionCallError("niDCPower_QueryInCompliance")
-        mock_library.niDCPower_QueryInCompliance.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_QueryInCompliance.return_value = 0
         mock_library.niDCPower_QueryMaxCurrentLimit.side_effect = MockFunctionCallError("niDCPower_QueryMaxCurrentLimit")
-        mock_library.niDCPower_QueryMaxCurrentLimit.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_QueryMaxCurrentLimit.return_value = 0
         mock_library.niDCPower_QueryMaxVoltageLevel.side_effect = MockFunctionCallError("niDCPower_QueryMaxVoltageLevel")
-        mock_library.niDCPower_QueryMaxVoltageLevel.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_QueryMaxVoltageLevel.return_value = 0
         mock_library.niDCPower_QueryMinCurrentLimit.side_effect = MockFunctionCallError("niDCPower_QueryMinCurrentLimit")
-        mock_library.niDCPower_QueryMinCurrentLimit.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_QueryMinCurrentLimit.return_value = 0
         mock_library.niDCPower_QueryOutputState.side_effect = MockFunctionCallError("niDCPower_QueryOutputState")
-        mock_library.niDCPower_QueryOutputState.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_QueryOutputState.return_value = 0
         mock_library.niDCPower_ReadCurrentTemperature.side_effect = MockFunctionCallError("niDCPower_ReadCurrentTemperature")
-        mock_library.niDCPower_ReadCurrentTemperature.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_ReadCurrentTemperature.return_value = 0
         mock_library.niDCPower_ResetDevice.side_effect = MockFunctionCallError("niDCPower_ResetDevice")
-        mock_library.niDCPower_ResetDevice.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_ResetDevice.return_value = 0
         mock_library.niDCPower_ResetWithDefaults.side_effect = MockFunctionCallError("niDCPower_ResetWithDefaults")
-        mock_library.niDCPower_ResetWithDefaults.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_ResetWithDefaults.return_value = 0
         mock_library.niDCPower_SendSoftwareEdgeTrigger.side_effect = MockFunctionCallError("niDCPower_SendSoftwareEdgeTrigger")
-        mock_library.niDCPower_SendSoftwareEdgeTrigger.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_SendSoftwareEdgeTrigger.return_value = 0
         mock_library.niDCPower_SetAttributeViBoolean.side_effect = MockFunctionCallError("niDCPower_SetAttributeViBoolean")
-        mock_library.niDCPower_SetAttributeViBoolean.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_SetAttributeViBoolean.return_value = 0
         mock_library.niDCPower_SetAttributeViInt32.side_effect = MockFunctionCallError("niDCPower_SetAttributeViInt32")
-        mock_library.niDCPower_SetAttributeViInt32.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_SetAttributeViInt32.return_value = 0
         mock_library.niDCPower_SetAttributeViInt64.side_effect = MockFunctionCallError("niDCPower_SetAttributeViInt64")
-        mock_library.niDCPower_SetAttributeViInt64.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_SetAttributeViInt64.return_value = 0
         mock_library.niDCPower_SetAttributeViReal64.side_effect = MockFunctionCallError("niDCPower_SetAttributeViReal64")
-        mock_library.niDCPower_SetAttributeViReal64.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_SetAttributeViReal64.return_value = 0
         mock_library.niDCPower_SetAttributeViString.side_effect = MockFunctionCallError("niDCPower_SetAttributeViString")
-        mock_library.niDCPower_SetAttributeViString.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_SetAttributeViString.return_value = 0
         mock_library.niDCPower_SetSequence.side_effect = MockFunctionCallError("niDCPower_SetSequence")
-        mock_library.niDCPower_SetSequence.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_SetSequence.return_value = 0
         mock_library.niDCPower_WaitForEvent.side_effect = MockFunctionCallError("niDCPower_WaitForEvent")
-        mock_library.niDCPower_WaitForEvent.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_WaitForEvent.return_value = 0
         mock_library.niDCPower_close.side_effect = MockFunctionCallError("niDCPower_close")
-        mock_library.niDCPower_close.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_close.return_value = 0
+        mock_library.niDCPower_error_message.side_effect = MockFunctionCallError("niDCPower_error_message")
+        mock_library.niDCPower_error_message.return_value = 0
         mock_library.niDCPower_reset.side_effect = MockFunctionCallError("niDCPower_reset")
-        mock_library.niDCPower_reset.return_value = nidcpower.python_types.ViStatus(0)
-        mock_library.niDCPower_revision_query.side_effect = MockFunctionCallError("niDCPower_revision_query")
-        mock_library.niDCPower_revision_query.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_reset.return_value = 0
         mock_library.niDCPower_self_test.side_effect = MockFunctionCallError("niDCPower_self_test")
-        mock_library.niDCPower_self_test.return_value = nidcpower.python_types.ViStatus(0)
+        mock_library.niDCPower_self_test.return_value = 0

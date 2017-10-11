@@ -5,31 +5,26 @@ nidcpower.Session methods
 
 .. function:: commit()
 
-    Vistatus :py:func:`nidcpower.commit`(ViSession vi);
-
     Applies previously configured settings to the device. Calling this
     function moves the NI-DCPower session from the Uncommitted state into
     the Committed state. After calling this function, modifying any
     attribute reverts the NI-DCPower session to the Uncommitted state. Use
-    the
-    `:py:func:`nidcpower._initiate` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
-    function to transition to the Running state. Refer to the `Programming
-    States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-    topic in the *NI DC Power Supplies and SMUs Help* for details about the
-    specific NI-DCPower software states.
+    the :py:func:`nidcpower._initiate` function to transition to the Running state.
+    Refer to the `Programming
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+    the *NI DC Power Supplies and SMUs Help* for details about the specific
+    NI-DCPower software states.
 
     **Related Topics:**
 
     `Programming
-    States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
     
 
 
-.. function:: configure_aperture_time(aperture_time, units)
 
-    Vistatus :py:func:`nidcpower.configure_aperture_time`(ViSession vi, ViConstString
-    channelName, ViReal64 apertureTime, ViInt32 units);
+.. function:: configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
     Configures the aperture time on the specified channel(s).
 
@@ -45,32 +40,26 @@ nidcpower.Session methods
 
     **Related Topics:**
 
-    `Aperture
-    Time <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/aperture/>`__
+    `Aperture Time <REPLACE_DRIVER_SPECIFIC_URL_1(aperture)>`__
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
 
-        Specifies the output channel(s) to which this configuration value
-        applies. Specify multiple channels by using a channel list or a channel
-        range. A channel list is a comma (,) separated sequence of channel names
-        (for example, 0,2 specifies channels 0 and 2). A channel range is a
-        lower bound channel followed by a hyphen (-) or colon (:) followed by an
-        upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-        In the Running state, multiple output channel configurations are
-        performed sequentially based on the order specified in this parameter.
-
-        
-
-    :type channel_name: int
     :param aperture_time:
 
 
@@ -78,6 +67,7 @@ nidcpower.Session methods
         device in the *NI DC Power Supplies and SMUs Help* for more information.
 
         
+
 
     :type aperture_time: float
     :param units:
@@ -92,12 +82,10 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_POWER\_LINE\_CYCLES (1029) | Specifies Power Line Cycles. |
         +--------------------------------------------+------------------------------+
 
-    :type units: int
 
-.. function:: configure_digital_edge_measure_trigger(input_terminal, edge)
+    :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
-    Vistatus :py:func:`nidcpower.configure_digital_edge_measure_trigger`(ViSession vi,
-    ViConstString inputTerminal, ViInt32 edge);
+.. function:: configure_digital_edge_measure_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Measure trigger for digital edge triggering.
 
@@ -105,8 +93,9 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param input_terminal:
@@ -129,7 +118,8 @@ nidcpower.Session methods
 
         
 
-    :type input_terminal: int
+
+    :type input_terminal: string
     :param edge:
 
 
@@ -143,12 +133,10 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
-    :type edge: int
 
-.. function:: configure_digital_edge_pulse_trigger(input_terminal, edge)
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-    Vistatus :py:func:`nidcpower.configure_digital_edge_pulse_trigger`(ViSession vi,
-    ViConstString inputTerminal, ViInt32 edge);
+.. function:: configure_digital_edge_pulse_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Pulse trigger for digital edge triggering.
 
@@ -156,8 +144,9 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param input_terminal:
@@ -180,7 +169,8 @@ nidcpower.Session methods
 
         
 
-    :type input_terminal: int
+
+    :type input_terminal: string
     :param edge:
 
 
@@ -194,12 +184,10 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
-    :type edge: int
 
-.. function:: configure_digital_edge_sequence_advance_trigger(input_terminal, edge)
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-    Vistatus :py:func:`nidcpower.configure_digital_edge_sequence_advance_trigger`(ViSession
-    vi, ViConstString inputTerminal, ViInt32 edge);
+.. function:: configure_digital_edge_sequence_advance_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Sequence Advance trigger for digital edge triggering.
 
@@ -207,8 +195,9 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param input_terminal:
@@ -232,7 +221,8 @@ nidcpower.Session methods
 
         
 
-    :type input_terminal: int
+
+    :type input_terminal: string
     :param edge:
 
 
@@ -246,12 +236,10 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
-    :type edge: int
 
-.. function:: configure_digital_edge_source_trigger(input_terminal, edge)
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-    Vistatus :py:func:`nidcpower.configure_digital_edge_source_trigger`(ViSession vi,
-    ViConstString inputTerminal, ViInt32 edge);
+.. function:: configure_digital_edge_source_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Source trigger for digital edge triggering.
 
@@ -259,8 +247,9 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param input_terminal:
@@ -283,7 +272,8 @@ nidcpower.Session methods
 
         
 
-    :type input_terminal: int
+
+    :type input_terminal: string
     :param edge:
 
 
@@ -297,12 +287,10 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
-    :type edge: int
 
-.. function:: configure_digital_edge_start_trigger(input_terminal, edge)
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-    Vistatus :py:func:`nidcpower.configure_digital_edge_start_trigger`(ViSession vi,
-    ViConstString inputTerminal, ViInt32 edge);
+.. function:: configure_digital_edge_start_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
 
     Configures the Start trigger for digital edge triggering.
 
@@ -310,8 +298,9 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param input_terminal:
@@ -334,7 +323,8 @@ nidcpower.Session methods
 
         
 
-    :type input_terminal: int
+
+    :type input_terminal: string
     :param edge:
 
 
@@ -348,13 +338,10 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
-    :type edge: int
 
-.. function:: create_advanced_sequence(sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence)
+    :type edge: :py:data:`nidcpower.DigitalEdge`
 
-    Vistatus :py:func:`nidcpower.create_advanced_sequence`(ViSession vi, ViConstString
-    sequenceName, ViInt32 attributeIDCount,ViInt32 attributeIDs[], viBoolean
-    setAsActiveSequence);
+.. function:: create_advanced_sequence(sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence=True)
 
     Creates an empty advanced sequence. Call the
     :py:func:`nidcpower.create_advanced_sequence_step` function to add steps to the
@@ -369,26 +356,27 @@ nidcpower.Session methods
 
     Use this function in the Uncommitted or Committed programming states.
     Refer to the `Programming
-    States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-    topic in the *NI DC Power Supplies and SMUs Help* for more information
-    about NI-DCPower programming states.
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+    the *NI DC Power Supplies and SMUs Help* for more information about
+    NI-DCPower programming states.
 
     **Related Topics**:
 
     `Advanced Sequence
-    Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/advancedsequencemode/>`__
+    Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
     `Programming
-    States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-    `:py:func:`nidcpower.create_advanced_sequence_step` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_CreateAdvancedSequenceStep.html')>`__
+    :py:func:`nidcpower.create_advanced_sequence_step`
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param sequence_name:
@@ -398,13 +386,15 @@ nidcpower.Session methods
 
         
 
-    :type sequence_name: str
+
+    :type sequence_name: string
     :param attribute_id_count:
 
 
         Specifies the number of attributes in the attributeIDs array.
 
         
+
 
     :type attribute_id_count: int
     :param attribute_ids:
@@ -417,91 +407,92 @@ nidcpower.Session methods
         in advanced sequencing. An ✕ indicates that the attribute cannot be
         configured in advanced sequencing.
 
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | Attribute                                                                                                                                                                                               | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
-        +=========================================================================================================================================================================================================+===========+=========+=========+=========+=========+===================+===================+================+
-        | `:py:data:`nidcpower.DC\_NOISE\_REJECTION` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_DC_NOISE_REJECTION.html')>`__                         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.APERTURE\_TIME` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_APERTURE_TIME.html')>`__                                    | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.MEASURE\_RECORD\_LENGTH` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_MEASURE_RECORD_LENGTH.html')>`__                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.sense` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_SENSE.html')>`__                                                     | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.OVP\_ENABLED` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OVP_ENABLED.html')>`__                                        | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.OVP\_LIMIT` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OVP_LIMIT.html')>`__                                            | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_BIAS\_DELAY` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_DELAY.html')>`__                             | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_OFF\_TIME` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_OFF_TIME.html')>`__                                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_ON\_TIME` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_ON_TIME.html')>`__                                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.SOURCE\_DELAY` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_SOURCE_DELAY.html')>`__                                      | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.CURRENT\_COMPENSATION\_FREQUENCY` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_COMPENSATION_FREQUENCY.html')>`__ | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.CURRENT\_GAIN\_BANDWIDTH` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_GAIN_BANDWIDTH.html')>`__                 | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.CURRENT\_POLE\_ZERO\_RATIO` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_POLE_ZERO_RATIO.html')>`__              | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.VOLTAGE\_COMPENSATION\_FREQUENCY` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_COMPENSATION_FREQUENCY.html')>`__ | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.VOLTAGE\_GAIN\_BANDWIDTH` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_GAIN_BANDWIDTH.html')>`__                 | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.VOLTAGE\_POLE\_ZERO\_RATIO` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_POLE_ZERO_RATIO.html')>`__              | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.CURRENT\_LEVEL` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_LEVEL.html')>`__                                    | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.CURRENT\_LEVEL\_RANGE` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.VOLTAGE\_LIMIT` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_LIMIT.html')>`__                                    | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.VOLTAGE\_LIMIT\_RANGE` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.CURRENT\_LIMIT` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_LIMIT.html')>`__                                    | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.CURRENT\_LIMIT\_RANGE` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.VOLTAGE\_LEVEL` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_LEVEL.html')>`__                                    | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.VOLTAGE\_LEVEL\_RANGE` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.OUTPUT\_ENABLED` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OUTPUT_ENABLED.html')>`__                                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.OUTPUT\_FUNCTION` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OUTPUT_FUNCTION.html')>`__                                | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.OUTPUT\_RESISTANCE` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OUTPUT_RESISTANCE.html')>`__                            | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_BIAS\_CURRENT\_LEVEL` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LEVEL.html')>`__            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_BIAS\_VOLTAGE\_LIMIT` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT.html')>`__            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_CURRENT\_LEVEL` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_CURRENT\_LEVEL\_RANGE` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL_RANGE.html')>`__          | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_VOLTAGE\_LIMIT` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_VOLTAGE\_LIMIT\_RANGE` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE.html')>`__          | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_BIAS\_CURRENT\_LIMIT` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT.html')>`__            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_BIAS\_VOLTAGE\_LEVEL` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LEVEL.html')>`__            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_CURRENT\_LIMIT` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_CURRENT\_LIMIT\_RANGE` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE.html')>`__          | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_VOLTAGE\_LEVEL` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_VOLTAGE_LEVEL.html')>`__                       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.PULSE\_VOLTAGE\_LEVEL\_RANGE` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_PULSE_VOLTAGE_LEVEL_RANGE.html')>`__          | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-        | `:py:data:`nidcpower.TRANSIENT\_RESPONSE` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_TRANSIENT_RESPONSE.html')>`__                          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | Attribute                                             | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
+        +=======================================================+===========+=========+=========+=========+=========+===================+===================+================+
+        | :py:data:`nidcpower.DC\_NOISE\_REJECTION`             | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.APERTURE\_TIME`                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.MEASURE\_RECORD\_LENGTH`          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.sense`                            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.OVP\_ENABLED`                     | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.OVP\_LIMIT`                       | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_BIAS\_DELAY`               | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_OFF\_TIME`                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_ON\_TIME`                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.SOURCE\_DELAY`                    | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.CURRENT\_COMPENSATION\_FREQUENCY` | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.CURRENT\_GAIN\_BANDWIDTH`         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.CURRENT\_POLE\_ZERO\_RATIO`       | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.VOLTAGE\_COMPENSATION\_FREQUENCY` | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.VOLTAGE\_GAIN\_BANDWIDTH`         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.VOLTAGE\_POLE\_ZERO\_RATIO`       | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.CURRENT\_LEVEL`                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.CURRENT\_LEVEL\_RANGE`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.VOLTAGE\_LIMIT`                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.VOLTAGE\_LIMIT\_RANGE`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.CURRENT\_LIMIT`                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.CURRENT\_LIMIT\_RANGE`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.VOLTAGE\_LEVEL`                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.VOLTAGE\_LEVEL\_RANGE`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.OUTPUT\_ENABLED`                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.OUTPUT\_FUNCTION`                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.OUTPUT\_RESISTANCE`               | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_BIAS\_CURRENT\_LEVEL`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_BIAS\_VOLTAGE\_LIMIT`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_CURRENT\_LEVEL`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_CURRENT\_LEVEL\_RANGE`     | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_VOLTAGE\_LIMIT`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_VOLTAGE\_LIMIT\_RANGE`     | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_BIAS\_CURRENT\_LIMIT`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_BIAS\_VOLTAGE\_LEVEL`      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_CURRENT\_LIMIT`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_CURRENT\_LIMIT\_RANGE`     | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_VOLTAGE\_LEVEL`            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.PULSE\_VOLTAGE\_LEVEL\_RANGE`     | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+        | :py:data:`nidcpower.TRANSIENT\_RESPONSE`              | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
+        +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
 
-    :type attribute_ids: int
+
+    :type attribute_ids: list of int
     :param set_as_active_sequence:
 
 
@@ -509,12 +500,10 @@ nidcpower.Session methods
 
         
 
+
     :type set_as_active_sequence: bool
 
-.. function:: create_advanced_sequence_step(set_as_active_step)
-
-    Vistatus :py:func:`nidcpower.create_advanced_sequence_step`(ViSession vi, viBoolean
-    setAsActiveSequenceStep);
+.. function:: create_advanced_sequence_step(set_as_active_step=True)
 
     Creates a new advanced sequence step in the advanced sequence specified
     by the Active advanced sequence. When you create an advanced sequence
@@ -532,19 +521,20 @@ nidcpower.Session methods
     **Related Topics**:
 
     `Advanced Sequence
-    Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/advancedsequencemode/>`__
+    Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
     `Programming
-    States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-    `:py:func:`nidcpower.create_advanced_sequence` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_CreateAdvancedSequence.html')>`__
+    :py:func:`nidcpower.create_advanced_sequence`
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param set_as_active_step:
@@ -554,12 +544,10 @@ nidcpower.Session methods
 
         
 
+
     :type set_as_active_step: bool
 
 .. function:: delete_advanced_sequence(sequence_name)
-
-    Vistatus :py:func:`nidcpower.delete_advanced_sequence`(ViSession vi, viConstString
-    sequenceName);
 
     Deletes a previously created advanced sequence and all the advanced
     sequence steps in the advanced sequence.
@@ -574,17 +562,18 @@ nidcpower.Session methods
     **Related Topics**:
 
     `Advanced Sequence
-    Mode <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/advancedsequencemode/>`__
+    Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
 
     `Programming
-    States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param sequence_name:
@@ -594,17 +583,14 @@ nidcpower.Session methods
 
         
 
-    :type sequence_name: str
+
+    :type sequence_name: string
 
 .. function:: disable()
 
-    Vistatus :py:func:`nidcpower.disable`(ViSession vi);
-
-    This function performs the same actions as the
-    `:py:func:`nidcpower.reset` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
+    This function performs the same actions as the :py:func:`nidcpower.reset`
     function, except that this function also immediately sets the
-    `:py:data:`nidcpower.OUTPUT\_ENABLED` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_OUTPUT_ENABLED.html')>`__
-    attribute to VI\_FALSE.
+    :py:data:`nidcpower.OUTPUT\_ENABLED` attribute to VI\_FALSE.
 
     This function opens the output relay on devices that have an output
     relay.
@@ -612,25 +598,23 @@ nidcpower.Session methods
     
 
 
-.. function:: export_signal(signal, signal_identifier, output_terminal)
 
-    Vistatus :py:func:`nidcpower.export_signal`(ViSession vi, ViInt32 signal,
-    ViConstString signalIdentifier, ViConstString outputTerminal);
+.. function:: export_signal(signal, output_terminal, signal_identifier='')
 
     Routes signals (triggers and events) to the output terminal you specify.
-    The route is created when the session is
-    `committed <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Commit.html')>`__.
+    The route is created when the session is :py:func:`nidcpower.commit`.
 
     **Related Topics:**
 
-    `Triggers <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
+    `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param signal:
@@ -663,6 +647,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_PULSE\_TRIGGER (1053)                       | Exports the Pulse trigger.                     |
         +-------------------------------------------------------------+------------------------------------------------+
 
+
     :type signal: int
     :param signal_identifier:
 
@@ -671,7 +656,8 @@ nidcpower.Session methods
 
         
 
-    :type signal_identifier: int
+
+    :type signal_identifier: string
     :param output_terminal:
 
 
@@ -698,54 +684,42 @@ nidcpower.Session methods
         | "PXI\_Trig7" | PXI trigger line 7   |
         +--------------+----------------------+
 
-    :type output_terminal: int
 
-.. function:: fetch_multiple(timeout, count)
+    :type output_terminal: string
 
-    Vistatus :py:func:`nidcpower.fetch_multiple`(ViSession vi, ViConstString
-    channelName, ViReal64 timeout, ViInt32 count, ViReal64
-    voltageMeasurements[], ViReal64 currentMeasurements[], ViBoolean
-    inCompliance[], ViInt32\* actualcount);
+.. function:: fetch_multiple(count, timeout=1.0)
 
     Returns an array of voltage measurements, an array of current
     measurements, and an array of compliance measurements that were
     previously taken and are stored in the NI-DCPower buffer. This function
-    should not be used when the
-    `:py:data:`nidcpower.MEASURE\_WHEN` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'NIDCPOWER_ATTR_MEASURE_WHEN.html')>`__
-    attribute is set to NIDCPOWER\_VAL\_ON\_DEMAND. You must first call
-    `:py:func:`nidcpower._initiate` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
-    before calling this function.
+    should not be used when the :py:data:`nidcpower.MEASURE\_WHEN` attribute is
+    set to NIDCPOWER\_VAL\_ON\_DEMAND. You must first call
+    :py:func:`nidcpower._initiate` before calling this function.
 
     Refer to the `Acquiring
-    Measurements <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/acquiringmeasurements/>`__
-    and
-    `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
-    topics in the *NI DC Power Supplies and SMUs Help* for more information
-    about configuring this function.
+    Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
+    and `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__ topics in
+    the *NI DC Power Supplies and SMUs Help* for more information about
+    configuring this function.
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].fetch_multiple(count, timeout=1.0)
 
 
-        Specifies the output channel(s) to which this configuration value
-        applies. Specify multiple channels by using a channel list or a channel
-        range. A channel list is a comma (,) separated sequence of channel names
-        (for example, 0,2 specifies channels 0 and 2). A channel range is a
-        lower bound channel followed by a hyphen (-) or colon (:) followed by an
-        upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-        In the Running state, multiple output channel configurations are
-        performed sequentially based on the order specified in this parameter.
-
-        
-
-    :type channel_name: int
     :param timeout:
 
 
@@ -759,6 +733,7 @@ nidcpower.Session methods
             triggers so that the timeout interval is long enough for your
             application.
 
+
     :type timeout: float
     :param count:
 
@@ -767,13 +742,14 @@ nidcpower.Session methods
 
         
 
+
     :type count: int
 
     :rtype: tuple (voltage_measurements, current_measurements, in_compliance, actual_count)
 
         WHERE
 
-        voltage_measurements (float): 
+        voltage_measurements (list of float): 
 
 
             Returns an array of voltage measurements. Ensure that sufficient space
@@ -781,7 +757,8 @@ nidcpower.Session methods
 
             
 
-        current_measurements (float): 
+
+        current_measurements (list of float): 
 
 
             Returns an array of current measurements. Ensure that sufficient space
@@ -789,7 +766,8 @@ nidcpower.Session methods
 
             
 
-        in_compliance (bool): 
+
+        in_compliance (list of bool): 
 
 
             Returns an array of Boolean values indicating whether the output was in
@@ -797,6 +775,7 @@ nidcpower.Session methods
             space has been allocated for the returned array.
 
             
+
 
         actual_count (int): 
 
@@ -807,11 +786,55 @@ nidcpower.Session methods
             
 
 
-.. function:: get_self_cal_last_date_and_time()
 
-    Vistatus :py:func:`nidcpower.get_self_cal_last_date_and_time`(ViSession vi, ViInt32
-    \*year, ViInt32 \*month, ViInt32 \*day, ViInt32 \*hour, ViInt32
-    \*minute);
+.. function:: get_channel_name(index)
+
+    Retrieves the output **channelName** that corresponds to the requested
+    **index**. Use the :py:data:`nidcpower.CHANNEL\_COUNT` attribute to
+    determine the upper bound of valid values for **index**.
+
+    
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].get_channel_name(index)
+
+
+    :param index:
+
+
+        Specifies which output channel name to return. The index values begin at
+        1.
+
+        
+
+
+    :type index: int
+    :param buffer_size:
+
+
+        Specifies the number of bytes in the ViChar array you specify for
+        **channelName**. If the **channelName**, including the terminating NUL
+        byte, contains more bytes than you indicate in this attribute, the
+        function copies (buffer size - 1) bytes into the buffer, places an ASCII
+        NUL byte at the end of the buffer, and returns the buffer size you must
+        pass to get the entire value. For example, if the value is 123456 and
+        the buffer size is 4, the function places 123 into the buffer and
+        returns 7.
+        If you pass 0, you can pass VI\_NULL for **channelName**.
+
+        
+
+
+    :type buffer_size: int
+
+.. function:: get_self_cal_last_date_and_time()
 
     Returns the date and time of the oldest successful self-calibration from
     among the channels in the session.
@@ -826,8 +849,9 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :rtype: tuple (year, month, day, hour, minute)
@@ -841,6 +865,7 @@ nidcpower.Session methods
 
             
 
+
         month (int): 
 
 
@@ -848,12 +873,14 @@ nidcpower.Session methods
 
             
 
+
         day (int): 
 
 
             Returns the **day** on which the device was last calibrated.
 
             
+
 
         hour (int): 
 
@@ -863,6 +890,7 @@ nidcpower.Session methods
 
             
 
+
         minute (int): 
 
 
@@ -871,10 +899,8 @@ nidcpower.Session methods
             
 
 
-.. function:: get_self_cal_last_temp()
 
-    Vistatus :py:func:`nidcpower.get_self_cal_last_temp`(ViSession vi, ViReal64
-    \*temperature);
+.. function:: get_self_cal_last_temp()
 
     Returns the onboard temperature of the device, in degrees Celsius,
     during the oldest successful self-calibration from among the channels in
@@ -890,8 +916,9 @@ nidcpower.Session methods
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :rtype: float
@@ -904,32 +931,28 @@ nidcpower.Session methods
             
 
 
-.. function:: measure(measurement_type)
 
-    Vistatus :py:func:`nidcpower.measure`(ViSession vi, ViConstString channelName,
-    ViInt32 measurementType, ViReal64 \*measurement)
+.. function:: measure(measurement_type)
 
     Returns the measured value of either the voltage or current on the
     specified output channel. Each call to this function blocks other
     function calls until the hardware returns the **measurement**. To
-    measure multiple output channels, use the
-    `:py:func:`nidcpower.measure_multiple` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_MeasureMultiple.html')>`__
+    measure multiple output channels, use the :py:func:`nidcpower.measure_multiple`
     function.
 
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].measure(measurement_type)
 
 
-        Specifies the output channel to measure. Only one measurement at a time
-        may be made with the :py:func:`nidcpower.measure` function. Use the
-        `:py:func:`nidcpower.measure_multiple` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_MeasureMultiple.html')>`__
-        function to measure multiple channels.
-
-        
-
-    :type channel_name: int
     :param measurement_type:
 
 
@@ -941,6 +964,7 @@ nidcpower.Session methods
         +--------------------------------------+------------------------------+
         | NIDCPOWER\_VAL\_MEASURE\_CURRENT (0) | The device measures current. |
         +--------------------------------------+------------------------------+
+
 
     :type measurement_type: int
 
@@ -954,11 +978,8 @@ nidcpower.Session methods
             
 
 
-.. function:: measure_multiple()
 
-    Vistatus :py:func:`nidcpower.measure_multiple`(ViSession vi, ViConstString
-    channelName, ViReal64 voltageMeasurements[], ViReal64
-    currentMeasurements[]);
+.. function:: measure_multiple()
 
     Returns arrays of the measured voltage and current values on the
     specified output channel(s). Each call to this function blocks other
@@ -969,26 +990,21 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
+        .. code:: python
 
-        Specifies the output channels to measure. You can specify multiple
-        channels by using a channel list or a channel range. A channel list is a
-        comma (,) separated sequence of channel names (e.g. 0,2 specifies
-        channels 0 and 2). A channel range is a lower bound channel followed by
-        a hyphen (-) or colon (:) followed by an upper bound channel (e.g. 0-2
-        specifies channels 0, 1, and 2). If you do not specify a channel name,
-        the function uses all channels in the session.
+            session['0,1'].measure_multiple()
 
-        
-
-    :type channel_name: int
 
     :rtype: tuple (voltage_measurements, current_measurements)
 
         WHERE
 
-        voltage_measurements (float): 
+        voltage_measurements (list of float): 
 
 
             Returns an array of voltage measurements. The measurements in the array
@@ -998,7 +1014,8 @@ nidcpower.Session methods
 
             
 
-        current_measurements (float): 
+
+        current_measurements (list of float): 
 
 
             Returns an array of current measurements. The measurements in the array
@@ -1009,51 +1026,42 @@ nidcpower.Session methods
             
 
 
+
 .. function:: query_in_compliance()
 
-    Vistatus :py:func:`nidcpower.query_in_compliance`(ViSession vi, ViConstString
-    channelName, ViBoolean \*inCompliance);
-
     Queries the specified output device to determine if it is operating at
-    the
-    `compliance <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'compliance.html')>`__
-    limit.
+    the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
 
     The compliance limit is the current limit when the output function is
     set to NIDCPOWER\_VAL\_DC\_VOLTAGE. If the output is operating at the
     compliance limit, the output reaches the current limit before the
-    desired voltage level. Refer to the
-    `:py:func:`nidcpower.configure_output_function` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureOutputFunction.html')>`__
-    function and the
-    `:py:func:`nidcpower.configure_current_limit` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureCurrentLimit.html')>`__
-    function for more information about output function and current limit,
-    respectively.
+    desired voltage level. Refer to the :py:func:`nidcpower.configure_output_function`
+    function and the :py:func:`nidcpower.configure_current_limit` function for more
+    information about output function and current limit, respectively.
 
     The compliance limit is the voltage limit when the output function is
     set to NIDCPOWER\_VAL\_DC\_CURRENT. If the output is operating at the
     compliance limit, the output reaches the voltage limit before the
     desired current level. Refer to the :py:func:`nidcpower.configure_output_function`
-    function and the
-    `:py:func:`nidcpower.configure_voltage_limit` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm','cviniDCPower_ConfigureVoltageLimit.html')>`__
-    function for more information about output function and voltage limit,
-    respectively.
+    function and the :py:func:`nidcpower.configure_voltage_limit` function for more
+    information about output function and voltage limit, respectively.
 
     **Related Topics:**
 
-    `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
+    `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
+        .. code:: python
 
-        Specifies the output channel to query. Compliance status can only be
-        queried for one channel at a time.
+            session['0,1'].query_in_compliance()
 
-        
-
-    :type channel_name: int
 
     :rtype: bool
     :return:
@@ -1064,10 +1072,8 @@ nidcpower.Session methods
             
 
 
-.. function:: query_max_current_limit(voltage_level)
 
-    Vistatus :py:func:`nidcpower.query_max_current_limit`(ViSession vi, ViConstString
-    channelName, ViReal64 voltageLevel, ViReal64 \*maxCurrentLimit);
+.. function:: query_max_current_limit(voltage_level)
 
     Queries the maximum current limit on an output channel if the output
     channel is set to the specified **voltageLevel**.
@@ -1075,15 +1081,16 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].query_max_current_limit(voltage_level)
 
 
-        Specifies the output channel to query. The maximum current limit may
-        only be queried for one channel at a time.
-
-        
-
-    :type channel_name: int
     :param voltage_level:
 
 
@@ -1091,6 +1098,7 @@ nidcpower.Session methods
         **maxCurrentLimit**.
 
         
+
 
     :type voltage_level: float
 
@@ -1104,10 +1112,8 @@ nidcpower.Session methods
             
 
 
-.. function:: query_max_voltage_level(current_limit)
 
-    Vistatus :py:func:`nidcpower.query_max_voltage_level`(ViSession vi, ViConstString
-    channelName, ViReal64 currentLimit, ViReal64 \*maxVoltageLevel);
+.. function:: query_max_voltage_level(current_limit)
 
     Queries the maximum voltage level on an output channel if the output
     channel is set to the specified **currentLimit**.
@@ -1115,15 +1121,16 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].query_max_voltage_level(current_limit)
 
 
-        Specifies the output channel to query. The maximum voltage level may
-        only be queried for one channel at a time.
-
-        
-
-    :type channel_name: int
     :param current_limit:
 
 
@@ -1131,6 +1138,7 @@ nidcpower.Session methods
         **maxVoltageLevel**.
 
         
+
 
     :type current_limit: float
 
@@ -1144,10 +1152,8 @@ nidcpower.Session methods
             
 
 
-.. function:: query_min_current_limit(voltage_level)
 
-    Vistatus :py:func:`nidcpower.query_min_current_limit`(ViSession vi, ViConstString
-    channelName, ViReal64 voltageLevel, ViReal64 \*minCurrentLimit);
+.. function:: query_min_current_limit(voltage_level)
 
     Queries the minimum current limit on an output channel if the output
     channel is set to the specified **voltageLevel**.
@@ -1155,15 +1161,16 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].query_min_current_limit(voltage_level)
 
 
-        Specifies the output channel to query. The minimum current limit may
-        only be queried for one channel at a time.
-
-        
-
-    :type channel_name: int
     :param voltage_level:
 
 
@@ -1171,6 +1178,7 @@ nidcpower.Session methods
         **minCurrentLimit**.
 
         
+
 
     :type voltage_level: float
 
@@ -1184,30 +1192,29 @@ nidcpower.Session methods
             
 
 
-.. function:: query_output_state(output_state)
 
-    Vistatus :py:func:`nidcpower.query_output_state`(ViSession vi, ViConstString
-    channelName, ViInt32 outputState, ViBoolean \*inState);
+.. function:: query_output_state(output_state)
 
     Queries the specified output channel to determine if the output channel
     is currently in the state specified by **outputState**.
 
     **Related Topics:**
 
-    `Compliance <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/compliance/>`__
+    `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].query_output_state(output_state)
 
 
-        Specifies the output channel to query. The output state may only be
-        queried for one channel at a time.
-
-        
-
-    :type channel_name: int
     :param output_state:
 
 
@@ -1219,6 +1226,7 @@ nidcpower.Session methods
         +-----------------------------------------------+-------------------------------------------------------------------+
         | NIDCPOWER\_VAL\_OUTPUT\_CONSTANT\_CURRENT (1) | The device maintains a constant current by adjusting the voltage. |
         +-----------------------------------------------+-------------------------------------------------------------------+
+
 
     :type output_state: int
 
@@ -1232,15 +1240,14 @@ nidcpower.Session methods
             
 
 
-.. function:: read_current_temperature()
 
-    Vistatus :py:func:`nidcpower.read_current_temperature`(ViSession vi, ViReal64
-    \*temperature);
+.. function:: read_current_temperature()
 
     Returns the current onboard **temperature**, in degrees Celsius, of the
     device.
 
     
+
 
 
     :rtype: float
@@ -1252,9 +1259,8 @@ nidcpower.Session methods
             
 
 
-.. function:: reset_device()
 
-    Vistatus :py:func:`nidcpower.reset_device`(ViSession vi);
+.. function:: reset_device()
 
     Resets the device to a known state. The function disables power
     generation, resets session attributes to their default values, clears
@@ -1264,8 +1270,8 @@ nidcpower.Session methods
     device and driver software. This function has the same functionality as
     using reset in Measurement & Automation Explorer. Refer to the
     `Programming
-    States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-    topic for more information about NI-DCPower software states.
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+    more information about NI-DCPower software states.
 
     This will also open the output relay on devices that have an output
     relay.
@@ -1273,40 +1279,37 @@ nidcpower.Session methods
     
 
 
-.. function:: reset_with_defaults()
 
-    Vistatus :py:func:`nidcpower.reset_with_defaults`(ViSession vi);
+.. function:: reset_with_defaults()
 
     Resets the device to a known state. This function disables power
     generation, resets session attributes to their default values, commits
     the session attributes, and leaves the session in the
     `Running <javascript:LaunchHelp('NI_DC_Power_Supplies_Help.chm::/programmingStates.html#running')>`__
-    state. In addition to exhibiting the behavior of the
-    `:py:func:`nidcpower.reset` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
+    state. In addition to exhibiting the behavior of the :py:func:`nidcpower.reset`
     function, this function can assign user-defined default values for
     configurable attributes from the IVI configuration.
 
     
 
 
-.. function:: send_software_edge_trigger(trigger)
 
-    Vistatus :py:func:`nidcpower.send_software_edge_trigger`(ViSession vi, ViInt32
-    trigger);
+.. function:: send_software_edge_trigger(trigger=nidcpower.SendSoftwareEdgeTriggerType.START)
 
     Asserts the specified trigger. This function can override an external
     edge trigger.
 
     **Related Topics:**
 
-    `triggers <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__
+    `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param trigger:
@@ -1327,59 +1330,59 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_PULSE\_TRIGGER (1053              | Asserts the Pulse trigger.            |
         +---------------------------------------------------+---------------------------------------+
 
-    :type trigger: int
 
-.. function:: set_sequence(values, source_delays, size)
+    :type trigger: :py:data:`nidcpower.SendSoftwareEdgeTriggerType`
 
-    Vistatus :py:func:`nidcpower.set_sequence`(ViSession vi, ViConstString channelName,
-    ViReal64 values[], ViReal64 sourceDelays[], ViUInt32 size);
+.. function:: set_sequence(source_delays, size, values=None)
 
     Configures a series of voltage or current outputs and corresponding
     source delays. The source mode must be set to
-    `Sequence <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/sequencing/>`__
-    for this function to take effect.
+    `Sequence <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for this
+    function to take effect.
 
     Refer to the `Configuring the Source
-    Unit <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/configuringthesourceunit/>`__
-    topic in the *NI DC Power Supplies and SMUs Help* for more information
-    about how to configure your device.
+    Unit <REPLACE_DRIVER_SPECIFIC_URL_1(configuringthesourceunit)>`__ topic
+    in the *NI DC Power Supplies and SMUs Help* for more information about
+    how to configure your device.
 
     Use this function in the Uncommitted or Committed programming states.
     Refer to the `Programming
-    States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-    topic in the *NI DC Power Supplies and SMUs Help* for more information
-    about NI-DCPower programming states.
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+    the *NI DC Power Supplies and SMUs Help* for more information about
+    NI-DCPower programming states.
 
     
 
     .. note:: This function is not supported on all devices. Refer to `Supported
         Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].set_sequence(source_delays, size, values=None)
 
 
-        Specifies the output channel to which this configuration value applies.
-        You can only set a sequence for one channel at a time.
-
-        
-
-    :type channel_name: int
     :param values:
 
 
         Specifies the series of voltage levels or current levels, depending on
         the configured `output
-        function <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programming_output/>`__.
+        function <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
         **Valid values**:
         The valid values for this parameter are defined by the voltage level
         range or current level range.
 
         
 
-    :type values: float
+
+    :type values: list of float
     :param source_delays:
 
 
@@ -1390,7 +1393,8 @@ nidcpower.Session methods
 
         
 
-    :type source_delays: float
+
+    :type source_delays: list of float
     :param size:
 
 
@@ -1399,18 +1403,15 @@ nidcpower.Session methods
 
         
 
+
     :type size: int
 
-.. function:: wait_for_event(event_id, timeout)
-
-    Vistatus :py:func:`nidcpower.wait_for_event`(ViSession vi, ViInt32 eventId, ViReal64
-    timeout);
+.. function:: wait_for_event(timeout, event_id=10.0)
 
     Waits until the device has generated the specified event.
 
     The session monitors whether each type of event has occurred at least
-    once since the last time this function or the
-    `:py:func:`nidcpower._initiate` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_Initiate.html')>`__
+    once since the last time this function or the :py:func:`nidcpower._initiate`
     function were called. If an event has only been generated once and you
     call this function successively, the function times out. Individual
     events must be generated between separate calls of this function.
@@ -1418,8 +1419,9 @@ nidcpower.Session methods
     
 
     .. note:: Refer to `Supported Functions by
-        Device <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'supportedFunctions.html')>`__
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param event_id:
@@ -1442,6 +1444,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_READY\_FOR\_PULSE\_TRIGGER\_EVENT (1052)    | Waits for the Ready for Pulse Trigger event.     |
         +-------------------------------------------------------------+--------------------------------------------------+
 
+
     :type event_id: int
     :param timeout:
 
@@ -1456,63 +1459,29 @@ nidcpower.Session methods
             triggers so that the timeout interval is long enough for your
             application.
 
-    :type timeout: float
+
+    :type timeout: :py:data:`nidcpower.Event`
 
 .. function:: reset()
-
-    Vistatus :py:func:`nidcpower.reset`(ViSession vi);
 
     Resets the device to a known state. This function disables power
     generation, resets session attributes to their default values, commits
     the session attributes, and leaves the session in the Uncommitted state.
     Refer to the `Programming
-    States <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/programmingstates/>`__
-    topic for more information about NI-DCPower software states.
+    States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
+    more information about NI-DCPower software states.
 
     
 
-
-.. function:: revision_query()
-
-    Vistatus :py:func:`nidcpower.revision_query`(ViSession vi, ViChar
-    instrumentDriverRevision[], ViChar firmwareRevision[]);
-
-    Returns the revision information of NI-DCPower and the device firmware.
-
-    
-
-
-    :rtype: tuple (instrument_driver_revision, firmware_revision)
-
-        WHERE
-
-        instrument_driver_revision (int): 
-
-
-            Returns the driver revision information for NI-DCPower.
-
-            
-
-        firmware_revision (int): 
-
-
-            Returns firmware revision information for the device you are using. The
-            size of this array must be at least 256 bytes.
-
-            
 
 
 .. function:: self_test()
 
-    Vistatus :py:func:`nidcpower.self_test`(ViSession vi, ViInt16 \*selfTestResult,
-    ViChar selfTestMessage[]);
-
     Performs the device self-test routine and returns the test result(s).
-    Calling this function implicitly calls the
-    `:py:func:`nidcpower.reset` <javascript:LaunchMergedHelp('NI_DC_Power_Supplies_Help.chm',%20'NIDCPowerCRef.chm',%20'cviniDCPower_reset.html')>`__
-    function.
+    Calling this function implicitly calls the :py:func:`nidcpower.reset` function.
 
     
+
 
 
     :rtype: tuple (self_test_result, self_test_message)
@@ -1532,13 +1501,15 @@ nidcpower.Session methods
             | 1              | Self test failed. |
             +----------------+-------------------+
 
-        self_test_message (int): 
+
+        self_test_message (string): 
 
 
             Returns the self-test result message. The size of this array must be at
             least 256 bytes.
 
             
+
 
 
 

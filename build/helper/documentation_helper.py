@@ -3,7 +3,7 @@ from .metadata_filters import filter_input_parameters
 from .metadata_filters import filter_output_parameters
 
 from .codegen_helper import get_params_snippet
-from .codegen_helper import ParamListType
+from .codegen_helper import ParameterUsageOptions
 
 import re
 import string
@@ -11,12 +11,12 @@ import sys
 
 
 # Python 2/3 compatibility
-def normalize_string_type(d):
+def _normalize_string_type(d):
     '''Normalize string type between python2 & python3'''
     if sys.version_info.major < 3:
         if type(d) is dict:
             for k in d:
-                d[k] = normalize_string_type(d[k])
+                d[k] = _normalize_string_type(d[k])
         elif type(d) is str:
             d = d.decode('utf-8')
     return d
@@ -45,7 +45,7 @@ def get_indented_docstring_snippet(d, indent=4):
             ret_val += '\n'
             if len(l.rstrip()) > 0:
                 ret_val += (' ' * indent)
-        ret_val += normalize_string_type(l.rstrip())
+        ret_val += _normalize_string_type(l.rstrip())
     return ret_val
 
 
@@ -56,7 +56,7 @@ def get_rst_header_snippet(t, header_level='='):
     return ret_val
 
 
-def get_rst_table_snippet(d, config, indent=0, make_link=True):
+def _get_rst_table_snippet(d, config, indent=0, make_link=True):
     '''Returns an rst table snippet if table_header and/or table_body are in the dictionary'''
     if 'table_body' in d:
         table_body = d['table_body']
@@ -73,14 +73,14 @@ def get_rst_table_snippet(d, config, indent=0, make_link=True):
     if header:
         header_contents = []
         for i in table_header:
-            contents = fix_references(i, config, make_link)
+            contents = _fix_references(i, config, make_link)
             header_contents.append(contents)
         table_contents.append(header_contents)
 
     for t in table_body:
         line_contents = []
         for i in t:
-            contents = fix_references(i, config, make_link)
+            contents = _fix_references(i, config, make_link)
             line_contents.append(contents)
         table_contents.append(line_contents)
 
@@ -92,7 +92,7 @@ def get_rst_admonition_snippet(admonition, d, config, indent=0):
     '''Returns a rst formatted admonition if the given admonition ('note', 'caution') exists in the dictionary'''
     if admonition in d:
         a = '\n\n' + (' ' * indent) + '.. {0}:: '.format(admonition)
-        a += get_indented_docstring_snippet(fix_references(d[admonition], config, make_link=True), indent + 4)
+        a += get_indented_docstring_snippet(_fix_references(d[admonition], config, make_link=True), indent + 4)
         return a
     else:
         return ''
@@ -122,10 +122,12 @@ def get_documentation_for_node_rst(node, config, indent=0):
     nd = node['documentation']
     doc += get_rst_admonition_snippet('caution', nd, config, indent)
     if 'description' in nd:
-        doc += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(fix_references(nd['description'], config, make_link=True), indent)
+        doc += '\n\n' + (' ' * indent) + get_indented_docstring_snippet(_fix_references(nd['description'], config, make_link=True), indent)
 
-    doc += '\n\n' + (' ' * indent) + get_rst_table_snippet(nd, config, indent)
+    doc += '\n\n' + (' ' * indent) + _get_rst_table_snippet(nd, config, indent)
     doc += get_rst_admonition_snippet('note', nd, config, indent)
+    doc += '\n'
+    doc += get_rst_admonition_snippet('tip', nd, config, indent)
     doc += '\n'
 
     return doc
@@ -139,6 +141,7 @@ def get_documentation_for_node_docstring(node, config, indent=0):
     - 'description'
     - table made of 'table_header' and 'table_body'
     - 'note' admonition
+    - 'tip' admonition
 
     Args:
         node (dict) - Node possibly containing documentation
@@ -155,20 +158,23 @@ def get_documentation_for_node_docstring(node, config, indent=0):
     nd = node['documentation']
     extra_newline = ''
     if 'caution' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(fix_references('Caution: ' + nd['caution'], config, make_link=False), indent)
+        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('Caution: ' + nd['caution'], config, make_link=False), indent)
         extra_newline = '\n'
 
     if 'description' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(fix_references(nd['description'], config, make_link=False), indent)
+        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references(nd['description'], config, make_link=False), indent)
         extra_newline = '\n'
 
-    tbl = get_rst_table_snippet(nd, config, indent, make_link=False)
+    tbl = _get_rst_table_snippet(nd, config, indent, make_link=False)
     if len(tbl) > 0:
         doc += '\n' + extra_newline + (' ' * indent) + tbl
         extra_newline = '\n'
 
     if 'note' in nd:
-        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(fix_references('Note: ' + nd['note'], config, make_link=False), indent)
+        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('Note: ' + nd['note'], config, make_link=False), indent)
+
+    if 'tip' in nd:
+        doc += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(_fix_references('Tip: ' + nd['tip'], config, make_link=False), indent)
 
     return doc.strip()
 
@@ -177,7 +183,7 @@ def get_documentation_for_node_docstring(node, config, indent=0):
 config = None
 
 
-def find_attribute_by_name(attributes, name):
+def _find_attribute_by_name(attributes, name):
     '''Returns the attribute with the given name if there is one
 
     There should only be one so return that individual parameter and not a list
@@ -189,7 +195,7 @@ def find_attribute_by_name(attributes, name):
     return attr[0]
 
 
-def replace_attribute_python_name(a_match):
+def _replace_attribute_python_name(a_match):
     '''callback function for regex sub command when link not needed
 
     Args:
@@ -200,7 +206,7 @@ def replace_attribute_python_name(a_match):
     '''
     aname = "Unknown"
     if a_match:
-        attr = find_attribute_by_name(config['attributes'], a_match.group(1))
+        attr = _find_attribute_by_name(config['attributes'], a_match.group(1))
         aname = a_match.group(1)
         if attr:
             aname = attr['name'].lower()
@@ -211,7 +217,7 @@ def replace_attribute_python_name(a_match):
         return '{0}'.format(aname)
 
 
-def replace_func_python_name(f_match):
+def _replace_func_python_name(f_match):
     '''callback function for regex sub command when link needed
 
     Args:
@@ -237,7 +243,26 @@ def replace_func_python_name(f_match):
         return '{0}'.format(fname)
 
 
-def fix_references(doc, cfg, make_link=False):
+def _replace_urls(u_match):
+    '''callback function for regex when url link needed
+
+    Args:
+        u_match (match object): Match object from the function substitution command
+
+    Returns:
+        str: replacement url
+    '''
+    if config['make_link']:
+        pages = u_match.group(1)
+        pages_list = pages.split(',')
+        url_template = config['driver_urls'][config['url_key']]
+        url = url_template.format(*pages_list)
+        return url
+    else:
+        return u_match.group(1)
+
+
+def _fix_references(doc, cfg, make_link=False):
     '''Replace ATTR and function mentions in documentation
 
     Args:
@@ -259,12 +284,45 @@ def fix_references(doc, cfg, make_link=False):
     attr_re = re.compile('{0}\\\\_ATTR\\\\_([A-Z0-9\\\\_]+)'.format(config['module_name'].upper()))
     func_re = re.compile('{0}\\\\_([A-Za-z0-9\\\\_]+)'.format(config['c_function_prefix'].replace('_', '')))
 
-    doc = attr_re.sub(replace_attribute_python_name, doc)
-    doc = func_re.sub(replace_func_python_name, doc)
+    doc = attr_re.sub(_replace_attribute_python_name, doc)
+    doc = func_re.sub(_replace_func_python_name, doc)
+
+    if 'driver_urls' in cfg:
+        for url_key in cfg['driver_urls']:
+            url_re = re.compile('{0}\((.+?)\)'.format(url_key))
+            config['url_key'] = url_key
+            doc = url_re.sub(_replace_urls, doc)
 
     if not make_link:
         doc = doc.replace('\_', '_')
     return doc
+
+
+def _format_type_for_rst_documentation(param, config):
+    p_type = param['python_type']
+    if param['enum'] is not None:
+        p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
+
+    # We assume everything that is a buffer of ViChar is really a string (otherwise
+    # it would end up as 'list of int'
+    if param['type'] == 'ViChar' and param['is_buffer'] is True:
+        p_type = 'string'
+    elif param['is_buffer'] is True:
+        p_type = 'list of ' + p_type
+    return p_type
+
+
+rep_cap_method_desc = '''
+This method requires repeated capabilities (usually channels). If called directly on the
+{0}.Session object, then the method will use all repeated capabilities in the session.
+You can specify a subset of repeated capabilities using the Python index notation on an
+{0}.Session instance, and calling this method on the result.:
+'''
+rep_cap_method_desc_rst = rep_cap_method_desc + '''
+.. code:: python
+
+    session['0,1'].{1}({2})
+'''
 
 
 def get_function_rst(fname, config, indent=0):
@@ -278,8 +336,11 @@ def get_function_rst(fname, config, indent=0):
         str: rst formatted documentation
     '''
     function = config['functions'][fname]
+    if function['has_repeated_capability'] is True:
+        function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
+
     rst = '.. function:: ' + function['python_name'] + '('
-    rst += get_params_snippet(function, ParamListType.DOCUMENTATION_SESSION_METHOD) + ')'
+    rst += get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
 
@@ -290,10 +351,7 @@ def get_function_rst(fname, config, indent=0):
         rst += '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
         rst += get_documentation_for_node_rst(p, config, indent + 4)
 
-        p_type = p['intrinsic_type']
-        if p_type.startswith('enums.'):
-            p_type = p_type.replace('enums.', '')
-            p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+        p_type = _format_type_for_rst_documentation(p, config)
         rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
 
     output_params = filter_output_parameters(function['parameters'])
@@ -301,22 +359,33 @@ def get_function_rst(fname, config, indent=0):
         rst += '\n\n' + (' ' * indent) + ':rtype: tuple (' + ', '.join([p['python_name'] for p in output_params]) + ')\n\n'
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
-            p_type = p['intrinsic_type']
-            if p_type.startswith('enums.'):
-                p_type = p_type.replace('enums.', '')
-                p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+            p_type = _format_type_for_rst_documentation(p, config)
             rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p_type) + '\n'
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
-        p_type = p['intrinsic_type']
-        if p_type.startswith('enums.'):
-            p_type = p_type.replace('enums.', '')
-            p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], p_type)
+        p_type = _format_type_for_rst_documentation(p, config)
         rst += '\n\n' + (' ' * indent) + ':rtype: ' + p_type + '\n'
         rst += (' ' * indent) + ':return:\n' + get_documentation_for_node_rst(p, config, indent + 8)
 
     return rst
+
+
+def _format_type_for_docstring(param, config):
+    p_type = param['python_type']
+
+    # We assume everything that is a buffer of ViChar is really a string (otherwise
+    # it would end up as 'list of int'
+    if param['type'] == 'ViChar' and param['is_buffer'] is True:
+        p_type = 'string'
+    elif param['is_buffer'] is True:
+        p_type = 'list of ' + p_type
+    return p_type
+
+
+rep_cap_method_desc_docstring = rep_cap_method_desc + '''
+    session['0,1'].{1}({2})
+'''
 
 
 def get_function_docstring(fname, config, indent=0):
@@ -331,20 +400,23 @@ def get_function_docstring(fname, config, indent=0):
     '''
     docstring = ''
     function = config['functions'][fname]
+    if function['has_repeated_capability'] is True:
+        function['documentation']['tip'] = rep_cap_method_desc_docstring.format(config['module_name'], function['python_name'], get_params_snippet(function, ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD))
+
     docstring += get_documentation_for_node_docstring(function, config, indent)
 
     input_params = filter_input_parameters(function['parameters'])
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
-        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['intrinsic_type'])
+        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], _format_type_for_docstring(p, config))
         docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     output_params = filter_output_parameters(function['parameters'])
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], p['intrinsic_type'])
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], _format_type_for_docstring(p, config))
             docstring += get_documentation_for_node_docstring(p, config, indent + 8)
 
     return docstring
@@ -426,4 +498,253 @@ def as_rest_table(data, header=True):
     return '\n'.join(table)
 
 
+# Unit Tests
 
+
+def _remove_trailing_whitespace(s):
+    '''Removes trailing whitespace and empty lines in multi-line strings. https://stackoverflow.com/a/17350806/316875'''
+    return re.sub(r'\s+$', '', s, flags=re.M)
+
+
+def assert_rst_strings_are_equal(expected, actual):
+    '''Asserts rst formatted strings (multiline) are equal. Ignores trailing whitespace and empty lines.'''
+    expected = _remove_trailing_whitespace(expected).splitlines()
+    actual = _remove_trailing_whitespace(actual).splitlines()
+    assert len(expected) == len(actual), 'Strings have different number of non-empty lines.'
+    for expected_line, actual_line in zip(expected, actual):
+        assert expected_line == actual_line, 'Difference found:\n{0}\n{1}'.format(expected_line, actual_line)
+
+
+config = {
+    'functions': {
+        'GetTurtleID': {
+            'codegen_method': 'public',
+            'returns': 'ViStatus',
+            'parameters': [
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'vi',
+                    'type': 'ViSession',
+                    'documentation': {
+                        'description': 'Identifies a particular instrument session.'
+                    },
+                    'python_name': 'vi',
+                    'python_type': 'int',
+                    'ctypes_variable_name': 'vi_ctype',
+                    'ctypes_type': 'ViSession',
+                    'ctypes_type_library_call': 'ViSession',
+                    'size': {
+                        'mechanism': 'fixed',
+                        'value': 1
+                    },
+                    'is_buffer': False,
+                    'python_name_with_default': 'vi',
+                    'python_name_with_doc_default': 'vi',
+                    'is_repeated_capability': False,
+                    'is_session_handle': True,
+                    'library_method_call_snippet': 'self._vi'
+                },
+                {
+                    'direction': 'in',
+                    'enum': None,
+                    'name': 'turtleType',
+                    'type': 'ViInt32',
+                    'documentation': {
+                        'description': '''Specifies the type of Turtle type
+wanted to choose.''',
+                        'note': 'You wont be able to import RAPHAEL',
+                        'table_body': [
+                            ['NIFake\\_VAL\\_LEONARDO (default)', '0', 'LEONARDO'],
+                            ['NIFake\\_VAL\\_DONATELLO', '1', 'DONATELLO'],
+                            ['NIFake\\_VAL\\_RAPHAEL', '2', 'RAPHAEL'],
+                            ['NIFake\\_VAL\\_MICHELANGELO', '3', 'MICHELANGELO']
+                        ]
+                    },
+                    'python_name': 'turtle_type',
+                    'python_type': 'int',
+                    'ctypes_variable_name': 'turtle_type_ctype',
+                    'ctypes_type': 'ViInt32',
+                    'ctypes_type_library_call': 'ViInt32',
+                    'size': {
+                        'mechanism': 'fixed',
+                        'value': 1
+                    },
+                    'is_buffer': False,
+                    'python_name_with_default': 'turtle_type',
+                    'python_name_with_doc_default': 'turtle_type',
+                    'is_repeated_capability': False,
+                    'is_session_handle': False,
+                    'library_method_call_snippet': 'turtle_type'
+                },
+                {
+                    'direction': 'out',
+                    'enum': None,
+                    'name': 'turtleId',
+                    'type': 'ViReal64',
+                    'documentation': {
+                        'description': 'Returns the **ID** of selected turtle.'
+                    },
+                    'python_name': 'turtle_id',
+                    'python_type': 'float',
+                    'ctypes_variable_name': 'turtleId_ctype',
+                    'ctypes_type': 'ViReal64',
+                    'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
+                    'size': {
+                        'mechanism': 'fixed',
+                        'value': 1
+                    },
+                    'is_buffer': False,
+                    'python_name_with_default': 'turtleId',
+                    'python_name_with_doc_default': 'turtleId',
+                    'is_repeated_capability': False,
+                    'is_session_handle': False,
+                    'library_method_call_snippet': 'ctypes.pointer(turtleId_ctype)'
+                }
+            ],
+            'documentation': {
+                'description': 'Returns the **ID** of selected Turtle Type.',
+                'note': 'The RAPHAEL Turtles dont have an ID.'
+            },
+            'name': 'GetTurtleID',
+            'python_name': 'get_turtle_id',
+            'is_error_handling': False,
+            'has_repeated_capability': False
+        }
+    },
+    'metadata_version': '1.0',
+    'module_name': 'nifake',
+    'module_version': '0.3.0.dev0',
+    'c_function_prefix': 'niFake_',
+    'driver_name': 'NI-FAKE',
+    'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
+    'session_handle_parameter_name': 'vi',
+    'library_info':
+    {
+        'Windows': {
+            '32bit': {'name': 'nifake_32.dll', 'type': 'windll'},
+            '64bit': {'name': 'nifake_64.dll', 'type': 'cdll'},
+        },
+        'Linux': {
+            '64bit': {'name': 'libnifake.so', 'type': 'cdll'},
+        },
+    },
+    'context_manager_name': {
+        'task': 'acquisition',
+        'initiate_function': 'Initiate',
+        'abort_function': 'Abort',
+    },
+    'init_function': 'InitWithOptions',
+}
+
+
+def test_get_function_rst():
+    actual_function_rst = get_function_rst('GetTurtleID', config, 0)
+    expected_fuction_rst = '''.. function:: get_turtle_id(turtle_type)
+
+    Returns the **ID** of selected Turtle Type.
+
+
+
+    .. note:: The RAPHAEL Turtles dont have an ID.
+
+
+    :param turtle_type:
+
+
+        Specifies the type of Turtle type
+        wanted to choose.
+
+        +---------------------------------+---+--------------+
+        | NIFake\_VAL\_LEONARDO (default) | 0 | LEONARDO     |
+        +---------------------------------+---+--------------+
+        | NIFake\_VAL\_DONATELLO          | 1 | DONATELLO    |
+        +---------------------------------+---+--------------+
+        | NIFake\_VAL\_RAPHAEL            | 2 | RAPHAEL      |
+        +---------------------------------+---+--------------+
+        | NIFake\_VAL\_MICHELANGELO       | 3 | MICHELANGELO |
+        +---------------------------------+---+--------------+
+
+        .. note:: You wont be able to import RAPHAEL
+
+    :type turtle_type: int
+
+    :rtype: float
+    :return:
+
+
+            Returns the **ID** of selected turtle.
+
+
+''' # noqa
+    assert_rst_strings_are_equal(actual_function_rst, expected_fuction_rst)
+
+
+def test_get_function_docstring():
+    actual_function_docstring = get_function_docstring('GetTurtleID', config, 0)
+    expected_function_docstring = '''Returns the **ID** of selected Turtle Type.
+
+Note: The RAPHAEL Turtles dont have an ID.
+
+Args:
+    turtle_type (int): Specifies the type of Turtle type
+        wanted to choose.
+
+        +-------------------------------+---+--------------+
+        | NIFake_VAL_LEONARDO (default) | 0 | LEONARDO     |
+        +-------------------------------+---+--------------+
+        | NIFake_VAL_DONATELLO          | 1 | DONATELLO    |
+        +-------------------------------+---+--------------+
+        | NIFake_VAL_RAPHAEL            | 2 | RAPHAEL      |
+        +-------------------------------+---+--------------+
+        | NIFake_VAL_MICHELANGELO       | 3 | MICHELANGELO |
+        +-------------------------------+---+--------------+
+
+        Note: You wont be able to import RAPHAEL
+
+Returns:
+    turtle_id (float): Returns the **ID** of selected turtle.''' # noqa
+    assert_rst_strings_are_equal(expected_function_docstring, actual_function_docstring)
+
+
+def test_get_rst_header_snippet():
+    header = "This will be your method header"
+    actual_rst_header = get_rst_header_snippet(header)
+    expected_rst_header = """This will be your method header
+==============================="""
+    assert actual_rst_header == expected_rst_header
+
+
+def test_get_documentation_for_node_docstring():
+    caution = """ this is a very
+long string if I had the
+energy to type more and more ..."""
+    description = """ This string might be
+at maximum size I can handle"""
+    node = {
+        'documentation': {
+            'caution': caution,
+            'description': description,
+            'table_header': ['what', 'how', 'who'],
+            'table_body': [
+                ['lorem', 'that is a dummy string', 'Place holder string'],
+                ['ipsum', 'this is a random strinf', 'Yes, I am a random string']
+            ]
+        }
+    }
+    actual_documentation = get_documentation_for_node_docstring(node, config, indent=4)
+    expected_documentation = """Caution:  this is a very
+    long string if I had the
+    energy to type more and more ...
+
+    This string might be
+    at maximum size I can handle
+
+    +-------+-------------------------+---------------------------+
+    | what  | how                     | who                       |
+    +=======+=========================+===========================+
+    | lorem | that is a dummy string  | Place holder string       |
+    +-------+-------------------------+---------------------------+
+    | ipsum | this is a random strinf | Yes, I am a random string |
+    +-------+-------------------------+---------------------------+""" # noqa
+    assert_rst_strings_are_equal(expected_documentation, actual_documentation)

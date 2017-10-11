@@ -16,7 +16,7 @@ ${helper.get_rst_header_snippet(module_name + '.Session properties', '=')}
 
 <%
 a = attributes[attr]
-data_type = helper.get_intrinsic_type_from_visa_type(a['type'])
+data_type = helper.get_python_type_for_visa_type(a['type'])
 if attributes[attr]['enum'] is not None:
     data_type = ':py:data:`' + attributes[attr]["enum"] + '`'
 table_contents = [
@@ -27,6 +27,21 @@ table_contents = [
          ('Resettable', a['resettable']),
          ]
 table = helper.as_rest_table(table_contents)
+
+rep_cap_attr_desc = '''
+This property can use repeated capabilities (usually channels). If set or get directly on the 
+{0}.Session object, then the set/get will use all repeated capabilities in the session. 
+You can specify a subset of repeated capabilities using the Python index notation on an 
+{0}.Session instance, and calling set/get value on the result.:
+
+.. code:: python
+
+    session['0,1'].{0} = var
+    var = session['0,1'].{0}
+'''
+
+if a['channel_based'] == 'True':
+    a['documentation']['tip'] = rep_cap_attr_desc.format(a["name"].lower())
 
 desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 %>\

@@ -12,7 +12,7 @@ functions_codegen_method = {
     'Abort':                           { 'codegen_method': 'private',  },
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'init':                            { 'codegen_method': 'no',       },
-    'error_message':                   { 'codegen_method': 'no',       },
+    'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
     'ClearError':                      { 'codegen_method': 'no',       },
     'LockSession':                     { 'codegen_method': 'no',       },
@@ -28,7 +28,6 @@ functions_codegen_method = {
     'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # Not applicable to Python API
     'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
     'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'GetChannelName':                  { 'codegen_method': 'no',       },
     'error_query':                     { 'codegen_method': 'no',       },
     'ConfigureAutoZero':               { 'codegen_method': 'no',       },
     'ConfigureCurrent.+':              { 'codegen_method': 'no',       },
@@ -40,19 +39,21 @@ functions_codegen_method = {
     'ConfigureSourceMode':             { 'codegen_method': 'no',       },
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
+    'revision_query':                  { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    'ConfigureAutoZero':   { 'parameters': { 2: { 'enum': 'AutoZero',                  }, }, },
+    'ConfigureAutoZero':                            { 'parameters': { 2: { 'enum': 'AutoZero',                    }, }, },
+    'ConfigureApertureTime':                        { 'parameters': { 3: { 'enum': 'ApertureTimeUnits',           }, }, },
+    'ConfigureDigitalEdgeMeasureTrigger':           { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
+    'ConfigureDigitalEdgePulseTrigger':             { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
+    'ConfigureDigitalEdgeSequenceAdvanceTrigger':   { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
+    'ConfigureDigitalEdgeSourceTrigger':            { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
+    'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
+    'SendSoftwareEdgeTrigger':                      { 'parameters': { 1: { 'enum': 'SendSoftwareEdgeTriggerType', }, }, },
+    'WaitForEvent':                                 { 'parameters': { 2: { 'enum': 'Event', }, }, },
     # @TODO add all enums
-}
-
-# TODO(texasaggie97) can we get rid of this now that we are code generating the ivi-dance method of buffer retrieval? Issue #259
-functions_params_types = {
-    'GetAttributeViString':         { 'parameters': { 4: { 'type': 'ViString',                  }, }, },
-    'SetAttributeViString':         { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
-    'GetError':                     { 'parameters': { 3: { 'type': 'ViString',                  }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
@@ -74,11 +75,16 @@ functions_buffer_info = {
     'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetCalUserDefinedInfo':        { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
+    'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'SetSequence':                  { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'Size'}, }, }, },
+    'CreateAdvancedSequence':       { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'attributeIdCount'}, }, }, },
     'init':                         { 'parameters': { 0: { 'is_buffer': True, }, }, },
-    'InitWithOptions':              { 'parameters': { 0: { 'is_buffer': True, },
-                                                      3: { 'is_buffer': True, }, }, },
     '.etAttribute.+':               { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'GetDevTemp':                   { 'parameters': { 1: { 'is_buffer': True, }, }, },
+    'InitializeWithChannels':       { 'parameters': { 0: { 'is_buffer': True, },
+                                                      1: { 'is_buffer': True, },
+                                                      3: { 'is_buffer': True, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -91,8 +97,23 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 function_default_value = {
-    'InitWithOptions':  { 'parameters': { 1: { 'default_value': False, },
-                                          2: { 'default_value': False, },
-                                          3: { 'default_value': '', }, }, },
+    'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '', },
+                                                                       2: { 'default_value': False, },
+                                                                       3: { 'default_value': '', }, }, },
+    'ConfigureApertureTime':                         { 'parameters': { 3: { 'default_value': 'ApertureTimeUnits.SECONDS', }, }, },
+    'SetSequence':                                   { 'parameters': { 2: { 'default_value': None, }, }, },
+    'ConfigureDigitalEdgeMeasureTrigger':            { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
+    'ConfigureDigitalEdgePulseTrigger':              { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
+    'ConfigureDigitalEdgeSequenceAdvanceTrigger':    { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
+    'ConfigureDigitalEdgeSourceTrigger':             { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
+    'ConfigureDigitalEdgeStartTrigger':              { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
+    'CreateAdvancedSequence':                        { 'parameters': { 4: { 'default_value': True, }, }, },
+    'CreateAdvancedSequenceStep':                    { 'parameters': { 1: { 'default_value': True, }, }, },
+    'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '', }, }, },
+    'SendSoftwareEdgeTrigger':                       { 'parameters': { 1: { 'default_value': 'SendSoftwareEdgeTriggerType.START', }, }, },
+    'WaitForEvent':                                  { 'parameters': { 1: { 'default_value': 10.0, },}, },
+    'FetchMultiple':                                 { 'parameters': { 1: { 'default_value': 1.0, },
+                                                                       2: { 'default_value': 1.0, }, }, },
+
 }
 
