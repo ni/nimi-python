@@ -13,6 +13,7 @@ parser.add_argument('-v2', '--voltage2', default=2.0, type=float, help='Voltage 
 parser.add_argument('-d', '--delay', default=0.05, type=float, help='Source delay (seconds)')
 args = parser.parse_args()
 
+
 def print_fetched_measurements(voltage_measurements, current_measurements, in_compliance, actual_count):
     assert actual_count == 1
     print('             Voltage : {:f} V'.format(voltage_measurements[0]))
