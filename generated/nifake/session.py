@@ -189,6 +189,28 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    def _get_error(self):
+        '''_get_error
+
+        Returns the error information associated with the session.
+
+        Args:
+            buffer_size (int): Number of bytes in description buffer.
+
+        Returns:
+            error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
+        '''
+        error_code_ctype = visatype.ViStatus(0)
+        buffer_size = 0
+        description_ctype = None
+        error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        buffer_size = error_code
+        description_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
+
     def read_from_channel(self, maximum_time):
         '''read_from_channel
 
@@ -296,6 +318,22 @@ class _SessionBase(object):
         error_code = self._library.niFake_SetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def _error_message(self, error_code):
+        '''_error_message
+
+        Takes the errorCode returned by a functiona and returns it as a user-readable string.
+
+        Args:
+            error_code (int): The errorCode returned from the instrument.
+
+        Returns:
+            error_message (string): The error information formatted into a string.
+        '''
+        error_message_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niFake_error_message(self._vi, error_code, error_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_message_ctype.value.decode(self._encoding)
 
 
 class _RepeatedCapability(_SessionBase):
@@ -474,28 +512,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
 
-    def _get_error(self):
-        '''_get_error
-
-        Returns the error information associated with the session.
-
-        Args:
-            buffer_size (int): Number of bytes in description buffer.
-
-        Returns:
-            error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
-        '''
-        error_code_ctype = visatype.ViStatus(0)
-        buffer_size = 0
-        description_ctype = None
-        error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        description_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
-
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
         '''_init_with_options
 
@@ -652,22 +668,6 @@ class Session(_SessionBase):
         error_code = self._library.niFake_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def _error_message(self, error_code):
-        '''_error_message
-
-        Takes the errorCode returned by a functiona and returns it as a user-readable string.
-
-        Args:
-            error_code (int): The errorCode returned from the instrument.
-
-        Returns:
-            error_message (string): The error information formatted into a string.
-        '''
-        error_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niFake_error_message(self._vi, error_code, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
 
 
 

@@ -959,6 +959,46 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    def _get_error(self):
+        '''_get_error
+
+        Returns the error information associated with the
+        **Instrument_Handle**. This function retrieves and then clears the
+        error information for the session. If you leave the
+        **Instrument_Handle** unwired, this function retrieves and then clears
+        the error information for the process.
+
+        Args:
+            buffer_size (int): Passes the number of bytes in the ViChar array you specify for the
+                **Description** parameter. If the error description, including the
+                terminating NULL byte, contains more bytes than you indicate in this
+                parameter, the function copies **buffer_size** –1 bytes into the
+                buffer, places an ASCII NULL byte at the end of the buffer, and returns
+                the **buffer_size** you must pass to get the entire value.
+
+                For example, if the value is "123456" and the **buffer_size** is 4, the
+                function places "123" into the buffer and returns 7. If you pass a
+                negative number, the function copies the value to the buffer regardless
+                of the number of bytes in the value. If you pass 0, you can pass
+                VI_NULL for the **Description** buffer parameter. The default value is
+                None.
+
+        Returns:
+            error_code (int): Returns the **error_code** for the session or execution thread. If you
+                pass 0 for the **Buffer_Size**, you can pass VI_NULL for this
+                parameter.
+        '''
+        error_code_ctype = visatype.ViStatus(0)
+        buffer_size = 0
+        description_ctype = None
+        error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        buffer_size = error_code
+        description_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
+
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -1138,6 +1178,24 @@ class _SessionBase(object):
         error_code = self._library.niDMM_SetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def _error_message(self, error_code):
+        '''_error_message
+
+        Takes the **Error_Code** returned by the instrument driver functions,
+        interprets it, and returns it as a user-readable string.
+
+        Args:
+            error_code (int): The **error_code** returned from the instrument. The default is 0,
+                indicating VI_SUCCESS.
+
+        Returns:
+            error_message (string): The error information formatted into a string.
+        '''
+        error_message_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niDMM_error_message(self._vi, error_code, error_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_message_ctype.value.decode(self._encoding)
 
 
 class _RepeatedCapability(_SessionBase):
@@ -1845,46 +1903,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
-    def _get_error(self):
-        '''_get_error
-
-        Returns the error information associated with the
-        **Instrument_Handle**. This function retrieves and then clears the
-        error information for the session. If you leave the
-        **Instrument_Handle** unwired, this function retrieves and then clears
-        the error information for the process.
-
-        Args:
-            buffer_size (int): Passes the number of bytes in the ViChar array you specify for the
-                **Description** parameter. If the error description, including the
-                terminating NULL byte, contains more bytes than you indicate in this
-                parameter, the function copies **buffer_size** –1 bytes into the
-                buffer, places an ASCII NULL byte at the end of the buffer, and returns
-                the **buffer_size** you must pass to get the entire value.
-
-                For example, if the value is "123456" and the **buffer_size** is 4, the
-                function places "123" into the buffer and returns 7. If you pass a
-                negative number, the function copies the value to the buffer regardless
-                of the number of bytes in the value. If you pass 0, you can pass
-                VI_NULL for the **Description** buffer parameter. The default value is
-                None.
-
-        Returns:
-            error_code (int): Returns the **error_code** for the session or execution thread. If you
-                pass 0 for the **Buffer_Size**, you can pass VI_NULL for this
-                parameter.
-        '''
-        error_code_ctype = visatype.ViStatus(0)
-        buffer_size = 0
-        description_ctype = None
-        error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        description_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niDMM_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
-
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
 
@@ -2315,24 +2333,6 @@ class Session(_SessionBase):
         error_code = self._library.niDMM_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def _error_message(self, error_code):
-        '''_error_message
-
-        Takes the **Error_Code** returned by the instrument driver functions,
-        interprets it, and returns it as a user-readable string.
-
-        Args:
-            error_code (int): The **error_code** returned from the instrument. The default is 0,
-                indicating VI_SUCCESS.
-
-        Returns:
-            error_message (string): The error information formatted into a string.
-        '''
-        error_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niDMM_error_message(self._vi, error_code, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
 
     def reset(self):
         '''reset
