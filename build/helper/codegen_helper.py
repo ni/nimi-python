@@ -25,6 +25,10 @@ class ParameterUsageOptions(Enum):
     '''For setting up the ctypes argument types'''
     LIBRARY_METHOD_DECLARATION = 7
     '''For declaring a method in Library'''
+    INPUT_PARAMETERS = 8
+    '''Get all input parameters, other than self, rep caps, and size'''
+    OUTPUT_PARAMETERS = 9
+    '''Get all output parameters, other than ivi-dance'''
 
 
 _parameterUsageOptions = {}
@@ -38,6 +42,7 @@ _parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
     'reordered_for_default_values': True,
     'name_to_use': 'python_name_with_default',
     'skip_repeated_capability_parameter': True,
+    'mechanism': 'any',
 }
 _parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_self': True,
@@ -48,6 +53,7 @@ _parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'reordered_for_default_values': True,
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': True,
+    'mechanism': 'any',
 }
 _parameterUsageOptions[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_self': True,
@@ -58,6 +64,7 @@ _parameterUsageOptions[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'reordered_for_default_values': True,
     'name_to_use': 'python_name_with_doc_default',
     'skip_repeated_capability_parameter': True,
+    'mechanism': 'any',
 }
 _parameterUsageOptions[ParameterUsageOptions.CTYPES_CALL] = {
     'skip_self': True,
@@ -68,6 +75,7 @@ _parameterUsageOptions[ParameterUsageOptions.CTYPES_CALL] = {
     'reordered_for_default_values': False,
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': False,
+    'mechanism': 'any',
 }
 _parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'skip_self': True,
@@ -78,6 +86,7 @@ _parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'reordered_for_default_values': False,
     'name_to_use': 'library_method_call_snippet',
     'skip_repeated_capability_parameter': False,
+    'mechanism': 'any',
 }
 _parameterUsageOptions[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'skip_self': True,
@@ -88,6 +97,7 @@ _parameterUsageOptions[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'reordered_for_default_values': False,
     'name_to_use': 'ctypes_type_library_call',
     'skip_repeated_capability_parameter': False,
+    'mechanism': 'any',
 }
 _parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
     'skip_self': False,
@@ -98,6 +108,29 @@ _parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
     'reordered_for_default_values': False,
     'name_to_use': 'python_name',
     'skip_repeated_capability_parameter': False,
+    'mechanism': 'any',
+}
+_parameterUsageOptions[ParameterUsageOptions.INPUT_PARAMETERS] = {
+    'skip_self': True,
+    'skip_session_handle': True,
+    'skip_input_parameters': False,
+    'skip_output_parameters': True,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'name_to_use': 'python_name',
+    'skip_repeated_capability_parameter': True,
+    'mechanism': 'any',
+}
+_parameterUsageOptions[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
+    'skip_self': True,
+    'skip_session_handle': True,
+    'skip_input_parameters': True,
+    'skip_output_parameters': False,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'name_to_use': 'python_name',
+    'skip_repeated_capability_parameter': False,
+    'mechanism': 'fixed, passed-in, len', # any but ivi-dance
 }
 
 
@@ -129,6 +162,8 @@ def filter_parameters(function, parameter_usage_options):
         if x['is_session_handle'] is True and options_to_use['skip_session_handle']:
             skip = True
         if x['is_repeated_capability'] is True and options_to_use['skip_repeated_capability_parameter']:
+            skip = True
+        if options_to_use['mechanism'] != 'any' and x['size']['mechanism'] not in options_to_use['mechanism']:
             skip = True
         if not skip:
             parameters_to_use.append(x)

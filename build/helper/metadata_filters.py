@@ -6,16 +6,6 @@ def filter_codegen_functions(functions):
     return {k: v for k, v in functions.items() if v['codegen_method'] != 'no'}
 
 
-def filter_input_parameters(parameters):
-    '''Returns list of parameters that includes only input parameters, except the session parameter or repeated capability parameter if they exists'''
-    return [x for x in parameters if x['direction'] == 'in' and not x['is_session_handle'] and not x['is_repeated_capability']]
-
-
-def filter_output_parameters(parameters):
-    '''Returns list of parameters that includes only output parameters, except the ivi-dance parameter if it exists'''
-    return [x for x in parameters if x['direction'] == 'out' and x['size']['mechanism'] != 'ivi-dance']
-
-
 def filter_enum_parameters(parameters):
     '''Returns a list of parameters whose type is an enum'''
     return [x for x in parameters if x['enum'] is not None]

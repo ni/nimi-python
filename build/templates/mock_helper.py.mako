@@ -34,7 +34,7 @@ f = functions[func_name]
 %>\
         self._defaults['${func_name}'] = {}
         self._defaults['${func_name}']['return'] = 0
-% for p in helper.filter_output_parameters(f['parameters']):
+% for p in helper.filter_parameters(f['parameters'], ParameterUsageOptions.OUTPUT_PARAMETERS):
         self._defaults['${func_name}']['${p['name']}'] = None
 % endfor
 <%
@@ -55,7 +55,7 @@ ivi_dance_param = helper.filter_ivi_dance_parameter(f['parameters'])
 <%
 f = functions[func_name]
 params = f['parameters']
-output_params = helper.filter_output_parameters(params)
+output_params = helper.filter_parameters(params, ParameterUsageOptions.OUTPUT_PARAMETERS)
 ivi_dance_param = helper.filter_ivi_dance_parameter(params)
 ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 %>\
