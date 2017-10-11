@@ -18,6 +18,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES
 
 
@@ -25,6 +26,7 @@ Enums used in NI-DCPower
         Specifies aperture time in power line cycles (PLCs).
 
         
+
 
 
 
@@ -39,6 +41,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.AutoZero.ON
 
 
@@ -46,6 +49,7 @@ Enums used in NI-DCPower
         Makes zero conversions for every measurement.
 
         
+
 
 
     .. py:attribute:: nidcpower.AutoZero.ONCE
@@ -60,6 +64,7 @@ Enums used in NI-DCPower
 
 
 
+
 .. py:data:: CurrentLevelAutorange
 
     .. py:attribute:: nidcpower.CurrentLevelAutorange.OFF
@@ -71,6 +76,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.CurrentLevelAutorange.ON
 
 
@@ -78,6 +84,7 @@ Enums used in NI-DCPower
         NI-DCPower automatically selects the current level range.
 
         
+
 
 
 
@@ -92,6 +99,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.CurrentLimitAutorange.ON
 
 
@@ -99,6 +107,7 @@ Enums used in NI-DCPower
         NI-DCPower automatically selects the current limit range.
 
         
+
 
 
 
@@ -113,6 +122,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.CurrentLimitBehavior.CURRENT_TRIP
 
 
@@ -120,6 +130,7 @@ Enums used in NI-DCPower
         
 
         
+
 
 
 
@@ -136,6 +147,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.DCNoiseRejection.NORMAL
 
 
@@ -143,6 +155,7 @@ Enums used in NI-DCPower
         Normal DC noise rejection.
 
         
+
 
 
 
@@ -157,6 +170,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.DigitalEdge.FALLING
 
 
@@ -164,6 +178,7 @@ Enums used in NI-DCPower
         Asserts the trigger on the falling edge of the digital signal.
 
         
+
 
 
 
@@ -176,11 +191,13 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.Event.MEASURE_COMPLETE
 
 
 
         
+
 
 
     .. py:attribute:: nidcpower.Event.SEQUENCE_ITERATION_COMPLETE
@@ -190,11 +207,13 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.Event.SEQUENCE_ENGINE_DONE
 
 
 
         
+
 
 
     .. py:attribute:: nidcpower.Event.PULSE_COMPLETE
@@ -204,11 +223,13 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.Event.READY_FOR_PULSE_TRIGGER
 
 
 
         
+
 
 
 
@@ -226,6 +247,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.MeasureWhen.ON_DEMAND
 
 
@@ -237,6 +259,7 @@ Enums used in NI-DCPower
         called.
 
         
+
 
 
     .. py:attribute:: nidcpower.MeasureWhen.ON_MEASURE_TRIGGER
@@ -252,6 +275,7 @@ Enums used in NI-DCPower
 
 
 
+
 .. py:data:: OutputCapacitance
 
     .. py:attribute:: nidcpower.OutputCapacitance.LOW
@@ -263,6 +287,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.OutputCapacitance.HIGH
 
 
@@ -270,6 +295,7 @@ Enums used in NI-DCPower
         Output capacitance is high.
 
         
+
 
 
 
@@ -284,6 +310,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.OutputFunction.DC_CURRENT
 
 
@@ -291,6 +318,7 @@ Enums used in NI-DCPower
         Sets the output function to DC current.
 
         
+
 
 
     .. py:attribute:: nidcpower.OutputFunction.PULSE_VOLTAGE
@@ -302,6 +330,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.OutputFunction.PULSE_CURRENT
 
 
@@ -309,6 +338,7 @@ Enums used in NI-DCPower
         Sets the output function to pulse current.
 
         
+
 
 
 
@@ -324,6 +354,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.Polarity.ACTIVE_LOW
 
 
@@ -332,6 +363,7 @@ Enums used in NI-DCPower
         high level both before and after the event is generated.
 
         
+
 
 
 
@@ -346,6 +378,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.PowerLineFrequency._60_HERTZ
 
 
@@ -353,6 +386,7 @@ Enums used in NI-DCPower
         Specifies a power line frequency of 60 Hz.
 
         
+
 
 
 
@@ -367,6 +401,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.PowerSource.AUXILIARY
 
 
@@ -374,6 +409,7 @@ Enums used in NI-DCPower
         Uses the auxiliary power source connected to the device.
 
         
+
 
 
     .. py:attribute:: nidcpower.PowerSource.AUTOMATIC
@@ -387,6 +423,7 @@ Enums used in NI-DCPower
 
 
 
+
 .. py:data:: PowerSourceInUse
 
     .. py:attribute:: nidcpower.PowerSourceInUse.INTERNAL
@@ -396,6 +433,7 @@ Enums used in NI-DCPower
         Uses the PXI chassis power source.
 
         
+
 
 
     .. py:attribute:: nidcpower.PowerSourceInUse.AUXILIARY
@@ -411,6 +449,7 @@ Enums used in NI-DCPower
 
 
 
+
 .. py:data:: SelfCalibrationPersistence
 
     .. py:attribute:: nidcpower.SelfCalibrationPersistence.KEEP_IN_MEMORY
@@ -420,6 +459,7 @@ Enums used in NI-DCPower
         Keep new self-calibration values in memory only.
 
         
+
 
 
     .. py:attribute:: nidcpower.SelfCalibrationPersistence.WRITE_TO_EEPROM
@@ -434,6 +474,7 @@ Enums used in NI-DCPower
 
 
 
+
 .. py:data:: SendSoftwareEdgeTriggerType
 
     .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.START
@@ -443,11 +484,13 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SOURCE
 
 
 
         
+
 
 
     .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.MEASURE
@@ -457,6 +500,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE
 
 
@@ -464,11 +508,13 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.PULSE
 
 
 
         
+
 
 
 
@@ -483,6 +529,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.Sense.REMOTE
 
 
@@ -490,6 +537,7 @@ Enums used in NI-DCPower
         Remote sensing is selected.
 
         
+
 
 
 
@@ -504,6 +552,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.SourceMode.SEQUENCE
 
 
@@ -512,6 +561,7 @@ Enums used in NI-DCPower
         configurations.
 
         
+
 
 
 
@@ -526,6 +576,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.TransientResponse.FAST
 
 
@@ -533,6 +584,7 @@ Enums used in NI-DCPower
         Fast transient response time.
 
         
+
 
 
     .. py:attribute:: nidcpower.TransientResponse.SLOW
@@ -544,6 +596,7 @@ Enums used in NI-DCPower
         for supported devices.
 
         
+
 
 
     .. py:attribute:: nidcpower.TransientResponse.CUSTOM
@@ -568,6 +621,7 @@ Enums used in NI-DCPower
 
 
 
+
 .. py:data:: TriggerType
 
     .. py:attribute:: nidcpower.TriggerType.NONE
@@ -579,6 +633,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.TriggerType.DIGITAL_EDGE
 
 
@@ -588,6 +643,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.TriggerType.SOFTWARE_EDGE
 
 
@@ -595,6 +651,7 @@ Enums used in NI-DCPower
         The data operation starts when a software trigger occurs.
 
         
+
 
 
 
@@ -609,6 +666,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.VoltageLevelAutorange.ON
 
 
@@ -616,6 +674,7 @@ Enums used in NI-DCPower
         NI-DCPower automatically selects the voltage level range.
 
         
+
 
 
 
@@ -630,6 +689,7 @@ Enums used in NI-DCPower
         
 
 
+
     .. py:attribute:: nidcpower.VoltageLimitAutorange.ON
 
 
@@ -637,4 +697,5 @@ Enums used in NI-DCPower
         NI-DCPower automatically selects the voltage limit range.
 
         
+
 
