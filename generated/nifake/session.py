@@ -138,6 +138,30 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
+    def _get_attribute_vi_int64(self, attribute_id):
+        '''_get_attribute_vi_int64
+
+        Queries the value of a ViInt64 attribute.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_int64(attribute_id)
+
+        Args:
+            attribute_id (int): Pass the ID of an attribute.
+
+        Returns:
+            attribute_value (int): Returns the value of the attribute.
+        '''
+        attribute_value_ctype = visatype.ViInt64(0)
+        error_code = self._library.niFake_GetAttributeViInt64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(attribute_value_ctype.value)
+
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
@@ -252,6 +276,27 @@ class _SessionBase(object):
             attribute_value (int): Pass the value that you want to set the attribute to.
         '''
         error_code = self._library.niFake_SetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_int64(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_int64
+
+        This function sets the value of a ViInt64 attribute.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
+
+        Args:
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (int): Pass the value that you want to set the attribute to.
+        '''
+        error_code = self._library.niFake_SetAttributeViInt64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
