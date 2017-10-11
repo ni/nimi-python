@@ -240,21 +240,6 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
-    def test_method_with_warning(self):
-        test_error_code = 42
-        test_error_desc = "The answer to the ultimate question, only positive"
-        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
-        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = test_error_code
-        self.side_effects_helper['GetError']['description'] = test_error_desc
-        with nifake.Session('dev1') as session:
-            with warnings.catch_warnings(record=True) as w:
-                session.simple_function()
-                assert len(w) == 1
-                assert issubclass(w[0].category, nifake.NifakeWarning)
-                assert test_error_desc in str(w[0].message)
-
     def test_invalid_method_call_not_enough_parameters_error(self):
         self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
         with nifake.Session('dev1') as session:
@@ -272,6 +257,21 @@ class TestSession(object):
                 assert False
             except TypeError as e:
                 pass
+
+    def test_method_with_warning(self):
+        test_error_code = 42
+        test_error_desc = "The answer to the ultimate question, only positive"
+        self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
+        self.side_effects_helper['SimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            with warnings.catch_warnings(record=True) as w:
+                session.simple_function()
+                assert len(w) == 1
+                assert issubclass(w[0].category, nifake.NifakeWarning)
+                assert test_error_desc in str(w[0].message)
 
     '''
     # TODO(bhaswath): Enable test once issue 320 is fixed
@@ -423,7 +423,7 @@ class TestSession(object):
             self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViString.call_count == 2
 
-    def test_set_vi_string_attribute(self):
+    def test_set_attribute_string(self):
         self.patched_library.niFake_SetAttributeViString.side_effect = self.side_effects_helper.niFake_SetAttributeViString
         attribute_id = 1000002
         attrib_string = 'This is test string'
@@ -438,7 +438,7 @@ class TestSession(object):
             assert session.read_write_bool
             self.patched_library.niFake_GetAttributeViBoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, b"", 1000000, ANY)
 
-    def test_set_bool_attribute(self):
+    def test_set_attribute_boolean(self):
         self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
         attribute_id = 1000000
         attrib_bool = True
@@ -500,23 +500,6 @@ class TestSession(object):
     # def test_get_attribute_int64(self):
     # def test_set_attribute_int64(self):
 
-    def test_set_attribute_error(self):
-        test_error_code = -1
-        test_error_desc = 'Test'
-        self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
-        self.side_effects_helper['SetAttributeViReal64']['return'] = test_error_code
-        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
-        self.side_effects_helper['GetError']['errorCode'] = test_error_code
-        self.side_effects_helper['GetError']['description'] = test_error_desc
-        with nifake.Session('dev1') as session:
-            try:
-                session.read_write_double = -42
-                assert False
-            except nifake.Error as e:
-                assert e.code == test_error_code
-                assert e.description == test_error_desc
-                self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', 1000001, -42)
-
     def test_get_attribute_error(self):
         test_error_code = -123
         test_error_desc = "ascending order"
@@ -533,6 +516,23 @@ class TestSession(object):
             except nifake.Error as e:
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
+
+    def test_set_attribute_error(self):
+        test_error_code = -1
+        test_error_desc = 'Test'
+        self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
+        self.side_effects_helper['SetAttributeViReal64']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            try:
+                session.read_write_double = -42
+                assert False
+            except nifake.Error as e:
+                assert e.code == test_error_code
+                assert e.description == test_error_desc
+                self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', 1000001, -42)
 
     def test_add_properties_to_session_error(self):
         with nifake.Session('dev1') as session:
