@@ -303,7 +303,8 @@ def test_reset_method(session):
 
 
 def test_error_message(session):
-    # Testing a private function, as there is no way to natively get to this function on a simulated session.
+    # Calling the private function directly, as _get_error_message() only gets called when you have an invalid session,
+    # and there is no good way for us to invalidate a simulated session.
     message = session._error_message(-1074118641)
     assert message == 'The data is not available. This can be caused by calling Fetch or FetchMultiPoint before calling Initiate or after calling Abort.'
 

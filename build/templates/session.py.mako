@@ -89,6 +89,19 @@ class _SessionBase(object):
     _is_frozen = False
 
 % for attribute in helper.sorted_attrs(attributes):
+<%
+rep_cap_attr_desc = '''
+This property can use repeated capabilities (usually channels). If set or get directly on the 
+{0}.Session object, then the set/get will use all repeated capabilities in the session. 
+You can specify a subset of repeated capabilities using the Python index notation on an 
+{0}.Session instance, and calling set/get value on the result.:
+
+    session['0,1'].{0} = var
+    var = session['0,1'].{0}
+'''
+if attributes[attribute]['channel_based'] == 'True':
+    attributes[attribute]['documentation']['tip'] = rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
+%>\
     %if attributes[attribute]['enum']:
     ${attributes[attribute]['name'].lower()} = attributes.AttributeEnum(attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
     %else:

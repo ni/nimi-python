@@ -14,6 +14,7 @@ niswitch.Session methods
     
 
 
+
     :param channel1:
 
 
@@ -23,6 +24,7 @@ niswitch.Session methods
         names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
 
         
+
 
     :type channel1: string
     :param channel2:
@@ -34,6 +36,7 @@ niswitch.Session methods
         names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
 
         
+
 
     :type channel2: string
 
@@ -64,6 +67,7 @@ niswitch.Session methods
             
 
 
+
 .. function:: commit()
 
     Downloads the configured scan list and trigger settings to hardware.
@@ -72,6 +76,7 @@ niswitch.Session methods
     order or to control when expensive hardware operations are performed.
 
     
+
 
 
 .. function:: configure_scan_list(scanlist, scan_mode=niswitch.ScanMode.BREAK_BEFORE_MAKE)
@@ -90,6 +95,7 @@ niswitch.Session methods
     
 
 
+
     :param scanlist:
 
 
@@ -97,6 +103,7 @@ niswitch.Session methods
         attribute. Default value: None
 
         
+
 
     :type scanlist: string
     :param scan_mode:
@@ -108,6 +115,7 @@ niswitch.Session methods
         Make
 
         
+
 
     :type scan_mode: :py:data:`niswitch.ScanMode`
 
@@ -124,6 +132,7 @@ niswitch.Session methods
     
 
 
+
     :param scan_delay:
 
 
@@ -135,6 +144,7 @@ niswitch.Session methods
         value in seconds. Default value: 0.0 s
 
         
+
 
     :type scan_delay: float
     :param trigger_input:
@@ -150,6 +160,7 @@ niswitch.Session methods
 
         
 
+
     :type trigger_input: :py:data:`niswitch.TriggerInput`
     :param scan_advanced_output:
 
@@ -163,6 +174,7 @@ niswitch.Session methods
         a list of valid values.
 
         
+
 
     :type scan_advanced_output: :py:data:`niswitch.ScanAdvancedOutput`
 
@@ -190,6 +202,7 @@ niswitch.Session methods
     
 
 
+
     :param channel1:
 
 
@@ -199,6 +212,7 @@ niswitch.Session methods
         names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         
+
 
     :type channel1: string
     :param channel2:
@@ -210,6 +224,7 @@ niswitch.Session methods
         names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         
+
 
     :type channel2: string
 
@@ -239,6 +254,7 @@ niswitch.Session methods
     
 
 
+
     :param connection_list:
 
 
@@ -252,6 +268,7 @@ niswitch.Session methods
 
         
 
+
     :type connection_list: string
 
 .. function:: disable()
@@ -261,6 +278,7 @@ niswitch.Session methods
     disconnected and any scan in progress is aborted.
 
     
+
 
 
 .. function:: disconnect(channel1, channel2)
@@ -273,6 +291,7 @@ niswitch.Session methods
     
 
 
+
     :param channel1:
 
 
@@ -282,6 +301,7 @@ niswitch.Session methods
         names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         
+
 
     :type channel1: string
     :param channel2:
@@ -294,6 +314,7 @@ niswitch.Session methods
 
         
 
+
     :type channel2: string
 
 .. function:: disconnect_all()
@@ -304,6 +325,7 @@ niswitch.Session methods
     
 
 
+
 .. function:: disconnect_multiple(disconnection_list)
 
     Breaks the connections between channels specified in Disconnection List.
@@ -312,6 +334,7 @@ niswitch.Session methods
     error occurred.
 
     
+
 
 
     :param disconnection_list:
@@ -328,6 +351,7 @@ niswitch.Session methods
 
         
 
+
     :type disconnection_list: string
 
 .. function:: get_channel_name(index)
@@ -340,6 +364,7 @@ niswitch.Session methods
     
 
 
+
     :param index:
 
 
@@ -347,6 +372,7 @@ niswitch.Session methods
         Value of Channel Count attribute.
 
         
+
 
     :type index: int
     :param buffer_size:
@@ -365,6 +391,7 @@ niswitch.Session methods
         Coercion Record buffer parameter. Default Value: None
 
         
+
 
     :type buffer_size: int
 
@@ -385,6 +412,7 @@ niswitch.Session methods
     
 
 
+
     :param channel1:
 
 
@@ -394,6 +422,7 @@ niswitch.Session methods
         names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
 
         
+
 
     :type channel1: string
     :param channel2:
@@ -405,6 +434,7 @@ niswitch.Session methods
         names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
 
         
+
 
     :type channel2: string
     :param buffer_size:
@@ -424,6 +454,7 @@ niswitch.Session methods
 
         
 
+
     :type buffer_size: int
 
 .. function:: get_relay_count(relay_name)
@@ -437,6 +468,7 @@ niswitch.Session methods
     
 
 
+
     :param relay_name:
 
 
@@ -445,6 +477,7 @@ niswitch.Session methods
         relay names for the switch module.
 
         
+
 
     :type relay_name: string
 
@@ -457,6 +490,7 @@ niswitch.Session methods
             
 
 
+
 .. function:: get_relay_name(index)
 
     Returns the relay name string that is in the relay list at the specified
@@ -467,6 +501,7 @@ niswitch.Session methods
     
 
 
+
     :param index:
 
 
@@ -474,6 +509,7 @@ niswitch.Session methods
         Value of Channel Count attribute.
 
         
+
 
     :type index: int
     :param relay_name_buffer_size:
@@ -493,6 +529,7 @@ niswitch.Session methods
 
         
 
+
     :type relay_name_buffer_size: int
 
 .. function:: get_relay_position(relay_name)
@@ -501,6 +538,7 @@ niswitch.Session methods
     parameter.
 
     
+
 
 
     :param relay_name:
@@ -512,6 +550,7 @@ niswitch.Session methods
 
         
 
+
     :type relay_name: string
 
     :rtype: :py:data:`niswitch.RelayPosition`
@@ -522,6 +561,7 @@ niswitch.Session methods
             NIWITCH\_VAL\_CLOSED 11
 
             
+
 
 
 .. function:: init_with_topology(resource_name, topology='Configured Topology', simulate=False, reset_device=False)
@@ -544,6 +584,7 @@ niswitch.Session methods
     
 
 
+
     :param resource_name:
 
 
@@ -560,6 +601,7 @@ niswitch.Session methods
         0, device number 16 PXI::16 PXI bus 0, device number 16
 
         
+
 
     :type resource_name: string
     :param topology:
@@ -758,6 +800,7 @@ niswitch.Session methods
 
         
 
+
     :type topology: string
     :param simulate:
 
@@ -768,6 +811,7 @@ niswitch.Session methods
 
         
 
+
     :type simulate: bool
     :param reset_device:
 
@@ -777,6 +821,7 @@ niswitch.Session methods
         - Currently unsupported. The device will not reset.
 
         
+
 
     :type reset_device: bool
 
@@ -791,12 +836,14 @@ niswitch.Session methods
             
 
 
+
 .. function:: is_debounced()
 
     Indicates if all created paths have settled by returning the value of
     the :py:data:`niswitch.IS\_DEBOUNCED` attribute.
 
     
+
 
 
     :rtype: bool
@@ -809,11 +856,13 @@ niswitch.Session methods
             
 
 
+
 .. function:: is_scanning()
 
     Indicates the status of the scan.
 
     
+
 
 
     :rtype: bool
@@ -825,6 +874,7 @@ niswitch.Session methods
             indicates that the switch device is idle.
 
             
+
 
 
 .. function:: relay_control(relay_name, relay_action)
@@ -839,6 +889,7 @@ niswitch.Session methods
     
 
 
+
     :param relay_name:
 
 
@@ -847,6 +898,7 @@ niswitch.Session methods
         relay names for the switch module.
 
         
+
 
     :type relay_name: string
     :param relay_action:
@@ -857,6 +909,7 @@ niswitch.Session methods
         NISWITCH\_VAL\_CLOSE\_RELAY (Default Value)
 
         
+
 
     :type relay_action: :py:data:`niswitch.RelayAction`
 
@@ -870,12 +923,14 @@ niswitch.Session methods
     
 
 
+
 .. function:: route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False)
 
     Routes the scan advanced output trigger from a trigger bus line (TTLx)
     to the front or rear connector.
 
     
+
 
 
     :param scan_advanced_output_connector:
@@ -886,6 +941,7 @@ niswitch.Session methods
         value: NISWITCH\_VAL\_FRONTCONNECTOR
 
         
+
 
     :type scan_advanced_output_connector: :py:data:`niswitch.ScanAdvancedOutput`
     :param scan_advanced_output_bus_line:
@@ -900,6 +956,7 @@ niswitch.Session methods
 
         
 
+
     :type scan_advanced_output_bus_line: :py:data:`niswitch.ScanAdvancedOutput`
     :param invert:
 
@@ -908,6 +965,7 @@ niswitch.Session methods
         vice versa. Default value: VI\_FALSE
 
         
+
 
     :type invert: bool
 
@@ -920,6 +978,7 @@ niswitch.Session methods
     
 
 
+
     :param trigger_input_connector:
 
 
@@ -929,6 +988,7 @@ niswitch.Session methods
         NISWITCH\_VAL\_FRONTCONNECTOR
 
         
+
 
     :type trigger_input_connector: :py:data:`niswitch.TriggerInput`
     :param trigger_input_bus_line:
@@ -942,6 +1002,7 @@ niswitch.Session methods
 
         
 
+
     :type trigger_input_bus_line: :py:data:`niswitch.TriggerInput`
     :param invert:
 
@@ -950,6 +1011,7 @@ niswitch.Session methods
         vice versa. Default value: VI\_FALSE
 
         
+
 
     :type invert: bool
 
@@ -965,12 +1027,14 @@ niswitch.Session methods
     
 
 
+
 .. function:: set_continuous_scan(continuous_scan)
 
     Sets the to loop continuously through the scan list or to stop scanning
     after one pass through the scan list.
 
     
+
 
 
     :param continuous_scan:
@@ -982,6 +1046,7 @@ niswitch.Session methods
 
         
 
+
     :type continuous_scan: bool
 
 .. function:: set_path(path_list)
@@ -992,6 +1057,7 @@ niswitch.Session methods
     is not necessary, use :py:func:`niswitch.connect`.
 
     
+
 
 
     :param path_list:
@@ -1006,6 +1072,7 @@ niswitch.Session methods
 
         
 
+
     :type path_list: string
 
 .. function:: wait_for_debounce(maximum_time_ms=5000)
@@ -1018,6 +1085,7 @@ niswitch.Session methods
     
 
 
+
     :param maximum_time_ms:
 
 
@@ -1027,6 +1095,7 @@ niswitch.Session methods
         Default Value:5000 ms
 
         
+
 
     :type maximum_time_ms: int
 
@@ -1041,6 +1110,7 @@ niswitch.Session methods
     
 
 
+
     :param maximum_time_ms:
 
 
@@ -1050,6 +1120,7 @@ niswitch.Session methods
         Value:5000 ms
 
         
+
 
     :type maximum_time_ms: int
 
@@ -1062,11 +1133,13 @@ niswitch.Session methods
     
 
 
+
 .. function:: self_test()
 
     Verifies that the driver can communicate with the switch module.
 
     
+
 
 
     :rtype: tuple (self_test_result, self_test_message)
@@ -1080,6 +1153,7 @@ niswitch.Session methods
 
             
 
+
         self_test_message (string): 
 
 
@@ -1087,6 +1161,7 @@ niswitch.Session methods
             array with at least 256 bytes.
 
             
+
 
 
 

@@ -96,8 +96,15 @@ class _SessionBase(object):
 
         Queries the value of a ViBoolean attribute.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_boolean(attribute_id)
+
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -116,8 +123,15 @@ class _SessionBase(object):
 
         Queries the value of a ViInt32 attribute.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_int32(attribute_id)
+
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -136,8 +150,15 @@ class _SessionBase(object):
 
         Queries the value of a ViReal attribute.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_real64(attribute_id)
+
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -156,8 +177,15 @@ class _SessionBase(object):
 
         Queries the value of a ViBoolean attribute.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_string(attribute_id)
+
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
             buffer_size (int): Number of bytes in attributeValue. You can IVI-dance with this.
         '''
@@ -181,8 +209,15 @@ class _SessionBase(object):
 
         Acquires a single measurement and returns the measured value.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1'].read_from_channel(maximum_time)
+
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             maximum_time (int): Specifies the **maximum_time** allowed in years.
 
         Returns:
@@ -201,8 +236,15 @@ class _SessionBase(object):
 
         This function sets the value of a ViBoolean attribute.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (bool): Pass the value that you want to set the attribute to.
         '''
@@ -219,8 +261,15 @@ class _SessionBase(object):
 
         This function sets the value of a ViInt32 attribute.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (int): Pass the value that you want to set the attribute to.
         '''
@@ -237,8 +286,15 @@ class _SessionBase(object):
 
         This function sets the value of a ViReal64 attribute.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (float): Pass the value that you want to set the attribute to.
         '''
@@ -255,8 +311,15 @@ class _SessionBase(object):
 
         This function sets the value of a ViString attribute.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): This is the channel(s) that this function will apply to.
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (string): Pass the value that you want to set the attribute to.
         '''

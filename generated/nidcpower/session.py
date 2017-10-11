@@ -2513,15 +2513,15 @@ class _SessionBase(object):
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your
                 device in the *NI DC Power Supplies and SMUs Help* for more information.
             units (enums.ApertureTimeUnits): Specifies the units for **apertureTime**.
@@ -2565,15 +2565,15 @@ class _SessionBase(object):
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].fetch_multiple(count, timeout=1.0)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             timeout (float): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
@@ -2614,15 +2614,15 @@ class _SessionBase(object):
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_boolean(attribute_id)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -2666,15 +2666,15 @@ class _SessionBase(object):
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_int32(attribute_id)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -2718,15 +2718,15 @@ class _SessionBase(object):
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_int64(attribute_id)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -2770,15 +2770,15 @@ class _SessionBase(object):
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_real64(attribute_id)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -2822,15 +2822,15 @@ class _SessionBase(object):
         | You can use this function to get the values of device-specific
           attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_string(attribute_id)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -2885,6 +2885,14 @@ class _SessionBase(object):
         **index**. Use the CHANNEL_COUNT attribute to
         determine the upper bound of valid values for **index**.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].get_channel_name(index)
+
         Args:
             index (int): Specifies which output channel name to return. The index values begin at
                 1.
@@ -2921,10 +2929,15 @@ class _SessionBase(object):
         measure multiple output channels, use the measure_multiple
         function.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].measure(measurement_type)
+
         Args:
-            channel_name (string): Specifies the output channel to measure. Only one measurement at a time
-                may be made with the measure function. Use the
-                measure_multiple function to measure multiple channels.
             measurement_type (int): Specifies whether a voltage or current value is measured.
                 **Defined Values**:
 
@@ -2955,14 +2968,13 @@ class _SessionBase(object):
         order of the measurements returned in the array corresponds to the order
         on the specified output channel(s).
 
-        Args:
-            channel_name (string): Specifies the output channels to measure. You can specify multiple
-                channels by using a channel list or a channel range. A channel list is a
-                comma (,) separated sequence of channel names (e.g. 0,2 specifies
-                channels 0 and 2). A channel range is a lower bound channel followed by
-                a hyphen (-) or colon (:) followed by an upper bound channel (e.g. 0-2
-                specifies channels 0, 1, and 2). If you do not specify a channel name,
-                the function uses all channels in the session.
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].measure_multiple()
 
         Returns:
             voltage_measurements (list of float): Returns an array of voltage measurements. The measurements in the array
@@ -3006,9 +3018,13 @@ class _SessionBase(object):
 
         `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
-        Args:
-            channel_name (string): Specifies the output channel to query. Compliance status can only be
-                queried for one channel at a time.
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].query_in_compliance()
 
         Returns:
             in_compliance (bool): Returns whether the device output channel is in compliance.
@@ -3026,9 +3042,15 @@ class _SessionBase(object):
         Queries the maximum current limit on an output channel if the output
         channel is set to the specified **voltageLevel**.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].query_max_current_limit(voltage_level)
+
         Args:
-            channel_name (string): Specifies the output channel to query. The maximum current limit may
-                only be queried for one channel at a time.
             voltage_level (float): Specifies the voltage level to use when calculating the
                 **maxCurrentLimit**.
 
@@ -3050,9 +3072,15 @@ class _SessionBase(object):
         Queries the maximum voltage level on an output channel if the output
         channel is set to the specified **currentLimit**.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].query_max_voltage_level(current_limit)
+
         Args:
-            channel_name (string): Specifies the output channel to query. The maximum voltage level may
-                only be queried for one channel at a time.
             current_limit (float): Specifies the current limit to use when calculating the
                 **maxVoltageLevel**.
 
@@ -3074,9 +3102,15 @@ class _SessionBase(object):
         Queries the minimum current limit on an output channel if the output
         channel is set to the specified **voltageLevel**.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].query_min_current_limit(voltage_level)
+
         Args:
-            channel_name (string): Specifies the output channel to query. The minimum current limit may
-                only be queried for one channel at a time.
             voltage_level (float): Specifies the voltage level to use when calculating the
                 **minCurrentLimit**.
 
@@ -3102,9 +3136,15 @@ class _SessionBase(object):
 
         `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].query_output_state(output_state)
+
         Args:
-            channel_name (string): Specifies the output channel to query. The output state may only be
-                queried for one channel at a time.
             output_state (int): Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
@@ -3133,15 +3173,15 @@ class _SessionBase(object):
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -3188,15 +3228,15 @@ class _SessionBase(object):
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -3243,15 +3283,15 @@ class _SessionBase(object):
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -3298,15 +3338,15 @@ class _SessionBase(object):
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -3353,15 +3393,15 @@ class _SessionBase(object):
         | This is a low-level function that you can use to set the values of
           device-specific attributes and inherent IVI attributes.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+
         Args:
-            channel_name (string): Specifies the output channel(s) to which this configuration value
-                applies. Specify multiple channels by using a channel list or a channel
-                range. A channel list is a comma (,) separated sequence of channel names
-                (for example, 0,2 specifies channels 0 and 2). A channel range is a
-                lower bound channel followed by a hyphen (-) or colon (:) followed by an
-                upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-                In the Running state, multiple output channel configurations are
-                performed sequentially based on the order specified in this parameter.
             attribute_id (int): Specifies the ID of an attribute. From the function panel window, you
                 can use this control as follows.
 
@@ -3426,9 +3466,15 @@ class _SessionBase(object):
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
 
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session['0,1'].set_sequence(source_delays, size, values=None)
+
         Args:
-            channel_name (string): Specifies the output channel to which this configuration value applies.
-                You can only set a sequence for one channel at a time.
             values (list of float): Specifies the series of voltage levels or current levels, depending on
                 the configured `output
                 function <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.

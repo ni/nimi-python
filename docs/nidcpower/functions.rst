@@ -23,6 +23,7 @@ nidcpower.Session methods
     
 
 
+
 .. function:: configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
     Configures the aperture time on the specified channel(s).
@@ -49,21 +50,16 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
 
-        Specifies the output channel(s) to which this configuration value
-        applies. Specify multiple channels by using a channel list or a channel
-        range. A channel list is a comma (,) separated sequence of channel names
-        (for example, 0,2 specifies channels 0 and 2). A channel range is a
-        lower bound channel followed by a hyphen (-) or colon (:) followed by an
-        upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-        In the Running state, multiple output channel configurations are
-        performed sequentially based on the order specified in this parameter.
-
-        
-
-    :type channel_name: string
     :param aperture_time:
 
 
@@ -71,6 +67,7 @@ nidcpower.Session methods
         device in the *NI DC Power Supplies and SMUs Help* for more information.
 
         
+
 
     :type aperture_time: float
     :param units:
@@ -85,6 +82,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_POWER\_LINE\_CYCLES (1029) | Specifies Power Line Cycles. |
         +--------------------------------------------+------------------------------+
 
+
     :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
 .. function:: configure_digital_edge_measure_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
@@ -97,6 +95,7 @@ nidcpower.Session methods
         Functions by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param input_terminal:
@@ -119,6 +118,7 @@ nidcpower.Session methods
 
         
 
+
     :type input_terminal: string
     :param edge:
 
@@ -133,6 +133,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
+
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
 .. function:: configure_digital_edge_pulse_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
@@ -145,6 +146,7 @@ nidcpower.Session methods
         Functions by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param input_terminal:
@@ -167,6 +169,7 @@ nidcpower.Session methods
 
         
 
+
     :type input_terminal: string
     :param edge:
 
@@ -181,6 +184,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
+
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
 .. function:: configure_digital_edge_sequence_advance_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
@@ -193,6 +197,7 @@ nidcpower.Session methods
         Functions by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param input_terminal:
@@ -216,6 +221,7 @@ nidcpower.Session methods
 
         
 
+
     :type input_terminal: string
     :param edge:
 
@@ -230,6 +236,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
+
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
 .. function:: configure_digital_edge_source_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
@@ -242,6 +249,7 @@ nidcpower.Session methods
         Functions by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param input_terminal:
@@ -264,6 +272,7 @@ nidcpower.Session methods
 
         
 
+
     :type input_terminal: string
     :param edge:
 
@@ -278,6 +287,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
 
+
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
 .. function:: configure_digital_edge_start_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
@@ -290,6 +300,7 @@ nidcpower.Session methods
         Functions by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param input_terminal:
@@ -312,6 +323,7 @@ nidcpower.Session methods
 
         
 
+
     :type input_terminal: string
     :param edge:
 
@@ -325,6 +337,7 @@ nidcpower.Session methods
         +--------------------------------+----------------------------------------------------------------+
         | NIDCPOWER\_VAL\_FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
         +--------------------------------+----------------------------------------------------------------+
+
 
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
@@ -365,12 +378,14 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
+
     :param sequence_name:
 
 
         Specifies the name of the sequence to create.
 
         
+
 
     :type sequence_name: string
     :param attribute_id_count:
@@ -379,6 +394,7 @@ nidcpower.Session methods
         Specifies the number of attributes in the attributeIDs array.
 
         
+
 
     :type attribute_id_count: int
     :param attribute_ids:
@@ -475,6 +491,7 @@ nidcpower.Session methods
         | :py:data:`nidcpower.TRANSIENT\_RESPONSE`              | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
         +-------------------------------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
 
+
     :type attribute_ids: list of int
     :param set_as_active_sequence:
 
@@ -482,6 +499,7 @@ nidcpower.Session methods
         Specifies that this current sequence is active.
 
         
+
 
     :type set_as_active_sequence: bool
 
@@ -518,12 +536,14 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
+
     :param set_as_active_step:
 
 
         Specifies that this current step in the active sequence is active.
 
         
+
 
     :type set_as_active_step: bool
 
@@ -555,12 +575,14 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
+
     :param sequence_name:
 
 
         specifies the name of the sequence to delete.
 
         
+
 
     :type sequence_name: string
 
@@ -574,6 +596,7 @@ nidcpower.Session methods
     relay.
 
     
+
 
 
 .. function:: export_signal(signal, output_terminal, signal_identifier='')
@@ -591,6 +614,7 @@ nidcpower.Session methods
         Functions by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param signal:
@@ -623,6 +647,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_PULSE\_TRIGGER (1053)                       | Exports the Pulse trigger.                     |
         +-------------------------------------------------------------+------------------------------------------------+
 
+
     :type signal: int
     :param signal_identifier:
 
@@ -630,6 +655,7 @@ nidcpower.Session methods
         Reserved for future use. Pass in an empty string for this parameter.
 
         
+
 
     :type signal_identifier: string
     :param output_terminal:
@@ -658,6 +684,7 @@ nidcpower.Session methods
         | "PXI\_Trig7" | PXI trigger line 7   |
         +--------------+----------------------+
 
+
     :type output_terminal: string
 
 .. function:: fetch_multiple(count, timeout=1.0)
@@ -683,21 +710,16 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].fetch_multiple(count, timeout=1.0)
 
 
-        Specifies the output channel(s) to which this configuration value
-        applies. Specify multiple channels by using a channel list or a channel
-        range. A channel list is a comma (,) separated sequence of channel names
-        (for example, 0,2 specifies channels 0 and 2). A channel range is a
-        lower bound channel followed by a hyphen (-) or colon (:) followed by an
-        upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
-        In the Running state, multiple output channel configurations are
-        performed sequentially based on the order specified in this parameter.
-
-        
-
-    :type channel_name: string
     :param timeout:
 
 
@@ -711,6 +733,7 @@ nidcpower.Session methods
             triggers so that the timeout interval is long enough for your
             application.
 
+
     :type timeout: float
     :param count:
 
@@ -718,6 +741,7 @@ nidcpower.Session methods
         Specifies the number of measurements to fetch.
 
         
+
 
     :type count: int
 
@@ -733,6 +757,7 @@ nidcpower.Session methods
 
             
 
+
         current_measurements (list of float): 
 
 
@@ -740,6 +765,7 @@ nidcpower.Session methods
             has been allocated for the returned array.
 
             
+
 
         in_compliance (list of bool): 
 
@@ -750,6 +776,7 @@ nidcpower.Session methods
 
             
 
+
         actual_count (int): 
 
 
@@ -757,6 +784,7 @@ nidcpower.Session methods
             device.
 
             
+
 
 
 .. function:: get_channel_name(index)
@@ -768,6 +796,16 @@ nidcpower.Session methods
     
 
 
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].get_channel_name(index)
+
+
     :param index:
 
 
@@ -775,6 +813,7 @@ nidcpower.Session methods
         1.
 
         
+
 
     :type index: int
     :param buffer_size:
@@ -791,6 +830,7 @@ nidcpower.Session methods
         If you pass 0, you can pass VI\_NULL for **channelName**.
 
         
+
 
     :type buffer_size: int
 
@@ -813,6 +853,7 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
+
     :rtype: tuple (year, month, day, hour, minute)
 
         WHERE
@@ -824,6 +865,7 @@ nidcpower.Session methods
 
             
 
+
         month (int): 
 
 
@@ -831,12 +873,14 @@ nidcpower.Session methods
 
             
 
+
         day (int): 
 
 
             Returns the **day** on which the device was last calibrated.
 
             
+
 
         hour (int): 
 
@@ -846,12 +890,14 @@ nidcpower.Session methods
 
             
 
+
         minute (int): 
 
 
             Returns the **minute** in which the device was last calibrated.
 
             
+
 
 
 .. function:: get_self_cal_last_temp()
@@ -874,6 +920,7 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
+
     :rtype: float
     :return:
 
@@ -882,6 +929,7 @@ nidcpower.Session methods
             during the oldest successful calibration.
 
             
+
 
 
 .. function:: measure(measurement_type)
@@ -895,16 +943,16 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].measure(measurement_type)
 
 
-        Specifies the output channel to measure. Only one measurement at a time
-        may be made with the :py:func:`nidcpower.measure` function. Use the
-        :py:func:`nidcpower.measure_multiple` function to measure multiple channels.
-
-        
-
-    :type channel_name: string
     :param measurement_type:
 
 
@@ -916,6 +964,7 @@ nidcpower.Session methods
         +--------------------------------------+------------------------------+
         | NIDCPOWER\_VAL\_MEASURE\_CURRENT (0) | The device measures current. |
         +--------------------------------------+------------------------------+
+
 
     :type measurement_type: int
 
@@ -929,6 +978,7 @@ nidcpower.Session methods
             
 
 
+
 .. function:: measure_multiple()
 
     Returns arrays of the measured voltage and current values on the
@@ -940,20 +990,15 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
+        .. code:: python
 
-        Specifies the output channels to measure. You can specify multiple
-        channels by using a channel list or a channel range. A channel list is a
-        comma (,) separated sequence of channel names (e.g. 0,2 specifies
-        channels 0 and 2). A channel range is a lower bound channel followed by
-        a hyphen (-) or colon (:) followed by an upper bound channel (e.g. 0-2
-        specifies channels 0, 1, and 2). If you do not specify a channel name,
-        the function uses all channels in the session.
+            session['0,1'].measure_multiple()
 
-        
-
-    :type channel_name: string
 
     :rtype: tuple (voltage_measurements, current_measurements)
 
@@ -969,6 +1014,7 @@ nidcpower.Session methods
 
             
 
+
         current_measurements (list of float): 
 
 
@@ -978,6 +1024,7 @@ nidcpower.Session methods
             returned array.
 
             
+
 
 
 .. function:: query_in_compliance()
@@ -1006,15 +1053,15 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
 
+        .. code:: python
 
-        Specifies the output channel to query. Compliance status can only be
-        queried for one channel at a time.
+            session['0,1'].query_in_compliance()
 
-        
-
-    :type channel_name: string
 
     :rtype: bool
     :return:
@@ -1025,6 +1072,7 @@ nidcpower.Session methods
             
 
 
+
 .. function:: query_max_current_limit(voltage_level)
 
     Queries the maximum current limit on an output channel if the output
@@ -1033,15 +1081,16 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].query_max_current_limit(voltage_level)
 
 
-        Specifies the output channel to query. The maximum current limit may
-        only be queried for one channel at a time.
-
-        
-
-    :type channel_name: string
     :param voltage_level:
 
 
@@ -1049,6 +1098,7 @@ nidcpower.Session methods
         **maxCurrentLimit**.
 
         
+
 
     :type voltage_level: float
 
@@ -1062,6 +1112,7 @@ nidcpower.Session methods
             
 
 
+
 .. function:: query_max_voltage_level(current_limit)
 
     Queries the maximum voltage level on an output channel if the output
@@ -1070,15 +1121,16 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].query_max_voltage_level(current_limit)
 
 
-        Specifies the output channel to query. The maximum voltage level may
-        only be queried for one channel at a time.
-
-        
-
-    :type channel_name: string
     :param current_limit:
 
 
@@ -1086,6 +1138,7 @@ nidcpower.Session methods
         **maxVoltageLevel**.
 
         
+
 
     :type current_limit: float
 
@@ -1099,6 +1152,7 @@ nidcpower.Session methods
             
 
 
+
 .. function:: query_min_current_limit(voltage_level)
 
     Queries the minimum current limit on an output channel if the output
@@ -1107,15 +1161,16 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].query_min_current_limit(voltage_level)
 
 
-        Specifies the output channel to query. The minimum current limit may
-        only be queried for one channel at a time.
-
-        
-
-    :type channel_name: string
     :param voltage_level:
 
 
@@ -1123,6 +1178,7 @@ nidcpower.Session methods
         **minCurrentLimit**.
 
         
+
 
     :type voltage_level: float
 
@@ -1134,6 +1190,7 @@ nidcpower.Session methods
             with the specified **voltageLevel**.
 
             
+
 
 
 .. function:: query_output_state(output_state)
@@ -1148,15 +1205,16 @@ nidcpower.Session methods
     
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].query_output_state(output_state)
 
 
-        Specifies the output channel to query. The output state may only be
-        queried for one channel at a time.
-
-        
-
-    :type channel_name: string
     :param output_state:
 
 
@@ -1168,6 +1226,7 @@ nidcpower.Session methods
         +-----------------------------------------------+-------------------------------------------------------------------+
         | NIDCPOWER\_VAL\_OUTPUT\_CONSTANT\_CURRENT (1) | The device maintains a constant current by adjusting the voltage. |
         +-----------------------------------------------+-------------------------------------------------------------------+
+
 
     :type output_state: int
 
@@ -1181,12 +1240,14 @@ nidcpower.Session methods
             
 
 
+
 .. function:: read_current_temperature()
 
     Returns the current onboard **temperature**, in degrees Celsius, of the
     device.
 
     
+
 
 
     :rtype: float
@@ -1196,6 +1257,7 @@ nidcpower.Session methods
             Returns the onboard **temperature**, in degrees Celsius, of the device.
 
             
+
 
 
 .. function:: reset_device()
@@ -1217,6 +1279,7 @@ nidcpower.Session methods
     
 
 
+
 .. function:: reset_with_defaults()
 
     Resets the device to a known state. This function disables power
@@ -1228,6 +1291,7 @@ nidcpower.Session methods
     configurable attributes from the IVI configuration.
 
     
+
 
 
 .. function:: send_software_edge_trigger(trigger=nidcpower.SendSoftwareEdgeTriggerType.START)
@@ -1247,6 +1311,7 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
+
     :param trigger:
 
 
@@ -1264,6 +1329,7 @@ nidcpower.Session methods
         +---------------------------------------------------+---------------------------------------+
         | NIDCPOWER\_VAL\_PULSE\_TRIGGER (1053              | Asserts the Pulse trigger.            |
         +---------------------------------------------------+---------------------------------------+
+
 
     :type trigger: :py:data:`nidcpower.SendSoftwareEdgeTriggerType`
 
@@ -1293,15 +1359,16 @@ nidcpower.Session methods
         for more information about supported devices.
 
 
-    :param channel_name:
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].set_sequence(source_delays, size, values=None)
 
 
-        Specifies the output channel to which this configuration value applies.
-        You can only set a sequence for one channel at a time.
-
-        
-
-    :type channel_name: string
     :param values:
 
 
@@ -1314,6 +1381,7 @@ nidcpower.Session methods
 
         
 
+
     :type values: list of float
     :param source_delays:
 
@@ -1325,6 +1393,7 @@ nidcpower.Session methods
 
         
 
+
     :type source_delays: list of float
     :param size:
 
@@ -1333,6 +1402,7 @@ nidcpower.Session methods
         Values and Source Delays arrays should have the same size.
 
         
+
 
     :type size: int
 
@@ -1351,6 +1421,7 @@ nidcpower.Session methods
     .. note:: Refer to `Supported Functions by
         Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
         for more information about supported devices.
+
 
 
     :param event_id:
@@ -1373,6 +1444,7 @@ nidcpower.Session methods
         | NIDCPOWER\_VAL\_READY\_FOR\_PULSE\_TRIGGER\_EVENT (1052)    | Waits for the Ready for Pulse Trigger event.     |
         +-------------------------------------------------------------+--------------------------------------------------+
 
+
     :type event_id: int
     :param timeout:
 
@@ -1386,6 +1458,7 @@ nidcpower.Session methods
         .. note:: When setting the timeout interval, ensure you take into account any
             triggers so that the timeout interval is long enough for your
             application.
+
 
     :type timeout: :py:data:`nidcpower.Event`
 
@@ -1401,12 +1474,14 @@ nidcpower.Session methods
     
 
 
+
 .. function:: self_test()
 
     Performs the device self-test routine and returns the test result(s).
     Calling this function implicitly calls the :py:func:`nidcpower.reset` function.
 
     
+
 
 
     :rtype: tuple (self_test_result, self_test_message)
@@ -1426,6 +1501,7 @@ nidcpower.Session methods
             | 1              | Self test failed. |
             +----------------+-------------------+
 
+
         self_test_message (string): 
 
 
@@ -1433,6 +1509,7 @@ nidcpower.Session methods
             least 256 bytes.
 
             
+
 
 
 

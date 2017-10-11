@@ -820,13 +820,15 @@ class _SessionBase(object):
            particular attribute.
         -  State caching is enabled, and the currently cached value is invalid.
 
-        Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
 
-                The default value is " " (an empty string).
+            session['0,1']._get_attribute_vi_boolean(attribute_id)
+
+        Args:
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -855,13 +857,15 @@ class _SessionBase(object):
            particular attribute.
         -  State caching is enabled, and the currently cached value is invalid.
 
-        Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
 
-                The default value is " " (an empty string).
+            session['0,1']._get_attribute_vi_int32(attribute_id)
+
+        Args:
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -890,13 +894,15 @@ class _SessionBase(object):
            particular attribute.
         -  State caching is enabled, and the currently cached value is invalid.
 
-        Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
 
-                The default value is " " (an empty string).
+            session['0,1']._get_attribute_vi_real64(attribute_id)
+
+        Args:
             attribute_id (int): Pass the ID of an attribute.
 
         Returns:
@@ -928,13 +934,15 @@ class _SessionBase(object):
            You pass the number of bytes in the buffer as the Array Size
            parameter.
 
-        Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
 
-                The default value is " " (an empty string).
+            session['0,1']._get_attribute_vi_string(attribute_id)
+
+        Args:
             attribute_id (int): Pass the ID of an attribute.
             buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
                 **Attribute_Value** parameter.
@@ -995,13 +1003,15 @@ class _SessionBase(object):
         attributes whose value you change. Thus, you can safely call the
         high-level functions without the penalty of redundant instrument I/O.
 
-        Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
 
-                The default value is " " (an empty string).
+            session['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+
+        Args:
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (bool): Pass the value that you want to set the attribute to.
         '''
@@ -1042,13 +1052,15 @@ class _SessionBase(object):
         attributes whose value you change. Thus, you can safely call the
         high-level functions without the penalty of redundant instrument I/O.
 
-        Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
 
-                The default value is " " (an empty string).
+            session['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+
+        Args:
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (int): Pass the value that you want to set the attribute to.
         '''
@@ -1089,13 +1101,15 @@ class _SessionBase(object):
         attributes whose value you change. Thus, you can safely call the
         high-level functions without the penalty of redundant instrument I/O.
 
-        Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
 
-                The default value is " " (an empty string).
+            session['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+
+        Args:
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (float): Pass the value that you want to set the attribute to.
         '''
@@ -1136,13 +1150,15 @@ class _SessionBase(object):
         attributes whose value you change. Thus, you can safely call the
         high-level functions without the penalty of redundant instrument I/O.
 
-        Args:
-            channel_name (string): This parameter is ignored. National Instruments DMMs do not support
-                channel names since they only have a single channel. This parameter is
-                included in order to support interchangeability and upgradability to
-                multiple channel DMMs.
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidmm.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidmm.Session instance, and calling this method on the result.:
 
-                The default value is " " (an empty string).
+            session['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+
+        Args:
             attribute_id (int): Pass the ID of an attribute.
             attribute_value (string): Pass the value that you want to set the attribute to.
         '''
