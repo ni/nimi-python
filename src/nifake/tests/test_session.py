@@ -408,8 +408,13 @@ class TestSession(object):
             self.patched_library.niFake_GetAttributeViReal64.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViReal64.call_count == 1
 
-    # TODO(marcoskirsch):
-    # def test_set_attribute_real64(self):
+    def test_set_attribute_real64(self):
+        self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
+        attribute_id = 1000001
+        test_number = -10.1
+        with nifake.Session('dev1') as session:
+            session.read_write_double = test_number
+            self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, test_number)
 
     def test_get_attribute_string(self):
         self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
@@ -496,9 +501,23 @@ class TestSession(object):
             session['0-24'].read_write_double = test_number
             self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'0-24', attribute_id, test_number)
 
-    # TODO(marcoskirsch)
-    # def test_get_attribute_int64(self):
-    # def test_set_attribute_int64(self):
+    def test_get_attribute_int64(self):
+        self.patched_library.niFake_GetAttributeViInt64.side_effect = self.side_effects_helper.niFake_GetAttributeViInt64
+        attribute_id = 1000006
+        test_number = 3
+        self.side_effects_helper['GetAttributeViInt64']['attributeValue'] = test_number
+        with nifake.Session('dev1') as session:
+            attr_int = session.read_write_int64
+            assert(attr_int == test_number)
+            self.patched_library.niFake_GetAttributeViInt64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, ANY)
+
+    def test_set_attribute_int64(self):
+        self.patched_library.niFake_SetAttributeViInt64.side_effect = self.side_effects_helper.niFake_SetAttributeViInt64
+        attribute_id = 1000006
+        test_number = -10
+        with nifake.Session('dev1') as session:
+            session.read_write_int64 = test_number
+            self.patched_library.niFake_SetAttributeViInt64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, test_number)
 
     def test_get_attribute_error(self):
         test_error_code = -123
