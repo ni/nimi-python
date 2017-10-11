@@ -569,17 +569,17 @@ for supported devices.
     'MeasurementTypes': {
         'values': [
             {
-                'name': 'MEASURE_VOLTAGE',
-                'value': 1,
-                'documentation': {
-                    'description': 'The device measures voltage.',
-                },
-            },
-            {
                 'name': 'MEASURE_CURRENT',
                 'value': 0,
                 'documentation': {
                     'description': 'The device measures current.',
+                },
+            },
+            {
+                'name': 'MEASURE_VOLTAGE',
+                'value': 1,
+                'documentation': {
+                    'description': 'The device measures voltage.',
                 },
             }
         ],
