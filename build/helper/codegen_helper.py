@@ -7,108 +7,40 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 
-
-_parameterUsageOptions = {}
-
-_parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
+_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
     'skip_self': False,
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
     'name_to_use': 'python_name_with_default',
-    'skip_repeated_capability_parameter': True,
-    'mechanism': 'any',
 }
-_parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_CALL] = {
+_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_self': True,
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
     'name_to_use': 'python_name',
-    'skip_repeated_capability_parameter': True,
-    'mechanism': 'any',
 }
-_parameterUsageOptions[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
+_parameterUsageOptionsSnippet[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_self': True,
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
     'name_to_use': 'python_name_with_doc_default',
-    'skip_repeated_capability_parameter': True,
-    'mechanism': 'any',
 }
-_parameterUsageOptions[ParameterUsageOptions.CTYPES_CALL] = {
+_parameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_CALL] = {
     'skip_self': True,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
     'name_to_use': 'python_name',
-    'skip_repeated_capability_parameter': False,
-    'mechanism': 'any',
 }
-_parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
+_parameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'skip_self': True,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
     'name_to_use': 'library_method_call_snippet',
-    'skip_repeated_capability_parameter': False,
-    'mechanism': 'any',
 }
-_parameterUsageOptions[ParameterUsageOptions.CTYPES_ARGTYPES] = {
+_parameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'skip_self': True,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
     'name_to_use': 'ctypes_type_library_call',
-    'skip_repeated_capability_parameter': False,
-    'mechanism': 'any',
 }
-_parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
+_parameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
     'skip_self': False,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
     'name_to_use': 'python_name',
-    'skip_repeated_capability_parameter': False,
-    'mechanism': 'any',
 }
-_parameterUsageOptions[ParameterUsageOptions.INPUT_PARAMETERS] = {
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'name_to_use': 'python_name',
-    'skip_repeated_capability_parameter': True,
-    'mechanism': 'any',
-}
-_parameterUsageOptions[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_input_parameters': True,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'name_to_use': 'python_name',
-    'skip_repeated_capability_parameter': False,
-    'mechanism': 'fixed, passed-in, len',  # any but ivi-dance
-}
+# Only used for filtering
+#   ParameterUsageOptions.INPUT_PARAMETERS
+#   ParameterUsageOptions.OUTPUT_PARAMETERS
+#   ParameterUsageOptions.IVI_DANCE_PARAMETER
+#   ParameterUsageOptions.LEN_PARAMETER
+#   ParameterUsageOptions.INPUT_ENUM_PARAMETERS
 
 
 def filter_parameters(function, parameter_usage_options):

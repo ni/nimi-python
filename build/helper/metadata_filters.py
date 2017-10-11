@@ -1,10 +1,132 @@
 from .parameter_usage_options import ParameterUsageOptions
 # Filters
 
+_parameterUsageOptionsFiltering = {}
 
 def filter_codegen_functions(functions):
     '''Returns function metadata only for those functions to be included in codegen'''
     return {k: v for k, v in functions.items() if v['codegen_method'] != 'no'}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
+    'skip_session_handle': True,
+    'skip_input_parameters': False,
+    'skip_output_parameters': True,
+    'skip_size_parameter': True,
+    'reordered_for_default_values': True,
+    'skip_repeated_capability_parameter': True,
+    'skip_non_enum_parameter': False,
+    'mechanism': 'any',
+}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
+    'skip_session_handle': True,
+    'skip_input_parameters': False,
+    'skip_output_parameters': True,
+    'skip_size_parameter': True,
+    'reordered_for_default_values': True,
+    'skip_repeated_capability_parameter': True,
+    'skip_non_enum_parameter': False,
+    'mechanism': 'any',
+}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
+    'skip_session_handle': True,
+    'skip_input_parameters': False,
+    'skip_output_parameters': True,
+    'skip_size_parameter': True,
+    'reordered_for_default_values': True,
+    'skip_repeated_capability_parameter': True,
+    'skip_non_enum_parameter': False,
+    'mechanism': 'any',
+}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL] = {
+    'skip_session_handle': False,
+    'skip_input_parameters': False,
+    'skip_output_parameters': False,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'skip_repeated_capability_parameter': False,
+    'skip_non_enum_parameter': False,
+    'mechanism': 'any',
+}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
+    'skip_session_handle': False,
+    'skip_input_parameters': False,
+    'skip_output_parameters': False,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'skip_repeated_capability_parameter': False,
+    'skip_non_enum_parameter': False,
+    'mechanism': 'any',
+}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_ARGTYPES] = {
+    'skip_session_handle': False,
+    'skip_input_parameters': False,
+    'skip_output_parameters': False,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'skip_repeated_capability_parameter': False,
+    'skip_non_enum_parameter': False,
+    'mechanism': 'any',
+}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
+    'skip_session_handle': False,
+    'skip_input_parameters': False,
+    'skip_output_parameters': False,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'skip_repeated_capability_parameter': False,
+    'skip_non_enum_parameter': False,
+    'mechanism': 'any',
+}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_PARAMETERS] = {
+    'skip_session_handle': True,
+    'skip_input_parameters': False,
+    'skip_output_parameters': True,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'skip_repeated_capability_parameter': True,
+    'skip_non_enum_parameter': False,
+    'mechanism': 'any',
+}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
+    'skip_session_handle': True,
+    'skip_input_parameters': True,
+    'skip_output_parameters': False,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'skip_repeated_capability_parameter': False,
+    'skip_non_enum_parameter': False,
+    'mechanism': 'fixed, passed-in, len',  # any but ivi-dance
+}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
+    'skip_session_handle': True,
+    'skip_input_parameters': True,
+    'skip_output_parameters': False,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'skip_repeated_capability_parameter': False,
+    'skip_non_enum_parameter': False,
+    'mechanism': 'ivi-dance',
+}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
+    'skip_session_handle': True,
+    'skip_input_parameters': False,
+    'skip_output_parameters': True,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'skip_repeated_capability_parameter': False,
+    'skip_non_enum_parameter': False,
+    'mechanism': 'len',
+}
+_parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_ENUM_PARAMETERS] = {
+    'skip_session_handle': True,
+    'skip_input_parameters': False,
+    'skip_output_parameters': True,
+    'skip_size_parameter': False,
+    'reordered_for_default_values': False,
+    'skip_repeated_capability_parameter': True,
+    'skip_non_enum_parameter': True,
+    'mechanism': 'any',
+}
+
 
 
 def filter_enum_parameters(parameters):
