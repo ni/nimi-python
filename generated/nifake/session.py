@@ -490,6 +490,24 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
 
+    def get_an_ivi_dance_string(self):
+        '''get_an_ivi_dance_string
+
+        Returns a string using the IVI dance.
+
+        Args:
+            buffer_size (int): Number of bytes in aString You can IVI-dance with this.
+        '''
+        buffer_size = 0
+        a_string_ctype = None
+        error_code = self._library.niFake_GetAnIviDanceString(self._vi, buffer_size, a_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size = error_code
+        a_string_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niFake_GetAnIviDanceString(self._vi, buffer_size, a_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return a_string_ctype.value.decode(self._encoding)
+
     def get_enum_value(self):
         '''get_enum_value
 

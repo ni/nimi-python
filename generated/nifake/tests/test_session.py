@@ -327,8 +327,21 @@ class TestSession(object):
             assert (returned_number == test_number)
             self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
 
-    # TODO(marcoskirsch):
-    # def test_get_string_ivi_dance(self)
+    def test_get_an_ivi_dance_string(self):
+        self.patched_library.niFake_GetAnIviDanceString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceString
+        self.patched_library.niFake_GetAnIviDanceString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceString
+        string = 'Testing is fun?'
+        self.side_effects_helper['GetAnIviDanceString']['aString'] = ''
+        self.side_effects_helper['GetAnIviDanceString']['return'] = len(string)
+        self.side_effects_helper['GetAnIviDanceString']['aString'] = string
+        self.side_effects_helper['GetAnIviDanceString']['return'] = 0
+        with nifake.Session('dev1') as session:
+            result_string = session.get_an_ivi_dance_string()
+            assert result_string == string
+            from mock import call
+            calls = [call(SESSION_NUM_FOR_TEST, 0, None), call(SESSION_NUM_FOR_TEST, len(string), ANY)]
+            self.patched_library.niFake_GetAnIviDanceString.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAnIviDanceString.call_count == 2
 
     def test_get_string_ivi_dance_error(self):
         test_error_code = -1234
