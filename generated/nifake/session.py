@@ -400,6 +400,38 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def bool_array_output_function(self, number_of_elements):
+        '''bool_array_output_function
+
+        This function returns an array of booleans.
+
+        Args:
+            number_of_elements (int): Number of elements in the array.
+
+        Returns:
+            an_array (list of bool): Contains an array of booleans
+        '''
+        an_array_ctype = (visatype.ViBoolean * number_of_elements)()
+        error_code = self._library.niFake_BoolArrayOutputFunction(self._vi, number_of_elements, an_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [bool(an_array_ctype[i]) for i in range(number_of_elements)]
+
+    def enum_array_output_function(self, number_of_elements):
+        '''enum_array_output_function
+
+        This function returns an array of booleans.
+
+        Args:
+            number_of_elements (int): Number of elements in the array.
+
+        Returns:
+            an_array (list of enums.Turtle): Contains an array of booleans
+        '''
+        an_array_ctype = (visatype.ViInt16 * number_of_elements)()
+        error_code = self._library.niFake_EnumArrayOutputFunction(self._vi, number_of_elements, an_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements)]
+
     def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
         '''enum_input_function_with_defaults
 
@@ -601,7 +633,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32(0)
         error_code = self._library.niFake_ReadMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [float(reading_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def return_a_number_and_a_string(self):
         '''return_a_number_and_a_string

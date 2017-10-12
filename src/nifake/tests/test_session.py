@@ -146,6 +146,19 @@ class TestSession(object):
             assert test_result_enum == test_turtle
             self.patched_library.niFake_GetEnumValue.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
 
+    def test_get_a_list_enums(self):
+        self.patched_library.niFake_EnumArrayOutputFunction.side_effect = self.side_effects_helper.niFake_EnumArrayOutputFunction
+        test_array = [1, 1, 0]
+        test_array_size = len(test_array)
+        self.side_effects_helper['EnumArrayOutputFunction']['anArray'] = test_array
+        with nifake.Session('dev1') as session:
+            test_result = session.enum_array_output_function(test_array_size)
+            assert test_array_size == len(test_result)
+            for i in range(test_array_size):
+                assert isinstance(test_result[i], nifake.Turtle)
+                assert test_result[i].value == test_array[i]
+            self.patched_library.niFake_EnumArrayOutputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, ANY)
+
     def test_get_a_boolean(self):
         self.patched_library.niFake_GetABoolean.side_effect = self.side_effects_helper.niFake_GetABoolean
         self.side_effects_helper['GetABoolean']['aBoolean'] = 1
@@ -154,6 +167,19 @@ class TestSession(object):
             assert isinstance(test_result, bool)
             assert test_result
             self.patched_library.niFake_GetABoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
+
+    def test_get_a_list_booleans(self):
+        self.patched_library.niFake_BoolArrayOutputFunction.side_effect = self.side_effects_helper.niFake_BoolArrayOutputFunction
+        test_array = [1, 1, 0]
+        test_array_size = len(test_array)
+        self.side_effects_helper['BoolArrayOutputFunction']['anArray'] = test_array
+        with nifake.Session('dev1') as session:
+            test_result = session.bool_array_output_function(test_array_size)
+            assert test_array_size == len(test_result)
+            for i in range(test_array_size):
+                assert isinstance(test_result[0], bool)
+                assert test_result[i] == bool(test_array[i])
+            self.patched_library.niFake_BoolArrayOutputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, ANY)
 
     def test_acquisition_context_manager(self):
         self.patched_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate
@@ -204,6 +230,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             measurements, points = session.read_multi_point(test_maximum_time, len(test_reading_array))
             assert len(measurements) == test_actual_number_of_points
+            assert isinstance(measurements[0], float)
             assert points == test_actual_number_of_points
             assert measurements == test_reading_array
             from mock import call
