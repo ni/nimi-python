@@ -35,6 +35,7 @@ class Library(object):
         self.niFake_Initiate_cfunc = None
         self.niFake_MultipleArrayTypes_cfunc = None
         self.niFake_OneInputFunction_cfunc = None
+        self.niFake_ParametersAreMultipleTypes_cfunc = None
         self.niFake_Read_cfunc = None
         self.niFake_ReadFromChannel_cfunc = None
         self.niFake_ReadMultiPoint_cfunc = None
@@ -208,6 +209,14 @@ class Library(object):
                 self.niFake_OneInputFunction_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
                 self.niFake_OneInputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_OneInputFunction_cfunc(vi, a_number)
+
+    def niFake_ParametersAreMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ParametersAreMultipleTypes_cfunc is None:
+                self.niFake_ParametersAreMultipleTypes_cfunc = self._library.niFake_ParametersAreMultipleTypes
+                self.niFake_ParametersAreMultipleTypes_cfunc.argtypes = [ViSession, ViBoolean, ViInt32, ViInt64, ViInt16, ViReal64, ViReal64, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_ParametersAreMultipleTypes_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_ParametersAreMultipleTypes_cfunc(vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string)
 
     def niFake_Read(self, vi, maximum_time, reading):  # noqa: N802
         with self._func_lock:

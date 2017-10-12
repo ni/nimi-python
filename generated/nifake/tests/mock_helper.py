@@ -69,6 +69,8 @@ class SideEffectsHelper(object):
         self._defaults['MultipleArrayTypes']['aFixedArray'] = None
         self._defaults['OneInputFunction'] = {}
         self._defaults['OneInputFunction']['return'] = 0
+        self._defaults['ParametersAreMultipleTypes'] = {}
+        self._defaults['ParametersAreMultipleTypes']['return'] = 0
         self._defaults['Read'] = {}
         self._defaults['Read']['return'] = 0
         self._defaults['Read']['reading'] = None
@@ -294,6 +296,11 @@ class SideEffectsHelper(object):
             return self._defaults['OneInputFunction']['return']
         return self._defaults['OneInputFunction']['return']
 
+    def niFake_ParametersAreMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):  # noqa: N802
+        if self._defaults['ParametersAreMultipleTypes']['return'] != 0:
+            return self._defaults['ParametersAreMultipleTypes']['return']
+        return self._defaults['ParametersAreMultipleTypes']['return']
+
     def niFake_Read(self, vi, maximum_time, reading):  # noqa: N802
         if self._defaults['Read']['return'] != 0:
             return self._defaults['Read']['return']
@@ -479,6 +486,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_MultipleArrayTypes.return_value = 0
         mock_library.niFake_OneInputFunction.side_effect = MockFunctionCallError("niFake_OneInputFunction")
         mock_library.niFake_OneInputFunction.return_value = 0
+        mock_library.niFake_ParametersAreMultipleTypes.side_effect = MockFunctionCallError("niFake_ParametersAreMultipleTypes")
+        mock_library.niFake_ParametersAreMultipleTypes.return_value = 0
         mock_library.niFake_Read.side_effect = MockFunctionCallError("niFake_Read")
         mock_library.niFake_Read.return_value = 0
         mock_library.niFake_ReadFromChannel.side_effect = MockFunctionCallError("niFake_ReadFromChannel")

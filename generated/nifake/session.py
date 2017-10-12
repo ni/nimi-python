@@ -636,6 +636,40 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):
+        '''parameters_are_multiple_types
+
+        Has parameters of multiple types.
+
+        Args:
+            a_boolean (bool): Contains a boolean.
+            an_int32 (int): Contains a 32-bit integer.
+            an_int64 (int): Contains a 64-bit integer.
+            an_int_enum (enums.Turtle): Indicates a ninja turtle
+
+                +---+---------------+
+                | 0 | Leonardo      |
+                +---+---------------+
+                | 1 | Donatello     |
+                +---+---------------+
+                | 2 | Raphael       |
+                +---+---------------+
+                | 3 | Mich elangelo |
+                +---+---------------+
+            a_float (float): The measured value.
+            a_float_enum (enums.FloatEnum): A float enum.
+            string_size (int): Number of bytes allocated for aString
+            a_string (string): An IVI dance string.
+        '''
+        if type(an_int_enum) is not enums.Turtle:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Turtle))
+        if type(a_float_enum) is not enums.FloatEnum:
+            raise TypeError('Parameter mode must be of type ' + str(enums.FloatEnum))
+        string_size = len(a_string)
+        error_code = self._library.niFake_ParametersAreMultipleTypes(self._vi, a_boolean, an_int32, an_int64, an_int_enum.value, a_float, a_float_enum.value, string_size, a_string.encode(self._encoding))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def read(self, maximum_time):
         '''read
 

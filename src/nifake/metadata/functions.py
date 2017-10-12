@@ -1023,7 +1023,7 @@ functions = {
             'description': 'Returns a string using the IVI dance.',
         },
     },
-    
+
     'GetAStringOfFixedMaximumSize': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -1526,7 +1526,7 @@ functions = {
             'description': 'Returns multiple types.',
         },
     },
-    
+
     'MultipleArrayTypes': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -1585,9 +1585,100 @@ functions = {
             'description': 'Returns multiple types of arrays.',
         },
     },
-    
+
+    'ParametersAreMultipleTypes': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'aBoolean',
+                'type': 'ViBoolean',
+                'documentation': {
+                    'description': 'Contains a boolean.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'anInt32',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Contains a 32-bit integer.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'anInt64',
+                'type': 'ViInt64',
+                'documentation': {
+                    'description': 'Contains a 64-bit integer.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': 'Turtle',
+                'name': 'anIntEnum',
+                'type': 'ViInt16',
+                'documentation': {
+                    'description': 'Indicates a ninja turtle',
+                    'table_body': [['0', 'Leonardo'], ['1', 'Donatello'], ['2', 'Raphael'], ['3', 'Mich elangelo']],
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'aFloat',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'The measured value.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': 'FloatEnum',
+                'name': 'aFloatEnum',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'A float enum.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'stringSize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of bytes allocated for aString',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'aString',
+                'type': 'ViChar',
+                'documentation': {
+                    'description': 'An IVI dance string.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Has parameters of multiple types.',
+        },
+    },
+
     #TODO(marcoskirsch): More cases to add:
-    #     Returning arrays (not strings) through all 3 mechanisms
-    #     Taking parameters of all types
     #     Waveforms as inputs and outputs
 }

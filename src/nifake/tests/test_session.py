@@ -264,7 +264,7 @@ class TestSession(object):
             session.array_input_function(test_array)
             self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
 
-    # TODO(marcoskirsch): Other read variations: waveforms
+    # TODO(marcoskirsch): Waveforms
 
     def test_return_multiple_types(self):
         self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
@@ -313,6 +313,51 @@ class TestSession(object):
             passed_in_array_result, fixed_size_array_result = session.multiple_array_types(passed_in_array_size, len_array)
             assert passed_in_array == passed_in_array_result
             assert fixed_size_array == fixed_size_array_result
+
+    def test_parameters_are_multiple_types(self):
+        self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
+        boolean = True
+        int32 = 32
+        int64 = 64
+        enum = nifake.Turtle.LEONARDO
+        float = 1.23
+        float_enum = nifake.FloatEnum._6_5
+        string = 'Testing is fun?'
+        with nifake.Session('dev1') as session:
+            session.parameters_are_multiple_types(boolean, int32, int64, enum, float, float_enum, string)
+            self.patched_library.niFake_ParametersAreMultipleTypes.assert_called_once_with(SESSION_NUM_FOR_TEST, boolean, int32, int64, enum.value, float, float_enum.value, len(string), string.encode('ascii'))
+
+    def test_parameters_are_multiple_types_error(self):
+        test_error_code = -42
+        test_error_desc = "The answer to the ultimate question"
+        self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
+        self.side_effects_helper['ParametersAreMultipleTypes']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
+        self.side_effects_helper['ParametersAreMultipleTypes']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        boolean = True
+        int32 = 32
+        int64 = 64
+        enum = nifake.Turtle.LEONARDO
+        float = 1.23
+        float_enum = nifake.FloatEnum._6_5
+        string = 'Testing is fun?'
+        with nifake.Session('dev1') as session:
+            try:
+                session.parameters_are_multiple_types(boolean, int32, int64, 123, float, float_enum, string)
+                assert False
+            except TypeError as e:
+                pass
+            try:
+                session.parameters_are_multiple_types(boolean, int32, int64, enum, float, 0.123, string)
+                assert False
+            except TypeError as e:
+                pass
 
     def test_method_with_error(self):
         test_error_code = -42

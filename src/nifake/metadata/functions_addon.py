@@ -58,6 +58,7 @@ functions_buffer_info = {
     'MultipleArrayTypes':                    { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'passedInArraySize'}, },
                                                                2: { 'size': {'mechanism':'fixed', 'value':3}, },
                                                                4: { 'size': {'mechanism':'len', 'value':'lenArraySize'}, }, }, },
+    'ParametersAreMultipleTypes':            { 'parameters': { 8: { 'size': {'mechanism':'len', 'value':'stringSize'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
