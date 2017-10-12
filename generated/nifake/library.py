@@ -38,6 +38,7 @@ class Library(object):
         self.niFake_ReadFromChannel_cfunc = None
         self.niFake_ReadMultiPoint_cfunc = None
         self.niFake_ReturnANumberAndAString_cfunc = None
+        self.niFake_ReturnMultipleTypes_cfunc = None
         self.niFake_SetAttributeViBoolean_cfunc = None
         self.niFake_SetAttributeViInt32_cfunc = None
         self.niFake_SetAttributeViInt64_cfunc = None
@@ -230,6 +231,14 @@ class Library(object):
                 self.niFake_ReturnANumberAndAString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_ReturnANumberAndAString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReturnANumberAndAString_cfunc(vi, a_number, a_string)
+
+    def niFake_ReturnMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ReturnMultipleTypes_cfunc is None:
+                self.niFake_ReturnMultipleTypes_cfunc = self._library.niFake_ReturnMultipleTypes
+                self.niFake_ReturnMultipleTypes_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt64), ctypes.POINTER(ViInt16), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_ReturnMultipleTypes_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_ReturnMultipleTypes_cfunc(vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string)
 
     def niFake_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:

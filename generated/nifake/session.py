@@ -667,6 +667,55 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
 
+    def return_multiple_types(self, array_size):
+        '''return_multiple_types
+
+        Returns a boolean.
+
+        Note: This function rules!
+
+        Args:
+            array_size (int): Number of measurements to acquire.
+            string_size (int): Number of bytes allocated for aString
+
+        Returns:
+            a_boolean (bool): Contains a boolean.
+            an_int32 (int): Contains a 32-bit integer.
+            an_int64 (int): Contains a 64-bit integer.
+            an_int_enum (enums.Turtle): Indicates a ninja turtle
+
+                +---+---------------+
+                | 0 | Leonardo      |
+                +---+---------------+
+                | 1 | Donatello     |
+                +---+---------------+
+                | 2 | Raphael       |
+                +---+---------------+
+                | 3 | Mich elangelo |
+                +---+---------------+
+            a_float (float): The measured value.
+            a_float_enum (enums.FloatEnum): A float enum.
+            an_array (list of float): An array of measurement values.
+
+                Note: The size must be at least arraySize.
+        '''
+        a_boolean_ctype = visatype.ViBoolean(0)
+        an_int32_ctype = visatype.ViInt32(0)
+        an_int64_ctype = visatype.ViInt64(0)
+        an_int_enum_ctype = visatype.ViInt16(0)
+        a_float_ctype = visatype.ViReal64(0)
+        a_float_enum_ctype = visatype.ViReal64(0)
+        an_array_ctype = (visatype.ViReal64 * array_size)()
+        string_size = 0
+        a_string_ctype = None
+        error_code = self._library.niFake_ReturnMultipleTypes(self._vi, ctypes.pointer(a_boolean_ctype), ctypes.pointer(an_int32_ctype), ctypes.pointer(an_int64_ctype), ctypes.pointer(an_int_enum_ctype), ctypes.pointer(a_float_ctype), ctypes.pointer(a_float_enum_ctype), array_size, an_array_ctype, string_size, a_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        string_size = error_code
+        a_string_ctype = (visatype.ViChar * string_size)()
+        error_code = self._library.niFake_ReturnMultipleTypes(self._vi, ctypes.pointer(a_boolean_ctype), ctypes.pointer(an_int32_ctype), ctypes.pointer(an_int64_ctype), ctypes.pointer(an_int_enum_ctype), ctypes.pointer(a_float_ctype), ctypes.pointer(a_float_enum_ctype), array_size, an_array_ctype, string_size, a_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), [an_array_ctype[i] for i in range(array_size)], a_string_ctype.value.decode(self._encoding)
+
     def simple_function(self):
         '''simple_function
 

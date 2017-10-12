@@ -79,6 +79,16 @@ class SideEffectsHelper(object):
         self._defaults['ReturnANumberAndAString']['return'] = 0
         self._defaults['ReturnANumberAndAString']['aNumber'] = None
         self._defaults['ReturnANumberAndAString']['aString'] = None
+        self._defaults['ReturnMultipleTypes'] = {}
+        self._defaults['ReturnMultipleTypes']['return'] = 0
+        self._defaults['ReturnMultipleTypes']['aBoolean'] = None
+        self._defaults['ReturnMultipleTypes']['anInt32'] = None
+        self._defaults['ReturnMultipleTypes']['anInt64'] = None
+        self._defaults['ReturnMultipleTypes']['anIntEnum'] = None
+        self._defaults['ReturnMultipleTypes']['aFloat'] = None
+        self._defaults['ReturnMultipleTypes']['aFloatEnum'] = None
+        self._defaults['ReturnMultipleTypes']['anArray'] = None
+        self._defaults['ReturnMultipleTypes']['aString'] = None
         self._defaults['SetAttributeViBoolean'] = {}
         self._defaults['SetAttributeViBoolean']['return'] = 0
         self._defaults['SetAttributeViInt32'] = {}
@@ -307,6 +317,42 @@ class SideEffectsHelper(object):
             a_string[i] = a[i]
         return self._defaults['ReturnANumberAndAString']['return']
 
+    def niFake_ReturnMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string):  # noqa: N802
+        if self._defaults['ReturnMultipleTypes']['return'] != 0:
+            return self._defaults['ReturnMultipleTypes']['return']
+        if self._defaults['ReturnMultipleTypes']['aBoolean'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aBoolean')
+        a_boolean.contents.value = self._defaults['ReturnMultipleTypes']['aBoolean']
+        if self._defaults['ReturnMultipleTypes']['anInt32'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anInt32')
+        an_int32.contents.value = self._defaults['ReturnMultipleTypes']['anInt32']
+        if self._defaults['ReturnMultipleTypes']['anInt64'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anInt64')
+        an_int64.contents.value = self._defaults['ReturnMultipleTypes']['anInt64']
+        if self._defaults['ReturnMultipleTypes']['anIntEnum'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anIntEnum')
+        an_int_enum.contents.value = self._defaults['ReturnMultipleTypes']['anIntEnum']
+        if self._defaults['ReturnMultipleTypes']['aFloat'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aFloat')
+        a_float.contents.value = self._defaults['ReturnMultipleTypes']['aFloat']
+        if self._defaults['ReturnMultipleTypes']['aFloatEnum'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aFloatEnum')
+        a_float_enum.contents.value = self._defaults['ReturnMultipleTypes']['aFloatEnum']
+        if self._defaults['ReturnMultipleTypes']['anArray'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anArray')
+        a = self._defaults['ReturnMultipleTypes']['anArray']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(an_array), len(a))):
+            an_array[i] = a[i]
+        if self._defaults['ReturnMultipleTypes']['aString'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aString')
+        if string_size == 0:
+            return len(self._defaults['ReturnMultipleTypes']['aString'])
+        a_string.value = self._defaults['ReturnMultipleTypes']['aString'].encode('ascii')
+        return self._defaults['ReturnMultipleTypes']['return']
+
     def niFake_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['SetAttributeViBoolean']['return'] != 0:
             return self._defaults['SetAttributeViBoolean']['return']
@@ -414,6 +460,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_ReadMultiPoint.return_value = 0
         mock_library.niFake_ReturnANumberAndAString.side_effect = MockFunctionCallError("niFake_ReturnANumberAndAString")
         mock_library.niFake_ReturnANumberAndAString.return_value = 0
+        mock_library.niFake_ReturnMultipleTypes.side_effect = MockFunctionCallError("niFake_ReturnMultipleTypes")
+        mock_library.niFake_ReturnMultipleTypes.return_value = 0
         mock_library.niFake_SetAttributeViBoolean.side_effect = MockFunctionCallError("niFake_SetAttributeViBoolean")
         mock_library.niFake_SetAttributeViBoolean.return_value = 0
         mock_library.niFake_SetAttributeViInt32.side_effect = MockFunctionCallError("niFake_SetAttributeViInt32")
