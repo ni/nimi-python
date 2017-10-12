@@ -30,6 +30,10 @@ class TestSession(object):
         self.patched_library_singleton_get.stop()
         self.patched_library_patcher.stop()
 
+    def niFake_Read_warning(self, vi, maximum_time, reading):  # noqa: N802
+        reading.contents.value = self.reading
+        return self.error_code_return
+
     # Session management
 
     def test_init_with_options_and_close(self):
@@ -260,7 +264,7 @@ class TestSession(object):
             session.array_input_function(test_array)
             self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
 
-    # TODO(marcoskirsch): Other read variations: waveform with ViReal64
+    # TODO(marcoskirsch): Other read variations: waveforms
 
     def test_return_multiple_types(self):
         self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
@@ -355,26 +359,23 @@ class TestSession(object):
                 assert issubclass(w[0].category, nifake.NifakeWarning)
                 assert test_error_desc in str(w[0].message)
 
-    '''
-    # TODO(bhaswath): Enable test once issue 320 is fixed
     def test_read_with_warning(self):
         test_maximum_time = 10
         test_reading = float('nan')
         test_error_code = 42
         test_error_desc = "The answer to the ultimate question, only positive"
-        self.patched_library.niFake_Read.side_effect = self.side_effects_helper.niFake_Read
-        self.side_effects_helper['Read']['return'] = test_error_code
-        self.side_effects_helper['Read']['reading'] = test_reading
+        self.patched_library.niFake_Read.side_effect = self.niFake_Read_warning
+        self.error_code_return = test_error_code
+        self.reading = test_reading
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
         with nifake.Session('dev1') as session:
             with warnings.catch_warnings(record=True) as w:
-                assert test_reading == session.read(test_maximum_time)
+                assert math.isnan(session.read(test_maximum_time))
                 assert len(w) == 1
                 assert issubclass(w[0].category, nifake.NifakeWarning)
                 assert test_error_desc in str(w[0].message)
-    '''
 
     # Retrieving buffers and strings
 
