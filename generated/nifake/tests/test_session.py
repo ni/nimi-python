@@ -176,8 +176,9 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             test_result = session.bool_array_output_function(test_array_size)
             assert test_array_size == len(test_result)
-            assert isinstance(test_result[0], bool)
-            assert test_result == test_array
+            for i in range(test_array_size):
+                assert isinstance(test_result[0], bool)
+                assert test_result[i] == bool(test_array[i])
             self.patched_library.niFake_BoolArrayOutputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, ANY)
 
     def test_acquisition_context_manager(self):
