@@ -1528,10 +1528,8 @@ functions = {
         },
     },
     
-    #TODO(marcoskirsch): Lots more cases to add:
+    #TODO(marcoskirsch): More cases to add:
     #     Returning arrays (not strings) through all 3 mechanisms
     #     Taking parameters of all types
-    #     Enums enums enums
     #     Waveforms as inputs and outputs
-    #     ... etc
 }
