@@ -300,6 +300,20 @@ class TestSession(object):
             assert result_string == string
             assert self.patched_library.niFake_ReturnMultipleTypes.call_count == 2
 
+    def test_multiple_array_types(self):
+        self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
+        passed_in_array = [0.0, 1.0]
+        passed_in_array_size = len(passed_in_array)
+        fixed_size_array = [2.0, 3.0, 4.0]
+        len_array = [5.0, 6.0, 7.0, 8.0]
+        self.side_effects_helper['MultipleArrayTypes']['passedInArray'] = passed_in_array
+        self.side_effects_helper['MultipleArrayTypes']['aFixedArray'] = fixed_size_array
+        self.side_effects_helper['MultipleArrayTypes']['return'] = 0
+        with nifake.Session('dev1') as session:
+            passed_in_array_result, fixed_size_array_result = session.multiple_array_types(passed_in_array_size, len_array)
+            assert passed_in_array == passed_in_array_result
+            assert fixed_size_array == fixed_size_array_result
+
     def test_method_with_error(self):
         test_error_code = -42
         test_error_desc = "The answer to the ultimate question"

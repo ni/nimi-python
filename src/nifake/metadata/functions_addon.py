@@ -55,6 +55,9 @@ functions_buffer_info = {
     'GetAnIviDanceString':                   { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'ReturnMultipleTypes':                   { 'parameters': { 8: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, },
                                                               10: { 'size': {'mechanism':'ivi-dance', 'value':'stringSize'}, }, }, },
+    'MultipleArrayTypes':                    { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'passedInArraySize'}, },
+                                                               2: { 'size': {'mechanism':'fixed', 'value':3}, },
+                                                               4: { 'size': {'mechanism':'len', 'value':'lenArraySize'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

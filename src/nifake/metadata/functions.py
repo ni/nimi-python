@@ -1523,8 +1523,66 @@ functions = {
             },
         ],
         'documentation': {
-            'description': 'Returns a boolean.',
-            'note': 'This function rules!',
+            'description': 'Returns multiple types.',
+        },
+    },
+    
+    'MultipleArrayTypes': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'passedInArraySize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of measurements to acquire.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'passedInArray',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'An array with size passed in.',
+                    'note': 'The size must be at least arraySize.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'aFixedArray',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'An array of doubles with fixed size.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'lenArraySize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Size of lenArray',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'lenArray',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'Contains an array of float numbers.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns multiple types of arrays.',
         },
     },
     

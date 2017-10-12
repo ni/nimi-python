@@ -33,6 +33,7 @@ class Library(object):
         self.niFake_GetError_cfunc = None
         self.niFake_InitWithOptions_cfunc = None
         self.niFake_Initiate_cfunc = None
+        self.niFake_MultipleArrayTypes_cfunc = None
         self.niFake_OneInputFunction_cfunc = None
         self.niFake_Read_cfunc = None
         self.niFake_ReadFromChannel_cfunc = None
@@ -191,6 +192,14 @@ class Library(object):
                 self.niFake_Initiate_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFake_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Initiate_cfunc(vi)
+
+    def niFake_MultipleArrayTypes(self, passed_in_array_size, passed_in_array, a_fixed_array, len_array_size, len_array):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_MultipleArrayTypes_cfunc is None:
+                self.niFake_MultipleArrayTypes_cfunc = self._library.niFake_MultipleArrayTypes
+                self.niFake_MultipleArrayTypes_cfunc.argtypes = [ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_MultipleArrayTypes_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_MultipleArrayTypes_cfunc(passed_in_array_size, passed_in_array, a_fixed_array, len_array_size, len_array)
 
     def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
         with self._func_lock:

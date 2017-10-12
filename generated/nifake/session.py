@@ -601,6 +601,29 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def multiple_array_types(self, passed_in_array_size, len_array):
+        '''multiple_array_types
+
+        Returns multiple types of arrays.
+
+        Args:
+            passed_in_array_size (int): Number of measurements to acquire.
+            len_array_size (int): Size of lenArray
+            len_array (list of float): Contains an array of float numbers.
+
+        Returns:
+            passed_in_array (list of float): An array with size passed in.
+
+                Note: The size must be at least arraySize.
+            a_fixed_array (list of float): An array of doubles with fixed size.
+        '''
+        passed_in_array_ctype = (visatype.ViReal64 * passed_in_array_size)()
+        a_fixed_array_ctype = (visatype.ViReal64 * 3)()
+        len_array_size = len(len_array)
+        error_code = self._library.niFake_MultipleArrayTypes(passed_in_array_size, passed_in_array_ctype, a_fixed_array_ctype, len_array_size, len_array)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [passed_in_array_ctype[i] for i in range(passed_in_array_size)], [a_fixed_array_ctype[i] for i in range(3)]
+
     def one_input_function(self, a_number):
         '''one_input_function
 
@@ -670,9 +693,7 @@ class Session(_SessionBase):
     def return_multiple_types(self, array_size):
         '''return_multiple_types
 
-        Returns a boolean.
-
-        Note: This function rules!
+        Returns multiple types.
 
         Args:
             array_size (int): Number of measurements to acquire.
