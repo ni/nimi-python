@@ -648,7 +648,7 @@ nidcpower.Session methods
         +-------------------------------------------------------------+------------------------------------------------+
 
 
-    :type signal: int
+    :type signal: :py:data:`nidcpower.Signals`
     :param signal_identifier:
 
 
@@ -966,7 +966,7 @@ nidcpower.Session methods
         +--------------------------------------+------------------------------+
 
 
-    :type measurement_type: int
+    :type measurement_type: :py:data:`nidcpower.MeasurementTypes`
 
     :rtype: float
     :return:
@@ -1228,7 +1228,7 @@ nidcpower.Session methods
         +-----------------------------------------------+-------------------------------------------------------------------+
 
 
-    :type output_state: int
+    :type output_state: :py:data:`nidcpower.OutputStates`
 
     :rtype: bool
     :return:

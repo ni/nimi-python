@@ -2908,7 +2908,7 @@ class _SessionBase(object):
             session['0,1'].measure(measurement_type)
 
         Args:
-            measurement_type (int): Specifies whether a voltage or current value is measured.
+            measurement_type (enums.MeasurementTypes): Specifies whether a voltage or current value is measured.
                 **Defined Values**:
 
                 +-----------------------------------+------------------------------+
@@ -2921,8 +2921,10 @@ class _SessionBase(object):
             measurement (float): Returns the value of the measurement, either in volts for voltage or
                 amps for current.
         '''
+        if type(measurement_type) is not enums.MeasurementTypes:
+            raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementTypes))
         measurement_ctype = visatype.ViReal64(0)
-        error_code = self._library.niDCPower_Measure(self._vi, self._repeated_capability.encode(self._encoding), measurement_type, ctypes.pointer(measurement_ctype))
+        error_code = self._library.niDCPower_Measure(self._vi, self._repeated_capability.encode(self._encoding), measurement_type.value, ctypes.pointer(measurement_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
 
@@ -3099,7 +3101,7 @@ class _SessionBase(object):
             session['0,1'].query_output_state(output_state)
 
         Args:
-            output_state (int): Specifies the output state of the output channel that is being queried.
+            output_state (enums.OutputStates): Specifies the output state of the output channel that is being queried.
                 **Defined Values**:
 
                 +-------------------------------------------+-------------------------------------------------------------------+
@@ -3112,8 +3114,10 @@ class _SessionBase(object):
             in_state (bool): Returns whether the device output channel is in the specified output
                 state.
         '''
+        if type(output_state) is not enums.OutputStates:
+            raise TypeError('Parameter mode must be of type ' + str(enums.OutputStates))
         in_state_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niDCPower_QueryOutputState(self._vi, self._repeated_capability.encode(self._encoding), output_state, ctypes.pointer(in_state_ctype))
+        error_code = self._library.niDCPower_QueryOutputState(self._vi, self._repeated_capability.encode(self._encoding), output_state.value, ctypes.pointer(in_state_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_state_ctype.value)
 
@@ -3965,7 +3969,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            signal (int): Specifies which trigger or event to export.
+            signal (enums.Signals): Specifies which trigger or event to export.
                 **Defined Values:**
 
                 +--------------------------------------------------------+------------------------------------------------+
@@ -4015,7 +4019,9 @@ class Session(_SessionBase):
                 | "PXI_Trig7" | PXI trigger line 7   |
                 +-------------+----------------------+
         '''
-        error_code = self._library.niDCPower_ExportSignal(self._vi, signal, signal_identifier.encode(self._encoding), output_terminal.encode(self._encoding))
+        if type(signal) is not enums.Signals:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Signals))
+        error_code = self._library.niDCPower_ExportSignal(self._vi, signal.value, signal_identifier.encode(self._encoding), output_terminal.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

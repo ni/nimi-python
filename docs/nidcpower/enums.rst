@@ -276,6 +276,29 @@ Enums used in NI-DCPower
 
 
 
+.. py:data:: MeasurementTypes
+
+    .. py:attribute:: nidcpower.MeasurementTypes.MEASURE_VOLTAGE
+
+
+
+        The device measures voltage.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.MeasurementTypes.MEASURE_CURRENT
+
+
+
+        The device measures current.
+
+        
+
+
+
+
 .. py:data:: OutputCapacitance
 
     .. py:attribute:: nidcpower.OutputCapacitance.LOW
@@ -336,6 +359,29 @@ Enums used in NI-DCPower
 
 
         Sets the output function to pulse current.
+
+        
+
+
+
+
+.. py:data:: OutputStates
+
+    .. py:attribute:: nidcpower.OutputStates.OUTPUT_CONSTANT_VOLTAGE
+
+
+
+        The device maintains a constant voltage by adjusting the current
+
+        
+
+
+
+    .. py:attribute:: nidcpower.OutputStates.OUTPUT_CONSTANT_CURRENT
+
+
+
+        The device maintains a constant current by adjusting the voltage.
 
         
 
@@ -535,6 +581,119 @@ Enums used in NI-DCPower
 
 
         Remote sensing is selected.
+
+        
+
+
+
+
+.. py:data:: Signals
+
+    .. py:attribute:: nidcpower.Signals.SOURCE_COMPLETE_EVENT
+
+
+
+        Exports the Source Complete event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Signals.MEASURE_COMPLETE_EVENT
+
+
+
+        Exports the Measure Complete event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Signals.SEQUENCE_ITERATION_COMPLETE_EVENT
+
+
+
+        Exports the Sequence Iteration Complete event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Signals.SEQUENCE_ENGINE_DONE_EVENT
+
+
+
+        Exports the Sequence Engine Done event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Signals.PULSE_COMPLETE_EVENT
+
+
+
+        Exports the Pulse Complete event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Signals.READY_FOR_PULSE_TRIGGER_EVENT
+
+
+
+        Exports the Ready Pulse Trigger event.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Signals.START_TRIGGER
+
+
+
+        Exports the Start trigger.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Signals.SOURCE_TRIGGER
+
+
+
+        Exports the Source trigger.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Signals.MEASURE_TRIGGER
+
+
+
+        Exports the Measure trigger.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Signals.SEQUENCE_ADVANCE_TRIGGER
+
+
+
+        Exports the Sequence Advance trigger.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Signals.PULSE_TRIGGER
+
+
+
+        Exports the Pulse trigger.
 
         
 
