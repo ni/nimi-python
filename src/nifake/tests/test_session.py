@@ -262,8 +262,39 @@ class TestSession(object):
 
     # TODO(marcoskirsch): Other read variations: waveform with ViReal64
 
-    # TODO(marcoskirsch):
-    # def test_multiple_outputs of different types
+    def test_return_multiple_types(self):
+        self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
+        self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
+        boolean = True
+        int32 = 32
+        int64 = 64
+        enum = nifake.Turtle.LEONARDO
+        float = 1.23
+        float_enum = nifake.FloatEnum._6_5
+        array = [0, 1, 2]
+        array_size = len(array)
+        string = 'Testing is fun?'
+        self.side_effects_helper['ReturnMultipleTypes']['return'] = len(string)
+        self.side_effects_helper['ReturnMultipleTypes']['aBoolean'] = boolean
+        self.side_effects_helper['ReturnMultipleTypes']['anInt32'] = int32
+        self.side_effects_helper['ReturnMultipleTypes']['anInt64'] = int64
+        self.side_effects_helper['ReturnMultipleTypes']['anIntEnum'] = enum.value
+        self.side_effects_helper['ReturnMultipleTypes']['aFloat'] = float
+        self.side_effects_helper['ReturnMultipleTypes']['aFloatEnum'] = float_enum.value
+        self.side_effects_helper['ReturnMultipleTypes']['anArray'] = array
+        self.side_effects_helper['ReturnMultipleTypes']['aString'] = string
+        self.side_effects_helper['ReturnMultipleTypes']['return'] = 0
+        with nifake.Session('dev1') as session:
+            result_boolean, result_int32, result_int64, result_enum, result_float, result_float_enum, result_array, result_string = session.return_multiple_types(array_size)
+            assert result_boolean == boolean
+            assert result_int32 == int32
+            assert result_int64 == int64
+            assert result_enum == enum
+            assert result_float == float
+            assert result_float_enum == float_enum
+            assert result_array == array
+            assert result_string == string
+            assert self.patched_library.niFake_ReturnMultipleTypes.call_count == 2
 
     def test_method_with_error(self):
         test_error_code = -42
