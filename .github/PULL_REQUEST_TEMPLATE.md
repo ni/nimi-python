@@ -6,6 +6,10 @@ TODO: Check the above box with an 'x' indicating you've read and followed [CONTR
 
 TODO: Check the above box with an 'x' if you've documented client facing changes in [CHANGELOG.md](https://github.com/ni/nimi-python/blob/master/CHANGELOG.md).
 
+[ ] I've added any unit tests that are applicable for this pull request
+
+TODO: Check the above box with an 'x' indicating you have considered and added any applicable unit tests. Strike through if you considered and decided additional unit tests were not warranted.
+
 ### What does this Pull Request accomplish?
 
 TODO: Include high-level description of the changes in this pull request.
