@@ -126,6 +126,22 @@ class TestSession(object):
                 assert issubclass(w[0].category, nifake.NifakeWarning)
                 assert test_error_desc in str(w[0].message)
 
+    def test_error_with_rep_cap(self):
+        test_error_code = -42
+        test_error_desc = "The answer to the ultimate question"
+        self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
+        self.side_effects_helper['SetAttributeViReal64']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        with nifake.Session('dev1') as session:
+            try:
+                session['100'].read_write_double = 5.0
+                assert False
+            except nifake.Error as e:
+                assert e.code == test_error_code
+                assert e.description == test_error_desc
+
     def test_get_a_number(self):
         test_number = 16
         self.patched_library.niFake_GetANumber.side_effect = self.side_effects_helper.niFake_GetANumber
