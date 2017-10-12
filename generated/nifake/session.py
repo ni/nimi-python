@@ -362,6 +362,38 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def bool_array_output_function(self, number_of_elements):
+        '''bool_array_output_function
+
+        This function returns an array of booleans.
+
+        Args:
+            number_of_elements (int): Number of elements in the array.
+
+        Returns:
+            an_array (list of bool): Contains an array of booleans
+        '''
+        an_array_ctype = (visatype.ViBoolean * number_of_elements)()
+        error_code = self._library.niFake_BoolArrayOutputFunction(self._vi, number_of_elements, an_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [bool(an_array_ctype[i]) for i in range(number_of_elements)]
+
+    def enum_array_output_function(self, number_of_elements):
+        '''enum_array_output_function
+
+        This function returns an array of booleans.
+
+        Args:
+            number_of_elements (int): Number of elements in the array.
+
+        Returns:
+            an_array (list of enums.Turtle): Contains an array of booleans
+        '''
+        an_array_ctype = (visatype.ViInt16 * number_of_elements)()
+        error_code = self._library.niFake_EnumArrayOutputFunction(self._vi, number_of_elements, an_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements)]
+
     def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
         '''enum_input_function_with_defaults
 
