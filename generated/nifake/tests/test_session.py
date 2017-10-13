@@ -295,7 +295,6 @@ class TestSession(object):
 
     def test_return_multiple_types(self):
         self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
-        self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
         boolean_val = True
         int32_val = 32
         int64_val = 6000000000
@@ -522,7 +521,6 @@ class TestSession(object):
             self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
 
     def test_get_an_ivi_dance_string(self):
-        self.patched_library.niFake_GetAnIviDanceString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceString
         self.patched_library.niFake_GetAnIviDanceString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceString
         string_val = 'Testing is fun?'
         self.side_effects_helper['GetAnIviDanceString']['aString'] = ''
