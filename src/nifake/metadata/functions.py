@@ -1414,6 +1414,81 @@ functions = {
         },
     },
 
+    'BoolArrayOutputFunction': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi**',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfElements',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of elements in the array.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'anArray',
+                'type': 'ViBoolean',
+                'documentation': {
+                    'description': 'Contains an array of booleans',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns an array of booleans.',
+        },
+    },
+    'EnumArrayOutputFunction': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi**',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfElements',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of elements in the array.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'anArray',
+                'type': 'ViInt16',
+                'documentation': {
+                    'description': 'Contains an array of booleans',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns an array of booleans.',
+        },
+    },
+
     'ReturnMultipleTypes': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
