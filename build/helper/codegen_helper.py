@@ -1,152 +1,49 @@
-from .metadata_filters import filter_ivi_dance_parameter
-from .metadata_filters import filter_len_parameter
+from .metadata_filters import filter_parameters
 from .metadata_find import find_size_parameter
-from enum import Enum
+from .parameter_usage_options import ParameterUsageOptions
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
 
+_parameterUsageOptionsSnippet = {}
+
+_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
+    'skip_self': False,
+    'name_to_use': 'python_name_with_default',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_CALL] = {
+    'skip_self': True,
+    'name_to_use': 'python_name',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
+    'skip_self': True,
+    'name_to_use': 'python_name_with_doc_default',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_CALL] = {
+    'skip_self': True,
+    'name_to_use': 'python_name',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
+    'skip_self': True,
+    'name_to_use': 'library_method_call_snippet',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_ARGTYPES] = {
+    'skip_self': True,
+    'name_to_use': 'ctypes_type_library_call',
+}
+_parameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
+    'skip_self': False,
+    'name_to_use': 'python_name',
+}
+# Only used for filtering
+#   ParameterUsageOptions.INPUT_PARAMETERS
+#   ParameterUsageOptions.OUTPUT_PARAMETERS
+#   ParameterUsageOptions.IVI_DANCE_PARAMETER
+#   ParameterUsageOptions.LEN_PARAMETER
+#   ParameterUsageOptions.INPUT_ENUM_PARAMETERS
+
 
 # Functions that return snippets that can be placed directly in the templates.
-class ParameterUsageOptions(Enum):
-    '''Different usage options for parameter lists.'''
-
-    SESSION_METHOD_DECLARATION = 1
-    '''For declaring a method in Session'''
-    SESSION_METHOD_CALL = 2
-    '''For calling into a Session method.'''
-    DOCUMENTATION_SESSION_METHOD = 3
-    '''For documentation (rst) of Session methods'''
-    CTYPES_CALL = 4
-    '''For Library implementation calling into the DLL via ctypes'''
-    LIBRARY_METHOD_CALL = 5
-    '''For calling into a method in Library.'''
-    CTYPES_ARGTYPES = 6
-    '''For setting up the ctypes argument types'''
-    LIBRARY_METHOD_DECLARATION = 7
-    '''For declaring a method in Library'''
-
-
-_parameterUsageOptions = {}
-
-_parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
-    'skip_self': False,
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
-    'name_to_use': 'python_name_with_default',
-    'skip_repeated_capability_parameter': True,
-}
-_parameterUsageOptions[ParameterUsageOptions.SESSION_METHOD_CALL] = {
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
-    'name_to_use': 'python_name',
-    'skip_repeated_capability_parameter': True,
-}
-_parameterUsageOptions[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
-    'skip_self': True,
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
-    'name_to_use': 'python_name_with_doc_default',
-    'skip_repeated_capability_parameter': True,
-}
-_parameterUsageOptions[ParameterUsageOptions.CTYPES_CALL] = {
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'name_to_use': 'python_name',
-    'skip_repeated_capability_parameter': False,
-}
-_parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'name_to_use': 'library_method_call_snippet',
-    'skip_repeated_capability_parameter': False,
-}
-_parameterUsageOptions[ParameterUsageOptions.CTYPES_ARGTYPES] = {
-    'skip_self': True,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'name_to_use': 'ctypes_type_library_call',
-    'skip_repeated_capability_parameter': False,
-}
-_parameterUsageOptions[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
-    'skip_self': False,
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'name_to_use': 'python_name',
-    'skip_repeated_capability_parameter': False,
-}
-
-
-def filter_parameters(function, parameter_usage_options):
-    '''filter_parameters
-
-    Filters and reorders the parameters of the function passed in based on parameter_usage_options.
-    '''
-    if type(parameter_usage_options) is not ParameterUsageOptions:
-        raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
-
-    options_to_use = _parameterUsageOptions[parameter_usage_options]
-
-    parameters_to_use = []
-
-    # Filter based on options
-    # Find the size parameter - we are assuming there can only be one, other from mechanism == 'ivi-dance' or mechanism == 'len'
-    size_parameter = find_size_parameter(filter_ivi_dance_parameter(function['parameters']), function['parameters'])
-    if size_parameter is None:
-        size_parameter = find_size_parameter(filter_len_parameter(function['parameters']), function['parameters'])
-    for x in function['parameters']:
-        skip = False
-        if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
-            skip = True
-        if x['direction'] == 'in' and options_to_use['skip_input_parameters']:
-            skip = True
-        if x == size_parameter and options_to_use['skip_size_parameter']:
-            skip = True
-        if x['is_session_handle'] is True and options_to_use['skip_session_handle']:
-            skip = True
-        if x['is_repeated_capability'] is True and options_to_use['skip_repeated_capability_parameter']:
-            skip = True
-        if not skip:
-            parameters_to_use.append(x)
-
-    # Reorder based on options
-    if options_to_use['reordered_for_default_values']:
-        new_order = []
-        for x in parameters_to_use:
-            if 'default_value' not in x:
-                new_order.append(x)
-        for x in parameters_to_use:
-            if 'default_value' in x:
-                new_order.append(x)
-        parameters_to_use = new_order
-
-    return parameters_to_use
-
-
 def get_params_snippet(function, parameter_usage_options):
     '''get_params_snippet
 
@@ -155,7 +52,7 @@ def get_params_snippet(function, parameter_usage_options):
     if type(parameter_usage_options) is not ParameterUsageOptions:
         raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
 
-    options_to_use = _parameterUsageOptions[parameter_usage_options]
+    options_to_use = _parameterUsageOptionsSnippet[parameter_usage_options]
 
     parameters_to_use = filter_parameters(function, parameter_usage_options)
 

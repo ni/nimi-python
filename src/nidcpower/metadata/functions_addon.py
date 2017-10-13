@@ -52,7 +52,9 @@ functions_enums = {
     'ConfigureDigitalEdgeSourceTrigger':            { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
     'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
     'SendSoftwareEdgeTrigger':                      { 'parameters': { 1: { 'enum': 'SendSoftwareEdgeTriggerType', }, }, },
-    'WaitForEvent':                                 { 'parameters': { 2: { 'enum': 'Event', }, }, },
+    'WaitForEvent':                                 { 'parameters': { 2: { 'enum': 'Event',                       }, }, },
+    'Measure':                                      { 'parameters': { 2: { 'enum': 'MeasurementTypes',            }, }, },
+    'QueryOutputState':                             { 'parameters': { 2: { 'enum': 'OutputStates',                }, }, },
     # @TODO add all enums
 }
 
