@@ -111,7 +111,7 @@ class TestSession(object):
         try:
             with nifake.Session('dev1') as session:
                 assert type(session) == nifake.Session
-            assert False
+                assert False
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
@@ -127,7 +127,7 @@ class TestSession(object):
         try:
             with nifake.Session('dev1') as session:
                 assert type(session) == nifake.Session
-            assert False
+                assert False
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
