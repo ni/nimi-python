@@ -276,6 +276,29 @@ Enums used in NI-DCPower
 
 
 
+.. py:data:: MeasurementTypes
+
+    .. py:attribute:: nidcpower.MeasurementTypes.MEASURE_CURRENT
+
+
+
+        The device measures current.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.MeasurementTypes.MEASURE_VOLTAGE
+
+
+
+        The device measures voltage.
+
+        
+
+
+
+
 .. py:data:: OutputCapacitance
 
     .. py:attribute:: nidcpower.OutputCapacitance.LOW
@@ -336,6 +359,29 @@ Enums used in NI-DCPower
 
 
         Sets the output function to pulse current.
+
+        
+
+
+
+
+.. py:data:: OutputStates
+
+    .. py:attribute:: nidcpower.OutputStates.OUTPUT_CONSTANT_VOLTAGE
+
+
+
+        The device maintains a constant voltage by adjusting the current
+
+        
+
+
+
+    .. py:attribute:: nidcpower.OutputStates.OUTPUT_CONSTANT_CURRENT
+
+
+
+        The device maintains a constant current by adjusting the voltage.
 
         
 

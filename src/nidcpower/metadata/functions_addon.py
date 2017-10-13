@@ -54,6 +54,8 @@ functions_enums = {
     'SendSoftwareEdgeTrigger':                      { 'parameters': { 1: { 'enum': 'SendSoftwareEdgeTriggerType', }, }, },
     'WaitForEvent':                                 { 'parameters': { 2: { 'enum': 'Event',                       }, }, },
     'ExportSignal':                                 { 'parameters': { 1: { 'enum': 'Signals',                     }, }, },
+    'Measure':                                      { 'parameters': { 2: { 'enum': 'MeasurementTypes',            }, }, },
+    'QueryOutputState':                             { 'parameters': { 2: { 'enum': 'OutputStates',                }, }, },
     # @TODO add all enums
 }
 

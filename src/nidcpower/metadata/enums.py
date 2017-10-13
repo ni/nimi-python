@@ -644,7 +644,41 @@ for supported devices.
                 'documentation': {
                     'description': 'Exports the Pulse trigger.',
                 },
-            },          
+            },
+    'MeasurementTypes': {
+        'values': [
+            {
+                'name': 'MEASURE_CURRENT',
+                'value': 0,
+                'documentation': {
+                    'description': 'The device measures current.',
+                },
+            },
+            {
+                'name': 'MEASURE_VOLTAGE',
+                'value': 1,
+                'documentation': {
+                    'description': 'The device measures voltage.',
+                },
+            }
+        ],
+    },
+    'OutputStates': {
+        'values': [
+            {
+                'name': 'OUTPUT_CONSTANT_VOLTAGE',
+                'value': 0,
+                'documentation': {
+                    'description': 'The device maintains a constant voltage by adjusting the current ',
+                },
+            },
+            {
+                'name': 'OUTPUT_CONSTANT_CURRENT',
+                'value': 1,
+                'documentation': {
+                    'description': 'The device maintains a constant current by adjusting the voltage.',
+                },
+            }
         ],
     },  
 }
