@@ -22,6 +22,7 @@ functions_codegen_method = {
 functions_enums = {
     'GetEnumValue':                     { 'parameters': { 2: { 'enum': 'Turtle',    }, }, },
     'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'enum': 'Turtle',    }, }, },
+    'EnumArrayOutputFunction':          { 'parameters': { 2: { 'enum': 'Turtle',    }, }, },
 }
 
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
@@ -50,6 +51,8 @@ functions_buffer_info = {
     '.etAttribute.+':                        { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'error_message':                         { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'ArrayInputFunction':                    { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfElements'}, }, }, },
+    'BoolArrayOutputFunction':               { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
+    'EnumArrayOutputFunction':               { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

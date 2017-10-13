@@ -189,6 +189,28 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    def _get_error(self):
+        '''_get_error
+
+        Returns the error information associated with the session.
+
+        Args:
+            buffer_size (int): Number of bytes in description buffer.
+
+        Returns:
+            error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
+        '''
+        error_code_ctype = visatype.ViStatus(0)
+        buffer_size = 0
+        description_ctype = None
+        error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        buffer_size = error_code
+        description_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
+
     def read_from_channel(self, maximum_time):
         '''read_from_channel
 
@@ -297,6 +319,22 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def _error_message(self, error_code):
+        '''_error_message
+
+        Takes the errorCode returned by a functiona and returns it as a user-readable string.
+
+        Args:
+            error_code (int): The errorCode returned from the instrument.
+
+        Returns:
+            error_message (string): The error information formatted into a string.
+        '''
+        error_message_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niFake_error_message(self._vi, error_code, error_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_message_ctype.value.decode(self._encoding)
+
 
 class _RepeatedCapability(_SessionBase):
     '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
@@ -361,6 +399,38 @@ class Session(_SessionBase):
         error_code = self._library.niFake_ArrayInputFunction(self._vi, number_of_elements, an_array)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def bool_array_output_function(self, number_of_elements):
+        '''bool_array_output_function
+
+        This function returns an array of booleans.
+
+        Args:
+            number_of_elements (int): Number of elements in the array.
+
+        Returns:
+            an_array (list of bool): Contains an array of booleans
+        '''
+        an_array_ctype = (visatype.ViBoolean * number_of_elements)()
+        error_code = self._library.niFake_BoolArrayOutputFunction(self._vi, number_of_elements, an_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [bool(an_array_ctype[i]) for i in range(number_of_elements)]
+
+    def enum_array_output_function(self, number_of_elements):
+        '''enum_array_output_function
+
+        This function returns an array of booleans.
+
+        Args:
+            number_of_elements (int): Number of elements in the array.
+
+        Returns:
+            an_array (list of enums.Turtle): Contains an array of booleans
+        '''
+        an_array_ctype = (visatype.ViInt16 * number_of_elements)()
+        error_code = self._library.niFake_EnumArrayOutputFunction(self._vi, number_of_elements, an_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements)]
 
     def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
         '''enum_input_function_with_defaults
@@ -474,28 +544,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
 
-    def _get_error(self):
-        '''_get_error
-
-        Returns the error information associated with the session.
-
-        Args:
-            buffer_size (int): Number of bytes in description buffer.
-
-        Returns:
-            error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
-        '''
-        error_code_ctype = visatype.ViStatus(0)
-        buffer_size = 0
-        description_ctype = None
-        error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        description_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niFake_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
-
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=''):
         '''_init_with_options
 
@@ -585,7 +633,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32(0)
         error_code = self._library.niFake_ReadMultiPoint(self._vi, maximum_time, array_size, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [reading_array_ctype[i] for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [float(reading_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
 
     def return_a_number_and_a_string(self):
         '''return_a_number_and_a_string
@@ -652,22 +700,6 @@ class Session(_SessionBase):
         error_code = self._library.niFake_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def _error_message(self, error_code):
-        '''_error_message
-
-        Takes the errorCode returned by a functiona and returns it as a user-readable string.
-
-        Args:
-            error_code (int): The errorCode returned from the instrument.
-
-        Returns:
-            error_message (string): The error information formatted into a string.
-        '''
-        error_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niFake_error_message(self._vi, error_code, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
 
 
 
