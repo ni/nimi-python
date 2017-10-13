@@ -193,7 +193,7 @@ class Session(_SessionBase):
             self._close()
         except errors.Error as e:
             self._${config['session_handle_parameter_name']} = 0
-            raise errors.Error(e.code, e.description)
+            raise
         self._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''

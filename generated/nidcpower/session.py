@@ -3528,7 +3528,7 @@ class Session(_SessionBase):
             self._close()
         except errors.Error as e:
             self._vi = 0
-            raise errors.Error(e.code, e.description)
+            raise
         self._vi = 0
 
     ''' These are code-generated '''
