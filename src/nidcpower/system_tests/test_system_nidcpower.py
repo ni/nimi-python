@@ -142,7 +142,7 @@ def test_triggers_measure(session):
         session.export_signal(nidcpower.Signals.START_TRIGGER, '/FakeDevice/PXI_Trig0')
         session.commit()
         with session.initiate():
-            voltage = session['0'].measure(1)  # nidcpower.MeasurementTypes.MEASURE_VOLTAGE
+            voltage = session['0'].measure(nidcpower.MeasurementTypes.MEASURE_VOLTAGE)
         assert voltage == voltage_level
 
 
