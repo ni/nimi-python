@@ -40,6 +40,25 @@ def test_get_error(session):
         assert e.description.find('Attribute is read-only.') != -1
 
 
+def test_measure(session):
+    with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
+        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+        session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+        session.voltage_level_range = 6
+        session.voltage_level = 2
+        with session.initiate():
+            reading = session.measure(nidcpower.MeasurementTypes.MEASURE_VOLTAGE)
+            assert session.query_in_compliance() is False
+        assert reading == 2
+
+
+def test_query_output_state(session):
+    with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
+        with session.initiate():
+            assert session.query_output_state(nidcpower.OutputStates.OUTPUT_CONSTANT_VOLTAGE) is True   # since default function is DCVolt when initiated output state for DC Volt\DC current should be True and False respectively
+            assert session.query_output_state(nidcpower.OutputStates.OUTPUT_CONSTANT_CURRENT) is False
+
+
 def test_config_aperture_time(session):
     with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
         expected_default_aperture_time = 0.016666666666666666
