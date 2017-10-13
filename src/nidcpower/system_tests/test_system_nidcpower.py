@@ -111,3 +111,36 @@ def test_query_min_current_limit(session):
         expected_min_current_limit = 0.0000001  # for a simulated 4143 min_current_limit should be 1uA for 6V voltage level
         min_current_limit_in_range = abs(min_current_limit - expected_min_current_limit) <= max(1e-09 * max(abs(min_current_limit), abs(expected_min_current_limit)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
         assert min_current_limit_in_range is True
+
+
+def test_triggers_measure(session):
+    with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
+        voltage_level = 4
+        session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+        session.voltage_level = voltage_level
+        session.output_enabled = True
+        session.measure_when = nidcpower.MeasureWhen.ON_DEMAND
+        session.export_signal(nidcpower.Signals.START_TRIGGER, '/FakeDevice/PXI_Trig0')
+        session.commit()
+        with session.initiate():
+            voltage = session['0'].measure(1)  # nidcpower.MeasurementTypes.MEASURE_VOLTAGE
+        assert voltage == voltage_level
+
+
+def test_triggers_fetch(session):
+    with nidcpower.Session('FakeDevice', '0', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
+        current_level = 0.1
+        current_list = [current_level]
+        session.output_function = nidcpower.OutputFunction.DC_CURRENT
+        session.current_level = current_level
+        session.output_enabled = True
+        session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+        session.configure_digital_edge_source_trigger('/FakeDevice/PXI_Trig0')
+        session.commit()
+        with session.initiate():
+            voltage_measurements, current_measurements, in_compliance, actual_count = session.fetch_multiple(1)
+        assert voltage_measurements == [0.24]  # expected return value for this simulated device.
+        assert current_measurements == current_list
+        assert in_compliance == [False]  # expected return value for this simulated device.
+        assert actual_count == 1
+
