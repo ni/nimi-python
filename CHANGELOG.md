@@ -5,7 +5,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Python Versioning](http://legacy.python.org/dev/peps/pep-0396/).
 
 ## [Unreleased]
-* #### ALL
+* ### ALL
+  * #### Added
+  * #### Changed
+  * #### Removed
+* ### NI-DMM
+  * #### Added
+  * #### Changed
+  * #### Removed
+* ### NI-ModInst
+  * #### Added
+  * #### Changed
+  * #### Removed
+* ### NI-Switch
+  * #### Added
+  * #### Changed
+  * #### Removed
+* ### NI-DCPower
+ * #### Added
+ * #### Changed
+ * #### Removed
+
+## [0.3.0] - 2017-10-13
+* ### ALL
   * #### Added
     * Support for ViInt64 (64-bit integers)
   * #### Changed
@@ -15,40 +37,31 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
       session['0-3'].set_sequence(values, source_delays)
       ```
     * Enum value documentation lists the fully qualified name - this is to allow easy copy/paste
-  * #### Removed
-* #### NI-DMM
-  * #### Added
+* ### NI-DMM
   * #### Changed
     * Added default values to some parameters.
   * #### Removed
     * Removed methods that aren’t useful in the Python bindings.
-* #### NI-ModInst
-  * #### Added
-  * #### Changed
-  * #### Removed
-* #### NI-SWITCH
-  * #### Added
+* ### NI-SWITCH
   * #### Changed
     * Added default values to some parameters.
   * #### Removed
     * Removed methods that aren’t useful in the Python bindings.
-* #### NI-DCPower
+* ### NI-DCPower
   * #### Added
     * Initial release
-  * #### Changed
-  * #### Removed
 
 ## [0.2.0] - 2017-09-20
-* #### ALL
+* ### ALL
   * #### Added
     * Suport for channel-based properties
   * #### Changed
     * Warnings no longer raise an exception
       * Warnings are now added to warnings.warn()
-* #### NI-DMM
+* ### NI-DMM
   * #### Changed
     * Added support for enums with types other than ViInt32 (Fixes [#330](https://github.com/ni/nimi-python/issues/330))
-* #### NI-ModInst
+* ### NI-ModInst
   * #### Changed
     * Device index is now on session not attribute. The correct way is now
       ```python
@@ -56,7 +69,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
       with nimodinst.Session('nidmm') as session:
           name = session[i].device_name
       ```
-* #### NI-SWITCH
+* ### NI-SWITCH
   * #### Added
     * Initial release
 
@@ -71,23 +84,23 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 
 <!--
 ## [Unreleased]
-* #### ALL
+* ### ALL
   * #### Added
   * #### Changed
   * #### Removed
-* #### NI-DMM
+* ### NI-DMM
   * #### Added
   * #### Changed
   * #### Removed
-* #### NI-ModInst
+* ### NI-ModInst
   * #### Added
   * #### Changed
   * #### Removed
-* #### NI-Switch
+* ### NI-Switch
   * #### Added
   * #### Changed
   * #### Removed
-* #### NI-DCPower
+* ### NI-DCPower
  * #### Added
  * #### Changed
  * #### Removed
