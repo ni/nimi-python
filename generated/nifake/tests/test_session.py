@@ -111,7 +111,7 @@ class TestSession(object):
         try:
             with nifake.Session('dev1') as session:
                 assert type(session) == nifake.Session
-            assert False
+                assert False
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
@@ -127,7 +127,7 @@ class TestSession(object):
         try:
             with nifake.Session('dev1') as session:
                 assert type(session) == nifake.Session
-            assert False
+                assert False
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
@@ -296,35 +296,44 @@ class TestSession(object):
     def test_return_multiple_types(self):
         self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
         self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
-        boolean = True
-        int32 = 32
-        int64 = 64
-        enum = nifake.Turtle.LEONARDO
-        float = 1.23
-        float_enum = nifake.FloatEnum._6_5
-        array = [0, 1, 2]
-        array_size = len(array)
-        string = 'Testing is fun?'
-        self.side_effects_helper['ReturnMultipleTypes']['return'] = len(string)
-        self.side_effects_helper['ReturnMultipleTypes']['aBoolean'] = boolean
-        self.side_effects_helper['ReturnMultipleTypes']['anInt32'] = int32
-        self.side_effects_helper['ReturnMultipleTypes']['anInt64'] = int64
-        self.side_effects_helper['ReturnMultipleTypes']['anIntEnum'] = enum.value
-        self.side_effects_helper['ReturnMultipleTypes']['aFloat'] = float
-        self.side_effects_helper['ReturnMultipleTypes']['aFloatEnum'] = float_enum.value
-        self.side_effects_helper['ReturnMultipleTypes']['anArray'] = array
-        self.side_effects_helper['ReturnMultipleTypes']['aString'] = string
+        boolean_val = True
+        int32_val = 32
+        int64_val = 6000000000
+        enum_val = nifake.Turtle.LEONARDO
+        float_val = 1.23
+        float_enum_val = nifake.FloatEnum._6_5
+        array_val = [0, 1, 2]
+        array_size = len(array_val)
+        string_val = 'Testing is fun?'
+        self.side_effects_helper['ReturnMultipleTypes']['return'] = len(string_val)
+        self.side_effects_helper['ReturnMultipleTypes']['aBoolean'] = boolean_val
+        self.side_effects_helper['ReturnMultipleTypes']['anInt32'] = int32_val
+        self.side_effects_helper['ReturnMultipleTypes']['anInt64'] = int64_val
+        self.side_effects_helper['ReturnMultipleTypes']['anIntEnum'] = enum_val.value
+        self.side_effects_helper['ReturnMultipleTypes']['aFloat'] = float_val
+        self.side_effects_helper['ReturnMultipleTypes']['aFloatEnum'] = float_enum_val.value
+        self.side_effects_helper['ReturnMultipleTypes']['anArray'] = array_val
+        self.side_effects_helper['ReturnMultipleTypes']['aString'] = string_val
         self.side_effects_helper['ReturnMultipleTypes']['return'] = 0
         with nifake.Session('dev1') as session:
             result_boolean, result_int32, result_int64, result_enum, result_float, result_float_enum, result_array, result_string = session.return_multiple_types(array_size)
-            assert result_boolean == boolean
-            assert result_int32 == int32
-            assert result_int64 == int64
-            assert result_enum == enum
-            assert result_float == float
-            assert result_float_enum == float_enum
-            assert result_array == array
-            assert result_string == string
+            assert result_boolean == boolean_val
+            assert isinstance(result_boolean, bool)
+            assert result_int32 == int32_val
+            assert isinstance(result_int32, int)
+            assert result_int64 == int64_val
+            assert isinstance(result_int64, int)
+            assert result_enum == enum_val
+            assert isinstance(result_enum, nifake.Turtle)
+            assert result_float == float_val
+            assert isinstance(result_float, float)
+            assert result_float_enum == float_enum_val
+            assert isinstance(result_float_enum, nifake.FloatEnum)
+            assert result_array == array_val
+            assert isinstance(result_array, list)
+            assert isinstance(result_array[0], float)
+            assert result_string == string_val
+            assert isinstance(result_string, str)
             assert self.patched_library.niFake_ReturnMultipleTypes.call_count == 2
 
     def test_multiple_array_types(self):
@@ -343,16 +352,16 @@ class TestSession(object):
 
     def test_parameters_are_multiple_types(self):
         self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
-        boolean = True
-        int32 = 32
-        int64 = 64
-        enum = nifake.Turtle.LEONARDO
-        float = 1.23
-        float_enum = nifake.FloatEnum._6_5
-        string = 'Testing is fun?'
+        boolean_val = True
+        int32_val = 32
+        int64_val = 6000000000
+        enum_val = nifake.Turtle.LEONARDO
+        float_val = 1.23
+        float_enum_val = nifake.FloatEnum._6_5
+        string_val = 'Testing is fun?'
         with nifake.Session('dev1') as session:
-            session.parameters_are_multiple_types(boolean, int32, int64, enum, float, float_enum, string)
-            self.patched_library.niFake_ParametersAreMultipleTypes.assert_called_once_with(SESSION_NUM_FOR_TEST, boolean, int32, int64, enum.value, float, float_enum.value, len(string), string.encode('ascii'))
+            session.parameters_are_multiple_types(boolean_val, int32_val, int64_val, enum_val, float_val, float_enum_val, string_val)
+            self.patched_library.niFake_ParametersAreMultipleTypes.assert_called_once_with(SESSION_NUM_FOR_TEST, boolean_val, int32_val, int64_val, enum_val.value, float_val, float_enum_val.value, len(string_val), string_val.encode('ascii'))
 
     def test_parameters_are_multiple_types_error(self):
         test_error_code = -42
@@ -367,21 +376,21 @@ class TestSession(object):
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
-        boolean = True
-        int32 = 32
-        int64 = 64
-        enum = nifake.Turtle.LEONARDO
-        float = 1.23
-        float_enum = nifake.FloatEnum._6_5
-        string = 'Testing is fun?'
+        boolean_val = True
+        int32_val = 32
+        int64_val = 6000000000
+        enum_val = nifake.Turtle.LEONARDO
+        float_val = 1.23
+        float_enum_val = nifake.FloatEnum._6_5
+        string_val = 'Testing is fun?'
         with nifake.Session('dev1') as session:
             try:
-                session.parameters_are_multiple_types(boolean, int32, int64, 123, float, float_enum, string)
+                session.parameters_are_multiple_types(boolean_val, int32_val, int64_val, 123, float_val, float_enum_val, string_val)
                 assert False
             except TypeError as e:
                 pass
             try:
-                session.parameters_are_multiple_types(boolean, int32, int64, enum, float, 0.123, string)
+                session.parameters_are_multiple_types(boolean_val, int32_val, int64_val, enum_val, float_val, 0.123, string_val)
                 assert False
             except TypeError as e:
                 pass
@@ -515,16 +524,16 @@ class TestSession(object):
     def test_get_an_ivi_dance_string(self):
         self.patched_library.niFake_GetAnIviDanceString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceString
         self.patched_library.niFake_GetAnIviDanceString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceString
-        string = 'Testing is fun?'
+        string_val = 'Testing is fun?'
         self.side_effects_helper['GetAnIviDanceString']['aString'] = ''
-        self.side_effects_helper['GetAnIviDanceString']['return'] = len(string)
-        self.side_effects_helper['GetAnIviDanceString']['aString'] = string
+        self.side_effects_helper['GetAnIviDanceString']['return'] = len(string_val)
+        self.side_effects_helper['GetAnIviDanceString']['aString'] = string_val
         self.side_effects_helper['GetAnIviDanceString']['return'] = 0
         with nifake.Session('dev1') as session:
             result_string = session.get_an_ivi_dance_string()
-            assert result_string == string
+            assert result_string == string_val
             from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, 0, None), call(SESSION_NUM_FOR_TEST, len(string), ANY)]
+            calls = [call(SESSION_NUM_FOR_TEST, 0, None), call(SESSION_NUM_FOR_TEST, len(string_val), ANY)]
             self.patched_library.niFake_GetAnIviDanceString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAnIviDanceString.call_count == 2
 
@@ -702,7 +711,7 @@ class TestSession(object):
     def test_get_attribute_int64(self):
         self.patched_library.niFake_GetAttributeViInt64.side_effect = self.side_effects_helper.niFake_GetAttributeViInt64
         attribute_id = 1000006
-        test_number = 3
+        test_number = 6000000000
         self.side_effects_helper['GetAttributeViInt64']['attributeValue'] = test_number
         with nifake.Session('dev1') as session:
             attr_int = session.read_write_int64
@@ -712,7 +721,7 @@ class TestSession(object):
     def test_set_attribute_int64(self):
         self.patched_library.niFake_SetAttributeViInt64.side_effect = self.side_effects_helper.niFake_SetAttributeViInt64
         attribute_id = 1000006
-        test_number = -10
+        test_number = -6000000000
         with nifake.Session('dev1') as session:
             session.read_write_int64 = test_number
             self.patched_library.niFake_SetAttributeViInt64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, test_number)
