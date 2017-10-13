@@ -318,13 +318,22 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             result_boolean, result_int32, result_int64, result_enum, result_float, result_float_enum, result_array, result_string = session.return_multiple_types(array_size)
             assert result_boolean == boolean_val
+            assert isinstance(result_boolean, bool)
             assert result_int32 == int32_val
+            assert isinstance(result_int32, int)
             assert result_int64 == int64_val
+            assert isinstance(result_int64, int)
             assert result_enum == enum_val
+            assert isinstance(result_enum, nifake.Turtle)
             assert result_float == float_val
+            assert isinstance(result_float, float)
             assert result_float_enum == float_enum_val
+            assert isinstance(result_float_enum, nifake.FloatEnum)
             assert result_array == array_val
+            assert isinstance(result_array, list)
+            assert isinstance(result_array[0], float)
             assert result_string == string_val
+            assert isinstance(result_string, str)
             assert self.patched_library.niFake_ReturnMultipleTypes.call_count == 2
 
     def test_multiple_array_types(self):
