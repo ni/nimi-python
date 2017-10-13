@@ -116,17 +116,6 @@ class MeasureWhen(Enum):
     '''
 
 
-class MeasurementTypes(Enum):
-    MEASURE_VOLTAGE = 1
-    '''
-    The device measures voltage.
-    '''
-    MEASURE_CURRENT = 0
-    '''
-    The device measures current.
-    '''
-
-
 class OutputCapacitance(Enum):
     LOW = 1010
     '''
@@ -154,17 +143,6 @@ class OutputFunction(Enum):
     PULSE_CURRENT = 1050
     '''
     Sets the output function to pulse current.
-    '''
-
-
-class OutputStates(Enum):
-    OUTPUT_CONSTANT_VOLTAGE = 0
-    '''
-    The device maintains a constant voltage by adjusting the current
-    '''
-    OUTPUT_CONSTANT_CURRENT = 1
-    '''
-    The device maintains a constant current by adjusting the voltage.
     '''
 
 

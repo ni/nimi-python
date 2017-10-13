@@ -966,7 +966,7 @@ nidcpower.Session methods
         +--------------------------------------+------------------------------+
 
 
-    :type measurement_type: :py:data:`nidcpower.MeasurementTypes`
+    :type measurement_type: int
 
     :rtype: float
     :return:
@@ -1228,7 +1228,7 @@ nidcpower.Session methods
         +-----------------------------------------------+-------------------------------------------------------------------+
 
 
-    :type output_state: :py:data:`nidcpower.OutputStates`
+    :type output_state: int
 
     :rtype: bool
     :return:
