@@ -14,6 +14,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        active_advanced_sequence.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        active_advanced_sequence.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].active_advanced_sequence = var
+            var = session['0,1'].active_advanced_sequence
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -23,7 +34,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -45,6 +56,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        active_advanced_sequence_step.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        active_advanced_sequence_step.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].active_advanced_sequence_step = var
+            var = session['0,1'].active_advanced_sequence_step
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -54,7 +76,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -91,6 +113,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        aperture_time.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        aperture_time.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].aperture_time = var
+            var = session['0,1'].aperture_time
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -100,7 +133,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -137,6 +170,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        aperture_time_units.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        aperture_time_units.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].aperture_time_units = var
+            var = session['0,1'].aperture_time_units
+
     The following table lists the characteristics of this property.
 
     +----------------+------------------------------+
@@ -146,7 +190,7 @@ nidcpower.Session properties
     +----------------+------------------------------+
     | Permissions    | read-write                   |
     +----------------+------------------------------+
-    | Channel Based  | False                        |
+    | Channel Based  | True                         |
     +----------------+------------------------------+
     | Resettable     | No                           |
     +----------------+------------------------------+
@@ -175,6 +219,19 @@ nidcpower.Session properties
 
     `Auto Zero <NI_DC_Power_Supplies_Help.chm::/AutoZero.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        auto_zero.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        auto_zero.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].auto_zero = var
+            var = session['0,1'].auto_zero
+
     The following table lists the characteristics of this property.
 
     +----------------+---------------------+
@@ -184,7 +241,7 @@ nidcpower.Session properties
     +----------------+---------------------+
     | Permissions    | read-write          |
     +----------------+---------------------+
-    | Channel Based  | False               |
+    | Channel Based  | True                |
     +----------------+---------------------+
     | Resettable     | No                  |
     +----------------+---------------------+
@@ -323,6 +380,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        current_compensation_frequency.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        current_compensation_frequency.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].current_compensation_frequency = var
+            var = session['0,1'].current_compensation_frequency
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -332,7 +400,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -361,6 +429,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        current_gain_bandwidth.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        current_gain_bandwidth.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].current_gain_bandwidth = var
+            var = session['0,1'].current_gain_bandwidth
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -370,7 +449,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -405,6 +484,17 @@ nidcpower.Session properties
         effect. Refer to the `Output Enabled <pniDCPower_OutputEnabled.html>`__
         property for more information about enabling the output channel.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        current_level.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        current_level.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].current_level = var
+            var = session['0,1'].current_level
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -414,7 +504,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -454,6 +544,19 @@ nidcpower.Session properties
 
     `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        current_level_autorange.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        current_level_autorange.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].current_level_autorange = var
+            var = session['0,1'].current_level_autorange
+
     The following table lists the characteristics of this property.
 
     +----------------+----------------------------------+
@@ -463,7 +566,7 @@ nidcpower.Session properties
     +----------------+----------------------------------+
     | Permissions    | read-write                       |
     +----------------+----------------------------------+
-    | Channel Based  | False                            |
+    | Channel Based  | True                             |
     +----------------+----------------------------------+
     | Resettable     | No                               |
     +----------------+----------------------------------+
@@ -502,6 +605,17 @@ nidcpower.Session properties
         Enabled <pniDCPower_OutputEnabled.html>`__ property for more information
         about enabling the output channel.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        current_level_range.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        current_level_range.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].current_level_range = var
+            var = session['0,1'].current_level_range
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -511,7 +625,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -547,6 +661,17 @@ nidcpower.Session properties
         effect. Refer to the `Output Enabled <pniDCPower_OutputEnabled.html>`__
         property for more information about enabling the output channel.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        current_limit.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        current_limit.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].current_limit = var
+            var = session['0,1'].current_limit
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -556,7 +681,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -595,6 +720,19 @@ nidcpower.Session properties
 
     `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        current_limit_autorange.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        current_limit_autorange.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].current_limit_autorange = var
+            var = session['0,1'].current_limit_autorange
+
     The following table lists the characteristics of this property.
 
     +----------------+----------------------------------+
@@ -604,7 +742,7 @@ nidcpower.Session properties
     +----------------+----------------------------------+
     | Permissions    | read-write                       |
     +----------------+----------------------------------+
-    | Channel Based  | False                            |
+    | Channel Based  | True                             |
     +----------------+----------------------------------+
     | Resettable     | No                               |
     +----------------+----------------------------------+
@@ -642,6 +780,17 @@ nidcpower.Session properties
         effect. Refer to the `Output Enabled <pniDCPower_OutputEnabled.html>`__
         property for more information about enabling the output channel.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        current_limit_range.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        current_limit_range.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].current_limit_range = var
+            var = session['0,1'].current_limit_range
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -651,7 +800,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -679,6 +828,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        current_pole_zero_ratio.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        current_pole_zero_ratio.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].current_pole_zero_ratio = var
+            var = session['0,1'].current_pole_zero_ratio
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -688,7 +848,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -2118,6 +2278,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        output_capacitance.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        output_capacitance.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].output_capacitance = var
+            var = session['0,1'].output_capacitance
+
     The following table lists the characteristics of this property.
 
     +----------------+------------------------------+
@@ -2127,7 +2298,7 @@ nidcpower.Session properties
     +----------------+------------------------------+
     | Permissions    | read-write                   |
     +----------------+------------------------------+
-    | Channel Based  | False                        |
+    | Channel Based  | True                         |
     +----------------+------------------------------+
     | Resettable     | No                           |
     +----------------+------------------------------+
@@ -2161,6 +2332,17 @@ nidcpower.Session properties
         electromechanical relays, such as those used by the NI PXI-4132 or NI
         PXIe-4138/39.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        output_connected.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        output_connected.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].output_connected = var
+            var = session['0,1'].output_connected
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2170,7 +2352,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -2207,6 +2389,17 @@ nidcpower.Session properties
         in the *NI DC Power Supplies and SMUs Help* for more information about
         NI-DCPower programming states.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        output_enabled.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        output_enabled.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].output_enabled = var
+            var = session['0,1'].output_enabled
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2216,7 +2409,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -2263,6 +2456,19 @@ nidcpower.Session properties
     `Constant Current
     Mode <NI_DC_Power_Supplies_Help.chm::/Constant_Current.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        output_function.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        output_function.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].output_function = var
+            var = session['0,1'].output_function
+
     The following table lists the characteristics of this property.
 
     +----------------+---------------------------+
@@ -2272,7 +2478,7 @@ nidcpower.Session properties
     +----------------+---------------------------+
     | Permissions    | read-write                |
     +----------------+---------------------------+
-    | Channel Based  | False                     |
+    | Channel Based  | True                      |
     +----------------+---------------------------+
     | Resettable     | No                        |
     +----------------+---------------------------+
@@ -2307,6 +2513,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        output_resistance.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        output_resistance.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].output_resistance = var
+            var = session['0,1'].output_resistance
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2316,7 +2533,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -2514,6 +2731,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        power_line_frequency.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        power_line_frequency.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].power_line_frequency = var
+            var = session['0,1'].power_line_frequency
+
     The following table lists the characteristics of this property.
 
     +----------------+-------------------------------+
@@ -2523,7 +2751,7 @@ nidcpower.Session properties
     +----------------+-------------------------------+
     | Permissions    | read-write                    |
     +----------------+-------------------------------+
-    | Channel Based  | False                         |
+    | Channel Based  | True                          |
     +----------------+-------------------------------+
     | Resettable     | No                            |
     +----------------+-------------------------------+
@@ -2626,6 +2854,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_bias_current_level.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_bias_current_level.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_bias_current_level = var
+            var = session['0,1'].pulse_bias_current_level
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2635,7 +2874,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -2668,6 +2907,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_bias_current_limit.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_bias_current_limit.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_bias_current_limit = var
+            var = session['0,1'].pulse_bias_current_limit
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2677,7 +2927,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -2705,6 +2955,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_bias_delay.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_bias_delay.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_bias_delay = var
+            var = session['0,1'].pulse_bias_delay
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2714,7 +2975,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -2745,6 +3006,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_bias_voltage_level.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_bias_voltage_level.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_bias_voltage_level = var
+            var = session['0,1'].pulse_bias_voltage_level
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2754,7 +3026,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -2786,6 +3058,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_bias_voltage_limit.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_bias_voltage_limit.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_bias_voltage_limit = var
+            var = session['0,1'].pulse_bias_voltage_limit
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2795,7 +3078,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -2943,6 +3226,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_current_level.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_current_level.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_current_level = var
+            var = session['0,1'].pulse_current_level
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2952,7 +3246,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -2984,6 +3278,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_current_level_range.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_current_level_range.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_current_level_range = var
+            var = session['0,1'].pulse_current_level_range
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -2993,7 +3298,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -3026,6 +3331,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_current_limit.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_current_limit.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_current_limit = var
+            var = session['0,1'].pulse_current_limit
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3035,7 +3351,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -3067,6 +3383,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_current_limit_range.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_current_limit_range.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_current_limit_range = var
+            var = session['0,1'].pulse_current_limit_range
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3076,7 +3403,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -3103,6 +3430,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_off_time.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_off_time.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_off_time = var
+            var = session['0,1'].pulse_off_time
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3112,7 +3450,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -3139,6 +3477,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_on_time.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_on_time.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_on_time = var
+            var = session['0,1'].pulse_on_time
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3148,7 +3497,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -3217,6 +3566,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_voltage_level.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_voltage_level.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_voltage_level = var
+            var = session['0,1'].pulse_voltage_level
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3226,7 +3586,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -3258,6 +3618,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_voltage_level_range.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_voltage_level_range.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_voltage_level_range = var
+            var = session['0,1'].pulse_voltage_level_range
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3267,7 +3638,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -3300,6 +3671,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_voltage_limit.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_voltage_limit.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_voltage_limit = var
+            var = session['0,1'].pulse_voltage_limit
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3309,7 +3691,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -3342,6 +3724,17 @@ nidcpower.Session properties
         Enabled <pniDCPower_OutputEnabled.html>`__ property for more information
         about enabling the output channel.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        pulse_voltage_limit_range.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        pulse_voltage_limit_range.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].pulse_voltage_limit_range = var
+            var = session['0,1'].pulse_voltage_limit_range
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3351,7 +3744,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -3618,6 +4011,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        reset_average_before_measurement.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        reset_average_before_measurement.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].reset_average_before_measurement = var
+            var = session['0,1'].reset_average_before_measurement
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3627,7 +4031,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -3685,6 +4089,17 @@ nidcpower.Session properties
     | PXIe-4162/4163                        | 1                               |
     +---------------------------------------+---------------------------------+
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        samples_to_average.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        samples_to_average.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].samples_to_average = var
+            var = session['0,1'].samples_to_average
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -3694,7 +4109,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -3779,6 +4194,19 @@ nidcpower.Session properties
     `Local and Remote
     Sense <NI_DC_Power_Supplies_Help.chm::/local_and_remote_sense.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        sense.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        sense.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].sense = var
+            var = session['0,1'].sense
+
     The following table lists the characteristics of this property.
 
     +----------------+------------------+
@@ -3788,7 +4216,7 @@ nidcpower.Session properties
     +----------------+------------------+
     | Permissions    | read-write       |
     +----------------+------------------+
-    | Channel Based  | False            |
+    | Channel Based  | True             |
     +----------------+------------------+
     | Resettable     | No               |
     +----------------+------------------+
@@ -4318,6 +4746,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        source_delay.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        source_delay.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].source_delay = var
+            var = session['0,1'].source_delay
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -4327,7 +4766,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -4644,6 +5083,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        transient_response.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        transient_response.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].transient_response = var
+            var = session['0,1'].transient_response
+
     The following table lists the characteristics of this property.
 
     +----------------+------------------------------+
@@ -4653,7 +5103,7 @@ nidcpower.Session properties
     +----------------+------------------------------+
     | Permissions    | read-write                   |
     +----------------+------------------------------+
-    | Channel Based  | False                        |
+    | Channel Based  | True                         |
     +----------------+------------------------------+
     | Resettable     | No                           |
     +----------------+------------------------------+
@@ -4681,6 +5131,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        voltage_compensation_frequency.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        voltage_compensation_frequency.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].voltage_compensation_frequency = var
+            var = session['0,1'].voltage_compensation_frequency
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -4690,7 +5151,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -4719,6 +5180,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        voltage_gain_bandwidth.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        voltage_gain_bandwidth.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].voltage_gain_bandwidth = var
+            var = session['0,1'].voltage_gain_bandwidth
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -4728,7 +5200,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -4763,6 +5235,17 @@ nidcpower.Session properties
         effect. Refer to the `Output Enabled <pniDCPower_OutputEnabled.html>`__
         property for more information about enabling the output channel.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        voltage_level.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        voltage_level.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].voltage_level = var
+            var = session['0,1'].voltage_level
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -4772,7 +5255,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -4812,6 +5295,19 @@ nidcpower.Session properties
 
     `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        voltage_level_autorange.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        voltage_level_autorange.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].voltage_level_autorange = var
+            var = session['0,1'].voltage_level_autorange
+
     The following table lists the characteristics of this property.
 
     +----------------+----------------------------------+
@@ -4821,7 +5317,7 @@ nidcpower.Session properties
     +----------------+----------------------------------+
     | Permissions    | read-write                       |
     +----------------+----------------------------------+
-    | Channel Based  | False                            |
+    | Channel Based  | True                             |
     +----------------+----------------------------------+
     | Resettable     | No                               |
     +----------------+----------------------------------+
@@ -4860,6 +5356,17 @@ nidcpower.Session properties
         Enabled <pniDCPower_OutputEnabled.html>`__ property for more information
         about enabling the output channel.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        voltage_level_range.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        voltage_level_range.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].voltage_level_range = var
+            var = session['0,1'].voltage_level_range
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -4869,7 +5376,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -4905,6 +5412,17 @@ nidcpower.Session properties
         effect. Refer to the `Output Enabled <pniDCPower_OutputEnabled.html>`__
         property for more information about enabling the output channel.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        voltage_limit.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        voltage_limit.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].voltage_limit = var
+            var = session['0,1'].voltage_limit
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -4914,7 +5432,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -4954,6 +5472,19 @@ nidcpower.Session properties
 
     `Ranges <NI_DC_Power_Supplies_Help.chm::/ranges.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        voltage_limit_autorange.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        voltage_limit_autorange.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].voltage_limit_autorange = var
+            var = session['0,1'].voltage_limit_autorange
+
     The following table lists the characteristics of this property.
 
     +----------------+----------------------------------+
@@ -4963,7 +5494,7 @@ nidcpower.Session properties
     +----------------+----------------------------------+
     | Permissions    | read-write                       |
     +----------------+----------------------------------+
-    | Channel Based  | False                            |
+    | Channel Based  | True                             |
     +----------------+----------------------------------+
     | Resettable     | No                               |
     +----------------+----------------------------------+
@@ -5002,6 +5533,17 @@ nidcpower.Session properties
         Enabled <pniDCPower_OutputEnabled.html>`__ property for more information
         about enabling the output channel.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        voltage_limit_range.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        voltage_limit_range.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].voltage_limit_range = var
+            var = session['0,1'].voltage_limit_range
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -5011,7 +5553,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -5039,6 +5581,17 @@ nidcpower.Session properties
         Device <NI_DC_Power_Supplies_Help.chm::/SupportedProperties.html>`__ for
         information about supported devices.
 
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        voltage_pole_zero_ratio.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        voltage_pole_zero_ratio.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].voltage_pole_zero_ratio = var
+            var = session['0,1'].voltage_pole_zero_ratio
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -5048,7 +5601,7 @@ nidcpower.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
