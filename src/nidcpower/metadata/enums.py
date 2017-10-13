@@ -645,6 +645,8 @@ for supported devices.
                     'description': 'Exports the Pulse trigger.',
                 },
             },
+        ],
+    },
     'MeasurementTypes': {
         'values': [
             {
