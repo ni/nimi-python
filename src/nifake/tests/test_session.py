@@ -298,7 +298,7 @@ class TestSession(object):
         self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
         boolean_val = True
         int32_val = 32
-        int64_val = 64
+        int64_val = 6000000000
         enum_val = nifake.Turtle.LEONARDO
         float_val = 1.23
         float_enum_val = nifake.FloatEnum._6_5
@@ -345,7 +345,7 @@ class TestSession(object):
         self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
         boolean_val = True
         int32_val = 32
-        int64_val = 64
+        int64_val = 6000000000
         enum_val = nifake.Turtle.LEONARDO
         float_val = 1.23
         float_enum_val = nifake.FloatEnum._6_5
@@ -369,7 +369,7 @@ class TestSession(object):
         self.side_effects_helper['GetError']['description'] = test_error_desc
         boolean_val = True
         int32_val = 32
-        int64_val = 64
+        int64_val = 6000000000
         enum_val = nifake.Turtle.LEONARDO
         float_val = 1.23
         float_enum_val = nifake.FloatEnum._6_5
@@ -702,7 +702,7 @@ class TestSession(object):
     def test_get_attribute_int64(self):
         self.patched_library.niFake_GetAttributeViInt64.side_effect = self.side_effects_helper.niFake_GetAttributeViInt64
         attribute_id = 1000006
-        test_number = 3
+        test_number = 6000000000
         self.side_effects_helper['GetAttributeViInt64']['attributeValue'] = test_number
         with nifake.Session('dev1') as session:
             attr_int = session.read_write_int64
@@ -712,7 +712,7 @@ class TestSession(object):
     def test_set_attribute_int64(self):
         self.patched_library.niFake_SetAttributeViInt64.side_effect = self.side_effects_helper.niFake_SetAttributeViInt64
         attribute_id = 1000006
-        test_number = -10
+        test_number = -6000000000
         with nifake.Session('dev1') as session:
             session.read_write_int64 = test_number
             self.patched_library.niFake_SetAttributeViInt64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', attribute_id, test_number)
