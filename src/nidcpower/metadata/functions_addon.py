@@ -87,6 +87,9 @@ functions_buffer_info = {
     'InitializeWithChannels':       { 'parameters': { 0: { 'is_buffer': True, },
                                                       1: { 'is_buffer': True, },
                                                       3: { 'is_buffer': True, }, }, },
+    'FetchMultiple':                { 'parameters': { 4: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
+                                                      5: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
+                                                      6: { 'size': {'mechanism':'passed-in', 'value':'Count'}, }, }, }
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

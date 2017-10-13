@@ -2590,13 +2590,13 @@ class _SessionBase(object):
             actual_count (int): Indicates the number of measured values actually retrieved from the
                 device.
         '''
-        voltage_measurements_ctype = (visatype.ViReal64 * 1)()
-        current_measurements_ctype = (visatype.ViReal64 * 1)()
-        in_compliance_ctype = (visatype.ViBoolean * 1)()
+        voltage_measurements_ctype = (visatype.ViReal64 * count)()
+        current_measurements_ctype = (visatype.ViReal64 * count)()
+        in_compliance_ctype = (visatype.ViBoolean * count)()
         actual_count_ctype = visatype.ViInt32(0)
         error_code = self._library.niDCPower_FetchMultiple(self._vi, self._repeated_capability.encode(self._encoding), timeout, count, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, ctypes.pointer(actual_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [voltage_measurements_ctype[i] for i in range(1)], [current_measurements_ctype[i] for i in range(1)], [in_compliance_ctype[i] for i in range(1)], int(actual_count_ctype.value)
+        return [float(voltage_measurements_ctype[i]) for i in range(count)], [float(current_measurements_ctype[i]) for i in range(count)], [bool(in_compliance_ctype[i]) for i in range(count)], int(actual_count_ctype.value)
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
@@ -2890,6 +2890,50 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_ctype.value.decode(self._encoding)
 
+    def _get_error(self):
+        '''_get_error
+
+        | Retrieves and then clears the IVI error information for the session or
+          the current execution thread unless **bufferSize** is 0, in which case
+          the function does not clear the error information. By passing 0 for
+          the buffer size, you can ascertain the buffer size required to get the
+          entire error description string and then call the function again with
+          a sufficiently large buffer size.
+        | If the user specifies a valid IVI session for **vi**, this function
+          retrieves and then clears the error information for the session. If
+          the user passes VI_NULL for **vi**, this function retrieves and then
+          clears the error information for the current execution thread. If
+          **vi** is an invalid session, the function does nothing and returns an
+          error. Normally, the error information describes the first error that
+          occurred since the user last called _get_error or
+          clear_error.
+
+        Args:
+            buffer_size (int): Specifies the number of bytes in the ViChar array you specify for
+                **description**.
+                If the error description, including the terminating NUL byte, contains
+                more bytes than you indicate in this attribute, the function copies
+                (buffer size - 1) bytes into the buffer, places an ASCII NUL byte at the
+                end of the buffer, and returns the buffer size you must pass to get the
+                entire value. For example, if the value is 123456 and the buffer size is
+                4, the function places 123 into the buffer and returns 7.
+                If you pass 0 for this attribute, you can pass VI_NULL for
+                **description**.
+
+        Returns:
+            code (int): Returns the error code for the session or execution thread.
+        '''
+        code_ctype = visatype.ViStatus(0)
+        buffer_size = 0
+        description_ctype = None
+        error_code = self._library.niDCPower_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        buffer_size = error_code
+        description_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niDCPower_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
+
     def measure(self, measurement_type):
         '''measure
 
@@ -2959,7 +3003,7 @@ class _SessionBase(object):
         current_measurements_ctype = (visatype.ViReal64 * 1)()
         error_code = self._library.niDCPower_MeasureMultiple(self._vi, self._repeated_capability.encode(self._encoding), voltage_measurements_ctype, current_measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [voltage_measurements_ctype[i] for i in range(1)], [current_measurements_ctype[i] for i in range(1)]
+        return [float(voltage_measurements_ctype[i]) for i in range(1)], [float(current_measurements_ctype[i]) for i in range(1)]
 
     def query_in_compliance(self):
         '''query_in_compliance
@@ -3426,6 +3470,26 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_SetSequence(self._vi, self._repeated_capability.encode(self._encoding), values, source_delays, size)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def _error_message(self, error_code):
+        '''_error_message
+
+        Converts a status code returned by an instrument driver function into a
+        user-readable string.
+
+        Args:
+            error_code (int): Specifies the **status** parameter that is returned from any of the
+                NI-DCPower functions.
+
+        Returns:
+            error_message (string): Returns the user-readable message string that corresponds to the status
+                code you specify.
+                You must pass a ViChar array with at least 256 bytes.
+        '''
+        error_message_ctype = (visatype.ViChar * 256)()
+        error_code = self._library.niDCPower_error_message(self._vi, error_code, error_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_message_ctype.value.decode(self._encoding)
 
 
 class _RepeatedCapability(_SessionBase):
@@ -4023,50 +4087,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _get_error(self):
-        '''_get_error
-
-        | Retrieves and then clears the IVI error information for the session or
-          the current execution thread unless **bufferSize** is 0, in which case
-          the function does not clear the error information. By passing 0 for
-          the buffer size, you can ascertain the buffer size required to get the
-          entire error description string and then call the function again with
-          a sufficiently large buffer size.
-        | If the user specifies a valid IVI session for **vi**, this function
-          retrieves and then clears the error information for the session. If
-          the user passes VI_NULL for **vi**, this function retrieves and then
-          clears the error information for the current execution thread. If
-          **vi** is an invalid session, the function does nothing and returns an
-          error. Normally, the error information describes the first error that
-          occurred since the user last called _get_error or
-          clear_error.
-
-        Args:
-            buffer_size (int): Specifies the number of bytes in the ViChar array you specify for
-                **description**.
-                If the error description, including the terminating NUL byte, contains
-                more bytes than you indicate in this attribute, the function copies
-                (buffer size - 1) bytes into the buffer, places an ASCII NUL byte at the
-                end of the buffer, and returns the buffer size you must pass to get the
-                entire value. For example, if the value is 123456 and the buffer size is
-                4, the function places 123 into the buffer and returns 7.
-                If you pass 0 for this attribute, you can pass VI_NULL for
-                **description**.
-
-        Returns:
-            code (int): Returns the error code for the session or execution thread.
-        '''
-        code_ctype = visatype.ViStatus(0)
-        buffer_size = 0
-        description_ctype = None
-        error_code = self._library.niDCPower_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        description_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niDCPower_GetError(self._vi, ctypes.pointer(code_ctype), buffer_size, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
-
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
 
@@ -4374,26 +4394,6 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def _error_message(self, error_code):
-        '''_error_message
-
-        Converts a status code returned by an instrument driver function into a
-        user-readable string.
-
-        Args:
-            error_code (int): Specifies the **status** parameter that is returned from any of the
-                NI-DCPower functions.
-
-        Returns:
-            error_message (string): Returns the user-readable message string that corresponds to the status
-                code you specify.
-                You must pass a ViChar array with at least 256 bytes.
-        '''
-        error_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niDCPower_error_message(self._vi, error_code, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
 
     def reset(self):
         '''reset

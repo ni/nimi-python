@@ -18,6 +18,12 @@ class SideEffectsHelper(object):
         self._defaults['Abort']['return'] = 0
         self._defaults['ArrayInputFunction'] = {}
         self._defaults['ArrayInputFunction']['return'] = 0
+        self._defaults['BoolArrayOutputFunction'] = {}
+        self._defaults['BoolArrayOutputFunction']['return'] = 0
+        self._defaults['BoolArrayOutputFunction']['anArray'] = None
+        self._defaults['EnumArrayOutputFunction'] = {}
+        self._defaults['EnumArrayOutputFunction']['return'] = 0
+        self._defaults['EnumArrayOutputFunction']['anArray'] = None
         self._defaults['EnumInputFunctionWithDefaults'] = {}
         self._defaults['EnumInputFunctionWithDefaults']['return'] = 0
         self._defaults['GetABoolean'] = {}
@@ -109,6 +115,32 @@ class SideEffectsHelper(object):
         if self._defaults['ArrayInputFunction']['return'] != 0:
             return self._defaults['ArrayInputFunction']['return']
         return self._defaults['ArrayInputFunction']['return']
+
+    def niFake_BoolArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
+        if self._defaults['BoolArrayOutputFunction']['return'] != 0:
+            return self._defaults['BoolArrayOutputFunction']['return']
+        if self._defaults['BoolArrayOutputFunction']['anArray'] is None:
+            raise MockFunctionCallError("niFake_BoolArrayOutputFunction", param='anArray')
+        a = self._defaults['BoolArrayOutputFunction']['anArray']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(an_array), len(a))):
+            an_array[i] = a[i]
+        return self._defaults['BoolArrayOutputFunction']['return']
+
+    def niFake_EnumArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
+        if self._defaults['EnumArrayOutputFunction']['return'] != 0:
+            return self._defaults['EnumArrayOutputFunction']['return']
+        if self._defaults['EnumArrayOutputFunction']['anArray'] is None:
+            raise MockFunctionCallError("niFake_EnumArrayOutputFunction", param='anArray')
+        a = self._defaults['EnumArrayOutputFunction']['anArray']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(an_array), len(a))):
+            an_array[i] = a[i]
+        return self._defaults['EnumArrayOutputFunction']['return']
 
     def niFake_EnumInputFunctionWithDefaults(self, vi, a_turtle):  # noqa: N802
         if self._defaults['EnumInputFunctionWithDefaults']['return'] != 0:
@@ -343,6 +375,10 @@ class SideEffectsHelper(object):
         mock_library.niFake_Abort.return_value = 0
         mock_library.niFake_ArrayInputFunction.side_effect = MockFunctionCallError("niFake_ArrayInputFunction")
         mock_library.niFake_ArrayInputFunction.return_value = 0
+        mock_library.niFake_BoolArrayOutputFunction.side_effect = MockFunctionCallError("niFake_BoolArrayOutputFunction")
+        mock_library.niFake_BoolArrayOutputFunction.return_value = 0
+        mock_library.niFake_EnumArrayOutputFunction.side_effect = MockFunctionCallError("niFake_EnumArrayOutputFunction")
+        mock_library.niFake_EnumArrayOutputFunction.return_value = 0
         mock_library.niFake_EnumInputFunctionWithDefaults.side_effect = MockFunctionCallError("niFake_EnumInputFunctionWithDefaults")
         mock_library.niFake_EnumInputFunctionWithDefaults.return_value = 0
         mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")
