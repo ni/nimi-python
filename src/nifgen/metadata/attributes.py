@@ -116,7 +116,7 @@ VI to override the value of this property.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Record Value Coercions',
-        'name': 'RECORD_VALUE_COERCIONS',
+        'name': 'RECORD_COERCIONS',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -232,7 +232,7 @@ separate cache value for each channel.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Driver Prefix',
-        'name': 'DRIVER_PREFIX',
+        'name': 'SPECIFIC_DRIVER_PREFIX',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -247,7 +247,7 @@ NI-FGEN starts with this prefix.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Advanced Session Information:Resource Descriptor',
-        'name': 'RESOURCE_DESCRIPTOR',
+        'name': 'IO_RESOURCE_DESCRIPTOR',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -309,7 +309,7 @@ supported instrument models.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities',
-        'name': 'CLASS_GROUP_CAPABILITIES',
+        'name': 'GROUP_CAPABILITIES',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -348,7 +348,7 @@ implements.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Instrument Identification:Firmware Revision',
-        'name': 'FIRMWARE_REVISION',
+        'name': 'INSTRUMENT_FIRMWARE_REVISION',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -363,7 +363,7 @@ currently using.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Instrument Identification:Manufacturer',
-        'name': 'MANUFACTURER',
+        'name': 'INSTRUMENT_MANUFACTURER',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -375,7 +375,7 @@ currently using.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Instrument Identification:Model',
-        'name': 'MODEL',
+        'name': 'INSTRUMENT_MODEL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -390,7 +390,7 @@ currently using.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Driver Vendor',
-        'name': 'DRIVER_VENDOR',
+        'name': 'SPECIFIC_DRIVER_VENDOR',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -402,7 +402,7 @@ currently using.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Description',
-        'name': 'DESCRIPTION',
+        'name': 'SPECIFIC_DRIVER_DESCRIPTION',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -414,7 +414,7 @@ currently using.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Class Specification Major Version',
-        'name': 'CLASS_SPECIFICATION_MAJOR_VERSION',
+        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -429,7 +429,7 @@ NI-FGEN is compliant.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Class Specification Minor Version',
-        'name': 'CLASS_SPECIFICATION_MINOR_VERSION',
+        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -444,7 +444,7 @@ NI-FGEN is compliant.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Revision',
-        'name': 'REVISION',
+        'name': 'SPECIFIC_DRIVER_REVISION',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -575,7 +575,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Clocks:Reference Clock:Frequency',
-        'name': 'REFERENCE_CLOCK_FREQUENCY',
+        'name': 'REF_CLOCK_FREQUENCY',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -629,7 +629,7 @@ coercion or rounding.
         'channel_based': 'False',
         'enum': 'ClockMode',
         'lv_property': 'Clocks:Sample Clock:Mode',
-        'name': 'SAMPLE_CLOCK_MODE',
+        'name': 'CLOCK_MODE',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -656,7 +656,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': 'SynchronizationSource',
         'lv_property': 'Instrument:5401/5411/5431:Synchronization Source',
-        'name': 'SYNCHRONIZATION_SOURCE',
+        'name': 'SYNCHRONIZATION',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -721,7 +721,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Frequency List Handle',
-        'name': 'FREQUENCY_LIST_HANDLE',
+        'name': 'FREQ_LIST_HANDLE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -748,7 +748,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Maximum Number Of Frequency Lists',
-        'name': 'MAX_NUMBER_OF_FREQUENCY_LISTS',
+        'name': 'MAX_NUM_FREQ_LISTS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -763,7 +763,7 @@ allows.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Minimum Frequency List Length',
-        'name': 'MIN_FREQUENCY_LIST_LENGTH',
+        'name': 'MIN_FREQ_LIST_LENGTH',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -778,7 +778,7 @@ allows.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Maximum Frequency List Length',
-        'name': 'MAX_FREQUENCY_LIST_LENGTH',
+        'name': 'MAX_FREQ_LIST_LENGTH',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -790,7 +790,7 @@ allows.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Minimum Frequency List Duration',
-        'name': 'MIN_FREQUENCY_LIST_DURATION',
+        'name': 'MIN_FREQ_LIST_DURATION',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -805,7 +805,7 @@ list.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Maximum Frequency List Duration',
-        'name': 'MAX_FREQUENCY_LIST_DURATION',
+        'name': 'MAX_FREQ_LIST_DURATION',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -827,7 +827,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Frequency List Mode:Frequency List Duration Quantum',
-        'name': 'FREQUENCY_LIST_DURATION_QUANTUM',
+        'name': 'FREQ_LIST_DURATION_QUANTUM',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1089,7 +1089,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Calibration:Pre-Amplifier Attenuation',
-        'name': 'PRE-AMPLIFIER_ATTENUATION',
+        'name': 'PRE_AMPLIFIER_ATTENUATION',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1111,7 +1111,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Calibration:Post-Amplifier Attenuation',
-        'name': 'POST-AMPLIFIER_ATTENUATION',
+        'name': 'POST_AMPLIFIER_ATTENUATION',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1262,7 +1262,7 @@ Data Mask <pniFgen_DigitalDataMask.html>`__ property.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Standard Function Mode:Buffer Size',
-        'name': 'BUFFER_SIZE',
+        'name': 'FUNC_BUFFER_SIZE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1286,7 +1286,7 @@ implementation of Standard Function output mode on your device.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Standard Function Mode:Maximum Buffer Size',
-        'name': 'MAXIMUM_BUFFER_SIZE',
+        'name': 'FUNC_MAX_BUFFER_SIZE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1428,7 +1428,7 @@ are disabled and have no effect on the generated signal.
         'channel_based': 'False',
         'enum': 'DataProcessingMode',
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Data Processing Mode',
-        'name': 'DATA_PROCESSING_MODE',
+        'name': 'OSP_DATA_PROCESSING_MODE',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -1444,7 +1444,7 @@ restricts this property value to Complex.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Rate',
-        'name': 'IQ_RATE',
+        'name': 'OSP_IQ_RATE',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1470,7 +1470,7 @@ generator processes complex (I/Q) data.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Carrier Enabled',
-        'name': 'CARRIER_ENABLED',
+        'name': 'OSP_CARRIER_ENABLED',
         'resettable': 'Yes',
         'type': 'ViBoolean',
 'documentation': {
@@ -1482,7 +1482,7 @@ generator processes complex (I/Q) data.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Carrier Frequency',
-        'name': 'CARRIER_FREQUENCY',
+        'name': 'OSP_CARRIER_FREQUENCY',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1494,7 +1494,7 @@ generator processes complex (I/Q) data.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Carrier Phase:Carrier Phase I',
-        'name': 'CARRIER_PHASE_I',
+        'name': 'OSP_CARRIER_PHASE_I',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1511,7 +1511,7 @@ generated signal.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Carrier Phase:Carrier Phase Q',
-        'name': 'CARRIER_PHASE_Q',
+        'name': 'OSP_CARRIER_PHASE_Q',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1530,7 +1530,7 @@ Mode <pniFgen_DataProcessingMode.html>`__ property is set to
         'channel_based': 'False',
         'enum': 'FilterType',
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Filter Type',
-        'name': 'FILTER_TYPE',
+        'name': 'OSP_FIR_FILTER_TYPE',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -1571,7 +1571,7 @@ gain, so only analog gain makes full use of the resolution of the DAC.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:FIR Filter Enabled',
-        'name': 'FIR_FILTER_ENABLED',
+        'name': 'OSP_FIR_FILTER_ENABLED',
         'resettable': 'Yes',
         'type': 'ViBoolean',
 'documentation': {
@@ -1590,7 +1590,7 @@ property and the FIR Filter Enabled property to the same value.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:FIR Interpolation Factor',
-        'name': 'FIR_INTERPOLATION',
+        'name': 'OSP_FIR_FILTER_INTERPOLATION',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1606,7 +1606,7 @@ of the `IQ Rate <pniFgen_IQRate.html>`__ property.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Filter Enabled',
-        'name': 'CIC_FILTER_ENABLED',
+        'name': 'OSP_CIC_FILTER_ENABLED',
         'resettable': 'Yes',
         'type': 'ViBoolean',
 'documentation': {
@@ -1622,7 +1622,7 @@ Enabled <pniFgen_FIRFilterEnabled.html>`__ properties to the same value.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Interpolation Factor',
-        'name': 'CIC_INTERPOLATION',
+        'name': 'OSP_CIC_FILTER_INTERPOLATION',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1638,7 +1638,7 @@ of the `IQ Rate <pniFgen_IQRate.html>`__ property.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Root Raised Cosine:Alpha',
-        'name': 'ROOT_RAISED_COSINE_FILTER_ALPHA',
+        'name': 'OSP_FIR_FILTER_ROOT_RAISED_COSINE_ALPHA',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1655,7 +1655,7 @@ Cosine**.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Raised Cosine:Alpha',
-        'name': 'RAISED_COSINE_FILTER_ALPHA',
+        'name': 'OSP_FIR_FILTER_RAISED_COSINE_ALPHA',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1671,7 +1671,7 @@ Type <pniFgen_FilterType.html>`__ property is set to **Raised Cosine**.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Flat:Passband',
-        'name': 'FLAT_FILTER_PASSBAND',
+        'name': 'OSP_FIR_FILTER_FLAT_PASSBAND',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1688,7 +1688,7 @@ Type <pniFgen_FilterType.html>`__ property is set to **Flat**.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Gaussian:BT',
-        'name': 'GAUSSIAN_FILTER_BT',
+        'name': 'OSP_FIR_FILTER_GAUSSIAN_BT',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1705,7 +1705,7 @@ Type <pniFgen_FilterType.html>`__ property is set to **Gaussian**.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Filter Gain',
-        'name': 'CIC_FILTER_GAIN',
+        'name': 'OSP_CIC_FILTER_GAIN',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1724,7 +1724,7 @@ property overrides the value set by NI-FGEN.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Gain:Pre-filter Gain I',
-        'name': 'PRE-FILTER_GAIN_I',
+        'name': 'OSP_PRE_FILTER_GAIN_I',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1743,7 +1743,7 @@ filtering by the OSP block.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Gain:Pre-filter Gain Q',
-        'name': 'PRE-FILTER_GAIN_Q',
+        'name': 'OSP_PRE_FILTER_GAIN_Q',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1764,7 +1764,7 @@ Processing Mode <pniFgen_DataProcessingMode.html>`__ property is set to
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Offset:Pre-filter Offset I',
-        'name': 'PRE-FILTER_OFFSET_I',
+        'name': 'OSP_PRE_FILTER_OFFSET_I',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1783,7 +1783,7 @@ is applied after the prefilter gain and before any filtering.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Offset:Pre-filter Offset Q',
-        'name': 'PRE-FILTER_OFFSET_Q',
+        'name': 'OSP_PRE_FILTER_OFFSET_Q',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -1874,7 +1874,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Marker Events Count',
-        'name': 'MARKERS_COUNT',
+        'name': 'MARKER_EVENTS_COUNT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1906,7 +1906,7 @@ set to **NIFGEN\_VAL\_OUTPUT\_SCRIPT**.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Instrument:Data Marker Events Count',
-        'name': 'DATA_MARKERS_COUNT',
+        'name': 'DATA_MARKER_EVENTS_COUNT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1946,7 +1946,7 @@ data source.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Triggers:Start:Digital Edge:Source',
-        'name': 'START_TRIGGER_DIGITAL_EDGE_-_SOURCE',
+        'name': 'DIGITAL_EDGE_START_TRIGGER_SOURCE',
         'resettable': 'Yes',
         'type': 'ViString',
 'documentation': {
@@ -1970,9 +1970,9 @@ terminal using PFI 0.
     1150282: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'StartTriggerDigitalEdge_Edge',
+        'enum': 'StartTriggerDigitalEdgeEdge',
         'lv_property': 'Triggers:Start:Digital Edge:Edge',
-        'name': 'START_TRIGGER_DIGITAL_EDGE_-_EDGE',
+        'name': 'DIGITAL_EDGE_START_TRIGGER_EDGE',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -2021,7 +2021,7 @@ trigger.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Triggers:Script:Digital Edge:Source',
-        'name': 'SCRIPT_TRIGGER_DIGITAL_EDGE_-_SOURCE',
+        'name': 'DIGITAL_EDGE_SCRIPT_TRIGGER_SOURCE',
         'resettable': 'Yes',
         'type': 'ViString',
 'documentation': {
@@ -2035,9 +2035,9 @@ property is set to **Digital Edge**.
     1150292: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'ScriptTriggerDigitalEdge_Edge',
+        'enum': 'ScriptTriggerDigitalEdgeEdge',
         'lv_property': 'Triggers:Script:Digital Edge:Edge',
-        'name': 'SCRIPT_TRIGGER_DIGITAL_EDGE_-_EDGE',
+        'name': 'DIGITAL_EDGE_SCRIPT_TRIGGER_EDGE',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -2053,7 +2053,7 @@ property is set to **Digital Edge**.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Triggers:Script:Digital Level:Source',
-        'name': 'SCRIPT_TRIGGER_DIGITAL_LEVEL_-_SOURCE',
+        'name': 'DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE',
         'resettable': 'Yes',
         'type': 'ViString',
 'documentation': {
@@ -2067,9 +2067,9 @@ property is set to **Digital Level**.
     1150294: {
         'access': 'read-write',
         'channel_based': 'False',
-        'enum': 'ScriptTriggerDigitalLevel_ActiveLevel',
+        'enum': 'ScriptTriggerDigitalLevelActiveLevel',
         'lv_property': 'Triggers:Script:Digital Level:Active Level',
-        'name': 'SCRIPT_TRIGGER_DIGITAL_LEVEL_-_ACTIVE_LEVEL',
+        'name': 'DIGITAL_LEVEL_SCRIPT_TRIGGER_ACTIVE_LEVEL',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -2122,7 +2122,7 @@ topic for your device or the **Device Routes** tab in MAX.
         'channel_based': 'False',
         'enum': 'ReadyForStartEventActiveLevel',
         'lv_property': 'Events:Ready For Start:Level:Active Level',
-        'name': 'READY_FOR_START_EVENT_ACTIVE_LEVEL',
+        'name': 'READY_FOR_START_EVENT_LEVEL_ACTIVE_LEVEL',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -2195,7 +2195,7 @@ device or the **Device Routes** tab in MAX.
         'channel_based': 'False',
         'enum': 'StartedEventActiveLevel',
         'lv_property': 'Events:Started:Level:Active Level',
-        'name': 'STARTED_EVENT_ACTIVE_LEVEL',
+        'name': 'STARTED_EVENT_LEVEL_ACTIVE_LEVEL',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -2207,7 +2207,7 @@ device or the **Device Routes** tab in MAX.
         'channel_based': 'False',
         'enum': 'DoneEventActiveLevel',
         'lv_property': 'Events:Done:Level:Active Level',
-        'name': 'DONE_EVENT_ACTIVE_LEVEL',
+        'name': 'DONE_EVENT_LEVEL_ACTIVE_LEVEL',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -2351,7 +2351,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Streaming:Space Available in Streaming Waveform',
-        'name': 'SPACE_AVAILABLE_IN_STREAMING_WAVEFORM',
+        'name': 'STREAMING_SPACE_AVAILABLE_IN_WAVEFORM',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -2399,7 +2399,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Marker Position',
-        'name': 'MARKER_POSITION',
+        'name': 'ARB_MARKER_POSITION',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -2421,7 +2421,7 @@ VI to export the marker signal.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Repeat Count',
-        'name': 'REPEAT_COUNT',
+        'name': 'ARB_REPEAT_COUNT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -2545,7 +2545,7 @@ the **Device Routes** tab in MAX.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Events:Started:Pulse:Width Value',
-        'name': 'STARTED_EVENT_PULSE_WIDTH_VALUE',
+        'name': 'STARTED_EVENT_PULSE_WIDTH',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -2557,7 +2557,7 @@ the **Device Routes** tab in MAX.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Events:Done:Pulse:Width Value',
-        'name': 'DONE_EVENT_PULSE_WIDTH_VALUE',
+        'name': 'DONE_EVENT_PULSE_WIDTH',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -2569,7 +2569,7 @@ the **Device Routes** tab in MAX.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Events:Data Marker:Data Bit Number',
-        'name': 'DATA_MARKER_EVENT_BIT_NUMBER',
+        'name': 'DATA_MARKER_EVENT_DATA_BIT_NUMBER',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -2619,7 +2619,7 @@ behavior.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Events:Marker:Pulse:Width Value',
-        'name': 'MARKER_EVENT_PULSE_WIDTH_VALUE',
+        'name': 'MARKER_EVENT_PULSE_WIDTH',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -2767,7 +2767,7 @@ property to FALSE to clear the latched status of the Marker Event.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Events:Marker:Advanced:Delay Value',
-        'name': 'MARKER_EVENT_DELAY_VALUE',
+        'name': 'MARKER_EVENT_DELAY',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -2807,7 +2807,7 @@ Value <pniFgen_MarkerEventDelayValue.html>`__ property.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Events:Started:Advanced:Delay Value',
-        'name': 'STARTED_EVENT_DELAY_VALUE',
+        'name': 'STARTED_EVENT_DELAY',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -2847,7 +2847,7 @@ Value <pniFgen_StartedEventDelayValue.html>`__ property.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Events:Done:Advanced:Delay Value',
-        'name': 'DONE_EVENT_DELAY_VALUE',
+        'name': 'DONE_EVENT_DELAY',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -3048,7 +3048,7 @@ restricts this property value to BaseBand.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Frequency Shift',
-        'name': 'FREQUENCY_SHIFT',
+        'name': 'OSP_FREQUENCY_SHIFT',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -3064,7 +3064,7 @@ restricts this property value to 0.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Maximum Bandwidth',
-        'name': 'MAXIMUM_BANDWIDTH',
+        'name': 'DATA_TRANSFER_MAXIMUM_BANDWIDTH',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -3085,7 +3085,7 @@ onboard memory of the device.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Advanced:Preferred Packet Size',
-        'name': 'PREFERRED_PACKET_SIZE',
+        'name': 'DATA_TRANSFER_PREFERRED_PACKET_SIZE',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -3116,7 +3116,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Data Transfer:Advanced:Maximum In-Flight Read Requests',
-        'name': 'MAXIMUM_IN-FLIGHT_READ_REQUESTS',
+        'name': 'DATA_TRANSFER_MAXIMUM_IN_FLIGHT_READS',
         'resettable': 'Yes',
         'type': 'ViInt32',
 'documentation': {
@@ -3260,7 +3260,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:Compensate for Filter Group Delay',
-        'name': 'COMPENSATE_FOR_FILTER_GROUP_DELAY',
+        'name': 'OSP_COMPENSATE_FOR_FILTER_GROUP_DELAY',
         'resettable': 'Yes',
         'type': 'ViBoolean',
 'documentation': {
@@ -3314,7 +3314,7 @@ based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html'
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Destination Channels',
-        'name': 'DESTINATION_CHANNELS',
+        'name': 'P2P_DESTINATION_CHANNELS',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -3335,7 +3335,7 @@ based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html'
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Endpoint Size',
-        'name': 'ENDPOINT_SIZE',
+        'name': 'P2P_ENDPOINT_SIZE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3351,7 +3351,7 @@ This property is
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Space Available In Endpoint',
-        'name': 'SPACE_AVAILABLE_IN_ENDPOINT',
+        'name': 'P2P_SPACE_AVAILABLE_IN_ENDPOINT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3372,7 +3372,7 @@ peer-to-peer stream as data moves across the bus. This property is
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Most Space Available In Endpoint',
-        'name': 'MOST_SPACE_AVAILABLE_IN_ENDPOINT',
+        'name': 'P2P_MOST_SPACE_AVAILABLE_IN_ENDPOINT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3398,7 +3398,7 @@ size.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Endpoint Count',
-        'name': 'ENDPOINT_COUNT',
+        'name': 'P2P_ENDPOINT_COUNT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3413,7 +3413,7 @@ device.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Manual Configuration Enabled',
-        'name': 'MANUAL_CONFIGURATION_ENABLED',
+        'name': 'P2P_MANUAL_CONFIGURATION_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -3429,7 +3429,7 @@ stream manager flow control and Done Notifications.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address',
-        'name': 'DATA_TRANSFER_PERMISSION_ADDRESS',
+        'name': 'P2P_DATA_TRANSFER_PERMISSION_ADDRESS',
         'resettable': 'No',
         'type': 'ViInt64',
 'documentation': {
@@ -3450,7 +3450,7 @@ TRUE.
         'channel_based': 'False',
         'enum': 'P2PAddressType',
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address Type',
-        'name': 'DATA_TRANSFER_PERMISSION_ADDRESS_TYPE',
+        'name': 'P2P_DATA_TRANSFER_PERMISSION_ADDRESS_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3474,7 +3474,7 @@ TRUE.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Data Transfer Permission Interval',
-        'name': 'DATA_TRANSFER_PERMISSION_INTERVAL',
+        'name': 'P2P_DATA_TRANSFER_PERMISSION_INTERVAL',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3497,7 +3497,7 @@ property is
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Address',
-        'name': 'ENDPOINT_WINDOW_ADDRESS',
+        'name': 'P2P_ENDPOINT_WINDOW_ADDRESS',
         'resettable': 'No',
         'type': 'ViInt64',
 'documentation': {
@@ -3520,7 +3520,7 @@ TRUE.
         'channel_based': 'False',
         'enum': 'P2PAddressType',
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Address Type',
-        'name': 'ENDPOINT_WINDOW_ADDRESS_TYPE',
+        'name': 'P2P_ENDPOINT_WINDOW_ADDRESS_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3544,7 +3544,7 @@ TRUE.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Size',
-        'name': 'ENDPOINT_WINDOW_SIZE',
+        'name': 'P2P_ENDPOINT_WINDOW_SIZE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3569,7 +3569,7 @@ TRUE.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Address',
-        'name': 'DONE_NOTIFICATION_ADDRESS',
+        'name': 'P2P_DONE_NOTIFICATION_ADDRESS',
         'resettable': 'No',
         'type': 'ViInt64',
 'documentation': {
@@ -3595,7 +3595,7 @@ TRUE.
         'channel_based': 'False',
         'enum': 'P2PAddressType',
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Address Type',
-        'name': 'DONE_NOTIFICATION_ADDRESS_TYPE',
+        'name': 'P2P_DONE_NOTIFICATION_ADDRESS_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3623,7 +3623,7 @@ TRUE.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Value',
-        'name': 'DONE_NOTIFICATION_VALUE',
+        'name': 'P2P_DONE_NOTIFICATION_VALUE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3649,7 +3649,7 @@ TRUE.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Data Transfer Permission Initial Credits',
-        'name': 'DATA_TRANSFER_PERMISSION_INITIAL_CREDITS',
+        'name': 'P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3856,7 +3856,7 @@ generators currently support only one value:
         'channel_based': 'False',
         'enum': 'Waveform',
         'lv_property': 'Standard Function:Waveform',
-        'name': 'WAVEFORM',
+        'name': 'FUNC_WAVEFORM',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3874,7 +3874,7 @@ property is set to **NIFGEN\_VAL\_OUTPUT\_FUNC**.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Amplitude',
-        'name': 'AMPLITUDE',
+        'name': 'FUNC_AMPLITUDE',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -3901,7 +3901,7 @@ the `Waveform <pniFgen_Waveform.html>`__ property to
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:DC Offset',
-        'name': 'DC_OFFSET',
+        'name': 'FUNC_DC_OFFSET',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -3927,7 +3927,7 @@ range from 0.00 V to +10.00 V, set this property to 5.00 V.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Standard Function Mode:Frequency',
-        'name': 'FREQUENCY',
+        'name': 'FUNC_FREQUENCY',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -3953,7 +3953,7 @@ all other waveforms.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Start Phase',
-        'name': 'START_PHASE',
+        'name': 'FUNC_START_PHASE',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -3982,7 +3982,7 @@ This property does not affect signal generator behavior when you set the
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Standard Function:Duty Cycle High',
-        'name': 'DUTY_CYCLE_HIGH',
+        'name': 'FUNC_DUTY_CYCLE_HIGH',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -4007,7 +4007,7 @@ This parameter only affects signal generator behavior when you set the
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Waveform Mode:Arbitrary Waveform Handle',
-        'name': 'ARBITRARY_WAVEFORM_HANDLE',
+        'name': 'ARB_WAVEFORM_HANDLE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -4044,7 +4044,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Gain',
-        'name': 'GAIN',
+        'name': 'ARB_GAIN',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -4068,7 +4068,7 @@ property is set to **NIFGEN\_VAL\_OUTPUT\_ARB** or
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Offset',
-        'name': 'OFFSET',
+        'name': 'ARB_OFFSET',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -4092,7 +4092,7 @@ property is set to **NIFGEN\_VAL\_OUTPUT\_ARB** or
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Clocks:Sample Clock:Rate',
-        'name': 'SAMPLE_RATE',
+        'name': 'ARB_SAMPLE_RATE',
         'resettable': 'Yes',
         'type': 'ViReal64',
 'documentation': {
@@ -4118,7 +4118,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Capabilities:Max Number of Waveforms',
-        'name': 'MAX_NUMBER_OF_WAVEFORMS',
+        'name': 'MAX_NUM_WAVEFORMS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -4191,7 +4191,7 @@ remaining onboard memory.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Arbitrary Sequence Handle',
-        'name': 'ARBITRARY_SEQUENCE_HANDLE',
+        'name': 'ARB_SEQUENCE_HANDLE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -4222,7 +4222,7 @@ VI or wait for the generation to complete.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Max Number of Sequences',
-        'name': 'MAX_NUMBER_OF_SEQUENCES',
+        'name': 'MAX_NUM_SEQUENCES',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {

@@ -202,7 +202,10 @@ Specifies the size of a waveform so that it can be allocated in onboard
 memory before loading the associated data. Data can then be loaded in
 smaller blocks with the Write Binary 16 Waveform functions.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The signal generator must not be in the Generating state when you call this function.'], ['', 'You must call the nifgen\\_ConfigureOutputMode function to set the **outputMode** parameter to NIFGEN\\_VAL\\_OUTPUT\\_SEQ before calling this function.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+''',
 },
     },
     'CalAdjustADC': {
@@ -1518,31 +1521,16 @@ functions and identifies a particular instrument session.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| sequenceHandle          | ViInt32                 | Specifies the handle of |
-|                         |                         | the arbitrary sequence  |
-|                         |                         | that you want the       |
-|                         |                         | signal generator to     |
-|                         |                         | remove. You can create  |
-|                         |                         | an arbitrary sequence   |
-|                         |                         | using the               |
-|                         |                         | nifgen\_CreateArbSequen |
-|                         |                         | ce                      |
-|                         |                         | or                      |
-|                         |                         | nifgen\_CreateAdvancedA |
-|                         |                         | rbSequence              |
-|                         |                         | function. These         |
-|                         |                         | functions return a      |
-|                         |                         | handle that you use to  |
-|                         |                         | identify the sequence.  |
-|                         |                         | | **Defined Value**:    |
-|                         |                         | | NIFGEN\_VAL\_ALL\_SEQ |
-|                         |                         | UENCES—Remove           |
-|                         |                         |   all sequences from    |
-|                         |                         |   the signal generator  |
-|                         |                         |                         |
-|                         |                         | **Default Value**: None |
-+-------------------------+-------------------------+-------------------------+
+Specifies the handle of the arbitrary sequence that you want the signal
+generator to remove. You can create an arbitrary sequence using the
+nifgen\_CreateArbSequence or nifgen\_CreateAdvancedArbSequence function.
+These functions return a handle that you use to identify the sequence.
+
+| **Defined Value**:
+| NIFGEN\_VAL\_ALL\_SEQUENCES—Remove all sequences from the signal
+  generator
+
+**Default Value**: None
 ''',
 },
             },
@@ -1582,38 +1570,24 @@ functions and identifies a particular instrument session.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| waveformHandle          | ViInt32                 | Specifies the handle of |
-|                         |                         | the arbitrary waveform  |
-|                         |                         | that you want the       |
-|                         |                         | signal generator to     |
-|                         |                         | remove.                 |
-|                         |                         | You can create multiple |
-|                         |                         | arbitrary waveforms     |
-|                         |                         | using one of the        |
-|                         |                         | following niFgen Create |
-|                         |                         | Waveform functions:     |
-|                         |                         |                         |
-|                         |                         | -  niFgen\_CreateWavefo |
-|                         |                         | rmF64                   |
-|                         |                         | -  niFgen\_CreateWavefo |
-|                         |                         | rmI16                   |
-|                         |                         | -  niFgen\_CreateWavefo |
-|                         |                         | rmFromFileI16           |
-|                         |                         | -  niFgen\_CreateWavefo |
-|                         |                         | rmFromFileF64           |
-|                         |                         | -  niFgen\_CreateWavefo |
-|                         |                         | rmFromFileHWS           |
-|                         |                         |                         |
-|                         |                         | **Defined Value**:      |
-|                         |                         |                         |
-|                         |                         | NIFGEN\_VAL\_ALL\_WAVEF |
-|                         |                         | ORMS—Remove             |
-|                         |                         | all waveforms from the  |
-|                         |                         | signal generator.       |
-|                         |                         |                         |
-|                         |                         | **Default Value**: None |
-+-------------------------+-------------------------+-------------------------+
+Specifies the handle of the arbitrary waveform that you want the signal
+generator to remove.
+
+You can create multiple arbitrary waveforms using one of the following
+niFgen Create Waveform functions:
+
+-  niFgen\_CreateWaveformF64
+-  niFgen\_CreateWaveformI16
+-  niFgen\_CreateWaveformFromFileI16
+-  niFgen\_CreateWaveformFromFileF64
+-  niFgen\_CreateWaveformFromFileHWS
+
+**Defined Value**:
+
+NIFGEN\_VAL\_ALL\_WAVEFORMS—Remove all waveforms from the signal
+generator.
+
+**Default Value**: None
 ''',
 },
             },
@@ -2027,7 +2001,10 @@ Configures the signal generator attributes that affect arbitrary
 sequence generation. Sets the NIFGEN\_ATTR\_ARB\_SEQUENCE\_HANDLE,
 NIFGEN\_ATTR\_ARB\_GAIN, and NIFGEN\_ATTR\_ARB\_OFFSET attributes.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The signal generator must not be in the Generating state when you call this function.'], ['', 'You must call the nifgen\\_ConfigureOutputMode function to set the **outputMode** parameter to NIFGEN\\_VAL\\_OUTPUT\\_SEQ before calling this function.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+''',
 },
     },
     'ConfigureArbWaveform': {
@@ -2068,39 +2045,21 @@ waveform.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| waveformHandle          | ViInt32                 | Specifies the handle of |
-|                         |                         | the arbitrary waveform  |
-|                         |                         | you want the signal     |
-|                         |                         | generator to produce.   |
-|                         |                         | NI-FGEN sets the        |
-|                         |                         | NIFGEN\_ATTR\_ARB\_WAVE |
-|                         |                         | FORM\_HANDLE            |
-|                         |                         | attribute to this       |
-|                         |                         | value. You can create   |
-|                         |                         | an arbitrary waveform   |
-|                         |                         | using one of the        |
-|                         |                         | following niFgen Create |
-|                         |                         | Waveform functions:     |
-|                         |                         |                         |
-|                         |                         | -  niFgen\_CreateWavefo |
-|                         |                         | rmF64                   |
-|                         |                         | -  niFgen\_CreateWavefo |
-|                         |                         | rmI16                   |
-|                         |                         | -  niFgen\_CreateWavefo |
-|                         |                         | rmFromFileI16           |
-|                         |                         | -  niFgen\_CreateWavefo |
-|                         |                         | rmFromFileF64           |
-|                         |                         | -  niFgen\_CreateWavefo |
-|                         |                         | rmFromFileHWS           |
-|                         |                         |                         |
-|                         |                         | These functions return  |
-|                         |                         | a handle that you use   |
-|                         |                         | to identify the         |
-|                         |                         | waveform.               |
-|                         |                         |                         |
-|                         |                         | **Default Value**: None |
-+-------------------------+-------------------------+-------------------------+
+Specifies the handle of the arbitrary waveform you want the signal
+generator to produce. NI-FGEN sets the
+NIFGEN\_ATTR\_ARB\_WAVEFORM\_HANDLE attribute to this value. You can
+create an arbitrary waveform using one of the following niFgen Create
+Waveform functions:
+
+-  niFgen\_CreateWaveformF64
+-  niFgen\_CreateWaveformI16
+-  niFgen\_CreateWaveformFromFileI16
+-  niFgen\_CreateWaveformFromFileF64
+-  niFgen\_CreateWaveformFromFileHWS
+
+These functions return a handle that you use to identify the waveform.
+
+**Default Value**: None
 ''',
 },
             },
@@ -2155,7 +2114,10 @@ Configures the attributes of the signal generator that affect arbitrary
 waveform generation. Sets the NIFGEN\_ATTR\_ARB\_WAVEFORM\_HANDLE,
 NIFGEN\_ATTR\_ARB\_GAIN, and NIFGEN\_ATTR\_ARB\_OFFSET attributes.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The signal generator must not be in the Generating state when you call this function.'], ['', 'You must call the nifgen\\_ConfigureOutputMode function to set the **outputMode** parameter to NIFGEN\\_VAL\\_OUTPUT\\_ARB before calling this function.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+''',
 },
     },
     'ConfigureChannels': {
@@ -2250,7 +2212,10 @@ NIFGEN\_VAL\_HIGH\_RESOLUTION, you can set the sample rate to any value.
 If you select NIFGEN\_VAL\_AUTOMATIC, NI-FGEN selects the clock mode
 based on the sample rate, using divide-down sampling when possible.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The signal generator must not be in the Generating state when you call this function.'], ['', 'You must call the nifgen\\_ConfigureOutputMode function to set the **outputMode** parameter to NIFGEN\\_VAL\\_OUTPUT\\_SEQ, NIFGEN\\_VAL\\_OUTPUT\\_ARB, or NIFGEN\\_VAL\\_OUTPUT\\_SCRIPT before calling this function.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+''',
 },
     },
     'ConfigureCustomFIRFilterCoefficients': {
@@ -2350,35 +2315,13 @@ functions and identifies a particular instrument session.
                 'type': 'ViConstString',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| triggerID               | ViConstString           | Specifies the Script    |
-|                         |                         | Trigger used for        |
-|                         |                         | triggering.             |
-|                         |                         | **Defined Values**      |
-|                         |                         |                         |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger0"   |  |
-|                         |                         | Script Trigger 0   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger1"   |  |
-|                         |                         | Script Trigger 1   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger2"   |  |
-|                         |                         | Script Trigger 2   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger3"   |  |
-|                         |                         | Script Trigger 3   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         |                         |
-|                         |                         | **Default Value**:      |
-|                         |                         | "ScriptTrigger0"        |
-+-------------------------+-------------------------+-------------------------+
+Specifies the Script Trigger used for triggering.
+
+**Defined Values**
+
+**Default Value**: "ScriptTrigger0"
 ''',
+'table_body': [['"ScriptTrigger0"', 'Script Trigger 0'], ['"ScriptTrigger1"', 'Script Trigger 1'], ['"ScriptTrigger2"', 'Script Trigger 2'], ['"ScriptTrigger3"', 'Script Trigger 3']],
 },
             },
             {
@@ -2388,122 +2331,13 @@ functions and identifies a particular instrument session.
                 'type': 'ViConstString',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| source                  | ViConstString           | Specifies which trigger |
-|                         |                         | source the signal       |
-|                         |                         | generator uses.         |
-|                         |                         | **Defined Values**      |
-|                         |                         |                         |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI0"         | PFI  |
-|                         |                         | 0                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI1"         | PFI  |
-|                         |                         | 1                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI2"         | PFI  |
-|                         |                         | 2                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI3"         | PFI  |
-|                         |                         | 3                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI4"         | PFI  |
-|                         |                         | 4                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI5"         | PFI  |
-|                         |                         | 5                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI6"         | PFI  |
-|                         |                         | 6                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI7"         | PFI  |
-|                         |                         | 7                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig0"   | PXI  |
-|                         |                         | trigger line 0 or RTSI  |
-|                         |                         | line 0   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig1"   | PXI  |
-|                         |                         | trigger line 1 or RTSI  |
-|                         |                         | line 1   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig2"   | PXI  |
-|                         |                         | trigger line 2 or RTSI  |
-|                         |                         | line 2   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig3"   | PXI  |
-|                         |                         | trigger line 3 or RTSI  |
-|                         |                         | line 3   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig4"   | PXI  |
-|                         |                         | trigger line 4 or RTSI  |
-|                         |                         | line 4   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig5"   | PXI  |
-|                         |                         | trigger line 5 or RTSI  |
-|                         |                         | line 5   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig6"   | PXI  |
-|                         |                         | trigger line 6 or RTSI  |
-|                         |                         | line 6   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig7"   | PXI  |
-|                         |                         | trigger line 7 or RTSI  |
-|                         |                         | line 7   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Star"    | PXI  |
-|                         |                         | star trigger line       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         |                         |
-|                         |                         | **Default Value**:      |
-|                         |                         | "PFI0"                  |
-+-------------------------+-------------------------+-------------------------+
+Specifies which trigger source the signal generator uses.
+
+**Defined Values**
+
+**Default Value**: "PFI0"
 ''',
+'table_body': [['"PFI0"', 'PFI 0'], ['"PFI1"', 'PFI 1'], ['"PFI2"', 'PFI 2'], ['"PFI3"', 'PFI 3'], ['"PFI4"', 'PFI 4'], ['"PFI5"', 'PFI 5'], ['"PFI6"', 'PFI 6'], ['"PFI7"', 'PFI 7'], ['"PXI\\_Trig0"', 'PXI trigger line 0 or RTSI line 0'], ['"PXI\\_Trig1"', 'PXI trigger line 1 or RTSI line 1'], ['"PXI\\_Trig2"', 'PXI trigger line 2 or RTSI line 2'], ['"PXI\\_Trig3"', 'PXI trigger line 3 or RTSI line 3'], ['"PXI\\_Trig4"', 'PXI trigger line 4 or RTSI line 4'], ['"PXI\\_Trig5"', 'PXI trigger line 5 or RTSI line 5'], ['"PXI\\_Trig6"', 'PXI trigger line 6 or RTSI line 6'], ['"PXI\\_Trig7"', 'PXI trigger line 7 or RTSI line 7'], ['"PXI\\_Star"', 'PXI star trigger line']],
 },
             },
             {
@@ -2513,42 +2347,13 @@ functions and identifies a particular instrument session.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| edge                    | ViInt32                 | Specifies the edge to   |
-|                         |                         | detect.                 |
-|                         |                         | ****Defined Values****  |
-|                         |                         |                         |
-|                         |                         | +---------------------- |
-|                         |                         | --------+-------------- |
-|                         |                         | ----------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | --------+               |
-|                         |                         | | NIFGEN\_VAL\_RISING\_ |
-|                         |                         | EDGE    | Occurs when t |
-|                         |                         | he signal transitions f |
-|                         |                         | rom low level to high l |
-|                         |                         | evel.   |               |
-|                         |                         | +---------------------- |
-|                         |                         | --------+-------------- |
-|                         |                         | ----------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | --------+               |
-|                         |                         | | NIFGEN\_VAL\_FALLING\ |
-|                         |                         | _EDGE   | Occurs when t |
-|                         |                         | he signal transitions f |
-|                         |                         | rom high level to low l |
-|                         |                         | evel.   |               |
-|                         |                         | +---------------------- |
-|                         |                         | --------+-------------- |
-|                         |                         | ----------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | --------+               |
-|                         |                         |                         |
-|                         |                         | ****Default Value**:**  |
-|                         |                         | NIFGEN\_VAL\_RISING\_ED |
-|                         |                         | GE                      |
-+-------------------------+-------------------------+-------------------------+
+Specifies the edge to detect.
+
+****Defined Values****
+
+****Default Value**:** NIFGEN\_VAL\_RISING\_EDGE
 ''',
+'table_body': [['NIFGEN\\_VAL\\_RISING\\_EDGE', 'Occurs when the signal transitions from low level to high level.'], ['NIFGEN\\_VAL\\_FALLING\\_EDGE', 'Occurs when the signal transitions from high level to low level.']],
 },
             },
         ],
@@ -2580,122 +2385,13 @@ functions and identifies a particular instrument session.
                 'type': 'ViConstString',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| source                  | ViConstString           | Specifies which trigger |
-|                         |                         | source the signal       |
-|                         |                         | generator uses.         |
-|                         |                         | **Defined Values**      |
-|                         |                         |                         |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI0"         | PFI  |
-|                         |                         | 0                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI1"         | PFI  |
-|                         |                         | 1                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI2"         | PFI  |
-|                         |                         | 2                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI3"         | PFI  |
-|                         |                         | 3                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI4"         | PFI  |
-|                         |                         | 4                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI5"         | PFI  |
-|                         |                         | 5                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI6"         | PFI  |
-|                         |                         | 6                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI7"         | PFI  |
-|                         |                         | 7                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig0"   | PXI  |
-|                         |                         | trigger line 0 or RTSI  |
-|                         |                         | line 0   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig1"   | PXI  |
-|                         |                         | trigger line 1 or RTSI  |
-|                         |                         | line 1   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig2"   | PXI  |
-|                         |                         | trigger line 2 or RTSI  |
-|                         |                         | line 2   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig3"   | PXI  |
-|                         |                         | trigger line 3 or RTSI  |
-|                         |                         | line 3   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig4"   | PXI  |
-|                         |                         | trigger line 4 or RTSI  |
-|                         |                         | line 4   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig5"   | PXI  |
-|                         |                         | trigger line 5 or RTSI  |
-|                         |                         | line 5   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig6"   | PXI  |
-|                         |                         | trigger line 6 or RTSI  |
-|                         |                         | line 6   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig7"   | PXI  |
-|                         |                         | trigger line 7 or RTSI  |
-|                         |                         | line 7   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Star"    | PXI  |
-|                         |                         | star trigger line       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         |                         |
-|                         |                         | **Default Value**:      |
-|                         |                         | "PFI0"                  |
-+-------------------------+-------------------------+-------------------------+
+Specifies which trigger source the signal generator uses.
+
+**Defined Values**
+
+**Default Value**: "PFI0"
 ''',
+'table_body': [['"PFI0"', 'PFI 0'], ['"PFI1"', 'PFI 1'], ['"PFI2"', 'PFI 2'], ['"PFI3"', 'PFI 3'], ['"PFI4"', 'PFI 4'], ['"PFI5"', 'PFI 5'], ['"PFI6"', 'PFI 6'], ['"PFI7"', 'PFI 7'], ['"PXI\\_Trig0"', 'PXI trigger line 0 or RTSI line 0'], ['"PXI\\_Trig1"', 'PXI trigger line 1 or RTSI line 1'], ['"PXI\\_Trig2"', 'PXI trigger line 2 or RTSI line 2'], ['"PXI\\_Trig3"', 'PXI trigger line 3 or RTSI line 3'], ['"PXI\\_Trig4"', 'PXI trigger line 4 or RTSI line 4'], ['"PXI\\_Trig5"', 'PXI trigger line 5 or RTSI line 5'], ['"PXI\\_Trig6"', 'PXI trigger line 6 or RTSI line 6'], ['"PXI\\_Trig7"', 'PXI trigger line 7 or RTSI line 7'], ['"PXI\\_Star"', 'PXI star trigger line']],
 },
             },
             {
@@ -2705,42 +2401,13 @@ functions and identifies a particular instrument session.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| edge                    | ViInt32                 | Specifies the edge to   |
-|                         |                         | detect.                 |
-|                         |                         | ****Defined Values****  |
-|                         |                         |                         |
-|                         |                         | +---------------------- |
-|                         |                         | --------+-------------- |
-|                         |                         | ----------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | --------+               |
-|                         |                         | | NIFGEN\_VAL\_RISING\_ |
-|                         |                         | EDGE    | Occurs when t |
-|                         |                         | he signal transitions f |
-|                         |                         | rom low level to high l |
-|                         |                         | evel.   |               |
-|                         |                         | +---------------------- |
-|                         |                         | --------+-------------- |
-|                         |                         | ----------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | --------+               |
-|                         |                         | | NIFGEN\_VAL\_FALLING\ |
-|                         |                         | _EDGE   | Occurs when t |
-|                         |                         | he signal transitions f |
-|                         |                         | rom high level to low l |
-|                         |                         | evel.   |               |
-|                         |                         | +---------------------- |
-|                         |                         | --------+-------------- |
-|                         |                         | ----------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | --------+               |
-|                         |                         |                         |
-|                         |                         | ****Default Value**:**  |
-|                         |                         | NIFGEN\_VAL\_RISING\_ED |
-|                         |                         | GE                      |
-+-------------------------+-------------------------+-------------------------+
+Specifies the edge to detect.
+
+****Defined Values****
+
+****Default Value**:** NIFGEN\_VAL\_RISING\_EDGE
 ''',
+'table_body': [['NIFGEN\\_VAL\\_RISING\\_EDGE', 'Occurs when the signal transitions from low level to high level.'], ['NIFGEN\\_VAL\\_FALLING\\_EDGE', 'Occurs when the signal transitions from high level to low level.']],
 },
             },
         ],
@@ -2772,35 +2439,13 @@ functions and identifies a particular instrument session.
                 'type': 'ViConstString',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| triggerID               | ViConstString           | Specifies the Script    |
-|                         |                         | Trigger used for        |
-|                         |                         | triggering.             |
-|                         |                         | **Defined Values**      |
-|                         |                         |                         |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger0"   |  |
-|                         |                         | Script Trigger 0   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger1"   |  |
-|                         |                         | Script Trigger 1   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger2"   |  |
-|                         |                         | Script Trigger 2   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger3"   |  |
-|                         |                         | Script Trigger 3   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         |                         |
-|                         |                         | **Default Value**:      |
-|                         |                         | "ScriptTrigger0"        |
-+-------------------------+-------------------------+-------------------------+
+Specifies the Script Trigger used for triggering.
+
+**Defined Values**
+
+**Default Value**: "ScriptTrigger0"
 ''',
+'table_body': [['"ScriptTrigger0"', 'Script Trigger 0'], ['"ScriptTrigger1"', 'Script Trigger 1'], ['"ScriptTrigger2"', 'Script Trigger 2'], ['"ScriptTrigger3"', 'Script Trigger 3']],
 },
             },
             {
@@ -2810,122 +2455,13 @@ functions and identifies a particular instrument session.
                 'type': 'ViConstString',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| source                  | ViConstString           | Specifies which trigger |
-|                         |                         | source the signal       |
-|                         |                         | generator uses.         |
-|                         |                         | **Defined Values**      |
-|                         |                         |                         |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI0"         | PFI  |
-|                         |                         | 0                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI1"         | PFI  |
-|                         |                         | 1                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI2"         | PFI  |
-|                         |                         | 2                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI3"         | PFI  |
-|                         |                         | 3                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI4"         | PFI  |
-|                         |                         | 4                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI5"         | PFI  |
-|                         |                         | 5                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI6"         | PFI  |
-|                         |                         | 6                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PFI7"         | PFI  |
-|                         |                         | 7                       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig0"   | PXI  |
-|                         |                         | trigger line 0 or RTSI  |
-|                         |                         | line 0   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig1"   | PXI  |
-|                         |                         | trigger line 1 or RTSI  |
-|                         |                         | line 1   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig2"   | PXI  |
-|                         |                         | trigger line 2 or RTSI  |
-|                         |                         | line 2   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig3"   | PXI  |
-|                         |                         | trigger line 3 or RTSI  |
-|                         |                         | line 3   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig4"   | PXI  |
-|                         |                         | trigger line 4 or RTSI  |
-|                         |                         | line 4   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig5"   | PXI  |
-|                         |                         | trigger line 5 or RTSI  |
-|                         |                         | line 5   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig6"   | PXI  |
-|                         |                         | trigger line 6 or RTSI  |
-|                         |                         | line 6   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Trig7"   | PXI  |
-|                         |                         | trigger line 7 or RTSI  |
-|                         |                         | line 7   |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         | | "PXI\_Star"    | PXI  |
-|                         |                         | star trigger line       |
-|                         |                         |          |              |
-|                         |                         | +----------------+----- |
-|                         |                         | ----------------------- |
-|                         |                         | ---------+              |
-|                         |                         |                         |
-|                         |                         | **Default Value**:      |
-|                         |                         | "PFI0"                  |
-+-------------------------+-------------------------+-------------------------+
+Specifies which trigger source the signal generator uses.
+
+**Defined Values**
+
+**Default Value**: "PFI0"
 ''',
+'table_body': [['"PFI0"', 'PFI 0'], ['"PFI1"', 'PFI 1'], ['"PFI2"', 'PFI 2'], ['"PFI3"', 'PFI 3'], ['"PFI4"', 'PFI 4'], ['"PFI5"', 'PFI 5'], ['"PFI6"', 'PFI 6'], ['"PFI7"', 'PFI 7'], ['"PXI\\_Trig0"', 'PXI trigger line 0 or RTSI line 0'], ['"PXI\\_Trig1"', 'PXI trigger line 1 or RTSI line 1'], ['"PXI\\_Trig2"', 'PXI trigger line 2 or RTSI line 2'], ['"PXI\\_Trig3"', 'PXI trigger line 3 or RTSI line 3'], ['"PXI\\_Trig4"', 'PXI trigger line 4 or RTSI line 4'], ['"PXI\\_Trig5"', 'PXI trigger line 5 or RTSI line 5'], ['"PXI\\_Trig6"', 'PXI trigger line 6 or RTSI line 6'], ['"PXI\\_Trig7"', 'PXI trigger line 7 or RTSI line 7'], ['"PXI\\_Star"', 'PXI star trigger line']],
 },
             },
             {
@@ -2935,33 +2471,14 @@ functions and identifies a particular instrument session.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| triggerWhen             | ViInt32                 | Specifies whether the   |
-|                         |                         | Script Trigger asserts  |
-|                         |                         | on a high or low        |
-|                         |                         | digital level.          |
-|                         |                         | **Defined Values**      |
-|                         |                         |                         |
-|                         |                         | +---------------+------ |
-|                         |                         | ----------------------- |
-|                         |                         | ----------------------+ |
-|                         |                         | | "HighLevel"   | Scrip |
-|                         |                         | t Trigger asserts on a  |
-|                         |                         | high digital level.   | |
-|                         |                         | +---------------+------ |
-|                         |                         | ----------------------- |
-|                         |                         | ----------------------+ |
-|                         |                         | | "LowLevel"    | Scrip |
-|                         |                         | t Trigger asserts on a  |
-|                         |                         | low digital level.    | |
-|                         |                         | +---------------+------ |
-|                         |                         | ----------------------- |
-|                         |                         | ----------------------+ |
-|                         |                         |                         |
-|                         |                         | **Default Value**:      |
-|                         |                         | "HighLevel"             |
-+-------------------------+-------------------------+-------------------------+
+Specifies whether the Script Trigger asserts on a high or low digital
+level.
+
+**Defined Values**
+
+**Default Value**: "HighLevel"
 ''',
+'table_body': [['"HighLevel"', 'Script Trigger asserts on a high digital level.'], ['"LowLevel"', 'Script Trigger asserts on a low digital level.']],
 },
             },
         ],
@@ -3096,7 +2613,10 @@ list generation (the NIFGEN\_ATTR\_FREQ\_LIST\_HANDLE,
 NIFGEN\_ATTR\_FUNC\_AMPLITUDE, NIFGEN\_ATTR\_FUNC\_DC\_OFFSET, and
 NIFGEN\_ATTR\_FUNC\_START\_PHASE attributes).
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The signal generator must not be in the Generating state when you call this function.'], ['', 'You must call the nifgen\\_ConfigureOutputMode function to set the **outputMode** parameter to NIFGEN\\_VAL\\_OUTPUT\\_FREQ\\_LIST before calling this function.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+''',
 },
     },
     'ConfigureFrequency': {
@@ -3145,7 +2665,11 @@ waveform.
 
 **Default Value**: None
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** This parameter does not affect signal generator behavior when you set the **waveform** parameter of the niFgen\\_ConfigureStandardWaveform function to NIFGEN\\_VAL\\_WFM\\_DC.'], ['', 'Frequency ranges vary from device to device. For information about the frequencies supported on your device, refer to the *Features Supported* topic for your device in the *NI Signal Generators Help*.']],
+'note': '''
+This parameter does not affect signal generator behavior when you set
+the **waveform** parameter of the niFgen\_ConfigureStandardWaveform
+function to NIFGEN\_VAL\_WFM\_DC.
+''',
 },
             },
         ],
@@ -3211,7 +2735,10 @@ For example, to configure the output signal to range from –2.00 to
         ],
 'documentation': {
 'description': 'Configures the amount of gain to apply to the waveform.',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The signal generator must not be in the Generating state when you call this function.'], ['', 'You must call the nifgen\\_ConfigureOutputMode function to set the **outputMode** parameter to NIFGEN\\_VAL\\_OUTPUT\\_ARB before calling this function.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+''',
 },
     },
     'ConfigureOperationMode': {
@@ -3453,18 +2980,11 @@ functions and identifies a particular instrument session.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| p2p\_endpoint\_fullness | ViInt32                 | Specifies the quantity  |
-| \_level                 |                         | of data in the FIFO     |
-|                         |                         | endpoint that asserts   |
-|                         |                         | the trigger. The        |
-|                         |                         | value –1 specifies that |
-|                         |                         | NI-FGEN uses a default  |
-|                         |                         | value based on your     |
-|                         |                         | endpoint configuration. |
-|                         |                         | **Units**: samples per  |
-|                         |                         | channel                 |
-+-------------------------+-------------------------+-------------------------+
+Specifies the quantity of data in the FIFO endpoint that asserts the
+trigger. The value –1 specifies that NI-FGEN uses a default value based
+on your endpoint configuration.
+
+**Units**: samples per channel
 ''',
 },
             },
@@ -3731,7 +3251,10 @@ waveforms. When you configure the signal generator to produce an
 arbitrary sequence, this value is the sample rate for all arbitrary
 waveforms in the sequence.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The signal generator must not be in the Generating state when you call this function.'], ['', 'You must call the niFgen\\_ConfigureOutputMode function to set the **outputMode** parameter to NIFGEN\\_VAL\\_OUTPUT\\_ARB, NIFGEN\\_VAL\\_OUTPUT\\_SEQ, or NIFGEN\\_VAL\\_OUTPUT\\_SCRIPT before calling this function.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+''',
 },
     },
     'ConfigureSoftwareEdgeScriptTrigger': {
@@ -3758,35 +3281,13 @@ functions and identifies a particular instrument session.
                 'type': 'ViConstString',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| triggerID               | ViConstString           | Specifies the Script    |
-|                         |                         | Trigger used for        |
-|                         |                         | triggering.             |
-|                         |                         | **Defined Values**      |
-|                         |                         |                         |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger0"   |  |
-|                         |                         | Script Trigger 0   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger1"   |  |
-|                         |                         | Script Trigger 1   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger2"   |  |
-|                         |                         | Script Trigger 2   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger3"   |  |
-|                         |                         | Script Trigger 3   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         |                         |
-|                         |                         | **Default Value**:      |
-|                         |                         | "ScriptTrigger0"        |
-+-------------------------+-------------------------+-------------------------+
+Specifies the Script Trigger used for triggering.
+
+**Defined Values**
+
+**Default Value**: "ScriptTrigger0"
 ''',
+'table_body': [['"ScriptTrigger0"', 'Script Trigger 0'], ['"ScriptTrigger1"', 'Script Trigger 1'], ['"ScriptTrigger2"', 'Script Trigger 2'], ['"ScriptTrigger3"', 'Script Trigger 3']],
 },
             },
         ],
@@ -3927,7 +3428,11 @@ attribute to this value.
 
 **Default Value**: None
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** This parameter does not affect signal generator behavior when you set the **waveform** parameter of the niFgen\\_ConfigureStandardWaveform function to NIFGEN\\_VAL\\_WFM\\_DC.'], ['', 'Frequency ranges vary from device to device. For information about the frequencies supported on your device, refer to the *Features Supported* topic for your device in the *NI Signal Generators Help*.']],
+'note': '''
+This parameter does not affect signal generator behavior when you set
+the **waveform** parameter of the niFgen\_ConfigureStandardWaveform
+function to NIFGEN\_VAL\_WFM\_DC.
+''',
 },
             },
             {
@@ -4031,7 +3536,12 @@ nifgen\_ExportSignal function (use the nifgen\_RouteSignalOut function
 for the NI 5404), and other signal generators should receive the signal
 by calling the niFgen\_ConfigureSynchronization function.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The signal generator must not be in the Generating state when you call this function. Only the NI 5401/5411/5431 signal generators require this function to be called for proper synchronization.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+Only the NI 5401/5411/5431 signal generators require this function to be
+called for proper synchronization.
+''',
 },
     },
     'ConfigureTriggerMode': {
@@ -4088,7 +3598,12 @@ Sets the trigger mode for your device. Refer to the *Trigger Modes*
 topic for your device in the *NI Signal Generators Help* for
 descriptions of the specific behavior for supported trigger modes.
 ''',
-'table_body': [['|Note|  .. |Note| image:: note.gif', '**Notes** The signal generator must not be in the Generating state when you call this function. In Frequency List output mode, Stepped trigger mode is the same as Burst trigger mode.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+In Frequency List output mode, Stepped trigger mode is the same as Burst
+trigger mode.
+''',
 },
     },
     'ConfigureTriggerSource': {
@@ -4367,7 +3882,13 @@ you specify the number of times the signal generator produces the
 waveform before proceeding to the next waveform. The number of times to
 repeat a specific waveform is called the loop count.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The signal generator must not be in the Generating state when you call this function. You must call the nifgen\\_ConfigureOutputMode function to set the **outputMode** parameter to NIFGEN\\_VAL\\_OUTPUT\\_SEQ before calling this function.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+You must call the nifgen\_ConfigureOutputMode function to set the
+**outputMode** parameter to NIFGEN\_VAL\_OUTPUT\_SEQ before calling this
+function.
+''',
 },
     },
     'CreateArbSequence': {
@@ -4788,7 +4309,10 @@ signal generator generates each frequency for the given amount of time
 and then proceeds to the next frequency. When the end of the list is
 reached, the signal generator starts over at the beginning of the list.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The signal generator must not be in the Generating state when you call this function.'], ['', 'You must call the nifgen\\_ConfigureOutputMode function to set the **outputMode** parameter to NIFGEN\\_VAL\\_OUTPUT\\_FREQ\\_LIST before calling this function.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+''',
 },
     },
     'CreateWaveformComplexF64': {
@@ -4828,43 +4352,22 @@ Specifies the channel name for which you want to create the waveform.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| numberofSamples         | ViInt32                 | Specifies the size of   |
-|                         |                         | the arbitrary waveform  |
-|                         |                         | that you want to        |
-|                         |                         | create.                 |
-|                         |                         | The size must meet the  |
-|                         |                         | following restrictions: |
-|                         |                         |                         |
-|                         |                         | -  The size must be     |
-|                         |                         |    less than or equal   |
-|                         |                         |    to the maximum       |
-|                         |                         |    waveform size that   |
-|                         |                         |    the device allows.   |
-|                         |                         | -  The size must be     |
-|                         |                         |    greater than or      |
-|                         |                         |    equal to the minimum |
-|                         |                         |    waveform size that   |
-|                         |                         |    the device allows.   |
-|                         |                         | -  The size must be an  |
-|                         |                         |    integer multiple of  |
-|                         |                         |    the device waveform  |
-|                         |                         |    quantum.             |
-|                         |                         |                         |
-|                         |                         | You can obtain these    |
-|                         |                         | values from the         |
-|                         |                         | **maximumWaveformSize** |
-|                         |                         | ,                       |
-|                         |                         | **minimumWaveformSize** |
-|                         |                         | ,                       |
-|                         |                         | and **waveformQuantum** |
-|                         |                         | parameters of the       |
-|                         |                         | niFgen\_QueryArbWfmCapa |
-|                         |                         | bilities                |
-|                         |                         | function.               |
-|                         |                         |                         |
-|                         |                         | **Default Value**: None |
-+-------------------------+-------------------------+-------------------------+
+Specifies the size of the arbitrary waveform that you want to create.
+
+The size must meet the following restrictions:
+
+-  The size must be less than or equal to the maximum waveform size that
+   the device allows.
+-  The size must be greater than or equal to the minimum waveform size
+   that the device allows.
+-  The size must be an integer multiple of the device waveform quantum.
+
+You can obtain these values from the **maximumWaveformSize**,
+**minimumWaveformSize**, and **waveformQuantum** parameters of the
+niFgen\_QueryArbWfmCapabilities function.
+
+| 
+| **Default Value**: None
 ''',
 },
             },
@@ -4955,44 +4458,20 @@ Specifies the channel name for which you want to create the waveform.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| waveformSize            | ViInt32                 | Specifies the size of   |
-|                         |                         | the arbitrary waveform  |
-|                         |                         | that you want to        |
-|                         |                         | create.                 |
-|                         |                         | The size must meet the  |
-|                         |                         | following restrictions: |
-|                         |                         |                         |
-|                         |                         | -  The size must be     |
-|                         |                         |    less than or equal   |
-|                         |                         |    to the maximum       |
-|                         |                         |    waveform size that   |
-|                         |                         |    the device allows.   |
-|                         |                         | -  The size must be     |
-|                         |                         |    greater than or      |
-|                         |                         |    equal to the minimum |
-|                         |                         |    waveform size that   |
-|                         |                         |    the device allows.   |
-|                         |                         | -  The size must be an  |
-|                         |                         |    integer multiple of  |
-|                         |                         |    the device waveform  |
-|                         |                         |    quantum.             |
-|                         |                         |                         |
-|                         |                         | You can obtain these    |
-|                         |                         | values from the         |
-|                         |                         | **maximumWaveformSize** |
-|                         |                         | ,                       |
-|                         |                         | **minimumWaveformSize** |
-|                         |                         | ,                       |
-|                         |                         | and **waveformQuantum** |
-|                         |                         | parameters of the       |
-|                         |                         | nifgen\_QueryArbWfmCapa |
-|                         |                         | bilities                |
-|                         |                         | function.               |
-|                         |                         |                         |
-|                         |                         | ****Default Value**:**  |
-|                         |                         | None                    |
-+-------------------------+-------------------------+-------------------------+
+| Specifies the size of the arbitrary waveform that you want to create.
+| The size must meet the following restrictions:
+
+-  The size must be less than or equal to the maximum waveform size that
+   the device allows.
+-  The size must be greater than or equal to the minimum waveform size
+   that the device allows.
+-  The size must be an integer multiple of the device waveform quantum.
+
+You can obtain these values from the **maximumWaveformSize**,
+**minimumWaveformSize**, and **waveformQuantum** parameters of the
+nifgen\_QueryArbWfmCapabilities function.
+
+| ****Default Value**:** None
 ''',
 },
             },
@@ -5129,7 +4608,11 @@ returned by this function can later be used for setting the active
 waveform, changing the data in the waveform, building sequences of
 waveforms, or deleting the waveform when it is no longer needed.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The F64 data must be between –1.0 and +1.0 V. Use the NIFGEN\\_ATTR\\_DIGITAL\\_GAIN attribute to generate different voltage outputs.'], ['', 'You must call the nifgen\\_ConfigureOutputMode function to set the **outputMode** parameter to NIFGEN\\_VAL\\_OUTPUT\\_ARB or NIFGEN\\_VAL\\_OUTPUT\\_SEQ before calling this function.']],
+'note': '''
+The F64 data must be between –1.0 and +1.0 V. Use the
+NIFGEN\_ATTR\_DIGITAL\_GAIN attribute to generate different voltage
+outputs.
+''',
 },
     },
     'CreateWaveformFromFileHWS': {
@@ -5197,7 +4680,7 @@ Specifies the channel name for which you want to create the waveform.
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'useGain&OffsetFromWaveform',
+                'name': 'useGainAndOffsetFromWaveform',
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
@@ -5241,7 +4724,14 @@ when referring to this waveform.
 
 |
 ''',
-'table_body': [['|Note|  .. |Note| image:: note.gif', '**Notes** If you choose to have this function set the gain and offset properties for you, you should **not** use the niFgen\\_ConfigureArbWaveform or niFgen\\_ConfigureArbSequence functions, as they also set the gain and offset, thereby overriding the values set by this function. Instead, use the NIFGEN\\_ATTR\\_ARB\\_WAVEFORM\\_HANDLE or NIFGEN\\_ATTR\\_ARB\\_SEQUENCE\\_HANDLE attributes.'], ['', 'HWS files may contain I16 or DBL data, depending on how it was saved. This function automatically adapts to either data type. If the file contains DBL data, it must be between –1.0 and +1.0. Check the "Scale Data to +/– 1V" option in the Analog Waveform Editor to ensure your data is between –1.0 and +1.0.']],
+'note': '''
+If you choose to have this function set the gain and offset properties
+for you, you should **not** use the niFgen\_ConfigureArbWaveform or
+niFgen\_ConfigureArbSequence functions, as they also set the gain and
+offset, thereby overriding the values set by this function. Instead, use
+the NIFGEN\_ATTR\_ARB\_WAVEFORM\_HANDLE or
+NIFGEN\_ATTR\_ARB\_SEQUENCE\_HANDLE attributes.
+''',
 },
     },
     'CreateWaveformFromFileI16': {
@@ -5329,7 +4819,11 @@ function can later be used for setting the active waveform, changing the
 data in the waveform, building sequences of waveforms, or deleting the
 waveform when it is no longer needed.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The I16 data (values between –32768 and +32767) is assumed to represent –1 to +1 V. Use the NIFGEN\\_ATTR\\_DIGITAL\\_GAIN attribute to generate different voltage outputs.'], ['', 'You must call the nifgen\\_ConfigureOutputMode function to set the **outputMode** parameter to NIFGEN\\_VAL\\_OUTPUT\\_ARB or NIFGEN\\_VAL\\_OUTPUT\\_SEQ before calling this function.']],
+'note': '''
+The I16 data (values between –32768 and +32767) is assumed to
+represent –1 to +1 V. Use the NIFGEN\_ATTR\_DIGITAL\_GAIN attribute to
+generate different voltage outputs.
+''',
 },
     },
     'CreateWaveformI16': {
@@ -5369,44 +4863,21 @@ Specifies the channel name for which you want to create the waveform.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| waveformSize            | ViInt32                 | Specifies the size of   |
-|                         |                         | the arbitrary waveform  |
-|                         |                         | that you want to        |
-|                         |                         | create.                 |
-|                         |                         | The size must meet the  |
-|                         |                         | following restrictions: |
-|                         |                         |                         |
-|                         |                         | -  The size must be     |
-|                         |                         |    less than or equal   |
-|                         |                         |    to the maximum       |
-|                         |                         |    waveform size that   |
-|                         |                         |    the device allows.   |
-|                         |                         | -  The size must be     |
-|                         |                         |    greater than or      |
-|                         |                         |    equal to the minimum |
-|                         |                         |    waveform size that   |
-|                         |                         |    the device allows.   |
-|                         |                         | -  The size must be an  |
-|                         |                         |    integer multiple of  |
-|                         |                         |    the device waveform  |
-|                         |                         |    quantum.             |
-|                         |                         |                         |
-|                         |                         | You can obtain these    |
-|                         |                         | values from the         |
-|                         |                         | **maximumWaveformSize** |
-|                         |                         | ,                       |
-|                         |                         | **minimumWaveformSize** |
-|                         |                         | ,                       |
-|                         |                         | and **waveformQuantum** |
-|                         |                         | parameters of the       |
-|                         |                         | nifgen\_QueryArbWfmCapa |
-|                         |                         | bilities                |
-|                         |                         | function.               |
-|                         |                         |                         |
-|                         |                         | ****Default Value**:**  |
-|                         |                         | None                    |
-+-------------------------+-------------------------+-------------------------+
+| Specifies the size of the arbitrary waveform that you want to create.
+| The size must meet the following restrictions:
+
+-  The size must be less than or equal to the maximum waveform size that
+   the device allows.
+-  The size must be greater than or equal to the minimum waveform size
+   that the device allows.
+-  The size must be an integer multiple of the device waveform quantum.
+
+You can obtain these values from the **maximumWaveformSize**,
+**minimumWaveformSize**, and **waveformQuantum** parameters of the
+nifgen\_QueryArbWfmCapabilities function.
+
+| 
+| ****Default Value**:** None
 ''',
 },
             },
@@ -5807,35 +5278,13 @@ functions and identifies a particular instrument session.
                 'type': 'ViConstString',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| triggerID               | ViConstString           | Specifies the Script    |
-|                         |                         | Trigger used for        |
-|                         |                         | triggering.             |
-|                         |                         | **Defined Values**      |
-|                         |                         |                         |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger0"   |  |
-|                         |                         | Script Trigger 0   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger1"   |  |
-|                         |                         | Script Trigger 1   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger2"   |  |
-|                         |                         | Script Trigger 2   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         | | "ScriptTrigger3"   |  |
-|                         |                         | Script Trigger 3   |    |
-|                         |                         | +--------------------+- |
-|                         |                         | -------------------+    |
-|                         |                         |                         |
-|                         |                         | **Default Value**:      |
-|                         |                         | "ScriptTrigger0"        |
-+-------------------------+-------------------------+-------------------------+
+Specifies the Script Trigger used for triggering.
+
+**Defined Values**
+
+**Default Value**: "ScriptTrigger0"
 ''',
+'table_body': [['"ScriptTrigger0"', 'Script Trigger 0'], ['"ScriptTrigger1"', 'Script Trigger 1'], ['"ScriptTrigger2"', 'Script Trigger 2'], ['"ScriptTrigger3"', 'Script Trigger 3']],
 },
             },
         ],
@@ -7047,69 +6496,11 @@ functions and identifies a particular instrument session.
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| state                   | ViInt32\*               | Returns the hardware    |
-|                         |                         | state of the signal     |
-|                         |                         | generator.              |
-|                         |                         | **Defined Values**      |
-|                         |                         |                         |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | -+                      |
-|                         |                         | | NIFGEN\_VAL\_IDLE     |
-|                         |                         |                         |
-|                         |                         | | The device is in the  |
-|                         |                         | Idle state.             |
-|                         |                         |  |                      |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | -+                      |
-|                         |                         | | NIFGEN\_VAL\_WAITING\ |
-|                         |                         | _FOR\_START\_TRIGGER    |
-|                         |                         | | The device is waiting |
-|                         |                         |  for Start Trigger.     |
-|                         |                         |  |                      |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | -+                      |
-|                         |                         | | NIFGEN\_VAL\_RUNNING  |
-|                         |                         |                         |
-|                         |                         | | The device is in the  |
-|                         |                         | Running state.          |
-|                         |                         |  |                      |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | -+                      |
-|                         |                         | | NIFGEN\_VAL\_DONE     |
-|                         |                         |                         |
-|                         |                         | | The generation has co |
-|                         |                         | mpleted successfully.   |
-|                         |                         |  |                      |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | -+                      |
-|                         |                         | | NIFGEN\_VAL\_HARDWARE |
-|                         |                         | \_ERROR                 |
-|                         |                         | | There is a hardware e |
-|                         |                         | rror.                   |
-|                         |                         |  |                      |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | +---------------------- |
-|                         |                         | ----------------------- |
-|                         |                         | -+                      |
-+-------------------------+-------------------------+-------------------------+
+Returns the hardware state of the signal generator.
+
+**Defined Values**
 ''',
+'table_body': [['NIFGEN\\_VAL\\_IDLE', 'The device is in the Idle state.'], ['NIFGEN\\_VAL\\_WAITING\\_FOR\\_START\\_TRIGGER', 'The device is waiting for Start Trigger.'], ['NIFGEN\\_VAL\\_RUNNING', 'The device is in the Running state.'], ['NIFGEN\\_VAL\\_DONE', 'The generation has completed successfully.'], ['NIFGEN\\_VAL\\_HARDWARE\\_ERROR', 'There is a hardware error.']],
 },
             },
         ],
@@ -7454,29 +6845,11 @@ particular instrument session.
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| selfCalSupported        | ViBoolean\*             | Returns whether the     |
-|                         |                         | device supports         |
-|                         |                         | self-calibration.       |
-|                         |                         | ****Defined Values****  |
-|                         |                         |                         |
-|                         |                         | +-------------+-------- |
-|                         |                         | ----------------------- |
-|                         |                         | -------+                |
-|                         |                         | | VI\_TRUE    | Self–ca |
-|                         |                         | libration is supported. |
-|                         |                         |        |                |
-|                         |                         | +-------------+-------- |
-|                         |                         | ----------------------- |
-|                         |                         | -------+                |
-|                         |                         | | VI\_FALSE   | Self–ca |
-|                         |                         | libration is not suppor |
-|                         |                         | ted.   |                |
-|                         |                         | +-------------+-------- |
-|                         |                         | ----------------------- |
-|                         |                         | -------+                |
-+-------------------------+-------------------------+-------------------------+
+Returns whether the device supports self-calibration.
+
+****Defined Values****
 ''',
+'table_body': [['VI\\_TRUE', 'Self–calibration is supported.'], ['VI\\_FALSE', 'Self–calibration is not supported.']],
 },
             },
         ],
@@ -8089,29 +7462,11 @@ functions and identifies a particular instrument session.
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| done                    | ViBoolean\*             | Returns information     |
-|                         |                         | about the completion of |
-|                         |                         | waveform generation.    |
-|                         |                         | **Defined Values**      |
-|                         |                         |                         |
-|                         |                         | +-------------+-------- |
-|                         |                         | ----------------------- |
-|                         |                         | +                       |
-|                         |                         | | VI\_TRUE    | Generat |
-|                         |                         | ion is complete.        |
-|                         |                         | |                       |
-|                         |                         | +-------------+-------- |
-|                         |                         | ----------------------- |
-|                         |                         | +                       |
-|                         |                         | | VI\_FALSE   | Generat |
-|                         |                         | ion is not complete.    |
-|                         |                         | |                       |
-|                         |                         | +-------------+-------- |
-|                         |                         | ----------------------- |
-|                         |                         | +                       |
-+-------------------------+-------------------------+-------------------------+
+Returns information about the completion of waveform generation.
+
+**Defined Values**
 ''',
+'table_body': [['VI\\_TRUE', 'Generation is complete.'], ['VI\\_FALSE', 'Generation is not complete.']],
 },
             },
         ],
@@ -8151,138 +7506,71 @@ functions and identifies a particular instrument session.
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| callerHasLock           | ViBoolean\*             | Keeps track of whether  |
-|                         |                         | you obtained a lock and |
-|                         |                         | therefore need to       |
-|                         |                         | unlock the session.     |
-|                         |                         | Pass the address of a   |
-|                         |                         | local ViBoolean         |
-|                         |                         | variable. In the        |
-|                         |                         | declaration of the      |
-|                         |                         | local variable,         |
-|                         |                         | initialize it to        |
-|                         |                         | VI\_FALSE. Pass the     |
-|                         |                         | address of the same     |
-|                         |                         | local variable to any   |
-|                         |                         | other calls you make to |
-|                         |                         | the niFgen\_LockSession |
-|                         |                         | function or the         |
-|                         |                         | nifgen\_UnlockSession   |
-|                         |                         | function in the same    |
-|                         |                         | function.               |
-|                         |                         | This parameter serves   |
-|                         |                         | as a convenience. If    |
-|                         |                         | you do not want to use  |
-|                         |                         | this parameter, pass    |
-|                         |                         | VI\_NULL.               |
-|                         |                         |                         |
-|                         |                         | This parameter is an    |
-|                         |                         | input/output parameter. |
-|                         |                         | The niFgen\_LockSession |
-|                         |                         | function and the        |
-|                         |                         | niFgen\_UnlockSession   |
-|                         |                         | function each inspect   |
-|                         |                         | the current value and   |
-|                         |                         | take the following      |
-|                         |                         | actions:                |
-|                         |                         |                         |
-|                         |                         | -  If the value is      |
-|                         |                         |    VI\_TRUE, the        |
-|                         |                         |    niFgen\_LockSession  |
-|                         |                         |    function does not    |
-|                         |                         |    lock the session     |
-|                         |                         |    again. If the value  |
-|                         |                         |    is VI\_FALSE, the    |
-|                         |                         |    niFgen\_LockSession  |
-|                         |                         |    function obtains the |
-|                         |                         |    lock and sets the    |
-|                         |                         |    value of the         |
-|                         |                         |    parameter to         |
-|                         |                         |    VI\_TRUE.            |
-|                         |                         | -  If the value is      |
-|                         |                         |    VI\_FALSE, the       |
-|                         |                         |    niFgen\_UnlockSessio |
-|                         |                         | n                       |
-|                         |                         |    function does not    |
-|                         |                         |    attempt to unlock    |
-|                         |                         |    the session. If the  |
-|                         |                         |    value is VI\_TRUE,   |
-|                         |                         |    the                  |
-|                         |                         |    niFgen\_UnlockSessio |
-|                         |                         | n                       |
-|                         |                         |    function releases    |
-|                         |                         |    the lock and sets    |
-|                         |                         |    the value of the     |
-|                         |                         |    parameter to         |
-|                         |                         |    VI\_FALSE.           |
-|                         |                         |                         |
-|                         |                         | Thus, you can call the  |
-|                         |                         | niFgen\_UnlockSession   |
-|                         |                         | function at the end of  |
-|                         |                         | your function without   |
-|                         |                         | worrying about whether  |
-|                         |                         | you actually have the   |
-|                         |                         | lock.                   |
-|                         |                         |                         |
-|                         |                         | Example:                |
-|                         |                         |                         |
-|                         |                         | ViStatus TestFunc       |
-|                         |                         | (ViSession vi, ViInt32  |
-|                         |                         | flags)                  |
-|                         |                         | {                       |
-|                         |                         | ViStatus error =        |
-|                         |                         | VI\_SUCCESS;            |
-|                         |                         | ViBoolean haveLock =    |
-|                         |                         | VI\_FALSE;              |
-|                         |                         | if (flags & BIT\_1)     |
-|                         |                         | {                       |
-|                         |                         |                         |
-|                         |                         | viCheckErr(             |
-|                         |                         | niFgen\_LockSession(vi, |
-|                         |                         | &haveLock;));           |
-|                         |                         | viCheckErr(             |
-|                         |                         | TakeAction1(vi));       |
-|                         |                         | if (flags & BIT\_2)     |
-|                         |                         | {                       |
-|                         |                         |                         |
-|                         |                         |  viCheckErr(            |
-|                         |                         | niFgen\_UnlockSession(v |
-|                         |                         | i,                      |
-|                         |                         | &haveLock;));           |
-|                         |                         | viCheckErr(             |
-|                         |                         | TakeAction2(vi));       |
-|                         |                         | viCheckErr(             |
-|                         |                         | niFgen\_LockSession(vi, |
-|                         |                         | &haveLock;);            |
-|                         |                         |                         |
-|                         |                         | }                       |
-|                         |                         | if (flags & BIT\_3)     |
-|                         |                         |                         |
-|                         |                         |  viCheckErr(            |
-|                         |                         | TakeAction3(vi));       |
-|                         |                         |                         |
-|                         |                         | }                       |
-|                         |                         |                         |
-|                         |                         | Error:                  |
-|                         |                         |                         |
-|                         |                         | /\*                     |
-|                         |                         | At this point, you      |
-|                         |                         | cannot really be sure   |
-|                         |                         | that                    |
-|                         |                         | you have the lock.      |
-|                         |                         | Fortunately, the        |
-|                         |                         | haveLock                |
-|                         |                         | variable takes care of  |
-|                         |                         | that for you.           |
-|                         |                         | \*/                     |
-|                         |                         | niFgen\_UnlockSession(v |
-|                         |                         | i,                      |
-|                         |                         | &haveLock;);            |
-|                         |                         | return error;           |
-|                         |                         |                         |
-|                         |                         | }                       |
-+-------------------------+-------------------------+-------------------------+
+Keeps track of whether you obtained a lock and therefore need to unlock
+the session. Pass the address of a local ViBoolean variable. In the
+declaration of the local variable, initialize it to VI\_FALSE. Pass the
+address of the same local variable to any other calls you make to the
+niFgen\_LockSession function or the nifgen\_UnlockSession function in
+the same function.
+
+This parameter serves as a convenience. If you do not want to use this
+parameter, pass VI\_NULL.
+
+This parameter is an input/output parameter. The niFgen\_LockSession
+function and the niFgen\_UnlockSession function each inspect the current
+value and take the following actions:
+
+-  If the value is VI\_TRUE, the niFgen\_LockSession function does not
+   lock the session again. If the value is VI\_FALSE, the
+   niFgen\_LockSession function obtains the lock and sets the value of
+   the parameter to VI\_TRUE.
+-  If the value is VI\_FALSE, the niFgen\_UnlockSession function does
+   not attempt to unlock the session. If the value is VI\_TRUE, the
+   niFgen\_UnlockSession function releases the lock and sets the value
+   of the parameter to VI\_FALSE.
+
+Thus, you can call the niFgen\_UnlockSession function at the end of your
+function without worrying about whether you actually have the lock.
+
+Example:
+
+ViStatus TestFunc (ViSession vi, ViInt32 flags)
+{
+
+ViStatus error = VI\_SUCCESS;
+ViBoolean haveLock = VI\_FALSE;
+if (flags & BIT\_1)
+{
+
+viCheckErr( niFgen\_LockSession(vi, &haveLock;));
+viCheckErr( TakeAction1(vi));
+if (flags & BIT\_2)
+{
+
+ viCheckErr( niFgen\_UnlockSession(vi, &haveLock;));
+viCheckErr( TakeAction2(vi));
+viCheckErr( niFgen\_LockSession(vi, &haveLock;);
+
+}
+if (flags & BIT\_3)
+
+ viCheckErr( TakeAction3(vi));
+
+}
+
+Error:
+
+| 
+
+/\*
+At this point, you cannot really be sure that
+you have the lock. Fortunately, the haveLock
+variable takes care of that for you.
+\*/
+niFgen\_UnlockSession(vi, &haveLock;);
+return error;
+
+| }
 ''',
 },
             },
@@ -8986,7 +8274,11 @@ The possible RTSI lines to which you can route a signal.
 Routes various signals in the signal generator to the RTSI lines and
 front panel terminals.
 ''',
-'table_body': [['', 'You can clear a previously routed signal by routing NIFGEN\\_VAL\\_NONE to the destination terminal.']],
+'note': '''
+The signal generator must not be in the Generating state when you call
+this function.
+''',
+'table_body': [[' ', 'You can clear a previously routed signal by routing NIFGEN\\_VAL\\_NONE to the destination terminal.']],
 },
     },
     'SelfCal': {
@@ -9850,139 +9142,73 @@ functions and identifies a particular instrument session.
                 'type': 'ViBoolean',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| callerHasLock           | ViBoolean\*             | Keeps track of whether  |
-|                         |                         | you obtain a lock and   |
-|                         |                         | therefore need to       |
-|                         |                         | unlock the session.     |
-|                         |                         | This parameter serves   |
-|                         |                         | as a convenience. If    |
-|                         |                         | you do not want to use  |
-|                         |                         | this parameter, pass    |
-|                         |                         | VI\_NULL.               |
-|                         |                         |                         |
-|                         |                         | Pass the address of a   |
-|                         |                         | local ViBoolean         |
-|                         |                         | variable. In the        |
-|                         |                         | declaration of the      |
-|                         |                         | local variable,         |
-|                         |                         | initialize it to        |
-|                         |                         | VI\_FALSE. Pass the     |
-|                         |                         | address of the same     |
-|                         |                         | local variable to any   |
-|                         |                         | other calls you make to |
-|                         |                         | the niFgen\_LockSession |
-|                         |                         | function or the         |
-|                         |                         | niFgen\_UnlockSession   |
-|                         |                         | function in the same    |
-|                         |                         | function.               |
-|                         |                         |                         |
-|                         |                         | The parameter is an     |
-|                         |                         | input/output parameter. |
-|                         |                         | The niFgen\_LockSession |
-|                         |                         | function and the        |
-|                         |                         | niFgen\_UnlockSession   |
-|                         |                         | function each inspect   |
-|                         |                         | the current value and   |
-|                         |                         | take the following      |
-|                         |                         | actions:                |
-|                         |                         |                         |
-|                         |                         | -  If the value is      |
-|                         |                         |    VI\_TRUE, the        |
-|                         |                         |    niFgen\_LockSession  |
-|                         |                         |    function does not    |
-|                         |                         |    lock the session     |
-|                         |                         |    again. If the value  |
-|                         |                         |    is VI\_FALSE, the    |
-|                         |                         |    niFgen\_LockSession  |
-|                         |                         |    function obtains the |
-|                         |                         |    lock and sets the    |
-|                         |                         |    value of the         |
-|                         |                         |    parameter to         |
-|                         |                         |    VI\_TRUE.            |
-|                         |                         | -  If the value is      |
-|                         |                         |    VI\_FALSE, the       |
-|                         |                         |    niFgen\_UnlockSessio |
-|                         |                         | n                       |
-|                         |                         |    function does not    |
-|                         |                         |    attempt to unlock    |
-|                         |                         |    the session. If the  |
-|                         |                         |    value is VI\_TRUE,   |
-|                         |                         |    the                  |
-|                         |                         |    niFgen\_UnlockSessio |
-|                         |                         | n                       |
-|                         |                         |    function releases    |
-|                         |                         |    the lock and sets    |
-|                         |                         |    the value of the     |
-|                         |                         |    parameter to         |
-|                         |                         |    VI\_FALSE.           |
-|                         |                         |                         |
-|                         |                         | Thus, you can, call the |
-|                         |                         | niFgen\_UnlockSession   |
-|                         |                         | function at the end of  |
-|                         |                         | your function without   |
-|                         |                         | worrying about whether  |
-|                         |                         | you actually have the   |
-|                         |                         | lock.                   |
-|                         |                         |                         |
-|                         |                         | Example:                |
-|                         |                         |                         |
-|                         |                         | ViStatus TestFunc       |
-|                         |                         | (ViSession vi, ViInt32  |
-|                         |                         | flags)                  |
-|                         |                         | {                       |
-|                         |                         | ViStatus error =        |
-|                         |                         | VI\_SUCCESS;            |
-|                         |                         | ViBoolean haveLock =    |
-|                         |                         | VI\_FALSE;              |
-|                         |                         | if (flags & BIT\_1)     |
-|                         |                         | {                       |
-|                         |                         |                         |
-|                         |                         | viCheckErr(niFgen\_Lock |
-|                         |                         | Session(vi,             |
-|                         |                         | &haveLock;));           |
-|                         |                         | viCheckErr(             |
-|                         |                         | TakeAction1(vi));       |
-|                         |                         | if (flags & BIT\_2)     |
-|                         |                         | {                       |
-|                         |                         |                         |
-|                         |                         | viCheckErr(             |
-|                         |                         | niFgen\_UnlockSession(v |
-|                         |                         | i,                      |
-|                         |                         | &haveLock;));           |
-|                         |                         | viCheckErr(             |
-|                         |                         | TakeAction2(vi));       |
-|                         |                         | viCheckErr(             |
-|                         |                         | niFgen\_LockSession(vi, |
-|                         |                         | &haveLock;);            |
-|                         |                         |                         |
-|                         |                         | }                       |
-|                         |                         | if (flags & BIT\_3)     |
-|                         |                         |                         |
-|                         |                         |  viCheckErr(            |
-|                         |                         | TakeAction3(vi));       |
-|                         |                         |                         |
-|                         |                         | }                       |
-|                         |                         |                         |
-|                         |                         | Error:                  |
-|                         |                         |                         |
-|                         |                         | /\*                     |
-|                         |                         | At this point, you      |
-|                         |                         | cannot really be sure   |
-|                         |                         | that                    |
-|                         |                         | you have the lock.      |
-|                         |                         | Fortunately, the        |
-|                         |                         | haveLock                |
-|                         |                         | variable takes care of  |
-|                         |                         | that for you.           |
-|                         |                         | \*/                     |
-|                         |                         | niFgen\_UnlockSession(v |
-|                         |                         | i,                      |
-|                         |                         | &haveLock;);            |
-|                         |                         | return error;           |
-|                         |                         |                         |
-|                         |                         | }                       |
-+-------------------------+-------------------------+-------------------------+
+Keeps track of whether you obtain a lock and therefore need to unlock
+the session.
+
+This parameter serves as a convenience. If you do not want to use this
+parameter, pass VI\_NULL.
+
+Pass the address of a local ViBoolean variable. In the declaration of
+the local variable, initialize it to VI\_FALSE. Pass the address of the
+same local variable to any other calls you make to the
+niFgen\_LockSession function or the niFgen\_UnlockSession function in
+the same function.
+
+The parameter is an input/output parameter. The niFgen\_LockSession
+function and the niFgen\_UnlockSession function each inspect the current
+value and take the following actions:
+
+-  If the value is VI\_TRUE, the niFgen\_LockSession function does not
+   lock the session again. If the value is VI\_FALSE, the
+   niFgen\_LockSession function obtains the lock and sets the value of
+   the parameter to VI\_TRUE.
+-  If the value is VI\_FALSE, the niFgen\_UnlockSession function does
+   not attempt to unlock the session. If the value is VI\_TRUE, the
+   niFgen\_UnlockSession function releases the lock and sets the value
+   of the parameter to VI\_FALSE.
+
+Thus, you can, call the niFgen\_UnlockSession function at the end of
+your function without worrying about whether you actually have the lock.
+
+Example:
+
+ViStatus TestFunc (ViSession vi, ViInt32 flags)
+{
+
+ViStatus error = VI\_SUCCESS;
+ViBoolean haveLock = VI\_FALSE;
+if (flags & BIT\_1)
+{
+
+viCheckErr(niFgen\_LockSession(vi, &haveLock;));
+viCheckErr( TakeAction1(vi));
+if (flags & BIT\_2)
+{
+
+viCheckErr( niFgen\_UnlockSession(vi, &haveLock;));
+viCheckErr( TakeAction2(vi));
+viCheckErr( niFgen\_LockSession(vi, &haveLock;);
+
+}
+if (flags & BIT\_3)
+
+ viCheckErr( TakeAction3(vi));
+
+}
+
+Error:
+
+| 
+
+/\*
+At this point, you cannot really be sure that
+you have the lock. Fortunately, the haveLock
+variable takes care of that for you.
+\*/
+niFgen\_UnlockSession(vi, &haveLock;);
+return error;
+
+}
 ''',
 },
             },
