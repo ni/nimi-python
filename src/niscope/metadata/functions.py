@@ -2199,7 +2199,22 @@ Related topics:
 -  `Equivalent-Time Sampling and Random Interleaved
    Sampling <digitizers.chm::/RIS.html>`__
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** For multirecord acquisitions, all records after the first record are started by using the Advance Trigger Source. The default is immediate.  You can adjust the amount of pre-trigger and post-trigger samples using the reference position parameter on the niScope\\_ConfigureHorizontalTiming function. The default is half of the record length.  Some features are not supported by all digitizers. Refer to `Features Supported by Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for more information.  Digital triggering is not supported in RIS mode.']],
+'note': '''
+For multirecord acquisitions, all records after the first record are
+started by using the Advance Trigger Source. The default is immediate.
+
+You can adjust the amount of pre-trigger and post-trigger samples using
+the reference position parameter on the
+niScope\_ConfigureHorizontalTiming function. The default is half of the
+record length.
+
+Some features are not supported by all digitizers. Refer to `Features
+Supported by
+Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+more information.
+
+Digital triggering is not supported in RIS mode.
+''',
 },
     },
     'ConfigureTriggerEdge': {
@@ -3314,7 +3329,16 @@ Related topics:
 -  `Acquiring Data
    Continuously <digitizers.chm::/Continuously_Acquiring_Data.html>`__
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** You can use niScope\\_Read instead of this function. niScope\\_Read starts an acquisition on all enabled channels, waits for the acquisition to complete, and returns the waveform for the specified channel.  Some functionality, such as time stamping, is not supported in all digitizers. Refer to `Features Supported by Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for more information.']],
+'note': '''
+You can use niScope\_Read instead of this function. niScope\_Read
+starts an acquisition on all enabled channels, waits for the acquisition
+to complete, and returns the waveform for the specified channel.
+
+Some functionality, such as time stamping, is not supported in all
+digitizers. Refer to `Features Supported by
+Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+more information.
+''',
 },
     },
     'FetchArrayMeasurement': {
@@ -4559,7 +4583,17 @@ following attributes:
 | NISCOPE\_ATTR\_MEAS\_LOW\_REF
 | NISCOPE\_ATTR\_MEAS\_MID\_REF
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** This function is included for compliance with the IviScope Class Specification.  You can use niScope\\_ReadWaveformMeasurement instead of this function. niScope\\_ReadWaveformMeasurement starts an acquisition on all enabled channels, waits for the acquisition to complete, obtains a waveform measurement on the specified channel, and returns the waveform for the specified channel. Call this function separately to obtain any other waveform measurements on a specific channel.']],
+'note': '''
+This function is included for compliance with the IviScope Class
+Specification.
+
+You can use niScope\_ReadWaveformMeasurement instead of this function.
+niScope\_ReadWaveformMeasurement starts an acquisition on all enabled
+channels, waits for the acquisition to complete, obtains a waveform
+measurement on the specified channel, and returns the waveform for the
+specified channel. Call this function separately to obtain any other
+waveform measurements on a specific channel.
+''',
 },
     },
     'GetAttributeViBoolean': {
@@ -5301,41 +5335,17 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| buffer\_size            | ViInt32                 | The array size for the  |
-|                         |                         | frequencies,            |
-|                         |                         | amplitudes, and phases  |
-|                         |                         | arrays that you pass in |
-|                         |                         | to the other            |
-|                         |                         | parameters.             |
-|                         |                         | To determine the sizes  |
-|                         |                         | of the buffers to       |
-|                         |                         | allocate for the        |
-|                         |                         | frequencies,            |
-|                         |                         | amplitudes, and phases  |
-|                         |                         | arrays, pass a value of |
-|                         |                         | 0 to the                |
-|                         |                         | **buffer\_size**        |
-|                         |                         | parameter and a value   |
-|                         |                         | of NULL to the          |
-|                         |                         | **frequencies**         |
-|                         |                         | parameter. In this      |
-|                         |                         | case, the value         |
-|                         |                         | returned by the         |
-|                         |                         | **numberOfFrequencies** |
-|                         |                         | parameter is the size   |
-|                         |                         | of the arrays necessary |
-|                         |                         | to hold the             |
-|                         |                         | frequencies,            |
-|                         |                         | amplitudes, and phases. |
-|                         |                         | Allocate three arrays   |
-|                         |                         | of this size, then call |
-|                         |                         | this function again     |
-|                         |                         | (with correct           |
-|                         |                         | **buffer\_size**        |
-|                         |                         | parameter) to retrieve  |
-|                         |                         | the actual values.      |
-+-------------------------+-------------------------+-------------------------+
+The array size for the frequencies, amplitudes, and phases arrays that
+you pass in to the other parameters.
+
+To determine the sizes of the buffers to allocate for the frequencies,
+amplitudes, and phases arrays, pass a value of 0 to the **buffer\_size**
+parameter and a value of NULL to the **frequencies** parameter. In this
+case, the value returned by the **numberOfFrequencies** parameter is the
+size of the arrays necessary to hold the frequencies, amplitudes, and
+phases. Allocate three arrays of this size, then call this function
+again (with correct **buffer\_size** parameter) to retrieve the actual
+values.
 ''',
 },
             },
@@ -5588,39 +5598,16 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| bufferSize              | ViInt32                 | The array size for the  |
-|                         |                         | **coefficentInfo**      |
-|                         |                         | parameter.              |
-|                         |                         | To determine the size   |
-|                         |                         | of the buffer to        |
-|                         |                         | allocate for            |
-|                         |                         | **coefficientInfo**,    |
-|                         |                         | pass a value of 0 to    |
-|                         |                         | the **buffersize**      |
-|                         |                         | parameter and a value   |
-|                         |                         | of NULL to the          |
-|                         |                         | **coefficientInfo**     |
-|                         |                         | parameter. In this      |
-|                         |                         | case, the return value  |
-|                         |                         | of the                  |
-|                         |                         | **numberOfCoefficientSe |
-|                         |                         | ts**                    |
-|                         |                         | parameter is the size   |
-|                         |                         | of the array necessary  |
-|                         |                         | to hold the coefficient |
-|                         |                         | structures. Allocate an |
-|                         |                         | array of                |
-|                         |                         | niScope\_coefficientInf |
-|                         |                         | o                       |
-|                         |                         | structures of this      |
-|                         |                         | size, then call this    |
-|                         |                         | function again (with    |
-|                         |                         | the correct             |
-|                         |                         | **bufferSize**          |
-|                         |                         | parameter) to retrieve  |
-|                         |                         | the actual values.      |
-+-------------------------+-------------------------+-------------------------+
+The array size for the **coefficentInfo** parameter.
+
+To determine the size of the buffer to allocate for **coefficientInfo**,
+pass a value of 0 to the **buffersize** parameter and a value of NULL to
+the **coefficientInfo** parameter. In this case, the return value of the
+**numberOfCoefficientSets** parameter is the size of the array necessary
+to hold the coefficient structures. Allocate an array of
+niScope\_coefficientInfo structures of this size, then call this
+function again (with the correct **bufferSize** parameter) to retrieve
+the actual values.
 ''',
 },
             },
@@ -5695,39 +5682,16 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
                 'type': 'ViInt32',
 'documentation': {
 'description': '''
-+-------------------------+-------------------------+-------------------------+
-| bufferSize              | ViInt32                 | The array size for the  |
-|                         |                         | **coefficentInfo**      |
-|                         |                         | parameter.              |
-|                         |                         | To determine the size   |
-|                         |                         | of the buffer to        |
-|                         |                         | allocate for            |
-|                         |                         | **coefficientInfo**,    |
-|                         |                         | pass a value of 0 to    |
-|                         |                         | the **buffersize**      |
-|                         |                         | parameter and a value   |
-|                         |                         | of NULL to the          |
-|                         |                         | **coefficientInfo**     |
-|                         |                         | parameter. In this      |
-|                         |                         | case, the return value  |
-|                         |                         | of the                  |
-|                         |                         | **numberOfCoefficientSe |
-|                         |                         | ts**                    |
-|                         |                         | parameter is the size   |
-|                         |                         | of the array necessary  |
-|                         |                         | to hold the coefficient |
-|                         |                         | structures. Allocate an |
-|                         |                         | array of                |
-|                         |                         | niScope\_coefficientInf |
-|                         |                         | o                       |
-|                         |                         | structures of this      |
-|                         |                         | size, then call this    |
-|                         |                         | function again (with    |
-|                         |                         | the correct             |
-|                         |                         | **bufferSize**          |
-|                         |                         | parameter) to retrieve  |
-|                         |                         | the actual values.      |
-+-------------------------+-------------------------+-------------------------+
+The array size for the **coefficentInfo** parameter.
+
+To determine the size of the buffer to allocate for **coefficientInfo**,
+pass a value of 0 to the **buffersize** parameter and a value of NULL to
+the **coefficientInfo** parameter. In this case, the return value of the
+**numberOfCoefficientSets** parameter is the size of the array necessary
+to hold the coefficient structures. Allocate an array of
+niScope\_coefficientInfo structures of this size, then call this
+function again (with the correct **bufferSize** parameter) to retrieve
+the actual values.
 ''',
 },
             },
