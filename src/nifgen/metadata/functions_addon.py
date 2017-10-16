@@ -1,3 +1,5 @@
+# TODO(texasaggie97) update this file with all NI-FGEN function information
+
 # These dictionaries are applied to the generated functions dictionary at build time
 # Any changes to the API should be made here. functions.py is code generated
 
