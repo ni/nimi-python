@@ -5069,7 +5069,7 @@ class _RepeatedCapability(_SessionBase):
 
 
 class Session(_SessionBase):
-    '''An NI-FGEN session to a National Instruments Function Generator.'''
+    '''An NI-FGEN session to a National Instruments Signal Generator.'''
 
     def __init__(self, resource_name, id_query, reset_device, option_string):
         super(Session, self).__init__(repeated_capability='')

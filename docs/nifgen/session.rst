@@ -5,7 +5,7 @@ nifgen.Session
 
 .. py:class:: Session
 
-   An NI-FGEN session to a National Instruments Function Generator.
+   An NI-FGEN session to a National Instruments Signal Generator.
 
    **Properties**
 
