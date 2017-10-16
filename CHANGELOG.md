@@ -25,6 +25,11 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
  * #### Added
  * #### Changed
  * #### Removed
+* ### NI-FGen
+ * #### Added
+  * Initial release
+ * #### Changed
+ * #### Removed
 
 ## [0.3.0] - 2017-10-13
 * ### ALL
@@ -101,6 +106,10 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Changed
   * #### Removed
 * ### NI-DCPower
+ * #### Added
+ * #### Changed
+ * #### Removed
+* ### NI-FGen
  * #### Added
  * #### Changed
  * #### Removed
