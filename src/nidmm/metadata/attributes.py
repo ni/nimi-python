@@ -1554,7 +1554,7 @@ aperture time in seconds = 20 ms \* 5 PLCs = 100 ms. Similarly, if
 powerline frequency = 60 Hz (or 16.667 ms) and aperture time in PLCs =
 6, then aperture time in seconds = 16.667 ms \* 6 PLCs = 100 ms.
 ''',
-'note': 'For 400 Hz powerline frequency, use the 50Â Hz setting.',
+'note': 'For 400 Hz powerline frequency, use the 50 Hz setting.',
 },
     },
     1250334: {
