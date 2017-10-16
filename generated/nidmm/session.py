@@ -380,7 +380,7 @@ class _SessionBase(object):
     powerline frequency = 60 Hz (or 16.667 ms) and aperture time in PLCs =
     6, then aperture time in seconds = 16.667 ms \* 6 PLCs = 100 ms.
 
-    Note: For 400 Hz powerline frequency, use the 50Â Hz setting.
+    Note: For 400 Hz powerline frequency, use the 50 Hz setting.
     '''
     primary_error = attributes.AttributeViInt32(1050101)
     '''

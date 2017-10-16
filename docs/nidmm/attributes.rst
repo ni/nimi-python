@@ -1211,7 +1211,7 @@ nidmm.Session properties
 
 
 
-    .. note:: For 400 Hz powerline frequency, use the 50Â Hz setting.
+    .. note:: For 400 Hz powerline frequency, use the 50 Hz setting.
 
     The following table lists the characteristics of this property.
 
