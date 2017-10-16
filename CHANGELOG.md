@@ -1,10 +1,13 @@
 # Changelog
+
+* [Unreleased](#unreleased)
+* [0.3.0](#030---2017-10-13)
+* [0.2.0](#020---2017-09-20)
+* [0.1.0](#010---2017-09-01)
+
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Python Versioning](http://legacy.python.org/dev/peps/pep-0396/).
-
-## [Unreleased]
+## Unreleased
 * ### ALL
   * #### Added
   * #### Changed
@@ -31,7 +34,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
  * #### Changed
  * #### Removed
 
-## [0.3.0] - 2017-10-13
+## 0.3.0 - 2017-10-13
 * ### ALL
   * #### Added
     * Support for ViInt64 (64-bit integers)
@@ -56,7 +59,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Added
     * Initial release
 
-## [0.2.0] - 2017-09-20
+## 0.2.0 - 2017-09-20
 * ### ALL
   * #### Added
     * Suport for channel-based properties
@@ -78,7 +81,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Added
     * Initial release
 
-## [0.1.0] - 2017-09-01
+## 0.1.0 - 2017-09-01
 * ### NI-DMM
   * #### Added
     * Initial release
@@ -86,6 +89,8 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Added
     * Initial release
 
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Python Versioning](http://legacy.python.org/dev/peps/pep-0396/).
 
 <!--
 ## [Unreleased]
