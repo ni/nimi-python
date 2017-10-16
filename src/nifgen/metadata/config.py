@@ -4,7 +4,7 @@ config = {
     'module_version': '0.4.0.dev0',
     'c_function_prefix': 'niFgen_',
     'driver_name': 'NI-FGEN',
-    'session_class_description': 'An NI-FGEN session to a National Instruments Function Generator.',
+    'session_class_description': 'An NI-FGEN session to a National Instruments Signal Generator.',
     'session_handle_parameter_name': 'vi',
     'library_info':
     {
