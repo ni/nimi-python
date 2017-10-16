@@ -7,7 +7,7 @@
 # This will override that with private - add '_' to the beginning of the name, or
 # don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':                 { 'codegen_method': 'private',       },
+    'InitWithOptions':                 { 'codegen_method': 'private',  },
     'Initiate':                        { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
     'Abort':                           { 'codegen_method': 'private',  },
