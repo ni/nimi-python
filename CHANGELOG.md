@@ -25,7 +25,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
  * #### Added
  * #### Changed
  * #### Removed
-* ### NI-FGen
+* ### NI-FGEN
  * #### Added
   * Initial release
  * #### Changed
@@ -109,7 +109,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
  * #### Added
  * #### Changed
  * #### Removed
-* ### NI-FGen
+* ### NI-FGEN
  * #### Added
  * #### Changed
  * #### Removed
