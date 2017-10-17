@@ -38,12 +38,18 @@ class SideEffectsHelper(object):
         self._defaults['GetAStringWithSpecifiedMaximumSize'] = {}
         self._defaults['GetAStringWithSpecifiedMaximumSize']['return'] = 0
         self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'] = None
+        self._defaults['GetAnIviDanceString'] = {}
+        self._defaults['GetAnIviDanceString']['return'] = 0
+        self._defaults['GetAnIviDanceString']['aString'] = None
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
         self._defaults['GetAttributeViBoolean']['attributeValue'] = None
         self._defaults['GetAttributeViInt32'] = {}
         self._defaults['GetAttributeViInt32']['return'] = 0
         self._defaults['GetAttributeViInt32']['attributeValue'] = None
+        self._defaults['GetAttributeViInt64'] = {}
+        self._defaults['GetAttributeViInt64']['return'] = 0
+        self._defaults['GetAttributeViInt64']['attributeValue'] = None
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViReal64']['attributeValue'] = None
@@ -63,8 +69,14 @@ class SideEffectsHelper(object):
         self._defaults['InitWithOptions']['vi'] = None
         self._defaults['Initiate'] = {}
         self._defaults['Initiate']['return'] = 0
+        self._defaults['MultipleArrayTypes'] = {}
+        self._defaults['MultipleArrayTypes']['return'] = 0
+        self._defaults['MultipleArrayTypes']['passedInArray'] = None
+        self._defaults['MultipleArrayTypes']['aFixedArray'] = None
         self._defaults['OneInputFunction'] = {}
         self._defaults['OneInputFunction']['return'] = 0
+        self._defaults['ParametersAreMultipleTypes'] = {}
+        self._defaults['ParametersAreMultipleTypes']['return'] = 0
         self._defaults['Read'] = {}
         self._defaults['Read']['return'] = 0
         self._defaults['Read']['reading'] = None
@@ -79,10 +91,22 @@ class SideEffectsHelper(object):
         self._defaults['ReturnANumberAndAString']['return'] = 0
         self._defaults['ReturnANumberAndAString']['aNumber'] = None
         self._defaults['ReturnANumberAndAString']['aString'] = None
+        self._defaults['ReturnMultipleTypes'] = {}
+        self._defaults['ReturnMultipleTypes']['return'] = 0
+        self._defaults['ReturnMultipleTypes']['aBoolean'] = None
+        self._defaults['ReturnMultipleTypes']['anInt32'] = None
+        self._defaults['ReturnMultipleTypes']['anInt64'] = None
+        self._defaults['ReturnMultipleTypes']['anIntEnum'] = None
+        self._defaults['ReturnMultipleTypes']['aFloat'] = None
+        self._defaults['ReturnMultipleTypes']['aFloatEnum'] = None
+        self._defaults['ReturnMultipleTypes']['anArray'] = None
+        self._defaults['ReturnMultipleTypes']['aString'] = None
         self._defaults['SetAttributeViBoolean'] = {}
         self._defaults['SetAttributeViBoolean']['return'] = 0
         self._defaults['SetAttributeViInt32'] = {}
         self._defaults['SetAttributeViInt32']['return'] = 0
+        self._defaults['SetAttributeViInt64'] = {}
+        self._defaults['SetAttributeViInt64']['return'] = 0
         self._defaults['SetAttributeViReal64'] = {}
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
@@ -189,6 +213,16 @@ class SideEffectsHelper(object):
             a_string[i] = a[i]
         return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
 
+    def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
+        if self._defaults['GetAnIviDanceString']['return'] != 0:
+            return self._defaults['GetAnIviDanceString']['return']
+        if self._defaults['GetAnIviDanceString']['aString'] is None:
+            raise MockFunctionCallError("niFake_GetAnIviDanceString", param='aString')
+        if buffer_size == 0:
+            return len(self._defaults['GetAnIviDanceString']['aString'])
+        a_string.value = self._defaults['GetAnIviDanceString']['aString'].encode('ascii')
+        return self._defaults['GetAnIviDanceString']['return']
+
     def niFake_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
             return self._defaults['GetAttributeViBoolean']['return']
@@ -204,6 +238,14 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetAttributeViInt32", param='attributeValue')
         attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
         return self._defaults['GetAttributeViInt32']['return']
+
+    def niFake_GetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+        if self._defaults['GetAttributeViInt64']['return'] != 0:
+            return self._defaults['GetAttributeViInt64']['return']
+        if self._defaults['GetAttributeViInt64']['attributeValue'] is None:
+            raise MockFunctionCallError("niFake_GetAttributeViInt64", param='attributeValue')
+        attribute_value.contents.value = self._defaults['GetAttributeViInt64']['attributeValue']
+        return self._defaults['GetAttributeViInt64']['return']
 
     def niFake_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViReal64']['return'] != 0:
@@ -260,10 +302,36 @@ class SideEffectsHelper(object):
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
 
+    def niFake_MultipleArrayTypes(self, passed_in_array_size, passed_in_array, a_fixed_array, len_array_size, len_array):  # noqa: N802
+        if self._defaults['MultipleArrayTypes']['return'] != 0:
+            return self._defaults['MultipleArrayTypes']['return']
+        if self._defaults['MultipleArrayTypes']['passedInArray'] is None:
+            raise MockFunctionCallError("niFake_MultipleArrayTypes", param='passedInArray')
+        a = self._defaults['MultipleArrayTypes']['passedInArray']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(passed_in_array), len(a))):
+            passed_in_array[i] = a[i]
+        if self._defaults['MultipleArrayTypes']['aFixedArray'] is None:
+            raise MockFunctionCallError("niFake_MultipleArrayTypes", param='aFixedArray')
+        a = self._defaults['MultipleArrayTypes']['aFixedArray']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(a_fixed_array), len(a))):
+            a_fixed_array[i] = a[i]
+        return self._defaults['MultipleArrayTypes']['return']
+
     def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
         if self._defaults['OneInputFunction']['return'] != 0:
             return self._defaults['OneInputFunction']['return']
         return self._defaults['OneInputFunction']['return']
+
+    def niFake_ParametersAreMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):  # noqa: N802
+        if self._defaults['ParametersAreMultipleTypes']['return'] != 0:
+            return self._defaults['ParametersAreMultipleTypes']['return']
+        return self._defaults['ParametersAreMultipleTypes']['return']
 
     def niFake_Read(self, vi, maximum_time, reading):  # noqa: N802
         if self._defaults['Read']['return'] != 0:
@@ -313,6 +381,42 @@ class SideEffectsHelper(object):
             a_string[i] = a[i]
         return self._defaults['ReturnANumberAndAString']['return']
 
+    def niFake_ReturnMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string):  # noqa: N802
+        if self._defaults['ReturnMultipleTypes']['return'] != 0:
+            return self._defaults['ReturnMultipleTypes']['return']
+        if self._defaults['ReturnMultipleTypes']['aBoolean'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aBoolean')
+        a_boolean.contents.value = self._defaults['ReturnMultipleTypes']['aBoolean']
+        if self._defaults['ReturnMultipleTypes']['anInt32'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anInt32')
+        an_int32.contents.value = self._defaults['ReturnMultipleTypes']['anInt32']
+        if self._defaults['ReturnMultipleTypes']['anInt64'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anInt64')
+        an_int64.contents.value = self._defaults['ReturnMultipleTypes']['anInt64']
+        if self._defaults['ReturnMultipleTypes']['anIntEnum'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anIntEnum')
+        an_int_enum.contents.value = self._defaults['ReturnMultipleTypes']['anIntEnum']
+        if self._defaults['ReturnMultipleTypes']['aFloat'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aFloat')
+        a_float.contents.value = self._defaults['ReturnMultipleTypes']['aFloat']
+        if self._defaults['ReturnMultipleTypes']['aFloatEnum'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aFloatEnum')
+        a_float_enum.contents.value = self._defaults['ReturnMultipleTypes']['aFloatEnum']
+        if self._defaults['ReturnMultipleTypes']['anArray'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anArray')
+        a = self._defaults['ReturnMultipleTypes']['anArray']
+        import sys
+        if sys.version_info.major > 2 and type(a) is str:
+            a = a.encode('ascii')
+        for i in range(min(len(an_array), len(a))):
+            an_array[i] = a[i]
+        if self._defaults['ReturnMultipleTypes']['aString'] is None:
+            raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aString')
+        if string_size == 0:
+            return len(self._defaults['ReturnMultipleTypes']['aString'])
+        a_string.value = self._defaults['ReturnMultipleTypes']['aString'].encode('ascii')
+        return self._defaults['ReturnMultipleTypes']['return']
+
     def niFake_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['SetAttributeViBoolean']['return'] != 0:
             return self._defaults['SetAttributeViBoolean']['return']
@@ -322,6 +426,11 @@ class SideEffectsHelper(object):
         if self._defaults['SetAttributeViInt32']['return'] != 0:
             return self._defaults['SetAttributeViInt32']['return']
         return self._defaults['SetAttributeViInt32']['return']
+
+    def niFake_SetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
+        if self._defaults['SetAttributeViInt64']['return'] != 0:
+            return self._defaults['SetAttributeViInt64']['return']
+        return self._defaults['SetAttributeViInt64']['return']
 
     def niFake_SetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['SetAttributeViReal64']['return'] != 0:
@@ -389,10 +498,14 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetAStringOfFixedMaximumSize.return_value = 0
         mock_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = MockFunctionCallError("niFake_GetAStringWithSpecifiedMaximumSize")
         mock_library.niFake_GetAStringWithSpecifiedMaximumSize.return_value = 0
+        mock_library.niFake_GetAnIviDanceString.side_effect = MockFunctionCallError("niFake_GetAnIviDanceString")
+        mock_library.niFake_GetAnIviDanceString.return_value = 0
         mock_library.niFake_GetAttributeViBoolean.side_effect = MockFunctionCallError("niFake_GetAttributeViBoolean")
         mock_library.niFake_GetAttributeViBoolean.return_value = 0
         mock_library.niFake_GetAttributeViInt32.side_effect = MockFunctionCallError("niFake_GetAttributeViInt32")
         mock_library.niFake_GetAttributeViInt32.return_value = 0
+        mock_library.niFake_GetAttributeViInt64.side_effect = MockFunctionCallError("niFake_GetAttributeViInt64")
+        mock_library.niFake_GetAttributeViInt64.return_value = 0
         mock_library.niFake_GetAttributeViReal64.side_effect = MockFunctionCallError("niFake_GetAttributeViReal64")
         mock_library.niFake_GetAttributeViReal64.return_value = 0
         mock_library.niFake_GetAttributeViString.side_effect = MockFunctionCallError("niFake_GetAttributeViString")
@@ -405,8 +518,12 @@ class SideEffectsHelper(object):
         mock_library.niFake_InitWithOptions.return_value = 0
         mock_library.niFake_Initiate.side_effect = MockFunctionCallError("niFake_Initiate")
         mock_library.niFake_Initiate.return_value = 0
+        mock_library.niFake_MultipleArrayTypes.side_effect = MockFunctionCallError("niFake_MultipleArrayTypes")
+        mock_library.niFake_MultipleArrayTypes.return_value = 0
         mock_library.niFake_OneInputFunction.side_effect = MockFunctionCallError("niFake_OneInputFunction")
         mock_library.niFake_OneInputFunction.return_value = 0
+        mock_library.niFake_ParametersAreMultipleTypes.side_effect = MockFunctionCallError("niFake_ParametersAreMultipleTypes")
+        mock_library.niFake_ParametersAreMultipleTypes.return_value = 0
         mock_library.niFake_Read.side_effect = MockFunctionCallError("niFake_Read")
         mock_library.niFake_Read.return_value = 0
         mock_library.niFake_ReadFromChannel.side_effect = MockFunctionCallError("niFake_ReadFromChannel")
@@ -415,10 +532,14 @@ class SideEffectsHelper(object):
         mock_library.niFake_ReadMultiPoint.return_value = 0
         mock_library.niFake_ReturnANumberAndAString.side_effect = MockFunctionCallError("niFake_ReturnANumberAndAString")
         mock_library.niFake_ReturnANumberAndAString.return_value = 0
+        mock_library.niFake_ReturnMultipleTypes.side_effect = MockFunctionCallError("niFake_ReturnMultipleTypes")
+        mock_library.niFake_ReturnMultipleTypes.return_value = 0
         mock_library.niFake_SetAttributeViBoolean.side_effect = MockFunctionCallError("niFake_SetAttributeViBoolean")
         mock_library.niFake_SetAttributeViBoolean.return_value = 0
         mock_library.niFake_SetAttributeViInt32.side_effect = MockFunctionCallError("niFake_SetAttributeViInt32")
         mock_library.niFake_SetAttributeViInt32.return_value = 0
+        mock_library.niFake_SetAttributeViInt64.side_effect = MockFunctionCallError("niFake_SetAttributeViInt64")
+        mock_library.niFake_SetAttributeViInt64.return_value = 0
         mock_library.niFake_SetAttributeViReal64.side_effect = MockFunctionCallError("niFake_SetAttributeViReal64")
         mock_library.niFake_SetAttributeViReal64.return_value = 0
         mock_library.niFake_SetAttributeViString.side_effect = MockFunctionCallError("niFake_SetAttributeViString")
