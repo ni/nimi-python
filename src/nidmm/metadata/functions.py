@@ -178,7 +178,11 @@ Specifies the **input\_resistance** that the device should use.
 Calibrates the gain coefficient for the supplied **Mode**, **Range**,
 and **Input\_Resistance**.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The NI 4050 and NI 4060 are not supported. Refer to the calibration procedure for your device before using this function.']],
+'note': '''
+The NI 4050 and NI 4060 are not supported.
+Refer to the calibration procedure for your device before using this
+function.
+''',
 },
     },
     'CalAdjustLC': {
@@ -2276,7 +2280,12 @@ Controls the DMM. Use this function if you want a parameter change to be
 immediately reflected in the hardware. Use this function before calling
 nidMM\_Initiate to make the initiate call as quickly as possible.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes** The NI 4050 and NI 4060 are not supported. Calling this function while the DMM is taking measurements results in an error. After the DMM is finished taking measurements, calling this function will make any unfetched data points unavailable.']],
+'note': '''
+The NI 4050 and NI 4060 are not supported.
+Calling this function while the DMM is taking measurements results in an
+error. After the DMM is finished taking measurements, calling this
+function will make any unfetched data points unavailable.
+''',
 },
     },
     'Disable': {
@@ -3986,7 +3995,16 @@ while performing an external calibration, you can call
 niDMM\_RestoreLastExtCalConstants to return the device to a usable
 state.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes**', 'The NI 4050 and NI 4060 are not supported. Refer to the *NI 4065 6½ Digit DMM Calibration Procedure*, the *NI 4070/4072 6½ Digit FlexDMM Calibration Procedure*, or the *NI 4071 7½–Digit FlexDMM Calibration Procedure* before using this function. This function creates a new session the first time you invoke it for a device. If you call this function on the same resource, an error is returned. You should use niDMM\\_CloseExtCal to close a session obtained using this function.']],
+'note': '''
+The NI 4050 and NI 4060 are not supported.
+Refer to the *NI 4065 6½ Digit DMM Calibration Procedure*, the
+*NI 4070/4072 6½ Digit FlexDMM Calibration Procedure*, or the *NI 4071
+7½–Digit FlexDMM Calibration Procedure* before using this function.
+This function creates a new session the first time you invoke it for a
+device. If you call this function on the same resource, an error is
+returned. You should use niDMM\_CloseExtCal to close a session obtained
+using this function.
+''',
 },
     },
     'InitWithOptions': {
@@ -5382,7 +5400,11 @@ functionality for the specified instrument. The maximum password string
 length is eight characters, excluding the termination character. "NI" is
 the default password.
 ''',
-'table_body': [['|image0|  .. |image0| image:: note.gif', '**Notes**', 'The NI 4050 and NI 4060 are not supported. A password is required for external calibration. Be sure to record the password in a secure location.']],
+'note': '''
+The NI 4050 and NI 4060 are not supported.
+A password is required for external calibration. Be sure to record the
+password in a secure location.
+''',
 },
     },
     'SetCalUserDefinedInfo': {

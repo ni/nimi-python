@@ -41,6 +41,15 @@ class _SessionBase(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Using the
     Analog Bus on an NI SwitchBlock
     Carrier <switch.chm::/SwitchBlock_analog_bus_reservation.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    analog_bus_sharing_enable.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    analog_bus_sharing_enable.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].analog_bus_sharing_enable = var
+        var = session['0,1'].analog_bus_sharing_enable
     '''
     bandwidth = attributes.AttributeViReal64(1250005)
     '''
@@ -51,6 +60,15 @@ class _SessionBase(object):
     `Bandwidth and Insertion Loss <SWITCH.chm::/bandwidth.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
     Considerations <SWITCH.chm::/rf.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    bandwidth.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    bandwidth.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].bandwidth = var
+        var = session['0,1'].bandwidth
     '''
     cabled_module_scan_advanced_bus = attributes.AttributeViInt32(1150009)
     '''
@@ -104,6 +122,15 @@ class _SessionBase(object):
     Impedance <SWITCH.chm::/characteristic_impedance.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
     Considerations <SWITCH.chm::/rf.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    characteristic_impedance.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    characteristic_impedance.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].characteristic_impedance = var
+        var = session['0,1'].characteristic_impedance
     '''
     continuous_scan = attributes.AttributeViBoolean(1150002)
     '''
@@ -274,6 +301,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
     Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    is_configuration_channel.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    is_configuration_channel.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].is_configuration_channel = var
+        var = session['0,1'].is_configuration_channel
     '''
     is_debounced = attributes.AttributeViBoolean(1250002)
     '''
@@ -314,6 +350,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
     Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    is_source_channel.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    is_source_channel.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].is_source_channel = var
+        var = session['0,1'].is_source_channel
     '''
     is_waiting_for_trig = attributes.AttributeViBoolean(1150004)
     '''
@@ -373,6 +418,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_ac_voltage.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_ac_voltage.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_ac_voltage = var
+        var = session['0,1'].max_ac_voltage
     '''
     max_carry_ac_current = attributes.AttributeViReal64(1250011)
     '''
@@ -382,6 +436,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_ac_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_ac_current.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_carry_ac_current = var
+        var = session['0,1'].max_carry_ac_current
     '''
     max_carry_ac_power = attributes.AttributeViReal64(1250015)
     '''
@@ -391,6 +454,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_ac_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_ac_power.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_carry_ac_power = var
+        var = session['0,1'].max_carry_ac_power
     '''
     max_carry_dc_current = attributes.AttributeViReal64(1250010)
     '''
@@ -400,6 +472,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_dc_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_dc_current.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_carry_dc_current = var
+        var = session['0,1'].max_carry_dc_current
     '''
     max_carry_dc_power = attributes.AttributeViReal64(1250014)
     '''
@@ -409,6 +490,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_dc_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_dc_power.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_carry_dc_power = var
+        var = session['0,1'].max_carry_dc_power
     '''
     max_dc_voltage = attributes.AttributeViReal64(1250006)
     '''
@@ -418,6 +508,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_dc_voltage.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_dc_voltage.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_dc_voltage = var
+        var = session['0,1'].max_dc_voltage
     '''
     max_switching_ac_current = attributes.AttributeViReal64(1250009)
     '''
@@ -427,6 +526,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Current <SWITCH.chm::/switching_current.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_ac_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_ac_current.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_switching_ac_current = var
+        var = session['0,1'].max_switching_ac_current
     '''
     max_switching_ac_power = attributes.AttributeViReal64(1250013)
     '''
@@ -436,6 +544,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Power <SWITCH.chm::/switching_power.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_ac_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_ac_power.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_switching_ac_power = var
+        var = session['0,1'].max_switching_ac_power
     '''
     max_switching_dc_current = attributes.AttributeViReal64(1250008)
     '''
@@ -445,6 +562,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Current <SWITCH.chm::/switching_current.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_dc_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_dc_current.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_switching_dc_current = var
+        var = session['0,1'].max_switching_dc_current
     '''
     max_switching_dc_power = attributes.AttributeViReal64(1250012)
     '''
@@ -454,6 +580,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Power <SWITCH.chm::/switching_power.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_dc_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_dc_power.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_switching_dc_power = var
+        var = session['0,1'].max_switching_dc_power
     '''
     number_of_relays = attributes.AttributeViInt32(1150014)
     '''
@@ -696,6 +831,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Settling
     Time <SWITCH.chm::/settling_time.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    settling_time.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    settling_time.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].settling_time = var
+        var = session['0,1'].settling_time
     '''
     simulate = attributes.AttributeViBoolean(1050005)
     '''
@@ -826,6 +970,15 @@ class _SessionBase(object):
 
     `N-Wire Switching Modes <SWITCH.chm::/xwire.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    wire_mode.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    wire_mode.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].wire_mode = var
+        var = session['0,1'].wire_mode
     '''
 
     def __init__(self, repeated_capability):
