@@ -30,7 +30,7 @@ class TestSession(object):
         self.patched_library_singleton_get.stop()
         self.patched_library_patcher.stop()
 
-    def niFake_Read_warning(self, vi, maximum_time, reading):  # noqa: N802
+    def niFake_read_warning(self, vi, maximum_time, reading):  # noqa: N802
         reading.contents.value = self.reading
         return self.error_code_return
 
@@ -97,6 +97,7 @@ class TestSession(object):
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
+            assert session._vi == 0
         self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
 
     def test_session_context_manager_init_with_error(self):
@@ -291,8 +292,6 @@ class TestSession(object):
             session.array_input_function(test_array)
             self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
 
-    # TODO(marcoskirsch): Waveforms
-
     def test_return_multiple_types(self):
         self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
         boolean_val = True
@@ -477,7 +476,7 @@ class TestSession(object):
         test_reading = float('nan')
         test_error_code = 42
         test_error_desc = "The answer to the ultimate question, only positive"
-        self.patched_library.niFake_Read.side_effect = self.niFake_Read_warning
+        self.patched_library.niFake_Read.side_effect = self.niFake_read_warning
         self.error_code_return = test_error_code
         self.reading = test_reading
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
