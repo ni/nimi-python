@@ -29,6 +29,8 @@ functions_codegen_method = {
     'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
     'error_query':                     { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
+    '.+Complex.+':                     { 'codegen_method': 'no',       },
+    'GetStreamEndpointHandle':         { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py
