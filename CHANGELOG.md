@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
   * #### Removed
+    * Support for is_debounced and is_scanning functions. Instead use the attribute of the same name.
 * ### NI-DCPower
  * #### Added
  * #### Changed
