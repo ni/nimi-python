@@ -121,9 +121,6 @@ class SideEffectsHelper(object):
         self._defaults['CreateFreqList'] = {}
         self._defaults['CreateFreqList']['return'] = 0
         self._defaults['CreateFreqList']['frequencyListHandle'] = None
-        self._defaults['CreateWaveformComplexF64'] = {}
-        self._defaults['CreateWaveformComplexF64']['return'] = 0
-        self._defaults['CreateWaveformComplexF64']['waveformHandle'] = None
         self._defaults['CreateWaveformF64'] = {}
         self._defaults['CreateWaveformF64']['return'] = 0
         self._defaults['CreateWaveformF64']['waveformHandle'] = None
@@ -205,9 +202,6 @@ class SideEffectsHelper(object):
         self._defaults['GetSelfCalSupported'] = {}
         self._defaults['GetSelfCalSupported']['return'] = 0
         self._defaults['GetSelfCalSupported']['selfCalSupported'] = None
-        self._defaults['GetStreamEndpointHandle'] = {}
-        self._defaults['GetStreamEndpointHandle']['return'] = 0
-        self._defaults['GetStreamEndpointHandle']['readerHandle'] = None
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
         self._defaults['InitWithOptions']['vi'] = None
@@ -289,12 +283,6 @@ class SideEffectsHelper(object):
         self._defaults['WriteBinary16AnalogStaticValue']['return'] = 0
         self._defaults['WriteBinary16Waveform'] = {}
         self._defaults['WriteBinary16Waveform']['return'] = 0
-        self._defaults['WriteComplexBinary16Waveform'] = {}
-        self._defaults['WriteComplexBinary16Waveform']['return'] = 0
-        self._defaults['WriteNamedWaveformComplexF64'] = {}
-        self._defaults['WriteNamedWaveformComplexF64']['return'] = 0
-        self._defaults['WriteNamedWaveformComplexI16'] = {}
-        self._defaults['WriteNamedWaveformComplexI16']['return'] = 0
         self._defaults['WriteNamedWaveformF64'] = {}
         self._defaults['WriteNamedWaveformF64']['return'] = 0
         self._defaults['WriteNamedWaveformI16'] = {}
@@ -305,8 +293,6 @@ class SideEffectsHelper(object):
         self._defaults['WriteScript']['return'] = 0
         self._defaults['WriteWaveform'] = {}
         self._defaults['WriteWaveform']['return'] = 0
-        self._defaults['WriteWaveformComplexF64'] = {}
-        self._defaults['WriteWaveformComplexF64']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['error_message'] = {}
@@ -601,14 +587,6 @@ class SideEffectsHelper(object):
         frequency_list_handle.contents.value = self._defaults['CreateFreqList']['frequencyListHandle']
         return self._defaults['CreateFreqList']['return']
 
-    def niFgen_CreateWaveformComplexF64(self, vi, channel_name, number_of_samples, waveform_data_array, waveform_handle):  # noqa: N802
-        if self._defaults['CreateWaveformComplexF64']['return'] != 0:
-            return self._defaults['CreateWaveformComplexF64']['return']
-        if self._defaults['CreateWaveformComplexF64']['waveformHandle'] is None:
-            raise MockFunctionCallError("niFgen_CreateWaveformComplexF64", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateWaveformComplexF64']['waveformHandle']
-        return self._defaults['CreateWaveformComplexF64']['return']
-
     def niFgen_CreateWaveformF64(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
         if self._defaults['CreateWaveformF64']['return'] != 0:
             return self._defaults['CreateWaveformF64']['return']
@@ -831,14 +809,6 @@ class SideEffectsHelper(object):
         self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
         return self._defaults['GetSelfCalSupported']['return']
 
-    def niFgen_GetStreamEndpointHandle(self, vi, stream_endpoint, reader_handle):  # noqa: N802
-        if self._defaults['GetStreamEndpointHandle']['return'] != 0:
-            return self._defaults['GetStreamEndpointHandle']['return']
-        if self._defaults['GetStreamEndpointHandle']['readerHandle'] is None:
-            raise MockFunctionCallError("niFgen_GetStreamEndpointHandle", param='readerHandle')
-        reader_handle.contents.value = self._defaults['GetStreamEndpointHandle']['readerHandle']
-        return self._defaults['GetStreamEndpointHandle']['return']
-
     def niFgen_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
             return self._defaults['InitWithOptions']['return']
@@ -1051,21 +1021,6 @@ class SideEffectsHelper(object):
             return self._defaults['WriteBinary16Waveform']['return']
         return self._defaults['WriteBinary16Waveform']['return']
 
-    def niFgen_WriteComplexBinary16Waveform(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
-        if self._defaults['WriteComplexBinary16Waveform']['return'] != 0:
-            return self._defaults['WriteComplexBinary16Waveform']['return']
-        return self._defaults['WriteComplexBinary16Waveform']['return']
-
-    def niFgen_WriteNamedWaveformComplexF64(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
-        if self._defaults['WriteNamedWaveformComplexF64']['return'] != 0:
-            return self._defaults['WriteNamedWaveformComplexF64']['return']
-        return self._defaults['WriteNamedWaveformComplexF64']['return']
-
-    def niFgen_WriteNamedWaveformComplexI16(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
-        if self._defaults['WriteNamedWaveformComplexI16']['return'] != 0:
-            return self._defaults['WriteNamedWaveformComplexI16']['return']
-        return self._defaults['WriteNamedWaveformComplexI16']['return']
-
     def niFgen_WriteNamedWaveformF64(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
         if self._defaults['WriteNamedWaveformF64']['return'] != 0:
             return self._defaults['WriteNamedWaveformF64']['return']
@@ -1090,11 +1045,6 @@ class SideEffectsHelper(object):
         if self._defaults['WriteWaveform']['return'] != 0:
             return self._defaults['WriteWaveform']['return']
         return self._defaults['WriteWaveform']['return']
-
-    def niFgen_WriteWaveformComplexF64(self, vi, channel_name, number_of_samples, data, waveform_handle):  # noqa: N802
-        if self._defaults['WriteWaveformComplexF64']['return'] != 0:
-            return self._defaults['WriteWaveformComplexF64']['return']
-        return self._defaults['WriteWaveformComplexF64']['return']
 
     def niFgen_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
@@ -1237,8 +1187,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_CreateBinary16ArbWaveform.return_value = 0
         mock_library.niFgen_CreateFreqList.side_effect = MockFunctionCallError("niFgen_CreateFreqList")
         mock_library.niFgen_CreateFreqList.return_value = 0
-        mock_library.niFgen_CreateWaveformComplexF64.side_effect = MockFunctionCallError("niFgen_CreateWaveformComplexF64")
-        mock_library.niFgen_CreateWaveformComplexF64.return_value = 0
         mock_library.niFgen_CreateWaveformF64.side_effect = MockFunctionCallError("niFgen_CreateWaveformF64")
         mock_library.niFgen_CreateWaveformF64.return_value = 0
         mock_library.niFgen_CreateWaveformFromFileF64.side_effect = MockFunctionCallError("niFgen_CreateWaveformFromFileF64")
@@ -1299,8 +1247,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetSelfCalLastTemp.return_value = 0
         mock_library.niFgen_GetSelfCalSupported.side_effect = MockFunctionCallError("niFgen_GetSelfCalSupported")
         mock_library.niFgen_GetSelfCalSupported.return_value = 0
-        mock_library.niFgen_GetStreamEndpointHandle.side_effect = MockFunctionCallError("niFgen_GetStreamEndpointHandle")
-        mock_library.niFgen_GetStreamEndpointHandle.return_value = 0
         mock_library.niFgen_InitWithOptions.side_effect = MockFunctionCallError("niFgen_InitWithOptions")
         mock_library.niFgen_InitWithOptions.return_value = 0
         mock_library.niFgen_InitializeAnalogOutputCalibration.side_effect = MockFunctionCallError("niFgen_InitializeAnalogOutputCalibration")
@@ -1363,12 +1309,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_WriteBinary16AnalogStaticValue.return_value = 0
         mock_library.niFgen_WriteBinary16Waveform.side_effect = MockFunctionCallError("niFgen_WriteBinary16Waveform")
         mock_library.niFgen_WriteBinary16Waveform.return_value = 0
-        mock_library.niFgen_WriteComplexBinary16Waveform.side_effect = MockFunctionCallError("niFgen_WriteComplexBinary16Waveform")
-        mock_library.niFgen_WriteComplexBinary16Waveform.return_value = 0
-        mock_library.niFgen_WriteNamedWaveformComplexF64.side_effect = MockFunctionCallError("niFgen_WriteNamedWaveformComplexF64")
-        mock_library.niFgen_WriteNamedWaveformComplexF64.return_value = 0
-        mock_library.niFgen_WriteNamedWaveformComplexI16.side_effect = MockFunctionCallError("niFgen_WriteNamedWaveformComplexI16")
-        mock_library.niFgen_WriteNamedWaveformComplexI16.return_value = 0
         mock_library.niFgen_WriteNamedWaveformF64.side_effect = MockFunctionCallError("niFgen_WriteNamedWaveformF64")
         mock_library.niFgen_WriteNamedWaveformF64.return_value = 0
         mock_library.niFgen_WriteNamedWaveformI16.side_effect = MockFunctionCallError("niFgen_WriteNamedWaveformI16")
@@ -1379,8 +1319,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_WriteScript.return_value = 0
         mock_library.niFgen_WriteWaveform.side_effect = MockFunctionCallError("niFgen_WriteWaveform")
         mock_library.niFgen_WriteWaveform.return_value = 0
-        mock_library.niFgen_WriteWaveformComplexF64.side_effect = MockFunctionCallError("niFgen_WriteWaveformComplexF64")
-        mock_library.niFgen_WriteWaveformComplexF64.return_value = 0
         mock_library.niFgen_close.side_effect = MockFunctionCallError("niFgen_close")
         mock_library.niFgen_close.return_value = 0
         mock_library.niFgen_error_message.side_effect = MockFunctionCallError("niFgen_error_message")

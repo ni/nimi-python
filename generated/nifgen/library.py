@@ -66,7 +66,6 @@ class Library(object):
         self.niFgen_CreateArbWaveform_cfunc = None
         self.niFgen_CreateBinary16ArbWaveform_cfunc = None
         self.niFgen_CreateFreqList_cfunc = None
-        self.niFgen_CreateWaveformComplexF64_cfunc = None
         self.niFgen_CreateWaveformF64_cfunc = None
         self.niFgen_CreateWaveformFromFileF64_cfunc = None
         self.niFgen_CreateWaveformFromFileHWS_cfunc = None
@@ -97,7 +96,6 @@ class Library(object):
         self.niFgen_GetSelfCalLastDateAndTime_cfunc = None
         self.niFgen_GetSelfCalLastTemp_cfunc = None
         self.niFgen_GetSelfCalSupported_cfunc = None
-        self.niFgen_GetStreamEndpointHandle_cfunc = None
         self.niFgen_InitWithOptions_cfunc = None
         self.niFgen_InitializeAnalogOutputCalibration_cfunc = None
         self.niFgen_InitializeCalADCCalibration_cfunc = None
@@ -129,15 +127,11 @@ class Library(object):
         self.niFgen_WaitUntilDone_cfunc = None
         self.niFgen_WriteBinary16AnalogStaticValue_cfunc = None
         self.niFgen_WriteBinary16Waveform_cfunc = None
-        self.niFgen_WriteComplexBinary16Waveform_cfunc = None
-        self.niFgen_WriteNamedWaveformComplexF64_cfunc = None
-        self.niFgen_WriteNamedWaveformComplexI16_cfunc = None
         self.niFgen_WriteNamedWaveformF64_cfunc = None
         self.niFgen_WriteNamedWaveformI16_cfunc = None
         self.niFgen_WriteP2PEndpointI16_cfunc = None
         self.niFgen_WriteScript_cfunc = None
         self.niFgen_WriteWaveform_cfunc = None
-        self.niFgen_WriteWaveformComplexF64_cfunc = None
         self.niFgen_close_cfunc = None
         self.niFgen_error_message_cfunc = None
         self.niFgen_reset_cfunc = None
@@ -549,14 +543,6 @@ class Library(object):
                 self.niFgen_CreateFreqList_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateFreqList_cfunc(vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle)
 
-    def niFgen_CreateWaveformComplexF64(self, vi, channel_name, number_of_samples, waveform_data_array, waveform_handle):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_CreateWaveformComplexF64_cfunc is None:
-                self.niFgen_CreateWaveformComplexF64_cfunc = self._library.niFgen_CreateWaveformComplexF64
-                self.niFgen_CreateWaveformComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(NIComplexNumber), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niFgen_CreateWaveformComplexF64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_CreateWaveformComplexF64_cfunc(vi, channel_name, number_of_samples, waveform_data_array, waveform_handle)
-
     def niFgen_CreateWaveformF64(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
         with self._func_lock:
             if self.niFgen_CreateWaveformF64_cfunc is None:
@@ -796,14 +782,6 @@ class Library(object):
                 self.niFgen_GetSelfCalSupported_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFgen_GetSelfCalSupported_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetSelfCalSupported_cfunc(vi, self_cal_supported)
-
-    def niFgen_GetStreamEndpointHandle(self, vi, stream_endpoint, reader_handle):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_GetStreamEndpointHandle_cfunc is None:
-                self.niFgen_GetStreamEndpointHandle_cfunc = self._library.niFgen_GetStreamEndpointHandle
-                self.niFgen_GetStreamEndpointHandle_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(void)]  # noqa: F405
-                self.niFgen_GetStreamEndpointHandle_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_GetStreamEndpointHandle_cfunc(vi, stream_endpoint, reader_handle)
 
     def niFgen_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
@@ -1053,30 +1031,6 @@ class Library(object):
                 self.niFgen_WriteBinary16Waveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteBinary16Waveform_cfunc(vi, channel_name, waveform_handle, size, data)
 
-    def niFgen_WriteComplexBinary16Waveform(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_WriteComplexBinary16Waveform_cfunc is None:
-                self.niFgen_WriteComplexBinary16Waveform_cfunc = self._library.niFgen_WriteComplexBinary16Waveform
-                self.niFgen_WriteComplexBinary16Waveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(NIComplexI16)]  # noqa: F405
-                self.niFgen_WriteComplexBinary16Waveform_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_WriteComplexBinary16Waveform_cfunc(vi, channel_name, waveform_handle, size, data)
-
-    def niFgen_WriteNamedWaveformComplexF64(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_WriteNamedWaveformComplexF64_cfunc is None:
-                self.niFgen_WriteNamedWaveformComplexF64_cfunc = self._library.niFgen_WriteNamedWaveformComplexF64
-                self.niFgen_WriteNamedWaveformComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(NIComplexNumber)]  # noqa: F405
-                self.niFgen_WriteNamedWaveformComplexF64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_WriteNamedWaveformComplexF64_cfunc(vi, channel_name, waveform_name, size, data)
-
-    def niFgen_WriteNamedWaveformComplexI16(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_WriteNamedWaveformComplexI16_cfunc is None:
-                self.niFgen_WriteNamedWaveformComplexI16_cfunc = self._library.niFgen_WriteNamedWaveformComplexI16
-                self.niFgen_WriteNamedWaveformComplexI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(NIComplexI16)]  # noqa: F405
-                self.niFgen_WriteNamedWaveformComplexI16_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_WriteNamedWaveformComplexI16_cfunc(vi, channel_name, waveform_name, size, data)
-
     def niFgen_WriteNamedWaveformF64(self, vi, channel_name, waveform_name, size, data):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WriteNamedWaveformF64_cfunc is None:
@@ -1116,14 +1070,6 @@ class Library(object):
                 self.niFgen_WriteWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_WriteWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteWaveform_cfunc(vi, channel_name, waveform_handle, size, data)
-
-    def niFgen_WriteWaveformComplexF64(self, vi, channel_name, number_of_samples, data, waveform_handle):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_WriteWaveformComplexF64_cfunc is None:
-                self.niFgen_WriteWaveformComplexF64_cfunc = self._library.niFgen_WriteWaveformComplexF64
-                self.niFgen_WriteWaveformComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(NIComplexNumber), ViInt32]  # noqa: F405
-                self.niFgen_WriteWaveformComplexF64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_WriteWaveformComplexF64_cfunc(vi, channel_name, number_of_samples, data, waveform_handle)
 
     def niFgen_close(self, vi):  # noqa: N802
         with self._func_lock:

@@ -3172,67 +3172,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_waveform_complex_f64(self, number_of_samples, waveform_data_array):
-        '''create_waveform_complex_f64
-
-        Creates an onboard waveform from complex double-precision floating-point
-        (F64) data for use with the OUTPUT_MODE attribute set to
-        Arbitrary Waveform or Arbitrary Sequence output mode on devices with the
-        OUTPUT_ENABLED attribute set to VI_TRUE and the
-        OSP_DATA_PROCESSING_MODE attribute set to
-        NIFGEN_VAL_OSP_COMPLEX. The **waveformHandle** returned by the
-        function can be used later for setting the active waveform, changing the
-        data in the waveform, building sequences of waveforms, or deleting the
-        waveform when it is no longer needed.
-
-        Note:
-        You must call the nifgen_ConfigureOutputMode function to set the
-        **outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or
-        NIFGEN_VAL_OUTPUT_SEQ before calling this function.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].create_waveform_complex_f64(number_of_samples, waveform_data_array)
-
-        Args:
-            number_of_samples (int): Specifies the size of the arbitrary waveform that you want to create.
-
-                The size must meet the following restrictions:
-
-                -  The size must be less than or equal to the maximum waveform size that
-                   the device allows.
-                -  The size must be greater than or equal to the minimum waveform size
-                   that the device allows.
-                -  The size must be an integer multiple of the device waveform quantum.
-
-                You can obtain these values from the **maximumWaveformSize**,
-                **minimumWaveformSize**, and **waveformQuantum** parameters of the
-                query_arb_wfm_capabilities function.
-
-                |
-                | **Default Value**: None
-            waveform_data_array (list of int): Specifies the array of data you want to use for the new arbitrary
-                waveform. The array must have at least as many elements as the value
-                that you specify in **waveformSize**.
-
-                You must normalize the data points in the array to be between –1.00 and
-                +1.00.
-
-                **Default Value**: None
-
-        Returns:
-            waveform_handle (int): The handle that identifies the new waveform. This handle is used later
-                when referring to this waveform.
-        '''
-        waveform_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_CreateWaveformComplexF64(self._vi, self._repeated_capability.encode(self._encoding), number_of_samples, waveform_data_array, ctypes.pointer(waveform_handle_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(waveform_handle_ctype.value)
-
     def create_waveform_f64(self, waveform_size, waveform_data_array):
         '''create_waveform_f64
 
@@ -4713,136 +4652,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_complex_binary16_waveform(self, waveform_handle, size, data):
-        '''write_complex_binary16_waveform
-
-        Writes binary data to the waveform in onboard memory. The waveform
-        handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform or the nifgen_CreateWaveformI16 function.
-
-        By default, the subsequent call to the
-        write_complex_binary16_waveform function continues writing data
-        from the position of the last sample written. You can set the write
-        position and offset by calling the nifgen_SetWaveformNextWritePosition
-        function. If streaming is enabled, you can write more data than the
-        allocated waveform size in onboard memory. Refer to the
-        `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
-        information about streaming data.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].write_complex_binary16_waveform(waveform_handle, size, data)
-
-        Args:
-            waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform function.
-            size (int): Specifies the number of samples to load into the waveform.
-
-                **Default Value**: 0
-            data (list of int): Specifies the array of data to load into the waveform. The array must
-                have at least as many elements as the value in **size**. The binary data
-                is left-justified.
-        '''
-        error_code = self._library.niFgen_WriteComplexBinary16Waveform(self._vi, self._repeated_capability.encode(self._encoding), waveform_handle, size, data)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def write_named_waveform_complex_f64(self, waveform_name, size, data):
-        '''write_named_waveform_complex_f64
-
-        Writes complex floating–point data to the named waveform in onboard
-        memory on devices with the OSP_ENABLED attribute set to
-        VI_TRUE and the OSP_DATA_PROCESSING_MODE attribute set
-        to NIFGEN_VAL_OSP_COMPLEX. The waveform handle passed in must have
-        been created by a call to the nifgen_AllocateWaveform function or to
-        one of the following niFgen Create Waveform functions:
-
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
-
-        By default, the subsequent call to the
-        write_named_waveform_complex_f64 function continues writing data
-        from the position of the last sample written. You can set the write
-        position and offset by calling the
-        nifgen_SetNamedWaveformNextWritePosition function. If streaming is
-        enabled, you can write more data than the allocated waveform size in
-        onboard memory. Refer to the
-        `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
-        information about streaming data.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].write_named_waveform_complex_f64(waveform_name, size, data)
-
-        Args:
-            waveform_name (string): Specifies the name to associate with the allocated waveform.
-            size (int): Specifies the number of samples to load into the waveform.
-
-                **Default Value**: 0
-            data (list of int): Specifies the array of data to load into the waveform. The array must
-                have at least as many elements as the value in **size**.
-        '''
-        error_code = self._library.niFgen_WriteNamedWaveformComplexF64(self._vi, self._repeated_capability.encode(self._encoding), waveform_name.encode(self._encoding), size, data)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def write_named_waveform_complex_i16(self, waveform_name, size, data):
-        '''write_named_waveform_complex_i16
-
-        Writes complex binary data to the named waveform in onboard memory on
-        devices with the OSP_ENABLED attribute set to VI_TRUE
-        and the OSP_DATA_PROCESSING_MODE attribute set to
-        NIFGEN_VAL_OSP_COMPLEX. The waveform handle passed in must have been
-        created by a call to the nifgen_AllocateWaveform function or to one of
-        the following niFgen Create Waveform functions:
-
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
-
-        By default, the subsequent call to the
-        WriteNamedWaveformComplexi16 function continues writing data
-        from the position of the last sample written. You can set the write
-        position and offset by calling the
-        nifgen_SetNamedWaveformNextWritePosition function. If streaming is
-        enabled, you can write more data than the allocated waveform size in
-        onboard memory. Refer to the
-        `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
-        information about streaming data.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].write_named_waveform_complex_i16(waveform_name, size, data)
-
-        Args:
-            waveform_name (string): Specifies the name to associate with the allocated waveform.
-            size (int): Specifies the number of samples to load into the waveform.
-
-                **Default Value**: 0
-            data (list of int): Specifies the array of data to load into the waveform. The array must
-                have at least as many elements as the value in **size**.
-        '''
-        error_code = self._library.niFgen_WriteNamedWaveformComplexI16(self._vi, self._repeated_capability.encode(self._encoding), waveform_name.encode(self._encoding), size, data)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def write_named_waveform_f64(self, waveform_name, size, data):
         '''write_named_waveform_f64
 
@@ -4988,53 +4797,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_waveform_complex_f64(self, number_of_samples, data, waveform_handle):
-        '''write_waveform_complex_f64
-
-        Writes complex data to the waveform in onboard memory on devices with
-        the OUTPUT_ENABLED attribute set to VI_TRUE and the
-        OSP_DATA_PROCESSING_MODE attribute set to
-        NIFGEN_VAL_OSP_COMPLEX. The waveform handle passed in must have been
-        created by a call to the nifgen_AllocateWaveform function or to one of
-        the following niFgen Create Waveform functions:
-
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
-
-        By default, the subsequent call to the write_waveform_complex_f64
-        function continues writing data from the position of the last sample
-        written. You can set the write position and offset by calling the
-        nifgen_SetWaveformNextWritePosition function. If streaming is enabled,
-        you can write more data than the allocated waveform size in onboard
-        memory. Refer to the
-        `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
-        information about streaming data.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].write_waveform_complex_f64(number_of_samples, data, waveform_handle)
-
-        Args:
-            number_of_samples (int): Specifies the number of samples to load into the waveform.
-                **Default Value**: 0
-            data (list of int): Specifies the array of data to load into the waveform. You must
-                normalize the data points in the array to be between –1.00 and +1.00.
-                The array must have at least as many elements as the value in the
-                **numberOfSamples** parameter.
-            waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the allocate_waveform function.
-        '''
-        error_code = self._library.niFgen_WriteWaveformComplexF64(self._vi, self._repeated_capability.encode(self._encoding), number_of_samples, data, waveform_handle)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _error_message(self, error_code):
         '''_error_message
 
@@ -5093,9 +4855,9 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
+        except errors.Error as e:
+            self._vi = 0
+            raise
         self._vi = 0
 
     ''' These are code-generated '''
@@ -6527,26 +6289,6 @@ class Session(_SessionBase):
         error_code = self._library.niFgen_GetSelfCalSupported(self._vi, ctypes.pointer(self_cal_supported_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
-
-    def get_stream_endpoint_handle(self, stream_endpoint):
-        '''get_stream_endpoint_handle
-
-        Returns a reader endpoint handle that can be used with NI-P2P to
-        configure a peer-to-peer stream with a signal generator endpoint.
-
-        Args:
-            stream_endpoint (string): Specifies the stream endpoint FIFO to configure. Refer to the
-                device-specific documentation for peer-to-peer streaming in the *NI
-                Signal Generators Help* for more information.
-
-        Returns:
-            reader_handle (int): Specifies the reader endpoint handle that is used with NI-P2P to create
-                a stream with the signal generator as an endpoint.
-        '''
-        reader_handle_ctype = visatype.void(0)
-        error_code = self._library.niFgen_GetStreamEndpointHandle(self._vi, stream_endpoint.encode(self._encoding), ctypes.pointer(reader_handle_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(reader_handle_ctype.value)
 
     def _init_with_options(self, resource_name, id_query, reset_device, option_string):
         '''_init_with_options
