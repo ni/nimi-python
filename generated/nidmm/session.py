@@ -1542,13 +1542,13 @@ class Session(_SessionBase):
 
         Args:
             thermistor_a (float): Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the configure_thermistor_type
+                Thermistor Type is set to Custom in the ConfigureThermistorType
                 function. The default is 1.0295e-3 (44006).
             thermistor_b (float): Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the configure_thermistor_type
+                Thermistor Type is set to Custom in the ConfigureThermistorType
                 function. The default is 2.391e-4 (44006).
             thermistor_c (float): Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the configure_thermistor_type
+                Thermistor Type is set to Custom in the ConfigureThermistorType
                 function. The default is 1.568e-7 (44006).
         '''
         error_code = self._library.niDMM_ConfigureThermistorCustom(self._vi, thermistor_a, thermistor_b, thermistor_c)

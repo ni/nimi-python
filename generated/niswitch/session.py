@@ -1251,7 +1251,7 @@ class _SessionBase(object):
         current execution thread. If the InstrumentHandle parameter is an
         invalid session, the function does nothing and returns an error.
         Normally, the error information describes the first error that occurred
-        since the user last called _get_error or clear_error.
+        since the user last called _get_error or ClearError.
 
         Args:
             buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
@@ -2246,7 +2246,7 @@ class Session(_SessionBase):
 
         Returns:
             vi (int): A particular NI-SWITCH session established with
-                init_with_topology, init_with_options, or init
+                init_with_topology, InitWithOptions, or init
                 and used for all subsequent NI-SWITCH calls.
         '''
         vi_ctype = visatype.ViSession(0)
@@ -2484,7 +2484,7 @@ class Session(_SessionBase):
         deallocates any memory resources the driver uses. Notes: (1) You must
         unlock the session before calling _close. (2) After calling
         _close, you cannot use the instrument driver again until you
-        call init or init_with_options.
+        call init or InitWithOptions.
         '''
         error_code = self._library.niSwitch_close(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
