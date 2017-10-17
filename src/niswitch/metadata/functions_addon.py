@@ -26,8 +26,8 @@ functions_codegen_method = {
     'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
     'error_query':                     { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
-    'IsDebounced':                     { 'codegen_method': 'no',       },
-    'IsScanning':                      { 'codegen_method': 'no',       },
+    'IsDebounced':                     { 'codegen_method': 'no',       },  # Equivalent attribute is available
+    'IsScanning':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
 }
 
 # Attach the given parameter to the given enum from enums.py
