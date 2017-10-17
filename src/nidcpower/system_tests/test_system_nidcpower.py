@@ -40,14 +40,6 @@ def test_get_error(session):
         assert e.description.find('Attribute is read-only.') != -1
 
 
-def test_commit_after_initiate(session):
-    try:
-        with session.initiate():
-            session.commit()
-    except nidcpower.Error as e:
-        assert False
-
-
 def test_get_self_cal_last_date_and_time(session):
     try:
         session.get_self_cal_last_date_and_time()
