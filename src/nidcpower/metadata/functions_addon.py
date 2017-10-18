@@ -40,6 +40,7 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
+    'MeasureMultiple':                 { 'codegen_method': 'no',       },  # Issue 444
 }
 
 # Attach the given parameter to the given enum from enums.py

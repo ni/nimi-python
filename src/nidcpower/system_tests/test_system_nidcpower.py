@@ -132,25 +132,28 @@ def test_config_aperture_time():
         assert aperture_time_in_range is True
 
 
+def test_fetch_multiple():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+        session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
+        session.voltage_level = 1
+        count = 10
+        session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+        with session.initiate():
+            voltage_measurements, current_measurements, in_compliance, actual_count = session.fetch_multiple(count)
+            assert len(voltage_measurements) == count
+            assert len(current_measurements) == count
+            assert len(in_compliance) == count
+            assert actual_count == count
+            assert isinstance(voltage_measurements[1], float)
+            assert isinstance(current_measurements[1], float)
+            assert in_compliance[1] in [True, False]
+            assert voltage_measurements[1] == 1.0
+            assert current_measurements[1] == 0.00001
+
+
 '''
-TODO: (Jaleel) Python Crashes when running these examples : Issue#444,445
-def test_fetch_multiple(session):
-    session.source_mode = nidcpower.SourceMode.SINGLE_POINT
-    session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
-    session.voltage_level = 1
-    count = 10
-    session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
-    with session.initiate():
-        voltage_measurements, current_measurements, in_compliance, actual_count = session.fetch_multiple(-1, count)
-        assert len(voltage_measurements) == count
-        assert len(current_measurements) == count
-        assert len(in_compliance) == count
-        assert actual_count == count
-        assert isinstance(voltage_measurement[1], float)
-        assert isinstance(current_measurements[1], float)
-        assert in_compliance[1] in [True, False]
-
-
+TODO: (Jaleel) Python Crashes when running these examples : Issue#444
 def test_measure_multiple(session):
     session.source_mode = nidcpower.SourceMode.SINGLE_POINT
     session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
@@ -161,7 +164,7 @@ def test_measure_multiple(session):
         voltage_measurements, current_measurements = session.measure_multiple()
     assert len(voltage_measurements) == 4   # measuremultiple will return a reading for all channel , since 4162 has 4 channel expecting 4 readings
     assert len(current_measurements) == 4
-    assert isinstance(voltage_measurement[1], float)
+    assert isinstance(voltage_measurements[1], float)
     assert isinstance(current_measurements[1], float)
 '''
 
