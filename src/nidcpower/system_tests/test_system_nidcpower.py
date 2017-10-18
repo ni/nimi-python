@@ -152,6 +152,23 @@ def test_fetch_multiple():
             assert current_measurements[1] == 0.00001
 
 
+'''
+TODO: (Jaleel) Python Crashes when running these examples : Issue#444
+def test_measure_multiple(session):
+    session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+    session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
+    #session.voltage_level = 1
+    count = 10
+    session.measure_when = nidcpower.MeasureWhen.ON_DEMAND
+    with session.initiate():
+        voltage_measurements, current_measurements = session.measure_multiple()
+    assert len(voltage_measurements) == 4   # measuremultiple will return a reading for all channel , since 4162 has 4 channel expecting 4 readings
+    assert len(current_measurements) == 4
+    assert isinstance(voltage_measurements[1], float)
+    assert isinstance(current_measurements[1], float)
+'''
+
+
 def test_query_max_current_limit():
     with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
         max_current_limit = session.query_max_current_limit(6)
