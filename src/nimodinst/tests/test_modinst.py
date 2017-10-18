@@ -166,8 +166,8 @@ class TestSession(object):
             try:
                 session.nonexistent_property = 5
                 assert False
-            except TypeError as e:
-                assert str(e).find(' is a frozen class') != -1
+            except AttributeError as e:
+                assert str(e) == "Set attribute not supported."
             try:
                 session.nonexistent_property
                 assert False
@@ -179,8 +179,8 @@ class TestSession(object):
             try:
                 session[0].nonexistent_property = 5
                 assert False
-            except TypeError as e:
-                assert str(e) == 'nonexistent_property is not writable'
+            except AttributeError as e:
+                assert str(e) == "Set attribute not supported."
             try:
                 session[0].nonexistent_property
                 assert False
@@ -193,8 +193,8 @@ class TestSession(object):
             try:
                 session[0].chassis_number = 5
                 assert False
-            except TypeError as e:
-                assert str(e) == 'chassis_number is not writable'
+            except AttributeError as e:
+                assert str(e) == "Set attribute not supported."
 
     def test_vi_string_attribute_read_only(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
@@ -202,8 +202,8 @@ class TestSession(object):
             try:
                 session[0].device_name = "Not Possible"
                 assert False
-            except TypeError as e:
-                assert str(e) == 'device_name is not writable'
+            except AttributeError as e:
+                assert str(e) == "Set attribute not supported."
 
     def test_int_attribute_error(self):
         error_code = -1234
