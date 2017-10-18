@@ -6952,7 +6952,7 @@ name configured with the IVI Configuration utility, as shown in Example
 name identifies a specific device and specifies the initial settings for
 the session.
 ''',
-'table_body': [['.. raw:: html     <div align="center">  1  .. raw:: html     </div>', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['.. raw:: html     <div align="center">  2  .. raw:: html     </div>', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  3  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  4  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)'], ['.. raw:: html     <div align="center">  5  .. raw:: html     </div>', 'IVI logical name or IVI virtual name', '*myLogicalName*', '(*myLogicalName* = name)']],
+'table_body': [['1', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['2', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['3', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['4', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)'], ['5', 'IVI logical name or IVI virtual name', '*myLogicalName*', '(*myLogicalName* = name)']],
 'table_header': ['Example #', 'Device Type', 'Syntax', 'Variable'],
 },
             },
@@ -7039,7 +7039,7 @@ name configured with the IVI Configuration utility, as shown in Example
 name identifies a specific device and specifies the initial settings for
 the session.
 ''',
-'table_body': [['.. raw:: html     <div align="center">  1  .. raw:: html     </div>', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['.. raw:: html     <div align="center">  2  .. raw:: html     </div>', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  3  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  4  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)'], ['.. raw:: html     <div align="center">  5  .. raw:: html     </div>', 'IVI logical name or IVI virtual name', '*myLogicalName*', '(*myLogicalName* = name)']],
+'table_body': [['1', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['2', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['3', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['4', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)'], ['5', 'IVI logical name or IVI virtual name', '*myLogicalName*', '(*myLogicalName* = name)']],
 'table_header': ['Example #', 'Device Type', 'Syntax', 'Variable'],
 },
             },
@@ -7308,7 +7308,7 @@ name configured with the IVI Configuration utility, as shown in Example
 name identifies a specific device and specifies the initial settings for
 the session.
 ''',
-'table_body': [['.. raw:: html     <div align="center">  1  .. raw:: html     </div>', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['.. raw:: html     <div align="center">  2  .. raw:: html     </div>', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  3  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  4  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)'], ['.. raw:: html     <div align="center">  5  .. raw:: html     </div>', 'IVI logical name or IVI virtual name', '*myLogicalName*', '(*myLogicalName* = name)']],
+'table_body': [['1', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['2', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['3', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['4', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)'], ['5', 'IVI logical name or IVI virtual name', '*myLogicalName*', '(*myLogicalName* = name)']],
 'table_header': ['Example #', 'Device Type', 'Syntax', 'Variable'],
 },
             },
@@ -10313,7 +10313,7 @@ name configured with the IVI Configuration utility, as shown in Example
 name identifies a specific device and specifies the initial settings for
 the session.
 ''',
-'table_body': [['.. raw:: html     <div align="center">  1  .. raw:: html     </div>', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['.. raw:: html     <div align="center">  2  .. raw:: html     </div>', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  3  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  4  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)'], ['.. raw:: html     <div align="center">  5  .. raw:: html     </div>', 'IVI logical name or IVI virtual name', '*myLogicalName*', '(*myLogicalName* = name)']],
+'table_body': [['1', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['2', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['3', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['4', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)'], ['5', 'IVI logical name or IVI virtual name', '*myLogicalName*', '(*myLogicalName* = name)']],
 'table_header': ['Example #', 'Device Type', 'Syntax', 'Variable'],
 },
             },
@@ -10496,7 +10496,7 @@ functions and identifies a particular instrument session.
 Contains the value returned from the instrument self-test. A value of 0
 indicates success.
 ''',
-'table_body': [['.. raw:: html     <div align="center">  0  .. raw:: html     </div>', 'Passed self-test'], ['.. raw:: html     <div align="center">  1  .. raw:: html     </div>', 'Self-test failed']],
+'table_body': [['0', 'Passed self-test'], ['1', 'Self-test failed']],
 'table_header': ['Self-Test Code', 'Description'],
 },
             },
