@@ -440,7 +440,7 @@ nidmm.Session methods
 
 
         Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the :py:func:`nidmm.configure_thermistor_type`
+        Thermistor Type is set to Custom in the :py:func:`nidmm.ConfigureThermistorType`
         function. The default is 1.0295e-3 (44006).
 
         
@@ -451,7 +451,7 @@ nidmm.Session methods
 
 
         Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the :py:func:`nidmm.configure_thermistor_type`
+        Thermistor Type is set to Custom in the :py:func:`nidmm.ConfigureThermistorType`
         function. The default is 2.391e-4 (44006).
 
         
@@ -462,7 +462,7 @@ nidmm.Session methods
 
 
         Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-        Thermistor Type is set to Custom in the :py:func:`nidmm.configure_thermistor_type`
+        Thermistor Type is set to Custom in the :py:func:`nidmm.ConfigureThermistorType`
         function. The default is 1.568e-7 (44006).
 
         

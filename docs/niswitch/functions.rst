@@ -830,7 +830,7 @@ niswitch.Session methods
 
 
             A particular NI-SWITCH session established with
-            :py:func:`niswitch.init_with_topology`, :py:func:`niswitch.init_with_options`, or :py:func:`niswitch.init`
+            :py:func:`niswitch.init_with_topology`, :py:func:`niswitch.InitWithOptions`, or :py:func:`niswitch.init`
             and used for all subsequent NI-SWITCH calls.
 
             
