@@ -370,7 +370,7 @@ a bell-curve weighing function.
 },
             },
             {
-                'name': '_AC_VOLTS_DC_COUPLED',
+                'name': 'AC_VOLTS_DC_COUPLED',
                 'value': 1001,
 'documentation': {
 'description': 'NI 4070/4071/4072 supported.',
@@ -391,7 +391,7 @@ a bell-curve weighing function.
 },
             },
             {
-                'name': '_WAVEFORM_CURRENT',
+                'name': 'WAVEFORM_CURRENT',
                 'value': 1004,
 'documentation': {
 'description': 'NI 4070/4071/4072 supported.',
@@ -542,7 +542,7 @@ inductance.
 },
             },
             {
-                'name': '_LBR_TRIG_0',
+                'name': 'LBR_TRIG_0',
                 'value': 1003,
 'documentation': {
 'description': 'Local Bus Right Trigger Line 0 of PXI/SCXI combination chassis',
@@ -589,7 +589,7 @@ inductance.
     'OperationMode': {
         'values': [
             {
-                'name': '_IVIDMM_MODE',
+                'name': 'IVIDMM_MODE',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -714,7 +714,7 @@ and C coefficients.
 },
             },
             {
-                'name': '_EXTERNAL',
+                'name': 'EXTERNAL',
                 'value': 2,
 'documentation': {
 'description': 'Pin 9 on the AUX Connector',
@@ -759,7 +759,7 @@ Trigger <dmmviref.chm::/niDMM_Send_Software_Trigger.html>`__ is called.
 },
             },
             {
-                'name': '_TTL_3',
+                'name': 'TTL_3',
                 'value': 114,
 'documentation': {
 'description': 'PXI Trigger Line 3',
@@ -1002,7 +1002,7 @@ Trigger <dmmviref.chm::/niDMM_Send_Software_Trigger.html>`__ is called.
 },
             },
             {
-                'name': '_TTL_0',
+                'name': 'TTL_0',
                 'value': 111,
 'documentation': {
 'description': 'PXI Trigger Line 0',
@@ -1023,7 +1023,7 @@ Trigger <dmmviref.chm::/niDMM_Send_Software_Trigger.html>`__ is called.
 },
             },
             {
-                'name': '_TTL_3',
+                'name': 'TTL_3',
                 'value': 114,
 'documentation': {
 'description': 'PXI Trigger Line 3',
@@ -1051,14 +1051,14 @@ Trigger <dmmviref.chm::/niDMM_Send_Software_Trigger.html>`__ is called.
 },
             },
             {
-                'name': '_TTL_7',
+                'name': 'TTL_7',
                 'value': 118,
 'documentation': {
 'description': 'PXI Trigger Line 7',
 },
             },
             {
-                'name': '_PXI_STAR',
+                'name': 'PXI_STAR',
                 'value': 131,
 'documentation': {
 'description': 'PXI Star Trigger Line',
