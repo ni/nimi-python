@@ -146,71 +146,57 @@ licenses allow for non-commercial and commercial use.
 
 .. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
     :alt: Build Status - master branch
-    :scale: 100%
     :target: https://travis-ci.org/ni/nimi-python
 
 .. |Docs| image:: https://readthedocs.org/projects/nimi-python/badge/?version=latest
     :alt: Documentation Status - master branch
-    :scale: 100%
     :target: https://nimi-python.readthedocs.io/en/latest/?badge=latest
 
 .. |MITLicense| image:: https://img.shields.io/badge/License-MIT-yellow.svg
     :alt: MIT License
-    :scale: 100%
     :target: https://opensource.org/licenses/MIT
 
 .. |CoverageStatus| image:: https://coveralls.io/repos/github/ni/nimi-python/badge.svg?branch=master&dummy=no_cache_please_1
     :alt: Test Coverage - master branch
-    :scale: 100%
     :target: https://coveralls.io/github/ni/nimi-python?branch=master
 
 .. |DCPowerLatestVersion| image:: http://img.shields.io/pypi/v/nidcpower.svg
     :alt: Latest NI-DMM Version
-    :scale: 100%
     :target: http://pypi.python.org/pypi/nidmm
 
 .. |DCPowerPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidcpower.svg
     :alt: NI-DCPower supported Python versions
-    :scale: 100%
     :target: http://pypi.python.org/pypi/nidcpower
 
 .. |DMMLatestVersion| image:: http://img.shields.io/pypi/v/nidcpower.svg
     :alt: Latest NI-DCPower Version
-    :scale: 100%
     :target: http://pypi.python.org/pypi/nidcpower
 
 .. |DMMPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidmm.svg
     :alt: NI-DMM supported Python versions
-    :scale: 100%
     :target: http://pypi.python.org/pypi/nidmm
 
 .. |ModInstLatestVersion| image:: http://img.shields.io/pypi/v/nimodinst.svg
     :alt: Latest NI-ModInst Version
-    :scale: 100%
     :target: http://pypi.python.org/pypi/nimodinst
 
 .. |ModInstPythonVersion| image:: http://img.shields.io/pypi/pyversions/nimodinst.svg
     :alt: NI-ModInst supported Python versions
-    :scale: 100%
     :target: http://pypi.python.org/pypi/nimodinst
 
 .. |SwitchLatestVersion| image:: http://img.shields.io/pypi/v/niswitch.svg
     :alt: Latest NI-SWITCH Version
-    :scale: 100%
     :target: http://pypi.python.org/pypi/niswitch
 
 .. |SwitchPythonVersion| image:: http://img.shields.io/pypi/pyversions/niswitch.svg
     :alt: NI-SWITCH supported Python versions
-    :scale: 100%
     :target: http://pypi.python.org/pypi/niswitch
 
 .. |OpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python.svg
     :alt: Open Issues + Pull Requests
-    :scale: 100%
     :target: https://github.com/ni/nimi-python/issues
 
 .. |OpenPullRequests| image:: https://img.shields.io/github/issues-pr/ni/nimi-python.svg
     :alt: Open Pull Requests
-    :scale: 100%
     :target: https://github.com/ni/nimi-python/pulls
 
