@@ -26,11 +26,11 @@ ${encoding_tag}
     '''Renders a Session method corresponding to the passed-in function metadata.'''
 
     parameters = f['parameters']
-    output_parameters = helper.filter_output_parameters(parameters)
-    enum_input_parameters = helper.filter_enum_parameters(helper.filter_input_parameters(parameters))
-    ivi_dance_parameter = helper.filter_ivi_dance_parameter(parameters)
+    output_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_PARAMETERS)
+    enum_input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
+    ivi_dance_parameter = helper.filter_ivi_dance_parameter(f)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
-    len_parameter = helper.filter_len_parameter(parameters)
+    len_parameter = helper.filter_len_parameter(f)
     len_size_parameter = helper.find_size_parameter(len_parameter, parameters)
     assert ivi_dance_size_parameter is None or len_size_parameter is None
 %>\
@@ -153,7 +153,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
 
     ''' These are code-generated '''
 
-% for func_name in sorted({k: v for k, v in functions.items() if v['has_repeated_capability']}):
+% for func_name in sorted({k: v for k, v in functions.items() if v['has_repeated_capability'] or v['is_error_handling']}):
 ${render_method(functions[func_name])}
 % endfor
 
@@ -191,14 +191,14 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
+        except errors.Error as e:
+            self._${config['session_handle_parameter_name']} = 0
+            raise
         self._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
 
-% for func_name in sorted({k: v for k, v in functions.items() if not v['has_repeated_capability']}):
+% for func_name in sorted({k: v for k, v in functions.items() if not v['has_repeated_capability'] and not v['is_error_handling']}):
 ${render_method(functions[func_name])}
 % endfor
 

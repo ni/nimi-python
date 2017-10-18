@@ -221,6 +221,51 @@ functions = {
             'description': 'Queries the value of a ViInt32 attribute.',
         },
     },
+    'GetAttributeViInt64': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'documentation': {
+                    'description': 'This is the channel(s) that this function will apply to.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'attributeId',
+                'type': 'ViAttr',
+                'documentation': {
+                    'description': 'Pass the ID of an attribute.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'attributeValue',
+                'type': 'ViInt64',
+                'documentation': {
+                    'description': 'Returns the value of the attribute.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Queries the value of a ViInt64 attribute.',
+        },
+    },
     'GetAttributeViReal64': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -459,6 +504,51 @@ functions = {
         ],
         'documentation': {
             'description': 'This function sets the value of a ViInt32 attribute.',
+        },
+    },
+    'SetAttributeViInt64': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'documentation': {
+                    'description': 'This is the channel(s) that this function will apply to.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'attributeId',
+                'type': 'ViAttr',
+                'documentation': {
+                    'description': 'Pass the ID of an attribute.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'attributeValue',
+                'type': 'ViInt64',
+                'documentation': {
+                    'description': 'Pass the value that you want to set the attribute to.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function sets the value of a ViInt64 attribute.',
         },
     },
     'SetAttributeViReal64': {
@@ -896,6 +986,44 @@ functions = {
         },
     },
 
+    'GetAnIviDanceString': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'bufferSize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of bytes in aString You can IVI-dance with this.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'aString',
+                'type': 'ViChar',
+                'documentation': {
+                    'description': 'Returns the string.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns a string using the IVI dance.',
+        },
+    },
+
     'GetAStringOfFixedMaximumSize': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -1285,12 +1413,347 @@ functions = {
             'description': 'This function takes an array parameter.',
         },
     },
-    #TODO(marcoskirsch): Lots more cases to add:
-    #     Returning arrays (not strings) through all 3 mechanisms
-    #     Returning lots of numbers
-    #     Taking parameters of all types
-    #     Returning parameters of all types
-    #     Enums enums enums
+
+    'BoolArrayOutputFunction': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi**',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfElements',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of elements in the array.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'anArray',
+                'type': 'ViBoolean',
+                'documentation': {
+                    'description': 'Contains an array of booleans',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns an array of booleans.',
+        },
+    },
+    'EnumArrayOutputFunction': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi**',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'numberOfElements',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of elements in the array.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'anArray',
+                'type': 'ViInt16',
+                'documentation': {
+                    'description': 'Contains an array of booleans',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns an array of booleans.',
+        },
+    },
+
+    'ReturnMultipleTypes': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'aBoolean',
+                'type': 'ViBoolean',
+                'documentation': {
+                    'description': 'Contains a boolean.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'anInt32',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Contains a 32-bit integer.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'anInt64',
+                'type': 'ViInt64',
+                'documentation': {
+                    'description': 'Contains a 64-bit integer.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': 'Turtle',
+                'name': 'anIntEnum',
+                'type': 'ViInt16',
+                'documentation': {
+                    'description': 'Indicates a ninja turtle',
+                    'table_body': [['0', 'Leonardo'], ['1', 'Donatello'], ['2', 'Raphael'], ['3', 'Mich elangelo']],
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'aFloat',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'The measured value.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': 'FloatEnum',
+                'name': 'aFloatEnum',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'A float enum.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'arraySize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of measurements to acquire.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'anArray',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'An array of measurement values.',
+                    'note': 'The size must be at least arraySize.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'stringSize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of bytes allocated for aString',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'aString',
+                'type': 'ViChar',
+                'documentation': {
+                    'description': 'An IVI dance string.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns multiple types.',
+        },
+    },
+
+    'MultipleArrayTypes': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'passedInArraySize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of measurements to acquire.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'passedInArray',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'An array with size passed in.',
+                    'note': 'The size must be at least arraySize.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'aFixedArray',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'An array of doubles with fixed size.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'lenArraySize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Size of lenArray',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'lenArray',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'Contains an array of float numbers.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns multiple types of arrays.',
+        },
+    },
+
+    'ParametersAreMultipleTypes': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'aBoolean',
+                'type': 'ViBoolean',
+                'documentation': {
+                    'description': 'Contains a boolean.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'anInt32',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Contains a 32-bit integer.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'anInt64',
+                'type': 'ViInt64',
+                'documentation': {
+                    'description': 'Contains a 64-bit integer.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': 'Turtle',
+                'name': 'anIntEnum',
+                'type': 'ViInt16',
+                'documentation': {
+                    'description': 'Indicates a ninja turtle',
+                    'table_body': [['0', 'Leonardo'], ['1', 'Donatello'], ['2', 'Raphael'], ['3', 'Mich elangelo']],
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'aFloat',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'The measured value.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': 'FloatEnum',
+                'name': 'aFloatEnum',
+                'type': 'ViReal64',
+                'documentation': {
+                    'description': 'A float enum.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'stringSize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of bytes allocated for aString',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'is_buffer': True,
+                'name': 'aString',
+                'type': 'ViChar',
+                'documentation': {
+                    'description': 'An IVI dance string.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Has parameters of multiple types.',
+        },
+    },
+
+    #TODO(marcoskirsch): More cases to add:
     #     Waveforms as inputs and outputs
-    #     ... etc
 }
