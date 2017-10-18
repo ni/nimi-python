@@ -3381,7 +3381,7 @@ class _SessionBase(object):
         Returns the measured value of either the voltage or current on the
         specified output channel. Each call to this function blocks other
         function calls until the hardware returns the **measurement**. To
-        measure multiple output channels, use the measure_multiple
+        measure multiple output channels, use the MeasureMultiple
         function.
 
         Tip:
@@ -3412,39 +3412,6 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_Measure(self._vi, self._repeated_capability.encode(self._encoding), measurement_type.value, ctypes.pointer(measurement_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
-
-    def measure_multiple(self):
-        '''measure_multiple
-
-        Returns arrays of the measured voltage and current values on the
-        specified output channel(s). Each call to this function blocks other
-        function calls until the measurements are returned from the device. The
-        order of the measurements returned in the array corresponds to the order
-        on the specified output channel(s).
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nidcpower.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
-
-            session['0,1'].measure_multiple()
-
-        Returns:
-            voltage_measurements (list of float): Returns an array of voltage measurements. The measurements in the array
-                are returned in the same order as the channels specified in
-                **channelName**. Ensure that sufficient space has been allocated for the
-                returned array.
-            current_measurements (list of float): Returns an array of current measurements. The measurements in the array
-                are returned in the same order as the channels specified in
-                **channelName**. Ensure that sufficient space has been allocated for the
-                returned array.
-        '''
-        voltage_measurements_ctype = (visatype.ViReal64 * 1)()
-        current_measurements_ctype = (visatype.ViReal64 * 1)()
-        error_code = self._library.niDCPower_MeasureMultiple(self._vi, self._repeated_capability.encode(self._encoding), voltage_measurements_ctype, current_measurements_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(voltage_measurements_ctype[i]) for i in range(1)], [float(current_measurements_ctype[i]) for i in range(1)]
 
     def query_in_compliance(self):
         '''query_in_compliance

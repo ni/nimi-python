@@ -15,6 +15,17 @@ All notable changes to this project will be documented in this file.
 * ### NI-DMM
   * #### Added
   * #### Changed
+    * Removed incorrect leading underscore from some enum values:
+        * Function.AC_VOLTS_DC_COUPLED
+        * Function.WAVEFORM_CURRENT
+        * MeasurementCompleteDest.LBR_TRIG_0
+        * OperationMode.IVIDMM_MODE
+        * SampleTrigger.EXTERNAL
+        * SampleTrigger.TTL_3
+        * TriggerSource.TTL_0
+        * TriggerSource.TTL_3
+        * TriggerSource.TTL_7
+        * TriggerSource.PXI_STAR
   * #### Removed
 * ### NI-ModInst
   * #### Added
@@ -24,10 +35,12 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
   * #### Removed
+    * Support for is_debounced and is_scanning functions. Instead use the attribute of the same name.
 * ### NI-DCPower
  * #### Added
  * #### Changed
  * #### Removed
+   * Support for measure_multiple until issue #444 is addressed.
 * ### NI-FGEN
  * #### Added
   * Initial release
