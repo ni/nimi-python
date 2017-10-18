@@ -63,7 +63,7 @@ def test_read_current_temperature(session):
 
 
 def test_reset_device():
-    # TODO(frank): self_test does not work with simulated PXIe-4162 modules due to internal NI bug.
+    # TODO(frank): reset_device does not work with simulated PXIe-4162 modules due to internal NI bug.
     # Update to use the session created with 'session' function above after internal NI bug is fixed.
     with nidcpower.Session('', '', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
         channel = session['0']
