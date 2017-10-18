@@ -9,22 +9,56 @@ import warnings
 from mock import ANY
 from mock import patch
 
-SESSION_NUM_FOR_TEST = 42
+# Matching classes for setting mock expectations:
 
-class Matcher:
-    def __init__(self, visa_type, value):
-        self.visa_type = visa_type
-        self.value = value
+class ScalarMatcher(object):
+    def __init__(self, expected_type, expected_value):
+        self.expected_type = expected_type
+        self.expected_value = expected_value
+    def __repr__(self):
+        return 'Matcher({0}, {1})'.format(self.expected_type, self.expected_value)
     def __eq__(self, other):
-        if not isinstance(other, self.visa_type):
-            print("Types don't match {0} {1}".format(self.visa_type, type(other)))
+        if not isinstance(other, self.expected_type):
+            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
             return False
-        if other.value == self.value:
-            print("Match!")
+        if other.value == self.expected_value:
             return True
         else:
-            print("No match! {0} {1}".format(other.value, self.value))
+            print("Unexpected value. Expected: {0}. Received: {1}".format(self.expected_value, other.value))
         return
+
+class StringMatcher(object):
+    def __init__(self, expected_string_value):
+        self.expected_string_value = expected_string_value
+    def __eq__(self, other):
+        if not isinstance(other, ctypes.Array):
+            print("Unexpected type. Expected: {0}. Received: {1}".format(ctypes.Array, type(other)))
+            return False
+        if len(other) < len(self.expected_string_value) + 1:  # +1 for NULL terminating character
+            print("Unexpected length in C string. Expected at least: {0}. Received {1}".format(len(other), len(self.expected_string_value) + 1))
+            return False
+        if other.value.decode("ascii") == self.expected_string_value:
+            return True
+        else:
+            print("Unexpected value. Expected {0}. Received: {1}".format(self.expected_string_value, other.value.decode))
+        return
+
+class AnyPointerToType(object):
+    def __init__(self, expected_type):
+        self.expected_type = expected_type
+    def __eq__(self, other):
+        if not isinstance(other, ctypes.POINTER(self.expected_type)):
+            print("Unexpected type. Expected: {0}. Received: {1}".format(ctypes.POINTER(self.expected_type), type(other)))
+            return False
+        return True
+
+class BooleanMatcher(ScalarMatcher):
+    def __init__(self, expected_value):
+        ScalarMatcher.__init__(self, visatype.ViBoolean, 1 if expected_value is True else False)
+
+# Tests
+
+SESSION_NUM_FOR_TEST = 42
 
 class TestSession(object):
 
@@ -54,19 +88,13 @@ class TestSession(object):
         patched_errors._is_error.return_value = 0
 
         session = nifake.Session('dev1')
-        a = ctypes.create_string_buffer(b'dev1')  # (visatype.ViChar * 4)(b'dev1')
-        b = Matcher(visatype.ViBoolean, 0)
-        c = Matcher(visatype.ViBoolean, 0)
-        d = ctypes.create_string_buffer(b'')
-        e = ANY
-
-        self.patched_library.niFake_InitWithOptions.assert_called_once_with(ANY, b, c, ANY, e)
-        #self.patched_library.niFake_InitWithOptions.assert_called_once_with(a, b, c, d, e)
+        self.patched_library.niFake_InitWithOptions.assert_called_once_with(StringMatcher('dev1'), BooleanMatcher(False), BooleanMatcher(False), StringMatcher(''), AnyPointerToType(visatype.ViSession))
         patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False, is_error_handling=False)
         session.close()
-        self.patched_library.niFake_close.assert_called_once_with(Matcher(visatype.ViSession, SESSION_NUM_FOR_TEST))
+        self.patched_library.niFake_close.assert_called_once_with(ScalarMatcher(visatype.ViSession, SESSION_NUM_FOR_TEST))
 
         errors_patcher.stop()
+
     '''
     def test_init_with_options_nondefault_and_close(self):
         session = nifake.Session('FakeDevice', True, True, 'Some string')
