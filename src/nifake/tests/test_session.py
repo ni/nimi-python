@@ -765,12 +765,14 @@ class TestSession(object):
             try:
                 session.nonexistent_property = 5
                 assert False
-            except TypeError as e:
+            except AttributeError as e:
+                assert str(e) == "'Session' object has no attribute 'nonexistent_property'"
                 pass
             try:
                 value = session.nonexistent_property  # noqa: F841
                 assert False
             except AttributeError as e:
+                assert str(e) == "'Session' object has no attribute 'nonexistent_property'"
                 pass
 
     def test_set_enum_attribute_int32_error(self):
