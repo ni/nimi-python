@@ -214,7 +214,7 @@ class Function(Enum):
     '''
     NI 4065, and NI 4070/4071/4072 supported.
     '''
-    _AC_VOLTS_DC_COUPLED = 1001
+    AC_VOLTS_DC_COUPLED = 1001
     '''
     NI 4070/4071/4072 supported.
     '''
@@ -226,7 +226,7 @@ class Function(Enum):
     '''
     NI 4070/4071/4072 supported.
     '''
-    _WAVEFORM_CURRENT = 1004
+    WAVEFORM_CURRENT = 1004
     '''
     NI 4070/4071/4072 supported.
     '''
@@ -313,7 +313,7 @@ class MeasurementCompleteDest(Enum):
     '''
     PXI Trigger Line 7
     '''
-    _LBR_TRIG_0 = 1003
+    LBR_TRIG_0 = 1003
     '''
     Local Bus Right Trigger Line 0 of PXI/SCXI combination chassis
     '''
@@ -342,7 +342,7 @@ class OffsetCompensatedOhms(Enum):
 
 
 class OperationMode(Enum):
-    _IVIDMM_MODE = 0
+    IVIDMM_MODE = 0
     '''
     Single or multipoint measurements: When the Trigger Count and Sample
     Count properties are both set to 1, the NI 4065, NI 4070/4071/4072, and
@@ -415,7 +415,7 @@ class SampleTrigger(Enum):
     '''
     No trigger specified
     '''
-    _EXTERNAL = 2
+    EXTERNAL = 2
     '''
     Pin 9 on the AUX Connector
     '''
@@ -440,7 +440,7 @@ class SampleTrigger(Enum):
     '''
     PXI Trigger Line 2
     '''
-    _TTL_3 = 114
+    TTL_3 = 114
     '''
     PXI Trigger Line 3
     '''
@@ -581,7 +581,7 @@ class TriggerSource(Enum):
     Waits until `niDMM Send Software
     Trigger <dmmviref.chm::/niDMM_Send_Software_Trigger.html>`__ is called.
     '''
-    _TTL_0 = 111
+    TTL_0 = 111
     '''
     PXI Trigger Line 0
     '''
@@ -593,7 +593,7 @@ class TriggerSource(Enum):
     '''
     PXI Trigger Line 2
     '''
-    _TTL_3 = 114
+    TTL_3 = 114
     '''
     PXI Trigger Line 3
     '''
@@ -609,11 +609,11 @@ class TriggerSource(Enum):
     '''
     PXI Trigger Line 6
     '''
-    _TTL_7 = 118
+    TTL_7 = 118
     '''
     PXI Trigger Line 7
     '''
-    _PXI_STAR = 131
+    PXI_STAR = 131
     '''
     PXI Star Trigger Line
     '''
