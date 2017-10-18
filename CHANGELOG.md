@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
  * #### Added
  * #### Changed
  * #### Removed
+   * Support for measure_multiple.
 * ### NI-FGEN
  * #### Added
   * Initial release
