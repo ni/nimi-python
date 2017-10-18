@@ -191,9 +191,9 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
+        except errors.Error as e:
+            self._${config['session_handle_parameter_name']} = 0
+            raise
         self._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''

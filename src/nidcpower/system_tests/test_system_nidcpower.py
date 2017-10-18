@@ -43,6 +43,61 @@ def test_get_error(session):
         assert e.description.find('Attribute is read-only.') != -1
 
 
+def test_get_self_cal_last_date_and_time(session):
+    year, month, day, hour, minute = session.get_self_cal_last_date_and_time()
+    assert year == 1940
+    assert month == 3
+    assert day == 1
+    assert hour == 0
+    assert minute == 0
+
+
+def test_get_self_cal_last_temp(session):
+    temperature = session.get_self_cal_last_temp()
+    assert temperature == 25.0
+
+
+def test_read_current_temperature(session):
+    temperature = session.read_current_temperature()
+    assert temperature == 25.0
+
+
+def test_reset_device():
+    # TODO(frank): self_test does not work with simulated PXIe-4162 modules due to internal NI bug.
+    # Update to use the session created with 'session' function above after internal NI bug is fixed.
+    with nidcpower.Session('', '', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
+        channel = session['0']
+        default_output_function = channel.output_function
+        assert default_output_function == nidcpower.OutputFunction.DC_VOLTAGE
+        channel.output_function = nidcpower.OutputFunction.DC_CURRENT
+        session.reset_device()
+        function_after_reset = channel.output_function
+        assert function_after_reset == default_output_function
+
+
+def test_reset_with_default(session):
+    channel = session['0']
+    assert channel.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
+    channel.aperture_time_units == nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES
+    session.reset_with_defaults()
+    assert channel.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
+
+
+def test_reset(session):
+    channel = session['0']
+    assert channel.output_enabled is True
+    channel.output_enabled = False
+    session.reset()
+    assert channel.output_enabled is True
+
+
+def test_disable(session):
+    channel = session['0']
+    assert channel.output_enabled is True
+    session.disable()
+    assert channel.output_enabled is False
+
+
 def test_measure():
     with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
         session.source_mode = nidcpower.SourceMode.SINGLE_POINT

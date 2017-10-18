@@ -407,15 +407,19 @@ def get_function_docstring(fname, config, indent=0):
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
-        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], _format_type_for_docstring(p, config))
-        docstring += get_documentation_for_node_docstring(p, config, indent + 8)
+        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, config))
+        ds = get_documentation_for_node_docstring(p, config, indent + 8)
+        if len(ds) > 0:
+            docstring += ' ' + ds
 
     output_params = filter_parameters(function, ParameterUsageOptions.OUTPUT_PARAMETERS)
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], _format_type_for_docstring(p, config))
-            docstring += get_documentation_for_node_docstring(p, config, indent + 8)
+            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, config))
+            ds = get_documentation_for_node_docstring(p, config, indent + 8)
+            if len(ds) > 0:
+                docstring += ' ' + ds
 
     return docstring
 

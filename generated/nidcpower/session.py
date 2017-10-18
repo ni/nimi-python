@@ -3347,7 +3347,7 @@ class _SessionBase(object):
           **vi** is an invalid session, the function does nothing and returns an
           error. Normally, the error information describes the first error that
           occurred since the user last called _get_error or
-          clear_error.
+          ClearError.
 
         Args:
             buffer_size (int): Specifies the number of bytes in the ViChar array you specify for
@@ -3455,15 +3455,15 @@ class _SessionBase(object):
         The compliance limit is the current limit when the output function is
         set to NIDCPOWER_VAL_DC_VOLTAGE. If the output is operating at the
         compliance limit, the output reaches the current limit before the
-        desired voltage level. Refer to the configure_output_function
-        function and the configure_current_limit function for more
+        desired voltage level. Refer to the ConfigureOutputFunction
+        function and the ConfigureCurrentLimit function for more
         information about output function and current limit, respectively.
 
         The compliance limit is the voltage limit when the output function is
         set to NIDCPOWER_VAL_DC_CURRENT. If the output is operating at the
         compliance limit, the output reaches the voltage limit before the
-        desired current level. Refer to the configure_output_function
-        function and the configure_voltage_limit function for more
+        desired current level. Refer to the ConfigureOutputFunction
+        function and the ConfigureVoltageLimit function for more
         information about output function and voltage limit, respectively.
 
         **Related Topics:**
@@ -3967,9 +3967,9 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
+        except errors.Error as e:
+            self._vi = 0
+            raise
         self._vi = 0
 
     ''' These are code-generated '''
@@ -3984,7 +3984,7 @@ class Session(_SessionBase):
         when you call the _abort function, the output channels remain
         in their current state and continue providing power.
 
-        Use the configure_output_enabled function to disable power
+        Use the ConfigureOutputEnabled function to disable power
         output on a per channel basis. Use the reset function to
         disable output on all channels.
 
@@ -4823,7 +4823,7 @@ class Session(_SessionBase):
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
         function, the output channels remain in their existing state and
-        continue providing power. Use the configure_output_enabled
+        continue providing power. Use the ConfigureOutputEnabled
         function to disable power output on a per channel basis. Use the
         reset function to disable power output on all channel(s).
 
