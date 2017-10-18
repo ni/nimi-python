@@ -73,12 +73,6 @@ class SideEffectsHelper(object):
         self._defaults['InitWithTopology']['vi'] = None
         self._defaults['InitiateScan'] = {}
         self._defaults['InitiateScan']['return'] = 0
-        self._defaults['IsDebounced'] = {}
-        self._defaults['IsDebounced']['return'] = 0
-        self._defaults['IsDebounced']['isDebounced'] = None
-        self._defaults['IsScanning'] = {}
-        self._defaults['IsScanning']['return'] = 0
-        self._defaults['IsScanning']['isScanning'] = None
         self._defaults['RelayControl'] = {}
         self._defaults['RelayControl']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -287,22 +281,6 @@ class SideEffectsHelper(object):
             return self._defaults['InitiateScan']['return']
         return self._defaults['InitiateScan']['return']
 
-    def niSwitch_IsDebounced(self, vi, is_debounced):  # noqa: N802
-        if self._defaults['IsDebounced']['return'] != 0:
-            return self._defaults['IsDebounced']['return']
-        if self._defaults['IsDebounced']['isDebounced'] is None:
-            raise MockFunctionCallError("niSwitch_IsDebounced", param='isDebounced')
-        is_debounced.contents.value = self._defaults['IsDebounced']['isDebounced']
-        return self._defaults['IsDebounced']['return']
-
-    def niSwitch_IsScanning(self, vi, is_scanning):  # noqa: N802
-        if self._defaults['IsScanning']['return'] != 0:
-            return self._defaults['IsScanning']['return']
-        if self._defaults['IsScanning']['isScanning'] is None:
-            raise MockFunctionCallError("niSwitch_IsScanning", param='isScanning')
-        is_scanning.contents.value = self._defaults['IsScanning']['isScanning']
-        return self._defaults['IsScanning']['return']
-
     def niSwitch_RelayControl(self, vi, relay_name, relay_action):  # noqa: N802
         if self._defaults['RelayControl']['return'] != 0:
             return self._defaults['RelayControl']['return']
@@ -455,10 +433,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_InitWithTopology.return_value = 0
         mock_library.niSwitch_InitiateScan.side_effect = MockFunctionCallError("niSwitch_InitiateScan")
         mock_library.niSwitch_InitiateScan.return_value = 0
-        mock_library.niSwitch_IsDebounced.side_effect = MockFunctionCallError("niSwitch_IsDebounced")
-        mock_library.niSwitch_IsDebounced.return_value = 0
-        mock_library.niSwitch_IsScanning.side_effect = MockFunctionCallError("niSwitch_IsScanning")
-        mock_library.niSwitch_IsScanning.return_value = 0
         mock_library.niSwitch_RelayControl.side_effect = MockFunctionCallError("niSwitch_RelayControl")
         mock_library.niSwitch_RelayControl.return_value = 0
         mock_library.niSwitch_ResetWithDefaults.side_effect = MockFunctionCallError("niSwitch_ResetWithDefaults")
