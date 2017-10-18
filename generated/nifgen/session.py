@@ -2195,7 +2195,7 @@ class _SessionBase(object):
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
-            raise TypeError("%r is a frozen class" % self)
+            raise AttributeError("'Session' object has no attribute %r" % key)
         object.__setattr__(self, key, value)
 
     def _get_error_description(self, error_code):
