@@ -822,7 +822,7 @@ Properties <switchpropref.chm::/cniSwitch.html>`__
     },
     1150018: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Channel Configuration:Analog Bus Sharing Enable',
         'name': 'ANALOG_BUS_SHARING_ENABLE',
@@ -866,7 +866,7 @@ Refer to the device documentation for more information.
     },
     1250001: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Channel Configuration:Is Source Channel',
         'name': 'IS_SOURCE_CHANNEL',
@@ -916,7 +916,7 @@ Time <SWITCH.chm::/settling_time.html>`__
     },
     1250003: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Channel Configuration:Is Configuration Channel',
         'name': 'IS_CONFIGURATION_CHANNEL',
@@ -947,7 +947,7 @@ Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
     },
     1250004: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Settling Time',
         'name': 'SETTLING_TIME',
@@ -968,7 +968,7 @@ Time <SWITCH.chm::/settling_time.html>`__
     },
     1250005: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Bandwidth',
         'name': 'BANDWIDTH',
@@ -988,7 +988,7 @@ Considerations <SWITCH.chm::/rf.html>`__
     },
     1250006: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Maximum DC Voltage',
         'name': 'MAX_DC_VOLTAGE',
@@ -1007,7 +1007,7 @@ Returns the maximum DC voltage the channel can switch in volts.
     },
     1250007: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Maximum AC Voltage',
         'name': 'MAX_AC_VOLTAGE',
@@ -1026,7 +1026,7 @@ Returns the maximum AC voltage the channel can switch in volts RMS.
     },
     1250008: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Maximum Switching DC Current',
         'name': 'MAX_SWITCHING_DC_CURRENT',
@@ -1045,7 +1045,7 @@ Current <SWITCH.chm::/switching_current.html>`__
     },
     1250009: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Maximum Switching AC Current',
         'name': 'MAX_SWITCHING_AC_CURRENT',
@@ -1064,7 +1064,7 @@ Current <SWITCH.chm::/switching_current.html>`__
     },
     1250010: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Maximum Carry DC Current',
         'name': 'MAX_CARRY_DC_CURRENT',
@@ -1083,7 +1083,7 @@ Returns the maximum DC current the channel can carry in amperes.
     },
     1250011: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Maximum Carry AC Current',
         'name': 'MAX_CARRY_AC_CURRENT',
@@ -1102,7 +1102,7 @@ Returns the maximum AC current the channel can carry in amperes RMS.
     },
     1250012: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Maximum Switching DC Power',
         'name': 'MAX_SWITCHING_DC_POWER',
@@ -1121,7 +1121,7 @@ Power <SWITCH.chm::/switching_power.html>`__
     },
     1250013: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Maximum Switching AC Power',
         'name': 'MAX_SWITCHING_AC_POWER',
@@ -1140,7 +1140,7 @@ Power <SWITCH.chm::/switching_power.html>`__
     },
     1250014: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Maximum Carry DC Power',
         'name': 'MAX_CARRY_DC_POWER',
@@ -1159,7 +1159,7 @@ Returns the maximum DC power the channel can carry in watts.
     },
     1250015: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Maximum Carry AC Power',
         'name': 'MAX_CARRY_AC_POWER',
@@ -1178,7 +1178,7 @@ Returns the maximum AC power the channel can carry in volt-amperes.
     },
     1250016: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Characteristic Impedance',
         'name': 'CHARACTERISTIC_IMPEDANCE',
@@ -1199,7 +1199,7 @@ Considerations <SWITCH.chm::/rf.html>`__
     },
     1250017: {
         'access': 'read only',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Module Characteristics:Wire mode',
         'name': 'WIRE_MODE',

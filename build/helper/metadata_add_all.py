@@ -2,6 +2,7 @@
 
 from .helper import camelcase_to_snakecase
 from .helper import get_python_type_for_visa_type
+from .metadata_filters import filter_codegen_functions
 
 import copy
 import pprint
@@ -158,8 +159,7 @@ def _add_is_session_handle(parameter):
 
 def add_all_function_metadata(functions, config):
     '''Adds all codegen-specific metada to the function metadata list'''
-    # for f in {k: v for k, v in functions.items() if v['codegen_method'] != 'no'}:
-    for f in functions:
+    for f in filter_codegen_functions(functions):
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])

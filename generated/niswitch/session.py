@@ -42,6 +42,15 @@ class _SessionBase(object):
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Using the
     Analog Bus on an NI SwitchBlock
     Carrier <switch.chm::/SwitchBlock_analog_bus_reservation.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    analog_bus_sharing_enable.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    analog_bus_sharing_enable.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].analog_bus_sharing_enable = var
+        var = session['0,1'].analog_bus_sharing_enable
     '''
     bandwidth = attributes.AttributeViReal64(1250005)
     '''
@@ -52,6 +61,15 @@ class _SessionBase(object):
     `Bandwidth and Insertion Loss <SWITCH.chm::/bandwidth.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
     Considerations <SWITCH.chm::/rf.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    bandwidth.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    bandwidth.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].bandwidth = var
+        var = session['0,1'].bandwidth
     '''
     cabled_module_scan_advanced_bus = attributes.AttributeViInt32(1150009)
     '''
@@ -105,6 +123,15 @@ class _SessionBase(object):
     Impedance <SWITCH.chm::/characteristic_impedance.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
     Considerations <SWITCH.chm::/rf.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    characteristic_impedance.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    characteristic_impedance.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].characteristic_impedance = var
+        var = session['0,1'].characteristic_impedance
     '''
     continuous_scan = attributes.AttributeViBoolean(1150002)
     '''
@@ -275,6 +302,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
     Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    is_configuration_channel.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    is_configuration_channel.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].is_configuration_channel = var
+        var = session['0,1'].is_configuration_channel
     '''
     is_debounced = attributes.AttributeViBoolean(1250002)
     '''
@@ -315,6 +351,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
     Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    is_source_channel.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    is_source_channel.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].is_source_channel = var
+        var = session['0,1'].is_source_channel
     '''
     is_waiting_for_trig = attributes.AttributeViBoolean(1150004)
     '''
@@ -374,6 +419,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_ac_voltage.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_ac_voltage.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_ac_voltage = var
+        var = session['0,1'].max_ac_voltage
     '''
     max_carry_ac_current = attributes.AttributeViReal64(1250011)
     '''
@@ -383,6 +437,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_ac_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_ac_current.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_carry_ac_current = var
+        var = session['0,1'].max_carry_ac_current
     '''
     max_carry_ac_power = attributes.AttributeViReal64(1250015)
     '''
@@ -392,6 +455,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_ac_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_ac_power.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_carry_ac_power = var
+        var = session['0,1'].max_carry_ac_power
     '''
     max_carry_dc_current = attributes.AttributeViReal64(1250010)
     '''
@@ -401,6 +473,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_dc_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_dc_current.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_carry_dc_current = var
+        var = session['0,1'].max_carry_dc_current
     '''
     max_carry_dc_power = attributes.AttributeViReal64(1250014)
     '''
@@ -410,6 +491,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_carry_dc_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_carry_dc_power.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_carry_dc_power = var
+        var = session['0,1'].max_carry_dc_power
     '''
     max_dc_voltage = attributes.AttributeViReal64(1250006)
     '''
@@ -419,6 +509,15 @@ class _SessionBase(object):
 
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_dc_voltage.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_dc_voltage.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_dc_voltage = var
+        var = session['0,1'].max_dc_voltage
     '''
     max_switching_ac_current = attributes.AttributeViReal64(1250009)
     '''
@@ -428,6 +527,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Current <SWITCH.chm::/switching_current.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_ac_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_ac_current.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_switching_ac_current = var
+        var = session['0,1'].max_switching_ac_current
     '''
     max_switching_ac_power = attributes.AttributeViReal64(1250013)
     '''
@@ -437,6 +545,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Power <SWITCH.chm::/switching_power.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_ac_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_ac_power.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_switching_ac_power = var
+        var = session['0,1'].max_switching_ac_power
     '''
     max_switching_dc_current = attributes.AttributeViReal64(1250008)
     '''
@@ -446,6 +563,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Current <SWITCH.chm::/switching_current.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_dc_current.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_dc_current.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_switching_dc_current = var
+        var = session['0,1'].max_switching_dc_current
     '''
     max_switching_dc_power = attributes.AttributeViReal64(1250012)
     '''
@@ -455,6 +581,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Power <SWITCH.chm::/switching_power.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    max_switching_dc_power.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    max_switching_dc_power.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].max_switching_dc_power = var
+        var = session['0,1'].max_switching_dc_power
     '''
     number_of_relays = attributes.AttributeViInt32(1150014)
     '''
@@ -697,6 +832,15 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Settling
     Time <SWITCH.chm::/settling_time.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    settling_time.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    settling_time.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].settling_time = var
+        var = session['0,1'].settling_time
     '''
     simulate = attributes.AttributeViBoolean(1050005)
     '''
@@ -827,6 +971,15 @@ class _SessionBase(object):
 
     `N-Wire Switching Modes <SWITCH.chm::/xwire.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    Tip:
+    This property can use repeated capabilities (usually channels). If set or get directly on the
+    wire_mode.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    wire_mode.Session instance, and calling set/get value on the result.:
+
+        session['0,1'].wire_mode = var
+        var = session['0,1'].wire_mode
     '''
 
     def __init__(self, repeated_capability):
@@ -1097,6 +1250,55 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    def _get_error(self):
+        '''_get_error
+
+        This function retrieves and then clears the IVI error information for
+        the session or the current execution thread. One exception exists: If
+        the buffer_size parameter is 0, the function does not clear the error
+        information. By passing 0 for the buffer size, the caller can ascertain
+        the buffer size required to get the entire error description string and
+        then call the function again with a sufficiently large buffer. If the
+        user specifies a valid IVI session for the InstrumentHandle parameter,
+        Get Error retrieves and then clears the error information for the
+        session. If the user passes VI_NULL for the InstrumentHandle parameter,
+        this function retrieves and then clears the error information for the
+        current execution thread. If the InstrumentHandle parameter is an
+        invalid session, the function does nothing and returns an error.
+        Normally, the error information describes the first error that occurred
+        since the user last called _get_error or ClearError.
+
+        Args:
+            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
+                Description parameter. If the error description, including the
+                terminating NUL byte, contains more bytes than you indicate in this
+                parameter, the function copies buffer_size - 1 bytes into the buffer,
+                places an ASCII NUL byte at the end of the buffer, and returns the
+                buffer size you must pass to get the entire value. For example, if the
+                value is "123456" and the Buffer Size is 4, the function places "123"
+                into the buffer and returns 7. If you pass a negative number, the
+                function copies the value to the buffer regardless of the number of
+                bytes in the value. If you pass 0, you can pass VI_NULL for the
+                Description buffer parameter. Default Value: None
+
+        Returns:
+            code (int): Returns the error code for the session or execution thread. If you pass
+                0 for the Buffer Size, you can pass VI_NULL for this parameter.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        code_ctype = visatype.ViStatus()  # case 11
+        buffer_size_ctype = visatype.ViInt32(0)  # case 5
+        description_ctype = None  # case 9
+        buffer_size = 0
+        description_ctype = None
+        error_code = self._library.niSwitch_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        buffer_size = error_code
+        description_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niSwitch_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
+
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -1357,6 +1559,29 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def _error_message(self, error_code):
+        '''_error_message
+
+        Converts an error code returned by NI-SWITCH into a user-readable
+        string. Generally this information is supplied in error out of any
+        NI-SWITCH VI. Use _error_message for a static lookup of an
+        error code description.
+
+        Args:
+            error_code (int): Status code returned by any NI-SWITCH function. Default Value: 0
+                (VI_SUCCESS)
+
+        Returns:
+            error_message (string): The error information formatted into a string. You must pass a ViChar
+                array with at least 256 bytes.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code_ctype = visatype.ViStatus(error_code)  # case 6
+        error_message_ctype = (visatype.ViChar * 256)()  # case 8
+        error_code = self._library.niSwitch_error_message(vi_ctype, error_code_ctype, error_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_message_ctype.value.decode(self._encoding)
+
 
 class _RepeatedCapability(_SessionBase):
     '''Allows for setting/getting properties and calling methods for specific repeated capabilities (such as channels) on your session.'''
@@ -1392,9 +1617,9 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
+        except errors.Error as e:
+            self._vi = 0
+            raise
         self._vi = 0
 
     ''' These are code-generated '''
@@ -1734,55 +1959,6 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_buffer_ctype.value.decode(self._encoding)
-
-    def _get_error(self):
-        '''_get_error
-
-        This function retrieves and then clears the IVI error information for
-        the session or the current execution thread. One exception exists: If
-        the buffer_size parameter is 0, the function does not clear the error
-        information. By passing 0 for the buffer size, the caller can ascertain
-        the buffer size required to get the entire error description string and
-        then call the function again with a sufficiently large buffer. If the
-        user specifies a valid IVI session for the InstrumentHandle parameter,
-        Get Error retrieves and then clears the error information for the
-        session. If the user passes VI_NULL for the InstrumentHandle parameter,
-        this function retrieves and then clears the error information for the
-        current execution thread. If the InstrumentHandle parameter is an
-        invalid session, the function does nothing and returns an error.
-        Normally, the error information describes the first error that occurred
-        since the user last called _get_error or clear_error.
-
-        Args:
-            buffer_size (int): Pass the number of bytes in the ViChar array you specify for the
-                Description parameter. If the error description, including the
-                terminating NUL byte, contains more bytes than you indicate in this
-                parameter, the function copies buffer_size - 1 bytes into the buffer,
-                places an ASCII NUL byte at the end of the buffer, and returns the
-                buffer size you must pass to get the entire value. For example, if the
-                value is "123456" and the Buffer Size is 4, the function places "123"
-                into the buffer and returns 7. If you pass a negative number, the
-                function copies the value to the buffer regardless of the number of
-                bytes in the value. If you pass 0, you can pass VI_NULL for the
-                Description buffer parameter. Default Value: None
-
-        Returns:
-            code (int): Returns the error code for the session or execution thread. If you pass
-                0 for the Buffer Size, you can pass VI_NULL for this parameter.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        code_ctype = visatype.ViStatus()  # case 11
-        buffer_size_ctype = visatype.ViInt32(0)  # case 5
-        description_ctype = None  # case 9
-        buffer_size = 0
-        description_ctype = None
-        error_code = self._library.niSwitch_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        description_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niSwitch_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
     def get_path(self, channel1, channel2):
         '''get_path
@@ -2147,7 +2323,7 @@ class Session(_SessionBase):
 
         Returns:
             vi (int): A particular NI-SWITCH session established with
-                init_with_topology, init_with_options, or init
+                init_with_topology, InitWithOptions, or init
                 and used for all subsequent NI-SWITCH calls.
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
@@ -2413,35 +2589,12 @@ class Session(_SessionBase):
         deallocates any memory resources the driver uses. Notes: (1) You must
         unlock the session before calling _close. (2) After calling
         _close, you cannot use the instrument driver again until you
-        call init or init_with_options.
+        call init or InitWithOptions.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code = self._library.niSwitch_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def _error_message(self, error_code):
-        '''_error_message
-
-        Converts an error code returned by NI-SWITCH into a user-readable
-        string. Generally this information is supplied in error out of any
-        NI-SWITCH VI. Use _error_message for a static lookup of an
-        error code description.
-
-        Args:
-            error_code (int): Status code returned by any NI-SWITCH function. Default Value: 0
-                (VI_SUCCESS)
-
-        Returns:
-            error_message (string): The error information formatted into a string. You must pass a ViChar
-                array with at least 256 bytes.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code_ctype = visatype.ViStatus(error_code)  # case 6
-        error_message_ctype = (visatype.ViChar * 256)()  # case 8
-        error_code = self._library.niSwitch_error_message(vi_ctype, error_code_ctype, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
 
     def reset(self):
         '''reset

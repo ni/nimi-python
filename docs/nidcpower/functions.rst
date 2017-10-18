@@ -966,7 +966,7 @@ nidcpower.Session methods
         +--------------------------------------+------------------------------+
 
 
-    :type measurement_type: int
+    :type measurement_type: :py:data:`nidcpower.MeasurementTypes`
 
     :rtype: float
     :return:
@@ -1035,15 +1035,15 @@ nidcpower.Session methods
     The compliance limit is the current limit when the output function is
     set to NIDCPOWER\_VAL\_DC\_VOLTAGE. If the output is operating at the
     compliance limit, the output reaches the current limit before the
-    desired voltage level. Refer to the :py:func:`nidcpower.configure_output_function`
-    function and the :py:func:`nidcpower.configure_current_limit` function for more
+    desired voltage level. Refer to the :py:func:`nidcpower.ConfigureOutputFunction`
+    function and the :py:func:`nidcpower.ConfigureCurrentLimit` function for more
     information about output function and current limit, respectively.
 
     The compliance limit is the voltage limit when the output function is
     set to NIDCPOWER\_VAL\_DC\_CURRENT. If the output is operating at the
     compliance limit, the output reaches the voltage limit before the
-    desired current level. Refer to the :py:func:`nidcpower.configure_output_function`
-    function and the :py:func:`nidcpower.configure_voltage_limit` function for more
+    desired current level. Refer to the :py:func:`nidcpower.ConfigureOutputFunction`
+    function and the :py:func:`nidcpower.ConfigureVoltageLimit` function for more
     information about output function and voltage limit, respectively.
 
     **Related Topics:**
@@ -1228,7 +1228,7 @@ nidcpower.Session methods
         +-----------------------------------------------+-------------------------------------------------------------------+
 
 
-    :type output_state: int
+    :type output_state: :py:data:`nidcpower.OutputStates`
 
     :rtype: bool
     :return:
