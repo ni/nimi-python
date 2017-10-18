@@ -471,7 +471,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function._AC_VOLTS_DC_COUPLED
+    .. py:attribute:: nidmm.Function.AC_VOLTS_DC_COUPLED
 
 
 
@@ -501,7 +501,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.Function._WAVEFORM_CURRENT
+    .. py:attribute:: nidmm.Function.WAVEFORM_CURRENT
 
 
 
@@ -702,7 +702,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.MeasurementCompleteDest._LBR_TRIG_0
+    .. py:attribute:: nidmm.MeasurementCompleteDest.LBR_TRIG_0
 
 
 
@@ -761,7 +761,7 @@ Enums used in NI-DMM
 
 .. py:data:: OperationMode
 
-    .. py:attribute:: nidmm.OperationMode._IVIDMM_MODE
+    .. py:attribute:: nidmm.OperationMode.IVIDMM_MODE
 
 
 
@@ -918,7 +918,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger._EXTERNAL
+    .. py:attribute:: nidmm.SampleTrigger.EXTERNAL
 
 
 
@@ -979,7 +979,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.SampleTrigger._TTL_3
+    .. py:attribute:: nidmm.SampleTrigger.TTL_3
 
 
 
@@ -1300,7 +1300,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource._TTL_0
+    .. py:attribute:: nidmm.TriggerSource.TTL_0
 
 
 
@@ -1330,7 +1330,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource._TTL_3
+    .. py:attribute:: nidmm.TriggerSource.TTL_3
 
 
 
@@ -1370,7 +1370,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource._TTL_7
+    .. py:attribute:: nidmm.TriggerSource.TTL_7
 
 
 
@@ -1380,7 +1380,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.TriggerSource._PXI_STAR
+    .. py:attribute:: nidmm.TriggerSource.PXI_STAR
 
 
 
