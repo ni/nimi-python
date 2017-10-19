@@ -193,7 +193,7 @@ def test_query_min_current_limit():
         assert min_current_limit_in_range is True
 
 
-# TODO: create_advanced_sequence doesn't work because of #505
+# TODO(marcoskirsch): create_advanced_sequence doesn't work because of #505
 '''
 def test_create_advanced_sequence():
     with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
@@ -201,7 +201,7 @@ def test_create_advanced_sequence():
         session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
 '''
 
-# TODO: set_sequence doesn't work because of #505
+# TODO(marcoskirsch): set_sequence doesn't work because of #505
 '''
 def test_set_sequence_default_source_delays():
     with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
@@ -224,10 +224,12 @@ def test_set_sequence_with_too_few_source_delays():
         session.set_sequence([0.1, 0.2, 0.3, 0.4], [0.001, 0.002, 0.003, 0.004])
 '''
 
+
 def test_wait_for_event_default_timeout():
     with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
         with session.initiate():
             session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE)
+
 
 def test_wait_for_event_with_timeout():
     with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
