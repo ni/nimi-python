@@ -1,6 +1,7 @@
 # This file was generated
 
 import ctypes
+import numpy
 import threading
 
 from nidmm.visatype import *  # noqa: F403,H303
@@ -34,6 +35,7 @@ class Library(object):
         self.niDMM_Fetch_cfunc = None
         self.niDMM_FetchMultiPoint_cfunc = None
         self.niDMM_FetchWaveform_cfunc = None
+        self.niDMM_FetchWaveform_numpy_cfunc = None
         self.niDMM_GetApertureTimeInfo_cfunc = None
         self.niDMM_GetAttributeViBoolean_cfunc = None
         self.niDMM_GetAttributeViInt32_cfunc = None
@@ -215,6 +217,14 @@ class Library(object):
                 self.niDMM_FetchWaveform_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDMM_FetchWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_FetchWaveform_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
+
+    def niDMM_FetchWaveform_numpy(self, vi, maximum_time, array_size, waveform_array, actual_number_of_points):  # noqa: N802
+        with self._func_lock:
+            if self.niDMM_FetchWaveform_numpy_cfunc is None:
+                self.niDMM_FetchWaveform_numpy_cfunc = self._library.niDMM_FetchWaveform
+                self.niDMM_FetchWaveform_numpy_cfunc.argtypes = [ViSession, ViInt32, ViInt32, numpy.ctypeslib.ndpointer(dtype=numpy.float64, flags=('C', 'W')), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDMM_FetchWaveform_numpy_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDMM_FetchWaveform_numpy_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
 
     def niDMM_GetApertureTimeInfo(self, vi, aperture_time, aperture_time_units):  # noqa: N802
         with self._func_lock:
