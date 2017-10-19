@@ -87,7 +87,7 @@ niswitch.Session methods
     semi-colons. For example, the following scan list will scan the first
     three channels of a multiplexer: com0->ch0; com0->ch1; com0->ch2; Refer
     to Scan Lists for more information on scan list syntax To see the status
-    of the scan, call either :py:func:`niswitch.is_scanning` or
+    of the scan, call either :py:func:`niswitch.IsScanning` or
     :py:func:`niswitch.wait_for_scan_complete`. Use the :py:func:`niswitch.configure_scan_trigger`
     function to configure the scan trigger. Use the :py:func:`niswitch._initiate_scan`
     function to start the scan.
@@ -832,46 +832,6 @@ niswitch.Session methods
             A particular NI-SWITCH session established with
             :py:func:`niswitch.init_with_topology`, :py:func:`niswitch.InitWithOptions`, or :py:func:`niswitch.init`
             and used for all subsequent NI-SWITCH calls.
-
-            
-
-
-
-.. function:: is_debounced()
-
-    Indicates if all created paths have settled by returning the value of
-    the :py:data:`niswitch.IS\_DEBOUNCED` attribute.
-
-    
-
-
-
-    :rtype: bool
-    :return:
-
-
-            VI\_TRUE indicates that all created paths have settled. VI\_FALSE
-            indicates that all created paths have not settled.
-
-            
-
-
-
-.. function:: is_scanning()
-
-    Indicates the status of the scan.
-
-    
-
-
-
-    :rtype: bool
-    :return:
-
-
-            The driver returns the value of :py:data:`niswitch.IS\_SCANNING` attribute.
-            VI\_TRUE indicates that the switch device is scanning. VI\_FALSE
-            indicates that the switch device is idle.
 
             
 

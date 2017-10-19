@@ -341,7 +341,7 @@ nidcpower.Session methods
 
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: create_advanced_sequence(sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence=True)
+.. function:: create_advanced_sequence(sequence_name, attribute_ids, set_as_active_sequence=True)
 
     Creates an empty advanced sequence. Call the
     :py:func:`nidcpower.create_advanced_sequence_step` function to add steps to the
@@ -1285,7 +1285,7 @@ nidcpower.Session methods
 
     :type trigger: :py:data:`nidcpower.SendSoftwareEdgeTriggerType`
 
-.. function:: set_sequence(source_delays, size, values=None)
+.. function:: set_sequence(source_delays, values=None)
 
     Configures a series of voltage or current outputs and corresponding
     source delays. The source mode must be set to
@@ -1318,7 +1318,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].set_sequence(source_delays, size, values=None)
+            session['0,1'].set_sequence(source_delays, values=None)
 
 
     :param values:
@@ -1358,7 +1358,7 @@ nidcpower.Session methods
 
     :type size: int
 
-.. function:: wait_for_event(timeout, event_id=10.0)
+.. function:: wait_for_event(event_id, timeout=10.0)
 
     Waits until the device has generated the specified event.
 
@@ -1397,7 +1397,7 @@ nidcpower.Session methods
         +-------------------------------------------------------------+--------------------------------------------------+
 
 
-    :type event_id: int
+    :type event_id: :py:data:`nidcpower.Event`
     :param timeout:
 
 
@@ -1412,7 +1412,7 @@ nidcpower.Session methods
             application.
 
 
-    :type timeout: :py:data:`nidcpower.Event`
+    :type timeout: float
 
 .. function:: reset()
 

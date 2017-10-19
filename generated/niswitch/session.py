@@ -1665,7 +1665,7 @@ class Session(_SessionBase):
         semi-colons. For example, the following scan list will scan the first
         three channels of a multiplexer: com0->ch0; com0->ch1; com0->ch2; Refer
         to Scan Lists for more information on scan list syntax To see the status
-        of the scan, call either is_scanning or
+        of the scan, call either IsScanning or
         wait_for_scan_complete. Use the configure_scan_trigger
         function to configure the scan trigger. Use the _initiate_scan
         function to start the scan.
@@ -2269,36 +2269,6 @@ class Session(_SessionBase):
         error_code = self._library.niSwitch_InitiateScan(self._vi)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def is_debounced(self):
-        '''is_debounced
-
-        Indicates if all created paths have settled by returning the value of
-        the IS_DEBOUNCED attribute.
-
-        Returns:
-            is_debounced (bool): VI_TRUE indicates that all created paths have settled. VI_FALSE
-                indicates that all created paths have not settled.
-        '''
-        is_debounced_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niSwitch_IsDebounced(self._vi, ctypes.pointer(is_debounced_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(is_debounced_ctype.value)
-
-    def is_scanning(self):
-        '''is_scanning
-
-        Indicates the status of the scan.
-
-        Returns:
-            is_scanning (bool): The driver returns the value of IS_SCANNING attribute.
-                VI_TRUE indicates that the switch device is scanning. VI_FALSE
-                indicates that the switch device is idle.
-        '''
-        is_scanning_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niSwitch_IsScanning(self._vi, ctypes.pointer(is_scanning_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(is_scanning_ctype.value)
 
     def relay_control(self, relay_name, relay_action):
         '''relay_control
