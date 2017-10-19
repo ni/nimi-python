@@ -16,16 +16,16 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
     * Removed incorrect leading underscore from some enum values:
-        * Function.AC_VOLTS_DC_COUPLED
-        * Function.WAVEFORM_CURRENT
-        * MeasurementCompleteDest.LBR_TRIG_0
-        * OperationMode.IVIDMM_MODE
-        * SampleTrigger.EXTERNAL
-        * SampleTrigger.TTL_3
-        * TriggerSource.TTL_0
-        * TriggerSource.TTL_3
-        * TriggerSource.TTL_7
-        * TriggerSource.PXI_STAR
+      * Function.AC_VOLTS_DC_COUPLED
+      * Function.WAVEFORM_CURRENT
+      * MeasurementCompleteDest.LBR_TRIG_0
+      * OperationMode.IVIDMM_MODE
+      * SampleTrigger.EXTERNAL
+      * SampleTrigger.TTL_3
+      * TriggerSource.TTL_0
+      * TriggerSource.TTL_3
+      * TriggerSource.TTL_7
+      * TriggerSource.PXI_STAR
   * #### Removed
 * ### NI-ModInst
   * #### Added
@@ -39,6 +39,10 @@ All notable changes to this project will be documented in this file.
 * ### NI-DCPower
  * #### Added
  * #### Changed
+  * Fixed method signature for:
+    * wait_for_event
+    * create_sequence
+    * create_advanced_sequence
  * #### Removed
    * Support for measure_multiple until issue #444 is addressed.
 * ### NI-FGEN
