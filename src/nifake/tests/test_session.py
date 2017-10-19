@@ -829,7 +829,14 @@ class TestSession(object):
             try:
                 session.read_write_color = 5
             except TypeError as e:
-                assert str(e) == 'must be nifake.Color not int'
+                assert str(e) == 'must be Color not int'
+
+    def test_set_wrong_enum_attribute_int32_error(self):
+        with nifake.Session('dev1') as session:
+            try:
+                session.read_write_color = nifake.FloatEnum._6_5
+            except TypeError as e:
+                assert str(e) == 'must be Color not FloatEnum'
 
     # Error descriptions
 

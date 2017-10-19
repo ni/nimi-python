@@ -87,7 +87,7 @@ niswitch.Session methods
     semi-colons. For example, the following scan list will scan the first
     three channels of a multiplexer: com0->ch0; com0->ch1; com0->ch2; Refer
     to Scan Lists for more information on scan list syntax To see the status
-    of the scan, call either :py:func:`niswitch.is_scanning` or
+    of the scan, call either :py:func:`niswitch.IsScanning` or
     :py:func:`niswitch.wait_for_scan_complete`. Use the :py:func:`niswitch.configure_scan_trigger`
     function to configure the scan trigger. Use the :py:func:`niswitch._initiate_scan`
     function to start the scan.
