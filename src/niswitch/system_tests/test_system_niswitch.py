@@ -26,7 +26,7 @@ def test_channel_connection(session):
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
     session.connect(channel1, channel2)
     session.wait_for_debounce()
-    assert session.is_debounced() is True
+    assert session.is_debounced is True
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_EXISTS
     session.disconnect(channel1, channel2)
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
@@ -48,7 +48,7 @@ def test_continuous_software_scanning(session):
         session.set_continuous_scan(True)
         session.commit()
         with session.initiate():
-            assert session.is_scanning() is True
+            assert session.is_scanning is True
             session.send_software_trigger()
             try:
                 session.wait_for_scan_complete()
