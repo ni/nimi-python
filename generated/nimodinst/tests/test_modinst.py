@@ -161,31 +161,37 @@ class TestSession(object):
                 assert(attr_int == self.string_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
 
     # Error Tests
-    def test_cannot_add_properties_to_session(self):
+    def test_cannot_add_properties_to_session_set(self):
         with nimodinst.Session('') as session:
             try:
-                session.nonexistent_property = 5
-                assert False
-            except TypeError as e:
-                assert str(e).find(' is a frozen class') != -1
-            try:
-                session.nonexistent_property
+                session.non_existent_property = 5
                 assert False
             except AttributeError as e:
-                assert str(e) == "'Session' object has no attribute 'nonexistent_property'"
+                assert str(e) == "__setattr__ not supported."
 
-    def test_cannot_add_properties_to_device(self):
+    def test_cannot_add_properties_to_session_get(self):
         with nimodinst.Session('') as session:
             try:
-                session[0].nonexistent_property = 5
-                assert False
-            except TypeError as e:
-                assert str(e) == 'nonexistent_property is not writable'
-            try:
-                session[0].nonexistent_property
+                session.non_existent_property
                 assert False
             except AttributeError as e:
-                assert str(e) == "'Device' object has no attribute 'nonexistent_property'"
+                assert str(e) == "'Session' object has no attribute 'non_existent_property'"
+
+    def test_cannot_add_properties_to_device_set(self):
+        with nimodinst.Session('') as session:
+            try:
+                session[0].non_existent_property = 5
+                assert False
+            except AttributeError as e:
+                assert str(e) == "__setattr__ not supported."
+
+    def test_cannot_add_properties_to_device_get(self):
+        with nimodinst.Session('') as session:
+            try:
+                session[0].non_existent_property
+                assert False
+            except AttributeError as e:
+                assert str(e) == "'Device' object has no attribute 'non_existent_property'"
 
     def test_vi_int32_attribute_read_only(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
@@ -193,8 +199,8 @@ class TestSession(object):
             try:
                 session[0].chassis_number = 5
                 assert False
-            except TypeError as e:
-                assert str(e) == 'chassis_number is not writable'
+            except AttributeError as e:
+                assert str(e) == "__setattr__ not supported."
 
     def test_vi_string_attribute_read_only(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
@@ -202,8 +208,8 @@ class TestSession(object):
             try:
                 session[0].device_name = "Not Possible"
                 assert False
-            except TypeError as e:
-                assert str(e) == 'device_name is not writable'
+            except AttributeError as e:
+                assert str(e) == "__setattr__ not supported."
 
     def test_int_attribute_error(self):
         error_code = -1234
