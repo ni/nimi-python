@@ -80,8 +80,8 @@ class Device(object):
             return object.__getattribute__(self, name).__getitem__(None)
 
     def __setattr__(self, name, value):
-        if self._is_frozen and name not in ['_is_frozen', 'index']:
-            raise TypeError("%s is not writable" % name)
+        if self._is_frozen:
+            raise AttributeError("__setattr__ not supported.")
         object.__setattr__(self, name, value)
 
 
@@ -103,7 +103,7 @@ class Session(object):
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
-            raise TypeError("%r is a frozen class" % self)
+            raise AttributeError("__setattr__ not supported.")
         object.__setattr__(self, key, value)
 
     def __getitem__(self, index):
