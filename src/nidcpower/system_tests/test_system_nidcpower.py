@@ -191,3 +191,48 @@ def test_query_min_current_limit():
         expected_min_current_limit = 0.0000001  # for a simulated 4162 min_current_limit should be 1uA for 6V voltage level
         min_current_limit_in_range = abs(min_current_limit - expected_min_current_limit) <= max(1e-09 * max(abs(min_current_limit), abs(expected_min_current_limit)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
         assert min_current_limit_in_range is True
+
+
+# TODO(marcoskirsch): create_advanced_sequence doesn't work because of #505
+'''
+def test_create_advanced_sequence():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+        ids = [1150008, 1250001, 1150009]  # work around #507
+        session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
+'''
+
+# TODO(marcoskirsch): set_sequence doesn't work because of #505
+'''
+def test_set_sequence_default_source_delays():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+        session.set_sequence([0.1, 0.2, 0.3])
+
+def test_set_sequence_no_source_delays():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+        session.set_sequence([0.1, 0.2, 0.3], [])
+
+def test_set_sequence_with_source_delays():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+        session.set_sequence([0.1, 0.2, 0.3], [0.001, 0.002, 0.003])
+
+def test_set_sequence_with_too_many_source_delays():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+        session.set_sequence([0.1, 0.2, 0.3], [0.001, 0.002, 0.003, 0.004])
+
+def test_set_sequence_with_too_few_source_delays():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+        session.set_sequence([0.1, 0.2, 0.3, 0.4], [0.001, 0.002, 0.003, 0.004])
+'''
+
+
+def test_wait_for_event_default_timeout():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+        with session.initiate():
+            session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE)
+
+
+def test_wait_for_event_with_timeout():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+        with session.initiate():
+            session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
+

@@ -3828,7 +3828,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_sequence(self, source_delays, size, values=None):
+    def set_sequence(self, values, source_delays=None):
         '''set_sequence
 
         Configures a series of voltage or current outputs and corresponding
@@ -3859,7 +3859,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].set_sequence(source_delays, size, values=None)
+            session['0,1'].set_sequence(values, source_delays=None)
 
         Args:
             values (list of float): Specifies the series of voltage levels or current levels, depending on
@@ -3875,6 +3875,7 @@ class _SessionBase(object):
             size (int): The number of elements in the Values and the Source Delays arrays. The
                 Values and Source Delays arrays should have the same size.
         '''
+        size = len(values)
         error_code = self._library.niDCPower_SetSequence(self._vi, self._repeated_capability.encode(self._encoding), values, source_delays, size)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4202,7 +4203,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_advanced_sequence(self, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence=True):
+    def create_advanced_sequence(self, sequence_name, attribute_ids, set_as_active_sequence=True):
         '''create_advanced_sequence
 
         Creates an empty advanced sequence. Call the
@@ -4333,6 +4334,7 @@ class Session(_SessionBase):
                 +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
             set_as_active_sequence (bool): Specifies that this current sequence is active.
         '''
+        attribute_id_count = len(attribute_ids)
         error_code = self._library.niDCPower_CreateAdvancedSequence(self._vi, sequence_name.encode(self._encoding), attribute_id_count, attribute_ids, set_as_active_sequence)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4736,7 +4738,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_for_event(self, timeout, event_id=10.0):
+    def wait_for_event(self, event_id, timeout=10.0):
         '''wait_for_event
 
         Waits until the device has generated the specified event.
@@ -4753,7 +4755,7 @@ class Session(_SessionBase):
         for more information about supported devices.
 
         Args:
-            event_id (int): Specifies which event to wait for.
+            event_id (enums.Event): Specifies which event to wait for.
                 **Defined Values:**
 
                 +--------------------------------------------------------+--------------------------------------------------+
@@ -4769,7 +4771,7 @@ class Session(_SessionBase):
                 +--------------------------------------------------------+--------------------------------------------------+
                 | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
                 +--------------------------------------------------------+--------------------------------------------------+
-            timeout (enums.Event): Specifies the maximum time allowed for this function to complete, in
+            timeout (float): Specifies the maximum time allowed for this function to complete, in
                 seconds. If the function does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -4778,9 +4780,9 @@ class Session(_SessionBase):
                 triggers so that the timeout interval is long enough for your
                 application.
         '''
-        if type(timeout) is not enums.Event:
+        if type(event_id) is not enums.Event:
             raise TypeError('Parameter mode must be of type ' + str(enums.Event))
-        error_code = self._library.niDCPower_WaitForEvent(self._vi, event_id, timeout.value)
+        error_code = self._library.niDCPower_WaitForEvent(self._vi, event_id.value, timeout)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
