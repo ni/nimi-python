@@ -33,10 +33,10 @@ nimodinst.Session
 
    **Public methods**
 
-   +---------+
-   | No Data |
-   +=========+
-   | No Data |
-   +---------+
+   +--------+-----------+
+   | Method | Paramters |
+   +========+===========+
+   | Method | Paramters |
+   +--------+-----------+
 
 
