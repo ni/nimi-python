@@ -763,16 +763,31 @@ class TestSession(object):
     def test_add_properties_to_session_error(self):
         with nifake.Session('dev1') as session:
             try:
-                session.nonexistent_property = 5
+                session.non_existent_property = 5
                 assert False
             except AttributeError as e:
-                assert str(e) == "'Session' object has no attribute 'nonexistent_property'"
+                assert str(e) == "'Session' object has no attribute 'non_existent_property'"
                 pass
             try:
-                value = session.nonexistent_property  # noqa: F841
+                value = session.non_existent_property  # noqa: F841
                 assert False
             except AttributeError as e:
-                assert str(e) == "'Session' object has no attribute 'nonexistent_property'"
+                assert str(e) == "'Session' object has no attribute 'non_existent_property'"
+                pass
+
+    def test_add_properties_to_repeated_capability_error(self):
+        with nifake.Session('dev1') as session:
+            try:
+                session['0'].non_existent_property = 5
+                assert False
+            except AttributeError as e:
+                assert str(e) == "'_RepeatedCapability' object has no attribute 'non_existent_property'"
+                pass
+            try:
+                value = session['0'].non_existent_property  # noqa: F841
+                assert False
+            except AttributeError as e:
+                assert str(e) == "'_RepeatedCapability' object has no attribute 'non_existent_property'"
                 pass
 
     def test_set_enum_attribute_int32_error(self):
