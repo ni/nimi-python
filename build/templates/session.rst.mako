@@ -36,7 +36,7 @@ table = helper.as_rest_table(table_contents)
 
 <%
 table_contents = []
-table_contents.append(('Method', 'Paramters'))
+table_contents.append(('Method', 'Parameters'))
 for f in sorted(functions):
     if functions[f]['codegen_method'] == 'public':
         name = functions[f]['python_name']
