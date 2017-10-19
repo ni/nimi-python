@@ -81,7 +81,7 @@ class Device(object):
 
     def __setattr__(self, name, value):
         if self._is_frozen:
-            raise AttributeError("Set attribute not supported.")
+            raise AttributeError("__setattr__ not supported.")
         object.__setattr__(self, name, value)
 
 
@@ -103,7 +103,7 @@ class Session(object):
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
-            raise AttributeError("Set attribute not supported.")
+            raise AttributeError("__setattr__ not supported.")
         object.__setattr__(self, key, value)
 
     def __getitem__(self, index):
