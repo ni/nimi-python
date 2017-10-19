@@ -164,28 +164,28 @@ class TestSession(object):
     def test_cannot_add_properties_to_session(self):
         with nimodinst.Session('') as session:
             try:
-                session.nonexistent_property = 5
+                session.non_existent_property = 5
                 assert False
             except AttributeError as e:
-                assert str(e) == "Set attribute not supported."
+                assert str(e) == "__setattr__ not supported."
             try:
-                session.nonexistent_property
+                session.non_existent_property
                 assert False
             except AttributeError as e:
-                assert str(e) == "'Session' object has no attribute 'nonexistent_property'"
+                assert str(e) == "'Session' object has no attribute 'non_existent_property'"
 
     def test_cannot_add_properties_to_device(self):
         with nimodinst.Session('') as session:
             try:
-                session[0].nonexistent_property = 5
+                session[0].non_existent_property = 5
                 assert False
             except AttributeError as e:
-                assert str(e) == "Set attribute not supported."
+                assert str(e) == "__setattr__ not supported."
             try:
-                session[0].nonexistent_property
+                session[0].non_existent_property
                 assert False
             except AttributeError as e:
-                assert str(e) == "'Device' object has no attribute 'nonexistent_property'"
+                assert str(e) == "'Device' object has no attribute 'non_existent_property'"
 
     def test_vi_int32_attribute_read_only(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
@@ -194,7 +194,7 @@ class TestSession(object):
                 session[0].chassis_number = 5
                 assert False
             except AttributeError as e:
-                assert str(e) == "Set attribute not supported."
+                assert str(e) == "__setattr__ not supported."
 
     def test_vi_string_attribute_read_only(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
@@ -203,7 +203,7 @@ class TestSession(object):
                 session[0].device_name = "Not Possible"
                 assert False
             except AttributeError as e:
-                assert str(e) == "Set attribute not supported."
+                assert str(e) == "__setattr__ not supported."
 
     def test_int_attribute_error(self):
         error_code = -1234
