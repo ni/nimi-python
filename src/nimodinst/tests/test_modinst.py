@@ -161,26 +161,32 @@ class TestSession(object):
                 assert(attr_int == self.string_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
 
     # Error Tests
-    def test_cannot_add_properties_to_session(self):
+    def test_cannot_add_properties_to_session_set(self):
         with nimodinst.Session('') as session:
             try:
                 session.non_existent_property = 5
                 assert False
             except AttributeError as e:
                 assert str(e) == "__setattr__ not supported."
+
+    def test_cannot_add_properties_to_session_get(self):
+        with nimodinst.Session('') as session:
             try:
                 session.non_existent_property
                 assert False
             except AttributeError as e:
                 assert str(e) == "'Session' object has no attribute 'non_existent_property'"
 
-    def test_cannot_add_properties_to_device(self):
+    def test_cannot_add_properties_to_device_set(self):
         with nimodinst.Session('') as session:
             try:
                 session[0].non_existent_property = 5
                 assert False
             except AttributeError as e:
                 assert str(e) == "__setattr__ not supported."
+
+    def test_cannot_add_properties_to_device_get(self):
+        with nimodinst.Session('') as session:
             try:
                 session[0].non_existent_property
                 assert False

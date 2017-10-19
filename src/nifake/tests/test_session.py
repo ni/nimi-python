@@ -760,35 +760,37 @@ class TestSession(object):
                 assert e.description == test_error_desc
                 self.patched_library.niFake_SetAttributeViReal64.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', 1000001, -42)
 
-    def test_add_properties_to_session_error(self):
+    def test_add_properties_to_session_error_set(self):
         with nifake.Session('dev1') as session:
             try:
                 session.non_existent_property = 5
                 assert False
             except AttributeError as e:
                 assert str(e) == "'Session' object has no attribute 'non_existent_property'"
-                pass
+
+    def test_add_properties_to_session_error_get(self):
+        with nifake.Session('dev1') as session:
             try:
                 value = session.non_existent_property  # noqa: F841
                 assert False
             except AttributeError as e:
                 assert str(e) == "'Session' object has no attribute 'non_existent_property'"
-                pass
 
-    def test_add_properties_to_repeated_capability_error(self):
+    def test_add_properties_to_repeated_capability_error_set(self):
         with nifake.Session('dev1') as session:
             try:
                 session['0'].non_existent_property = 5
                 assert False
             except AttributeError as e:
                 assert str(e) == "'_RepeatedCapability' object has no attribute 'non_existent_property'"
-                pass
+
+    def test_add_properties_to_repeated_capability_error_get(self):
+        with nifake.Session('dev1') as session:
             try:
                 value = session['0'].non_existent_property  # noqa: F841
                 assert False
             except AttributeError as e:
                 assert str(e) == "'_RepeatedCapability' object has no attribute 'non_existent_property'"
-                pass
 
     def test_set_enum_attribute_int32_error(self):
         with nifake.Session('dev1') as session:
