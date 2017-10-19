@@ -2352,38 +2352,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def is_debounced(self):
-        '''is_debounced
-
-        Indicates if all created paths have settled by returning the value of
-        the IS_DEBOUNCED attribute.
-
-        Returns:
-            is_debounced (bool): VI_TRUE indicates that all created paths have settled. VI_FALSE
-                indicates that all created paths have not settled.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        is_debounced_ctype = visatype.ViBoolean()  # case 11
-        error_code = self._library.niSwitch_IsDebounced(vi_ctype, ctypes.pointer(is_debounced_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(is_debounced_ctype.value)
-
-    def is_scanning(self):
-        '''is_scanning
-
-        Indicates the status of the scan.
-
-        Returns:
-            is_scanning (bool): The driver returns the value of IS_SCANNING attribute.
-                VI_TRUE indicates that the switch device is scanning. VI_FALSE
-                indicates that the switch device is idle.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        is_scanning_ctype = visatype.ViBoolean()  # case 11
-        error_code = self._library.niSwitch_IsScanning(vi_ctype, ctypes.pointer(is_scanning_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(is_scanning_ctype.value)
-
     def relay_control(self, relay_name, relay_action):
         '''relay_control
 

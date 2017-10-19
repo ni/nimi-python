@@ -837,46 +837,6 @@ niswitch.Session methods
 
 
 
-.. function:: is_debounced()
-
-    Indicates if all created paths have settled by returning the value of
-    the :py:data:`niswitch.IS\_DEBOUNCED` attribute.
-
-    
-
-
-
-    :rtype: bool
-    :return:
-
-
-            VI\_TRUE indicates that all created paths have settled. VI\_FALSE
-            indicates that all created paths have not settled.
-
-            
-
-
-
-.. function:: is_scanning()
-
-    Indicates the status of the scan.
-
-    
-
-
-
-    :rtype: bool
-    :return:
-
-
-            The driver returns the value of :py:data:`niswitch.IS\_SCANNING` attribute.
-            VI\_TRUE indicates that the switch device is scanning. VI\_FALSE
-            indicates that the switch device is idle.
-
-            
-
-
-
 .. function:: relay_control(relay_name, relay_action)
 
     Controls individual relays of the switch. When controlling individual
