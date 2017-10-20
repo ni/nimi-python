@@ -51,6 +51,10 @@ All notable changes to this project will be documented in this file.
   * Initial release
  * #### Changed
  * #### Removed
+* ### NI-SCOPE
+ * #### Added
+ * #### Changed
+ * #### Removed
 
 ## 0.3.0 - 2017-10-13
 * ### ALL
@@ -129,12 +133,16 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
   * #### Changed
   * #### Removed
 * ### NI-DCPower
- * #### Added
- * #### Changed
- * #### Removed
+  * #### Added
+  * #### Changed
+  * #### Removed
 * ### NI-FGEN
- * #### Added
- * #### Changed
- * #### Removed
+  * #### Added
+  * #### Changed
+  * #### Removed
+* ### NI-SCOPE
+  * #### Added
+  * #### Changed
+  * #### Removed
 -->
 
