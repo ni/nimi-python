@@ -12,437 +12,437 @@ nifgen.Session
    +-------------------------------------------------------------+-------------------------------------------------+
    | Property                                                    | Datatype                                        |
    +=============================================================+=================================================+
-   | :py:attr:`actual_arb_sample_rate`                           | ViReal64                                        |
+   | :py:attr:`actual_arb_sample_rate`                           | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`all_marker_events_latched_status`                 | ViInt32                                         |
+   | :py:attr:`all_marker_events_latched_status`                 | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`all_marker_events_live_status`                    | ViInt32                                         |
+   | :py:attr:`all_marker_events_live_status`                    | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`analog_data_mask`                                 | ViInt32                                         |
+   | :py:attr:`analog_data_mask`                                 | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`analog_filter_enabled`                            | ViBoolean                                       |
+   | :py:attr:`analog_filter_enabled`                            | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`analog_path`                                      | :py:data:`AnalogPath`                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`analog_static_value`                              | ViInt32                                         |
+   | :py:attr:`analog_static_value`                              | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`arb_gain`                                         | ViReal64                                        |
+   | :py:attr:`arb_gain`                                         | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`arb_marker_position`                              | ViInt32                                         |
+   | :py:attr:`arb_marker_position`                              | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`arb_offset`                                       | ViReal64                                        |
+   | :py:attr:`arb_offset`                                       | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`arb_repeat_count`                                 | ViInt32                                         |
+   | :py:attr:`arb_repeat_count`                                 | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`arb_sample_rate`                                  | ViReal64                                        |
+   | :py:attr:`arb_sample_rate`                                  | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`arb_sequence_handle`                              | ViInt32                                         |
+   | :py:attr:`arb_sequence_handle`                              | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`arb_waveform_handle`                              | ViInt32                                         |
+   | :py:attr:`arb_waveform_handle`                              | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`aux_power_enabled`                                | ViBoolean                                       |
+   | :py:attr:`aux_power_enabled`                                | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`bus_type`                                         | :py:data:`BusType`                              |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`cache`                                            | ViBoolean                                       |
+   | :py:attr:`cache`                                            | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`cal_adc_input`                                    | :py:data:`CalADCInput`                          |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`channel_count`                                    | ViInt32                                         |
+   | :py:attr:`channel_count`                                    | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`channel_delay`                                    | ViReal64                                        |
+   | :py:attr:`channel_delay`                                    | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`clock_mode`                                       | :py:data:`ClockMode`                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`common_mode_offset`                               | ViReal64                                        |
+   | :py:attr:`common_mode_offset`                               | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`daqmx_task`                                       | ViInt32                                         |
+   | :py:attr:`daqmx_task`                                       | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`data_marker_events_count`                         | ViInt32                                         |
+   | :py:attr:`data_marker_events_count`                         | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`data_marker_event_data_bit_number`                | ViInt32                                         |
+   | :py:attr:`data_marker_event_data_bit_number`                | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`data_marker_event_level_polarity`                 | :py:data:`DataMarkerEventLevelPolarity`         |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`data_marker_event_output_terminal`                | ViString                                        |
+   | :py:attr:`data_marker_event_output_terminal`                | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`data_transfer_block_size`                         | ViInt32                                         |
+   | :py:attr:`data_transfer_block_size`                         | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`data_transfer_maximum_bandwidth`                  | ViReal64                                        |
+   | :py:attr:`data_transfer_maximum_bandwidth`                  | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`data_transfer_maximum_in_flight_reads`            | ViInt32                                         |
+   | :py:attr:`data_transfer_maximum_in_flight_reads`            | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`data_transfer_preferred_packet_size`              | ViInt32                                         |
+   | :py:attr:`data_transfer_preferred_packet_size`              | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`digital_data_mask`                                | ViInt32                                         |
+   | :py:attr:`digital_data_mask`                                | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`digital_edge_script_trigger_edge`                 | :py:data:`ScriptTriggerDigitalEdgeEdge`         |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`digital_edge_script_trigger_source`               | ViString                                        |
+   | :py:attr:`digital_edge_script_trigger_source`               | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`digital_edge_start_trigger_edge`                  | :py:data:`StartTriggerDigitalEdgeEdge`          |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`digital_edge_start_trigger_source`                | ViString                                        |
+   | :py:attr:`digital_edge_start_trigger_source`                | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`digital_filter_enabled`                           | ViBoolean                                       |
+   | :py:attr:`digital_filter_enabled`                           | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`digital_filter_interpolation_factor`              | ViReal64                                        |
+   | :py:attr:`digital_filter_interpolation_factor`              | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`digital_gain`                                     | ViReal64                                        |
+   | :py:attr:`digital_gain`                                     | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`digital_level_script_trigger_active_level`        | :py:data:`ScriptTriggerDigitalLevelActiveLevel` |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`digital_level_script_trigger_source`              | ViString                                        |
+   | :py:attr:`digital_level_script_trigger_source`              | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`digital_pattern_enabled`                          | ViBoolean                                       |
+   | :py:attr:`digital_pattern_enabled`                          | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`digital_static_value`                             | ViInt32                                         |
+   | :py:attr:`digital_static_value`                             | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`direct_dma_enabled`                               | ViBoolean                                       |
+   | :py:attr:`direct_dma_enabled`                               | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`direct_dma_window_address`                        | ViInt32                                         |
+   | :py:attr:`direct_dma_window_address`                        | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`direct_dma_window_size`                           | ViInt32                                         |
+   | :py:attr:`direct_dma_window_size`                           | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`done_event_delay`                                 | ViReal64                                        |
+   | :py:attr:`done_event_delay`                                 | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`done_event_delay_units`                           | :py:data:`DoneEventDelayUnits`                  |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`done_event_latched_status`                        | ViBoolean                                       |
+   | :py:attr:`done_event_latched_status`                        | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`done_event_level_active_level`                    | :py:data:`DoneEventActiveLevel`                 |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`done_event_output_behavior`                       | :py:data:`DoneEventOutputBehavior`              |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`done_event_output_terminal`                       | ViString                                        |
+   | :py:attr:`done_event_output_terminal`                       | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`done_event_pulse_polarity`                        | :py:data:`DoneEventPulsePolarity`               |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`done_event_pulse_width`                           | ViReal64                                        |
+   | :py:attr:`done_event_pulse_width`                           | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`done_event_pulse_width_units`                     | :py:data:`DoneEventPulseWidthUnits`             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`error_elaboration`                                | ViString                                        |
+   | :py:attr:`error_elaboration`                                | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`exported_onboard_reference_clock_output_terminal` | ViString                                        |
+   | :py:attr:`exported_onboard_reference_clock_output_terminal` | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`exported_reference_clock_output_terminal`         | ViString                                        |
+   | :py:attr:`exported_reference_clock_output_terminal`         | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`exported_sample_clock_divisor`                    | ViInt32                                         |
+   | :py:attr:`exported_sample_clock_divisor`                    | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`exported_sample_clock_output_terminal`            | ViString                                        |
+   | :py:attr:`exported_sample_clock_output_terminal`            | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`exported_sample_clock_timebase_divisor`           | ViInt32                                         |
+   | :py:attr:`exported_sample_clock_timebase_divisor`           | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`exported_sample_clock_timebase_output_terminal`   | ViString                                        |
+   | :py:attr:`exported_sample_clock_timebase_output_terminal`   | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`exported_script_trigger_output_terminal`          | ViString                                        |
+   | :py:attr:`exported_script_trigger_output_terminal`          | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`exported_start_trigger_output_terminal`           | ViString                                        |
+   | :py:attr:`exported_start_trigger_output_terminal`           | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`external_clock_delay_binary_value`                | ViInt32                                         |
+   | :py:attr:`external_clock_delay_binary_value`                | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`external_sample_clock_multiplier`                 | ViReal64                                        |
+   | :py:attr:`external_sample_clock_multiplier`                 | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`file_transfer_block_size`                         | ViInt32                                         |
+   | :py:attr:`file_transfer_block_size`                         | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`filter_correction_frequency`                      | ViReal64                                        |
+   | :py:attr:`filter_correction_frequency`                      | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`flatness_correction_enabled`                      | ViBoolean                                       |
+   | :py:attr:`flatness_correction_enabled`                      | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`fpga_bitfile_path`                                | ViString                                        |
+   | :py:attr:`fpga_bitfile_path`                                | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`freq_list_duration_quantum`                       | ViReal64                                        |
+   | :py:attr:`freq_list_duration_quantum`                       | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`freq_list_handle`                                 | ViInt32                                         |
+   | :py:attr:`freq_list_handle`                                 | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`func_amplitude`                                   | ViReal64                                        |
+   | :py:attr:`func_amplitude`                                   | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`func_buffer_size`                                 | ViInt32                                         |
+   | :py:attr:`func_buffer_size`                                 | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`func_dc_offset`                                   | ViReal64                                        |
+   | :py:attr:`func_dc_offset`                                   | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`func_duty_cycle_high`                             | ViReal64                                        |
+   | :py:attr:`func_duty_cycle_high`                             | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`func_frequency`                                   | ViReal64                                        |
+   | :py:attr:`func_frequency`                                   | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`func_max_buffer_size`                             | ViInt32                                         |
+   | :py:attr:`func_max_buffer_size`                             | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`func_start_phase`                                 | ViReal64                                        |
+   | :py:attr:`func_start_phase`                                 | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`func_waveform`                                    | :py:data:`Waveform`                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`gain_dac_value`                                   | ViInt32                                         |
+   | :py:attr:`gain_dac_value`                                   | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`group_capabilities`                               | ViString                                        |
+   | :py:attr:`group_capabilities`                               | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`idle_behavior`                                    | :py:data:`IdleBehavior`                         |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`idle_value`                                       | ViInt32                                         |
+   | :py:attr:`idle_value`                                       | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`instrument_firmware_revision`                     | ViString                                        |
+   | :py:attr:`instrument_firmware_revision`                     | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`instrument_manufacturer`                          | ViString                                        |
+   | :py:attr:`instrument_manufacturer`                          | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`instrument_model`                                 | ViString                                        |
+   | :py:attr:`instrument_model`                                 | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`interchange_check`                                | ViBoolean                                       |
+   | :py:attr:`interchange_check`                                | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`io_resource_descriptor`                           | ViString                                        |
+   | :py:attr:`io_resource_descriptor`                           | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`load_impedance`                                   | ViReal64                                        |
+   | :py:attr:`load_impedance`                                   | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`logical_name`                                     | ViString                                        |
+   | :py:attr:`logical_name`                                     | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`major_version`                                    | ViInt32                                         |
+   | :py:attr:`major_version`                                    | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`marker_events_count`                              | ViInt32                                         |
+   | :py:attr:`marker_events_count`                              | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`marker_event_delay`                               | ViReal64                                        |
+   | :py:attr:`marker_event_delay`                               | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`marker_event_delay_units`                         | :py:data:`MarkerEventDelayUnits`                |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`marker_event_latched_status`                      | ViBoolean                                       |
+   | :py:attr:`marker_event_latched_status`                      | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`marker_event_live_status`                         | ViBoolean                                       |
+   | :py:attr:`marker_event_live_status`                         | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`marker_event_output_behavior`                     | :py:data:`MarkerEventOutputBehavior`            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`marker_event_output_terminal`                     | ViString                                        |
+   | :py:attr:`marker_event_output_terminal`                     | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`marker_event_pulse_polarity`                      | :py:data:`MarkerEventPulsePolarity`             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`marker_event_pulse_width`                         | ViReal64                                        |
+   | :py:attr:`marker_event_pulse_width`                         | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`marker_event_pulse_width_units`                   | :py:data:`MarkerEventPulseWidthUnits`           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`marker_event_toggle_initial_state`                | :py:data:`MarkerEventToggleInitialState`        |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`max_freq_list_duration`                           | ViReal64                                        |
+   | :py:attr:`max_freq_list_duration`                           | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`max_freq_list_length`                             | ViInt32                                         |
+   | :py:attr:`max_freq_list_length`                             | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`max_loop_count`                                   | ViInt32                                         |
+   | :py:attr:`max_loop_count`                                   | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`max_num_freq_lists`                               | ViInt32                                         |
+   | :py:attr:`max_num_freq_lists`                               | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`max_num_sequences`                                | ViInt32                                         |
+   | :py:attr:`max_num_sequences`                                | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`max_num_waveforms`                                | ViInt32                                         |
+   | :py:attr:`max_num_waveforms`                                | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`max_sequence_length`                              | ViInt32                                         |
+   | :py:attr:`max_sequence_length`                              | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`max_waveform_size`                                | ViInt32                                         |
+   | :py:attr:`max_waveform_size`                                | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`memory_size`                                      | ViInt32                                         |
+   | :py:attr:`memory_size`                                      | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`minor_version`                                    | ViInt32                                         |
+   | :py:attr:`minor_version`                                    | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`min_freq_list_duration`                           | ViReal64                                        |
+   | :py:attr:`min_freq_list_duration`                           | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`min_freq_list_length`                             | ViInt32                                         |
+   | :py:attr:`min_freq_list_length`                             | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`min_sequence_length`                              | ViInt32                                         |
+   | :py:attr:`min_sequence_length`                              | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`min_waveform_size`                                | ViInt32                                         |
+   | :py:attr:`min_waveform_size`                                | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`module_revision`                                  | ViString                                        |
+   | :py:attr:`module_revision`                                  | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`offset_dac_value`                                 | ViInt32                                         |
+   | :py:attr:`offset_dac_value`                                 | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`operation_mode`                                   | :py:data:`OperationMode`                        |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`oscillator_freq_dac_value`                        | ViInt32                                         |
+   | :py:attr:`oscillator_freq_dac_value`                        | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`oscillator_phase_dac_value`                       | ViInt32                                         |
+   | :py:attr:`oscillator_phase_dac_value`                       | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_carrier_enabled`                              | ViBoolean                                       |
+   | :py:attr:`osp_carrier_enabled`                              | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_carrier_frequency`                            | ViReal64                                        |
+   | :py:attr:`osp_carrier_frequency`                            | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_carrier_phase_i`                              | ViReal64                                        |
+   | :py:attr:`osp_carrier_phase_i`                              | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_carrier_phase_q`                              | ViReal64                                        |
+   | :py:attr:`osp_carrier_phase_q`                              | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_cic_filter_enabled`                           | ViBoolean                                       |
+   | :py:attr:`osp_cic_filter_enabled`                           | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_cic_filter_gain`                              | ViReal64                                        |
+   | :py:attr:`osp_cic_filter_gain`                              | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_cic_filter_interpolation`                     | ViReal64                                        |
+   | :py:attr:`osp_cic_filter_interpolation`                     | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_compensate_for_filter_group_delay`            | ViBoolean                                       |
+   | :py:attr:`osp_compensate_for_filter_group_delay`            | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`osp_data_processing_mode`                         | :py:data:`DataProcessingMode`                   |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_enabled`                                      | ViBoolean                                       |
+   | :py:attr:`osp_enabled`                                      | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_fir_filter_enabled`                           | ViBoolean                                       |
+   | :py:attr:`osp_fir_filter_enabled`                           | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_fir_filter_flat_passband`                     | ViReal64                                        |
+   | :py:attr:`osp_fir_filter_flat_passband`                     | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_fir_filter_gaussian_bt`                       | ViReal64                                        |
+   | :py:attr:`osp_fir_filter_gaussian_bt`                       | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_fir_filter_interpolation`                     | ViReal64                                        |
+   | :py:attr:`osp_fir_filter_interpolation`                     | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_fir_filter_raised_cosine_alpha`               | ViReal64                                        |
+   | :py:attr:`osp_fir_filter_raised_cosine_alpha`               | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_fir_filter_root_raised_cosine_alpha`          | ViReal64                                        |
+   | :py:attr:`osp_fir_filter_root_raised_cosine_alpha`          | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`osp_fir_filter_type`                              | :py:data:`FilterType`                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_frequency_shift`                              | ViReal64                                        |
+   | :py:attr:`osp_frequency_shift`                              | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_iq_rate`                                      | ViReal64                                        |
+   | :py:attr:`osp_iq_rate`                                      | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`osp_mode`                                         | :py:data:`OSPMode`                              |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`osp_overflow_error_reporting`                     | :py:data:`OSPOverflowErrorReporting`            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_overflow_status`                              | ViInt32                                         |
+   | :py:attr:`osp_overflow_status`                              | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_pre_filter_gain_i`                            | ViReal64                                        |
+   | :py:attr:`osp_pre_filter_gain_i`                            | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_pre_filter_gain_q`                            | ViReal64                                        |
+   | :py:attr:`osp_pre_filter_gain_q`                            | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_pre_filter_offset_i`                          | ViReal64                                        |
+   | :py:attr:`osp_pre_filter_offset_i`                          | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`osp_pre_filter_offset_q`                          | ViReal64                                        |
+   | :py:attr:`osp_pre_filter_offset_q`                          | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`output_enabled`                                   | ViBoolean                                       |
+   | :py:attr:`output_enabled`                                   | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`output_impedance`                                 | ViReal64                                        |
+   | :py:attr:`output_impedance`                                 | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`output_mode`                                      | :py:data:`OutputMode`                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_data_transfer_permission_address`             | ViInt64                                         |
+   | :py:attr:`p2p_data_transfer_permission_address`             | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`p2p_data_transfer_permission_address_type`        | :py:data:`P2PAddressType`                       |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_data_transfer_permission_initial_credits`     | ViInt32                                         |
+   | :py:attr:`p2p_data_transfer_permission_initial_credits`     | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_data_transfer_permission_interval`            | ViInt32                                         |
+   | :py:attr:`p2p_data_transfer_permission_interval`            | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_destination_channels`                         | ViString                                        |
+   | :py:attr:`p2p_destination_channels`                         | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_done_notification_address`                    | ViInt64                                         |
+   | :py:attr:`p2p_done_notification_address`                    | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`p2p_done_notification_address_type`               | :py:data:`P2PAddressType`                       |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_done_notification_value`                      | ViInt32                                         |
+   | :py:attr:`p2p_done_notification_value`                      | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_enabled`                                      | ViBoolean                                       |
+   | :py:attr:`p2p_enabled`                                      | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_endpoint_count`                               | ViInt32                                         |
+   | :py:attr:`p2p_endpoint_count`                               | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_endpoint_fullness_start_trigger_level`        | ViInt32                                         |
+   | :py:attr:`p2p_endpoint_fullness_start_trigger_level`        | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_endpoint_size`                                | ViInt32                                         |
+   | :py:attr:`p2p_endpoint_size`                                | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_endpoint_window_address`                      | ViInt64                                         |
+   | :py:attr:`p2p_endpoint_window_address`                      | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`p2p_endpoint_window_address_type`                 | :py:data:`P2PAddressType`                       |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_endpoint_window_size`                         | ViInt32                                         |
+   | :py:attr:`p2p_endpoint_window_size`                         | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_manual_configuration_enabled`                 | ViBoolean                                       |
+   | :py:attr:`p2p_manual_configuration_enabled`                 | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_most_space_available_in_endpoint`             | ViInt32                                         |
+   | :py:attr:`p2p_most_space_available_in_endpoint`             | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`p2p_space_available_in_endpoint`                  | ViInt32                                         |
+   | :py:attr:`p2p_space_available_in_endpoint`                  | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`pci_dma_optimizations_enabled`                    | ViBoolean                                       |
+   | :py:attr:`pci_dma_optimizations_enabled`                    | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`post_amplifier_attenuation`                       | ViReal64                                        |
+   | :py:attr:`post_amplifier_attenuation`                       | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`pre_amplifier_attenuation`                        | ViReal64                                        |
+   | :py:attr:`pre_amplifier_attenuation`                        | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`primary_error`                                    | ViInt32                                         |
+   | :py:attr:`primary_error`                                    | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`query_instrument_status`                          | ViBoolean                                       |
+   | :py:attr:`query_instrument_status`                          | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`range_check`                                      | ViBoolean                                       |
+   | :py:attr:`range_check`                                      | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`ready_for_start_event_level_active_level`         | :py:data:`ReadyForStartEventActiveLevel`        |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`ready_for_start_event_live_status`                | ViBoolean                                       |
+   | :py:attr:`ready_for_start_event_live_status`                | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`ready_for_start_event_output_terminal`            | ViString                                        |
+   | :py:attr:`ready_for_start_event_output_terminal`            | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`record_coercions`                                 | ViBoolean                                       |
+   | :py:attr:`record_coercions`                                 | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`reference_clock_source`                           | :py:data:`ReferenceClockSource`                 |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`ref_clock_frequency`                              | ViReal64                                        |
+   | :py:attr:`ref_clock_frequency`                              | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`ref_clock_source`                                 | ViInt32                                         |
+   | :py:attr:`ref_clock_source`                                 | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`sample_clock_absolute_delay`                      | ViReal64                                        |
+   | :py:attr:`sample_clock_absolute_delay`                      | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`sample_clock_source`                              | :py:data:`SampleClockSource`                    |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`sample_clock_timebase_rate`                       | ViReal64                                        |
+   | :py:attr:`sample_clock_timebase_rate`                       | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`sample_clock_timebase_source`                     | :py:data:`SampleClockTimebaseSource`            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`script_to_generate`                               | ViString                                        |
+   | :py:attr:`script_to_generate`                               | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`script_triggers_count`                            | ViInt32                                         |
+   | :py:attr:`script_triggers_count`                            | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`script_trigger_type`                              | :py:data:`ScriptTriggerType`                    |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`secondary_error`                                  | ViInt32                                         |
+   | :py:attr:`secondary_error`                                  | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`serial_number`                                    | ViString                                        |
+   | :py:attr:`serial_number`                                    | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`simulate`                                         | ViBoolean                                       |
+   | :py:attr:`simulate`                                         | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`specific_driver_class_spec_major_version`         | ViInt32                                         |
+   | :py:attr:`specific_driver_class_spec_major_version`         | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`specific_driver_class_spec_minor_version`         | ViInt32                                         |
+   | :py:attr:`specific_driver_class_spec_minor_version`         | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`specific_driver_description`                      | ViString                                        |
+   | :py:attr:`specific_driver_description`                      | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`specific_driver_prefix`                           | ViString                                        |
+   | :py:attr:`specific_driver_prefix`                           | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`specific_driver_revision`                         | ViString                                        |
+   | :py:attr:`specific_driver_revision`                         | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`specific_driver_vendor`                           | ViString                                        |
+   | :py:attr:`specific_driver_vendor`                           | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`started_event_delay`                              | ViReal64                                        |
+   | :py:attr:`started_event_delay`                              | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`started_event_delay_units`                        | :py:data:`StartedEventDelayUnits`               |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`started_event_latched_status`                     | ViBoolean                                       |
+   | :py:attr:`started_event_latched_status`                     | bool                                            |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`started_event_level_active_level`                 | :py:data:`StartedEventActiveLevel`              |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`started_event_output_behavior`                    | :py:data:`StartedEventOutputBehavior`           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`started_event_output_terminal`                    | ViString                                        |
+   | :py:attr:`started_event_output_terminal`                    | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`started_event_pulse_polarity`                     | :py:data:`StartedEventPulsePolarity`            |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`started_event_pulse_width`                        | ViReal64                                        |
+   | :py:attr:`started_event_pulse_width`                        | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`started_event_pulse_width_units`                  | :py:data:`StartedEventPulseWidthUnits`          |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`start_trigger_type`                               | :py:data:`StartTriggerType`                     |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`streaming_space_available_in_waveform`            | ViInt32                                         |
+   | :py:attr:`streaming_space_available_in_waveform`            | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`streaming_waveform_handle`                        | ViInt32                                         |
+   | :py:attr:`streaming_waveform_handle`                        | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`streaming_waveform_name`                          | ViString                                        |
+   | :py:attr:`streaming_waveform_name`                          | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`streaming_write_timeout`                          | ViReal64                                        |
+   | :py:attr:`streaming_write_timeout`                          | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`supported_instrument_models`                      | ViString                                        |
+   | :py:attr:`supported_instrument_models`                      | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`synchronization`                                  | :py:data:`SynchronizationSource`                |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`sync_duty_cycle_high`                             | ViReal64                                        |
+   | :py:attr:`sync_duty_cycle_high`                             | float                                           |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`sync_out_output_terminal`                         | ViString                                        |
+   | :py:attr:`sync_out_output_terminal`                         | str                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`terminal_configuration`                           | :py:data:`TerminalConfiguration`                |
    +-------------------------------------------------------------+-------------------------------------------------+
@@ -456,9 +456,9 @@ nifgen.Session
    +-------------------------------------------------------------+-------------------------------------------------+
    | :py:attr:`wait_behavior`                                    | :py:data:`WaitBehavior`                         |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`wait_value`                                       | ViInt32                                         |
+   | :py:attr:`wait_value`                                       | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
-   | :py:attr:`waveform_quantum`                                 | ViInt32                                         |
+   | :py:attr:`waveform_quantum`                                 | int                                             |
    +-------------------------------------------------------------+-------------------------------------------------+
 
    **Public methods**

@@ -12,23 +12,23 @@ nimodinst.Session
    +--------------------------------------+----------+
    | Property                             | Datatype |
    +======================================+==========+
-   | :py:attr:`bus_number`                | ViInt32  |
+   | :py:attr:`bus_number`                | int      |
    +--------------------------------------+----------+
-   | :py:attr:`chassis_number`            | ViInt32  |
+   | :py:attr:`chassis_number`            | int      |
    +--------------------------------------+----------+
-   | :py:attr:`device_model`              | ViString |
+   | :py:attr:`device_model`              | str      |
    +--------------------------------------+----------+
-   | :py:attr:`device_name`               | ViString |
+   | :py:attr:`device_name`               | str      |
    +--------------------------------------+----------+
-   | :py:attr:`max_pciexpress_link_width` | ViInt32  |
+   | :py:attr:`max_pciexpress_link_width` | int      |
    +--------------------------------------+----------+
-   | :py:attr:`pciexpress_link_width`     | ViInt32  |
+   | :py:attr:`pciexpress_link_width`     | int      |
    +--------------------------------------+----------+
-   | :py:attr:`serial_number`             | ViString |
+   | :py:attr:`serial_number`             | str      |
    +--------------------------------------+----------+
-   | :py:attr:`slot_number`               | ViInt32  |
+   | :py:attr:`slot_number`               | int      |
    +--------------------------------------+----------+
-   | :py:attr:`socket_number`             | ViInt32  |
+   | :py:attr:`socket_number`             | int      |
    +--------------------------------------+----------+
 
    **Public methods**
