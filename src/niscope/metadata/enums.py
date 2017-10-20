@@ -217,7 +217,7 @@ format: IQIQIQ...
                 'name': 'DISABLED',
                 'value': 0,
 'documentation': {
-'description': '(Default) Use only this channel's ADC to acquire data for this channel.',
+'description': "(Default) Use only this channel's ADC to acquire data for this channel.",
 },
             },
             {
