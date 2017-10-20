@@ -24,7 +24,7 @@ for attr in helper.sorted_attrs(attributes):
     if attributes[attr]['enum'] is not None:
         t = ':py:data:`' + attributes[attr]["enum"] + '`'
     else:
-        t = attributes[attr]["type"]
+        t = helper.get_python_type_for_visa_type(attributes[attr]["type"])
 
     table_contents.append((':py:attr:`' + attributes[attr]["name"].lower() + '`', t))
 
@@ -36,11 +36,14 @@ table = helper.as_rest_table(table_contents)
 
 <%
 table_contents = []
+table_contents.append(('Method', 'Parameters'))
 for f in sorted(functions):
     if functions[f]['codegen_method'] == 'public':
         name = functions[f]['python_name']
         param_list = helper.get_params_snippet(functions[f], helper.ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD)
-        table_contents.append((':py:func:`{0}`'.format(name),))
+        if len(param_list) == 0:
+            param_list = " "
+        table_contents.append((':py:func:`{0}`'.format(name), param_list))
 
 table = helper.as_rest_table(table_contents)
 %>\
