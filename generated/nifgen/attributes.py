@@ -66,7 +66,7 @@ class AttributeEnum(object):
 
     def __set__(self, session, value):
         if type(value) is not self._attribute_type:
-            raise TypeError('must be nimodinst.' + str(self._attribute_type.__name__) + ' not ' + str(type(value).__name__))
+            raise TypeError('must be ' + str(self._attribute_type.__name__) + ' not ' + str(type(value).__name__))
         return self._underlying_attribute.__set__(session, value.value)
 
 

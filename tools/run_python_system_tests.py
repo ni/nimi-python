@@ -29,7 +29,7 @@ print('****Parsing GitHub releases to obtain the latest zip file URL.****')
 release_url = 'https://api.github.com/repos/ni/nimi-python/releases'
 with urllib.request.urlopen(release_url) as response:
     html = response.read()
-url_data = json.loads(html.decode('ascii'))
+url_data = json.loads(html.decode('utf-8'))
 zip_url = url_data[0]['zipball_url']
 print(zip_url)
 

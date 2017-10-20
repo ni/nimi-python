@@ -18,6 +18,19 @@ niswitch.Session properties
     Analog Bus on an NI SwitchBlock
     Carrier <switch.chm::/SwitchBlock_analog_bus_reservation.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        analog_bus_sharing_enable.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        analog_bus_sharing_enable.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].analog_bus_sharing_enable = var
+            var = session['0,1'].analog_bus_sharing_enable
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -27,7 +40,7 @@ niswitch.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -48,6 +61,19 @@ niswitch.Session properties
     Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
     Considerations <SWITCH.chm::/rf.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        bandwidth.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        bandwidth.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].bandwidth = var
+            var = session['0,1'].bandwidth
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -57,7 +83,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -201,6 +227,19 @@ niswitch.Session properties
     Properties <switchpropref.chm::/cniSwitch.html>`__ `RF Switching
     Considerations <SWITCH.chm::/rf.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        characteristic_impedance.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        characteristic_impedance.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].characteristic_impedance = var
+            var = session['0,1'].characteristic_impedance
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -210,7 +249,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -591,6 +630,19 @@ niswitch.Session properties
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
     Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        is_configuration_channel.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        is_configuration_channel.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].is_configuration_channel = var
+            var = session['0,1'].is_configuration_channel
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -600,7 +652,7 @@ niswitch.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -691,6 +743,19 @@ niswitch.Session properties
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Setting
     Source and Configuration Channels <SWITCH.chm::/configchannels.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        is_source_channel.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        is_source_channel.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].is_source_channel = var
+            var = session['0,1'].is_source_channel
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -700,7 +765,7 @@ niswitch.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -850,6 +915,19 @@ niswitch.Session properties
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        max_ac_voltage.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        max_ac_voltage.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].max_ac_voltage = var
+            var = session['0,1'].max_ac_voltage
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -859,7 +937,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -879,6 +957,19 @@ niswitch.Session properties
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        max_carry_ac_current.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        max_carry_ac_current.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].max_carry_ac_current = var
+            var = session['0,1'].max_carry_ac_current
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -888,7 +979,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -908,6 +999,19 @@ niswitch.Session properties
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        max_carry_ac_power.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        max_carry_ac_power.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].max_carry_ac_power = var
+            var = session['0,1'].max_carry_ac_power
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -917,7 +1021,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -937,6 +1041,19 @@ niswitch.Session properties
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        max_carry_dc_current.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        max_carry_dc_current.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].max_carry_dc_current = var
+            var = session['0,1'].max_carry_dc_current
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -946,7 +1063,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -966,6 +1083,19 @@ niswitch.Session properties
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        max_carry_dc_power.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        max_carry_dc_power.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].max_carry_dc_power = var
+            var = session['0,1'].max_carry_dc_power
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -975,7 +1105,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -995,6 +1125,19 @@ niswitch.Session properties
     `General Switching Considerations <SWITCH.chm::/considerations.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        max_dc_voltage.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        max_dc_voltage.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].max_dc_voltage = var
+            var = session['0,1'].max_dc_voltage
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -1004,7 +1147,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -1024,6 +1167,19 @@ niswitch.Session properties
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Current <SWITCH.chm::/switching_current.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        max_switching_ac_current.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        max_switching_ac_current.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].max_switching_ac_current = var
+            var = session['0,1'].max_switching_ac_current
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -1033,7 +1189,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -1053,6 +1209,19 @@ niswitch.Session properties
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Power <SWITCH.chm::/switching_power.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        max_switching_ac_power.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        max_switching_ac_power.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].max_switching_ac_power = var
+            var = session['0,1'].max_switching_ac_power
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -1062,7 +1231,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -1082,6 +1251,19 @@ niswitch.Session properties
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Current <SWITCH.chm::/switching_current.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        max_switching_dc_current.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        max_switching_dc_current.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].max_switching_dc_current = var
+            var = session['0,1'].max_switching_dc_current
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -1091,7 +1273,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -1111,6 +1293,19 @@ niswitch.Session properties
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Switching
     Power <SWITCH.chm::/switching_power.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        max_switching_dc_power.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        max_switching_dc_power.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].max_switching_dc_power = var
+            var = session['0,1'].max_switching_dc_power
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -1120,7 +1315,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+
@@ -1673,6 +1868,19 @@ niswitch.Session properties
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `Settling
     Time <SWITCH.chm::/settling_time.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        settling_time.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        settling_time.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].settling_time = var
+            var = session['0,1'].settling_time
+
     The following table lists the characteristics of this property.
 
     +----------------+------------+
@@ -1682,7 +1890,7 @@ niswitch.Session properties
     +----------------+------------+
     | Permissions    | read-write |
     +----------------+------------+
-    | Channel Based  | False      |
+    | Channel Based  | True       |
     +----------------+------------+
     | Resettable     | No         |
     +----------------+------------+
@@ -2063,6 +2271,19 @@ niswitch.Session properties
     `N-Wire Switching Modes <SWITCH.chm::/xwire.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
 
+
+
+
+    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
+        wire_mode.Session object, then the set/get will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        wire_mode.Session instance, and calling set/get value on the result.:
+
+        .. code:: python
+
+            session['0,1'].wire_mode = var
+            var = session['0,1'].wire_mode
+
     The following table lists the characteristics of this property.
 
     +----------------+-----------+
@@ -2072,7 +2293,7 @@ niswitch.Session properties
     +----------------+-----------+
     | Permissions    | read only |
     +----------------+-----------+
-    | Channel Based  | False     |
+    | Channel Based  | True      |
     +----------------+-----------+
     | Resettable     | No        |
     +----------------+-----------+

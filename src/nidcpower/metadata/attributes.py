@@ -505,7 +505,7 @@ information.
     },
     1150003: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Measurement:Samples To Average',
         'name': 'SAMPLES_TO_AVERAGE',
@@ -541,7 +541,7 @@ Rejection <NI_DC_Power_Supplies_Help.chm::/NoiseRejectMeasure.html>`__
     },
     1150004: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:DC Voltage:Current Limit Range',
         'name': 'CURRENT_LIMIT_RANGE',
@@ -577,7 +577,7 @@ property for more information about enabling the output channel.
     },
     1150005: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:DC Voltage:Voltage Level Range',
         'name': 'VOLTAGE_LEVEL_RANGE',
@@ -614,7 +614,7 @@ about enabling the output channel.
     },
     1150006: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Measurement:Advanced:Reset Average Before Measurement',
         'name': 'RESET_AVERAGE_BEFORE_MEASUREMENT',
@@ -689,7 +689,7 @@ the default value by device.
     },
     1150008: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': 'OutputFunction',
         'lv_property': 'Source:Output Function',
         'name': 'OUTPUT_FUNCTION',
@@ -735,7 +735,7 @@ Mode <NI_DC_Power_Supplies_Help.chm::/Constant_Current.html>`__
     },
     1150009: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:DC Current:Current Level',
         'name': 'CURRENT_LEVEL',
@@ -768,7 +768,7 @@ property for more information about enabling the output channel.
     },
     1150010: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:DC Current:Voltage Limit',
         'name': 'VOLTAGE_LIMIT',
@@ -802,7 +802,7 @@ property for more information about enabling the output channel.
     },
     1150011: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:DC Current:Current Level Range',
         'name': 'CURRENT_LEVEL_RANGE',
@@ -839,7 +839,7 @@ about enabling the output channel.
     },
     1150012: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:DC Current:Voltage Limit Range',
         'name': 'VOLTAGE_LIMIT_RANGE',
@@ -876,7 +876,7 @@ about enabling the output channel.
     },
     1150013: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': 'Sense',
         'lv_property': 'Measurement:Sense',
         'name': 'SENSE',
@@ -906,7 +906,7 @@ Sense <NI_DC_Power_Supplies_Help.chm::/local_and_remote_sense.html>`__
     },
     1150014: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': 'OutputCapacitance',
         'lv_property': 'Source:Advanced:Output Capacitance',
         'name': 'OUTPUT_CAPACITANCE',
@@ -941,7 +941,7 @@ information about supported devices.
     },
     1150015: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': 'VoltageLevelAutorange',
         'lv_property': 'Source:DC Voltage:Voltage Level Autorange',
         'name': 'VOLTAGE_LEVEL_AUTORANGE',
@@ -980,7 +980,7 @@ the default value by device.
     },
     1150016: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': 'CurrentLimitAutorange',
         'lv_property': 'Source:DC Voltage:Current Limit Autorange',
         'name': 'CURRENT_LIMIT_AUTORANGE',
@@ -1018,7 +1018,7 @@ the default value by device.
     },
     1150017: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': 'CurrentLevelAutorange',
         'lv_property': 'Source:DC Current:Current Level Autorange',
         'name': 'CURRENT_LEVEL_AUTORANGE',
@@ -1057,7 +1057,7 @@ the default value by device.
     },
     1150018: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': 'VoltageLimitAutorange',
         'lv_property': 'Source:DC Current:Voltage Limit Autorange',
         'name': 'VOLTAGE_LIMIT_AUTORANGE',
@@ -1096,7 +1096,7 @@ the default value by device.
     },
     1150020: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': 'PowerLineFrequency',
         'lv_property': 'Measurement:Power Line Frequency',
         'name': 'POWER_LINE_FREQUENCY',
@@ -2025,7 +2025,7 @@ information about supported devices.
     },
     1150051: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Advanced:Source Delay',
         'name': 'SOURCE_DELAY',
@@ -2086,7 +2086,7 @@ the default value by device.
     },
     1150055: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': 'AutoZero',
         'lv_property': 'Measurement:Auto Zero',
         'name': 'AUTO_ZERO',
@@ -2154,7 +2154,7 @@ the default value by device.
     },
     1150058: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Measurement:Aperture Time',
         'name': 'APERTURE_TIME',
@@ -2189,7 +2189,7 @@ information about supported devices.
     },
     1150059: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': 'ApertureTimeUnits',
         'lv_property': 'Measurement:Aperture Time Units',
         'name': 'APERTURE_TIME_UNITS',
@@ -2224,7 +2224,7 @@ information about supported devices.
     },
     1150060: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Output Connected',
         'name': 'OUTPUT_CONNECTED',
@@ -2256,7 +2256,7 @@ PXIe-4138/39.
     },
     1150061: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Output Resistance',
         'name': 'OUTPUT_RESISTANCE',
@@ -2289,7 +2289,7 @@ information about supported devices.
     },
     1150062: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': 'TransientResponse',
         'lv_property': 'Source:Transient Response',
         'name': 'TRANSIENT_RESPONSE',
@@ -2423,7 +2423,7 @@ information about supported devices.
     },
     1150067: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Custom Transient Response:Voltage:Gain Bandwidth',
         'name': 'VOLTAGE_GAIN_BANDWIDTH',
@@ -2450,7 +2450,7 @@ information about supported devices.
     },
     1150068: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Custom Transient Response:Voltage:Compensation Frequency',
         'name': 'VOLTAGE_COMPENSATION_FREQUENCY',
@@ -2476,7 +2476,7 @@ information about supported devices.
     },
     1150069: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Custom Transient Response:Voltage:Pole-Zero Ratio',
         'name': 'VOLTAGE_POLE_ZERO_RATIO',
@@ -2502,7 +2502,7 @@ information about supported devices.
     },
     1150070: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Custom Transient Response:Current:Gain Bandwidth',
         'name': 'CURRENT_GAIN_BANDWIDTH',
@@ -2529,7 +2529,7 @@ information about supported devices.
     },
     1150071: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Custom Transient Response:Current:Compensation Frequency',
         'name': 'CURRENT_COMPENSATION_FREQUENCY',
@@ -2555,7 +2555,7 @@ information about supported devices.
     },
     1150072: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Custom Transient Response:Current:Pole-Zero Ratio',
         'name': 'CURRENT_POLE_ZERO_RATIO',
@@ -2624,7 +2624,7 @@ information about supported devices.
     },
     1150074: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Advanced:Active Advanced Sequence',
         'name': 'ACTIVE_ADVANCED_SEQUENCE',
@@ -2642,7 +2642,7 @@ information about supported devices.
     },
     1150075: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Advanced:Active Advanced Sequence Step',
         'name': 'ACTIVE_ADVANCED_SEQUENCE_STEP',
@@ -2724,7 +2724,7 @@ Count <pniDCPower_SequenceLoopCount.html>`__ property is ignored.
     },
     1150080: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Voltage Level',
         'name': 'PULSE_VOLTAGE_LEVEL',
@@ -2752,7 +2752,7 @@ information about supported devices.
     },
     1150081: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Current Limit',
         'name': 'PULSE_CURRENT_LIMIT',
@@ -2783,7 +2783,7 @@ information about supported devices.
     },
     1150082: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Bias Voltage Level',
         'name': 'PULSE_BIAS_VOLTAGE_LEVEL',
@@ -2812,7 +2812,7 @@ information about supported devices.
     },
     1150083: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Bias Current Limit',
         'name': 'PULSE_BIAS_CURRENT_LIMIT',
@@ -2843,7 +2843,7 @@ information about supported devices.
     },
     1150084: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Voltage Level Range',
         'name': 'PULSE_VOLTAGE_LEVEL_RANGE',
@@ -2873,7 +2873,7 @@ information about supported devices.
     },
     1150085: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Voltage:Pulse Current Limit Range',
         'name': 'PULSE_CURRENT_LIMIT_RANGE',
@@ -2903,7 +2903,7 @@ information about supported devices.
     },
     1150086: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Current Level',
         'name': 'PULSE_CURRENT_LEVEL',
@@ -2931,7 +2931,7 @@ information about supported devices.
     },
     1150087: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Voltage Limit',
         'name': 'PULSE_VOLTAGE_LIMIT',
@@ -2962,7 +2962,7 @@ information about supported devices.
     },
     1150088: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Bias Current Level',
         'name': 'PULSE_BIAS_CURRENT_LEVEL',
@@ -2991,7 +2991,7 @@ information about supported devices.
     },
     1150089: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Bias Voltage Limit',
         'name': 'PULSE_BIAS_VOLTAGE_LIMIT',
@@ -3021,7 +3021,7 @@ information about supported devices.
     },
     1150090: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Current Level Range',
         'name': 'PULSE_CURRENT_LEVEL_RANGE',
@@ -3051,7 +3051,7 @@ information about supported devices.
     },
     1150091: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Pulse Current:Pulse Voltage Limit Range',
         'name': 'PULSE_VOLTAGE_LIMIT_RANGE',
@@ -3082,7 +3082,7 @@ about enabling the output channel.
     },
     1150092: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Advanced:Pulse Bias Delay',
         'name': 'PULSE_BIAS_DELAY',
@@ -3108,7 +3108,7 @@ information about supported devices.
     },
     1150093: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Advanced:Pulse On Time',
         'name': 'PULSE_ON_TIME',
@@ -3133,7 +3133,7 @@ information about supported devices.
     },
     1150094: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Advanced:Pulse Off Time',
         'name': 'PULSE_OFF_TIME',
@@ -3476,7 +3476,7 @@ information about supported devices.
     },
     1250001: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:DC Voltage:Voltage Level',
         'name': 'VOLTAGE_LEVEL',
@@ -3591,7 +3591,7 @@ information about supported devices.
     },
     1250005: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:DC Voltage:Current Limit',
         'name': 'CURRENT_LIMIT',
@@ -3625,7 +3625,7 @@ property for more information about enabling the output channel.
     },
     1250006: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': 'True',
         'enum': None,
         'lv_property': 'Source:Output Enabled',
         'name': 'OUTPUT_ENABLED',

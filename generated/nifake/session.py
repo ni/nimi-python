@@ -63,7 +63,7 @@ class _SessionBase(object):
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
-            raise TypeError("%r is a frozen class" % self)
+            raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
     def _get_error_description(self, error_code):
@@ -135,6 +135,30 @@ class _SessionBase(object):
         '''
         attribute_value_ctype = visatype.ViInt32(0)
         error_code = self._library.niFake_GetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(attribute_value_ctype.value)
+
+    def _get_attribute_vi_int64(self, attribute_id):
+        '''_get_attribute_vi_int64
+
+        Queries the value of a ViInt64 attribute.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._get_attribute_vi_int64(attribute_id)
+
+        Args:
+            attribute_id (int): Pass the ID of an attribute.
+
+        Returns:
+            attribute_value (int): Returns the value of the attribute.
+        '''
+        attribute_value_ctype = visatype.ViInt64(0)
+        error_code = self._library.niFake_GetAttributeViInt64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -277,6 +301,27 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def _set_attribute_vi_int64(self, attribute_id, attribute_value):
+        '''_set_attribute_vi_int64
+
+        This function sets the value of a ViInt64 attribute.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session instance, and calling this method on the result.:
+
+            session['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
+
+        Args:
+            attribute_id (int): Pass the ID of an attribute.
+            attribute_value (int): Pass the value that you want to set the attribute to.
+        '''
+        error_code = self._library.niFake_SetAttributeViInt64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
@@ -370,9 +415,9 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
+        except errors.Error as e:
+            self._vi = 0
+            raise
         self._vi = 0
 
     ''' These are code-generated '''
@@ -515,6 +560,24 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
 
+    def get_an_ivi_dance_string(self):
+        '''get_an_ivi_dance_string
+
+        Returns a string using the IVI dance.
+
+        Args:
+            buffer_size (int): Number of bytes in aString You can IVI-dance with this.
+        '''
+        buffer_size = 0
+        a_string_ctype = None
+        error_code = self._library.niFake_GetAnIviDanceString(self._vi, buffer_size, a_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size = error_code
+        a_string_ctype = (visatype.ViChar * buffer_size)()
+        error_code = self._library.niFake_GetAnIviDanceString(self._vi, buffer_size, a_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return a_string_ctype.value.decode(self._encoding)
+
     def get_enum_value(self):
         '''get_enum_value
 
@@ -586,6 +649,29 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def multiple_array_types(self, passed_in_array_size, len_array):
+        '''multiple_array_types
+
+        Returns multiple types of arrays.
+
+        Args:
+            passed_in_array_size (int): Number of measurements to acquire.
+            len_array_size (int): Size of lenArray
+            len_array (list of float): Contains an array of float numbers.
+
+        Returns:
+            passed_in_array (list of float): An array with size passed in.
+
+                Note: The size must be at least arraySize.
+            a_fixed_array (list of float): An array of doubles with fixed size.
+        '''
+        passed_in_array_ctype = (visatype.ViReal64 * passed_in_array_size)()
+        a_fixed_array_ctype = (visatype.ViReal64 * 3)()
+        len_array_size = len(len_array)
+        error_code = self._library.niFake_MultipleArrayTypes(passed_in_array_size, passed_in_array_ctype, a_fixed_array_ctype, len_array_size, len_array)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(passed_in_array_ctype[i]) for i in range(passed_in_array_size)], [float(a_fixed_array_ctype[i]) for i in range(3)]
+
     def one_input_function(self, a_number):
         '''one_input_function
 
@@ -595,6 +681,40 @@ class Session(_SessionBase):
             a_number (int): Contains a number
         '''
         error_code = self._library.niFake_OneInputFunction(self._vi, a_number)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):
+        '''parameters_are_multiple_types
+
+        Has parameters of multiple types.
+
+        Args:
+            a_boolean (bool): Contains a boolean.
+            an_int32 (int): Contains a 32-bit integer.
+            an_int64 (int): Contains a 64-bit integer.
+            an_int_enum (enums.Turtle): Indicates a ninja turtle
+
+                +---+---------------+
+                | 0 | Leonardo      |
+                +---+---------------+
+                | 1 | Donatello     |
+                +---+---------------+
+                | 2 | Raphael       |
+                +---+---------------+
+                | 3 | Mich elangelo |
+                +---+---------------+
+            a_float (float): The measured value.
+            a_float_enum (enums.FloatEnum): A float enum.
+            string_size (int): Number of bytes allocated for aString
+            a_string (string): An IVI dance string.
+        '''
+        if type(an_int_enum) is not enums.Turtle:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Turtle))
+        if type(a_float_enum) is not enums.FloatEnum:
+            raise TypeError('Parameter mode must be of type ' + str(enums.FloatEnum))
+        string_size = len(a_string)
+        error_code = self._library.niFake_ParametersAreMultipleTypes(self._vi, a_boolean, an_int32, an_int64, an_int_enum.value, a_float, a_float_enum.value, string_size, a_string.encode(self._encoding))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -651,6 +771,53 @@ class Session(_SessionBase):
         error_code = self._library.niFake_ReturnANumberAndAString(self._vi, ctypes.pointer(a_number_ctype), a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
+
+    def return_multiple_types(self, array_size):
+        '''return_multiple_types
+
+        Returns multiple types.
+
+        Args:
+            array_size (int): Number of measurements to acquire.
+            string_size (int): Number of bytes allocated for aString
+
+        Returns:
+            a_boolean (bool): Contains a boolean.
+            an_int32 (int): Contains a 32-bit integer.
+            an_int64 (int): Contains a 64-bit integer.
+            an_int_enum (enums.Turtle): Indicates a ninja turtle
+
+                +---+---------------+
+                | 0 | Leonardo      |
+                +---+---------------+
+                | 1 | Donatello     |
+                +---+---------------+
+                | 2 | Raphael       |
+                +---+---------------+
+                | 3 | Mich elangelo |
+                +---+---------------+
+            a_float (float): The measured value.
+            a_float_enum (enums.FloatEnum): A float enum.
+            an_array (list of float): An array of measurement values.
+
+                Note: The size must be at least arraySize.
+        '''
+        a_boolean_ctype = visatype.ViBoolean(0)
+        an_int32_ctype = visatype.ViInt32(0)
+        an_int64_ctype = visatype.ViInt64(0)
+        an_int_enum_ctype = visatype.ViInt16(0)
+        a_float_ctype = visatype.ViReal64(0)
+        a_float_enum_ctype = visatype.ViReal64(0)
+        an_array_ctype = (visatype.ViReal64 * array_size)()
+        string_size = 0
+        a_string_ctype = None
+        error_code = self._library.niFake_ReturnMultipleTypes(self._vi, ctypes.pointer(a_boolean_ctype), ctypes.pointer(an_int32_ctype), ctypes.pointer(an_int64_ctype), ctypes.pointer(an_int_enum_ctype), ctypes.pointer(a_float_ctype), ctypes.pointer(a_float_enum_ctype), array_size, an_array_ctype, string_size, a_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        string_size = error_code
+        a_string_ctype = (visatype.ViChar * string_size)()
+        error_code = self._library.niFake_ReturnMultipleTypes(self._vi, ctypes.pointer(a_boolean_ctype), ctypes.pointer(an_int32_ctype), ctypes.pointer(an_int64_ctype), ctypes.pointer(an_int_enum_ctype), ctypes.pointer(a_float_ctype), ctypes.pointer(a_float_enum_ctype), array_size, an_array_ctype, string_size, a_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), [float(an_array_ctype[i]) for i in range(array_size)], a_string_ctype.value.decode(self._encoding)
 
     def simple_function(self):
         '''simple_function

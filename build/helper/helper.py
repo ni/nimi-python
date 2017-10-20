@@ -56,7 +56,10 @@ def get_python_type_for_visa_type(visa_type):
         'ViRsrc': 'str',
     }
 
-    return type_map[visa_type]
+    if visa_type in type_map:
+        return type_map[visa_type]
+    else:
+        assert False, 'Unknown visa_type: {0}'.format(visa_type)
 
 
 
