@@ -2,7 +2,6 @@
 
 import argparse
 import nidmm
-import sys
 
 parser = argparse.ArgumentParser(description='Performs a multipoint measurement using the NI-DMM API.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-n', '--name', default='PXI1Slot2', help='Resource name of a National Instruments Digital Multimeter.')
@@ -13,13 +12,9 @@ parser.add_argument('-s', '--samples', default=10, type=int, help='The number of
 parser.add_argument('-t', '--triggers', default=1, type=int, help='Sets the number of triggers you want the DMM to receive before returning to the Idle state.')
 args = parser.parse_args()
 
-try:
-    with nidmm.Session(args.name) as session:
-        session.configure_measurement_digits(nidmm.Function[args.function], args.range, args.digits)
-        session.configure_multi_point(args.triggers, args.samples)
-        measurements, numberOfMeasurements = session.read_multi_point(array_size=args.samples)
-        print('Number of measurements: ', numberOfMeasurements)
-        print('Measurements: ', measurements)
-except nidmm.Error as e:
-    sys.stderr.write(str(e))
-    sys.exit(e.code)
+with nidmm.Session(args.name) as session:
+    session.configure_measurement_digits(nidmm.Function[args.function], args.range, args.digits)
+    session.configure_multi_point(args.triggers, args.samples)
+    measurements, numberOfMeasurements = session.read_multi_point(array_size=args.samples)
+    print('Number of measurements: ', numberOfMeasurements)
+    print('Measurements: ', measurements)
