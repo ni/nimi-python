@@ -27,19 +27,8 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Aborts an acquisition and returns the digitizer to the Idle state. Call
 this function if the digitizer times out waiting for a trigger.
-
-Related topics:
----------------
-
--  `NI-SCOPE Programming
-   Flow <digitizers.chm::/Programming_Flow.html>`__
--  `Acquisition
-   Functions <digitizers.chm::/Acquisition_Functions.html>`__
 ''',
 },
     },
@@ -81,9 +70,6 @@ NISCOPE\_VAL\_ACQ\_STATUS\_UNKNOWN
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Returns status information about the acquisition to the **status**
 output parameter.
 ''',
@@ -132,12 +118,7 @@ waveform.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Returns the total available size of an array measurement acquisition.
-''',
+'description': 'Returns the total available size of an array measurement acquisition.',
 },
     },
     'ActualNumWfms': {
@@ -184,9 +165,6 @@ two.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Helps you to declare appropriately sized waveforms. NI-SCOPE handles the
 channel list parsing for you.
 ''',
@@ -224,21 +202,11 @@ NISCOPE\_ATTR\_HORZ\_RECORD\_LENGTH attribute.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Returns the actual number of points the digitizer acquires for each
 channel. After configuring the digitizer for an acquisition, call this
 function to determine the size of the waveforms that the digitizer
 acquires. The value is equal to or greater than the minimum number of
 points specified in any of the Configure Horizontal functions.
-
-Related topics:
----------------
-
--  `Sample Rate <digitizers.chm::/Sample_Rate.html>`__
--  `Coercions of Horizontal
-   Parameters <digitizers.chm::/Horizontal_Parameters.html>`__
 ''',
 },
     },
@@ -286,9 +254,6 @@ to add.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Adds one measurement to the list of processing steps that are completed
 before the measurement. The processing is added on a per channel basis,
 and the processing measurements are completed in the same order they are
@@ -298,14 +263,6 @@ processing, and this set of parameters is used during the processing
 step. The processing measurements are streamed, so the result of the
 first processing step is used as the input for the next step. The
 processing is done before any other measurements.
-
-Related topics:
----------------
-
--  `Array Measurements in
-   NI-SCOPE <digitizers.chm::/Array_Measurements_refs.html>`__
--  `Scalar Measurements in
-   NI-SCOPE <digitizers.chm::/Scalar_Measurements_refs.html>`__
 ''',
 },
     },
@@ -341,20 +298,9 @@ information.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the relative sample clock delay (in seconds) when using the
 internal clock. Each time this function is called, the sample clock is
 delayed from the reference clock by the specified amount of time.
-
-Related topics:
----------------
-
--  `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
--  `Reference Clock/Phase-Lock
-   Loop <digitizers.chm::/Reference_Clock.html>`__
--  `NI-TClk Overview <nitclk.chm::/niTClk_overview.html>`__
 ''',
 },
     },
@@ -377,9 +323,6 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Automatically configures the instrument. When you call this function,
 the digitizer senses the input signal and automatically configures many
 of the instrument settings. If a signal is detected on a channel, the
@@ -394,12 +337,6 @@ a signal present if the signal is at least 10% of the smallest vertical
 range available for that channel.
 
 The following settings are changed:
-
-Related topics:
----------------
-
--  `Configuring an Acquisition Using
-   Auto\_Setup <digitizers.chm::/Configuring_an_Acquisition_Using_Auto_Setup.html>`__
 ''',
 'table_body': [['**General**'], ['Acquisition mode', 'Normal'], ['Reference clock', 'Internal'], ['**Vertical**'], ['Vertical coupling', 'AC (DC for NI 5621)'], ['Vertical bandwidth', 'Full'], ['Vertical range', 'Changed by auto setup'], ['Vertical offset', '0 V'], ['Probe attenuation', 'Unchanged by auto setup'], ['Input impedance', 'Unchanged by auto setup'], ['**Horizontal**'], ['Sample rate', 'Changed by auto setup'], ['Min record length', 'Changed by auto setup'], ['Enforce realtime', 'True'], ['Number of Records', 'Changed to 1'], ['**Triggering**'], ['Trigger type', 'Edge if signal present, otherwise immediate'], ['Trigger channel', 'Lowest numbered channel with a signal present'], ['Trigger slope', 'Positive'], ['Trigger coupling', 'DC'], ['Reference position', '50%'], ['Trigger level', '50% of signal on trigger channel'], ['Trigger delay', '0'], ['Trigger holdoff', '0'], ['Trigger output', 'None']],
 },
@@ -448,9 +385,6 @@ restore the previous calibration.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Self-calibrates most NI digitizers, including all SMC-based devices and
 most Traditional NI-DAQ (Legacy) devices. To verify that your digitizer
 supports self-calibration, refer to `Features Supported by
@@ -519,12 +453,7 @@ session.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Verifies the validity of a value you specify for a ViBoolean attribute.
-''',
+'description': 'Verifies the validity of a value you specify for a ViBoolean attribute.',
 },
     },
     'CheckAttributeViInt32': {
@@ -579,12 +508,7 @@ session.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Verifies the validity of a value you specify for a ViInt32 attribute.
-''',
+'description': 'Verifies the validity of a value you specify for a ViInt32 attribute.',
 },
     },
     'CheckAttributeViInt64': {
@@ -639,12 +563,7 @@ session.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Verifies the validity of a value you specify for a ViInt64 attribute.
-''',
+'description': 'Verifies the validity of a value you specify for a ViInt64 attribute.',
 },
     },
     'CheckAttributeViReal64': {
@@ -699,12 +618,7 @@ session.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Verifies the validity of a value you specify for a ViReal64 attribute.
-''',
+'description': 'Verifies the validity of a value you specify for a ViReal64 attribute.',
 },
     },
     'CheckAttributeViSession': {
@@ -759,12 +673,7 @@ session.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Verifies the validity of a value you specify for a ViSession attribute.
-''',
+'description': 'Verifies the validity of a value you specify for a ViSession attribute.',
 },
     },
     'CheckAttributeViString': {
@@ -819,12 +728,7 @@ session.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Verifies the validity of a value you specify for a ViString attribute.
-''',
+'description': 'Verifies the validity of a value you specify for a ViString attribute.',
 },
     },
     'ClearError': {
@@ -846,9 +750,6 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Clears the error information for the current execution thread and the
 IVI session you specify. If you pass VI\_NULL for the Instrument Handle
 parameter, this function clears the error information only for the
@@ -878,12 +779,7 @@ particular instrument session.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Clears the list of current interchange warnings.
-''',
+'description': 'Clears the list of current interchange warnings.',
 'note': '''
 This function is included for compliance with the IviScope Class
 Specification.
@@ -936,9 +832,6 @@ to clear the stats for.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Clears the waveform stats on the channel and measurement you specify. If
 you want to clear all of the measurements, use
 NISCOPE\_VAL\_ALL\_MEASUREMENTS in the **clearableMeasurementFunction**
@@ -983,9 +876,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Clears the list of processing steps assigned to the given channel. The
 processing is added using the niScope\_AddWaveformProcessing function,
 where the processing steps are completed in the same order in which they
@@ -1014,21 +904,10 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Commits to hardware all the parameter settings associated with the task.
 Use this function if you want a parameter change to be immediately
 reflected in the hardware. This function is not supported for
 Traditional NI-DAQ (Legacy) devices.
-
-Related topics:
----------------
-
--  `SMC-Based Digitizers Acquisition Engine State
-   Diagram <digitizers.chm::/5122_State_Model.html>`__
--  `NI-SCOPE Programming
-   Flow <digitizers.chm::/Programming_Flow.html>`__
 ''',
 },
     },
@@ -1077,17 +956,8 @@ and set NISCOPE\_ATTR\_DDC\_ENABLED to True.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures how the digitizer acquires data and fills the waveform
 record.
-
-Related topics:
----------------
-
--  `Acquisition
-   Functions <digitizers.chm::/Acquisition_Functions.html>`__
 ''',
 },
     },
@@ -1150,9 +1020,6 @@ relative to the trigger event.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 This function is included for compliance with the IviScope Class
 Specification.
 
@@ -1218,19 +1085,8 @@ achieve full bandwidth.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the attributes that control the electrical characteristics of
 the channel—the input impedance and the bandwidth.
-
-Related topics:
----------------
-
--  `Using Configure Chan
-   Characteristics <digitizers.chm::/Configure_Chan_Characteristics.html>`__
--  `Impedance and Impedance
-   Matching <digitizers.chm::/Impedance_and_Impedance_Matching.html>`__
 ''',
 },
     },
@@ -1357,9 +1213,6 @@ Defined Values
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 This function is included for compliance with the IviScope Class
 Specification.
 
@@ -1444,20 +1297,9 @@ Refer to NISCOPE\_ATTR\_MASTER\_ENABLE for more information.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the attributes for synchronizing the digitizer to a reference
 or sending the digitizer's reference clock output to be used as a
 synchronizing clock for other digitizers.
-
-Related topics:
----------------
-
--  `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
--  `Sample Rate <digitizers.chm::/Sample_Rate.html>`__
--  `Coercions of Horizontal
-   Parameters <digitizers.chm::/Horizontal_Parameters.html>`__
 ''',
 'note': '''
 Some features are not supported by all digitizers. Refer to `Features
@@ -1523,9 +1365,6 @@ information.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Sets the edge triggering attributes. An edge trigger occurs when the
 trigger signal specified with the source parameter passes through the
 voltage threshold specified with the level parameter and has the slope
@@ -1603,9 +1442,6 @@ attribute must be set to TRUE to enable the filter.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the custom coefficients for the equalization FIR filter on
 the device. This filter is designed to compensate the input signal for
 artifacts introduced to the signal outside of the digitizer. Because
@@ -1704,20 +1540,8 @@ VI\_FALSE—Allow real-time and equivalent-time acquisitions
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the common properties of the horizontal subsystem for a
 multirecord acquisition in terms of minimum sample rate.
-
-Related topics:
----------------
-
--  `Configuring the Horizontal
-   Settings <digitizers.chm::/Configuring_Horizontal.html>`__
--  `NI-TClk Overview <nitclk.chm::/niTClk_overview.html>`__
--  `Coercions of Horizontal
-   Parameters <digitizers.chm::/Horizontal_Parameters.html>`__
 ''',
 },
     },
@@ -1797,9 +1621,6 @@ Default Value: 90.0
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 This function is included for compliance with the IviScope Class
 Specification.
 
@@ -1851,9 +1672,6 @@ Default Value: 1
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 This function is included for compliance with the IviScope Class
 Specification.
 
@@ -1964,9 +1782,6 @@ Defined Values
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the instrument for TV triggering. It configures the TV signal
 format, the event, and the signal polarity.
 
@@ -2021,9 +1836,6 @@ NISCOPE\_ATTR\_TRIGGER\_HOLDOFF for more information.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the common attributes of the trigger subsystem.
 
 When you use niScope\_ReadWaveform, the instrument waits for a trigger.
@@ -2034,16 +1846,6 @@ If the instrument requires multiple waveform acquisitions to build a
 complete waveform, it waits for the length of time you specify with the
 **holdoff** parameter to elapse since the previous trigger. The
 instrument then waits for the next trigger.
-
-Related topics:
----------------
-
--  `Configuring Triggers <digitizers.chm::/Configuring_Triggers.html>`__
--  `Coercions of Trigger
-   Parameters <digitizers.chm::/Trigger_Coercions.html>`__
--  `Triggering <digitizers.chm::/Triggers.html>`__
--  `NI-SCOPE Programming
-   Flow <digitizers.chm::/Programming_Flow.html>`__
 ''',
 'note': '''
 This function is included for compliance with the IviScope Class
@@ -2093,12 +1895,7 @@ NISCOPE\_VAL\_AC\_PLUS\_HF\_REJECT (1001)
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Sets the trigger coupling attribute.
-''',
+'description': 'Sets the trigger coupling attribute.',
 'note': '''
 This function is included for compliance with the IviScope Class
 Specification.
@@ -2175,9 +1972,6 @@ information.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the common properties of a digital trigger.
 
 When you initiate an acquisition, the digitizer waits for the start
@@ -2191,13 +1985,6 @@ digitizer finishes the acquisition after completing posttrigger
 sampling. With each Configure Trigger function, you specify
 configuration parameters such as the trigger source and the amount of
 trigger delay.
-
-Related topics:
----------------
-
--  `Digital Triggers <digitizers.chm::/Digital_Triggers.html>`__
--  `Equivalent-Time Sampling and Random Interleaved
-   Sampling <digitizers.chm::/RIS.html>`__
 ''',
 'note': '''
 For multirecord acquisitions, all records after the first record are
@@ -2311,9 +2098,6 @@ information.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures common properties for analog edge triggering.
 
 When you initiate an acquisition, the digitizer waits for the start
@@ -2327,11 +2111,6 @@ digitizer finishes the acquisition after completing posttrigger
 sampling. With each Configure Trigger function, you specify
 configuration parameters such as the trigger source and the amount of
 trigger delay.
-
-Related topics:
----------------
-
--  `Edge Triggers <digitizers.chm::/Edge_Triggers.html>`__
 ''',
 'note': '''
 Some features are not supported by all digitizers. Refer to `Features
@@ -2450,9 +2229,6 @@ information.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures common properties for analog hysteresis triggering. This kind
 of trigger specifies an additional value, specified in the
 **hysteresis** parameter, that a signal must pass through before a
@@ -2470,11 +2246,6 @@ digitizer finishes the acquisition after completing posttrigger
 sampling. With each Configure Trigger function, you specify
 configuration parameters such as the trigger source and the amount of
 trigger delay.
-
-Related topics:
----------------
-
--  `Hysteresis Triggers <digitizers.chm::/Hysteresis_Triggers.html>`__
 ''',
 'note': '''
 Some features are not supported by all digitizers. Refer to `Features
@@ -2503,20 +2274,12 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures common properties for immediate triggering. Immediate
 triggering means the digitizer triggers itself.
 
 When you initiate an acquisition, the digitizer waits for a trigger. You
 specify the type of trigger that the digitizer waits for with a
 Configure Trigger function, such as niScope\_ConfigureTriggerImmediate.
-
-Related topics:
----------------
-
--  `Immediate Triggers <digitizers.chm::/Immediate_Triggers.html>`__
 ''',
 },
     },
@@ -2568,9 +2331,6 @@ generated.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the digitizer to generate a signal pulse that other
 digitizers can detect when configured for digital triggering.
 
@@ -2636,9 +2396,6 @@ information.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures common properties for software triggering.
 
 When you initiate an acquisition, the digitizer waits for the start
@@ -2654,11 +2411,6 @@ configuration parameters such as the trigger source and the amount of
 trigger delay.
 
 To trigger the acquisition, use niScope\_SendSoftwareTriggerEdge.
-
-Related topics:
----------------
-
--  `Software Triggers <digitizers.chm::/Software_Triggers.html>`__
 ''',
 'note': '''
 Some features are not supported by all digitizers. Refer to `Features
@@ -2802,9 +2554,6 @@ information.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the common properties for video triggering, including the
 signal format, TV event, line number, polarity, and enable DC restore. A
 video trigger occurs when the digitizer finds a valid video signal sync.
@@ -2934,9 +2683,6 @@ information.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures common properties for analog window triggering. A window
 trigger occurs when a signal enters or leaves a window you specify with
 the **high level** or **low level** parameters.
@@ -2954,11 +2700,6 @@ configuration parameters such as the trigger source and the amount of
 trigger delay.
 
 To trigger the acquisition, use niScope\_SendSoftwareTriggerEdge.
-
-Related topics:
----------------
-
--  `Window Triggers <digitizers.chm::/Window_Triggers.html>`__
 ''',
 'note': '''
 Some features are not supported by all digitizers. Refer to `Features
@@ -3059,22 +2800,9 @@ NISCOPE\_ATTR\_CHANNEL\_ENABLED for more information.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the most commonly configured attributes of the digitizer
 vertical subsystem, such as the range, offset, coupling, probe
 attenuation, and the channel.
-
-Related topics:
----------------
-
--  `Configuring the Vertical
-   Settings <digitizers.chm::/Configuring_Vertical.html>`__
--  `NI-SCOPE Programming
-   Flow <digitizers.chm::/Programming_Flow.html>`__
--  `Coercions of Vertical
-   Parameters <digitizers.chm::/Vertical_Parameters.html>`__
 ''',
 },
     },
@@ -3097,9 +2825,6 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Aborts any current operation, opens data channel relays, and releases
 RTSI and PFI lines.
 ''',
@@ -3162,9 +2887,6 @@ generated.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configures the digitizer to generate a signal that other devices can
 detect when configured for digital triggering or sharing clocks. The
 **signal** parameter specifies what condition causes the digitizer to
@@ -3180,14 +2902,6 @@ times and set each available line to a different signal.
 To unprogram a specific line on device, call this function with the
 signal you no longer want to export and set **outputTerminal** to
 NISCOPE\_VAL\_NONE.
-
-Related topics:
----------------
-
--  `Triggering <digitizers.chm::/Triggers.html>`__
--  `SMC-Based Digitizers Acquisition Engine State
-   Diagram <digitizers.chm::/5122_State_Model.html>`__
--  `PXI Trigger Lines <digitizers.chm::/PXI_Trigger_Lines.html>`__
 ''',
 'note': 'This function replaces niScope\_ConfigureTriggerOutput.',
 },
@@ -3312,22 +3026,12 @@ Call niScope\_ActualNumWfms to determine the size of this array.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Returns the waveform from a previously initiated acquisition that the
 digitizer acquires for the specified channel. This function returns
 scaled voltage waveforms.
 
 This function may return multiple waveforms depending on the number of
 channels, the acquisition type, and the number of records you specify.
-
-Related topics:
----------------
-
--  `Fetching Data <digitizers.chm::/Fetching_Data.html>`__
--  `Acquiring Data
-   Continuously <digitizers.chm::/Continuously_Acquiring_Data.html>`__
 ''',
 'note': '''
 You can use niScope\_Read instead of this function. niScope\_Read
@@ -3479,9 +3183,6 @@ Call niScope\_ActualNumWfms to determine the size of this array.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Obtains a waveform from the digitizer and returns the specified
 measurement array. This function may return multiple waveforms depending
 on the number of channels, the acquisition type, and the number of
@@ -3615,9 +3316,6 @@ Call niScope\_ActualNumWfms to determine the size of this array.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Retrieves data from a previously initiated acquisition and returns
 binary 16-bit waveforms. This function may return multiple waveforms
 depending on the number of channels, the acquisition type, and the
@@ -3755,9 +3453,6 @@ Call niScope\_ActualNumWfms to determine the size of this array.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Retrieves data from a previously initiated acquisition and returns
 binary 32-bit waveforms. This function may return multiple waveforms
 depending on the number of channels, the acquisition type, and the
@@ -3895,9 +3590,6 @@ Call niScope\_ActualNumWfms to determine the size of this array.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Retrieves data from a previously initiated acquisition and returns
 binary 8-bit waveforms. This function may return multiple waveforms
 depending on the number of channels, the acquisition type, and the
@@ -4021,9 +3713,6 @@ Call niScope\_ActualNumWfms to determine the size of this array.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Retrieves data that the digitizer has acquired from a previously
 initiated acquisition and returns a one-dimensional array of complex,
 scaled waveforms.
@@ -4136,9 +3825,6 @@ Call niScope\_ActualNumWfms to determine the size of this array.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Retrieves data from single channels and records. Returns a
 one-dimensional array of complex binary 16-bit waveforms.
 ''',
@@ -4213,9 +3899,6 @@ niScope\_ActualNumWfms to determine the array length.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Fetches a waveform from the digitizer and performs the specified
 waveform measurement. Refer to `Using Fetch
 Functions <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
@@ -4227,12 +3910,6 @@ NISCOPE\_ATTR\_MEAS\_CHAN\_LOW\_REF\_LEVEL,
 NISCOPE\_ATTR\_MEAS\_CHAN\_MID\_REF\_LEVEL, and
 NISCOPE\_ATTR\_MEAS\_CHAN\_HIGH\_REF\_LEVEL to set each channel
 differently.
-
-Related topics:
----------------
-
--  `Making Waveform
-   Measurements <digitizers.chm::/Making_Waveform_Measurements.html>`__
 ''',
 },
     },
@@ -4362,9 +4039,6 @@ called.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Obtains a waveform measurement and returns the measurement value. This
 function may return multiple statistical results depending on the number
 of channels, the acquisition type, and the number of records you
@@ -4495,9 +4169,6 @@ Units: seconds
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Returns the waveform from a previously initiated acquisition that the
 digitizer acquires for the channel you specify.
 
@@ -4572,9 +4243,6 @@ Default Value: "0"
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Configure the appropriate reference levels before calling this function.
 You can configure the low, mid, and high references by setting the
 following attributes:
@@ -4648,9 +4316,6 @@ ViBoolean variable.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Queries the value of a ViBoolean attribute. You can use this function to
 get the values of instrument-specific attributes and inherent IVI
 attributes. If the attribute represents an instrument state, this
@@ -4711,9 +4376,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Queries the value of a ViInt32 attribute. You can use this function to
 get the values of instrument-specific attributes and inherent IVI
 attributes. If the attribute represents an instrument state, this
@@ -4774,9 +4436,6 @@ Syntax <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cvichannelstringsyntaxforc
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Queries the value of a ViInt64 attribute. You can use this function to
 get the values of instrument-specific attributes and inherent IVI
 attributes. If the attribute represents an instrument state, this
@@ -4840,9 +4499,6 @@ ViReal64 variable.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Queries the value of a ViReal64 attribute. You can use this function to
 get the values of instrument-specific attributes and inherent IVI
 attributes. If the attribute represents an instrument state, this
@@ -4906,9 +4562,6 @@ ViSession variable.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Queries the value of a ViSession attribute. You can use this function to
 get the values of instrument-specific attributes and inherent IVI
 attributes. If the attribute represents an instrument state, this
@@ -4982,9 +4635,6 @@ bytes as indicated in the **bufSize**.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Queries the value of a ViString attribute. You can use this function to
 get the values of instrument-specific attributes and inherent IVI
 attributes. If the attribute represents an instrument state, this
@@ -5069,9 +4719,6 @@ specify. Do not modify the contents of the channel string.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Returns the channel string that is in the channel table at an index you
 specify. Not applicable to National Instruments digitizers.
 ''',
@@ -5136,9 +4783,6 @@ attribute.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Retrieves the custom coefficients for the equalization FIR filter on the
 device. This filter is designed to compensate the input signal for
 artifacts introduced to the signal outside of the digitizer. Because
@@ -5220,9 +4864,6 @@ parameter.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Reads an error code and message from the error queue. National
 Instruments digitizers do not contain an error queue. Errors are
 reported as they occur. Therefore, this function does not detect errors.
@@ -5285,9 +4926,6 @@ should be at least as large as the buffer size.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Returns the error code from an NI-SCOPE function as a user-readable
 string. Use VI\_NULL as the default instrument handle.
 
@@ -5462,9 +5100,6 @@ contain at least as many elements as the value you specify with the
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Returns the coercion information associated with the IVI session. This
 function retrieves and clears the oldest instance in which the
 instrument driver coerced a value you specified to another value.
@@ -5538,9 +5173,6 @@ with the **bufferSize** parameter.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Returns the interchangeability warnings associated with the IVI session.
 It retrieves and clears the oldest instance in which the class driver
 recorded an interchangeability warning. Interchangeability warnings
@@ -5777,9 +5409,6 @@ create a peer-to-peer streaming session.
 Returns a writer endpoint that can be used with NI-P2P to configure a
 peer-to-peer stream with a digitizer endpoint.
 
-Related topics:
----------------
-
 -  `Peer-to-Peer Streaming <digitizers.chm::/5160_P2P.html>`__
 ''',
 },
@@ -5930,9 +5559,6 @@ subsequent NI-SCOPE function calls.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Performs the following initialization actions:
 
 -  Creates a new IVI instrument driver and optionally sets the initial
@@ -5946,12 +5572,6 @@ Performs the following initialization actions:
    instrument driver if the **IDQuery** is set to VI\_TRUE
 -  Returns an instrument handle that you use to identify the instrument
    in all subsequent instrument driver function calls
-
-Related topics:
----------------
-
--  `NI-SCOPE Programming
-   Flow <digitizers.chm::/Programming_Flow.html>`__
 ''',
 },
     },
@@ -5974,22 +5594,11 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Initiates a waveform acquisition.
 
 After calling this function, the digitizer leaves the Idle state and
 waits for a trigger. The digitizer acquires a waveform for each channel
 you enable with niScope\_ConfigureVertical.
-
-Related topics:
----------------
-
--  `SMC-Based Digitizers Acquisition Engine State
-   Diagram <digitizers.chm::/5122_State_Model.html>`__
--  `NI-SCOPE Programming
-   Flow <digitizers.chm::/Programming_Flow.html>`__
 ''',
 },
     },
@@ -6042,7 +5651,7 @@ name configured with the IVI Configuration utility, as shown in Example
 name identifies a specific device and specifies the initial settings for
 the session.
 ''',
-'table_body': [['.. raw:: html     <div align="center">  1  .. raw:: html     </div>', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['.. raw:: html     <div align="center">  2  .. raw:: html     </div>', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  3  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  4  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)']],
+'table_body': [['1', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['2', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['3', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['4', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)']],
 'table_header': ['Example #', 'Device Type', 'Syntax', 'Variable'],
 },
             },
@@ -6073,9 +5682,6 @@ still initializing.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Call this function to determine whether the device is ready for use or
 the device is still undergoing initialization.
 ''',
@@ -6130,9 +5736,6 @@ Return values:
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Determines whether a value you pass from the waveform array is invalid.
 After the read and fetch waveform functions execute, each element in the
 waveform array contains either a voltage or a value indicating that the
@@ -6182,9 +5785,6 @@ niScope\_UnlockSession in the same function.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Obtains a multithread lock on the instrument session. Before doing so,
 it waits until all other execution threads have released their locks on
 the instrument session. Other threads might have obtained a lock on this
@@ -6230,17 +5830,7 @@ particular instrument session.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Starts the 1 kHz square wave output on PFI 1 for probe compensation.
-
-Related topics:
----------------
-
--  `Probe Compensation <digitizers.chm::/Compensating_Probes.html>`__
-''',
+'description': 'Starts the 1 kHz square wave output on PFI 1 for probe compensation.',
 },
     },
     'ProbeCompensationSignalStop': {
@@ -6261,17 +5851,7 @@ particular instrument session.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Stops the 1 kHz square wave output on PFI 1 for probe compensation.
-
-Related topics:
----------------
-
--  `Probe Compensation <digitizers.chm::/Compensating_Probes.html>`__
-''',
+'description': 'Stops the 1 kHz square wave output on PFI 1 for probe compensation.',
 },
     },
     'Read': {
@@ -6394,9 +5974,6 @@ Call niScope\_ActualNumWfms to determine the size of this array.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Initiates an acquisition, waits for it to complete, and retrieves the
 data. The process is similar to calling niScope\_InitiateAcquisition,
 niScope\_AcquisitionStatus, and niScope\_Fetch. The only difference is
@@ -6406,14 +5983,6 @@ the channels with niScope\_ConfigureVertical.
 
 This function may return multiple waveforms depending on the number of
 channels, the acquisition type, and the number of records you specify.
-
-Related topics:
----------------
-
--  `Acquisition
-   Functions <digitizers.chm::/Acquisition_Functions.html>`__
--  `NI-SCOPE Programming
-   Flow <digitizers.chm::/Programming_Flow.html>`__
 ''',
 'note': '''
 Some functionality is not supported in all digitizers. Refer to
@@ -6492,9 +6061,6 @@ niScope\_ActualNumWfms to determine the array length.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Initiates an acquisition, waits for it to complete, and performs the
 specified waveform measurement for a single channel and record or for
 multiple channels and records.
@@ -6509,14 +6075,6 @@ NISCOPE\_ATTR\_MEAS\_CHAN\_LOW\_REF\_LEVEL,
 NISCOPE\_ATTR\_MEAS\_CHAN\_MID\_REF\_LEVEL, and
 NISCOPE\_ATTR\_MEAS\_CHAN\_HIGH\_REF\_LEVEL to set each channel
 differently.
-
-Related topics:
----------------
-
--  `Making Waveform
-   Measurements <digitizers.chm::/Making_Waveform_Measurements.html>`__
--  `Acquisition
-   Functions <digitizers.chm::/Acquisition_Functions.html>`__
 ''',
 },
     },
@@ -6641,9 +6199,6 @@ Units: seconds
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Initiates an acquisition on the channels that you enable with
 niScope\_ConfigureVertical. This function then waits for the acquisition
 to complete and returns the waveform for the channel you specify. Call
@@ -6729,9 +6284,6 @@ Units: milliseconds
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Initiates a new waveform acquisition and returns a specified waveform
 measurement from a specific channel.
 
@@ -6778,16 +6330,10 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Performs a hard reset of the device. Acquisition stops, all routes are
 released, RTSI and PFI lines are tristated, hardware is configured to
 its default state, and all session attributes are reset to their default
 state.
-
-Related topics:
----------------
 
 -  `Thermal Shutdown <digitizers.chm::/Thermal_Shutdown.html>`__
 ''',
@@ -6812,9 +6358,6 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 When developing a complex test system that consists of multiple test
 modules, it is generally a good idea to design the test modules so that
 they can run in any order. To do so requires ensuring that each test
@@ -6872,9 +6415,6 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Performs a software reset of the device, returning it to the default
 state and applying any initial default settings from the IVI
 Configuration Store.
@@ -6911,17 +6451,7 @@ returns the value of the NISCOPE\_ATTR\_SAMPLE\_MODE attribute.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Returns the sample mode the digitizer is currently using.
-
-Related topics:
----------------
-
--  `Sampling Methods <digitizers.chm::/Sampling_Methods.html>`__
-''',
+'description': 'Returns the sample mode the digitizer is currently using.',
 },
     },
     'SampleRate': {
@@ -6956,22 +6486,11 @@ NISCOPE\_ATTR\_HORZ\_SAMPLE\_RATE attribute.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Returns the effective sample rate, in samples per second, of the
 acquired waveform using the current configuration. Refer to `Coercions
 of Horizontal
 Parameters <REPLACE_DRIVER_SPECIFIC_URL_1(horizontal_parameters)>`__ for
 more information about sample rate coercion.
-
-Related topics:
----------------
-
--  `Sample Rate <digitizers.chm::/Sample_Rate.html>`__
--  `Coercions of Horizontal
-   Parameters <digitizers.chm::/Horizontal_Parameters.html>`__
--  `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
 ''',
 },
     },
@@ -6994,9 +6513,6 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Sends a command to trigger the digitizer. Call this function after you
 call niScope\_ConfigureTriggerSoftware.
 ''',
@@ -7043,9 +6559,6 @@ Specifies the type of trigger to send to the digitizer.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Sends the selected trigger to the digitizer. Call this function if you
 called niScope\_ConfigureTriggerSoftware when you want the Reference
 trigger to occur. You can also call this function to override a misused
@@ -7053,11 +6566,6 @@ edge, digital, or hysteresis trigger. If you have configured
 NISCOPE\_ATTR\_ACQ\_ARM\_SOURCE, NISCOPE\_ATTR\_ARM\_REF\_TRIG\_SRC, or
 NISCOPE\_ATTR\_ADV\_TRIG\_SRC, call this function when you want to send
 the corresponding trigger to the digitizer.
-
-Related topics:
----------------
-
--  `Software Triggers <digitizers.chm::/Software_Triggers.html>`__
 ''',
 },
     },
@@ -7113,9 +6621,6 @@ be valid depending on the current settings of the instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Sets the value of a ViBoolean attribute. This is a low-level function
 that you can use to set the values of instrument-specific attributes and
 inherent IVI attributes. If the attribute represents an instrument
@@ -7193,9 +6698,6 @@ valid depending on the current settings of the instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Sets the value of a ViInt32 attribute. This is a low-level function that
 you can use to set the values of instrument-specific attributes and
 inherent IVI attributes. If the attribute represents an instrument
@@ -7273,9 +6775,6 @@ valid depending on the current settings of the instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Sets the value of a ViInt64 attribute. This is a low-level function that
 you can use to set the values of instrument-specific attributes and
 inherent IVI attributes. If the attribute represents an instrument
@@ -7353,9 +6852,6 @@ be valid depending on the current settings of the instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Sets the value of a ViReal64 attribute. This is a low-level function
 that you can use to set the values of instrument-specific attributes and
 inherent IVI attributes. If the attribute represents an instrument
@@ -7433,9 +6929,6 @@ be valid depending on the current settings of the instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Sets the value of a ViSession attribute. This is a low-level function
 that you can use to set the values of instrument-specific attributes and
 inherent IVI attributes. If the attribute represents an instrument
@@ -7513,9 +7006,6 @@ be valid depending on the current settings of the instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Sets the value of a ViString attribute.
 
 This is a low-level function that you can use to set the values of
@@ -7581,9 +7071,6 @@ niScope\_UnlockSession in the same function.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Releases a lock that you acquired on an instrument session using
 niScope\_LockSession.
 ''',
@@ -7608,21 +7095,12 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 When you are finished using an instrument driver session, you must call
 this function to perform the following actions:
 
 -  Closes the instrument I/O session.
 -  Destroys the IVI session and all of its attributes.
 -  Deallocates any memory resources used by the IVI session.
-
-Related topics:
----------------
-
--  `NI-SCOPE Programming
-   Flow <digitizers.chm::/Programming_Flow.html>`__
 ''',
 },
     },
@@ -7688,9 +7166,6 @@ length.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Takes the error code returned by NI-SCOPE functions and returns the
 interpretation as a user-readable string.
 ''',
@@ -7743,9 +7218,6 @@ must contain at least 256 elements (ViChar[256]).
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Reads an error code and message from the error queue. National
 Instruments digitizers do not contain an error queue. Errors are
 reported as they occur. Therefore, this function does not detect errors.
@@ -7805,7 +7277,7 @@ name configured with the IVI Configuration utility, as shown in Example
 name identifies a specific device and specifies the initial settings for
 the session.
 ''',
-'table_body': [['.. raw:: html     <div align="center">  1  .. raw:: html     </div>', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['.. raw:: html     <div align="center">  2  .. raw:: html     </div>', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  3  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['.. raw:: html     <div align="center">  4  .. raw:: html     </div>', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)'], ['.. raw:: html     <div align="center">  5  .. raw:: html     </div>', 'IVI logical name or IVI virtual name', '*myLogicalName*', '(*myLogicalName* = name)']],
+'table_body': [['1', 'Traditional NI-DAQ device', 'DAQ::\\ *1*', '(*1* = device number)'], ['2', 'NI-DAQmx device', '*myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['3', 'NI-DAQmx device', 'DAQ::\\ *myDAQmxDevice*', '(*myDAQmxDevice* = device name)'], ['4', 'NI-DAQmx device', 'DAQ::\\ *2*', '(*2* = device name)'], ['5', 'IVI logical name or IVI virtual name', '*myLogicalName*', '(*myLogicalName* = name)']],
 'table_header': ['Example #', 'Device Type', 'Syntax', 'Variable'],
 },
             },
@@ -7872,9 +7344,6 @@ subsequent NI-SCOPE function calls.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Performs the following initialization actions:
 
 -  Creates a new IVI instrument driver session
@@ -7888,14 +7357,6 @@ Performs the following initialization actions:
    necessary for the operation of the instrument driver
 -  Returns an instrument handle that you use to identify the instrument
    in all subsequent instrument driver function calls
-
-Related topics:
----------------
-
--  `NI-SCOPE Programming
-   Flow <digitizers.chm::/Programming_Flow.html>`__
--  `NI-SCOPE
-   Tutorial <digitizers.chm::/Getting_Started_with_NI-SCOPE.html>`__
 ''',
 },
     },
@@ -7918,9 +7379,6 @@ particular instrument session.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Stops the acquisition, releases routes, and all session attributes are
 reset to their `default
 states <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cviattribute_defaults)>`__.
@@ -7972,9 +7430,6 @@ IVI\_MAX\_MESSAGE\_BUF\_SIZE bytes in length.
         ],
 'documentation': {
 'description': '''
-C Function Prototype
---------------------
-
 Returns the revision numbers of the instrument driver and instrument
 firmware.
 ''',
@@ -8029,12 +7484,7 @@ in length.
             },
         ],
 'documentation': {
-'description': '''
-C Function Prototype
---------------------
-
-Runs the instrument self-test routine and returns the test result(s).
-''',
+'description': 'Runs the instrument self-test routine and returns the test result(s).',
 },
     },
 }

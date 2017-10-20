@@ -12,14 +12,18 @@ enums = {
                 'name': 'MEAN',
                 'value': 0,
 'documentation': {
-'description': 'Mean average.',
+'description': '''
+Mean average.
+''',
 },
             },
             {
                 'name': 'MEDIAN',
                 'value': 1,
 'documentation': {
-'description': 'Median average.',
+'description': '''
+Median average.
+''',
 },
             },
         ],
@@ -85,7 +89,9 @@ resolution depending on the sampling rate used.
                 'name': 'DDC',
                 'value': 1002,
 'documentation': {
-'description': 'Sets the NI 5620/5621digitizer to DDC mode.',
+'description': '''
+Sets the NI 5620/5621digitizer to DDC mode.
+''',
 },
             },
         ],
@@ -96,14 +102,18 @@ resolution depending on the sampling rate used.
                 'name': 'PHYSICAL',
                 'value': 0,
 'documentation': {
-'description': 'Physical address.',
+'description': '''
+Physical address.
+''',
 },
             },
             {
                 'name': 'VIRTUAL',
                 'value': 1,
 'documentation': {
-'description': 'Virtual address.',
+'description': '''
+Virtual address.
+''',
 },
             },
         ],
@@ -114,21 +124,27 @@ resolution depending on the sampling rate used.
                 'name': 'MAGNITUDE_DATA',
                 'value': 1,
 'documentation': {
-'description': 'Specifies magnitude data as the source.',
+'description': '''
+Specifies magnitude data as the source.
+''',
 },
             },
             {
                 'name': 'Q_DATA',
                 'value': 3,
 'documentation': {
-'description': 'Specifies Q data as the source.',
+'description': '''
+Specifies Q data as the source.
+''',
 },
             },
             {
                 'name': 'PHASE_DATA',
                 'value': 4,
 'documentation': {
-'description': 'Specifies phase data as the source.',
+'description': '''
+Specifies phase data as the source.
+''',
 },
             },
         ],
@@ -139,14 +155,18 @@ resolution depending on the sampling rate used.
                 'name': 'DISABLED',
                 'value': 0,
 'documentation': {
-'description': 'Disabled',
+'description': '''
+Disabled
+''',
 },
             },
             {
                 'name': 'ENABLED',
                 'value': 1,
 'documentation': {
-'description': 'Enabled',
+'description': '''
+Enabled
+''',
 },
             },
         ],
@@ -157,14 +177,18 @@ resolution depending on the sampling rate used.
                 'name': 'DISABLED',
                 'value': 0,
 'documentation': {
-'description': 'Does not acquire a waveform for the channel.',
+'description': '''
+Does not acquire a waveform for the channel.
+''',
 },
             },
             {
                 'name': 'ENABLED',
                 'value': 1,
 'documentation': {
-'description': 'Acquires a waveform for the channel.',
+'description': '''
+Acquires a waveform for the channel.
+''',
 },
             },
         ],
@@ -199,14 +223,18 @@ format: IQIQIQ...
                 'name': 'DISABLED',
                 'value': 0,
 'documentation': {
-'description': 'Allow both real-time and equivalent-time measurements.',
+'description': '''
+Allow both real-time and equivalent-time measurements.
+''',
 },
             },
             {
                 'name': 'ENABLED',
                 'value': 1,
 'documentation': {
-'description': 'Allow only real-time measurements.',
+'description': '''
+Allow only real-time measurements.
+''',
 },
             },
         ],
@@ -217,14 +245,18 @@ format: IQIQIQ...
                 'name': 'DISABLED',
                 'value': 0,
 'documentation': {
-'description': "(Default) Use only this channel's ADC to acquire data for this channel.",
+'description': '''
+(Default) Use only this channel's ADC to acquire data for this channel.
+''',
 },
             },
             {
                 'name': 'ENABLED',
                 'value': 1,
 'documentation': {
-'description': 'Use multiple interleaved ADCs to acquire data for this channel.',
+'description': '''
+Use multiple interleaved ADCs to acquire data for this channel.
+''',
 },
             },
         ],
@@ -259,14 +291,18 @@ coordinate converter.
                 'name': 'LEFT',
                 'value': 1,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'RIGHT',
                 'value': 2,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
         ],
@@ -277,14 +313,18 @@ coordinate converter.
                 'name': 'REAL',
                 'value': 0,
 'documentation': {
-'description': 'The waveform data points are real numbers (I data).',
+'description': '''
+The waveform data points are real numbers (I data).
+''',
 },
             },
             {
                 'name': 'COMPLEX',
                 'value': 1,
 'documentation': {
-'description': 'The waveform data points are complex numbers (IQ data).',
+'description': '''
+The waveform data points are complex numbers (IQ data).
+''',
 },
             },
         ],
@@ -295,21 +335,27 @@ coordinate converter.
                 'name': 'PHASE',
                 'value': 0,
 'documentation': {
-'description': 'Sets the discriminator FIR input source to phase.',
+'description': '''
+Sets the discriminator FIR input source to phase.
+''',
 },
             },
             {
                 'name': 'MAGNITUDE',
                 'value': 1,
 'documentation': {
-'description': 'Sets the discriminator FIR input source to magnitude.',
+'description': '''
+Sets the discriminator FIR input source to magnitude.
+''',
 },
             },
             {
                 'name': 'RESAMPLER',
                 'value': 3,
 'documentation': {
-'description': 'Sets the discriminator FIR input source to resampler.',
+'description': '''
+Sets the discriminator FIR input source to resampler.
+''',
 },
             },
         ],
@@ -320,14 +366,18 @@ coordinate converter.
                 'name': 'SYMMETRIC',
                 'value': 0,
 'documentation': {
-'description': 'Sets the discriminator FIR symmetry to symmetric.',
+'description': '''
+Sets the discriminator FIR symmetry to symmetric.
+''',
 },
             },
             {
                 'name': 'ASYMMETRIC',
                 'value': 1,
 'documentation': {
-'description': 'Sets the discriminator FIR symmetry to asymmetric.',
+'description': '''
+Sets the discriminator FIR symmetry to asymmetric.
+''',
 },
             },
         ],
@@ -338,14 +388,18 @@ coordinate converter.
                 'name': 'EVEN',
                 'value': 0,
 'documentation': {
-'description': 'Sets the discriminator FIR symmetry type to even.',
+'description': '''
+Sets the discriminator FIR symmetry type to even.
+''',
 },
             },
             {
                 'name': 'ODD',
                 'value': 1,
 'documentation': {
-'description': 'Sets the discriminator FIR symmetry type to odd.',
+'description': '''
+Sets the discriminator FIR symmetry type to odd.
+''',
 },
             },
         ],
@@ -356,42 +410,54 @@ coordinate converter.
                 'name': 'NONE',
                 'value': 0,
 'documentation': {
-'description': 'No window.',
+'description': '''
+No window.
+''',
 },
             },
             {
                 'name': 'HANNING',
                 'value': 409,
 'documentation': {
-'description': 'Specifies a Hanning window.',
+'description': '''
+Specifies a Hanning window.
+''',
 },
             },
             {
                 'name': 'FLAT_TOP',
                 'value': 410,
 'documentation': {
-'description': 'Specifies a Flat Top window.',
+'description': '''
+Specifies a Flat Top window.
+''',
 },
             },
             {
                 'name': 'HAMMING',
                 'value': 420,
 'documentation': {
-'description': 'Specifies a Hamming window.',
+'description': '''
+Specifies a Hamming window.
+''',
 },
             },
             {
                 'name': 'TRIANGLE',
                 'value': 423,
 'documentation': {
-'description': 'Specifies a Triangle window.',
+'description': '''
+Specifies a Triangle window.
+''',
 },
             },
             {
                 'name': 'BLACKMAN',
                 'value': 424,
 'documentation': {
-'description': 'Specifies a Blackman window.',
+'description': '''
+Specifies a Blackman window.
+''',
 },
             },
         ],
@@ -424,21 +490,27 @@ niScope Configure Horizontal Timing VI.
                 'name': 'NOW',
                 'value': 481,
 'documentation': {
-'description': 'Fetch data at the last sample acquired.',
+'description': '''
+Fetch data at the last sample acquired.
+''',
 },
             },
             {
                 'name': 'START',
                 'value': 482,
 'documentation': {
-'description': 'Fetch data starting at the first point sampled by the digitizer.',
+'description': '''
+Fetch data starting at the first point sampled by the digitizer.
+''',
 },
             },
             {
                 'name': 'TRIGGER',
                 'value': 483,
 'documentation': {
-'description': 'Fetch at the first posttrigger sample.',
+'description': '''
+Fetch at the first posttrigger sample.
+''',
 },
             },
         ],
@@ -449,28 +521,36 @@ niScope Configure Horizontal Timing VI.
                 'name': 'LOWPASS',
                 'value': 0,
 'documentation': {
-'description': 'Specifies lowpass as the filter type.',
+'description': '''
+Specifies lowpass as the filter type.
+''',
 },
             },
             {
                 'name': 'HIGHPASS',
                 'value': 1,
 'documentation': {
-'description': 'Specifies highpass as the filter type.',
+'description': '''
+Specifies highpass as the filter type.
+''',
 },
             },
             {
                 'name': 'BANDPASS',
                 'value': 2,
 'documentation': {
-'description': 'Specifies bandpass as the filter type.',
+'description': '''
+Specifies bandpass as the filter type.
+''',
 },
             },
             {
                 'name': 'BANDSTOP',
                 'value': 3,
 'documentation': {
-'description': 'Specifies bandstop as the filter type.',
+'description': '''
+Specifies bandstop as the filter type.
+''',
 },
             },
         ],
@@ -525,14 +605,18 @@ a 8 tap filter and maximizes the SNR.
                 'name': 'NEVER',
                 'value': 0,
 'documentation': {
-'description': 'Never send notification.',
+'description': '''
+Never send notification.
+''',
 },
             },
             {
                 'name': 'DONE',
                 'value': 1,
 'documentation': {
-'description': 'Notify when digitizer acquisition is done.',
+'description': '''
+Notify when digitizer acquisition is done.
+''',
 },
             },
         ],
@@ -587,14 +671,18 @@ the low/high method,
                 'name': 'MINMAX',
                 'value': 1,
 'documentation': {
-'description': 'Reference level percentages are computed using the min/max method.',
+'description': '''
+Reference level percentages are computed using the min/max method.
+''',
 },
             },
             {
                 'name': 'BASETOP',
                 'value': 2,
 'documentation': {
-'description': 'Reference level percentages are computed using the base/top method.',
+'description': '''
+Reference level percentages are computed using the base/top method.
+''',
 },
             },
         ],
@@ -605,14 +693,18 @@ the low/high method,
                 'name': 'REAL',
                 'value': 0,
 'documentation': {
-'description': 'Sets a dual real filter.',
+'description': '''
+Sets a dual real filter.
+''',
 },
             },
             {
                 'name': 'COMPLEX',
                 'value': 1,
 'documentation': {
-'description': 'Sets a complex filter.',
+'description': '''
+Sets a complex filter.
+''',
 },
             },
         ],
@@ -623,14 +715,18 @@ the low/high method,
                 'name': 'SYMMETRIC',
                 'value': 0,
 'documentation': {
-'description': 'Sets a symmetric filter.',
+'description': '''
+Sets a symmetric filter.
+''',
 },
             },
             {
                 'name': 'ASYMMETRIC',
                 'value': 1,
 'documentation': {
-'description': 'Sets an asymmetric filter.',
+'description': '''
+Sets an asymmetric filter.
+''',
 },
             },
         ],
@@ -641,14 +737,18 @@ the low/high method,
                 'name': 'EVEN',
                 'value': 0,
 'documentation': {
-'description': 'Sets the discriminator FIR symmetry type to even.',
+'description': '''
+Sets the discriminator FIR symmetry type to even.
+''',
 },
             },
             {
                 'name': 'ODD',
                 'value': 1,
 'documentation': {
-'description': 'Sets the discriminator FIR symmetry type to odd.',
+'description': '''
+Sets the discriminator FIR symmetry type to odd.
+''',
 },
             },
         ],
@@ -659,14 +759,18 @@ the low/high method,
                 'name': 'I_AND_Q',
                 'value': 0,
 'documentation': {
-'description': 'Enables the Q input to coordinate converter.',
+'description': '''
+Enables the Q input to coordinate converter.
+''',
 },
             },
             {
                 'name': 'Q_ZEROED',
                 'value': 1,
 'documentation': {
-'description': 'Zeroes out the Q input the to coordinate converter.',
+'description': '''
+Zeroes out the Q input the to coordinate converter.
+''',
 },
             },
         ],
@@ -726,7 +830,9 @@ sample periods are ignored.
                 'name': 'VOLTS',
                 'value': 0,
 'documentation': {
-'description': 'Specifies that the reference levels are given in units of volts.',
+'description': '''
+Specifies that the reference levels are given in units of volts.
+''',
 },
             },
             {
@@ -773,35 +879,45 @@ processed digital signal.
                 'name': 'RESAMPLER_ENABLED',
                 'value': 1,
 'documentation': {
-'description': 'Resampler enabled.',
+'description': '''
+Resampler enabled.
+''',
 },
             },
             {
                 'name': 'HB_1_ENABLED',
                 'value': 2,
 'documentation': {
-'description': 'HB 1 enabled.',
+'description': '''
+HB 1 enabled.
+''',
 },
             },
             {
                 'name': 'RESAMPLER_AND_HB_1',
                 'value': 3,
 'documentation': {
-'description': 'Resampler and HB 1.',
+'description': '''
+Resampler and HB 1.
+''',
 },
             },
             {
                 'name': 'BOTH_HB_FILTERS',
                 'value': 6,
 'documentation': {
-'description': 'Both HB Filters.',
+'description': '''
+Both HB Filters.
+''',
 },
             },
             {
                 'name': 'RESAMPLER_AND_BOTH_HB_FILTERS',
                 'value': 7,
 'documentation': {
-'description': 'Resampler and Both HB Filters.',
+'description': '''
+Resampler and Both HB Filters.
+''',
 },
             },
         ],
@@ -812,7 +928,9 @@ processed digital signal.
                 'name': 'START_TRIGGER',
                 'value': 0,
 'documentation': {
-'description': 'Data is streamed from the start trigger.',
+'description': '''
+Data is streamed from the start trigger.
+''',
 },
             },
             {
@@ -829,7 +947,9 @@ position.
                 'name': 'SYNC_TRIGGER',
                 'value': 2,
 'documentation': {
-'description': 'Data is streamed relative to the sync trigger and reference position.',
+'description': '''
+Data is streamed relative to the sync trigger and reference position.
+''',
 },
             },
         ],
@@ -840,14 +960,18 @@ position.
                 'name': 'CLKIN',
                 'value': 0,
 'documentation': {
-'description': 'Specifies CLKIN as the source for Syncout CLK.',
+'description': '''
+Specifies CLKIN as the source for Syncout CLK.
+''',
 },
             },
             {
                 'name': 'PROCCLK',
                 'value': 1,
 'documentation': {
-'description': 'Specifies PROCCLK as the source for Syncout CLK.',
+'description': '''
+Specifies PROCCLK as the source for Syncout CLK.
+''',
 },
             },
         ],
@@ -858,21 +982,27 @@ position.
                 'name': 'SINGLE_ENDED',
                 'value': 0,
 'documentation': {
-'description': 'Single-ended channel terminal configuration.',
+'description': '''
+Single-ended channel terminal configuration.
+''',
 },
             },
             {
                 'name': 'UNBALANCED_DIFFERENTIAL',
                 'value': 1,
 'documentation': {
-'description': 'Unbalanced differential channel terminal configuration.',
+'description': '''
+Unbalanced differential channel terminal configuration.
+''',
 },
             },
             {
                 'name': 'DIFFERENTIAL',
                 'value': 2,
 'documentation': {
-'description': 'Differential channel terminal configuration.',
+'description': '''
+Differential channel terminal configuration.
+''',
 },
             },
         ],
@@ -883,28 +1013,36 @@ position.
                 'name': '_8_BITS',
                 'value': 0,
 'documentation': {
-'description': 'Specifies 8 offset bits in the timing NCO.',
+'description': '''
+Specifies 8 offset bits in the timing NCO.
+''',
 },
             },
             {
                 'name': '_16_BITS',
                 'value': 1,
 'documentation': {
-'description': 'Specifies 16 offset bits in the timing NCO.',
+'description': '''
+Specifies 16 offset bits in the timing NCO.
+''',
 },
             },
             {
                 'name': '_24_BITS',
                 'value': 2,
 'documentation': {
-'description': 'Specifies 24 offset bits in the timing NCO.',
+'description': '''
+Specifies 24 offset bits in the timing NCO.
+''',
 },
             },
             {
                 'name': '_32_BITS',
                 'value': 3,
 'documentation': {
-'description': 'Specifies 32 offset bits in the timing NCO.',
+'description': '''
+Specifies 32 offset bits in the timing NCO.
+''',
 },
             },
         ],
@@ -915,35 +1053,45 @@ position.
                 'name': 'AC',
                 'value': 0,
 'documentation': {
-'description': 'AC coupled',
+'description': '''
+AC coupled
+''',
 },
             },
             {
                 'name': 'DC',
                 'value': 1,
 'documentation': {
-'description': 'DC coupled',
+'description': '''
+DC coupled
+''',
 },
             },
             {
                 'name': 'HF_REJECT',
                 'value': 3,
 'documentation': {
-'description': 'HF Reject filter.',
+'description': '''
+HF Reject filter.
+''',
 },
             },
             {
                 'name': 'LF_REJECT',
                 'value': 4,
 'documentation': {
-'description': 'LF Reject filter.',
+'description': '''
+LF Reject filter.
+''',
 },
             },
             {
                 'name': 'AC_PLUS_HF_REJECT',
                 'value': 1001,
 'documentation': {
-'description': 'AC Plus HF Reject filter.',
+'description': '''
+AC Plus HF Reject filter.
+''',
 },
             },
         ],
@@ -954,7 +1102,9 @@ position.
                 'name': 'NONE',
                 'value': 1,
 'documentation': {
-'description': 'Normal triggering.',
+'description': '''
+Normal triggering.
+''',
 },
             },
             {
@@ -975,14 +1125,18 @@ after a certain amount of time.
                 'name': 'NEGATIVE',
                 'value': 0,
 'documentation': {
-'description': 'Specifies a falling edge (negative slope).',
+'description': '''
+Specifies a falling edge (negative slope).
+''',
 },
             },
             {
                 'name': 'POSITIVE',
                 'value': 1,
 'documentation': {
-'description': 'Specifies a rising edge (positive slope).',
+'description': '''
+Specifies a rising edge (positive slope).
+''',
 },
             },
         ],
@@ -993,49 +1147,63 @@ after a certain amount of time.
                 'name': 'EDGE',
                 'value': 1,
 'documentation': {
-'description': 'Specifies an edge trigger.',
+'description': '''
+Specifies an edge trigger.
+''',
 },
             },
             {
                 'name': 'VIDEO',
                 'value': 5,
 'documentation': {
-'description': 'Specifies a video trigger.',
+'description': '''
+Specifies a video trigger.
+''',
 },
             },
             {
                 'name': 'IMMEDIATE',
                 'value': 6,
 'documentation': {
-'description': 'Specifies an immediate trigger.',
+'description': '''
+Specifies an immediate trigger.
+''',
 },
             },
             {
                 'name': 'HYSTERESIS',
                 'value': 1001,
 'documentation': {
-'description': 'Specifies a hysteresis trigger.',
+'description': '''
+Specifies a hysteresis trigger.
+''',
 },
             },
             {
                 'name': 'DIGITAL',
                 'value': 1002,
 'documentation': {
-'description': 'Specifies a digital trigger.',
+'description': '''
+Specifies a digital trigger.
+''',
 },
             },
             {
                 'name': 'WINDOW',
                 'value': 1003,
 'documentation': {
-'description': 'Specifies a window trigger.',
+'description': '''
+Specifies a window trigger.
+''',
 },
             },
             {
                 'name': 'SOFTWARE',
                 'value': 1004,
 'documentation': {
-'description': 'Specifies a software trigger.',
+'description': '''
+Specifies a software trigger.
+''',
 },
             },
         ],
@@ -1046,14 +1214,18 @@ after a certain amount of time.
                 'name': 'ENTERING',
                 'value': 0,
 'documentation': {
-'description': 'Trigger occurs when a signal enters a window.',
+'description': '''
+Trigger occurs when a signal enters a window.
+''',
 },
             },
             {
                 'name': 'LEAVING',
                 'value': 1,
 'documentation': {
-'description': 'Trigger occurs when a signal leaves a window.',
+'description': '''
+Trigger occurs when a signal leaves a window.
+''',
 },
             },
         ],
@@ -1064,21 +1236,27 @@ after a certain amount of time.
                 'name': 'AC',
                 'value': 0,
 'documentation': {
-'description': 'AC coupled',
+'description': '''
+AC coupled
+''',
 },
             },
             {
                 'name': 'DC',
                 'value': 1,
 'documentation': {
-'description': 'DC coupled',
+'description': '''
+DC coupled
+''',
 },
             },
             {
                 'name': 'GROUND',
                 'value': 2,
 'documentation': {
-'description': 'Ground coupled',
+'description': '''
+Ground coupled
+''',
 },
             },
         ],
@@ -1089,14 +1267,18 @@ after a certain amount of time.
                 'name': 'POSITIVE',
                 'value': 1,
 'documentation': {
-'description': 'Specifies that the video signal has positive polarity.',
+'description': '''
+Specifies that the video signal has positive polarity.
+''',
 },
             },
             {
                 'name': 'NEGATIVE',
                 'value': 2,
 'documentation': {
-'description': 'Specifies that the video signal has negative polarity.',
+'description': '''
+Specifies that the video signal has negative polarity.
+''',
 },
             },
         ],
@@ -1107,126 +1289,162 @@ after a certain amount of time.
                 'name': 'M_NTSC',
                 'value': 1,
 'documentation': {
-'description': 'Specifies M-NTSC signal format.',
+'description': '''
+Specifies M-NTSC signal format.
+''',
 },
             },
             {
                 'name': 'BG_PAL',
                 'value': 2,
 'documentation': {
-'description': 'Specifies BG/PAL signal format.',
+'description': '''
+Specifies BG/PAL signal format.
+''',
 },
             },
             {
                 'name': 'SECAM',
                 'value': 3,
 'documentation': {
-'description': 'Specifies SECAM signal format.',
+'description': '''
+Specifies SECAM signal format.
+''',
 },
             },
             {
                 'name': 'M_PAL',
                 'value': 4,
 'documentation': {
-'description': 'Specifies M-PAL signal format.',
+'description': '''
+Specifies M-PAL signal format.
+''',
 },
             },
             {
                 'name': '_480I59_94_FPS',
                 'value': 5,
 'documentation': {
-'description': 'Specifies 480i/59.94 signal format.',
+'description': '''
+Specifies 480i/59.94 signal format.
+''',
 },
             },
             {
                 'name': '_480I60_FPS',
                 'value': 6,
 'documentation': {
-'description': 'Specifies 480i/60 signal format.',
+'description': '''
+Specifies 480i/60 signal format.
+''',
 },
             },
             {
                 'name': '_480P59_94_FPS',
                 'value': 7,
 'documentation': {
-'description': 'Specifies 480p/59.94 signal format.',
+'description': '''
+Specifies 480p/59.94 signal format.
+''',
 },
             },
             {
                 'name': '_480P60_FPS',
                 'value': 8,
 'documentation': {
-'description': 'Specifies 480p/60 Fps signal format.',
+'description': '''
+Specifies 480p/60 Fps signal format.
+''',
 },
             },
             {
                 'name': '_576I60_FPS',
                 'value': 9,
 'documentation': {
-'description': 'Specifies 576i/60 fps signal format.',
+'description': '''
+Specifies 576i/60 fps signal format.
+''',
 },
             },
             {
                 'name': '_576P50_FPS',
                 'value': 10,
 'documentation': {
-'description': 'Specifies 576p/50 Fps signal format.',
+'description': '''
+Specifies 576p/50 Fps signal format.
+''',
 },
             },
             {
                 'name': '_720P30_FPS',
                 'value': 11,
 'documentation': {
-'description': 'Specifies 720p/30 Fps signal format.',
+'description': '''
+Specifies 720p/30 Fps signal format.
+''',
 },
             },
             {
                 'name': '_720P50_FPS',
                 'value': 12,
 'documentation': {
-'description': 'Specifies 720p/50 Fps signal format.',
+'description': '''
+Specifies 720p/50 Fps signal format.
+''',
 },
             },
             {
                 'name': '_720P59_94_FPS',
                 'value': 13,
 'documentation': {
-'description': 'Specifies 720p/59.94 Fps signal format.',
+'description': '''
+Specifies 720p/59.94 Fps signal format.
+''',
 },
             },
             {
                 'name': '_720P60_FPS',
                 'value': 14,
 'documentation': {
-'description': 'Specifies 720p/60 Fps signal format.',
+'description': '''
+Specifies 720p/60 Fps signal format.
+''',
 },
             },
             {
                 'name': '_1080I50_FPS',
                 'value': 15,
 'documentation': {
-'description': 'Specifies 1080i/50 fps signal format.',
+'description': '''
+Specifies 1080i/50 fps signal format.
+''',
 },
             },
             {
                 'name': '_1080I59_94_FPS',
                 'value': 16,
 'documentation': {
-'description': 'Specifies 1080i/59.94 fps signal format.',
+'description': '''
+Specifies 1080i/59.94 fps signal format.
+''',
 },
             },
             {
                 'name': '_1080I60_FPS',
                 'value': 17,
 'documentation': {
-'description': 'Specifies 1080i/60 fps signal format.',
+'description': '''
+Specifies 1080i/60 fps signal format.
+''',
 },
             },
             {
                 'name': '_1080P24_FPS',
                 'value': 18,
 'documentation': {
-'description': 'Specifies 1080p/24 Fps signal format.',
+'description': '''
+Specifies 1080p/24 Fps signal format.
+''',
 },
             },
         ],
@@ -1237,28 +1455,36 @@ after a certain amount of time.
                 'name': 'FIELD_1',
                 'value': 1,
 'documentation': {
-'description': 'Trigger on field 1 of the signal.',
+'description': '''
+Trigger on field 1 of the signal.
+''',
 },
             },
             {
                 'name': 'FIELD_2',
                 'value': 2,
 'documentation': {
-'description': 'Trigger on field 2 of the signal.',
+'description': '''
+Trigger on field 2 of the signal.
+''',
 },
             },
             {
                 'name': 'ANY_FIELD',
                 'value': 3,
 'documentation': {
-'description': 'Trigger on any field of the signal.',
+'description': '''
+Trigger on any field of the signal.
+''',
 },
             },
             {
                 'name': 'ANY_LINE',
                 'value': 4,
 'documentation': {
-'description': 'Trigger on the first line acquired.',
+'description': '''
+Trigger on the first line acquired.
+''',
 },
             },
             {

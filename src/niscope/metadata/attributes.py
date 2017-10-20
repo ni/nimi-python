@@ -93,7 +93,7 @@ override this value.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:User Options:Record Value Coercions',
-        'name': 'RECORD_VALUE_COERCIONS',
+        'name': 'RECORD_COERCIONS',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -144,7 +144,7 @@ separate cache value for each channel.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Prefix',
-        'name': 'DRIVER_PREFIX',
+        'name': 'SPECIFIC_DRIVER_PREFIX',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -159,7 +159,7 @@ each user-callable function in this driver starts with this prefix.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Advanced Session Information:Resource Descriptor',
-        'name': 'RESOURCE_DESCRIPTOR',
+        'name': 'IO_RESOURCE_DESCRIPTOR',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -216,7 +216,7 @@ numbers supported by this driver.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities',
-        'name': 'CLASS_GROUP_CAPABILITIES',
+        'name': 'GROUP_CAPABILITIES',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -231,7 +231,7 @@ that this driver implements.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Firmware Revision',
-        'name': 'FIRMWARE_REVISION',
+        'name': 'INSTRUMENT_FIRMWARE_REVISION',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -246,7 +246,7 @@ instrument.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Manufacturer',
-        'name': 'MANUFACTURER',
+        'name': 'INSTRUMENT_MANUFACTURER',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -261,7 +261,7 @@ example, "National Instruments".
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Model',
-        'name': 'MODEL',
+        'name': 'INSTRUMENT_MODEL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -273,7 +273,7 @@ example, "National Instruments".
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Vendor',
-        'name': 'DRIVER_VENDOR',
+        'name': 'SPECIFIC_DRIVER_VENDOR',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -288,7 +288,7 @@ for example, "National Instruments".
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Description',
-        'name': 'DESCRIPTION',
+        'name': 'SPECIFIC_DRIVER_DESCRIPTION',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -300,7 +300,7 @@ for example, "National Instruments".
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Major Version',
-        'name': 'CLASS_SPECIFICATION_MAJOR_VERSION',
+        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -315,7 +315,7 @@ driver is compliant.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Minor Version',
-        'name': 'CLASS_SPECIFICATION_MINOR_VERSION',
+        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -330,7 +330,7 @@ driver is compliant.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Revision',
-        'name': 'REVISION',
+        'name': 'SPECIFIC_DRIVER_REVISION',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -345,7 +345,7 @@ instrument driver.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Number of Records',
-        'name': 'NUMBER_OF_RECORDS',
+        'name': 'HORZ_NUM_RECORDS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -366,7 +366,7 @@ Acquisitions <digitizers.chm::/Fetching_Multiple-Record_Acquisitions.html>`__
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Clocking:Reference (Input) Clock Source',
-        'name': 'REFERENCE_CLOCK_SOURCE',
+        'name': 'INPUT_CLOCK_SOURCE',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -450,7 +450,7 @@ VAL\_RTSI\_6
         'channel_based': 'False',
         'enum': 'BoolEnableDisableRealtime',
         'lv_property': 'Horizontal:Enforce Realtime',
-        'name': 'ENFORCE_REALTIME',
+        'name': 'HORZ_ENFORCE_REALTIME',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -715,7 +715,7 @@ conditions:
         'channel_based': 'True',
         'enum': 'Ref.LevelUnits',
         'lv_property': 'Waveform Measurement:Reference Levels:Units',
-        'name': 'REF._LEVEL_UNITS',
+        'name': 'MEAS_REF_LEVEL_UNITS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -734,7 +734,7 @@ the voltage thresholds directly and avoid extra calculations.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Other Channel',
-        'name': 'OTHER_CHANNEL',
+        'name': 'MEAS_OTHER_CHANNEL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -751,7 +751,7 @@ waveform is used in a two-channel measurement. The default value is 0.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Hysteresis Percent',
-        'name': 'HYSTERESIS_PERCENT',
+        'name': 'MEAS_HYSTERESIS_PERCENT',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -767,7 +767,7 @@ vertical range for the hysteresis window size. The default value is 2%.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Last Acq. Histogram Size',
-        'name': 'LAST_ACQ._HISTOGRAM_SIZE',
+        'name': 'MEAS_LAST_ACQ_HISTOGRAM_SIZE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -784,7 +784,7 @@ value is 256.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Waveform Measurement:Voltage Histogram:Size',
-        'name': 'V._HIST._SIZE',
+        'name': 'MEAS_VOLTAGE_HISTOGRAM_SIZE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -804,7 +804,7 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Waveform Measurement:Voltage Histogram:Low Volts',
-        'name': 'V._HIST._LOW_VOLTS',
+        'name': 'MEAS_VOLTAGE_HISTOGRAM_LOW_VOLTS',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -824,7 +824,7 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Waveform Measurement:Voltage Histogram:High Volts',
-        'name': 'V._HIST._HIGH_VOLTS',
+        'name': 'MEAS_VOLTAGE_HISTOGRAM_HIGH_VOLTS',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -844,7 +844,7 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Time Histogram:Size',
-        'name': 'TIME_HIST._SIZE',
+        'name': 'MEAS_TIME_HISTOGRAM_SIZE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -861,7 +861,7 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Time Histogram:Low Volts',
-        'name': 'TIME_HIST._LOW_VOLTS',
+        'name': 'MEAS_TIME_HISTOGRAM_LOW_VOLTS',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -881,7 +881,7 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Time Histogram:High Volts',
-        'name': 'TIME_HIST._HIGH_VOLTS',
+        'name': 'MEAS_TIME_HISTOGRAM_HIGH_VOLTS',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -901,7 +901,7 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Waveform Measurement:Time Histogram:Low Time',
-        'name': 'TIME_HIST._LOW_TIME',
+        'name': 'MEAS_TIME_HISTOGRAM_LOW_TIME',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -922,7 +922,7 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Waveform Measurement:Time Histogram:High Time',
-        'name': 'TIME_HIST._HIGH_TIME',
+        'name': 'MEAS_TIME_HISTOGRAM_HIGH_TIME',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -943,7 +943,7 @@ Stats <scopeviref.chm::/niScope_Clear_Waveform_Measurement_Stats.html>`__.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Waveform Measurement:Interpolation:Polynomial Interpolation Order',
-        'name': 'POLY._INTERP._ORDER',
+        'name': 'MEAS_POLYNOMIAL_INTERPOLATION_ORDER',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -961,7 +961,7 @@ interpolation).
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Interpolation:Sampling Factor',
-        'name': 'INTERP._SAMPLING_FACTOR',
+        'name': 'MEAS_INTERPOLATION_SAMPLING_FACTOR',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -982,7 +982,7 @@ measurement resamples the waveform to 2,500 points.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Filter:Cutoff Frequency',
-        'name': 'FILTER_CUTOFF_FREQUENCY',
+        'name': 'MEAS_FILTER_CUTOFF_FREQ',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -998,7 +998,7 @@ filter. The default value is 1.0e6 Hz.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Filter:Center Frequency',
-        'name': 'FILTER_CENTER_FREQUENCY',
+        'name': 'MEAS_FILTER_CENTER_FREQ',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1014,7 +1014,7 @@ frequencies are the center width. The default value is 1.0e6 Hz.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Waveform Measurement:Filter:Ripple',
-        'name': 'FILTER_RIPPLE',
+        'name': 'MEAS_FILTER_RIPPLE',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1032,7 +1032,7 @@ Valid Values: >0.0
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Filter:Percent Waveform Transient',
-        'name': 'PERCENT_WAVEFORM_TRANSIENT',
+        'name': 'MEAS_FILTER_TRANSIENT_WAVEFORM_PERCENT',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1052,7 +1052,7 @@ Valid Range: 0.0 - 100.0%
         'channel_based': 'False',
         'enum': 'FilterType',
         'lv_property': 'Waveform Measurement:Filter:Type',
-        'name': 'FILTER_TYPE',
+        'name': 'MEAS_FILTER_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1064,7 +1064,7 @@ Valid Range: 0.0 - 100.0%
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Waveform Measurement:Filter:IIR Order',
-        'name': 'FILTER_ORDER',
+        'name': 'MEAS_FILTER_ORDER',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1081,7 +1081,7 @@ Valid Values: >0
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Waveform Measurement:Filter:FIR Taps',
-        'name': 'FILTER_TAPS',
+        'name': 'MEAS_FILTER_TAPS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1100,7 +1100,7 @@ Valid Values: >0
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Reference Levels:Channel Based Low Ref Level',
-        'name': 'CHAN._BASED_LOW_REF',
+        'name': 'MEAS_CHAN_LOW_REF_LEVEL',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1118,7 +1118,7 @@ Method <pniScope_PercentageMethod.html>`__ property.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Reference Levels:Channel Based Mid Ref Level',
-        'name': 'CHAN._BASED_MID_REF',
+        'name': 'MEAS_CHAN_MID_REF_LEVEL',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1136,7 +1136,7 @@ Method <pniScope_PercentageMethod.html>`__ property.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Reference Levels:Channel Based High Ref Level',
-        'name': 'CHAN_BASED_HIGH_REF',
+        'name': 'MEAS_CHAN_HIGH_REF_LEVEL',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1154,7 +1154,7 @@ Method <pniScope_PercentageMethod.html>`__ property.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Waveform Measurement:Filter:Width',
-        'name': 'FILTER_WIDTH',
+        'name': 'MEAS_FILTER_WIDTH',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1170,7 +1170,7 @@ The default value is 1.0e3.
         'channel_based': 'True',
         'enum': 'FIRFilterWindow',
         'lv_property': 'Waveform Measurement:Filter:FIR Window',
-        'name': 'FIR_FILTER_WINDOW',
+        'name': 'MEAS_FIR_FILTER_WINDOW',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1186,7 +1186,7 @@ default value is None (0).
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Array Gain',
-        'name': 'ARRAY_GAIN',
+        'name': 'MEAS_ARRAY_GAIN',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1201,7 +1201,7 @@ array gain measurement. The default value is 1.0.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Waveform Measurement:Array Offset',
-        'name': 'ARRAY_OFFSET',
+        'name': 'MEAS_ARRAY_OFFSET',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1216,7 +1216,7 @@ offset measurement. The default value is 0.0.
         'channel_based': 'True',
         'enum': 'PercentageMethod',
         'lv_property': 'Waveform Measurement:Reference Levels:Percentage Units Method',
-        'name': 'PERCENTAGE_METHOD',
+        'name': 'MEAS_PERCENTAGE_METHOD',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1394,7 +1394,7 @@ slave digitizers, you can use this value as a starting point to set the
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Synchronization:Start Trigger (Acq. Arm):Source',
-        'name': 'START_TRIGGER_SOURCE',
+        'name': 'ACQ_ARM_SOURCE',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -1478,7 +1478,7 @@ VAL\_PFI\_2
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Enable Records > Memory',
-        'name': 'ENABLE_RECORDS_>_MEMORY',
+        'name': 'ALLOW_MORE_RECORDS_THAN_MEMORY',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -1507,7 +1507,7 @@ your digitizer supports continuous acquisition.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Memory Size',
-        'name': 'MEMORY_SIZE',
+        'name': 'ONBOARD_MEMORY_SIZE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1522,7 +1522,7 @@ bytes.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:RIS Num Avg',
-        'name': 'RIS_NUM_AVG',
+        'name': 'RIS_NUM_AVERAGES',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1583,7 +1583,7 @@ default value is FALSE.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Maximum Real Time Sample Rate',
-        'name': 'MAXIMUM_REAL_TIME_SAMPLE_RATE',
+        'name': 'MAX_REAL_TIME_SAMPLING_RATE',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1602,7 +1602,7 @@ Sampling <digitizers.chm::/Real-Time_Sampling.html>`__
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Maximum RIS Rate',
-        'name': 'MAXIMUM_RIS_RATE',
+        'name': 'MAX_RIS_RATE',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1704,7 +1704,7 @@ Valid Values: Values greater than or equal to 0
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Fetch:Fetch Number of Records',
-        'name': 'FETCH_NUMBER_OF_RECORDS',
+        'name': 'FETCH_NUM_RECORDS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1728,7 +1728,7 @@ Acquisitions <digitizers.chm::/Fetching_Multiple-Record_Acquisitions.html>`__
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Fetch:Fetch Meas Num Samples',
-        'name': 'FETCH_MEAS_NUMBER_OF_SAMPLES',
+        'name': 'FETCH_MEAS_NUM_SAMPLES',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1775,7 +1775,7 @@ Offset <pniScope_FetchOffset.html>`__, and for the current configured
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Fetch:Fetch Backlog',
-        'name': 'FETCH_BACKLOG',
+        'name': 'BACKLOG',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1793,7 +1793,7 @@ Specifies the number of points acquired that have not been fetched yet.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Advanced:5102 Adjust Pretrigger Samples',
-        'name': 'ADJUST_SAMPLES',
+        'name': '5102_ADJUST_PRETRIGGER_SAMPLES',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -1829,7 +1829,7 @@ Chassis Cooling <digitizers.chm::/chassis_with_PXIe.html>`__
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Clocking:Sample Clock Timebase Source',
-        'name': 'SAMPLE_CLOCK_TIMEBASE_SOURCE',
+        'name': 'SAMP_CLK_TIMEBASE_SRC',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -1868,7 +1868,7 @@ VAL\_NO\_SOURCE
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Clocking:Sample Clock Timebase Rate',
-        'name': 'SAMPLE_CLOCK_TIMEBASE_RATE',
+        'name': 'SAMP_CLK_TIMEBASE_RATE',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1885,7 +1885,7 @@ source.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Clocking:Sample Clock Timebase Divisor',
-        'name': 'SAMPLE_CLOCK_TIMEBASE_DIVISOR',
+        'name': 'SAMP_CLK_TIMEBASE_DIV',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -1906,7 +1906,7 @@ the actual sample rate, which can be slower.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Clocking:Reference Clock Rate',
-        'name': 'REFERENCE_CLOCK_RATE',
+        'name': 'REF_CLK_RATE',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -1993,7 +1993,7 @@ video signal's zero reference point. The default value is FALSE.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Synchronization:Advance Trigger:Source',
-        'name': 'ADVANCE_TRIGGER_SOURCE',
+        'name': 'ADV_TRIG_SRC',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2037,7 +2037,7 @@ VAL\_SW\_TRIG\_FUNC
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Synchronization:Arm Reference Trigger:Source',
-        'name': 'ARM_REFERENCE_TRIGGER_SOURCE',
+        'name': 'ARM_REF_TRIG_SRC',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2082,7 +2082,7 @@ VAL\_SW\_TRIG\_FUNC
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Advanced:Enable TDC',
-        'name': 'ENABLE_TDC',
+        'name': 'REF_TRIG_TDC_ENABLE',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -2101,7 +2101,7 @@ precisely using time-digital conversion (TDC).
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Synchronization:Start Trigger (Acq. Arm):Output Terminal',
-        'name': 'STARTTRIG.OUTPUTTERM',
+        'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2117,7 +2117,7 @@ device specifications document for a list of valid destinations.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Triggering:Trigger Output Terminal',
-        'name': 'REFTRIG.OUTPUTTERM',
+        'name': 'EXPORTED_REF_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2158,7 +2158,7 @@ VAL\_PXI\_STAR
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Synchronization:End of Record:Output Terminal',
-        'name': 'ENDOFRECEVENT.OUTPUTTERM',
+        'name': 'END_OF_RECORD_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2198,7 +2198,7 @@ VAL\_PXI\_STAR
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Synchronization:End of Acquisition:Output Terminal',
-        'name': 'ENDOFACQEVENT.OUTPUTTERM',
+        'name': 'END_OF_ACQUISITION_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2307,7 +2307,7 @@ subsample adjustment of the timebase sample clock.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Acquisition:Advanced:Enable RIS in Auto Setup',
-        'name': 'ENABLE_RIS_IN_AUTO_SETUP',
+        'name': 'RIS_IN_AUTO_SETUP_ENABLE',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -2322,7 +2322,7 @@ searching for a frequency in autosetup.
         'channel_based': 'True',
         'enum': 'TerminalConfiguration',
         'lv_property': 'Vertical:Channel Terminal Configuration',
-        'name': 'TERMINAL_CONFIGURATION',
+        'name': 'CHANNEL_TERMINAL_CONFIGURATION',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -2341,7 +2341,7 @@ Configuration <digitizers.chm::/5922_Chan_Terminal_Configuration.html>`__
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Synchronization:Advance Trigger:Output Terminal',
-        'name': 'ADVTRIG.OUTPUTTERM',
+        'name': 'EXPORTED_ADVANCE_TRIGGER_OUTPUT_TERMINAL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2356,7 +2356,7 @@ trigger is received, the digitizer begins acquiring pretrigger samples.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Synchronization:Ready for Start:Output Terminal',
-        'name': 'RDYFORSTARTEVENT.OUTPUTTERM',
+        'name': 'READY_FOR_START_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2396,7 +2396,7 @@ VAL\_PXI\_STAR
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Synchronization:Ready for Reference:Output Terminal',
-        'name': 'RDYFORREFEVENT.OUTPUTTERM',
+        'name': 'READY_FOR_REF_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2414,7 +2414,7 @@ device.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Synchronization:Ready for Advance:Output Terminal',
-        'name': 'RDYFORADVEVENT.OUTPUTTERM',
+        'name': 'READY_FOR_ADVANCE_EVENT_OUTPUT_TERMINAL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2453,7 +2453,7 @@ VAL\_PXI\_STAR
         'channel_based': 'True',
         'enum': 'BoolEnableDisableTIS',
         'lv_property': 'Horizontal:Enable Time Interleaved Sampling',
-        'name': 'ENABLE_TIS',
+        'name': 'ENABLE_TIME_INTERLEAVED_SAMPLING',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -2479,7 +2479,7 @@ Settings <digitizers.chm::/Configuring_Horizontal.html>`__
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Synchronization:5 Volt Power:Output Terminal',
-        'name': '5VOLTPOWER.OUTPUTTERM',
+        'name': '5V_OUT_OUTPUT_TERMINAL',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2548,7 +2548,7 @@ PXI-5922 Specifications* for combined digital and analog settling times.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Triggering:Auto Triggered',
-        'name': 'AUTO_TRIGGERED',
+        'name': 'TRIGGER_AUTO_TRIGGERED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -2568,7 +2568,7 @@ Trigger and no trigger has been received for a certain amount of time.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device:Accessory:Gain',
-        'name': 'ACCESSORY_GAIN',
+        'name': 'SIGNAL_COND_GAIN',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -2591,7 +2591,7 @@ amplifier.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Device:Accessory:Offset',
-        'name': 'ACCESSORY_OFFSET',
+        'name': 'SIGNAL_COND_OFFSET',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -2636,7 +2636,7 @@ digitizers, use `Enable DDC <pniScope_EnableDDC.html>`__.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Onboard Signal Processing:DDC:Frequency Translation Enabled',
-        'name': 'FREQUENCY_TRANSLATION_ENABLED',
+        'name': 'DDC_FREQUENCY_TRANSLATION_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -2656,7 +2656,7 @@ this property with a device that does not support OSP.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Onboard Signal Processing:DDC:Center Frequency',
-        'name': 'CENTER_FREQUENCY',
+        'name': 'DDC_CENTER_FREQUENCY',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -2680,7 +2680,7 @@ this property with a device that does not support OSP.
         'channel_based': 'False',
         'enum': 'DataProcessingMode',
         'lv_property': 'Onboard Signal Processing:DDC:Data Processing Mode',
-        'name': 'DATA_PROCESSING_MODE',
+        'name': 'DDC_DATA_PROCESSING_MODE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -2700,7 +2700,7 @@ this property with a device that does not support OSP.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Onboard Signal Processing:DDC:Signal Adjustments:Frequency Translation:Frequency Translation Phase I',
-        'name': 'FREQUENCY_TRANSLATION_PHASE_I',
+        'name': 'DDC_FREQUENCY_TRANSLATION_PHASE_I',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -2724,7 +2724,7 @@ this property with a device that does not support OSP.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Onboard Signal Processing:DDC:Signal Adjustments:Frequency Translation:Frequency Translation Phase Q',
-        'name': 'FREQUENCY_TRANSLATION_PHASE_Q',
+        'name': 'DDC_FREQUENCY_TRANSLATION_PHASE_Q',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -2834,7 +2834,7 @@ the waveform. The default value is Warning.
         'channel_based': 'True',
         'enum': None,
         'lv_property': 'Onboard Signal Processing:DDC:Q Source',
-        'name': 'Q_SOURCE',
+        'name': 'DDC_Q_SOURCE',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -2948,7 +2948,7 @@ this property with a device that does not support OSP.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Triggering:Onboard Signal Processing:Ref Trigger Min Quiet Time',
-        'name': 'REF_TRIGGER_MIN_QUIET_TIME',
+        'name': 'REF_TRIGGER_MINIMUM_QUIET_TIME',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -3057,7 +3057,7 @@ this property with a device that does not support OSP.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Fetch:Advanced:Maximum Bandwidth',
-        'name': 'MAXIMUM_BANDWIDTH',
+        'name': 'DATA_TRANSFER_MAXIMUM_BANDWIDTH',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -3077,7 +3077,7 @@ PCIe bus than the value you specify for this property.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Fetch:Advanced:Preferred Packet Size',
-        'name': 'PREFERRED_PACKET_SIZE',
+        'name': 'DATA_TRANSFER_PREFERRED_PACKET_SIZE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3095,7 +3095,7 @@ this property must be a power of two (64, 128, ... , 512).
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Samples Available In Endpoint',
-        'name': 'SAMPLES_AVAILABLE_IN_ENDPOINT',
+        'name': 'P2P_SAMPLES_AVAIL_IN_ENDPOINT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3114,7 +3114,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address',
-        'name': 'DATA_TRANSFER_PERMISSION_ADDRESS',
+        'name': 'P2P_DATA_TRANS_PERMISSION_ADDR',
         'resettable': 'No',
         'type': 'ViInt64',
 'documentation': {
@@ -3137,7 +3137,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': 'AddressType',
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address Type',
-        'name': 'DATA_TRANSFER_PERMISSION_ADDRESS_TYPE',
+        'name': 'P2P_DATA_TRANS_PERMISSION_ADDR_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3158,7 +3158,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Destination Window Address',
-        'name': 'DESTINATION_WINDOW_ADDRESS',
+        'name': 'P2P_DESTINATION_WINDOW_ADDR',
         'resettable': 'No',
         'type': 'ViInt64',
 'documentation': {
@@ -3183,7 +3183,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': 'AddressType',
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Destination Window Address Type',
-        'name': 'DESTINATION_WINDOW_ADDRESS_TYPE',
+        'name': 'P2P_DESTINATION_WINDOW_ADDR_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3203,7 +3203,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Destination Window Size',
-        'name': 'DESTINATION_WINDOW_SIZE',
+        'name': 'P2P_DESTINATION_WINDOW_SIZE',
         'resettable': 'No',
         'type': 'ViInt64',
 'documentation': {
@@ -3225,7 +3225,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': 'NotificationType',
         'lv_property': 'Peer-to-Peer:Manual:Notification:Push Message On',
-        'name': 'PUSH_MESSAGE_ON',
+        'name': 'P2P_NOTIFY_PUSH_MESSAGE_ON',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3247,7 +3247,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Manual:Notification:Message Push Address',
-        'name': 'MESSAGE_PUSH_ADDRESS',
+        'name': 'P2P_NOTIFY_MESSAGE_PUSH_ADDR',
         'resettable': 'No',
         'type': 'ViInt64',
 'documentation': {
@@ -3268,7 +3268,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': 'AddressType',
         'lv_property': 'Peer-to-Peer:Manual:Notification:Message Push Address Type',
-        'name': 'MESSAGE_PUSH_ADDRESS_TYPE',
+        'name': 'P2P_NOTIFY_MESSAGE_PUSH_ADDR_TYPE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3288,7 +3288,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Manual:Notification:Message Push Value',
-        'name': 'MESSAGE_PUSH_VALUE',
+        'name': 'P2P_NOTIFY_MESSAGE_PUSH_VALUE',
         'resettable': 'No',
         'type': 'ViInt64',
 'documentation': {
@@ -3328,7 +3328,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Channels to Stream',
-        'name': 'CHANNELS_TO_STREAM',
+        'name': 'P2P_CHANNELS_TO_STREAM',
         'resettable': 'No',
         'type': 'ViString',
 'documentation': {
@@ -3348,7 +3348,7 @@ This property must either be unused or set to all enabled channels on NI
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Samples Transferred',
-        'name': 'SAMPLES_TRANSFERRED',
+        'name': 'P2P_SAMPLES_TRANSFERRED',
         'resettable': 'No',
         'type': 'ViInt64',
 'documentation': {
@@ -3368,7 +3368,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Most Samples Available in Endpoint',
-        'name': 'MOST_SAMPLES_AVAILABLE_IN_ENDPOINT',
+        'name': 'P2P_MOST_SAMPLES_AVAIL_IN_ENDPOINT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3388,7 +3388,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Endpoint Size',
-        'name': 'ENDPOINT_SIZE',
+        'name': 'P2P_ENDPOINT_SIZE',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3407,7 +3407,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': 'BoolEnableDisable',
         'lv_property': 'Peer-to-Peer:Manual:Manual Configuration Enabled',
-        'name': 'MANUAL_CONFIGURATION_ENABLED',
+        'name': 'P2P_MANUAL_CONFIGURATION_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -3428,7 +3428,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Endpoint Overflow',
-        'name': 'ENDPOINT_OVERFLOW',
+        'name': 'P2P_ENDPOINT_OVERFLOW',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -3448,7 +3448,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:FIFO Endpoint Count',
-        'name': 'FIFO_ENDPOINT_COUNT',
+        'name': 'P2P_FIFO_ENDPOINT_COUNT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3467,7 +3467,7 @@ peer-to-peer streaming.
         'channel_based': 'False',
         'enum': 'BoolEnableDisable',
         'lv_property': 'Peer-to-Peer:Onboard Memory Enabled',
-        'name': 'ONBOARD_MEMORY_ENABLED',
+        'name': 'P2P_ONBOARD_MEMORY_ENABLED',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -3504,7 +3504,7 @@ accept an Advance Trigger, or trigger on the input signal..
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Clocking:Sample Clock Timebase Multiplier',
-        'name': 'SAMPLE_CLOCK_TIMEBASE_MULTIPLIER',
+        'name': 'SAMP_CLK_TIMEBASE_MULT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3534,7 +3534,7 @@ by device and current configuration.
         'channel_based': 'False',
         'enum': 'StreamingPositionType',
         'lv_property': 'Peer-to-Peer:Stream Relative To',
-        'name': 'STREAM_RELATIVE_TO',
+        'name': 'P2P_STREAM_RELATIVE_TO',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -3632,7 +3632,7 @@ no coercion occurs. The default value is 0.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Peer-to-Peer:Samples Transferred Per Record',
-        'name': 'SAMPLES_TRANSFERRED_PER_RECORD',
+        'name': 'P2P_SAMPLES_TRANSFERRED_PER_RECORD',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -4502,7 +4502,7 @@ decimation.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Clocking:PLL Lock Status',
-        'name': 'PLL_LOCKED',
+        'name': 'PLL_LOCK_STATUS',
         'resettable': 'No',
         'type': 'ViBoolean',
 'documentation': {
@@ -4679,7 +4679,7 @@ Effects <digitizers.chm::/Probes.html>`__
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Advanced:Time Per Record',
-        'name': 'TIME_PER_RECORD',
+        'name': 'HORZ_TIME_PER_RECORD',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -4703,7 +4703,7 @@ Rate <digitizers.chm::/Sample_Rate.html>`__
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Actual Record Length',
-        'name': 'ACTUAL_RECORD_LENGTH',
+        'name': 'HORZ_RECORD_LENGTH',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -4726,7 +4726,7 @@ Horizontal Parameters <digitizers.chm::/Horizontal_Parameters.html>`__
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Min Number of Points',
-        'name': 'MIN_NUMBER_OF_POINTS',
+        'name': 'HORZ_MIN_NUM_PTS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -4751,7 +4751,7 @@ Rate <digitizers.chm::/Sample_Rate.html>`__
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Actual Sample Rate',
-        'name': 'ACTUAL_SAMPLE_RATE',
+        'name': 'HORZ_SAMPLE_RATE',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -4771,7 +4771,7 @@ Units: hertz (Samples / Second)
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Reference Position',
-        'name': 'REFERENCE_POSITION',
+        'name': 'HORZ_RECORD_REF_POSITION',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -4841,7 +4841,7 @@ coupling of that channel is used for the trigger.
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Triggering:Trigger Delay',
-        'name': 'TRIGGER_DELAY',
+        'name': 'TRIGGER_DELAY_TIME',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -5005,7 +5005,7 @@ Equivalent Time (1)
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Horizontal:Advanced:Acquisition Start Time',
-        'name': 'ACQ_START_TIME',
+        'name': 'ACQUISITION_START_TIME',
         'resettable': 'No',
         'type': 'ViReal64',
 'documentation': {
@@ -5025,7 +5025,7 @@ the trigger event (same as specifying Reference Position).
         'channel_based': 'True',
         'enum': 'VideoSignalFormat',
         'lv_property': 'Triggering:Trigger Video:Signal Format',
-        'name': 'VIDEO_SIGNAL_FORMAT',
+        'name': 'TV_TRIGGER_SIGNAL_FORMAT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -5037,7 +5037,7 @@ the trigger event (same as specifying Reference Position).
         'channel_based': 'False',
         'enum': 'VideoPolarity',
         'lv_property': 'Triggering:Trigger Video:Polarity',
-        'name': 'VIDEO_POLARITY',
+        'name': 'TV_TRIGGER_POLARITY',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -5049,7 +5049,7 @@ the trigger event (same as specifying Reference Position).
         'channel_based': 'False',
         'enum': 'VideoTriggerEvent',
         'lv_property': 'Triggering:Trigger Video:Event',
-        'name': 'VIDEO_TRIGGER_EVENT',
+        'name': 'TV_TRIGGER_EVENT',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
@@ -5061,7 +5061,7 @@ the trigger event (same as specifying Reference Position).
         'channel_based': 'False',
         'enum': None,
         'lv_property': 'Triggering:Trigger Video:Line Number',
-        'name': 'VIDEO_LINE_NUMBER',
+        'name': 'TV_TRIGGER_LINE_NUMBER',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
