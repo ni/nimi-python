@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
   * #### Added
   * #### Changed
+    * Simplified examples by removing try/except
   * #### Removed
 * ### NI-DMM
   * #### Added
