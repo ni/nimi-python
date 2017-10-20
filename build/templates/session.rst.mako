@@ -41,9 +41,7 @@ for f in sorted(functions):
     if functions[f]['codegen_method'] == 'public':
         name = functions[f]['python_name']
         param_list = helper.get_params_snippet(functions[f], helper.ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD)
-        if len(param_list) > 0:
-            param_list = '(' + param_list + ')'
-        else:
+        if len(param_list) == 0:
             param_list = " "
         table_contents.append((':py:func:`{0}`'.format(name), param_list))
 
