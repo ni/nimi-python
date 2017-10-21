@@ -111,12 +111,13 @@ def get_enum_type_check_snippet(parameter, indent):
     return enum_check
 
 
-def _is_size_parameter(parameter, parameters):
-    '''Returns true if the parameter represents the size of another parameter in the C API.'''
+def _get_buffer_parameter_for_size_parameter(parameter, parameters):
+    '''If parameter represents the size of another parameter in the C API, returns that other parameter. Otherwise None.'''
     for p in parameters:
         if p['is_buffer'] and p['size']['value'] == parameter['name']:
-            return True
-    return False
+            assert p['is_buffer'] is True, '{0} expected to be a buffer because its size is specified by {1}'.format(p['name'], parameter['name'])
+            return p
+    return None
 
 
 def get_ctype_variable_declaration_snippet(parameter, parameters):
@@ -127,7 +128,9 @@ def get_ctype_variable_declaration_snippet(parameter, parameters):
         2. Input repeated capability:                               ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
         3. Input string:                                            ctypes.create_string_buffer(parameter_name.encode(self._encoding))
         4. Input array (not string):                                (visatype.ViInt32 * len(list))(*list)
-        5. Input is size of output buffer:                          visatype.ViInt32(0)
+      4.5. Input is size of input buffer:                           visatype.ViInt32(len(list))
+        5. Input is size of output buffer with mechanism ivi-dance: visatype.ViInt32()
+      5.1. Input is size of output buffer with mechanism passed-in: visatype.ViInt32(buffer_size)
         6. Input scalar:                                            visatype.ViInt32(parameter_name)
         7. Input enum:                                              visatype.ViInt32(parameter_name.value)
         8. Output buffer with mechanism fixed-size:                 visatype.ViInt32 * 256
@@ -145,8 +148,17 @@ def get_ctype_variable_declaration_snippet(parameter, parameters):
         elif parameter['is_buffer'] is True:
             definition = '(visatype.{0} * len({1}))(*{1})  # case 4'.format(parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
-            if _is_size_parameter(parameter, parameters):
-                definition = 'visatype.{0}(0)  # case 5'.format(parameter['ctypes_type'])
+            corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
+            if corresponding_buffer_parameter is not None:
+                if corresponding_buffer_parameter['direction'] == 'in':
+                    definition = 'visatype.{0}(len({1})) # case 4.5'.format(parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
+                else:
+                    assert corresponding_buffer_parameter['direction'] == 'out'
+                    if corresponding_buffer_parameter['size']['mechanism'] == 'ivi-dance':
+                        definition = 'visatype.{0}()  # case 5'.format(parameter['ctypes_type'])
+                    else:
+                        assert corresponding_buffer_parameter['size']['mechanism'] == 'passed-in', 'mechanism fixed-size makes no sense here! Check metadata'
+                        definition = 'visatype.{0}({1}) # case 5.1'.format(parameter['ctypes_type'], parameter['python_name'])
             elif parameter['enum'] is None:
                 definition = 'visatype.{0}({1})  # case 6'.format(parameter['ctypes_type'], parameter['python_name'])
             else:
