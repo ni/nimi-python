@@ -139,7 +139,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters):
        13. Output scalar or enum:                                       visatype.ViInt32()
     '''
 
-    # And now, the beautiful block of conditional logic to get to each of these flavors.
+    # And now: A large block of conditional logic for getting to each of these cases. The following will not win any beauty pageants.
     # Suggestions on how to improve readability are welcome.
     # Note that we append "# case x". It's ugly in the generated code but it's sooo useful for debugging code generation problems.
     if parameter['direction'] == 'in':
@@ -155,14 +155,14 @@ def get_ctype_variable_declaration_snippet(parameter, parameters):
             corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
             if corresponding_buffer_parameter is not None:
                 if corresponding_buffer_parameter['direction'] == 'in':
-                    definition = 'visatype.{0}(len({1})) # case 5'.format(parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
+                    definition = 'visatype.{0}(len({1}))  # case 5'.format(parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
                 else:
                     assert corresponding_buffer_parameter['direction'] == 'out'
                     if corresponding_buffer_parameter['size']['mechanism'] == 'ivi-dance':
                         definition = 'visatype.{0}()  # case 6'.format(parameter['ctypes_type'])
                     else:
                         assert corresponding_buffer_parameter['size']['mechanism'] == 'passed-in', 'mechanism fixed-size makes no sense here! Check metadata'
-                        definition = 'visatype.{0}({1}) # case 7'.format(parameter['ctypes_type'], parameter['python_name'])
+                        definition = 'visatype.{0}({1})  # case 7'.format(parameter['ctypes_type'], parameter['python_name'])
             elif parameter['enum'] is None:
                 definition = 'visatype.{0}({1})  # case 8'.format(parameter['ctypes_type'], parameter['python_name'])
             else:
