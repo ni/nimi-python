@@ -1,13 +1,14 @@
 import ctypes
-import math
+# import math
 import mock_helper
 import nifake
-import sys
+# import sys
 from nifake import visatype
-import warnings
+# import warnings
 
-from mock import ANY
+# from mock import ANY
 from mock import patch
+
 
 # Matching classes for setting mock expectations:
 
@@ -15,8 +16,10 @@ class ScalarMatcher(object):
     def __init__(self, expected_type, expected_value):
         self.expected_type = expected_type
         self.expected_value = expected_value
+
     def __repr__(self):
         return 'Matcher({0}, {1})'.format(self.expected_type, self.expected_value)
+
     def __eq__(self, other):
         if not isinstance(other, self.expected_type):
             print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
@@ -27,9 +30,11 @@ class ScalarMatcher(object):
             print("Unexpected value. Expected: {0}. Received: {1}".format(self.expected_value, other.value))
         return
 
+
 class StringMatcher(object):
     def __init__(self, expected_string_value):
         self.expected_string_value = expected_string_value
+
     def __eq__(self, other):
         if not isinstance(other, ctypes.Array):
             print("Unexpected type. Expected: {0}. Received: {1}".format(ctypes.Array, type(other)))
@@ -43,22 +48,27 @@ class StringMatcher(object):
             print("Unexpected value. Expected {0}. Received: {1}".format(self.expected_string_value, other.value.decode))
         return
 
+
 class AnyPointerToType(object):
     def __init__(self, expected_type):
         self.expected_type = expected_type
+
     def __eq__(self, other):
         if not isinstance(other, ctypes.POINTER(self.expected_type)):
             print("Unexpected type. Expected: {0}. Received: {1}".format(ctypes.POINTER(self.expected_type), type(other)))
             return False
         return True
 
+
 class BooleanMatcher(ScalarMatcher):
     def __init__(self, expected_value):
         ScalarMatcher.__init__(self, visatype.ViBoolean, 1 if expected_value is True else False)
 
+
 # Tests
 
 SESSION_NUM_FOR_TEST = 42
+
 
 class TestSession(object):
 
