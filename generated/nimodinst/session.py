@@ -204,14 +204,12 @@ class Session(object):
                 character). Refer to the function help to find out how to determine the
                 exact buffer size required.
         '''
-        error_info_buffer_size_ctype = visatype.ViInt32(0)  # case 5
+        error_info_buffer_size_ctype = visatype.ViInt32()  # case 5
         error_info_ctype = None  # case 9
-        error_info_buffer_size = 0
-        error_info_ctype = None
         error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        error_info_buffer_size = error_code
-        error_info_ctype = (visatype.ViChar * error_info_buffer_size)()
+        error_info_buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_info_ctype = (visatype.ViChar * error_info_buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode(self._encoding)
@@ -292,14 +290,12 @@ class Session(object):
         handle_ctype = visatype.ViSession(self._handle)  # case 1
         index_ctype = visatype.ViInt32(index)  # case 6
         attribute_id_ctype = visatype.ViInt32(attribute_id)  # case 6
-        attribute_value_buffer_size_ctype = visatype.ViInt32(0)  # case 5
+        attribute_value_buffer_size_ctype = visatype.ViInt32()  # case 5
         attribute_value_ctype = None  # case 9
-        attribute_value_buffer_size = 0
-        attribute_value_ctype = None
         error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        attribute_value_buffer_size = error_code
-        attribute_value_ctype = (visatype.ViChar * attribute_value_buffer_size)()
+        attribute_value_buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        attribute_value_ctype = (visatype.ViChar * attribute_value_buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)

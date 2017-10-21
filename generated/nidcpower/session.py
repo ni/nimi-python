@@ -3039,7 +3039,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         timeout_ctype = visatype.ViReal64(timeout)  # case 6
-        count_ctype = visatype.ViInt32(0)  # case 5
+        count_ctype = visatype.ViInt32(count) # case 5.1
         voltage_measurements_ctype = (visatype.ViReal64 * count)()  # case 10
         current_measurements_ctype = (visatype.ViReal64 * count)()  # case 10
         in_compliance_ctype = (visatype.ViBoolean * count)()  # case 10
@@ -3307,14 +3307,12 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
-        buffer_size_ctype = visatype.ViInt32(0)  # case 5
+        buffer_size_ctype = visatype.ViInt32()  # case 5
         attribute_value_ctype = None  # case 9
-        buffer_size = 0
-        attribute_value_ctype = None
         error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        attribute_value_ctype = (visatype.ViChar * buffer_size)()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
@@ -3349,14 +3347,12 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         index_ctype = visatype.ViInt32(index)  # case 6
-        buffer_size_ctype = visatype.ViInt32(0)  # case 5
+        buffer_size_ctype = visatype.ViInt32()  # case 5
         channel_name_ctype = None  # case 9
-        buffer_size = 0
-        channel_name_ctype = None
         error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        channel_name_ctype = (visatype.ViChar * buffer_size)()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        channel_name_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_ctype.value.decode(self._encoding)
@@ -3396,14 +3392,12 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         code_ctype = visatype.ViStatus()  # case 11
-        buffer_size_ctype = visatype.ViInt32(0)  # case 5
+        buffer_size_ctype = visatype.ViInt32()  # case 5
         description_ctype = None  # case 9
-        buffer_size = 0
-        description_ctype = None
         error_code = self._library.niDCPower_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        description_ctype = (visatype.ViChar * buffer_size)()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         error_code = self._library.niDCPower_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
@@ -3949,7 +3943,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         values_ctype = (visatype.ViReal64 * len(values))(*values)  # case 4
         source_delays_ctype = (visatype.ViReal64 * len(source_delays))(*source_delays)  # case 4
-        size_ctype = visatype.ViUInt32(0)  # case 5
+        size_ctype = visatype.ViUInt32(len(values)) # case 4.5
         size = len(values)
         error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -4430,7 +4424,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case 3
-        attribute_id_count_ctype = visatype.ViInt32(0)  # case 5
+        attribute_id_count_ctype = visatype.ViInt32(len(attribute_ids)) # case 4.5
         attribute_ids_ctype = (visatype.ViInt32 * len(attribute_ids))(*attribute_ids)  # case 4
         set_as_active_sequence_ctype = visatype.ViBoolean(set_as_active_sequence)  # case 6
         attribute_id_count = len(attribute_ids)

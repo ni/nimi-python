@@ -962,14 +962,12 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
-        buffer_size_ctype = visatype.ViInt32(0)  # case 5
+        buffer_size_ctype = visatype.ViInt32()  # case 5
         attribute_value_ctype = None  # case 9
-        buffer_size = 0
-        attribute_value_ctype = None
         error_code = self._library.niDMM_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size = error_code
-        attribute_value_ctype = (visatype.ViChar * buffer_size)()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        attribute_value_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         error_code = self._library.niDMM_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
@@ -1005,14 +1003,12 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         error_code_ctype = visatype.ViStatus()  # case 11
-        buffer_size_ctype = visatype.ViInt32(0)  # case 5
+        buffer_size_ctype = visatype.ViInt32()  # case 5
         description_ctype = None  # case 9
-        buffer_size = 0
-        description_ctype = None
         error_code = self._library.niDMM_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        description_ctype = (visatype.ViChar * buffer_size)()
+        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         error_code = self._library.niDMM_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
@@ -1840,7 +1836,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 6
-        array_size_ctype = visatype.ViInt32(0)  # case 5
+        array_size_ctype = visatype.ViInt32(array_size) # case 5.1
         reading_array_ctype = (visatype.ViReal64 * array_size)()  # case 10
         actual_number_of_points_ctype = visatype.ViInt32()  # case 11
         error_code = self._library.niDMM_FetchMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
@@ -1877,7 +1873,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 6
-        array_size_ctype = visatype.ViInt32(0)  # case 5
+        array_size_ctype = visatype.ViInt32(array_size) # case 5.1
         waveform_array_ctype = (visatype.ViReal64 * array_size)()  # case 10
         actual_number_of_points_ctype = visatype.ViInt32()  # case 11
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
@@ -2310,7 +2306,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 6
-        array_size_ctype = visatype.ViInt32(0)  # case 5
+        array_size_ctype = visatype.ViInt32(array_size) # case 5.1
         reading_array_ctype = (visatype.ViReal64 * array_size)()  # case 10
         actual_number_of_points_ctype = visatype.ViInt32()  # case 11
         error_code = self._library.niDMM_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
@@ -2394,7 +2390,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         maximum_time_ctype = visatype.ViInt32(maximum_time)  # case 6
-        array_size_ctype = visatype.ViInt32(0)  # case 5
+        array_size_ctype = visatype.ViInt32(array_size) # case 5.1
         waveform_array_ctype = (visatype.ViReal64 * array_size)()  # case 10
         actual_number_of_points_ctype = visatype.ViInt32()  # case 11
         error_code = self._library.niDMM_ReadWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
