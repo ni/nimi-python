@@ -49,8 +49,6 @@ ${encoding_tag}
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
         ${ivi_dance_size_parameter['ctypes_variable_name']} = visatype.${ivi_dance_size_parameter['ctypes_type']}(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         ${ivi_dance_parameter['ctypes_variable_name']} = (visatype.${ivi_dance_parameter['ctypes_type']} * ${ivi_dance_size_parameter['ctypes_variable_name']}.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
-% elif len_parameter is not None:
-        ${len_size_parameter['python_name']} = len(${len_parameter['python_name']})
 % endif
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
@@ -59,7 +57,6 @@ ${encoding_tag}
 import ctypes
 
 from ${module_name} import attributes
-import ctypes
 from ${module_name} import enums
 from ${module_name} import errors
 from ${module_name} import library_singleton
