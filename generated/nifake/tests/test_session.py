@@ -119,18 +119,18 @@ class TestSession(object):
         session.close()
         self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
-    '''
     def test_close(self):
         session = nifake.Session('dev1')
         session.close()
-        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+        self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_session_context_manager(self):
         with nifake.Session('dev1') as session:
             assert type(session) == nifake.Session
-            self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
-        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+            self.patched_library.niFake_InitWithOptions.assert_called_once_with(ViStringMatcher('dev1'), BooleanMatcher(False), BooleanMatcher(False), ViStringMatcher(''), AnyPointerToType(visatype.ViSession))
+        self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
+    '''
     def test_init_with_error(self):
         test_error_code = -1
         test_error_desc = 'Test'
@@ -163,7 +163,7 @@ class TestSession(object):
             assert e.code == test_error_code
             assert e.description == test_error_desc
             assert session._vi == 0
-        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+        self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_session_context_manager_init_with_error(self):
         test_error_code = -1
@@ -204,7 +204,7 @@ class TestSession(object):
         self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
         with nifake.Session('dev1') as session:
             session.simple_function()
-            self.patched_library.niFake_SimpleFunction.assert_called_once_with(SESSION_NUM_FOR_TEST)
+            self.patched_library.niFake_SimpleFunction.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_get_a_number(self):
         test_number = 16
@@ -297,9 +297,9 @@ class TestSession(object):
         self.patched_library.niFake_Abort.side_effect = self.side_effects_helper.niFake_Abort
         with nifake.Session('dev1') as session:
             with session.initiate():
-                self.patched_library.niFake_Initiate.assert_called_once_with(SESSION_NUM_FOR_TEST)
-            self.patched_library.niFake_Abort.assert_called_once_with(SESSION_NUM_FOR_TEST)
-        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+                self.patched_library.niFake_Initiate.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
+            self.patched_library.niFake_Abort.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
+        self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_single_point_read(self):
         test_maximum_time = 10
