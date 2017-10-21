@@ -3,7 +3,6 @@
 import ctypes
 
 from niswitch import attributes
-import ctypes
 from niswitch import enums
 from niswitch import errors
 from niswitch import library_singleton
@@ -1063,8 +1062,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
-        attribute_value_ctype = visatype.ViBoolean()  # case 11
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViBoolean()  # case 13
         error_code = self._library.niSwitch_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
@@ -1116,8 +1115,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
-        attribute_value_ctype = visatype.ViInt32()  # case 11
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niSwitch_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -1169,8 +1168,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
-        attribute_value_ctype = visatype.ViReal64()  # case 11
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViReal64()  # case 13
         error_code = self._library.niSwitch_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
@@ -1237,9 +1236,9 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
-        array_size_ctype = visatype.ViInt32()  # case 5
-        attribute_value_ctype = None  # case 9
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        array_size_ctype = visatype.ViInt32()  # case 6
+        attribute_value_ctype = None  # case 11
         error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         array_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
@@ -1284,9 +1283,9 @@ class _SessionBase(object):
                 0 for the Buffer Size, you can pass VI_NULL for this parameter.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        code_ctype = visatype.ViStatus()  # case 11
-        buffer_size_ctype = visatype.ViInt32()  # case 5
-        description_ctype = None  # case 9
+        code_ctype = visatype.ViStatus()  # case 13
+        buffer_size_ctype = visatype.ViInt32()  # case 6
+        description_ctype = None  # case 11
         error_code = self._library.niSwitch_GetError(vi_ctype, ctypes.pointer(code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
         buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
@@ -1354,8 +1353,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
-        attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case 6
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case 8
         error_code = self._library.niSwitch_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1419,8 +1418,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
-        attribute_value_ctype = visatype.ViInt32(attribute_value)  # case 6
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViInt32(attribute_value)  # case 8
         error_code = self._library.niSwitch_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1484,8 +1483,8 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
-        attribute_value_ctype = visatype.ViReal64(attribute_value)  # case 6
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViReal64(attribute_value)  # case 8
         error_code = self._library.niSwitch_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1549,7 +1548,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 6
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
         attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case 3
         error_code = self._library.niSwitch_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1572,8 +1571,8 @@ class _SessionBase(object):
                 array with at least 256 bytes.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code_ctype = visatype.ViStatus(error_code)  # case 6
-        error_message_ctype = (visatype.ViChar * 256)()  # case 8
+        error_code_ctype = visatype.ViStatus(error_code)  # case 8
+        error_message_ctype = (visatype.ViChar * 256)()  # case 10
         error_code = self._library.niSwitch_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
@@ -1675,7 +1674,7 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case 3
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case 3
-        path_capability_ctype = visatype.ViInt32()  # case 11
+        path_capability_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niSwitch_CanConnect(vi_ctype, channel1_ctype, channel2_ctype, ctypes.pointer(path_capability_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
@@ -1719,7 +1718,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanMode))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         scanlist_ctype = ctypes.create_string_buffer(scanlist.encode(self._encoding))  # case 3
-        scan_mode_ctype = visatype.ViInt32(scan_mode.value)  # case 7
+        scan_mode_ctype = visatype.ViInt32(scan_mode.value)  # case 9
         error_code = self._library.niSwitch_ConfigureScanList(vi_ctype, scanlist_ctype, scan_mode_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1762,9 +1761,9 @@ class Session(_SessionBase):
         if type(scan_advanced_output) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        scan_delay_ctype = visatype.ViReal64(scan_delay)  # case 6
-        trigger_input_ctype = visatype.ViInt32(trigger_input.value)  # case 7
-        scan_advanced_output_ctype = visatype.ViInt32(scan_advanced_output.value)  # case 7
+        scan_delay_ctype = visatype.ViReal64(scan_delay)  # case 8
+        trigger_input_ctype = visatype.ViInt32(trigger_input.value)  # case 9
+        scan_advanced_output_ctype = visatype.ViInt32(scan_advanced_output.value)  # case 9
         error_code = self._library.niSwitch_ConfigureScanTrigger(vi_ctype, scan_delay_ctype, trigger_input_ctype, scan_advanced_output_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1943,9 +1942,9 @@ class Session(_SessionBase):
                 Coercion Record buffer parameter. Default Value: None
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        index_ctype = visatype.ViInt32(index)  # case 6
-        buffer_size_ctype = visatype.ViInt32()  # case 5
-        channel_name_buffer_ctype = None  # case 9
+        index_ctype = visatype.ViInt32(index)  # case 8
+        buffer_size_ctype = visatype.ViInt32()  # case 6
+        channel_name_buffer_ctype = None  # case 11
         error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
@@ -1993,8 +1992,8 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case 3
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case 3
-        buffer_size_ctype = visatype.ViInt32()  # case 5
-        path_ctype = None  # case 9
+        buffer_size_ctype = visatype.ViInt32()  # case 6
+        path_ctype = None  # case 11
         error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
@@ -2022,7 +2021,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case 3
-        relay_count_ctype = visatype.ViInt32()  # case 11
+        relay_count_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niSwitch_GetRelayCount(vi_ctype, relay_name_ctype, ctypes.pointer(relay_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(relay_count_ctype.value)
@@ -2051,9 +2050,9 @@ class Session(_SessionBase):
                 Coercion Record buffer parameter. Default Value: None
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        index_ctype = visatype.ViInt32(index)  # case 6
-        relay_name_buffer_size_ctype = visatype.ViInt32()  # case 5
-        relay_name_buffer_ctype = None  # case 9
+        index_ctype = visatype.ViInt32(index)  # case 8
+        relay_name_buffer_size_ctype = visatype.ViInt32()  # case 6
+        relay_name_buffer_ctype = None  # case 11
         error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         relay_name_buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
@@ -2079,7 +2078,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case 3
-        relay_position_ctype = visatype.ViInt32()  # case 11
+        relay_position_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niSwitch_GetRelayPosition(vi_ctype, relay_name_ctype, ctypes.pointer(relay_position_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
@@ -2318,9 +2317,9 @@ class Session(_SessionBase):
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
         topology_ctype = ctypes.create_string_buffer(topology.encode(self._encoding))  # case 3
-        simulate_ctype = visatype.ViBoolean(simulate)  # case 6
-        reset_device_ctype = visatype.ViBoolean(reset_device)  # case 6
-        vi_ctype = visatype.ViSession()  # case 11
+        simulate_ctype = visatype.ViBoolean(simulate)  # case 8
+        reset_device_ctype = visatype.ViBoolean(reset_device)  # case 8
+        vi_ctype = visatype.ViSession()  # case 13
         error_code = self._library.niSwitch_InitWithTopology(resource_name_ctype, topology_ctype, simulate_ctype, reset_device_ctype, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
@@ -2364,7 +2363,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.RelayAction))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case 3
-        relay_action_ctype = visatype.ViInt32(relay_action.value)  # case 7
+        relay_action_ctype = visatype.ViInt32(relay_action.value)  # case 9
         error_code = self._library.niSwitch_RelayControl(vi_ctype, relay_name_ctype, relay_action_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2406,9 +2405,9 @@ class Session(_SessionBase):
         if type(scan_advanced_output_bus_line) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        scan_advanced_output_connector_ctype = visatype.ViInt32(scan_advanced_output_connector.value)  # case 7
-        scan_advanced_output_bus_line_ctype = visatype.ViInt32(scan_advanced_output_bus_line.value)  # case 7
-        invert_ctype = visatype.ViBoolean(invert)  # case 6
+        scan_advanced_output_connector_ctype = visatype.ViInt32(scan_advanced_output_connector.value)  # case 9
+        scan_advanced_output_bus_line_ctype = visatype.ViInt32(scan_advanced_output_bus_line.value)  # case 9
+        invert_ctype = visatype.ViBoolean(invert)  # case 8
         error_code = self._library.niSwitch_RouteScanAdvancedOutput(vi_ctype, scan_advanced_output_connector_ctype, scan_advanced_output_bus_line_ctype, invert_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2438,9 +2437,9 @@ class Session(_SessionBase):
         if type(trigger_input_bus_line) is not enums.TriggerInput:
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        trigger_input_connector_ctype = visatype.ViInt32(trigger_input_connector.value)  # case 7
-        trigger_input_bus_line_ctype = visatype.ViInt32(trigger_input_bus_line.value)  # case 7
-        invert_ctype = visatype.ViBoolean(invert)  # case 6
+        trigger_input_connector_ctype = visatype.ViInt32(trigger_input_connector.value)  # case 9
+        trigger_input_bus_line_ctype = visatype.ViInt32(trigger_input_bus_line.value)  # case 9
+        invert_ctype = visatype.ViBoolean(invert)  # case 8
         error_code = self._library.niSwitch_RouteTriggerInput(vi_ctype, trigger_input_connector_ctype, trigger_input_bus_line_ctype, invert_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2472,7 +2471,7 @@ class Session(_SessionBase):
                 Default value: VI_FALSE
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        continuous_scan_ctype = visatype.ViBoolean(continuous_scan)  # case 6
+        continuous_scan_ctype = visatype.ViBoolean(continuous_scan)  # case 8
         error_code = self._library.niSwitch_SetContinuousScan(vi_ctype, continuous_scan_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2514,7 +2513,7 @@ class Session(_SessionBase):
                 Default Value:5000 ms
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case 6
+        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case 8
         error_code = self._library.niSwitch_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2535,7 +2534,7 @@ class Session(_SessionBase):
                 Value:5000 ms
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case 6
+        maximum_time_ms_ctype = visatype.ViInt32(maximum_time_ms)  # case 8
         error_code = self._library.niSwitch_WaitForScanComplete(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2577,8 +2576,8 @@ class Session(_SessionBase):
                 array with at least 256 bytes.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        self_test_result_ctype = visatype.ViInt16()  # case 11
-        self_test_message_ctype = (visatype.ViChar * 256)()  # case 8
+        self_test_result_ctype = visatype.ViInt16()  # case 13
+        self_test_message_ctype = (visatype.ViChar * 256)()  # case 10
         error_code = self._library.niSwitch_self_test(vi_ctype, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
