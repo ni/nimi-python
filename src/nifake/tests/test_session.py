@@ -132,9 +132,10 @@ class TestSession(object):
         test_error_desc = 'Test'
         self.patched_library.niFake_InitWithOptions.side_effect = self.side_effects_helper.niFake_InitWithOptions
         self.side_effects_helper['InitWithOptions']['return'] = test_error_code
-        self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
+        self.side_effects_helper['InitWithOptions']['vi'] = visatype.ViSession(SESSION_NUM_FOR_TEST)
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        #self.side_effects_helper['GetError']['description'] = (visatype.ViChar * (len(test_error_desc)+1))(test_error_desc.encode('ascii'))
         self.side_effects_helper['GetError']['description'] = test_error_desc
         try:
             nifake.Session('dev1')
@@ -159,7 +160,7 @@ class TestSession(object):
             assert e.code == test_error_code
             assert e.description == test_error_desc
             assert session._vi == 0
-        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+        self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_session_context_manager_init_with_error(self):
         test_error_code = -1
@@ -200,7 +201,7 @@ class TestSession(object):
         self.patched_library.niFake_SimpleFunction.side_effect = self.side_effects_helper.niFake_SimpleFunction
         with nifake.Session('dev1') as session:
             session.simple_function()
-            self.patched_library.niFake_SimpleFunction.assert_called_once_with(SESSION_NUM_FOR_TEST)
+            self.patched_library.niFake_SimpleFunction.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_get_a_number(self):
         test_number = 16
@@ -293,9 +294,9 @@ class TestSession(object):
         self.patched_library.niFake_Abort.side_effect = self.side_effects_helper.niFake_Abort
         with nifake.Session('dev1') as session:
             with session.initiate():
-                self.patched_library.niFake_Initiate.assert_called_once_with(SESSION_NUM_FOR_TEST)
-            self.patched_library.niFake_Abort.assert_called_once_with(SESSION_NUM_FOR_TEST)
-        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+                self.patched_library.niFake_Initiate.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
+            self.patched_library.niFake_Abort.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
+        self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_single_point_read(self):
         test_maximum_time = 10
