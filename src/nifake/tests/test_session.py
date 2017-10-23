@@ -451,6 +451,7 @@ class TestSession(object):
                 assert isinstance(result_string, str)
             assert self.patched_library.niFake_ReturnMultipleTypes.call_count == 2
     '''
+
     def test_multiple_array_types(self):
         self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
         passed_in_array = [0.0, 1.0]
@@ -465,7 +466,6 @@ class TestSession(object):
             assert passed_in_array == passed_in_array_result
             assert fixed_size_array == fixed_size_array_result
 
-    '''
     def test_parameters_are_multiple_types(self):
         self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
         boolean_val = True
@@ -477,8 +477,7 @@ class TestSession(object):
         string_val = 'Testing is fun?'
         with nifake.Session('dev1') as session:
             session.parameters_are_multiple_types(boolean_val, int32_val, int64_val, enum_val, float_val, float_enum_val, string_val)
-            self.patched_library.niFake_ParametersAreMultipleTypes.assert_called_once_with(SESSION_NUM_FOR_TEST, boolean_val, int32_val, int64_val, enum_val.value, float_val, float_enum_val.value, len(string_val), string_val.encode('ascii'))
-    '''
+            self.patched_library.niFake_ParametersAreMultipleTypes.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), BooleanMatcher(boolean_val), ViInt32Matcher(int32_val), ViInt64Matcher(int64_val), ViInt16Matcher(enum_val.value), ViReal64Matcher(float_val), ViReal64Matcher(float_enum_val.value), ViInt32Matcher(len(string_val)), ViStringMatcher(string_val))
 
     def test_parameters_are_multiple_types_error(self):
         test_error_code = -42
