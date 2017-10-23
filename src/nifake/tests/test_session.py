@@ -31,7 +31,7 @@ class ScalarMatcher(object):
         return
 
 
-class StringMatcher(object):
+class ViStringMatcher(object):
     def __init__(self, expected_string_value):
         self.expected_string_value = expected_string_value
 
@@ -64,6 +64,10 @@ class BooleanMatcher(ScalarMatcher):
     def __init__(self, expected_value):
         ScalarMatcher.__init__(self, visatype.ViBoolean, 1 if expected_value is True else False)
 
+
+class ViSessionMatcher(ScalarMatcher):
+    def __init__(self, expected_value):
+        ScalarMatcher.__init__(self, visatype.ViSession, expected_value)
 
 # Tests
 
@@ -102,31 +106,31 @@ class TestSession(object):
         patched_errors._is_error.return_value = 0
 
         session = nifake.Session('dev1')
-        self.patched_library.niFake_InitWithOptions.assert_called_once_with(StringMatcher('dev1'), BooleanMatcher(False), BooleanMatcher(False), StringMatcher(''), AnyPointerToType(visatype.ViSession))
+        self.patched_library.niFake_InitWithOptions.assert_called_once_with(ViStringMatcher('dev1'), BooleanMatcher(False), BooleanMatcher(False), ViStringMatcher(''), AnyPointerToType(visatype.ViSession))
         patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False, is_error_handling=False)
         session.close()
-        self.patched_library.niFake_close.assert_called_once_with(ScalarMatcher(visatype.ViSession, SESSION_NUM_FOR_TEST))
+        self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
         errors_patcher.stop()
 
-    '''
     def test_init_with_options_nondefault_and_close(self):
         session = nifake.Session('FakeDevice', True, True, 'Some string')
-        self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'FakeDevice', True, True, b'Some string', ANY)
+        self.patched_library.niFake_InitWithOptions.assert_called_once_with(ViStringMatcher('FakeDevice'), BooleanMatcher(True), BooleanMatcher(True), ViStringMatcher('Some string'), AnyPointerToType(visatype.ViSession))
         session.close()
-        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+        self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_close(self):
         session = nifake.Session('dev1')
         session.close()
-        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+        self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_session_context_manager(self):
         with nifake.Session('dev1') as session:
             assert type(session) == nifake.Session
-            self.patched_library.niFake_InitWithOptions.assert_called_once_with(b'dev1', 0, False, b'', ANY)
-        self.patched_library.niFake_close.assert_called_once_with(SESSION_NUM_FOR_TEST)
+            self.patched_library.niFake_InitWithOptions.assert_called_once_with(ViStringMatcher('dev1'), BooleanMatcher(False), BooleanMatcher(False), ViStringMatcher(''), AnyPointerToType(visatype.ViSession))
+        self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
+    '''
     def test_init_with_error(self):
         test_error_code = -1
         test_error_desc = 'Test'
