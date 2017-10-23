@@ -109,9 +109,13 @@ class BufferMatcher(object):
         if self.expected_size != len(other):
             print("Unexpected length. Expected: {0}. Received: {1}".format(self.expected_size, len(other)))
             return False
-        if self.expected_value is not None and self.expected_value != other:
-            print("Unexpected value. Expected: {0}. Received: {1}".format(self.expected_value, expected_value))
-            return False
+        if self.expected_value is not None:
+            # Can't compare the objects directly because they're different types (one is list, another is ctypes array).
+            # Go element by element, which allows for reporting the first index where different values were found.
+            for i in range(0, len(self.expected_value)):
+                if self.expected_value[i] != other[i]:
+                    print("Unexpected value at index {0}. Expected: {1}. Received: {2}".format(i, self.expected_value, self.expected_value))
+                    return False
         return True
 
 # Tests
@@ -378,7 +382,6 @@ class TestSession(object):
             calls = [call(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt16Matcher(0)), call(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt16Matcher(1))]  # 0 is the value of the default of nifake.Turtle.LEONARDO, 1 is the value of nifake.Turtle.DONATELLO
             self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
 
-    '''
     def test_multipoint_read(self):
         test_maximum_time = 1000
         test_reading_array = [1.0, 0.1, 42, .42]
@@ -392,10 +395,7 @@ class TestSession(object):
             assert isinstance(measurements[0], float)
             assert points == test_actual_number_of_points
             assert measurements == test_reading_array
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, len(test_reading_array), ANY, ANY)]
-            self.patched_library.niFake_ReadMultiPoint.assert_has_calls(calls)
-            assert self.patched_library.niFake_ReadMultiPoint.call_count == 1
+            self.patched_library.niFake_ReadMultiPoint.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt32Matcher(test_maximum_time), ViInt32Matcher(len(test_reading_array)), BufferMatcher(visatype.ViReal64, len(test_reading_array)), AnyPointerToType(visatype.ViInt32))
 
     def test_array_input_function(self):
         test_array = [1, 2, 3, 4]
@@ -403,8 +403,9 @@ class TestSession(object):
         self.patched_library.niFake_ArrayInputFunction.side_effect = self.side_effects_helper.niFake_ArrayInputFunction
         with nifake.Session('dev1') as session:
             session.array_input_function(test_array)
-            self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, test_array)
+            self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt32Matcher(test_array_size), BufferMatcher(visatype.ViReal64, test_array))
 
+    '''
     def test_return_multiple_types(self):
         self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
         boolean_val = True
