@@ -85,6 +85,30 @@ class ViReal64Matcher(ScalarMatcher):
         ScalarMatcher.__init__(self, visatype.ViReal64, expected_value)
 
 
+class BufferMatcher(object):
+    def __init__(self, expected_element_type, expected_size_or_value):
+        if isinstance(expected_size_or_value, int):
+            # Were given the size of the buffer
+            self.expected_value = None
+            self.expected_size = expected_size_or_value
+        else:
+            # Were given a list or something that behaves like a list
+            self.expected_value = expected_size_or_value
+            self.expected_size = len(expected_size_or_value)
+        self.expected_type = expected_element_type * self.expected_size
+
+    def __eq__(self, other):
+        if not isinstance(other, self.expected_type):
+            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
+            return False
+        if self.expected_size != len(other):
+            print("Unexpected length. Expected: {0}. Received: {1}".format(self.expected_size, len(other)))
+            return False
+        if self.expected_value is not None and self.expected_value != other:
+            print("Unexpected value. Expected: {0}. Received: {1}".format(self.expected_value, expected_value))
+            return False
+        return True
+
 # Tests
 
 SESSION_NUM_FOR_TEST = 42
@@ -278,7 +302,6 @@ class TestSession(object):
             assert test_result_enum == test_turtle
             self.patched_library.niFake_GetEnumValue.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), AnyPointerToType(visatype.ViInt32), AnyPointerToType(visatype.ViInt16))
 
-    '''
     def test_get_a_list_enums(self):
         self.patched_library.niFake_EnumArrayOutputFunction.side_effect = self.side_effects_helper.niFake_EnumArrayOutputFunction
         test_array = [1, 1, 0]
@@ -290,8 +313,9 @@ class TestSession(object):
             for i in range(test_array_size):
                 assert isinstance(test_result[i], nifake.Turtle)
                 assert test_result[i].value == test_array[i]
-            self.patched_library.niFake_EnumArrayOutputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, ANY)
+            self.patched_library.niFake_EnumArrayOutputFunction.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt32Matcher(test_array_size), BufferMatcher(visatype.ViInt16, test_array_size))
 
+    '''
     def test_get_a_boolean(self):
         self.patched_library.niFake_GetABoolean.side_effect = self.side_effects_helper.niFake_GetABoolean
         self.side_effects_helper['GetABoolean']['aBoolean'] = 1
