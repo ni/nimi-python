@@ -324,7 +324,6 @@ class TestSession(object):
             assert test_result
             self.patched_library.niFake_GetABoolean.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), AnyPointerToType(visatype.ViBoolean))
 
-    '''
     def test_get_a_list_booleans(self):
         self.patched_library.niFake_BoolArrayOutputFunction.side_effect = self.side_effects_helper.niFake_BoolArrayOutputFunction
         test_array = [1, 1, 0]
@@ -336,7 +335,7 @@ class TestSession(object):
             for i in range(test_array_size):
                 assert isinstance(test_result[0], bool)
                 assert test_result[i] == bool(test_array[i])
-            self.patched_library.niFake_BoolArrayOutputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_array_size, ANY)
+            self.patched_library.niFake_BoolArrayOutputFunction.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt32Matcher(test_array_size), BufferMatcher(visatype.ViBoolean, test_array_size))
 
     def test_acquisition_context_manager(self):
         self.patched_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate
@@ -354,11 +353,9 @@ class TestSession(object):
         self.side_effects_helper['Read']['reading'] = test_reading
         with nifake.Session('dev1') as session:
             assert test_reading == session.read(test_maximum_time)
-            from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, test_maximum_time, ANY)]
-            self.patched_library.niFake_Read.assert_has_calls(calls)
-            assert self.patched_library.niFake_Read.call_count == 1
+            self.patched_library.niFake_Read.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt32Matcher(test_maximum_time), AnyPointerToType(visatype.ViReal64))
 
+    '''
     def test_single_point_read_nan(self):
         test_maximum_time = 10
         test_reading = float('NaN')
