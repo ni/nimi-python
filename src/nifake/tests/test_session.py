@@ -264,7 +264,6 @@ class TestSession(object):
             session.two_input_function(test_number, test_string)
             self.patched_library.niFake_TwoInputFunction.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViReal64Matcher(test_number), ViStringMatcher(test_string))
 
-    '''
     def test_get_enum_value(self):
         test_number = 1
         test_turtle = nifake.Turtle.LEONARDO
@@ -277,8 +276,9 @@ class TestSession(object):
             assert test_result_number == test_number
             assert isinstance(test_result_enum, nifake.Turtle)
             assert test_result_enum == test_turtle
-            self.patched_library.niFake_GetEnumValue.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
+            self.patched_library.niFake_GetEnumValue.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), AnyPointerToType(visatype.ViInt32), AnyPointerToType(visatype.ViInt16))
 
+    '''
     def test_get_a_list_enums(self):
         self.patched_library.niFake_EnumArrayOutputFunction.side_effect = self.side_effects_helper.niFake_EnumArrayOutputFunction
         test_array = [1, 1, 0]
