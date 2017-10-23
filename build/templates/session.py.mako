@@ -113,7 +113,7 @@ if attributes[attribute]['name'][0].isdigit():
     %else:
     ${beginning_underscore + attributes[attribute]['name'].lower()} = attributes.Attribute${attributes[attribute]['type']}(${attribute})
     %endif
-%   if 'documentation' in attributes[attribute]:
+%   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
     '''
     ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
     '''
