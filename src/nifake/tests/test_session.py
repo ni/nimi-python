@@ -315,7 +315,6 @@ class TestSession(object):
                 assert test_result[i].value == test_array[i]
             self.patched_library.niFake_EnumArrayOutputFunction.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt32Matcher(test_array_size), BufferMatcher(visatype.ViInt16, test_array_size))
 
-    '''
     def test_get_a_boolean(self):
         self.patched_library.niFake_GetABoolean.side_effect = self.side_effects_helper.niFake_GetABoolean
         self.side_effects_helper['GetABoolean']['aBoolean'] = 1
@@ -323,8 +322,9 @@ class TestSession(object):
             test_result = session.get_a_boolean()
             assert isinstance(test_result, bool)
             assert test_result
-            self.patched_library.niFake_GetABoolean.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
+            self.patched_library.niFake_GetABoolean.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), AnyPointerToType(visatype.ViBoolean))
 
+    '''
     def test_get_a_list_booleans(self):
         self.patched_library.niFake_BoolArrayOutputFunction.side_effect = self.side_effects_helper.niFake_BoolArrayOutputFunction
         test_array = [1, 1, 0]
