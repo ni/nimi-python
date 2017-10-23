@@ -80,6 +80,11 @@ class ViInt64Matcher(ScalarMatcher):
         ScalarMatcher.__init__(self, visatype.ViInt64, expected_value)
 
 
+class ViReal64Matcher(ScalarMatcher):
+    def __init__(self, expected_value):
+        ScalarMatcher.__init__(self, visatype.ViReal64, expected_value)
+
+
 # Tests
 
 SESSION_NUM_FOR_TEST = 42
@@ -251,18 +256,15 @@ class TestSession(object):
             assert session.use64_bit_number(input_value) == output_value
             self.patched_library.niFake_Use64BitNumber.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt64Matcher(input_value), AnyPointerToType(visatype.ViInt64))
 
-    '''
     def test_two_input_function(self):
         test_number = 1.5
         test_string = 'test'
         self.patched_library.niFake_TwoInputFunction.side_effect = self.side_effects_helper.niFake_TwoInputFunction
         with nifake.Session('dev1') as session:
             session.two_input_function(test_number, test_string)
-            if sys.version_info.major < 3:
-                self.patched_library.niFake_TwoInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number, test_string)
-            else:
-                self.patched_library.niFake_TwoInputFunction.assert_called_once_with(SESSION_NUM_FOR_TEST, test_number, test_string.encode('ascii'))
+            self.patched_library.niFake_TwoInputFunction.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViReal64Matcher(test_number), ViStringMatcher(test_string))
 
+    '''
     def test_get_enum_value(self):
         test_number = 1
         test_turtle = nifake.Turtle.LEONARDO
