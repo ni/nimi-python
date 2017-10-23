@@ -1,5 +1,5 @@
 import ctypes
-# import math
+import math
 import mock_helper
 import nifake
 # import sys
@@ -355,7 +355,6 @@ class TestSession(object):
             assert test_reading == session.read(test_maximum_time)
             self.patched_library.niFake_Read.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt32Matcher(test_maximum_time), AnyPointerToType(visatype.ViReal64))
 
-    '''
     def test_single_point_read_nan(self):
         test_maximum_time = 10
         test_reading = float('NaN')
@@ -364,6 +363,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             assert math.isnan(session.read(test_maximum_time))
 
+    '''
     def test_enum_input_function_with_defaults(self):
         test_turtle = nifake.Turtle.DONATELLO
         self.patched_library.niFake_EnumInputFunctionWithDefaults.side_effect = self.side_effects_helper.niFake_EnumInputFunctionWithDefaults
