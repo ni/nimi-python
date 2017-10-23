@@ -75,6 +75,11 @@ class ViInt32Matcher(ScalarMatcher):
         ScalarMatcher.__init__(self, visatype.ViInt32, expected_value)
 
 
+class ViInt64Matcher(ScalarMatcher):
+    def __init__(self, expected_value):
+        ScalarMatcher.__init__(self, visatype.ViInt64, expected_value)
+
+
 # Tests
 
 SESSION_NUM_FOR_TEST = 42
@@ -237,7 +242,6 @@ class TestSession(object):
             session.one_input_function(test_number)
             self.patched_library.niFake_OneInputFunction.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt32Matcher(test_number))
 
-    '''
     def test_vi_int_64_function(self):
         input_value = 1099511627776  # 2^40
         output_value = 2199023255552  # 2^41
@@ -245,8 +249,9 @@ class TestSession(object):
         self.side_effects_helper['Use64BitNumber']['output'] = output_value
         with nifake.Session('dev1') as session:
             assert session.use64_bit_number(input_value) == output_value
-            self.patched_library.niFake_Use64BitNumber.assert_called_once_with(SESSION_NUM_FOR_TEST, input_value, ANY)
+            self.patched_library.niFake_Use64BitNumber.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt64Matcher(input_value), AnyPointerToType(visatype.ViInt64))
 
+    '''
     def test_two_input_function(self):
         test_number = 1.5
         test_string = 'test'
