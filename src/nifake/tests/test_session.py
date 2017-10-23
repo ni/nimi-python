@@ -147,7 +147,9 @@ class TestSession(object):
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
+    '''
 
+    '''
     def test_close_with_error(self):
         test_error_code = -1
         test_error_desc = 'Test'
@@ -165,7 +167,9 @@ class TestSession(object):
             assert e.description == test_error_desc
             assert session._vi == 0
         self.patched_library.niFake_close.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST))
+    '''
 
+    '''
     def test_session_context_manager_init_with_error(self):
         test_error_code = -1
         test_error_desc = 'Test'
@@ -182,7 +186,9 @@ class TestSession(object):
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
+    '''
 
+    '''
     def test_session_context_manager_close_with_error(self):
         test_error_code = -1
         test_error_desc = 'Test'
@@ -198,6 +204,7 @@ class TestSession(object):
         except nifake.Error as e:
             assert e.code == test_error_code
             assert e.description == test_error_desc
+    '''
 
     # Methods
 
@@ -215,7 +222,8 @@ class TestSession(object):
             test_result = session.get_a_number()
             assert isinstance(test_result, int)
             assert test_result == test_number
-            self.patched_library.niFake_GetANumber.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
+            self.patched_library.niFake_GetANumber.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), AnyPointerToType(visatype.ViInt16))
+    '''
 
     def test_one_input_function(self):
         test_number = 1
