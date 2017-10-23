@@ -687,7 +687,7 @@ Reference level percentages are computed using the base/top method.
             },
         ],
     },
-    'Prog.FIRFilterReal/Complex': {
+    'ProgFIRFilterRealComplex': {
         'values': [
             {
                 'name': 'REAL',
@@ -709,7 +709,7 @@ Sets a complex filter.
             },
         ],
     },
-    'Prog.FIRFilterSymmetry': {
+    'ProgFIRFilterSymmetry': {
         'values': [
             {
                 'name': 'SYMMETRIC',
@@ -731,7 +731,7 @@ Sets an asymmetric filter.
             },
         ],
     },
-    'Prog.FIRFilterSymmetryType': {
+    'ProgFIRFilterSymmetryType': {
         'values': [
             {
                 'name': 'EVEN',
@@ -753,7 +753,7 @@ Sets the discriminator FIR symmetry type to odd.
             },
         ],
     },
-    'QInputtoCoord.Converter': {
+    'QInputtoCoordConverter': {
         'values': [
             {
                 'name': 'I_AND_Q',
@@ -824,7 +824,7 @@ sample periods are ignored.
             },
         ],
     },
-    'Ref.LevelUnits': {
+    'RefLevelUnits': {
         'values': [
             {
                 'name': 'VOLTS',
@@ -1007,7 +1007,7 @@ Differential channel terminal configuration.
             },
         ],
     },
-    'TimingNCOFreq.OffsetBits': {
+    'TimingNCOFreqOffsetBits': {
         'values': [
             {
                 'name': '_8_BITS',

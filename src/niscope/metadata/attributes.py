@@ -713,7 +713,7 @@ conditions:
     1150016: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': 'Ref.LevelUnits',
+        'enum': 'RefLevelUnits',
         'lv_property': 'Waveform Measurement:Reference Levels:Units',
         'name': 'MEAS_REF_LEVEL_UNITS',
         'resettable': 'No',
@@ -3904,7 +3904,7 @@ Specifies the programmable FIR filter decimation. The default value is
     1151031: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': 'Prog.FIRFilterSymmetry',
+        'enum': 'ProgFIRFilterSymmetry',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Symmetry',
         'name': 'PROG._FIR_FILTER_SYMMETRY',
         'resettable': 'No',
@@ -3919,7 +3919,7 @@ Symmetric.
     1151032: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': 'Prog.FIRFilterSymmetryType',
+        'enum': 'ProgFIRFilterSymmetryType',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Symmetry Type',
         'name': 'PROG._FIR_FILTER_SYMMETRY_TYPE',
         'resettable': 'No',
@@ -3946,7 +3946,7 @@ filter. The default value is 25.
     1151034: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': 'Prog.FIRFilterReal/Complex',
+        'enum': 'ProgFIRFilterRealComplex',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Real/Complex',
         'name': 'PROG._FIR_FILTER_REALCOMPLEX',
         'resettable': 'No',
@@ -4242,7 +4242,7 @@ FIR.
     1151074: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': 'QInputtoCoord.Converter',
+        'enum': 'QInputtoCoordConverter',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Q Input to Coord. Converter',
         'name': 'Q_INPUT_TO_COORD._CONVERTER',
         'resettable': 'No',
@@ -4318,7 +4318,7 @@ offset frequency. The default value is FALSE.
     1151123: {
         'access': 'read-write',
         'channel_based': 'True',
-        'enum': 'TimingNCOFreq.OffsetBits',
+        'enum': 'TimingNCOFreqOffsetBits',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Frequency Offset Bits',
         'name': 'TIMING_NCO_FREQ._OFFSET_BITS',
         'resettable': 'No',

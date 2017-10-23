@@ -340,7 +340,7 @@ class PercentageMethod(Enum):
     '''
 
 
-class Prog.FIRFilterReal/Complex(Enum):
+class ProgFIRFilterRealComplex(Enum):
     REAL = 0
     '''
     Sets a dual real filter.
@@ -351,7 +351,7 @@ class Prog.FIRFilterReal/Complex(Enum):
     '''
 
 
-class Prog.FIRFilterSymmetry(Enum):
+class ProgFIRFilterSymmetry(Enum):
     SYMMETRIC = 0
     '''
     Sets a symmetric filter.
@@ -362,7 +362,7 @@ class Prog.FIRFilterSymmetry(Enum):
     '''
 
 
-class Prog.FIRFilterSymmetryType(Enum):
+class ProgFIRFilterSymmetryType(Enum):
     EVEN = 0
     '''
     Sets the discriminator FIR symmetry type to even.
@@ -373,7 +373,7 @@ class Prog.FIRFilterSymmetryType(Enum):
     '''
 
 
-class QInputtoCoord.Converter(Enum):
+class QInputtoCoordConverter(Enum):
     I_AND_Q = 0
     '''
     Enables the Q input to coordinate converter.
@@ -412,7 +412,7 @@ class RISMethod(Enum):
     '''
 
 
-class Ref.LevelUnits(Enum):
+class RefLevelUnits(Enum):
     VOLTS = 0
     '''
     Specifies that the reference levels are given in units of volts.
@@ -504,7 +504,7 @@ class TerminalConfiguration(Enum):
     '''
 
 
-class TimingNCOFreq.OffsetBits(Enum):
+class TimingNCOFreqOffsetBits(Enum):
     _8_BITS = 0
     '''
     Specifies 8 offset bits in the timing NCO.

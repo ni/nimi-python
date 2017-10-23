@@ -27,13 +27,13 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    5102_adjust_pretrigger_samples = attributes.AttributeViBoolean(1150085)
+    _5102_adjust_pretrigger_samples = attributes.AttributeViBoolean(1150085)
     '''
     When set to TRUE and the digitizer is set to master, the number of
     pretrigger samples and total number of samples are adjusted to enable
     synchronizing a master and slave NI 5102.
     '''
-    5v_out_output_terminal = attributes.AttributeViString(1150129)
+    _5v_out_output_terminal = attributes.AttributeViString(1150129)
     '''
     Specifies the destination for the 5 Volt power signal. Refer to the
     device specifications document for a list of valid destinations.
@@ -1983,7 +1983,7 @@ class _SessionBase(object):
     Any positive integer is valid. The default value is 1 (linear
     interpolation).
     '''
-    meas_ref_level_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Ref.LevelUnits, 1150016)
+    meas_ref_level_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.RefLevelUnits, 1150016)
     '''
     Specifies the units for the waveform measurement reference levels.
 
@@ -2126,9 +2126,6 @@ class _SessionBase(object):
     Horizontal Parameters <digitizers.chm::/Horizontal_Parameters.html>`__
     '''
     mux_mode_register = attributes.AttributeViInt32(1151002)
-    '''
-    
-    '''
     onboard_memory_size = attributes.AttributeViInt32(1150069)
     '''
     Returns the total combined amount of onboard memory for all channels in
@@ -2445,7 +2442,7 @@ class _SessionBase(object):
         session['0,1'].prog._fir_filter_decimation = var
         var = session['0,1'].prog._fir_filter_decimation
     '''
-    prog._fir_filter_realcomplex = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Prog.FIRFilterReal/Complex, 1151034)
+    prog._fir_filter_realcomplex = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ProgFIRFilterRealComplex, 1151034)
     '''
     Sets either a Complex filter or a dual Real filter. The default value is
     Real.
@@ -2459,7 +2456,7 @@ class _SessionBase(object):
         session['0,1'].prog._fir_filter_realcomplex = var
         var = session['0,1'].prog._fir_filter_realcomplex
     '''
-    prog._fir_filter_symmetry = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Prog.FIRFilterSymmetry, 1151031)
+    prog._fir_filter_symmetry = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ProgFIRFilterSymmetry, 1151031)
     '''
     Sets either a Symmetric or Asymmetric filter. The default value is
     Symmetric.
@@ -2473,7 +2470,7 @@ class _SessionBase(object):
         session['0,1'].prog._fir_filter_symmetry = var
         var = session['0,1'].prog._fir_filter_symmetry
     '''
-    prog._fir_filter_symmetry_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Prog.FIRFilterSymmetryType, 1151032)
+    prog._fir_filter_symmetry_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ProgFIRFilterSymmetryType, 1151032)
     '''
     Sets either even or odd symmetry. The default value is Even.
 
@@ -2512,7 +2509,7 @@ class _SessionBase(object):
     Options <scopeviref.chm::/niScope_Initialize_With_Options.html>`__ to
     override this value.
     '''
-    q_input_to_coord._converter = attributes.AttributeEnum(attributes.AttributeViInt32, enums.QInputtoCoord.Converter, 1151074)
+    q_input_to_coord._converter = attributes.AttributeEnum(attributes.AttributeViInt32, enums.QInputtoCoordConverter, 1151074)
     '''
     Either enables or zeros out the Q input to coordinate converter. The
     default value is I and Q.
@@ -2893,9 +2890,6 @@ class _SessionBase(object):
     `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
     '''
     serial_dac_cal_voltage = attributes.AttributeViReal64(1151302)
-    '''
-    
-    '''
     serial_number = attributes.AttributeViString(1150104)
     '''
     Returns the serial number of the device.
@@ -3090,7 +3084,7 @@ class _SessionBase(object):
         session['0,1'].timing_nco_enable_offset_freq. = var
         var = session['0,1'].timing_nco_enable_offset_freq.
     '''
-    timing_nco_freq._offset_bits = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TimingNCOFreq.OffsetBits, 1151123)
+    timing_nco_freq._offset_bits = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TimingNCOFreqOffsetBits, 1151123)
     '''
     Specifies the number of offset bits in the `timing
     NCO <Digitizers.chm::/Glossary.html#timingNCO>`__. The default value is

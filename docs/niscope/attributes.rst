@@ -4836,17 +4836,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------+
-    | Characteristic | Value                     |
-    +================+===========================+
-    | Datatype       | :py:data:`Ref.LevelUnits` |
-    +----------------+---------------------------+
-    | Permissions    | read-write                |
-    +----------------+---------------------------+
-    | Channel Based  | True                      |
-    +----------------+---------------------------+
-    | Resettable     | No                        |
-    +----------------+---------------------------+
+    +----------------+--------------------------+
+    | Characteristic | Value                    |
+    +================+==========================+
+    | Datatype       | :py:data:`RefLevelUnits` |
+    +----------------+--------------------------+
+    | Permissions    | read-write               |
+    +----------------+--------------------------+
+    | Channel Based  | True                     |
+    +----------------+--------------------------+
+    | Resettable     | No                       |
+    +----------------+--------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6143,17 +6143,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------------+
-    | Characteristic | Value                                 |
-    +================+=======================================+
-    | Datatype       | :py:data:`Prog.FIRFilterReal/Complex` |
-    +----------------+---------------------------------------+
-    | Permissions    | read-write                            |
-    +----------------+---------------------------------------+
-    | Channel Based  | True                                  |
-    +----------------+---------------------------------------+
-    | Resettable     | No                                    |
-    +----------------+---------------------------------------+
+    +----------------+-------------------------------------+
+    | Characteristic | Value                               |
+    +================+=====================================+
+    | Datatype       | :py:data:`ProgFIRFilterRealComplex` |
+    +----------------+-------------------------------------+
+    | Permissions    | read-write                          |
+    +----------------+-------------------------------------+
+    | Channel Based  | True                                |
+    +----------------+-------------------------------------+
+    | Resettable     | No                                  |
+    +----------------+-------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6181,17 +6181,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-----------------------------------+
-    | Characteristic | Value                             |
-    +================+===================================+
-    | Datatype       | :py:data:`Prog.FIRFilterSymmetry` |
-    +----------------+-----------------------------------+
-    | Permissions    | read-write                        |
-    +----------------+-----------------------------------+
-    | Channel Based  | True                              |
-    +----------------+-----------------------------------+
-    | Resettable     | No                                |
-    +----------------+-----------------------------------+
+    +----------------+----------------------------------+
+    | Characteristic | Value                            |
+    +================+==================================+
+    | Datatype       | :py:data:`ProgFIRFilterSymmetry` |
+    +----------------+----------------------------------+
+    | Permissions    | read-write                       |
+    +----------------+----------------------------------+
+    | Channel Based  | True                             |
+    +----------------+----------------------------------+
+    | Resettable     | No                               |
+    +----------------+----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6218,17 +6218,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------------+
-    | Characteristic | Value                                 |
-    +================+=======================================+
-    | Datatype       | :py:data:`Prog.FIRFilterSymmetryType` |
-    +----------------+---------------------------------------+
-    | Permissions    | read-write                            |
-    +----------------+---------------------------------------+
-    | Channel Based  | True                                  |
-    +----------------+---------------------------------------+
-    | Resettable     | No                                    |
-    +----------------+---------------------------------------+
+    +----------------+--------------------------------------+
+    | Characteristic | Value                                |
+    +================+======================================+
+    | Datatype       | :py:data:`ProgFIRFilterSymmetryType` |
+    +----------------+--------------------------------------+
+    | Permissions    | read-write                           |
+    +----------------+--------------------------------------+
+    | Channel Based  | True                                 |
+    +----------------+--------------------------------------+
+    | Resettable     | No                                   |
+    +----------------+--------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6326,17 +6326,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+------------------------------------+
-    | Characteristic | Value                              |
-    +================+====================================+
-    | Datatype       | :py:data:`QInputtoCoord.Converter` |
-    +----------------+------------------------------------+
-    | Permissions    | read-write                         |
-    +----------------+------------------------------------+
-    | Channel Based  | True                               |
-    +----------------+------------------------------------+
-    | Resettable     | No                                 |
-    +----------------+------------------------------------+
+    +----------------+-----------------------------------+
+    | Characteristic | Value                             |
+    +================+===================================+
+    | Datatype       | :py:data:`QInputtoCoordConverter` |
+    +----------------+-----------------------------------+
+    | Permissions    | read-write                        |
+    +----------------+-----------------------------------+
+    | Channel Based  | True                              |
+    +----------------+-----------------------------------+
+    | Resettable     | No                                |
+    +----------------+-----------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7862,17 +7862,17 @@ niscope.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------------------+
-    | Characteristic | Value                               |
-    +================+=====================================+
-    | Datatype       | :py:data:`TimingNCOFreq.OffsetBits` |
-    +----------------+-------------------------------------+
-    | Permissions    | read-write                          |
-    +----------------+-------------------------------------+
-    | Channel Based  | True                                |
-    +----------------+-------------------------------------+
-    | Resettable     | No                                  |
-    +----------------+-------------------------------------+
+    +----------------+------------------------------------+
+    | Characteristic | Value                              |
+    +================+====================================+
+    | Datatype       | :py:data:`TimingNCOFreqOffsetBits` |
+    +----------------+------------------------------------+
+    | Permissions    | read-write                         |
+    +----------------+------------------------------------+
+    | Channel Based  | True                               |
+    +----------------+------------------------------------+
+    | Resettable     | No                                 |
+    +----------------+------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

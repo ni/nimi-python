@@ -12,111 +12,111 @@ niscope.Session
    +-----------------------------------------------------+-----------------------------------------+
    | Property                                            | Datatype                                |
    +=====================================================+=========================================+
-   | :py:attr:`5102_adjust_pretrigger_samples`           | ViBoolean                               |
+   | :py:attr:`5102_adjust_pretrigger_samples`           | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`5v_out_output_terminal`                   | ViString                                |
+   | :py:attr:`5v_out_output_terminal`                   | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`absolute_sample_clock_offset`             | ViReal64                                |
+   | :py:attr:`absolute_sample_clock_offset`             | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`acquisition_start_time`                   | ViReal64                                |
+   | :py:attr:`acquisition_start_time`                   | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`acquisition_type`                         | :py:data:`AcquisitionType`              |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`acq_arm_source`                           | ViString                                |
+   | :py:attr:`acq_arm_source`                           | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`adv_trig_src`                             | ViString                                |
+   | :py:attr:`adv_trig_src`                             | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`agc_average_control`                      | :py:data:`AGCAverageControl`            |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`agc_loop_gain_0_exponent`                 | ViInt32                                 |
+   | :py:attr:`agc_loop_gain_0_exponent`                 | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`agc_loop_gain_0_mantissa`                 | ViInt32                                 |
+   | :py:attr:`agc_loop_gain_0_mantissa`                 | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`agc_loop_gain_1_exponent`                 | ViInt32                                 |
+   | :py:attr:`agc_loop_gain_1_exponent`                 | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`agc_loop_gain_1_mantissa`                 | ViInt32                                 |
+   | :py:attr:`agc_loop_gain_1_mantissa`                 | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`agc_lower_gain_limit`                     | ViReal64                                |
+   | :py:attr:`agc_lower_gain_limit`                     | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`agc_threshold`                            | ViInt32                                 |
+   | :py:attr:`agc_threshold`                            | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`agc_upper_gain_limit`                     | ViReal64                                |
+   | :py:attr:`agc_upper_gain_limit`                     | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`allow_more_records_than_memory`           | ViBoolean                               |
+   | :py:attr:`allow_more_records_than_memory`           | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`aout_parallel_output_source`              | :py:data:`AOUTParallelOutputSource`     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`arm_ref_trig_src`                         | ViString                                |
+   | :py:attr:`arm_ref_trig_src`                         | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`backlog`                                  | ViReal64                                |
+   | :py:attr:`backlog`                                  | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`bandpass_filter_enabled`                  | ViBoolean                               |
+   | :py:attr:`bandpass_filter_enabled`                  | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`binary_sample_width`                      | ViInt32                                 |
+   | :py:attr:`binary_sample_width`                      | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`bout_parallel_output_source`              | :py:data:`BOUTParallelOutputSource`     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`cache`                                    | ViBoolean                               |
+   | :py:attr:`cache`                                    | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`carrier_nco_center_frequency`             | ViReal64                                |
+   | :py:attr:`carrier_nco_center_frequency`             | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`carrier_phase_offset`                     | ViReal64                                |
+   | :py:attr:`carrier_phase_offset`                     | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`channel_count`                            | ViInt32                                 |
+   | :py:attr:`channel_count`                            | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`channel_enabled`                          | :py:data:`BoolEnableDisableChan`        |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`channel_terminal_configuration`           | :py:data:`TerminalConfiguration`        |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`cic_decimation`                           | ViInt32                                 |
+   | :py:attr:`cic_decimation`                           | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`cic_shift_gain`                           | ViInt32                                 |
+   | :py:attr:`cic_shift_gain`                           | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`clock_sync_pulse_source`                  | ViString                                |
+   | :py:attr:`clock_sync_pulse_source`                  | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`combined_decimation`                      | ViInt32                                 |
+   | :py:attr:`combined_decimation`                      | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`coordinate_converter_input`               | :py:data:`CoordinateConverterInput`     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`data_transfer_block_size`                 | ViInt32                                 |
+   | :py:attr:`data_transfer_block_size`                 | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`data_transfer_maximum_bandwidth`          | ViReal64                                |
+   | :py:attr:`data_transfer_maximum_bandwidth`          | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`data_transfer_preferred_packet_size`      | ViInt32                                 |
+   | :py:attr:`data_transfer_preferred_packet_size`      | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ddc_center_frequency`                     | ViReal64                                |
+   | :py:attr:`ddc_center_frequency`                     | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`ddc_data_processing_mode`                 | :py:data:`DataProcessingMode`           |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ddc_direct_register_address`              | ViInt32                                 |
+   | :py:attr:`ddc_direct_register_address`              | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ddc_direct_register_data`                 | ViInt32                                 |
+   | :py:attr:`ddc_direct_register_data`                 | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ddc_enabled`                              | ViBoolean                               |
+   | :py:attr:`ddc_enabled`                              | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ddc_frequency_translation_enabled`        | ViBoolean                               |
+   | :py:attr:`ddc_frequency_translation_enabled`        | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ddc_frequency_translation_phase_i`        | ViReal64                                |
+   | :py:attr:`ddc_frequency_translation_phase_i`        | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ddc_frequency_translation_phase_q`        | ViReal64                                |
+   | :py:attr:`ddc_frequency_translation_phase_q`        | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ddc_q_source`                             | ViString                                |
+   | :py:attr:`ddc_q_source`                             | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`delay_before_initiate`                    | ViReal64                                |
+   | :py:attr:`delay_before_initiate`                    | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`device_number`                            | ViInt32                                 |
+   | :py:attr:`device_number`                            | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`device_temperature`                       | ViReal64                                |
+   | :py:attr:`device_temperature`                       | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`digital_gain`                             | ViReal64                                |
+   | :py:attr:`digital_gain`                             | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`digital_offset`                           | ViReal64                                |
+   | :py:attr:`digital_offset`                           | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`discr._enable`                            | ViBoolean                               |
+   | :py:attr:`discr._enable`                            | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`discriminator_delay`                      | ViInt32                                 |
+   | :py:attr:`discriminator_delay`                      | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`discriminator_fir_decimation`             | ViInt32                                 |
+   | :py:attr:`discriminator_fir_decimation`             | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`discriminator_fir_input_source`           | :py:data:`DiscriminatorFIRInputSource`  |
    +-----------------------------------------------------+-----------------------------------------+
@@ -124,383 +124,383 @@ niscope.Session
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`discriminator_fir_symmetry_type`          | :py:data:`DiscriminatorFIRSymmetryType` |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`discriminator_fir_taps`                   | ViInt32                                 |
+   | :py:attr:`discriminator_fir_taps`                   | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`discriminator_phase_multiplier`           | ViInt32                                 |
+   | :py:attr:`discriminator_phase_multiplier`           | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`dither_enabled`                           | ViBoolean                               |
+   | :py:attr:`dither_enabled`                           | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`enable_dc_restore`                        | ViBoolean                               |
+   | :py:attr:`enable_dc_restore`                        | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`enable_ddc`                               | ViBoolean                               |
+   | :py:attr:`enable_ddc`                               | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`enable_dither`                            | ViBoolean                               |
+   | :py:attr:`enable_dither`                            | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`enable_time_interleaved_sampling`         | :py:data:`BoolEnableDisableTIS`         |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`end_of_acquisition_event_output_terminal` | ViString                                |
+   | :py:attr:`end_of_acquisition_event_output_terminal` | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`end_of_record_event_output_terminal`      | ViString                                |
+   | :py:attr:`end_of_record_event_output_terminal`      | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`end_of_record_to_advance_trigger_holdoff` | ViReal64                                |
+   | :py:attr:`end_of_record_to_advance_trigger_holdoff` | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`equalization_filter_enabled`              | ViBoolean                               |
+   | :py:attr:`equalization_filter_enabled`              | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`equalization_num_coefficients`            | ViInt32                                 |
+   | :py:attr:`equalization_num_coefficients`            | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`exported_advance_trigger_output_terminal` | ViString                                |
+   | :py:attr:`exported_advance_trigger_output_terminal` | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`exported_ref_trigger_output_terminal`     | ViString                                |
+   | :py:attr:`exported_ref_trigger_output_terminal`     | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`exported_sample_clock_output_terminal`    | ViString                                |
+   | :py:attr:`exported_sample_clock_output_terminal`    | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`exported_start_trigger_output_terminal`   | ViString                                |
+   | :py:attr:`exported_start_trigger_output_terminal`   | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`fetch_interleaved_data`                   | ViBoolean                               |
+   | :py:attr:`fetch_interleaved_data`                   | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`fetch_interleaved_iq_data`                | :py:data:`BoolEnableDisableIQ`          |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`fetch_meas_num_samples`                   | ViInt32                                 |
+   | :py:attr:`fetch_meas_num_samples`                   | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`fetch_num_records`                        | ViInt32                                 |
+   | :py:attr:`fetch_num_records`                        | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`fetch_offset`                             | ViInt32                                 |
+   | :py:attr:`fetch_offset`                             | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`fetch_record_number`                      | ViInt32                                 |
+   | :py:attr:`fetch_record_number`                      | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`fetch_relative_to`                        | :py:data:`FetchRelativeTo`              |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`flex_fir_antialias_filter_type`           | :py:data:`FlexFIRAntialiasFilterType`   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`fpga_bitfile_path`                        | ViString                                |
+   | :py:attr:`fpga_bitfile_path`                        | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`fractional_resample_enabled`              | ViBoolean                               |
+   | :py:attr:`fractional_resample_enabled`              | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`group_capabilities`                       | ViString                                |
+   | :py:attr:`group_capabilities`                       | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`halfband_filter_1_enable`                 | ViBoolean                               |
+   | :py:attr:`halfband_filter_1_enable`                 | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`halfband_filter_2_enable`                 | ViBoolean                               |
+   | :py:attr:`halfband_filter_2_enable`                 | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`halfband_filter_3_enable`                 | ViBoolean                               |
+   | :py:attr:`halfband_filter_3_enable`                 | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`halfband_filter_4_enable`                 | ViBoolean                               |
+   | :py:attr:`halfband_filter_4_enable`                 | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`halfband_filter_5_enable`                 | ViBoolean                               |
+   | :py:attr:`halfband_filter_5_enable`                 | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`halfband_filter_bypass`                   | ViBoolean                               |
+   | :py:attr:`halfband_filter_bypass`                   | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`high_pass_filter_frequency`               | ViReal64                                |
+   | :py:attr:`high_pass_filter_frequency`               | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`horz_enforce_realtime`                    | :py:data:`BoolEnableDisableRealtime`    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`horz_min_num_pts`                         | ViInt32                                 |
+   | :py:attr:`horz_min_num_pts`                         | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`horz_num_records`                         | ViInt32                                 |
+   | :py:attr:`horz_num_records`                         | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`horz_record_length`                       | ViInt32                                 |
+   | :py:attr:`horz_record_length`                       | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`horz_record_ref_position`                 | ViReal64                                |
+   | :py:attr:`horz_record_ref_position`                 | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`horz_sample_rate`                         | ViReal64                                |
+   | :py:attr:`horz_sample_rate`                         | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`horz_time_per_record`                     | ViReal64                                |
+   | :py:attr:`horz_time_per_record`                     | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`input_clock_source`                       | ViString                                |
+   | :py:attr:`input_clock_source`                       | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`input_impedance`                          | ViReal64                                |
+   | :py:attr:`input_impedance`                          | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`instrument_firmware_revision`             | ViString                                |
+   | :py:attr:`instrument_firmware_revision`             | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`instrument_manufacturer`                  | ViString                                |
+   | :py:attr:`instrument_manufacturer`                  | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`instrument_model`                         | ViString                                |
+   | :py:attr:`instrument_model`                         | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`interchange_check`                        | ViBoolean                               |
+   | :py:attr:`interchange_check`                        | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`interleaving_offset_correction_enabled`   | ViBoolean                               |
+   | :py:attr:`interleaving_offset_correction_enabled`   | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`io_resource_descriptor`                   | ViString                                |
+   | :py:attr:`io_resource_descriptor`                   | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`logical_name`                             | ViString                                |
+   | :py:attr:`logical_name`                             | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`master_enable`                            | ViBoolean                               |
+   | :py:attr:`master_enable`                            | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`max_input_frequency`                      | ViReal64                                |
+   | :py:attr:`max_input_frequency`                      | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`max_real_time_sampling_rate`              | ViReal64                                |
+   | :py:attr:`max_real_time_sampling_rate`              | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`max_ris_rate`                             | ViReal64                                |
+   | :py:attr:`max_ris_rate`                             | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_array_gain`                          | ViReal64                                |
+   | :py:attr:`meas_array_gain`                          | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_array_offset`                        | ViReal64                                |
+   | :py:attr:`meas_array_offset`                        | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_chan_high_ref_level`                 | ViReal64                                |
+   | :py:attr:`meas_chan_high_ref_level`                 | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_chan_low_ref_level`                  | ViReal64                                |
+   | :py:attr:`meas_chan_low_ref_level`                  | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_chan_mid_ref_level`                  | ViReal64                                |
+   | :py:attr:`meas_chan_mid_ref_level`                  | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_filter_center_freq`                  | ViReal64                                |
+   | :py:attr:`meas_filter_center_freq`                  | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_filter_cutoff_freq`                  | ViReal64                                |
+   | :py:attr:`meas_filter_cutoff_freq`                  | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_filter_order`                        | ViInt32                                 |
+   | :py:attr:`meas_filter_order`                        | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_filter_ripple`                       | ViReal64                                |
+   | :py:attr:`meas_filter_ripple`                       | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_filter_taps`                         | ViInt32                                 |
+   | :py:attr:`meas_filter_taps`                         | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_filter_transient_waveform_percent`   | ViReal64                                |
+   | :py:attr:`meas_filter_transient_waveform_percent`   | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`meas_filter_type`                         | :py:data:`FilterType`                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_filter_width`                        | ViReal64                                |
+   | :py:attr:`meas_filter_width`                        | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`meas_fir_filter_window`                   | :py:data:`FIRFilterWindow`              |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_hysteresis_percent`                  | ViReal64                                |
+   | :py:attr:`meas_hysteresis_percent`                  | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_interpolation_sampling_factor`       | ViReal64                                |
+   | :py:attr:`meas_interpolation_sampling_factor`       | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_last_acq_histogram_size`             | ViInt32                                 |
+   | :py:attr:`meas_last_acq_histogram_size`             | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_other_channel`                       | ViString                                |
+   | :py:attr:`meas_other_channel`                       | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`meas_percentage_method`                   | :py:data:`PercentageMethod`             |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_polynomial_interpolation_order`      | ViInt32                                 |
+   | :py:attr:`meas_polynomial_interpolation_order`      | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_ref_level_units`                     | :py:data:`Ref.LevelUnits`               |
+   | :py:attr:`meas_ref_level_units`                     | :py:data:`RefLevelUnits`                |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_time_histogram_high_time`            | ViReal64                                |
+   | :py:attr:`meas_time_histogram_high_time`            | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_time_histogram_high_volts`           | ViReal64                                |
+   | :py:attr:`meas_time_histogram_high_volts`           | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_time_histogram_low_time`             | ViReal64                                |
+   | :py:attr:`meas_time_histogram_low_time`             | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_time_histogram_low_volts`            | ViReal64                                |
+   | :py:attr:`meas_time_histogram_low_volts`            | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_time_histogram_size`                 | ViInt32                                 |
+   | :py:attr:`meas_time_histogram_size`                 | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_voltage_histogram_high_volts`        | ViReal64                                |
+   | :py:attr:`meas_voltage_histogram_high_volts`        | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_voltage_histogram_low_volts`         | ViReal64                                |
+   | :py:attr:`meas_voltage_histogram_low_volts`         | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`meas_voltage_histogram_size`              | ViInt32                                 |
+   | :py:attr:`meas_voltage_histogram_size`              | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`min_sample_rate`                          | ViReal64                                |
+   | :py:attr:`min_sample_rate`                          | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`mux_mode_register`                        | ViInt32                                 |
+   | :py:attr:`mux_mode_register`                        | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`onboard_memory_size`                      | ViInt32                                 |
+   | :py:attr:`onboard_memory_size`                      | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`oscillator_phase_dac_value`               | ViInt32                                 |
+   | :py:attr:`oscillator_phase_dac_value`               | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`output_clock_source`                      | ViString                                |
+   | :py:attr:`output_clock_source`                      | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`overflow_error_reporting`                 | :py:data:`OverflowErrorReporting`       |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_channels_to_stream`                   | ViString                                |
+   | :py:attr:`p2p_channels_to_stream`                   | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_data_trans_permission_addr`           | ViInt64                                 |
+   | :py:attr:`p2p_data_trans_permission_addr`           | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`p2p_data_trans_permission_addr_type`      | :py:data:`AddressType`                  |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_destination_window_addr`              | ViInt64                                 |
+   | :py:attr:`p2p_destination_window_addr`              | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`p2p_destination_window_addr_type`         | :py:data:`AddressType`                  |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_destination_window_size`              | ViInt64                                 |
+   | :py:attr:`p2p_destination_window_size`              | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`p2p_enabled`                              | :py:data:`BoolEnableDisable`            |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_endpoint_overflow`                    | ViBoolean                               |
+   | :py:attr:`p2p_endpoint_overflow`                    | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_endpoint_size`                        | ViInt32                                 |
+   | :py:attr:`p2p_endpoint_size`                        | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_fifo_endpoint_count`                  | ViInt32                                 |
+   | :py:attr:`p2p_fifo_endpoint_count`                  | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`p2p_manual_configuration_enabled`         | :py:data:`BoolEnableDisable`            |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_most_samples_avail_in_endpoint`       | ViInt32                                 |
+   | :py:attr:`p2p_most_samples_avail_in_endpoint`       | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_notify_message_push_addr`             | ViInt64                                 |
+   | :py:attr:`p2p_notify_message_push_addr`             | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`p2p_notify_message_push_addr_type`        | :py:data:`AddressType`                  |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_notify_message_push_value`            | ViInt64                                 |
+   | :py:attr:`p2p_notify_message_push_value`            | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`p2p_notify_push_message_on`               | :py:data:`NotificationType`             |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`p2p_onboard_memory_enabled`               | :py:data:`BoolEnableDisable`            |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_samples_avail_in_endpoint`            | ViInt32                                 |
+   | :py:attr:`p2p_samples_avail_in_endpoint`            | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_samples_transferred`                  | ViInt64                                 |
+   | :py:attr:`p2p_samples_transferred`                  | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`p2p_samples_transferred_per_record`       | ViInt32                                 |
+   | :py:attr:`p2p_samples_transferred_per_record`       | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`p2p_stream_relative_to`                   | :py:data:`StreamingPositionType`        |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`pll_lock_status`                          | ViBoolean                               |
+   | :py:attr:`pll_lock_status`                          | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`points_done`                              | ViReal64                                |
+   | :py:attr:`points_done`                              | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`probe_attenuation`                        | ViReal64                                |
+   | :py:attr:`probe_attenuation`                        | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`prog._fir_filter_decimation`              | ViInt32                                 |
+   | :py:attr:`prog._fir_filter_decimation`              | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`prog._fir_filter_realcomplex`             | :py:data:`Prog.FIRFilterReal/Complex`   |
+   | :py:attr:`prog._fir_filter_realcomplex`             | :py:data:`ProgFIRFilterRealComplex`     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`prog._fir_filter_symmetry`                | :py:data:`Prog.FIRFilterSymmetry`       |
+   | :py:attr:`prog._fir_filter_symmetry`                | :py:data:`ProgFIRFilterSymmetry`        |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`prog._fir_filter_symmetry_type`           | :py:data:`Prog.FIRFilterSymmetryType`   |
+   | :py:attr:`prog._fir_filter_symmetry_type`           | :py:data:`ProgFIRFilterSymmetryType`    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`prog._fir_filter_taps`                    | ViInt32                                 |
+   | :py:attr:`prog._fir_filter_taps`                    | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`query_instrument_status`                  | ViBoolean                               |
+   | :py:attr:`query_instrument_status`                  | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`q_input_to_coord._converter`              | :py:data:`QInputtoCoord.Converter`      |
+   | :py:attr:`q_input_to_coord._converter`              | :py:data:`QInputtoCoordConverter`       |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`range_check`                              | ViBoolean                               |
+   | :py:attr:`range_check`                              | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ready_for_advance_event_output_terminal`  | ViString                                |
+   | :py:attr:`ready_for_advance_event_output_terminal`  | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ready_for_ref_event_output_terminal`      | ViString                                |
+   | :py:attr:`ready_for_ref_event_output_terminal`      | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ready_for_start_event_output_terminal`    | ViString                                |
+   | :py:attr:`ready_for_start_event_output_terminal`    | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`records_done`                             | ViInt32                                 |
+   | :py:attr:`records_done`                             | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`record_arm_source`                        | ViString                                |
+   | :py:attr:`record_arm_source`                        | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`record_coercions`                         | ViBoolean                               |
+   | :py:attr:`record_coercions`                         | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ref_clk_rate`                             | ViReal64                                |
+   | :py:attr:`ref_clk_rate`                             | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`ref_trigger_detector_location`            | :py:data:`RefTriggerDetectorLocation`   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ref_trigger_minimum_quiet_time`           | ViReal64                                |
+   | :py:attr:`ref_trigger_minimum_quiet_time`           | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ref_trig_tdc_enable`                      | ViBoolean                               |
+   | :py:attr:`ref_trig_tdc_enable`                      | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`resampler_bypass`                         | ViBoolean                               |
+   | :py:attr:`resampler_bypass`                         | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`resampler_filter_mode`                    | :py:data:`ResamplerFilterMode`          |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`resampler_nco_divide`                     | ViInt32                                 |
+   | :py:attr:`resampler_nco_divide`                     | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`resampler_output_pulse_delay`             | ViInt32                                 |
+   | :py:attr:`resampler_output_pulse_delay`             | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`resampler_reference_divide`               | ViInt32                                 |
+   | :py:attr:`resampler_reference_divide`               | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`resolution`                               | ViInt32                                 |
+   | :py:attr:`resolution`                               | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ris_in_auto_setup_enable`                 | ViBoolean                               |
+   | :py:attr:`ris_in_auto_setup_enable`                 | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`ris_method`                               | :py:data:`RISMethod`                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`ris_num_averages`                         | ViInt32                                 |
+   | :py:attr:`ris_num_averages`                         | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`sample_mode`                              | ViInt32                                 |
+   | :py:attr:`sample_mode`                              | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`samp_clk_timebase_div`                    | ViInt32                                 |
+   | :py:attr:`samp_clk_timebase_div`                    | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`samp_clk_timebase_mult`                   | ViInt32                                 |
+   | :py:attr:`samp_clk_timebase_mult`                   | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`samp_clk_timebase_rate`                   | ViReal64                                |
+   | :py:attr:`samp_clk_timebase_rate`                   | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`samp_clk_timebase_src`                    | ViString                                |
+   | :py:attr:`samp_clk_timebase_src`                    | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`serial_dac_cal_voltage`                   | ViReal64                                |
+   | :py:attr:`serial_dac_cal_voltage`                   | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`serial_number`                            | ViString                                |
+   | :py:attr:`serial_number`                            | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`signal_cond_gain`                         | ViReal64                                |
+   | :py:attr:`signal_cond_gain`                         | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`signal_cond_offset`                       | ViReal64                                |
+   | :py:attr:`signal_cond_offset`                       | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`simulate`                                 | ViBoolean                               |
+   | :py:attr:`simulate`                                 | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`slave_trigger_delay`                      | ViReal64                                |
+   | :py:attr:`slave_trigger_delay`                      | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`specific_driver_class_spec_major_version` | ViInt32                                 |
+   | :py:attr:`specific_driver_class_spec_major_version` | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`specific_driver_class_spec_minor_version` | ViInt32                                 |
+   | :py:attr:`specific_driver_class_spec_minor_version` | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`specific_driver_description`              | ViString                                |
+   | :py:attr:`specific_driver_description`              | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`specific_driver_prefix`                   | ViString                                |
+   | :py:attr:`specific_driver_prefix`                   | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`specific_driver_revision`                 | ViString                                |
+   | :py:attr:`specific_driver_revision`                 | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`specific_driver_vendor`                   | ViString                                |
+   | :py:attr:`specific_driver_vendor`                   | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`start_to_ref_trigger_holdoff`             | ViReal64                                |
+   | :py:attr:`start_to_ref_trigger_holdoff`             | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`supported_instrument_models`              | ViString                                |
+   | :py:attr:`supported_instrument_models`              | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`syncout_clk_select`                       | :py:data:`SyncoutCLKSelect`             |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`test_mode_sincos`                         | ViBoolean                               |
+   | :py:attr:`test_mode_sincos`                         | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`timing_nco_center_freq.`                  | ViInt32                                 |
+   | :py:attr:`timing_nco_center_freq.`                  | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`timing_nco_clear_phase_accum.`            | ViBoolean                               |
+   | :py:attr:`timing_nco_clear_phase_accum.`            | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`timing_nco_enable_offset_freq.`           | ViBoolean                               |
+   | :py:attr:`timing_nco_enable_offset_freq.`           | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`timing_nco_freq._offset_bits`             | :py:data:`TimingNCOFreq.OffsetBits`     |
+   | :py:attr:`timing_nco_freq._offset_bits`             | :py:data:`TimingNCOFreqOffsetBits`      |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`timing_nco_phase_accum._load_on_update`   | ViBoolean                               |
+   | :py:attr:`timing_nco_phase_accum._load_on_update`   | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`timing_nco_phase_offset`                  | ViInt32                                 |
+   | :py:attr:`timing_nco_phase_offset`                  | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_auto_triggered`                   | ViBoolean                               |
+   | :py:attr:`trigger_auto_triggered`                   | bool                                    |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`trigger_coupling`                         | :py:data:`TriggerCoupling`              |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_delay_time`                       | ViReal64                                |
+   | :py:attr:`trigger_delay_time`                       | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_from_pfi_delay`                   | ViReal64                                |
+   | :py:attr:`trigger_from_pfi_delay`                   | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_from_rtsi_delay`                  | ViReal64                                |
+   | :py:attr:`trigger_from_rtsi_delay`                  | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_from_star_delay`                  | ViReal64                                |
+   | :py:attr:`trigger_from_star_delay`                  | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_holdoff`                          | ViReal64                                |
+   | :py:attr:`trigger_holdoff`                          | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_hysteresis`                       | ViReal64                                |
+   | :py:attr:`trigger_hysteresis`                       | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_impedance`                        | ViReal64                                |
+   | :py:attr:`trigger_impedance`                        | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_level`                            | ViReal64                                |
+   | :py:attr:`trigger_level`                            | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`trigger_modifier`                         | :py:data:`TriggerModifier`              |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`trigger_slope`                            | :py:data:`TriggerSlope`                 |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_source`                           | ViString                                |
+   | :py:attr:`trigger_source`                           | str                                     |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_to_pfi_delay`                     | ViReal64                                |
+   | :py:attr:`trigger_to_pfi_delay`                     | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_to_rtsi_delay`                    | ViReal64                                |
+   | :py:attr:`trigger_to_rtsi_delay`                    | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_to_star_delay`                    | ViReal64                                |
+   | :py:attr:`trigger_to_star_delay`                    | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`trigger_type`                             | :py:data:`TriggerType`                  |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_window_high_level`                | ViReal64                                |
+   | :py:attr:`trigger_window_high_level`                | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`trigger_window_low_level`                 | ViReal64                                |
+   | :py:attr:`trigger_window_low_level`                 | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`trigger_window_mode`                      | :py:data:`TriggerWindowMode`            |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`tv_trigger_event`                         | :py:data:`VideoTriggerEvent`            |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`tv_trigger_line_number`                   | ViInt32                                 |
+   | :py:attr:`tv_trigger_line_number`                   | int                                     |
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`tv_trigger_polarity`                      | :py:data:`VideoPolarity`                |
    +-----------------------------------------------------+-----------------------------------------+
@@ -508,145 +508,147 @@ niscope.Session
    +-----------------------------------------------------+-----------------------------------------+
    | :py:attr:`vertical_coupling`                        | :py:data:`VerticalCoupling`             |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`vertical_offset`                          | ViReal64                                |
+   | :py:attr:`vertical_offset`                          | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
-   | :py:attr:`vertical_range`                           | ViReal64                                |
+   | :py:attr:`vertical_range`                           | float                                   |
    +-----------------------------------------------------+-----------------------------------------+
 
    **Public methods**
 
-   +-------------------------------------------------------+
-   | :py:func:`acquisition_status`                         |
-   +=======================================================+
-   | :py:func:`actual_meas_wfm_size`                       |
-   +-------------------------------------------------------+
-   | :py:func:`actual_num_wfms`                            |
-   +-------------------------------------------------------+
-   | :py:func:`actual_record_length`                       |
-   +-------------------------------------------------------+
-   | :py:func:`add_waveform_processing`                    |
-   +-------------------------------------------------------+
-   | :py:func:`adjust_sample_clock_relative_delay`         |
-   +-------------------------------------------------------+
-   | :py:func:`auto_setup`                                 |
-   +-------------------------------------------------------+
-   | :py:func:`cal_self_calibrate`                         |
-   +-------------------------------------------------------+
-   | :py:func:`check_attribute_vi_boolean`                 |
-   +-------------------------------------------------------+
-   | :py:func:`check_attribute_vi_int32`                   |
-   +-------------------------------------------------------+
-   | :py:func:`check_attribute_vi_int64`                   |
-   +-------------------------------------------------------+
-   | :py:func:`check_attribute_vi_real64`                  |
-   +-------------------------------------------------------+
-   | :py:func:`check_attribute_vi_session`                 |
-   +-------------------------------------------------------+
-   | :py:func:`check_attribute_vi_string`                  |
-   +-------------------------------------------------------+
-   | :py:func:`clear_waveform_measurement_stats`           |
-   +-------------------------------------------------------+
-   | :py:func:`clear_waveform_processing`                  |
-   +-------------------------------------------------------+
-   | :py:func:`commit`                                     |
-   +-------------------------------------------------------+
-   | :py:func:`configure_acquisition`                      |
-   +-------------------------------------------------------+
-   | :py:func:`configure_acquisition_record`               |
-   +-------------------------------------------------------+
-   | :py:func:`configure_chan_characteristics`             |
-   +-------------------------------------------------------+
-   | :py:func:`configure_channel`                          |
-   +-------------------------------------------------------+
-   | :py:func:`configure_clock`                            |
-   +-------------------------------------------------------+
-   | :py:func:`configure_edge_trigger_source`              |
-   +-------------------------------------------------------+
-   | :py:func:`configure_equalization_filter_coefficients` |
-   +-------------------------------------------------------+
-   | :py:func:`configure_horizontal_timing`                |
-   +-------------------------------------------------------+
-   | :py:func:`configure_ref_levels`                       |
-   +-------------------------------------------------------+
-   | :py:func:`configure_tv_trigger_line_number`           |
-   +-------------------------------------------------------+
-   | :py:func:`configure_tv_trigger_source`                |
-   +-------------------------------------------------------+
-   | :py:func:`configure_trigger`                          |
-   +-------------------------------------------------------+
-   | :py:func:`configure_trigger_coupling`                 |
-   +-------------------------------------------------------+
-   | :py:func:`configure_trigger_digital`                  |
-   +-------------------------------------------------------+
-   | :py:func:`configure_trigger_edge`                     |
-   +-------------------------------------------------------+
-   | :py:func:`configure_trigger_hysteresis`               |
-   +-------------------------------------------------------+
-   | :py:func:`configure_trigger_immediate`                |
-   +-------------------------------------------------------+
-   | :py:func:`configure_trigger_output`                   |
-   +-------------------------------------------------------+
-   | :py:func:`configure_trigger_software`                 |
-   +-------------------------------------------------------+
-   | :py:func:`configure_trigger_video`                    |
-   +-------------------------------------------------------+
-   | :py:func:`configure_trigger_window`                   |
-   +-------------------------------------------------------+
-   | :py:func:`configure_vertical`                         |
-   +-------------------------------------------------------+
-   | :py:func:`disable`                                    |
-   +-------------------------------------------------------+
-   | :py:func:`export_signal`                              |
-   +-------------------------------------------------------+
-   | :py:func:`fetch_measurement`                          |
-   +-------------------------------------------------------+
-   | :py:func:`fetch_measurement_stats`                    |
-   +-------------------------------------------------------+
-   | :py:func:`fetch_waveform`                             |
-   +-------------------------------------------------------+
-   | :py:func:`fetch_waveform_measurement`                 |
-   +-------------------------------------------------------+
-   | :py:func:`get_channel_name`                           |
-   +-------------------------------------------------------+
-   | :py:func:`get_equalization_filter_coefficients`       |
-   +-------------------------------------------------------+
-   | :py:func:`get_error_message`                          |
-   +-------------------------------------------------------+
-   | :py:func:`get_frequency_response`                     |
-   +-------------------------------------------------------+
-   | :py:func:`get_stream_endpoint_handle`                 |
-   +-------------------------------------------------------+
-   | :py:func:`is_device_ready`                            |
-   +-------------------------------------------------------+
-   | :py:func:`is_invalid_wfm_element`                     |
-   +-------------------------------------------------------+
-   | :py:func:`probe_compensation_signal_start`            |
-   +-------------------------------------------------------+
-   | :py:func:`probe_compensation_signal_stop`             |
-   +-------------------------------------------------------+
-   | :py:func:`read_measurement`                           |
-   +-------------------------------------------------------+
-   | :py:func:`read_waveform`                              |
-   +-------------------------------------------------------+
-   | :py:func:`read_waveform_measurement`                  |
-   +-------------------------------------------------------+
-   | :py:func:`reset_device`                               |
-   +-------------------------------------------------------+
-   | :py:func:`reset_with_defaults`                        |
-   +-------------------------------------------------------+
-   | :py:func:`sample_mode`                                |
-   +-------------------------------------------------------+
-   | :py:func:`sample_rate`                                |
-   +-------------------------------------------------------+
-   | :py:func:`send_sw_trigger`                            |
-   +-------------------------------------------------------+
-   | :py:func:`send_software_trigger_edge`                 |
-   +-------------------------------------------------------+
-   | :py:func:`error_handler`                              |
-   +-------------------------------------------------------+
-   | :py:func:`reset`                                      |
-   +-------------------------------------------------------+
-   | :py:func:`self_test`                                  |
-   +-------------------------------------------------------+
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | Method                                                | Parameters                                                                                                       |
+   +=======================================================+==================================================================================================================+
+   | :py:func:`acquisition_status`                         |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`actual_meas_wfm_size`                       | array_meas_function                                                                                              |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`actual_num_wfms`                            |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`actual_record_length`                       |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`add_waveform_processing`                    | meas_function                                                                                                    |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`adjust_sample_clock_relative_delay`         | delay                                                                                                            |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`auto_setup`                                 |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`cal_self_calibrate`                         | option                                                                                                           |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`check_attribute_vi_boolean`                 | attribute_id, value                                                                                              |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`check_attribute_vi_int32`                   | attribute_id, value                                                                                              |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`check_attribute_vi_int64`                   | attribute_id, value                                                                                              |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`check_attribute_vi_real64`                  | attribute_id, value                                                                                              |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`check_attribute_vi_session`                 | attribute_id                                                                                                     |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`check_attribute_vi_string`                  | attribute_id, value                                                                                              |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`clear_waveform_measurement_stats`           | clearable_measurement_function                                                                                   |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`clear_waveform_processing`                  |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`commit`                                     |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_acquisition`                      | acquisition_type                                                                                                 |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_acquisition_record`               | time_per_record, min_num_points, acquisition_start_time                                                          |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_chan_characteristics`             | input_impedance, max_input_frequency                                                                             |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_channel`                          | channel, range, offset, coupling, probe_attenuation, enabled                                                     |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_clock`                            | input_clock_source, output_clock_source, clock_sync_pulse_source, master_enabled                                 |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_edge_trigger_source`              | source, level, slope                                                                                             |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_equalization_filter_coefficients` | number_of_coefficients, coefficients                                                                             |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_horizontal_timing`                | min_sample_rate, min_num_pts, ref_position, num_records, enforce_realtime                                        |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_ref_levels`                       | low, mid, high                                                                                                   |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_tv_trigger_line_number`           | line_number                                                                                                      |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_tv_trigger_source`                | source, signal_format, event, polarity                                                                           |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_trigger`                          | trigger_type, holdoff                                                                                            |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_trigger_coupling`                 | coupling                                                                                                         |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_trigger_digital`                  | trigger_source, slope, holdoff, delay                                                                            |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_trigger_edge`                     | trigger_source, level, slope, trigger_coupling, holdoff, delay                                                   |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_trigger_hysteresis`               | trigger_source, level, hysteresis, slope, trigger_coupling, holdoff, delay                                       |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_trigger_immediate`                |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_trigger_output`                   | trigger_event, trigger_output                                                                                    |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_trigger_software`                 | holdoff, delay                                                                                                   |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_trigger_video`                    | trigger_source, enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_trigger_window`                   | trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff, delay                             |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`configure_vertical`                         | range, offset, coupling, probe_attenuation, enabled                                                              |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`disable`                                    |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`export_signal`                              | signal, signal_identifier, output_terminal                                                                       |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`fetch_measurement`                          | timeout, scalar_meas_function                                                                                    |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`fetch_measurement_stats`                    | timeout, scalar_meas_function                                                                                    |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`fetch_waveform`                             | channel, waveform_size                                                                                           |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`fetch_waveform_measurement`                 | channel, meas_function                                                                                           |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`get_channel_name`                           | index, buffer_size                                                                                               |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`get_equalization_filter_coefficients`       | number_of_coefficients                                                                                           |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`get_error_message`                          | error_code, buffer__size                                                                                         |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`get_frequency_response`                     | buffer_size, frequencies, amplitudes, phases                                                                     |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`get_stream_endpoint_handle`                 | stream_name                                                                                                      |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`is_device_ready`                            | resource_name                                                                                                    |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`is_invalid_wfm_element`                     | element_value                                                                                                    |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`probe_compensation_signal_start`            |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`probe_compensation_signal_stop`             |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`read_measurement`                           | timeout, scalar_meas_function                                                                                    |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`read_waveform`                              | channel, waveform_size, max_time                                                                                 |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`read_waveform_measurement`                  | channel, meas_function, max_time                                                                                 |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`reset_device`                               |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`reset_with_defaults`                        |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`sample_mode`                                |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`sample_rate`                                |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`send_sw_trigger`                            |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`send_software_trigger_edge`                 | which_trigger                                                                                                    |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`error_handler`                              | error_code                                                                                                       |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`reset`                                      |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+   | :py:func:`self_test`                                  |                                                                                                                  |
+   +-------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 

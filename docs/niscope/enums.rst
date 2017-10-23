@@ -728,9 +728,9 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: Prog.FIRFilterReal/Complex
+.. py:data:: ProgFIRFilterRealComplex
 
-    .. py:attribute:: niscope.Prog.FIRFilterReal/Complex.REAL
+    .. py:attribute:: niscope.ProgFIRFilterRealComplex.REAL
 
 
 
@@ -740,7 +740,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.Prog.FIRFilterReal/Complex.COMPLEX
+    .. py:attribute:: niscope.ProgFIRFilterRealComplex.COMPLEX
 
 
 
@@ -751,9 +751,9 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: Prog.FIRFilterSymmetry
+.. py:data:: ProgFIRFilterSymmetry
 
-    .. py:attribute:: niscope.Prog.FIRFilterSymmetry.SYMMETRIC
+    .. py:attribute:: niscope.ProgFIRFilterSymmetry.SYMMETRIC
 
 
 
@@ -763,7 +763,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.Prog.FIRFilterSymmetry.ASYMMETRIC
+    .. py:attribute:: niscope.ProgFIRFilterSymmetry.ASYMMETRIC
 
 
 
@@ -774,9 +774,9 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: Prog.FIRFilterSymmetryType
+.. py:data:: ProgFIRFilterSymmetryType
 
-    .. py:attribute:: niscope.Prog.FIRFilterSymmetryType.EVEN
+    .. py:attribute:: niscope.ProgFIRFilterSymmetryType.EVEN
 
 
 
@@ -786,7 +786,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.Prog.FIRFilterSymmetryType.ODD
+    .. py:attribute:: niscope.ProgFIRFilterSymmetryType.ODD
 
 
 
@@ -797,9 +797,9 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: QInputtoCoord.Converter
+.. py:data:: QInputtoCoordConverter
 
-    .. py:attribute:: niscope.QInputtoCoord.Converter.I_AND_Q
+    .. py:attribute:: niscope.QInputtoCoordConverter.I_AND_Q
 
 
 
@@ -809,7 +809,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.QInputtoCoord.Converter.Q_ZEROED
+    .. py:attribute:: niscope.QInputtoCoordConverter.Q_ZEROED
 
 
 
@@ -872,9 +872,9 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: Ref.LevelUnits
+.. py:data:: RefLevelUnits
 
-    .. py:attribute:: niscope.Ref.LevelUnits.VOLTS
+    .. py:attribute:: niscope.RefLevelUnits.VOLTS
 
 
 
@@ -884,7 +884,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.Ref.LevelUnits.PERCENTAGE
+    .. py:attribute:: niscope.RefLevelUnits.PERCENTAGE
 
 
 
@@ -1066,9 +1066,9 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: TimingNCOFreq.OffsetBits
+.. py:data:: TimingNCOFreqOffsetBits
 
-    .. py:attribute:: niscope.TimingNCOFreq.OffsetBits._8_BITS
+    .. py:attribute:: niscope.TimingNCOFreqOffsetBits._8_BITS
 
 
 
@@ -1078,7 +1078,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.TimingNCOFreq.OffsetBits._16_BITS
+    .. py:attribute:: niscope.TimingNCOFreqOffsetBits._16_BITS
 
 
 
@@ -1088,7 +1088,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.TimingNCOFreq.OffsetBits._24_BITS
+    .. py:attribute:: niscope.TimingNCOFreqOffsetBits._24_BITS
 
 
 
@@ -1098,7 +1098,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.TimingNCOFreq.OffsetBits._32_BITS
+    .. py:attribute:: niscope.TimingNCOFreqOffsetBits._32_BITS
 
 
 
