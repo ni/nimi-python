@@ -202,7 +202,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetAnIviDanceString']['return']
         if self._defaults['GetAnIviDanceString']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAnIviDanceString", param='aString')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetAnIviDanceString']['aString'])
         a_string.value = self._defaults['GetAnIviDanceString']['aString'].encode('ascii')
         return self._defaults['GetAnIviDanceString']['return']
@@ -244,7 +244,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetAttributeViString']['return']
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViString", param='attributeValue')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
@@ -268,7 +268,7 @@ class SideEffectsHelper(object):
         error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niFake_GetError", param='description')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetError']['description'])
         description.value = self._defaults['GetError']['description'].encode('ascii')
         return self._defaults['GetError']['return']
@@ -396,7 +396,7 @@ class SideEffectsHelper(object):
             an_array[i] = a[i]
         if self._defaults['ReturnMultipleTypes']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aString')
-        if string_size == 0:
+        if string_size.value == 0:
             return len(self._defaults['ReturnMultipleTypes']['aString'])
         a_string.value = self._defaults['ReturnMultipleTypes']['aString'].encode('ascii')
         return self._defaults['ReturnMultipleTypes']['return']
