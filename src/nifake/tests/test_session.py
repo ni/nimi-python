@@ -2,10 +2,8 @@ import matchers
 import math
 import mock_helper
 import nifake
-from nifake import visatype
 import warnings
 
-# from mock import ANY
 from mock import patch
 
 # Tests
@@ -46,7 +44,7 @@ class TestSession(object):
         patched_errors._is_error.return_value = 0
 
         session = nifake.Session('dev1')
-        self.patched_library.niFake_InitWithOptions.assert_called_once_with(matchers.ViStringMatcher('dev1'), matchers.BooleanMatcher(False), matchers.BooleanMatcher(False), matchers.ViStringMatcher(''), matchers.AnyPointerToType(visatype.ViSession))
+        self.patched_library.niFake_InitWithOptions.assert_called_once_with(matchers.ViStringMatcher('dev1'), matchers.ViBooleanMatcher(False), matchers.ViBooleanMatcher(False), matchers.ViStringMatcher(''), matchers.ViSessionPointerMatcher())
         patched_errors.handle_error.assert_called_once_with(session, self.patched_library.niFake_InitWithOptions.return_value, ignore_warnings=False, is_error_handling=False)
         session.close()
         self.patched_library.niFake_close.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
@@ -55,7 +53,7 @@ class TestSession(object):
 
     def test_init_with_options_nondefault_and_close(self):
         session = nifake.Session('FakeDevice', True, True, 'Some string')
-        self.patched_library.niFake_InitWithOptions.assert_called_once_with(matchers.ViStringMatcher('FakeDevice'), matchers.BooleanMatcher(True), matchers.BooleanMatcher(True), matchers.ViStringMatcher('Some string'), matchers.AnyPointerToType(visatype.ViSession))
+        self.patched_library.niFake_InitWithOptions.assert_called_once_with(matchers.ViStringMatcher('FakeDevice'), matchers.ViBooleanMatcher(True), matchers.ViBooleanMatcher(True), matchers.ViStringMatcher('Some string'), matchers.ViSessionPointerMatcher())
         session.close()
         self.patched_library.niFake_close.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
@@ -67,7 +65,7 @@ class TestSession(object):
     def test_session_context_manager(self):
         with nifake.Session('dev1') as session:
             assert type(session) == nifake.Session
-            self.patched_library.niFake_InitWithOptions.assert_called_once_with(matchers.ViStringMatcher('dev1'), matchers.BooleanMatcher(False), matchers.BooleanMatcher(False), matchers.ViStringMatcher(''), matchers.AnyPointerToType(visatype.ViSession))
+            self.patched_library.niFake_InitWithOptions.assert_called_once_with(matchers.ViStringMatcher('dev1'), matchers.ViBooleanMatcher(False), matchers.ViBooleanMatcher(False), matchers.ViStringMatcher(''), matchers.ViSessionPointerMatcher())
         self.patched_library.niFake_close.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_init_with_error(self):
@@ -75,7 +73,7 @@ class TestSession(object):
         test_error_desc = 'Test'
         self.patched_library.niFake_InitWithOptions.side_effect = self.side_effects_helper.niFake_InitWithOptions
         self.side_effects_helper['InitWithOptions']['return'] = test_error_code
-        self.side_effects_helper['InitWithOptions']['vi'] = visatype.ViSession(SESSION_NUM_FOR_TEST)
+        self.side_effects_helper['InitWithOptions']['vi'] = SESSION_NUM_FOR_TEST
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
         self.side_effects_helper['GetError']['description'] = test_error_desc
@@ -153,7 +151,7 @@ class TestSession(object):
             test_result = session.get_a_number()
             assert isinstance(test_result, int)
             assert test_result == test_number
-            self.patched_library.niFake_GetANumber.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.AnyPointerToType(visatype.ViInt16))
+            self.patched_library.niFake_GetANumber.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt16PointerMatcher())
 
     def test_one_input_function(self):
         test_number = 1
@@ -169,7 +167,7 @@ class TestSession(object):
         self.side_effects_helper['Use64BitNumber']['output'] = output_value
         with nifake.Session('dev1') as session:
             assert session.use64_bit_number(input_value) == output_value
-            self.patched_library.niFake_Use64BitNumber.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt64Matcher(input_value), matchers.AnyPointerToType(visatype.ViInt64))
+            self.patched_library.niFake_Use64BitNumber.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt64Matcher(input_value), matchers.ViInt64PointerMatcher())
 
     def test_two_input_function(self):
         test_number = 1.5
@@ -191,7 +189,7 @@ class TestSession(object):
             assert test_result_number == test_number
             assert isinstance(test_result_enum, nifake.Turtle)
             assert test_result_enum == test_turtle
-            self.patched_library.niFake_GetEnumValue.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.AnyPointerToType(visatype.ViInt32), matchers.AnyPointerToType(visatype.ViInt16))
+            self.patched_library.niFake_GetEnumValue.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32PointerMatcher(), matchers.ViInt16PointerMatcher())
 
     def test_get_a_list_enums(self):
         self.patched_library.niFake_EnumArrayOutputFunction.side_effect = self.side_effects_helper.niFake_EnumArrayOutputFunction
@@ -204,7 +202,7 @@ class TestSession(object):
             for i in range(test_array_size):
                 assert isinstance(test_result[i], nifake.Turtle)
                 assert test_result[i].value == test_array[i]
-            self.patched_library.niFake_EnumArrayOutputFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_array_size), matchers.BufferMatcher(visatype.ViInt16, test_array_size))
+            self.patched_library.niFake_EnumArrayOutputFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_array_size), matchers.ViInt16BufferMatcher(test_array_size))
 
     def test_get_a_boolean(self):
         self.patched_library.niFake_GetABoolean.side_effect = self.side_effects_helper.niFake_GetABoolean
@@ -213,7 +211,7 @@ class TestSession(object):
             test_result = session.get_a_boolean()
             assert isinstance(test_result, bool)
             assert test_result
-            self.patched_library.niFake_GetABoolean.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.AnyPointerToType(visatype.ViBoolean))
+            self.patched_library.niFake_GetABoolean.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViBooleanPointerMatcher())
 
     def test_get_a_list_booleans(self):
         self.patched_library.niFake_BoolArrayOutputFunction.side_effect = self.side_effects_helper.niFake_BoolArrayOutputFunction
@@ -226,7 +224,7 @@ class TestSession(object):
             for i in range(test_array_size):
                 assert isinstance(test_result[0], bool)
                 assert test_result[i] == bool(test_array[i])
-            self.patched_library.niFake_BoolArrayOutputFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_array_size), matchers.BufferMatcher(visatype.ViBoolean, test_array_size))
+            self.patched_library.niFake_BoolArrayOutputFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_array_size), matchers.ViBooleanBufferMatcher(test_array_size))
 
     def test_acquisition_context_manager(self):
         self.patched_library.niFake_Initiate.side_effect = self.side_effects_helper.niFake_Initiate
@@ -244,7 +242,7 @@ class TestSession(object):
         self.side_effects_helper['Read']['reading'] = test_reading
         with nifake.Session('dev1') as session:
             assert test_reading == session.read(test_maximum_time)
-            self.patched_library.niFake_Read.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_maximum_time), matchers.AnyPointerToType(visatype.ViReal64))
+            self.patched_library.niFake_Read.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
 
     def test_single_point_read_nan(self):
         test_maximum_time = 10
@@ -277,7 +275,7 @@ class TestSession(object):
             assert isinstance(measurements[0], float)
             assert points == test_actual_number_of_points
             assert measurements == test_reading_array
-            self.patched_library.niFake_ReadMultiPoint.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_maximum_time), matchers.ViInt32Matcher(len(test_reading_array)), matchers.BufferMatcher(visatype.ViReal64, len(test_reading_array)), matchers.AnyPointerToType(visatype.ViInt32))
+            self.patched_library.niFake_ReadMultiPoint.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_maximum_time), matchers.ViInt32Matcher(len(test_reading_array)), matchers.ViReal64BufferMatcher(len(test_reading_array)), matchers.ViInt32PointerMatcher())
 
     def test_array_input_function(self):
         test_array = [1, 2, 3, 4]
@@ -285,7 +283,7 @@ class TestSession(object):
         self.patched_library.niFake_ArrayInputFunction.side_effect = self.side_effects_helper.niFake_ArrayInputFunction
         with nifake.Session('dev1') as session:
             session.array_input_function(test_array)
-            self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_array_size), matchers.BufferMatcher(visatype.ViReal64, test_array))
+            self.patched_library.niFake_ArrayInputFunction.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_array_size), matchers.ViReal64BufferMatcher(test_array))
 
     def test_return_multiple_types(self):
         self.patched_library.niFake_ReturnMultipleTypes.side_effect = self.side_effects_helper.niFake_ReturnMultipleTypes
@@ -357,7 +355,7 @@ class TestSession(object):
         string_val = 'Testing is fun?'
         with nifake.Session('dev1') as session:
             session.parameters_are_multiple_types(boolean_val, int32_val, int64_val, enum_val, float_val, float_enum_val, string_val)
-            self.patched_library.niFake_ParametersAreMultipleTypes.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.BooleanMatcher(boolean_val), matchers.ViInt32Matcher(int32_val), matchers.ViInt64Matcher(int64_val), matchers.ViInt16Matcher(enum_val.value), matchers.ViReal64Matcher(float_val), matchers.ViReal64Matcher(float_enum_val.value), matchers.ViInt32Matcher(len(string_val)), matchers.ViStringMatcher(string_val))
+            self.patched_library.niFake_ParametersAreMultipleTypes.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViBooleanMatcher(boolean_val), matchers.ViInt32Matcher(int32_val), matchers.ViInt64Matcher(int64_val), matchers.ViInt16Matcher(enum_val.value), matchers.ViReal64Matcher(float_val), matchers.ViReal64Matcher(float_enum_val.value), matchers.ViInt32Matcher(len(string_val)), matchers.ViStringMatcher(string_val))
 
     def test_parameters_are_multiple_types_error(self):
         test_error_code = -42
@@ -491,7 +489,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             returned_string = session.get_a_string_of_fixed_maximum_size()
             assert returned_string == test_string
-            self.patched_library.niFake_GetAStringOfFixedMaximumSize.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.BufferMatcher(visatype.ViChar, 256))
+            self.patched_library.niFake_GetAStringOfFixedMaximumSize.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViCharBufferMatcher(256))
 
     def test_return_a_number_and_a_string(self):
         test_string = "this string"
@@ -503,7 +501,7 @@ class TestSession(object):
             returned_number, returned_string = session.return_a_number_and_a_string()
             assert (returned_string == test_string)
             assert (returned_number == test_number)
-            self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.AnyPointerToType(visatype.ViInt16), matchers.BufferMatcher(visatype.ViChar, 256))
+            self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt16PointerMatcher(), matchers.ViCharBufferMatcher(256))
 
     def test_get_an_ivi_dance_string(self):
         self.patched_library.niFake_GetAnIviDanceString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceString
@@ -516,7 +514,7 @@ class TestSession(object):
             result_string = session.get_an_ivi_dance_string()
             assert result_string == string_val
             from mock import call
-            calls = [call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(0), None), call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(string_val)), matchers.BufferMatcher(visatype.ViChar, len(string_val)))]
+            calls = [call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(0), None), call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(len(string_val)), matchers.ViCharBufferMatcher(len(string_val)))]
             self.patched_library.niFake_GetAnIviDanceString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAnIviDanceString.call_count == 2
 
@@ -546,7 +544,7 @@ class TestSession(object):
         self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
         with nifake.Session('dev1') as session:
             value = session.read_from_channel(test_maximum_time)
-        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(test_maximum_time), matchers.AnyPointerToType(visatype.ViReal64))
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
         assert value == test_reading
 
     def test_repeated_capability_method_on_specific_channel(self):
@@ -556,7 +554,7 @@ class TestSession(object):
         self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
         with nifake.Session('dev1') as session:
             value = session['3'].read_from_channel(test_maximum_time)
-        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('3'), matchers.ViInt32Matcher(test_maximum_time), matchers.AnyPointerToType(visatype.ViReal64))
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('3'), matchers.ViInt32Matcher(test_maximum_time), matchers.ViReal64PointerMatcher())
         assert value == test_reading
 
     def test_device_method_not_exist_on_repeated_capability_error(self):
@@ -576,7 +574,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             attr_int = session.read_write_integer
             assert(attr_int == test_number)
-            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(1000004), matchers.AnyPointerToType(visatype.ViInt32))
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(1000004), matchers.ViInt32PointerMatcher())
 
     def test_set_attribute_int32(self):
         self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
@@ -593,7 +591,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             attr_double = session.read_write_double
             assert attr_double == test_number
-            self.patched_library.niFake_GetAttributeViReal64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(1000001), matchers.AnyPointerToType(visatype.ViReal64))
+            self.patched_library.niFake_GetAttributeViReal64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(1000001), matchers.ViReal64PointerMatcher())
 
     def test_set_attribute_real64(self):
         self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
@@ -611,7 +609,7 @@ class TestSession(object):
             attr_string = session.read_write_string
             assert attr_string == string
             from mock import call
-            calls = [call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(1000002), matchers.ViInt32Matcher(0), None), call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(1000002), matchers.ViInt32Matcher(15), matchers.BufferMatcher(visatype.ViChar, len(string)))]
+            calls = [call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(1000002), matchers.ViInt32Matcher(0), None), call(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(1000002), matchers.ViInt32Matcher(15), matchers.ViCharBufferMatcher(len(string)))]
             self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAttributeViString.call_count == 2
 
@@ -628,7 +626,7 @@ class TestSession(object):
         self.side_effects_helper['GetAttributeViBoolean']['attributeValue'] = 1
         with nifake.Session('dev1') as session:
             assert session.read_write_bool
-            self.patched_library.niFake_GetAttributeViBoolean.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(1000000), matchers.AnyPointerToType(visatype.ViBoolean))
+            self.patched_library.niFake_GetAttributeViBoolean.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(1000000), matchers.ViBooleanPointerMatcher())
 
     def test_set_attribute_boolean(self):
         self.patched_library.niFake_SetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_SetAttributeViBoolean
@@ -636,7 +634,7 @@ class TestSession(object):
         attrib_bool = True
         with nifake.Session('dev1') as session:
             session.read_write_bool = attrib_bool
-            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(attribute_id), matchers.BooleanMatcher(True))
+            self.patched_library.niFake_SetAttributeViBoolean.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(attribute_id), matchers.ViBooleanMatcher(True))
 
     def test_get_attribute_enum_int32(self):
         self.patched_library.niFake_GetAttributeViInt32.side_effect = self.side_effects_helper.niFake_GetAttributeViInt32
@@ -644,7 +642,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             assert session.read_write_color == nifake.Color.BLUE
             attribute_id = 1000003
-            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(attribute_id), matchers.AnyPointerToType(visatype.ViInt32))
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(attribute_id), matchers.ViInt32PointerMatcher())
 
     def test_set_attribute_enum_int32(self):
         self.patched_library.niFake_SetAttributeViInt32.side_effect = self.side_effects_helper.niFake_SetAttributeViInt32
@@ -661,7 +659,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             assert session.float_enum == enum_value
             attribute_id = 1000005
-            self.patched_library.niFake_GetAttributeViReal64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(attribute_id), matchers.AnyPointerToType(visatype.ViReal64))
+            self.patched_library.niFake_GetAttributeViReal64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(attribute_id), matchers.ViReal64PointerMatcher())
 
     def test_set_attribute_enum_real64(self):
         self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
@@ -678,7 +676,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             attr_int = session['0,1'].read_write_integer
             assert(attr_int == test_number)
-            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('0,1'), matchers.ViInt32Matcher(1000004), matchers.AnyPointerToType(visatype.ViInt32))
+            self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher('0,1'), matchers.ViInt32Matcher(1000004), matchers.ViInt32PointerMatcher())
 
     def test_set_attribute_channel(self):
         self.patched_library.niFake_SetAttributeViReal64.side_effect = self.side_effects_helper.niFake_SetAttributeViReal64
@@ -696,7 +694,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             attr_int = session.read_write_int64
             assert(attr_int == test_number)
-            self.patched_library.niFake_GetAttributeViInt64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(attribute_id), matchers.AnyPointerToType(visatype.ViInt32))
+            self.patched_library.niFake_GetAttributeViInt64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(attribute_id), matchers.ViInt32PointerMatcher())
 
     def test_set_attribute_int64(self):
         self.patched_library.niFake_SetAttributeViInt64.side_effect = self.side_effects_helper.niFake_SetAttributeViInt64
@@ -823,4 +821,4 @@ class TestSession(object):
             except nifake.Error as e:
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
-        self.patched_library.niFake_error_message.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_error_code), matchers.BufferMatcher(visatype.ViChar, 256))
+        self.patched_library.niFake_error_message.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_error_code), matchers.ViCharBufferMatcher(256))

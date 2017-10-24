@@ -1,10 +1,8 @@
 import matchers
 import mock_helper
 import nimodinst
-from nimodinst import visatype  # make this unecessary by improving matchers
 import warnings
 
-# from mock import ANY
 from mock import patch
 
 SESSION_NUM_FOR_TEST = 42
@@ -57,7 +55,7 @@ class TestSession(object):
 
     def test_open_and_close(self):
         session = nimodinst.Session('')
-        self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(matchers.ViStringMatcher(''), matchers.AnyPointerToType(visatype.ViSession), matchers.AnyPointerToType(visatype.ViInt32))
+        self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(matchers.ViStringMatcher(''), matchers.ViSessionPointerMatcher(), matchers.ViInt32PointerMatcher())
         session.close()
         self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
@@ -69,7 +67,7 @@ class TestSession(object):
     def test_context_manager(self):
         with nimodinst.Session('') as session:
             assert type(session) == nimodinst.Session
-            self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(matchers.ViStringMatcher(''), matchers.AnyPointerToType(visatype.ViSession), matchers.AnyPointerToType(visatype.ViInt32))
+            self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(matchers.ViStringMatcher(''), matchers.ViSessionPointerMatcher(), matchers.ViInt32PointerMatcher())
         self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_iterating_for(self):
