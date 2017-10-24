@@ -5,8 +5,10 @@ These work well with our visatype definitions.
 import ctypes
 from niswitch import visatype
 
+# Base classes
 
-class ScalarMatcher(object):
+
+class _ScalarMatcher(object):
     def __init__(self, expected_type, expected_value):
         self.expected_type = expected_type
         self.expected_value = expected_value
@@ -25,26 +27,7 @@ class ScalarMatcher(object):
         return
 
 
-class ViStringMatcher(object):
-    def __init__(self, expected_string_value):
-        self.expected_string_value = expected_string_value
-
-    def __eq__(self, other):
-        if not isinstance(other, ctypes.Array):
-            print("Unexpected type. Expected: {0}. Received: {1}".format(ctypes.Array, type(other)))
-            return False
-        if len(other) < len(self.expected_string_value) + 1:  # +1 for NULL terminating character
-            print("Unexpected length in C string. Expected at least: {0}. Received {1}".format(len(other), len(self.expected_string_value) + 1))
-            return False
-        if other.value.decode("ascii") == self.expected_string_value:
-            return True
-        else:
-            print("Unexpected value. Expected {0}. Received: {1}".format(self.expected_string_value, other.value.decode))
-        return
-
-
-# Rename to have Matcher suffix?
-class AnyPointerToType(object):
+class _PointerMatcher(object):
     def __init__(self, expected_type):
         self.expected_type = expected_type
 
@@ -55,37 +38,7 @@ class AnyPointerToType(object):
         return True
 
 
-class BooleanMatcher(ScalarMatcher):
-    def __init__(self, expected_value):
-        ScalarMatcher.__init__(self, visatype.ViBoolean, 1 if expected_value is True else False)
-
-
-class ViSessionMatcher(ScalarMatcher):
-    def __init__(self, expected_value):
-        ScalarMatcher.__init__(self, visatype.ViSession, expected_value)
-
-
-class ViInt16Matcher(ScalarMatcher):
-    def __init__(self, expected_value):
-        ScalarMatcher.__init__(self, visatype.ViInt16, expected_value)
-
-
-class ViInt32Matcher(ScalarMatcher):
-    def __init__(self, expected_value):
-        ScalarMatcher.__init__(self, visatype.ViInt32, expected_value)
-
-
-class ViInt64Matcher(ScalarMatcher):
-    def __init__(self, expected_value):
-        ScalarMatcher.__init__(self, visatype.ViInt64, expected_value)
-
-
-class ViReal64Matcher(ScalarMatcher):
-    def __init__(self, expected_value):
-        ScalarMatcher.__init__(self, visatype.ViReal64, expected_value)
-
-
-class BufferMatcher(object):
+class _BufferMatcher(object):
     def __init__(self, expected_element_type, expected_size_or_value):
         if isinstance(expected_size_or_value, int):
             # Were given the size of the buffer
@@ -112,4 +65,129 @@ class BufferMatcher(object):
                     print("Unexpected value at index {0}. Expected: {1}. Received: {2}".format(i, self.expected_value, self.expected_value))
                     return False
         return True
+
+
+# Strings
+
+
+class ViStringMatcher(object):
+    def __init__(self, expected_string_value):
+        self.expected_string_value = expected_string_value
+
+    def __eq__(self, other):
+        if not isinstance(other, ctypes.Array):
+            print("Unexpected type. Expected: {0}. Received: {1}".format(ctypes.Array, type(other)))
+            return False
+        if len(other) < len(self.expected_string_value) + 1:  # +1 for NULL terminating character
+            print("Unexpected length in C string. Expected at least: {0}. Received {1}".format(len(other), len(self.expected_string_value) + 1))
+            return False
+        if other.value.decode("ascii") == self.expected_string_value:
+            return True
+        else:
+            print("Unexpected value. Expected {0}. Received: {1}".format(self.expected_string_value, other.value.decode))
+        return
+
+
+# Scalars
+
+
+class ViBooleanMatcher(_ScalarMatcher):
+    def __init__(self, expected_value):
+        _ScalarMatcher.__init__(self, visatype.ViBoolean, 1 if expected_value is True else False)
+
+
+class ViSessionMatcher(_ScalarMatcher):
+    def __init__(self, expected_value):
+        _ScalarMatcher.__init__(self, visatype.ViSession, expected_value)
+
+
+class ViInt16Matcher(_ScalarMatcher):
+    def __init__(self, expected_value):
+        _ScalarMatcher.__init__(self, visatype.ViInt16, expected_value)
+
+
+class ViInt32Matcher(_ScalarMatcher):
+    def __init__(self, expected_value):
+        _ScalarMatcher.__init__(self, visatype.ViInt32, expected_value)
+
+
+class ViInt64Matcher(_ScalarMatcher):
+    def __init__(self, expected_value):
+        _ScalarMatcher.__init__(self, visatype.ViInt64, expected_value)
+
+
+class ViReal64Matcher(_ScalarMatcher):
+    def __init__(self, expected_value):
+        _ScalarMatcher.__init__(self, visatype.ViReal64, expected_value)
+
+
+# Pointers
+
+
+class ViBooleanPointerMatcher(_PointerMatcher):
+    def __init__(self):
+        _PointerMatcher.__init__(self, visatype.ViBoolean)
+
+
+class ViSessionPointerMatcher(_PointerMatcher):
+    def __init__(self):
+        _PointerMatcher.__init__(self, visatype.ViSession)
+
+
+class ViInt16PointerMatcher(_PointerMatcher):
+    def __init__(self):
+        _PointerMatcher.__init__(self, visatype.ViInt16)
+
+
+class ViInt32PointerMatcher(_PointerMatcher):
+    def __init__(self):
+        _PointerMatcher.__init__(self, visatype.ViInt32)
+
+
+class ViInt64PointerMatcher(_PointerMatcher):
+    def __init__(self):
+        _PointerMatcher.__init__(self, visatype.ViInt64)
+
+
+class ViReal64PointerMatcher(_PointerMatcher):
+    def __init__(self):
+        _PointerMatcher.__init__(self, visatype.ViReal64)
+
+
+# Buffers
+
+
+class ViBooleanBufferMatcher(_BufferMatcher):
+    def __init__(self, expected_size_or_value):
+        _BufferMatcher.__init__(self, visatype.ViBoolean, expected_size_or_value)
+
+
+class ViSessionBufferMatcher(_BufferMatcher):
+    def __init__(self, expected_size_or_value):
+        _BufferMatcher.__init__(self, visatype.ViSession, expected_size_or_value)
+
+
+class ViCharBufferMatcher(_BufferMatcher):
+    def __init__(self, expected_size_or_value):
+        _BufferMatcher.__init__(self, visatype.ViChar, expected_size_or_value)
+
+
+class ViInt16BufferMatcher(_BufferMatcher):
+    def __init__(self, expected_size_or_value):
+        _BufferMatcher.__init__(self, visatype.ViInt16, expected_size_or_value)
+
+
+class ViInt32BufferMatcher(_BufferMatcher):
+    def __init__(self, expected_size_or_value):
+        _BufferMatcher.__init__(self, visatype.ViInt32, expected_size_or_value)
+
+
+class ViInt64BufferMatcher(_BufferMatcher):
+    def __init__(self, expected_size_or_value):
+        _BufferMatcher.__init__(self, visatype.ViInt64, expected_size_or_value)
+
+
+class ViReal64BufferMatcher(_BufferMatcher):
+    def __init__(self, expected_size_or_value):
+        _BufferMatcher.__init__(self, visatype.ViReal64, expected_size_or_value)
 
