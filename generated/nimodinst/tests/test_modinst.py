@@ -1,7 +1,8 @@
-import ctypes
+import matchers
 import mock_helper
 import nimodinst
-# import warnings
+from nimodinst import visatype  # make this unecessary by improving matchers
+import warnings
 
 # from mock import ANY
 from mock import patch
@@ -37,10 +38,12 @@ class TestSession(object):
 
     # Helper function for mocking multiple devices
     def niModInst_GetInstalledDeviceAttributeViString_looping(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
-        if attribute_value_buffer_size == 0:
+        if attribute_value_buffer_size.value == 0:
+            # TODO(marcoskirsch): What about the byte for the NULL character? Issue #526
             return (len(self.string_vals_device_looping[self.iteration_device_looping]))
-        t = nimodinst.visatype.ViString(self.string_vals_device_looping[self.iteration_device_looping].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nimodinst.visatype.ViString).value
+        bytes_to_copy = self.string_vals_device_looping[self.iteration_device_looping].encode('ascii')
+        for i in range(0, len(bytes_to_copy)):
+            attribute_value[i] = bytes_to_copy[i]
         self.iteration_device_looping += 1
         return 0
 
@@ -52,31 +55,22 @@ class TestSession(object):
 
     # API Tests
 
-    # TODO(marcoskirsch): Retrofit and re-enable.
-    '''
     def test_open_and_close(self):
         session = nimodinst.Session('')
-        self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
+        self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(matchers.ViStringMatcher(''), matchers.AnyPointerToType(visatype.ViSession), matchers.AnyPointerToType(visatype.ViInt32))
         session.close()
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
-    '''
+        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
-    # TODO(marcoskirsch): Retrofit and re-enable.
-    '''
     def test_close(self):
         session = nimodinst.Session('')
         session.close()
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
-    '''
+        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
-    # TODO(marcoskirsch): Retrofit and re-enable.
-    '''
     def test_context_manager(self):
         with nimodinst.Session('') as session:
             assert type(session) == nimodinst.Session
-            self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
-    '''
+            self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(matchers.ViStringMatcher(''), matchers.AnyPointerToType(visatype.ViSession), matchers.AnyPointerToType(visatype.ViInt32))
+        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_iterating_for(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
@@ -93,8 +87,6 @@ class TestSession(object):
             d2 = session.next()
             assert d1 != d2
 
-    # TODO(marcoskirsch): Retrofit and re-enable.
-    '''
     def test_get_extended_error_info(self):
         error_string = 'Error'
         self.patched_library.niModInst_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
@@ -104,10 +96,7 @@ class TestSession(object):
             # As a result, it cannot be used directly during error handling.
             result = session._get_extended_error_info()
             assert result == error_string
-    '''
 
-    # TODO(marcoskirsch): Retrofit and re-enable.
-    '''
     def test_get_error_description_fails(self):
         self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
         self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['return'] = -1
@@ -119,7 +108,6 @@ class TestSession(object):
             except nimodinst.Error as e:
                 assert e.code == -1  # we want the original error code from getting the attribute.
                 assert e.description == "Failed to retrieve error description."
-    '''
 
     def test_get_attribute_session(self):
         val = 123
@@ -139,8 +127,6 @@ class TestSession(object):
             index += 1
             assert(attr_int == self.int_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
 
-    # TODO(marcoskirsch): Retrofit and re-enable.
-    '''
     def test_get_attribute_vi_string_for_loop_index(self):
         self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.niModInst_GetInstalledDeviceAttributeViString_looping
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_string_devices_looping
@@ -149,7 +135,6 @@ class TestSession(object):
             attr_int = session[index].device_name
             index += 1
             assert(attr_int == self.string_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
-    '''
 
     def test_get_attribute_session_no_index(self):
         val = 123
@@ -171,8 +156,6 @@ class TestSession(object):
                 attr_int = d.chassis_number
                 assert(attr_int == self.int_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
 
-    # TODO(marcoskirsch): Retrofit and re-enable.
-    '''
     def test_get_attribute_vi_string_for_loop_multiple_devices(self):
         self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.niModInst_GetInstalledDeviceAttributeViString_looping
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_string_devices_looping
@@ -180,7 +163,6 @@ class TestSession(object):
             for d in session:
                 attr_int = d.device_name
                 assert(attr_int == self.string_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
-    '''
 
     # Error Tests
     def test_cannot_add_properties_to_session_set(self):
@@ -233,7 +215,6 @@ class TestSession(object):
             except AttributeError as e:
                 assert str(e) == "__setattr__ not supported."
 
-    '''
     def test_int_attribute_error(self):
         error_code = -1234
         error_string = 'Error'
@@ -264,5 +245,5 @@ class TestSession(object):
                 assert len(w) == 1
                 assert issubclass(w[0].category, nimodinst.NimodinstWarning)
                 assert error_string in str(w[0].message)
-    '''
+
 
