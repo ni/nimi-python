@@ -120,6 +120,7 @@ class BufferMatcher(object):
 
 # Tests
 
+
 SESSION_NUM_FOR_TEST = 42
 
 
