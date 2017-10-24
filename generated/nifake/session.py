@@ -510,13 +510,13 @@ class Session(_SessionBase):
     def enum_array_output_function(self, number_of_elements):
         '''enum_array_output_function
 
-        This function returns an array of booleans.
+        This function returns an array of enums, stored as 16 bit integers under the hood.
 
         Args:
             number_of_elements (int): Number of elements in the array.
 
         Returns:
-            an_array (list of enums.Turtle): Contains an array of booleans
+            an_array (list of enums.Turtle): Contains an array of enums, stored as 16 bit integers under the hood
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         number_of_elements_ctype = visatype.ViInt32(number_of_elements)  # case 7
