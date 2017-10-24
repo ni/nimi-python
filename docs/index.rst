@@ -14,6 +14,7 @@ NI Modular Instruments Python Documentation
 
    nidcpower
    nidmm
+   nifgen
    niswitch
    nimodinst
 

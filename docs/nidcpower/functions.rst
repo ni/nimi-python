@@ -341,7 +341,7 @@ nidcpower.Session methods
 
     :type edge: :py:data:`nidcpower.DigitalEdge`
 
-.. function:: create_advanced_sequence(sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence=True)
+.. function:: create_advanced_sequence(sequence_name, attribute_ids, set_as_active_sequence=True)
 
     Creates an empty advanced sequence. Call the
     :py:func:`nidcpower.create_advanced_sequence_step` function to add steps to the
@@ -937,7 +937,7 @@ nidcpower.Session methods
     Returns the measured value of either the voltage or current on the
     specified output channel. Each call to this function blocks other
     function calls until the hardware returns the **measurement**. To
-    measure multiple output channels, use the :py:func:`nidcpower.measure_multiple`
+    measure multiple output channels, use the :py:func:`nidcpower.MeasureMultiple`
     function.
 
     
@@ -979,54 +979,6 @@ nidcpower.Session methods
 
 
 
-.. function:: measure_multiple()
-
-    Returns arrays of the measured voltage and current values on the
-    specified output channel(s). Each call to this function blocks other
-    function calls until the measurements are returned from the device. The
-    order of the measurements returned in the array corresponds to the order
-    on the specified output channel(s).
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nidcpower.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].measure_multiple()
-
-
-    :rtype: tuple (voltage_measurements, current_measurements)
-
-        WHERE
-
-        voltage_measurements (list of float): 
-
-
-            Returns an array of voltage measurements. The measurements in the array
-            are returned in the same order as the channels specified in
-            **channelName**. Ensure that sufficient space has been allocated for the
-            returned array.
-
-            
-
-
-        current_measurements (list of float): 
-
-
-            Returns an array of current measurements. The measurements in the array
-            are returned in the same order as the channels specified in
-            **channelName**. Ensure that sufficient space has been allocated for the
-            returned array.
-
-            
-
-
-
 .. function:: query_in_compliance()
 
     Queries the specified output device to determine if it is operating at
@@ -1035,15 +987,15 @@ nidcpower.Session methods
     The compliance limit is the current limit when the output function is
     set to NIDCPOWER\_VAL\_DC\_VOLTAGE. If the output is operating at the
     compliance limit, the output reaches the current limit before the
-    desired voltage level. Refer to the :py:func:`nidcpower.configure_output_function`
-    function and the :py:func:`nidcpower.configure_current_limit` function for more
+    desired voltage level. Refer to the :py:func:`nidcpower.ConfigureOutputFunction`
+    function and the :py:func:`nidcpower.ConfigureCurrentLimit` function for more
     information about output function and current limit, respectively.
 
     The compliance limit is the voltage limit when the output function is
     set to NIDCPOWER\_VAL\_DC\_CURRENT. If the output is operating at the
     compliance limit, the output reaches the voltage limit before the
-    desired current level. Refer to the :py:func:`nidcpower.configure_output_function`
-    function and the :py:func:`nidcpower.configure_voltage_limit` function for more
+    desired current level. Refer to the :py:func:`nidcpower.ConfigureOutputFunction`
+    function and the :py:func:`nidcpower.ConfigureVoltageLimit` function for more
     information about output function and voltage limit, respectively.
 
     **Related Topics:**
@@ -1333,7 +1285,7 @@ nidcpower.Session methods
 
     :type trigger: :py:data:`nidcpower.SendSoftwareEdgeTriggerType`
 
-.. function:: set_sequence(source_delays, size, values=None)
+.. function:: set_sequence(values, source_delays=None)
 
     Configures a series of voltage or current outputs and corresponding
     source delays. The source mode must be set to
@@ -1366,7 +1318,7 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session['0,1'].set_sequence(source_delays, size, values=None)
+            session['0,1'].set_sequence(values, source_delays=None)
 
 
     :param values:
@@ -1406,7 +1358,7 @@ nidcpower.Session methods
 
     :type size: int
 
-.. function:: wait_for_event(timeout, event_id=10.0)
+.. function:: wait_for_event(event_id, timeout=10.0)
 
     Waits until the device has generated the specified event.
 
@@ -1445,7 +1397,7 @@ nidcpower.Session methods
         +-------------------------------------------------------------+--------------------------------------------------+
 
 
-    :type event_id: int
+    :type event_id: :py:data:`nidcpower.Event`
     :param timeout:
 
 
@@ -1460,7 +1412,7 @@ nidcpower.Session methods
             application.
 
 
-    :type timeout: :py:data:`nidcpower.Event`
+    :type timeout: float
 
 .. function:: reset()
 

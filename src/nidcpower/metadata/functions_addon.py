@@ -40,6 +40,7 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
+    'MeasureMultiple':                 { 'codegen_method': 'no',       },  # Issue 444
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -52,8 +53,8 @@ functions_enums = {
     'ConfigureDigitalEdgeSourceTrigger':            { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
     'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
     'SendSoftwareEdgeTrigger':                      { 'parameters': { 1: { 'enum': 'SendSoftwareEdgeTriggerType', }, }, },
-    'WaitForEvent':                                 { 'parameters': { 2: { 'enum': 'Event',                       }, }, },
-    'ExportSignal':                                 { 'parameters': { 1: { 'enum': 'Signals',                     }, }, },
+    'ExportSignal':                                 { 'parameters': { 1: { 'enum': 'ExportSignal',                }, }, },
+    'WaitForEvent':                                 { 'parameters': { 1: { 'enum': 'Event',                       }, }, },
     'Measure':                                      { 'parameters': { 2: { 'enum': 'MeasurementTypes',            }, }, },
     'QueryOutputState':                             { 'parameters': { 2: { 'enum': 'OutputStates',                }, }, },
     # @TODO add all enums
@@ -80,8 +81,8 @@ functions_buffer_info = {
     'GetCalUserDefinedInfo':        { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'SetSequence':                  { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'Size'}, }, }, },
-    'CreateAdvancedSequence':       { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'attributeIdCount'}, }, }, },
+    'SetSequence':                  { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
+    'CreateAdvancedSequence':       { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'attributeIdCount'}, }, }, },
     'init':                         { 'parameters': { 0: { 'is_buffer': True, }, }, },
     '.etAttribute.+':               { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'GetDevTemp':                   { 'parameters': { 1: { 'is_buffer': True, }, }, },
@@ -90,7 +91,7 @@ functions_buffer_info = {
                                                       3: { 'is_buffer': True, }, }, },
     'FetchMultiple':                { 'parameters': { 4: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
                                                       5: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
-                                                      6: { 'size': {'mechanism':'passed-in', 'value':'Count'}, }, }, }
+                                                      6: { 'size': {'mechanism':'passed-in', 'value':'Count'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -102,12 +103,12 @@ functions_is_error_handling = {
 }
 
 # Default values for method parameters
-function_default_value = {
+functions_default_value = {
     'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '', },
                                                                        2: { 'default_value': False, },
                                                                        3: { 'default_value': '', }, }, },
     'ConfigureApertureTime':                         { 'parameters': { 3: { 'default_value': 'ApertureTimeUnits.SECONDS', }, }, },
-    'SetSequence':                                   { 'parameters': { 2: { 'default_value': None, }, }, },
+    'SetSequence':                                   { 'parameters': { 3: { 'default_value': None, }, }, },
     'ConfigureDigitalEdgeMeasureTrigger':            { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
     'ConfigureDigitalEdgePulseTrigger':              { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
     'ConfigureDigitalEdgeSequenceAdvanceTrigger':    { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
@@ -117,7 +118,7 @@ function_default_value = {
     'CreateAdvancedSequenceStep':                    { 'parameters': { 1: { 'default_value': True, }, }, },
     'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '', }, }, },
     'SendSoftwareEdgeTrigger':                       { 'parameters': { 1: { 'default_value': 'SendSoftwareEdgeTriggerType.START', }, }, },
-    'WaitForEvent':                                  { 'parameters': { 1: { 'default_value': 10.0, },}, },
+    'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 10.0, },}, },
     'FetchMultiple':                                 { 'parameters': { 1: { 'default_value': 1.0, },
                                                                        2: { 'default_value': 1.0, }, }, },
 

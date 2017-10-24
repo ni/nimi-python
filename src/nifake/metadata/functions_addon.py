@@ -22,6 +22,8 @@ functions_codegen_method = {
 functions_enums = {
     'GetEnumValue':                     { 'parameters': { 2: { 'enum': 'Turtle',    }, }, },
     'EnumInputFunctionWithDefaults':    { 'parameters': { 1: { 'enum': 'Turtle',    }, }, },
+    'ReturnMultipleTypes':              { 'parameters': { 4: { 'enum': 'Turtle',    },
+                                                          6: { 'enum': 'FloatEnum', }, }, },
     'EnumArrayOutputFunction':          { 'parameters': { 2: { 'enum': 'Turtle',    }, }, },
 }
 
@@ -51,6 +53,13 @@ functions_buffer_info = {
     '.etAttribute.+':                        { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'error_message':                         { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'ArrayInputFunction':                    { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfElements'}, }, }, },
+    'GetAnIviDanceString':                   { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'ReturnMultipleTypes':                   { 'parameters': { 8: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, },
+                                                              10: { 'size': {'mechanism':'ivi-dance', 'value':'stringSize'}, }, }, },
+    'MultipleArrayTypes':                    { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'passedInArraySize'}, },
+                                                               2: { 'size': {'mechanism':'fixed', 'value':3}, },
+                                                               4: { 'size': {'mechanism':'len', 'value':'lenArraySize'}, }, }, },
+    'ParametersAreMultipleTypes':            { 'parameters': { 8: { 'size': {'mechanism':'len', 'value':'stringSize'}, }, }, },
     'BoolArrayOutputFunction':               { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
     'EnumArrayOutputFunction':               { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
 }
@@ -64,7 +73,7 @@ functions_is_error_handling = {
 }
 
 # Default values for method parameters
-function_default_value = {
+functions_default_value = {
     'InitWithOptions':                 { 'parameters': { 1: { 'default_value': False, },
                                                          2: { 'default_value': False, },
                                                          3: { 'default_value': '', }, }, },

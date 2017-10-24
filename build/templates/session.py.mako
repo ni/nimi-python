@@ -126,7 +126,7 @@ init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsag
 
     def __setattr__(self, key, value):
         if self._is_frozen and key not in dir(self):
-            raise TypeError("%r is a frozen class" % self)
+            raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
     def _get_error_description(self, error_code):
@@ -191,9 +191,9 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.Error:
-            # TODO(marcoskirsch): This will occur when session is "stolen". Change to log instead
-            print("Failed to close session.")
+        except errors.Error as e:
+            self._${config['session_handle_parameter_name']} = 0
+            raise
         self._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''

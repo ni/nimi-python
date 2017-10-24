@@ -86,10 +86,6 @@ class SideEffectsHelper(object):
         self._defaults['Measure'] = {}
         self._defaults['Measure']['return'] = 0
         self._defaults['Measure']['Measurement'] = None
-        self._defaults['MeasureMultiple'] = {}
-        self._defaults['MeasureMultiple']['return'] = 0
-        self._defaults['MeasureMultiple']['voltageMeasurements'] = None
-        self._defaults['MeasureMultiple']['currentMeasurements'] = None
         self._defaults['QueryInCompliance'] = {}
         self._defaults['QueryInCompliance']['return'] = 0
         self._defaults['QueryInCompliance']['inCompliance'] = None
@@ -357,27 +353,6 @@ class SideEffectsHelper(object):
         measurement.contents.value = self._defaults['Measure']['Measurement']
         return self._defaults['Measure']['return']
 
-    def niDCPower_MeasureMultiple(self, vi, channel_name, voltage_measurements, current_measurements):  # noqa: N802
-        if self._defaults['MeasureMultiple']['return'] != 0:
-            return self._defaults['MeasureMultiple']['return']
-        if self._defaults['MeasureMultiple']['voltageMeasurements'] is None:
-            raise MockFunctionCallError("niDCPower_MeasureMultiple", param='voltageMeasurements')
-        a = self._defaults['MeasureMultiple']['voltageMeasurements']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(voltage_measurements), len(a))):
-            voltage_measurements[i] = a[i]
-        if self._defaults['MeasureMultiple']['currentMeasurements'] is None:
-            raise MockFunctionCallError("niDCPower_MeasureMultiple", param='currentMeasurements')
-        a = self._defaults['MeasureMultiple']['currentMeasurements']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(current_measurements), len(a))):
-            current_measurements[i] = a[i]
-        return self._defaults['MeasureMultiple']['return']
-
     def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
         if self._defaults['QueryInCompliance']['return'] != 0:
             return self._defaults['QueryInCompliance']['return']
@@ -569,8 +544,6 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_Initiate.return_value = 0
         mock_library.niDCPower_Measure.side_effect = MockFunctionCallError("niDCPower_Measure")
         mock_library.niDCPower_Measure.return_value = 0
-        mock_library.niDCPower_MeasureMultiple.side_effect = MockFunctionCallError("niDCPower_MeasureMultiple")
-        mock_library.niDCPower_MeasureMultiple.return_value = 0
         mock_library.niDCPower_QueryInCompliance.side_effect = MockFunctionCallError("niDCPower_QueryInCompliance")
         mock_library.niDCPower_QueryInCompliance.return_value = 0
         mock_library.niDCPower_QueryMaxCurrentLimit.side_effect = MockFunctionCallError("niDCPower_QueryMaxCurrentLimit")

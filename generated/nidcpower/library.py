@@ -42,7 +42,6 @@ class Library(object):
         self.niDCPower_InitializeWithChannels_cfunc = None
         self.niDCPower_Initiate_cfunc = None
         self.niDCPower_Measure_cfunc = None
-        self.niDCPower_MeasureMultiple_cfunc = None
         self.niDCPower_QueryInCompliance_cfunc = None
         self.niDCPower_QueryMaxCurrentLimit_cfunc = None
         self.niDCPower_QueryMaxVoltageLevel_cfunc = None
@@ -277,14 +276,6 @@ class Library(object):
                 self.niDCPower_Measure_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_Measure_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Measure_cfunc(vi, channel_name, measurement_type, measurement)
-
-    def niDCPower_MeasureMultiple(self, vi, channel_name, voltage_measurements, current_measurements):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_MeasureMultiple_cfunc is None:
-                self.niDCPower_MeasureMultiple_cfunc = self._library.niDCPower_MeasureMultiple
-                self.niDCPower_MeasureMultiple_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niDCPower_MeasureMultiple_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_MeasureMultiple_cfunc(vi, channel_name, voltage_measurements, current_measurements)
 
     def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
         with self._func_lock:
