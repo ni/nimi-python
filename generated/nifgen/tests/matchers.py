@@ -20,11 +20,10 @@ class _ScalarMatcher(object):
         if not isinstance(other, self.expected_type):
             print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
             return False
-        if other.value == self.expected_value:
-            return True
-        else:
+        if other.value != self.expected_value:
             print("Unexpected value. Expected: {0}. Received: {1}".format(self.expected_value, other.value))
-        return
+            return False
+        return True
 
 
 class _PointerMatcher(object):
@@ -81,11 +80,13 @@ class ViStringMatcher(object):
         if len(other) < len(self.expected_string_value) + 1:  # +1 for NULL terminating character
             print("Unexpected length in C string. Expected at least: {0}. Received {1}".format(len(other), len(self.expected_string_value) + 1))
             return False
-        if other.value.decode("ascii") == self.expected_string_value:
-            return True
-        else:
+        if not isinstance(other[0], bytes):
+            print("Unexpected type. Not a string. Received: {0}".format(type(other[0])))
+            return False
+        if other.value.decode("ascii") != self.expected_string_value:
             print("Unexpected value. Expected {0}. Received: {1}".format(self.expected_string_value, other.value.decode))
-        return
+            return False
+        return True
 
 
 # Scalars
