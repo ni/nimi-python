@@ -571,7 +571,6 @@ class TestSession(object):
                 assert False
             except TypeError as e:
                 pass
-
     '''
     def test_method_with_warning(self):
         test_error_code = 42
@@ -618,7 +617,6 @@ class TestSession(object):
             assert returned_string == test_string
             self.patched_library.niFake_GetAStringOfFixedMaximumSize.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), BufferMatcher(visatype.ViChar, 256))
 
-    '''
     def test_return_a_number_and_a_string(self):
         test_string = "this string"
         test_number = 13
@@ -629,8 +627,9 @@ class TestSession(object):
             returned_number, returned_string = session.return_a_number_and_a_string()
             assert (returned_string == test_string)
             assert (returned_number == test_number)
-            self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
+            self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), AnyPointerToType(visatype.ViInt16), BufferMatcher(visatype.ViChar, 256))
 
+    '''
     def test_get_an_ivi_dance_string(self):
         self.patched_library.niFake_GetAnIviDanceString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceString
         string_val = 'Testing is fun?'
@@ -642,10 +641,12 @@ class TestSession(object):
             result_string = session.get_an_ivi_dance_string()
             assert result_string == string_val
             from mock import call
-            calls = [call(SESSION_NUM_FOR_TEST, 0, None), call(SESSION_NUM_FOR_TEST, len(string_val), ANY)]
+            calls = [call(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt32Matcher(0), None), call(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViInt32Matcher(len(string_val)), BufferMatcher(visatype.ViChar, len(string_val)))]
             self.patched_library.niFake_GetAnIviDanceString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAnIviDanceString.call_count == 2
+    '''
 
+    '''
     def test_get_string_ivi_dance_error(self):
         test_error_code = -1234
         test_error_desc = "ascending order"
@@ -662,6 +663,7 @@ class TestSession(object):
             except nifake.Error as e:
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
+    '''
 
     # Repeated Capabilities
 
@@ -672,7 +674,7 @@ class TestSession(object):
         self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
         with nifake.Session('dev1') as session:
             value = session.read_from_channel(test_maximum_time)
-        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(SESSION_NUM_FOR_TEST, b'', test_maximum_time, ANY)
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViStringMatcher(''), ViInt32Matcher(test_maximum_time), AnyPointerToType(visatype.ViReal64))
         assert value == test_reading
 
     def test_repeated_capability_method_on_specific_channel(self):
@@ -682,9 +684,8 @@ class TestSession(object):
         self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
         with nifake.Session('dev1') as session:
             value = session['3'].read_from_channel(test_maximum_time)
-        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(SESSION_NUM_FOR_TEST, b'3', test_maximum_time, ANY)
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), ViStringMatcher('3'), ViInt32Matcher(test_maximum_time), AnyPointerToType(visatype.ViReal64))
         assert value == test_reading
-    '''
 
     def test_device_method_not_exist_on_repeated_capability_error(self):
         with nifake.Session('dev1') as session:

@@ -1082,7 +1082,7 @@ functions = {
                 'name': 'aString',
                 'type': 'ViChar',
                 'documentation': {
-                    'description': 'Contains a string.',
+                    'description': 'Contains a string. Buffer must be 256 bytes or larger.',
                 },
             },
         ],

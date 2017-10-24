@@ -825,7 +825,7 @@ class Session(_SessionBase):
 
         Returns:
             a_number (int): Contains a number.
-            a_string (string): Contains a string.
+            a_string (string): Contains a string. Buffer must be 256 bytes or larger.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         a_number_ctype = visatype.ViInt16()  # case 13
