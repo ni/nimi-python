@@ -1,7 +1,7 @@
 import ctypes
 import mock_helper
 import nimodinst
-import warnings
+# import warnings
 
 # from mock import ANY
 from mock import patch

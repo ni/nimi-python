@@ -1,0 +1,115 @@
+'''Matcher classes used by unit tests in order to set mock expectations.
+These work well with our visatype definitions.
+'''
+
+import ctypes
+from nidcpower import visatype
+
+
+class ScalarMatcher(object):
+    def __init__(self, expected_type, expected_value):
+        self.expected_type = expected_type
+        self.expected_value = expected_value
+
+    def __repr__(self):
+        return 'Matcher({0}, {1})'.format(self.expected_type, self.expected_value)
+
+    def __eq__(self, other):
+        if not isinstance(other, self.expected_type):
+            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
+            return False
+        if other.value == self.expected_value:
+            return True
+        else:
+            print("Unexpected value. Expected: {0}. Received: {1}".format(self.expected_value, other.value))
+        return
+
+
+class ViStringMatcher(object):
+    def __init__(self, expected_string_value):
+        self.expected_string_value = expected_string_value
+
+    def __eq__(self, other):
+        if not isinstance(other, ctypes.Array):
+            print("Unexpected type. Expected: {0}. Received: {1}".format(ctypes.Array, type(other)))
+            return False
+        if len(other) < len(self.expected_string_value) + 1:  # +1 for NULL terminating character
+            print("Unexpected length in C string. Expected at least: {0}. Received {1}".format(len(other), len(self.expected_string_value) + 1))
+            return False
+        if other.value.decode("ascii") == self.expected_string_value:
+            return True
+        else:
+            print("Unexpected value. Expected {0}. Received: {1}".format(self.expected_string_value, other.value.decode))
+        return
+
+
+# Rename to have Matcher suffix?
+class AnyPointerToType(object):
+    def __init__(self, expected_type):
+        self.expected_type = expected_type
+
+    def __eq__(self, other):
+        if not isinstance(other, ctypes.POINTER(self.expected_type)):
+            print("Unexpected type. Expected: {0}. Received: {1}".format(ctypes.POINTER(self.expected_type), type(other)))
+            return False
+        return True
+
+
+class BooleanMatcher(ScalarMatcher):
+    def __init__(self, expected_value):
+        ScalarMatcher.__init__(self, visatype.ViBoolean, 1 if expected_value is True else False)
+
+
+class ViSessionMatcher(ScalarMatcher):
+    def __init__(self, expected_value):
+        ScalarMatcher.__init__(self, visatype.ViSession, expected_value)
+
+
+class ViInt16Matcher(ScalarMatcher):
+    def __init__(self, expected_value):
+        ScalarMatcher.__init__(self, visatype.ViInt16, expected_value)
+
+
+class ViInt32Matcher(ScalarMatcher):
+    def __init__(self, expected_value):
+        ScalarMatcher.__init__(self, visatype.ViInt32, expected_value)
+
+
+class ViInt64Matcher(ScalarMatcher):
+    def __init__(self, expected_value):
+        ScalarMatcher.__init__(self, visatype.ViInt64, expected_value)
+
+
+class ViReal64Matcher(ScalarMatcher):
+    def __init__(self, expected_value):
+        ScalarMatcher.__init__(self, visatype.ViReal64, expected_value)
+
+
+class BufferMatcher(object):
+    def __init__(self, expected_element_type, expected_size_or_value):
+        if isinstance(expected_size_or_value, int):
+            # Were given the size of the buffer
+            self.expected_value = None
+            self.expected_size = expected_size_or_value
+        else:
+            # Were given a list or something that behaves like a list
+            self.expected_value = expected_size_or_value
+            self.expected_size = len(expected_size_or_value)
+        self.expected_type = expected_element_type * self.expected_size
+
+    def __eq__(self, other):
+        if not isinstance(other, self.expected_type):
+            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
+            return False
+        if self.expected_size != len(other):
+            print("Unexpected length. Expected: {0}. Received: {1}".format(self.expected_size, len(other)))
+            return False
+        if self.expected_value is not None:
+            # Can't compare the objects directly because they're different types (one is list, another is ctypes array).
+            # Go element by element, which allows for reporting the first index where different values were found.
+            for i in range(0, len(self.expected_value)):
+                if self.expected_value[i] != other[i]:
+                    print("Unexpected value at index {0}. Expected: {1}. Received: {2}".format(i, self.expected_value, self.expected_value))
+                    return False
+        return True
+
