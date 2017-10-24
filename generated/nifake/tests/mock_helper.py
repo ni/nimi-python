@@ -35,9 +35,6 @@ class SideEffectsHelper(object):
         self._defaults['GetAStringOfFixedMaximumSize'] = {}
         self._defaults['GetAStringOfFixedMaximumSize']['return'] = 0
         self._defaults['GetAStringOfFixedMaximumSize']['aString'] = None
-        self._defaults['GetAStringWithSpecifiedMaximumSize'] = {}
-        self._defaults['GetAStringWithSpecifiedMaximumSize']['return'] = 0
-        self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'] = None
         self._defaults['GetAnIviDanceString'] = {}
         self._defaults['GetAnIviDanceString']['return'] = 0
         self._defaults['GetAnIviDanceString']['aString'] = None
@@ -199,19 +196,6 @@ class SideEffectsHelper(object):
         for i in range(min(len(a_string), len(a))):
             a_string[i] = a[i]
         return self._defaults['GetAStringOfFixedMaximumSize']['return']
-
-    def niFake_GetAStringWithSpecifiedMaximumSize(self, vi, a_string, buffer_size):  # noqa: N802
-        if self._defaults['GetAStringWithSpecifiedMaximumSize']['return'] != 0:
-            return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
-        if self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'] is None:
-            raise MockFunctionCallError("niFake_GetAStringWithSpecifiedMaximumSize", param='aString')
-        a = self._defaults['GetAStringWithSpecifiedMaximumSize']['aString']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(a_string), len(a))):
-            a_string[i] = a[i]
-        return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
 
     def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
         if self._defaults['GetAnIviDanceString']['return'] != 0:
@@ -496,8 +480,6 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetANumber.return_value = 0
         mock_library.niFake_GetAStringOfFixedMaximumSize.side_effect = MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize")
         mock_library.niFake_GetAStringOfFixedMaximumSize.return_value = 0
-        mock_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = MockFunctionCallError("niFake_GetAStringWithSpecifiedMaximumSize")
-        mock_library.niFake_GetAStringWithSpecifiedMaximumSize.return_value = 0
         mock_library.niFake_GetAnIviDanceString.side_effect = MockFunctionCallError("niFake_GetAnIviDanceString")
         mock_library.niFake_GetAnIviDanceString.return_value = 0
         mock_library.niFake_GetAttributeViBoolean.side_effect = MockFunctionCallError("niFake_GetAttributeViBoolean")

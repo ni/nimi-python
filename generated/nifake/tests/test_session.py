@@ -546,20 +546,18 @@ class TestSession(object):
                 assert e.description == test_error_desc
     '''
 
-    def test_invalid_method_call_not_enough_parameters_error(self):
-        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
+    def test_call_not_enough_parameters_error(self):
         with nifake.Session('dev1') as session:
             try:
-                session.get_a_string_with_specified_maximum_size()
+                session.multiple_array_types(10)
                 assert False
             except TypeError as e:
                 pass
 
     def test_invalid_method_call_wrong_type_error(self):
-        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
         with nifake.Session('dev1') as session:
             try:
-                session.get_a_string_with_specified_maximum_size('potato')
+                session.multiple_array_types('potato', [0.0, 0.1, 0.2])
                 assert False
             except TypeError as e:
                 pass
@@ -610,25 +608,17 @@ class TestSession(object):
 
     # Retrieving buffers and strings
 
-    def test_get_a_string_with_specified_maximum_size(self):
-        single_character_string = 'a'
-        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
-        self.side_effects_helper['GetAStringWithSpecifiedMaximumSize']['aString'] = single_character_string
-        with nifake.Session('dev1') as session:
-            buffer_size = 19
-            string_with_specified_buffer = session.get_a_string_with_specified_maximum_size(buffer_size)
-            assert(string_with_specified_buffer == single_character_string)
-            self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY, ANY)
-
+    '''
     def test_get_a_string_of_fixed_maximum_size(self):
-        fixed_buffer_string = "this method will return fixed buffer string"
+        test_string = "A string no larger than the max size of 256 allowed by the function."
         self.patched_library.niFake_GetAStringOfFixedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringOfFixedMaximumSize
-        self.side_effects_helper['GetAStringOfFixedMaximumSize']['aString'] = fixed_buffer_string
+        self.side_effects_helper['GetAStringOfFixedMaximumSize']['aString'] = test_string
         with nifake.Session('dev1') as session:
             returned_string = session.get_a_string_of_fixed_maximum_size()
-            assert (returned_string == fixed_buffer_string)
-            self.patched_library.niFake_GetAStringOfFixedMaximumSize.assert_called_once_with(SESSION_NUM_FOR_TEST, ANY)
+            assert returned_string == test_string
+            self.patched_library.niFake_GetAStringOfFixedMaximumSize.assert_called_once_with(ViSessionMatcher(SESSION_NUM_FOR_TEST), BufferMatcher(visatype.ViChar, 256))
 
+    '''
     def test_return_a_number_and_a_string(self):
         test_string = "this string"
         test_number = 13

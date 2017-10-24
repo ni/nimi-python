@@ -597,24 +597,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
 
-    def get_a_string_with_specified_maximum_size(self, buffer_size):
-        '''get_a_string_with_specified_maximum_size
-
-        Illustrates resturning a string where user specifies the size.
-
-        Args:
-            buffer_size (int): Buffersize of the string.
-
-        Returns:
-            a_string (string): String comes back here. Buffer must be at least bufferSize big.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        a_string_ctype = (visatype.ViChar * buffer_size)()  # case 12
-        buffer_size_ctype = visatype.ViInt32(buffer_size)  # case 7
-        error_code = self._library.niFake_GetAStringWithSpecifiedMaximumSize(vi_ctype, a_string_ctype, buffer_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return a_string_ctype.value.decode(self._encoding)
-
     def get_an_ivi_dance_string(self):
         '''get_an_ivi_dance_string
 
