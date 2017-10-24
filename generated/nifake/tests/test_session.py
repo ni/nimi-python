@@ -1,7 +1,6 @@
-import ctypes
+import matchers
 import math
 import mock_helper
-import matchers
 import nifake
 from nifake import visatype
 import warnings
