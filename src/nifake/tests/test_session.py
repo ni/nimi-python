@@ -187,7 +187,6 @@ class TestSession(object):
         self.side_effects_helper['InitWithOptions']['vi'] = visatype.ViSession(SESSION_NUM_FOR_TEST)
         self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
         self.side_effects_helper['GetError']['errorCode'] = test_error_code
-        #self.side_effects_helper['GetError']['description'] = (visatype.ViChar * (len(test_error_desc)+1))(test_error_desc.encode('ascii'))
         self.side_effects_helper['GetError']['description'] = test_error_desc
         try:
             nifake.Session('dev1')
