@@ -115,7 +115,6 @@ def _get_buffer_parameter_for_size_parameter(parameter, parameters):
     '''If parameter represents the size of another parameter in the C API, returns that other parameter. Otherwise None.'''
     for p in parameters:
         if p['is_buffer'] and p['size']['value'] == parameter['name']:
-            assert p['is_buffer'] is True, '{0} expected to be a buffer because its size is specified by {1}'.format(p['name'], parameter['name'])
             return p
     return None
 
