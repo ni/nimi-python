@@ -1480,12 +1480,12 @@ functions = {
                 'name': 'anArray',
                 'type': 'ViInt16',
                 'documentation': {
-                    'description': 'Contains an array of booleans',
+                    'description': 'Contains an array of enums, stored as 16 bit integers under the hood ',
                 },
             },
         ],
         'documentation': {
-            'description': 'This function returns an array of booleans.',
+            'description': 'This function returns an array of enums, stored as 16 bit integers under the hood.',
         },
     },
 
