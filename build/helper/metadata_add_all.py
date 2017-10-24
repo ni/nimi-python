@@ -3,6 +3,7 @@
 from .helper import camelcase_to_snakecase
 from .helper import get_python_type_for_visa_type
 from .metadata_filters import filter_codegen_functions
+from .metadata_merge_dicts import merge_dicts
 
 import copy
 import pprint
@@ -158,7 +159,12 @@ def _add_is_session_handle(parameter):
 
 
 def add_all_function_metadata(functions, config):
-    '''Adds all codegen-specific metada to the function metadata list'''
+    '''Merges and Adds all codegen-specific metada to the function metadata list'''
+    if 'modules' in config and 'metadata.functions_addon' in config['modules']:
+        for m in dir(config['modules']['metadata.functions_addon']):
+            if m.startswith('functions_'):
+                merge_dicts(functions, config['modules']['metadata.functions_addon'].__getattribute__(m))
+
     for f in filter_codegen_functions(functions):
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
