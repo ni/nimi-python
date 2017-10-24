@@ -204,7 +204,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetAttributeViString']['return']
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niSwitch_GetAttributeViString", param='attributeValue')
-        if array_size == 0:
+        if array_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
@@ -214,7 +214,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetChannelName']['return']
         if self._defaults['GetChannelName']['channelNameBuffer'] is None:
             raise MockFunctionCallError("niSwitch_GetChannelName", param='channelNameBuffer')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetChannelName']['channelNameBuffer'])
         channel_name_buffer.value = self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii')
         return self._defaults['GetChannelName']['return']
@@ -227,7 +227,7 @@ class SideEffectsHelper(object):
         code.contents.value = self._defaults['GetError']['Code']
         if self._defaults['GetError']['Description'] is None:
             raise MockFunctionCallError("niSwitch_GetError", param='Description')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
         description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
@@ -237,7 +237,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetPath']['return']
         if self._defaults['GetPath']['Path'] is None:
             raise MockFunctionCallError("niSwitch_GetPath", param='Path')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetPath']['Path'])
         path.value = self._defaults['GetPath']['Path'].encode('ascii')
         return self._defaults['GetPath']['return']
@@ -255,7 +255,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetRelayName']['return']
         if self._defaults['GetRelayName']['relayNameBuffer'] is None:
             raise MockFunctionCallError("niSwitch_GetRelayName", param='relayNameBuffer')
-        if relay_name_buffer_size == 0:
+        if relay_name_buffer_size.value == 0:
             return len(self._defaults['GetRelayName']['relayNameBuffer'])
         relay_name_buffer.value = self._defaults['GetRelayName']['relayNameBuffer'].encode('ascii')
         return self._defaults['GetRelayName']['return']
