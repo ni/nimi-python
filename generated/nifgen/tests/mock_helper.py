@@ -35,16 +35,10 @@ class SideEffectsHelper(object):
         self._defaults['ClearUserStandardWaveform']['return'] = 0
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
-        self._defaults['ConfigureAmplitude'] = {}
-        self._defaults['ConfigureAmplitude']['return'] = 0
         self._defaults['ConfigureArbSequence'] = {}
         self._defaults['ConfigureArbSequence']['return'] = 0
         self._defaults['ConfigureArbWaveform'] = {}
         self._defaults['ConfigureArbWaveform']['return'] = 0
-        self._defaults['ConfigureChannels'] = {}
-        self._defaults['ConfigureChannels']['return'] = 0
-        self._defaults['ConfigureClockMode'] = {}
-        self._defaults['ConfigureClockMode']['return'] = 0
         self._defaults['ConfigureCustomFIRFilterCoefficients'] = {}
         self._defaults['ConfigureCustomFIRFilterCoefficients']['return'] = 0
         self._defaults['ConfigureDigitalEdgeScriptTrigger'] = {}
@@ -53,46 +47,8 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] = 0
         self._defaults['ConfigureDigitalLevelScriptTrigger'] = {}
         self._defaults['ConfigureDigitalLevelScriptTrigger']['return'] = 0
-        self._defaults['ConfigureFreqList'] = {}
-        self._defaults['ConfigureFreqList']['return'] = 0
-        self._defaults['ConfigureFrequency'] = {}
-        self._defaults['ConfigureFrequency']['return'] = 0
-        self._defaults['ConfigureGain'] = {}
-        self._defaults['ConfigureGain']['return'] = 0
-        self._defaults['ConfigureOperationMode'] = {}
-        self._defaults['ConfigureOperationMode']['return'] = 0
-        self._defaults['ConfigureOutputEnabled'] = {}
-        self._defaults['ConfigureOutputEnabled']['return'] = 0
-        self._defaults['ConfigureOutputImpedance'] = {}
-        self._defaults['ConfigureOutputImpedance']['return'] = 0
-        self._defaults['ConfigureOutputMode'] = {}
-        self._defaults['ConfigureOutputMode']['return'] = 0
-        self._defaults['ConfigureP2PEndpointFullnessStartTrigger'] = {}
-        self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return'] = 0
-        self._defaults['ConfigureRefClockFrequency'] = {}
-        self._defaults['ConfigureRefClockFrequency']['return'] = 0
-        self._defaults['ConfigureRefClockSource'] = {}
-        self._defaults['ConfigureRefClockSource']['return'] = 0
-        self._defaults['ConfigureReferenceClock'] = {}
-        self._defaults['ConfigureReferenceClock']['return'] = 0
-        self._defaults['ConfigureSampleClockSource'] = {}
-        self._defaults['ConfigureSampleClockSource']['return'] = 0
-        self._defaults['ConfigureSampleRate'] = {}
-        self._defaults['ConfigureSampleRate']['return'] = 0
-        self._defaults['ConfigureSoftwareEdgeScriptTrigger'] = {}
-        self._defaults['ConfigureSoftwareEdgeScriptTrigger']['return'] = 0
-        self._defaults['ConfigureSoftwareEdgeStartTrigger'] = {}
-        self._defaults['ConfigureSoftwareEdgeStartTrigger']['return'] = 0
         self._defaults['ConfigureStandardWaveform'] = {}
         self._defaults['ConfigureStandardWaveform']['return'] = 0
-        self._defaults['ConfigureSynchronization'] = {}
-        self._defaults['ConfigureSynchronization']['return'] = 0
-        self._defaults['ConfigureTriggerMode'] = {}
-        self._defaults['ConfigureTriggerMode']['return'] = 0
-        self._defaults['ConfigureTriggerSource'] = {}
-        self._defaults['ConfigureTriggerSource']['return'] = 0
-        self._defaults['ConfigureUpdateClockSource'] = {}
-        self._defaults['ConfigureUpdateClockSource']['return'] = 0
         self._defaults['CreateAdvancedArbSequence'] = {}
         self._defaults['CreateAdvancedArbSequence']['return'] = 0
         self._defaults['CreateAdvancedArbSequence']['coercedMarkersArray'] = None
@@ -362,11 +318,6 @@ class SideEffectsHelper(object):
             return self._defaults['Commit']['return']
         return self._defaults['Commit']['return']
 
-    def niFgen_ConfigureAmplitude(self, vi, channel_name, amplitude):  # noqa: N802
-        if self._defaults['ConfigureAmplitude']['return'] != 0:
-            return self._defaults['ConfigureAmplitude']['return']
-        return self._defaults['ConfigureAmplitude']['return']
-
     def niFgen_ConfigureArbSequence(self, vi, channel_name, sequence_handle, gain, offset):  # noqa: N802
         if self._defaults['ConfigureArbSequence']['return'] != 0:
             return self._defaults['ConfigureArbSequence']['return']
@@ -376,16 +327,6 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureArbWaveform']['return'] != 0:
             return self._defaults['ConfigureArbWaveform']['return']
         return self._defaults['ConfigureArbWaveform']['return']
-
-    def niFgen_ConfigureChannels(self, vi, channels):  # noqa: N802
-        if self._defaults['ConfigureChannels']['return'] != 0:
-            return self._defaults['ConfigureChannels']['return']
-        return self._defaults['ConfigureChannels']['return']
-
-    def niFgen_ConfigureClockMode(self, vi, clock_mode):  # noqa: N802
-        if self._defaults['ConfigureClockMode']['return'] != 0:
-            return self._defaults['ConfigureClockMode']['return']
-        return self._defaults['ConfigureClockMode']['return']
 
     def niFgen_ConfigureCustomFIRFilterCoefficients(self, vi, channel_name, number_of_coefficients, coefficients_array):  # noqa: N802
         if self._defaults['ConfigureCustomFIRFilterCoefficients']['return'] != 0:
@@ -407,105 +348,10 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureDigitalLevelScriptTrigger']['return']
         return self._defaults['ConfigureDigitalLevelScriptTrigger']['return']
 
-    def niFgen_ConfigureFreqList(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
-        if self._defaults['ConfigureFreqList']['return'] != 0:
-            return self._defaults['ConfigureFreqList']['return']
-        return self._defaults['ConfigureFreqList']['return']
-
-    def niFgen_ConfigureFrequency(self, vi, channel_name, frequency):  # noqa: N802
-        if self._defaults['ConfigureFrequency']['return'] != 0:
-            return self._defaults['ConfigureFrequency']['return']
-        return self._defaults['ConfigureFrequency']['return']
-
-    def niFgen_ConfigureGain(self, vi, channel_name, gain):  # noqa: N802
-        if self._defaults['ConfigureGain']['return'] != 0:
-            return self._defaults['ConfigureGain']['return']
-        return self._defaults['ConfigureGain']['return']
-
-    def niFgen_ConfigureOperationMode(self, vi, channel_name, operation_mode):  # noqa: N802
-        if self._defaults['ConfigureOperationMode']['return'] != 0:
-            return self._defaults['ConfigureOperationMode']['return']
-        return self._defaults['ConfigureOperationMode']['return']
-
-    def niFgen_ConfigureOutputEnabled(self, vi, channel_name, enabled):  # noqa: N802
-        if self._defaults['ConfigureOutputEnabled']['return'] != 0:
-            return self._defaults['ConfigureOutputEnabled']['return']
-        return self._defaults['ConfigureOutputEnabled']['return']
-
-    def niFgen_ConfigureOutputImpedance(self, vi, channel_name, impedance):  # noqa: N802
-        if self._defaults['ConfigureOutputImpedance']['return'] != 0:
-            return self._defaults['ConfigureOutputImpedance']['return']
-        return self._defaults['ConfigureOutputImpedance']['return']
-
-    def niFgen_ConfigureOutputMode(self, vi, output_mode):  # noqa: N802
-        if self._defaults['ConfigureOutputMode']['return'] != 0:
-            return self._defaults['ConfigureOutputMode']['return']
-        return self._defaults['ConfigureOutputMode']['return']
-
-    def niFgen_ConfigureP2PEndpointFullnessStartTrigger(self, vi, p2p_endpoint_fullness_level):  # noqa: N802
-        if self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return'] != 0:
-            return self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return']
-        return self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return']
-
-    def niFgen_ConfigureRefClockFrequency(self, vi, reference_clock_frequency):  # noqa: N802
-        if self._defaults['ConfigureRefClockFrequency']['return'] != 0:
-            return self._defaults['ConfigureRefClockFrequency']['return']
-        return self._defaults['ConfigureRefClockFrequency']['return']
-
-    def niFgen_ConfigureRefClockSource(self, vi, reference_clock_source):  # noqa: N802
-        if self._defaults['ConfigureRefClockSource']['return'] != 0:
-            return self._defaults['ConfigureRefClockSource']['return']
-        return self._defaults['ConfigureRefClockSource']['return']
-
-    def niFgen_ConfigureReferenceClock(self, vi, reference_clock_source, reference_clock_frequency):  # noqa: N802
-        if self._defaults['ConfigureReferenceClock']['return'] != 0:
-            return self._defaults['ConfigureReferenceClock']['return']
-        return self._defaults['ConfigureReferenceClock']['return']
-
-    def niFgen_ConfigureSampleClockSource(self, vi, sample_clock_source):  # noqa: N802
-        if self._defaults['ConfigureSampleClockSource']['return'] != 0:
-            return self._defaults['ConfigureSampleClockSource']['return']
-        return self._defaults['ConfigureSampleClockSource']['return']
-
-    def niFgen_ConfigureSampleRate(self, vi, sample_rate):  # noqa: N802
-        if self._defaults['ConfigureSampleRate']['return'] != 0:
-            return self._defaults['ConfigureSampleRate']['return']
-        return self._defaults['ConfigureSampleRate']['return']
-
-    def niFgen_ConfigureSoftwareEdgeScriptTrigger(self, vi, trigger_id):  # noqa: N802
-        if self._defaults['ConfigureSoftwareEdgeScriptTrigger']['return'] != 0:
-            return self._defaults['ConfigureSoftwareEdgeScriptTrigger']['return']
-        return self._defaults['ConfigureSoftwareEdgeScriptTrigger']['return']
-
-    def niFgen_ConfigureSoftwareEdgeStartTrigger(self, vi):  # noqa: N802
-        if self._defaults['ConfigureSoftwareEdgeStartTrigger']['return'] != 0:
-            return self._defaults['ConfigureSoftwareEdgeStartTrigger']['return']
-        return self._defaults['ConfigureSoftwareEdgeStartTrigger']['return']
-
     def niFgen_ConfigureStandardWaveform(self, vi, channel_name, waveform, amplitude, dc_offset, frequency, start_phase):  # noqa: N802
         if self._defaults['ConfigureStandardWaveform']['return'] != 0:
             return self._defaults['ConfigureStandardWaveform']['return']
         return self._defaults['ConfigureStandardWaveform']['return']
-
-    def niFgen_ConfigureSynchronization(self, vi, channel_name, synchronization_source):  # noqa: N802
-        if self._defaults['ConfigureSynchronization']['return'] != 0:
-            return self._defaults['ConfigureSynchronization']['return']
-        return self._defaults['ConfigureSynchronization']['return']
-
-    def niFgen_ConfigureTriggerMode(self, vi, channel_name, trigger_mode):  # noqa: N802
-        if self._defaults['ConfigureTriggerMode']['return'] != 0:
-            return self._defaults['ConfigureTriggerMode']['return']
-        return self._defaults['ConfigureTriggerMode']['return']
-
-    def niFgen_ConfigureTriggerSource(self, vi, channel_name, trigger_source):  # noqa: N802
-        if self._defaults['ConfigureTriggerSource']['return'] != 0:
-            return self._defaults['ConfigureTriggerSource']['return']
-        return self._defaults['ConfigureTriggerSource']['return']
-
-    def niFgen_ConfigureUpdateClockSource(self, vi, update_clock_source):  # noqa: N802
-        if self._defaults['ConfigureUpdateClockSource']['return'] != 0:
-            return self._defaults['ConfigureUpdateClockSource']['return']
-        return self._defaults['ConfigureUpdateClockSource']['return']
 
     def niFgen_CreateAdvancedArbSequence(self, vi, sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array, coerced_markers_array, sequence_handle):  # noqa: N802
         if self._defaults['CreateAdvancedArbSequence']['return'] != 0:
@@ -1103,16 +949,10 @@ class SideEffectsHelper(object):
         mock_library.niFgen_ClearUserStandardWaveform.return_value = 0
         mock_library.niFgen_Commit.side_effect = MockFunctionCallError("niFgen_Commit")
         mock_library.niFgen_Commit.return_value = 0
-        mock_library.niFgen_ConfigureAmplitude.side_effect = MockFunctionCallError("niFgen_ConfigureAmplitude")
-        mock_library.niFgen_ConfigureAmplitude.return_value = 0
         mock_library.niFgen_ConfigureArbSequence.side_effect = MockFunctionCallError("niFgen_ConfigureArbSequence")
         mock_library.niFgen_ConfigureArbSequence.return_value = 0
         mock_library.niFgen_ConfigureArbWaveform.side_effect = MockFunctionCallError("niFgen_ConfigureArbWaveform")
         mock_library.niFgen_ConfigureArbWaveform.return_value = 0
-        mock_library.niFgen_ConfigureChannels.side_effect = MockFunctionCallError("niFgen_ConfigureChannels")
-        mock_library.niFgen_ConfigureChannels.return_value = 0
-        mock_library.niFgen_ConfigureClockMode.side_effect = MockFunctionCallError("niFgen_ConfigureClockMode")
-        mock_library.niFgen_ConfigureClockMode.return_value = 0
         mock_library.niFgen_ConfigureCustomFIRFilterCoefficients.side_effect = MockFunctionCallError("niFgen_ConfigureCustomFIRFilterCoefficients")
         mock_library.niFgen_ConfigureCustomFIRFilterCoefficients.return_value = 0
         mock_library.niFgen_ConfigureDigitalEdgeScriptTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureDigitalEdgeScriptTrigger")
@@ -1121,46 +961,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_ConfigureDigitalEdgeStartTrigger.return_value = 0
         mock_library.niFgen_ConfigureDigitalLevelScriptTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureDigitalLevelScriptTrigger")
         mock_library.niFgen_ConfigureDigitalLevelScriptTrigger.return_value = 0
-        mock_library.niFgen_ConfigureFreqList.side_effect = MockFunctionCallError("niFgen_ConfigureFreqList")
-        mock_library.niFgen_ConfigureFreqList.return_value = 0
-        mock_library.niFgen_ConfigureFrequency.side_effect = MockFunctionCallError("niFgen_ConfigureFrequency")
-        mock_library.niFgen_ConfigureFrequency.return_value = 0
-        mock_library.niFgen_ConfigureGain.side_effect = MockFunctionCallError("niFgen_ConfigureGain")
-        mock_library.niFgen_ConfigureGain.return_value = 0
-        mock_library.niFgen_ConfigureOperationMode.side_effect = MockFunctionCallError("niFgen_ConfigureOperationMode")
-        mock_library.niFgen_ConfigureOperationMode.return_value = 0
-        mock_library.niFgen_ConfigureOutputEnabled.side_effect = MockFunctionCallError("niFgen_ConfigureOutputEnabled")
-        mock_library.niFgen_ConfigureOutputEnabled.return_value = 0
-        mock_library.niFgen_ConfigureOutputImpedance.side_effect = MockFunctionCallError("niFgen_ConfigureOutputImpedance")
-        mock_library.niFgen_ConfigureOutputImpedance.return_value = 0
-        mock_library.niFgen_ConfigureOutputMode.side_effect = MockFunctionCallError("niFgen_ConfigureOutputMode")
-        mock_library.niFgen_ConfigureOutputMode.return_value = 0
-        mock_library.niFgen_ConfigureP2PEndpointFullnessStartTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureP2PEndpointFullnessStartTrigger")
-        mock_library.niFgen_ConfigureP2PEndpointFullnessStartTrigger.return_value = 0
-        mock_library.niFgen_ConfigureRefClockFrequency.side_effect = MockFunctionCallError("niFgen_ConfigureRefClockFrequency")
-        mock_library.niFgen_ConfigureRefClockFrequency.return_value = 0
-        mock_library.niFgen_ConfigureRefClockSource.side_effect = MockFunctionCallError("niFgen_ConfigureRefClockSource")
-        mock_library.niFgen_ConfigureRefClockSource.return_value = 0
-        mock_library.niFgen_ConfigureReferenceClock.side_effect = MockFunctionCallError("niFgen_ConfigureReferenceClock")
-        mock_library.niFgen_ConfigureReferenceClock.return_value = 0
-        mock_library.niFgen_ConfigureSampleClockSource.side_effect = MockFunctionCallError("niFgen_ConfigureSampleClockSource")
-        mock_library.niFgen_ConfigureSampleClockSource.return_value = 0
-        mock_library.niFgen_ConfigureSampleRate.side_effect = MockFunctionCallError("niFgen_ConfigureSampleRate")
-        mock_library.niFgen_ConfigureSampleRate.return_value = 0
-        mock_library.niFgen_ConfigureSoftwareEdgeScriptTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureSoftwareEdgeScriptTrigger")
-        mock_library.niFgen_ConfigureSoftwareEdgeScriptTrigger.return_value = 0
-        mock_library.niFgen_ConfigureSoftwareEdgeStartTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureSoftwareEdgeStartTrigger")
-        mock_library.niFgen_ConfigureSoftwareEdgeStartTrigger.return_value = 0
         mock_library.niFgen_ConfigureStandardWaveform.side_effect = MockFunctionCallError("niFgen_ConfigureStandardWaveform")
         mock_library.niFgen_ConfigureStandardWaveform.return_value = 0
-        mock_library.niFgen_ConfigureSynchronization.side_effect = MockFunctionCallError("niFgen_ConfigureSynchronization")
-        mock_library.niFgen_ConfigureSynchronization.return_value = 0
-        mock_library.niFgen_ConfigureTriggerMode.side_effect = MockFunctionCallError("niFgen_ConfigureTriggerMode")
-        mock_library.niFgen_ConfigureTriggerMode.return_value = 0
-        mock_library.niFgen_ConfigureTriggerSource.side_effect = MockFunctionCallError("niFgen_ConfigureTriggerSource")
-        mock_library.niFgen_ConfigureTriggerSource.return_value = 0
-        mock_library.niFgen_ConfigureUpdateClockSource.side_effect = MockFunctionCallError("niFgen_ConfigureUpdateClockSource")
-        mock_library.niFgen_ConfigureUpdateClockSource.return_value = 0
         mock_library.niFgen_CreateAdvancedArbSequence.side_effect = MockFunctionCallError("niFgen_CreateAdvancedArbSequence")
         mock_library.niFgen_CreateAdvancedArbSequence.return_value = 0
         mock_library.niFgen_CreateArbSequence.side_effect = MockFunctionCallError("niFgen_CreateArbSequence")
