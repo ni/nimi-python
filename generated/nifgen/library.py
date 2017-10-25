@@ -91,12 +91,14 @@ class Library(object):
         self.niFgen_GetAttributeViReal64_cfunc = None
         self.niFgen_GetAttributeViString_cfunc = None
         self.niFgen_GetError_cfunc = None
+        self.niFgen_GetExtCalLastDateAndTime_cfunc = None
+        self.niFgen_GetExtCalLastTemp_cfunc = None
+        self.niFgen_GetExtCalRecommendedInterval_cfunc = None
         self.niFgen_GetFIRFilterCoefficients_cfunc = None
         self.niFgen_GetHardwareState_cfunc = None
         self.niFgen_GetSelfCalLastDateAndTime_cfunc = None
         self.niFgen_GetSelfCalLastTemp_cfunc = None
         self.niFgen_GetSelfCalSupported_cfunc = None
-        self.niFgen_InitWithOptions_cfunc = None
         self.niFgen_InitializeAnalogOutputCalibration_cfunc = None
         self.niFgen_InitializeCalADCCalibration_cfunc = None
         self.niFgen_InitializeFlatnessCalibration_cfunc = None
@@ -743,6 +745,30 @@ class Library(object):
                 self.niFgen_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetError_cfunc(vi, error_code, error_description_buffer_size, error_description)
 
+    def niFgen_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_GetExtCalLastDateAndTime_cfunc is None:
+                self.niFgen_GetExtCalLastDateAndTime_cfunc = self._library.niFgen_GetExtCalLastDateAndTime
+                self.niFgen_GetExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFgen_GetExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_GetExtCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
+
+    def niFgen_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_GetExtCalLastTemp_cfunc is None:
+                self.niFgen_GetExtCalLastTemp_cfunc = self._library.niFgen_GetExtCalLastTemp
+                self.niFgen_GetExtCalLastTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFgen_GetExtCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_GetExtCalLastTemp_cfunc(vi, temperature)
+
+    def niFgen_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_GetExtCalRecommendedInterval_cfunc is None:
+                self.niFgen_GetExtCalRecommendedInterval_cfunc = self._library.niFgen_GetExtCalRecommendedInterval
+                self.niFgen_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFgen_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_GetExtCalRecommendedInterval_cfunc(vi, months)
+
     def niFgen_GetFIRFilterCoefficients(self, vi, channel_name, array_size, coefficients_array, number_of_coefficients_read):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetFIRFilterCoefficients_cfunc is None:
@@ -782,14 +808,6 @@ class Library(object):
                 self.niFgen_GetSelfCalSupported_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFgen_GetSelfCalSupported_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetSelfCalSupported_cfunc(vi, self_cal_supported)
-
-    def niFgen_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_InitWithOptions_cfunc is None:
-                self.niFgen_InitWithOptions_cfunc = self._library.niFgen_InitWithOptions
-                self.niFgen_InitWithOptions_cfunc.argtypes = [ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
-                self.niFgen_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, vi)
 
     def niFgen_InitializeAnalogOutputCalibration(self, vi):  # noqa: N802
         with self._func_lock:

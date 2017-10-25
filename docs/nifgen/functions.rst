@@ -3478,6 +3478,102 @@ nifgen.Session methods
 
     :type output_terminal: string
 
+.. function:: get_ext_cal_last_date_and_time()
+
+    Returns the date and time of the last successful external calibration.
+    The time returned is 24-hour (military) local time; for example, if the
+    device was calibrated at 2:30 PM, this function returns 14 for the
+    **hour** parameter and 30 for the **minute** parameter.
+
+    
+
+
+
+    :rtype: tuple (year, month, day, hour, minute)
+
+        WHERE
+
+        year (int): 
+
+
+            Specifies the year of the last successful calibration.
+
+            
+
+
+        month (int): 
+
+
+            Specifies the month of the last successful calibration.
+
+            
+
+
+        day (int): 
+
+
+            Specifies the day of the last successful calibration.
+
+            
+
+
+        hour (int): 
+
+
+            Specifies the hour of the last successful calibration.
+
+            
+
+
+        minute (int): 
+
+
+            Specifies the minute of the last successful calibration.
+
+            
+
+
+
+.. function:: get_ext_cal_last_temp()
+
+    Returns the temperature at the last successful external calibration. The
+    temperature is returned in degrees Celsius.
+
+    
+
+
+
+    :rtype: float
+    :return:
+
+
+            Specifies the temperature at the last successful calibration in degrees
+            Celsius.
+
+            
+
+
+
+.. function:: get_ext_cal_recommended_interval()
+
+    Returns the recommended interval between external calibrations in
+    months.
+
+    
+
+
+
+    :rtype: int
+    :return:
+
+
+            Specifies the recommended interval between external calibrations in
+            months.
+
+            
+
+
+
 .. function:: get_fir_filter_coefficients(array_size, coefficients_array, number_of_coefficients_read)
 
     | Returns the FIR filter coefficients used by the onboard signal
@@ -3723,161 +3819,6 @@ nifgen.Session methods
     nifgen\_InitExtCal function.
 
     
-
-
-
-.. function:: initialize_with_channels(resource_name, reset_device, option_string)
-
-    Creates and returns a new NI-FGEN session to the specified channel of a
-    waveform generator that is used in all subsequent NI-FGEN function
-    calls.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].initialize_with_channels(resource_name, reset_device, option_string)
-
-
-    :param resource_name:
-
-
-        .. caution:: Traditional NI-DAQ and NI-DAQmx device names are not case-sensitive.
-            However, all IVI names, such as logical names, are case-sensitive. If
-            you use logical names, driver session names, or virtual names in your
-            program, you must ensure that the name you use matches the name in the
-            IVI Configuration Store file exactly, without any variations in the case
-            of the characters.
-
-        | Specifies the resource name of the device to initialize.
-
-        For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
-        the device number assigned by MAX, as shown in Example 1.
-
-        For NI-DAQmx devices, the syntax is just the device name specified in
-        MAX, as shown in Example 2. Typical default names for NI-DAQmx devices
-        in MAX are Dev1 or PXI1Slot1. You can rename an NI-DAQmx device by
-        right-clicking on the name in MAX and entering a new name.
-
-        An alternate syntax for NI-DAQmx devices consists of DAQ::\ *NI-DAQmx
-        device name*, as shown in Example 3. This naming convention allows for
-        the use of an NI-DAQmx device in an application that was originally
-        designed for a Traditional NI-DAQ device. For example, if the
-        application expects DAQ::1, you can rename the NI-DAQmx device to 1 in
-        MAX and pass in DAQ::1 for the resource name, as shown in Example 4.
-
-        If you use the DAQ::\ *n* syntax and an NI-DAQmx device name already
-        exists with that same name, the NI-DAQmx device is matched first.
-
-        You can also pass in the name of an IVI logical name or an IVI virtual
-        name configured with the IVI Configuration utility, as shown in Example
-        5. A logical name identifies a particular virtual instrument. A virtual
-        name identifies a specific device and specifies the initial settings for
-        the session.
-
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-        | Example # | Device Type                          | Syntax                 | Variable                        |
-        +===========+======================================+========================+=================================+
-        | 1         | Traditional NI-DAQ device            | DAQ::\ *1*             | (*1* = device number)           |
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-        | 2         | NI-DAQmx device                      | *myDAQmxDevice*        | (*myDAQmxDevice* = device name) |
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-        | 3         | NI-DAQmx device                      | DAQ::\ *myDAQmxDevice* | (*myDAQmxDevice* = device name) |
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-        | 4         | NI-DAQmx device                      | DAQ::\ *2*             | (*2* = device name)             |
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-        | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-
-
-    :type resource_name: string
-    :param reset_device:
-
-
-        Specifies whether you want to reset the device during the initialization
-        procedure. VI\_TRUE specifies that the device is reset and performs the
-        same function as the nifgen\_Reset function.
-
-        ****Defined Values****
-
-        **Default Value**: VI\_FALSE
-
-        +-----------+---------------------+
-        | VI\_TRUE  | Reset device        |
-        +-----------+---------------------+
-        | VI\_FALSE | Do not reset device |
-        +-----------+---------------------+
-
-
-    :type reset_device: bool
-    :param option_string:
-
-
-        Sets the initial value of certain session attributes.
-
-        The syntax for **optionString** is
-
-        <*attributeName*> = <*value*>
-
-        where
-
-        *attributeName* is the name of the attribute and *value* is the value to
-        which the attribute is set
-
-        To set multiple attributes, separate them with a comma.
-
-        If you pass NULL or an empty string for this parameter, the session uses
-        the default values for these attributes. You can override the default
-        values by assigning a value explicitly in a string that you pass for
-        this parameter.
-
-        You do not have to specify all of the attributes and may leave any of
-        them out. However, if you do not specify one of the attributes, its
-        default value is used.
-
-        If simulation is enabled (Simulate=1), you may specify the device that
-        you want to simulate. To specify a device, enter the following syntax in
-        **optionString**.
-
-        DriverSetup=Model:<*driver model number*>;Channels:<*channel
-        names*>;BoardType:<*module type*>;MemorySize:<*size of onboard memory in
-        bytes*>
-
-        **Syntax Examples**
-
-        **Attributes and **Defined Values****
-
-        **Default Values**: "Simulate=0,RangeCheck=1,QueryInstrStatus=1,Cache=1"
-
-        +------------------+---------------------------------------------+---------------------+
-        | Attribute Name   | Attribute                                   | Values              |
-        +==================+=============================================+=====================+
-        | RangeCheck       | :py:data:`nifgen.RANGE\_CHECK`              | VI\_TRUE, VI\_FALSE |
-        +------------------+---------------------------------------------+---------------------+
-        | QueryInstrStatus | :py:data:`nifgen.QUERY\_INSTRUMENT\_STATUS` | VI\_TRUE, VI\_FALSE |
-        +------------------+---------------------------------------------+---------------------+
-        | Cache            | :py:data:`nifgen.cache`                     | VI\_TRUE, VI\_FALSE |
-        +------------------+---------------------------------------------+---------------------+
-        | Simulate         | :py:data:`nifgen.simulate`                  | VI\_TRUE, VI\_FALSE |
-        +------------------+---------------------------------------------+---------------------+
-
-
-    :type option_string: string
-
-    :rtype: int
-    :return:
-
-
-            Returns a session handle that you can use to identify the device in all
-            subsequent NI-FGEN function calls.
-
-            
 
 
 

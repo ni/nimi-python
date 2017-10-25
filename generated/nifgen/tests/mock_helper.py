@@ -184,6 +184,19 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['errorDescription'] = None
+        self._defaults['GetExtCalLastDateAndTime'] = {}
+        self._defaults['GetExtCalLastDateAndTime']['return'] = 0
+        self._defaults['GetExtCalLastDateAndTime']['Year'] = None
+        self._defaults['GetExtCalLastDateAndTime']['Month'] = None
+        self._defaults['GetExtCalLastDateAndTime']['Day'] = None
+        self._defaults['GetExtCalLastDateAndTime']['Hour'] = None
+        self._defaults['GetExtCalLastDateAndTime']['Minute'] = None
+        self._defaults['GetExtCalLastTemp'] = {}
+        self._defaults['GetExtCalLastTemp']['return'] = 0
+        self._defaults['GetExtCalLastTemp']['Temperature'] = None
+        self._defaults['GetExtCalRecommendedInterval'] = {}
+        self._defaults['GetExtCalRecommendedInterval']['return'] = 0
+        self._defaults['GetExtCalRecommendedInterval']['Months'] = None
         self._defaults['GetFIRFilterCoefficients'] = {}
         self._defaults['GetFIRFilterCoefficients']['return'] = 0
         self._defaults['GetHardwareState'] = {}
@@ -202,9 +215,6 @@ class SideEffectsHelper(object):
         self._defaults['GetSelfCalSupported'] = {}
         self._defaults['GetSelfCalSupported']['return'] = 0
         self._defaults['GetSelfCalSupported']['selfCalSupported'] = None
-        self._defaults['InitWithOptions'] = {}
-        self._defaults['InitWithOptions']['return'] = 0
-        self._defaults['InitWithOptions']['vi'] = None
         self._defaults['InitializeAnalogOutputCalibration'] = {}
         self._defaults['InitializeAnalogOutputCalibration']['return'] = 0
         self._defaults['InitializeCalADCCalibration'] = {}
@@ -760,6 +770,42 @@ class SideEffectsHelper(object):
         error_description.value = self._defaults['GetError']['errorDescription'].encode('ascii')
         return self._defaults['GetError']['return']
 
+    def niFgen_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
+        if self._defaults['GetExtCalLastDateAndTime']['return'] != 0:
+            return self._defaults['GetExtCalLastDateAndTime']['return']
+        if self._defaults['GetExtCalLastDateAndTime']['Year'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Year')
+        year.contents.value = self._defaults['GetExtCalLastDateAndTime']['Year']
+        if self._defaults['GetExtCalLastDateAndTime']['Month'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Month')
+        month.contents.value = self._defaults['GetExtCalLastDateAndTime']['Month']
+        if self._defaults['GetExtCalLastDateAndTime']['Day'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Day')
+        day.contents.value = self._defaults['GetExtCalLastDateAndTime']['Day']
+        if self._defaults['GetExtCalLastDateAndTime']['Hour'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Hour')
+        hour.contents.value = self._defaults['GetExtCalLastDateAndTime']['Hour']
+        if self._defaults['GetExtCalLastDateAndTime']['Minute'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Minute')
+        minute.contents.value = self._defaults['GetExtCalLastDateAndTime']['Minute']
+        return self._defaults['GetExtCalLastDateAndTime']['return']
+
+    def niFgen_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
+        if self._defaults['GetExtCalLastTemp']['return'] != 0:
+            return self._defaults['GetExtCalLastTemp']['return']
+        if self._defaults['GetExtCalLastTemp']['Temperature'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastTemp", param='Temperature')
+        temperature.contents.value = self._defaults['GetExtCalLastTemp']['Temperature']
+        return self._defaults['GetExtCalLastTemp']['return']
+
+    def niFgen_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
+        if self._defaults['GetExtCalRecommendedInterval']['return'] != 0:
+            return self._defaults['GetExtCalRecommendedInterval']['return']
+        if self._defaults['GetExtCalRecommendedInterval']['Months'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalRecommendedInterval", param='Months')
+        months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
+        return self._defaults['GetExtCalRecommendedInterval']['return']
+
     def niFgen_GetFIRFilterCoefficients(self, vi, channel_name, array_size, coefficients_array, number_of_coefficients_read):  # noqa: N802
         if self._defaults['GetFIRFilterCoefficients']['return'] != 0:
             return self._defaults['GetFIRFilterCoefficients']['return']
@@ -808,14 +854,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_GetSelfCalSupported", param='selfCalSupported')
         self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
         return self._defaults['GetSelfCalSupported']['return']
-
-    def niFgen_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
-        if self._defaults['InitWithOptions']['return'] != 0:
-            return self._defaults['InitWithOptions']['return']
-        if self._defaults['InitWithOptions']['vi'] is None:
-            raise MockFunctionCallError("niFgen_InitWithOptions", param='vi')
-        vi.contents.value = self._defaults['InitWithOptions']['vi']
-        return self._defaults['InitWithOptions']['return']
 
     def niFgen_InitializeAnalogOutputCalibration(self, vi):  # noqa: N802
         if self._defaults['InitializeAnalogOutputCalibration']['return'] != 0:
@@ -1237,6 +1275,12 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetAttributeViString.return_value = 0
         mock_library.niFgen_GetError.side_effect = MockFunctionCallError("niFgen_GetError")
         mock_library.niFgen_GetError.return_value = 0
+        mock_library.niFgen_GetExtCalLastDateAndTime.side_effect = MockFunctionCallError("niFgen_GetExtCalLastDateAndTime")
+        mock_library.niFgen_GetExtCalLastDateAndTime.return_value = 0
+        mock_library.niFgen_GetExtCalLastTemp.side_effect = MockFunctionCallError("niFgen_GetExtCalLastTemp")
+        mock_library.niFgen_GetExtCalLastTemp.return_value = 0
+        mock_library.niFgen_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niFgen_GetExtCalRecommendedInterval")
+        mock_library.niFgen_GetExtCalRecommendedInterval.return_value = 0
         mock_library.niFgen_GetFIRFilterCoefficients.side_effect = MockFunctionCallError("niFgen_GetFIRFilterCoefficients")
         mock_library.niFgen_GetFIRFilterCoefficients.return_value = 0
         mock_library.niFgen_GetHardwareState.side_effect = MockFunctionCallError("niFgen_GetHardwareState")
@@ -1247,8 +1291,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetSelfCalLastTemp.return_value = 0
         mock_library.niFgen_GetSelfCalSupported.side_effect = MockFunctionCallError("niFgen_GetSelfCalSupported")
         mock_library.niFgen_GetSelfCalSupported.return_value = 0
-        mock_library.niFgen_InitWithOptions.side_effect = MockFunctionCallError("niFgen_InitWithOptions")
-        mock_library.niFgen_InitWithOptions.return_value = 0
         mock_library.niFgen_InitializeAnalogOutputCalibration.side_effect = MockFunctionCallError("niFgen_InitializeAnalogOutputCalibration")
         mock_library.niFgen_InitializeAnalogOutputCalibration.return_value = 0
         mock_library.niFgen_InitializeCalADCCalibration.side_effect = MockFunctionCallError("niFgen_InitializeCalADCCalibration")

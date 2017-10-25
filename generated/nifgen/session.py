@@ -4132,8 +4132,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def initialize_with_channels(self, resource_name, reset_device, option_string):
-        '''initialize_with_channels
+    def _initialize_with_channels(self, resource_name, reset_device, option_string):
+        '''_initialize_with_channels
 
         Creates and returns a new NI-FGEN session to the specified channel of a
         waveform generator that is used in all subsequent NI-FGEN function
@@ -4145,7 +4145,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].initialize_with_channels(resource_name, reset_device, option_string)
+            session['0,1']._initialize_with_channels(resource_name, reset_device, option_string)
 
         Args:
             resource_name (string): Caution:
@@ -5054,10 +5054,10 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-FGEN session to a National Instruments Signal Generator.'''
 
-    def __init__(self, resource_name, id_query, reset_device, option_string):
+    def __init__(self, resource_name, reset_device, option_string):
         super(Session, self).__init__(repeated_capability='')
-        self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._vi = 0  # This must be set before calling _initialize_with_channels().
+        self._vi = self._initialize_with_channels(resource_name, reset_device, option_string)
         self._is_frozen = True
 
     def __enter__(self):
@@ -6491,6 +6491,63 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last successful external calibration.
+        The time returned is 24-hour (military) local time; for example, if the
+        device was calibrated at 2:30 PM, this function returns 14 for the
+        **hour** parameter and 30 for the **minute** parameter.
+
+        Returns:
+            year (int): Specifies the year of the last successful calibration.
+            month (int): Specifies the month of the last successful calibration.
+            day (int): Specifies the day of the last successful calibration.
+            hour (int): Specifies the hour of the last successful calibration.
+            minute (int): Specifies the minute of the last successful calibration.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        year_ctype = visatype.ViInt32()  # case 13
+        month_ctype = visatype.ViInt32()  # case 13
+        day_ctype = visatype.ViInt32()  # case 13
+        hour_ctype = visatype.ViInt32()  # case 13
+        minute_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_GetExtCalLastDateAndTime(vi_ctype, ctypes.pointer(year_ctype), ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+
+    def get_ext_cal_last_temp(self):
+        '''get_ext_cal_last_temp
+
+        Returns the temperature at the last successful external calibration. The
+        temperature is returned in degrees Celsius.
+
+        Returns:
+            temperature (float): Specifies the temperature at the last successful calibration in degrees
+                Celsius.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        temperature_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niFgen_GetExtCalLastTemp(vi_ctype, ctypes.pointer(temperature_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(temperature_ctype.value)
+
+    def get_ext_cal_recommended_interval(self):
+        '''get_ext_cal_recommended_interval
+
+        Returns the recommended interval between external calibrations in
+        months.
+
+        Returns:
+            months (int): Specifies the recommended interval between external calibrations in
+                months.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        months_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_GetExtCalRecommendedInterval(vi_ctype, ctypes.pointer(months_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(months_ctype.value)
+
     def get_hardware_state(self):
         '''get_hardware_state
 
@@ -6591,167 +6648,6 @@ class Session(_SessionBase):
         error_code = self._library.niFgen_GetSelfCalSupported(vi_ctype, ctypes.pointer(self_cal_supported_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
-
-    def _init_with_options(self, resource_name, id_query, reset_device, option_string):
-        '''_init_with_options
-
-        Performs the following initialization actions:
-
-        -  Creates a new IVI instrument session and optionally sets the initial
-           state of the following session attributes:
-           RANGE_CHECK, QUERY_INSTRUMENT_STATUS,
-           cache, simulate, and
-           RECORD_COERCIONS.
-        -  Opens a session to the specified device using the interface and
-           address that you specify for **resourceName**.
-        -  If **IDQuery** is set to VI_TRUE, this function queries the device
-           ID and checks that it is valid for NI-FGEN.
-        -  If **resetDevice** is set to VI_TRUE, this function resets the
-           device to a known state.
-        -  Sends initialization commands to set the instrument to the state
-           necessary for NI-FGEN operation.
-        -  Returns a session handle that you can use to identify the device in
-           all subsequent NI-FGEN function calls.
-
-        Args:
-            resource_name (string): Caution:
-                Traditional NI-DAQ and NI-DAQmx device names are not case-sensitive.
-                However, all IVI names, such as logical names, are case-sensitive. If
-                you use logical names, driver session names, or virtual names in your
-                program, you must ensure that the name you use matches the name in the
-                IVI Configuration Store file exactly, without any variations in the case
-                of the characters.
-
-                | Specifies the resource name of the device to initialize.
-
-                For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
-                the device number assigned by MAX, as shown in Example 1.
-
-                For NI-DAQmx devices, the syntax is just the device name specified in
-                MAX, as shown in Example 2. Typical default names for NI-DAQmx devices
-                in MAX are Dev1 or PXI1Slot1. You can rename an NI-DAQmx device by
-                right-clicking on the name in MAX and entering a new name.
-
-                An alternate syntax for NI-DAQmx devices consists of DAQ::\ *NI-DAQmx
-                device name*, as shown in Example 3. This naming convention allows for
-                the use of an NI-DAQmx device in an application that was originally
-                designed for a Traditional NI-DAQ device. For example, if the
-                application expects DAQ::1, you can rename the NI-DAQmx device to 1 in
-                MAX and pass in DAQ::1 for the resource name, as shown in Example 4.
-
-                If you use the DAQ::\ *n* syntax and an NI-DAQmx device name already
-                exists with that same name, the NI-DAQmx device is matched first.
-
-                You can also pass in the name of an IVI logical name or an IVI virtual
-                name configured with the IVI Configuration utility, as shown in Example
-                5. A logical name identifies a particular virtual instrument. A virtual
-                name identifies a specific device and specifies the initial settings for
-                the session.
-
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | Example # | Device Type                          | Syntax                 | Variable                        |
-                +===========+======================================+========================+=================================+
-                | 1         | Traditional NI-DAQ device            | DAQ::\ *1*             | (*1* = device number)           |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 2         | NI-DAQmx device                      | *myDAQmxDevice*        | (*myDAQmxDevice* = device name) |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 3         | NI-DAQmx device                      | DAQ::\ *myDAQmxDevice* | (*myDAQmxDevice* = device name) |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 4         | NI-DAQmx device                      | DAQ::\ *2*             | (*2* = device name)             |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-            id_query (bool): Specifies whether you want NI-FGEN to perform an ID query.
-
-                When you set this parameter to VI_TRUE, NI-FGEN verifies that the
-                device that you initialize is a type that it supports.
-
-                Circumstances can arise where sending an ID query to the device is
-                undesirable. When you set this parameter to VI_FALSE, the function
-                initializes the device without performing an ID query.
-
-                ****Defined Values****
-
-                **Default Value**: VI_TRUE
-
-                +----------+------------------+
-                | VI_TRUE  | Perform ID query |
-                +----------+------------------+
-                | VI_FALSE | Skip ID query    |
-                +----------+------------------+
-            reset_device (bool): Specifies whether you want to reset the device during the initialization
-                procedure. VI_TRUE specifies that the device is reset and performs the
-                same function as the nifgen_Reset function.
-
-                ****Defined Values****
-
-                **Default Value**: VI_TRUE
-
-                +----------+---------------------+
-                | VI_TRUE  | Reset device        |
-                +----------+---------------------+
-                | VI_FALSE | Do not reset device |
-                +----------+---------------------+
-            option_string (string): Sets the initial value of certain session attributes.
-
-                The syntax for **optionString** is
-
-                <*attributeName*> = <*value*>
-
-                where
-
-                *attributeName* is the name of the attribute and *value* is the value to
-                which the attribute is set
-
-                To set multiple attributes, separate them with a comma.
-
-                If you pass NULL or an empty string for this parameter, the session uses
-                the default values for these attributes. You can override the default
-                values by assigning a value explicitly in a string that you pass for
-                this parameter.
-
-                You do not have to specify all of the attributes and may leave any of
-                them out. However, if you do not specify one of the attributes, its
-                default value is used.
-
-                If simulation is enabled (Simulate=1), you may specify the device that
-                you want to simulate. To specify a device, enter the following syntax in
-                **optionString**.
-
-                DriverSetup=Model:<*driver model number*>;Channels:<*channel
-                names*>;BoardType:<*module type*>;MemorySize:<*size of onboard memory in
-                bytes*>
-
-                **Syntax Examples**
-
-                **Attributes and **Defined Values****
-
-                **Default Values**: "Simulate=0,RangeCheck=1,QueryInstrStatus=1,Cache=1"
-
-                +------------------+-------------------------+-------------------+
-                | Attribute Name   | Attribute               | Values            |
-                +==================+=========================+===================+
-                | RangeCheck       | RANGE_CHECK             | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
-                | QueryInstrStatus | QUERY_INSTRUMENT_STATUS | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
-                | Cache            | cache                   | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
-                | Simulate         | simulate                | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
-
-        Returns:
-            vi (int): Returns a session handle that you can use to identify the device in all
-                subsequent NI-FGEN function calls.
-        '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
-        id_query_ctype = visatype.ViBoolean(id_query)  # case 8
-        reset_device_ctype = visatype.ViBoolean(reset_device)  # case 8
-        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case 3
-        vi_ctype = visatype.ViSession()  # case 13
-        error_code = self._library.niFgen_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, ctypes.pointer(vi_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(vi_ctype.value)
 
     def initialize_analog_output_calibration(self):
         '''initialize_analog_output_calibration
