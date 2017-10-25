@@ -79,7 +79,7 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_param, params)
 %    if ivi_dance_param is not None:
         if self._defaults['${func_name}']['${ivi_dance_param['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${ivi_dance_param['name']}')
-        if ${ivi_dance_size_param['python_name']} == 0:
+        if ${ivi_dance_size_param['python_name']}.value == 0:
             return len(self._defaults['${func_name}']['${ivi_dance_param['name']}'])
         ${ivi_dance_param['python_name']}.value = self._defaults['${func_name}']['${ivi_dance_param['name']}'].encode('ascii')
 %    endif

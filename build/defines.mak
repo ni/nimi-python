@@ -57,6 +57,7 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     session.py \
     errors.py \
     tests/mock_helper.py \
+    tests/matchers.py \
     __init__.py \
 
 DEFAULT_PY_FILES_TO_COPY := \
