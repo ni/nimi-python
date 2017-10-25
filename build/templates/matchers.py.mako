@@ -160,11 +160,6 @@ class ViBooleanBufferMatcher(_BufferMatcher):
         _BufferMatcher.__init__(self, visatype.ViBoolean, expected_size_or_value)
 
 
-class ViSessionBufferMatcher(_BufferMatcher):
-    def __init__(self, expected_size_or_value):
-        _BufferMatcher.__init__(self, visatype.ViSession, expected_size_or_value)
-
-
 class ViCharBufferMatcher(_BufferMatcher):
     def __init__(self, expected_size_or_value):
         _BufferMatcher.__init__(self, visatype.ViChar, expected_size_or_value)
