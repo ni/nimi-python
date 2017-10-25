@@ -88,22 +88,6 @@ class SideEffectsHelper(object):
         self._defaults['DeleteScript']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
-        self._defaults['DisableAnalogFilter'] = {}
-        self._defaults['DisableAnalogFilter']['return'] = 0
-        self._defaults['DisableDigitalFilter'] = {}
-        self._defaults['DisableDigitalFilter']['return'] = 0
-        self._defaults['DisableDigitalPatterning'] = {}
-        self._defaults['DisableDigitalPatterning']['return'] = 0
-        self._defaults['DisableScriptTrigger'] = {}
-        self._defaults['DisableScriptTrigger']['return'] = 0
-        self._defaults['DisableStartTrigger'] = {}
-        self._defaults['DisableStartTrigger']['return'] = 0
-        self._defaults['EnableAnalogFilter'] = {}
-        self._defaults['EnableAnalogFilter']['return'] = 0
-        self._defaults['EnableDigitalFilter'] = {}
-        self._defaults['EnableDigitalFilter']['return'] = 0
-        self._defaults['EnableDigitalPatterning'] = {}
-        self._defaults['EnableDigitalPatterning']['return'] = 0
         self._defaults['ErrorHandler'] = {}
         self._defaults['ErrorHandler']['return'] = 0
         self._defaults['ErrorHandler']['errorMessage'] = None
@@ -175,8 +159,6 @@ class SideEffectsHelper(object):
         self._defaults['IsDone'] = {}
         self._defaults['IsDone']['return'] = 0
         self._defaults['IsDone']['Done'] = None
-        self._defaults['ManualEnableP2PStream'] = {}
-        self._defaults['ManualEnableP2PStream']['return'] = 0
         self._defaults['QueryArbSeqCapabilities'] = {}
         self._defaults['QueryArbSeqCapabilities']['return'] = 0
         self._defaults['QueryArbSeqCapabilities']['maximumNumberOfSequences'] = None
@@ -241,8 +223,6 @@ class SideEffectsHelper(object):
         self._defaults['WriteNamedWaveformF64']['return'] = 0
         self._defaults['WriteNamedWaveformI16'] = {}
         self._defaults['WriteNamedWaveformI16']['return'] = 0
-        self._defaults['WriteP2PEndpointI16'] = {}
-        self._defaults['WriteP2PEndpointI16']['return'] = 0
         self._defaults['WriteScript'] = {}
         self._defaults['WriteScript']['return'] = 0
         self._defaults['WriteWaveform'] = {}
@@ -461,46 +441,6 @@ class SideEffectsHelper(object):
             return self._defaults['Disable']['return']
         return self._defaults['Disable']['return']
 
-    def niFgen_DisableAnalogFilter(self, vi, channel_name):  # noqa: N802
-        if self._defaults['DisableAnalogFilter']['return'] != 0:
-            return self._defaults['DisableAnalogFilter']['return']
-        return self._defaults['DisableAnalogFilter']['return']
-
-    def niFgen_DisableDigitalFilter(self, vi, channel_name):  # noqa: N802
-        if self._defaults['DisableDigitalFilter']['return'] != 0:
-            return self._defaults['DisableDigitalFilter']['return']
-        return self._defaults['DisableDigitalFilter']['return']
-
-    def niFgen_DisableDigitalPatterning(self, vi, channel_name):  # noqa: N802
-        if self._defaults['DisableDigitalPatterning']['return'] != 0:
-            return self._defaults['DisableDigitalPatterning']['return']
-        return self._defaults['DisableDigitalPatterning']['return']
-
-    def niFgen_DisableScriptTrigger(self, vi, trigger_id):  # noqa: N802
-        if self._defaults['DisableScriptTrigger']['return'] != 0:
-            return self._defaults['DisableScriptTrigger']['return']
-        return self._defaults['DisableScriptTrigger']['return']
-
-    def niFgen_DisableStartTrigger(self, vi):  # noqa: N802
-        if self._defaults['DisableStartTrigger']['return'] != 0:
-            return self._defaults['DisableStartTrigger']['return']
-        return self._defaults['DisableStartTrigger']['return']
-
-    def niFgen_EnableAnalogFilter(self, vi, channel_name, filter_correction_frequency):  # noqa: N802
-        if self._defaults['EnableAnalogFilter']['return'] != 0:
-            return self._defaults['EnableAnalogFilter']['return']
-        return self._defaults['EnableAnalogFilter']['return']
-
-    def niFgen_EnableDigitalFilter(self, vi, channel_name):  # noqa: N802
-        if self._defaults['EnableDigitalFilter']['return'] != 0:
-            return self._defaults['EnableDigitalFilter']['return']
-        return self._defaults['EnableDigitalFilter']['return']
-
-    def niFgen_EnableDigitalPatterning(self, vi, channel_name):  # noqa: N802
-        if self._defaults['EnableDigitalPatterning']['return'] != 0:
-            return self._defaults['EnableDigitalPatterning']['return']
-        return self._defaults['EnableDigitalPatterning']['return']
-
     def niFgen_ErrorHandler(self, vi, error_code, error_message):  # noqa: N802
         if self._defaults['ErrorHandler']['return'] != 0:
             return self._defaults['ErrorHandler']['return']
@@ -700,11 +640,6 @@ class SideEffectsHelper(object):
         done.contents.value = self._defaults['IsDone']['Done']
         return self._defaults['IsDone']['return']
 
-    def niFgen_ManualEnableP2PStream(self, vi, endpoint_name):  # noqa: N802
-        if self._defaults['ManualEnableP2PStream']['return'] != 0:
-            return self._defaults['ManualEnableP2PStream']['return']
-        return self._defaults['ManualEnableP2PStream']['return']
-
     def niFgen_QueryArbSeqCapabilities(self, vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count):  # noqa: N802
         if self._defaults['QueryArbSeqCapabilities']['return'] != 0:
             return self._defaults['QueryArbSeqCapabilities']['return']
@@ -873,11 +808,6 @@ class SideEffectsHelper(object):
             return self._defaults['WriteNamedWaveformI16']['return']
         return self._defaults['WriteNamedWaveformI16']['return']
 
-    def niFgen_WriteP2PEndpointI16(self, vi, endpoint_name, number_of_samples, endpoint_data):  # noqa: N802
-        if self._defaults['WriteP2PEndpointI16']['return'] != 0:
-            return self._defaults['WriteP2PEndpointI16']['return']
-        return self._defaults['WriteP2PEndpointI16']['return']
-
     def niFgen_WriteScript(self, vi, channel_name, script):  # noqa: N802
         if self._defaults['WriteScript']['return'] != 0:
             return self._defaults['WriteScript']['return']
@@ -991,22 +921,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_DeleteScript.return_value = 0
         mock_library.niFgen_Disable.side_effect = MockFunctionCallError("niFgen_Disable")
         mock_library.niFgen_Disable.return_value = 0
-        mock_library.niFgen_DisableAnalogFilter.side_effect = MockFunctionCallError("niFgen_DisableAnalogFilter")
-        mock_library.niFgen_DisableAnalogFilter.return_value = 0
-        mock_library.niFgen_DisableDigitalFilter.side_effect = MockFunctionCallError("niFgen_DisableDigitalFilter")
-        mock_library.niFgen_DisableDigitalFilter.return_value = 0
-        mock_library.niFgen_DisableDigitalPatterning.side_effect = MockFunctionCallError("niFgen_DisableDigitalPatterning")
-        mock_library.niFgen_DisableDigitalPatterning.return_value = 0
-        mock_library.niFgen_DisableScriptTrigger.side_effect = MockFunctionCallError("niFgen_DisableScriptTrigger")
-        mock_library.niFgen_DisableScriptTrigger.return_value = 0
-        mock_library.niFgen_DisableStartTrigger.side_effect = MockFunctionCallError("niFgen_DisableStartTrigger")
-        mock_library.niFgen_DisableStartTrigger.return_value = 0
-        mock_library.niFgen_EnableAnalogFilter.side_effect = MockFunctionCallError("niFgen_EnableAnalogFilter")
-        mock_library.niFgen_EnableAnalogFilter.return_value = 0
-        mock_library.niFgen_EnableDigitalFilter.side_effect = MockFunctionCallError("niFgen_EnableDigitalFilter")
-        mock_library.niFgen_EnableDigitalFilter.return_value = 0
-        mock_library.niFgen_EnableDigitalPatterning.side_effect = MockFunctionCallError("niFgen_EnableDigitalPatterning")
-        mock_library.niFgen_EnableDigitalPatterning.return_value = 0
         mock_library.niFgen_ErrorHandler.side_effect = MockFunctionCallError("niFgen_ErrorHandler")
         mock_library.niFgen_ErrorHandler.return_value = 0
         mock_library.niFgen_ExportSignal.side_effect = MockFunctionCallError("niFgen_ExportSignal")
@@ -1053,8 +967,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_InitiateGeneration.return_value = 0
         mock_library.niFgen_IsDone.side_effect = MockFunctionCallError("niFgen_IsDone")
         mock_library.niFgen_IsDone.return_value = 0
-        mock_library.niFgen_ManualEnableP2PStream.side_effect = MockFunctionCallError("niFgen_ManualEnableP2PStream")
-        mock_library.niFgen_ManualEnableP2PStream.return_value = 0
         mock_library.niFgen_QueryArbSeqCapabilities.side_effect = MockFunctionCallError("niFgen_QueryArbSeqCapabilities")
         mock_library.niFgen_QueryArbSeqCapabilities.return_value = 0
         mock_library.niFgen_QueryArbWfmCapabilities.side_effect = MockFunctionCallError("niFgen_QueryArbWfmCapabilities")
@@ -1103,8 +1015,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_WriteNamedWaveformF64.return_value = 0
         mock_library.niFgen_WriteNamedWaveformI16.side_effect = MockFunctionCallError("niFgen_WriteNamedWaveformI16")
         mock_library.niFgen_WriteNamedWaveformI16.return_value = 0
-        mock_library.niFgen_WriteP2PEndpointI16.side_effect = MockFunctionCallError("niFgen_WriteP2PEndpointI16")
-        mock_library.niFgen_WriteP2PEndpointI16.return_value = 0
         mock_library.niFgen_WriteScript.side_effect = MockFunctionCallError("niFgen_WriteScript")
         mock_library.niFgen_WriteScript.return_value = 0
         mock_library.niFgen_WriteWaveform.side_effect = MockFunctionCallError("niFgen_WriteWaveform")

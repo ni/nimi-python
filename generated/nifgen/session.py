@@ -3005,151 +3005,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def disable_analog_filter(self):
-        '''disable_analog_filter
-
-        Disables the analog filter. This function sets the
-        ANALOG_FILTER_ENABLED attribute to VI_FALSE. This
-        setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-        Script output modes. You also can use this setting in Standard Function
-        and Frequency List output modes for user-defined waveforms.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].disable_analog_filter()
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        error_code = self._library.niFgen_DisableAnalogFilter(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def disable_digital_filter(self):
-        '''disable_digital_filter
-
-        Disables the digital filter. This function sets the
-        DIGITAL_FILTER_ENABLED attribute to VI_FALSE. This
-        setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-        Script output modes. You also can use this setting in Standard Function
-        and Frequency List output modes for user-defined waveforms.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].disable_digital_filter()
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        error_code = self._library.niFgen_DisableDigitalFilter(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def disable_digital_patterning(self):
-        '''disable_digital_patterning
-
-        Disables digital pattern output on the signal generator. This function
-        sets the DIGITAL_PATTERN_ENABLED attribute to VI_FALSE.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].disable_digital_patterning()
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        error_code = self._library.niFgen_DisableDigitalPatterning(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def enable_analog_filter(self, filter_correction_frequency):
-        '''enable_analog_filter
-
-        Configures the analog filter for the device. This function sets the
-        ANALOG_FILTER_ENABLED attribute to VI_TRUE. This
-        setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-        Script output modes. You also can use this setting in Standard Function
-        and Frequency List output modes for user-defined waveforms.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].enable_analog_filter(filter_correction_frequency)
-
-        Args:
-            filter_correction_frequency (float): Specifies the filter correction frequency of the analog filter. On the
-                NI 5411 and NI 5431, NI-FGEN adjusts signal amplitude to compensate for
-                the filter attenuation at that frequency. To disable amplitude
-                correction, set **filterCorrectionFrequency** to 0. For Standard
-                Function output mode, **filterCorrectionFrequency** typically should be
-                set to the same value as the frequency of the standard waveform.
-
-                **Units**: hertz
-
-                **Default Value**: 0
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        filter_correction_frequency_ctype = visatype.ViReal64(filter_correction_frequency)  # case 8
-        error_code = self._library.niFgen_EnableAnalogFilter(vi_ctype, channel_name_ctype, filter_correction_frequency_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def enable_digital_filter(self):
-        '''enable_digital_filter
-
-        Enables the digital filter by setting the
-        DIGITAL_FILTER_ENABLED attribute to VI_TRUE. This
-        setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-        Script output modes. You also can use this setting in Standard Function
-        and Frequency List output modes for user-defined waveforms.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].enable_digital_filter()
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        error_code = self._library.niFgen_EnableDigitalFilter(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def enable_digital_patterning(self):
-        '''enable_digital_patterning
-
-        Enables digital pattern output on the signal generator. This function
-        sets the DIGITAL_PATTERN_ENABLED attribute to VI_TRUE.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].enable_digital_patterning()
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        error_code = self._library.niFgen_EnableDigitalPatterning(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
@@ -5215,44 +5070,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def disable_script_trigger(self, trigger_id):
-        '''disable_script_trigger
-
-        Disables the specified Script Trigger.
-
-        Args:
-            trigger_id (string): Specifies the Script Trigger used for triggering.
-
-                **Defined Values**
-
-                **Default Value**: "ScriptTrigger0"
-
-                +------------------+------------------+
-                | "ScriptTrigger0" | Script Trigger 0 |
-                +------------------+------------------+
-                | "ScriptTrigger1" | Script Trigger 1 |
-                +------------------+------------------+
-                | "ScriptTrigger2" | Script Trigger 2 |
-                +------------------+------------------+
-                | "ScriptTrigger3" | Script Trigger 3 |
-                +------------------+------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
-        error_code = self._library.niFgen_DisableScriptTrigger(vi_ctype, trigger_id_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def disable_start_trigger(self):
-        '''disable_start_trigger
-
-        Disables the Start Trigger.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_DisableStartTrigger(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def error_handler(self, error_code):
         '''error_handler
 
@@ -5648,23 +5465,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
 
-    def manual_enable_p2_p_stream(self, endpoint_name):
-        '''manual_enable_p2_p_stream
-
-        Enables a peer-to-peer data stream using manual flow control.
-
-        Args:
-            endpoint_name (string): Specifies the stream endpoint FIFO to configure. Refer to the
-                `Peer-to-Peer Data
-                Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(p2p_streaming)>`__
-                documentation in the *NI Signal Generators Help* for more information.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        endpoint_name_ctype = ctypes.create_string_buffer(endpoint_name.encode(self._encoding))  # case 3
-        error_code = self._library.niFgen_ManualEnableP2PStream(vi_ctype, endpoint_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def query_arb_seq_capabilities(self):
         '''query_arb_seq_capabilities
 
@@ -5923,28 +5723,6 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         max_time_ctype = visatype.ViInt32(max_time)  # case 8
         error_code = self._library.niFgen_WaitUntilDone(vi_ctype, max_time_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def write_p2_p_endpoint_i16(self, endpoint_name, number_of_samples, endpoint_data):
-        '''write_p2_p_endpoint_i16
-
-        Writes I16 data to the peer-to-peer endpoint. Use this function to write
-        initial data from the host to the endpoint before starting generation to
-        avoid an underflow at start.
-
-        Args:
-            endpoint_name (string): Specifies the name of the FIFO endpoint. Data is written to the endpoint
-                FIFO.
-            number_of_samples (int): Specifies the number of samples to write into the endpoint FIFO.
-            endpoint_data (list of int): Specifies the array of data to write into the endpoint FIFO. The binary
-                data is left-justified.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        endpoint_name_ctype = ctypes.create_string_buffer(endpoint_name.encode(self._encoding))  # case 3
-        number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
-        endpoint_data_ctype = (visatype.ViInt16 * len(endpoint_data))(*endpoint_data)  # case 4
-        error_code = self._library.niFgen_WriteP2PEndpointI16(vi_ctype, endpoint_name_ctype, number_of_samples_ctype, endpoint_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

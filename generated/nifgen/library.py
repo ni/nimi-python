@@ -47,14 +47,6 @@ class Library(object):
         self.niFgen_DeleteNamedWaveform_cfunc = None
         self.niFgen_DeleteScript_cfunc = None
         self.niFgen_Disable_cfunc = None
-        self.niFgen_DisableAnalogFilter_cfunc = None
-        self.niFgen_DisableDigitalFilter_cfunc = None
-        self.niFgen_DisableDigitalPatterning_cfunc = None
-        self.niFgen_DisableScriptTrigger_cfunc = None
-        self.niFgen_DisableStartTrigger_cfunc = None
-        self.niFgen_EnableAnalogFilter_cfunc = None
-        self.niFgen_EnableDigitalFilter_cfunc = None
-        self.niFgen_EnableDigitalPatterning_cfunc = None
         self.niFgen_ErrorHandler_cfunc = None
         self.niFgen_ExportSignal_cfunc = None
         self.niFgen_GetAttributeViBoolean_cfunc = None
@@ -78,7 +70,6 @@ class Library(object):
         self.niFgen_InitializeWithChannels_cfunc = None
         self.niFgen_InitiateGeneration_cfunc = None
         self.niFgen_IsDone_cfunc = None
-        self.niFgen_ManualEnableP2PStream_cfunc = None
         self.niFgen_QueryArbSeqCapabilities_cfunc = None
         self.niFgen_QueryArbWfmCapabilities_cfunc = None
         self.niFgen_QueryFreqListCapabilities_cfunc = None
@@ -103,7 +94,6 @@ class Library(object):
         self.niFgen_WriteBinary16Waveform_cfunc = None
         self.niFgen_WriteNamedWaveformF64_cfunc = None
         self.niFgen_WriteNamedWaveformI16_cfunc = None
-        self.niFgen_WriteP2PEndpointI16_cfunc = None
         self.niFgen_WriteScript_cfunc = None
         self.niFgen_WriteWaveform_cfunc = None
         self.niFgen_close_cfunc = None
@@ -365,70 +355,6 @@ class Library(object):
                 self.niFgen_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_Disable_cfunc(vi)
 
-    def niFgen_DisableAnalogFilter(self, vi, channel_name):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_DisableAnalogFilter_cfunc is None:
-                self.niFgen_DisableAnalogFilter_cfunc = self._library.niFgen_DisableAnalogFilter
-                self.niFgen_DisableAnalogFilter_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niFgen_DisableAnalogFilter_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_DisableAnalogFilter_cfunc(vi, channel_name)
-
-    def niFgen_DisableDigitalFilter(self, vi, channel_name):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_DisableDigitalFilter_cfunc is None:
-                self.niFgen_DisableDigitalFilter_cfunc = self._library.niFgen_DisableDigitalFilter
-                self.niFgen_DisableDigitalFilter_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niFgen_DisableDigitalFilter_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_DisableDigitalFilter_cfunc(vi, channel_name)
-
-    def niFgen_DisableDigitalPatterning(self, vi, channel_name):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_DisableDigitalPatterning_cfunc is None:
-                self.niFgen_DisableDigitalPatterning_cfunc = self._library.niFgen_DisableDigitalPatterning
-                self.niFgen_DisableDigitalPatterning_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niFgen_DisableDigitalPatterning_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_DisableDigitalPatterning_cfunc(vi, channel_name)
-
-    def niFgen_DisableScriptTrigger(self, vi, trigger_id):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_DisableScriptTrigger_cfunc is None:
-                self.niFgen_DisableScriptTrigger_cfunc = self._library.niFgen_DisableScriptTrigger
-                self.niFgen_DisableScriptTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niFgen_DisableScriptTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_DisableScriptTrigger_cfunc(vi, trigger_id)
-
-    def niFgen_DisableStartTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_DisableStartTrigger_cfunc is None:
-                self.niFgen_DisableStartTrigger_cfunc = self._library.niFgen_DisableStartTrigger
-                self.niFgen_DisableStartTrigger_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niFgen_DisableStartTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_DisableStartTrigger_cfunc(vi)
-
-    def niFgen_EnableAnalogFilter(self, vi, channel_name, filter_correction_frequency):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_EnableAnalogFilter_cfunc is None:
-                self.niFgen_EnableAnalogFilter_cfunc = self._library.niFgen_EnableAnalogFilter
-                self.niFgen_EnableAnalogFilter_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64]  # noqa: F405
-                self.niFgen_EnableAnalogFilter_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_EnableAnalogFilter_cfunc(vi, channel_name, filter_correction_frequency)
-
-    def niFgen_EnableDigitalFilter(self, vi, channel_name):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_EnableDigitalFilter_cfunc is None:
-                self.niFgen_EnableDigitalFilter_cfunc = self._library.niFgen_EnableDigitalFilter
-                self.niFgen_EnableDigitalFilter_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niFgen_EnableDigitalFilter_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_EnableDigitalFilter_cfunc(vi, channel_name)
-
-    def niFgen_EnableDigitalPatterning(self, vi, channel_name):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_EnableDigitalPatterning_cfunc is None:
-                self.niFgen_EnableDigitalPatterning_cfunc = self._library.niFgen_EnableDigitalPatterning
-                self.niFgen_EnableDigitalPatterning_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niFgen_EnableDigitalPatterning_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_EnableDigitalPatterning_cfunc(vi, channel_name)
-
     def niFgen_ErrorHandler(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:
             if self.niFgen_ErrorHandler_cfunc is None:
@@ -612,14 +538,6 @@ class Library(object):
                 self.niFgen_IsDone_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFgen_IsDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_IsDone_cfunc(vi, done)
-
-    def niFgen_ManualEnableP2PStream(self, vi, endpoint_name):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_ManualEnableP2PStream_cfunc is None:
-                self.niFgen_ManualEnableP2PStream_cfunc = self._library.niFgen_ManualEnableP2PStream
-                self.niFgen_ManualEnableP2PStream_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niFgen_ManualEnableP2PStream_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_ManualEnableP2PStream_cfunc(vi, endpoint_name)
 
     def niFgen_QueryArbSeqCapabilities(self, vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count):  # noqa: N802
         with self._func_lock:
@@ -812,14 +730,6 @@ class Library(object):
                 self.niFgen_WriteNamedWaveformI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt16)]  # noqa: F405
                 self.niFgen_WriteNamedWaveformI16_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteNamedWaveformI16_cfunc(vi, channel_name, waveform_name, size, data)
-
-    def niFgen_WriteP2PEndpointI16(self, vi, endpoint_name, number_of_samples, endpoint_data):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_WriteP2PEndpointI16_cfunc is None:
-                self.niFgen_WriteP2PEndpointI16_cfunc = self._library.niFgen_WriteP2PEndpointI16
-                self.niFgen_WriteP2PEndpointI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt16)]  # noqa: F405
-                self.niFgen_WriteP2PEndpointI16_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_WriteP2PEndpointI16_cfunc(vi, endpoint_name, number_of_samples, endpoint_data)
 
     def niFgen_WriteScript(self, vi, channel_name, script):  # noqa: N802
         with self._func_lock:
