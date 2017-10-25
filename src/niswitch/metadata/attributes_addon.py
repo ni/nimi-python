@@ -14,7 +14,6 @@ attributes_obsolete = {
     1050103: { "codegen_method": "no" },  # ERROR_ELABORATION
     1050324: { "codegen_method": "no" },  # IO_SESSION_TYPE
     1050322: { "codegen_method": "no" },  # IO_SESSION
-    1050203: { "codegen_method": "no" },  # NUM_CHANNELS
     1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS
     1050304: { "codegen_method": "no" },  # RESOURCE_DESCRIPTOR
     1050503: { "codegen_method": "no" },  # DRIVER_MAJOR_VERSION

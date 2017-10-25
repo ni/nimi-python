@@ -17,7 +17,6 @@ attributes_obsolete = {
     1050102: { "codegen_method": "no" },  # SECONDARY_ERROR
     1050103: { "codegen_method": "no" },  # ERROR_ELABORATION
     1250350: { "codegen_method": "no" },  # CYCLE_COUNT
-    1050203: { "codegen_method": "no" },  # NUM_CHANNELS
     1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS
     1050503: { "codegen_method": "no" },  # SPECIFIC_DRIVER_MAJOR_VERSION
     1050504: { "codegen_method": "no" },  # SPECIFIC_DRIVER_MINOR_VERSION

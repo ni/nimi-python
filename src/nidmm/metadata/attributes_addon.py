@@ -2,7 +2,6 @@
 # Any changes to the API should be made here. attributes.py is code generated
 
 attributes_obsolete = {
-    1050203: { "codegen_method": "no" },  # NUM_CHANNELS
     1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX
     1050551: { "codegen_method": "no" },  # DRIVER_REVISION
     1050503: { "codegen_method": "no" },  # SPECIFIC_DRIVER_MAJOR_VERSION
