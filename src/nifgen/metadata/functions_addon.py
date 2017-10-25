@@ -5,36 +5,45 @@
 # This will override that with private - add '_' to the beginning of the name, or
 # don't generate at all
 functions_codegen_method = {
-    'init':                            { 'codegen_method': 'no',       },
-    'InitWithOptions':                 { 'codegen_method': 'no',       },
-    'InitializeWithChannels':          { 'codegen_method': 'private',  },
-    'close':                           { 'codegen_method': 'private',  },
-    'CheckAttribute.*':                { 'codegen_method': 'no',       },  # Not supported in Python API. Issue #529
-    'InitiateGeneration':              { 'codegen_method': 'private',  },
+    'init':                                 { 'codegen_method': 'no',       },
+    'InitWithOptions':                      { 'codegen_method': 'no',       },
+    'InitializeWithChannels':               { 'codegen_method': 'private',  },
+    'close':                                { 'codegen_method': 'private',  },
+    'CheckAttribute.*':                     { 'codegen_method': 'no',       },  # Not supported in Python API. Issue #529
+    'InitiateGeneration':                   { 'codegen_method': 'private',  },
+    'Configure.*':                          { 'codegen_method': 'no',       },  # Use corresponding attribute instead
+    'ConfigureArbSequence':                 { 'codegen_method': 'public',   },
+    'ConfigureArbWaveform':                 { 'codegen_method': 'public',   },
+    'ConfigureArbWaveform':                 { 'codegen_method': 'public',   },
+    'ConfigureCustomFIRFilterCoefficients': { 'codegen_method': 'public',   },
+    'ConfigureDigitalEdgeScriptTrigger':    { 'codegen_method': 'public',   },
+    'ConfigureDigitalEdgeStartTrigger':     { 'codegen_method': 'public',   },
+    'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
+    'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
 
-    'Abort':                           { 'codegen_method': 'private',  },
-    '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
-    'error_message':                   { 'codegen_method': 'private',  },
-    'GetError':                        { 'codegen_method': 'private',  },
-    'ClearError':                      { 'codegen_method': 'no',       },
-    'LockSession':                     { 'codegen_method': 'no',       },
-    'UnlockSession':                   { 'codegen_method': 'no',       },
-    'InitExtCal':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'CloseExtCal':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'RestoreLastExtCalConstants':      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'ChangeExtCalPassword':            { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    '.+UserDefined.+':                 { 'codegen_method': 'no',       },
-    'SetAttributeViSession':           { 'codegen_method': 'no',       },
-    'GetAttributeViSession':           { 'codegen_method': 'no',       },
-    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'error_query':                     { 'codegen_method': 'no',       },
-    'revision_query':                  { 'codegen_method': 'no',       },
-    '.+Complex.+':                     { 'codegen_method': 'no',       },
-    'GetStreamEndpointHandle':         { 'codegen_method': 'no',       },
+    'Abort':                                { 'codegen_method': 'private',  },
+    '.etAttribute.+':                       { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
+    'error_message':                        { 'codegen_method': 'private',  },
+    'GetError':                             { 'codegen_method': 'private',  },
+    'ClearError':                           { 'codegen_method': 'no',       },
+    'LockSession':                          { 'codegen_method': 'no',       },
+    'UnlockSession':                        { 'codegen_method': 'no',       },
+    'InitExtCal':                           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'CloseExtCal':                          { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'RestoreLastExtCalConstants':           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'ChangeExtCalPassword':                 { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'CalAdjust.+':                          { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    '.+UserDefined.+':                      { 'codegen_method': 'no',       },
+    'SetAttributeViSession':                { 'codegen_method': 'no',       },
+    'GetAttributeViSession':                { 'codegen_method': 'no',       },
+    'GetNextInterchangeWarning':            { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ResetInterchangeCheck':                { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ClearInterchangeWarnings':             { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'GetNextCoercionRecord':                { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'error_query':                          { 'codegen_method': 'no',       },
+    'revision_query':                       { 'codegen_method': 'no',       },
+    '.+Complex.+':                          { 'codegen_method': 'no',       },
+    'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
 }
 
 # Attach the given parameter to the given enum from enums.py

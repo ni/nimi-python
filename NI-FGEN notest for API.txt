@@ -5,16 +5,6 @@ TODOs
 * Look at all drivers and see if we filtered out useful ext cal functions like niFgen_GetExtCalLastTemp
 
 get rid of
-    * All check attribute foo need to go away. Other APIs too
-    configure_amplitude
-    configure_frequency
-    configure_gain
-    configure_operation_mode
-    configure_output_enabled
-    configure_output_impedance
-    configure_synchronization
-    configure_trigger_mode
-    configure_trigger_source
     create_waveform_from_file_hws
     disable_analog_filter
     disable_digital_filter
@@ -25,18 +15,6 @@ get rid of
     reset_attribute - and open issue to support it same as nidaqmx
     route_signal_out - all enum based routing
     write_binary16_analog_static_value
-    configure_channels
-    configure_clock_mode
-    configure_output_mode
-    configure_p2_p_endpoint_fullness_start_trigger
-    configure_ref_clock_frequency
-    configure_ref_clock_source
-    configure_reference_clock
-    configure_sample_clock_source
-    configure_sample_rate
-    configure_software_edge_script_trigger
-    configure_software_edge_start_trigger
-    configure_update_clock_source
     create_arb_waveform
     create_binary16_arb_waveform
     disable_script_trigger
