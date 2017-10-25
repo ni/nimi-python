@@ -71,9 +71,6 @@ class SideEffectsHelper(object):
         self._defaults['CreateWaveformFromFileF64'] = {}
         self._defaults['CreateWaveformFromFileF64']['return'] = 0
         self._defaults['CreateWaveformFromFileF64']['waveformHandle'] = None
-        self._defaults['CreateWaveformFromFileHWS'] = {}
-        self._defaults['CreateWaveformFromFileHWS']['return'] = 0
-        self._defaults['CreateWaveformFromFileHWS']['waveformHandle'] = None
         self._defaults['CreateWaveformFromFileI16'] = {}
         self._defaults['CreateWaveformFromFileI16']['return'] = 0
         self._defaults['CreateWaveformFromFileI16']['waveformHandle'] = None
@@ -396,14 +393,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_CreateWaveformFromFileF64", param='waveformHandle')
         waveform_handle.contents.value = self._defaults['CreateWaveformFromFileF64']['waveformHandle']
         return self._defaults['CreateWaveformFromFileF64']['return']
-
-    def niFgen_CreateWaveformFromFileHWS(self, vi, channel_name, file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform, waveform_handle):  # noqa: N802
-        if self._defaults['CreateWaveformFromFileHWS']['return'] != 0:
-            return self._defaults['CreateWaveformFromFileHWS']['return']
-        if self._defaults['CreateWaveformFromFileHWS']['waveformHandle'] is None:
-            raise MockFunctionCallError("niFgen_CreateWaveformFromFileHWS", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateWaveformFromFileHWS']['waveformHandle']
-        return self._defaults['CreateWaveformFromFileHWS']['return']
 
     def niFgen_CreateWaveformFromFileI16(self, vi, channel_name, file_name, byte_order, waveform_handle):  # noqa: N802
         if self._defaults['CreateWaveformFromFileI16']['return'] != 0:
@@ -907,8 +896,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_CreateWaveformF64.return_value = 0
         mock_library.niFgen_CreateWaveformFromFileF64.side_effect = MockFunctionCallError("niFgen_CreateWaveformFromFileF64")
         mock_library.niFgen_CreateWaveformFromFileF64.return_value = 0
-        mock_library.niFgen_CreateWaveformFromFileHWS.side_effect = MockFunctionCallError("niFgen_CreateWaveformFromFileHWS")
-        mock_library.niFgen_CreateWaveformFromFileHWS.return_value = 0
         mock_library.niFgen_CreateWaveformFromFileI16.side_effect = MockFunctionCallError("niFgen_CreateWaveformFromFileI16")
         mock_library.niFgen_CreateWaveformFromFileI16.return_value = 0
         mock_library.niFgen_CreateWaveformI16.side_effect = MockFunctionCallError("niFgen_CreateWaveformI16")

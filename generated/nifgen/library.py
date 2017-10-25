@@ -40,7 +40,6 @@ class Library(object):
         self.niFgen_CreateFreqList_cfunc = None
         self.niFgen_CreateWaveformF64_cfunc = None
         self.niFgen_CreateWaveformFromFileF64_cfunc = None
-        self.niFgen_CreateWaveformFromFileHWS_cfunc = None
         self.niFgen_CreateWaveformFromFileI16_cfunc = None
         self.niFgen_CreateWaveformI16_cfunc = None
         self.niFgen_DefineUserStandardWaveform_cfunc = None
@@ -298,14 +297,6 @@ class Library(object):
                 self.niFgen_CreateWaveformFromFileF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_CreateWaveformFromFileF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_CreateWaveformFromFileF64_cfunc(vi, channel_name, file_name, byte_order, waveform_handle)
-
-    def niFgen_CreateWaveformFromFileHWS(self, vi, channel_name, file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform, waveform_handle):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_CreateWaveformFromFileHWS_cfunc is None:
-                self.niFgen_CreateWaveformFromFileHWS_cfunc = self._library.niFgen_CreateWaveformFromFileHWS
-                self.niFgen_CreateWaveformFromFileHWS_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niFgen_CreateWaveformFromFileHWS_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_CreateWaveformFromFileHWS_cfunc(vi, channel_name, file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform, waveform_handle)
 
     def niFgen_CreateWaveformFromFileI16(self, vi, channel_name, file_name, byte_order, waveform_handle):  # noqa: N802
         with self._func_lock:

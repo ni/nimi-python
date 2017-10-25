@@ -186,7 +186,7 @@ nifgen.Session methods
         -  :py:func:`nifgen.create_waveform_i16`
         -  :py:func:`nifgen.create_waveform_from_file_i16`
         -  :py:func:`nifgen.create_waveform_from_file_f64`
-        -  :py:func:`nifgen.create_waveform_from_file_hws`
+        -  :py:func:`nifgen.CreateWaveformFromFileHWS`
 
         **Defined Value**:
 
@@ -392,7 +392,7 @@ nifgen.Session methods
         -  :py:func:`nifgen.create_waveform_i16`
         -  :py:func:`nifgen.create_waveform_from_file_i16`
         -  :py:func:`nifgen.create_waveform_from_file_f64`
-        -  :py:func:`nifgen.create_waveform_from_file_hws`
+        -  :py:func:`nifgen.CreateWaveformFromFileHWS`
 
         These functions return a handle that you use to identify the waveform.
 
@@ -1538,104 +1538,6 @@ nifgen.Session methods
 
 
     :type byte_order: int
-
-    :rtype: int
-    :return:
-
-
-            The handle that identifies the new waveform. This handle is used later
-            when referring to this waveform.
-
-            
-
-
-
-.. function:: create_waveform_from_file_hws(file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform)
-
-    | Takes the waveform data from the specified HWS (Hierarchical Waveform
-      Storage) file and creates an onboard waveform for use in Arbitrary
-      Waveform or Arbitrary Sequence output mode. The **waveformHandle**
-      returned by this function can be used later for setting the active
-      waveform, changing the data in the waveform, building sequences of
-      waveforms, or deleting the waveform when it is no longer needed.
-    | When the Analog Waveform Editor saves data in an HWS file, it also
-      stores the rate, gain, and offset with the data. If the
-      **useRateFromWaveform** and **useGain&OffsetFromWaveform;** parameters
-      are set to VI\_TRUE, this function also sets those properties.
-
-    |
-
-    
-
-    .. note:: If you choose to have this function set the gain and offset properties
-        for you, you should **not** use the :py:func:`nifgen.configure_arb_waveform` or
-        :py:func:`nifgen.configure_arb_sequence` functions, as they also set the gain and
-        offset, thereby overriding the values set by this function. Instead, use
-        the :py:data:`nifgen.ARB\_WAVEFORM\_HANDLE` or
-        :py:data:`nifgen.ARB\_SEQUENCE\_HANDLE` attributes.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].create_waveform_from_file_hws(file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform)
-
-
-    :param file_name:
-
-
-        The full path and name of the file where the waveform data resides.
-
-        
-
-
-    :type file_name: string
-    :param use_rate_from_waveform:
-
-
-        | If you set this parameter input to VI\_TRUE and if onboard signal
-          processing (OSP) is enabled, the rate from the waveform is interpreted
-          as the data rate, and FGEN sets the data rate attribute for you. In
-          all other cases, it is interpreted as the sample rate, and FGEN sets
-          the sample rate attribute for you.
-
-        ****Defined Values****
-
-        |
-        | ****Default Value**:** VI\_TRUE
-
-        +-----------+--------------------------------+
-        | VI\_TRUE  | Use rate from waveform.        |
-        +-----------+--------------------------------+
-        | VI\_FALSE | Do not use rate from waveform. |
-        +-----------+--------------------------------+
-
-
-    :type use_rate_from_waveform: bool
-    :param use_gain_and_offset_from_waveform:
-
-
-        | If this input is set to VI\_TRUE, NI-FGEN retrieves the gain and
-          offset values from the specified HWS file and applies them to the
-          NI-FGEN driver.
-
-        ****Defined Values****
-
-        |
-        | ****Default Value**:** VI\_TRUE
-
-        +-----------+-------------------------------------------+
-        | VI\_TRUE  | Use gain and offset from waveform.        |
-        +-----------+-------------------------------------------+
-        | VI\_FALSE | Do not use gain and offset from waveform. |
-        +-----------+-------------------------------------------+
-
-
-    :type use_gain_and_offset_from_waveform: bool
 
     :rtype: int
     :return:

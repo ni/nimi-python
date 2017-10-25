@@ -2398,7 +2398,7 @@ class _SessionBase(object):
                 -  create_waveform_i16
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
-                -  create_waveform_from_file_hws
+                -  CreateWaveformFromFileHWS
 
                 These functions return a handle that you use to identify the waveform.
 
@@ -2708,85 +2708,6 @@ class _SessionBase(object):
         byte_order_ctype = visatype.ViInt32(byte_order)  # case 8
         waveform_handle_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFgen_CreateWaveformFromFileF64(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, ctypes.pointer(waveform_handle_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(waveform_handle_ctype.value)
-
-    def create_waveform_from_file_hws(self, file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform):
-        '''create_waveform_from_file_hws
-
-        | Takes the waveform data from the specified HWS (Hierarchical Waveform
-          Storage) file and creates an onboard waveform for use in Arbitrary
-          Waveform or Arbitrary Sequence output mode. The **waveformHandle**
-          returned by this function can be used later for setting the active
-          waveform, changing the data in the waveform, building sequences of
-          waveforms, or deleting the waveform when it is no longer needed.
-        | When the Analog Waveform Editor saves data in an HWS file, it also
-          stores the rate, gain, and offset with the data. If the
-          **useRateFromWaveform** and **useGain&OffsetFromWaveform;** parameters
-          are set to VI_TRUE, this function also sets those properties.
-
-        |
-
-        Note:
-        If you choose to have this function set the gain and offset properties
-        for you, you should **not** use the configure_arb_waveform or
-        configure_arb_sequence functions, as they also set the gain and
-        offset, thereby overriding the values set by this function. Instead, use
-        the ARB_WAVEFORM_HANDLE or
-        ARB_SEQUENCE_HANDLE attributes.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].create_waveform_from_file_hws(file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform)
-
-        Args:
-            file_name (string): The full path and name of the file where the waveform data resides.
-            use_rate_from_waveform (bool): | If you set this parameter input to VI_TRUE and if onboard signal
-                  processing (OSP) is enabled, the rate from the waveform is interpreted
-                  as the data rate, and FGEN sets the data rate attribute for you. In
-                  all other cases, it is interpreted as the sample rate, and FGEN sets
-                  the sample rate attribute for you.
-
-                ****Defined Values****
-
-                |
-                | ****Default Value**:** VI_TRUE
-
-                +----------+--------------------------------+
-                | VI_TRUE  | Use rate from waveform.        |
-                +----------+--------------------------------+
-                | VI_FALSE | Do not use rate from waveform. |
-                +----------+--------------------------------+
-            use_gain_and_offset_from_waveform (bool): | If this input is set to VI_TRUE, NI-FGEN retrieves the gain and
-                  offset values from the specified HWS file and applies them to the
-                  NI-FGEN driver.
-
-                ****Defined Values****
-
-                |
-                | ****Default Value**:** VI_TRUE
-
-                +----------+-------------------------------------------+
-                | VI_TRUE  | Use gain and offset from waveform.        |
-                +----------+-------------------------------------------+
-                | VI_FALSE | Do not use gain and offset from waveform. |
-                +----------+-------------------------------------------+
-
-        Returns:
-            waveform_handle (int): The handle that identifies the new waveform. This handle is used later
-                when referring to this waveform.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case 3
-        use_rate_from_waveform_ctype = visatype.ViBoolean(use_rate_from_waveform)  # case 8
-        use_gain_and_offset_from_waveform_ctype = visatype.ViBoolean(use_gain_and_offset_from_waveform)  # case 8
-        waveform_handle_ctype = visatype.ViInt32()  # case 13
-        error_code = self._library.niFgen_CreateWaveformFromFileHWS(vi_ctype, channel_name_ctype, file_name_ctype, use_rate_from_waveform_ctype, use_gain_and_offset_from_waveform_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
@@ -4376,7 +4297,7 @@ class Session(_SessionBase):
                 -  create_waveform_i16
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
-                -  create_waveform_from_file_hws
+                -  CreateWaveformFromFileHWS
 
                 **Defined Value**:
 
