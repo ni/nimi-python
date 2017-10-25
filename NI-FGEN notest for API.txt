@@ -1,17 +1,13 @@
 FGEN notes
 
-* Must use initialize with channels
+TODOs
 
+* Look at all drivers and see if we filtered out useful ext cal functions like niFgen_GetExtCalLastTemp
 * We *do* want:
     * niFgen_GetExtCalLastDateAndTime
     * niFgen_GetExtCalLastTemp
     * niFgen_GetExtCalRecommendedInterval
     * Look at other drivers as well
-    * create_waveform_from_file_hws
-
-* We need to make get session reference "no" on all APIs that have it
-
-* Initialize with channels needs to have its defaults added
 
 * All check attribute foo need to go away. Other APIs too
 
@@ -29,6 +25,7 @@ get rid of
     configure_synchronization
     configure_trigger_mode
     configure_trigger_source
+    create_waveform_from_file_hws
     disable_analog_filter
     disable_digital_filter
     disable_digital_patterning
@@ -80,6 +77,7 @@ Size mecanisms
     create_freq_list frequency_list_length for both arrays (issue)
 
 Defaults:
+    Initialize with channels
     configure_freq_list: defualt dc_offset and start_phase to 0.0
     configure_standard_waveform dc_offset 0.0 and start_phase 0.0
     configure_digital_edge_script_trigger edge rising

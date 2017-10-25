@@ -1,5 +1,3 @@
-# TODO(texasaggie97) update this file with all NI-FGEN function information
-
 # These dictionaries are applied to the generated functions dictionary at build time
 # Any changes to the API should be made here. functions.py is code generated
 
@@ -7,18 +5,23 @@
 # This will override that with private - add '_' to the beginning of the name, or
 # don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':                 { 'codegen_method': 'private',  },
-    'Initiate':                        { 'codegen_method': 'private',  },
+    'init':                            { 'codegen_method': 'no',       },
+    'InitWithOptions':                 { 'codegen_method': 'no',       },
+    'InitializeWithChannels':          { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
+
+    'Initiate':                        { 'codegen_method': 'private',  },
     'Abort':                           { 'codegen_method': 'private',  },
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
-    'init':                            { 'codegen_method': 'no',       },
     'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
     'ClearError':                      { 'codegen_method': 'no',       },
     'LockSession':                     { 'codegen_method': 'no',       },
     'UnlockSession':                   { 'codegen_method': 'no',       },
-    '.+ExtCal':                        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'InitExtCal':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'CloseExtCal':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'RestoreLastExtCalConstants':      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'ChangeExtCalPassword':            { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     '.+UserDefined.+':                 { 'codegen_method': 'no',       },
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
