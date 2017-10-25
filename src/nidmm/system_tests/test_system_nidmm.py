@@ -36,10 +36,12 @@ def test_vi_boolean_attribute(session):
     assert session.interchange_check is False
 
 
+# TODO(texasaggie97) enable when there is a writable string attribute
+'''
 def test_vi_string_attribute(session):
     session.error_elaboration = 'Test'
     assert 'Test' == session.error_elaboration
-
+'''
 
 def test_vi_int32_attribute(session):
     session.sample_count = 5
