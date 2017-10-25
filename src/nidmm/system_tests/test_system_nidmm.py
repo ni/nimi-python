@@ -43,6 +43,7 @@ def test_vi_string_attribute(session):
     assert 'Test' == session.error_elaboration
 '''
 
+
 def test_vi_int32_attribute(session):
     session.sample_count = 5
     assert 5 == session.sample_count
