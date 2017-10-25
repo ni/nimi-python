@@ -107,16 +107,16 @@ class Session(object):
         # We hand-maintain the code that calls into self._library rather than leverage code-generation
         # because niModInst_GetExtendedErrorInfo() does not properly do the IVI-dance.
         # See https://github.com/ni/nimi-python/issues/166
-        error_info_buffer_size = 0
+        error_info_buffer_size_ctype = visatype.ViInt32()
         error_info_ctype = None
-        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         if error_code <= 0:
             return "Failed to retrieve error description."
-        error_info_buffer_size = error_code
-        error_info_ctype = ctypes.create_string_buffer(error_info_buffer_size)
+        error_info_buffer_size_ctype = visatype.ViInt32(error_code)
+        error_info_ctype = ctypes.create_string_buffer(error_info_buffer_size_ctype.value)
         # Note we don't look at the return value. This is intentional as niModInst returns the
         # original error code rather than 0 (VI_SUCCESS).
-        self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         return error_info_ctype.value.decode("ascii")
 
     # Iterator functions
@@ -153,10 +153,11 @@ class Session(object):
     f = functions[func_name]
     parameters = f['parameters']
     input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_PARAMETERS)
-    output_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_PARAMETERS)
     enum_input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
     ivi_dance_parameter = helper.filter_ivi_dance_parameter(f)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
+    len_parameter = helper.filter_len_parameter(f)
+    len_size_parameter = helper.find_size_parameter(len_parameter, parameters)
 %>
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
@@ -166,16 +167,16 @@ class Session(object):
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
-% for output_parameter in output_parameters:
-        ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
+% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
+        ${helper.get_ctype_variable_declaration_snippet(p, parameters)}
 % endfor
 % if ivi_dance_parameter is not None:
-        ${ivi_dance_size_parameter['python_name']} = 0
-        ${ivi_dance_parameter['ctypes_variable_name']} = None
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
-        ${ivi_dance_size_parameter['python_name']} = error_code
-        ${ivi_dance_parameter['ctypes_variable_name']} = (visatype.${ivi_dance_parameter['ctypes_type']} * ${ivi_dance_size_parameter['python_name']})()
+        ${ivi_dance_size_parameter['ctypes_variable_name']} = visatype.${ivi_dance_size_parameter['ctypes_type']}(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        ${ivi_dance_parameter['ctypes_variable_name']} = (visatype.${ivi_dance_parameter['ctypes_type']} * ${ivi_dance_size_parameter['ctypes_variable_name']}.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+% elif len_parameter is not None:
+        ${len_size_parameter['python_name']} = len(${len_parameter['python_name']})
 % endif
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
