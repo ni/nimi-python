@@ -20,12 +20,6 @@ class Library(object):
         self.niFgen_AdjustSampleClockRelativeDelay_cfunc = None
         self.niFgen_AllocateNamedWaveform_cfunc = None
         self.niFgen_AllocateWaveform_cfunc = None
-        self.niFgen_CheckAttributeViBoolean_cfunc = None
-        self.niFgen_CheckAttributeViInt32_cfunc = None
-        self.niFgen_CheckAttributeViInt64_cfunc = None
-        self.niFgen_CheckAttributeViReal64_cfunc = None
-        self.niFgen_CheckAttributeViSession_cfunc = None
-        self.niFgen_CheckAttributeViString_cfunc = None
         self.niFgen_ClearArbMemory_cfunc = None
         self.niFgen_ClearArbSequence_cfunc = None
         self.niFgen_ClearArbWaveform_cfunc = None
@@ -176,54 +170,6 @@ class Library(object):
                 self.niFgen_AllocateWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_AllocateWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_AllocateWaveform_cfunc(vi, channel_name, waveform_size, waveform_handle)
-
-    def niFgen_CheckAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_CheckAttributeViBoolean_cfunc is None:
-                self.niFgen_CheckAttributeViBoolean_cfunc = self._library.niFgen_CheckAttributeViBoolean
-                self.niFgen_CheckAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
-                self.niFgen_CheckAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_CheckAttributeViBoolean_cfunc(vi, channel_name, attribute_id, attribute_value)
-
-    def niFgen_CheckAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_CheckAttributeViInt32_cfunc is None:
-                self.niFgen_CheckAttributeViInt32_cfunc = self._library.niFgen_CheckAttributeViInt32
-                self.niFgen_CheckAttributeViInt32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32]  # noqa: F405
-                self.niFgen_CheckAttributeViInt32_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_CheckAttributeViInt32_cfunc(vi, channel_name, attribute_id, attribute_value)
-
-    def niFgen_CheckAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_CheckAttributeViInt64_cfunc is None:
-                self.niFgen_CheckAttributeViInt64_cfunc = self._library.niFgen_CheckAttributeViInt64
-                self.niFgen_CheckAttributeViInt64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt64]  # noqa: F405
-                self.niFgen_CheckAttributeViInt64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_CheckAttributeViInt64_cfunc(vi, channel_name, attribute_id, attribute_value)
-
-    def niFgen_CheckAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_CheckAttributeViReal64_cfunc is None:
-                self.niFgen_CheckAttributeViReal64_cfunc = self._library.niFgen_CheckAttributeViReal64
-                self.niFgen_CheckAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
-                self.niFgen_CheckAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_CheckAttributeViReal64_cfunc(vi, channel_name, attribute_id, attribute_value)
-
-    def niFgen_CheckAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_CheckAttributeViSession_cfunc is None:
-                self.niFgen_CheckAttributeViSession_cfunc = self._library.niFgen_CheckAttributeViSession
-                self.niFgen_CheckAttributeViSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViSession]  # noqa: F405
-                self.niFgen_CheckAttributeViSession_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_CheckAttributeViSession_cfunc(vi, channel_name, attribute_id, attribute_value)
-
-    def niFgen_CheckAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_CheckAttributeViString_cfunc is None:
-                self.niFgen_CheckAttributeViString_cfunc = self._library.niFgen_CheckAttributeViString
-                self.niFgen_CheckAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niFgen_CheckAttributeViString_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_CheckAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
 
     def niFgen_ClearArbMemory(self, vi):  # noqa: N802
         with self._func_lock:

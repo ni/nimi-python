@@ -23,18 +23,6 @@ class SideEffectsHelper(object):
         self._defaults['AllocateWaveform'] = {}
         self._defaults['AllocateWaveform']['return'] = 0
         self._defaults['AllocateWaveform']['waveformHandle'] = None
-        self._defaults['CheckAttributeViBoolean'] = {}
-        self._defaults['CheckAttributeViBoolean']['return'] = 0
-        self._defaults['CheckAttributeViInt32'] = {}
-        self._defaults['CheckAttributeViInt32']['return'] = 0
-        self._defaults['CheckAttributeViInt64'] = {}
-        self._defaults['CheckAttributeViInt64']['return'] = 0
-        self._defaults['CheckAttributeViReal64'] = {}
-        self._defaults['CheckAttributeViReal64']['return'] = 0
-        self._defaults['CheckAttributeViSession'] = {}
-        self._defaults['CheckAttributeViSession']['return'] = 0
-        self._defaults['CheckAttributeViString'] = {}
-        self._defaults['CheckAttributeViString']['return'] = 0
         self._defaults['ClearArbMemory'] = {}
         self._defaults['ClearArbMemory']['return'] = 0
         self._defaults['ClearArbSequence'] = {}
@@ -343,36 +331,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_AllocateWaveform", param='waveformHandle')
         waveform_handle.contents.value = self._defaults['AllocateWaveform']['waveformHandle']
         return self._defaults['AllocateWaveform']['return']
-
-    def niFgen_CheckAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViBoolean']['return'] != 0:
-            return self._defaults['CheckAttributeViBoolean']['return']
-        return self._defaults['CheckAttributeViBoolean']['return']
-
-    def niFgen_CheckAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViInt32']['return'] != 0:
-            return self._defaults['CheckAttributeViInt32']['return']
-        return self._defaults['CheckAttributeViInt32']['return']
-
-    def niFgen_CheckAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViInt64']['return'] != 0:
-            return self._defaults['CheckAttributeViInt64']['return']
-        return self._defaults['CheckAttributeViInt64']['return']
-
-    def niFgen_CheckAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViReal64']['return'] != 0:
-            return self._defaults['CheckAttributeViReal64']['return']
-        return self._defaults['CheckAttributeViReal64']['return']
-
-    def niFgen_CheckAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViSession']['return'] != 0:
-            return self._defaults['CheckAttributeViSession']['return']
-        return self._defaults['CheckAttributeViSession']['return']
-
-    def niFgen_CheckAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViString']['return'] != 0:
-            return self._defaults['CheckAttributeViString']['return']
-        return self._defaults['CheckAttributeViString']['return']
 
     def niFgen_ClearArbMemory(self, vi):  # noqa: N802
         if self._defaults['ClearArbMemory']['return'] != 0:
@@ -1133,18 +1091,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_AllocateNamedWaveform.return_value = 0
         mock_library.niFgen_AllocateWaveform.side_effect = MockFunctionCallError("niFgen_AllocateWaveform")
         mock_library.niFgen_AllocateWaveform.return_value = 0
-        mock_library.niFgen_CheckAttributeViBoolean.side_effect = MockFunctionCallError("niFgen_CheckAttributeViBoolean")
-        mock_library.niFgen_CheckAttributeViBoolean.return_value = 0
-        mock_library.niFgen_CheckAttributeViInt32.side_effect = MockFunctionCallError("niFgen_CheckAttributeViInt32")
-        mock_library.niFgen_CheckAttributeViInt32.return_value = 0
-        mock_library.niFgen_CheckAttributeViInt64.side_effect = MockFunctionCallError("niFgen_CheckAttributeViInt64")
-        mock_library.niFgen_CheckAttributeViInt64.return_value = 0
-        mock_library.niFgen_CheckAttributeViReal64.side_effect = MockFunctionCallError("niFgen_CheckAttributeViReal64")
-        mock_library.niFgen_CheckAttributeViReal64.return_value = 0
-        mock_library.niFgen_CheckAttributeViSession.side_effect = MockFunctionCallError("niFgen_CheckAttributeViSession")
-        mock_library.niFgen_CheckAttributeViSession.return_value = 0
-        mock_library.niFgen_CheckAttributeViString.side_effect = MockFunctionCallError("niFgen_CheckAttributeViString")
-        mock_library.niFgen_CheckAttributeViString.return_value = 0
         mock_library.niFgen_ClearArbMemory.side_effect = MockFunctionCallError("niFgen_ClearArbMemory")
         mock_library.niFgen_ClearArbMemory.return_value = 0
         mock_library.niFgen_ClearArbSequence.side_effect = MockFunctionCallError("niFgen_ClearArbSequence")
