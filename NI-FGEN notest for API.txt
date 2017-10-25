@@ -1,0 +1,101 @@
+FGEN notes
+
+* Must use initialize with channels
+
+* We *do* want:
+    * niFgen_GetExtCalLastDateAndTime
+    * niFgen_GetExtCalLastTemp
+    * niFgen_GetExtCalRecommendedInterval
+    * Look at other drivers as well
+    * create_waveform_from_file_hws
+
+* We need to make get session reference "no" on all APIs that have it
+
+* Initialize with channels needs to have its defaults added
+
+* All check attribute foo need to go away. Other APIs too
+
+* update_clock_source property is obsolete. It is under obsolete submenu. Open issue about add metadata to anything that has obsolete in its path in RCXML
+
+* In functions_addon, we mention Initiate but it doesn't exist. Should be issue?
+
+get rid of
+    configure_amplitude
+    configure_frequency
+    configure_gain
+    configure_operation_mode
+    configure_output_enabled
+    configure_output_impedance
+    configure_synchronization
+    configure_trigger_mode
+    configure_trigger_source
+    disable_analog_filter
+    disable_digital_filter
+    disable_digital_patterning
+    enable_analog_filter
+    enable_digital_filter
+    enable_digital_patterning
+    reset_attribute - and open issue to support it same as nidaqmx
+    route_signal_out - all enum based routing
+    write_binary16_analog_static_value
+    configure_channels
+    configure_clock_mode
+    configure_output_mode
+    configure_p2_p_endpoint_fullness_start_trigger
+    configure_ref_clock_frequency
+    configure_ref_clock_source
+    configure_reference_clock
+    configure_sample_clock_source
+    configure_sample_rate
+    configure_software_edge_script_trigger
+    configure_software_edge_start_trigger
+    configure_update_clock_source
+    create_arb_waveform
+    create_binary16_arb_waveform
+    disable_script_trigger
+    disable_start_trigger
+    error_handler (get rid in other APIs?)
+    _init_with_options
+    initialize_analog_output_calibration
+    initialize_cal_adc_calibration
+    initialize_flatness_calibration
+    initialize_oscillator_frequency_calibration
+    manual_enable_p2_p_stream
+    read_cal_adc
+    write_p2_p_endpoint_i16
+
+Size mecanisms
+    configure_custom_fir_filter_coefficients don't include number_of_coefficients
+    create_waveform_f64 get rid of waveform_size
+    create_waveform_i16 waveform_size
+    define_user_standard_waveform waveform_size
+    get_fir_filter_coefficients(self, array_size, coefficients_array, number_of_coefficients_read) ivi dance and outputs
+        number_of_coefficients_read is output. Bad extraction?
+    write_binary16_waveform size
+    write_named_waveform_f64 size
+    write_named_waveform_i16 size
+    write_waveform size
+    create_advanced_arb_sequence sequence_length is array sizes
+        create_arb_sequence sequence_length is array size and both arrays should be equal size
+    create_freq_list frequency_list_length for both arrays (issue)
+
+Defaults:
+    configure_freq_list: defualt dc_offset and start_phase to 0.0
+    configure_standard_waveform dc_offset 0.0 and start_phase 0.0
+    configure_digital_edge_script_trigger edge rising
+    configure_digital_edge_start_trigger edge rising
+    create_advanced_arb_sequence sample_counts_array, marker_location_array are optional to None (known codegen issue)
+    wait_until_done max_time 10000 ms
+Enums:
+    operation mode property use enum
+    create_waveform_from_file_f64 byte_order enum
+    create_waveform_from_file_i16 byte_order enum
+    set_named_waveform_next_write_position relative_to
+    set_waveform_next_write_position relative_to
+    clock_mode needs enum
+    create_freq_list waveform use enum
+    signal is enum
+    get_hardware_state is enum
+    send_software_edge_trigger trigger is enum
+
+
