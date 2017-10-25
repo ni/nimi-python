@@ -20,6 +20,9 @@ functions_codegen_method = {
     'ConfigureDigitalEdgeStartTrigger':     { 'codegen_method': 'public',   },
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
+    'Disable.+':                            { 'codegen_method': 'no',       },  # Use corresponding attribute instead
+    'Enable.+':                             { 'codegen_method': 'no',       },  # Use corresponding attribute instead
+    'P2P':                                  { 'codegen_method': 'no',       },  # P2P not supported in Python API
 
     'Abort':                                { 'codegen_method': 'private',  },
     '.etAttribute.+':                       { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
