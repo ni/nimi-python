@@ -561,6 +561,32 @@ nifgen.Session properties
             - LabVIEW Property: **Instrument:Calibration:Cal ADC Input**
             - C Attribute: **NIFGEN_ATTR_CAL_ADC_INPUT**
 
+.. py:attribute:: channel_count
+
+    Returns the number of channels that NI-FGEN supports. For each property
+    for which IVI\_VAL\_MULTI\_CHANNEL is set, the IVI engine maintains a
+    separate cache value for each channel.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count**
+            - C Attribute: **NIFGEN_ATTR_CHANNEL_COUNT**
+
 .. py:attribute:: channel_delay
 
     Specifies the delay to apply to the analog output of the channel

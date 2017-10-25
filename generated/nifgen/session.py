@@ -240,6 +240,12 @@ class _SessionBase(object):
     Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
     VI or wait for the generation to complete.
     '''
+    channel_count = attributes.AttributeViInt32(1050203)
+    '''
+    Returns the number of channels that NI-FGEN supports. For each property
+    for which IVI_VAL_MULTI_CHANNEL is set, the IVI engine maintains a
+    separate cache value for each channel.
+    '''
     channel_delay = attributes.AttributeViReal64(1150369)
     '''
     Specifies the delay to apply to the analog output of the channel

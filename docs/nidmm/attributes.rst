@@ -309,6 +309,33 @@ nidmm.Session properties
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
             - C Attribute: **NIDMM_ATTR_CACHE**
 
+.. py:attribute:: channel_count
+
+    Indicates the number of channels that the specific instrument driver
+    supports. For each property for which the IVI\_VAL\_MULTI\_CHANNEL flag
+    property is set, the IVI engine maintains a separate cache value for
+    each channel.
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Instrument Capabilities:Channel Count**
+            - C Attribute: **NIDMM_ATTR_CHANNEL_COUNT**
+
 .. py:attribute:: config_product_number
 
     The PCI product ID.

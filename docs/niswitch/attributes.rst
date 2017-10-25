@@ -186,6 +186,36 @@ niswitch.Session properties
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
             - C Attribute: **NISWITCH_ATTR_CACHE**
 
+.. py:attribute:: channel_count
+
+    Contains the number of channels that the instrument driver supports.
+
+    **Related topics**
+
+    `niSwitch Get Channel
+    Name <switchviref.chm::/niSwitch_Get_Channel_Name.html>`__ `niSwitch
+    Properties <switchpropref.chm::/cniSwitch.html>`__
+
+    The following table lists the characteristics of this property.
+
+    +----------------+-----------+
+    | Characteristic | Value     |
+    +================+===========+
+    | Datatype       | int       |
+    +----------------+-----------+
+    | Permissions    | read only |
+    +----------------+-----------+
+    | Channel Based  | False     |
+    +----------------+-----------+
+    | Resettable     | No        |
+    +----------------+-----------+
+
+    .. tip::
+        This property corresponds to the following LabVIEW Property or C Attribute:
+
+            - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Channel Count**
+            - C Attribute: **NISWITCH_ATTR_CHANNEL_COUNT**
+
 .. py:attribute:: characteristic_impedance
 
     Returns the characteristic impedance for the channel in ohms.

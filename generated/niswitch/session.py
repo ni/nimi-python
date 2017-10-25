@@ -102,6 +102,16 @@ class _SessionBase(object):
     Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
+    channel_count = attributes.AttributeViInt32(1050203)
+    '''
+    Contains the number of channels that the instrument driver supports.
+
+    **Related topics**
+
+    `niSwitch Get Channel
+    Name <switchviref.chm::/niSwitch_Get_Channel_Name.html>`__ `niSwitch
+    Properties <switchpropref.chm::/cniSwitch.html>`__
+    '''
     characteristic_impedance = attributes.AttributeViReal64(1250016)
     '''
     Returns the characteristic impedance for the channel in ohms.
