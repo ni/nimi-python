@@ -199,6 +199,24 @@ def add_all_function_metadata(functions, config):
     return functions
 
 
+def _add_codegen_method(a, attributes):
+    '''Adds a boolean that sets the attribute obsolete. Will not be code genned when true'''
+    if 'obsolete' not in attributes[a]:
+        attributes[a]['codegen_method'] = 'public'
+
+
+def add_all_attribute_metadata(attributes, config):
+    '''Merges and Adds all codegen-specific metada to the function metadata list'''
+    if 'modules' in config and 'metadata.functions_addon' in config['modules']:
+        for m in dir(config['modules']['metadata.attributes_addon']):
+            if m.startswith('attributess_'):
+                merge_dicts(attributes, config['modules']['metadata.attributes_addon'].__getattribute__(m))
+
+    for a in attributes:
+        _add_codegen_method(a, attributes)
+    return attributes
+
+
 # Unit Tests
 def _compare_values(actual, expected, k):
     if type(actual) is dict:
