@@ -200,7 +200,7 @@ def test_triggers_measure(session):
         session.voltage_level = voltage_level
         session.output_enabled = True
         session.measure_when = nidcpower.MeasureWhen.ON_DEMAND
-        session.export_signal(nidcpower.Signals.START_TRIGGER, '/FakeDevice/PXI_Trig0')
+        session.export_signal(nidcpower.ExportSignal.START_TRIGGER, '/FakeDevice/PXI_Trig0')
         session.commit()
         with session.initiate():
             voltage = session['0'].measure(nidcpower.MeasurementTypes.MEASURE_VOLTAGE)
