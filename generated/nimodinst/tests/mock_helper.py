@@ -46,7 +46,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetExtendedErrorInfo']['return']
         if self._defaults['GetExtendedErrorInfo']['errorInfo'] is None:
             raise MockFunctionCallError("niModInst_GetExtendedErrorInfo", param='errorInfo')
-        if error_info_buffer_size == 0:
+        if error_info_buffer_size.value == 0:
             return len(self._defaults['GetExtendedErrorInfo']['errorInfo'])
         error_info.value = self._defaults['GetExtendedErrorInfo']['errorInfo'].encode('ascii')
         return self._defaults['GetExtendedErrorInfo']['return']
@@ -64,7 +64,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetInstalledDeviceAttributeViString']['return']
         if self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViString", param='attributeValue')
-        if attribute_value_buffer_size == 0:
+        if attribute_value_buffer_size.value == 0:
             return len(self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetInstalledDeviceAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetInstalledDeviceAttributeViString']['return']

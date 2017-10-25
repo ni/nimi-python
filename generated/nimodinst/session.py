@@ -123,16 +123,16 @@ class Session(object):
         # We hand-maintain the code that calls into self._library rather than leverage code-generation
         # because niModInst_GetExtendedErrorInfo() does not properly do the IVI-dance.
         # See https://github.com/ni/nimi-python/issues/166
-        error_info_buffer_size = 0
+        error_info_buffer_size_ctype = visatype.ViInt32()
         error_info_ctype = None
-        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         if error_code <= 0:
             return "Failed to retrieve error description."
-        error_info_buffer_size = error_code
-        error_info_ctype = ctypes.create_string_buffer(error_info_buffer_size)
+        error_info_buffer_size_ctype = visatype.ViInt32(error_code)
+        error_info_ctype = ctypes.create_string_buffer(error_info_buffer_size_ctype.value)
         # Note we don't look at the return value. This is intentional as niModInst returns the
         # original error code rather than 0 (VI_SUCCESS).
-        self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         return error_info_ctype.value.decode("ascii")
 
     # Iterator functions
@@ -172,7 +172,8 @@ class Session(object):
         _open_installed_devices_session. Call this function when you are
         finished using the session handle and do not use this handle again.
         '''
-        error_code = self._library.niModInst_CloseInstalledDevicesSession(self._handle)
+        handle_ctype = visatype.ViSession(self._handle)  # case 1
+        error_code = self._library.niModInst_CloseInstalledDevicesSession(handle_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -203,13 +204,13 @@ class Session(object):
                 character). Refer to the function help to find out how to determine the
                 exact buffer size required.
         '''
-        error_info_buffer_size = 0
-        error_info_ctype = None
-        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        error_info_buffer_size_ctype = visatype.ViInt32()  # case 6
+        error_info_ctype = None  # case 11
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        error_info_buffer_size = error_code
-        error_info_ctype = (visatype.ViChar * error_info_buffer_size)()
-        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size, error_info_ctype)
+        error_info_buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_info_ctype = (visatype.ViChar * error_info_buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niModInst_GetExtendedErrorInfo(error_info_buffer_size_ctype, error_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_info_ctype.value.decode(self._encoding)
 
@@ -245,8 +246,11 @@ class Session(object):
             attribute_value (int): A pointer to a signed 32-bit integer variable that receives the value of
                 the requested attribute.
         '''
-        attribute_value_ctype = visatype.ViInt32(0)
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(self._handle, index, attribute_id, ctypes.pointer(attribute_value_ctype))
+        handle_ctype = visatype.ViSession(self._handle)  # case 1
+        index_ctype = visatype.ViInt32(index)  # case 8
+        attribute_id_ctype = visatype.ViInt32(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(handle_ctype, index_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -283,13 +287,16 @@ class Session(object):
                 Description section for information on how to determine the exact buffer
                 size required.
         '''
-        attribute_value_buffer_size = 0
-        attribute_value_ctype = None
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(self._handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)
+        handle_ctype = visatype.ViSession(self._handle)  # case 1
+        index_ctype = visatype.ViInt32(index)  # case 8
+        attribute_id_ctype = visatype.ViInt32(attribute_id)  # case 8
+        attribute_value_buffer_size_ctype = visatype.ViInt32()  # case 6
+        attribute_value_ctype = None  # case 11
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        attribute_value_buffer_size = error_code
-        attribute_value_ctype = (visatype.ViChar * attribute_value_buffer_size)()
-        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(self._handle, index, attribute_id, attribute_value_buffer_size, attribute_value_ctype)
+        attribute_value_buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        attribute_value_ctype = (visatype.ViChar * attribute_value_buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niModInst_GetInstalledDeviceAttributeViString(handle_ctype, index_ctype, attribute_id_ctype, attribute_value_buffer_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
@@ -326,9 +333,10 @@ class Session(object):
                 found in the system that are supported by the driver specified in the
                 driver parameter.
         '''
-        handle_ctype = visatype.ViSession(0)
-        device_count_ctype = visatype.ViInt32(0)
-        error_code = self._library.niModInst_OpenInstalledDevicesSession(driver.encode(self._encoding), ctypes.pointer(handle_ctype), ctypes.pointer(device_count_ctype))
+        driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case 3
+        handle_ctype = visatype.ViSession()  # case 13
+        device_count_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niModInst_OpenInstalledDevicesSession(driver_ctype, ctypes.pointer(handle_ctype), ctypes.pointer(device_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(handle_ctype.value), int(device_count_ctype.value)
 
