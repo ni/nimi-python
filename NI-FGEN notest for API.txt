@@ -5,7 +5,6 @@ TODOs
 * Look at all drivers and see if we filtered out useful ext cal functions like niFgen_GetExtCalLastTemp
 
 get rid of
-    create_waveform_from_file_hws
     reset_attribute - and open issue to support it same as nidaqmx
     route_signal_out - all enum based routing
     write_binary16_analog_static_value
