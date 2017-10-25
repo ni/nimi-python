@@ -566,7 +566,7 @@ for supported devices.
             },
         ],
     },
-    'Signals': {
+    'ExportSignal': {
         'values': [
             {
                 'name': 'SOURCE_COMPLETE_EVENT',
