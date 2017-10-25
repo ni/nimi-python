@@ -27,11 +27,6 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    actual_arb_sample_rate = attributes.AttributeViReal64(1150109)
-    '''
-    Returns the actual sample rate value of the signal generator after any
-    coercion or rounding.
-    '''
     all_marker_events_latched_status = attributes.AttributeViInt32(1150349)
     '''
     Returns a bit field of the latched status of all Marker Events. Set this
@@ -245,12 +240,6 @@ class _SessionBase(object):
     Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
     VI or wait for the generation to complete.
     '''
-    channel_count = attributes.AttributeViInt32(1050203)
-    '''
-    Returns the number of channels that NI-FGEN supports. For each property
-    for which IVI_VAL_MULTI_CHANNEL is set, the IVI engine maintains a
-    separate cache value for each channel.
-    '''
     channel_delay = attributes.AttributeViReal64(1150369)
     '''
     Specifies the delay to apply to the analog output of the channel
@@ -294,10 +283,6 @@ class _SessionBase(object):
     `Terminal Configuration <pniFgen_TerminalConfiguration.html>`__ property
     to **Differential**. Common-mode offset is applied to the signals
     generated at each differential output terminal.
-    '''
-    daqmx_task = attributes.AttributeViInt32(1150221)
-    '''
-    Returns the NI-DAQmx task pointer.
     '''
     data_marker_events_count = attributes.AttributeViInt32(1150273)
     '''
@@ -567,11 +552,6 @@ class _SessionBase(object):
     done_event_pulse_width_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventPulseWidthUnits, 1150334)
     '''
     Specifies the pulse width units for the Done Event.
-    '''
-    error_elaboration = attributes.AttributeViString(1050103)
-    '''
-    Contains an optional string with additional information concerning the
-    primary error condition.
     '''
     exported_onboard_reference_clock_output_terminal = attributes.AttributeViString(1150322)
     '''
@@ -989,10 +969,6 @@ class _SessionBase(object):
     the IVI Configuration file. The virtual instrument section specifies a
     physical device and initial user options.
     '''
-    major_version = attributes.AttributeViInt32(1050503)
-    '''
-    Returns the major version number of NI-FGEN.
-    '''
     marker_events_count = attributes.AttributeViInt32(1150271)
     '''
     Returns the number of markers supported by the device. Use this property
@@ -1111,10 +1087,6 @@ class _SessionBase(object):
     '''
     Returns the amount of memory in bytes on the signal generator.
     '''
-    minor_version = attributes.AttributeViInt32(1050504)
-    '''
-    Returns the minor version number of NI-FGEN.
-    '''
     min_freq_list_duration = attributes.AttributeViReal64(1150212)
     '''
     Returns the minimum duration, in seconds, of any one step in a frequency
@@ -1158,13 +1130,6 @@ class _SessionBase(object):
     `niFgen Abort
     Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
     VI or wait for the generation to complete.
-    '''
-    operation_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OperationMode, 1250005)
-    '''
-    Specifies how the signal generator produces waveforms. NI signal
-    generators currently support only one value:
-    **NIFGEN_VAL_OPERATE_CONTINUOUS**. To control trigger mode, set the
-    `Trigger Mode <pniFgen_TriggerMode.html>`__ property.
     '''
     oscillator_freq_dac_value = attributes.AttributeViInt32(1150225)
     '''
@@ -1309,22 +1274,6 @@ class _SessionBase(object):
     Note:
     When using the NI 5450/5451 with I/Q rates higher than 200 MS/s, NI-FGEN
     restricts this property value to 0.
-    '''
-    osp_iq_rate = attributes.AttributeViReal64(1150248)
-    '''
-    Specifies the rate at which the user-provided waveform data is generated
-    when the `OSP Enabled <pniFgen_OSPEnabled.html>`__ property is set to
-    TRUE.
-
-    NI-FGEN sets the `Sample Rate <pniFgen_SampleRate.html>`__ property of
-    the signal generator to the product of the IQ Rate, `FIR Interpolation
-    Factor <pniFgen_FIRInterpolation.html>`__, and `CIC Interpolation
-    Factor <pniFgen_CICInterpolation.html>`__ properties. When the `Data
-    Processing Mode <pniFgen_DataProcessingMode.html>`__ property is set to
-    **Real**, the IQ Rate value is the rate at which the signal generator
-    processes real (I) data. When the Data Processing Mode property is set
-    to **Complex**, the IQ Rate value is the rate at which the signal
-    generator processes complex (I/Q) data.
     '''
     osp_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OSPMode, 1150370)
     '''
@@ -1700,38 +1649,6 @@ class _SessionBase(object):
     Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
     VI or wait for the generation to complete.
     '''
-    primary_error = attributes.AttributeViInt32(1050101)
-    '''
-    Describes the first error that occurred since the last call to the
-    `niFgen Error
-    Message <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Error_Message.html')>`__
-    VI on the session.
-
-    The value follows the VXIplug&play completion code conventions. A
-    negative value (0x80000000 or higher in hex) describes an error
-    condition. A positive value describes a warning condition and indicates
-    that no error occurred. A zero indicates that no error or warning
-    occurred. The error and warning values can be status codes defined by
-    IVI, VISA, class drivers, or specific drivers.
-    '''
-    query_instrument_status = attributes.AttributeViBoolean(1050003)
-    '''
-    Specifies whether NI-FGEN retains instrument status after each
-    operation. Set this property to TRUE to query the instrument status.
-
-    Querying the instrument status is very useful for debugging. After you
-    validate your program, you can set this property to FALSE to disable
-    status checking and maximize performance. However, the effect on NI-FGEN
-    is minor.
-
-    NI-FGEN can choose to ignore status checking for particular properties
-    regardless of the setting of this property. Use the `niFgen Initialize
-    With
-    Options <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Initialize_With_Options.html')>`__
-    VI to override this value.
-
-    **Default Value**: TRUE
-    '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate property values and VI parameters. Set
@@ -1795,23 +1712,6 @@ class _SessionBase(object):
     Specifies the Reference Clock frequency. The signal generator uses the
     Reference Clock to derive frequencies and sample rates when generating
     output.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
-    '''
-    ref_clock_source = attributes.AttributeViInt32(1250002)
-    '''
-    Controls the Reference Clock source the signal generator uses.
-
-    The signal generator derives the frequencies and sample rates that it
-    uses to generate waveforms from the source you specify. For example,
-    when you set this attribute to **Clock In**, the signal generator uses
-    the signal it receives at the Clk In front panel connector as its
-    Reference Clock.
 
     Note:
     You cannot change this property while the device is generating a
@@ -1894,13 +1794,6 @@ class _SessionBase(object):
     property, additional properties may be needed to fully configure the
     trigger.
     '''
-    secondary_error = attributes.AttributeViInt32(1050102)
-    '''
-    Provides an optional code with additional information concerning the
-    primary error condition. The error and warning values can be status
-    codes defined by IVI, VISA, class drivers, or specific drivers. Zero
-    indicates no additional information.
-    '''
     serial_number = attributes.AttributeViString(1150243)
     '''
     Returns the serial number of the signal generator.
@@ -1934,15 +1827,6 @@ class _SessionBase(object):
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
     Contains a brief description of the specific driver.
-    '''
-    specific_driver_prefix = attributes.AttributeViString(1050302)
-    '''
-    Contains the prefix for NI-FGEN. The name of each user-callable VI in
-    NI-FGEN starts with this prefix.
-    '''
-    specific_driver_revision = attributes.AttributeViString(1050551)
-    '''
-    Contains additional version information about NI-FGEN.
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
@@ -2122,17 +2006,6 @@ class _SessionBase(object):
     The value you select for this property is also the source for the
     trigger in the other trigger modes as specified by the `Trigger
     Mode <pniFgen_TriggerMode.html>`__ property.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
-    '''
-    update_clock_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.UpdateClockSource, 1150106)
-    '''
-    Controls the Update Clock source.
 
     Note:
     You cannot change this property while the device is generating a
