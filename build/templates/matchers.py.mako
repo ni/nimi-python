@@ -13,9 +13,6 @@ class _ScalarMatcher(object):
         self.expected_type = expected_type
         self.expected_value = expected_value
 
-    def __repr__(self):
-        return 'Matcher({0}, {1})'.format(self.expected_type, self.expected_value)
-
     def __eq__(self, other):
         if not isinstance(other, self.expected_type):
             print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
@@ -94,7 +91,7 @@ class ViStringMatcher(object):
 
 class ViBooleanMatcher(_ScalarMatcher):
     def __init__(self, expected_value):
-        _ScalarMatcher.__init__(self, visatype.ViBoolean, 1 if expected_value is True else False)
+        _ScalarMatcher.__init__(self, visatype.ViBoolean, 1 if expected_value is True else 0)
 
 
 class ViSessionMatcher(_ScalarMatcher):
