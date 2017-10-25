@@ -3,19 +3,9 @@ FGEN notes
 TODOs
 
 * Look at all drivers and see if we filtered out useful ext cal functions like niFgen_GetExtCalLastTemp
-* We *do* want:
-    * niFgen_GetExtCalLastDateAndTime
-    * niFgen_GetExtCalLastTemp
-    * niFgen_GetExtCalRecommendedInterval
-    * Look at other drivers as well
-
-* All check attribute foo need to go away. Other APIs too
-
-* update_clock_source property is obsolete. It is under obsolete submenu. Open issue about add metadata to anything that has obsolete in its path in RCXML
-
-* In functions_addon, we mention Initiate but it doesn't exist. Should be issue?
 
 get rid of
+    * All check attribute foo need to go away. Other APIs too
     configure_amplitude
     configure_frequency
     configure_gain

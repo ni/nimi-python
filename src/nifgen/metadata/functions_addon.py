@@ -9,8 +9,9 @@ functions_codegen_method = {
     'InitWithOptions':                 { 'codegen_method': 'no',       },
     'InitializeWithChannels':          { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
+    'CheckAttribute.*':                { 'codegen_method': 'no',       },  # Not supported in Python API. Issue #529
+    'InitiateGeneration':              { 'codegen_method': 'private',  },
 
-    'Initiate':                        { 'codegen_method': 'private',  },
     'Abort':                           { 'codegen_method': 'private',  },
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'error_message':                   { 'codegen_method': 'private',  },
