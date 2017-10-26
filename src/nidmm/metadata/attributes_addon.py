@@ -1,7 +1,9 @@
 # These dictionaries are applied to the generated attributes dictionary at build time
 # Any changes to the API should be made here. attributes.py is code generated
 
-attributes_obsolete = {
+# We are not code genning attributes that have been marked as obsolete prior to the initial
+# Python API bindings release
+attributes_codegen_method = {
     1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX
     1050551: { "codegen_method": "no" },  # DRIVER_REVISION
     1050503: { "codegen_method": "no" },  # SPECIFIC_DRIVER_MAJOR_VERSION
