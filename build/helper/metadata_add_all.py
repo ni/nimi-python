@@ -185,7 +185,7 @@ def add_all_function_metadata(functions, config):
 
 
 def _add_codegen_method(a, attributes):
-    '''Adds a boolean that sets the attribute obsolete. Will not be code genned when true'''
+    '''Adds 'codegen_method' that will determine whether and how the attribute is code genned. Default is public'''
     if 'codegen_method' not in attributes[a]:
         attributes[a]['codegen_method'] = 'public'
 
