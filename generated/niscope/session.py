@@ -165,128 +165,6 @@ class _SessionBase(object):
 
     VAL_SW_TRIG_FUNC
     '''
-    agc_average_control = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AGCAverageControl, 1151047)
-    '''
-    Averages the `AGC <Digitizers.chm::/Glossary.html#AGC>`__ values. The
-    default value is Mean.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    agc_average_control.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    agc_average_control.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].agc_average_control = var
-        var = session['0,1'].agc_average_control
-    '''
-    agc_loop_gain_0_exponent = attributes.AttributeViInt32(1151042)
-    '''
-    Along with the `AGC Loop Gain 0
-    Mantissa <pniScope_AGCLoopGain0Mantissa.html>`__ property, sets the loop
-    gain for the `AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default
-    value is 0.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    agc_loop_gain_0_exponent.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    agc_loop_gain_0_exponent.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].agc_loop_gain_0_exponent = var
-        var = session['0,1'].agc_loop_gain_0_exponent
-    '''
-    agc_loop_gain_0_mantissa = attributes.AttributeViInt32(1151043)
-    '''
-    Along with the `AGC Loop Gain 0
-    Exponent <pniScope_AGCLoopGain0Exponent.html>`__ property, sets the loop
-    gain for the `AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default
-    value is 0.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    agc_loop_gain_0_mantissa.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    agc_loop_gain_0_mantissa.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].agc_loop_gain_0_mantissa = var
-        var = session['0,1'].agc_loop_gain_0_mantissa
-    '''
-    agc_loop_gain_1_exponent = attributes.AttributeViInt32(1151044)
-    '''
-    Along with `AGC Loop Gain 1
-    Mantissa <pniScope_AGCLoopGain1Mantissa.html>`__ property, sets the loop
-    gain for the `AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default
-    value is 0.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    agc_loop_gain_1_exponent.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    agc_loop_gain_1_exponent.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].agc_loop_gain_1_exponent = var
-        var = session['0,1'].agc_loop_gain_1_exponent
-    '''
-    agc_loop_gain_1_mantissa = attributes.AttributeViInt32(1151045)
-    '''
-    Along with `AGC Loop Gain 1
-    Exponent <pniScope_AGCLoopGain1Exponent.html>`__ property, sets the loop
-    gain for the `AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default
-    value is 0.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    agc_loop_gain_1_mantissa.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    agc_loop_gain_1_mantissa.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].agc_loop_gain_1_mantissa = var
-        var = session['0,1'].agc_loop_gain_1_mantissa
-    '''
-    agc_lower_gain_limit = attributes.AttributeViReal64(1151041)
-    '''
-    Sets the minimum gain and maximum signal levels in the
-    `AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default value is
-    6.020600.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    agc_lower_gain_limit.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    agc_lower_gain_limit.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].agc_lower_gain_limit = var
-        var = session['0,1'].agc_lower_gain_limit
-    '''
-    agc_threshold = attributes.AttributeViInt32(1151046)
-    '''
-    Sets the gain error in the `AGC <Digitizers.chm::/Glossary.html#AGC>`__.
-    The default value is 0x034D.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    agc_threshold.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    agc_threshold.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].agc_threshold = var
-        var = session['0,1'].agc_threshold
-    '''
-    agc_upper_gain_limit = attributes.AttributeViReal64(1151040)
-    '''
-    Sets the maximum gain and minimum signal levels in the
-    `AGC <Digitizers.chm::/Glossary.html#AGC>`__. The default value is
-    6.020600.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    agc_upper_gain_limit.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    agc_upper_gain_limit.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].agc_upper_gain_limit = var
-        var = session['0,1'].agc_upper_gain_limit
-    '''
     allow_more_records_than_memory = attributes.AttributeViBoolean(1150068)
     '''
     Allows you to acquire more records than fit in onboard memory.
@@ -305,20 +183,6 @@ class _SessionBase(object):
     acquisition. Refer to `Features Supported by
     Device <Digitizers.chm::/Features_Supported_Main.html>`__ to find out if
     your digitizer supports continuous acquisition.
-    '''
-    aout_parallel_output_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AOUTParallelOutputSource, 1151070)
-    '''
-    Specifies the source for the AOUT parallel output from the
-    `DDC <Digitizers.chm::/Glossary.html#DDC>`__. The default is I Data.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    aout_parallel_output_source.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    aout_parallel_output_source.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].aout_parallel_output_source = var
-        var = session['0,1'].aout_parallel_output_source
     '''
     arm_ref_trig_src = attributes.AttributeViString(1150095)
     '''
@@ -396,20 +260,6 @@ class _SessionBase(object):
 
     Valid Values: 8, 16, 32
     '''
-    bout_parallel_output_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.BOUTParallelOutputSource, 1151071)
-    '''
-    Specifies the source for the BOUT parallel output from the
-    `DDC <Digitizers.chm::/Glossary.html#DDC>`__. The default is Q Data.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    bout_parallel_output_source.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    bout_parallel_output_source.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].bout_parallel_output_source = var
-        var = session['0,1'].bout_parallel_output_source
-    '''
     cache = attributes.AttributeViBoolean(1050004)
     '''
     Specifies whether to cache the value of properties. When caching is
@@ -421,53 +271,6 @@ class _SessionBase(object):
     Use `niScope Initialize with
     Options <scopeviref.chm::/niScope_Initialize_With_Options.html>`__ to
     override this value.
-    '''
-    carrier_nco_center_frequency = attributes.AttributeViReal64(1151000)
-    '''
-    Controls the frequency of the timing NCO. The default value is
-    0X8000000.
-
-    Specifies the timing NCO center frequency in binary format as follows:
-
-    N = ( *:sub:`out`* / *F\ :sub:`resampler`* ) & 2\ :sup:`32`
-
-    where *F\ :sub:`out`* is the output frequency and *F\ :sub:`resampler`*
-    is the resampled frequency.
-
-    The value is transferred to the active register during the next initiate
-    acquisition operation.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    carrier_nco_center_frequency.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    carrier_nco_center_frequency.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].carrier_nco_center_frequency = var
-        var = session['0,1'].carrier_nco_center_frequency
-    '''
-    carrier_phase_offset = attributes.AttributeViReal64(1151001)
-    '''
-    Offsets the phase of the timing NCO in binary format. The value is
-    transferred to the active register during the next initiate acquisition.
-    The default value is 0.
-
-    Valid Range: 0 to 6.283185307179586476925286766558
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    carrier_phase_offset.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    carrier_phase_offset.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].carrier_phase_offset = var
-        var = session['0,1'].carrier_phase_offset
-    '''
-    channel_count = attributes.AttributeViInt32(1050203)
-    '''
-    Indicates the number of channels that the specific instrument driver
-    supports. For channel based properties, the IVI engine maintains a
-    separate cache value for each channel.
     '''
     channel_enabled = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.BoolEnableDisableChan, 1250005)
     '''
@@ -500,40 +303,6 @@ class _SessionBase(object):
         session['0,1'].channel_terminal_configuration = var
         var = session['0,1'].channel_terminal_configuration
     '''
-    cic_decimation = attributes.AttributeViInt32(1151010)
-    '''
-    Controls the decimation in the CIC filter. The CIC filter reduces the
-    sample rate of a wideband signal to a rate that other filters in the DDC
-    can process. The default value is 4.
-
-    Valid Range: 4 to 32
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    cic_decimation.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    cic_decimation.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].cic_decimation = var
-        var = session['0,1'].cic_decimation
-    '''
-    cic_shift_gain = attributes.AttributeViInt32(1151011)
-    '''
-    Controls the shift gain at the input to the CIC filter. The CIC filter
-    reduces the sample rate of a wideband signal to a rate that other
-    filters in the DDC can process. The default value is 0.
-
-    Valid Range: 0 to 15
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    cic_shift_gain.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    cic_shift_gain.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].cic_shift_gain = var
-        var = session['0,1'].cic_shift_gain
-    '''
     clock_sync_pulse_source = attributes.AttributeViString(1150007)
     '''
     For the NI 5102, specifies the line on which the sample clock is sent or
@@ -563,35 +332,6 @@ class _SessionBase(object):
     VAL_PFI_1
 
     VAL_PFI_2
-    '''
-    combined_decimation = attributes.AttributeViInt32(1151301)
-    '''
-    Returns the combined `DDC <Digitizers.chm::/Glossary.html#DDC>`__
-    decimation.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    combined_decimation.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    combined_decimation.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].combined_decimation = var
-        var = session['0,1'].combined_decimation
-    '''
-    coordinate_converter_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CoordinateConverterInput, 1151073)
-    '''
-    Selects the source for the input to the coordinate converter, either the
-    HB filter or the Programmable FIR. the default value is Programmable
-    FIR.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    coordinate_converter_input.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    coordinate_converter_input.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].coordinate_converter_input = var
-        var = session['0,1'].coordinate_converter_input
     '''
     data_transfer_block_size = attributes.AttributeViInt32(1150316)
     '''
@@ -651,17 +391,6 @@ class _SessionBase(object):
     This property can be used only with high-speed digitizers that support
     onboard signal processing (OSP). NI-SCOPE returns an error if you use
     this property with a device that does not support OSP.
-    '''
-    ddc_direct_register_address = attributes.AttributeViInt32(1151305)
-    '''
-    Used for directly accessing the
-    `DDC <Digitizers.chm::/Glossary.html#DDC>`__ registers.
-    '''
-    ddc_direct_register_data = attributes.AttributeViInt32(1151306)
-    '''
-    Used for directly accessing the
-    `DDC <Digitizers.chm::/Glossary.html#DDC>`__ registers. The default
-    value is 0.
     '''
     ddc_enabled = attributes.AttributeViBoolean(1150300)
     '''
@@ -773,15 +502,6 @@ class _SessionBase(object):
         session['0,1'].ddc_q_source = var
         var = session['0,1'].ddc_q_source
     '''
-    delay_before_initiate = attributes.AttributeViReal64(1151304)
-    '''
-    Specifies a delay in seconds that is used by `Initiate
-    Acquisition <scopeviref.chm::/niScope_Initiate_Acquisition.html>`__ to
-    allow additional delay between programming of the vertical range,
-    trigger level, DDC, and the start of the acquisition. This property is
-    supported only on the NI 5112 and the NI 5620/5621. The default value is
-    0.0.
-    '''
     device_number = attributes.AttributeViInt32(1150076)
     '''
     Indicates the device number associated with the current session.
@@ -862,122 +582,6 @@ class _SessionBase(object):
         session['0,1'].digital_offset = var
         var = session['0,1'].digital_offset
     '''
-    discr._enable = attributes.AttributeViBoolean(1151020)
-    '''
-    Enables or disables the discriminator. If set to TRUE, frequency
-    discriminator is enabled. The default value is FALSE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    discr._enable.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    discr._enable.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].discr._enable = var
-        var = session['0,1'].discr._enable
-    '''
-    discriminator_delay = attributes.AttributeViInt32(1151025)
-    '''
-    Sets the number of delays in the discriminator. The default value is 1.
-
-    Valid Range: 1 to 8
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    discriminator_delay.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    discriminator_delay.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].discriminator_delay = var
-        var = session['0,1'].discriminator_delay
-    '''
-    discriminator_fir_decimation = attributes.AttributeViInt32(1151021)
-    '''
-    Sets the amount of decimation. The default value is 1.
-
-    Valid Range: 1 to 8
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    discriminator_fir_decimation.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    discriminator_fir_decimation.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].discriminator_fir_decimation = var
-        var = session['0,1'].discriminator_fir_decimation
-    '''
-    discriminator_fir_input_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DiscriminatorFIRInputSource, 1151026)
-    '''
-    Sets the discriminator FIR input source to Phase, Magnitude, or
-    Resampler. The default value is Phase.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    discriminator_fir_input_source.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    discriminator_fir_input_source.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].discriminator_fir_input_source = var
-        var = session['0,1'].discriminator_fir_input_source
-    '''
-    discriminator_fir_symmetry = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DiscriminatorFIRSymmetry, 1151022)
-    '''
-    Sets the discriminator FIR symmetry to symmetric or asymmetric. The
-    default value is Symmetric.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    discriminator_fir_symmetry.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    discriminator_fir_symmetry.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].discriminator_fir_symmetry = var
-        var = session['0,1'].discriminator_fir_symmetry
-    '''
-    discriminator_fir_symmetry_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DiscriminatorFIRSymmetryType, 1151023)
-    '''
-    Sets the discriminator FIR symmetry type to even or odd. The default
-    value is even.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    discriminator_fir_symmetry_type.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    discriminator_fir_symmetry_type.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].discriminator_fir_symmetry_type = var
-        var = session['0,1'].discriminator_fir_symmetry_type
-    '''
-    discriminator_fir_taps = attributes.AttributeViInt32(1151024)
-    '''
-    Sets the discriminator FIR number of taps. The default value is 1.
-
-    Valid Range: 1 to 63
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    discriminator_fir_taps.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    discriminator_fir_taps.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].discriminator_fir_taps = var
-        var = session['0,1'].discriminator_fir_taps
-    '''
-    discriminator_phase_multiplier = attributes.AttributeViInt32(1151027)
-    '''
-    Programs the coordinate converter to multiply the phase output by 1, 2,
-    4, or 8. Multiplying the phase output removes phase modulation before
-    the frequency is measured. The default value is 0.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    discriminator_phase_multiplier.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    discriminator_phase_multiplier.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].discriminator_phase_multiplier = var
-        var = session['0,1'].discriminator_phase_multiplier
-    '''
     dither_enabled = attributes.AttributeViBoolean(1150319)
     '''
     Enables or disables the analog dither on the device. Using dither can
@@ -1004,37 +608,6 @@ class _SessionBase(object):
     '''
     Restores the video-triggered data retrieved by the digitizer to the
     video signal's zero reference point. The default value is FALSE.
-    '''
-    enable_ddc = attributes.AttributeViBoolean(1151003)
-    '''
-    Disables programming the DDC when set to FALSE. The default value is
-    TRUE.
-
-    This property is supported for NI 5620/5621 digitizers only. For NI
-    5142/5622 digitizers, use the `DDC Enabled <pniScope_DDCEnabled.html>`__
-    property.
-
-    Custom programming of the DDC using NI-SCOPE property nodes is not
-    supported by National Instruments.
-
-    National Instruments supports using the DDC only when the Modulation
-    Toolkit and/or Spectral Measurements Toolkit are used, because they make
-    use of the DDC automatically (that is, without user intervention) when
-    configuration settings allow.
-    '''
-    enable_dither = attributes.AttributeViBoolean(1151300)
-    '''
-    Applies dither at the input of the ADC. Set this property to TRUE to
-    enable dither. The default value is FALSE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    enable_dither.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    enable_dither.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].enable_dither = var
-        var = session['0,1'].enable_dither
     '''
     enable_time_interleaved_sampling = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.BoolEnableDisableTIS, 1150128)
     '''
@@ -1214,41 +787,6 @@ class _SessionBase(object):
 
     VAL_PXI_STAR
     '''
-    exported_sample_clock_output_terminal = attributes.AttributeViString(1150091)
-    '''
-    Exports the sample clock to a specified terminal. This property is not
-    supported by all digitizers.
-
-    The full sample clock rate can be exported to the CLK_OUT connector. If
-    decimating, the divided down sample clock rate can be exported to any of
-    the valid destinations.
-
-    **Defined Values**
-
-    VAL_CLK_OUT
-
-    VAL_RTSI_0
-
-    VAL_RTSI_1
-
-    VAL_RTSI_2
-
-    VAL_RTSI_3
-
-    VAL_RTSI_4
-
-    VAL_RTSI_5
-
-    VAL_RTSI_6
-
-    VAL_PXI_STAR
-
-    VAL_PFI_0
-
-    VAL_PFI_1
-
-    VAL_PFI_2
-    '''
     exported_start_trigger_output_terminal = attributes.AttributeViString(1150097)
     '''
     Specifies the destination to export the Start trigger. When the start
@@ -1366,90 +904,6 @@ class _SessionBase(object):
     '''
     A string that contains a comma-separated list of class-extension groups
     that this driver implements.
-    '''
-    halfband_filter_1_enable = attributes.AttributeViBoolean(1151051)
-    '''
-    Enables halfband filter 1. If TRUE, filter is enabled. The default is
-    TRUE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    halfband_filter_1_enable.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    halfband_filter_1_enable.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].halfband_filter_1_enable = var
-        var = session['0,1'].halfband_filter_1_enable
-    '''
-    halfband_filter_2_enable = attributes.AttributeViBoolean(1151052)
-    '''
-    Enables halfband filter 2. If TRUE, filter is enabled. The default is
-    FALSE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    halfband_filter_2_enable.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    halfband_filter_2_enable.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].halfband_filter_2_enable = var
-        var = session['0,1'].halfband_filter_2_enable
-    '''
-    halfband_filter_3_enable = attributes.AttributeViBoolean(1151053)
-    '''
-    Enables halfband filter 3. If TRUE, filter is enabled. The default is
-    FALSE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    halfband_filter_3_enable.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    halfband_filter_3_enable.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].halfband_filter_3_enable = var
-        var = session['0,1'].halfband_filter_3_enable
-    '''
-    halfband_filter_4_enable = attributes.AttributeViBoolean(1151054)
-    '''
-    Enables halfband filter 4. If TRUE, filter is enabled. The default is
-    FALSE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    halfband_filter_4_enable.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    halfband_filter_4_enable.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].halfband_filter_4_enable = var
-        var = session['0,1'].halfband_filter_4_enable
-    '''
-    halfband_filter_5_enable = attributes.AttributeViBoolean(1151055)
-    '''
-    Enables halfband filter 5. If TRUE, filter is enabled. The default is
-    FALSE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    halfband_filter_5_enable.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    halfband_filter_5_enable.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].halfband_filter_5_enable = var
-        var = session['0,1'].halfband_filter_5_enable
-    '''
-    halfband_filter_bypass = attributes.AttributeViBoolean(1151050)
-    '''
-    Enables or bypasses the halfband filters. If set to TRUE, halfband
-    filters are bypassed. The default is TRUE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    halfband_filter_bypass.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    halfband_filter_bypass.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].halfband_filter_bypass = var
-        var = session['0,1'].halfband_filter_bypass
     '''
     high_pass_filter_frequency = attributes.AttributeViReal64(1150377)
     '''
@@ -1637,14 +1091,6 @@ class _SessionBase(object):
 
     Note: If disabled, warranted specifications are not guaranteed.
     '''
-    io_resource_descriptor = attributes.AttributeViString(1050304)
-    '''
-    Indicates the resource descriptor the driver uses to identify the
-    physical device. If you initialize the driver with a logical name, this
-    property contains the resource descriptor that corresponds to the entry
-    in the IVI Configuration utility. If you initialize the instrument
-    driver with the resource descriptor, this property contains that value.
-    '''
     logical_name = attributes.AttributeViString(1050305)
     '''
     A string that contains the logical name you specified when opening the
@@ -1671,32 +1117,6 @@ class _SessionBase(object):
     TRUE—Master
 
     FALSE—Slave
-    '''
-    max_input_frequency = attributes.AttributeViReal64(1250006)
-    '''
-    Specifies the bandwidth of the channel in hertz. Express this value as
-    the frequency at which the input circuitry attenuates the input signal
-    by 3 dB.
-
-    Special Values:
-
-    (-1) Full bandwidth
-
-    (0) Device default
-
-    **Related topics:**
-
-    `Bandwidth <digitizers.chm::/Analog_Bandwidth.html>`__ `Probes and Their
-    Effects <digitizers.chm::/Probes.html>`__
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    max_input_frequency.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    max_input_frequency.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].max_input_frequency = var
-        var = session['0,1'].max_input_frequency
     '''
     max_real_time_sampling_rate = attributes.AttributeViReal64(1150073)
     '''
@@ -2428,101 +1848,6 @@ class _SessionBase(object):
         session['0,1'].probe_attenuation = var
         var = session['0,1'].probe_attenuation
     '''
-    prog._fir_filter_decimation = attributes.AttributeViInt32(1151030)
-    '''
-    Specifies the programmable FIR filter decimation. The default value is
-    1.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    prog._fir_filter_decimation.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    prog._fir_filter_decimation.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].prog._fir_filter_decimation = var
-        var = session['0,1'].prog._fir_filter_decimation
-    '''
-    prog._fir_filter_realcomplex = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ProgFIRFilterRealComplex, 1151034)
-    '''
-    Sets either a Complex filter or a dual Real filter. The default value is
-    Real.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    prog._fir_filter_realcomplex.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    prog._fir_filter_realcomplex.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].prog._fir_filter_realcomplex = var
-        var = session['0,1'].prog._fir_filter_realcomplex
-    '''
-    prog._fir_filter_symmetry = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ProgFIRFilterSymmetry, 1151031)
-    '''
-    Sets either a Symmetric or Asymmetric filter. The default value is
-    Symmetric.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    prog._fir_filter_symmetry.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    prog._fir_filter_symmetry.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].prog._fir_filter_symmetry = var
-        var = session['0,1'].prog._fir_filter_symmetry
-    '''
-    prog._fir_filter_symmetry_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ProgFIRFilterSymmetryType, 1151032)
-    '''
-    Sets either even or odd symmetry. The default value is Even.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    prog._fir_filter_symmetry_type.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    prog._fir_filter_symmetry_type.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].prog._fir_filter_symmetry_type = var
-        var = session['0,1'].prog._fir_filter_symmetry_type
-    '''
-    prog._fir_filter_taps = attributes.AttributeViInt32(1151033)
-    '''
-    Defines the number of taps (in other words, coefficients) for a FIR
-    filter. The default value is 25.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    prog._fir_filter_taps.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    prog._fir_filter_taps.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].prog._fir_filter_taps = var
-        var = session['0,1'].prog._fir_filter_taps
-    '''
-    query_instrument_status = attributes.AttributeViBoolean(1050003)
-    '''
-    Specifies whether the instrument driver queries the instrument status
-    after each operation. Querying the instrument status is very useful for
-    debugging. After you validate your program, you can set this property to
-    FALSE to disable status checking and maximize performance. The
-    instrument driver can choose to ignore status checking for particular
-    properties regardless of the setting of this property. The default value
-    is TRUE. Use `niScope Initialize with
-    Options <scopeviref.chm::/niScope_Initialize_With_Options.html>`__ to
-    override this value.
-    '''
-    q_input_to_coord._converter = attributes.AttributeEnum(attributes.AttributeViInt32, enums.QInputtoCoordConverter, 1151074)
-    '''
-    Either enables or zeros out the Q input to coordinate converter. The
-    default value is I and Q.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    q_input_to_coord._converter.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    q_input_to_coord._converter.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].q_input_to_coord._converter = var
-        var = session['0,1'].q_input_to_coord._converter
-    '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate property values and function parameters.
@@ -2697,85 +2022,6 @@ class _SessionBase(object):
 
     `TDC <digitizers.chm::/TDC.html>`__
     '''
-    resampler_bypass = attributes.AttributeViBoolean(1151127)
-    '''
-    Either enables or bypasses the resampler filter in the DDC. The
-    resampler is a polyphase filter that allows the output sample rate to
-    have a non-integer relationship to the input sample rate. In essence, it
-    acts as a fixed interpolation filter followed by an NCO controlled
-    decimator. The default value is TRUE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    resampler_bypass.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    resampler_bypass.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].resampler_bypass = var
-        var = session['0,1'].resampler_bypass
-    '''
-    resampler_filter_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ResamplerFilterMode, 1151126)
-    '''
-    Selects the resampling filter mode.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    resampler_filter_mode.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    resampler_filter_mode.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].resampler_filter_mode = var
-        var = session['0,1'].resampler_filter_mode
-    '''
-    resampler_nco_divide = attributes.AttributeViInt32(1151129)
-    '''
-    Divides down the
-    `resampler <Digitizers.chm::/Glossary.html#resampler>`__ NCO output by
-    the value loaded into the register plus one. The default value is 2.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    resampler_nco_divide.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    resampler_nco_divide.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].resampler_nco_divide = var
-        var = session['0,1'].resampler_nco_divide
-    '''
-    resampler_output_pulse_delay = attributes.AttributeViInt32(1151128)
-    '''
-    Programs the delay between output samples when interpolating. These
-    outputs can be delayed from 2 to 255 clocks. The default value is 16.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    resampler_output_pulse_delay.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    resampler_output_pulse_delay.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].resampler_output_pulse_delay = var
-        var = session['0,1'].resampler_output_pulse_delay
-    '''
-    resampler_reference_divide = attributes.AttributeViInt32(1151130)
-    '''
-    Divides down the reference clock by the value loaded into the register
-    plus one. Load with a value that is one less than the desired period.
-    The default value is 2.
-
-    **Related topics:**
-
-    `Reference Clock/Phase-Lock
-    Loop <digitizers.chm::/Reference_Clock.html>`__
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    resampler_reference_divide.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    resampler_reference_divide.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].resampler_reference_divide = var
-        var = session['0,1'].resampler_reference_divide
-    '''
     resolution = attributes.AttributeViInt32(1150102)
     '''
     Indicates the actual resolution in bits of valid data (as opposed to
@@ -2889,7 +2135,6 @@ class _SessionBase(object):
 
     `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
     '''
-    serial_dac_cal_voltage = attributes.AttributeViReal64(1151302)
     serial_number = attributes.AttributeViString(1150104)
     '''
     Returns the serial number of the device.
@@ -2968,16 +2213,6 @@ class _SessionBase(object):
     '''
     A string that contains the description of the instrument.
     '''
-    specific_driver_prefix = attributes.AttributeViString(1050302)
-    '''
-    A string that contains the prefix for the instrument driver. The name of
-    each user-callable function in this driver starts with this prefix.
-    '''
-    specific_driver_revision = attributes.AttributeViString(1050551)
-    '''
-    The string that contains additional version information about this
-    instrument driver.
-    '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
     A string that contains the name of the vendor that supplies this driver,
@@ -3004,134 +2239,6 @@ class _SessionBase(object):
     '''
     A string that contains a comma-separated list of the instrument model
     numbers supported by this driver.
-    '''
-    syncout_clk_select = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SyncoutCLKSelect, 1151080)
-    '''
-    Source for Syncout CLK. The default value is CLK IN.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    syncout_clk_select.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    syncout_clk_select.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].syncout_clk_select = var
-        var = session['0,1'].syncout_clk_select
-    '''
-    test_mode_sincos = attributes.AttributeViBoolean(1151072)
-    '''
-    Enables the special test mode where the carrier NCO outputs are set to
-    0x7FFF. The default is FALSE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    test_mode_sincos.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    test_mode_sincos.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].test_mode_sincos = var
-        var = session['0,1'].test_mode_sincos
-    '''
-    timing_nco_center_freq. = attributes.AttributeViInt32(1151124)
-    '''
-    Controls the frequency of the timing NCO. Specifies the timing NCO
-    center frequency in binary format:
-
-    *N = (F:sub:`out` / F\ :sub:`resampler`) & 2\ :sup:`32`*
-
-    where *F\ :sub:`out`* is the output frequency and *F\ :sub:`resampler`*
-    is the resampled frequency.
-
-    The value is transferred to the active register during the next initiate
-    acquisition operation. The default value is 0X8000000.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    timing_nco_center_freq..Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    timing_nco_center_freq..Session instance, and calling set/get value on the result.:
-
-        session['0,1'].timing_nco_center_freq. = var
-        var = session['0,1'].timing_nco_center_freq.
-    '''
-    timing_nco_clear_phase_accum. = attributes.AttributeViBoolean(1151121)
-    '''
-    If FALSE, enables the accumulator in the `timing
-    NCO <Digitizers.chm::/Glossary.html#timingNCO>`__. If TRUE, zeros out
-    feedback in the accumulator. The default value is FALSE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    timing_nco_clear_phase_accum..Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    timing_nco_clear_phase_accum..Session instance, and calling set/get value on the result.:
-
-        session['0,1'].timing_nco_clear_phase_accum. = var
-        var = session['0,1'].timing_nco_clear_phase_accum.
-    '''
-    timing_nco_enable_offset_freq. = attributes.AttributeViBoolean(1151122)
-    '''
-    If TRUE, enables offset frequency in the `timing
-    NCO <Digitizers.chm::/Glossary.html#timingNCO>`__. If FALSE, applies no
-    offset frequency. The default value is FALSE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    timing_nco_enable_offset_freq..Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    timing_nco_enable_offset_freq..Session instance, and calling set/get value on the result.:
-
-        session['0,1'].timing_nco_enable_offset_freq. = var
-        var = session['0,1'].timing_nco_enable_offset_freq.
-    '''
-    timing_nco_freq._offset_bits = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TimingNCOFreqOffsetBits, 1151123)
-    '''
-    Specifies the number of offset bits in the `timing
-    NCO <Digitizers.chm::/Glossary.html#timingNCO>`__. The default value is
-    8 bits.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    timing_nco_freq._offset_bits.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    timing_nco_freq._offset_bits.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].timing_nco_freq._offset_bits = var
-        var = session['0,1'].timing_nco_freq._offset_bits
-    '''
-    timing_nco_phase_accum._load_on_update = attributes.AttributeViBoolean(1151120)
-    '''
-    When TRUE, updates the `timing
-    NCO <Digitizers.chm::/Glossary.html#timingNCO>`__ frequency to zero the
-    feedback of the phase accumulator as well as update the phase and
-    frequency. The default value is TRUE.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    timing_nco_phase_accum._load_on_update.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    timing_nco_phase_accum._load_on_update.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].timing_nco_phase_accum._load_on_update = var
-        var = session['0,1'].timing_nco_phase_accum._load_on_update
-    '''
-    timing_nco_phase_offset = attributes.AttributeViInt32(1151125)
-    '''
-    Offsets the phase of the `timing
-    NCO <Digitizers.chm::/Glossary.html#timingNCO>`__ in binary format. The
-    value is transferred to the active register during the next initiate
-    acquisition. The default value is 0.
-
-    Valid Range: 0 to 6.283185307179586476925286766558
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    timing_nco_phase_offset.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    timing_nco_phase_offset.Session instance, and calling set/get value on the result.:
-
-        session['0,1'].timing_nco_phase_offset = var
-        var = session['0,1'].timing_nco_phase_offset
     '''
     trigger_auto_triggered = attributes.AttributeViBoolean(1150278)
     '''
@@ -3562,8 +2669,10 @@ class _SessionBase(object):
                 operating in DDC mode (NI 5620/5621 only), this value is multiplied by
                 two.
         '''
-        num_wfms_ctype = visatype.ViInt32(0)
-        error_code = self._library.niScope_ActualNumWfms(self._vi, self._repeated_capability.encode(self._encoding), ctypes.pointer(num_wfms_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        num_wfms_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niScope_ActualNumWfms(vi_ctype, channel_list_ctype, ctypes.pointer(num_wfms_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(num_wfms_ctype.value)
 
@@ -3593,7 +2702,10 @@ class _SessionBase(object):
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to add.
         '''
-        error_code = self._library.niScope_AddWaveformProcessing(self._vi, self._repeated_capability.encode(self._encoding), meas_function)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        meas_function_ctype = visatype.ViInt32(meas_function)  # case 8
+        error_code = self._library.niScope_AddWaveformProcessing(vi_ctype, channel_list_ctype, meas_function_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3627,7 +2739,10 @@ class _SessionBase(object):
                 operation or NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION to
                 restore the previous calibration.
         '''
-        error_code = self._library.niScope_CalSelfCalibrate(self._vi, self._repeated_capability.encode(self._encoding), option)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        option_ctype = visatype.ViInt32(option)  # case 8
+        error_code = self._library.niScope_CalSelfCalibrate(vi_ctype, channel_list_ctype, option_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3650,7 +2765,11 @@ class _SessionBase(object):
                 not be valid depending on the current settings of the instrument
                 session.
         '''
-        error_code = self._library.niScope_CheckAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViBoolean(value)  # case 8
+        error_code = self._library.niScope_CheckAttributeViBoolean(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3673,7 +2792,11 @@ class _SessionBase(object):
                 not be valid depending on the current settings of the instrument
                 session.
         '''
-        error_code = self._library.niScope_CheckAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViInt32(value)  # case 8
+        error_code = self._library.niScope_CheckAttributeViInt32(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3696,7 +2819,11 @@ class _SessionBase(object):
                 not be valid depending on the current settings of the instrument
                 session.
         '''
-        error_code = self._library.niScope_CheckAttributeViInt64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViInt64(value)  # case 8
+        error_code = self._library.niScope_CheckAttributeViInt64(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3719,7 +2846,11 @@ class _SessionBase(object):
                 not be valid depending on the current settings of the instrument
                 session.
         '''
-        error_code = self._library.niScope_CheckAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViReal64(value)  # case 8
+        error_code = self._library.niScope_CheckAttributeViReal64(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3739,7 +2870,11 @@ class _SessionBase(object):
         Args:
             attribute_id (int): The ID of an attribute.
         '''
-        error_code = self._library.niScope_CheckAttributeViSession(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, self._Value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViSession(self._value)  # case 1
+        error_code = self._library.niScope_CheckAttributeViSession(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3762,7 +2897,11 @@ class _SessionBase(object):
                 not be valid depending on the current settings of the instrument
                 session.
         '''
-        error_code = self._library.niScope_CheckAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, value.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case 3
+        error_code = self._library.niScope_CheckAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3795,7 +2934,10 @@ class _SessionBase(object):
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
                 to clear the stats for.
         '''
-        error_code = self._library.niScope_ClearWaveformMeasurementStats(self._vi, self._repeated_capability.encode(self._encoding), clearable_measurement_function)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        clearable_measurement_function_ctype = visatype.ViInt32(clearable_measurement_function)  # case 8
+        error_code = self._library.niScope_ClearWaveformMeasurementStats(vi_ctype, channel_list_ctype, clearable_measurement_function_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3817,7 +2959,9 @@ class _SessionBase(object):
 
             session['0,1'].clear_waveform_processing()
         '''
-        error_code = self._library.niScope_ClearWaveformProcessing(self._vi, self._repeated_capability.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        error_code = self._library.niScope_ClearWaveformProcessing(vi_ctype, channel_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3843,7 +2987,11 @@ class _SessionBase(object):
                 value to use the hardware default bandwidth. Pass –1 for this value to
                 achieve full bandwidth.
         '''
-        error_code = self._library.niScope_ConfigureChanCharacteristics(self._vi, self._repeated_capability.encode(self._encoding), input_impedance, max_input_frequency)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        input_impedance_ctype = visatype.ViReal64(input_impedance)  # case 8
+        max_input_frequency_ctype = visatype.ViReal64(max_input_frequency)  # case 8
+        error_code = self._library.niScope_ConfigureChanCharacteristics(vi_ctype, channel_list_ctype, input_impedance_ctype, max_input_frequency_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3874,7 +3022,11 @@ class _SessionBase(object):
                 `EQUALIZATION_FILTER_ENABLED <cviNISCOPE_ATTR_EQUALIZATION_FILTER_ENABLED.html>`__
                 attribute must be set to TRUE to enable the filter.
         '''
-        error_code = self._library.niScope_ConfigureEqualizationFilterCoefficients(self._vi, self._repeated_capability.encode(self._encoding), number_of_coefficients, coefficients)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case 8
+        coefficients_ctype = (visatype.ViReal64 * len(coefficients))(*coefficients)  # case 4
+        error_code = self._library.niScope_ConfigureEqualizationFilterCoefficients(vi_ctype, channel_list_ctype, number_of_coefficients_ctype, coefficients_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3905,7 +3057,14 @@ class _SessionBase(object):
             enabled (bool): Specifies whether the channel is enabled for acquisition. Refer to
                 CHANNEL_ENABLED for more information.
         '''
-        error_code = self._library.niScope_ConfigureVertical(self._vi, self._repeated_capability.encode(self._encoding), range, offset, coupling, probe_attenuation, enabled)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        range_ctype = visatype.ViReal64(range)  # case 8
+        offset_ctype = visatype.ViReal64(offset)  # case 8
+        coupling_ctype = visatype.ViInt32(coupling)  # case 8
+        probe_attenuation_ctype = visatype.ViReal64(probe_attenuation)  # case 8
+        enabled_ctype = visatype.ViBoolean(enabled)  # case 8
+        error_code = self._library.niScope_ConfigureVertical(vi_ctype, channel_list_ctype, range_ctype, offset_ctype, coupling_ctype, probe_attenuation_ctype, enabled_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3944,8 +3103,12 @@ class _SessionBase(object):
             result (list of float): Contains an array of all measurements acquired; call
                 actual_num_wfms to determine the array length.
         '''
-        result_ctype = (visatype.ViReal64 * 1)()
-        error_code = self._library.niScope_FetchMeasurement(self._vi, self._repeated_capability.encode(self._encoding), timeout, scalar_meas_function, result_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        timeout_ctype = visatype.ViReal64(timeout)  # case 8
+        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function)  # case 8
+        result_ctype = (visatype.ViReal64 * 1)()  # case 10
+        error_code = self._library.niScope_FetchMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(result_ctype[i]) for i in range(1)]
 
@@ -4006,13 +3169,17 @@ class _SessionBase(object):
             num_in_stats (list of int): Returns the number of times fetch_measurement_stats has been
                 called.
         '''
-        result_ctype = (visatype.ViReal64 * 1)()
-        mean_ctype = (visatype.ViReal64 * 1)()
-        stdev_ctype = (visatype.ViReal64 * 1)()
-        min_ctype = (visatype.ViReal64 * 1)()
-        max_ctype = (visatype.ViReal64 * 1)()
-        num_in_stats_ctype = (visatype.ViInt32 * 1)()
-        error_code = self._library.niScope_FetchMeasurementStats(self._vi, self._repeated_capability.encode(self._encoding), timeout, scalar_meas_function, result_ctype, mean_ctype, stdev_ctype, min_ctype, max_ctype, num_in_stats_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        timeout_ctype = visatype.ViReal64(timeout)  # case 8
+        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function)  # case 8
+        result_ctype = (visatype.ViReal64 * 1)()  # case 10
+        mean_ctype = (visatype.ViReal64 * 1)()  # case 10
+        stdev_ctype = (visatype.ViReal64 * 1)()  # case 10
+        min_ctype = (visatype.ViReal64 * 1)()  # case 10
+        max_ctype = (visatype.ViReal64 * 1)()  # case 10
+        num_in_stats_ctype = (visatype.ViInt32 * 1)()  # case 10
+        error_code = self._library.niScope_FetchMeasurementStats(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype, mean_ctype, stdev_ctype, min_ctype, max_ctype, num_in_stats_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(result_ctype[i]) for i in range(1)], [float(mean_ctype[i]) for i in range(1)], [float(stdev_ctype[i]) for i in range(1)], [float(min_ctype[i]) for i in range(1)], [float(max_ctype[i]) for i in range(1)], [int(num_in_stats_ctype[i]) for i in range(1)]
 
@@ -4043,8 +3210,11 @@ class _SessionBase(object):
             value (bool): Returns the current value of the attribute; pass the address of a
                 ViBoolean variable.
         '''
-        value_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niScope_GetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViBoolean()  # case 13
+        error_code = self._library.niScope_GetAttributeViBoolean(vi_ctype, channel_list_ctype, attribute_id_ctype, ctypes.pointer(value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(value_ctype.value)
 
@@ -4074,8 +3244,11 @@ class _SessionBase(object):
         Returns:
             value (int): Returns the current value of the attribute.
         '''
-        value_ctype = visatype.ViInt32(0)
-        error_code = self._library.niScope_GetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niScope_GetAttributeViInt32(vi_ctype, channel_list_ctype, attribute_id_ctype, ctypes.pointer(value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
@@ -4105,8 +3278,11 @@ class _SessionBase(object):
         Returns:
             value (int): Returns the current value of the attribute.
         '''
-        value_ctype = visatype.ViInt64(0)
-        error_code = self._library.niScope_GetAttributeViInt64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViInt64()  # case 13
+        error_code = self._library.niScope_GetAttributeViInt64(vi_ctype, channel_list_ctype, attribute_id_ctype, ctypes.pointer(value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
@@ -4137,8 +3313,11 @@ class _SessionBase(object):
             value (float): Returns the current value of the attribute; pass the address of a
                 ViReal64 variable.
         '''
-        value_ctype = visatype.ViReal64(0)
-        error_code = self._library.niScope_GetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niScope_GetAttributeViReal64(vi_ctype, channel_list_ctype, attribute_id_ctype, ctypes.pointer(value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(value_ctype.value)
 
@@ -4177,13 +3356,16 @@ class _SessionBase(object):
             attribute_id (int): The ID of an attribute.
             buf_size (int): The number of bytes in the ViChar array you specify for **value**.
         '''
-        buf_size = 0
-        value_ctype = None
-        error_code = self._library.niScope_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, buf_size, value_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        buf_size_ctype = visatype.ViInt32()  # case 6
+        value_ctype = None  # case 11
+        error_code = self._library.niScope_GetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buf_size = error_code
-        value_ctype = (visatype.ViChar * buf_size)()
-        error_code = self._library.niScope_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, buf_size, value_ctype)
+        buf_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        value_ctype = (visatype.ViChar * buf_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niScope_GetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
 
@@ -4214,8 +3396,11 @@ class _SessionBase(object):
                 `EQUALIZATION_NUM_COEFFICIENTS <cviNISCOPE_ATTR_EQUALIZATION_NUM_COEFFICIENTS.html>`__
                 attribute.
         '''
-        coefficients_ctype = (visatype.ViReal64 * 1)()
-        error_code = self._library.niScope_GetEqualizationFilterCoefficients(self._vi, self._repeated_capability.encode(self._encoding), number_of_coefficients, coefficients_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case 8
+        coefficients_ctype = (visatype.ViReal64 * 1)()  # case 10
+        error_code = self._library.niScope_GetEqualizationFilterCoefficients(vi_ctype, channel_ctype, number_of_coefficients_ctype, coefficients_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_ctype[i]) for i in range(1)]
 
@@ -4250,14 +3435,15 @@ class _SessionBase(object):
 
                 If you pass 0, you can pass VI_NULL for the **description** parameter.
         '''
-        error_code_ctype = visatype.ViStatus(0)
-        buffer_size = 0
-        description_ctype = None
-        error_code = self._library.niScope_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code_ctype = visatype.ViStatus()  # case 13
+        buffer_size_ctype = visatype.ViInt32()  # case 6
+        description_ctype = None  # case 11
+        error_code = self._library.niScope_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size = error_code
-        description_ctype = (visatype.ViChar * buffer_size)()
-        error_code = self._library.niScope_GetError(self._vi, ctypes.pointer(error_code_ctype), buffer_size, description_ctype)
+        buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        description_ctype = (visatype.ViChar * buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niScope_GetError(vi_ctype, ctypes.pointer(error_code_ctype), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
@@ -4298,8 +3484,14 @@ class _SessionBase(object):
         Returns:
             number_of_frequencies (int): Returns the number of frequencies in the returned spectrum.
         '''
-        number_of_frequencies_ctype = visatype.ViInt32(0)
-        error_code = self._library.niScope_GetFrequencyResponse(self._vi, self._repeated_capability.encode(self._encoding), buffer_size, frequencies, amplitudes, phases, ctypes.pointer(number_of_frequencies_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        buffer_size_ctype = visatype.ViInt32(buffer_size)  # case 8
+        frequencies_ctype = (visatype.ViReal64 * len(frequencies))(*frequencies)  # case 4
+        amplitudes_ctype = (visatype.ViReal64 * len(amplitudes))(*amplitudes)  # case 4
+        phases_ctype = (visatype.ViReal64 * len(phases))(*phases)  # case 4
+        number_of_frequencies_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niScope_GetFrequencyResponse(vi_ctype, channel_ctype, buffer_size_ctype, frequencies_ctype, amplitudes_ctype, phases_ctype, ctypes.pointer(number_of_frequencies_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(number_of_frequencies_ctype.value)
 
@@ -4372,8 +3564,10 @@ class _SessionBase(object):
             device_ready (bool): Returns True if the device is ready to use, or False if the device is
                 still initializing.
         '''
-        device_ready_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niScope_IsDeviceReady(resource_name.encode(self._encoding), self._repeated_capability.encode(self._encoding), ctypes.pointer(device_ready_ctype))
+        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        device_ready_ctype = visatype.ViBoolean()  # case 13
+        error_code = self._library.niScope_IsDeviceReady(resource_name_ctype, channel_list_ctype, ctypes.pointer(device_ready_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(device_ready_ctype.value)
 
@@ -4415,8 +3609,12 @@ class _SessionBase(object):
             result (list of float): Contains an array of all measurements acquired. Call
                 actual_num_wfms to determine the array length.
         '''
-        result_ctype = (visatype.ViReal64 * 1)()
-        error_code = self._library.niScope_ReadMeasurement(self._vi, self._repeated_capability.encode(self._encoding), timeout, scalar_meas_function, result_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        timeout_ctype = visatype.ViReal64(timeout)  # case 8
+        scalar_meas_function_ctype = visatype.ViInt32(scalar_meas_function)  # case 8
+        result_ctype = (visatype.ViReal64 * 1)()  # case 10
+        error_code = self._library.niScope_ReadMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, scalar_meas_function_ctype, result_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(result_ctype[i]) for i in range(1)]
 
@@ -4459,7 +3657,11 @@ class _SessionBase(object):
             value (bool): The value that you want to set the attribute to. Some values might not
                 be valid depending on the current settings of the instrument session.
         '''
-        error_code = self._library.niScope_SetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViBoolean(value)  # case 8
+        error_code = self._library.niScope_SetAttributeViBoolean(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4502,7 +3704,11 @@ class _SessionBase(object):
             value (int): The value that you want to set the attribute. Some values might not be
                 valid depending on the current settings of the instrument session.
         '''
-        error_code = self._library.niScope_SetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViInt32(value)  # case 8
+        error_code = self._library.niScope_SetAttributeViInt32(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4545,7 +3751,11 @@ class _SessionBase(object):
             value (int): The value that you want to set the attribute. Some values might not be
                 valid depending on the current settings of the instrument session.
         '''
-        error_code = self._library.niScope_SetAttributeViInt64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViInt64(value)  # case 8
+        error_code = self._library.niScope_SetAttributeViInt64(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4588,7 +3798,11 @@ class _SessionBase(object):
             value (float): The value that you want to set the attribute to. Some values might not
                 be valid depending on the current settings of the instrument session.
         '''
-        error_code = self._library.niScope_SetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = visatype.ViReal64(value)  # case 8
+        error_code = self._library.niScope_SetAttributeViReal64(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4633,7 +3847,11 @@ class _SessionBase(object):
             value (string): The value that you want to set the attribute to. Some values might not
                 be valid depending on the current settings of the instrument session.
         '''
-        error_code = self._library.niScope_SetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, value.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case 3
+        error_code = self._library.niScope_SetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4685,7 +3903,8 @@ class Session(_SessionBase):
         Aborts an acquisition and returns the digitizer to the Idle state. Call
         this function if the digitizer times out waiting for a trigger.
         '''
-        error_code = self._library.niScope_Abort(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_Abort(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4706,8 +3925,9 @@ class Session(_SessionBase):
 
                 NISCOPE_VAL_ACQ_STATUS_UNKNOWN
         '''
-        acquisition_status_ctype = visatype.ViInt32(0)
-        error_code = self._library.niScope_AcquisitionStatus(self._vi, ctypes.pointer(acquisition_status_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        acquisition_status_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niScope_AcquisitionStatus(vi_ctype, ctypes.pointer(acquisition_status_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(acquisition_status_ctype.value)
 
@@ -4725,8 +3945,10 @@ class Session(_SessionBase):
             meas_waveform_size (int): Returns the size (in number of samples) of the resulting analysis
                 waveform.
         '''
-        meas_waveform_size_ctype = visatype.ViInt32(0)
-        error_code = self._library.niScope_ActualMeasWfmSize(self._vi, array_meas_function, ctypes.pointer(meas_waveform_size_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        array_meas_function_ctype = visatype.ViInt32(array_meas_function)  # case 8
+        meas_waveform_size_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niScope_ActualMeasWfmSize(vi_ctype, array_meas_function_ctype, ctypes.pointer(meas_waveform_size_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(meas_waveform_size_ctype.value)
 
@@ -4744,8 +3966,9 @@ class Session(_SessionBase):
                 channel; NI-SCOPE returns the value held in the
                 HORZ_RECORD_LENGTH attribute.
         '''
-        record_length_ctype = visatype.ViInt32(0)
-        error_code = self._library.niScope_ActualRecordLength(self._vi, ctypes.pointer(record_length_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        record_length_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niScope_ActualRecordLength(vi_ctype, ctypes.pointer(record_length_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(record_length_ctype.value)
 
@@ -4761,7 +3984,9 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        error_code = self._library.niScope_AdjustSampleClockRelativeDelay(self._vi, delay)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        delay_ctype = visatype.ViReal64(delay)  # case 8
+        error_code = self._library.niScope_AdjustSampleClockRelativeDelay(vi_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4835,7 +4060,8 @@ class Session(_SessionBase):
         | Trigger output     |
         +--------------------+
         '''
-        error_code = self._library.niScope_AutoSetup(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_AutoSetup(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4847,7 +4073,8 @@ class Session(_SessionBase):
         reflected in the hardware. This function is not supported for
         Traditional NI-DAQ (Legacy) devices.
         '''
-        error_code = self._library.niScope_Commit(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_Commit(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4875,7 +4102,9 @@ class Session(_SessionBase):
                 the NI 5142/5622, leave **acquisitionType** set to NISCOPE_VAL_NORMAL
                 and set DDC_ENABLED to True.
         '''
-        error_code = self._library.niScope_ConfigureAcquisition(self._vi, acquisition_type)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        acquisition_type_ctype = visatype.ViInt32(acquisition_type)  # case 8
+        error_code = self._library.niScope_ConfigureAcquisition(vi_ctype, acquisition_type_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4900,7 +4129,11 @@ class Session(_SessionBase):
             acquisition_start_time (float): Specifies the position of the first point in the waveform record
                 relative to the trigger event.
         '''
-        error_code = self._library.niScope_ConfigureAcquisitionRecord(self._vi, time_per_record, min_num_points, acquisition_start_time)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        time_per_record_ctype = visatype.ViReal64(time_per_record)  # case 8
+        min_num_points_ctype = visatype.ViInt32(min_num_points)  # case 8
+        acquisition_start_time_ctype = visatype.ViReal64(acquisition_start_time)  # case 8
+        error_code = self._library.niScope_ConfigureAcquisitionRecord(vi_ctype, time_per_record_ctype, min_num_points_ctype, acquisition_start_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4961,7 +4194,14 @@ class Session(_SessionBase):
                 | NISCOPE_VAL_TRUE (1)—Acquire data on this channel
                 | NISCOPE_VAL_FALSE (0)—Do not acquire data on this channel
         '''
-        error_code = self._library.niScope_ConfigureChannel(self._vi, channel.encode(self._encoding), range, offset, coupling, probe_attenuation, enabled)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_ctype = ctypes.create_string_buffer(channel.encode(self._encoding))  # case 3
+        range_ctype = visatype.ViReal64(range)  # case 8
+        offset_ctype = visatype.ViReal64(offset)  # case 8
+        coupling_ctype = visatype.ViInt32(coupling)  # case 8
+        probe_attenuation_ctype = visatype.ViReal64(probe_attenuation)  # case 8
+        enabled_ctype = visatype.ViBoolean(enabled)  # case 8
+        error_code = self._library.niScope_ConfigureChannel(vi_ctype, channel_ctype, range_ctype, offset_ctype, coupling_ctype, probe_attenuation_ctype, enabled_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4997,7 +4237,12 @@ class Session(_SessionBase):
 
                 Refer to MASTER_ENABLE for more information.
         '''
-        error_code = self._library.niScope_ConfigureClock(self._vi, input_clock_source.encode(self._encoding), output_clock_source.encode(self._encoding), clock_sync_pulse_source.encode(self._encoding), master_enabled)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        input_clock_source_ctype = ctypes.create_string_buffer(input_clock_source.encode(self._encoding))  # case 3
+        output_clock_source_ctype = ctypes.create_string_buffer(output_clock_source.encode(self._encoding))  # case 3
+        clock_sync_pulse_source_ctype = ctypes.create_string_buffer(clock_sync_pulse_source.encode(self._encoding))  # case 3
+        master_enabled_ctype = visatype.ViBoolean(master_enabled)  # case 8
+        error_code = self._library.niScope_ConfigureClock(vi_ctype, input_clock_source_ctype, output_clock_source_ctype, clock_sync_pulse_source_ctype, master_enabled_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5031,7 +4276,11 @@ class Session(_SessionBase):
                 the digitizer. Refer to TRIGGER_SLOPE for more
                 information.
         '''
-        error_code = self._library.niScope_ConfigureEdgeTriggerSource(self._vi, source.encode(self._encoding), level, slope)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case 3
+        level_ctype = visatype.ViReal64(level)  # case 8
+        slope_ctype = visatype.ViInt32(slope)  # case 8
+        error_code = self._library.niScope_ConfigureEdgeTriggerSource(vi_ctype, source_ctype, level_ctype, slope_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5066,7 +4315,13 @@ class Session(_SessionBase):
 
                 VI_FALSE—Allow real-time and equivalent-time acquisitions
         '''
-        error_code = self._library.niScope_ConfigureHorizontalTiming(self._vi, min_sample_rate, min_num_pts, ref_position, num_records, enforce_realtime)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        min_sample_rate_ctype = visatype.ViReal64(min_sample_rate)  # case 8
+        min_num_pts_ctype = visatype.ViInt32(min_num_pts)  # case 8
+        ref_position_ctype = visatype.ViReal64(ref_position)  # case 8
+        num_records_ctype = visatype.ViInt32(num_records)  # case 8
+        enforce_realtime_ctype = visatype.ViBoolean(enforce_realtime)  # case 8
+        error_code = self._library.niScope_ConfigureHorizontalTiming(vi_ctype, min_sample_rate_ctype, min_num_pts_ctype, ref_position_ctype, num_records_ctype, enforce_realtime_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5116,7 +4371,11 @@ class Session(_SessionBase):
 
                 Default Value: 90.0
         '''
-        error_code = self._library.niScope_ConfigureRefLevels(self._vi, low, mid, high)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        low_ctype = visatype.ViReal64(low)  # case 8
+        mid_ctype = visatype.ViReal64(mid)  # case 8
+        high_ctype = visatype.ViReal64(high)  # case 8
+        error_code = self._library.niScope_ConfigureRefLevels(vi_ctype, low_ctype, mid_ctype, high_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5153,7 +4412,9 @@ class Session(_SessionBase):
                 | 1080i,1080p               | 1 to 1,125   |
                 +---------------------------+--------------+
         '''
-        error_code = self._library.niScope_ConfigureTVTriggerLineNumber(self._vi, line_number)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        line_number_ctype = visatype.ViInt32(line_number)  # case 8
+        error_code = self._library.niScope_ConfigureTVTriggerLineNumber(vi_ctype, line_number_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5210,7 +4471,12 @@ class Session(_SessionBase):
                 | NISCOPE_VAL_TV_POSITIVE (1)
                 | NISCOPE_VAL_TV_NEGATIVE (2)
         '''
-        error_code = self._library.niScope_ConfigureTVTriggerSource(self._vi, source.encode(self._encoding), signal_format, event, polarity)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case 3
+        signal_format_ctype = visatype.ViInt32(signal_format)  # case 8
+        event_ctype = visatype.ViInt32(event)  # case 8
+        polarity_ctype = visatype.ViInt32(polarity)  # case 8
+        error_code = self._library.niScope_ConfigureTVTriggerSource(vi_ctype, source_ctype, signal_format_ctype, event_ctype, polarity_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5238,7 +4504,10 @@ class Session(_SessionBase):
                 enabling NI-SCOPE to detect another trigger. Refer to
                 TRIGGER_HOLDOFF for more information.
         '''
-        error_code = self._library.niScope_ConfigureTrigger(self._vi, trigger_type, holdoff)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_type_ctype = visatype.ViInt32(trigger_type)  # case 8
+        holdoff_ctype = visatype.ViReal64(holdoff)  # case 8
+        error_code = self._library.niScope_ConfigureTrigger(vi_ctype, trigger_type_ctype, holdoff_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5267,7 +4536,9 @@ class Session(_SessionBase):
 
                 NISCOPE_VAL_AC_PLUS_HF_REJECT (1001)
         '''
-        error_code = self._library.niScope_ConfigureTriggerCoupling(self._vi, coupling)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        coupling_ctype = visatype.ViInt32(coupling)  # case 8
+        error_code = self._library.niScope_ConfigureTriggerCoupling(vi_ctype, coupling_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5317,7 +4588,12 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        error_code = self._library.niScope_ConfigureTriggerDigital(self._vi, trigger_source.encode(self._encoding), slope, holdoff, delay)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
+        slope_ctype = visatype.ViInt32(slope)  # case 8
+        holdoff_ctype = visatype.ViReal64(holdoff)  # case 8
+        delay_ctype = visatype.ViReal64(delay)  # case 8
+        error_code = self._library.niScope_ConfigureTriggerDigital(vi_ctype, trigger_source_ctype, slope_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5361,7 +4637,14 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        error_code = self._library.niScope_ConfigureTriggerEdge(self._vi, trigger_source.encode(self._encoding), level, slope, trigger_coupling, holdoff, delay)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
+        level_ctype = visatype.ViReal64(level)  # case 8
+        slope_ctype = visatype.ViInt32(slope)  # case 8
+        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling)  # case 8
+        holdoff_ctype = visatype.ViReal64(holdoff)  # case 8
+        delay_ctype = visatype.ViReal64(delay)  # case 8
+        error_code = self._library.niScope_ConfigureTriggerEdge(vi_ctype, trigger_source_ctype, level_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5414,7 +4697,15 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        error_code = self._library.niScope_ConfigureTriggerHysteresis(self._vi, trigger_source.encode(self._encoding), level, hysteresis, slope, trigger_coupling, holdoff, delay)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
+        level_ctype = visatype.ViReal64(level)  # case 8
+        hysteresis_ctype = visatype.ViReal64(hysteresis)  # case 8
+        slope_ctype = visatype.ViInt32(slope)  # case 8
+        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling)  # case 8
+        holdoff_ctype = visatype.ViReal64(holdoff)  # case 8
+        delay_ctype = visatype.ViReal64(delay)  # case 8
+        error_code = self._library.niScope_ConfigureTriggerHysteresis(vi_ctype, trigger_source_ctype, level_ctype, hysteresis_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5428,7 +4719,8 @@ class Session(_SessionBase):
         specify the type of trigger that the digitizer waits for with a
         Configure Trigger function, such as configure_trigger_immediate.
         '''
-        error_code = self._library.niScope_ConfigureTriggerImmediate(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_ConfigureTriggerImmediate(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5466,7 +4758,10 @@ class Session(_SessionBase):
                 | NISCOPE_VAL_END_OF_ACQUISITION_EVENT
                 | NISCOPE_VAL_END_OF_RECORD_EVENT
         '''
-        error_code = self._library.niScope_ConfigureTriggerOutput(self._vi, trigger_event, trigger_output.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_event_ctype = visatype.ViInt32(trigger_event)  # case 8
+        trigger_output_ctype = ctypes.create_string_buffer(trigger_output.encode(self._encoding))  # case 3
+        error_code = self._library.niScope_ConfigureTriggerOutput(vi_ctype, trigger_event_ctype, trigger_output_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5503,7 +4798,10 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        error_code = self._library.niScope_ConfigureTriggerSoftware(self._vi, holdoff, delay)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        holdoff_ctype = visatype.ViReal64(holdoff)  # case 8
+        delay_ctype = visatype.ViReal64(delay)  # case 8
+        error_code = self._library.niScope_ConfigureTriggerSoftware(vi_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5561,7 +4859,17 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        error_code = self._library.niScope_ConfigureTriggerVideo(self._vi, trigger_source.encode(self._encoding), enable_dc_restore, signal_format, event, line_number, polarity, trigger_coupling, holdoff, delay)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
+        enable_dc_restore_ctype = visatype.ViBoolean(enable_dc_restore)  # case 8
+        signal_format_ctype = visatype.ViInt32(signal_format)  # case 8
+        event_ctype = visatype.ViInt32(event)  # case 8
+        line_number_ctype = visatype.ViInt32(line_number)  # case 8
+        polarity_ctype = visatype.ViInt32(polarity)  # case 8
+        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling)  # case 8
+        holdoff_ctype = visatype.ViReal64(holdoff)  # case 8
+        delay_ctype = visatype.ViReal64(delay)  # case 8
+        error_code = self._library.niScope_ConfigureTriggerVideo(vi_ctype, trigger_source_ctype, enable_dc_restore_ctype, signal_format_ctype, event_ctype, line_number_ctype, polarity_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5610,7 +4918,15 @@ class Session(_SessionBase):
                 acquiring data. Refer to TRIGGER_DELAY_TIME for more
                 information.
         '''
-        error_code = self._library.niScope_ConfigureTriggerWindow(self._vi, trigger_source.encode(self._encoding), low_level, high_level, window_mode, trigger_coupling, holdoff, delay)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case 3
+        low_level_ctype = visatype.ViReal64(low_level)  # case 8
+        high_level_ctype = visatype.ViReal64(high_level)  # case 8
+        window_mode_ctype = visatype.ViInt32(window_mode)  # case 8
+        trigger_coupling_ctype = visatype.ViInt32(trigger_coupling)  # case 8
+        holdoff_ctype = visatype.ViReal64(holdoff)  # case 8
+        delay_ctype = visatype.ViReal64(delay)  # case 8
+        error_code = self._library.niScope_ConfigureTriggerWindow(vi_ctype, trigger_source_ctype, low_level_ctype, high_level_ctype, window_mode_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5620,7 +4936,8 @@ class Session(_SessionBase):
         Aborts any current operation, opens data channel relays, and releases
         RTSI and PFI lines.
         '''
-        error_code = self._library.niScope_Disable(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_Disable(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5707,7 +5024,11 @@ class Session(_SessionBase):
                 | NISCOPE_VAL_CLK_OUT  | ("VAL_CLK_OUT")  |
                 +----------------------+------------------+
         '''
-        error_code = self._library.niScope_ExportSignal(self._vi, signal, signal_identifier.encode(self._encoding), output_terminal.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        signal_ctype = visatype.ViInt32(signal)  # case 8
+        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case 3
+        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case 3
+        error_code = self._library.niScope_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5765,11 +5086,14 @@ class Session(_SessionBase):
 
                 Units: seconds
         '''
-        waveform_ctype = (visatype.ViReal64 * 1)()
-        actual_points_ctype = visatype.ViInt32(0)
-        initial_x_ctype = visatype.ViReal64(0)
-        x_increment_ctype = visatype.ViReal64(0)
-        error_code = self._library.niScope_FetchWaveform(self._vi, channel.encode(self._encoding), waveform_size, waveform_ctype, ctypes.pointer(actual_points_ctype), ctypes.pointer(initial_x_ctype), ctypes.pointer(x_increment_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_ctype = ctypes.create_string_buffer(channel.encode(self._encoding))  # case 3
+        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_ctype = (visatype.ViReal64 * 1)()  # case 10
+        actual_points_ctype = visatype.ViInt32()  # case 13
+        initial_x_ctype = visatype.ViReal64()  # case 13
+        x_increment_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niScope_FetchWaveform(vi_ctype, channel_ctype, waveform_size_ctype, waveform_ctype, ctypes.pointer(actual_points_ctype), ctypes.pointer(initial_x_ctype), ctypes.pointer(x_increment_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(waveform_ctype[i]) for i in range(1)], int(actual_points_ctype.value), float(initial_x_ctype.value), float(x_increment_ctype.value)
 
@@ -5805,8 +5129,11 @@ class Session(_SessionBase):
         Returns:
             measurement (float): The measured value.
         '''
-        measurement_ctype = visatype.ViReal64(0)
-        error_code = self._library.niScope_FetchWaveformMeasurement(self._vi, channel.encode(self._encoding), meas_function, ctypes.pointer(measurement_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_ctype = ctypes.create_string_buffer(channel.encode(self._encoding))  # case 3
+        meas_function_ctype = visatype.ViInt32(meas_function)  # case 8
+        measurement_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niScope_FetchWaveformMeasurement(vi_ctype, channel_ctype, meas_function_ctype, ctypes.pointer(measurement_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
 
@@ -5839,8 +5166,11 @@ class Session(_SessionBase):
             channel_string (string): Returns the channel string that is in the channel table at the index you
                 specify. Do not modify the contents of the channel string.
         '''
-        channel_string_ctype = (visatype.ViChar * 1)()
-        error_code = self._library.niScope_GetChannelName(self._vi, index, buffer_size, channel_string_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        index_ctype = visatype.ViInt32(index)  # case 8
+        buffer_size_ctype = visatype.ViInt32(buffer_size)  # case 8
+        channel_string_ctype = (visatype.ViChar * 1)()  # case 10
+        error_code = self._library.niScope_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_string_ctype.value.decode(self._encoding)
 
@@ -5866,8 +5196,11 @@ class Session(_SessionBase):
             error_message (string): Returns a char buffer that will be populated with the error message. It
                 should be at least as large as the buffer size.
         '''
-        error_message_ctype = (visatype.ViChar * 1)()
-        error_code = self._library.niScope_GetErrorMessage(self._vi, error_code, buffer__size, error_message_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code_ctype = visatype.ViStatus(error_code)  # case 8
+        buffer__size_ctype = visatype.ViInt32(buffer__size)  # case 8
+        error_message_ctype = (visatype.ViChar * 1)()  # case 10
+        error_code = self._library.niScope_GetErrorMessage(vi_ctype, error_code_ctype, buffer__size_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return error_message_ctype.value.decode(self._encoding)
 
@@ -5888,8 +5221,10 @@ class Session(_SessionBase):
             writer_handle (int): Returns a reference to a peer-to-peer writer FIFO that can be used to
                 create a peer-to-peer streaming session.
         '''
-        writer_handle_ctype = visatype.ViUInt32(0)
-        error_code = self._library.niScope_GetStreamEndpointHandle(self._vi, stream_name.encode(self._encoding), ctypes.pointer(writer_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        stream_name_ctype = ctypes.create_string_buffer(stream_name.encode(self._encoding))  # case 3
+        writer_handle_ctype = visatype.ViUInt32()  # case 13
+        error_code = self._library.niScope_GetStreamEndpointHandle(vi_ctype, stream_name_ctype, ctypes.pointer(writer_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(writer_handle_ctype.value)
 
@@ -6020,8 +5355,12 @@ class Session(_SessionBase):
             vi (int): Returns a session handle that you can use to identify the device in all
                 subsequent NI-SCOPE function calls.
         '''
-        vi_ctype = visatype.ViSession(0)
-        error_code = self._library.niScope_InitWithOptions(resource_name.encode(self._encoding), id_query, reset_device, option_string.encode(self._encoding), ctypes.pointer(vi_ctype))
+        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
+        id_query_ctype = visatype.ViBoolean(id_query)  # case 8
+        reset_device_ctype = visatype.ViBoolean(reset_device)  # case 8
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case 3
+        vi_ctype = visatype.ViSession()  # case 13
+        error_code = self._library.niScope_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -6034,7 +5373,8 @@ class Session(_SessionBase):
         waits for a trigger. The digitizer acquires a waveform for each channel
         you enable with configure_vertical.
         '''
-        error_code = self._library.niScope_InitiateAcquisition(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_InitiateAcquisition(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6064,8 +5404,10 @@ class Session(_SessionBase):
                   sample the voltage.
                 | VI_FALSE—The element value is a valid voltage.
         '''
-        is_invalid_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niScope_IsInvalidWfmElement(self._vi, element_value, ctypes.pointer(is_invalid_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        element_value_ctype = visatype.ViReal64(element_value)  # case 8
+        is_invalid_ctype = visatype.ViBoolean()  # case 13
+        error_code = self._library.niScope_IsInvalidWfmElement(vi_ctype, element_value_ctype, ctypes.pointer(is_invalid_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_invalid_ctype.value)
 
@@ -6074,7 +5416,8 @@ class Session(_SessionBase):
 
         Starts the 1 kHz square wave output on PFI 1 for probe compensation.
         '''
-        error_code = self._library.niScope_ProbeCompensationSignalStart(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_ProbeCompensationSignalStart(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6083,7 +5426,8 @@ class Session(_SessionBase):
 
         Stops the 1 kHz square wave output on PFI 1 for probe compensation.
         '''
-        error_code = self._library.niScope_ProbeCompensationSignalStop(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_ProbeCompensationSignalStop(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6141,11 +5485,15 @@ class Session(_SessionBase):
 
                 Units: seconds
         '''
-        waveform_ctype = (visatype.ViReal64 * 1)()
-        actual_points_ctype = visatype.ViInt32(0)
-        initial_x_ctype = visatype.ViReal64(0)
-        x_increment_ctype = visatype.ViReal64(0)
-        error_code = self._library.niScope_ReadWaveform(self._vi, channel.encode(self._encoding), waveform_size, max_time, waveform_ctype, ctypes.pointer(actual_points_ctype), ctypes.pointer(initial_x_ctype), ctypes.pointer(x_increment_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_ctype = ctypes.create_string_buffer(channel.encode(self._encoding))  # case 3
+        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        max_time_ctype = visatype.ViInt32(max_time)  # case 8
+        waveform_ctype = (visatype.ViReal64 * 1)()  # case 10
+        actual_points_ctype = visatype.ViInt32()  # case 13
+        initial_x_ctype = visatype.ViReal64()  # case 13
+        x_increment_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niScope_ReadWaveform(vi_ctype, channel_ctype, waveform_size_ctype, max_time_ctype, waveform_ctype, ctypes.pointer(actual_points_ctype), ctypes.pointer(initial_x_ctype), ctypes.pointer(x_increment_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(waveform_ctype[i]) for i in range(1)], int(actual_points_ctype.value), float(initial_x_ctype.value), float(x_increment_ctype.value)
 
@@ -6196,8 +5544,12 @@ class Session(_SessionBase):
         Returns:
             measurement (float): The measured value.
         '''
-        measurement_ctype = visatype.ViReal64(0)
-        error_code = self._library.niScope_ReadWaveformMeasurement(self._vi, channel.encode(self._encoding), meas_function, max_time, ctypes.pointer(measurement_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_ctype = ctypes.create_string_buffer(channel.encode(self._encoding))  # case 3
+        meas_function_ctype = visatype.ViInt32(meas_function)  # case 8
+        max_time_ctype = visatype.ViInt32(max_time)  # case 8
+        measurement_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niScope_ReadWaveformMeasurement(vi_ctype, channel_ctype, meas_function_ctype, max_time_ctype, ctypes.pointer(measurement_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
 
@@ -6211,7 +5563,8 @@ class Session(_SessionBase):
 
         -  `Thermal Shutdown <digitizers.chm::/Thermal_Shutdown.html>`__
         '''
-        error_code = self._library.niScope_ResetDevice(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_ResetDevice(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6222,7 +5575,8 @@ class Session(_SessionBase):
         state and applying any initial default settings from the IVI
         Configuration Store.
         '''
-        error_code = self._library.niScope_ResetWithDefaults(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_ResetWithDefaults(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6235,8 +5589,9 @@ class Session(_SessionBase):
             sample_mode (int): Returns the sample mode the digitizer is currently using; NI-SCOPE
                 returns the value of the SAMPLE_MODE attribute.
         '''
-        sample_mode_ctype = visatype.ViInt32(0)
-        error_code = self._library.niScope_SampleMode(self._vi, ctypes.pointer(sample_mode_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        sample_mode_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niScope_SampleMode(vi_ctype, ctypes.pointer(sample_mode_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(sample_mode_ctype.value)
 
@@ -6254,8 +5609,9 @@ class Session(_SessionBase):
                 acquires for each channel; the driver returns the value held in the
                 HORZ_SAMPLE_RATE attribute.
         '''
-        sample_rate_ctype = visatype.ViReal64(0)
-        error_code = self._library.niScope_SampleRate(self._vi, ctypes.pointer(sample_rate_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        sample_rate_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niScope_SampleRate(vi_ctype, ctypes.pointer(sample_rate_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(sample_rate_ctype.value)
 
@@ -6269,7 +5625,8 @@ class Session(_SessionBase):
         This function is included for compliance with the IviScope Class
         Specification. Consider using send_software_trigger_edge instead.
         '''
-        error_code = self._library.niScope_SendSWTrigger(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_SendSWTrigger(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6294,7 +5651,9 @@ class Session(_SessionBase):
                 | NISCOPE_VAL_SOFTWARE_TRIGGER_REFERENCE (2L)
                 | NISCOPE_VAL_SOFTWARE_TRIGGER_ADVANCE (3L)
         '''
-        error_code = self._library.niScope_SendSoftwareTriggerEdge(self._vi, which_trigger)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        which_trigger_ctype = visatype.ViInt32(which_trigger)  # case 8
+        error_code = self._library.niScope_SendSoftwareTriggerEdge(vi_ctype, which_trigger_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6308,7 +5667,8 @@ class Session(_SessionBase):
         -  Destroys the IVI session and all of its attributes.
         -  Deallocates any memory resources used by the IVI session.
         '''
-        error_code = self._library.niScope_close(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6339,9 +5699,11 @@ class Session(_SessionBase):
                 you must pass a ViChar array at least MAX_ERROR_DESCRIPTION bytes in
                 length.
         '''
-        error_source_ctype = (visatype.ViChar * 1)()
-        error_description_ctype = (visatype.ViChar * 1)()
-        error_code = self._library.niScope_errorHandler(self._vi, error_code, error_source_ctype, error_description_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code_ctype = visatype.ViInt32(error_code)  # case 8
+        error_source_ctype = (visatype.ViChar * 1)()  # case 10
+        error_description_ctype = (visatype.ViChar * 1)()  # case 10
+        error_code = self._library.niScope_errorHandler(vi_ctype, error_code_ctype, error_source_ctype, error_description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return error_source_ctype.value.decode(self._encoding), error_description_ctype.value.decode(self._encoding)
 
@@ -6352,7 +5714,8 @@ class Session(_SessionBase):
         reset to their `default
         states <REPLACE_DRIVER_SPECIFIC_URL_2(scopefunc.chm','cviattribute_defaults)>`__.
         '''
-        error_code = self._library.niScope_reset(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niScope_reset(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6374,9 +5737,10 @@ class Session(_SessionBase):
                 you must pass a ViChar array at least IVI_MAX_MESSAGE_BUF_SIZE bytes
                 in length.
         '''
-        self_test_result_ctype = visatype.ViInt16(0)
-        self_test_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niScope_self_test(self._vi, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        self_test_result_ctype = visatype.ViInt16()  # case 13
+        self_test_message_ctype = (visatype.ViChar * 256)()  # case 10
+        error_code = self._library.niScope_self_test(vi_ctype, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 

@@ -581,7 +581,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetAttributeViString']['return']
         if self._defaults['GetAttributeViString']['Value'] is None:
             raise MockFunctionCallError("niScope_GetAttributeViString", param='Value')
-        if buf_size == 0:
+        if buf_size.value == 0:
             return len(self._defaults['GetAttributeViString']['Value'])
         value.value = self._defaults['GetAttributeViString']['Value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
@@ -620,7 +620,7 @@ class SideEffectsHelper(object):
         error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['Description'] is None:
             raise MockFunctionCallError("niScope_GetError", param='Description')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
         description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
