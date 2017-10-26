@@ -27,11 +27,6 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    actual_arb_sample_rate = attributes.AttributeViReal64(1150109)
-    '''
-    Returns the actual sample rate value of the signal generator after any
-    coercion or rounding.
-    '''
     all_marker_events_latched_status = attributes.AttributeViInt32(1150349)
     '''
     Returns a bit field of the latched status of all Marker Events. Set this
@@ -294,10 +289,6 @@ class _SessionBase(object):
     `Terminal Configuration <pniFgen_TerminalConfiguration.html>`__ property
     to **Differential**. Common-mode offset is applied to the signals
     generated at each differential output terminal.
-    '''
-    daqmx_task = attributes.AttributeViInt32(1150221)
-    '''
-    Returns the NI-DAQmx task pointer.
     '''
     data_marker_events_count = attributes.AttributeViInt32(1150273)
     '''
@@ -567,11 +558,6 @@ class _SessionBase(object):
     done_event_pulse_width_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventPulseWidthUnits, 1150334)
     '''
     Specifies the pulse width units for the Done Event.
-    '''
-    error_elaboration = attributes.AttributeViString(1050103)
-    '''
-    Contains an optional string with additional information concerning the
-    primary error condition.
     '''
     exported_onboard_reference_clock_output_terminal = attributes.AttributeViString(1150322)
     '''
@@ -989,10 +975,6 @@ class _SessionBase(object):
     the IVI Configuration file. The virtual instrument section specifies a
     physical device and initial user options.
     '''
-    major_version = attributes.AttributeViInt32(1050503)
-    '''
-    Returns the major version number of NI-FGEN.
-    '''
     marker_events_count = attributes.AttributeViInt32(1150271)
     '''
     Returns the number of markers supported by the device. Use this property
@@ -1111,10 +1093,6 @@ class _SessionBase(object):
     '''
     Returns the amount of memory in bytes on the signal generator.
     '''
-    minor_version = attributes.AttributeViInt32(1050504)
-    '''
-    Returns the minor version number of NI-FGEN.
-    '''
     min_freq_list_duration = attributes.AttributeViReal64(1150212)
     '''
     Returns the minimum duration, in seconds, of any one step in a frequency
@@ -1158,13 +1136,6 @@ class _SessionBase(object):
     `niFgen Abort
     Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
     VI or wait for the generation to complete.
-    '''
-    operation_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OperationMode, 1250005)
-    '''
-    Specifies how the signal generator produces waveforms. NI signal
-    generators currently support only one value:
-    **NIFGEN_VAL_OPERATE_CONTINUOUS**. To control trigger mode, set the
-    `Trigger Mode <pniFgen_TriggerMode.html>`__ property.
     '''
     oscillator_freq_dac_value = attributes.AttributeViInt32(1150225)
     '''
@@ -1309,22 +1280,6 @@ class _SessionBase(object):
     Note:
     When using the NI 5450/5451 with I/Q rates higher than 200 MS/s, NI-FGEN
     restricts this property value to 0.
-    '''
-    osp_iq_rate = attributes.AttributeViReal64(1150248)
-    '''
-    Specifies the rate at which the user-provided waveform data is generated
-    when the `OSP Enabled <pniFgen_OSPEnabled.html>`__ property is set to
-    TRUE.
-
-    NI-FGEN sets the `Sample Rate <pniFgen_SampleRate.html>`__ property of
-    the signal generator to the product of the IQ Rate, `FIR Interpolation
-    Factor <pniFgen_FIRInterpolation.html>`__, and `CIC Interpolation
-    Factor <pniFgen_CICInterpolation.html>`__ properties. When the `Data
-    Processing Mode <pniFgen_DataProcessingMode.html>`__ property is set to
-    **Real**, the IQ Rate value is the rate at which the signal generator
-    processes real (I) data. When the Data Processing Mode property is set
-    to **Complex**, the IQ Rate value is the rate at which the signal
-    generator processes complex (I/Q) data.
     '''
     osp_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OSPMode, 1150370)
     '''
@@ -1700,38 +1655,6 @@ class _SessionBase(object):
     Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
     VI or wait for the generation to complete.
     '''
-    primary_error = attributes.AttributeViInt32(1050101)
-    '''
-    Describes the first error that occurred since the last call to the
-    `niFgen Error
-    Message <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Error_Message.html')>`__
-    VI on the session.
-
-    The value follows the VXIplug&play completion code conventions. A
-    negative value (0x80000000 or higher in hex) describes an error
-    condition. A positive value describes a warning condition and indicates
-    that no error occurred. A zero indicates that no error or warning
-    occurred. The error and warning values can be status codes defined by
-    IVI, VISA, class drivers, or specific drivers.
-    '''
-    query_instrument_status = attributes.AttributeViBoolean(1050003)
-    '''
-    Specifies whether NI-FGEN retains instrument status after each
-    operation. Set this property to TRUE to query the instrument status.
-
-    Querying the instrument status is very useful for debugging. After you
-    validate your program, you can set this property to FALSE to disable
-    status checking and maximize performance. However, the effect on NI-FGEN
-    is minor.
-
-    NI-FGEN can choose to ignore status checking for particular properties
-    regardless of the setting of this property. Use the `niFgen Initialize
-    With
-    Options <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Initialize_With_Options.html')>`__
-    VI to override this value.
-
-    **Default Value**: TRUE
-    '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate property values and VI parameters. Set
@@ -1795,23 +1718,6 @@ class _SessionBase(object):
     Specifies the Reference Clock frequency. The signal generator uses the
     Reference Clock to derive frequencies and sample rates when generating
     output.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
-    '''
-    ref_clock_source = attributes.AttributeViInt32(1250002)
-    '''
-    Controls the Reference Clock source the signal generator uses.
-
-    The signal generator derives the frequencies and sample rates that it
-    uses to generate waveforms from the source you specify. For example,
-    when you set this attribute to **Clock In**, the signal generator uses
-    the signal it receives at the Clk In front panel connector as its
-    Reference Clock.
 
     Note:
     You cannot change this property while the device is generating a
@@ -1894,13 +1800,6 @@ class _SessionBase(object):
     property, additional properties may be needed to fully configure the
     trigger.
     '''
-    secondary_error = attributes.AttributeViInt32(1050102)
-    '''
-    Provides an optional code with additional information concerning the
-    primary error condition. The error and warning values can be status
-    codes defined by IVI, VISA, class drivers, or specific drivers. Zero
-    indicates no additional information.
-    '''
     serial_number = attributes.AttributeViString(1150243)
     '''
     Returns the serial number of the signal generator.
@@ -1934,15 +1833,6 @@ class _SessionBase(object):
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
     Contains a brief description of the specific driver.
-    '''
-    specific_driver_prefix = attributes.AttributeViString(1050302)
-    '''
-    Contains the prefix for NI-FGEN. The name of each user-callable VI in
-    NI-FGEN starts with this prefix.
-    '''
-    specific_driver_revision = attributes.AttributeViString(1050551)
-    '''
-    Contains additional version information about NI-FGEN.
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
@@ -2130,17 +2020,6 @@ class _SessionBase(object):
     Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
     VI or wait for the generation to complete.
     '''
-    update_clock_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.UpdateClockSource, 1150106)
-    '''
-    Controls the Update Clock source.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
-    '''
     video_waveform_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoWaveformType, 1150216)
     '''
     Specifies the waveform type the NI 5431 generates. Setting this property
@@ -2244,7 +2123,11 @@ class _SessionBase(object):
 
                 **Default Value**: "4096"
         '''
-        error_code = self._library.niFgen_AllocateNamedWaveform(self._vi, self._repeated_capability.encode(self._encoding), waveform_name.encode(self._encoding), waveform_size)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
+        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        error_code = self._library.niFgen_AllocateNamedWaveform(vi_ctype, channel_name_ctype, waveform_name_ctype, waveform_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2274,8 +2157,11 @@ class _SessionBase(object):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
-        waveform_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_AllocateWaveform(self._vi, self._repeated_capability.encode(self._encoding), waveform_size, ctypes.pointer(waveform_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_handle_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_AllocateWaveform(vi_ctype, channel_name_ctype, waveform_size_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
@@ -2301,7 +2187,11 @@ class _SessionBase(object):
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
         '''
-        error_code = self._library.niFgen_CheckAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case 8
+        error_code = self._library.niFgen_CheckAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2327,7 +2217,11 @@ class _SessionBase(object):
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
         '''
-        error_code = self._library.niFgen_CheckAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViInt32(attribute_value)  # case 8
+        error_code = self._library.niFgen_CheckAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2353,7 +2247,11 @@ class _SessionBase(object):
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
         '''
-        error_code = self._library.niFgen_CheckAttributeViInt64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViInt64(attribute_value)  # case 8
+        error_code = self._library.niFgen_CheckAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2379,7 +2277,11 @@ class _SessionBase(object):
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
         '''
-        error_code = self._library.niFgen_CheckAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViReal64(attribute_value)  # case 8
+        error_code = self._library.niFgen_CheckAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2399,7 +2301,11 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Specifies the ID of an attribute.
         '''
-        error_code = self._library.niFgen_CheckAttributeViSession(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, self._attributeValue)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViSession(self._attribute_value)  # case 1
+        error_code = self._library.niFgen_CheckAttributeViSession(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2427,7 +2333,11 @@ class _SessionBase(object):
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
         '''
-        error_code = self._library.niFgen_CheckAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_CheckAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2445,7 +2355,9 @@ class _SessionBase(object):
 
             session['0,1'].clear_user_standard_waveform()
         '''
-        error_code = self._library.niFgen_ClearUserStandardWaveform(self._vi, self._repeated_capability.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        error_code = self._library.niFgen_ClearUserStandardWaveform(vi_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2481,7 +2393,10 @@ class _SessionBase(object):
                 the **waveform** parameter of the configure_standard_waveform
                 function to NIFGEN_VAL_WFM_DC.
         '''
-        error_code = self._library.niFgen_ConfigureAmplitude(self._vi, self._repeated_capability.encode(self._encoding), amplitude)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        amplitude_ctype = visatype.ViReal64(amplitude)  # case 8
+        error_code = self._library.niFgen_ConfigureAmplitude(vi_ctype, channel_name_ctype, amplitude_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2538,7 +2453,12 @@ class _SessionBase(object):
 
                 **Default Value**: None
         '''
-        error_code = self._library.niFgen_ConfigureArbSequence(self._vi, self._repeated_capability.encode(self._encoding), sequence_handle, gain, offset)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        sequence_handle_ctype = visatype.ViInt32(sequence_handle)  # case 8
+        gain_ctype = visatype.ViReal64(gain)  # case 8
+        offset_ctype = visatype.ViReal64(offset)  # case 8
+        error_code = self._library.niFgen_ConfigureArbSequence(vi_ctype, channel_name_ctype, sequence_handle_ctype, gain_ctype, offset_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2602,7 +2522,12 @@ class _SessionBase(object):
 
                 **Default Value**: None
         '''
-        error_code = self._library.niFgen_ConfigureArbWaveform(self._vi, self._repeated_capability.encode(self._encoding), waveform_handle, gain, offset)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 8
+        gain_ctype = visatype.ViReal64(gain)  # case 8
+        offset_ctype = visatype.ViReal64(offset)  # case 8
+        error_code = self._library.niFgen_ConfigureArbWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, gain_ctype, offset_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2638,7 +2563,11 @@ class _SessionBase(object):
                 parameter in this function.
                 The coefficients should range between –1.00 and +1.00.
         '''
-        error_code = self._library.niFgen_ConfigureCustomFIRFilterCoefficients(self._vi, self._repeated_capability.encode(self._encoding), number_of_coefficients, coefficients_array)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case 8
+        coefficients_array_ctype = (visatype.ViReal64 * len(coefficients_array))(*coefficients_array)  # case 4
+        error_code = self._library.niFgen_ConfigureCustomFIRFilterCoefficients(vi_ctype, channel_name_ctype, number_of_coefficients_ctype, coefficients_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2712,7 +2641,13 @@ class _SessionBase(object):
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter to NIFGEN_VAL_WFM_DC.
         '''
-        error_code = self._library.niFgen_ConfigureFreqList(self._vi, self._repeated_capability.encode(self._encoding), frequency_list_handle, amplitude, dc_offset, start_phase)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        frequency_list_handle_ctype = visatype.ViInt32(frequency_list_handle)  # case 8
+        amplitude_ctype = visatype.ViReal64(amplitude)  # case 8
+        dc_offset_ctype = visatype.ViReal64(dc_offset)  # case 8
+        start_phase_ctype = visatype.ViReal64(start_phase)  # case 8
+        error_code = self._library.niFgen_ConfigureFreqList(vi_ctype, channel_name_ctype, frequency_list_handle_ctype, amplitude_ctype, dc_offset_ctype, start_phase_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2744,7 +2679,10 @@ class _SessionBase(object):
                 the **waveform** parameter of the configure_standard_waveform
                 function to NIFGEN_VAL_WFM_DC.
         '''
-        error_code = self._library.niFgen_ConfigureFrequency(self._vi, self._repeated_capability.encode(self._encoding), frequency)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        frequency_ctype = visatype.ViReal64(frequency)  # case 8
+        error_code = self._library.niFgen_ConfigureFrequency(vi_ctype, channel_name_ctype, frequency_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2779,7 +2717,10 @@ class _SessionBase(object):
 
                 **Default Value**: None
         '''
-        error_code = self._library.niFgen_ConfigureGain(self._vi, self._repeated_capability.encode(self._encoding), gain)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        gain_ctype = visatype.ViReal64(gain)  # case 8
+        error_code = self._library.niFgen_ConfigureGain(vi_ctype, channel_name_ctype, gain_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2805,7 +2746,10 @@ class _SessionBase(object):
 
                 **Defined Value**: NIFGEN_VAL_OPERATE_CONTINUOUS
         '''
-        error_code = self._library.niFgen_ConfigureOperationMode(self._vi, self._repeated_capability.encode(self._encoding), operation_mode)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        operation_mode_ctype = visatype.ViInt32(operation_mode)  # case 8
+        error_code = self._library.niFgen_ConfigureOperationMode(vi_ctype, channel_name_ctype, operation_mode_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2837,7 +2781,10 @@ class _SessionBase(object):
                 | VI_FALSE | Disable the output. |
                 +----------+---------------------+
         '''
-        error_code = self._library.niFgen_ConfigureOutputEnabled(self._vi, self._repeated_capability.encode(self._encoding), enabled)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        enabled_ctype = visatype.ViBoolean(enabled)  # case 8
+        error_code = self._library.niFgen_ConfigureOutputEnabled(vi_ctype, channel_name_ctype, enabled_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2871,7 +2818,10 @@ class _SessionBase(object):
                 | NIFGEN_VAL_75_OHMS | Specifies that 75 Ω of impedance is used |
                 +--------------------+------------------------------------------+
         '''
-        error_code = self._library.niFgen_ConfigureOutputImpedance(self._vi, self._repeated_capability.encode(self._encoding), impedance)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        impedance_ctype = visatype.ViReal64(impedance)  # case 8
+        error_code = self._library.niFgen_ConfigureOutputImpedance(vi_ctype, channel_name_ctype, impedance_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2981,7 +2931,14 @@ class _SessionBase(object):
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter to NIFGEN_VAL_WFM_DC.
         '''
-        error_code = self._library.niFgen_ConfigureStandardWaveform(self._vi, self._repeated_capability.encode(self._encoding), waveform, amplitude, dc_offset, frequency, start_phase)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_ctype = visatype.ViInt32(waveform)  # case 8
+        amplitude_ctype = visatype.ViReal64(amplitude)  # case 8
+        dc_offset_ctype = visatype.ViReal64(dc_offset)  # case 8
+        frequency_ctype = visatype.ViReal64(frequency)  # case 8
+        start_phase_ctype = visatype.ViReal64(start_phase)  # case 8
+        error_code = self._library.niFgen_ConfigureStandardWaveform(vi_ctype, channel_name_ctype, waveform_ctype, amplitude_ctype, dc_offset_ctype, frequency_ctype, start_phase_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3048,7 +3005,10 @@ class _SessionBase(object):
                 | NIFGEN_VAL_TTL6   | Specifies that TTL 6 is used as the synchronization source.                |
                 +-------------------+----------------------------------------------------------------------------+
         '''
-        error_code = self._library.niFgen_ConfigureSynchronization(self._vi, self._repeated_capability.encode(self._encoding), synchronization_source)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        synchronization_source_ctype = visatype.ViInt32(synchronization_source)  # case 8
+        error_code = self._library.niFgen_ConfigureSynchronization(vi_ctype, channel_name_ctype, synchronization_source_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3090,7 +3050,10 @@ class _SessionBase(object):
                 | NIFGEN_VAL_BURST      | After a Start Trigger is received, the waveform described by the first stage generates until another trigger is received. At the next trigger, the buffer of the previous stage completes, then the waveform described by the second stage generates. After the staging list is exhausted, the waveform generation returns to the first stage and continues to repeat the cycle. In Frequency List mode, the duration instruction is ignored, and the trigger switches the frequency to the next frequency in the list. |
                 +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         '''
-        error_code = self._library.niFgen_ConfigureTriggerMode(self._vi, self._repeated_capability.encode(self._encoding), trigger_mode)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        trigger_mode_ctype = visatype.ViInt32(trigger_mode)  # case 8
+        error_code = self._library.niFgen_ConfigureTriggerMode(vi_ctype, channel_name_ctype, trigger_mode_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3168,7 +3131,10 @@ class _SessionBase(object):
                 | NIFGEN_VAL_PFI_3         | PFI 3                    |
                 +--------------------------+--------------------------+
         '''
-        error_code = self._library.niFgen_ConfigureTriggerSource(self._vi, self._repeated_capability.encode(self._encoding), trigger_source)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        trigger_source_ctype = visatype.ViInt32(trigger_source)  # case 8
+        error_code = self._library.niFgen_ConfigureTriggerSource(vi_ctype, channel_name_ctype, trigger_source_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3222,8 +3188,12 @@ class _SessionBase(object):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
-        waveform_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_CreateWaveformF64(self._vi, self._repeated_capability.encode(self._encoding), waveform_size, waveform_data_array, ctypes.pointer(waveform_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_handle_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
@@ -3276,8 +3246,12 @@ class _SessionBase(object):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
-        waveform_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_CreateWaveformFromFileF64(self._vi, self._repeated_capability.encode(self._encoding), file_name.encode(self._encoding), byte_order, ctypes.pointer(waveform_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case 3
+        byte_order_ctype = visatype.ViInt32(byte_order)  # case 8
+        waveform_handle_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_CreateWaveformFromFileF64(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
@@ -3350,8 +3324,13 @@ class _SessionBase(object):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
-        waveform_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_CreateWaveformFromFileHWS(self._vi, self._repeated_capability.encode(self._encoding), file_name.encode(self._encoding), use_rate_from_waveform, use_gain_and_offset_from_waveform, ctypes.pointer(waveform_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case 3
+        use_rate_from_waveform_ctype = visatype.ViBoolean(use_rate_from_waveform)  # case 8
+        use_gain_and_offset_from_waveform_ctype = visatype.ViBoolean(use_gain_and_offset_from_waveform)  # case 8
+        waveform_handle_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_CreateWaveformFromFileHWS(vi_ctype, channel_name_ctype, file_name_ctype, use_rate_from_waveform_ctype, use_gain_and_offset_from_waveform_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
@@ -3404,8 +3383,12 @@ class _SessionBase(object):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
-        waveform_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_CreateWaveformFromFileI16(self._vi, self._repeated_capability.encode(self._encoding), file_name.encode(self._encoding), byte_order, ctypes.pointer(waveform_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case 3
+        byte_order_ctype = visatype.ViInt32(byte_order)  # case 8
+        waveform_handle_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_CreateWaveformFromFileI16(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
@@ -3458,8 +3441,12 @@ class _SessionBase(object):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
-        waveform_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_CreateWaveformI16(self._vi, self._repeated_capability.encode(self._encoding), waveform_size, waveform_data_array, ctypes.pointer(waveform_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_data_array_ctype = (visatype.ViInt16 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_handle_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_CreateWaveformI16(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
@@ -3502,7 +3489,11 @@ class _SessionBase(object):
 
                 **Default Value**: None
         '''
-        error_code = self._library.niFgen_DefineUserStandardWaveform(self._vi, self._repeated_capability.encode(self._encoding), waveform_size, waveform_data_array)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        error_code = self._library.niFgen_DefineUserStandardWaveform(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3527,7 +3518,10 @@ class _SessionBase(object):
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
         '''
-        error_code = self._library.niFgen_DeleteNamedWaveform(self._vi, self._repeated_capability.encode(self._encoding), waveform_name.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_DeleteNamedWaveform(vi_ctype, channel_name_ctype, waveform_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3548,7 +3542,10 @@ class _SessionBase(object):
             script_name (string): Specifies the name of the script you want to delete. The script name
                 appears in the text of the script following the script keyword.
         '''
-        error_code = self._library.niFgen_DeleteScript(self._vi, self._repeated_capability.encode(self._encoding), script_name.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        script_name_ctype = ctypes.create_string_buffer(script_name.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_DeleteScript(vi_ctype, channel_name_ctype, script_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3569,7 +3566,9 @@ class _SessionBase(object):
 
             session['0,1'].disable_analog_filter()
         '''
-        error_code = self._library.niFgen_DisableAnalogFilter(self._vi, self._repeated_capability.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        error_code = self._library.niFgen_DisableAnalogFilter(vi_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3590,7 +3589,9 @@ class _SessionBase(object):
 
             session['0,1'].disable_digital_filter()
         '''
-        error_code = self._library.niFgen_DisableDigitalFilter(self._vi, self._repeated_capability.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        error_code = self._library.niFgen_DisableDigitalFilter(vi_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3608,7 +3609,9 @@ class _SessionBase(object):
 
             session['0,1'].disable_digital_patterning()
         '''
-        error_code = self._library.niFgen_DisableDigitalPatterning(self._vi, self._repeated_capability.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        error_code = self._library.niFgen_DisableDigitalPatterning(vi_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3641,7 +3644,10 @@ class _SessionBase(object):
 
                 **Default Value**: 0
         '''
-        error_code = self._library.niFgen_EnableAnalogFilter(self._vi, self._repeated_capability.encode(self._encoding), filter_correction_frequency)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        filter_correction_frequency_ctype = visatype.ViReal64(filter_correction_frequency)  # case 8
+        error_code = self._library.niFgen_EnableAnalogFilter(vi_ctype, channel_name_ctype, filter_correction_frequency_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3662,7 +3668,9 @@ class _SessionBase(object):
 
             session['0,1'].enable_digital_filter()
         '''
-        error_code = self._library.niFgen_EnableDigitalFilter(self._vi, self._repeated_capability.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        error_code = self._library.niFgen_EnableDigitalFilter(vi_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3680,7 +3688,9 @@ class _SessionBase(object):
 
             session['0,1'].enable_digital_patterning()
         '''
-        error_code = self._library.niFgen_EnableDigitalPatterning(self._vi, self._repeated_capability.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        error_code = self._library.niFgen_EnableDigitalPatterning(vi_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3713,8 +3723,11 @@ class _SessionBase(object):
             attribute_value (bool): Returns the current value of the attribute. Pass the address of a
                 ViBoolean variable.
         '''
-        attribute_value_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niFgen_GetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViBoolean()  # case 13
+        error_code = self._library.niFgen_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
@@ -3745,8 +3758,11 @@ class _SessionBase(object):
             attribute_value (int): Returns the current value of the attribute. Pass the address of a
                 ViInt32 variable.
         '''
-        attribute_value_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_GetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -3777,8 +3793,11 @@ class _SessionBase(object):
             attribute_value (int): Returns the current value of the attribute. Pass the address of a
                 ViInt64 variable.
         '''
-        attribute_value_ctype = visatype.ViInt64(0)
-        error_code = self._library.niFgen_GetAttributeViInt64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViInt64()  # case 13
+        error_code = self._library.niFgen_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
@@ -3811,8 +3830,11 @@ class _SessionBase(object):
             attribute_value (float): Returns the current value of the attribute. Pass the address of a
                 ViReal64 variable.
         '''
-        attribute_value_ctype = visatype.ViReal64(0)
-        error_code = self._library.niFgen_GetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, ctypes.pointer(attribute_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niFgen_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, ctypes.pointer(attribute_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
@@ -3875,13 +3897,16 @@ class _SessionBase(object):
                 If you pass 0, you can pass VI_NULL for the **attributeValue** buffer
                 parameter.
         '''
-        array_size = 0
-        attribute_value_ctype = None
-        error_code = self._library.niFgen_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, array_size, attribute_value_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        array_size_ctype = visatype.ViInt32()  # case 6
+        attribute_value_ctype = None  # case 11
+        error_code = self._library.niFgen_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size = error_code
-        attribute_value_ctype = (visatype.ViChar * array_size)()
-        error_code = self._library.niFgen_GetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, array_size, attribute_value_ctype)
+        array_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        attribute_value_ctype = (visatype.ViChar * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niFgen_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
@@ -3921,14 +3946,15 @@ class _SessionBase(object):
 
                 If you are not interested in this value, you can pass VI_NULL.
         '''
-        error_code_ctype = visatype.ViStatus(0)
-        error_description_buffer_size = 0
-        error_description_ctype = None
-        error_code = self._library.niFgen_GetError(self._vi, ctypes.pointer(error_code_ctype), error_description_buffer_size, error_description_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code_ctype = visatype.ViStatus()  # case 13
+        error_description_buffer_size_ctype = visatype.ViInt32()  # case 6
+        error_description_ctype = None  # case 11
+        error_code = self._library.niFgen_GetError(vi_ctype, ctypes.pointer(error_code_ctype), error_description_buffer_size_ctype, error_description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        error_description_buffer_size = error_code
-        error_description_ctype = (visatype.ViChar * error_description_buffer_size)()
-        error_code = self._library.niFgen_GetError(self._vi, ctypes.pointer(error_code_ctype), error_description_buffer_size, error_description_ctype)
+        error_description_buffer_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_description_ctype = (visatype.ViChar * error_description_buffer_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niFgen_GetError(vi_ctype, ctypes.pointer(error_code_ctype), error_description_buffer_size_ctype, error_description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
 
@@ -3976,7 +4002,12 @@ class _SessionBase(object):
             number_of_coefficients_read (list of int): Specifies the array of data containing the number of coefficients you
                 want to read.
         '''
-        error_code = self._library.niFgen_GetFIRFilterCoefficients(self._vi, self._repeated_capability.encode(self._encoding), array_size, coefficients_array, number_of_coefficients_read)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        array_size_ctype = visatype.ViInt32(array_size)  # case 8
+        coefficients_array_ctype = (visatype.ViReal64 * len(coefficients_array))(*coefficients_array)  # case 4
+        number_of_coefficients_read_ctype = (visatype.ViInt32 * len(number_of_coefficients_read))(*number_of_coefficients_read)  # case 4
+        error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, number_of_coefficients_read_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4108,8 +4139,12 @@ class _SessionBase(object):
             vi (int): Returns a session handle that you can use to identify the device in all
                 subsequent NI-FGEN function calls.
         '''
-        vi_ctype = visatype.ViSession(0)
-        error_code = self._library.niFgen_InitializeWithChannels(resource_name.encode(self._encoding), self._repeated_capability.encode(self._encoding), reset_device, option_string.encode(self._encoding), ctypes.pointer(vi_ctype))
+        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        reset_device_ctype = visatype.ViBoolean(reset_device)  # case 8
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case 3
+        vi_ctype = visatype.ViSession()  # case 13
+        error_code = self._library.niFgen_InitializeWithChannels(resource_name_ctype, channel_name_ctype, reset_device_ctype, option_string_ctype, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -4129,7 +4164,10 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Specifies the ID of an attribute.
         '''
-        error_code = self._library.niFgen_ResetAttribute(self._vi, self._repeated_capability.encode(self._encoding), attribute_id)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        error_code = self._library.niFgen_ResetAttribute(vi_ctype, channel_name_ctype, attribute_id_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4249,7 +4287,11 @@ class _SessionBase(object):
                 | NIFGEN_VAL_PXI_CLK10            | PXI 10 MHz backplane Reference Clock      |
                 +---------------------------------+-------------------------------------------+
         '''
-        error_code = self._library.niFgen_RouteSignalOut(self._vi, self._repeated_capability.encode(self._encoding), route_signal_from, route_signal_to)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        route_signal_from_ctype = visatype.ViInt32(route_signal_from)  # case 8
+        route_signal_to_ctype = visatype.ViInt32(route_signal_to)  # case 8
+        error_code = self._library.niFgen_RouteSignalOut(vi_ctype, channel_name_ctype, route_signal_from_ctype, route_signal_to_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4298,7 +4340,11 @@ class _SessionBase(object):
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
         '''
-        error_code = self._library.niFgen_SetAttributeViBoolean(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case 8
+        error_code = self._library.niFgen_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4347,7 +4393,11 @@ class _SessionBase(object):
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
         '''
-        error_code = self._library.niFgen_SetAttributeViInt32(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViInt32(attribute_value)  # case 8
+        error_code = self._library.niFgen_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4396,7 +4446,11 @@ class _SessionBase(object):
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
         '''
-        error_code = self._library.niFgen_SetAttributeViInt64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViInt64(attribute_value)  # case 8
+        error_code = self._library.niFgen_SetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4445,7 +4499,11 @@ class _SessionBase(object):
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
         '''
-        error_code = self._library.niFgen_SetAttributeViReal64(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = visatype.ViReal64(attribute_value)  # case 8
+        error_code = self._library.niFgen_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4494,7 +4552,11 @@ class _SessionBase(object):
                 Some of the values might not be valid depending on the current
                 settings of the instrument session.
         '''
-        error_code = self._library.niFgen_SetAttributeViString(self._vi, self._repeated_capability.encode(self._encoding), attribute_id, attribute_value.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
+        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4540,7 +4602,12 @@ class _SessionBase(object):
             offset (int): Specifies the offset from the **relativeTo** parameter at which to start
                 loading the data into the waveform.
         '''
-        error_code = self._library.niFgen_SetNamedWaveformNextWritePosition(self._vi, self._repeated_capability.encode(self._encoding), waveform_name.encode(self._encoding), relative_to, offset)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
+        relative_to_ctype = visatype.ViInt32(relative_to)  # case 8
+        offset_ctype = visatype.ViInt32(offset)  # case 8
+        error_code = self._library.niFgen_SetNamedWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_name_ctype, relative_to_ctype, offset_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4587,7 +4654,12 @@ class _SessionBase(object):
             offset (int): Specifies the offset from **relativeTo** at which to start loading the
                 data into the waveform.
         '''
-        error_code = self._library.niFgen_SetWaveformNextWritePosition(self._vi, self._repeated_capability.encode(self._encoding), waveform_handle, relative_to, offset)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 8
+        relative_to_ctype = visatype.ViInt32(relative_to)  # case 8
+        offset_ctype = visatype.ViInt32(offset)  # case 8
+        error_code = self._library.niFgen_SetWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_handle_ctype, relative_to_ctype, offset_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4610,7 +4682,10 @@ class _SessionBase(object):
         Args:
             value (int): The value to write.
         '''
-        error_code = self._library.niFgen_WriteBinary16AnalogStaticValue(self._vi, self._repeated_capability.encode(self._encoding), value)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        value_ctype = visatype.ViInt16(value)  # case 8
+        error_code = self._library.niFgen_WriteBinary16AnalogStaticValue(vi_ctype, channel_name_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4648,7 +4723,12 @@ class _SessionBase(object):
                 have at least as many elements as the value in **size**. The binary data
                 is left-justified.
         '''
-        error_code = self._library.niFgen_WriteBinary16Waveform(self._vi, self._repeated_capability.encode(self._encoding), waveform_handle, size, data)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 8
+        size_ctype = visatype.ViInt32(size)  # case 8
+        data_ctype = (visatype.ViInt16 * len(data))(*data)  # case 4
+        error_code = self._library.niFgen_WriteBinary16Waveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4691,7 +4771,12 @@ class _SessionBase(object):
             data (list of float): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
         '''
-        error_code = self._library.niFgen_WriteNamedWaveformF64(self._vi, self._repeated_capability.encode(self._encoding), waveform_name.encode(self._encoding), size, data)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
+        size_ctype = visatype.ViInt32(size)  # case 8
+        data_ctype = (visatype.ViReal64 * len(data))(*data)  # case 4
+        error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4725,7 +4810,12 @@ class _SessionBase(object):
             data (list of int): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
         '''
-        error_code = self._library.niFgen_WriteNamedWaveformI16(self._vi, self._repeated_capability.encode(self._encoding), waveform_name.encode(self._encoding), size, data)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
+        size_ctype = visatype.ViInt32(size)  # case 8
+        data_ctype = (visatype.ViInt16 * len(data))(*data)  # case 4
+        error_code = self._library.niFgen_WriteNamedWaveformI16(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4749,7 +4839,10 @@ class _SessionBase(object):
                 Instructions <REPLACE_DRIVER_SPECIFIC_URL_2(niscripted.chm',%20'scripting_instructions)>`__
                 for more information about writing scripts.
         '''
-        error_code = self._library.niFgen_WriteScript(self._vi, self._repeated_capability.encode(self._encoding), script.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        script_ctype = ctypes.create_string_buffer(script.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_WriteScript(vi_ctype, channel_name_ctype, script_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4793,7 +4886,12 @@ class _SessionBase(object):
             data (list of float): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
         '''
-        error_code = self._library.niFgen_WriteWaveform(self._vi, self._repeated_capability.encode(self._encoding), waveform_handle, size, data)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
+        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 8
+        size_ctype = visatype.ViInt32(size)  # case 8
+        data_ctype = (visatype.ViReal64 * len(data))(*data)  # case 4
+        error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4815,8 +4913,10 @@ class _SessionBase(object):
 
                 You must pass a ViChar array with at least 256 bytes.
         '''
-        error_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niFgen_error_message(self._vi, error_code, error_message_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code_ctype = visatype.ViStatus(error_code)  # case 8
+        error_message_ctype = (visatype.ViChar * 256)()  # case 10
+        error_code = self._library.niFgen_error_message(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
 
@@ -4869,7 +4969,8 @@ class Session(_SessionBase):
         nifgen_InitiateGeneration function to cause the signal generator to
         produce a signal again.
         '''
-        error_code = self._library.niFgen_AbortGeneration(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_AbortGeneration(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4893,7 +4994,9 @@ class Session(_SessionBase):
 
                 **Default Value**: 0
         '''
-        error_code = self._library.niFgen_AdjustSampleClockRelativeDelay(self._vi, adjustment_time)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        adjustment_time_ctype = visatype.ViReal64(adjustment_time)  # case 8
+        error_code = self._library.niFgen_AdjustSampleClockRelativeDelay(vi_ctype, adjustment_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4908,7 +5011,8 @@ class Session(_SessionBase):
         The signal generator must not be in the Generating state when you
         call this function.
         '''
-        error_code = self._library.niFgen_ClearArbMemory(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_ClearArbMemory(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4934,7 +5038,9 @@ class Session(_SessionBase):
 
                 **Default Value**: None
         '''
-        error_code = self._library.niFgen_ClearArbSequence(self._vi, sequence_handle)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        sequence_handle_ctype = visatype.ViInt32(sequence_handle)  # case 8
+        error_code = self._library.niFgen_ClearArbSequence(vi_ctype, sequence_handle_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4968,7 +5074,9 @@ class Session(_SessionBase):
 
                 **Default Value**: None
         '''
-        error_code = self._library.niFgen_ClearArbWaveform(self._vi, waveform_handle)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 8
+        error_code = self._library.niFgen_ClearArbWaveform(vi_ctype, waveform_handle_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4996,7 +5104,9 @@ class Session(_SessionBase):
 
                 **Default Value**: None
         '''
-        error_code = self._library.niFgen_ClearFreqList(self._vi, frequency_list_handle)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        frequency_list_handle_ctype = visatype.ViInt32(frequency_list_handle)  # case 8
+        error_code = self._library.niFgen_ClearFreqList(vi_ctype, frequency_list_handle_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5024,7 +5134,8 @@ class Session(_SessionBase):
         -  A subsequent _initiate_generation function can run faster
            because the device is already configured.
         '''
-        error_code = self._library.niFgen_Commit(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_Commit(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5044,7 +5155,9 @@ class Session(_SessionBase):
                 more than one channel by inserting commas between values (for example,
                 0,1).
         '''
-        error_code = self._library.niFgen_ConfigureChannels(self._vi, channels.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        channels_ctype = ctypes.create_string_buffer(channels.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_ConfigureChannels(vi_ctype, channels_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5083,7 +5196,9 @@ class Session(_SessionBase):
                 | NIFGEN_VAL_AUTOMATIC       | **Automatic Selection**—NI-FGEN selects between the divide-down and high-resolution clocking modes. |
                 +----------------------------+-----------------------------------------------------------------------------------------------------+
         '''
-        error_code = self._library.niFgen_ConfigureClockMode(self._vi, clock_mode)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        clock_mode_ctype = visatype.ViInt32(clock_mode)  # case 8
+        error_code = self._library.niFgen_ConfigureClockMode(vi_ctype, clock_mode_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5161,7 +5276,11 @@ class Session(_SessionBase):
                 | NIFGEN_VAL_FALLING_EDGE | Occurs when the signal transitions from high level to low level. |
                 +-------------------------+------------------------------------------------------------------+
         '''
-        error_code = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger(self._vi, trigger_id.encode(self._encoding), source.encode(self._encoding), edge)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
+        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case 3
+        edge_ctype = visatype.ViInt32(edge)  # case 8
+        error_code = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5224,7 +5343,10 @@ class Session(_SessionBase):
                 | NIFGEN_VAL_FALLING_EDGE | Occurs when the signal transitions from high level to low level. |
                 +-------------------------+------------------------------------------------------------------+
         '''
-        error_code = self._library.niFgen_ConfigureDigitalEdgeStartTrigger(self._vi, source.encode(self._encoding), edge)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case 3
+        edge_ctype = visatype.ViInt32(edge)  # case 8
+        error_code = self._library.niFgen_ConfigureDigitalEdgeStartTrigger(vi_ctype, source_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5303,7 +5425,11 @@ class Session(_SessionBase):
                 | "LowLevel"  | Script Trigger asserts on a low digital level.  |
                 +-------------+-------------------------------------------------+
         '''
-        error_code = self._library.niFgen_ConfigureDigitalLevelScriptTrigger(self._vi, trigger_id.encode(self._encoding), source.encode(self._encoding), trigger_when)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
+        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case 3
+        trigger_when_ctype = visatype.ViInt32(trigger_when)  # case 8
+        error_code = self._library.niFgen_ConfigureDigitalLevelScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, trigger_when_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5340,7 +5466,9 @@ class Session(_SessionBase):
                 | NIFGEN_VAL_OUTPUT_SCRIPT    | **Script mode**—Allows you to use scripting to link and loop multiple waveforms in complex combinations.    |
                 +-----------------------------+-------------------------------------------------------------------------------------------------------------+
         '''
-        error_code = self._library.niFgen_ConfigureOutputMode(self._vi, output_mode)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        output_mode_ctype = visatype.ViInt32(output_mode)  # case 8
+        error_code = self._library.niFgen_ConfigureOutputMode(vi_ctype, output_mode_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5364,7 +5492,9 @@ class Session(_SessionBase):
 
                 **Units**: samples per channel
         '''
-        error_code = self._library.niFgen_ConfigureP2PEndpointFullnessStartTrigger(self._vi, p2p_endpoint_fullness_level)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        p2p_endpoint_fullness_level_ctype = visatype.ViInt32(p2p_endpoint_fullness_level)  # case 8
+        error_code = self._library.niFgen_ConfigureP2PEndpointFullnessStartTrigger(vi_ctype, p2p_endpoint_fullness_level_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5384,7 +5514,9 @@ class Session(_SessionBase):
 
                 **Default Value**: 10000000
         '''
-        error_code = self._library.niFgen_ConfigureRefClockFrequency(self._vi, reference_clock_frequency)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        reference_clock_frequency_ctype = visatype.ViReal64(reference_clock_frequency)  # case 8
+        error_code = self._library.niFgen_ConfigureRefClockFrequency(vi_ctype, reference_clock_frequency_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5443,7 +5575,9 @@ class Session(_SessionBase):
                 | NIFGEN_VAL_CLK_IN               | CLK IN front panel connector |
                 +---------------------------------+------------------------------+
         '''
-        error_code = self._library.niFgen_ConfigureRefClockSource(self._vi, reference_clock_source)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        reference_clock_source_ctype = visatype.ViInt32(reference_clock_source)  # case 8
+        error_code = self._library.niFgen_ConfigureRefClockSource(vi_ctype, reference_clock_source_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5489,7 +5623,10 @@ class Session(_SessionBase):
 
                 **Default Value**: 10000000
         '''
-        error_code = self._library.niFgen_ConfigureReferenceClock(self._vi, reference_clock_source.encode(self._encoding), reference_clock_frequency)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        reference_clock_source_ctype = ctypes.create_string_buffer(reference_clock_source.encode(self._encoding))  # case 3
+        reference_clock_frequency_ctype = visatype.ViReal64(reference_clock_frequency)  # case 8
+        error_code = self._library.niFgen_ConfigureReferenceClock(vi_ctype, reference_clock_source_ctype, reference_clock_frequency_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5536,7 +5673,9 @@ class Session(_SessionBase):
                 on your device, refer to the Routes topic for your device or the
                 **Device Routes** tab in MAX.
         '''
-        error_code = self._library.niFgen_ConfigureSampleClockSource(self._vi, sample_clock_source.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        sample_clock_source_ctype = ctypes.create_string_buffer(sample_clock_source.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_ConfigureSampleClockSource(vi_ctype, sample_clock_source_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5562,7 +5701,9 @@ class Session(_SessionBase):
 
                 **Default Value**: None
         '''
-        error_code = self._library.niFgen_ConfigureSampleRate(self._vi, sample_rate)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        sample_rate_ctype = visatype.ViReal64(sample_rate)  # case 8
+        error_code = self._library.niFgen_ConfigureSampleRate(vi_ctype, sample_rate_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5588,7 +5729,9 @@ class Session(_SessionBase):
                 | "ScriptTrigger3" | Script Trigger 3 |
                 +------------------+------------------+
         '''
-        error_code = self._library.niFgen_ConfigureSoftwareEdgeScriptTrigger(self._vi, trigger_id.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_ConfigureSoftwareEdgeScriptTrigger(vi_ctype, trigger_id_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5597,7 +5740,8 @@ class Session(_SessionBase):
 
         Configures the Start Trigger for software edge triggering.
         '''
-        error_code = self._library.niFgen_ConfigureSoftwareEdgeStartTrigger(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_ConfigureSoftwareEdgeStartTrigger(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5642,7 +5786,9 @@ class Session(_SessionBase):
                 | NIFGEN_VAL_DDC_CLK_IN | Digital Data & Control clock in |
                 +-----------------------+---------------------------------+
         '''
-        error_code = self._library.niFgen_ConfigureUpdateClockSource(self._vi, update_clock_source)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        update_clock_source_ctype = visatype.ViInt32(update_clock_source)  # case 8
+        error_code = self._library.niFgen_ConfigureUpdateClockSource(vi_ctype, update_clock_source_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -5745,9 +5891,15 @@ class Session(_SessionBase):
                 pass this handle to nifgen_ConfigureArbSequence to generate the
                 arbitrary sequence.
         '''
-        coerced_markers_array_ctype = (visatype.ViInt32 * 1)()
-        sequence_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_CreateAdvancedArbSequence(self._vi, sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array, coerced_markers_array_ctype, ctypes.pointer(sequence_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        sequence_length_ctype = visatype.ViInt32(sequence_length)  # case 8
+        waveform_handles_array_ctype = (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
+        loop_counts_array_ctype = (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
+        sample_counts_array_ctype = (visatype.ViInt32 * len(sample_counts_array))(*sample_counts_array)  # case 4
+        marker_location_array_ctype = (visatype.ViInt32 * len(marker_location_array))(*marker_location_array)  # case 4
+        coerced_markers_array_ctype = (visatype.ViInt32 * 1)()  # case 10
+        sequence_handle_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_CreateAdvancedArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, sample_counts_array_ctype, marker_location_array_ctype, coerced_markers_array_ctype, ctypes.pointer(sequence_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(coerced_markers_array_ctype[i]) for i in range(1)], int(sequence_handle_ctype.value)
 
@@ -5812,8 +5964,12 @@ class Session(_SessionBase):
                 pass this handle to nifgen_ConfigureArbSequence to generate the
                 arbitrary sequence.
         '''
-        sequence_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_CreateArbSequence(self._vi, sequence_length, waveform_handles_array, loop_counts_array, ctypes.pointer(sequence_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        sequence_length_ctype = visatype.ViInt32(sequence_length)  # case 8
+        waveform_handles_array_ctype = (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
+        loop_counts_array_ctype = (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
+        sequence_handle_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_CreateArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, ctypes.pointer(sequence_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(sequence_handle_ctype.value)
 
@@ -5862,8 +6018,11 @@ class Session(_SessionBase):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
-        waveform_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_CreateArbWaveform(self._vi, waveform_size, waveform_data_array, ctypes.pointer(waveform_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_handle_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_CreateArbWaveform(vi_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
@@ -5911,8 +6070,11 @@ class Session(_SessionBase):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
-        waveform_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_CreateBinary16ArbWaveform(self._vi, waveform_size, waveform_data_array, ctypes.pointer(waveform_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_data_array_ctype = (visatype.ViInt16 * len(waveform_data_array))(*waveform_data_array)  # case 4
+        waveform_handle_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_CreateBinary16ArbWaveform(vi_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
@@ -5997,8 +6159,13 @@ class Session(_SessionBase):
                 this handle to nifgen_ConfigureFreqList to generate the arbitrary
                 sequence.
         '''
-        frequency_list_handle_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_CreateFreqList(self._vi, waveform, frequency_list_length, frequency_array, duration_array, ctypes.pointer(frequency_list_handle_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        waveform_ctype = visatype.ViInt32(waveform)  # case 8
+        frequency_list_length_ctype = visatype.ViInt32(frequency_list_length)  # case 8
+        frequency_array_ctype = (visatype.ViReal64 * len(frequency_array))(*frequency_array)  # case 4
+        duration_array_ctype = (visatype.ViReal64 * len(duration_array))(*duration_array)  # case 4
+        frequency_list_handle_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_CreateFreqList(vi_ctype, waveform_ctype, frequency_list_length_ctype, frequency_array_ctype, duration_array_ctype, ctypes.pointer(frequency_list_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(frequency_list_handle_ctype.value)
 
@@ -6009,7 +6176,8 @@ class Session(_SessionBase):
         impact on the system to which it is connected. The analog output and all
         exported signals are disabled.
         '''
-        error_code = self._library.niFgen_Disable(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_Disable(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6035,7 +6203,9 @@ class Session(_SessionBase):
                 | "ScriptTrigger3" | Script Trigger 3 |
                 +------------------+------------------+
         '''
-        error_code = self._library.niFgen_DisableScriptTrigger(self._vi, trigger_id.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_DisableScriptTrigger(vi_ctype, trigger_id_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6044,7 +6214,8 @@ class Session(_SessionBase):
 
         Disables the Start Trigger.
         '''
-        error_code = self._library.niFgen_DisableStartTrigger(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_DisableStartTrigger(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6066,8 +6237,10 @@ class Session(_SessionBase):
 
                 You must pass a ViChar array with at least 256 bytes.
         '''
-        error_message_ctype = (visatype.ViChar * 1)()
-        error_code = self._library.niFgen_ErrorHandler(self._vi, error_code, error_message_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code_ctype = visatype.ViStatus(error_code)  # case 8
+        error_message_ctype = (visatype.ViChar * 1)()  # case 10
+        error_code = self._library.niFgen_ErrorHandler(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return error_message_ctype.value.decode(self._encoding)
 
@@ -6189,7 +6362,11 @@ class Session(_SessionBase):
                 device, refer to the Routes topic for your device or the **Device
                 Routes** tab in MAX.
         '''
-        error_code = self._library.niFgen_ExportSignal(self._vi, signal, signal_identifier.encode(self._encoding), output_terminal.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        signal_ctype = visatype.ViInt32(signal)  # case 8
+        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case 3
+        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6218,8 +6395,9 @@ class Session(_SessionBase):
                 | NIFGEN_VAL_HARDWARE_ERROR            | There is a hardware error.                 |
                 +--------------------------------------+--------------------------------------------+
         '''
-        state_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_GetHardwareState(self._vi, ctypes.pointer(state_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        state_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_GetHardwareState(vi_ctype, ctypes.pointer(state_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(state_ctype.value)
 
@@ -6245,12 +6423,13 @@ class Session(_SessionBase):
             hour (int): Specifies the hour of the last successful calibration.
             minute (int): Specifies the minute of the last successful calibration.
         '''
-        year_ctype = visatype.ViInt32(0)
-        month_ctype = visatype.ViInt32(0)
-        day_ctype = visatype.ViInt32(0)
-        hour_ctype = visatype.ViInt32(0)
-        minute_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_GetSelfCalLastDateAndTime(self._vi, ctypes.pointer(year_ctype), ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        year_ctype = visatype.ViInt32()  # case 13
+        month_ctype = visatype.ViInt32()  # case 13
+        day_ctype = visatype.ViInt32()  # case 13
+        hour_ctype = visatype.ViInt32()  # case 13
+        minute_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_GetSelfCalLastDateAndTime(vi_ctype, ctypes.pointer(year_ctype), ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
@@ -6264,8 +6443,9 @@ class Session(_SessionBase):
             temperature (float): Specifies the temperature at the last successful calibration in degrees
                 Celsius.
         '''
-        temperature_ctype = visatype.ViReal64(0)
-        error_code = self._library.niFgen_GetSelfCalLastTemp(self._vi, ctypes.pointer(temperature_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        temperature_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niFgen_GetSelfCalLastTemp(vi_ctype, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -6285,8 +6465,9 @@ class Session(_SessionBase):
                 | VI_FALSE | Self–calibration is not supported. |
                 +----------+------------------------------------+
         '''
-        self_cal_supported_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niFgen_GetSelfCalSupported(self._vi, ctypes.pointer(self_cal_supported_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        self_cal_supported_ctype = visatype.ViBoolean()  # case 13
+        error_code = self._library.niFgen_GetSelfCalSupported(vi_ctype, ctypes.pointer(self_cal_supported_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
 
@@ -6442,8 +6623,12 @@ class Session(_SessionBase):
             vi (int): Returns a session handle that you can use to identify the device in all
                 subsequent NI-FGEN function calls.
         '''
-        vi_ctype = visatype.ViSession(0)
-        error_code = self._library.niFgen_InitWithOptions(resource_name.encode(self._encoding), id_query, reset_device, option_string.encode(self._encoding), ctypes.pointer(vi_ctype))
+        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
+        id_query_ctype = visatype.ViBoolean(id_query)  # case 8
+        reset_device_ctype = visatype.ViBoolean(reset_device)  # case 8
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case 3
+        vi_ctype = visatype.ViSession()  # case 13
+        error_code = self._library.niFgen_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
@@ -6452,7 +6637,8 @@ class Session(_SessionBase):
 
         Sets up the device to start the analog output calibration.
         '''
-        error_code = self._library.niFgen_InitializeAnalogOutputCalibration(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_InitializeAnalogOutputCalibration(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6463,7 +6649,8 @@ class Session(_SessionBase):
         NI 5421/5422/5441, ADC calibration involves characterizing the gain and
         offset of the onboard ADC.
         '''
-        error_code = self._library.niFgen_InitializeCalADCCalibration(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_InitializeCalADCCalibration(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6472,7 +6659,8 @@ class Session(_SessionBase):
 
         Initializes an external calibration session to calibrate flatness.
         '''
-        error_code = self._library.niFgen_InitializeFlatnessCalibration(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_InitializeFlatnessCalibration(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6484,7 +6672,8 @@ class Session(_SessionBase):
         The session handle should be the handle returned by the
         nifgen_InitExtCal function.
         '''
-        error_code = self._library.niFgen_InitializeOscillatorFrequencyCalibration(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_InitializeOscillatorFrequencyCalibration(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6496,7 +6685,8 @@ class Session(_SessionBase):
         is aborted, you can call the _initiate_generation function to
         cause the signal generator to produce a signal again.
         '''
-        error_code = self._library.niFgen_InitiateGeneration(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_InitiateGeneration(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6522,8 +6712,9 @@ class Session(_SessionBase):
                 | VI_FALSE | Generation is not complete. |
                 +----------+-----------------------------+
         '''
-        done_ctype = visatype.ViBoolean(0)
-        error_code = self._library.niFgen_IsDone(self._vi, ctypes.pointer(done_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        done_ctype = visatype.ViBoolean()  # case 13
+        error_code = self._library.niFgen_IsDone(vi_ctype, ctypes.pointer(done_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
 
@@ -6538,7 +6729,9 @@ class Session(_SessionBase):
                 Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(p2p_streaming)>`__
                 documentation in the *NI Signal Generators Help* for more information.
         '''
-        error_code = self._library.niFgen_ManualEnableP2PStream(self._vi, endpoint_name.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        endpoint_name_ctype = ctypes.create_string_buffer(endpoint_name.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_ManualEnableP2PStream(vi_ctype, endpoint_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6565,11 +6758,12 @@ class Session(_SessionBase):
                 arbitrary waveform in a sequence. NI-FGEN obtains this value from the
                 MAX_LOOP_COUNT attribute.
         '''
-        maximum_number_of_sequences_ctype = visatype.ViInt32(0)
-        minimum_sequence_length_ctype = visatype.ViInt32(0)
-        maximum_sequence_length_ctype = visatype.ViInt32(0)
-        maximum_loop_count_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_QueryArbSeqCapabilities(self._vi, ctypes.pointer(maximum_number_of_sequences_ctype), ctypes.pointer(minimum_sequence_length_ctype), ctypes.pointer(maximum_sequence_length_ctype), ctypes.pointer(maximum_loop_count_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        maximum_number_of_sequences_ctype = visatype.ViInt32()  # case 13
+        minimum_sequence_length_ctype = visatype.ViInt32()  # case 13
+        maximum_sequence_length_ctype = visatype.ViInt32()  # case 13
+        maximum_loop_count_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_QueryArbSeqCapabilities(vi_ctype, ctypes.pointer(maximum_number_of_sequences_ctype), ctypes.pointer(minimum_sequence_length_ctype), ctypes.pointer(maximum_sequence_length_ctype), ctypes.pointer(maximum_loop_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_sequences_ctype.value), int(minimum_sequence_length_ctype.value), int(maximum_sequence_length_ctype.value), int(maximum_loop_count_ctype.value)
 
@@ -6603,11 +6797,12 @@ class Session(_SessionBase):
                 a waveform. NI-FGEN obtains this value from the
                 MAX_WAVEFORM_SIZE attribute.
         '''
-        maximum_number_of_waveforms_ctype = visatype.ViInt32(0)
-        waveform_quantum_ctype = visatype.ViInt32(0)
-        minimum_waveform_size_ctype = visatype.ViInt32(0)
-        maximum_waveform_size_ctype = visatype.ViInt32(0)
-        error_code = self._library.niFgen_QueryArbWfmCapabilities(self._vi, ctypes.pointer(maximum_number_of_waveforms_ctype), ctypes.pointer(waveform_quantum_ctype), ctypes.pointer(minimum_waveform_size_ctype), ctypes.pointer(maximum_waveform_size_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        maximum_number_of_waveforms_ctype = visatype.ViInt32()  # case 13
+        waveform_quantum_ctype = visatype.ViInt32()  # case 13
+        minimum_waveform_size_ctype = visatype.ViInt32()  # case 13
+        maximum_waveform_size_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_QueryArbWfmCapabilities(vi_ctype, ctypes.pointer(maximum_number_of_waveforms_ctype), ctypes.pointer(waveform_quantum_ctype), ctypes.pointer(minimum_waveform_size_ctype), ctypes.pointer(maximum_waveform_size_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_waveforms_ctype.value), int(waveform_quantum_ctype.value), int(minimum_waveform_size_ctype.value), int(maximum_waveform_size_ctype.value)
 
@@ -6643,13 +6838,14 @@ class Session(_SessionBase):
                 frequency list. NI-FGEN obtains this value from the
                 FREQ_LIST_DURATION_QUANTUM attribute.
         '''
-        maximum_number_of_freq_lists_ctype = visatype.ViInt32(0)
-        minimum_frequency_list_length_ctype = visatype.ViInt32(0)
-        maximum_frequency_list_length_ctype = visatype.ViInt32(0)
-        minimum_frequency_list_duration_ctype = visatype.ViReal64(0)
-        maximum_frequency_list_duration_ctype = visatype.ViReal64(0)
-        frequency_list_duration_quantum_ctype = visatype.ViReal64(0)
-        error_code = self._library.niFgen_QueryFreqListCapabilities(self._vi, ctypes.pointer(maximum_number_of_freq_lists_ctype), ctypes.pointer(minimum_frequency_list_length_ctype), ctypes.pointer(maximum_frequency_list_length_ctype), ctypes.pointer(minimum_frequency_list_duration_ctype), ctypes.pointer(maximum_frequency_list_duration_ctype), ctypes.pointer(frequency_list_duration_quantum_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        maximum_number_of_freq_lists_ctype = visatype.ViInt32()  # case 13
+        minimum_frequency_list_length_ctype = visatype.ViInt32()  # case 13
+        maximum_frequency_list_length_ctype = visatype.ViInt32()  # case 13
+        minimum_frequency_list_duration_ctype = visatype.ViReal64()  # case 13
+        maximum_frequency_list_duration_ctype = visatype.ViReal64()  # case 13
+        frequency_list_duration_quantum_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niFgen_QueryFreqListCapabilities(vi_ctype, ctypes.pointer(maximum_number_of_freq_lists_ctype), ctypes.pointer(minimum_frequency_list_length_ctype), ctypes.pointer(maximum_frequency_list_length_ctype), ctypes.pointer(minimum_frequency_list_duration_ctype), ctypes.pointer(maximum_frequency_list_duration_ctype), ctypes.pointer(frequency_list_duration_quantum_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_freq_lists_ctype.value), int(minimum_frequency_list_length_ctype.value), int(maximum_frequency_list_length_ctype.value), float(minimum_frequency_list_duration_ctype.value), float(maximum_frequency_list_duration_ctype.value), float(frequency_list_duration_quantum_ctype.value)
 
@@ -6677,8 +6873,11 @@ class Session(_SessionBase):
             cal_adc_value (float): Specifies the average of the voltage measurements taken from the onboard
                 calibration ADC.
         '''
-        cal_adc_value_ctype = visatype.ViReal64(0)
-        error_code = self._library.niFgen_ReadCalADC(self._vi, number_of_reads_to_average, return_calibrated_value, ctypes.pointer(cal_adc_value_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        number_of_reads_to_average_ctype = visatype.ViInt32(number_of_reads_to_average)  # case 8
+        return_calibrated_value_ctype = visatype.ViBoolean(return_calibrated_value)  # case 8
+        cal_adc_value_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niFgen_ReadCalADC(vi_ctype, number_of_reads_to_average_ctype, return_calibrated_value_ctype, ctypes.pointer(cal_adc_value_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(cal_adc_value_ctype.value)
 
@@ -6692,8 +6891,9 @@ class Session(_SessionBase):
             temperature (float): Returns the current temperature read from onboard temperature sensors,
                 in degrees Celsius.
         '''
-        temperature_ctype = visatype.ViReal64(0)
-        error_code = self._library.niFgen_ReadCurrentTemperature(self._vi, ctypes.pointer(temperature_ctype))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        temperature_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niFgen_ReadCurrentTemperature(vi_ctype, ctypes.pointer(temperature_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -6705,7 +6905,8 @@ class Session(_SessionBase):
         reset, hardware is configured to its default state, and all session
         attributes are reset to their default states.
         '''
-        error_code = self._library.niFgen_ResetDevice(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_ResetDevice(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6717,7 +6918,8 @@ class Session(_SessionBase):
         was created without a logical name, this function is equivalent to the
         nifgen_reset function.
         '''
-        error_code = self._library.niFgen_ResetWithDefaults(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_ResetWithDefaults(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6728,7 +6930,8 @@ class Session(_SessionBase):
         calibration is successful, new calibration data and constants are stored
         in the onboard EEPROM.
         '''
-        error_code = self._library.niFgen_SelfCal(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_SelfCal(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6756,7 +6959,10 @@ class Session(_SessionBase):
                 +----------------------------+
             trigger_id (string):
         '''
-        error_code = self._library.niFgen_SendSoftwareEdgeTrigger(self._vi, trigger, trigger_id.encode(self._encoding))
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        trigger_ctype = visatype.ViInt32(trigger)  # case 8
+        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
+        error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6770,7 +6976,8 @@ class Session(_SessionBase):
         However, the NI 5401/5411/5431 do not support overriding an external
         digital edge trigger.
         '''
-        error_code = self._library.niFgen_SendSoftwareTrigger(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_SendSoftwareTrigger(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6783,7 +6990,9 @@ class Session(_SessionBase):
         Args:
             max_time (int): Specifies the timeout value in milliseconds.
         '''
-        error_code = self._library.niFgen_WaitUntilDone(self._vi, max_time)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        max_time_ctype = visatype.ViInt32(max_time)  # case 8
+        error_code = self._library.niFgen_WaitUntilDone(vi_ctype, max_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6801,7 +7010,11 @@ class Session(_SessionBase):
             endpoint_data (list of int): Specifies the array of data to write into the endpoint FIFO. The binary
                 data is left-justified.
         '''
-        error_code = self._library.niFgen_WriteP2PEndpointI16(self._vi, endpoint_name.encode(self._encoding), number_of_samples, endpoint_data)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        endpoint_name_ctype = ctypes.create_string_buffer(endpoint_name.encode(self._encoding))  # case 3
+        number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
+        endpoint_data_ctype = (visatype.ViInt16 * len(endpoint_data))(*endpoint_data)  # case 4
+        error_code = self._library.niFgen_WriteP2PEndpointI16(vi_ctype, endpoint_name_ctype, number_of_samples_ctype, endpoint_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6831,7 +7044,8 @@ class Session(_SessionBase):
         After calling _close, you cannot use NI-FGEN again until you
         call the nifgen_init or nifgen_InitWithOptions functions.
         '''
-        error_code = self._library.niFgen_close(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6847,7 +7061,8 @@ class Session(_SessionBase):
         For the NI 5401/5404/5411/5431, this function exhibits the same
         behavior as the nifgen_ResetDevice function.
         '''
-        error_code = self._library.niFgen_reset(self._vi)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        error_code = self._library.niFgen_reset(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -6877,9 +7092,10 @@ class Session(_SessionBase):
 
                 You must pass a ViChar array with at least 256 bytes.
         '''
-        self_test_result_ctype = visatype.ViInt16(0)
-        self_test_message_ctype = (visatype.ViChar * 256)()
-        error_code = self._library.niFgen_self_test(self._vi, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        self_test_result_ctype = visatype.ViInt16()  # case 13
+        self_test_message_ctype = (visatype.ViChar * 256)()  # case 10
+        error_code = self._library.niFgen_self_test(vi_ctype, ctypes.pointer(self_test_result_ctype), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 

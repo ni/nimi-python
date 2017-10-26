@@ -742,7 +742,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetAttributeViString']['return']
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niFgen_GetAttributeViString", param='attributeValue')
-        if array_size == 0:
+        if array_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
@@ -755,7 +755,7 @@ class SideEffectsHelper(object):
         error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['errorDescription'] is None:
             raise MockFunctionCallError("niFgen_GetError", param='errorDescription')
-        if error_description_buffer_size == 0:
+        if error_description_buffer_size.value == 0:
             return len(self._defaults['GetError']['errorDescription'])
         error_description.value = self._defaults['GetError']['errorDescription'].encode('ascii')
         return self._defaults['GetError']['return']

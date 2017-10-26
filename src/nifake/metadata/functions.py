@@ -1053,44 +1053,6 @@ functions = {
         },
     },
 
-    'GetAStringWithSpecifiedMaximumSize': {
-        'codegen_method': 'public',
-        'returns': 'ViStatus',
-        'parameters': [
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'vi',
-                'type': 'ViSession',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.',
-                },
-            },
-            {
-                'direction': 'out',
-                'enum': None,
-                'is_buffer': True,
-                'name': 'aString',
-                'type': 'ViChar',
-                'documentation': {
-                    'description': 'String comes back here. Buffer must be at least bufferSize big.',
-                },
-            },
-            {
-                'direction': 'in',
-                'enum': None,
-                'name': 'bufferSize',
-                'type': 'ViInt32',
-                'documentation': {
-                    'description': 'Buffersize of the string.',
-                },
-            },
-        ],
-        'documentation': {
-            'description': 'Illustrates resturning a string where user specifies the size.',
-        },
-    },
-
     'ReturnANumberAndAString': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
@@ -1120,7 +1082,7 @@ functions = {
                 'name': 'aString',
                 'type': 'ViChar',
                 'documentation': {
-                    'description': 'Contains a string.',
+                    'description': 'Contains a string. Buffer must be 256 bytes or larger.',
                 },
             },
         ],
@@ -1480,12 +1442,12 @@ functions = {
                 'name': 'anArray',
                 'type': 'ViInt16',
                 'documentation': {
-                    'description': 'Contains an array of booleans',
+                    'description': 'Contains an array of enums, stored as 16 bit integers under the hood ',
                 },
             },
         ],
         'documentation': {
-            'description': 'This function returns an array of booleans.',
+            'description': 'This function returns an array of enums, stored as 16 bit integers under the hood.',
         },
     },
 

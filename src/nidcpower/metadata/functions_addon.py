@@ -102,7 +102,7 @@ functions_is_error_handling = {
 }
 
 # Default values for method parameters
-function_default_value = {
+functions_default_value = {
     'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '', },
                                                                        2: { 'default_value': False, },
                                                                        3: { 'default_value': '', }, }, },
