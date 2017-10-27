@@ -898,7 +898,7 @@ nifgen.Session methods
 
     :type start_phase: float
 
-.. function:: create_advanced_arb_sequence(sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array)
+.. function:: create_advanced_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array)
 
     Creates an arbitrary sequence from an array of waveform handles and an
     array of corresponding loop counts. This function returns a handle that
@@ -1148,7 +1148,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_freq_list(waveform, frequency_list_length, frequency_array, duration_array)
+.. function:: create_freq_list(waveform, frequency_array, duration_array)
 
     Creates a frequency list from an array of frequencies
     (**frequencyArray**) and an array of durations (**durationArray**). The

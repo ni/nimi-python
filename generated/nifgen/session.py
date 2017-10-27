@@ -4429,7 +4429,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_advanced_arb_sequence(self, sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array):
+    def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array):
         '''create_advanced_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
@@ -4529,7 +4529,7 @@ class Session(_SessionBase):
                 arbitrary sequence.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sequence_length_ctype = visatype.ViInt32(sequence_length)  # case 8
+        sequence_length_ctype = visatype.ViInt32(len(waveform_handles_array))  # case 5
         waveform_handles_array_ctype = (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
         loop_counts_array_ctype = (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
         sample_counts_array_ctype = (visatype.ViInt32 * len(sample_counts_array))(*sample_counts_array)  # case 4
@@ -4610,7 +4610,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(sequence_handle_ctype.value)
 
-    def create_freq_list(self, waveform, frequency_list_length, frequency_array, duration_array):
+    def create_freq_list(self, waveform, frequency_array, duration_array):
         '''create_freq_list
 
         Creates a frequency list from an array of frequencies
@@ -4693,7 +4693,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         waveform_ctype = visatype.ViInt32(waveform)  # case 8
-        frequency_list_length_ctype = visatype.ViInt32(frequency_list_length)  # case 8
+        frequency_list_length_ctype = visatype.ViInt32(len(frequency_array))  # case 5
         frequency_array_ctype = (visatype.ViReal64 * len(frequency_array))(*frequency_array)  # case 4
         duration_array_ctype = (visatype.ViReal64 * len(duration_array))(*duration_array)  # case 4
         frequency_list_handle_ctype = visatype.ViInt32()  # case 13
