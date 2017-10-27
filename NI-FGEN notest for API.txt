@@ -5,10 +5,6 @@ TODOs
 * Look at all drivers and see if we filtered out useful ext cal functions like niFgen_GetExtCalLastTemp
 
 Size mecanisms
-    write_binary16_waveform size
-    write_named_waveform_f64 size
-    write_named_waveform_i16 size
-    write_waveform size
     create_advanced_arb_sequence sequence_length is array sizes
         create_arb_sequence sequence_length is array size and both arrays should be equal size
     create_freq_list frequency_list_length for both arrays (issue)
