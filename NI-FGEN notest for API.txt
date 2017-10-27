@@ -5,9 +5,6 @@ TODOs
 * Look at all drivers and see if we filtered out useful ext cal functions like niFgen_GetExtCalLastTemp
 
 Size mecanisms
-    configure_custom_fir_filter_coefficients don't include number_of_coefficients
-    create_waveform_f64 get rid of waveform_size
-    create_waveform_i16 waveform_size
     define_user_standard_waveform waveform_size
     get_fir_filter_coefficients(self, array_size, coefficients_array, number_of_coefficients_read) ivi dance and outputs
         number_of_coefficients_read is output. Bad extraction?
@@ -27,6 +24,7 @@ Defaults:
     configure_digital_edge_start_trigger edge rising
     create_advanced_arb_sequence sample_counts_array, marker_location_array are optional to None (known codegen issue)
     wait_until_done max_time 10000 ms
+
 Enums:
     operation mode property use enum
     create_waveform_from_file_f64 byte_order enum
@@ -38,5 +36,6 @@ Enums:
     signal is enum
     get_hardware_state is enum
     send_software_edge_trigger trigger is enum
+
 
 
