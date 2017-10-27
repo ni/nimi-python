@@ -187,9 +187,6 @@ class SideEffectsHelper(object):
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
         self._defaults['ResetWithDefaults']['return'] = 0
-        self._defaults['SampleMode'] = {}
-        self._defaults['SampleMode']['return'] = 0
-        self._defaults['SampleMode']['sampleMode'] = None
         self._defaults['SampleRate'] = {}
         self._defaults['SampleRate']['return'] = 0
         self._defaults['SampleRate']['sampleRate'] = None
@@ -746,14 +743,6 @@ class SideEffectsHelper(object):
             return self._defaults['ResetWithDefaults']['return']
         return self._defaults['ResetWithDefaults']['return']
 
-    def niScope_SampleMode(self, vi, sample_mode):  # noqa: N802
-        if self._defaults['SampleMode']['return'] != 0:
-            return self._defaults['SampleMode']['return']
-        if self._defaults['SampleMode']['sampleMode'] is None:
-            raise MockFunctionCallError("niScope_SampleMode", param='sampleMode')
-        sample_mode.contents.value = self._defaults['SampleMode']['sampleMode']
-        return self._defaults['SampleMode']['return']
-
     def niScope_SampleRate(self, vi, sample_rate):  # noqa: N802
         if self._defaults['SampleRate']['return'] != 0:
             return self._defaults['SampleRate']['return']
@@ -982,8 +971,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_ResetDevice.return_value = 0
         mock_library.niScope_ResetWithDefaults.side_effect = MockFunctionCallError("niScope_ResetWithDefaults")
         mock_library.niScope_ResetWithDefaults.return_value = 0
-        mock_library.niScope_SampleMode.side_effect = MockFunctionCallError("niScope_SampleMode")
-        mock_library.niScope_SampleMode.return_value = 0
         mock_library.niScope_SampleRate.side_effect = MockFunctionCallError("niScope_SampleRate")
         mock_library.niScope_SampleRate.return_value = 0
         mock_library.niScope_SendSWTrigger.side_effect = MockFunctionCallError("niScope_SendSWTrigger")

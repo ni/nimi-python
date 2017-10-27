@@ -748,7 +748,6 @@ niscope.Session methods
         channel.
 
         Defined Values
-        ~~~~~~~~~~~~~~
 
         NISCOPE\_VAL\_AC (0)
 
@@ -794,7 +793,6 @@ niscope.Session methods
         | NISCOPE\_VAL\_TRUE (1)
 
         Defined Values
-        ~~~~~~~~~~~~~~
 
         | NISCOPE\_VAL\_TRUE (1)—Acquire data on this channel
         | NISCOPE\_VAL\_FALSE (0)—Do not acquire data on this channel
@@ -1178,7 +1176,6 @@ niscope.Session methods
         Pass the source you want the digitizer to monitor for a trigger.
 
         Defined Values
-        ~~~~~~~~~~~~~~
 
         | "0"—Channel 0
         | "1"—Channel 1
@@ -1194,7 +1191,6 @@ niscope.Session methods
         Specifies the Video/TV signal format.
 
         Defined Values
-        ~~~~~~~~~~~~~~
 
         | NISCOPE\_VAL\_NTSC (1)
         | NISCOPE\_VAL\_PAL (2)
@@ -1210,7 +1206,6 @@ niscope.Session methods
         Video/TV event to trigger off of.
 
         Defined Values
-        ~~~~~~~~~~~~~~
 
         | NISCOPE\_VAL\_TV\_EVENT\_FIELD1 (1)—trigger on field 1 of the signal
         | NISCOPE\_VAL\_TV\_EVENT\_FIELD2 (2)—trigger on field 2 of the signal
@@ -1232,7 +1227,6 @@ niscope.Session methods
         | Specifies the polarity of the video signal to trigger off of.
 
         Defined Values
-        ~~~~~~~~~~~~~~
 
         | NISCOPE\_VAL\_TV\_POSITIVE (1)
         | NISCOPE\_VAL\_TV\_NEGATIVE (2)
@@ -1300,7 +1294,6 @@ niscope.Session methods
         Specify how you want the instrument to couple the trigger signal.
 
         Defined Values
-        ~~~~~~~~~~~~~~
 
          NISCOPE\_VAL\_AC (0)
 
@@ -2748,7 +2741,6 @@ niscope.Session methods
         initialize.
 
         resourceName Examples
-        ~~~~~~~~~~~~~~~~~~~~~
 
         For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
         the device number assigned by MAX, as shown in Example 1.
@@ -3131,25 +3123,6 @@ niscope.Session methods
     Configuration Store.
 
     
-
-
-
-.. function:: sample_mode()
-
-    Returns the sample mode the digitizer is currently using.
-
-    
-
-
-
-    :rtype: int
-    :return:
-
-
-            Returns the sample mode the digitizer is currently using; NI-SCOPE
-            returns the value of the :py:data:`niscope.SAMPLE\_MODE` attribute.
-
-            
 
 
 

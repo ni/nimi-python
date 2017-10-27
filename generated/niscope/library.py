@@ -84,7 +84,6 @@ class Library(object):
         self.niScope_ReadWaveformMeasurement_cfunc = None
         self.niScope_ResetDevice_cfunc = None
         self.niScope_ResetWithDefaults_cfunc = None
-        self.niScope_SampleMode_cfunc = None
         self.niScope_SampleRate_cfunc = None
         self.niScope_SendSWTrigger_cfunc = None
         self.niScope_SendSoftwareTriggerEdge_cfunc = None
@@ -647,14 +646,6 @@ class Library(object):
                 self.niScope_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_ResetWithDefaults_cfunc(vi)
-
-    def niScope_SampleMode(self, vi, sample_mode):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_SampleMode_cfunc is None:
-                self.niScope_SampleMode_cfunc = self._library.niScope_SampleMode
-                self.niScope_SampleMode_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niScope_SampleMode_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_SampleMode_cfunc(vi, sample_mode)
 
     def niScope_SampleRate(self, vi, sample_rate):  # noqa: N802
         with self._func_lock:

@@ -3522,7 +3522,6 @@ class _SessionBase(object):
                 initialize.
 
                 resourceName Examples
-                ~~~~~~~~~~~~~~~~~~~~~
 
                 For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
                 the device number assigned by MAX, as shown in Example 1.
@@ -4159,7 +4158,6 @@ class Session(_SessionBase):
                 channel.
 
                 Defined Values
-                ~~~~~~~~~~~~~~
 
                 NISCOPE_VAL_AC (0)
 
@@ -4189,7 +4187,6 @@ class Session(_SessionBase):
                 | NISCOPE_VAL_TRUE (1)
 
                 Defined Values
-                ~~~~~~~~~~~~~~
 
                 | NISCOPE_VAL_TRUE (1)—Acquire data on this channel
                 | NISCOPE_VAL_FALSE (0)—Do not acquire data on this channel
@@ -4436,7 +4433,6 @@ class Session(_SessionBase):
             source (string): Pass the source you want the digitizer to monitor for a trigger.
 
                 Defined Values
-                ~~~~~~~~~~~~~~
 
                 | "0"—Channel 0
                 | "1"—Channel 1
@@ -4444,7 +4440,6 @@ class Session(_SessionBase):
             signal_format (int): Specifies the Video/TV signal format.
 
                 Defined Values
-                ~~~~~~~~~~~~~~
 
                 | NISCOPE_VAL_NTSC (1)
                 | NISCOPE_VAL_PAL (2)
@@ -4452,7 +4447,6 @@ class Session(_SessionBase):
             event (int): Video/TV event to trigger off of.
 
                 Defined Values
-                ~~~~~~~~~~~~~~
 
                 | NISCOPE_VAL_TV_EVENT_FIELD1 (1)—trigger on field 1 of the signal
                 | NISCOPE_VAL_TV_EVENT_FIELD2 (2)—trigger on field 2 of the signal
@@ -4466,7 +4460,6 @@ class Session(_SessionBase):
             polarity (int): | Specifies the polarity of the video signal to trigger off of.
 
                 Defined Values
-                ~~~~~~~~~~~~~~
 
                 | NISCOPE_VAL_TV_POSITIVE (1)
                 | NISCOPE_VAL_TV_NEGATIVE (2)
@@ -4524,7 +4517,6 @@ class Session(_SessionBase):
             coupling (int): Specify how you want the instrument to couple the trigger signal.
 
                 Defined Values
-                ~~~~~~~~~~~~~~
 
                  NISCOPE_VAL_AC (0)
 
@@ -5579,21 +5571,6 @@ class Session(_SessionBase):
         error_code = self._library.niScope_ResetWithDefaults(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def sample_mode(self):
-        '''sample_mode
-
-        Returns the sample mode the digitizer is currently using.
-
-        Returns:
-            sample_mode (int): Returns the sample mode the digitizer is currently using; NI-SCOPE
-                returns the value of the SAMPLE_MODE attribute.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sample_mode_ctype = visatype.ViInt32()  # case 13
-        error_code = self._library.niScope_SampleMode(vi_ctype, ctypes.pointer(sample_mode_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(sample_mode_ctype.value)
 
     def sample_rate(self):
         '''sample_rate
