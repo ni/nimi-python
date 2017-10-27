@@ -10,6 +10,10 @@
 |                      | NI-ModInst | |ModInstLatestVersion| |ModInstPythonVersion| |
 |                      +------------+-----------------------------------------------+
 |                      | NI-SWITCH  | |SwitchLatestVersion| |SwitchPythonVersion|   |
+|                      +------------+-----------------------------------------------+
+|                      | NI-FGEN    | |FgenLatestVersion| |FgenPythonVersion|       |
+|                      +------------+-----------------------------------------------+
+|                      | NI-SCOPE   | |ScopeLatestVersion| |ScopePythonVersion|     |
 +----------------------+------------+-----------------------------------------------+
 
 ===========  ============================================================================================================================
@@ -38,6 +42,8 @@ The **nimi-python** repository generates Python bindings (Application Programmin
 * NI-DMM (Python module: nidmm)
 * NI-ModInst (Python module: nimodinst)
 * NI-SWITCH (Python module: niswitch)
+* NI-FGEN (Python module: nifgen)
+* NI-SCOPE (Python module: niscope)
 
 It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is called through its public C API using the
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
@@ -191,6 +197,22 @@ licenses allow for non-commercial and commercial use.
 .. |SwitchPythonVersion| image:: http://img.shields.io/pypi/pyversions/niswitch.svg
     :alt: NI-SWITCH supported Python versions
     :target: http://pypi.python.org/pypi/niswitch
+
+.. |ScopeLatestVersion| image:: http://img.shields.io/pypi/v/niscope.svg
+    :alt: Latest NI-SCOPE Version
+    :target: http://pypi.python.org/pypi/niscope
+
+.. |ScopePythonVersion| image:: http://img.shields.io/pypi/pyversions/niscope.svg
+    :alt: NI-SCOPE supported Python versions
+    :target: http://pypi.python.org/pypi/niscope
+
+.. |FgenLatestVersion| image:: http://img.shields.io/pypi/v/nifgen.svg
+    :alt: Latest NI-FGEN Version
+    :target: http://pypi.python.org/pypi/nifgen
+
+.. |FgenPythonVersion| image:: http://img.shields.io/pypi/pyversions/nifgen.svg
+    :alt: NI-FGEN supported Python versions
+    :target: http://pypi.python.org/pypi/nifgen
 
 .. |OpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python.svg
     :alt: Open Issues + Pull Requests
