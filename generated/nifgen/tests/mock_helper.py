@@ -56,12 +56,6 @@ class SideEffectsHelper(object):
         self._defaults['CreateArbSequence'] = {}
         self._defaults['CreateArbSequence']['return'] = 0
         self._defaults['CreateArbSequence']['sequenceHandle'] = None
-        self._defaults['CreateArbWaveform'] = {}
-        self._defaults['CreateArbWaveform']['return'] = 0
-        self._defaults['CreateArbWaveform']['waveformHandle'] = None
-        self._defaults['CreateBinary16ArbWaveform'] = {}
-        self._defaults['CreateBinary16ArbWaveform']['return'] = 0
-        self._defaults['CreateBinary16ArbWaveform']['waveformHandle'] = None
         self._defaults['CreateFreqList'] = {}
         self._defaults['CreateFreqList']['return'] = 0
         self._defaults['CreateFreqList']['frequencyListHandle'] = None
@@ -85,9 +79,6 @@ class SideEffectsHelper(object):
         self._defaults['DeleteScript']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
-        self._defaults['ErrorHandler'] = {}
-        self._defaults['ErrorHandler']['return'] = 0
-        self._defaults['ErrorHandler']['errorMessage'] = None
         self._defaults['ExportSignal'] = {}
         self._defaults['ExportSignal']['return'] = 0
         self._defaults['GetAttributeViBoolean'] = {}
@@ -140,14 +131,6 @@ class SideEffectsHelper(object):
         self._defaults['GetSelfCalSupported'] = {}
         self._defaults['GetSelfCalSupported']['return'] = 0
         self._defaults['GetSelfCalSupported']['selfCalSupported'] = None
-        self._defaults['InitializeAnalogOutputCalibration'] = {}
-        self._defaults['InitializeAnalogOutputCalibration']['return'] = 0
-        self._defaults['InitializeCalADCCalibration'] = {}
-        self._defaults['InitializeCalADCCalibration']['return'] = 0
-        self._defaults['InitializeFlatnessCalibration'] = {}
-        self._defaults['InitializeFlatnessCalibration']['return'] = 0
-        self._defaults['InitializeOscillatorFrequencyCalibration'] = {}
-        self._defaults['InitializeOscillatorFrequencyCalibration']['return'] = 0
         self._defaults['InitializeWithChannels'] = {}
         self._defaults['InitializeWithChannels']['return'] = 0
         self._defaults['InitializeWithChannels']['vi'] = None
@@ -176,9 +159,6 @@ class SideEffectsHelper(object):
         self._defaults['QueryFreqListCapabilities']['minimumFrequencyListDuration'] = None
         self._defaults['QueryFreqListCapabilities']['maximumFrequencyListDuration'] = None
         self._defaults['QueryFreqListCapabilities']['frequencyListDurationQuantum'] = None
-        self._defaults['ReadCalADC'] = {}
-        self._defaults['ReadCalADC']['return'] = 0
-        self._defaults['ReadCalADC']['calAdcValue'] = None
         self._defaults['ReadCurrentTemperature'] = {}
         self._defaults['ReadCurrentTemperature']['return'] = 0
         self._defaults['ReadCurrentTemperature']['Temperature'] = None
@@ -186,8 +166,6 @@ class SideEffectsHelper(object):
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
         self._defaults['ResetWithDefaults']['return'] = 0
-        self._defaults['RouteSignalOut'] = {}
-        self._defaults['RouteSignalOut']['return'] = 0
         self._defaults['SelfCal'] = {}
         self._defaults['SelfCal']['return'] = 0
         self._defaults['SendSoftwareEdgeTrigger'] = {}
@@ -210,8 +188,6 @@ class SideEffectsHelper(object):
         self._defaults['SetWaveformNextWritePosition']['return'] = 0
         self._defaults['WaitUntilDone'] = {}
         self._defaults['WaitUntilDone']['return'] = 0
-        self._defaults['WriteBinary16AnalogStaticValue'] = {}
-        self._defaults['WriteBinary16AnalogStaticValue']['return'] = 0
         self._defaults['WriteBinary16Waveform'] = {}
         self._defaults['WriteBinary16Waveform']['return'] = 0
         self._defaults['WriteNamedWaveformF64'] = {}
@@ -352,22 +328,6 @@ class SideEffectsHelper(object):
         sequence_handle.contents.value = self._defaults['CreateArbSequence']['sequenceHandle']
         return self._defaults['CreateArbSequence']['return']
 
-    def niFgen_CreateArbWaveform(self, vi, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
-        if self._defaults['CreateArbWaveform']['return'] != 0:
-            return self._defaults['CreateArbWaveform']['return']
-        if self._defaults['CreateArbWaveform']['waveformHandle'] is None:
-            raise MockFunctionCallError("niFgen_CreateArbWaveform", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateArbWaveform']['waveformHandle']
-        return self._defaults['CreateArbWaveform']['return']
-
-    def niFgen_CreateBinary16ArbWaveform(self, vi, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
-        if self._defaults['CreateBinary16ArbWaveform']['return'] != 0:
-            return self._defaults['CreateBinary16ArbWaveform']['return']
-        if self._defaults['CreateBinary16ArbWaveform']['waveformHandle'] is None:
-            raise MockFunctionCallError("niFgen_CreateBinary16ArbWaveform", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateBinary16ArbWaveform']['waveformHandle']
-        return self._defaults['CreateBinary16ArbWaveform']['return']
-
     def niFgen_CreateFreqList(self, vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle):  # noqa: N802
         if self._defaults['CreateFreqList']['return'] != 0:
             return self._defaults['CreateFreqList']['return']
@@ -427,19 +387,6 @@ class SideEffectsHelper(object):
         if self._defaults['Disable']['return'] != 0:
             return self._defaults['Disable']['return']
         return self._defaults['Disable']['return']
-
-    def niFgen_ErrorHandler(self, vi, error_code, error_message):  # noqa: N802
-        if self._defaults['ErrorHandler']['return'] != 0:
-            return self._defaults['ErrorHandler']['return']
-        if self._defaults['ErrorHandler']['errorMessage'] is None:
-            raise MockFunctionCallError("niFgen_ErrorHandler", param='errorMessage')
-        a = self._defaults['ErrorHandler']['errorMessage']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(error_message), len(a))):
-            error_message[i] = a[i]
-        return self._defaults['ErrorHandler']['return']
 
     def niFgen_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
         if self._defaults['ExportSignal']['return'] != 0:
@@ -586,26 +533,6 @@ class SideEffectsHelper(object):
         self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
         return self._defaults['GetSelfCalSupported']['return']
 
-    def niFgen_InitializeAnalogOutputCalibration(self, vi):  # noqa: N802
-        if self._defaults['InitializeAnalogOutputCalibration']['return'] != 0:
-            return self._defaults['InitializeAnalogOutputCalibration']['return']
-        return self._defaults['InitializeAnalogOutputCalibration']['return']
-
-    def niFgen_InitializeCalADCCalibration(self, vi):  # noqa: N802
-        if self._defaults['InitializeCalADCCalibration']['return'] != 0:
-            return self._defaults['InitializeCalADCCalibration']['return']
-        return self._defaults['InitializeCalADCCalibration']['return']
-
-    def niFgen_InitializeFlatnessCalibration(self, vi):  # noqa: N802
-        if self._defaults['InitializeFlatnessCalibration']['return'] != 0:
-            return self._defaults['InitializeFlatnessCalibration']['return']
-        return self._defaults['InitializeFlatnessCalibration']['return']
-
-    def niFgen_InitializeOscillatorFrequencyCalibration(self, vi):  # noqa: N802
-        if self._defaults['InitializeOscillatorFrequencyCalibration']['return'] != 0:
-            return self._defaults['InitializeOscillatorFrequencyCalibration']['return']
-        return self._defaults['InitializeOscillatorFrequencyCalibration']['return']
-
     def niFgen_InitializeWithChannels(self, resource_name, channel_name, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitializeWithChannels']['return'] != 0:
             return self._defaults['InitializeWithChannels']['return']
@@ -684,14 +611,6 @@ class SideEffectsHelper(object):
         frequency_list_duration_quantum.contents.value = self._defaults['QueryFreqListCapabilities']['frequencyListDurationQuantum']
         return self._defaults['QueryFreqListCapabilities']['return']
 
-    def niFgen_ReadCalADC(self, vi, number_of_reads_to_average, return_calibrated_value, cal_adc_value):  # noqa: N802
-        if self._defaults['ReadCalADC']['return'] != 0:
-            return self._defaults['ReadCalADC']['return']
-        if self._defaults['ReadCalADC']['calAdcValue'] is None:
-            raise MockFunctionCallError("niFgen_ReadCalADC", param='calAdcValue')
-        cal_adc_value.contents.value = self._defaults['ReadCalADC']['calAdcValue']
-        return self._defaults['ReadCalADC']['return']
-
     def niFgen_ReadCurrentTemperature(self, vi, temperature):  # noqa: N802
         if self._defaults['ReadCurrentTemperature']['return'] != 0:
             return self._defaults['ReadCurrentTemperature']['return']
@@ -709,11 +628,6 @@ class SideEffectsHelper(object):
         if self._defaults['ResetWithDefaults']['return'] != 0:
             return self._defaults['ResetWithDefaults']['return']
         return self._defaults['ResetWithDefaults']['return']
-
-    def niFgen_RouteSignalOut(self, vi, channel_name, route_signal_from, route_signal_to):  # noqa: N802
-        if self._defaults['RouteSignalOut']['return'] != 0:
-            return self._defaults['RouteSignalOut']['return']
-        return self._defaults['RouteSignalOut']['return']
 
     def niFgen_SelfCal(self, vi):  # noqa: N802
         if self._defaults['SelfCal']['return'] != 0:
@@ -769,11 +683,6 @@ class SideEffectsHelper(object):
         if self._defaults['WaitUntilDone']['return'] != 0:
             return self._defaults['WaitUntilDone']['return']
         return self._defaults['WaitUntilDone']['return']
-
-    def niFgen_WriteBinary16AnalogStaticValue(self, vi, channel_name, value):  # noqa: N802
-        if self._defaults['WriteBinary16AnalogStaticValue']['return'] != 0:
-            return self._defaults['WriteBinary16AnalogStaticValue']['return']
-        return self._defaults['WriteBinary16AnalogStaticValue']['return']
 
     def niFgen_WriteBinary16Waveform(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
         if self._defaults['WriteBinary16Waveform']['return'] != 0:
@@ -879,10 +788,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_CreateAdvancedArbSequence.return_value = 0
         mock_library.niFgen_CreateArbSequence.side_effect = MockFunctionCallError("niFgen_CreateArbSequence")
         mock_library.niFgen_CreateArbSequence.return_value = 0
-        mock_library.niFgen_CreateArbWaveform.side_effect = MockFunctionCallError("niFgen_CreateArbWaveform")
-        mock_library.niFgen_CreateArbWaveform.return_value = 0
-        mock_library.niFgen_CreateBinary16ArbWaveform.side_effect = MockFunctionCallError("niFgen_CreateBinary16ArbWaveform")
-        mock_library.niFgen_CreateBinary16ArbWaveform.return_value = 0
         mock_library.niFgen_CreateFreqList.side_effect = MockFunctionCallError("niFgen_CreateFreqList")
         mock_library.niFgen_CreateFreqList.return_value = 0
         mock_library.niFgen_CreateWaveformF64.side_effect = MockFunctionCallError("niFgen_CreateWaveformF64")
@@ -901,8 +806,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_DeleteScript.return_value = 0
         mock_library.niFgen_Disable.side_effect = MockFunctionCallError("niFgen_Disable")
         mock_library.niFgen_Disable.return_value = 0
-        mock_library.niFgen_ErrorHandler.side_effect = MockFunctionCallError("niFgen_ErrorHandler")
-        mock_library.niFgen_ErrorHandler.return_value = 0
         mock_library.niFgen_ExportSignal.side_effect = MockFunctionCallError("niFgen_ExportSignal")
         mock_library.niFgen_ExportSignal.return_value = 0
         mock_library.niFgen_GetAttributeViBoolean.side_effect = MockFunctionCallError("niFgen_GetAttributeViBoolean")
@@ -933,14 +836,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetSelfCalLastTemp.return_value = 0
         mock_library.niFgen_GetSelfCalSupported.side_effect = MockFunctionCallError("niFgen_GetSelfCalSupported")
         mock_library.niFgen_GetSelfCalSupported.return_value = 0
-        mock_library.niFgen_InitializeAnalogOutputCalibration.side_effect = MockFunctionCallError("niFgen_InitializeAnalogOutputCalibration")
-        mock_library.niFgen_InitializeAnalogOutputCalibration.return_value = 0
-        mock_library.niFgen_InitializeCalADCCalibration.side_effect = MockFunctionCallError("niFgen_InitializeCalADCCalibration")
-        mock_library.niFgen_InitializeCalADCCalibration.return_value = 0
-        mock_library.niFgen_InitializeFlatnessCalibration.side_effect = MockFunctionCallError("niFgen_InitializeFlatnessCalibration")
-        mock_library.niFgen_InitializeFlatnessCalibration.return_value = 0
-        mock_library.niFgen_InitializeOscillatorFrequencyCalibration.side_effect = MockFunctionCallError("niFgen_InitializeOscillatorFrequencyCalibration")
-        mock_library.niFgen_InitializeOscillatorFrequencyCalibration.return_value = 0
         mock_library.niFgen_InitializeWithChannels.side_effect = MockFunctionCallError("niFgen_InitializeWithChannels")
         mock_library.niFgen_InitializeWithChannels.return_value = 0
         mock_library.niFgen_InitiateGeneration.side_effect = MockFunctionCallError("niFgen_InitiateGeneration")
@@ -953,16 +848,12 @@ class SideEffectsHelper(object):
         mock_library.niFgen_QueryArbWfmCapabilities.return_value = 0
         mock_library.niFgen_QueryFreqListCapabilities.side_effect = MockFunctionCallError("niFgen_QueryFreqListCapabilities")
         mock_library.niFgen_QueryFreqListCapabilities.return_value = 0
-        mock_library.niFgen_ReadCalADC.side_effect = MockFunctionCallError("niFgen_ReadCalADC")
-        mock_library.niFgen_ReadCalADC.return_value = 0
         mock_library.niFgen_ReadCurrentTemperature.side_effect = MockFunctionCallError("niFgen_ReadCurrentTemperature")
         mock_library.niFgen_ReadCurrentTemperature.return_value = 0
         mock_library.niFgen_ResetDevice.side_effect = MockFunctionCallError("niFgen_ResetDevice")
         mock_library.niFgen_ResetDevice.return_value = 0
         mock_library.niFgen_ResetWithDefaults.side_effect = MockFunctionCallError("niFgen_ResetWithDefaults")
         mock_library.niFgen_ResetWithDefaults.return_value = 0
-        mock_library.niFgen_RouteSignalOut.side_effect = MockFunctionCallError("niFgen_RouteSignalOut")
-        mock_library.niFgen_RouteSignalOut.return_value = 0
         mock_library.niFgen_SelfCal.side_effect = MockFunctionCallError("niFgen_SelfCal")
         mock_library.niFgen_SelfCal.return_value = 0
         mock_library.niFgen_SendSoftwareEdgeTrigger.side_effect = MockFunctionCallError("niFgen_SendSoftwareEdgeTrigger")
@@ -985,8 +876,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_SetWaveformNextWritePosition.return_value = 0
         mock_library.niFgen_WaitUntilDone.side_effect = MockFunctionCallError("niFgen_WaitUntilDone")
         mock_library.niFgen_WaitUntilDone.return_value = 0
-        mock_library.niFgen_WriteBinary16AnalogStaticValue.side_effect = MockFunctionCallError("niFgen_WriteBinary16AnalogStaticValue")
-        mock_library.niFgen_WriteBinary16AnalogStaticValue.return_value = 0
         mock_library.niFgen_WriteBinary16Waveform.side_effect = MockFunctionCallError("niFgen_WriteBinary16Waveform")
         mock_library.niFgen_WriteBinary16Waveform.return_value = 0
         mock_library.niFgen_WriteNamedWaveformF64.side_effect = MockFunctionCallError("niFgen_WriteNamedWaveformF64")

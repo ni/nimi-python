@@ -3380,130 +3380,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
-    def route_signal_out(self, route_signal_from, route_signal_to):
-        '''route_signal_out
-
-        Routes various signals in the signal generator to the RTSI lines and
-        front panel terminals.
-
-        +---+--------------------------------------------------------------------------------------------------+
-        |   | You can clear a previously routed signal by routing NIFGEN_VAL_NONE to the destination terminal. |
-        +---+--------------------------------------------------------------------------------------------------+
-        |   | You can clear a previously routed signal by routing NIFGEN_VAL_NONE to the destination terminal. |
-        +---+--------------------------------------------------------------------------------------------------+
-
-        Note:
-        The signal generator must not be in the Generating state when you call
-        this function.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].route_signal_out(route_signal_from, route_signal_to)
-
-        Args:
-            route_signal_from (int): Various signals can be routed out the RTSI lines.
-
-                ****Defined Values****
-
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_NONE                    | Nothing Sending this value clears the line.                                                                                                                                                                                                                                                                     |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_MARKER                  | Marker Event                                                                                                                                                                                                                                                                                                    |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SYNC_OUT                | SYNC signal This signal normally appears on the SYNC OUT front panel connector.                                                                                                                                                                                                                                 |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_OUT_START_TRIGGER       | Start Trigger The Start Trigger is normally generated at the start of the sequence. Call the nifgen_ConfigureTriggerSource function to receive this trigger.                                                                                                                                                    |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_BOARD_CLOCK             | Signal generator board clock The signal generator board clock is 20 MHz for the NI PCI-5401/5411/5431. The NI PXI-5404 has a 20 MHz board clock, and the NI PXI-5421 has integer divisors of 100 MHz. The NI PXI-5401/5411/5431 does not support routing a Board Clock to RTSI lines or front panel connectors. |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SYNCHRONIZATION         | Synchronization strobe A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators. Call the nifgen_ConfigureSynchronization function to receive the strobe.                                                                                                   |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SOFTWARE_TRIG           | Software trigger                                                                                                                                                                                                                                                                                                |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_OUT_UPDATE              | —                                                                                                                                                                                                                                                                                                               |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_REF_OUT                 | Reference Clock out front panel connector                                                                                                                                                                                                                                                                       |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_PXI_CLK10               | PXI 10 MHz backplane Reference Clock                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_PXI_STAR                | PXI star trigger line                                                                                                                                                                                                                                                                                           |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_PFI_0                   | PFI 0                                                                                                                                                                                                                                                                                                           |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_0                  | RTSI 0 or PXI_Trig 0                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_1                  | RTSI 1 or PXI_Trig 1                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_2                  | RTSI 2 or PXI_Trig 2                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_3                  | RTSI 3 or PXI_Trig 3                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_4                  | RTSI 4 or PXI_Trig 4                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_5                  | RTSI 5 or PXI_Trig 5                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_6                  | RTSI 6 or PXI_Trig 6                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_7                  | RTSI 7 or PXI_Trig 7                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_REF_CLOCK_RTSI_CLOCK    | RTSI clock                                                                                                                                                                                                                                                                                                      |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK | Onboard Reference Clock                                                                                                                                                                                                                                                                                         |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_UPDATE_CLOCK            | Sample Clock                                                                                                                                                                                                                                                                                                    |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_PLL_REF_SOURCE          | PLL Reference Clock                                                                                                                                                                                                                                                                                             |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-            route_signal_to (int): The possible RTSI lines to which you can route a signal.
-
-                ****Defined Values****
-
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_0               | RTSI 0 or PXI_Trig 0                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_1               | RTSI 1 or PXI_Trig 1                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_2               | RTSI 2 or PXI_Trig 2                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_3               | RTSI 3 or PXI_Trig 3                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_4               | RTSI 4 or PXI_Trig 4                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_5               | RTSI 5 or PXI_Trig 5                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_6               | RTSI 6 or PXI_Trig 6                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_7               | RTSI 7 or PXI_Trig 7                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_REF_CLOCK_RTSI_CLOCK | RTSI clock                                |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_REF_OUT              | Reference Clock out front panel connector |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PFI_0                | PFI 0                                     |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PFI_1                | PFI 1                                     |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PFI_4                | PFI 4                                     |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PFI_5                | PFI 5                                     |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PXI_STAR             | PXI star trigger line                     |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PXI_CLK10            | PXI 10 MHz backplane Reference Clock      |
-                +---------------------------------+-------------------------------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        route_signal_from_ctype = visatype.ViInt32(route_signal_from)  # case 8
-        route_signal_to_ctype = visatype.ViInt32(route_signal_to)  # case 8
-        error_code = self._library.niFgen_RouteSignalOut(vi_ctype, channel_name_ctype, route_signal_from_ctype, route_signal_to_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -3869,32 +3745,6 @@ class _SessionBase(object):
         relative_to_ctype = visatype.ViInt32(relative_to)  # case 8
         offset_ctype = visatype.ViInt32(offset)  # case 8
         error_code = self._library.niFgen_SetWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_handle_ctype, relative_to_ctype, offset_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def write_binary16_analog_static_value(self, value):
-        '''write_binary16_analog_static_value
-
-        | Writes the 16-bit value to the DAC, which could be output as a DC
-          Voltage.
-        | This function writes to the DAC only when in an external calibration
-          session.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].write_binary16_analog_static_value(value)
-
-        Args:
-            value (int): The value to write.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        value_ctype = visatype.ViInt16(value)  # case 8
-        error_code = self._library.niFgen_WriteBinary16AnalogStaticValue(vi_ctype, channel_name_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4760,111 +4610,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(sequence_handle_ctype.value)
 
-    def create_arb_waveform(self, waveform_size, waveform_data_array):
-        '''create_arb_waveform
-
-        [OBSOLETE] This function is obsolete. Use the nifgen_CreateWaveformF64,
-        nifgen_CreateWaveformI16, or nifgen_CreateWaveformComplexF64 function
-        instead of this function.
-
-        Creates an arbitrary waveform and returns a handle that identifies that
-        waveform. You can pass this handle to the nifgen_ConfigureArbWaveform
-        function to produce that waveform. You can also use the handles this
-        function returns to specify a sequence of arbitrary waveforms with the
-        nifgen_CreateArbSequence function.
-
-        Note:
-        You must scale the data between –1.00 and +1.00. Use the **arbGain**
-        parameter to generate different output voltages.
-
-        Args:
-            waveform_size (int): | Specifies the size of the arbitrary waveform that you want created.
-                | The size must meet the following restrictions:
-
-                -  The size must be less than or equal to the maximum waveform size that
-                   the device allows.
-                -  The size must be greater than or equal to the minimum waveform size
-                   that the device allows.
-                -  The size must be an integer multiple of the device waveform quantum.
-
-                |
-                | You can obtain these values from the **maximumWaveformSize**,
-                  **minimumWaveformSize**, and **waveformQuantum** parameters in the
-                  nifgen_QueryArbWfmCapabilities function.
-                | ****Default Value**:** None
-            waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
-                waveform. The array must have at least as many elements as the value
-                that you specify in **waveformSize**.
-
-                You must normalize the data points in the array to be between –1.00 and
-                +1.00.
-
-                **Default Value**: None
-
-        Returns:
-            waveform_handle (int): The handle that identifies the new waveform. This handle is used later
-                when referring to this waveform.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
-        waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
-        waveform_handle_ctype = visatype.ViInt32()  # case 13
-        error_code = self._library.niFgen_CreateArbWaveform(vi_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(waveform_handle_ctype.value)
-
-    def create_binary16_arb_waveform(self, waveform_size, waveform_data_array):
-        '''create_binary16_arb_waveform
-
-        [OBSOLETE] This function is obsolete. Use the nifgen_CreateWaveformI16
-        function instead of this function.
-
-        Creates an arbitrary waveform from binary data and returns a handle that
-        identifies that waveform. You can pass this handle to the
-        nifgen_ConfigureArbWaveform function to produce that waveform. You can
-        also use the handles this function returns to specify a sequence of
-        arbitrary waveforms with the nifgen_CreateArbSequence function.
-
-        Note:
-        You must set the output mode to NIFGEN_VAL_OUTPUT_ARB or
-        NIFGEN_VAL_OUTPUT_SEQ before calling this function.
-
-        Args:
-            waveform_size (int): | Specifies the size of the arbitrary waveform that you want created.
-                | The size must meet the following restrictions:
-
-                -  The size must be less than or equal to the maximum waveform size that
-                   the device allows.
-                -  The size must be greater than or equal to the minimum waveform size
-                   that the device allows.
-                -  The size must be an integer multiple of the device waveform quantum.
-
-                |
-                | You can obtain these values from the **maximumWaveformSize**,
-                  **minimumWaveformSize**, and **waveformQuantum** parameters in
-                  nifgen_QueryArbWfmCapabilities.
-                | ****Default Value**:** None
-            waveform_data_array (list of int): Specifies the array of data you want to use for the new arbitrary
-                waveform. The array must have at least as many elements as the value
-                that you specify in **waveformSize**.
-
-                You must normalize the data points in the array to be between –32768 and
-                32767.
-
-                **Default Value**: None
-
-        Returns:
-            waveform_handle (int): The handle that identifies the new waveform. This handle is used later
-                when referring to this waveform.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
-        waveform_data_array_ctype = (visatype.ViInt16 * len(waveform_data_array))(*waveform_data_array)  # case 4
-        waveform_handle_ctype = visatype.ViInt32()  # case 13
-        error_code = self._library.niFgen_CreateBinary16ArbWaveform(vi_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(waveform_handle_ctype.value)
-
     def create_freq_list(self, waveform, frequency_list_length, frequency_array, duration_array):
         '''create_freq_list
 
@@ -4967,31 +4712,6 @@ class Session(_SessionBase):
         error_code = self._library.niFgen_Disable(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    def error_handler(self, error_code):
-        '''error_handler
-
-        Converts a status code returned by an NI-FGEN function into a
-        user-readable string and returns any error elaborations.
-
-        Args:
-            error_code (int): Specifies the **status** parameter that is returned from any of the
-                NI-FGEN functions.
-
-                **Default Value**: 0 (VI_SUCCESS)
-
-        Returns:
-            error_message (string): Returns the error message string read from the instrument error message
-                queue.
-
-                You must pass a ViChar array with at least 256 bytes.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code_ctype = visatype.ViStatus(error_code)  # case 8
-        error_message_ctype = (visatype.ViChar * 1)()  # case 10
-        error_code = self._library.niFgen_ErrorHandler(vi_ctype, error_code_ctype, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return error_message_ctype.value.decode(self._encoding)
 
     def export_signal(self, signal, signal_identifier, output_terminal):
         '''export_signal
@@ -5277,51 +4997,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
 
-    def initialize_analog_output_calibration(self):
-        '''initialize_analog_output_calibration
-
-        Sets up the device to start the analog output calibration.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_InitializeAnalogOutputCalibration(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def initialize_cal_adc_calibration(self):
-        '''initialize_cal_adc_calibration
-
-        Initializes an external calibration session for ADC calibration. For the
-        NI 5421/5422/5441, ADC calibration involves characterizing the gain and
-        offset of the onboard ADC.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_InitializeCalADCCalibration(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def initialize_flatness_calibration(self):
-        '''initialize_flatness_calibration
-
-        Initializes an external calibration session to calibrate flatness.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_InitializeFlatnessCalibration(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def initialize_oscillator_frequency_calibration(self):
-        '''initialize_oscillator_frequency_calibration
-
-        Sets up the device to start the VCXO calibration.
-
-        The session handle should be the handle returned by the
-        nifgen_InitExtCal function.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_InitializeOscillatorFrequencyCalibration(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _initiate_generation(self):
         '''_initiate_generation
 
@@ -5476,38 +5151,6 @@ class Session(_SessionBase):
         error_code = self._library.niFgen_QueryFreqListCapabilities(vi_ctype, ctypes.pointer(maximum_number_of_freq_lists_ctype), ctypes.pointer(minimum_frequency_list_length_ctype), ctypes.pointer(maximum_frequency_list_length_ctype), ctypes.pointer(minimum_frequency_list_duration_ctype), ctypes.pointer(maximum_frequency_list_duration_ctype), ctypes.pointer(frequency_list_duration_quantum_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_freq_lists_ctype.value), int(minimum_frequency_list_length_ctype.value), int(maximum_frequency_list_length_ctype.value), float(minimum_frequency_list_duration_ctype.value), float(maximum_frequency_list_duration_ctype.value), float(frequency_list_duration_quantum_ctype.value)
-
-    def read_cal_adc(self, number_of_reads_to_average, return_calibrated_value):
-        '''read_cal_adc
-
-        Takes one or more voltage measurements from the onboard calibration ADC
-        and returns the value or the average value. The signal that the ADC
-        actually measures can be specified using the
-        CAL_ADC_INPUT attribute. The ADC has some inherent gain
-        and offset. These values can be determined during an external
-        calibration session and stored in the calibration EEPROM.
-
-        If the **returnCalibratedValue** parameter is VI_TRUE, NI-FGEN adjusts
-        the value that is returned to account for the gain and offset of the
-        ADC. Otherwise, the raw voltage value reported by the ADC is returned.
-
-        Args:
-            number_of_reads_to_average (int): Specifies the number of measurements to be taken and averaged to
-                determine the return value.
-            return_calibrated_value (bool): Specifies whether the voltage returned from the ADC should be adjusted
-                to account for the gain and offset of the ADC.
-
-        Returns:
-            cal_adc_value (float): Specifies the average of the voltage measurements taken from the onboard
-                calibration ADC.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        number_of_reads_to_average_ctype = visatype.ViInt32(number_of_reads_to_average)  # case 8
-        return_calibrated_value_ctype = visatype.ViBoolean(return_calibrated_value)  # case 8
-        cal_adc_value_ctype = visatype.ViReal64()  # case 13
-        error_code = self._library.niFgen_ReadCalADC(vi_ctype, number_of_reads_to_average_ctype, return_calibrated_value_ctype, ctypes.pointer(cal_adc_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(cal_adc_value_ctype.value)
 
     def read_current_temperature(self):
         '''read_current_temperature
