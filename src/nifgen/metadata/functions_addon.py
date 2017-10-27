@@ -24,6 +24,9 @@ functions_codegen_method = {
     'Enable.+':                             { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'P2P':                                  { 'codegen_method': 'no',       },  # P2P not supported in Python API
     'HWS':                                  { 'codegen_method': 'no',       },  # HWS is dead!
+    'ResetAttribute':                       { 'codegen_method': 'no',       },  # Issue #531
+
+
     'Abort':                                { 'codegen_method': 'private',  },
     '.etAttribute.+':                       { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'error_message':                        { 'codegen_method': 'private',  },
