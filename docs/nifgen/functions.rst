@@ -443,7 +443,7 @@ nifgen.Session methods
 
     :type offset: float
 
-.. function:: configure_custom_fir_filter_coefficients(number_of_coefficients, coefficients_array)
+.. function:: configure_custom_fir_filter_coefficients(coefficients_array)
 
     Sets the FIR filter coefficients used by the onboard signal processing
     block. The values are coerced to the closest settings achievable by the
@@ -466,7 +466,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_custom_fir_filter_coefficients(number_of_coefficients, coefficients_array)
+            session['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
 
 
     :param number_of_coefficients:
@@ -1267,7 +1267,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_waveform_f64(waveform_size, waveform_data_array)
+.. function:: create_waveform_f64(waveform_data_array)
 
     Creates an onboard waveform from binary F64 (floating point double) data
     for use in Arbitrary Waveform output mode or Arbitrary Sequence output
@@ -1289,7 +1289,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].create_waveform_f64(waveform_size, waveform_data_array)
+            session['0,1'].create_waveform_f64(waveform_data_array)
 
 
     :param waveform_size:
@@ -1484,7 +1484,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_waveform_i16(waveform_size, waveform_data_array)
+.. function:: create_waveform_i16(waveform_data_array)
 
     Creates an onboard waveform from binary 16-bit signed integer (I16) data
     for use in Arbitrary Waveform or Arbitrary Sequence output mode. The
@@ -1506,7 +1506,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].create_waveform_i16(waveform_size, waveform_data_array)
+            session['0,1'].create_waveform_i16(waveform_data_array)
 
 
     :param waveform_size:

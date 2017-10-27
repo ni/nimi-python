@@ -2437,7 +2437,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_custom_fir_filter_coefficients(self, number_of_coefficients, coefficients_array):
+    def configure_custom_fir_filter_coefficients(self, coefficients_array):
         '''configure_custom_fir_filter_coefficients
 
         Sets the FIR filter coefficients used by the onboard signal processing
@@ -2458,7 +2458,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_custom_fir_filter_coefficients(number_of_coefficients, coefficients_array)
+            session['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
 
         Args:
             number_of_coefficients (int): Specifies the number of coefficients. The NI 5441 requires 95.
@@ -2471,7 +2471,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case 8
+        number_of_coefficients_ctype = visatype.ViInt32(len(coefficients_array))  # case 5
         coefficients_array_ctype = (visatype.ViReal64 * len(coefficients_array))(*coefficients_array)  # case 4
         error_code = self._library.niFgen_ConfigureCustomFIRFilterCoefficients(vi_ctype, channel_name_ctype, number_of_coefficients_ctype, coefficients_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2594,7 +2594,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_waveform_f64(self, waveform_size, waveform_data_array):
+    def create_waveform_f64(self, waveform_data_array):
         '''create_waveform_f64
 
         Creates an onboard waveform from binary F64 (floating point double) data
@@ -2614,7 +2614,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].create_waveform_f64(waveform_size, waveform_data_array)
+            session['0,1'].create_waveform_f64(waveform_data_array)
 
         Args:
             waveform_size (int): | Specifies the size of the arbitrary waveform that you want to create.
@@ -2646,7 +2646,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 5
         waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
         waveform_handle_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
@@ -2769,7 +2769,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
-    def create_waveform_i16(self, waveform_size, waveform_data_array):
+    def create_waveform_i16(self, waveform_data_array):
         '''create_waveform_i16
 
         Creates an onboard waveform from binary 16-bit signed integer (I16) data
@@ -2789,7 +2789,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].create_waveform_i16(waveform_size, waveform_data_array)
+            session['0,1'].create_waveform_i16(waveform_data_array)
 
         Args:
             waveform_size (int): | Specifies the size of the arbitrary waveform that you want to create.
@@ -2820,7 +2820,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 5
         waveform_data_array_ctype = (visatype.ViInt16 * len(waveform_data_array))(*waveform_data_array)  # case 4
         waveform_handle_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFgen_CreateWaveformI16(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
