@@ -25,13 +25,16 @@ functions_codegen_method = {
     'P2P':                                  { 'codegen_method': 'no',       },  # P2P not supported in Python API
     'HWS':                                  { 'codegen_method': 'no',       },  # HWS is dead!
     'ResetAttribute':                       { 'codegen_method': 'no',       },  # Issue #531
-
-
+    'RouteSignalOut':                       { 'codegen_method': 'no',       },  # Use string-based routing instead
+    'WriteBinary16AnalogStaticValue':       { 'codegen_method': 'no',       },  # Use corresponding attribute instead
+    'CreateArbWaveform':                    { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
+    'CreateBinary16ArbWaveform':            { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'Abort':                                { 'codegen_method': 'private',  },
     '.etAttribute.+':                       { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'error_message':                        { 'codegen_method': 'private',  },
     'GetError':                             { 'codegen_method': 'private',  },
     'ClearError':                           { 'codegen_method': 'no',       },
+    'ErrorHandler':                         { 'codegen_method': 'no',       },
     'LockSession':                          { 'codegen_method': 'no',       },
     'UnlockSession':                        { 'codegen_method': 'no',       },
     'InitExtCal':                           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
@@ -39,6 +42,8 @@ functions_codegen_method = {
     'RestoreLastExtCalConstants':           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'ChangeExtCalPassword':                 { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalAdjust.+':                          { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'Initialize.+Calibration':              { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'ReadCalADC':                           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     '.+UserDefined.+':                      { 'codegen_method': 'no',       },
     'SetAttributeViSession':                { 'codegen_method': 'no',       },
     'GetAttributeViSession':                { 'codegen_method': 'no',       },

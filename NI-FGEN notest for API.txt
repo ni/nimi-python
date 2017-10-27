@@ -4,19 +4,6 @@ TODOs
 
 * Look at all drivers and see if we filtered out useful ext cal functions like niFgen_GetExtCalLastTemp
 
-get rid of
-    route_signal_out - all enum based routing
-    write_binary16_analog_static_value
-    create_arb_waveform
-    create_binary16_arb_waveform
-    error_handler (get rid in other APIs?)
-    _init_with_options
-    initialize_analog_output_calibration
-    initialize_cal_adc_calibration
-    initialize_flatness_calibration
-    initialize_oscillator_frequency_calibration
-    read_cal_adc
-
 Size mecanisms
     configure_custom_fir_filter_coefficients don't include number_of_coefficients
     create_waveform_f64 get rid of waveform_size
