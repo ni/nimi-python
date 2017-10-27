@@ -4,11 +4,6 @@ TODOs
 
 * Look at all drivers and see if we filtered out useful ext cal functions like niFgen_GetExtCalLastTemp
 
-Size mecanisms
-    create_advanced_arb_sequence sequence_length is array sizes
-        create_arb_sequence sequence_length is array size and both arrays should be equal size
-    create_freq_list frequency_list_length for both arrays (issue)
-
 Defaults:
     Initialize with channels
     configure_freq_list: defualt dc_offset and start_phase to 0.0
