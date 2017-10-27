@@ -1558,7 +1558,7 @@ nifgen.Session methods
 
 
 
-.. function:: define_user_standard_waveform(waveform_size, waveform_data_array)
+.. function:: define_user_standard_waveform(waveform_data_array)
 
     Defines a user waveform for use in either Standard Function or Frequency
     List output mode.
@@ -1585,7 +1585,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].define_user_standard_waveform(waveform_size, waveform_data_array)
+            session['0,1'].define_user_standard_waveform(waveform_data_array)
 
 
     :param waveform_size:
@@ -1917,7 +1917,7 @@ nifgen.Session methods
 
 
 
-.. function:: get_fir_filter_coefficients(array_size, coefficients_array, number_of_coefficients_read)
+.. function:: get_fir_filter_coefficients()
 
     | Returns the FIR filter coefficients used by the onboard signal
       processing block. These coefficients are determined by NI-FGEN and
@@ -1951,7 +1951,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].get_fir_filter_coefficients(array_size, coefficients_array, number_of_coefficients_read)
+            session['0,1'].get_fir_filter_coefficients()
 
 
     :param array_size:
@@ -1963,30 +1963,17 @@ nifgen.Session methods
 
 
     :type array_size: int
-    :param coefficients_array:
+
+    :rtype: int
+    :return:
 
 
-        Specifies the array of data the onboard signal processor uses for the
-        FIR filter coefficients. For the NI 5441, provide a symmetric array of
-        95 coefficients to this parameter. The array must have at least as many
-        elements as the value that you specify in the **numberOfCoefficients**
-        parameter in this function.
-        The coefficients should range between –1.00 and +1.00.
+            Specifies the array of data containing the number of coefficients you
+            want to read.
 
-        
+            
 
 
-    :type coefficients_array: list of float
-    :param number_of_coefficients_read:
-
-
-        Specifies the array of data containing the number of coefficients you
-        want to read.
-
-        
-
-
-    :type number_of_coefficients_read: list of int
 
 .. function:: get_hardware_state()
 

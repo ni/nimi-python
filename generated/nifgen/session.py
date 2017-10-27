@@ -2827,7 +2827,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
-    def define_user_standard_waveform(self, waveform_size, waveform_data_array):
+    def define_user_standard_waveform(self, waveform_data_array):
         '''define_user_standard_waveform
 
         Defines a user waveform for use in either Standard Function or Frequency
@@ -2852,7 +2852,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].define_user_standard_waveform(waveform_size, waveform_data_array)
+            session['0,1'].define_user_standard_waveform(waveform_data_array)
 
         Args:
             waveform_size (int): Specifies the size of the waveform in samples.
@@ -2868,7 +2868,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 5
         waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
         error_code = self._library.niFgen_DefineUserStandardWaveform(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3190,7 +3190,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
 
-    def get_fir_filter_coefficients(self, array_size, coefficients_array, number_of_coefficients_read):
+    def get_fir_filter_coefficients(self):
         '''get_fir_filter_coefficients
 
         | Returns the FIR filter coefficients used by the onboard signal
@@ -3221,27 +3221,27 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].get_fir_filter_coefficients(array_size, coefficients_array, number_of_coefficients_read)
+            session['0,1'].get_fir_filter_coefficients()
 
         Args:
             array_size (int): Specifies the size of the coefficient array
-            coefficients_array (list of float): Specifies the array of data the onboard signal processor uses for the
-                FIR filter coefficients. For the NI 5441, provide a symmetric array of
-                95 coefficients to this parameter. The array must have at least as many
-                elements as the value that you specify in the **numberOfCoefficients**
-                parameter in this function.
-                The coefficients should range between –1.00 and +1.00.
-            number_of_coefficients_read (list of int): Specifies the array of data containing the number of coefficients you
+
+        Returns:
+            number_of_coefficients_read (int): Specifies the array of data containing the number of coefficients you
                 want to read.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        array_size_ctype = visatype.ViInt32(array_size)  # case 8
-        coefficients_array_ctype = (visatype.ViReal64 * len(coefficients_array))(*coefficients_array)  # case 4
-        number_of_coefficients_read_ctype = (visatype.ViInt32 * len(number_of_coefficients_read))(*number_of_coefficients_read)  # case 4
-        error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, number_of_coefficients_read_ctype)
+        array_size_ctype = visatype.ViInt32()  # case 6
+        coefficients_array_ctype = None  # case 11
+        number_of_coefficients_read_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, ctypes.pointer(number_of_coefficients_read_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        array_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        coefficients_array_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, ctypes.pointer(number_of_coefficients_read_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        return [float(coefficients_array_ctype[i]) for i in range(array_size)], int(number_of_coefficients_read_ctype.value)
 
     def _initialize_with_channels(self, resource_name, reset_device, option_string):
         '''_initialize_with_channels

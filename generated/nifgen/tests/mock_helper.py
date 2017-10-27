@@ -115,6 +115,8 @@ class SideEffectsHelper(object):
         self._defaults['GetExtCalRecommendedInterval']['Months'] = None
         self._defaults['GetFIRFilterCoefficients'] = {}
         self._defaults['GetFIRFilterCoefficients']['return'] = 0
+        self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead'] = None
+        self._defaults['GetFIRFilterCoefficients']['coefficientsArray'] = None
         self._defaults['GetHardwareState'] = {}
         self._defaults['GetHardwareState']['return'] = 0
         self._defaults['GetHardwareState']['state'] = None
@@ -487,6 +489,14 @@ class SideEffectsHelper(object):
     def niFgen_GetFIRFilterCoefficients(self, vi, channel_name, array_size, coefficients_array, number_of_coefficients_read):  # noqa: N802
         if self._defaults['GetFIRFilterCoefficients']['return'] != 0:
             return self._defaults['GetFIRFilterCoefficients']['return']
+        if self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead'] is None:
+            raise MockFunctionCallError("niFgen_GetFIRFilterCoefficients", param='numberOfCoefficientsRead')
+        number_of_coefficients_read.contents.value = self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead']
+        if self._defaults['GetFIRFilterCoefficients']['coefficientsArray'] is None:
+            raise MockFunctionCallError("niFgen_GetFIRFilterCoefficients", param='coefficientsArray')
+        if array_size.value == 0:
+            return len(self._defaults['GetFIRFilterCoefficients']['coefficientsArray'])
+        coefficients_array.value = self._defaults['GetFIRFilterCoefficients']['coefficientsArray'].encode('ascii')
         return self._defaults['GetFIRFilterCoefficients']['return']
 
     def niFgen_GetHardwareState(self, vi, state):  # noqa: N802
