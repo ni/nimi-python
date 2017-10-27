@@ -1153,7 +1153,6 @@ Specify how you want the digitizer to couple the input signal for the
 channel.
 
 Defined Values
-~~~~~~~~~~~~~~
 
 NISCOPE\_VAL\_AC (0)
 
@@ -1203,7 +1202,6 @@ when you call niScope\_InitiateAcquisition or niScope\_ReadWaveform.
 | NISCOPE\_VAL\_TRUE (1)
 
 Defined Values
-~~~~~~~~~~~~~~
 
 | NISCOPE\_VAL\_TRUE (1)—Acquire data on this channel
 | NISCOPE\_VAL\_FALSE (0)—Do not acquire data on this channel
@@ -1712,7 +1710,6 @@ particular instrument session.
 Pass the source you want the digitizer to monitor for a trigger.
 
 Defined Values
-~~~~~~~~~~~~~~
 
 | "0"—Channel 0
 | "1"—Channel 1
@@ -1730,7 +1727,6 @@ Defined Values
 Specifies the Video/TV signal format.
 
 Defined Values
-~~~~~~~~~~~~~~
 
 | NISCOPE\_VAL\_NTSC (1)
 | NISCOPE\_VAL\_PAL (2)
@@ -1748,7 +1744,6 @@ Defined Values
 Video/TV event to trigger off of.
 
 Defined Values
-~~~~~~~~~~~~~~
 
 | NISCOPE\_VAL\_TV\_EVENT\_FIELD1 (1)—trigger on field 1 of the signal
 | NISCOPE\_VAL\_TV\_EVENT\_FIELD2 (2)—trigger on field 2 of the signal
@@ -1772,7 +1767,6 @@ Defined Values
 | Specifies the polarity of the video signal to trigger off of.
 
 Defined Values
-~~~~~~~~~~~~~~
 
 | NISCOPE\_VAL\_TV\_POSITIVE (1)
 | NISCOPE\_VAL\_TV\_NEGATIVE (2)
@@ -1879,7 +1873,6 @@ particular instrument session.
 Specify how you want the instrument to couple the trigger signal.
 
 Defined Values
-~~~~~~~~~~~~~~
 
  NISCOPE\_VAL\_AC (0)
 
@@ -5625,7 +5618,6 @@ case of the characters.
 initialize.
 
 resourceName Examples
-~~~~~~~~~~~~~~~~~~~~~
 
 For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
 the device number assigned by MAX, as shown in Example 1.
@@ -7251,7 +7243,6 @@ case of the characters.
 initialize.
 
 resourceName Examples
-~~~~~~~~~~~~~~~~~~~~~
 
 For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
 the device number assigned by MAX, as shown in Example 1.
