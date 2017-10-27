@@ -3748,7 +3748,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_binary16_waveform(self, waveform_handle, size, data):
+    def write_binary16_waveform(self, waveform_handle, data):
         '''write_binary16_waveform
 
         Writes binary data to the waveform in onboard memory. The waveform
@@ -3770,7 +3770,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_binary16_waveform(waveform_handle, size, data)
+            session['0,1'].write_binary16_waveform(waveform_handle, data)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -3785,13 +3785,13 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 8
-        size_ctype = visatype.ViInt32(size)  # case 8
+        size_ctype = visatype.ViInt32(len(data))  # case 5
         data_ctype = (visatype.ViInt16 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteBinary16Waveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_named_waveform_f64(self, waveform_name, size, data):
+    def write_named_waveform_f64(self, waveform_name, data):
         '''write_named_waveform_f64
 
         Writes floating-point data to the waveform in onboard memory. The
@@ -3820,7 +3820,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_named_waveform_f64(waveform_name, size, data)
+            session['0,1'].write_named_waveform_f64(waveform_name, data)
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
@@ -3833,13 +3833,13 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
-        size_ctype = visatype.ViInt32(size)  # case 8
+        size_ctype = visatype.ViInt32(len(data))  # case 5
         data_ctype = (visatype.ViReal64 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_named_waveform_i16(self, waveform_name, size, data):
+    def write_named_waveform_i16(self, waveform_name, data):
         '''write_named_waveform_i16
 
         Writes binary data to the named waveform in onboard memory.
@@ -3859,7 +3859,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_named_waveform_i16(waveform_name, size, data)
+            session['0,1'].write_named_waveform_i16(waveform_name, data)
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
@@ -3872,7 +3872,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
-        size_ctype = visatype.ViInt32(size)  # case 8
+        size_ctype = visatype.ViInt32(len(data))  # case 5
         data_ctype = (visatype.ViInt16 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteNamedWaveformI16(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3905,7 +3905,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_waveform(self, waveform_handle, size, data):
+    def write_waveform(self, waveform_handle, data):
         '''write_waveform
 
         Writes floating-point data to the waveform in onboard memory. The
@@ -3934,7 +3934,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_waveform(waveform_handle, size, data)
+            session['0,1'].write_waveform(waveform_handle, data)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -3948,7 +3948,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 8
-        size_ctype = visatype.ViInt32(size)  # case 8
+        size_ctype = visatype.ViInt32(len(data))  # case 5
         data_ctype = (visatype.ViReal64 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

@@ -2595,7 +2595,7 @@ nifgen.Session methods
 
     :type max_time: int
 
-.. function:: write_binary16_waveform(waveform_handle, size, data)
+.. function:: write_binary16_waveform(waveform_handle, data)
 
     Writes binary data to the waveform in onboard memory. The waveform
     handle passed must have been created by a call to the
@@ -2620,7 +2620,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].write_binary16_waveform(waveform_handle, size, data)
+            session['0,1'].write_binary16_waveform(waveform_handle, data)
 
 
     :param waveform_handle:
@@ -2656,7 +2656,7 @@ nifgen.Session methods
 
     :type data: list of int
 
-.. function:: write_named_waveform_f64(waveform_name, size, data)
+.. function:: write_named_waveform_f64(waveform_name, data)
 
     Writes floating-point data to the waveform in onboard memory. The
     waveform handle passed in must have been created by a call to the
@@ -2688,7 +2688,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].write_named_waveform_f64(waveform_name, size, data)
+            session['0,1'].write_named_waveform_f64(waveform_name, data)
 
 
     :param waveform_name:
@@ -2722,7 +2722,7 @@ nifgen.Session methods
 
     :type data: list of float
 
-.. function:: write_named_waveform_i16(waveform_name, size, data)
+.. function:: write_named_waveform_i16(waveform_name, data)
 
     Writes binary data to the named waveform in onboard memory.
 
@@ -2745,7 +2745,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].write_named_waveform_i16(waveform_name, size, data)
+            session['0,1'].write_named_waveform_i16(waveform_name, data)
 
 
     :param waveform_name:
@@ -2810,7 +2810,7 @@ nifgen.Session methods
 
     :type script: string
 
-.. function:: write_waveform(waveform_handle, size, data)
+.. function:: write_waveform(waveform_handle, data)
 
     Writes floating-point data to the waveform in onboard memory. The
     waveform handle passed in must have been created by a call to the
@@ -2842,7 +2842,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].write_waveform(waveform_handle, size, data)
+            session['0,1'].write_waveform(waveform_handle, data)
 
 
     :param waveform_handle:
