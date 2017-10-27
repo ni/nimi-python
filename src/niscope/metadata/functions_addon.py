@@ -29,6 +29,7 @@ functions_codegen_method = {
     'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
     'error_query':                     { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
+    'SampleMode':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'GetNormalizationCoefficients':    { 'codegen_method': 'no',       },  # Has void param
     'GetScalingCoefficients':          { 'codegen_method': 'no',       },  # Has void param
     'Fetch':                           { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param
