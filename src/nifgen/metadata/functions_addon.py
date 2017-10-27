@@ -62,6 +62,11 @@ functions_enums = {
     # @TODO add all enums
 }
 
+functions_issues = {
+    'GetFIRFilterCoefficients':             { 'parameters': { 3: {'direction':'out'},  # TODO(marcoskirsch): Remove when #534 solved
+                                                              4: { 'direction':'out', 'is_buffer': False, 'type':'ViInt32', }, }, },
+}
+
 # This is the additional information needed by the code generator to properly generate the buffer retrieval mechanism
 # {'is_buffer': True} is required for all parameters that are arrays. Some were able to be detected as an array when
 #   generating functions.py. This sets 'is_buffer' for those parameters where the dectection didn't work
@@ -86,6 +91,8 @@ functions_buffer_info = {
     '.etAttribute.+':                       { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'ConfigureCustomFIRFilterCoefficients': { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'numberOfCoefficients'}, }, }, },
     'CreateWaveform(I16|F64)':              { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'waveformSize'}, }, }, },
+    'DefineUserStandardWaveform':           { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'waveformSize'}, }, }, },
+    'GetFIRFilterCoefficients':             { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'arraySize'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
