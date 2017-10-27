@@ -74,7 +74,6 @@ class Library(object):
         self.niFgen_QueryFreqListCapabilities_cfunc = None
         self.niFgen_ReadCalADC_cfunc = None
         self.niFgen_ReadCurrentTemperature_cfunc = None
-        self.niFgen_ResetAttribute_cfunc = None
         self.niFgen_ResetDevice_cfunc = None
         self.niFgen_ResetWithDefaults_cfunc = None
         self.niFgen_RouteSignalOut_cfunc = None
@@ -569,14 +568,6 @@ class Library(object):
                 self.niFgen_ReadCurrentTemperature_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_ReadCurrentTemperature_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ReadCurrentTemperature_cfunc(vi, temperature)
-
-    def niFgen_ResetAttribute(self, vi, channel_name, attribute_id):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_ResetAttribute_cfunc is None:
-                self.niFgen_ResetAttribute_cfunc = self._library.niFgen_ResetAttribute
-                self.niFgen_ResetAttribute_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr]  # noqa: F405
-                self.niFgen_ResetAttribute_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_ResetAttribute_cfunc(vi, channel_name, attribute_id)
 
     def niFgen_ResetDevice(self, vi):  # noqa: N802
         with self._func_lock:

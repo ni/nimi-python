@@ -2635,33 +2635,6 @@ nifgen.Session methods
 
 
 
-.. function:: reset_attribute(attribute_id)
-
-    Resets the attribute to its default value.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].reset_attribute(attribute_id)
-
-
-    :param attribute_id:
-
-
-        Specifies the ID of an attribute.
-
-        
-
-
-    :type attribute_id: int
-
 .. function:: reset_device()
 
     Performs a hard reset on the device. Generation is stopped, all routes

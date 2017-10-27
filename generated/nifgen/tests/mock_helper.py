@@ -182,8 +182,6 @@ class SideEffectsHelper(object):
         self._defaults['ReadCurrentTemperature'] = {}
         self._defaults['ReadCurrentTemperature']['return'] = 0
         self._defaults['ReadCurrentTemperature']['Temperature'] = None
-        self._defaults['ResetAttribute'] = {}
-        self._defaults['ResetAttribute']['return'] = 0
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -702,11 +700,6 @@ class SideEffectsHelper(object):
         temperature.contents.value = self._defaults['ReadCurrentTemperature']['Temperature']
         return self._defaults['ReadCurrentTemperature']['return']
 
-    def niFgen_ResetAttribute(self, vi, channel_name, attribute_id):  # noqa: N802
-        if self._defaults['ResetAttribute']['return'] != 0:
-            return self._defaults['ResetAttribute']['return']
-        return self._defaults['ResetAttribute']['return']
-
     def niFgen_ResetDevice(self, vi):  # noqa: N802
         if self._defaults['ResetDevice']['return'] != 0:
             return self._defaults['ResetDevice']['return']
@@ -964,8 +957,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_ReadCalADC.return_value = 0
         mock_library.niFgen_ReadCurrentTemperature.side_effect = MockFunctionCallError("niFgen_ReadCurrentTemperature")
         mock_library.niFgen_ReadCurrentTemperature.return_value = 0
-        mock_library.niFgen_ResetAttribute.side_effect = MockFunctionCallError("niFgen_ResetAttribute")
-        mock_library.niFgen_ResetAttribute.return_value = 0
         mock_library.niFgen_ResetDevice.side_effect = MockFunctionCallError("niFgen_ResetDevice")
         mock_library.niFgen_ResetDevice.return_value = 0
         mock_library.niFgen_ResetWithDefaults.side_effect = MockFunctionCallError("niFgen_ResetWithDefaults")

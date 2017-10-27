@@ -3380,29 +3380,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
-    def reset_attribute(self, attribute_id):
-        '''reset_attribute
-
-        Resets the attribute to its default value.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].reset_attribute(attribute_id)
-
-        Args:
-            attribute_id (int): Specifies the ID of an attribute.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
-        error_code = self._library.niFgen_ResetAttribute(vi_ctype, channel_name_ctype, attribute_id_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def route_signal_out(self, route_signal_from, route_signal_to):
         '''route_signal_out
 
