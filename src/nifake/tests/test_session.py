@@ -694,7 +694,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             attr_int = session.read_write_int64
             assert(attr_int == test_number)
-            self.patched_library.niFake_GetAttributeViInt64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(attribute_id), matchers.ViInt32PointerMatcher())
+            self.patched_library.niFake_GetAttributeViInt64.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViStringMatcher(''), matchers.ViInt32Matcher(attribute_id), matchers.ViInt64PointerMatcher())
 
     def test_set_attribute_int64(self):
         self.patched_library.niFake_SetAttributeViInt64.side_effect = self.side_effects_helper.niFake_SetAttributeViInt64

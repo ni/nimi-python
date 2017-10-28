@@ -171,24 +171,6 @@ class _SessionBase(object):
     the user does not specify a Driver Setup string, this property returns
     an empty string.
     '''
-    engine_major_version = attributes.AttributeViInt32(1050501)
-    '''
-    The major version number of the IVI engine.
-    '''
-    engine_minor_version = attributes.AttributeViInt32(1050502)
-    '''
-    The minor version number of the IVI engine.
-    '''
-    engine_revision = attributes.AttributeViString(1050553)
-    '''
-    A string that contains additional version information about the IVI
-    engine.
-    '''
-    error_elaboration = attributes.AttributeViString(1050103)
-    '''
-    An optional string that contains additional information concerning the
-    primary error condition.
-    '''
     freq_voltage_auto_range_value = attributes.AttributeViReal64(1150044)
     '''
     For the NI 4080/4081/4082 and NI 4070/4071/4072, specifies the value of
@@ -223,10 +205,6 @@ class _SessionBase(object):
     '''
     A string containing the capabilities and extension groups supported by
     the specific driver.
-    '''
-    idquery_response = attributes.AttributeViString(1150001)
-    '''
-    A string containing the type of instrument used in the current session.
     '''
     input_resistance = attributes.AttributeEnum(attributes.AttributeViReal64, enums.InputResistance, 1150029)
     '''
@@ -268,10 +246,6 @@ class _SessionBase(object):
     +-------+---+
     | FALSE | 0 |
     +-------+---+
-    '''
-    io_resource_descriptor = attributes.AttributeViString(1050304)
-    '''
-    A string containing the resource descriptor of the instrument.
     '''
     latency = attributes.AttributeViInt32(1150034)
     '''
@@ -382,27 +356,6 @@ class _SessionBase(object):
 
     Note: For 400 Hz powerline frequency, use the 50 Hz setting.
     '''
-    primary_error = attributes.AttributeViInt32(1050101)
-    '''
-    A code that describes the first error that occurred since the last call
-    to niDMM Get Error for the session. The value follows the VXIplug&play
-    conventions. A negative value describes an error condition. A positive
-    value describes a warning condition. A zero indicates that no error or
-    warning occurred. The error and warning values can be status codes
-    defined by IVI, VISA, class drivers, or specific drivers.
-    '''
-    query_instrument_status = attributes.AttributeViBoolean(1050003)
-    '''
-    Specifies whether the instrument driver queries the instrument status
-    after each operation. Querying the instrument status is very useful for
-    debugging. After the user program is validated, this property can be set
-    to FALSE (0) to disable status checking and maximize performance. The
-    instrument driver can choose to ignore status checking for particular
-    properties regardless of the setting of this property. The default value
-    is TRUE (1). Use `niDMM Initialize With
-    Options <dmmviref.chm::/niDMM_Initialize_with_Options.html>`__ to
-    override the default setting.
-    '''
     range = attributes.AttributeViReal64(1250002)
     '''
     Specifies the measurement range. Use positive values to represent the
@@ -455,18 +408,6 @@ class _SessionBase(object):
     on the NI 4082 and NI 4072. To achieve better resolution for such
     measurements, use the Number of LC Measurements to Average property.
     '''
-    resolution_digits = attributes.AttributeEnum(attributes.AttributeViReal64, enums.DigitsResolution, 1250003)
-    '''
-    Specifies the measurement resolution in digits. Setting this property to
-    higher values increases the measurement accuracy. Setting this property
-    to lower values increases the measurement speed.
-
-    Note:
-    NI-DMM ignores this property for capacitance and inductance measurements
-    on the NI 4082 and NI 4072. To achieve better resolution for such
-    measurements, use the `Number of LC Measurements to
-    Average <pniDMM_NumberofLCMeasurementsToAverage.html>`__ property.
-    '''
     sample_count = attributes.AttributeViInt32(1250301)
     '''
     Specifies the number of measurements the DMM takes each time it receives
@@ -476,16 +417,6 @@ class _SessionBase(object):
     conditional statement "Measurements equal to Sample Count" to always
     evaluate to False, and causes the DMM to continue taking measurements in
     the inner loop.
-    '''
-    sample_delay_mode = attributes.AttributeViInt32(1150031)
-    '''
-    For the NI 4060 only, specifies a delay interval after a sample trigger.
-
-    +---+-------------------+---------------------------------------------------------------------------------------+
-    | 0 | IVI compliant     | The Sample Interval property is only used when the Sample Trigger is set to Interval. |
-    +---+-------------------+---------------------------------------------------------------------------------------+
-    | 1 | Not IVI compliant | The Sample Interval property is used as a delay after any type of Sample Trigger.     |
-    +---+-------------------+---------------------------------------------------------------------------------------+
     '''
     sample_interval = attributes.AttributeViReal64(1250303)
     '''
@@ -520,13 +451,6 @@ class _SessionBase(object):
     '''
     Specifies the edge of the signal from the specified sample trigger
     source on which the DMM is triggered.
-    '''
-    secondary_error = attributes.AttributeViInt32(1050102)
-    '''
-    An optional code that provides additional information concerning the
-    primary error condition. The error and warning values can be status
-    codes defined by IVI, VISA, class drivers, or specific drivers. Zero
-    indicates no additional information.
     '''
     serial_number = attributes.AttributeViString(1150054)
     '''
@@ -604,25 +528,6 @@ class _SessionBase(object):
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
     A string containing a description of the specific driver.
-    '''
-    specific_driver_major_version = attributes.AttributeViInt32(1050503)
-    '''
-    Returns the major version number of this instrument driver.
-    '''
-    specific_driver_minor_version = attributes.AttributeViInt32(1050504)
-    '''
-    Returns the minor version number of this instrument driver.
-    '''
-    specific_driver_prefix = attributes.AttributeViString(1050302)
-    '''
-    The prefix for the specific instrument driver. The name of each
-    user-callable VI in this driver starts with this prefix. The prefix can
-    be up to a maximum of eight characters.
-    '''
-    specific_driver_revision = attributes.AttributeViString(1050551)
-    '''
-    A string that contains additional version information about this
-    instrument driver.
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''

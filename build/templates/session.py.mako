@@ -13,7 +13,8 @@ ${encoding_tag}
 
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
-    attributes = template_parameters['metadata'].attributes
+
+    attributes = helper.filter_codegen_attributes(config['attributes'])
 
     session_context_manager = None
     if 'task' in config['context_manager_name']:

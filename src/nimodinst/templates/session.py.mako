@@ -3,7 +3,7 @@
     import build.helper as helper
 
     config            = template_parameters['metadata'].config
-    attributes        = config['attributes']
+    attributes        = helper.filter_codegen_attributes(config['attributes'])
     functions         = config['functions']
 
     module_name       = config['module_name']

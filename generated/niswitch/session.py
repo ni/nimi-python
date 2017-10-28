@@ -266,21 +266,6 @@ class _SessionBase(object):
     Reset Interchange
     Check <switchviref.chm::/niSwitch_Reset_Interchange_Check.html>`__
     '''
-    io_resource_descriptor = attributes.AttributeViString(1050304)
-    '''
-    Contains the resource descriptor the instrument driver uses to identify
-    the physical device.
-
-    If you initialize the instrument driver with a logical name, this
-    property contains the resource descriptor that corresponds to the entry
-    in the IVI Configuration Utility. If you initialize the instrument
-    driver with the resource descriptor, this property contains that value.
-
-    **Related topics**
-
-    `Initialization <SWITCH.chm::/flow_init.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__
-    '''
     is_configuration_channel = attributes.AttributeViBoolean(1250003)
     '''
     Specifies whether to designate the channel as a configuration channel—a
@@ -651,24 +636,6 @@ class _SessionBase(object):
     `Armature Relays <SWITCH.chm::/armature_relay.html>`__ `niSwitch
     Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    query_instrument_status = attributes.AttributeViBoolean(1050003)
-    '''
-    Specifies whether the instrument driver queries the instrument status
-    after each operation. The default value is TRUE. Use the `niSwitch
-    Initialize With
-    Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__ VI
-    to override the default value.
-
-    Querying the instrument status is useful for debugging. After you
-    validate your program, set this property to FALSE to disable status
-    checking and maximize performance. The instrument driver can choose to
-    ignore status checking for particular properties regardless of the
-    setting of this property.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''
     Specifies whether to validate property values and VI parameters. The
@@ -816,11 +783,6 @@ class _SessionBase(object):
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
     '''
-    serial_number_i32 = attributes.AttributeViInt32(1150001)
-    '''
-    This property has been deprecated and might be removed from a future
-    release of NI-SWITCH.
-    '''
     settling_time = attributes.AttributeViReal64(1250004)
     '''
     Returns the maximum length of time in seconds from after you make a
@@ -882,23 +844,6 @@ class _SessionBase(object):
     **Related topics**
 
     `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    '''
-    specific_driver_prefix = attributes.AttributeViString(1050302)
-    '''
-    Contains the prefix for all of the instrument driver VIs.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-    '''
-    specific_driver_revision = attributes.AttributeViString(1050551)
-    '''
-    Contains additional version information about the instrument driver.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `niSwitch
-    Revision Query VI <switchviref.chm::/niSwitch_Revision_Query.html>`__
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
