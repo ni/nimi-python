@@ -493,7 +493,7 @@ nifgen.Session methods
 
     :type coefficients_array: list of float
 
-.. function:: configure_digital_edge_script_trigger(trigger_id, source, edge)
+.. function:: configure_digital_edge_script_trigger(trigger_id, source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING_EDGE)
 
     Configures the specified Script Trigger for digital edge triggering.
 
@@ -585,9 +585,9 @@ nifgen.Session methods
         +----------------------------+------------------------------------------------------------------+
 
 
-    :type edge: int
+    :type edge: :py:data:`nifgen.ScriptTriggerDigitalEdgeEdge`
 
-.. function:: configure_digital_edge_start_trigger(source, edge)
+.. function:: configure_digital_edge_start_trigger(source, edge=nifgen.StartTriggerDigitalEdgeEdge.RISING_EDGE)
 
     Configures the Start Trigger for digital edge triggering.
 
@@ -658,7 +658,7 @@ nifgen.Session methods
         +----------------------------+------------------------------------------------------------------+
 
 
-    :type edge: int
+    :type edge: :py:data:`nifgen.StartTriggerDigitalEdgeEdge`
 
 .. function:: configure_digital_level_script_trigger(trigger_id, source, trigger_when)
 
@@ -755,7 +755,109 @@ nifgen.Session methods
 
     :type trigger_when: int
 
-.. function:: configure_standard_waveform(waveform, amplitude, dc_offset, frequency, start_phase)
+.. function:: configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
+
+    Configures the attributes of the signal generator that affect frequency
+    list generation (the :py:data:`nifgen.FREQ\_LIST\_HANDLE`,
+    :py:data:`nifgen.FUNC\_AMPLITUDE`, :py:data:`nifgen.FUNC\_DC\_OFFSET`, and
+    :py:data:`nifgen.FUNC\_START\_PHASE` attributes).
+
+    
+
+    .. note:: The signal generator must not be in the Generating state when you call
+        this function.
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session['0,1'].configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
+
+
+    :param frequency_list_handle:
+
+
+        Specifies the handle of the frequency list that you want the signal
+        generator to produce. NI-FGEN sets the :py:data:`nifgen.FREQ\_LIST\_HANDLE`
+        attribute to this value. You can create a frequency list using the
+        :py:func:`nifgen.create_freq_list` function, which returns a handle that you use to
+        identify the list.
+        **Default Value**: None
+
+        
+
+
+    :type frequency_list_handle: int
+    :param amplitude:
+
+
+        Specifies the amplitude of the standard waveform that you want the
+        signal generator to produce. This value is the amplitude at the output
+        terminal. NI-FGEN sets the :py:data:`nifgen.FUNC\_AMPLITUDE` attribute to
+        this value.
+
+        For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
+        the amplitude to 10.00 V.
+
+        **Units**: peak-to-peak voltage
+
+        **Default Value**: None
+
+        
+
+        .. note:: This parameter does not affect signal generator behavior when you set
+            the **waveform** parameter of the :py:func:`nifgen.configure_standard_waveform`
+            function to NIFGEN\_VAL\_WFM\_DC.
+
+
+    :type amplitude: float
+    :param dc_offset:
+
+
+        Specifies the DC offset of the standard waveform that you want the
+        signal generator to produce. The value is the offset from ground to the
+        center of the waveform you specify with the **waveform** parameter,
+        observed at the output terminal. For example, to configure a waveform
+        with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
+        **dcOffset** to 5.00 V. NI-FGEN sets the :py:data:`nifgen.FUNC\_DC\_OFFSET`
+        attribute to this value.
+
+        **Units**: volts
+
+        **Default Value**: None
+
+        
+
+
+    :type dc_offset: float
+    :param start_phase:
+
+
+        Specifies the horizontal offset of the standard waveform you want the
+        signal generator to produce. Specify this attribute in degrees of one
+        waveform cycle. NI-FGEN sets the :py:data:`nifgen.FUNC\_START\_PHASE`
+        attribute to this value. A start phase of 180 degrees means output
+        generation begins halfway through the waveform. A start phase of 360
+        degrees offsets the output by an entire waveform cycle, which is
+        identical to a start phase of 0 degrees.
+
+        **Units**: degrees of one cycle
+
+        **Default Value**: None degrees
+
+        
+
+        .. note:: This parameter does not affect signal generator behavior when you set
+            the **waveform** parameter to NIFGEN\_VAL\_WFM\_DC.
+
+
+    :type start_phase: float
+
+.. function:: configure_standard_waveform(waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0)
 
     Configures the following attributes of the signal generator that affect
     standard waveform generation:
@@ -780,7 +882,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_standard_waveform(waveform, amplitude, dc_offset, frequency, start_phase)
+            session['0,1'].configure_standard_waveform(waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0)
 
 
     :param waveform:

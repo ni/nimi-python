@@ -32,6 +32,7 @@ class Library(object):
         self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc = None
         self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc = None
         self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc = None
+        self.niFgen_ConfigureFreqList_cfunc = None
         self.niFgen_ConfigureStandardWaveform_cfunc = None
         self.niFgen_CreateAdvancedArbSequence_cfunc = None
         self.niFgen_CreateArbSequence_cfunc = None
@@ -222,6 +223,14 @@ class Library(object):
                 self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc(vi, trigger_id, source, trigger_when)
+
+    def niFgen_ConfigureFreqList(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_ConfigureFreqList_cfunc is None:
+                self.niFgen_ConfigureFreqList_cfunc = self._library.niFgen_ConfigureFreqList
+                self.niFgen_ConfigureFreqList_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64, ViReal64]  # noqa: F405
+                self.niFgen_ConfigureFreqList_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_ConfigureFreqList_cfunc(vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase)
 
     def niFgen_ConfigureStandardWaveform(self, vi, channel_name, waveform, amplitude, dc_offset, frequency, start_phase):  # noqa: N802
         with self._func_lock:

@@ -47,6 +47,8 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] = 0
         self._defaults['ConfigureDigitalLevelScriptTrigger'] = {}
         self._defaults['ConfigureDigitalLevelScriptTrigger']['return'] = 0
+        self._defaults['ConfigureFreqList'] = {}
+        self._defaults['ConfigureFreqList']['return'] = 0
         self._defaults['ConfigureStandardWaveform'] = {}
         self._defaults['ConfigureStandardWaveform']['return'] = 0
         self._defaults['CreateAdvancedArbSequence'] = {}
@@ -300,6 +302,11 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureDigitalLevelScriptTrigger']['return'] != 0:
             return self._defaults['ConfigureDigitalLevelScriptTrigger']['return']
         return self._defaults['ConfigureDigitalLevelScriptTrigger']['return']
+
+    def niFgen_ConfigureFreqList(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
+        if self._defaults['ConfigureFreqList']['return'] != 0:
+            return self._defaults['ConfigureFreqList']['return']
+        return self._defaults['ConfigureFreqList']['return']
 
     def niFgen_ConfigureStandardWaveform(self, vi, channel_name, waveform, amplitude, dc_offset, frequency, start_phase):  # noqa: N802
         if self._defaults['ConfigureStandardWaveform']['return'] != 0:
@@ -792,6 +799,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_ConfigureDigitalEdgeStartTrigger.return_value = 0
         mock_library.niFgen_ConfigureDigitalLevelScriptTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureDigitalLevelScriptTrigger")
         mock_library.niFgen_ConfigureDigitalLevelScriptTrigger.return_value = 0
+        mock_library.niFgen_ConfigureFreqList.side_effect = MockFunctionCallError("niFgen_ConfigureFreqList")
+        mock_library.niFgen_ConfigureFreqList.return_value = 0
         mock_library.niFgen_ConfigureStandardWaveform.side_effect = MockFunctionCallError("niFgen_ConfigureStandardWaveform")
         mock_library.niFgen_ConfigureStandardWaveform.return_value = 0
         mock_library.niFgen_CreateAdvancedArbSequence.side_effect = MockFunctionCallError("niFgen_CreateAdvancedArbSequence")

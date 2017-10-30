@@ -462,13 +462,15 @@ nifgen.Session
    +-----------------------------------------------------+---------------------------------------------------------------------------------------+
    | :py:func:`configure_custom_fir_filter_coefficients` | coefficients_array                                                                    |
    +-----------------------------------------------------+---------------------------------------------------------------------------------------+
-   | :py:func:`configure_digital_edge_script_trigger`    | trigger_id, source, edge                                                              |
+   | :py:func:`configure_digital_edge_script_trigger`    | trigger_id, source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING_EDGE              |
    +-----------------------------------------------------+---------------------------------------------------------------------------------------+
-   | :py:func:`configure_digital_edge_start_trigger`     | source, edge                                                                          |
+   | :py:func:`configure_digital_edge_start_trigger`     | source, edge=nifgen.StartTriggerDigitalEdgeEdge.RISING_EDGE                           |
    +-----------------------------------------------------+---------------------------------------------------------------------------------------+
    | :py:func:`configure_digital_level_script_trigger`   | trigger_id, source, trigger_when                                                      |
    +-----------------------------------------------------+---------------------------------------------------------------------------------------+
-   | :py:func:`configure_standard_waveform`              | waveform, amplitude, dc_offset, frequency, start_phase                                |
+   | :py:func:`configure_freq_list`                      | frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0                      |
+   +-----------------------------------------------------+---------------------------------------------------------------------------------------+
+   | :py:func:`configure_standard_waveform`              | waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0                        |
    +-----------------------------------------------------+---------------------------------------------------------------------------------------+
    | :py:func:`create_advanced_arb_sequence`             | waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array |
    +-----------------------------------------------------+---------------------------------------------------------------------------------------+
