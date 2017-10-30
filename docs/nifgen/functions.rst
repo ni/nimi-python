@@ -1000,7 +1000,7 @@ nifgen.Session methods
 
     :type start_phase: float
 
-.. function:: create_advanced_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array)
+.. function:: create_advanced_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None)
 
     Creates an arbitrary sequence from an array of waveform handles and an
     array of corresponding loop counts. This function returns a handle that

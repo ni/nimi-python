@@ -125,6 +125,7 @@ functions_default_value = {
                                                                       5: { 'default_value': 0.0, }, }, },
     'ConfigureDigitalEdgeScriptTrigger':            { 'parameters': { 3: { 'default_value': 'ScriptTriggerDigitalEdgeEdge.RISING_EDGE', }, }, },
     'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'default_value': 'StartTriggerDigitalEdgeEdge.RISING_EDGE', }, }, },
-
+    'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
+                                                                      5: { 'default_value': None, }, }, },
 }
 
