@@ -217,7 +217,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetArrayUsingIVIDance", param='arrayOut')
         if array_size.value == 0:
             return len(self._defaults['GetArrayUsingIVIDance']['arrayOut'])
-        array_out.value = self._defaults['GetArrayUsingIVIDance']['arrayOut'].encode('ascii')
+        for i in range(len(self._defaults['GetArrayUsingIVIDance']['arrayOut'])):
+            array_out[i] = self._defaults['GetArrayUsingIVIDance']['arrayOut'][i]
         return self._defaults['GetArrayUsingIVIDance']['return']
 
     def niFake_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802

@@ -535,6 +535,17 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
+    def test_get_array_using_ivi_dance(self):
+        self.patched_library.niFake_GetArrayUsingIVIDance.side_effect = self.side_effects_helper.niFake_GetArrayUsingIVIDance
+        self.side_effects_helper['GetArrayUsingIVIDance']['arrayOut'] = None
+        self.side_effects_helper['GetArrayUsingIVIDance']['return'] = 2
+        self.side_effects_helper['GetArrayUsingIVIDance']['arrayOut'] = [1.1, 2.2]
+        self.side_effects_helper['GetArrayUsingIVIDance']['return'] = 0
+        with nifake.Session('dev1') as session:
+            result_array = session.get_array_using_ivi_dance()
+            assert result_array == [1.1, 2.2]
+
+
     # Repeated Capabilities
 
     def test_repeated_capability_method_on_session(self):

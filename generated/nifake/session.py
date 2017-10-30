@@ -505,7 +505,7 @@ class Session(_SessionBase):
         an_array_ctype = (visatype.ViBoolean * number_of_elements)()  # case 12
         error_code = self._library.niFake_BoolArrayOutputFunction(vi_ctype, number_of_elements_ctype, an_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [bool(an_array_ctype[i]) for i in range(number_of_elements)]
+        return [bool(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
     def enum_array_output_function(self, number_of_elements):
         '''enum_array_output_function
@@ -523,7 +523,7 @@ class Session(_SessionBase):
         an_array_ctype = (visatype.ViInt16 * number_of_elements)()  # case 12
         error_code = self._library.niFake_EnumArrayOutputFunction(vi_ctype, number_of_elements_ctype, an_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements)]
+        return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
     def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
         '''enum_input_function_with_defaults
@@ -633,7 +633,7 @@ class Session(_SessionBase):
         array_out_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         error_code = self._library.niFake_GetArrayUsingIVIDance(vi_ctype, array_size_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(array_out_ctype[i]) for i in range(array_size)]
+        return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
 
     def get_enum_value(self):
         '''get_enum_value
@@ -735,7 +735,7 @@ class Session(_SessionBase):
         len_array_ctype = (visatype.ViReal64 * len(len_array))(*len_array)  # case 4
         error_code = self._library.niFake_MultipleArrayTypes(passed_in_array_size_ctype, passed_in_array_ctype, a_fixed_array_ctype, len_array_size_ctype, len_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(passed_in_array_ctype[i]) for i in range(passed_in_array_size)], [float(a_fixed_array_ctype[i]) for i in range(3)]
+        return [float(passed_in_array_ctype[i]) for i in range(passed_in_array_size_ctype.value)], [float(a_fixed_array_ctype[i]) for i in range(3)]
 
     def one_input_function(self, a_number):
         '''one_input_function
@@ -833,7 +833,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFake_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)], int(actual_number_of_points_ctype.value)
 
     def return_a_number_and_a_string(self):
         '''return_a_number_and_a_string
@@ -900,7 +900,7 @@ class Session(_SessionBase):
         a_string_ctype = (visatype.ViChar * string_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         error_code = self._library.niFake_ReturnMultipleTypes(vi_ctype, ctypes.pointer(a_boolean_ctype), ctypes.pointer(an_int32_ctype), ctypes.pointer(an_int64_ctype), ctypes.pointer(an_int_enum_ctype), ctypes.pointer(a_float_ctype), ctypes.pointer(a_float_enum_ctype), array_size_ctype, an_array_ctype, string_size_ctype, a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), [float(an_array_ctype[i]) for i in range(array_size)], a_string_ctype.value.decode(self._encoding)
+        return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), [float(an_array_ctype[i]) for i in range(array_size_ctype.value)], a_string_ctype.value.decode(self._encoding)
 
     def simple_function(self):
         '''simple_function
