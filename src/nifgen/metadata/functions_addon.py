@@ -35,6 +35,12 @@ functions_codegen_method = {
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
+    'ConfigureOutputMode':               { 'parameters': { 1: { 'enum': 'OutputMode',                    }, }, },
+    'ConfigureStandardWaveform':         { 'parameters': { 2: { 'enum': 'Waveform',                      }, }, },
+    'ConfigureTriggerMode':              { 'parameters': { 2: { 'enum': 'TriggerMode',                   }, }, },
+    'ConfigureTriggerSource':            { 'parameters': { 2: { 'enum': 'TriggerSource',                 }, }, },
+    'CreateFreqList':                    { 'parameters': { 1: { 'enum': 'Waveform',                      }, }, },
+    'ConfigureDigitalEdgeScriptTrigger': { 'parameters': { 3: { 'enum': 'StartTriggerDigitalEdgeEdge',   }, }, },
     # @TODO add all enums
 }
 

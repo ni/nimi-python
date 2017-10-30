@@ -924,7 +924,7 @@ nifgen.Session methods
         +----------------------------+------------------------------------------------------------------+
 
 
-    :type edge: int
+    :type edge: :py:data:`nifgen.StartTriggerDigitalEdgeEdge`
 
 .. function:: configure_digital_edge_start_trigger(source, edge)
 
@@ -1422,7 +1422,7 @@ nifgen.Session methods
         +---------------------------------+-------------------------------------------------------------------------------------------------------------+
 
 
-    :type output_mode: int
+    :type output_mode: :py:data:`nifgen.OutputMode`
 
 .. function:: configure_p2_p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
 
@@ -1775,7 +1775,7 @@ nifgen.Session methods
         +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
-    :type waveform: int
+    :type waveform: :py:data:`nifgen.Waveform`
     :param amplitude:
 
 
@@ -1975,7 +1975,7 @@ nifgen.Session methods
         +-------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-    :type trigger_mode: int
+    :type trigger_mode: :py:data:`nifgen.TriggerMode`
 
 .. function:: configure_trigger_source(trigger_source)
 
@@ -2057,7 +2057,7 @@ nifgen.Session methods
         +-----------------------------+--------------------------+
 
 
-    :type trigger_source: int
+    :type trigger_source: :py:data:`nifgen.TriggerSource`
 
 .. function:: configure_update_clock_source(update_clock_source)
 
@@ -2547,7 +2547,7 @@ nifgen.Session methods
         +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
-    :type waveform: int
+    :type waveform: :py:data:`nifgen.Waveform`
     :param frequency_list_length:
 
 

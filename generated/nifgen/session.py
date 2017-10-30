@@ -2851,7 +2851,7 @@ class _SessionBase(object):
             session['0,1'].configure_standard_waveform(waveform, amplitude, dc_offset, frequency, start_phase)
 
         Args:
-            waveform (int): Specifies the standard waveform that you want the signal generator to
+            waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
                 produce. NI-FGEN sets the FUNC_WAVEFORM attribute to this
                 value.
 
@@ -2931,9 +2931,11 @@ class _SessionBase(object):
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter to NIFGEN_VAL_WFM_DC.
         '''
+        if type(waveform) is not enums.Waveform:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_ctype = visatype.ViInt32(waveform)  # case 8
+        waveform_ctype = visatype.ViInt32(waveform.value)  # case 9
         amplitude_ctype = visatype.ViReal64(amplitude)  # case 8
         dc_offset_ctype = visatype.ViReal64(dc_offset)  # case 8
         frequency_ctype = visatype.ViReal64(frequency)  # case 8
@@ -3034,7 +3036,7 @@ class _SessionBase(object):
             session['0,1'].configure_trigger_mode(trigger_mode)
 
         Args:
-            trigger_mode (int): Specifies the trigger mode.
+            trigger_mode (enums.TriggerMode): Specifies the trigger mode.
 
                 ****Defined Values****
 
@@ -3050,9 +3052,11 @@ class _SessionBase(object):
                 | NIFGEN_VAL_BURST      | After a Start Trigger is received, the waveform described by the first stage generates until another trigger is received. At the next trigger, the buffer of the previous stage completes, then the waveform described by the second stage generates. After the staging list is exhausted, the waveform generation returns to the first stage and continues to repeat the cycle. In Frequency List mode, the duration instruction is ignored, and the trigger switches the frequency to the next frequency in the list. |
                 +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         '''
+        if type(trigger_mode) is not enums.TriggerMode:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerMode))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        trigger_mode_ctype = visatype.ViInt32(trigger_mode)  # case 8
+        trigger_mode_ctype = visatype.ViInt32(trigger_mode.value)  # case 9
         error_code = self._library.niFgen_ConfigureTriggerMode(vi_ctype, channel_name_ctype, trigger_mode_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3077,7 +3081,7 @@ class _SessionBase(object):
             session['0,1'].configure_trigger_source(trigger_source)
 
         Args:
-            trigger_source (int): Controls which trigger source the signal generator uses.
+            trigger_source (enums.TriggerSource): Controls which trigger source the signal generator uses.
 
                 ****Defined Values****
 
@@ -3131,9 +3135,11 @@ class _SessionBase(object):
                 | NIFGEN_VAL_PFI_3         | PFI 3                    |
                 +--------------------------+--------------------------+
         '''
+        if type(trigger_source) is not enums.TriggerSource:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        trigger_source_ctype = visatype.ViInt32(trigger_source)  # case 8
+        trigger_source_ctype = visatype.ViInt32(trigger_source.value)  # case 9
         error_code = self._library.niFgen_ConfigureTriggerSource(vi_ctype, channel_name_ctype, trigger_source_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -5264,7 +5270,7 @@ class Session(_SessionBase):
                 +-------------+-----------------------------------+
                 | "PXI_Star"  | PXI star trigger line             |
                 +-------------+-----------------------------------+
-            edge (int): Specifies the edge to detect.
+            edge (enums.StartTriggerDigitalEdgeEdge): Specifies the edge to detect.
 
                 ****Defined Values****
 
@@ -5276,10 +5282,12 @@ class Session(_SessionBase):
                 | NIFGEN_VAL_FALLING_EDGE | Occurs when the signal transitions from high level to low level. |
                 +-------------------------+------------------------------------------------------------------+
         '''
+        if type(edge) is not enums.StartTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.StartTriggerDigitalEdgeEdge))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case 3
-        edge_ctype = visatype.ViInt32(edge)  # case 8
+        edge_ctype = visatype.ViInt32(edge.value)  # case 9
         error_code = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -5446,7 +5454,7 @@ class Session(_SessionBase):
         call this function.
 
         Args:
-            output_mode (int): Specifies the output mode that you want the signal generator to use. The
+            output_mode (enums.OutputMode): Specifies the output mode that you want the signal generator to use. The
                 value you specify determines which functions and attributes you can use
                 to configure the waveform the signal generator produces.
                 Refer to the OUTPUT_MODE attribute for more information
@@ -5466,8 +5474,10 @@ class Session(_SessionBase):
                 | NIFGEN_VAL_OUTPUT_SCRIPT    | **Script mode**—Allows you to use scripting to link and loop multiple waveforms in complex combinations.    |
                 +-----------------------------+-------------------------------------------------------------------------------------------------------------+
         '''
+        if type(output_mode) is not enums.OutputMode:
+            raise TypeError('Parameter mode must be of type ' + str(enums.OutputMode))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        output_mode_ctype = visatype.ViInt32(output_mode)  # case 8
+        output_mode_ctype = visatype.ViInt32(output_mode.value)  # case 9
         error_code = self._library.niFgen_ConfigureOutputMode(vi_ctype, output_mode_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -6099,7 +6109,7 @@ class Session(_SessionBase):
         this function.
 
         Args:
-            waveform (int): Specifies the standard waveform that you want the signal generator to
+            waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
                 produce. NI-FGEN sets the FUNC_WAVEFORM attribute to this
                 value.
 
@@ -6159,8 +6169,10 @@ class Session(_SessionBase):
                 this handle to nifgen_ConfigureFreqList to generate the arbitrary
                 sequence.
         '''
+        if type(waveform) is not enums.Waveform:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        waveform_ctype = visatype.ViInt32(waveform)  # case 8
+        waveform_ctype = visatype.ViInt32(waveform.value)  # case 9
         frequency_list_length_ctype = visatype.ViInt32(frequency_list_length)  # case 8
         frequency_array_ctype = (visatype.ViReal64 * len(frequency_array))(*frequency_array)  # case 4
         duration_array_ctype = (visatype.ViReal64 * len(duration_array))(*duration_array)  # case 4
