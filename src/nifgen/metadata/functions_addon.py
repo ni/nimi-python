@@ -19,6 +19,7 @@ functions_codegen_method = {
     'ConfigureDigitalEdgeScriptTrigger':    { 'codegen_method': 'public',   },
     'ConfigureDigitalEdgeStartTrigger':     { 'codegen_method': 'public',   },
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
+    'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
     'Disable.+':                            { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'Enable.+':                             { 'codegen_method': 'no',       },  # Use corresponding attribute instead
@@ -113,8 +114,12 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 functions_default_value = {
-    'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '', },
-                                                                       2: { 'default_value': False, },
-                                                                       3: { 'default_value': '', }, }, },
+    'InitializeWithChannels':                       { 'parameters': { 1: { 'default_value': '', },
+                                                                      2: { 'default_value': False, },
+                                                                      3: { 'default_value': '', }, }, },
+    'ConfigureFreqList':                            { 'parameters': { 4: { 'default_value': 0,0, },
+                                                                      5: { 'default_value': 0.0, }, }, },
+    'ConfigureStandardWaveform':                    { 'parameters': { 4: { 'default_value': 0.0, },
+                                                                      5: { 'default_value': 0.0, }, }, },
 }
 

@@ -7,9 +7,6 @@ TODOs
 * Documentation of SendSoftwareEdgeTrigger for param Trigger says "Sets the clock mode of the signal generator". File internal bug report.
 
 Defaults:
-    Initialize with channels
-    configure_freq_list: defualt dc_offset and start_phase to 0.0
-    configure_standard_waveform dc_offset 0.0 and start_phase 0.0
     configure_digital_edge_script_trigger edge rising
     configure_digital_edge_start_trigger edge rising
     create_advanced_arb_sequence sample_counts_array, marker_location_array are optional to None (known codegen issue)
