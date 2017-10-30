@@ -69,7 +69,7 @@ def test_no_waveform_data(session):
         with session.initiate():
             assert False
     except nifgen.Error as e:
-        assert e.code ==  -1074118636 # No waveforms have been created
+        assert e.code == -1074118636  # No waveforms have been created
 
 
 def test_frequency_list(session):
@@ -77,7 +77,7 @@ def test_frequency_list(session):
     session.clear_freq_list(-1)
     duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
     frequency_array = [1000, 100900, 200800, 300700, 400600, 500500, 600400, 700300, 800200, 900100]
-    waveform_handle =session.create_freq_list(nifgen.Waveform.SQUARE, 10, frequency_array, duration_array)
+    waveform_handle = session.create_freq_list(nifgen.Waveform.SQUARE, 10, frequency_array, duration_array)
     session.configure_freq_list(waveform_handle, 2.0, 0, 0)
     session.configure_trigger_mode(nifgen.TriggerMode.NIFGEN_VAL_CONTINUOUS)
     session.disable_start_trigger()
