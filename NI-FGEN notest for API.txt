@@ -1,7 +1,0 @@
-FGEN notes
-
-TODOs
-
-* Look at all drivers and see if we filtered out useful ext cal functions like niFgen_GetExtCalLastTemp
-* functions_addon.py documents mechanisms but we are missing len
-* Documentation of SendSoftwareEdgeTrigger for param Trigger says "Sets the clock mode of the signal generator". File internal bug report.
