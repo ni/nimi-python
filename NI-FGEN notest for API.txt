@@ -3,6 +3,8 @@ FGEN notes
 TODOs
 
 * Look at all drivers and see if we filtered out useful ext cal functions like niFgen_GetExtCalLastTemp
+* functions_addon.py documents mechanisms but we are missing len
+* Documentation of SendSoftwareEdgeTrigger for param Trigger says "Sets the clock mode of the signal generator". File internal bug report.
 
 Defaults:
     Initialize with channels
@@ -12,16 +14,4 @@ Defaults:
     configure_digital_edge_start_trigger edge rising
     create_advanced_arb_sequence sample_counts_array, marker_location_array are optional to None (known codegen issue)
     wait_until_done max_time 10000 ms
-
-Enums:
-    operation mode property use enum
-    create_waveform_from_file_f64 byte_order enum
-    create_waveform_from_file_i16 byte_order enum
-    set_named_waveform_next_write_position relative_to
-    set_waveform_next_write_position relative_to
-    clock_mode needs enum
-    create_freq_list waveform use enum
-    signal is enum
-    get_hardware_state is enum
-    send_software_edge_trigger trigger is enum
 
