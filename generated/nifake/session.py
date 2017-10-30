@@ -616,6 +616,25 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
 
+    def get_array_using_ivi_dance(self):
+        '''get_array_using_ivi_dance
+
+        This function returns an array of float whose size is determined with the IVI dance.
+
+        Args:
+            array_size (int): Specifies the size of the buffer for copyint arrayOut onto.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        array_size_ctype = visatype.ViInt32()  # case 6
+        array_out_ctype = None  # case 11
+        error_code = self._library.niFake_GetArrayUsingIVIDance(vi_ctype, array_size_ctype, array_out_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        array_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        array_out_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niFake_GetArrayUsingIVIDance(vi_ctype, array_size_ctype, array_out_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(array_out_ctype[i]) for i in range(array_size)]
+
     def get_enum_value(self):
         '''get_enum_value
 
