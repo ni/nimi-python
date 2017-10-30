@@ -190,6 +190,14 @@ def _add_codegen_method(a, attributes):
         attributes[a]['codegen_method'] = 'public'
 
 
+def _add_python_name(a, attributes):
+    '''Adds 'python_name' - lower case + leading '_' if first character is a digit'''
+    n = attributes[a]['name'].lower()
+    if attributes[a]['name'][0].isdigit():
+        n = '_' + n
+    attributes[a]['python_name'] = n
+
+
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     if 'modules' in config and 'metadata.functions_addon' in config['modules']:
@@ -199,6 +207,7 @@ def add_all_attribute_metadata(attributes, config):
 
     for a in attributes:
         _add_codegen_method(a, attributes)
+        _add_python_name(a, attributes)
 
     return attributes
 
