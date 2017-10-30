@@ -1,20 +1,20 @@
-+----------------------+------------------------------------------------------------+
-| master branch status | |BuildStatus| |Docs| |MITLicense| |CoverageStatus|         |
-+----------------------+------------------------------------------------------------+
-| GitHub status        | |OpenIssues| |OpenPullRequests|                            |
-+----------------------+------------+-----------------------------------------------+
-| Versions             | NI-DCPower | |DCPowerLatestVersion| |DCPowerPythonVersion| |
-|                      +------------+-----------------------------------------------+
-|                      | NI-DMM     | |DMMLatestVersion| |DMMPythonVersion|         |
-|                      +------------+-----------------------------------------------+
-|                      | NI-ModInst | |ModInstLatestVersion| |ModInstPythonVersion| |
-|                      +------------+-----------------------------------------------+
-|                      | NI-SWITCH  | |SwitchLatestVersion| |SwitchPythonVersion|   |
-|                      +------------+-----------------------------------------------+
-|                      | NI-FGEN    | |FgenLatestVersion| |FgenPythonVersion|       |
-|                      +------------+-----------------------------------------------+
-|                      | NI-SCOPE   | |ScopeLatestVersion| |ScopePythonVersion|     |
-+----------------------+------------+-----------------------------------------------+
++----------------------+----------------------------------------------------------------+
+| master branch status | |BuildStatus| |Docs| |MITLicense| |CoverageStatus|             |
++----------------------+----------------------------------------------------------------+
+| GitHub status        | |OpenIssues| |OpenPullRequests|                                |
++----------------------+------------+---------------------------------------------------+
+| Versions             | NI-DCPower | |nidcpowerLatestVersion| |nidcpowerPythonVersion| |
+|                      +------------+---------------------------------------------------+
+|                      | NI-DMM     | |nidmmLatestVersion| |nidmmPythonVersion|         |
+|                      +------------+---------------------------------------------------+
+|                      | NI-FGEN    | |nifgenLatestVersion| |nifgenPythonVersion|       |
+|                      +------------+---------------------------------------------------+
+|                      | NI-SCOPE   | |niscopeLatestVersion| |niscopePythonVersion|     |
+|                      +------------+---------------------------------------------------+
+|                      | NI-SWITCH  | |niswitchLatestVersion| |niswitchPythonVersion|   |
+|                      +------------+---------------------------------------------------+
+|                      | NI-ModInst | |nimodinstLatestVersion| |nimodinstPythonVersion| |
++----------------------+------------+---------------------------------------------------+
 
 ===========  ============================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
@@ -40,10 +40,10 @@ The **nimi-python** repository generates Python bindings (Application Programmin
 
 * NI-DCPower (Python module: nidcpower)
 * NI-DMM (Python module: nidmm)
-* NI-ModInst (Python module: nimodinst)
-* NI-SWITCH (Python module: niswitch)
 * NI-FGEN (Python module: nifgen)
 * NI-SCOPE (Python module: niscope)
+* NI-SWITCH (Python module: niswitch)
+* NI-ModInst (Python module: nimodinst)
 
 It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is called through its public C API using the
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
@@ -166,51 +166,51 @@ licenses allow for non-commercial and commercial use.
     :alt: Test Coverage - master branch
     :target: https://coveralls.io/github/ni/nimi-python?branch=master
 
-.. |DCPowerLatestVersion| image:: http://img.shields.io/pypi/v/nidcpower.svg
+.. |nidcpowerLatestVersion| image:: http://img.shields.io/pypi/v/nidcpower.svg
     :alt: Latest NI-DMM Version
     :target: http://pypi.python.org/pypi/nidmm
 
-.. |DCPowerPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidcpower.svg
+.. |nidcpowerPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidcpower.svg
     :alt: NI-DCPower supported Python versions
     :target: http://pypi.python.org/pypi/nidcpower
 
-.. |DMMLatestVersion| image:: http://img.shields.io/pypi/v/nidcpower.svg
+.. |nidmmLatestVersion| image:: http://img.shields.io/pypi/v/nidcpower.svg
     :alt: Latest NI-DCPower Version
     :target: http://pypi.python.org/pypi/nidcpower
 
-.. |DMMPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidmm.svg
+.. |nidmmPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidmm.svg
     :alt: NI-DMM supported Python versions
     :target: http://pypi.python.org/pypi/nidmm
 
-.. |ModInstLatestVersion| image:: http://img.shields.io/pypi/v/nimodinst.svg
+.. |nimodinstLatestVersion| image:: http://img.shields.io/pypi/v/nimodinst.svg
     :alt: Latest NI-ModInst Version
     :target: http://pypi.python.org/pypi/nimodinst
 
-.. |ModInstPythonVersion| image:: http://img.shields.io/pypi/pyversions/nimodinst.svg
+.. |nimodinstPythonVersion| image:: http://img.shields.io/pypi/pyversions/nimodinst.svg
     :alt: NI-ModInst supported Python versions
     :target: http://pypi.python.org/pypi/nimodinst
 
-.. |SwitchLatestVersion| image:: http://img.shields.io/pypi/v/niswitch.svg
+.. |niswitchLatestVersion| image:: http://img.shields.io/pypi/v/niswitch.svg
     :alt: Latest NI-SWITCH Version
     :target: http://pypi.python.org/pypi/niswitch
 
-.. |SwitchPythonVersion| image:: http://img.shields.io/pypi/pyversions/niswitch.svg
+.. |niswitchPythonVersion| image:: http://img.shields.io/pypi/pyversions/niswitch.svg
     :alt: NI-SWITCH supported Python versions
     :target: http://pypi.python.org/pypi/niswitch
 
-.. |ScopeLatestVersion| image:: http://img.shields.io/pypi/v/niscope.svg
+.. |niscopeLatestVersion| image:: http://img.shields.io/pypi/v/niscope.svg
     :alt: Latest NI-SCOPE Version
     :target: http://pypi.python.org/pypi/niscope
 
-.. |ScopePythonVersion| image:: http://img.shields.io/pypi/pyversions/niscope.svg
+.. |niscopePythonVersion| image:: http://img.shields.io/pypi/pyversions/niscope.svg
     :alt: NI-SCOPE supported Python versions
     :target: http://pypi.python.org/pypi/niscope
 
-.. |FgenLatestVersion| image:: http://img.shields.io/pypi/v/nifgen.svg
+.. |nifgenLatestVersion| image:: http://img.shields.io/pypi/v/nifgen.svg
     :alt: Latest NI-FGEN Version
     :target: http://pypi.python.org/pypi/nifgen
 
-.. |FgenPythonVersion| image:: http://img.shields.io/pypi/pyversions/nifgen.svg
+.. |nifgenPythonVersion| image:: http://img.shields.io/pypi/pyversions/nifgen.svg
     :alt: NI-FGEN supported Python versions
     :target: http://pypi.python.org/pypi/nifgen
 
