@@ -63,6 +63,8 @@ functions_enums = {
     'CreateFreqList':                           { 'parameters': { 1: { 'enum': 'Waveform',                  }, }, },
     'CreateWaveformFromFileF64':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  # TODO: issue #538
     'CreateWaveformFromFileI16':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  # TODO: issue #538
+    'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 3: { 'enum': 'ScriptTriggerDigitalEdgeEdge', }, }, },
+    'ConfigureDigitalEdgeStartTrigger':         { 'parameters': { 2: { 'enum': 'StartTriggerDigitalEdgeEdge', }, }, },
     'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                    }, }, },  # TODO: issue #538
     'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  # TODO: issue #538
     'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  # TODO: issue #538
@@ -117,9 +119,12 @@ functions_default_value = {
     'InitializeWithChannels':                       { 'parameters': { 1: { 'default_value': '', },
                                                                       2: { 'default_value': False, },
                                                                       3: { 'default_value': '', }, }, },
-    'ConfigureFreqList':                            { 'parameters': { 4: { 'default_value': 0,0, },
+    'ConfigureFreqList':                            { 'parameters': { 4: { 'default_value': 0.0, },
                                                                       5: { 'default_value': 0.0, }, }, },
     'ConfigureStandardWaveform':                    { 'parameters': { 4: { 'default_value': 0.0, },
                                                                       5: { 'default_value': 0.0, }, }, },
+    'ConfigureDigitalEdgeScriptTrigger':            { 'parameters': { 3: { 'default_value': 'ScriptTriggerDigitalEdgeEdge.RISING_EDGE', }, }, },
+    'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'default_value': 'StartTriggerDigitalEdgeEdge.RISING_EDGE', }, }, },
+
 }
 

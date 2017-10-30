@@ -7,8 +7,6 @@ TODOs
 * Documentation of SendSoftwareEdgeTrigger for param Trigger says "Sets the clock mode of the signal generator". File internal bug report.
 
 Defaults:
-    configure_digital_edge_script_trigger edge rising
-    configure_digital_edge_start_trigger edge rising
     create_advanced_arb_sequence sample_counts_array, marker_location_array are optional to None (known codegen issue)
     wait_until_done max_time 10000 ms
 
