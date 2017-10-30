@@ -506,10 +506,7 @@ class TestSession(object):
     def test_get_an_ivi_dance_string(self):
         self.patched_library.niFake_GetAnIviDanceString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceString
         string_val = 'Testing is fun?'
-        self.side_effects_helper['GetAnIviDanceString']['aString'] = ''
-        self.side_effects_helper['GetAnIviDanceString']['return'] = len(string_val)
         self.side_effects_helper['GetAnIviDanceString']['aString'] = string_val
-        self.side_effects_helper['GetAnIviDanceString']['return'] = 0
         with nifake.Session('dev1') as session:
             result_string = session.get_an_ivi_dance_string()
             assert result_string == string_val
