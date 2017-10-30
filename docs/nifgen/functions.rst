@@ -2678,7 +2678,7 @@ nifgen.Session methods
 
     :type offset: int
 
-.. function:: wait_until_done(max_time)
+.. function:: wait_until_done(max_time=10000)
 
     Waits until the device is done generating or until the maximum time has
     expired.

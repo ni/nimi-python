@@ -5229,7 +5229,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_until_done(self, max_time):
+    def wait_until_done(self, max_time=10000):
         '''wait_until_done
 
         Waits until the device is done generating or until the maximum time has
