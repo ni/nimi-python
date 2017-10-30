@@ -1,5 +1,3 @@
-# TODO(texasaggie97) update this file with all NI-FGEN function information
-
 # These dictionaries are applied to the generated functions dictionary at build time
 # Any changes to the API should be made here. functions.py is code generated
 
@@ -32,14 +30,14 @@ functions_codegen_method = {
     'SampleMode':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'GetNormalizationCoefficients':    { 'codegen_method': 'no',       },  # Has void param
     'GetScalingCoefficients':          { 'codegen_method': 'no',       },  # Has void param
-    'Fetch':                           { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param
-    'FetchArrayMeasurement':           { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param
-    'FetchBinary16':                   { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param
-    'FetchBinary32':                   { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param
-    'FetchBinary8':                    { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param
-    'FetchComplex':                    { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param
-    'FetchComplexBinary16':            { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param
-    'Read':                            { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param
+    'Fetch':                           { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
+    'FetchArrayMeasurement':           { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
+    'FetchBinary16':                   { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
+    'FetchBinary32':                   { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
+    'FetchBinary8':                    { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
+    'FetchComplex':                    { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
+    'FetchComplexBinary16':            { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
+    'Read':                            { 'codegen_method': 'no',       },  # Has niScope_wfmInfo param #543
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -67,8 +65,6 @@ functions_buffer_info = {
     'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufSize'}, }, }, },
     'GetCalUserDefinedInfo':        { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'init':                         { 'parameters': { 0: { 'is_buffer': True, }, }, },
-    '.etAttribute.+':               { 'parameters': { 1: { 'is_buffer': True, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
