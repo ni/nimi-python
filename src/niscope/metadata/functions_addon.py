@@ -8,7 +8,7 @@
 # don't generate at all
 functions_codegen_method = {
     'InitWithOptions':                 { 'codegen_method': 'private',  },
-    'Initiate':                        { 'codegen_method': 'private',  },
+    'InitiateAcquisition':             { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
     'Abort':                           { 'codegen_method': 'private',  },
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
