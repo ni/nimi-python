@@ -545,7 +545,6 @@ class TestSession(object):
             result_array = session.get_array_using_ivi_dance()
             assert result_array == [1.1, 2.2]
 
-
     # Repeated Capabilities
 
     def test_repeated_capability_method_on_session(self):
