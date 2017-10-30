@@ -3,7 +3,7 @@ niscope.Session properties
 
 .. py:currentmodule:: niscope
 
-.. py:attribute:: 5102_adjust_pretrigger_samples
+.. py:attribute:: _5102_adjust_pretrigger_samples
 
     When set to TRUE and the digitizer is set to master, the number of
     pretrigger samples and total number of samples are adjusted to enable
@@ -29,7 +29,7 @@ niscope.Session properties
             - LabVIEW Property: **Horizontal:Advanced:5102 Adjust Pretrigger Samples**
             - C Attribute: **NISCOPE_ATTR_5102_ADJUST_PRETRIGGER_SAMPLES**
 
-.. py:attribute:: 5v_out_output_terminal
+.. py:attribute:: _5v_out_output_terminal
 
     Specifies the destination for the 5 Volt power signal. Refer to the
     device specifications document for a list of valid destinations.
