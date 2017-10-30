@@ -90,13 +90,6 @@ functions_buffer_info = {
     'ReadWaveform':                 { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
     'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'GetCalUserDefinedInfo':        { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
-    'init':                         { 'parameters': { 0: { 'is_buffer': True, }, }, },
-    'InitWithOptions':              { 'parameters': { 0: { 'is_buffer': True, },
-                                                      3: { 'is_buffer': True, }, }, },
-    '.etAttribute.+':               { 'parameters': { 1: { 'is_buffer': True, }, }, },
-    'CheckAttribute.+':             { 'parameters': { 1: { 'is_buffer': True, }, }, }, # Not actually used since CheckAttribute* not part of API
-    'InitExtCal':                   { 'parameters': { 0: { 'is_buffer': True, }, }, }, # Not actually used since External Cal not part of API
-    'GetDevTemp':                   { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
 }
 
