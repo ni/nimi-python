@@ -2557,7 +2557,7 @@ class _SessionBase(object):
 
         Args:
             file_name (string): The full path and name of the file where the waveform data resides.
-            byte_order (int): Specifies the byte order of the data in the file.
+            byte_order (enums.ByteOrder): Specifies the byte order of the data in the file.
 
                 ****Defined Values****
 
@@ -2581,10 +2581,12 @@ class _SessionBase(object):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
+        if type(byte_order) is not enums.ByteOrder:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ByteOrder))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case 3
-        byte_order_ctype = visatype.ViInt32(byte_order)  # case 8
+        byte_order_ctype = visatype.ViInt32(byte_order.value)  # case 9
         waveform_handle_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFgen_CreateWaveformFromFileF64(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2615,7 +2617,7 @@ class _SessionBase(object):
 
         Args:
             file_name (string): The full path and name of the file where the waveform data resides.
-            byte_order (int): Specifies the byte order of the data in the file.
+            byte_order (enums.ByteOrder): Specifies the byte order of the data in the file.
 
                 ****Defined Values****
 
@@ -2639,10 +2641,12 @@ class _SessionBase(object):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
+        if type(byte_order) is not enums.ByteOrder:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ByteOrder))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case 3
-        byte_order_ctype = visatype.ViInt32(byte_order)  # case 8
+        byte_order_ctype = visatype.ViInt32(byte_order.value)  # case 9
         waveform_handle_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFgen_CreateWaveformFromFileI16(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3552,7 +3556,7 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
-            relative_to (int): Specifies the reference position in the waveform. This position and
+            relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
                 waveform.
 
@@ -3566,10 +3570,12 @@ class _SessionBase(object):
             offset (int): Specifies the offset from the **relativeTo** parameter at which to start
                 loading the data into the waveform.
         '''
+        if type(relative_to) is not enums.RelativeTo:
+            raise TypeError('Parameter mode must be of type ' + str(enums.RelativeTo))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
-        relative_to_ctype = visatype.ViInt32(relative_to)  # case 8
+        relative_to_ctype = visatype.ViInt32(relative_to.value)  # case 9
         offset_ctype = visatype.ViInt32(offset)  # case 8
         error_code = self._library.niFgen_SetNamedWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_name_ctype, relative_to_ctype, offset_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3604,7 +3610,7 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
-            relative_to (int): Specifies the reference position in the waveform. This position and
+            relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
                 waveform.
 
@@ -3618,10 +3624,12 @@ class _SessionBase(object):
             offset (int): Specifies the offset from **relativeTo** at which to start loading the
                 data into the waveform.
         '''
+        if type(relative_to) is not enums.RelativeTo:
+            raise TypeError('Parameter mode must be of type ' + str(enums.RelativeTo))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 8
-        relative_to_ctype = visatype.ViInt32(relative_to)  # case 8
+        relative_to_ctype = visatype.ViInt32(relative_to.value)  # case 9
         offset_ctype = visatype.ViInt32(offset)  # case 8
         error_code = self._library.niFgen_SetWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_handle_ctype, relative_to_ctype, offset_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -4510,7 +4518,7 @@ class Session(_SessionBase):
         this function.
 
         Args:
-            waveform (int): Specifies the standard waveform that you want the signal generator to
+            waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
                 produce. NI-FGEN sets the FUNC_WAVEFORM attribute to this
                 value.
 
@@ -4570,8 +4578,10 @@ class Session(_SessionBase):
                 this handle to nifgen_ConfigureFreqList to generate the arbitrary
                 sequence.
         '''
+        if type(waveform) is not enums.Waveform:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        waveform_ctype = visatype.ViInt32(waveform)  # case 8
+        waveform_ctype = visatype.ViInt32(waveform.value)  # case 9
         frequency_list_length_ctype = visatype.ViInt32(len(frequency_array))  # case 5
         frequency_array_ctype = (visatype.ViReal64 * len(frequency_array))(*frequency_array)  # case 4
         duration_array_ctype = (visatype.ViReal64 * len(duration_array))(*duration_array)  # case 4
@@ -4607,7 +4617,7 @@ class Session(_SessionBase):
         signal is routed to the output terminal you specify.
 
         Args:
-            signal (int): Specifies the source of the signal to route.
+            signal (enums.Signal): Specifies the source of the signal to route.
                 ****Defined Values****
 
                 +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -4710,8 +4720,10 @@ class Session(_SessionBase):
                 device, refer to the Routes topic for your device or the **Device
                 Routes** tab in MAX.
         '''
+        if type(signal) is not enums.Signal:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Signal))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        signal_ctype = visatype.ViInt32(signal)  # case 8
+        signal_ctype = visatype.ViInt32(signal.value)  # case 9
         signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case 3
         output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case 3
         error_code = self._library.niFgen_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
@@ -4784,7 +4796,7 @@ class Session(_SessionBase):
         Note: Hardware states do not necessarily correspond to NI-FGEN states.
 
         Returns:
-            state (int): Returns the hardware state of the signal generator.
+            state (enums.HardwareState): Returns the hardware state of the signal generator.
 
                 **Defined Values**
 
@@ -4804,7 +4816,7 @@ class Session(_SessionBase):
         state_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFgen_GetHardwareState(vi_ctype, ctypes.pointer(state_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(state_ctype.value)
+        return enums.HardwareState(state_ctype.value)
 
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
@@ -5096,7 +5108,7 @@ class Session(_SessionBase):
         NI 5401/5411/5431.
 
         Args:
-            trigger (int): Sets the clock mode of the signal generator.
+            trigger (enums.Trigger): Sets the clock mode of the signal generator.
 
                 ****Defined Values****
 
@@ -5109,8 +5121,10 @@ class Session(_SessionBase):
                 +----------------------------+
             trigger_id (string):
         '''
+        if type(trigger) is not enums.Trigger:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Trigger))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        trigger_ctype = visatype.ViInt32(trigger)  # case 8
+        trigger_ctype = visatype.ViInt32(trigger.value)  # case 9
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
         error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

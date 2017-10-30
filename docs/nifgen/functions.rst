@@ -1200,7 +1200,7 @@ nifgen.Session methods
         +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
-    :type waveform: int
+    :type waveform: :py:data:`nifgen.Waveform`
     :param frequency_list_length:
 
 
@@ -1400,7 +1400,7 @@ nifgen.Session methods
             which can differ on different processors.
 
 
-    :type byte_order: int
+    :type byte_order: :py:data:`nifgen.ByteOrder`
 
     :rtype: int
     :return:
@@ -1471,7 +1471,7 @@ nifgen.Session methods
             which can differ on different processors.
 
 
-    :type byte_order: int
+    :type byte_order: :py:data:`nifgen.ByteOrder`
 
     :rtype: int
     :return:
@@ -1736,7 +1736,7 @@ nifgen.Session methods
         +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-    :type signal: int
+    :type signal: :py:data:`nifgen.Signal`
     :param signal_identifier:
 
 
@@ -1986,7 +1986,7 @@ nifgen.Session methods
 
 
 
-    :rtype: int
+    :rtype: :py:data:`nifgen.HardwareState`
     :return:
 
 
@@ -2424,7 +2424,7 @@ nifgen.Session methods
         +-------------------------------+
 
 
-    :type trigger: int
+    :type trigger: :py:data:`nifgen.Trigger`
     :param trigger_id:
 
     :type trigger_id: string
@@ -2496,7 +2496,7 @@ nifgen.Session methods
         +----------------------------------------------+-------------------------------------------------------------------------+
 
 
-    :type relative_to: int
+    :type relative_to: :py:data:`nifgen.RelativeTo`
     :param offset:
 
 
@@ -2564,7 +2564,7 @@ nifgen.Session methods
         +----------------------------------------------+-------------------------------------------------------------------------+
 
 
-    :type relative_to: int
+    :type relative_to: :py:data:`nifgen.RelativeTo`
     :param offset:
 
 
