@@ -97,17 +97,11 @@ You can specify a subset of repeated capabilities using the Python index notatio
 '''
 if attributes[attribute]['channel_based'] == 'True':
     attributes[attribute]['documentation']['tip'] = rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
-
-# Handle attribute names that start with a number
-beginning_underscore = ''
-if attributes[attribute]['name'][0].isdigit():
-    beginning_underscore = '_'
-
 %>\
     %if attributes[attribute]['enum']:
-    ${beginning_underscore + attributes[attribute]['name'].lower()} = attributes.AttributeEnum(attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
+    ${attributes[attribute]['python_name']} = attributes.AttributeEnum(attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
     %else:
-    ${beginning_underscore + attributes[attribute]['name'].lower()} = attributes.Attribute${attributes[attribute]['type']}(${attribute})
+    ${attributes[attribute]['python_name']} = attributes.Attribute${attributes[attribute]['type']}(${attribute})
     %endif
 %   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
     '''
