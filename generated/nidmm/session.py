@@ -1745,7 +1745,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niDMM_FetchMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)], int(actual_number_of_points_ctype.value)
 
     def fetch_waveform(self, array_size, maximum_time=-1):
         '''fetch_waveform
@@ -1782,7 +1782,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niDMM_FetchWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [float(waveform_array_ctype[i]) for i in range(array_size_ctype.value)], int(actual_number_of_points_ctype.value)
 
     def get_aperture_time_info(self):
         '''get_aperture_time_info
@@ -2215,7 +2215,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niDMM_ReadMultiPoint(vi_ctype, maximum_time_ctype, array_size_ctype, reading_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(reading_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [float(reading_array_ctype[i]) for i in range(array_size_ctype.value)], int(actual_number_of_points_ctype.value)
 
     def read_status(self):
         '''read_status
@@ -2299,7 +2299,7 @@ class Session(_SessionBase):
         actual_number_of_points_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niDMM_ReadWaveform(vi_ctype, maximum_time_ctype, array_size_ctype, waveform_array_ctype, ctypes.pointer(actual_number_of_points_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(waveform_array_ctype[i]) for i in range(array_size)], int(actual_number_of_points_ctype.value)
+        return [float(waveform_array_ctype[i]) for i in range(array_size_ctype.value)], int(actual_number_of_points_ctype.value)
 
     def reset_with_defaults(self):
         '''reset_with_defaults

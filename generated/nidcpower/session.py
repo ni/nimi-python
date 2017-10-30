@@ -3045,7 +3045,7 @@ class _SessionBase(object):
         actual_count_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, ctypes.pointer(actual_count_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(voltage_measurements_ctype[i]) for i in range(count)], [float(current_measurements_ctype[i]) for i in range(count)], [bool(in_compliance_ctype[i]) for i in range(count)], int(actual_count_ctype.value)
+        return [float(voltage_measurements_ctype[i]) for i in range(count_ctype.value)], [float(current_measurements_ctype[i]) for i in range(count_ctype.value)], [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)], int(actual_count_ctype.value)
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
