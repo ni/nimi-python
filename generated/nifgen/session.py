@@ -2165,182 +2165,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
-    def check_attribute_vi_boolean(self, attribute_id, attribute_value):
-        '''check_attribute_vi_boolean
-
-        Checks the validity of a value you specify for a ViBoolean attribute.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].check_attribute_vi_boolean(attribute_id, attribute_value)
-
-        Args:
-            attribute_id (int): Specifies the ID of an attribute.
-            attribute_value (bool): Specifies the value to which you want to set the attribute. **Default
-                Value**: None
-
-                Note:
-                Some of the values might not be valid depending on the current
-                settings of the instrument session.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
-        attribute_value_ctype = visatype.ViBoolean(attribute_value)  # case 8
-        error_code = self._library.niFgen_CheckAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def check_attribute_vi_int32(self, attribute_id, attribute_value):
-        '''check_attribute_vi_int32
-
-        Checks the validity of a value you specify for a ViInt32 attribute.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].check_attribute_vi_int32(attribute_id, attribute_value)
-
-        Args:
-            attribute_id (int): Specifies the ID of an attribute.
-            attribute_value (int): Specifies the value to which you want to set the attribute. **Default
-                Value**: None
-
-                Note:
-                Some of the values might not be valid depending on the current
-                settings of the instrument session.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
-        attribute_value_ctype = visatype.ViInt32(attribute_value)  # case 8
-        error_code = self._library.niFgen_CheckAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def check_attribute_vi_int64(self, attribute_id, attribute_value):
-        '''check_attribute_vi_int64
-
-        Checks the validity of a value you specify for a ViInt64 attribute.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].check_attribute_vi_int64(attribute_id, attribute_value)
-
-        Args:
-            attribute_id (int): Specifies the ID of an attribute.
-            attribute_value (int): Specifies the value to which you want to set the attribute. **Default
-                Value**: None
-
-                Note:
-                Some of the values might not be valid depending on the current
-                settings of the instrument session.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
-        attribute_value_ctype = visatype.ViInt64(attribute_value)  # case 8
-        error_code = self._library.niFgen_CheckAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def check_attribute_vi_real64(self, attribute_id, attribute_value):
-        '''check_attribute_vi_real64
-
-        Checks the validity of a value you specify for a ViReal64 attribute.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].check_attribute_vi_real64(attribute_id, attribute_value)
-
-        Args:
-            attribute_id (int): Specifies the ID of an attribute.
-            attribute_value (float): Specifies the value to which you want to set the attribute. **Default
-                Value**: None
-
-                Note:
-                Some of the values might not be valid depending on the current
-                settings of the instrument session.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
-        attribute_value_ctype = visatype.ViReal64(attribute_value)  # case 8
-        error_code = self._library.niFgen_CheckAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def check_attribute_vi_session(self, attribute_id):
-        '''check_attribute_vi_session
-
-        Checks the validity of a value you specify for a ViSession attribute.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].check_attribute_vi_session(attribute_id)
-
-        Args:
-            attribute_id (int): Specifies the ID of an attribute.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
-        attribute_value_ctype = visatype.ViSession(self._attribute_value)  # case 1
-        error_code = self._library.niFgen_CheckAttributeViSession(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def check_attribute_vi_string(self, attribute_id, attribute_value):
-        '''check_attribute_vi_string
-
-        Checks the validity of a value you specify for a ViString attribute.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].check_attribute_vi_string(attribute_id, attribute_value)
-
-        Args:
-            attribute_id (int): Specifies the ID of an attribute.
-            attribute_value (string): Specifies the value which you want to verify as a valid value for the
-                attribute.
-
-                **Default Value**: None
-
-                Note:
-                Some of the values might not be valid depending on the current
-                settings of the instrument session.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
-        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case 3
-        error_code = self._library.niFgen_CheckAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def clear_user_standard_waveform(self):
         '''clear_user_standard_waveform
 
@@ -2358,45 +2182,6 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         error_code = self._library.niFgen_ClearUserStandardWaveform(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_amplitude(self, amplitude):
-        '''configure_amplitude
-
-        Configures the amplitude of the standard waveform that you want the
-        signal generator to produce.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].configure_amplitude(amplitude)
-
-        Args:
-            amplitude (float): Specifies the amplitude of the standard waveform that you want the
-                signal generator to produce. This value is the amplitude at the output
-                terminal. NI-FGEN sets the FUNC_AMPLITUDE attribute to
-                this value.
-
-                For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
-                the amplitude to 10.00 V.
-
-                **Units**: peak-to-peak voltage
-
-                **Default Value**: None
-
-                Note:
-                This parameter does not affect signal generator behavior when you set
-                the **waveform** parameter of the configure_standard_waveform
-                function to NIFGEN_VAL_WFM_DC.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        amplitude_ctype = visatype.ViReal64(amplitude)  # case 8
-        error_code = self._library.niFgen_ConfigureAmplitude(vi_ctype, channel_name_ctype, amplitude_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2492,7 +2277,7 @@ class _SessionBase(object):
                 -  create_waveform_i16
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
-                -  create_waveform_from_file_hws
+                -  CreateWaveformFromFileHWS
 
                 These functions return a handle that you use to identify the waveform.
 
@@ -2531,7 +2316,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_custom_fir_filter_coefficients(self, number_of_coefficients, coefficients_array):
+    def configure_custom_fir_filter_coefficients(self, coefficients_array):
         '''configure_custom_fir_filter_coefficients
 
         Sets the FIR filter coefficients used by the onboard signal processing
@@ -2552,7 +2337,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_custom_fir_filter_coefficients(number_of_coefficients, coefficients_array)
+            session['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
 
         Args:
             number_of_coefficients (int): Specifies the number of coefficients. The NI 5441 requires 95.
@@ -2565,13 +2350,13 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        number_of_coefficients_ctype = visatype.ViInt32(number_of_coefficients)  # case 8
+        number_of_coefficients_ctype = visatype.ViInt32(len(coefficients_array))  # case 5
         coefficients_array_ctype = (visatype.ViReal64 * len(coefficients_array))(*coefficients_array)  # case 4
         error_code = self._library.niFgen_ConfigureCustomFIRFilterCoefficients(vi_ctype, channel_name_ctype, number_of_coefficients_ctype, coefficients_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_freq_list(self, frequency_list_handle, amplitude, dc_offset, start_phase):
+    def configure_freq_list(self, frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0):
         '''configure_freq_list
 
         Configures the attributes of the signal generator that affect frequency
@@ -2589,7 +2374,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_freq_list(frequency_list_handle, amplitude, dc_offset, start_phase)
+            session['0,1'].configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
 
         Args:
             frequency_list_handle (int): Specifies the handle of the frequency list that you want the signal
@@ -2651,181 +2436,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_frequency(self, frequency):
-        '''configure_frequency
-
-        Configures the frequency of the standard waveform that you want the
-        signal generator to produce.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].configure_frequency(frequency)
-
-        Args:
-            frequency (float): | Specifies the frequency of the standard waveform that you want the
-                  signal generator to produce. NI-FGEN sets the
-                  FUNC_FREQUENCY attribute to this value.
-
-                **Units**: hertz
-
-                **Default Value**: None
-
-                Note:
-                This parameter does not affect signal generator behavior when you set
-                the **waveform** parameter of the configure_standard_waveform
-                function to NIFGEN_VAL_WFM_DC.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        frequency_ctype = visatype.ViReal64(frequency)  # case 8
-        error_code = self._library.niFgen_ConfigureFrequency(vi_ctype, channel_name_ctype, frequency_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_gain(self, gain):
-        '''configure_gain
-
-        Configures the amount of gain to apply to the waveform.
-
-        Note:
-        The signal generator must not be in the Generating state when you call
-        this function.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].configure_gain(gain)
-
-        Args:
-            gain (float): Specifies the factor by which the signal generator scales the arbitrary
-                waveforms in the sequence. When you create an arbitrary waveform, you
-                must first normalize the data points to a range of –1.00 to +1.00. You
-                can use this parameter to scale the waveform to other ranges. The gain
-                is applied before the offset is added.
-
-                For example, to configure the output signal to range from –2.00 to
-                +2.00 V, set **gain** to 2.00.
-
-                **Units**: unitless
-
-                **Default Value**: None
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        gain_ctype = visatype.ViReal64(gain)  # case 8
-        error_code = self._library.niFgen_ConfigureGain(vi_ctype, channel_name_ctype, gain_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_operation_mode(self, operation_mode):
-        '''configure_operation_mode
-
-        Determines how the signal generator produces waveforms. NI signal
-        generators support only Continuous operation mode. To control trigger
-        mode, use the nifgen_ConfigureTriggerMode function.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].configure_operation_mode(operation_mode)
-
-        Args:
-            operation_mode (int): Specifies the operation mode you want the signal generator to use.
-                NI-FGEN sets the OPERATION_MODE attribute to this value.
-                NI-FGEN supports only one value.
-
-                **Defined Value**: NIFGEN_VAL_OPERATE_CONTINUOUS
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        operation_mode_ctype = visatype.ViInt32(operation_mode)  # case 8
-        error_code = self._library.niFgen_ConfigureOperationMode(vi_ctype, channel_name_ctype, operation_mode_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_output_enabled(self, enabled):
-        '''configure_output_enabled
-
-        Configures the signal generator to generate a signal at the channel
-        output connector.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].configure_output_enabled(enabled)
-
-        Args:
-            enabled (bool): Specifies whether you want to enable or disable the output. NI-FGEN uses
-                this value to set the OUTPUT_ENABLED attribute.
-
-                ****Defined Values****
-
-                **Default Value**: VI_TRUE
-
-                +----------+---------------------+
-                | VI_TRUE  | Enable the output.  |
-                +----------+---------------------+
-                | VI_FALSE | Disable the output. |
-                +----------+---------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        enabled_ctype = visatype.ViBoolean(enabled)  # case 8
-        error_code = self._library.niFgen_ConfigureOutputEnabled(vi_ctype, channel_name_ctype, enabled_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_output_impedance(self, impedance):
-        '''configure_output_impedance
-
-        Configures the output impedance for the channel you specify.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].configure_output_impedance(impedance)
-
-        Args:
-            impedance (float): Specifies the impedance value that you want the signal generator to use.
-                NI-FGEN sets the OUTPUT_IMPEDANCE attribute to this
-                value.
-
-                **Units**: Ω (ohms)
-
-                ****Defined Values****:
-
-                **Default Value**: NIFGEN_VAL_50_OHMS
-
-                +--------------------+------------------------------------------+
-                | NIFGEN_VAL_50_OHMS | Specifies that 50 Ω of impedance is used |
-                +--------------------+------------------------------------------+
-                | NIFGEN_VAL_75_OHMS | Specifies that 75 Ω of impedance is used |
-                +--------------------+------------------------------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        impedance_ctype = visatype.ViReal64(impedance)  # case 8
-        error_code = self._library.niFgen_ConfigureOutputImpedance(vi_ctype, channel_name_ctype, impedance_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_standard_waveform(self, waveform, amplitude, dc_offset, frequency, start_phase):
+    def configure_standard_waveform(self, waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0):
         '''configure_standard_waveform
 
         Configures the following attributes of the signal generator that affect
@@ -2838,7 +2449,7 @@ class _SessionBase(object):
         -  FUNC_START_PHASE
 
         Note:
-        You must call the configure_output_mode function with the
+        You must call the ConfigureOutputMode function with the
         **outputMode** parameter set to NIFGEN_VAL_OUTPUT_FUNC before calling
         this function.
 
@@ -2848,7 +2459,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_standard_waveform(waveform, amplitude, dc_offset, frequency, start_phase)
+            session['0,1'].configure_standard_waveform(waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0)
 
         Args:
             waveform (int): Specifies the standard waveform that you want the signal generator to
@@ -2942,203 +2553,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_synchronization(self, synchronization_source):
-        '''configure_synchronization
-
-        Sets the signal generator to receive a synchronization signal to
-        synchronize two or more NI 5401/5411/5431 signal generators. One signal
-        generator should route a SYNC signal to a RTSI line by calling the
-        nifgen_ExportSignal function (use the nifgen_RouteSignalOut function
-        for the NI 5404), and other signal generators should receive the signal
-        by calling the configure_synchronization function.
-
-        Note:
-        The signal generator must not be in the Generating state when you call
-        this function.
-        Only the NI 5401/5411/5431 signal generators require this function to be
-        called for proper synchronization.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].configure_synchronization(synchronization_source)
-
-        Args:
-            synchronization_source (int): Specify the source of the synchronization signal you want to use.
-
-                ****Defined Values****
-
-                **Default Value**: NIFGEN_VAL_NONE
-
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_NONE   | Specifies that no synchronization source is used.                          |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_0 | Specifies that RTSI 0 or PXI_Trig 0 is used as the synchronization source. |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_1 | Specifies that RTSI 1 or PXI_Trig 1 is used as the synchronization source. |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_2 | Specifies that RTSI 2 or PXI_Trig 2 is used as the synchronization source. |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_3 | Specifies that RTSI 3 or PXI_Trig 3 is used as the synchronization source. |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_4 | Specifies that RTSI 4 or PXI_Trig 4 is used as the synchronization source. |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_5 | Specifies that RTSI 5 or PXI_Trig 5 is used as the synchronization source. |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_6 | Specifies that RTSI 6 or PXI_Trig 6 is used as the synchronization source. |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_TTL0   | Specifies that TTL 0 is used as the synchronization source.                |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_TTL1   | Specifies that TTL 1 is used as the synchronization source.                |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_TTL2   | Specifies that TTL 2 is used as the synchronization source.                |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_TTL3   | Specifies that TTL 3 is used as the synchronization source.                |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_TTL4   | Specifies that TTL 4 is used as the synchronization source.                |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_TTL5   | Specifies that TTL 5 is used as the synchronization source.                |
-                +-------------------+----------------------------------------------------------------------------+
-                | NIFGEN_VAL_TTL6   | Specifies that TTL 6 is used as the synchronization source.                |
-                +-------------------+----------------------------------------------------------------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        synchronization_source_ctype = visatype.ViInt32(synchronization_source)  # case 8
-        error_code = self._library.niFgen_ConfigureSynchronization(vi_ctype, channel_name_ctype, synchronization_source_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_trigger_mode(self, trigger_mode):
-        '''configure_trigger_mode
-
-        Sets the trigger mode for your device. Refer to the *Trigger Modes*
-        topic for your device in the *NI Signal Generators Help* for
-        descriptions of the specific behavior for supported trigger modes.
-
-        Note:
-        The signal generator must not be in the Generating state when you call
-        this function.
-        In Frequency List output mode, Stepped trigger mode is the same as Burst
-        trigger mode.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].configure_trigger_mode(trigger_mode)
-
-        Args:
-            trigger_mode (int): Specifies the trigger mode.
-
-                ****Defined Values****
-
-                **Default Value**: NIFGEN_VAL_CONTINUOUS
-
-                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SINGLE     | The waveform that you describe in the sequence list generates only once by going through the entire staging list. Only one trigger is required to start the waveform generation. You can use Single trigger mode in any output mode. After a trigger is received, the waveform generation starts from the first stage and continues through to the last stage.                                                                                                                                                          |
-                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_CONTINUOUS | The waveform that you describe in the staging list generates infinitely by repeatedly cycling through the staging list. After a trigger is received, the waveform generation starts from the first stage and continues through to the last stage. After the last stage is completed, the waveform generation loops back to the start of the first stage and continues until it is stopped. Only one trigger is required to start the waveform generation.                                                               |
-                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_STEPPED    | After a Start Trigger is received, the waveform described by the first stage generates. Then, the device waits for the next trigger signal. On the next trigger, the waveform described by the second stage generates, and so on. After the staging list is exhausted, the waveform generation returns to the first stage and continues to repeat the cycle.                                                                                                                                                            |
-                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_BURST      | After a Start Trigger is received, the waveform described by the first stage generates until another trigger is received. At the next trigger, the buffer of the previous stage completes, then the waveform described by the second stage generates. After the staging list is exhausted, the waveform generation returns to the first stage and continues to repeat the cycle. In Frequency List mode, the duration instruction is ignored, and the trigger switches the frequency to the next frequency in the list. |
-                +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        trigger_mode_ctype = visatype.ViInt32(trigger_mode)  # case 8
-        error_code = self._library.niFgen_ConfigureTriggerMode(vi_ctype, channel_name_ctype, trigger_mode_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_trigger_source(self, trigger_source):
-        '''configure_trigger_source
-
-        Configures the trigger source. The signal generator responds to a
-        trigger depending on the operation mode in which the signal generator is
-        operating.
-
-        Note:
-        The signal generator must not be in the Generating state when you
-        call this function.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].configure_trigger_source(trigger_source)
-
-        Args:
-            trigger_source (int): Controls which trigger source the signal generator uses.
-
-                ****Defined Values****
-
-                **Default Value**: NIFGEN_VAL_IMMEDIATE
-
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_IMMEDIATE     | Immediate                |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_EXTERNAL      | External (maps to PFI 0) |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_SOFTWARE_TRIG | Software trigger         |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_PXI_STAR      | PXI star                 |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_RTSI_0        | RTSI 0 or PXI_Trig 0     |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_RTSI_1        | RTSI 1 or PXI_Trig 1     |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_RTSI_2        | RTSI 2 or PXI_Trig 2     |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_RTSI_3        | RTSI 3 or PXI_Trig 3     |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_RTSI_4        | RTSI 4 or PXI_Trig 4     |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_RTSI_5        | RTSI 5 or PXI_Trig 5     |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_RTSI_6        | RTSI 6 or PXI_Trig 6     |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_RTSI_7        | RTSI 7 or PXI_Trig 7     |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_TTL0          | TTL 0                    |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_TTL1          | TTL 1                    |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_TTL2          | TTL 2                    |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_TTL3          | TTL 3                    |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_TTL4          | TTL 4                    |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_TTL5          | TTL 5                    |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_TTL6          | TTL 6                    |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_PFI_0         | PFI 0                    |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_PFI_1         | PFI 1                    |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_PFI_2         | PFI 2                    |
-                +--------------------------+--------------------------+
-                | NIFGEN_VAL_PFI_3         | PFI 3                    |
-                +--------------------------+--------------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        trigger_source_ctype = visatype.ViInt32(trigger_source)  # case 8
-        error_code = self._library.niFgen_ConfigureTriggerSource(vi_ctype, channel_name_ctype, trigger_source_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def create_waveform_f64(self, waveform_size, waveform_data_array):
+    def create_waveform_f64(self, waveform_data_array):
         '''create_waveform_f64
 
         Creates an onboard waveform from binary F64 (floating point double) data
@@ -3158,7 +2573,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].create_waveform_f64(waveform_size, waveform_data_array)
+            session['0,1'].create_waveform_f64(waveform_data_array)
 
         Args:
             waveform_size (int): | Specifies the size of the arbitrary waveform that you want to create.
@@ -3190,7 +2605,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 5
         waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
         waveform_handle_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
@@ -3222,7 +2637,7 @@ class _SessionBase(object):
 
         Args:
             file_name (string): The full path and name of the file where the waveform data resides.
-            byte_order (int): Specifies the byte order of the data in the file.
+            byte_order (enums.ByteOrder): Specifies the byte order of the data in the file.
 
                 ****Defined Values****
 
@@ -3246,91 +2661,14 @@ class _SessionBase(object):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
+        if type(byte_order) is not enums.ByteOrder:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ByteOrder))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case 3
-        byte_order_ctype = visatype.ViInt32(byte_order)  # case 8
+        byte_order_ctype = visatype.ViInt32(byte_order.value)  # case 9
         waveform_handle_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFgen_CreateWaveformFromFileF64(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, ctypes.pointer(waveform_handle_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(waveform_handle_ctype.value)
-
-    def create_waveform_from_file_hws(self, file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform):
-        '''create_waveform_from_file_hws
-
-        | Takes the waveform data from the specified HWS (Hierarchical Waveform
-          Storage) file and creates an onboard waveform for use in Arbitrary
-          Waveform or Arbitrary Sequence output mode. The **waveformHandle**
-          returned by this function can be used later for setting the active
-          waveform, changing the data in the waveform, building sequences of
-          waveforms, or deleting the waveform when it is no longer needed.
-        | When the Analog Waveform Editor saves data in an HWS file, it also
-          stores the rate, gain, and offset with the data. If the
-          **useRateFromWaveform** and **useGain&OffsetFromWaveform;** parameters
-          are set to VI_TRUE, this function also sets those properties.
-
-        |
-
-        Note:
-        If you choose to have this function set the gain and offset properties
-        for you, you should **not** use the configure_arb_waveform or
-        configure_arb_sequence functions, as they also set the gain and
-        offset, thereby overriding the values set by this function. Instead, use
-        the ARB_WAVEFORM_HANDLE or
-        ARB_SEQUENCE_HANDLE attributes.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].create_waveform_from_file_hws(file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform)
-
-        Args:
-            file_name (string): The full path and name of the file where the waveform data resides.
-            use_rate_from_waveform (bool): | If you set this parameter input to VI_TRUE and if onboard signal
-                  processing (OSP) is enabled, the rate from the waveform is interpreted
-                  as the data rate, and FGEN sets the data rate attribute for you. In
-                  all other cases, it is interpreted as the sample rate, and FGEN sets
-                  the sample rate attribute for you.
-
-                ****Defined Values****
-
-                |
-                | ****Default Value**:** VI_TRUE
-
-                +----------+--------------------------------+
-                | VI_TRUE  | Use rate from waveform.        |
-                +----------+--------------------------------+
-                | VI_FALSE | Do not use rate from waveform. |
-                +----------+--------------------------------+
-            use_gain_and_offset_from_waveform (bool): | If this input is set to VI_TRUE, NI-FGEN retrieves the gain and
-                  offset values from the specified HWS file and applies them to the
-                  NI-FGEN driver.
-
-                ****Defined Values****
-
-                |
-                | ****Default Value**:** VI_TRUE
-
-                +----------+-------------------------------------------+
-                | VI_TRUE  | Use gain and offset from waveform.        |
-                +----------+-------------------------------------------+
-                | VI_FALSE | Do not use gain and offset from waveform. |
-                +----------+-------------------------------------------+
-
-        Returns:
-            waveform_handle (int): The handle that identifies the new waveform. This handle is used later
-                when referring to this waveform.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case 3
-        use_rate_from_waveform_ctype = visatype.ViBoolean(use_rate_from_waveform)  # case 8
-        use_gain_and_offset_from_waveform_ctype = visatype.ViBoolean(use_gain_and_offset_from_waveform)  # case 8
-        waveform_handle_ctype = visatype.ViInt32()  # case 13
-        error_code = self._library.niFgen_CreateWaveformFromFileHWS(vi_ctype, channel_name_ctype, file_name_ctype, use_rate_from_waveform_ctype, use_gain_and_offset_from_waveform_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
@@ -3359,7 +2697,7 @@ class _SessionBase(object):
 
         Args:
             file_name (string): The full path and name of the file where the waveform data resides.
-            byte_order (int): Specifies the byte order of the data in the file.
+            byte_order (enums.ByteOrder): Specifies the byte order of the data in the file.
 
                 ****Defined Values****
 
@@ -3383,16 +2721,18 @@ class _SessionBase(object):
             waveform_handle (int): The handle that identifies the new waveform. This handle is used later
                 when referring to this waveform.
         '''
+        if type(byte_order) is not enums.ByteOrder:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ByteOrder))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case 3
-        byte_order_ctype = visatype.ViInt32(byte_order)  # case 8
+        byte_order_ctype = visatype.ViInt32(byte_order.value)  # case 9
         waveform_handle_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFgen_CreateWaveformFromFileI16(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
-    def create_waveform_i16(self, waveform_size, waveform_data_array):
+    def create_waveform_i16(self, waveform_data_array):
         '''create_waveform_i16
 
         Creates an onboard waveform from binary 16-bit signed integer (I16) data
@@ -3412,7 +2752,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].create_waveform_i16(waveform_size, waveform_data_array)
+            session['0,1'].create_waveform_i16(waveform_data_array)
 
         Args:
             waveform_size (int): | Specifies the size of the arbitrary waveform that you want to create.
@@ -3443,14 +2783,14 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 5
         waveform_data_array_ctype = (visatype.ViInt16 * len(waveform_data_array))(*waveform_data_array)  # case 4
         waveform_handle_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFgen_CreateWaveformI16(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
-    def define_user_standard_waveform(self, waveform_size, waveform_data_array):
+    def define_user_standard_waveform(self, waveform_data_array):
         '''define_user_standard_waveform
 
         Defines a user waveform for use in either Standard Function or Frequency
@@ -3475,7 +2815,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].define_user_standard_waveform(waveform_size, waveform_data_array)
+            session['0,1'].define_user_standard_waveform(waveform_data_array)
 
         Args:
             waveform_size (int): Specifies the size of the waveform in samples.
@@ -3491,7 +2831,7 @@ class _SessionBase(object):
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
+        waveform_size_ctype = visatype.ViInt32(len(waveform_data_array))  # case 5
         waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
         error_code = self._library.niFgen_DefineUserStandardWaveform(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3546,151 +2886,6 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         script_name_ctype = ctypes.create_string_buffer(script_name.encode(self._encoding))  # case 3
         error_code = self._library.niFgen_DeleteScript(vi_ctype, channel_name_ctype, script_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def disable_analog_filter(self):
-        '''disable_analog_filter
-
-        Disables the analog filter. This function sets the
-        ANALOG_FILTER_ENABLED attribute to VI_FALSE. This
-        setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-        Script output modes. You also can use this setting in Standard Function
-        and Frequency List output modes for user-defined waveforms.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].disable_analog_filter()
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        error_code = self._library.niFgen_DisableAnalogFilter(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def disable_digital_filter(self):
-        '''disable_digital_filter
-
-        Disables the digital filter. This function sets the
-        DIGITAL_FILTER_ENABLED attribute to VI_FALSE. This
-        setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-        Script output modes. You also can use this setting in Standard Function
-        and Frequency List output modes for user-defined waveforms.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].disable_digital_filter()
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        error_code = self._library.niFgen_DisableDigitalFilter(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def disable_digital_patterning(self):
-        '''disable_digital_patterning
-
-        Disables digital pattern output on the signal generator. This function
-        sets the DIGITAL_PATTERN_ENABLED attribute to VI_FALSE.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].disable_digital_patterning()
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        error_code = self._library.niFgen_DisableDigitalPatterning(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def enable_analog_filter(self, filter_correction_frequency):
-        '''enable_analog_filter
-
-        Configures the analog filter for the device. This function sets the
-        ANALOG_FILTER_ENABLED attribute to VI_TRUE. This
-        setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-        Script output modes. You also can use this setting in Standard Function
-        and Frequency List output modes for user-defined waveforms.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].enable_analog_filter(filter_correction_frequency)
-
-        Args:
-            filter_correction_frequency (float): Specifies the filter correction frequency of the analog filter. On the
-                NI 5411 and NI 5431, NI-FGEN adjusts signal amplitude to compensate for
-                the filter attenuation at that frequency. To disable amplitude
-                correction, set **filterCorrectionFrequency** to 0. For Standard
-                Function output mode, **filterCorrectionFrequency** typically should be
-                set to the same value as the frequency of the standard waveform.
-
-                **Units**: hertz
-
-                **Default Value**: 0
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        filter_correction_frequency_ctype = visatype.ViReal64(filter_correction_frequency)  # case 8
-        error_code = self._library.niFgen_EnableAnalogFilter(vi_ctype, channel_name_ctype, filter_correction_frequency_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def enable_digital_filter(self):
-        '''enable_digital_filter
-
-        Enables the digital filter by setting the
-        DIGITAL_FILTER_ENABLED attribute to VI_TRUE. This
-        setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-        Script output modes. You also can use this setting in Standard Function
-        and Frequency List output modes for user-defined waveforms.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].enable_digital_filter()
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        error_code = self._library.niFgen_EnableDigitalFilter(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def enable_digital_patterning(self):
-        '''enable_digital_patterning
-
-        Enables digital pattern output on the signal generator. This function
-        sets the DIGITAL_PATTERN_ENABLED attribute to VI_TRUE.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].enable_digital_patterning()
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        error_code = self._library.niFgen_EnableDigitalPatterning(vi_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3958,7 +3153,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
 
-    def get_fir_filter_coefficients(self, array_size, coefficients_array, number_of_coefficients_read):
+    def get_fir_filter_coefficients(self):
         '''get_fir_filter_coefficients
 
         | Returns the FIR filter coefficients used by the onboard signal
@@ -3989,30 +3184,30 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].get_fir_filter_coefficients(array_size, coefficients_array, number_of_coefficients_read)
+            session['0,1'].get_fir_filter_coefficients()
 
         Args:
             array_size (int): Specifies the size of the coefficient array
-            coefficients_array (list of float): Specifies the array of data the onboard signal processor uses for the
-                FIR filter coefficients. For the NI 5441, provide a symmetric array of
-                95 coefficients to this parameter. The array must have at least as many
-                elements as the value that you specify in the **numberOfCoefficients**
-                parameter in this function.
-                The coefficients should range between –1.00 and +1.00.
-            number_of_coefficients_read (list of int): Specifies the array of data containing the number of coefficients you
+
+        Returns:
+            number_of_coefficients_read (int): Specifies the array of data containing the number of coefficients you
                 want to read.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        array_size_ctype = visatype.ViInt32(array_size)  # case 8
-        coefficients_array_ctype = (visatype.ViReal64 * len(coefficients_array))(*coefficients_array)  # case 4
-        number_of_coefficients_read_ctype = (visatype.ViInt32 * len(number_of_coefficients_read))(*number_of_coefficients_read)  # case 4
-        error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, number_of_coefficients_read_ctype)
+        array_size_ctype = visatype.ViInt32()  # case 6
+        coefficients_array_ctype = None  # case 11
+        number_of_coefficients_read_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, ctypes.pointer(number_of_coefficients_read_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        array_size_ctype = visatype.ViInt32(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        coefficients_array_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, ctypes.pointer(number_of_coefficients_read_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
 
-    def initialize_with_channels(self, resource_name, reset_device, option_string):
-        '''initialize_with_channels
+    def _initialize_with_channels(self, resource_name, reset_device=False, option_string=''):
+        '''_initialize_with_channels
 
         Creates and returns a new NI-FGEN session to the specified channel of a
         waveform generator that is used in all subsequent NI-FGEN function
@@ -4024,7 +3219,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].initialize_with_channels(resource_name, reset_device, option_string)
+            session['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string='')
 
         Args:
             resource_name (string): Caution:
@@ -4147,153 +3342,6 @@ class _SessionBase(object):
         error_code = self._library.niFgen_InitializeWithChannels(resource_name_ctype, channel_name_ctype, reset_device_ctype, option_string_ctype, ctypes.pointer(vi_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
-
-    def reset_attribute(self, attribute_id):
-        '''reset_attribute
-
-        Resets the attribute to its default value.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].reset_attribute(attribute_id)
-
-        Args:
-            attribute_id (int): Specifies the ID of an attribute.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        attribute_id_ctype = visatype.ViAttr(attribute_id)  # case 8
-        error_code = self._library.niFgen_ResetAttribute(vi_ctype, channel_name_ctype, attribute_id_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def route_signal_out(self, route_signal_from, route_signal_to):
-        '''route_signal_out
-
-        Routes various signals in the signal generator to the RTSI lines and
-        front panel terminals.
-
-        +---+--------------------------------------------------------------------------------------------------+
-        |   | You can clear a previously routed signal by routing NIFGEN_VAL_NONE to the destination terminal. |
-        +---+--------------------------------------------------------------------------------------------------+
-        |   | You can clear a previously routed signal by routing NIFGEN_VAL_NONE to the destination terminal. |
-        +---+--------------------------------------------------------------------------------------------------+
-
-        Note:
-        The signal generator must not be in the Generating state when you call
-        this function.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].route_signal_out(route_signal_from, route_signal_to)
-
-        Args:
-            route_signal_from (int): Various signals can be routed out the RTSI lines.
-
-                ****Defined Values****
-
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_NONE                    | Nothing Sending this value clears the line.                                                                                                                                                                                                                                                                     |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_MARKER                  | Marker Event                                                                                                                                                                                                                                                                                                    |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SYNC_OUT                | SYNC signal This signal normally appears on the SYNC OUT front panel connector.                                                                                                                                                                                                                                 |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_OUT_START_TRIGGER       | Start Trigger The Start Trigger is normally generated at the start of the sequence. Call the nifgen_ConfigureTriggerSource function to receive this trigger.                                                                                                                                                    |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_BOARD_CLOCK             | Signal generator board clock The signal generator board clock is 20 MHz for the NI PCI-5401/5411/5431. The NI PXI-5404 has a 20 MHz board clock, and the NI PXI-5421 has integer divisors of 100 MHz. The NI PXI-5401/5411/5431 does not support routing a Board Clock to RTSI lines or front panel connectors. |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SYNCHRONIZATION         | Synchronization strobe A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators. Call the nifgen_ConfigureSynchronization function to receive the strobe.                                                                                                   |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_SOFTWARE_TRIG           | Software trigger                                                                                                                                                                                                                                                                                                |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_OUT_UPDATE              | —                                                                                                                                                                                                                                                                                                               |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_REF_OUT                 | Reference Clock out front panel connector                                                                                                                                                                                                                                                                       |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_PXI_CLK10               | PXI 10 MHz backplane Reference Clock                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_PXI_STAR                | PXI star trigger line                                                                                                                                                                                                                                                                                           |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_PFI_0                   | PFI 0                                                                                                                                                                                                                                                                                                           |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_0                  | RTSI 0 or PXI_Trig 0                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_1                  | RTSI 1 or PXI_Trig 1                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_2                  | RTSI 2 or PXI_Trig 2                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_3                  | RTSI 3 or PXI_Trig 3                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_4                  | RTSI 4 or PXI_Trig 4                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_5                  | RTSI 5 or PXI_Trig 5                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_6                  | RTSI 6 or PXI_Trig 6                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_RTSI_7                  | RTSI 7 or PXI_Trig 7                                                                                                                                                                                                                                                                                            |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_REF_CLOCK_RTSI_CLOCK    | RTSI clock                                                                                                                                                                                                                                                                                                      |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK | Onboard Reference Clock                                                                                                                                                                                                                                                                                         |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_UPDATE_CLOCK            | Sample Clock                                                                                                                                                                                                                                                                                                    |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_PLL_REF_SOURCE          | PLL Reference Clock                                                                                                                                                                                                                                                                                             |
-                +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-            route_signal_to (int): The possible RTSI lines to which you can route a signal.
-
-                ****Defined Values****
-
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_0               | RTSI 0 or PXI_Trig 0                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_1               | RTSI 1 or PXI_Trig 1                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_2               | RTSI 2 or PXI_Trig 2                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_3               | RTSI 3 or PXI_Trig 3                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_4               | RTSI 4 or PXI_Trig 4                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_5               | RTSI 5 or PXI_Trig 5                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_6               | RTSI 6 or PXI_Trig 6                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_RTSI_7               | RTSI 7 or PXI_Trig 7                      |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_REF_CLOCK_RTSI_CLOCK | RTSI clock                                |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_REF_OUT              | Reference Clock out front panel connector |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PFI_0                | PFI 0                                     |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PFI_1                | PFI 1                                     |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PFI_4                | PFI 4                                     |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PFI_5                | PFI 5                                     |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PXI_STAR             | PXI star trigger line                     |
-                +---------------------------------+-------------------------------------------+
-                | NIFGEN_VAL_PXI_CLK10            | PXI 10 MHz backplane Reference Clock      |
-                +---------------------------------+-------------------------------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        route_signal_from_ctype = visatype.ViInt32(route_signal_from)  # case 8
-        route_signal_to_ctype = visatype.ViInt32(route_signal_to)  # case 8
-        error_code = self._library.niFgen_RouteSignalOut(vi_ctype, channel_name_ctype, route_signal_from_ctype, route_signal_to_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
@@ -4588,7 +3636,7 @@ class _SessionBase(object):
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
-            relative_to (int): Specifies the reference position in the waveform. This position and
+            relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
                 waveform.
 
@@ -4602,10 +3650,12 @@ class _SessionBase(object):
             offset (int): Specifies the offset from the **relativeTo** parameter at which to start
                 loading the data into the waveform.
         '''
+        if type(relative_to) is not enums.RelativeTo:
+            raise TypeError('Parameter mode must be of type ' + str(enums.RelativeTo))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
-        relative_to_ctype = visatype.ViInt32(relative_to)  # case 8
+        relative_to_ctype = visatype.ViInt32(relative_to.value)  # case 9
         offset_ctype = visatype.ViInt32(offset)  # case 8
         error_code = self._library.niFgen_SetNamedWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_name_ctype, relative_to_ctype, offset_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -4640,7 +3690,7 @@ class _SessionBase(object):
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
                 the nifgen_AllocateWaveform function.
-            relative_to (int): Specifies the reference position in the waveform. This position and
+            relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
                 waveform.
 
@@ -4654,42 +3704,18 @@ class _SessionBase(object):
             offset (int): Specifies the offset from **relativeTo** at which to start loading the
                 data into the waveform.
         '''
+        if type(relative_to) is not enums.RelativeTo:
+            raise TypeError('Parameter mode must be of type ' + str(enums.RelativeTo))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 8
-        relative_to_ctype = visatype.ViInt32(relative_to)  # case 8
+        relative_to_ctype = visatype.ViInt32(relative_to.value)  # case 9
         offset_ctype = visatype.ViInt32(offset)  # case 8
         error_code = self._library.niFgen_SetWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_handle_ctype, relative_to_ctype, offset_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_binary16_analog_static_value(self, value):
-        '''write_binary16_analog_static_value
-
-        | Writes the 16-bit value to the DAC, which could be output as a DC
-          Voltage.
-        | This function writes to the DAC only when in an external calibration
-          session.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session['0,1'].write_binary16_analog_static_value(value)
-
-        Args:
-            value (int): The value to write.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        value_ctype = visatype.ViInt16(value)  # case 8
-        error_code = self._library.niFgen_WriteBinary16AnalogStaticValue(vi_ctype, channel_name_ctype, value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def write_binary16_waveform(self, waveform_handle, size, data):
+    def write_binary16_waveform(self, waveform_handle, data):
         '''write_binary16_waveform
 
         Writes binary data to the waveform in onboard memory. The waveform
@@ -4711,7 +3737,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_binary16_waveform(waveform_handle, size, data)
+            session['0,1'].write_binary16_waveform(waveform_handle, data)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -4726,13 +3752,13 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 8
-        size_ctype = visatype.ViInt32(size)  # case 8
+        size_ctype = visatype.ViInt32(len(data))  # case 5
         data_ctype = (visatype.ViInt16 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteBinary16Waveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_named_waveform_f64(self, waveform_name, size, data):
+    def write_named_waveform_f64(self, waveform_name, data):
         '''write_named_waveform_f64
 
         Writes floating-point data to the waveform in onboard memory. The
@@ -4761,7 +3787,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_named_waveform_f64(waveform_name, size, data)
+            session['0,1'].write_named_waveform_f64(waveform_name, data)
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
@@ -4774,13 +3800,13 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
-        size_ctype = visatype.ViInt32(size)  # case 8
+        size_ctype = visatype.ViInt32(len(data))  # case 5
         data_ctype = (visatype.ViReal64 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteNamedWaveformF64(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_named_waveform_i16(self, waveform_name, size, data):
+    def write_named_waveform_i16(self, waveform_name, data):
         '''write_named_waveform_i16
 
         Writes binary data to the named waveform in onboard memory.
@@ -4800,7 +3826,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_named_waveform_i16(waveform_name, size, data)
+            session['0,1'].write_named_waveform_i16(waveform_name, data)
 
         Args:
             waveform_name (string): Specifies the name to associate with the allocated waveform.
@@ -4813,7 +3839,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case 3
-        size_ctype = visatype.ViInt32(size)  # case 8
+        size_ctype = visatype.ViInt32(len(data))  # case 5
         data_ctype = (visatype.ViInt16 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteNamedWaveformI16(vi_ctype, channel_name_ctype, waveform_name_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -4846,7 +3872,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_waveform(self, waveform_handle, size, data):
+    def write_waveform(self, waveform_handle, data):
         '''write_waveform
 
         Writes floating-point data to the waveform in onboard memory. The
@@ -4875,7 +3901,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].write_waveform(waveform_handle, size, data)
+            session['0,1'].write_waveform(waveform_handle, data)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -4889,7 +3915,7 @@ class _SessionBase(object):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         waveform_handle_ctype = visatype.ViInt32(waveform_handle)  # case 8
-        size_ctype = visatype.ViInt32(size)  # case 8
+        size_ctype = visatype.ViInt32(len(data))  # case 5
         data_ctype = (visatype.ViReal64 * len(data))(*data)  # case 4
         error_code = self._library.niFgen_WriteWaveform(vi_ctype, channel_name_ctype, waveform_handle_ctype, size_ctype, data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -4933,10 +3959,10 @@ class _RepeatedCapability(_SessionBase):
 class Session(_SessionBase):
     '''An NI-FGEN session to a National Instruments Signal Generator.'''
 
-    def __init__(self, resource_name, id_query, reset_device, option_string):
+    def __init__(self, resource_name, reset_device=False, option_string=''):
         super(Session, self).__init__(repeated_capability='')
-        self._vi = 0  # This must be set before calling _init_with_options().
-        self._vi = self._init_with_options(resource_name, id_query, reset_device, option_string)
+        self._vi = 0  # This must be set before calling _initialize_with_channels().
+        self._vi = self._initialize_with_channels(resource_name, reset_device, option_string)
         self._is_frozen = True
 
     def __enter__(self):
@@ -5065,7 +4091,7 @@ class Session(_SessionBase):
                 -  create_waveform_i16
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
-                -  create_waveform_from_file_hws
+                -  CreateWaveformFromFileHWS
 
                 **Defined Value**:
 
@@ -5139,70 +4165,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_channels(self, channels):
-        '''configure_channels
-
-        Configures the channels to use with the instrument specified in the
-        **vi** parameter. If you call this function, you must call it
-        immediately after initializing your session and before configuring
-        attributes or writing data.
-
-        Args:
-            channels (string): Specifies the channel on which all subsequent channel-based attributes
-                in the session are set. Valid values are non-negative integers. For
-                example, 0 is the only valid value on devices with one channel, while
-                devices with two channels support values of 0 and 1. You can specify
-                more than one channel by inserting commas between values (for example,
-                0,1).
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        channels_ctype = ctypes.create_string_buffer(channels.encode(self._encoding))  # case 3
-        error_code = self._library.niFgen_ConfigureChannels(vi_ctype, channels_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_clock_mode(self, clock_mode):
-        '''configure_clock_mode
-
-        Selects the clock mode for the signal generator.
-
-        Some signal generators allow you to switch the Sample Clock to
-        High-Resolution or Automatic Sampling mode with this function.
-
-        When you select NIFGEN_VAL_DIVIDE_DOWN, NI-FGEN rounds the sample
-        rate to a frequency that can be achieved by dividing down the board
-        clock (Sample Clock timebase). However, if you select
-        NIFGEN_VAL_HIGH_RESOLUTION, you can set the sample rate to any value.
-        If you select NIFGEN_VAL_AUTOMATIC, NI-FGEN selects the clock mode
-        based on the sample rate, using divide-down sampling when possible.
-
-        Note:
-        The signal generator must not be in the Generating state when you call
-        this function.
-
-        Args:
-            clock_mode (int): Sets the clock mode of the signal generator.
-
-                ****Defined Values****
-
-                **Default Value**: NIFGEN_VAL_HIGH_RESOLUTION (NI 5450, NI 5451),
-                NIFGEN_VAL_DIVIDE_DOWN (all other devices)
-
-                +----------------------------+-----------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_DIVIDE_DOWN     | **Divide down sampling**—Sample rates are generated by dividing the source frequency.               |
-                +----------------------------+-----------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_HIGH_RESOLUTION | **High resolution sampling**—Sample rate is generated by a high-resolution clock source.            |
-                +----------------------------+-----------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_AUTOMATIC       | **Automatic Selection**—NI-FGEN selects between the divide-down and high-resolution clocking modes. |
-                +----------------------------+-----------------------------------------------------------------------------------------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        clock_mode_ctype = visatype.ViInt32(clock_mode)  # case 8
-        error_code = self._library.niFgen_ConfigureClockMode(vi_ctype, clock_mode_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_digital_edge_script_trigger(self, trigger_id, source, edge):
+    def configure_digital_edge_script_trigger(self, trigger_id, source, edge=enums.ScriptTriggerDigitalEdgeEdge.RISING_EDGE):
         '''configure_digital_edge_script_trigger
 
         Configures the specified Script Trigger for digital edge triggering.
@@ -5264,7 +4227,7 @@ class Session(_SessionBase):
                 +-------------+-----------------------------------+
                 | "PXI_Star"  | PXI star trigger line             |
                 +-------------+-----------------------------------+
-            edge (int): Specifies the edge to detect.
+            edge (enums.ScriptTriggerDigitalEdgeEdge): Specifies the edge to detect.
 
                 ****Defined Values****
 
@@ -5276,15 +4239,17 @@ class Session(_SessionBase):
                 | NIFGEN_VAL_FALLING_EDGE | Occurs when the signal transitions from high level to low level. |
                 +-------------------------+------------------------------------------------------------------+
         '''
+        if type(edge) is not enums.ScriptTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScriptTriggerDigitalEdgeEdge))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case 3
-        edge_ctype = visatype.ViInt32(edge)  # case 8
+        edge_ctype = visatype.ViInt32(edge.value)  # case 9
         error_code = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_start_trigger(self, source, edge):
+    def configure_digital_edge_start_trigger(self, source, edge=enums.StartTriggerDigitalEdgeEdge.RISING_EDGE):
         '''configure_digital_edge_start_trigger
 
         Configures the Start Trigger for digital edge triggering.
@@ -5331,7 +4296,7 @@ class Session(_SessionBase):
                 +-------------+-----------------------------------+
                 | "PXI_Star"  | PXI star trigger line             |
                 +-------------+-----------------------------------+
-            edge (int): Specifies the edge to detect.
+            edge (enums.StartTriggerDigitalEdgeEdge): Specifies the edge to detect.
 
                 ****Defined Values****
 
@@ -5343,9 +4308,11 @@ class Session(_SessionBase):
                 | NIFGEN_VAL_FALLING_EDGE | Occurs when the signal transitions from high level to low level. |
                 +-------------------------+------------------------------------------------------------------+
         '''
+        if type(edge) is not enums.StartTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.StartTriggerDigitalEdgeEdge))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case 3
-        edge_ctype = visatype.ViInt32(edge)  # case 8
+        edge_ctype = visatype.ViInt32(edge.value)  # case 9
         error_code = self._library.niFgen_ConfigureDigitalEdgeStartTrigger(vi_ctype, source_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -5433,366 +4400,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_output_mode(self, output_mode):
-        '''configure_output_mode
-
-        Configures the output mode of the signal generator. The output mode
-        determines how the signal generator produces waveforms. For example, you
-        can select to generate a standard waveform, an arbitrary waveform, or a
-        sequence of arbitrary waveforms.
-
-        Note:
-        The signal generator must not be in the Generating state when you
-        call this function.
-
-        Args:
-            output_mode (int): Specifies the output mode that you want the signal generator to use. The
-                value you specify determines which functions and attributes you can use
-                to configure the waveform the signal generator produces.
-                Refer to the OUTPUT_MODE attribute for more information
-                about setting this parameter.
-                ****Defined Values****
-                **Default Value**: NIFGEN_VAL_OUTPUT_FUNC
-
-                +-----------------------------+-------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_OUTPUT_FUNC      | **Standard Function mode**—Generates standard function waveforms such as sine, square, triangle, and so on. |
-                +-----------------------------+-------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_OUTPUT_FREQ_LIST | **Frequency List mode**—Generates a standard function using a list of frequencies you define.               |
-                +-----------------------------+-------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_OUTPUT_ARB       | **Arbitrary waveform mode**—Generates waveforms from user-created/provided waveform arrays of numeric data. |
-                +-----------------------------+-------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_OUTPUT_SEQ       | **Arbitrary sequence mode**—Generates downloaded waveforms in an order your specify.                        |
-                +-----------------------------+-------------------------------------------------------------------------------------------------------------+
-                | NIFGEN_VAL_OUTPUT_SCRIPT    | **Script mode**—Allows you to use scripting to link and loop multiple waveforms in complex combinations.    |
-                +-----------------------------+-------------------------------------------------------------------------------------------------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        output_mode_ctype = visatype.ViInt32(output_mode)  # case 8
-        error_code = self._library.niFgen_ConfigureOutputMode(vi_ctype, output_mode_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_p2_p_endpoint_fullness_start_trigger(self, p2p_endpoint_fullness_level):
-        '''configure_p2_p_endpoint_fullness_start_trigger
-
-        Configures the Start Trigger for to detect peer-to-peer endpoint
-        fullness. Generation begins when the number of samples in the
-        peer-to-peer endpoint reaches the threshold indicated by the
-        **p2pEndpointFullnessLevel** parameter.
-
-        Note:
-        Because there is an additional internal FIFO in the signal generator,
-        the writer peer must actually write 2,304 bytes more than the quantity
-        of data specified by this function to satisfy the trigger level.
-
-        Args:
-            p2p_endpoint_fullness_level (int): Specifies the quantity of data in the FIFO endpoint that asserts the
-                trigger. The value –1 specifies that NI-FGEN uses a default value based
-                on your endpoint configuration.
-
-                **Units**: samples per channel
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        p2p_endpoint_fullness_level_ctype = visatype.ViInt32(p2p_endpoint_fullness_level)  # case 8
-        error_code = self._library.niFgen_ConfigureP2PEndpointFullnessStartTrigger(vi_ctype, p2p_endpoint_fullness_level_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_ref_clock_frequency(self, reference_clock_frequency):
-        '''configure_ref_clock_frequency
-
-        Configures the signal generator reference clock frequency. The signal
-        generator uses the reference clock to derive frequencies and sample
-        rates when generating waveforms.
-
-        Note:
-        The signal generator must not be in the Generating state when you
-        call this function.
-
-        Args:
-            reference_clock_frequency (float): The reference clock frequency in Hz.
-
-                **Default Value**: 10000000
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        reference_clock_frequency_ctype = visatype.ViReal64(reference_clock_frequency)  # case 8
-        error_code = self._library.niFgen_ConfigureRefClockFrequency(vi_ctype, reference_clock_frequency_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_ref_clock_source(self, reference_clock_source):
-        '''configure_ref_clock_source
-
-        Configures the signal generator reference clock source. The signal
-        generator uses the reference clock to derive frequencies and sample
-        rates when generating waveforms.
-
-        Args:
-            reference_clock_source (int): Specifies the reference clock source that you want the signal generator
-                to use. NI-FGEN sets the REF_CLOCK_SOURCE attribute to
-                this value.
-
-                The signal generator derives the frequencies and sample rates that it
-                uses to generate waveforms from the source you specify.
-
-                For example, when you set this parameter to
-                NIFGEN_VAL_REF_CLOCK_EXTERNAL, the signal generator uses the signal
-                it receives at its external clock terminal as the reference clock.
-
-                ****Defined Values****
-
-                **Default Value**: NIFGEN_VAL_REF_CLOCK_INTERNAL
-
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_REF_CLOCK_INTERNAL   | Internal clock source        |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_REF_CLOCK_EXTERNAL   | External clock source        |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_REF_CLOCK_RTSI_CLOCK | RTSI clock                   |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_REF_CLOCK_TTL7       | TTL 7                        |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_PXI_CLK10            | PXI 10 MHz clock             |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_REF_IN               | External clock source        |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_RTSI_0               | RTSI 0                       |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_RTSI_1               | RTSI 1                       |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_RTSI_2               | RTSI 2                       |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_RTSI_3               | RTSI 3                       |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_RTSI_4               | RTSI 4                       |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_RTSI_5               | RTSI 5                       |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_RTSI_6               | RTSI 6                       |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_RTSI_7               | RTSI 7                       |
-                +---------------------------------+------------------------------+
-                | NIFGEN_VAL_CLK_IN               | CLK IN front panel connector |
-                +---------------------------------+------------------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        reference_clock_source_ctype = visatype.ViInt32(reference_clock_source)  # case 8
-        error_code = self._library.niFgen_ConfigureRefClockSource(vi_ctype, reference_clock_source_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_reference_clock(self, reference_clock_source, reference_clock_frequency):
-        '''configure_reference_clock
-
-        Configures the signal generator Reference Clock source and frequency.
-        The signal generator uses the Reference Clock to tune the Sample Clock
-        timebase of the signal generator so that the frequency stability and
-        accuracy of the Sample Clock timebase matches that of the Reference
-        Clock.
-
-        Args:
-            reference_clock_source (string): Specifies the source for the Reference Clock. For example, when you set
-                this parameter to "ClkIn," the signal generator uses the signal it
-                receives at its CLK IN front panel connector as the Reference Clock. The
-                Reference Clock phase-locks with the signal generator Sample Clock
-                timebase to allow the frequency stability and accuracy of the Sample
-                Clock timebase to match that of the Reference Clock.
-                ****Defined Values****
-                **Default Value**: "None"
-
-                +-------------------------+----------------------------------+
-                | "None"                  | No Reference Clock               |
-                +-------------------------+----------------------------------+
-                | "PXI_Clk"               | 10 MHz backplane Reference Clock |
-                +-------------------------+----------------------------------+
-                | "ClkIn"                 | CLK IN front panel connector     |
-                +-------------------------+----------------------------------+
-                | "OnboardReferenceClock" | Onboard Reference Clock          |
-                +-------------------------+----------------------------------+
-                | "RTSI7"                 | RTSI line 7                      |
-                +-------------------------+----------------------------------+
-                | "RefIn"                 | REF IN front panel connector     |
-                +-------------------------+----------------------------------+
-
-                Note:
-                The following **Defined Values** are examples of possible Reference
-                Clock sources. For a complete list of the Reference Clock sources
-                available on your device, refer to the Routes topic for your device or
-                the **Device Routes** tab in MAX.
-            reference_clock_frequency (float): The Reference Clock frequency in hertz.
-
-                **Default Value**: 10000000
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        reference_clock_source_ctype = ctypes.create_string_buffer(reference_clock_source.encode(self._encoding))  # case 3
-        reference_clock_frequency_ctype = visatype.ViReal64(reference_clock_frequency)  # case 8
-        error_code = self._library.niFgen_ConfigureReferenceClock(vi_ctype, reference_clock_source_ctype, reference_clock_frequency_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_sample_clock_source(self, sample_clock_source):
-        '''configure_sample_clock_source
-
-        Sets the source of the Sample Clock (Update Clock) of the signal
-        generator.
-
-        Args:
-            sample_clock_source (string): Specifies the Sample Clock source the signal generator uses.
-                ****Defined Values****
-                **Default Value**: "OnboardClock"
-
-                +----------------+-----------------------------------+
-                | "OnboardClock" | Onboard Clock                     |
-                +----------------+-----------------------------------+
-                | "ClkIn"        | CLK IN front panel connector      |
-                +----------------+-----------------------------------+
-                | "PXI_Star"     | PXI star trigger line             |
-                +----------------+-----------------------------------+
-                | "PXI_Trig0"    | PXI trigger line 0 or RTSI line 0 |
-                +----------------+-----------------------------------+
-                | "PXI_Trig1"    | PXI trigger line 1 or RTSI line 1 |
-                +----------------+-----------------------------------+
-                | "PXI_Trig2"    | PXI trigger line 2 or RTSI line 2 |
-                +----------------+-----------------------------------+
-                | "PXI_Trig3"    | PXI trigger line 3 or RTSI line 3 |
-                +----------------+-----------------------------------+
-                | "PXI_Trig4"    | PXI trigger line 4 or RTSI line 4 |
-                +----------------+-----------------------------------+
-                | "PXI_Trig5"    | PXI trigger line 5 or RTSI line 5 |
-                +----------------+-----------------------------------+
-                | "PXI_Trig6"    | PXI trigger line 6 or RTSI line 6 |
-                +----------------+-----------------------------------+
-                | "PXI_Trig7"    | PXI trigger line 7 or RTSI line 7 |
-                +----------------+-----------------------------------+
-                | "DDC_ClkIn"    | Sample Clock from DDC connector   |
-                +----------------+-----------------------------------+
-
-                Note:
-                The following **Defined Values** are examples of possible Sample
-                Clock sources. For a complete list of the Sample Clock sources available
-                on your device, refer to the Routes topic for your device or the
-                **Device Routes** tab in MAX.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sample_clock_source_ctype = ctypes.create_string_buffer(sample_clock_source.encode(self._encoding))  # case 3
-        error_code = self._library.niFgen_ConfigureSampleClockSource(vi_ctype, sample_clock_source_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_sample_rate(self, sample_rate):
-        '''configure_sample_rate
-
-        Configures the ARB_SAMPLE_RATE attribute, which
-        determines the rate at which the signal generator produces arbitrary
-        waveforms. When you configure the signal generator to produce an
-        arbitrary sequence, this value is the sample rate for all arbitrary
-        waveforms in the sequence.
-
-        Note:
-        The signal generator must not be in the Generating state when you call
-        this function.
-
-        Args:
-            sample_rate (float): Specifies the sample rate at which you want the signal generator to
-                generate arbitrary waveforms. NI-FGEN sets the
-                ARB_SAMPLE_RATE attribute to this value.
-
-                **Units**: Samples/s
-
-                **Default Value**: None
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sample_rate_ctype = visatype.ViReal64(sample_rate)  # case 8
-        error_code = self._library.niFgen_ConfigureSampleRate(vi_ctype, sample_rate_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_software_edge_script_trigger(self, trigger_id):
-        '''configure_software_edge_script_trigger
-
-        Configures the specified Script Trigger for software edge triggering.
-
-        Args:
-            trigger_id (string): Specifies the Script Trigger used for triggering.
-
-                **Defined Values**
-
-                **Default Value**: "ScriptTrigger0"
-
-                +------------------+------------------+
-                | "ScriptTrigger0" | Script Trigger 0 |
-                +------------------+------------------+
-                | "ScriptTrigger1" | Script Trigger 1 |
-                +------------------+------------------+
-                | "ScriptTrigger2" | Script Trigger 2 |
-                +------------------+------------------+
-                | "ScriptTrigger3" | Script Trigger 3 |
-                +------------------+------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
-        error_code = self._library.niFgen_ConfigureSoftwareEdgeScriptTrigger(vi_ctype, trigger_id_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_software_edge_start_trigger(self):
-        '''configure_software_edge_start_trigger
-
-        Configures the Start Trigger for software edge triggering.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_ConfigureSoftwareEdgeStartTrigger(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_update_clock_source(self, update_clock_source):
-        '''configure_update_clock_source
-
-        Sets the source of the update clock of the signal generator. The source
-        can be internal or external.
-
-        Args:
-            update_clock_source (int): Specifies the update clock source.
-
-                ****Defined Values****
-
-                **Default Value**: NIFGEN_VAL_INTERNAL
-
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_INTERNAL   | Internal clock source           |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_EXTERNAL   | External clock source           |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_PXI_STAR   | PXI star                        |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_RTSI_0     | RTSI 0 or PXI_Trig 0            |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_RTSI_1     | RTSI 1 or PXI_Trig 1            |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_RTSI_2     | RTSI 2 or PXI_Trig 2            |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_RTSI_3     | RTSI 3 or PXI_Trig 3            |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_RTSI_4     | RTSI 4 or PXI_Trig 4            |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_RTSI_5     | RTSI 5 or PXI_Trig 5            |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_RTSI_6     | RTSI 6 or PXI_Trig 6            |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_RTSI_7     | RTSI 7 or PXI_Trig 7            |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_CLK_IN     | CLK IN front panel connector    |
-                +-----------------------+---------------------------------+
-                | NIFGEN_VAL_DDC_CLK_IN | Digital Data & Control clock in |
-                +-----------------------+---------------------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        update_clock_source_ctype = visatype.ViInt32(update_clock_source)  # case 8
-        error_code = self._library.niFgen_ConfigureUpdateClockSource(vi_ctype, update_clock_source_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def create_advanced_arb_sequence(self, sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array):
+    def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None):
         '''create_advanced_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
@@ -5892,7 +4500,7 @@ class Session(_SessionBase):
                 arbitrary sequence.
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        sequence_length_ctype = visatype.ViInt32(sequence_length)  # case 8
+        sequence_length_ctype = visatype.ViInt32(len(waveform_handles_array))  # case 5
         waveform_handles_array_ctype = (visatype.ViInt32 * len(waveform_handles_array))(*waveform_handles_array)  # case 4
         loop_counts_array_ctype = (visatype.ViInt32 * len(loop_counts_array))(*loop_counts_array)  # case 4
         sample_counts_array_ctype = (visatype.ViInt32 * len(sample_counts_array))(*sample_counts_array)  # case 4
@@ -5973,112 +4581,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(sequence_handle_ctype.value)
 
-    def create_arb_waveform(self, waveform_size, waveform_data_array):
-        '''create_arb_waveform
-
-        [OBSOLETE] This function is obsolete. Use the nifgen_CreateWaveformF64,
-        nifgen_CreateWaveformI16, or nifgen_CreateWaveformComplexF64 function
-        instead of this function.
-
-        Creates an arbitrary waveform and returns a handle that identifies that
-        waveform. You can pass this handle to the nifgen_ConfigureArbWaveform
-        function to produce that waveform. You can also use the handles this
-        function returns to specify a sequence of arbitrary waveforms with the
-        nifgen_CreateArbSequence function.
-
-        Note:
-        You must scale the data between –1.00 and +1.00. Use the **arbGain**
-        parameter to generate different output voltages.
-
-        Args:
-            waveform_size (int): | Specifies the size of the arbitrary waveform that you want created.
-                | The size must meet the following restrictions:
-
-                -  The size must be less than or equal to the maximum waveform size that
-                   the device allows.
-                -  The size must be greater than or equal to the minimum waveform size
-                   that the device allows.
-                -  The size must be an integer multiple of the device waveform quantum.
-
-                |
-                | You can obtain these values from the **maximumWaveformSize**,
-                  **minimumWaveformSize**, and **waveformQuantum** parameters in the
-                  nifgen_QueryArbWfmCapabilities function.
-                | ****Default Value**:** None
-            waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
-                waveform. The array must have at least as many elements as the value
-                that you specify in **waveformSize**.
-
-                You must normalize the data points in the array to be between –1.00 and
-                +1.00.
-
-                **Default Value**: None
-
-        Returns:
-            waveform_handle (int): The handle that identifies the new waveform. This handle is used later
-                when referring to this waveform.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
-        waveform_data_array_ctype = (visatype.ViReal64 * len(waveform_data_array))(*waveform_data_array)  # case 4
-        waveform_handle_ctype = visatype.ViInt32()  # case 13
-        error_code = self._library.niFgen_CreateArbWaveform(vi_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(waveform_handle_ctype.value)
-
-    def create_binary16_arb_waveform(self, waveform_size, waveform_data_array):
-        '''create_binary16_arb_waveform
-
-        [OBSOLETE] This function is obsolete. Use the nifgen_CreateWaveformI16
-        function instead of this function.
-
-        Creates an arbitrary waveform from binary data and returns a handle that
-        identifies that waveform. You can pass this handle to the
-        nifgen_ConfigureArbWaveform function to produce that waveform. You can
-        also use the handles this function returns to specify a sequence of
-        arbitrary waveforms with the nifgen_CreateArbSequence function.
-
-        Note:
-        You must set the output mode to NIFGEN_VAL_OUTPUT_ARB or
-        NIFGEN_VAL_OUTPUT_SEQ before calling this function.
-
-        Args:
-            waveform_size (int): | Specifies the size of the arbitrary waveform that you want created.
-                | The size must meet the following restrictions:
-
-                -  The size must be less than or equal to the maximum waveform size that
-                   the device allows.
-                -  The size must be greater than or equal to the minimum waveform size
-                   that the device allows.
-                -  The size must be an integer multiple of the device waveform quantum.
-
-                |
-                | You can obtain these values from the **maximumWaveformSize**,
-                  **minimumWaveformSize**, and **waveformQuantum** parameters in
-                  nifgen_QueryArbWfmCapabilities.
-                | ****Default Value**:** None
-            waveform_data_array (list of int): Specifies the array of data you want to use for the new arbitrary
-                waveform. The array must have at least as many elements as the value
-                that you specify in **waveformSize**.
-
-                You must normalize the data points in the array to be between –32768 and
-                32767.
-
-                **Default Value**: None
-
-        Returns:
-            waveform_handle (int): The handle that identifies the new waveform. This handle is used later
-                when referring to this waveform.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        waveform_size_ctype = visatype.ViInt32(waveform_size)  # case 8
-        waveform_data_array_ctype = (visatype.ViInt16 * len(waveform_data_array))(*waveform_data_array)  # case 4
-        waveform_handle_ctype = visatype.ViInt32()  # case 13
-        error_code = self._library.niFgen_CreateBinary16ArbWaveform(vi_ctype, waveform_size_ctype, waveform_data_array_ctype, ctypes.pointer(waveform_handle_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(waveform_handle_ctype.value)
-
-    def create_freq_list(self, waveform, frequency_list_length, frequency_array, duration_array):
+    def create_freq_list(self, waveform, frequency_array, duration_array):
         '''create_freq_list
 
         Creates a frequency list from an array of frequencies
@@ -6099,7 +4602,7 @@ class Session(_SessionBase):
         this function.
 
         Args:
-            waveform (int): Specifies the standard waveform that you want the signal generator to
+            waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
                 produce. NI-FGEN sets the FUNC_WAVEFORM attribute to this
                 value.
 
@@ -6159,9 +4662,11 @@ class Session(_SessionBase):
                 this handle to nifgen_ConfigureFreqList to generate the arbitrary
                 sequence.
         '''
+        if type(waveform) is not enums.Waveform:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        waveform_ctype = visatype.ViInt32(waveform)  # case 8
-        frequency_list_length_ctype = visatype.ViInt32(frequency_list_length)  # case 8
+        waveform_ctype = visatype.ViInt32(waveform.value)  # case 9
+        frequency_list_length_ctype = visatype.ViInt32(len(frequency_array))  # case 5
         frequency_array_ctype = (visatype.ViReal64 * len(frequency_array))(*frequency_array)  # case 4
         duration_array_ctype = (visatype.ViReal64 * len(duration_array))(*duration_array)  # case 4
         frequency_list_handle_ctype = visatype.ViInt32()  # case 13
@@ -6181,69 +4686,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def disable_script_trigger(self, trigger_id):
-        '''disable_script_trigger
-
-        Disables the specified Script Trigger.
-
-        Args:
-            trigger_id (string): Specifies the Script Trigger used for triggering.
-
-                **Defined Values**
-
-                **Default Value**: "ScriptTrigger0"
-
-                +------------------+------------------+
-                | "ScriptTrigger0" | Script Trigger 0 |
-                +------------------+------------------+
-                | "ScriptTrigger1" | Script Trigger 1 |
-                +------------------+------------------+
-                | "ScriptTrigger2" | Script Trigger 2 |
-                +------------------+------------------+
-                | "ScriptTrigger3" | Script Trigger 3 |
-                +------------------+------------------+
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
-        error_code = self._library.niFgen_DisableScriptTrigger(vi_ctype, trigger_id_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def disable_start_trigger(self):
-        '''disable_start_trigger
-
-        Disables the Start Trigger.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_DisableStartTrigger(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def error_handler(self, error_code):
-        '''error_handler
-
-        Converts a status code returned by an NI-FGEN function into a
-        user-readable string and returns any error elaborations.
-
-        Args:
-            error_code (int): Specifies the **status** parameter that is returned from any of the
-                NI-FGEN functions.
-
-                **Default Value**: 0 (VI_SUCCESS)
-
-        Returns:
-            error_message (string): Returns the error message string read from the instrument error message
-                queue.
-
-                You must pass a ViChar array with at least 256 bytes.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code_ctype = visatype.ViStatus(error_code)  # case 8
-        error_message_ctype = (visatype.ViChar * 1)()  # case 10
-        error_code = self._library.niFgen_ErrorHandler(vi_ctype, error_code_ctype, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return error_message_ctype.value.decode(self._encoding)
-
     def export_signal(self, signal, signal_identifier, output_terminal):
         '''export_signal
 
@@ -6259,7 +4701,7 @@ class Session(_SessionBase):
         signal is routed to the output terminal you specify.
 
         Args:
-            signal (int): Specifies the source of the signal to route.
+            signal (enums.Signal): Specifies the source of the signal to route.
                 ****Defined Values****
 
                 +------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -6362,13 +4804,72 @@ class Session(_SessionBase):
                 device, refer to the Routes topic for your device or the **Device
                 Routes** tab in MAX.
         '''
+        if type(signal) is not enums.Signal:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Signal))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        signal_ctype = visatype.ViInt32(signal)  # case 8
+        signal_ctype = visatype.ViInt32(signal.value)  # case 9
         signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case 3
         output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case 3
         error_code = self._library.niFgen_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last successful external calibration.
+        The time returned is 24-hour (military) local time; for example, if the
+        device was calibrated at 2:30 PM, this function returns 14 for the
+        **hour** parameter and 30 for the **minute** parameter.
+
+        Returns:
+            year (int): Specifies the year of the last successful calibration.
+            month (int): Specifies the month of the last successful calibration.
+            day (int): Specifies the day of the last successful calibration.
+            hour (int): Specifies the hour of the last successful calibration.
+            minute (int): Specifies the minute of the last successful calibration.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        year_ctype = visatype.ViInt32()  # case 13
+        month_ctype = visatype.ViInt32()  # case 13
+        day_ctype = visatype.ViInt32()  # case 13
+        hour_ctype = visatype.ViInt32()  # case 13
+        minute_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_GetExtCalLastDateAndTime(vi_ctype, ctypes.pointer(year_ctype), ctypes.pointer(month_ctype), ctypes.pointer(day_ctype), ctypes.pointer(hour_ctype), ctypes.pointer(minute_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+
+    def get_ext_cal_last_temp(self):
+        '''get_ext_cal_last_temp
+
+        Returns the temperature at the last successful external calibration. The
+        temperature is returned in degrees Celsius.
+
+        Returns:
+            temperature (float): Specifies the temperature at the last successful calibration in degrees
+                Celsius.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        temperature_ctype = visatype.ViReal64()  # case 13
+        error_code = self._library.niFgen_GetExtCalLastTemp(vi_ctype, ctypes.pointer(temperature_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(temperature_ctype.value)
+
+    def get_ext_cal_recommended_interval(self):
+        '''get_ext_cal_recommended_interval
+
+        Returns the recommended interval between external calibrations in
+        months.
+
+        Returns:
+            months (int): Specifies the recommended interval between external calibrations in
+                months.
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        months_ctype = visatype.ViInt32()  # case 13
+        error_code = self._library.niFgen_GetExtCalRecommendedInterval(vi_ctype, ctypes.pointer(months_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(months_ctype.value)
 
     def get_hardware_state(self):
         '''get_hardware_state
@@ -6379,7 +4880,7 @@ class Session(_SessionBase):
         Note: Hardware states do not necessarily correspond to NI-FGEN states.
 
         Returns:
-            state (int): Returns the hardware state of the signal generator.
+            state (enums.HardwareState): Returns the hardware state of the signal generator.
 
                 **Defined Values**
 
@@ -6399,7 +4900,7 @@ class Session(_SessionBase):
         state_ctype = visatype.ViInt32()  # case 13
         error_code = self._library.niFgen_GetHardwareState(vi_ctype, ctypes.pointer(state_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(state_ctype.value)
+        return enums.HardwareState(state_ctype.value)
 
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
@@ -6471,212 +4972,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
 
-    def _init_with_options(self, resource_name, id_query, reset_device, option_string):
-        '''_init_with_options
-
-        Performs the following initialization actions:
-
-        -  Creates a new IVI instrument session and optionally sets the initial
-           state of the following session attributes:
-           RANGE_CHECK, QUERY_INSTRUMENT_STATUS,
-           cache, simulate, and
-           RECORD_COERCIONS.
-        -  Opens a session to the specified device using the interface and
-           address that you specify for **resourceName**.
-        -  If **IDQuery** is set to VI_TRUE, this function queries the device
-           ID and checks that it is valid for NI-FGEN.
-        -  If **resetDevice** is set to VI_TRUE, this function resets the
-           device to a known state.
-        -  Sends initialization commands to set the instrument to the state
-           necessary for NI-FGEN operation.
-        -  Returns a session handle that you can use to identify the device in
-           all subsequent NI-FGEN function calls.
-
-        Args:
-            resource_name (string): Caution:
-                Traditional NI-DAQ and NI-DAQmx device names are not case-sensitive.
-                However, all IVI names, such as logical names, are case-sensitive. If
-                you use logical names, driver session names, or virtual names in your
-                program, you must ensure that the name you use matches the name in the
-                IVI Configuration Store file exactly, without any variations in the case
-                of the characters.
-
-                | Specifies the resource name of the device to initialize.
-
-                For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
-                the device number assigned by MAX, as shown in Example 1.
-
-                For NI-DAQmx devices, the syntax is just the device name specified in
-                MAX, as shown in Example 2. Typical default names for NI-DAQmx devices
-                in MAX are Dev1 or PXI1Slot1. You can rename an NI-DAQmx device by
-                right-clicking on the name in MAX and entering a new name.
-
-                An alternate syntax for NI-DAQmx devices consists of DAQ::\ *NI-DAQmx
-                device name*, as shown in Example 3. This naming convention allows for
-                the use of an NI-DAQmx device in an application that was originally
-                designed for a Traditional NI-DAQ device. For example, if the
-                application expects DAQ::1, you can rename the NI-DAQmx device to 1 in
-                MAX and pass in DAQ::1 for the resource name, as shown in Example 4.
-
-                If you use the DAQ::\ *n* syntax and an NI-DAQmx device name already
-                exists with that same name, the NI-DAQmx device is matched first.
-
-                You can also pass in the name of an IVI logical name or an IVI virtual
-                name configured with the IVI Configuration utility, as shown in Example
-                5. A logical name identifies a particular virtual instrument. A virtual
-                name identifies a specific device and specifies the initial settings for
-                the session.
-
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | Example # | Device Type                          | Syntax                 | Variable                        |
-                +===========+======================================+========================+=================================+
-                | 1         | Traditional NI-DAQ device            | DAQ::\ *1*             | (*1* = device number)           |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 2         | NI-DAQmx device                      | *myDAQmxDevice*        | (*myDAQmxDevice* = device name) |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 3         | NI-DAQmx device                      | DAQ::\ *myDAQmxDevice* | (*myDAQmxDevice* = device name) |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 4         | NI-DAQmx device                      | DAQ::\ *2*             | (*2* = device name)             |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-            id_query (bool): Specifies whether you want NI-FGEN to perform an ID query.
-
-                When you set this parameter to VI_TRUE, NI-FGEN verifies that the
-                device that you initialize is a type that it supports.
-
-                Circumstances can arise where sending an ID query to the device is
-                undesirable. When you set this parameter to VI_FALSE, the function
-                initializes the device without performing an ID query.
-
-                ****Defined Values****
-
-                **Default Value**: VI_TRUE
-
-                +----------+------------------+
-                | VI_TRUE  | Perform ID query |
-                +----------+------------------+
-                | VI_FALSE | Skip ID query    |
-                +----------+------------------+
-            reset_device (bool): Specifies whether you want to reset the device during the initialization
-                procedure. VI_TRUE specifies that the device is reset and performs the
-                same function as the nifgen_Reset function.
-
-                ****Defined Values****
-
-                **Default Value**: VI_TRUE
-
-                +----------+---------------------+
-                | VI_TRUE  | Reset device        |
-                +----------+---------------------+
-                | VI_FALSE | Do not reset device |
-                +----------+---------------------+
-            option_string (string): Sets the initial value of certain session attributes.
-
-                The syntax for **optionString** is
-
-                <*attributeName*> = <*value*>
-
-                where
-
-                *attributeName* is the name of the attribute and *value* is the value to
-                which the attribute is set
-
-                To set multiple attributes, separate them with a comma.
-
-                If you pass NULL or an empty string for this parameter, the session uses
-                the default values for these attributes. You can override the default
-                values by assigning a value explicitly in a string that you pass for
-                this parameter.
-
-                You do not have to specify all of the attributes and may leave any of
-                them out. However, if you do not specify one of the attributes, its
-                default value is used.
-
-                If simulation is enabled (Simulate=1), you may specify the device that
-                you want to simulate. To specify a device, enter the following syntax in
-                **optionString**.
-
-                DriverSetup=Model:<*driver model number*>;Channels:<*channel
-                names*>;BoardType:<*module type*>;MemorySize:<*size of onboard memory in
-                bytes*>
-
-                **Syntax Examples**
-
-                **Attributes and **Defined Values****
-
-                **Default Values**: "Simulate=0,RangeCheck=1,QueryInstrStatus=1,Cache=1"
-
-                +------------------+-------------------------+-------------------+
-                | Attribute Name   | Attribute               | Values            |
-                +==================+=========================+===================+
-                | RangeCheck       | RANGE_CHECK             | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
-                | QueryInstrStatus | QUERY_INSTRUMENT_STATUS | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
-                | Cache            | cache                   | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
-                | Simulate         | simulate                | VI_TRUE, VI_FALSE |
-                +------------------+-------------------------+-------------------+
-
-        Returns:
-            vi (int): Returns a session handle that you can use to identify the device in all
-                subsequent NI-FGEN function calls.
-        '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case 3
-        id_query_ctype = visatype.ViBoolean(id_query)  # case 8
-        reset_device_ctype = visatype.ViBoolean(reset_device)  # case 8
-        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case 3
-        vi_ctype = visatype.ViSession()  # case 13
-        error_code = self._library.niFgen_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, ctypes.pointer(vi_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(vi_ctype.value)
-
-    def initialize_analog_output_calibration(self):
-        '''initialize_analog_output_calibration
-
-        Sets up the device to start the analog output calibration.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_InitializeAnalogOutputCalibration(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def initialize_cal_adc_calibration(self):
-        '''initialize_cal_adc_calibration
-
-        Initializes an external calibration session for ADC calibration. For the
-        NI 5421/5422/5441, ADC calibration involves characterizing the gain and
-        offset of the onboard ADC.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_InitializeCalADCCalibration(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def initialize_flatness_calibration(self):
-        '''initialize_flatness_calibration
-
-        Initializes an external calibration session to calibrate flatness.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_InitializeFlatnessCalibration(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def initialize_oscillator_frequency_calibration(self):
-        '''initialize_oscillator_frequency_calibration
-
-        Sets up the device to start the VCXO calibration.
-
-        The session handle should be the handle returned by the
-        nifgen_InitExtCal function.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_InitializeOscillatorFrequencyCalibration(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _initiate_generation(self):
         '''_initiate_generation
 
@@ -6717,23 +5012,6 @@ class Session(_SessionBase):
         error_code = self._library.niFgen_IsDone(vi_ctype, ctypes.pointer(done_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
-
-    def manual_enable_p2_p_stream(self, endpoint_name):
-        '''manual_enable_p2_p_stream
-
-        Enables a peer-to-peer data stream using manual flow control.
-
-        Args:
-            endpoint_name (string): Specifies the stream endpoint FIFO to configure. Refer to the
-                `Peer-to-Peer Data
-                Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(p2p_streaming)>`__
-                documentation in the *NI Signal Generators Help* for more information.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        endpoint_name_ctype = ctypes.create_string_buffer(endpoint_name.encode(self._encoding))  # case 3
-        error_code = self._library.niFgen_ManualEnableP2PStream(vi_ctype, endpoint_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
 
     def query_arb_seq_capabilities(self):
         '''query_arb_seq_capabilities
@@ -6849,38 +5127,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_freq_lists_ctype.value), int(minimum_frequency_list_length_ctype.value), int(maximum_frequency_list_length_ctype.value), float(minimum_frequency_list_duration_ctype.value), float(maximum_frequency_list_duration_ctype.value), float(frequency_list_duration_quantum_ctype.value)
 
-    def read_cal_adc(self, number_of_reads_to_average, return_calibrated_value):
-        '''read_cal_adc
-
-        Takes one or more voltage measurements from the onboard calibration ADC
-        and returns the value or the average value. The signal that the ADC
-        actually measures can be specified using the
-        CAL_ADC_INPUT attribute. The ADC has some inherent gain
-        and offset. These values can be determined during an external
-        calibration session and stored in the calibration EEPROM.
-
-        If the **returnCalibratedValue** parameter is VI_TRUE, NI-FGEN adjusts
-        the value that is returned to account for the gain and offset of the
-        ADC. Otherwise, the raw voltage value reported by the ADC is returned.
-
-        Args:
-            number_of_reads_to_average (int): Specifies the number of measurements to be taken and averaged to
-                determine the return value.
-            return_calibrated_value (bool): Specifies whether the voltage returned from the ADC should be adjusted
-                to account for the gain and offset of the ADC.
-
-        Returns:
-            cal_adc_value (float): Specifies the average of the voltage measurements taken from the onboard
-                calibration ADC.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        number_of_reads_to_average_ctype = visatype.ViInt32(number_of_reads_to_average)  # case 8
-        return_calibrated_value_ctype = visatype.ViBoolean(return_calibrated_value)  # case 8
-        cal_adc_value_ctype = visatype.ViReal64()  # case 13
-        error_code = self._library.niFgen_ReadCalADC(vi_ctype, number_of_reads_to_average_ctype, return_calibrated_value_ctype, ctypes.pointer(cal_adc_value_ctype))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(cal_adc_value_ctype.value)
-
     def read_current_temperature(self):
         '''read_current_temperature
 
@@ -6946,7 +5192,7 @@ class Session(_SessionBase):
         NI 5401/5411/5431.
 
         Args:
-            trigger (int): Sets the clock mode of the signal generator.
+            trigger (enums.Trigger): Sets the clock mode of the signal generator.
 
                 ****Defined Values****
 
@@ -6959,29 +5205,16 @@ class Session(_SessionBase):
                 +----------------------------+
             trigger_id (string):
         '''
+        if type(trigger) is not enums.Trigger:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Trigger))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        trigger_ctype = visatype.ViInt32(trigger)  # case 8
+        trigger_ctype = visatype.ViInt32(trigger.value)  # case 9
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case 3
         error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def send_software_trigger(self):
-        '''send_software_trigger
-
-        Sends a command to trigger the signal generator.
-
-        Note:
-        This function can act as an override for an external edge trigger.
-        However, the NI 5401/5411/5431 do not support overriding an external
-        digital edge trigger.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_SendSoftwareTrigger(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def wait_until_done(self, max_time):
+    def wait_until_done(self, max_time=10000):
         '''wait_until_done
 
         Waits until the device is done generating or until the maximum time has
@@ -6993,28 +5226,6 @@ class Session(_SessionBase):
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         max_time_ctype = visatype.ViInt32(max_time)  # case 8
         error_code = self._library.niFgen_WaitUntilDone(vi_ctype, max_time_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def write_p2_p_endpoint_i16(self, endpoint_name, number_of_samples, endpoint_data):
-        '''write_p2_p_endpoint_i16
-
-        Writes I16 data to the peer-to-peer endpoint. Use this function to write
-        initial data from the host to the endpoint before starting generation to
-        avoid an underflow at start.
-
-        Args:
-            endpoint_name (string): Specifies the name of the FIFO endpoint. Data is written to the endpoint
-                FIFO.
-            number_of_samples (int): Specifies the number of samples to write into the endpoint FIFO.
-            endpoint_data (list of int): Specifies the array of data to write into the endpoint FIFO. The binary
-                data is left-justified.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        endpoint_name_ctype = ctypes.create_string_buffer(endpoint_name.encode(self._encoding))  # case 3
-        number_of_samples_ctype = visatype.ViInt32(number_of_samples)  # case 8
-        endpoint_data_ctype = (visatype.ViInt16 * len(endpoint_data))(*endpoint_data)  # case 4
-        error_code = self._library.niFgen_WriteP2PEndpointI16(vi_ctype, endpoint_name_ctype, number_of_samples_ctype, endpoint_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

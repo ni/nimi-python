@@ -4,7 +4,7 @@ import pytest
 
 @pytest.fixture(scope='function')
 def session():
-    with nifgen.Session('', False, False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
+    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
         yield simulated_session
 
 
@@ -41,7 +41,7 @@ def test_method_get_self_cal_supported(session):
 
 def test_get_self_cal_last_date_and_time():
     try:
-        with nifgen.Session('', False, False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:
+        with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:
             year, month, day, hour, minute = session.get_self_cal_last_date_and_time()
             assert False
     except nifgen.Error as e:

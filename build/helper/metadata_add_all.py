@@ -83,6 +83,7 @@ def _add_buffer_info(parameter):
         parameter['is_buffer'] = True
 
     if (t.find('[ ]') > 0) or (t.find('[]') > 0):
+        assert 'is_buffer' not in parameter or parameter['is_buffer'] is True, 'Conflicting metadata - [] found but is_buffer already set to False.'
         parameter['type'] = t.replace('[ ]', '').replace('[]', '')
         parameter['original_type'] = t
         parameter['is_buffer'] = True
