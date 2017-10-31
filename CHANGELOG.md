@@ -39,6 +39,7 @@ All notable changes to this project will be documented in this file.
     * Support for is_debounced and is_scanning functions. Instead use the attribute of the same name.
 * ### NI-DCPower
  * #### Added
+  * New example nidcpower_advanced_sequence.py
  * #### Changed
   * Fixed method signature for:
     * wait_for_event
