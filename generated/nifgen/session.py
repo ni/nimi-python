@@ -3204,7 +3204,7 @@ class _SessionBase(object):
         coefficients_array_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, ctypes.pointer(number_of_coefficients_read_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(coefficients_array_ctype[i]) for i in range(array_size)], int(number_of_coefficients_read_ctype.value)
+        return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
 
     def _initialize_with_channels(self, resource_name, reset_device=False, option_string=''):
         '''_initialize_with_channels

@@ -503,7 +503,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_GetFIRFilterCoefficients", param='coefficientsArray')
         if array_size.value == 0:
             return len(self._defaults['GetFIRFilterCoefficients']['coefficientsArray'])
-        coefficients_array.value = self._defaults['GetFIRFilterCoefficients']['coefficientsArray'].encode('ascii')
+        for i in range(len(self._defaults['GetFIRFilterCoefficients']['coefficientsArray'])):
+            coefficients_array[i] = self._defaults['GetFIRFilterCoefficients']['coefficientsArray'][i]
         return self._defaults['GetFIRFilterCoefficients']['return']
 
     def niFgen_GetHardwareState(self, vi, state):  # noqa: N802
