@@ -22,6 +22,13 @@ attribute_ids = [
     1150009,  # current_level
 ]
 
+def create_sweep(begin_value, end_value, number_of_steps):
+    sweep = []
+    for i in range(number_of_steps):
+        step_size = (end_value - begin_value) / number_of_steps
+        sweep.append(begin_value + i*step_size)
+    return sweep
+
 with nidcpower.Session(args.name, channels=args.channels) as session:
 
     session.source_mode = nidcpower.SourceMode.SEQUENCE
@@ -29,20 +36,29 @@ with nidcpower.Session(args.name, channels=args.channels) as session:
     session.voltage_level_autorange = nidcpower.VoltageLevelAutorange.ON
     session.current_level_autorange = nidcpower.CurrentLevelAutorange.ON
     session.create_advanced_sequence('my_sequence', attribute_ids)
+    voltages = create_sweep(args.voltage_start, args.voltage_final, args.steps)
+    currents = create_sweep(args.current_start, args.current_final, args.steps)
 
-    for v in range(args.v0, args.vf, (args.vf-args.v0 / args.steps)):
-        print(v)
+    for v in voltages:
         session.create_advanced_sequence_step()
         session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
         session.voltage_level = v
 
-    for c in range(args.c0, args.cf, (args.cf-args.c0 / args.steps)):
-        print(c)
+    for c in currents:
         session.create_advanced_sequence_step()
         session.output_function = nidcpower.OutputFunction.DC_CURRENT
         session.current_level = c
 
     with session.initiate():
-        session.wait_for_event(nidcpower.EventId.SEQUENCE_ENGINE_DONE_EVENT)
-        print(session.fetch_multiple(args.steps*2))
+        session.wait_for_event(nidcpower.Event.SEQUENCE_ENGINE_DONE)
+        voltage_measurements, current_measurements, in_compliance, _ = session.fetch_multiple(args.steps * 2)
+
+    # Print a table with the measurements
+    programmed_levels = voltages + currents
+    units = ['V'] * args.steps + ['A'] * args.steps
+    measurements = zip(programmed_levels, units, voltage_measurements, current_measurements, in_compliance)
+    row_format = '{:<8} {:4} {:<25} {:<25} {}'
+    print(row_format.format('Sourced', '', 'Measured voltage', 'Measured current', 'In-compliance'))
+    for m in measurements:
+        print(row_format.format(*m))
 
