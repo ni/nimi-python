@@ -2,7 +2,6 @@
 
 import argparse
 import nidcpower
-import sys
 
 
 parser = argparse.ArgumentParser(description='Performs voltage sweep then a current sweep.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -22,12 +21,14 @@ attribute_ids = [
     1150009,  # current_level
 ]
 
+
 def create_sweep(begin_value, end_value, number_of_steps):
     sweep = []
     for i in range(number_of_steps):
         step_size = (end_value - begin_value) / number_of_steps
-        sweep.append(begin_value + i*step_size)
+        sweep.append(begin_value + i * step_size)
     return sweep
+
 
 with nidcpower.Session(args.name, channels=args.channels) as session:
 
