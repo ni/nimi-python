@@ -1715,7 +1715,42 @@ functions = {
             'description': 'Has parameters of multiple types.',
         },
     },
-
+    'GetArrayUsingIVIDance': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'arraySize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Specifies the size of the buffer for copyint arrayOut onto.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'arrayOut',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': 'The array returned by this function',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function returns an array of float whose size is determined with the IVI dance.',
+        },
+    }
     #TODO(marcoskirsch): More cases to add:
     #     Waveforms as inputs and outputs
 }

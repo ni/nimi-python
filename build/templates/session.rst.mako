@@ -25,7 +25,7 @@ for attr in helper.sorted_attrs(attributes):
     else:
         t = helper.get_python_type_for_visa_type(attributes[attr]["type"])
 
-    table_contents.append((':py:attr:`' + attributes[attr]["name"].lower() + '`', t))
+    table_contents.append((':py:attr:`' + attributes[attr]["python_name"] + '`', t))
 
 table = helper.as_rest_table(table_contents)
 %>\
