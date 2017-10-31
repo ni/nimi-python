@@ -57,7 +57,7 @@ def test_standard_waveform(session):
     session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 0.0, 0.0, 2000000)
     session.output_enabled = True
     session.trigger_mode = nifgen.TriggerMode.NIFGEN_VAL_CONTINUOUS
-    session.trigger_source = nifgen.TriggerSource.NIFGEN_VAL_IMMEDIATE 
+    session.trigger_source = nifgen.TriggerSource.NIFGEN_VAL_IMMEDIATE
     with session.initiate():
         assert session.func_amplitude == 2.0
         assert session.func_waveform == nifgen.Waveform.SINE
