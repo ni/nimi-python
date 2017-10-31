@@ -3891,7 +3891,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_sequence(self, values, source_delays=None):
+    def set_sequence(self, source_delays, values=None):
         '''set_sequence
 
         Configures a series of voltage or current outputs and corresponding
@@ -3922,7 +3922,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session['0,1'].set_sequence(values, source_delays=None)
+            session['0,1'].set_sequence(source_delays, values=None)
 
         Args:
             values (list of float): Specifies the series of voltage levels or current levels, depending on
