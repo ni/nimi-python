@@ -3938,17 +3938,12 @@ class _SessionBase(object):
             size (int): The number of elements in the Values and the Source Delays arrays. The
                 Values and Source Delays arrays should have the same size.
         '''
-<<<<<<< HEAD
-        size = len(channel_name)
-        error_code = self._library.niDCPower_SetSequence(self._vi, self._repeated_capability.encode(self._encoding), values, source_delays, size)
-=======
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
         values_ctype = (visatype.ViReal64 * len(values))(*values)  # case 4
         source_delays_ctype = (visatype.ViReal64 * len(source_delays))(*source_delays)  # case 4
-        size_ctype = visatype.ViUInt32(len(values))  # case 5
+        size_ctype = visatype.ViUInt32(len(channel_name))  # case 5
         error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
->>>>>>> master
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
