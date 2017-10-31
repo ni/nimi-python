@@ -276,7 +276,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetAttributeViString']['return']
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niDCPower_GetAttributeViString", param='attributeValue')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
@@ -286,7 +286,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetChannelName']['return']
         if self._defaults['GetChannelName']['channelName'] is None:
             raise MockFunctionCallError("niDCPower_GetChannelName", param='channelName')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetChannelName']['channelName'])
         channel_name.value = self._defaults['GetChannelName']['channelName'].encode('ascii')
         return self._defaults['GetChannelName']['return']
@@ -299,7 +299,7 @@ class SideEffectsHelper(object):
         code.contents.value = self._defaults['GetError']['Code']
         if self._defaults['GetError']['Description'] is None:
             raise MockFunctionCallError("niDCPower_GetError", param='Description')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetError']['Description'])
         description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']

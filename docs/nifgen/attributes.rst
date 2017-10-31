@@ -3,31 +3,6 @@ nifgen.Session properties
 
 .. py:currentmodule:: nifgen
 
-.. py:attribute:: actual_arb_sample_rate
-
-    Returns the actual sample rate value of the signal generator after any
-    coercion or rounding.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | float     |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Obsolete:Actual Arb Sample Rate**
-            - C Attribute: **NIFGEN_ATTR_ACTUAL_ARB_SAMPLE_RATE**
-
 .. py:attribute:: all_marker_events_latched_status
 
     Returns a bit field of the latched status of all Marker Events. Set this
@@ -717,30 +692,6 @@ nifgen.Session properties
 
             - LabVIEW Property: **Output:Common Mode Offset**
             - C Attribute: **NIFGEN_ATTR_COMMON_MODE_OFFSET**
-
-.. py:attribute:: daqmx_task
-
-    Returns the NI-DAQmx task pointer.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Obsolete:DAQmx Task**
-            - C Attribute: **NIFGEN_ATTR_DAQMX_TASK**
 
 .. py:attribute:: data_marker_events_count
 
@@ -1654,31 +1605,6 @@ nifgen.Session properties
 
             - LabVIEW Property: **Events:Done:Pulse:Width Units**
             - C Attribute: **NIFGEN_ATTR_DONE_EVENT_PULSE_WIDTH_UNITS**
-
-.. py:attribute:: error_elaboration
-
-    Contains an optional string with additional information concerning the
-    primary error condition.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | str        |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Obsolete:Error Elaboration**
-            - C Attribute: **NIFGEN_ATTR_ERROR_ELABORATION**
 
 .. py:attribute:: exported_onboard_reference_clock_output_terminal
 
@@ -2812,30 +2738,6 @@ nifgen.Session properties
             - LabVIEW Property: **Instrument:Inherent IVI Attributes:Advanced Session Information:Logical Name**
             - C Attribute: **NIFGEN_ATTR_LOGICAL_NAME**
 
-.. py:attribute:: major_version
-
-    Returns the major version number of NI-FGEN.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Obsolete:Major Version**
-            - C Attribute: **NIFGEN_ATTR_MAJOR_VERSION**
-
 .. py:attribute:: marker_events_count
 
     Returns the number of markers supported by the device. Use this property
@@ -3355,30 +3257,6 @@ nifgen.Session properties
             - LabVIEW Property: **Instrument:Memory Size**
             - C Attribute: **NIFGEN_ATTR_MEMORY_SIZE**
 
-.. py:attribute:: minor_version
-
-    Returns the minor version number of NI-FGEN.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Obsolete:Minor Version**
-            - C Attribute: **NIFGEN_ATTR_MINOR_VERSION**
-
 .. py:attribute:: min_freq_list_duration
 
     Returns the minimum duration, in seconds, of any one step in a frequency
@@ -3544,33 +3422,6 @@ nifgen.Session properties
 
             - LabVIEW Property: **Instrument:Calibration:Offset DAC Value**
             - C Attribute: **NIFGEN_ATTR_OFFSET_DAC_VALUE**
-
-.. py:attribute:: operation_mode
-
-    Specifies how the signal generator produces waveforms. NI signal
-    generators currently support only one value:
-    **NIFGEN\_VAL\_OPERATE\_CONTINUOUS**. To control trigger mode, set the
-    `Trigger Mode <pniFgen_TriggerMode.html>`__ property.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+--------------------------+
-    | Characteristic | Value                    |
-    +================+==========================+
-    | Datatype       | :py:data:`OperationMode` |
-    +----------------+--------------------------+
-    | Permissions    | read-write               |
-    +----------------+--------------------------+
-    | Channel Based  | False                    |
-    +----------------+--------------------------+
-    | Resettable     | No                       |
-    +----------------+--------------------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Obsolete:Operation Mode**
-            - C Attribute: **NIFGEN_ATTR_OPERATION_MODE**
 
 .. py:attribute:: oscillator_freq_dac_value
 
@@ -4121,42 +3972,6 @@ nifgen.Session properties
 
             - LabVIEW Property: **Arbitrary Waveform:Onboard Signal Processing:Frequency Shift**
             - C Attribute: **NIFGEN_ATTR_OSP_FREQUENCY_SHIFT**
-
-.. py:attribute:: osp_iq_rate
-
-    Specifies the rate at which the user-provided waveform data is generated
-    when the `OSP Enabled <pniFgen_OSPEnabled.html>`__ property is set to
-    TRUE.
-
-    NI-FGEN sets the `Sample Rate <pniFgen_SampleRate.html>`__ property of
-    the signal generator to the product of the IQ Rate, `FIR Interpolation
-    Factor <pniFgen_FIRInterpolation.html>`__, and `CIC Interpolation
-    Factor <pniFgen_CICInterpolation.html>`__ properties. When the `Data
-    Processing Mode <pniFgen_DataProcessingMode.html>`__ property is set to
-    **Real**, the IQ Rate value is the rate at which the signal generator
-    processes real (I) data. When the Data Processing Mode property is set
-    to **Complex**, the IQ Rate value is the rate at which the signal
-    generator processes complex (I/Q) data.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | float      |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Arbitrary Waveform:Onboard Signal Processing:IQ Rate**
-            - C Attribute: **NIFGEN_ATTR_OSP_IQ_RATE**
 
 .. py:attribute:: osp_mode
 
@@ -5167,78 +4982,6 @@ nifgen.Session properties
             - LabVIEW Property: **Instrument:Calibration:Pre-Amplifier Attenuation**
             - C Attribute: **NIFGEN_ATTR_PRE_AMPLIFIER_ATTENUATION**
 
-.. py:attribute:: primary_error
-
-    Describes the first error that occurred since the last call to the
-    `niFgen Error
-    Message <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Error_Message.html')>`__
-    VI on the session.
-
-    The value follows the VXIplug&play completion code conventions. A
-    negative value (0x80000000 or higher in hex) describes an error
-    condition. A positive value describes a warning condition and indicates
-    that no error occurred. A zero indicates that no error or warning
-    occurred. The error and warning values can be status codes defined by
-    IVI, VISA, class drivers, or specific drivers.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | int        |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Obsolete:Primary Error**
-            - C Attribute: **NIFGEN_ATTR_PRIMARY_ERROR**
-
-.. py:attribute:: query_instrument_status
-
-    Specifies whether NI-FGEN retains instrument status after each
-    operation. Set this property to TRUE to query the instrument status.
-
-    Querying the instrument status is very useful for debugging. After you
-    validate your program, you can set this property to FALSE to disable
-    status checking and maximize performance. However, the effect on NI-FGEN
-    is minor.
-
-    NI-FGEN can choose to ignore status checking for particular properties
-    regardless of the setting of this property. Use the `niFgen Initialize
-    With
-    Options <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Initialize_With_Options.html')>`__
-    VI to override this value.
-
-    **Default Value**: TRUE
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Inherent IVI Attributes:User Options:Query Instrument Status**
-            - C Attribute: **NIFGEN_ATTR_QUERY_INSTRUMENT_STATUS**
-
 .. py:attribute:: range_check
 
     Specifies whether to validate property values and VI parameters. Set
@@ -5451,44 +5194,6 @@ nifgen.Session properties
 
             - LabVIEW Property: **Clocks:Reference Clock:Frequency**
             - C Attribute: **NIFGEN_ATTR_REF_CLOCK_FREQUENCY**
-
-.. py:attribute:: ref_clock_source
-
-    Controls the Reference Clock source the signal generator uses.
-
-    The signal generator derives the frequencies and sample rates that it
-    uses to generate waveforms from the source you specify. For example,
-    when you set this attribute to **Clock In**, the signal generator uses
-    the signal it receives at the Clk In front panel connector as its
-    Reference Clock.
-
-
-
-    .. note:: You cannot change this property while the device is generating a
-        waveform. If you want to change the device configuration, call the
-        `niFgen Abort
-        Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-        VI or wait for the generation to complete.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | int        |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | Yes        |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Obsolete:Ref Clock Source**
-            - C Attribute: **NIFGEN_ATTR_REF_CLOCK_SOURCE**
 
 .. py:attribute:: sample_clock_absolute_delay
 
@@ -5709,33 +5414,6 @@ nifgen.Session properties
             - LabVIEW Property: **Triggers:Script:Trigger Type**
             - C Attribute: **NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE**
 
-.. py:attribute:: secondary_error
-
-    Provides an optional code with additional information concerning the
-    primary error condition. The error and warning values can be status
-    codes defined by IVI, VISA, class drivers, or specific drivers. Zero
-    indicates no additional information.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | int        |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Obsolete:Secondary Error**
-            - C Attribute: **NIFGEN_ATTR_SECONDARY_ERROR**
-
 .. py:attribute:: serial_number
 
     Returns the serial number of the signal generator.
@@ -5869,55 +5547,6 @@ nifgen.Session properties
 
             - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Identification:Description**
             - C Attribute: **NIFGEN_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
-
-.. py:attribute:: specific_driver_prefix
-
-    Contains the prefix for NI-FGEN. The name of each user-callable VI in
-    NI-FGEN starts with this prefix.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Identification:Driver Prefix**
-            - C Attribute: **NIFGEN_ATTR_SPECIFIC_DRIVER_PREFIX**
-
-.. py:attribute:: specific_driver_revision
-
-    Contains additional version information about NI-FGEN.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Identification:Revision**
-            - C Attribute: **NIFGEN_ATTR_SPECIFIC_DRIVER_REVISION**
 
 .. py:attribute:: specific_driver_vendor
 
@@ -6549,38 +6178,6 @@ nifgen.Session properties
 
             - LabVIEW Property: **Instrument:5401/5411/5431:Trigger Source**
             - C Attribute: **NIFGEN_ATTR_TRIGGER_SOURCE**
-
-.. py:attribute:: update_clock_source
-
-    Controls the Update Clock source.
-
-
-
-    .. note:: You cannot change this property while the device is generating a
-        waveform. If you want to change the device configuration, call the
-        `niFgen Abort
-        Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-        VI or wait for the generation to complete.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------------------------+
-    | Characteristic | Value                        |
-    +================+==============================+
-    | Datatype       | :py:data:`UpdateClockSource` |
-    +----------------+------------------------------+
-    | Permissions    | read-write                   |
-    +----------------+------------------------------+
-    | Channel Based  | False                        |
-    +----------------+------------------------------+
-    | Resettable     | Yes                          |
-    +----------------+------------------------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Obsolete:Update Clock Source**
-            - C Attribute: **NIFGEN_ATTR_UPDATE_CLOCK_SOURCE**
 
 .. py:attribute:: video_waveform_type
 

@@ -574,41 +574,6 @@ niswitch.Session properties
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
             - C Attribute: **NISWITCH_ATTR_INTERCHANGE_CHECK**
 
-.. py:attribute:: io_resource_descriptor
-
-    Contains the resource descriptor the instrument driver uses to identify
-    the physical device.
-
-    If you initialize the instrument driver with a logical name, this
-    property contains the resource descriptor that corresponds to the entry
-    in the IVI Configuration Utility. If you initialize the instrument
-    driver with the resource descriptor, this property contains that value.
-
-    **Related topics**
-
-    `Initialization <SWITCH.chm::/flow_init.html>`__ `niSwitch
-    Properties <switchpropref.chm::/cniSwitch.html>`__
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:IO Resource Descriptor**
-            - C Attribute: **NISWITCH_ATTR_IO_RESOURCE_DESCRIPTOR**
-
 .. py:attribute:: is_configuration_channel
 
     Specifies whether to designate the channel as a configuration channel—a
@@ -1487,44 +1452,6 @@ niswitch.Session properties
             - LabVIEW Property: **Module Characteristics:Power Down Latching Relays After Debounce**
             - C Attribute: **NISWITCH_ATTR_POWER_DOWN_LATCHING_RELAYS_AFTER_DEBOUNCE**
 
-.. py:attribute:: query_instrument_status
-
-    Specifies whether the instrument driver queries the instrument status
-    after each operation. The default value is TRUE. Use the `niSwitch
-    Initialize With
-    Options <switchviref.chm::/niSwitch_Initialize_With_Options.html>`__ VI
-    to override the default value.
-
-    Querying the instrument status is useful for debugging. After you
-    validate your program, set this property to FALSE to disable status
-    checking and maximize performance. The instrument driver can choose to
-    ignore status checking for particular properties regardless of the
-    setting of this property.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
-            - C Attribute: **NISWITCH_ATTR_QUERY_INSTRUMENT_STATUS**
-
 .. py:attribute:: range_check
 
     Specifies whether to validate property values and VI parameters. The
@@ -1832,31 +1759,6 @@ niswitch.Session properties
             - LabVIEW Property: **Module Characteristics:Serial Number**
             - C Attribute: **NISWITCH_ATTR_SERIAL_NUMBER**
 
-.. py:attribute:: serial_number_i32
-
-    This property has been deprecated and might be removed from a future
-    release of NI-SWITCH.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Obsolete Attributes:Serial Number**
-            - C Attribute: **NISWITCH_ATTR_SERIAL_NUMBER_I32**
-
 .. py:attribute:: settling_time
 
     Returns the maximum length of time in seconds from after you make a
@@ -2022,63 +1924,6 @@ niswitch.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Description**
             - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
-
-.. py:attribute:: specific_driver_prefix
-
-    Contains the prefix for all of the instrument driver VIs.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Prefix**
-            - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_PREFIX**
-
-.. py:attribute:: specific_driver_revision
-
-    Contains additional version information about the instrument driver.
-
-    **Related topics**
-
-    `niSwitch Properties <switchpropref.chm::/cniSwitch.html>`__ `niSwitch
-    Revision Query VI <switchviref.chm::/niSwitch_Revision_Query.html>`__
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Revision**
-            - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_REVISION**
 
 .. py:attribute:: specific_driver_vendor
 

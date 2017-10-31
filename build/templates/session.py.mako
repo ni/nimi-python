@@ -13,7 +13,8 @@ ${encoding_tag}
 
     module_name = config['module_name']
     c_function_prefix = config['c_function_prefix']
-    attributes = template_parameters['metadata'].attributes
+
+    attributes = helper.filter_codegen_attributes(config['attributes'])
 
     session_context_manager = None
     if 'task' in config['context_manager_name']:
@@ -26,7 +27,6 @@ ${encoding_tag}
     '''Renders a Session method corresponding to the passed-in function metadata.'''
 
     parameters = f['parameters']
-    output_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_PARAMETERS)
     enum_input_parameters = helper.filter_parameters(f, helper.ParameterUsageOptions.INPUT_ENUM_PARAMETERS)
     ivi_dance_parameter = helper.filter_ivi_dance_parameter(f)
     ivi_dance_size_parameter = helper.find_size_parameter(ivi_dance_parameter, parameters)
@@ -42,18 +42,14 @@ ${encoding_tag}
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
-% for output_parameter in output_parameters:
-        ${helper.get_ctype_variable_declaration_snippet(output_parameter, parameters)}
+% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
+        ${helper.get_ctype_variable_declaration_snippet(p, parameters)}
 % endfor
 % if ivi_dance_parameter is not None:
-        ${ivi_dance_size_parameter['python_name']} = 0
-        ${ivi_dance_parameter['ctypes_variable_name']} = None
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=${f['is_error_handling']})
-        ${ivi_dance_size_parameter['python_name']} = error_code
-        ${ivi_dance_parameter['ctypes_variable_name']} = (visatype.${ivi_dance_parameter['ctypes_type']} * ${ivi_dance_size_parameter['python_name']})()
-% elif len_parameter is not None:
-        ${len_size_parameter['python_name']} = len(${len_parameter['python_name']})
+        ${ivi_dance_size_parameter['ctypes_variable_name']} = visatype.${ivi_dance_size_parameter['ctypes_type']}(error_code)  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
+        ${ivi_dance_parameter['ctypes_variable_name']} = (visatype.${ivi_dance_parameter['ctypes_type']} * ${ivi_dance_size_parameter['ctypes_variable_name']}.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
 % endif
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
@@ -91,9 +87,9 @@ class _SessionBase(object):
 % for attribute in helper.sorted_attrs(attributes):
 <%
 rep_cap_attr_desc = '''
-This property can use repeated capabilities (usually channels). If set or get directly on the 
-{0}.Session object, then the set/get will use all repeated capabilities in the session. 
-You can specify a subset of repeated capabilities using the Python index notation on an 
+This property can use repeated capabilities (usually channels). If set or get directly on the
+{0}.Session object, then the set/get will use all repeated capabilities in the session.
+You can specify a subset of repeated capabilities using the Python index notation on an
 {0}.Session instance, and calling set/get value on the result.:
 
     session['0,1'].{0} = var
@@ -103,11 +99,11 @@ if attributes[attribute]['channel_based'] == 'True':
     attributes[attribute]['documentation']['tip'] = rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
 %>\
     %if attributes[attribute]['enum']:
-    ${attributes[attribute]['name'].lower()} = attributes.AttributeEnum(attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
+    ${attributes[attribute]['python_name']} = attributes.AttributeEnum(attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
     %else:
-    ${attributes[attribute]['name'].lower()} = attributes.Attribute${attributes[attribute]['type']}(${attribute})
+    ${attributes[attribute]['python_name']} = attributes.Attribute${attributes[attribute]['type']}(${attribute})
     %endif
-%   if 'documentation' in attributes[attribute]:
+%   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
     '''
     ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
     '''

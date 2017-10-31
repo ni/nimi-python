@@ -24,8 +24,8 @@ class Library(object):
         self.niFake_GetABoolean_cfunc = None
         self.niFake_GetANumber_cfunc = None
         self.niFake_GetAStringOfFixedMaximumSize_cfunc = None
-        self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc = None
         self.niFake_GetAnIviDanceString_cfunc = None
+        self.niFake_GetArrayUsingIVIDance_cfunc = None
         self.niFake_GetAttributeViBoolean_cfunc = None
         self.niFake_GetAttributeViInt32_cfunc = None
         self.niFake_GetAttributeViInt64_cfunc = None
@@ -124,14 +124,6 @@ class Library(object):
                 self.niFake_GetAStringOfFixedMaximumSize_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAStringOfFixedMaximumSize_cfunc(vi, a_string)
 
-    def niFake_GetAStringWithSpecifiedMaximumSize(self, vi, a_string, buffer_size):  # noqa: N802
-        with self._func_lock:
-            if self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc is None:
-                self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc = self._library.niFake_GetAStringWithSpecifiedMaximumSize
-                self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc(vi, a_string, buffer_size)
-
     def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
         with self._func_lock:
             if self.niFake_GetAnIviDanceString_cfunc is None:
@@ -139,6 +131,14 @@ class Library(object):
                 self.niFake_GetAnIviDanceString_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetAnIviDanceString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAnIviDanceString_cfunc(vi, buffer_size, a_string)
+
+    def niFake_GetArrayUsingIVIDance(self, vi, array_size, array_out):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetArrayUsingIVIDance_cfunc is None:
+                self.niFake_GetArrayUsingIVIDance_cfunc = self._library.niFake_GetArrayUsingIVIDance
+                self.niFake_GetArrayUsingIVIDance_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_GetArrayUsingIVIDance_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetArrayUsingIVIDance_cfunc(vi, array_size, array_out)
 
     def niFake_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:

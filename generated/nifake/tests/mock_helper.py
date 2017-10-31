@@ -35,12 +35,12 @@ class SideEffectsHelper(object):
         self._defaults['GetAStringOfFixedMaximumSize'] = {}
         self._defaults['GetAStringOfFixedMaximumSize']['return'] = 0
         self._defaults['GetAStringOfFixedMaximumSize']['aString'] = None
-        self._defaults['GetAStringWithSpecifiedMaximumSize'] = {}
-        self._defaults['GetAStringWithSpecifiedMaximumSize']['return'] = 0
-        self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'] = None
         self._defaults['GetAnIviDanceString'] = {}
         self._defaults['GetAnIviDanceString']['return'] = 0
         self._defaults['GetAnIviDanceString']['aString'] = None
+        self._defaults['GetArrayUsingIVIDance'] = {}
+        self._defaults['GetArrayUsingIVIDance']['return'] = 0
+        self._defaults['GetArrayUsingIVIDance']['arrayOut'] = None
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
         self._defaults['GetAttributeViBoolean']['attributeValue'] = None
@@ -200,28 +200,26 @@ class SideEffectsHelper(object):
             a_string[i] = a[i]
         return self._defaults['GetAStringOfFixedMaximumSize']['return']
 
-    def niFake_GetAStringWithSpecifiedMaximumSize(self, vi, a_string, buffer_size):  # noqa: N802
-        if self._defaults['GetAStringWithSpecifiedMaximumSize']['return'] != 0:
-            return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
-        if self._defaults['GetAStringWithSpecifiedMaximumSize']['aString'] is None:
-            raise MockFunctionCallError("niFake_GetAStringWithSpecifiedMaximumSize", param='aString')
-        a = self._defaults['GetAStringWithSpecifiedMaximumSize']['aString']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(a_string), len(a))):
-            a_string[i] = a[i]
-        return self._defaults['GetAStringWithSpecifiedMaximumSize']['return']
-
     def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
         if self._defaults['GetAnIviDanceString']['return'] != 0:
             return self._defaults['GetAnIviDanceString']['return']
         if self._defaults['GetAnIviDanceString']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAnIviDanceString", param='aString')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetAnIviDanceString']['aString'])
         a_string.value = self._defaults['GetAnIviDanceString']['aString'].encode('ascii')
         return self._defaults['GetAnIviDanceString']['return']
+
+    def niFake_GetArrayUsingIVIDance(self, vi, array_size, array_out):  # noqa: N802
+        if self._defaults['GetArrayUsingIVIDance']['return'] != 0:
+            return self._defaults['GetArrayUsingIVIDance']['return']
+        if self._defaults['GetArrayUsingIVIDance']['arrayOut'] is None:
+            raise MockFunctionCallError("niFake_GetArrayUsingIVIDance", param='arrayOut')
+        if array_size.value == 0:
+            return len(self._defaults['GetArrayUsingIVIDance']['arrayOut'])
+        for i in range(len(self._defaults['GetArrayUsingIVIDance']['arrayOut'])):
+            array_out[i] = self._defaults['GetArrayUsingIVIDance']['arrayOut'][i]
+        return self._defaults['GetArrayUsingIVIDance']['return']
 
     def niFake_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
@@ -260,7 +258,7 @@ class SideEffectsHelper(object):
             return self._defaults['GetAttributeViString']['return']
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViString", param='attributeValue')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
@@ -284,7 +282,7 @@ class SideEffectsHelper(object):
         error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niFake_GetError", param='description')
-        if buffer_size == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetError']['description'])
         description.value = self._defaults['GetError']['description'].encode('ascii')
         return self._defaults['GetError']['return']
@@ -412,7 +410,7 @@ class SideEffectsHelper(object):
             an_array[i] = a[i]
         if self._defaults['ReturnMultipleTypes']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aString')
-        if string_size == 0:
+        if string_size.value == 0:
             return len(self._defaults['ReturnMultipleTypes']['aString'])
         a_string.value = self._defaults['ReturnMultipleTypes']['aString'].encode('ascii')
         return self._defaults['ReturnMultipleTypes']['return']
@@ -496,10 +494,10 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetANumber.return_value = 0
         mock_library.niFake_GetAStringOfFixedMaximumSize.side_effect = MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize")
         mock_library.niFake_GetAStringOfFixedMaximumSize.return_value = 0
-        mock_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = MockFunctionCallError("niFake_GetAStringWithSpecifiedMaximumSize")
-        mock_library.niFake_GetAStringWithSpecifiedMaximumSize.return_value = 0
         mock_library.niFake_GetAnIviDanceString.side_effect = MockFunctionCallError("niFake_GetAnIviDanceString")
         mock_library.niFake_GetAnIviDanceString.return_value = 0
+        mock_library.niFake_GetArrayUsingIVIDance.side_effect = MockFunctionCallError("niFake_GetArrayUsingIVIDance")
+        mock_library.niFake_GetArrayUsingIVIDance.return_value = 0
         mock_library.niFake_GetAttributeViBoolean.side_effect = MockFunctionCallError("niFake_GetAttributeViBoolean")
         mock_library.niFake_GetAttributeViBoolean.return_value = 0
         mock_library.niFake_GetAttributeViInt32.side_effect = MockFunctionCallError("niFake_GetAttributeViInt32")

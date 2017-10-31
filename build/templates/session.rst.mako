@@ -2,11 +2,10 @@
     import build.helper as helper
 
     config        = template_parameters['metadata'].config
-    attributes    = config['attributes']
-    functions     = config['functions']
-    functions     = helper.filter_codegen_functions(functions)
-    module_name = config['module_name']
-    driver_name = config['driver_name']
+    attributes    = helper.filter_codegen_attributes(config['attributes'])
+    functions     = helper.filter_codegen_functions(config['functions'])
+    module_name   = config['module_name']
+    driver_name   = config['driver_name']
     c_function_prefix = config['c_function_prefix']
 %>\
 ${helper.get_rst_header_snippet(module_name + '.Session', '=')}
@@ -26,7 +25,7 @@ for attr in helper.sorted_attrs(attributes):
     else:
         t = helper.get_python_type_for_visa_type(attributes[attr]["type"])
 
-    table_contents.append((':py:attr:`' + attributes[attr]["name"].lower() + '`', t))
+    table_contents.append((':py:attr:`' + attributes[attr]["python_name"] + '`', t))
 
 table = helper.as_rest_table(table_contents)
 %>\

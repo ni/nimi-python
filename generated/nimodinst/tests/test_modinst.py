@@ -1,9 +1,8 @@
-import ctypes
+import matchers
 import mock_helper
 import nimodinst
 import warnings
 
-from mock import ANY
 from mock import patch
 
 SESSION_NUM_FOR_TEST = 42
@@ -37,10 +36,12 @@ class TestSession(object):
 
     # Helper function for mocking multiple devices
     def niModInst_GetInstalledDeviceAttributeViString_looping(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
-        if attribute_value_buffer_size == 0:
+        if attribute_value_buffer_size.value == 0:
+            # TODO(marcoskirsch): What about the byte for the NULL character? Issue #526
             return (len(self.string_vals_device_looping[self.iteration_device_looping]))
-        t = nimodinst.visatype.ViString(self.string_vals_device_looping[self.iteration_device_looping].encode('ascii'))
-        attribute_value.value = ctypes.cast(t, nimodinst.visatype.ViString).value
+        bytes_to_copy = self.string_vals_device_looping[self.iteration_device_looping].encode('ascii')
+        for i in range(0, len(bytes_to_copy)):
+            attribute_value[i] = bytes_to_copy[i]
         self.iteration_device_looping += 1
         return 0
 
@@ -51,22 +52,23 @@ class TestSession(object):
         return 0
 
     # API Tests
+
     def test_open_and_close(self):
         session = nimodinst.Session('')
-        self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
+        self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(matchers.ViStringMatcher(''), matchers.ViSessionPointerMatcher(), matchers.ViInt32PointerMatcher())
         session.close()
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
+        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_close(self):
         session = nimodinst.Session('')
         session.close()
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
+        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_context_manager(self):
         with nimodinst.Session('') as session:
             assert type(session) == nimodinst.Session
-            self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(b'', ANY, ANY)
-        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(SESSION_NUM_FOR_TEST)
+            self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(matchers.ViStringMatcher(''), matchers.ViSessionPointerMatcher(), matchers.ViInt32PointerMatcher())
+        self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 
     def test_iterating_for(self):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 2
@@ -241,4 +243,5 @@ class TestSession(object):
                 assert len(w) == 1
                 assert issubclass(w[0].category, nimodinst.NimodinstWarning)
                 assert error_string in str(w[0].message)
+
 

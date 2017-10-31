@@ -48,9 +48,6 @@ functions_buffer_info = {
     'GetAStringWithSpecifiedMaximumSize':    { 'parameters': { 1: { 'size': {'mechanism':'passed-in', 'value':'bufferSize'}, }, }, },
     'ReturnANumberAndAString':               { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, },
     'GetAStringOfFixedMaximumSize':          { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, },
-    'InitWithOptions':                       { 'parameters': { 0: { 'is_buffer': True, },
-                                                               3: { 'is_buffer': True, }, }, },
-    '.etAttribute.+':                        { 'parameters': { 1: { 'is_buffer': True, }, }, },
     'error_message':                         { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'ArrayInputFunction':                    { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfElements'}, }, }, },
     'GetAnIviDanceString':                   { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
@@ -62,6 +59,7 @@ functions_buffer_info = {
     'ParametersAreMultipleTypes':            { 'parameters': { 8: { 'size': {'mechanism':'len', 'value':'stringSize'}, }, }, },
     'BoolArrayOutputFunction':               { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
     'EnumArrayOutputFunction':               { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
+    'GetArrayUsingIVIDance':                 { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'arraySize'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

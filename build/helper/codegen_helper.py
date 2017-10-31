@@ -61,8 +61,8 @@ def get_params_snippet(function, parameter_usage_options):
         snippets.append('self')
 
     # Render based on options
-    for x in parameters_to_use:
-            snippets.append(x[options_to_use['name_to_use']])
+    for p in parameters_to_use:
+            snippets.append(p[options_to_use['name_to_use']])
     return ', '.join(snippets)
 
 
@@ -84,7 +84,7 @@ def _get_output_param_return_snippet(output_parameter, parameters):
                 size = str(output_parameter['size']['value'])
             else:
                 size_parameter = find_size_parameter(output_parameter, parameters)
-                size = size_parameter['python_name']
+                size = size_parameter['ctypes_variable_name'] + '.value'
 
             snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
     else:
@@ -111,24 +111,78 @@ def get_enum_type_check_snippet(parameter, indent):
     return enum_check
 
 
+def _get_buffer_parameter_for_size_parameter(parameter, parameters):
+    '''If parameter represents the size of another parameter in the C API, returns that other parameter. Otherwise None.'''
+    for p in parameters:
+        if p['is_buffer'] and p['size']['value'] == parameter['name']:
+            return p
+    return None
+
+
 def get_ctype_variable_declaration_snippet(parameter, parameters):
-    '''Returns python snippet to declare and initialize the corresponding ctypes variable'''
-    assert parameter['direction'] == 'out', pp.pformat(parameter)
-    snippet = parameter['ctypes_variable_name'] + ' = '
-    if parameter['is_buffer']:
-        if parameter['size']['mechanism'] == 'fixed':
-            snippet += '(' + 'visatype.' + parameter['ctypes_type'] + ' * ' + str(parameter['size']['value']) + ')()'
-        elif parameter['size']['mechanism'] == 'ivi-dance':
-            # TODO(marcoskirsch): remove.
-            assert False, "THIS IS DEAD CODE!"
-            snippet += 'visatype.' + parameter['ctypes_type'] + '(0)  # TODO(marcoskirsch): Do the IVI-dance!'
+    '''Returns python snippet that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
+
+    We've identified many different cases on how these need to be initialized based on the parameter:
+        1. Input session handle:                                        visatype.ViSession(self._vi)
+        2. Input repeated capability:                                   ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
+        3. Input string:                                                ctypes.create_string_buffer(parameter_name.encode(self._encoding))
+        4. Input buffer (not string):                                   (visatype.ViInt32 * len(list))(*list)
+        5. Input is size of input buffer:                               visatype.ViInt32(len(list))
+        6. Input is size of output buffer with mechanism ivi-dance:     visatype.ViInt32()
+        7. Input is size of output buffer with mechanism passed-in:     visatype.ViInt32(buffer_size)
+        8. Input scalar:                                                visatype.ViInt32(parameter_name)
+        9. Input enum:                                                  visatype.ViInt32(parameter_name.value)
+       10. Output buffer with mechanism fixed-size:                     visatype.ViInt32 * 256
+       11. Output buffer with mechanism ivi-dance:                      None
+       12. Output buffer with mechanism passed-in:                      (visatype.ViInt32 * buffer_size)()
+       13. Output scalar or enum:                                       visatype.ViInt32()
+    '''
+
+    # And now: A large block of conditional logic for getting to each of these cases. The following will not win any beauty pageants.
+    # Suggestions on how to improve readability are welcome.
+    # Note that we append "# case x". It's ugly in the generated code but it's sooo useful for debugging code generation problems.
+    if parameter['direction'] == 'in':
+        if parameter['is_session_handle'] is True:
+            definition = 'visatype.{0}(self._{1})  # case 1'.format(parameter['ctypes_type'], parameter['python_name'])
+        elif parameter['is_repeated_capability'] is True:
+            definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2'
+        elif parameter['type'] == 'ViChar':
+            definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case 3'.format(parameter['python_name'])
+        elif parameter['is_buffer'] is True:
+            definition = '(visatype.{0} * len({1}))(*{1})  # case 4'.format(parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
         else:
-            assert parameter['size']['mechanism'] == 'passed-in', parameter['size']['mechanism']
-            size_parameter = find_size_parameter(parameter, parameters)
-            snippet += '(' + 'visatype.' + parameter['ctypes_type'] + ' * ' + size_parameter['python_name'] + ')()'
+            corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
+            if corresponding_buffer_parameter is not None:
+                if corresponding_buffer_parameter['direction'] == 'in':
+                    definition = 'visatype.{0}(len({1}))  # case 5'.format(parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
+                else:
+                    assert corresponding_buffer_parameter['direction'] == 'out'
+                    if corresponding_buffer_parameter['size']['mechanism'] == 'ivi-dance':
+                        definition = 'visatype.{0}()  # case 6'.format(parameter['ctypes_type'])
+                    else:
+                        assert corresponding_buffer_parameter['size']['mechanism'] == 'passed-in', 'mechanism fixed-size makes no sense here! Check metadata'
+                        definition = 'visatype.{0}({1})  # case 7'.format(parameter['ctypes_type'], parameter['python_name'])
+            elif parameter['enum'] is None:
+                definition = 'visatype.{0}({1})  # case 8'.format(parameter['ctypes_type'], parameter['python_name'])
+            else:
+                definition = 'visatype.{0}({1}.value)  # case 9'.format(parameter['ctypes_type'], parameter['python_name'])
     else:
-        snippet += 'visatype.' + parameter['ctypes_type'] + '(0)'
-    return snippet
+        assert parameter['direction'] == 'out'
+        if parameter['is_buffer'] is True:
+            assert 'size' in parameter, 'Warning: \'size\' not in parameter: ' + str(parameter)
+            if parameter['size']['mechanism'] == 'fixed':
+                definition = '(visatype.{0} * {1})()  # case 10'.format(parameter['ctypes_type'], parameter['size']['value'])
+            elif parameter['size']['mechanism'] == 'ivi-dance':
+                definition = 'None  # case 11'
+            elif parameter['size']['mechanism'] == 'passed-in':
+                size_parameter = find_size_parameter(parameter, parameters)
+                definition = '(visatype.{0} * {1})()  # case 12'.format(parameter['ctypes_type'], size_parameter['python_name'])
+            else:
+                assert False, 'Unknown mechanism: ' + str(parameter)
+        else:
+            definition = 'visatype.{0}()  # case 13'.format(parameter['ctypes_type'])
+
+    return parameter['ctypes_variable_name'] + ' = ' + definition
 
 
 def get_dictionary_snippet(d, indent=4):

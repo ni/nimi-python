@@ -100,25 +100,10 @@ def _add_buffer_info(parameter):
 
 def _add_library_method_call_snippet(parameter):
     '''Code snippet for calling a method of Library for this parameter.'''
-    if parameter['direction'] == 'in':
-        if parameter['is_session_handle'] is True:
-            library_method_call_snippet = 'self._' + parameter['name']
-        elif parameter['is_repeated_capability']:
-            # 'self._encoding' is a variable on the session object
-            library_method_call_snippet = 'self._repeated_capability.encode(self._encoding)'
-        else:
-            library_method_call_snippet = parameter['python_name']
-            library_method_call_snippet += '.value' if parameter['enum'] is not None else ''
-            # 'self._encoding' is a variable on the session object
-            library_method_call_snippet += '.encode(self._encoding)' if parameter['type'] == 'ViChar' else ''
-
+    if parameter['direction'] == 'out' and parameter['is_buffer'] is False:
+        parameter['library_method_call_snippet'] = 'ctypes.pointer({0})'.format(parameter['ctypes_variable_name'])
     else:
-        assert parameter['direction'] == 'out', pp.pformat(parameter)
-        if parameter['is_buffer'] is True:
-            library_method_call_snippet = parameter['ctypes_variable_name']
-        else:
-            library_method_call_snippet = 'ctypes.pointer(' + (parameter['ctypes_variable_name']) + ')'
-    parameter['library_method_call_snippet'] = library_method_call_snippet
+        parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
 
 
 def _add_default_value_name(parameter):
@@ -197,6 +182,34 @@ def add_all_function_metadata(functions, config):
             _add_is_session_handle(p)
             _add_library_method_call_snippet(p)
     return functions
+
+
+def _add_codegen_method(a, attributes):
+    '''Adds 'codegen_method' that will determine whether and how the attribute is code genned. Default is public'''
+    if 'codegen_method' not in attributes[a]:
+        attributes[a]['codegen_method'] = 'public'
+
+
+def _add_python_name(a, attributes):
+    '''Adds 'python_name' - lower case + leading '_' if first character is a digit'''
+    n = attributes[a]['name'].lower()
+    if attributes[a]['name'][0].isdigit():
+        n = '_' + n
+    attributes[a]['python_name'] = n
+
+
+def add_all_attribute_metadata(attributes, config):
+    '''Merges and Adds all codegen-specific metada to the function metadata list'''
+    if 'modules' in config and 'metadata.functions_addon' in config['modules']:
+        for m in dir(config['modules']['metadata.attributes_addon']):
+            if m.startswith('attributes_'):
+                merge_dicts(attributes, config['modules']['metadata.attributes_addon'].__getattribute__(m))
+
+    for a in attributes:
+        _add_codegen_method(a, attributes)
+        _add_python_name(a, attributes)
+
+    return attributes
 
 
 # Unit Tests
@@ -320,7 +333,7 @@ def test_add_all_metadata_simple():
                         'value': 1
                     },
                     'type': 'ViSession',
-                    'library_method_call_snippet': 'self._vi',
+                    'library_method_call_snippet': 'vi_ctype',
                 },
                 {
                     'ctypes_type': 'ViChar',
@@ -342,7 +355,7 @@ def test_add_all_metadata_simple():
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViChar',
                     'original_type': 'ViString',
-                    'library_method_call_snippet': 'self._repeated_capability.encode(self._encoding)',
+                    'library_method_call_snippet': 'channel_name_ctype',
                 },
             ],
             'python_name': 'make_a_foo',
@@ -373,7 +386,7 @@ def test_add_all_metadata_simple():
                 'python_name_with_doc_default': 'vi',
                 'is_repeated_capability': False,
                 'is_session_handle': True,
-                'library_method_call_snippet': 'self._vi'
+                'library_method_call_snippet': 'vi_ctype'
             }, {
                 'direction': 'out',
                 'enum': None,
