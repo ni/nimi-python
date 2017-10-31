@@ -13,20 +13,15 @@ class Library(object):
     Class will setup the correct ctypes information for every function on first call.
     '''
 
-    def __init__(self, library_name, library_type):
+    def __init__(self, ctypes_library):
         self._func_lock = threading.Lock()
+        self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niModInst_CloseInstalledDevicesSession_cfunc = None
         self.niModInst_GetExtendedErrorInfo_cfunc = None
         self.niModInst_GetInstalledDeviceAttributeViInt32_cfunc = None
         self.niModInst_GetInstalledDeviceAttributeViString_cfunc = None
         self.niModInst_OpenInstalledDevicesSession_cfunc = None
-
-        if library_type == 'windll':
-            self._library = ctypes.WinDLL(library_name)
-        else:  # pragma: no cover
-            assert library_type == 'cdll'
-            self._library = ctypes.CDLL(library_name)
 
     def niModInst_CloseInstalledDevicesSession(self, handle):  # noqa: N802
         with self._func_lock:
