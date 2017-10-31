@@ -53,11 +53,11 @@ def test_self_cal(session):
 
 
 def test_standard_waveform(session):
-    session.configure_output_mode(nifgen.OutputMode.NIFGEN_VAL_OUTPUT_FUNC)
-    session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 0.0, 2000000, 0.0)
+    session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_FUNC
+    session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 0.0, 0.0, 2000000)
     session.output_enabled = True
-    session.configure_trigger_mode(nifgen.TriggerMode.NIFGEN_VAL_CONTINUOUS)
-    session.configure_trigger_source(nifgen.TriggerSource.NIFGEN_VAL_IMMEDIATE)
+    session.trigger_mode = nifgen.TriggerMode.NIFGEN_VAL_CONTINUOUS
+    session.trigger_source = nifgen.TriggerSource.NIFGEN_VAL_IMMEDIATE 
     with session.initiate():
         assert session.func_amplitude == 2.0
         assert session.func_waveform == nifgen.Waveform.SINE
@@ -73,18 +73,16 @@ def test_no_waveform_data(session):
 
 
 def test_frequency_list(session):
-    session.configure_output_mode(nifgen.OutputMode.NIFGEN_VAL_OUTPUT_FREQ_LIST)
+    session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_FREQ_LIST
     session.clear_freq_list(-1)
     duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
     frequency_array = [1000, 100900, 200800, 300700, 400600, 500500, 600400, 700300, 800200, 900100]
-    waveform_handle = session.create_freq_list(nifgen.Waveform.SQUARE, 10, frequency_array, duration_array)
+    waveform_handle = session.create_freq_list(nifgen.Waveform.SQUARE, frequency_array, duration_array)
     session.configure_freq_list(waveform_handle, 2.0, 0, 0)
-    session.configure_trigger_mode(nifgen.TriggerMode.NIFGEN_VAL_CONTINUOUS)
-    session.disable_start_trigger()
+    session.trigger_mode = nifgen.TriggerMode.NIFGEN_VAL_CONTINUOUS
     session.output_enabled = True
     with session.initiate():
         assert session.func_waveform == nifgen.Waveform.SQUARE
-    session.configure_software_edge_start_trigger()
     session.output_enabled = True
     with session.initiate():
         assert session.func_waveform == nifgen.Waveform.SQUARE
