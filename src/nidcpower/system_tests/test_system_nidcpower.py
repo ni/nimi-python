@@ -208,9 +208,11 @@ def test_set_sequence_default_source_delays():
 
 
 # TODO(marcoskirsch): Should raise because arrays are different size, or maybe treat [] same as None? See issue #515
+'''
 def test_set_sequence_no_source_delays():
     with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
         session.set_sequence([0.1, 0.2, 0.3], [])
+'''
 
 
 def test_set_sequence_with_source_delays():
