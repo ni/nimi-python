@@ -47,8 +47,8 @@ def get():
                 else:  # pragma: no cover
                     assert library_type == 'cdll'
                     ctypes_library = ctypes.CDLL(_get_library_name())
-                    _instance = library.Library(ctypes_library)
             except OSError:  # pragma: no cover
                 raise errors.DriverNotInstalledError()
+            _instance = library.Library(ctypes_library)
         return _instance
 
