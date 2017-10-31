@@ -117,235 +117,6 @@ nifgen.Session methods
 
 
 
-.. function:: check_attribute_vi_boolean(attribute_id, attribute_value)
-
-    Checks the validity of a value you specify for a ViBoolean attribute.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].check_attribute_vi_boolean(attribute_id, attribute_value)
-
-
-    :param attribute_id:
-
-
-        Specifies the ID of an attribute.
-
-        
-
-
-    :type attribute_id: int
-    :param attribute_value:
-
-
-        Specifies the value to which you want to set the attribute. **Default
-        Value**: None
-
-        
-
-        .. note:: Some of the values might not be valid depending on the current
-            settings of the instrument session.
-
-
-    :type attribute_value: bool
-
-.. function:: check_attribute_vi_int32(attribute_id, attribute_value)
-
-    Checks the validity of a value you specify for a ViInt32 attribute.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].check_attribute_vi_int32(attribute_id, attribute_value)
-
-
-    :param attribute_id:
-
-
-        Specifies the ID of an attribute.
-
-        
-
-
-    :type attribute_id: int
-    :param attribute_value:
-
-
-        Specifies the value to which you want to set the attribute. **Default
-        Value**: None
-
-        
-
-        .. note:: Some of the values might not be valid depending on the current
-            settings of the instrument session.
-
-
-    :type attribute_value: int
-
-.. function:: check_attribute_vi_int64(attribute_id, attribute_value)
-
-    Checks the validity of a value you specify for a ViInt64 attribute.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].check_attribute_vi_int64(attribute_id, attribute_value)
-
-
-    :param attribute_id:
-
-
-        Specifies the ID of an attribute.
-
-        
-
-
-    :type attribute_id: int
-    :param attribute_value:
-
-
-        Specifies the value to which you want to set the attribute. **Default
-        Value**: None
-
-        
-
-        .. note:: Some of the values might not be valid depending on the current
-            settings of the instrument session.
-
-
-    :type attribute_value: int
-
-.. function:: check_attribute_vi_real64(attribute_id, attribute_value)
-
-    Checks the validity of a value you specify for a ViReal64 attribute.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].check_attribute_vi_real64(attribute_id, attribute_value)
-
-
-    :param attribute_id:
-
-
-        Specifies the ID of an attribute.
-
-        
-
-
-    :type attribute_id: int
-    :param attribute_value:
-
-
-        Specifies the value to which you want to set the attribute. **Default
-        Value**: None
-
-        
-
-        .. note:: Some of the values might not be valid depending on the current
-            settings of the instrument session.
-
-
-    :type attribute_value: float
-
-.. function:: check_attribute_vi_session(attribute_id)
-
-    Checks the validity of a value you specify for a ViSession attribute.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].check_attribute_vi_session(attribute_id)
-
-
-    :param attribute_id:
-
-
-        Specifies the ID of an attribute.
-
-        
-
-
-    :type attribute_id: int
-
-.. function:: check_attribute_vi_string(attribute_id, attribute_value)
-
-    Checks the validity of a value you specify for a ViString attribute.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].check_attribute_vi_string(attribute_id, attribute_value)
-
-
-    :param attribute_id:
-
-
-        Specifies the ID of an attribute.
-
-        
-
-
-    :type attribute_id: int
-    :param attribute_value:
-
-
-        Specifies the value which you want to verify as a valid value for the
-        attribute.
-
-        **Default Value**: None
-
-        
-
-        .. note:: Some of the values might not be valid depending on the current
-            settings of the instrument session.
-
-
-    :type attribute_value: string
-
 .. function:: clear_arb_memory()
 
     Removes all previously created arbitrary waveforms, sequences, and
@@ -415,7 +186,7 @@ nifgen.Session methods
         -  :py:func:`nifgen.create_waveform_i16`
         -  :py:func:`nifgen.create_waveform_from_file_i16`
         -  :py:func:`nifgen.create_waveform_from_file_f64`
-        -  :py:func:`nifgen.create_waveform_from_file_hws`
+        -  :py:func:`nifgen.CreateWaveformFromFileHWS`
 
         **Defined Value**:
 
@@ -506,48 +277,6 @@ nifgen.Session methods
     
 
 
-
-.. function:: configure_amplitude(amplitude)
-
-    Configures the amplitude of the standard waveform that you want the
-    signal generator to produce.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].configure_amplitude(amplitude)
-
-
-    :param amplitude:
-
-
-        Specifies the amplitude of the standard waveform that you want the
-        signal generator to produce. This value is the amplitude at the output
-        terminal. NI-FGEN sets the :py:data:`nifgen.FUNC\_AMPLITUDE` attribute to
-        this value.
-
-        For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
-        the amplitude to 10.00 V.
-
-        **Units**: peak-to-peak voltage
-
-        **Default Value**: None
-
-        
-
-        .. note:: This parameter does not affect signal generator behavior when you set
-            the **waveform** parameter of the :py:func:`nifgen.configure_standard_waveform`
-            function to NIFGEN\_VAL\_WFM\_DC.
-
-
-    :type amplitude: float
 
 .. function:: configure_arb_sequence(sequence_handle, gain, offset)
 
@@ -663,7 +392,7 @@ nifgen.Session methods
         -  :py:func:`nifgen.create_waveform_i16`
         -  :py:func:`nifgen.create_waveform_from_file_i16`
         -  :py:func:`nifgen.create_waveform_from_file_f64`
-        -  :py:func:`nifgen.create_waveform_from_file_hws`
+        -  :py:func:`nifgen.CreateWaveformFromFileHWS`
 
         These functions return a handle that you use to identify the waveform.
 
@@ -714,75 +443,7 @@ nifgen.Session methods
 
     :type offset: float
 
-.. function:: configure_channels(channels)
-
-    Configures the channels to use with the instrument specified in the
-    **vi** parameter. If you call this function, you must call it
-    immediately after initializing your session and before configuring
-    attributes or writing data.
-
-    
-
-
-
-    :param channels:
-
-
-        Specifies the channel on which all subsequent channel-based attributes
-        in the session are set. Valid values are non-negative integers. For
-        example, 0 is the only valid value on devices with one channel, while
-        devices with two channels support values of 0 and 1. You can specify
-        more than one channel by inserting commas between values (for example,
-        0,1).
-
-        
-
-
-    :type channels: string
-
-.. function:: configure_clock_mode(clock_mode)
-
-    Selects the clock mode for the signal generator.
-
-    Some signal generators allow you to switch the Sample Clock to
-    High-Resolution or Automatic Sampling mode with this function.
-
-    When you select NIFGEN\_VAL\_DIVIDE\_DOWN, NI-FGEN rounds the sample
-    rate to a frequency that can be achieved by dividing down the board
-    clock (Sample Clock timebase). However, if you select
-    NIFGEN\_VAL\_HIGH\_RESOLUTION, you can set the sample rate to any value.
-    If you select NIFGEN\_VAL\_AUTOMATIC, NI-FGEN selects the clock mode
-    based on the sample rate, using divide-down sampling when possible.
-
-    
-
-    .. note:: The signal generator must not be in the Generating state when you call
-        this function.
-
-
-
-    :param clock_mode:
-
-
-        Sets the clock mode of the signal generator.
-
-        ****Defined Values****
-
-        **Default Value**: NIFGEN\_VAL\_HIGH\_RESOLUTION (NI 5450, NI 5451),
-        NIFGEN\_VAL\_DIVIDE\_DOWN (all other devices)
-
-        +-------------------------------+-----------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_DIVIDE\_DOWN     | **Divide down sampling**—Sample rates are generated by dividing the source frequency.               |
-        +-------------------------------+-----------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_HIGH\_RESOLUTION | **High resolution sampling**—Sample rate is generated by a high-resolution clock source.            |
-        +-------------------------------+-----------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_AUTOMATIC        | **Automatic Selection**—NI-FGEN selects between the divide-down and high-resolution clocking modes. |
-        +-------------------------------+-----------------------------------------------------------------------------------------------------+
-
-
-    :type clock_mode: int
-
-.. function:: configure_custom_fir_filter_coefficients(number_of_coefficients, coefficients_array)
+.. function:: configure_custom_fir_filter_coefficients(coefficients_array)
 
     Sets the FIR filter coefficients used by the onboard signal processing
     block. The values are coerced to the closest settings achievable by the
@@ -805,7 +466,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_custom_fir_filter_coefficients(number_of_coefficients, coefficients_array)
+            session['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
 
 
     :param number_of_coefficients:
@@ -832,7 +493,7 @@ nifgen.Session methods
 
     :type coefficients_array: list of float
 
-.. function:: configure_digital_edge_script_trigger(trigger_id, source, edge)
+.. function:: configure_digital_edge_script_trigger(trigger_id, source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING_EDGE)
 
     Configures the specified Script Trigger for digital edge triggering.
 
@@ -924,9 +585,9 @@ nifgen.Session methods
         +----------------------------+------------------------------------------------------------------+
 
 
-    :type edge: :py:data:`nifgen.StartTriggerDigitalEdgeEdge`
+    :type edge: :py:data:`nifgen.ScriptTriggerDigitalEdgeEdge`
 
-.. function:: configure_digital_edge_start_trigger(source, edge)
+.. function:: configure_digital_edge_start_trigger(source, edge=nifgen.StartTriggerDigitalEdgeEdge.RISING_EDGE)
 
     Configures the Start Trigger for digital edge triggering.
 
@@ -997,7 +658,7 @@ nifgen.Session methods
         +----------------------------+------------------------------------------------------------------+
 
 
-    :type edge: int
+    :type edge: :py:data:`nifgen.StartTriggerDigitalEdgeEdge`
 
 .. function:: configure_digital_level_script_trigger(trigger_id, source, trigger_when)
 
@@ -1094,7 +755,7 @@ nifgen.Session methods
 
     :type trigger_when: int
 
-.. function:: configure_freq_list(frequency_list_handle, amplitude, dc_offset, start_phase)
+.. function:: configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
 
     Configures the attributes of the signal generator that affect frequency
     list generation (the :py:data:`nifgen.FREQ\_LIST\_HANDLE`,
@@ -1114,7 +775,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_freq_list(frequency_list_handle, amplitude, dc_offset, start_phase)
+            session['0,1'].configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
 
 
     :param frequency_list_handle:
@@ -1196,528 +857,7 @@ nifgen.Session methods
 
     :type start_phase: float
 
-.. function:: configure_frequency(frequency)
-
-    Configures the frequency of the standard waveform that you want the
-    signal generator to produce.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].configure_frequency(frequency)
-
-
-    :param frequency:
-
-
-        | Specifies the frequency of the standard waveform that you want the
-          signal generator to produce. NI-FGEN sets the
-          :py:data:`nifgen.FUNC\_FREQUENCY` attribute to this value.
-
-        **Units**: hertz
-
-        **Default Value**: None
-
-        
-
-        .. note:: This parameter does not affect signal generator behavior when you set
-            the **waveform** parameter of the :py:func:`nifgen.configure_standard_waveform`
-            function to NIFGEN\_VAL\_WFM\_DC.
-
-
-    :type frequency: float
-
-.. function:: configure_gain(gain)
-
-    Configures the amount of gain to apply to the waveform.
-
-    
-
-    .. note:: The signal generator must not be in the Generating state when you call
-        this function.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].configure_gain(gain)
-
-
-    :param gain:
-
-
-        Specifies the factor by which the signal generator scales the arbitrary
-        waveforms in the sequence. When you create an arbitrary waveform, you
-        must first normalize the data points to a range of –1.00 to +1.00. You
-        can use this parameter to scale the waveform to other ranges. The gain
-        is applied before the offset is added.
-
-        For example, to configure the output signal to range from –2.00 to
-        +2.00 V, set **gain** to 2.00.
-
-        **Units**: unitless
-
-        **Default Value**: None
-
-        
-
-
-    :type gain: float
-
-.. function:: configure_operation_mode(operation_mode)
-
-    Determines how the signal generator produces waveforms. NI signal
-    generators support only Continuous operation mode. To control trigger
-    mode, use the nifgen\_ConfigureTriggerMode function.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].configure_operation_mode(operation_mode)
-
-
-    :param operation_mode:
-
-
-        Specifies the operation mode you want the signal generator to use.
-        NI-FGEN sets the :py:data:`nifgen.OPERATION\_MODE` attribute to this value.
-        NI-FGEN supports only one value.
-
-        **Defined Value**: NIFGEN\_VAL\_OPERATE\_CONTINUOUS
-
-        
-
-
-    :type operation_mode: int
-
-.. function:: configure_output_enabled(enabled)
-
-    Configures the signal generator to generate a signal at the channel
-    output connector.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].configure_output_enabled(enabled)
-
-
-    :param enabled:
-
-
-        Specifies whether you want to enable or disable the output. NI-FGEN uses
-        this value to set the :py:data:`nifgen.OUTPUT\_ENABLED` attribute.
-
-        ****Defined Values****
-
-        **Default Value**: VI\_TRUE
-
-        +-----------+---------------------+
-        | VI\_TRUE  | Enable the output.  |
-        +-----------+---------------------+
-        | VI\_FALSE | Disable the output. |
-        +-----------+---------------------+
-
-
-    :type enabled: bool
-
-.. function:: configure_output_impedance(impedance)
-
-    Configures the output impedance for the channel you specify.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].configure_output_impedance(impedance)
-
-
-    :param impedance:
-
-
-        Specifies the impedance value that you want the signal generator to use.
-        NI-FGEN sets the :py:data:`nifgen.OUTPUT\_IMPEDANCE` attribute to this
-        value.
-
-        **Units**: Ω (ohms)
-
-        ****Defined Values****:
-
-        **Default Value**: NIFGEN\_VAL\_50\_OHMS
-
-        +-----------------------+------------------------------------------+
-        | NIFGEN\_VAL\_50\_OHMS | Specifies that 50 Ω of impedance is used |
-        +-----------------------+------------------------------------------+
-        | NIFGEN\_VAL\_75\_OHMS | Specifies that 75 Ω of impedance is used |
-        +-----------------------+------------------------------------------+
-
-
-    :type impedance: float
-
-.. function:: configure_output_mode(output_mode)
-
-    Configures the output mode of the signal generator. The output mode
-    determines how the signal generator produces waveforms. For example, you
-    can select to generate a standard waveform, an arbitrary waveform, or a
-    sequence of arbitrary waveforms.
-
-    
-
-    .. note:: The signal generator must not be in the Generating state when you
-        call this function.
-
-
-
-    :param output_mode:
-
-
-        Specifies the output mode that you want the signal generator to use. The
-        value you specify determines which functions and attributes you can use
-        to configure the waveform the signal generator produces.
-        Refer to the :py:data:`nifgen.OUTPUT\_MODE` attribute for more information
-        about setting this parameter.
-        ****Defined Values****
-        **Default Value**: NIFGEN\_VAL\_OUTPUT\_FUNC
-
-        +---------------------------------+-------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_OUTPUT\_FUNC       | **Standard Function mode**—Generates standard function waveforms such as sine, square, triangle, and so on. |
-        +---------------------------------+-------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_OUTPUT\_FREQ\_LIST | **Frequency List mode**—Generates a standard function using a list of frequencies you define.               |
-        +---------------------------------+-------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_OUTPUT\_ARB        | **Arbitrary waveform mode**—Generates waveforms from user-created/provided waveform arrays of numeric data. |
-        +---------------------------------+-------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_OUTPUT\_SEQ        | **Arbitrary sequence mode**—Generates downloaded waveforms in an order your specify.                        |
-        +---------------------------------+-------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_OUTPUT\_SCRIPT     | **Script mode**—Allows you to use scripting to link and loop multiple waveforms in complex combinations.    |
-        +---------------------------------+-------------------------------------------------------------------------------------------------------------+
-
-
-    :type output_mode: :py:data:`nifgen.OutputMode`
-
-.. function:: configure_p2_p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
-
-    Configures the Start Trigger for to detect peer-to-peer endpoint
-    fullness. Generation begins when the number of samples in the
-    peer-to-peer endpoint reaches the threshold indicated by the
-    **p2pEndpointFullnessLevel** parameter.
-
-    
-
-    .. note:: Because there is an additional internal FIFO in the signal generator,
-        the writer peer must actually write 2,304 bytes more than the quantity
-        of data specified by this function to satisfy the trigger level.
-
-
-
-    :param p2p_endpoint_fullness_level:
-
-
-        Specifies the quantity of data in the FIFO endpoint that asserts the
-        trigger. The value –1 specifies that NI-FGEN uses a default value based
-        on your endpoint configuration.
-
-        **Units**: samples per channel
-
-        
-
-
-    :type p2p_endpoint_fullness_level: int
-
-.. function:: configure_ref_clock_frequency(reference_clock_frequency)
-
-    Configures the signal generator reference clock frequency. The signal
-    generator uses the reference clock to derive frequencies and sample
-    rates when generating waveforms.
-
-    
-
-    .. note:: The signal generator must not be in the Generating state when you
-        call this function.
-
-
-
-    :param reference_clock_frequency:
-
-
-        The reference clock frequency in Hz.
-
-        **Default Value**: 10000000
-
-        
-
-
-    :type reference_clock_frequency: float
-
-.. function:: configure_ref_clock_source(reference_clock_source)
-
-    Configures the signal generator reference clock source. The signal
-    generator uses the reference clock to derive frequencies and sample
-    rates when generating waveforms.
-
-    
-
-
-
-    :param reference_clock_source:
-
-
-        Specifies the reference clock source that you want the signal generator
-        to use. NI-FGEN sets the :py:data:`nifgen.REF\_CLOCK\_SOURCE` attribute to
-        this value.
-
-        The signal generator derives the frequencies and sample rates that it
-        uses to generate waveforms from the source you specify.
-
-        For example, when you set this parameter to
-        NIFGEN\_VAL\_REF\_CLOCK\_EXTERNAL, the signal generator uses the signal
-        it receives at its external clock terminal as the reference clock.
-
-        ****Defined Values****
-
-        **Default Value**: NIFGEN\_VAL\_REF\_CLOCK\_INTERNAL
-
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_REF\_CLOCK\_INTERNAL    | Internal clock source        |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_REF\_CLOCK\_EXTERNAL    | External clock source        |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_REF\_CLOCK\_RTSI\_CLOCK | RTSI clock                   |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_REF\_CLOCK\_TTL7        | TTL 7                        |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_PXI\_CLK10              | PXI 10 MHz clock             |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_REF\_IN                 | External clock source        |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_RTSI\_0                 | RTSI 0                       |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_RTSI\_1                 | RTSI 1                       |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_RTSI\_2                 | RTSI 2                       |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_RTSI\_3                 | RTSI 3                       |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_RTSI\_4                 | RTSI 4                       |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_RTSI\_5                 | RTSI 5                       |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_RTSI\_6                 | RTSI 6                       |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_RTSI\_7                 | RTSI 7                       |
-        +--------------------------------------+------------------------------+
-        | NIFGEN\_VAL\_CLK\_IN                 | CLK IN front panel connector |
-        +--------------------------------------+------------------------------+
-
-
-    :type reference_clock_source: int
-
-.. function:: configure_reference_clock(reference_clock_source, reference_clock_frequency)
-
-    Configures the signal generator Reference Clock source and frequency.
-    The signal generator uses the Reference Clock to tune the Sample Clock
-    timebase of the signal generator so that the frequency stability and
-    accuracy of the Sample Clock timebase matches that of the Reference
-    Clock.
-
-    
-
-
-
-    :param reference_clock_source:
-
-
-        Specifies the source for the Reference Clock. For example, when you set
-        this parameter to "ClkIn," the signal generator uses the signal it
-        receives at its CLK IN front panel connector as the Reference Clock. The
-        Reference Clock phase-locks with the signal generator Sample Clock
-        timebase to allow the frequency stability and accuracy of the Sample
-        Clock timebase to match that of the Reference Clock.
-        ****Defined Values****
-        **Default Value**: "None"
-
-        +-------------------------+----------------------------------+
-        | "None"                  | No Reference Clock               |
-        +-------------------------+----------------------------------+
-        | "PXI\_Clk"              | 10 MHz backplane Reference Clock |
-        +-------------------------+----------------------------------+
-        | "ClkIn"                 | CLK IN front panel connector     |
-        +-------------------------+----------------------------------+
-        | "OnboardReferenceClock" | Onboard Reference Clock          |
-        +-------------------------+----------------------------------+
-        | "RTSI7"                 | RTSI line 7                      |
-        +-------------------------+----------------------------------+
-        | "RefIn"                 | REF IN front panel connector     |
-        +-------------------------+----------------------------------+
-
-        .. note:: The following **Defined Values** are examples of possible Reference
-            Clock sources. For a complete list of the Reference Clock sources
-            available on your device, refer to the Routes topic for your device or
-            the **Device Routes** tab in MAX.
-
-
-    :type reference_clock_source: string
-    :param reference_clock_frequency:
-
-
-        The Reference Clock frequency in hertz.
-
-        **Default Value**: 10000000
-
-        
-
-
-    :type reference_clock_frequency: float
-
-.. function:: configure_sample_clock_source(sample_clock_source)
-
-    Sets the source of the Sample Clock (Update Clock) of the signal
-    generator.
-
-    
-
-
-
-    :param sample_clock_source:
-
-
-        Specifies the Sample Clock source the signal generator uses.
-        ****Defined Values****
-        **Default Value**: "OnboardClock"
-
-        +----------------+-----------------------------------+
-        | "OnboardClock" | Onboard Clock                     |
-        +----------------+-----------------------------------+
-        | "ClkIn"        | CLK IN front panel connector      |
-        +----------------+-----------------------------------+
-        | "PXI\_Star"    | PXI star trigger line             |
-        +----------------+-----------------------------------+
-        | "PXI\_Trig0"   | PXI trigger line 0 or RTSI line 0 |
-        +----------------+-----------------------------------+
-        | "PXI\_Trig1"   | PXI trigger line 1 or RTSI line 1 |
-        +----------------+-----------------------------------+
-        | "PXI\_Trig2"   | PXI trigger line 2 or RTSI line 2 |
-        +----------------+-----------------------------------+
-        | "PXI\_Trig3"   | PXI trigger line 3 or RTSI line 3 |
-        +----------------+-----------------------------------+
-        | "PXI\_Trig4"   | PXI trigger line 4 or RTSI line 4 |
-        +----------------+-----------------------------------+
-        | "PXI\_Trig5"   | PXI trigger line 5 or RTSI line 5 |
-        +----------------+-----------------------------------+
-        | "PXI\_Trig6"   | PXI trigger line 6 or RTSI line 6 |
-        +----------------+-----------------------------------+
-        | "PXI\_Trig7"   | PXI trigger line 7 or RTSI line 7 |
-        +----------------+-----------------------------------+
-        | "DDC\_ClkIn"   | Sample Clock from DDC connector   |
-        +----------------+-----------------------------------+
-
-        .. note:: The following **Defined Values** are examples of possible Sample
-            Clock sources. For a complete list of the Sample Clock sources available
-            on your device, refer to the Routes topic for your device or the
-            **Device Routes** tab in MAX.
-
-
-    :type sample_clock_source: string
-
-.. function:: configure_sample_rate(sample_rate)
-
-    Configures the :py:data:`nifgen.ARB\_SAMPLE\_RATE` attribute, which
-    determines the rate at which the signal generator produces arbitrary
-    waveforms. When you configure the signal generator to produce an
-    arbitrary sequence, this value is the sample rate for all arbitrary
-    waveforms in the sequence.
-
-    
-
-    .. note:: The signal generator must not be in the Generating state when you call
-        this function.
-
-
-
-    :param sample_rate:
-
-
-        Specifies the sample rate at which you want the signal generator to
-        generate arbitrary waveforms. NI-FGEN sets the
-        :py:data:`nifgen.ARB\_SAMPLE\_RATE` attribute to this value.
-
-        **Units**: Samples/s
-
-        **Default Value**: None
-
-        
-
-
-    :type sample_rate: float
-
-.. function:: configure_software_edge_script_trigger(trigger_id)
-
-    Configures the specified Script Trigger for software edge triggering.
-
-    
-
-
-
-    :param trigger_id:
-
-
-        Specifies the Script Trigger used for triggering.
-
-        **Defined Values**
-
-        **Default Value**: "ScriptTrigger0"
-
-        +------------------+------------------+
-        | "ScriptTrigger0" | Script Trigger 0 |
-        +------------------+------------------+
-        | "ScriptTrigger1" | Script Trigger 1 |
-        +------------------+------------------+
-        | "ScriptTrigger2" | Script Trigger 2 |
-        +------------------+------------------+
-        | "ScriptTrigger3" | Script Trigger 3 |
-        +------------------+------------------+
-
-
-    :type trigger_id: string
-
-.. function:: configure_software_edge_start_trigger()
-
-    Configures the Start Trigger for software edge triggering.
-
-    
-
-
-
-.. function:: configure_standard_waveform(waveform, amplitude, dc_offset, frequency, start_phase)
+.. function:: configure_standard_waveform(waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0)
 
     Configures the following attributes of the signal generator that affect
     standard waveform generation:
@@ -1730,7 +870,7 @@ nifgen.Session methods
 
     
 
-    .. note:: You must call the :py:func:`nifgen.configure_output_mode` function with the
+    .. note:: You must call the :py:func:`nifgen.ConfigureOutputMode` function with the
         **outputMode** parameter set to NIFGEN\_VAL\_OUTPUT\_FUNC before calling
         this function.
 
@@ -1742,7 +882,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_standard_waveform(waveform, amplitude, dc_offset, frequency, start_phase)
+            session['0,1'].configure_standard_waveform(waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0)
 
 
     :param waveform:
@@ -1860,255 +1000,7 @@ nifgen.Session methods
 
     :type start_phase: float
 
-.. function:: configure_synchronization(synchronization_source)
-
-    Sets the signal generator to receive a synchronization signal to
-    synchronize two or more NI 5401/5411/5431 signal generators. One signal
-    generator should route a SYNC signal to a RTSI line by calling the
-    nifgen\_ExportSignal function (use the nifgen\_RouteSignalOut function
-    for the NI 5404), and other signal generators should receive the signal
-    by calling the :py:func:`nifgen.configure_synchronization` function.
-
-    
-
-    .. note:: The signal generator must not be in the Generating state when you call
-        this function.
-        Only the NI 5401/5411/5431 signal generators require this function to be
-        called for proper synchronization.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].configure_synchronization(synchronization_source)
-
-
-    :param synchronization_source:
-
-
-        Specify the source of the synchronization signal you want to use.
-
-        ****Defined Values****
-
-        **Default Value**: NIFGEN\_VAL\_NONE
-
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_NONE    | Specifies that no synchronization source is used.                           |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_0 | Specifies that RTSI 0 or PXI\_Trig 0 is used as the synchronization source. |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_1 | Specifies that RTSI 1 or PXI\_Trig 1 is used as the synchronization source. |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_2 | Specifies that RTSI 2 or PXI\_Trig 2 is used as the synchronization source. |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_3 | Specifies that RTSI 3 or PXI\_Trig 3 is used as the synchronization source. |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_4 | Specifies that RTSI 4 or PXI\_Trig 4 is used as the synchronization source. |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_5 | Specifies that RTSI 5 or PXI\_Trig 5 is used as the synchronization source. |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_6 | Specifies that RTSI 6 or PXI\_Trig 6 is used as the synchronization source. |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_TTL0    | Specifies that TTL 0 is used as the synchronization source.                 |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_TTL1    | Specifies that TTL 1 is used as the synchronization source.                 |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_TTL2    | Specifies that TTL 2 is used as the synchronization source.                 |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_TTL3    | Specifies that TTL 3 is used as the synchronization source.                 |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_TTL4    | Specifies that TTL 4 is used as the synchronization source.                 |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_TTL5    | Specifies that TTL 5 is used as the synchronization source.                 |
-        +----------------------+-----------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_TTL6    | Specifies that TTL 6 is used as the synchronization source.                 |
-        +----------------------+-----------------------------------------------------------------------------+
-
-
-    :type synchronization_source: int
-
-.. function:: configure_trigger_mode(trigger_mode)
-
-    Sets the trigger mode for your device. Refer to the *Trigger Modes*
-    topic for your device in the *NI Signal Generators Help* for
-    descriptions of the specific behavior for supported trigger modes.
-
-    
-
-    .. note:: The signal generator must not be in the Generating state when you call
-        this function.
-        In Frequency List output mode, Stepped trigger mode is the same as Burst
-        trigger mode.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].configure_trigger_mode(trigger_mode)
-
-
-    :param trigger_mode:
-
-
-        Specifies the trigger mode.
-
-        ****Defined Values****
-
-        **Default Value**: NIFGEN\_VAL\_CONTINUOUS
-
-        +-------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_SINGLE     | The waveform that you describe in the sequence list generates only once by going through the entire staging list. Only one trigger is required to start the waveform generation. You can use Single trigger mode in any output mode. After a trigger is received, the waveform generation starts from the first stage and continues through to the last stage.                                                                                                                                                          |
-        +-------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_CONTINUOUS | The waveform that you describe in the staging list generates infinitely by repeatedly cycling through the staging list. After a trigger is received, the waveform generation starts from the first stage and continues through to the last stage. After the last stage is completed, the waveform generation loops back to the start of the first stage and continues until it is stopped. Only one trigger is required to start the waveform generation.                                                               |
-        +-------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_STEPPED    | After a Start Trigger is received, the waveform described by the first stage generates. Then, the device waits for the next trigger signal. On the next trigger, the waveform described by the second stage generates, and so on. After the staging list is exhausted, the waveform generation returns to the first stage and continues to repeat the cycle.                                                                                                                                                            |
-        +-------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_BURST      | After a Start Trigger is received, the waveform described by the first stage generates until another trigger is received. At the next trigger, the buffer of the previous stage completes, then the waveform described by the second stage generates. After the staging list is exhausted, the waveform generation returns to the first stage and continues to repeat the cycle. In Frequency List mode, the duration instruction is ignored, and the trigger switches the frequency to the next frequency in the list. |
-        +-------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-    :type trigger_mode: :py:data:`nifgen.TriggerMode`
-
-.. function:: configure_trigger_source(trigger_source)
-
-    Configures the trigger source. The signal generator responds to a
-    trigger depending on the operation mode in which the signal generator is
-    operating.
-
-    
-
-    .. note:: The signal generator must not be in the Generating state when you
-        call this function.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].configure_trigger_source(trigger_source)
-
-
-    :param trigger_source:
-
-
-        Controls which trigger source the signal generator uses.
-
-        ****Defined Values****
-
-        **Default Value**: NIFGEN\_VAL\_IMMEDIATE
-
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_IMMEDIATE      | Immediate                |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_EXTERNAL       | External (maps to PFI 0) |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_SOFTWARE\_TRIG | Software trigger         |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_PXI\_STAR      | PXI star                 |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_RTSI\_0        | RTSI 0 or PXI\_Trig 0    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_RTSI\_1        | RTSI 1 or PXI\_Trig 1    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_RTSI\_2        | RTSI 2 or PXI\_Trig 2    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_RTSI\_3        | RTSI 3 or PXI\_Trig 3    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_RTSI\_4        | RTSI 4 or PXI\_Trig 4    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_RTSI\_5        | RTSI 5 or PXI\_Trig 5    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_RTSI\_6        | RTSI 6 or PXI\_Trig 6    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_RTSI\_7        | RTSI 7 or PXI\_Trig 7    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_TTL0           | TTL 0                    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_TTL1           | TTL 1                    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_TTL2           | TTL 2                    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_TTL3           | TTL 3                    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_TTL4           | TTL 4                    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_TTL5           | TTL 5                    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_TTL6           | TTL 6                    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_PFI\_0         | PFI 0                    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_PFI\_1         | PFI 1                    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_PFI\_2         | PFI 2                    |
-        +-----------------------------+--------------------------+
-        | NIFGEN\_VAL\_PFI\_3         | PFI 3                    |
-        +-----------------------------+--------------------------+
-
-
-    :type trigger_source: :py:data:`nifgen.TriggerSource`
-
-.. function:: configure_update_clock_source(update_clock_source)
-
-    Sets the source of the update clock of the signal generator. The source
-    can be internal or external.
-
-    
-
-
-
-    :param update_clock_source:
-
-
-        Specifies the update clock source.
-
-        ****Defined Values****
-
-        **Default Value**: NIFGEN\_VAL\_INTERNAL
-
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_INTERNAL     | Internal clock source           |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_EXTERNAL     | External clock source           |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_PXI\_STAR    | PXI star                        |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_RTSI\_0      | RTSI 0 or PXI\_Trig 0           |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_RTSI\_1      | RTSI 1 or PXI\_Trig 1           |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_RTSI\_2      | RTSI 2 or PXI\_Trig 2           |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_RTSI\_3      | RTSI 3 or PXI\_Trig 3           |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_RTSI\_4      | RTSI 4 or PXI\_Trig 4           |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_RTSI\_5      | RTSI 5 or PXI\_Trig 5           |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_RTSI\_6      | RTSI 6 or PXI\_Trig 6           |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_RTSI\_7      | RTSI 7 or PXI\_Trig 7           |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_CLK\_IN      | CLK IN front panel connector    |
-        +---------------------------+---------------------------------+
-        | NIFGEN\_VAL\_DDC\_CLK\_IN | Digital Data & Control clock in |
-        +---------------------------+---------------------------------+
-
-
-    :type update_clock_source: int
-
-.. function:: create_advanced_arb_sequence(sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array)
+.. function:: create_advanced_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array)
 
     Creates an arbitrary sequence from an array of waveform handles and an
     array of corresponding loop counts. This function returns a handle that
@@ -2358,144 +1250,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_arb_waveform(waveform_size, waveform_data_array)
-
-    [OBSOLETE] This function is obsolete. Use the nifgen\_CreateWaveformF64,
-    nifgen\_CreateWaveformI16, or nifgen\_CreateWaveformComplexF64 function
-    instead of this function.
-
-    Creates an arbitrary waveform and returns a handle that identifies that
-    waveform. You can pass this handle to the nifgen\_ConfigureArbWaveform
-    function to produce that waveform. You can also use the handles this
-    function returns to specify a sequence of arbitrary waveforms with the
-    nifgen\_CreateArbSequence function.
-
-    
-
-    .. note:: You must scale the data between –1.00 and +1.00. Use the **arbGain**
-        parameter to generate different output voltages.
-
-
-
-    :param waveform_size:
-
-
-        | Specifies the size of the arbitrary waveform that you want created.
-        | The size must meet the following restrictions:
-
-        -  The size must be less than or equal to the maximum waveform size that
-           the device allows.
-        -  The size must be greater than or equal to the minimum waveform size
-           that the device allows.
-        -  The size must be an integer multiple of the device waveform quantum.
-
-        |
-        | You can obtain these values from the **maximumWaveformSize**,
-          **minimumWaveformSize**, and **waveformQuantum** parameters in the
-          nifgen\_QueryArbWfmCapabilities function.
-        | ****Default Value**:** None
-
-        
-
-
-    :type waveform_size: int
-    :param waveform_data_array:
-
-
-        Specifies the array of data you want to use for the new arbitrary
-        waveform. The array must have at least as many elements as the value
-        that you specify in **waveformSize**.
-
-        You must normalize the data points in the array to be between –1.00 and
-        +1.00.
-
-        **Default Value**: None
-
-        
-
-
-    :type waveform_data_array: list of float
-
-    :rtype: int
-    :return:
-
-
-            The handle that identifies the new waveform. This handle is used later
-            when referring to this waveform.
-
-            
-
-
-
-.. function:: create_binary16_arb_waveform(waveform_size, waveform_data_array)
-
-    [OBSOLETE] This function is obsolete. Use the nifgen\_CreateWaveformI16
-    function instead of this function.
-
-    Creates an arbitrary waveform from binary data and returns a handle that
-    identifies that waveform. You can pass this handle to the
-    nifgen\_ConfigureArbWaveform function to produce that waveform. You can
-    also use the handles this function returns to specify a sequence of
-    arbitrary waveforms with the nifgen\_CreateArbSequence function.
-
-    
-
-    .. note:: You must set the output mode to NIFGEN\_VAL\_OUTPUT\_ARB or
-        NIFGEN\_VAL\_OUTPUT\_SEQ before calling this function.
-
-
-
-    :param waveform_size:
-
-
-        | Specifies the size of the arbitrary waveform that you want created.
-        | The size must meet the following restrictions:
-
-        -  The size must be less than or equal to the maximum waveform size that
-           the device allows.
-        -  The size must be greater than or equal to the minimum waveform size
-           that the device allows.
-        -  The size must be an integer multiple of the device waveform quantum.
-
-        |
-        | You can obtain these values from the **maximumWaveformSize**,
-          **minimumWaveformSize**, and **waveformQuantum** parameters in
-          nifgen\_QueryArbWfmCapabilities.
-        | ****Default Value**:** None
-
-        
-
-
-    :type waveform_size: int
-    :param waveform_data_array:
-
-
-        Specifies the array of data you want to use for the new arbitrary
-        waveform. The array must have at least as many elements as the value
-        that you specify in **waveformSize**.
-
-        You must normalize the data points in the array to be between –32768 and
-        32767.
-
-        **Default Value**: None
-
-        
-
-
-    :type waveform_data_array: list of int
-
-    :rtype: int
-    :return:
-
-
-            The handle that identifies the new waveform. This handle is used later
-            when referring to this waveform.
-
-            
-
-
-
-.. function:: create_freq_list(waveform, frequency_list_length, frequency_array, duration_array)
+.. function:: create_freq_list(waveform, frequency_array, duration_array)
 
     Creates a frequency list from an array of frequencies
     (**frequencyArray**) and an array of durations (**durationArray**). The
@@ -2614,7 +1369,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_waveform_f64(waveform_size, waveform_data_array)
+.. function:: create_waveform_f64(waveform_data_array)
 
     Creates an onboard waveform from binary F64 (floating point double) data
     for use in Arbitrary Waveform output mode or Arbitrary Sequence output
@@ -2636,7 +1391,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].create_waveform_f64(waveform_size, waveform_data_array)
+            session['0,1'].create_waveform_f64(waveform_data_array)
 
 
     :param waveform_size:
@@ -2747,105 +1502,7 @@ nifgen.Session methods
             which can differ on different processors.
 
 
-    :type byte_order: int
-
-    :rtype: int
-    :return:
-
-
-            The handle that identifies the new waveform. This handle is used later
-            when referring to this waveform.
-
-            
-
-
-
-.. function:: create_waveform_from_file_hws(file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform)
-
-    | Takes the waveform data from the specified HWS (Hierarchical Waveform
-      Storage) file and creates an onboard waveform for use in Arbitrary
-      Waveform or Arbitrary Sequence output mode. The **waveformHandle**
-      returned by this function can be used later for setting the active
-      waveform, changing the data in the waveform, building sequences of
-      waveforms, or deleting the waveform when it is no longer needed.
-    | When the Analog Waveform Editor saves data in an HWS file, it also
-      stores the rate, gain, and offset with the data. If the
-      **useRateFromWaveform** and **useGain&OffsetFromWaveform;** parameters
-      are set to VI\_TRUE, this function also sets those properties.
-
-    |
-
-    
-
-    .. note:: If you choose to have this function set the gain and offset properties
-        for you, you should **not** use the :py:func:`nifgen.configure_arb_waveform` or
-        :py:func:`nifgen.configure_arb_sequence` functions, as they also set the gain and
-        offset, thereby overriding the values set by this function. Instead, use
-        the :py:data:`nifgen.ARB\_WAVEFORM\_HANDLE` or
-        :py:data:`nifgen.ARB\_SEQUENCE\_HANDLE` attributes.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].create_waveform_from_file_hws(file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform)
-
-
-    :param file_name:
-
-
-        The full path and name of the file where the waveform data resides.
-
-        
-
-
-    :type file_name: string
-    :param use_rate_from_waveform:
-
-
-        | If you set this parameter input to VI\_TRUE and if onboard signal
-          processing (OSP) is enabled, the rate from the waveform is interpreted
-          as the data rate, and FGEN sets the data rate attribute for you. In
-          all other cases, it is interpreted as the sample rate, and FGEN sets
-          the sample rate attribute for you.
-
-        ****Defined Values****
-
-        |
-        | ****Default Value**:** VI\_TRUE
-
-        +-----------+--------------------------------+
-        | VI\_TRUE  | Use rate from waveform.        |
-        +-----------+--------------------------------+
-        | VI\_FALSE | Do not use rate from waveform. |
-        +-----------+--------------------------------+
-
-
-    :type use_rate_from_waveform: bool
-    :param use_gain_and_offset_from_waveform:
-
-
-        | If this input is set to VI\_TRUE, NI-FGEN retrieves the gain and
-          offset values from the specified HWS file and applies them to the
-          NI-FGEN driver.
-
-        ****Defined Values****
-
-        |
-        | ****Default Value**:** VI\_TRUE
-
-        +-----------+-------------------------------------------+
-        | VI\_TRUE  | Use gain and offset from waveform.        |
-        +-----------+-------------------------------------------+
-        | VI\_FALSE | Do not use gain and offset from waveform. |
-        +-----------+-------------------------------------------+
-
-
-    :type use_gain_and_offset_from_waveform: bool
+    :type byte_order: :py:data:`nifgen.ByteOrder`
 
     :rtype: int
     :return:
@@ -2916,7 +1573,7 @@ nifgen.Session methods
             which can differ on different processors.
 
 
-    :type byte_order: int
+    :type byte_order: :py:data:`nifgen.ByteOrder`
 
     :rtype: int
     :return:
@@ -2929,7 +1586,7 @@ nifgen.Session methods
 
 
 
-.. function:: create_waveform_i16(waveform_size, waveform_data_array)
+.. function:: create_waveform_i16(waveform_data_array)
 
     Creates an onboard waveform from binary 16-bit signed integer (I16) data
     for use in Arbitrary Waveform or Arbitrary Sequence output mode. The
@@ -2951,7 +1608,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].create_waveform_i16(waveform_size, waveform_data_array)
+            session['0,1'].create_waveform_i16(waveform_data_array)
 
 
     :param waveform_size:
@@ -3003,7 +1660,7 @@ nifgen.Session methods
 
 
 
-.. function:: define_user_standard_waveform(waveform_size, waveform_data_array)
+.. function:: define_user_standard_waveform(waveform_data_array)
 
     Defines a user waveform for use in either Standard Function or Frequency
     List output mode.
@@ -3030,7 +1687,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].define_user_standard_waveform(waveform_size, waveform_data_array)
+            session['0,1'].define_user_standard_waveform(waveform_data_array)
 
 
     :param waveform_size:
@@ -3129,218 +1786,6 @@ nifgen.Session methods
 
 
 
-.. function:: disable_analog_filter()
-
-    Disables the analog filter. This function sets the
-    :py:data:`nifgen.ANALOG\_FILTER\_ENABLED` attribute to VI\_FALSE. This
-    setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-    Script output modes. You also can use this setting in Standard Function
-    and Frequency List output modes for user-defined waveforms.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].disable_analog_filter()
-
-
-.. function:: disable_digital_filter()
-
-    Disables the digital filter. This function sets the
-    :py:data:`nifgen.DIGITAL\_FILTER\_ENABLED` attribute to VI\_FALSE. This
-    setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-    Script output modes. You also can use this setting in Standard Function
-    and Frequency List output modes for user-defined waveforms.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].disable_digital_filter()
-
-
-.. function:: disable_digital_patterning()
-
-    Disables digital pattern output on the signal generator. This function
-    sets the :py:data:`nifgen.DIGITAL\_PATTERN\_ENABLED` attribute to VI\_FALSE.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].disable_digital_patterning()
-
-
-.. function:: disable_script_trigger(trigger_id)
-
-    Disables the specified Script Trigger.
-
-    
-
-
-
-    :param trigger_id:
-
-
-        Specifies the Script Trigger used for triggering.
-
-        **Defined Values**
-
-        **Default Value**: "ScriptTrigger0"
-
-        +------------------+------------------+
-        | "ScriptTrigger0" | Script Trigger 0 |
-        +------------------+------------------+
-        | "ScriptTrigger1" | Script Trigger 1 |
-        +------------------+------------------+
-        | "ScriptTrigger2" | Script Trigger 2 |
-        +------------------+------------------+
-        | "ScriptTrigger3" | Script Trigger 3 |
-        +------------------+------------------+
-
-
-    :type trigger_id: string
-
-.. function:: disable_start_trigger()
-
-    Disables the Start Trigger.
-
-    
-
-
-
-.. function:: enable_analog_filter(filter_correction_frequency)
-
-    Configures the analog filter for the device. This function sets the
-    :py:data:`nifgen.ANALOG\_FILTER\_ENABLED` attribute to VI\_TRUE. This
-    setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-    Script output modes. You also can use this setting in Standard Function
-    and Frequency List output modes for user-defined waveforms.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].enable_analog_filter(filter_correction_frequency)
-
-
-    :param filter_correction_frequency:
-
-
-        Specifies the filter correction frequency of the analog filter. On the
-        NI 5411 and NI 5431, NI-FGEN adjusts signal amplitude to compensate for
-        the filter attenuation at that frequency. To disable amplitude
-        correction, set **filterCorrectionFrequency** to 0. For Standard
-        Function output mode, **filterCorrectionFrequency** typically should be
-        set to the same value as the frequency of the standard waveform.
-
-        **Units**: hertz
-
-        **Default Value**: 0
-
-        
-
-
-    :type filter_correction_frequency: float
-
-.. function:: enable_digital_filter()
-
-    Enables the digital filter by setting the
-    :py:data:`nifgen.DIGITAL\_FILTER\_ENABLED` attribute to VI\_TRUE. This
-    setting can be applied in Arbitrary Waveform, Arbitrary Sequence, or
-    Script output modes. You also can use this setting in Standard Function
-    and Frequency List output modes for user-defined waveforms.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].enable_digital_filter()
-
-
-.. function:: enable_digital_patterning()
-
-    Enables digital pattern output on the signal generator. This function
-    sets the :py:data:`nifgen.DIGITAL\_PATTERN\_ENABLED` attribute to VI\_TRUE.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].enable_digital_patterning()
-
-
-.. function:: error_handler(error_code)
-
-    Converts a status code returned by an NI-FGEN function into a
-    user-readable string and returns any error elaborations.
-
-    
-
-
-
-    :param error_code:
-
-
-        Specifies the **status** parameter that is returned from any of the
-        NI-FGEN functions.
-
-        **Default Value**: 0 (VI\_SUCCESS)
-
-        
-
-
-    :type error_code: int
-
-    :rtype: string
-    :return:
-
-
-            Returns the error message string read from the instrument error message
-            queue.
-
-            You must pass a ViChar array with at least 256 bytes.
-
-            
-
-
-
 .. function:: export_signal(signal, signal_identifier, output_terminal)
 
     Routes signals (clocks, triggers, and events) to the output terminal you
@@ -3393,7 +1838,7 @@ nifgen.Session methods
         +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-    :type signal: int
+    :type signal: :py:data:`nifgen.Signal`
     :param signal_identifier:
 
 
@@ -3478,7 +1923,103 @@ nifgen.Session methods
 
     :type output_terminal: string
 
-.. function:: get_fir_filter_coefficients(array_size, coefficients_array, number_of_coefficients_read)
+.. function:: get_ext_cal_last_date_and_time()
+
+    Returns the date and time of the last successful external calibration.
+    The time returned is 24-hour (military) local time; for example, if the
+    device was calibrated at 2:30 PM, this function returns 14 for the
+    **hour** parameter and 30 for the **minute** parameter.
+
+    
+
+
+
+    :rtype: tuple (year, month, day, hour, minute)
+
+        WHERE
+
+        year (int): 
+
+
+            Specifies the year of the last successful calibration.
+
+            
+
+
+        month (int): 
+
+
+            Specifies the month of the last successful calibration.
+
+            
+
+
+        day (int): 
+
+
+            Specifies the day of the last successful calibration.
+
+            
+
+
+        hour (int): 
+
+
+            Specifies the hour of the last successful calibration.
+
+            
+
+
+        minute (int): 
+
+
+            Specifies the minute of the last successful calibration.
+
+            
+
+
+
+.. function:: get_ext_cal_last_temp()
+
+    Returns the temperature at the last successful external calibration. The
+    temperature is returned in degrees Celsius.
+
+    
+
+
+
+    :rtype: float
+    :return:
+
+
+            Specifies the temperature at the last successful calibration in degrees
+            Celsius.
+
+            
+
+
+
+.. function:: get_ext_cal_recommended_interval()
+
+    Returns the recommended interval between external calibrations in
+    months.
+
+    
+
+
+
+    :rtype: int
+    :return:
+
+
+            Specifies the recommended interval between external calibrations in
+            months.
+
+            
+
+
+
+.. function:: get_fir_filter_coefficients()
 
     | Returns the FIR filter coefficients used by the onboard signal
       processing block. These coefficients are determined by NI-FGEN and
@@ -3512,7 +2053,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].get_fir_filter_coefficients(array_size, coefficients_array, number_of_coefficients_read)
+            session['0,1'].get_fir_filter_coefficients()
 
 
     :param array_size:
@@ -3524,30 +2065,17 @@ nifgen.Session methods
 
 
     :type array_size: int
-    :param coefficients_array:
+
+    :rtype: int
+    :return:
 
 
-        Specifies the array of data the onboard signal processor uses for the
-        FIR filter coefficients. For the NI 5441, provide a symmetric array of
-        95 coefficients to this parameter. The array must have at least as many
-        elements as the value that you specify in the **numberOfCoefficients**
-        parameter in this function.
-        The coefficients should range between –1.00 and +1.00.
+            Specifies the array of data containing the number of coefficients you
+            want to read.
 
-        
+            
 
 
-    :type coefficients_array: list of float
-    :param number_of_coefficients_read:
-
-
-        Specifies the array of data containing the number of coefficients you
-        want to read.
-
-        
-
-
-    :type number_of_coefficients_read: list of int
 
 .. function:: get_hardware_state()
 
@@ -3560,7 +2088,7 @@ nifgen.Session methods
 
 
 
-    :rtype: int
+    :rtype: :py:data:`nifgen.HardwareState`
     :return:
 
 
@@ -3689,198 +2217,6 @@ nifgen.Session methods
 
 
 
-.. function:: initialize_analog_output_calibration()
-
-    Sets up the device to start the analog output calibration.
-
-    
-
-
-
-.. function:: initialize_cal_adc_calibration()
-
-    Initializes an external calibration session for ADC calibration. For the
-    NI 5421/5422/5441, ADC calibration involves characterizing the gain and
-    offset of the onboard ADC.
-
-    
-
-
-
-.. function:: initialize_flatness_calibration()
-
-    Initializes an external calibration session to calibrate flatness.
-
-    
-
-
-
-.. function:: initialize_oscillator_frequency_calibration()
-
-    Sets up the device to start the VCXO calibration.
-
-    The session handle should be the handle returned by the
-    nifgen\_InitExtCal function.
-
-    
-
-
-
-.. function:: initialize_with_channels(resource_name, reset_device, option_string)
-
-    Creates and returns a new NI-FGEN session to the specified channel of a
-    waveform generator that is used in all subsequent NI-FGEN function
-    calls.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].initialize_with_channels(resource_name, reset_device, option_string)
-
-
-    :param resource_name:
-
-
-        .. caution:: Traditional NI-DAQ and NI-DAQmx device names are not case-sensitive.
-            However, all IVI names, such as logical names, are case-sensitive. If
-            you use logical names, driver session names, or virtual names in your
-            program, you must ensure that the name you use matches the name in the
-            IVI Configuration Store file exactly, without any variations in the case
-            of the characters.
-
-        | Specifies the resource name of the device to initialize.
-
-        For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
-        the device number assigned by MAX, as shown in Example 1.
-
-        For NI-DAQmx devices, the syntax is just the device name specified in
-        MAX, as shown in Example 2. Typical default names for NI-DAQmx devices
-        in MAX are Dev1 or PXI1Slot1. You can rename an NI-DAQmx device by
-        right-clicking on the name in MAX and entering a new name.
-
-        An alternate syntax for NI-DAQmx devices consists of DAQ::\ *NI-DAQmx
-        device name*, as shown in Example 3. This naming convention allows for
-        the use of an NI-DAQmx device in an application that was originally
-        designed for a Traditional NI-DAQ device. For example, if the
-        application expects DAQ::1, you can rename the NI-DAQmx device to 1 in
-        MAX and pass in DAQ::1 for the resource name, as shown in Example 4.
-
-        If you use the DAQ::\ *n* syntax and an NI-DAQmx device name already
-        exists with that same name, the NI-DAQmx device is matched first.
-
-        You can also pass in the name of an IVI logical name or an IVI virtual
-        name configured with the IVI Configuration utility, as shown in Example
-        5. A logical name identifies a particular virtual instrument. A virtual
-        name identifies a specific device and specifies the initial settings for
-        the session.
-
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-        | Example # | Device Type                          | Syntax                 | Variable                        |
-        +===========+======================================+========================+=================================+
-        | 1         | Traditional NI-DAQ device            | DAQ::\ *1*             | (*1* = device number)           |
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-        | 2         | NI-DAQmx device                      | *myDAQmxDevice*        | (*myDAQmxDevice* = device name) |
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-        | 3         | NI-DAQmx device                      | DAQ::\ *myDAQmxDevice* | (*myDAQmxDevice* = device name) |
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-        | 4         | NI-DAQmx device                      | DAQ::\ *2*             | (*2* = device name)             |
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-        | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
-        +-----------+--------------------------------------+------------------------+---------------------------------+
-
-
-    :type resource_name: string
-    :param reset_device:
-
-
-        Specifies whether you want to reset the device during the initialization
-        procedure. VI\_TRUE specifies that the device is reset and performs the
-        same function as the nifgen\_Reset function.
-
-        ****Defined Values****
-
-        **Default Value**: VI\_FALSE
-
-        +-----------+---------------------+
-        | VI\_TRUE  | Reset device        |
-        +-----------+---------------------+
-        | VI\_FALSE | Do not reset device |
-        +-----------+---------------------+
-
-
-    :type reset_device: bool
-    :param option_string:
-
-
-        Sets the initial value of certain session attributes.
-
-        The syntax for **optionString** is
-
-        <*attributeName*> = <*value*>
-
-        where
-
-        *attributeName* is the name of the attribute and *value* is the value to
-        which the attribute is set
-
-        To set multiple attributes, separate them with a comma.
-
-        If you pass NULL or an empty string for this parameter, the session uses
-        the default values for these attributes. You can override the default
-        values by assigning a value explicitly in a string that you pass for
-        this parameter.
-
-        You do not have to specify all of the attributes and may leave any of
-        them out. However, if you do not specify one of the attributes, its
-        default value is used.
-
-        If simulation is enabled (Simulate=1), you may specify the device that
-        you want to simulate. To specify a device, enter the following syntax in
-        **optionString**.
-
-        DriverSetup=Model:<*driver model number*>;Channels:<*channel
-        names*>;BoardType:<*module type*>;MemorySize:<*size of onboard memory in
-        bytes*>
-
-        **Syntax Examples**
-
-        **Attributes and **Defined Values****
-
-        **Default Values**: "Simulate=0,RangeCheck=1,QueryInstrStatus=1,Cache=1"
-
-        +------------------+---------------------------------------------+---------------------+
-        | Attribute Name   | Attribute                                   | Values              |
-        +==================+=============================================+=====================+
-        | RangeCheck       | :py:data:`nifgen.RANGE\_CHECK`              | VI\_TRUE, VI\_FALSE |
-        +------------------+---------------------------------------------+---------------------+
-        | QueryInstrStatus | :py:data:`nifgen.QUERY\_INSTRUMENT\_STATUS` | VI\_TRUE, VI\_FALSE |
-        +------------------+---------------------------------------------+---------------------+
-        | Cache            | :py:data:`nifgen.cache`                     | VI\_TRUE, VI\_FALSE |
-        +------------------+---------------------------------------------+---------------------+
-        | Simulate         | :py:data:`nifgen.simulate`                  | VI\_TRUE, VI\_FALSE |
-        +------------------+---------------------------------------------+---------------------+
-
-
-    :type option_string: string
-
-    :rtype: int
-    :return:
-
-
-            Returns a session handle that you can use to identify the device in all
-            subsequent NI-FGEN function calls.
-
-            
-
-
-
 .. function:: is_done()
 
     Determines whether the current generation is complete. This function
@@ -3909,27 +2245,6 @@ nifgen.Session methods
             +-----------+-----------------------------+
 
 
-
-.. function:: manual_enable_p2_p_stream(endpoint_name)
-
-    Enables a peer-to-peer data stream using manual flow control.
-
-    
-
-
-
-    :param endpoint_name:
-
-
-        Specifies the stream endpoint FIFO to configure. Refer to the
-        `Peer-to-Peer Data
-        Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(p2p_streaming)>`__
-        documentation in the *NI Signal Generators Help* for more information.
-
-        
-
-
-    :type endpoint_name: string
 
 .. function:: query_arb_seq_capabilities()
 
@@ -4131,55 +2446,6 @@ nifgen.Session methods
 
 
 
-.. function:: read_cal_adc(number_of_reads_to_average, return_calibrated_value)
-
-    Takes one or more voltage measurements from the onboard calibration ADC
-    and returns the value or the average value. The signal that the ADC
-    actually measures can be specified using the
-    :py:data:`nifgen.CAL\_ADC\_INPUT` attribute. The ADC has some inherent gain
-    and offset. These values can be determined during an external
-    calibration session and stored in the calibration EEPROM.
-
-    If the **returnCalibratedValue** parameter is VI\_TRUE, NI-FGEN adjusts
-    the value that is returned to account for the gain and offset of the
-    ADC. Otherwise, the raw voltage value reported by the ADC is returned.
-
-    
-
-
-
-    :param number_of_reads_to_average:
-
-
-        Specifies the number of measurements to be taken and averaged to
-        determine the return value.
-
-        
-
-
-    :type number_of_reads_to_average: int
-    :param return_calibrated_value:
-
-
-        Specifies whether the voltage returned from the ADC should be adjusted
-        to account for the gain and offset of the ADC.
-
-        
-
-
-    :type return_calibrated_value: bool
-
-    :rtype: float
-    :return:
-
-
-            Specifies the average of the voltage measurements taken from the onboard
-            calibration ADC.
-
-            
-
-
-
 .. function:: read_current_temperature()
 
     Reads the current onboard temperature of the device. The temperature is
@@ -4199,33 +2465,6 @@ nifgen.Session methods
             
 
 
-
-.. function:: reset_attribute(attribute_id)
-
-    Resets the attribute to its default value.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].reset_attribute(attribute_id)
-
-
-    :param attribute_id:
-
-
-        Specifies the ID of an attribute.
-
-        
-
-
-    :type attribute_id: int
 
 .. function:: reset_device()
 
@@ -4248,134 +2487,6 @@ nifgen.Session methods
     
 
 
-
-.. function:: route_signal_out(route_signal_from, route_signal_to)
-
-    Routes various signals in the signal generator to the RTSI lines and
-    front panel terminals.
-
-    +---+----------------------------------------------------------------------------------------------------+
-    |   | You can clear a previously routed signal by routing NIFGEN\_VAL\_NONE to the destination terminal. |
-    +---+----------------------------------------------------------------------------------------------------+
-    |   | You can clear a previously routed signal by routing NIFGEN\_VAL\_NONE to the destination terminal. |
-    +---+----------------------------------------------------------------------------------------------------+
-
-    .. note:: The signal generator must not be in the Generating state when you call
-        this function.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].route_signal_out(route_signal_from, route_signal_to)
-
-
-    :param route_signal_from:
-
-
-        Various signals can be routed out the RTSI lines.
-
-        ****Defined Values****
-
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_NONE                      | Nothing Sending this value clears the line.                                                                                                                                                                                                                                                                     |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_MARKER                    | Marker Event                                                                                                                                                                                                                                                                                                    |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_SYNC\_OUT                 | SYNC signal This signal normally appears on the SYNC OUT front panel connector.                                                                                                                                                                                                                                 |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_OUT\_START\_TRIGGER       | Start Trigger The Start Trigger is normally generated at the start of the sequence. Call the nifgen\_ConfigureTriggerSource function to receive this trigger.                                                                                                                                                   |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_BOARD\_CLOCK              | Signal generator board clock The signal generator board clock is 20 MHz for the NI PCI-5401/5411/5431. The NI PXI-5404 has a 20 MHz board clock, and the NI PXI-5421 has integer divisors of 100 MHz. The NI PXI-5401/5411/5431 does not support routing a Board Clock to RTSI lines or front panel connectors. |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_SYNCHRONIZATION           | Synchronization strobe A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators. Call the nifgen\_ConfigureSynchronization function to receive the strobe.                                                                                                  |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_SOFTWARE\_TRIG            | Software trigger                                                                                                                                                                                                                                                                                                |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_OUT\_UPDATE               | —                                                                                                                                                                                                                                                                                                               |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_REF\_OUT                  | Reference Clock out front panel connector                                                                                                                                                                                                                                                                       |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_PXI\_CLK10                | PXI 10 MHz backplane Reference Clock                                                                                                                                                                                                                                                                            |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_PXI\_STAR                 | PXI star trigger line                                                                                                                                                                                                                                                                                           |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_PFI\_0                    | PFI 0                                                                                                                                                                                                                                                                                                           |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_0                   | RTSI 0 or PXI\_Trig 0                                                                                                                                                                                                                                                                                           |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_1                   | RTSI 1 or PXI\_Trig 1                                                                                                                                                                                                                                                                                           |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_2                   | RTSI 2 or PXI\_Trig 2                                                                                                                                                                                                                                                                                           |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_3                   | RTSI 3 or PXI\_Trig 3                                                                                                                                                                                                                                                                                           |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_4                   | RTSI 4 or PXI\_Trig 4                                                                                                                                                                                                                                                                                           |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_5                   | RTSI 5 or PXI\_Trig 5                                                                                                                                                                                                                                                                                           |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_6                   | RTSI 6 or PXI\_Trig 6                                                                                                                                                                                                                                                                                           |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_7                   | RTSI 7 or PXI\_Trig 7                                                                                                                                                                                                                                                                                           |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_REF\_CLOCK\_RTSI\_CLOCK   | RTSI clock                                                                                                                                                                                                                                                                                                      |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_ONBOARD\_REFERENCE\_CLOCK | Onboard Reference Clock                                                                                                                                                                                                                                                                                         |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_UPDATE\_CLOCK             | Sample Clock                                                                                                                                                                                                                                                                                                    |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | NIFGEN\_VAL\_PLL\_REF\_SOURCE          | PLL Reference Clock                                                                                                                                                                                                                                                                                             |
-        +----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-    :type route_signal_from: int
-    :param route_signal_to:
-
-
-        The possible RTSI lines to which you can route a signal.
-
-        ****Defined Values****
-
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_0                 | RTSI 0 or PXI\_Trig 0                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_1                 | RTSI 1 or PXI\_Trig 1                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_2                 | RTSI 2 or PXI\_Trig 2                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_3                 | RTSI 3 or PXI\_Trig 3                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_4                 | RTSI 4 or PXI\_Trig 4                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_5                 | RTSI 5 or PXI\_Trig 5                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_6                 | RTSI 6 or PXI\_Trig 6                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_RTSI\_7                 | RTSI 7 or PXI\_Trig 7                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_REF\_CLOCK\_RTSI\_CLOCK | RTSI clock                                |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_REF\_OUT                | Reference Clock out front panel connector |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_PFI\_0                  | PFI 0                                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_PFI\_1                  | PFI 1                                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_PFI\_4                  | PFI 4                                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_PFI\_5                  | PFI 5                                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_PXI\_STAR               | PXI star trigger line                     |
-        +--------------------------------------+-------------------------------------------+
-        | NIFGEN\_VAL\_PXI\_CLK10              | PXI 10 MHz backplane Reference Clock      |
-        +--------------------------------------+-------------------------------------------+
-
-
-    :type route_signal_to: int
 
 .. function:: self_cal()
 
@@ -4415,7 +2526,7 @@ nifgen.Session methods
         +-------------------------------+
 
 
-    :type trigger: int
+    :type trigger: :py:data:`nifgen.Trigger`
     :param trigger_id:
 
     :type trigger_id: string
@@ -4487,7 +2598,7 @@ nifgen.Session methods
         +----------------------------------------------+-------------------------------------------------------------------------+
 
 
-    :type relative_to: int
+    :type relative_to: :py:data:`nifgen.RelativeTo`
     :param offset:
 
 
@@ -4555,7 +2666,7 @@ nifgen.Session methods
         +----------------------------------------------+-------------------------------------------------------------------------+
 
 
-    :type relative_to: int
+    :type relative_to: :py:data:`nifgen.RelativeTo`
     :param offset:
 
 
@@ -4586,37 +2697,7 @@ nifgen.Session methods
 
     :type max_time: int
 
-.. function:: write_binary16_analog_static_value(value)
-
-    | Writes the 16-bit value to the DAC, which could be output as a DC
-      Voltage.
-    | This function writes to the DAC only when in an external calibration
-      session.
-
-    
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session['0,1'].write_binary16_analog_static_value(value)
-
-
-    :param value:
-
-
-        The value to write.
-
-        
-
-
-    :type value: int
-
-.. function:: write_binary16_waveform(waveform_handle, size, data)
+.. function:: write_binary16_waveform(waveform_handle, data)
 
     Writes binary data to the waveform in onboard memory. The waveform
     handle passed must have been created by a call to the
@@ -4641,7 +2722,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].write_binary16_waveform(waveform_handle, size, data)
+            session['0,1'].write_binary16_waveform(waveform_handle, data)
 
 
     :param waveform_handle:
@@ -4677,7 +2758,7 @@ nifgen.Session methods
 
     :type data: list of int
 
-.. function:: write_named_waveform_f64(waveform_name, size, data)
+.. function:: write_named_waveform_f64(waveform_name, data)
 
     Writes floating-point data to the waveform in onboard memory. The
     waveform handle passed in must have been created by a call to the
@@ -4709,7 +2790,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].write_named_waveform_f64(waveform_name, size, data)
+            session['0,1'].write_named_waveform_f64(waveform_name, data)
 
 
     :param waveform_name:
@@ -4743,7 +2824,7 @@ nifgen.Session methods
 
     :type data: list of float
 
-.. function:: write_named_waveform_i16(waveform_name, size, data)
+.. function:: write_named_waveform_i16(waveform_name, data)
 
     Writes binary data to the named waveform in onboard memory.
 
@@ -4766,7 +2847,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].write_named_waveform_i16(waveform_name, size, data)
+            session['0,1'].write_named_waveform_i16(waveform_name, data)
 
 
     :param waveform_name:
@@ -4800,46 +2881,6 @@ nifgen.Session methods
 
     :type data: list of int
 
-.. function:: write_p2_p_endpoint_i16(endpoint_name, number_of_samples, endpoint_data)
-
-    Writes I16 data to the peer-to-peer endpoint. Use this function to write
-    initial data from the host to the endpoint before starting generation to
-    avoid an underflow at start.
-
-    
-
-
-
-    :param endpoint_name:
-
-
-        Specifies the name of the FIFO endpoint. Data is written to the endpoint
-        FIFO.
-
-        
-
-
-    :type endpoint_name: string
-    :param number_of_samples:
-
-
-        Specifies the number of samples to write into the endpoint FIFO.
-
-        
-
-
-    :type number_of_samples: int
-    :param endpoint_data:
-
-
-        Specifies the array of data to write into the endpoint FIFO. The binary
-        data is left-justified.
-
-        
-
-
-    :type endpoint_data: list of int
-
 .. function:: write_script(script)
 
     Writes a string containing one or more scripts that govern the
@@ -4871,7 +2912,7 @@ nifgen.Session methods
 
     :type script: string
 
-.. function:: write_waveform(waveform_handle, size, data)
+.. function:: write_waveform(waveform_handle, data)
 
     Writes floating-point data to the waveform in onboard memory. The
     waveform handle passed in must have been created by a call to the
@@ -4903,7 +2944,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].write_waveform(waveform_handle, size, data)
+            session['0,1'].write_waveform(waveform_handle, data)
 
 
     :param waveform_handle:

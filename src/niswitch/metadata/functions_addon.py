@@ -89,7 +89,4 @@ functions_default_value = {
     'RouteTriggerInput':        { 'parameters': { 3: { 'default_value': False, }, }, },
     'WaitForDebounce':          { 'parameters': { 1: { 'default_value': 5000, }, }, },
     'WaitForScanComplete':      { 'parameters': { 1: { 'default_value': 5000, }, }, },
-
-
-
 }

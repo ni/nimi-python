@@ -23,18 +23,6 @@ class SideEffectsHelper(object):
         self._defaults['AllocateWaveform'] = {}
         self._defaults['AllocateWaveform']['return'] = 0
         self._defaults['AllocateWaveform']['waveformHandle'] = None
-        self._defaults['CheckAttributeViBoolean'] = {}
-        self._defaults['CheckAttributeViBoolean']['return'] = 0
-        self._defaults['CheckAttributeViInt32'] = {}
-        self._defaults['CheckAttributeViInt32']['return'] = 0
-        self._defaults['CheckAttributeViInt64'] = {}
-        self._defaults['CheckAttributeViInt64']['return'] = 0
-        self._defaults['CheckAttributeViReal64'] = {}
-        self._defaults['CheckAttributeViReal64']['return'] = 0
-        self._defaults['CheckAttributeViSession'] = {}
-        self._defaults['CheckAttributeViSession']['return'] = 0
-        self._defaults['CheckAttributeViString'] = {}
-        self._defaults['CheckAttributeViString']['return'] = 0
         self._defaults['ClearArbMemory'] = {}
         self._defaults['ClearArbMemory']['return'] = 0
         self._defaults['ClearArbSequence'] = {}
@@ -47,16 +35,10 @@ class SideEffectsHelper(object):
         self._defaults['ClearUserStandardWaveform']['return'] = 0
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
-        self._defaults['ConfigureAmplitude'] = {}
-        self._defaults['ConfigureAmplitude']['return'] = 0
         self._defaults['ConfigureArbSequence'] = {}
         self._defaults['ConfigureArbSequence']['return'] = 0
         self._defaults['ConfigureArbWaveform'] = {}
         self._defaults['ConfigureArbWaveform']['return'] = 0
-        self._defaults['ConfigureChannels'] = {}
-        self._defaults['ConfigureChannels']['return'] = 0
-        self._defaults['ConfigureClockMode'] = {}
-        self._defaults['ConfigureClockMode']['return'] = 0
         self._defaults['ConfigureCustomFIRFilterCoefficients'] = {}
         self._defaults['ConfigureCustomFIRFilterCoefficients']['return'] = 0
         self._defaults['ConfigureDigitalEdgeScriptTrigger'] = {}
@@ -67,44 +49,8 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureDigitalLevelScriptTrigger']['return'] = 0
         self._defaults['ConfigureFreqList'] = {}
         self._defaults['ConfigureFreqList']['return'] = 0
-        self._defaults['ConfigureFrequency'] = {}
-        self._defaults['ConfigureFrequency']['return'] = 0
-        self._defaults['ConfigureGain'] = {}
-        self._defaults['ConfigureGain']['return'] = 0
-        self._defaults['ConfigureOperationMode'] = {}
-        self._defaults['ConfigureOperationMode']['return'] = 0
-        self._defaults['ConfigureOutputEnabled'] = {}
-        self._defaults['ConfigureOutputEnabled']['return'] = 0
-        self._defaults['ConfigureOutputImpedance'] = {}
-        self._defaults['ConfigureOutputImpedance']['return'] = 0
-        self._defaults['ConfigureOutputMode'] = {}
-        self._defaults['ConfigureOutputMode']['return'] = 0
-        self._defaults['ConfigureP2PEndpointFullnessStartTrigger'] = {}
-        self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return'] = 0
-        self._defaults['ConfigureRefClockFrequency'] = {}
-        self._defaults['ConfigureRefClockFrequency']['return'] = 0
-        self._defaults['ConfigureRefClockSource'] = {}
-        self._defaults['ConfigureRefClockSource']['return'] = 0
-        self._defaults['ConfigureReferenceClock'] = {}
-        self._defaults['ConfigureReferenceClock']['return'] = 0
-        self._defaults['ConfigureSampleClockSource'] = {}
-        self._defaults['ConfigureSampleClockSource']['return'] = 0
-        self._defaults['ConfigureSampleRate'] = {}
-        self._defaults['ConfigureSampleRate']['return'] = 0
-        self._defaults['ConfigureSoftwareEdgeScriptTrigger'] = {}
-        self._defaults['ConfigureSoftwareEdgeScriptTrigger']['return'] = 0
-        self._defaults['ConfigureSoftwareEdgeStartTrigger'] = {}
-        self._defaults['ConfigureSoftwareEdgeStartTrigger']['return'] = 0
         self._defaults['ConfigureStandardWaveform'] = {}
         self._defaults['ConfigureStandardWaveform']['return'] = 0
-        self._defaults['ConfigureSynchronization'] = {}
-        self._defaults['ConfigureSynchronization']['return'] = 0
-        self._defaults['ConfigureTriggerMode'] = {}
-        self._defaults['ConfigureTriggerMode']['return'] = 0
-        self._defaults['ConfigureTriggerSource'] = {}
-        self._defaults['ConfigureTriggerSource']['return'] = 0
-        self._defaults['ConfigureUpdateClockSource'] = {}
-        self._defaults['ConfigureUpdateClockSource']['return'] = 0
         self._defaults['CreateAdvancedArbSequence'] = {}
         self._defaults['CreateAdvancedArbSequence']['return'] = 0
         self._defaults['CreateAdvancedArbSequence']['coercedMarkersArray'] = None
@@ -112,12 +58,6 @@ class SideEffectsHelper(object):
         self._defaults['CreateArbSequence'] = {}
         self._defaults['CreateArbSequence']['return'] = 0
         self._defaults['CreateArbSequence']['sequenceHandle'] = None
-        self._defaults['CreateArbWaveform'] = {}
-        self._defaults['CreateArbWaveform']['return'] = 0
-        self._defaults['CreateArbWaveform']['waveformHandle'] = None
-        self._defaults['CreateBinary16ArbWaveform'] = {}
-        self._defaults['CreateBinary16ArbWaveform']['return'] = 0
-        self._defaults['CreateBinary16ArbWaveform']['waveformHandle'] = None
         self._defaults['CreateFreqList'] = {}
         self._defaults['CreateFreqList']['return'] = 0
         self._defaults['CreateFreqList']['frequencyListHandle'] = None
@@ -127,9 +67,6 @@ class SideEffectsHelper(object):
         self._defaults['CreateWaveformFromFileF64'] = {}
         self._defaults['CreateWaveformFromFileF64']['return'] = 0
         self._defaults['CreateWaveformFromFileF64']['waveformHandle'] = None
-        self._defaults['CreateWaveformFromFileHWS'] = {}
-        self._defaults['CreateWaveformFromFileHWS']['return'] = 0
-        self._defaults['CreateWaveformFromFileHWS']['waveformHandle'] = None
         self._defaults['CreateWaveformFromFileI16'] = {}
         self._defaults['CreateWaveformFromFileI16']['return'] = 0
         self._defaults['CreateWaveformFromFileI16']['waveformHandle'] = None
@@ -144,25 +81,6 @@ class SideEffectsHelper(object):
         self._defaults['DeleteScript']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
-        self._defaults['DisableAnalogFilter'] = {}
-        self._defaults['DisableAnalogFilter']['return'] = 0
-        self._defaults['DisableDigitalFilter'] = {}
-        self._defaults['DisableDigitalFilter']['return'] = 0
-        self._defaults['DisableDigitalPatterning'] = {}
-        self._defaults['DisableDigitalPatterning']['return'] = 0
-        self._defaults['DisableScriptTrigger'] = {}
-        self._defaults['DisableScriptTrigger']['return'] = 0
-        self._defaults['DisableStartTrigger'] = {}
-        self._defaults['DisableStartTrigger']['return'] = 0
-        self._defaults['EnableAnalogFilter'] = {}
-        self._defaults['EnableAnalogFilter']['return'] = 0
-        self._defaults['EnableDigitalFilter'] = {}
-        self._defaults['EnableDigitalFilter']['return'] = 0
-        self._defaults['EnableDigitalPatterning'] = {}
-        self._defaults['EnableDigitalPatterning']['return'] = 0
-        self._defaults['ErrorHandler'] = {}
-        self._defaults['ErrorHandler']['return'] = 0
-        self._defaults['ErrorHandler']['errorMessage'] = None
         self._defaults['ExportSignal'] = {}
         self._defaults['ExportSignal']['return'] = 0
         self._defaults['GetAttributeViBoolean'] = {}
@@ -184,8 +102,23 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['errorDescription'] = None
+        self._defaults['GetExtCalLastDateAndTime'] = {}
+        self._defaults['GetExtCalLastDateAndTime']['return'] = 0
+        self._defaults['GetExtCalLastDateAndTime']['Year'] = None
+        self._defaults['GetExtCalLastDateAndTime']['Month'] = None
+        self._defaults['GetExtCalLastDateAndTime']['Day'] = None
+        self._defaults['GetExtCalLastDateAndTime']['Hour'] = None
+        self._defaults['GetExtCalLastDateAndTime']['Minute'] = None
+        self._defaults['GetExtCalLastTemp'] = {}
+        self._defaults['GetExtCalLastTemp']['return'] = 0
+        self._defaults['GetExtCalLastTemp']['Temperature'] = None
+        self._defaults['GetExtCalRecommendedInterval'] = {}
+        self._defaults['GetExtCalRecommendedInterval']['return'] = 0
+        self._defaults['GetExtCalRecommendedInterval']['Months'] = None
         self._defaults['GetFIRFilterCoefficients'] = {}
         self._defaults['GetFIRFilterCoefficients']['return'] = 0
+        self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead'] = None
+        self._defaults['GetFIRFilterCoefficients']['coefficientsArray'] = None
         self._defaults['GetHardwareState'] = {}
         self._defaults['GetHardwareState']['return'] = 0
         self._defaults['GetHardwareState']['state'] = None
@@ -202,17 +135,6 @@ class SideEffectsHelper(object):
         self._defaults['GetSelfCalSupported'] = {}
         self._defaults['GetSelfCalSupported']['return'] = 0
         self._defaults['GetSelfCalSupported']['selfCalSupported'] = None
-        self._defaults['InitWithOptions'] = {}
-        self._defaults['InitWithOptions']['return'] = 0
-        self._defaults['InitWithOptions']['vi'] = None
-        self._defaults['InitializeAnalogOutputCalibration'] = {}
-        self._defaults['InitializeAnalogOutputCalibration']['return'] = 0
-        self._defaults['InitializeCalADCCalibration'] = {}
-        self._defaults['InitializeCalADCCalibration']['return'] = 0
-        self._defaults['InitializeFlatnessCalibration'] = {}
-        self._defaults['InitializeFlatnessCalibration']['return'] = 0
-        self._defaults['InitializeOscillatorFrequencyCalibration'] = {}
-        self._defaults['InitializeOscillatorFrequencyCalibration']['return'] = 0
         self._defaults['InitializeWithChannels'] = {}
         self._defaults['InitializeWithChannels']['return'] = 0
         self._defaults['InitializeWithChannels']['vi'] = None
@@ -221,8 +143,6 @@ class SideEffectsHelper(object):
         self._defaults['IsDone'] = {}
         self._defaults['IsDone']['return'] = 0
         self._defaults['IsDone']['Done'] = None
-        self._defaults['ManualEnableP2PStream'] = {}
-        self._defaults['ManualEnableP2PStream']['return'] = 0
         self._defaults['QueryArbSeqCapabilities'] = {}
         self._defaults['QueryArbSeqCapabilities']['return'] = 0
         self._defaults['QueryArbSeqCapabilities']['maximumNumberOfSequences'] = None
@@ -243,20 +163,13 @@ class SideEffectsHelper(object):
         self._defaults['QueryFreqListCapabilities']['minimumFrequencyListDuration'] = None
         self._defaults['QueryFreqListCapabilities']['maximumFrequencyListDuration'] = None
         self._defaults['QueryFreqListCapabilities']['frequencyListDurationQuantum'] = None
-        self._defaults['ReadCalADC'] = {}
-        self._defaults['ReadCalADC']['return'] = 0
-        self._defaults['ReadCalADC']['calAdcValue'] = None
         self._defaults['ReadCurrentTemperature'] = {}
         self._defaults['ReadCurrentTemperature']['return'] = 0
         self._defaults['ReadCurrentTemperature']['Temperature'] = None
-        self._defaults['ResetAttribute'] = {}
-        self._defaults['ResetAttribute']['return'] = 0
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
         self._defaults['ResetWithDefaults']['return'] = 0
-        self._defaults['RouteSignalOut'] = {}
-        self._defaults['RouteSignalOut']['return'] = 0
         self._defaults['SelfCal'] = {}
         self._defaults['SelfCal']['return'] = 0
         self._defaults['SendSoftwareEdgeTrigger'] = {}
@@ -279,16 +192,12 @@ class SideEffectsHelper(object):
         self._defaults['SetWaveformNextWritePosition']['return'] = 0
         self._defaults['WaitUntilDone'] = {}
         self._defaults['WaitUntilDone']['return'] = 0
-        self._defaults['WriteBinary16AnalogStaticValue'] = {}
-        self._defaults['WriteBinary16AnalogStaticValue']['return'] = 0
         self._defaults['WriteBinary16Waveform'] = {}
         self._defaults['WriteBinary16Waveform']['return'] = 0
         self._defaults['WriteNamedWaveformF64'] = {}
         self._defaults['WriteNamedWaveformF64']['return'] = 0
         self._defaults['WriteNamedWaveformI16'] = {}
         self._defaults['WriteNamedWaveformI16']['return'] = 0
-        self._defaults['WriteP2PEndpointI16'] = {}
-        self._defaults['WriteP2PEndpointI16']['return'] = 0
         self._defaults['WriteScript'] = {}
         self._defaults['WriteScript']['return'] = 0
         self._defaults['WriteWaveform'] = {}
@@ -334,36 +243,6 @@ class SideEffectsHelper(object):
         waveform_handle.contents.value = self._defaults['AllocateWaveform']['waveformHandle']
         return self._defaults['AllocateWaveform']['return']
 
-    def niFgen_CheckAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViBoolean']['return'] != 0:
-            return self._defaults['CheckAttributeViBoolean']['return']
-        return self._defaults['CheckAttributeViBoolean']['return']
-
-    def niFgen_CheckAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViInt32']['return'] != 0:
-            return self._defaults['CheckAttributeViInt32']['return']
-        return self._defaults['CheckAttributeViInt32']['return']
-
-    def niFgen_CheckAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViInt64']['return'] != 0:
-            return self._defaults['CheckAttributeViInt64']['return']
-        return self._defaults['CheckAttributeViInt64']['return']
-
-    def niFgen_CheckAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViReal64']['return'] != 0:
-            return self._defaults['CheckAttributeViReal64']['return']
-        return self._defaults['CheckAttributeViReal64']['return']
-
-    def niFgen_CheckAttributeViSession(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViSession']['return'] != 0:
-            return self._defaults['CheckAttributeViSession']['return']
-        return self._defaults['CheckAttributeViSession']['return']
-
-    def niFgen_CheckAttributeViString(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
-        if self._defaults['CheckAttributeViString']['return'] != 0:
-            return self._defaults['CheckAttributeViString']['return']
-        return self._defaults['CheckAttributeViString']['return']
-
     def niFgen_ClearArbMemory(self, vi):  # noqa: N802
         if self._defaults['ClearArbMemory']['return'] != 0:
             return self._defaults['ClearArbMemory']['return']
@@ -394,11 +273,6 @@ class SideEffectsHelper(object):
             return self._defaults['Commit']['return']
         return self._defaults['Commit']['return']
 
-    def niFgen_ConfigureAmplitude(self, vi, channel_name, amplitude):  # noqa: N802
-        if self._defaults['ConfigureAmplitude']['return'] != 0:
-            return self._defaults['ConfigureAmplitude']['return']
-        return self._defaults['ConfigureAmplitude']['return']
-
     def niFgen_ConfigureArbSequence(self, vi, channel_name, sequence_handle, gain, offset):  # noqa: N802
         if self._defaults['ConfigureArbSequence']['return'] != 0:
             return self._defaults['ConfigureArbSequence']['return']
@@ -408,16 +282,6 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureArbWaveform']['return'] != 0:
             return self._defaults['ConfigureArbWaveform']['return']
         return self._defaults['ConfigureArbWaveform']['return']
-
-    def niFgen_ConfigureChannels(self, vi, channels):  # noqa: N802
-        if self._defaults['ConfigureChannels']['return'] != 0:
-            return self._defaults['ConfigureChannels']['return']
-        return self._defaults['ConfigureChannels']['return']
-
-    def niFgen_ConfigureClockMode(self, vi, clock_mode):  # noqa: N802
-        if self._defaults['ConfigureClockMode']['return'] != 0:
-            return self._defaults['ConfigureClockMode']['return']
-        return self._defaults['ConfigureClockMode']['return']
 
     def niFgen_ConfigureCustomFIRFilterCoefficients(self, vi, channel_name, number_of_coefficients, coefficients_array):  # noqa: N802
         if self._defaults['ConfigureCustomFIRFilterCoefficients']['return'] != 0:
@@ -444,100 +308,10 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureFreqList']['return']
         return self._defaults['ConfigureFreqList']['return']
 
-    def niFgen_ConfigureFrequency(self, vi, channel_name, frequency):  # noqa: N802
-        if self._defaults['ConfigureFrequency']['return'] != 0:
-            return self._defaults['ConfigureFrequency']['return']
-        return self._defaults['ConfigureFrequency']['return']
-
-    def niFgen_ConfigureGain(self, vi, channel_name, gain):  # noqa: N802
-        if self._defaults['ConfigureGain']['return'] != 0:
-            return self._defaults['ConfigureGain']['return']
-        return self._defaults['ConfigureGain']['return']
-
-    def niFgen_ConfigureOperationMode(self, vi, channel_name, operation_mode):  # noqa: N802
-        if self._defaults['ConfigureOperationMode']['return'] != 0:
-            return self._defaults['ConfigureOperationMode']['return']
-        return self._defaults['ConfigureOperationMode']['return']
-
-    def niFgen_ConfigureOutputEnabled(self, vi, channel_name, enabled):  # noqa: N802
-        if self._defaults['ConfigureOutputEnabled']['return'] != 0:
-            return self._defaults['ConfigureOutputEnabled']['return']
-        return self._defaults['ConfigureOutputEnabled']['return']
-
-    def niFgen_ConfigureOutputImpedance(self, vi, channel_name, impedance):  # noqa: N802
-        if self._defaults['ConfigureOutputImpedance']['return'] != 0:
-            return self._defaults['ConfigureOutputImpedance']['return']
-        return self._defaults['ConfigureOutputImpedance']['return']
-
-    def niFgen_ConfigureOutputMode(self, vi, output_mode):  # noqa: N802
-        if self._defaults['ConfigureOutputMode']['return'] != 0:
-            return self._defaults['ConfigureOutputMode']['return']
-        return self._defaults['ConfigureOutputMode']['return']
-
-    def niFgen_ConfigureP2PEndpointFullnessStartTrigger(self, vi, p2p_endpoint_fullness_level):  # noqa: N802
-        if self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return'] != 0:
-            return self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return']
-        return self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return']
-
-    def niFgen_ConfigureRefClockFrequency(self, vi, reference_clock_frequency):  # noqa: N802
-        if self._defaults['ConfigureRefClockFrequency']['return'] != 0:
-            return self._defaults['ConfigureRefClockFrequency']['return']
-        return self._defaults['ConfigureRefClockFrequency']['return']
-
-    def niFgen_ConfigureRefClockSource(self, vi, reference_clock_source):  # noqa: N802
-        if self._defaults['ConfigureRefClockSource']['return'] != 0:
-            return self._defaults['ConfigureRefClockSource']['return']
-        return self._defaults['ConfigureRefClockSource']['return']
-
-    def niFgen_ConfigureReferenceClock(self, vi, reference_clock_source, reference_clock_frequency):  # noqa: N802
-        if self._defaults['ConfigureReferenceClock']['return'] != 0:
-            return self._defaults['ConfigureReferenceClock']['return']
-        return self._defaults['ConfigureReferenceClock']['return']
-
-    def niFgen_ConfigureSampleClockSource(self, vi, sample_clock_source):  # noqa: N802
-        if self._defaults['ConfigureSampleClockSource']['return'] != 0:
-            return self._defaults['ConfigureSampleClockSource']['return']
-        return self._defaults['ConfigureSampleClockSource']['return']
-
-    def niFgen_ConfigureSampleRate(self, vi, sample_rate):  # noqa: N802
-        if self._defaults['ConfigureSampleRate']['return'] != 0:
-            return self._defaults['ConfigureSampleRate']['return']
-        return self._defaults['ConfigureSampleRate']['return']
-
-    def niFgen_ConfigureSoftwareEdgeScriptTrigger(self, vi, trigger_id):  # noqa: N802
-        if self._defaults['ConfigureSoftwareEdgeScriptTrigger']['return'] != 0:
-            return self._defaults['ConfigureSoftwareEdgeScriptTrigger']['return']
-        return self._defaults['ConfigureSoftwareEdgeScriptTrigger']['return']
-
-    def niFgen_ConfigureSoftwareEdgeStartTrigger(self, vi):  # noqa: N802
-        if self._defaults['ConfigureSoftwareEdgeStartTrigger']['return'] != 0:
-            return self._defaults['ConfigureSoftwareEdgeStartTrigger']['return']
-        return self._defaults['ConfigureSoftwareEdgeStartTrigger']['return']
-
     def niFgen_ConfigureStandardWaveform(self, vi, channel_name, waveform, amplitude, dc_offset, frequency, start_phase):  # noqa: N802
         if self._defaults['ConfigureStandardWaveform']['return'] != 0:
             return self._defaults['ConfigureStandardWaveform']['return']
         return self._defaults['ConfigureStandardWaveform']['return']
-
-    def niFgen_ConfigureSynchronization(self, vi, channel_name, synchronization_source):  # noqa: N802
-        if self._defaults['ConfigureSynchronization']['return'] != 0:
-            return self._defaults['ConfigureSynchronization']['return']
-        return self._defaults['ConfigureSynchronization']['return']
-
-    def niFgen_ConfigureTriggerMode(self, vi, channel_name, trigger_mode):  # noqa: N802
-        if self._defaults['ConfigureTriggerMode']['return'] != 0:
-            return self._defaults['ConfigureTriggerMode']['return']
-        return self._defaults['ConfigureTriggerMode']['return']
-
-    def niFgen_ConfigureTriggerSource(self, vi, channel_name, trigger_source):  # noqa: N802
-        if self._defaults['ConfigureTriggerSource']['return'] != 0:
-            return self._defaults['ConfigureTriggerSource']['return']
-        return self._defaults['ConfigureTriggerSource']['return']
-
-    def niFgen_ConfigureUpdateClockSource(self, vi, update_clock_source):  # noqa: N802
-        if self._defaults['ConfigureUpdateClockSource']['return'] != 0:
-            return self._defaults['ConfigureUpdateClockSource']['return']
-        return self._defaults['ConfigureUpdateClockSource']['return']
 
     def niFgen_CreateAdvancedArbSequence(self, vi, sequence_length, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array, coerced_markers_array, sequence_handle):  # noqa: N802
         if self._defaults['CreateAdvancedArbSequence']['return'] != 0:
@@ -563,22 +337,6 @@ class SideEffectsHelper(object):
         sequence_handle.contents.value = self._defaults['CreateArbSequence']['sequenceHandle']
         return self._defaults['CreateArbSequence']['return']
 
-    def niFgen_CreateArbWaveform(self, vi, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
-        if self._defaults['CreateArbWaveform']['return'] != 0:
-            return self._defaults['CreateArbWaveform']['return']
-        if self._defaults['CreateArbWaveform']['waveformHandle'] is None:
-            raise MockFunctionCallError("niFgen_CreateArbWaveform", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateArbWaveform']['waveformHandle']
-        return self._defaults['CreateArbWaveform']['return']
-
-    def niFgen_CreateBinary16ArbWaveform(self, vi, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
-        if self._defaults['CreateBinary16ArbWaveform']['return'] != 0:
-            return self._defaults['CreateBinary16ArbWaveform']['return']
-        if self._defaults['CreateBinary16ArbWaveform']['waveformHandle'] is None:
-            raise MockFunctionCallError("niFgen_CreateBinary16ArbWaveform", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateBinary16ArbWaveform']['waveformHandle']
-        return self._defaults['CreateBinary16ArbWaveform']['return']
-
     def niFgen_CreateFreqList(self, vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle):  # noqa: N802
         if self._defaults['CreateFreqList']['return'] != 0:
             return self._defaults['CreateFreqList']['return']
@@ -602,14 +360,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_CreateWaveformFromFileF64", param='waveformHandle')
         waveform_handle.contents.value = self._defaults['CreateWaveformFromFileF64']['waveformHandle']
         return self._defaults['CreateWaveformFromFileF64']['return']
-
-    def niFgen_CreateWaveformFromFileHWS(self, vi, channel_name, file_name, use_rate_from_waveform, use_gain_and_offset_from_waveform, waveform_handle):  # noqa: N802
-        if self._defaults['CreateWaveformFromFileHWS']['return'] != 0:
-            return self._defaults['CreateWaveformFromFileHWS']['return']
-        if self._defaults['CreateWaveformFromFileHWS']['waveformHandle'] is None:
-            raise MockFunctionCallError("niFgen_CreateWaveformFromFileHWS", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateWaveformFromFileHWS']['waveformHandle']
-        return self._defaults['CreateWaveformFromFileHWS']['return']
 
     def niFgen_CreateWaveformFromFileI16(self, vi, channel_name, file_name, byte_order, waveform_handle):  # noqa: N802
         if self._defaults['CreateWaveformFromFileI16']['return'] != 0:
@@ -646,59 +396,6 @@ class SideEffectsHelper(object):
         if self._defaults['Disable']['return'] != 0:
             return self._defaults['Disable']['return']
         return self._defaults['Disable']['return']
-
-    def niFgen_DisableAnalogFilter(self, vi, channel_name):  # noqa: N802
-        if self._defaults['DisableAnalogFilter']['return'] != 0:
-            return self._defaults['DisableAnalogFilter']['return']
-        return self._defaults['DisableAnalogFilter']['return']
-
-    def niFgen_DisableDigitalFilter(self, vi, channel_name):  # noqa: N802
-        if self._defaults['DisableDigitalFilter']['return'] != 0:
-            return self._defaults['DisableDigitalFilter']['return']
-        return self._defaults['DisableDigitalFilter']['return']
-
-    def niFgen_DisableDigitalPatterning(self, vi, channel_name):  # noqa: N802
-        if self._defaults['DisableDigitalPatterning']['return'] != 0:
-            return self._defaults['DisableDigitalPatterning']['return']
-        return self._defaults['DisableDigitalPatterning']['return']
-
-    def niFgen_DisableScriptTrigger(self, vi, trigger_id):  # noqa: N802
-        if self._defaults['DisableScriptTrigger']['return'] != 0:
-            return self._defaults['DisableScriptTrigger']['return']
-        return self._defaults['DisableScriptTrigger']['return']
-
-    def niFgen_DisableStartTrigger(self, vi):  # noqa: N802
-        if self._defaults['DisableStartTrigger']['return'] != 0:
-            return self._defaults['DisableStartTrigger']['return']
-        return self._defaults['DisableStartTrigger']['return']
-
-    def niFgen_EnableAnalogFilter(self, vi, channel_name, filter_correction_frequency):  # noqa: N802
-        if self._defaults['EnableAnalogFilter']['return'] != 0:
-            return self._defaults['EnableAnalogFilter']['return']
-        return self._defaults['EnableAnalogFilter']['return']
-
-    def niFgen_EnableDigitalFilter(self, vi, channel_name):  # noqa: N802
-        if self._defaults['EnableDigitalFilter']['return'] != 0:
-            return self._defaults['EnableDigitalFilter']['return']
-        return self._defaults['EnableDigitalFilter']['return']
-
-    def niFgen_EnableDigitalPatterning(self, vi, channel_name):  # noqa: N802
-        if self._defaults['EnableDigitalPatterning']['return'] != 0:
-            return self._defaults['EnableDigitalPatterning']['return']
-        return self._defaults['EnableDigitalPatterning']['return']
-
-    def niFgen_ErrorHandler(self, vi, error_code, error_message):  # noqa: N802
-        if self._defaults['ErrorHandler']['return'] != 0:
-            return self._defaults['ErrorHandler']['return']
-        if self._defaults['ErrorHandler']['errorMessage'] is None:
-            raise MockFunctionCallError("niFgen_ErrorHandler", param='errorMessage')
-        a = self._defaults['ErrorHandler']['errorMessage']
-        import sys
-        if sys.version_info.major > 2 and type(a) is str:
-            a = a.encode('ascii')
-        for i in range(min(len(error_message), len(a))):
-            error_message[i] = a[i]
-        return self._defaults['ErrorHandler']['return']
 
     def niFgen_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
         if self._defaults['ExportSignal']['return'] != 0:
@@ -760,9 +457,53 @@ class SideEffectsHelper(object):
         error_description.value = self._defaults['GetError']['errorDescription'].encode('ascii')
         return self._defaults['GetError']['return']
 
+    def niFgen_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
+        if self._defaults['GetExtCalLastDateAndTime']['return'] != 0:
+            return self._defaults['GetExtCalLastDateAndTime']['return']
+        if self._defaults['GetExtCalLastDateAndTime']['Year'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Year')
+        year.contents.value = self._defaults['GetExtCalLastDateAndTime']['Year']
+        if self._defaults['GetExtCalLastDateAndTime']['Month'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Month')
+        month.contents.value = self._defaults['GetExtCalLastDateAndTime']['Month']
+        if self._defaults['GetExtCalLastDateAndTime']['Day'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Day')
+        day.contents.value = self._defaults['GetExtCalLastDateAndTime']['Day']
+        if self._defaults['GetExtCalLastDateAndTime']['Hour'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Hour')
+        hour.contents.value = self._defaults['GetExtCalLastDateAndTime']['Hour']
+        if self._defaults['GetExtCalLastDateAndTime']['Minute'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Minute')
+        minute.contents.value = self._defaults['GetExtCalLastDateAndTime']['Minute']
+        return self._defaults['GetExtCalLastDateAndTime']['return']
+
+    def niFgen_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
+        if self._defaults['GetExtCalLastTemp']['return'] != 0:
+            return self._defaults['GetExtCalLastTemp']['return']
+        if self._defaults['GetExtCalLastTemp']['Temperature'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalLastTemp", param='Temperature')
+        temperature.contents.value = self._defaults['GetExtCalLastTemp']['Temperature']
+        return self._defaults['GetExtCalLastTemp']['return']
+
+    def niFgen_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
+        if self._defaults['GetExtCalRecommendedInterval']['return'] != 0:
+            return self._defaults['GetExtCalRecommendedInterval']['return']
+        if self._defaults['GetExtCalRecommendedInterval']['Months'] is None:
+            raise MockFunctionCallError("niFgen_GetExtCalRecommendedInterval", param='Months')
+        months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
+        return self._defaults['GetExtCalRecommendedInterval']['return']
+
     def niFgen_GetFIRFilterCoefficients(self, vi, channel_name, array_size, coefficients_array, number_of_coefficients_read):  # noqa: N802
         if self._defaults['GetFIRFilterCoefficients']['return'] != 0:
             return self._defaults['GetFIRFilterCoefficients']['return']
+        if self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead'] is None:
+            raise MockFunctionCallError("niFgen_GetFIRFilterCoefficients", param='numberOfCoefficientsRead')
+        number_of_coefficients_read.contents.value = self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead']
+        if self._defaults['GetFIRFilterCoefficients']['coefficientsArray'] is None:
+            raise MockFunctionCallError("niFgen_GetFIRFilterCoefficients", param='coefficientsArray')
+        if array_size.value == 0:
+            return len(self._defaults['GetFIRFilterCoefficients']['coefficientsArray'])
+        coefficients_array.value = self._defaults['GetFIRFilterCoefficients']['coefficientsArray'].encode('ascii')
         return self._defaults['GetFIRFilterCoefficients']['return']
 
     def niFgen_GetHardwareState(self, vi, state):  # noqa: N802
@@ -809,34 +550,6 @@ class SideEffectsHelper(object):
         self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
         return self._defaults['GetSelfCalSupported']['return']
 
-    def niFgen_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
-        if self._defaults['InitWithOptions']['return'] != 0:
-            return self._defaults['InitWithOptions']['return']
-        if self._defaults['InitWithOptions']['vi'] is None:
-            raise MockFunctionCallError("niFgen_InitWithOptions", param='vi')
-        vi.contents.value = self._defaults['InitWithOptions']['vi']
-        return self._defaults['InitWithOptions']['return']
-
-    def niFgen_InitializeAnalogOutputCalibration(self, vi):  # noqa: N802
-        if self._defaults['InitializeAnalogOutputCalibration']['return'] != 0:
-            return self._defaults['InitializeAnalogOutputCalibration']['return']
-        return self._defaults['InitializeAnalogOutputCalibration']['return']
-
-    def niFgen_InitializeCalADCCalibration(self, vi):  # noqa: N802
-        if self._defaults['InitializeCalADCCalibration']['return'] != 0:
-            return self._defaults['InitializeCalADCCalibration']['return']
-        return self._defaults['InitializeCalADCCalibration']['return']
-
-    def niFgen_InitializeFlatnessCalibration(self, vi):  # noqa: N802
-        if self._defaults['InitializeFlatnessCalibration']['return'] != 0:
-            return self._defaults['InitializeFlatnessCalibration']['return']
-        return self._defaults['InitializeFlatnessCalibration']['return']
-
-    def niFgen_InitializeOscillatorFrequencyCalibration(self, vi):  # noqa: N802
-        if self._defaults['InitializeOscillatorFrequencyCalibration']['return'] != 0:
-            return self._defaults['InitializeOscillatorFrequencyCalibration']['return']
-        return self._defaults['InitializeOscillatorFrequencyCalibration']['return']
-
     def niFgen_InitializeWithChannels(self, resource_name, channel_name, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitializeWithChannels']['return'] != 0:
             return self._defaults['InitializeWithChannels']['return']
@@ -857,11 +570,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_IsDone", param='Done')
         done.contents.value = self._defaults['IsDone']['Done']
         return self._defaults['IsDone']['return']
-
-    def niFgen_ManualEnableP2PStream(self, vi, endpoint_name):  # noqa: N802
-        if self._defaults['ManualEnableP2PStream']['return'] != 0:
-            return self._defaults['ManualEnableP2PStream']['return']
-        return self._defaults['ManualEnableP2PStream']['return']
 
     def niFgen_QueryArbSeqCapabilities(self, vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count):  # noqa: N802
         if self._defaults['QueryArbSeqCapabilities']['return'] != 0:
@@ -920,14 +628,6 @@ class SideEffectsHelper(object):
         frequency_list_duration_quantum.contents.value = self._defaults['QueryFreqListCapabilities']['frequencyListDurationQuantum']
         return self._defaults['QueryFreqListCapabilities']['return']
 
-    def niFgen_ReadCalADC(self, vi, number_of_reads_to_average, return_calibrated_value, cal_adc_value):  # noqa: N802
-        if self._defaults['ReadCalADC']['return'] != 0:
-            return self._defaults['ReadCalADC']['return']
-        if self._defaults['ReadCalADC']['calAdcValue'] is None:
-            raise MockFunctionCallError("niFgen_ReadCalADC", param='calAdcValue')
-        cal_adc_value.contents.value = self._defaults['ReadCalADC']['calAdcValue']
-        return self._defaults['ReadCalADC']['return']
-
     def niFgen_ReadCurrentTemperature(self, vi, temperature):  # noqa: N802
         if self._defaults['ReadCurrentTemperature']['return'] != 0:
             return self._defaults['ReadCurrentTemperature']['return']
@@ -935,11 +635,6 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_ReadCurrentTemperature", param='Temperature')
         temperature.contents.value = self._defaults['ReadCurrentTemperature']['Temperature']
         return self._defaults['ReadCurrentTemperature']['return']
-
-    def niFgen_ResetAttribute(self, vi, channel_name, attribute_id):  # noqa: N802
-        if self._defaults['ResetAttribute']['return'] != 0:
-            return self._defaults['ResetAttribute']['return']
-        return self._defaults['ResetAttribute']['return']
 
     def niFgen_ResetDevice(self, vi):  # noqa: N802
         if self._defaults['ResetDevice']['return'] != 0:
@@ -950,11 +645,6 @@ class SideEffectsHelper(object):
         if self._defaults['ResetWithDefaults']['return'] != 0:
             return self._defaults['ResetWithDefaults']['return']
         return self._defaults['ResetWithDefaults']['return']
-
-    def niFgen_RouteSignalOut(self, vi, channel_name, route_signal_from, route_signal_to):  # noqa: N802
-        if self._defaults['RouteSignalOut']['return'] != 0:
-            return self._defaults['RouteSignalOut']['return']
-        return self._defaults['RouteSignalOut']['return']
 
     def niFgen_SelfCal(self, vi):  # noqa: N802
         if self._defaults['SelfCal']['return'] != 0:
@@ -1011,11 +701,6 @@ class SideEffectsHelper(object):
             return self._defaults['WaitUntilDone']['return']
         return self._defaults['WaitUntilDone']['return']
 
-    def niFgen_WriteBinary16AnalogStaticValue(self, vi, channel_name, value):  # noqa: N802
-        if self._defaults['WriteBinary16AnalogStaticValue']['return'] != 0:
-            return self._defaults['WriteBinary16AnalogStaticValue']['return']
-        return self._defaults['WriteBinary16AnalogStaticValue']['return']
-
     def niFgen_WriteBinary16Waveform(self, vi, channel_name, waveform_handle, size, data):  # noqa: N802
         if self._defaults['WriteBinary16Waveform']['return'] != 0:
             return self._defaults['WriteBinary16Waveform']['return']
@@ -1030,11 +715,6 @@ class SideEffectsHelper(object):
         if self._defaults['WriteNamedWaveformI16']['return'] != 0:
             return self._defaults['WriteNamedWaveformI16']['return']
         return self._defaults['WriteNamedWaveformI16']['return']
-
-    def niFgen_WriteP2PEndpointI16(self, vi, endpoint_name, number_of_samples, endpoint_data):  # noqa: N802
-        if self._defaults['WriteP2PEndpointI16']['return'] != 0:
-            return self._defaults['WriteP2PEndpointI16']['return']
-        return self._defaults['WriteP2PEndpointI16']['return']
 
     def niFgen_WriteScript(self, vi, channel_name, script):  # noqa: N802
         if self._defaults['WriteScript']['return'] != 0:
@@ -1095,18 +775,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_AllocateNamedWaveform.return_value = 0
         mock_library.niFgen_AllocateWaveform.side_effect = MockFunctionCallError("niFgen_AllocateWaveform")
         mock_library.niFgen_AllocateWaveform.return_value = 0
-        mock_library.niFgen_CheckAttributeViBoolean.side_effect = MockFunctionCallError("niFgen_CheckAttributeViBoolean")
-        mock_library.niFgen_CheckAttributeViBoolean.return_value = 0
-        mock_library.niFgen_CheckAttributeViInt32.side_effect = MockFunctionCallError("niFgen_CheckAttributeViInt32")
-        mock_library.niFgen_CheckAttributeViInt32.return_value = 0
-        mock_library.niFgen_CheckAttributeViInt64.side_effect = MockFunctionCallError("niFgen_CheckAttributeViInt64")
-        mock_library.niFgen_CheckAttributeViInt64.return_value = 0
-        mock_library.niFgen_CheckAttributeViReal64.side_effect = MockFunctionCallError("niFgen_CheckAttributeViReal64")
-        mock_library.niFgen_CheckAttributeViReal64.return_value = 0
-        mock_library.niFgen_CheckAttributeViSession.side_effect = MockFunctionCallError("niFgen_CheckAttributeViSession")
-        mock_library.niFgen_CheckAttributeViSession.return_value = 0
-        mock_library.niFgen_CheckAttributeViString.side_effect = MockFunctionCallError("niFgen_CheckAttributeViString")
-        mock_library.niFgen_CheckAttributeViString.return_value = 0
         mock_library.niFgen_ClearArbMemory.side_effect = MockFunctionCallError("niFgen_ClearArbMemory")
         mock_library.niFgen_ClearArbMemory.return_value = 0
         mock_library.niFgen_ClearArbSequence.side_effect = MockFunctionCallError("niFgen_ClearArbSequence")
@@ -1119,16 +787,10 @@ class SideEffectsHelper(object):
         mock_library.niFgen_ClearUserStandardWaveform.return_value = 0
         mock_library.niFgen_Commit.side_effect = MockFunctionCallError("niFgen_Commit")
         mock_library.niFgen_Commit.return_value = 0
-        mock_library.niFgen_ConfigureAmplitude.side_effect = MockFunctionCallError("niFgen_ConfigureAmplitude")
-        mock_library.niFgen_ConfigureAmplitude.return_value = 0
         mock_library.niFgen_ConfigureArbSequence.side_effect = MockFunctionCallError("niFgen_ConfigureArbSequence")
         mock_library.niFgen_ConfigureArbSequence.return_value = 0
         mock_library.niFgen_ConfigureArbWaveform.side_effect = MockFunctionCallError("niFgen_ConfigureArbWaveform")
         mock_library.niFgen_ConfigureArbWaveform.return_value = 0
-        mock_library.niFgen_ConfigureChannels.side_effect = MockFunctionCallError("niFgen_ConfigureChannels")
-        mock_library.niFgen_ConfigureChannels.return_value = 0
-        mock_library.niFgen_ConfigureClockMode.side_effect = MockFunctionCallError("niFgen_ConfigureClockMode")
-        mock_library.niFgen_ConfigureClockMode.return_value = 0
         mock_library.niFgen_ConfigureCustomFIRFilterCoefficients.side_effect = MockFunctionCallError("niFgen_ConfigureCustomFIRFilterCoefficients")
         mock_library.niFgen_ConfigureCustomFIRFilterCoefficients.return_value = 0
         mock_library.niFgen_ConfigureDigitalEdgeScriptTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureDigitalEdgeScriptTrigger")
@@ -1139,60 +801,18 @@ class SideEffectsHelper(object):
         mock_library.niFgen_ConfigureDigitalLevelScriptTrigger.return_value = 0
         mock_library.niFgen_ConfigureFreqList.side_effect = MockFunctionCallError("niFgen_ConfigureFreqList")
         mock_library.niFgen_ConfigureFreqList.return_value = 0
-        mock_library.niFgen_ConfigureFrequency.side_effect = MockFunctionCallError("niFgen_ConfigureFrequency")
-        mock_library.niFgen_ConfigureFrequency.return_value = 0
-        mock_library.niFgen_ConfigureGain.side_effect = MockFunctionCallError("niFgen_ConfigureGain")
-        mock_library.niFgen_ConfigureGain.return_value = 0
-        mock_library.niFgen_ConfigureOperationMode.side_effect = MockFunctionCallError("niFgen_ConfigureOperationMode")
-        mock_library.niFgen_ConfigureOperationMode.return_value = 0
-        mock_library.niFgen_ConfigureOutputEnabled.side_effect = MockFunctionCallError("niFgen_ConfigureOutputEnabled")
-        mock_library.niFgen_ConfigureOutputEnabled.return_value = 0
-        mock_library.niFgen_ConfigureOutputImpedance.side_effect = MockFunctionCallError("niFgen_ConfigureOutputImpedance")
-        mock_library.niFgen_ConfigureOutputImpedance.return_value = 0
-        mock_library.niFgen_ConfigureOutputMode.side_effect = MockFunctionCallError("niFgen_ConfigureOutputMode")
-        mock_library.niFgen_ConfigureOutputMode.return_value = 0
-        mock_library.niFgen_ConfigureP2PEndpointFullnessStartTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureP2PEndpointFullnessStartTrigger")
-        mock_library.niFgen_ConfigureP2PEndpointFullnessStartTrigger.return_value = 0
-        mock_library.niFgen_ConfigureRefClockFrequency.side_effect = MockFunctionCallError("niFgen_ConfigureRefClockFrequency")
-        mock_library.niFgen_ConfigureRefClockFrequency.return_value = 0
-        mock_library.niFgen_ConfigureRefClockSource.side_effect = MockFunctionCallError("niFgen_ConfigureRefClockSource")
-        mock_library.niFgen_ConfigureRefClockSource.return_value = 0
-        mock_library.niFgen_ConfigureReferenceClock.side_effect = MockFunctionCallError("niFgen_ConfigureReferenceClock")
-        mock_library.niFgen_ConfigureReferenceClock.return_value = 0
-        mock_library.niFgen_ConfigureSampleClockSource.side_effect = MockFunctionCallError("niFgen_ConfigureSampleClockSource")
-        mock_library.niFgen_ConfigureSampleClockSource.return_value = 0
-        mock_library.niFgen_ConfigureSampleRate.side_effect = MockFunctionCallError("niFgen_ConfigureSampleRate")
-        mock_library.niFgen_ConfigureSampleRate.return_value = 0
-        mock_library.niFgen_ConfigureSoftwareEdgeScriptTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureSoftwareEdgeScriptTrigger")
-        mock_library.niFgen_ConfigureSoftwareEdgeScriptTrigger.return_value = 0
-        mock_library.niFgen_ConfigureSoftwareEdgeStartTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureSoftwareEdgeStartTrigger")
-        mock_library.niFgen_ConfigureSoftwareEdgeStartTrigger.return_value = 0
         mock_library.niFgen_ConfigureStandardWaveform.side_effect = MockFunctionCallError("niFgen_ConfigureStandardWaveform")
         mock_library.niFgen_ConfigureStandardWaveform.return_value = 0
-        mock_library.niFgen_ConfigureSynchronization.side_effect = MockFunctionCallError("niFgen_ConfigureSynchronization")
-        mock_library.niFgen_ConfigureSynchronization.return_value = 0
-        mock_library.niFgen_ConfigureTriggerMode.side_effect = MockFunctionCallError("niFgen_ConfigureTriggerMode")
-        mock_library.niFgen_ConfigureTriggerMode.return_value = 0
-        mock_library.niFgen_ConfigureTriggerSource.side_effect = MockFunctionCallError("niFgen_ConfigureTriggerSource")
-        mock_library.niFgen_ConfigureTriggerSource.return_value = 0
-        mock_library.niFgen_ConfigureUpdateClockSource.side_effect = MockFunctionCallError("niFgen_ConfigureUpdateClockSource")
-        mock_library.niFgen_ConfigureUpdateClockSource.return_value = 0
         mock_library.niFgen_CreateAdvancedArbSequence.side_effect = MockFunctionCallError("niFgen_CreateAdvancedArbSequence")
         mock_library.niFgen_CreateAdvancedArbSequence.return_value = 0
         mock_library.niFgen_CreateArbSequence.side_effect = MockFunctionCallError("niFgen_CreateArbSequence")
         mock_library.niFgen_CreateArbSequence.return_value = 0
-        mock_library.niFgen_CreateArbWaveform.side_effect = MockFunctionCallError("niFgen_CreateArbWaveform")
-        mock_library.niFgen_CreateArbWaveform.return_value = 0
-        mock_library.niFgen_CreateBinary16ArbWaveform.side_effect = MockFunctionCallError("niFgen_CreateBinary16ArbWaveform")
-        mock_library.niFgen_CreateBinary16ArbWaveform.return_value = 0
         mock_library.niFgen_CreateFreqList.side_effect = MockFunctionCallError("niFgen_CreateFreqList")
         mock_library.niFgen_CreateFreqList.return_value = 0
         mock_library.niFgen_CreateWaveformF64.side_effect = MockFunctionCallError("niFgen_CreateWaveformF64")
         mock_library.niFgen_CreateWaveformF64.return_value = 0
         mock_library.niFgen_CreateWaveformFromFileF64.side_effect = MockFunctionCallError("niFgen_CreateWaveformFromFileF64")
         mock_library.niFgen_CreateWaveformFromFileF64.return_value = 0
-        mock_library.niFgen_CreateWaveformFromFileHWS.side_effect = MockFunctionCallError("niFgen_CreateWaveformFromFileHWS")
-        mock_library.niFgen_CreateWaveformFromFileHWS.return_value = 0
         mock_library.niFgen_CreateWaveformFromFileI16.side_effect = MockFunctionCallError("niFgen_CreateWaveformFromFileI16")
         mock_library.niFgen_CreateWaveformFromFileI16.return_value = 0
         mock_library.niFgen_CreateWaveformI16.side_effect = MockFunctionCallError("niFgen_CreateWaveformI16")
@@ -1205,24 +825,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_DeleteScript.return_value = 0
         mock_library.niFgen_Disable.side_effect = MockFunctionCallError("niFgen_Disable")
         mock_library.niFgen_Disable.return_value = 0
-        mock_library.niFgen_DisableAnalogFilter.side_effect = MockFunctionCallError("niFgen_DisableAnalogFilter")
-        mock_library.niFgen_DisableAnalogFilter.return_value = 0
-        mock_library.niFgen_DisableDigitalFilter.side_effect = MockFunctionCallError("niFgen_DisableDigitalFilter")
-        mock_library.niFgen_DisableDigitalFilter.return_value = 0
-        mock_library.niFgen_DisableDigitalPatterning.side_effect = MockFunctionCallError("niFgen_DisableDigitalPatterning")
-        mock_library.niFgen_DisableDigitalPatterning.return_value = 0
-        mock_library.niFgen_DisableScriptTrigger.side_effect = MockFunctionCallError("niFgen_DisableScriptTrigger")
-        mock_library.niFgen_DisableScriptTrigger.return_value = 0
-        mock_library.niFgen_DisableStartTrigger.side_effect = MockFunctionCallError("niFgen_DisableStartTrigger")
-        mock_library.niFgen_DisableStartTrigger.return_value = 0
-        mock_library.niFgen_EnableAnalogFilter.side_effect = MockFunctionCallError("niFgen_EnableAnalogFilter")
-        mock_library.niFgen_EnableAnalogFilter.return_value = 0
-        mock_library.niFgen_EnableDigitalFilter.side_effect = MockFunctionCallError("niFgen_EnableDigitalFilter")
-        mock_library.niFgen_EnableDigitalFilter.return_value = 0
-        mock_library.niFgen_EnableDigitalPatterning.side_effect = MockFunctionCallError("niFgen_EnableDigitalPatterning")
-        mock_library.niFgen_EnableDigitalPatterning.return_value = 0
-        mock_library.niFgen_ErrorHandler.side_effect = MockFunctionCallError("niFgen_ErrorHandler")
-        mock_library.niFgen_ErrorHandler.return_value = 0
         mock_library.niFgen_ExportSignal.side_effect = MockFunctionCallError("niFgen_ExportSignal")
         mock_library.niFgen_ExportSignal.return_value = 0
         mock_library.niFgen_GetAttributeViBoolean.side_effect = MockFunctionCallError("niFgen_GetAttributeViBoolean")
@@ -1237,6 +839,12 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetAttributeViString.return_value = 0
         mock_library.niFgen_GetError.side_effect = MockFunctionCallError("niFgen_GetError")
         mock_library.niFgen_GetError.return_value = 0
+        mock_library.niFgen_GetExtCalLastDateAndTime.side_effect = MockFunctionCallError("niFgen_GetExtCalLastDateAndTime")
+        mock_library.niFgen_GetExtCalLastDateAndTime.return_value = 0
+        mock_library.niFgen_GetExtCalLastTemp.side_effect = MockFunctionCallError("niFgen_GetExtCalLastTemp")
+        mock_library.niFgen_GetExtCalLastTemp.return_value = 0
+        mock_library.niFgen_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niFgen_GetExtCalRecommendedInterval")
+        mock_library.niFgen_GetExtCalRecommendedInterval.return_value = 0
         mock_library.niFgen_GetFIRFilterCoefficients.side_effect = MockFunctionCallError("niFgen_GetFIRFilterCoefficients")
         mock_library.niFgen_GetFIRFilterCoefficients.return_value = 0
         mock_library.niFgen_GetHardwareState.side_effect = MockFunctionCallError("niFgen_GetHardwareState")
@@ -1247,42 +855,24 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetSelfCalLastTemp.return_value = 0
         mock_library.niFgen_GetSelfCalSupported.side_effect = MockFunctionCallError("niFgen_GetSelfCalSupported")
         mock_library.niFgen_GetSelfCalSupported.return_value = 0
-        mock_library.niFgen_InitWithOptions.side_effect = MockFunctionCallError("niFgen_InitWithOptions")
-        mock_library.niFgen_InitWithOptions.return_value = 0
-        mock_library.niFgen_InitializeAnalogOutputCalibration.side_effect = MockFunctionCallError("niFgen_InitializeAnalogOutputCalibration")
-        mock_library.niFgen_InitializeAnalogOutputCalibration.return_value = 0
-        mock_library.niFgen_InitializeCalADCCalibration.side_effect = MockFunctionCallError("niFgen_InitializeCalADCCalibration")
-        mock_library.niFgen_InitializeCalADCCalibration.return_value = 0
-        mock_library.niFgen_InitializeFlatnessCalibration.side_effect = MockFunctionCallError("niFgen_InitializeFlatnessCalibration")
-        mock_library.niFgen_InitializeFlatnessCalibration.return_value = 0
-        mock_library.niFgen_InitializeOscillatorFrequencyCalibration.side_effect = MockFunctionCallError("niFgen_InitializeOscillatorFrequencyCalibration")
-        mock_library.niFgen_InitializeOscillatorFrequencyCalibration.return_value = 0
         mock_library.niFgen_InitializeWithChannels.side_effect = MockFunctionCallError("niFgen_InitializeWithChannels")
         mock_library.niFgen_InitializeWithChannels.return_value = 0
         mock_library.niFgen_InitiateGeneration.side_effect = MockFunctionCallError("niFgen_InitiateGeneration")
         mock_library.niFgen_InitiateGeneration.return_value = 0
         mock_library.niFgen_IsDone.side_effect = MockFunctionCallError("niFgen_IsDone")
         mock_library.niFgen_IsDone.return_value = 0
-        mock_library.niFgen_ManualEnableP2PStream.side_effect = MockFunctionCallError("niFgen_ManualEnableP2PStream")
-        mock_library.niFgen_ManualEnableP2PStream.return_value = 0
         mock_library.niFgen_QueryArbSeqCapabilities.side_effect = MockFunctionCallError("niFgen_QueryArbSeqCapabilities")
         mock_library.niFgen_QueryArbSeqCapabilities.return_value = 0
         mock_library.niFgen_QueryArbWfmCapabilities.side_effect = MockFunctionCallError("niFgen_QueryArbWfmCapabilities")
         mock_library.niFgen_QueryArbWfmCapabilities.return_value = 0
         mock_library.niFgen_QueryFreqListCapabilities.side_effect = MockFunctionCallError("niFgen_QueryFreqListCapabilities")
         mock_library.niFgen_QueryFreqListCapabilities.return_value = 0
-        mock_library.niFgen_ReadCalADC.side_effect = MockFunctionCallError("niFgen_ReadCalADC")
-        mock_library.niFgen_ReadCalADC.return_value = 0
         mock_library.niFgen_ReadCurrentTemperature.side_effect = MockFunctionCallError("niFgen_ReadCurrentTemperature")
         mock_library.niFgen_ReadCurrentTemperature.return_value = 0
-        mock_library.niFgen_ResetAttribute.side_effect = MockFunctionCallError("niFgen_ResetAttribute")
-        mock_library.niFgen_ResetAttribute.return_value = 0
         mock_library.niFgen_ResetDevice.side_effect = MockFunctionCallError("niFgen_ResetDevice")
         mock_library.niFgen_ResetDevice.return_value = 0
         mock_library.niFgen_ResetWithDefaults.side_effect = MockFunctionCallError("niFgen_ResetWithDefaults")
         mock_library.niFgen_ResetWithDefaults.return_value = 0
-        mock_library.niFgen_RouteSignalOut.side_effect = MockFunctionCallError("niFgen_RouteSignalOut")
-        mock_library.niFgen_RouteSignalOut.return_value = 0
         mock_library.niFgen_SelfCal.side_effect = MockFunctionCallError("niFgen_SelfCal")
         mock_library.niFgen_SelfCal.return_value = 0
         mock_library.niFgen_SendSoftwareEdgeTrigger.side_effect = MockFunctionCallError("niFgen_SendSoftwareEdgeTrigger")
@@ -1305,16 +895,12 @@ class SideEffectsHelper(object):
         mock_library.niFgen_SetWaveformNextWritePosition.return_value = 0
         mock_library.niFgen_WaitUntilDone.side_effect = MockFunctionCallError("niFgen_WaitUntilDone")
         mock_library.niFgen_WaitUntilDone.return_value = 0
-        mock_library.niFgen_WriteBinary16AnalogStaticValue.side_effect = MockFunctionCallError("niFgen_WriteBinary16AnalogStaticValue")
-        mock_library.niFgen_WriteBinary16AnalogStaticValue.return_value = 0
         mock_library.niFgen_WriteBinary16Waveform.side_effect = MockFunctionCallError("niFgen_WriteBinary16Waveform")
         mock_library.niFgen_WriteBinary16Waveform.return_value = 0
         mock_library.niFgen_WriteNamedWaveformF64.side_effect = MockFunctionCallError("niFgen_WriteNamedWaveformF64")
         mock_library.niFgen_WriteNamedWaveformF64.return_value = 0
         mock_library.niFgen_WriteNamedWaveformI16.side_effect = MockFunctionCallError("niFgen_WriteNamedWaveformI16")
         mock_library.niFgen_WriteNamedWaveformI16.return_value = 0
-        mock_library.niFgen_WriteP2PEndpointI16.side_effect = MockFunctionCallError("niFgen_WriteP2PEndpointI16")
-        mock_library.niFgen_WriteP2PEndpointI16.return_value = 0
         mock_library.niFgen_WriteScript.side_effect = MockFunctionCallError("niFgen_WriteScript")
         mock_library.niFgen_WriteScript.return_value = 0
         mock_library.niFgen_WriteWaveform.side_effect = MockFunctionCallError("niFgen_WriteWaveform")

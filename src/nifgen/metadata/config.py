@@ -21,6 +21,6 @@ config = {
         'initiate_function': 'InitiateGeneration',
         'abort_function': 'AbortGeneration',
     },
-    'init_function': 'InitWithOptions',
+    'init_function': 'InitializeWithChannels',
 }
 
