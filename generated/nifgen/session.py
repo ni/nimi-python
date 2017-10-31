@@ -5214,21 +5214,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def send_software_trigger(self):
-        '''send_software_trigger
-
-        Sends a command to trigger the signal generator.
-
-        Note:
-        This function can act as an override for an external edge trigger.
-        However, the NI 5401/5411/5431 do not support overriding an external
-        digital edge trigger.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_SendSoftwareTrigger(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def wait_until_done(self, max_time=10000):
         '''wait_until_done
 

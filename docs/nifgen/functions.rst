@@ -2531,18 +2531,6 @@ nifgen.Session methods
 
     :type trigger_id: string
 
-.. function:: send_software_trigger()
-
-    Sends a command to trigger the signal generator.
-
-    
-
-    .. note:: This function can act as an override for an external edge trigger.
-        However, the NI 5401/5411/5431 do not support overriding an external
-        digital edge trigger.
-
-
-
 .. function:: set_named_waveform_next_write_position(waveform_name, relative_to, offset)
 
     Sets the position in the waveform to which data is written at the next
