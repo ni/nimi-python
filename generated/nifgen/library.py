@@ -13,8 +13,9 @@ class Library(object):
     Class will setup the correct ctypes information for every function on first call.
     '''
 
-    def __init__(self, library_name, library_type):
+    def __init__(self, ctypes_library):
         self._func_lock = threading.Lock()
+        self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niFgen_AbortGeneration_cfunc = None
         self.niFgen_AdjustSampleClockRelativeDelay_cfunc = None
@@ -88,12 +89,6 @@ class Library(object):
         self.niFgen_error_message_cfunc = None
         self.niFgen_reset_cfunc = None
         self.niFgen_self_test_cfunc = None
-
-        if library_type == 'windll':
-            self._library = ctypes.WinDLL(library_name)
-        else:  # pragma: no cover
-            assert library_type == 'cdll'
-            self._library = ctypes.CDLL(library_name)
 
     def niFgen_AbortGeneration(self, vi):  # noqa: N802
         with self._func_lock:
