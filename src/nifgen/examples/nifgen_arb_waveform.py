@@ -13,12 +13,14 @@ parser.add_argument('-g', '--gain', default=1.0, type=float, help='Gain')
 parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC Offset')
 args = parser.parse_args()
 
+
 def create_waveform_data(number_of_samples):
     waveform_data = []
     angle_per_sample = (2 * math.pi) / number_of_samples
     for i in range(number_of_samples):
         waveform_data.append(math.sin(i * angle_per_sample) * math.sin(i * angle_per_sample * 20))
     return waveform_data
+
 
 waveform_data = create_waveform_data(args.samples)
 with nifgen.Session(args.name) as session:
