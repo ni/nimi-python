@@ -251,6 +251,7 @@ def test_commit():
         session.commit()
         assert session.current_limit == non_default_current_limit
 
+
 def test_export_signal_error():
     try:
         with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
