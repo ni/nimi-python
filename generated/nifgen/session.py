@@ -2436,7 +2436,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_standard_waveform(self, waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0):
+    def configure_standard_waveform(self, waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0):
         '''configure_standard_waveform
 
         Configures the following attributes of the signal generator that affect
@@ -2459,10 +2459,10 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_standard_waveform(waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0)
+            session['0,1'].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
         Args:
-            waveform (int): Specifies the standard waveform that you want the signal generator to
+            waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
                 produce. NI-FGEN sets the FUNC_WAVEFORM attribute to this
                 value.
 
@@ -2542,9 +2542,11 @@ class _SessionBase(object):
                 This parameter does not affect signal generator behavior when you set
                 the **waveform** parameter to NIFGEN_VAL_WFM_DC.
         '''
+        if type(waveform) is not enums.Waveform:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
         vi_ctype = visatype.ViSession(self._vi)  # case 1
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case 2
-        waveform_ctype = visatype.ViInt32(waveform)  # case 8
+        waveform_ctype = visatype.ViInt32(waveform.value)  # case 9
         amplitude_ctype = visatype.ViReal64(amplitude)  # case 8
         dc_offset_ctype = visatype.ViReal64(dc_offset)  # case 8
         frequency_ctype = visatype.ViReal64(frequency)  # case 8

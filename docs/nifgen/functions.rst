@@ -857,7 +857,7 @@ nifgen.Session methods
 
     :type start_phase: float
 
-.. function:: configure_standard_waveform(waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0)
+.. function:: configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
     Configures the following attributes of the signal generator that affect
     standard waveform generation:
@@ -882,7 +882,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_standard_waveform(waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0)
+            session['0,1'].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
 
     :param waveform:
@@ -915,7 +915,7 @@ nifgen.Session methods
         +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
-    :type waveform: int
+    :type waveform: :py:data:`nifgen.Waveform`
     :param amplitude:
 
 
