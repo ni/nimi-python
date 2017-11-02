@@ -243,3 +243,84 @@ def test_wait_for_event_with_timeout():
         with session.initiate():
             session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
 
+
+def test_commit():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+        non_default_current_limit = 0.00021
+        session.current_limit = non_default_current_limit
+        session.commit()
+        assert session.current_limit == non_default_current_limit
+
+def test_export_signal_error():
+    try:
+        with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+            session.export_signal(1032,"invalid_string")
+            with session.initiate():
+                session.measure(nidcpower.MeasurementTypes.MEASURE_VOLTAGE)
+        assert False
+    except nidcpower.Error as e:
+        assert e.code == -1074097882  # Error : Invalid property value
+        assert e.description.find('Requested value is not a supported value for this property.') != -1
+
+
+def test_configure_digital_edge_measure_trigger_error():
+    try:
+        with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+            session.configure_digital_edge_measure_trigger("invalid string")
+            with session.initiate():
+                session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
+        assert False
+    except nidcpower.Error as e:
+        assert e.code == -1074097882  # Error : Invalid property value
+        assert e.description.find('Requested value is not a supported value for this property.') != -1
+
+
+def test_configure_digital_edge_pulse_trigger_error():
+    try:
+        with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+            session.configure_digital_edge_pulse_trigger("invalid string")
+            with session.initiate():
+                session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
+        assert False
+    except nidcpower.Error as e:
+        assert e.code == -1074135023  # Error : Unsupported function
+        assert e.description.find('Function or method not supported.') != -1
+
+
+def test_configure_digital_edge_sequence_advance_trigger():
+    try:
+        with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+            session.configure_digital_edge_sequence_advance_trigger("invalid string")
+            with session.initiate():
+                session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
+        assert False
+    except nidcpower.Error as e:
+        assert e.code == -1074097882  # Error : Invalid property value
+        assert e.description.find('Requested value is not a supported value for this property.') != -1
+
+
+def test_configure_digital_edge_source_trigger():
+    try:
+        with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+            session.configure_digital_edge_source_trigger("invalid string")
+            with session.initiate():
+                session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
+        assert False
+    except nidcpower.Error as e:
+        assert e.code == -1074097882  # Error : Invalid property value
+        assert e.description.find('Requested value is not a supported value for this property.') != -1
+
+
+def test_configure_digital_edge_start_trigger():
+    try:
+        with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
+            session.source_mode = nidcpower.SourceMode.SEQUENCE
+            session.set_sequence([0.1],[0.1])
+            session.configure_digital_edge_start_trigger("invalid string")
+            with session.initiate():
+                session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
+        assert False
+    except nidcpower.Error as e:
+        assert e.code == -1074097882  # Error : Invalid property value
+        assert e.description.find('Requested value is not a supported value for this property.') != -1
+
