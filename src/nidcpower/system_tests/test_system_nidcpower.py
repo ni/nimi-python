@@ -256,6 +256,7 @@ def test_commit(single_channel_session):
     single_channel_session.commit()
     assert single_channel_session.current_limit == non_default_current_limit
 
+
 # TODO (bhaswath): Enable test after Pull request #467 is merged, which will enable the export signal enum
 '''
 def test_export_signal(single_channel_session):
@@ -263,6 +264,7 @@ def test_export_signal(single_channel_session):
     single_channel_session.export_signal(nidcpower.Event.SOURCE_COMPLETE, expected_trigger_terminal)
     assert expected_trigger_terminal == single_channel_session.source_complete_event_output_terminal
 '''
+
 
 def test_configure_digital_edge_measure_trigger_error(single_channel_session):
     try:
