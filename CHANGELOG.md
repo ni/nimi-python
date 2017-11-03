@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
   * #### Added
   * #### Changed
     * Simplified examples by removing try/except
+    * Updated enum value names to correspond to C #defines
   * #### Removed
 * ### NI-DMM
   * #### Added
