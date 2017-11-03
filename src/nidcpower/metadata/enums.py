@@ -12,14 +12,18 @@ enums = {
                 'name': 'SECONDS',
                 'value': 1028,
 'documentation': {
-'description': 'Specifies aperture time in seconds.',
+'description': '''
+Specifies aperture time in seconds. NIDCPOWER_VAL_POWER_LINE_CYCLES (1029) Specifies aperture time in power line cycles (PLCs).
+''',
 },
             },
             {
                 'name': 'POWER_LINE_CYCLES',
                 'value': 1029,
 'documentation': {
-'description': 'Specifies aperture time in power line cycles (PLCs).',
+'description': '''
+Specifies aperture time in power line cycles (PLCs).
+''',
 },
             },
         ],
@@ -30,14 +34,18 @@ enums = {
                 'name': 'OFF',
                 'value': 0,
 'documentation': {
-'description': 'Disables auto-zero.',
+'description': '''
+Disables auto zero. NIDCPOWER_VAL_ONCE (1024) Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
+''',
 },
             },
             {
                 'name': 'ON',
                 'value': 1,
 'documentation': {
-'description': 'Makes zero conversions for every measurement.',
+'description': '''
+Makes zero conversions for every measurement.
+''',
 },
             },
             {
@@ -59,14 +67,18 @@ measurement and future measurements until the device is reinitiated.
                 'name': 'OFF',
                 'value': 0,
 'documentation': {
-'description': 'NI-DCPower does not automatically select the current level range.',
+'description': '''
+Autoranging is disabled.
+''',
 },
             },
             {
                 'name': 'ON',
                 'value': 1,
 'documentation': {
-'description': 'NI-DCPower automatically selects the current level range.',
+'description': '''
+Autoranging is enabled.
+''',
 },
             },
         ],
@@ -77,14 +89,18 @@ measurement and future measurements until the device is reinitiated.
                 'name': 'OFF',
                 'value': 0,
 'documentation': {
-'description': 'NI-DCPower does not automatically select the current limit range.',
+'description': '''
+Autoranging is disabled.
+''',
 },
             },
             {
                 'name': 'ON',
                 'value': 1,
 'documentation': {
-'description': 'NI-DCPower automatically selects the current limit range.',
+'description': '''
+Autoranging is enabled.
+''',
 },
             },
         ],
@@ -95,14 +111,18 @@ measurement and future measurements until the device is reinitiated.
                 'name': 'CURRENT_REGULATE',
                 'value': 13613,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'CURRENT_TRIP',
                 'value': 13614,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
         ],
@@ -121,10 +141,12 @@ for supported devices.
 },
             },
             {
-                'name': 'NORMAL',
+                'name': 'DC_NOISE_REJECTION_NORMAL',
                 'value': 1044,
 'documentation': {
-'description': 'Normal DC noise rejection.',
+'description': '''
+Normal rejection of DC noise. NIDCPOWER_VAL_DC_NOISE_REJECTION_SECOND_ORDER (1043) Second-order rejection of DC noise.
+''',
 },
             },
         ],
@@ -135,14 +157,18 @@ for supported devices.
                 'name': 'RISING',
                 'value': 1016,
 'documentation': {
-'description': 'Asserts the trigger on the rising edge of the digital signal.',
+'description': '''
+Asserts the trigger on the rising edge of the digital signal. NIDCPOWER_VAL_FALLING (1017) Asserts the trigger on the falling edge of the digital signal.
+''',
 },
             },
             {
                 'name': 'FALLING',
                 'value': 1017,
 'documentation': {
-'description': 'Asserts the trigger on the falling edge of the digital signal.',
+'description': '''
+Asserts the trigger on the falling edge of the digital signal.
+''',
 },
             },
         ],
@@ -154,10 +180,7 @@ for supported devices.
                 'value': 1025,
 'documentation': {
 'description': '''
-Acquires a measurement after each Source Complete event completes. Use
-the `niDCPower Fetch
-Multiple <NIDCPowerVIRef.chm::/niDCPower_Fetch_Multiple.html>`__ VI to
-retrieve the measurements.
+Acquires a measurement after each Source Complete event completes. NIDCPOWER_VAL_ON_DEMAND (1026) Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called. NIDCPOWER_VAL_ON_MEASURE_TRIGGER (1027) Acquires a measurement when a Measure trigger is received.
 ''',
 },
             },
@@ -194,14 +217,18 @@ retrieve the measurements.
                 'name': 'LOW',
                 'value': 1010,
 'documentation': {
-'description': 'Output capacitance is low.',
+'description': '''
+Output Capacitance is low. NIDCPOWER_VAL_HIGH (1011) Output Capacitance is high.
+''',
 },
             },
             {
                 'name': 'HIGH',
                 'value': 1011,
 'documentation': {
-'description': 'Output capacitance is high.',
+'description': '''
+Output capacitance is high.
+''',
 },
             },
         ],
@@ -212,28 +239,36 @@ retrieve the measurements.
                 'name': 'DC_VOLTAGE',
                 'value': 1006,
 'documentation': {
-'description': 'Sets the output function to DC voltage.',
+'description': '''
+Sets the output function to DC voltage. NIDCPOWER_VAL_DC_CURRENT (1007) Sets the output function to DC current. NIDCPOWER_VAL_PULSE_VOLTAGE (1049)   NIDCPOWER_VAL_PULSE_CURRENT (1050)
+''',
 },
             },
             {
                 'name': 'DC_CURRENT',
                 'value': 1007,
 'documentation': {
-'description': 'Sets the output function to DC current.',
+'description': '''
+Sets the output function to DC current.
+''',
 },
             },
             {
                 'name': 'PULSE_VOLTAGE',
                 'value': 1049,
 'documentation': {
-'description': 'Sets the output function to pulse voltage.',
+'description': '''
+Sets the output function to pulse voltage.
+''',
 },
             },
             {
                 'name': 'PULSE_CURRENT',
                 'value': 1050,
 'documentation': {
-'description': 'Sets the output function to pulse current.',
+'description': '''
+Sets the output function to pulse current.
+''',
 },
             },
         ],
@@ -245,8 +280,7 @@ retrieve the measurements.
                 'value': 1018,
 'documentation': {
 'description': '''
-A high pulse occurs when the event is generated. The exported signal is
-low level both before and after the event is generated.
+A high pulse occurs when the event is generated.  The exported signal is low level both before and after the event is generated. NIDCPOWER_VAL_ACTIVE_LOW (1019) A low pulse occurs when the event is generated.  The exported signal is high level both before and after the event is generated.
 ''',
 },
             },
@@ -268,14 +302,18 @@ high level both before and after the event is generated.
                 'name': '_50_HERTZ',
                 'value': 50.0,
 'documentation': {
-'description': 'Specifies a power line frequency of 50 Hz.',
+'description': '''
+Specifies a power line frequency of 50 Hz. NIDCPOWER_VAL_60_HERTZ (60.0) Specifies a power line frequency of 60 Hz.
+''',
 },
             },
             {
                 'name': '_60_HERTZ',
                 'value': 60.0,
 'documentation': {
-'description': 'Specifies a power line frequency of 60 Hz.',
+'description': '''
+Specifies a power line frequency of 60 Hz.
+''',
 },
             },
         ],
@@ -286,14 +324,18 @@ high level both before and after the event is generated.
                 'name': 'INTERNAL',
                 'value': 1003,
 'documentation': {
-'description': 'Uses the PXI chassis power source.',
+'description': '''
+Uses the PXI chassis power source.
+''',
 },
             },
             {
                 'name': 'AUXILIARY',
                 'value': 1004,
 'documentation': {
-'description': 'Uses the auxiliary power source connected to the device.',
+'description': '''
+Uses the auxiliary power source connected to the device.
+''',
 },
             },
             {
@@ -301,8 +343,7 @@ high level both before and after the event is generated.
                 'value': 1005,
 'documentation': {
 'description': '''
-Uses the auxiliary power source if it is available; otherwise, use the
-PXI chassis power source.
+Uses the auxiliary power source if it is available; otherwise uses the PXI chassis power source.
 ''',
 },
             },
@@ -314,7 +355,9 @@ PXI chassis power source.
                 'name': 'INTERNAL',
                 'value': 1003,
 'documentation': {
-'description': 'Uses the PXI chassis power source.',
+'description': '''
+Uses the PXI chassis power source.
+''',
 },
             },
             {
@@ -322,10 +365,7 @@ PXI chassis power source.
                 'value': 1004,
 'documentation': {
 'description': '''
-Uses the auxiliary power source connected to the device. Only the NI
-PXI-4110, NI PXIe-4112, NI PXIe-4113, and NI PXI-4130 support this
-value. This is the only supported value for the NI PXIe-4112 and NI
-PXIe-4113.
+Uses the auxiliary power source connected to the device. Only the NI PXI-4110,  NI PXIe-4112, NI PXIe-4113, and NI PXI-4130 support this value. This is the only supported value  for the NI PXIe-4112 and NI PXIe-4113.
 ''',
 },
             },
@@ -337,7 +377,9 @@ PXIe-4113.
                 'name': 'KEEP_IN_MEMORY',
                 'value': 1045,
 'documentation': {
-'description': 'Keep new self-calibration values in memory only.',
+'description': '''
+Keep new self calibration values in memory only.
+''',
 },
             },
             {
@@ -345,9 +387,7 @@ PXIe-4113.
                 'value': 1046,
 'documentation': {
 'description': '''
-Write new self-calibration values to hardware. Refer to your device
-documentation for more information about the implications of frequent
-writes to the EEPROM.
+Write new self calibration values to hardware.
 ''',
 },
             },
@@ -359,14 +399,18 @@ writes to the EEPROM.
                 'name': 'LOCAL',
                 'value': 1008,
 'documentation': {
-'description': 'Local sensing is selected.',
+'description': '''
+Local sensing is selected. NIDCPOWER_VAL_REMOTE (1009) Remote sensing is selected.
+''',
 },
             },
             {
                 'name': 'REMOTE',
                 'value': 1009,
 'documentation': {
-'description': 'Remote sensing is selected.',
+'description': '''
+Remote sensing is selected.
+''',
 },
             },
         ],
@@ -377,7 +421,9 @@ writes to the EEPROM.
                 'name': 'SINGLE_POINT',
                 'value': 1020,
 'documentation': {
-'description': 'The source unit applies a single source configuration.',
+'description': '''
+The source unit applies a single source configuration. NIDCPOWER_VAL_SEQUENCE (1021) The source unit applies a list of voltage or current configurations sequentially.
+''',
 },
             },
             {
@@ -398,14 +444,18 @@ configurations.
                 'name': 'NORMAL',
                 'value': 1038,
 'documentation': {
-'description': 'Normal transient response time.',
+'description': '''
+The output responds to changes in load at a normal speed. NIDCPOWER_VAL_FAST (1039) The output responds to changes in load quickly. NIDCPOWER_VAL_SLOW (1041) The output responds to changes in load slowly. NIDCPOWER_VAL_CUSTOM (1042) The output responds to changes in load based on specified values.
+''',
 },
             },
             {
                 'name': 'FAST',
                 'value': 1039,
 'documentation': {
-'description': 'Fast transient response time.',
+'description': '''
+Fast transient response time.
+''',
 },
             },
             {
@@ -448,21 +498,27 @@ for supported devices.
                 'name': 'NONE',
                 'value': 1012,
 'documentation': {
-'description': 'No trigger is configured.',
+'description': '''
+No trigger is configured. NIDCPOWER_VAL_DIGITAL_EDGE (1014) The data operation starts when a digital edge is detected. NIDCPOWER_VAL_SOFTWARE_EDGE (1015) The data operation starts when a software trigger occurs.
+''',
 },
             },
             {
                 'name': 'DIGITAL_EDGE',
                 'value': 1014,
 'documentation': {
-'description': 'The data operation starts when a digital edge is detected.',
+'description': '''
+The data operation starts when a digital edge is detected. NIDCPOWER_VAL_SOFTWARE_EDGE (1015) The data operation starts when a software trigger occurs.
+''',
 },
             },
             {
                 'name': 'SOFTWARE_EDGE',
                 'value': 1015,
 'documentation': {
-'description': 'The data operation starts when a software trigger occurs.',
+'description': '''
+The data operation starts when a software trigger occurs.
+''',
 },
             },
         ],
@@ -473,14 +529,18 @@ for supported devices.
                 'name': 'OFF',
                 'value': 0,
 'documentation': {
-'description': 'NI-DCPower does not automatically select the voltage level range.',
+'description': '''
+Autoranging is disabled.
+''',
 },
             },
             {
                 'name': 'ON',
                 'value': 1,
 'documentation': {
-'description': 'NI-DCPower automatically selects the voltage level range.',
+'description': '''
+Autoranging is enabled.
+''',
 },
             },
         ],
@@ -491,115 +551,20 @@ for supported devices.
                 'name': 'OFF',
                 'value': 0,
 'documentation': {
-'description': 'NI-DCPower does not automatically select the voltage limit range.',
+'description': '''
+Autoranging is disabled.
+''',
 },
             },
             {
                 'name': 'ON',
                 'value': 1,
 'documentation': {
-'description': 'NI-DCPower automatically selects the voltage limit range.',
+'description': '''
+Autoranging is enabled.
+''',
 },
             },
         ],
     },
-    'SendSoftwareEdgeTriggerType': {
-        'values': [
-            {
-                'name': 'START',
-                'value': 1034,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SOURCE',
-                'value': 1035,
-                'documentation': {'',},
-            },
-            {
-                'name': 'MEASURE',
-                'value': 1036,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SEQUENCE_ADVANCE',
-                'value': 1037,
-                'documentation': {'',},
-            },
-            {
-                'name': 'PULSE',
-                'value': 1053,
-                'documentation': {'',},
-            },
-        ],
-    },
-    'Event': {
-        'values': [
-            {
-                'name': 'SOURCE_COMPLETE',
-                'value': 1030,
-                'documentation': {'',},
-            },
-            {
-                'name': 'MEASURE_COMPLETE',
-                'value': 1031,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SEQUENCE_ITERATION_COMPLETE',
-                'value': 1032,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SEQUENCE_ENGINE_DONE',
-                'value': 1033,
-                'documentation': {'',},
-            },
-            {
-                'name': 'PULSE_COMPLETE',
-                'value': 1051,
-                'documentation': {'',},
-            },
-            {
-                'name': 'READY_FOR_PULSE_TRIGGER',
-                'value': 1052,
-                'documentation': {'',},
-            },
-        ],
-    },
-    'MeasurementTypes': {
-        'values': [
-            {
-                'name': 'MEASURE_CURRENT',
-                'value': 0,
-                'documentation': {
-                    'description': 'The device measures current.',
-                },
-            },
-            {
-                'name': 'MEASURE_VOLTAGE',
-                'value': 1,
-                'documentation': {
-                    'description': 'The device measures voltage.',
-                },
-            }
-        ],
-    },
-    'OutputStates': {
-        'values': [
-            {
-                'name': 'OUTPUT_CONSTANT_VOLTAGE',
-                'value': 0,
-                'documentation': {
-                    'description': 'The device maintains a constant voltage by adjusting the current ',
-                },
-            },
-            {
-                'name': 'OUTPUT_CONSTANT_CURRENT',
-                'value': 1,
-                'documentation': {
-                    'description': 'The device maintains a constant current by adjusting the voltage.',
-                },
-            }
-        ],
-    },  
 }

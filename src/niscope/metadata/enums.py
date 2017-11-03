@@ -69,19 +69,16 @@ the DDC.
                 'value': 0,
 'documentation': {
 'description': '''
-Sets the digitizer to normal resolution mode. The digitizer can use
-real-time sampling or equivalent-time sampling.
+Sets the digitizer to normal resolution mode. The digitizer can use real-time sampling or equivalent-time sampling.
 ''',
 },
             },
             {
-                'name': 'FLEX_RES',
+                'name': 'FLEXRES',
                 'value': 1001,
 'documentation': {
 'description': '''
-Sets the digitizer to flexible resolution mode, if supported. The
-digitizer uses different hardware configurations to change the
-resolution depending on the sampling rate used.
+Sets the digitizer to flexible resolution mode if supported.  The digitizer uses different hardware configurations to change the resolution depending on the sampling rate used.
 ''',
 },
             },
@@ -90,7 +87,7 @@ resolution depending on the sampling rate used.
                 'value': 1002,
 'documentation': {
 'description': '''
-Sets the NI 5620/5621digitizer to DDC mode.
+Sets the digitizer to DDC mode on the NI 5620/5621.
 ''',
 },
             },
@@ -99,7 +96,7 @@ Sets the NI 5620/5621digitizer to DDC mode.
     'AddressType': {
         'values': [
             {
-                'name': 'PHYSICAL',
+                'name': 'ADDR_PHYSICAL',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -108,7 +105,7 @@ Physical address.
 },
             },
             {
-                'name': 'VIRTUAL',
+                'name': 'ADDR_VIRTUAL',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -469,10 +466,7 @@ Specifies a Blackman window.
                 'value': 388,
 'documentation': {
 'description': '''
-The read pointer is set to zero when a new acquisition is initiated.
-After every fetch the read pointer is incremented to be the sample after
-the last sample retrieved. Therefore, you can repeatedly fetch relative
-to the read pointer for a continuous acquisition program.
+The read pointer is set to zero when a new acquisition is initiated. After every fetch the read pointer is incremeted to be the sample after the last sample retrieved.  Therefore, you can repeatedly fetch relative to the read pointer for a continuous acquisition program.
 ''',
 },
             },
@@ -481,8 +475,7 @@ to the read pointer for a continuous acquisition program.
                 'value': 477,
 'documentation': {
 'description': '''
-Fetches relative to the first pretrigger point requested with the
-niScope Configure Horizontal Timing VI.
+Fetches relative to the first pretrigger point requested with niScope_ConfigureHorizontalTiming.
 ''',
 },
             },
@@ -562,8 +555,7 @@ Specifies bandstop as the filter type.
                 'value': 0,
 'documentation': {
 'description': '''
-48 Tap Standard filter is optimized for alias protection and
-frequency-domain flatness.
+This filter is optimized for alias protection and frequency-domain flatness
 ''',
 },
             },
@@ -572,8 +564,7 @@ frequency-domain flatness.
                 'value': 1,
 'documentation': {
 'description': '''
-48 Tap Hanning filter is optimized for the lowest possible bandwidth for
-a 48 tap filter and maximizes the SNR.
+This filter is optimized for the lowest possible bandwidth for a 48 tap filter and maximizes the SNR
 ''',
 },
             },
@@ -582,8 +573,7 @@ a 48 tap filter and maximizes the SNR.
                 'value': 2,
 'documentation': {
 'description': '''
-16 Tap Hanning is optimized for the lowest possible bandwidth for a 16
-tap filter and maximizes the SNR.
+This filter is optimized for the lowest possible bandwidth for a 16 tap filter and maximizes the SNR
 ''',
 },
             },
@@ -592,8 +582,7 @@ tap filter and maximizes the SNR.
                 'value': 3,
 'documentation': {
 'description': '''
-8 Tap Hanning filter is optimized for the lowest possible bandwidth for
-a 8 tap filter and maximizes the SNR.
+This filter is optimized for the lowest possible bandwidth for a 8 tap filter and maximizes the SNR
 ''',
 },
             },
@@ -602,7 +591,7 @@ a 8 tap filter and maximizes the SNR.
     'NotificationType': {
         'values': [
             {
-                'name': 'NEVER',
+                'name': 'NOTIFY_NEVER',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -611,7 +600,7 @@ Never send notification.
 },
             },
             {
-                'name': 'DONE',
+                'name': 'NOTIFY_DONE',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -624,7 +613,7 @@ Notify when digitizer acquisition is done.
     'OverflowErrorReporting': {
         'values': [
             {
-                'name': 'ERROR',
+                'name': 'ERROR_REPORTING_ERROR',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -634,7 +623,7 @@ occurred in the OSP block.
 },
             },
             {
-                'name': 'WARNING',
+                'name': 'ERROR_REPORTING_WARNING',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -644,7 +633,7 @@ occurred in the OSP block.
 },
             },
             {
-                'name': 'DISABLED',
+                'name': 'ERROR_REPORTING_DISABLED',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -778,17 +767,16 @@ Zeroes out the Q input the to coordinate converter.
     'RISMethod': {
         'values': [
             {
-                'name': 'EXACT_NUM_AVG_',
+                'name': 'RIS_EXACT_NUM_AVERAGES',
                 'value': 1,
 'documentation': {
 'description': '''
-Acquires exactly the specified number of records for each bin in the RIS
-acquisition.
+Acquires exactly the specified number of records for each bin in the RIS acquisition.  An error is returned from the fetch function if the RIS acquisition does not successfully acquire the specified number of waveforms within the timeout period.  You may call the fetch function again to allow more time for the acquisition to finish.
 ''',
 },
             },
             {
-                'name': 'MIN_NUM_AVG_',
+                'name': 'RIS_MIN_NUM_AVERAGES',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -798,27 +786,20 @@ distributed points.
 },
             },
             {
-                'name': 'INCOMPLETE',
+                'name': 'RIS_INCOMPLETE',
                 'value': 3,
 'documentation': {
 'description': '''
-If RIS does not complete in the allotted fetch time, the Fetch VI should
-abort and return the incomplete data. Any missing samples appear as NaN
-when fetching scaled data or zero when fetching binary data. A warning
-with a positive error code is returned from the Fetch VI if the RIS
-acquisition did not finish. The acquisition is aborted when data is
-returned.
+Returns the RIS waveform after the specified timeout even if it is incomplete.  If no waveforms have been acquired in certain bins, these bins will have a NaN (when fetching scaled data) or a zero (when fetching binary data). A warning (positive error code) is returned from the fetch function if the RIS acquisition did not finish.  The acquisition aborts when data is returned.
 ''',
 },
             },
             {
-                'name': 'LIMIT_BIN_WIDTH',
+                'name': 'RIS_LIMITED_BIN_WIDTH',
                 'value': 5,
 'documentation': {
 'description': '''
-Each RIS sample is the average of Min Num Avg points distributed close
-to the sample period boundaries (within 200 ps). Points falling between
-sample periods are ignored.
+Limits the waveforms in the various bins to be within 200 ps of the center of the bin.
 ''',
 },
             },
@@ -854,9 +835,7 @@ units.
                 'value': 0,
 'documentation': {
 'description': '''
-(Default) Uses the hardware analog circuitry to implement the reference
-trigger. This option detects trigger conditions by analyzing the
-unprocessed analog signal.
+use the hardware analog circuitry to implement the reference trigger.  This option will trigger before any onboard signal processing.
 ''',
 },
             },
@@ -865,9 +844,7 @@ unprocessed analog signal.
                 'value': 1,
 'documentation': {
 'description': '''
-Uses the onboard signal processing logic to implement the reference
-trigger. This option detects trigger conditions by analyzing the
-processed digital signal.
+use the onboard signal processing logic to implement the reference trigger.  This option will trigger based on the onboard signal processed data.
 ''',
 },
             },
@@ -983,7 +960,7 @@ Specifies PROCCLK as the source for Syncout CLK.
                 'value': 0,
 'documentation': {
 'description': '''
-Single-ended channel terminal configuration.
+Channel is single ended
 ''',
 },
             },
@@ -992,7 +969,7 @@ Single-ended channel terminal configuration.
                 'value': 1,
 'documentation': {
 'description': '''
-Unbalanced differential channel terminal configuration.
+Channel is unbalanced differential
 ''',
 },
             },
@@ -1001,7 +978,7 @@ Unbalanced differential channel terminal configuration.
                 'value': 2,
 'documentation': {
 'description': '''
-Differential channel terminal configuration.
+Channel is differential
 ''',
 },
             },
@@ -1054,7 +1031,7 @@ Specifies 32 offset bits in the timing NCO.
                 'value': 0,
 'documentation': {
 'description': '''
-AC coupled
+AC coupling
 ''',
 },
             },
@@ -1063,16 +1040,25 @@ AC coupled
                 'value': 1,
 'documentation': {
 'description': '''
-DC coupled
+DC coupling
 ''',
 },
             },
             {
                 'name': 'HF_REJECT',
+                'value': 2,
+'documentation': {
+'description': '''
+Highpass filter coupling
+''',
+},
+            },
+            {
+                'name': 'LF_REJECT',
                 'value': 3,
 'documentation': {
 'description': '''
-HF Reject filter.
+Lowpass filter coupling
 ''',
 },
             },
@@ -1090,7 +1076,7 @@ LF Reject filter.
                 'value': 1001,
 'documentation': {
 'description': '''
-AC Plus HF Reject filter.
+Highpass and lowpass filter coupling
 ''',
 },
             },
@@ -1099,7 +1085,7 @@ AC Plus HF Reject filter.
     'TriggerModifier': {
         'values': [
             {
-                'name': 'NONE',
+                'name': 'NO_TRIGGER_MOD',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1108,7 +1094,7 @@ Normal triggering.
 },
             },
             {
-                'name': 'AUTO_TRIGGER',
+                'name': 'AUTO',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1126,7 +1112,7 @@ after a certain amount of time.
                 'value': 0,
 'documentation': {
 'description': '''
-Specifies a falling edge (negative slope).
+Falling edge
 ''',
 },
             },
@@ -1135,7 +1121,7 @@ Specifies a falling edge (negative slope).
                 'value': 1,
 'documentation': {
 'description': '''
-Specifies a rising edge (positive slope).
+Rising edge
 ''',
 },
             },
@@ -1144,65 +1130,65 @@ Specifies a rising edge (positive slope).
     'TriggerType': {
         'values': [
             {
-                'name': 'EDGE',
+                'name': 'EDGE_TRIGGER',
                 'value': 1,
 'documentation': {
 'description': '''
-Specifies an edge trigger.
+Configures the digitizer for edge triggering.  An edge trigger occurs when the trigger signal crosses the trigger level specified with the set trigger slope.  You configure the trigger level and slope with niScope_ConfigureTriggerEdge.
 ''',
 },
             },
             {
-                'name': 'VIDEO',
+                'name': 'TV_TRIGGER',
                 'value': 5,
 'documentation': {
 'description': '''
-Specifies a video trigger.
+Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with niScope_ConfigureTriggerVideo.
 ''',
 },
             },
             {
-                'name': 'IMMEDIATE',
+                'name': 'IMMEDIATE_TRIGGER',
                 'value': 6,
 'documentation': {
 'description': '''
-Specifies an immediate trigger.
+Configures the digitizer for immediate triggering.   An immediate trigger occurs as soon as the pretrigger samples are acquired.
 ''',
 },
             },
             {
-                'name': 'HYSTERESIS',
+                'name': 'HYSTERESIS_TRIGGER',
                 'value': 1001,
 'documentation': {
 'description': '''
-Specifies a hysteresis trigger.
+Configures the digitizer for hysteresis triggering.  A hysteresis trigger occurs when the trigger signal crosses the trigger level with the specified slope and passes through the hysteresis window you specify. You configure the trigger level, slope, and hysteresis with niScope_ConfigureTriggerHysteresis.
 ''',
 },
             },
             {
-                'name': 'DIGITAL',
+                'name': 'DIGITAL_TRIGGER',
                 'value': 1002,
 'documentation': {
 'description': '''
-Specifies a digital trigger.
+Configures the digitizer for digital triggering. A digital trigger occurs when the trigger signal has the specified slope. You configure the trigger slope with niScope_ConfigureTriggerDigital.
 ''',
 },
             },
             {
-                'name': 'WINDOW',
+                'name': 'WINDOW_TRIGGER',
                 'value': 1003,
 'documentation': {
 'description': '''
-Specifies a window trigger.
+Configures the digitizer for window triggering.  A window trigger occurs when the trigger signal enters or leaves the window defined by the values you specify with the Low Window Level, High Window Level, and Window Mode Parameters.  You configure the low window level high window level, and window mode with niScope_ConfigureTriggerWindow.
 ''',
 },
             },
             {
-                'name': 'SOFTWARE',
+                'name': 'SOFTWARE_TRIGGER',
                 'value': 1004,
 'documentation': {
 'description': '''
-Specifies a software trigger.
+Configures the digitizer for software triggering.  A software trigger occurs when niScope_SendSoftwareTrigger is called.
 ''',
 },
             },
@@ -1211,20 +1197,20 @@ Specifies a software trigger.
     'TriggerWindowMode': {
         'values': [
             {
-                'name': 'ENTERING',
+                'name': 'ENTERING_WINDOW',
                 'value': 0,
 'documentation': {
 'description': '''
-Trigger occurs when a signal enters a window.
+Trigger upon entering the window
 ''',
 },
             },
             {
-                'name': 'LEAVING',
+                'name': 'LEAVING_WINDOW',
                 'value': 1,
 'documentation': {
 'description': '''
-Trigger occurs when a signal leaves a window.
+Trigger upon leaving the window
 ''',
 },
             },
@@ -1237,7 +1223,7 @@ Trigger occurs when a signal leaves a window.
                 'value': 0,
 'documentation': {
 'description': '''
-AC coupled
+AC coupling
 ''',
 },
             },
@@ -1246,16 +1232,16 @@ AC coupled
                 'value': 1,
 'documentation': {
 'description': '''
-DC coupled
+DC coupling
 ''',
 },
             },
             {
-                'name': 'GROUND',
+                'name': 'GND',
                 'value': 2,
 'documentation': {
 'description': '''
-Ground coupled
+GND coupling
 ''',
 },
             },
@@ -1264,7 +1250,7 @@ Ground coupled
     'VideoPolarity': {
         'values': [
             {
-                'name': 'POSITIVE',
+                'name': 'TV_POSITIVE',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1273,7 +1259,7 @@ Specifies that the video signal has positive polarity.
 },
             },
             {
-                'name': 'NEGATIVE',
+                'name': 'TV_NEGATIVE',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1286,20 +1272,20 @@ Specifies that the video signal has negative polarity.
     'VideoSignalFormat': {
         'values': [
             {
-                'name': 'M_NTSC',
+                'name': 'NTSC',
                 'value': 1,
 'documentation': {
 'description': '''
-Specifies M-NTSC signal format.
+NTSC signal format supports line numbers from 1 to 525
 ''',
 },
             },
             {
-                'name': 'BG_PAL',
+                'name': 'PAL',
                 'value': 2,
 'documentation': {
 'description': '''
-Specifies BG/PAL signal format.
+PAL signal format supports line numbers from 1 to 625
 ''',
 },
             },
@@ -1308,7 +1294,7 @@ Specifies BG/PAL signal format.
                 'value': 3,
 'documentation': {
 'description': '''
-Specifies SECAM signal format.
+SECAM signal format supports line numbers from 1 to 625
 ''',
 },
             },
@@ -1447,53 +1433,178 @@ Specifies 1080p/24 Fps signal format.
 ''',
 },
             },
+            {
+                'name': 'M_PAL',
+                'value': 1001,
+'documentation': {
+'description': '''
+M-PAL signal format supports line numbers from 1 to 525
+''',
+},
+            },
+            {
+                'name': '_480I_59_94_FIELDS_PER_SECOND',
+                'value': 1010,
+'documentation': {
+'description': '''
+480 lines, interlaced, 59.94 fields per second
+''',
+},
+            },
+            {
+                'name': '_480I_60_FIELDS_PER_SECOND',
+                'value': 1011,
+'documentation': {
+'description': '''
+480 lines, interlaced, 60 fields per second
+''',
+},
+            },
+            {
+                'name': '_480P_59_94_FRAMES_PER_SECOND',
+                'value': 1015,
+'documentation': {
+'description': '''
+480 lines, progressive, 59.94 frames per second
+''',
+},
+            },
+            {
+                'name': '_480P_60_FRAMES_PER_SECOND',
+                'value': 1016,
+'documentation': {
+'description': '''
+480 lines, progressive,60 frames per second
+''',
+},
+            },
+            {
+                'name': '_576I_50_FIELDS_PER_SECOND',
+                'value': 1020,
+'documentation': {
+'description': '''
+576 lines, interlaced, 50 fields per second
+''',
+},
+            },
+            {
+                'name': '_576P_50_FRAMES_PER_SECOND',
+                'value': 1025,
+'documentation': {
+'description': '''
+576 lines, progressive, 50 frames per second
+''',
+},
+            },
+            {
+                'name': '_720P_50_FRAMES_PER_SECOND',
+                'value': 1031,
+'documentation': {
+'description': '''
+720 lines, progressive, 50 frames per second
+''',
+},
+            },
+            {
+                'name': '_720P_59_94_FRAMES_PER_SECOND',
+                'value': 1032,
+'documentation': {
+'description': '''
+720 lines, progressive, 59.94 frames per second
+''',
+},
+            },
+            {
+                'name': '_720P_60_FRAMES_PER_SECOND',
+                'value': 1033,
+'documentation': {
+'description': '''
+720 lines, progressive, 60 frames per second
+''',
+},
+            },
+            {
+                'name': '_1080I_50_FIELDS_PER_SECOND',
+                'value': 1040,
+'documentation': {
+'description': '''
+1,080 lines, interlaced, 50 fields per second
+''',
+},
+            },
+            {
+                'name': '_1080I_59_94_FIELDS_PER_SECOND',
+                'value': 1041,
+'documentation': {
+'description': '''
+1,080 lines, interlaced, 59.94 fields per second
+''',
+},
+            },
+            {
+                'name': '_1080I_60_FIELDS_PER_SECOND',
+                'value': 1042,
+'documentation': {
+'description': '''
+1,080 lines, interlaced, 60 fields per second
+''',
+},
+            },
+            {
+                'name': '_1080P_24_FRAMES_PER_SECOND',
+                'value': 1045,
+'documentation': {
+'description': '''
+1,080 lines, progressive, 24 frames per second
+''',
+},
+            },
         ],
     },
     'VideoTriggerEvent': {
         'values': [
             {
-                'name': 'FIELD_1',
+                'name': 'TV_EVENT_FIELD1',
                 'value': 1,
 'documentation': {
 'description': '''
-Trigger on field 1 of the signal.
+Trigger on field 1 of the signal
 ''',
 },
             },
             {
-                'name': 'FIELD_2',
+                'name': 'TV_EVENT_FIELD2',
                 'value': 2,
 'documentation': {
 'description': '''
-Trigger on field 2 of the signal.
+Trigger on field 2 of the signal
 ''',
 },
             },
             {
-                'name': 'ANY_FIELD',
+                'name': 'TV_EVENT_ANY_FIELD',
                 'value': 3,
 'documentation': {
 'description': '''
-Trigger on any field of the signal.
+Trigger on the first field acquired
 ''',
 },
             },
             {
-                'name': 'ANY_LINE',
+                'name': 'TV_EVENT_ANY_LINE',
                 'value': 4,
 'documentation': {
 'description': '''
-Trigger on the first line acquired.
+Trigger on the first line acquired
 ''',
 },
             },
             {
-                'name': 'LINE_NUMBER',
+                'name': 'TV_EVENT_LINE_NUMBER',
                 'value': 5,
 'documentation': {
 'description': '''
-Trigger on a specific line of a video signal. Valid values vary
-depending on the signal format.
+Trigger on a specific line of a video signal.  Valid values vary depending on the signal format configured.
 ''',
 },
             },

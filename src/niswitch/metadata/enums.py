@@ -12,7 +12,9 @@ enums = {
                 'name': 'NONE',
                 'value': 0,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
@@ -103,63 +105,81 @@ line before processing the next entry in the scan list.
                 'name': 'NONE',
                 'value': 0,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'PXI_TRIG0',
                 'value': 111,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'PXI_TRIG1',
                 'value': 112,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'PXI_TRIG2',
                 'value': 113,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'PXI_TRIG3',
                 'value': 114,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'PXI_TRIG4',
                 'value': 115,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'PXI_TRIG5',
                 'value': 116,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'PXI_TRIG6',
                 'value': 117,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'PXI_TRIG7',
                 'value': 118,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
         ],
@@ -208,7 +228,9 @@ advanced output signal of the switch module initiates handshaking.
                 'name': 'NONE',
                 'value': 0,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
@@ -299,7 +321,9 @@ line before processing the next entry in the scan list.
                 'name': 'NONE',
                 'value': 0,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
@@ -390,42 +414,54 @@ line before processing the next entry in the scan list.
                 'name': 'PATH_AVAILABLE',
                 'value': 1,
 'documentation': {
-'description': 'Path Available',
+'description': '''
+Path Available
+''',
 },
             },
             {
                 'name': 'PATH_EXISTS',
                 'value': 2,
 'documentation': {
-'description': 'Path Exists',
+'description': '''
+Path Exists
+''',
 },
             },
             {
                 'name': 'PATH_UNSUPPORTED',
                 'value': 3,
 'documentation': {
-'description': 'Path Unsupported',
+'description': '''
+Path Unsupported
+''',
 },
             },
             {
                 'name': 'RESOURCE_IN_USE',
                 'value': 4,
 'documentation': {
-'description': 'Resource in use',
+'description': '''
+Resource in use
+''',
 },
             },
             {
                 'name': 'SOURCE_CONFLICT',
                 'value': 5,
 'documentation': {
-'description': 'Source conflict',
+'description': '''
+Source conflict
+''',
 },
             },
             {
                 'name': 'CHANNEL_NOT_AVAILABLE',
                 'value': 6,
 'documentation': {
-'description': 'Channel not available',
+'description': '''
+Channel not available
+''',
 },
             },
         ],
@@ -436,14 +472,18 @@ line before processing the next entry in the scan list.
                 'name': 'OPEN_RELAY',
                 'value': 20,
 'documentation': {
-'description': 'Open Relay',
+'description': '''
+Open Relay
+''',
 },
             },
             {
                 'name': 'CLOSE_RELAY',
                 'value': 21,
 'documentation': {
-'description': 'Close Relay',
+'description': '''
+Close Relay
+''',
 },
             },
         ],
@@ -454,14 +494,18 @@ line before processing the next entry in the scan list.
                 'name': 'OPEN',
                 'value': 10,
 'documentation': {
-'description': 'Open',
+'description': '''
+Open
+''',
 },
             },
             {
                 'name': 'CLOSED',
                 'value': 11,
 'documentation': {
-'description': 'Closed',
+'description': '''
+Closed
+''',
 },
             },
         ],
@@ -472,7 +516,9 @@ line before processing the next entry in the scan list.
                 'name': 'NONE',
                 'value': 0,
 'documentation': {
-'description': 'The switch module does not produce a Scan Advanced Output trigger.',
+'description': '''
+The switch device does not produce a Scan Advanced Output trigger.
+''',
 },
             },
             {
@@ -480,88 +526,79 @@ line before processing the next entry in the scan list.
                 'value': 2,
 'documentation': {
 'description': '''
-The switch module produces the Scan Advanced Output trigger on the
-external trigger output.
+External Trigger. The switch device produces the Scan Advanced Output  trigger on the external trigger output.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG0',
+                'name': 'TTL0',
                 'value': 111,
 'documentation': {
 'description': '''
-The switch module produces the Scan Advanced Output Trigger on the
-PXI\_Trig0 line before processing the next entry in the scan list.
+The switch device produces the Scan Advanced Output on the PXI TRIG0 line.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG1',
+                'name': 'TTL1',
                 'value': 112,
 'documentation': {
 'description': '''
-The switch module produces the Scan Advanced Output Trigger on the
-PXI\_Trig1 line before processing the next entry in the scan list.
+The switch device produces the Scan Advanced Output on the PXI TRIG1 line.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG2',
+                'name': 'TTL2',
                 'value': 113,
 'documentation': {
 'description': '''
-The switch module produces the Scan Advanced Output Trigger on the
-PXI\_Trig2 line before processing the next entry in the scan list.
+The switch device produces the Scan Advanced Output on the PXI TRIG2 line.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG3',
+                'name': 'TTL3',
                 'value': 114,
 'documentation': {
 'description': '''
-The switch module produces the Scan Advanced Output Trigger on the
-PXI\_Trig3 line before processing the next entry in the scan list.
+The switch device produces the Scan Advanced Output on the PXI TRIG3 line.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG4',
+                'name': 'TTL4',
                 'value': 115,
 'documentation': {
 'description': '''
-The switch module produces the Scan Advanced Output Trigger on the
-PXI\_Trig4 line before processing the next entry in the scan list.
+The switch device produces the Scan Advanced Output on the PXI TRIG4 line.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG5',
+                'name': 'TTL5',
                 'value': 116,
 'documentation': {
 'description': '''
-The switch module produces the Scan Advanced Output Trigger on the
-PXI\_Trig5 line before processing the next entry in the scan list.
+The switch device produces the Scan Advanced Output on the PXI TRIG5 line.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG6',
+                'name': 'TTL6',
                 'value': 117,
 'documentation': {
 'description': '''
-The switch module produces the Scan Advanced Output Trigger on the
-PXI\_Trig6 line before processing the next entry in the scan list.
+The switch device produces the Scan Advanced Output on the PXI TRIG6 line.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG7',
+                'name': 'TTL7',
                 'value': 118,
 'documentation': {
 'description': '''
-The switch module produces the Scan Advanced Output Trigger on the
-PXI\_Trig7 line before processing the next entry in the scan list.
+The switch device produces the Scan Advanced Output on the PXI TRIG7 line.
 ''',
 },
             },
@@ -580,8 +617,7 @@ Star trigger bus before processing the next entry in the scan list.
                 'value': 1000,
 'documentation': {
 'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector.
+The switch device produces the Scan Advanced Output  trigger on the rear connector.
 ''',
 },
             },
@@ -590,8 +626,7 @@ connector.
                 'value': 1001,
 'documentation': {
 'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector.
+The switch device produces the Scan Advanced Output  trigger on the front connector.
 ''',
 },
             },
@@ -843,14 +878,18 @@ connector module 12.
                 'name': 'RISING_EDGE',
                 'value': 0,
 'documentation': {
-'description': 'The trigger occurs on the rising edge of the signal.',
+'description': '''
+The trigger occurs on the rising edge of the signal.
+''',
 },
             },
             {
                 'name': 'FALLING_EDGE',
                 'value': 1,
 'documentation': {
-'description': 'The trigger occurs on the falling edge of the signal.',
+'description': '''
+The trigger occurs on the falling edge of the signal.
+''',
 },
             },
         ],
@@ -861,7 +900,9 @@ connector module 12.
                 'name': 'NONE',
                 'value': 0,
 'documentation': {
-'description': 'No implicit action on connections when scanning.',
+'description': '''
+No implicit action on connections when scanning.
+''',
 },
             },
             {
@@ -869,8 +910,7 @@ connector module 12.
                 'value': 1,
 'documentation': {
 'description': '''
-When scanning, the switch module breaks existing connections before
-making new connections.
+When scanning, the switch device breaks existing connections before  making new connections.
 ''',
 },
             },
@@ -879,8 +919,7 @@ making new connections.
                 'value': 2,
 'documentation': {
 'description': '''
-When scanning, the switch module breaks existing connections after
-making new connections.
+When scanning, the switch device breaks existing connections after making  new connections.
 ''',
 },
             },
@@ -893,8 +932,7 @@ making new connections.
                 'value': 1,
 'documentation': {
 'description': '''
-The switch module does not wait for a trigger before processing the next
-entry in the scan list.
+Immediate Trigger. The switch device does not wait for a trigger before  processing the next entry in the scan list.
 ''',
 },
             },
@@ -903,100 +941,88 @@ entry in the scan list.
                 'value': 2,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger from an external
-source through the external trigger input before processing the next
-entry in the scan list.
+External Trigger. The switch device waits until it receives a trigger  from an external source through the external trigger input before  processing the next entry in the scan list.
 ''',
 },
             },
             {
-                'name': 'SW_TRIG_FUNC',
+                'name': 'SOFTWARE_TRIG',
                 'value': 3,
 'documentation': {
 'description': '''
-The switch module waits until you call the `niSwitch Send Software
-Trigger <switchviref.chm::/niSwitch_Send_Software_Trigger.html>`__ VI
-before processing the next entry in the scan list.
+The switch device waits until you call the niSwitch_SendSoftwareTrigger  function before processing the next entry in the scan list.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG0',
+                'name': 'TTL0',
                 'value': 111,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig0
-line before processing the next entry in the scan list.
+The switch device waits until it receives a trigger on the PXI TRIG0 line before processing the next entry in the scan list.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG1',
+                'name': 'TTL1',
                 'value': 112,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig1
-line before processing the next entry in the scan list.
+The switch device waits until it receives a trigger on the PXI TRIG1 line before processing the next entry in the scan list.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG2',
+                'name': 'TTL2',
                 'value': 113,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig2
-line before processing the next entry in the scan list.
+The switch device waits until it receives a trigger on the PXI TRIG2 line before processing the next entry in the scan list.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG3',
+                'name': 'TTL3',
                 'value': 114,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig3
-line before processing the next entry in the scan list.
+The switch device waits until it receives a trigger on the PXI TRIG3 line before processing the next entry in the scan list.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG4',
+                'name': 'TTL4',
                 'value': 115,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig4
-line before processing the next entry in the scan list.
+The switch device waits until it receives a trigger on the PXI TRIG4 line before processing the next entry in the scan list.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG5',
+                'name': 'TTL5',
                 'value': 116,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig5
-line before processing the next entry in the scan list.
+The switch device waits until it receives a trigger on the PXI TRIG5 line before processing the next entry in the scan list.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG6',
+                'name': 'TTL6',
                 'value': 117,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig6
-line before processing the next entry in the scan list.
+The switch device waits until it receives a trigger on the PXI TRIG6 line before processing the next entry in the scan list.
 ''',
 },
             },
             {
-                'name': 'PXI_TRIG7',
+                'name': 'TTL7',
                 'value': 118,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig7
-line before processing the next entry in the scan list.
+The switch device waits until it receives a trigger on the PXI TRIG7 line before processing the next entry in the scan list.
 ''',
 },
             },
@@ -1005,8 +1031,7 @@ line before processing the next entry in the scan list.
                 'value': 125,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger on the PXI star
-trigger bus before processing the next entry in the scan list.
+The switch device waits until it receives a trigger on the PXI STAR  trigger bus before processing the next entry in the scan list.
 ''',
 },
             },
@@ -1015,8 +1040,7 @@ trigger bus before processing the next entry in the scan list.
                 'value': 1000,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger on the rear
-connector.
+The switch device waits until it receives a trigger on the  rear connector.
 ''',
 },
             },
@@ -1025,8 +1049,7 @@ connector.
                 'value': 1001,
 'documentation': {
 'description': '''
-The switch module waits until it receives a trigger on the front
-connector.
+The switch device waits until it receives a trigger on the  front connector.
 ''',
 },
             },
@@ -1278,14 +1301,18 @@ connector module 12.
                 'name': 'RISING_EDGE',
                 'value': 0,
 'documentation': {
-'description': 'The trigger occurs on the rising edge of the signal.',
+'description': '''
+The trigger occurs on the rising edge of the signal.
+''',
 },
             },
             {
                 'name': 'FALLING_EDGE',
                 'value': 1,
 'documentation': {
-'description': 'The trigger occurs on the falling edge of the signal.',
+'description': '''
+The trigger occurs on the falling edge of the signal.
+''',
 },
             },
         ],
@@ -1296,21 +1323,27 @@ connector module 12.
                 'name': 'SINGLE',
                 'value': 0,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'MASTER',
                 'value': 1,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
             {
                 'name': 'SLAVE',
                 'value': 2,
 'documentation': {
-'description': '',
+'description': '''
+
+''',
 },
             },
         ],
