@@ -54,26 +54,30 @@ def test_self_cal(session):
 
 def test_standard_waveform(session):
     session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_FUNC
-    session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 0.0, 0.0, 2000000)
-    session.output_enabled = True
-    session.trigger_mode = nifgen.TriggerMode.NIFGEN_VAL_CONTINUOUS
-    session.trigger_source = nifgen.TriggerSource.NIFGEN_VAL_IMMEDIATE
+    session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 2000000, 1.0, 0.0)
+    expected_frequency = 2000000
     with session.initiate():
         assert session.func_amplitude == 2.0
         assert session.func_waveform == nifgen.Waveform.SINE
+        actual_frequency = session.func_frequency
+        in_range = abs(actual_frequency - expected_frequency) <= max(1e-09 * max(abs(actual_frequency), abs(expected_frequency)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+        assert in_range is True
+        assert session.func_dc_offset == 1.0
+        assert session.func_start_phase == 0.0
         assert session.is_done() is False
 
 
 def test_frequency_list(session):
     session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_FREQ_LIST
-    session.clear_freq_list(-1)
     duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
     frequency_array = [1000, 100900, 200800, 300700, 400600, 500500, 600400, 700300, 800200, 900100]
     waveform_handle = session.create_freq_list(nifgen.Waveform.SQUARE, frequency_array, duration_array)
     session.configure_freq_list(waveform_handle, 2.0, 0, 0)
     session.trigger_mode = nifgen.TriggerMode.NIFGEN_VAL_CONTINUOUS
     session.output_enabled = True
-    with session.initiate():
-        assert session.func_waveform == nifgen.Waveform.SQUARE
-    with session.initiate():
-        assert session.func_waveform == nifgen.Waveform.SQUARE
+    assert session.func_waveform == nifgen.Waveform.SQUARE
+    assert session.func_amplitude == 2.0
+
+
+def test_clear_freq_list(session):
+    session.clear_freq_list(-1)
