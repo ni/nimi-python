@@ -41,7 +41,7 @@ def test_method_get_self_cal_supported(session):
 
 def test_get_self_cal_last_date_and_time():
     try:
-        with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:
+        with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Simulated 5433 returns unrecoverable error when calling get_self_cal_last_date_and_time()
             year, month, day, hour, minute = session.get_self_cal_last_date_and_time()
             assert False
     except nifgen.Error as e:
@@ -64,14 +64,6 @@ def test_standard_waveform(session):
         assert session.is_done() is False
 
 
-def test_no_waveform_data(session):
-    try:
-        with session.initiate():
-            assert False
-    except nifgen.Error as e:
-        assert e.code == -1074118636  # No waveforms have been created
-
-
 def test_frequency_list(session):
     session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_FREQ_LIST
     session.clear_freq_list(-1)
@@ -83,6 +75,5 @@ def test_frequency_list(session):
     session.output_enabled = True
     with session.initiate():
         assert session.func_waveform == nifgen.Waveform.SQUARE
-    session.output_enabled = True
     with session.initiate():
         assert session.func_waveform == nifgen.Waveform.SQUARE

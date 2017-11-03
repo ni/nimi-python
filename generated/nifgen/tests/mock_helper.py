@@ -174,8 +174,6 @@ class SideEffectsHelper(object):
         self._defaults['SelfCal']['return'] = 0
         self._defaults['SendSoftwareEdgeTrigger'] = {}
         self._defaults['SendSoftwareEdgeTrigger']['return'] = 0
-        self._defaults['SendSoftwareTrigger'] = {}
-        self._defaults['SendSoftwareTrigger']['return'] = 0
         self._defaults['SetAttributeViBoolean'] = {}
         self._defaults['SetAttributeViBoolean']['return'] = 0
         self._defaults['SetAttributeViInt32'] = {}
@@ -503,7 +501,8 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_GetFIRFilterCoefficients", param='coefficientsArray')
         if array_size.value == 0:
             return len(self._defaults['GetFIRFilterCoefficients']['coefficientsArray'])
-        coefficients_array.value = self._defaults['GetFIRFilterCoefficients']['coefficientsArray'].encode('ascii')
+        for i in range(len(self._defaults['GetFIRFilterCoefficients']['coefficientsArray'])):
+            coefficients_array[i] = self._defaults['GetFIRFilterCoefficients']['coefficientsArray'][i]
         return self._defaults['GetFIRFilterCoefficients']['return']
 
     def niFgen_GetHardwareState(self, vi, state):  # noqa: N802
@@ -655,11 +654,6 @@ class SideEffectsHelper(object):
         if self._defaults['SendSoftwareEdgeTrigger']['return'] != 0:
             return self._defaults['SendSoftwareEdgeTrigger']['return']
         return self._defaults['SendSoftwareEdgeTrigger']['return']
-
-    def niFgen_SendSoftwareTrigger(self, vi):  # noqa: N802
-        if self._defaults['SendSoftwareTrigger']['return'] != 0:
-            return self._defaults['SendSoftwareTrigger']['return']
-        return self._defaults['SendSoftwareTrigger']['return']
 
     def niFgen_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['SetAttributeViBoolean']['return'] != 0:
@@ -877,8 +871,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_SelfCal.return_value = 0
         mock_library.niFgen_SendSoftwareEdgeTrigger.side_effect = MockFunctionCallError("niFgen_SendSoftwareEdgeTrigger")
         mock_library.niFgen_SendSoftwareEdgeTrigger.return_value = 0
-        mock_library.niFgen_SendSoftwareTrigger.side_effect = MockFunctionCallError("niFgen_SendSoftwareTrigger")
-        mock_library.niFgen_SendSoftwareTrigger.return_value = 0
         mock_library.niFgen_SetAttributeViBoolean.side_effect = MockFunctionCallError("niFgen_SetAttributeViBoolean")
         mock_library.niFgen_SetAttributeViBoolean.return_value = 0
         mock_library.niFgen_SetAttributeViInt32.side_effect = MockFunctionCallError("niFgen_SetAttributeViInt32")

@@ -857,7 +857,7 @@ nifgen.Session methods
 
     :type start_phase: float
 
-.. function:: configure_standard_waveform(waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0)
+.. function:: configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
     Configures the following attributes of the signal generator that affect
     standard waveform generation:
@@ -882,7 +882,7 @@ nifgen.Session methods
 
         .. code:: python
 
-            session['0,1'].configure_standard_waveform(waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0)
+            session['0,1'].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
 
     :param waveform:
@@ -1000,7 +1000,7 @@ nifgen.Session methods
 
     :type start_phase: float
 
-.. function:: create_advanced_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array)
+.. function:: create_advanced_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None)
 
     Creates an arbitrary sequence from an array of waveform handles and an
     array of corresponding loop counts. This function returns a handle that
@@ -2531,18 +2531,6 @@ nifgen.Session methods
 
     :type trigger_id: string
 
-.. function:: send_software_trigger()
-
-    Sends a command to trigger the signal generator.
-
-    
-
-    .. note:: This function can act as an override for an external edge trigger.
-        However, the NI 5401/5411/5431 do not support overriding an external
-        digital edge trigger.
-
-
-
 .. function:: set_named_waveform_next_write_position(waveform_name, relative_to, offset)
 
     Sets the position in the waveform to which data is written at the next
@@ -2678,7 +2666,7 @@ nifgen.Session methods
 
     :type offset: int
 
-.. function:: wait_until_done(max_time)
+.. function:: wait_until_done(max_time=10000)
 
     Waits until the device is done generating or until the maximum time has
     expired.

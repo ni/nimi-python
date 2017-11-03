@@ -30,6 +30,7 @@ functions_codegen_method = {
     'WriteBinary16AnalogStaticValue':       { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'CreateArbWaveform':                    { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'CreateBinary16ArbWaveform':            { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
+    'SendSoftwareTrigger':                  { 'codegen_method': 'no',       },  # Obsoleted before initial Python release
     'Abort':                                { 'codegen_method': 'private',  },
     '.etAttribute.+':                       { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'error_message':                        { 'codegen_method': 'private',  },
@@ -60,21 +61,17 @@ functions_codegen_method = {
 
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
-    'ConfigureOutputMode':                      { 'parameters': { 1: { 'enum': 'OutputMode',                    }, }, },
-    'ConfigureStandardWaveform':                { 'parameters': { 2: { 'enum': 'Waveform',                      }, }, },
-    'ConfigureTriggerMode':                     { 'parameters': { 2: { 'enum': 'TriggerMode',                   }, }, },
-    'ConfigureTriggerSource':                   { 'parameters': { 2: { 'enum': 'TriggerSource',                 }, }, },
-    'CreateFreqList':                           { 'parameters': { 1: { 'enum': 'Waveform',                      }, }, },
-    'CreateWaveformFromFileF64':                { 'parameters': { 3: { 'enum': 'ByteOrder',                     }, }, },  # TODO: issue #538
-    'CreateWaveformFromFileI16':                { 'parameters': { 3: { 'enum': 'ByteOrder',                     }, }, },  # TODO: issue #538
-    'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 3: { 'enum': 'ScriptTriggerDigitalEdgeEdge',  }, }, },
-    'ConfigureDigitalEdgeStartTrigger':         { 'parameters': { 2: { 'enum': 'StartTriggerDigitalEdgeEdge',   }, }, },
-    'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                        }, }, },  # TODO: issue #538
-    'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                    }, }, },  # TODO: issue #538
-    'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                    }, }, },  # TODO: issue #538
-    'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',                 }, }, },  # TODO: issue #538
-    'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                       }, }, },  # TODO: issue #538
-# @TODO add all enums
+    'CreateFreqList':                           { 'parameters': { 1: { 'enum': 'Waveform',                  }, }, },
+    'CreateWaveformFromFileF64':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  # TODO: issue #538
+    'CreateWaveformFromFileI16':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },  # TODO: issue #538
+    'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 3: { 'enum': 'ScriptTriggerDigitalEdgeEdge', }, }, },
+    'ConfigureDigitalEdgeStartTrigger':         { 'parameters': { 2: { 'enum': 'StartTriggerDigitalEdgeEdge', }, }, },
+    'ConfigureStandardWaveform':                { 'parameters': { 2: { 'enum': 'Waveform' }, }, },
+    'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                    }, }, },  # TODO: issue #538
+    'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  # TODO: issue #538
+    'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },  # TODO: issue #538
+    'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },  # TODO: issue #538
+    'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
 }
 
 functions_issues = {
@@ -127,9 +124,10 @@ functions_default_value = {
     'ConfigureFreqList':                            { 'parameters': { 4: { 'default_value': 0.0, },
                                                                       5: { 'default_value': 0.0, }, }, },
     'ConfigureStandardWaveform':                    { 'parameters': { 4: { 'default_value': 0.0, },
-                                                                      5: { 'default_value': 0.0, }, }, },
+                                                                      6: { 'default_value': 0.0, }, }, },
     'ConfigureDigitalEdgeScriptTrigger':            { 'parameters': { 3: { 'default_value': 'ScriptTriggerDigitalEdgeEdge.RISING_EDGE', }, }, },
     'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'default_value': 'StartTriggerDigitalEdgeEdge.RISING_EDGE', }, }, },
-
+    'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
+                                                                      5: { 'default_value': None, }, }, },
+    'WaitUntilDone': { 'parameters': { 1: { 'default_value': 10000, }, }, },
 }
-

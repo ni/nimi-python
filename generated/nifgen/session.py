@@ -2436,7 +2436,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_standard_waveform(self, waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0):
+    def configure_standard_waveform(self, waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0):
         '''configure_standard_waveform
 
         Configures the following attributes of the signal generator that affect
@@ -2459,7 +2459,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session['0,1'].configure_standard_waveform(waveform, amplitude, start_phase, dc_offset=0.0, frequency=0.0)
+            session['0,1'].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
         Args:
             waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
@@ -3206,7 +3206,7 @@ class _SessionBase(object):
         coefficients_array_ctype = (visatype.ViReal64 * array_size_ctype.value)()  # TODO(marcoskirsch): use get_ctype_variable_declaration_snippet()
         error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, ctypes.pointer(number_of_coefficients_read_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(coefficients_array_ctype[i]) for i in range(array_size)], int(number_of_coefficients_read_ctype.value)
+        return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
 
     def _initialize_with_channels(self, resource_name, reset_device=False, option_string=''):
         '''_initialize_with_channels
@@ -4402,7 +4402,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array):
+    def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None):
         '''create_advanced_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
@@ -5216,22 +5216,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def send_software_trigger(self):
-        '''send_software_trigger
-
-        Sends a command to trigger the signal generator.
-
-        Note:
-        This function can act as an override for an external edge trigger.
-        However, the NI 5401/5411/5431 do not support overriding an external
-        digital edge trigger.
-        '''
-        vi_ctype = visatype.ViSession(self._vi)  # case 1
-        error_code = self._library.niFgen_SendSoftwareTrigger(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def wait_until_done(self, max_time):
+    def wait_until_done(self, max_time=10000):
         '''wait_until_done
 
         Waits until the device is done generating or until the maximum time has

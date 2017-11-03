@@ -13,8 +13,9 @@ class Library(object):
     Class will setup the correct ctypes information for every function on first call.
     '''
 
-    def __init__(self, library_name, library_type):
+    def __init__(self, ctypes_library):
         self._func_lock = threading.Lock()
+        self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niFgen_AbortGeneration_cfunc = None
         self.niFgen_AdjustSampleClockRelativeDelay_cfunc = None
@@ -71,7 +72,6 @@ class Library(object):
         self.niFgen_ResetWithDefaults_cfunc = None
         self.niFgen_SelfCal_cfunc = None
         self.niFgen_SendSoftwareEdgeTrigger_cfunc = None
-        self.niFgen_SendSoftwareTrigger_cfunc = None
         self.niFgen_SetAttributeViBoolean_cfunc = None
         self.niFgen_SetAttributeViInt32_cfunc = None
         self.niFgen_SetAttributeViInt64_cfunc = None
@@ -89,12 +89,6 @@ class Library(object):
         self.niFgen_error_message_cfunc = None
         self.niFgen_reset_cfunc = None
         self.niFgen_self_test_cfunc = None
-
-        if library_type == 'windll':
-            self._library = ctypes.WinDLL(library_name)
-        else:  # pragma: no cover
-            assert library_type == 'cdll'
-            self._library = ctypes.CDLL(library_name)
 
     def niFgen_AbortGeneration(self, vi):  # noqa: N802
         with self._func_lock:
@@ -535,14 +529,6 @@ class Library(object):
                 self.niFgen_SendSoftwareEdgeTrigger_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_SendSoftwareEdgeTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SendSoftwareEdgeTrigger_cfunc(vi, trigger, trigger_id)
-
-    def niFgen_SendSoftwareTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_SendSoftwareTrigger_cfunc is None:
-                self.niFgen_SendSoftwareTrigger_cfunc = self._library.niFgen_SendSoftwareTrigger
-                self.niFgen_SendSoftwareTrigger_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niFgen_SendSoftwareTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_SendSoftwareTrigger_cfunc(vi)
 
     def niFgen_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:

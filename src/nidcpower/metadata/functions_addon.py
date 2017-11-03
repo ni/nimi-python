@@ -101,7 +101,7 @@ functions_default_value = {
                                                                        2: { 'default_value': False, },
                                                                        3: { 'default_value': '', }, }, },
     'ConfigureApertureTime':                         { 'parameters': { 3: { 'default_value': 'ApertureTimeUnits.SECONDS', }, }, },
-    'SetSequence':                                   { 'parameters': { 3: { 'default_value': None, }, }, },
+    'SetSequence':                                   { 'parameters': { 2: { 'default_value': None, }, }, },
     'ConfigureDigitalEdgeMeasureTrigger':            { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
     'ConfigureDigitalEdgePulseTrigger':              { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
     'ConfigureDigitalEdgeSequenceAdvanceTrigger':    { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
