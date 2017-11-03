@@ -29,8 +29,7 @@ class _SessionBase(object):
 
     all_marker_events_latched_status = attributes.AttributeViInt32(1150349)
     '''
-    Returns a bit field of the latched status of all Marker Events. Set this
-    property to 0 to clear the latched status of all Marker Events.
+    Returns a bit field of the latched status of all Marker Events.  Write 0 to this attribute to clear the latched status of all Marker Events.
     '''
     all_marker_events_live_status = attributes.AttributeViInt32(1150344)
     '''
@@ -38,257 +37,102 @@ class _SessionBase(object):
     '''
     analog_data_mask = attributes.AttributeViInt32(1150234)
     '''
-    Specifies the mask to apply to the analog output data. The masked data
-    is replaced with the data in the `Analog Static
-    Value <pniFgen_AnalogStaticValue.html>`__ property.
+    Specifies the mask to apply to the analog output. The masked data is replaced with the data in NIFGEN_ATTR_ANALOG_STATIC_VALUE.
     '''
     analog_filter_enabled = attributes.AttributeViBoolean(1150103)
     '''
-    Specifies whether the signal generator applies an analog filter to the
-    output signal. Set this property to TRUE to enable the filter. This
-    property is valid in Arbitrary Waveform, Arbitrary Sequence, and Script
-    output modes. You also can use this property in Standard Function and
-    Frequency List output modes for user-defined waveforms.
-
-    **Default Value**: FALSE
+    Controls whether the signal generator applies to an analog filter to the output signal. This attribute is valid in arbitrary waveform, arbitrary sequence, and script modes. This attribute can also be used in standard function and frequency list modes for user-defined waveforms.
     '''
     analog_path = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AnalogPath, 1150222)
     '''
-    Specifies the analog signal path. The main path allows the user to
-    configure gain, offset, analog filter status, output impedance, and
-    output enable.
-
-    The direct path presents a much smaller gain range, and you cannot
-    adjust offset or the filter status. The direct path provides a smaller
-    output range but lower distortion. The main path has two amplifier
-    options, high and low gain. Setting this value to
-    **NIFGEN_VAL_MAIN_ANALOG_PATH** allows NI-FGEN to choose the
-    amplifier based on the user-specified gain.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the analog signal path that should be used. The main path allows you to configure gain, offset, analog filter status, output impedance, and output enable. The main path has two amplifier options, high- and low-gain.
+    The direct path presents a much smaller gain range, and you cannot adjust offset or the filter status. The direct path also provides a smaller output range but also lower distortion. NI-FGEN normally chooses the amplifier based on the user-specified gain.
     '''
     analog_static_value = attributes.AttributeViInt32(1150235)
     '''
-    Specifies the static value that replaces data masked by the `Analog Data
-    Mask <pniFgen_AnalogDataMask.html>`__ property.
+    Specifies the static value that replaces data masked by NIFGEN_ATTR_ANALOG_DATA_MASK.
     '''
     arb_gain = attributes.AttributeViReal64(1250202)
     '''
-    Specifies the factor by which the signal generator scales the arbitrary
-    waveform data. When you create arbitrary waveforms, you must first
-    normalize the data points to the range -1.0 to +1.0. Use this property
-    to scale the arbitrary waveform to other ranges.
-
-    For example, when you set this property to 2.0, the output signal ranges
-    from -2.0 V to +2.0 V.
-
-    Use this property when the `Output Mode <pniFgen_OutputMode.html>`__
-    property is set to **NIFGEN_VAL_OUTPUT_ARB** or
-    **NIFGEN_VAL_OUTPUT_SEQ**.
+    Specifies the factor by which the signal generator scales the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this attribute to scale the arbitrary waveform to other ranges.
+    For example, when you set this attribute to 2.0, the output signal ranges from -2.0 V to +2.0 V.
+    Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ.
     '''
     arb_marker_position = attributes.AttributeViInt32(1150327)
     '''
-    Specifies the position for a marker to be asserted in the arbitrary
-    waveform.
-
-    Use this property when the `Output Mode <pniFgen_OutputMode.html>`__
-    property is set to **NIFGEN_VAL_OUTPUT_ARB**. Use the `niFgen Export
-    Signal <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Export_Signal.html')>`__
-    VI to export the marker signal.
-
-    **Default Value**: -1
+    Specifies the position for a marker to be asserted in the arbitrary waveform. This attribute defaults to -1 when no marker position is specified. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.
+    Use niFgen_ExportSignal to export the marker signal.
     '''
     arb_offset = attributes.AttributeViReal64(1250203)
     '''
-    Specifies the value the signal generator adds to the arbitrary waveform
-    data. When you create arbitrary waveforms, you must first normalize the
-    data points to the range -1.0 to +1.0. Use this property to shift the
-    arbitrary waveform range.
-
-    For example, when you set this property to 1.0, the output signal ranges
-    from 0.0 V to 2.0 V.
-
-    Use this property when the `Output Mode <pniFgen_OutputMode.html>`__
-    property is set to **NIFGEN_VAL_OUTPUT_ARB** or
-    **NIFGEN_VAL_OUTPUT_SEQ**.
+    Specifies the value that the signal generator adds to the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this attribute to shift the arbitrary waveform range.
+    For example, when you set this attribute to 1.0, the output signal ranges from 2.0 V to 0.0 V.
+    Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ.
+    Units: Volts
     '''
     arb_repeat_count = attributes.AttributeViInt32(1150328)
     '''
-    Specifies the number of times to repeat the arbitrary waveform when the
-    **Trigger Mode** parameter in the `niFgen Configure Trigger
-    Mode <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Configure_Trigger_Mode.html')>`__
-    VI is set to **Single** or **Stepped**.
-
-    This property is ignored if the **Trigger Mode** parameter is set to
-    **Continuous** or **Burst**. Use this property when the `Output
-    Mode <pniFgen_OutputMode.html>`__ property is set to
-    **NIFGEN_VAL_OUTPUT_ARB**.
-
-    When used during
-    `streaming <javascript:LaunchHelp('SigGenHelp.chm::/streaming.html')>`__
-    operations, this property specifies the number of times to repeat the
-    streaming waveform (the onboard memory allocated for streaming).
-
-    **Default Value**: 1
+    Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of nifgen_ConfigureTriggerMode is set to NIFGEN_VAL_SINGLE or NIFGEN_VAL_STEPPED. This attribute is ignored if the triggerMode parameter is set to NIFGEN_VAL_CONTINUOUS or NIFGEN_VAL_BURST. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.
+    When used during streaming, this attribute specifies the number of times to repeat the streaming waveform (the onboard memory allocated for streaming).  For more information about streaming, refer to the Streaming topic.
     '''
     arb_sample_rate = attributes.AttributeViReal64(1250204)
     '''
-    Specifies the rate, in samples per second, at which the signal generator
-    generates the points in arbitrary waveforms.
-
-    Use this property when the `Output Mode <pniFgen_OutputMode.html>`__
-    property is set to **NIFGEN_VAL_OUTPUT_ARB** or
-    **NIFGEN_VAL_OUTPUT_SEQ**.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the rate at which the signal generator outputs the points in arbitrary waveforms.  Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set  to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ.
+    Units: Samples/s
     '''
     arb_sequence_handle = attributes.AttributeViInt32(1250211)
     '''
-    Selects which sequence the signal generator produces. You can create
-    multiple sequences using the `niFgen Create Arbitrary
-    Sequence <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Create_Arbitrary_Sequence.html')>`__
-    VI.
-
-    The niFgen Create Arbitrary Sequence VI returns a **Sequence Handle**
-    that you use to identify the particular sequence. To configure the
-    signal generator to produce a particular sequence, set this property to
-    the **Sequence Handle** value. Use this property when the `Output
-    Mode <pniFgen_OutputMode.html>`__ property is set to
-    **NIFGEN_VAL_OUTPUT_SEQ**.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    This channel-based attribute identifies which sequence the signal generator produces. You can create multiple sequences using niFgen_CreateArbSequence. niFgen_CreateArbSequence returns a handle that you can use to identify the particular sequence. To configure the signal generator to produce a particular sequence, set this attribute to the sequence handle.
+    Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SEQ.
     '''
     arb_waveform_handle = attributes.AttributeViInt32(1250201)
     '''
-    Selects which arbitrary waveform the signal generator produces. You can
-    create multiple arbitrary waveforms using the `niFgen Create
-    Waveform <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Create_Waveform_poly.html')>`__
-    VI.
-
-    The `niFgen Create
-    Waveform <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Create_Waveform_poly.html')>`__
-    VI, `niFgen Allocate
-    Waveform <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Allocate_Waveform.html')>`__
-    VI, and similar VIs return a **Waveform Handle** that you use to
-    identify the particular waveform. To configure the signal generator to
-    produce a particular waveform, set this property to the **Waveform
-    Handle** value.
-
-    Use this property only when the `Output
-    Mode <pniFgen_OutputMode.html>`__ property is set to
-    **NIFGEN_VAL_OUTPUT_ARB**.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Selects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform functions:
+    niFgen_CreateWaveformF64
+    niFgen_CreateWaveformI16
+    niFgen_CreateWaveformFromFileI16
+    niFgen_CreateWaveformFromFileF64
+    niFgen_CreateWaveformFromFileHWS
+    These functions return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this attribute to the waveform handle.
+    Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_ARB.
     '''
     aux_power_enabled = attributes.AttributeViBoolean(1150411)
     '''
     Controls the specified auxiliary power pin. Setting this property to
     TRUE energizes the auxiliary power when the session is committed. When
     this property is FALSE, the power pin of the connector outputs no power.
-
     **Default Value**: FALSE
     '''
     bus_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.BusType, 1150215)
     '''
-    Returns the bus type of the signal generator.
+    The bus type of the signal generator.
     '''
     cache = attributes.AttributeViBoolean(1050004)
     '''
-    Specifies whether to cache the value of properties.
-
-    When caching is enabled (TRUE), NI-FGEN keeps track of the current
-    instrument settings and avoids sending redundant commands to the
-    instrument. Thus, you can significantly increase execution speed.
-    NI-FGEN can choose always to cache or never to cache particular
-    properties regardless of the setting of this property. Use the `niFgen
-    Initialize With
-    Options <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Initialize_With_Options.html')>`__
-    VI to override this value.
-
-    **Default Value**: TRUE
+    Specifies whether to cache the value of attributes.   When caching is enabled, NI-FGEN keeps track of  the current device settings and avoids sending redundant commands to  the device. Thus, you can significantly increase execution speed.
+    NI-FGEN can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.  Use niFgen_InitWithOptions to override the default value.
     '''
     cal_adc_input = attributes.AttributeEnum(attributes.AttributeViInt32, enums.CalADCInput, 1150227)
     '''
-    Specifies the input of the calibration ADC. The ADC can take a reading
-    from several inputs: the analog output, a 2.5 V reference, and ground.
-    The latter two inputs are used to calibrate the ADC itself.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the input of the calibration ADC. The ADC can take a reading from several inputs: the analog output, a 2.5 V reference, and ground.
     '''
     channel_count = attributes.AttributeViInt32(1050203)
     '''
-    Returns the number of channels that NI-FGEN supports. For each property
-    for which IVI_VAL_MULTI_CHANNEL is set, the IVI engine maintains a
-    separate cache value for each channel.
+    Returns the number of channels that the specific instrument  driver supports.
+    For each attribute for which IVI_VAL_MULTI_CHANNEL  is set, the IVI Engine maintains a separate cache value for each channel.
     '''
     channel_delay = attributes.AttributeViReal64(1150369)
     '''
-    Specifies the delay to apply to the analog output of the channel
-    specified by the `Active Channel <pniFgen_ActiveChannel.html>`__
-    property.
-
-    You can use the output delay to configure the timing relationship
-    between channels on a multichannel device. Values for this property can
-    be zero or positive. A value of zero indicates that the channels are
-    aligned. A positive value delays the analog output by the specified
-    number of seconds.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies, in seconds, the delay to apply to the analog output of the channel specified by the channel string. You can use the channel delay to configure the timing relationship between channels on a multichannel device. Values for this attribute can be zero or positive. A value of zero indicates that the channels are aligned. A positive value delays the analog output by the specified number of seconds.
     '''
     clock_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ClockMode, 1150110)
     '''
-    Specifies the Sample Clock mode for the signal generator.
-
-    For signal generators that support it, this property allows switching
-    the Sample Clock to a high-resolution clocking mode. When in divide-down
-    sampling mode, the sample rate can be set only to certain frequencies,
-    based on dividing down the Sample Clock. However, in high-resolution
-    mode, the sample rate may be set to any value.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Controls which clock mode is used for the signal generator.
+    For signal generators that support it, this attribute allows switching the sample  clock to High-Resolution mode. When in Divide-Down  mode, the sample rate can only be set to certain frequences, based on  dividing down the update clock. However, in High-Resolution mode, the  sample rate may be set to any value.
     '''
     common_mode_offset = attributes.AttributeViReal64(1150366)
     '''
-    Specifies the value the signal generator adds to or subtracts from the
-    arbitrary waveform data. This property applies only when set the
-    `Terminal Configuration <pniFgen_TerminalConfiguration.html>`__ property
-    to **Differential**. Common-mode offset is applied to the signals
-    generated at each differential output terminal.
+    Specifies, in volts, the value the signal generator adds to or subtracts from the arbitrary waveform data. This attribute applies only when you set the NIFGEN_ATTR_TERMINAL_CONFIGURATION attribute to NIFGEN_VAL_DIFFERENTIAL. Common mode offset is applied to the signals generated at each differential output terminal.
     '''
     data_marker_events_count = attributes.AttributeViInt32(1150273)
     '''
@@ -300,234 +144,104 @@ class _SessionBase(object):
     '''
     data_marker_event_level_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DataMarkerEventLevelPolarity, 1150338)
     '''
-    Specifies the output polarity of the Data Marker Event. Refer to `Data
-    Marker
-    Events <javascript:LaunchHelp('SigGenHelp.chm::/events_data_markers.html')>`__
-    topic for more information about Data Marker Event polarity.
+    Specifies the output polarity of the Data marker event.
     '''
     data_marker_event_output_terminal = attributes.AttributeViString(1150339)
     '''
-    Specifies the destination terminal for the Data Marker Event. For a list
-    of the terminals available on your device, refer to the Routes topic for
-    your device or the **Device Routes** tab in MAX.
-
-    Note:
-    NI recommends using a data sample rate of less than 200 MS/s for data
-    markers routed to RTSI. Faster sample rates may lead to unwanted
-    behavior.
+    Specifies the destination terminal for the Data Marker Event.
     '''
     data_transfer_block_size = attributes.AttributeViInt32(1150241)
     '''
-    Specifies the number of samples at a time to download to onboard memory.
-    This property is useful when the total data to be transferred to onboard
-    memory is large.
+    The number of samples at a time to download to onboard memory. Useful when the total data to be transferred to onboard memory is large.
     '''
     data_transfer_maximum_bandwidth = attributes.AttributeViReal64(1150373)
     '''
-    Specifies the maximum amount of bus bandwidth to use for data transfers.
-
-    The signal generator limits data transfer speeds on the PCI Express bus
-    to the value you specify for this property. Set this property to
-    optimize bus bandwidth usage for multidevice streaming applications by
-    preventing the signal generator from consuming all the available
-    bandwidth on a PCI Express link when waveforms are being written to the
-    onboard memory of the device.
+    Specifies the maximum amount of bus bandwidth (in bytes per second) to use for data transfers. The signal generator limits data transfer speeds on the PCIe bus to the value you specify for this attribute. Set this attribute to optimize bus bandwidth usage for multi-device streaming applications by preventing the signal generator from consuming all of the available bandwidth on a PCI express link when waveforms are being written to the onboard memory of the device.
     '''
     data_transfer_maximum_in_flight_reads = attributes.AttributeViInt32(1150375)
     '''
-    Specifies the maximum number of concurrent PCI Express read requests the
-    signal generator can issue.
-
-    When transferring data from computer memory to device onboard memory
-    across the PCI Express bus, the signal generator can issue multiple
-    memory reads at the same time. In general, the larger the number of read
-    requests, the more efficiently the device uses the bus because the
-    multiple read requests keep the data flowing, even in a PCI Express
-    topology that has high latency due to PCI Express switches in the data
-    path. Most NI devices can issue a large number of read requests
-    (typically 8 or 16). By default, this property is set to the highest
-    value the signal generator supports.
-
-    If other devices in your system cannot tolerate long data latencies, it
-    may be helpful to decrease the number of in-flight read requests the NI
-    signal generator issues. This change helps to reduce the amount of data
-    the signal generator reads at one time.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the maximum number of concurrent PCI Express read requests the signal generator can issue.
+    When transferring data from computer memory to device onboard memory across the PCI Express bus, the signal generator can issue multiple memory reads at the same time. In general, the larger the number of read requests, the more efficiently the device uses the bus because the multiple read requests keep the data flowing, even in a PCI Express topology that has high latency due to PCI Express switches in the data path. Most NI devices can issue a large number of read requests (typically 8 or 16). By default, this attribute is set to the highest value the signal generator supports.
+    If other devices in your system cannot tolerate long data latencies, it may be helpful to decrease the number of in-flight read requests the NI signal generator issues. This helps to reduce the amount of data the signal generator reads at one time.
     '''
     data_transfer_preferred_packet_size = attributes.AttributeViInt32(1150374)
     '''
-    Specifies the preferred size of the data field in a PCI Express read
-    request packet.
-
-    In general, the larger the packet size, the more efficiently the device
-    uses the bus. By default, NI signal generators use the largest packet
-    size allowed by the system. However, due to different system
-    implementations, some systems may perform better with smaller packet
-    sizes.
-
-    Recommended values for this property are powers of two between 64 and
-    512.
+    Specifies the preferred size of the data field in a PCI Express read request packet. In general, the larger the packet size, the more efficiently the device uses the bus. By default, NI signal generators use the largest packet size allowed by the system. However, due to different system implementations, some systems may perform better with smaller packet sizes.
+    Recommended values for this attribute are powers of two between 64 and 512.
+    In some cases, the signal generator generates packets smaller than  the preferred size you set with this attribute.
+    You cannot change this attribute while the device is generating a waveform. If you want to change the device configuration, call the niFgen_AbortGeneration function or wait for the generation to complete.
 
     Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    :
     '''
     digital_data_mask = attributes.AttributeViInt32(1150236)
     '''
-    Specifies the mask to apply to the output on the digital connector. The
-    masked data is replaced with the data in the `Digital Static
-    Value <pniFgen_DigitalStaticValue.html>`__ property.
+    Specifies the mask to apply to the output on the digital connector. The masked data is replaced with the data in NIFGEN_ATTR_DIGITAL_STATIC_VALUE.
     '''
     digital_edge_script_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerDigitalEdgeEdge, 1150292)
     '''
-    Specifies the active edge for the Script Trigger. This property is used
-    when the `Script Trigger Type <pniFgen_ScriptTriggerType.html>`__
-    property is set to **Digital Edge**.
+    Specifies the active edge for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Edge.
     '''
     digital_edge_script_trigger_source = attributes.AttributeViString(1150291)
     '''
-    Specifies the source terminal for the Script Trigger. This property is
-    used when the `Script Trigger Type <pniFgen_ScriptTriggerType.html>`__
-    property is set to **Digital Edge**.
+    Specifies the source terminal for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Edge.
     '''
     digital_edge_start_trigger_edge = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartTriggerDigitalEdgeEdge, 1150282)
     '''
-    Specifies the active edge for the Start Trigger. This property is used
-    only when the `Start Trigger Type <pniFgen_StartTriggerType.html>`__
-    property is set to **Digital Edge**.
+    Specifies the active edge for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to Digital Edge.
     '''
     digital_edge_start_trigger_source = attributes.AttributeViString(1150281)
     '''
-    Specifies the source terminal for the Start Trigger. This property is
-    used only when the `Start Trigger
-    Type <pniFgen_StartTriggerType.html>`__ property is set to **Digital
-    Edge**.
-
-    You can specify any valid source terminal for this property. Valid
-    sources can be found in the Routes topic for your device or in
-    Measurement & Automation Explorer under the **Device Routes** tab.
-
-    Source terminals can be specified in two ways. If your device is named
-    Dev1 and your terminal is PFI0, then the terminal can be specified as a
-    fully qualified terminal name, "/Dev1/PFI0". You can also specify the
-    terminal using PFI 0.
+    Specifies the source terminal for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to Digital Edge.
     '''
     digital_filter_enabled = attributes.AttributeViBoolean(1150102)
     '''
-    Specifies whether the signal generator applies a digital filter to the
-    output signal. Set this property to TRUE to use a digital filter. This
-    property is valid in Arbitrary Waveform, Arbitrary Sequence, and Script
-    output modes. You also can use this property in Standard Function and
-    Frequency List output modes for user-defined waveforms.
-
-    **Default Value**: FALSE
+    Controls whether the signal generator applies a digital filter to the output signal. This attribute is valid in arbitrary waveform, arbitrary sequence, and script modes. This attribute can also be used in standard function and frequency list modes for user-defined waveforms.
     '''
     digital_filter_interpolation_factor = attributes.AttributeViReal64(1150218)
     '''
-    Specifies the interpolation factor when the `Digital Filter
-    Enabled <pniFgen_DigitalFilterEnabled.html>`__ property is set to TRUE.
-
-    **Valid Values**: 2, 4, and 8
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    This attribute only affects the device when NIFGEN_ATTR_DIGITAL_FILTER_ENABLED is set to VI_TRUE. If you do not set this attribute directly, NI-FGEN automatically selects the maximum interpolation factor allowed for the current sample rate. Valid values are 2, 4, and 8.
     '''
     digital_gain = attributes.AttributeViReal64(1150254)
     '''
-    Specifies a factor by which the signal generator digitally multiplies
-    generated data before converting it to an analog signal in the DAC. For
-    a digital gain greater than 1.0, the product of digital gain times the
-    generated data must be inside the range ±1.0, assuming floating point
-    data. If the product exceeds these limits, the signal generator clips
-    the output signal, and an error results.
-
-    Some signal generators support both digital gain and analog gain,
-    specified with the `Amplitude <pniFgen_Amplitude.html>`__ property or
-    `Arbitrary Waveform Gain <pniFgen_ArbitraryWaveformGain.html>`__
-    property. Digital gain can be changed during generation without the
-    glitches that may occur when changing analog gains, because of relay
-    switching. However, the DAC output resolution is a function of analog
-    gain, so only analog gain makes full use of the resolution of the DAC.
-
-    **Default Value**: 1
+    Specifies a factor by which the signal generator digitally multiplies generated data before converting it to an analog signal in the DAC. For a digital gain greater than 1.0, the product of digital gain times the generated data must be inside the range plus or minus 1.0 (assuming floating point data).  If the product exceeds these limits, the signal generator clips the output signal, and an error results.
+    Some signal generators support both digital gain and an analog gain (analog gain is specified with the NIFGEN_ATTR_FUNC_AMPLITUDE attribute or the NIFGEN_ATTR_ARB_GAIN attribute). Digital gain can be changed during generation without the glitches that may occur when changing analog gains, due to relay switching. However, the DAC output resolution is a function of analog gain, so only analog gain makes full use of the resolution of the DAC.
     '''
     digital_level_script_trigger_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerDigitalLevelActiveLevel, 1150294)
     '''
-    Specifies the active level for the Script Trigger. This property is used
-    when the `Script Trigger Type <pniFgen_ScriptTriggerType.html>`__
-    property is set to **Digital Level**.
+    Specifies the active level for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Level.
     '''
     digital_level_script_trigger_source = attributes.AttributeViString(1150293)
     '''
-    Specifies the source terminal for the Script Trigger. This property is
-    used when the `Script Trigger Type <pniFgen_ScriptTriggerType.html>`__
-    property is set to **Digital Level**.
+    Specifies the source terminal for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Level.
     '''
     digital_pattern_enabled = attributes.AttributeViBoolean(1150101)
     '''
-    Specifies whether the signal generator generates a digital pattern
-    corresponding to the output signal. Set this property to TRUE to
-    generate a digital pattern.
+    Controls whether the signal generator generates a digital pattern of the output signal.
     '''
     digital_static_value = attributes.AttributeViInt32(1150237)
     '''
-    Specifies the static value that replaces data masked by the `Digital
-    Data Mask <pniFgen_DigitalDataMask.html>`__ property.
+    Specifies the static value that replaces data masked by NIFGEN_ATTR_DIGITAL_DATA_MASK.
     '''
     direct_dma_enabled = attributes.AttributeViBoolean(1150244)
     '''
-    Enables the device for Direct DMA writes.
-
-    When enabled, all `niFgen Create
-    Waveform <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Create_Waveform_poly.html')>`__
-    VI and `niFgen Write
-    Waveform <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Write_Waveform_poly.html')>`__
-    VI calls that are given a data address in the Direct DMA window download
-    data residing on the Direct DMA device to the instrument onboard memory.
+    Enable the device for Direct DMA writes. When enabled, all Create Waveform and Write Waveform function calls that are given a data address in the Direct DMA Window will download data residing on the Direct DMA device to the instrument's onboard memory.
     '''
     direct_dma_window_address = attributes.AttributeViInt32(1150274)
     '''
-    Specifies the window address (beginning of window) of the waveform data
-    source. This window address is specified by your Direct DMA-compatible
-    data source.
+    Specifies the window address (beginning of window) of the waveform data source. This window address is specified by your Direct DMA-compatible data source.
     '''
     direct_dma_window_size = attributes.AttributeViInt32(1150245)
     '''
-    Specifies the size of the memory window provided by your Direct
-    DMA-compatible data source.
+    Specifies the size of the memory window in bytes (not samples) provided by your Direct DMA-compatible data source.
     '''
     done_event_delay = attributes.AttributeViReal64(1150358)
     '''
-    Specifies the amount of delay applied to a Done Event with respect to
-    the analog output of the signal generator.
-
-    A positive delay value indicates that the Done Event occurs after the
-    analog data, while a negative delay value indicates that the Done Event
-    occurs before the analog data. A value of zero aligns the Done Event
-    with the analog output.
-
-    You can specify the units of the delay value by setting the `Delay
-    Units <pniFgen_DoneEventDelayUnits.html>`__ property.
-
-    **Default Value**: 0
+    Specifies the amount of delay applied to a Done Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Done Event will come out after the analog data, while a negative delay  value indicates that the Done Event will come out before the analog data.  The default value is zero, which will align the Done Event with the analog output.  You can specify the units of the delay value by setting the  NIFGEN_ATTR_DONE_EVENT_DELAY attribute.
     '''
     done_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventDelayUnits, 1150359)
     '''
-    Specifies the units used for the `Done Event Delay
-    Value <pniFgen_DoneEventDelayValue.html>`__ property.
+    Specifies the units applied to the value of the NIFGEN_ATTR_DONE_EVENT_DELAY attribute. Valid units are seconds and sample clock periods.
     '''
     done_event_latched_status = attributes.AttributeViBoolean(1150351)
     '''
@@ -543,9 +257,7 @@ class _SessionBase(object):
     '''
     done_event_output_terminal = attributes.AttributeViString(1150315)
     '''
-    Specifies the destination terminal for the Done Event. For a list of the
-    terminals available on your device, refer to the Routes topic for your
-    device or the **Device Routes** tab in MAX.
+    Specifies the destination terminal for the Done Event.
     '''
     done_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DoneEventPulsePolarity, 1150319)
     '''
@@ -559,162 +271,66 @@ class _SessionBase(object):
     '''
     Specifies the pulse width units for the Done Event.
     '''
+    driver_setup = attributes.AttributeViString(1050007)
+    '''
+    Specifies the driver setup portion of the option string that was passed into the niFgen_InitWithOptions function.
+    '''
     exported_onboard_reference_clock_output_terminal = attributes.AttributeViString(1150322)
     '''
-    Specifies the terminal at which to export the onboard Reference Clock.
-
-    For a list of the terminals available on your device, refer to the
-    Routes topic for your device or the **Device Routes** tab in MAX.
+    Specifies the terminal to which to export the Onboard Reference Clock.
     '''
     exported_reference_clock_output_terminal = attributes.AttributeViString(1150321)
     '''
-    Specifies the terminal at which to export the Reference Clock.
-
-    For a list of the terminals available on your device, refer to the
-    Routes topic for your device or the **Device Routes** tab in MAX.
+    Specifies the terminal to which to export the Reference Clock.
     '''
     exported_sample_clock_divisor = attributes.AttributeViInt32(1150219)
     '''
-    Specifies the factor by which to divide the update (Sample) Clock before
-    it is exported.
-
-    To export the Sample Clock, use the `niFgen Export
-    Signal <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Export_Signal.html')>`__
-    VI or the `Exported Sample Clock Output
-    Terminal <pniFgen_ExportedSampleClockOutputTerminal.html>`__ property.
-
-    **Valid Values**: 1 to 4,096
-
-    **Default Value**: 1
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the niFgen_ExportSignal function or the  NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_OUTPUT_TERMINAL attribute.
     '''
     exported_sample_clock_output_terminal = attributes.AttributeViString(1150320)
     '''
-    Specifies the terminal at which to export the Sample Clock. If you
-    specify a divisor with the `Exported Sample Clock
-    Divisor <pniFgen_ExportedSampleClockDivisor.html>`__ property, the
-    Sample Clock exported with this property is the value of the Sample
-    Clock after it is divided-down.
-
-    For a list of the terminals available on your device, refer to the
-    Routes topic for your device or the **Device Routes** tab in MAX.
-
-    Note:
-    The signal generator must not be in the Generating state when you change
-    this property. To change the device configuration, call the `niFgen
-    Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the terminal to which to export the Sample Clock.
     '''
     exported_sample_clock_timebase_divisor = attributes.AttributeViInt32(1150230)
     '''
-    Specifies the factor by which to divide the device clock (Sample Clock
-    timebase) before it is exported.
-
-    To export the Sample Clock timebase, use the `niFgen Export
-    Signal <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Export_Signal.html')>`__
-    VI or the `Exported Sample Clock Timebase Output
-    Terminal <pniFgen_ExportedSampleClockTimebaseOutputTerminal.html>`__
-    property.
-
-    **Valid Values**: 1 to 4,194,304
-
-    Note: Not all devices support a divisor value of 1.
+    Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the niFgen_ExportSignal function or the  NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_TIMEBASE_OUTPUT_TERMINAL attribute.
     '''
     exported_sample_clock_timebase_output_terminal = attributes.AttributeViString(1150329)
     '''
-    Specifies the terminal at which to export the Sample Clock Timebase.
+    Specifies the terminal to which to export the Sample clock timebase. If you specify a divisor with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_TIMEBASE_DIVISOR attribute,   the Sample clock exported with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_TIMEBASE_OUTPUT_TERMINAL  attribute is the value of the Sample clock timebase after it is divided-down.  For a list of the terminals available on your device, refer to the Device Routes tab in MAX.
+    To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
 
-    For a list of the terminals available on your device, refer to the
-    Routes topic for your device or the **Device Routes** tab in MAX.
-
-    If you specify a divisor with the `Exported Sample Clock Timebase
-    Divisor <pniFgen_ExportedSampleClockTimebaseDivisor.html>`__ property,
-    the Sample Clock timebase exported with the Exported Sample Clock
-    Timebase Output Terminal property is the value of the Sample Clock
-    timebase after it is divided down.
-
-    Note:
-    The signal generator must not be in the Generating state when you change
-    this property. To change the device configuration, call the `niFgen
-    Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Note: The signal generator must not be in the Generating state when you change this attribute.
     '''
     exported_script_trigger_output_terminal = attributes.AttributeViString(1150295)
     '''
-    Specifies the output terminal for the exported Script Trigger.
-
-    Setting this property to an empty string means that when you commit the
-    session, the signal is removed from that terminal and, if possible, the
-    terminal is tristated.
-
-    For a list of the terminals available on your device, refer to the
-    Routes topic for your device or the **Device Routes** tab in MAX.
+    Specifies the output terminal for the exported Script trigger.
+    Setting this attribute to an empty string means that when you commit the session, the signal is removed from that terminal and, if possible, the terminal is tristated.
     '''
     exported_start_trigger_output_terminal = attributes.AttributeViString(1150283)
     '''
-    Specifies the destination terminal for exporting the Start Trigger.
-
-    For a list of the terminals available on your device, refer to the
-    Routes topic for your device or the **Device Routes** tab in MAX.
+    Specifies the destination terminal for exporting the Start trigger.
     '''
     external_clock_delay_binary_value = attributes.AttributeViInt32(1150233)
     '''
-    Specifies the external clock delay binary value.
+    Binary value of the external clock delay.
     '''
     external_sample_clock_multiplier = attributes.AttributeViReal64(1150376)
     '''
-    Specifies a multiplication factor to use to obtain a desired sample rate
-    from an external Sample Clock.
-
-    The resulting sample rate is equal to this factor multiplied by the
-    external Sample Clock rate. You can use this property to generate
-    samples at a rate higher than your external clock rate. When using this
-    property, you do not need to explicitly set the external clock rate.
+    Specifies a multiplication factor to use to obtain a desired sample rate from an external Sample clock.  The resulting sample rate is equal to this factor multiplied by the external Sample clock rate.  You can use this attribute to generate samples at a rate higher than your external clock rate.  When using this attribute, you do not need to explicitly set the external clock rate.
     '''
     file_transfer_block_size = attributes.AttributeViInt32(1150240)
     '''
-    Specifies the maximum number of samples to transfer at one time from the
-    device to host memory. This property is used in conjunction with the
-    `niFgen Create Waveform From
-    File <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Create_Waveform_poly.html')>`__
-    VI and the `niFgen Write Waveform From
-    File <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Write_Waveform_poly.html')>`__
-    VI.
-
-    If the requested value is not evenly divisible by the required
-    increment, this property is coerced up to the next 64-sample increment
-    (32-sample increment for complex samples).
+    The number of samples at a time to read from the file and download to onboard memory. Used in conjunction with the Create From File and Write From File functions.
     '''
     filter_correction_frequency = attributes.AttributeViReal64(1150104)
     '''
-    Specifies the filter correction frequency of the analog filter. This
-    property can correct for the ripples in the analog filter frequency
-    response at the frequency specified.
-
-    When using the Standard Waveform output mode, this property should be
-    set to the same frequency as the standard waveform. To disable filter
-    correction, set this property to 0.
-
-    **Units**: hertz (Hz)
-
-    **Default Value**: 0
+    Controls the filter correction frequency of the analog filter. This attribute corrects for the ripples in the analog filter frequency response at the frequency specified. For standard waveform output, the filter correction frequency should be set to be the same as the frequency of the standard waveform. To have no filter correction, set this attribute to 0 Hz.
     '''
     flatness_correction_enabled = attributes.AttributeViBoolean(1150323)
     '''
-    Specify a value of TRUE to enable flatness correction. When flatness
-    correction is enabled, the signal generator applies a flatness
-    correction factor to the generated sine wave to ensure the same output
-    power level at all frequencies.
-
-    Set this property to FALSE when performing flatness calibration.
+    When VI_TRUE, the signal generator applies a flatness correction factor to the generated sine wave in order to ensure the same output power level at all frequencies.
+    This attribute should be set to VI_FALSE when performing Flatness Calibration.
     '''
     fpga_bitfile_path = attributes.AttributeViString(1150412)
     '''
@@ -722,294 +338,152 @@ class _SessionBase(object):
     '''
     freq_list_duration_quantum = attributes.AttributeViReal64(1150214)
     '''
-    Returns the quantum that all durations must be a multiple of in a
-    frequency list.
+    Returns the quantum of which all durations must be a multiple in a  frequency list.
     '''
     freq_list_handle = attributes.AttributeViInt32(1150208)
     '''
-    Sets which frequency list the signal generator produces. You create a
-    frequency list using the `niFgen Create Frequency
-    List <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Create_Frequency_List.html')>`__
-    VI. The niFgen Create Frequency List VI returns a handle that you use to
-    identify the list.
-
-    **Default Value**: None
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Sets which frequency list the signal generator  produces. Create a frequency list using niFgen_CreateFreqList.  niFgen_CreateFreqList returns a handle that you can  use to identify the list.
     '''
     func_amplitude = attributes.AttributeViReal64(1250102)
     '''
-    Controls the amplitude of the standard waveform that the signal
-    generator produces. This value is the amplitude at the output terminal.
+    Controls the amplitude of the standard waveform that the  signal generator produces. This value is the amplitude at the  output terminal.
+    For example, to produce a waveform ranging from -5.00 V to +5.00 V, set  the amplitude to 10.00 V.
+    set the Waveform parameter to NIFGEN_VAL_WFM_DC.
+    Units: Vpk-pk
 
-    For example, to produce a waveform ranging from -5.00 V to +5.00 V, set
-    Amplitude property to 10.00 V.
-
-    **Units**: volts peak-to-peak (Vpk-pk)
-
-    **Default Value**: None
-
-    Note:
-    This parameter does not affect signal generator behavior when you set
-    the `Waveform <pniFgen_Waveform.html>`__ property to
-    **NIFGEN_VAL_WFM_DC**.
+    Note: This parameter does not affect signal generator behavior when you
     '''
     func_buffer_size = attributes.AttributeViInt32(1150238)
     '''
-    Contains the number of samples used in the standard function waveform
-    buffer.
+    This attribute contains the number of samples used in the standard function waveform  buffer. This attribute is only valid on devices that implement standard function mode  in software, and is read-only for all other devices.
+    implementation of Standard Function Mode on your device.
 
-    This property is valid only on devices that implement Standard Function
-    output mode in software, and it is read-only for all other devices.
-
-    Note:
-    Refer to the `Standard Function
-    Mode <javascript:LaunchHelp('SigGenHelp.chm::/Function_Generation_Mode.html')>`__
-    topic in the *NI Signal Generators Help* for more information about the
-    implementation of Standard Function output mode on your device.
+    Note: Refer to the Standard Function Mode topic for more information on the
     '''
     func_dc_offset = attributes.AttributeViReal64(1250103)
     '''
-    Controls the DC offset of the standard waveform that the signal
-    generator produces.
-
-    This value is the offset at the output terminal. The value is the offset
-    from ground to the center of the waveform you specify with the
-    `Waveform <pniFgen_Waveform.html>`__ property.
-
-    For example, to configure a waveform with an amplitude of 10.00 V to
-    range from 0.00 V to +10.00 V, set this property to 5.00 V.
-
-    **Units**: volts (V)
-
-    **Default Value**: None
+    Controls the DC offset of the standard waveform that the  signal generator produces.  This value is the offset at the output  terminal. The value is the offset from ground to the center of the  waveform that you specify with the Waveform parameter.
+    For example, to configure a waveform with an amplitude of 10.00 V to  range from 0.00 V to +10.00 V, set DC Offset to 5.00 V.
+    Units: volts
     '''
     func_duty_cycle_high = attributes.AttributeViReal64(1250106)
     '''
-    Specifies the duty cycle of the square wave the signal generator is
-    producing. Specify this property as a percentage of the time the square
-    wave is high in a cycle.
+    Controls the duty cycle of the square wave the signal generator  produces. Specify this attribute as a percentage of  the time the square wave is high in a cycle.
+    set the Waveform parameter to NIFGEN_VAL_WFM_SQUARE.
+    Units: Percentage of time the waveform is high
 
-    **Units**: Percentage of time the waveform is high
-
-    **Default Value**: 50%
-
-    Note:
-    This parameter only affects signal generator behavior when you set the
-    `Waveform <pniFgen_Waveform.html>`__ property to
-    **NIFGEN_VAL_WFM_SQUARE**.
+    Note: This parameter only affects signal generator behavior when you
     '''
     func_frequency = attributes.AttributeViReal64(1250104)
     '''
-    Controls the frequency of the standard waveform that the signal
-    generator produces.
-
-    **Units**: hertz (Hz)
-
-    **Default Value**: None
+    Controls the frequency of the standard waveform that the  signal generator produces.
+    Units: hertz
+    (1) This parameter does not affect signal generator behavior when you  set the Waveform parameter of the niFgen_ConfigureStandardWaveform function  to NIFGEN_VAL_WFM_DC.
+    (2) For NIFGEN_VAL_WFM_SINE, the range is between 0 MHz and 16 MHz, but the  range is between 0 MHz and 1 MHz for all other waveforms.
 
     Note:
-    This parameter does not affect signal generator behavior when you set
-    the `Waveform <pniFgen_Waveform.html>`__ property to
-    **NIFGEN_VAL_WFM_DC**. For **NIFGEN_VAL_WFM_SINE** , the range is
-    between 0 MHz and 16 MHz, but the range is between 0 MHz and 1 MHz for
-    all other waveforms.
+    :
     '''
     func_max_buffer_size = attributes.AttributeViInt32(1150239)
     '''
-    Sets the maximum number of samples that can be used in the standard
-    function waveform buffer. Increasing this value may increase the quality
-    of the waveform but may also increase the amount of time required to
-    change the waveform while running.
+    This attribute sets the maximum number of samples that can be used in the standard  function waveform buffer. Increasing this value may increase the quality of  the waveform. This attribute is only valid on devices that implement standard  function mode in software, and is read-only for all other devices.
+    implementation of Standard Function Mode on your device.
 
-    This property is valid only on devices that implement Standard Function
-    output mode in software, and it is read-only for all other devices.
-
-    Note:
-    Refer to the `Standard Function
-    Mode <javascript:LaunchHelp('SigGenHelp.chm::/Function_Generation_Mode.html')>`__
-    topic in the *NI Signal Generators Help* for more information about the
-    implementation of Standard Function output mode on your device.
+    Note: Refer to the Standard Function Mode topic for more information on the
     '''
     func_start_phase = attributes.AttributeViReal64(1250105)
     '''
-    Controls horizontal offset of the standard waveform the signal generator
-    produces. Specify this property in degrees of one waveform cycle.
+    Controls horizontal offset of the standard waveform the  signal generator produces. Specify this attribute in degrees of  one waveform cycle.
+    A start phase of 180 degrees means output generation begins halfway  through the waveform. A start phase of 360 degrees offsets the output by  an entire waveform cycle, which is identical to a start phase of 0  degrees.
+    set the Waveform parameter to NIFGEN_VAL_WFM_DC.
+    Units: Degrees of one cycle
 
-    A start phase of 180 degrees means output generation begins halfway
-    through the waveform. A start phase of 360 degrees offsets the output by
-    an entire waveform cycle, which is identical to a start phase of 0
-    degrees.
-
-    **Units**: Degrees of one cycle
-
-    **Default Value**: None
-
-    Note:
-    This property does not affect signal generator behavior when you set the
-    `Waveform <pniFgen_Waveform.html>`__ property to
-    **NIFGEN_VAL_WFM_DC**.
+    Note: This parameter does not affect signal generator behavior when you
     '''
     func_waveform = attributes.AttributeEnum(attributes.AttributeViInt32, enums.Waveform, 1250101)
     '''
-    Specifies which standard waveform the signal generator produces. Use
-    this property only when the `Output Mode <pniFgen_OutputMode.html>`__
-    property is set to **NIFGEN_VAL_OUTPUT_FUNC**.
-
-    **Default Value**: **NIFGEN_VAL_WFM_DC**
+    This channel-based attribute specifies which standard waveform the signal generator produces.
+    Use this attribute only when NIFGEN_ATTR_OUTPUT_MODE is set to  NIFGEN_VAL_OUTPUT_FUNC.
+    NIFGEN_VAL_WFM_SINE      - Sinusoid waveform
+    NIFGEN_VAL_WFM_SQUARE    - Square waveform
+    NIFGEN_VAL_WFM_TRIANGLE  - Triangle waveform
+    NIFGEN_VAL_WFM_RAMP_UP   - Positive ramp waveform
+    NIFGEN_VAL_WFM_RAMP_DOWN - Negative ramp waveform
+    NIFGEN_VAL_WFM_DC        - Constant voltage
+    NIFGEN_VAL_WFM_NOISE     - White noise
+    NIFGEN_VAL_WFM_USER      - User-defined waveform as defined with
+    niFgen_DefineUserStandardWaveform
     '''
     gain_dac_value = attributes.AttributeViInt32(1150223)
     '''
-    Specifies the value programmed to the Gain DAC. The value should be
-    treated as an unsigned, right-justified number.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the value programmed to the gain DAC. The value should be treated as an unsigned, right-justified number.
     '''
     group_capabilities = attributes.AttributeViString(1050401)
     '''
-    Returns a comma-separated list of class-extension groups that NI-FGEN
-    implements.
+    Returns a string that contains a comma-separated list of class-extention groups that  NI-FGEN implements.
     '''
     idle_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.IdleBehavior, 1150377)
     '''
-    Specifies the behavior of the output during the Idle state.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the behavior of the output during the Idle state.  The output can be configured to hold the last generated voltage before entering the Idle state or jump to the Idle Value.
     '''
     idle_value = attributes.AttributeViInt32(1150378)
     '''
-    Specifies the value to generate in the Idle state. You must set the
-    `Idle Behavior <pniFgen_IdleBehavior.html>`__ property to **Jump To
-    Value** to use this property.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the value to generate in the Idle state.  The Idle Behavior must be configured to jump to this value.
     '''
+    id_query_response = attributes.AttributeViString(1150001)
     instrument_firmware_revision = attributes.AttributeViString(1050510)
     '''
-    Returns the firmware revision information for the instrument you are
-    currently using.
+    A string that contains the firmware revision information  for the device that you are currently using.
     '''
     instrument_manufacturer = attributes.AttributeViString(1050511)
     '''
-    Returns the name of the instrument manufacturer you are currently using.
+    A string that contains the name of the device manufacturer you are currently  using.
     '''
     instrument_model = attributes.AttributeViString(1050512)
     '''
-    Returns the model number or name of the instrument that you are
-    currently using.
+    A string that contains the model number or name of the device that you  are currently using.
     '''
     interchange_check = attributes.AttributeViBoolean(1050021)
     '''
-    Specifies whether to perform interchangeability checking and log
-    interchangeability warnings when you call VIs. Set this property to TRUE
-    to enable interchangeability checking.
-
-    Interchangeability warnings indicate that using your application with a
-    different instrument might cause different behavior. Interchangeability
-    checking examines the properties in a capability group only if you
-    specify a value for at least one property within that group.
-    Interchangeability warnings can occur when a property affects the
-    behavior of the instrument and you have not set that property or the
-    property has been invalidated since you set it.
+    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  niFgen_InitiateGeneration.
+    Interchangeability warnings indicate that using your application with a  different device might cause different behavior.   Call niFgen_GetNextInterchangeWarning to extract interchange warnings.   Call niFgen_ClearInterchangeWarnings to clear the list  of interchangeability warnings without reading them.
+    Interchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group. Interchangeability warnings can  occur when an attribute affects the behavior of the device and you  have not set that attribute, or the attribute has been invalidated since you set it.
     '''
     io_resource_descriptor = attributes.AttributeViString(1050304)
     '''
-    Returns the resource descriptor NI-FGEN uses to identify the physical
-    device.
-
-    If you initialize NI-FGEN with a logical name, this property contains
-    the resource descriptor that corresponds to the entry in the IVI
-    Configuration utility.
-
-    If you initialize NI-FGEN with the resource descriptor, this property
-    contains that value.
+    Indicates the resource descriptor that NI-FGEN uses to identify the physical device.
+    If you initialize NI-FGEN with a logical name, this  attribute contains the resource descriptor that corresponds  to the entry in the IVI Configuration Utility.
+    If you initialize NI-FGEN with the resource  descriptor, this attribute contains that value.
     '''
     load_impedance = attributes.AttributeViReal64(1150220)
     '''
-    Specifies the load impedance connected to the analog output of the
-    channel.
-
-    If the load impedance is set to -1.0, NI-FGEN matches the load impedance
-    to the `Output Impedance <pniFgen_OutputImpedance.html>`__ property
-    value. NI-FGEN compensates to give the desired peak-to-peak voltage
-    amplitude or arbitrary gain (relative to 1 V).
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    This channel-based attribute specifies the load impedance connected to the analog output of the channel. If you set this attribute to NIFGEN_VAL_MATCHED_LOAD_IMPEDANCE (-1.0), NI-FGEN assumes that the load impedance matches the output impedance. NI-FGEN compensates to give the desired peak-to-peak voltage amplitude or arbitrary gain (relative to 1 V).
     '''
     logical_name = attributes.AttributeViString(1050305)
     '''
-    Returns the logical name you specified when opening the current IVI
-    session.
-
-    You may pass a logical name to the `niFgen
-    Initialize <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Initialize.html')>`__
-    VI or the `niFgen Initialize With
-    Options <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Initialize_With_Options.html')>`__
-    VI. The IVI Configuration utility must contain an entry for the logical
-    name. The logical name entry refers to a virtual instrument section in
-    the IVI Configuration file. The virtual instrument section specifies a
-    physical device and initial user options.
+    A string containing the logical name that you specified when opening the  current IVI session.
+    You may pass a logical name to niFgen_init or  niFgen_InitWithOptions.  The IVI Configuration Utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
     '''
     marker_events_count = attributes.AttributeViInt32(1150271)
     '''
-    Returns the number of markers supported by the device. Use this property
-    when the `Output Mode <pniFgen_OutputMode.html>`__ property is set to
-    **NIFGEN_VAL_OUTPUT_SCRIPT**.
+    Returns the number of markers supported by the device. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
     '''
     marker_event_delay = attributes.AttributeViReal64(1150354)
     '''
-    Specifies the amount of delay applied to a Marker Event with respect to
-    the analog output of the signal generator.
-
-    A positive delay value indicates that the Marker Event occurs after the
-    analog data, while a negative delay value indicates that the Marker
-    Event occurs before the analog data. The default value is zero, which
-    aligns the Marker Event with the analog output.
-
-    You can specify the units of the delay value using the `Marker Event
-    Delay Units <pniFgen_MarkerEventDelayUnits.html>`__ property.
-
-    **Default Value**: 0
+    Specifies the amount of delay applied to a Marker Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Marker Event will come out after the analog data, while a negative delay  value indicates that the Marker Event will come out before the analog data.  The default value is zero, which will align the Marker Event with the  analog output. You can specify the units of the delay value by setting the NIFGEN_ATTR_MARKER_EVENT_DELAY attribute.
     '''
     marker_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventDelayUnits, 1150355)
     '''
-    Specifies the units used for the `Marker Event Delay
-    Value <pniFgen_MarkerEventDelayValue.html>`__ property.
+    Specifies the units applied to the value of the NIFGEN_ATTR_MARKER_EVENT_DELAY attribute.  Valid units are seconds and sample clock periods.
     '''
     marker_event_latched_status = attributes.AttributeViBoolean(1150350)
     '''
-    Specifies the latched status of the specified Marker Event. Set this
-    property to FALSE to clear the latched status of the Marker Event.
+    Specifies the latched status of the specified Marker Event.
+    Write VI_TRUE to this attribute to clear the latched status of the Marker Event.
     '''
     marker_event_live_status = attributes.AttributeViBoolean(1150345)
     '''
-    Returns TRUE if the status of the specified Marker Event is live, and
-    FALSE otherwise.
+    Returns the live status of the specified Marker Event.
     '''
     marker_event_output_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventOutputBehavior, 1150342)
     '''
@@ -1018,9 +492,6 @@ class _SessionBase(object):
     marker_event_output_terminal = attributes.AttributeViString(1150312)
     '''
     Specifies the destination terminal for the Marker Event.
-
-    For a list of the terminals available on your device, refer to the
-    Routes topic for your device or the **Device Routes** tab in MAX.
     '''
     marker_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventPulsePolarity, 1150313)
     '''
@@ -1028,648 +499,319 @@ class _SessionBase(object):
     '''
     marker_event_pulse_width = attributes.AttributeViReal64(1150340)
     '''
-    Specifies the pulse width value of the Marker Event. Set the units for
-    the values with the `Marker Event Pulse Width
-    Units <pniFgen_MarkerEventPulseWidthUnits.html>`__ property.
+    Specifies the pulse width for the Marker Event.
     '''
     marker_event_pulse_width_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventPulseWidthUnits, 1150341)
     '''
-    Specifies the pulse width units of the Marker Event.
+    Specifies the pulse width units for the Marker Event.
     '''
     marker_event_toggle_initial_state = attributes.AttributeEnum(attributes.AttributeViInt32, enums.MarkerEventToggleInitialState, 1150343)
     '''
-    Specifies the initial state of the Marker Event.
+    Specifies the output polarity of the Marker Event.
     '''
     max_freq_list_duration = attributes.AttributeViReal64(1150213)
     '''
-    Returns the maximum duration, in seconds, of any one step in the
-    frequency list.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Returns the maximum duration of any one step in the frequency  list.
     '''
     max_freq_list_length = attributes.AttributeViInt32(1150211)
     '''
-    Returns the maximum number of steps that can be in a frequency list.
+    Returns the maximum number of steps that can be in a frequency  list.
     '''
     max_loop_count = attributes.AttributeViInt32(1250215)
     '''
-    Returns the maximum number of times the signal generator can repeat a
-    waveform in a sequence. Typically, this value is constant for the signal
-    generator.
+    Returns the maximum number of times that the signal generator can repeat a waveform in a sequence. Typically, this value is constant for the signal generator.
     '''
     max_num_freq_lists = attributes.AttributeViInt32(1150209)
     '''
-    Returns the maximum number of frequency lists that the signal generator
-    allows.
+    Returns the maximum number of frequency lists the signal generator allows.
     '''
     max_num_sequences = attributes.AttributeViInt32(1250212)
     '''
-    Returns the maximum number of arbitrary sequences the signal generator
-    allows.
+    Returns the maximum number of arbitrary sequences that the signal generator allows. Typically, this value is constant for the signal generator.
     '''
     max_num_waveforms = attributes.AttributeViInt32(1250205)
     '''
-    Returns the maximum number of arbitrary waveforms that the signal
-    generator allows. On some signal generators, this value may vary with
-    remaining onboard memory.
+    Returns the maximum number of arbitrary waveforms that the signal generator allows. Typically, this value is constant for the signal generator.
     '''
     max_sequence_length = attributes.AttributeViInt32(1250214)
     '''
-    Returns the maximum number of arbitrary waveforms the signal generator
-    allows in a sequence.
+    Returns the maximum number of arbitrary waveforms that the signal generator allows in a sequence. Typically, this value is constant for the signal generator.
     '''
     max_waveform_size = attributes.AttributeViInt32(1250208)
     '''
-    Returns the maximum number of points the signal generator allows in an
-    arbitrary waveform. On some signal generators, this value may vary with
-    remaining onboard memory.
+    Returns the size, in samples, of the largest waveform that can be created. This attribute reflects the space currently available, taking into account previously allocated waveforms and instructions.
     '''
     memory_size = attributes.AttributeViInt32(1150242)
     '''
-    Returns the amount of memory in bytes on the signal generator.
+    The total amount of memory, in bytes, on the signal generator.
     '''
     min_freq_list_duration = attributes.AttributeViReal64(1150212)
     '''
-    Returns the minimum duration, in seconds, of any one step in a frequency
-    list.
+    Returns the minimum number of steps that can be in a frequency  list.
     '''
     min_freq_list_length = attributes.AttributeViInt32(1150210)
     '''
-    Returns the minimum number of frequency lists that the signal generator
-    allows.
+    Returns the minimum number of frequency lists that the signal generator allows.
     '''
     min_sequence_length = attributes.AttributeViInt32(1250213)
     '''
-    Returns the minimum number of arbitrary waveforms the signal generator
-    allows in a sequence. Typically, this value is constant for the signal
-    generator.
+    Returns the minimum number of arbitrary waveforms that the signal generator allows in a sequence. Typically, this value is constant for the signal generator.
     '''
     min_waveform_size = attributes.AttributeViInt32(1250207)
     '''
-    Returns the minimum number of points the signal generator allows in an
-    arbitrary waveform. Typically, this value is constant for the signal
-    generator.
-
-    Note:
-    In some cases, you may need to supply a larger waveform than the value
-    specified by this property. Refer to the "Features Supported" topic for
-    your device in the *NI Signal Generators Help* for a table of minimum
-    waveform sizes.
+    Returns the minimum number of points that the signal generator allows in an arbitrary waveform. Typically, this value is constant for the signal generator.
     '''
     module_revision = attributes.AttributeViString(1150390)
     '''
-    Returns the revision letter of the module you are using.
+    A string that contains the module revision  for the device that you are currently using.
     '''
     offset_dac_value = attributes.AttributeViInt32(1150224)
     '''
-    Specifies the value programmed to the Offset DAC. The value should be
-    treated as an unsigned, right-justified number.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the value programmed to the offset DAC. The value should be treated as an unsigned, right-justified number.
     '''
     oscillator_freq_dac_value = attributes.AttributeViInt32(1150225)
     '''
-    Specifies the value programmed to the Oscillator DAC. The value should
-    be treated as an unsigned, right-justified number.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the value programmed to the oscillator frequency DAC. The value should be treated as an unsigned, right-justified number.
     '''
     oscillator_phase_dac_value = attributes.AttributeViInt32(1150232)
     '''
-    Specifies the oscillator phase DAC value.
+    The value of the oscillator phase DAC.
     '''
     osp_carrier_enabled = attributes.AttributeViBoolean(1150249)
     '''
-    Enables (TRUE) or disables (FALSE) generation of the carrier.
+    Enables or disables generation of the carrier.
     '''
     osp_carrier_frequency = attributes.AttributeViReal64(1150250)
     '''
-    Specifies the frequency of the generated carrier.
+    The frequency of the generated carrier.
     '''
     osp_carrier_phase_i = attributes.AttributeViReal64(1150251)
     '''
-    Specifies the I carrier phase, in degrees, at the first point of the
-    generated signal.
-
-    **Default Value**: 0.0
+    I Carrier Phase in degrees at the first point of the generation.
     '''
     osp_carrier_phase_q = attributes.AttributeViReal64(1150252)
     '''
-    Specifies the Q carrier phase, in degrees, at the first point of the
-    generated signal. This property is used only when the `Data Processing
-    Mode <pniFgen_DataProcessingMode.html>`__ property is set to
-    **Complex**.
-
-    **Default Value**: -90.0
+    Q Carrier Phase in degrees at the first point of the generation.  This attribute is only used when the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE  attribute is set to NIFGEN_VAL_OSP_COMPLEX.
     '''
     osp_cic_filter_enabled = attributes.AttributeViBoolean(1150257)
     '''
-    Enables (TRUE) or disables (FALSE) the CIC filter.
-
-    Note:
-    You must set the CIC Filter Enabled and `FIR Filter
-    Enabled <pniFgen_FIRFilterEnabled.html>`__ properties to the same value.
+    Enables or disables the CIC filter.
+    The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  attributes must have the same enable/disable setting.
     '''
     osp_cic_filter_gain = attributes.AttributeViReal64(1150263)
     '''
-    Specifies the gain applied at the final stage of the CIC filter. This
-    property is commonly used to compensate for attenuation in the FIR
-    filter. If you set the `FIR Filter Type <pniFgen_FilterType.html>`__ to
-    a value other than **Custom**, NI-FGEN calculates the CIC gain to
-    achieve unity gain between the FIR and CIC filters. Setting this
-    property overrides the value set by NI-FGEN.
+    Gain applied at the final stage of the CIC filter. Commonly used to compensate  for attenuation in the FIR filter. For FIR filter types other than Custom,  NI-FGEN calculates the CIC gain in order to achieve unity gain between the FIR  and CIC filters. Setting this attribute overrides the value set by NI-FGEN.
     '''
     osp_cic_filter_interpolation = attributes.AttributeViReal64(1150258)
     '''
-    Specifies the interpolation factor for the CIC filter. If you do not set
-    this value, NI-FGEN calculates the appropriate value based on the value
-    of the `IQ Rate <pniFgen_IQRate.html>`__ property.
+    Interpolation factor for the CIC filter. If you do not set this value, NI-FGEN  calculates the appropriate value based on the value of the NIFGEN_ATTR_OSP_IQ_RATE attribute.
     '''
     osp_compensate_for_filter_group_delay = attributes.AttributeViBoolean(1150389)
     '''
-    Adjusts for OSP filter group delay when aligning analog outputs and
-    events in OSP mode. If you set this property to TRUE, event outputs
-    align more closely with the analog output. The analog output also aligns
-    more closely between two devices synchronized using NI-TClk.
-
-    Note:
-    Group delay is the delay that occurs as a result of passing through a
-    FIR filter. At a low I/Q rate, the group delay can become so large that
-    some devices may not be able to align the events with the output. In
-    this case, you must increase the I/Q rate or disable this property.
+    Compensate for OSP Filter Group Delay. If this is enabled, the Event Outputs will be aligned  with the Analog Output. The Analog output will also be aligned between synchronized devices  (using NI-TClk).
     '''
     osp_data_processing_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.DataProcessingMode, 1150247)
     '''
-    Controls the way that data is processed by the OSP block.
-
-    Note:
-    When using the NI 5450/5451 with I/Q rates higher than 200 MS/s, NI-FGEN
-    restricts this property value to Complex.
+    The way in which data is processed by the OSP block.
     '''
     osp_enabled = attributes.AttributeViBoolean(1150246)
     '''
-    Enables (TRUE) or disables (FALSE) the OSP block of the signal
-    generator. When the OSP block is disabled, all OSP-related properties
-    are disabled and have no effect on the generated signal.
+    Enables or disables the OSP block of the signal generator. When the OSP block is disabled, all OSP-related attributes are disabled and have no effect on the generated signal.
     '''
     osp_fir_filter_enabled = attributes.AttributeViBoolean(1150255)
     '''
-    Specify TRUE to enables the FIR filter. Specify FALSE to disable the FIR
-    filter.
-
-    Note:
-    You must set the `CIC Filter Enabled <pniFgen_CICFilterEnabled.html>`__
-    property and the FIR Filter Enabled property to the same value.
+    Enables or disables the FIR filter.
+    The NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  attributes must have the same enable/disable setting.
     '''
     osp_fir_filter_flat_passband = attributes.AttributeViReal64(1150261)
     '''
-    Specifies the passband value to use when calculating the FIR filter
-    coefficients. The FIR filter is designed to be flat to passband × I/Q
-    rate. This property is used only when the `Filter
-    Type <pniFgen_FilterType.html>`__ property is set to **Flat**.
+    Passband value to use when calculating the FIR filter coefficients.  The FIR filter is designed to be flat to passband × IQ rate.  This attribute is used only when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_FLAT.
     '''
     osp_fir_filter_gaussian_bt = attributes.AttributeViReal64(1150262)
     '''
-    Specifies the BT value to use when calculating the pulse-shaping FIR
-    filter coefficients. The BT value is the product of the -3 dB bandwidth
-    and the symbol period. This property is used only when the `Filter
-    Type <pniFgen_FilterType.html>`__ property is set to **Gaussian**.
+    BT value to use when calculating the pulse-shaping FIR filter coefficients.  Only used when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE attribute is set to  NIFGEN_VAL_OSP_GAUSSIAN.
     '''
     osp_fir_filter_interpolation = attributes.AttributeViReal64(1150256)
     '''
-    Specifies the interpolation factor for the FIR filter. If you do not set
-    this value, NI-FGEN calculates the appropriate value based on the value
-    of the `IQ Rate <pniFgen_IQRate.html>`__ property.
+    Interpolation factor for the FIR filter. If you do not set this value,  NI-FGEN calculates the appropriate value based on the value of the NIFGEN_ATTR_OSP_IQ_RATE attribute.
     '''
     osp_fir_filter_raised_cosine_alpha = attributes.AttributeViReal64(1150260)
     '''
-    Specifies the alpha value to use when calculating the pulse-shaping FIR
-    filter coefficients. This property is used only when the `Filter
-    Type <pniFgen_FilterType.html>`__ property is set to **Raised Cosine**.
+    Alpha value to use when calculating the pulse shaping FIR filter  coefficients. Only used when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_RAISED_COSINE.
     '''
     osp_fir_filter_root_raised_cosine_alpha = attributes.AttributeViReal64(1150259)
     '''
-    Specifies the alpha value to use when calculating the pulse-shaping FIR
-    filter coefficients. This property is used only when the `Filter
-    Type <pniFgen_FilterType.html>`__ property is set to **Root Raised
-    Cosine**.
+    Alpha value to use when calculating the pulse-shaping FIR filter  coefficients. This attribute is used only when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_ROOT_RAISED_COSINE.
     '''
     osp_fir_filter_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.FilterType, 1150253)
     '''
-    Specifies the pulse-shaping filter type for the FIR filter.
+    Pulse-shaping filter type for the FIR filter.
     '''
     osp_frequency_shift = attributes.AttributeViReal64(1150371)
     '''
     Specifies the amount of frequency shift applied to the baseband signal.
-
-    Note:
-    When using the NI 5450/5451 with I/Q rates higher than 200 MS/s, NI-FGEN
-    restricts this property value to 0.
     '''
     osp_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OSPMode, 1150370)
     '''
-    Specifies the generation mode of the OSP, which determines the type of
-    data contained in the output signal.
-
-    For more information about the OSP modes your device supports, refer to
-    `Devices <javascript:LaunchHelp('SigGenHelp.chm::/device_specific.html')>`__
-    section of the *NI Signal Generators Help*.
-
-    Note:
-    When using the NI 5450/5451 with I/Q rates higher than 200 MS/s, NI-FGEN
-    restricts this property value to BaseBand.
+    Specifies the generation mode of the OSP, which determines the type of data contained in the output signal.
     '''
     osp_overflow_error_reporting = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OSPOverflowErrorReporting, 1150268)
     '''
-    Configures error reporting when the OSP block detects an overflow in any
-    of its stages. Overflows lead to waveform clipping.
-
-    You can use the `OSP Overflow Status <pniFgen_OSPOverflowStatus.html>`__
-    property to query for overflow conditions regardless of the setting of
-    the OSP Overflow Error Reporting property. The device continues to
-    generate after an overflow regardless of the setting of the OSP Overflow
-    Error Reporting property.
+    Configures error reporting when the OSP block detects an overflow in any of its stages.  Overflows lead to clipping of the waveform.
+    You can use the NIFGEN_ATTR_OSP_OVERFLOW_STATUS attribute to query for overflow  conditions whether or not the NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute is  enabled. The device will continue to generate after an overflow whether or not the  NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute is enabled.
     '''
     osp_overflow_status = attributes.AttributeViInt32(1150269)
     '''
-    Returns a bit field of the overflow status in any stage of the OSP
-    block. This property is functional regardless of the value for the `OSP
-    Overflow Error Reporting <pniFgen_OSPOverflowErrorReporting.html>`__
-    property.
-
-    Set this property to 0 to clear the current OSP overflow status.
+    Returns a bit field of the overflow status in any stage of the OSP block.  This attribute is functional regardless of the value for the  NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute.
+    Write 0 to this attribute to clear the current NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING value.
     '''
     osp_pre_filter_gain_i = attributes.AttributeViReal64(1150264)
     '''
-    Specifies the digital gain to apply to the I data stream before any
-    filtering by the OSP block.
-
-    **Valid Values**: -2.0 to 2.0
-
-    **Default Value**: 1.0
+    Digital gain to apply to the I data stream before any filtering by the OSP block.
     '''
     osp_pre_filter_gain_q = attributes.AttributeViReal64(1150265)
     '''
-    Specifies the digital gain to apply to the Q data stream before any
-    filtering by the OSP block. This property is used only when the `Data
-    Processing Mode <pniFgen_DataProcessingMode.html>`__ property is set to
-    **Complex**.
-
-    **Valid Values**: -2.0 to 2.0
-
-    **Default Value**: 1.0
+    Digital gain to apply to the Q data stream before any filtering by the OSP block.  This attribute is only used when the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute  is set to NIFGEN_VAL_OSP_COMPLEX.
     '''
     osp_pre_filter_offset_i = attributes.AttributeViReal64(1150266)
     '''
-    Specifies the digital offset to apply to the I data stream. This offset
-    is applied after the prefilter gain and before any filtering.
-
-    **Valid Values**: -1.0 to 1.0
-
-    **Default Value**: 0.9
+    Digital offset to apply to the I data stream. This offset is applied after  the Pre-Filter Gain and before any filtering.
     '''
     osp_pre_filter_offset_q = attributes.AttributeViReal64(1150267)
     '''
-    Specifies the digital offset to apply to the Q data stream. This offset
-    is applied after the prefilter gain and before any filtering. This
-    property is only used when the `Data Processing
-    Mode <pniFgen_DataProcessingMode.html>`__ property is set to
-    **Complex**.
-
-    **Valid Values**: -1.0 to 1.0
-
-    **Default Value**: 0.0
+    Digital offset to apply to the Q data stream. This offset is applied after  the Pre-Filter Gain and before any filtering. This attribute is used only when  the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute is set to NIFGEN_VAL_OSP_COMPLEX.
     '''
     output_enabled = attributes.AttributeViBoolean(1250003)
     '''
-    Specifies whether the signal that the signal generator produces appears
-    at the output connector.
+    This channel-based attribute specifies whether the signal that the signal generator produces appears at the output connector.
     '''
     output_impedance = attributes.AttributeViReal64(1250004)
     '''
-    Specifies the output impedance of the signal generator at the output
-    connector. NI signal generators have an output impedance of 50 ohms and
-    an optional 75 ohms on select modules.
-
-    If the `Load Impedance <pniFgen_LoadImpedance.html>`__ property value
-    matches the output impedance, the voltage at the signal output connector
-    is at the necessary level. The voltage at the signal output connector
-    varies with load output impedance, up to doubling the voltage for a
-    high-impedance load.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    This channel-based attribute specifies the signal generator output impedance at the output connector. NI signal sources modules have an output impedance of 50 ohms and an optional 75 ohms on select modules. If the load impedance matches the output impedance, then the voltage at the signal output connector is at the needed level. The voltage at the signal output connector varies with load output impedance, up to doubling the voltage for a high-impedance load.
     '''
     output_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.OutputMode, 1250001)
     '''
-    Specifies the output mode the signal generator uses. The output mode you
-    specify determines which VIs and properties you use to configure the
-    waveform the signal generator produces.
+    Sets which output mode the signal generator will use. The value you specify determines which functions and attributes you use to configure the waveform the signal generator produces.
 
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Note: The signal generator must not be in the Generating state when you change this attribute. To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
     '''
     p2p_data_transfer_permission_address = attributes.AttributeViInt64(1150398)
     '''
-    Indicates the address in the writer peer to which the signal generator
-    sends data transfer permission credits. This property is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
+    Indicates the address in the writer peer to which the signal generator should send data transfer permission credits.  This attribute is endpoint based.
 
     Note:
-    You can use this property only when the `Manual Configuration
-    Enabled <pniFgen_ManualConfigurationEnabled.html>`__ property is set to
-    TRUE.
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
     '''
     p2p_data_transfer_permission_address_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.P2PAddressType, 1150399)
     '''
-    Specifies the type of address for the `Data Transfer Permission
-    Address <pniFgen_DataTransferPermissionAddress.html>`__ property. This
-    property is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
-
-    **Default Value**: **Virtual**
+    Indicates the address in the writer peer to which the signal generator should send data transfer permission credits.  This attribute is endpoint based.
 
     Note:
-    You can only use this property when the `Manual Configuration
-    Enabled <pniFgen_ManualConfigurationEnabled.html>`__ property is set to
-    TRUE.
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
     '''
     p2p_data_transfer_permission_initial_credits = attributes.AttributeViInt32(1150408)
     '''
-    Specifies the initial amount of data, in samples per channel, that the
-    writer peer is allowed to transfer over the bus into the configured
-    endpoint when the peer-to-peer data stream is enabled. If you do not set
-    this property and the endpoint is empty, credits equal to the full size
-    of the endpoint are issued to the writer peer. If data has been written
-    to the endpoint using the `niFgen Write P2P Endpoint
-    I16 <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Write_P2P_Endpoint_I16.html')>`__
-    VI prior to enabling the stream, credits equal to the remaining space
-    available in the endpoint are issued to the writer peer. This property
-    is coerced up by NI-FGEN to 8-byte boundaries.
+    Specifies the initial amount of data, in samples per channel, that the writer peer is allowed to transfer over the bus  into the configured endpoint when the peer-to-peer data stream is enabled. If you do not set this property and the endpoint  is empty, credits equal to the full size of the endpoint are issued to the writer peer. If data has been written to the  endpoint using the niFgen_WriteP2PEndpointI16 function prior to enabling the stream, credits equal to the remaining space  available in the endpoint are issued to the writer peer. This attribute is coerced up by NI-FGEN to 8-byte boundaries.
     '''
     p2p_data_transfer_permission_interval = attributes.AttributeViInt32(1150400)
     '''
-    Specifies the interval, in samples per channel, at which the signal
-    generator issues credits to allow the writer peer to transfer data over
-    the bus into the configured endpoint. Refer to the `Flow
-    Control <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Flow_Control.html')>`__
-    topic in the *NI Signal Generators Help* for more information. This
-    property is coerced up by NI-FGEN to the nearest 128-byte boundary. This
-    property is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
-
-    **Default Value**: 1,024
+    Specifies the interval, in samples per channel, at which the signal generator issues credits to allow the writer  peer to transfer data over the bus into the configured endpoint. Refer to the Flow Control topic in the NI Signal  Generators Help for more information. This attribute is coerced up by NI-FGEN to the nearest 128 byte boundary.  This attribute is endpoint based.
+    Default Value: 1,024 samples per channel
     '''
     p2p_destination_channels = attributes.AttributeViString(1150392)
     '''
-    Specifies which channels are written to by a peer-to-peer endpoint. If
-    multiple channels are specified, data is deinterleaved to each channel.
-    Channels are configured using the `niFgen Configure
-    Channels <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Configure_Channels.html')>`__
-    VI. This property is `endpoint
-    based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
-
-    **Default Value**: "" (empty string), all channels are configured
+    Specifies which channels will be written to by a peer-to-peer endpoint. If multiple channels are specified,  data is deinterleaved to each channel. The default value is an empty string, which means all configured channels.  Channels are configured using the niFgen_ConfigureChannels function. This attribute is endpoint based.
     '''
     p2p_done_notification_address = attributes.AttributeViInt64(1150405)
     '''
-    Returns the signal generator address to which the writer peer sends the
-    `Done Notification Value <pniFgen_DoneNotificationValue.html>`__. This
-    property is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
-    Refer to the `Stopping a Peer-to-Peer
-    Generation <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Stopping_Generation.html')>`__
-    topic in the *NI Signal Generators Help* for more information about
-    using Done Notifications.
+    Specifies the signal generator address to which the writer peer sends the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_VALUE.  This attribute is endpoint based. Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help  for more information.
 
     Note:
-    You can only use this property when the `Manual Configuration
-    Enabled <pniFgen_ManualConfigurationEnabled.html>`__ property is set to
-    TRUE.
+    You can use this attribute only when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
     '''
     p2p_done_notification_address_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.P2PAddressType, 1150406)
     '''
-    Specifies the address type of the `Done Notification
-    Address <pniFgen_DoneNotificationAddress.html>`__ property. This
-    property is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
-    Refer to the `Stopping a Peer-to-Peer
-    Generation <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Stopping_Generation.html')>`__
-    topic in the *NI Signal Generators Help* for more information about
-    using Done Notifications.
-
-    Default Value: **Virtual**
+    Specifies the address type of the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_ADDRESS attribute. This attribute is endpoint based.  Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help for more information.
 
     Note:
-    You can only use this property when the `Manual Configuration
-    Enabled <pniFgen_ManualConfigurationEnabled.html>`__ property is set to
-    TRUE.
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
     '''
     p2p_done_notification_value = attributes.AttributeViInt32(1150407)
     '''
-    Returns the value the writer peer writes to the address specified by the
-    `Done Notification Address <pniFgen_DoneNotificationAddress.html>`__
-    property. This property is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
-    Refer to the `Stopping a Peer-to-Peer
-    Generation <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Stopping_Generation.html')>`__
-    topic in the *NI Signal Generators Help* for more information about
-    using Done Notifications.
+    Specifies the value the writer peer should write to the address specified by the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_ADDRESS  attribute. This attribute is endpoint based. Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help  for more information.
 
     Note:
-    You can only use this property when the `Manual Configuration
-    Enabled <pniFgen_ManualConfigurationEnabled.html>`__ property is set to
-    TRUE.
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
     '''
     p2p_enabled = attributes.AttributeViBoolean(1150391)
     '''
-    Specifies whether the signal generator reads data from the peer-to-peer
-    endpoint (TRUE) instead of reading it from the onboard memory. This
-    property is `endpoint
-    based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
-
-    **Default Value**: FALSE
+    Specifies whether the signal generator reads data from the peer-to-peer endpoint, as opposed to  the typical method of reading it from the onboard memory. This attribute is endpoint based.
     '''
     p2p_endpoint_count = attributes.AttributeViInt32(1150396)
     '''
-    Returns the number of peer-to-peer FIFO endpoints supported by the
-    device.
+    Returns the number of peer-to-peer FIFO endpoints supported by the device.
     '''
     p2p_endpoint_fullness_start_trigger_level = attributes.AttributeViInt32(1150410)
     '''
-    Specifies the number of samples the endpoint needs to receive before the
-    signal generator starts generation. This property applies only when the
-    `Start Trigger Type <pniFgen_StartTriggerType.html>`__ property is set
-    to **P2P Endpoint Fullness**. Refer to the `Flow
-    Control <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Flow_Control.html')>`__
-    topic in the *NI Signal Generators Help* for more information about
-    peer-to-peer operations. This property is coerced down to 8-byte
-    boundaries.
-
-    Note:
-    Due to an additional internal FIFO in the signal generator, the writer
-    peer actually must write 2,304 bytes more than the quantity of data
-    specified by this property to satisfy the trigger level.
+    Specifies the Endpoint threshold for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to P2P Endpoint Fullness.
     '''
     p2p_endpoint_size = attributes.AttributeViInt32(1150393)
     '''
-    Returns the size, in samples per channel, of the peer-to-peer endpoint.
-    This property is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
+    Returns the size, in samples per channel, of the peer-to-peer endpoint. This attribute is endpoint based.
     '''
     p2p_endpoint_window_address = attributes.AttributeViInt64(1150401)
     '''
-    Returns the signal generator address where endpoint data is sent by the
-    writer peer. The type of this address is specified by the `Endpoint
-    Window Address Type <pniFgen_EndpointWindowAddressType.html>`__
-    property. This property is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
+    Specifies the signal generator address where endpoint data is sent by the writer peer. The type of this address is specified  by the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS_TYPE attribute. This attribute is endpoint based.
 
     Note:
-    You can only use this property when the `Manual Configuration
-    Enabled <pniFgen_ManualConfigurationEnabled.html>`__ property is set to
-    TRUE.
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
     '''
     p2p_endpoint_window_address_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.P2PAddressType, 1150402)
     '''
-    Specifies the type of the `Endpoint Window
-    Address <pniFgen_EndpointWindowAddress.html>`__ property. This property
-    is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
-
-    **Default Value**: **Virtual**
+    Specifies the type of the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS attribute. This attribute is endpoint based.
 
     Note:
-    You can only use this property when the `Manual Configuration
-    Enabled <pniFgen_ManualConfigurationEnabled.html>`__ property is set to
-    TRUE.
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
     '''
     p2p_endpoint_window_size = attributes.AttributeViInt32(1150403)
     '''
-    Returns the size, in bytes, of the endpoint window. The endpoint window
-    is also described by the `Endpoint Window
-    Address <pniFgen_EndpointWindowAddress.html>`__ property and the
-    `Endpoint Window Address
-    Type <pniFgen_EndpointWindowAddressType.html>`__ property. This property
-    is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
+    Specifies the type of the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS attribute. This attribute is endpoint based.
 
     Note:
-    You can only use this property when the `Manual Configuration
-    Enabled <pniFgen_ManualConfigurationEnabled.html>`__ property is set to
-    TRUE.
+    You can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.
     '''
     p2p_manual_configuration_enabled = attributes.AttributeViBoolean(1150397)
     '''
-    Enables (TRUE) or disables (FALSE) manual configuration for a
-    peer-to-peer endpoint. Enabling this property disables automatic NI-P2P
-    stream manager flow control and Done Notifications.
+    Enables/disables manual configuration for a peer-to-peer endpoint. Enabling this attribute disables  automatic NI-P2P stream manager flow control and Done Notifications.
     '''
     p2p_most_space_available_in_endpoint = attributes.AttributeViInt32(1150395)
     '''
-    Returns the largest number of samples per channel available in the
-    endpoint since this property was last read. This property can be used to
-    determine how much endpoint space to use as a buffer against PCI Express
-    bus traffic latencies by reading the property and keeping track of the
-    largest value returned. This property is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
-
-    If you want to minimize the latency for data to move through the
-    endpoint and be generated by the signal generator, use the `Data
-    Transfer Permission Initial
-    Credits <pniFgen_DataTransferPermissionInitialCredits.html>`__ property
-    to grant fewer initial credits than the default of the entire endpoint
-    size.
+    Returns the largest number of samples per channel available in the endpoint since this attribute was last read.  Use this attribute to determine how much endpoint space to use as a buffer against PCI Express bus traffic  latencies by reading the attribute and keeping track of the largest value returned. This attribute is endpoint based.
+    If you wish to minimize the latency for data to move through the endpoint and be generated by the signal generator,  use the NIFGEN_ATTR_P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS attribute to grant fewer initial credits than the  default of the entire endpoint size.
     '''
     p2p_space_available_in_endpoint = attributes.AttributeViInt32(1150394)
     '''
-    Returns the current space available in the endpoint in samples per
-    channel. You can use this property when priming the endpoint with
-    initial data through the `niFgen Write P2P Endpoint
-    I16 <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Write_P2P_Endpoint_I16.html')>`__
-    VI to determine how many samples you can write. You also can use this
-    property to characterize the performance and measure the latency of the
-    peer-to-peer stream as data moves across the bus. This property is
-    `endpoint-based <javascript:LaunchHelp('SigGenHelp.chm::/P2P_Configuring_an_Endpoint.html')>`__.
+    Returns the current space available in the endpoint in samples per channel. You can use this attribute when  priming the endpoint with initial data through the niFgen_WriteP2PEndpointI16 function to determine how many  samples you can write. You can also use this attribute to characterize the performance and measure the latency  of the peer-to-peer stream as data moves across the bus. This attribute is endpoint based.
     '''
     pci_dma_optimizations_enabled = attributes.AttributeViBoolean(1150362)
     '''
-    Controls whether NI-FGEN allows performance optimizations for DMA
-    transfers. This property is only valid for PCI and PXI SMC-based
-    devices. This property is enabled (TRUE) by default, and NI recommends
-    leaving it enabled.
-
-    **Default Value**: TRUE
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Controls whether or not NI-FGEN allows performance optimizations for DMA transfers.
+    This attribute is only valid for PCI and PXI SMC-based devices.
+    This attribute is enabled (VI_TRUE) by default, and NI recommends leaving it enabled.
     '''
     post_amplifier_attenuation = attributes.AttributeViReal64(1150229)
     '''
-    Specifies the amount of post-amplifier attenuation to apply to the
-    signal, in dB.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the amount of post-amplifier attenuation that should be applied to the signal (in dB).
     '''
     pre_amplifier_attenuation = attributes.AttributeViReal64(1150228)
     '''
-    Specifies the amount of preamplifier attenuation to apply to the signal,
-    in dB.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the amount of pre-amplifier attenuation that should be applied to the signal (in dB).
     '''
     range_check = attributes.AttributeViBoolean(1050002)
     '''
-    Specifies whether to validate property values and VI parameters. Set
-    this property to TRUE to enable range-checking.
-
-    If enabled, in some cases, NI-FGEN does extra validation of parameter
-    values that you pass to NI-FGEN VIs. Range checking parameters is useful
-    for debugging. After you validate your program, you can set this
-    property to FALSE to disable range checking and maximize performance.
-
-    Use the `niFgen Initialize With
-    Options <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Initialize_With_Options.html')>`__
-    VI to override the value of this property.
-
-    **Default Value**: TRUE
+    Specifies whether to validate attribute values and function parameters.  If enabled, NI-FGEN validates the parameter values that  you pass to the functions. Range-checking  parameters is very useful for debugging. After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.
+    Default Value: VI_TRUE
+    Use niFgen_InitWithOptions to override the default value.
     '''
     ready_for_start_event_level_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ReadyForStartEventActiveLevel, 1150311)
     '''
@@ -1677,190 +819,111 @@ class _SessionBase(object):
     '''
     ready_for_start_event_live_status = attributes.AttributeViBoolean(1150348)
     '''
-    Returns TRUE if the status of the specified Ready for Start Event is
-    live, and FALSE otherwise.
+    Returns the live status of the specified Ready For Start Event.
     '''
     ready_for_start_event_output_terminal = attributes.AttributeViString(1150310)
     '''
-    Specifies the destination terminal for the Ready for Start Event. For a
-    list of the terminals available on your device, refer to the Routes
-    topic for your device or the **Device Routes** tab in MAX.
+    Specifies the destination terminal for the Ready for Start Event.
     '''
     record_coercions = attributes.AttributeViBoolean(1050006)
     '''
-    Specifies whether the IVI engine keeps a list of the value coercions it
-    makes for ViInt32 and ViReal64 properties. Set this property to TRUE to
-    record the coercions. Use the `niFgen Initialize With
-    Options <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Initialize_With_Options.html')>`__
-    VI to override this value.
-
-    **Default Value**: FALSE
+    Specifies whether the IVI Engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   Call niFgen_GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
+    Default Value: VI_FALSE
+    Use niFgen_InitWithOptions to override default value.
     '''
     reference_clock_source = attributes.AttributeEnum(attributes.AttributeViString, enums.ReferenceClockSource, 1150113)
     '''
-    Specifies the Reference Clock source used by the signal generator.
+    Specifies the reference clock source used by the signal generator.
+    The signal generator derives the frequencies and sample rates that it uses  to generate waveforms from the source you specify.  For example, when you set this attribute to ClkIn, the signal  generator uses the signal it receives at the CLK IN front  panel connector as the Reference clock.
+    To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
 
-    The signal generator derives the frequencies and sample rates that it
-    uses to generate waveforms from the source you specify. For example,
-    when you set this property to **Clock In**, the signal generator uses
-    the signal it receives at its CLK In front panel connector as its
-    Reference Clock.
-
-    Note:
-    The signal generator must not be in the Generating state when you change
-    this property. To change the device configuration, call the `niFgen
-    Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Note: The signal generator must not be in the Generating state when you change this attribute.
     '''
     ref_clock_frequency = attributes.AttributeViReal64(1150107)
     '''
-    Specifies the Reference Clock frequency. The signal generator uses the
-    Reference Clock to derive frequencies and sample rates when generating
-    output.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Sets the frequency of the signal generator reference  clock. The signal generator uses the reference clock to derive  frequencies and sample rates when generating output.
     '''
     sample_clock_absolute_delay = attributes.AttributeViReal64(1150231)
     '''
-    Specifies the delay in seconds to apply to an external Sample Clock.
-    This property is useful when trying to align the output of two devices.
+    Specifies the absolute delay adjustment of the sample clock. The  sample clock delay adjustment is expressed in seconds.
+    can only be applied when an external sample clock is used.
 
-    Note:
-    For the NI 5421, absolute delay can only be applied when an external
-    Sample Clock is used.
+    Note: For the NI 5421, absolute delay
     '''
     sample_clock_source = attributes.AttributeEnum(attributes.AttributeViString, enums.SampleClockSource, 1150112)
     '''
-    Specifies the Sample Clock source.
+    Specifies the Sample clock source. If you specify a divisor with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_DIVISOR  attribute, the Sample clock exported with the NIFGEN_ATTR_EXPORTED_SAMPLE_CLOCK_OUTPUT_TERMINAL attribute is the  value of the Sample clock after it is divided-down. For a list of the terminals available on your device, refer  to the Device Routes tab in MAX.
+    To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
 
-    Note:
-    The signal generator must not be in the Generating state when you change
-    this property. To change the device configuration, call the `niFgen
-    Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Note: The signal generator must not be in the Generating state when you change this attribute.
     '''
     sample_clock_timebase_rate = attributes.AttributeViReal64(1150368)
     '''
-    Specifies the Sample Clock Timebase rate. This property applies only to
-    external Sample Clock timebases.
+    Specifies the Sample clock timebase rate. This attribute applies only to external Sample clock timebases.
+    To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
 
-    Note:
-    The signal generator must not be in the Generating state when you change
-    this property. To change the device configuration, call the `niFgen
-    Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Note: The signal generator must not be in the Generating state when you change this attribute.
     '''
     sample_clock_timebase_source = attributes.AttributeEnum(attributes.AttributeViString, enums.SampleClockTimebaseSource, 1150367)
     '''
     Specifies the Sample Clock Timebase source.
+    To change the device configuration, call the niFgen_AbortGeneration function or wait for the generation to complete.
 
-    Note:
-    The signal generator must not be in the Generating state when you change
-    this property. To change the device configuration, call the `niFgen
-    Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Note: The signal generator must not be in the Generating state when you change this attribute.
     '''
     script_to_generate = attributes.AttributeViString(1150270)
     '''
-    Specifies which script the signal generator uses. To configure the
-    signal generator to run a particular script, set this property to the
-    name of the script.
+    Specifies which script the generator produces. To configure the generator to run a particular script, set this attribute to the name of the script. Use niFgen_WriteScript to create multiple scripts. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
 
-    Use the `niFgen Write
-    Script <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Write_Script.html')>`__
-    VI to create multiple scripts. Use this property when the `Output
-    Mode <pniFgen_OutputMode.html>`__ property is set to
-    **NIFGEN_VAL_OUTPUT_SCRIPT**.
-
-    Note:
-    The signal generator must not be in the Generating state when you change
-    this property. To change the device configuration, call the `niFgen
-    Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Note: The signal generator must not be in the Generating state when you change this attribute. To change the device configuration, call niFgen_AbortGeneration or wait for the generation to complete.
     '''
     script_triggers_count = attributes.AttributeViInt32(1150272)
     '''
-    Returns the number of Script Triggers supported by the device. Use this
-    property when the `Output Mode <pniFgen_OutputMode.html>`__ property is
-    set to **NIFGEN_VAL_OUTPUT_SCRIPT**.
+    Specifies the number of Script triggers supported by the device. Use this attribute when NIFGEN_ATTR_OUTPUT_MODE is set to NIFGEN_VAL_OUTPUT_SCRIPT.
     '''
     script_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.ScriptTriggerType, 1150290)
     '''
-    Specifies the Script trigger type. Depending upon the value of this
-    property, additional properties may be needed to fully configure the
-    trigger.
+    Specifies the Script trigger type. Depending upon the value of this attribute, additional attributes may need to be configured to fully configure the trigger.
     '''
     serial_number = attributes.AttributeViString(1150243)
     '''
-    Returns the serial number of the signal generator.
+    The signal generator's serial number.
     '''
     simulate = attributes.AttributeViBoolean(1050005)
     '''
-    Specifies whether or not to simulate NI-FGEN I/O operations. Set this
-    property to TRUE to enable simulation.
-
-    If simulation is enabled, NI-FGEN VIs perform range checking and can get
-    and set properties, but they do not perform instrument I/O. For output
-    parameters that represent instrument data, NI-FGEN VIs return calculated
-    values.
-
-    Use the `niFgen Initialize With
-    Options <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Initialize_With_Options.html')>`__
-    VI to override the value of this property.
-
-    **Default Value**: FALSE
+    Specifies whether to simulate NI-FGEN I/O  operations. If simulation is enabled, NI-FGEN  functions perform range checking and call Ivi_GetAttribute and  Ivi_SetAttribute, but they do not perform device I/O.   For output parameters that represent device data, NI-FGEN  functions return calculated values.
+    Default Value: VI_FALSE
+    Use niFgen_InitWithOptions to override default value.
     '''
     specific_driver_class_spec_major_version = attributes.AttributeViInt32(1050515)
     '''
-    Returns the major version number of the class specification with which
-    NI-FGEN is compliant.
+    Returns the major version number of the class specification with which NI-FGEN is compliant.
     '''
     specific_driver_class_spec_minor_version = attributes.AttributeViInt32(1050516)
     '''
-    Returns the minor version number of the class specification with which
-    NI-FGEN is compliant.
+    Returns the minor version number of the class specification with which NI-FGEN is compliant.
     '''
     specific_driver_description = attributes.AttributeViString(1050514)
     '''
-    Contains a brief description of the specific driver.
+    Returns a brief description of NI-FGEN.
     '''
     specific_driver_vendor = attributes.AttributeViString(1050513)
     '''
-    Contains the name of the vendor that supplies NI-FGEN.
+    A string that contains the name of the vendor that supplies NI-FGEN.
     '''
     started_event_delay = attributes.AttributeViReal64(1150356)
     '''
-    Specifies the amount of delay applied to a Started Event with respect to
-    the analog output of the signal generator.
-
-    A positive delay value indicates that the Started Event occurs after the
-    analog data, while a negative delay value indicates that the Started
-    Event occurs before the analog data. The default value is zero, which
-    aligns the Started Event with the analog output.
-
-    You can specify the units of the delay value by setting the `Started
-    Event Delay Units <pniFgen_StartedEventDelayUnits.html>`__ property.
-
-    **Default Value**: 0
+    Specifies the amount of delay applied to a Started Event with respect to the  analog output of the signal generator. A positive delay value specifies that  the Started Event occurs after the analog data, and a negative delay  value specifies that the Started Event occurs before the analog data.  The default value is zero, which will align the Started event with the analog output.
+    You can specify the units of the delay value by setting the NIFGEN_ATTR_STARTED_EVENT_DELAY attribute.
     '''
     started_event_delay_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventDelayUnits, 1150357)
     '''
-    Specifies the units used for the `Started Event Delay
-    Value <pniFgen_StartedEventDelayValue.html>`__ property.
+    Specifies the units applied to the value of the NIFGEN_ATTR_STARTED_EVENT_DELAY
+    attribute.  Valid units are seconds and sample clock periods.
     '''
     started_event_latched_status = attributes.AttributeViBoolean(1150352)
     '''
-    Returns the latched status of the specified Started Event.
+    Specifies the latched status of the Started Event.
     '''
     started_event_level_active_level = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventActiveLevel, 1150316)
     '''
@@ -1872,9 +935,7 @@ class _SessionBase(object):
     '''
     started_event_output_terminal = attributes.AttributeViString(1150314)
     '''
-    Specifies the destination terminal for the Started Event. For a list of
-    the terminals available on your device, refer to the Routes topic for
-    your device or the **Device Routes** tab in MAX.
+    Specifies the destination terminal for the Started Event.
     '''
     started_event_pulse_polarity = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventPulsePolarity, 1150318)
     '''
@@ -1882,7 +943,7 @@ class _SessionBase(object):
     '''
     started_event_pulse_width = attributes.AttributeViReal64(1150335)
     '''
-    Specifies the pulse width value for the Started Event.
+    Specifies the pulse width for the Started Event.
     '''
     started_event_pulse_width_units = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartedEventPulseWidthUnits, 1150333)
     '''
@@ -1890,181 +951,75 @@ class _SessionBase(object):
     '''
     start_trigger_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.StartTriggerType, 1150280)
     '''
-    Specifies the type of Start Trigger you want to use.
+    Specifies whether you want the Start trigger to be a Digital Edge, or Software trigger. You can also choose None as the value for this attribute.
     '''
     streaming_space_available_in_waveform = attributes.AttributeViInt32(1150325)
     '''
-    Returns the space available in the streaming waveform for writing new
-    data.
-
-    Use this property in conjunction with the `Streaming Waveform
-    Handle <pniFgen_StreamingWaveformHandle.html>`__ property or the
-    `Streaming Waveform Name <pniFgen_StreamingWaveformName.html>`__
-    property.
+    Indicates the space available (in samples) in the streaming waveform for writing new data. During generation, this available space may be in multiple locations with, for example, part of the available space at the end of the streaming waveform and the rest at the beginning. In this situation, writing a block of waveform data the size of the  total space available in the streaming waveform causes NI-FGEN to return an error, as  NI-FGEN will not wrap the data from the end of the waveform to the beginning and cannot write data past the end of the waveform buffer.
+    To avoid writing data past the end of the waveform, write new data to the waveform in a fixed size that is an integer divisor of the total size of the streaming waveform.
+    Used in conjunction with the NIFGEN_ATTR_STREAMING_WAVEFORM_HANDLE or NIFGEN_ATTR_STREAMING_WAVEFORM_NAME attributes.
     '''
     streaming_waveform_handle = attributes.AttributeViInt32(1150324)
     '''
-    Specifies the waveform handle of the waveform used to continuously
-    stream data during generation.
-
-    This property is used in conjunction with the `Space Available in
-    Streaming Waveform <pniFgen_SpaceAvailInStreamingWfm.html>`__ property.
-
-    **Default Value**: -1
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the waveform handle of the waveform used to continuously stream data during generation. This attribute defaults to -1 when no streaming waveform is specified.
+    Used in conjunction with NIFGEN_ATTR_STREAMING_SPACE_AVAILABLE_IN_WAVEFORM.
     '''
     streaming_waveform_name = attributes.AttributeViString(1150326)
     '''
-    Specifies the name of the waveform used to continuously stream data
-    during generation. This property defaults to an empty string when no
-    streaming waveform is specified.
-
-    Use this property in conjunction with the `Space Available in Streaming
-    Waveform <pniFgen_SpaceAvailInStreamingWfm.html>`__ property.
-
-    **Default Value**: ""
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the name of the waveform used to continuously stream data during generation. This attribute defaults to // when no streaming waveform is specified.
+    Use in conjunction with NIFGEN_ATTR_STREAMING_SPACE_AVAILABLE_IN_WAVEFORM.
     '''
     streaming_write_timeout = attributes.AttributeViReal64(1150409)
     '''
-    Specifies the maximum amount of time allowed to complete a streaming
-    write operation.
-
-    **Units**: seconds (s)
+    Specifies the maximum amount of time allowed to complete a streaming write operation.
     '''
     supported_instrument_models = attributes.AttributeViString(1050327)
     '''
-    Returns a model code of the instrument. For drivers that support more
-    than one device, this property contains a comma-separated list of
-    supported instrument models.
+    Returns a model code of the device. For NI-FGEN versions that support more than one device, this  attribute contains a comma-separated list of supported device  models.
     '''
     synchronization = attributes.AttributeEnum(attributes.AttributeViInt32, enums.SynchronizationSource, 1150111)
     '''
-    Specifies the source of the synchronization signal to use.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specify the source of the synchronization signal that you want to use.
     '''
     sync_duty_cycle_high = attributes.AttributeViReal64(1150105)
     '''
-    Specifies the duty cycle of the square wave the signal generator
-    produces on the SYNC OUT connector. Specify this property as a
-    percentage of the time the square wave is high in each cycle.
-
-    **Units**: Percentage of time the waveform is high
-
-    **Default Value**: 50%
+    Controls the duty cycle of the square wave the signal generator  produces on the SYNC out line.  Specify this attribute as a  percentage of the time the square wave is high in each cycle.
+    Units: Percentage of time the waveform is high
     '''
     sync_out_output_terminal = attributes.AttributeViString(1150330)
     '''
-    Specifies the terminal at which to export the SYNC OUT signal. This
-    property is not supported for all devices. For a list of the terminals
-    available on your device, refer to the Routes topic for your device or
-    the **Device Routes** tab in MAX.
+    Specifies the terminal to which to export the SYNC OUT signal. This attribute is not supported for all devices.
     '''
     terminal_configuration = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TerminalConfiguration, 1150365)
     '''
-    Specifies whether to analyze gain and offset values based on
-    single-ended or
-    `differential <javascript:LaunchHelp('SigGenHelp.chm::/fund_differential_output.html')>`__
-    operation.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies whether gain and offset values will be analyzed based on single-ended or differential operation.
     '''
     trigger_mode = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerMode, 1150108)
     '''
     Controls the trigger mode.
-
-    **Default Value**: **NIFGEN_VAL_CONTINUOUS**
     '''
     trigger_source = attributes.AttributeEnum(attributes.AttributeViInt32, enums.TriggerSource, 1250302)
     '''
-    Specifies which trigger source the signal generator uses.
-
-    After you call the `niFgen Initiate
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Initiate_Generation.html')>`__
-    VI, the signal generator waits for the trigger you specify in this
-    parameter. After it receives a trigger, the signal generator produces
-    the number of cycles you specify in the `Repeat
-    Count <pniFgen_ArbWfm.RepeatCount.html>`__ property.
-
-    The value you select for this property is also the source for the
-    trigger in the other trigger modes as specified by the `Trigger
-    Mode <pniFgen_TriggerMode.html>`__ property.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Controls which trigger source the signal generator uses.
+    After you call the niFgen_InitiateGeneration function, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the NIFGEN_ATTR_CYCLE_COUNT attribute.
+    This attribute is also the source for the trigger in the other trigger modes as specified by the NIFGEN_ATTR_TRIGGER_MODE attribute.
     '''
     video_waveform_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.VideoWaveformType, 1150216)
     '''
-    Specifies the waveform type the NI 5431 generates. Setting this property
-    ensures the oscillator crystal is set to the proper frequency.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Selects which waveform type that the NI 5431 generates. Setting this attribute ensures that the crystal is set to the proper frequency.
     '''
     wait_behavior = attributes.AttributeEnum(attributes.AttributeViInt32, enums.WaitBehavior, 1150379)
     '''
-    Specifies the behavior of the output while waiting for a Script Trigger
-    or during a wait instruction.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the behavior of the output while waiting for a script trigger or during a wait instruction.  The output can be configured to hold the last generated voltage before waiting or jump to the Wait Value.
     '''
     wait_value = attributes.AttributeViInt32(1150380)
     '''
-    Specifies the value to generate while waiting. You must set the `Wait
-    Behavior <pniFgen_WaitBehavior.html>`__ property to **Jump To Value** to
-    use this property.
-
-    Note:
-    You cannot change this property while the device is generating a
-    waveform. If you want to change the device configuration, call the
-    `niFgen Abort
-    Generation <javascript:LaunchMergedHelp('SigGenHelp.chm',%20'nifgenlv.chm',%20'niFgen_Abort_Generation.html')>`__
-    VI or wait for the generation to complete.
+    Specifies the value to generate while waiting.  The Wait Behavior must be configured to jump to this value.
     '''
     waveform_quantum = attributes.AttributeViInt32(1250206)
     '''
-    Returns the quantum value the signal generator allows. The size of each
-    arbitrary waveform must be a multiple of this quantum value.
-
-    For example, when this property returns a value of 8, all waveform sizes
-    must be a multiple of 8. Typically, this value is constant for the
-    signal generator.
+    The size of each arbitrary waveform must be a multiple of a quantum value. This attribute returns the quantum value that the signal generator allows.
+    For example, when this attribute returns a value of 8, all waveform sizes must be a multiple of 8. Typically, this value is constant for the signal generator.
     '''
 
     def __init__(self, repeated_capability):
