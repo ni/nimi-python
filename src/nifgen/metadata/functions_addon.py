@@ -129,5 +129,5 @@ functions_default_value = {
     'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'default_value': 'StartTriggerDigitalEdgeEdge.RISING_EDGE', }, }, },
     'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
                                                                       5: { 'default_value': None, }, }, },
-    'WaitUntilDone': { 'parameters': { 1: { 'default_value': 10000, }, }, },
+    'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
 }
