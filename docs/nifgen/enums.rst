@@ -52,7 +52,7 @@ Enums used in NI-FGEN
 
 .. py:data:: BusType
 
-    .. py:attribute:: nifgen.BusType.BUS_INVALID
+    .. py:attribute:: nifgen.BusType.INVALID
 
 
 
@@ -62,7 +62,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.BUS_AT
+    .. py:attribute:: nifgen.BusType.AT
 
 
 
@@ -72,7 +72,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.BUS_PCI
+    .. py:attribute:: nifgen.BusType.PCI
 
 
 
@@ -82,7 +82,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.BUS_PXI
+    .. py:attribute:: nifgen.BusType.PXI
 
 
 
@@ -92,7 +92,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.BUS_VXI
+    .. py:attribute:: nifgen.BusType.VXI
 
 
 
@@ -102,7 +102,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.BusType.BUS_PCMCIA
+    .. py:attribute:: nifgen.BusType.PCMCIA
 
 
 
@@ -231,7 +231,7 @@ Enums used in NI-FGEN
 
 .. py:data:: DataMarkerEventLevelPolarity
 
-    .. py:attribute:: nifgen.DataMarkerEventLevelPolarity.ACTIVE_HIGH
+    .. py:attribute:: nifgen.DataMarkerEventLevelPolarity.HIGH
 
 
 
@@ -241,7 +241,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.DataMarkerEventLevelPolarity.ACTIVE_LOW
+    .. py:attribute:: nifgen.DataMarkerEventLevelPolarity.LOW
 
 
 
@@ -254,7 +254,7 @@ Enums used in NI-FGEN
 
 .. py:data:: DataProcessingMode
 
-    .. py:attribute:: nifgen.DataProcessingMode.OSP_REAL
+    .. py:attribute:: nifgen.DataProcessingMode.REAL
 
 
 
@@ -264,7 +264,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.DataProcessingMode.OSP_COMPLEX
+    .. py:attribute:: nifgen.DataProcessingMode.COMPLEX
 
 
 
@@ -277,7 +277,7 @@ Enums used in NI-FGEN
 
 .. py:data:: DoneEventActiveLevel
 
-    .. py:attribute:: nifgen.DoneEventActiveLevel.ACTIVE_HIGH
+    .. py:attribute:: nifgen.DoneEventActiveLevel.HIGH
 
 
 
@@ -287,7 +287,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.DoneEventActiveLevel.ACTIVE_LOW
+    .. py:attribute:: nifgen.DoneEventActiveLevel.LOW
 
 
 
@@ -346,7 +346,7 @@ Enums used in NI-FGEN
 
 .. py:data:: DoneEventPulsePolarity
 
-    .. py:attribute:: nifgen.DoneEventPulsePolarity.ACTIVE_HIGH
+    .. py:attribute:: nifgen.DoneEventPulsePolarity.HIGH
 
 
 
@@ -356,7 +356,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.DoneEventPulsePolarity.ACTIVE_LOW
+    .. py:attribute:: nifgen.DoneEventPulsePolarity.LOW
 
 
 
@@ -392,7 +392,7 @@ Enums used in NI-FGEN
 
 .. py:data:: FilterType
 
-    .. py:attribute:: nifgen.FilterType.OSP_FLAT
+    .. py:attribute:: nifgen.FilterType.FLAT
 
 
 
@@ -402,7 +402,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.FilterType.OSP_RAISED_COSINE
+    .. py:attribute:: nifgen.FilterType.RAISED_COSINE
 
 
 
@@ -412,7 +412,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.FilterType.OSP_ROOT_RAISED_COSINE
+    .. py:attribute:: nifgen.FilterType.ROOT_RAISED_COSINE
 
 
 
@@ -422,7 +422,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.FilterType.OSP_GAUSSIAN
+    .. py:attribute:: nifgen.FilterType.GAUSSIAN
 
 
 
@@ -432,7 +432,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.FilterType.OSP_CUSTOM
+    .. py:attribute:: nifgen.FilterType.CUSTOM
 
 
 
@@ -525,7 +525,7 @@ Enums used in NI-FGEN
 
 .. py:data:: MarkerEventPulsePolarity
 
-    .. py:attribute:: nifgen.MarkerEventPulsePolarity.ACTIVE_HIGH
+    .. py:attribute:: nifgen.MarkerEventPulsePolarity.HIGH
 
 
 
@@ -535,7 +535,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.MarkerEventPulsePolarity.ACTIVE_LOW
+    .. py:attribute:: nifgen.MarkerEventPulsePolarity.LOW
 
 
 
@@ -594,7 +594,7 @@ Enums used in NI-FGEN
 
 .. py:data:: OSPMode
 
-    .. py:attribute:: nifgen.OSPMode.OSP_IF
+    .. py:attribute:: nifgen.OSPMode.IF
 
 
 
@@ -604,7 +604,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OSPMode.OSP_BASEBAND
+    .. py:attribute:: nifgen.OSPMode.BASEBAND
 
 
 
@@ -617,7 +617,7 @@ Enums used in NI-FGEN
 
 .. py:data:: OSPOverflowErrorReporting
 
-    .. py:attribute:: nifgen.OSPOverflowErrorReporting.ERROR_REPORTING_ERROR
+    .. py:attribute:: nifgen.OSPOverflowErrorReporting.ERROR
 
 
 
@@ -627,7 +627,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OSPOverflowErrorReporting.ERROR_REPORTING_DISABLED
+    .. py:attribute:: nifgen.OSPOverflowErrorReporting.DISABLED
 
 
 
@@ -653,7 +653,7 @@ Enums used in NI-FGEN
 
 .. py:data:: OutputMode
 
-    .. py:attribute:: nifgen.OutputMode.OUTPUT_FUNC
+    .. py:attribute:: nifgen.OutputMode.FUNC
 
 
 
@@ -663,7 +663,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OutputMode.OUTPUT_ARB
+    .. py:attribute:: nifgen.OutputMode.ARB
 
 
 
@@ -673,7 +673,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OutputMode.OUTPUT_SEQ
+    .. py:attribute:: nifgen.OutputMode.SEQ
 
 
 
@@ -683,7 +683,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.OutputMode.OUTPUT_FREQ_LIST
+    .. py:attribute:: nifgen.OutputMode.FREQ_LIST
 
 
 
@@ -707,7 +707,7 @@ Enums used in NI-FGEN
 
 .. py:data:: P2PAddressType
 
-    .. py:attribute:: nifgen.P2PAddressType.ADDR_PHYSICAL
+    .. py:attribute:: nifgen.P2PAddressType.PHYSICAL
 
 
 
@@ -717,7 +717,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.P2PAddressType.ADDR_VIRTUAL
+    .. py:attribute:: nifgen.P2PAddressType.VIRTUAL
 
 
 
@@ -730,7 +730,7 @@ Enums used in NI-FGEN
 
 .. py:data:: ReadyForStartEventActiveLevel
 
-    .. py:attribute:: nifgen.ReadyForStartEventActiveLevel.ACTIVE_HIGH
+    .. py:attribute:: nifgen.ReadyForStartEventActiveLevel.HIGH
 
 
 
@@ -740,7 +740,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ReadyForStartEventActiveLevel.ACTIVE_LOW
+    .. py:attribute:: nifgen.ReadyForStartEventActiveLevel.LOW
 
 
 
@@ -989,7 +989,7 @@ Enums used in NI-FGEN
 
 .. py:data:: ScriptTriggerDigitalLevelActiveLevel
 
-    .. py:attribute:: nifgen.ScriptTriggerDigitalLevelActiveLevel.ACTIVE_HIGH
+    .. py:attribute:: nifgen.ScriptTriggerDigitalLevelActiveLevel.HIGH
 
 
 
@@ -999,7 +999,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ScriptTriggerDigitalLevelActiveLevel.ACTIVE_LOW
+    .. py:attribute:: nifgen.ScriptTriggerDigitalLevelActiveLevel.LOW
 
 
 
@@ -1121,7 +1121,7 @@ Enums used in NI-FGEN
 
 .. py:data:: StartedEventActiveLevel
 
-    .. py:attribute:: nifgen.StartedEventActiveLevel.ACTIVE_HIGH
+    .. py:attribute:: nifgen.StartedEventActiveLevel.HIGH
 
 
 
@@ -1131,7 +1131,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartedEventActiveLevel.ACTIVE_LOW
+    .. py:attribute:: nifgen.StartedEventActiveLevel.LOW
 
 
 
@@ -1190,7 +1190,7 @@ Enums used in NI-FGEN
 
 .. py:data:: StartedEventPulsePolarity
 
-    .. py:attribute:: nifgen.StartedEventPulsePolarity.ACTIVE_HIGH
+    .. py:attribute:: nifgen.StartedEventPulsePolarity.HIGH
 
 
 
@@ -1200,7 +1200,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartedEventPulsePolarity.ACTIVE_LOW
+    .. py:attribute:: nifgen.StartedEventPulsePolarity.LOW
 
 
 
@@ -1956,7 +1956,7 @@ Enums used in NI-FGEN
 
 .. py:data:: Waveform
 
-    .. py:attribute:: nifgen.Waveform.WFM_SINE
+    .. py:attribute:: nifgen.Waveform.SINE
 
 
 
@@ -1966,7 +1966,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.WFM_SQUARE
+    .. py:attribute:: nifgen.Waveform.SQUARE
 
 
 
@@ -1976,7 +1976,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.WFM_TRIANGLE
+    .. py:attribute:: nifgen.Waveform.TRIANGLE
 
 
 
@@ -1986,7 +1986,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.WFM_RAMP_UP
+    .. py:attribute:: nifgen.Waveform.RAMP_UP
 
 
 
@@ -1996,7 +1996,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.WFM_RAMP_DOWN
+    .. py:attribute:: nifgen.Waveform.RAMP_DOWN
 
 
 
@@ -2006,7 +2006,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.WFM_DC
+    .. py:attribute:: nifgen.Waveform.DC
 
 
 
@@ -2016,7 +2016,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.WFM_NOISE
+    .. py:attribute:: nifgen.Waveform.NOISE
 
 
 
@@ -2026,7 +2026,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.Waveform.WFM_USER
+    .. py:attribute:: nifgen.Waveform.USER
 
 
 

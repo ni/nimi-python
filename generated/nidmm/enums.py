@@ -4,15 +4,15 @@ from enum import Enum
 
 
 class ADCCalibration(Enum):
-    ADC_CALIBRATION_AUTO = -1
+    AUTO = -1
     '''
     The DMM enables or disables ADC calibration for you.
     '''
-    ADC_CALIBRATION_OFF = 0
+    OFF = 0
     '''
     The DMM does not compensate for changes to the gain.
     '''
-    ADC_CALIBRATION_ON = 1
+    ON = 1
     '''
     The DMM measures an internal reference to calculate the correct gain for the  measurement.
     '''
@@ -53,38 +53,38 @@ class ApertureTimeUnits(Enum):
 
 
 class AutoZero(Enum):
-    AUTO_ZERO_AUTO = -1
+    AUTO = -1
     '''
     The drivers chooses the AutoZero setting based on the configured function  and resolution.
     '''
-    AUTO_ZERO_OFF = 0
+    OFF = 0
     '''
     Disables AutoZero.
     '''
-    AUTO_ZERO_ON = 1
+    ON = 1
     '''
     The DMM internally disconnects the input signal following each measurement  and takes a zero reading. It then subtracts the zero reading from the  preceding reading.
     '''
-    AUTO_ZERO_ONCE = 2
+    ONCE = 2
     '''
     The DMM internally disconnects the input signal for the first measurement  and takes a zero reading. It then subtracts the zero reading from the first  reading and the following readings.
     '''
 
 
 class CableCompensationType(Enum):
-    CABLE_COMP_NONE = 0
+    NONE = 0
     '''
     No Cable Compensation
     '''
-    CABLE_COMP_OPEN = 1
+    OPEN = 1
     '''
     Open Cable Compensation
     '''
-    CABLE_COMP_SHORT = 2
+    SHORT = 2
     '''
     Short Cable Compensation
     '''
-    CABLE_COMP_OPEN_AND_SHORT = 3
+    OPEN_AND_SHORT = 3
     '''
     Open and Short Cable Compensation
     '''
@@ -110,30 +110,30 @@ class CurrentSource(Enum):
 
 
 class DCBias(Enum):
-    DC_BIAS_OFF = 0
+    OFF = 0
     '''
     NI-DMM programs the device not to use the DC bias
     '''
-    DC_BIAS_ON = 1
+    ON = 1
     '''
     NI-DMM programs the device to use the DC bias
     '''
 
 
 class DCNoiseRejection(Enum):
-    DCNR_AUTO = -1
+    AUTO = -1
     '''
     The driver chooses the DC noise rejection setting based on the configured  function and resolution.
     '''
-    DCNR_NORMAL = 0
+    NORMAL = 0
     '''
     NI-DMM weighs all samples equally.
     '''
-    DCNR_SECOND_ORDER = 1
+    SECOND_ORDER = 1
     '''
     NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  triangular weighing function.
     '''
-    DCNR_HIGH_ORDER = 2
+    HIGH_ORDER = 2
     '''
     NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  bell-curve weighing function.
     '''
@@ -241,15 +241,15 @@ class InputResistance(Enum):
 
 
 class LCCalculationModel(Enum):
-    CALC_MODEL_AUTO = -1
+    AUTO = -1
     '''
     NI-DMM chooses the algorithm based on function and range
     '''
-    CALC_MODEL_SERIES = 0
+    SERIES = 0
     '''
     NI-DMM uses the series impedance model to calculate capacitance and inductance
     '''
-    CALC_MODEL_PARALLEL = 1
+    PARALLEL = 1
     '''
     NI-DMM uses the parallel admittance model to calculate capacitance and inductance
     '''
@@ -314,11 +314,11 @@ class MeasurementDestinationSlope(Enum):
 
 
 class OffsetCompensatedOhms(Enum):
-    OFFSET_COMP_OHMS_OFF = 0
+    OFF = 0
     '''
     The DMM disables offset compensated ohms.
     '''
-    OFFSET_COMP_OHMS_ON = 1
+    ON = 1
     '''
     The DMM enables offset compensated ohms.
     '''
@@ -347,32 +347,32 @@ class PowerlineFrequency(Enum):
 
 
 class RTDType(Enum):
-    TEMP_RTD_CUSTOM = 0
+    CUSTOM = 0
     '''
     Performs Callendar-Van Dusen RTD scaling with the user-specified A, B,
     and C coefficients.
     '''
-    TEMP_RTD_PT3750 = 1
+    PT3750 = 1
     '''
     Performs scaling for a Pt 3750 RTD.
     '''
-    TEMP_RTD_PT3851 = 2
+    PT3851 = 2
     '''
     Performs scaling for a Pt 3851 RTD.
     '''
-    TEMP_RTD_PT3911 = 3
+    PT3911 = 3
     '''
     Performs scaling for a Pt 3911 RTD.
     '''
-    TEMP_RTD_PT3916 = 4
+    PT3916 = 4
     '''
     Performs scaling for a Pt 3916 RTD.
     '''
-    TEMP_RTD_PT3920 = 5
+    PT3920 = 5
     '''
     Performs scaling for a Pt 3920 RTD.
     '''
-    TEMP_RTD_PT3928 = 6
+    PT3928 = 6
     '''
     Performs scaling for a Pt 3928 RTD.
     '''
@@ -453,19 +453,19 @@ class SampleTrigger(Enum):
 
 
 class ThermistorType(Enum):
-    TEMP_THERMISTOR_CUSTOM = 0
+    CUSTOM = 0
     '''
     Custom
     '''
-    TEMP_THERMISTOR_44004 = 1
+    44004 = 1
     '''
     44004
     '''
-    TEMP_THERMISTOR_44006 = 2
+    44006 = 2
     '''
     44006
     '''
-    TEMP_THERMISTOR_44007 = 3
+    44007 = 3
     '''
     44007
     '''
@@ -480,35 +480,35 @@ class ThermocoupleReferenceJunctionType(Enum):
 
 
 class ThermocoupleType(Enum):
-    TEMP_TC_B = 1
+    B = 1
     '''
     Thermocouple type B
     '''
-    TEMP_TC_E = 4
+    E = 4
     '''
     Thermocouple type E
     '''
-    TEMP_TC_J = 6
+    J = 6
     '''
     Thermocouple type J
     '''
-    TEMP_TC_K = 7
+    K = 7
     '''
     Thermocouple type K
     '''
-    TEMP_TC_N = 8
+    N = 8
     '''
     Thermocouple type N
     '''
-    TEMP_TC_R = 9
+    R = 9
     '''
     Thermocouple type R
     '''
-    TEMP_TC_S = 10
+    S = 10
     '''
     Thermocouple type S
     '''
-    TEMP_TC_T = 11
+    T = 11
     '''
     Thermocouple type T
     '''
@@ -604,11 +604,11 @@ class TriggerSource(Enum):
 
 
 class WaveformCoupling(Enum):
-    WAVEFORM_COUPLING_AC = 0
+    AC = 0
     '''
     AC Coupled
     '''
-    WAVEFORM_COUPLING_DC = 1
+    DC = 1
     '''
     DC Coupled
     '''

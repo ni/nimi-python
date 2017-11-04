@@ -13,7 +13,7 @@ Enums used in NI-DCPower
 
 
 
-        Specifies aperture time in seconds. NIDCPOWER_VAL_POWER_LINE_CYCLES (1029) Specifies aperture time in power line cycles (PLCs).
+        Specifies aperture time in seconds.
 
         
 
@@ -36,7 +36,7 @@ Enums used in NI-DCPower
 
 
 
-        Disables auto zero. NIDCPOWER_VAL_ONCE (1024) Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
+        Disables auto zero.
 
         
 
@@ -56,9 +56,7 @@ Enums used in NI-DCPower
 
 
 
-        Makes zero conversions following the first measurement after initiating
-        the device. The device uses these zero conversions for the preceding
-        measurement and future measurements until the device is reinitiated.
+        Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
 
         
 
@@ -140,19 +138,17 @@ Enums used in NI-DCPower
 
 
 
-        Second-order DC noise rejection. Refer to `Configuring the Measure
-        Unit <NI_DC_Power_Supplies_Help.chm::/ConfiguringTheMeasureUnit.html>`__
-        for supported devices.
+        Second-order rejection of DC noise.
 
         
 
 
 
-    .. py:attribute:: nidcpower.DCNoiseRejection.DC_NOISE_REJECTION_NORMAL
+    .. py:attribute:: nidcpower.DCNoiseRejection.NORMAL
 
 
 
-        Normal rejection of DC noise. NIDCPOWER_VAL_DC_NOISE_REJECTION_SECOND_ORDER (1043) Second-order rejection of DC noise.
+        Normal rejection of DC noise.
 
         
 
@@ -165,7 +161,7 @@ Enums used in NI-DCPower
 
 
 
-        Asserts the trigger on the rising edge of the digital signal. NIDCPOWER_VAL_FALLING (1017) Asserts the trigger on the falling edge of the digital signal.
+        Asserts the trigger on the rising edge of the digital signal.
 
         
 
@@ -182,64 +178,13 @@ Enums used in NI-DCPower
 
 
 
-.. py:data:: Event
-
-    .. py:attribute:: nidcpower.Event.SOURCE_COMPLETE
-
-
-
-        
-
-
-
-    .. py:attribute:: nidcpower.Event.MEASURE_COMPLETE
-
-
-
-        
-
-
-
-    .. py:attribute:: nidcpower.Event.SEQUENCE_ITERATION_COMPLETE
-
-
-
-        
-
-
-
-    .. py:attribute:: nidcpower.Event.SEQUENCE_ENGINE_DONE
-
-
-
-        
-
-
-
-    .. py:attribute:: nidcpower.Event.PULSE_COMPLETE
-
-
-
-        
-
-
-
-    .. py:attribute:: nidcpower.Event.READY_FOR_PULSE_TRIGGER
-
-
-
-        
-
-
-
-
 .. py:data:: MeasureWhen
 
     .. py:attribute:: nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
 
 
 
-        Acquires a measurement after each Source Complete event completes. NIDCPOWER_VAL_ON_DEMAND (1026) Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called. NIDCPOWER_VAL_ON_MEASURE_TRIGGER (1027) Acquires a measurement when a Measure trigger is received.
+        Acquires a measurement after each Source Complete event completes.
 
         
 
@@ -249,11 +194,7 @@ Enums used in NI-DCPower
 
 
 
-        Acquires a measurement when the `niDCPower
-        Measure <NIDCPowerVIRef.chm::/niDCPower_Measure.html>`__ VI or
-        `niDCPower Measure
-        Multiple <NIDCPowerVIRef.chm::/niDCPower_Measure_Multiple.html>`__ VI is
-        called.
+        Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called.
 
         
 
@@ -263,10 +204,7 @@ Enums used in NI-DCPower
 
 
 
-        Acquires a measurement when a Measure trigger is received. Use the
-        `niDCPower Fetch
-        Multiple <NIDCPowerVIRef.chm::/niDCPower_Fetch_Multiple.html>`__ VI to
-        retrieve the measurements.
+        Acquires a measurement when a Measure trigger is received.
 
         
 
@@ -279,7 +217,7 @@ Enums used in NI-DCPower
 
 
 
-        Output Capacitance is low. NIDCPOWER_VAL_HIGH (1011) Output Capacitance is high.
+        Output Capacitance is low.
 
         
 
@@ -289,7 +227,7 @@ Enums used in NI-DCPower
 
 
 
-        Output capacitance is high.
+        Output Capacitance is high.
 
         
 
@@ -302,7 +240,7 @@ Enums used in NI-DCPower
 
 
 
-        Sets the output function to DC voltage. NIDCPOWER_VAL_DC_CURRENT (1007) Sets the output function to DC current. NIDCPOWER_VAL_PULSE_VOLTAGE (1049)   NIDCPOWER_VAL_PULSE_CURRENT (1050)
+        Sets the output function to DC voltage.
 
         
 
@@ -341,22 +279,21 @@ Enums used in NI-DCPower
 
 .. py:data:: Polarity
 
-    .. py:attribute:: nidcpower.Polarity.ACTIVE_HIGH
+    .. py:attribute:: nidcpower.Polarity.HIGH
 
 
 
-        A high pulse occurs when the event is generated.  The exported signal is low level both before and after the event is generated. NIDCPOWER_VAL_ACTIVE_LOW (1019) A low pulse occurs when the event is generated.  The exported signal is high level both before and after the event is generated.
+        A high pulse occurs when the event is generated.  The exported signal is low level both before and after the event is generated.
 
         
 
 
 
-    .. py:attribute:: nidcpower.Polarity.ACTIVE_LOW
+    .. py:attribute:: nidcpower.Polarity.LOW
 
 
 
-        A low pulse occurs when the event is generated. The exported signal is
-        high level both before and after the event is generated.
+        A low pulse occurs when the event is generated.  The exported signal is high level both before and after the event is generated.
 
         
 
@@ -369,7 +306,7 @@ Enums used in NI-DCPower
 
 
 
-        Specifies a power line frequency of 50 Hz. NIDCPOWER_VAL_60_HERTZ (60.0) Specifies a power line frequency of 60 Hz.
+        Specifies a power line frequency of 50 Hz.
 
         
 
@@ -465,56 +402,13 @@ Enums used in NI-DCPower
 
 
 
-.. py:data:: SendSoftwareEdgeTriggerType
-
-    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.START
-
-
-
-        
-
-
-
-    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SOURCE
-
-
-
-        
-
-
-
-    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.MEASURE
-
-
-
-        
-
-
-
-    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE
-
-
-
-        
-
-
-
-    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.PULSE
-
-
-
-        
-
-
-
-
 .. py:data:: Sense
 
     .. py:attribute:: nidcpower.Sense.LOCAL
 
 
 
-        Local sensing is selected. NIDCPOWER_VAL_REMOTE (1009) Remote sensing is selected.
+        Local sensing is selected.
 
         
 
@@ -537,7 +431,7 @@ Enums used in NI-DCPower
 
 
 
-        The source unit applies a single source configuration. NIDCPOWER_VAL_SEQUENCE (1021) The source unit applies a list of voltage or current configurations sequentially.
+        The source unit applies a single source configuration.
 
         
 
@@ -547,8 +441,7 @@ Enums used in NI-DCPower
 
 
 
-        The source unit sequentially applies a list of voltage or current
-        configurations.
+        The source unit applies a list of voltage or current configurations sequentially.
 
         
 
@@ -561,7 +454,7 @@ Enums used in NI-DCPower
 
 
 
-        The output responds to changes in load at a normal speed. NIDCPOWER_VAL_FAST (1039) The output responds to changes in load quickly. NIDCPOWER_VAL_SLOW (1041) The output responds to changes in load slowly. NIDCPOWER_VAL_CUSTOM (1042) The output responds to changes in load based on specified values.
+        The output responds to changes in load at a normal speed.
 
         
 
@@ -571,7 +464,7 @@ Enums used in NI-DCPower
 
 
 
-        Fast transient response time.
+        The output responds to changes in load quickly.
 
         
 
@@ -581,9 +474,7 @@ Enums used in NI-DCPower
 
 
 
-        Slow transient response time. Refer to `Configuring Transient
-        Response <NI_DC_Power_Supplies_Help.chm::/CompensatingforLoad.html>`__
-        for supported devices.
+        The output responds to changes in load slowly.
 
         
 
@@ -593,19 +484,7 @@ Enums used in NI-DCPower
 
 
 
-        Custom transient response time. If you select this value, you can then
-        specify values for the `Voltage Gain
-        Bandwidth <pniDCPower_VoltageGainBandwidth.html>`__, `Voltage
-        Compensation
-        Frequency <pniDCPower_VoltageCompensationFrequency.html>`__, `Voltage
-        Pole-Zero Frequency <pniDCPower_VoltagePoleZeroRatio.html>`__, `Current
-        Gain Bandwidth <pniDCPower_CurrentGainBandwidth.html>`__, `Current
-        Compensation
-        Frequency <pniDCPower_CurrentCompensationFrequency.html>`__, and
-        `Current Pole-Zero Ratio <pniDCPower_CurrentPoleZeroRatio.html>`__
-        properties. Refer to `Configuring Transient
-        Response <NI_DC_Power_Supplies_Help.chm::/CompensatingforLoad.html>`__
-        for supported devices.
+        The output responds to changes in load based on specified values.
 
         
 
@@ -618,7 +497,7 @@ Enums used in NI-DCPower
 
 
 
-        No trigger is configured. NIDCPOWER_VAL_DIGITAL_EDGE (1014) The data operation starts when a digital edge is detected. NIDCPOWER_VAL_SOFTWARE_EDGE (1015) The data operation starts when a software trigger occurs.
+        No trigger is configured.
 
         
 
@@ -628,7 +507,7 @@ Enums used in NI-DCPower
 
 
 
-        The data operation starts when a digital edge is detected. NIDCPOWER_VAL_SOFTWARE_EDGE (1015) The data operation starts when a software trigger occurs.
+        The data operation starts when a digital edge is detected.
 
         
 

@@ -6,7 +6,7 @@ from enum import Enum
 class ApertureTimeUnits(Enum):
     SECONDS = 1028
     '''
-    Specifies aperture time in seconds. NIDCPOWER_VAL_POWER_LINE_CYCLES (1029) Specifies aperture time in power line cycles (PLCs).
+    Specifies aperture time in seconds.
     '''
     POWER_LINE_CYCLES = 1029
     '''
@@ -17,7 +17,7 @@ class ApertureTimeUnits(Enum):
 class AutoZero(Enum):
     OFF = 0
     '''
-    Disables auto zero. NIDCPOWER_VAL_ONCE (1024) Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
+    Disables auto zero.
     '''
     ON = 1
     '''
@@ -25,9 +25,7 @@ class AutoZero(Enum):
     '''
     ONCE = 1024
     '''
-    Makes zero conversions following the first measurement after initiating
-    the device. The device uses these zero conversions for the preceding
-    measurement and future measurements until the device is reinitiated.
+    Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
     '''
 
 
@@ -61,20 +59,18 @@ class CurrentLimitBehavior(Enum):
 class DCNoiseRejection(Enum):
     SECOND_ORDER = 1043
     '''
-    Second-order DC noise rejection. Refer to `Configuring the Measure
-    Unit <NI_DC_Power_Supplies_Help.chm::/ConfiguringTheMeasureUnit.html>`__
-    for supported devices.
+    Second-order rejection of DC noise.
     '''
-    DC_NOISE_REJECTION_NORMAL = 1044
+    NORMAL = 1044
     '''
-    Normal rejection of DC noise. NIDCPOWER_VAL_DC_NOISE_REJECTION_SECOND_ORDER (1043) Second-order rejection of DC noise.
+    Normal rejection of DC noise.
     '''
 
 
 class DigitalEdge(Enum):
     RISING = 1016
     '''
-    Asserts the trigger on the rising edge of the digital signal. NIDCPOWER_VAL_FALLING (1017) Asserts the trigger on the falling edge of the digital signal.
+    Asserts the trigger on the rising edge of the digital signal.
     '''
     FALLING = 1017
     '''
@@ -82,52 +78,36 @@ class DigitalEdge(Enum):
     '''
 
 
-class Event(Enum):
-    SOURCE_COMPLETE = 1030
-    MEASURE_COMPLETE = 1031
-    SEQUENCE_ITERATION_COMPLETE = 1032
-    SEQUENCE_ENGINE_DONE = 1033
-    PULSE_COMPLETE = 1051
-    READY_FOR_PULSE_TRIGGER = 1052
-
-
 class MeasureWhen(Enum):
     AUTOMATICALLY_AFTER_SOURCE_COMPLETE = 1025
     '''
-    Acquires a measurement after each Source Complete event completes. NIDCPOWER_VAL_ON_DEMAND (1026) Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called. NIDCPOWER_VAL_ON_MEASURE_TRIGGER (1027) Acquires a measurement when a Measure trigger is received.
+    Acquires a measurement after each Source Complete event completes.
     '''
     ON_DEMAND = 1026
     '''
-    Acquires a measurement when the `niDCPower
-    Measure <NIDCPowerVIRef.chm::/niDCPower_Measure.html>`__ VI or
-    `niDCPower Measure
-    Multiple <NIDCPowerVIRef.chm::/niDCPower_Measure_Multiple.html>`__ VI is
-    called.
+    Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called.
     '''
     ON_MEASURE_TRIGGER = 1027
     '''
-    Acquires a measurement when a Measure trigger is received. Use the
-    `niDCPower Fetch
-    Multiple <NIDCPowerVIRef.chm::/niDCPower_Fetch_Multiple.html>`__ VI to
-    retrieve the measurements.
+    Acquires a measurement when a Measure trigger is received.
     '''
 
 
 class OutputCapacitance(Enum):
     LOW = 1010
     '''
-    Output Capacitance is low. NIDCPOWER_VAL_HIGH (1011) Output Capacitance is high.
+    Output Capacitance is low.
     '''
     HIGH = 1011
     '''
-    Output capacitance is high.
+    Output Capacitance is high.
     '''
 
 
 class OutputFunction(Enum):
     DC_VOLTAGE = 1006
     '''
-    Sets the output function to DC voltage. NIDCPOWER_VAL_DC_CURRENT (1007) Sets the output function to DC current. NIDCPOWER_VAL_PULSE_VOLTAGE (1049)   NIDCPOWER_VAL_PULSE_CURRENT (1050)
+    Sets the output function to DC voltage.
     '''
     DC_CURRENT = 1007
     '''
@@ -144,21 +124,20 @@ class OutputFunction(Enum):
 
 
 class Polarity(Enum):
-    ACTIVE_HIGH = 1018
+    HIGH = 1018
     '''
-    A high pulse occurs when the event is generated.  The exported signal is low level both before and after the event is generated. NIDCPOWER_VAL_ACTIVE_LOW (1019) A low pulse occurs when the event is generated.  The exported signal is high level both before and after the event is generated.
+    A high pulse occurs when the event is generated.  The exported signal is low level both before and after the event is generated.
     '''
-    ACTIVE_LOW = 1019
+    LOW = 1019
     '''
-    A low pulse occurs when the event is generated. The exported signal is
-    high level both before and after the event is generated.
+    A low pulse occurs when the event is generated.  The exported signal is high level both before and after the event is generated.
     '''
 
 
 class PowerLineFrequency(Enum):
     _50_HERTZ = 50.0
     '''
-    Specifies a power line frequency of 50 Hz. NIDCPOWER_VAL_60_HERTZ (60.0) Specifies a power line frequency of 60 Hz.
+    Specifies a power line frequency of 50 Hz.
     '''
     _60_HERTZ = 60.0
     '''
@@ -203,18 +182,10 @@ class SelfCalibrationPersistence(Enum):
     '''
 
 
-class SendSoftwareEdgeTriggerType(Enum):
-    START = 1034
-    SOURCE = 1035
-    MEASURE = 1036
-    SEQUENCE_ADVANCE = 1037
-    PULSE = 1053
-
-
 class Sense(Enum):
     LOCAL = 1008
     '''
-    Local sensing is selected. NIDCPOWER_VAL_REMOTE (1009) Remote sensing is selected.
+    Local sensing is selected.
     '''
     REMOTE = 1009
     '''
@@ -225,56 +196,41 @@ class Sense(Enum):
 class SourceMode(Enum):
     SINGLE_POINT = 1020
     '''
-    The source unit applies a single source configuration. NIDCPOWER_VAL_SEQUENCE (1021) The source unit applies a list of voltage or current configurations sequentially.
+    The source unit applies a single source configuration.
     '''
     SEQUENCE = 1021
     '''
-    The source unit sequentially applies a list of voltage or current
-    configurations.
+    The source unit applies a list of voltage or current configurations sequentially.
     '''
 
 
 class TransientResponse(Enum):
     NORMAL = 1038
     '''
-    The output responds to changes in load at a normal speed. NIDCPOWER_VAL_FAST (1039) The output responds to changes in load quickly. NIDCPOWER_VAL_SLOW (1041) The output responds to changes in load slowly. NIDCPOWER_VAL_CUSTOM (1042) The output responds to changes in load based on specified values.
+    The output responds to changes in load at a normal speed.
     '''
     FAST = 1039
     '''
-    Fast transient response time.
+    The output responds to changes in load quickly.
     '''
     SLOW = 1041
     '''
-    Slow transient response time. Refer to `Configuring Transient
-    Response <NI_DC_Power_Supplies_Help.chm::/CompensatingforLoad.html>`__
-    for supported devices.
+    The output responds to changes in load slowly.
     '''
     CUSTOM = 1042
     '''
-    Custom transient response time. If you select this value, you can then
-    specify values for the `Voltage Gain
-    Bandwidth <pniDCPower_VoltageGainBandwidth.html>`__, `Voltage
-    Compensation
-    Frequency <pniDCPower_VoltageCompensationFrequency.html>`__, `Voltage
-    Pole-Zero Frequency <pniDCPower_VoltagePoleZeroRatio.html>`__, `Current
-    Gain Bandwidth <pniDCPower_CurrentGainBandwidth.html>`__, `Current
-    Compensation
-    Frequency <pniDCPower_CurrentCompensationFrequency.html>`__, and
-    `Current Pole-Zero Ratio <pniDCPower_CurrentPoleZeroRatio.html>`__
-    properties. Refer to `Configuring Transient
-    Response <NI_DC_Power_Supplies_Help.chm::/CompensatingforLoad.html>`__
-    for supported devices.
+    The output responds to changes in load based on specified values.
     '''
 
 
 class TriggerType(Enum):
     NONE = 1012
     '''
-    No trigger is configured. NIDCPOWER_VAL_DIGITAL_EDGE (1014) The data operation starts when a digital edge is detected. NIDCPOWER_VAL_SOFTWARE_EDGE (1015) The data operation starts when a software trigger occurs.
+    No trigger is configured.
     '''
     DIGITAL_EDGE = 1014
     '''
-    The data operation starts when a digital edge is detected. NIDCPOWER_VAL_SOFTWARE_EDGE (1015) The data operation starts when a software trigger occurs.
+    The data operation starts when a digital edge is detected.
     '''
     SOFTWARE_EDGE = 1015
     '''

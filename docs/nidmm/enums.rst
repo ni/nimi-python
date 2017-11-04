@@ -9,7 +9,7 @@ Enums used in NI-DMM
 
 .. py:data:: ADCCalibration
 
-    .. py:attribute:: nidmm.ADCCalibration.ADC_CALIBRATION_AUTO
+    .. py:attribute:: nidmm.ADCCalibration.AUTO
 
 
 
@@ -19,7 +19,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ADCCalibration.ADC_CALIBRATION_OFF
+    .. py:attribute:: nidmm.ADCCalibration.OFF
 
 
 
@@ -29,7 +29,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ADCCalibration.ADC_CALIBRATION_ON
+    .. py:attribute:: nidmm.ADCCalibration.ON
 
 
 
@@ -118,7 +118,7 @@ Enums used in NI-DMM
 
 .. py:data:: AutoZero
 
-    .. py:attribute:: nidmm.AutoZero.AUTO_ZERO_AUTO
+    .. py:attribute:: nidmm.AutoZero.AUTO
 
 
 
@@ -128,7 +128,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.AutoZero.AUTO_ZERO_OFF
+    .. py:attribute:: nidmm.AutoZero.OFF
 
 
 
@@ -138,7 +138,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.AutoZero.AUTO_ZERO_ON
+    .. py:attribute:: nidmm.AutoZero.ON
 
 
 
@@ -148,7 +148,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.AutoZero.AUTO_ZERO_ONCE
+    .. py:attribute:: nidmm.AutoZero.ONCE
 
 
 
@@ -161,7 +161,7 @@ Enums used in NI-DMM
 
 .. py:data:: CableCompensationType
 
-    .. py:attribute:: nidmm.CableCompensationType.CABLE_COMP_NONE
+    .. py:attribute:: nidmm.CableCompensationType.NONE
 
 
 
@@ -171,7 +171,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.CableCompensationType.CABLE_COMP_OPEN
+    .. py:attribute:: nidmm.CableCompensationType.OPEN
 
 
 
@@ -181,7 +181,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.CableCompensationType.CABLE_COMP_SHORT
+    .. py:attribute:: nidmm.CableCompensationType.SHORT
 
 
 
@@ -191,7 +191,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.CableCompensationType.CABLE_COMP_OPEN_AND_SHORT
+    .. py:attribute:: nidmm.CableCompensationType.OPEN_AND_SHORT
 
 
 
@@ -247,7 +247,7 @@ Enums used in NI-DMM
 
 .. py:data:: DCBias
 
-    .. py:attribute:: nidmm.DCBias.DC_BIAS_OFF
+    .. py:attribute:: nidmm.DCBias.OFF
 
 
 
@@ -257,7 +257,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.DCBias.DC_BIAS_ON
+    .. py:attribute:: nidmm.DCBias.ON
 
 
 
@@ -270,7 +270,7 @@ Enums used in NI-DMM
 
 .. py:data:: DCNoiseRejection
 
-    .. py:attribute:: nidmm.DCNoiseRejection.DCNR_AUTO
+    .. py:attribute:: nidmm.DCNoiseRejection.AUTO
 
 
 
@@ -280,7 +280,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.DCNoiseRejection.DCNR_NORMAL
+    .. py:attribute:: nidmm.DCNoiseRejection.NORMAL
 
 
 
@@ -290,7 +290,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.DCNoiseRejection.DCNR_SECOND_ORDER
+    .. py:attribute:: nidmm.DCNoiseRejection.SECOND_ORDER
 
 
 
@@ -300,7 +300,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.DCNoiseRejection.DCNR_HIGH_ORDER
+    .. py:attribute:: nidmm.DCNoiseRejection.HIGH_ORDER
 
 
 
@@ -552,7 +552,7 @@ Enums used in NI-DMM
 
 .. py:data:: LCCalculationModel
 
-    .. py:attribute:: nidmm.LCCalculationModel.CALC_MODEL_AUTO
+    .. py:attribute:: nidmm.LCCalculationModel.AUTO
 
 
 
@@ -562,7 +562,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.LCCalculationModel.CALC_MODEL_SERIES
+    .. py:attribute:: nidmm.LCCalculationModel.SERIES
 
 
 
@@ -572,7 +572,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.LCCalculationModel.CALC_MODEL_PARALLEL
+    .. py:attribute:: nidmm.LCCalculationModel.PARALLEL
 
 
 
@@ -721,7 +721,7 @@ Enums used in NI-DMM
 
 .. py:data:: OffsetCompensatedOhms
 
-    .. py:attribute:: nidmm.OffsetCompensatedOhms.OFFSET_COMP_OHMS_OFF
+    .. py:attribute:: nidmm.OffsetCompensatedOhms.OFF
 
 
 
@@ -731,7 +731,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.OffsetCompensatedOhms.OFFSET_COMP_OHMS_ON
+    .. py:attribute:: nidmm.OffsetCompensatedOhms.ON
 
 
 
@@ -790,7 +790,7 @@ Enums used in NI-DMM
 
 .. py:data:: RTDType
 
-    .. py:attribute:: nidmm.RTDType.TEMP_RTD_CUSTOM
+    .. py:attribute:: nidmm.RTDType.CUSTOM
 
 
 
@@ -801,7 +801,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.TEMP_RTD_PT3750
+    .. py:attribute:: nidmm.RTDType.PT3750
 
 
 
@@ -811,7 +811,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.TEMP_RTD_PT3851
+    .. py:attribute:: nidmm.RTDType.PT3851
 
 
 
@@ -821,7 +821,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.TEMP_RTD_PT3911
+    .. py:attribute:: nidmm.RTDType.PT3911
 
 
 
@@ -831,7 +831,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.TEMP_RTD_PT3916
+    .. py:attribute:: nidmm.RTDType.PT3916
 
 
 
@@ -841,7 +841,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.TEMP_RTD_PT3920
+    .. py:attribute:: nidmm.RTDType.PT3920
 
 
 
@@ -851,7 +851,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.RTDType.TEMP_RTD_PT3928
+    .. py:attribute:: nidmm.RTDType.PT3928
 
 
 
@@ -1040,7 +1040,7 @@ Enums used in NI-DMM
 
 .. py:data:: ThermistorType
 
-    .. py:attribute:: nidmm.ThermistorType.TEMP_THERMISTOR_CUSTOM
+    .. py:attribute:: nidmm.ThermistorType.CUSTOM
 
 
 
@@ -1050,7 +1050,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermistorType.TEMP_THERMISTOR_44004
+    .. py:attribute:: nidmm.ThermistorType.44004
 
 
 
@@ -1060,7 +1060,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermistorType.TEMP_THERMISTOR_44006
+    .. py:attribute:: nidmm.ThermistorType.44006
 
 
 
@@ -1070,7 +1070,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermistorType.TEMP_THERMISTOR_44007
+    .. py:attribute:: nidmm.ThermistorType.44007
 
 
 
@@ -1097,7 +1097,7 @@ Enums used in NI-DMM
 
 .. py:data:: ThermocoupleType
 
-    .. py:attribute:: nidmm.ThermocoupleType.TEMP_TC_B
+    .. py:attribute:: nidmm.ThermocoupleType.B
 
 
 
@@ -1107,7 +1107,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.TEMP_TC_E
+    .. py:attribute:: nidmm.ThermocoupleType.E
 
 
 
@@ -1117,7 +1117,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.TEMP_TC_J
+    .. py:attribute:: nidmm.ThermocoupleType.J
 
 
 
@@ -1127,7 +1127,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.TEMP_TC_K
+    .. py:attribute:: nidmm.ThermocoupleType.K
 
 
 
@@ -1137,7 +1137,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.TEMP_TC_N
+    .. py:attribute:: nidmm.ThermocoupleType.N
 
 
 
@@ -1147,7 +1147,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.TEMP_TC_R
+    .. py:attribute:: nidmm.ThermocoupleType.R
 
 
 
@@ -1157,7 +1157,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.TEMP_TC_S
+    .. py:attribute:: nidmm.ThermocoupleType.S
 
 
 
@@ -1167,7 +1167,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermocoupleType.TEMP_TC_T
+    .. py:attribute:: nidmm.ThermocoupleType.T
 
 
 
@@ -1389,7 +1389,7 @@ Enums used in NI-DMM
 
 .. py:data:: WaveformCoupling
 
-    .. py:attribute:: nidmm.WaveformCoupling.WAVEFORM_COUPLING_AC
+    .. py:attribute:: nidmm.WaveformCoupling.AC
 
 
 
@@ -1399,7 +1399,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.WaveformCoupling.WAVEFORM_COUPLING_DC
+    .. py:attribute:: nidmm.WaveformCoupling.DC
 
 
 

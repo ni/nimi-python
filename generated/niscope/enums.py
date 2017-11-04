@@ -48,11 +48,11 @@ class AcquisitionType(Enum):
 
 
 class AddressType(Enum):
-    ADDR_PHYSICAL = 0
+    PHYSICAL = 0
     '''
     Physical address.
     '''
-    ADDR_VIRTUAL = 1
+    VIRTUAL = 1
     '''
     Virtual address.
     '''
@@ -285,28 +285,28 @@ class FlexFIRAntialiasFilterType(Enum):
 
 
 class NotificationType(Enum):
-    NOTIFY_NEVER = 0
+    NEVER = 0
     '''
     Never send notification.
     '''
-    NOTIFY_DONE = 1
+    DONE = 1
     '''
     Notify when digitizer acquisition is done.
     '''
 
 
 class OverflowErrorReporting(Enum):
-    ERROR_REPORTING_ERROR = 0
+    ERROR = 0
     '''
     Execution stops and NI-SCOPE returns an error when an overflow has
     occurred in the OSP block.
     '''
-    ERROR_REPORTING_WARNING = 1
+    WARNING = 1
     '''
     Execution continues and NI-SCOPE returns a warning when an overflow has
     occurred in the OSP block.
     '''
-    ERROR_REPORTING_DISABLED = 2
+    DISABLED = 2
     '''
     NI-SCOPE does not return an error when an overflow has occurred in the
     OSP block.
@@ -374,20 +374,20 @@ class QInputtoCoordConverter(Enum):
 
 
 class RISMethod(Enum):
-    RIS_EXACT_NUM_AVERAGES = 1
+    EXACT_NUM_AVERAGES = 1
     '''
     Acquires exactly the specified number of records for each bin in the RIS acquisition.  An error is returned from the fetch function if the RIS acquisition does not successfully acquire the specified number of waveforms within the timeout period.  You may call the fetch function again to allow more time for the acquisition to finish.
     '''
-    RIS_MIN_NUM_AVERAGES = 2
+    MIN_NUM_AVERAGES = 2
     '''
     Each RIS sample is the average of a least a minimum number of randomly
     distributed points.
     '''
-    RIS_INCOMPLETE = 3
+    INCOMPLETE = 3
     '''
     Returns the RIS waveform after the specified timeout even if it is incomplete.  If no waveforms have been acquired in certain bins, these bins will have a NaN (when fetching scaled data) or a zero (when fetching binary data). A warning (positive error code) is returned from the fetch function if the RIS acquisition did not finish.  The acquisition aborts when data is returned.
     '''
-    RIS_LIMITED_BIN_WIDTH = 5
+    LIMITED_BIN_WIDTH = 5
     '''
     Limits the waveforms in the various bins to be within 200 ps of the center of the bin.
     '''
@@ -517,6 +517,10 @@ class TriggerCoupling(Enum):
     '''
     Lowpass filter coupling
     '''
+    LF_REJECT = 4
+    '''
+    LF Reject filter.
+    '''
     AC_PLUS_HF_REJECT = 1001
     '''
     Highpass and lowpass filter coupling
@@ -604,11 +608,11 @@ class VerticalCoupling(Enum):
 
 
 class VideoPolarity(Enum):
-    TV_POSITIVE = 1
+    POSITIVE = 1
     '''
     Specifies that the video signal has positive polarity.
     '''
-    TV_NEGATIVE = 2
+    NEGATIVE = 2
     '''
     Specifies that the video signal has negative polarity.
     '''
@@ -626,6 +630,66 @@ class VideoSignalFormat(Enum):
     SECAM = 3
     '''
     SECAM signal format supports line numbers from 1 to 625
+    '''
+    M_PAL = 4
+    '''
+    Specifies M-PAL signal format.
+    '''
+    _480I59_94_FPS = 5
+    '''
+    Specifies 480i/59.94 signal format.
+    '''
+    _480I60_FPS = 6
+    '''
+    Specifies 480i/60 signal format.
+    '''
+    _480P59_94_FPS = 7
+    '''
+    Specifies 480p/59.94 signal format.
+    '''
+    _480P60_FPS = 8
+    '''
+    Specifies 480p/60 Fps signal format.
+    '''
+    _576I60_FPS = 9
+    '''
+    Specifies 576i/60 fps signal format.
+    '''
+    _576P50_FPS = 10
+    '''
+    Specifies 576p/50 Fps signal format.
+    '''
+    _720P30_FPS = 11
+    '''
+    Specifies 720p/30 Fps signal format.
+    '''
+    _720P50_FPS = 12
+    '''
+    Specifies 720p/50 Fps signal format.
+    '''
+    _720P59_94_FPS = 13
+    '''
+    Specifies 720p/59.94 Fps signal format.
+    '''
+    _720P60_FPS = 14
+    '''
+    Specifies 720p/60 Fps signal format.
+    '''
+    _1080I50_FPS = 15
+    '''
+    Specifies 1080i/50 fps signal format.
+    '''
+    _1080I59_94_FPS = 16
+    '''
+    Specifies 1080i/59.94 fps signal format.
+    '''
+    _1080I60_FPS = 17
+    '''
+    Specifies 1080i/60 fps signal format.
+    '''
+    _1080P24_FPS = 18
+    '''
+    Specifies 1080p/24 Fps signal format.
     '''
     M_PAL = 1001
     '''
@@ -686,23 +750,23 @@ class VideoSignalFormat(Enum):
 
 
 class VideoTriggerEvent(Enum):
-    TV_EVENT_FIELD1 = 1
+    FIELD1 = 1
     '''
     Trigger on field 1 of the signal
     '''
-    TV_EVENT_FIELD2 = 2
+    FIELD2 = 2
     '''
     Trigger on field 2 of the signal
     '''
-    TV_EVENT_ANY_FIELD = 3
+    ANY_FIELD = 3
     '''
     Trigger on the first field acquired
     '''
-    TV_EVENT_ANY_LINE = 4
+    ANY_LINE = 4
     '''
     Trigger on the first line acquired
     '''
-    TV_EVENT_LINE_NUMBER = 5
+    LINE_NUMBER = 5
     '''
     Trigger on a specific line of a video signal.  Valid values vary depending on the signal format configured.
     '''

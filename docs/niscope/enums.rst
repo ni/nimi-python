@@ -101,7 +101,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: AddressType
 
-    .. py:attribute:: niscope.AddressType.ADDR_PHYSICAL
+    .. py:attribute:: niscope.AddressType.PHYSICAL
 
 
 
@@ -111,7 +111,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.AddressType.ADDR_VIRTUAL
+    .. py:attribute:: niscope.AddressType.VIRTUAL
 
 
 
@@ -626,7 +626,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: NotificationType
 
-    .. py:attribute:: niscope.NotificationType.NOTIFY_NEVER
+    .. py:attribute:: niscope.NotificationType.NEVER
 
 
 
@@ -636,7 +636,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.NotificationType.NOTIFY_DONE
+    .. py:attribute:: niscope.NotificationType.DONE
 
 
 
@@ -649,7 +649,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: OverflowErrorReporting
 
-    .. py:attribute:: niscope.OverflowErrorReporting.ERROR_REPORTING_ERROR
+    .. py:attribute:: niscope.OverflowErrorReporting.ERROR
 
 
 
@@ -660,7 +660,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.OverflowErrorReporting.ERROR_REPORTING_WARNING
+    .. py:attribute:: niscope.OverflowErrorReporting.WARNING
 
 
 
@@ -671,7 +671,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.OverflowErrorReporting.ERROR_REPORTING_DISABLED
+    .. py:attribute:: niscope.OverflowErrorReporting.DISABLED
 
 
 
@@ -811,7 +811,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: RISMethod
 
-    .. py:attribute:: niscope.RISMethod.RIS_EXACT_NUM_AVERAGES
+    .. py:attribute:: niscope.RISMethod.EXACT_NUM_AVERAGES
 
 
 
@@ -821,7 +821,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.RISMethod.RIS_MIN_NUM_AVERAGES
+    .. py:attribute:: niscope.RISMethod.MIN_NUM_AVERAGES
 
 
 
@@ -832,7 +832,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.RISMethod.RIS_INCOMPLETE
+    .. py:attribute:: niscope.RISMethod.INCOMPLETE
 
 
 
@@ -842,7 +842,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.RISMethod.RIS_LIMITED_BIN_WIDTH
+    .. py:attribute:: niscope.RISMethod.LIMITED_BIN_WIDTH
 
 
 
@@ -1128,6 +1128,16 @@ Enums used in NI-SCOPE
 
 
 
+    .. py:attribute:: niscope.TriggerCoupling.LF_REJECT
+
+
+
+        LF Reject filter.
+
+        
+
+
+
     .. py:attribute:: niscope.TriggerCoupling.AC_PLUS_HF_REJECT
 
 
@@ -1317,7 +1327,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: VideoPolarity
 
-    .. py:attribute:: niscope.VideoPolarity.TV_POSITIVE
+    .. py:attribute:: niscope.VideoPolarity.POSITIVE
 
 
 
@@ -1327,7 +1337,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.VideoPolarity.TV_NEGATIVE
+    .. py:attribute:: niscope.VideoPolarity.NEGATIVE
 
 
 
@@ -1365,6 +1375,156 @@ Enums used in NI-SCOPE
 
 
         SECAM signal format supports line numbers from 1 to 625
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat.M_PAL
+
+
+
+        Specifies M-PAL signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._480I59_94_FPS
+
+
+
+        Specifies 480i/59.94 signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._480I60_FPS
+
+
+
+        Specifies 480i/60 signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._480P59_94_FPS
+
+
+
+        Specifies 480p/59.94 signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._480P60_FPS
+
+
+
+        Specifies 480p/60 Fps signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._576I60_FPS
+
+
+
+        Specifies 576i/60 fps signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._576P50_FPS
+
+
+
+        Specifies 576p/50 Fps signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._720P30_FPS
+
+
+
+        Specifies 720p/30 Fps signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._720P50_FPS
+
+
+
+        Specifies 720p/50 Fps signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._720P59_94_FPS
+
+
+
+        Specifies 720p/59.94 Fps signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._720P60_FPS
+
+
+
+        Specifies 720p/60 Fps signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._1080I50_FPS
+
+
+
+        Specifies 1080i/50 fps signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._1080I59_94_FPS
+
+
+
+        Specifies 1080i/59.94 fps signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._1080I60_FPS
+
+
+
+        Specifies 1080i/60 fps signal format.
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat._1080P24_FPS
+
+
+
+        Specifies 1080p/24 Fps signal format.
 
         
 
@@ -1513,7 +1673,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: VideoTriggerEvent
 
-    .. py:attribute:: niscope.VideoTriggerEvent.TV_EVENT_FIELD1
+    .. py:attribute:: niscope.VideoTriggerEvent.FIELD1
 
 
 
@@ -1523,7 +1683,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.VideoTriggerEvent.TV_EVENT_FIELD2
+    .. py:attribute:: niscope.VideoTriggerEvent.FIELD2
 
 
 
@@ -1533,7 +1693,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.VideoTriggerEvent.TV_EVENT_ANY_FIELD
+    .. py:attribute:: niscope.VideoTriggerEvent.ANY_FIELD
 
 
 
@@ -1543,7 +1703,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.VideoTriggerEvent.TV_EVENT_ANY_LINE
+    .. py:attribute:: niscope.VideoTriggerEvent.ANY_LINE
 
 
 
@@ -1553,7 +1713,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.VideoTriggerEvent.TV_EVENT_LINE_NUMBER
+    .. py:attribute:: niscope.VideoTriggerEvent.LINE_NUMBER
 
 
 

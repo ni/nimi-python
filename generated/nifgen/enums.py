@@ -23,27 +23,27 @@ class AnalogPath(Enum):
 
 
 class BusType(Enum):
-    BUS_INVALID = 0
+    INVALID = 0
     '''
     Indicates an invalid bus type.
     '''
-    BUS_AT = 1
+    AT = 1
     '''
     Indicates the signal generator is the AT bus type.
     '''
-    BUS_PCI = 2
+    PCI = 2
     '''
     Indicates the signal generator is the PCI bus type.
     '''
-    BUS_PXI = 3
+    PXI = 3
     '''
     Indicates the signal generator is the PXI bus type.
     '''
-    BUS_VXI = 4
+    VXI = 4
     '''
     Indicates the signal generator is the VXI bus type.
     '''
-    BUS_PCMCIA = 5
+    PCMCIA = 5
     '''
     Indicates the signal generator is the PCI-CMA bus type.
     '''
@@ -100,33 +100,33 @@ class ClockMode(Enum):
 
 
 class DataMarkerEventLevelPolarity(Enum):
-    ACTIVE_HIGH = 101
+    HIGH = 101
     '''
     When the operation is ready to start, the Ready for Start  event level is high.
     '''
-    ACTIVE_LOW = 102
+    LOW = 102
     '''
     When the operation is ready to start, the Ready for Start  event level is low.
     '''
 
 
 class DataProcessingMode(Enum):
-    OSP_REAL = 0
+    REAL = 0
     '''
     The waveform data points are real numbers (I data).
     '''
-    OSP_COMPLEX = 1
+    COMPLEX = 1
     '''
     The waveform data points are complex numbers (I/Q data).
     '''
 
 
 class DoneEventActiveLevel(Enum):
-    ACTIVE_HIGH = 101
+    HIGH = 101
     '''
     When the operation is ready to start, the Ready for Start  event level is high.
     '''
-    ACTIVE_LOW = 102
+    LOW = 102
     '''
     When the operation is ready to start, the Ready for Start  event level is low.
     '''
@@ -155,11 +155,11 @@ class DoneEventOutputBehavior(Enum):
 
 
 class DoneEventPulsePolarity(Enum):
-    ACTIVE_HIGH = 101
+    HIGH = 101
     '''
     When the operation is ready to start, the Ready for Start  event level is high.
     '''
-    ACTIVE_LOW = 102
+    LOW = 102
     '''
     When the operation is ready to start, the Ready for Start  event level is low.
     '''
@@ -177,23 +177,23 @@ class DoneEventPulseWidthUnits(Enum):
 
 
 class FilterType(Enum):
-    OSP_FLAT = 0
+    FLAT = 0
     '''
     Applies a flat filter to the data with the passband value specified  in the NIFGEN_ATTR_OSP_FIR_FILTER_FLAT_PASSBAND attribute.
     '''
-    OSP_RAISED_COSINE = 1
+    RAISED_COSINE = 1
     '''
     Applies a raised cosine filter to the data with the alpha value  specified in the NIFGEN_ATTR_OSP_FIR_FILTER_RAISED_COSINE_ALPHA attribute.
     '''
-    OSP_ROOT_RAISED_COSINE = 2
+    ROOT_RAISED_COSINE = 2
     '''
     Applies a root raised cosine filter to the data with the alpha value  specified in the NIFGEN_ATTR_OSP_FIR_FILTER_ROOT_RAISED_COSINE_ALPHA attribute.
     '''
-    OSP_GAUSSIAN = 3
+    GAUSSIAN = 3
     '''
     Applies a Gaussian filter to the data with the BT value specified in the  NIFGEN_ATTR_OSP_FIR_FILTER_GAUSSIAN_BT attribute.
     '''
-    OSP_CUSTOM = 4
+    CUSTOM = 4
     '''
     Applies a custom filter to the data. If NIFGEN_VAL_OSP_CUSTOM is selected,  you must provide a set of FIR filter coefficients with the  niFgen_ConfigureCustomFIRFilterCoefficients function.
     '''
@@ -238,11 +238,11 @@ class MarkerEventOutputBehavior(Enum):
 
 
 class MarkerEventPulsePolarity(Enum):
-    ACTIVE_HIGH = 101
+    HIGH = 101
     '''
     When the operation is ready to start, the Ready for Start  event level is high.
     '''
-    ACTIVE_LOW = 102
+    LOW = 102
     '''
     When the operation is ready to start, the Ready for Start  event level is low.
     '''
@@ -271,22 +271,22 @@ class MarkerEventToggleInitialState(Enum):
 
 
 class OSPMode(Enum):
-    OSP_IF = 0
+    IF = 0
     '''
     The OSP block generates intermediate frequency (IF) data.
     '''
-    OSP_BASEBAND = 1
+    BASEBAND = 1
     '''
     The OSP block generates baseband data.
     '''
 
 
 class OSPOverflowErrorReporting(Enum):
-    ERROR_REPORTING_ERROR = 0
+    ERROR = 0
     '''
     NI-FGEN returns errors whenever an overflow has occurred in the OSP block.
     '''
-    ERROR_REPORTING_DISABLED = 2
+    DISABLED = 2
     '''
     NI-FGEN does not return errors when an overflow occurs in the OSP block.
     '''
@@ -300,19 +300,19 @@ class OperationMode(Enum):
 
 
 class OutputMode(Enum):
-    OUTPUT_FUNC = 0
+    FUNC = 0
     '''
     Standard Function mode—  Generates standard function waveforms  such as sine, square, triangle, and so on.
     '''
-    OUTPUT_ARB = 1
+    ARB = 1
     '''
     Arbitrary waveform mode—Generates  waveforms from user-created/provided  waveform arrays of numeric data.
     '''
-    OUTPUT_SEQ = 2
+    SEQ = 2
     '''
     Arbitrary sequence mode —  Generates downloaded waveforms  in an order your specify.
     '''
-    OUTPUT_FREQ_LIST = 101
+    FREQ_LIST = 101
     '''
     Frequency List mode—Generates a  standard function using a list of  frequencies you define.
     '''
@@ -324,22 +324,22 @@ class OutputMode(Enum):
 
 
 class P2PAddressType(Enum):
-    ADDR_PHYSICAL = 0
+    PHYSICAL = 0
     '''
     Physical
     '''
-    ADDR_VIRTUAL = 1
+    VIRTUAL = 1
     '''
     Physical
     '''
 
 
 class ReadyForStartEventActiveLevel(Enum):
-    ACTIVE_HIGH = 101
+    HIGH = 101
     '''
     When the operation is ready to start, the Ready for Start  event level is high.
     '''
-    ACTIVE_LOW = 102
+    LOW = 102
     '''
     When the operation is ready to start, the Ready for Start  event level is low.
     '''
@@ -456,11 +456,11 @@ class ScriptTriggerDigitalEdgeEdge(Enum):
 
 
 class ScriptTriggerDigitalLevelActiveLevel(Enum):
-    ACTIVE_HIGH = 101
+    HIGH = 101
     '''
     High Level
     '''
-    ACTIVE_LOW = 102
+    LOW = 102
     '''
     Low Level
     '''
@@ -516,11 +516,11 @@ class StartTriggerType(Enum):
 
 
 class StartedEventActiveLevel(Enum):
-    ACTIVE_HIGH = 101
+    HIGH = 101
     '''
     When the operation is ready to start, the Ready for Start  event level is high.
     '''
-    ACTIVE_LOW = 102
+    LOW = 102
     '''
     When the operation is ready to start, the Ready for Start  event level is low.
     '''
@@ -549,11 +549,11 @@ class StartedEventOutputBehavior(Enum):
 
 
 class StartedEventPulsePolarity(Enum):
-    ACTIVE_HIGH = 101
+    HIGH = 101
     '''
     When the operation is ready to start, the Ready for Start  event level is high.
     '''
-    ACTIVE_LOW = 102
+    LOW = 102
     '''
     When the operation is ready to start, the Ready for Start  event level is low.
     '''
@@ -879,35 +879,35 @@ class WaitBehavior(Enum):
 
 
 class Waveform(Enum):
-    WFM_SINE = 1
+    SINE = 1
     '''
     Sinusoid waveform
     '''
-    WFM_SQUARE = 2
+    SQUARE = 2
     '''
     Square waveform
     '''
-    WFM_TRIANGLE = 3
+    TRIANGLE = 3
     '''
     Triange waveform
     '''
-    WFM_RAMP_UP = 4
+    RAMP_UP = 4
     '''
     Positive ramp waveform
     '''
-    WFM_RAMP_DOWN = 5
+    RAMP_DOWN = 5
     '''
     Negative ramp waveform
     '''
-    WFM_DC = 6
+    DC = 6
     '''
     Constant voltage
     '''
-    WFM_NOISE = 101
+    NOISE = 101
     '''
     White noise
     '''
-    WFM_USER = 102
+    USER = 102
     '''
     User-defined waveform as defined by the niFgen_DefineUserStandardWaveform function.
     '''
