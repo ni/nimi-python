@@ -54,7 +54,7 @@ desc = helper.get_documentation_for_node_rst(a, config, indent=0)
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
 
-%   if 'lv_property' in attributes[attr] and len(attributes[attr]['lv_property'].strip()) > 0:
+%   if 'lv_property' in attributes[attr] and len(attributes[attr]['lv_property']) > 0:
             - LabVIEW Property: **${attributes[attr]['lv_property'].strip()}**
 %   endif
             - C Attribute: **${c_function_prefix.upper()}ATTR_${attributes[attr]["name"].upper()}**
