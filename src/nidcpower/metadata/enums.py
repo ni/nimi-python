@@ -567,4 +567,67 @@ Autoranging is enabled.
             },
         ],
     },
+    'SendSoftwareEdgeTriggerType': {
+        'values': [
+            {
+                'name': 'START',
+                'value': 1034,
+                'documentation': {'',},
+            },
+            {
+                'name': 'SOURCE',
+                'value': 1035,
+                'documentation': {'',},
+            },
+            {
+                'name': 'MEASURE',
+                'value': 1036,
+                'documentation': {'',},
+            },
+            {
+                'name': 'SEQUENCE_ADVANCE',
+                'value': 1037,
+                'documentation': {'',},
+            },
+            {
+                'name': 'PULSE',
+                'value': 1053,
+                'documentation': {'',},
+            },
+        ],
+    },
+    'Event': {
+        'values': [
+            {
+                'name': 'SOURCE_COMPLETE',
+                'value': 1030,
+                'documentation': {'',},
+            },
+            {
+                'name': 'MEASURE_COMPLETE',
+                'value': 1031,
+                'documentation': {'',},
+            },
+            {
+                'name': 'SEQUENCE_ITERATION_COMPLETE',
+                'value': 1032,
+                'documentation': {'',},
+            },
+            {
+                'name': 'SEQUENCE_ENGINE_DONE',
+                'value': 1033,
+                'documentation': {'',},
+            },
+            {
+                'name': 'PULSE_COMPLETE',
+                'value': 1051,
+                'documentation': {'',},
+            },
+            {
+                'name': 'READY_FOR_PULSE_TRIGGER',
+                'value': 1052,
+                'documentation': {'',},
+            },
+        ],
+    },
 }
