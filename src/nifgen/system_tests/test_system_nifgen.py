@@ -54,7 +54,7 @@ def test_self_cal(session):
 
 def test_configure_arb_waveform(session):
     waveform_data = [0.000000, 0.049068, 0.098017, 0.146730, 0.195090, 0.242980, 0.290285, 0.336890, 0.382683, 0.427555]
-    session.output_mode = nifgen.OutputMode.NIFGEN_VAL_OUTPUT_ARB  # TODO(Jaleel): name to change per #553
+    session.output_mode = nifgen.OutputMode.OUTPUT_ARB  # TODO(Jaleel): name to change per #553
     session.configure_arb_waveform(session.create_waveform_f64(waveform_data), 1.0, 0.0)
 
 
@@ -89,7 +89,7 @@ def test_get_ext_cal_recommended_interval(session):
 ''' TODO(Jaleel) Enable after Issue#558 fixed
 def test_get_hardware_state():
     with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Function or method not supported for 5413/23/33
-        assert session.get_hardware_state() == nifgen.HardwareState.NIFGEN_VAL_IDLE  # TODO(Jaleel): name to change per #553
+        assert session.get_hardware_state() == nifgen.HardwareState.IDLE  # TODO(Jaleel): name to change per #553
 '''
 
 
