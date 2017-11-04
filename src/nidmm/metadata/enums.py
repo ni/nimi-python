@@ -1070,7 +1070,7 @@ Custom
 },
             },
             {
-                'name': '44004',
+                'name': '_44004',
                 'prefix': 'TEMP_THERMISTOR_',
                 'value': 1,
 'documentation': {
@@ -1080,7 +1080,7 @@ Custom
 },
             },
             {
-                'name': '44006',
+                'name': '_44006',
                 'prefix': 'TEMP_THERMISTOR_',
                 'value': 2,
 'documentation': {
@@ -1090,7 +1090,7 @@ Custom
 },
             },
             {
-                'name': '44007',
+                'name': '_44007',
                 'prefix': 'TEMP_THERMISTOR_',
                 'value': 3,
 'documentation': {
