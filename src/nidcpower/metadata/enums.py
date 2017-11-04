@@ -10,15 +10,17 @@ enums = {
         'values': [
             {
                 'name': 'SECONDS',
+                'prefix': None,
                 'value': 1028,
 'documentation': {
 'description': '''
-Specifies aperture time in seconds. NIDCPOWER_VAL_POWER_LINE_CYCLES (1029) Specifies aperture time in power line cycles (PLCs).
+Specifies aperture time in seconds.
 ''',
 },
             },
             {
                 'name': 'POWER_LINE_CYCLES',
+                'prefix': None,
                 'value': 1029,
 'documentation': {
 'description': '''
@@ -32,15 +34,17 @@ Specifies aperture time in power line cycles (PLCs).
         'values': [
             {
                 'name': 'OFF',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
-Disables auto zero. NIDCPOWER_VAL_ONCE (1024) Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
+Disables auto zero.
 ''',
 },
             },
             {
                 'name': 'ON',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -50,12 +54,11 @@ Makes zero conversions for every measurement.
             },
             {
                 'name': 'ONCE',
+                'prefix': None,
                 'value': 1024,
 'documentation': {
 'description': '''
-Makes zero conversions following the first measurement after initiating
-the device. The device uses these zero conversions for the preceding
-measurement and future measurements until the device is reinitiated.
+Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
 ''',
 },
             },
@@ -65,6 +68,7 @@ measurement and future measurements until the device is reinitiated.
         'values': [
             {
                 'name': 'OFF',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -74,6 +78,7 @@ Autoranging is disabled.
             },
             {
                 'name': 'ON',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -87,6 +92,7 @@ Autoranging is enabled.
         'values': [
             {
                 'name': 'OFF',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -96,6 +102,7 @@ Autoranging is disabled.
             },
             {
                 'name': 'ON',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -109,6 +116,7 @@ Autoranging is enabled.
         'values': [
             {
                 'name': 'CURRENT_REGULATE',
+                'prefix': None,
                 'value': 13613,
 'documentation': {
 'description': '''
@@ -118,6 +126,7 @@ Autoranging is enabled.
             },
             {
                 'name': 'CURRENT_TRIP',
+                'prefix': None,
                 'value': 13614,
 'documentation': {
 'description': '''
@@ -131,21 +140,21 @@ Autoranging is enabled.
         'values': [
             {
                 'name': 'SECOND_ORDER',
+                'prefix': 'DC_NOISE_REJECTION_',
                 'value': 1043,
 'documentation': {
 'description': '''
-Second-order DC noise rejection. Refer to `Configuring the Measure
-Unit <NI_DC_Power_Supplies_Help.chm::/ConfiguringTheMeasureUnit.html>`__
-for supported devices.
+Second-order rejection of DC noise.
 ''',
 },
             },
             {
-                'name': 'DC_NOISE_REJECTION_NORMAL',
+                'name': 'NORMAL',
+                'prefix': 'DC_NOISE_REJECTION_',
                 'value': 1044,
 'documentation': {
 'description': '''
-Normal rejection of DC noise. NIDCPOWER_VAL_DC_NOISE_REJECTION_SECOND_ORDER (1043) Second-order rejection of DC noise.
+Normal rejection of DC noise.
 ''',
 },
             },
@@ -155,15 +164,17 @@ Normal rejection of DC noise. NIDCPOWER_VAL_DC_NOISE_REJECTION_SECOND_ORDER (104
         'values': [
             {
                 'name': 'RISING',
+                'prefix': None,
                 'value': 1016,
 'documentation': {
 'description': '''
-Asserts the trigger on the rising edge of the digital signal. NIDCPOWER_VAL_FALLING (1017) Asserts the trigger on the falling edge of the digital signal.
+Asserts the trigger on the rising edge of the digital signal.
 ''',
 },
             },
             {
                 'name': 'FALLING',
+                'prefix': None,
                 'value': 1017,
 'documentation': {
 'description': '''
@@ -177,35 +188,31 @@ Asserts the trigger on the falling edge of the digital signal.
         'values': [
             {
                 'name': 'AUTOMATICALLY_AFTER_SOURCE_COMPLETE',
+                'prefix': None,
                 'value': 1025,
 'documentation': {
 'description': '''
-Acquires a measurement after each Source Complete event completes. NIDCPOWER_VAL_ON_DEMAND (1026) Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called. NIDCPOWER_VAL_ON_MEASURE_TRIGGER (1027) Acquires a measurement when a Measure trigger is received.
+Acquires a measurement after each Source Complete event completes.
 ''',
 },
             },
             {
                 'name': 'ON_DEMAND',
+                'prefix': None,
                 'value': 1026,
 'documentation': {
 'description': '''
-Acquires a measurement when the `niDCPower
-Measure <NIDCPowerVIRef.chm::/niDCPower_Measure.html>`__ VI or
-`niDCPower Measure
-Multiple <NIDCPowerVIRef.chm::/niDCPower_Measure_Multiple.html>`__ VI is
-called.
+Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called.
 ''',
 },
             },
             {
                 'name': 'ON_MEASURE_TRIGGER',
+                'prefix': None,
                 'value': 1027,
 'documentation': {
 'description': '''
-Acquires a measurement when a Measure trigger is received. Use the
-`niDCPower Fetch
-Multiple <NIDCPowerVIRef.chm::/niDCPower_Fetch_Multiple.html>`__ VI to
-retrieve the measurements.
+Acquires a measurement when a Measure trigger is received.
 ''',
 },
             },
@@ -215,19 +222,21 @@ retrieve the measurements.
         'values': [
             {
                 'name': 'LOW',
+                'prefix': None,
                 'value': 1010,
 'documentation': {
 'description': '''
-Output Capacitance is low. NIDCPOWER_VAL_HIGH (1011) Output Capacitance is high.
+Output Capacitance is low.
 ''',
 },
             },
             {
                 'name': 'HIGH',
+                'prefix': None,
                 'value': 1011,
 'documentation': {
 'description': '''
-Output capacitance is high.
+Output Capacitance is high.
 ''',
 },
             },
@@ -237,15 +246,17 @@ Output capacitance is high.
         'values': [
             {
                 'name': 'DC_VOLTAGE',
+                'prefix': None,
                 'value': 1006,
 'documentation': {
 'description': '''
-Sets the output function to DC voltage. NIDCPOWER_VAL_DC_CURRENT (1007) Sets the output function to DC current. NIDCPOWER_VAL_PULSE_VOLTAGE (1049)   NIDCPOWER_VAL_PULSE_CURRENT (1050)
+Sets the output function to DC voltage.
 ''',
 },
             },
             {
                 'name': 'DC_CURRENT',
+                'prefix': None,
                 'value': 1007,
 'documentation': {
 'description': '''
@@ -255,6 +266,7 @@ Sets the output function to DC current.
             },
             {
                 'name': 'PULSE_VOLTAGE',
+                'prefix': None,
                 'value': 1049,
 'documentation': {
 'description': '''
@@ -264,6 +276,7 @@ Sets the output function to pulse voltage.
             },
             {
                 'name': 'PULSE_CURRENT',
+                'prefix': None,
                 'value': 1050,
 'documentation': {
 'description': '''
@@ -276,21 +289,22 @@ Sets the output function to pulse current.
     'Polarity': {
         'values': [
             {
-                'name': 'ACTIVE_HIGH',
+                'name': 'HIGH',
+                'prefix': 'ACTIVE_',
                 'value': 1018,
 'documentation': {
 'description': '''
-A high pulse occurs when the event is generated.  The exported signal is low level both before and after the event is generated. NIDCPOWER_VAL_ACTIVE_LOW (1019) A low pulse occurs when the event is generated.  The exported signal is high level both before and after the event is generated.
+A high pulse occurs when the event is generated.  The exported signal is low level both before and after the event is generated.
 ''',
 },
             },
             {
-                'name': 'ACTIVE_LOW',
+                'name': 'LOW',
+                'prefix': 'ACTIVE_',
                 'value': 1019,
 'documentation': {
 'description': '''
-A low pulse occurs when the event is generated. The exported signal is
-high level both before and after the event is generated.
+A low pulse occurs when the event is generated.  The exported signal is high level both before and after the event is generated.
 ''',
 },
             },
@@ -300,15 +314,17 @@ high level both before and after the event is generated.
         'values': [
             {
                 'name': '_50_HERTZ',
+                'prefix': None,
                 'value': 50.0,
 'documentation': {
 'description': '''
-Specifies a power line frequency of 50 Hz. NIDCPOWER_VAL_60_HERTZ (60.0) Specifies a power line frequency of 60 Hz.
+Specifies a power line frequency of 50 Hz.
 ''',
 },
             },
             {
                 'name': '_60_HERTZ',
+                'prefix': None,
                 'value': 60.0,
 'documentation': {
 'description': '''
@@ -322,6 +338,7 @@ Specifies a power line frequency of 60 Hz.
         'values': [
             {
                 'name': 'INTERNAL',
+                'prefix': None,
                 'value': 1003,
 'documentation': {
 'description': '''
@@ -331,6 +348,7 @@ Uses the PXI chassis power source.
             },
             {
                 'name': 'AUXILIARY',
+                'prefix': None,
                 'value': 1004,
 'documentation': {
 'description': '''
@@ -340,6 +358,7 @@ Uses the auxiliary power source connected to the device.
             },
             {
                 'name': 'AUTOMATIC',
+                'prefix': None,
                 'value': 1005,
 'documentation': {
 'description': '''
@@ -353,6 +372,7 @@ Uses the auxiliary power source if it is available; otherwise uses the PXI chass
         'values': [
             {
                 'name': 'INTERNAL',
+                'prefix': None,
                 'value': 1003,
 'documentation': {
 'description': '''
@@ -362,6 +382,7 @@ Uses the PXI chassis power source.
             },
             {
                 'name': 'AUXILIARY',
+                'prefix': None,
                 'value': 1004,
 'documentation': {
 'description': '''
@@ -375,6 +396,7 @@ Uses the auxiliary power source connected to the device. Only the NI PXI-4110,  
         'values': [
             {
                 'name': 'KEEP_IN_MEMORY',
+                'prefix': None,
                 'value': 1045,
 'documentation': {
 'description': '''
@@ -384,6 +406,7 @@ Keep new self calibration values in memory only.
             },
             {
                 'name': 'WRITE_TO_EEPROM',
+                'prefix': None,
                 'value': 1046,
 'documentation': {
 'description': '''
@@ -397,15 +420,17 @@ Write new self calibration values to hardware.
         'values': [
             {
                 'name': 'LOCAL',
+                'prefix': None,
                 'value': 1008,
 'documentation': {
 'description': '''
-Local sensing is selected. NIDCPOWER_VAL_REMOTE (1009) Remote sensing is selected.
+Local sensing is selected.
 ''',
 },
             },
             {
                 'name': 'REMOTE',
+                'prefix': None,
                 'value': 1009,
 'documentation': {
 'description': '''
@@ -419,20 +444,21 @@ Remote sensing is selected.
         'values': [
             {
                 'name': 'SINGLE_POINT',
+                'prefix': None,
                 'value': 1020,
 'documentation': {
 'description': '''
-The source unit applies a single source configuration. NIDCPOWER_VAL_SEQUENCE (1021) The source unit applies a list of voltage or current configurations sequentially.
+The source unit applies a single source configuration.
 ''',
 },
             },
             {
                 'name': 'SEQUENCE',
+                'prefix': None,
                 'value': 1021,
 'documentation': {
 'description': '''
-The source unit sequentially applies a list of voltage or current
-configurations.
+The source unit applies a list of voltage or current configurations sequentially.
 ''',
 },
             },
@@ -442,51 +468,41 @@ configurations.
         'values': [
             {
                 'name': 'NORMAL',
+                'prefix': None,
                 'value': 1038,
 'documentation': {
 'description': '''
-The output responds to changes in load at a normal speed. NIDCPOWER_VAL_FAST (1039) The output responds to changes in load quickly. NIDCPOWER_VAL_SLOW (1041) The output responds to changes in load slowly. NIDCPOWER_VAL_CUSTOM (1042) The output responds to changes in load based on specified values.
+The output responds to changes in load at a normal speed.
 ''',
 },
             },
             {
                 'name': 'FAST',
+                'prefix': None,
                 'value': 1039,
 'documentation': {
 'description': '''
-Fast transient response time.
+The output responds to changes in load quickly.
 ''',
 },
             },
             {
                 'name': 'SLOW',
+                'prefix': None,
                 'value': 1041,
 'documentation': {
 'description': '''
-Slow transient response time. Refer to `Configuring Transient
-Response <NI_DC_Power_Supplies_Help.chm::/CompensatingforLoad.html>`__
-for supported devices.
+The output responds to changes in load slowly.
 ''',
 },
             },
             {
                 'name': 'CUSTOM',
+                'prefix': None,
                 'value': 1042,
 'documentation': {
 'description': '''
-Custom transient response time. If you select this value, you can then
-specify values for the `Voltage Gain
-Bandwidth <pniDCPower_VoltageGainBandwidth.html>`__, `Voltage
-Compensation
-Frequency <pniDCPower_VoltageCompensationFrequency.html>`__, `Voltage
-Pole-Zero Frequency <pniDCPower_VoltagePoleZeroRatio.html>`__, `Current
-Gain Bandwidth <pniDCPower_CurrentGainBandwidth.html>`__, `Current
-Compensation
-Frequency <pniDCPower_CurrentCompensationFrequency.html>`__, and
-`Current Pole-Zero Ratio <pniDCPower_CurrentPoleZeroRatio.html>`__
-properties. Refer to `Configuring Transient
-Response <NI_DC_Power_Supplies_Help.chm::/CompensatingforLoad.html>`__
-for supported devices.
+The output responds to changes in load based on specified values.
 ''',
 },
             },
@@ -496,24 +512,27 @@ for supported devices.
         'values': [
             {
                 'name': 'NONE',
+                'prefix': None,
                 'value': 1012,
 'documentation': {
 'description': '''
-No trigger is configured. NIDCPOWER_VAL_DIGITAL_EDGE (1014) The data operation starts when a digital edge is detected. NIDCPOWER_VAL_SOFTWARE_EDGE (1015) The data operation starts when a software trigger occurs.
+No trigger is configured.
 ''',
 },
             },
             {
                 'name': 'DIGITAL_EDGE',
+                'prefix': None,
                 'value': 1014,
 'documentation': {
 'description': '''
-The data operation starts when a digital edge is detected. NIDCPOWER_VAL_SOFTWARE_EDGE (1015) The data operation starts when a software trigger occurs.
+The data operation starts when a digital edge is detected.
 ''',
 },
             },
             {
                 'name': 'SOFTWARE_EDGE',
+                'prefix': None,
                 'value': 1015,
 'documentation': {
 'description': '''
@@ -527,6 +546,7 @@ The data operation starts when a software trigger occurs.
         'values': [
             {
                 'name': 'OFF',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -536,6 +556,7 @@ Autoranging is disabled.
             },
             {
                 'name': 'ON',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -549,6 +570,7 @@ Autoranging is enabled.
         'values': [
             {
                 'name': 'OFF',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -558,6 +580,7 @@ Autoranging is disabled.
             },
             {
                 'name': 'ON',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''

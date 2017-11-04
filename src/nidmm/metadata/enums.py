@@ -9,7 +9,8 @@ enums = {
     'ADCCalibration': {
         'values': [
             {
-                'name': 'ADC_CALIBRATION_AUTO',
+                'name': 'AUTO',
+                'prefix': 'ADC_CALIBRATION_',
                 'value': -1,
 'documentation': {
 'description': '''
@@ -18,7 +19,8 @@ The DMM enables or disables ADC calibration for you.
 },
             },
             {
-                'name': 'ADC_CALIBRATION_OFF',
+                'name': 'OFF',
+                'prefix': 'ADC_CALIBRATION_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -27,7 +29,8 @@ The DMM does not compensate for changes to the gain.
 },
             },
             {
-                'name': 'ADC_CALIBRATION_ON',
+                'name': 'ON',
+                'prefix': 'ADC_CALIBRATION_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -41,6 +44,7 @@ The DMM measures an internal reference to calculate the correct gain for the  me
         'values': [
             {
                 'name': 'RUNNING',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -50,6 +54,7 @@ Running
             },
             {
                 'name': 'FINISHED_WITH_BACKLOG',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -59,6 +64,7 @@ Finished with **Backlog**
             },
             {
                 'name': 'FINISHED_WITH_NO_BACKLOG',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -68,6 +74,7 @@ Finished with no **Backlog**
             },
             {
                 'name': 'PAUSED',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -77,6 +84,7 @@ Paused
             },
             {
                 'name': 'NO_ACQUISITION_IN_PROGRESS',
+                'prefix': None,
                 'value': 4,
 'documentation': {
 'description': '''
@@ -90,6 +98,7 @@ No acquisition in progress
         'values': [
             {
                 'name': 'SECONDS',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -99,6 +108,7 @@ Seconds
             },
             {
                 'name': 'POWER_LINE_CYCLES',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -111,7 +121,8 @@ Powerline Cycles
     'AutoZero': {
         'values': [
             {
-                'name': 'AUTO_ZERO_AUTO',
+                'name': 'AUTO',
+                'prefix': 'AUTO_ZERO_',
                 'value': -1,
 'documentation': {
 'description': '''
@@ -120,7 +131,8 @@ The drivers chooses the AutoZero setting based on the configured function  and r
 },
             },
             {
-                'name': 'AUTO_ZERO_OFF',
+                'name': 'OFF',
+                'prefix': 'AUTO_ZERO_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -129,7 +141,8 @@ Disables AutoZero.
 },
             },
             {
-                'name': 'AUTO_ZERO_ON',
+                'name': 'ON',
+                'prefix': 'AUTO_ZERO_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -138,7 +151,8 @@ The DMM internally disconnects the input signal following each measurement  and 
 },
             },
             {
-                'name': 'AUTO_ZERO_ONCE',
+                'name': 'ONCE',
+                'prefix': 'AUTO_ZERO_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -151,7 +165,8 @@ The DMM internally disconnects the input signal for the first measurement  and t
     'CableCompensationType': {
         'values': [
             {
-                'name': 'CABLE_COMP_NONE',
+                'name': 'NONE',
+                'prefix': 'CABLE_COMP_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -160,7 +175,8 @@ No Cable Compensation
 },
             },
             {
-                'name': 'CABLE_COMP_OPEN',
+                'name': 'OPEN',
+                'prefix': 'CABLE_COMP_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -169,7 +185,8 @@ Open Cable Compensation
 },
             },
             {
-                'name': 'CABLE_COMP_SHORT',
+                'name': 'SHORT',
+                'prefix': 'CABLE_COMP_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -178,7 +195,8 @@ Short Cable Compensation
 },
             },
             {
-                'name': 'CABLE_COMP_OPEN_AND_SHORT',
+                'name': 'OPEN_AND_SHORT',
+                'prefix': 'CABLE_COMP_',
                 'value': 3,
 'documentation': {
 'description': '''
@@ -192,6 +210,7 @@ Open and Short Cable Compensation
         'values': [
             {
                 'name': '_1_MICROAMP',
+                'prefix': None,
                 'value': 1e-06,
 'documentation': {
 'description': '''
@@ -201,6 +220,7 @@ NI 4070/4071/4072 are supported.
             },
             {
                 'name': '_10_MICROAMP',
+                'prefix': None,
                 'value': 1e-05,
 'documentation': {
 'description': '''
@@ -210,6 +230,7 @@ NI 4080/4081/4082 and NI 4070/4071/4072 are supported.
             },
             {
                 'name': '_100_MICROAMP',
+                'prefix': None,
                 'value': 0.0001,
 'documentation': {
 'description': '''
@@ -219,6 +240,7 @@ NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
             },
             {
                 'name': '_1_MILLIAMP',
+                'prefix': None,
                 'value': 0.001,
 'documentation': {
 'description': '''
@@ -231,7 +253,8 @@ NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.
     'DCBias': {
         'values': [
             {
-                'name': 'DC_BIAS_OFF',
+                'name': 'OFF',
+                'prefix': 'DC_BIAS_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -240,7 +263,8 @@ NI-DMM programs the device not to use the DC bias
 },
             },
             {
-                'name': 'DC_BIAS_ON',
+                'name': 'ON',
+                'prefix': 'DC_BIAS_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -253,7 +277,8 @@ NI-DMM programs the device to use the DC bias
     'DCNoiseRejection': {
         'values': [
             {
-                'name': 'DCNR_AUTO',
+                'name': 'AUTO',
+                'prefix': 'DCNR_',
                 'value': -1,
 'documentation': {
 'description': '''
@@ -262,7 +287,8 @@ The driver chooses the DC noise rejection setting based on the configured  funct
 },
             },
             {
-                'name': 'DCNR_NORMAL',
+                'name': 'NORMAL',
+                'prefix': 'DCNR_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -271,7 +297,8 @@ NI-DMM weighs all samples equally.
 },
             },
             {
-                'name': 'DCNR_SECOND_ORDER',
+                'name': 'SECOND_ORDER',
+                'prefix': 'DCNR_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -280,7 +307,8 @@ NI-DMM weighs the samples taken in the middle of the aperture time more than  sa
 },
             },
             {
-                'name': 'DCNR_HIGH_ORDER',
+                'name': 'HIGH_ORDER',
+                'prefix': 'DCNR_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -294,6 +322,7 @@ NI-DMM weighs the samples taken in the middle of the aperture time more than  sa
         'values': [
             {
                 'name': '_3_5',
+                'prefix': None,
                 'value': 3.5,
 'documentation': {
 'description': '''
@@ -303,6 +332,7 @@ Specifies 3.5 digits resolution.
             },
             {
                 'name': '_4_5',
+                'prefix': None,
                 'value': 4.5,
 'documentation': {
 'description': '''
@@ -312,6 +342,7 @@ Specifies 4.5 digits resolution.
             },
             {
                 'name': '_5_5',
+                'prefix': None,
                 'value': 5.5,
 'documentation': {
 'description': '''
@@ -321,6 +352,7 @@ Specifies 5.5 digits resolution.
             },
             {
                 'name': '_6_5',
+                'prefix': None,
                 'value': 6.5,
 'documentation': {
 'description': '''
@@ -330,6 +362,7 @@ Specifies 6.5 digits resolution.
             },
             {
                 'name': '_7_5',
+                'prefix': None,
                 'value': 7.5,
 'documentation': {
 'description': '''
@@ -343,6 +376,7 @@ Specifies 7.5 digits resolution.
         'values': [
             {
                 'name': 'DC_VOLTS',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -352,6 +386,7 @@ DC Voltage
             },
             {
                 'name': 'AC_VOLTS',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -361,6 +396,7 @@ AC Voltage
             },
             {
                 'name': 'DC_CURRENT',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -370,6 +406,7 @@ DC Current
             },
             {
                 'name': 'AC_CURRENT',
+                'prefix': None,
                 'value': 4,
 'documentation': {
 'description': '''
@@ -379,6 +416,7 @@ AC Current
             },
             {
                 'name': '_2_WIRE_RES',
+                'prefix': None,
                 'value': 5,
 'documentation': {
 'description': '''
@@ -388,6 +426,7 @@ AC Current
             },
             {
                 'name': '_4_WIRE_RES',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -397,6 +436,7 @@ AC Current
             },
             {
                 'name': 'FREQ',
+                'prefix': None,
                 'value': 104,
 'documentation': {
 'description': '''
@@ -406,6 +446,7 @@ Frequency
             },
             {
                 'name': 'PERIOD',
+                'prefix': None,
                 'value': 105,
 'documentation': {
 'description': '''
@@ -415,6 +456,7 @@ Period
             },
             {
                 'name': 'TEMPERATURE',
+                'prefix': None,
                 'value': 108,
 'documentation': {
 'description': '''
@@ -424,6 +466,7 @@ NI 4065, and NI 4070/4071/4072 supported.
             },
             {
                 'name': 'AC_VOLTS_DC_COUPLED',
+                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': '''
@@ -433,6 +476,7 @@ AC Voltage with DC Coupling
             },
             {
                 'name': 'DIODE',
+                'prefix': None,
                 'value': 1002,
 'documentation': {
 'description': '''
@@ -442,6 +486,7 @@ Diode
             },
             {
                 'name': 'WAVEFORM_VOLTAGE',
+                'prefix': None,
                 'value': 1003,
 'documentation': {
 'description': '''
@@ -451,6 +496,7 @@ Waveform voltage
             },
             {
                 'name': 'WAVEFORM_CURRENT',
+                'prefix': None,
                 'value': 1004,
 'documentation': {
 'description': '''
@@ -460,6 +506,7 @@ Waveform current
             },
             {
                 'name': 'CAPACITANCE',
+                'prefix': None,
                 'value': 1005,
 'documentation': {
 'description': '''
@@ -469,6 +516,7 @@ Capacitance
             },
             {
                 'name': 'INDUCTANCE',
+                'prefix': None,
                 'value': 1006,
 'documentation': {
 'description': '''
@@ -482,6 +530,7 @@ Inductance
         'values': [
             {
                 'name': '_1_MEGAOHM',
+                'prefix': None,
                 'value': 1000000.0,
 'documentation': {
 'description': '''
@@ -491,6 +540,7 @@ Input resistance of 1 M Ohm
             },
             {
                 'name': '_10_MEGAOHM',
+                'prefix': None,
                 'value': 10000000.0,
 'documentation': {
 'description': '''
@@ -500,6 +550,7 @@ Input resistance of 10 M Ohm
             },
             {
                 'name': 'GREATER_THAN_10_GIGAOHM',
+                'prefix': None,
                 'value': 10000000000.0,
 'documentation': {
 'description': '''
@@ -512,7 +563,8 @@ Input resistance greater than 10 G Ohm
     'LCCalculationModel': {
         'values': [
             {
-                'name': 'CALC_MODEL_AUTO',
+                'name': 'AUTO',
+                'prefix': 'CALC_MODEL_',
                 'value': -1,
 'documentation': {
 'description': '''
@@ -521,7 +573,8 @@ NI-DMM chooses the algorithm based on function and range
 },
             },
             {
-                'name': 'CALC_MODEL_SERIES',
+                'name': 'SERIES',
+                'prefix': 'CALC_MODEL_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -530,7 +583,8 @@ NI-DMM uses the series impedance model to calculate capacitance and inductance
 },
             },
             {
-                'name': 'CALC_MODEL_PARALLEL',
+                'name': 'PARALLEL',
+                'prefix': 'CALC_MODEL_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -544,6 +598,7 @@ NI-DMM uses the parallel admittance model to calculate capacitance and inductanc
         'values': [
             {
                 'name': 'NONE',
+                'prefix': None,
                 'value': -1,
 'documentation': {
 'description': '''
@@ -553,6 +608,7 @@ No Trigger
             },
             {
                 'name': 'EXTERNAL',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -562,6 +618,7 @@ AUX I/O Connector
             },
             {
                 'name': 'PXI_TRIG0',
+                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': '''
@@ -571,6 +628,7 @@ PXI Trigger Line 0
             },
             {
                 'name': 'PXI_TRIG1',
+                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': '''
@@ -580,6 +638,7 @@ PXI Trigger Line 1
             },
             {
                 'name': 'PXI_TRIG2',
+                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': '''
@@ -589,6 +648,7 @@ PXI Trigger Line 2
             },
             {
                 'name': 'PXI_TRIG3',
+                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': '''
@@ -598,6 +658,7 @@ PXI Trigger Line 3
             },
             {
                 'name': 'PXI_TRIG4',
+                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': '''
@@ -607,6 +668,7 @@ PXI Trigger Line 4
             },
             {
                 'name': 'PXI_TRIG5',
+                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': '''
@@ -616,6 +678,7 @@ PXI Trigger Line 5
             },
             {
                 'name': 'PXI_TRIG6',
+                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': '''
@@ -625,6 +688,7 @@ PXI Trigger Line 6
             },
             {
                 'name': 'PXI_TRIG7',
+                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': '''
@@ -634,6 +698,7 @@ PXI Trigger Line 7
             },
             {
                 'name': 'LBR_TRIG0',
+                'prefix': None,
                 'value': 1003,
 'documentation': {
 'description': '''
@@ -647,6 +712,7 @@ Internal Trigger Line of a PXI/SCXI Combination Chassis
         'values': [
             {
                 'name': 'POSITIVE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -656,6 +722,7 @@ Rising Edgs
             },
             {
                 'name': 'NEGATIVE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -668,7 +735,8 @@ Falling Edge
     'OffsetCompensatedOhms': {
         'values': [
             {
-                'name': 'OFFSET_COMP_OHMS_OFF',
+                'name': 'OFF',
+                'prefix': 'OFFSET_COMP_OHMS_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -677,7 +745,8 @@ The DMM disables offset compensated ohms.
 },
             },
             {
-                'name': 'OFFSET_COMP_OHMS_ON',
+                'name': 'ON',
+                'prefix': 'OFFSET_COMP_OHMS_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -691,6 +760,7 @@ The DMM enables offset compensated ohms.
         'values': [
             {
                 'name': 'IVIDMM_MODE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -700,6 +770,7 @@ IviDmm Mode
             },
             {
                 'name': 'WAVEFORM_MODE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -713,6 +784,7 @@ Waveform acquisition mode
         'values': [
             {
                 'name': '_50_HERTZ',
+                'prefix': None,
                 'value': 50.0,
 'documentation': {
 'description': '''
@@ -722,6 +794,7 @@ Specifies the powerline frequency as 50 Hz.
             },
             {
                 'name': '_60_HERTZ',
+                'prefix': None,
                 'value': 60.0,
 'documentation': {
 'description': '''
@@ -734,7 +807,8 @@ Specifies the powerline frequency as 60 Hz.
     'RTDType': {
         'values': [
             {
-                'name': 'TEMP_RTD_CUSTOM',
+                'name': 'CUSTOM',
+                'prefix': 'TEMP_RTD_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -744,7 +818,8 @@ and C coefficients.
 },
             },
             {
-                'name': 'TEMP_RTD_PT3750',
+                'name': 'PT3750',
+                'prefix': 'TEMP_RTD_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -753,7 +828,8 @@ Performs scaling for a Pt 3750 RTD.
 },
             },
             {
-                'name': 'TEMP_RTD_PT3851',
+                'name': 'PT3851',
+                'prefix': 'TEMP_RTD_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -762,7 +838,8 @@ Performs scaling for a Pt 3851 RTD.
 },
             },
             {
-                'name': 'TEMP_RTD_PT3911',
+                'name': 'PT3911',
+                'prefix': 'TEMP_RTD_',
                 'value': 3,
 'documentation': {
 'description': '''
@@ -771,7 +848,8 @@ Performs scaling for a Pt 3911 RTD.
 },
             },
             {
-                'name': 'TEMP_RTD_PT3916',
+                'name': 'PT3916',
+                'prefix': 'TEMP_RTD_',
                 'value': 4,
 'documentation': {
 'description': '''
@@ -780,7 +858,8 @@ Performs scaling for a Pt 3916 RTD.
 },
             },
             {
-                'name': 'TEMP_RTD_PT3920',
+                'name': 'PT3920',
+                'prefix': 'TEMP_RTD_',
                 'value': 5,
 'documentation': {
 'description': '''
@@ -789,7 +868,8 @@ Performs scaling for a Pt 3920 RTD.
 },
             },
             {
-                'name': 'TEMP_RTD_PT3928',
+                'name': 'PT3928',
+                'prefix': 'TEMP_RTD_',
                 'value': 6,
 'documentation': {
 'description': '''
@@ -803,6 +883,7 @@ Performs scaling for a Pt 3928 RTD.
         'values': [
             {
                 'name': 'POSITIVE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -812,6 +893,7 @@ Rising Edgs
             },
             {
                 'name': 'NEGATIVE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -825,6 +907,7 @@ Falling Edge
         'values': [
             {
                 'name': 'IMMEDIATE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -834,6 +917,7 @@ No Trigger
             },
             {
                 'name': 'EXTERNAL',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -843,6 +927,7 @@ AUX I/O Connector Trigger Line 0
             },
             {
                 'name': 'SOFTWARE_TRIG',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -852,6 +937,7 @@ Software Trigger
             },
             {
                 'name': 'INTERVAL',
+                'prefix': None,
                 'value': 10,
 'documentation': {
 'description': '''
@@ -861,6 +947,7 @@ Interval Trigger
             },
             {
                 'name': 'PXI_TRIG0',
+                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': '''
@@ -870,6 +957,7 @@ PXI Trigger Line 0
             },
             {
                 'name': 'PXI_TRIG1',
+                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': '''
@@ -879,6 +967,7 @@ PXI Trigger Line 1
             },
             {
                 'name': 'PXI_TRIG2',
+                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': '''
@@ -888,6 +977,7 @@ PXI Trigger Line 2
             },
             {
                 'name': 'PXI_TRIG3',
+                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': '''
@@ -897,6 +987,7 @@ PXI Trigger Line 3
             },
             {
                 'name': 'PXI_TRIG4',
+                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': '''
@@ -906,6 +997,7 @@ PXI Trigger Line 4
             },
             {
                 'name': 'PXI_TRIG5',
+                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': '''
@@ -915,6 +1007,7 @@ PXI Trigger Line 5
             },
             {
                 'name': 'PXI_TRIG6',
+                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': '''
@@ -924,6 +1017,7 @@ PXI Trigger Line 6
             },
             {
                 'name': 'PXI_TRIG7',
+                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': '''
@@ -933,6 +1027,7 @@ PXI Trigger Line 7
             },
             {
                 'name': 'PXI_STAR',
+                'prefix': None,
                 'value': 131,
 'documentation': {
 'description': '''
@@ -942,6 +1037,7 @@ PXI Star Trigger Line
             },
             {
                 'name': 'AUX_TRIG1',
+                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': '''
@@ -951,6 +1047,7 @@ AUX I/0 Connector Trigger Line 1
             },
             {
                 'name': 'LBR_TRIG1',
+                'prefix': None,
                 'value': 1004,
 'documentation': {
 'description': '''
@@ -963,7 +1060,8 @@ Internal Trigger Line of a PXI/SCXI Combination Chassis
     'ThermistorType': {
         'values': [
             {
-                'name': 'TEMP_THERMISTOR_CUSTOM',
+                'name': 'CUSTOM',
+                'prefix': 'TEMP_THERMISTOR_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -972,7 +1070,8 @@ Custom
 },
             },
             {
-                'name': 'TEMP_THERMISTOR_44004',
+                'name': '44004',
+                'prefix': 'TEMP_THERMISTOR_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -981,7 +1080,8 @@ Custom
 },
             },
             {
-                'name': 'TEMP_THERMISTOR_44006',
+                'name': '44006',
+                'prefix': 'TEMP_THERMISTOR_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -990,7 +1090,8 @@ Custom
 },
             },
             {
-                'name': 'TEMP_THERMISTOR_44007',
+                'name': '44007',
+                'prefix': 'TEMP_THERMISTOR_',
                 'value': 3,
 'documentation': {
 'description': '''
@@ -1004,6 +1105,7 @@ Custom
         'values': [
             {
                 'name': 'FIXED',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1017,7 +1119,8 @@ temperature.
     'ThermocoupleType': {
         'values': [
             {
-                'name': 'TEMP_TC_B',
+                'name': 'B',
+                'prefix': 'TEMP_TC_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1026,7 +1129,8 @@ Thermocouple type B
 },
             },
             {
-                'name': 'TEMP_TC_E',
+                'name': 'E',
+                'prefix': 'TEMP_TC_',
                 'value': 4,
 'documentation': {
 'description': '''
@@ -1035,7 +1139,8 @@ Thermocouple type E
 },
             },
             {
-                'name': 'TEMP_TC_J',
+                'name': 'J',
+                'prefix': 'TEMP_TC_',
                 'value': 6,
 'documentation': {
 'description': '''
@@ -1044,7 +1149,8 @@ Thermocouple type J
 },
             },
             {
-                'name': 'TEMP_TC_K',
+                'name': 'K',
+                'prefix': 'TEMP_TC_',
                 'value': 7,
 'documentation': {
 'description': '''
@@ -1053,7 +1159,8 @@ Thermocouple type K
 },
             },
             {
-                'name': 'TEMP_TC_N',
+                'name': 'N',
+                'prefix': 'TEMP_TC_',
                 'value': 8,
 'documentation': {
 'description': '''
@@ -1062,7 +1169,8 @@ Thermocouple type N
 },
             },
             {
-                'name': 'TEMP_TC_R',
+                'name': 'R',
+                'prefix': 'TEMP_TC_',
                 'value': 9,
 'documentation': {
 'description': '''
@@ -1071,7 +1179,8 @@ Thermocouple type R
 },
             },
             {
-                'name': 'TEMP_TC_S',
+                'name': 'S',
+                'prefix': 'TEMP_TC_',
                 'value': 10,
 'documentation': {
 'description': '''
@@ -1080,7 +1189,8 @@ Thermocouple type S
 },
             },
             {
-                'name': 'TEMP_TC_T',
+                'name': 'T',
+                'prefix': 'TEMP_TC_',
                 'value': 11,
 'documentation': {
 'description': '''
@@ -1094,6 +1204,7 @@ Thermocouple type T
         'values': [
             {
                 'name': 'THERMOCOUPLE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1103,6 +1214,7 @@ Thermocouple
             },
             {
                 'name': 'THERMISTOR',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1112,6 +1224,7 @@ Thermistor
             },
             {
                 'name': '_2_WIRE_RTD',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -1121,6 +1234,7 @@ Thermistor
             },
             {
                 'name': '_4_WIRE_RTD',
+                'prefix': None,
                 'value': 4,
 'documentation': {
 'description': '''
@@ -1134,6 +1248,7 @@ Thermistor
         'values': [
             {
                 'name': 'POSITIVE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -1143,6 +1258,7 @@ Rising Edgs
             },
             {
                 'name': 'NEGATIVE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1156,6 +1272,7 @@ Falling Edge
         'values': [
             {
                 'name': 'IMMEDIATE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1165,6 +1282,7 @@ No Trigger
             },
             {
                 'name': 'EXTERNAL',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1174,6 +1292,7 @@ AUX I/O Connector Trigger Line 0
             },
             {
                 'name': 'SOFTWARE_TRIG',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -1183,6 +1302,7 @@ Software Trigger
             },
             {
                 'name': 'PXI_TRIG0',
+                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': '''
@@ -1192,6 +1312,7 @@ PXI Trigger Line 0
             },
             {
                 'name': 'PXI_TRIG1',
+                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': '''
@@ -1201,6 +1322,7 @@ PXI Trigger Line 1
             },
             {
                 'name': 'PXI_TRIG2',
+                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': '''
@@ -1210,6 +1332,7 @@ PXI Trigger Line 2
             },
             {
                 'name': 'PXI_TRIG3',
+                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': '''
@@ -1219,6 +1342,7 @@ PXI Trigger Line 3
             },
             {
                 'name': 'PXI_TRIG4',
+                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': '''
@@ -1228,6 +1352,7 @@ PXI Trigger Line 4
             },
             {
                 'name': 'PXI_TRIG5',
+                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': '''
@@ -1237,6 +1362,7 @@ PXI Trigger Line 5
             },
             {
                 'name': 'PXI_TRIG6',
+                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': '''
@@ -1246,6 +1372,7 @@ PXI Trigger Line 6
             },
             {
                 'name': 'PXI_TRIG7',
+                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': '''
@@ -1255,6 +1382,7 @@ PXI Trigger Line 7
             },
             {
                 'name': 'PXI_STAR',
+                'prefix': None,
                 'value': 131,
 'documentation': {
 'description': '''
@@ -1264,6 +1392,7 @@ PXI Star Trigger Line
             },
             {
                 'name': 'AUX_TRIG1',
+                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': '''
@@ -1273,6 +1402,7 @@ AUX I/O Connector Trigger Line 1
             },
             {
                 'name': 'LBR_TRIG1',
+                'prefix': None,
                 'value': 1004,
 'documentation': {
 'description': '''
@@ -1285,7 +1415,8 @@ Internal Trigger Line of a PXI/SCXI Combination Chassis
     'WaveformCoupling': {
         'values': [
             {
-                'name': 'WAVEFORM_COUPLING_AC',
+                'name': 'AC',
+                'prefix': 'WAVEFORM_COUPLING_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -1294,7 +1425,8 @@ AC Coupled
 },
             },
             {
-                'name': 'WAVEFORM_COUPLING_DC',
+                'name': 'DC',
+                'prefix': 'WAVEFORM_COUPLING_',
                 'value': 1,
 'documentation': {
 'description': '''

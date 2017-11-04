@@ -10,6 +10,7 @@ enums = {
         'values': [
             {
                 'name': 'MAIN_ANALOG_PATH',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -19,6 +20,7 @@ Specifies use of the main path.  NI-FGEN chooses the amplifier based on the user
             },
             {
                 'name': 'DIRECT_ANALOG_PATH',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -28,6 +30,7 @@ Specifies use of the direct path.
             },
             {
                 'name': 'FIXED_LOW_GAIN_ANALOG_PATH',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -37,6 +40,7 @@ Specifies use of the low-gain amplifier in the main path, no matter  what value 
             },
             {
                 'name': 'FIXED_HIGH_GAIN_ANALOG_PATH',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -49,7 +53,8 @@ Specifies use of the high-gain amplifier in the main path.
     'BusType': {
         'values': [
             {
-                'name': 'BUS_INVALID',
+                'name': 'INVALID',
+                'prefix': 'BUS_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -58,7 +63,8 @@ Indicates an invalid bus type.
 },
             },
             {
-                'name': 'BUS_AT',
+                'name': 'AT',
+                'prefix': 'BUS_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -67,7 +73,8 @@ Indicates the signal generator is the AT bus type.
 },
             },
             {
-                'name': 'BUS_PCI',
+                'name': 'PCI',
+                'prefix': 'BUS_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -76,7 +83,8 @@ Indicates the signal generator is the PCI bus type.
 },
             },
             {
-                'name': 'BUS_PXI',
+                'name': 'PXI',
+                'prefix': 'BUS_',
                 'value': 3,
 'documentation': {
 'description': '''
@@ -85,7 +93,8 @@ Indicates the signal generator is the PXI bus type.
 },
             },
             {
-                'name': 'BUS_VXI',
+                'name': 'VXI',
+                'prefix': 'BUS_',
                 'value': 4,
 'documentation': {
 'description': '''
@@ -94,7 +103,8 @@ Indicates the signal generator is the VXI bus type.
 },
             },
             {
-                'name': 'BUS_PCMCIA',
+                'name': 'PCMCIA',
+                'prefix': 'BUS_',
                 'value': 5,
 'documentation': {
 'description': '''
@@ -104,6 +114,7 @@ Indicates the signal generator is the PCI-CMA bus type.
             },
             {
                 'name': 'NIFGEN_VAL_BUS_PXIE',
+                'prefix': None,
                 'value': 6,
 'documentation': {
 'description': '''
@@ -117,6 +128,7 @@ Indicates the signal generator is the PXI Express bus type.
         'values': [
             {
                 'name': 'ANALOG_OUTPUT',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -126,6 +138,7 @@ Specifies that the ADC measures the analog output.
             },
             {
                 'name': 'INTERNAL_VOLTAGE_REFERENCE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -135,6 +148,7 @@ Specifies that the ADC measures the internal voltage reference.
             },
             {
                 'name': 'GROUND',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -144,6 +158,7 @@ Specifies that the ADC measures the ground voltage.
             },
             {
                 'name': 'ANALOG_OUTPUT_DIFFERENTIAL',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -153,6 +168,7 @@ Specifies that the ADC measures the differential analog output.
             },
             {
                 'name': 'ANALOG_OUTPUT_PLUS',
+                'prefix': None,
                 'value': 4,
 'documentation': {
 'description': '''
@@ -162,6 +178,7 @@ Specifies that the ADC measures the positive differential analog output.
             },
             {
                 'name': 'ANALOG_OUTPUT_MINUS',
+                'prefix': None,
                 'value': 5,
 'documentation': {
 'description': '''
@@ -171,6 +188,7 @@ Specifies that the ADC measures the negative differential analog output.
             },
             {
                 'name': 'ANALOG_OUTPUT_IDLE',
+                'prefix': None,
                 'value': 6,
 'documentation': {
 'description': '''
@@ -184,6 +202,7 @@ Specifies that the ADC measures the idle analog output.
         'values': [
             {
                 'name': 'HIGH_RESOLUTION',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -193,6 +212,7 @@ High resolution sampling—Sample rate is generated by a high–resolution clock
             },
             {
                 'name': 'DIVIDE_DOWN',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -202,6 +222,7 @@ Divide down sampling—Sample rates are generated by dividing the source frequen
             },
             {
                 'name': 'AUTOMATIC',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -214,7 +235,8 @@ Automatic Selection—NI-FGEN selects between the divide–down and high–resol
     'DataMarkerEventLevelPolarity': {
         'values': [
             {
-                'name': 'ACTIVE_HIGH',
+                'name': 'HIGH',
+                'prefix': 'ACTIVE_',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -223,7 +245,8 @@ When the operation is ready to start, the Ready for Start  event level is high.
 },
             },
             {
-                'name': 'ACTIVE_LOW',
+                'name': 'LOW',
+                'prefix': 'ACTIVE_',
                 'value': 102,
 'documentation': {
 'description': '''
@@ -236,7 +259,8 @@ When the operation is ready to start, the Ready for Start  event level is low.
     'DataProcessingMode': {
         'values': [
             {
-                'name': 'OSP_REAL',
+                'name': 'REAL',
+                'prefix': 'OSP_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -245,7 +269,8 @@ The waveform data points are real numbers (I data).
 },
             },
             {
-                'name': 'OSP_COMPLEX',
+                'name': 'COMPLEX',
+                'prefix': 'OSP_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -258,7 +283,8 @@ The waveform data points are complex numbers (I/Q data).
     'DoneEventActiveLevel': {
         'values': [
             {
-                'name': 'ACTIVE_HIGH',
+                'name': 'HIGH',
+                'prefix': 'ACTIVE_',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -267,7 +293,8 @@ When the operation is ready to start, the Ready for Start  event level is high.
 },
             },
             {
-                'name': 'ACTIVE_LOW',
+                'name': 'LOW',
+                'prefix': 'ACTIVE_',
                 'value': 102,
 'documentation': {
 'description': '''
@@ -281,6 +308,7 @@ When the operation is ready to start, the Ready for Start  event level is low.
         'values': [
             {
                 'name': 'SAMPLE_CLOCK_PERIODS',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -290,6 +318,7 @@ Specifies the pulse width in Sample clock periods.
             },
             {
                 'name': 'SECONDS',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -303,6 +332,7 @@ Specifies the pulse width in seconds.
         'values': [
             {
                 'name': 'PULSE',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -312,6 +342,7 @@ Triggers a pulse for a specified period of time.
             },
             {
                 'name': 'LEVEL',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -324,7 +355,8 @@ Shifts high or low while the event is active, depending  on the active state you
     'DoneEventPulsePolarity': {
         'values': [
             {
-                'name': 'ACTIVE_HIGH',
+                'name': 'HIGH',
+                'prefix': 'ACTIVE_',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -333,7 +365,8 @@ When the operation is ready to start, the Ready for Start  event level is high.
 },
             },
             {
-                'name': 'ACTIVE_LOW',
+                'name': 'LOW',
+                'prefix': 'ACTIVE_',
                 'value': 102,
 'documentation': {
 'description': '''
@@ -347,6 +380,7 @@ When the operation is ready to start, the Ready for Start  event level is low.
         'values': [
             {
                 'name': 'SAMPLE_CLOCK_PERIODS',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -356,6 +390,7 @@ Specifies the pulse width in Sample clock periods.
             },
             {
                 'name': 'SECONDS',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -368,7 +403,8 @@ Specifies the pulse width in seconds.
     'FilterType': {
         'values': [
             {
-                'name': 'OSP_FLAT',
+                'name': 'FLAT',
+                'prefix': 'OSP_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -377,7 +413,8 @@ Applies a flat filter to the data with the passband value specified  in the NIFG
 },
             },
             {
-                'name': 'OSP_RAISED_COSINE',
+                'name': 'RAISED_COSINE',
+                'prefix': 'OSP_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -386,7 +423,8 @@ Applies a raised cosine filter to the data with the alpha value  specified in th
 },
             },
             {
-                'name': 'OSP_ROOT_RAISED_COSINE',
+                'name': 'ROOT_RAISED_COSINE',
+                'prefix': 'OSP_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -395,7 +433,8 @@ Applies a root raised cosine filter to the data with the alpha value  specified 
 },
             },
             {
-                'name': 'OSP_GAUSSIAN',
+                'name': 'GAUSSIAN',
+                'prefix': 'OSP_',
                 'value': 3,
 'documentation': {
 'description': '''
@@ -404,7 +443,8 @@ Applies a Gaussian filter to the data with the BT value specified in the  NIFGEN
 },
             },
             {
-                'name': 'OSP_CUSTOM',
+                'name': 'CUSTOM',
+                'prefix': 'OSP_',
                 'value': 4,
 'documentation': {
 'description': '''
@@ -418,6 +458,7 @@ Applies a custom filter to the data. If NIFGEN_VAL_OSP_CUSTOM is selected,  you 
         'values': [
             {
                 'name': 'HOLD_LAST_VALUE',
+                'prefix': None,
                 'value': 400,
 'documentation': {
 'description': '''
@@ -427,6 +468,7 @@ While in an Idle or Wait state, the output signal remains  at the last voltage g
             },
             {
                 'name': 'JUMP_TO_VALUE',
+                'prefix': None,
                 'value': 401,
 'documentation': {
 'description': '''
@@ -440,6 +482,7 @@ While in an Idle or Wait state, the output signal remains  at the value configur
         'values': [
             {
                 'name': 'SAMPLE_CLOCK_PERIODS',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -449,6 +492,7 @@ Specifies the pulse width in Sample clock periods.
             },
             {
                 'name': 'SECONDS',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -462,6 +506,7 @@ Specifies the pulse width in seconds.
         'values': [
             {
                 'name': 'PULSE',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -471,6 +516,7 @@ Triggers a pulse for a specified period of time.
             },
             {
                 'name': 'LEVEL',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -480,6 +526,7 @@ Shifts high or low while the event is active, depending  on the active state you
             },
             {
                 'name': 'TOGGLE',
+                'prefix': None,
                 'value': 103,
 'documentation': {
 'description': '''
@@ -493,7 +540,8 @@ active state you specify.
     'MarkerEventPulsePolarity': {
         'values': [
             {
-                'name': 'ACTIVE_HIGH',
+                'name': 'HIGH',
+                'prefix': 'ACTIVE_',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -502,7 +550,8 @@ When the operation is ready to start, the Ready for Start  event level is high.
 },
             },
             {
-                'name': 'ACTIVE_LOW',
+                'name': 'LOW',
+                'prefix': 'ACTIVE_',
                 'value': 102,
 'documentation': {
 'description': '''
@@ -516,6 +565,7 @@ When the operation is ready to start, the Ready for Start  event level is low.
         'values': [
             {
                 'name': 'SAMPLE_CLOCK_PERIODS',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -525,6 +575,7 @@ Specifies the pulse width in Sample clock periods.
             },
             {
                 'name': 'SECONDS',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -538,6 +589,7 @@ Specifies the pulse width in seconds.
         'values': [
             {
                 'name': 'HIGH',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -547,6 +599,7 @@ Sets the initial state of the Marker event to high.
             },
             {
                 'name': 'LOW',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -559,7 +612,8 @@ Sets the initial state of the Marker event to low.
     'OSPMode': {
         'values': [
             {
-                'name': 'OSP_IF',
+                'name': 'IF',
+                'prefix': 'OSP_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -568,7 +622,8 @@ The OSP block generates intermediate frequency (IF) data.
 },
             },
             {
-                'name': 'OSP_BASEBAND',
+                'name': 'BASEBAND',
+                'prefix': 'OSP_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -581,7 +636,8 @@ The OSP block generates baseband data.
     'OSPOverflowErrorReporting': {
         'values': [
             {
-                'name': 'ERROR_REPORTING_ERROR',
+                'name': 'ERROR',
+                'prefix': 'ERROR_REPORTING_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -590,7 +646,8 @@ NI-FGEN returns errors whenever an overflow has occurred in the OSP block.
 },
             },
             {
-                'name': 'ERROR_REPORTING_DISABLED',
+                'name': 'DISABLED',
+                'prefix': 'ERROR_REPORTING_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -604,6 +661,7 @@ NI-FGEN does not return errors when an overflow occurs in the OSP block.
         'values': [
             {
                 'name': 'NIFGEN_VAL_OPERATE_CONTINUOUS',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -616,7 +674,8 @@ Continuous operation
     'OutputMode': {
         'values': [
             {
-                'name': 'OUTPUT_FUNC',
+                'name': 'FUNC',
+                'prefix': 'OUTPUT_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -625,7 +684,8 @@ Standard Function mode—  Generates standard function waveforms  such as sine, 
 },
             },
             {
-                'name': 'OUTPUT_ARB',
+                'name': 'ARB',
+                'prefix': 'OUTPUT_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -634,7 +694,8 @@ Arbitrary waveform mode—Generates  waveforms from user-created/provided  wavef
 },
             },
             {
-                'name': 'OUTPUT_SEQ',
+                'name': 'SEQ',
+                'prefix': 'OUTPUT_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -643,7 +704,8 @@ Arbitrary sequence mode —  Generates downloaded waveforms  in an order your sp
 },
             },
             {
-                'name': 'OUTPUT_FREQ_LIST',
+                'name': 'FREQ_LIST',
+                'prefix': 'OUTPUT_',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -653,6 +715,7 @@ Frequency List mode—Generates a  standard function using a list of  frequencie
             },
             {
                 'name': 'NIFGEN_VAL_OUTPUT_SCRIPT',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -666,7 +729,8 @@ waveforms in complex combinations.
     'P2PAddressType': {
         'values': [
             {
-                'name': 'ADDR_PHYSICAL',
+                'name': 'PHYSICAL',
+                'prefix': 'ADDR_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -675,7 +739,8 @@ Physical
 },
             },
             {
-                'name': 'ADDR_VIRTUAL',
+                'name': 'VIRTUAL',
+                'prefix': 'ADDR_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -688,7 +753,8 @@ Physical
     'ReadyForStartEventActiveLevel': {
         'values': [
             {
-                'name': 'ACTIVE_HIGH',
+                'name': 'HIGH',
+                'prefix': 'ACTIVE_',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -697,7 +763,8 @@ When the operation is ready to start, the Ready for Start  event level is high.
 },
             },
             {
-                'name': 'ACTIVE_LOW',
+                'name': 'LOW',
+                'prefix': 'ACTIVE_',
                 'value': 102,
 'documentation': {
 'description': '''
@@ -711,6 +778,7 @@ When the operation is ready to start, the Ready for Start  event level is low.
         'values': [
             {
                 'name': 'CLOCK_IN',
+                'prefix': None,
                 'value': 'ClkIn',
 'documentation': {
 'description': '''
@@ -721,6 +789,7 @@ used as the Reference Clock source.
             },
             {
                 'name': 'NONE',
+                'prefix': None,
                 'value': 'None',
 'documentation': {
 'description': '''
@@ -730,6 +799,7 @@ Specifies that a Reference Clock is not used.
             },
             {
                 'name': 'ONBOARD_REFERENCE_CLOCK',
+                'prefix': None,
                 'value': 'OnboardRefClk',
 'documentation': {
 'description': '''
@@ -740,6 +810,7 @@ Clock source.
             },
             {
                 'name': 'PXI_CLOCK',
+                'prefix': None,
                 'value': 'PXI_Clk',
 'documentation': {
 'description': '''
@@ -749,6 +820,7 @@ Specifies the PXI Clock is used as the Reference Clock source.
             },
             {
                 'name': 'RTSI_7',
+                'prefix': None,
                 'value': 'RTSI7',
 'documentation': {
 'description': '''
@@ -762,6 +834,7 @@ Specifies that the RTSI line 7 is used as the Reference Clock source.
         'values': [
             {
                 'name': 'CLOCK_IN',
+                'prefix': None,
                 'value': '"ClkIn"',
 'documentation': {
 'description': '''
@@ -772,6 +845,7 @@ the Sample Clock source.
             },
             {
                 'name': 'DDC_CLOCK_IN',
+                'prefix': None,
                 'value': '"DDC_ClkIn"',
 'documentation': {
 'description': '''
@@ -782,6 +856,7 @@ Clock source.
             },
             {
                 'name': 'ONBOARD_CLOCK',
+                'prefix': None,
                 'value': '"OnboardClock"',
 'documentation': {
 'description': '''
@@ -791,6 +866,7 @@ Specifies that the onboard clock is used as the Sample Clock source.
             },
             {
                 'name': 'PXI_STAR_LINE',
+                'prefix': None,
                 'value': '"PXI_Star"',
 'documentation': {
 'description': '''
@@ -801,6 +877,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_0RTSI_0',
+                'prefix': None,
                 'value': '"PXI_Trig0"',
 'documentation': {
 'description': '''
@@ -811,6 +888,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_1RTSI_1',
+                'prefix': None,
                 'value': '"PXI_Trig1"',
 'documentation': {
 'description': '''
@@ -821,6 +899,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_2RTSI_2',
+                'prefix': None,
                 'value': '"PXI_Trig2"',
 'documentation': {
 'description': '''
@@ -831,6 +910,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_3RTSI_3',
+                'prefix': None,
                 'value': '"PXI_Trig3"',
 'documentation': {
 'description': '''
@@ -841,6 +921,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_4RTSI_4',
+                'prefix': None,
                 'value': '"PXI_Trig4"',
 'documentation': {
 'description': '''
@@ -851,6 +932,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_5RTSI_5',
+                'prefix': None,
                 'value': '"PXI_Trig5"',
 'documentation': {
 'description': '''
@@ -861,6 +943,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_6RTSI_6',
+                'prefix': None,
                 'value': '"PXI_Trig6"',
 'documentation': {
 'description': '''
@@ -871,6 +954,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_7RTSI_7',
+                'prefix': None,
                 'value': '"PXI_Trig7"',
 'documentation': {
 'description': '''
@@ -885,6 +969,7 @@ source.
         'values': [
             {
                 'name': 'CLOCK_IN',
+                'prefix': None,
                 'value': '"ClkIn"',
 'documentation': {
 'description': '''
@@ -895,6 +980,7 @@ is used as the source.
             },
             {
                 'name': 'ONBOARD_CLOCK',
+                'prefix': None,
                 'value': '"OnboardClock"',
 'documentation': {
 'description': '''
@@ -908,6 +994,7 @@ Specifies that the onboard Sample Clock timebase is used as the source.
         'values': [
             {
                 'name': 'RISING_EDGE',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -917,6 +1004,7 @@ Rising Edge
             },
             {
                 'name': 'FALLING_EDGE',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -929,7 +1017,8 @@ Falling Edge
     'ScriptTriggerDigitalLevelActiveLevel': {
         'values': [
             {
-                'name': 'ACTIVE_HIGH',
+                'name': 'HIGH',
+                'prefix': 'ACTIVE_',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -938,7 +1027,8 @@ High Level
 },
             },
             {
-                'name': 'ACTIVE_LOW',
+                'name': 'LOW',
+                'prefix': 'ACTIVE_',
                 'value': 102,
 'documentation': {
 'description': '''
@@ -952,6 +1042,7 @@ Low Level
         'values': [
             {
                 'name': 'TRIG_NONE',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -961,6 +1052,7 @@ No trigger is configured. Signal generation starts immediately.
             },
             {
                 'name': 'DIGITAL_EDGE',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -970,6 +1062,7 @@ Trigger is asserted when a digital edge is detected.
             },
             {
                 'name': 'DIGITAL_LEVEL',
+                'prefix': None,
                 'value': 103,
 'documentation': {
 'description': '''
@@ -979,6 +1072,7 @@ Trigger is asserted when a digital level is detected.
             },
             {
                 'name': 'SOFTWARE_EDGE',
+                'prefix': None,
                 'value': 104,
 'documentation': {
 'description': '''
@@ -992,6 +1086,7 @@ Trigger is asserted when a software edge is detected.
         'values': [
             {
                 'name': 'RISING_EDGE',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -1001,6 +1096,7 @@ Rising Edge
             },
             {
                 'name': 'FALLING_EDGE',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -1014,6 +1110,7 @@ Falling Edge
         'values': [
             {
                 'name': 'TRIG_NONE',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -1023,6 +1120,7 @@ None
             },
             {
                 'name': 'DIGITAL_EDGE',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -1032,6 +1130,7 @@ Digital Edge
             },
             {
                 'name': 'SOFTWARE_EDGE',
+                'prefix': None,
                 'value': 104,
 'documentation': {
 'description': '''
@@ -1041,6 +1140,7 @@ Software Edge
             },
             {
                 'name': 'P2P_ENDPOINT_FULLNESS',
+                'prefix': None,
                 'value': 106,
 'documentation': {
 'description': '''
@@ -1053,7 +1153,8 @@ P2P Endpoint Fullness
     'StartedEventActiveLevel': {
         'values': [
             {
-                'name': 'ACTIVE_HIGH',
+                'name': 'HIGH',
+                'prefix': 'ACTIVE_',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -1062,7 +1163,8 @@ When the operation is ready to start, the Ready for Start  event level is high.
 },
             },
             {
-                'name': 'ACTIVE_LOW',
+                'name': 'LOW',
+                'prefix': 'ACTIVE_',
                 'value': 102,
 'documentation': {
 'description': '''
@@ -1076,6 +1178,7 @@ When the operation is ready to start, the Ready for Start  event level is low.
         'values': [
             {
                 'name': 'SAMPLE_CLOCK_PERIODS',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -1085,6 +1188,7 @@ Specifies the pulse width in Sample clock periods.
             },
             {
                 'name': 'SECONDS',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -1098,6 +1202,7 @@ Specifies the pulse width in seconds.
         'values': [
             {
                 'name': 'PULSE',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -1107,6 +1212,7 @@ Triggers a pulse for a specified period of time.
             },
             {
                 'name': 'LEVEL',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -1119,7 +1225,8 @@ Shifts high or low while the event is active, depending  on the active state you
     'StartedEventPulsePolarity': {
         'values': [
             {
-                'name': 'ACTIVE_HIGH',
+                'name': 'HIGH',
+                'prefix': 'ACTIVE_',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -1128,7 +1235,8 @@ When the operation is ready to start, the Ready for Start  event level is high.
 },
             },
             {
-                'name': 'ACTIVE_LOW',
+                'name': 'LOW',
+                'prefix': 'ACTIVE_',
                 'value': 102,
 'documentation': {
 'description': '''
@@ -1142,6 +1250,7 @@ When the operation is ready to start, the Ready for Start  event level is low.
         'values': [
             {
                 'name': 'SAMPLE_CLOCK_PERIODS',
+                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '''
@@ -1151,6 +1260,7 @@ Specifies the pulse width in Sample clock periods.
             },
             {
                 'name': 'SECONDS',
+                'prefix': None,
                 'value': 102,
 'documentation': {
 'description': '''
@@ -1164,6 +1274,7 @@ Specifies the pulse width in seconds.
         'values': [
             {
                 'name': 'TTL0',
+                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': '''
@@ -1173,6 +1284,7 @@ PXI TRIG0 or VXI TTL0
             },
             {
                 'name': 'TTL1',
+                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': '''
@@ -1182,6 +1294,7 @@ PXI TRIG1 or VXI TTL1
             },
             {
                 'name': 'TTL2',
+                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': '''
@@ -1191,6 +1304,7 @@ PXI TRIG2 or VXI TTL2
             },
             {
                 'name': 'TTL3',
+                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': '''
@@ -1200,6 +1314,7 @@ PXI TRIG3 or VXI TTL3
             },
             {
                 'name': 'TTL4',
+                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': '''
@@ -1209,6 +1324,7 @@ PXI TRIG4 or VXI TTL4
             },
             {
                 'name': 'TTL5',
+                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': '''
@@ -1218,6 +1334,7 @@ PXI TRIG5 or VXI TTL5
             },
             {
                 'name': 'TTL6',
+                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': '''
@@ -1227,6 +1344,7 @@ PXI TRIG6 or VXI TTL6
             },
             {
                 'name': 'RTSI_0',
+                'prefix': None,
                 'value': 141,
 'documentation': {
 'description': '''
@@ -1236,6 +1354,7 @@ RTSI 0
             },
             {
                 'name': 'RTSI_1',
+                'prefix': None,
                 'value': 142,
 'documentation': {
 'description': '''
@@ -1245,6 +1364,7 @@ RTSI 1
             },
             {
                 'name': 'RTSI_2',
+                'prefix': None,
                 'value': 143,
 'documentation': {
 'description': '''
@@ -1254,6 +1374,7 @@ RTSI 2
             },
             {
                 'name': 'RTSI_3',
+                'prefix': None,
                 'value': 144,
 'documentation': {
 'description': '''
@@ -1263,6 +1384,7 @@ RTSI 3
             },
             {
                 'name': 'RTSI_4',
+                'prefix': None,
                 'value': 145,
 'documentation': {
 'description': '''
@@ -1272,6 +1394,7 @@ RTSI 4
             },
             {
                 'name': 'RTSI_5',
+                'prefix': None,
                 'value': 146,
 'documentation': {
 'description': '''
@@ -1281,6 +1404,7 @@ RTSI 5
             },
             {
                 'name': 'RTSI_6',
+                'prefix': None,
                 'value': 147,
 'documentation': {
 'description': '''
@@ -1290,6 +1414,7 @@ RTSI 6
             },
             {
                 'name': 'NONE',
+                'prefix': None,
                 'value': 1000,
 'documentation': {
 'description': '''
@@ -1303,6 +1428,7 @@ No Synchronization Source
         'values': [
             {
                 'name': 'SINGLE_ENDED',
+                'prefix': None,
                 'value': 300,
 'documentation': {
 'description': '''
@@ -1312,6 +1438,7 @@ Single-ended operation
             },
             {
                 'name': 'DIFFERENTIAL',
+                'prefix': None,
                 'value': 301,
 'documentation': {
 'description': '''
@@ -1325,6 +1452,7 @@ Differential operation
         'values': [
             {
                 'name': 'SINGLE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1334,6 +1462,7 @@ Single Trigger Mode - The waveform you describe in the sequence list is  generat
             },
             {
                 'name': 'CONTINUOUS',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1343,6 +1472,7 @@ Continuous Trigger Mode - The waveform you describe in the staging list generate
             },
             {
                 'name': 'STEPPED',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -1357,6 +1487,7 @@ In Frequency List mode, Stepped trigger mode is the same as Burst
             },
             {
                 'name': 'BURST',
+                'prefix': None,
                 'value': 4,
 'documentation': {
 'description': '''
@@ -1375,6 +1506,7 @@ In Frequency List mode, Stepped trigger mode is the same as Burst
         'values': [
             {
                 'name': 'IMMEDIATE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -1384,6 +1516,7 @@ Immediate-The signal generator does not wait for a trigger of any kind.
             },
             {
                 'name': 'EXTERNAL',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1393,6 +1526,7 @@ External-The signal generator waits for a trigger on the external trigger input
             },
             {
                 'name': 'SOFTWARE_TRIG',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1402,6 +1536,7 @@ Software Trigger-The signal generator waits until you call niFgen_SendSWTrigger.
             },
             {
                 'name': 'TTL0',
+                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': '''
@@ -1411,6 +1546,7 @@ PXI TRIG0 or VXI TTL0
             },
             {
                 'name': 'TTL1',
+                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': '''
@@ -1420,6 +1556,7 @@ PXI TRIG1 or VXI TTL1
             },
             {
                 'name': 'TTL2',
+                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': '''
@@ -1429,6 +1566,7 @@ PXI TRIG2 or VXI TTL2
             },
             {
                 'name': 'TTL3',
+                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': '''
@@ -1438,6 +1576,7 @@ PXI TRIG3 or VXI TTL3
             },
             {
                 'name': 'TTL4',
+                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': '''
@@ -1447,6 +1586,7 @@ PXI TRIG4 or VXI TTL4
             },
             {
                 'name': 'TTL5',
+                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': '''
@@ -1456,6 +1596,7 @@ PXI TRIG5 or VXI TTL5
             },
             {
                 'name': 'TTL6',
+                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': '''
@@ -1465,6 +1606,7 @@ PXI TRIG6 or VXI TTL6
             },
             {
                 'name': 'PXI_STAR',
+                'prefix': None,
                 'value': 131,
 'documentation': {
 'description': '''
@@ -1474,6 +1616,7 @@ PXI star
             },
             {
                 'name': 'RTSI_0',
+                'prefix': None,
                 'value': 141,
 'documentation': {
 'description': '''
@@ -1483,6 +1626,7 @@ RTSI line 0
             },
             {
                 'name': 'RTSI_1',
+                'prefix': None,
                 'value': 142,
 'documentation': {
 'description': '''
@@ -1492,6 +1636,7 @@ RTSI line 1
             },
             {
                 'name': 'RTSI_2',
+                'prefix': None,
                 'value': 143,
 'documentation': {
 'description': '''
@@ -1501,6 +1646,7 @@ RTSI line 2
             },
             {
                 'name': 'RTSI_3',
+                'prefix': None,
                 'value': 144,
 'documentation': {
 'description': '''
@@ -1510,6 +1656,7 @@ RTSI line 3
             },
             {
                 'name': 'RTSI_4',
+                'prefix': None,
                 'value': 145,
 'documentation': {
 'description': '''
@@ -1519,6 +1666,7 @@ RTSI line 4
             },
             {
                 'name': 'RTSI_5',
+                'prefix': None,
                 'value': 146,
 'documentation': {
 'description': '''
@@ -1528,6 +1676,7 @@ RTSI line 5
             },
             {
                 'name': 'RTSI_6',
+                'prefix': None,
                 'value': 147,
 'documentation': {
 'description': '''
@@ -1537,6 +1686,7 @@ RTSI line 6
             },
             {
                 'name': 'RTSI_7',
+                'prefix': None,
                 'value': 1010,
 'documentation': {
 'description': '''
@@ -1546,6 +1696,7 @@ RTSI line 7
             },
             {
                 'name': 'PFI_0',
+                'prefix': None,
                 'value': 1011,
 'documentation': {
 'description': '''
@@ -1555,6 +1706,7 @@ PFI 0
             },
             {
                 'name': 'PFI_1',
+                'prefix': None,
                 'value': 1012,
 'documentation': {
 'description': '''
@@ -1564,6 +1716,7 @@ PFI 1
             },
             {
                 'name': 'PFI_2',
+                'prefix': None,
                 'value': 1013,
 'documentation': {
 'description': '''
@@ -1573,6 +1726,7 @@ PFI 2
             },
             {
                 'name': 'PFI_3',
+                'prefix': None,
                 'value': 1014,
 'documentation': {
 'description': '''
@@ -1582,6 +1736,7 @@ PFI 3
             },
             {
                 'name': 'NIFGEN_VAL_OTHER_TERMINAL',
+                'prefix': None,
                 'value': 1018,
 'documentation': {
 'description': '''
@@ -1595,6 +1750,7 @@ Specifies that another terminal is used.
         'values': [
             {
                 'name': 'NIFGEN_VAL_INTERNAL',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -1604,6 +1760,7 @@ Internal update clock
             },
             {
                 'name': 'NIFGEN_VAL_EXTERNAL',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1613,6 +1770,7 @@ External update clock given on the IO connector
             },
             {
                 'name': 'NIFGEN_VAL_PXI_STAR',
+                'prefix': None,
                 'value': 131,
 'documentation': {
 'description': '''
@@ -1623,6 +1781,7 @@ chassis slots 3 through 15.
             },
             {
                 'name': 'NIFGEN_VAL_RTSI_0',
+                'prefix': None,
                 'value': 141,
 'documentation': {
 'description': '''
@@ -1632,6 +1791,7 @@ RTSI line 0
             },
             {
                 'name': 'NIFGEN_VAL_RTSI_1',
+                'prefix': None,
                 'value': 142,
 'documentation': {
 'description': '''
@@ -1641,6 +1801,7 @@ RTSI line 1
             },
             {
                 'name': 'NIFGEN_VAL_RTSI_2',
+                'prefix': None,
                 'value': 143,
 'documentation': {
 'description': '''
@@ -1650,6 +1811,7 @@ RTSI line 2
             },
             {
                 'name': 'NIFGEN_VAL_RTSI_3',
+                'prefix': None,
                 'value': 144,
 'documentation': {
 'description': '''
@@ -1659,6 +1821,7 @@ RTSI line 3
             },
             {
                 'name': 'NIFGEN_VAL_RTSI_4',
+                'prefix': None,
                 'value': 145,
 'documentation': {
 'description': '''
@@ -1668,6 +1831,7 @@ RTSI line 4
             },
             {
                 'name': 'NIFGEN_VAL_RTSI_5',
+                'prefix': None,
                 'value': 146,
 'documentation': {
 'description': '''
@@ -1677,6 +1841,7 @@ RTSI line 5
             },
             {
                 'name': 'NIFGEN_VAL_RTSI_6',
+                'prefix': None,
                 'value': 147,
 'documentation': {
 'description': '''
@@ -1686,6 +1851,7 @@ RTSI line 6
             },
             {
                 'name': 'NIFGEN_VAL_RTSI_7',
+                'prefix': None,
                 'value': 1010,
 'documentation': {
 'description': '''
@@ -1695,6 +1861,7 @@ RTSI line 6
             },
             {
                 'name': 'NIFGEN_VAL_OTHER_TERMINAL',
+                'prefix': None,
                 'value': 1018,
 'documentation': {
 'description': '''
@@ -1704,6 +1871,7 @@ Uses another device terminal.
             },
             {
                 'name': 'NIFGEN_VAL_CLK_IN',
+                'prefix': None,
                 'value': 1202,
 'documentation': {
 'description': '''
@@ -1713,6 +1881,7 @@ Coaxial CLK IN connector on the board front panel
             },
             {
                 'name': 'NIFGEN_VAL_DDC_CLK_IN',
+                'prefix': None,
                 'value': 1203,
 'documentation': {
 'description': '''
@@ -1726,6 +1895,7 @@ DDC CLK IN line of the Digital Data & Control connector
         'values': [
             {
                 'name': 'PAL_B',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -1735,6 +1905,7 @@ PAL B Video Type
             },
             {
                 'name': 'PAL_D',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1744,6 +1915,7 @@ PAL D Video Type
             },
             {
                 'name': 'PAL_G',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1753,6 +1925,7 @@ PAL G Video Type
             },
             {
                 'name': 'PAL_H',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -1762,6 +1935,7 @@ PAL H Video Type
             },
             {
                 'name': 'PAL_I',
+                'prefix': None,
                 'value': 4,
 'documentation': {
 'description': '''
@@ -1771,6 +1945,7 @@ PAL I Video Type
             },
             {
                 'name': 'PAL_M',
+                'prefix': None,
                 'value': 5,
 'documentation': {
 'description': '''
@@ -1780,6 +1955,7 @@ PAL M Video Type
             },
             {
                 'name': 'PAL_N',
+                'prefix': None,
                 'value': 6,
 'documentation': {
 'description': '''
@@ -1789,6 +1965,7 @@ PAL N Video Type
             },
             {
                 'name': 'NTSC_M',
+                'prefix': None,
                 'value': 7,
 'documentation': {
 'description': '''
@@ -1802,6 +1979,7 @@ NTSC M Video Type
         'values': [
             {
                 'name': 'HOLD_LAST_VALUE',
+                'prefix': None,
                 'value': 400,
 'documentation': {
 'description': '''
@@ -1811,6 +1989,7 @@ While in an Idle or Wait state, the output signal remains  at the last voltage g
             },
             {
                 'name': 'JUMP_TO_VALUE',
+                'prefix': None,
                 'value': 401,
 'documentation': {
 'description': '''
@@ -1823,7 +2002,8 @@ While in an Idle or Wait state, the output signal remains  at the value configur
     'Waveform': {
         'values': [
             {
-                'name': 'WFM_SINE',
+                'name': 'SINE',
+                'prefix': 'WFM_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1832,7 +2012,8 @@ Sinusoid waveform
 },
             },
             {
-                'name': 'WFM_SQUARE',
+                'name': 'SQUARE',
+                'prefix': 'WFM_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1841,7 +2022,8 @@ Square waveform
 },
             },
             {
-                'name': 'WFM_TRIANGLE',
+                'name': 'TRIANGLE',
+                'prefix': 'WFM_',
                 'value': 3,
 'documentation': {
 'description': '''
@@ -1850,7 +2032,8 @@ Triange waveform
 },
             },
             {
-                'name': 'WFM_RAMP_UP',
+                'name': 'RAMP_UP',
+                'prefix': 'WFM_',
                 'value': 4,
 'documentation': {
 'description': '''
@@ -1859,7 +2042,8 @@ Positive ramp waveform
 },
             },
             {
-                'name': 'WFM_RAMP_DOWN',
+                'name': 'RAMP_DOWN',
+                'prefix': 'WFM_',
                 'value': 5,
 'documentation': {
 'description': '''
@@ -1868,7 +2052,8 @@ Negative ramp waveform
 },
             },
             {
-                'name': 'WFM_DC',
+                'name': 'DC',
+                'prefix': 'WFM_',
                 'value': 6,
 'documentation': {
 'description': '''
@@ -1877,7 +2062,8 @@ Constant voltage
 },
             },
             {
-                'name': 'WFM_NOISE',
+                'name': 'NOISE',
+                'prefix': 'WFM_',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -1886,7 +2072,8 @@ White noise
 },
             },
             {
-                'name': 'WFM_USER',
+                'name': 'USER',
+                'prefix': 'WFM_',
                 'value': 102,
 'documentation': {
 'description': '''

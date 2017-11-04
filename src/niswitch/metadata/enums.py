@@ -10,6 +10,7 @@ enums = {
         'values': [
             {
                 'name': 'NONE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -19,6 +20,7 @@ enums = {
             },
             {
                 'name': 'PXI_TRIG0',
+                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': '''
@@ -29,6 +31,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG1',
+                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': '''
@@ -39,6 +42,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG2',
+                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': '''
@@ -49,6 +53,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG3',
+                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': '''
@@ -59,6 +64,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG4',
+                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': '''
@@ -69,6 +75,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG5',
+                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': '''
@@ -79,6 +86,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG6',
+                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': '''
@@ -89,6 +97,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG7',
+                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': '''
@@ -103,6 +112,7 @@ line before processing the next entry in the scan list.
         'values': [
             {
                 'name': 'NONE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -112,6 +122,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG0',
+                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': '''
@@ -121,6 +132,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG1',
+                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': '''
@@ -130,6 +142,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG2',
+                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': '''
@@ -139,6 +152,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG3',
+                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': '''
@@ -148,6 +162,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG4',
+                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': '''
@@ -157,6 +172,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG5',
+                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': '''
@@ -166,6 +182,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG6',
+                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': '''
@@ -175,6 +192,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG7',
+                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': '''
@@ -188,6 +206,7 @@ line before processing the next entry in the scan list.
         'values': [
             {
                 'name': 'MEASUREMENT_DEVICE_INITIATED',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -207,6 +226,7 @@ handshaking.
             },
             {
                 'name': 'SWITCH_INITIATED',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -226,6 +246,7 @@ advanced output signal of the switch module initiates handshaking.
         'values': [
             {
                 'name': 'NONE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -235,6 +256,7 @@ advanced output signal of the switch module initiates handshaking.
             },
             {
                 'name': 'PXI_TRIG0',
+                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': '''
@@ -245,6 +267,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG1',
+                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': '''
@@ -255,6 +278,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG2',
+                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': '''
@@ -265,6 +289,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG3',
+                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': '''
@@ -275,6 +300,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG4',
+                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': '''
@@ -285,6 +311,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG5',
+                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': '''
@@ -295,6 +322,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG6',
+                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': '''
@@ -305,6 +333,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG7',
+                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': '''
@@ -319,6 +348,7 @@ line before processing the next entry in the scan list.
         'values': [
             {
                 'name': 'NONE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -328,6 +358,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG0',
+                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': '''
@@ -338,6 +369,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG1',
+                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': '''
@@ -348,6 +380,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG2',
+                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': '''
@@ -358,6 +391,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG3',
+                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': '''
@@ -368,6 +402,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG4',
+                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': '''
@@ -378,6 +413,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG5',
+                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': '''
@@ -388,6 +424,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG6',
+                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': '''
@@ -398,6 +435,7 @@ line before processing the next entry in the scan list.
             },
             {
                 'name': 'PXI_TRIG7',
+                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': '''
@@ -412,6 +450,7 @@ line before processing the next entry in the scan list.
         'values': [
             {
                 'name': 'PATH_AVAILABLE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -421,6 +460,7 @@ Path Available
             },
             {
                 'name': 'PATH_EXISTS',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -430,6 +470,7 @@ Path Exists
             },
             {
                 'name': 'PATH_UNSUPPORTED',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -439,6 +480,7 @@ Path Unsupported
             },
             {
                 'name': 'RESOURCE_IN_USE',
+                'prefix': None,
                 'value': 4,
 'documentation': {
 'description': '''
@@ -448,6 +490,7 @@ Resource in use
             },
             {
                 'name': 'SOURCE_CONFLICT',
+                'prefix': None,
                 'value': 5,
 'documentation': {
 'description': '''
@@ -457,6 +500,7 @@ Source conflict
             },
             {
                 'name': 'CHANNEL_NOT_AVAILABLE',
+                'prefix': None,
                 'value': 6,
 'documentation': {
 'description': '''
@@ -470,6 +514,7 @@ Channel not available
         'values': [
             {
                 'name': 'OPEN_RELAY',
+                'prefix': None,
                 'value': 20,
 'documentation': {
 'description': '''
@@ -479,6 +524,7 @@ Open Relay
             },
             {
                 'name': 'CLOSE_RELAY',
+                'prefix': None,
                 'value': 21,
 'documentation': {
 'description': '''
@@ -492,6 +538,7 @@ Close Relay
         'values': [
             {
                 'name': 'OPEN',
+                'prefix': None,
                 'value': 10,
 'documentation': {
 'description': '''
@@ -501,6 +548,7 @@ Open
             },
             {
                 'name': 'CLOSED',
+                'prefix': None,
                 'value': 11,
 'documentation': {
 'description': '''
@@ -514,6 +562,7 @@ Closed
         'values': [
             {
                 'name': 'NONE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -523,6 +572,7 @@ The switch device does not produce a Scan Advanced Output trigger.
             },
             {
                 'name': 'EXTERNAL',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -532,6 +582,7 @@ External Trigger. The switch device produces the Scan Advanced Output  trigger o
             },
             {
                 'name': 'TTL0',
+                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': '''
@@ -541,6 +592,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG0 line.
             },
             {
                 'name': 'TTL1',
+                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': '''
@@ -550,6 +602,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG1 line.
             },
             {
                 'name': 'TTL2',
+                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': '''
@@ -559,6 +612,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG2 line.
             },
             {
                 'name': 'TTL3',
+                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': '''
@@ -568,6 +622,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG3 line.
             },
             {
                 'name': 'TTL4',
+                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': '''
@@ -577,6 +632,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG4 line.
             },
             {
                 'name': 'TTL5',
+                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': '''
@@ -586,6 +642,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG5 line.
             },
             {
                 'name': 'TTL6',
+                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': '''
@@ -595,6 +652,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG6 line.
             },
             {
                 'name': 'TTL7',
+                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': '''
@@ -604,6 +662,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG7 line.
             },
             {
                 'name': 'PXI_STAR',
+                'prefix': None,
                 'value': 125,
 'documentation': {
 'description': '''
@@ -614,6 +673,7 @@ Star trigger bus before processing the next entry in the scan list.
             },
             {
                 'name': 'REARCONNECTOR',
+                'prefix': None,
                 'value': 1000,
 'documentation': {
 'description': '''
@@ -623,6 +683,7 @@ The switch device produces the Scan Advanced Output  trigger on the rear connect
             },
             {
                 'name': 'FRONTCONNECTOR',
+                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': '''
@@ -632,6 +693,7 @@ The switch device produces the Scan Advanced Output  trigger on the front connec
             },
             {
                 'name': 'REARCONNECTOR_MODULE1',
+                'prefix': None,
                 'value': 1021,
 'documentation': {
 'description': '''
@@ -642,6 +704,7 @@ connector module 1.
             },
             {
                 'name': 'REARCONNECTOR_MODULE2',
+                'prefix': None,
                 'value': 1022,
 'documentation': {
 'description': '''
@@ -652,6 +715,7 @@ connector module 2.
             },
             {
                 'name': 'REARCONNECTOR_MODULE3',
+                'prefix': None,
                 'value': 1023,
 'documentation': {
 'description': '''
@@ -662,6 +726,7 @@ connector module 3.
             },
             {
                 'name': 'REARCONNECTOR_MODULE4',
+                'prefix': None,
                 'value': 1024,
 'documentation': {
 'description': '''
@@ -672,6 +737,7 @@ connector module 4.
             },
             {
                 'name': 'REARCONNECTOR_MODULE5',
+                'prefix': None,
                 'value': 1025,
 'documentation': {
 'description': '''
@@ -682,6 +748,7 @@ connector module 5.
             },
             {
                 'name': 'REARCONNECTOR_MODULE6',
+                'prefix': None,
                 'value': 1026,
 'documentation': {
 'description': '''
@@ -692,6 +759,7 @@ connector module 6.
             },
             {
                 'name': 'REARCONNECTOR_MODULE7',
+                'prefix': None,
                 'value': 1027,
 'documentation': {
 'description': '''
@@ -702,6 +770,7 @@ connector module 7.
             },
             {
                 'name': 'REARCONNECTOR_MODULE8',
+                'prefix': None,
                 'value': 1028,
 'documentation': {
 'description': '''
@@ -712,6 +781,7 @@ connector module 8.
             },
             {
                 'name': 'REARCONNECTOR_MODULE9',
+                'prefix': None,
                 'value': 1029,
 'documentation': {
 'description': '''
@@ -722,6 +792,7 @@ connector module 9.
             },
             {
                 'name': 'REARCONNECTOR_MODULE10',
+                'prefix': None,
                 'value': 1030,
 'documentation': {
 'description': '''
@@ -732,6 +803,7 @@ connector module 10.
             },
             {
                 'name': 'REARCONNECTOR_MODULE11',
+                'prefix': None,
                 'value': 1031,
 'documentation': {
 'description': '''
@@ -742,6 +814,7 @@ connector module 11.
             },
             {
                 'name': 'REARCONNECTOR_MODULE12',
+                'prefix': None,
                 'value': 1032,
 'documentation': {
 'description': '''
@@ -752,6 +825,7 @@ connector module 12.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE1',
+                'prefix': None,
                 'value': 1041,
 'documentation': {
 'description': '''
@@ -762,6 +836,7 @@ connector module 1.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE2',
+                'prefix': None,
                 'value': 1042,
 'documentation': {
 'description': '''
@@ -772,6 +847,7 @@ connector module 2.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE3',
+                'prefix': None,
                 'value': 1043,
 'documentation': {
 'description': '''
@@ -782,6 +858,7 @@ connector module 3.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE4',
+                'prefix': None,
                 'value': 1044,
 'documentation': {
 'description': '''
@@ -792,6 +869,7 @@ connector module 4.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE5',
+                'prefix': None,
                 'value': 1045,
 'documentation': {
 'description': '''
@@ -802,6 +880,7 @@ connector module 5.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE6',
+                'prefix': None,
                 'value': 1046,
 'documentation': {
 'description': '''
@@ -812,6 +891,7 @@ connector module 6.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE7',
+                'prefix': None,
                 'value': 1047,
 'documentation': {
 'description': '''
@@ -822,6 +902,7 @@ connector module 7.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE8',
+                'prefix': None,
                 'value': 1048,
 'documentation': {
 'description': '''
@@ -832,6 +913,7 @@ connector module 8.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE9',
+                'prefix': None,
                 'value': 1049,
 'documentation': {
 'description': '''
@@ -842,6 +924,7 @@ connector module 9.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE10',
+                'prefix': None,
                 'value': 1050,
 'documentation': {
 'description': '''
@@ -852,6 +935,7 @@ connector module 10.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE11',
+                'prefix': None,
                 'value': 1051,
 'documentation': {
 'description': '''
@@ -862,6 +946,7 @@ connector module 11.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE12',
+                'prefix': None,
                 'value': 1052,
 'documentation': {
 'description': '''
@@ -876,6 +961,7 @@ connector module 12.
         'values': [
             {
                 'name': 'RISING_EDGE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -885,6 +971,7 @@ The trigger occurs on the rising edge of the signal.
             },
             {
                 'name': 'FALLING_EDGE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -898,6 +985,7 @@ The trigger occurs on the falling edge of the signal.
         'values': [
             {
                 'name': 'NONE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -907,6 +995,7 @@ No implicit action on connections when scanning.
             },
             {
                 'name': 'BREAK_BEFORE_MAKE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -916,6 +1005,7 @@ When scanning, the switch device breaks existing connections before  making new 
             },
             {
                 'name': 'BREAK_AFTER_MAKE',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -929,6 +1019,7 @@ When scanning, the switch device breaks existing connections after making  new c
         'values': [
             {
                 'name': 'IMMEDIATE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -938,6 +1029,7 @@ Immediate Trigger. The switch device does not wait for a trigger before  process
             },
             {
                 'name': 'EXTERNAL',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -947,6 +1039,7 @@ External Trigger. The switch device waits until it receives a trigger  from an e
             },
             {
                 'name': 'SOFTWARE_TRIG',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -956,6 +1049,7 @@ The switch device waits until you call the niSwitch_SendSoftwareTrigger  functio
             },
             {
                 'name': 'TTL0',
+                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': '''
@@ -965,6 +1059,7 @@ The switch device waits until it receives a trigger on the PXI TRIG0 line before
             },
             {
                 'name': 'TTL1',
+                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': '''
@@ -974,6 +1069,7 @@ The switch device waits until it receives a trigger on the PXI TRIG1 line before
             },
             {
                 'name': 'TTL2',
+                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': '''
@@ -983,6 +1079,7 @@ The switch device waits until it receives a trigger on the PXI TRIG2 line before
             },
             {
                 'name': 'TTL3',
+                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': '''
@@ -992,6 +1089,7 @@ The switch device waits until it receives a trigger on the PXI TRIG3 line before
             },
             {
                 'name': 'TTL4',
+                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': '''
@@ -1001,6 +1099,7 @@ The switch device waits until it receives a trigger on the PXI TRIG4 line before
             },
             {
                 'name': 'TTL5',
+                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': '''
@@ -1010,6 +1109,7 @@ The switch device waits until it receives a trigger on the PXI TRIG5 line before
             },
             {
                 'name': 'TTL6',
+                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': '''
@@ -1019,6 +1119,7 @@ The switch device waits until it receives a trigger on the PXI TRIG6 line before
             },
             {
                 'name': 'TTL7',
+                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': '''
@@ -1028,6 +1129,7 @@ The switch device waits until it receives a trigger on the PXI TRIG7 line before
             },
             {
                 'name': 'PXI_STAR',
+                'prefix': None,
                 'value': 125,
 'documentation': {
 'description': '''
@@ -1037,6 +1139,7 @@ The switch device waits until it receives a trigger on the PXI STAR  trigger bus
             },
             {
                 'name': 'REARCONNECTOR',
+                'prefix': None,
                 'value': 1000,
 'documentation': {
 'description': '''
@@ -1046,6 +1149,7 @@ The switch device waits until it receives a trigger on the  rear connector.
             },
             {
                 'name': 'FRONTCONNECTOR',
+                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': '''
@@ -1055,6 +1159,7 @@ The switch device waits until it receives a trigger on the  front connector.
             },
             {
                 'name': 'REARCONNECTOR_MODULE1',
+                'prefix': None,
                 'value': 1021,
 'documentation': {
 'description': '''
@@ -1065,6 +1170,7 @@ connector module 1.
             },
             {
                 'name': 'REARCONNECTOR_MODULE2',
+                'prefix': None,
                 'value': 1022,
 'documentation': {
 'description': '''
@@ -1075,6 +1181,7 @@ connector module 2.
             },
             {
                 'name': 'REARCONNECTOR_MODULE3',
+                'prefix': None,
                 'value': 1023,
 'documentation': {
 'description': '''
@@ -1085,6 +1192,7 @@ connector module 3.
             },
             {
                 'name': 'REARCONNECTOR_MODULE4',
+                'prefix': None,
                 'value': 1024,
 'documentation': {
 'description': '''
@@ -1095,6 +1203,7 @@ connector module 4.
             },
             {
                 'name': 'REARCONNECTOR_MODULE5',
+                'prefix': None,
                 'value': 1025,
 'documentation': {
 'description': '''
@@ -1105,6 +1214,7 @@ connector module 5.
             },
             {
                 'name': 'REARCONNECTOR_MODULE6',
+                'prefix': None,
                 'value': 1026,
 'documentation': {
 'description': '''
@@ -1115,6 +1225,7 @@ connector module 6.
             },
             {
                 'name': 'REARCONNECTOR_MODULE7',
+                'prefix': None,
                 'value': 1027,
 'documentation': {
 'description': '''
@@ -1125,6 +1236,7 @@ connector module 7.
             },
             {
                 'name': 'REARCONNECTOR_MODULE8',
+                'prefix': None,
                 'value': 1028,
 'documentation': {
 'description': '''
@@ -1135,6 +1247,7 @@ connector module 8.
             },
             {
                 'name': 'REARCONNECTOR_MODULE9',
+                'prefix': None,
                 'value': 1029,
 'documentation': {
 'description': '''
@@ -1145,6 +1258,7 @@ connector module 9.
             },
             {
                 'name': 'REARCONNECTOR_MODULE10',
+                'prefix': None,
                 'value': 1030,
 'documentation': {
 'description': '''
@@ -1155,6 +1269,7 @@ connector module 10.
             },
             {
                 'name': 'REARCONNECTOR_MODULE11',
+                'prefix': None,
                 'value': 1031,
 'documentation': {
 'description': '''
@@ -1165,6 +1280,7 @@ connector module 11.
             },
             {
                 'name': 'REARCONNECTOR_MODULE12',
+                'prefix': None,
                 'value': 1032,
 'documentation': {
 'description': '''
@@ -1175,6 +1291,7 @@ connector module 12.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE1',
+                'prefix': None,
                 'value': 1041,
 'documentation': {
 'description': '''
@@ -1185,6 +1302,7 @@ connector module 1.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE2',
+                'prefix': None,
                 'value': 1042,
 'documentation': {
 'description': '''
@@ -1195,6 +1313,7 @@ connector module 2.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE3',
+                'prefix': None,
                 'value': 1043,
 'documentation': {
 'description': '''
@@ -1205,6 +1324,7 @@ connector module 3.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE4',
+                'prefix': None,
                 'value': 1044,
 'documentation': {
 'description': '''
@@ -1215,6 +1335,7 @@ connector module 4.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE5',
+                'prefix': None,
                 'value': 1045,
 'documentation': {
 'description': '''
@@ -1225,6 +1346,7 @@ connector module 5.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE6',
+                'prefix': None,
                 'value': 1046,
 'documentation': {
 'description': '''
@@ -1235,6 +1357,7 @@ connector module 6.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE7',
+                'prefix': None,
                 'value': 1047,
 'documentation': {
 'description': '''
@@ -1245,6 +1368,7 @@ connector module 7.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE8',
+                'prefix': None,
                 'value': 1048,
 'documentation': {
 'description': '''
@@ -1255,6 +1379,7 @@ connector module 8.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE9',
+                'prefix': None,
                 'value': 1049,
 'documentation': {
 'description': '''
@@ -1265,6 +1390,7 @@ connector module 9.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE10',
+                'prefix': None,
                 'value': 1050,
 'documentation': {
 'description': '''
@@ -1275,6 +1401,7 @@ connector module 10.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE11',
+                'prefix': None,
                 'value': 1051,
 'documentation': {
 'description': '''
@@ -1285,6 +1412,7 @@ connector module 11.
             },
             {
                 'name': 'FRONTCONNECTOR_MODULE12',
+                'prefix': None,
                 'value': 1052,
 'documentation': {
 'description': '''
@@ -1299,6 +1427,7 @@ connector module 12.
         'values': [
             {
                 'name': 'RISING_EDGE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -1308,6 +1437,7 @@ The trigger occurs on the rising edge of the signal.
             },
             {
                 'name': 'FALLING_EDGE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1321,6 +1451,7 @@ The trigger occurs on the falling edge of the signal.
         'values': [
             {
                 'name': 'SINGLE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -1330,6 +1461,7 @@ The trigger occurs on the falling edge of the signal.
             },
             {
                 'name': 'MASTER',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1339,6 +1471,7 @@ The trigger occurs on the falling edge of the signal.
             },
             {
                 'name': 'SLAVE',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''

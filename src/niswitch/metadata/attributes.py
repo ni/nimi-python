@@ -850,13 +850,13 @@ This attribute contains a scan list, which is a string that specifies  channel c
 The scan list is comprised of channel names that you separate with  special characters.  These special characters determine the operations the  scanner performs on the channels when it executes this scan list.
 To create a path between two channels, use the following character between  the two channel names:
 -> (a dash followed by a '>' sign)
-Example:  \CH1->CH2\ tells the switch to make a path from channel CH1 to channel  CH2.
+Example:  'CH1->CH2' tells the switch to make a path from channel CH1 to channel  CH2.
 To break or clear a path, use the following character as a prefix before  the path:
 ~ (tilde)
-Example:  \~CH1->CH2\ tells the switch to break the path from channel CH1 to  channel CH2.
+Example:  '~CH1->CH2' tells the switch to break the path from channel CH1 to  channel CH2.
 To tell the switch device to wait for a trigger event, use the following  character as a separator between paths:
 ; (semi-colon)
-Example:  \CH1->CH2;CH3->CH4\ tells the switch to make the path from channel CH1  to channel CH2, wait for a trigger, and then make the path from CH3 to  CH4.
+Example:  'CH1->CH2;CH3->CH4' tells the switch to make the path from channel CH1  to channel CH2, wait for a trigger, and then make the path from CH3 to  CH4.
 ''',
 },
     },

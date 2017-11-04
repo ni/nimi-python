@@ -10,6 +10,7 @@ enums = {
         'values': [
             {
                 'name': 'MEAN',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -19,6 +20,7 @@ Mean average.
             },
             {
                 'name': 'MEDIAN',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -32,6 +34,7 @@ Median average.
         'values': [
             {
                 'name': 'I_DATA',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -42,6 +45,7 @@ DDC.
             },
             {
                 'name': 'MAGNITUDE_DATA',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -52,6 +56,7 @@ the DDC.
             },
             {
                 'name': 'FREQUENCY_DATA',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -66,6 +71,7 @@ the DDC.
         'values': [
             {
                 'name': 'NORMAL',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -75,6 +81,7 @@ Sets the digitizer to normal resolution mode. The digitizer can use real-time sa
             },
             {
                 'name': 'FLEXRES',
+                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': '''
@@ -84,6 +91,7 @@ Sets the digitizer to flexible resolution mode if supported.  The digitizer uses
             },
             {
                 'name': 'DDC',
+                'prefix': None,
                 'value': 1002,
 'documentation': {
 'description': '''
@@ -96,7 +104,8 @@ Sets the digitizer to DDC mode on the NI 5620/5621.
     'AddressType': {
         'values': [
             {
-                'name': 'ADDR_PHYSICAL',
+                'name': 'PHYSICAL',
+                'prefix': 'ADDR_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -105,7 +114,8 @@ Physical address.
 },
             },
             {
-                'name': 'ADDR_VIRTUAL',
+                'name': 'VIRTUAL',
+                'prefix': 'ADDR_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -119,6 +129,7 @@ Virtual address.
         'values': [
             {
                 'name': 'MAGNITUDE_DATA',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -128,6 +139,7 @@ Specifies magnitude data as the source.
             },
             {
                 'name': 'Q_DATA',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -137,6 +149,7 @@ Specifies Q data as the source.
             },
             {
                 'name': 'PHASE_DATA',
+                'prefix': None,
                 'value': 4,
 'documentation': {
 'description': '''
@@ -150,6 +163,7 @@ Specifies phase data as the source.
         'values': [
             {
                 'name': 'DISABLED',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -159,6 +173,7 @@ Disabled
             },
             {
                 'name': 'ENABLED',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -172,6 +187,7 @@ Enabled
         'values': [
             {
                 'name': 'DISABLED',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -181,6 +197,7 @@ Does not acquire a waveform for the channel.
             },
             {
                 'name': 'ENABLED',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -194,6 +211,7 @@ Acquires a waveform for the channel.
         'values': [
             {
                 'name': 'DISABLED',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -204,6 +222,7 @@ III...QQQ...
             },
             {
                 'name': 'ENABLED',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -218,6 +237,7 @@ format: IQIQIQ...
         'values': [
             {
                 'name': 'DISABLED',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -227,6 +247,7 @@ Allow both real-time and equivalent-time measurements.
             },
             {
                 'name': 'ENABLED',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -240,6 +261,7 @@ Allow only real-time measurements.
         'values': [
             {
                 'name': 'DISABLED',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -249,6 +271,7 @@ Allow only real-time measurements.
             },
             {
                 'name': 'ENABLED',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -262,6 +285,7 @@ Use multiple interleaved ADCs to acquire data for this channel.
         'values': [
             {
                 'name': 'RESAMPLER_HB',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -272,6 +296,7 @@ converter.
             },
             {
                 'name': 'PROGRAMMABLE_FIR',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -286,6 +311,7 @@ coordinate converter.
         'values': [
             {
                 'name': 'LEFT',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -295,6 +321,7 @@ coordinate converter.
             },
             {
                 'name': 'RIGHT',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -308,6 +335,7 @@ coordinate converter.
         'values': [
             {
                 'name': 'REAL',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -317,6 +345,7 @@ The waveform data points are real numbers (I data).
             },
             {
                 'name': 'COMPLEX',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -330,6 +359,7 @@ The waveform data points are complex numbers (IQ data).
         'values': [
             {
                 'name': 'PHASE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -339,6 +369,7 @@ Sets the discriminator FIR input source to phase.
             },
             {
                 'name': 'MAGNITUDE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -348,6 +379,7 @@ Sets the discriminator FIR input source to magnitude.
             },
             {
                 'name': 'RESAMPLER',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -361,6 +393,7 @@ Sets the discriminator FIR input source to resampler.
         'values': [
             {
                 'name': 'SYMMETRIC',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -370,6 +403,7 @@ Sets the discriminator FIR symmetry to symmetric.
             },
             {
                 'name': 'ASYMMETRIC',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -383,6 +417,7 @@ Sets the discriminator FIR symmetry to asymmetric.
         'values': [
             {
                 'name': 'EVEN',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -392,6 +427,7 @@ Sets the discriminator FIR symmetry type to even.
             },
             {
                 'name': 'ODD',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -405,6 +441,7 @@ Sets the discriminator FIR symmetry type to odd.
         'values': [
             {
                 'name': 'NONE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -414,6 +451,7 @@ No window.
             },
             {
                 'name': 'HANNING',
+                'prefix': None,
                 'value': 409,
 'documentation': {
 'description': '''
@@ -423,6 +461,7 @@ Specifies a Hanning window.
             },
             {
                 'name': 'FLAT_TOP',
+                'prefix': None,
                 'value': 410,
 'documentation': {
 'description': '''
@@ -432,6 +471,7 @@ Specifies a Flat Top window.
             },
             {
                 'name': 'HAMMING',
+                'prefix': None,
                 'value': 420,
 'documentation': {
 'description': '''
@@ -441,6 +481,7 @@ Specifies a Hamming window.
             },
             {
                 'name': 'TRIANGLE',
+                'prefix': None,
                 'value': 423,
 'documentation': {
 'description': '''
@@ -450,6 +491,7 @@ Specifies a Triangle window.
             },
             {
                 'name': 'BLACKMAN',
+                'prefix': None,
                 'value': 424,
 'documentation': {
 'description': '''
@@ -463,6 +505,7 @@ Specifies a Blackman window.
         'values': [
             {
                 'name': 'READ_POINTER',
+                'prefix': None,
                 'value': 388,
 'documentation': {
 'description': '''
@@ -472,6 +515,7 @@ The read pointer is set to zero when a new acquisition is initiated. After every
             },
             {
                 'name': 'PRETRIGGER',
+                'prefix': None,
                 'value': 477,
 'documentation': {
 'description': '''
@@ -481,6 +525,7 @@ Fetches relative to the first pretrigger point requested with niScope_ConfigureH
             },
             {
                 'name': 'NOW',
+                'prefix': None,
                 'value': 481,
 'documentation': {
 'description': '''
@@ -490,6 +535,7 @@ Fetch data at the last sample acquired.
             },
             {
                 'name': 'START',
+                'prefix': None,
                 'value': 482,
 'documentation': {
 'description': '''
@@ -499,6 +545,7 @@ Fetch data starting at the first point sampled by the digitizer.
             },
             {
                 'name': 'TRIGGER',
+                'prefix': None,
                 'value': 483,
 'documentation': {
 'description': '''
@@ -512,6 +559,7 @@ Fetch at the first posttrigger sample.
         'values': [
             {
                 'name': 'LOWPASS',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -521,6 +569,7 @@ Specifies lowpass as the filter type.
             },
             {
                 'name': 'HIGHPASS',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -530,6 +579,7 @@ Specifies highpass as the filter type.
             },
             {
                 'name': 'BANDPASS',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -539,6 +589,7 @@ Specifies bandpass as the filter type.
             },
             {
                 'name': 'BANDSTOP',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -552,6 +603,7 @@ Specifies bandstop as the filter type.
         'values': [
             {
                 'name': '_48_TAP_STANDARD',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -561,6 +613,7 @@ This filter is optimized for alias protection and frequency-domain flatness
             },
             {
                 'name': '_48_TAP_HANNING',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -570,6 +623,7 @@ This filter is optimized for the lowest possible bandwidth for a 48 tap filter a
             },
             {
                 'name': '_16_TAP_HANNING',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -579,6 +633,7 @@ This filter is optimized for the lowest possible bandwidth for a 16 tap filter a
             },
             {
                 'name': '_8_TAP_HANNING',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -591,7 +646,8 @@ This filter is optimized for the lowest possible bandwidth for a 8 tap filter an
     'NotificationType': {
         'values': [
             {
-                'name': 'NOTIFY_NEVER',
+                'name': 'NEVER',
+                'prefix': 'NOTIFY_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -600,7 +656,8 @@ Never send notification.
 },
             },
             {
-                'name': 'NOTIFY_DONE',
+                'name': 'DONE',
+                'prefix': 'NOTIFY_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -613,7 +670,8 @@ Notify when digitizer acquisition is done.
     'OverflowErrorReporting': {
         'values': [
             {
-                'name': 'ERROR_REPORTING_ERROR',
+                'name': 'ERROR',
+                'prefix': 'ERROR_REPORTING_',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -623,7 +681,8 @@ occurred in the OSP block.
 },
             },
             {
-                'name': 'ERROR_REPORTING_WARNING',
+                'name': 'WARNING',
+                'prefix': 'ERROR_REPORTING_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -633,7 +692,8 @@ occurred in the OSP block.
 },
             },
             {
-                'name': 'ERROR_REPORTING_DISABLED',
+                'name': 'DISABLED',
+                'prefix': 'ERROR_REPORTING_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -648,6 +708,7 @@ OSP block.
         'values': [
             {
                 'name': 'LOWHIGH',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -658,6 +719,7 @@ the low/high method,
             },
             {
                 'name': 'MINMAX',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -667,6 +729,7 @@ Reference level percentages are computed using the min/max method.
             },
             {
                 'name': 'BASETOP',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -680,6 +743,7 @@ Reference level percentages are computed using the base/top method.
         'values': [
             {
                 'name': 'REAL',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -689,6 +753,7 @@ Sets a dual real filter.
             },
             {
                 'name': 'COMPLEX',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -702,6 +767,7 @@ Sets a complex filter.
         'values': [
             {
                 'name': 'SYMMETRIC',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -711,6 +777,7 @@ Sets a symmetric filter.
             },
             {
                 'name': 'ASYMMETRIC',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -724,6 +791,7 @@ Sets an asymmetric filter.
         'values': [
             {
                 'name': 'EVEN',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -733,6 +801,7 @@ Sets the discriminator FIR symmetry type to even.
             },
             {
                 'name': 'ODD',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -746,6 +815,7 @@ Sets the discriminator FIR symmetry type to odd.
         'values': [
             {
                 'name': 'I_AND_Q',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -755,6 +825,7 @@ Enables the Q input to coordinate converter.
             },
             {
                 'name': 'Q_ZEROED',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -767,7 +838,8 @@ Zeroes out the Q input the to coordinate converter.
     'RISMethod': {
         'values': [
             {
-                'name': 'RIS_EXACT_NUM_AVERAGES',
+                'name': 'EXACT_NUM_AVERAGES',
+                'prefix': 'RIS_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -776,7 +848,8 @@ Acquires exactly the specified number of records for each bin in the RIS acquisi
 },
             },
             {
-                'name': 'RIS_MIN_NUM_AVERAGES',
+                'name': 'MIN_NUM_AVERAGES',
+                'prefix': 'RIS_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -786,7 +859,8 @@ distributed points.
 },
             },
             {
-                'name': 'RIS_INCOMPLETE',
+                'name': 'INCOMPLETE',
+                'prefix': 'RIS_',
                 'value': 3,
 'documentation': {
 'description': '''
@@ -795,7 +869,8 @@ Returns the RIS waveform after the specified timeout even if it is incomplete.  
 },
             },
             {
-                'name': 'RIS_LIMITED_BIN_WIDTH',
+                'name': 'LIMITED_BIN_WIDTH',
+                'prefix': 'RIS_',
                 'value': 5,
 'documentation': {
 'description': '''
@@ -809,6 +884,7 @@ Limits the waveforms in the various bins to be within 200 ps of the center of th
         'values': [
             {
                 'name': 'VOLTS',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -818,6 +894,7 @@ Specifies that the reference levels are given in units of volts.
             },
             {
                 'name': 'PERCENTAGE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -832,6 +909,7 @@ units.
         'values': [
             {
                 'name': 'ANALOG_DETECTION_CIRCUIT',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -841,6 +919,7 @@ use the hardware analog circuitry to implement the reference trigger.  This opti
             },
             {
                 'name': 'DDC_OUTPUT',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -854,6 +933,7 @@ use the onboard signal processing logic to implement the reference trigger.  Thi
         'values': [
             {
                 'name': 'RESAMPLER_ENABLED',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -863,6 +943,7 @@ Resampler enabled.
             },
             {
                 'name': 'HB_1_ENABLED',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -872,6 +953,7 @@ HB 1 enabled.
             },
             {
                 'name': 'RESAMPLER_AND_HB_1',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -881,6 +963,7 @@ Resampler and HB 1.
             },
             {
                 'name': 'BOTH_HB_FILTERS',
+                'prefix': None,
                 'value': 6,
 'documentation': {
 'description': '''
@@ -890,6 +973,7 @@ Both HB Filters.
             },
             {
                 'name': 'RESAMPLER_AND_BOTH_HB_FILTERS',
+                'prefix': None,
                 'value': 7,
 'documentation': {
 'description': '''
@@ -903,6 +987,7 @@ Resampler and Both HB Filters.
         'values': [
             {
                 'name': 'START_TRIGGER',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -912,6 +997,7 @@ Data is streamed from the start trigger.
             },
             {
                 'name': 'REFERENCE_TRIGGER',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -922,6 +1008,7 @@ position.
             },
             {
                 'name': 'SYNC_TRIGGER',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -935,6 +1022,7 @@ Data is streamed relative to the sync trigger and reference position.
         'values': [
             {
                 'name': 'CLKIN',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -944,6 +1032,7 @@ Specifies CLKIN as the source for Syncout CLK.
             },
             {
                 'name': 'PROCCLK',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -957,6 +1046,7 @@ Specifies PROCCLK as the source for Syncout CLK.
         'values': [
             {
                 'name': 'SINGLE_ENDED',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -966,6 +1056,7 @@ Channel is single ended
             },
             {
                 'name': 'UNBALANCED_DIFFERENTIAL',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -975,6 +1066,7 @@ Channel is unbalanced differential
             },
             {
                 'name': 'DIFFERENTIAL',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -988,6 +1080,7 @@ Channel is differential
         'values': [
             {
                 'name': '_8_BITS',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -997,6 +1090,7 @@ Specifies 8 offset bits in the timing NCO.
             },
             {
                 'name': '_16_BITS',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1006,6 +1100,7 @@ Specifies 16 offset bits in the timing NCO.
             },
             {
                 'name': '_24_BITS',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1015,6 +1110,7 @@ Specifies 24 offset bits in the timing NCO.
             },
             {
                 'name': '_32_BITS',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -1028,6 +1124,7 @@ Specifies 32 offset bits in the timing NCO.
         'values': [
             {
                 'name': 'AC',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -1037,6 +1134,7 @@ AC coupling
             },
             {
                 'name': 'DC',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1046,6 +1144,7 @@ DC coupling
             },
             {
                 'name': 'HF_REJECT',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1055,6 +1154,7 @@ Highpass filter coupling
             },
             {
                 'name': 'LF_REJECT',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -1064,6 +1164,7 @@ Lowpass filter coupling
             },
             {
                 'name': 'AC_PLUS_HF_REJECT',
+                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': '''
@@ -1077,6 +1178,7 @@ Highpass and lowpass filter coupling
         'values': [
             {
                 'name': 'NO_TRIGGER_MOD',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1086,6 +1188,7 @@ Normal triggering.
             },
             {
                 'name': 'AUTO',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1100,6 +1203,7 @@ after a certain amount of time.
         'values': [
             {
                 'name': 'NEGATIVE',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -1109,6 +1213,7 @@ Falling edge
             },
             {
                 'name': 'POSITIVE',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1122,6 +1227,7 @@ Rising edge
         'values': [
             {
                 'name': 'EDGE_TRIGGER',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1131,6 +1237,7 @@ Configures the digitizer for edge triggering.  An edge trigger occurs when the t
             },
             {
                 'name': 'TV_TRIGGER',
+                'prefix': None,
                 'value': 5,
 'documentation': {
 'description': '''
@@ -1140,6 +1247,7 @@ Configures the digitizer for video/TV triggering.   You configure the video trig
             },
             {
                 'name': 'IMMEDIATE_TRIGGER',
+                'prefix': None,
                 'value': 6,
 'documentation': {
 'description': '''
@@ -1149,6 +1257,7 @@ Configures the digitizer for immediate triggering.   An immediate trigger occurs
             },
             {
                 'name': 'HYSTERESIS_TRIGGER',
+                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': '''
@@ -1158,6 +1267,7 @@ Configures the digitizer for hysteresis triggering.  A hysteresis trigger occurs
             },
             {
                 'name': 'DIGITAL_TRIGGER',
+                'prefix': None,
                 'value': 1002,
 'documentation': {
 'description': '''
@@ -1167,6 +1277,7 @@ Configures the digitizer for digital triggering. A digital trigger occurs when t
             },
             {
                 'name': 'WINDOW_TRIGGER',
+                'prefix': None,
                 'value': 1003,
 'documentation': {
 'description': '''
@@ -1176,6 +1287,7 @@ Configures the digitizer for window triggering.  A window trigger occurs when th
             },
             {
                 'name': 'SOFTWARE_TRIGGER',
+                'prefix': None,
                 'value': 1004,
 'documentation': {
 'description': '''
@@ -1189,6 +1301,7 @@ Configures the digitizer for software triggering.  A software trigger occurs whe
         'values': [
             {
                 'name': 'ENTERING_WINDOW',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -1198,6 +1311,7 @@ Trigger upon entering the window
             },
             {
                 'name': 'LEAVING_WINDOW',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1211,6 +1325,7 @@ Trigger upon leaving the window
         'values': [
             {
                 'name': 'AC',
+                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': '''
@@ -1220,6 +1335,7 @@ AC coupling
             },
             {
                 'name': 'DC',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1229,6 +1345,7 @@ DC coupling
             },
             {
                 'name': 'GND',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1241,7 +1358,8 @@ GND coupling
     'VideoPolarity': {
         'values': [
             {
-                'name': 'TV_POSITIVE',
+                'name': 'POSITIVE',
+                'prefix': 'TV_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1250,7 +1368,8 @@ Specifies that the video signal has positive polarity.
 },
             },
             {
-                'name': 'TV_NEGATIVE',
+                'name': 'NEGATIVE',
+                'prefix': 'TV_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1264,6 +1383,7 @@ Specifies that the video signal has negative polarity.
         'values': [
             {
                 'name': 'NTSC',
+                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1273,6 +1393,7 @@ NTSC signal format supports line numbers from 1 to 525
             },
             {
                 'name': 'PAL',
+                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1282,6 +1403,7 @@ PAL signal format supports line numbers from 1 to 625
             },
             {
                 'name': 'SECAM',
+                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '''
@@ -1291,6 +1413,7 @@ SECAM signal format supports line numbers from 1 to 625
             },
             {
                 'name': 'M_PAL',
+                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': '''
@@ -1300,6 +1423,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_480I_59_94_FIELDS_PER_SECOND',
+                'prefix': None,
                 'value': 1010,
 'documentation': {
 'description': '''
@@ -1309,6 +1433,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_480I_60_FIELDS_PER_SECOND',
+                'prefix': None,
                 'value': 1011,
 'documentation': {
 'description': '''
@@ -1318,6 +1443,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_480P_59_94_FRAMES_PER_SECOND',
+                'prefix': None,
                 'value': 1015,
 'documentation': {
 'description': '''
@@ -1327,6 +1453,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_480P_60_FRAMES_PER_SECOND',
+                'prefix': None,
                 'value': 1016,
 'documentation': {
 'description': '''
@@ -1336,6 +1463,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_576I_50_FIELDS_PER_SECOND',
+                'prefix': None,
                 'value': 1020,
 'documentation': {
 'description': '''
@@ -1345,6 +1473,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_576P_50_FRAMES_PER_SECOND',
+                'prefix': None,
                 'value': 1025,
 'documentation': {
 'description': '''
@@ -1354,6 +1483,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_720P_50_FRAMES_PER_SECOND',
+                'prefix': None,
                 'value': 1031,
 'documentation': {
 'description': '''
@@ -1363,6 +1493,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_720P_59_94_FRAMES_PER_SECOND',
+                'prefix': None,
                 'value': 1032,
 'documentation': {
 'description': '''
@@ -1372,6 +1503,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_720P_60_FRAMES_PER_SECOND',
+                'prefix': None,
                 'value': 1033,
 'documentation': {
 'description': '''
@@ -1381,6 +1513,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_1080I_50_FIELDS_PER_SECOND',
+                'prefix': None,
                 'value': 1040,
 'documentation': {
 'description': '''
@@ -1390,6 +1523,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_1080I_59_94_FIELDS_PER_SECOND',
+                'prefix': None,
                 'value': 1041,
 'documentation': {
 'description': '''
@@ -1399,6 +1533,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_1080I_60_FIELDS_PER_SECOND',
+                'prefix': None,
                 'value': 1042,
 'documentation': {
 'description': '''
@@ -1408,6 +1543,7 @@ M-PAL signal format supports line numbers from 1 to 525
             },
             {
                 'name': '_1080P_24_FRAMES_PER_SECOND',
+                'prefix': None,
                 'value': 1045,
 'documentation': {
 'description': '''
@@ -1420,7 +1556,8 @@ M-PAL signal format supports line numbers from 1 to 525
     'VideoTriggerEvent': {
         'values': [
             {
-                'name': 'TV_EVENT_FIELD1',
+                'name': 'FIELD1',
+                'prefix': 'TV_EVENT_',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -1429,7 +1566,8 @@ Trigger on field 1 of the signal
 },
             },
             {
-                'name': 'TV_EVENT_FIELD2',
+                'name': 'FIELD2',
+                'prefix': 'TV_EVENT_',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -1438,7 +1576,8 @@ Trigger on field 2 of the signal
 },
             },
             {
-                'name': 'TV_EVENT_ANY_FIELD',
+                'name': 'ANY_FIELD',
+                'prefix': 'TV_EVENT_',
                 'value': 3,
 'documentation': {
 'description': '''
@@ -1447,7 +1586,8 @@ Trigger on the first field acquired
 },
             },
             {
-                'name': 'TV_EVENT_ANY_LINE',
+                'name': 'ANY_LINE',
+                'prefix': 'TV_EVENT_',
                 'value': 4,
 'documentation': {
 'description': '''
@@ -1456,7 +1596,8 @@ Trigger on the first line acquired
 },
             },
             {
-                'name': 'TV_EVENT_LINE_NUMBER',
+                'name': 'LINE_NUMBER',
+                'prefix': 'TV_EVENT_',
                 'value': 5,
 'documentation': {
 'description': '''
