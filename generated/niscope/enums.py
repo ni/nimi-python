@@ -517,10 +517,6 @@ class TriggerCoupling(Enum):
     '''
     Lowpass filter coupling
     '''
-    LF_REJECT = 4
-    '''
-    LF Reject filter.
-    '''
     AC_PLUS_HF_REJECT = 1001
     '''
     Highpass and lowpass filter coupling
@@ -630,66 +626,6 @@ class VideoSignalFormat(Enum):
     SECAM = 3
     '''
     SECAM signal format supports line numbers from 1 to 625
-    '''
-    M_PAL = 4
-    '''
-    Specifies M-PAL signal format.
-    '''
-    _480I59_94_FPS = 5
-    '''
-    Specifies 480i/59.94 signal format.
-    '''
-    _480I60_FPS = 6
-    '''
-    Specifies 480i/60 signal format.
-    '''
-    _480P59_94_FPS = 7
-    '''
-    Specifies 480p/59.94 signal format.
-    '''
-    _480P60_FPS = 8
-    '''
-    Specifies 480p/60 Fps signal format.
-    '''
-    _576I60_FPS = 9
-    '''
-    Specifies 576i/60 fps signal format.
-    '''
-    _576P50_FPS = 10
-    '''
-    Specifies 576p/50 Fps signal format.
-    '''
-    _720P30_FPS = 11
-    '''
-    Specifies 720p/30 Fps signal format.
-    '''
-    _720P50_FPS = 12
-    '''
-    Specifies 720p/50 Fps signal format.
-    '''
-    _720P59_94_FPS = 13
-    '''
-    Specifies 720p/59.94 Fps signal format.
-    '''
-    _720P60_FPS = 14
-    '''
-    Specifies 720p/60 Fps signal format.
-    '''
-    _1080I50_FPS = 15
-    '''
-    Specifies 1080i/50 fps signal format.
-    '''
-    _1080I59_94_FPS = 16
-    '''
-    Specifies 1080i/59.94 fps signal format.
-    '''
-    _1080I60_FPS = 17
-    '''
-    Specifies 1080i/60 fps signal format.
-    '''
-    _1080P24_FPS = 18
-    '''
-    Specifies 1080p/24 Fps signal format.
     '''
     M_PAL = 1001
     '''

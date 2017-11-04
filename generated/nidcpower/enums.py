@@ -82,6 +82,15 @@ class DigitalEdge(Enum):
     '''
 
 
+class Event(Enum):
+    SOURCE_COMPLETE = 1030
+    MEASURE_COMPLETE = 1031
+    SEQUENCE_ITERATION_COMPLETE = 1032
+    SEQUENCE_ENGINE_DONE = 1033
+    PULSE_COMPLETE = 1051
+    READY_FOR_PULSE_TRIGGER = 1052
+
+
 class MeasureWhen(Enum):
     AUTOMATICALLY_AFTER_SOURCE_COMPLETE = 1025
     '''
@@ -192,6 +201,14 @@ class SelfCalibrationPersistence(Enum):
     '''
     Write new self calibration values to hardware.
     '''
+
+
+class SendSoftwareEdgeTriggerType(Enum):
+    START = 1034
+    SOURCE = 1035
+    MEASURE = 1036
+    SEQUENCE_ADVANCE = 1037
+    PULSE = 1053
 
 
 class Sense(Enum):
