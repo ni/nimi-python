@@ -178,6 +178,57 @@ Enums used in NI-DCPower
 
 
 
+.. py:data:: Event
+
+    .. py:attribute:: nidcpower.Event.SOURCE_COMPLETE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Event.MEASURE_COMPLETE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Event.SEQUENCE_ITERATION_COMPLETE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Event.SEQUENCE_ENGINE_DONE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Event.PULSE_COMPLETE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.Event.READY_FOR_PULSE_TRIGGER
+
+
+
+        
+
+
+
+
 .. py:data:: MeasureWhen
 
     .. py:attribute:: nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
@@ -205,6 +256,29 @@ Enums used in NI-DCPower
 
 
         Acquires a measurement when a Measure trigger is received.
+
+        
+
+
+
+
+.. py:data:: MeasurementTypes
+
+    .. py:attribute:: nidcpower.MeasurementTypes.MEASURE_CURRENT
+
+
+
+        The device measures current.
+
+        
+
+
+
+    .. py:attribute:: nidcpower.MeasurementTypes.MEASURE_VOLTAGE
+
+
+
+        The device measures voltage.
 
         
 
@@ -271,6 +345,29 @@ Enums used in NI-DCPower
 
 
         Sets the output function to pulse current.
+
+        
+
+
+
+
+.. py:data:: OutputStates
+
+    .. py:attribute:: nidcpower.OutputStates.OUTPUT_CONSTANT_VOLTAGE
+
+
+
+        The device maintains a constant voltage by adjusting the current
+
+        
+
+
+
+    .. py:attribute:: nidcpower.OutputStates.OUTPUT_CONSTANT_CURRENT
+
+
+
+        The device maintains a constant current by adjusting the voltage.
 
         
 
@@ -396,6 +493,49 @@ Enums used in NI-DCPower
 
 
         Write new self calibration values to hardware.
+
+        
+
+
+
+
+.. py:data:: SendSoftwareEdgeTriggerType
+
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.START
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SOURCE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.MEASURE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE
+
+
+
+        
+
+
+
+    .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.PULSE
+
+
 
         
 
