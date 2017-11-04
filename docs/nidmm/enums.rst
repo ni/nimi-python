@@ -1050,7 +1050,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermistorType.44004
+    .. py:attribute:: nidmm.ThermistorType._44004
 
 
 
@@ -1060,7 +1060,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermistorType.44006
+    .. py:attribute:: nidmm.ThermistorType._44006
 
 
 
@@ -1070,7 +1070,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.ThermistorType.44007
+    .. py:attribute:: nidmm.ThermistorType._44007
 
 
 
