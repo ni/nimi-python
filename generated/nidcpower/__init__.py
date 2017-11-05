@@ -6,4 +6,3 @@ from nidcpower.errors import Error     # noqa: F401
 from nidcpower.errors import NidcpowerWarning   # noqa: F401
 from nidcpower.session import Session  # noqa: F401
 
-

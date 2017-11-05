@@ -6,4 +6,3 @@ from nifgen.errors import Error     # noqa: F401
 from nifgen.errors import NifgenWarning   # noqa: F401
 from nifgen.session import Session  # noqa: F401
 
-

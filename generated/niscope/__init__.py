@@ -6,4 +6,3 @@ from niscope.errors import Error     # noqa: F401
 from niscope.errors import NiscopeWarning   # noqa: F401
 from niscope.session import Session  # noqa: F401
 
-

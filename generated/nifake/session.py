@@ -913,7 +913,7 @@ class Session(_SessionBase):
             cs (custom_struct): Set using custom type
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        cs_ctype = visatype.CustomStruct(cs)  # case 8
+        cs_ctype = custom_struct.CustomStruct(cs)  # case 8
         error_code = self._library.niFake_SetCustomType(vi_ctype, cs_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

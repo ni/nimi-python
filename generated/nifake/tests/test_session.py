@@ -6,6 +6,7 @@ import warnings
 
 from mock import patch
 
+from mock import ANY
 # Tests
 
 
@@ -826,3 +827,13 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
         self.patched_library.niFake_error_message.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.ViInt32Matcher(test_error_code), matchers.ViCharBufferMatcher(256))
+
+    # Custom types
+
+    def test_set_custom_type(self):
+        self.patched_library.niFake_SetCustomType.side_effect = self.side_effects_helper.niFake_SetCustomType
+        cs = nifake.custom_struct(struct_int=42, struct_double=4.2)
+        with nifake.Session('dev1') as session:
+            session.set_custom_type(cs)
+            self.patched_library.niFake_SetCustomType.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.CustomTypeMatcher(nifake.CustomStruct, nifake.CustomStruct(cs)))
+

@@ -9,26 +9,25 @@ class CustomStruct(ctypes.Structure):
         ('struct_double', visatype.ViReal64),
     ]
 
-    def __init__(self, data=None):
+    def __init__(self, data=None, struct_int=0, struct_double=0.0):
+        super(ctypes.Structure, self).__init__()
         if data is not None:
-            super(ctypes.Structure, self).__init__(data.struct_int, data.struct_double)
+            self.struct_int = data.struct_int
+            self.struct_double = data.struct_double
         else:
-            super(ctypes.Structure, self).__init__(0, 0.0)
+            self.struct_int = struct_int
+            self.struct_double = struct_double
 
 
 
 class CustomStructPython(object):
-    def __init__(self, data=None):
+    def __init__(self, data=None, struct_int=0, struct_double=0.0):
         if data is not None:
-            if isinstance(data, custom_struct):
-                self.struct_int = data.struct_int
-                self.struct_double = data.struct_double
-            elif isinstance(data, CustomStruct):
-                self.struct_int = data.struct_int
-                self.struct_double = data.struct_double
+            self.struct_int = data.struct_int
+            self.struct_double = data.struct_double
         else:
-            self.struct_int = 0
-            self.struct_double = 0.0
+            self.struct_int = struct_int
+            self.struct_double = struct_double
 
 
 custom_struct = CustomStructPython
