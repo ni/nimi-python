@@ -1750,6 +1750,33 @@ functions = {
         'documentation': {
             'description': 'This function returns an array of float whose size is determined with the IVI dance.',
         },
+    },
+    'SetCustomType': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'cs',
+                'type': 'CustomStruct',
+                'documentation': {
+                    'description': 'Set using custom type',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'This function takes a custom type.',
+        },
     }
     #TODO(marcoskirsch): More cases to add:
     #     Waveforms as inputs and outputs
