@@ -22,6 +22,8 @@ config = {
         'abort_function': 'Abort',
     },
     'init_function': 'InitWithOptions',
-    'custom_types': [],
+    'custom_types': [
+        {'file_name': 'custom_struct', 'python_name': '', 'ctypes_name': '', },
+    ],
 }
 
