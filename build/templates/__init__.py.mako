@@ -12,8 +12,9 @@ from ${module_name}.enums import *          # noqa: F403,F401,H303
 from ${module_name}.errors import Error     # noqa: F401
 from ${module_name}.errors import ${module_name_class}Warning   # noqa: F401
 from ${module_name}.session import Session  # noqa: F401
-
 % for c in config['custom_types']:
-import ${module_name}.${c['file_name']}  # noqa: F401
+
+from ${module_name}.${c['file_name']} import ${c['python_name']}  # noqa: F401
+from ${module_name}.${c['file_name']} import ${c['ctypes_name']}  # noqa: F401
 % endfor
 
