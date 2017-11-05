@@ -35,10 +35,10 @@ def _add_python_parameter_name(parameter):
     return parameter
 
 
-def _add_python_type(parameter):
+def _add_python_type(parameter, config):
     '''Adds the type to use in the Python API to the parameter metadata'''
     if parameter['enum'] is None:
-        parameter['python_type'] = get_python_type_for_visa_type(parameter['type'])
+        parameter['python_type'] = get_python_type_for_visa_type(parameter['type'], config)
     else:
         parameter['python_type'] = 'enums.' + parameter['enum']
     return parameter
@@ -174,7 +174,7 @@ def add_all_function_metadata(functions, config):
         for p in functions[f]['parameters']:
             _add_buffer_info(p)
             _add_python_parameter_name(p)
-            _add_python_type(p)
+            _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p)
             _add_default_value_name(p)

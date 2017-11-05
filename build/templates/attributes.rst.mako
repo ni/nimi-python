@@ -16,7 +16,7 @@ ${helper.get_rst_header_snippet(module_name + '.Session properties', '=')}
 
 <%
 a = attributes[attr]
-data_type = helper.get_python_type_for_visa_type(a['type'])
+data_type = helper.get_python_type_for_visa_type(a['type'], config)
 if attributes[attr]['enum'] is not None:
     data_type = ':py:data:`' + attributes[attr]["enum"] + '`'
 table_contents = [

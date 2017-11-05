@@ -31,7 +31,7 @@ def sorted_attrs(a):
     return sorted(a, key=lambda k: a[k]['name'])
 
 
-def get_python_type_for_visa_type(visa_type):
+def get_python_type_for_visa_type(visa_type, config):
     '''Returns the type to use in the Python API from the original visa type used in the C API
 
     Do not use this with enums.
@@ -59,6 +59,10 @@ def get_python_type_for_visa_type(visa_type):
     if visa_type in type_map:
         return type_map[visa_type]
     else:
+        for c in config['custom_types']:
+            if c['ctypes_name'] == visa_type:
+                return c['python_name']
+        # We didn't find it so assert
         assert False, 'Unknown visa_type: {0}'.format(visa_type)
 
 
