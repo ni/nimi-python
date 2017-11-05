@@ -62,6 +62,10 @@ from ${module_name} import enums
 from ${module_name} import errors
 from ${module_name} import library_singleton
 from ${module_name} import visatype
+% for c in config['custom_types']:
+
+from ${module_name} import ${c['file_name']}  # noqa: F401
+% endfor
 
 
 % if session_context_manager is not None:
