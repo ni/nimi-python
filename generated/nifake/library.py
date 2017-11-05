@@ -5,6 +5,8 @@ import threading
 
 from nifake.visatype import *  # noqa: F403,H303
 
+from nifake import custom_struct  # noqa: F401
+
 
 class Library(object):
     '''Library
@@ -49,6 +51,7 @@ class Library(object):
         self.niFake_SetAttributeViInt64_cfunc = None
         self.niFake_SetAttributeViReal64_cfunc = None
         self.niFake_SetAttributeViString_cfunc = None
+        self.niFake_SetCustomType_cfunc = None
         self.niFake_SimpleFunction_cfunc = None
         self.niFake_TwoInputFunction_cfunc = None
         self.niFake_Use64BitNumber_cfunc = None
@@ -310,6 +313,14 @@ class Library(object):
                 self.niFake_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
+
+    def niFake_SetCustomType(self, vi, cs):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_SetCustomType_cfunc is None:
+                self.niFake_SetCustomType_cfunc = self._library.niFake_SetCustomType
+                self.niFake_SetCustomType_cfunc.argtypes = [ViSession, CustomStruct]  # noqa: F405
+                self.niFake_SetCustomType_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_SetCustomType_cfunc(vi, cs)
 
     def niFake_SimpleFunction(self, vi):  # noqa: N802
         with self._func_lock:

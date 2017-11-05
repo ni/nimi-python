@@ -7,3 +7,4 @@ from nifake.errors import NifakeWarning   # noqa: F401
 from nifake.session import Session  # noqa: F401
 
 import nifake.custom_struct  # noqa: F401
+

@@ -111,6 +111,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
+        self._defaults['SetCustomType'] = {}
+        self._defaults['SetCustomType']['return'] = 0
         self._defaults['SimpleFunction'] = {}
         self._defaults['SimpleFunction']['return'] = 0
         self._defaults['TwoInputFunction'] = {}
@@ -440,6 +442,11 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
 
+    def niFake_SetCustomType(self, vi, cs):  # noqa: N802
+        if self._defaults['SetCustomType']['return'] != 0:
+            return self._defaults['SetCustomType']['return']
+        return self._defaults['SetCustomType']['return']
+
     def niFake_SimpleFunction(self, vi):  # noqa: N802
         if self._defaults['SimpleFunction']['return'] != 0:
             return self._defaults['SimpleFunction']['return']
@@ -542,6 +549,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_SetAttributeViReal64.return_value = 0
         mock_library.niFake_SetAttributeViString.side_effect = MockFunctionCallError("niFake_SetAttributeViString")
         mock_library.niFake_SetAttributeViString.return_value = 0
+        mock_library.niFake_SetCustomType.side_effect = MockFunctionCallError("niFake_SetCustomType")
+        mock_library.niFake_SetCustomType.return_value = 0
         mock_library.niFake_SimpleFunction.side_effect = MockFunctionCallError("niFake_SimpleFunction")
         mock_library.niFake_SimpleFunction.return_value = 0
         mock_library.niFake_TwoInputFunction.side_effect = MockFunctionCallError("niFake_TwoInputFunction")
