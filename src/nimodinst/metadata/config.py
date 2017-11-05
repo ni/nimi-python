@@ -16,5 +16,6 @@ config = {
             '64bit': {'name': 'libnimodinst.so', 'type': 'cdll'},
         },
     }
+    'custom_types': [],
 }
 

@@ -22,5 +22,6 @@ config = {
         'abort_function': 'AbortGeneration',
     },
     'init_function': 'InitializeWithChannels',
+    'custom_types': [],
 }
 

@@ -22,5 +22,6 @@ config = {
         'abort_function': 'Abort',
     },
     'init_function': 'InitWithOptions',
+    'custom_types': [],
 }
 
