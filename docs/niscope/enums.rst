@@ -1374,16 +1374,6 @@ Enums used in NI-SCOPE
 
 
 
-        Specifies M-PAL signal format.
-
-        
-
-
-
-    .. py:attribute:: niscope.VideoSignalFormat.M_PAL
-
-
-
         M-PAL signal format supports line numbers from 1 to 525
 
         

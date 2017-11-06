@@ -627,10 +627,6 @@ class VideoSignalFormat(Enum):
     '''
     SECAM signal format supports line numbers from 1 to 625
     '''
-    M_PAL = 4
-    '''
-    Specifies M-PAL signal format.
-    '''
     M_PAL = 1001
     '''
     M-PAL signal format supports line numbers from 1 to 525
