@@ -54,7 +54,7 @@ def test_self_cal(session):
 
 def test_configure_arb_waveform(session):
     waveform_data = [0.000000, 0.049068, 0.098017, 0.146730, 0.195090, 0.242980, 0.290285, 0.336890, 0.382683, 0.427555]
-    session.output_mode = nifgen.OutputMode.ARB  # TODO(Jaleel): name to change per #553
+    session.output_mode = nifgen.OutputMode.ARB
     session.configure_arb_waveform(session.create_waveform_f64(waveform_data), 1.0, 0.0)
 
 
