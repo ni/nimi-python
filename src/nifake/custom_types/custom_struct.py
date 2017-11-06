@@ -19,7 +19,6 @@ class CustomStruct(ctypes.Structure):
             self.struct_double = struct_double
 
 
-
 class CustomStructPython(object):
     def __init__(self, data=None, struct_int=0, struct_double=0.0):
         if data is not None:
