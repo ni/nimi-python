@@ -4,6 +4,7 @@ from metadata.attributes import attributes
 from metadata.enums import enums
 import metadata.functions_addon
 import metadata.attributes_addon
+import metadata.enums_addon
 
 import build.helper as helper
 import sys
@@ -12,6 +13,7 @@ import sys
 config['modules'] = sys.modules
 helper.add_all_function_metadata(functions, config)
 helper.add_all_attribute_metadata(attributes, config)
+helper.add_all_enum_metadata(enums, config)
 
 __version__ = config['module_version']
 
