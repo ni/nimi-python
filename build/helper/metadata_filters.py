@@ -231,3 +231,8 @@ def filter_codegen_attributes(attributes):
     return {k: v for k, v in attributes.items() if v['codegen_method'] != 'no'}
 
 
+def filter_codegen_enums(enums):
+    '''Returns enum metadata only for those enums to be included in codegen'''
+    return {k: v for k, v in enums.items() if v['codegen_method'] != 'no'}
+
+

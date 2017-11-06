@@ -5,7 +5,7 @@ config = template_parameters['metadata'].config
 enums = config['enums']
 %>
 from enum import Enum
-% for enum_name in sorted(enums):
+% for enum_name in sorted(helper.filter_codegen_enums(enums)):
 
 
 class ${enum_name}(Enum):
