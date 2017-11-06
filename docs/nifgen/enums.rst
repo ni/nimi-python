@@ -9,7 +9,7 @@ Enums used in NI-FGEN
 
 .. py:data:: AnalogPath
 
-    .. py:attribute:: nifgen.AnalogPath.MAIN_ANALOG_PATH
+    .. py:attribute:: nifgen.AnalogPath.MAIN
 
 
 
@@ -19,7 +19,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.AnalogPath.DIRECT_ANALOG_PATH
+    .. py:attribute:: nifgen.AnalogPath.DIRECT
 
 
 
@@ -29,7 +29,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.AnalogPath.FIXED_LOW_GAIN_ANALOG_PATH
+    .. py:attribute:: nifgen.AnalogPath.FIXED_LOW_GAIN
 
 
 
@@ -39,7 +39,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.AnalogPath.FIXED_HIGH_GAIN_ANALOG_PATH
+    .. py:attribute:: nifgen.AnalogPath.FIXED_HIGH_GAIN
 
 
 
@@ -445,7 +445,7 @@ Enums used in NI-FGEN
 
 .. py:data:: IdleBehavior
 
-    .. py:attribute:: nifgen.IdleBehavior.HOLD_LAST_VALUE
+    .. py:attribute:: nifgen.IdleBehavior.HOLD_LAST
 
 
 
@@ -455,7 +455,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.IdleBehavior.JUMP_TO_VALUE
+    .. py:attribute:: nifgen.IdleBehavior.JUMP_TO
 
 
 
@@ -966,7 +966,7 @@ Enums used in NI-FGEN
 
 .. py:data:: ScriptTriggerDigitalEdgeEdge
 
-    .. py:attribute:: nifgen.ScriptTriggerDigitalEdgeEdge.RISING_EDGE
+    .. py:attribute:: nifgen.ScriptTriggerDigitalEdgeEdge.RISING
 
 
 
@@ -976,7 +976,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.ScriptTriggerDigitalEdgeEdge.FALLING_EDGE
+    .. py:attribute:: nifgen.ScriptTriggerDigitalEdgeEdge.FALLING
 
 
 
@@ -1055,7 +1055,7 @@ Enums used in NI-FGEN
 
 .. py:data:: StartTriggerDigitalEdgeEdge
 
-    .. py:attribute:: nifgen.StartTriggerDigitalEdgeEdge.RISING_EDGE
+    .. py:attribute:: nifgen.StartTriggerDigitalEdgeEdge.RISING
 
 
 
@@ -1065,7 +1065,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.StartTriggerDigitalEdgeEdge.FALLING_EDGE
+    .. py:attribute:: nifgen.StartTriggerDigitalEdgeEdge.FALLING
 
 
 
@@ -1933,7 +1933,7 @@ Enums used in NI-FGEN
 
 .. py:data:: WaitBehavior
 
-    .. py:attribute:: nifgen.WaitBehavior.HOLD_LAST_VALUE
+    .. py:attribute:: nifgen.WaitBehavior.HOLD_LAST
 
 
 
@@ -1943,7 +1943,7 @@ Enums used in NI-FGEN
 
 
 
-    .. py:attribute:: nifgen.WaitBehavior.JUMP_TO_VALUE
+    .. py:attribute:: nifgen.WaitBehavior.JUMP_TO
 
 
 

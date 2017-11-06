@@ -4,19 +4,19 @@ from enum import Enum
 
 
 class AnalogPath(Enum):
-    MAIN_ANALOG_PATH = 0
+    MAIN = 0
     '''
     Specifies use of the main path.  NI-FGEN chooses the amplifier based on the user-specified gain.
     '''
-    DIRECT_ANALOG_PATH = 1
+    DIRECT = 1
     '''
     Specifies use of the direct path.
     '''
-    FIXED_LOW_GAIN_ANALOG_PATH = 2
+    FIXED_LOW_GAIN = 2
     '''
     Specifies use of the low-gain amplifier in the main path, no matter  what value the user specifies for gain. This setting limits the output  range.
     '''
-    FIXED_HIGH_GAIN_ANALOG_PATH = 3
+    FIXED_HIGH_GAIN = 3
     '''
     Specifies use of the high-gain amplifier in the main path.
     '''
@@ -200,11 +200,11 @@ class FilterType(Enum):
 
 
 class IdleBehavior(Enum):
-    HOLD_LAST_VALUE = 400
+    HOLD_LAST = 400
     '''
     While in an Idle or Wait state, the output signal remains  at the last voltage generated prior to entering the state.
     '''
-    JUMP_TO_VALUE = 401
+    JUMP_TO = 401
     '''
     While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value attribute.
     '''
@@ -445,11 +445,11 @@ class SampleClockTimebaseSource(Enum):
 
 
 class ScriptTriggerDigitalEdgeEdge(Enum):
-    RISING_EDGE = 101
+    RISING = 101
     '''
     Rising Edge
     '''
-    FALLING_EDGE = 102
+    FALLING = 102
     '''
     Falling Edge
     '''
@@ -486,11 +486,11 @@ class ScriptTriggerType(Enum):
 
 
 class StartTriggerDigitalEdgeEdge(Enum):
-    RISING_EDGE = 101
+    RISING = 101
     '''
     Rising Edge
     '''
-    FALLING_EDGE = 102
+    FALLING = 102
     '''
     Falling Edge
     '''
@@ -868,11 +868,11 @@ class VideoWaveformType(Enum):
 
 
 class WaitBehavior(Enum):
-    HOLD_LAST_VALUE = 400
+    HOLD_LAST = 400
     '''
     While in an Idle or Wait state, the output signal remains  at the last voltage generated prior to entering the state.
     '''
-    JUMP_TO_VALUE = 401
+    JUMP_TO = 401
     '''
     While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value attribute.
     '''
