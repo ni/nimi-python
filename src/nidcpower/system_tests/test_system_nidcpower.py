@@ -299,3 +299,12 @@ def test_configure_digital_edge_start_trigger(single_channel_session):
     single_channel_session.configure_digital_edge_start_trigger(expected_trigger_terminal)
     assert expected_trigger_terminal == single_channel_session.digital_edge_start_trigger_input_terminal
 
+
+def test_create_and_delete_advanced_sequence_step(single_channel_session):
+    ids = [1250001]  # work around #507
+    single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
+    single_channel_session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
+    single_channel_session.create_advanced_sequence_step(set_as_active_step=True)
+    single_channel_session.voltage_level = 1
+    single_channel_session.delete_advanced_sequence(sequence_name='my_sequence')
+
