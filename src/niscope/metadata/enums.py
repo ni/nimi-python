@@ -993,14 +993,6 @@ position.
 },
             },
             {
-                'name': 'LF_REJECT',
-                'prefix': None,
-                'value': 4,
-'documentation': {
-'description': 'LF Reject filter.',
-},
-            },
-            {
                 'name': 'AC_PLUS_HF_REJECT',
                 'prefix': None,
                 'value': 1001,
@@ -1213,118 +1205,6 @@ after a certain amount of time.
                 'value': 4,
 'documentation': {
 'description': 'Specifies M-PAL signal format.',
-},
-            },
-            {
-                'name': '_480I59_94_FPS',
-                'prefix': None,
-                'value': 5,
-'documentation': {
-'description': 'Specifies 480i/59.94 signal format.',
-},
-            },
-            {
-                'name': '_480I60_FPS',
-                'prefix': None,
-                'value': 6,
-'documentation': {
-'description': 'Specifies 480i/60 signal format.',
-},
-            },
-            {
-                'name': '_480P59_94_FPS',
-                'prefix': None,
-                'value': 7,
-'documentation': {
-'description': 'Specifies 480p/59.94 signal format.',
-},
-            },
-            {
-                'name': '_480P60_FPS',
-                'prefix': None,
-                'value': 8,
-'documentation': {
-'description': 'Specifies 480p/60 Fps signal format.',
-},
-            },
-            {
-                'name': '_576I60_FPS',
-                'prefix': None,
-                'value': 9,
-'documentation': {
-'description': 'Specifies 576i/60 fps signal format.',
-},
-            },
-            {
-                'name': '_576P50_FPS',
-                'prefix': None,
-                'value': 10,
-'documentation': {
-'description': 'Specifies 576p/50 Fps signal format.',
-},
-            },
-            {
-                'name': '_720P30_FPS',
-                'prefix': None,
-                'value': 11,
-'documentation': {
-'description': 'Specifies 720p/30 Fps signal format.',
-},
-            },
-            {
-                'name': '_720P50_FPS',
-                'prefix': None,
-                'value': 12,
-'documentation': {
-'description': 'Specifies 720p/50 Fps signal format.',
-},
-            },
-            {
-                'name': '_720P59_94_FPS',
-                'prefix': None,
-                'value': 13,
-'documentation': {
-'description': 'Specifies 720p/59.94 Fps signal format.',
-},
-            },
-            {
-                'name': '_720P60_FPS',
-                'prefix': None,
-                'value': 14,
-'documentation': {
-'description': 'Specifies 720p/60 Fps signal format.',
-},
-            },
-            {
-                'name': '_1080I50_FPS',
-                'prefix': None,
-                'value': 15,
-'documentation': {
-'description': 'Specifies 1080i/50 fps signal format.',
-},
-            },
-            {
-                'name': '_1080I59_94_FPS',
-                'prefix': None,
-                'value': 16,
-'documentation': {
-'description': 'Specifies 1080i/59.94 fps signal format.',
-},
-            },
-            {
-                'name': '_1080I60_FPS',
-                'prefix': None,
-                'value': 17,
-'documentation': {
-'description': 'Specifies 1080i/60 fps signal format.',
-},
-            },
-            {
-                'name': '_1080P24_FPS',
-                'prefix': None,
-                'value': 18,
-'documentation': {
-'description': 'Specifies 1080p/24 Fps signal format.',
 },
             },
             {
