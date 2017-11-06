@@ -13,9 +13,7 @@ enums = {
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -115,9 +113,7 @@ line before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -125,9 +121,7 @@ line before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 111,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -135,9 +129,7 @@ line before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 112,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -145,9 +137,7 @@ line before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 113,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -155,9 +145,7 @@ line before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 114,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -165,9 +153,7 @@ line before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 115,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -175,9 +161,7 @@ line before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 116,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -185,9 +169,7 @@ line before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 117,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -195,9 +177,7 @@ line before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 118,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
         ],
@@ -249,9 +229,7 @@ advanced output signal of the switch module initiates handshaking.
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -351,9 +329,7 @@ line before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -453,9 +429,7 @@ line before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 1,
 'documentation': {
-'description': '''
-Path Available
-''',
+'description': 'Path Available',
 },
             },
             {
@@ -463,9 +437,7 @@ Path Available
                 'prefix': None,
                 'value': 2,
 'documentation': {
-'description': '''
-Path Exists
-''',
+'description': 'Path Exists',
 },
             },
             {
@@ -473,9 +445,7 @@ Path Exists
                 'prefix': None,
                 'value': 3,
 'documentation': {
-'description': '''
-Path Unsupported
-''',
+'description': 'Path Unsupported',
 },
             },
             {
@@ -483,9 +453,7 @@ Path Unsupported
                 'prefix': None,
                 'value': 4,
 'documentation': {
-'description': '''
-Resource in use
-''',
+'description': 'Resource in use',
 },
             },
             {
@@ -493,9 +461,7 @@ Resource in use
                 'prefix': None,
                 'value': 5,
 'documentation': {
-'description': '''
-Source conflict
-''',
+'description': 'Source conflict',
 },
             },
             {
@@ -503,9 +469,7 @@ Source conflict
                 'prefix': None,
                 'value': 6,
 'documentation': {
-'description': '''
-Channel not available
-''',
+'description': 'Channel not available',
 },
             },
         ],
@@ -517,9 +481,7 @@ Channel not available
                 'prefix': None,
                 'value': 20,
 'documentation': {
-'description': '''
-Open Relay
-''',
+'description': 'Open Relay',
 },
             },
             {
@@ -527,9 +489,7 @@ Open Relay
                 'prefix': None,
                 'value': 21,
 'documentation': {
-'description': '''
-Close Relay
-''',
+'description': 'Close Relay',
 },
             },
         ],
@@ -541,9 +501,7 @@ Close Relay
                 'prefix': None,
                 'value': 10,
 'documentation': {
-'description': '''
-Open
-''',
+'description': 'Open',
 },
             },
             {
@@ -551,9 +509,7 @@ Open
                 'prefix': None,
                 'value': 11,
 'documentation': {
-'description': '''
-Closed
-''',
+'description': 'Closed',
 },
             },
         ],
@@ -565,9 +521,7 @@ Closed
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-The switch device does not produce a Scan Advanced Output trigger.
-''',
+'description': 'The switch device does not produce a Scan Advanced Output trigger.',
 },
             },
             {
@@ -575,9 +529,7 @@ The switch device does not produce a Scan Advanced Output trigger.
                 'prefix': None,
                 'value': 2,
 'documentation': {
-'description': '''
-External Trigger. The switch device produces the Scan Advanced Output  trigger on the external trigger output.
-''',
+'description': 'External Trigger. The switch device produces the Scan Advanced Output  trigger on the external trigger output.',
 },
             },
             {
@@ -585,9 +537,7 @@ External Trigger. The switch device produces the Scan Advanced Output  trigger o
                 'prefix': None,
                 'value': 111,
 'documentation': {
-'description': '''
-The switch device produces the Scan Advanced Output on the PXI TRIG0 line.
-''',
+'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG0 line.',
 },
             },
             {
@@ -595,9 +545,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG0 line.
                 'prefix': None,
                 'value': 112,
 'documentation': {
-'description': '''
-The switch device produces the Scan Advanced Output on the PXI TRIG1 line.
-''',
+'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG1 line.',
 },
             },
             {
@@ -605,9 +553,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG1 line.
                 'prefix': None,
                 'value': 113,
 'documentation': {
-'description': '''
-The switch device produces the Scan Advanced Output on the PXI TRIG2 line.
-''',
+'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG2 line.',
 },
             },
             {
@@ -615,9 +561,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG2 line.
                 'prefix': None,
                 'value': 114,
 'documentation': {
-'description': '''
-The switch device produces the Scan Advanced Output on the PXI TRIG3 line.
-''',
+'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG3 line.',
 },
             },
             {
@@ -625,9 +569,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG3 line.
                 'prefix': None,
                 'value': 115,
 'documentation': {
-'description': '''
-The switch device produces the Scan Advanced Output on the PXI TRIG4 line.
-''',
+'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG4 line.',
 },
             },
             {
@@ -635,9 +577,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG4 line.
                 'prefix': None,
                 'value': 116,
 'documentation': {
-'description': '''
-The switch device produces the Scan Advanced Output on the PXI TRIG5 line.
-''',
+'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG5 line.',
 },
             },
             {
@@ -645,9 +585,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG5 line.
                 'prefix': None,
                 'value': 117,
 'documentation': {
-'description': '''
-The switch device produces the Scan Advanced Output on the PXI TRIG6 line.
-''',
+'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG6 line.',
 },
             },
             {
@@ -655,9 +593,7 @@ The switch device produces the Scan Advanced Output on the PXI TRIG6 line.
                 'prefix': None,
                 'value': 118,
 'documentation': {
-'description': '''
-The switch device produces the Scan Advanced Output on the PXI TRIG7 line.
-''',
+'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG7 line.',
 },
             },
             {
@@ -676,9 +612,7 @@ Star trigger bus before processing the next entry in the scan list.
                 'prefix': None,
                 'value': 1000,
 'documentation': {
-'description': '''
-The switch device produces the Scan Advanced Output  trigger on the rear connector.
-''',
+'description': 'The switch device produces the Scan Advanced Output  trigger on the rear connector.',
 },
             },
             {
@@ -686,9 +620,7 @@ The switch device produces the Scan Advanced Output  trigger on the rear connect
                 'prefix': None,
                 'value': 1001,
 'documentation': {
-'description': '''
-The switch device produces the Scan Advanced Output  trigger on the front connector.
-''',
+'description': 'The switch device produces the Scan Advanced Output  trigger on the front connector.',
 },
             },
             {
@@ -960,23 +892,19 @@ connector module 12.
     'ScanAdvancedPolarity': {
         'values': [
             {
-                'name': 'RISING_EDGE',
-                'prefix': None,
+                'name': 'RISING',
+                'prefix': '_EDGE',
                 'value': 0,
 'documentation': {
-'description': '''
-The trigger occurs on the rising edge of the signal.
-''',
+'description': 'The trigger occurs on the rising edge of the signal.',
 },
             },
             {
-                'name': 'FALLING_EDGE',
-                'prefix': None,
+                'name': 'FALLING',
+                'prefix': '_EDGE',
                 'value': 1,
 'documentation': {
-'description': '''
-The trigger occurs on the falling edge of the signal.
-''',
+'description': 'The trigger occurs on the falling edge of the signal.',
 },
             },
         ],
@@ -988,9 +916,7 @@ The trigger occurs on the falling edge of the signal.
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-No implicit action on connections when scanning.
-''',
+'description': 'No implicit action on connections when scanning.',
 },
             },
             {
@@ -998,9 +924,7 @@ No implicit action on connections when scanning.
                 'prefix': None,
                 'value': 1,
 'documentation': {
-'description': '''
-When scanning, the switch device breaks existing connections before  making new connections.
-''',
+'description': 'When scanning, the switch device breaks existing connections before  making new connections.',
 },
             },
             {
@@ -1008,9 +932,7 @@ When scanning, the switch device breaks existing connections before  making new 
                 'prefix': None,
                 'value': 2,
 'documentation': {
-'description': '''
-When scanning, the switch device breaks existing connections after making  new connections.
-''',
+'description': 'When scanning, the switch device breaks existing connections after making  new connections.',
 },
             },
         ],
@@ -1022,9 +944,7 @@ When scanning, the switch device breaks existing connections after making  new c
                 'prefix': None,
                 'value': 1,
 'documentation': {
-'description': '''
-Immediate Trigger. The switch device does not wait for a trigger before  processing the next entry in the scan list.
-''',
+'description': 'Immediate Trigger. The switch device does not wait for a trigger before  processing the next entry in the scan list.',
 },
             },
             {
@@ -1032,9 +952,7 @@ Immediate Trigger. The switch device does not wait for a trigger before  process
                 'prefix': None,
                 'value': 2,
 'documentation': {
-'description': '''
-External Trigger. The switch device waits until it receives a trigger  from an external source through the external trigger input before  processing the next entry in the scan list.
-''',
+'description': 'External Trigger. The switch device waits until it receives a trigger  from an external source through the external trigger input before  processing the next entry in the scan list.',
 },
             },
             {
@@ -1042,9 +960,7 @@ External Trigger. The switch device waits until it receives a trigger  from an e
                 'prefix': None,
                 'value': 3,
 'documentation': {
-'description': '''
-The switch device waits until you call the niSwitch_SendSoftwareTrigger  function before processing the next entry in the scan list.
-''',
+'description': 'The switch device waits until you call the niSwitch_SendSoftwareTrigger  function before processing the next entry in the scan list.',
 },
             },
             {
@@ -1052,9 +968,7 @@ The switch device waits until you call the niSwitch_SendSoftwareTrigger  functio
                 'prefix': None,
                 'value': 111,
 'documentation': {
-'description': '''
-The switch device waits until it receives a trigger on the PXI TRIG0 line before processing the next entry in the scan list.
-''',
+'description': 'The switch device waits until it receives a trigger on the PXI TRIG0 line before processing the next entry in the scan list.',
 },
             },
             {
@@ -1062,9 +976,7 @@ The switch device waits until it receives a trigger on the PXI TRIG0 line before
                 'prefix': None,
                 'value': 112,
 'documentation': {
-'description': '''
-The switch device waits until it receives a trigger on the PXI TRIG1 line before processing the next entry in the scan list.
-''',
+'description': 'The switch device waits until it receives a trigger on the PXI TRIG1 line before processing the next entry in the scan list.',
 },
             },
             {
@@ -1072,9 +984,7 @@ The switch device waits until it receives a trigger on the PXI TRIG1 line before
                 'prefix': None,
                 'value': 113,
 'documentation': {
-'description': '''
-The switch device waits until it receives a trigger on the PXI TRIG2 line before processing the next entry in the scan list.
-''',
+'description': 'The switch device waits until it receives a trigger on the PXI TRIG2 line before processing the next entry in the scan list.',
 },
             },
             {
@@ -1082,9 +992,7 @@ The switch device waits until it receives a trigger on the PXI TRIG2 line before
                 'prefix': None,
                 'value': 114,
 'documentation': {
-'description': '''
-The switch device waits until it receives a trigger on the PXI TRIG3 line before processing the next entry in the scan list.
-''',
+'description': 'The switch device waits until it receives a trigger on the PXI TRIG3 line before processing the next entry in the scan list.',
 },
             },
             {
@@ -1092,9 +1000,7 @@ The switch device waits until it receives a trigger on the PXI TRIG3 line before
                 'prefix': None,
                 'value': 115,
 'documentation': {
-'description': '''
-The switch device waits until it receives a trigger on the PXI TRIG4 line before processing the next entry in the scan list.
-''',
+'description': 'The switch device waits until it receives a trigger on the PXI TRIG4 line before processing the next entry in the scan list.',
 },
             },
             {
@@ -1102,9 +1008,7 @@ The switch device waits until it receives a trigger on the PXI TRIG4 line before
                 'prefix': None,
                 'value': 116,
 'documentation': {
-'description': '''
-The switch device waits until it receives a trigger on the PXI TRIG5 line before processing the next entry in the scan list.
-''',
+'description': 'The switch device waits until it receives a trigger on the PXI TRIG5 line before processing the next entry in the scan list.',
 },
             },
             {
@@ -1112,9 +1016,7 @@ The switch device waits until it receives a trigger on the PXI TRIG5 line before
                 'prefix': None,
                 'value': 117,
 'documentation': {
-'description': '''
-The switch device waits until it receives a trigger on the PXI TRIG6 line before processing the next entry in the scan list.
-''',
+'description': 'The switch device waits until it receives a trigger on the PXI TRIG6 line before processing the next entry in the scan list.',
 },
             },
             {
@@ -1122,9 +1024,7 @@ The switch device waits until it receives a trigger on the PXI TRIG6 line before
                 'prefix': None,
                 'value': 118,
 'documentation': {
-'description': '''
-The switch device waits until it receives a trigger on the PXI TRIG7 line before processing the next entry in the scan list.
-''',
+'description': 'The switch device waits until it receives a trigger on the PXI TRIG7 line before processing the next entry in the scan list.',
 },
             },
             {
@@ -1132,9 +1032,7 @@ The switch device waits until it receives a trigger on the PXI TRIG7 line before
                 'prefix': None,
                 'value': 125,
 'documentation': {
-'description': '''
-The switch device waits until it receives a trigger on the PXI STAR  trigger bus before processing the next entry in the scan list.
-''',
+'description': 'The switch device waits until it receives a trigger on the PXI STAR  trigger bus before processing the next entry in the scan list.',
 },
             },
             {
@@ -1142,9 +1040,7 @@ The switch device waits until it receives a trigger on the PXI STAR  trigger bus
                 'prefix': None,
                 'value': 1000,
 'documentation': {
-'description': '''
-The switch device waits until it receives a trigger on the  rear connector.
-''',
+'description': 'The switch device waits until it receives a trigger on the  rear connector.',
 },
             },
             {
@@ -1152,9 +1048,7 @@ The switch device waits until it receives a trigger on the  rear connector.
                 'prefix': None,
                 'value': 1001,
 'documentation': {
-'description': '''
-The switch device waits until it receives a trigger on the  front connector.
-''',
+'description': 'The switch device waits until it receives a trigger on the  front connector.',
 },
             },
             {
@@ -1426,23 +1320,19 @@ connector module 12.
     'TriggerInputPolarity': {
         'values': [
             {
-                'name': 'RISING_EDGE',
-                'prefix': None,
+                'name': 'RISING',
+                'prefix': '_EDGE',
                 'value': 0,
 'documentation': {
-'description': '''
-The trigger occurs on the rising edge of the signal.
-''',
+'description': 'The trigger occurs on the rising edge of the signal.',
 },
             },
             {
-                'name': 'FALLING_EDGE',
-                'prefix': None,
+                'name': 'FALLING',
+                'prefix': '_EDGE',
                 'value': 1,
 'documentation': {
-'description': '''
-The trigger occurs on the falling edge of the signal.
-''',
+'description': 'The trigger occurs on the falling edge of the signal.',
 },
             },
         ],
@@ -1454,9 +1344,7 @@ The trigger occurs on the falling edge of the signal.
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -1464,9 +1352,7 @@ The trigger occurs on the falling edge of the signal.
                 'prefix': None,
                 'value': 1,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -1474,9 +1360,7 @@ The trigger occurs on the falling edge of the signal.
                 'prefix': None,
                 'value': 2,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
         ],

@@ -13,9 +13,7 @@ enums = {
                 'prefix': None,
                 'value': 1028,
 'documentation': {
-'description': '''
-Specifies aperture time in seconds.
-''',
+'description': 'Specifies aperture time in seconds.',
 },
             },
             {
@@ -23,9 +21,7 @@ Specifies aperture time in seconds.
                 'prefix': None,
                 'value': 1029,
 'documentation': {
-'description': '''
-Specifies aperture time in power line cycles (PLCs).
-''',
+'description': 'Specifies aperture time in power line cycles (PLCs).',
 },
             },
         ],
@@ -37,9 +33,7 @@ Specifies aperture time in power line cycles (PLCs).
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-Disables auto zero.
-''',
+'description': 'Disables auto zero.',
 },
             },
             {
@@ -47,9 +41,7 @@ Disables auto zero.
                 'prefix': None,
                 'value': 1,
 'documentation': {
-'description': '''
-Makes zero conversions for every measurement.
-''',
+'description': 'Makes zero conversions for every measurement.',
 },
             },
             {
@@ -57,9 +49,7 @@ Makes zero conversions for every measurement.
                 'prefix': None,
                 'value': 1024,
 'documentation': {
-'description': '''
-Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
-''',
+'description': 'Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.',
 },
             },
         ],
@@ -71,9 +61,7 @@ Makes zero conversions following the first measurement after initiating the devi
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-Autoranging is disabled.
-''',
+'description': 'Autoranging is disabled.',
 },
             },
             {
@@ -81,9 +69,7 @@ Autoranging is disabled.
                 'prefix': None,
                 'value': 1,
 'documentation': {
-'description': '''
-Autoranging is enabled.
-''',
+'description': 'Autoranging is enabled.',
 },
             },
         ],
@@ -95,9 +81,7 @@ Autoranging is enabled.
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-Autoranging is disabled.
-''',
+'description': 'Autoranging is disabled.',
 },
             },
             {
@@ -105,9 +89,7 @@ Autoranging is disabled.
                 'prefix': None,
                 'value': 1,
 'documentation': {
-'description': '''
-Autoranging is enabled.
-''',
+'description': 'Autoranging is enabled.',
 },
             },
         ],
@@ -119,9 +101,7 @@ Autoranging is enabled.
                 'prefix': None,
                 'value': 13613,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
             {
@@ -129,9 +109,7 @@ Autoranging is enabled.
                 'prefix': None,
                 'value': 13614,
 'documentation': {
-'description': '''
-
-''',
+'description': '',
 },
             },
         ],
@@ -143,9 +121,7 @@ Autoranging is enabled.
                 'prefix': 'DC_NOISE_REJECTION_',
                 'value': 1043,
 'documentation': {
-'description': '''
-Second-order rejection of DC noise.
-''',
+'description': 'Second-order rejection of DC noise.',
 },
             },
             {
@@ -153,9 +129,7 @@ Second-order rejection of DC noise.
                 'prefix': 'DC_NOISE_REJECTION_',
                 'value': 1044,
 'documentation': {
-'description': '''
-Normal rejection of DC noise.
-''',
+'description': 'Normal rejection of DC noise.',
 },
             },
         ],
@@ -167,9 +141,7 @@ Normal rejection of DC noise.
                 'prefix': None,
                 'value': 1016,
 'documentation': {
-'description': '''
-Asserts the trigger on the rising edge of the digital signal.
-''',
+'description': 'Asserts the trigger on the rising edge of the digital signal.',
 },
             },
             {
@@ -177,9 +149,7 @@ Asserts the trigger on the rising edge of the digital signal.
                 'prefix': None,
                 'value': 1017,
 'documentation': {
-'description': '''
-Asserts the trigger on the falling edge of the digital signal.
-''',
+'description': 'Asserts the trigger on the falling edge of the digital signal.',
 },
             },
         ],
@@ -191,9 +161,7 @@ Asserts the trigger on the falling edge of the digital signal.
                 'prefix': None,
                 'value': 1025,
 'documentation': {
-'description': '''
-Acquires a measurement after each Source Complete event completes.
-''',
+'description': 'Acquires a measurement after each Source Complete event completes.',
 },
             },
             {
@@ -201,9 +169,7 @@ Acquires a measurement after each Source Complete event completes.
                 'prefix': None,
                 'value': 1026,
 'documentation': {
-'description': '''
-Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called.
-''',
+'description': 'Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called.',
 },
             },
             {
@@ -211,9 +177,7 @@ Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureM
                 'prefix': None,
                 'value': 1027,
 'documentation': {
-'description': '''
-Acquires a measurement when a Measure trigger is received.
-''',
+'description': 'Acquires a measurement when a Measure trigger is received.',
 },
             },
         ],
@@ -225,9 +189,7 @@ Acquires a measurement when a Measure trigger is received.
                 'prefix': None,
                 'value': 1010,
 'documentation': {
-'description': '''
-Output Capacitance is low.
-''',
+'description': 'Output Capacitance is low.',
 },
             },
             {
@@ -235,9 +197,7 @@ Output Capacitance is low.
                 'prefix': None,
                 'value': 1011,
 'documentation': {
-'description': '''
-Output Capacitance is high.
-''',
+'description': 'Output Capacitance is high.',
 },
             },
         ],
@@ -249,9 +209,7 @@ Output Capacitance is high.
                 'prefix': None,
                 'value': 1006,
 'documentation': {
-'description': '''
-Sets the output function to DC voltage.
-''',
+'description': 'Sets the output function to DC voltage.',
 },
             },
             {
@@ -259,9 +217,7 @@ Sets the output function to DC voltage.
                 'prefix': None,
                 'value': 1007,
 'documentation': {
-'description': '''
-Sets the output function to DC current.
-''',
+'description': 'Sets the output function to DC current.',
 },
             },
             {
@@ -269,9 +225,7 @@ Sets the output function to DC current.
                 'prefix': None,
                 'value': 1049,
 'documentation': {
-'description': '''
-Sets the output function to pulse voltage.
-''',
+'description': 'Sets the output function to pulse voltage.',
 },
             },
             {
@@ -279,9 +233,7 @@ Sets the output function to pulse voltage.
                 'prefix': None,
                 'value': 1050,
 'documentation': {
-'description': '''
-Sets the output function to pulse current.
-''',
+'description': 'Sets the output function to pulse current.',
 },
             },
         ],
@@ -293,9 +245,7 @@ Sets the output function to pulse current.
                 'prefix': 'ACTIVE_',
                 'value': 1018,
 'documentation': {
-'description': '''
-A high pulse occurs when the event is generated.  The exported signal is low level both before and after the event is generated.
-''',
+'description': 'A high pulse occurs when the event is generated.  The exported signal is low level both before and after the event is generated.',
 },
             },
             {
@@ -303,9 +253,7 @@ A high pulse occurs when the event is generated.  The exported signal is low lev
                 'prefix': 'ACTIVE_',
                 'value': 1019,
 'documentation': {
-'description': '''
-A low pulse occurs when the event is generated.  The exported signal is high level both before and after the event is generated.
-''',
+'description': 'A low pulse occurs when the event is generated.  The exported signal is high level both before and after the event is generated.',
 },
             },
         ],
@@ -313,23 +261,19 @@ A low pulse occurs when the event is generated.  The exported signal is high lev
     'PowerLineFrequency': {
         'values': [
             {
-                'name': '_50_HERTZ',
-                'prefix': None,
+                'name': '_50',
+                'prefix': '_HERTZ',
                 'value': 50.0,
 'documentation': {
-'description': '''
-Specifies a power line frequency of 50 Hz.
-''',
+'description': 'Specifies a power line frequency of 50 Hz.',
 },
             },
             {
-                'name': '_60_HERTZ',
-                'prefix': None,
+                'name': '_60',
+                'prefix': '_HERTZ',
                 'value': 60.0,
 'documentation': {
-'description': '''
-Specifies a power line frequency of 60 Hz.
-''',
+'description': 'Specifies a power line frequency of 60 Hz.',
 },
             },
         ],
@@ -341,9 +285,7 @@ Specifies a power line frequency of 60 Hz.
                 'prefix': None,
                 'value': 1003,
 'documentation': {
-'description': '''
-Uses the PXI chassis power source.
-''',
+'description': 'Uses the PXI chassis power source.',
 },
             },
             {
@@ -351,9 +293,7 @@ Uses the PXI chassis power source.
                 'prefix': None,
                 'value': 1004,
 'documentation': {
-'description': '''
-Uses the auxiliary power source connected to the device.
-''',
+'description': 'Uses the auxiliary power source connected to the device.',
 },
             },
             {
@@ -361,9 +301,7 @@ Uses the auxiliary power source connected to the device.
                 'prefix': None,
                 'value': 1005,
 'documentation': {
-'description': '''
-Uses the auxiliary power source if it is available; otherwise uses the PXI chassis power source.
-''',
+'description': 'Uses the auxiliary power source if it is available; otherwise uses the PXI chassis power source.',
 },
             },
         ],
@@ -375,9 +313,7 @@ Uses the auxiliary power source if it is available; otherwise uses the PXI chass
                 'prefix': None,
                 'value': 1003,
 'documentation': {
-'description': '''
-Uses the PXI chassis power source.
-''',
+'description': 'Uses the PXI chassis power source.',
 },
             },
             {
@@ -385,9 +321,7 @@ Uses the PXI chassis power source.
                 'prefix': None,
                 'value': 1004,
 'documentation': {
-'description': '''
-Uses the auxiliary power source connected to the device. Only the NI PXI-4110,  NI PXIe-4112, NI PXIe-4113, and NI PXI-4130 support this value. This is the only supported value  for the NI PXIe-4112 and NI PXIe-4113.
-''',
+'description': 'Uses the auxiliary power source connected to the device. Only the NI PXI-4110,  NI PXIe-4112, NI PXIe-4113, and NI PXI-4130 support this value. This is the only supported value  for the NI PXIe-4112 and NI PXIe-4113.',
 },
             },
         ],
@@ -399,9 +333,7 @@ Uses the auxiliary power source connected to the device. Only the NI PXI-4110,  
                 'prefix': None,
                 'value': 1045,
 'documentation': {
-'description': '''
-Keep new self calibration values in memory only.
-''',
+'description': 'Keep new self calibration values in memory only.',
 },
             },
             {
@@ -409,9 +341,7 @@ Keep new self calibration values in memory only.
                 'prefix': None,
                 'value': 1046,
 'documentation': {
-'description': '''
-Write new self calibration values to hardware.
-''',
+'description': 'Write new self calibration values to hardware.',
 },
             },
         ],
@@ -423,9 +353,7 @@ Write new self calibration values to hardware.
                 'prefix': None,
                 'value': 1008,
 'documentation': {
-'description': '''
-Local sensing is selected.
-''',
+'description': 'Local sensing is selected.',
 },
             },
             {
@@ -433,9 +361,7 @@ Local sensing is selected.
                 'prefix': None,
                 'value': 1009,
 'documentation': {
-'description': '''
-Remote sensing is selected.
-''',
+'description': 'Remote sensing is selected.',
 },
             },
         ],
@@ -447,9 +373,7 @@ Remote sensing is selected.
                 'prefix': None,
                 'value': 1020,
 'documentation': {
-'description': '''
-The source unit applies a single source configuration.
-''',
+'description': 'The source unit applies a single source configuration.',
 },
             },
             {
@@ -457,9 +381,7 @@ The source unit applies a single source configuration.
                 'prefix': None,
                 'value': 1021,
 'documentation': {
-'description': '''
-The source unit applies a list of voltage or current configurations sequentially.
-''',
+'description': 'The source unit applies a list of voltage or current configurations sequentially.',
 },
             },
         ],
@@ -471,9 +393,7 @@ The source unit applies a list of voltage or current configurations sequentially
                 'prefix': None,
                 'value': 1038,
 'documentation': {
-'description': '''
-The output responds to changes in load at a normal speed.
-''',
+'description': 'The output responds to changes in load at a normal speed.',
 },
             },
             {
@@ -481,9 +401,7 @@ The output responds to changes in load at a normal speed.
                 'prefix': None,
                 'value': 1039,
 'documentation': {
-'description': '''
-The output responds to changes in load quickly.
-''',
+'description': 'The output responds to changes in load quickly.',
 },
             },
             {
@@ -491,9 +409,7 @@ The output responds to changes in load quickly.
                 'prefix': None,
                 'value': 1041,
 'documentation': {
-'description': '''
-The output responds to changes in load slowly.
-''',
+'description': 'The output responds to changes in load slowly.',
 },
             },
             {
@@ -501,9 +417,7 @@ The output responds to changes in load slowly.
                 'prefix': None,
                 'value': 1042,
 'documentation': {
-'description': '''
-The output responds to changes in load based on specified values.
-''',
+'description': 'The output responds to changes in load based on specified values.',
 },
             },
         ],
@@ -515,29 +429,23 @@ The output responds to changes in load based on specified values.
                 'prefix': None,
                 'value': 1012,
 'documentation': {
-'description': '''
-No trigger is configured.
-''',
+'description': 'No trigger is configured.',
 },
             },
             {
                 'name': 'DIGITAL_EDGE',
-                'prefix': None,
+                'prefix': '_EDGE',
                 'value': 1014,
 'documentation': {
-'description': '''
-The data operation starts when a digital edge is detected.
-''',
+'description': 'The data operation starts when a digital edge is detected.',
 },
             },
             {
                 'name': 'SOFTWARE_EDGE',
-                'prefix': None,
+                'prefix': '_EDGE',
                 'value': 1015,
 'documentation': {
-'description': '''
-The data operation starts when a software trigger occurs.
-''',
+'description': 'The data operation starts when a software trigger occurs.',
 },
             },
         ],
@@ -549,9 +457,7 @@ The data operation starts when a software trigger occurs.
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-Autoranging is disabled.
-''',
+'description': 'Autoranging is disabled.',
 },
             },
             {
@@ -559,9 +465,7 @@ Autoranging is disabled.
                 'prefix': None,
                 'value': 1,
 'documentation': {
-'description': '''
-Autoranging is enabled.
-''',
+'description': 'Autoranging is enabled.',
 },
             },
         ],
@@ -573,9 +477,7 @@ Autoranging is enabled.
                 'prefix': None,
                 'value': 0,
 'documentation': {
-'description': '''
-Autoranging is disabled.
-''',
+'description': 'Autoranging is disabled.',
 },
             },
             {
@@ -583,111 +485,9 @@ Autoranging is disabled.
                 'prefix': None,
                 'value': 1,
 'documentation': {
-'description': '''
-Autoranging is enabled.
-''',
+'description': 'Autoranging is enabled.',
 },
             },
         ],
     },
-    # Enums from here to the end are not yet extracted
-    'SendSoftwareEdgeTriggerType': {
-        'values': [
-            {
-                'name': 'START',
-                'value': 1034,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SOURCE',
-                'value': 1035,
-                'documentation': {'',},
-            },
-            {
-                'name': 'MEASURE',
-                'value': 1036,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SEQUENCE_ADVANCE',
-                'value': 1037,
-                'documentation': {'',},
-            },
-            {
-                'name': 'PULSE',
-                'value': 1053,
-                'documentation': {'',},
-            },
-        ],
-    },
-    'Event': {
-        'values': [
-            {
-                'name': 'SOURCE_COMPLETE',
-                'value': 1030,
-                'documentation': {'',},
-            },
-            {
-                'name': 'MEASURE_COMPLETE',
-                'value': 1031,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SEQUENCE_ITERATION_COMPLETE',
-                'value': 1032,
-                'documentation': {'',},
-            },
-            {
-                'name': 'SEQUENCE_ENGINE_DONE',
-                'value': 1033,
-                'documentation': {'',},
-            },
-            {
-                'name': 'PULSE_COMPLETE',
-                'value': 1051,
-                'documentation': {'',},
-            },
-            {
-                'name': 'READY_FOR_PULSE_TRIGGER',
-                'value': 1052,
-                'documentation': {'',},
-            },
-        ],
-    },
-    'MeasurementTypes': {
-        'values': [
-            {
-                'name': 'MEASURE_CURRENT',
-                'value': 0,
-                'documentation': {
-                    'description': 'The device measures current.',
-                },
-            },
-            {
-                'name': 'MEASURE_VOLTAGE',
-                'value': 1,
-                'documentation': {
-                    'description': 'The device measures voltage.',
-                },
-            }
-        ],
-    },
-    'OutputStates': {
-        'values': [
-            {
-                'name': 'OUTPUT_CONSTANT_VOLTAGE',
-                'value': 0,
-                'documentation': {
-                    'description': 'The device maintains a constant voltage by adjusting the current ',
-                },
-            },
-            {
-                'name': 'OUTPUT_CONSTANT_CURRENT',
-                'value': 1,
-                'documentation': {
-                    'description': 'The device maintains a constant current by adjusting the voltage.',
-                },
-            }
-        ],
-    },  
 }
