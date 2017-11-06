@@ -38,7 +38,6 @@ enums = {
         'values': [
             {
                 'name': 'RUNNING',
-                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': 'Running',
@@ -46,7 +45,6 @@ enums = {
             },
             {
                 'name': 'FINISHED_WITH_BACKLOG',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'Finished with **Backlog**',
@@ -54,7 +52,6 @@ enums = {
             },
             {
                 'name': 'FINISHED_WITH_NO_BACKLOG',
-                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': 'Finished with no **Backlog**',
@@ -62,7 +59,6 @@ enums = {
             },
             {
                 'name': 'PAUSED',
-                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': 'Paused',
@@ -70,7 +66,6 @@ enums = {
             },
             {
                 'name': 'NO_ACQUISITION_IN_PROGRESS',
-                'prefix': None,
                 'value': 4,
 'documentation': {
 'description': 'No acquisition in progress',
@@ -82,7 +77,6 @@ enums = {
         'values': [
             {
                 'name': 'SECONDS',
-                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': 'Seconds',
@@ -90,7 +84,6 @@ enums = {
             },
             {
                 'name': 'POWER_LINE_CYCLES',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'Powerline Cycles',
@@ -174,7 +167,6 @@ enums = {
         'values': [
             {
                 'name': '_1_MICROAMP',
-                'prefix': None,
                 'value': 1e-06,
 'documentation': {
 'description': 'NI 4070/4071/4072 are supported.',
@@ -182,7 +174,6 @@ enums = {
             },
             {
                 'name': '_10_MICROAMP',
-                'prefix': None,
                 'value': 1e-05,
 'documentation': {
 'description': 'NI 4080/4081/4082 and NI 4070/4071/4072 are supported.',
@@ -190,7 +181,6 @@ enums = {
             },
             {
                 'name': '_100_MICROAMP',
-                'prefix': None,
                 'value': 0.0001,
 'documentation': {
 'description': 'NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.',
@@ -198,7 +188,6 @@ enums = {
             },
             {
                 'name': '_1_MILLIAMP',
-                'prefix': None,
                 'value': 0.001,
 'documentation': {
 'description': 'NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.',
@@ -266,7 +255,6 @@ enums = {
         'values': [
             {
                 'name': '_3_5',
-                'prefix': None,
                 'value': 3.5,
 'documentation': {
 'description': 'Specifies 3.5 digits resolution.',
@@ -274,7 +262,6 @@ enums = {
             },
             {
                 'name': '_4_5',
-                'prefix': None,
                 'value': 4.5,
 'documentation': {
 'description': 'Specifies 4.5 digits resolution.',
@@ -282,7 +269,6 @@ enums = {
             },
             {
                 'name': '_5_5',
-                'prefix': None,
                 'value': 5.5,
 'documentation': {
 'description': 'Specifies 5.5 digits resolution.',
@@ -290,7 +276,6 @@ enums = {
             },
             {
                 'name': '_6_5',
-                'prefix': None,
                 'value': 6.5,
 'documentation': {
 'description': 'Specifies 6.5 digits resolution.',
@@ -298,7 +283,6 @@ enums = {
             },
             {
                 'name': '_7_5',
-                'prefix': None,
                 'value': 7.5,
 'documentation': {
 'description': 'Specifies 7.5 digits resolution.',
@@ -310,7 +294,6 @@ enums = {
         'values': [
             {
                 'name': 'DC_VOLTS',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'DC Voltage',
@@ -318,7 +301,6 @@ enums = {
             },
             {
                 'name': 'AC_VOLTS',
-                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': 'AC Voltage',
@@ -326,7 +308,6 @@ enums = {
             },
             {
                 'name': 'DC_CURRENT',
-                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': 'DC Current',
@@ -334,7 +315,6 @@ enums = {
             },
             {
                 'name': 'AC_CURRENT',
-                'prefix': None,
                 'value': 4,
 'documentation': {
 'description': 'AC Current',
@@ -342,7 +322,6 @@ enums = {
             },
             {
                 'name': '_2_WIRE_RES',
-                'prefix': None,
                 'value': 5,
 'documentation': {
 'description': '2-Wire Resistance',
@@ -350,7 +329,6 @@ enums = {
             },
             {
                 'name': '_4_WIRE_RES',
-                'prefix': None,
                 'value': 101,
 'documentation': {
 'description': '4-Wire Resistance',
@@ -358,7 +336,6 @@ enums = {
             },
             {
                 'name': 'FREQ',
-                'prefix': None,
                 'value': 104,
 'documentation': {
 'description': 'Frequency',
@@ -366,7 +343,6 @@ enums = {
             },
             {
                 'name': 'PERIOD',
-                'prefix': None,
                 'value': 105,
 'documentation': {
 'description': 'Period',
@@ -374,7 +350,6 @@ enums = {
             },
             {
                 'name': 'TEMPERATURE',
-                'prefix': None,
                 'value': 108,
 'documentation': {
 'description': 'NI 4065, and NI 4070/4071/4072 supported.',
@@ -382,7 +357,6 @@ enums = {
             },
             {
                 'name': 'AC_VOLTS_DC_COUPLED',
-                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': 'AC Voltage with DC Coupling',
@@ -390,7 +364,6 @@ enums = {
             },
             {
                 'name': 'DIODE',
-                'prefix': None,
                 'value': 1002,
 'documentation': {
 'description': 'Diode',
@@ -398,7 +371,6 @@ enums = {
             },
             {
                 'name': 'WAVEFORM_VOLTAGE',
-                'prefix': None,
                 'value': 1003,
 'documentation': {
 'description': 'Waveform voltage',
@@ -406,7 +378,6 @@ enums = {
             },
             {
                 'name': 'WAVEFORM_CURRENT',
-                'prefix': None,
                 'value': 1004,
 'documentation': {
 'description': 'Waveform current',
@@ -414,7 +385,6 @@ enums = {
             },
             {
                 'name': 'CAPACITANCE',
-                'prefix': None,
                 'value': 1005,
 'documentation': {
 'description': 'Capacitance',
@@ -422,7 +392,6 @@ enums = {
             },
             {
                 'name': 'INDUCTANCE',
-                'prefix': None,
                 'value': 1006,
 'documentation': {
 'description': 'Inductance',
@@ -434,7 +403,6 @@ enums = {
         'values': [
             {
                 'name': '_1_MEGAOHM',
-                'prefix': None,
                 'value': 1000000.0,
 'documentation': {
 'description': 'Input resistance of 1 M Ohm',
@@ -442,7 +410,6 @@ enums = {
             },
             {
                 'name': '_10_MEGAOHM',
-                'prefix': None,
                 'value': 10000000.0,
 'documentation': {
 'description': 'Input resistance of 10 M Ohm',
@@ -450,7 +417,6 @@ enums = {
             },
             {
                 'name': 'GREATER_THAN_10_GIGAOHM',
-                'prefix': None,
                 'value': 10000000000.0,
 'documentation': {
 'description': 'Input resistance greater than 10 G Ohm',
@@ -490,7 +456,6 @@ enums = {
         'values': [
             {
                 'name': 'NONE',
-                'prefix': None,
                 'value': -1,
 'documentation': {
 'description': 'No Trigger',
@@ -498,7 +463,6 @@ enums = {
             },
             {
                 'name': 'EXTERNAL',
-                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': 'AUX I/O Connector',
@@ -506,7 +470,6 @@ enums = {
             },
             {
                 'name': 'PXI_TRIG0',
-                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': 'PXI Trigger Line 0',
@@ -514,7 +477,6 @@ enums = {
             },
             {
                 'name': 'PXI_TRIG1',
-                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': 'PXI Trigger Line 1',
@@ -522,7 +484,6 @@ enums = {
             },
             {
                 'name': 'PXI_TRIG2',
-                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': 'PXI Trigger Line 2',
@@ -530,7 +491,6 @@ enums = {
             },
             {
                 'name': 'PXI_TRIG3',
-                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': 'PXI Trigger Line 3',
@@ -538,7 +498,6 @@ enums = {
             },
             {
                 'name': 'PXI_TRIG4',
-                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': 'PXI Trigger Line 4',
@@ -546,7 +505,6 @@ enums = {
             },
             {
                 'name': 'PXI_TRIG5',
-                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': 'PXI Trigger Line 5',
@@ -554,7 +512,6 @@ enums = {
             },
             {
                 'name': 'PXI_TRIG6',
-                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': 'PXI Trigger Line 6',
@@ -562,7 +519,6 @@ enums = {
             },
             {
                 'name': 'PXI_TRIG7',
-                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': 'PXI Trigger Line 7',
@@ -570,7 +526,6 @@ enums = {
             },
             {
                 'name': 'LBR_TRIG0',
-                'prefix': None,
                 'value': 1003,
 'documentation': {
 'description': 'Internal Trigger Line of a PXI/SCXI Combination Chassis',
@@ -582,7 +537,6 @@ enums = {
         'values': [
             {
                 'name': 'POSITIVE',
-                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': 'Rising Edgs',
@@ -590,7 +544,6 @@ enums = {
             },
             {
                 'name': 'NEGATIVE',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'Falling Edge',
@@ -622,7 +575,7 @@ enums = {
         'values': [
             {
                 'name': 'IVIDMM',
-                'prefix': '_MODE',
+                'suffix': '_MODE',
                 'value': 0,
 'documentation': {
 'description': 'IviDmm Mode',
@@ -630,7 +583,7 @@ enums = {
             },
             {
                 'name': 'WAVEFORM',
-                'prefix': '_MODE',
+                'suffix': '_MODE',
                 'value': 1,
 'documentation': {
 'description': 'Waveform acquisition mode',
@@ -642,7 +595,7 @@ enums = {
         'values': [
             {
                 'name': '_50',
-                'prefix': '_HERTZ',
+                'suffix': '_HERTZ',
                 'value': 50.0,
 'documentation': {
 'description': 'Specifies the powerline frequency as 50 Hz.',
@@ -650,7 +603,7 @@ enums = {
             },
             {
                 'name': '_60',
-                'prefix': '_HERTZ',
+                'suffix': '_HERTZ',
                 'value': 60.0,
 'documentation': {
 'description': 'Specifies the powerline frequency as 60 Hz.',
@@ -725,7 +678,6 @@ and C coefficients.
         'values': [
             {
                 'name': 'POSITIVE',
-                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': 'Rising Edgs',
@@ -733,7 +685,6 @@ and C coefficients.
             },
             {
                 'name': 'NEGATIVE',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'Falling Edge',
@@ -745,7 +696,6 @@ and C coefficients.
         'values': [
             {
                 'name': 'IMMEDIATE',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'No Trigger',
@@ -753,7 +703,6 @@ and C coefficients.
             },
             {
                 'name': 'EXTERNAL',
-                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': 'AUX I/O Connector Trigger Line 0',
@@ -761,7 +710,6 @@ and C coefficients.
             },
             {
                 'name': 'SOFTWARE_TRIG',
-                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': 'Software Trigger',
@@ -769,7 +717,6 @@ and C coefficients.
             },
             {
                 'name': 'INTERVAL',
-                'prefix': None,
                 'value': 10,
 'documentation': {
 'description': 'Interval Trigger',
@@ -777,7 +724,6 @@ and C coefficients.
             },
             {
                 'name': 'PXI_TRIG0',
-                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': 'PXI Trigger Line 0',
@@ -785,7 +731,6 @@ and C coefficients.
             },
             {
                 'name': 'PXI_TRIG1',
-                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': 'PXI Trigger Line 1',
@@ -793,7 +738,6 @@ and C coefficients.
             },
             {
                 'name': 'PXI_TRIG2',
-                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': 'PXI Trigger Line 2',
@@ -801,7 +745,6 @@ and C coefficients.
             },
             {
                 'name': 'PXI_TRIG3',
-                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': 'PXI Trigger Line 3',
@@ -809,7 +752,6 @@ and C coefficients.
             },
             {
                 'name': 'PXI_TRIG4',
-                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': 'PXI Trigger Line 4',
@@ -817,7 +759,6 @@ and C coefficients.
             },
             {
                 'name': 'PXI_TRIG5',
-                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': 'PXI Trigger Line 5',
@@ -825,7 +766,6 @@ and C coefficients.
             },
             {
                 'name': 'PXI_TRIG6',
-                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': 'PXI Trigger Line 6',
@@ -833,7 +773,6 @@ and C coefficients.
             },
             {
                 'name': 'PXI_TRIG7',
-                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': 'PXI Trigger Line 7',
@@ -841,7 +780,6 @@ and C coefficients.
             },
             {
                 'name': 'PXI_STAR',
-                'prefix': None,
                 'value': 131,
 'documentation': {
 'description': 'PXI Star Trigger Line',
@@ -849,7 +787,6 @@ and C coefficients.
             },
             {
                 'name': 'AUX_TRIG1',
-                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': 'AUX I/0 Connector Trigger Line 1',
@@ -857,7 +794,6 @@ and C coefficients.
             },
             {
                 'name': 'LBR_TRIG1',
-                'prefix': None,
                 'value': 1004,
 'documentation': {
 'description': 'Internal Trigger Line of a PXI/SCXI Combination Chassis',
@@ -905,7 +841,6 @@ and C coefficients.
         'values': [
             {
                 'name': 'FIXED',
-                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': '''
@@ -988,7 +923,6 @@ temperature.
         'values': [
             {
                 'name': 'THERMOCOUPLE',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'Thermocouple',
@@ -996,7 +930,6 @@ temperature.
             },
             {
                 'name': 'THERMISTOR',
-                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': 'Thermistor',
@@ -1004,7 +937,6 @@ temperature.
             },
             {
                 'name': '_2_WIRE_RTD',
-                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': '2-wire RTD',
@@ -1012,7 +944,6 @@ temperature.
             },
             {
                 'name': '_4_WIRE_RTD',
-                'prefix': None,
                 'value': 4,
 'documentation': {
 'description': '4-wire RTD',
@@ -1024,7 +955,6 @@ temperature.
         'values': [
             {
                 'name': 'POSITIVE',
-                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': 'Rising Edgs',
@@ -1032,7 +962,6 @@ temperature.
             },
             {
                 'name': 'NEGATIVE',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'Falling Edge',
@@ -1044,7 +973,6 @@ temperature.
         'values': [
             {
                 'name': 'IMMEDIATE',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'No Trigger',
@@ -1052,7 +980,6 @@ temperature.
             },
             {
                 'name': 'EXTERNAL',
-                'prefix': None,
                 'value': 2,
 'documentation': {
 'description': 'AUX I/O Connector Trigger Line 0',
@@ -1060,7 +987,6 @@ temperature.
             },
             {
                 'name': 'SOFTWARE_TRIG',
-                'prefix': None,
                 'value': 3,
 'documentation': {
 'description': 'Software Trigger',
@@ -1068,7 +994,6 @@ temperature.
             },
             {
                 'name': 'PXI_TRIG0',
-                'prefix': None,
                 'value': 111,
 'documentation': {
 'description': 'PXI Trigger Line 0',
@@ -1076,7 +1001,6 @@ temperature.
             },
             {
                 'name': 'PXI_TRIG1',
-                'prefix': None,
                 'value': 112,
 'documentation': {
 'description': 'PXI Trigger Line 1',
@@ -1084,7 +1008,6 @@ temperature.
             },
             {
                 'name': 'PXI_TRIG2',
-                'prefix': None,
                 'value': 113,
 'documentation': {
 'description': 'PXI Trigger Line 2',
@@ -1092,7 +1015,6 @@ temperature.
             },
             {
                 'name': 'PXI_TRIG3',
-                'prefix': None,
                 'value': 114,
 'documentation': {
 'description': 'PXI Trigger Line 3',
@@ -1100,7 +1022,6 @@ temperature.
             },
             {
                 'name': 'PXI_TRIG4',
-                'prefix': None,
                 'value': 115,
 'documentation': {
 'description': 'PXI Trigger Line 4',
@@ -1108,7 +1029,6 @@ temperature.
             },
             {
                 'name': 'PXI_TRIG5',
-                'prefix': None,
                 'value': 116,
 'documentation': {
 'description': 'PXI Trigger Line 5',
@@ -1116,7 +1036,6 @@ temperature.
             },
             {
                 'name': 'PXI_TRIG6',
-                'prefix': None,
                 'value': 117,
 'documentation': {
 'description': 'PXI Trigger Line 6',
@@ -1124,7 +1043,6 @@ temperature.
             },
             {
                 'name': 'PXI_TRIG7',
-                'prefix': None,
                 'value': 118,
 'documentation': {
 'description': 'PXI Trigger Line 7',
@@ -1132,7 +1050,6 @@ temperature.
             },
             {
                 'name': 'PXI_STAR',
-                'prefix': None,
                 'value': 131,
 'documentation': {
 'description': 'PXI Star Trigger Line',
@@ -1140,7 +1057,6 @@ temperature.
             },
             {
                 'name': 'AUX_TRIG1',
-                'prefix': None,
                 'value': 1001,
 'documentation': {
 'description': 'AUX I/O Connector Trigger Line 1',
@@ -1148,7 +1064,6 @@ temperature.
             },
             {
                 'name': 'LBR_TRIG1',
-                'prefix': None,
                 'value': 1004,
 'documentation': {
 'description': 'Internal Trigger Line of a PXI/SCXI Combination Chassis',

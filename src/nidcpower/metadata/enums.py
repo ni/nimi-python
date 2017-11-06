@@ -10,7 +10,6 @@ enums = {
         'values': [
             {
                 'name': 'SECONDS',
-                'prefix': None,
                 'value': 1028,
 'documentation': {
 'description': 'Specifies aperture time in seconds.',
@@ -18,7 +17,6 @@ enums = {
             },
             {
                 'name': 'POWER_LINE_CYCLES',
-                'prefix': None,
                 'value': 1029,
 'documentation': {
 'description': 'Specifies aperture time in power line cycles (PLCs).',
@@ -30,7 +28,6 @@ enums = {
         'values': [
             {
                 'name': 'OFF',
-                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': 'Disables auto zero.',
@@ -38,7 +35,6 @@ enums = {
             },
             {
                 'name': 'ON',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'Makes zero conversions for every measurement.',
@@ -46,7 +42,6 @@ enums = {
             },
             {
                 'name': 'ONCE',
-                'prefix': None,
                 'value': 1024,
 'documentation': {
 'description': 'Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.',
@@ -58,7 +53,6 @@ enums = {
         'values': [
             {
                 'name': 'OFF',
-                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': 'Autoranging is disabled.',
@@ -66,7 +60,6 @@ enums = {
             },
             {
                 'name': 'ON',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'Autoranging is enabled.',
@@ -78,7 +71,6 @@ enums = {
         'values': [
             {
                 'name': 'OFF',
-                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': 'Autoranging is disabled.',
@@ -86,7 +78,6 @@ enums = {
             },
             {
                 'name': 'ON',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'Autoranging is enabled.',
@@ -98,7 +89,6 @@ enums = {
         'values': [
             {
                 'name': 'CURRENT_REGULATE',
-                'prefix': None,
                 'value': 13613,
 'documentation': {
 'description': '',
@@ -106,7 +96,6 @@ enums = {
             },
             {
                 'name': 'CURRENT_TRIP',
-                'prefix': None,
                 'value': 13614,
 'documentation': {
 'description': '',
@@ -138,7 +127,6 @@ enums = {
         'values': [
             {
                 'name': 'RISING',
-                'prefix': None,
                 'value': 1016,
 'documentation': {
 'description': 'Asserts the trigger on the rising edge of the digital signal.',
@@ -146,7 +134,6 @@ enums = {
             },
             {
                 'name': 'FALLING',
-                'prefix': None,
                 'value': 1017,
 'documentation': {
 'description': 'Asserts the trigger on the falling edge of the digital signal.',
@@ -158,7 +145,6 @@ enums = {
         'values': [
             {
                 'name': 'AUTOMATICALLY_AFTER_SOURCE_COMPLETE',
-                'prefix': None,
                 'value': 1025,
 'documentation': {
 'description': 'Acquires a measurement after each Source Complete event completes.',
@@ -166,7 +152,6 @@ enums = {
             },
             {
                 'name': 'ON_DEMAND',
-                'prefix': None,
                 'value': 1026,
 'documentation': {
 'description': 'Acquires a measurement when the niDCPower_Measure function or niDCPower_MeasureMultiple function is called.',
@@ -174,7 +159,6 @@ enums = {
             },
             {
                 'name': 'ON_MEASURE_TRIGGER',
-                'prefix': None,
                 'value': 1027,
 'documentation': {
 'description': 'Acquires a measurement when a Measure trigger is received.',
@@ -186,7 +170,6 @@ enums = {
         'values': [
             {
                 'name': 'LOW',
-                'prefix': None,
                 'value': 1010,
 'documentation': {
 'description': 'Output Capacitance is low.',
@@ -194,7 +177,6 @@ enums = {
             },
             {
                 'name': 'HIGH',
-                'prefix': None,
                 'value': 1011,
 'documentation': {
 'description': 'Output Capacitance is high.',
@@ -206,7 +188,6 @@ enums = {
         'values': [
             {
                 'name': 'DC_VOLTAGE',
-                'prefix': None,
                 'value': 1006,
 'documentation': {
 'description': 'Sets the output function to DC voltage.',
@@ -214,7 +195,6 @@ enums = {
             },
             {
                 'name': 'DC_CURRENT',
-                'prefix': None,
                 'value': 1007,
 'documentation': {
 'description': 'Sets the output function to DC current.',
@@ -222,7 +202,6 @@ enums = {
             },
             {
                 'name': 'PULSE_VOLTAGE',
-                'prefix': None,
                 'value': 1049,
 'documentation': {
 'description': 'Sets the output function to pulse voltage.',
@@ -230,7 +209,6 @@ enums = {
             },
             {
                 'name': 'PULSE_CURRENT',
-                'prefix': None,
                 'value': 1050,
 'documentation': {
 'description': 'Sets the output function to pulse current.',
@@ -262,7 +240,7 @@ enums = {
         'values': [
             {
                 'name': '_50',
-                'prefix': '_HERTZ',
+                'suffix': '_HERTZ',
                 'value': 50.0,
 'documentation': {
 'description': 'Specifies a power line frequency of 50 Hz.',
@@ -270,7 +248,7 @@ enums = {
             },
             {
                 'name': '_60',
-                'prefix': '_HERTZ',
+                'suffix': '_HERTZ',
                 'value': 60.0,
 'documentation': {
 'description': 'Specifies a power line frequency of 60 Hz.',
@@ -282,7 +260,6 @@ enums = {
         'values': [
             {
                 'name': 'INTERNAL',
-                'prefix': None,
                 'value': 1003,
 'documentation': {
 'description': 'Uses the PXI chassis power source.',
@@ -290,7 +267,6 @@ enums = {
             },
             {
                 'name': 'AUXILIARY',
-                'prefix': None,
                 'value': 1004,
 'documentation': {
 'description': 'Uses the auxiliary power source connected to the device.',
@@ -298,7 +274,6 @@ enums = {
             },
             {
                 'name': 'AUTOMATIC',
-                'prefix': None,
                 'value': 1005,
 'documentation': {
 'description': 'Uses the auxiliary power source if it is available; otherwise uses the PXI chassis power source.',
@@ -310,7 +285,6 @@ enums = {
         'values': [
             {
                 'name': 'INTERNAL',
-                'prefix': None,
                 'value': 1003,
 'documentation': {
 'description': 'Uses the PXI chassis power source.',
@@ -318,7 +292,6 @@ enums = {
             },
             {
                 'name': 'AUXILIARY',
-                'prefix': None,
                 'value': 1004,
 'documentation': {
 'description': 'Uses the auxiliary power source connected to the device. Only the NI PXI-4110,  NI PXIe-4112, NI PXIe-4113, and NI PXI-4130 support this value. This is the only supported value  for the NI PXIe-4112 and NI PXIe-4113.',
@@ -330,7 +303,6 @@ enums = {
         'values': [
             {
                 'name': 'KEEP_IN_MEMORY',
-                'prefix': None,
                 'value': 1045,
 'documentation': {
 'description': 'Keep new self calibration values in memory only.',
@@ -338,7 +310,6 @@ enums = {
             },
             {
                 'name': 'WRITE_TO_EEPROM',
-                'prefix': None,
                 'value': 1046,
 'documentation': {
 'description': 'Write new self calibration values to hardware.',
@@ -350,7 +321,6 @@ enums = {
         'values': [
             {
                 'name': 'LOCAL',
-                'prefix': None,
                 'value': 1008,
 'documentation': {
 'description': 'Local sensing is selected.',
@@ -358,7 +328,6 @@ enums = {
             },
             {
                 'name': 'REMOTE',
-                'prefix': None,
                 'value': 1009,
 'documentation': {
 'description': 'Remote sensing is selected.',
@@ -370,7 +339,6 @@ enums = {
         'values': [
             {
                 'name': 'SINGLE_POINT',
-                'prefix': None,
                 'value': 1020,
 'documentation': {
 'description': 'The source unit applies a single source configuration.',
@@ -378,7 +346,6 @@ enums = {
             },
             {
                 'name': 'SEQUENCE',
-                'prefix': None,
                 'value': 1021,
 'documentation': {
 'description': 'The source unit applies a list of voltage or current configurations sequentially.',
@@ -390,7 +357,6 @@ enums = {
         'values': [
             {
                 'name': 'NORMAL',
-                'prefix': None,
                 'value': 1038,
 'documentation': {
 'description': 'The output responds to changes in load at a normal speed.',
@@ -398,7 +364,6 @@ enums = {
             },
             {
                 'name': 'FAST',
-                'prefix': None,
                 'value': 1039,
 'documentation': {
 'description': 'The output responds to changes in load quickly.',
@@ -406,7 +371,6 @@ enums = {
             },
             {
                 'name': 'SLOW',
-                'prefix': None,
                 'value': 1041,
 'documentation': {
 'description': 'The output responds to changes in load slowly.',
@@ -414,7 +378,6 @@ enums = {
             },
             {
                 'name': 'CUSTOM',
-                'prefix': None,
                 'value': 1042,
 'documentation': {
 'description': 'The output responds to changes in load based on specified values.',
@@ -426,23 +389,22 @@ enums = {
         'values': [
             {
                 'name': 'NONE',
-                'prefix': None,
                 'value': 1012,
 'documentation': {
 'description': 'No trigger is configured.',
 },
             },
             {
-                'name': 'DIGITAL_EDGE',
-                'prefix': '_EDGE',
+                'name': 'DIGITAL',
+                'suffix': '_EDGE',
                 'value': 1014,
 'documentation': {
 'description': 'The data operation starts when a digital edge is detected.',
 },
             },
             {
-                'name': 'SOFTWARE_EDGE',
-                'prefix': '_EDGE',
+                'name': 'SOFTWARE',
+                'suffix': '_EDGE',
                 'value': 1015,
 'documentation': {
 'description': 'The data operation starts when a software trigger occurs.',
@@ -454,7 +416,6 @@ enums = {
         'values': [
             {
                 'name': 'OFF',
-                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': 'Autoranging is disabled.',
@@ -462,7 +423,6 @@ enums = {
             },
             {
                 'name': 'ON',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'Autoranging is enabled.',
@@ -474,7 +434,6 @@ enums = {
         'values': [
             {
                 'name': 'OFF',
-                'prefix': None,
                 'value': 0,
 'documentation': {
 'description': 'Autoranging is disabled.',
@@ -482,7 +441,6 @@ enums = {
             },
             {
                 'name': 'ON',
-                'prefix': None,
                 'value': 1,
 'documentation': {
 'description': 'Autoranging is enabled.',
