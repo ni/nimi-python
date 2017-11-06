@@ -400,11 +400,11 @@ class ScanAdvancedOutput(Enum):
 
 
 class ScanAdvancedPolarity(Enum):
-    RISING_EDGE = 0
+    RISING = 0
     '''
     The trigger occurs on the rising edge of the signal.
     '''
-    FALLING_EDGE = 1
+    FALLING = 1
     '''
     The trigger occurs on the falling edge of the signal.
     '''
@@ -605,11 +605,11 @@ class TriggerInput(Enum):
 
 
 class TriggerInputPolarity(Enum):
-    RISING_EDGE = 0
+    RISING = 0
     '''
     The trigger occurs on the rising edge of the signal.
     '''
-    FALLING_EDGE = 1
+    FALLING = 1
     '''
     The trigger occurs on the falling edge of the signal.
     '''

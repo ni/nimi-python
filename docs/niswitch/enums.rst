@@ -951,7 +951,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: ScanAdvancedPolarity
 
-    .. py:attribute:: niswitch.ScanAdvancedPolarity.RISING_EDGE
+    .. py:attribute:: niswitch.ScanAdvancedPolarity.RISING
 
 
 
@@ -961,7 +961,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.ScanAdvancedPolarity.FALLING_EDGE
+    .. py:attribute:: niswitch.ScanAdvancedPolarity.FALLING
 
 
 
@@ -1414,7 +1414,7 @@ Enums used in NI-SWITCH
 
 .. py:data:: TriggerInputPolarity
 
-    .. py:attribute:: niswitch.TriggerInputPolarity.RISING_EDGE
+    .. py:attribute:: niswitch.TriggerInputPolarity.RISING
 
 
 
@@ -1424,7 +1424,7 @@ Enums used in NI-SWITCH
 
 
 
-    .. py:attribute:: niswitch.TriggerInputPolarity.FALLING_EDGE
+    .. py:attribute:: niswitch.TriggerInputPolarity.FALLING
 
 
 

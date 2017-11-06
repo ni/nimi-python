@@ -184,15 +184,7 @@ Enums used in NI-DCPower
 
 
 
-        
-
-
-
     .. py:attribute:: nidcpower.Event.MEASURE_COMPLETE
-
-
-
-        
 
 
 
@@ -200,15 +192,7 @@ Enums used in NI-DCPower
 
 
 
-        
-
-
-
     .. py:attribute:: nidcpower.Event.SEQUENCE_ENGINE_DONE
-
-
-
-        
 
 
 
@@ -216,15 +200,7 @@ Enums used in NI-DCPower
 
 
 
-        
-
-
-
     .. py:attribute:: nidcpower.Event.READY_FOR_PULSE_TRIGGER
-
-
-
-        
 
 
 
@@ -399,7 +375,7 @@ Enums used in NI-DCPower
 
 .. py:data:: PowerLineFrequency
 
-    .. py:attribute:: nidcpower.PowerLineFrequency._50_HERTZ
+    .. py:attribute:: nidcpower.PowerLineFrequency._50
 
 
 
@@ -409,7 +385,7 @@ Enums used in NI-DCPower
 
 
 
-    .. py:attribute:: nidcpower.PowerLineFrequency._60_HERTZ
+    .. py:attribute:: nidcpower.PowerLineFrequency._60
 
 
 
@@ -505,15 +481,7 @@ Enums used in NI-DCPower
 
 
 
-        
-
-
-
     .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SOURCE
-
-
-
-        
 
 
 
@@ -521,23 +489,11 @@ Enums used in NI-DCPower
 
 
 
-        
-
-
-
     .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE
 
 
 
-        
-
-
-
     .. py:attribute:: nidcpower.SendSoftwareEdgeTriggerType.PULSE
-
-
-
-        
 
 
 

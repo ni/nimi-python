@@ -166,11 +166,11 @@ class Polarity(Enum):
 
 
 class PowerLineFrequency(Enum):
-    _50_HERTZ = 50.0
+    _50 = 50.0
     '''
     Specifies a power line frequency of 50 Hz.
     '''
-    _60_HERTZ = 60.0
+    _60 = 60.0
     '''
     Specifies a power line frequency of 60 Hz.
     '''

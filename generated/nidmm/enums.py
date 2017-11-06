@@ -325,22 +325,22 @@ class OffsetCompensatedOhms(Enum):
 
 
 class OperationMode(Enum):
-    IVIDMM_MODE = 0
+    IVIDMM = 0
     '''
     IviDmm Mode
     '''
-    WAVEFORM_MODE = 1
+    WAVEFORM = 1
     '''
     Waveform acquisition mode
     '''
 
 
 class PowerlineFrequency(Enum):
-    _50_HERTZ = 50.0
+    _50 = 50.0
     '''
     Specifies the powerline frequency as 50 Hz.
     '''
-    _60_HERTZ = 60.0
+    _60 = 60.0
     '''
     Specifies the powerline frequency as 60 Hz.
     '''

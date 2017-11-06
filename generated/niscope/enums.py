@@ -547,42 +547,42 @@ class TriggerSlope(Enum):
 
 
 class TriggerType(Enum):
-    EDGE_TRIGGER = 1
+    EDGE = 1
     '''
     Configures the digitizer for edge triggering.  An edge trigger occurs when the trigger signal crosses the trigger level specified with the set trigger slope.  You configure the trigger level and slope with niScope_ConfigureTriggerEdge.
     '''
-    TV_TRIGGER = 5
+    TV = 5
     '''
     Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with niScope_ConfigureTriggerVideo.
     '''
-    IMMEDIATE_TRIGGER = 6
+    IMMEDIATE = 6
     '''
     Configures the digitizer for immediate triggering.   An immediate trigger occurs as soon as the pretrigger samples are acquired.
     '''
-    HYSTERESIS_TRIGGER = 1001
+    HYSTERESIS = 1001
     '''
     Configures the digitizer for hysteresis triggering.  A hysteresis trigger occurs when the trigger signal crosses the trigger level with the specified slope and passes through the hysteresis window you specify. You configure the trigger level, slope, and hysteresis with niScope_ConfigureTriggerHysteresis.
     '''
-    DIGITAL_TRIGGER = 1002
+    DIGITAL = 1002
     '''
     Configures the digitizer for digital triggering. A digital trigger occurs when the trigger signal has the specified slope. You configure the trigger slope with niScope_ConfigureTriggerDigital.
     '''
-    WINDOW_TRIGGER = 1003
+    WINDOW = 1003
     '''
     Configures the digitizer for window triggering.  A window trigger occurs when the trigger signal enters or leaves the window defined by the values you specify with the Low Window Level, High Window Level, and Window Mode Parameters.  You configure the low window level high window level, and window mode with niScope_ConfigureTriggerWindow.
     '''
-    SOFTWARE_TRIGGER = 1004
+    SOFTWARE = 1004
     '''
     Configures the digitizer for software triggering.  A software trigger occurs when niScope_SendSoftwareTrigger is called.
     '''
 
 
 class TriggerWindowMode(Enum):
-    ENTERING_WINDOW = 0
+    ENTERING = 0
     '''
     Trigger upon entering the window
     '''
-    LEAVING_WINDOW = 1
+    LEAVING = 1
     '''
     Trigger upon leaving the window
     '''
@@ -626,6 +626,10 @@ class VideoSignalFormat(Enum):
     SECAM = 3
     '''
     SECAM signal format supports line numbers from 1 to 625
+    '''
+    M_PAL = 4
+    '''
+    Specifies M-PAL signal format.
     '''
     M_PAL = 1001
     '''

@@ -588,17 +588,6 @@ class _SessionBase(object):
     '''
     A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to niScope_Init or niScope_InitWithOptions. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
     '''
-    manual_configuration_enabled = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.BoolEnableDisable, 1150343)
-    '''
-    Enables and disables manual configuration of a peer-to-peer endpoint.
-    These attributes cannot be used if an endpoint is being configured by
-    NI-P2P, or a resource reservation error will result. This property is
-    endpoint-based.
-
-    Note:
-    This property can be used only with high-speed digitizers that support
-    peer-to-peer streaming.
-    '''
     master_enable = attributes.AttributeViBoolean(1150008)
     '''
     Specifies whether you want the device to be a master or a slave. The master typically originates  the trigger signal and clock sync pulse. For a standalone device, set this attribute to VI_FALSE.
@@ -964,135 +953,6 @@ class _SessionBase(object):
     Disabled (2)
     Default Value: Warning
     '''
-    p2p_channels_to_stream = attributes.AttributeViString(1150339)
-    '''
-    Specifies which channels are written to a peer-to-peer endpoint. If multiple channels are specified,  the channels are interleaved by sample.
-    Default Value: 0
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_data_trans_permission_addr = attributes.AttributeViInt64(1150329)
-    '''
-    Returns the address of a hardware register used to grant permisison for the peer-to-peer endpoint to write  data to another peer.. The type of this address is determined by the  NISCOPE_ATTR_P2P_DATA_TRANS_PERMISSION_ADDR_TYPE attribute. Permission is granted in bytes and the register  is additive.
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_data_trans_permission_addr_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AddressType, 1150330)
-    '''
-    Specifies the type of address returned from the NISCOPE_ATTR_P2P_DATA_TRANS_PERMISSION_ADDR attribute.
-    Valid Values:
-    Physical (0)
-    Virtual (1)
-    Default Value: Virtual
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_destination_window_addr = attributes.AttributeViInt64(1150331)
-    '''
-    Specifies the destination for data written by the peer-to-peer endpoint. The type of this address is specified  by the NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDR_TYPE attribute.
-    Valid Values: A valid, non-NULL physical or virtual address.
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_destination_window_addr_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AddressType, 1150332)
-    '''
-    Specifies the type of the NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDR attribute.
-    Valid Values:
-    Physical (0)
-    Virtual (1)
-    Default Value: Virtual
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_destination_window_size = attributes.AttributeViInt64(1150333)
-    '''
-    Specifies the size, in bytes, of the destination window determined by the  NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDRESS and the NISCOPE_ATTR_P2P_DESTINATION_WINDOW_ADDRESS_TYPE  attributes.
-    Valid Values: Any non-NULL value.
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_enabled = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.BoolEnableDisable, 1150338)
-    '''
-    Specifies whether the digitizer writes data to the peer-to-peer endpoint.
-    Default Value: VI_FALSE
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_endpoint_overflow = attributes.AttributeViBoolean(1150344)
-    '''
-    Returns TRUE if the endpoint FIFO has overflowed. Reset the endpoint to clear the overflow condition.
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_endpoint_size = attributes.AttributeViInt32(1150342)
-    '''
-    Returns the size in samples of the peer-to-peer endpoint.
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_fifo_endpoint_count = attributes.AttributeViInt32(1150345)
-    '''
-    Returns the number of FIFO-based peer-to-peer endpoints this device supports.
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_most_samples_avail_in_endpoint = attributes.AttributeViInt32(1150341)
-    '''
-    Returns the most number of samples available to stream from a peer-to-peer endpoint since the last  time this attribute was read.
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_notify_message_push_addr = attributes.AttributeViInt64(1150335)
-    '''
-    Specifies the address to Push Message push Value to on the event specified by the  NISCOPE_ATTR_P2P_NOTIFY_PUSH_MESSAGE_ON attribute.
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_notify_message_push_addr_type = attributes.AttributeEnum(attributes.AttributeViInt32, enums.AddressType, 1150336)
-    '''
-    Specifies the type of the NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_ADDR attribute.
-    Valid Values:
-    Physical (0)
-    Virtual (1)
-    Default Value: Virtual
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_notify_message_push_value = attributes.AttributeViInt64(1150337)
-    '''
-    Specifies the value to be pushed to the NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_ADDR attribute on the event specified  by the NISCOPE_ATTR_MESSAGE_PUSH_ON attribute.
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_notify_push_message_on = attributes.AttributeEnum(attributes.AttributeViInt32, enums.NotificationType, 1150334)
-    '''
-    Specifies the event to push the NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_VALUE attribute to the  NISCOPE_ATTR_P2P_NOTIFY_MESSAGE_PUSH_ADDR attribute. Setting this attribute to NISCOPE_VAL_NOTIFY_DONE pushes  the message when the acquisition has completed.
-    Valid Values:
-    Never (0)
-    Done (1)
-    Default Value: Done
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_onboard_memory_enabled = attributes.AttributeEnum(attributes.AttributeViBoolean, enums.BoolEnableDisable, 1150354)
-    '''
-    Specifies whether the digitizer writes data to onboard memory when a peer-to-peer endpoint is enabled.
-    Default Value: VI_FALSE
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_samples_avail_in_endpoint = attributes.AttributeViInt32(1150328)
-    '''
-    Returns the current number of samples available to stream from a peer-to-peer endpoint.
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
-    p2p_samples_transferred = attributes.AttributeViInt64(1150340)
-    '''
-    Returns the number of samples transferred through the peer-to-peer endpoint since it was last reset.
-
-    Note: This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.
-    '''
     pll_lock_status = attributes.AttributeViBoolean(1151303)
     '''
     If TRUE, the PLL has remained locked to the external reference clock since it was last checked. If FALSE,  the PLL has become unlocked from the external reference clock since it was last checked.
@@ -1187,14 +1047,6 @@ class _SessionBase(object):
     ris_num_averages = attributes.AttributeViInt32(1150070)
     '''
     The number of averages for each bin in an RIS acquisition.  The number of averages  times the oversampling factor is the minimum number of real-time acquisitions  necessary to reconstruct the RIS waveform.  Averaging is useful in RIS because  the trigger times are not evenly spaced, so adjacent points in the reconstructed  waveform not be accurately spaced.  By averaging, the errors in both time and  voltage are smoothed.
-    '''
-    samples_transferred_per_record = attributes.AttributeViInt32(1150380)
-    '''
-    Returns the number of samples transferred per record when you set the
-    `Stream Relative To <pniScope_P2PStreamRelativeTo.html>`__ property to
-    **Reference Trigger** or **Sync Trigger**.
-
-    Note: This property is only supported on NI 5160/5162 digitizers.
     '''
     sample_clock_timebase_multiplier = attributes.AttributeViInt32(1150367)
     '''

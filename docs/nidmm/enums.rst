@@ -744,7 +744,7 @@ Enums used in NI-DMM
 
 .. py:data:: OperationMode
 
-    .. py:attribute:: nidmm.OperationMode.IVIDMM_MODE
+    .. py:attribute:: nidmm.OperationMode.IVIDMM
 
 
 
@@ -754,7 +754,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.OperationMode.WAVEFORM_MODE
+    .. py:attribute:: nidmm.OperationMode.WAVEFORM
 
 
 
@@ -767,7 +767,7 @@ Enums used in NI-DMM
 
 .. py:data:: PowerlineFrequency
 
-    .. py:attribute:: nidmm.PowerlineFrequency._50_HERTZ
+    .. py:attribute:: nidmm.PowerlineFrequency._50
 
 
 
@@ -777,7 +777,7 @@ Enums used in NI-DMM
 
 
 
-    .. py:attribute:: nidmm.PowerlineFrequency._60_HERTZ
+    .. py:attribute:: nidmm.PowerlineFrequency._60
 
 
 

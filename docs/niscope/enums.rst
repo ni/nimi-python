@@ -1188,7 +1188,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: TriggerType
 
-    .. py:attribute:: niscope.TriggerType.EDGE_TRIGGER
+    .. py:attribute:: niscope.TriggerType.EDGE
 
 
 
@@ -1198,7 +1198,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.TriggerType.TV_TRIGGER
+    .. py:attribute:: niscope.TriggerType.TV
 
 
 
@@ -1208,7 +1208,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.TriggerType.IMMEDIATE_TRIGGER
+    .. py:attribute:: niscope.TriggerType.IMMEDIATE
 
 
 
@@ -1218,7 +1218,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.TriggerType.HYSTERESIS_TRIGGER
+    .. py:attribute:: niscope.TriggerType.HYSTERESIS
 
 
 
@@ -1228,7 +1228,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.TriggerType.DIGITAL_TRIGGER
+    .. py:attribute:: niscope.TriggerType.DIGITAL
 
 
 
@@ -1238,7 +1238,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.TriggerType.WINDOW_TRIGGER
+    .. py:attribute:: niscope.TriggerType.WINDOW
 
 
 
@@ -1248,7 +1248,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.TriggerType.SOFTWARE_TRIGGER
+    .. py:attribute:: niscope.TriggerType.SOFTWARE
 
 
 
@@ -1261,7 +1261,7 @@ Enums used in NI-SCOPE
 
 .. py:data:: TriggerWindowMode
 
-    .. py:attribute:: niscope.TriggerWindowMode.ENTERING_WINDOW
+    .. py:attribute:: niscope.TriggerWindowMode.ENTERING
 
 
 
@@ -1271,7 +1271,7 @@ Enums used in NI-SCOPE
 
 
 
-    .. py:attribute:: niscope.TriggerWindowMode.LEAVING_WINDOW
+    .. py:attribute:: niscope.TriggerWindowMode.LEAVING
 
 
 
@@ -1365,6 +1365,16 @@ Enums used in NI-SCOPE
 
 
         SECAM signal format supports line numbers from 1 to 625
+
+        
+
+
+
+    .. py:attribute:: niscope.VideoSignalFormat.M_PAL
+
+
+
+        Specifies M-PAL signal format.
 
         
 
