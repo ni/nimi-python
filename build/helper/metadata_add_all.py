@@ -185,7 +185,7 @@ def add_all_function_metadata(functions, config):
     return functions
 
 
-def _add_codegen_method(a, attributes):
+def _add_attr_codegen_method(a, attributes):
     '''Adds 'codegen_method' that will determine whether and how the attribute is code genned. Default is public'''
     if 'codegen_method' not in attributes[a]:
         attributes[a]['codegen_method'] = 'public'
@@ -201,16 +201,25 @@ def _add_python_name(a, attributes):
 
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
-    if 'modules' in config and 'metadata.functions_addon' in config['modules']:
+    if 'modules' in config and 'metadata.fattributes_addon' in config['modules']:
         for m in dir(config['modules']['metadata.attributes_addon']):
             if m.startswith('attributes_'):
                 merge_dicts(attributes, config['modules']['metadata.attributes_addon'].__getattribute__(m))
 
     for a in attributes:
-        _add_codegen_method(a, attributes)
+        _add_attr_codegen_method(a, attributes)
         _add_python_name(a, attributes)
 
     return attributes
+
+
+def add_all_enum_metadata(enums, config):
+    '''Merges and Adds all codegen-specific metada to the function metadata list'''
+    if 'modules' in config and 'metadata.enums_addon' in config['modules']:
+        for m in dir(config['modules']['metadata.enums_addon']):
+            if m.startswith('enums_'):
+                merge_dicts(attributes, config['modules']['metadata.enums_addon'].__getattribute__(m))
+
 
 
 # Unit Tests
