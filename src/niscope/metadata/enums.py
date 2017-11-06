@@ -1101,13 +1101,6 @@ after a certain amount of time.
             },
             {
                 'name': 'M_PAL',
-                'value': 4,
-'documentation': {
-'description': 'Specifies M-PAL signal format.',
-},
-            },
-            {
-                'name': 'M_PAL',
                 'value': 1001,
 'documentation': {
 'description': 'M-PAL signal format supports line numbers from 1 to 525',
