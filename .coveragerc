@@ -1,7 +1,0 @@
-[run]
-omit =
-    */library*
-include =
-    */nifake/*
-    */nimodinst/session.py
-    build/*
