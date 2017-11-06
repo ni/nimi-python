@@ -406,6 +406,7 @@ enums = {
             },
             {
                 'name': 'LEVEL',
+                'value': 102,
 'documentation': {
 'description': 'Shifts high or low while the event is active, depending  on the active state you specify.',
 },

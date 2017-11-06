@@ -891,6 +891,7 @@ position.
             },
             {
                 'name': 'HF_REJECT',
+                'value': 2,
 'documentation': {
 'description': 'Highpass filter coupling',
 },
@@ -1107,84 +1108,98 @@ after a certain amount of time.
             },
             {
                 'name': 'M_PAL',
+                'value': 1001,
 'documentation': {
 'description': 'M-PAL signal format supports line numbers from 1 to 525',
 },
             },
             {
                 'name': '_480I_59_94_FIELDS_PER_SECOND',
+                'value': 1010,
 'documentation': {
 'description': '480 lines, interlaced, 59.94 fields per second',
 },
             },
             {
                 'name': '_480I_60_FIELDS_PER_SECOND',
+                'value': 1011,
 'documentation': {
 'description': '480 lines, interlaced, 60 fields per second',
 },
             },
             {
                 'name': '_480P_59_94_FRAMES_PER_SECOND',
+                'value': 1015,
 'documentation': {
 'description': '480 lines, progressive, 59.94 frames per second',
 },
             },
             {
                 'name': '_480P_60_FRAMES_PER_SECOND',
+                'value': 1016,
 'documentation': {
 'description': '480 lines, progressive,60 frames per second',
 },
             },
             {
                 'name': '_576I_50_FIELDS_PER_SECOND',
+                'value': 1020,
 'documentation': {
 'description': '576 lines, interlaced, 50 fields per second',
 },
             },
             {
                 'name': '_576P_50_FRAMES_PER_SECOND',
+                'value': 1025,
 'documentation': {
 'description': '576 lines, progressive, 50 frames per second',
 },
             },
             {
                 'name': '_720P_50_FRAMES_PER_SECOND',
+                'value': 1031,
 'documentation': {
 'description': '720 lines, progressive, 50 frames per second',
 },
             },
             {
                 'name': '_720P_59_94_FRAMES_PER_SECOND',
+                'value': 1032,
 'documentation': {
 'description': '720 lines, progressive, 59.94 frames per second',
 },
             },
             {
                 'name': '_720P_60_FRAMES_PER_SECOND',
+                'value': 1033,
 'documentation': {
 'description': '720 lines, progressive, 60 frames per second',
 },
             },
             {
                 'name': '_1080I_50_FIELDS_PER_SECOND',
+                'value': 1040,
 'documentation': {
 'description': '1,080 lines, interlaced, 50 fields per second',
 },
             },
             {
                 'name': '_1080I_59_94_FIELDS_PER_SECOND',
+                'value': 1041,
 'documentation': {
 'description': '1,080 lines, interlaced, 59.94 fields per second',
 },
             },
             {
                 'name': '_1080I_60_FIELDS_PER_SECOND',
+                'value': 1042,
 'documentation': {
 'description': '1,080 lines, interlaced, 60 fields per second',
 },
             },
             {
                 'name': '_1080P_24_FRAMES_PER_SECOND',
+                'value': 1045,
 'documentation': {
 'description': '1,080 lines, progressive, 24 frames per second',
 },
