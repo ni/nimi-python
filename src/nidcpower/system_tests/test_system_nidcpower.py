@@ -10,7 +10,7 @@ def session():
 
 @pytest.fixture(scope='function')
 def single_channel_session():
-    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+    with nidcpower.Session('4162', '0', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
         yield simulated_session
 
 
@@ -260,46 +260,40 @@ def test_commit(single_channel_session):
 # TODO(bhaswath): Enable test after Pull request #467 is merged, which will enable the export signal enum
 '''
 def test_export_signal(single_channel_session):
-    expected_trigger_terminal = "//Engine0/MeasureTrigger"
+    expected_trigger_terminal = "/4162/Engine0/MeasureTrigger"
     single_channel_session.export_signal(nidcpower.Event.SOURCE_COMPLETE, expected_trigger_terminal)
     assert expected_trigger_terminal == single_channel_session.source_complete_event_output_terminal
 '''
 
 
-def test_configure_digital_edge_measure_trigger_error(single_channel_session):
-    try:
-        single_channel_session.configure_digital_edge_measure_trigger("invalid string")
-        with single_channel_session.initiate():
-            single_channel_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, 0.5)
-        assert False
-    except nidcpower.Error as e:
-        assert e.code == -1074097882  # Error : Invalid property value
-        assert e.description.find('Requested value is not a supported value for this property.') != -1
+def test_configure_digital_edge_measure_trigger(single_channel_session):
+    single_channel_session.measure_when = nidcpower.MeasureWhen.ON_MEASURE_TRIGGER
+    expected_trigger_terminal = "/4162/PXI_Trig0"
+    single_channel_session.configure_digital_edge_measure_trigger(expected_trigger_terminal)
+    assert expected_trigger_terminal == single_channel_session.digital_edge_measure_trigger_input_terminal
 
 
-def test_configure_digital_edge_pulse_trigger_error(single_channel_session):
-    try:
-        single_channel_session.configure_digital_edge_pulse_trigger("invalid string")
-        assert False
-    except nidcpower.Error as e:
-        assert e.code == -1074135023  # Error : Unsupported function
-        assert e.description.find('Function or method not supported.') != -1
+def test_configure_digital_edge_pulse_trigger():
+    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4139; BoardType:PXIe') as session:
+        expected_trigger_terminal = "/4139/PXI_Trig0"
+        session.configure_digital_edge_pulse_trigger(expected_trigger_terminal)
+        assert expected_trigger_terminal == session.digital_edge_pulse_trigger_input_terminal
 
 
 def test_configure_digital_edge_sequence_advance_trigger(single_channel_session):
-    expected_trigger_terminal = "//PXI_Trig0"
+    expected_trigger_terminal = "/4162/PXI_Trig0"
     single_channel_session.configure_digital_edge_sequence_advance_trigger(expected_trigger_terminal)
     assert expected_trigger_terminal == single_channel_session.digital_edge_sequence_advance_trigger_input_terminal
 
 
 def test_configure_digital_edge_source_trigger(single_channel_session):
-    expected_trigger_terminal = "//PXI_Trig0"
+    expected_trigger_terminal = "/4162/PXI_Trig0"
     single_channel_session.configure_digital_edge_source_trigger(expected_trigger_terminal)
     assert expected_trigger_terminal == single_channel_session.digital_edge_source_trigger_input_terminal
 
 
 def test_configure_digital_edge_start_trigger(single_channel_session):
-    expected_trigger_terminal = "//PXI_Trig0"
+    expected_trigger_terminal = "/4162/PXI_Trig0"
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
     single_channel_session.set_sequence([0.1], [0.1])
     single_channel_session.configure_digital_edge_start_trigger(expected_trigger_terminal)
