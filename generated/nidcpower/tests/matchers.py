@@ -98,7 +98,9 @@ class CustomTypeMatcher(object):
         if not isinstance(other, self.expected_type):
             print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
             return False
-        for field_name, field_type in self.expected_value._fields_:
+        # From https://stackoverflow.com/questions/20986330/print-all-fields-of-ctypes-structure-with-introspection
+        for field in self.expected_value._fields_:
+            field_name = field[0]
             expected_val = getattr(self.expected_value, field_name)
             other_val = getattr(other, field_name)
             if expected_val != other_val:

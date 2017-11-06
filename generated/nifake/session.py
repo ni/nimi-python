@@ -637,6 +637,20 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
 
+    def get_custom_type(self):
+        '''get_custom_type
+
+        This function takes a custom type.
+
+        Returns:
+            cs (custom_struct): Set using custom type
+        '''
+        vi_ctype = visatype.ViSession(self._vi)  # case 1
+        cs_ctype = custom_struct.CustomStruct()  # case 13
+        error_code = self._library.niFake_GetCustomType(vi_ctype, ctypes.pointer(cs_ctype))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return custom_struct.custom_struct(cs_ctype)
+
     def get_enum_value(self):
         '''get_enum_value
 
