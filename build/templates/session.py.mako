@@ -53,7 +53,7 @@ ${encoding_tag}
 % endif
         error_code = self._library.${c_function_prefix}${f['name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL)})
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=${f['is_error_handling']})
-        ${helper.get_method_return_snippet(parameters)}
+        ${helper.get_method_return_snippet(parameters, config)}
 </%def>\
 import ctypes
 

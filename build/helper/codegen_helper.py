@@ -77,10 +77,19 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
     assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
     return_type_snippet = ''
+
+    # Custom types (I.e. inherit from ctypes.Structure) don't need a .value but do need a module name
+    val_suffix = '.value'
+    module_name = ''
+    c = get_custom_type(output_parameter, config)
+    if c is not None:
+        val_suffix = ''
+        module_name = c['file_name'] + '.'
+
     if output_parameter['enum'] is not None:
         return_type_snippet = 'enums.' + output_parameter['enum'] + '('
     else:
-        return_type_snippet = output_parameter['python_type'] + '('
+        return_type_snippet = module_name + output_parameter['python_type'] + '('
 
     if output_parameter['is_buffer']:
         if output_parameter['type'] == 'ViChar':
@@ -91,21 +100,21 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
                 size = str(output_parameter['size']['value'])
             else:
                 size_parameter = find_size_parameter(output_parameter, parameters)
-                size = size_parameter['ctypes_variable_name'] + '.value'
+                size = size_parameter['ctypes_variable_name'] + val_suffix
 
             snippet = '[' + return_type_snippet + output_parameter['ctypes_variable_name'] + '[i]) for i in range(' + size + ')]'
     else:
-        snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + '.value)'
+        snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + val_suffix + ')'
 
     return snippet
 
 
-def get_method_return_snippet(parameters):
+def get_method_return_snippet(parameters, config):
     '''Returns a string suitable to use as the return argument of a Session method, i.e. "return reading_ctype.value"'''
     snippets = []
     for x in parameters:
         if x['direction'] == 'out' or x['size']['mechanism'] == 'ivi-dance':
-            snippets.append(_get_output_param_return_snippet(x, parameters))
+            snippets.append(_get_output_param_return_snippet(x, parameters, config))
     return ('return ' + ', '.join(snippets)).strip()
 
 
@@ -147,9 +156,9 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
 
     # First we need to determine the module. If it is a custom type then the module is the file associated wit that type, otherwise 'visatype'
     module_name = 'visatype'
-    for c in config['custom_types']:
-        if parameter['ctypes_type'] == c['ctypes_name']:
-            module_name = c['file_name']
+    c = get_custom_type(parameter, config)
+    if c is not None:
+        module_name = c['file_name']
 
     # And now: A large block of conditional logic for getting to each of these cases. The following will not win any beauty pageants.
     # Suggestions on how to improve readability are welcome.
