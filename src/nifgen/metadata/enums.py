@@ -9,8 +9,8 @@ enums = {
     'AnalogPath': {
         'values': [
             {
-                'name': 'MAIN_ANALOG_PATH',
-                'prefix': None,
+                'name': 'MAIN',
+                'prefix': '_ANALOG_PATH',
                 'value': 0,
 'documentation': {
 'description': '''
@@ -19,8 +19,8 @@ Specifies use of the main path.  NI-FGEN chooses the amplifier based on the user
 },
             },
             {
-                'name': 'DIRECT_ANALOG_PATH',
-                'prefix': None,
+                'name': 'DIRECT',
+                'prefix': '_ANALOG_PATH',
                 'value': 1,
 'documentation': {
 'description': '''
@@ -29,8 +29,8 @@ Specifies use of the direct path.
 },
             },
             {
-                'name': 'FIXED_LOW_GAIN_ANALOG_PATH',
-                'prefix': None,
+                'name': 'FIXED_LOW_GAIN',
+                'prefix': '_ANALOG_PATH',
                 'value': 2,
 'documentation': {
 'description': '''
@@ -39,8 +39,8 @@ Specifies use of the low-gain amplifier in the main path, no matter  what value 
 },
             },
             {
-                'name': 'FIXED_HIGH_GAIN_ANALOG_PATH',
-                'prefix': None,
+                'name': 'FIXED_HIGH_GAIN',
+                'prefix': '_ANALOG_PATH',
                 'value': 3,
 'documentation': {
 'description': '''
@@ -457,8 +457,8 @@ Applies a custom filter to the data. If NIFGEN_VAL_OSP_CUSTOM is selected,  you 
     'IdleBehavior': {
         'values': [
             {
-                'name': 'HOLD_LAST_VALUE',
-                'prefix': None,
+                'name': 'HOLD_LAST',
+                'prefix': '_VALUE',
                 'value': 400,
 'documentation': {
 'description': '''
@@ -467,8 +467,8 @@ While in an Idle or Wait state, the output signal remains  at the last voltage g
 },
             },
             {
-                'name': 'JUMP_TO_VALUE',
-                'prefix': None,
+                'name': 'JUMP_TO',
+                'prefix': '_VALUE',
                 'value': 401,
 'documentation': {
 'description': '''
@@ -993,8 +993,8 @@ Specifies that the onboard Sample Clock timebase is used as the source.
     'ScriptTriggerDigitalEdgeEdge': {
         'values': [
             {
-                'name': 'RISING_EDGE',
-                'prefix': None,
+                'name': 'RISING',
+                'prefix': '_EDGE',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -1003,8 +1003,8 @@ Rising Edge
 },
             },
             {
-                'name': 'FALLING_EDGE',
-                'prefix': None,
+                'name': 'FALLING',
+                'prefix': '_EDGE',
                 'value': 102,
 'documentation': {
 'description': '''
@@ -1085,8 +1085,8 @@ Trigger is asserted when a software edge is detected.
     'StartTriggerDigitalEdgeEdge': {
         'values': [
             {
-                'name': 'RISING_EDGE',
-                'prefix': None,
+                'name': 'RISING',
+                'prefix': '_EDGE',
                 'value': 101,
 'documentation': {
 'description': '''
@@ -1095,8 +1095,8 @@ Rising Edge
 },
             },
             {
-                'name': 'FALLING_EDGE',
-                'prefix': None,
+                'name': 'FALLING',
+                'prefix': '_EDGE',
                 'value': 102,
 'documentation': {
 'description': '''
@@ -1978,8 +1978,8 @@ NTSC M Video Type
     'WaitBehavior': {
         'values': [
             {
-                'name': 'HOLD_LAST_VALUE',
-                'prefix': None,
+                'name': 'HOLD_LAST',
+                'prefix': '_VALUE',
                 'value': 400,
 'documentation': {
 'description': '''
@@ -1988,8 +1988,8 @@ While in an Idle or Wait state, the output signal remains  at the last voltage g
 },
             },
             {
-                'name': 'JUMP_TO_VALUE',
-                'prefix': None,
+                'name': 'JUMP_TO',
+                'prefix': '_VALUE',
                 'value': 401,
 'documentation': {
 'description': '''
