@@ -66,7 +66,14 @@ def get_params_snippet(function, parameter_usage_options):
     return ', '.join(snippets)
 
 
-def _get_output_param_return_snippet(output_parameter, parameters):
+def get_custom_type(p, config):
+    for c in config['custom_types']:
+        if p['ctypes_type'] == c['ctypes_name']:
+            return c
+    return None
+
+
+def _get_output_param_return_snippet(output_parameter, parameters, config):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
     assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
     return_type_snippet = ''
