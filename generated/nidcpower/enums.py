@@ -267,11 +267,11 @@ class TriggerType(Enum):
     '''
     No trigger is configured.
     '''
-    DIGITAL_EDGE = 1014
+    DIGITAL = 1014
     '''
     The data operation starts when a digital edge is detected.
     '''
-    SOFTWARE_EDGE = 1015
+    SOFTWARE = 1015
     '''
     The data operation starts when a software trigger occurs.
     '''

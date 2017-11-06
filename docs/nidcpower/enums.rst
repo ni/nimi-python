@@ -599,7 +599,7 @@ Enums used in NI-DCPower
 
 
 
-    .. py:attribute:: nidcpower.TriggerType.DIGITAL_EDGE
+    .. py:attribute:: nidcpower.TriggerType.DIGITAL
 
 
 
@@ -609,7 +609,7 @@ Enums used in NI-DCPower
 
 
 
-    .. py:attribute:: nidcpower.TriggerType.SOFTWARE_EDGE
+    .. py:attribute:: nidcpower.TriggerType.SOFTWARE
 
 
 
