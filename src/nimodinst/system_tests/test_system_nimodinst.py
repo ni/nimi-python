@@ -2,6 +2,7 @@
 
 import nimodinst
 import re
+import six
 
 
 def test_bad_device_family():
@@ -49,7 +50,7 @@ def test_string_attribute_error_on_non_existant_device():
 def test_device_name_attribute():
     with nimodinst.Session('') as session:
         assert len(session) > 0, 'Must have hardware for ModInst tests to be valid.'
-        assert isinstance(session[0].device_name, str)
+        assert isinstance(session[0].device_name, six.text_type)
         assert len(session[0].device_name) > 0  # device name must be at least 1 character
 
 
@@ -57,7 +58,7 @@ def test_device_model_attribute():
     with nimodinst.Session('') as session:
         assert len(session) > 0, 'Must have hardware for ModInst tests to be valid.'
         assert len(session[0].device_model) > 0
-        assert isinstance(session[0].device_model, str)
+        assert isinstance(session[0].device_model, six.text_type)
         pattern = r'(NI )?[A-Z]+e?-\d\d\d\d'
         assert re.search(pattern, session[0].device_model) is not None  # NI Model numbers are generally "NI PXIe-2532", but might also be "USB-2532"
 
@@ -66,7 +67,7 @@ def test_serial_number_attribute():
     with nimodinst.Session('') as session:
         assert len(session) > 0, 'Must have hardware for ModInst tests to be valid.'
         pattern = r'^[0-9A-F]+$'
-        assert isinstance(session[0].serial_number, str)
+        assert isinstance(session[0].serial_number, six.text_type)
         assert (len(session[0].serial_number) == 0) | (re.search(pattern, session[0].serial_number) is not None)  # NI Serial numbers hex unless it is simulated than it is 0
 
 
