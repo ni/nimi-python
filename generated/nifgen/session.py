@@ -3028,7 +3028,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_script_trigger(self, trigger_id, source, edge=enums.ScriptTriggerDigitalEdgeEdge.RISING_EDGE):
+    def configure_digital_edge_script_trigger(self, trigger_id, source, edge=enums.ScriptTriggerDigitalEdgeEdge.RISING):
         '''configure_digital_edge_script_trigger
 
         Configures the specified Script Trigger for digital edge triggering.
@@ -3112,7 +3112,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_start_trigger(self, source, edge=enums.StartTriggerDigitalEdgeEdge.RISING_EDGE):
+    def configure_digital_edge_start_trigger(self, source, edge=enums.StartTriggerDigitalEdgeEdge.RISING):
         '''configure_digital_edge_start_trigger
 
         Configures the Start Trigger for digital edge triggering.

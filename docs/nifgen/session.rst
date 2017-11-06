@@ -432,9 +432,9 @@ nifgen.Session
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
    | :py:func:`configure_custom_fir_filter_coefficients` | coefficients_array                                                                              |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
-   | :py:func:`configure_digital_edge_script_trigger`    | trigger_id, source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING_EDGE                        |
+   | :py:func:`configure_digital_edge_script_trigger`    | trigger_id, source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING                             |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
-   | :py:func:`configure_digital_edge_start_trigger`     | source, edge=nifgen.StartTriggerDigitalEdgeEdge.RISING_EDGE                                     |
+   | :py:func:`configure_digital_edge_start_trigger`     | source, edge=nifgen.StartTriggerDigitalEdgeEdge.RISING                                          |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
    | :py:func:`configure_digital_level_script_trigger`   | trigger_id, source, trigger_when                                                                |
    +-----------------------------------------------------+-------------------------------------------------------------------------------------------------+
