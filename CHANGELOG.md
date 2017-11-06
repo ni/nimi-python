@@ -57,6 +57,7 @@ All notable changes to this project will be documented in this file.
  * #### Added
  * #### Changed
  * #### Removed
+   * Removed Peer to Peer attributes
 
 ## 0.3.0 - 2017-10-13
 * ### ALL
