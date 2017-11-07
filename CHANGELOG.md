@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
   * #### Changed
     * Simplified examples by removing try/except
   * #### Removed
+    * enum definitions that are not referenced by a function and/or an attributes
 * ### NI-DMM
   * #### Added
   * #### Changed
