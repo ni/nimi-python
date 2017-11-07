@@ -19,6 +19,7 @@ class _CustomStructCType(ctypes.Structure):
             self.struct_int = struct_int
             self.struct_double = struct_double
 
+
 # We need to match the name in the function definition
 custom_struct = _CustomStructCType
 
