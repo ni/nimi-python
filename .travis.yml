@@ -3,7 +3,7 @@ cache: pip
 dist: trusty
 language: python
 # For pypy versions, see https://github.com/pyenv/pyenv/tree/master/plugins/python-build/share/python-build
-python: 
+python:
   - 3.6
   - 3.5
   - 3.4
@@ -19,7 +19,6 @@ script:
   - tox
 
 after_success:
-  - cp bin/nifake/.coverage .
   - coveralls
 
 
