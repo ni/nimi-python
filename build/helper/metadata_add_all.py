@@ -5,6 +5,7 @@ from .helper import get_python_type_for_visa_type
 from .metadata_filters import filter_codegen_functions
 from .metadata_merge_dicts import merge_dicts
 
+import codecs
 import copy
 import os
 import pprint
@@ -233,13 +234,13 @@ def add_all_metadata(functions, attributes, enums, config):
     if not os.path.exists(metadata_dir):
         os.makedirs(metadata_dir)
 
-    with open(os.path.join(metadata_dir, config['module_name'] + '_functions.py'), "w") as text_file:
+    with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_functions.py'), "w", "utf-8") as text_file:
         text_file.write("function =\n{0}".format(pp_persist.pformat(functions)))
 
-    with open(os.path.join(metadata_dir, config['module_name'] + '_attributes.py'), "w") as text_file:
+    with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_attributes.py'), "w", "utf-8") as text_file:
         text_file.write("attributes =\n{0}".format(pp_persist.pformat(attributes)))
 
-    with open(os.path.join(metadata_dir, config['module_name'] + '_enums.py'), "w") as text_file:
+    with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_enums.py'), "w", "utf-8") as text_file:
         text_file.write("enums =\n{0}".format(pp_persist.pformat(enums)))
 
 
