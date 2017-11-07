@@ -228,18 +228,18 @@ def add_all_metadata(functions, attributes, enums, config):
     config['attributes'] = attributes
     config['enums'] = enums
 
-    with open(os.path.join('bin', 'metadata', config['module_name'] + '_functions.py'), "w") as text_file:
     pp_persist = pprint.PrettyPrinter(indent=4, width=200)
     metadata_dir = os.path.join('bin', 'processed_metadata')
     if not os.path.exists(metadata_dir):
         os.makedirs(metadata_dir)
 
+    with open(os.path.join(metadata_dir, config['module_name'] + '_functions.py'), "w") as text_file:
         text_file.write("function =\n{0}".format(pp_persist.pformat(functions)))
 
-    with open(os.path.join('bin', 'metadata', config['module_name'] + '_attributes.py'), "w") as text_file:
+    with open(os.path.join(metadata_dir, config['module_name'] + '_attributes.py'), "w") as text_file:
         text_file.write("attributes =\n{0}".format(pp_persist.pformat(attributes)))
 
-    with open(os.path.join('bin', 'metadata', config['module_name'] + '_enums.py'), "w") as text_file:
+    with open(os.path.join(metadata_dir, config['module_name'] + '_enums.py'), "w") as text_file:
         text_file.write("enums =\n{0}".format(pp_persist.pformat(enums)))
 
 
