@@ -226,52 +226,43 @@ class RelayPosition(Enum):
 class ScanAdvancedOutput(Enum):
     NONE = 0
     '''
-    The switch module does not produce a Scan Advanced Output trigger.
+    The switch device does not produce a Scan Advanced Output trigger.
     '''
     EXTERNAL = 2
     '''
-    The switch module produces the Scan Advanced Output trigger on the
-    external trigger output.
+    External Trigger. The switch device produces the Scan Advanced Output  trigger on the external trigger output.
     '''
-    PXI_TRIG0 = 111
+    TTL0 = 111
     '''
-    The switch module produces the Scan Advanced Output Trigger on the
-    PXI_Trig0 line before processing the next entry in the scan list.
+    The switch device produces the Scan Advanced Output on the PXI TRIG0 line.
     '''
-    PXI_TRIG1 = 112
+    TTL1 = 112
     '''
-    The switch module produces the Scan Advanced Output Trigger on the
-    PXI_Trig1 line before processing the next entry in the scan list.
+    The switch device produces the Scan Advanced Output on the PXI TRIG1 line.
     '''
-    PXI_TRIG2 = 113
+    TTL2 = 113
     '''
-    The switch module produces the Scan Advanced Output Trigger on the
-    PXI_Trig2 line before processing the next entry in the scan list.
+    The switch device produces the Scan Advanced Output on the PXI TRIG2 line.
     '''
-    PXI_TRIG3 = 114
+    TTL3 = 114
     '''
-    The switch module produces the Scan Advanced Output Trigger on the
-    PXI_Trig3 line before processing the next entry in the scan list.
+    The switch device produces the Scan Advanced Output on the PXI TRIG3 line.
     '''
-    PXI_TRIG4 = 115
+    TTL4 = 115
     '''
-    The switch module produces the Scan Advanced Output Trigger on the
-    PXI_Trig4 line before processing the next entry in the scan list.
+    The switch device produces the Scan Advanced Output on the PXI TRIG4 line.
     '''
-    PXI_TRIG5 = 116
+    TTL5 = 116
     '''
-    The switch module produces the Scan Advanced Output Trigger on the
-    PXI_Trig5 line before processing the next entry in the scan list.
+    The switch device produces the Scan Advanced Output on the PXI TRIG5 line.
     '''
-    PXI_TRIG6 = 117
+    TTL6 = 117
     '''
-    The switch module produces the Scan Advanced Output Trigger on the
-    PXI_Trig6 line before processing the next entry in the scan list.
+    The switch device produces the Scan Advanced Output on the PXI TRIG6 line.
     '''
-    PXI_TRIG7 = 118
+    TTL7 = 118
     '''
-    The switch module produces the Scan Advanced Output Trigger on the
-    PXI_Trig7 line before processing the next entry in the scan list.
+    The switch device produces the Scan Advanced Output on the PXI TRIG7 line.
     '''
     PXI_STAR = 125
     '''
@@ -280,13 +271,11 @@ class ScanAdvancedOutput(Enum):
     '''
     REARCONNECTOR = 1000
     '''
-    The switch module produces the Scan Advanced Output Trigger on the rear
-    connector.
+    The switch device produces the Scan Advanced Output  trigger on the rear connector.
     '''
     FRONTCONNECTOR = 1001
     '''
-    The switch module produces the Scan Advanced Output Trigger on the front
-    connector.
+    The switch device produces the Scan Advanced Output  trigger on the front connector.
     '''
     REARCONNECTOR_MODULE1 = 1021
     '''
@@ -411,11 +400,11 @@ class ScanAdvancedOutput(Enum):
 
 
 class ScanAdvancedPolarity(Enum):
-    RISING_EDGE = 0
+    RISING = 0
     '''
     The trigger occurs on the rising edge of the signal.
     '''
-    FALLING_EDGE = 1
+    FALLING = 1
     '''
     The trigger occurs on the falling edge of the signal.
     '''
@@ -428,88 +417,70 @@ class ScanMode(Enum):
     '''
     BREAK_BEFORE_MAKE = 1
     '''
-    When scanning, the switch module breaks existing connections before
-    making new connections.
+    When scanning, the switch device breaks existing connections before  making new connections.
     '''
     BREAK_AFTER_MAKE = 2
     '''
-    When scanning, the switch module breaks existing connections after
-    making new connections.
+    When scanning, the switch device breaks existing connections after making  new connections.
     '''
 
 
 class TriggerInput(Enum):
     IMMEDIATE = 1
     '''
-    The switch module does not wait for a trigger before processing the next
-    entry in the scan list.
+    Immediate Trigger. The switch device does not wait for a trigger before  processing the next entry in the scan list.
     '''
     EXTERNAL = 2
     '''
-    The switch module waits until it receives a trigger from an external
-    source through the external trigger input before processing the next
-    entry in the scan list.
+    External Trigger. The switch device waits until it receives a trigger  from an external source through the external trigger input before  processing the next entry in the scan list.
     '''
-    SW_TRIG_FUNC = 3
+    SOFTWARE_TRIG = 3
     '''
-    The switch module waits until you call the `niSwitch Send Software
-    Trigger <switchviref.chm::/niSwitch_Send_Software_Trigger.html>`__ VI
-    before processing the next entry in the scan list.
+    The switch device waits until you call the niSwitch_SendSoftwareTrigger  function before processing the next entry in the scan list.
     '''
-    PXI_TRIG0 = 111
+    TTL0 = 111
     '''
-    The switch module waits until it receives a trigger on the PXI_Trig0
-    line before processing the next entry in the scan list.
+    The switch device waits until it receives a trigger on the PXI TRIG0 line before processing the next entry in the scan list.
     '''
-    PXI_TRIG1 = 112
+    TTL1 = 112
     '''
-    The switch module waits until it receives a trigger on the PXI_Trig1
-    line before processing the next entry in the scan list.
+    The switch device waits until it receives a trigger on the PXI TRIG1 line before processing the next entry in the scan list.
     '''
-    PXI_TRIG2 = 113
+    TTL2 = 113
     '''
-    The switch module waits until it receives a trigger on the PXI_Trig2
-    line before processing the next entry in the scan list.
+    The switch device waits until it receives a trigger on the PXI TRIG2 line before processing the next entry in the scan list.
     '''
-    PXI_TRIG3 = 114
+    TTL3 = 114
     '''
-    The switch module waits until it receives a trigger on the PXI_Trig3
-    line before processing the next entry in the scan list.
+    The switch device waits until it receives a trigger on the PXI TRIG3 line before processing the next entry in the scan list.
     '''
-    PXI_TRIG4 = 115
+    TTL4 = 115
     '''
-    The switch module waits until it receives a trigger on the PXI_Trig4
-    line before processing the next entry in the scan list.
+    The switch device waits until it receives a trigger on the PXI TRIG4 line before processing the next entry in the scan list.
     '''
-    PXI_TRIG5 = 116
+    TTL5 = 116
     '''
-    The switch module waits until it receives a trigger on the PXI_Trig5
-    line before processing the next entry in the scan list.
+    The switch device waits until it receives a trigger on the PXI TRIG5 line before processing the next entry in the scan list.
     '''
-    PXI_TRIG6 = 117
+    TTL6 = 117
     '''
-    The switch module waits until it receives a trigger on the PXI_Trig6
-    line before processing the next entry in the scan list.
+    The switch device waits until it receives a trigger on the PXI TRIG6 line before processing the next entry in the scan list.
     '''
-    PXI_TRIG7 = 118
+    TTL7 = 118
     '''
-    The switch module waits until it receives a trigger on the PXI_Trig7
-    line before processing the next entry in the scan list.
+    The switch device waits until it receives a trigger on the PXI TRIG7 line before processing the next entry in the scan list.
     '''
     PXI_STAR = 125
     '''
-    The switch module waits until it receives a trigger on the PXI star
-    trigger bus before processing the next entry in the scan list.
+    The switch device waits until it receives a trigger on the PXI STAR  trigger bus before processing the next entry in the scan list.
     '''
     REARCONNECTOR = 1000
     '''
-    The switch module waits until it receives a trigger on the rear
-    connector.
+    The switch device waits until it receives a trigger on the  rear connector.
     '''
     FRONTCONNECTOR = 1001
     '''
-    The switch module waits until it receives a trigger on the front
-    connector.
+    The switch device waits until it receives a trigger on the  front connector.
     '''
     REARCONNECTOR_MODULE1 = 1021
     '''
@@ -634,11 +605,11 @@ class TriggerInput(Enum):
 
 
 class TriggerInputPolarity(Enum):
-    RISING_EDGE = 0
+    RISING = 0
     '''
     The trigger occurs on the rising edge of the signal.
     '''
-    FALLING_EDGE = 1
+    FALLING = 1
     '''
     The trigger occurs on the falling edge of the signal.
     '''
