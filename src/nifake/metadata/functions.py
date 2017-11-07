@@ -1768,7 +1768,7 @@ functions = {
                 'direction': 'in',
                 'enum': None,
                 'name': 'cs',
-                'type': 'CustomStruct',
+                'type': 'custom_struct',
                 'documentation': {
                     'description': 'Set using custom type',
                 },
@@ -1795,14 +1795,14 @@ functions = {
                 'direction': 'out',
                 'enum': None,
                 'name': 'cs',
-                'type': 'CustomStruct',
+                'type': 'custom_struct',
                 'documentation': {
                     'description': 'Set using custom type',
                 },
             },
         ],
         'documentation': {
-            'description': 'This function takes a custom type.',
+            'description': 'This function returns a custom type.',
         },
     },
     #TODO(marcoskirsch): More cases to add:

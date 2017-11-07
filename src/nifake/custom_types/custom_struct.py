@@ -3,7 +3,8 @@ import ctypes
 from nifake import visatype
 
 
-class CustomStruct(ctypes.Structure):
+# This class is an internal implementation detail
+class _CustomStructCType(ctypes.Structure):
     _fields_ = [
         ('struct_int', visatype.ViInt32),
         ('struct_double', visatype.ViReal64),
@@ -18,8 +19,11 @@ class CustomStruct(ctypes.Structure):
             self.struct_int = struct_int
             self.struct_double = struct_double
 
+# We need to match the name in the function definition
+custom_struct = _CustomStructCType
 
-class CustomStructPython(object):
+
+class CustomStruct(object):
     def __init__(self, data=None, struct_int=0, struct_double=0.0):
         if data is not None:
             self.struct_int = data.struct_int
@@ -29,5 +33,4 @@ class CustomStructPython(object):
             self.struct_double = struct_double
 
 
-custom_struct = CustomStructPython
 

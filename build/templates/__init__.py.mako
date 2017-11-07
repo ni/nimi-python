@@ -15,6 +15,7 @@ from ${module_name}.session import Session  # noqa: F401
 % for c in config['custom_types']:
 
 from ${module_name}.${c['file_name']} import ${c['python_name']}  # noqa: F401
-from ${module_name}.${c['file_name']} import ${c['ctypes_name']}  # noqa: F401
+
+from ${module_name}.${c['file_name']} import ${c['ctypes_type']}  # noqa: F401
 % endfor
 

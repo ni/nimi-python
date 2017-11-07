@@ -60,7 +60,7 @@ def get_python_type_for_visa_type(visa_type, config):
         return type_map[visa_type]
     else:
         for c in config['custom_types']:
-            if c['ctypes_name'] == visa_type:
+            if c['ctypes_type'] == visa_type:
                 return c['python_name']
         # We didn't find it so assert
         assert False, 'Unknown visa_type: {0}'.format(visa_type)

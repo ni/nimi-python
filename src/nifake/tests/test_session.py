@@ -831,14 +831,14 @@ class TestSession(object):
 
     def test_set_custom_type(self):
         self.patched_library.niFake_SetCustomType.side_effect = self.side_effects_helper.niFake_SetCustomType
-        cs = nifake.custom_struct(struct_int=42, struct_double=4.2)
+        cs = nifake.CustomStruct(struct_int=42, struct_double=4.2)
         with nifake.Session('dev1') as session:
             session.set_custom_type(cs)
-            self.patched_library.niFake_SetCustomType.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.CustomTypeMatcher(nifake.CustomStruct, nifake.CustomStruct(cs)))
+            self.patched_library.niFake_SetCustomType.assert_called_once_with(matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs)))
 
     def test_get_custom_type(self):
         self.patched_library.niFake_GetCustomType.side_effect = self.side_effects_helper.niFake_GetCustomType
-        cs_ctype = nifake.CustomStruct(struct_int=42, struct_double=4.2)
+        cs_ctype = nifake.custom_struct(struct_int=42, struct_double=4.2)
         self.side_effects_helper['GetCustomType']['cs'] = cs_ctype
         with nifake.Session('dev1') as session:
             cs = session.get_custom_type()

@@ -23,7 +23,7 @@ config = {
     },
     'init_function': 'InitWithOptions',
     'custom_types': [
-        {'file_name': 'custom_struct', 'python_name': 'custom_struct', 'ctypes_name': 'CustomStruct', },
+        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
     ],
 }
 
