@@ -19,6 +19,6 @@ script:
   - tox -e test
 
 after_success:
-  - coveralls
+  - coveralls --rcfile=tools/coverage_unit_tests.rc
 
 
