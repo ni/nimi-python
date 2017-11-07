@@ -215,6 +215,12 @@ def add_all_attribute_metadata(attributes, config):
 
 
 def add_all_metadata(functions, attributes, enums, config):
+    '''merge and add all additional metadata_dir
+
+    Updates all parameters
+        functions, attributes, enums - addon data merged, additional metadata
+        config - functions, attributes, enums added
+    '''
     functions = add_all_function_metadata(functions, config)
     attributes = add_all_attribute_metadata(attributes, config)
 
