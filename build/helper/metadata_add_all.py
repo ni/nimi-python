@@ -2,6 +2,7 @@
 
 from .helper import camelcase_to_snakecase
 from .helper import get_python_type_for_visa_type
+from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
 from .metadata_merge_dicts import merge_dicts
 
@@ -213,10 +214,41 @@ def add_all_attribute_metadata(attributes, config):
     return attributes
 
 
-def _add_enum_codegen_method(e, enums):
-    '''Adds 'codegen_method' that will determine whether and how the enum is code genned. Default is public'''
-    if 'codegen_method' not in enums[e]:
-        enums[e]['codegen_method'] = 'public'
+def _add_enum_codegen_method(enums, config):
+    '''Adds 'codegen_method' that will determine whether and how the enum is code genned. Default is public
+
+    Set all to 'no', then go through all functions and attributes and set to least restrictive use
+    '''
+    for e in enums:
+        if 'codegen_method' not in enums[e]:
+            enums[e]['codegen_method'] = 'no'
+
+    # Iterate through all codegen functions and set any enum parameters to the same level
+    for f in filter_codegen_functions(config['functions']):
+        f_codegen_method = config['functions'][f]['codegen_method']
+        if f_codegen_method != 'no':
+            for p in config['functions'][f]['parameters']:
+                e = p['enum']
+                if e is not None and e not in enums:
+                    print('Missing enum {0} referenced by function {1}'.format(e, f))
+                elif e is not None:
+                    if f_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
+                        enums[e]['codegen_method'] = f_codegen_method
+                    elif f_codegen_method == 'public':
+                        enums[e]['codegen_method'] = f_codegen_method
+
+    # Iterate through all codegen attributes and set any enum parameters to the same level
+    for a in filter_codegen_attributes(config['attributes']):
+        a_codegen_method = config['attributes'][a]['codegen_method']
+        if a_codegen_method != 'no':
+            e = config['attributes'][a]['enum']
+            if e is not None and e not in enums:
+                print('Missing enum {0} referenced by attribute {1}'.format(e, a['name']))
+            elif e is not None:
+                if a_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
+                    enums[e]['codegen_method'] = a_codegen_method
+                elif a_codegen_method == 'public':
+                    enums[e]['codegen_method'] = a_codegen_method
 
 
 def add_all_enum_metadata(enums, config):
@@ -226,8 +258,7 @@ def add_all_enum_metadata(enums, config):
             if m.startswith('enums_'):
                 merge_dicts(enums, config['modules']['metadata.enums_addon'].__getattribute__(m))
 
-    for e in enums:
-        _add_enum_codegen_method(e, enums)
+    _add_enum_codegen_method(enums, config)
 
 
 # Unit Tests
