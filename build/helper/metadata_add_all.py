@@ -6,9 +6,11 @@ from .metadata_filters import filter_codegen_functions
 from .metadata_merge_dicts import merge_dicts
 
 import copy
+import os
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4, width=80)
+pp_persist = pprint.PrettyPrinter(indent=4, width=300)
 
 # Functions to add information to metadata structures that are specific to our codegen needs.
 
@@ -211,6 +213,24 @@ def add_all_attribute_metadata(attributes, config):
         _add_python_name(a, attributes)
 
     return attributes
+
+
+def add_all_metadata(functions, attributes, enums, config):
+    functions = add_all_function_metadata(functions, config)
+    attributes = add_all_attribute_metadata(attributes, config)
+
+    config['functions'] = functions
+    config['attributes'] = attributes
+    config['enums'] = enums
+
+    with open(os.path.join('bin', 'metadata', config['module_name'] + '_functions.py'), "w") as text_file:
+        text_file.write("function =\n{0}".format(pp_persist.pformat(functions)))
+
+    with open(os.path.join('bin', 'metadata', config['module_name'] + '_attributes.py'), "w") as text_file:
+        text_file.write("attributes =\n{0}".format(pp_persist.pformat(attributes)))
+
+    with open(os.path.join('bin', 'metadata', config['module_name'] + '_enums.py'), "w") as text_file:
+        text_file.write("enums =\n{0}".format(pp_persist.pformat(enums)))
 
 
 # Unit Tests
