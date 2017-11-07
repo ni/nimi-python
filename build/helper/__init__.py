@@ -1,5 +1,4 @@
 from build.helper.codegen_helper import get_ctype_variable_declaration_snippet  # noqa: F401
-from build.helper.codegen_helper import get_custom_type  # noqa: F401
 from build.helper.codegen_helper import get_dictionary_snippet  # noqa: F401
 from build.helper.codegen_helper import get_enum_type_check_snippet  # noqa: F401
 from build.helper.codegen_helper import get_method_return_snippet  # noqa: F401
@@ -28,6 +27,7 @@ from build.helper.metadata_filters import filter_ivi_dance_parameter  # noqa: F4
 from build.helper.metadata_filters import filter_len_parameter  # noqa: F401
 from build.helper.metadata_filters import filter_parameters  # noqa: F401
 
+from build.helper.metadata_find import find_custom_type  # noqa: F401
 from build.helper.metadata_find import find_size_parameter  # noqa: F401
 
 from build.helper.metadata_merge_dicts import merge_dicts  # noqa: F401

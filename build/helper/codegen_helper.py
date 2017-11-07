@@ -1,4 +1,5 @@
 from .metadata_filters import filter_parameters
+from .metadata_find import find_custom_type
 from .metadata_find import find_size_parameter
 from .parameter_usage_options import ParameterUsageOptions
 import pprint
@@ -66,13 +67,6 @@ def get_params_snippet(function, parameter_usage_options):
     return ', '.join(snippets)
 
 
-def get_custom_type(p, config):
-    for c in config['custom_types']:
-        if p['ctypes_type'] == c['ctypes_name']:
-            return c
-    return None
-
-
 def _get_output_param_return_snippet(output_parameter, parameters, config):
     '''Returns the snippet for returning a single output parameter from a Session method, i.e. "reading_ctype.value"'''
     assert output_parameter['direction'] == 'out', pp.pformat(output_parameter)
@@ -81,7 +75,7 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
     # Custom types (I.e. inherit from ctypes.Structure) don't need a .value but do need a module name
     val_suffix = '.value'
     module_name = ''
-    c = get_custom_type(output_parameter, config)
+    c = find_custom_type(output_parameter, config)
     if c is not None:
         val_suffix = ''
         module_name = c['file_name'] + '.'
@@ -156,7 +150,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, config):
 
     # First we need to determine the module. If it is a custom type then the module is the file associated wit that type, otherwise 'visatype'
     module_name = 'visatype'
-    c = get_custom_type(parameter, config)
+    c = find_custom_type(parameter, config)
     if c is not None:
         module_name = c['file_name']
 
