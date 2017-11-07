@@ -640,16 +640,16 @@ class Session(_SessionBase):
     def get_custom_type(self):
         '''get_custom_type
 
-        This function takes a custom type.
+        This function returns a custom type.
 
         Returns:
-            cs (custom_struct): Set using custom type
+            cs (CustomStruct): Set using custom type
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        cs_ctype = custom_struct.CustomStruct()  # case 13
+        cs_ctype = custom_struct.custom_struct()  # case 13
         error_code = self._library.niFake_GetCustomType(vi_ctype, ctypes.pointer(cs_ctype))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return custom_struct.custom_struct(cs_ctype)
+        return custom_struct.CustomStruct(cs_ctype)
 
     def get_enum_value(self):
         '''get_enum_value
@@ -924,10 +924,10 @@ class Session(_SessionBase):
         This function takes a custom type.
 
         Args:
-            cs (custom_struct): Set using custom type
+            cs (CustomStruct): Set using custom type
         '''
         vi_ctype = visatype.ViSession(self._vi)  # case 1
-        cs_ctype = custom_struct.CustomStruct(cs)  # case 8
+        cs_ctype = custom_struct.custom_struct(cs)  # case 8
         error_code = self._library.niFake_SetCustomType(vi_ctype, cs_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

@@ -183,7 +183,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_GetCustomType_cfunc is None:
                 self.niFake_GetCustomType_cfunc = self._library.niFake_GetCustomType
-                self.niFake_GetCustomType_cfunc.argtypes = [ViSession, ctypes.POINTER(CustomStruct)]  # noqa: F405
+                self.niFake_GetCustomType_cfunc.argtypes = [ViSession, ctypes.POINTER(custom_struct)]  # noqa: F405
                 self.niFake_GetCustomType_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetCustomType_cfunc(vi, cs)
 
@@ -327,7 +327,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_SetCustomType_cfunc is None:
                 self.niFake_SetCustomType_cfunc = self._library.niFake_SetCustomType
-                self.niFake_SetCustomType_cfunc.argtypes = [ViSession, CustomStruct]  # noqa: F405
+                self.niFake_SetCustomType_cfunc.argtypes = [ViSession, custom_struct]  # noqa: F405
                 self.niFake_SetCustomType_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetCustomType_cfunc(vi, cs)
 
