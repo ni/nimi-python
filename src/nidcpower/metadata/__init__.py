@@ -11,13 +11,16 @@ import sys
 
 # Update generated functions data with hand maintained data
 config['modules'] = sys.modules
+
 helper.add_all_function_metadata(functions, config)
+config['functions'] = functions
+
 helper.add_all_attribute_metadata(attributes, config)
+config['attributes'] = attributes
+
 helper.add_all_enum_metadata(enums, config)
+config['enums'] = enums
 
 __version__ = config['module_version']
 
-config['functions'] = functions
-config['attributes'] = attributes
-config['enums'] = enums
 
