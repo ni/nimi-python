@@ -310,13 +310,6 @@ class OSPOverflowErrorReporting(Enum):
     '''
 
 
-class OperationMode(Enum):
-    NIFGEN_VAL_OPERATE_CONTINUOUS = 0
-    '''
-    Continuous operation
-    '''
-
-
 class OutputMode(Enum):
     NIFGEN_VAL_OUTPUT_FUNC = 0
     '''
@@ -797,66 +790,6 @@ class TriggerSource(Enum):
     NIFGEN_VAL_OTHER_TERMINAL = 1018
     '''
     Specifies that another terminal is used.
-    '''
-
-
-class UpdateClockSource(Enum):
-    NIFGEN_VAL_INTERNAL = 0
-    '''
-    Internal update clock
-    '''
-    NIFGEN_VAL_EXTERNAL = 1
-    '''
-    External update clock given on the IO connector
-    '''
-    NIFGEN_VAL_PXI_STAR = 131
-    '''
-    (PXI only) PXI star trigger line. This choice is valid only in PXI
-    chassis slots 3 through 15.
-    '''
-    NIFGEN_VAL_RTSI_0 = 141
-    '''
-    RTSI line 0
-    '''
-    NIFGEN_VAL_RTSI_1 = 142
-    '''
-    RTSI line 1
-    '''
-    NIFGEN_VAL_RTSI_2 = 143
-    '''
-    RTSI line 2
-    '''
-    NIFGEN_VAL_RTSI_3 = 144
-    '''
-    RTSI line 3
-    '''
-    NIFGEN_VAL_RTSI_4 = 145
-    '''
-    RTSI line 4
-    '''
-    NIFGEN_VAL_RTSI_5 = 146
-    '''
-    RTSI line 5
-    '''
-    NIFGEN_VAL_RTSI_6 = 147
-    '''
-    RTSI line 6
-    '''
-    NIFGEN_VAL_RTSI_7 = 1010
-    '''
-    (PCI only) RTSI line 7
-    '''
-    NIFGEN_VAL_OTHER_TERMINAL = 1018
-    '''
-    Uses another device terminal.
-    '''
-    NIFGEN_VAL_CLK_IN = 1202
-    '''
-    Coaxial CLK IN connector on the board front panel
-    '''
-    NIFGEN_VAL_DDC_CLK_IN = 1203
-    '''
-    DDC CLK IN line of the Digital Data & Control connector
     '''
 
 

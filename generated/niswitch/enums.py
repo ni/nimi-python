@@ -3,62 +3,6 @@
 from enum import Enum
 
 
-class CabledModuleScanAdvancedBus(Enum):
-    NONE = 0
-    PXI_TRIG0 = 111
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig0
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG1 = 112
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig1
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG2 = 113
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig2
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG3 = 114
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig3
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG4 = 115
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig4
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG5 = 116
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig5
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG6 = 117
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig6
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG7 = 118
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig7
-    line before processing the next entry in the scan list.
-    '''
-
-
-class CabledModuleTriggerBus(Enum):
-    NONE = 0
-    PXI_TRIG0 = 111
-    PXI_TRIG1 = 112
-    PXI_TRIG2 = 113
-    PXI_TRIG3 = 114
-    PXI_TRIG4 = 115
-    PXI_TRIG5 = 116
-    PXI_TRIG6 = 117
-    PXI_TRIG7 = 118
-
-
 class HandshakingInitiation(Enum):
     MEASUREMENT_DEVICE_INITIATED = 0
     '''
@@ -83,94 +27,6 @@ class HandshakingInitiation(Enum):
     scanner advanced signal. The measurement should be configured to first
     wait for a trigger, then take a measurement. Thus, the first scanner
     advanced output signal of the switch module initiates handshaking.
-    '''
-
-
-class MasterSlaveScanAdvancedBus(Enum):
-    NONE = 0
-    PXI_TRIG0 = 111
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig0
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG1 = 112
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig1
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG2 = 113
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig2
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG3 = 114
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig3
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG4 = 115
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig4
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG5 = 116
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig5
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG6 = 117
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig6
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG7 = 118
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig7
-    line before processing the next entry in the scan list.
-    '''
-
-
-class MasterSlaveTriggerBus(Enum):
-    NONE = 0
-    PXI_TRIG0 = 111
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig0
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG1 = 112
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig1
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG2 = 113
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig2
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG3 = 114
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig3
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG4 = 115
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig4
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG5 = 116
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig5
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG6 = 117
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig6
-    line before processing the next entry in the scan list.
-    '''
-    PXI_TRIG7 = 118
-    '''
-    The switch module waits until it receives a trigger on the PXI_Trig7
-    line before processing the next entry in the scan list.
     '''
 
 
@@ -642,9 +498,3 @@ class TriggerInputPolarity(Enum):
     '''
     The trigger occurs on the falling edge of the signal.
     '''
-
-
-class TriggerMode(Enum):
-    SINGLE = 0
-    MASTER = 1
-    SLAVE = 2

@@ -326,59 +326,6 @@ Enums used in NI-DMM
 
 
 
-.. py:data:: DigitsResolution
-
-    .. py:attribute:: nidmm.DigitsResolution._3_5
-
-
-
-        Specifies 3.5 digits resolution.
-
-        
-
-
-
-    .. py:attribute:: nidmm.DigitsResolution._4_5
-
-
-
-        Specifies 4.5 digits resolution.
-
-        
-
-
-
-    .. py:attribute:: nidmm.DigitsResolution._5_5
-
-
-
-        Specifies 5.5 digits resolution.
-
-        
-
-
-
-    .. py:attribute:: nidmm.DigitsResolution._6_5
-
-
-
-        Specifies 6.5 digits resolution.
-
-        
-
-
-
-    .. py:attribute:: nidmm.DigitsResolution._7_5
-
-
-
-        Specifies 7.5 digits resolution.
-
-        
-
-
-
-
 .. py:data:: Function
 
     .. py:attribute:: nidmm.Function.DC_VOLTS

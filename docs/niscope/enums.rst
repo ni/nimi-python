@@ -7,65 +7,6 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: AGCAverageControl
-
-    .. py:attribute:: niscope.AGCAverageControl.MEAN
-
-
-
-        Mean average.
-
-        
-
-
-
-    .. py:attribute:: niscope.AGCAverageControl.MEDIAN
-
-
-
-        Median average.
-
-        
-
-
-
-
-.. py:data:: AOUTParallelOutputSource
-
-    .. py:attribute:: niscope.AOUTParallelOutputSource.I_DATA
-
-
-
-        Specifies I data as the source for the AOUT parallel output from the
-        DDC.
-
-        
-
-
-
-    .. py:attribute:: niscope.AOUTParallelOutputSource.MAGNITUDE_DATA
-
-
-
-        Specifies magnitude data as the source for the AOUT parallel output from
-        the DDC.
-
-        
-
-
-
-    .. py:attribute:: niscope.AOUTParallelOutputSource.FREQUENCY_DATA
-
-
-
-        Specifies frequency data as the source for the AOUT parallel output from
-        the DDC.
-
-        
-
-
-
-
 .. py:data:: AcquisitionType
 
     .. py:attribute:: niscope.AcquisitionType.NORMAL
@@ -119,39 +60,6 @@ Enums used in NI-SCOPE
 
 
         Virtual address.
-
-        
-
-
-
-
-.. py:data:: BOUTParallelOutputSource
-
-    .. py:attribute:: niscope.BOUTParallelOutputSource.MAGNITUDE_DATA
-
-
-
-        Specifies magnitude data as the source.
-
-        
-
-
-
-    .. py:attribute:: niscope.BOUTParallelOutputSource.Q_DATA
-
-
-
-        Specifies Q data as the source.
-
-        
-
-
-
-    .. py:attribute:: niscope.BOUTParallelOutputSource.PHASE_DATA
-
-
-
-        Specifies phase data as the source.
 
         
 
@@ -275,54 +183,6 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: CoordinateConverterInput
-
-    .. py:attribute:: niscope.CoordinateConverterInput.RESAMPLER_HB
-
-
-
-        Selects the HB filter as the source for the input to the coordinate
-        converter.
-
-        
-
-
-
-    .. py:attribute:: niscope.CoordinateConverterInput.PROGRAMMABLE_FIR
-
-
-
-        Selects the programmable FIR filter as the source for the input to the
-        coordinate converter.
-
-        
-
-
-
-
-.. py:data:: DataJustificationMode
-
-    .. py:attribute:: niscope.DataJustificationMode.LEFT
-
-
-
-        
-
-        
-
-
-
-    .. py:attribute:: niscope.DataJustificationMode.RIGHT
-
-
-
-        
-
-        
-
-
-
-
 .. py:data:: DataProcessingMode
 
     .. py:attribute:: niscope.DataProcessingMode.REAL
@@ -340,85 +200,6 @@ Enums used in NI-SCOPE
 
 
         The waveform data points are complex numbers (IQ data).
-
-        
-
-
-
-
-.. py:data:: DiscriminatorFIRInputSource
-
-    .. py:attribute:: niscope.DiscriminatorFIRInputSource.PHASE
-
-
-
-        Sets the discriminator FIR input source to phase.
-
-        
-
-
-
-    .. py:attribute:: niscope.DiscriminatorFIRInputSource.MAGNITUDE
-
-
-
-        Sets the discriminator FIR input source to magnitude.
-
-        
-
-
-
-    .. py:attribute:: niscope.DiscriminatorFIRInputSource.RESAMPLER
-
-
-
-        Sets the discriminator FIR input source to resampler.
-
-        
-
-
-
-
-.. py:data:: DiscriminatorFIRSymmetry
-
-    .. py:attribute:: niscope.DiscriminatorFIRSymmetry.SYMMETRIC
-
-
-
-        Sets the discriminator FIR symmetry to symmetric.
-
-        
-
-
-
-    .. py:attribute:: niscope.DiscriminatorFIRSymmetry.ASYMMETRIC
-
-
-
-        Sets the discriminator FIR symmetry to asymmetric.
-
-        
-
-
-
-
-.. py:data:: DiscriminatorFIRSymmetryType
-
-    .. py:attribute:: niscope.DiscriminatorFIRSymmetryType.EVEN
-
-
-
-        Sets the discriminator FIR symmetry type to even.
-
-        
-
-
-
-    .. py:attribute:: niscope.DiscriminatorFIRSymmetryType.ODD
-
-
-
-        Sets the discriminator FIR symmetry type to odd.
 
         
 
@@ -728,98 +509,6 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: ProgFIRFilterRealComplex
-
-    .. py:attribute:: niscope.ProgFIRFilterRealComplex.REAL
-
-
-
-        Sets a dual real filter.
-
-        
-
-
-
-    .. py:attribute:: niscope.ProgFIRFilterRealComplex.COMPLEX
-
-
-
-        Sets a complex filter.
-
-        
-
-
-
-
-.. py:data:: ProgFIRFilterSymmetry
-
-    .. py:attribute:: niscope.ProgFIRFilterSymmetry.SYMMETRIC
-
-
-
-        Sets a symmetric filter.
-
-        
-
-
-
-    .. py:attribute:: niscope.ProgFIRFilterSymmetry.ASYMMETRIC
-
-
-
-        Sets an asymmetric filter.
-
-        
-
-
-
-
-.. py:data:: ProgFIRFilterSymmetryType
-
-    .. py:attribute:: niscope.ProgFIRFilterSymmetryType.EVEN
-
-
-
-        Sets the discriminator FIR symmetry type to even.
-
-        
-
-
-
-    .. py:attribute:: niscope.ProgFIRFilterSymmetryType.ODD
-
-
-
-        Sets the discriminator FIR symmetry type to odd.
-
-        
-
-
-
-
-.. py:data:: QInputtoCoordConverter
-
-    .. py:attribute:: niscope.QInputtoCoordConverter.I_AND_Q
-
-
-
-        Enables the Q input to coordinate converter.
-
-        
-
-
-
-    .. py:attribute:: niscope.QInputtoCoordConverter.Q_ZEROED
-
-
-
-        Zeroes out the Q input the to coordinate converter.
-
-        
-
-
-
-
 .. py:data:: RISMethod
 
     .. py:attribute:: niscope.RISMethod.EXACT_NUM_AVG_
@@ -923,59 +612,6 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: ResamplerFilterMode
-
-    .. py:attribute:: niscope.ResamplerFilterMode.RESAMPLER_ENABLED
-
-
-
-        Resampler enabled.
-
-        
-
-
-
-    .. py:attribute:: niscope.ResamplerFilterMode.HB_1_ENABLED
-
-
-
-        HB 1 enabled.
-
-        
-
-
-
-    .. py:attribute:: niscope.ResamplerFilterMode.RESAMPLER_AND_HB_1
-
-
-
-        Resampler and HB 1.
-
-        
-
-
-
-    .. py:attribute:: niscope.ResamplerFilterMode.BOTH_HB_FILTERS
-
-
-
-        Both HB Filters.
-
-        
-
-
-
-    .. py:attribute:: niscope.ResamplerFilterMode.RESAMPLER_AND_BOTH_HB_FILTERS
-
-
-
-        Resampler and Both HB Filters.
-
-        
-
-
-
-
 .. py:data:: StreamingPositionType
 
     .. py:attribute:: niscope.StreamingPositionType.START_TRIGGER
@@ -1010,29 +646,6 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: SyncoutCLKSelect
-
-    .. py:attribute:: niscope.SyncoutCLKSelect.CLKIN
-
-
-
-        Specifies CLKIN as the source for Syncout CLK.
-
-        
-
-
-
-    .. py:attribute:: niscope.SyncoutCLKSelect.PROCCLK
-
-
-
-        Specifies PROCCLK as the source for Syncout CLK.
-
-        
-
-
-
-
 .. py:data:: TerminalConfiguration
 
     .. py:attribute:: niscope.TerminalConfiguration.SINGLE_ENDED
@@ -1060,49 +673,6 @@ Enums used in NI-SCOPE
 
 
         Differential channel terminal configuration.
-
-        
-
-
-
-
-.. py:data:: TimingNCOFreqOffsetBits
-
-    .. py:attribute:: niscope.TimingNCOFreqOffsetBits._8_BITS
-
-
-
-        Specifies 8 offset bits in the timing NCO.
-
-        
-
-
-
-    .. py:attribute:: niscope.TimingNCOFreqOffsetBits._16_BITS
-
-
-
-        Specifies 16 offset bits in the timing NCO.
-
-        
-
-
-
-    .. py:attribute:: niscope.TimingNCOFreqOffsetBits._24_BITS
-
-
-
-        Specifies 24 offset bits in the timing NCO.
-
-        
-
-
-
-    .. py:attribute:: niscope.TimingNCOFreqOffsetBits._32_BITS
-
-
-
-        Specifies 32 offset bits in the timing NCO.
 
         
 
