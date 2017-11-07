@@ -6,6 +6,5 @@ bin/
 .tox/
 .coverage
 commands.log
-junit-*
 .vscode/launch.json
 .vscode/settings.json
