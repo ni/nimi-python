@@ -10,7 +10,6 @@ import os
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4, width=80)
-pp_persist = pprint.PrettyPrinter(indent=4, width=300)
 
 # Functions to add information to metadata structures that are specific to our codegen needs.
 
@@ -224,6 +223,7 @@ def add_all_metadata(functions, attributes, enums, config):
     config['enums'] = enums
 
     with open(os.path.join('bin', 'metadata', config['module_name'] + '_functions.py'), "w") as text_file:
+    pp_persist = pprint.PrettyPrinter(indent=4, width=200)
         text_file.write("function =\n{0}".format(pp_persist.pformat(functions)))
 
     with open(os.path.join('bin', 'metadata', config['module_name'] + '_attributes.py'), "w") as text_file:
