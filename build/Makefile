@@ -49,7 +49,6 @@ SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 clean: start
 	@echo 'Cleaning...'
 	-@rm -Rf $(BIN_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@mkdir -p $(BIN_DIR)/metadata $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@find $(ROOT_DIR) -path '*/__pycache__/*' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
